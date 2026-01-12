@@ -317,7 +317,7 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     if "ask agent to" in text:
         instruction = text.split("ask agent to", 1)[1].strip()
     elif "fix" in text:
-        instruction = text.split("fix", 1)[1].strip() if "fix" in text.split() else text
+        instruction = text.split("fix", 1)[1].strip()
 
     # Extract issue/PR number if present
     issue_number = None
@@ -465,12 +465,18 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 "failed": "❌",
             }.get(task.status, "❓")
 
+            instruction_display = (
+                task.instruction[:60] + "..."
+                if len(task.instruction) > 60
+                else task.instruction
+            )
+
             cards.append(
                 UICard(
                     title=f"{status_emoji} Task {task.id[:8]}",
                     subtitle=f"{task.status} • {task.provider}",
                     lines=[
-                        f"Instruction: {task.instruction[:60]}...",
+                        f"Instruction: {instruction_display}",
                         f"Last update: {task.last_update or 'No updates'}",
                     ],
                 )
