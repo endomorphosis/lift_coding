@@ -17,8 +17,8 @@ This is a proof-of-concept project under active development. Security patches ar
 **Please do not report security vulnerabilities through public GitHub issues.**
 
 Instead, please report them via:
-- Email: security@[project-domain] (if configured)
 - GitHub Security Advisories: Use the "Security" tab in this repository
+- Or open a private discussion with maintainers
 
 Include in your report:
 - Description of the vulnerability
@@ -74,7 +74,7 @@ logger.info(f"Auth with token: {redact_secrets(github_token)}")
 logger.info("authenticated", extra={"user_id": hash_user_id(user_id)})
 ```
 
-See `docs/09-observability.md` for detailed logging standards.
+See `implementation_plan/docs/09-observability.md` for detailed logging standards.
 
 ### Data Privacy
 
@@ -169,7 +169,7 @@ We credit reporters unless they prefer to remain anonymous.
 
 - [GitHub Security Best Practices](https://docs.github.com/en/code-security)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- Project security docs: `docs/08-security-privacy.md`
+- Project security docs: `implementation_plan/docs/08-security-privacy.md`
 
 ## Questions?
 
