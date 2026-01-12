@@ -3,6 +3,7 @@
 import hashlib
 import hmac
 import logging
+import uuid
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -167,8 +168,6 @@ class WebhookStore:
         Returns:
             Event ID (UUID in real implementation)
         """
-        import uuid
-
         event_id = str(uuid.uuid4())
         self._events[event_id] = {
             "id": event_id,

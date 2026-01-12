@@ -7,7 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.webhooks import get_webhook_store
+from handsfree.webhooks import get_webhook_store, normalize_github_event
 
 
 @pytest.fixture(autouse=True)
@@ -200,8 +200,6 @@ class TestEventNormalization:
 
     def test_pull_request_opened_normalized(self, client):
         """Test that pull_request opened events are normalized correctly."""
-        from handsfree.webhooks import normalize_github_event
-
         payload = load_fixture("pull_request.opened.json")
         normalized = normalize_github_event("pull_request", payload)
 
@@ -217,8 +215,6 @@ class TestEventNormalization:
 
     def test_check_suite_completed_normalized(self, client):
         """Test that check_suite completed events are normalized correctly."""
-        from handsfree.webhooks import normalize_github_event
-
         payload = load_fixture("check_suite.completed.json")
         normalized = normalize_github_event("check_suite", payload)
 
@@ -232,8 +228,6 @@ class TestEventNormalization:
 
     def test_pull_request_review_submitted_normalized(self, client):
         """Test that pull_request_review submitted events are normalized correctly."""
-        from handsfree.webhooks import normalize_github_event
-
         payload = load_fixture("pull_request_review.submitted.json")
         normalized = normalize_github_event("pull_request_review", payload)
 
