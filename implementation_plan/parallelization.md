@@ -4,7 +4,7 @@ This document maps the implementation plan into parallel work tracks and draft p
 
 ## Track A — Foundation (can start immediately)
 **PR-001**: Repo foundation (dev loop + CI gates)
-- CI with OpenAPI validation, fixture layout, reproducible dev deps (Postgres/Redis)
+- CI with OpenAPI validation, fixture layout, reproducible dev deps (DuckDB/Redis)
 
 ## Track B — Backend contract surface (unblocks everything)
 **PR-002**: Backend API skeleton (OpenAPI-aligned)

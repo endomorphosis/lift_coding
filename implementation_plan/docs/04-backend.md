@@ -7,10 +7,10 @@
 - Policy Service
 - Event/Webhook Service
 - Notification Service
-- Storage (Postgres + Redis)
+- Storage (DuckDB + Redis)
 
 ## Storage
-- Postgres: users, repos, installs, policies, action logs, command history
+- DuckDB: users, repos, installs, policies, action logs, command history
 - Redis: short-lived sessions, rate limits, dedupe keys
 - Object store: optional audio snippets (avoid unless needed)
 

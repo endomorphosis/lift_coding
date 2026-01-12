@@ -52,7 +52,7 @@ GitHub Actions should run on every PR:
 ---
 
 ## Suggested local workflow
-1. Start dependencies: `docker compose up -d` (Postgres + Redis)
+1. Start dependencies: `docker compose up -d` (Redis; DuckDB is embedded)
 2. Start backend: `make dev` (or `uvicorn` / `node` etc.)
 3. Use simulator:
    - `curl` command with a transcript (see `dev/simulator_cli.md`)
