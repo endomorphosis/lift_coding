@@ -12,6 +12,7 @@ cd "$REPO_ROOT"
 gh label create copilot-agent --color 5319e7 --description "Work items queued for Copilot agents" || true
 
 branches=(
+  "draft/pr-001-repo-foundation-followups"
   "draft/pr-002-backend-api-skeleton"
   "draft/pr-003-db-migrations-and-models"
   "draft/pr-004-command-router-and-confirmations"
@@ -30,23 +31,31 @@ for branch in "${branches[@]}"; do
   git checkout "$branch" >/dev/null
 
   base=$(basename "$branch")
-  num=$(echo "$base" | cut -d- -f2)
-  slug=${base#pr-${num}-}
-  body_file="tracking/PR-${num}-${slug}.md"
-  title=$(sed -n '1s/^# //p' "$body_file")
+  if [[ "$base" == "pr-001-repo-foundation-followups" ]]; then
+    body_file="tracking/PR-001-repo-foundation-followups.md"
+  else
+    num=$(echo "$base" | cut -d- -f2)
+    slug=${base#pr-${num}-}
+    body_file="tracking/PR-${num}-${slug}.md"
+  fi
+  # Title: use first non-empty line; strip a leading "# " if present.
+  title=$(awk 'NF { print; exit }' "$body_file" | sed 's/^# //')
 
   # If PR already exists for this head branch, skip.
-  if gh pr view --head "$branch" --json number >/dev/null 2>&1; then
-    echo "PR already exists for $branch; skipping."
+  existing_url=$(gh pr list --head "$branch" --state all --json url --jq '.[0].url' 2>/dev/null || true)
+  if [[ -n "${existing_url}" ]]; then
+    echo "PR already exists for $branch; skipping: ${existing_url}"
     continue
   fi
 
-  gh pr create --draft \
+  if ! gh pr create --draft \
     --base main \
     --head "$branch" \
     --title "$title" \
     --body-file "$body_file" \
-    --label copilot-agent
+    --label copilot-agent; then
+    echo "Failed to create PR for $branch; continuing."
+  fi
 
 done
 
