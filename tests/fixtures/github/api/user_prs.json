@@ -1,0 +1,38 @@
+[
+  {
+    "repo": "owner/repo",
+    "pr_number": 123,
+    "title": "Add new feature X",
+    "url": "https://github.com/owner/repo/pull/123",
+    "state": "open",
+    "author": "contributor",
+    "requested_reviewer": true,
+    "assignee": false,
+    "updated_at": "2026-01-10T15:30:00Z",
+    "labels": ["feature", "needs-review"]
+  },
+  {
+    "repo": "owner/repo",
+    "pr_number": 124,
+    "title": "Fix critical bug in authentication",
+    "url": "https://github.com/owner/repo/pull/124",
+    "state": "open",
+    "author": "security-team",
+    "requested_reviewer": false,
+    "assignee": true,
+    "updated_at": "2026-01-11T09:15:00Z",
+    "labels": ["bug", "urgent", "security"]
+  },
+  {
+    "repo": "owner/other-repo",
+    "pr_number": 42,
+    "title": "Update documentation for API v2",
+    "url": "https://github.com/owner/other-repo/pull/42",
+    "state": "open",
+    "author": "docs-team",
+    "requested_reviewer": true,
+    "assignee": false,
+    "updated_at": "2026-01-09T12:00:00Z",
+    "labels": ["documentation"]
+  }
+]
