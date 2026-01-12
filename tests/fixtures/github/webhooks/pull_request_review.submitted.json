@@ -1,0 +1,46 @@
+{
+  "action": "submitted",
+  "review": {
+    "id": 987654321,
+    "user": {
+      "login": "reviewer1",
+      "id": 2345678
+    },
+    "body": "Looks good to me!",
+    "state": "approved",
+    "html_url": "https://github.com/testorg/testrepo/pull/123#pullrequestreview-987654321",
+    "submitted_at": "2026-01-12T05:10:00Z"
+  },
+  "pull_request": {
+    "id": 123456789,
+    "number": 123,
+    "state": "open",
+    "title": "Add webhook ingestion feature",
+    "user": {
+      "login": "testuser",
+      "id": 1234567
+    },
+    "head": {
+      "ref": "feature-branch",
+      "sha": "abc123def456"
+    },
+    "base": {
+      "ref": "main",
+      "sha": "def456abc123"
+    },
+    "html_url": "https://github.com/testorg/testrepo/pull/123"
+  },
+  "repository": {
+    "id": 987654321,
+    "name": "testrepo",
+    "full_name": "testorg/testrepo",
+    "owner": {
+      "login": "testorg",
+      "id": 7654321
+    }
+  },
+  "sender": {
+    "login": "reviewer1",
+    "id": 2345678
+  }
+}

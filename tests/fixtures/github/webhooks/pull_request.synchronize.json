@@ -1,0 +1,38 @@
+{
+  "action": "synchronize",
+  "number": 123,
+  "pull_request": {
+    "id": 123456789,
+    "number": 123,
+    "state": "open",
+    "title": "Add webhook ingestion feature",
+    "user": {
+      "login": "testuser",
+      "id": 1234567
+    },
+    "body": "This PR adds webhook ingestion with signature verification.",
+    "head": {
+      "ref": "feature-branch",
+      "sha": "def456abc789"
+    },
+    "base": {
+      "ref": "main",
+      "sha": "abc123def456"
+    },
+    "merged": false,
+    "html_url": "https://github.com/testorg/testrepo/pull/123"
+  },
+  "repository": {
+    "id": 987654321,
+    "name": "testrepo",
+    "full_name": "testorg/testrepo",
+    "owner": {
+      "login": "testorg",
+      "id": 7654321
+    }
+  },
+  "sender": {
+    "login": "testuser",
+    "id": 1234567
+  }
+}
