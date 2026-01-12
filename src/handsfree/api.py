@@ -466,9 +466,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
             }.get(task.status, "❓")
 
             instruction_display = (
-                task.instruction[:60] + "..."
-                if len(task.instruction) > 60
-                else task.instruction
+                task.instruction[:60] + "..." if len(task.instruction) > 60 else task.instruction
             )
 
             cards.append(
