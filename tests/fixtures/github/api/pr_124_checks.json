@@ -1,0 +1,26 @@
+[
+  {
+    "name": "ci / build",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-01-11T09:00:00Z",
+    "completed_at": "2026-01-11T09:05:00Z",
+    "url": "https://github.com/owner/repo/actions/runs/123460"
+  },
+  {
+    "name": "ci / test",
+    "status": "completed",
+    "conclusion": "failure",
+    "started_at": "2026-01-11T09:05:00Z",
+    "completed_at": "2026-01-11T09:12:00Z",
+    "url": "https://github.com/owner/repo/actions/runs/123461"
+  },
+  {
+    "name": "ci / lint",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-01-11T09:00:00Z",
+    "completed_at": "2026-01-11T09:03:00Z",
+    "url": "https://github.com/owner/repo/actions/runs/123462"
+  }
+]

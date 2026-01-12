@@ -1,0 +1,19 @@
+{
+  "repo": "owner/repo",
+  "pr_number": 123,
+  "title": "Add new feature X",
+  "description": "This PR adds a new feature X that improves the user experience by providing better feedback during long operations. Includes new UI components and backend API endpoints.",
+  "url": "https://github.com/owner/repo/pull/123",
+  "state": "open",
+  "author": "contributor",
+  "created_at": "2026-01-08T10:00:00Z",
+  "updated_at": "2026-01-10T15:30:00Z",
+  "labels": ["feature", "needs-review"],
+  "base_branch": "main",
+  "head_branch": "feature/x",
+  "additions": 450,
+  "deletions": 120,
+  "changed_files": 12,
+  "draft": false,
+  "mergeable": true
+}
