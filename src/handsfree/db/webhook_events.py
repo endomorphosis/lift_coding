@@ -97,7 +97,7 @@ class DBWebhookStore:
                 return None
 
             return {
-                "id": result[0],
+                "id": str(result[0]),  # Convert UUID to string
                 "source": result[1],
                 "event_type": result[2],
                 "delivery_id": result[3],
@@ -128,7 +128,7 @@ class DBWebhookStore:
 
             return [
                 {
-                    "id": row[0],
+                    "id": str(row[0]),  # Convert UUID to string
                     "source": row[1],
                     "event_type": row[2],
                     "delivery_id": row[3],
