@@ -88,7 +88,3 @@ lift_coding/
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Development workflow and best practices
 - [SECURITY.md](SECURITY.md) - Security policies and reporting
 - `implementation_plan/` - Detailed design documents and PR specifications
-
-## License
-
-Apache 2.0 - See [LICENSE](LICENSE) for details.
