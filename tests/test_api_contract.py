@@ -193,12 +193,17 @@ def test_post_webhook_github() -> None:
                 "title": "Test PR",
             },
         },
+        headers={
+            "X-GitHub-Event": "pull_request",
+            "X-GitHub-Delivery": "test-delivery-001",
+            "X-Hub-Signature-256": "dev",
+        },
     )
 
     assert response.status_code == 202
     data = response.json()
-    assert "status" in data
-    assert data["status"] == "accepted"
+    assert "event_id" in data
+    assert "message" in data
 
 
 def test_post_action_request_review() -> None:

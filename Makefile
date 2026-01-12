@@ -8,6 +8,7 @@ PYTHON ?= python3
 deps:
 	$(PYTHON) -m pip install -U pip
 	$(PYTHON) -m pip install -r requirements-dev.txt
+	$(PYTHON) -m pip install -e .
 
 fmt:
 	$(PYTHON) -m ruff format .
@@ -30,5 +31,6 @@ compose-up:
 compose-down:
 	docker compose down
 
+# Run the backend server
 dev:
 	$(PYTHON) -m handsfree.server
