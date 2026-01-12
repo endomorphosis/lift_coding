@@ -1,8 +1,9 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev
+.PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev migrate migrate-test
 
 PYTHON ?= python3
+DB_PATH ?= data/handsfree.duckdb
 
 # Install dev dependencies into the active environment.
 deps:
@@ -29,6 +30,14 @@ compose-up:
 
 compose-down:
 	docker compose down
+
+# Run database migrations
+migrate:
+	$(PYTHON) scripts/migrate.py --db-path $(DB_PATH)
+
+# Run database migrations for test database (in-memory or separate file)
+migrate-test:
+	$(PYTHON) scripts/migrate.py --db-path :memory:
 
 # Placeholder: implemented in PR-002.
 dev:
