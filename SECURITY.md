@@ -224,7 +224,7 @@ export LOG_LEVEL=info
 
 If a security issue is discovered:
 
-1. **Report**: Email security@[domain] or open a private security advisory on GitHub
+1. **Report**: Open a private security advisory on GitHub
 2. **Do not** publicly disclose until patched
 3. We aim to acknowledge within 24 hours and provide a fix timeline within 72 hours
 
@@ -265,4 +265,6 @@ logger.info("GitHub token loaded from environment")
 
 ## Questions?
 
-For security-related questions or to report vulnerabilities, contact the maintainers via GitHub issues (for non-sensitive topics) or email (for sensitive disclosures).
+For security-related questions or to report vulnerabilities:
+- **Non-sensitive topics**: Open a GitHub issue
+- **Security vulnerabilities**: Open a private security advisory on GitHub
