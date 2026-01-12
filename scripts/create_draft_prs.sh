@@ -38,7 +38,8 @@ for branch in "${branches[@]}"; do
     slug=${base#pr-${num}-}
     body_file="tracking/PR-${num}-${slug}.md"
   fi
-  title=$(sed -n '1s/^# //p' "$body_file")
+  # Title: use first non-empty line; strip a leading "# " if present.
+  title=$(awk 'NF { print; exit }' "$body_file" | sed 's/^# //')
 
   # If PR already exists for this head branch, skip.
   if gh pr view --head "$branch" --json number >/dev/null 2>&1; then
