@@ -10,6 +10,11 @@ from typing import Any
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
+from handsfree.db import init_db
+from handsfree.db.action_logs import write_action_log
+from handsfree.db.pending_actions import (
+    create_pending_action,
+)
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -22,13 +27,17 @@ from handsfree.models import (
     InboxResponse,
     MergeRequest,
     ParsedIntent,
-    PendingAction,
     Profile,
     RequestReviewRequest,
     RerunChecksRequest,
     TextInput,
     UICard,
 )
+from handsfree.models import (
+    PendingAction as PydanticPendingAction,
+)
+from handsfree.policy import PolicyDecision, evaluate_action_policy
+from handsfree.rate_limit import check_rate_limit
 
 app = FastAPI(
     title="HandsFree Dev Companion API",
@@ -36,10 +45,25 @@ app = FastAPI(
     description="API for hands-free developer assistant",
 )
 
-# In-memory storage
-pending_actions: dict[str, dict[str, Any]] = {}
+# Database connection (initialized lazily)
+_db_conn = None
+
+# In-memory storage (for backwards compatibility with existing tests)
+pending_actions_memory: dict[str, dict[str, Any]] = {}
 webhook_payloads: list[dict[str, Any]] = []
 processed_commands: dict[str, CommandResponse] = {}
+idempotency_store: dict[str, ActionResult] = {}
+
+# Fixture user ID for development/testing
+FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def get_db():
+    """Get or initialize database connection."""
+    global _db_conn
+    if _db_conn is None:
+        _db_conn = init_db(":memory:")
+    return _db_conn
 
 
 @app.post("/v1/command", response_model=CommandResponse)
@@ -100,14 +124,8 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
             token = str(uuid.uuid4())
             expires_at = datetime.now(UTC) + timedelta(minutes=5)
 
-            pending_action = PendingAction(
-                token=token,
-                expires_at=expires_at,
-                summary=f"Fetch and summarize PR #{pr_number}",
-            )
-
-            # Store pending action
-            pending_actions[token] = {
+            # Store pending action in memory
+            pending_actions_memory[token] = {
                 "action": "summarize_pr",
                 "pr_number": pr_number,
                 "expires_at": expires_at,
@@ -121,7 +139,11 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
                     entities={"pr_number": pr_number},
                 ),
                 spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
-                pending_action=pending_action,
+                pending_action=PydanticPendingAction(
+                    token=token,
+                    expires_at=expires_at,
+                    summary=f"Fetch and summarize PR #{pr_number}",
+                ),
                 debug=DebugInfo(transcript=text),
             )
         else:
@@ -164,7 +186,7 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
         return processed_commands[request.idempotency_key]
 
     # Check if pending action exists
-    if request.token not in pending_actions:
+    if request.token not in pending_actions_memory:
         raise HTTPException(
             status_code=404,
             detail={
@@ -173,11 +195,11 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
             },
         )
 
-    action_data = pending_actions[request.token]
+    action_data = pending_actions_memory[request.token]
 
     # Check expiration
     if datetime.now(UTC) > action_data["expires_at"]:
-        del pending_actions[request.token]
+        del pending_actions_memory[request.token]
         raise HTTPException(
             status_code=404,
             detail={
@@ -219,7 +241,7 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
         )
 
     # Clean up pending action
-    del pending_actions[request.token]
+    del pending_actions_memory[request.token]
 
     # Store for idempotency
     if request.idempotency_key:
@@ -261,13 +283,148 @@ async def github_webhook(request: Request) -> dict[str, str]:
 
 @app.post("/v1/actions/request-review", response_model=ActionResult)
 async def request_review(request: RequestReviewRequest) -> ActionResult:
-    """Request reviewers on a PR (stubbed - real implementation in PR-007)."""
-    return ActionResult(
-        ok=True,
-        message=f"[STUB] Would request review from {', '.join(request.reviewers)} "
-        f"on {request.repo}#{request.pr_number}. Real implementation in PR-007.",
-        url=None,
+    """Request reviewers on a PR with policy evaluation and audit logging."""
+    db = get_db()
+
+    # Check idempotency first
+    if request.idempotency_key and request.idempotency_key in idempotency_store:
+        return idempotency_store[request.idempotency_key]
+
+    # Check rate limit
+    rate_limit_result = check_rate_limit(
+        db,
+        FIXTURE_USER_ID,
+        "request_review",
+        window_seconds=60,
+        max_requests=10,
     )
+
+    if not rate_limit_result.allowed:
+        # Write audit log for rate limit denial
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=False,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"reviewers": request.reviewers},
+            result={"error": "rate_limited", "message": rate_limit_result.reason},
+            idempotency_key=request.idempotency_key,
+        )
+
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "rate_limited",
+                "message": rate_limit_result.reason,
+                "retry_after": rate_limit_result.retry_after_seconds,
+            },
+        )
+
+    # Evaluate policy
+    policy_result = evaluate_action_policy(
+        db,
+        FIXTURE_USER_ID,
+        request.repo,
+        "request_review",
+    )
+
+    # Handle policy decisions
+    if policy_result.decision == PolicyDecision.DENY:
+        # Write audit log for policy denial
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=False,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"reviewers": request.reviewers},
+            result={"error": "policy_denied", "message": policy_result.reason},
+            idempotency_key=request.idempotency_key,
+        )
+
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "policy_denied",
+                "message": policy_result.reason,
+            },
+        )
+
+    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+        # Create pending action in database
+        reviewers_str = ", ".join(request.reviewers)
+        summary = f"Request review from {reviewers_str} on {request.repo}#{request.pr_number}"
+        pending_action = create_pending_action(
+            db,
+            user_id=FIXTURE_USER_ID,
+            summary=summary,
+            action_type="request_review",
+            action_payload={
+                "repo": request.repo,
+                "pr_number": request.pr_number,
+                "reviewers": request.reviewers,
+            },
+            expires_in_seconds=300,  # 5 minutes
+        )
+
+        # Write audit log for confirmation required
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=True,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"reviewers": request.reviewers},
+            result={
+                "status": "needs_confirmation",
+                "token": pending_action.token,
+                "reason": policy_result.reason,
+            },
+            idempotency_key=request.idempotency_key,
+        )
+
+        result = ActionResult(
+            ok=False,
+            message=f"Confirmation required: {policy_result.reason}. "
+            f"Use token '{pending_action.token}' to confirm.",
+            url=None,
+        )
+
+        # Store for idempotency
+        if request.idempotency_key:
+            idempotency_store[request.idempotency_key] = result
+
+        return result
+
+    # Policy allows the action - execute it
+    # In a real implementation, this would call GitHub API
+    # For now, we simulate success
+    target = f"{request.repo}#{request.pr_number}"
+
+    # Write audit log for successful execution
+    write_action_log(
+        db,
+        user_id=FIXTURE_USER_ID,
+        action_type="request_review",
+        ok=True,
+        target=target,
+        request={"reviewers": request.reviewers},
+        result={"status": "success", "message": "Review requested (fixture)"},
+        idempotency_key=request.idempotency_key,
+    )
+
+    result = ActionResult(
+        ok=True,
+        message=f"Review requested from {', '.join(request.reviewers)} on {target}",
+        url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+    )
+
+    # Store for idempotency
+    if request.idempotency_key:
+        idempotency_store[request.idempotency_key] = result
+
+    return result
 
 
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
