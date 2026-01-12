@@ -1,4 +1,4 @@
--- DuckDB schema (initial migration)
+-- DuckDB schema (initial, evolve with migrations)
 
 CREATE TABLE IF NOT EXISTS users (
   id              UUID PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- GitHub App installations (or OAuth connections)
 CREATE TABLE IF NOT EXISTS github_connections (
   id              UUID PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   installation_id BIGINT,
   token_ref       TEXT, -- reference to secret manager (do not store tokens directly)
   scopes          TEXT,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS github_connections (
 
 CREATE TABLE IF NOT EXISTS repo_policies (
   id              UUID PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   repo_full_name  TEXT NOT NULL, -- owner/name
   allow_merge     BOOLEAN NOT NULL DEFAULT false,
   allow_rerun     BOOLEAN NOT NULL DEFAULT true,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS repo_policies (
 -- Commands (inputs + parsed intents)
 CREATE TABLE IF NOT EXISTS commands (
   id              UUID PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   profile         TEXT NOT NULL DEFAULT 'default',
   input_type      TEXT NOT NULL, -- text/audio
   transcript      TEXT,          -- store only if allowed by privacy mode
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS commands (
 -- Pending actions requiring confirmation
 CREATE TABLE IF NOT EXISTS pending_actions (
   token           TEXT PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   summary         TEXT NOT NULL,
   action_type     TEXT NOT NULL,
   action_payload  JSON NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS pending_actions (
 -- Side-effect action audit log
 CREATE TABLE IF NOT EXISTS action_logs (
   id              UUID PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   action_type     TEXT NOT NULL,
   target          TEXT,
   request         JSON,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS webhook_events (
 -- Agent tasks
 CREATE TABLE IF NOT EXISTS agent_tasks (
   id              UUID PRIMARY KEY,
-  user_id         UUID NOT NULL,
+  user_id         UUID NOT NULL REFERENCES users(id),
   provider        TEXT NOT NULL, -- copilot/custom
   repo_full_name  TEXT,
   issue_number    INT,
