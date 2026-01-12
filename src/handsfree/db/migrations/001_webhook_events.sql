@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS webhook_events (
   id              UUID PRIMARY KEY,
   source          TEXT NOT NULL, -- github
   event_type      TEXT,
-  delivery_id     TEXT,
+  delivery_id     TEXT NOT NULL, -- Required for replay protection
   signature_ok    BOOLEAN NOT NULL DEFAULT false,
   payload         JSON,
   received_at     TIMESTAMPTZ NOT NULL DEFAULT now()
