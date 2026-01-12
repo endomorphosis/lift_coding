@@ -8,6 +8,7 @@ PYTHON ?= python3
 deps:
 	$(PYTHON) -m pip install -U pip
 	$(PYTHON) -m pip install -r requirements-dev.txt
+	$(PYTHON) -m pip install -e .
 
 fmt:
 	$(PYTHON) -m ruff format .
@@ -30,6 +31,6 @@ compose-up:
 compose-down:
 	docker compose down
 
-# Placeholder: implemented in PR-002.
+# Run the backend server
 dev:
-	@echo "Backend server will be added in PR-002 (see implementation_plan/prs/PR-002-backend-api-skeleton.md)"
+	$(PYTHON) -m handsfree.server
