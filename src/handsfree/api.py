@@ -6,11 +6,8 @@ from typing import Any
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 
-from handsfree.webhooks import (
-    get_webhook_store,
-    normalize_github_event,
-    verify_github_signature,
-)
+from handsfree.db.webhook_events import get_db_webhook_store
+from handsfree.webhooks import normalize_github_event, verify_github_signature
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -51,7 +48,7 @@ async def github_webhook(
     Raises:
         400 Bad Request if signature invalid or duplicate delivery
     """
-    store = get_webhook_store()
+    store = get_db_webhook_store()
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):

@@ -8,13 +8,13 @@ Background
 - The DuckDB migrations + persistence primitives exist in PR #12 (DB schema + src/handsfree/db/webhook_events.py etc.).
 
 Agent checklist (keep scope tight)
-- [ ] Cherry-pick/rebase the minimal DB webhook_events persistence code from PR #12.
-- [ ] Replace/augment the in-memory webhook store with a DB-backed store:
+- [x] Cherry-pick/rebase the minimal DB webhook_events persistence code from PR #12.
+- [x] Replace/augment the in-memory webhook store with a DB-backed store:
   - persist raw event payload + event_type + delivery_id + signature_ok
   - implement replay protection/dedup keyed by delivery_id via DB
-- [ ] Keep existing tests passing; add DB-backed tests where needed.
-- [ ] Keep dev mode working without external DB service (DuckDB embedded; Redis optional).
-- [ ] Keep CI green: make fmt-check, make lint, make test, make openapi-validate.
+- [x] Keep existing tests passing; add DB-backed tests where needed.
+- [x] Keep dev mode working without external DB service (DuckDB embedded; Redis optional).
+- [x] Keep CI green: make fmt-check, make lint, make test, make openapi-validate.
 
 Out of scope
 - Full inbox state projection from normalized events (follow-up)
