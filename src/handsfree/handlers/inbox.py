@@ -67,10 +67,12 @@ def handle_inbox_list(
         )
 
     # Sort by priority (highest first), then by updated_at
+    # Create a mapping for efficient lookup
+    pr_by_url = {pr["url"]: pr for pr in user_prs}
     items.sort(
         key=lambda x: (
             -x["priority"],
-            user_prs[[p["url"] for p in user_prs].index(x["url"])].get("updated_at", ""),
+            pr_by_url[x["url"]].get("updated_at", ""),
         )
     )
 

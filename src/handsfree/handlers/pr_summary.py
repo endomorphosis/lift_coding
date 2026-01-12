@@ -68,12 +68,16 @@ def handle_pr_summarize(
 
     # Add review status
     if reviews_summary["total"] > 0:
+        review_parts = []
         if reviews_summary["changes_requested"] > 0:
-            spoken_text += f"Reviews: {reviews_summary['changes_requested']} requested changes. "
-        elif reviews_summary["approved"] > 0:
-            spoken_text += f"Reviews: {reviews_summary['approved']} approved. "
-        else:
-            spoken_text += f"Reviews: {reviews_summary['commented']} commented. "
+            review_parts.append(f"{reviews_summary['changes_requested']} requested changes")
+        if reviews_summary["approved"] > 0:
+            review_parts.append(f"{reviews_summary['approved']} approved")
+        if reviews_summary["commented"] > 0 and not review_parts:
+            review_parts.append(f"{reviews_summary['commented']} commented")
+
+        if review_parts:
+            spoken_text += f"Reviews: {', '.join(review_parts)}. "
 
     # Add labels if important
     important_labels = [
@@ -82,11 +86,13 @@ def handle_pr_summarize(
     if important_labels:
         spoken_text += f"Labels: {', '.join(important_labels)}. "
 
-    # Add description highlight (first sentence only, privacy-friendly)
+    # Add description highlight (first 100 chars only, privacy-friendly)
     if description and not privacy_mode:
-        first_sentence = description.split(".")[0].strip()
-        if first_sentence and len(first_sentence) < 100:
-            spoken_text += f"Description: {first_sentence}."
+        # Limit to first 100 characters to avoid sentence parsing issues
+        excerpt = description[:100].strip()
+        if len(description) > 100:
+            excerpt += "..."
+        spoken_text += f"Description: {excerpt}"
 
     return {
         "pr_number": pr_number,

@@ -156,3 +156,18 @@ def test_pr_summary_diff_stats(github_provider):
     assert "12 files" in spoken
     assert "450 additions" in spoken
     assert "120 deletions" in spoken
+
+
+def test_pr_summary_mixed_reviews(github_provider):
+    """Test that mixed reviews (both approved and changes requested) are reported."""
+    result = handle_pr_summarize(github_provider, repo="owner/repo", pr_number=125)
+
+    reviews = result["reviews"]
+    assert reviews["total"] == 3
+    assert reviews["approved"] == 2
+    assert reviews["changes_requested"] == 1
+
+    # Verify both types are mentioned in spoken text
+    spoken = result["spoken_text"]
+    assert "1 requested changes" in spoken
+    assert "2 approved" in spoken
