@@ -1,0 +1,395 @@
+openapi: 3.0.3
+info:
+  title: HandsFree Dev Companion API
+  version: 1.0.0
+  description: >
+    API contract for a hands-free developer assistant (wearable/phone -> backend).
+    Designed for fixture-driven testing and safe, policy-gated side effects.
+servers:
+  - url: http://localhost:8080
+paths:
+  /v1/command:
+    post:
+      summary: Submit a hands-free command (text or audio metadata)
+      operationId: submitCommand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommandRequest'
+      responses:
+        '200':
+          description: Command handled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/commands/confirm:
+    post:
+      summary: Confirm a previously proposed side-effect action
+      operationId: confirmCommand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmRequest'
+      responses:
+        '200':
+          description: Confirmation processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+        '404':
+          description: Pending action not found/expired
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/inbox:
+    get:
+      summary: Get attention items (PRs, mentions, failing checks)
+      operationId: getInbox
+      parameters:
+        - in: query
+          name: profile
+          schema: { $ref: '#/components/schemas/Profile' }
+          required: false
+      responses:
+        '200':
+          description: Inbox items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InboxResponse'
+
+  /v1/webhooks/github:
+    post:
+      summary: Receive GitHub webhooks (verified by signature)
+      operationId: githubWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Raw GitHub webhook payload
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Invalid payload or signature
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/actions/request-review:
+    post:
+      summary: Request reviewers on a PR (policy-gated)
+      operationId: requestReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RequestReviewRequest' }
+      responses:
+        '200':
+          description: Review request submitted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+        '409':
+          description: Policy denied or needs confirmation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/actions/rerun-checks:
+    post:
+      summary: Re-run CI checks (policy-gated)
+      operationId: rerunChecks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RerunChecksRequest' }
+      responses:
+        '200':
+          description: Re-run triggered
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+
+  /v1/actions/merge:
+    post:
+      summary: Merge a PR (strict policy gate + confirmation)
+      operationId: mergePr
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MergeRequest' }
+      responses:
+        '200':
+          description: Merge submitted
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+        '409':
+          description: Policy denied or needs confirmation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+components:
+  schemas:
+    Profile:
+      type: string
+      enum: [workout, kitchen, commute, default]
+      default: default
+
+    CommandRequest:
+      type: object
+      required: [input, profile, client_context]
+      properties:
+        input:
+          $ref: '#/components/schemas/CommandInput'
+        profile:
+          $ref: '#/components/schemas/Profile'
+        client_context:
+          $ref: '#/components/schemas/ClientContext'
+        idempotency_key:
+          type: string
+          description: Client-provided idempotency key for de-duping.
+
+    CommandInput:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/TextInput'
+        - $ref: '#/components/schemas/AudioInput'
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/TextInput'
+          audio: '#/components/schemas/AudioInput'
+
+    TextInput:
+      type: object
+      required: [type, text]
+      properties:
+        type:
+          type: string
+          enum: [text]
+        text:
+          type: string
+          maxLength: 2000
+
+    AudioInput:
+      type: object
+      required: [type, format, uri]
+      properties:
+        type:
+          type: string
+          enum: [audio]
+        format:
+          type: string
+          enum: [wav, m4a, mp3, opus]
+        uri:
+          type: string
+          description: Where the backend can fetch the audio (pre-signed URL) or a local dev placeholder.
+        duration_ms:
+          type: integer
+          minimum: 0
+
+    ClientContext:
+      type: object
+      required: [device, locale, timezone, app_version]
+      properties:
+        device:
+          type: string
+          description: e.g. ios, android, simulator
+        locale:
+          type: string
+          example: en-US
+        timezone:
+          type: string
+          example: America/Los_Angeles
+        app_version:
+          type: string
+          example: 0.1.0
+        noise_mode:
+          type: boolean
+          default: false
+
+    CommandResponse:
+      type: object
+      required: [spoken_text, intent, status]
+      properties:
+        status:
+          type: string
+          enum: [ok, needs_confirmation, error]
+        intent:
+          $ref: '#/components/schemas/ParsedIntent'
+        spoken_text:
+          type: string
+          description: Text that should be sent to TTS.
+        cards:
+          type: array
+          items: { $ref: '#/components/schemas/UICard' }
+        pending_action:
+          $ref: '#/components/schemas/PendingAction'
+        debug:
+          $ref: '#/components/schemas/DebugInfo'
+
+    ParsedIntent:
+      type: object
+      required: [name, confidence]
+      properties:
+        name:
+          type: string
+          example: inbox.list
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        entities:
+          type: object
+          additionalProperties: true
+
+    PendingAction:
+      type: object
+      required: [token, expires_at, summary]
+      properties:
+        token:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        summary:
+          type: string
+          description: Human-readable action summary for confirmation.
+
+    UICard:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+        subtitle:
+          type: string
+        lines:
+          type: array
+          items: { type: string }
+        deep_link:
+          type: string
+          description: Optional link to open on phone.
+
+    DebugInfo:
+      type: object
+      properties:
+        transcript:
+          type: string
+        tool_calls:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+
+    ConfirmRequest:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+        idempotency_key:
+          type: string
+
+    InboxResponse:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/InboxItem' }
+
+    InboxItem:
+      type: object
+      required: [type, title, priority]
+      properties:
+        type:
+          type: string
+          enum: [pr, mention, check, agent]
+        title:
+          type: string
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 5
+        repo:
+          type: string
+        url:
+          type: string
+        summary:
+          type: string
+
+    RequestReviewRequest:
+      type: object
+      required: [repo, pr_number, reviewers]
+      properties:
+        repo: { type: string, example: owner/name }
+        pr_number: { type: integer, minimum: 1 }
+        reviewers:
+          type: array
+          items: { type: string }
+        idempotency_key: { type: string }
+
+    RerunChecksRequest:
+      type: object
+      required: [repo, pr_number]
+      properties:
+        repo: { type: string }
+        pr_number: { type: integer, minimum: 1 }
+        idempotency_key: { type: string }
+
+    MergeRequest:
+      type: object
+      required: [repo, pr_number]
+      properties:
+        repo: { type: string }
+        pr_number: { type: integer, minimum: 1 }
+        merge_method:
+          type: string
+          enum: [merge, squash, rebase]
+          default: squash
+        idempotency_key: { type: string }
+
+    ActionResult:
+      type: object
+      required: [ok, message]
+      properties:
+        ok: { type: boolean }
+        message: { type: string }
+        url: { type: string }
+
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error: { type: string }
+        message: { type: string }
+        details:
+          type: object
+          additionalProperties: true
