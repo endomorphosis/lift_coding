@@ -286,7 +286,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
     """Request reviewers on a PR with policy evaluation and audit logging."""
     db = get_db()
 
-    # Check idempotency first
+    # Check idempotency first - return cached result if exists
     if request.idempotency_key and request.idempotency_key in idempotency_store:
         return idempotency_store[request.idempotency_key]
 
@@ -300,17 +300,21 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
     )
 
     if not rate_limit_result.allowed:
-        # Write audit log for rate limit denial
-        write_action_log(
-            db,
-            user_id=FIXTURE_USER_ID,
-            action_type="request_review",
-            ok=False,
-            target=f"{request.repo}#{request.pr_number}",
-            request={"reviewers": request.reviewers},
-            result={"error": "rate_limited", "message": rate_limit_result.reason},
-            idempotency_key=request.idempotency_key,
-        )
+        # Write audit log for rate limit denial (only if not already logged)
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"reviewers": request.reviewers},
+                result={"error": "rate_limited", "message": rate_limit_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
 
         raise HTTPException(
             status_code=429,
@@ -331,17 +335,21 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
 
     # Handle policy decisions
     if policy_result.decision == PolicyDecision.DENY:
-        # Write audit log for policy denial
-        write_action_log(
-            db,
-            user_id=FIXTURE_USER_ID,
-            action_type="request_review",
-            ok=False,
-            target=f"{request.repo}#{request.pr_number}",
-            request={"reviewers": request.reviewers},
-            result={"error": "policy_denied", "message": policy_result.reason},
-            idempotency_key=request.idempotency_key,
-        )
+        # Write audit log for policy denial (only if not already logged)
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"reviewers": request.reviewers},
+                result={"error": "policy_denied", "message": policy_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
 
         raise HTTPException(
             status_code=403,
