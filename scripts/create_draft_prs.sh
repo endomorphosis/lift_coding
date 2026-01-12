@@ -12,13 +12,13 @@ cd "$REPO_ROOT"
 gh label create copilot-agent --color 5319e7 --description "Work items queued for Copilot agents" || true
 
 branches=(
-  pr-002-backend-api-skeleton
-  pr-003-db-migrations-and-models
-  pr-004-command-router-and-confirmations
-  pr-005-github-readonly-inbox-and-summary
-  pr-006-github-webhook-ingestion-and-replay
-  pr-007-policy-engine-and-safe-action
-  pr-008-agent-orchestration-stub
+  "draft/pr-002-backend-api-skeleton"
+  "draft/pr-003-db-migrations-and-models"
+  "draft/pr-004-command-router-and-confirmations"
+  "draft/pr-005-github-readonly-inbox-and-summary"
+  "draft/pr-006-github-webhook-ingestion-and-replay"
+  "draft/pr-007-policy-engine-and-safe-action"
+  "draft/pr-008-agent-orchestration-stub"
 )
 
 start_branch=$(git branch --show-current)
@@ -29,7 +29,10 @@ for branch in "${branches[@]}"; do
 
   git checkout "$branch" >/dev/null
 
-  body_file=$(ls -1 tracking/PR-*.md | head -n 1)
+  base=$(basename "$branch")
+  num=$(echo "$base" | cut -d- -f2)
+  slug=${base#pr-${num}-}
+  body_file="tracking/PR-${num}-${slug}.md"
   title=$(sed -n '1s/^# //p' "$body_file")
 
   # If PR already exists for this head branch, skip.
