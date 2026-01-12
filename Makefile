@@ -19,7 +19,7 @@ lint:
 	$(PYTHON) -m ruff check .
 
 test:
-	$(PYTHON) -m pytest -q
+	PYTHONPATH=$(PWD)/src $(PYTHON) -m pytest -q
 
 openapi-validate:
 	$(PYTHON) scripts/validate_openapi.py spec/openapi.yaml
@@ -30,6 +30,5 @@ compose-up:
 compose-down:
 	docker compose down
 
-# Placeholder: implemented in PR-002.
 dev:
-	@echo "Backend server will be added in PR-002 (see implementation_plan/prs/PR-002-backend-api-skeleton.md)"
+	$(PYTHON) -m handsfree.server
