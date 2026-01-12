@@ -153,7 +153,7 @@ class TestWebhookIngestion:
             },
         )
         assert response2.status_code == 400
-        assert "Duplicate delivery ID" in response2.json()["detail"]
+        assert "Duplicate delivery ID" in response2.json()["message"]
 
     def test_invalid_signature_rejected(self, client):
         """Test that webhooks with invalid signatures are rejected."""
@@ -168,7 +168,7 @@ class TestWebhookIngestion:
             },
         )
         assert response.status_code == 400
-        assert "Invalid signature" in response.json()["detail"]
+        assert "Invalid signature" in response.json()["message"]
 
     def test_all_fixtures_can_be_replayed(self, client):
         """Test that all fixtures in the webhooks directory can be successfully ingested."""
