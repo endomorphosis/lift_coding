@@ -41,6 +41,9 @@ pending_actions: dict[str, dict[str, Any]] = {}
 webhook_payloads: list[dict[str, Any]] = []
 processed_commands: dict[str, CommandResponse] = {}
 
+# Test user ID for MVP (in production this would come from auth)
+TEST_USER_ID = "00000000-0000-0000-0000-000000000001"
+
 
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(request: CommandRequest) -> CommandResponse:
@@ -131,6 +134,12 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
                 spoken_text="I couldn't find a PR number in your request.",
                 debug=DebugInfo(transcript=text),
             )
+    elif "agent" in text and ("delegate" in text or "ask" in text or "fix" in text):
+        # Handle agent.delegate intent
+        response = _handle_agent_delegate(text, request.client_context.device)
+    elif "agent" in text and ("status" in text or "progress" in text):
+        # Handle agent.status intent
+        response = _handle_agent_status(text, request.client_context.device)
     elif "merge" in text:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -290,6 +299,205 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
         f"requires policy gates. Real implementation in PR-007.",
         url=None,
     )
+
+
+def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
+    """Handle agent.delegate intent.
+
+    Parse the command and create an agent task.
+    For MVP, uses mock provider.
+    """
+    from handsfree.agent_providers import get_provider
+    from handsfree.db import init_db
+    from handsfree.db.agent_tasks import create_agent_task, update_task_status
+
+    # Extract instruction from text
+    # Simple parsing: everything after "agent" or "fix" or "ask agent to"
+    instruction = text
+    if "ask agent to" in text:
+        instruction = text.split("ask agent to", 1)[1].strip()
+    elif "fix" in text:
+        instruction = text.split("fix", 1)[1].strip()
+
+    # Extract issue/PR number if present
+    issue_number = None
+    pr_number = None
+    repo_full_name = None
+
+    words = text.split()
+    for i, word in enumerate(words):
+        if word.lower() == "issue" and i + 1 < len(words):
+            try:
+                issue_number = int(words[i + 1].replace("#", ""))
+            except ValueError:
+                pass
+        elif word.lower() == "pr" and i + 1 < len(words):
+            try:
+                pr_number = int(words[i + 1].replace("#", ""))
+            except ValueError:
+                pass
+
+    # For MVP, use a test user ID and mock provider
+    user_id = TEST_USER_ID
+    provider = "mock"
+
+    try:
+        # Create task in database
+        conn = init_db()
+        task = create_agent_task(
+            conn,
+            user_id=user_id,
+            provider=provider,
+            instruction=instruction,
+            repo_full_name=repo_full_name,
+            issue_number=issue_number,
+            pr_number=pr_number,
+        )
+
+        # Start the task with the provider
+        agent_provider = get_provider(provider)
+        result = agent_provider.start_task(task)
+
+        # Update task status
+        if result.get("ok"):
+            update_task_status(
+                conn,
+                task.id,
+                status="running",
+                last_update=result.get("message", "Agent started"),
+            )
+
+        conn.close()
+
+        # Return response
+        target = ""
+        if issue_number:
+            target = f" for issue #{issue_number}"
+        elif pr_number:
+            target = f" for PR #{pr_number}"
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.delegate",
+                confidence=0.90,
+                entities={
+                    "instruction": instruction,
+                    "task_id": task.id,
+                    "issue_number": issue_number,
+                    "pr_number": pr_number,
+                },
+            ),
+            spoken_text=f"I've delegated the task{target} to an agent. "
+            f"Task ID is {task.id[:8]}. Say 'agent status' to check progress.",
+            cards=[
+                UICard(
+                    title="Agent Task Created",
+                    subtitle=f"Task {task.id[:8]}",
+                    lines=[
+                        f"Provider: {provider}",
+                        f"Instruction: {instruction}",
+                        "Status: running",
+                    ],
+                )
+            ],
+            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task.id}]),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.delegate", confidence=0.90),
+            spoken_text=f"Failed to create agent task: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
+
+
+def _handle_agent_status(text: str, device: str) -> CommandResponse:
+    """Handle agent.status intent.
+
+    Query and return the status of agent tasks.
+    """
+    from handsfree.db import init_db
+    from handsfree.db.agent_tasks import get_agent_tasks
+
+    # For MVP, use a test user ID
+    user_id = TEST_USER_ID
+
+    try:
+        conn = init_db()
+        tasks = get_agent_tasks(conn, user_id=user_id, limit=10)
+        conn.close()
+
+        if not tasks:
+            return CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(name="agent.status", confidence=0.95),
+                spoken_text="You have no agent tasks.",
+                debug=DebugInfo(transcript=text),
+            )
+
+        # Count by status
+        status_counts = {}
+        for task in tasks:
+            status_counts[task.status] = status_counts.get(task.status, 0) + 1
+
+        # Build spoken response
+        parts = []
+        if status_counts.get("running"):
+            parts.append(f"{status_counts['running']} running")
+        if status_counts.get("needs_input"):
+            parts.append(f"{status_counts['needs_input']} waiting for input")
+        if status_counts.get("completed"):
+            parts.append(f"{status_counts['completed']} completed")
+        if status_counts.get("failed"):
+            parts.append(f"{status_counts['failed']} failed")
+
+        spoken_text = f"You have {len(tasks)} agent tasks: {', '.join(parts)}."
+
+        # Build cards for recent tasks
+        cards = []
+        for task in tasks[:5]:  # Show top 5 most recent
+            status_emoji = {
+                "created": "⏱️",
+                "running": "⚙️",
+                "needs_input": "⏸️",
+                "completed": "✅",
+                "failed": "❌",
+            }.get(task.status, "❓")
+
+            instruction_display = (
+                task.instruction[:60] + "..." if len(task.instruction) > 60 else task.instruction
+            )
+
+            cards.append(
+                UICard(
+                    title=f"{status_emoji} Task {task.id[:8]}",
+                    subtitle=f"{task.status} • {task.provider}",
+                    lines=[
+                        f"Instruction: {instruction_display}",
+                        f"Last update: {task.last_update or 'No updates'}",
+                    ],
+                )
+            )
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.status",
+                confidence=0.95,
+                entities={"task_count": len(tasks)},
+            ),
+            spoken_text=spoken_text,
+            cards=cards,
+            debug=DebugInfo(transcript=text),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.status", confidence=0.95),
+            spoken_text=f"Failed to get agent status: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
 
 
 def _get_fixture_inbox_items() -> list[InboxItem]:

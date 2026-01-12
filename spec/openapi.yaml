@@ -261,6 +261,13 @@ components:
         name:
           type: string
           example: inbox.list
+          description: >
+            Intent name parsed from the command. Supported intents include:
+            - inbox.list: Query inbox items
+            - pr.summarize: Summarize a pull request
+            - pr.merge: Merge a pull request (policy-gated)
+            - agent.delegate: Delegate a task to an agent
+            - agent.status: Query status of agent tasks
         confidence:
           type: number
           minimum: 0
@@ -268,6 +275,12 @@ components:
         entities:
           type: object
           additionalProperties: true
+          description: >
+            Extracted entities specific to the intent. Examples:
+            - pr_number (int): PR number for pr.* intents
+            - issue_number (int): Issue number for agent.delegate
+            - task_id (string): Agent task ID for agent.delegate
+            - instruction (string): Task instruction for agent.delegate
 
     PendingAction:
       type: object
