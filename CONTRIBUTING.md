@@ -1,186 +1,141 @@
-# Contributing to HandsFree Dev Companion
+# Contributing to Handsfree Dev Companion
 
-Thank you for your interest in contributing! This guide will help you get started.
+Thank you for your interest in contributing! This guide covers the development workflow and best practices for this project.
 
-## Development Setup
+## Development Philosophy
 
-### Prerequisites
+This project follows a **fixtures-first** approach:
 
-- Python 3.11 or higher
-- Docker and Docker Compose
-- Make
-- Git
+- Write fixtures (example inputs/outputs) before implementing features
+- Keep fixtures in `tests/fixtures/` for reproducibility
+- Use fixtures for both testing and development iteration
+- Replay recorded GitHub webhooks and API responses for local dev
 
-### Getting Started
+## Getting Started
 
-1. **Fork and clone the repository**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/lift_coding.git
-   cd lift_coding
-   ```
+1. **Fork and clone** the repository
+2. **Install dependencies**: `make deps`
+3. **Start services**: `make compose-up` (Redis)
+4. **Run tests**: `make test`
 
-2. **Install development dependencies**
-   ```bash
-   make deps
-   ```
+## Running CI Checks Locally
 
-3. **Start infrastructure services**
-   ```bash
-   make compose-up
-   ```
-   This starts Redis. DuckDB is embedded and requires no separate service.
+Before pushing your changes, run the same checks that CI will run:
 
-4. **Run tests to verify setup**
-   ```bash
-   make test
-   ```
+```bash
+# 1. Format check
+make fmt-check
+
+# 2. Lint
+make lint
+
+# 3. Tests
+make test
+
+# 4. OpenAPI validation
+make openapi-validate
+```
+
+Or auto-fix formatting issues:
+```bash
+make fmt
+```
+
+All checks must pass before a PR can be merged.
 
 ## Development Workflow
 
-### Before Making Changes
+### 1. Create a Branch
 
-1. Create a feature branch from `main`:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. Make sure all tests pass:
-   ```bash
-   make fmt-check lint test openapi-validate
-   ```
-
-### Making Changes
-
-1. **Write tests first** (when applicable)
-   - Add fixtures to `tests/fixtures/` for reproducible scenarios
-   - Use transcript fixtures for intent parsing tests
-   - Use webhook fixtures for GitHub integration tests
-
-2. **Make your changes**
-   - Follow existing code style and conventions
-   - Keep changes focused and minimal
-   - Update documentation if needed
-
-3. **Validate your changes**
-   ```bash
-   make fmt          # Format code
-   make lint         # Run linter
-   make test         # Run tests
-   make openapi-validate  # Validate OpenAPI spec if changed
-   ```
-
-### Code Style
-
-- **Formatting**: We use Ruff for code formatting
-  - Run `make fmt` to auto-format
-  - Run `make fmt-check` to check without modifying
-
-- **Linting**: We use Ruff for linting
-  - Run `make lint` to check for issues
-  - Fix all linting errors before submitting
-
-- **Type Hints**: Use Python type hints where practical
-
-### Testing
-
-- Place test files in `tests/` directory
-- Use fixtures from `tests/fixtures/` for deterministic tests
-- Test transcript parsing with `tests/fixtures/transcripts/*.txt`
-- Test GitHub integration with `tests/fixtures/github/*.json`
-- Run tests with `make test` or `python3 -m pytest`
-
-### Commit Guidelines
-
-- Write clear, concise commit messages
-- Use present tense ("Add feature" not "Added feature")
-- Reference issue numbers when applicable
-- Keep commits focused on a single change
-
-Example:
-```
-Add webhook signature verification
-
-- Implement HMAC-SHA256 verification for GitHub webhooks
-- Add tests for valid and invalid signatures
-- Update security docs with verification details
-
-Fixes #123
+Use descriptive branch names:
+```bash
+git checkout -b feature/your-feature-name
+git checkout -b fix/issue-description
 ```
 
-### Submitting a Pull Request
+### 2. Write Tests First (Fixtures-First)
 
-1. **Push your branch**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+- Add or update fixtures in `tests/fixtures/`
+- Write tests that use those fixtures
+- Run tests to verify they fail: `make test`
 
-2. **Open a Pull Request**
-   - Provide a clear description of changes
-   - Reference related issues
-   - Include testing details
-   - Ensure CI passes
+### 3. Implement Changes
 
-3. **Address review feedback**
-   - Respond to comments
-   - Make requested changes
-   - Push updates to the same branch
+- Make minimal changes to satisfy the tests
+- Follow existing code style (enforced by Ruff)
+- Keep commits focused and atomic
 
-## Project Structure
+### 4. Validate Locally
 
-```
-.
-├── spec/                    # OpenAPI specification
-│   └── openapi.yaml        # API contract (source of truth)
-├── src/                     # Source code (backend implemented in PR-002+)
-├── tests/                   # Test suite
-│   └── fixtures/           # Test fixtures
-│       ├── transcripts/    # Voice input examples
-│       ├── github/         # Webhook and API response samples
-│       └── api/            # Expected API responses
-├── implementation_plan/     # Design documents
-│   ├── docs/               # Architecture and design specs
-│   └── prs/                # PR-specific implementation plans
-├── scripts/                # Development utilities
-├── docker-compose.yml      # Infrastructure services (Redis)
-└── Makefile               # Development commands
+Run all CI checks:
+```bash
+make fmt-check lint test openapi-validate
 ```
 
-## Development Best Practices
+### 5. Push and Create PR
 
-### Security
+```bash
+git push origin your-branch-name
+```
 
-- **Never commit secrets**: See [SECURITY.md](SECURITY.md) for guidelines
-- **Redact sensitive data**: Ensure logs don't contain tokens or private data
-- **Validate input**: Sanitize user input and webhook payloads
-- **Follow least privilege**: Request minimal GitHub permissions needed
+Then open a pull request on GitHub.
 
-### Fixtures and Replay
+## Code Style
 
-- Use fixtures to make tests deterministic
-- Add new fixtures for new integration scenarios
-- Test with webhook replay instead of live debugging
-- Keep fixtures minimal but representative
+- **Python**: Follow Ruff formatting and linting rules (configured in `pyproject.toml`)
+- **Line length**: 100 characters
+- **Target**: Python 3.11+
 
-### Documentation
+The formatter and linter will catch most style issues automatically.
 
-- Update documentation when changing behavior
-- Add inline comments for complex logic
-- Keep README and SECURITY.md in sync with changes
-- Document new environment variables in README
+## Testing Guidelines
+
+### Test Organization
+
+- Unit tests: Test individual functions/classes
+- Integration tests: Test component interactions
+- Use fixtures from `tests/fixtures/` for realistic scenarios
+
+### Fixtures-First Development
+
+1. **Capture real data**: Record GitHub webhooks, API responses, or create representative examples
+2. **Store as fixtures**: Save in `tests/fixtures/` with descriptive names
+3. **Use in tests**: Load fixtures and verify behavior
+4. **Iterate**: Replay fixtures during development for fast feedback
+
+Example fixture structure:
+```
+tests/fixtures/
+├── github_webhooks/
+│   ├── issue_opened.json
+│   └── pr_review_requested.json
+├── github_api/
+│   ├── issue_123.json
+│   └── pr_456.json
+└── transcripts/
+    └── example_conversation.json
+```
+
+## Pull Request Guidelines
+
+- **Title**: Clear and concise description of changes
+- **Description**: Explain what, why, and how
+- **Link issues**: Use "Fixes #123" or "Closes #456"
+- **Keep scope small**: Focus on one feature or fix per PR
+- **Request review**: Tag appropriate reviewers
+
+## OpenAPI Changes
+
+If you modify the API:
+
+1. Update `spec/openapi.yaml`
+2. Validate: `make openapi-validate`
+3. Ensure backward compatibility or document breaking changes
 
 ## Questions?
 
-- Check existing [issues](https://github.com/endomorphosis/lift_coding/issues)
-- Review [implementation plan docs](implementation_plan/docs/)
-- Open a new issue for questions or bugs
-- Join discussions in pull requests
+- Check `implementation_plan/` for design documents
+- Open a discussion issue for clarification
+- Review existing PRs for examples
 
-## Code of Conduct
-
-- Be respectful and constructive
-- Focus on the issue, not the person
-- Help create a welcoming environment for all contributors
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the same license as the project (see [LICENSE](LICENSE)).
+Thank you for contributing! 🚀

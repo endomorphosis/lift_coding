@@ -1,270 +1,180 @@
 # Security Policy
 
-This document outlines security practices and guidelines for the HandsFree Dev Companion project.
+## Overview
 
-## Threat Model
+This project handles sensitive data including GitHub tokens, user conversations, and repository access. Security is a critical concern.
 
-This application handles sensitive data and privileged operations. Key threats include:
+## Supported Versions
 
-- **Token theft** → repository compromise
-- **Unauthorized merges/actions** → unintended code changes
-- **Leaking proprietary code** through logs, summaries, or transcripts
-- **Malicious webhook spoofing** → unauthorized actions
-- **Voice command injection** → unintended side effects
+| Version | Supported          |
+| ------- | ------------------ |
+| 0.x     | :white_check_mark: |
 
-## Security Controls
+This is a proof-of-concept project under active development. Security patches are applied to the latest commit on `main`.
 
-### Authentication & Authorization
-- **GitHub App integration**: Prefer GitHub App with least-privilege access over personal access tokens
-- **Short-lived tokens**: Session tokens expire after reasonable timeouts
-- **Webhook verification**: All incoming webhooks must pass signature verification and replay protection
-- **Least-privilege scopes**: Request minimum required GitHub permissions
-- **Rate limiting**: Implement anomaly detection for side-effect actions
+## Reporting a Vulnerability
 
-### Webhook Security
+**Please do not report security vulnerabilities through public GitHub issues.**
 
-**Signature Verification**
-- Always verify GitHub webhook signatures using HMAC-SHA256
-- Use the `X-Hub-Signature-256` header
-- Reject unsigned or invalidly signed webhooks
+Instead, please report them via:
+- GitHub Security Advisories: Use the "Security" tab in this repository
+- Or open a private discussion with maintainers
 
-**Replay Protection**
-- Track webhook delivery IDs to prevent replay attacks
-- Use idempotency keys for side-effect actions
-- Implement timestamp checks for webhook freshness
+Include in your report:
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Suggested fix (if any)
 
-## Secret Management
+We aim to respond within 48 hours and provide a fix timeline based on severity.
 
-### General Principles
+## Security Best Practices
 
-1. **Never log secrets**: Tokens, API keys, and credentials must never appear in logs, metrics, or error messages
-2. **Encrypt at rest**: Use KMS or equivalent for secret storage
-3. **Short-lived tokens**: Prefer temporary credentials with minimal scope
-4. **Principle of least privilege**: Request only the permissions you need
-5. **Rotate regularly**: Implement token rotation strategy for long-lived credentials
+### Secret Handling
 
-### What to Store Securely
+#### Never Commit Secrets
 
-**DO:**
-- Store secrets in environment variables or secure secret management systems (e.g., AWS KMS, HashiCorp Vault)
-- Use short-lived tokens where possible
-- Encrypt secrets at rest using KMS or equivalent
-- Rotate tokens regularly
-- Use GitHub App installation tokens (scoped, short-lived) instead of personal access tokens
+- **GitHub tokens**: Use environment variables or secret management systems
+- **API keys**: Never hardcode in source code
+- **Credentials**: Store securely, never in git history
 
-**DON'T:**
-- Never commit secrets, tokens, or API keys to source control
-- Never log secrets in plain text
-- Never include secrets in error messages or exception details
-- Never send secrets to external systems without encryption
+#### Environment Variables
 
-### Environment Variables
-
-**NEVER** commit secrets to source control. Use environment variables or secret management services.
+Use `.env` files (git-ignored) or system environment variables:
 
 ```bash
-# Good: Load from environment
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-
-# Bad: Hardcoded secret
-GITHUB_TOKEN = "ghp_abc123..."  # NEVER DO THIS
+export GITHUB_TOKEN="ghp_..."
+export REDIS_PASSWORD="..."
 ```
 
-Store secrets in environment variables or a secure secret manager:
-```bash
-# Example: .env file (DO NOT COMMIT)
-GITHUB_APP_PRIVATE_KEY=...
-REDIS_PASSWORD=...
-DATABASE_ENCRYPTION_KEY=...
-```
-
-Add `.env` files to `.gitignore` to prevent accidental commits.
-
-### Secret Storage by Environment
-
-**Local Development**:
-- Store secrets in `.env` files (ensure `.env` is in `.gitignore`)
-- Use environment variables for configuration
-- Never commit secrets to version control
-
-**Production**:
-- Use GitHub Secrets for CI/CD
-- Use environment variables or secret management service (AWS Secrets Manager, Azure Key Vault, etc.)
-- Encrypt secrets at rest using KMS
-- Use short-lived session tokens when possible
-
-### GitHub Token Handling
-
-- **Prefer GitHub Apps over Personal Access Tokens**
-  - Use fine-grained permissions (read-only when possible)
-  - Minimize scope to specific repositories
-  
-- **Token storage**: Encrypt at rest using KMS or equivalent
-- **Token scope**: Request minimum required scopes (e.g., `repo:status`, `read:org`)
-- **Never log tokens**: Redact tokens in all log output
-
-```python
-# Good: redacted in logs
-logger.info("GitHub API call", extra={"token": "[REDACTED]"})
-
-# Bad: exposes token
-logger.info(f"Using token {token}")
-```
-
-Example environment variables:
-```bash
-export GITHUB_TOKEN=ghp_...
-export REDIS_PASSWORD=...
-```
-
-## Redaction Policies
+Never commit `.env` files to the repository.
 
 ### Log Redaction
 
-All logging output must redact sensitive information before writing to disk or external services.
+All logging **must** redact sensitive data:
 
-**Always redact:**
-- GitHub tokens (PATs, installation tokens, OAuth tokens)
-- API keys and secrets
-- Webhook signatures
-- Repository content (code snippets, file contents)
-- User PII (emails, names when not necessary)
-- Session tokens and authentication credentials
-- Private repository names (when in strict privacy mode)
+#### Automatic Redaction Rules
 
-**Redaction patterns:**
+- **GitHub tokens**: Pattern `ghp_[A-Za-z0-9_]+` → `ghp_***REDACTED***`
+- **GitHub App keys**: Pattern `ghs_[A-Za-z0-9_]+` → `ghs_***REDACTED***`
+- **OAuth tokens**: Pattern `gho_[A-Za-z0-9_]+` → `gho_***REDACTED***`
+- **Email addresses**: Redact or hash
+- **User IDs**: Redact or pseudonymize when appropriate
+
+#### Logging Guidelines
+
 ```python
-# Example redaction patterns
-REDACT_PATTERNS = [
-    r'ghp_[a-zA-Z0-9]{36}',  # GitHub personal access tokens
-    r'ghs_[a-zA-Z0-9]{36}',   # GitHub app tokens
-    r'-----BEGIN [A-Z ]+-----.*?-----END [A-Z ]+-----',  # Private keys
-    r'[A-Za-z0-9+/]{40,}={0,2}',  # Base64 secrets (conservative)
-]
+# ❌ Bad - logs sensitive data
+logger.info(f"Auth with token: {github_token}")
 
-# Example: redact tokens
-log_message = re.sub(r'(token|key|secret)=[^\s&]+', r'\1=REDACTED', log_message)
+# ✅ Good - redacts automatically
+logger.info(f"Auth with token: {redact_secrets(github_token)}")
 
-# Example: redact bearer tokens
-log_message = re.sub(r'Bearer [A-Za-z0-9_-]+', 'Bearer [REDACTED]', log_message)
+# ✅ Good - structured logging without secrets
+logger.info("authenticated", extra={"user_id": hash_user_id(user_id)})
 ```
 
-**Implementation guidelines:**
-- Use structured logging (JSON) with clearly marked sensitive fields
-- Apply redaction filters before log emission
-- Never log full request/response bodies containing tokens
-- Redact with consistent markers: `[REDACTED]` or `***`
+See `implementation_plan/docs/09-observability.md` for detailed logging standards.
 
-Example:
-```python
-# Bad - token in plain sight
-logger.info(f"GitHub token: {token}")
+### Data Privacy
 
-# Good - redact sensitive data
-logger.info("GitHub token: [REDACTED]")
+#### Personal Information
 
-# Good - use structured logging with automatic redaction
-logger.info("user_authenticated", extra={
-    "user_id": user_id,
-    "repo": repo_name,
-    # token is automatically redacted by log filter
-})
-```
+- Minimize collection of personal data
+- Hash or pseudonymize user identifiers when possible
+- Document data retention policies
+- Comply with applicable privacy regulations (GDPR, etc.)
 
-### Log Levels and Content
+#### GitHub Data
 
-- **ERROR/WARN**: Include structured context but redact tokens, emails, repo names in private mode
-- **INFO**: High-level operations only (e.g., "PR summarized", "webhook received")
-- **DEBUG**: Verbose mode with redaction still enabled (never log raw tokens)
+- Respect GitHub's terms of service
+- Only access repositories with proper authorization
+- Don't store repository content unnecessarily
+- Implement webhook verification (HMAC)
 
-## Privacy Modes
+### Code Safety
 
-The system supports three privacy levels for data handling:
+#### Input Validation
 
-**Strict Mode** (recommended for proprietary code)
-- No code snippets in logs or summaries
-- No images stored or transmitted
-- Summaries only: "PR #123 has 5 comments, 2 approvals"
+- Validate all external inputs (webhooks, API requests)
+- Use schema validation (Pydantic, OpenAPI)
+- Sanitize data before processing
 
-**Balanced Mode** (default)
-- Small code excerpts permitted (max 3-5 lines)
-- Automatic redaction of secrets/tokens
-- Images allowed but not stored long-term
+#### Dependency Management
 
-**Debug Mode** (development only)
-- Verbose logging enabled
-- Full payloads in logs
-- ⚠️ Never use in production
+- Pin dependency versions in `requirements-dev.txt`
+- Regularly update dependencies for security patches
+- Review dependencies for known vulnerabilities
 
-Configure via environment variable:
-```bash
-export PRIVACY_MODE=strict  # or balanced, debug
-export REDACTION_ENABLED=true
-export LOG_LEVEL=info
-```
+#### Safe Defaults
 
-## Data Retention
+- Fail closed (deny by default)
+- Require explicit opt-in for risky operations
+- Use policy engine for action approval
 
-**Minimize Storage**
-- Do not store audio recordings (process and discard)
-- Keep action logs for security audit but avoid full payload content
-- Purge old webhook data after processing
+### Infrastructure Security
 
-**What We Store**
-- Action audit logs (who, what, when, repo, result) - 90 days
-- User session metadata - 30 days
-- Webhook delivery IDs (for replay protection) - 7 days
+#### Redis
 
-**What We Don't Store**
-- Raw audio from wearable
-- Full code diffs in logs
-- GitHub tokens (only encrypted at rest, never logged)
+- Use authentication: `requirepass` in redis.conf
+- Bind to localhost only in development
+- Use TLS in production
+- Regularly update Redis version
 
-## Incident Response
+#### DuckDB
 
-If a security issue is discovered:
+- Embedded database (no network exposure)
+- File permissions: readable only by application user
+- Regular backups with encryption
 
-1. **Report**: Open a private security advisory on GitHub
-2. **Do not** publicly disclose until patched
-3. We aim to acknowledge within 24 hours and provide a fix timeline within 72 hours
+#### Docker
 
-## Development Best Practices
+- Use official base images
+- Pin image versions (no `latest` tags in production)
+- Run containers as non-root users
+- Scan images for vulnerabilities
 
-**For Contributors**
-- Never commit secrets or tokens to git
-- Use `.env` files (excluded via `.gitignore`) for local secrets
-- Run `make lint` before committing to catch potential security issues
-- Review logs for accidental secret exposure before pushing
+## Security Checklist for Contributors
 
-**In Code**
-```python
-# ❌ Bad
-github_token = "ghp_abc123..."
-logger.info(f"Using token: {github_token}")
+Before submitting a PR, ensure:
 
-# ✅ Good
-github_token = os.environ.get("GITHUB_TOKEN")
-if not github_token:
-    raise ValueError("GITHUB_TOKEN not set")
-logger.info("GitHub token loaded from environment")
-```
+- [ ] No secrets committed to git
+- [ ] Logging includes redaction for sensitive data
+- [ ] Input validation for external data
+- [ ] Dependencies are up to date
+- [ ] New environment variables documented
+- [ ] Security implications considered and documented
 
-**Code Review Checklist**
-- [ ] No hardcoded secrets
-- [ ] Sensitive data properly redacted in logs
-- [ ] User input sanitized/validated
-- [ ] Webhook signatures verified
-- [ ] Destructive actions gated by policy
-- [ ] Tests cover security-critical paths
+## Security-Related CI Checks
 
-## Additional Resources
+CI runs automatic checks including:
+- Static analysis (Ruff linter)
+- Dependency vulnerability scanning (planned)
+- Secret scanning (GitHub's built-in)
 
-- [Implementation Plan: Security & Privacy](implementation_plan/docs/08-security-privacy.md)
-- [Development Loop](implementation_plan/docs/11-devloop-vscode.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
+## Disclosure Policy
+
+When we receive a security report:
+
+1. **Acknowledge** receipt within 48 hours
+2. **Assess** severity and impact
+3. **Develop** a fix on a private branch
+4. **Test** the fix thoroughly
+5. **Release** the fix publicly
+6. **Notify** users of the vulnerability and fix
+
+We credit reporters unless they prefer to remain anonymous.
+
+## Resources
+
+- [GitHub Security Best Practices](https://docs.github.com/en/code-security)
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- Project security docs: `implementation_plan/docs/08-security-privacy.md`
 
 ## Questions?
 
-For security-related questions or to report vulnerabilities:
-- **Non-sensitive topics**: Open a GitHub issue
-- **Security vulnerabilities**: Open a private security advisory on GitHub
+For security questions (non-vulnerability), open a discussion or contact the maintainers.
+
+---
+
+Thank you for helping keep this project secure! 🔒
