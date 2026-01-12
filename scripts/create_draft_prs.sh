@@ -12,6 +12,7 @@ cd "$REPO_ROOT"
 gh label create copilot-agent --color 5319e7 --description "Work items queued for Copilot agents" || true
 
 branches=(
+  "draft/pr-001-repo-foundation-followups"
   "draft/pr-002-backend-api-skeleton"
   "draft/pr-003-db-migrations-and-models"
   "draft/pr-004-command-router-and-confirmations"
@@ -30,9 +31,13 @@ for branch in "${branches[@]}"; do
   git checkout "$branch" >/dev/null
 
   base=$(basename "$branch")
-  num=$(echo "$base" | cut -d- -f2)
-  slug=${base#pr-${num}-}
-  body_file="tracking/PR-${num}-${slug}.md"
+  if [[ "$base" == "pr-001-repo-foundation-followups" ]]; then
+    body_file="tracking/PR-001-repo-foundation-followups.md"
+  else
+    num=$(echo "$base" | cut -d- -f2)
+    slug=${base#pr-${num}-}
+    body_file="tracking/PR-${num}-${slug}.md"
+  fi
   title=$(sed -n '1s/^# //p' "$body_file")
 
   # If PR already exists for this head branch, skip.
