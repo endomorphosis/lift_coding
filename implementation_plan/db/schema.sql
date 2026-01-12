@@ -1,4 +1,4 @@
--- Postgres schema (initial, evolve with migrations)
+-- DuckDB schema (initial, evolve with migrations)
 
 CREATE TABLE IF NOT EXISTS users (
   id              UUID PRIMARY KEY,

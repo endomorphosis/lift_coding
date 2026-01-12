@@ -5,7 +5,7 @@ This folder is a **docs/spec/dev** starter you can drop into a repo to guide imp
 ## What's inside
 - `docs/` architecture + dev loop docs
 - `spec/openapi.yaml` API contract (v1)
-- `db/schema.sql` Postgres schema (initial)
+- `db/schema.sql` DuckDB schema (initial)
 - `spec/command_grammar.md` voice command grammar + examples
 - `dev/` local iteration helpers and fixtures guidance
 - `tests/fixtures/` directories for transcripts and GitHub payloads

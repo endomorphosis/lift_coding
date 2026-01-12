@@ -4,7 +4,7 @@
 Turn `db/schema.sql` into a migration-based schema and provide minimal persistence helpers used by commands, pending actions, audit logs, and webhook storage.
 
 ## Why (from the plan)
-- `docs/04-backend.md`: Postgres as system of record; Redis for sessions/dedupe
+- `docs/04-backend.md`: DuckDB as system of record; Redis for sessions/dedupe
 - `docs/06-command-system.md`: pending action tokens with expiry
 - `docs/08-security-privacy.md`: audit log + retention discipline
 - `db/schema.sql`: defines baseline tables for users, policies, commands, pending_actions, action_logs, webhook_events, agent_tasks

@@ -12,7 +12,7 @@ Stand up a tight local + CI dev loop aligned with the implementation plan: fixtu
 - Add baseline repo tooling (format/lint/test placeholders wired to real commands)
 - Add OpenAPI validation in CI (fail PRs if `spec/openapi.yaml` is invalid)
 - Add fixture directory structure and guidance in-tree
-- Add docker compose + Makefile targets that actually work (bring up Postgres/Redis)
+- Add docker compose + Makefile targets that actually work (bring up Redis; DuckDB is embedded)
 
 ## Out of scope
 - Implementing the backend endpoints themselves (PR-002)
@@ -25,7 +25,7 @@ Stand up a tight local + CI dev loop aligned with the implementation plan: fixtu
 - Security baseline: add logging redaction policy + secret handling guidelines (docs)
 
 ## Acceptance criteria
-- `docker compose up -d` starts Postgres + Redis
+- `docker compose up -d` starts Redis (DuckDB is embedded)
 - CI runs on PRs and fails on OpenAPI spec errors
 - A contributor can run `make fmt`, `make lint`, `make test` (even if minimal) without guessing
 
