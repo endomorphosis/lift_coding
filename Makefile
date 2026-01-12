@@ -8,6 +8,7 @@ PYTHON ?= python3
 deps:
 	$(PYTHON) -m pip install -U pip
 	$(PYTHON) -m pip install -r requirements-dev.txt
+	$(PYTHON) -m pip install -e .
 
 fmt:
 	$(PYTHON) -m ruff format .
@@ -30,5 +31,9 @@ compose-up:
 compose-down:
 	docker compose down
 
+<<<<<<< HEAD
+=======
+# Run the backend server
+>>>>>>> d6b0325 (Add server entry point and update Makefile dev target)
 dev:
 	$(PYTHON) -m handsfree.server
