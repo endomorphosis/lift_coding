@@ -4,8 +4,11 @@ Usage:
   python dev/replay_webhook.py tests/fixtures/github/webhooks/pull_request.opened.json
 """
 
-import sys, json, pathlib
+import json
+import pathlib
+import sys
 import urllib.request
+
 
 def main():
     if len(sys.argv) != 2:
@@ -18,7 +21,11 @@ def main():
     req = urllib.request.Request(
         "http://localhost:8080/v1/webhooks/github",
         data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json", "X-GitHub-Event": "pull_request", "X-Hub-Signature-256": "dev"},
+        headers={
+            "Content-Type": "application/json",
+            "X-GitHub-Event": "pull_request",
+            "X-Hub-Signature-256": "dev",
+        },
         method="POST",
     )
     try:
@@ -27,6 +34,7 @@ def main():
     except Exception as e:
         print("Error:", e)
         raise
+
 
 if __name__ == "__main__":
     main()
