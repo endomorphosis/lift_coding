@@ -60,13 +60,12 @@ for spec in implementation_plan/prs/PR-00*.md; do
   echo "---"
   echo "Preparing $branch"
 
-  # Create branch from origin/main (idempotent).
-  if git show-ref --verify --quiet "refs/heads/$branch"; then
-    git checkout "$branch" >/dev/null
-    git reset --hard "origin/$default_branch" >/dev/null
-  else
-    git checkout -b "$branch" "origin/$default_branch" >/dev/null
+  if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+    echo "Remote branch exists; skipping."
+    continue
   fi
+
+  git checkout -b "$branch" "origin/$default_branch" >/dev/null
 
   mkdir -p work
 
