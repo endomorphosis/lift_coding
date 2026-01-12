@@ -7,15 +7,17 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.webhooks import get_webhook_store, normalize_github_event
+from handsfree.db import get_connection
+from handsfree.db.webhook_events import get_db_webhook_store
+from handsfree.webhooks import normalize_github_event
 
 
 @pytest.fixture(autouse=True)
 def reset_webhook_store():
     """Reset webhook store before each test."""
-    store = get_webhook_store()
-    store._events.clear()
-    store._delivery_ids.clear()
+    # Clean up DB-backed store
+    with get_connection() as conn:
+        conn.execute("DELETE FROM webhook_events")
 
 
 @pytest.fixture
@@ -59,7 +61,7 @@ class TestWebhookIngestion:
         assert data["message"] == "Webhook accepted"
 
         # Verify event was stored
-        store = get_webhook_store()
+        store = get_db_webhook_store()
         event = store.get_event(data["event_id"])
         assert event is not None
         assert event["source"] == "github"
@@ -238,3 +240,95 @@ class TestEventNormalization:
         assert normalized["pr_number"] == 123
         assert normalized["review_state"] == "approved"
         assert normalized["review_author"] == "reviewer1"
+
+
+class TestDatabaseBackedStore:
+    """Test database-backed webhook storage and replay protection."""
+
+    def test_db_store_persists_events(self, client):
+        """Test that events are persisted to the database."""
+        payload = load_fixture("pull_request.opened.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": "test-db-persist-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Verify the event can be retrieved from DB
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event is not None
+        assert event["id"] == event_id
+        assert event["delivery_id"] == "test-db-persist-001"
+        assert event["source"] == "github"
+        assert event["event_type"] == "pull_request"
+        assert event["signature_ok"] is True
+        assert event["payload"]["action"] == "opened"
+
+    def test_db_replay_protection_across_sessions(self, client):
+        """Test that replay protection works across sessions (via DB)."""
+        payload = load_fixture("pull_request.opened.json")
+        delivery_id = "test-db-replay-001"
+
+        # First request should succeed
+        response1 = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": delivery_id,
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response1.status_code == 202
+
+        # Create a new store instance (simulating a new session/process)
+        store = get_db_webhook_store()
+
+        # Replay protection should still work via DB
+        assert store.is_duplicate_delivery(delivery_id) is True
+
+        # Second request with same delivery ID should fail
+        response2 = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": delivery_id,
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response2.status_code == 400
+        assert "Duplicate delivery ID" in response2.json()["detail"]
+
+    def test_db_list_events(self, client):
+        """Test that list_events retrieves events from database."""
+        # Post multiple events
+        for i in range(5):
+            payload = load_fixture("pull_request.opened.json")
+            client.post(
+                "/v1/webhooks/github",
+                json=payload,
+                headers={
+                    "X-GitHub-Event": "pull_request",
+                    "X-GitHub-Delivery": f"test-db-list-{i:03d}",
+                    "X-Hub-Signature-256": "dev",
+                },
+            )
+
+        # Retrieve events
+        store = get_db_webhook_store()
+        events = store.list_events(limit=10)
+
+        assert len(events) >= 5
+        # Events should be ordered by received_at DESC
+        delivery_ids = [
+            e["delivery_id"] for e in events if e["delivery_id"].startswith("test-db-list-")
+        ]
+        assert len(delivery_ids) == 5

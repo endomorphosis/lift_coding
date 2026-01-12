@@ -200,5 +200,9 @@ _webhook_store = WebhookStore()
 
 
 def get_webhook_store() -> WebhookStore:
-    """Get the global webhook store instance."""
+    """Get the global webhook store instance.
+
+    Note: This is the in-memory store for backward compatibility.
+    For DB-backed storage, use get_db_webhook_store from handsfree.db.webhook_events.
+    """
     return _webhook_store

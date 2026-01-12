@@ -78,7 +78,7 @@ async def github_webhook(
     Raises:
         400 Bad Request if signature invalid or duplicate delivery
     """
-    store = get_webhook_store()
+    store = get_db_webhook_store()
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):
