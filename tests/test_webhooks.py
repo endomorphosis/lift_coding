@@ -7,15 +7,17 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.webhooks import get_webhook_store, normalize_github_event
+from handsfree.db import get_connection
+from handsfree.db.webhook_events import get_db_webhook_store
+from handsfree.webhooks import normalize_github_event
 
 
 @pytest.fixture(autouse=True)
 def reset_webhook_store():
     """Reset webhook store before each test."""
-    store = get_webhook_store()
-    store._events.clear()
-    store._delivery_ids.clear()
+    # Clean up DB-backed store
+    with get_connection() as conn:
+        conn.execute("DELETE FROM webhook_events")
 
 
 @pytest.fixture
@@ -59,7 +61,7 @@ class TestWebhookIngestion:
         assert data["message"] == "Webhook accepted"
 
         # Verify event was stored
-        store = get_webhook_store()
+        store = get_db_webhook_store()
         event = store.get_event(data["event_id"])
         assert event is not None
         assert event["source"] == "github"
