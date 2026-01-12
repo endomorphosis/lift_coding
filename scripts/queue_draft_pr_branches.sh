@@ -17,8 +17,40 @@ for spec in implementation_plan/prs/PR-00*.md; do
   slug=${base#PR-${num}-}
   slug=${slug%.md}
 
-  # PR-001 is already implemented/merged in this repo.
+  # PR-001 is already implemented/merged in this repo; create a follow-ups draft.
   if [[ "$num" == "001" ]]; then
+    branch="draft/pr-001-repo-foundation-followups"
+    workfile="work/PR-001-repo-foundation-followups.md"
+
+    echo "---"
+    echo "Preparing $branch"
+
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+      git checkout "$branch" >/dev/null
+      git reset --hard "origin/$default_branch" >/dev/null
+    else
+      git checkout -b "$branch" "origin/$default_branch" >/dev/null
+    fi
+
+    mkdir -p work
+
+    {
+      echo "PR-001 follow-ups: Repo foundation polish"
+      echo
+      echo "This branch exists to host a draft PR for Copilot agents."
+      echo
+      echo "- Spec: implementation_plan/prs/PR-001-repo-foundation.md"
+      echo "- Tracking: tracking/PR-001-repo-foundation-followups.md"
+      echo
+      echo "## Agent checklist"
+      echo "- [ ] Pick a minimal set of polish items"
+      echo "- [ ] Keep CI green (fmt/lint/test/openapi)"
+      echo
+    } > "$workfile"
+
+    git add "$workfile"
+    git commit -m "Queue PR-001 follow-ups draft" >/dev/null || true
+    git push -u origin "$branch" >/dev/null
     continue
   fi
 
@@ -28,13 +60,12 @@ for spec in implementation_plan/prs/PR-00*.md; do
   echo "---"
   echo "Preparing $branch"
 
-  # Create branch from origin/main (idempotent).
-  if git show-ref --verify --quiet "refs/heads/$branch"; then
-    git checkout "$branch" >/dev/null
-    git reset --hard "origin/$default_branch" >/dev/null
-  else
-    git checkout -b "$branch" "origin/$default_branch" >/dev/null
+  if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+    echo "Remote branch exists; skipping."
+    continue
   fi
+
+  git checkout -b "$branch" "origin/$default_branch" >/dev/null
 
   mkdir -p work
 
