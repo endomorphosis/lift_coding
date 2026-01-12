@@ -1,0 +1,19 @@
+{
+  "repo": "owner/repo",
+  "pr_number": 124,
+  "title": "Fix critical bug in authentication",
+  "description": "Addresses a security vulnerability in the authentication flow. This fix ensures proper token validation and prevents unauthorized access.",
+  "url": "https://github.com/owner/repo/pull/124",
+  "state": "open",
+  "author": "security-team",
+  "created_at": "2026-01-11T08:00:00Z",
+  "updated_at": "2026-01-11T09:15:00Z",
+  "labels": ["bug", "urgent", "security"],
+  "base_branch": "main",
+  "head_branch": "fix/auth-vulnerability",
+  "additions": 85,
+  "deletions": 42,
+  "changed_files": 3,
+  "draft": false,
+  "mergeable": true
+}
