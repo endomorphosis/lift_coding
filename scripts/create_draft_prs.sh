@@ -42,17 +42,20 @@ for branch in "${branches[@]}"; do
   title=$(awk 'NF { print; exit }' "$body_file" | sed 's/^# //')
 
   # If PR already exists for this head branch, skip.
-  if gh pr view --head "$branch" --json number >/dev/null 2>&1; then
-    echo "PR already exists for $branch; skipping."
+  existing_url=$(gh pr list --head "$branch" --state all --json url --jq '.[0].url' 2>/dev/null || true)
+  if [[ -n "${existing_url}" ]]; then
+    echo "PR already exists for $branch; skipping: ${existing_url}"
     continue
   fi
 
-  gh pr create --draft \
+  if ! gh pr create --draft \
     --base main \
     --head "$branch" \
     --title "$title" \
     --body-file "$body_file" \
-    --label copilot-agent
+    --label copilot-agent; then
+    echo "Failed to create PR for $branch; continuing."
+  fi
 
 done
 
