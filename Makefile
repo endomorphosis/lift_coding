@@ -19,7 +19,7 @@ lint:
 	$(PYTHON) -m ruff check .
 
 test:
-	$(PYTHON) -m pytest -q
+	PYTHONPATH=$(PWD)/src $(PYTHON) -m pytest -q
 
 openapi-validate:
 	$(PYTHON) scripts/validate_openapi.py spec/openapi.yaml
