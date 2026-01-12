@@ -1,4 +1,10 @@
-"""Webhook events persistence layer using DuckDB."""
+"""Webhook events persistence layer using DuckDB.
+
+Note on UUID handling:
+DuckDB returns UUID columns as UUID objects, but we convert them to strings
+for JSON serialization and API compatibility. This ensures consistent behavior
+across the application where UUIDs are represented as strings.
+"""
 
 import json
 import logging

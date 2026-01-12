@@ -65,4 +65,9 @@ def init_db() -> None:
 try:
     init_db()
 except Exception as e:
-    logger.warning("Failed to initialize database: %s", e)
+    logger.warning(
+        "Failed to initialize database at %s: %s. "
+        "Database operations may fail. Check that the directory exists and is writable.",
+        get_db_path(),
+        e,
+    )
