@@ -198,7 +198,7 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     # Parse intent using IntentParser
     parser = IntentParser()
     parsed_intent_dc = parser.parse(text)
-    
+
     # Convert dataclass to Pydantic model
     parsed_intent = PydanticParsedIntent(
         name=parsed_intent_dc.name,
@@ -264,7 +264,9 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
             )
     elif parsed_intent.name == "pr.request_review":
         # Handle request review with policy evaluation
-        response = await _handle_request_review_command(parsed_intent, text, request.idempotency_key)
+        response = await _handle_request_review_command(
+            parsed_intent, text, request.idempotency_key
+        )
     elif parsed_intent.name == "agent.delegate":
         # Handle agent.delegate intent
         response = _handle_agent_delegate(text, request.client_context.device)
@@ -640,20 +642,20 @@ async def _handle_request_review_command(
     parsed_intent: ParsedIntent, text: str, idempotency_key: str | None
 ) -> CommandResponse:
     """Handle pr.request_review intent with policy evaluation.
-    
+
     This creates a pending action that requires confirmation unless policy allows direct execution.
-    
+
     Args:
         parsed_intent: Pydantic ParsedIntent model
         text: Original text command
         idempotency_key: Optional idempotency key
     """
     db = get_db()
-    
+
     # Extract entities
     reviewers = parsed_intent.entities.get("reviewers", [])
     pr_number = parsed_intent.entities.get("pr_number")
-    
+
     # For voice commands, we need a default repo. In a real implementation, this would come
     # from context (e.g., current repo, last mentioned repo, etc.)
     # For now, we'll require the PR number and use a placeholder repo.
@@ -662,10 +664,12 @@ async def _handle_request_review_command(
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=parsed_intent,
-            spoken_text="Please specify a PR number, for example: 'request review from alice on PR 123'.",
+            spoken_text=(
+                "Please specify a PR number, for example: 'request review from alice on PR 123'."
+            ),
             debug=DebugInfo(transcript=text),
         )
-    
+
     if not reviewers:
         return CommandResponse(
             status=CommandStatus.ERROR,
@@ -673,10 +677,10 @@ async def _handle_request_review_command(
             spoken_text="Please specify at least one reviewer.",
             debug=DebugInfo(transcript=text),
         )
-    
+
     # Use a default repo for now (in production, this would come from context)
     repo = parsed_intent.entities.get("repo", "default/repo")
-    
+
     # Check rate limit
     rate_limit_result = check_rate_limit(
         db,
@@ -685,7 +689,7 @@ async def _handle_request_review_command(
         window_seconds=60,
         max_requests=10,
     )
-    
+
     if not rate_limit_result.allowed:
         # Write audit log for rate limit denial
         try:
@@ -702,14 +706,14 @@ async def _handle_request_review_command(
         except ValueError:
             # Idempotency key already used - this is a retry
             pass
-        
+
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=parsed_intent,
             spoken_text=f"Rate limit exceeded. {rate_limit_result.reason}",
             debug=DebugInfo(transcript=text),
         )
-    
+
     # Evaluate policy
     policy_result = evaluate_action_policy(
         db,
@@ -717,7 +721,7 @@ async def _handle_request_review_command(
         repo,
         "request_review",
     )
-    
+
     # Handle policy decisions
     if policy_result.decision == PolicyDecision.DENY:
         # Write audit log for policy denial
@@ -735,14 +739,14 @@ async def _handle_request_review_command(
         except ValueError:
             # Idempotency key already used
             pass
-        
+
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=parsed_intent,
             spoken_text=f"Action not allowed: {policy_result.reason}",
             debug=DebugInfo(transcript=text),
         )
-    
+
     elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
         # Create pending action in database
         reviewers_str = ", ".join(reviewers)
@@ -759,7 +763,7 @@ async def _handle_request_review_command(
             },
             expires_in_seconds=300,  # 5 minutes
         )
-        
+
         # Write audit log for confirmation required
         write_action_log(
             db,
@@ -775,7 +779,7 @@ async def _handle_request_review_command(
             },
             idempotency_key=idempotency_key,
         )
-        
+
         return CommandResponse(
             status=CommandStatus.NEEDS_CONFIRMATION,
             intent=parsed_intent,
@@ -787,10 +791,10 @@ async def _handle_request_review_command(
             ),
             debug=DebugInfo(transcript=text),
         )
-    
+
     # Policy allows the action - execute it directly
     target = f"{repo}#{pr_number}"
-    
+
     # Write audit log for successful execution
     write_action_log(
         db,
@@ -802,7 +806,7 @@ async def _handle_request_review_command(
         result={"status": "success", "message": "Review requested (fixture)"},
         idempotency_key=idempotency_key,
     )
-    
+
     reviewers_str = ", ".join(reviewers)
     return CommandResponse(
         status=CommandStatus.OK,
@@ -810,7 +814,6 @@ async def _handle_request_review_command(
         spoken_text=f"Review requested from {reviewers_str} on {target}.",
         debug=DebugInfo(transcript=text),
     )
-
 
 
 def _handle_agent_delegate(text: str, device: str) -> CommandResponse:

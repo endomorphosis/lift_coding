@@ -148,7 +148,11 @@ class IntentParser:
                 "pr.request_review",
                 {
                     "reviewers": lambda m: (
-                        [r.strip() for r in m.group(1).replace(" and ", ",").split(",") if r.strip()]
+                        [
+                            r.strip()
+                            for r in m.group(1).replace(" and ", ",").split(",")
+                            if r.strip()
+                        ]
                         if "," in m.group(1) or " and " in m.group(1).lower()
                         else [r.strip() for r in m.group(1).split() if r.strip()]
                     ),
