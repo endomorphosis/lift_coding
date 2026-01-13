@@ -128,9 +128,32 @@ class IntentParser:
                 },
             ),
             (
+                re.compile(r"\bask\s+([\w]+)\s+to\s+review\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "pr.request_review",
+                {
+                    "reviewers": lambda m: [m.group(1)],
+                    "pr_number": lambda m: int(m.group(2)),
+                },
+            ),
+            (
                 re.compile(r"\bask\s+([\w]+)\s+to\s+review\b", re.IGNORECASE),
                 "pr.request_review",
                 {"reviewers": lambda m: [m.group(1)]},
+            ),
+            (
+                re.compile(
+                    r"\brequest\s+reviewers?\s+([\w\s,]+?)\s+(?:for|on)\s+pr\s+(\d+)$",
+                    re.IGNORECASE,
+                ),
+                "pr.request_review",
+                {
+                    "reviewers": lambda m: (
+                        [r.strip() for r in m.group(1).replace(" and ", ",").split(",") if r.strip()]
+                        if "," in m.group(1) or " and " in m.group(1).lower()
+                        else [r.strip() for r in m.group(1).split() if r.strip()]
+                    ),
+                    "pr_number": lambda m: int(m.group(2)),
+                },
             ),
             # PR merge (side effect)
             (
