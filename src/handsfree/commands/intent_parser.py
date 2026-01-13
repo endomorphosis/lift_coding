@@ -197,6 +197,17 @@ class IntentParser:
                     "provider": "copilot",
                 },
             ),
+            # General agent delegation without specific target
+            (
+                re.compile(
+                    r"\b(?:ask|have|tell)\s+(?:the\s+)?agent\s+(?:to\s+)?(.+)$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(1).strip(),
+                },
+            ),
             # Agent progress
             (
                 re.compile(r"\bagent\s+status\b", re.IGNORECASE),

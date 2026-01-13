@@ -334,14 +334,13 @@ def _convert_router_response_to_command_response(
                 pass
 
     elif parsed_intent.name == "agent.delegate" and status == CommandStatus.OK:
-        # Agent commands are handled by router with agent service
-        # Add cards if available in router response
-        pass
+        # Agent delegate commands - use old handler for backward compatibility
+        # This ensures task_id is included in entities as tests expect
+        return _handle_agent_delegate(transcript, "api")
 
     elif parsed_intent.name == "agent.progress" and status == CommandStatus.OK:
-        # Agent status is handled by router with agent service
-        # Cards may be in router response
-        pass
+        # Agent status commands - use old handler for backward compatibility
+        return _handle_agent_status(transcript, "api")
 
     # Get cards from router response if not already set
     if not cards and "cards" in router_response:
@@ -774,7 +773,7 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     """
     from handsfree.agent_providers import get_provider
     from handsfree.db import init_db
-    from handsfree.db.agent_tasks import create_agent_task, update_task_status
+    from handsfree.db.agent_tasks import create_agent_task, update_agent_task_state
 
     # Extract instruction from text
     # Simple parsing: everything after "agent" or "fix" or "ask agent to"
@@ -787,18 +786,23 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     # Extract issue/PR number if present
     issue_number = None
     pr_number = None
-    repo_full_name = None
+    target_type = None
+    target_ref = None
 
     words = text.split()
     for i, word in enumerate(words):
         if word.lower() == "issue" and i + 1 < len(words):
             try:
                 issue_number = int(words[i + 1].replace("#", ""))
+                target_type = "issue"
+                target_ref = f"#{issue_number}"
             except ValueError:
                 pass
         elif word.lower() == "pr" and i + 1 < len(words):
             try:
                 pr_number = int(words[i + 1].replace("#", ""))
+                target_type = "pr"
+                target_ref = f"#{pr_number}"
             except ValueError:
                 pass
 
@@ -814,22 +818,21 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
             user_id=user_id,
             provider=provider,
             instruction=instruction,
-            repo_full_name=repo_full_name,
-            issue_number=issue_number,
-            pr_number=pr_number,
+            target_type=target_type,
+            target_ref=target_ref,
         )
 
         # Start the task with the provider
         agent_provider = get_provider(provider)
         result = agent_provider.start_task(task)
 
-        # Update task status
+        # Update task state
         if result.get("ok"):
-            update_task_status(
+            update_agent_task_state(
                 conn,
                 task.id,
-                status="running",
-                last_update=result.get("message", "Agent started"),
+                new_state="running",
+                trace_update={"started": result.get("message", "Agent started")},
             )
 
         conn.close()
@@ -896,28 +899,30 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         if not tasks:
             return CommandResponse(
                 status=CommandStatus.OK,
-                intent=ParsedIntent(name="agent.status", confidence=0.95),
+                intent=ParsedIntent(name="agent.progress", confidence=0.95),
                 spoken_text="You have no agent tasks.",
                 debug=DebugInfo(transcript=text),
             )
 
-        # Count by status
-        status_counts = {}
+        # Count by state
+        state_counts = {}
         for task in tasks:
-            status_counts[task.status] = status_counts.get(task.status, 0) + 1
+            state_counts[task.state] = state_counts.get(task.state, 0) + 1
 
         # Build spoken response
         parts = []
-        if status_counts.get("running"):
-            parts.append(f"{status_counts['running']} running")
-        if status_counts.get("needs_input"):
-            parts.append(f"{status_counts['needs_input']} waiting for input")
-        if status_counts.get("completed"):
-            parts.append(f"{status_counts['completed']} completed")
-        if status_counts.get("failed"):
-            parts.append(f"{status_counts['failed']} failed")
+        if state_counts.get("running"):
+            parts.append(f"{state_counts['running']} running")
+        if state_counts.get("needs_input"):
+            parts.append(f"{state_counts['needs_input']} waiting for input")
+        if state_counts.get("completed"):
+            parts.append(f"{state_counts['completed']} completed")
+        if state_counts.get("failed"):
+            parts.append(f"{state_counts['failed']} failed")
+        if state_counts.get("created"):
+            parts.append(f"{state_counts['created']} created")
 
-        spoken_text = f"You have {len(tasks)} agent tasks: {', '.join(parts)}."
+        spoken_text = f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: {', '.join(parts)}."
 
         # Build cards for recent tasks
         cards = []
@@ -928,19 +933,18 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 "needs_input": "⏸️",
                 "completed": "✅",
                 "failed": "❌",
-            }.get(task.status, "❓")
+            }.get(task.state, "❓")
 
             instruction_display = (
-                task.instruction[:60] + "..." if len(task.instruction) > 60 else task.instruction
+                task.instruction[:60] + "..." if task.instruction and len(task.instruction) > 60 else (task.instruction or "No instruction")
             )
 
             cards.append(
                 UICard(
                     title=f"{status_emoji} Task {task.id[:8]}",
-                    subtitle=f"{task.status} • {task.provider}",
+                    subtitle=f"{task.state} • {task.provider}",
                     lines=[
                         f"Instruction: {instruction_display}",
-                        f"Last update: {task.last_update or 'No updates'}",
                     ],
                 )
             )
@@ -948,7 +952,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         return CommandResponse(
             status=CommandStatus.OK,
             intent=ParsedIntent(
-                name="agent.status",
+                name="agent.progress",  # Match router's convention
                 confidence=0.95,
                 entities={"task_count": len(tasks)},
             ),
@@ -959,7 +963,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
     except Exception as e:
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=ParsedIntent(name="agent.status", confidence=0.95),
+            intent=ParsedIntent(name="agent.progress", confidence=0.95),
             spoken_text=f"Failed to get agent status: {str(e)}",
             debug=DebugInfo(transcript=text),
         )
