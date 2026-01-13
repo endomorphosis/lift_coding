@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Server entry point for HandsFree Dev Companion API."""
 
 import uvicorn

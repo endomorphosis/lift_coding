@@ -1,0 +1,37 @@
+{
+  "action": "completed",
+  "check_suite": {
+    "id": 987654321,
+    "head_branch": "feature-branch",
+    "head_sha": "abc123def456",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://api.github.com/repos/testorg/testrepo/check-suites/987654321",
+    "pull_requests": [
+      {
+        "number": 123,
+        "head": {
+          "ref": "feature-branch",
+          "sha": "abc123def456"
+        },
+        "base": {
+          "ref": "main",
+          "sha": "def456abc123"
+        }
+      }
+    ]
+  },
+  "repository": {
+    "id": 987654321,
+    "name": "testrepo",
+    "full_name": "testorg/testrepo",
+    "owner": {
+      "login": "testorg",
+      "id": 7654321
+    }
+  },
+  "sender": {
+    "login": "github",
+    "id": 9919
+  }
+}

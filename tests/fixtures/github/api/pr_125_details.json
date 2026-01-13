@@ -1,0 +1,19 @@
+{
+  "repo": "owner/repo",
+  "pr_number": 125,
+  "title": "Refactor authentication module",
+  "description": "Major refactoring of the authentication module to improve maintainability and add new features.",
+  "url": "https://github.com/owner/repo/pull/125",
+  "state": "open",
+  "author": "dev-team",
+  "created_at": "2026-01-12T10:00:00Z",
+  "updated_at": "2026-01-12T14:00:00Z",
+  "labels": ["refactor"],
+  "base_branch": "main",
+  "head_branch": "refactor/auth",
+  "additions": 320,
+  "deletions": 180,
+  "changed_files": 8,
+  "draft": false,
+  "mergeable": true
+}

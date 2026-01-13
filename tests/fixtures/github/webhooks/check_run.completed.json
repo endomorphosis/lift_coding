@@ -1,0 +1,42 @@
+{
+  "action": "completed",
+  "check_run": {
+    "id": 123456789,
+    "name": "CI / Build and Test",
+    "head_sha": "abc123def456",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-01-12T05:00:00Z",
+    "completed_at": "2026-01-12T05:05:00Z",
+    "output": {
+      "title": "Build Successful",
+      "summary": "All tests passed"
+    },
+    "pull_requests": [
+      {
+        "number": 123,
+        "head": {
+          "ref": "feature-branch",
+          "sha": "abc123def456"
+        },
+        "base": {
+          "ref": "main",
+          "sha": "def456abc123"
+        }
+      }
+    ]
+  },
+  "repository": {
+    "id": 987654321,
+    "name": "testrepo",
+    "full_name": "testorg/testrepo",
+    "owner": {
+      "login": "testorg",
+      "id": 7654321
+    }
+  },
+  "sender": {
+    "login": "github",
+    "id": 9919
+  }
+}

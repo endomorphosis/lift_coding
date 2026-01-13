@@ -11,6 +11,9 @@ from handsfree.db.agent_tasks import (
     get_agent_tasks,
     store_agent_trace,
     update_task_status,
+    get_agent_task_by_id,
+    get_agent_tasks,
+    update_agent_task_state,
 )
 
 
@@ -22,243 +25,278 @@ def db_conn():
     conn.close()
 
 
-def test_create_agent_task(db_conn):
-    """Test creating an agent task."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Fix issue #123",
-        repo_full_name="owner/repo",
-        issue_number=123,
-    )
-
-    assert task.id is not None
-    assert task.user_id == user_id
-    assert task.provider == "copilot"
-    assert task.instruction == "Fix issue #123"
-    assert task.repo_full_name == "owner/repo"
-    assert task.issue_number == 123
-    assert task.pr_number is None
-    assert task.status == "created"
-    assert task.last_update == "Task created"
+@pytest.fixture
+def test_user_id():
+    """Generate a consistent test user ID."""
+    # Use a fixed UUID for consistent testing
+    return str(uuid.UUID("12345678-1234-1234-1234-123456789012"))
 
 
-def test_create_agent_task_with_pr(db_conn):
-    """Test creating an agent task associated with a PR."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="custom",
-        instruction="Address review comments",
-        repo_full_name="owner/repo",
-        pr_number=456,
-    )
-
-    assert task.pr_number == 456
-    assert task.issue_number is None
+@pytest.fixture
+def test_user_id_2():
+    """Generate a second test user ID."""
+    return str(uuid.UUID("87654321-4321-4321-4321-210987654321"))
 
 
-def test_update_task_status(db_conn):
-    """Test updating task status."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Test task",
-    )
+class TestAgentTaskCreation:
+    """Test agent task creation."""
 
-    # Update to running
-    success = update_task_status(
-        db_conn,
-        task.id,
-        status="running",
-        last_update="Started processing",
-    )
-    assert success is True
+    def test_create_basic_task(self, db_conn, test_user_id):
+        """Test creating a basic agent task."""
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="copilot",
+            instruction="fix the bug",
+        )
 
-    # Verify update
-    updated_task = get_agent_task(db_conn, task.id)
-    assert updated_task is not None
-    assert updated_task.status == "running"
-    assert updated_task.last_update == "Started processing"
+        assert task.id is not None
+        assert task.user_id == test_user_id
+        assert task.provider == "copilot"
+        assert task.instruction == "fix the bug"
+        assert task.state == "created"
+        assert task.target_type is None
+        assert task.target_ref is None
 
+    def test_create_task_with_issue_target(self, db_conn, test_user_id):
+        """Test creating a task with issue target."""
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="copilot",
+            instruction="handle issue",
+            target_type="issue",
+            target_ref="owner/repo#42",
+        )
 
-def test_update_task_status_transitions(db_conn):
-    """Test state machine transitions."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Test transitions",
-    )
+        assert task.target_type == "issue"
+        assert task.target_ref == "owner/repo#42"
 
-    # created -> running
-    update_task_status(db_conn, task.id, "running", "Agent started")
-    task = get_agent_task(db_conn, task.id)
-    assert task.status == "running"
+    def test_create_task_with_pr_target(self, db_conn, test_user_id):
+        """Test creating a task with PR target."""
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="copilot",
+            instruction="review pr",
+            target_type="pr",
+            target_ref="owner/repo#99",
+        )
 
-    # running -> needs_input
-    update_task_status(db_conn, task.id, "needs_input", "Waiting for clarification")
-    task = get_agent_task(db_conn, task.id)
-    assert task.status == "needs_input"
+        assert task.target_type == "pr"
+        assert task.target_ref == "owner/repo#99"
 
-    # needs_input -> running
-    update_task_status(db_conn, task.id, "running", "Resumed")
-    task = get_agent_task(db_conn, task.id)
-    assert task.status == "running"
+    def test_create_task_with_trace(self, db_conn, test_user_id):
+        """Test creating a task with trace data."""
+        trace = {"source": "test", "metadata": {"key": "value"}}
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="mock",
+            instruction="test task",
+            trace=trace,
+        )
 
-    # running -> completed
-    update_task_status(db_conn, task.id, "completed", "PR opened")
-    task = get_agent_task(db_conn, task.id)
-    assert task.status == "completed"
-
-
-def test_update_task_failed(db_conn):
-    """Test marking task as failed."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Test failure",
-    )
-
-    update_task_status(db_conn, task.id, "running")
-    update_task_status(db_conn, task.id, "failed", "Build failed")
-
-    task = get_agent_task(db_conn, task.id)
-    assert task.status == "failed"
-    assert task.last_update == "Build failed"
+        assert task.trace == trace
 
 
-def test_update_nonexistent_task(db_conn):
-    """Test updating a non-existent task."""
-    result = update_task_status(db_conn, str(uuid.uuid4()), "running")
-    assert result is not True
+class TestAgentTaskRetrieval:
+    """Test agent task retrieval."""
+
+    def test_get_task_by_id(self, db_conn, test_user_id):
+        """Test retrieving a task by ID."""
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="copilot",
+            instruction="test",
+        )
+
+        retrieved = get_agent_task_by_id(conn=db_conn, task_id=task.id)
+
+        assert retrieved is not None
+        assert retrieved.id == task.id
+        assert retrieved.user_id == test_user_id
+        assert retrieved.provider == task.provider
+        assert retrieved.instruction == task.instruction
+
+    def test_get_nonexistent_task(self, db_conn):
+        """Test retrieving a nonexistent task."""
+        retrieved = get_agent_task_by_id(conn=db_conn, task_id=str(uuid.uuid4()))
+
+        assert retrieved is None
+
+    def test_get_tasks_by_user(self, db_conn, test_user_id, test_user_id_2):
+        """Test querying tasks by user."""
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id_2, provider="copilot", instruction="task 3"
+        )
+
+        tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
+
+        assert len(tasks) == 2
+        assert all(t.user_id == test_user_id for t in tasks)
+
+    def test_get_tasks_by_provider(self, db_conn, test_user_id):
+        """Test querying tasks by provider."""
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="custom", instruction="task 2"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 3"
+        )
+
+        tasks = get_agent_tasks(conn=db_conn, provider="copilot")
+
+        assert len(tasks) == 2
+        assert all(t.provider == "copilot" for t in tasks)
+
+    def test_get_tasks_by_state(self, db_conn, test_user_id):
+        """Test querying tasks by state."""
+        task1 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        task2 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2"
+        )
+
+        # Advance one task
+        update_agent_task_state(conn=db_conn, task_id=task1.id, new_state="running")
+
+        tasks = get_agent_tasks(conn=db_conn, state="created")
+
+        assert len(tasks) == 1
+        assert tasks[0].id == task2.id
 
 
-def test_get_agent_task(db_conn):
-    """Test retrieving an agent task."""
-    user_id = str(uuid.uuid4())
-    created = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Test get",
-        repo_full_name="owner/repo",
-    )
+class TestAgentTaskStateTransitions:
+    """Test agent task state transitions."""
 
-    retrieved = get_agent_task(db_conn, created.id)
-    assert retrieved is not None
-    assert retrieved.id == created.id
-    assert retrieved.user_id == user_id
-    assert retrieved.instruction == "Test get"
+    def test_valid_transition_created_to_running(self, db_conn, test_user_id):
+        """Test valid transition from created to running."""
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test"
+        )
 
+        updated = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
 
-def test_get_nonexistent_task(db_conn):
-    """Test retrieving a non-existent task."""
-    result = get_agent_task(db_conn, str(uuid.uuid4()))
-    assert result is None
+        assert updated is not None
+        assert updated.state == "running"
+        assert updated.updated_at > task.updated_at
 
+    def test_valid_transition_running_to_completed(self, db_conn, test_user_id):
+        """Test valid transition from running to completed."""
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
 
-def test_get_agent_tasks(db_conn):
-    """Test querying agent tasks."""
-    user_id = str(uuid.uuid4())
+        updated = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="completed")
 
-    # Create multiple tasks
-    create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 1")
-    create_agent_task(db_conn, user_id=user_id, provider="custom", instruction="Task 2")
-    create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 3")
+        assert updated is not None
+        assert updated.state == "completed"
 
-    # Get all tasks for user
-    tasks = get_agent_tasks(db_conn, user_id=user_id)
-    assert len(tasks) == 3
+    def test_valid_transition_running_to_needs_input(self, db_conn, test_user_id):
+        """Test valid transition from running to needs_input."""
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
 
+        updated = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="needs_input")
 
-def test_get_agent_tasks_by_status(db_conn):
-    """Test filtering tasks by status."""
-    user_id = str(uuid.uuid4())
+        assert updated is not None
+        assert updated.state == "needs_input"
 
-    task1 = create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 1")
-    task2 = create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 2")
+    def test_invalid_transition_created_to_completed(self, db_conn, test_user_id):
+        """Test invalid transition from created to completed."""
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test"
+        )
 
-    update_task_status(db_conn, task1.id, "running")
-    update_task_status(db_conn, task2.id, "completed")
+        with pytest.raises(ValueError, match="Invalid state transition"):
+            update_agent_task_state(conn=db_conn, task_id=task.id, new_state="completed")
 
-    running_tasks = get_agent_tasks(db_conn, user_id=user_id, status="running")
-    assert len(running_tasks) == 1
-    assert running_tasks[0].id == task1.id
+    def test_invalid_transition_completed_to_running(self, db_conn, test_user_id):
+        """Test invalid transition from completed to any state."""
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="completed")
 
-    completed_tasks = get_agent_tasks(db_conn, user_id=user_id, status="completed")
-    assert len(completed_tasks) == 1
-    assert completed_tasks[0].id == task2.id
+        with pytest.raises(ValueError, match="Invalid state transition"):
+            update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
 
+    def test_transition_with_trace_update(self, db_conn, test_user_id):
+        """Test state transition with trace update."""
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="copilot",
+            instruction="test",
+            trace={"initial": "data"},
+        )
 
-def test_get_agent_tasks_by_provider(db_conn):
-    """Test filtering tasks by provider."""
-    user_id = str(uuid.uuid4())
+        updated = update_agent_task_state(
+            conn=db_conn,
+            task_id=task.id,
+            new_state="running",
+            trace_update={"step": "started"},
+        )
 
-    create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 1")
-    create_agent_task(db_conn, user_id=user_id, provider="custom", instruction="Task 2")
-    create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 3")
+        assert updated.trace is not None
+        assert updated.trace["initial"] == "data"
+        assert updated.trace["step"] == "started"
 
-    copilot_tasks = get_agent_tasks(db_conn, user_id=user_id, provider="copilot")
-    assert len(copilot_tasks) == 2
+    def test_update_nonexistent_task(self, db_conn):
+        """Test updating a nonexistent task."""
+        result = update_agent_task_state(
+            conn=db_conn, task_id=str(uuid.uuid4()), new_state="running"
+        )
 
-    custom_tasks = get_agent_tasks(db_conn, user_id=user_id, provider="custom")
-    assert len(custom_tasks) == 1
-
-
-def test_get_agent_tasks_with_limit(db_conn):
-    """Test limiting the number of returned tasks."""
-    user_id = str(uuid.uuid4())
-
-    for i in range(10):
-        create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction=f"Task {i}")
-
-    tasks = get_agent_tasks(db_conn, user_id=user_id, limit=5)
-    assert len(tasks) == 5
-
-
-def test_get_agent_tasks_ordering(db_conn):
-    """Test that tasks are returned in descending order by updated_at."""
-    user_id = str(uuid.uuid4())
-
-    task1 = create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 1")
-    task2 = create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 2")
-    task3 = create_agent_task(db_conn, user_id=user_id, provider="copilot", instruction="Task 3")
-
-    # Update task1 status (should move it to top)
-    update_task_status(db_conn, task1.id, "running")
-
-    tasks = get_agent_tasks(db_conn, user_id=user_id)
-
-    # task1 should be first (most recently updated)
-    assert tasks[0].id == task1.id
-    assert tasks[1].id == task3.id
-    assert tasks[2].id == task2.id
+        assert result is None
 
 
-def test_store_agent_trace(db_conn):
-    """Test storing agent trace data."""
-    user_id = str(uuid.uuid4())
-    task = create_agent_task(
-        db_conn,
-        user_id=user_id,
-        provider="copilot",
-        instruction="Test trace",
-    )
+class TestAgentTaskQueries:
+    """Test agent task queries."""
 
-    trace_data = {
-        "prompt": "Fix the bug in file.py",
-        "tools_used": ["edit_file", "run_tests"],
-        "links": ["https://github.com/owner/repo/pull/123"],
-    }
+    def test_tasks_ordered_by_created_at_desc(self, db_conn, test_user_id):
+        """Test that tasks are returned in descending order by creation time."""
+        task1 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="first"
+        )
+        task2 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="second"
+        )
+        task3 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="third"
+        )
 
-    success = store_agent_trace(db_conn, task.id, trace_data)
-    assert success is True
+        tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
+
+        assert len(tasks) == 3
+        # Most recent first
+        assert tasks[0].id == task3.id
+        assert tasks[1].id == task2.id
+        assert tasks[2].id == task1.id
+
+    def test_limit_tasks(self, db_conn, test_user_id):
+        """Test limiting number of returned tasks."""
+        for i in range(10):
+            create_agent_task(
+                conn=db_conn, user_id=test_user_id, provider="copilot", instruction=f"task {i}"
+            )
+
+        tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id, limit=5)
+
+        assert len(tasks) == 5
