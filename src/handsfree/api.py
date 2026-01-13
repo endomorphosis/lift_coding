@@ -24,6 +24,7 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
+from handsfree.db.webhook_events import get_db_webhook_store
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -206,6 +207,9 @@ async def github_webhook(
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(request: CommandRequest) -> CommandResponse:
     """Submit a hands-free command."""
+    from handsfree.commands.intent_parser import IntentParser
+    from handsfree.models import ParsedIntent as PydanticParsedIntent
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -217,7 +221,7 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
         # Audio input - return error for now
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=ParsedIntent(name="error.unsupported", confidence=1.0),
+            intent=PydanticParsedIntent(name="error.unsupported", confidence=1.0),
             spoken_text="Audio input is not yet supported in this version.",
             debug=DebugInfo(transcript="<audio input>"),
         )
@@ -237,6 +241,109 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     response = _convert_router_response_to_command_response(
         router_response, parsed_intent, text, request.profile
     )
+    # Parse intent using IntentParser
+    parser = IntentParser()
+    parsed_intent_dc = parser.parse(text)
+
+    # Convert dataclass to Pydantic model
+    parsed_intent = PydanticParsedIntent(
+        name=parsed_intent_dc.name,
+        confidence=parsed_intent_dc.confidence,
+        entities=parsed_intent_dc.entities,
+    )
+
+    # Handle different intents
+    if parsed_intent.name == "inbox.list":
+        # Return inbox items
+        items = _get_fixture_inbox_items()
+        cards = [
+            UICard(
+                title=item.title,
+                subtitle=f"{item.type.value} - Priority {item.priority}",
+                lines=[item.summary] if item.summary else [],
+                deep_link=item.url,
+            )
+            for item in items[:3]  # Limit to top 3
+        ]
+
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text=f"You have {len(items)} items in your inbox. "
+            f"Top priority: {items[0].title if items else 'none'}.",
+            cards=cards,
+            debug=DebugInfo(transcript=text),
+        )
+    elif parsed_intent.name == "pr.summarize":
+        # Extract PR number
+        pr_number = parsed_intent.entities.get("pr_number")
+
+        if pr_number:
+            # Create a pending action requiring confirmation
+            token = str(uuid.uuid4())
+            expires_at = datetime.now(UTC) + timedelta(minutes=5)
+
+            # Store pending action in memory
+            pending_actions_memory[token] = {
+                "action": "summarize_pr",
+                "pr_number": pr_number,
+                "expires_at": expires_at,
+            }
+
+            response = CommandResponse(
+                status=CommandStatus.NEEDS_CONFIRMATION,
+                intent=parsed_intent,
+                spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
+                pending_action=PydanticPendingAction(
+                    token=token,
+                    expires_at=expires_at,
+                    summary=f"Fetch and summarize PR #{pr_number}",
+                ),
+                debug=DebugInfo(transcript=text),
+            )
+        else:
+            response = CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=parsed_intent,
+                spoken_text="I couldn't find a PR number in your request.",
+                debug=DebugInfo(transcript=text),
+            )
+    elif parsed_intent.name == "pr.request_review":
+        # Handle request review with policy evaluation
+        response = await _handle_request_review_command(
+            parsed_intent, text, request.idempotency_key
+        )
+    elif parsed_intent.name == "agent.delegate":
+        # Handle agent.delegate intent
+        response = _handle_agent_delegate(text, request.client_context.device)
+    elif parsed_intent.name == "agent.status" or parsed_intent.name == "agent.progress":
+        # Handle agent.status intent
+        response = _handle_agent_status(text, request.client_context.device)
+    elif parsed_intent.name == "pr.merge":
+        response = CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text=(
+                "Merge actions require strict policy gates. This feature is coming in PR-007."
+            ),
+            debug=DebugInfo(transcript=text),
+        )
+    elif parsed_intent.name == "unknown":
+        # Unknown command
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text="I didn't understand that command. Try 'inbox' or 'summarize PR <number>'.",
+            debug=DebugInfo(transcript=text),
+        )
+    else:
+        # Other intents - return a generic response
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text="I recognized that command but it's not fully implemented yet.",
+            debug=DebugInfo(transcript=text),
+        )
 
     # Store for idempotency
     if request.idempotency_key:
@@ -762,6 +869,189 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
         message=f"[STUB] Merge action for {request.repo}#{request.pr_number} "
         f"requires policy gates. Real implementation in PR-007.",
         url=None,
+    )
+
+
+async def _handle_request_review_command(
+    parsed_intent: ParsedIntent, text: str, idempotency_key: str | None
+) -> CommandResponse:
+    """Handle pr.request_review intent with policy evaluation.
+
+    This creates a pending action that requires confirmation unless policy allows direct execution.
+
+    Args:
+        parsed_intent: Pydantic ParsedIntent model
+        text: Original text command
+        idempotency_key: Optional idempotency key
+    """
+    db = get_db()
+
+    # Extract entities
+    reviewers = parsed_intent.entities.get("reviewers", [])
+    pr_number = parsed_intent.entities.get("pr_number")
+
+    # For voice commands, we need a default repo. In a real implementation, this would come
+    # from context (e.g., current repo, last mentioned repo, etc.)
+    # For now, we'll require the PR number and use a placeholder repo.
+    # If no PR number is provided, return an error.
+    if not pr_number:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text=(
+                "Please specify a PR number, for example: 'request review from alice on PR 123'."
+            ),
+            debug=DebugInfo(transcript=text),
+        )
+
+    if not reviewers:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text="Please specify at least one reviewer.",
+            debug=DebugInfo(transcript=text),
+        )
+
+    # Use a default repo for now (in production, this would come from context)
+    repo = parsed_intent.entities.get("repo", "default/repo")
+
+    # Check rate limit
+    rate_limit_result = check_rate_limit(
+        db,
+        FIXTURE_USER_ID,
+        "request_review",
+        window_seconds=60,
+        max_requests=10,
+    )
+
+    if not rate_limit_result.allowed:
+        # Write audit log for rate limit denial
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{repo}#{pr_number}",
+                request={"reviewers": reviewers},
+                result={"error": "rate_limited", "message": rate_limit_result.reason},
+                idempotency_key=idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used - this is a retry
+            logger.debug(
+                "Idempotency key %s already used for rate limit audit log", idempotency_key
+            )
+
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text=f"Rate limit exceeded. {rate_limit_result.reason}",
+            debug=DebugInfo(transcript=text),
+        )
+
+    # Evaluate policy
+    policy_result = evaluate_action_policy(
+        db,
+        FIXTURE_USER_ID,
+        repo,
+        "request_review",
+    )
+
+    # Handle policy decisions
+    if policy_result.decision == PolicyDecision.DENY:
+        # Write audit log for policy denial
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{repo}#{pr_number}",
+                request={"reviewers": reviewers},
+                result={"error": "policy_denied", "message": policy_result.reason},
+                idempotency_key=idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used
+            logger.debug(
+                "Idempotency key %s already used for policy denial audit log",
+                idempotency_key,
+            )
+
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text=f"Action not allowed: {policy_result.reason}",
+            debug=DebugInfo(transcript=text),
+        )
+
+    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+        # Create pending action in database
+        reviewers_str = ", ".join(reviewers)
+        summary = f"Request review from {reviewers_str} on {repo}#{pr_number}"
+        pending_action = create_pending_action(
+            db,
+            user_id=FIXTURE_USER_ID,
+            summary=summary,
+            action_type="request_review",
+            action_payload={
+                "repo": repo,
+                "pr_number": pr_number,
+                "reviewers": reviewers,
+            },
+            expires_in_seconds=300,  # 5 minutes
+        )
+
+        # Write audit log for confirmation required
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=True,
+            target=f"{repo}#{pr_number}",
+            request={"reviewers": reviewers},
+            result={
+                "status": "needs_confirmation",
+                "token": pending_action.token,
+                "reason": policy_result.reason,
+            },
+            idempotency_key=idempotency_key,
+        )
+
+        return CommandResponse(
+            status=CommandStatus.NEEDS_CONFIRMATION,
+            intent=parsed_intent,
+            spoken_text=f"{summary}. Say 'confirm' to proceed.",
+            pending_action=PydanticPendingAction(
+                token=pending_action.token,
+                expires_at=pending_action.expires_at,
+                summary=summary,
+            ),
+            debug=DebugInfo(transcript=text),
+        )
+
+    # Policy allows the action - execute it directly
+    target = f"{repo}#{pr_number}"
+
+    # Write audit log for successful execution
+    write_action_log(
+        db,
+        user_id=FIXTURE_USER_ID,
+        action_type="request_review",
+        ok=True,
+        target=target,
+        request={"reviewers": reviewers},
+        result={"status": "success", "message": "Review requested (fixture)"},
+        idempotency_key=idempotency_key,
+    )
+
+    reviewers_str = ", ".join(reviewers)
+    return CommandResponse(
+        status=CommandStatus.OK,
+        intent=parsed_intent,
+        spoken_text=f"Review requested from {reviewers_str} on {target}.",
+        debug=DebugInfo(transcript=text),
     )
 
 
