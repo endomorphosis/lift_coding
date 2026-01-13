@@ -23,6 +23,7 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
+from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -72,8 +73,8 @@ pending_actions: dict[str, dict[str, Any]] = {}
 processed_commands: dict[str, CommandResponse] = {}
 idempotency_store: dict[str, ActionResult] = {}
 
-# Webhook store
-_webhook_store = WebhookStore()
+# Webhook store (DB-backed, initialized lazily)
+_webhook_store = None
 
 # Fixture user ID for development/testing
 FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
@@ -100,6 +101,15 @@ def get_command_router() -> CommandRouter:
         db = get_db()
         _command_router = CommandRouter(_pending_action_manager, db_conn=db)
     return _command_router
+
+
+def get_db_webhook_store() -> DBWebhookStore:
+    """Get the DB-backed webhook store instance."""
+    global _webhook_store
+    if _webhook_store is None:
+        db = get_db()
+        _webhook_store = DBWebhookStore(db)
+    return _webhook_store
 
 
 # Test user ID for MVP (in production this would come from auth)
@@ -135,7 +145,7 @@ async def github_webhook(
     Raises:
         400 Bad Request if signature invalid or duplicate delivery
     """
-    store = get_webhook_store()
+    store = get_db_webhook_store()
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):

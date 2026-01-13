@@ -6,20 +6,24 @@ import pathlib
 import pytest
 from fastapi.testclient import TestClient
 
-from handsfree.api import app
-from handsfree.db.webhook_events import get_db_webhook_store
+from handsfree.api import app, get_db_webhook_store
 from handsfree.webhooks import normalize_github_event
 
 
 @pytest.fixture(autouse=True)
 def reset_webhook_store():
     """Reset webhook store before each test."""
-    # Clean up DB-backed store
-    from handsfree.db import init_db
+    # Clean up DB-backed store using the shared connection from api.py
+    from handsfree import api
     
-    conn = init_db()
+    # Reset global state in api.py
+    api._db_conn = None
+    api._webhook_store = None
+    api._command_router = None
+    
+    # Get fresh DB connection and clear webhook events
+    conn = api.get_db()
     conn.execute("DELETE FROM webhook_events")
-    conn.close()
 
 
 @pytest.fixture
