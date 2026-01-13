@@ -256,3 +256,155 @@ def test_request_review_audit_log_target_format(reset_db):
     logs = get_action_logs(db, action_type="request_review", limit=10)
     last_log = logs[0]
     assert last_log.target == "owner/repo#123"
+
+
+def test_confirm_request_review_executes_once(reset_db):
+    """Test that confirming a request_review action executes exactly once."""
+    from handsfree.api import get_db
+
+    db = get_db()
+
+    # Create a request that requires confirmation
+    response = client.post(
+        "/v1/actions/request-review",
+        json={
+            "repo": "test/confirm-repo",
+            "pr_number": 99,
+            "reviewers": ["alice"],
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["ok"] is False
+    assert "token" in data["message"]
+
+    # Extract token from message
+    import re
+
+    match = re.search(r"token '([^']+)'", data["message"])
+    assert match is not None
+    token = match.group(1)
+
+    # Confirm the action
+    confirm_response = client.post(
+        "/v1/commands/confirm",
+        json={"token": token},
+    )
+
+    assert confirm_response.status_code == 200
+    confirm_data = confirm_response.json()
+    assert confirm_data["status"] == "ok"
+    assert "review requested" in confirm_data["spoken_text"].lower()
+
+    # Check that audit log was created for the confirmation
+    logs = get_action_logs(db, action_type="request_review", limit=10)
+    confirmation_logs = [log for log in logs if log.result.get("via_confirmation")]
+    assert len(confirmation_logs) == 1
+    assert confirmation_logs[0].ok is True
+    assert confirmation_logs[0].target == "test/confirm-repo#99"
+
+
+def test_confirm_request_review_retry_does_not_duplicate(reset_db):
+    """Test that retrying confirmation does not duplicate audit logs or side effects."""
+    from handsfree.api import get_db
+
+    db = get_db()
+
+    # Create a request that requires confirmation
+    response = client.post(
+        "/v1/actions/request-review",
+        json={
+            "repo": "test/retry-repo",
+            "pr_number": 100,
+            "reviewers": ["bob"],
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Extract token
+    import re
+
+    match = re.search(r"token '([^']+)'", data["message"])
+    assert match is not None
+    token = match.group(1)
+
+    # Confirm the action once
+    confirm_response1 = client.post(
+        "/v1/commands/confirm",
+        json={"token": token},
+    )
+
+    assert confirm_response1.status_code == 200
+
+    # Count audit logs for confirmation
+    logs_after_first = get_action_logs(db, action_type="request_review", limit=10)
+    confirmation_logs_after_first = [
+        log for log in logs_after_first if log.result.get("via_confirmation")
+    ]
+    assert len(confirmation_logs_after_first) == 1
+
+    # Try to confirm again with the same token (should fail)
+    confirm_response2 = client.post(
+        "/v1/commands/confirm",
+        json={"token": token},
+    )
+
+    # Should return 404 because the action was already consumed
+    assert confirm_response2.status_code == 404
+    error_data = confirm_response2.json()
+    assert error_data["error"] == "not_found"
+    assert "already consumed" in error_data["message"] or "not found" in error_data["message"]
+
+    # Confirm that no duplicate audit logs were created
+    logs_after_retry = get_action_logs(db, action_type="request_review", limit=10)
+    confirmation_logs_after_retry = [
+        log for log in logs_after_retry if log.result.get("via_confirmation")
+    ]
+    assert len(confirmation_logs_after_retry) == 1  # Still only one confirmation log
+
+
+def test_confirm_missing_token_returns_404(reset_db):
+    """Test that confirming with a missing/invalid token returns 404."""
+    confirm_response = client.post(
+        "/v1/commands/confirm",
+        json={"token": "nonexistent-token-12345"},
+    )
+
+    assert confirm_response.status_code == 404
+    error_data = confirm_response.json()
+    assert error_data["error"] == "not_found"
+    assert "not found" in error_data["message"].lower()
+
+
+def test_confirm_expired_token_returns_404(reset_db):
+    """Test that confirming with an expired token returns 404."""
+    from handsfree.api import get_db
+    from handsfree.db.pending_actions import create_pending_action
+
+    db = get_db()
+
+    # Create an already-expired pending action
+    expired_action = create_pending_action(
+        db,
+        user_id="00000000-0000-0000-0000-000000000001",
+        summary="Expired test action",
+        action_type="request_review",
+        action_payload={"repo": "test/repo", "pr_number": 1, "reviewers": ["alice"]},
+        expires_in_seconds=-10,  # Already expired
+    )
+
+    # Try to confirm the expired action
+    confirm_response = client.post(
+        "/v1/commands/confirm",
+        json={"token": expired_action.token},
+    )
+
+    assert confirm_response.status_code == 404
+    error_data = confirm_response.json()
+    assert error_data["error"] == "not_found"
+    assert (
+        "not found" in error_data["message"].lower() or "expired" in error_data["message"].lower()
+    )

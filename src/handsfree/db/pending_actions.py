@@ -136,7 +136,7 @@ def delete_pending_action(
         True if action was deleted, False if not found.
     """
     result = conn.execute(
-        "DELETE FROM pending_actions WHERE token = ?",
+        "DELETE FROM pending_actions WHERE token = ? RETURNING token",
         [token],
     )
     return result.fetchone() is not None
