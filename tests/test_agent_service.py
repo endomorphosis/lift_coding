@@ -1,6 +1,5 @@
 """Tests for agent service."""
 
-
 import pytest
 
 from handsfree.agents.service import AgentService
@@ -76,9 +75,7 @@ class TestAgentDelegate:
 
     def test_delegate_trace_added(self, agent_service, db_conn, test_user_id):
         """Test that delegation adds trace information."""
-        agent_service.delegate(
-            user_id=test_user_id, instruction="test task", provider="mock"
-        )
+        agent_service.delegate(user_id=test_user_id, instruction="test task", provider="mock")
 
         # Verify trace in DB
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)

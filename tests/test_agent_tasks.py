@@ -7,10 +7,6 @@ import pytest
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import (
     create_agent_task,
-    get_agent_task,
-    get_agent_tasks,
-    store_agent_trace,
-    update_task_status,
     get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_state,

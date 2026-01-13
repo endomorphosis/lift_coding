@@ -64,7 +64,8 @@ def test_agent_workflow_complete():
     assert status_data["status"] == "ok"
     assert status_data["intent"]["name"] == "agent.status"
     assert "task" in status_data["spoken_text"].lower()
-    assert "running" in status_data["spoken_text"].lower()
+    # Tasks start in "created" state
+    assert "created" in status_data["spoken_text"].lower()
 
     # Should show the newly created task
     assert len(status_data["cards"]) > 0
@@ -74,8 +75,8 @@ def test_agent_workflow_complete():
     for card in status_data["cards"]:
         if task_id[:8] in card["title"]:
             our_task_found = True
-            # Verify task details
-            assert "running" in card["subtitle"].lower()
+            # Verify task details - tasks start in "created" state
+            assert "created" in card["subtitle"].lower()
             assert "Instruction: fix issue 500" in card["lines"][0]
             break
 

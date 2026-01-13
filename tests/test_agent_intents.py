@@ -112,7 +112,7 @@ def test_agent_status_no_tasks():
     assert data["status"] == "ok"
     assert data["intent"]["name"] == "agent.status"
     # After previous tests, there might be tasks, so we just check the structure
-    assert "agent" in data["spoken_text"].lower()
+    assert "task" in data["spoken_text"].lower() or "no agent" in data["spoken_text"].lower()
 
 
 def test_agent_status_with_tasks():

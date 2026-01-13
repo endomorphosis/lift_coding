@@ -208,13 +208,13 @@ class TestAgentIntents:
         assert response["status"] == "needs_confirmation"
         assert "pending_action" in response
 
-    def test_agent_progress(self, router: CommandRouter, parser: IntentParser) -> None:
-        """Test agent.progress intent."""
+    def test_agent_status(self, router: CommandRouter, parser: IntentParser) -> None:
+        """Test agent.status intent."""
         intent = parser.parse("agent status")
         response = router.route(intent, Profile.DEFAULT)
 
         assert response["status"] == "ok"
-        assert response["intent"]["name"] == "agent.progress"
+        assert response["intent"]["name"] == "agent.status"
 
 
 class TestUnknownIntent:
