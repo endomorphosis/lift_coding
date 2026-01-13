@@ -207,7 +207,7 @@ def test_post_webhook_github() -> None:
 
 
 def test_post_action_request_review() -> None:
-    """Test POST /v1/actions/request-review stub."""
+    """Test POST /v1/actions/request-review with policy evaluation."""
     response = client.post(
         "/v1/actions/request-review",
         json={
@@ -225,7 +225,9 @@ def test_post_action_request_review() -> None:
     assert "ok" in data
     assert "message" in data
     assert isinstance(data["ok"], bool)
-    assert "[STUB]" in data["message"]
+    # Default policy requires confirmation
+    assert data["ok"] is False
+    assert "confirmation required" in data["message"].lower()
 
 
 def test_post_action_rerun_checks() -> None:

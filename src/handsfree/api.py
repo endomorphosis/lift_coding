@@ -11,6 +11,13 @@ from typing import Any
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 
+from handsfree.db import init_db
+from handsfree.db.action_logs import write_action_log
+from handsfree.db.pending_actions import (
+    create_pending_action,
+    delete_pending_action,
+    get_pending_action,
+)
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -23,13 +30,17 @@ from handsfree.models import (
     InboxResponse,
     MergeRequest,
     ParsedIntent,
-    PendingAction,
     Profile,
     RequestReviewRequest,
     RerunChecksRequest,
     TextInput,
     UICard,
 )
+from handsfree.models import (
+    PendingAction as PydanticPendingAction,
+)
+from handsfree.policy import PolicyDecision, evaluate_action_policy
+from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
@@ -43,9 +54,31 @@ app = FastAPI(
     description="API for hands-free developer assistant",
 )
 
+# Database connection (initialized lazily)
+_db_conn = None
+
+# In-memory storage (for backwards compatibility with existing tests)
+pending_actions_memory: dict[str, dict[str, Any]] = {}
+webhook_payloads: list[dict[str, Any]] = []
 # In-memory storage
 pending_actions: dict[str, dict[str, Any]] = {}
 processed_commands: dict[str, CommandResponse] = {}
+idempotency_store: dict[str, ActionResult] = {}
+
+# Fixture user ID for development/testing
+FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def get_db():
+    """Get or initialize database connection."""
+    global _db_conn
+    if _db_conn is None:
+        _db_conn = init_db(":memory:")
+    return _db_conn
+
+
+# Test user ID for MVP (in production this would come from auth)
+TEST_USER_ID = "00000000-0000-0000-0000-000000000001"
 
 
 @app.get("/health")
@@ -198,14 +231,8 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
             token = str(uuid.uuid4())
             expires_at = datetime.now(UTC) + timedelta(minutes=5)
 
-            pending_action = PendingAction(
-                token=token,
-                expires_at=expires_at,
-                summary=f"Fetch and summarize PR #{pr_number}",
-            )
-
-            # Store pending action
-            pending_actions[token] = {
+            # Store pending action in memory
+            pending_actions_memory[token] = {
                 "action": "summarize_pr",
                 "pr_number": pr_number,
                 "expires_at": expires_at,
@@ -219,7 +246,11 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
                     entities={"pr_number": pr_number},
                 ),
                 spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
-                pending_action=pending_action,
+                pending_action=PydanticPendingAction(
+                    token=token,
+                    expires_at=expires_at,
+                    summary=f"Fetch and summarize PR #{pr_number}",
+                ),
                 debug=DebugInfo(transcript=text),
             )
         else:
@@ -229,6 +260,12 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
                 spoken_text="I couldn't find a PR number in your request.",
                 debug=DebugInfo(transcript=text),
             )
+    elif "agent" in text and ("delegate" in text or "ask" in text or "fix" in text):
+        # Handle agent.delegate intent
+        response = _handle_agent_delegate(text, request.client_context.device)
+    elif "agent" in text and ("status" in text or "progress" in text):
+        # Handle agent.status intent
+        response = _handle_agent_status(text, request.client_context.device)
     elif "merge" in text:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -257,38 +294,54 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
 @app.post("/v1/commands/confirm", response_model=CommandResponse)
 async def confirm_command(request: ConfirmRequest) -> CommandResponse:
     """Confirm a previously proposed side-effect action."""
-    # Check idempotency
+    db = get_db()
+
+    # Check idempotency - return cached response if exists
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
 
-    # Check if pending action exists
-    if request.token not in pending_actions:
-        raise HTTPException(
-            status_code=404,
-            detail={
-                "error": "not_found",
-                "message": "Pending action not found or expired",
-            },
-        )
+    # Check if pending action exists in memory first (for backward compatibility)
+    action_data = None
+    is_memory_action = False
 
-    action_data = pending_actions[request.token]
+    if request.token in pending_actions_memory:
+        action_data = pending_actions_memory[request.token]
+        is_memory_action = True
 
-    # Check expiration
-    if datetime.now(UTC) > action_data["expires_at"]:
-        del pending_actions[request.token]
-        raise HTTPException(
-            status_code=404,
-            detail={
-                "error": "expired",
-                "message": "Pending action has expired",
-            },
-        )
+        # Check expiration for memory actions
+        if datetime.now(UTC) > action_data["expires_at"]:
+            del pending_actions_memory[request.token]
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "expired",
+                    "message": "Pending action has expired",
+                },
+            )
 
-    # Execute the action (stubbed for now)
-    action_type = action_data["action"]
+        action_type = action_data["action"]
+        action_payload = action_data
+    else:
+        # Check database for pending action
+        db_action = get_pending_action(db, request.token)
 
+        if db_action is None:
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or expired",
+                },
+            )
+
+        action_type = db_action.action_type
+        action_payload = db_action.action_payload
+        action_data = db_action
+
+    # Execute the action based on type
     if action_type == "summarize_pr":
-        pr_number = action_data["pr_number"]
+        # Handle memory-based summarize_pr action
+        pr_number = action_payload.get("pr_number")
         response = CommandResponse(
             status=CommandStatus.OK,
             intent=ParsedIntent(
@@ -309,6 +362,60 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
                 )
             ],
         )
+    elif action_type == "request_review":
+        # Handle DB-backed request_review action with exactly-once semantics
+        # Atomically delete the pending action to prevent duplicate execution.
+        # Note: get_pending_action already verified the action exists and is not expired,
+        # but between that check and this delete, another concurrent request could have
+        # consumed it, or it could have been cleaned up. The atomic delete with RETURNING
+        # ensures exactly-once execution - if the delete fails, the action is gone and
+        # we correctly return 404 to prevent re-execution.
+        deleted = delete_pending_action(db, request.token)
+
+        if not deleted:
+            # Action was already consumed or cleaned up between the get and delete
+            # This ensures idempotency even without an idempotency_key
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or already consumed",
+                },
+            )
+
+        # Execute the side-effect (fixture behavior - no real GitHub writes)
+        repo = action_payload.get("repo")
+        pr_number = action_payload.get("pr_number")
+        reviewers = action_payload.get("reviewers", [])
+
+        target = f"{repo}#{pr_number}"
+        reviewers_str = ", ".join(reviewers)
+
+        # Write audit log for the confirmation execution
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=True,
+            target=target,
+            request={"reviewers": reviewers, "confirmed": True},
+            result={
+                "status": "success",
+                "message": "Review requested (fixture)",
+                "via_confirmation": True,
+            },
+            idempotency_key=request.idempotency_key,
+        )
+
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="request_review.confirmed",
+                confidence=1.0,
+                entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
+            ),
+            spoken_text=f"Review requested from {reviewers_str} on {target}.",
+        )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -316,8 +423,9 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
             spoken_text=f"Unknown action type: {action_type}",
         )
 
-    # Clean up pending action
-    del pending_actions[request.token]
+    # Clean up pending action from memory if it was a memory action
+    if is_memory_action:
+        del pending_actions_memory[request.token]
 
     # Store for idempotency
     if request.idempotency_key:
@@ -341,13 +449,156 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
 
 @app.post("/v1/actions/request-review", response_model=ActionResult)
 async def request_review(request: RequestReviewRequest) -> ActionResult:
-    """Request reviewers on a PR (stubbed - real implementation in PR-007)."""
-    return ActionResult(
-        ok=True,
-        message=f"[STUB] Would request review from {', '.join(request.reviewers)} "
-        f"on {request.repo}#{request.pr_number}. Real implementation in PR-007.",
-        url=None,
+    """Request reviewers on a PR with policy evaluation and audit logging."""
+    db = get_db()
+
+    # Check idempotency first - return cached result if exists
+    if request.idempotency_key and request.idempotency_key in idempotency_store:
+        return idempotency_store[request.idempotency_key]
+
+    # Check rate limit
+    rate_limit_result = check_rate_limit(
+        db,
+        FIXTURE_USER_ID,
+        "request_review",
+        window_seconds=60,
+        max_requests=10,
     )
+
+    if not rate_limit_result.allowed:
+        # Write audit log for rate limit denial (only if not already logged)
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"reviewers": request.reviewers},
+                result={"error": "rate_limited", "message": rate_limit_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
+
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "rate_limited",
+                "message": rate_limit_result.reason,
+                "retry_after": rate_limit_result.retry_after_seconds,
+            },
+        )
+
+    # Evaluate policy
+    policy_result = evaluate_action_policy(
+        db,
+        FIXTURE_USER_ID,
+        request.repo,
+        "request_review",
+    )
+
+    # Handle policy decisions
+    if policy_result.decision == PolicyDecision.DENY:
+        # Write audit log for policy denial (only if not already logged)
+        try:
+            write_action_log(
+                db,
+                user_id=FIXTURE_USER_ID,
+                action_type="request_review",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"reviewers": request.reviewers},
+                result={"error": "policy_denied", "message": policy_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
+
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "policy_denied",
+                "message": policy_result.reason,
+            },
+        )
+
+    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+        # Create pending action in database
+        reviewers_str = ", ".join(request.reviewers)
+        summary = f"Request review from {reviewers_str} on {request.repo}#{request.pr_number}"
+        pending_action = create_pending_action(
+            db,
+            user_id=FIXTURE_USER_ID,
+            summary=summary,
+            action_type="request_review",
+            action_payload={
+                "repo": request.repo,
+                "pr_number": request.pr_number,
+                "reviewers": request.reviewers,
+            },
+            expires_in_seconds=300,  # 5 minutes
+        )
+
+        # Write audit log for confirmation required
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=True,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"reviewers": request.reviewers},
+            result={
+                "status": "needs_confirmation",
+                "token": pending_action.token,
+                "reason": policy_result.reason,
+            },
+            idempotency_key=request.idempotency_key,
+        )
+
+        result = ActionResult(
+            ok=False,
+            message=f"Confirmation required: {policy_result.reason}. "
+            f"Use token '{pending_action.token}' to confirm.",
+            url=None,
+        )
+
+        # Store for idempotency
+        if request.idempotency_key:
+            idempotency_store[request.idempotency_key] = result
+
+        return result
+
+    # Policy allows the action - execute it
+    # In a real implementation, this would call GitHub API
+    # For now, we simulate success
+    target = f"{request.repo}#{request.pr_number}"
+
+    # Write audit log for successful execution
+    write_action_log(
+        db,
+        user_id=FIXTURE_USER_ID,
+        action_type="request_review",
+        ok=True,
+        target=target,
+        request={"reviewers": request.reviewers},
+        result={"status": "success", "message": "Review requested (fixture)"},
+        idempotency_key=request.idempotency_key,
+    )
+
+    result = ActionResult(
+        ok=True,
+        message=f"Review requested from {', '.join(request.reviewers)} on {target}",
+        url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+    )
+
+    # Store for idempotency
+    if request.idempotency_key:
+        idempotency_store[request.idempotency_key] = result
+
+    return result
 
 
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
@@ -370,6 +621,205 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
         f"requires policy gates. Real implementation in PR-007.",
         url=None,
     )
+
+
+def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
+    """Handle agent.delegate intent.
+
+    Parse the command and create an agent task.
+    For MVP, uses mock provider.
+    """
+    from handsfree.agent_providers import get_provider
+    from handsfree.db import init_db
+    from handsfree.db.agent_tasks import create_agent_task, update_task_status
+
+    # Extract instruction from text
+    # Simple parsing: everything after "agent" or "fix" or "ask agent to"
+    instruction = text
+    if "ask agent to" in text:
+        instruction = text.split("ask agent to", 1)[1].strip()
+    elif "fix" in text:
+        instruction = text.split("fix", 1)[1].strip()
+
+    # Extract issue/PR number if present
+    issue_number = None
+    pr_number = None
+    repo_full_name = None
+
+    words = text.split()
+    for i, word in enumerate(words):
+        if word.lower() == "issue" and i + 1 < len(words):
+            try:
+                issue_number = int(words[i + 1].replace("#", ""))
+            except ValueError:
+                pass
+        elif word.lower() == "pr" and i + 1 < len(words):
+            try:
+                pr_number = int(words[i + 1].replace("#", ""))
+            except ValueError:
+                pass
+
+    # For MVP, use a test user ID and mock provider
+    user_id = TEST_USER_ID
+    provider = "mock"
+
+    try:
+        # Create task in database
+        conn = init_db()
+        task = create_agent_task(
+            conn,
+            user_id=user_id,
+            provider=provider,
+            instruction=instruction,
+            repo_full_name=repo_full_name,
+            issue_number=issue_number,
+            pr_number=pr_number,
+        )
+
+        # Start the task with the provider
+        agent_provider = get_provider(provider)
+        result = agent_provider.start_task(task)
+
+        # Update task status
+        if result.get("ok"):
+            update_task_status(
+                conn,
+                task.id,
+                status="running",
+                last_update=result.get("message", "Agent started"),
+            )
+
+        conn.close()
+
+        # Return response
+        target = ""
+        if issue_number:
+            target = f" for issue #{issue_number}"
+        elif pr_number:
+            target = f" for PR #{pr_number}"
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.delegate",
+                confidence=0.90,
+                entities={
+                    "instruction": instruction,
+                    "task_id": task.id,
+                    "issue_number": issue_number,
+                    "pr_number": pr_number,
+                },
+            ),
+            spoken_text=f"I've delegated the task{target} to an agent. "
+            f"Task ID is {task.id[:8]}. Say 'agent status' to check progress.",
+            cards=[
+                UICard(
+                    title="Agent Task Created",
+                    subtitle=f"Task {task.id[:8]}",
+                    lines=[
+                        f"Provider: {provider}",
+                        f"Instruction: {instruction}",
+                        "Status: running",
+                    ],
+                )
+            ],
+            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task.id}]),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.delegate", confidence=0.90),
+            spoken_text=f"Failed to create agent task: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
+
+
+def _handle_agent_status(text: str, device: str) -> CommandResponse:
+    """Handle agent.status intent.
+
+    Query and return the status of agent tasks.
+    """
+    from handsfree.db import init_db
+    from handsfree.db.agent_tasks import get_agent_tasks
+
+    # For MVP, use a test user ID
+    user_id = TEST_USER_ID
+
+    try:
+        conn = init_db()
+        tasks = get_agent_tasks(conn, user_id=user_id, limit=10)
+        conn.close()
+
+        if not tasks:
+            return CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(name="agent.status", confidence=0.95),
+                spoken_text="You have no agent tasks.",
+                debug=DebugInfo(transcript=text),
+            )
+
+        # Count by status
+        status_counts = {}
+        for task in tasks:
+            status_counts[task.status] = status_counts.get(task.status, 0) + 1
+
+        # Build spoken response
+        parts = []
+        if status_counts.get("running"):
+            parts.append(f"{status_counts['running']} running")
+        if status_counts.get("needs_input"):
+            parts.append(f"{status_counts['needs_input']} waiting for input")
+        if status_counts.get("completed"):
+            parts.append(f"{status_counts['completed']} completed")
+        if status_counts.get("failed"):
+            parts.append(f"{status_counts['failed']} failed")
+
+        spoken_text = f"You have {len(tasks)} agent tasks: {', '.join(parts)}."
+
+        # Build cards for recent tasks
+        cards = []
+        for task in tasks[:5]:  # Show top 5 most recent
+            status_emoji = {
+                "created": "⏱️",
+                "running": "⚙️",
+                "needs_input": "⏸️",
+                "completed": "✅",
+                "failed": "❌",
+            }.get(task.status, "❓")
+
+            instruction_display = (
+                task.instruction[:60] + "..." if len(task.instruction) > 60 else task.instruction
+            )
+
+            cards.append(
+                UICard(
+                    title=f"{status_emoji} Task {task.id[:8]}",
+                    subtitle=f"{task.status} • {task.provider}",
+                    lines=[
+                        f"Instruction: {instruction_display}",
+                        f"Last update: {task.last_update or 'No updates'}",
+                    ],
+                )
+            )
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.status",
+                confidence=0.95,
+                entities={"task_count": len(tasks)},
+            ),
+            spoken_text=spoken_text,
+            cards=cards,
+            debug=DebugInfo(transcript=text),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.status", confidence=0.95),
+            spoken_text=f"Failed to get agent status: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
 
 
 def _get_fixture_inbox_items() -> list[InboxItem]:
