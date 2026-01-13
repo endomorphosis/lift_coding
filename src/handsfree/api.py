@@ -4,8 +4,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 """
 
 import logging
-import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
@@ -24,7 +23,6 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import get_db_webhook_store
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -49,10 +47,10 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
+    WebhookStore,
     get_webhook_store,
     normalize_github_event,
     verify_github_signature,
-    WebhookStore,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -102,11 +100,6 @@ def get_command_router() -> CommandRouter:
         db = get_db()
         _command_router = CommandRouter(_pending_action_manager, db_conn=db)
     return _command_router
-
-
-def get_db_webhook_store() -> WebhookStore:
-    """Get the webhook store instance."""
-    return _webhook_store
 
 
 # Test user ID for MVP (in production this would come from auth)
@@ -357,7 +350,9 @@ def _convert_router_response_to_command_response(
         # This ensures task_id is included in entities as tests expect
         return _handle_agent_delegate(transcript, "api")
 
-    elif (parsed_intent.name == "agent.progress" or parsed_intent.name == "agent.status") and status == CommandStatus.OK:
+    elif (
+        parsed_intent.name == "agent.progress" or parsed_intent.name == "agent.status"
+    ) and status == CommandStatus.OK:
         # Agent status commands - use old handler for backward compatibility
         return _handle_agent_status(transcript, "api")
 
@@ -420,7 +415,10 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
                         confidence=1.0,
                         entities=entities,
                     ),
-                    spoken_text=f"Review request sent to {reviewers_str} for PR {pr_num}. (Fixture response)",
+                    spoken_text=(
+                        f"Review request sent to {reviewers_str} for PR {pr_num}. "
+                        "(Fixture response)"
+                    ),
                 )
             elif intent_name == "pr.merge":
                 pr_num = entities.get("pr_number", "unknown")
@@ -1122,7 +1120,10 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         if state_counts.get("created"):
             parts.append(f"{state_counts['created']} created")
 
-        spoken_text = f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: {', '.join(parts)}."
+        spoken_text = (
+            f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: "
+            f"{', '.join(parts)}."
+        )
 
         # Build cards for recent tasks
         cards = []
