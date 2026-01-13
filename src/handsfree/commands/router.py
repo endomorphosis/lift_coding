@@ -2,6 +2,8 @@
 
 from typing import Any
 
+import duckdb
+
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
 from .profiles import Profile, ProfileConfig
@@ -17,15 +19,28 @@ class CommandRouter:
         "agent.delegate",
     }
 
-    def __init__(self, pending_actions: PendingActionManager) -> None:
+    def __init__(
+        self,
+        pending_actions: PendingActionManager,
+        db_conn: duckdb.DuckDBPyConnection | None = None,
+    ) -> None:
         """Initialize the router.
 
         Args:
             pending_actions: Manager for pending confirmation actions
+            db_conn: Optional database connection for agent operations
         """
         self.pending_actions = pending_actions
+        self.db_conn = db_conn
         # Session state for system.repeat - maps session_id to last response
         self._last_responses: dict[str, dict[str, Any]] = {}
+
+        # Initialize agent service if DB is available
+        self._agent_service = None
+        if db_conn:
+            from handsfree.agents.service import AgentService
+
+            self._agent_service = AgentService(db_conn)
 
     def route(
         self,
@@ -236,10 +251,60 @@ class CommandRouter:
     ) -> dict[str, Any]:
         """Handle agent-related intents."""
         if intent.name == "agent.delegate":
-            # Should have been caught by confirmation flow
-            spoken_text = "Agent task created."
+            # This should normally be caught by confirmation flow,
+            # but handle it here if confirmation was bypassed
+            if not self._agent_service:
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": "Agent service not available.",
+                }
+
+            # Extract entities
+            instruction = intent.entities.get("instruction", "handle this")
+            issue_num = intent.entities.get("issue_number")
+            pr_num = intent.entities.get("pr_number")
+            provider = intent.entities.get("provider", "copilot")
+
+            target_type = None
+            target_ref = None
+            if issue_num:
+                target_type = "issue"
+                target_ref = f"#{issue_num}"
+            elif pr_num:
+                target_type = "pr"
+                target_ref = f"#{pr_num}"
+
+            # Create task (user_id would come from context in real implementation)
+            result = self._agent_service.delegate(
+                user_id="default-user",  # Placeholder
+                instruction=instruction,
+                provider=provider,
+                target_type=target_type,
+                target_ref=target_ref,
+            )
+
+            spoken_text = result.get("spoken_text", "Agent task created.")
+
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
         elif intent.name == "agent.progress":
-            spoken_text = "The agent is working on 1 task."
+            if not self._agent_service:
+                spoken_text = "Agent service not available."
+            else:
+                # Get status (user_id would come from context in real implementation)
+                result = self._agent_service.get_status(user_id="default-user")
+                spoken_text = result.get("spoken_text", "No agent tasks.")
+
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
         else:
             spoken_text = "Agent intent recognized but not implemented."
 

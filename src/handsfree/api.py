@@ -31,7 +31,6 @@ from handsfree.models import (
     UICard,
 )
 from handsfree.webhooks import (
-    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
 )
