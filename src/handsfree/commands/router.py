@@ -287,7 +287,6 @@ class CommandRouter:
             "spoken_text": spoken_text,
             "cards": [card_data],
         }
-        return self._last_responses[session_id]
 
     def _handle_confirm(
         self, intent: ParsedIntent, profile_config: ProfileConfig
@@ -482,7 +481,10 @@ class CommandRouter:
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
-                "spoken_text": "Please specify a PR number, for example: 'request review from alice on PR 123'.",
+                "spoken_text": (
+                    "Please specify a PR number, for example: "
+                    "'request review from alice on PR 123'."
+                ),
             }
         
         if not reviewers:

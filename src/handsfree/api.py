@@ -20,10 +20,10 @@ from handsfree.db.pending_actions import (
     delete_pending_action,
     get_pending_action,
 )
+from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -48,8 +48,6 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
-    WebhookStore,
-    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
 )
@@ -360,9 +358,13 @@ def _convert_router_response_direct(
     pending_action = None
     if "pending_action" in router_response and router_response["pending_action"]:
         pa = router_response["pending_action"]
+        # Parse expires_at if it's a string, otherwise use as-is
+        expires_at = pa["expires_at"]
+        if isinstance(expires_at, str):
+            expires_at = datetime.fromisoformat(expires_at)
         pending_action = PydanticPendingAction(
             token=pa["token"],
-            expires_at=datetime.fromisoformat(pa["expires_at"]) if isinstance(pa["expires_at"], str) else pa["expires_at"],
+            expires_at=expires_at,
             summary=pa["summary"],
         )
     
