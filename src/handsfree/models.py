@@ -192,3 +192,35 @@ class Error(BaseModel):
     error: str
     message: str
     details: dict[str, Any] | None = None
+
+
+class CreateGitHubConnectionRequest(BaseModel):
+    """Request to create a GitHub connection."""
+
+    installation_id: int | None = None
+    token_ref: str | None = Field(
+        default=None,
+        description="Reference to token in secret manager (NOT the actual token)",
+    )
+    scopes: str | None = Field(
+        default=None,
+        description="Comma-separated OAuth scopes",
+    )
+
+
+class GitHubConnectionResponse(BaseModel):
+    """GitHub connection response."""
+
+    id: str
+    user_id: str
+    installation_id: int | None
+    token_ref: str | None
+    scopes: str | None
+    created_at: datetime
+    updated_at: datetime
+
+
+class GitHubConnectionsListResponse(BaseModel):
+    """List of GitHub connections."""
+
+    connections: list[GitHubConnectionResponse]

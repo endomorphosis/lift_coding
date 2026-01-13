@@ -24,13 +24,21 @@ from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
 from handsfree.db.webhook_events import DBWebhookStore
+from handsfree.db.github_connections import (
+    create_github_connection,
+    get_github_connection,
+    get_github_connections_by_user,
+)
 from handsfree.models import (
     ActionResult,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
+    CreateGitHubConnectionRequest,
     DebugInfo,
+    GitHubConnectionResponse,
+    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -78,6 +86,29 @@ _webhook_store = None
 
 # Fixture user ID for development/testing
 FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
+
+
+def get_user_id_from_header(x_user_id: str | None = None) -> str:
+    """Extract user ID from header, falling back to fixture user ID.
+
+    Args:
+        x_user_id: Optional X-User-Id header value.
+
+    Returns:
+        User ID string (UUID format).
+    """
+    if x_user_id:
+        # Validate it's a proper UUID format
+        try:
+            import uuid
+
+            uuid.UUID(x_user_id)
+            return x_user_id
+        except (ValueError, AttributeError):
+            logger.warning("Invalid X-User-Id format: %s, using fixture", x_user_id)
+            return FIXTURE_USER_ID
+    return FIXTURE_USER_ID
+
 
 # Initialize command infrastructure
 _intent_parser = IntentParser()
@@ -209,8 +240,19 @@ async def github_webhook(
 
 
 @app.post("/v1/command", response_model=CommandResponse)
-async def submit_command(request: CommandRequest) -> CommandResponse:
-    """Submit a hands-free command."""
+async def submit_command(
+    request: CommandRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> CommandResponse:
+    """Submit a hands-free command.
+
+    Args:
+        request: Command request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+    """
+    # Get user ID from header
+    user_id = get_user_id_from_header(x_user_id)
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -240,7 +282,7 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key
+            pydantic_intent, text, request.idempotency_key, user_id
         )
         # Store for idempotency
         if request.idempotency_key:
@@ -253,13 +295,13 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
         intent=parsed_intent,
         profile=request.profile,
         session_id=request.idempotency_key,  # Use idempotency key as session ID
-        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
+        user_id=user_id,  # Pass user ID from header
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
     # Convert router response to CommandResponse
     response = _convert_router_response_to_command_response(
-        router_response, parsed_intent, text, request.profile
+        router_response, parsed_intent, text, request.profile, user_id
     )
     # Parse intent using IntentParser
     parser = IntentParser()
@@ -377,6 +419,7 @@ def _convert_router_response_to_command_response(
     parsed_intent: Any,
     transcript: str,
     profile: Profile,
+    user_id: str,
 ) -> CommandResponse:
     """Convert router response dict to CommandResponse model.
 
@@ -385,6 +428,7 @@ def _convert_router_response_to_command_response(
         parsed_intent: The parsed intent object
         transcript: Original text transcript
         profile: User profile
+        user_id: User ID from header or fixture
 
     Returns:
         CommandResponse object
@@ -405,7 +449,7 @@ def _convert_router_response_to_command_response(
 
     # Handle special intents with fixture-backed handlers
     cards: list[UICard] = []
-    
+
     if parsed_intent.name == "inbox.list":
         # Use fixture-backed inbox handler
         try:
@@ -463,11 +507,11 @@ def _convert_router_response_to_command_response(
     elif parsed_intent.name == "agent.delegate" and status == CommandStatus.OK:
         # Agent delegate commands - use old handler for backward compatibility
         # This ensures task_id is included in entities as tests expect
-        return _handle_agent_delegate(transcript, "api")
+        return _handle_agent_delegate(transcript, "api", user_id)
 
     elif parsed_intent.name == "agent.status" and status == CommandStatus.OK:
         # Agent status commands - use old handler for backward compatibility
-        return _handle_agent_status(transcript, "api")
+        return _handle_agent_status(transcript, "api", user_id)
 
     # Get cards from router response if not already set
     if not cards and "cards" in router_response:
@@ -497,9 +541,18 @@ def _convert_router_response_to_command_response(
 
 
 @app.post("/v1/commands/confirm", response_model=CommandResponse)
-async def confirm_command(request: ConfirmRequest) -> CommandResponse:
-    """Confirm a previously proposed side-effect action."""
+async def confirm_command(
+    request: ConfirmRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> CommandResponse:
+    """Confirm a previously proposed side-effect action.
+
+    Args:
+        request: Confirmation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+    """
     db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
 
     # Check idempotency - return cached response if exists
     if request.idempotency_key and request.idempotency_key in processed_commands:
@@ -516,7 +569,7 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
             # In a full implementation, this would execute the actual side effect
             intent_name = confirmed_action.intent_name
             entities = confirmed_action.entities
-            
+
             if intent_name == "pr.request_review":
                 reviewers = entities.get("reviewers", [])
                 pr_num = entities.get("pr_number", "unknown")
@@ -666,7 +719,7 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
         # Write audit log for the confirmation execution
         write_action_log(
             db,
-            user_id=FIXTURE_USER_ID,
+            user_id=user_id,
             action_type="request_review",
             ok=True,
             target=target,
@@ -720,9 +773,18 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
 
 
 @app.post("/v1/actions/request-review", response_model=ActionResult)
-async def request_review(request: RequestReviewRequest) -> ActionResult:
-    """Request reviewers on a PR with policy evaluation and audit logging."""
+async def request_review(
+    request: RequestReviewRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> ActionResult:
+    """Request reviewers on a PR with policy evaluation and audit logging.
+
+    Args:
+        request: Request review request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+    """
     db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
 
     # Check idempotency first - return cached result if exists
     if request.idempotency_key and request.idempotency_key in idempotency_store:
@@ -731,7 +793,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
     # Check rate limit
     rate_limit_result = check_rate_limit(
         db,
-        FIXTURE_USER_ID,
+        user_id,
         "request_review",
         window_seconds=60,
         max_requests=10,
@@ -742,7 +804,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
         try:
             write_action_log(
                 db,
-                user_id=FIXTURE_USER_ID,
+                user_id=user_id,
                 action_type="request_review",
                 ok=False,
                 target=f"{request.repo}#{request.pr_number}",
@@ -777,7 +839,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
         try:
             write_action_log(
                 db,
-                user_id=FIXTURE_USER_ID,
+                user_id=user_id,
                 action_type="request_review",
                 ok=False,
                 target=f"{request.repo}#{request.pr_number}",
@@ -803,7 +865,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
         summary = f"Request review from {reviewers_str} on {request.repo}#{request.pr_number}"
         pending_action = create_pending_action(
             db,
-            user_id=FIXTURE_USER_ID,
+            user_id=user_id,
             summary=summary,
             action_type="request_review",
             action_payload={
@@ -817,7 +879,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
         # Write audit log for confirmation required
         write_action_log(
             db,
-            user_id=FIXTURE_USER_ID,
+            user_id=user_id,
             action_type="request_review",
             ok=True,
             target=f"{request.repo}#{request.pr_number}",
@@ -851,7 +913,7 @@ async def request_review(request: RequestReviewRequest) -> ActionResult:
     # Write audit log for successful execution
     write_action_log(
         db,
-        user_id=FIXTURE_USER_ID,
+        user_id=user_id,
         action_type="request_review",
         ok=True,
         target=target,
@@ -896,7 +958,7 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
 
 
 async def _handle_request_review_command(
-    parsed_intent: ParsedIntent, text: str, idempotency_key: str | None
+    parsed_intent: ParsedIntent, text: str, idempotency_key: str | None, user_id: str
 ) -> CommandResponse:
     """Handle pr.request_review intent with policy evaluation.
 
@@ -906,6 +968,7 @@ async def _handle_request_review_command(
         parsed_intent: Pydantic ParsedIntent model
         text: Original text command
         idempotency_key: Optional idempotency key
+        user_id: User ID from header or fixture
     """
     db = get_db()
 
@@ -941,7 +1004,7 @@ async def _handle_request_review_command(
     # Check rate limit
     rate_limit_result = check_rate_limit(
         db,
-        FIXTURE_USER_ID,
+        user_id,
         "request_review",
         window_seconds=60,
         max_requests=10,
@@ -952,7 +1015,7 @@ async def _handle_request_review_command(
         try:
             write_action_log(
                 db,
-                user_id=FIXTURE_USER_ID,
+                user_id=user_id,
                 action_type="request_review",
                 ok=False,
                 target=f"{repo}#{pr_number}",
@@ -976,7 +1039,7 @@ async def _handle_request_review_command(
     # Evaluate policy
     policy_result = evaluate_action_policy(
         db,
-        FIXTURE_USER_ID,
+        user_id,
         repo,
         "request_review",
     )
@@ -987,7 +1050,7 @@ async def _handle_request_review_command(
         try:
             write_action_log(
                 db,
-                user_id=FIXTURE_USER_ID,
+                user_id=user_id,
                 action_type="request_review",
                 ok=False,
                 target=f"{repo}#{pr_number}",
@@ -1015,7 +1078,7 @@ async def _handle_request_review_command(
         summary = f"Request review from {reviewers_str} on {repo}#{pr_number}"
         pending_action = create_pending_action(
             db,
-            user_id=FIXTURE_USER_ID,
+            user_id=user_id,
             summary=summary,
             action_type="request_review",
             action_payload={
@@ -1029,7 +1092,7 @@ async def _handle_request_review_command(
         # Write audit log for confirmation required
         write_action_log(
             db,
-            user_id=FIXTURE_USER_ID,
+            user_id=user_id,
             action_type="request_review",
             ok=True,
             target=f"{repo}#{pr_number}",
@@ -1060,7 +1123,7 @@ async def _handle_request_review_command(
     # Write audit log for successful execution
     write_action_log(
         db,
-        user_id=FIXTURE_USER_ID,
+        user_id=user_id,
         action_type="request_review",
         ok=True,
         target=target,
@@ -1078,11 +1141,16 @@ async def _handle_request_review_command(
     )
 
 
-def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
+def _handle_agent_delegate(text: str, device: str, user_id: str) -> CommandResponse:
     """Handle agent.delegate intent.
 
     Parse the command and create an agent task using AgentService.
     For MVP, uses mock provider stubs only.
+
+    Args:
+        text: Command text
+        device: Device identifier
+        user_id: User ID from header or fixture
     """
     from handsfree.agents.service import AgentService
 
@@ -1127,8 +1195,7 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
         target_type = "pr"
         target_ref = f"#{pr_number}"
 
-    # For MVP, use a test user ID and mock provider
-    user_id = TEST_USER_ID
+    # Use provided user_id and mock provider
     provider = "mock"
 
     try:
@@ -1188,15 +1255,17 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
         )
 
 
-def _handle_agent_status(text: str, device: str) -> CommandResponse:
+def _handle_agent_status(text: str, device: str, user_id: str) -> CommandResponse:
     """Handle agent.status intent.
 
     Query and return the status of agent tasks using AgentService.
+
+    Args:
+        text: Command text
+        device: Device identifier
+        user_id: User ID from header or fixture
     """
     from handsfree.agents.service import AgentService
-
-    # For MVP, use a test user ID
-    user_id = TEST_USER_ID
 
     try:
         db = get_db()
@@ -1234,8 +1303,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
             parts.append(f"{state_counts['created']} created")
 
         spoken_text = (
-            f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: "
-            f"{', '.join(parts)}."
+            f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: {', '.join(parts)}."
         )
 
         # Build cards for recent tasks
@@ -1321,6 +1389,117 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
             summary="Automated refactoring PR ready for review",
         ),
     ]
+
+
+@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
+async def create_connection(
+    request: CreateGitHubConnectionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Create a GitHub connection for the authenticated user.
+
+    Stores connection metadata (installation_id, token_ref, scopes).
+    Does NOT store actual tokens - only references.
+
+    Args:
+        request: Connection creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created GitHub connection.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    conn = create_github_connection(
+        conn=db,
+        user_id=user_id,
+        installation_id=request.installation_id,
+        token_ref=request.token_ref,
+        scopes=request.scopes,
+    )
+
+    return GitHubConnectionResponse(
+        id=conn.id,
+        user_id=conn.user_id,
+        installation_id=conn.installation_id,
+        token_ref=conn.token_ref,
+        scopes=conn.scopes,
+        created_at=conn.created_at,
+        updated_at=conn.updated_at,
+    )
+
+
+@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
+async def list_connections(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionsListResponse:
+    """List all GitHub connections for the authenticated user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of GitHub connections.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connections = get_github_connections_by_user(db, user_id)
+
+    return GitHubConnectionsListResponse(
+        connections=[
+            GitHubConnectionResponse(
+                id=c.id,
+                user_id=c.user_id,
+                installation_id=c.installation_id,
+                token_ref=c.token_ref,
+                scopes=c.scopes,
+                created_at=c.created_at,
+                updated_at=c.updated_at,
+            )
+            for c in connections
+        ]
+    )
+
+
+@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
+async def get_connection_by_id(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Get a specific GitHub connection by ID.
+
+    Args:
+        connection_id: UUID of the connection.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        GitHub connection.
+
+    Raises:
+        404: Connection not found or doesn't belong to user.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    conn = get_github_connection(db, connection_id)
+
+    if conn is None or conn.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "not_found", "message": "Connection not found"},
+        )
+
+    return GitHubConnectionResponse(
+        id=conn.id,
+        user_id=conn.user_id,
+        installation_id=conn.installation_id,
+        token_ref=conn.token_ref,
+        scopes=conn.scopes,
+        created_at=conn.created_at,
+        updated_at=conn.updated_at,
+    )
 
 
 @app.exception_handler(HTTPException)
