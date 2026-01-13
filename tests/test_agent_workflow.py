@@ -86,7 +86,7 @@ def test_agent_workflow_complete():
     delegate_response2 = client.post(
         "/v1/command",
         json={
-            "input": {"type": "text", "text": "ask agent to review PR 200"},
+            "input": {"type": "text", "text": "ask agent to handle PR 200"},
             "profile": "default",
             "client_context": {
                 "device": "test",

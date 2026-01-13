@@ -24,7 +24,6 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import get_db_webhook_store
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -49,10 +48,10 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
+    WebhookStore,
     get_webhook_store,
     normalize_github_event,
     verify_github_signature,
-    WebhookStore,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -509,7 +508,10 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
                         confidence=1.0,
                         entities=entities,
                     ),
-                    spoken_text=f"Review request sent to {reviewers_str} for PR {pr_num}. (Fixture response)",
+                    spoken_text=(
+                        f"Review request sent to {reviewers_str} "
+                        f"for PR {pr_num}. (Fixture response)"
+                    ),
                 )
             elif intent_name == "pr.merge":
                 pr_num = entities.get("pr_number", "unknown")
@@ -1062,9 +1064,6 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     Parse the command and create an agent task using AgentService.
     For MVP, uses mock provider stubs only.
     """
-    from handsfree.agent_providers import get_provider
-    from handsfree.db import init_db
-    from handsfree.db.agent_tasks import create_agent_task, update_agent_task_state
     from handsfree.agents.service import AgentService
 
     # Extract instruction from text
@@ -1187,7 +1186,6 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         total = result["total"]
         tasks = result["tasks"]
         spoken_text = result["spoken_text"]
-        state_counts = result["by_state"]
 
         if total == 0:
             return CommandResponse(
@@ -1208,9 +1206,11 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 "failed": "❌",
             }.get(task_info["state"], "❓")
 
-            instruction_display = (
-                task_info["instruction"][:60] + "..." if task_info.get("instruction") and len(task_info["instruction"]) > 60 else (task_info.get("instruction") or "No instruction")
-            )
+            instruction = task_info.get("instruction")
+            if instruction and len(instruction) > 60:
+                instruction_display = instruction[:60] + "..."
+            else:
+                instruction_display = instruction or "No instruction"
 
             cards.append(
                 UICard(
