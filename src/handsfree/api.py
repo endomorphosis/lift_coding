@@ -235,6 +235,8 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
         intent=parsed_intent,
         profile=request.profile,
         session_id=request.idempotency_key,  # Use idempotency key as session ID
+        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
+        idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
     # Convert router response to CommandResponse

@@ -47,6 +47,8 @@ class CommandRouter:
         intent: ParsedIntent,
         profile: Profile,
         session_id: str | None = None,
+        user_id: str | None = None,
+        idempotency_key: str | None = None,
     ) -> dict[str, Any]:
         """Route an intent to appropriate handler and compose response.
 
@@ -54,6 +56,8 @@ class CommandRouter:
             intent: Parsed intent from the parser
             profile: User's current profile
             session_id: Optional session identifier for repeat functionality
+            user_id: Optional user identifier for policy evaluation and audit logging
+            idempotency_key: Optional idempotency key for deduplication
 
         Returns:
             Dictionary conforming to CommandResponse schema
@@ -70,7 +74,14 @@ class CommandRouter:
         elif intent.name == "system.set_profile":
             return self._handle_set_profile(intent, profile_config)
 
-        # Check if this is a side-effect intent requiring confirmation
+        # Special handling for pr.request_review - integrate with policy engine
+        # Policy-based handling takes precedence over profile-based confirmation
+        if intent.name == "pr.request_review" and self.db_conn and user_id:
+            return self._handle_request_review_with_policy(
+                intent, user_id, idempotency_key
+            )
+        
+        # Check if this is a side-effect intent requiring confirmation (profile-based fallback)
         if intent.name in self.SIDE_EFFECT_INTENTS and profile_config.confirmation_required:
             return self._create_confirmation_response(intent, profile_config)
 
@@ -322,4 +333,175 @@ class CommandRouter:
             "status": "error",
             "intent": intent.to_dict(),
             "spoken_text": "I didn't catch that. Can you try again?",
+        }
+
+    def _handle_request_review_with_policy(
+        self,
+        intent: ParsedIntent,
+        user_id: str,
+        idempotency_key: str | None,
+    ) -> dict[str, Any]:
+        """Handle pr.request_review with full policy evaluation, rate limiting, and audit logging.
+        
+        Args:
+            intent: The parsed pr.request_review intent
+            user_id: User identifier for policy evaluation
+            idempotency_key: Optional idempotency key
+            
+        Returns:
+            Response dict with status, spoken_text, and optional pending_action
+        """
+        from handsfree.db.action_logs import write_action_log
+        from handsfree.db.pending_actions import create_pending_action
+        from handsfree.policy import PolicyDecision, evaluate_action_policy
+        from handsfree.rate_limit import check_rate_limit
+        
+        # Extract entities
+        reviewers = intent.entities.get("reviewers", [])
+        pr_number = intent.entities.get("pr_number")
+        repo = intent.entities.get("repo", "default/repo")
+        
+        # Validate required fields
+        if not pr_number:
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": "Please specify a PR number, for example: 'request review from alice on PR 123'.",
+            }
+        
+        if not reviewers:
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": "Please specify at least one reviewer.",
+            }
+        
+        # Check rate limit
+        rate_limit_result = check_rate_limit(
+            self.db_conn,
+            user_id,
+            "request_review",
+            window_seconds=60,
+            max_requests=10,
+        )
+        
+        if not rate_limit_result.allowed:
+            # Write audit log for rate limit denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={"reviewers": reviewers},
+                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used - this is a retry
+                pass
+            
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+            }
+        
+        # Evaluate policy
+        policy_result = evaluate_action_policy(
+            self.db_conn,
+            user_id,
+            repo,
+            "request_review",
+        )
+        
+        # Handle policy decisions
+        if policy_result.decision == PolicyDecision.DENY:
+            # Write audit log for policy denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={"reviewers": reviewers},
+                    result={"error": "policy_denied", "message": policy_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used
+                pass
+            
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Action not allowed: {policy_result.reason}",
+            }
+        
+        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+            # Create pending action in database
+            reviewers_str = ", ".join(reviewers)
+            summary = f"Request review from {reviewers_str} on {repo}#{pr_number}"
+            pending_action = create_pending_action(
+                self.db_conn,
+                user_id=user_id,
+                summary=summary,
+                action_type="request_review",
+                action_payload={
+                    "repo": repo,
+                    "pr_number": pr_number,
+                    "reviewers": reviewers,
+                },
+                expires_in_seconds=300,  # 5 minutes
+            )
+            
+            # Write audit log for confirmation required
+            write_action_log(
+                self.db_conn,
+                user_id=user_id,
+                action_type="request_review",
+                ok=True,
+                target=f"{repo}#{pr_number}",
+                request={"reviewers": reviewers},
+                result={
+                    "status": "needs_confirmation",
+                    "token": pending_action.token,
+                    "reason": policy_result.reason,
+                },
+                idempotency_key=idempotency_key,
+            )
+            
+            return {
+                "status": "needs_confirmation",
+                "intent": intent.to_dict(),
+                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "pending_action": {
+                    "token": pending_action.token,
+                    "expires_at": pending_action.expires_at.isoformat(),
+                    "summary": summary,
+                },
+            }
+        
+        # Policy allows the action - execute it directly
+        target = f"{repo}#{pr_number}"
+        
+        # Write audit log for successful execution
+        write_action_log(
+            self.db_conn,
+            user_id=user_id,
+            action_type="request_review",
+            ok=True,
+            target=target,
+            request={"reviewers": reviewers},
+            result={"status": "success", "message": "Review requested (fixture)"},
+            idempotency_key=idempotency_key,
+        )
+        
+        reviewers_str = ", ".join(reviewers)
+        return {
+            "status": "ok",
+            "intent": intent.to_dict(),
+            "spoken_text": f"Review requested from {reviewers_str} on {target}.",
         }
