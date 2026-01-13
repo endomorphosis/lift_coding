@@ -168,15 +168,16 @@ class TestAgentIntents:
         assert result.entities["provider"] == "copilot"
 
     def test_agent_progress(self, parser: IntentParser) -> None:
-        """Test agent.progress intent."""
+        """Test agent.status intent (and backwards compatibility with 'progress' phrase)."""
         phrases = [
             "agent status",
             "what's the agent doing",
             "summarize agent progress",
+            "agent progress",  # backwards compatibility
         ]
         for phrase in phrases:
             result = parser.parse(phrase)
-            assert result.name == "agent.progress", f"Failed for: {phrase}"
+            assert result.name == "agent.status", f"Failed for: {phrase}"
 
 
 class TestUnknownIntents:

@@ -626,12 +626,10 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
 def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     """Handle agent.delegate intent.
 
-    Parse the command and create an agent task.
-    For MVP, uses mock provider.
+    Parse the command and create an agent task using AgentService.
+    For MVP, uses mock provider stubs only.
     """
-    from handsfree.agent_providers import get_provider
-    from handsfree.db import init_db
-    from handsfree.db.agent_tasks import create_agent_task, update_task_status
+    from handsfree.agents.service import AgentService
 
     # Extract instruction from text
     # Simple parsing: everything after "agent" or "fix" or "ask agent to"
@@ -644,7 +642,6 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     # Extract issue/PR number if present
     issue_number = None
     pr_number = None
-    repo_full_name = None
 
     words = text.split()
     for i, word in enumerate(words):
@@ -659,44 +656,41 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
             except ValueError:
                 pass
 
+    # Determine target type and reference
+    target_type = None
+    target_ref = None
+    if issue_number:
+        target_type = "issue"
+        target_ref = f"#{issue_number}"
+    elif pr_number:
+        target_type = "pr"
+        target_ref = f"#{pr_number}"
+
     # For MVP, use a test user ID and mock provider
     user_id = TEST_USER_ID
     provider = "mock"
 
     try:
-        # Create task in database
-        conn = init_db()
-        task = create_agent_task(
-            conn,
+        # Create task via AgentService
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.delegate(
             user_id=user_id,
-            provider=provider,
             instruction=instruction,
-            repo_full_name=repo_full_name,
-            issue_number=issue_number,
-            pr_number=pr_number,
+            provider=provider,
+            target_type=target_type,
+            target_ref=target_ref,
         )
 
-        # Start the task with the provider
-        agent_provider = get_provider(provider)
-        result = agent_provider.start_task(task)
+        task_id = result["task_id"]
+        spoken_text = result["spoken_text"]
 
-        # Update task status
-        if result.get("ok"):
-            update_task_status(
-                conn,
-                task.id,
-                status="running",
-                last_update=result.get("message", "Agent started"),
-            )
-
-        conn.close()
-
-        # Return response
-        target = ""
+        # Build entity response
+        target_description = ""
         if issue_number:
-            target = f" for issue #{issue_number}"
+            target_description = f" for issue #{issue_number}"
         elif pr_number:
-            target = f" for PR #{pr_number}"
+            target_description = f" for PR #{pr_number}"
 
         return CommandResponse(
             status=CommandStatus.OK,
@@ -705,25 +699,25 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
                 confidence=0.90,
                 entities={
                     "instruction": instruction,
-                    "task_id": task.id,
+                    "task_id": task_id,
                     "issue_number": issue_number,
                     "pr_number": pr_number,
                 },
             ),
-            spoken_text=f"I've delegated the task{target} to an agent. "
-            f"Task ID is {task.id[:8]}. Say 'agent status' to check progress.",
+            spoken_text=f"I've delegated the task{target_description} to an agent. "
+            f"Task ID is {task_id[:8]}. Say 'agent status' to check progress.",
             cards=[
                 UICard(
                     title="Agent Task Created",
-                    subtitle=f"Task {task.id[:8]}",
+                    subtitle=f"Task {task_id[:8]}",
                     lines=[
                         f"Provider: {provider}",
                         f"Instruction: {instruction}",
-                        "Status: running",
+                        f"State: {result['state']}",
                     ],
                 )
             ],
-            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task.id}]),
+            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task_id}]),
         )
     except Exception as e:
         return CommandResponse(
@@ -737,67 +731,55 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
 def _handle_agent_status(text: str, device: str) -> CommandResponse:
     """Handle agent.status intent.
 
-    Query and return the status of agent tasks.
+    Query and return the status of agent tasks using AgentService.
     """
-    from handsfree.db import init_db
-    from handsfree.db.agent_tasks import get_agent_tasks
+    from handsfree.agents.service import AgentService
 
     # For MVP, use a test user ID
     user_id = TEST_USER_ID
 
     try:
-        conn = init_db()
-        tasks = get_agent_tasks(conn, user_id=user_id, limit=10)
-        conn.close()
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.get_status(user_id=user_id)
 
-        if not tasks:
+        total = result["total"]
+        tasks = result["tasks"]
+        spoken_text = result["spoken_text"]
+
+        if total == 0:
             return CommandResponse(
                 status=CommandStatus.OK,
                 intent=ParsedIntent(name="agent.status", confidence=0.95),
-                spoken_text="You have no agent tasks.",
+                spoken_text=spoken_text,
                 debug=DebugInfo(transcript=text),
             )
 
-        # Count by status
-        status_counts = {}
-        for task in tasks:
-            status_counts[task.status] = status_counts.get(task.status, 0) + 1
-
-        # Build spoken response
-        parts = []
-        if status_counts.get("running"):
-            parts.append(f"{status_counts['running']} running")
-        if status_counts.get("needs_input"):
-            parts.append(f"{status_counts['needs_input']} waiting for input")
-        if status_counts.get("completed"):
-            parts.append(f"{status_counts['completed']} completed")
-        if status_counts.get("failed"):
-            parts.append(f"{status_counts['failed']} failed")
-
-        spoken_text = f"You have {len(tasks)} agent tasks: {', '.join(parts)}."
-
         # Build cards for recent tasks
         cards = []
-        for task in tasks[:5]:  # Show top 5 most recent
-            status_emoji = {
+        for task_info in tasks[:5]:  # Show top 5 most recent
+            state_emoji = {
                 "created": "⏱️",
                 "running": "⚙️",
                 "needs_input": "⏸️",
                 "completed": "✅",
                 "failed": "❌",
-            }.get(task.status, "❓")
+            }.get(task_info["state"], "❓")
 
-            instruction_display = (
-                task.instruction[:60] + "..." if len(task.instruction) > 60 else task.instruction
-            )
+            instruction_display = task_info["instruction"] or "No instruction"
+            if instruction_display and len(instruction_display) > 60:
+                instruction_display = instruction_display[:60] + "..."
+
+            subtitle_parts = [task_info["state"]]
+            if task_info.get("target_type") and task_info.get("target_ref"):
+                subtitle_parts.append(f"{task_info['target_type']} {task_info['target_ref']}")
 
             cards.append(
                 UICard(
-                    title=f"{status_emoji} Task {task.id[:8]}",
-                    subtitle=f"{task.status} • {task.provider}",
+                    title=f"{state_emoji} Task {task_info['id'][:8]}",
+                    subtitle=" • ".join(subtitle_parts),
                     lines=[
                         f"Instruction: {instruction_display}",
-                        f"Last update: {task.last_update or 'No updates'}",
                     ],
                 )
             )
@@ -807,7 +789,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
             intent=ParsedIntent(
                 name="agent.status",
                 confidence=0.95,
-                entities={"task_count": len(tasks)},
+                entities={"task_count": total},
             ),
             spoken_text=spoken_text,
             cards=cards,

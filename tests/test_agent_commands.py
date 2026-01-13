@@ -93,7 +93,7 @@ class TestAgentDelegate:
 
 
 class TestAgentStatus:
-    """Test agent.status (agent.progress) command routing."""
+    """Test agent.status command routing."""
 
     def test_status_no_tasks(self, router, parser, test_user_id):
         """Test status with no tasks."""
@@ -170,13 +170,13 @@ class TestAgentIntentParsing:
         """Test parsing agent status."""
         intent = parser.parse("agent status")
 
-        assert intent.name == "agent.progress"
+        assert intent.name == "agent.status"
 
     def test_parse_whats_agent_doing(self, parser):
         """Test parsing 'what's the agent doing'."""
         intent = parser.parse("what's the agent doing")
 
-        assert intent.name == "agent.progress"
+        assert intent.name == "agent.status"
 
 
 class TestAgentConfirmationFlow:
