@@ -7,7 +7,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.db import get_connection
 from handsfree.db.webhook_events import get_db_webhook_store
 from handsfree.webhooks import normalize_github_event
 
