@@ -4,6 +4,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 """
 
 import logging
+import uuid
 from datetime import UTC, datetime
 from typing import Any
 
@@ -98,8 +99,6 @@ def get_user_id_from_header(x_user_id: str | None = None) -> str:
     if x_user_id:
         # Validate it's a proper UUID format
         try:
-            import uuid
-
             uuid.UUID(x_user_id)
             return x_user_id
         except (ValueError, AttributeError):
@@ -139,10 +138,6 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
-
-
-# Test user ID for MVP (in production this would come from auth)
-TEST_USER_ID = "00000000-0000-0000-0000-000000000001"
 
 
 @app.get("/health")
@@ -1079,16 +1074,6 @@ def _handle_agent_delegate(text: str, device: str, user_id: str) -> CommandRespo
                 target_ref = f"#{pr_number}"
             except ValueError:
                 pass
-
-    # Determine target type and reference
-    target_type = None
-    target_ref = None
-    if issue_number:
-        target_type = "issue"
-        target_ref = f"#{issue_number}"
-    elif pr_number:
-        target_type = "pr"
-        target_ref = f"#{pr_number}"
 
     # Use provided user_id and mock provider
     provider = "mock"
