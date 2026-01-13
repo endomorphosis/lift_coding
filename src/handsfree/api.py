@@ -24,7 +24,6 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import get_db_webhook_store
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -49,10 +48,10 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
+    WebhookStore,
     get_webhook_store,
     normalize_github_event,
     verify_github_signature,
-    WebhookStore,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -244,6 +243,109 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     response = _convert_router_response_to_command_response(
         router_response, parsed_intent, text, request.profile
     )
+    # Parse intent using IntentParser
+    parser = IntentParser()
+    parsed_intent_dc = parser.parse(text)
+
+    # Convert dataclass to Pydantic model
+    parsed_intent = PydanticParsedIntent(
+        name=parsed_intent_dc.name,
+        confidence=parsed_intent_dc.confidence,
+        entities=parsed_intent_dc.entities,
+    )
+
+    # Handle different intents
+    if parsed_intent.name == "inbox.list":
+        # Return inbox items
+        items = _get_fixture_inbox_items()
+        cards = [
+            UICard(
+                title=item.title,
+                subtitle=f"{item.type.value} - Priority {item.priority}",
+                lines=[item.summary] if item.summary else [],
+                deep_link=item.url,
+            )
+            for item in items[:3]  # Limit to top 3
+        ]
+
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text=f"You have {len(items)} items in your inbox. "
+            f"Top priority: {items[0].title if items else 'none'}.",
+            cards=cards,
+            debug=DebugInfo(transcript=text),
+        )
+    elif parsed_intent.name == "pr.summarize":
+        # Extract PR number
+        pr_number = parsed_intent.entities.get("pr_number")
+
+        if pr_number:
+            # Create a pending action requiring confirmation
+            token = str(uuid.uuid4())
+            expires_at = datetime.now(UTC) + timedelta(minutes=5)
+
+            # Store pending action in memory
+            pending_actions_memory[token] = {
+                "action": "summarize_pr",
+                "pr_number": pr_number,
+                "expires_at": expires_at,
+            }
+
+            response = CommandResponse(
+                status=CommandStatus.NEEDS_CONFIRMATION,
+                intent=parsed_intent,
+                spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
+                pending_action=PydanticPendingAction(
+                    token=token,
+                    expires_at=expires_at,
+                    summary=f"Fetch and summarize PR #{pr_number}",
+                ),
+                debug=DebugInfo(transcript=text),
+            )
+        else:
+            response = CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=parsed_intent,
+                spoken_text="I couldn't find a PR number in your request.",
+                debug=DebugInfo(transcript=text),
+            )
+    elif parsed_intent.name == "pr.request_review":
+        # Handle request review with policy evaluation
+        response = await _handle_request_review_command(
+            parsed_intent, text, request.idempotency_key
+        )
+    elif parsed_intent.name == "agent.delegate":
+        # Handle agent.delegate intent
+        response = _handle_agent_delegate(text, request.client_context.device)
+    elif parsed_intent.name == "agent.status":
+        # Handle agent.status intent
+        response = _handle_agent_status(text, request.client_context.device)
+    elif parsed_intent.name == "pr.merge":
+        response = CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=parsed_intent,
+            spoken_text=(
+                "Merge actions require strict policy gates. This feature is coming in PR-007."
+            ),
+            debug=DebugInfo(transcript=text),
+        )
+    elif parsed_intent.name == "unknown":
+        # Unknown command
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text="I didn't understand that command. Try 'inbox' or 'summarize PR <number>'.",
+            debug=DebugInfo(transcript=text),
+        )
+    else:
+        # Other intents - return a generic response
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text="I recognized that command but it's not fully implemented yet.",
+            debug=DebugInfo(transcript=text),
+        )
 
     # Store for idempotency
     if request.idempotency_key:
@@ -345,7 +447,7 @@ def _convert_router_response_to_command_response(
         # This ensures task_id is included in entities as tests expect
         return _handle_agent_delegate(transcript, "api")
 
-    elif parsed_intent.name == "agent.progress" and status == CommandStatus.OK:
+    elif parsed_intent.name == "agent.status" and status == CommandStatus.OK:
         # Agent status commands - use old handler for backward compatibility
         return _handle_agent_status(transcript, "api")
 
@@ -408,7 +510,10 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
                         confidence=1.0,
                         entities=entities,
                     ),
-                    spoken_text=f"Review request sent to {reviewers_str} for PR {pr_num}. (Fixture response)",
+                    spoken_text=(
+                        f"Review request sent to {reviewers_str} "
+                        f"for PR {pr_num}. (Fixture response)"
+                    ),
                 )
             elif intent_name == "pr.merge":
                 pr_num = entities.get("pr_number", "unknown")
@@ -961,9 +1066,6 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     Parse the command and create an agent task using AgentService.
     For MVP, uses mock provider stubs only.
     """
-    from handsfree.agent_providers import get_provider
-    from handsfree.db import init_db
-    from handsfree.db.agent_tasks import create_agent_task, update_agent_task_state
     from handsfree.agents.service import AgentService
 
     # Extract instruction from text
@@ -1023,20 +1125,6 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
             target_ref=target_ref,
         )
 
-        # Start the task with the provider
-        agent_provider = get_provider(provider)
-        result = agent_provider.start_task(task)
-
-        # Update task state
-        if result.get("ok"):
-            update_agent_task_state(
-                conn,
-                task.id,
-                new_state="running",
-                trace_update={"started": result.get("message", "Agent started")},
-            )
-
-        conn.close()
         task_id = result["task_id"]
 
         # Build entity response
@@ -1104,30 +1192,10 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         if total == 0:
             return CommandResponse(
                 status=CommandStatus.OK,
-                intent=ParsedIntent(name="agent.progress", confidence=0.95),
+                intent=ParsedIntent(name="agent.status", confidence=0.95),
                 spoken_text="You have no agent tasks.",
                 debug=DebugInfo(transcript=text),
             )
-
-        # Count by state
-        state_counts = {}
-        for task in tasks:
-            state_counts[task.state] = state_counts.get(task.state, 0) + 1
-
-        # Build spoken response
-        parts = []
-        if state_counts.get("running"):
-            parts.append(f"{state_counts['running']} running")
-        if state_counts.get("needs_input"):
-            parts.append(f"{state_counts['needs_input']} waiting for input")
-        if state_counts.get("completed"):
-            parts.append(f"{state_counts['completed']} completed")
-        if state_counts.get("failed"):
-            parts.append(f"{state_counts['failed']} failed")
-        if state_counts.get("created"):
-            parts.append(f"{state_counts['created']} created")
-
-        spoken_text = f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: {', '.join(parts)}."
 
         # Build cards for recent tasks
         cards = []
@@ -1138,16 +1206,18 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 "needs_input": "⏸️",
                 "completed": "✅",
                 "failed": "❌",
-            }.get(task.state, "❓")
+            }.get(task_info["state"], "❓")
 
-            instruction_display = (
-                task.instruction[:60] + "..." if task.instruction and len(task.instruction) > 60 else (task.instruction or "No instruction")
-            )
+            instruction = task_info.get("instruction")
+            if instruction and len(instruction) > 60:
+                instruction_display = instruction[:60] + "..."
+            else:
+                instruction_display = instruction or "No instruction"
 
             cards.append(
                 UICard(
-                    title=f"{status_emoji} Task {task.id[:8]}",
-                    subtitle=f"{task.state} • {task.provider}",
+                    title=f"{state_emoji} Task {task_info['id'][:8]}",
+                    subtitle=f"{task_info['state']} • {task_info.get('provider', 'unknown')}",
                     lines=[
                         f"Instruction: {instruction_display}",
                     ],
@@ -1157,7 +1227,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
         return CommandResponse(
             status=CommandStatus.OK,
             intent=ParsedIntent(
-                name="agent.progress",  # Match router's convention
+                name="agent.status",
                 confidence=0.95,
                 entities={"task_count": total},
             ),
@@ -1168,7 +1238,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
     except Exception as e:
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=ParsedIntent(name="agent.progress", confidence=0.95),
+            intent=ParsedIntent(name="agent.status", confidence=0.95),
             spoken_text=f"Failed to get agent status: {str(e)}",
             debug=DebugInfo(transcript=text),
         )
