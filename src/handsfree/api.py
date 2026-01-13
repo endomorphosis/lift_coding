@@ -21,10 +21,10 @@ from handsfree.db.pending_actions import (
     delete_pending_action,
     get_pending_action,
 )
+from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -49,8 +49,6 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
-    WebhookStore,
-    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
 )
@@ -1472,7 +1470,7 @@ async def get_notifications(
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}",
-            )
+            ) from e
 
     # Fetch notifications
     notifications = list_notifications(

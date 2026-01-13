@@ -1,14 +1,12 @@
 """Tests for notifications API endpoint and integration."""
 
 from datetime import UTC, datetime
-from fastapi.testclient import TestClient
 
 import pytest
+from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.db import init_db
 from handsfree.db.notifications import create_notification
-
 
 client = TestClient(app)
 
@@ -24,12 +22,17 @@ class TestNotificationsEndpoint:
 
     def test_get_notifications_empty(self):
         """Test getting notifications when there are none."""
-        response = client.get("/v1/notifications")
+        # Use a unique user ID to avoid interference from other tests
+        response = client.get(
+            "/v1/notifications",
+            headers={"X-User-ID": "empty-user-00000000-0000-0000-0000-000000000000"}
+        )
 
         assert response.status_code == 200
         data = response.json()
         assert "notifications" in data
         assert "count" in data
+        # With a unique user ID, count should be 0
         assert data["count"] == 0
         assert len(data["notifications"]) == 0
 
@@ -40,7 +43,8 @@ class TestNotificationsEndpoint:
         from handsfree.db.notifications import create_notification
 
         db = get_db()
-        user_id = "00000000-0000-0000-0000-000000000001"  # FIXTURE_USER_ID
+        # Use a unique user ID for this test
+        user_id = "test-user-with-data-0000-0000-0000-000000000001"
 
         create_notification(
             conn=db,
@@ -57,7 +61,10 @@ class TestNotificationsEndpoint:
             metadata={"key": "value2"},
         )
 
-        response = client.get("/v1/notifications")
+        response = client.get(
+            "/v1/notifications",
+            headers={"X-User-ID": user_id}
+        )
 
         assert response.status_code == 200
         data = response.json()
@@ -98,8 +105,9 @@ class TestNotificationsEndpoint:
 
     def test_get_notifications_with_since_filter(self):
         """Test getting notifications with since timestamp."""
-        from handsfree.api import get_db
         import time
+
+        from handsfree.api import get_db
 
         db = get_db()
         user_id = "00000000-0000-0000-0000-000000000001"
@@ -174,8 +182,8 @@ class TestAgentServiceNotifications:
 
     def test_delegate_creates_notification(self):
         """Test that delegating an agent task creates a notification."""
-        from handsfree.api import get_db
         from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
         from handsfree.db.notifications import list_notifications
 
         db = get_db()
@@ -201,8 +209,8 @@ class TestAgentServiceNotifications:
 
     def test_state_change_creates_notification(self):
         """Test that advancing task state creates a notification."""
-        from handsfree.api import get_db
         from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
         from handsfree.db.notifications import list_notifications
 
         db = get_db()
@@ -243,6 +251,9 @@ class TestWebhookNotifications:
         from handsfree.db.notifications import list_notifications
 
         db = get_db()
+        # Use unique delivery ID to avoid duplicate rejection
+        import uuid
+        delivery_id = f"test-delivery-pr-opened-{uuid.uuid4()}"
         user_id = "00000000-0000-0000-0000-000000000001"
 
         # Count notifications before
@@ -270,7 +281,7 @@ class TestWebhookNotifications:
             json=payload,
             headers={
                 "X-GitHub-Event": "pull_request",
-                "X-GitHub-Delivery": "test-delivery-pr-opened",
+                "X-GitHub-Delivery": delivery_id,
                 "X-Hub-Signature-256": "dev",
             },
         )
@@ -281,12 +292,14 @@ class TestWebhookNotifications:
         notifs_after = list_notifications(conn=db, user_id=user_id)
         assert len(notifs_after) == count_before + 1
 
-        # Find the webhook notification
+        # Find the webhook notification - get the most recent one
         webhook_notifs = [n for n in notifs_after if n.event_type == "webhook.pr_opened"]
-        assert len(webhook_notifs) == 1
-        assert "PR #123" in webhook_notifs[0].message
-        assert "test/repo" in webhook_notifs[0].message
-        assert webhook_notifs[0].metadata.get("pr_number") == 123
+        assert len(webhook_notifs) >= 1
+        # Check the most recent notification
+        latest_notif = webhook_notifs[0]
+        assert "PR #123" in latest_notif.message
+        assert "test/repo" in latest_notif.message
+        assert latest_notif.metadata.get("pr_number") == 123
 
     def test_check_suite_completed_webhook_creates_notification(self):
         """Test that check_suite completed webhook creates a notification."""

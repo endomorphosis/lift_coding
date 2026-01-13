@@ -72,7 +72,14 @@ def create_notification(
         (id, user_id, event_type, message, metadata, created_at)
         VALUES (?, ?, ?, ?, ?, ?)
         """,
-        [notification_id, user_uuid, event_type, message, json.dumps(metadata) if metadata else None, now],
+        [
+            notification_id,
+            user_uuid,
+            event_type,
+            message,
+            json.dumps(metadata) if metadata else None,
+            now,
+        ],
     )
 
     return Notification(

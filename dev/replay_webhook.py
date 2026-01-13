@@ -52,7 +52,7 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
         from handsfree.db import init_db
         from handsfree.db.webhook_events import get_webhook_event_by_id, get_webhook_events
     except ImportError as e:
-        print(f"Error: Cannot import database modules. Make sure handsfree package is installed.")
+        print("Error: Cannot import database modules. Make sure handsfree package is installed.")
         print(f"Details: {e}")
         return 1
     

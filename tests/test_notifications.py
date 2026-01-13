@@ -1,6 +1,6 @@
 """Tests for notifications persistence and retrieval."""
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 import pytest
 
