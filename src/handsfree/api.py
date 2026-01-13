@@ -49,6 +49,7 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
+    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
     WebhookStore,
@@ -141,7 +142,7 @@ async def github_webhook(
     Raises:
         400 Bad Request if signature invalid or duplicate delivery
     """
-    store = get_db_webhook_store()
+    store = get_webhook_store()
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):
@@ -1058,12 +1059,13 @@ async def _handle_request_review_command(
 def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
     """Handle agent.delegate intent.
 
-    Parse the command and create an agent task.
-    For MVP, uses mock provider.
+    Parse the command and create an agent task using AgentService.
+    For MVP, uses mock provider stubs only.
     """
     from handsfree.agent_providers import get_provider
     from handsfree.db import init_db
     from handsfree.db.agent_tasks import create_agent_task, update_agent_task_state
+    from handsfree.agents.service import AgentService
 
     # Extract instruction from text
     # Simple parsing: everything after "agent" or "fix" or "ask agent to"
@@ -1096,18 +1098,28 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
             except ValueError:
                 pass
 
+    # Determine target type and reference
+    target_type = None
+    target_ref = None
+    if issue_number:
+        target_type = "issue"
+        target_ref = f"#{issue_number}"
+    elif pr_number:
+        target_type = "pr"
+        target_ref = f"#{pr_number}"
+
     # For MVP, use a test user ID and mock provider
     user_id = TEST_USER_ID
     provider = "mock"
 
     try:
-        # Create task in database
-        conn = init_db()
-        task = create_agent_task(
-            conn,
+        # Create task via AgentService
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.delegate(
             user_id=user_id,
-            provider=provider,
             instruction=instruction,
+            provider=provider,
             target_type=target_type,
             target_ref=target_ref,
         )
@@ -1126,13 +1138,14 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
             )
 
         conn.close()
+        task_id = result["task_id"]
 
-        # Return response
-        target = ""
+        # Build entity response
+        target_description = ""
         if issue_number:
-            target = f" for issue #{issue_number}"
+            target_description = f" for issue #{issue_number}"
         elif pr_number:
-            target = f" for PR #{pr_number}"
+            target_description = f" for PR #{pr_number}"
 
         return CommandResponse(
             status=CommandStatus.OK,
@@ -1141,25 +1154,25 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
                 confidence=0.90,
                 entities={
                     "instruction": instruction,
-                    "task_id": task.id,
+                    "task_id": task_id,
                     "issue_number": issue_number,
                     "pr_number": pr_number,
                 },
             ),
-            spoken_text=f"I've delegated the task{target} to an agent. "
-            f"Task ID is {task.id[:8]}. Say 'agent status' to check progress.",
+            spoken_text=f"I've delegated the task{target_description} to an agent. "
+            f"Task ID is {task_id[:8]}. Say 'agent status' to check progress.",
             cards=[
                 UICard(
                     title="Agent Task Created",
-                    subtitle=f"Task {task.id[:8]}",
+                    subtitle=f"Task {task_id[:8]}",
                     lines=[
                         f"Provider: {provider}",
                         f"Instruction: {instruction}",
-                        "Status: running",
+                        f"State: {result['state']}",
                     ],
                 )
             ],
-            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task.id}]),
+            debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task_id}]),
         )
     except Exception as e:
         return CommandResponse(
@@ -1173,20 +1186,23 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
 def _handle_agent_status(text: str, device: str) -> CommandResponse:
     """Handle agent.status intent.
 
-    Query and return the status of agent tasks.
+    Query and return the status of agent tasks using AgentService.
     """
-    from handsfree.db import init_db
-    from handsfree.db.agent_tasks import get_agent_tasks
+    from handsfree.agents.service import AgentService
 
     # For MVP, use a test user ID
     user_id = TEST_USER_ID
 
     try:
-        conn = init_db()
-        tasks = get_agent_tasks(conn, user_id=user_id, limit=10)
-        conn.close()
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.get_status(user_id=user_id)
 
-        if not tasks:
+        total = result["total"]
+        tasks = result["tasks"]
+        spoken_text = result["spoken_text"]
+
+        if total == 0:
             return CommandResponse(
                 status=CommandStatus.OK,
                 intent=ParsedIntent(name="agent.progress", confidence=0.95),
@@ -1216,8 +1232,8 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
 
         # Build cards for recent tasks
         cards = []
-        for task in tasks[:5]:  # Show top 5 most recent
-            status_emoji = {
+        for task_info in tasks[:5]:  # Show top 5 most recent
+            state_emoji = {
                 "created": "⏱️",
                 "running": "⚙️",
                 "needs_input": "⏸️",
@@ -1244,7 +1260,7 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
             intent=ParsedIntent(
                 name="agent.progress",  # Match router's convention
                 confidence=0.95,
-                entities={"task_count": len(tasks)},
+                entities={"task_count": total},
             ),
             spoken_text=spoken_text,
             cards=cards,

@@ -246,17 +246,22 @@ class IntentParser:
             # Agent progress
             (
                 re.compile(r"\bagent\s+status\b", re.IGNORECASE),
-                "agent.progress",
+                "agent.status",
                 {},
             ),
             (
                 re.compile(r"\bwhat'?s\s+the\s+agent\s+doing\b", re.IGNORECASE),
-                "agent.progress",
+                "agent.status",
                 {},
             ),
             (
                 re.compile(r"\bsummarize\s+agent\s+progress\b", re.IGNORECASE),
-                "agent.progress",
+                "agent.status",
+                {},
+            ),
+            (
+                re.compile(r"\bagent\s+progress\b", re.IGNORECASE),
+                "agent.status",
                 {},
             ),
         ]

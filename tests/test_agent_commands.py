@@ -80,7 +80,10 @@ class TestAgentDelegate:
 
         assert response["status"] == "ok"
         # Should mention task creation
-        assert "task created" in response["spoken_text"].lower() or "pr" in response["spoken_text"].lower()
+        assert (
+            "task created" in response["spoken_text"].lower()
+            or "pr" in response["spoken_text"].lower()
+        )
 
     def test_delegate_without_db_fails(self, router_no_db, parser):
         """Test that delegation fails without database."""
@@ -93,7 +96,7 @@ class TestAgentDelegate:
 
 
 class TestAgentStatus:
-    """Test agent.status (agent.progress) command routing."""
+    """Test agent.status command routing."""
 
     def test_status_no_tasks(self, router, parser, test_user_id):
         """Test status with no tasks."""
@@ -108,6 +111,7 @@ class TestAgentStatus:
         """Test status with existing tasks."""
         # First create a task using the agent service directly
         from handsfree.agents.service import AgentService
+
         service = AgentService(db_conn)
         service.delegate(user_id="default-user", instruction="test", provider="mock")
 
@@ -170,13 +174,13 @@ class TestAgentIntentParsing:
         """Test parsing agent status."""
         intent = parser.parse("agent status")
 
-        assert intent.name == "agent.progress"
+        assert intent.name == "agent.status"
 
     def test_parse_whats_agent_doing(self, parser):
         """Test parsing 'what's the agent doing'."""
         intent = parser.parse("what's the agent doing")
 
-        assert intent.name == "agent.progress"
+        assert intent.name == "agent.status"
 
 
 class TestAgentConfirmationFlow:

@@ -292,7 +292,7 @@ class CommandRouter:
                 "spoken_text": spoken_text,
             }
 
-        elif intent.name == "agent.progress":
+        elif intent.name == "agent.status":
             if not self._agent_service:
                 spoken_text = "Agent service not available."
             else:

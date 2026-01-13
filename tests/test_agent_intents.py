@@ -113,7 +113,7 @@ def test_agent_status_no_tasks():
     # Router uses "agent.progress" for status queries
     assert data["intent"]["name"] == "agent.progress"
     # After previous tests, there might be tasks, so we just check the structure
-    assert "agent" in data["spoken_text"].lower()
+    assert "task" in data["spoken_text"].lower() or "no agent" in data["spoken_text"].lower()
 
 
 def test_agent_status_with_tasks():
