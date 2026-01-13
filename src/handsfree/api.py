@@ -14,6 +14,8 @@ from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.db.pending_actions import (
     create_pending_action,
+    delete_pending_action,
+    get_pending_action,
 )
 from handsfree.models import (
     ActionResult,
@@ -64,6 +66,7 @@ def get_db():
     if _db_conn is None:
         _db_conn = init_db(":memory:")
     return _db_conn
+
 
 # Test user ID for MVP (in production this would come from auth)
 TEST_USER_ID = "00000000-0000-0000-0000-000000000001"
@@ -190,38 +193,54 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
 @app.post("/v1/commands/confirm", response_model=CommandResponse)
 async def confirm_command(request: ConfirmRequest) -> CommandResponse:
     """Confirm a previously proposed side-effect action."""
-    # Check idempotency
+    db = get_db()
+
+    # Check idempotency - return cached response if exists
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
 
-    # Check if pending action exists
-    if request.token not in pending_actions_memory:
-        raise HTTPException(
-            status_code=404,
-            detail={
-                "error": "not_found",
-                "message": "Pending action not found or expired",
-            },
-        )
+    # Check if pending action exists in memory first (for backward compatibility)
+    action_data = None
+    is_memory_action = False
 
-    action_data = pending_actions_memory[request.token]
+    if request.token in pending_actions_memory:
+        action_data = pending_actions_memory[request.token]
+        is_memory_action = True
 
-    # Check expiration
-    if datetime.now(UTC) > action_data["expires_at"]:
-        del pending_actions_memory[request.token]
-        raise HTTPException(
-            status_code=404,
-            detail={
-                "error": "expired",
-                "message": "Pending action has expired",
-            },
-        )
+        # Check expiration for memory actions
+        if datetime.now(UTC) > action_data["expires_at"]:
+            del pending_actions_memory[request.token]
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "expired",
+                    "message": "Pending action has expired",
+                },
+            )
 
-    # Execute the action (stubbed for now)
-    action_type = action_data["action"]
+        action_type = action_data["action"]
+        action_payload = action_data
+    else:
+        # Check database for pending action
+        db_action = get_pending_action(db, request.token)
 
+        if db_action is None:
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or expired",
+                },
+            )
+
+        action_type = db_action.action_type
+        action_payload = db_action.action_payload
+        action_data = db_action
+
+    # Execute the action based on type
     if action_type == "summarize_pr":
-        pr_number = action_data["pr_number"]
+        # Handle memory-based summarize_pr action
+        pr_number = action_payload.get("pr_number")
         response = CommandResponse(
             status=CommandStatus.OK,
             intent=ParsedIntent(
@@ -242,6 +261,60 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
                 )
             ],
         )
+    elif action_type == "request_review":
+        # Handle DB-backed request_review action with exactly-once semantics
+        # Atomically delete the pending action to prevent duplicate execution.
+        # Note: get_pending_action already verified the action exists and is not expired,
+        # but between that check and this delete, another concurrent request could have
+        # consumed it, or it could have been cleaned up. The atomic delete with RETURNING
+        # ensures exactly-once execution - if the delete fails, the action is gone and
+        # we correctly return 404 to prevent re-execution.
+        deleted = delete_pending_action(db, request.token)
+
+        if not deleted:
+            # Action was already consumed or cleaned up between the get and delete
+            # This ensures idempotency even without an idempotency_key
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or already consumed",
+                },
+            )
+
+        # Execute the side-effect (fixture behavior - no real GitHub writes)
+        repo = action_payload.get("repo")
+        pr_number = action_payload.get("pr_number")
+        reviewers = action_payload.get("reviewers", [])
+
+        target = f"{repo}#{pr_number}"
+        reviewers_str = ", ".join(reviewers)
+
+        # Write audit log for the confirmation execution
+        write_action_log(
+            db,
+            user_id=FIXTURE_USER_ID,
+            action_type="request_review",
+            ok=True,
+            target=target,
+            request={"reviewers": reviewers, "confirmed": True},
+            result={
+                "status": "success",
+                "message": "Review requested (fixture)",
+                "via_confirmation": True,
+            },
+            idempotency_key=request.idempotency_key,
+        )
+
+        response = CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="request_review.confirmed",
+                confidence=1.0,
+                entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
+            ),
+            spoken_text=f"Review requested from {reviewers_str} on {target}.",
+        )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -249,8 +322,9 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
             spoken_text=f"Unknown action type: {action_type}",
         )
 
-    # Clean up pending action
-    del pending_actions_memory[request.token]
+    # Clean up pending action from memory if it was a memory action
+    if is_memory_action:
+        del pending_actions_memory[request.token]
 
     # Store for idempotency
     if request.idempotency_key:
