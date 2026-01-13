@@ -359,3 +359,168 @@ def test_agent_delegate_requires_confirmation_in_workout() -> None:
     assert data["intent"]["name"] == "agent.delegate"
     assert "pending_action" in data
     assert "token" in data["pending_action"]
+
+
+def test_session_support_via_header() -> None:
+    """Test session support via X-Session-Id header."""
+    session_id = "test-session-123"
+    
+    # First command with session
+    response1 = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": session_id},
+        json={
+            "input": {"type": "text", "text": "inbox"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response1.status_code == 200
+    data1 = response1.json()
+    original_text = data1["spoken_text"]
+    
+    # Repeat command with same session
+    response2 = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": session_id},
+        json={
+            "input": {"type": "text", "text": "repeat"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response2.status_code == 200
+    data2 = response2.json()
+    
+    # Should return same spoken text
+    assert data2["spoken_text"] == original_text
+
+
+def test_session_isolation() -> None:
+    """Test that different sessions have isolated histories."""
+    # Session 1
+    response1 = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": "session-1"},
+        json={
+            "input": {"type": "text", "text": "inbox"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response1.status_code == 200
+    
+    # Session 2 - repeat should not see session 1's history
+    response2 = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": "session-2"},
+        json={
+            "input": {"type": "text", "text": "repeat"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response2.status_code == 200
+    data2 = response2.json()
+    
+    # Should indicate nothing to repeat
+    assert "nothing to repeat" in data2["spoken_text"].lower()
+
+
+def test_system_next_navigation() -> None:
+    """Test system.next navigation through inbox items."""
+    session_id = "test-nav-session"
+    
+    # Get inbox (should have multiple items)
+    response1 = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": session_id},
+        json={
+            "input": {"type": "text", "text": "inbox"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response1.status_code == 200
+    data1 = response1.json()
+    
+    # Should have cards
+    if "cards" in data1 and len(data1.get("cards", [])) > 1:
+        # Next command should work
+        response2 = client.post(
+            "/v1/command",
+            headers={"X-Session-Id": session_id},
+            json={
+                "input": {"type": "text", "text": "next"},
+                "profile": "default",
+                "client_context": {
+                    "device": "simulator",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+        
+        assert response2.status_code == 200
+        data2 = response2.json()
+        
+        # Should have status ok
+        assert data2["status"] == "ok"
+        # Should have a single card (the next item)
+        assert "cards" in data2
+        assert len(data2["cards"]) == 1
+
+
+def test_next_without_list() -> None:
+    """Test next command without any list context."""
+    response = client.post(
+        "/v1/command",
+        headers={"X-Session-Id": "new-session"},
+        json={
+            "input": {"type": "text", "text": "next"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+    
+    assert response.status_code == 200
+    data = response.json()
+    
+    assert data["status"] == "ok"
+    assert "no list" in data["spoken_text"].lower()

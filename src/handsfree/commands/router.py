@@ -34,6 +34,8 @@ class CommandRouter:
         self.db_conn = db_conn
         # Session state for system.repeat - maps session_id to last response
         self._last_responses: dict[str, dict[str, Any]] = {}
+        # Session state for system.next - maps session_id to (items, current_index)
+        self._navigation_state: dict[str, tuple[list[dict[str, Any]], int]] = {}
 
         # Initialize agent service if DB is available
         self._agent_service = None
@@ -67,6 +69,8 @@ class CommandRouter:
         # Handle system commands
         if intent.name == "system.repeat":
             return self._handle_repeat(session_id, profile_config, intent)
+        elif intent.name == "system.next":
+            return self._handle_next(session_id, profile_config, intent)
         elif intent.name == "system.confirm":
             return self._handle_confirm(intent, profile_config)
         elif intent.name == "system.cancel":
@@ -106,6 +110,9 @@ class CommandRouter:
         # Store response for system.repeat
         if session_id:
             self._last_responses[session_id] = response
+            
+            # Store navigation state for list-like responses
+            self._store_navigation_state(session_id, response, intent)
 
         return response
 
@@ -171,6 +178,115 @@ class CommandRouter:
             }
 
         # Return the last response for this session
+        return self._last_responses[session_id]
+    
+    def _handle_next(
+        self,
+        session_id: str | None,
+        profile_config: ProfileConfig,
+        intent: ParsedIntent,
+    ) -> dict[str, Any]:
+        """Handle system.next to advance through list items."""
+        if not session_id or session_id not in self._navigation_state:
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": "No list to navigate. Try asking for inbox or PR summary first.",
+            }
+        
+        items, current_index = self._navigation_state[session_id]
+        next_index = current_index + 1
+        
+        if next_index >= len(items):
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": "No more items.",
+            }
+        
+        # Update navigation state
+        self._navigation_state[session_id] = (items, next_index)
+        
+        # Build response for next item
+        next_item = items[next_index]
+        response = self._build_item_response(next_item, next_index, len(items), profile_config)
+        
+        # Store as last response for repeat
+        self._last_responses[session_id] = response
+        
+        return response
+    
+    def _store_navigation_state(
+        self,
+        session_id: str,
+        response: dict[str, Any],
+        intent: ParsedIntent,
+    ) -> None:
+        """Store navigation state for list-like responses.
+        
+        Args:
+            session_id: Session identifier
+            response: Response dict that may contain navigable items
+            intent: The intent that generated this response
+        """
+        # Check if response has cards (indicates list-like data)
+        if "cards" not in response or not response["cards"]:
+            # Clear navigation state if no cards
+            if session_id in self._navigation_state:
+                del self._navigation_state[session_id]
+            return
+        
+        # Store cards as navigable items with metadata
+        items = []
+        for card in response["cards"]:
+            items.append({
+                "type": "card",
+                "intent_name": intent.name,
+                "data": card,
+            })
+        
+        # Store with index 0 (showing first item)
+        self._navigation_state[session_id] = (items, 0)
+    
+    def _build_item_response(
+        self,
+        item: dict[str, Any],
+        index: int,
+        total: int,
+        profile_config: ProfileConfig,
+    ) -> dict[str, Any]:
+        """Build a response for a single navigation item.
+        
+        Args:
+            item: Item data dict
+            index: Current item index (0-based)
+            total: Total number of items
+            profile_config: User's profile configuration
+            
+        Returns:
+            Response dict
+        """
+        intent_name = item.get("intent_name", "unknown")
+        card_data = item.get("data", {})
+        
+        # Build spoken text based on profile
+        if profile_config.profile == Profile.WORKOUT:
+            spoken_text = f"Item {index + 1} of {total}: {card_data.get('title', 'Unknown')}."
+        else:
+            title = card_data.get("title", "Unknown")
+            subtitle = card_data.get("subtitle", "")
+            spoken_text = f"Item {index + 1} of {total}: {title}. {subtitle}"
+        
+        return {
+            "status": "ok",
+            "intent": {
+                "name": f"system.next.{intent_name}",
+                "confidence": 1.0,
+                "entities": {"index": index, "total": total},
+            },
+            "spoken_text": spoken_text,
+            "cards": [card_data],
+        }
         return self._last_responses[session_id]
 
     def _handle_confirm(

@@ -51,6 +51,11 @@ class IntentParser:
                 "system.repeat",
                 {},
             ),
+            (
+                re.compile(r"\b(next|next one)\b", re.IGNORECASE),
+                "system.next",
+                {},
+            ),
             (re.compile(r"\bcancel\b", re.IGNORECASE), "system.cancel", {}),
             (
                 re.compile(r"\b(confirm|confirmed)\b", re.IGNORECASE),

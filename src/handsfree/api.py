@@ -209,8 +209,22 @@ async def github_webhook(
 
 
 @app.post("/v1/command", response_model=CommandResponse)
-async def submit_command(request: CommandRequest) -> CommandResponse:
-    """Submit a hands-free command."""
+async def submit_command(
+    request: CommandRequest,
+    x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+) -> CommandResponse:
+    """Submit a hands-free command.
+    
+    Args:
+        request: Command request body
+        x_session_id: Optional session identifier from X-Session-Id header
+        
+    Returns:
+        CommandResponse with status, intent, spoken text, etc.
+    """
+    # Determine session ID: prefer header, fallback to idempotency_key
+    session_id = x_session_id or request.idempotency_key
+    
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -252,124 +266,117 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     router_response = router.route(
         intent=parsed_intent,
         profile=request.profile,
-        session_id=request.idempotency_key,  # Use idempotency key as session ID
+        session_id=session_id,  # Use session ID from header or idempotency key
         user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
-    # Convert router response to CommandResponse
-    response = _convert_router_response_to_command_response(
-        router_response, parsed_intent, text, request.profile
-    )
-    # Parse intent using IntentParser
-    parser = IntentParser()
-    parsed_intent_dc = parser.parse(text)
-
-    # Convert dataclass to Pydantic model
-    parsed_intent = PydanticParsedIntent(
-        name=parsed_intent_dc.name,
-        confidence=parsed_intent_dc.confidence,
-        entities=parsed_intent_dc.entities,
-    )
-
-    # Handle different intents
-    if parsed_intent.name == "inbox.list":
-        # Return inbox items
-        items = _get_fixture_inbox_items()
-        cards = [
-            UICard(
-                title=item.title,
-                subtitle=f"{item.type.value} - Priority {item.priority}",
-                lines=[item.summary] if item.summary else [],
-                deep_link=item.url,
-            )
-            for item in items[:3]  # Limit to top 3
-        ]
-
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text=f"You have {len(items)} items in your inbox. "
-            f"Top priority: {items[0].title if items else 'none'}.",
-            cards=cards,
-            debug=DebugInfo(transcript=text),
-        )
-    elif parsed_intent.name == "pr.summarize":
-        # Extract PR number
-        pr_number = parsed_intent.entities.get("pr_number")
-
-        if pr_number:
-            # Create a pending action requiring confirmation
-            token = str(uuid.uuid4())
-            expires_at = datetime.now(UTC) + timedelta(minutes=5)
-
-            # Store pending action in memory
-            pending_actions_memory[token] = {
-                "action": "summarize_pr",
-                "pr_number": pr_number,
-                "expires_at": expires_at,
-            }
-
-            response = CommandResponse(
-                status=CommandStatus.NEEDS_CONFIRMATION,
-                intent=parsed_intent,
-                spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
-                pending_action=PydanticPendingAction(
-                    token=token,
-                    expires_at=expires_at,
-                    summary=f"Fetch and summarize PR #{pr_number}",
-                ),
-                debug=DebugInfo(transcript=text),
-            )
-        else:
-            response = CommandResponse(
-                status=CommandStatus.ERROR,
-                intent=parsed_intent,
-                spoken_text="I couldn't find a PR number in your request.",
-                debug=DebugInfo(transcript=text),
-            )
-    elif parsed_intent.name == "pr.request_review":
-        # Handle request review with policy evaluation
-        response = await _handle_request_review_command(
-            parsed_intent, text, request.idempotency_key
-        )
-    elif parsed_intent.name == "agent.delegate":
-        # Handle agent.delegate intent
-        response = _handle_agent_delegate(text, request.client_context.device)
-    elif parsed_intent.name == "agent.status":
-        # Handle agent.status intent
-        response = _handle_agent_status(text, request.client_context.device)
-    elif parsed_intent.name == "pr.merge":
-        response = CommandResponse(
-            status=CommandStatus.ERROR,
-            intent=parsed_intent,
-            spoken_text=(
-                "Merge actions require strict policy gates. This feature is coming in PR-007."
-            ),
-            debug=DebugInfo(transcript=text),
-        )
-    elif parsed_intent.name == "unknown":
-        # Unknown command
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text="I didn't understand that command. Try 'inbox' or 'summarize PR <number>'.",
-            debug=DebugInfo(transcript=text),
-        )
+    # For system commands (repeat, next), router returns complete response
+    # Don't re-apply fixture handlers - just convert directly
+    if parsed_intent.name.startswith("system."):
+        response = _convert_router_response_direct(router_response, text)
     else:
-        # Other intents - return a generic response
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text="I recognized that command but it's not fully implemented yet.",
-            debug=DebugInfo(transcript=text),
+        # Convert router response to CommandResponse
+        response = _convert_router_response_to_command_response(
+            router_response, parsed_intent, text, request.profile
         )
+        
+        # For non-system commands, update the router's stored response with the enhanced version
+        # This ensures system.repeat returns the full enriched response
+        if session_id:
+            router = get_command_router()
+            # Store the enhanced response as a dict for the router's session state
+            enhanced_dict = {
+                "status": response.status.value,
+                "intent": {
+                    "name": response.intent.name,
+                    "confidence": response.intent.confidence,
+                    "entities": response.intent.entities,
+                },
+                "spoken_text": response.spoken_text,
+                "cards": [card.model_dump() for card in response.cards] if response.cards else [],
+            }
+            if response.pending_action:
+                enhanced_dict["pending_action"] = {
+                    "token": response.pending_action.token,
+                    "expires_at": response.pending_action.expires_at.isoformat(),
+                    "summary": response.pending_action.summary,
+                }
+            router._last_responses[session_id] = enhanced_dict
+            
+            # Also update navigation state with enhanced cards
+            if response.cards:
+                items = []
+                for card in response.cards:
+                    items.append({
+                        "type": "card",
+                        "intent_name": parsed_intent.name,
+                        "data": card.model_dump(),
+                    })
+                router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
     if request.idempotency_key:
         processed_commands[request.idempotency_key] = response
 
     return response
+
+
+def _convert_router_response_direct(
+    router_response: dict[str, Any],
+    transcript: str,
+) -> CommandResponse:
+    """Convert router response dict directly to CommandResponse without re-applying handlers.
+    
+    Used for system commands where router returns complete response that shouldn't be modified.
+    
+    Args:
+        router_response: Response dict from CommandRouter
+        transcript: Original text transcript
+        
+    Returns:
+        CommandResponse object
+    """
+    # Extract basic fields
+    status_str = router_response.get("status", "ok")
+    status = CommandStatus(status_str)
+    
+    # Get intent from response
+    intent_dict = router_response.get("intent", {})
+    intent = ParsedIntent(
+        name=intent_dict.get("name", "unknown"),
+        confidence=intent_dict.get("confidence", 1.0),
+        entities=intent_dict.get("entities", {}),
+    )
+    
+    spoken_text = router_response.get("spoken_text", "")
+    
+    # Get cards if present
+    cards: list[UICard] = []
+    if "cards" in router_response and router_response["cards"]:
+        cards = [UICard(**card) for card in router_response["cards"]]
+    
+    # Handle pending action
+    pending_action = None
+    if "pending_action" in router_response and router_response["pending_action"]:
+        pa = router_response["pending_action"]
+        pending_action = PydanticPendingAction(
+            token=pa["token"],
+            expires_at=datetime.fromisoformat(pa["expires_at"]) if isinstance(pa["expires_at"], str) else pa["expires_at"],
+            summary=pa["summary"],
+        )
+    
+    # Build debug info
+    debug = DebugInfo(transcript=transcript)
+    
+    return CommandResponse(
+        status=status,
+        intent=intent,
+        spoken_text=spoken_text,
+        cards=cards,
+        pending_action=pending_action,
+        debug=debug,
+    )
 
 
 def _convert_router_response_to_command_response(
@@ -1247,9 +1254,9 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 "needs_input": "⏸️",
                 "completed": "✅",
                 "failed": "❌",
-            }.get(task_info["state"], "❓")
+            }.get(task["state"], "❓")
 
-            instruction = task_info.get("instruction")
+            instruction = task.get("instruction")
             if instruction and len(instruction) > 60:
                 instruction_display = instruction[:60] + "..."
             else:
@@ -1257,8 +1264,8 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
 
             cards.append(
                 UICard(
-                    title=f"{state_emoji} Task {task_info['id'][:8]}",
-                    subtitle=f"{task_info['state']} • {task_info.get('provider', 'unknown')}",
+                    title=f"{state_emoji} Task {task['id'][:8]}",
+                    subtitle=f"{task['state']} • {task.get('provider', 'unknown')}",
                     lines=[
                         f"Instruction: {instruction_display}",
                     ],
