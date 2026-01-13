@@ -91,7 +91,9 @@ class TestMockAgentRunner:
         """Test advancing task state."""
         runner = MockAgentRunner()
 
-        runner.register_task(task_id="task-123", instruction="test", target_type=None, target_ref=None)
+        runner.register_task(
+            task_id="task-123", instruction="test", target_type=None, target_ref=None
+        )
 
         success = runner.advance_task("task-123", "running", {"action": "started"})
 
@@ -105,7 +107,9 @@ class TestMockAgentRunner:
         """Test advancing through multiple steps."""
         runner = MockAgentRunner()
 
-        runner.register_task(task_id="task-123", instruction="test", target_type=None, target_ref=None)
+        runner.register_task(
+            task_id="task-123", instruction="test", target_type=None, target_ref=None
+        )
         runner.advance_task("task-123", "running", {"step": 1})
         runner.advance_task("task-123", "processing", {"step": 2})
         runner.advance_task("task-123", "completed", {"step": 3})
@@ -126,8 +130,12 @@ class TestMockAgentRunner:
         """Test clearing all tasks."""
         runner = MockAgentRunner()
 
-        runner.register_task(task_id="task-1", instruction="test1", target_type=None, target_ref=None)
-        runner.register_task(task_id="task-2", instruction="test2", target_type=None, target_ref=None)
+        runner.register_task(
+            task_id="task-1", instruction="test1", target_type=None, target_ref=None
+        )
+        runner.register_task(
+            task_id="task-2", instruction="test2", target_type=None, target_ref=None
+        )
 
         runner.clear()
 
@@ -142,7 +150,9 @@ class TestMockAgentRunner:
         assert runner1 is runner2
 
         # Register a task in runner1
-        runner1.register_task(task_id="shared-task", instruction="test", target_type=None, target_ref=None)
+        runner1.register_task(
+            task_id="shared-task", instruction="test", target_type=None, target_ref=None
+        )
 
         # Should be visible in runner2
         info = runner2.get_task_info("shared-task")
@@ -179,9 +189,7 @@ class TestMockProvider:
         runner.clear()
         provider = MockProvider(runner)
 
-        provider.invoke(
-            task_id="test-123", instruction="test", target_type=None, target_ref=None
-        )
+        provider.invoke(task_id="test-123", instruction="test", target_type=None, target_ref=None)
 
         status = provider.get_status("test-123")
 

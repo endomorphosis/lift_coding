@@ -34,11 +34,12 @@ class CommandRouter:
         self.db_conn = db_conn
         # Session state for system.repeat - maps session_id to last response
         self._last_responses: dict[str, dict[str, Any]] = {}
-        
+
         # Initialize agent service if DB is available
         self._agent_service = None
         if db_conn:
             from handsfree.agents.service import AgentService
+
             self._agent_service = AgentService(db_conn)
 
     def route(
@@ -258,13 +259,13 @@ class CommandRouter:
                     "intent": intent.to_dict(),
                     "spoken_text": "Agent service not available.",
                 }
-            
+
             # Extract entities
             instruction = intent.entities.get("instruction", "handle this")
             issue_num = intent.entities.get("issue_number")
             pr_num = intent.entities.get("pr_number")
             provider = intent.entities.get("provider", "copilot")
-            
+
             target_type = None
             target_ref = None
             if issue_num:
@@ -273,7 +274,7 @@ class CommandRouter:
             elif pr_num:
                 target_type = "pr"
                 target_ref = f"#{pr_num}"
-            
+
             # Create task (user_id would come from context in real implementation)
             result = self._agent_service.delegate(
                 user_id="default-user",  # Placeholder
@@ -282,15 +283,15 @@ class CommandRouter:
                 target_type=target_type,
                 target_ref=target_ref,
             )
-            
+
             spoken_text = result.get("spoken_text", "Agent task created.")
-            
+
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
                 "spoken_text": spoken_text,
             }
-            
+
         elif intent.name == "agent.progress":
             if not self._agent_service:
                 spoken_text = "Agent service not available."
@@ -298,7 +299,7 @@ class CommandRouter:
                 # Get status (user_id would come from context in real implementation)
                 result = self._agent_service.get_status(user_id="default-user")
                 spoken_text = result.get("spoken_text", "No agent tasks.")
-            
+
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),

@@ -11,7 +11,6 @@ from typing import Any
 
 import duckdb
 
-
 # Valid state transitions
 VALID_TRANSITIONS = {
     "created": ["running", "failed"],
@@ -79,10 +78,12 @@ def create_agent_task(
     task_id = str(uuid.uuid4())
     now = datetime.now(UTC)
     state = "created"
-    
+
     # Convert user_id to UUID if it's not already one
     try:
-        user_uuid = uuid.UUID(user_id) if '-' in user_id else uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+        user_uuid = (
+            uuid.UUID(user_id) if "-" in user_id else uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+        )
     except (ValueError, AttributeError):
         # If conversion fails, generate a UUID from the string
         user_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
@@ -181,7 +182,7 @@ def update_agent_task_state(
     updated_trace = task.trace or {}
     if trace_update:
         updated_trace.update(trace_update)
-    
+
     try:
         task_uuid = uuid.UUID(task_id)
     except ValueError:
@@ -227,7 +228,7 @@ def get_agent_task_by_id(
         task_uuid = uuid.UUID(task_id)
     except ValueError:
         return None
-        
+
     result = conn.execute(
         """
         SELECT id, user_id, provider, repo_full_name, issue_number, pr_number,
@@ -301,7 +302,9 @@ def get_agent_tasks(
     if user_id:
         # Convert user_id to UUID
         try:
-            user_uuid = uuid.UUID(user_id) if '-' in user_id else uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+            user_uuid = (
+                uuid.UUID(user_id) if "-" in user_id else uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+            )
         except (ValueError, AttributeError):
             user_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
         query += " AND user_id = ?"

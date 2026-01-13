@@ -7,7 +7,6 @@ from typing import Any
 
 import duckdb
 
-from handsfree.agents import get_provider
 from handsfree.db.agent_tasks import (
     create_agent_task,
     get_agent_tasks,

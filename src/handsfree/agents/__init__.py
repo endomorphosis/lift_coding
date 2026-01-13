@@ -151,7 +151,9 @@ class MockAgentRunner:
             "steps": [],
         }
 
-    def advance_task(self, task_id: str, new_state: str, step_info: dict[str, Any] | None = None) -> bool:
+    def advance_task(
+        self, task_id: str, new_state: str, step_info: dict[str, Any] | None = None
+    ) -> bool:
         """Explicitly advance task to a new state.
 
         Args:
@@ -256,8 +258,7 @@ def get_provider(provider_name: str) -> AgentProvider:
     provider = providers.get(provider_name.lower())
     if not provider:
         raise ValueError(
-            f"Unknown provider: {provider_name}. "
-            f"Valid providers: {', '.join(providers.keys())}"
+            f"Unknown provider: {provider_name}. Valid providers: {', '.join(providers.keys())}"
         )
 
     return provider

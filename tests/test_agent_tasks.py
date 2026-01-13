@@ -124,9 +124,15 @@ class TestAgentTaskRetrieval:
 
     def test_get_tasks_by_user(self, db_conn, test_user_id, test_user_id_2):
         """Test querying tasks by user."""
-        create_agent_task(conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1")
-        create_agent_task(conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2")
-        create_agent_task(conn=db_conn, user_id=test_user_id_2, provider="copilot", instruction="task 3")
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id_2, provider="copilot", instruction="task 3"
+        )
 
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
 
@@ -135,9 +141,15 @@ class TestAgentTaskRetrieval:
 
     def test_get_tasks_by_provider(self, db_conn, test_user_id):
         """Test querying tasks by provider."""
-        create_agent_task(conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1")
-        create_agent_task(conn=db_conn, user_id=test_user_id, provider="custom", instruction="task 2")
-        create_agent_task(conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 3")
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="custom", instruction="task 2"
+        )
+        create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 3"
+        )
 
         tasks = get_agent_tasks(conn=db_conn, provider="copilot")
 
