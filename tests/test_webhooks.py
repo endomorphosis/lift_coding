@@ -16,8 +16,11 @@ from handsfree.webhooks import normalize_github_event
 def reset_webhook_store():
     """Reset webhook store before each test."""
     # Clean up DB-backed store
-    with get_connection() as conn:
-        conn.execute("DELETE FROM webhook_events")
+    from handsfree.db import init_db
+    
+    conn = init_db()
+    conn.execute("DELETE FROM webhook_events")
+    conn.close()
 
 
 @pytest.fixture
@@ -305,7 +308,7 @@ class TestDatabaseBackedStore:
             },
         )
         assert response2.status_code == 400
-        assert "Duplicate delivery ID" in response2.json()["detail"]
+        assert "Duplicate delivery ID" in response2.json()["message"]
 
     def test_db_list_events(self, client):
         """Test that list_events retrieves events from database."""
