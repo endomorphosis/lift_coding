@@ -200,19 +200,24 @@ class TestAdvanceTaskState:
 
 
 class TestNotifications:
-    """Test notification emission (placeholder)."""
+    """Test notification emission."""
 
-    def test_notification_on_task_creation(self, agent_service, capsys, test_user_id):
-        """Test that notification is emitted on task creation."""
+    def test_notification_on_task_creation(self, agent_service, db_conn, test_user_id):
+        """Test that notification is persisted on task creation."""
+        from handsfree.db.notifications import list_notifications
+
         agent_service.delegate(user_id=test_user_id, instruction="test", provider="mock")
 
-        # Capture stdout to verify notification was logged
-        captured = capsys.readouterr()
-        assert "NOTIFICATION" in captured.out
-        assert "task_created" in captured.out
+        # Verify notification was created in database
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        assert len(notifications) >= 1
+        task_created_notifs = [n for n in notifications if n.event_type == "task_created"]
+        assert len(task_created_notifs) >= 1
 
-    def test_notification_on_state_change(self, agent_service, capsys, test_user_id):
-        """Test that notification is emitted on state change."""
+    def test_notification_on_state_change(self, agent_service, db_conn, test_user_id):
+        """Test that notification is persisted on state change."""
+        from handsfree.db.notifications import list_notifications
+
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="test", provider="mock"
         )
@@ -220,6 +225,7 @@ class TestNotifications:
 
         agent_service.advance_task_state(task_id, "running")
 
-        captured = capsys.readouterr()
-        assert "NOTIFICATION" in captured.out
-        assert "state_changed" in captured.out
+        # Verify notification was created in database
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        state_change_notifs = [n for n in notifications if n.event_type == "state_changed"]
+        assert len(state_change_notifs) >= 1

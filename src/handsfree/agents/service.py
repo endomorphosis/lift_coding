@@ -12,6 +12,7 @@ from handsfree.db.agent_tasks import (
     get_agent_tasks,
     update_agent_task_state,
 )
+from handsfree.db.notifications import create_notification
 
 
 class AgentService:
@@ -180,14 +181,9 @@ class AgentService:
         task_id: str,
         message: str,
     ) -> None:
-        """Emit a user-facing notification (placeholder).
+        """Emit a user-facing notification.
 
-        In a real implementation, this would:
-        - Write to a notifications table
-        - Send push notifications
-        - Update UI state
-
-        For now, just log to console.
+        Persists notification to the database for poll-based retrieval.
 
         Args:
             user_id: User to notify.
@@ -195,5 +191,11 @@ class AgentService:
             task_id: Related task ID.
             message: Notification message.
         """
-        # Placeholder: just log for now
-        print(f"[NOTIFICATION] user={user_id} event={event} task={task_id} msg={message}")
+        # Write notification to database
+        create_notification(
+            conn=self.conn,
+            user_id=user_id,
+            event_type=event,
+            message=message,
+            metadata={"task_id": task_id},
+        )
