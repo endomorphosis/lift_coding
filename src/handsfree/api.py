@@ -705,7 +705,9 @@ async def _handle_request_review_command(
             )
         except ValueError:
             # Idempotency key already used - this is a retry
-            pass
+            logger.debug(
+                "Idempotency key %s already used for rate limit audit log", idempotency_key
+            )
 
         return CommandResponse(
             status=CommandStatus.ERROR,
@@ -738,7 +740,10 @@ async def _handle_request_review_command(
             )
         except ValueError:
             # Idempotency key already used
-            pass
+            logger.debug(
+                "Idempotency key %s already used for policy denial audit log",
+                idempotency_key,
+            )
 
         return CommandResponse(
             status=CommandStatus.ERROR,

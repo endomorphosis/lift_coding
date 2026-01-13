@@ -22,6 +22,22 @@ class ParsedIntent:
         }
 
 
+def _parse_reviewers(text: str) -> list[str]:
+    """Parse reviewer names from text, handling comma and space separation.
+
+    Args:
+        text: Text containing reviewer names, e.g., "alice, bob" or "alice bob"
+
+    Returns:
+        List of reviewer names
+    """
+    # If text contains commas or "and", use those as separators
+    if "," in text or " and " in text.lower():
+        return [r.strip() for r in text.replace(" and ", ",").split(",") if r.strip()]
+    # Otherwise, split by spaces
+    return [r.strip() for r in text.split() if r.strip()]
+
+
 class IntentParser:
     """Parse text transcripts into structured intents using pattern matching."""
 
@@ -147,15 +163,7 @@ class IntentParser:
                 ),
                 "pr.request_review",
                 {
-                    "reviewers": lambda m: (
-                        [
-                            r.strip()
-                            for r in m.group(1).replace(" and ", ",").split(",")
-                            if r.strip()
-                        ]
-                        if "," in m.group(1) or " and " in m.group(1).lower()
-                        else [r.strip() for r in m.group(1).split() if r.strip()]
-                    ),
+                    "reviewers": lambda m: _parse_reviewers(m.group(1)),
                     "pr_number": lambda m: int(m.group(2)),
                 },
             ),
