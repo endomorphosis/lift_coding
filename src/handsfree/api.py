@@ -24,7 +24,7 @@ from handsfree.db.pending_actions import (
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import get_db_webhook_store
+from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -49,10 +49,8 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
-    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
-    WebhookStore,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -74,8 +72,8 @@ pending_actions: dict[str, dict[str, Any]] = {}
 processed_commands: dict[str, CommandResponse] = {}
 idempotency_store: dict[str, ActionResult] = {}
 
-# Webhook store
-_webhook_store = WebhookStore()
+# Webhook store (DB-backed, initialized lazily)
+_webhook_store = None
 
 # Fixture user ID for development/testing
 FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
@@ -104,8 +102,12 @@ def get_command_router() -> CommandRouter:
     return _command_router
 
 
-def get_db_webhook_store() -> WebhookStore:
-    """Get the webhook store instance."""
+def get_db_webhook_store() -> DBWebhookStore:
+    """Get the DB-backed webhook store instance."""
+    global _webhook_store
+    if _webhook_store is None:
+        db = get_db()
+        _webhook_store = DBWebhookStore(db)
     return _webhook_store
 
 
@@ -142,7 +144,7 @@ async def github_webhook(
     Raises:
         400 Bad Request if signature invalid or duplicate delivery
     """
-    store = get_webhook_store()
+    store = get_db_webhook_store()
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):
