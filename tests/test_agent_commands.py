@@ -211,6 +211,7 @@ class TestAgentConfirmationFlow:
 
         # Check if it was parsed as agent.delegate
         if intent.name == "agent.delegate":
-            response = router.route(intent, Profile.DEFAULT)
+            # Use WORKOUT profile which requires confirmation
+            response = router.route(intent, Profile.WORKOUT)
             assert response["status"] == "needs_confirmation"
             assert "pending_action" in response
