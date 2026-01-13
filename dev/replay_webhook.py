@@ -124,7 +124,8 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
     
     db.close()
     print(f"\nReplayed {success_count}/{len(events)} events successfully")
-    return 0 if success_count > 0 else 1
+    # Return 0 only if all events succeeded, 1 otherwise
+    return 0 if success_count == len(events) else 1
 
 
 def main():
