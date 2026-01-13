@@ -80,7 +80,10 @@ class TestAgentDelegate:
 
         assert response["status"] == "ok"
         # Should mention task creation
-        assert "task created" in response["spoken_text"].lower() or "pr" in response["spoken_text"].lower()
+        assert (
+            "task created" in response["spoken_text"].lower()
+            or "pr" in response["spoken_text"].lower()
+        )
 
     def test_delegate_without_db_fails(self, router_no_db, parser):
         """Test that delegation fails without database."""
@@ -108,6 +111,7 @@ class TestAgentStatus:
         """Test status with existing tasks."""
         # First create a task using the agent service directly
         from handsfree.agents.service import AgentService
+
         service = AgentService(db_conn)
         service.delegate(user_id="default-user", instruction="test", provider="mock")
 

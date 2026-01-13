@@ -42,9 +42,9 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
+    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
-    get_webhook_store,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -684,7 +684,6 @@ def _handle_agent_delegate(text: str, device: str) -> CommandResponse:
         )
 
         task_id = result["task_id"]
-        spoken_text = result["spoken_text"]
 
         # Build entity response
         target_description = ""
