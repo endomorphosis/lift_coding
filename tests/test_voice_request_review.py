@@ -23,8 +23,10 @@ def reset_db():
     import handsfree.api as api_module
 
     api_module._db_conn = None
+    api_module._command_router = None  # Also reset the router so it gets new db_conn
     yield
     api_module._db_conn = None
+    api_module._command_router = None
 
 
 client = TestClient(app)

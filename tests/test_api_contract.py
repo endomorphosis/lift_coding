@@ -330,8 +330,8 @@ def test_agent_status_via_router() -> None:
     assert response.status_code == 200
     data = response.json()
 
-    # Intent parser should recognize this as agent.progress
-    assert data["intent"]["name"] == "agent.progress"
+    # Intent parser should recognize this as agent.status
+    assert data["intent"]["name"] == "agent.status"
     assert data["status"] == "ok"
 
 
