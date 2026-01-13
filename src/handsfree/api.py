@@ -4,8 +4,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 """
 
 import logging
-import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
@@ -101,11 +100,6 @@ def get_command_router() -> CommandRouter:
         db = get_db()
         _command_router = CommandRouter(_pending_action_manager, db_conn=db)
     return _command_router
-
-
-def get_db_webhook_store() -> WebhookStore:
-    """Get the webhook store instance."""
-    return _webhook_store
 
 
 # Test user ID for MVP (in production this would come from auth)
@@ -207,9 +201,6 @@ async def github_webhook(
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(request: CommandRequest) -> CommandResponse:
     """Submit a hands-free command."""
-    from handsfree.commands.intent_parser import IntentParser
-    from handsfree.models import ParsedIntent as PydanticParsedIntent
-
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -221,7 +212,7 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
         # Audio input - return error for now
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=PydanticParsedIntent(name="error.unsupported", confidence=1.0),
+            intent=ParsedIntent(name="error.unsupported", confidence=1.0),
             spoken_text="Audio input is not yet supported in this version.",
             debug=DebugInfo(transcript="<audio input>"),
         )
@@ -229,7 +220,24 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     # Parse intent using the intent parser
     parsed_intent = _intent_parser.parse(text)
 
-    # Route through CommandRouter
+    # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
+    # This bypasses the router because these intents require database operations and policy checks
+    if parsed_intent.name == "pr.request_review":
+        # Convert dataclass intent to Pydantic model for the handler
+        pydantic_intent = ParsedIntent(
+            name=parsed_intent.name,
+            confidence=parsed_intent.confidence,
+            entities=parsed_intent.entities,
+        )
+        response = await _handle_request_review_command(
+            pydantic_intent, text, request.idempotency_key
+        )
+        # Store for idempotency
+        if request.idempotency_key:
+            processed_commands[request.idempotency_key] = response
+        return response
+
+    # Route through CommandRouter for other intents
     router = get_command_router()
     router_response = router.route(
         intent=parsed_intent,
@@ -1197,9 +1205,32 @@ def _handle_agent_status(text: str, device: str) -> CommandResponse:
                 debug=DebugInfo(transcript=text),
             )
 
+        # Count by state
+        state_counts = {}
+        for task in tasks:
+            state_counts[task["state"]] = state_counts.get(task["state"], 0) + 1
+
+        # Build spoken response
+        parts = []
+        if state_counts.get("running"):
+            parts.append(f"{state_counts['running']} running")
+        if state_counts.get("needs_input"):
+            parts.append(f"{state_counts['needs_input']} waiting for input")
+        if state_counts.get("completed"):
+            parts.append(f"{state_counts['completed']} completed")
+        if state_counts.get("failed"):
+            parts.append(f"{state_counts['failed']} failed")
+        if state_counts.get("created"):
+            parts.append(f"{state_counts['created']} created")
+
+        spoken_text = (
+            f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: "
+            f"{', '.join(parts)}."
+        )
+
         # Build cards for recent tasks
         cards = []
-        for task_info in tasks[:5]:  # Show top 5 most recent
+        for task in tasks[:5]:  # Show top 5 most recent
             state_emoji = {
                 "created": "⏱️",
                 "running": "⚙️",
