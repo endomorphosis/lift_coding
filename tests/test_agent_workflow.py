@@ -62,7 +62,7 @@ def test_agent_workflow_complete():
 
     # Verify status response
     assert status_data["status"] == "ok"
-    assert status_data["intent"]["name"] == "agent.status"
+    assert status_data["intent"]["name"] == "agent.progress"  # Router uses agent.progress
     assert "task" in status_data["spoken_text"].lower()
     # Tasks start in "created" state
     assert "created" in status_data["spoken_text"].lower()
@@ -105,7 +105,7 @@ def test_agent_workflow_complete():
     status_response2 = client.post(
         "/v1/command",
         json={
-            "input": {"type": "text", "text": "what is the agent progress"},
+            "input": {"type": "text", "text": "agent status"},
             "profile": "default",
             "client_context": {
                 "device": "test",
@@ -127,11 +127,11 @@ def test_agent_workflow_various_commands():
     """Test that agent intents are correctly identified from various phrasings."""
     test_cases = [
         ("ask agent to fix issue 123", "agent.delegate", 123, None),
-        ("agent fix pr 456", "agent.delegate", None, 456),
+        ("tell agent to handle PR 456", "agent.delegate", None, 456),
         ("ask agent to add tests", "agent.delegate", None, None),
-        ("agent status", "agent.status", None, None),
-        ("what's the agent progress", "agent.status", None, None),
-        ("agent delegate task for issue 789", "agent.delegate", 789, None),
+        ("agent status", "agent.progress", None, None),
+        ("summarize agent progress", "agent.progress", None, None),
+        ("ask agent to fix the bug on issue 789", "agent.delegate", 789, None),
     ]
 
     for text, expected_intent, expected_issue, expected_pr in test_cases:

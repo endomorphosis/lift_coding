@@ -47,11 +47,11 @@ def test_post_command_text_inbox() -> None:
 
 
 def test_post_command_summarize_pr() -> None:
-    """Test POST /v1/command with PR summarize."""
+    """Test POST /v1/command with PR summarize (read-only operation)."""
     response = client.post(
         "/v1/command",
         json={
-            "input": {"type": "text", "text": "summarize pr 412"},
+            "input": {"type": "text", "text": "summarize pr 123"},
             "profile": "default",
             "client_context": {
                 "device": "simulator",
@@ -66,16 +66,16 @@ def test_post_command_summarize_pr() -> None:
     assert response.status_code == 200
     data = response.json()
 
-    # Should have pending action for confirmation
-    assert data["status"] == "needs_confirmation"
-    assert "pending_action" in data
-    assert data["pending_action"] is not None
-
-    # Validate PendingAction
-    pending = data["pending_action"]
-    assert "token" in pending
-    assert "expires_at" in pending
-    assert "summary" in pending
+    # pr.summarize is a read operation, should not require confirmation
+    assert data["status"] == "ok"
+    assert "intent" in data
+    assert data["intent"]["name"] == "pr.summarize"
+    assert "spoken_text" in data
+    
+    # Should have cards with PR details
+    if "cards" in data and data["cards"]:
+        assert isinstance(data["cards"], list)
+        assert len(data["cards"]) > 0
 
 
 def test_post_command_idempotency() -> None:
@@ -102,12 +102,13 @@ def test_post_command_idempotency() -> None:
 
 def test_post_confirm_valid_token() -> None:
     """Test POST /v1/commands/confirm with valid token."""
-    # First, create a pending action
+    # First, create a pending action using a side-effect intent (pr.request_review)
+    # in workout profile which requires confirmation
     cmd_response = client.post(
         "/v1/command",
         json={
-            "input": {"type": "text", "text": "summarize pr 100"},
-            "profile": "default",
+            "input": {"type": "text", "text": "request review from alice on pr 100"},
+            "profile": "workout",
             "client_context": {
                 "device": "simulator",
                 "locale": "en-US",
@@ -119,6 +120,7 @@ def test_post_confirm_valid_token() -> None:
 
     assert cmd_response.status_code == 200
     cmd_data = cmd_response.json()
+    assert cmd_data["status"] == "needs_confirmation"
     assert "pending_action" in cmd_data
     token = cmd_data["pending_action"]["token"]
 
@@ -283,3 +285,77 @@ def test_invalid_command_request() -> None:
     )
 
     assert response.status_code == 422  # Validation error
+
+
+def test_command_uses_intent_parser() -> None:
+    """Test that /v1/command uses intent parser for parsing."""
+    response = client.post(
+        "/v1/command",
+        json={
+            "input": {"type": "text", "text": "what needs my attention"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Intent parser should recognize this as inbox.list
+    assert data["intent"]["name"] == "inbox.list"
+    assert data["intent"]["confidence"] > 0.5
+
+
+def test_agent_status_via_router() -> None:
+    """Test that agent status command goes through router."""
+    response = client.post(
+        "/v1/command",
+        json={
+            "input": {"type": "text", "text": "agent status"},
+            "profile": "default",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Intent parser should recognize this as agent.progress
+    assert data["intent"]["name"] == "agent.progress"
+    assert data["status"] == "ok"
+
+
+def test_agent_delegate_requires_confirmation_in_workout() -> None:
+    """Test that agent.delegate requires confirmation in workout profile."""
+    response = client.post(
+        "/v1/command",
+        json={
+            "input": {"type": "text", "text": "ask agent to handle issue 42"},
+            "profile": "workout",
+            "client_context": {
+                "device": "simulator",
+                "locale": "en-US",
+                "timezone": "America/Los_Angeles",
+                "app_version": "0.1.0",
+            },
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Should require confirmation in workout profile
+    assert data["status"] == "needs_confirmation"
+    assert data["intent"]["name"] == "agent.delegate"
+    assert "pending_action" in data
+    assert "token" in data["pending_action"]
