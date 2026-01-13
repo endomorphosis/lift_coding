@@ -264,7 +264,7 @@ async def submit_command(request: CommandRequest) -> CommandResponse:
     elif "agent" in text and ("delegate" in text or "ask" in text or "fix" in text):
         # Handle agent.delegate intent
         response = _handle_agent_delegate(text, request.client_context.device)
-    elif "agent" in text and ("status" in text or "progress" in text):
+    elif "agent" in text and ("status" in text or "progress" in text or "doing" in text):
         # Handle agent.status intent
         response = _handle_agent_status(text, request.client_context.device)
     elif "merge" in text:
