@@ -1,5 +1,6 @@
 """Integration tests for request-review action with policy and audit logging."""
 
+import re
 import uuid
 
 import pytest
@@ -7,6 +8,7 @@ from fastapi.testclient import TestClient
 
 from handsfree.api import app
 from handsfree.db.action_logs import get_action_logs
+from handsfree.db.pending_actions import create_pending_action
 from handsfree.db.repo_policies import create_or_update_repo_policy
 
 
@@ -280,8 +282,6 @@ def test_confirm_request_review_executes_once(reset_db):
     assert "token" in data["message"]
 
     # Extract token from message
-    import re
-
     match = re.search(r"token '([^']+)'", data["message"])
     assert match is not None
     token = match.group(1)
@@ -325,8 +325,6 @@ def test_confirm_request_review_retry_does_not_duplicate(reset_db):
     data = response.json()
 
     # Extract token
-    import re
-
     match = re.search(r"token '([^']+)'", data["message"])
     assert match is not None
     token = match.group(1)
@@ -382,7 +380,6 @@ def test_confirm_missing_token_returns_404(reset_db):
 def test_confirm_expired_token_returns_404(reset_db):
     """Test that confirming with an expired token returns 404."""
     from handsfree.api import get_db
-    from handsfree.db.pending_actions import create_pending_action
 
     db = get_db()
 
@@ -405,6 +402,6 @@ def test_confirm_expired_token_returns_404(reset_db):
     assert confirm_response.status_code == 404
     error_data = confirm_response.json()
     assert error_data["error"] == "not_found"
-    assert (
-        "not found" in error_data["message"].lower() or "expired" in error_data["message"].lower()
-    )
+    # Should contain either "not found" or "expired" in the error message
+    message_lower = error_data["message"].lower()
+    assert "not found" in message_lower or "expired" in message_lower

@@ -240,9 +240,7 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
     # Execute the action based on type
     if action_type == "summarize_pr":
         # Handle memory-based summarize_pr action
-        pr_number = (
-            action_payload["pr_number"] if is_memory_action else action_payload.get("pr_number")
-        )
+        pr_number = action_payload.get("pr_number")
         response = CommandResponse(
             status=CommandStatus.OK,
             intent=ParsedIntent(
