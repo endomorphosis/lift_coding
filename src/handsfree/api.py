@@ -263,11 +263,16 @@ async def confirm_command(request: ConfirmRequest) -> CommandResponse:
         )
     elif action_type == "request_review":
         # Handle DB-backed request_review action with exactly-once semantics
-        # First, atomically delete the pending action to prevent retries
+        # Atomically delete the pending action to prevent duplicate execution.
+        # Note: get_pending_action already verified the action exists and is not expired,
+        # but between that check and this delete, another concurrent request could have
+        # consumed it, or it could have been cleaned up. The atomic delete with RETURNING
+        # ensures exactly-once execution - if the delete fails, the action is gone and
+        # we correctly return 404 to prevent re-execution.
         deleted = delete_pending_action(db, request.token)
 
         if not deleted:
-            # Action was already consumed - check audit log for the result
+            # Action was already consumed or cleaned up between the get and delete
             # This ensures idempotency even without an idempotency_key
             raise HTTPException(
                 status_code=404,
