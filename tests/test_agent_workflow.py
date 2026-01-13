@@ -62,7 +62,7 @@ def test_agent_workflow_complete():
 
     # Verify status response
     assert status_data["status"] == "ok"
-    assert status_data["intent"]["name"] == "agent.progress"  # Router uses agent.progress
+    assert status_data["intent"]["name"] == "agent.status"  # Router uses agent.status
     assert "task" in status_data["spoken_text"].lower()
     # Tasks start in "created" state
     assert "created" in status_data["spoken_text"].lower()
@@ -129,8 +129,8 @@ def test_agent_workflow_various_commands():
         ("ask agent to fix issue 123", "agent.delegate", 123, None),
         ("tell agent to handle PR 456", "agent.delegate", None, 456),
         ("ask agent to add tests", "agent.delegate", None, None),
-        ("agent status", "agent.progress", None, None),
-        ("summarize agent progress", "agent.progress", None, None),
+        ("agent status", "agent.status", None, None),
+        ("summarize agent progress", "agent.status", None, None),
         ("ask agent to fix the bug on issue 789", "agent.delegate", 789, None),
     ]
 

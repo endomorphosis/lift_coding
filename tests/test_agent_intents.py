@@ -110,8 +110,8 @@ def test_agent_status_no_tasks():
     data = response.json()
 
     assert data["status"] == "ok"
-    # Router uses "agent.progress" for status queries
-    assert data["intent"]["name"] == "agent.progress"
+    # Router uses "agent.status" for status queries
+    assert data["intent"]["name"] == "agent.status"
     # After previous tests, there might be tasks, so we just check the structure
     assert "task" in data["spoken_text"].lower() or "no agent" in data["spoken_text"].lower()
 
@@ -152,8 +152,8 @@ def test_agent_status_with_tasks():
     data = response.json()
 
     assert data["status"] == "ok"
-    # Router uses "agent.progress" for status queries
-    assert data["intent"]["name"] == "agent.progress"
+    # Router uses "agent.status" for status queries
+    assert data["intent"]["name"] == "agent.status"
     assert "task" in data["spoken_text"].lower()
 
 
@@ -177,8 +177,8 @@ def test_agent_progress_query():
     data = response.json()
 
     assert data["status"] == "ok"
-    # Router uses agent.progress for all status/progress queries
-    assert data["intent"]["name"] == "agent.progress"
+    # Router uses agent.status for all status/progress queries
+    assert data["intent"]["name"] == "agent.status"
 
 
 def test_agent_delegate_with_idempotency():
