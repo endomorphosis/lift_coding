@@ -144,19 +144,6 @@ class IntentParser:
                 },
             ),
             (
-                re.compile(r"\bask\s+([\w]+)\s+to\s+review\s+pr\s+(\d+)\b", re.IGNORECASE),
-                "pr.request_review",
-                {
-                    "reviewers": lambda m: [m.group(1)],
-                    "pr_number": lambda m: int(m.group(2)),
-                },
-            ),
-            (
-                re.compile(r"\bask\s+([\w]+)\s+to\s+review\b", re.IGNORECASE),
-                "pr.request_review",
-                {"reviewers": lambda m: [m.group(1)]},
-            ),
-            (
                 re.compile(
                     r"\brequest\s+reviewers?\s+([\w\s,]+?)\s+(?:for|on)\s+pr\s+(\d+)$",
                     re.IGNORECASE,
@@ -167,37 +154,7 @@ class IntentParser:
                     "pr_number": lambda m: int(m.group(2)),
                 },
             ),
-            # PR merge (side effect)
-            (
-                re.compile(r"\b(squash\s+)?merge\s+(pr\s+)?(\d+)\b", re.IGNORECASE),
-                "pr.merge",
-                {
-                    "pr_number": lambda m: int(m.group(3)),
-                    "merge_method": lambda m: "squash" if m.group(1) else "merge",
-                },
-            ),
-            (
-                re.compile(r"\bmerge\s+when\s+green\b", re.IGNORECASE),
-                "pr.merge",
-                {"merge_method": "squash", "auto": True},
-            ),
-            # Checks status
-            (
-                re.compile(r"\bchecks\s+for\s+pr\s+(\d+)\b", re.IGNORECASE),
-                "checks.status",
-                {"pr_number": lambda m: int(m.group(1))},
-            ),
-            (
-                re.compile(r"\bci\s+status\b", re.IGNORECASE),
-                "checks.status",
-                {},
-            ),
-            (
-                re.compile(r"\bwhat'?s\s+failing\s+on\s+([\w\-/]+)\b", re.IGNORECASE),
-                "checks.status",
-                {"repo": lambda m: m.group(1)},
-            ),
-            # Agent delegation
+            # Agent delegation (placed before less specific PR patterns to take precedence)
             (
                 re.compile(
                     r"\b(?:ask|have|tell)\s+(?:the\s+)?agent\s+(?:to\s+)?(.*?)\s+(?:on\s+)?(?:pr|pull\s+request)\s+(\d+)$",
@@ -242,6 +199,50 @@ class IntentParser:
                 {
                     "instruction": lambda m: m.group(1).strip(),
                 },
+            ),
+            # PR request review - less specific patterns after agent delegation
+            (
+                re.compile(r"\bask\s+([\w]+)\s+to\s+review\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "pr.request_review",
+                {
+                    "reviewers": lambda m: [m.group(1)],
+                    "pr_number": lambda m: int(m.group(2)),
+                },
+            ),
+            (
+                re.compile(r"\bask\s+([\w]+)\s+to\s+review\b", re.IGNORECASE),
+                "pr.request_review",
+                {"reviewers": lambda m: [m.group(1)]},
+            ),
+            # PR merge (side effect)
+            (
+                re.compile(r"\b(squash\s+)?merge\s+(pr\s+)?(\d+)\b", re.IGNORECASE),
+                "pr.merge",
+                {
+                    "pr_number": lambda m: int(m.group(3)),
+                    "merge_method": lambda m: "squash" if m.group(1) else "merge",
+                },
+            ),
+            (
+                re.compile(r"\bmerge\s+when\s+green\b", re.IGNORECASE),
+                "pr.merge",
+                {"merge_method": "squash", "auto": True},
+            ),
+            # Checks status
+            (
+                re.compile(r"\bchecks\s+for\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "checks.status",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(r"\bci\s+status\b", re.IGNORECASE),
+                "checks.status",
+                {},
+            ),
+            (
+                re.compile(r"\bwhat'?s\s+failing\s+on\s+([\w\-/]+)\b", re.IGNORECASE),
+                "checks.status",
+                {"repo": lambda m: m.group(1)},
             ),
             # Agent progress
             (
