@@ -4,11 +4,9 @@ Manages GitHub connection metadata (installation_id, token_ref, scopes).
 Does NOT store actual tokens - only references to secret manager.
 """
 
-import json
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from typing import Any
 
 import duckdb
 

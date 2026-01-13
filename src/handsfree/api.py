@@ -15,20 +15,20 @@ from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
-from handsfree.db.pending_actions import (
-    create_pending_action,
-    delete_pending_action,
-    get_pending_action,
-)
-from handsfree.github import GitHubProvider
-from handsfree.handlers.inbox import handle_inbox_list
-from handsfree.handlers.pr_summary import handle_pr_summarize
-from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.db.github_connections import (
     create_github_connection,
     get_github_connection,
     get_github_connections_by_user,
 )
+from handsfree.db.pending_actions import (
+    create_pending_action,
+    delete_pending_action,
+    get_pending_action,
+)
+from handsfree.db.webhook_events import DBWebhookStore
+from handsfree.github import GitHubProvider
+from handsfree.handlers.inbox import handle_inbox_list
+from handsfree.handlers.pr_summary import handle_pr_summarize
 from handsfree.models import (
     ActionResult,
     CommandRequest,
@@ -56,8 +56,6 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
 from handsfree.webhooks import (
-    WebhookStore,
-    get_webhook_store,
     normalize_github_event,
     verify_github_signature,
 )
@@ -303,109 +301,6 @@ async def submit_command(
     response = _convert_router_response_to_command_response(
         router_response, parsed_intent, text, request.profile, user_id
     )
-    # Parse intent using IntentParser
-    parser = IntentParser()
-    parsed_intent_dc = parser.parse(text)
-
-    # Convert dataclass to Pydantic model
-    parsed_intent = PydanticParsedIntent(
-        name=parsed_intent_dc.name,
-        confidence=parsed_intent_dc.confidence,
-        entities=parsed_intent_dc.entities,
-    )
-
-    # Handle different intents
-    if parsed_intent.name == "inbox.list":
-        # Return inbox items
-        items = _get_fixture_inbox_items()
-        cards = [
-            UICard(
-                title=item.title,
-                subtitle=f"{item.type.value} - Priority {item.priority}",
-                lines=[item.summary] if item.summary else [],
-                deep_link=item.url,
-            )
-            for item in items[:3]  # Limit to top 3
-        ]
-
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text=f"You have {len(items)} items in your inbox. "
-            f"Top priority: {items[0].title if items else 'none'}.",
-            cards=cards,
-            debug=DebugInfo(transcript=text),
-        )
-    elif parsed_intent.name == "pr.summarize":
-        # Extract PR number
-        pr_number = parsed_intent.entities.get("pr_number")
-
-        if pr_number:
-            # Create a pending action requiring confirmation
-            token = str(uuid.uuid4())
-            expires_at = datetime.now(UTC) + timedelta(minutes=5)
-
-            # Store pending action in memory
-            pending_actions_memory[token] = {
-                "action": "summarize_pr",
-                "pr_number": pr_number,
-                "expires_at": expires_at,
-            }
-
-            response = CommandResponse(
-                status=CommandStatus.NEEDS_CONFIRMATION,
-                intent=parsed_intent,
-                spoken_text=f"I found PR {pr_number}. Say 'confirm' to fetch the summary.",
-                pending_action=PydanticPendingAction(
-                    token=token,
-                    expires_at=expires_at,
-                    summary=f"Fetch and summarize PR #{pr_number}",
-                ),
-                debug=DebugInfo(transcript=text),
-            )
-        else:
-            response = CommandResponse(
-                status=CommandStatus.ERROR,
-                intent=parsed_intent,
-                spoken_text="I couldn't find a PR number in your request.",
-                debug=DebugInfo(transcript=text),
-            )
-    elif parsed_intent.name == "pr.request_review":
-        # Handle request review with policy evaluation
-        response = await _handle_request_review_command(
-            parsed_intent, text, request.idempotency_key
-        )
-    elif parsed_intent.name == "agent.delegate":
-        # Handle agent.delegate intent
-        response = _handle_agent_delegate(text, request.client_context.device)
-    elif parsed_intent.name == "agent.status":
-        # Handle agent.status intent
-        response = _handle_agent_status(text, request.client_context.device)
-    elif parsed_intent.name == "pr.merge":
-        response = CommandResponse(
-            status=CommandStatus.ERROR,
-            intent=parsed_intent,
-            spoken_text=(
-                "Merge actions require strict policy gates. This feature is coming in PR-007."
-            ),
-            debug=DebugInfo(transcript=text),
-        )
-    elif parsed_intent.name == "unknown":
-        # Unknown command
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text="I didn't understand that command. Try 'inbox' or 'summarize PR <number>'.",
-            debug=DebugInfo(transcript=text),
-        )
-    else:
-        # Other intents - return a generic response
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=parsed_intent,
-            spoken_text="I recognized that command but it's not fully implemented yet.",
-            debug=DebugInfo(transcript=text),
-        )
 
     # Store for idempotency
     if request.idempotency_key:
@@ -1315,9 +1210,9 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
                 "needs_input": "⏸️",
                 "completed": "✅",
                 "failed": "❌",
-            }.get(task_info["state"], "❓")
+            }.get(task["state"], "❓")
 
-            instruction = task_info.get("instruction")
+            instruction = task.get("instruction")
             if instruction and len(instruction) > 60:
                 instruction_display = instruction[:60] + "..."
             else:
@@ -1325,8 +1220,8 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
 
             cards.append(
                 UICard(
-                    title=f"{state_emoji} Task {task_info['id'][:8]}",
-                    subtitle=f"{task_info['state']} • {task_info.get('provider', 'unknown')}",
+                    title=f"{state_emoji} Task {task['id'][:8]}",
+                    subtitle=f"{task['state']} • {task.get('provider', 'unknown')}",
                     lines=[
                         f"Instruction: {instruction_display}",
                     ],

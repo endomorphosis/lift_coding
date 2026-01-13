@@ -99,19 +99,19 @@ class TestGitHubConnectionRetrieval:
     def test_get_connections_by_user(self, db_conn, test_user_id, test_user_id_2):
         """Test retrieving all connections for a user."""
         # Create connections for user 1
-        conn1 = create_github_connection(
+        create_github_connection(
             conn=db_conn,
             user_id=test_user_id,
             installation_id=11111,
         )
-        conn2 = create_github_connection(
+        create_github_connection(
             conn=db_conn,
             user_id=test_user_id,
             installation_id=22222,
         )
 
         # Create connection for user 2
-        conn3 = create_github_connection(
+        create_github_connection(
             conn=db_conn,
             user_id=test_user_id_2,
             installation_id=33333,
