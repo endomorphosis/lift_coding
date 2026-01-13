@@ -106,6 +106,28 @@ class TestPRIntents:
         assert result.entities["reviewers"] == ["charlie"]
         assert result.entities["pr_number"] == 55
 
+    def test_pr_request_review_ask_with_pr_number(self, parser: IntentParser) -> None:
+        """Test pr.request_review with 'ask X to review PR N' phrasing."""
+        result = parser.parse("ask bob to review PR 123")
+        assert result.name == "pr.request_review"
+        assert result.entities["reviewers"] == ["bob"]
+        assert result.entities["pr_number"] == 123
+
+    def test_pr_request_reviewers_for_pr(self, parser: IntentParser) -> None:
+        """Test pr.request_review with 'request reviewers X Y for PR N' phrasing."""
+        result = parser.parse("request reviewers alice bob for PR 789")
+        assert result.name == "pr.request_review"
+        assert "alice" in result.entities["reviewers"]
+        assert "bob" in result.entities["reviewers"]
+        assert result.entities["pr_number"] == 789
+
+    def test_pr_request_reviewer_single_for_pr(self, parser: IntentParser) -> None:
+        """Test pr.request_review with 'request reviewer X for PR N' phrasing."""
+        result = parser.parse("request reviewer alice for PR 456")
+        assert result.name == "pr.request_review"
+        assert result.entities["reviewers"] == ["alice"]
+        assert result.entities["pr_number"] == 456
+
     def test_pr_merge(self, parser: IntentParser) -> None:
         """Test pr.merge intent."""
         result = parser.parse("merge pr 412")
