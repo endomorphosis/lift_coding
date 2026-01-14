@@ -1,110 +1,104 @@
-"""GitHub authentication and token provider interface.
+"""GitHub authentication and token management.
 
-This module provides abstractions for GitHub authentication without storing tokens directly.
-Token providers can be fixture-based (for testing) or environment-based (for dev/local).
+This module provides a minimal auth provider that can mint/use tokens via environment variables
+in dev mode. It is structured to be swapped for GitHub App installation tokens later.
 """
 
-import logging
 import os
 from abc import ABC, abstractmethod
 
-logger = logging.getLogger(__name__)
 
-
-class TokenProvider(ABC):
-    """Abstract interface for GitHub token providers."""
+class GitHubAuthProvider(ABC):
+    """Abstract interface for GitHub authentication providers."""
 
     @abstractmethod
-    def get_token(self) -> str | None:
-        """Get a GitHub token for API access.
-        
+    def get_token(self, user_id: str) -> str | None:
+        """Get a GitHub token for the specified user.
+
+        Args:
+            user_id: User ID to get token for.
+
         Returns:
-            GitHub token string, or None if not available.
+            GitHub token or None if not available.
+        """
+        pass
+
+    @abstractmethod
+    def supports_live_mode(self) -> bool:
+        """Check if this provider supports live GitHub API calls.
+
+        Returns:
+            True if live mode is supported, False for fixture-only mode.
         """
         pass
 
 
-class FixtureTokenProvider(TokenProvider):
-    """Fixture-based token provider that returns None (fixture mode)."""
+class EnvironmentTokenProvider(GitHubAuthProvider):
+    """Token provider that reads from environment variables.
 
-    def get_token(self) -> str | None:
-        """Return None to indicate fixture mode.
-        
-        In fixture mode, the GitHub provider uses local fixture data
-        instead of making real API calls.
-        """
-        return None
+    This is a development/testing provider that reads tokens from the GITHUB_TOKEN
+    environment variable. It does not support per-user tokens or token refresh.
 
-
-class EnvTokenProvider(TokenProvider):
-    """Environment-based token provider for dev/local testing.
-    
-    Supports:
-    - GITHUB_TOKEN: Personal access token
-    - GITHUB_APP_PRIVATE_KEY + GITHUB_APP_ID + GITHUB_APP_INSTALLATION_ID:
-      GitHub App authentication (stubbed with TODO for now)
+    Usage:
+        export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+        export GITHUB_LIVE_MODE=true
     """
 
     def __init__(self):
-        """Initialize provider and check for available credentials."""
-        self._token = os.environ.get("GITHUB_TOKEN")
-        self._app_private_key = os.environ.get("GITHUB_APP_PRIVATE_KEY")
-        self._app_id = os.environ.get("GITHUB_APP_ID")
-        self._installation_id = os.environ.get("GITHUB_APP_INSTALLATION_ID")
+        """Initialize the environment token provider."""
+        self.token = os.getenv("GITHUB_TOKEN")
+        self.live_mode_enabled = os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
 
-    def get_token(self) -> str | None:
-        """Get token from environment variables.
-        
-        Priority:
-        1. GITHUB_TOKEN (personal access token)
-        2. GitHub App credentials (TODO: implement JWT/installation token minting)
-        
+    def get_token(self, user_id: str) -> str | None:
+        """Get a GitHub token from environment variable.
+
+        Args:
+            user_id: User ID (ignored in this implementation).
+
         Returns:
-            GitHub token string, or None if no credentials available.
-            
-        Security:
-            - Tokens are never logged
-            - Only token presence is logged, not the value
+            GitHub token from GITHUB_TOKEN env var, or None if not set.
         """
-        # Personal access token (simplest approach for dev)
-        if self._token:
-            logger.info("Using GitHub personal access token from GITHUB_TOKEN")
-            # SECURITY: Never log the actual token value
-            return self._token
+        return self.token if self.live_mode_enabled else None
 
-        # GitHub App authentication (stubbed for now)
-        if self._app_private_key and self._app_id and self._installation_id:
-            logger.warning(
-                "GitHub App authentication detected but not yet implemented. "
-                "TODO: Implement JWT signing and installation token minting. "
-                "For now, set GITHUB_TOKEN to use a personal access token."
-            )
-            # TODO: Implement GitHub App JWT/installation token flow
-            # 1. Parse private key
-            # 2. Create and sign JWT with app_id
-            # 3. Exchange JWT for installation access token
-            # 4. Return installation token
-            return None
+    def supports_live_mode(self) -> bool:
+        """Check if live mode is enabled via environment variable.
 
-        logger.info("No GitHub credentials found in environment (fixture mode)")
+        Returns:
+            True if GITHUB_LIVE_MODE is set to true/1/yes and GITHUB_TOKEN is available.
+        """
+        return self.live_mode_enabled and self.token is not None
+
+
+class FixtureOnlyProvider(GitHubAuthProvider):
+    """Auth provider that always uses fixtures (default behavior)."""
+
+    def get_token(self, user_id: str) -> str | None:
+        """Always returns None to force fixture mode.
+
+        Args:
+            user_id: User ID (ignored).
+
+        Returns:
+            None to indicate fixture-only mode.
+        """
         return None
 
+    def supports_live_mode(self) -> bool:
+        """Fixture-only provider never supports live mode.
 
-def get_token_provider() -> TokenProvider:
-    """Get the appropriate token provider based on configuration.
-    
-    Uses GITHUB_LIVE_MODE environment variable to determine provider:
-    - GITHUB_LIVE_MODE=true: Use EnvTokenProvider (live mode)
-    - GITHUB_LIVE_MODE=false or unset: Use FixtureTokenProvider (default)
-    
+        Returns:
+            False.
+        """
+        return False
+
+
+def get_default_auth_provider() -> GitHubAuthProvider:
+    """Get the default GitHub auth provider based on environment.
+
     Returns:
-        TokenProvider instance
+        EnvironmentTokenProvider if GITHUB_LIVE_MODE is enabled,
+        otherwise FixtureOnlyProvider.
     """
-    live_mode = os.environ.get("GITHUB_LIVE_MODE", "false").lower() == "true"
-    
-    if live_mode:
-        logger.info("GitHub live mode enabled")
-        return EnvTokenProvider()
-    else:
-        logger.info("GitHub fixture mode enabled (default)")
-        return FixtureTokenProvider()
+    if os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes"):
+        return EnvironmentTokenProvider()
+    return FixtureOnlyProvider()

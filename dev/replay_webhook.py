@@ -37,9 +37,11 @@ def infer_event_type_from_filename(filename: str) -> str:
     return name.split(".")[0]
 
 
-def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int = 1, new_delivery_id: bool = False):
+def replay_from_db(
+    event_id_or_latest: str, url: str, signature: str, limit: int = 1, new_delivery_id: bool = False
+):
     """Replay webhook event(s) from the database.
-    
+
     Args:
         event_id_or_latest: Event ID to replay, or 'latest' for most recent
         url: Webhook endpoint URL
@@ -55,10 +57,10 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
         print("Error: Cannot import database modules. Make sure handsfree package is installed.")
         print(f"Details: {e}")
         return 1
-    
+
     # Connect to database
     db = init_db()
-    
+
     # Get event(s) from database
     events = []
     if event_id_or_latest == "latest":
@@ -72,26 +74,26 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
             print(f"Error: Event not found: {event_id_or_latest}")
             return 1
         events = [event]
-    
+
     # Replay each event
     success_count = 0
     for event in events:
         event_type = event.event_type or "unknown"
         delivery_id = event.delivery_id or f"replay-{uuid.uuid4()}"
-        
+
         # Generate new delivery ID if requested (to avoid duplicate rejection)
         if new_delivery_id:
             delivery_id = f"replay-{uuid.uuid4()}"
-        
+
         payload = event.payload or {}
-        
+
         print(f"\nReplaying event {event.id}:")
         print(f"  Original delivery ID: {event.delivery_id}")
         print(f"  Event type: {event_type}")
         print(f"  Delivery ID: {delivery_id}")
         print(f"  Received at: {event.received_at}")
         print(f"  URL: {url}")
-        
+
         req = urllib.request.Request(
             url,
             data=json.dumps(payload).encode("utf-8"),
@@ -103,13 +105,15 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
             },
             method="POST",
         )
-        
+
         try:
             with urllib.request.urlopen(req) as resp:
                 print(f"  Response: {resp.status}")
                 response_body = resp.read().decode("utf-8")
                 if response_body:
-                    print("  " + json.dumps(json.loads(response_body), indent=2).replace("\n", "\n  "))
+                    print(
+                        "  " + json.dumps(json.loads(response_body), indent=2).replace("\n", "\n  ")
+                    )
                 success_count += 1
         except urllib.error.HTTPError as e:
             print(f"  Error: {e.code} {e.reason}")
@@ -121,7 +125,7 @@ def replay_from_db(event_id_or_latest: str, url: str, signature: str, limit: int
                     print("  " + error_body)
         except Exception as e:
             print(f"  Error: {e}")
-    
+
     db.close()
     print(f"\nReplayed {success_count}/{len(events)} events successfully")
     # Return 0 only if all events succeeded, 1 otherwise

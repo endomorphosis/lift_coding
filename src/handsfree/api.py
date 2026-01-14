@@ -6,10 +6,12 @@ This implementation combines webhook handling with comprehensive API endpoints.
 import logging
 import uuid
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
@@ -34,14 +36,12 @@ from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
 from handsfree.models import (
     ActionResult,
+    AudioInput,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
-    CreateGitHubConnectionRequest,
     DebugInfo,
-    GitHubConnectionResponse,
-    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -51,6 +51,7 @@ from handsfree.models import (
     RequestReviewRequest,
     RerunChecksRequest,
     TextInput,
+    TTSRequest,
     UICard,
 )
 from handsfree.models import (
@@ -58,6 +59,7 @@ from handsfree.models import (
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
+from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
@@ -140,6 +142,43 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
+
+
+def _fetch_audio_data(uri: str) -> bytes:
+    """Fetch audio data from URI.
+
+    Supports file:// URIs for local testing and development.
+    In production, this could support pre-signed URLs from S3, etc.
+
+    Args:
+        uri: Audio URI (file:// or local path)
+
+    Returns:
+        Audio data as bytes
+
+    Raises:
+        ValueError: If URI scheme is unsupported
+        FileNotFoundError: If local file doesn't exist
+    """
+    parsed = urlparse(uri)
+
+    # Support file:// URIs and plain paths
+    if parsed.scheme in ("", "file"):
+        # Extract path from file:// URI or use as-is
+        path = parsed.path if parsed.scheme == "file" else uri
+
+        # Convert to Path object and read
+        file_path = Path(path)
+        if not file_path.exists():
+            raise FileNotFoundError(f"Audio file not found: {path}")
+
+        return file_path.read_bytes()
+    else:
+        # Future: Support http/https pre-signed URLs
+        raise ValueError(
+            f"Unsupported audio URI scheme: {parsed.scheme}. "
+            f"Currently only file:// URIs are supported in dev/test mode."
+        )
 
 
 @app.get("/health")
@@ -241,21 +280,21 @@ async def submit_command(
     x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
-    
+
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
-        x_user_id: Optional user ID header (falls back to fixture user ID)
-        
+        x_user_id: Optional user identifier from X-User-Id header
+
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
-    
-    # Get user ID from header or use fixture
+
+    # Get user ID from header or use fixture user ID
     user_id = get_user_id_from_header(x_user_id)
-    
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -263,13 +302,55 @@ async def submit_command(
     # Extract text from input
     if isinstance(request.input, TextInput):
         text = request.input.text.strip()
+    elif isinstance(request.input, AudioInput):
+        # Audio input - transcribe to text using STT
+        try:
+            # Fetch audio data from URI
+            audio_data = _fetch_audio_data(request.input.uri)
+
+            # Get STT provider and transcribe
+            stt_provider = get_stt_provider()
+            text = stt_provider.transcribe(audio_data, request.input.format.value)
+
+            logger.info(
+                "Transcribed audio input: format=%s, duration_ms=%s, transcript_length=%d",
+                request.input.format.value,
+                request.input.duration_ms,
+                len(text),
+            )
+        except NotImplementedError as e:
+            # STT is disabled
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.stt_disabled", confidence=1.0),
+                spoken_text=str(e),
+                debug=DebugInfo(transcript="<audio input - STT disabled>"),
+            )
+        except (ValueError, FileNotFoundError) as e:
+            # Invalid audio format or URI
+            logger.error("Audio input error: %s", e)
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.audio_input", confidence=1.0),
+                spoken_text=f"Could not process audio input: {str(e)}",
+                debug=DebugInfo(transcript="<audio input - error>"),
+            )
+        except Exception as e:
+            # Unexpected error during transcription
+            logger.error("Unexpected STT error: %s", e, exc_info=True)
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.stt_failed", confidence=1.0),
+                spoken_text="Audio transcription failed. Please try again or use text input.",
+                debug=DebugInfo(transcript="<audio input - transcription failed>"),
+            )
     else:
-        # Audio input - return error for now
+        # Unknown input type
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=ParsedIntent(name="error.unsupported", confidence=1.0),
-            spoken_text="Audio input is not yet supported in this version.",
-            debug=DebugInfo(transcript="<audio input>"),
+            intent=ParsedIntent(name="error.unknown_input", confidence=1.0),
+            spoken_text="Unknown input type.",
+            debug=DebugInfo(transcript="<unknown input>"),
         )
 
     # Parse intent using the intent parser
@@ -278,6 +359,9 @@ async def submit_command(
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
+        # Get user_id from header or use fixture
+        user_id = FIXTURE_USER_ID  # In production, would extract from auth token
+        
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
@@ -285,7 +369,7 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, user_id
+            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
         )
         # Store for idempotency
         if request.idempotency_key:
@@ -309,9 +393,9 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, user_id
+            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
-        
+
         # For non-system commands, update the router's stored response with the enhanced version
         # This ensures system.repeat returns the full enriched response
         if session_id:
@@ -334,16 +418,18 @@ async def submit_command(
                     "summary": response.pending_action.summary,
                 }
             router._last_responses[session_id] = enhanced_dict
-            
+
             # Also update navigation state with enhanced cards
             if response.cards:
                 items = []
                 for card in response.cards:
-                    items.append({
-                        "type": "card",
-                        "intent_name": parsed_intent.name,
-                        "data": card.model_dump(),
-                    })
+                    items.append(
+                        {
+                            "type": "card",
+                            "intent_name": parsed_intent.name,
+                            "data": card.model_dump(),
+                        }
+                    )
                 router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
@@ -358,20 +444,20 @@ def _convert_router_response_direct(
     transcript: str,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
-    
+
     Used for system commands where router returns complete response that shouldn't be modified.
-    
+
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
-        
+
     Returns:
         CommandResponse object
     """
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
-    
+
     # Get intent from response
     intent_dict = router_response.get("intent", {})
     intent = ParsedIntent(
@@ -379,14 +465,14 @@ def _convert_router_response_direct(
         confidence=intent_dict.get("confidence", 1.0),
         entities=intent_dict.get("entities", {}),
     )
-    
+
     spoken_text = router_response.get("spoken_text", "")
-    
+
     # Get cards if present
     cards: list[UICard] = []
     if "cards" in router_response and router_response["cards"]:
         cards = [UICard(**card) for card in router_response["cards"]]
-    
+
     # Handle pending action
     pending_action = None
     if "pending_action" in router_response and router_response["pending_action"]:
@@ -400,10 +486,10 @@ def _convert_router_response_direct(
             expires_at=expires_at,
             summary=pa["summary"],
         )
-    
+
     # Build debug info
     debug = DebugInfo(transcript=transcript)
-    
+
     return CommandResponse(
         status=status,
         intent=intent,
@@ -1400,7 +1486,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         pr_title = normalized.get("pr_title", "")
-        
+
         if action == "opened":
             message = f"PR #{pr_number} opened in {repo}: {pr_title}"
             notification_type = "webhook.pr_opened"
@@ -1416,7 +1502,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
             # synchronize, reopened
             message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
             notification_type = f"webhook.pr_{action}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1428,15 +1514,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_url": normalized.get("pr_url"),
             },
         )
-    
+
     elif event_type == "check_suite" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         head_branch = normalized.get("head_branch")
-        
+
         message = f"Check suite {conclusion} on {repo} ({head_branch})"
         notification_type = f"webhook.check_suite_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1449,15 +1535,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "check_run" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         check_run_name = normalized.get("check_run_name")
-        
+
         message = f"Check run '{check_run_name}' {conclusion} on {repo}"
         notification_type = f"webhook.check_run_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1470,16 +1556,16 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "pull_request_review" and action == "submitted":
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         review_state = normalized.get("review_state")
         review_author = normalized.get("review_author")
-        
+
         message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
         notification_type = f"webhook.review_{review_state}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1547,159 +1633,72 @@ async def get_notifications(
     )
 
 
-@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=status.HTTP_201_CREATED)
-async def create_github_connection_endpoint(
-    request: CreateGitHubConnectionRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> GitHubConnectionResponse:
-    """Create a new GitHub connection for the authenticated user.
-    
-    Stores GitHub App installation metadata (NO secrets stored directly).
-    Scoped per user via X-User-Id header.
-    Users can have multiple connections.
-    
+@app.post("/v1/tts")
+async def text_to_speech(request: TTSRequest) -> Response:
+    """Convert text to speech audio.
+
+    This endpoint provides fixture-first TTS capability for the dev loop.
+    By default, it uses a stub provider that returns deterministic audio placeholders.
+    Real TTS providers can be enabled via environment variables in production.
+
     Args:
-        request: Connection creation request
-        x_user_id: Optional user ID header (falls back to fixture user ID)
-        
+        request: TTS request with text, optional voice, and format
+
     Returns:
-        Created connection details
-    """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-    
-    # Always create new connection
-    conn = create_github_connection(
-        db,
-        user_id=user_id,
-        installation_id=request.installation_id,
-        token_ref=request.token_ref,
-        scopes=request.scopes,
-    )
-    
-    return GitHubConnectionResponse(
-        id=conn.id,
-        user_id=conn.user_id,
-        installation_id=conn.installation_id,
-        token_ref=conn.token_ref,
-        scopes=conn.scopes,
-        created_at=conn.created_at,
-        updated_at=conn.updated_at,
-    )
+        Audio bytes with appropriate content-type header
 
-
-@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
-async def get_github_connection_endpoint(
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> GitHubConnectionsListResponse:
-    """Get GitHub connection status for the authenticated user.
-    
-    Returns all GitHub connections for the user (usually 0 or 1).
-    
-    Args:
-        x_user_id: Optional user ID header (falls back to fixture user ID)
-        
-    Returns:
-        List of connections for the user
-    """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-    
-    connections = get_github_connections_by_user(db, user_id)
-    
-    return GitHubConnectionsListResponse(
-        connections=[
-            GitHubConnectionResponse(
-                id=conn.id,
-                user_id=conn.user_id,
-                installation_id=conn.installation_id,
-                token_ref=conn.token_ref,
-                scopes=conn.scopes,
-                created_at=conn.created_at,
-                updated_at=conn.updated_at,
-            )
-            for conn in connections
-        ]
-    )
-
-
-@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
-async def get_github_connection_by_id_endpoint(
-    connection_id: str,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> GitHubConnectionResponse:
-    """Get a specific GitHub connection by ID.
-    
-    Users can only access their own connections.
-    
-    Args:
-        connection_id: UUID of the connection to retrieve
-        x_user_id: Optional user ID header (falls back to fixture user ID)
-        
-    Returns:
-        Connection details
-        
     Raises:
-        404: Connection not found or not owned by user
+        400 Bad Request for invalid input (empty text, text too long)
     """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-    
-    # Get connection
-    conn = get_github_connection(db, connection_id)
-    
-    # Check it exists and belongs to user
-    if conn is None or conn.user_id != user_id:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={"error": "not_found", "message": "Connection not found"},
-        )
-    
-    return GitHubConnectionResponse(
-        id=conn.id,
-        user_id=conn.user_id,
-        installation_id=conn.installation_id,
-        token_ref=conn.token_ref,
-        scopes=conn.scopes,
-        created_at=conn.created_at,
-        updated_at=conn.updated_at,
-    )
+    from handsfree.tts import StubTTSProvider
 
-
-@app.delete("/v1/github/connections/{connection_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_github_connection_endpoint(
-    connection_id: str,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> None:
-    """Delete a GitHub connection.
-    
-    Users can only delete their own connections.
-    
-    Args:
-        connection_id: UUID of the connection to delete
-        x_user_id: Optional user ID header (falls back to fixture user ID)
-        
-    Raises:
-        404: Connection not found or not owned by user
-    """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-    
-    # Check connection exists and belongs to user
-    conn = get_github_connection(db, connection_id)
-    if conn is None or conn.user_id != user_id:
+    # Input validation
+    if not request.text or not request.text.strip():
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={"error": "not_found", "message": "Connection not found"},
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text cannot be empty",
+            },
         )
-    
-    # Delete the connection
-    deleted = delete_github_connection(db, connection_id)
-    if not deleted:
+
+    if len(request.text) > 5000:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text too long (maximum 5000 characters)",
+            },
+        )
+
+    # For MVP, always use stub provider
+    # In production, check env var for real TTS provider selection
+    # provider = get_tts_provider()  # Would check HANDSFREE_TTS_PROVIDER env var
+    provider = StubTTSProvider()
+
+    try:
+        audio_bytes, content_type = provider.synthesize(
+            text=request.text,
+            voice=request.voice,
+            format=request.format,
+        )
+
+        return Response(
+            content=audio_bytes,
+            media_type=content_type,
+            headers={
+                "Content-Disposition": f'attachment; filename="speech.{request.format}"',
+            },
+        )
+    except Exception as e:
+        logger.error("TTS synthesis failed: %s", e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"error": "delete_failed", "message": "Failed to delete connection"},
-        )
+            detail={
+                "error": "synthesis_failed",
+                "message": "Failed to synthesize speech",
+            },
+        ) from e
 
 
 @app.exception_handler(HTTPException)
@@ -1717,4 +1716,115 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
             "error": "http_error",
             "message": str(exc.detail),
         },
+    )
+
+
+@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
+async def create_connection(
+    request: CreateGitHubConnectionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Create a new GitHub connection for the user.
+
+    Args:
+        request: Connection creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created connection.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = create_github_connection(
+        conn=db,
+        user_id=user_id,
+        installation_id=request.installation_id,
+        token_ref=request.token_ref,
+        scopes=request.scopes,
+    )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
+    )
+
+
+@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
+async def list_connections(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionsListResponse:
+    """List all GitHub connections for the user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of connections.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connections = get_github_connections_by_user(conn=db, user_id=user_id)
+
+    return GitHubConnectionsListResponse(
+        connections=[
+            GitHubConnectionResponse(
+                id=conn.id,
+                user_id=conn.user_id,
+                installation_id=conn.installation_id,
+                token_ref=conn.token_ref,
+                scopes=conn.scopes,
+                created_at=conn.created_at,
+                updated_at=conn.updated_at,
+            )
+            for conn in connections
+        ]
+    )
+
+
+@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
+async def get_connection(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Get a specific GitHub connection by ID.
+
+    Args:
+        connection_id: Connection UUID.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Connection details.
+
+    Raises:
+        404: Connection not found or user doesn't have access.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = get_github_connection(conn=db, connection_id=connection_id)
+
+    if connection is None or connection.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Connection not found",
+            },
+        )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
     )

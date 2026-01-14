@@ -25,7 +25,7 @@ class TestNotificationsEndpoint:
         # Use a unique user ID to avoid interference from other tests
         response = client.get(
             "/v1/notifications",
-            headers={"X-User-ID": "empty-user-00000000-0000-0000-0000-000000000000"}
+            headers={"X-User-ID": "empty-user-00000000-0000-0000-0000-000000000000"},
         )
 
         assert response.status_code == 200
@@ -61,10 +61,7 @@ class TestNotificationsEndpoint:
             metadata={"key": "value2"},
         )
 
-        response = client.get(
-            "/v1/notifications",
-            headers={"X-User-ID": user_id}
-        )
+        response = client.get("/v1/notifications", headers={"X-User-ID": user_id})
 
         assert response.status_code == 200
         data = response.json()
@@ -133,9 +130,7 @@ class TestNotificationsEndpoint:
         )
 
         # Query with since filter
-        response = client.get(
-            f"/v1/notifications?since={cutoff.isoformat()}"
-        )
+        response = client.get(f"/v1/notifications?since={cutoff.isoformat()}")
 
         assert response.status_code == 200
         data = response.json()
@@ -200,7 +195,7 @@ class TestAgentServiceNotifications:
         # Check that a notification was created
         notifs = list_notifications(conn=db, user_id=user_id)
         assert len(notifs) >= 1
-        
+
         # Find the task_created notification
         task_notifs = [n for n in notifs if n.event_type == "task_created"]
         assert len(task_notifs) >= 1
@@ -241,6 +236,111 @@ class TestAgentServiceNotifications:
         assert len(state_notifs) >= 1
         assert task_id in state_notifs[0].message
 
+    def test_task_completion_notification_via_api(self):
+        """Test that completed task notification is returned by GET /v1/notifications."""
+        from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
+
+        db = get_db()
+        service = AgentService(db)
+        # Use a unique user ID to avoid interference
+        user_id = "completion-test-user-0000-0000-0000-000000000002"
+
+        # Create and complete a task with PR info
+        result = service.delegate(
+            user_id=user_id,
+            instruction="Fix critical bug",
+            provider="copilot",
+        )
+        task_id = result["task_id"]
+
+        # Advance to running, then complete with PR info
+        service.advance_task_state(task_id, "running")
+        service.advance_task_state(
+            task_id,
+            "completed",
+            trace_update={
+                "pr_url": "https://github.com/test/repo/pull/999",
+                "pr_number": 999,
+                "repo_full_name": "test/repo",
+            },
+        )
+
+        # Query notifications via API
+        response = client.get(
+            "/v1/notifications",
+            headers={"X-User-ID": user_id},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        
+        # Find the completion notification
+        completion_notifs = [
+            n for n in data["notifications"]
+            if n["event_type"] == "task_completed"
+        ]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif["metadata"]["task_id"] == task_id
+        assert notif["metadata"]["state"] == "completed"
+        assert notif["metadata"]["pr_url"] == "https://github.com/test/repo/pull/999"
+        assert notif["metadata"]["pr_number"] == 999
+        assert notif["metadata"]["repo_full_name"] == "test/repo"
+        assert "https://github.com/test/repo/pull/999" in notif["message"]
+
+    def test_task_failure_notification_via_api(self):
+        """Test that failed task notification is returned by GET /v1/notifications."""
+        from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
+
+        db = get_db()
+        service = AgentService(db)
+        # Use a unique user ID to avoid interference
+        user_id = "failure-test-user-0000-0000-0000-000000000003"
+
+        # Create and fail a task with PR info
+        result = service.delegate(
+            user_id=user_id,
+            instruction="Attempt fix",
+            provider="copilot",
+        )
+        task_id = result["task_id"]
+
+        # Fail task with PR info
+        service.advance_task_state(
+            task_id,
+            "failed",
+            trace_update={
+                "pr_number": 888,
+                "repo_full_name": "test/repo",
+            },
+        )
+
+        # Query notifications via API
+        response = client.get(
+            "/v1/notifications",
+            headers={"X-User-ID": user_id},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        
+        # Find the failure notification
+        failure_notifs = [
+            n for n in data["notifications"]
+            if n["event_type"] == "task_failed"
+        ]
+        assert len(failure_notifs) == 1
+
+        notif = failure_notifs[0]
+        assert notif["metadata"]["task_id"] == task_id
+        assert notif["metadata"]["state"] == "failed"
+        assert notif["metadata"]["pr_number"] == 888
+        assert notif["metadata"]["repo_full_name"] == "test/repo"
+        assert "test/repo#888" in notif["message"]
+
 
 class TestWebhookNotifications:
     """Test that webhook events create notifications."""
@@ -253,6 +353,7 @@ class TestWebhookNotifications:
         db = get_db()
         # Use unique delivery ID to avoid duplicate rejection
         import uuid
+
         delivery_id = f"test-delivery-pr-opened-{uuid.uuid4()}"
         user_id = "00000000-0000-0000-0000-000000000001"
 
@@ -344,9 +445,7 @@ class TestWebhookNotifications:
         assert len(notifs_after) == count_before + 1
 
         # Find the webhook notification
-        webhook_notifs = [
-            n for n in notifs_after if n.event_type == "webhook.check_suite_success"
-        ]
+        webhook_notifs = [n for n in notifs_after if n.event_type == "webhook.check_suite_success"]
         assert len(webhook_notifs) == 1
         assert "success" in webhook_notifs[0].message
         assert "test/repo" in webhook_notifs[0].message
@@ -396,9 +495,7 @@ class TestWebhookNotifications:
         assert len(notifs_after) == count_before + 1
 
         # Find the webhook notification
-        webhook_notifs = [
-            n for n in notifs_after if n.event_type == "webhook.review_approved"
-        ]
+        webhook_notifs = [n for n in notifs_after if n.event_type == "webhook.review_approved"]
         assert len(webhook_notifs) == 1
         assert "approved" in webhook_notifs[0].message
         assert "reviewer" in webhook_notifs[0].message

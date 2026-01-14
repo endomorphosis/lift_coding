@@ -189,7 +189,7 @@ def update_github_connection(
     conn.execute(
         f"""
         UPDATE github_connections
-        SET {', '.join(updates)}
+        SET {", ".join(updates)}
         WHERE id = ?
         """,
         params,

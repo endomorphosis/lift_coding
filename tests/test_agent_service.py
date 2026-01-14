@@ -229,3 +229,148 @@ class TestNotifications:
         notifications = list_notifications(conn=db_conn, user_id=test_user_id)
         state_change_notifs = [n for n in notifications if n.event_type == "state_changed"]
         assert len(state_change_notifs) >= 1
+
+    def test_notification_on_task_completion(self, agent_service, db_conn, test_user_id):
+        """Test that completing a task writes a notification."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create and advance task to running, then complete
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="test task", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        # Advance to running first
+        agent_service.advance_task_state(task_id, "running")
+
+        # Then complete the task
+        agent_service.advance_task_state(task_id, "completed")
+
+        # Verify completion notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completion_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completion_notifs) == 1
+
+        # Verify the notification includes task_id and state
+        notif = completion_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["task_id"] == task_id
+        assert notif.metadata["state"] == "completed"
+        assert task_id in notif.message
+
+    def test_notification_on_task_failure(self, agent_service, db_conn, test_user_id):
+        """Test that failing a task writes a notification."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create and fail task
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="test task", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        # Fail the task
+        agent_service.advance_task_state(task_id, "failed")
+
+        # Verify failure notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        failure_notifs = [n for n in notifications if n.event_type == "task_failed"]
+        assert len(failure_notifs) == 1
+
+        # Verify the notification includes task_id and state
+        notif = failure_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["task_id"] == task_id
+        assert notif.metadata["state"] == "failed"
+        assert task_id in notif.message
+
+    def test_completion_notification_includes_pr_url(self, agent_service, db_conn, test_user_id):
+        """Test that completion notification includes PR URL when provided in trace."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create task with PR reference in trace
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="fix bug", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        # Advance to running with PR info
+        agent_service.advance_task_state(task_id, "running")
+
+        # Complete with PR URL in trace
+        agent_service.advance_task_state(
+            task_id,
+            "completed",
+            trace_update={
+                "pr_url": "https://github.com/owner/repo/pull/123",
+                "pr_number": 123,
+                "repo_full_name": "owner/repo",
+            },
+        )
+
+        # Verify notification includes PR info
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completion_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["pr_url"] == "https://github.com/owner/repo/pull/123"
+        assert notif.metadata["pr_number"] == 123
+        assert notif.metadata["repo_full_name"] == "owner/repo"
+        assert "https://github.com/owner/repo/pull/123" in notif.message
+
+    def test_completion_notification_with_pr_number_only(
+        self, agent_service, db_conn, test_user_id
+    ):
+        """Test completion notification with PR number but no URL."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create and complete task with only PR number
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="test", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        agent_service.advance_task_state(task_id, "running")
+        agent_service.advance_task_state(
+            task_id,
+            "completed",
+            trace_update={"pr_number": 456, "repo_full_name": "owner/repo"},
+        )
+
+        # Verify notification includes PR reference
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completion_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["pr_number"] == 456
+        assert notif.metadata["repo_full_name"] == "owner/repo"
+        assert "owner/repo#456" in notif.message
+
+    def test_completion_notification_without_pr_info(self, agent_service, db_conn, test_user_id):
+        """Test completion notification works without PR info."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create and complete task without PR info
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="test", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        agent_service.advance_task_state(task_id, "running")
+        agent_service.advance_task_state(task_id, "completed")
+
+        # Verify notification was still created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completion_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["task_id"] == task_id
+        assert notif.metadata["state"] == "completed"
+        # Should not have PR fields
+        assert "pr_url" not in notif.metadata
+        assert "pr_number" not in notif.metadata

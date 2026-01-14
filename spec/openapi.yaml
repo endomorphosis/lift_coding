@@ -154,121 +154,35 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
-  /v1/github/connections:
+  /v1/tts:
     post:
-      summary: Create or update GitHub connection metadata
-      operationId: createGitHubConnection
-      description: >
-        Store GitHub App installation metadata for the authenticated user.
-        Does NOT store actual tokens - only references to secret manager.
-        Scoped per user via X-User-Id header.
-      parameters:
-        - in: header
-          name: X-User-Id
-          schema:
-            type: string
-            format: uuid
-          required: false
-          description: User ID (defaults to fixture user for dev/testing)
+      summary: Convert text to speech (TTS)
+      operationId: textToSpeech
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateGitHubConnectionRequest'
+              $ref: '#/components/schemas/TTSRequest'
       responses:
-        '201':
-          description: Connection created or updated
+        '200':
+          description: Audio file generated successfully
           content:
-            application/json:
+            audio/wav:
               schema:
-                $ref: '#/components/schemas/GitHubConnectionResponse'
+                type: string
+                format: binary
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
         '400':
-          description: Invalid request
+          description: Invalid request (empty or too long text)
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
-
-    get:
-      summary: Get GitHub connection status for authenticated user
-      operationId: getGitHubConnections
-      description: >
-        Returns all GitHub connections for the user (usually 0 or 1).
-        Scoped per user via X-User-Id header.
-      parameters:
-        - in: header
-          name: X-User-Id
-          schema:
-            type: string
-            format: uuid
-          required: false
-          description: User ID (defaults to fixture user for dev/testing)
-      responses:
-        '200':
-          description: Connection details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GitHubConnectionsListResponse'
-
-  /v1/github/connections/{connection_id}:
-    get:
-      summary: Get a specific GitHub connection by ID
-      operationId: getGitHubConnectionById
-      description: >
-        Get a specific GitHub connection. Users can only access their own connections.
-      parameters:
-        - in: path
-          name: connection_id
-          required: true
-          schema:
-            type: string
-            format: uuid
-          description: UUID of the connection to retrieve
-        - in: header
-          name: X-User-Id
-          schema:
-            type: string
-            format: uuid
-          required: false
-          description: User ID (defaults to fixture user for dev/testing)
-      responses:
-        '200':
-          description: Connection details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GitHubConnectionResponse'
-        '404':
-          description: Connection not found or not owned by user
-          content:
-            application/json:
-              schema: { $ref: '#/components/schemas/Error' }
-    delete:
-      summary: Delete a GitHub connection
-      operationId: deleteGitHubConnection
-      description: >
-        Delete a GitHub connection. Users can only delete their own connections.
-      parameters:
-        - in: path
-          name: connection_id
-          required: true
-          schema:
-            type: string
-            format: uuid
-          description: UUID of the connection to delete
-        - in: header
-          name: X-User-Id
-          schema:
-            type: string
-            format: uuid
-          required: false
-          description: User ID (defaults to fixture user for dev/testing)
-      responses:
-        '204':
-          description: Connection deleted
-        '404':
-          description: Connection not found or not owned by user
+        '500':
+          description: TTS synthesis failed
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
@@ -526,47 +440,20 @@ components:
           type: object
           additionalProperties: true
 
-    CreateGitHubConnectionRequest:
+    TTSRequest:
       type: object
+      required: [text]
       properties:
-        installation_id:
-          type: integer
-          description: GitHub App installation ID
-        token_ref:
+        text:
           type: string
-          description: Reference to token in secret manager (NOT the actual token)
-        scopes:
+          minLength: 1
+          maxLength: 5000
+          description: Text to convert to speech
+        voice:
           type: string
-          description: Comma-separated OAuth scopes
-
-    GitHubConnectionResponse:
-      type: object
-      required: [id, user_id, created_at, updated_at]
-      properties:
-        id:
+          description: Optional voice identifier (provider-specific)
+        format:
           type: string
-          format: uuid
-        user_id:
-          type: string
-          format: uuid
-        installation_id:
-          type: integer
-        token_ref:
-          type: string
-        scopes:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-
-    GitHubConnectionsListResponse:
-      type: object
-      required: [connections]
-      properties:
-        connections:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitHubConnectionResponse'
+          enum: [wav, mp3]
+          default: wav
+          description: Audio format for the output
