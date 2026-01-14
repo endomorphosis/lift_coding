@@ -158,8 +158,10 @@ class AgentService:
                                     task.trace = updated_task.trace
                 except Exception as e:
                     logger.warning(
-                        f"Failed to check/advance status for task {task.id} "
-                        f"with provider {task.provider}: {e}"
+                        "Failed to check/advance status for task %s with provider %s: %s",
+                        task.id,
+                        task.provider,
+                        e,
                     )
 
         # Count by state (using updated states)

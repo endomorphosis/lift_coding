@@ -257,5 +257,14 @@ def get_provider(provider_name: str) -> AgentProvider:
     return providers[provider_name]()
 
 
+def reset_mock_provider() -> None:
+    """Reset the mock provider singleton instance.
+
+    This is primarily for testing purposes to ensure test isolation.
+    """
+    global _mock_provider_instance
+    _mock_provider_instance = None
+
+
 # Global mock provider instance
 _mock_provider_instance: MockAgentProvider | None = None
