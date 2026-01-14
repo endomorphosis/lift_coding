@@ -6,6 +6,7 @@ from .auth import (
     GitHubAuthProvider,
     get_default_auth_provider,
 )
+from .auth import EnvironmentTokenProvider, FixtureOnlyProvider, GitHubAuthProvider
 from .provider import GitHubProvider, GitHubProviderInterface, LiveGitHubProvider
 
 __all__ = [
