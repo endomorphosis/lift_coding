@@ -55,14 +55,10 @@ class StubSTTProvider:
         # This allows tests to be predictable while still being somewhat realistic
         data_hash = hash(audio_data) % 1000
 
-        # Map hash to common test commands
-        if data_hash < 200:
+        # Map hash to common test commands that will succeed
+        if data_hash < 333:
             return "show my inbox"
-        elif data_hash < 400:
+        elif data_hash < 666:
             return "summarize PR 42"
-        elif data_hash < 600:
-            return "request review from alice on PR 100"
-        elif data_hash < 800:
-            return "what is the status of my agent tasks"
         else:
             return "list my pull requests"
