@@ -605,21 +605,103 @@ class CommandRouter:
         # Policy allows the action - execute it directly
         target = f"{repo}#{pr_number}"
 
-        # Write audit log for successful execution
-        write_action_log(
-            self.db_conn,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=target,
-            request={"reviewers": reviewers},
-            result={"status": "success", "message": "Review requested (fixture)"},
-            idempotency_key=idempotency_key,
-        )
+        # Check if live mode is enabled and token is available
+        from handsfree.github.auth import get_default_auth_provider
 
-        reviewers_str = ", ".join(reviewers)
-        return {
-            "status": "ok",
-            "intent": intent.to_dict(),
-            "spoken_text": f"Review requested from {reviewers_str} on {target}.",
-        }
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        # Execute via GitHub API if live mode enabled and token available
+        if token:
+            from handsfree.github.client import request_reviewers as github_request_reviewers
+            import logging
+
+            logger = logging.getLogger(__name__)
+
+            logger.info(
+                "Executing request_review via GitHub API (live mode) for %s",
+                target,
+            )
+
+            github_result = github_request_reviewers(
+                repo=repo,
+                pr_number=pr_number,
+                reviewers=reviewers,
+                token=token,
+            )
+
+            if github_result["ok"]:
+                # Write audit log for successful execution
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=True,
+                    target=target,
+                    request={"reviewers": reviewers},
+                    result={
+                        "status": "success",
+                        "message": "Review requested (live mode)",
+                        "github_response": github_result.get("response_data"),
+                    },
+                    idempotency_key=idempotency_key,
+                )
+
+                reviewers_str = ", ".join(reviewers)
+                return {
+                    "status": "ok",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Review requested from {reviewers_str} on {target}.",
+                }
+            else:
+                # GitHub API call failed
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=False,
+                    target=target,
+                    request={"reviewers": reviewers},
+                    result={
+                        "status": "error",
+                        "message": github_result["message"],
+                        "status_code": github_result.get("status_code"),
+                    },
+                    idempotency_key=idempotency_key,
+                )
+
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Failed to request reviewers: {github_result['message']}",
+                }
+        else:
+            # Fixture mode - simulate success
+            import logging
+
+            logger = logging.getLogger(__name__)
+
+            logger.info(
+                "Executing request_review in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                self.db_conn,
+                user_id=user_id,
+                action_type="request_review",
+                ok=True,
+                target=target,
+                request={"reviewers": reviewers},
+                result={"status": "success", "message": "Review requested (fixture)"},
+                idempotency_key=idempotency_key,
+            )
+
+            reviewers_str = ", ".join(reviewers)
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Review requested from {reviewers_str} on {target}.",
+            }
