@@ -126,7 +126,10 @@ class TestNotificationSubscriptionPersistence:
 
     def test_get_subscription_not_found(self, db_conn):
         """Test getting a non-existent subscription."""
-        result = get_subscription(conn=db_conn, subscription_id="non-existent-id")
+        # Use a valid UUID format that doesn't exist
+        result = get_subscription(
+            conn=db_conn, subscription_id="00000000-0000-0000-0000-000000000099"
+        )
         assert result is None
 
     def test_delete_subscription(self, db_conn, test_user_id):
@@ -147,7 +150,10 @@ class TestNotificationSubscriptionPersistence:
 
     def test_delete_subscription_not_found(self, db_conn):
         """Test deleting a non-existent subscription."""
-        deleted = delete_subscription(conn=db_conn, subscription_id="non-existent-id")
+        # Use a valid UUID format that doesn't exist
+        deleted = delete_subscription(
+            conn=db_conn, subscription_id="00000000-0000-0000-0000-000000000099"
+        )
         assert deleted is False
 
     def test_subscription_to_dict(self, db_conn, test_user_id):
@@ -259,8 +265,9 @@ class TestNotificationSubscriptionAPI:
 
     def test_delete_subscription_not_found(self):
         """Test deleting a non-existent subscription."""
+        # Use a valid UUID format that doesn't exist
         response = client.delete(
-            "/v1/notifications/subscriptions/non-existent-id",
+            "/v1/notifications/subscriptions/00000000-0000-0000-0000-000000000099",
             headers={"X-User-Id": "00000000-0000-0000-0000-000000000001"},
         )
 
