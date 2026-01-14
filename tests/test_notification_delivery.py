@@ -308,7 +308,7 @@ class TestBackwardCompatibility:
         client = TestClient(app)
         response = client.get(
             "/v1/notifications",
-            headers={"X-User-ID": test_user_id},
+            headers={"X-User-Id": test_user_id},
         )
 
         assert response.status_code == 200
@@ -339,7 +339,7 @@ class TestBackwardCompatibility:
         client = TestClient(app)
         response = client.get(
             "/v1/notifications",
-            headers={"X-User-ID": test_user_id},
+            headers={"X-User-Id": test_user_id},
         )
 
         assert response.status_code == 200
