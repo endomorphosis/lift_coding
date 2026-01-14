@@ -15,6 +15,7 @@ from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
+from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
     delete_pending_action,
@@ -197,8 +198,8 @@ async def github_webhook(
             x_github_event,
             normalized.get("action"),
         )
-        # In a full implementation, normalized events would update inbox/notifications
-        # For now, just log them
+        # Emit notification for normalized webhook events
+        _emit_webhook_notification(normalized)
 
     return JSONResponse(
         status_code=status.HTTP_202_ACCEPTED,
@@ -1330,6 +1331,172 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
             summary="Automated refactoring PR ready for review",
         ),
     ]
+
+
+def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
+    """Emit notifications for normalized webhook events.
+
+    Args:
+        normalized: Normalized webhook event data.
+    """
+    db = get_db()
+    event_type = normalized.get("event_type")
+    action = normalized.get("action")
+
+    # For MVP, use fixture user ID
+    # In production, we'd determine affected users from repo subscriptions
+    user_id = FIXTURE_USER_ID
+
+    # Generate notification message based on event type
+    if event_type == "pull_request":
+        pr_number = normalized.get("pr_number")
+        repo = normalized.get("repo")
+        pr_title = normalized.get("pr_title", "")
+        
+        if action == "opened":
+            message = f"PR #{pr_number} opened in {repo}: {pr_title}"
+            notification_type = "webhook.pr_opened"
+        elif action == "closed":
+            merged = normalized.get("pr_merged", False)
+            if merged:
+                message = f"PR #{pr_number} merged in {repo}: {pr_title}"
+                notification_type = "webhook.pr_merged"
+            else:
+                message = f"PR #{pr_number} closed in {repo}: {pr_title}"
+                notification_type = "webhook.pr_closed"
+        else:
+            # synchronize, reopened
+            message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
+            notification_type = f"webhook.pr_{action}"
+        
+        create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type=notification_type,
+            message=message,
+            metadata={
+                "pr_number": pr_number,
+                "repo": repo,
+                "pr_url": normalized.get("pr_url"),
+            },
+        )
+    
+    elif event_type == "check_suite" and action == "completed":
+        repo = normalized.get("repo")
+        conclusion = normalized.get("conclusion")
+        head_branch = normalized.get("head_branch")
+        
+        message = f"Check suite {conclusion} on {repo} ({head_branch})"
+        notification_type = f"webhook.check_suite_{conclusion}"
+        
+        create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type=notification_type,
+            message=message,
+            metadata={
+                "repo": repo,
+                "conclusion": conclusion,
+                "head_branch": head_branch,
+                "pr_numbers": normalized.get("pr_numbers", []),
+            },
+        )
+    
+    elif event_type == "check_run" and action == "completed":
+        repo = normalized.get("repo")
+        conclusion = normalized.get("conclusion")
+        check_run_name = normalized.get("check_run_name")
+        
+        message = f"Check run '{check_run_name}' {conclusion} on {repo}"
+        notification_type = f"webhook.check_run_{conclusion}"
+        
+        create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type=notification_type,
+            message=message,
+            metadata={
+                "repo": repo,
+                "conclusion": conclusion,
+                "check_run_name": check_run_name,
+                "pr_numbers": normalized.get("pr_numbers", []),
+            },
+        )
+    
+    elif event_type == "pull_request_review" and action == "submitted":
+        pr_number = normalized.get("pr_number")
+        repo = normalized.get("repo")
+        review_state = normalized.get("review_state")
+        review_author = normalized.get("review_author")
+        
+        message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
+        notification_type = f"webhook.review_{review_state}"
+        
+        create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type=notification_type,
+            message=message,
+            metadata={
+                "pr_number": pr_number,
+                "repo": repo,
+                "review_state": review_state,
+                "review_author": review_author,
+                "review_url": normalized.get("review_url"),
+            },
+        )
+
+
+@app.get("/v1/notifications")
+async def get_notifications(
+    since: str | None = None,
+    limit: int = 50,
+    x_user_id: str = Header(default=FIXTURE_USER_ID, alias="X-User-ID"),
+) -> JSONResponse:
+    """Get notifications for the current user.
+
+    Poll-based notification retrieval endpoint. Clients can poll this endpoint
+    to get new notifications since a given timestamp.
+
+    Args:
+        since: Optional ISO 8601 timestamp to get notifications after this time.
+        limit: Maximum number of notifications to return (default: 50, max: 100).
+        x_user_id: User ID from header (defaults to fixture user for dev/testing).
+
+    Returns:
+        JSON response with list of notifications.
+    """
+    from handsfree.db.notifications import list_notifications
+
+    db = get_db()
+
+    # Parse since timestamp if provided
+    since_dt = None
+    if since:
+        try:
+            # Handle both +00:00 and Z formats, and URL-encoded spaces
+            since_clean = since.replace(" ", "+").replace("Z", "+00:00")
+            since_dt = datetime.fromisoformat(since_clean)
+        except (ValueError, TypeError) as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}",
+            ) from e
+
+    # Fetch notifications
+    notifications = list_notifications(
+        conn=db,
+        user_id=x_user_id,
+        since=since_dt,
+        limit=limit,
+    )
+
+    return JSONResponse(
+        content={
+            "notifications": [n.to_dict() for n in notifications],
+            "count": len(notifications),
+        }
+    )
 
 
 @app.exception_handler(HTTPException)
