@@ -16,11 +16,6 @@ from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
-from handsfree.db.github_connections import (
-    create_github_connection,
-    get_github_connection,
-    get_github_connections_by_user,
-)
 from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
@@ -37,10 +32,7 @@ from handsfree.models import (
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
-    CreateGitHubConnectionRequest,
     DebugInfo,
-    GitHubConnectionResponse,
-    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,

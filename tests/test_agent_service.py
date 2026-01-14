@@ -319,7 +319,9 @@ class TestNotifications:
         assert notif.metadata["repo_full_name"] == "owner/repo"
         assert "https://github.com/owner/repo/pull/123" in notif.message
 
-    def test_completion_notification_with_pr_number_only(self, agent_service, db_conn, test_user_id):
+    def test_completion_notification_with_pr_number_only(
+        self, agent_service, db_conn, test_user_id
+    ):
         """Test completion notification with PR number but no URL."""
         from handsfree.db.notifications import list_notifications
 
