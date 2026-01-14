@@ -1,33 +1,12 @@
-"""Speech-to-Text (STT) abstraction layer.
+"""Stub STT provider that returns deterministic responses for testing.
 
-Provides an interface for STT providers with a safe stub implementation for CI/dev.
+This is the default implementation used in CI and dev environments.
+It doesn't require any external dependencies or API keys.
 """
 
 import logging
-import os
-from typing import Protocol
 
 logger = logging.getLogger(__name__)
-
-
-class STTProvider(Protocol):
-    """Protocol for STT providers."""
-
-    def transcribe(self, audio_data: bytes, format: str) -> str:
-        """Transcribe audio data to text.
-
-        Args:
-            audio_data: Raw audio data bytes
-            format: Audio format (wav, m4a, mp3, opus)
-
-        Returns:
-            Transcribed text
-
-        Raises:
-            NotImplementedError: If STT is not enabled/available
-            ValueError: If audio format is unsupported
-        """
-        ...
 
 
 class StubSTTProvider:
@@ -87,33 +66,3 @@ class StubSTTProvider:
             return "what is the status of my agent tasks"
         else:
             return "list my pull requests"
-
-
-def get_stt_provider() -> STTProvider:
-    """Get the configured STT provider.
-
-    Returns the appropriate STT provider based on environment configuration:
-    - If HANDSFREE_STT_PROVIDER=stub or unset: returns StubSTTProvider
-    - If HANDSFREE_STT_ENABLED=false: returns disabled StubSTTProvider
-    - Future: Support for real providers (whisper, google, azure, etc.)
-
-    Returns:
-        An STTProvider instance
-
-    Environment variables:
-        HANDSFREE_STT_PROVIDER: Provider type (default: "stub")
-        HANDSFREE_STT_ENABLED: Whether STT is enabled (default: "true")
-    """
-    provider_type = os.environ.get("HANDSFREE_STT_PROVIDER", "stub").lower()
-    enabled = os.environ.get("HANDSFREE_STT_ENABLED", "true").lower() in (
-        "true",
-        "1",
-        "yes",
-    )
-
-    if provider_type == "stub":
-        return StubSTTProvider(enabled=enabled)
-    else:
-        # Future: Support other providers
-        logger.warning("Unknown STT provider '%s', falling back to stub", provider_type)
-        return StubSTTProvider(enabled=enabled)
