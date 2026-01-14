@@ -455,17 +455,35 @@ def get_default_auth_provider() -> GitHubAuthProvider:
 def get_token_provider() -> TokenProvider:
     """Get a token provider for LiveGitHubProvider based on environment.
     
-    Checks HANDS_FREE_GITHUB_MODE or GITHUB_LIVE_MODE environment variables.
+    Priority order:
+    1. FixtureTokenProvider if HANDS_FREE_GITHUB_MODE is explicitly set to "fixtures"
+    2. GitHubAppTokenProvider if GitHub App is configured
+    3. EnvTokenProvider if GITHUB_TOKEN is set
+    4. FixtureTokenProvider as fallback
 
     Returns:
-        EnvTokenProvider if live mode is enabled, otherwise FixtureTokenProvider.
+        TokenProvider instance based on environment configuration.
     """
-    # Check both environment variable names as per problem statement
-    live_mode = (
-        os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live"
-        or os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
-    )
+    # Check if fixture mode is explicitly requested
+    mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
+    if mode == "fixtures":
+        return FixtureTokenProvider()
     
-    if live_mode and os.getenv("GITHUB_TOKEN"):
+    # Check if GitHub App is configured (takes priority over env token)
+    app_id = os.getenv("GITHUB_APP_ID")
+    private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
+    installation_id = os.getenv("GITHUB_INSTALLATION_ID")
+    
+    if app_id and private_key and installation_id:
+        return GitHubAppTokenProvider(
+            app_id=app_id,
+            private_key_pem=private_key,
+            installation_id=installation_id,
+        )
+    
+    # Fall back to environment token if set
+    if os.getenv("GITHUB_TOKEN"):
         return EnvTokenProvider()
+    
+    # Default to fixture-only mode
     return FixtureTokenProvider()
