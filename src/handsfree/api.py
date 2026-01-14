@@ -237,18 +237,23 @@ async def github_webhook(
 async def submit_command(
     request: CommandRequest,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
     
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
+        x_user_id: Optional user identifier from X-User-Id header
         
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
+    
+    # Get user ID from header or use fixture user ID
+    user_id = get_user_id_from_header(x_user_id)
     
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
@@ -292,7 +297,7 @@ async def submit_command(
         intent=parsed_intent,
         profile=request.profile,
         session_id=session_id,  # Use session ID from header or idempotency key
-        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
+        user_id=user_id,  # Pass user ID for policy evaluation
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
@@ -303,7 +308,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile
+            router_response, parsed_intent, text, request.profile, user_id
         )
         
         # For non-system commands, update the router's stored response with the enhanced version
