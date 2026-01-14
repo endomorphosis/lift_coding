@@ -6,7 +6,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.db import init_db
 
 
 @pytest.fixture

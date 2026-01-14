@@ -20,7 +20,6 @@ from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.db.github_connections import (
     create_github_connection,
-    delete_github_connection,
     get_github_connection,
     get_github_connections_by_user,
 )

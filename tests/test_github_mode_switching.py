@@ -1,6 +1,5 @@
 """Tests for GitHub provider mode switching via environment variables."""
 
-import os
 
 import pytest
 
