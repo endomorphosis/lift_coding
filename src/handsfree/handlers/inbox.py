@@ -43,15 +43,18 @@ def handle_inbox_list(
         checks_pending = 0
 
         for check in checks:
-            if check.get("status") == "completed":
-                if check.get("conclusion") == "success":
-                    checks_passed += 1
-                elif check.get("conclusion") == "failure":
-                    checks_failed += 1
-                # Skip other conclusions: neutral, skipped, cancelled, timed_out, action_required
-            else:
+            status = check.get("status")
+            conclusion = check.get("conclusion")
+
+            if status != "completed":
                 # queued, in_progress
                 checks_pending += 1
+            elif conclusion == "success":
+                checks_passed += 1
+            elif conclusion == "failure":
+                checks_failed += 1
+            # Skip other conclusions (neutral, skipped, cancelled, timed_out, action_required)
+            # These are not counted as passed, failed, or pending
         # Determine item type
         item_type = "pr"
 
