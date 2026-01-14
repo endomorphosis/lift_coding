@@ -83,7 +83,7 @@ def validate_jwt_token(token: str) -> str:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token: user identifier must be a valid UUID",
-            )
+            ) from None
         
         return str(user_id)
         
@@ -92,13 +92,13 @@ def validate_jwt_token(token: str) -> str:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token expired",
-        )
+        ) from None
     except jwt.InvalidTokenError as e:
         logger.warning("Invalid JWT token: %s", str(e))
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication token",
-        )
+        ) from None
 
 
 def validate_api_key(api_key: str) -> str:
