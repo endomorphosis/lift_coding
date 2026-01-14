@@ -279,7 +279,7 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, user_id
+            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
         )
         # Store for idempotency
         if request.idempotency_key:
@@ -303,7 +303,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile
+            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
         
         # For non-system commands, update the router's stored response with the enhanced version
