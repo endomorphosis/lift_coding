@@ -9,7 +9,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
@@ -42,6 +42,7 @@ from handsfree.models import (
     RequestReviewRequest,
     RerunChecksRequest,
     TextInput,
+    TTSRequest,
     UICard,
 )
 from handsfree.models import (
@@ -231,17 +232,17 @@ async def submit_command(
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
-    
+
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
-        
+
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
-    
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -264,6 +265,9 @@ async def submit_command(
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
+        # Get user_id from header or use fixture
+        user_id = FIXTURE_USER_ID  # In production, would extract from auth token
+        
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
@@ -297,7 +301,7 @@ async def submit_command(
         response = _convert_router_response_to_command_response(
             router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
-        
+
         # For non-system commands, update the router's stored response with the enhanced version
         # This ensures system.repeat returns the full enriched response
         if session_id:
@@ -320,16 +324,18 @@ async def submit_command(
                     "summary": response.pending_action.summary,
                 }
             router._last_responses[session_id] = enhanced_dict
-            
+
             # Also update navigation state with enhanced cards
             if response.cards:
                 items = []
                 for card in response.cards:
-                    items.append({
-                        "type": "card",
-                        "intent_name": parsed_intent.name,
-                        "data": card.model_dump(),
-                    })
+                    items.append(
+                        {
+                            "type": "card",
+                            "intent_name": parsed_intent.name,
+                            "data": card.model_dump(),
+                        }
+                    )
                 router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
@@ -344,20 +350,20 @@ def _convert_router_response_direct(
     transcript: str,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
-    
+
     Used for system commands where router returns complete response that shouldn't be modified.
-    
+
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
-        
+
     Returns:
         CommandResponse object
     """
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
-    
+
     # Get intent from response
     intent_dict = router_response.get("intent", {})
     intent = ParsedIntent(
@@ -365,14 +371,14 @@ def _convert_router_response_direct(
         confidence=intent_dict.get("confidence", 1.0),
         entities=intent_dict.get("entities", {}),
     )
-    
+
     spoken_text = router_response.get("spoken_text", "")
-    
+
     # Get cards if present
     cards: list[UICard] = []
     if "cards" in router_response and router_response["cards"]:
         cards = [UICard(**card) for card in router_response["cards"]]
-    
+
     # Handle pending action
     pending_action = None
     if "pending_action" in router_response and router_response["pending_action"]:
@@ -386,10 +392,10 @@ def _convert_router_response_direct(
             expires_at=expires_at,
             summary=pa["summary"],
         )
-    
+
     # Build debug info
     debug = DebugInfo(transcript=transcript)
-    
+
     return CommandResponse(
         status=status,
         intent=intent,
@@ -1386,7 +1392,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         pr_title = normalized.get("pr_title", "")
-        
+
         if action == "opened":
             message = f"PR #{pr_number} opened in {repo}: {pr_title}"
             notification_type = "webhook.pr_opened"
@@ -1402,7 +1408,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
             # synchronize, reopened
             message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
             notification_type = f"webhook.pr_{action}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1414,15 +1420,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_url": normalized.get("pr_url"),
             },
         )
-    
+
     elif event_type == "check_suite" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         head_branch = normalized.get("head_branch")
-        
+
         message = f"Check suite {conclusion} on {repo} ({head_branch})"
         notification_type = f"webhook.check_suite_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1435,15 +1441,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "check_run" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         check_run_name = normalized.get("check_run_name")
-        
+
         message = f"Check run '{check_run_name}' {conclusion} on {repo}"
         notification_type = f"webhook.check_run_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1456,16 +1462,16 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "pull_request_review" and action == "submitted":
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         review_state = normalized.get("review_state")
         review_author = normalized.get("review_author")
-        
+
         message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
         notification_type = f"webhook.review_{review_state}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1531,6 +1537,74 @@ async def get_notifications(
             "count": len(notifications),
         }
     )
+
+
+@app.post("/v1/tts")
+async def text_to_speech(request: TTSRequest) -> Response:
+    """Convert text to speech audio.
+
+    This endpoint provides fixture-first TTS capability for the dev loop.
+    By default, it uses a stub provider that returns deterministic audio placeholders.
+    Real TTS providers can be enabled via environment variables in production.
+
+    Args:
+        request: TTS request with text, optional voice, and format
+
+    Returns:
+        Audio bytes with appropriate content-type header
+
+    Raises:
+        400 Bad Request for invalid input (empty text, text too long)
+    """
+    from handsfree.tts import StubTTSProvider
+
+    # Input validation
+    if not request.text or not request.text.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text cannot be empty",
+            },
+        )
+
+    if len(request.text) > 5000:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text too long (maximum 5000 characters)",
+            },
+        )
+
+    # For MVP, always use stub provider
+    # In production, check env var for real TTS provider selection
+    # provider = get_tts_provider()  # Would check HANDSFREE_TTS_PROVIDER env var
+    provider = StubTTSProvider()
+
+    try:
+        audio_bytes, content_type = provider.synthesize(
+            text=request.text,
+            voice=request.voice,
+            format=request.format,
+        )
+
+        return Response(
+            content=audio_bytes,
+            media_type=content_type,
+            headers={
+                "Content-Disposition": f'attachment; filename="speech.{request.format}"',
+            },
+        )
+    except Exception as e:
+        logger.error("TTS synthesis failed: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "synthesis_failed",
+                "message": "Failed to synthesize speech",
+            },
+        ) from e
 
 
 @app.exception_handler(HTTPException)

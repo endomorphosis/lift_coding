@@ -71,7 +71,7 @@ def test_post_command_summarize_pr() -> None:
     assert "intent" in data
     assert data["intent"]["name"] == "pr.summarize"
     assert "spoken_text" in data
-    
+
     # Should have cards with PR details
     if "cards" in data and data["cards"]:
         assert isinstance(data["cards"], list)
@@ -364,7 +364,7 @@ def test_agent_delegate_requires_confirmation_in_workout() -> None:
 def test_session_support_via_header() -> None:
     """Test session support via X-Session-Id header."""
     session_id = "test-session-123"
-    
+
     # First command with session
     response1 = client.post(
         "/v1/command",
@@ -380,11 +380,11 @@ def test_session_support_via_header() -> None:
             },
         },
     )
-    
+
     assert response1.status_code == 200
     data1 = response1.json()
     original_text = data1["spoken_text"]
-    
+
     # Repeat command with same session
     response2 = client.post(
         "/v1/command",
@@ -400,10 +400,10 @@ def test_session_support_via_header() -> None:
             },
         },
     )
-    
+
     assert response2.status_code == 200
     data2 = response2.json()
-    
+
     # Should return same spoken text
     assert data2["spoken_text"] == original_text
 
@@ -425,9 +425,9 @@ def test_session_isolation() -> None:
             },
         },
     )
-    
+
     assert response1.status_code == 200
-    
+
     # Session 2 - repeat should not see session 1's history
     response2 = client.post(
         "/v1/command",
@@ -443,10 +443,10 @@ def test_session_isolation() -> None:
             },
         },
     )
-    
+
     assert response2.status_code == 200
     data2 = response2.json()
-    
+
     # Should indicate nothing to repeat
     assert "nothing to repeat" in data2["spoken_text"].lower()
 
@@ -454,7 +454,7 @@ def test_session_isolation() -> None:
 def test_system_next_navigation() -> None:
     """Test system.next navigation through inbox items."""
     session_id = "test-nav-session"
-    
+
     # Get inbox (should have multiple items)
     response1 = client.post(
         "/v1/command",
@@ -470,10 +470,10 @@ def test_system_next_navigation() -> None:
             },
         },
     )
-    
+
     assert response1.status_code == 200
     data1 = response1.json()
-    
+
     # Should have cards
     if "cards" in data1 and len(data1.get("cards", [])) > 1:
         # Next command should work
@@ -491,10 +491,10 @@ def test_system_next_navigation() -> None:
                 },
             },
         )
-        
+
         assert response2.status_code == 200
         data2 = response2.json()
-        
+
         # Should have status ok
         assert data2["status"] == "ok"
         # Should have a single card (the next item)
@@ -518,9 +518,9 @@ def test_next_without_list() -> None:
             },
         },
     )
-    
+
     assert response.status_code == 200
     data = response.json()
-    
+
     assert data["status"] == "ok"
     assert "no list" in data["spoken_text"].lower()

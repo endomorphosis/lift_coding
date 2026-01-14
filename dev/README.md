@@ -110,3 +110,72 @@ When the server is running, visit:
 - Swagger UI: `http://localhost:8080/docs`
 - ReDoc: `http://localhost:8080/redoc`
 - OpenAPI JSON: `http://localhost:8080/openapi.json`
+
+## Text-to-Speech (TTS) Integration
+
+The API includes a `/v1/tts` endpoint for converting text to speech. This is useful for the hands-free dev loop.
+
+### Basic TTS usage
+
+Convert any text to speech:
+
+```bash
+curl -s http://localhost:8080/v1/tts \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"Hello world","format":"wav"}' \
+  --output speech.wav
+```
+
+### TTS Demo Script
+
+Use the included demo script to see the full dev loop in action:
+
+```bash
+# Convert a command response to speech
+python dev/tts_demo.py "inbox"
+
+# Convert PR summary to speech
+python dev/tts_demo.py "summarize pr 123"
+
+# Convert custom text to speech
+python dev/tts_demo.py --text "This is a custom message"
+
+# Play audio automatically (requires audio player)
+python dev/tts_demo.py "inbox" --play
+
+# Use MP3 format instead of WAV
+python dev/tts_demo.py "inbox" --format mp3 --output /tmp/inbox.mp3
+```
+
+The demo script demonstrates:
+1. Submitting a command to `/v1/command`
+2. Extracting the `spoken_text` from the response
+3. Calling `/v1/tts` to convert it to audio
+4. Saving the audio file locally (and optionally playing it)
+
+### TTS API Details
+
+**Endpoint:** `POST /v1/tts`
+
+**Request body:**
+```json
+{
+  "text": "Text to convert to speech",
+  "voice": "en-US-male",  // Optional
+  "format": "wav"          // wav or mp3, default: wav
+}
+```
+
+**Response:**
+- Content-Type: `audio/wav` or `audio/mpeg`
+- Body: Binary audio data
+
+**Validation:**
+- Text must not be empty
+- Text maximum length: 5000 characters
+
+**Implementation:**
+- Uses stub/fixture provider by default (returns deterministic audio)
+- Real TTS providers can be enabled via environment variables in production
+- No secrets required for fixture mode
+
