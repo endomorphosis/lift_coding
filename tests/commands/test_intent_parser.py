@@ -27,7 +27,7 @@ class TestSystemIntents:
         assert result.name == "system.next"
         assert result.confidence >= 0.9
         assert result.entities == {}
-        
+
         result = parser.parse("next one")
         assert result.name == "system.next"
         assert result.confidence >= 0.9

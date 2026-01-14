@@ -5,7 +5,6 @@ Provides an interface for STT providers with a safe stub implementation for CI/d
 
 import logging
 import os
-from abc import ABC, abstractmethod
 from typing import Protocol
 
 logger = logging.getLogger(__name__)
@@ -116,7 +115,5 @@ def get_stt_provider() -> STTProvider:
         return StubSTTProvider(enabled=enabled)
     else:
         # Future: Support other providers
-        logger.warning(
-            "Unknown STT provider '%s', falling back to stub", provider_type
-        )
+        logger.warning("Unknown STT provider '%s', falling back to stub", provider_type)
         return StubSTTProvider(enabled=enabled)

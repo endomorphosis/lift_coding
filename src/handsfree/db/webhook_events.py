@@ -163,14 +163,14 @@ def get_webhook_event_by_id(
 
 class DBWebhookStore:
     """Database-backed webhook store with replay protection.
-    
+
     This store uses DuckDB for persistence and provides replay protection
     by checking for duplicate delivery IDs in the database.
     """
 
     def __init__(self, conn: duckdb.DuckDBPyConnection):
         """Initialize the DB webhook store.
-        
+
         Args:
             conn: Database connection.
         """
@@ -178,10 +178,10 @@ class DBWebhookStore:
 
     def is_duplicate_delivery(self, delivery_id: str) -> bool:
         """Check if delivery ID has been processed before.
-        
+
         Args:
             delivery_id: GitHub delivery ID to check.
-            
+
         Returns:
             True if the delivery ID exists in the database, False otherwise.
         """
@@ -199,13 +199,13 @@ class DBWebhookStore:
         signature_ok: bool,
     ) -> str:
         """Store webhook event and return event ID.
-        
+
         Args:
             delivery_id: GitHub delivery ID.
             event_type: GitHub event type.
             payload: Full webhook payload.
             signature_ok: Whether signature verification passed.
-            
+
         Returns:
             Event ID (UUID string).
         """
@@ -221,17 +221,17 @@ class DBWebhookStore:
 
     def get_event(self, event_id: str) -> dict[str, Any] | None:
         """Retrieve stored event by ID.
-        
+
         Args:
             event_id: The event ID.
-            
+
         Returns:
             Event dict or None if not found.
         """
         event = get_webhook_event_by_id(self.conn, event_id)
         if not event:
             return None
-        
+
         return {
             "id": event.id,
             "source": event.source,
@@ -244,10 +244,10 @@ class DBWebhookStore:
 
     def list_events(self, limit: int = 100) -> list[dict[str, Any]]:
         """List recent events.
-        
+
         Args:
             limit: Maximum number of events to return.
-            
+
         Returns:
             List of event dicts, ordered by received_at DESC.
         """
@@ -268,14 +268,14 @@ class DBWebhookStore:
 
 def get_db_webhook_store() -> DBWebhookStore:
     """Get a DB-backed webhook store instance.
-    
+
     This function provides a singleton-like access to the webhook store
     that uses the database for persistence.
-    
+
     Returns:
         DBWebhookStore instance connected to the database.
     """
     from handsfree.db import init_db
-    
+
     conn = init_db()
     return DBWebhookStore(conn)

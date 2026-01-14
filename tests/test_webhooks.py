@@ -15,12 +15,12 @@ def reset_webhook_store():
     """Reset webhook store before each test."""
     # Clean up DB-backed store using the shared connection from api.py
     from handsfree import api
-    
+
     # Reset global state in api.py
     api._db_conn = None
     api._webhook_store = None
     api._command_router = None
-    
+
     # Get fresh DB connection and clear webhook events
     conn = api.get_db()
     conn.execute("DELETE FROM webhook_events")

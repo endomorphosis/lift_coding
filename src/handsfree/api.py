@@ -18,11 +18,6 @@ from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
-from handsfree.db.github_connections import (
-    create_github_connection,
-    get_github_connection,
-    get_github_connections_by_user,
-)
 from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
@@ -40,10 +35,7 @@ from handsfree.models import (
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
-    CreateGitHubConnectionRequest,
     DebugInfo,
-    GitHubConnectionResponse,
-    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -147,32 +139,32 @@ def get_db_webhook_store() -> DBWebhookStore:
 
 def _fetch_audio_data(uri: str) -> bytes:
     """Fetch audio data from URI.
-    
+
     Supports file:// URIs for local testing and development.
     In production, this could support pre-signed URLs from S3, etc.
-    
+
     Args:
         uri: Audio URI (file:// or local path)
-        
+
     Returns:
         Audio data as bytes
-        
+
     Raises:
         ValueError: If URI scheme is unsupported
         FileNotFoundError: If local file doesn't exist
     """
     parsed = urlparse(uri)
-    
+
     # Support file:// URIs and plain paths
     if parsed.scheme in ("", "file"):
         # Extract path from file:// URI or use as-is
         path = parsed.path if parsed.scheme == "file" else uri
-        
+
         # Convert to Path object and read
         file_path = Path(path)
         if not file_path.exists():
             raise FileNotFoundError(f"Audio file not found: {path}")
-        
+
         return file_path.read_bytes()
     else:
         # Future: Support http/https pre-signed URLs
@@ -280,17 +272,17 @@ async def submit_command(
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
-    
+
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
-        
+
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
-    
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -303,11 +295,11 @@ async def submit_command(
         try:
             # Fetch audio data from URI
             audio_data = _fetch_audio_data(request.input.uri)
-            
+
             # Get STT provider and transcribe
             stt_provider = get_stt_provider()
             text = stt_provider.transcribe(audio_data, request.input.format.value)
-            
+
             logger.info(
                 "Transcribed audio input: format=%s, duration_ms=%s, transcript_length=%d",
                 request.input.format.value,
@@ -388,7 +380,7 @@ async def submit_command(
         response = _convert_router_response_to_command_response(
             router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
-        
+
         # For non-system commands, update the router's stored response with the enhanced version
         # This ensures system.repeat returns the full enriched response
         if session_id:
@@ -411,16 +403,18 @@ async def submit_command(
                     "summary": response.pending_action.summary,
                 }
             router._last_responses[session_id] = enhanced_dict
-            
+
             # Also update navigation state with enhanced cards
             if response.cards:
                 items = []
                 for card in response.cards:
-                    items.append({
-                        "type": "card",
-                        "intent_name": parsed_intent.name,
-                        "data": card.model_dump(),
-                    })
+                    items.append(
+                        {
+                            "type": "card",
+                            "intent_name": parsed_intent.name,
+                            "data": card.model_dump(),
+                        }
+                    )
                 router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
@@ -435,20 +429,20 @@ def _convert_router_response_direct(
     transcript: str,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
-    
+
     Used for system commands where router returns complete response that shouldn't be modified.
-    
+
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
-        
+
     Returns:
         CommandResponse object
     """
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
-    
+
     # Get intent from response
     intent_dict = router_response.get("intent", {})
     intent = ParsedIntent(
@@ -456,14 +450,14 @@ def _convert_router_response_direct(
         confidence=intent_dict.get("confidence", 1.0),
         entities=intent_dict.get("entities", {}),
     )
-    
+
     spoken_text = router_response.get("spoken_text", "")
-    
+
     # Get cards if present
     cards: list[UICard] = []
     if "cards" in router_response and router_response["cards"]:
         cards = [UICard(**card) for card in router_response["cards"]]
-    
+
     # Handle pending action
     pending_action = None
     if "pending_action" in router_response and router_response["pending_action"]:
@@ -477,10 +471,10 @@ def _convert_router_response_direct(
             expires_at=expires_at,
             summary=pa["summary"],
         )
-    
+
     # Build debug info
     debug = DebugInfo(transcript=transcript)
-    
+
     return CommandResponse(
         status=status,
         intent=intent,
@@ -1477,7 +1471,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         pr_title = normalized.get("pr_title", "")
-        
+
         if action == "opened":
             message = f"PR #{pr_number} opened in {repo}: {pr_title}"
             notification_type = "webhook.pr_opened"
@@ -1493,7 +1487,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
             # synchronize, reopened
             message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
             notification_type = f"webhook.pr_{action}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1505,15 +1499,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_url": normalized.get("pr_url"),
             },
         )
-    
+
     elif event_type == "check_suite" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         head_branch = normalized.get("head_branch")
-        
+
         message = f"Check suite {conclusion} on {repo} ({head_branch})"
         notification_type = f"webhook.check_suite_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1526,15 +1520,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "check_run" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         check_run_name = normalized.get("check_run_name")
-        
+
         message = f"Check run '{check_run_name}' {conclusion} on {repo}"
         notification_type = f"webhook.check_run_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1547,16 +1541,16 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "pull_request_review" and action == "submitted":
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         review_state = normalized.get("review_state")
         review_author = normalized.get("review_author")
-        
+
         message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
         notification_type = f"webhook.review_{review_state}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,

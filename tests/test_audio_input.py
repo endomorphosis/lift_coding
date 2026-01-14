@@ -14,13 +14,13 @@ client = TestClient(app)
 @pytest.fixture
 def audio_file():
     """Create a temporary audio file for testing."""
-    with tempfile.NamedTemporaryFile(mode='wb', suffix='.wav', delete=False) as f:
+    with tempfile.NamedTemporaryFile(mode="wb", suffix=".wav", delete=False) as f:
         # Write some dummy audio data (doesn't need to be valid WAV)
         f.write(b"dummy audio data for testing")
         temp_path = f.name
-    
+
     yield temp_path
-    
+
     # Cleanup - use try/except to handle already deleted files
     try:
         Path(temp_path).unlink()
@@ -31,6 +31,7 @@ def audio_file():
 def test_audio_input_with_stub_stt(audio_file):
     """Test POST /v1/command with audio input using stub STT."""
     import uuid
+
     response = client.post(
         "/v1/command",
         json={
@@ -59,7 +60,7 @@ def test_audio_input_with_stub_stt(audio_file):
     assert "intent" in data
     assert "spoken_text" in data
     assert "debug" in data
-    
+
     # Debug info should have transcript
     # The stub returns deterministic transcripts based on audio data hash
 
@@ -67,6 +68,7 @@ def test_audio_input_with_stub_stt(audio_file):
 def test_audio_input_local_path(audio_file):
     """Test audio input with local path (no file:// scheme)."""
     import uuid
+
     response = client.post(
         "/v1/command",
         json={
@@ -115,11 +117,13 @@ def test_audio_input_file_not_found():
 
     assert response.status_code == 200
     data = response.json()
-    
+
     # Should return error status
     assert data["status"] == "error"
     assert data["intent"]["name"] == "error.audio_input"
-    assert "not found" in data["spoken_text"].lower() or "process audio" in data["spoken_text"].lower()
+    assert (
+        "not found" in data["spoken_text"].lower() or "process audio" in data["spoken_text"].lower()
+    )
 
 
 def test_audio_input_unsupported_format(audio_file):
@@ -154,11 +158,11 @@ def test_audio_input_unsupported_format(audio_file):
 def test_audio_input_stt_disabled(audio_file, monkeypatch):
     """Test audio input when STT is disabled via env var."""
     monkeypatch.setenv("HANDSFREE_STT_ENABLED", "false")
-    
+
     # Need to reload the module to pick up env var change
     # For this test, we'll just verify the error message structure
     # In a real scenario, we'd need to restart the app or use dependency injection
-    
+
     response = client.post(
         "/v1/command",
         json={
@@ -178,12 +182,12 @@ def test_audio_input_stt_disabled(audio_file, monkeypatch):
         },
     )
 
-    # With current implementation using get_stt_provider(), 
+    # With current implementation using get_stt_provider(),
     # it will read env var at call time
     # If HANDSFREE_STT_ENABLED=false, should get error
     assert response.status_code == 200
     data = response.json()
-    
+
     # Should get an error about STT being disabled
     assert data["status"] == "error"
     assert data["intent"]["name"] == "error.stt_disabled"
@@ -208,7 +212,7 @@ def test_text_input_unchanged():
 
     assert response.status_code == 200
     data = response.json()
-    
+
     # Text input should work exactly as before
     assert data["status"] in ["ok", "needs_confirmation"]
     assert "intent" in data
@@ -239,7 +243,7 @@ def test_audio_input_idempotency(audio_file):
 
     assert response1.status_code == 200
     assert response2.status_code == 200
-    
+
     # Responses should be identical due to idempotency
     assert response1.json() == response2.json()
 
@@ -247,8 +251,9 @@ def test_audio_input_idempotency(audio_file):
 def test_audio_input_different_formats(audio_file):
     """Test audio input with different supported formats."""
     import uuid
+
     formats = ["wav", "m4a", "mp3", "opus"]
-    
+
     for fmt in formats:
         response = client.post(
             "/v1/command",
