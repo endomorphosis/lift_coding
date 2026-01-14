@@ -68,7 +68,7 @@ class GitHubProvider(GitHubProviderInterface):
         if auth_provider is None:
             auth_provider = get_default_auth_provider()
         self.auth_provider = auth_provider
-        
+
         # Create a live provider instance for when live mode is enabled
         self._live_provider: LiveGitHubProvider | None = None
 
@@ -98,27 +98,28 @@ class GitHubProvider(GitHubProviderInterface):
 
     def _get_live_provider(self, user_id: str) -> "LiveGitHubProvider":
         """Get or create a live provider instance for the given user.
-        
+
         Args:
             user_id: User ID for authentication
-            
+
         Returns:
             LiveGitHubProvider instance configured for the user
         """
+
         # Create a simple token provider that wraps the auth_provider
         class UserTokenProvider:
             def __init__(self, auth_provider: GitHubAuthProvider, user_id: str):
                 self._auth_provider = auth_provider
                 self._user_id = user_id
-            
+
             def get_token(self) -> str | None:
                 return self._auth_provider.get_token(self._user_id)
-        
+
         # Create or reuse live provider
         if self._live_provider is None:
             token_provider = UserTokenProvider(self.auth_provider, user_id)
             self._live_provider = LiveGitHubProvider(token_provider)
-        
+
         return self._live_provider
 
     def list_user_prs(self, user: str, user_id: str | None = None) -> list[dict[str, Any]]:
@@ -269,15 +270,15 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         try:
             import httpx
-            
+
             url = f"https://api.github.com{endpoint}"
             headers = self._get_headers()
-            
+
             logger.debug("Making GitHub API request: %s", url)
-            
+
             with httpx.Client(timeout=10.0) as client:
                 response = client.get(url, headers=headers, params=params or {})
-                
+
                 # Check for rate limiting
                 if response.status_code == 429:
                     rate_limit_reset = response.headers.get("X-RateLimit-Reset", "unknown")
@@ -285,34 +286,34 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     raise RuntimeError(
                         f"GitHub API rate limit exceeded. Try again after {rate_limit_reset}"
                     )
-                
+
                 # Check for authentication errors
                 if response.status_code == 401:
                     logger.error("GitHub API authentication failed: 401 Unauthorized")
                     raise RuntimeError(
                         "GitHub API authentication failed. Token may be invalid or expired."
                     )
-                
+
                 if response.status_code == 403:
                     logger.error("GitHub API access forbidden: 403 Forbidden")
                     raise RuntimeError(
                         "GitHub API access forbidden. Token may lack required permissions."
                     )
-                
+
                 # Raise for other HTTP errors
                 if response.status_code >= 400:
                     logger.error(
                         "GitHub API request failed: HTTP %d - %s",
                         response.status_code,
-                        response.text[:200]
+                        response.text[:200],
                     )
                     raise RuntimeError(
                         f"GitHub API request failed with status {response.status_code}"
                     )
-                
+
                 response.raise_for_status()
                 return response.json()
-                
+
         except httpx.TimeoutException as e:
             logger.error("GitHub API request timed out: %s", str(e))
             raise RuntimeError(f"GitHub API request timed out: {e}") from e
@@ -327,16 +328,16 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
     def _transform_search_prs_response(self, response: dict[str, Any]) -> list[dict[str, Any]]:
         """Transform GitHub search issues response to fixture format.
-        
+
         Args:
             response: GitHub API search response
-            
+
         Returns:
             List of PRs in fixture format
         """
         items = response.get("items", [])
         transformed = []
-        
+
         for item in items:
             # Extract repo from html_url or repository_url
             repo = item.get("repository_url", "").replace("https://api.github.com/repos/", "")
@@ -347,29 +348,31 @@ class LiveGitHubProvider(GitHubProviderInterface):
                 parts = html_url.split("/")
                 if len(parts) >= 5:
                     repo = f"{parts[3]}/{parts[4]}"
-            
+
             pr_number = item.get("number", 0)
             labels = [label.get("name", "") for label in item.get("labels", [])]
-            
+
             # Determine if user is requested reviewer or assignee
             # GitHub search API doesn't directly provide this, so we make reasonable guesses
             assignee = item.get("assignee") is not None
             # For requested_reviewer, we'd need to check if any reviewer is set
             requested_reviewer = len(item.get("assignees", [])) == 0 and item.get("state") == "open"
-            
-            transformed.append({
-                "repo": repo,
-                "pr_number": pr_number,
-                "title": item.get("title", ""),
-                "url": item.get("html_url", ""),
-                "state": item.get("state", "open"),
-                "author": item.get("user", {}).get("login", ""),
-                "requested_reviewer": requested_reviewer,
-                "assignee": assignee,
-                "updated_at": item.get("updated_at", ""),
-                "labels": labels,
-            })
-        
+
+            transformed.append(
+                {
+                    "repo": repo,
+                    "pr_number": pr_number,
+                    "title": item.get("title", ""),
+                    "url": item.get("html_url", ""),
+                    "state": item.get("state", "open"),
+                    "author": item.get("user", {}).get("login", ""),
+                    "requested_reviewer": requested_reviewer,
+                    "assignee": assignee,
+                    "updated_at": item.get("updated_at", ""),
+                    "labels": labels,
+                }
+            )
+
         return transformed
 
     def list_user_prs(self, user: str, user_id: str | None = None) -> list[dict[str, Any]]:
@@ -388,19 +391,19 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
     def _transform_pr_details_response(self, response: dict[str, Any]) -> dict[str, Any]:
         """Transform GitHub PR response to fixture format.
-        
+
         Args:
             response: GitHub API PR response
-            
+
         Returns:
             PR details in fixture format
         """
         # Extract repo from base.repo
         base_repo = response.get("base", {}).get("repo", {})
         repo = base_repo.get("full_name", "")
-        
+
         labels = [label.get("name", "") for label in response.get("labels", [])]
-        
+
         return {
             "repo": repo,
             "pr_number": response.get("number", 0),
@@ -437,26 +440,28 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
     def _transform_pr_checks_response(self, response: dict[str, Any]) -> list[dict[str, Any]]:
         """Transform GitHub check runs response to fixture format.
-        
+
         Args:
             response: GitHub API check runs response
-            
+
         Returns:
             List of checks in fixture format
         """
         check_runs = response.get("check_runs", [])
         transformed = []
-        
+
         for check in check_runs:
-            transformed.append({
-                "name": check.get("name", ""),
-                "status": check.get("status", ""),
-                "conclusion": check.get("conclusion", ""),
-                "started_at": check.get("started_at", ""),
-                "completed_at": check.get("completed_at", ""),
-                "url": check.get("html_url", ""),
-            })
-        
+            transformed.append(
+                {
+                    "name": check.get("name", ""),
+                    "status": check.get("status", ""),
+                    "conclusion": check.get("conclusion", ""),
+                    "started_at": check.get("started_at", ""),
+                    "completed_at": check.get("completed_at", ""),
+                    "url": check.get("html_url", ""),
+                }
+            )
+
         return transformed
 
     def get_pr_checks(
@@ -470,11 +475,11 @@ class LiveGitHubProvider(GitHubProviderInterface):
             # First get the PR to get the head SHA
             pr_response = self._make_request(f"/repos/{repo}/pulls/{pr_number}")
             head_sha = pr_response.get("head", {}).get("sha")
-            
+
             if not head_sha:
                 logger.warning("Could not get head SHA for PR %s/%d", repo, pr_number)
                 raise RuntimeError("Could not determine PR head SHA")
-            
+
             # Get check runs for the head commit
             response = self._make_request(f"/repos/{repo}/commits/{head_sha}/check-runs")
             return self._transform_pr_checks_response(response)
@@ -484,23 +489,25 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
     def _transform_pr_reviews_response(self, reviews: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Transform GitHub reviews response to fixture format.
-        
+
         Args:
             reviews: GitHub API reviews response (list)
-            
+
         Returns:
             List of reviews in fixture format
         """
         transformed = []
-        
+
         for review in reviews:
-            transformed.append({
-                "user": review.get("user", {}).get("login", ""),
-                "state": review.get("state", ""),
-                "submitted_at": review.get("submitted_at", ""),
-                "body": review.get("body", ""),
-            })
-        
+            transformed.append(
+                {
+                    "user": review.get("user", {}).get("login", ""),
+                    "state": review.get("state", ""),
+                    "submitted_at": review.get("submitted_at", ""),
+                    "body": review.get("body", ""),
+                }
+            )
+
         return transformed
 
     def get_pr_reviews(

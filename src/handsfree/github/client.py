@@ -153,6 +153,18 @@ def request_reviewers(
         }
 
 
+def rerun_workflow(
+    repo: str,
+    pr_number: int,
+    token: str,
+    run_id: int | None = None,
+    timeout: float = 10.0,
+) -> dict[str, Any]:
+    """Re-run workflow checks for a PR using the GitHub API.
+
+    This function makes real HTTP requests to GitHub's API to re-run workflow runs.
+    If run_id is provided, it will re-run that specific workflow run.
+    Otherwise, it will fetch the latest workflow run for the PR's head SHA and re-run it.
 def get_pull_request(
     repo: str,
     pr_number: int,
@@ -171,6 +183,7 @@ def get_pull_request(
         repo: Repository in owner/name format (e.g., "octocat/hello-world").
         pr_number: Pull request number.
         token: GitHub authentication token.
+        run_id: Optional workflow run ID. If not provided, fetches latest for PR.
         timeout: Request timeout in seconds (default: 10.0).
 
     Returns:
@@ -178,6 +191,8 @@ def get_pull_request(
         - ok: bool - True if request succeeded
         - message: str - Human-readable message
         - status_code: int - HTTP status code
+        - response_data: dict - GitHub API response (if successful)
+        - run_id: int - The workflow run ID that was re-run
         - pr_data: dict - PR details (if successful) including state, mergeable, etc.
 
     Raises:
@@ -208,6 +223,120 @@ def get_pull_request(
         "X-GitHub-Api-Version": "2022-11-28",
     }
 
+    # If run_id is not provided, fetch the latest workflow run for this PR
+    if run_id is None:
+        logger.info(
+            "Fetching latest workflow run for %s#%d (live mode)",
+            repo,
+            pr_number,
+        )
+
+        try:
+            # First, get the PR to find its head SHA
+            pr_endpoint = f"https://api.github.com/repos/{repo}/pulls/{pr_number}"
+            pr_response = httpx.get(pr_endpoint, headers=headers, timeout=timeout)
+
+            if not (200 <= pr_response.status_code < 300):
+                error_msg = f"Failed to fetch PR info: HTTP {pr_response.status_code}"
+                try:
+                    error_data = pr_response.json()
+                    if "message" in error_data:
+                        error_msg = f"{error_msg}: {error_data['message']}"
+                except Exception:
+                    if pr_response.text:
+                        error_msg = f"{error_msg}: {pr_response.text[:200]}"
+                logger.error("Failed to fetch PR %s#%d: %s", repo, pr_number, error_msg)
+                return {
+                    "ok": False,
+                    "message": error_msg,
+                    "status_code": pr_response.status_code,
+                }
+
+            pr_data = pr_response.json()
+            head_sha = pr_data.get("head", {}).get("sha")
+
+            if not head_sha:
+                error_msg = "Could not find head SHA for PR"
+                logger.error("Failed to get head SHA for %s#%d", repo, pr_number)
+                return {
+                    "ok": False,
+                    "message": error_msg,
+                    "status_code": pr_response.status_code,
+                }
+
+            # Now fetch workflow runs for this SHA
+            runs_endpoint = f"https://api.github.com/repos/{repo}/actions/runs"
+            runs_response = httpx.get(
+                runs_endpoint,
+                headers=headers,
+                params={"head_sha": head_sha, "per_page": 1},
+                timeout=timeout,
+            )
+
+            if not (200 <= runs_response.status_code < 300):
+                error_msg = f"Failed to fetch workflow runs: HTTP {runs_response.status_code}"
+                try:
+                    error_data = runs_response.json()
+                    if "message" in error_data:
+                        error_msg = f"{error_msg}: {error_data['message']}"
+                except Exception:
+                    if runs_response.text:
+                        error_msg = f"{error_msg}: {runs_response.text[:200]}"
+                logger.error(
+                    "Failed to fetch workflow runs for %s#%d: %s",
+                    repo,
+                    pr_number,
+                    error_msg,
+                )
+                return {
+                    "ok": False,
+                    "message": error_msg,
+                    "status_code": runs_response.status_code,
+                }
+
+            runs_data = runs_response.json()
+            workflow_runs = runs_data.get("workflow_runs", [])
+
+            if not workflow_runs:
+                error_msg = f"No workflow runs found for PR #{pr_number}"
+                logger.warning("No workflow runs found for %s#%d", repo, pr_number)
+                return {
+                    "ok": False,
+                    "message": error_msg,
+                    "status_code": 404,
+                }
+
+            run_id = workflow_runs[0]["id"]
+            logger.info("Found workflow run ID %d for %s#%d", run_id, repo, pr_number)
+
+        except Exception as e:
+            error_msg = f"Failed to fetch workflow run: {type(e).__name__}: {str(e)}"
+            logger.error(
+                "Failed to fetch workflow run for %s#%d: %s",
+                repo,
+                pr_number,
+                error_msg,
+            )
+            return {
+                "ok": False,
+                "message": error_msg,
+                "status_code": 0,
+            }
+
+    # Now re-run the workflow
+    rerun_endpoint = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/rerun"
+
+    logger.info(
+        "Re-running workflow run %d on %s#%d (live mode)",
+        run_id,
+        repo,
+        pr_number,
+    )
+
+    try:
+        # Make the POST request to re-run
+        response = httpx.post(
+            rerun_endpoint,
     logger.info("Getting PR details for %s#%d (live mode)", repo, pr_number)
 
     try:
@@ -351,6 +480,8 @@ def merge_pull_request(
         # Check if request was successful (2xx status code)
         if 200 <= response.status_code < 300:
             logger.info(
+                "Successfully re-ran workflow run %d on %s#%d (HTTP %d)",
+                run_id,
                 "Successfully merged PR %s#%d (HTTP %d)",
                 repo,
                 pr_number,
@@ -358,6 +489,13 @@ def merge_pull_request(
             )
             return {
                 "ok": True,
+                "message": f"Workflow checks re-run on PR #{pr_number}",
+                "status_code": response.status_code,
+                "run_id": run_id,
+            }
+        else:
+            # Non-2xx status code
+            error_msg = f"GitHub API returned HTTP {response.status_code}"
                 "message": f"PR #{pr_number} merged successfully",
                 "status_code": response.status_code,
                 "response_data": response.json(),
@@ -376,6 +514,11 @@ def merge_pull_request(
                 if response.text:
                     error_msg = f"{error_msg}: {response.text[:200]}"
 
+            logger.error(
+                "Failed to re-run workflow on %s#%d: %s",
+                repo,
+                pr_number,
+                error_msg,
             # Classify error types based on status code
             if response.status_code == 405:
                 error_type = "not_mergeable"
@@ -413,6 +556,12 @@ def merge_pull_request(
     except Exception as e:
         # Network error, timeout, or other exception
         error_msg = f"Request failed: {type(e).__name__}: {str(e)}"
+        logger.error(
+            "Failed to re-run workflow on %s#%d: %s",
+            repo,
+            pr_number,
+            error_msg,
+        )
         logger.error("Failed to merge PR %s#%d: %s", repo, pr_number, error_msg)
         return {
             "ok": False,

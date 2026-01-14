@@ -114,9 +114,9 @@ class TestUserTokenProviderWithConnection:
 
         provider = UserTokenProvider(db_conn, test_user_id, http_client=mock_http_client)
         inner_provider = provider._get_provider()
-        
+
         assert isinstance(inner_provider, GitHubAppTokenProvider)
-        
+
         # Should be able to get token
         token = provider.get_token()
         assert token == "ghs_mock_installation_token_abc123"
@@ -135,16 +135,16 @@ class TestUserTokenProviderWithConnection:
         # Clear GitHub App configuration
         monkeypatch.delenv("GITHUB_APP_ID", raising=False)
         monkeypatch.delenv("GITHUB_APP_PRIVATE_KEY_PEM", raising=False)
-        
+
         # Set environment token as fallback
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
 
         provider = UserTokenProvider(db_conn, test_user_id)
         inner_provider = provider._get_provider()
-        
+
         # Should fall back to EnvTokenProvider
         assert isinstance(inner_provider, EnvTokenProvider)
-        
+
         token = provider.get_token()
         assert token == "ghp_test_token"
 
@@ -164,9 +164,9 @@ class TestUserTokenProviderWithConnection:
 
         provider = UserTokenProvider(db_conn, test_user_id)
         inner_provider = provider._get_provider()
-        
+
         assert isinstance(inner_provider, EnvTokenProvider)
-        
+
         token = provider.get_token()
         assert token == "ghp_test_token"
 
@@ -186,9 +186,9 @@ class TestUserTokenProviderWithConnection:
 
         provider = UserTokenProvider(db_conn, test_user_id)
         inner_provider = provider._get_provider()
-        
+
         assert isinstance(inner_provider, FixtureTokenProvider)
-        
+
         token = provider.get_token()
         assert token is None
 
@@ -218,9 +218,9 @@ class TestUserTokenProviderMultipleConnections:
 
         provider = UserTokenProvider(db_conn, test_user_id, http_client=mock_http_client)
         inner_provider = provider._get_provider()
-        
+
         assert isinstance(inner_provider, GitHubAppTokenProvider)
-        
+
         # Verify it uses the most recent installation_id (22222)
         assert inner_provider.installation_id == "22222"
 
@@ -238,13 +238,13 @@ class TestUserTokenProviderCaching:
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
 
         provider = UserTokenProvider(db_conn, test_user_id)
-        
+
         # First call should create provider
         provider1 = provider._get_provider()
-        
+
         # Second call should return same instance
         provider2 = provider._get_provider()
-        
+
         assert provider1 is provider2
 
 

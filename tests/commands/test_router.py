@@ -380,9 +380,7 @@ class TestProfileResponseShaping:
             # Allow for "..." which adds one extra "word"
             assert word_count <= config.max_spoken_words + 1
 
-    def test_truncation_is_deterministic(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_truncation_is_deterministic(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test that truncation produces consistent results."""
         intent = parser.parse("summarize pr 456")
 

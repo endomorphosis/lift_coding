@@ -104,7 +104,7 @@ _github_provider = GitHubProvider()
 
 def get_db():
     """Get or initialize database connection.
-    
+
     Uses DUCKDB_PATH environment variable or defaults to data/handsfree.db.
     Tests set DUCKDB_PATH=:memory: in conftest.py for isolation.
     """
@@ -1018,6 +1018,134 @@ async def confirm_command(
                 ),
                 spoken_text=f"Review requested from {reviewers_str} on {target}.",
             )
+    elif action_type == "rerun_checks":
+        # Handle DB-backed rerun_checks action with exactly-once semantics
+        deleted = delete_pending_action(db, request.token)
+
+        if not deleted:
+            # Action was already consumed or cleaned up
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or already consumed",
+                },
+            )
+
+        # Execute the side-effect
+        repo = action_payload.get("repo")
+        pr_number = action_payload.get("pr_number")
+
+        target = f"{repo}#{pr_number}"
+
+        # Check if live mode is enabled and token is available
+        from handsfree.github.auth import get_default_auth_provider
+
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        # Execute via GitHub API if live mode enabled and token available
+        if token:
+            from handsfree.github.client import rerun_workflow
+
+            logger.info(
+                "Executing confirmed rerun_checks via GitHub API (live mode) for %s",
+                target,
+            )
+
+            github_result = rerun_workflow(
+                repo=repo,
+                pr_number=pr_number,
+                token=token,
+            )
+
+            if github_result["ok"]:
+                # Write audit log for successful execution
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=True,
+                    target=target,
+                    request={"confirmed": True},
+                    result={
+                        "status": "success",
+                        "message": "Checks re-run (live mode)",
+                        "via_confirmation": True,
+                        "run_id": github_result.get("run_id"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.OK,
+                    intent=ParsedIntent(
+                        name="rerun_checks.confirmed",
+                        confidence=1.0,
+                        entities={"repo": repo, "pr_number": pr_number},
+                    ),
+                    spoken_text=f"Workflow checks re-run on {target}.",
+                )
+            else:
+                # GitHub API call failed
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=False,
+                    target=target,
+                    request={"confirmed": True},
+                    result={
+                        "status": "error",
+                        "message": github_result["message"],
+                        "via_confirmation": True,
+                        "status_code": github_result.get("status_code"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.ERROR,
+                    intent=ParsedIntent(
+                        name="rerun_checks.confirmed",
+                        confidence=1.0,
+                        entities={"repo": repo, "pr_number": pr_number},
+                    ),
+                    spoken_text=f"Failed to re-run checks: {github_result['message']}",
+                )
+        else:
+            # Fixture mode - simulate success
+            logger.info(
+                "Executing confirmed rerun_checks in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="rerun",
+                ok=True,
+                target=target,
+                request={"confirmed": True},
+                result={
+                    "status": "success",
+                    "message": "Checks re-run (fixture)",
+                    "via_confirmation": True,
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            response = CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(
+                    name="rerun_checks.confirmed",
+                    confidence=1.0,
+                    entities={"repo": repo, "pr_number": pr_number},
+                ),
+                spoken_text=f"Workflow checks re-run on {target}.",
+            )
 
             # Store for idempotency with link to audit log
             if request.idempotency_key:
@@ -1372,6 +1500,225 @@ async def request_review(
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
 async def rerun_checks(
     request: RerunChecksRequest,
+    x_user_id: str | None = Header(default=None),
+) -> ActionResult:
+    """Re-run CI checks with policy evaluation and rate limiting."""
+    # Get user ID from header
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Get DB connection
+    db = get_db()
+
+    # Check idempotency
+    if request.idempotency_key and request.idempotency_key in idempotency_store:
+        logger.info("Returning cached result for idempotency key: %s", request.idempotency_key)
+        return idempotency_store[request.idempotency_key]
+
+    # Rate limiting
+    rate_limit_result = check_rate_limit(
+        db,
+        user_id,
+        "rerun",
+        window_seconds=60,
+        max_requests=5,  # More restrictive than request_review
+    )
+
+    if not rate_limit_result.allowed:
+        # Write audit log for rate limit
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="rerun",
+            ok=False,
+            target=f"{request.repo}#{request.pr_number}",
+            request={},
+            result={"error": "rate_limited", "message": rate_limit_result.reason},
+            idempotency_key=request.idempotency_key,
+        )
+
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "rate_limited",
+                "message": rate_limit_result.reason,
+                "retry_after": rate_limit_result.retry_after_seconds,
+            },
+        )
+
+    # Evaluate policy
+    policy_result = evaluate_action_policy(
+        db,
+        user_id,
+        request.repo,
+        "rerun",
+    )
+
+    # Handle policy decisions
+    if policy_result.decision == PolicyDecision.DENY:
+        # Write audit log for policy denial
+        try:
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="rerun",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={},
+                result={"error": "policy_denied", "message": policy_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used - this is a retry
+            pass
+
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "policy_denied",
+                "message": policy_result.reason,
+            },
+        )
+
+    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+        # Create pending action in database
+        summary = f"Re-run checks on {request.repo}#{request.pr_number}"
+        pending_action = create_pending_action(
+            db,
+            user_id=user_id,
+            summary=summary,
+            action_type="rerun_checks",
+            action_payload={
+                "repo": request.repo,
+                "pr_number": request.pr_number,
+            },
+            expires_in_seconds=300,  # 5 minutes
+        )
+
+        # Write audit log for confirmation required
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="rerun",
+            ok=True,
+            target=f"{request.repo}#{request.pr_number}",
+            request={},
+            result={
+                "status": "needs_confirmation",
+                "token": pending_action.token,
+                "reason": policy_result.reason,
+            },
+            idempotency_key=request.idempotency_key,
+        )
+
+        result = ActionResult(
+            ok=False,
+            message=f"Confirmation required: {policy_result.reason}. "
+            f"Use token '{pending_action.token}' to confirm.",
+            url=None,
+        )
+
+        # Store for idempotency
+        if request.idempotency_key:
+            idempotency_store[request.idempotency_key] = result
+
+        return result
+
+    # Policy allows the action - execute it
+    target = f"{request.repo}#{request.pr_number}"
+
+    # Check if live mode is enabled and token is available
+    from handsfree.github.auth import get_default_auth_provider
+
+    auth_provider = get_default_auth_provider()
+    token = None
+    if auth_provider.supports_live_mode():
+        token = auth_provider.get_token(user_id)
+
+    # Execute via GitHub API if live mode enabled and token available
+    if token:
+        from handsfree.github.client import rerun_workflow
+
+        logger.info(
+            "Executing rerun_checks via GitHub API (live mode) for %s",
+            target,
+        )
+
+        github_result = rerun_workflow(
+            repo=request.repo,
+            pr_number=request.pr_number,
+            token=token,
+        )
+
+        if github_result["ok"]:
+            # Write audit log for successful execution
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="rerun",
+                ok=True,
+                target=target,
+                request={},
+                result={
+                    "status": "success",
+                    "message": "Checks re-run (live mode)",
+                    "run_id": github_result.get("run_id"),
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            result = ActionResult(
+                ok=True,
+                message=github_result["message"],
+                url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+            )
+        else:
+            # GitHub API call failed
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="rerun",
+                ok=False,
+                target=target,
+                request={},
+                result={
+                    "status": "error",
+                    "message": github_result["message"],
+                    "status_code": github_result.get("status_code"),
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            result = ActionResult(
+                ok=False,
+                message=f"GitHub API error: {github_result['message']}",
+                url=None,
+            )
+    else:
+        # Fixture mode - simulate success
+        logger.info(
+            "Executing rerun_checks in fixture mode (no live token) for %s",
+            target,
+        )
+
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="rerun",
+            ok=True,
+            target=target,
+            request={},
+            result={"status": "success", "message": "Checks re-run (fixture)"},
+            idempotency_key=request.idempotency_key,
+        )
+
+        result = ActionResult(
+            ok=True,
+            message=f"Workflow checks re-run on {target}",
+            url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+        )
+
+    # Store for idempotency
+    if request.idempotency_key:
     x_user_id: str | None = Header(None, alias="X-User-Id"),
 ) -> ActionResult:
     """Re-run CI checks (stubbed - real implementation in PR-007).
