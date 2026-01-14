@@ -1,7 +1,5 @@
 """Integration tests for checks.rerun intent command flow."""
 
-import uuid
-
 import pytest
 from fastapi.testclient import TestClient
 
@@ -10,7 +8,6 @@ from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import Profile
 from handsfree.commands.router import CommandRouter
-
 
 # Use a fixed UUID for testing
 TEST_USER_ID = "00000000-0000-0000-0000-000000000001"
@@ -247,9 +244,7 @@ class TestChecksRerunAuditLogging:
         assert logs[0].target == "default/repo#123"
         assert logs[0].result.get("message") == "Checks re-run (fixture)"
 
-    def test_audit_log_policy_denial(
-        self, db_router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_audit_log_policy_denial(self, db_router: CommandRouter, parser: IntentParser) -> None:
         """Test that policy denial creates audit log entry."""
         from handsfree.db.action_logs import get_action_logs
         from handsfree.db.repo_policies import create_or_update_repo_policy

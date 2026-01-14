@@ -657,8 +657,9 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            from handsfree.github.client import request_reviewers as github_request_reviewers
             import logging
+
+            from handsfree.github.client import request_reviewers as github_request_reviewers
 
             logger = logging.getLogger(__name__)
 
@@ -779,8 +780,7 @@ class CommandRouter:
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": (
-                    "Please specify a PR number, for example: "
-                    "'rerun checks for PR 123'."
+                    "Please specify a PR number, for example: 'rerun checks for PR 123'."
                 ),
             }
 
@@ -903,8 +903,9 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            from handsfree.github.client import rerun_workflow
             import logging
+
+            from handsfree.github.client import rerun_workflow
 
             logger = logging.getLogger(__name__)
 
