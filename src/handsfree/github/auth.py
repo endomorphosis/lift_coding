@@ -15,7 +15,7 @@ import logging
 import os
 import time
 from abc import ABC, abstractmethod
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,7 @@ def _import_jwt():
     global _jwt
     if _jwt is None:
         import jwt as jwt_module
+
         _jwt = jwt_module
     return _jwt
 
@@ -39,13 +40,14 @@ def _import_httpx():
     global _httpx
     if _httpx is None:
         import httpx as httpx_module
+
         _httpx = httpx_module
     return _httpx
 
 
 class TokenProvider(ABC):
     """Abstract interface for GitHub token providers.
-    
+
     This is the base interface that all token providers implement.
     It provides a simple get_token() method that returns tokens for GitHub API access.
     """
@@ -62,7 +64,7 @@ class TokenProvider(ABC):
 
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
-    
+
     Legacy interface that includes user_id parameter.
     Kept for backward compatibility with existing code.
     """
@@ -91,7 +93,7 @@ class GitHubAuthProvider(ABC):
 
 class FixtureTokenProvider(TokenProvider):
     """Token provider that always returns None (fixture-only mode).
-    
+
     This is the default provider when no live mode configuration is present.
     All GitHub API calls will fall back to fixture data.
     """
@@ -107,10 +109,10 @@ class FixtureTokenProvider(TokenProvider):
 
 class EnvTokenProvider(TokenProvider):
     """Token provider that reads from GITHUB_TOKEN environment variable.
-    
+
     This is a simple provider for development and testing that uses a
     personal access token from the environment.
-    
+
     Usage:
         export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
         export GITHUB_LIVE_MODE=true
@@ -131,17 +133,17 @@ class EnvTokenProvider(TokenProvider):
 
 class GitHubAppTokenProvider(TokenProvider):
     """Token provider that mints GitHub App installation tokens.
-    
+
     This provider implements the GitHub App authentication flow:
     1. Generate a JWT signed with the app's private key
     2. Use the JWT to request an installation access token
     3. Cache the token and refresh automatically when near expiry
-    
+
     Configuration via environment variables:
     - GITHUB_APP_ID: The GitHub App ID
     - GITHUB_APP_PRIVATE_KEY_PEM: The private key in PEM format (supports \\n escaping)
     - GITHUB_INSTALLATION_ID: The installation ID for the app
-    
+
     Security:
     - Private key is stored in memory only, never logged
     - Tokens are cached in memory only, never persisted
@@ -171,13 +173,13 @@ class GitHubAppTokenProvider(TokenProvider):
         """
         self.app_id = app_id or os.getenv("GITHUB_APP_ID")
         self.installation_id = installation_id or os.getenv("GITHUB_INSTALLATION_ID")
-        
+
         # Get private key and unescape newlines if needed
         raw_key = private_key_pem or os.getenv("GITHUB_APP_PRIVATE_KEY_PEM", "")
         self.private_key_pem = raw_key.replace("\\n", "\n") if raw_key else None
-        
+
         self.http_client = http_client
-        
+
         # Token cache
         self._cached_token: str | None = None
         self._token_expires_at: datetime | None = None
@@ -194,9 +196,7 @@ class GitHubAppTokenProvider(TokenProvider):
         Returns:
             True if all required configuration is present.
         """
-        return bool(
-            self.app_id and self.private_key_pem and self.installation_id
-        )
+        return bool(self.app_id and self.private_key_pem and self.installation_id)
 
     def _generate_jwt(self) -> str:
         """Generate a JWT for GitHub App authentication.
@@ -212,7 +212,7 @@ class GitHubAppTokenProvider(TokenProvider):
 
         try:
             jwt_lib = _import_jwt()
-            
+
             now = int(time.time())
             payload = {
                 "iat": now,  # Issued at time
@@ -221,13 +221,11 @@ class GitHubAppTokenProvider(TokenProvider):
             }
 
             # Sign with RS256 algorithm
-            token = jwt_lib.encode(
-                payload,
-                self.private_key_pem,
-                algorithm="RS256"
+            token = jwt_lib.encode(payload, self.private_key_pem, algorithm="RS256")
+
+            logger.debug(
+                "Generated GitHub App JWT (expires in %d seconds)", self.JWT_EXPIRATION_SECONDS
             )
-            
-            logger.debug("Generated GitHub App JWT (expires in %d seconds)", self.JWT_EXPIRATION_SECONDS)
             return token
 
         except Exception as e:
@@ -244,7 +242,7 @@ class GitHubAppTokenProvider(TokenProvider):
             RuntimeError: If token minting fails.
         """
         jwt_token = self._generate_jwt()
-        
+
         # Use provided HTTP client or create a new httpx client
         if self.http_client:
             response = self.http_client.post(
@@ -271,24 +269,19 @@ class GitHubAppTokenProvider(TokenProvider):
             logger.error(
                 "Failed to mint installation token: HTTP %d - %s",
                 response.status_code,
-                response.text[:200]  # Log first 200 chars of error
+                response.text[:200],  # Log first 200 chars of error
             )
-            raise RuntimeError(
-                f"Failed to mint installation token: HTTP {response.status_code}"
-            )
+            raise RuntimeError(f"Failed to mint installation token: HTTP {response.status_code}")
 
         data = response.json()
         token = data["token"]
         expires_at_str = data["expires_at"]
-        
+
         # Parse expiration time (ISO 8601 format)
         expires_at = datetime.fromisoformat(expires_at_str.replace("Z", "+00:00"))
-        
-        logger.info(
-            "Minted GitHub App installation token (expires at %s)",
-            expires_at.isoformat()
-        )
-        
+
+        logger.info("Minted GitHub App installation token (expires at %s)", expires_at.isoformat())
+
         return token, expires_at
 
     def _should_refresh_token(self) -> bool:
@@ -300,11 +293,11 @@ class GitHubAppTokenProvider(TokenProvider):
         if self._cached_token is None or self._token_expires_at is None:
             return True
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         refresh_threshold = self._token_expires_at - timedelta(
             seconds=self.TOKEN_REFRESH_WINDOW_SECONDS
         )
-        
+
         return now >= refresh_threshold
 
     def get_token(self) -> str | None:
@@ -371,7 +364,7 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
 
 class FixtureOnlyProvider(GitHubAuthProvider):
     """Legacy auth provider that always uses fixtures (default behavior).
-    
+
     Kept for backward compatibility.
     """
 

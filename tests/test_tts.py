@@ -1,6 +1,5 @@
 """Tests for TTS (Text-to-Speech) endpoint."""
 
-
 from fastapi.testclient import TestClient
 
 from handsfree.api import app

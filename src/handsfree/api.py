@@ -20,7 +20,6 @@ from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.db.github_connections import (
     create_github_connection,
-    delete_github_connection,
     get_github_connection,
     get_github_connections_by_user,
 )
@@ -364,7 +363,7 @@ async def submit_command(
     if parsed_intent.name == "pr.request_review":
         # Get user_id from header or use fixture
         user_id = FIXTURE_USER_ID  # In production, would extract from auth token
-        
+
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
