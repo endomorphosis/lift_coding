@@ -562,6 +562,7 @@ def get_token_provider() -> TokenProvider:
     ).lower() in ("true", "1", "yes")
 
     if live_mode and os.getenv("GITHUB_TOKEN"):
+        pass  # Continue to check other providers
     # Check for explicit fixture mode
     github_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
     if github_mode == "fixtures":
