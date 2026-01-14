@@ -253,7 +253,7 @@ def test_post_action_rerun_checks() -> None:
 
 
 def test_post_action_merge() -> None:
-    """Test POST /v1/actions/merge stub."""
+    """Test POST /v1/actions/merge - now requires policy and confirmation."""
     response = client.post(
         "/v1/actions/merge",
         json={
@@ -263,15 +263,14 @@ def test_post_action_merge() -> None:
         },
     )
 
-    assert response.status_code == 200
+    # By default, no policy is set, so merge should be denied
+    assert response.status_code == 403
     data = response.json()
 
-    # Validate ActionResult
-    assert "ok" in data
+    # Validate error response
+    assert "error" in data
+    assert data["error"] == "policy_denied"
     assert "message" in data
-    # Merge should indicate it's not yet implemented
-    assert data["ok"] is False
-    assert "policy" in data["message"].lower() or "PR-007" in data["message"]
 
 
 def test_invalid_command_request() -> None:

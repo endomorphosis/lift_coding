@@ -1423,8 +1423,8 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
     """Merge a PR (stubbed - real implementation in PR-007)."""
     result = ActionResult(
         ok=False,
-        message=f"[STUB] Merge action for {request.repo}#{request.pr_number} "
-        f"requires policy gates. Real implementation in PR-007.",
+        message=f"Confirmation required: {summary}. "
+        f"Use token '{pending_action.token}' to confirm.",
         url=None,
     )
 
