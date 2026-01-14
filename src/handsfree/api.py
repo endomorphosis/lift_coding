@@ -842,7 +842,7 @@ async def confirm_command(
                 },
             )
 
-        # Execute the side-effect (fixture behavior - no real GitHub writes)
+        # Execute the side-effect
         repo = action_payload.get("repo")
         pr_number = action_payload.get("pr_number")
         reviewers = action_payload.get("reviewers", [])
@@ -850,31 +850,115 @@ async def confirm_command(
         target = f"{repo}#{pr_number}"
         reviewers_str = ", ".join(reviewers)
 
-        # Write audit log for the confirmation execution
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=target,
-            request={"reviewers": reviewers, "confirmed": True},
-            result={
-                "status": "success",
-                "message": "Review requested (fixture)",
-                "via_confirmation": True,
-            },
-            idempotency_key=request.idempotency_key,
-        )
+        # Check if live mode is enabled and token is available
+        from handsfree.github.auth import get_default_auth_provider
 
-        response = CommandResponse(
-            status=CommandStatus.OK,
-            intent=ParsedIntent(
-                name="request_review.confirmed",
-                confidence=1.0,
-                entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
-            ),
-            spoken_text=f"Review requested from {reviewers_str} on {target}.",
-        )
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        # Execute via GitHub API if live mode enabled and token available
+        if token:
+            from handsfree.github.client import request_reviewers as github_request_reviewers
+
+            logger.info(
+                "Executing confirmed request_review via GitHub API (live mode) for %s",
+                target,
+            )
+
+            github_result = github_request_reviewers(
+                repo=repo,
+                pr_number=pr_number,
+                reviewers=reviewers,
+                token=token,
+            )
+
+            if github_result["ok"]:
+                # Write audit log for successful execution
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=True,
+                    target=target,
+                    request={"reviewers": reviewers, "confirmed": True},
+                    result={
+                        "status": "success",
+                        "message": "Review requested (live mode)",
+                        "via_confirmation": True,
+                        "github_response": github_result.get("response_data"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.OK,
+                    intent=ParsedIntent(
+                        name="request_review.confirmed",
+                        confidence=1.0,
+                        entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
+                    ),
+                    spoken_text=f"Review requested from {reviewers_str} on {target}.",
+                )
+            else:
+                # GitHub API call failed
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="request_review",
+                    ok=False,
+                    target=target,
+                    request={"reviewers": reviewers, "confirmed": True},
+                    result={
+                        "status": "error",
+                        "message": github_result["message"],
+                        "via_confirmation": True,
+                        "status_code": github_result.get("status_code"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.ERROR,
+                    intent=ParsedIntent(
+                        name="request_review.confirmed",
+                        confidence=1.0,
+                        entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
+                    ),
+                    spoken_text=f"Failed to request reviewers: {github_result['message']}",
+                )
+        else:
+            # Fixture mode - simulate success
+            logger.info(
+                "Executing confirmed request_review in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="request_review",
+                ok=True,
+                target=target,
+                request={"reviewers": reviewers, "confirmed": True},
+                result={
+                    "status": "success",
+                    "message": "Review requested (fixture)",
+                    "via_confirmation": True,
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            response = CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(
+                    name="request_review.confirmed",
+                    confidence=1.0,
+                    entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
+                ),
+                spoken_text=f"Review requested from {reviewers_str} on {target}.",
+            )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -1040,27 +1124,99 @@ async def request_review(
         return result
 
     # Policy allows the action - execute it
-    # In a real implementation, this would call GitHub API
-    # For now, we simulate success
     target = f"{request.repo}#{request.pr_number}"
 
-    # Write audit log for successful execution
-    write_action_log(
-        db,
-        user_id=user_id,
-        action_type="request_review",
-        ok=True,
-        target=target,
-        request={"reviewers": request.reviewers},
-        result={"status": "success", "message": "Review requested (fixture)"},
-        idempotency_key=request.idempotency_key,
-    )
+    # Check if live mode is enabled and token is available
+    from handsfree.github.auth import get_default_auth_provider
 
-    result = ActionResult(
-        ok=True,
-        message=f"Review requested from {', '.join(request.reviewers)} on {target}",
-        url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
-    )
+    auth_provider = get_default_auth_provider()
+    token = None
+    if auth_provider.supports_live_mode():
+        token = auth_provider.get_token(user_id)
+
+    # Execute via GitHub API if live mode enabled and token available
+    if token:
+        from handsfree.github.client import request_reviewers
+
+        logger.info(
+            "Executing request_review via GitHub API (live mode) for %s",
+            target,
+        )
+
+        github_result = request_reviewers(
+            repo=request.repo,
+            pr_number=request.pr_number,
+            reviewers=request.reviewers,
+            token=token,
+        )
+
+        if github_result["ok"]:
+            # Write audit log for successful execution
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="request_review",
+                ok=True,
+                target=target,
+                request={"reviewers": request.reviewers},
+                result={
+                    "status": "success",
+                    "message": "Review requested (live mode)",
+                    "github_response": github_result.get("response_data"),
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            result = ActionResult(
+                ok=True,
+                message=github_result["message"],
+                url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+            )
+        else:
+            # GitHub API call failed
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="request_review",
+                ok=False,
+                target=target,
+                request={"reviewers": request.reviewers},
+                result={
+                    "status": "error",
+                    "message": github_result["message"],
+                    "status_code": github_result.get("status_code"),
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            result = ActionResult(
+                ok=False,
+                message=f"GitHub API error: {github_result['message']}",
+                url=None,
+            )
+    else:
+        # Fixture mode - simulate success
+        logger.info(
+            "Executing request_review in fixture mode (no live token) for %s",
+            target,
+        )
+
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="request_review",
+            ok=True,
+            target=target,
+            request={"reviewers": request.reviewers},
+            result={"status": "success", "message": "Review requested (fixture)"},
+            idempotency_key=request.idempotency_key,
+        )
+
+        result = ActionResult(
+            ok=True,
+            message=f"Review requested from {', '.join(request.reviewers)} on {target}",
+            url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
+        )
 
     # Store for idempotency
     if request.idempotency_key:
@@ -1254,25 +1410,102 @@ async def _handle_request_review_command(
     # Policy allows the action - execute it directly
     target = f"{repo}#{pr_number}"
 
-    # Write audit log for successful execution
-    write_action_log(
-        db,
-        user_id=user_id,
-        action_type="request_review",
-        ok=True,
-        target=target,
-        request={"reviewers": reviewers},
-        result={"status": "success", "message": "Review requested (fixture)"},
-        idempotency_key=idempotency_key,
-    )
+    # Check if live mode is enabled and token is available
+    from handsfree.github.auth import get_default_auth_provider
 
-    reviewers_str = ", ".join(reviewers)
-    return CommandResponse(
-        status=CommandStatus.OK,
-        intent=parsed_intent,
-        spoken_text=f"Review requested from {reviewers_str} on {target}.",
-        debug=DebugInfo(transcript=text),
-    )
+    auth_provider = get_default_auth_provider()
+    token = None
+    if auth_provider.supports_live_mode():
+        token = auth_provider.get_token(user_id)
+
+    # Execute via GitHub API if live mode enabled and token available
+    if token:
+        from handsfree.github.client import request_reviewers as github_request_reviewers
+
+        logger.info(
+            "Executing request_review via GitHub API (live mode) for %s",
+            target,
+        )
+
+        github_result = github_request_reviewers(
+            repo=repo,
+            pr_number=pr_number,
+            reviewers=reviewers,
+            token=token,
+        )
+
+        if github_result["ok"]:
+            # Write audit log for successful execution
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="request_review",
+                ok=True,
+                target=target,
+                request={"reviewers": reviewers},
+                result={
+                    "status": "success",
+                    "message": "Review requested (live mode)",
+                    "github_response": github_result.get("response_data"),
+                },
+                idempotency_key=idempotency_key,
+            )
+
+            reviewers_str = ", ".join(reviewers)
+            return CommandResponse(
+                status=CommandStatus.OK,
+                intent=parsed_intent,
+                spoken_text=f"Review requested from {reviewers_str} on {target}.",
+                debug=DebugInfo(transcript=text),
+            )
+        else:
+            # GitHub API call failed
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="request_review",
+                ok=False,
+                target=target,
+                request={"reviewers": reviewers},
+                result={
+                    "status": "error",
+                    "message": github_result["message"],
+                    "status_code": github_result.get("status_code"),
+                },
+                idempotency_key=idempotency_key,
+            )
+
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=parsed_intent,
+                spoken_text=f"Failed to request reviewers: {github_result['message']}",
+                debug=DebugInfo(transcript=text),
+            )
+    else:
+        # Fixture mode - simulate success
+        logger.info(
+            "Executing request_review in fixture mode (no live token) for %s",
+            target,
+        )
+
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="request_review",
+            ok=True,
+            target=target,
+            request={"reviewers": reviewers},
+            result={"status": "success", "message": "Review requested (fixture)"},
+            idempotency_key=idempotency_key,
+        )
+
+        reviewers_str = ", ".join(reviewers)
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=parsed_intent,
+            spoken_text=f"Review requested from {reviewers_str} on {target}.",
+            debug=DebugInfo(transcript=text),
+        )
 
 
 def _handle_agent_delegate(text: str, device: str, user_id: str) -> CommandResponse:
