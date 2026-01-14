@@ -21,6 +21,18 @@ class TestSystemIntents:
         assert result.confidence >= 0.9
         assert result.entities == {}
 
+    def test_next(self, parser: IntentParser) -> None:
+        """Test system.next intent."""
+        result = parser.parse("next")
+        assert result.name == "system.next"
+        assert result.confidence >= 0.9
+        assert result.entities == {}
+        
+        result = parser.parse("next one")
+        assert result.name == "system.next"
+        assert result.confidence >= 0.9
+        assert result.entities == {}
+
     def test_confirm(self, parser: IntentParser) -> None:
         """Test system.confirm intent."""
         result = parser.parse("confirm")
