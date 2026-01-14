@@ -127,7 +127,10 @@ class TestProfileTruncation:
     def test_truncate_preserves_word_boundaries(self) -> None:
         """Test that truncation preserves complete words."""
         config = ProfileConfig.for_profile(Profile.WORKOUT)  # 15 words max
-        text = "The quick brown fox jumps over the lazy dog and runs through the forest quickly to escape from danger"
+        text = (
+            "The quick brown fox jumps over the lazy dog and runs through "
+            "the forest quickly to escape from danger"
+        )
         result = config.truncate_spoken_text(text)
 
         # Should have complete words, no partial words

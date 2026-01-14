@@ -8,7 +8,8 @@ import uuid
 import pytest
 from fastapi.testclient import TestClient
 
-from handsfree.api import FIXTURE_USER_ID, app, get_db
+from handsfree.api import app, get_db
+from handsfree.auth import FIXTURE_USER_ID
 from handsfree.db.github_connections import create_github_connection
 from handsfree.db.notifications import list_notifications
 from handsfree.db.repo_subscriptions import create_repo_subscription
