@@ -154,6 +154,94 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/github/connect:
+    post:
+      summary: Create or update GitHub connection metadata
+      operationId: createGitHubConnection
+      description: >
+        Store GitHub App installation metadata for the authenticated user.
+        Does NOT store actual tokens - only references to secret manager.
+        Scoped per user via X-User-Id header.
+      parameters:
+        - in: header
+          name: X-User-Id
+          schema:
+            type: string
+            format: uuid
+          required: false
+          description: User ID (defaults to fixture user for dev/testing)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGitHubConnectionRequest'
+      responses:
+        '201':
+          description: Connection created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/github/connection:
+    get:
+      summary: Get GitHub connection status for authenticated user
+      operationId: getGitHubConnection
+      description: >
+        Returns all GitHub connections for the user (usually 0 or 1).
+        Scoped per user via X-User-Id header.
+      parameters:
+        - in: header
+          name: X-User-Id
+          schema:
+            type: string
+            format: uuid
+          required: false
+          description: User ID (defaults to fixture user for dev/testing)
+      responses:
+        '200':
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionsListResponse'
+
+  /v1/github/connection/{connection_id}:
+    delete:
+      summary: Delete a GitHub connection
+      operationId: deleteGitHubConnection
+      description: >
+        Delete a GitHub connection. Users can only delete their own connections.
+      parameters:
+        - in: path
+          name: connection_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: UUID of the connection to delete
+        - in: header
+          name: X-User-Id
+          schema:
+            type: string
+            format: uuid
+          required: false
+          description: User ID (defaults to fixture user for dev/testing)
+      responses:
+        '204':
+          description: Connection deleted
+        '404':
+          description: Connection not found or not owned by user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
 components:
   schemas:
     Profile:
@@ -406,3 +494,48 @@ components:
         details:
           type: object
           additionalProperties: true
+
+    CreateGitHubConnectionRequest:
+      type: object
+      properties:
+        installation_id:
+          type: integer
+          description: GitHub App installation ID
+        token_ref:
+          type: string
+          description: Reference to token in secret manager (NOT the actual token)
+        scopes:
+          type: string
+          description: Comma-separated OAuth scopes
+
+    GitHubConnectionResponse:
+      type: object
+      required: [id, user_id, created_at, updated_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        installation_id:
+          type: integer
+        token_ref:
+          type: string
+        scopes:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    GitHubConnectionsListResponse:
+      type: object
+      required: [connections]
+      properties:
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitHubConnectionResponse'

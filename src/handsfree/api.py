@@ -1541,6 +1541,151 @@ async def get_notifications(
     )
 
 
+@app.post("/v1/github/connect", response_model=GitHubConnectionResponse, status_code=status.HTTP_201_CREATED)
+async def create_github_connection_endpoint(
+    request: CreateGitHubConnectionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Create or update a GitHub connection for the authenticated user.
+    
+    Stores GitHub App installation metadata (NO secrets stored directly).
+    Scoped per user via X-User-Id header.
+    
+    Args:
+        request: Connection creation request
+        x_user_id: Optional user ID header (falls back to fixture user ID)
+        
+    Returns:
+        Created/updated connection details
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+    
+    # Check if user already has a connection
+    existing_connections = get_github_connections_by_user(db, user_id)
+    
+    if existing_connections:
+        # Update existing connection (for now, update the first one)
+        # In a full implementation, might support multiple connections
+        from handsfree.db.github_connections import update_github_connection
+        
+        updated = update_github_connection(
+            db,
+            existing_connections[0].id,
+            installation_id=request.installation_id,
+            token_ref=request.token_ref,
+            scopes=request.scopes,
+        )
+        
+        if updated is None:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={"error": "update_failed", "message": "Failed to update connection"},
+            )
+        
+        return GitHubConnectionResponse(
+            id=updated.id,
+            user_id=updated.user_id,
+            installation_id=updated.installation_id,
+            token_ref=updated.token_ref,
+            scopes=updated.scopes,
+            created_at=updated.created_at,
+            updated_at=updated.updated_at,
+        )
+    
+    # Create new connection
+    conn = create_github_connection(
+        db,
+        user_id=user_id,
+        installation_id=request.installation_id,
+        token_ref=request.token_ref,
+        scopes=request.scopes,
+    )
+    
+    return GitHubConnectionResponse(
+        id=conn.id,
+        user_id=conn.user_id,
+        installation_id=conn.installation_id,
+        token_ref=conn.token_ref,
+        scopes=conn.scopes,
+        created_at=conn.created_at,
+        updated_at=conn.updated_at,
+    )
+
+
+@app.get("/v1/github/connection", response_model=GitHubConnectionsListResponse)
+async def get_github_connection_endpoint(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionsListResponse:
+    """Get GitHub connection status for the authenticated user.
+    
+    Returns all GitHub connections for the user (usually 0 or 1).
+    
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID)
+        
+    Returns:
+        List of connections for the user
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+    
+    connections = get_github_connections_by_user(db, user_id)
+    
+    return GitHubConnectionsListResponse(
+        connections=[
+            GitHubConnectionResponse(
+                id=conn.id,
+                user_id=conn.user_id,
+                installation_id=conn.installation_id,
+                token_ref=conn.token_ref,
+                scopes=conn.scopes,
+                created_at=conn.created_at,
+                updated_at=conn.updated_at,
+            )
+            for conn in connections
+        ]
+    )
+
+
+@app.delete("/v1/github/connection/{connection_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_github_connection_endpoint(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> None:
+    """Delete a GitHub connection.
+    
+    Users can only delete their own connections.
+    
+    Args:
+        connection_id: UUID of the connection to delete
+        x_user_id: Optional user ID header (falls back to fixture user ID)
+        
+    Raises:
+        404: Connection not found or not owned by user
+    """
+    from handsfree.db.github_connections import delete_github_connection, get_github_connection
+    
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+    
+    # Check connection exists and belongs to user
+    conn = get_github_connection(db, connection_id)
+    if conn is None or conn.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"error": "not_found", "message": "Connection not found"},
+        )
+    
+    # Delete the connection
+    deleted = delete_github_connection(db, connection_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "delete_failed", "message": "Failed to delete connection"},
+        )
+
+
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
     """Handle HTTPExceptions and return Error schema."""
