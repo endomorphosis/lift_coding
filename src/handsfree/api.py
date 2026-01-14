@@ -11,7 +11,8 @@ from typing import Any
 from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
@@ -41,7 +42,10 @@ from handsfree.models import (
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
+    CreateGitHubConnectionRequest,
     DebugInfo,
+    GitHubConnectionResponse,
+    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -185,6 +189,25 @@ def _fetch_audio_data(uri: str) -> bytes:
 def health_check():
     """Health check endpoint."""
     return {"status": "ok"}
+
+
+@app.get("/simulator")
+async def dev_simulator():
+    """Serve the web-based dev simulator interface.
+    
+    This provides a user-friendly way to test the handsfree loop:
+    - Record or upload audio
+    - Call /v1/command endpoint
+    - Display parsed intent and response
+    - Call /v1/tts and play audio
+    """
+    simulator_path = Path(__file__).parent.parent.parent / "dev" / "simulator.html"
+    if not simulator_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Simulator not found. Ensure dev/simulator.html exists.",
+        )
+    return FileResponse(simulator_path)
 
 
 @app.post("/v1/webhooks/github", status_code=status.HTTP_202_ACCEPTED)
