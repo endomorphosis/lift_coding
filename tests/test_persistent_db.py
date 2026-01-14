@@ -4,8 +4,6 @@ import os
 import tempfile
 from pathlib import Path
 
-import pytest
-
 from handsfree.db.connection import get_db_path, init_db
 from handsfree.db.notifications import create_notification, list_notifications
 
@@ -99,7 +97,7 @@ def test_api_uses_memory_db_in_tests():
     api._db_conn = None
     
     # Get DB (should use :memory: due to conftest.py)
-    db = api.get_db()
+    _ = api.get_db()
     
     # Check it's using memory database
     # We can verify by checking that DUCKDB_PATH is set to :memory:
