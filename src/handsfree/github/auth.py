@@ -561,32 +561,32 @@ def get_token_provider() -> TokenProvider:
         "GITHUB_LIVE_MODE", ""
     ).lower() in ("true", "1", "yes")
 
-    if live_mode and os.getenv("GITHUB_TOKEN"):
     # Check for explicit fixture mode
     github_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
     if github_mode == "fixtures":
         logger.debug("Using fixture token provider (explicit HANDS_FREE_GITHUB_MODE=fixtures)")
         return FixtureTokenProvider()
     
-    # Priority 1: GitHub App installation token minting
-    # Check if GitHub App is fully configured
-    app_id = os.getenv("GITHUB_APP_ID")
-    private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
-    installation_id = os.getenv("GITHUB_INSTALLATION_ID")
-    
-    if app_id and private_key and installation_id:
-        logger.debug("Using GitHub App token provider (installation token minting)")
-        return GitHubAppTokenProvider(
-            app_id=app_id,
-            private_key_pem=private_key,
-            installation_id=installation_id,
-        )
-    
-    # Priority 2: Environment token fallback for dev
-    github_token = os.getenv("GITHUB_TOKEN")
-    if github_token:
-        logger.debug("Using environment token provider (GITHUB_TOKEN)")
-        return EnvTokenProvider()
+    if live_mode and os.getenv("GITHUB_TOKEN"):
+        # Priority 1: GitHub App installation token minting
+        # Check if GitHub App is fully configured
+        app_id = os.getenv("GITHUB_APP_ID")
+        private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
+        installation_id = os.getenv("GITHUB_INSTALLATION_ID")
+        
+        if app_id and private_key and installation_id:
+            logger.debug("Using GitHub App token provider (installation token minting)")
+            return GitHubAppTokenProvider(
+                app_id=app_id,
+                private_key_pem=private_key,
+                installation_id=installation_id,
+            )
+        
+        # Priority 2: Environment token fallback for dev
+        github_token = os.getenv("GITHUB_TOKEN")
+        if github_token:
+            logger.debug("Using environment token provider (GITHUB_TOKEN)")
+            return EnvTokenProvider()
     
     # Priority 3: Fixture-only mode (default)
     logger.debug("Using fixture token provider (no live mode configuration)")

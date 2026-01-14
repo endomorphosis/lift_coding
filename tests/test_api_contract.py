@@ -1,10 +1,24 @@
 """Contract tests ensuring API responses match OpenAPI schema."""
 
+import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
 
 client = TestClient(app)
+
+
+@pytest.fixture
+def reset_db():
+    """Reset the database connection before each test."""
+    import handsfree.api as api_module
+
+    api_module._db_conn = None
+    api_module._command_router = None
+    yield
+    api_module._db_conn = None
+    api_module._command_router = None
+
 
 
 def test_post_command_text_inbox() -> None:
@@ -232,8 +246,21 @@ def test_post_action_request_review() -> None:
     assert "confirmation required" in data["message"].lower()
 
 
-def test_post_action_rerun_checks() -> None:
-    """Test POST /v1/actions/rerun-checks stub."""
+def test_post_action_rerun_checks(reset_db) -> None:
+    """Test POST /v1/actions/rerun-checks with real implementation."""
+    # Create policy that allows rerun with confirmation (default behavior)
+    from handsfree.api import get_db
+    from handsfree.db.repo_policies import create_or_update_repo_policy
+
+    db = get_db()
+    create_or_update_repo_policy(
+        db,
+        user_id="00000000-0000-0000-0000-000000000001",
+        repo_full_name="owner/repo",
+        allow_rerun=True,
+        require_confirmation=True,
+    )
+
     response = client.post(
         "/v1/actions/rerun-checks",
         json={
@@ -249,7 +276,10 @@ def test_post_action_rerun_checks() -> None:
     # Validate ActionResult
     assert "ok" in data
     assert "message" in data
-    assert "[STUB]" in data["message"]
+    # Real implementation should require confirmation by default
+    assert data["ok"] is False
+    assert "confirmation required" in data["message"].lower()
+
 
 
 def test_post_action_merge() -> None:
