@@ -20,7 +20,6 @@ def reset_db():
     api_module._command_router = None
 
 
-
 def test_post_command_text_inbox() -> None:
     """Test POST /v1/command with inbox query."""
     response = client.post(
@@ -279,7 +278,6 @@ def test_post_action_rerun_checks(reset_db) -> None:
     # Real implementation should require confirmation by default
     assert data["ok"] is False
     assert "confirmation required" in data["message"].lower()
-
 
 
 def test_post_action_merge() -> None:

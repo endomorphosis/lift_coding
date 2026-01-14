@@ -79,10 +79,10 @@ class TestEndToEndAuthWiring:
         """User without connection should fall back to fixture mode."""
         # Create a token provider for user (no connections)
         token_provider = get_user_token_provider(db_conn, test_user_id)
-        
+
         # Create a live provider with this token provider
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Should be able to call API methods (falls back to fixtures)
         prs = provider.list_user_prs("testuser")
         assert isinstance(prs, list)
@@ -107,10 +107,10 @@ class TestEndToEndAuthWiring:
         token_provider = get_user_token_provider(
             db_conn, test_user_id, http_client=mock_http_client
         )
-        
+
         # Create live provider
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Should have minted token available
         headers = provider._get_headers()
         assert "Authorization" in headers
@@ -134,10 +134,10 @@ class TestEndToEndAuthWiring:
 
         # Create token provider for user
         token_provider = get_user_token_provider(db_conn, test_user_id)
-        
+
         # Create live provider
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Should use env token
         headers = provider._get_headers()
         assert "Authorization" in headers
@@ -161,14 +161,14 @@ class TestEndToEndAuthWiring:
 
         # Create token provider for user
         token_provider = get_user_token_provider(db_conn, test_user_id)
-        
+
         # Create live provider
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Should fall back to fixtures (no Authorization header)
         headers = provider._get_headers()
         assert "Authorization" not in headers
-        
+
         # Should still work via fixture fallback
         prs = provider.list_user_prs("testuser")
         assert isinstance(prs, list)
@@ -197,7 +197,7 @@ class TestErrorHandling:
         # Should not crash
         token_provider = get_user_token_provider(db_conn, test_user_id)
         token = token_provider.get_token()
-        
+
         # Should return None (fixture mode)
         assert token is None
 
@@ -225,14 +225,12 @@ class TestErrorHandling:
         mock_client.post.return_value = response
 
         # Create token provider
-        token_provider = get_user_token_provider(
-            db_conn, test_user_id, http_client=mock_client
-        )
-        
+        token_provider = get_user_token_provider(db_conn, test_user_id, http_client=mock_client)
+
         # Token minting will fail, but should not crash
         # The provider will attempt to mint but return None on error
         token = token_provider.get_token()
-        
+
         # GitHub App provider returns None on error, not falling back
         # This is expected behavior - token minting errors should be logged
         assert token is None
@@ -256,7 +254,7 @@ class TestMultipleUsers:
         )
 
         # User 2 has no connections (will use env token)
-        
+
         # Configure GitHub App and env token
         monkeypatch.setenv("GITHUB_APP_ID", "app-123")
         monkeypatch.setenv("GITHUB_APP_PRIVATE_KEY_PEM", valid_private_key)

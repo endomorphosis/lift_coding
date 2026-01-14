@@ -123,7 +123,7 @@ _github_provider = GitHubProvider()
 
 def get_db():
     """Get or initialize database connection.
-    
+
     Uses DUCKDB_PATH environment variable or defaults to data/handsfree.db.
     Tests set DUCKDB_PATH=:memory: in conftest.py for isolation.
     """
