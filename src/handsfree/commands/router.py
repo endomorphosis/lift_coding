@@ -17,6 +17,7 @@ class CommandRouter:
         "pr.request_review",
         "pr.merge",
         "agent.delegate",
+        "checks.rerun",
     }
 
     def __init__(
@@ -82,6 +83,10 @@ class CommandRouter:
         # Policy-based handling takes precedence over profile-based confirmation
         if intent.name == "pr.request_review" and self.db_conn and user_id:
             return self._handle_request_review_with_policy(intent, user_id, idempotency_key)
+
+        # Special handling for checks.rerun - integrate with policy engine
+        if intent.name == "checks.rerun" and self.db_conn and user_id:
+            return self._handle_rerun_checks_with_policy(intent, user_id, idempotency_key)
 
         # Check if this is a side-effect intent requiring confirmation (profile-based fallback)
         if intent.name in self.SIDE_EFFECT_INTENTS and profile_config.confirmation_required:
@@ -162,6 +167,11 @@ class CommandRouter:
             elif pr_num:
                 return f"I can ask the agent to {instruction} PR {pr_num}."
             return f"I can delegate to the agent: {instruction}."
+        elif intent.name == "checks.rerun":
+            pr_num = intent.entities.get("pr_number")
+            if pr_num:
+                return f"I can re-run checks on PR {pr_num}."
+            return "I can re-run checks."
         return "I can execute this action."
 
     def _handle_repeat(
@@ -638,7 +648,11 @@ class CommandRouter:
         target = f"{repo}#{pr_number}"
 
         # Check if live mode is enabled and token is available
+        import logging
+
         from handsfree.github.auth import get_default_auth_provider
+
+        logger = logging.getLogger(__name__)
 
         auth_provider = get_default_auth_provider()
         token = None
@@ -648,9 +662,6 @@ class CommandRouter:
         # Execute via GitHub API if live mode enabled and token available
         if token:
             from handsfree.github.client import request_reviewers as github_request_reviewers
-            import logging
-
-            logger = logging.getLogger(__name__)
 
             logger.info(
                 "Executing request_review via GitHub API (live mode) for %s",
@@ -711,10 +722,6 @@ class CommandRouter:
                 }
         else:
             # Fixture mode - simulate success
-            import logging
-
-            logger = logging.getLogger(__name__)
-
             logger.info(
                 "Executing request_review in fixture mode (no live token) for %s",
                 target,
@@ -736,4 +743,243 @@ class CommandRouter:
                 "status": "ok",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Review requested from {reviewers_str} on {target}.",
+            }
+
+    def _handle_rerun_checks_with_policy(
+        self,
+        intent: ParsedIntent,
+        user_id: str,
+        idempotency_key: str | None,
+    ) -> dict[str, Any]:
+        """Handle checks.rerun with full policy evaluation, rate limiting, and audit logging.
+
+        Args:
+            intent: The parsed checks.rerun intent
+            user_id: User identifier for policy evaluation
+            idempotency_key: Optional idempotency key
+
+        Returns:
+            Response dict with status, spoken_text, and optional pending_action
+        """
+        from handsfree.db.action_logs import write_action_log
+        from handsfree.db.pending_actions import create_pending_action
+        from handsfree.policy import PolicyDecision, evaluate_action_policy
+        from handsfree.rate_limit import check_rate_limit
+
+        # Extract entities
+        pr_number = intent.entities.get("pr_number")
+        repo = intent.entities.get("repo", "default/repo")
+
+        # Validate required fields
+        if not pr_number:
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": (
+                    "Please specify a PR number, for example: 'rerun checks for PR 123'."
+                ),
+            }
+
+        # Check rate limit
+        rate_limit_result = check_rate_limit(
+            self.db_conn,
+            user_id,
+            "rerun",
+            window_seconds=60,
+            max_requests=5,
+        )
+
+        if not rate_limit_result.allowed:
+            # Write audit log for rate limit denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={},
+                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used - this is a retry
+                pass
+
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+            }
+
+        # Evaluate policy
+        policy_result = evaluate_action_policy(
+            self.db_conn,
+            user_id,
+            repo,
+            "rerun",
+        )
+
+        # Handle policy decisions
+        if policy_result.decision == PolicyDecision.DENY:
+            # Write audit log for policy denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={},
+                    result={"error": "policy_denied", "message": policy_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used
+                pass
+
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Action not allowed: {policy_result.reason}",
+            }
+
+        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+            # Create pending action in database
+            summary = f"Re-run checks on {repo}#{pr_number}"
+            pending_action = create_pending_action(
+                self.db_conn,
+                user_id=user_id,
+                summary=summary,
+                action_type="rerun_checks",
+                action_payload={
+                    "repo": repo,
+                    "pr_number": pr_number,
+                },
+                expires_in_seconds=300,  # 5 minutes
+            )
+
+            # Write audit log for confirmation required
+            write_action_log(
+                self.db_conn,
+                user_id=user_id,
+                action_type="rerun",
+                ok=True,
+                target=f"{repo}#{pr_number}",
+                request={},
+                result={
+                    "status": "needs_confirmation",
+                    "token": pending_action.token,
+                    "reason": policy_result.reason,
+                },
+                idempotency_key=idempotency_key,
+            )
+
+            return {
+                "status": "needs_confirmation",
+                "intent": intent.to_dict(),
+                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "pending_action": {
+                    "token": pending_action.token,
+                    "expires_at": pending_action.expires_at.isoformat(),
+                    "summary": summary,
+                },
+            }
+
+        # Policy allows the action - execute it directly
+        target = f"{repo}#{pr_number}"
+
+        # Check if live mode is enabled and token is available
+        import logging
+
+        from handsfree.github.auth import get_default_auth_provider
+
+        logger = logging.getLogger(__name__)
+
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        # Execute via GitHub API if live mode enabled and token available
+        if token:
+            from handsfree.github.client import rerun_workflow
+
+            logger.info(
+                "Executing rerun_checks via GitHub API (live mode) for %s",
+                target,
+            )
+
+            github_result = rerun_workflow(
+                repo=repo,
+                pr_number=pr_number,
+                token=token,
+            )
+
+            if github_result["ok"]:
+                # Write audit log for successful execution
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=True,
+                    target=target,
+                    request={},
+                    result={
+                        "status": "success",
+                        "message": "Checks re-run (live mode)",
+                        "run_id": github_result.get("run_id"),
+                    },
+                    idempotency_key=idempotency_key,
+                )
+
+                return {
+                    "status": "ok",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Checks re-run on {target}.",
+                }
+            else:
+                # GitHub API call failed
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="rerun",
+                    ok=False,
+                    target=target,
+                    request={},
+                    result={
+                        "status": "error",
+                        "message": github_result["message"],
+                        "status_code": github_result.get("status_code"),
+                    },
+                    idempotency_key=idempotency_key,
+                )
+
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Failed to rerun checks: {github_result['message']}",
+                }
+        else:
+            # Fixture mode - simulate success
+            logger.info(
+                "Executing rerun_checks in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                self.db_conn,
+                user_id=user_id,
+                action_type="rerun",
+                ok=True,
+                target=target,
+                request={},
+                result={"status": "success", "message": "Checks re-run (fixture)"},
+                idempotency_key=idempotency_key,
+            )
+
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Checks re-run on {target}.",
             }
