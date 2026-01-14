@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
+from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import ProfileConfig
@@ -42,6 +43,7 @@ from handsfree.models import (
     CommandStatus,
     ConfirmRequest,
     CreateGitHubConnectionRequest,
+    CreateNotificationSubscriptionRequest,
     DebugInfo,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
@@ -49,6 +51,8 @@ from handsfree.models import (
     InboxItemType,
     InboxResponse,
     MergeRequest,
+    NotificationSubscriptionResponse,
+    NotificationSubscriptionsListResponse,
     ParsedIntent,
     Profile,
     RequestReviewRequest,
@@ -89,29 +93,6 @@ idempotency_store: dict[str, ActionResult] = {}
 
 # Webhook store (DB-backed, initialized lazily)
 _webhook_store = None
-
-# Fixture user ID for development/testing
-FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
-
-
-def get_user_id_from_header(x_user_id: str | None = None) -> str:
-    """Extract user ID from header, falling back to fixture user ID.
-
-    Args:
-        x_user_id: Optional X-User-Id header value.
-
-    Returns:
-        User ID string (UUID format).
-    """
-    if x_user_id:
-        # Validate it's a proper UUID format
-        try:
-            uuid.UUID(x_user_id)
-            return x_user_id
-        except (ValueError, AttributeError):
-            logger.warning("Invalid X-User-Id format: %s, using fixture", x_user_id)
-            return FIXTURE_USER_ID
-    return FIXTURE_USER_ID
 
 
 # Initialize command infrastructure
@@ -303,15 +284,15 @@ async def github_webhook(
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(
     request: CommandRequest,
+    user_id: CurrentUser,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
-    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
 
     Args:
         request: Command request body
+        user_id: User ID extracted from authentication (via CurrentUser dependency)
         x_session_id: Optional session identifier from X-Session-Id header
-        x_user_id: Optional user identifier from X-User-Id header
 
     Returns:
         CommandResponse with status, intent, spoken text, etc.
@@ -322,9 +303,19 @@ async def submit_command(
     # Get user ID from header or use fixture user ID
     user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency
-    if request.idempotency_key and request.idempotency_key in processed_commands:
-        return processed_commands[request.idempotency_key]
+    # Check idempotency - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        db = get_db()
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct CommandResponse from cached data
+            return CommandResponse(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in processed_commands:
+            return processed_commands[request.idempotency_key]
 
     # Extract text from input
     if isinstance(request.input, TextInput):
@@ -386,9 +377,6 @@ async def submit_command(
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
-        # Get user_id from header or use fixture
-        user_id = FIXTURE_USER_ID  # In production, would extract from auth token
-
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
@@ -396,10 +384,21 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
+            pydantic_intent, text, request.idempotency_key, user_id
         )
-        # Store for idempotency
+        # Store for idempotency (both persistent and in-memory)
         if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            db = get_db()
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/command",
+                response_data=response.model_dump(mode="json"),
+                expires_in_seconds=86400,  # 24 hours
+            )
             processed_commands[request.idempotency_key] = response
         return response
 
@@ -420,7 +419,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
+            router_response, parsed_intent, text, request.profile, user_id
         )
 
         # For non-system commands, update the router's stored response with the enhanced version
@@ -459,8 +458,19 @@ async def submit_command(
                     )
                 router._navigation_state[session_id] = (items, 0)
 
-    # Store for idempotency
+    # Store for idempotency (both persistent and in-memory)
     if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/command",
+            response_data=response.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
         processed_commands[request.idempotency_key] = response
 
     return response
@@ -678,20 +688,28 @@ def _convert_router_response_to_command_response(
 @app.post("/v1/commands/confirm", response_model=CommandResponse)
 async def confirm_command(
     request: ConfirmRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> CommandResponse:
     """Confirm a previously proposed side-effect action.
 
     Args:
         request: Confirmation request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency - return cached response if exists
-    if request.idempotency_key and request.idempotency_key in processed_commands:
-        return processed_commands[request.idempotency_key]
+    # Check idempotency - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct CommandResponse from cached data
+            return CommandResponse(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in processed_commands:
+            return processed_commands[request.idempotency_key]
 
     # Check PendingActionManager first (for intents from router)
     pending_action = _pending_action_manager.get(request.token)
@@ -754,8 +772,18 @@ async def confirm_command(
                     spoken_text="Action confirmed. (Fixture response)",
                 )
 
-            # Store for idempotency
+            # Store for idempotency (both persistent and in-memory)
             if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/commands/confirm",
+                    response_data=response.model_dump(mode="json"),
+                    expires_in_seconds=86400,  # 24 hours
+                )
                 processed_commands[request.idempotency_key] = response
 
             return response
@@ -877,7 +905,7 @@ async def confirm_command(
 
             if github_result["ok"]:
                 # Write audit log for successful execution
-                write_action_log(
+                audit_log = write_action_log(
                     db,
                     user_id=user_id,
                     action_type="request_review",
@@ -902,9 +930,24 @@ async def confirm_command(
                     ),
                     spoken_text=f"Review requested from {reviewers_str} on {target}.",
                 )
+
+                # Store for idempotency with link to audit log
+                if request.idempotency_key:
+                    from handsfree.db.idempotency_keys import store_idempotency_key
+
+                    store_idempotency_key(
+                        db,
+                        key=request.idempotency_key,
+                        user_id=user_id,
+                        endpoint="/v1/commands/confirm",
+                        response_data=response.model_dump(mode="json"),
+                        audit_log_id=audit_log.id,
+                        expires_in_seconds=86400,  # 24 hours
+                    )
+                    processed_commands[request.idempotency_key] = response
             else:
                 # GitHub API call failed
-                write_action_log(
+                audit_log = write_action_log(
                     db,
                     user_id=user_id,
                     action_type="request_review",
@@ -929,6 +972,21 @@ async def confirm_command(
                     ),
                     spoken_text=f"Failed to request reviewers: {github_result['message']}",
                 )
+
+                # Store for idempotency with link to audit log
+                if request.idempotency_key:
+                    from handsfree.db.idempotency_keys import store_idempotency_key
+
+                    store_idempotency_key(
+                        db,
+                        key=request.idempotency_key,
+                        user_id=user_id,
+                        endpoint="/v1/commands/confirm",
+                        response_data=response.model_dump(mode="json"),
+                        audit_log_id=audit_log.id,
+                        expires_in_seconds=86400,  # 24 hours
+                    )
+                    processed_commands[request.idempotency_key] = response
         else:
             # Fixture mode - simulate success
             logger.info(
@@ -936,7 +994,7 @@ async def confirm_command(
                 target,
             )
 
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -960,226 +1018,21 @@ async def confirm_command(
                 ),
                 spoken_text=f"Review requested from {reviewers_str} on {target}.",
             )
-    elif action_type == "merge":
-        # Handle DB-backed merge action with exactly-once semantics
-        # Atomically delete the pending action to prevent duplicate execution
-        deleted = delete_pending_action(db, request.token)
 
-        if not deleted:
-            # Action was already consumed or cleaned up between the get and delete
-            raise HTTPException(
-                status_code=404,
-                detail={
-                    "error": "not_found",
-                    "message": "Pending action not found or already consumed",
-                },
-            )
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
 
-        # Execute the side-effect
-        repo = action_payload.get("repo")
-        pr_number = action_payload.get("pr_number")
-        merge_method = action_payload.get("merge_method", "squash")
-
-        target = f"{repo}#{pr_number}"
-
-        # Check if live mode is enabled and token is available
-        from handsfree.github.auth import get_default_auth_provider
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        # Execute via GitHub API if live mode enabled and token available
-        if token:
-            from handsfree.github.client import get_pull_request, merge_pull_request
-
-            logger.info(
-                "Executing confirmed merge via GitHub API (live mode) for %s with method %s",
-                target,
-                merge_method,
-            )
-
-            # First, validate PR preconditions (read-only checks)
-            pr_result = get_pull_request(
-                repo=repo,
-                pr_number=pr_number,
-                token=token,
-            )
-
-            if not pr_result["ok"]:
-                # Failed to fetch PR details
-                write_action_log(
+                store_idempotency_key(
                     db,
+                    key=request.idempotency_key,
                     user_id=user_id,
-                    action_type="merge",
-                    ok=False,
-                    target=target,
-                    request={"merge_method": merge_method, "confirmed": True},
-                    result={
-                        "status": "error",
-                        "message": f"Failed to fetch PR details: {pr_result['message']}",
-                        "via_confirmation": True,
-                        "status_code": pr_result.get("status_code"),
-                    },
-                    idempotency_key=request.idempotency_key,
+                    endpoint="/v1/commands/confirm",
+                    response_data=response.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
                 )
-
-                response = CommandResponse(
-                    status=CommandStatus.ERROR,
-                    intent=ParsedIntent(
-                        name="merge.confirmed",
-                        confidence=1.0,
-                        entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                    ),
-                    spoken_text=f"Failed to fetch PR details: {pr_result['message']}",
-                )
-            else:
-                pr_data = pr_result["pr_data"]
-                pr_state = pr_data.get("state")
-
-                # Validate preconditions
-                if pr_state != "open":
-                    write_action_log(
-                        db,
-                        user_id=user_id,
-                        action_type="merge",
-                        ok=False,
-                        target=target,
-                        request={"merge_method": merge_method, "confirmed": True},
-                        result={
-                            "status": "error",
-                            "message": f"PR is not open (state: {pr_state})",
-                            "via_confirmation": True,
-                        },
-                        idempotency_key=request.idempotency_key,
-                    )
-
-                    response = CommandResponse(
-                        status=CommandStatus.ERROR,
-                        intent=ParsedIntent(
-                            name="merge.confirmed",
-                            confidence=1.0,
-                            entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                        ),
-                        spoken_text=f"Cannot merge: PR is {pr_state}",
-                    )
-                else:
-                    # PR is open, attempt to merge
-                    github_result = merge_pull_request(
-                        repo=repo,
-                        pr_number=pr_number,
-                        merge_method=merge_method,
-                        token=token,
-                    )
-
-                    if github_result["ok"]:
-                        # Write audit log for successful execution
-                        write_action_log(
-                            db,
-                            user_id=user_id,
-                            action_type="merge",
-                            ok=True,
-                            target=target,
-                            request={"merge_method": merge_method, "confirmed": True},
-                            result={
-                                "status": "success",
-                                "message": "PR merged (live mode)",
-                                "via_confirmation": True,
-                                "github_response": github_result.get("response_data"),
-                            },
-                            idempotency_key=request.idempotency_key,
-                        )
-
-                        response = CommandResponse(
-                            status=CommandStatus.OK,
-                            intent=ParsedIntent(
-                                name="merge.confirmed",
-                                confidence=1.0,
-                                entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                            ),
-                            spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
-                        )
-                    else:
-                        # GitHub API call failed
-                        error_type = github_result.get("error_type", "unknown")
-                        write_action_log(
-                            db,
-                            user_id=user_id,
-                            action_type="merge",
-                            ok=False,
-                            target=target,
-                            request={"merge_method": merge_method, "confirmed": True},
-                            result={
-                                "status": "error",
-                                "message": github_result["message"],
-                                "via_confirmation": True,
-                                "status_code": github_result.get("status_code"),
-                                "error_type": error_type,
-                            },
-                            idempotency_key=request.idempotency_key,
-                        )
-
-                        response = CommandResponse(
-                            status=CommandStatus.ERROR,
-                            intent=ParsedIntent(
-                                name="merge.confirmed",
-                                confidence=1.0,
-                                entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                            ),
-                            spoken_text=f"Failed to merge PR: {github_result['message']}",
-                        )
-        else:
-            # Fixture mode - simulate success
-            logger.info(
-                "Executing confirmed merge in fixture mode (no live token) for %s",
-                target,
-            )
-
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="merge",
-                ok=True,
-                target=target,
-                request={"merge_method": merge_method, "confirmed": True},
-                result={
-                    "status": "success",
-                    "message": "PR merged (fixture)",
-                    "via_confirmation": True,
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            response = CommandResponse(
-                status=CommandStatus.OK,
-                intent=ParsedIntent(
-                    name="merge.confirmed",
-                    confidence=1.0,
-                    entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                ),
-                spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
-            )
+                processed_commands[request.idempotency_key] = response
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -1191,8 +1044,18 @@ async def confirm_command(
     if is_memory_action:
         del pending_actions_memory[request.token]
 
-    # Store for idempotency
+    # Store for idempotency (both persistent and in-memory)
     if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/commands/confirm",
+            response_data=response.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
         processed_commands[request.idempotency_key] = response
 
     return response
@@ -1214,20 +1077,28 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
 @app.post("/v1/actions/request-review", response_model=ActionResult)
 async def request_review(
     request: RequestReviewRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> ActionResult:
     """Request reviewers on a PR with policy evaluation and audit logging.
 
     Args:
         request: Request review request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency first - return cached result if exists
-    if request.idempotency_key and request.idempotency_key in idempotency_store:
-        return idempotency_store[request.idempotency_key]
+    # Check idempotency first - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct ActionResult from cached data
+            return ActionResult(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in idempotency_store:
+            return idempotency_store[request.idempotency_key]
 
     # Check rate limit
     rate_limit_result = check_rate_limit(
@@ -1267,7 +1138,7 @@ async def request_review(
     # Evaluate policy
     policy_result = evaluate_action_policy(
         db,
-        FIXTURE_USER_ID,
+        user_id,
         request.repo,
         "request_review",
     )
@@ -1316,7 +1187,7 @@ async def request_review(
         )
 
         # Write audit log for confirmation required
-        write_action_log(
+        audit_log = write_action_log(
             db,
             user_id=user_id,
             action_type="request_review",
@@ -1338,8 +1209,19 @@ async def request_review(
             url=None,
         )
 
-        # Store for idempotency
+        # Store for idempotency (both persistent and in-memory)
         if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/actions/request-review",
+                response_data=result.model_dump(mode="json"),
+                audit_log_id=audit_log.id,
+                expires_in_seconds=86400,  # 24 hours
+            )
             idempotency_store[request.idempotency_key] = result
 
         return result
@@ -1373,7 +1255,7 @@ async def request_review(
 
         if github_result["ok"]:
             # Write audit log for successful execution
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -1393,9 +1275,24 @@ async def request_review(
                 message=github_result["message"],
                 url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
             )
+
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/actions/request-review",
+                    response_data=result.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
+                )
+                idempotency_store[request.idempotency_key] = result
         else:
             # GitHub API call failed
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -1415,6 +1312,21 @@ async def request_review(
                 message=f"GitHub API error: {github_result['message']}",
                 url=None,
             )
+
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/actions/request-review",
+                    response_data=result.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
+                )
+                idempotency_store[request.idempotency_key] = result
     else:
         # Fixture mode - simulate success
         logger.info(
@@ -1422,7 +1334,7 @@ async def request_review(
             target,
         )
 
-        write_action_log(
+        audit_log = write_action_log(
             db,
             user_id=user_id,
             action_type="request_review",
@@ -1439,158 +1351,76 @@ async def request_review(
             url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
         )
 
-    # Store for idempotency
-    if request.idempotency_key:
-        idempotency_store[request.idempotency_key] = result
+        # Store for idempotency with link to audit log
+        if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/actions/request-review",
+                response_data=result.model_dump(mode="json"),
+                audit_log_id=audit_log.id,
+                expires_in_seconds=86400,  # 24 hours
+            )
+            idempotency_store[request.idempotency_key] = result
 
     return result
 
 
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
-async def rerun_checks(request: RerunChecksRequest) -> ActionResult:
-    """Re-run CI checks (stubbed - real implementation in PR-007)."""
-    return ActionResult(
+async def rerun_checks(
+    request: RerunChecksRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> ActionResult:
+    """Re-run CI checks (stubbed - real implementation in PR-007).
+
+    Args:
+        request: Rerun checks request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Check idempotency first - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return ActionResult(**cached_response)
+
+    result = ActionResult(
         ok=True,
         message=f"[STUB] Would rerun checks on {request.repo}#{request.pr_number}. "
         f"Real implementation in PR-007.",
         url=None,
     )
 
+    # Store for idempotency (both persistent and in-memory)
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        user_id = get_user_id_from_header(None)  # Use fixture user ID
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/actions/rerun-checks",
+            response_data=result.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
+        idempotency_store[request.idempotency_key] = result
+
+    return result
+
 
 @app.post("/v1/actions/merge", response_model=ActionResult)
-async def merge_pr(
-    request: MergeRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> ActionResult:
-    """Merge a PR with strict policy gating, confirmation, and audit logging.
-
-    This endpoint implements real merge functionality with:
-    - Policy evaluation (repo allowlist + merge constraints)
-    - Confirmation required (always for merge actions)
-    - Audit logs for propose/confirm/execute
-    - Rate limiting
-    - GitHub API integration when live mode enabled
-    - Fixture behavior when disabled
-
-    Args:
-        request: Merge request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
-
-    Returns:
-        ActionResult with pending action requiring confirmation.
-    """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-
-    # Check idempotency first - return cached result if exists
-    if request.idempotency_key and request.idempotency_key in idempotency_store:
-        return idempotency_store[request.idempotency_key]
-
-    # Check rate limit
-    rate_limit_result = check_rate_limit(
-        db,
-        user_id,
-        "merge",
-        window_seconds=60,
-        max_requests=5,  # Stricter limit for merge actions
-    )
-
-    if not rate_limit_result.allowed:
-        # Write audit log for rate limit denial
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="merge",
-                ok=False,
-                target=f"{request.repo}#{request.pr_number}",
-                request={"merge_method": request.merge_method},
-                result={"error": "rate_limited", "message": rate_limit_result.reason},
-                idempotency_key=request.idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used in audit log - this is a retry
-            pass
-
-        raise HTTPException(
-            status_code=429,
-            detail={
-                "error": "rate_limited",
-                "message": rate_limit_result.reason,
-                "retry_after": rate_limit_result.retry_after_seconds,
-            },
-        )
-
-    # Evaluate policy - merge actions need special precondition checks
-    # For now, we don't have PR checks status, so we pass None which will require confirmation
-    policy_result = evaluate_action_policy(
-        db,
-        user_id,
-        request.repo,
-        "merge",
-        pr_checks_status=None,  # TODO: Fetch from GitHub API if available
-        pr_approvals_count=0,  # TODO: Fetch from GitHub API if available
-    )
-
-    # Handle policy decisions
-    if policy_result.decision == PolicyDecision.DENY:
-        # Write audit log for policy denial
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="merge",
-                ok=False,
-                target=f"{request.repo}#{request.pr_number}",
-                request={"merge_method": request.merge_method},
-                result={"error": "policy_denied", "message": policy_result.reason},
-                idempotency_key=request.idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used in audit log - this is a retry
-            pass
-
-        raise HTTPException(
-            status_code=403,
-            detail={
-                "error": "policy_denied",
-                "message": policy_result.reason,
-            },
-        )
-
-    # For merge actions, ALWAYS require confirmation (even if policy allows)
-    # This is a critical safety measure for destructive operations
-    # Create pending action in database
-    summary = f"Merge PR {request.repo}#{request.pr_number} using {request.merge_method}"
-    pending_action = create_pending_action(
-        db,
-        user_id=user_id,
-        summary=summary,
-        action_type="merge",
-        action_payload={
-            "repo": request.repo,
-            "pr_number": request.pr_number,
-            "merge_method": request.merge_method,
-        },
-        expires_in_seconds=300,  # 5 minutes
-    )
-
-    # Write audit log for confirmation required
-    write_action_log(
-        db,
-        user_id=user_id,
-        action_type="merge",
-        ok=True,
-        target=f"{request.repo}#{request.pr_number}",
-        request={"merge_method": request.merge_method},
-        result={
-            "status": "needs_confirmation",
-            "token": pending_action.token,
-            "reason": "Merge actions always require confirmation",
-        },
-        idempotency_key=request.idempotency_key,
-    )
-
+async def merge_pr(request: MergeRequest) -> ActionResult:
+    """Merge a PR (stubbed - real implementation in PR-007)."""
     result = ActionResult(
         ok=False,
         message=f"Confirmation required: {summary}. "
@@ -1598,8 +1428,21 @@ async def merge_pr(
         url=None,
     )
 
-    # Store for idempotency
+    # Store for idempotency even for stubs
     if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        user_id = FIXTURE_USER_ID  # In production, would extract from header
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/actions/merge",
+            response_data=result.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
         idempotency_store[request.idempotency_key] = result
 
     return result
@@ -2253,9 +2096,9 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
 
 @app.get("/v1/notifications")
 async def get_notifications(
+    user_id: CurrentUser,
     since: str | None = None,
     limit: int = 50,
-    x_user_id: str = Header(default=FIXTURE_USER_ID, alias="X-User-ID"),
 ) -> JSONResponse:
     """Get notifications for the current user.
 
@@ -2265,7 +2108,7 @@ async def get_notifications(
     Args:
         since: Optional ISO 8601 timestamp to get notifications after this time.
         limit: Maximum number of notifications to return (default: 50, max: 100).
-        x_user_id: User ID from header (defaults to fixture user for dev/testing).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         JSON response with list of notifications.
@@ -2290,7 +2133,7 @@ async def get_notifications(
     # Fetch notifications
     notifications = list_notifications(
         conn=db,
-        user_id=x_user_id,
+        user_id=user_id,
         since=since_dt,
         limit=limit,
     )
@@ -2392,19 +2235,18 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
 @app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
 async def create_connection(
     request: CreateGitHubConnectionRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionResponse:
     """Create a new GitHub connection for the user.
 
     Args:
         request: Connection creation request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         Created connection.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connection = create_github_connection(
         conn=db,
@@ -2427,18 +2269,17 @@ async def create_connection(
 
 @app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
 async def list_connections(
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionsListResponse:
     """List all GitHub connections for the user.
 
     Args:
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         List of connections.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connections = get_github_connections_by_user(conn=db, user_id=user_id)
 
@@ -2461,13 +2302,13 @@ async def list_connections(
 @app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
 async def get_connection(
     connection_id: str,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionResponse:
     """Get a specific GitHub connection by ID.
 
     Args:
         connection_id: Connection UUID.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         Connection details.
@@ -2476,7 +2317,6 @@ async def get_connection(
         404: Connection not found or user doesn't have access.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connection = get_github_connection(conn=db, connection_id=connection_id)
 
@@ -2498,3 +2338,127 @@ async def get_connection(
         created_at=connection.created_at,
         updated_at=connection.updated_at,
     )
+
+
+@app.post(
+    "/v1/notifications/subscriptions",
+    response_model=NotificationSubscriptionResponse,
+    status_code=201,
+)
+async def create_notification_subscription(
+    request: CreateNotificationSubscriptionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> NotificationSubscriptionResponse:
+    """Create a new notification subscription for push delivery.
+
+    Args:
+        request: Subscription creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created subscription.
+    """
+    from handsfree.db.notification_subscriptions import create_subscription
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    subscription = create_subscription(
+        conn=db,
+        user_id=user_id,
+        endpoint=request.endpoint,
+        subscription_keys=request.subscription_keys,
+    )
+
+    return NotificationSubscriptionResponse(
+        id=subscription.id,
+        user_id=subscription.user_id,
+        endpoint=subscription.endpoint,
+        subscription_keys=subscription.subscription_keys or {},
+        created_at=subscription.created_at.isoformat(),
+        updated_at=subscription.updated_at.isoformat(),
+    )
+
+
+@app.get(
+    "/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse
+)
+async def list_notification_subscriptions(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> NotificationSubscriptionsListResponse:
+    """List all notification subscriptions for the user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of subscriptions.
+    """
+    from handsfree.db.notification_subscriptions import list_subscriptions
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    subscriptions = list_subscriptions(conn=db, user_id=user_id)
+
+    return NotificationSubscriptionsListResponse(
+        subscriptions=[
+            NotificationSubscriptionResponse(
+                id=sub.id,
+                user_id=sub.user_id,
+                endpoint=sub.endpoint,
+                subscription_keys=sub.subscription_keys or {},
+                created_at=sub.created_at.isoformat(),
+                updated_at=sub.updated_at.isoformat(),
+            )
+            for sub in subscriptions
+        ]
+    )
+
+
+@app.delete("/v1/notifications/subscriptions/{subscription_id}", status_code=204)
+async def delete_notification_subscription(
+    subscription_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> Response:
+    """Delete a notification subscription.
+
+    Args:
+        subscription_id: Subscription UUID.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: Subscription not found or user does not have access.
+    """
+    from handsfree.db.notification_subscriptions import delete_subscription, get_subscription
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Verify subscription exists and belongs to user
+    subscription = get_subscription(conn=db, subscription_id=subscription_id)
+    if subscription is None or subscription.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Subscription not found",
+            },
+        )
+
+    # Delete subscription
+    deleted = delete_subscription(conn=db, subscription_id=subscription_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Subscription not found",
+            },
+        )
+
+    return Response(status_code=204)
+
