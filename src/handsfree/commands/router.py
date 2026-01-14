@@ -426,8 +426,7 @@ class CommandRouter:
             # In a real implementation, this would query recent PRs or commits for the repo
             # For now, return a helpful message
             spoken_text = (
-                "Checks lookup by repo requires more context. "
-                "Try 'checks for pr <number>'."
+                "Checks lookup by repo requires more context. Try 'checks for pr <number>'."
             )
             if profile_config.profile == Profile.WORKOUT:
                 spoken_text = "Need PR number."
@@ -758,8 +757,9 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            from handsfree.github.client import request_reviewers as github_request_reviewers
             import logging
+
+            from handsfree.github.client import request_reviewers as github_request_reviewers
 
             logger = logging.getLogger(__name__)
 
