@@ -4,7 +4,6 @@ This implementation combines webhook handling with comprehensive API endpoints.
 """
 
 import logging
-import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -35,6 +34,13 @@ from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
+from handsfree.logging_utils import (
+    clear_request_id,
+    log_error,
+    log_info,
+    log_warning,
+    set_request_id,
+)
 from handsfree.models import (
     ActionResult,
     AudioInput,
@@ -221,7 +227,12 @@ async def github_webhook(
 
     # Check for duplicate delivery (replay protection)
     if store.is_duplicate_delivery(x_github_delivery):
-        logger.warning("Duplicate delivery detected: %s", x_github_delivery)
+        log_warning(
+            logger,
+            "Duplicate delivery detected",
+            delivery_id=x_github_delivery,
+            event_type=x_github_event,
+        )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Duplicate delivery ID",
@@ -237,9 +248,11 @@ async def github_webhook(
     signature_ok = verify_github_signature(body, x_hub_signature_256, webhook_secret)
 
     if not signature_ok:
-        logger.error(
-            "Signature verification failed for delivery %s",
-            x_github_delivery,
+        log_error(
+            logger,
+            "Signature verification failed",
+            delivery_id=x_github_delivery,
+            event_type=x_github_event,
         )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -250,7 +263,12 @@ async def github_webhook(
     try:
         payload = await request.json()
     except Exception as e:
-        logger.error("Failed to parse webhook payload: %s", e)
+        log_error(
+            logger,
+            "Failed to parse webhook payload",
+            error=str(e),
+            delivery_id=x_github_delivery,
+        )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Invalid JSON payload",
@@ -267,10 +285,12 @@ async def github_webhook(
     # Normalize event (if supported)
     normalized = normalize_github_event(x_github_event, payload)
     if normalized:
-        logger.info(
-            "Normalized event: type=%s, action=%s",
-            x_github_event,
-            normalized.get("action"),
+        log_info(
+            logger,
+            "Normalized webhook event",
+            event_type=x_github_event,
+            action=normalized.get("action"),
+            event_id=event_id,
         )
         # Emit notification for normalized webhook events
         _emit_webhook_notification(normalized, payload)
@@ -286,6 +306,7 @@ async def submit_command(
     request: CommandRequest,
     user_id: CurrentUser,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+    x_request_id: str | None = Header(default=None, alias="X-Request-ID"),
 ) -> CommandResponse:
     """Submit a hands-free command.
 
@@ -293,14 +314,28 @@ async def submit_command(
         request: Command request body
         user_id: User ID extracted from authentication (via CurrentUser dependency)
         x_session_id: Optional session identifier from X-Session-Id header
+        x_request_id: Optional request ID for tracing (generates one if not provided)
 
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
+    # Set up request ID for tracing
+    set_request_id(x_request_id)
+
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
 
     # user_id is provided via authentication dependency (CurrentUser)
+
+    # Log the request with structured context
+    log_info(
+        logger,
+        "Received command request",
+        user_id=user_id,
+        session_id=session_id or "none",
+        idempotency_key=request.idempotency_key or "none",
+        endpoint="/v1/command",
+    )
 
     # Check idempotency - database first, then in-memory cache as optimization
     if request.idempotency_key:
@@ -329,14 +364,17 @@ async def submit_command(
             stt_provider = get_stt_provider()
             text = stt_provider.transcribe(audio_data, request.input.format.value)
 
-            logger.info(
-                "Transcribed audio input: format=%s, duration_ms=%s, transcript_length=%d",
-                request.input.format.value,
-                request.input.duration_ms,
-                len(text),
+            log_info(
+                logger,
+                "Transcribed audio input",
+                format=request.input.format.value,
+                duration_ms=request.input.duration_ms,
+                transcript_length=len(text),
+                user_id=user_id,
             )
         except NotImplementedError as e:
             # STT is disabled
+            clear_request_id()
             return CommandResponse(
                 status=CommandStatus.ERROR,
                 intent=ParsedIntent(name="error.stt_disabled", confidence=1.0),
@@ -345,7 +383,8 @@ async def submit_command(
             )
         except (ValueError, FileNotFoundError) as e:
             # Invalid audio format or URI
-            logger.error("Audio input error: %s", e)
+            log_error(logger, "Audio input error", error=str(e), user_id=user_id)
+            clear_request_id()
             return CommandResponse(
                 status=CommandStatus.ERROR,
                 intent=ParsedIntent(name="error.audio_input", confidence=1.0),
@@ -354,7 +393,14 @@ async def submit_command(
             )
         except Exception as e:
             # Unexpected error during transcription
-            logger.error("Unexpected STT error: %s", e, exc_info=True)
+            log_error(
+                logger,
+                "Unexpected STT error",
+                error=str(e),
+                error_type=type(e).__name__,
+                user_id=user_id,
+            )
+            clear_request_id()
             return CommandResponse(
                 status=CommandStatus.ERROR,
                 intent=ParsedIntent(name="error.stt_failed", confidence=1.0),
@@ -363,6 +409,7 @@ async def submit_command(
             )
     else:
         # Unknown input type
+        clear_request_id()
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=ParsedIntent(name="error.unknown_input", confidence=1.0),
@@ -471,6 +518,9 @@ async def submit_command(
             expires_in_seconds=86400,  # 24 hours
         )
         processed_commands[request.idempotency_key] = response
+
+    # Clear request ID from context
+    clear_request_id()
 
     return response
 
