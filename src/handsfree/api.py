@@ -322,9 +322,19 @@ async def submit_command(
     # Get user ID from header or use fixture user ID
     user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency
-    if request.idempotency_key and request.idempotency_key in processed_commands:
-        return processed_commands[request.idempotency_key]
+    # Check idempotency - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        db = get_db()
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct CommandResponse from cached data
+            return CommandResponse(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in processed_commands:
+            return processed_commands[request.idempotency_key]
 
     # Extract text from input
     if isinstance(request.input, TextInput):
@@ -398,8 +408,19 @@ async def submit_command(
         response = await _handle_request_review_command(
             pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
         )
-        # Store for idempotency
+        # Store for idempotency (both persistent and in-memory)
         if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            db = get_db()
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/command",
+                response_data=response.model_dump(mode="json"),
+                expires_in_seconds=86400,  # 24 hours
+            )
             processed_commands[request.idempotency_key] = response
         return response
 
@@ -459,8 +480,19 @@ async def submit_command(
                     )
                 router._navigation_state[session_id] = (items, 0)
 
-    # Store for idempotency
+    # Store for idempotency (both persistent and in-memory)
     if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/command",
+            response_data=response.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
         processed_commands[request.idempotency_key] = response
 
     return response
@@ -689,9 +721,18 @@ async def confirm_command(
     db = get_db()
     user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency - return cached response if exists
-    if request.idempotency_key and request.idempotency_key in processed_commands:
-        return processed_commands[request.idempotency_key]
+    # Check idempotency - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct CommandResponse from cached data
+            return CommandResponse(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in processed_commands:
+            return processed_commands[request.idempotency_key]
 
     # Check PendingActionManager first (for intents from router)
     pending_action = _pending_action_manager.get(request.token)
@@ -754,8 +795,18 @@ async def confirm_command(
                     spoken_text="Action confirmed. (Fixture response)",
                 )
 
-            # Store for idempotency
+            # Store for idempotency (both persistent and in-memory)
             if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/commands/confirm",
+                    response_data=response.model_dump(mode="json"),
+                    expires_in_seconds=86400,  # 24 hours
+                )
                 processed_commands[request.idempotency_key] = response
 
             return response
@@ -877,7 +928,7 @@ async def confirm_command(
 
             if github_result["ok"]:
                 # Write audit log for successful execution
-                write_action_log(
+                audit_log = write_action_log(
                     db,
                     user_id=user_id,
                     action_type="request_review",
@@ -902,9 +953,24 @@ async def confirm_command(
                     ),
                     spoken_text=f"Review requested from {reviewers_str} on {target}.",
                 )
+
+                # Store for idempotency with link to audit log
+                if request.idempotency_key:
+                    from handsfree.db.idempotency_keys import store_idempotency_key
+
+                    store_idempotency_key(
+                        db,
+                        key=request.idempotency_key,
+                        user_id=user_id,
+                        endpoint="/v1/commands/confirm",
+                        response_data=response.model_dump(mode="json"),
+                        audit_log_id=audit_log.id,
+                        expires_in_seconds=86400,  # 24 hours
+                    )
+                    processed_commands[request.idempotency_key] = response
             else:
                 # GitHub API call failed
-                write_action_log(
+                audit_log = write_action_log(
                     db,
                     user_id=user_id,
                     action_type="request_review",
@@ -929,6 +995,21 @@ async def confirm_command(
                     ),
                     spoken_text=f"Failed to request reviewers: {github_result['message']}",
                 )
+
+                # Store for idempotency with link to audit log
+                if request.idempotency_key:
+                    from handsfree.db.idempotency_keys import store_idempotency_key
+
+                    store_idempotency_key(
+                        db,
+                        key=request.idempotency_key,
+                        user_id=user_id,
+                        endpoint="/v1/commands/confirm",
+                        response_data=response.model_dump(mode="json"),
+                        audit_log_id=audit_log.id,
+                        expires_in_seconds=86400,  # 24 hours
+                    )
+                    processed_commands[request.idempotency_key] = response
         else:
             # Fixture mode - simulate success
             logger.info(
@@ -936,7 +1017,7 @@ async def confirm_command(
                 target,
             )
 
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -960,6 +1041,21 @@ async def confirm_command(
                 ),
                 spoken_text=f"Review requested from {reviewers_str} on {target}.",
             )
+
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/commands/confirm",
+                    response_data=response.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
+                )
+                processed_commands[request.idempotency_key] = response
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -971,8 +1067,18 @@ async def confirm_command(
     if is_memory_action:
         del pending_actions_memory[request.token]
 
-    # Store for idempotency
+    # Store for idempotency (both persistent and in-memory)
     if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/commands/confirm",
+            response_data=response.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
         processed_commands[request.idempotency_key] = response
 
     return response
@@ -1005,9 +1111,18 @@ async def request_review(
     db = get_db()
     user_id = get_user_id_from_header(x_user_id)
 
-    # Check idempotency first - return cached result if exists
-    if request.idempotency_key and request.idempotency_key in idempotency_store:
-        return idempotency_store[request.idempotency_key]
+    # Check idempotency first - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            # Reconstruct ActionResult from cached data
+            return ActionResult(**cached_response)
+
+        # Also check in-memory cache (backward compatibility)
+        if request.idempotency_key in idempotency_store:
+            return idempotency_store[request.idempotency_key]
 
     # Check rate limit
     rate_limit_result = check_rate_limit(
@@ -1096,7 +1211,7 @@ async def request_review(
         )
 
         # Write audit log for confirmation required
-        write_action_log(
+        audit_log = write_action_log(
             db,
             user_id=user_id,
             action_type="request_review",
@@ -1118,8 +1233,19 @@ async def request_review(
             url=None,
         )
 
-        # Store for idempotency
+        # Store for idempotency (both persistent and in-memory)
         if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/actions/request-review",
+                response_data=result.model_dump(mode="json"),
+                audit_log_id=audit_log.id,
+                expires_in_seconds=86400,  # 24 hours
+            )
             idempotency_store[request.idempotency_key] = result
 
         return result
@@ -1153,7 +1279,7 @@ async def request_review(
 
         if github_result["ok"]:
             # Write audit log for successful execution
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -1173,9 +1299,24 @@ async def request_review(
                 message=github_result["message"],
                 url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
             )
+
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/actions/request-review",
+                    response_data=result.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
+                )
+                idempotency_store[request.idempotency_key] = result
         else:
             # GitHub API call failed
-            write_action_log(
+            audit_log = write_action_log(
                 db,
                 user_id=user_id,
                 action_type="request_review",
@@ -1195,6 +1336,21 @@ async def request_review(
                 message=f"GitHub API error: {github_result['message']}",
                 url=None,
             )
+
+            # Store for idempotency with link to audit log
+            if request.idempotency_key:
+                from handsfree.db.idempotency_keys import store_idempotency_key
+
+                store_idempotency_key(
+                    db,
+                    key=request.idempotency_key,
+                    user_id=user_id,
+                    endpoint="/v1/actions/request-review",
+                    response_data=result.model_dump(mode="json"),
+                    audit_log_id=audit_log.id,
+                    expires_in_seconds=86400,  # 24 hours
+                )
+                idempotency_store[request.idempotency_key] = result
     else:
         # Fixture mode - simulate success
         logger.info(
@@ -1202,7 +1358,7 @@ async def request_review(
             target,
         )
 
-        write_action_log(
+        audit_log = write_action_log(
             db,
             user_id=user_id,
             action_type="request_review",
@@ -1219,33 +1375,101 @@ async def request_review(
             url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
         )
 
-    # Store for idempotency
-    if request.idempotency_key:
-        idempotency_store[request.idempotency_key] = result
+        # Store for idempotency with link to audit log
+        if request.idempotency_key:
+            from handsfree.db.idempotency_keys import store_idempotency_key
+
+            store_idempotency_key(
+                db,
+                key=request.idempotency_key,
+                user_id=user_id,
+                endpoint="/v1/actions/request-review",
+                response_data=result.model_dump(mode="json"),
+                audit_log_id=audit_log.id,
+                expires_in_seconds=86400,  # 24 hours
+            )
+            idempotency_store[request.idempotency_key] = result
 
     return result
 
 
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
-async def rerun_checks(request: RerunChecksRequest) -> ActionResult:
-    """Re-run CI checks (stubbed - real implementation in PR-007)."""
-    return ActionResult(
+async def rerun_checks(
+    request: RerunChecksRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> ActionResult:
+    """Re-run CI checks (stubbed - real implementation in PR-007).
+
+    Args:
+        request: Rerun checks request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Check idempotency first - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return ActionResult(**cached_response)
+
+    result = ActionResult(
         ok=True,
         message=f"[STUB] Would rerun checks on {request.repo}#{request.pr_number}. "
         f"Real implementation in PR-007.",
         url=None,
     )
 
+    # Store for idempotency (both persistent and in-memory)
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        user_id = get_user_id_from_header(None)  # Use fixture user ID
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/actions/rerun-checks",
+            response_data=result.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
+        idempotency_store[request.idempotency_key] = result
+
+    return result
+
 
 @app.post("/v1/actions/merge", response_model=ActionResult)
 async def merge_pr(request: MergeRequest) -> ActionResult:
     """Merge a PR (stubbed - real implementation in PR-007)."""
-    return ActionResult(
+    result = ActionResult(
         ok=False,
         message=f"[STUB] Merge action for {request.repo}#{request.pr_number} "
         f"requires policy gates. Real implementation in PR-007.",
         url=None,
     )
+
+    # Store for idempotency even for stubs
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        user_id = FIXTURE_USER_ID  # In production, would extract from header
+
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/actions/merge",
+            response_data=result.model_dump(mode="json"),
+            expires_in_seconds=86400,  # 24 hours
+        )
+        idempotency_store[request.idempotency_key] = result
+
+    return result
 
 
 async def _handle_request_review_command(
