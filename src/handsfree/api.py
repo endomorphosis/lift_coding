@@ -43,6 +43,7 @@ from handsfree.models import (
     CommandStatus,
     ConfirmRequest,
     CreateGitHubConnectionRequest,
+    CreateNotificationSubscriptionRequest,
     DebugInfo,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
@@ -50,6 +51,8 @@ from handsfree.models import (
     InboxItemType,
     InboxResponse,
     MergeRequest,
+    NotificationSubscriptionResponse,
+    NotificationSubscriptionsListResponse,
     ParsedIntent,
     Profile,
     RequestReviewRequest,
@@ -2335,3 +2338,127 @@ async def get_connection(
         created_at=connection.created_at,
         updated_at=connection.updated_at,
     )
+
+
+@app.post(
+    "/v1/notifications/subscriptions",
+    response_model=NotificationSubscriptionResponse,
+    status_code=201,
+)
+async def create_notification_subscription(
+    request: CreateNotificationSubscriptionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> NotificationSubscriptionResponse:
+    """Create a new notification subscription for push delivery.
+
+    Args:
+        request: Subscription creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created subscription.
+    """
+    from handsfree.db.notification_subscriptions import create_subscription
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    subscription = create_subscription(
+        conn=db,
+        user_id=user_id,
+        endpoint=request.endpoint,
+        subscription_keys=request.subscription_keys,
+    )
+
+    return NotificationSubscriptionResponse(
+        id=subscription.id,
+        user_id=subscription.user_id,
+        endpoint=subscription.endpoint,
+        subscription_keys=subscription.subscription_keys or {},
+        created_at=subscription.created_at.isoformat(),
+        updated_at=subscription.updated_at.isoformat(),
+    )
+
+
+@app.get(
+    "/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse
+)
+async def list_notification_subscriptions(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> NotificationSubscriptionsListResponse:
+    """List all notification subscriptions for the user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of subscriptions.
+    """
+    from handsfree.db.notification_subscriptions import list_subscriptions
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    subscriptions = list_subscriptions(conn=db, user_id=user_id)
+
+    return NotificationSubscriptionsListResponse(
+        subscriptions=[
+            NotificationSubscriptionResponse(
+                id=sub.id,
+                user_id=sub.user_id,
+                endpoint=sub.endpoint,
+                subscription_keys=sub.subscription_keys or {},
+                created_at=sub.created_at.isoformat(),
+                updated_at=sub.updated_at.isoformat(),
+            )
+            for sub in subscriptions
+        ]
+    )
+
+
+@app.delete("/v1/notifications/subscriptions/{subscription_id}", status_code=204)
+async def delete_notification_subscription(
+    subscription_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> Response:
+    """Delete a notification subscription.
+
+    Args:
+        subscription_id: Subscription UUID.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: Subscription not found or user does not have access.
+    """
+    from handsfree.db.notification_subscriptions import delete_subscription, get_subscription
+
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Verify subscription exists and belongs to user
+    subscription = get_subscription(conn=db, subscription_id=subscription_id)
+    if subscription is None or subscription.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Subscription not found",
+            },
+        )
+
+    # Delete subscription
+    deleted = delete_subscription(conn=db, subscription_id=subscription_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Subscription not found",
+            },
+        )
+
+    return Response(status_code=204)
+

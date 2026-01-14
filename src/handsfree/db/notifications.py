@@ -82,7 +82,7 @@ def create_notification(
         ],
     )
 
-    return Notification(
+    notification = Notification(
         id=notification_id,
         user_id=user_id,
         event_type=event_type,
@@ -90,6 +90,84 @@ def create_notification(
         metadata=metadata,
         created_at=now,
     )
+
+    # Optionally deliver notification via push provider
+    _deliver_notification(conn, notification)
+
+    return notification
+
+
+def _deliver_notification(
+    conn: duckdb.DuckDBPyConnection,
+    notification: Notification,
+) -> None:
+    """Deliver notification via push provider if enabled.
+
+    Args:
+        conn: Database connection.
+        notification: Notification to deliver.
+    """
+    import logging
+
+    from handsfree.notifications import get_notification_provider
+
+    logger = logging.getLogger(__name__)
+    provider = get_notification_provider()
+
+    if provider is None:
+        # Push notifications disabled
+        return
+
+    # Get subscriptions for this user
+    from handsfree.db.notification_subscriptions import list_subscriptions
+
+    subscriptions = list_subscriptions(conn, notification.user_id)
+
+    if not subscriptions:
+        logger.debug(
+            "No push subscriptions for user %s, skipping delivery", notification.user_id
+        )
+        return
+
+    # Prepare notification payload
+    notification_data = {
+        "id": notification.id,
+        "event_type": notification.event_type,
+        "message": notification.message,
+        "metadata": notification.metadata or {},
+        "created_at": notification.created_at.isoformat(),
+    }
+
+    # Send to all subscriptions
+    for subscription in subscriptions:
+        try:
+            result = provider.send(
+                subscription_endpoint=subscription.endpoint,
+                notification_data=notification_data,
+                subscription_keys=subscription.subscription_keys,
+            )
+            if result["ok"]:
+                logger.info(
+                    "Delivered notification %s to subscription %s: %s",
+                    notification.id,
+                    subscription.id,
+                    result.get("delivery_id"),
+                )
+            else:
+                logger.warning(
+                    "Failed to deliver notification %s to subscription %s: %s",
+                    notification.id,
+                    subscription.id,
+                    result.get("message"),
+                )
+        except Exception as e:
+            logger.error(
+                "Error delivering notification %s to subscription %s: %s",
+                notification.id,
+                subscription.id,
+                e,
+                exc_info=True,
+            )
 
 
 def list_notifications(

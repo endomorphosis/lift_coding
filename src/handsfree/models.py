@@ -240,3 +240,30 @@ class TTSRequest(BaseModel):
         description="Audio format (wav, mp3)",
         pattern="^(wav|mp3)$",
     )
+
+
+class CreateNotificationSubscriptionRequest(BaseModel):
+    """Request to create a notification subscription."""
+
+    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL")
+    subscription_keys: dict[str, str] | None = Field(
+        default=None,
+        description="Provider-specific subscription keys (e.g., auth, p256dh for WebPush)",
+    )
+
+
+class NotificationSubscriptionResponse(BaseModel):
+    """Response for a notification subscription."""
+
+    id: str
+    user_id: str
+    endpoint: str
+    subscription_keys: dict[str, str]
+    created_at: str
+    updated_at: str
+
+
+class NotificationSubscriptionsListResponse(BaseModel):
+    """Response for listing notification subscriptions."""
+
+    subscriptions: list[NotificationSubscriptionResponse]
