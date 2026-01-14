@@ -1,5 +1,6 @@
 """pytest configuration for HandsFree tests."""
 
+import os
 import sys
 import uuid
 from pathlib import Path
@@ -9,6 +10,9 @@ import pytest
 # Add src directory to path so tests can import handsfree
 src_path = Path(__file__).parent / "src"
 sys.path.insert(0, str(src_path))
+
+# Set DUCKDB_PATH to :memory: for all tests to ensure test isolation
+os.environ["DUCKDB_PATH"] = ":memory:"
 
 
 @pytest.fixture
