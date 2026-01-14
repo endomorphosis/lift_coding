@@ -119,13 +119,13 @@ class TestSystemNext:
         # First, get inbox which should have multiple items
         intent1 = parser.parse("inbox")
         response1 = router.route(intent1, Profile.DEFAULT, session_id="session1")
-        
+
         # If there are cards, we should be able to navigate
         if "cards" in response1 and len(response1.get("cards", [])) > 1:
             # Next command should return second item
             intent2 = parser.parse("next")
             response2 = router.route(intent2, Profile.DEFAULT, session_id="session1")
-            
+
             assert response2["status"] == "ok"
             assert "cards" in response2
             assert len(response2["cards"]) == 1  # Should return single card for next item
@@ -135,20 +135,20 @@ class TestSystemNext:
         # Get inbox
         intent1 = parser.parse("inbox")
         response1 = router.route(intent1, Profile.DEFAULT, session_id="session1")
-        
+
         # If there are cards, navigate through all of them
         if "cards" in response1:
             card_count = len(response1.get("cards", []))
-            
+
             # Navigate through all items
             for _ in range(card_count):
                 intent_next = parser.parse("next")
                 router.route(intent_next, Profile.DEFAULT, session_id="session1")
-            
+
             # One more next should indicate no more items
             intent_final = parser.parse("next")
             response_final = router.route(intent_final, Profile.DEFAULT, session_id="session1")
-            
+
             assert "no more items" in response_final["spoken_text"].lower()
 
     def test_next_different_sessions(self, router: CommandRouter, parser: IntentParser) -> None:
@@ -156,11 +156,11 @@ class TestSystemNext:
         # Session 1 - get inbox
         intent1 = parser.parse("inbox")
         router.route(intent1, Profile.DEFAULT, session_id="session1")
-        
+
         # Session 2 - next should not see session1's list
         intent2 = parser.parse("next")
         response2 = router.route(intent2, Profile.DEFAULT, session_id="session2")
-        
+
         assert "no list" in response2["spoken_text"].lower()
 
     def test_repeat_after_next(self, router: CommandRouter, parser: IntentParser) -> None:
@@ -168,16 +168,16 @@ class TestSystemNext:
         # Get inbox
         intent1 = parser.parse("inbox")
         response1 = router.route(intent1, Profile.DEFAULT, session_id="session1")
-        
+
         # Navigate to next if possible
         if "cards" in response1 and len(response1.get("cards", [])) > 1:
             intent2 = parser.parse("next")
             response2 = router.route(intent2, Profile.DEFAULT, session_id="session1")
-            
+
             # Repeat should return the same next item
             intent3 = parser.parse("repeat")
             response3 = router.route(intent3, Profile.DEFAULT, session_id="session1")
-            
+
             assert response3["spoken_text"] == response2["spoken_text"]
 
 

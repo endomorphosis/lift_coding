@@ -240,21 +240,21 @@ async def submit_command(
     x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
-    
+
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
         x_user_id: Optional user identifier from X-User-Id header
-        
+
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
-    
+
     # Get user ID from header or use fixture user ID
     user_id = get_user_id_from_header(x_user_id)
-    
+
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -310,7 +310,7 @@ async def submit_command(
         response = _convert_router_response_to_command_response(
             router_response, parsed_intent, text, request.profile, user_id
         )
-        
+
         # For non-system commands, update the router's stored response with the enhanced version
         # This ensures system.repeat returns the full enriched response
         if session_id:
@@ -333,16 +333,18 @@ async def submit_command(
                     "summary": response.pending_action.summary,
                 }
             router._last_responses[session_id] = enhanced_dict
-            
+
             # Also update navigation state with enhanced cards
             if response.cards:
                 items = []
                 for card in response.cards:
-                    items.append({
-                        "type": "card",
-                        "intent_name": parsed_intent.name,
-                        "data": card.model_dump(),
-                    })
+                    items.append(
+                        {
+                            "type": "card",
+                            "intent_name": parsed_intent.name,
+                            "data": card.model_dump(),
+                        }
+                    )
                 router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
@@ -357,20 +359,20 @@ def _convert_router_response_direct(
     transcript: str,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
-    
+
     Used for system commands where router returns complete response that shouldn't be modified.
-    
+
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
-        
+
     Returns:
         CommandResponse object
     """
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
-    
+
     # Get intent from response
     intent_dict = router_response.get("intent", {})
     intent = ParsedIntent(
@@ -378,14 +380,14 @@ def _convert_router_response_direct(
         confidence=intent_dict.get("confidence", 1.0),
         entities=intent_dict.get("entities", {}),
     )
-    
+
     spoken_text = router_response.get("spoken_text", "")
-    
+
     # Get cards if present
     cards: list[UICard] = []
     if "cards" in router_response and router_response["cards"]:
         cards = [UICard(**card) for card in router_response["cards"]]
-    
+
     # Handle pending action
     pending_action = None
     if "pending_action" in router_response and router_response["pending_action"]:
@@ -399,10 +401,10 @@ def _convert_router_response_direct(
             expires_at=expires_at,
             summary=pa["summary"],
         )
-    
+
     # Build debug info
     debug = DebugInfo(transcript=transcript)
-    
+
     return CommandResponse(
         status=status,
         intent=intent,
@@ -1399,7 +1401,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         pr_title = normalized.get("pr_title", "")
-        
+
         if action == "opened":
             message = f"PR #{pr_number} opened in {repo}: {pr_title}"
             notification_type = "webhook.pr_opened"
@@ -1415,7 +1417,7 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
             # synchronize, reopened
             message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
             notification_type = f"webhook.pr_{action}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1427,15 +1429,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_url": normalized.get("pr_url"),
             },
         )
-    
+
     elif event_type == "check_suite" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         head_branch = normalized.get("head_branch")
-        
+
         message = f"Check suite {conclusion} on {repo} ({head_branch})"
         notification_type = f"webhook.check_suite_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1448,15 +1450,15 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "check_run" and action == "completed":
         repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         check_run_name = normalized.get("check_run_name")
-        
+
         message = f"Check run '{check_run_name}' {conclusion} on {repo}"
         notification_type = f"webhook.check_run_{conclusion}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1469,16 +1471,16 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
                 "pr_numbers": normalized.get("pr_numbers", []),
             },
         )
-    
+
     elif event_type == "pull_request_review" and action == "submitted":
         pr_number = normalized.get("pr_number")
         repo = normalized.get("repo")
         review_state = normalized.get("review_state")
         review_author = normalized.get("review_author")
-        
+
         message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
         notification_type = f"webhook.review_{review_state}"
-        
+
         create_notification(
             conn=db,
             user_id=user_id,
@@ -1561,4 +1563,115 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
             "error": "http_error",
             "message": str(exc.detail),
         },
+    )
+
+
+@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
+async def create_connection(
+    request: CreateGitHubConnectionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Create a new GitHub connection for the user.
+
+    Args:
+        request: Connection creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created connection.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = create_github_connection(
+        conn=db,
+        user_id=user_id,
+        installation_id=request.installation_id,
+        token_ref=request.token_ref,
+        scopes=request.scopes,
+    )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
+    )
+
+
+@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
+async def list_connections(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionsListResponse:
+    """List all GitHub connections for the user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of connections.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connections = get_github_connections_by_user(conn=db, user_id=user_id)
+
+    return GitHubConnectionsListResponse(
+        connections=[
+            GitHubConnectionResponse(
+                id=conn.id,
+                user_id=conn.user_id,
+                installation_id=conn.installation_id,
+                token_ref=conn.token_ref,
+                scopes=conn.scopes,
+                created_at=conn.created_at,
+                updated_at=conn.updated_at,
+            )
+            for conn in connections
+        ]
+    )
+
+
+@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
+async def get_connection(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Get a specific GitHub connection by ID.
+
+    Args:
+        connection_id: Connection UUID.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Connection details.
+
+    Raises:
+        404: Connection not found or user doesn't have access.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = get_github_connection(conn=db, connection_id=connection_id)
+
+    if connection is None or connection.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Connection not found",
+            },
+        )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
     )

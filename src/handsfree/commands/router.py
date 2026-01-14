@@ -81,10 +81,8 @@ class CommandRouter:
         # Special handling for pr.request_review - integrate with policy engine
         # Policy-based handling takes precedence over profile-based confirmation
         if intent.name == "pr.request_review" and self.db_conn and user_id:
-            return self._handle_request_review_with_policy(
-                intent, user_id, idempotency_key
-            )
-        
+            return self._handle_request_review_with_policy(intent, user_id, idempotency_key)
+
         # Check if this is a side-effect intent requiring confirmation (profile-based fallback)
         if intent.name in self.SIDE_EFFECT_INTENTS and profile_config.confirmation_required:
             return self._create_confirmation_response(intent, profile_config)
@@ -110,7 +108,7 @@ class CommandRouter:
         # Store response for system.repeat
         if session_id:
             self._last_responses[session_id] = response
-            
+
             # Store navigation state for list-like responses
             self._store_navigation_state(session_id, response, intent)
 
@@ -179,7 +177,7 @@ class CommandRouter:
 
         # Return the last response for this session
         return self._last_responses[session_id]
-    
+
     def _handle_next(
         self,
         session_id: str | None,
@@ -193,29 +191,29 @@ class CommandRouter:
                 "intent": intent.to_dict(),
                 "spoken_text": "No list to navigate. Try asking for inbox or PR summary first.",
             }
-        
+
         items, current_index = self._navigation_state[session_id]
         next_index = current_index + 1
-        
+
         if next_index >= len(items):
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
                 "spoken_text": "No more items.",
             }
-        
+
         # Update navigation state
         self._navigation_state[session_id] = (items, next_index)
-        
+
         # Build response for next item
         next_item = items[next_index]
         response = self._build_item_response(next_item, next_index, len(items), profile_config)
-        
+
         # Store as last response for repeat
         self._last_responses[session_id] = response
-        
+
         return response
-    
+
     def _store_navigation_state(
         self,
         session_id: str,
@@ -223,7 +221,7 @@ class CommandRouter:
         intent: ParsedIntent,
     ) -> None:
         """Store navigation state for list-like responses.
-        
+
         Args:
             session_id: Session identifier
             response: Response dict that may contain navigable items
@@ -235,19 +233,21 @@ class CommandRouter:
             if session_id in self._navigation_state:
                 del self._navigation_state[session_id]
             return
-        
+
         # Store cards as navigable items with metadata
         items = []
         for card in response["cards"]:
-            items.append({
-                "type": "card",
-                "intent_name": intent.name,
-                "data": card,
-            })
-        
+            items.append(
+                {
+                    "type": "card",
+                    "intent_name": intent.name,
+                    "data": card,
+                }
+            )
+
         # Store with index 0 (showing first item)
         self._navigation_state[session_id] = (items, 0)
-    
+
     def _build_item_response(
         self,
         item: dict[str, Any],
@@ -256,19 +256,19 @@ class CommandRouter:
         profile_config: ProfileConfig,
     ) -> dict[str, Any]:
         """Build a response for a single navigation item.
-        
+
         Args:
             item: Item data dict
             index: Current item index (0-based)
             total: Total number of items
             profile_config: User's profile configuration
-            
+
         Returns:
             Response dict
         """
         intent_name = item.get("intent_name", "unknown")
         card_data = item.get("data", {})
-        
+
         # Build spoken text based on profile
         if profile_config.profile == Profile.WORKOUT:
             spoken_text = f"Item {index + 1} of {total}: {card_data.get('title', 'Unknown')}."
@@ -276,7 +276,7 @@ class CommandRouter:
             title = card_data.get("title", "Unknown")
             subtitle = card_data.get("subtitle", "")
             spoken_text = f"Item {index + 1} of {total}: {title}. {subtitle}"
-        
+
         return {
             "status": "ok",
             "intent": {
@@ -457,12 +457,12 @@ class CommandRouter:
         idempotency_key: str | None,
     ) -> dict[str, Any]:
         """Handle pr.request_review with full policy evaluation, rate limiting, and audit logging.
-        
+
         Args:
             intent: The parsed pr.request_review intent
             user_id: User identifier for policy evaluation
             idempotency_key: Optional idempotency key
-            
+
         Returns:
             Response dict with status, spoken_text, and optional pending_action
         """
@@ -470,12 +470,12 @@ class CommandRouter:
         from handsfree.db.pending_actions import create_pending_action
         from handsfree.policy import PolicyDecision, evaluate_action_policy
         from handsfree.rate_limit import check_rate_limit
-        
+
         # Extract entities
         reviewers = intent.entities.get("reviewers", [])
         pr_number = intent.entities.get("pr_number")
         repo = intent.entities.get("repo", "default/repo")
-        
+
         # Validate required fields
         if not pr_number:
             return {
@@ -486,14 +486,14 @@ class CommandRouter:
                     "'request review from alice on PR 123'."
                 ),
             }
-        
+
         if not reviewers:
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": "Please specify at least one reviewer.",
             }
-        
+
         # Check rate limit
         rate_limit_result = check_rate_limit(
             self.db_conn,
@@ -502,7 +502,7 @@ class CommandRouter:
             window_seconds=60,
             max_requests=10,
         )
-        
+
         if not rate_limit_result.allowed:
             # Write audit log for rate limit denial
             try:
@@ -519,13 +519,13 @@ class CommandRouter:
             except ValueError:
                 # Idempotency key already used - this is a retry
                 pass
-            
+
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
             }
-        
+
         # Evaluate policy
         policy_result = evaluate_action_policy(
             self.db_conn,
@@ -533,7 +533,7 @@ class CommandRouter:
             repo,
             "request_review",
         )
-        
+
         # Handle policy decisions
         if policy_result.decision == PolicyDecision.DENY:
             # Write audit log for policy denial
@@ -551,13 +551,13 @@ class CommandRouter:
             except ValueError:
                 # Idempotency key already used
                 pass
-            
+
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Action not allowed: {policy_result.reason}",
             }
-        
+
         elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
             # Create pending action in database
             reviewers_str = ", ".join(reviewers)
@@ -574,7 +574,7 @@ class CommandRouter:
                 },
                 expires_in_seconds=300,  # 5 minutes
             )
-            
+
             # Write audit log for confirmation required
             write_action_log(
                 self.db_conn,
@@ -590,7 +590,7 @@ class CommandRouter:
                 },
                 idempotency_key=idempotency_key,
             )
-            
+
             return {
                 "status": "needs_confirmation",
                 "intent": intent.to_dict(),
@@ -601,10 +601,10 @@ class CommandRouter:
                     "summary": summary,
                 },
             }
-        
+
         # Policy allows the action - execute it directly
         target = f"{repo}#{pr_number}"
-        
+
         # Write audit log for successful execution
         write_action_log(
             self.db_conn,
@@ -616,7 +616,7 @@ class CommandRouter:
             result={"status": "success", "message": "Review requested (fixture)"},
             idempotency_key=idempotency_key,
         )
-        
+
         reviewers_str = ", ".join(reviewers)
         return {
             "status": "ok",

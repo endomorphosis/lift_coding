@@ -132,6 +132,7 @@ class TestNotificationRetrieval:
 
         # Sleep a tiny bit to ensure different timestamp
         import time
+
         time.sleep(0.01)
 
         create_notification(
@@ -142,9 +143,7 @@ class TestNotificationRetrieval:
         )
 
         # List notifications since cutoff
-        notifs = list_notifications(
-            conn=db_conn, user_id=test_user_id, since=cutoff_time
-        )
+        notifs = list_notifications(conn=db_conn, user_id=test_user_id, since=cutoff_time)
 
         assert len(notifs) == 1
         assert notifs[0].message == "New message"
