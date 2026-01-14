@@ -300,8 +300,7 @@ async def submit_command(
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
 
-    # Get user ID from header or use fixture user ID
-    user_id = get_user_id_from_header(x_user_id)
+    # user_id is provided via authentication dependency (CurrentUser)
 
     # Check idempotency - database first, then in-memory cache as optimization
     if request.idempotency_key:
@@ -748,7 +747,7 @@ async def confirm_command(
                         confidence=1.0,
                         entities=entities,
                     ),
-                    spoken_text=f"PR {pr_num} merged. (Fixture response)",
+                    spoken_text=f"PR {pr_num} merged successfully. (Fixture response)",
                 )
             elif intent_name == "agent.delegate":
                 instruction = entities.get("instruction", "handle this")
@@ -1146,21 +1145,142 @@ async def confirm_command(
                 ),
                 spoken_text=f"Workflow checks re-run on {target}.",
             )
+    elif action_type == "merge":
+        # Handle DB-backed merge action with exactly-once semantics
+        deleted = delete_pending_action(db, request.token)
 
-            # Store for idempotency with link to audit log
-            if request.idempotency_key:
-                from handsfree.db.idempotency_keys import store_idempotency_key
+        if not deleted:
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or already consumed",
+                },
+            )
 
-                store_idempotency_key(
+        repo = action_payload.get("repo")
+        pr_number = action_payload.get("pr_number")
+        merge_method = action_payload.get("merge_method") or "squash"
+
+        target = f"{repo}#{pr_number}"
+
+        from handsfree.github.auth import get_default_auth_provider
+
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        if token:
+            from handsfree.github.client import merge_pull_request
+
+            logger.info(
+                "Executing confirmed merge via GitHub API (live mode) for %s",
+                target,
+            )
+
+            github_result = merge_pull_request(
+                repo=repo,
+                pr_number=pr_number,
+                merge_method=merge_method,
+                token=token,
+            )
+
+            if github_result["ok"]:
+                write_action_log(
                     db,
-                    key=request.idempotency_key,
                     user_id=user_id,
-                    endpoint="/v1/commands/confirm",
-                    response_data=response.model_dump(mode="json"),
-                    audit_log_id=audit_log.id,
-                    expires_in_seconds=86400,  # 24 hours
+                    action_type="merge",
+                    ok=True,
+                    target=target,
+                    request={"confirmed": True, "merge_method": merge_method},
+                    result={
+                        "status": "success",
+                        "message": "Merged (live mode)",
+                        "via_confirmation": True,
+                        "github_response": github_result.get("response_data"),
+                    },
+                    idempotency_key=request.idempotency_key,
                 )
-                processed_commands[request.idempotency_key] = response
+
+                response = CommandResponse(
+                    status=CommandStatus.OK,
+                    intent=ParsedIntent(
+                        name="merge.confirmed",
+                        confidence=1.0,
+                        entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
+                    ),
+                    spoken_text=f"Merged successfully {target}.",
+                )
+            else:
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="merge",
+                    ok=False,
+                    target=target,
+                    request={"confirmed": True, "merge_method": merge_method},
+                    result={
+                        "status": "error",
+                        "message": github_result["message"],
+                        "via_confirmation": True,
+                        "status_code": github_result.get("status_code"),
+                        "error_type": github_result.get("error_type"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.ERROR,
+                    intent=ParsedIntent(
+                        name="merge.confirmed",
+                        confidence=1.0,
+                        entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
+                    ),
+                    spoken_text=f"Failed to merge: {github_result['message']}",
+                )
+        else:
+            logger.info(
+                "Executing confirmed merge in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="merge",
+                ok=True,
+                target=target,
+                request={"confirmed": True, "merge_method": merge_method},
+                result={
+                    "status": "success",
+                    "message": "PR merged (fixture)",
+                    "via_confirmation": True,
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            response = CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(
+                    name="merge.confirmed",
+                    confidence=1.0,
+                    entities={
+                        "repo": repo,
+                        "pr_number": pr_number,
+                        "merge_method": merge_method,
+                    },
+                ),
+                spoken_text=f"Merged successfully {target}.",
+            )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -1500,19 +1620,26 @@ async def request_review(
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
 async def rerun_checks(
     request: RerunChecksRequest,
-    x_user_id: str | None = Header(default=None),
+    user_id: CurrentUser,
 ) -> ActionResult:
     """Re-run CI checks with policy evaluation and rate limiting."""
-    # Get user ID from header
-    user_id = get_user_id_from_header(x_user_id)
-
     # Get DB connection
     db = get_db()
 
-    # Check idempotency
-    if request.idempotency_key and request.idempotency_key in idempotency_store:
-        logger.info("Returning cached result for idempotency key: %s", request.idempotency_key)
-        return idempotency_store[request.idempotency_key]
+    # Check idempotency - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return ActionResult(**cached_response)
+
+        if request.idempotency_key in idempotency_store:
+            logger.info(
+                "Returning cached result for idempotency key: %s",
+                request.idempotency_key,
+            )
+            return idempotency_store[request.idempotency_key]
 
     # Rate limiting
     rate_limit_result = check_rate_limit(
@@ -1719,38 +1846,7 @@ async def rerun_checks(
 
     # Store for idempotency
     if request.idempotency_key:
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
-) -> ActionResult:
-    """Re-run CI checks (stubbed - real implementation in PR-007).
-
-    Args:
-        request: Rerun checks request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
-    """
-    db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
-
-    # Check idempotency first - database first, then in-memory cache as optimization
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            return ActionResult(**cached_response)
-
-    result = ActionResult(
-        ok=True,
-        message=f"[STUB] Would rerun checks on {request.repo}#{request.pr_number}. "
-        f"Real implementation in PR-007.",
-        url=None,
-    )
-
-    # Store for idempotency (both persistent and in-memory)
-    if request.idempotency_key:
         from handsfree.db.idempotency_keys import store_idempotency_key
-
-        db = get_db()
-        user_id = get_user_id_from_header(None)  # Use fixture user ID
 
         store_idempotency_key(
             db,
@@ -1766,21 +1862,120 @@ async def rerun_checks(
 
 
 @app.post("/v1/actions/merge", response_model=ActionResult)
-async def merge_pr(request: MergeRequest) -> ActionResult:
-    """Merge a PR (stubbed - real implementation in PR-007)."""
+async def merge_pr(
+    request: MergeRequest,
+    user_id: CurrentUser,
+) -> ActionResult:
+    """Merge a PR with strict policy gating and confirmation."""
+    db = get_db()
+
+    # Check idempotency first - database first, then in-memory cache as optimization
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return ActionResult(**cached_response)
+
+        if request.idempotency_key in idempotency_store:
+            return idempotency_store[request.idempotency_key]
+
+    # Rate limiting (strict)
+    rate_limit_result = check_rate_limit(
+        db,
+        user_id,
+        "merge",
+        window_seconds=60,
+        max_requests=5,
+    )
+
+    if not rate_limit_result.allowed:
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="merge",
+            ok=False,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"merge_method": request.merge_method},
+            result={"error": "rate_limited", "message": rate_limit_result.reason},
+            idempotency_key=request.idempotency_key,
+        )
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "rate_limited",
+                "message": rate_limit_result.reason,
+                "retry_after": rate_limit_result.retry_after_seconds,
+            },
+        )
+
+    # Evaluate policy (merge is denied by default)
+    policy_result = evaluate_action_policy(
+        db,
+        user_id,
+        request.repo,
+        "merge",
+        pr_checks_status=None,
+        pr_approvals_count=0,
+    )
+
+    if policy_result.decision == PolicyDecision.DENY:
+        write_action_log(
+            db,
+            user_id=user_id,
+            action_type="merge",
+            ok=False,
+            target=f"{request.repo}#{request.pr_number}",
+            request={"merge_method": request.merge_method},
+            result={"error": "policy_denied", "message": policy_result.reason},
+            idempotency_key=request.idempotency_key,
+        )
+        raise HTTPException(
+            status_code=403,
+            detail={"error": "policy_denied", "message": policy_result.reason},
+        )
+
+    # Always require confirmation for merge
+    summary = f"Merge {request.repo}#{request.pr_number} using {request.merge_method}"
+    pending_action = create_pending_action(
+        db,
+        user_id=user_id,
+        summary=summary,
+        action_type="merge",
+        action_payload={
+            "repo": request.repo,
+            "pr_number": request.pr_number,
+            "merge_method": request.merge_method,
+        },
+        expires_in_seconds=300,
+    )
+
+    audit_log = write_action_log(
+        db,
+        user_id=user_id,
+        action_type="merge",
+        ok=True,
+        target=f"{request.repo}#{request.pr_number}",
+        request={"merge_method": request.merge_method},
+        result={
+            "status": "needs_confirmation",
+            "token": pending_action.token,
+            "reason": policy_result.reason,
+        },
+        idempotency_key=request.idempotency_key,
+    )
+
     result = ActionResult(
         ok=False,
-        message=f"Confirmation required: {summary}. "
-        f"Use token '{pending_action.token}' to confirm.",
+        message=(
+            f"Confirmation required: {policy_result.reason}. "
+            f"Use token '{pending_action.token}' to confirm."
+        ),
         url=None,
     )
 
-    # Store for idempotency even for stubs
     if request.idempotency_key:
         from handsfree.db.idempotency_keys import store_idempotency_key
-
-        db = get_db()
-        user_id = FIXTURE_USER_ID  # In production, would extract from header
 
         store_idempotency_key(
             db,
@@ -1788,6 +1983,7 @@ async def merge_pr(request: MergeRequest) -> ActionResult:
             user_id=user_id,
             endpoint="/v1/actions/merge",
             response_data=result.model_dump(mode="json"),
+            audit_log_id=audit_log.id,
             expires_in_seconds=86400,  # 24 hours
         )
         idempotency_store[request.idempotency_key] = result
@@ -2444,6 +2640,7 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
 @app.get("/v1/notifications")
 async def get_notifications(
     user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
     since: str | None = None,
     limit: int = 50,
 ) -> JSONResponse:
@@ -2464,6 +2661,14 @@ async def get_notifications(
 
     db = get_db()
 
+    # In dev/test, some endpoints accept arbitrary user IDs (not UUIDs) via header
+    # for isolation in tests. In non-dev modes, always trust the authenticated user.
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
     # Parse since timestamp if provided
     since_dt = None
     if since:
@@ -2480,7 +2685,7 @@ async def get_notifications(
     # Fetch notifications
     notifications = list_notifications(
         conn=db,
-        user_id=user_id,
+        user_id=effective_user_id,
         since=since_dt,
         limit=limit,
     )
@@ -2687,6 +2892,31 @@ async def get_connection(
     )
 
 
+@app.delete("/v1/github/connections/{connection_id}", status_code=204)
+async def delete_connection(
+    connection_id: str,
+    user_id: CurrentUser,
+) -> Response:
+    """Delete a GitHub connection.
+
+    Returns 204 on success. Returns 404 if the connection does not exist or
+    does not belong to the current user.
+    """
+    from handsfree.db.github_connections import delete_github_connection
+
+    db = get_db()
+
+    connection = get_github_connection(conn=db, connection_id=connection_id)
+    if connection is None or connection.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={"error": "not_found", "message": "Connection not found"},
+        )
+
+    delete_github_connection(conn=db, connection_id=connection_id)
+    return Response(status_code=204)
+
+
 @app.post(
     "/v1/notifications/subscriptions",
     response_model=NotificationSubscriptionResponse,
@@ -2694,7 +2924,7 @@ async def get_connection(
 )
 async def create_notification_subscription(
     request: CreateNotificationSubscriptionRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> NotificationSubscriptionResponse:
     """Create a new notification subscription for push delivery.
 
@@ -2708,7 +2938,6 @@ async def create_notification_subscription(
     from handsfree.db.notification_subscriptions import create_subscription
 
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     subscription = create_subscription(
         conn=db,
@@ -2731,7 +2960,7 @@ async def create_notification_subscription(
     "/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse
 )
 async def list_notification_subscriptions(
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> NotificationSubscriptionsListResponse:
     """List all notification subscriptions for the user.
 
@@ -2744,7 +2973,6 @@ async def list_notification_subscriptions(
     from handsfree.db.notification_subscriptions import list_subscriptions
 
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     subscriptions = list_subscriptions(conn=db, user_id=user_id)
 
@@ -2766,7 +2994,7 @@ async def list_notification_subscriptions(
 @app.delete("/v1/notifications/subscriptions/{subscription_id}", status_code=204)
 async def delete_notification_subscription(
     subscription_id: str,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> Response:
     """Delete a notification subscription.
 
@@ -2783,7 +3011,6 @@ async def delete_notification_subscription(
     from handsfree.db.notification_subscriptions import delete_subscription, get_subscription
 
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     # Verify subscription exists and belongs to user
     subscription = get_subscription(conn=db, subscription_id=subscription_id)

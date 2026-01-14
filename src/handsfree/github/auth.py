@@ -62,22 +62,6 @@ class TokenProvider(ABC):
         pass
 
 
-class TokenProvider(ABC):
-    """Abstract interface for token providers (used by LiveGitHubProvider).
-
-    This is a simplified interface that doesn't require user_id parameter.
-    """
-
-    @abstractmethod
-    def get_token(self) -> str | None:
-        """Get a GitHub token.
-
-        Returns:
-            GitHub token or None if not available.
-        """
-        pass
-
-
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
 
@@ -440,52 +424,25 @@ class UserTokenProvider(TokenProvider):
         Returns:
             TokenProvider instance based on user's connection metadata.
         """
-        return None
-
-
-class EnvTokenProvider(TokenProvider):
-    """Token provider that reads from GITHUB_TOKEN environment variable.
-
-    This is a simplified provider for LiveGitHubProvider that doesn't
-    require per-user tokens.
-    """
-
-    def __init__(self):
-        """Initialize the environment token provider."""
-        self.token = os.getenv("GITHUB_TOKEN")
-        # Return cached provider if available
         if self._cached_provider is not None:
             return self._cached_provider
 
         # Import here to avoid circular dependency
         from handsfree.db.github_connections import get_github_connections_by_user
 
-        # Look up user's GitHub connections
-        connections = get_github_connections_by_user(self.db_conn, self.user_id)
-
+        connections = get_github_connections_by_user(conn=self.db_conn, user_id=self.user_id)
         if not connections:
-            logger.debug(
-                "No GitHub connections found for user %s, using fixture mode",
-                self.user_id,
-            )
             self._cached_provider = FixtureTokenProvider()
             return self._cached_provider
 
-        # Use the first (most recent) connection
+        # Use the most-recent connection
         connection = connections[0]
 
         # Priority 1: GitHub App installation token minting
         if connection.installation_id is not None:
-            # Get GitHub App credentials from environment
             app_id = os.getenv("GITHUB_APP_ID")
             private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
-
             if app_id and private_key:
-                logger.debug(
-                    "Using GitHub App token provider for user %s (installation_id=%s)",
-                    self.user_id,
-                    connection.installation_id,
-                )
                 self._cached_provider = GitHubAppTokenProvider(
                     app_id=app_id,
                     private_key_pem=private_key,
@@ -493,35 +450,25 @@ class EnvTokenProvider(TokenProvider):
                     http_client=self.http_client,
                 )
                 return self._cached_provider
-            else:
-                logger.warning(
-                    "User %s has installation_id but GitHub App not configured",
-                    self.user_id,
-                )
+
+            logger.warning(
+                "User %s has installation_id=%s but GitHub App is not configured",
+                self.user_id,
+                connection.installation_id,
+            )
 
         # Priority 2: Environment token fallback for dev
-        github_token = os.getenv("GITHUB_TOKEN")
-        if github_token:
-            logger.debug("Using environment token provider for user %s", self.user_id)
+        if os.getenv("GITHUB_TOKEN"):
             self._cached_provider = EnvTokenProvider()
             return self._cached_provider
 
         # Priority 3: Fixture-only mode
-        logger.debug(
-            "No token source available for user %s, using fixture mode",
-            self.user_id,
-        )
         self._cached_provider = FixtureTokenProvider()
         return self._cached_provider
 
     def get_token(self) -> str | None:
-        """Get a GitHub token for the user.
-
-        Returns:
-            GitHub token or None if not available.
-        """
-        provider = self._get_provider()
-        return provider.get_token()
+        """Get a GitHub token for this user."""
+        return self._get_provider().get_token()
 
 
 def get_default_auth_provider() -> GitHubAuthProvider:
@@ -554,45 +501,26 @@ def get_token_provider() -> TokenProvider:
     Returns:
         TokenProvider instance based on available configuration.
     """
-    # Check both environment variable names as per problem statement
-    live_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live" or os.getenv(
-        "GITHUB_LIVE_MODE", ""
-    ).lower() in ("true", "1", "yes")
-
-    if live_mode and os.getenv("GITHUB_TOKEN"):
-        # Live mode with token - use UserTokenProvider
-        logger.debug("Using user token provider (live mode)")
-        return UserTokenProvider()
-
-    # Check for explicit fixture mode
-    github_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
-    if github_mode == "fixtures":
-        logger.debug("Using fixture token provider (explicit HANDS_FREE_GITHUB_MODE=fixtures)")
+    # Explicit fixture mode overrides everything
+    if os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "fixtures":
         return FixtureTokenProvider()
 
-    if live_mode and os.getenv("GITHUB_TOKEN"):
-        # Priority 1: GitHub App installation token minting
-        # Check if GitHub App is fully configured
-        app_id = os.getenv("GITHUB_APP_ID")
-        private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
-        installation_id = os.getenv("GITHUB_INSTALLATION_ID")
+    # Priority 1: GitHub App installation token minting
+    app_id = os.getenv("GITHUB_APP_ID")
+    private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
+    installation_id = os.getenv("GITHUB_INSTALLATION_ID")
+    if app_id and private_key and installation_id:
+        return GitHubAppTokenProvider(
+            app_id=app_id,
+            private_key_pem=private_key,
+            installation_id=installation_id,
+        )
 
-        if app_id and private_key and installation_id:
-            logger.debug("Using GitHub App token provider (installation token minting)")
-            return GitHubAppTokenProvider(
-                app_id=app_id,
-                private_key_pem=private_key,
-                installation_id=installation_id,
-            )
+    # Priority 2: Environment token
+    if os.getenv("GITHUB_TOKEN"):
+        return EnvTokenProvider()
 
-        # Priority 2: Environment token fallback for dev
-        github_token = os.getenv("GITHUB_TOKEN")
-        if github_token:
-            logger.debug("Using environment token provider (GITHUB_TOKEN)")
-            return EnvTokenProvider()
-
-    # Priority 3: Fixture-only mode (default)
-    logger.debug("Using fixture token provider (no live mode configuration)")
+    # Priority 3: Fixture-only mode
     return FixtureTokenProvider()
 
 
@@ -612,4 +540,4 @@ def get_user_token_provider(
     Returns:
         TokenProvider instance for the specified user.
     """
-    return UserTokenProvider(db_conn, user_id, http_client)
+    return UserTokenProvider(db_conn=db_conn, user_id=user_id, http_client=http_client)
