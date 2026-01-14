@@ -228,11 +228,11 @@ class AgentService:
             # Check for PR URL
             if "pr_url" in task.trace:
                 metadata["pr_url"] = task.trace["pr_url"]
-            
+
             # Check for PR number
             if "pr_number" in task.trace:
                 metadata["pr_number"] = task.trace["pr_number"]
-            
+
             # Check for repo full name
             if "repo_full_name" in task.trace:
                 metadata["repo_full_name"] = task.trace["repo_full_name"]

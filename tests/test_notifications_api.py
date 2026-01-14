@@ -274,11 +274,10 @@ class TestAgentServiceNotifications:
 
         assert response.status_code == 200
         data = response.json()
-        
+
         # Find the completion notification
         completion_notifs = [
-            n for n in data["notifications"]
-            if n["event_type"] == "task_completed"
+            n for n in data["notifications"] if n["event_type"] == "task_completed"
         ]
         assert len(completion_notifs) == 1
 
@@ -326,12 +325,9 @@ class TestAgentServiceNotifications:
 
         assert response.status_code == 200
         data = response.json()
-        
+
         # Find the failure notification
-        failure_notifs = [
-            n for n in data["notifications"]
-            if n["event_type"] == "task_failed"
-        ]
+        failure_notifs = [n for n in data["notifications"] if n["event_type"] == "task_failed"]
         assert len(failure_notifs) == 1
 
         notif = failure_notifs[0]
