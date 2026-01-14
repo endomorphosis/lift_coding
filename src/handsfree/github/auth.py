@@ -62,6 +62,7 @@ class TokenProvider(ABC):
         pass
 
 
+
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
 

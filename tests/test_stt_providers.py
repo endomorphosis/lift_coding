@@ -2,8 +2,7 @@
 
 import os
 import sys
-import tempfile
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -34,6 +33,7 @@ def _setup_mock_openai(api_key="sk-test-key", mock_response=None):
     
     # Reload the module to pick up the mock
     import importlib
+
     import handsfree.stt.openai_provider
     importlib.reload(handsfree.stt.openai_provider)
     

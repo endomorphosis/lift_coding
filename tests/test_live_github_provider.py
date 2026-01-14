@@ -68,14 +68,15 @@ class TestLiveGitHubProvider:
         assert len(reviews) == 2
 
     def test_with_token_but_not_implemented(self):
-        """Test that provider falls back even with token (API not implemented)."""
+        """Test that provider makes live API calls with token."""
         token_provider = MockTokenProvider("ghp_test1234567890")
         provider = LiveGitHubProvider(token_provider)
 
-        # Should still fall back since live API calls are not implemented
+        # With the implementation, it should attempt to make requests
+        # but since we don't have a real server, it will fail and fall back
         prs = provider.list_user_prs("testuser")
         assert isinstance(prs, list)
-        assert len(prs) == 3  # From fixture
+        assert len(prs) == 3  # From fixture fallback
 
     def test_headers_include_authorization(self):
         """Test that headers include authorization when token available."""
