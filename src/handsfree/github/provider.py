@@ -84,7 +84,10 @@ class LiveGitHubProvider(GitHubProviderInterface):
         from handsfree.github.auth import TokenProvider
         
         if not isinstance(token_provider, TokenProvider):
-            raise TypeError("token_provider must be an instance of TokenProvider")
+            raise TypeError(
+                f"token_provider must be an instance of TokenProvider, "
+                f"got {type(token_provider).__name__}"
+            )
         
         self._token_provider = token_provider
         self._fallback_provider = GitHubProvider()  # For fixture fallback

@@ -18,6 +18,7 @@ from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.db.github_connections import (
     create_github_connection,
+    delete_github_connection,
     get_github_connection,
     get_github_connections_by_user,
 )
@@ -1681,8 +1682,6 @@ async def delete_github_connection_endpoint(
     Raises:
         404: Connection not found or not owned by user
     """
-    from handsfree.db.github_connections import delete_github_connection, get_github_connection
-    
     db = get_db()
     user_id = get_user_id_from_header(x_user_id)
     
