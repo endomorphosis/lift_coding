@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
+from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import ProfileConfig
@@ -89,29 +90,6 @@ idempotency_store: dict[str, ActionResult] = {}
 
 # Webhook store (DB-backed, initialized lazily)
 _webhook_store = None
-
-# Fixture user ID for development/testing
-FIXTURE_USER_ID = "00000000-0000-0000-0000-000000000001"
-
-
-def get_user_id_from_header(x_user_id: str | None = None) -> str:
-    """Extract user ID from header, falling back to fixture user ID.
-
-    Args:
-        x_user_id: Optional X-User-Id header value.
-
-    Returns:
-        User ID string (UUID format).
-    """
-    if x_user_id:
-        # Validate it's a proper UUID format
-        try:
-            uuid.UUID(x_user_id)
-            return x_user_id
-        except (ValueError, AttributeError):
-            logger.warning("Invalid X-User-Id format: %s, using fixture", x_user_id)
-            return FIXTURE_USER_ID
-    return FIXTURE_USER_ID
 
 
 # Initialize command infrastructure
@@ -303,15 +281,15 @@ async def github_webhook(
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(
     request: CommandRequest,
+    user_id: CurrentUser,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
-    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
 
     Args:
         request: Command request body
+        user_id: User ID extracted from authentication (via CurrentUser dependency)
         x_session_id: Optional session identifier from X-Session-Id header
-        x_user_id: Optional user identifier from X-User-Id header
 
     Returns:
         CommandResponse with status, intent, spoken text, etc.
@@ -396,9 +374,6 @@ async def submit_command(
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
-        # Get user_id from header or use fixture
-        user_id = FIXTURE_USER_ID  # In production, would extract from auth token
-
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
@@ -406,7 +381,7 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
+            pydantic_intent, text, request.idempotency_key, user_id
         )
         # Store for idempotency (both persistent and in-memory)
         if request.idempotency_key:
@@ -441,7 +416,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
+            router_response, parsed_intent, text, request.profile, user_id
         )
 
         # For non-system commands, update the router's stored response with the enhanced version
@@ -710,16 +685,15 @@ def _convert_router_response_to_command_response(
 @app.post("/v1/commands/confirm", response_model=CommandResponse)
 async def confirm_command(
     request: ConfirmRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> CommandResponse:
     """Confirm a previously proposed side-effect action.
 
     Args:
         request: Confirmation request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     # Check idempotency - database first, then in-memory cache as optimization
     if request.idempotency_key:
@@ -1100,16 +1074,15 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
 @app.post("/v1/actions/request-review", response_model=ActionResult)
 async def request_review(
     request: RequestReviewRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> ActionResult:
     """Request reviewers on a PR with policy evaluation and audit logging.
 
     Args:
         request: Request review request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     # Check idempotency first - database first, then in-memory cache as optimization
     if request.idempotency_key:
@@ -1162,7 +1135,7 @@ async def request_review(
     # Evaluate policy
     policy_result = evaluate_action_policy(
         db,
-        FIXTURE_USER_ID,
+        user_id,
         request.repo,
         "request_review",
     )
@@ -2120,9 +2093,9 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
 
 @app.get("/v1/notifications")
 async def get_notifications(
+    user_id: CurrentUser,
     since: str | None = None,
     limit: int = 50,
-    x_user_id: str = Header(default=FIXTURE_USER_ID, alias="X-User-ID"),
 ) -> JSONResponse:
     """Get notifications for the current user.
 
@@ -2132,7 +2105,7 @@ async def get_notifications(
     Args:
         since: Optional ISO 8601 timestamp to get notifications after this time.
         limit: Maximum number of notifications to return (default: 50, max: 100).
-        x_user_id: User ID from header (defaults to fixture user for dev/testing).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         JSON response with list of notifications.
@@ -2157,7 +2130,7 @@ async def get_notifications(
     # Fetch notifications
     notifications = list_notifications(
         conn=db,
-        user_id=x_user_id,
+        user_id=user_id,
         since=since_dt,
         limit=limit,
     )
@@ -2259,19 +2232,18 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
 @app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
 async def create_connection(
     request: CreateGitHubConnectionRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionResponse:
     """Create a new GitHub connection for the user.
 
     Args:
         request: Connection creation request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         Created connection.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connection = create_github_connection(
         conn=db,
@@ -2294,18 +2266,17 @@ async def create_connection(
 
 @app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
 async def list_connections(
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionsListResponse:
     """List all GitHub connections for the user.
 
     Args:
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         List of connections.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connections = get_github_connections_by_user(conn=db, user_id=user_id)
 
@@ -2328,13 +2299,13 @@ async def list_connections(
 @app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
 async def get_connection(
     connection_id: str,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    user_id: CurrentUser,
 ) -> GitHubConnectionResponse:
     """Get a specific GitHub connection by ID.
 
     Args:
         connection_id: Connection UUID.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         Connection details.
@@ -2343,7 +2314,6 @@ async def get_connection(
         404: Connection not found or user doesn't have access.
     """
     db = get_db()
-    user_id = get_user_id_from_header(x_user_id)
 
     connection = get_github_connection(conn=db, connection_id=connection_id)
 
