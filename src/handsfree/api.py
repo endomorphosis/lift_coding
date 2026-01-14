@@ -187,7 +187,7 @@ def get_status():
     """
     # Check DuckDB connection status
     dependencies = []
-    
+
     try:
         db = get_db()
         # Simple check to see if DB is accessible
@@ -216,7 +216,7 @@ def get_status():
 
     return StatusResponse(
         status=overall_status,
-        version="1.0.0",  # Could be read from package metadata or env var
+        version=app.version,
         timestamp=datetime.now(UTC),
         dependencies=dependencies,
     )
