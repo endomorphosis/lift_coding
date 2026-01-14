@@ -252,9 +252,7 @@ adW+7qG7Q9T48zppJ2NWTp6pUUOKrMfX2Mu9tqGJJZiUMsbhrI+w
         # Set up mock to return token expiring soon
         response = Mock()
         response.status_code = 201
-        near_expiry = datetime.now(UTC) + timedelta(
-            seconds=200
-        )  # Less than refresh window
+        near_expiry = datetime.now(UTC) + timedelta(seconds=200)  # Less than refresh window
         response.json.return_value = {
             "token": "ghs_expiring_soon",
             "expires_at": near_expiry.isoformat(),

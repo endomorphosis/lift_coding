@@ -1,6 +1,5 @@
 """Tests for GitHub provider mode switching via environment variables."""
 
-
 import pytest
 
 from handsfree.github.auth import (
@@ -18,7 +17,7 @@ class TestEnvironmentVariableSwitching:
         """Test HANDS_FREE_GITHUB_MODE=live enables live mode."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         provider = get_token_provider()
         assert isinstance(provider, EnvTokenProvider)
         assert provider.get_token() == "ghp_test_token"
@@ -27,7 +26,7 @@ class TestEnvironmentVariableSwitching:
         """Test GITHUB_LIVE_MODE=true enables live mode."""
         monkeypatch.setenv("GITHUB_LIVE_MODE", "true")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         provider = get_token_provider()
         assert isinstance(provider, EnvTokenProvider)
         assert provider.get_token() == "ghp_test_token"
@@ -36,7 +35,7 @@ class TestEnvironmentVariableSwitching:
         """Test GITHUB_LIVE_MODE=1 enables live mode."""
         monkeypatch.setenv("GITHUB_LIVE_MODE", "1")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         provider = get_token_provider()
         assert isinstance(provider, EnvTokenProvider)
 
@@ -44,7 +43,7 @@ class TestEnvironmentVariableSwitching:
         """Test GITHUB_LIVE_MODE=yes enables live mode."""
         monkeypatch.setenv("GITHUB_LIVE_MODE", "yes")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         provider = get_token_provider()
         assert isinstance(provider, EnvTokenProvider)
 
@@ -54,7 +53,7 @@ class TestEnvironmentVariableSwitching:
         monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
         monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
         monkeypatch.delenv("GITHUB_TOKEN", raising=False)
-        
+
         provider = get_token_provider()
         assert isinstance(provider, FixtureTokenProvider)
         assert provider.get_token() is None
@@ -63,7 +62,7 @@ class TestEnvironmentVariableSwitching:
         """Test that live mode without token falls back to fixture."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.delenv("GITHUB_TOKEN", raising=False)
-        
+
         provider = get_token_provider()
         assert isinstance(provider, FixtureTokenProvider)
 
@@ -71,7 +70,7 @@ class TestEnvironmentVariableSwitching:
         """Test explicit fixture mode setting."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "fixtures")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         provider = get_token_provider()
         # Should still be fixture mode even with token
         assert isinstance(provider, FixtureTokenProvider)
@@ -84,10 +83,10 @@ class TestLiveProviderIntegration:
         """Test LiveGitHubProvider can be created with env token provider."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         token_provider = get_token_provider()
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Should have token available
         headers = provider._get_headers()
         assert "Authorization" in headers
@@ -97,10 +96,10 @@ class TestLiveProviderIntegration:
         """Test LiveGitHubProvider falls back to fixtures when needed."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         token_provider = get_token_provider()
         provider = LiveGitHubProvider(token_provider)
-        
+
         # API not implemented yet, should fall back to fixtures
         prs = provider.list_user_prs("testuser")
         assert len(prs) == 3  # From fixture
@@ -113,7 +112,7 @@ class TestProviderFactoryPattern:
         """Test creating a fixture-only provider."""
         monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
         monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
-        
+
         # Default GitHubProvider uses fixtures
         provider = GitHubProvider()
         prs = provider.list_user_prs("testuser")
@@ -123,10 +122,10 @@ class TestProviderFactoryPattern:
         """Test creating a live provider using factory function."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-        
+
         token_provider = get_token_provider()
         provider = LiveGitHubProvider(token_provider)
-        
+
         # Verify it's properly configured
         assert provider._token_provider.get_token() == "ghp_test_token"
 
@@ -164,6 +163,6 @@ class TestErrorHandling:
         """Test _make_request raises RuntimeError when no token available."""
         token_provider = FixtureTokenProvider()
         provider = LiveGitHubProvider(token_provider)
-        
+
         with pytest.raises(RuntimeError, match="GitHub token not available"):
             provider._make_request("/test/endpoint")

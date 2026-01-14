@@ -345,6 +345,7 @@ class TestWebhookNotifications:
         """Test that PR opened webhook creates a notification."""
         from handsfree.api import get_db
         from handsfree.db.notifications import list_notifications
+        from handsfree.db.repo_subscriptions import create_repo_subscription
 
         db = get_db()
         # Use unique delivery ID to avoid duplicate rejection
@@ -352,6 +353,9 @@ class TestWebhookNotifications:
 
         delivery_id = f"test-delivery-pr-opened-{uuid.uuid4()}"
         user_id = "00000000-0000-0000-0000-000000000001"
+
+        # Set up subscription for fixture user to receive notifications
+        create_repo_subscription(db, user_id, "test/repo")
 
         # Count notifications before
         notifs_before = list_notifications(conn=db, user_id=user_id)
@@ -402,9 +406,13 @@ class TestWebhookNotifications:
         """Test that check_suite completed webhook creates a notification."""
         from handsfree.api import get_db
         from handsfree.db.notifications import list_notifications
+        from handsfree.db.repo_subscriptions import create_repo_subscription
 
         db = get_db()
         user_id = "00000000-0000-0000-0000-000000000001"
+
+        # Set up subscription for fixture user
+        create_repo_subscription(db, user_id, "test/repo")
 
         # Count notifications before
         notifs_before = list_notifications(conn=db, user_id=user_id)
@@ -450,9 +458,13 @@ class TestWebhookNotifications:
         """Test that pull_request_review submitted webhook creates a notification."""
         from handsfree.api import get_db
         from handsfree.db.notifications import list_notifications
+        from handsfree.db.repo_subscriptions import create_repo_subscription
 
         db = get_db()
         user_id = "00000000-0000-0000-0000-000000000001"
+
+        # Set up subscription for fixture user
+        create_repo_subscription(db, user_id, "test/repo")
 
         # Count notifications before
         notifs_before = list_notifications(conn=db, user_id=user_id)

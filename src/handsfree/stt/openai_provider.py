@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 # Try to import openai - if not available, class instantiation will fail with helpful error
 try:
     import openai
+
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
@@ -26,10 +27,10 @@ class OpenAISTTProvider:
     # Supported audio formats per OpenAI Whisper API
     # https://platform.openai.com/docs/guides/speech-to-text
     SUPPORTED_FORMATS = ["wav", "m4a", "mp3", "opus", "flac", "webm"]
-    
+
     # Max file size: 25MB per OpenAI docs
     MAX_FILE_SIZE = 25 * 1024 * 1024  # 25MB in bytes
-    
+
     def __init__(
         self,
         api_key: str | None = None,
@@ -62,7 +63,7 @@ class OpenAISTTProvider:
 
         # Initialize OpenAI client
         self.client = openai.OpenAI(api_key=self.api_key)
-        
+
         # Configuration
         self.model = os.environ.get("OPENAI_STT_MODEL", "whisper-1")
         self.timeout = float(os.environ.get("HANDS_FREE_STT_TIMEOUT", str(timeout)))
@@ -134,14 +135,16 @@ class OpenAISTTProvider:
                     )
 
                 # OpenAI API returns the transcript as a string directly
-                transcript = response.strip() if isinstance(response, str) else str(response).strip()
-                
+                transcript = (
+                    response.strip() if isinstance(response, str) else str(response).strip()
+                )
+
                 logger.info(
                     "Successfully transcribed audio (attempt %d): length=%d chars",
                     attempt + 1,
                     len(transcript),
                 )
-                
+
                 return transcript
 
             except Exception as e:
@@ -155,7 +158,7 @@ class OpenAISTTProvider:
 
                 # If not last attempt, wait before retrying with exponential backoff
                 if attempt < self.max_retries - 1:
-                    backoff_delay = min(self.retry_delay * (2 ** attempt), 30.0)
+                    backoff_delay = min(self.retry_delay * (2**attempt), 30.0)
                     logger.info("Retrying in %.1f seconds...", backoff_delay)
                     time.sleep(backoff_delay)
 
@@ -166,4 +169,3 @@ class OpenAISTTProvider:
         )
         logger.error("%s Last error: %s", error_msg, last_error)
         raise RuntimeError(error_msg) from last_error
-
