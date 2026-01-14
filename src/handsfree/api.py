@@ -119,7 +119,9 @@ def get_command_router() -> CommandRouter:
     global _command_router
     if _command_router is None:
         db = get_db()
-        _command_router = CommandRouter(_pending_action_manager, db_conn=db)
+        _command_router = CommandRouter(
+            _pending_action_manager, db_conn=db, github_provider=_github_provider
+        )
     return _command_router
 
 
