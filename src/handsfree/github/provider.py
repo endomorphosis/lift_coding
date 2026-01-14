@@ -6,8 +6,9 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
-logger = logging.getLogger(__name__)
 from handsfree.github.auth import GitHubAuthProvider, get_default_auth_provider
+
+logger = logging.getLogger(__name__)
 
 
 class GitHubProviderInterface(ABC):

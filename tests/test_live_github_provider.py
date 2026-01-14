@@ -2,6 +2,7 @@
 
 import pytest
 
+from handsfree.github.auth import TokenProvider
 from handsfree.github.auth import FixtureOnlyProvider, GitHubAuthProvider
 from handsfree.github.provider import LiveGitHubProvider
 
