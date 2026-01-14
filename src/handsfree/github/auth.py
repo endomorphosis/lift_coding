@@ -62,22 +62,6 @@ class TokenProvider(ABC):
         pass
 
 
-class TokenProvider(ABC):
-    """Abstract interface for token providers (used by LiveGitHubProvider).
-    
-    This is a simplified interface that doesn't require user_id parameter.
-    """
-
-    @abstractmethod
-    def get_token(self) -> str | None:
-        """Get a GitHub token.
-
-        Returns:
-            GitHub token or None if not available.
-        """
-        pass
-
-
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
 
@@ -406,38 +390,6 @@ class FixtureOnlyProvider(GitHubAuthProvider):
         return False
 
 
-class FixtureTokenProvider(TokenProvider):
-    """Token provider that always returns None (fixture-only mode)."""
-
-    def get_token(self) -> str | None:
-        """Always returns None to force fixture mode.
-
-        Returns:
-            None to indicate fixture-only mode.
-        """
-        return None
-
-
-class EnvTokenProvider(TokenProvider):
-    """Token provider that reads from GITHUB_TOKEN environment variable.
-    
-    This is a simplified provider for LiveGitHubProvider that doesn't
-    require per-user tokens.
-    """
-
-    def __init__(self):
-        """Initialize the environment token provider."""
-        self.token = os.getenv("GITHUB_TOKEN")
-
-    def get_token(self) -> str | None:
-        """Get a GitHub token from environment variable.
-
-        Returns:
-            GitHub token from GITHUB_TOKEN env var, or None if not set.
-        """
-        return self.token
-
-
 class UserTokenProvider(TokenProvider):
     """Token provider that gets tokens for specific users from connection metadata.
     
@@ -483,7 +435,10 @@ class UserTokenProvider(TokenProvider):
         connections = get_github_connections_by_user(self.db_conn, self.user_id)
         
         if not connections:
-            logger.debug("No GitHub connections found for user %s, using fixture mode", self.user_id)
+            logger.debug(
+                "No GitHub connections found for user %s, using fixture mode",
+                self.user_id,
+            )
             self._cached_provider = FixtureTokenProvider()
             return self._cached_provider
         
@@ -511,19 +466,24 @@ class UserTokenProvider(TokenProvider):
                 return self._cached_provider
             else:
                 logger.warning(
-                    "User %s has installation_id but GitHub App credentials not configured",
+                    "User %s has installation_id but GitHub App not configured",
                     self.user_id,
                 )
         
         # Priority 2: Environment token fallback for dev
         github_token = os.getenv("GITHUB_TOKEN")
         if github_token:
-            logger.debug("Using environment token provider for user %s", self.user_id)
+            logger.debug(
+                "Using environment token provider for user %s", self.user_id
+            )
             self._cached_provider = EnvTokenProvider()
             return self._cached_provider
         
         # Priority 3: Fixture-only mode
-        logger.debug("No token source available for user %s, using fixture mode", self.user_id)
+        logger.debug(
+            "No token source available for user %s, using fixture mode",
+            self.user_id,
+        )
         self._cached_provider = FixtureTokenProvider()
         return self._cached_provider
 
@@ -555,7 +515,8 @@ def get_token_provider() -> TokenProvider:
     """Get a token provider for LiveGitHubProvider based on environment.
     
     Token selection order:
-    1. GitHub App installation token minting (JWT -> installation access token) when app config present
+    1. GitHub App installation token minting (JWT -> installation access token)
+       when app config present
     2. GITHUB_TOKEN env fallback for dev
     3. fixture-only mode otherwise
     
@@ -595,7 +556,9 @@ def get_token_provider() -> TokenProvider:
     return FixtureTokenProvider()
 
 
-def get_user_token_provider(db_conn: Any, user_id: str, http_client: Any | None = None) -> TokenProvider:
+def get_user_token_provider(
+    db_conn: Any, user_id: str, http_client: Any | None = None
+) -> TokenProvider:
     """Get a token provider for a specific user using their connection metadata.
     
     This function creates a UserTokenProvider that looks up the user's GitHub
