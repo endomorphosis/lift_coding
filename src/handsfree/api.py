@@ -237,18 +237,23 @@ async def github_webhook(
 async def submit_command(
     request: CommandRequest,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
     
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
+        x_user_id: Optional user ID header (falls back to fixture user ID)
         
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
+    
+    # Get user ID from header or use fixture
+    user_id = get_user_id_from_header(x_user_id)
     
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
@@ -292,7 +297,7 @@ async def submit_command(
         intent=parsed_intent,
         profile=request.profile,
         session_id=session_id,  # Use session ID from header or idempotency key
-        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
+        user_id=user_id,  # Pass user ID for policy evaluation
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
@@ -303,7 +308,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile
+            router_response, parsed_intent, text, request.profile, user_id
         )
         
         # For non-system commands, update the router's stored response with the enhanced version
@@ -1541,59 +1546,28 @@ async def get_notifications(
     )
 
 
-@app.post("/v1/github/connect", response_model=GitHubConnectionResponse, status_code=status.HTTP_201_CREATED)
+@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=status.HTTP_201_CREATED)
 async def create_github_connection_endpoint(
     request: CreateGitHubConnectionRequest,
     x_user_id: str | None = Header(None, alias="X-User-Id"),
 ) -> GitHubConnectionResponse:
-    """Create or update a GitHub connection for the authenticated user.
+    """Create a new GitHub connection for the authenticated user.
     
     Stores GitHub App installation metadata (NO secrets stored directly).
     Scoped per user via X-User-Id header.
+    Users can have multiple connections.
     
     Args:
         request: Connection creation request
         x_user_id: Optional user ID header (falls back to fixture user ID)
         
     Returns:
-        Created/updated connection details
+        Created connection details
     """
     db = get_db()
     user_id = get_user_id_from_header(x_user_id)
     
-    # Check if user already has a connection
-    existing_connections = get_github_connections_by_user(db, user_id)
-    
-    if existing_connections:
-        # Update existing connection (for now, update the first one)
-        # In a full implementation, might support multiple connections
-        from handsfree.db.github_connections import update_github_connection
-        
-        updated = update_github_connection(
-            db,
-            existing_connections[0].id,
-            installation_id=request.installation_id,
-            token_ref=request.token_ref,
-            scopes=request.scopes,
-        )
-        
-        if updated is None:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail={"error": "update_failed", "message": "Failed to update connection"},
-            )
-        
-        return GitHubConnectionResponse(
-            id=updated.id,
-            user_id=updated.user_id,
-            installation_id=updated.installation_id,
-            token_ref=updated.token_ref,
-            scopes=updated.scopes,
-            created_at=updated.created_at,
-            updated_at=updated.updated_at,
-        )
-    
-    # Create new connection
+    # Always create new connection
     conn = create_github_connection(
         db,
         user_id=user_id,
@@ -1613,7 +1587,7 @@ async def create_github_connection_endpoint(
     )
 
 
-@app.get("/v1/github/connection", response_model=GitHubConnectionsListResponse)
+@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
 async def get_github_connection_endpoint(
     x_user_id: str | None = Header(None, alias="X-User-Id"),
 ) -> GitHubConnectionsListResponse:
@@ -1648,7 +1622,50 @@ async def get_github_connection_endpoint(
     )
 
 
-@app.delete("/v1/github/connection/{connection_id}", status_code=status.HTTP_204_NO_CONTENT)
+@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
+async def get_github_connection_by_id_endpoint(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Get a specific GitHub connection by ID.
+    
+    Users can only access their own connections.
+    
+    Args:
+        connection_id: UUID of the connection to retrieve
+        x_user_id: Optional user ID header (falls back to fixture user ID)
+        
+    Returns:
+        Connection details
+        
+    Raises:
+        404: Connection not found or not owned by user
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+    
+    # Get connection
+    conn = get_github_connection(db, connection_id)
+    
+    # Check it exists and belongs to user
+    if conn is None or conn.user_id != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"error": "not_found", "message": "Connection not found"},
+        )
+    
+    return GitHubConnectionResponse(
+        id=conn.id,
+        user_id=conn.user_id,
+        installation_id=conn.installation_id,
+        token_ref=conn.token_ref,
+        scopes=conn.scopes,
+        created_at=conn.created_at,
+        updated_at=conn.updated_at,
+    )
+
+
+@app.delete("/v1/github/connections/{connection_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_github_connection_endpoint(
     connection_id: str,
     x_user_id: str | None = Header(None, alias="X-User-Id"),

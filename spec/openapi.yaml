@@ -154,7 +154,7 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
-  /v1/github/connect:
+  /v1/github/connections:
     post:
       summary: Create or update GitHub connection metadata
       operationId: createGitHubConnection
@@ -189,10 +189,9 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
-  /v1/github/connection:
     get:
       summary: Get GitHub connection status for authenticated user
-      operationId: getGitHubConnection
+      operationId: getGitHubConnections
       description: >
         Returns all GitHub connections for the user (usually 0 or 1).
         Scoped per user via X-User-Id header.
@@ -212,7 +211,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/GitHubConnectionsListResponse'
 
-  /v1/github/connection/{connection_id}:
+  /v1/github/connections/{connection_id}:
+    get:
+      summary: Get a specific GitHub connection by ID
+      operationId: getGitHubConnectionById
+      description: >
+        Get a specific GitHub connection. Users can only access their own connections.
+      parameters:
+        - in: path
+          name: connection_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: UUID of the connection to retrieve
+        - in: header
+          name: X-User-Id
+          schema:
+            type: string
+            format: uuid
+          required: false
+          description: User ID (defaults to fixture user for dev/testing)
+      responses:
+        '200':
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionResponse'
+        '404':
+          description: Connection not found or not owned by user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
     delete:
       summary: Delete a GitHub connection
       operationId: deleteGitHubConnection

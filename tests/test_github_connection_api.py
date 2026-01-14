@@ -33,12 +33,12 @@ def setup_db():
 
 
 class TestCreateGitHubConnection:
-    """Test POST /v1/github/connect endpoint."""
+    """Test POST /v1/github/connections endpoint."""
 
     def test_create_connection_basic(self, client, test_user_id, setup_db):
         """Test creating a basic GitHub connection."""
         response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={
                 "installation_id": 12345,
                 "token_ref": "secret://tokens/github/user123",
@@ -60,7 +60,7 @@ class TestCreateGitHubConnection:
     def test_create_connection_minimal(self, client, test_user_id, setup_db):
         """Test creating a connection with minimal fields."""
         response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={},
             headers={"X-User-Id": test_user_id},
         )
@@ -75,7 +75,7 @@ class TestCreateGitHubConnection:
     def test_create_connection_default_user(self, client, setup_db):
         """Test creating a connection with default fixture user."""
         response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 99999},
         )
 
@@ -86,38 +86,38 @@ class TestCreateGitHubConnection:
         assert data["installation_id"] == 99999
 
     def test_update_existing_connection(self, client, test_user_id, setup_db):
-        """Test updating an existing connection."""
+        """Test creating multiple connections for the same user."""
         # Create first connection
         response1 = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 11111, "scopes": "repo"},
             headers={"X-User-Id": test_user_id},
         )
         assert response1.status_code == 201
         conn1 = response1.json()
 
-        # Create second connection (should update the first)
+        # Create second connection
         response2 = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 22222, "scopes": "repo,read:org"},
             headers={"X-User-Id": test_user_id},
         )
         assert response2.status_code == 201
         conn2 = response2.json()
 
-        # Should have same ID (updated, not created)
-        assert conn2["id"] == conn1["id"]
+        # Should have different IDs (created, not updated)
+        assert conn2["id"] != conn1["id"]
         assert conn2["installation_id"] == 22222
         assert conn2["scopes"] == "repo,read:org"
 
 
 class TestGetGitHubConnection:
-    """Test GET /v1/github/connection endpoint."""
+    """Test GET /v1/github/connections endpoint."""
 
     def test_get_connection_empty(self, client, test_user_id, setup_db):
         """Test getting connection when none exists."""
         response = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": test_user_id},
         )
 
@@ -130,7 +130,7 @@ class TestGetGitHubConnection:
         """Test getting connection after creating one."""
         # Create connection
         create_response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 12345, "scopes": "repo"},
             headers={"X-User-Id": test_user_id},
         )
@@ -138,7 +138,7 @@ class TestGetGitHubConnection:
 
         # Get connection
         get_response = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": test_user_id},
         )
 
@@ -153,18 +153,23 @@ class TestGetGitHubConnection:
     def test_get_connection_default_user(self, client, setup_db):
         """Test getting connection with default fixture user."""
         # Create connection for fixture user
-        client.post(
-            "/v1/github/connect",
+        create_resp = client.post(
+            "/v1/github/connections",
             json={"installation_id": 99999},
         )
+        assert create_resp.status_code == 201
+        created_id = create_resp.json()["id"]
 
         # Get connection without explicit user ID
-        response = client.get("/v1/github/connection")
+        response = client.get("/v1/github/connections")
 
         assert response.status_code == 200
         data = response.json()
-        assert len(data["connections"]) == 1
-        assert data["connections"][0]["installation_id"] == 99999
+        # Should have at least the connection we just created
+        assert len(data["connections"]) >= 1
+        # Verify our connection is in the list
+        connection_ids = [c["id"] for c in data["connections"]]
+        assert created_id in connection_ids
 
     def test_get_connection_isolation(self, client, setup_db):
         """Test that connections are isolated per user."""
@@ -173,21 +178,21 @@ class TestGetGitHubConnection:
 
         # Create connection for user 1
         client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 11111},
             headers={"X-User-Id": user1_id},
         )
 
         # Create connection for user 2
         client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 22222},
             headers={"X-User-Id": user2_id},
         )
 
         # Get connections for user 1
         response1 = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": user1_id},
         )
         data1 = response1.json()
@@ -196,7 +201,7 @@ class TestGetGitHubConnection:
 
         # Get connections for user 2
         response2 = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": user2_id},
         )
         data2 = response2.json()
@@ -205,13 +210,13 @@ class TestGetGitHubConnection:
 
 
 class TestDeleteGitHubConnection:
-    """Test DELETE /v1/github/connection/{connection_id} endpoint."""
+    """Test DELETE /v1/github/connections/{connection_id} endpoint."""
 
     def test_delete_connection(self, client, test_user_id, setup_db):
         """Test deleting a connection."""
         # Create connection
         create_response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 12345},
             headers={"X-User-Id": test_user_id},
         )
@@ -219,14 +224,14 @@ class TestDeleteGitHubConnection:
 
         # Delete connection
         delete_response = client.delete(
-            f"/v1/github/connection/{conn_id}",
+            f"/v1/github/connections/{conn_id}",
             headers={"X-User-Id": test_user_id},
         )
         assert delete_response.status_code == 204
 
         # Verify it's gone
         get_response = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": test_user_id},
         )
         data = get_response.json()
@@ -236,7 +241,7 @@ class TestDeleteGitHubConnection:
         """Test deleting a non-existent connection."""
         fake_id = str(uuid.uuid4())
         response = client.delete(
-            f"/v1/github/connection/{fake_id}",
+            f"/v1/github/connections/{fake_id}",
             headers={"X-User-Id": test_user_id},
         )
         assert response.status_code == 404
@@ -248,7 +253,7 @@ class TestDeleteGitHubConnection:
 
         # Create connection for user 1
         create_response = client.post(
-            "/v1/github/connect",
+            "/v1/github/connections",
             json={"installation_id": 12345},
             headers={"X-User-Id": user1_id},
         )
@@ -256,14 +261,14 @@ class TestDeleteGitHubConnection:
 
         # Try to delete as user 2
         delete_response = client.delete(
-            f"/v1/github/connection/{conn_id}",
+            f"/v1/github/connections/{conn_id}",
             headers={"X-User-Id": user2_id},
         )
         assert delete_response.status_code == 404
 
         # Verify connection still exists for user 1
         get_response = client.get(
-            "/v1/github/connection",
+            "/v1/github/connections",
             headers={"X-User-Id": user1_id},
         )
         data = get_response.json()
