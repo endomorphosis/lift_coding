@@ -1,5 +1,6 @@
 """Command router and response composer."""
 
+import logging
 from typing import Any
 
 import duckdb
@@ -7,6 +8,8 @@ import duckdb
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
 from .profiles import Profile, ProfileConfig
+
+logger = logging.getLogger(__name__)
 
 
 class CommandRouter:
@@ -408,14 +411,12 @@ class CommandRouter:
             # Use a default repo if not specified (in real app, would come from context)
             if not repo:
                 repo = "owner/repo"  # Fallback for fixture mode
-            
+
             try:
                 checks = self.github_provider.get_pr_checks(repo, pr_number)
                 spoken_text = self._format_checks_summary(checks, pr_number, profile_config)
             except Exception as e:
                 # Log error and return fallback message
-                import logging
-                logger = logging.getLogger(__name__)
                 logger.warning("Failed to fetch checks for PR %s: %s", pr_number, str(e))
                 spoken_text = f"Could not fetch checks for PR {pr_number}."
                 if profile_config.profile == Profile.WORKOUT:
