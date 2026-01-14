@@ -15,13 +15,17 @@ class MockResponse:
 
     def json(self):
         """Return JSON data."""
+        if not self._json_data:
+            # Simulate JSONDecodeError for empty response
+            import json
+
+            raise json.JSONDecodeError("Expecting value", "", 0)
         return self._json_data
 
 
 @pytest.fixture
 def reset_db():
     """Reset the database connection before each test."""
-    global _db_conn
     import handsfree.api as api_module
 
     api_module._db_conn = None
@@ -319,9 +323,9 @@ def test_no_network_calls_without_live_mode(reset_db, monkeypatch):
 
     import handsfree.github.client as client_module
 
-    # Only patch if httpx is imported
-    if client_module._httpx:
-        monkeypatch.setattr(client_module._httpx, "post", mock_post)
+    # Import httpx to ensure it's available for patching
+    client_module._import_httpx()
+    monkeypatch.setattr(client_module._httpx, "post", mock_post)
 
     # Create policy that allows without confirmation
     from handsfree.api import get_db

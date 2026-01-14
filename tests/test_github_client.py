@@ -1,5 +1,7 @@
 """Unit tests for GitHub API client write operations."""
 
+import json
+
 import pytest
 
 from handsfree.github.client import request_reviewers
@@ -15,9 +17,10 @@ class MockResponse:
 
     def json(self):
         """Return JSON data."""
-        if self._json_data:
-            return self._json_data
-        raise ValueError("No JSON data")
+        if not self._json_data:
+            # Raise JSONDecodeError for empty response
+            raise json.JSONDecodeError("Expecting value", "", 0)
+        return self._json_data
 
 
 class TestRequestReviewers:
