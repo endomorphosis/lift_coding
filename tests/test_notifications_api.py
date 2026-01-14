@@ -25,7 +25,7 @@ class TestNotificationsEndpoint:
         # Use a unique user ID to avoid interference from other tests
         response = client.get(
             "/v1/notifications",
-            headers={"X-User-ID": "empty-user-00000000-0000-0000-0000-000000000000"}
+            headers={"X-User-ID": "empty-user-00000000-0000-0000-0000-000000000000"},
         )
 
         assert response.status_code == 200
@@ -61,10 +61,7 @@ class TestNotificationsEndpoint:
             metadata={"key": "value2"},
         )
 
-        response = client.get(
-            "/v1/notifications",
-            headers={"X-User-ID": user_id}
-        )
+        response = client.get("/v1/notifications", headers={"X-User-ID": user_id})
 
         assert response.status_code == 200
         data = response.json()
@@ -133,9 +130,7 @@ class TestNotificationsEndpoint:
         )
 
         # Query with since filter
-        response = client.get(
-            f"/v1/notifications?since={cutoff.isoformat()}"
-        )
+        response = client.get(f"/v1/notifications?since={cutoff.isoformat()}")
 
         assert response.status_code == 200
         data = response.json()
@@ -200,7 +195,7 @@ class TestAgentServiceNotifications:
         # Check that a notification was created
         notifs = list_notifications(conn=db, user_id=user_id)
         assert len(notifs) >= 1
-        
+
         # Find the task_created notification
         task_notifs = [n for n in notifs if n.event_type == "task_created"]
         assert len(task_notifs) >= 1
@@ -253,6 +248,7 @@ class TestWebhookNotifications:
         db = get_db()
         # Use unique delivery ID to avoid duplicate rejection
         import uuid
+
         delivery_id = f"test-delivery-pr-opened-{uuid.uuid4()}"
         user_id = "00000000-0000-0000-0000-000000000001"
 
@@ -344,9 +340,7 @@ class TestWebhookNotifications:
         assert len(notifs_after) == count_before + 1
 
         # Find the webhook notification
-        webhook_notifs = [
-            n for n in notifs_after if n.event_type == "webhook.check_suite_success"
-        ]
+        webhook_notifs = [n for n in notifs_after if n.event_type == "webhook.check_suite_success"]
         assert len(webhook_notifs) == 1
         assert "success" in webhook_notifs[0].message
         assert "test/repo" in webhook_notifs[0].message
@@ -396,9 +390,7 @@ class TestWebhookNotifications:
         assert len(notifs_after) == count_before + 1
 
         # Find the webhook notification
-        webhook_notifs = [
-            n for n in notifs_after if n.event_type == "webhook.review_approved"
-        ]
+        webhook_notifs = [n for n in notifs_after if n.event_type == "webhook.review_approved"]
         assert len(webhook_notifs) == 1
         assert "approved" in webhook_notifs[0].message
         assert "reviewer" in webhook_notifs[0].message

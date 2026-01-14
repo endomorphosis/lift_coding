@@ -154,6 +154,39 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/tts:
+    post:
+      summary: Convert text to speech (TTS)
+      operationId: textToSpeech
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TTSRequest'
+      responses:
+        '200':
+          description: Audio file generated successfully
+          content:
+            audio/wav:
+              schema:
+                type: string
+                format: binary
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Invalid request (empty or too long text)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '500':
+          description: TTS synthesis failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
 components:
   schemas:
     Profile:
@@ -406,3 +439,21 @@ components:
         details:
           type: object
           additionalProperties: true
+
+    TTSRequest:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 5000
+          description: Text to convert to speech
+        voice:
+          type: string
+          description: Optional voice identifier (provider-specific)
+        format:
+          type: string
+          enum: [wav, mp3]
+          default: wav
+          description: Audio format for the output
