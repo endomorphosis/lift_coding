@@ -2956,9 +2956,7 @@ async def create_notification_subscription(
     )
 
 
-@app.get(
-    "/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse
-)
+@app.get("/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse)
 async def list_notification_subscriptions(
     user_id: CurrentUser,
 ) -> NotificationSubscriptionsListResponse:
@@ -3035,4 +3033,3 @@ async def delete_notification_subscription(
         )
 
     return Response(status_code=204)
-

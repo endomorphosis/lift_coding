@@ -94,9 +94,7 @@ class TestJWTModeAuthentication:
 
     def test_command_requires_token_in_jwt_mode(self, jwt_secret):
         """Test that command endpoint requires token in JWT mode."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             response = client.post(
                 "/v1/command",
                 json={
@@ -113,16 +111,11 @@ class TestJWTModeAuthentication:
             assert response.status_code == 401
             data = response.json()
             # Check for either FastAPI error format or our custom format
-            assert (
-                "authentication required" in str(data).lower()
-                or "error" in data
-            )
+            assert "authentication required" in str(data).lower() or "error" in data
 
     def test_command_with_valid_token_in_jwt_mode(self, jwt_secret, test_user_id):
         """Test command endpoint with valid JWT token."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             token = create_jwt_token(test_user_id, jwt_secret)
             response = client.post(
                 "/v1/command",
@@ -142,9 +135,7 @@ class TestJWTModeAuthentication:
 
     def test_command_with_expired_token(self, jwt_secret, test_user_id):
         """Test that expired tokens are rejected."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             token = create_jwt_token(test_user_id, jwt_secret, expired=True)
             response = client.post(
                 "/v1/command",
@@ -167,9 +158,7 @@ class TestJWTModeAuthentication:
 
     def test_command_with_invalid_token(self, jwt_secret):
         """Test that invalid tokens are rejected."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             response = client.post(
                 "/v1/command",
                 headers={"Authorization": "Bearer invalid-token"},
@@ -188,9 +177,7 @@ class TestJWTModeAuthentication:
 
     def test_jwt_mode_ignores_x_user_id_header(self, jwt_secret, test_user_id):
         """Test that JWT mode ignores X-User-Id header."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             # Even with X-User-Id header, should require JWT token
             response = client.post(
                 "/v1/command",
@@ -210,9 +197,7 @@ class TestJWTModeAuthentication:
 
     def test_github_connection_requires_token_in_jwt_mode(self, jwt_secret):
         """Test GitHub connection creation requires token in JWT mode."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             response = client.post(
                 "/v1/github/connections",
                 json={"installation_id": 12345},
@@ -221,9 +206,7 @@ class TestJWTModeAuthentication:
 
     def test_github_connection_with_valid_token(self, jwt_secret, test_user_id):
         """Test GitHub connection creation with valid JWT token."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             token = create_jwt_token(test_user_id, jwt_secret)
             response = client.post(
                 "/v1/github/connections",
@@ -237,17 +220,13 @@ class TestJWTModeAuthentication:
 
     def test_list_connections_requires_token(self, jwt_secret):
         """Test listing connections requires token in JWT mode."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             response = client.get("/v1/github/connections")
             assert response.status_code == 401
 
     def test_list_connections_with_valid_token(self, jwt_secret, test_user_id):
         """Test listing connections with valid JWT token."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             token = create_jwt_token(test_user_id, jwt_secret)
             response = client.get(
                 "/v1/github/connections",
@@ -257,9 +236,7 @@ class TestJWTModeAuthentication:
 
     def test_request_review_requires_token(self, jwt_secret):
         """Test request review action requires token in JWT mode."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             response = client.post(
                 "/v1/actions/request-review",
                 json={
@@ -273,9 +250,7 @@ class TestJWTModeAuthentication:
 
     def test_request_review_with_valid_token(self, jwt_secret, test_user_id):
         """Test request review action with valid JWT token."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             token = create_jwt_token(test_user_id, jwt_secret)
             response = client.post(
                 "/v1/actions/request-review",
@@ -299,9 +274,7 @@ class TestJWTModeUserIsolation:
         user1_id = str(uuid.uuid4())
         user2_id = str(uuid.uuid4())
 
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             # User 1 creates a connection
             token1 = create_jwt_token(user1_id, jwt_secret)
             create_response = client.post(
