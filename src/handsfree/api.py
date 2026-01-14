@@ -1866,9 +1866,9 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
 
 @app.get("/v1/notifications")
 async def get_notifications(
+    user_id: CurrentUser,
     since: str | None = None,
     limit: int = 50,
-    user_id: CurrentUser = FIXTURE_USER_ID,
 ) -> JSONResponse:
     """Get notifications for the current user.
 
