@@ -90,6 +90,7 @@ class DebugInfo(BaseModel):
 
     transcript: str | None = None
     tool_calls: list[dict[str, Any]] = Field(default_factory=list)
+    profile_metadata: dict[str, Any] | None = None  # Optional profile info (speech_rate, etc.)
 
 
 class CommandStatus(str, Enum):

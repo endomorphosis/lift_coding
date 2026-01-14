@@ -2,11 +2,16 @@
 
 from typing import Any
 
+from ..commands.profiles import ProfileConfig
 from ..github import GitHubProvider
 
 
 def handle_pr_summarize(
-    provider: GitHubProvider, repo: str, pr_number: int, privacy_mode: bool = True
+    provider: GitHubProvider,
+    repo: str,
+    pr_number: int,
+    privacy_mode: bool = True,
+    profile_config: ProfileConfig | None = None,
 ) -> dict[str, Any]:
     """
     Handle pr.summarize command to provide PR summary.
@@ -16,6 +21,7 @@ def handle_pr_summarize(
         repo: Repository name (e.g., "owner/repo")
         pr_number: PR number
         privacy_mode: If True, no code snippets are included (default: True)
+        profile_config: Optional profile configuration for response shaping
 
     Returns:
         Response dict with spoken_text and summary details
@@ -94,6 +100,14 @@ def handle_pr_summarize(
             excerpt += "..."
         spoken_text += f"Description: {excerpt}"
 
+    # Apply profile-based truncation if profile_config is provided
+    # Note: Optional truncation maintains backward compatibility with callers
+    # that don't provide profile_config
+    if profile_config:
+        spoken_text = profile_config.truncate_spoken_text(spoken_text.strip())
+    else:
+        spoken_text = spoken_text.strip()
+
     return {
         "pr_number": pr_number,
         "title": title,
@@ -105,7 +119,7 @@ def handle_pr_summarize(
         "labels": labels,
         "checks": checks_summary,
         "reviews": reviews_summary,
-        "spoken_text": spoken_text.strip(),
+        "spoken_text": spoken_text,
     }
 
 
