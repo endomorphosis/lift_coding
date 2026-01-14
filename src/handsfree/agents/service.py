@@ -3,16 +3,21 @@
 Handles agent task delegation and status queries.
 """
 
+import logging
 from typing import Any
 
 import duckdb
 
+from handsfree.agent_providers import get_provider
 from handsfree.db.agent_tasks import (
     create_agent_task,
+    get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_state,
 )
 from handsfree.db.notifications import create_notification
+
+logger = logging.getLogger(__name__)
 
 
 class AgentService:
@@ -46,7 +51,7 @@ class AgentService:
         Returns:
             Dictionary with task information and spoken confirmation.
         """
-        # Create task in database
+        # Create task in database (starts in "created" state)
         task = create_agent_task(
             conn=self.conn,
             user_id=user_id,
@@ -57,7 +62,7 @@ class AgentService:
             trace={"created_via": "delegate_command"},
         )
 
-        # Log notification (placeholder for now)
+        # Emit "created" notification
         self._emit_notification(
             user_id=user_id,
             event="task_created",
@@ -80,6 +85,9 @@ class AgentService:
     def get_status(self, user_id: str) -> dict[str, Any]:
         """Get status summary of agent tasks for a user.
 
+        For mock provider tasks in created or running state, checks provider status 
+        and auto-advances task state if needed.
+
         Args:
             user_id: User ID to query tasks for.
 
@@ -89,7 +97,72 @@ class AgentService:
         # Query all tasks for user
         tasks = get_agent_tasks(conn=self.conn, user_id=user_id, limit=100)
 
-        # Count by state
+        # Check status of mock provider tasks and auto-advance states
+        for task in tasks:
+            if task.provider == "mock" and task.state in ("created", "running"):
+                try:
+                    # For created tasks, start them first
+                    if task.state == "created":
+                        agent_provider = get_provider(task.provider)
+                        start_result = agent_provider.start_task(task)
+
+                        if start_result.get("ok"):
+                            # Transition to "running" state
+                            updated_task = update_agent_task_state(
+                                conn=self.conn,
+                                task_id=task.id,
+                                new_state="running",
+                                trace_update=start_result.get("trace", {}),
+                            )
+
+                            if updated_task:
+                                # Emit "running" notification
+                                self._emit_notification(
+                                    user_id=task.user_id,
+                                    event="task_running",
+                                    task_id=task.id,
+                                    message=f"Agent task {task.id} is now running",
+                                )
+                                task.state = "running"
+                                task.trace = updated_task.trace
+
+                    # For running tasks, check status
+                    if task.state == "running":
+                        agent_provider = get_provider(task.provider)
+                        status_result = agent_provider.check_status(task)
+
+                        if status_result.get("ok"):
+                            new_status = status_result.get("status")
+                            if new_status and new_status != task.state:
+                                # Update task state based on provider response
+                                trace_update = status_result.get("trace", {})
+                                updated_task = update_agent_task_state(
+                                    conn=self.conn,
+                                    task_id=task.id,
+                                    new_state=new_status,
+                                    trace_update=trace_update,
+                                )
+
+                                if updated_task:
+                                    # Emit notification for state change
+                                    if new_status in ("completed", "failed"):
+                                        self._emit_completion_notification(updated_task, new_status)
+                                    else:
+                                        self._emit_notification(
+                                            user_id=task.user_id,
+                                            event="state_changed",
+                                            task_id=task.id,
+                                            message=f"Task {task.id} transitioned to {new_status}",
+                                        )
+                                    # Update the task in the list
+                                    task.state = new_status
+                                    task.trace = updated_task.trace
+                except Exception as e:
+                    logger.warning(
+                        f"Failed to check/advance status for task {task.id} with provider {task.provider}: {e}"
+                    )
+
+        # Count by state (using updated states)
         state_counts = {}
         for task in tasks:
             state_counts[task.state] = state_counts.get(task.state, 0) + 1

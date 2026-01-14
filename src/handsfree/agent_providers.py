@@ -227,6 +227,9 @@ class CustomAgentProvider(AgentProvider):
 def get_provider(provider_name: str) -> AgentProvider:
     """Get an agent provider by name.
 
+    For the mock provider, returns a singleton instance to maintain state across calls.
+    For other providers, creates new instances.
+
     Args:
         provider_name: Name of the provider (copilot, custom, mock).
 
@@ -236,8 +239,14 @@ def get_provider(provider_name: str) -> AgentProvider:
     Raises:
         ValueError: If provider name is not recognized.
     """
+    # Use singleton for mock provider to maintain state
+    if provider_name == "mock":
+        global _mock_provider_instance
+        if _mock_provider_instance is None:
+            _mock_provider_instance = MockAgentProvider()
+        return _mock_provider_instance
+
     providers = {
-        "mock": MockAgentProvider,
         "copilot": CopilotAgentProvider,
         "custom": CustomAgentProvider,
     }
@@ -246,3 +255,7 @@ def get_provider(provider_name: str) -> AgentProvider:
         raise ValueError(f"Unknown provider: {provider_name}")
 
     return providers[provider_name]()
+
+
+# Global mock provider instance
+_mock_provider_instance: MockAgentProvider | None = None
