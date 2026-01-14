@@ -62,8 +62,7 @@ class TestJWTValidation:
         payload = {
             "user_id": user_id,
             "iat": datetime.now(UTC),
-            "exp": datetime.now(UTC)
-            + timedelta(hours=-1 if expired else 1),  # Expired or valid
+            "exp": datetime.now(UTC) + timedelta(hours=-1 if expired else 1),  # Expired or valid
         }
         return jwt.encode(payload, secret, algorithm="HS256")
 
@@ -154,9 +153,7 @@ class TestJWTValidation:
     def test_jwt_custom_algorithm(self, test_user_id):
         """Test JWT validation with custom algorithm."""
         secret = "test-secret"
-        with patch.dict(
-            os.environ, {"JWT_SECRET_KEY": secret, "JWT_ALGORITHM": "HS256"}
-        ):
+        with patch.dict(os.environ, {"JWT_SECRET_KEY": secret, "JWT_ALGORITHM": "HS256"}):
             payload = {
                 "user_id": test_user_id,
                 "iat": datetime.now(UTC),
@@ -210,9 +207,7 @@ class TestGetCurrentUser:
     @pytest.mark.asyncio
     async def test_jwt_mode_with_valid_token(self, test_user_id, jwt_secret):
         """Test JWT mode with valid token."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             payload = {
                 "user_id": test_user_id,
                 "iat": datetime.now(UTC),
@@ -227,9 +222,7 @@ class TestGetCurrentUser:
     @pytest.mark.asyncio
     async def test_jwt_mode_without_token(self):
         """Test JWT mode without token raises 401."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": "secret"}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": "secret"}):
             with pytest.raises(HTTPException) as exc_info:
                 await get_current_user(x_user_id=None, credentials=None)
             assert exc_info.value.status_code == 401
@@ -238,9 +231,7 @@ class TestGetCurrentUser:
     @pytest.mark.asyncio
     async def test_jwt_mode_with_invalid_token(self, jwt_secret):
         """Test JWT mode with invalid token raises 401."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             credentials = self.create_credentials("invalid-token")
             with pytest.raises(HTTPException) as exc_info:
                 await get_current_user(x_user_id=None, credentials=credentials)
@@ -249,9 +240,7 @@ class TestGetCurrentUser:
     @pytest.mark.asyncio
     async def test_jwt_mode_ignores_x_user_id_header(self, test_user_id, jwt_secret):
         """Test that JWT mode ignores X-User-Id header."""
-        with patch.dict(
-            os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}
-        ):
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt", "JWT_SECRET_KEY": jwt_secret}):
             # Even with X-User-Id header, JWT mode requires token
             with pytest.raises(HTTPException) as exc_info:
                 await get_current_user(x_user_id=test_user_id, credentials=None)

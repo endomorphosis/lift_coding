@@ -124,9 +124,7 @@ def _deliver_notification(
     subscriptions = list_subscriptions(conn, notification.user_id)
 
     if not subscriptions:
-        logger.debug(
-            "No push subscriptions for user %s, skipping delivery", notification.user_id
-        )
+        logger.debug("No push subscriptions for user %s, skipping delivery", notification.user_id)
         return
 
     # Prepare notification payload
