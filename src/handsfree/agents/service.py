@@ -11,7 +11,6 @@ import duckdb
 from handsfree.agent_providers import get_provider
 from handsfree.db.agent_tasks import (
     create_agent_task,
-    get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_state,
 )
@@ -85,7 +84,7 @@ class AgentService:
     def get_status(self, user_id: str) -> dict[str, Any]:
         """Get status summary of agent tasks for a user.
 
-        For mock provider tasks in created or running state, checks provider status 
+        For mock provider tasks in created or running state, checks provider status
         and auto-advances task state if needed.
 
         Args:
@@ -159,7 +158,8 @@ class AgentService:
                                     task.trace = updated_task.trace
                 except Exception as e:
                     logger.warning(
-                        f"Failed to check/advance status for task {task.id} with provider {task.provider}: {e}"
+                        f"Failed to check/advance status for task {task.id} "
+                        f"with provider {task.provider}: {e}"
                     )
 
         # Count by state (using updated states)
