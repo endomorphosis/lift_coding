@@ -235,17 +235,20 @@ async def github_webhook(
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(
     request: CommandRequest,
-    x_user_id: str | None = Header(None, alias="X-User-Id"),
+    x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
-
+    
     Args:
-        request: Command request.
-        x_user_id: Optional user ID header (falls back to fixture user ID).
+        request: Command request body
+        x_session_id: Optional session identifier from X-Session-Id header
+        
+    Returns:
+        CommandResponse with status, intent, spoken text, etc.
     """
-    # Get user ID from header
-    user_id = get_user_id_from_header(x_user_id)
-
+    # Determine session ID: prefer header, fallback to idempotency_key
+    session_id = x_session_id or request.idempotency_key
+    
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
         return processed_commands[request.idempotency_key]
@@ -287,21 +290,121 @@ async def submit_command(
     router_response = router.route(
         intent=parsed_intent,
         profile=request.profile,
-        session_id=request.idempotency_key,  # Use idempotency key as session ID
-        user_id=user_id,  # Pass user ID from header
+        session_id=session_id,  # Use session ID from header or idempotency key
+        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
-    # Convert router response to CommandResponse
-    response = _convert_router_response_to_command_response(
-        router_response, parsed_intent, text, request.profile, user_id
-    )
+    # For system commands (repeat, next), router returns complete response
+    # Don't re-apply fixture handlers - just convert directly
+    if parsed_intent.name.startswith("system."):
+        response = _convert_router_response_direct(router_response, text)
+    else:
+        # Convert router response to CommandResponse
+        response = _convert_router_response_to_command_response(
+            router_response, parsed_intent, text, request.profile
+        )
+        
+        # For non-system commands, update the router's stored response with the enhanced version
+        # This ensures system.repeat returns the full enriched response
+        if session_id:
+            router = get_command_router()
+            # Store the enhanced response as a dict for the router's session state
+            enhanced_dict = {
+                "status": response.status.value,
+                "intent": {
+                    "name": response.intent.name,
+                    "confidence": response.intent.confidence,
+                    "entities": response.intent.entities,
+                },
+                "spoken_text": response.spoken_text,
+                "cards": [card.model_dump() for card in response.cards] if response.cards else [],
+            }
+            if response.pending_action:
+                enhanced_dict["pending_action"] = {
+                    "token": response.pending_action.token,
+                    "expires_at": response.pending_action.expires_at.isoformat(),
+                    "summary": response.pending_action.summary,
+                }
+            router._last_responses[session_id] = enhanced_dict
+            
+            # Also update navigation state with enhanced cards
+            if response.cards:
+                items = []
+                for card in response.cards:
+                    items.append({
+                        "type": "card",
+                        "intent_name": parsed_intent.name,
+                        "data": card.model_dump(),
+                    })
+                router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency
     if request.idempotency_key:
         processed_commands[request.idempotency_key] = response
 
     return response
+
+
+def _convert_router_response_direct(
+    router_response: dict[str, Any],
+    transcript: str,
+) -> CommandResponse:
+    """Convert router response dict directly to CommandResponse without re-applying handlers.
+    
+    Used for system commands where router returns complete response that shouldn't be modified.
+    
+    Args:
+        router_response: Response dict from CommandRouter
+        transcript: Original text transcript
+        
+    Returns:
+        CommandResponse object
+    """
+    # Extract basic fields
+    status_str = router_response.get("status", "ok")
+    status = CommandStatus(status_str)
+    
+    # Get intent from response
+    intent_dict = router_response.get("intent", {})
+    intent = ParsedIntent(
+        name=intent_dict.get("name", "unknown"),
+        confidence=intent_dict.get("confidence", 1.0),
+        entities=intent_dict.get("entities", {}),
+    )
+    
+    spoken_text = router_response.get("spoken_text", "")
+    
+    # Get cards if present
+    cards: list[UICard] = []
+    if "cards" in router_response and router_response["cards"]:
+        cards = [UICard(**card) for card in router_response["cards"]]
+    
+    # Handle pending action
+    pending_action = None
+    if "pending_action" in router_response and router_response["pending_action"]:
+        pa = router_response["pending_action"]
+        # Parse expires_at if it's a string, otherwise use as-is
+        expires_at = pa["expires_at"]
+        if isinstance(expires_at, str):
+            expires_at = datetime.fromisoformat(expires_at)
+        pending_action = PydanticPendingAction(
+            token=pa["token"],
+            expires_at=expires_at,
+            summary=pa["summary"],
+        )
+    
+    # Build debug info
+    debug = DebugInfo(transcript=transcript)
+    
+    return CommandResponse(
+        status=status,
+        intent=intent,
+        spoken_text=spoken_text,
+        cards=cards,
+        pending_action=pending_action,
+        debug=debug,
+    )
 
 
 def _convert_router_response_to_command_response(
