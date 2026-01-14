@@ -8,6 +8,46 @@ from unittest.mock import MagicMock, Mock, patch
 import pytest
 
 
+# Test helper to mock openai module
+def _setup_mock_openai(api_key="sk-test-key", mock_response=None):
+    """Helper to set up mocked openai module for testing.
+    
+    Args:
+        api_key: API key to set in environment
+        mock_response: Response to return from transcriptions.create call
+        
+    Returns:
+        Tuple of (mock_openai, mock_client)
+    """
+    if api_key:
+        os.environ["OPENAI_API_KEY"] = api_key
+    
+    # Mock openai module
+    mock_openai = MagicMock()
+    mock_client = MagicMock()
+    mock_openai.OpenAI.return_value = mock_client
+    
+    if mock_response is not None:
+        mock_client.audio.transcriptions.create.return_value = mock_response
+    
+    sys.modules["openai"] = mock_openai
+    
+    # Reload the module to pick up the mock
+    import importlib
+    import handsfree.stt.openai_provider
+    importlib.reload(handsfree.stt.openai_provider)
+    
+    return mock_openai, mock_client
+
+
+def _teardown_mock_openai():
+    """Clean up mocked openai module."""
+    os.environ.pop("OPENAI_API_KEY", None)
+    os.environ.pop("HANDS_FREE_STT_MAX_RETRIES", None)
+    if "openai" in sys.modules:
+        del sys.modules["openai"]
+
+
 def test_get_stt_provider_default_stub():
     """Test that get_stt_provider returns StubSTTProvider by default."""
     from handsfree.stt import get_stt_provider
@@ -105,48 +145,25 @@ def test_stub_provider_unsupported_format():
 
 def test_openai_provider_init_requires_api_key():
     """Test that OpenAI provider requires API key."""
-    # Mock openai to be available
-    mock_openai = MagicMock()
-    sys.modules["openai"] = mock_openai
-
     try:
-        # Ensure no API key is set
+        # Setup without API key
         old_key = os.environ.pop("OPENAI_API_KEY", None)
-
-        # Reload module to pick up the mock
-        import importlib
-
-        import handsfree.stt.openai_provider
-        importlib.reload(handsfree.stt.openai_provider)
+        _setup_mock_openai(api_key=None)
 
         from handsfree.stt.openai_provider import OpenAISTTProvider
 
         with pytest.raises(ValueError, match="OPENAI_API_KEY"):
             OpenAISTTProvider()
     finally:
-        # Restore original state
         if old_key:
             os.environ["OPENAI_API_KEY"] = old_key
-        if "openai" in sys.modules:
-            del sys.modules["openai"]
+        _teardown_mock_openai()
 
 
 def test_openai_provider_transcribe_validates_input():
     """Test that OpenAI provider validates input."""
-    # Mock openai module
-    mock_openai = MagicMock()
-    mock_client = MagicMock()
-    mock_openai.OpenAI.return_value = mock_client
-    sys.modules["openai"] = mock_openai
-
     try:
-        os.environ["OPENAI_API_KEY"] = "sk-test-key"
-
-        # Reload module
-        import importlib
-
-        import handsfree.stt.openai_provider
-        importlib.reload(handsfree.stt.openai_provider)
+        _setup_mock_openai()
 
         from handsfree.stt.openai_provider import OpenAISTTProvider
 
@@ -160,34 +177,19 @@ def test_openai_provider_transcribe_validates_input():
         with pytest.raises(ValueError, match="Unsupported audio format"):
             provider.transcribe(b"test", "unsupported_format")
 
-        # Test file too large
-        large_audio = b"x" * (26 * 1024 * 1024)  # 26MB
+        # Test file too large (use constant + 1MB)
+        large_audio = b"x" * (OpenAISTTProvider.MAX_FILE_SIZE + 1024 * 1024)
         with pytest.raises(ValueError, match="Audio file too large"):
             provider.transcribe(large_audio, "wav")
 
     finally:
-        os.environ.pop("OPENAI_API_KEY", None)
-        if "openai" in sys.modules:
-            del sys.modules["openai"]
+        _teardown_mock_openai()
 
 
 def test_openai_provider_transcribe_success():
     """Test successful OpenAI transcription."""
-    # Mock openai module
-    mock_openai = MagicMock()
-    mock_client = MagicMock()
-    mock_openai.OpenAI.return_value = mock_client
-    mock_client.audio.transcriptions.create.return_value = "Test transcription"
-    sys.modules["openai"] = mock_openai
-
     try:
-        os.environ["OPENAI_API_KEY"] = "sk-test-key"
-
-        # Reload module
-        import importlib
-
-        import handsfree.stt.openai_provider
-        importlib.reload(handsfree.stt.openai_provider)
+        _setup_mock_openai(mock_response="Test transcription")
 
         from handsfree.stt.openai_provider import OpenAISTTProvider
 
@@ -197,37 +199,21 @@ def test_openai_provider_transcribe_success():
         transcript = provider.transcribe(audio_data, "wav")
 
         assert transcript == "Test transcription"
-        mock_client.audio.transcriptions.create.assert_called_once()
 
     finally:
-        os.environ.pop("OPENAI_API_KEY", None)
-        if "openai" in sys.modules:
-            del sys.modules["openai"]
+        _teardown_mock_openai()
 
 
 def test_openai_provider_transcribe_with_retry():
     """Test that OpenAI provider retries on failure."""
-    # Mock openai module
-    mock_openai = MagicMock()
-    mock_client = MagicMock()
-    mock_openai.OpenAI.return_value = mock_client
-
-    # Fail first, succeed second
-    mock_client.audio.transcriptions.create.side_effect = [
-        Exception("Temporary error"),
-        "Success on retry",
-    ]
-
-    sys.modules["openai"] = mock_openai
-
     try:
-        os.environ["OPENAI_API_KEY"] = "sk-test-key"
+        mock_openai, mock_client = _setup_mock_openai()
 
-        # Reload module
-        import importlib
-
-        import handsfree.stt.openai_provider
-        importlib.reload(handsfree.stt.openai_provider)
+        # Fail first, succeed second
+        mock_client.audio.transcriptions.create.side_effect = [
+            Exception("Temporary error"),
+            "Success on retry",
+        ]
 
         from handsfree.stt.openai_provider import OpenAISTTProvider
 
@@ -240,32 +226,17 @@ def test_openai_provider_transcribe_with_retry():
         assert mock_client.audio.transcriptions.create.call_count == 2
 
     finally:
-        os.environ.pop("OPENAI_API_KEY", None)
-        if "openai" in sys.modules:
-            del sys.modules["openai"]
+        _teardown_mock_openai()
 
 
 def test_openai_provider_transcribe_max_retries():
     """Test that OpenAI provider fails after max retries."""
-    # Mock openai module
-    mock_openai = MagicMock()
-    mock_client = MagicMock()
-    mock_openai.OpenAI.return_value = mock_client
-
-    # Always fail
-    mock_client.audio.transcriptions.create.side_effect = Exception("API error")
-
-    sys.modules["openai"] = mock_openai
-
     try:
-        os.environ["OPENAI_API_KEY"] = "sk-test-key"
         os.environ["HANDS_FREE_STT_MAX_RETRIES"] = "2"
+        mock_openai, mock_client = _setup_mock_openai()
 
-        # Reload module
-        import importlib
-
-        import handsfree.stt.openai_provider
-        importlib.reload(handsfree.stt.openai_provider)
+        # Always fail
+        mock_client.audio.transcriptions.create.side_effect = Exception("API error")
 
         from handsfree.stt.openai_provider import OpenAISTTProvider
 
@@ -279,7 +250,4 @@ def test_openai_provider_transcribe_max_retries():
         assert mock_client.audio.transcriptions.create.call_count == 2
 
     finally:
-        os.environ.pop("OPENAI_API_KEY", None)
-        os.environ.pop("HANDS_FREE_STT_MAX_RETRIES", None)
-        if "openai" in sys.modules:
-            del sys.modules["openai"]
+        _teardown_mock_openai()

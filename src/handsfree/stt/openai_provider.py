@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 # Try to import openai - if not available, class instantiation will fail with helpful error
 try:
     import openai
-    
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
