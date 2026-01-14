@@ -16,11 +16,6 @@ from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
-from handsfree.db.github_connections import (
-    create_github_connection,
-    get_github_connection,
-    get_github_connections_by_user,
-)
 from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
@@ -37,10 +32,7 @@ from handsfree.models import (
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
-    CreateGitHubConnectionRequest,
     DebugInfo,
-    GitHubConnectionResponse,
-    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -279,7 +271,7 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, user_id
+            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
         )
         # Store for idempotency
         if request.idempotency_key:
@@ -303,7 +295,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile
+            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
         
         # For non-system commands, update the router's stored response with the enhanced version
