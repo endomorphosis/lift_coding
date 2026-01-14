@@ -101,6 +101,8 @@ def handle_pr_summarize(
         spoken_text += f"Description: {excerpt}"
 
     # Apply profile-based truncation if profile_config is provided
+    # Note: Optional truncation maintains backward compatibility with callers
+    # that don't provide profile_config
     if profile_config:
         spoken_text = profile_config.truncate_spoken_text(spoken_text.strip())
     else:

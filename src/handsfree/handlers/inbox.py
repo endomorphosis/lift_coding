@@ -103,6 +103,8 @@ def handle_inbox_list(
             spoken_text += f"Plus {count - 3} more."
 
     # Apply profile-based truncation if profile_config is provided
+    # Note: Optional truncation maintains backward compatibility with callers
+    # that don't provide profile_config
     if profile_config:
         spoken_text = profile_config.truncate_spoken_text(spoken_text.strip())
     else:

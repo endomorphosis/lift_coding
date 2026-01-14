@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
+from handsfree.commands.profiles import ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
@@ -477,8 +478,6 @@ def _convert_router_response_direct(
     Returns:
         CommandResponse object
     """
-    from handsfree.commands.profiles import ProfileConfig
-
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
@@ -570,8 +569,6 @@ def _convert_router_response_to_command_response(
     cards: list[UICard] = []
 
     # Get profile config for applying truncation
-    from handsfree.commands.profiles import ProfileConfig
-
     profile_config = ProfileConfig.for_profile(profile)
 
     if parsed_intent.name == "inbox.list":
