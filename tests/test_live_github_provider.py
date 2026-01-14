@@ -3,17 +3,21 @@
 import pytest
 
 from handsfree.github.auth import TokenProvider
+from handsfree.github.auth import FixtureOnlyProvider, GitHubAuthProvider
 from handsfree.github.provider import LiveGitHubProvider
 
 
-class MockTokenProvider(TokenProvider):
+class MockTokenProvider(GitHubAuthProvider):
     """Mock token provider for testing."""
 
     def __init__(self, token: str | None = None):
         self._token = token
 
-    def get_token(self) -> str | None:
+    def get_token(self, user_id: str) -> str | None:
         return self._token
+
+    def supports_live_mode(self) -> bool:
+        return self._token is not None
 
 
 class TestLiveGitHubProvider:
@@ -26,8 +30,8 @@ class TestLiveGitHubProvider:
         assert provider is not None
 
     def test_initialization_requires_token_provider(self):
-        """Test that initialization requires a TokenProvider instance."""
-        with pytest.raises(TypeError, match="TokenProvider"):
+        """Test that initialization requires a GitHubAuthProvider instance."""
+        with pytest.raises(TypeError, match="GitHubAuthProvider"):
             LiveGitHubProvider("not a token provider")
 
     def test_fallback_to_fixture_when_no_token(self):

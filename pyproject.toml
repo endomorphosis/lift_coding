@@ -3,6 +3,9 @@ name = "handsfree-dev-companion"
 version = "0.0.0"
 requires-python = ">=3.11"
 
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+
 [build-system]
 requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"

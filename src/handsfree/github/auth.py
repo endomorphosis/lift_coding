@@ -62,11 +62,29 @@ class TokenProvider(ABC):
         pass
 
 
+class TokenProvider(ABC):
+    """Abstract interface for token providers (used by LiveGitHubProvider).
+    
+    This is a simplified interface that doesn't require user_id parameter.
+    """
+
+    @abstractmethod
+    def get_token(self) -> str | None:
+        """Get a GitHub token.
+
+        Returns:
+            GitHub token or None if not available.
+        """
+        pass
+
+
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
 
     Legacy interface that includes user_id parameter.
     Kept for backward compatibility with existing code.
+    
+    This is the legacy interface used by GitHubProvider.
     """
 
     @abstractmethod
@@ -388,34 +406,36 @@ class FixtureOnlyProvider(GitHubAuthProvider):
         return False
 
 
-def get_token_provider() -> TokenProvider:
-    """Get the appropriate token provider based on environment configuration.
+class FixtureTokenProvider(TokenProvider):
+    """Token provider that always returns None (fixture-only mode)."""
 
-    Priority order:
-    1. GitHub App (if GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY_PEM, GITHUB_INSTALLATION_ID are set)
-    2. Environment token (if GITHUB_TOKEN is set)
-    3. Fixture-only (default)
+    def get_token(self) -> str | None:
+        """Always returns None to force fixture mode.
 
-    Returns:
-        Configured TokenProvider instance.
+        Returns:
+            None to indicate fixture-only mode.
+        """
+        return None
+
+
+class EnvTokenProvider(TokenProvider):
+    """Token provider that reads from GITHUB_TOKEN environment variable.
+    
+    This is a simplified provider for LiveGitHubProvider that doesn't
+    require per-user tokens.
     """
-    # Check for GitHub App configuration
-    if (
-        os.getenv("GITHUB_APP_ID")
-        and os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
-        and os.getenv("GITHUB_INSTALLATION_ID")
-    ):
-        logger.info("Using GitHub App token provider")
-        return GitHubAppTokenProvider()
 
-    # Check for environment token
-    if os.getenv("GITHUB_TOKEN"):
-        logger.info("Using environment token provider")
-        return EnvTokenProvider()
+    def __init__(self):
+        """Initialize the environment token provider."""
+        self.token = os.getenv("GITHUB_TOKEN")
 
-    # Default to fixture-only
-    logger.info("Using fixture-only token provider")
-    return FixtureTokenProvider()
+    def get_token(self) -> str | None:
+        """Get a GitHub token from environment variable.
+
+        Returns:
+            GitHub token from GITHUB_TOKEN env var, or None if not set.
+        """
+        return self.token
 
 
 def get_default_auth_provider() -> GitHubAuthProvider:
@@ -430,3 +450,22 @@ def get_default_auth_provider() -> GitHubAuthProvider:
     if os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes"):
         return EnvironmentTokenProvider()
     return FixtureOnlyProvider()
+
+
+def get_token_provider() -> TokenProvider:
+    """Get a token provider for LiveGitHubProvider based on environment.
+    
+    Checks HANDS_FREE_GITHUB_MODE or GITHUB_LIVE_MODE environment variables.
+
+    Returns:
+        EnvTokenProvider if live mode is enabled, otherwise FixtureTokenProvider.
+    """
+    # Check both environment variable names as per problem statement
+    live_mode = (
+        os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live"
+        or os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
+    )
+    
+    if live_mode and os.getenv("GITHUB_TOKEN"):
+        return EnvTokenProvider()
+    return FixtureTokenProvider()

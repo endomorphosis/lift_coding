@@ -1,5 +1,58 @@
 # Development Guide
 
+## Web Dev Simulator
+
+The web dev simulator provides a user-friendly interface to test the complete handsfree loop: mic input → `/v1/command` → TTS playback.
+
+### Quick Start
+
+1. **Start the backend server:**
+   ```bash
+   make dev
+   ```
+
+2. **Open the simulator in your browser:**
+   ```
+   http://localhost:8080/simulator
+   ```
+
+3. **Try it out:**
+   - Enter a text command (e.g., "show my inbox", "summarize pr 42")
+   - Click "Send Text" to submit
+   - View the parsed intent and response
+   - Audio response will auto-play (if enabled in settings)
+
+### Features
+
+- **Text Input**: Type commands directly and submit
+- **Audio Recording**: Record voice commands (requires microphone permission)
+- **Audio Upload**: Upload pre-recorded audio files for testing
+- **Response Display**: View parsed intents, spoken text, and UI cards
+- **TTS Playback**: Automatically converts responses to speech and plays them
+- **Activity Log**: Track all API interactions in real-time
+- **Settings**: Configure API URL, auto-play TTS, and debug mode
+
+### Quick Commands
+
+The simulator includes shortcuts for common commands:
+- `inbox` - Show your inbox
+- `summarize pr 42` - Summarize a pull request
+- `list PRs` - List your pull requests
+- `agent status` - Check agent task status
+
+### Audio Notes
+
+- **Recording**: Uses browser's MediaRecorder API (requires HTTPS in production)
+- **STT**: Audio transcription uses a stub provider by default
+- **TTS**: Text-to-speech works with fixture data (no external API keys needed)
+- To enable real STT/TTS providers, set environment variables (see below)
+
+### Troubleshooting
+
+- **CORS errors**: The simulator is served from the same origin as the API, so CORS should not be an issue
+- **Microphone not working**: Ensure you've granted browser permission and are using HTTPS (or localhost)
+- **Audio not playing**: Check browser audio permissions and volume settings
+
 ## Running the Backend Server
 
 The backend API server runs on `http://localhost:8080` by default.
