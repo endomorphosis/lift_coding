@@ -267,3 +267,23 @@ class NotificationSubscriptionsListResponse(BaseModel):
     """Response for listing notification subscriptions."""
 
     subscriptions: list[NotificationSubscriptionResponse]
+
+
+class DependencyStatus(BaseModel):
+    """Status of a service dependency."""
+
+    name: str
+    status: str = Field(..., description="Status: ok, degraded, or unavailable")
+    message: str | None = None
+
+
+class StatusResponse(BaseModel):
+    """Service status response."""
+
+    status: str = Field(..., description="Overall service status: ok, degraded, or unavailable")
+    version: str | None = Field(default=None, description="Service version if available")
+    timestamp: datetime = Field(..., description="Current server time")
+    dependencies: list[DependencyStatus] = Field(
+        default_factory=list,
+        description="Status of dependencies like DuckDB, Redis (optional)",
+    )
