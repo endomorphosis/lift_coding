@@ -291,7 +291,8 @@ def merge_pull_request(
         - message: str - Human-readable message
         - status_code: int - HTTP status code
         - response_data: dict - GitHub API response (if successful)
-        - error_type: str - Error classification (if failed): "conflict", "blocked", "not_open", etc.
+        - error_type: str - Error classification (if failed):
+          "conflict", "blocked", "not_open", etc.
 
     Raises:
         ValueError: If inputs are invalid (empty repo, pr_number < 1, etc.)
@@ -384,7 +385,10 @@ def merge_pull_request(
                 error_msg = "PR has merge conflicts"
             elif response.status_code == 422:
                 error_type = "invalid_state"
-                error_msg = "PR is not in a valid state for merging (may be closed or already merged)"
+                error_msg = (
+                    "PR is not in a valid state for merging "
+                    "(may be closed or already merged)"
+                )
             elif response.status_code == 403:
                 error_type = "forbidden"
                 error_msg = "Insufficient permissions to merge PR"

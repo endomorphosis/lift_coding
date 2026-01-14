@@ -1,8 +1,6 @@
 """Tests for PR merge action endpoint and GitHub client."""
 
 import json
-from datetime import UTC, datetime, timedelta
-from unittest.mock import MagicMock
 
 import pytest
 from fastapi.testclient import TestClient
@@ -641,8 +639,6 @@ class TestMergeConfirmation:
         from handsfree.github.auth import get_default_auth_provider
 
         auth_provider = get_default_auth_provider()
-        original_supports = auth_provider.supports_live_mode
-        original_get_token = auth_provider.get_token
 
         monkeypatch.setattr(auth_provider, "supports_live_mode", lambda: True)
         monkeypatch.setattr(auth_provider, "get_token", lambda user_id: "test_token_123")

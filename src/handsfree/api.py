@@ -1030,7 +1030,11 @@ async def confirm_command(
                     intent=ParsedIntent(
                         name="merge.confirmed",
                         confidence=1.0,
-                        entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                        entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
                     ),
                     spoken_text=f"Failed to fetch PR details: {pr_result['message']}",
                 )
@@ -1060,7 +1064,11 @@ async def confirm_command(
                         intent=ParsedIntent(
                             name="merge.confirmed",
                             confidence=1.0,
-                            entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                            entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
                         ),
                         spoken_text=f"Cannot merge: PR is {pr_state}",
                     )
@@ -1096,7 +1104,11 @@ async def confirm_command(
                             intent=ParsedIntent(
                                 name="merge.confirmed",
                                 confidence=1.0,
-                                entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                                entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
                             ),
                             spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
                         )
@@ -1125,7 +1137,11 @@ async def confirm_command(
                             intent=ParsedIntent(
                                 name="merge.confirmed",
                                 confidence=1.0,
-                                entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                                entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
                             ),
                             spoken_text=f"Failed to merge PR: {github_result['message']}",
                         )
@@ -1156,7 +1172,11 @@ async def confirm_command(
                 intent=ParsedIntent(
                     name="merge.confirmed",
                     confidence=1.0,
-                    entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                    entities={
+                            "repo": repo,
+                            "pr_number": pr_number,
+                            "merge_method": merge_method,
+                        },
                 ),
                 spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
             )
