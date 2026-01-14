@@ -224,3 +224,18 @@ class GitHubConnectionsListResponse(BaseModel):
     """List of GitHub connections."""
 
     connections: list[GitHubConnectionResponse]
+
+
+class TTSRequest(BaseModel):
+    """Text-to-speech request."""
+
+    text: str = Field(..., min_length=1, max_length=5000)
+    voice: str | None = Field(
+        default=None,
+        description="Voice identifier (provider-specific)",
+    )
+    format: str = Field(
+        default="wav",
+        description="Audio format (wav, mp3)",
+        pattern="^(wav|mp3)$",
+    )

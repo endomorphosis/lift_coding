@@ -6,21 +6,18 @@ This implementation combines webhook handling with comprehensive API endpoints.
 import logging
 import uuid
 from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
-from handsfree.db.github_connections import (
-    create_github_connection,
-    get_github_connection,
-    get_github_connections_by_user,
-)
 from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
@@ -33,14 +30,12 @@ from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
 from handsfree.models import (
     ActionResult,
+    AudioInput,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
-    CreateGitHubConnectionRequest,
     DebugInfo,
-    GitHubConnectionResponse,
-    GitHubConnectionsListResponse,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -50,6 +45,7 @@ from handsfree.models import (
     RequestReviewRequest,
     RerunChecksRequest,
     TextInput,
+    TTSRequest,
     UICard,
 )
 from handsfree.models import (
@@ -57,6 +53,7 @@ from handsfree.models import (
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
+from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
@@ -139,6 +136,43 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
+
+
+def _fetch_audio_data(uri: str) -> bytes:
+    """Fetch audio data from URI.
+
+    Supports file:// URIs for local testing and development.
+    In production, this could support pre-signed URLs from S3, etc.
+
+    Args:
+        uri: Audio URI (file:// or local path)
+
+    Returns:
+        Audio data as bytes
+
+    Raises:
+        ValueError: If URI scheme is unsupported
+        FileNotFoundError: If local file doesn't exist
+    """
+    parsed = urlparse(uri)
+
+    # Support file:// URIs and plain paths
+    if parsed.scheme in ("", "file"):
+        # Extract path from file:// URI or use as-is
+        path = parsed.path if parsed.scheme == "file" else uri
+
+        # Convert to Path object and read
+        file_path = Path(path)
+        if not file_path.exists():
+            raise FileNotFoundError(f"Audio file not found: {path}")
+
+        return file_path.read_bytes()
+    else:
+        # Future: Support http/https pre-signed URLs
+        raise ValueError(
+            f"Unsupported audio URI scheme: {parsed.scheme}. "
+            f"Currently only file:// URIs are supported in dev/test mode."
+        )
 
 
 @app.get("/health")
@@ -262,13 +296,55 @@ async def submit_command(
     # Extract text from input
     if isinstance(request.input, TextInput):
         text = request.input.text.strip()
+    elif isinstance(request.input, AudioInput):
+        # Audio input - transcribe to text using STT
+        try:
+            # Fetch audio data from URI
+            audio_data = _fetch_audio_data(request.input.uri)
+
+            # Get STT provider and transcribe
+            stt_provider = get_stt_provider()
+            text = stt_provider.transcribe(audio_data, request.input.format.value)
+
+            logger.info(
+                "Transcribed audio input: format=%s, duration_ms=%s, transcript_length=%d",
+                request.input.format.value,
+                request.input.duration_ms,
+                len(text),
+            )
+        except NotImplementedError as e:
+            # STT is disabled
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.stt_disabled", confidence=1.0),
+                spoken_text=str(e),
+                debug=DebugInfo(transcript="<audio input - STT disabled>"),
+            )
+        except (ValueError, FileNotFoundError) as e:
+            # Invalid audio format or URI
+            logger.error("Audio input error: %s", e)
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.audio_input", confidence=1.0),
+                spoken_text=f"Could not process audio input: {str(e)}",
+                debug=DebugInfo(transcript="<audio input - error>"),
+            )
+        except Exception as e:
+            # Unexpected error during transcription
+            logger.error("Unexpected STT error: %s", e, exc_info=True)
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.stt_failed", confidence=1.0),
+                spoken_text="Audio transcription failed. Please try again or use text input.",
+                debug=DebugInfo(transcript="<audio input - transcription failed>"),
+            )
     else:
-        # Audio input - return error for now
+        # Unknown input type
         return CommandResponse(
             status=CommandStatus.ERROR,
-            intent=ParsedIntent(name="error.unsupported", confidence=1.0),
-            spoken_text="Audio input is not yet supported in this version.",
-            debug=DebugInfo(transcript="<audio input>"),
+            intent=ParsedIntent(name="error.unknown_input", confidence=1.0),
+            spoken_text="Unknown input type.",
+            debug=DebugInfo(transcript="<unknown input>"),
         )
 
     # Parse intent using the intent parser
@@ -277,6 +353,9 @@ async def submit_command(
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
+        # Get user_id from header or use fixture
+        user_id = FIXTURE_USER_ID  # In production, would extract from auth token
+        
         # Convert dataclass intent to Pydantic model for the handler
         pydantic_intent = ParsedIntent(
             name=parsed_intent.name,
@@ -284,7 +363,7 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, user_id
+            pydantic_intent, text, request.idempotency_key, FIXTURE_USER_ID
         )
         # Store for idempotency
         if request.idempotency_key:
@@ -308,7 +387,7 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, user_id
+            router_response, parsed_intent, text, request.profile, FIXTURE_USER_ID
         )
 
         # For non-system commands, update the router's stored response with the enhanced version
@@ -1546,6 +1625,74 @@ async def get_notifications(
             "count": len(notifications),
         }
     )
+
+
+@app.post("/v1/tts")
+async def text_to_speech(request: TTSRequest) -> Response:
+    """Convert text to speech audio.
+
+    This endpoint provides fixture-first TTS capability for the dev loop.
+    By default, it uses a stub provider that returns deterministic audio placeholders.
+    Real TTS providers can be enabled via environment variables in production.
+
+    Args:
+        request: TTS request with text, optional voice, and format
+
+    Returns:
+        Audio bytes with appropriate content-type header
+
+    Raises:
+        400 Bad Request for invalid input (empty text, text too long)
+    """
+    from handsfree.tts import StubTTSProvider
+
+    # Input validation
+    if not request.text or not request.text.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text cannot be empty",
+            },
+        )
+
+    if len(request.text) > 5000:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_input",
+                "message": "Text too long (maximum 5000 characters)",
+            },
+        )
+
+    # For MVP, always use stub provider
+    # In production, check env var for real TTS provider selection
+    # provider = get_tts_provider()  # Would check HANDSFREE_TTS_PROVIDER env var
+    provider = StubTTSProvider()
+
+    try:
+        audio_bytes, content_type = provider.synthesize(
+            text=request.text,
+            voice=request.voice,
+            format=request.format,
+        )
+
+        return Response(
+            content=audio_bytes,
+            media_type=content_type,
+            headers={
+                "Content-Disposition": f'attachment; filename="speech.{request.format}"',
+            },
+        )
+    except Exception as e:
+        logger.error("TTS synthesis failed: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "synthesis_failed",
+                "message": "Failed to synthesize speech",
+            },
+        ) from e
 
 
 @app.exception_handler(HTTPException)

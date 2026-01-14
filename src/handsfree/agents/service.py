@@ -160,13 +160,17 @@ class AgentService:
         if not task:
             raise ValueError(f"Task {task_id} not found")
 
-        # Emit notification
-        self._emit_notification(
-            user_id=task.user_id,
-            event="state_changed",
-            task_id=task.id,
-            message=f"Task {task.id} transitioned to {new_state}",
-        )
+        # For completed/failed tasks, emit a completion notification with PR info
+        if new_state in ("completed", "failed"):
+            self._emit_completion_notification(task, new_state)
+        else:
+            # Emit regular state change notification
+            self._emit_notification(
+                user_id=task.user_id,
+                event="state_changed",
+                task_id=task.id,
+                message=f"Task {task.id} transitioned to {new_state}",
+            )
 
         return {
             "task_id": task.id,
@@ -198,4 +202,57 @@ class AgentService:
             event_type=event,
             message=message,
             metadata={"task_id": task_id},
+        )
+
+    def _emit_completion_notification(
+        self,
+        task: Any,
+        new_state: str,
+    ) -> None:
+        """Emit a completion notification for completed/failed tasks.
+
+        Includes PR link/reference from trace if available.
+
+        Args:
+            task: The AgentTask object.
+            new_state: The new state (completed or failed).
+        """
+        # Build metadata with task_id and state
+        metadata = {
+            "task_id": task.id,
+            "state": new_state,
+        }
+
+        # Extract PR information from trace if available
+        if task.trace:
+            # Check for PR URL
+            if "pr_url" in task.trace:
+                metadata["pr_url"] = task.trace["pr_url"]
+            
+            # Check for PR number
+            if "pr_number" in task.trace:
+                metadata["pr_number"] = task.trace["pr_number"]
+            
+            # Check for repo full name
+            if "repo_full_name" in task.trace:
+                metadata["repo_full_name"] = task.trace["repo_full_name"]
+
+        # Build message with PR reference if available
+        message_parts = [f"Agent task {task.id} {new_state}"]
+        if "pr_url" in metadata:
+            message_parts.append(f"PR: {metadata['pr_url']}")
+        elif "pr_number" in metadata and "repo_full_name" in metadata:
+            message_parts.append(f"PR: {metadata['repo_full_name']}#{metadata['pr_number']}")
+        elif "pr_number" in metadata:
+            message_parts.append(f"PR #{metadata['pr_number']}")
+
+        message = ". ".join(message_parts)
+
+        # Create notification
+        create_notification(
+            conn=self.conn,
+            user_id=task.user_id,
+            event_type=f"task_{new_state}",
+            message=message,
+            metadata=metadata,
         )
