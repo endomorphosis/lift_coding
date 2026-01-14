@@ -648,7 +648,11 @@ class CommandRouter:
         target = f"{repo}#{pr_number}"
 
         # Check if live mode is enabled and token is available
+        import logging
+
         from handsfree.github.auth import get_default_auth_provider
+
+        logger = logging.getLogger(__name__)
 
         auth_provider = get_default_auth_provider()
         token = None
@@ -657,11 +661,7 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            import logging
-
             from handsfree.github.client import request_reviewers as github_request_reviewers
-
-            logger = logging.getLogger(__name__)
 
             logger.info(
                 "Executing request_review via GitHub API (live mode) for %s",
@@ -722,10 +722,6 @@ class CommandRouter:
                 }
         else:
             # Fixture mode - simulate success
-            import logging
-
-            logger = logging.getLogger(__name__)
-
             logger.info(
                 "Executing request_review in fixture mode (no live token) for %s",
                 target,
@@ -894,7 +890,11 @@ class CommandRouter:
         target = f"{repo}#{pr_number}"
 
         # Check if live mode is enabled and token is available
+        import logging
+
         from handsfree.github.auth import get_default_auth_provider
+
+        logger = logging.getLogger(__name__)
 
         auth_provider = get_default_auth_provider()
         token = None
@@ -903,11 +903,7 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            import logging
-
             from handsfree.github.client import rerun_workflow
-
-            logger = logging.getLogger(__name__)
 
             logger.info(
                 "Executing rerun_checks via GitHub API (live mode) for %s",
@@ -966,10 +962,6 @@ class CommandRouter:
                 }
         else:
             # Fixture mode - simulate success
-            import logging
-
-            logger = logging.getLogger(__name__)
-
             logger.info(
                 "Executing rerun_checks in fixture mode (no live token) for %s",
                 target,
