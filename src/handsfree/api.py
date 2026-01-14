@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
+from handsfree.commands.profiles import ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
@@ -121,10 +122,14 @@ _github_provider = GitHubProvider()
 
 
 def get_db():
-    """Get or initialize database connection."""
+    """Get or initialize database connection.
+    
+    Uses DUCKDB_PATH environment variable or defaults to data/handsfree.db.
+    Tests set DUCKDB_PATH=:memory: in conftest.py for isolation.
+    """
     global _db_conn
     if _db_conn is None:
-        _db_conn = init_db(":memory:")
+        _db_conn = init_db()  # Uses get_db_path() from connection.py
     return _db_conn
 
 
@@ -410,7 +415,7 @@ async def submit_command(
     # For system commands (repeat, next), router returns complete response
     # Don't re-apply fixture handlers - just convert directly
     if parsed_intent.name.startswith("system."):
-        response = _convert_router_response_direct(router_response, text)
+        response = _convert_router_response_direct(router_response, text, request.profile)
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
@@ -463,6 +468,7 @@ async def submit_command(
 def _convert_router_response_direct(
     router_response: dict[str, Any],
     transcript: str,
+    profile: Profile,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
 
@@ -471,6 +477,7 @@ def _convert_router_response_direct(
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
+        profile: User profile
 
     Returns:
         CommandResponse object
@@ -508,8 +515,16 @@ def _convert_router_response_direct(
             summary=pa["summary"],
         )
 
-    # Build debug info
-    debug = DebugInfo(transcript=transcript)
+    # Build debug info with profile metadata
+    profile_config = ProfileConfig.for_profile(profile)
+    debug = DebugInfo(
+        transcript=transcript,
+        profile_metadata={
+            "profile": profile_config.profile.value,
+            "max_spoken_words": profile_config.max_spoken_words,
+            "speech_rate": profile_config.speech_rate,
+        },
+    )
 
     return CommandResponse(
         status=status,
@@ -557,6 +572,9 @@ def _convert_router_response_to_command_response(
     # Handle special intents with fixture-backed handlers
     cards: list[UICard] = []
 
+    # Get profile config for applying truncation
+    profile_config = ProfileConfig.for_profile(profile)
+
     if parsed_intent.name == "inbox.list":
         # Use fixture-backed inbox handler
         try:
@@ -564,6 +582,7 @@ def _convert_router_response_to_command_response(
                 provider=_github_provider,
                 user="fixture-user",
                 privacy_mode=True,
+                profile_config=profile_config,
             )
             items = inbox_result.get("items", [])
             spoken_text = inbox_result.get("spoken_text", spoken_text)
@@ -592,6 +611,7 @@ def _convert_router_response_to_command_response(
                     repo="fixture/repo",
                     pr_number=pr_number,
                     privacy_mode=True,
+                    profile_config=profile_config,
                 )
                 spoken_text = pr_result.get("spoken_text", spoken_text)
 
@@ -634,8 +654,15 @@ def _convert_router_response_to_command_response(
             summary=pa["summary"],
         )
 
-    # Build debug info
-    debug = DebugInfo(transcript=transcript)
+    # Build debug info with profile metadata
+    debug = DebugInfo(
+        transcript=transcript,
+        profile_metadata={
+            "profile": profile_config.profile.value,
+            "max_spoken_words": profile_config.max_spoken_words,
+            "speech_rate": profile_config.speech_rate,
+        },
+    )
 
     return CommandResponse(
         status=status,

@@ -2,11 +2,15 @@
 
 from typing import Any
 
+from ..commands.profiles import ProfileConfig
 from ..github import GitHubProvider
 
 
 def handle_inbox_list(
-    provider: GitHubProvider, user: str, privacy_mode: bool = True
+    provider: GitHubProvider,
+    user: str,
+    privacy_mode: bool = True,
+    profile_config: ProfileConfig | None = None,
 ) -> dict[str, Any]:
     """
     Handle inbox.list command to show attention items.
@@ -15,6 +19,7 @@ def handle_inbox_list(
         provider: GitHub provider instance
         user: GitHub username
         privacy_mode: If True, no code snippets are included (default: True)
+        profile_config: Optional profile configuration for response shaping
 
     Returns:
         Response dict with spoken_text and items
@@ -97,7 +102,15 @@ def handle_inbox_list(
         if count > 3:
             spoken_text += f"Plus {count - 3} more."
 
+    # Apply profile-based truncation if profile_config is provided
+    # Note: Optional truncation maintains backward compatibility with callers
+    # that don't provide profile_config
+    if profile_config:
+        spoken_text = profile_config.truncate_spoken_text(spoken_text.strip())
+    else:
+        spoken_text = spoken_text.strip()
+
     return {
         "items": items,
-        "spoken_text": spoken_text.strip(),
+        "spoken_text": spoken_text,
     }

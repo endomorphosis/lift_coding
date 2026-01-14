@@ -61,3 +61,79 @@ class TestProfileConfig:
             assert config.max_spoken_words > 0
             assert isinstance(config.confirmation_required, bool)
             assert config.speech_rate > 0
+
+
+class TestProfileTruncation:
+    """Test profile-based spoken text truncation."""
+
+    def test_truncate_within_limit(self) -> None:
+        """Test that text within limit is not truncated."""
+        config = ProfileConfig.for_profile(Profile.WORKOUT)
+        text = "This is a short message"  # 5 words
+        result = config.truncate_spoken_text(text)
+        assert result == text
+        assert "..." not in result
+
+    def test_truncate_exceeds_limit(self) -> None:
+        """Test that text exceeding limit is truncated."""
+        config = ProfileConfig.for_profile(Profile.WORKOUT)  # 15 words max
+        # Create a 20-word text
+        text = " ".join([f"word{i}" for i in range(20)])
+        result = config.truncate_spoken_text(text)
+
+        # Should have exactly 15 words plus "..."
+        words = result.replace("...", "").split()
+        assert len(words) == 15
+        assert result.endswith("...")
+
+    def test_truncate_exactly_at_limit(self) -> None:
+        """Test that text exactly at limit is not truncated."""
+        config = ProfileConfig.for_profile(Profile.WORKOUT)  # 15 words max
+        # Create a 15-word text
+        text = " ".join([f"word{i}" for i in range(15)])
+        result = config.truncate_spoken_text(text)
+
+        assert result == text
+        assert "..." not in result
+
+    def test_truncate_empty_text(self) -> None:
+        """Test that empty text is handled correctly."""
+        config = ProfileConfig.for_profile(Profile.WORKOUT)
+        assert config.truncate_spoken_text("") == ""
+        assert config.truncate_spoken_text("   ") == "   "
+
+    def test_truncate_workout_vs_default(self) -> None:
+        """Test that workout profile truncates more aggressively than default."""
+        workout_config = ProfileConfig.for_profile(Profile.WORKOUT)  # 15 words
+        default_config = ProfileConfig.for_profile(Profile.DEFAULT)  # 25 words
+
+        # Create a 30-word text
+        text = " ".join([f"word{i}" for i in range(30)])
+
+        workout_result = workout_config.truncate_spoken_text(text)
+        default_result = default_config.truncate_spoken_text(text)
+
+        # Both should be truncated
+        assert "..." in workout_result
+        assert "..." in default_result
+
+        # Workout should be shorter
+        workout_words = len(workout_result.replace("...", "").split())
+        default_words = len(default_result.replace("...", "").split())
+        assert workout_words < default_words
+        assert workout_words == 15
+        assert default_words == 25
+
+    def test_truncate_preserves_word_boundaries(self) -> None:
+        """Test that truncation preserves complete words."""
+        config = ProfileConfig.for_profile(Profile.WORKOUT)  # 15 words max
+        text = "The quick brown fox jumps over the lazy dog and runs through the forest quickly to escape from danger"
+        result = config.truncate_spoken_text(text)
+
+        # Should have complete words, no partial words
+        words = result.replace("...", "").strip().split()
+        assert len(words) == 15
+        # First 15 words should match
+        original_words = text.split()
+        for i, word in enumerate(words):
+            assert word == original_words[i]
