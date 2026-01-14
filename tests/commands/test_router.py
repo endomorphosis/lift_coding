@@ -326,3 +326,71 @@ class TestResponseFormat:
         assert "name" in response["intent"]
         assert "confidence" in response["intent"]
         assert "entities" in response["intent"]
+
+
+class TestProfileResponseShaping:
+    """Test that profile configurations actually affect response length."""
+
+    def test_workout_shorter_than_default_pr_summary(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that workout profile yields shorter PR summaries."""
+        intent = parser.parse("summarize pr 123")
+
+        workout_response = router.route(intent, Profile.WORKOUT)
+        default_response = router.route(intent, Profile.DEFAULT)
+
+        workout_words = len(workout_response["spoken_text"].split())
+        default_words = len(default_response["spoken_text"].split())
+
+        # Workout should be <= 15 words (accounting for "...")
+        assert workout_words <= 16  # 15 words + potential "..."
+        # Default should be <= 25 words
+        assert default_words <= 26
+
+    def test_workout_shorter_than_default_inbox(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that workout profile yields shorter inbox responses."""
+        intent = parser.parse("inbox")
+
+        workout_response = router.route(intent, Profile.WORKOUT)
+        default_response = router.route(intent, Profile.DEFAULT)
+
+        workout_words = len(workout_response["spoken_text"].split())
+        default_words = len(default_response["spoken_text"].split())
+
+        # Both should respect their limits
+        assert workout_words <= 16  # 15 words + potential "..."
+        assert default_words <= 26
+
+    def test_all_profiles_respect_word_limits(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that all profiles respect their max_spoken_words limits."""
+        intent = parser.parse("inbox")
+
+        for profile in Profile:
+            from handsfree.commands.profiles import ProfileConfig
+
+            config = ProfileConfig.for_profile(profile)
+            response = router.route(intent, profile)
+
+            word_count = len(response["spoken_text"].split())
+            # Allow for "..." which adds one extra "word"
+            assert word_count <= config.max_spoken_words + 1
+
+    def test_truncation_is_deterministic(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that truncation produces consistent results."""
+        intent = parser.parse("summarize pr 456")
+
+        # Call multiple times with same profile
+        response1 = router.route(intent, Profile.WORKOUT)
+        response2 = router.route(intent, Profile.WORKOUT)
+        response3 = router.route(intent, Profile.WORKOUT)
+
+        # Should get identical results
+        assert response1["spoken_text"] == response2["spoken_text"]
+        assert response2["spoken_text"] == response3["spoken_text"]

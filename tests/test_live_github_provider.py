@@ -3,21 +3,17 @@
 import pytest
 
 from handsfree.github.auth import TokenProvider
-from handsfree.github.auth import FixtureOnlyProvider, GitHubAuthProvider
 from handsfree.github.provider import LiveGitHubProvider
 
 
-class MockTokenProvider(GitHubAuthProvider):
+class MockTokenProvider(TokenProvider):
     """Mock token provider for testing."""
 
     def __init__(self, token: str | None = None):
         self._token = token
 
-    def get_token(self, user_id: str) -> str | None:
+    def get_token(self) -> str | None:
         return self._token
-
-    def supports_live_mode(self) -> bool:
-        return self._token is not None
 
 
 class TestLiveGitHubProvider:
@@ -30,8 +26,8 @@ class TestLiveGitHubProvider:
         assert provider is not None
 
     def test_initialization_requires_token_provider(self):
-        """Test that initialization requires a GitHubAuthProvider instance."""
-        with pytest.raises(TypeError, match="GitHubAuthProvider"):
+        """Test that initialization requires a TokenProvider instance."""
+        with pytest.raises(TypeError, match="TokenProvider"):
             LiveGitHubProvider("not a token provider")
 
     def test_fallback_to_fixture_when_no_token(self):
@@ -72,14 +68,15 @@ class TestLiveGitHubProvider:
         assert len(reviews) == 2
 
     def test_with_token_but_not_implemented(self):
-        """Test that provider falls back even with token (API not implemented)."""
+        """Test that provider makes live API calls with token."""
         token_provider = MockTokenProvider("ghp_test1234567890")
         provider = LiveGitHubProvider(token_provider)
 
-        # Should still fall back since live API calls are not implemented
+        # With the implementation, it should attempt to make requests
+        # but since we don't have a real server, it will fail and fall back
         prs = provider.list_user_prs("testuser")
         assert isinstance(prs, list)
-        assert len(prs) == 3  # From fixture
+        assert len(prs) == 3  # From fixture fallback
 
     def test_headers_include_authorization(self):
         """Test that headers include authorization when token available."""

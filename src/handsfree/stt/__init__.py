@@ -63,7 +63,7 @@ def get_stt_provider() -> STTProvider:
             from handsfree.stt.openai_provider import OpenAISTTProvider
 
             return OpenAISTTProvider()
-        except ImportError as e:
+        except ImportError:
             logger.error(
                 "OpenAI STT provider requested but openai package not installed. "
                 "Install with: pip install 'handsfree-dev-companion[openai]'"
