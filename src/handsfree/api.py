@@ -410,7 +410,7 @@ async def submit_command(
     # For system commands (repeat, next), router returns complete response
     # Don't re-apply fixture handlers - just convert directly
     if parsed_intent.name.startswith("system."):
-        response = _convert_router_response_direct(router_response, text)
+        response = _convert_router_response_direct(router_response, text, request.profile)
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
@@ -463,6 +463,7 @@ async def submit_command(
 def _convert_router_response_direct(
     router_response: dict[str, Any],
     transcript: str,
+    profile: Profile,
 ) -> CommandResponse:
     """Convert router response dict directly to CommandResponse without re-applying handlers.
 
@@ -471,10 +472,13 @@ def _convert_router_response_direct(
     Args:
         router_response: Response dict from CommandRouter
         transcript: Original text transcript
+        profile: User profile
 
     Returns:
         CommandResponse object
     """
+    from handsfree.commands.profiles import ProfileConfig
+
     # Extract basic fields
     status_str = router_response.get("status", "ok")
     status = CommandStatus(status_str)
@@ -508,8 +512,16 @@ def _convert_router_response_direct(
             summary=pa["summary"],
         )
 
-    # Build debug info
-    debug = DebugInfo(transcript=transcript)
+    # Build debug info with profile metadata
+    profile_config = ProfileConfig.for_profile(profile)
+    debug = DebugInfo(
+        transcript=transcript,
+        profile_metadata={
+            "profile": profile_config.profile.value,
+            "max_spoken_words": profile_config.max_spoken_words,
+            "speech_rate": profile_config.speech_rate,
+        },
+    )
 
     return CommandResponse(
         status=status,
@@ -641,8 +653,15 @@ def _convert_router_response_to_command_response(
             summary=pa["summary"],
         )
 
-    # Build debug info
-    debug = DebugInfo(transcript=transcript)
+    # Build debug info with profile metadata
+    debug = DebugInfo(
+        transcript=transcript,
+        profile_metadata={
+            "profile": profile_config.profile.value,
+            "max_spoken_words": profile_config.max_spoken_words,
+            "speech_rate": profile_config.speech_rate,
+        },
+    )
 
     return CommandResponse(
         status=status,
