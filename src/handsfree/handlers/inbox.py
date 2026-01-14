@@ -30,10 +30,32 @@ def handle_inbox_list(
     # Process PRs into inbox items
     items = []
     for pr in user_prs:
+        # Fetch checks for this PR
+        try:
+            checks = provider.get_pr_checks(pr["repo"], pr["pr_number"])
+        except Exception:
+            # If checks fetch fails, continue with empty checks
+            checks = []
+
+        # Calculate checks summary
+        checks_passed = 0
+        checks_failed = 0
+        checks_pending = 0
+
+        for check in checks:
+            if check.get("status") == "completed":
+                if check.get("conclusion") == "success":
+                    checks_passed += 1
+                elif check.get("conclusion") in ["failure", "timed_out", "action_required"]:
+                    checks_failed += 1
+                # Skip neutral, skipped, cancelled
+            else:
+                # queued, in_progress
+                checks_pending += 1
         # Determine item type
         item_type = "pr"
 
-        # Calculate priority based on labels and reviewer status
+        # Calculate priority based on labels, reviewer status, and failing checks
         priority = 3  # default
         labels = pr.get("labels", [])
 
@@ -48,6 +70,10 @@ def handle_inbox_list(
         else:
             priority = 2
 
+        # Boost priority if checks are failing
+        if checks_failed > 0 and priority < 4:
+            priority = 4
+
         # Build summary
         label_text = f" ({', '.join(labels)})" if labels else ""
         role = ""
@@ -60,6 +86,7 @@ def handle_inbox_list(
         if role:
             summary = f"{role}: {summary}"
 
+        # Add checks summary to item
         items.append(
             {
                 "type": item_type,
@@ -68,6 +95,9 @@ def handle_inbox_list(
                 "repo": pr["repo"],
                 "url": pr["url"],
                 "summary": summary,
+                "checks_passed": checks_passed,
+                "checks_failed": checks_failed,
+                "checks_pending": checks_pending,
             }
         )
 
@@ -88,9 +118,14 @@ def handle_inbox_list(
         count = len(items)
         spoken_text = f"You have {count} item{'s' if count != 1 else ''} in your inbox. "
 
+        # Mention failing checks
+        failing_checks_count = sum(1 for item in items if item["checks_failed"] > 0)
+        if failing_checks_count > 0:
+            spoken_text += f"{failing_checks_count} with failing checks. "
+
         # Mention top priority items
         high_priority = [item for item in items if item["priority"] >= 4]
-        if high_priority:
+        if high_priority and failing_checks_count == 0:
             spoken_text += f"{len(high_priority)} high priority. "
 
         # List top 3 items
