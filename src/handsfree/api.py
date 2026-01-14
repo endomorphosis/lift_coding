@@ -271,18 +271,23 @@ async def github_webhook(
 async def submit_command(
     request: CommandRequest,
     x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> CommandResponse:
     """Submit a hands-free command.
 
     Args:
         request: Command request body
         x_session_id: Optional session identifier from X-Session-Id header
+        x_user_id: Optional user identifier from X-User-Id header
 
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
+
+    # Get user ID from header or use fixture user ID
+    user_id = get_user_id_from_header(x_user_id)
 
     # Check idempotency
     if request.idempotency_key and request.idempotency_key in processed_commands:
@@ -371,7 +376,7 @@ async def submit_command(
         intent=parsed_intent,
         profile=request.profile,
         session_id=session_id,  # Use session ID from header or idempotency key
-        user_id=FIXTURE_USER_ID,  # Pass user ID for policy evaluation
+        user_id=user_id,  # Pass user ID for policy evaluation
         idempotency_key=request.idempotency_key,  # Pass for audit logging
     )
 
@@ -1705,4 +1710,115 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
             "error": "http_error",
             "message": str(exc.detail),
         },
+    )
+
+
+@app.post("/v1/github/connections", response_model=GitHubConnectionResponse, status_code=201)
+async def create_connection(
+    request: CreateGitHubConnectionRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Create a new GitHub connection for the user.
+
+    Args:
+        request: Connection creation request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Created connection.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = create_github_connection(
+        conn=db,
+        user_id=user_id,
+        installation_id=request.installation_id,
+        token_ref=request.token_ref,
+        scopes=request.scopes,
+    )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
+    )
+
+
+@app.get("/v1/github/connections", response_model=GitHubConnectionsListResponse)
+async def list_connections(
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionsListResponse:
+    """List all GitHub connections for the user.
+
+    Args:
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        List of connections.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connections = get_github_connections_by_user(conn=db, user_id=user_id)
+
+    return GitHubConnectionsListResponse(
+        connections=[
+            GitHubConnectionResponse(
+                id=conn.id,
+                user_id=conn.user_id,
+                installation_id=conn.installation_id,
+                token_ref=conn.token_ref,
+                scopes=conn.scopes,
+                created_at=conn.created_at,
+                updated_at=conn.updated_at,
+            )
+            for conn in connections
+        ]
+    )
+
+
+@app.get("/v1/github/connections/{connection_id}", response_model=GitHubConnectionResponse)
+async def get_connection(
+    connection_id: str,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> GitHubConnectionResponse:
+    """Get a specific GitHub connection by ID.
+
+    Args:
+        connection_id: Connection UUID.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        Connection details.
+
+    Raises:
+        404: Connection not found or user doesn't have access.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    connection = get_github_connection(conn=db, connection_id=connection_id)
+
+    if connection is None or connection.user_id != user_id:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Connection not found",
+            },
+        )
+
+    return GitHubConnectionResponse(
+        id=connection.id,
+        user_id=connection.user_id,
+        installation_id=connection.installation_id,
+        token_ref=connection.token_ref,
+        scopes=connection.scopes,
+        created_at=connection.created_at,
+        updated_at=connection.updated_at,
     )

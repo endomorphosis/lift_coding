@@ -21,6 +21,75 @@ make deps
 pip install -e .
 ```
 
+## Running in Live GitHub Mode
+
+By default, the backend uses fixture data for GitHub API calls. To enable live GitHub API integration:
+
+### Enable Live Mode
+
+Set environment variables before starting the server:
+
+```bash
+export GITHUB_TOKEN=ghp_YOUR_PERSONAL_ACCESS_TOKEN_HERE
+export GITHUB_LIVE_MODE=true
+make dev
+```
+
+### Get a GitHub Token
+
+1. Go to GitHub Settings → Developer settings → Personal access tokens
+2. Generate a new token (classic) with these scopes:
+   - `repo` - Full control of private repositories
+   - `read:org` - Read org and team membership
+3. Copy the token and use it as `GITHUB_TOKEN`
+
+### Configuration Details
+
+- **`GITHUB_TOKEN`**: Your GitHub personal access token
+- **`GITHUB_LIVE_MODE`**: Set to `true`, `1`, or `yes` to enable live mode
+- When both are set, API calls will use the real GitHub API
+- When not set or disabled, the system uses fixture data (default behavior)
+
+### User Identity in Live Mode
+
+When making API calls in live mode, the system uses the `X-User-Id` header to associate requests with users. The token provider reads from `GITHUB_TOKEN` regardless of user ID (for now).
+
+```bash
+curl -s http://localhost:8080/v1/command \
+  -H 'Content-Type: application/json' \
+  -H 'X-User-Id: 12345678-1234-1234-1234-123456789012' \
+  -d '{
+    "input": {"type":"text","text":"inbox"},
+    "profile":"default",
+    "client_context":{"device":"simulator"},
+    "idempotency_key":"dev-1"
+  }' | jq
+```
+
+### Connection Metadata
+
+GitHub connection metadata (installation IDs, token references, scopes) is stored in the database. Raw tokens are **never** stored in the database.
+
+Create a connection:
+
+```bash
+curl -s http://localhost:8080/v1/github/connections \
+  -H 'Content-Type: application/json' \
+  -H 'X-User-Id: 12345678-1234-1234-1234-123456789012' \
+  -d '{
+    "installation_id": 12345,
+    "token_ref": "secret://tokens/github/user123",
+    "scopes": "repo,read:org"
+  }' | jq
+```
+
+List connections:
+
+```bash
+curl -s http://localhost:8080/v1/github/connections \
+  -H 'X-User-Id: 12345678-1234-1234-1234-123456789012' | jq
+```
+
 ## Testing the API
 
 ### Run all tests
@@ -94,14 +163,14 @@ make lint
 
 - **FastAPI**: Modern Python web framework with automatic OpenAPI documentation
 - **Pydantic**: Schema validation aligned with `spec/openapi.yaml`
-- **In-memory storage**: Temporary storage for pending actions and webhook payloads
-- **Fixture data**: GET /v1/inbox returns fixture data for testing
+- **DuckDB**: Embedded database for persistence
+- **Fixture data**: Used by default for GitHub API calls (live mode optional)
 
 ## Current Limitations (by design)
 
-- No persistence layer (in-memory only) - DuckDB integration is in PR-003
-- GitHub API calls are stubbed - real implementation in PR-005
-- Policy enforcement is stubbed - real implementation in PR-007
+- Live GitHub mode uses a single `GITHUB_TOKEN` for all users (per-user tokens in future PRs)
+- Real GitHub API calls are planned but not yet implemented (falls back to fixtures)
+- GitHub App installation UI and OAuth redirects are out of scope for now
 - Audio input returns an error - transcription coming in future PRs
 
 ## OpenAPI Documentation
