@@ -556,12 +556,6 @@ def get_token_provider() -> TokenProvider:
     Returns:
         TokenProvider instance based on available configuration.
     """
-    # Check both environment variable names as per problem statement
-    live_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live" or os.getenv(
-        "GITHUB_LIVE_MODE", ""
-    ).lower() in ("true", "1", "yes")
-
-    if live_mode and os.getenv("GITHUB_TOKEN"):
     # Check for explicit fixture mode
     github_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
     if github_mode == "fixtures":
