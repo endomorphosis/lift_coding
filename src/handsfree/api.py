@@ -960,6 +960,206 @@ async def confirm_command(
                 ),
                 spoken_text=f"Review requested from {reviewers_str} on {target}.",
             )
+    elif action_type == "merge":
+        # Handle DB-backed merge action with exactly-once semantics
+        # Atomically delete the pending action to prevent duplicate execution
+        deleted = delete_pending_action(db, request.token)
+
+        if not deleted:
+            # Action was already consumed or cleaned up between the get and delete
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "not_found",
+                    "message": "Pending action not found or already consumed",
+                },
+            )
+
+        # Execute the side-effect
+        repo = action_payload.get("repo")
+        pr_number = action_payload.get("pr_number")
+        merge_method = action_payload.get("merge_method", "squash")
+
+        target = f"{repo}#{pr_number}"
+
+        # Check if live mode is enabled and token is available
+        from handsfree.github.auth import get_default_auth_provider
+
+        auth_provider = get_default_auth_provider()
+        token = None
+        if auth_provider.supports_live_mode():
+            token = auth_provider.get_token(user_id)
+
+        # Execute via GitHub API if live mode enabled and token available
+        if token:
+            from handsfree.github.client import get_pull_request, merge_pull_request
+
+            logger.info(
+                "Executing confirmed merge via GitHub API (live mode) for %s with method %s",
+                target,
+                merge_method,
+            )
+
+            # First, validate PR preconditions (read-only checks)
+            pr_result = get_pull_request(
+                repo=repo,
+                pr_number=pr_number,
+                token=token,
+            )
+
+            if not pr_result["ok"]:
+                # Failed to fetch PR details
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="merge",
+                    ok=False,
+                    target=target,
+                    request={"merge_method": merge_method, "confirmed": True},
+                    result={
+                        "status": "error",
+                        "message": f"Failed to fetch PR details: {pr_result['message']}",
+                        "via_confirmation": True,
+                        "status_code": pr_result.get("status_code"),
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+
+                response = CommandResponse(
+                    status=CommandStatus.ERROR,
+                    intent=ParsedIntent(
+                        name="merge.confirmed",
+                        confidence=1.0,
+                        entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                    ),
+                    spoken_text=f"Failed to fetch PR details: {pr_result['message']}",
+                )
+            else:
+                pr_data = pr_result["pr_data"]
+                pr_state = pr_data.get("state")
+
+                # Validate preconditions
+                if pr_state != "open":
+                    write_action_log(
+                        db,
+                        user_id=user_id,
+                        action_type="merge",
+                        ok=False,
+                        target=target,
+                        request={"merge_method": merge_method, "confirmed": True},
+                        result={
+                            "status": "error",
+                            "message": f"PR is not open (state: {pr_state})",
+                            "via_confirmation": True,
+                        },
+                        idempotency_key=request.idempotency_key,
+                    )
+
+                    response = CommandResponse(
+                        status=CommandStatus.ERROR,
+                        intent=ParsedIntent(
+                            name="merge.confirmed",
+                            confidence=1.0,
+                            entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                        ),
+                        spoken_text=f"Cannot merge: PR is {pr_state}",
+                    )
+                else:
+                    # PR is open, attempt to merge
+                    github_result = merge_pull_request(
+                        repo=repo,
+                        pr_number=pr_number,
+                        merge_method=merge_method,
+                        token=token,
+                    )
+
+                    if github_result["ok"]:
+                        # Write audit log for successful execution
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="merge",
+                            ok=True,
+                            target=target,
+                            request={"merge_method": merge_method, "confirmed": True},
+                            result={
+                                "status": "success",
+                                "message": "PR merged (live mode)",
+                                "via_confirmation": True,
+                                "github_response": github_result.get("response_data"),
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+
+                        response = CommandResponse(
+                            status=CommandStatus.OK,
+                            intent=ParsedIntent(
+                                name="merge.confirmed",
+                                confidence=1.0,
+                                entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                            ),
+                            spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
+                        )
+                    else:
+                        # GitHub API call failed
+                        error_type = github_result.get("error_type", "unknown")
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="merge",
+                            ok=False,
+                            target=target,
+                            request={"merge_method": merge_method, "confirmed": True},
+                            result={
+                                "status": "error",
+                                "message": github_result["message"],
+                                "via_confirmation": True,
+                                "status_code": github_result.get("status_code"),
+                                "error_type": error_type,
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+
+                        response = CommandResponse(
+                            status=CommandStatus.ERROR,
+                            intent=ParsedIntent(
+                                name="merge.confirmed",
+                                confidence=1.0,
+                                entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                            ),
+                            spoken_text=f"Failed to merge PR: {github_result['message']}",
+                        )
+        else:
+            # Fixture mode - simulate success
+            logger.info(
+                "Executing confirmed merge in fixture mode (no live token) for %s",
+                target,
+            )
+
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="merge",
+                ok=True,
+                target=target,
+                request={"merge_method": merge_method, "confirmed": True},
+                result={
+                    "status": "success",
+                    "message": "PR merged (fixture)",
+                    "via_confirmation": True,
+                },
+                idempotency_key=request.idempotency_key,
+            )
+
+            response = CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(
+                    name="merge.confirmed",
+                    confidence=1.0,
+                    entities={"repo": repo, "pr_number": pr_number, "merge_method": merge_method},
+                ),
+                spoken_text=f"PR {pr_number} merged successfully using {merge_method}.",
+            )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -1238,14 +1438,151 @@ async def rerun_checks(request: RerunChecksRequest) -> ActionResult:
 
 
 @app.post("/v1/actions/merge", response_model=ActionResult)
-async def merge_pr(request: MergeRequest) -> ActionResult:
-    """Merge a PR (stubbed - real implementation in PR-007)."""
-    return ActionResult(
+async def merge_pr(
+    request: MergeRequest,
+    x_user_id: str | None = Header(None, alias="X-User-Id"),
+) -> ActionResult:
+    """Merge a PR with strict policy gating, confirmation, and audit logging.
+
+    This endpoint implements real merge functionality with:
+    - Policy evaluation (repo allowlist + merge constraints)
+    - Confirmation required (always for merge actions)
+    - Audit logs for propose/confirm/execute
+    - Rate limiting
+    - GitHub API integration when live mode enabled
+    - Fixture behavior when disabled
+
+    Args:
+        request: Merge request.
+        x_user_id: Optional user ID header (falls back to fixture user ID).
+
+    Returns:
+        ActionResult with pending action requiring confirmation.
+    """
+    db = get_db()
+    user_id = get_user_id_from_header(x_user_id)
+
+    # Check idempotency first - return cached result if exists
+    if request.idempotency_key and request.idempotency_key in idempotency_store:
+        return idempotency_store[request.idempotency_key]
+
+    # Check rate limit
+    rate_limit_result = check_rate_limit(
+        db,
+        user_id,
+        "merge",
+        window_seconds=60,
+        max_requests=5,  # Stricter limit for merge actions
+    )
+
+    if not rate_limit_result.allowed:
+        # Write audit log for rate limit denial
+        try:
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="merge",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"merge_method": request.merge_method},
+                result={"error": "rate_limited", "message": rate_limit_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
+
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "error": "rate_limited",
+                "message": rate_limit_result.reason,
+                "retry_after": rate_limit_result.retry_after_seconds,
+            },
+        )
+
+    # Evaluate policy - merge actions need special precondition checks
+    # For now, we don't have PR checks status, so we pass None which will require confirmation
+    policy_result = evaluate_action_policy(
+        db,
+        user_id,
+        request.repo,
+        "merge",
+        pr_checks_status=None,  # TODO: Fetch from GitHub API if available
+        pr_approvals_count=0,  # TODO: Fetch from GitHub API if available
+    )
+
+    # Handle policy decisions
+    if policy_result.decision == PolicyDecision.DENY:
+        # Write audit log for policy denial
+        try:
+            write_action_log(
+                db,
+                user_id=user_id,
+                action_type="merge",
+                ok=False,
+                target=f"{request.repo}#{request.pr_number}",
+                request={"merge_method": request.merge_method},
+                result={"error": "policy_denied", "message": policy_result.reason},
+                idempotency_key=request.idempotency_key,
+            )
+        except ValueError:
+            # Idempotency key already used in audit log - this is a retry
+            pass
+
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "error": "policy_denied",
+                "message": policy_result.reason,
+            },
+        )
+
+    # For merge actions, ALWAYS require confirmation (even if policy allows)
+    # This is a critical safety measure for destructive operations
+    # Create pending action in database
+    summary = f"Merge PR {request.repo}#{request.pr_number} using {request.merge_method}"
+    pending_action = create_pending_action(
+        db,
+        user_id=user_id,
+        summary=summary,
+        action_type="merge",
+        action_payload={
+            "repo": request.repo,
+            "pr_number": request.pr_number,
+            "merge_method": request.merge_method,
+        },
+        expires_in_seconds=300,  # 5 minutes
+    )
+
+    # Write audit log for confirmation required
+    write_action_log(
+        db,
+        user_id=user_id,
+        action_type="merge",
+        ok=True,
+        target=f"{request.repo}#{request.pr_number}",
+        request={"merge_method": request.merge_method},
+        result={
+            "status": "needs_confirmation",
+            "token": pending_action.token,
+            "reason": "Merge actions always require confirmation",
+        },
+        idempotency_key=request.idempotency_key,
+    )
+
+    result = ActionResult(
         ok=False,
-        message=f"[STUB] Merge action for {request.repo}#{request.pr_number} "
-        f"requires policy gates. Real implementation in PR-007.",
+        message=f"Confirmation required: {summary}. "
+        f"Use token '{pending_action.token}' to confirm.",
         url=None,
     )
+
+    # Store for idempotency
+    if request.idempotency_key:
+        idempotency_store[request.idempotency_key] = result
+
+    return result
 
 
 async def _handle_request_review_command(
