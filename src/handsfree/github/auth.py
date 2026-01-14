@@ -62,21 +62,6 @@ class TokenProvider(ABC):
         pass
 
 
-class TokenProvider(ABC):
-    """Abstract interface for token providers (used by LiveGitHubProvider).
-    
-    This is a simplified interface that doesn't require user_id parameter.
-    """
-
-    @abstractmethod
-    def get_token(self) -> str | None:
-        """Get a GitHub token.
-
-        Returns:
-            GitHub token or None if not available.
-        """
-        pass
-
 
 class GitHubAuthProvider(ABC):
     """Abstract interface for GitHub authentication providers.
@@ -404,38 +389,6 @@ class FixtureOnlyProvider(GitHubAuthProvider):
             False.
         """
         return False
-
-
-class FixtureTokenProvider(TokenProvider):
-    """Token provider that always returns None (fixture-only mode)."""
-
-    def get_token(self) -> str | None:
-        """Always returns None to force fixture mode.
-
-        Returns:
-            None to indicate fixture-only mode.
-        """
-        return None
-
-
-class EnvTokenProvider(TokenProvider):
-    """Token provider that reads from GITHUB_TOKEN environment variable.
-    
-    This is a simplified provider for LiveGitHubProvider that doesn't
-    require per-user tokens.
-    """
-
-    def __init__(self):
-        """Initialize the environment token provider."""
-        self.token = os.getenv("GITHUB_TOKEN")
-
-    def get_token(self) -> str | None:
-        """Get a GitHub token from environment variable.
-
-        Returns:
-            GitHub token from GITHUB_TOKEN env var, or None if not set.
-        """
-        return self.token
 
 
 def get_default_auth_provider() -> GitHubAuthProvider:
