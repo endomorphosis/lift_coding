@@ -76,9 +76,9 @@ pip install -e .
 
 ## Running in Live GitHub Mode
 
-By default, the backend uses fixture data for GitHub API calls. To enable live GitHub API integration:
+By default, the backend uses fixture data for GitHub API calls. To enable live GitHub API integration, you can use either a personal access token or GitHub App authentication.
 
-### Enable Live Mode
+### Option 1: Personal Access Token (Simple, for development)
 
 Set environment variables before starting the server:
 
@@ -88,7 +88,7 @@ export GITHUB_LIVE_MODE=true
 make dev
 ```
 
-### Get a GitHub Token
+#### Get a GitHub Token
 
 1. Go to GitHub Settings → Developer settings → Personal access tokens
 2. Generate a new token (classic) with these scopes:
@@ -96,16 +96,62 @@ make dev
    - `read:org` - Read org and team membership
 3. Copy the token and use it as `GITHUB_TOKEN`
 
+### Option 2: GitHub App (Recommended for production)
+
+For production use, GitHub App authentication is recommended as it provides better security and per-installation access control.
+
+Set these environment variables:
+
+```bash
+export GITHUB_APP_ID=123456
+export GITHUB_APP_PRIVATE_KEY_PEM="-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA...
+-----END RSA PRIVATE KEY-----"
+export GITHUB_INSTALLATION_ID=78901234
+make dev
+```
+
+**Note:** The private key can include actual newlines or escaped newlines (`\n`). Both formats are supported.
+
+#### Create a GitHub App
+
+1. Go to GitHub Settings → Developer settings → GitHub Apps → New GitHub App
+2. Set up your app with these permissions:
+   - Repository permissions:
+     - Contents: Read
+     - Pull requests: Read & Write
+     - Issues: Read & Write
+   - Subscribe to events as needed
+3. Generate a private key (RSA format) and download it
+4. Install the app on your organization/repository
+5. Note the App ID and Installation ID from the app settings
+
+**Security notes:**
+- Private keys are never logged or stored in the database
+- Installation tokens are cached in memory only
+- Tokens are automatically refreshed before expiry (default: 5 minutes before expiration)
+- JWT tokens expire after 10 minutes (GitHub's maximum)
+
+### Configuration Priority
+
+When multiple authentication methods are configured, the system uses this priority order:
+
+1. **GitHub App** (if `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY_PEM`, and `GITHUB_INSTALLATION_ID` are set)
+2. **Personal Access Token** (if `GITHUB_TOKEN` is set)
+3. **Fixture-only mode** (default, uses test fixtures)
+
 ### Configuration Details
 
-- **`GITHUB_TOKEN`**: Your GitHub personal access token
-- **`GITHUB_LIVE_MODE`**: Set to `true`, `1`, or `yes` to enable live mode
-- When both are set, API calls will use the real GitHub API
+- **`GITHUB_APP_ID`**: Your GitHub App ID (numeric)
+- **`GITHUB_APP_PRIVATE_KEY_PEM`**: Your GitHub App private key in PEM format (supports escaped newlines)
+- **`GITHUB_INSTALLATION_ID`**: The installation ID for your GitHub App
+- **`GITHUB_TOKEN`**: Your GitHub personal access token (for simple auth)
+- **`GITHUB_LIVE_MODE`**: Set to `true`, `1`, or `yes` to enable live mode with personal tokens
 - When not set or disabled, the system uses fixture data (default behavior)
 
 ### User Identity in Live Mode
 
-When making API calls in live mode, the system uses the `X-User-Id` header to associate requests with users. The token provider reads from `GITHUB_TOKEN` regardless of user ID (for now).
+When making API calls in live mode, the system uses the `X-User-Id` header to associate requests with users.
 
 ```bash
 curl -s http://localhost:8080/v1/command \
@@ -121,7 +167,7 @@ curl -s http://localhost:8080/v1/command \
 
 ### Connection Metadata
 
-GitHub connection metadata (installation IDs, token references, scopes) is stored in the database. Raw tokens are **never** stored in the database.
+GitHub connection metadata (installation IDs, token references, scopes) is stored in the database. Raw tokens are **never** stored in the database. Tokens are managed in memory with automatic refresh.
 
 Create a connection:
 
