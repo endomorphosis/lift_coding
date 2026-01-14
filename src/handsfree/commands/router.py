@@ -130,6 +130,9 @@ class CommandRouter:
         if profile_config.profile == Profile.WORKOUT:
             spoken_text = f"{summary} Confirm?"
 
+        # Apply profile-based truncation
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
         return {
             "status": "needs_confirmation",
             "intent": intent.to_dict(),
@@ -169,10 +172,11 @@ class CommandRouter:
     ) -> dict[str, Any]:
         """Handle system.repeat to replay last response."""
         if not session_id or session_id not in self._last_responses:
+            spoken_text = profile_config.truncate_spoken_text("Nothing to repeat.")
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
-                "spoken_text": "Nothing to repeat.",
+                "spoken_text": spoken_text,
             }
 
         # Return the last response for this session
@@ -186,20 +190,24 @@ class CommandRouter:
     ) -> dict[str, Any]:
         """Handle system.next to advance through list items."""
         if not session_id or session_id not in self._navigation_state:
+            spoken_text = profile_config.truncate_spoken_text(
+                "No list to navigate. Try asking for inbox or PR summary first."
+            )
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
-                "spoken_text": "No list to navigate. Try asking for inbox or PR summary first.",
+                "spoken_text": spoken_text,
             }
 
         items, current_index = self._navigation_state[session_id]
         next_index = current_index + 1
 
         if next_index >= len(items):
+            spoken_text = profile_config.truncate_spoken_text("No more items.")
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
-                "spoken_text": "No more items.",
+                "spoken_text": spoken_text,
             }
 
         # Update navigation state
@@ -277,6 +285,9 @@ class CommandRouter:
             subtitle = card_data.get("subtitle", "")
             spoken_text = f"Item {index + 1} of {total}: {title}. {subtitle}"
 
+        # Apply profile-based truncation
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
         return {
             "status": "ok",
             "intent": {
@@ -294,18 +305,22 @@ class CommandRouter:
         """Handle system.confirm - execute pending action."""
         # In a real implementation, this would get the pending token from context
         # For now, return a placeholder
+        spoken_text = profile_config.truncate_spoken_text(
+            "Confirmation received. This will be implemented in the API endpoint."
+        )
         return {
             "status": "ok",
             "intent": intent.to_dict(),
-            "spoken_text": "Confirmation received. This will be implemented in the API endpoint.",
+            "spoken_text": spoken_text,
         }
 
     def _handle_cancel(self, intent: ParsedIntent, profile_config: ProfileConfig) -> dict[str, Any]:
         """Handle system.cancel - cancel pending action."""
+        spoken_text = profile_config.truncate_spoken_text("Cancelled.")
         return {
             "status": "ok",
             "intent": intent.to_dict(),
-            "spoken_text": "Cancelled.",
+            "spoken_text": spoken_text,
         }
 
     def _handle_set_profile(
@@ -313,10 +328,11 @@ class CommandRouter:
     ) -> dict[str, Any]:
         """Handle system.set_profile to change user profile."""
         profile_name = intent.entities.get("profile", "default")
+        spoken_text = profile_config.truncate_spoken_text(f"Switched to {profile_name} mode.")
         return {
             "status": "ok",
             "intent": intent.to_dict(),
-            "spoken_text": f"Switched to {profile_name} mode.",
+            "spoken_text": spoken_text,
         }
 
     def _handle_inbox_list(
@@ -327,6 +343,9 @@ class CommandRouter:
         spoken_text = "You have 2 PRs waiting for review and 1 failing check."
         if profile_config.profile == Profile.WORKOUT:
             spoken_text = "2 PRs, 1 failing."
+
+        # Apply profile-based truncation
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
         return {
             "status": "ok",
@@ -352,6 +371,9 @@ class CommandRouter:
         else:
             spoken_text = "PR intent recognized but not implemented."
 
+        # Apply profile-based truncation
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
         return {
             "status": "ok",
             "intent": intent.to_dict(),
@@ -365,6 +387,9 @@ class CommandRouter:
         spoken_text = "All checks passing."
         if profile_config.profile == Profile.WORKOUT:
             spoken_text = "Checks OK."
+
+        # Apply profile-based truncation
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
         return {
             "status": "ok",
@@ -380,10 +405,11 @@ class CommandRouter:
             # This should normally be caught by confirmation flow,
             # but handle it here if confirmation was bypassed
             if not self._agent_service:
+                spoken_text = profile_config.truncate_spoken_text("Agent service not available.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
-                    "spoken_text": "Agent service not available.",
+                    "spoken_text": spoken_text,
                 }
 
             # Extract entities
@@ -411,6 +437,7 @@ class CommandRouter:
             )
 
             spoken_text = result.get("spoken_text", "Agent task created.")
+            spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
             return {
                 "status": "ok",
@@ -426,13 +453,17 @@ class CommandRouter:
                 result = self._agent_service.get_status(user_id="default-user")
                 spoken_text = result.get("spoken_text", "No agent tasks.")
 
+            spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
                 "spoken_text": spoken_text,
             }
         else:
-            spoken_text = "Agent intent recognized but not implemented."
+            spoken_text = profile_config.truncate_spoken_text(
+                "Agent intent recognized but not implemented."
+            )
 
         return {
             "status": "ok",
@@ -444,10 +475,11 @@ class CommandRouter:
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
         """Handle unknown intents."""
+        spoken_text = profile_config.truncate_spoken_text("I didn't catch that. Can you try again?")
         return {
             "status": "error",
             "intent": intent.to_dict(),
-            "spoken_text": "I didn't catch that. Can you try again?",
+            "spoken_text": spoken_text,
         }
 
     def _handle_request_review_with_policy(

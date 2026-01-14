@@ -557,6 +557,11 @@ def _convert_router_response_to_command_response(
     # Handle special intents with fixture-backed handlers
     cards: list[UICard] = []
 
+    # Get profile config for applying truncation
+    from handsfree.commands.profiles import ProfileConfig
+
+    profile_config = ProfileConfig.for_profile(profile)
+
     if parsed_intent.name == "inbox.list":
         # Use fixture-backed inbox handler
         try:
@@ -564,6 +569,7 @@ def _convert_router_response_to_command_response(
                 provider=_github_provider,
                 user="fixture-user",
                 privacy_mode=True,
+                profile_config=profile_config,
             )
             items = inbox_result.get("items", [])
             spoken_text = inbox_result.get("spoken_text", spoken_text)
@@ -592,6 +598,7 @@ def _convert_router_response_to_command_response(
                     repo="fixture/repo",
                     pr_number=pr_number,
                     privacy_mode=True,
+                    profile_config=profile_config,
                 )
                 spoken_text = pr_result.get("spoken_text", spoken_text)
 

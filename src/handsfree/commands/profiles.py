@@ -52,3 +52,25 @@ class ProfileConfig:
             ),
         }
         return configs[profile]
+
+    def truncate_spoken_text(self, text: str) -> str:
+        """Truncate spoken text to respect max_spoken_words limit.
+
+        Uses word-based truncation for deterministic, stable behavior.
+
+        Args:
+            text: The spoken text to truncate
+
+        Returns:
+            Truncated text, ending with "..." if truncated
+        """
+        if not text:
+            return text
+
+        words = text.split()
+        if len(words) <= self.max_spoken_words:
+            return text
+
+        # Truncate to max words and add ellipsis
+        truncated_words = words[: self.max_spoken_words]
+        return " ".join(truncated_words) + "..."
