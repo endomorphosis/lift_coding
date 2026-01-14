@@ -11,32 +11,33 @@ import pytest
 # Test helper to mock openai module
 def _setup_mock_openai(api_key="sk-test-key", mock_response=None):
     """Helper to set up mocked openai module for testing.
-    
+
     Args:
         api_key: API key to set in environment
         mock_response: Response to return from transcriptions.create call
-        
+
     Returns:
         Tuple of (mock_openai, mock_client)
     """
     if api_key:
         os.environ["OPENAI_API_KEY"] = api_key
-    
+
     # Mock openai module
     mock_openai = MagicMock()
     mock_client = MagicMock()
     mock_openai.OpenAI.return_value = mock_client
-    
+
     if mock_response is not None:
         mock_client.audio.transcriptions.create.return_value = mock_response
-    
+
     sys.modules["openai"] = mock_openai
-    
+
     # Reload the module to pick up the mock
     import importlib
     import handsfree.stt.openai_provider
+
     importlib.reload(handsfree.stt.openai_provider)
-    
+
     return mock_openai, mock_client
 
 

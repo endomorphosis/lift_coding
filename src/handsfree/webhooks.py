@@ -3,10 +3,35 @@
 import hashlib
 import hmac
 import logging
+import os
 import uuid
 from typing import Any
 
 logger = logging.getLogger(__name__)
+
+
+def get_webhook_secret() -> str | None:
+    """Get webhook secret from environment.
+
+    Returns:
+        Webhook secret string if GITHUB_WEBHOOK_SECRET is set, None otherwise (dev mode).
+    """
+    return os.environ.get("GITHUB_WEBHOOK_SECRET")
+
+
+def extract_installation_id(payload: dict[str, Any]) -> int | None:
+    """Extract GitHub App installation ID from webhook payload.
+
+    Args:
+        payload: Raw webhook payload.
+
+    Returns:
+        Installation ID if present, None otherwise.
+    """
+    # Installation can be at top level or nested in various ways
+    if "installation" in payload and isinstance(payload["installation"], dict):
+        return payload["installation"].get("id")
+    return None
 
 
 class WebhookVerificationError(Exception):

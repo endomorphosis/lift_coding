@@ -64,7 +64,7 @@ class TokenProvider(ABC):
 
 class TokenProvider(ABC):
     """Abstract interface for token providers (used by LiveGitHubProvider).
-    
+
     This is a simplified interface that doesn't require user_id parameter.
     """
 
@@ -83,7 +83,7 @@ class GitHubAuthProvider(ABC):
 
     Legacy interface that includes user_id parameter.
     Kept for backward compatibility with existing code.
-    
+
     This is the legacy interface used by GitHubProvider.
     """
 
@@ -420,7 +420,7 @@ class FixtureTokenProvider(TokenProvider):
 
 class EnvTokenProvider(TokenProvider):
     """Token provider that reads from GITHUB_TOKEN environment variable.
-    
+
     This is a simplified provider for LiveGitHubProvider that doesn't
     require per-user tokens.
     """
@@ -454,18 +454,17 @@ def get_default_auth_provider() -> GitHubAuthProvider:
 
 def get_token_provider() -> TokenProvider:
     """Get a token provider for LiveGitHubProvider based on environment.
-    
+
     Checks HANDS_FREE_GITHUB_MODE or GITHUB_LIVE_MODE environment variables.
 
     Returns:
         EnvTokenProvider if live mode is enabled, otherwise FixtureTokenProvider.
     """
     # Check both environment variable names as per problem statement
-    live_mode = (
-        os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live"
-        or os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
-    )
-    
+    live_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live" or os.getenv(
+        "GITHUB_LIVE_MODE", ""
+    ).lower() in ("true", "1", "yes")
+
     if live_mode and os.getenv("GITHUB_TOKEN"):
         return EnvTokenProvider()
     return FixtureTokenProvider()

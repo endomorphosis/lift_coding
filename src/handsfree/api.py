@@ -244,9 +244,10 @@ async def github_webhook(
     # Read raw body for signature verification
     body = await request.body()
 
-    # Verify signature (dev mode: secret=None allows 'dev' signature)
-    # In production, get secret from environment/config
-    webhook_secret = None  # Dev mode
+    # Get webhook secret from environment (None in dev/test mode)
+    from handsfree.webhooks import get_webhook_secret
+
+    webhook_secret = get_webhook_secret()
     signature_ok = verify_github_signature(body, x_hub_signature_256, webhook_secret)
 
     if not signature_ok:
@@ -286,7 +287,7 @@ async def github_webhook(
             normalized.get("action"),
         )
         # Emit notification for normalized webhook events
-        _emit_webhook_notification(normalized)
+        _emit_webhook_notification(normalized, payload)
 
     return JSONResponse(
         status_code=status.HTTP_202_ACCEPTED,
@@ -1488,24 +1489,60 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
     ]
 
 
-def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
+def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
     """Emit notifications for normalized webhook events.
+
+    Determines affected user(s) based on repository subscriptions and GitHub connections,
+    then creates notifications for each affected user.
 
     Args:
         normalized: Normalized webhook event data.
+        raw_payload: Raw webhook payload (for extracting installation_id).
     """
+    from handsfree.db.repo_subscriptions import (
+        get_users_for_installation,
+        get_users_for_repo,
+    )
+    from handsfree.webhooks import extract_installation_id
+
     db = get_db()
     event_type = normalized.get("event_type")
     action = normalized.get("action")
+    repo = normalized.get("repo")
 
-    # For MVP, use fixture user ID
-    # In production, we'd determine affected users from repo subscriptions
-    user_id = FIXTURE_USER_ID
+    if not repo:
+        logger.warning("No repository in normalized event, skipping notification")
+        return
 
-    # Generate notification message based on event type
+    # Determine affected users based on repo subscriptions and installation
+    affected_users = set()
+
+    # First, try to get users by repository name
+    repo_users = get_users_for_repo(db, repo)
+    affected_users.update(repo_users)
+
+    # Also try to get users by installation_id if present
+    installation_id = extract_installation_id(raw_payload)
+    if installation_id:
+        installation_users = get_users_for_installation(db, installation_id)
+        affected_users.update(installation_users)
+
+    # If no users found, log and return (no-op instead of routing to fixture user)
+    if not affected_users:
+        logger.info(
+            "No users subscribed to repo '%s' (installation_id=%s), skipping notification",
+            repo,
+            installation_id,
+        )
+        return
+
+    # Generate notification message and type based on event type
+    notification_type = None
+    message = None
+    metadata = {}
+
     if event_type == "pull_request":
         pr_number = normalized.get("pr_number")
-        repo = normalized.get("repo")
         pr_title = normalized.get("pr_title", "")
 
         if action == "opened":
@@ -1524,81 +1561,76 @@ def _emit_webhook_notification(normalized: dict[str, Any]) -> None:
             message = f"PR #{pr_number} {action} in {repo}: {pr_title}"
             notification_type = f"webhook.pr_{action}"
 
-        create_notification(
-            conn=db,
-            user_id=user_id,
-            event_type=notification_type,
-            message=message,
-            metadata={
-                "pr_number": pr_number,
-                "repo": repo,
-                "pr_url": normalized.get("pr_url"),
-            },
-        )
+        metadata = {
+            "pr_number": pr_number,
+            "repo": repo,
+            "pr_url": normalized.get("pr_url"),
+        }
 
     elif event_type == "check_suite" and action == "completed":
-        repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         head_branch = normalized.get("head_branch")
 
         message = f"Check suite {conclusion} on {repo} ({head_branch})"
         notification_type = f"webhook.check_suite_{conclusion}"
 
-        create_notification(
-            conn=db,
-            user_id=user_id,
-            event_type=notification_type,
-            message=message,
-            metadata={
-                "repo": repo,
-                "conclusion": conclusion,
-                "head_branch": head_branch,
-                "pr_numbers": normalized.get("pr_numbers", []),
-            },
-        )
+        metadata = {
+            "repo": repo,
+            "conclusion": conclusion,
+            "head_branch": head_branch,
+            "pr_numbers": normalized.get("pr_numbers", []),
+        }
 
     elif event_type == "check_run" and action == "completed":
-        repo = normalized.get("repo")
         conclusion = normalized.get("conclusion")
         check_run_name = normalized.get("check_run_name")
 
         message = f"Check run '{check_run_name}' {conclusion} on {repo}"
         notification_type = f"webhook.check_run_{conclusion}"
 
-        create_notification(
-            conn=db,
-            user_id=user_id,
-            event_type=notification_type,
-            message=message,
-            metadata={
-                "repo": repo,
-                "conclusion": conclusion,
-                "check_run_name": check_run_name,
-                "pr_numbers": normalized.get("pr_numbers", []),
-            },
-        )
+        metadata = {
+            "repo": repo,
+            "conclusion": conclusion,
+            "check_run_name": check_run_name,
+            "pr_numbers": normalized.get("pr_numbers", []),
+        }
 
     elif event_type == "pull_request_review" and action == "submitted":
         pr_number = normalized.get("pr_number")
-        repo = normalized.get("repo")
         review_state = normalized.get("review_state")
         review_author = normalized.get("review_author")
 
         message = f"Review {review_state} by {review_author} on PR #{pr_number} in {repo}"
         notification_type = f"webhook.review_{review_state}"
 
-        create_notification(
-            conn=db,
-            user_id=user_id,
-            event_type=notification_type,
-            message=message,
-            metadata={
-                "pr_number": pr_number,
-                "repo": repo,
-                "review_state": review_state,
-                "review_author": review_author,
-                "review_url": normalized.get("review_url"),
-            },
+        metadata = {
+            "pr_number": pr_number,
+            "repo": repo,
+            "review_state": review_state,
+            "review_author": review_author,
+            "review_url": normalized.get("review_url"),
+        }
+
+    # Create notification for each affected user
+    if notification_type and message:
+        for user_id in affected_users:
+            create_notification(
+                conn=db,
+                user_id=user_id,
+                event_type=notification_type,
+                message=message,
+                metadata=metadata,
+            )
+            logger.debug(
+                "Created notification for user %s: type=%s",
+                user_id,
+                notification_type,
+            )
+    else:
+        logger.warning(
+            "Could not generate notification for event_type=%s, action=%s",
+            event_type,
+            action,
         )
 
 
