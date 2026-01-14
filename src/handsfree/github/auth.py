@@ -562,6 +562,10 @@ def get_token_provider() -> TokenProvider:
     ).lower() in ("true", "1", "yes")
 
     if live_mode and os.getenv("GITHUB_TOKEN"):
+        # Live mode with token - use UserTokenProvider
+        logger.debug("Using user token provider (live mode)")
+        return UserTokenProvider()
+
     # Check for explicit fixture mode
     github_mode = os.getenv("HANDS_FREE_GITHUB_MODE", "").lower()
     if github_mode == "fixtures":
