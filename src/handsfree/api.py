@@ -213,6 +213,8 @@ def get_status():
     overall_status = "ok"
     if any(dep.status == "unavailable" for dep in dependencies):
         overall_status = "degraded"
+    elif any(dep.status == "degraded" for dep in dependencies):
+        overall_status = "degraded"
 
     return StatusResponse(
         status=overall_status,
