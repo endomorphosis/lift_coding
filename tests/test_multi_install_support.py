@@ -132,9 +132,7 @@ class TestGetInstallationForRepo:
         )
         assert result == 11111
 
-    def test_returns_none_from_repo_subscription_without_installation(
-        self, db_conn, test_user_id
-    ):
+    def test_returns_none_from_repo_subscription_without_installation(self, db_conn, test_user_id):
         """Should fall back when repo subscription has no installation_id."""
         # Create a repo subscription without installation_id
         create_repo_subscription(

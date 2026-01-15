@@ -151,7 +151,7 @@ class GitHubAppTokenProvider(TokenProvider):
     - Private key is stored in memory only, never logged
     - Tokens are cached in memory only, never persisted
     - Token refresh happens automatically before expiry
-    
+
     Thread-safety:
     - Token refresh is protected by a lock to prevent concurrent minting
     """
@@ -189,7 +189,7 @@ class GitHubAppTokenProvider(TokenProvider):
         # Token cache
         self._cached_token: str | None = None
         self._token_expires_at: datetime | None = None
-        
+
         # Thread lock for token refresh
         self._refresh_lock = threading.Lock()
 
@@ -314,7 +314,7 @@ class GitHubAppTokenProvider(TokenProvider):
 
         This method handles token caching and automatic refresh.
         Tokens are refreshed when they are within 5 minutes of expiry.
-        
+
         Thread-safe: Uses a lock to prevent concurrent token refresh.
 
         Returns:
@@ -413,16 +413,16 @@ class UserTokenProvider(TokenProvider):
     This provider implements per-user token retrieval using the connection metadata
     stored in the database. It supports the token selection order:
     1. GitHub App installation token minting (if connection has installation_id)
-    2. GITHUB_TOKEN env fallback for dev
-    3. fixture-only mode otherwise
-    
+    2. GITHUB_TOKEN env fallback (for users with connections but no installation_id)
+    3. fixture-only mode (for users without any connections)
+
     Supports multi-installation scenarios by allowing repo-specific installation selection.
 
     Usage:
         db_conn = init_db()
         provider = UserTokenProvider(db_conn, user_id="user-123")
         token = provider.get_token()
-        
+
         # For repo-specific installation:
         provider = UserTokenProvider(db_conn, user_id="user-123", repo_full_name="owner/repo")
         token = provider.get_token()
@@ -464,6 +464,10 @@ class UserTokenProvider(TokenProvider):
             get_installation_for_repo,
         )
 
+        # Check if user has any connections
+        connections = get_github_connections_by_user(conn=self.db_conn, user_id=self.user_id)
+        has_connections = len(connections) > 0
+
         # If repo_full_name is provided, try to get repo-specific installation
         installation_id = None
         if self.repo_full_name:
@@ -473,13 +477,10 @@ class UserTokenProvider(TokenProvider):
                 repo_full_name=self.repo_full_name,
             )
 
-        # If no repo-specific installation, fall back to user's connections
-        if installation_id is None:
-            connections = get_github_connections_by_user(conn=self.db_conn, user_id=self.user_id)
-            if connections:
-                # Use the most-recent connection
-                connection = connections[0]
-                installation_id = connection.installation_id
+        # If no repo-specific installation, fall back to user's most recent connection
+        if installation_id is None and has_connections:
+            connection = connections[0]
+            installation_id = connection.installation_id
 
         # Priority 1: GitHub App installation token minting
         if installation_id is not None:
@@ -500,12 +501,13 @@ class UserTokenProvider(TokenProvider):
                 installation_id,
             )
 
-        # Priority 2: Environment token fallback for dev
-        if os.getenv("GITHUB_TOKEN"):
+        # Priority 2: Environment token fallback (only for users with connections)
+        # Users with connections are real users, so they can use env token for dev
+        if has_connections and os.getenv("GITHUB_TOKEN"):
             self._cached_provider = EnvTokenProvider()
             return self._cached_provider
 
-        # Priority 3: Fixture-only mode
+        # Priority 3: Fixture-only mode (users without connections for isolation)
         self._cached_provider = FixtureTokenProvider()
         return self._cached_provider
 
@@ -577,7 +579,7 @@ def get_user_token_provider(
 
     This function creates a UserTokenProvider that looks up the user's GitHub
     connection metadata and selects the appropriate token source.
-    
+
     Supports multi-installation scenarios by allowing repo-specific installation selection.
 
     Args:
