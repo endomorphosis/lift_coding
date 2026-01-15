@@ -384,6 +384,9 @@ async def github_webhook(
         signature_ok=signature_ok,
     )
 
+    # Get database connection once for all operations
+    db = get_db()
+
     # Normalize event (if supported) and track processing status
     try:
         normalized = normalize_github_event(x_github_event, payload)
@@ -399,7 +402,6 @@ async def github_webhook(
             # Process installation lifecycle events
             from handsfree.installation_lifecycle import process_installation_event
 
-            db = get_db()
             event_type_normalized = normalized.get("event_type")
             if event_type_normalized in ("installation", "installation_repositories"):
                 process_installation_event(db, normalized, payload)
