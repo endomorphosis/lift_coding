@@ -200,9 +200,16 @@ class CreateGitHubConnectionRequest(BaseModel):
     """Request to create a GitHub connection."""
 
     installation_id: int | None = None
+    token: str | None = Field(
+        default=None,
+        description="GitHub access token (will be stored securely in secret manager)",
+    )
     token_ref: str | None = Field(
         default=None,
-        description="Reference to token in secret manager (NOT the actual token)",
+        description=(
+            "Reference to token in secret manager (NOT the actual token). "
+            "Use this OR 'token', not both."
+        ),
     )
     scopes: str | None = Field(
         default=None,
