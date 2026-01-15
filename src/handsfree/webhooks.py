@@ -4,6 +4,7 @@ import hashlib
 import hmac
 import logging
 import os
+import re
 import uuid
 from typing import Any
 
@@ -158,6 +159,33 @@ def normalize_github_event(
                 "review_author": review.get("user", {}).get("login"),
                 "review_body": review.get("body"),
                 "review_url": review.get("html_url"),
+            }
+
+    elif event_type == "issue_comment":
+        action = payload.get("action")
+        if action == "created":
+            comment = payload.get("comment", {})
+            issue = payload.get("issue", {})
+            comment_body = comment.get("body", "")
+            
+            # Extract @mentions from comment body
+            mentions = re.findall(r"@(\w+)", comment_body)
+            
+            # Check if this is a PR comment (issue with pull_request field)
+            is_pr = "pull_request" in issue
+            issue_or_pr_number = issue.get("number")
+            
+            return {
+                "event_type": "issue_comment",
+                "action": action,
+                "repo": payload.get("repository", {}).get("full_name"),
+                "issue_number": issue_or_pr_number,
+                "is_pull_request": is_pr,
+                "comment_id": comment.get("id"),
+                "comment_author": comment.get("user", {}).get("login"),
+                "comment_url": comment.get("html_url"),
+                "comment_body": comment_body,
+                "mentions": mentions,
             }
 
     # Unsupported event type or action

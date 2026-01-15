@@ -2717,6 +2717,33 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
             "review_url": normalized.get("review_url"),
         }
 
+    elif event_type == "issue_comment" and action == "created":
+        issue_number = normalized.get("issue_number")
+        is_pr = normalized.get("is_pull_request", False)
+        comment_author = normalized.get("comment_author")
+        comment_url = normalized.get("comment_url")
+        mentions = normalized.get("mentions", [])
+
+        # Only create notifications if there are mentions
+        if mentions:
+            # Generate mention notification for all subscribed users
+            item_type = "PR" if is_pr else "issue"
+            message = f"Mention by {comment_author} on {item_type} #{issue_number} in {repo}"
+            notification_type = "webhook.mention"
+
+            metadata = {
+                "issue_number": issue_number,
+                "is_pull_request": is_pr,
+                "repo": repo,
+                "comment_author": comment_author,
+                "comment_url": comment_url,
+                "mentions": mentions,
+            }
+        else:
+            # No mentions, skip notification
+            notification_type = None
+            message = None
+
     # Create notification for each affected user
     if notification_type and message:
         for user_id in affected_users:

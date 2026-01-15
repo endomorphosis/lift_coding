@@ -1,0 +1,47 @@
+{
+  "action": "created",
+  "issue": {
+    "number": 42,
+    "title": "Add support for mentions in issue comments",
+    "html_url": "https://github.com/testorg/testrepo/issues/42",
+    "user": {
+      "login": "issue_creator",
+      "id": 1111111,
+      "type": "User"
+    },
+    "state": "open",
+    "pull_request": {
+      "url": "https://api.github.com/repos/testorg/testrepo/pulls/42",
+      "html_url": "https://github.com/testorg/testrepo/pull/42"
+    }
+  },
+  "comment": {
+    "id": 999888777,
+    "html_url": "https://github.com/testorg/testrepo/issues/42#issuecomment-999888777",
+    "user": {
+      "login": "commenter",
+      "id": 2222222,
+      "type": "User"
+    },
+    "body": "Hey @testuser and @anotheruser, please take a look at this!",
+    "created_at": "2026-01-15T06:00:00Z",
+    "updated_at": "2026-01-15T06:00:00Z"
+  },
+  "repository": {
+    "id": 987654321,
+    "name": "testrepo",
+    "full_name": "testorg/testrepo",
+    "owner": {
+      "login": "testorg",
+      "id": 7654321,
+      "type": "Organization"
+    },
+    "private": false,
+    "html_url": "https://github.com/testorg/testrepo"
+  },
+  "sender": {
+    "login": "commenter",
+    "id": 2222222,
+    "type": "User"
+  }
+}
