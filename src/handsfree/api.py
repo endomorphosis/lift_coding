@@ -1481,8 +1481,13 @@ async def confirm_command(
         metrics.record_confirmation("ok")
     elif response.status == CommandStatus.ERROR:
         metrics.record_confirmation("error")
+    elif response.status == CommandStatus.NEEDS_CONFIRMATION:
+        # This shouldn't normally happen for confirmations, but track it
+        metrics.record_confirmation("needs_confirmation")
     else:
-        metrics.record_confirmation("other")
+        # Log unexpected status for debugging
+        logger.warning("Unexpected confirmation status: %s", response.status)
+        metrics.record_confirmation("unexpected")
 
     return response
 

@@ -64,6 +64,23 @@ class MetricsCollector:
         with self._lock:
             self.confirm_outcomes[outcome] = self.confirm_outcomes.get(outcome, 0) + 1
 
+    def _calculate_percentile(self, sorted_values: list[float], percentile: float) -> float | None:
+        """Calculate a percentile from sorted values.
+
+        Args:
+            sorted_values: List of values sorted in ascending order
+            percentile: Percentile to calculate (0.0 to 1.0)
+
+        Returns:
+            The percentile value, or None if list is empty
+        """
+        if not sorted_values:
+            return None
+
+        n = len(sorted_values)
+        idx = int(n * percentile)
+        return sorted_values[min(idx, n - 1)]
+
     def get_snapshot(self) -> dict[str, Any]:
         """Get a snapshot of current metrics.
 
@@ -77,17 +94,8 @@ class MetricsCollector:
 
             if self.command_latencies:
                 sorted_latencies = sorted(self.command_latencies)
-                n = len(sorted_latencies)
-
-                # Calculate p50 (median)
-                if n > 0:
-                    p50_idx = int(n * 0.5)
-                    latency_p50 = sorted_latencies[min(p50_idx, n - 1)]
-
-                # Calculate p95
-                if n > 0:
-                    p95_idx = int(n * 0.95)
-                    latency_p95 = sorted_latencies[min(p95_idx, n - 1)]
+                latency_p50 = self._calculate_percentile(sorted_latencies, 0.5)
+                latency_p95 = self._calculate_percentile(sorted_latencies, 0.95)
 
             return {
                 "intent_counts": dict(self.intent_counts),
