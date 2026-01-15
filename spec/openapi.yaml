@@ -76,6 +76,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/InboxResponse'
 
+  /v1/status:
+    get:
+      summary: Get service status
+      operationId: getStatus
+      description: >
+        Lightweight health/status endpoint for the mobile app and simulator.
+        Returns service status, version, timestamp, and dependency readiness
+        (e.g., DuckDB). Does not expose sensitive configuration values.
+      responses:
+        '200':
+          description: Service status information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+
   /v1/webhooks/github:
     post:
       summary: Receive GitHub webhooks (verified by signature)
@@ -439,6 +455,42 @@ components:
         details:
           type: object
           additionalProperties: true
+
+    DependencyStatus:
+      type: object
+      required: [name, status]
+      properties:
+        name:
+          type: string
+          description: Name of the dependency (e.g., duckdb, redis)
+        status:
+          type: string
+          enum: [ok, degraded, unavailable]
+          description: Status of the dependency
+        message:
+          type: string
+          description: Optional message with additional details
+
+    StatusResponse:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, unavailable]
+          description: Overall service status
+        version:
+          type: string
+          description: Service version if available
+        timestamp:
+          type: string
+          format: date-time
+          description: Current server time (ISO 8601)
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependencyStatus'
+          description: Status of service dependencies
 
     TTSRequest:
       type: object
