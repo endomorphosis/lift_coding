@@ -298,8 +298,8 @@ def test_rerun_checks_rate_limited(reset_db, monkeypatch):
         require_confirmation=False,
     )
 
-    # Make 5 successful requests (should hit rate limit at max_requests=5)
-    for i in range(5):
+    # Make 2 successful requests (burst_max is 2 for rerun, will hit burst limit after this)
+    for i in range(2):
         response = client.post(
             "/v1/actions/rerun-checks",
             json={
@@ -309,7 +309,7 @@ def test_rerun_checks_rate_limited(reset_db, monkeypatch):
         )
         assert response.status_code == 200
 
-    # 6th request should be rate limited
+    # 3rd request should be rate limited (burst limit exceeded)
     response = client.post(
         "/v1/actions/rerun-checks",
         json={
@@ -320,8 +320,12 @@ def test_rerun_checks_rate_limited(reset_db, monkeypatch):
 
     assert response.status_code == 429
     data = response.json()
-    assert "rate limit" in data["message"].lower()
-    assert "retry_after" in data
+    # Check for either rate limit or burst limit message
+    assert (
+        "rate limit" in data["detail"]["message"].lower()
+        or "burst limit" in data["detail"]["message"].lower()
+    )
+    assert data["detail"]["retry_after"] is not None
 
     # Check audit log shows rate limit
     from handsfree.db.action_logs import get_action_logs

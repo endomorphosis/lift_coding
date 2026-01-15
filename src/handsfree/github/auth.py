@@ -13,6 +13,7 @@ Security notes:
 
 import logging
 import os
+import threading
 import time
 from abc import ABC, abstractmethod
 from datetime import UTC, datetime, timedelta
@@ -150,6 +151,9 @@ class GitHubAppTokenProvider(TokenProvider):
     - Private key is stored in memory only, never logged
     - Tokens are cached in memory only, never persisted
     - Token refresh happens automatically before expiry
+
+    Thread-safety:
+    - Token refresh is protected by a lock to prevent concurrent minting
     """
 
     # Token refresh window: refresh when less than 5 minutes remain
@@ -185,6 +189,9 @@ class GitHubAppTokenProvider(TokenProvider):
         # Token cache
         self._cached_token: str | None = None
         self._token_expires_at: datetime | None = None
+
+        # Thread lock for token refresh
+        self._refresh_lock = threading.Lock()
 
         # Validate configuration
         if not self.app_id or not self.private_key_pem or not self.installation_id:
@@ -308,6 +315,8 @@ class GitHubAppTokenProvider(TokenProvider):
         This method handles token caching and automatic refresh.
         Tokens are refreshed when they are within 5 minutes of expiry.
 
+        Thread-safe: Uses a lock to prevent concurrent token refresh.
+
         Returns:
             GitHub installation access token, or None if not configured.
         """
@@ -315,13 +324,21 @@ class GitHubAppTokenProvider(TokenProvider):
             return None
 
         try:
-            if self._should_refresh_token():
+            # Fast path: check if we can use cached token without lock
+            if not self._should_refresh_token():
+                logger.debug("Using cached GitHub App installation token")
+                return self._cached_token
+
+            # Slow path: acquire lock and refresh token
+            with self._refresh_lock:
+                # Double-check after acquiring lock (another thread may have refreshed)
+                if not self._should_refresh_token():
+                    logger.debug("Using cached GitHub App installation token (after lock)")
+                    return self._cached_token
+
                 logger.debug("Refreshing GitHub App installation token")
                 self._cached_token, self._token_expires_at = self._mint_installation_token()
-            else:
-                logger.debug("Using cached GitHub App installation token")
-
-            return self._cached_token
+                return self._cached_token
 
         except Exception as e:
             logger.error("Failed to get GitHub App token: %s", str(e))
@@ -396,25 +413,39 @@ class UserTokenProvider(TokenProvider):
     This provider implements per-user token retrieval using the connection metadata
     stored in the database. It supports the token selection order:
     1. GitHub App installation token minting (if connection has installation_id)
-    2. GITHUB_TOKEN env fallback for dev
-    3. fixture-only mode otherwise
+    2. GITHUB_TOKEN env fallback (for users with connections but no installation_id)
+    3. fixture-only mode (for users without any connections)
+
+    Supports multi-installation scenarios by allowing repo-specific installation selection.
 
     Usage:
         db_conn = init_db()
         provider = UserTokenProvider(db_conn, user_id="user-123")
         token = provider.get_token()
+
+        # For repo-specific installation:
+        provider = UserTokenProvider(db_conn, user_id="user-123", repo_full_name="owner/repo")
+        token = provider.get_token()
     """
 
-    def __init__(self, db_conn: Any, user_id: str, http_client: Any | None = None):
+    def __init__(
+        self,
+        db_conn: Any,
+        user_id: str,
+        repo_full_name: str | None = None,
+        http_client: Any | None = None,
+    ):
         """Initialize the user token provider.
 
         Args:
             db_conn: Database connection for looking up connection metadata.
             user_id: User ID to get token for.
+            repo_full_name: Optional repository name for installation selection.
             http_client: Optional HTTP client for token minting (for testing).
         """
         self.db_conn = db_conn
         self.user_id = user_id
+        self.repo_full_name = repo_full_name
         self.http_client = http_client
         self._cached_provider: TokenProvider | None = None
 
@@ -428,25 +459,38 @@ class UserTokenProvider(TokenProvider):
             return self._cached_provider
 
         # Import here to avoid circular dependency
-        from handsfree.db.github_connections import get_github_connections_by_user
+        from handsfree.db.github_connections import (
+            get_github_connections_by_user,
+            get_installation_for_repo,
+        )
 
+        # Check if user has any connections
         connections = get_github_connections_by_user(conn=self.db_conn, user_id=self.user_id)
-        if not connections:
-            self._cached_provider = FixtureTokenProvider()
-            return self._cached_provider
+        has_connections = len(connections) > 0
 
-        # Use the most-recent connection
-        connection = connections[0]
+        # If repo_full_name is provided, try to get repo-specific installation
+        installation_id = None
+        if self.repo_full_name:
+            installation_id = get_installation_for_repo(
+                conn=self.db_conn,
+                user_id=self.user_id,
+                repo_full_name=self.repo_full_name,
+            )
+
+        # If no repo-specific installation, fall back to user's most recent connection
+        if installation_id is None and has_connections:
+            connection = connections[0]
+            installation_id = connection.installation_id
 
         # Priority 1: GitHub App installation token minting
-        if connection.installation_id is not None:
+        if installation_id is not None:
             app_id = os.getenv("GITHUB_APP_ID")
             private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
             if app_id and private_key:
                 self._cached_provider = GitHubAppTokenProvider(
                     app_id=app_id,
                     private_key_pem=private_key,
-                    installation_id=str(connection.installation_id),
+                    installation_id=str(installation_id),
                     http_client=self.http_client,
                 )
                 return self._cached_provider
@@ -454,15 +498,16 @@ class UserTokenProvider(TokenProvider):
             logger.warning(
                 "User %s has installation_id=%s but GitHub App is not configured",
                 self.user_id,
-                connection.installation_id,
+                installation_id,
             )
 
-        # Priority 2: Environment token fallback for dev
-        if os.getenv("GITHUB_TOKEN"):
+        # Priority 2: Environment token fallback (only for users with connections)
+        # Users with connections are real users, so they can use env token for dev
+        if has_connections and os.getenv("GITHUB_TOKEN"):
             self._cached_provider = EnvTokenProvider()
             return self._cached_provider
 
-        # Priority 3: Fixture-only mode
+        # Priority 3: Fixture-only mode (users without connections for isolation)
         self._cached_provider = FixtureTokenProvider()
         return self._cached_provider
 
@@ -525,19 +570,30 @@ def get_token_provider() -> TokenProvider:
 
 
 def get_user_token_provider(
-    db_conn: Any, user_id: str, http_client: Any | None = None
+    db_conn: Any,
+    user_id: str,
+    repo_full_name: str | None = None,
+    http_client: Any | None = None,
 ) -> TokenProvider:
     """Get a token provider for a specific user using their connection metadata.
 
     This function creates a UserTokenProvider that looks up the user's GitHub
     connection metadata and selects the appropriate token source.
 
+    Supports multi-installation scenarios by allowing repo-specific installation selection.
+
     Args:
         db_conn: Database connection for looking up connection metadata.
         user_id: User ID to get token for.
+        repo_full_name: Optional repository name for installation selection.
         http_client: Optional HTTP client for token minting (for testing).
 
     Returns:
         TokenProvider instance for the specified user.
     """
-    return UserTokenProvider(db_conn=db_conn, user_id=user_id, http_client=http_client)
+    return UserTokenProvider(
+        db_conn=db_conn,
+        user_id=user_id,
+        repo_full_name=repo_full_name,
+        http_client=http_client,
+    )

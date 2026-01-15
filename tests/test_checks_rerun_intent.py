@@ -331,8 +331,8 @@ class TestChecksRerunRateLimiting:
             require_confirmation=False,
         )
 
-        # Make 5 requests (should hit rate limit at max_requests=5)
-        for i in range(5):
+        # Make 2 requests (burst_max is 2 for rerun, will hit burst limit after this)
+        for i in range(2):
             intent = parser.parse(f"rerun checks for pr {100 + i}")
             response = db_router.route(
                 intent,
@@ -343,7 +343,7 @@ class TestChecksRerunRateLimiting:
             )
             assert response["status"] == "ok"
 
-        # 6th request should be rate limited
+        # 3rd request should be rate limited (burst limit exceeded)
         intent = parser.parse("rerun checks for pr 200")
         response = db_router.route(
             intent,

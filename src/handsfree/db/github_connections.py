@@ -225,3 +225,49 @@ def delete_github_connection(
     )
 
     return True
+
+
+def get_installation_for_repo(
+    conn: duckdb.DuckDBPyConnection,
+    user_id: str,
+    repo_full_name: str,
+) -> int | None:
+    """Get the best installation_id for a given repository and user.
+
+    This function helps with multi-installation support by finding the appropriate
+    installation_id to use when making API calls for a specific repository.
+
+    Selection order:
+    1. Check repo_subscriptions for explicit repo->installation mapping
+    2. Fall back to user's most recent github_connection with installation_id
+
+    Args:
+        conn: Database connection.
+        user_id: UUID of the user.
+        repo_full_name: Full repository name (e.g., "owner/repo").
+
+    Returns:
+        Installation ID for the repo, or None if not found.
+    """
+    # First try to find an explicit mapping in repo_subscriptions
+    result = conn.execute(
+        """
+        SELECT installation_id
+        FROM repo_subscriptions
+        WHERE user_id = ? AND repo_full_name = ? AND installation_id IS NOT NULL
+        ORDER BY created_at DESC
+        LIMIT 1
+        """,
+        [user_id, repo_full_name],
+    ).fetchone()
+
+    if result and result[0] is not None:
+        return result[0]
+
+    # Fall back to user's most recent github_connection with installation_id
+    connections = get_github_connections_by_user(conn, user_id)
+    for connection in connections:
+        if connection.installation_id is not None:
+            return connection.installation_id
+
+    return None

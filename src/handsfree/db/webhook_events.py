@@ -23,6 +23,9 @@ class WebhookEvent:
     signature_ok: bool
     payload: dict[str, Any] | None
     received_at: datetime
+    processed_ok: bool | None = None
+    processing_error: str | None = None
+    processed_at: datetime | None = None
 
 
 def store_webhook_event(
@@ -32,6 +35,9 @@ def store_webhook_event(
     event_type: str | None = None,
     delivery_id: str | None = None,
     payload: dict[str, Any] | None = None,
+    processed_ok: bool | None = None,
+    processing_error: str | None = None,
+    processed_at: datetime | None = None,
 ) -> WebhookEvent:
     """Store a webhook event.
 
@@ -42,6 +48,9 @@ def store_webhook_event(
         event_type: Type of event (e.g., "push", "pull_request").
         delivery_id: Unique delivery ID from the webhook provider.
         payload: Full webhook payload (JSON-serializable).
+        processed_ok: Whether the event was processed successfully (None if not yet processed).
+        processing_error: Redacted error message if processing failed.
+        processed_at: Timestamp when processing was attempted.
 
     Returns:
         Created WebhookEvent object.
@@ -52,10 +61,22 @@ def store_webhook_event(
     conn.execute(
         """
         INSERT INTO webhook_events
-        (id, source, event_type, delivery_id, signature_ok, payload, received_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (id, source, event_type, delivery_id, signature_ok, payload, received_at,
+         processed_ok, processing_error, processed_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
-        [event_id, source, event_type, delivery_id, signature_ok, payload, now],
+        [
+            event_id,
+            source,
+            event_type,
+            delivery_id,
+            signature_ok,
+            payload,
+            now,
+            processed_ok,
+            processing_error,
+            processed_at,
+        ],
     )
 
     return WebhookEvent(
@@ -66,6 +87,9 @@ def store_webhook_event(
         signature_ok=signature_ok,
         payload=payload,
         received_at=now,
+        processed_ok=processed_ok,
+        processing_error=processing_error,
+        processed_at=processed_at,
     )
 
 
@@ -90,7 +114,8 @@ def get_webhook_events(
     """
     query = (
         "SELECT id, source, event_type, delivery_id, signature_ok, payload, "
-        "received_at FROM webhook_events WHERE 1=1"
+        "received_at, processed_ok, processing_error, processed_at "
+        "FROM webhook_events WHERE 1=1"
     )
     params = []
 
@@ -120,6 +145,9 @@ def get_webhook_events(
             signature_ok=row[4],
             payload=json.loads(row[5]) if isinstance(row[5], str) and row[5] else row[5],
             received_at=row[6],
+            processed_ok=row[7],
+            processing_error=row[8],
+            processed_at=row[9],
         )
         for row in results
     ]
@@ -140,7 +168,8 @@ def get_webhook_event_by_id(
     """
     result = conn.execute(
         """
-        SELECT id, source, event_type, delivery_id, signature_ok, payload, received_at
+        SELECT id, source, event_type, delivery_id, signature_ok, payload, received_at,
+               processed_ok, processing_error, processed_at
         FROM webhook_events
         WHERE id = ?
         """,
@@ -158,6 +187,34 @@ def get_webhook_event_by_id(
         signature_ok=result[4],
         payload=json.loads(result[5]) if isinstance(result[5], str) and result[5] else result[5],
         received_at=result[6],
+        processed_ok=result[7],
+        processing_error=result[8],
+        processed_at=result[9],
+    )
+
+
+def update_webhook_processing_status(
+    conn: duckdb.DuckDBPyConnection,
+    event_id: str,
+    processed_ok: bool,
+    processing_error: str | None = None,
+) -> None:
+    """Update the processing status of a webhook event.
+
+    Args:
+        conn: Database connection.
+        event_id: The event ID.
+        processed_ok: Whether processing was successful.
+        processing_error: Error message if processing failed (should be redacted).
+    """
+    processed_at = datetime.now(UTC)
+    conn.execute(
+        """
+        UPDATE webhook_events
+        SET processed_ok = ?, processing_error = ?, processed_at = ?
+        WHERE id = ?
+        """,
+        [processed_ok, processing_error, processed_at, event_id],
     )
 
 
@@ -240,6 +297,9 @@ class DBWebhookStore:
             "signature_ok": event.signature_ok,
             "payload": event.payload,
             "received_at": event.received_at,
+            "processed_ok": event.processed_ok,
+            "processing_error": event.processing_error,
+            "processed_at": event.processed_at,
         }
 
     def list_events(self, limit: int = 100) -> list[dict[str, Any]]:
@@ -261,6 +321,9 @@ class DBWebhookStore:
                 "signature_ok": event.signature_ok,
                 "payload": event.payload,
                 "received_at": event.received_at,
+                "processed_ok": event.processed_ok,
+                "processing_error": event.processing_error,
+                "processed_at": event.processed_at,
             }
             for event in events
         ]
