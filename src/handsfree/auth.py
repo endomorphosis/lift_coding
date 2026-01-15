@@ -127,8 +127,8 @@ def validate_api_key(api_key: str) -> str:
 
 
 async def get_current_user(
-    x_user_id: str | None = Header(default=None, alias="X-User-Id"),
-    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+    x_user_id: Annotated[str | None, Header(alias="X-User-Id")] = None,
+    credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(security)] = None,
 ) -> str:
     """Extract and validate user ID based on configured auth mode.
 
