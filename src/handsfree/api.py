@@ -79,6 +79,7 @@ from handsfree.models import (
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.rate_limit import check_rate_limit
+from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
@@ -3159,20 +3160,64 @@ async def create_connection(
 ) -> GitHubConnectionResponse:
     """Create a new GitHub connection for the user.
 
+    This endpoint securely stores GitHub tokens using the configured secret manager.
+    You can provide either:
+    - A 'token' field with the actual GitHub token (will be stored securely)
+    - A 'token_ref' field with a reference to an already-stored token
+
     Args:
         request: Connection creation request.
         user_id: User ID extracted from authentication (via CurrentUser dependency).
 
     Returns:
         Created connection.
+
+    Raises:
+        HTTPException: If both token and token_ref are provided, or neither is provided.
     """
     db = get_db()
+
+    # Determine the token_ref to store
+    final_token_ref = None
+
+    if request.token and request.token_ref:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Provide either 'token' or 'token_ref', not both",
+        )
+
+    if request.token:
+        # Store the token securely using the secret manager
+        secret_manager = get_default_secret_manager()
+        try:
+            # Create a unique key for this token
+            secret_key = f"github_token_{user_id}"
+            final_token_ref = secret_manager.store_secret(
+                key=secret_key,
+                value=request.token,
+                metadata={
+                    "user_id": user_id,
+                    "scopes": request.scopes or "",
+                    "created_at": datetime.now(UTC).isoformat(),
+                },
+            )
+            log_info(f"Stored GitHub token securely for user {user_id}")
+        except Exception as e:
+            log_error(f"Failed to store GitHub token: {e}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Failed to store token securely",
+            ) from e
+    elif request.token_ref:
+        # Use the provided reference
+        final_token_ref = request.token_ref
+    # else: both are None, which is acceptable (e.g., for GitHub App installations)
 
     connection = create_github_connection(
         conn=db,
         user_id=user_id,
         installation_id=request.installation_id,
-        token_ref=request.token_ref,
+        token_ref=final_token_ref,
         scopes=request.scopes,
     )
 
@@ -3267,6 +3312,8 @@ async def delete_connection(
 ) -> Response:
     """Delete a GitHub connection.
 
+    This also removes the associated token from the secret manager if present.
+
     Returns 204 on success. Returns 404 if the connection does not exist or
     does not belong to the current user.
     """
@@ -3280,6 +3327,16 @@ async def delete_connection(
             status_code=404,
             detail={"error": "not_found", "message": "Connection not found"},
         )
+
+    # Delete the token from secret manager if it exists
+    if connection.token_ref:
+        secret_manager = get_default_secret_manager()
+        try:
+            secret_manager.delete_secret(connection.token_ref)
+            log_info(f"Deleted secret for connection {connection_id}")
+        except Exception as e:
+            # Log but don't fail - the database record should still be deleted
+            log_warning(f"Failed to delete secret for connection {connection_id}: {e}")
 
     delete_github_connection(conn=db, connection_id=connection_id)
     return Response(status_code=204)

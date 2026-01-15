@@ -5,11 +5,13 @@ secrets (like GitHub tokens) from various secret management backends.
 """
 
 from .env_secrets import EnvSecretManager
-from .factory import get_secret_manager
+from .factory import get_default_secret_manager, get_secret_manager, reset_secret_manager
 from .interface import SecretManager
 
 __all__ = [
     "SecretManager",
     "EnvSecretManager",
     "get_secret_manager",
+    "get_default_secret_manager",
+    "reset_secret_manager",
 ]
