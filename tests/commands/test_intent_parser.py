@@ -154,6 +154,27 @@ class TestPRIntents:
         assert result.entities["pr_number"] == 99
         assert result.entities["merge_method"] == "squash"
 
+    def test_pr_comment_with_colon(self, parser: IntentParser) -> None:
+        """Test pr.comment with colon separator."""
+        result = parser.parse("comment on pr 123: looks good")
+        assert result.name == "pr.comment"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["comment_body"] == "looks good"
+
+    def test_pr_comment_with_saying(self, parser: IntentParser) -> None:
+        """Test pr.comment with 'saying' phrasing."""
+        result = parser.parse("post comment on pr 456 saying great work")
+        assert result.name == "pr.comment"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["comment_body"] == "great work"
+
+    def test_pr_comment_on_pull_request(self, parser: IntentParser) -> None:
+        """Test pr.comment with 'pull request' instead of 'pr'."""
+        result = parser.parse("comment on pull request 789: this is ready")
+        assert result.name == "pr.comment"
+        assert result.entities["pr_number"] == 789
+        assert result.entities["comment_body"] == "this is ready"
+
 
 class TestChecksIntents:
     """Test checks-related intents."""
