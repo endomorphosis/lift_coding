@@ -132,6 +132,33 @@ class TestWebhookIngestion:
         )
         assert response.status_code == 202
 
+    def test_issue_comment_created(self, client):
+        """Test ingesting an issue_comment created event."""
+        payload = load_fixture("issue_comment.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "issue_comment",
+                "X-GitHub-Delivery": "test-delivery-006",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        data = response.json()
+        assert "event_id" in data
+        assert data["message"] == "Webhook accepted"
+
+        # Verify event was stored
+        store = get_db_webhook_store()
+        event = store.get_event(data["event_id"])
+        assert event is not None
+        assert event["source"] == "github"
+        assert event["event_type"] == "issue_comment"
+        assert event["delivery_id"] == "test-delivery-006"
+        assert event["signature_ok"] is True
+        assert event["payload"]["action"] == "created"
+
     def test_duplicate_delivery_rejected(self, client):
         """Test that duplicate delivery IDs are rejected (replay protection)."""
         payload = load_fixture("pull_request.opened.json")
@@ -246,6 +273,26 @@ class TestEventNormalization:
         assert normalized["pr_number"] == 123
         assert normalized["review_state"] == "approved"
         assert normalized["review_author"] == "reviewer1"
+
+    def test_issue_comment_created_normalized(self, client):
+        """Test that issue_comment created events are normalized correctly."""
+        payload = load_fixture("issue_comment.created.json")
+        normalized = normalize_github_event("issue_comment", payload)
+
+        assert normalized is not None
+        assert normalized["event_type"] == "issue_comment"
+        assert normalized["action"] == "created"
+        assert normalized["repo"] == "testorg/testrepo"
+        assert normalized["issue_number"] == 42
+        assert normalized["is_pull_request"] is True
+        assert normalized["comment_author"] == "commenter"
+        assert (
+            normalized["comment_url"]
+            == "https://github.com/testorg/testrepo/issues/42#issuecomment-999888777"
+        )
+        assert "testuser" in normalized["mentions"]
+        assert "anotheruser" in normalized["mentions"]
+        assert len(normalized["mentions"]) == 2
 
 
 class TestDatabaseBackedStore:

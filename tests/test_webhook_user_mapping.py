@@ -307,6 +307,103 @@ class TestWebhookUserMapping:
         assert len(notifs) == 1
         assert notifs[0].event_type == "webhook.review_approved"
 
+    def test_issue_comment_mention_notification(self, client):
+        """Test that issue_comment webhooks create mention notifications for subscribed users."""
+        db = get_db()
+        # Create a test user with UUID
+        test_user_id = str(uuid.uuid4())
+        repo_name = "testorg/testrepo"
+
+        # Create a repo subscription for the user
+        create_repo_subscription(db, test_user_id, repo_name)
+
+        payload = load_fixture("issue_comment.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "issue_comment",
+                "X-GitHub-Delivery": f"test-mention-{uuid.uuid4()}",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Check that notification was created for subscribed user
+        notifs = list_notifications(db, test_user_id)
+        assert len(notifs) == 1
+        assert notifs[0].event_type == "webhook.mention"
+        assert "commenter" in notifs[0].message
+        assert "testorg/testrepo" in notifs[0].message
+        assert "PR #42" in notifs[0].message
+        assert notifs[0].metadata["comment_author"] == "commenter"
+        assert notifs[0].metadata["is_pull_request"] is True
+        assert "testuser" in notifs[0].metadata["mentions"]
+        assert "anotheruser" in notifs[0].metadata["mentions"]
+
+    def test_issue_comment_no_mention_no_notification(self, client):
+        """Test that issue_comment webhooks without mentions don't create notifications."""
+        db = get_db()
+        test_user_id = str(uuid.uuid4())
+        repo_name = "testorg/testrepo"
+
+        # Create a repo subscription
+        create_repo_subscription(db, test_user_id, repo_name)
+
+        # Modify the payload to have no mentions
+        payload = load_fixture("issue_comment.created.json")
+        payload["comment"]["body"] = "This is a comment without any mentions."
+
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "issue_comment",
+                "X-GitHub-Delivery": f"test-no-mention-{uuid.uuid4()}",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Check that no notification was created when there are no mentions
+        notifs = list_notifications(db, test_user_id)
+        assert len(notifs) == 0
+
+    def test_issue_comment_multiple_mentions(self, client):
+        """Test that issue_comment webhooks notify all subscribed users when there are mentions."""
+        db = get_db()
+        # Create test users with UUIDs
+        user1_id = str(uuid.uuid4())
+        user2_id = str(uuid.uuid4())
+        repo_name = "testorg/testrepo"
+
+        # Create subscriptions for both users
+        create_repo_subscription(db, user1_id, repo_name)
+        create_repo_subscription(db, user2_id, repo_name)
+
+        payload = load_fixture("issue_comment.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "issue_comment",
+                "X-GitHub-Delivery": f"test-multi-mention-{uuid.uuid4()}",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Check that both subscribed users received notifications
+        notifs1 = list_notifications(db, user1_id)
+        assert len(notifs1) == 1
+        assert notifs1[0].event_type == "webhook.mention"
+        assert "testuser" in notifs1[0].metadata["mentions"]
+        assert "anotheruser" in notifs1[0].metadata["mentions"]
+
+        notifs2 = list_notifications(db, user2_id)
+        assert len(notifs2) == 1
+        assert notifs2[0].event_type == "webhook.mention"
+
 
 class TestWebhookPayloadExtraction:
     """Test helper functions for extracting data from webhook payloads."""
