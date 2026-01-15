@@ -219,6 +219,29 @@ class IntentParser:
                 "pr.request_review",
                 {"reviewers": lambda m: [m.group(1)]},
             ),
+            # PR comment (side effect)
+            (
+                re.compile(
+                    r"\bcomment\s+on\s+(?:pr|pull\s+request)\s+(\d+):\s*(.+)$",
+                    re.IGNORECASE,
+                ),
+                "pr.comment",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "comment_body": lambda m: m.group(2).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bpost\s+comment\s+on\s+(?:pr|pull\s+request)\s+(\d+)\s+saying\s+(.+)$",
+                    re.IGNORECASE,
+                ),
+                "pr.comment",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "comment_body": lambda m: m.group(2).strip(),
+                },
+            ),
             # PR merge (side effect)
             (
                 re.compile(r"\b(squash\s+)?merge\s+(pr\s+)?(\d+)\b", re.IGNORECASE),
