@@ -183,7 +183,9 @@ def rerun_workflow(
     try:
         resolved_run_id = run_id
         if resolved_run_id is None:
-            pr_result = get_pull_request(repo=repo, pr_number=pr_number, token=token, timeout=timeout)
+            pr_result = get_pull_request(
+                repo=repo, pr_number=pr_number, token=token, timeout=timeout
+            )
             if not pr_result.get("ok"):
                 return {
                     "ok": False,
@@ -326,9 +328,7 @@ def merge_pull_request(
     if pr_number < 1:
         raise ValueError(f"Invalid pr_number: {pr_number}. Must be >= 1")
     if merge_method not in ("merge", "squash", "rebase"):
-        raise ValueError(
-            f"Invalid merge_method: {merge_method}. Must be merge, squash, or rebase"
-        )
+        raise ValueError(f"Invalid merge_method: {merge_method}. Must be merge, squash, or rebase")
     if not token:
         raise ValueError("token cannot be empty")
 
