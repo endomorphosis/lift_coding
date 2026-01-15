@@ -185,7 +185,7 @@ class TestAnomalyDetection:
         """Test that anomaly is detected after repeated rate limit denials."""
         user_id = str(uuid.uuid4())
 
-        # Create 5 rate limit denials (matches ANOMALY_THRESHOLD_DENIALS)
+        # Create 5 rate limit denials (threshold is 5 denials in 5 minutes)
         for _i in range(5):
             write_action_log(
                 db_conn,

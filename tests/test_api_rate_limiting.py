@@ -5,8 +5,9 @@ import uuid
 import pytest
 from fastapi.testclient import TestClient
 
-from handsfree.api import app
+from handsfree.api import app, get_db
 from handsfree.db.action_logs import get_action_logs, write_action_log
+from handsfree.security import check_and_log_anomaly
 
 
 @pytest.fixture
@@ -259,9 +260,6 @@ class TestAnomalyAuditLogs:
         """Test that security.anomaly is logged for repeated policy denials."""
         monkeypatch.setenv("HANDSFREE_AUTH_MODE", "dev")
         user_id = str(uuid.uuid4())
-
-        from handsfree.api import get_db
-        from handsfree.security import check_and_log_anomaly
 
         db = get_db()
 

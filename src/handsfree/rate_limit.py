@@ -20,6 +20,14 @@ class RateLimitResult:
     is_burst_limited: bool = False
 
 
+# Stricter configuration for high-risk side-effect actions
+STRICT_SIDE_EFFECT_CONFIG = {
+    "window_seconds": 60,
+    "max_requests": 5,
+    "burst_seconds": 10,
+    "burst_max": 2,
+}
+
 # Stricter defaults for side-effect actions
 SIDE_EFFECT_RATE_LIMITS = {
     "request_review": {
@@ -28,8 +36,8 @@ SIDE_EFFECT_RATE_LIMITS = {
         "burst_seconds": 10,
         "burst_max": 3,
     },
-    "rerun": {"window_seconds": 60, "max_requests": 5, "burst_seconds": 10, "burst_max": 2},
-    "merge": {"window_seconds": 60, "max_requests": 5, "burst_seconds": 10, "burst_max": 2},
+    "rerun": STRICT_SIDE_EFFECT_CONFIG,
+    "merge": STRICT_SIDE_EFFECT_CONFIG,
     "comment": {"window_seconds": 60, "max_requests": 10, "burst_seconds": 10, "burst_max": 3},
 }
 
