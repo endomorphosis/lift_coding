@@ -406,6 +406,18 @@ components:
           type: string
         summary:
           type: string
+        checks_passed:
+          type: integer
+          minimum: 0
+          description: Number of checks that passed
+        checks_failed:
+          type: integer
+          minimum: 0
+          description: Number of checks that failed
+        checks_pending:
+          type: integer
+          minimum: 0
+          description: Number of checks that are pending or in progress
 
     RequestReviewRequest:
       type: object
