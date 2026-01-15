@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from handsfree.auth import FIXTURE_USER_ID, CurrentUser
+from handsfree.auth import CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import ProfileConfig
@@ -46,6 +46,7 @@ from handsfree.models import (
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     DebugInfo,
+    DependencyStatus,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
     InboxItem,
@@ -58,6 +59,7 @@ from handsfree.models import (
     Profile,
     RequestReviewRequest,
     RerunChecksRequest,
+    StatusResponse,
     TextInput,
     TTSRequest,
     UICard,
@@ -174,6 +176,53 @@ def _fetch_audio_data(uri: str) -> bytes:
 def health_check():
     """Health check endpoint."""
     return {"status": "ok"}
+
+
+@app.get("/v1/status", response_model=StatusResponse)
+def get_status():
+    """Get service status endpoint.
+
+    Returns lightweight status information for the mobile app and simulator,
+    including service health, version, timestamp, and dependency readiness.
+    Does not expose sensitive configuration values.
+    """
+    # Check DuckDB connection status
+    dependencies = []
+
+    try:
+        db = get_db()
+        # Simple check to see if DB is accessible
+        db.execute("SELECT 1").fetchone()
+        dependencies.append(
+            DependencyStatus(
+                name="duckdb",
+                status="ok",
+                message="Database connection healthy",
+            )
+        )
+    except Exception as e:
+        logger.warning("DuckDB health check failed: %s", e)
+        dependencies.append(
+            DependencyStatus(
+                name="duckdb",
+                status="unavailable",
+                message="Database connection failed",
+            )
+        )
+
+    # Overall status: ok if all critical dependencies are ok, degraded otherwise
+    overall_status = "ok"
+    if any(dep.status == "unavailable" for dep in dependencies):
+        overall_status = "degraded"
+    elif any(dep.status == "degraded" for dep in dependencies):
+        overall_status = "degraded"
+
+    return StatusResponse(
+        status=overall_status,
+        version=app.version,
+        timestamp=datetime.now(UTC),
+        dependencies=dependencies,
+    )
 
 
 @app.get("/simulator")
