@@ -320,7 +320,7 @@ class CommandRouter:
             elif pr_number:
                 # If no repo specified, use a default or preserve existing repo
                 context = self._session_context.get_repo_pr(session_id)
-                repo = context.get("repo", "fixture/repo")
+                repo = context.get("repo", "default/repo")
                 self._session_context.set_repo_pr(session_id, repo, pr_number)
 
         # Capture context from checks.status
@@ -332,7 +332,7 @@ class CommandRouter:
             elif pr_number:
                 # If no repo specified, use a default or preserve existing repo
                 context = self._session_context.get_repo_pr(session_id)
-                repo = context.get("repo", "fixture/repo")
+                repo = context.get("repo", "default/repo")
                 self._session_context.set_repo_pr(session_id, repo, pr_number)
 
         # Note: inbox.list doesn't capture PR context since it shows multiple PRs
