@@ -9,7 +9,6 @@ from handsfree.api import app
 @pytest.fixture
 def reset_db():
     """Reset the database connection before each test."""
-    global _db_conn
     import handsfree.api as api_module
 
     api_module._db_conn = None
