@@ -1141,8 +1141,7 @@ class CommandRouter:
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": (
-                    "Please specify a PR number, for example: "
-                    "'comment on PR 123: looks good'."
+                    "Please specify a PR number, for example: 'comment on PR 123: looks good'."
                 ),
             }
 
@@ -1220,9 +1219,7 @@ class CommandRouter:
         elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
             # Create pending action in database
             # Truncate long comment bodies in summary
-            comment_preview = (
-                comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
-            )
+            comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
             summary = f"Post comment on {repo}#{pr_number}: {comment_preview}"
             pending_action = create_pending_action(
                 self.db_conn,
