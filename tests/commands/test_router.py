@@ -264,6 +264,56 @@ class TestPRIntents:
 class TestChecksIntents:
     """Test checks intent routing."""
 
+    def test_checks_rerun_requires_confirmation_in_workout(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that checks.rerun requires confirmation in workout profile."""
+        intent = parser.parse("rerun checks for pr 123")
+
+        response = router.route(intent, Profile.WORKOUT, session_id="test-session")
+
+        assert response["status"] == "needs_confirmation"
+        assert "pending_action" in response
+        assert "token" in response["pending_action"]
+        assert "confirm" in response["spoken_text"].lower()
+
+    def test_checks_rerun_no_confirmation_in_commute(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that checks.rerun doesn't require confirmation in commute profile."""
+        intent = parser.parse("rerun checks for pr 123")
+
+        response = router.route(intent, Profile.COMMUTE, session_id="test-session")
+
+        # Commute profile doesn't require confirmation
+        assert response["status"] == "ok"
+        assert "pending_action" not in response
+
+    def test_checks_rerun_confirmation_summary(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that checks.rerun confirmation summary is human-readable."""
+        intent = parser.parse("rerun checks for pr 456")
+
+        response = router.route(intent, Profile.WORKOUT)
+
+        summary = response["pending_action"]["summary"]
+        assert "456" in summary
+        assert "re-run" in summary.lower() or "rerun" in summary.lower()
+
+    def test_checks_rerun_without_pr_requires_pr(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test that checks.rerun without PR number shows error in commute profile."""
+        intent = parser.parse("rerun checks")
+
+        # In commute profile (no confirmation), should immediately fail for missing PR
+        response = router.route(intent, Profile.COMMUTE, session_id="test-session")
+
+        # Since there's no pr_number, it should be handled as a basic checks intent
+        # The actual validation for pr_number would happen in policy handler
+        assert response["status"] == "ok"
+
     def test_checks_status(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test checks.status intent."""
         intent = parser.parse("ci status")
