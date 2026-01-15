@@ -9,6 +9,7 @@ This module provides production-ready session token management with:
 """
 
 import hashlib
+import json
 import logging
 import secrets
 from dataclasses import dataclass
@@ -126,7 +127,7 @@ class SessionTokenManager:
             "device_id": device_id,
             "created_at": now.isoformat(),
             "expires_at": expires_at.isoformat(),
-            "metadata": str(metadata or {}),
+            "metadata": json.dumps(metadata or {}),  # Store as JSON string
         }
 
         # Store in Redis with expiration
@@ -191,11 +192,12 @@ class SessionTokenManager:
                 self.revoke_session(token)
                 return None
 
-            # Parse metadata (stored as string)
+            # Parse metadata (stored as JSON string)
             metadata_str = session_data.get("metadata", "{}")
             try:
-                metadata = eval(metadata_str)  # Safe since we control the input
-            except Exception:
+                metadata = json.loads(metadata_str)
+            except json.JSONDecodeError:
+                logger.warning("Invalid JSON in session metadata, using empty dict")
                 metadata = {}
 
             return SessionToken(
