@@ -647,8 +647,9 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
-            from handsfree.github.client import request_reviewers as github_request_reviewers
             import logging
+
+            from handsfree.github.client import request_reviewers as github_request_reviewers
 
             logger = logging.getLogger(__name__)
 

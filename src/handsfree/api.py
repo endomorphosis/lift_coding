@@ -3,8 +3,9 @@
 This implementation combines webhook handling with comprehensive API endpoints.
 """
 
+__all__ = ["app", "get_db", "FIXTURE_USER_ID"]
+
 import logging
-import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
