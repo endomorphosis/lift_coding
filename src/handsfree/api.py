@@ -2403,7 +2403,6 @@ def _handle_agent_delegate(
                 "pr_number": pr_number,
                 "provider": provider,
             },
-            "provider": provider,
             "created_at": datetime.now(UTC).isoformat(),
         }
 

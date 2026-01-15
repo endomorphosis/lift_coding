@@ -558,7 +558,6 @@ class CommandRouter:
                     "pr_number": pr_num,
                     "provider": provider,
                 },
-                "provider": provider,
                 "created_at": datetime.now(UTC).isoformat(),
             }
 

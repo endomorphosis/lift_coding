@@ -106,7 +106,6 @@ class TestTraceScaffolding:
                 "issue_number": 123,
                 "provider": "copilot",
             },
-            "provider": "copilot",
             "created_at": datetime.now(UTC).isoformat(),
         }
 
@@ -127,9 +126,9 @@ class TestTraceScaffolding:
         assert task.trace is not None
         assert task.trace["transcript"] == "tell copilot to handle issue 123"
         assert task.trace["intent_name"] == "agent.delegate"
-        assert task.trace["provider"] == "copilot"
         assert "created_at" in task.trace
         assert "entities" in task.trace
+        assert task.trace["entities"]["provider"] == "copilot"
         assert task.trace["entities"]["issue_number"] == 123
 
     def test_trace_is_json_serializable(self, db_conn):
@@ -144,8 +143,7 @@ class TestTraceScaffolding:
         trace = {
             "transcript": "test command",
             "intent_name": "agent.delegate",
-            "entities": {"instruction": "test"},
-            "provider": "copilot",
+            "entities": {"instruction": "test", "provider": "copilot"},
             "created_at": datetime.now(UTC).isoformat(),
         }
 
@@ -170,7 +168,7 @@ class TestTraceScaffolding:
         # Ensure it can be deserialized
         deserialized = json.loads(json_str)
         assert deserialized["transcript"] == "test command"
-        assert deserialized["provider"] == "copilot"
+        assert deserialized["entities"]["provider"] == "copilot"
 
 
 class TestTargetReferenceNormalization:
