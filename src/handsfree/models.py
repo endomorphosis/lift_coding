@@ -347,3 +347,40 @@ class StatusResponse(BaseModel):
         default_factory=list,
         description="Status of dependencies like DuckDB, Redis (optional)",
     )
+
+
+class CreateApiKeyRequest(BaseModel):
+    """Request to create a new API key."""
+
+    label: str | None = Field(
+        default=None,
+        max_length=100,
+        description="Optional user-friendly label for the key (e.g., 'Mobile app', 'CI/CD')",
+    )
+
+
+class ApiKeyResponse(BaseModel):
+    """Response for an API key (without the plaintext key)."""
+
+    id: str
+    user_id: str
+    label: str | None
+    created_at: str
+    revoked_at: str | None
+    last_used_at: str | None
+
+
+class CreateApiKeyResponse(BaseModel):
+    """Response when creating a new API key.
+    
+    This is the ONLY time the plaintext key is returned.
+    """
+
+    key: str = Field(..., description="The plaintext API key. Save this - it will not be shown again.")
+    api_key: ApiKeyResponse
+
+
+class ApiKeysListResponse(BaseModel):
+    """Response for listing API keys."""
+
+    api_keys: list[ApiKeyResponse]
