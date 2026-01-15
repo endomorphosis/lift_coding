@@ -49,6 +49,21 @@ class AudioInput(BaseModel):
     duration_ms: int | None = Field(default=None, ge=0)
 
 
+class ImageInput(BaseModel):
+    """Image input schema for camera snapshots."""
+
+    type: Literal["image"] = "image"
+    uri: str = Field(
+        ...,
+        description="URI to the image/camera snapshot (not fetched or processed yet)",
+    )
+    content_type: str | None = Field(
+        default=None,
+        description="MIME type of the image (e.g., image/jpeg, image/png)",
+        examples=["image/jpeg"],
+    )
+
+
 class ClientContext(BaseModel):
     """Client context."""
 
@@ -64,7 +79,7 @@ class ClientContext(BaseModel):
 class CommandRequest(BaseModel):
     """Command request."""
 
-    input: TextInput | AudioInput
+    input: TextInput | AudioInput | ImageInput
     profile: Profile
     client_context: ClientContext
     idempotency_key: str | None = None
