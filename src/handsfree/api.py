@@ -1567,13 +1567,14 @@ async def request_review(
         if request.idempotency_key in idempotency_store:
             return idempotency_store[request.idempotency_key]
 
-    # Check rate limit
-    rate_limit_result = check_rate_limit(
+    # Check rate limit with burst limiting
+    from handsfree.rate_limit import check_side_effect_rate_limit
+    from handsfree.security import check_and_log_anomaly
+
+    rate_limit_result = check_side_effect_rate_limit(
         db,
         user_id,
         "request_review",
-        window_seconds=60,
-        max_requests=10,
     )
 
     if not rate_limit_result.allowed:
@@ -1593,6 +1594,22 @@ async def request_review(
             # Idempotency key already used in audit log - this is a retry
             pass
 
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "request_review",
+            "rate_limited",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={"reviewers": request.reviewers},
+        )
+
+        # Return 429 with Retry-After header
+        from fastapi import Response
+        response = Response(status_code=429)
+        if rate_limit_result.retry_after_seconds:
+            response.headers["Retry-After"] = str(rate_limit_result.retry_after_seconds)
+
         raise HTTPException(
             status_code=429,
             detail={
@@ -1600,6 +1617,7 @@ async def request_review(
                 "message": rate_limit_result.reason,
                 "retry_after": rate_limit_result.retry_after_seconds,
             },
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
 
     # Evaluate policy
@@ -1627,6 +1645,16 @@ async def request_review(
         except ValueError:
             # Idempotency key already used in audit log - this is a retry
             pass
+
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "request_review",
+            "policy_denied",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={"reviewers": request.reviewers},
+        )
 
         raise HTTPException(
             status_code=403,
@@ -1860,13 +1888,14 @@ async def rerun_checks(
             )
             return idempotency_store[request.idempotency_key]
 
-    # Rate limiting
-    rate_limit_result = check_rate_limit(
+    # Rate limiting with burst limiting
+    from handsfree.rate_limit import check_side_effect_rate_limit
+    from handsfree.security import check_and_log_anomaly
+
+    rate_limit_result = check_side_effect_rate_limit(
         db,
         user_id,
         "rerun",
-        window_seconds=60,
-        max_requests=5,  # More restrictive than request_review
     )
 
     if not rate_limit_result.allowed:
@@ -1882,6 +1911,16 @@ async def rerun_checks(
             idempotency_key=request.idempotency_key,
         )
 
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "rerun",
+            "rate_limited",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={},
+        )
+
         raise HTTPException(
             status_code=429,
             detail={
@@ -1889,6 +1928,7 @@ async def rerun_checks(
                 "message": rate_limit_result.reason,
                 "retry_after": rate_limit_result.retry_after_seconds,
             },
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
 
     # Evaluate policy
@@ -1916,6 +1956,16 @@ async def rerun_checks(
         except ValueError:
             # Idempotency key already used - this is a retry
             pass
+
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "rerun",
+            "policy_denied",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={},
+        )
 
         raise HTTPException(
             status_code=403,
@@ -2099,13 +2149,14 @@ async def merge_pr(
         if request.idempotency_key in idempotency_store:
             return idempotency_store[request.idempotency_key]
 
-    # Rate limiting (strict)
-    rate_limit_result = check_rate_limit(
+    # Rate limiting (strict) with burst limiting
+    from handsfree.rate_limit import check_side_effect_rate_limit
+    from handsfree.security import check_and_log_anomaly
+
+    rate_limit_result = check_side_effect_rate_limit(
         db,
         user_id,
         "merge",
-        window_seconds=60,
-        max_requests=5,
     )
 
     if not rate_limit_result.allowed:
@@ -2119,6 +2170,17 @@ async def merge_pr(
             result={"error": "rate_limited", "message": rate_limit_result.reason},
             idempotency_key=request.idempotency_key,
         )
+
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "merge",
+            "rate_limited",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={"merge_method": request.merge_method},
+        )
+
         raise HTTPException(
             status_code=429,
             detail={
@@ -2126,6 +2188,7 @@ async def merge_pr(
                 "message": rate_limit_result.reason,
                 "retry_after": rate_limit_result.retry_after_seconds,
             },
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
 
     # Evaluate policy (merge is denied by default)
@@ -2149,6 +2212,17 @@ async def merge_pr(
             result={"error": "policy_denied", "message": policy_result.reason},
             idempotency_key=request.idempotency_key,
         )
+
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "merge",
+            "policy_denied",
+            target=f"{request.repo}#{request.pr_number}",
+            request_data={"merge_method": request.merge_method},
+        )
+
         raise HTTPException(
             status_code=403,
             detail={"error": "policy_denied", "message": policy_result.reason},
@@ -2254,13 +2328,14 @@ async def _handle_request_review_command(
     # Use a default repo for now (in production, this would come from context)
     repo = parsed_intent.entities.get("repo", "default/repo")
 
-    # Check rate limit
-    rate_limit_result = check_rate_limit(
+    # Check rate limit with burst limiting
+    from handsfree.rate_limit import check_side_effect_rate_limit
+    from handsfree.security import check_and_log_anomaly
+
+    rate_limit_result = check_side_effect_rate_limit(
         db,
         user_id,
         "request_review",
-        window_seconds=60,
-        max_requests=10,
     )
 
     if not rate_limit_result.allowed:
@@ -2282,10 +2357,25 @@ async def _handle_request_review_command(
                 "Idempotency key %s already used for rate limit audit log", idempotency_key
             )
 
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "request_review",
+            "rate_limited",
+            target=f"{repo}#{pr_number}",
+            request_data={"reviewers": reviewers},
+        )
+
+        # Create user-friendly spoken message with retry guidance
+        retry_msg = ""
+        if rate_limit_result.retry_after_seconds:
+            retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
+
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=parsed_intent,
-            spoken_text=f"Rate limit exceeded. {rate_limit_result.reason}",
+            spoken_text=f"Rate limit exceeded.{retry_msg}",
             debug=DebugInfo(transcript=text),
         )
 
@@ -2317,6 +2407,16 @@ async def _handle_request_review_command(
                 "Idempotency key %s already used for policy denial audit log",
                 idempotency_key,
             )
+
+        # Check for suspicious activity patterns
+        check_and_log_anomaly(
+            db,
+            user_id,
+            "request_review",
+            "policy_denied",
+            target=f"{repo}#{pr_number}",
+            request_data={"reviewers": reviewers},
+        )
 
         return CommandResponse(
             status=CommandStatus.ERROR,
