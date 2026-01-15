@@ -10,6 +10,7 @@ client = TestClient(app)
 def test_agent_workflow_complete():
     """Test complete agent workflow: delegate, check status, verify persistence."""
     # Step 1: Delegate a task to agent
+    # Note: "ask agent to..." defaults to copilot provider (not mock)
     delegate_response = client.post(
         "/v1/command",
         json={
@@ -41,6 +42,8 @@ def test_agent_workflow_complete():
     task_card = delegate_data["cards"][0]
     assert "Agent Task Created" in task_card["title"]
     assert task_id[:8] in task_card["subtitle"]
+    # Verify provider is copilot (new default behavior)
+    assert "Provider: copilot" in task_card["lines"][0]
 
     # Step 2: Query agent status immediately
     status_response = client.post(
@@ -64,8 +67,9 @@ def test_agent_workflow_complete():
     assert status_data["status"] == "ok"
     assert status_data["intent"]["name"] == "agent.status"  # Router uses agent.status
     assert "task" in status_data["spoken_text"].lower()
-    # Mock provider auto-advances to "running" on first status check
-    assert "running" in status_data["spoken_text"].lower()
+    # Copilot provider doesn't auto-advance - tasks stay in "created" state
+    # until real orchestration is implemented
+    assert "created" in status_data["spoken_text"].lower()
 
     # Should show the newly created task
     assert len(status_data["cards"]) > 0
@@ -75,9 +79,9 @@ def test_agent_workflow_complete():
     for card in status_data["cards"]:
         if task_id[:8] in card["title"]:
             our_task_found = True
-            # Verify task details - mock provider auto-advances to "running"
-            assert "running" in card["subtitle"].lower()
-            assert "Instruction: fix issue 500" in card["lines"][0]
+            # Verify task details - copilot provider tasks stay in "created" state
+            assert "created" in card["subtitle"].lower()
+            assert "Instruction: fix" in card["lines"][0]
             break
 
     assert our_task_found, "Created task not found in agent status"

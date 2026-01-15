@@ -627,6 +627,20 @@ class CommandRouter:
                 target_type = "pr"
                 target_ref = f"#{pr_num}"
 
+            # Build trace with intent information
+            from datetime import UTC, datetime
+
+            trace = {
+                "intent_name": intent.name,
+                "entities": {
+                    "instruction": instruction,
+                    "issue_number": issue_num,
+                    "pr_number": pr_num,
+                    "provider": provider,
+                },
+                "created_at": datetime.now(UTC).isoformat(),
+            }
+
             # Create task (user_id would come from context in real implementation)
             result = self._agent_service.delegate(
                 user_id="default-user",  # Placeholder
@@ -634,6 +648,7 @@ class CommandRouter:
                 provider=provider,
                 target_type=target_type,
                 target_ref=target_ref,
+                trace=trace,
             )
 
             spoken_text = result.get("spoken_text", "Agent task created.")

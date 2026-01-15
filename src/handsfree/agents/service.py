@@ -37,6 +37,7 @@ class AgentService:
         provider: str = "copilot",
         target_type: str | None = None,
         target_ref: str | None = None,
+        trace: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Create a new agent task.
 
@@ -46,10 +47,16 @@ class AgentService:
             provider: Provider name (default: "copilot").
             target_type: Type of target ("issue", "pr", or None).
             target_ref: Reference to target (e.g., "owner/repo#123").
+            trace: Optional trace information (JSON-serializable).
 
         Returns:
             Dictionary with task information and spoken confirmation.
         """
+        # Merge provided trace with default metadata
+        task_trace = trace or {}
+        if "created_via" not in task_trace:
+            task_trace["created_via"] = "delegate_command"
+
         # Create task in database (starts in "created" state)
         task = create_agent_task(
             conn=self.conn,
@@ -58,7 +65,7 @@ class AgentService:
             instruction=instruction,
             target_type=target_type,
             target_ref=target_ref,
-            trace={"created_via": "delegate_command"},
+            trace=task_trace,
         )
 
         # Emit "created" notification
