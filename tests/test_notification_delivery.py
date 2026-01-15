@@ -118,6 +118,7 @@ class TestWebPushProvider:
 
     def test_send_notification_success(self, monkeypatch):
         """Test successful WebPush notification send."""
+
         # Mock pywebpush.webpush
         class MockResponse:
             status_code = 201

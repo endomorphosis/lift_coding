@@ -182,9 +182,7 @@ class WebPushProvider(NotificationDeliveryProvider):
                 response.status_code if hasattr(response, "status_code") else "unknown",
             )
 
-            status_code = (
-                response.status_code if hasattr(response, "status_code") else "sent"
-            )
+            status_code = response.status_code if hasattr(response, "status_code") else "sent"
             return {
                 "ok": True,
                 "message": f"Notification sent (status: {status_code})",
