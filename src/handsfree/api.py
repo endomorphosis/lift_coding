@@ -747,7 +747,7 @@ def _convert_router_response_to_command_response(
     elif parsed_intent.name == "agent.delegate" and status == CommandStatus.OK:
         # Agent delegate commands - use old handler for backward compatibility
         # This ensures task_id is included in entities as tests expect
-        return _handle_agent_delegate(transcript, "api", user_id)
+        return _handle_agent_delegate(parsed_intent, transcript, "api", user_id)
 
     elif parsed_intent.name == "agent.status" and status == CommandStatus.OK:
         # Agent status commands - use old handler for backward compatibility
@@ -2355,54 +2355,58 @@ async def _handle_request_review_command(
         )
 
 
-def _handle_agent_delegate(text: str, device: str, user_id: str) -> CommandResponse:
+def _handle_agent_delegate(
+    parsed_intent: ParsedIntent, text: str, device: str, user_id: str
+) -> CommandResponse:
     """Handle agent.delegate intent.
 
     Parse the command and create an agent task using AgentService.
-    For MVP, uses mock provider stubs only.
+    Provider is selected from intent entities or defaults to copilot.
 
     Args:
+        parsed_intent: Parsed intent with entities
         text: Command text
         device: Device identifier
         user_id: User ID from header or fixture
     """
     from handsfree.agents.service import AgentService
 
-    # Extract instruction from text
-    # Simple parsing: everything after "agent" or "fix" or "ask agent to"
-    instruction = text
-    if "ask agent to" in text:
-        instruction = text.split("ask agent to", 1)[1].strip()
-    elif "fix" in text:
-        instruction = text.split("fix", 1)[1].strip()
+    # Extract entities from parsed intent
+    instruction = parsed_intent.entities.get("instruction", text)
+    issue_number = parsed_intent.entities.get("issue_number")
+    pr_number = parsed_intent.entities.get("pr_number")
+    # Use provider from intent entities, or default to "copilot" if not specified
+    # Note: Tests may override this by explicitly specifying provider in intent
+    provider = parsed_intent.entities.get("provider", "copilot")
 
-    # Extract issue/PR number if present
-    issue_number = None
-    pr_number = None
+    # Build target reference
     target_type = None
     target_ref = None
 
-    words = text.split()
-    for i, word in enumerate(words):
-        if word.lower() == "issue" and i + 1 < len(words):
-            try:
-                issue_number = int(words[i + 1].replace("#", ""))
-                target_type = "issue"
-                target_ref = f"#{issue_number}"
-            except ValueError:
-                pass
-        elif word.lower() == "pr" and i + 1 < len(words):
-            try:
-                pr_number = int(words[i + 1].replace("#", ""))
-                target_type = "pr"
-                target_ref = f"#{pr_number}"
-            except ValueError:
-                pass
-
-    # Use provided user_id and mock provider
-    provider = "mock"
+    if issue_number:
+        target_type = "issue"
+        target_ref = f"#{issue_number}"
+    elif pr_number:
+        target_type = "pr"
+        target_ref = f"#{pr_number}"
 
     try:
+        # Build trace with original transcript and parsed entities
+        from datetime import UTC, datetime
+
+        trace = {
+            "transcript": text,
+            "intent_name": parsed_intent.name,
+            "entities": {
+                "instruction": instruction,
+                "issue_number": issue_number,
+                "pr_number": pr_number,
+                "provider": provider,
+            },
+            "provider": provider,
+            "created_at": datetime.now(UTC).isoformat(),
+        }
+
         # Create task via AgentService
         db = get_db()
         agent_service = AgentService(db)
@@ -2412,6 +2416,7 @@ def _handle_agent_delegate(text: str, device: str, user_id: str) -> CommandRespo
             provider=provider,
             target_type=target_type,
             target_ref=target_ref,
+            trace=trace,
         )
 
         task_id = result["task_id"]
