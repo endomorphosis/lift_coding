@@ -85,6 +85,13 @@ def handle_pr_summarize(
         if review_parts:
             spoken_text += f"Reviews: {', '.join(review_parts)}. "
 
+        # Add latest review details
+        latest_review = _get_latest_review(pr_reviews)
+        if latest_review:
+            review_state = latest_review.get("state", "")
+            reviewer = latest_review.get("user", "unknown")
+            spoken_text += f"Latest review: {review_state} by {reviewer}. "
+
     # Add labels if important
     important_labels = [
         label for label in labels if label in ["urgent", "security", "bug", "breaking"]
@@ -151,3 +158,21 @@ def _summarize_reviews(reviews: list[dict[str, Any]]) -> dict[str, Any]:
         "changes_requested": changes_requested,
         "commented": commented,
     }
+
+
+def _get_latest_review(reviews: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Get the latest review by submitted timestamp.
+
+    Args:
+        reviews: List of review objects with 'submitted_at', 'state', and 'user' fields
+
+    Returns:
+        Latest review dict or None if no reviews exist
+    """
+    if not reviews:
+        return None
+
+    # Sort by submitted_at timestamp descending (most recent first)
+    sorted_reviews = sorted(reviews, key=lambda r: r.get("submitted_at", ""), reverse=True)
+
+    return sorted_reviews[0] if sorted_reviews else None
