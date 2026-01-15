@@ -3135,31 +3135,50 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
     action = normalized.get("action")
     repo = normalized.get("repo")
 
-    if not repo:
+    # Special handling for installation events which don't have a 'repo' field
+    if event_type in ("installation", "installation_repositories"):
+        # Installation events determine affected users differently
+        affected_users = set()
+        installation_id = extract_installation_id(raw_payload)
+        if installation_id:
+            installation_users = get_users_for_installation(db, installation_id)
+            affected_users.update(installation_users)
+
+        # Skip notification if no users found
+        if not affected_users:
+            logger.info(
+                "No users for installation_id=%s, skipping notification",
+                installation_id,
+            )
+            return
+
+        # Continue to notification generation logic below
+        # (repo is None for installation events, which is OK)
+    elif not repo:
         logger.warning("No repository in normalized event, skipping notification")
         return
+    else:
+        # Determine affected users based on repo subscriptions and installation
+        affected_users = set()
 
-    # Determine affected users based on repo subscriptions and installation
-    affected_users = set()
+        # First, try to get users by repository name
+        repo_users = get_users_for_repo(db, repo)
+        affected_users.update(repo_users)
 
-    # First, try to get users by repository name
-    repo_users = get_users_for_repo(db, repo)
-    affected_users.update(repo_users)
+        # Also try to get users by installation_id if present
+        installation_id = extract_installation_id(raw_payload)
+        if installation_id:
+            installation_users = get_users_for_installation(db, installation_id)
+            affected_users.update(installation_users)
 
-    # Also try to get users by installation_id if present
-    installation_id = extract_installation_id(raw_payload)
-    if installation_id:
-        installation_users = get_users_for_installation(db, installation_id)
-        affected_users.update(installation_users)
-
-    # If no users found, log and return (no-op instead of routing to fixture user)
-    if not affected_users:
-        logger.info(
-            "No users subscribed to repo '%s' (installation_id=%s), skipping notification",
-            repo,
-            installation_id,
-        )
-        return
+        # If no users found, log and return (no-op instead of routing to fixture user)
+        if not affected_users:
+            logger.info(
+                "No users subscribed to repo '%s' (installation_id=%s), skipping notification",
+                repo,
+                installation_id,
+            )
+            return
 
     # Generate notification message and type based on event type
     notification_type = None
@@ -3262,6 +3281,36 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
             # No mentions, skip notification
             notification_type = None
             message = None
+
+    elif event_type == "installation" and action == "created":
+        # Installation created - low priority notification
+        installation_id = normalized.get("installation_id")
+        account_login = normalized.get("account_login")
+        repositories = normalized.get("repositories", [])
+
+        message = f"GitHub App installed for {account_login} ({len(repositories)} repositories)"
+        notification_type = "webhook.installation_created"
+
+        metadata = {
+            "installation_id": installation_id,
+            "account_login": account_login,
+            "repositories": repositories,
+        }
+
+    elif event_type == "installation" and action == "deleted":
+        # Installation deleted - low priority notification
+        installation_id = normalized.get("installation_id")
+        account_login = normalized.get("account_login")
+        repositories = normalized.get("repositories", [])
+
+        message = f"GitHub App uninstalled for {account_login}"
+        notification_type = "webhook.installation_deleted"
+
+        metadata = {
+            "installation_id": installation_id,
+            "account_login": account_login,
+            "repositories": repositories,
+        }
 
     # Create notification for each affected user
     if notification_type and message:

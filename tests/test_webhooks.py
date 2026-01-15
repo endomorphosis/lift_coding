@@ -801,3 +801,85 @@ class TestInstallationLifecycle:
             assert response.status_code == 202, (
                 f"Failed to ingest fixture {fixture_name}: {response.status_code} {response.text}"
             )
+
+    def test_installation_created_notification(self, client):
+        """Test that installation.created event creates notifications for affected users."""
+        from handsfree import api
+        from handsfree.db.github_connections import create_github_connection
+        from handsfree.db.notifications import list_notifications
+
+        # Create a user with an installation
+        db = api.get_db()
+        test_user_id = "00000000-0000-0000-0000-000000000001"
+        create_github_connection(
+            db,
+            user_id=test_user_id,
+            installation_id=12345678,
+        )
+
+        # Send installation.created event
+        payload = load_fixture("installation.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-notif-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify notification was created
+        notifications = list_notifications(db, test_user_id, limit=10)
+        install_notifications = [
+            n for n in notifications if n.event_type == "webhook.installation_created"
+        ]
+        assert len(install_notifications) > 0
+
+        # Check notification content
+        notif = install_notifications[0]
+        assert "testorg" in notif.message
+        assert "installed" in notif.message.lower()
+        assert notif.metadata.get("installation_id") == 12345678
+
+    def test_installation_deleted_notification(self, client):
+        """Test that installation.deleted event creates notifications for affected users."""
+        from handsfree import api
+        from handsfree.db.github_connections import create_github_connection
+        from handsfree.db.notifications import list_notifications
+
+        # Create a user with an installation
+        db = api.get_db()
+        test_user_id = "00000000-0000-0000-0000-000000000002"
+        create_github_connection(
+            db,
+            user_id=test_user_id,
+            installation_id=12345678,
+        )
+
+        # Send installation.deleted event
+        payload = load_fixture("installation.deleted.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-del-notif-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify notification was created
+        notifications = list_notifications(db, test_user_id, limit=10)
+        install_notifications = [
+            n for n in notifications if n.event_type == "webhook.installation_deleted"
+        ]
+        assert len(install_notifications) > 0
+
+        # Check notification content
+        notif = install_notifications[0]
+        assert "testorg" in notif.message
+        assert "uninstalled" in notif.message.lower()
+        assert notif.metadata.get("installation_id") == 12345678
