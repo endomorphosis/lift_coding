@@ -10,9 +10,7 @@ Run from repository root:
     python3 dev/test_webhook_mapping.py
 """
 
-import json
 import uuid
-from datetime import UTC, datetime
 
 from handsfree.api import get_db
 from handsfree.db.github_connections import create_github_connection
@@ -33,7 +31,7 @@ def main():
     # Create test users
     user1_id = str(uuid.uuid4())
     user2_id = str(uuid.uuid4())
-    print(f"\n✓ Created test users:")
+    print("\n✓ Created test users:")
     print(f"  User 1: {user1_id}")
     print(f"  User 2: {user2_id}")
 
@@ -42,7 +40,7 @@ def main():
 
     # User 1 subscribes to testorg/testrepo by repo name
     create_repo_subscription(db, user1_id, "testorg/testrepo")
-    print(f"  ✓ User 1 subscribed to testorg/testrepo")
+    print("  ✓ User 1 subscribed to testorg/testrepo")
 
     # User 2 connects via GitHub App installation
     installation_id = 12345
@@ -58,8 +56,8 @@ def main():
     print("Test 1: Webhook routed by repository subscription")
     print("=" * 70)
 
-    from handsfree.webhooks import normalize_github_event
     from handsfree.api import _emit_webhook_notification
+    from handsfree.webhooks import normalize_github_event
 
     payload1 = {
         "action": "opened",

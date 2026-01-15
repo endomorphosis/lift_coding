@@ -86,7 +86,6 @@ def test_get_status_includes_duckdb_dependency(reset_db) -> None:
 def test_get_status_no_sensitive_config(reset_db) -> None:
     """Test GET /v1/status does not expose sensitive configuration."""
     response = client.get("/v1/status")
-    data = response.json()
 
     # Convert to JSON string to check for sensitive keywords
     response_str = response.text.lower()
