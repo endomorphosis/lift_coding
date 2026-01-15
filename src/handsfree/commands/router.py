@@ -580,6 +580,63 @@ class CommandRouter:
                 "intent": intent.to_dict(),
                 "spoken_text": spoken_text,
             }
+
+        elif intent.name == "agent.pause":
+            if not self._agent_service:
+                spoken_text = profile_config.truncate_spoken_text("Agent service not available.")
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
+            task_id = intent.entities.get("task_id")
+            try:
+                result = self._agent_service.pause_task(user_id="default-user", task_id=task_id)
+                spoken_text = result.get("spoken_text", "Task paused.")
+                spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
+                return {
+                    "status": "ok",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+            except ValueError as e:
+                spoken_text = profile_config.truncate_spoken_text(str(e))
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
+        elif intent.name == "agent.resume":
+            if not self._agent_service:
+                spoken_text = profile_config.truncate_spoken_text("Agent service not available.")
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
+            task_id = intent.entities.get("task_id")
+            try:
+                result = self._agent_service.resume_task(user_id="default-user", task_id=task_id)
+                spoken_text = result.get("spoken_text", "Task resumed.")
+                spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
+                return {
+                    "status": "ok",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+            except ValueError as e:
+                spoken_text = profile_config.truncate_spoken_text(str(e))
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
         else:
             spoken_text = profile_config.truncate_spoken_text(
                 "Agent intent recognized but not implemented."

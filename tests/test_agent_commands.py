@@ -219,3 +219,147 @@ class TestAgentConfirmationFlow:
             response = router.route(intent, Profile.WORKOUT)
             assert response["status"] == "needs_confirmation"
             assert "pending_action" in response
+
+
+class TestAgentPause:
+    """Test agent.pause command routing."""
+
+    def test_pause_without_task_id(self, router, parser, db_conn):
+        """Test pausing most recent running task."""
+        # Create and start a task
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+        result = service.delegate(user_id="default-user", instruction="test", provider="mock")
+        task_id = result["task_id"]
+
+        # Transition to running state
+        from handsfree.db.agent_tasks import update_agent_task_state
+
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="running")
+
+        # Pause the task
+        intent = parser.parse("pause agent")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "paused" in response["spoken_text"].lower()
+
+        # Verify task state
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+
+        task = get_agent_task_by_id(conn=db_conn, task_id=task_id)
+        assert task.state == "needs_input"
+
+    def test_pause_with_task_id(self, router, parser, db_conn):
+        """Test pausing specific task by ID."""
+        # Create and start a task
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+        result = service.delegate(user_id="default-user", instruction="test", provider="mock")
+        task_id = result["task_id"]
+
+        # Transition to running state
+        from handsfree.db.agent_tasks import update_agent_task_state
+
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="running")
+
+        # Pause the specific task
+        intent = parser.parse(f"pause task {task_id}")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "paused" in response["spoken_text"].lower()
+
+    def test_pause_no_running_tasks(self, router, parser):
+        """Test error when no running tasks to pause."""
+        intent = parser.parse("pause agent")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "error"
+        assert "no running" in response["spoken_text"].lower()
+
+    def test_pause_without_db_fails(self, router_no_db, parser):
+        """Test that pause fails without database."""
+        intent = parser.parse("pause agent")
+        response = router_no_db.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "error"
+        assert "not available" in response["spoken_text"].lower()
+
+
+class TestAgentResume:
+    """Test agent.resume command routing."""
+
+    def test_resume_without_task_id(self, router, parser, db_conn):
+        """Test resuming most recent paused task."""
+        # Create, start, and pause a task
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+        result = service.delegate(user_id="default-user", instruction="test", provider="mock")
+        task_id = result["task_id"]
+
+        # Transition to running then pause
+        from handsfree.db.agent_tasks import update_agent_task_state
+
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="running")
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="needs_input")
+
+        # Resume the task
+        intent = parser.parse("resume agent")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "resumed" in response["spoken_text"].lower()
+
+        # Verify task state
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+
+        task = get_agent_task_by_id(conn=db_conn, task_id=task_id)
+        assert task.state == "running"
+
+    def test_resume_with_task_id(self, router, parser, db_conn):
+        """Test resuming specific task by ID."""
+        # Create, start, and pause a task
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+        result = service.delegate(user_id="default-user", instruction="test", provider="mock")
+        task_id = result["task_id"]
+
+        # Transition to running then pause
+        from handsfree.db.agent_tasks import update_agent_task_state
+
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="running")
+        update_agent_task_state(conn=db_conn, task_id=task_id, new_state="needs_input")
+
+        # Resume the specific task
+        intent = parser.parse(f"resume task {task_id}")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "resumed" in response["spoken_text"].lower()
+
+    def test_resume_no_paused_tasks(self, router, parser):
+        """Test error when no paused tasks to resume."""
+        intent = parser.parse("resume agent")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "error"
+        assert "no paused" in response["spoken_text"].lower()
+
+    def test_resume_without_db_fails(self, router_no_db, parser):
+        """Test that resume fails without database."""
+        intent = parser.parse("resume agent")
+        response = router_no_db.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "error"
+        assert "not available" in response["spoken_text"].lower()
+
+
+@pytest.fixture
+def test_user_id():
+    """Return a test user ID."""
+    return "default-user"

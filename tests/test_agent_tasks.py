@@ -296,3 +296,181 @@ class TestAgentTaskQueries:
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id, limit=5)
 
         assert len(tasks) == 5
+
+
+class TestAgentServicePauseResume:
+    """Test agent service pause and resume functionality."""
+
+    def test_pause_task_by_id(self, db_conn, test_user_id):
+        """Test pausing a task by ID."""
+        from handsfree.agents.service import AgentService
+
+        # Create and start a task
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test task"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+
+        # Pause the task
+        service = AgentService(db_conn)
+        result = service.pause_task(user_id=test_user_id, task_id=task.id)
+
+        assert result["task_id"] == task.id
+        assert result["state"] == "needs_input"
+        assert "paused" in result["spoken_text"].lower()
+
+        # Verify task state in database
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task.id)
+        assert updated_task.state == "needs_input"
+        assert updated_task.trace.get("paused_via") == "pause_command"
+
+    def test_pause_most_recent_running_task(self, db_conn, test_user_id):
+        """Test pausing most recent running task when no task_id provided."""
+        from handsfree.agents.service import AgentService
+
+        # Create multiple tasks
+        task1 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        task1 = update_agent_task_state(conn=db_conn, task_id=task1.id, new_state="running")
+
+        task2 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2"
+        )
+        task2 = update_agent_task_state(conn=db_conn, task_id=task2.id, new_state="running")
+
+        # Pause without specifying task_id - should pause most recent (task2)
+        service = AgentService(db_conn)
+        result = service.pause_task(user_id=test_user_id)
+
+        assert result["task_id"] == task2.id
+        assert result["state"] == "needs_input"
+
+        # Verify task2 is paused
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task2.id)
+        assert updated_task.state == "needs_input"
+
+        # Verify task1 is still running
+        task1_check = get_agent_task_by_id(conn=db_conn, task_id=task1.id)
+        assert task1_check.state == "running"
+
+    def test_pause_task_no_running_tasks(self, db_conn, test_user_id):
+        """Test error when trying to pause with no running tasks."""
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+
+        with pytest.raises(ValueError, match="No running tasks found"):
+            service.pause_task(user_id=test_user_id)
+
+    def test_resume_task_by_id(self, db_conn, test_user_id):
+        """Test resuming a task by ID."""
+        from handsfree.agents.service import AgentService
+
+        # Create and pause a task
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test task"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="needs_input")
+
+        # Resume the task
+        service = AgentService(db_conn)
+        result = service.resume_task(user_id=test_user_id, task_id=task.id)
+
+        assert result["task_id"] == task.id
+        assert result["state"] == "running"
+        assert "resumed" in result["spoken_text"].lower()
+
+        # Verify task state in database
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task.id)
+        assert updated_task.state == "running"
+        assert updated_task.trace.get("resumed_via") == "resume_command"
+
+    def test_resume_most_recent_paused_task(self, db_conn, test_user_id):
+        """Test resuming most recent paused task when no task_id provided."""
+        from handsfree.agents.service import AgentService
+
+        # Create multiple paused tasks
+        task1 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 1"
+        )
+        task1 = update_agent_task_state(conn=db_conn, task_id=task1.id, new_state="running")
+        task1 = update_agent_task_state(conn=db_conn, task_id=task1.id, new_state="needs_input")
+
+        task2 = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="task 2"
+        )
+        task2 = update_agent_task_state(conn=db_conn, task_id=task2.id, new_state="running")
+        task2 = update_agent_task_state(conn=db_conn, task_id=task2.id, new_state="needs_input")
+
+        # Resume without specifying task_id - should resume most recent (task2)
+        service = AgentService(db_conn)
+        result = service.resume_task(user_id=test_user_id)
+
+        assert result["task_id"] == task2.id
+        assert result["state"] == "running"
+
+        # Verify task2 is running
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task2.id)
+        assert updated_task.state == "running"
+
+        # Verify task1 is still paused
+        task1_check = get_agent_task_by_id(conn=db_conn, task_id=task1.id)
+        assert task1_check.state == "needs_input"
+
+    def test_resume_task_no_paused_tasks(self, db_conn, test_user_id):
+        """Test error when trying to resume with no paused tasks."""
+        from handsfree.agents.service import AgentService
+
+        service = AgentService(db_conn)
+
+        with pytest.raises(ValueError, match="No paused tasks found"):
+            service.resume_task(user_id=test_user_id)
+
+    def test_pause_creates_notification(self, db_conn, test_user_id):
+        """Test that pausing a task creates a notification."""
+        from handsfree.agents.service import AgentService
+        from handsfree.db.notifications import list_notifications
+
+        # Create and start a task
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test task"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+
+        # Pause the task
+        service = AgentService(db_conn)
+        service.pause_task(user_id=test_user_id, task_id=task.id)
+
+        # Check notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        pause_notifications = [n for n in notifications if n.event_type == "task_paused"]
+
+        assert len(pause_notifications) > 0
+        assert pause_notifications[0].metadata["task_id"] == task.id
+        assert "paused" in pause_notifications[0].message.lower()
+
+    def test_resume_creates_notification(self, db_conn, test_user_id):
+        """Test that resuming a task creates a notification."""
+        from handsfree.agents.service import AgentService
+        from handsfree.db.notifications import list_notifications
+
+        # Create and pause a task
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="copilot", instruction="test task"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="needs_input")
+
+        # Resume the task
+        service = AgentService(db_conn)
+        service.resume_task(user_id=test_user_id, task_id=task.id)
+
+        # Check notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        resume_notifications = [n for n in notifications if n.event_type == "task_resumed"]
+
+        assert len(resume_notifications) > 0
+        assert resume_notifications[0].metadata["task_id"] == task.id
+        assert "resumed" in resume_notifications[0].message.lower()

@@ -206,6 +206,104 @@ class AgentService:
             "spoken_text": spoken,
         }
 
+    def pause_task(
+        self,
+        user_id: str,
+        task_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Pause a running agent task.
+
+        Args:
+            user_id: User ID making the request.
+            task_id: Optional task ID to pause. If not provided, pauses most recent running task.
+
+        Returns:
+            Dictionary with task information and spoken confirmation.
+
+        Raises:
+            ValueError: If task not found or no running tasks available.
+        """
+        # If no task_id provided, get most recent running task for user
+        if not task_id:
+            tasks = get_agent_tasks(conn=self.conn, user_id=user_id, state="running", limit=1)
+            if not tasks:
+                raise ValueError("No running tasks found to pause")
+            task_id = tasks[0].id
+
+        # Transition from running to needs_input (pause state)
+        task = update_agent_task_state(
+            conn=self.conn,
+            task_id=task_id,
+            new_state="needs_input",
+            trace_update={"paused_via": "pause_command"},
+        )
+
+        if not task:
+            raise ValueError(f"Task {task_id} not found")
+
+        # Emit notification
+        self._emit_notification(
+            user_id=task.user_id,
+            event="task_paused",
+            task_id=task.id,
+            message=f"Agent task {task.id} paused",
+        )
+
+        return {
+            "task_id": task.id,
+            "state": task.state,
+            "spoken_text": f"Task {task.id[:8]} paused.",
+        }
+
+    def resume_task(
+        self,
+        user_id: str,
+        task_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Resume a paused agent task.
+
+        Args:
+            user_id: User ID making the request.
+            task_id: Optional task ID to resume. If not provided, resumes most recent paused task.
+
+        Returns:
+            Dictionary with task information and spoken confirmation.
+
+        Raises:
+            ValueError: If task not found or no paused tasks available.
+        """
+        # If no task_id provided, get most recent paused task (needs_input) for user
+        if not task_id:
+            tasks = get_agent_tasks(conn=self.conn, user_id=user_id, state="needs_input", limit=1)
+            if not tasks:
+                raise ValueError("No paused tasks found to resume")
+            task_id = tasks[0].id
+
+        # Transition from needs_input back to running (resume)
+        task = update_agent_task_state(
+            conn=self.conn,
+            task_id=task_id,
+            new_state="running",
+            trace_update={"resumed_via": "resume_command"},
+        )
+
+        if not task:
+            raise ValueError(f"Task {task_id} not found")
+
+        # Emit notification
+        self._emit_notification(
+            user_id=task.user_id,
+            event="task_resumed",
+            task_id=task.id,
+            message=f"Agent task {task.id} resumed",
+        )
+
+        return {
+            "task_id": task.id,
+            "state": task.state,
+            "spoken_text": f"Task {task.id[:8]} resumed.",
+        }
+
     def advance_task_state(
         self,
         task_id: str,

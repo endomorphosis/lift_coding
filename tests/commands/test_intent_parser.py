@@ -243,6 +243,44 @@ class TestAgentIntents:
             result = parser.parse(phrase)
             assert result.name == "agent.status", f"Failed for: {phrase}"
 
+    def test_agent_pause_without_task_id(self, parser: IntentParser) -> None:
+        """Test agent.pause intent without task ID."""
+        result = parser.parse("pause agent")
+        assert result.name == "agent.pause"
+        assert result.confidence >= 0.9
+        assert result.entities == {}
+
+    def test_agent_pause_with_task_id(self, parser: IntentParser) -> None:
+        """Test agent.pause intent with task ID."""
+        result = parser.parse("pause task 12345678-1234-1234-1234-123456789abc")
+        assert result.name == "agent.pause"
+        assert result.confidence >= 0.9
+        assert result.entities["task_id"] == "12345678-1234-1234-1234-123456789abc"
+
+        # Test with short task ID
+        result = parser.parse("pause task abc123")
+        assert result.name == "agent.pause"
+        assert result.entities["task_id"] == "abc123"
+
+    def test_agent_resume_without_task_id(self, parser: IntentParser) -> None:
+        """Test agent.resume intent without task ID."""
+        result = parser.parse("resume agent")
+        assert result.name == "agent.resume"
+        assert result.confidence >= 0.9
+        assert result.entities == {}
+
+    def test_agent_resume_with_task_id(self, parser: IntentParser) -> None:
+        """Test agent.resume intent with task ID."""
+        result = parser.parse("resume task 87654321-4321-4321-4321-210987654321")
+        assert result.name == "agent.resume"
+        assert result.confidence >= 0.9
+        assert result.entities["task_id"] == "87654321-4321-4321-4321-210987654321"
+
+        # Test with short task ID
+        result = parser.parse("resume task def456")
+        assert result.name == "agent.resume"
+        assert result.entities["task_id"] == "def456"
+
 
 class TestUnknownIntents:
     """Test handling of unknown/invalid inputs."""

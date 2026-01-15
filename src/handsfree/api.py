@@ -753,6 +753,14 @@ def _convert_router_response_to_command_response(
         # Agent status commands - use old handler for backward compatibility
         return _handle_agent_status(transcript, "api", user_id)
 
+    elif parsed_intent.name == "agent.pause" and status == CommandStatus.OK:
+        # Agent pause commands
+        return _handle_agent_pause(parsed_intent, transcript, "api", user_id)
+
+    elif parsed_intent.name == "agent.resume" and status == CommandStatus.OK:
+        # Agent resume commands
+        return _handle_agent_resume(parsed_intent, transcript, "api", user_id)
+
     # Get cards from router response if not already set
     if not cards and "cards" in router_response:
         cards = [UICard(**card) for card in router_response["cards"]]
@@ -2553,6 +2561,124 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
             status=CommandStatus.ERROR,
             intent=ParsedIntent(name="agent.status", confidence=0.95),
             spoken_text=f"Failed to get agent status: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
+
+
+def _handle_agent_pause(
+    parsed_intent: ParsedIntent, text: str, device: str, user_id: str
+) -> CommandResponse:
+    """Handle agent.pause intent.
+
+    Pause a running agent task. If task_id is provided in entities, pauses that specific task.
+    Otherwise, pauses the most recent running task for the user.
+
+    Args:
+        parsed_intent: Parsed intent with entities.
+        text: Command text.
+        device: Device identifier.
+        user_id: User ID from header or fixture.
+    """
+    from handsfree.agents.service import AgentService
+
+    task_id = parsed_intent.entities.get("task_id")
+
+    try:
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.pause_task(user_id=user_id, task_id=task_id)
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.pause",
+                confidence=0.95,
+                entities={"task_id": result["task_id"]},
+            ),
+            spoken_text=result["spoken_text"],
+            cards=[
+                UICard(
+                    title="Agent Task Paused",
+                    subtitle=f"Task {result['task_id'][:8]}",
+                    lines=[
+                        f"State: {result['state']}",
+                        "Use 'resume agent' to continue",
+                    ],
+                )
+            ],
+            debug=DebugInfo(transcript=text),
+        )
+    except ValueError as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.pause", confidence=0.95),
+            spoken_text=str(e),
+            debug=DebugInfo(transcript=text),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.pause", confidence=0.95),
+            spoken_text=f"Failed to pause agent task: {str(e)}",
+            debug=DebugInfo(transcript=text),
+        )
+
+
+def _handle_agent_resume(
+    parsed_intent: ParsedIntent, text: str, device: str, user_id: str
+) -> CommandResponse:
+    """Handle agent.resume intent.
+
+    Resume a paused agent task. If task_id is provided in entities, resumes that specific task.
+    Otherwise, resumes the most recent paused task for the user.
+
+    Args:
+        parsed_intent: Parsed intent with entities.
+        text: Command text.
+        device: Device identifier.
+        user_id: User ID from header or fixture.
+    """
+    from handsfree.agents.service import AgentService
+
+    task_id = parsed_intent.entities.get("task_id")
+
+    try:
+        db = get_db()
+        agent_service = AgentService(db)
+        result = agent_service.resume_task(user_id=user_id, task_id=task_id)
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(
+                name="agent.resume",
+                confidence=0.95,
+                entities={"task_id": result["task_id"]},
+            ),
+            spoken_text=result["spoken_text"],
+            cards=[
+                UICard(
+                    title="Agent Task Resumed",
+                    subtitle=f"Task {result['task_id'][:8]}",
+                    lines=[
+                        f"State: {result['state']}",
+                        "Task is now running",
+                    ],
+                )
+            ],
+            debug=DebugInfo(transcript=text),
+        )
+    except ValueError as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.resume", confidence=0.95),
+            spoken_text=str(e),
+            debug=DebugInfo(transcript=text),
+        )
+    except Exception as e:
+        return CommandResponse(
+            status=CommandStatus.ERROR,
+            intent=ParsedIntent(name="agent.resume", confidence=0.95),
+            spoken_text=f"Failed to resume agent task: {str(e)}",
             debug=DebugInfo(transcript=text),
         )
 

@@ -286,6 +286,28 @@ class IntentParser:
                 "agent.status",
                 {},
             ),
+            # Agent pause
+            (
+                re.compile(r"\bpause\s+task\s+([a-f0-9-]+)\b", re.IGNORECASE),
+                "agent.pause",
+                {"task_id": lambda m: m.group(1)},
+            ),
+            (
+                re.compile(r"\bpause\s+agent\b", re.IGNORECASE),
+                "agent.pause",
+                {},
+            ),
+            # Agent resume
+            (
+                re.compile(r"\bresume\s+task\s+([a-f0-9-]+)\b", re.IGNORECASE),
+                "agent.resume",
+                {"task_id": lambda m: m.group(1)},
+            ),
+            (
+                re.compile(r"\bresume\s+agent\b", re.IGNORECASE),
+                "agent.resume",
+                {},
+            ),
         ]
 
     def parse(self, text: str) -> ParsedIntent:
