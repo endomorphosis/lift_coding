@@ -1,10 +1,7 @@
 """Tests for agent task correlation with PR webhooks."""
 
-import json
 from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
-
-import pytest
 
 from handsfree.api import _correlate_pr_with_agent_tasks
 from handsfree.db.agent_tasks import AgentTask
