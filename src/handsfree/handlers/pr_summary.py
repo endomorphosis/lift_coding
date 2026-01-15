@@ -164,7 +164,8 @@ def _get_latest_review(reviews: list[dict[str, Any]]) -> dict[str, Any] | None:
     """Get the latest review by submitted timestamp.
 
     Args:
-        reviews: List of review objects with 'submitted_at', 'state', and 'user' fields
+        reviews: List of review objects with 'submitted_at' (ISO 8601 timestamp),
+                 'state', and 'user' fields
 
     Returns:
         Latest review dict or None if no reviews exist
@@ -180,8 +181,7 @@ def _get_latest_review(reviews: list[dict[str, Any]]) -> dict[str, Any] | None:
         return reviews[0]
 
     # Sort by submitted_at timestamp descending (most recent first)
-    sorted_reviews = sorted(
-        reviews_with_timestamp, key=lambda r: r.get("submitted_at", ""), reverse=True
-    )
+    # ISO 8601 timestamps sort correctly as strings
+    sorted_reviews = sorted(reviews_with_timestamp, key=lambda r: r["submitted_at"], reverse=True)
 
     return sorted_reviews[0]
