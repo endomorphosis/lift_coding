@@ -49,6 +49,7 @@ class ClientContext(BaseModel):
     timezone: str = Field(..., examples=["America/Los_Angeles"])
     app_version: str = Field(..., examples=["0.1.0"])
     noise_mode: bool = False
+    debug: bool = False
 
 
 class CommandRequest(BaseModel):

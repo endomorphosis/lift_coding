@@ -73,6 +73,10 @@ class CommandRouter:
         """
         profile_config = ProfileConfig.for_profile(profile)
 
+        # Handle debug commands
+        if intent.name == "debug.transcript":
+            return self._handle_debug_transcript(user_id, profile_config, intent)
+
         # Handle system commands
         if intent.name == "system.repeat":
             return self._handle_repeat(session_id, profile_config, intent)
@@ -271,6 +275,71 @@ class CommandRouter:
 
         # Store with index 0 (showing first item)
         self._navigation_state[session_id] = (items, 0)
+
+    def _handle_debug_transcript(
+        self, user_id: str | None, profile_config: ProfileConfig, intent: ParsedIntent
+    ) -> dict[str, Any]:
+        """Handle debug.transcript to return the last stored transcript.
+
+        Args:
+            user_id: User identifier for filtering commands
+            profile_config: User's profile configuration
+            intent: The debug.transcript intent
+
+        Returns:
+            Response dict with the last transcript
+        """
+        from handsfree.db.commands import get_commands
+        from handsfree.logging_utils import redact_secrets
+
+        if not self.db_conn or not user_id:
+            spoken_text = profile_config.truncate_spoken_text("Debug information not available.")
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        # Get the most recent command with transcript for this user
+        commands = get_commands(
+            self.db_conn,
+            user_id=user_id,
+            limit=10,  # Check last 10 commands
+        )
+
+        # Find the first command with a transcript
+        last_transcript = None
+        for cmd in commands:
+            if cmd.transcript:
+                last_transcript = cmd.transcript
+                break
+
+        if not last_transcript:
+            spoken_text = profile_config.truncate_spoken_text(
+                "No recent transcript found. Try enabling debug mode in your client."
+            )
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        # Redact secrets from transcript
+        safe_transcript = redact_secrets(last_transcript)
+
+        # Build response based on profile
+        if profile_config.profile == Profile.WORKOUT:
+            spoken_text = f"I heard: {safe_transcript}"
+        else:
+            spoken_text = f"The last command I heard was: {safe_transcript}"
+
+        spoken_text = profile_config.truncate_spoken_text(spoken_text)
+
+        return {
+            "status": "ok",
+            "intent": intent.to_dict(),
+            "spoken_text": spoken_text,
+        }
 
     def _build_item_response(
         self,
