@@ -826,7 +826,6 @@ class CommandRouter:
         from handsfree.db.action_logs import write_action_log
         from handsfree.db.pending_actions import create_pending_action
         from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_rate_limit
 
         # Extract entities
         reviewers = intent.entities.get("reviewers", [])
@@ -860,13 +859,14 @@ class CommandRouter:
                 "spoken_text": "Please specify at least one reviewer.",
             }
 
-        # Check rate limit
-        rate_limit_result = check_rate_limit(
+        # Check rate limit with burst limiting
+        from handsfree.rate_limit import check_side_effect_rate_limit
+        from handsfree.security import check_and_log_anomaly
+
+        rate_limit_result = check_side_effect_rate_limit(
             self.db_conn,
             user_id,
             "request_review",
-            window_seconds=60,
-            max_requests=10,
         )
 
         if not rate_limit_result.allowed:
@@ -886,10 +886,25 @@ class CommandRouter:
                 # Idempotency key already used - this is a retry
                 pass
 
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "request_review",
+                "rate_limited",
+                target=f"{repo}#{pr_number}",
+                request_data={"reviewers": reviewers},
+            )
+
+            # Create user-friendly spoken message with retry guidance
+            retry_msg = ""
+            if rate_limit_result.retry_after_seconds:
+                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
+
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
-                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+                "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
         # Evaluate policy
@@ -917,6 +932,16 @@ class CommandRouter:
             except ValueError:
                 # Idempotency key already used
                 pass
+
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "request_review",
+                "policy_denied",
+                target=f"{repo}#{pr_number}",
+                request_data={"reviewers": reviewers},
+            )
 
             return {
                 "status": "error",
@@ -1094,7 +1119,8 @@ class CommandRouter:
         from handsfree.db.action_logs import write_action_log
         from handsfree.db.pending_actions import create_pending_action
         from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_rate_limit
+        from handsfree.rate_limit import check_side_effect_rate_limit
+        from handsfree.security import check_and_log_anomaly
 
         # Extract entities
         pr_number = intent.entities.get("pr_number")
@@ -1119,13 +1145,11 @@ class CommandRouter:
                 ),
             }
 
-        # Check rate limit
-        rate_limit_result = check_rate_limit(
+        # Check rate limit with burst limiting
+        rate_limit_result = check_side_effect_rate_limit(
             self.db_conn,
             user_id,
             "rerun",
-            window_seconds=60,
-            max_requests=5,
         )
 
         if not rate_limit_result.allowed:
@@ -1145,10 +1169,25 @@ class CommandRouter:
                 # Idempotency key already used - this is a retry
                 pass
 
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "rerun",
+                "rate_limited",
+                target=f"{repo}#{pr_number}",
+                request_data={},
+            )
+
+            # Create user-friendly spoken message with retry guidance
+            retry_msg = ""
+            if rate_limit_result.retry_after_seconds:
+                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
+
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
-                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+                "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
         # Evaluate policy
@@ -1176,6 +1215,16 @@ class CommandRouter:
             except ValueError:
                 # Idempotency key already used
                 pass
+
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "rerun",
+                "policy_denied",
+                target=f"{repo}#{pr_number}",
+                request_data={},
+            )
 
             return {
                 "status": "error",
@@ -1344,7 +1393,8 @@ class CommandRouter:
         from handsfree.db.action_logs import write_action_log
         from handsfree.db.pending_actions import create_pending_action
         from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_rate_limit
+        from handsfree.rate_limit import check_side_effect_rate_limit
+        from handsfree.security import check_and_log_anomaly
 
         # Extract entities
         pr_number = intent.entities.get("pr_number")
@@ -1377,13 +1427,11 @@ class CommandRouter:
                 "spoken_text": "Please specify the comment text.",
             }
 
-        # Check rate limit
-        rate_limit_result = check_rate_limit(
+        # Check rate limit with burst limiting
+        rate_limit_result = check_side_effect_rate_limit(
             self.db_conn,
             user_id,
             "comment",
-            window_seconds=60,
-            max_requests=10,
         )
 
         if not rate_limit_result.allowed:
@@ -1403,10 +1451,25 @@ class CommandRouter:
                 # Idempotency key already used - this is a retry
                 pass
 
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "comment",
+                "rate_limited",
+                target=f"{repo}#{pr_number}",
+                request_data={"comment_body": comment_body},
+            )
+
+            # Create user-friendly spoken message with retry guidance
+            retry_msg = ""
+            if rate_limit_result.retry_after_seconds:
+                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
+
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
-                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+                "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
         # Evaluate policy
@@ -1434,6 +1497,16 @@ class CommandRouter:
             except ValueError:
                 # Idempotency key already used
                 pass
+
+            # Check for suspicious activity patterns
+            check_and_log_anomaly(
+                self.db_conn,
+                user_id,
+                "comment",
+                "policy_denied",
+                target=f"{repo}#{pr_number}",
+                request_data={"comment_body": comment_body},
+            )
 
             return {
                 "status": "error",
