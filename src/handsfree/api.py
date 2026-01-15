@@ -79,6 +79,7 @@ from handsfree.models import (
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.redis_client import get_redis_client
+from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
@@ -3866,3 +3867,236 @@ async def delete_notification_subscription(
         )
 
     return Response(status_code=204)
+
+
+@app.post("/v1/agents/tasks/{task_id}/start")
+async def start_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+) -> JSONResponse:
+    """Start an agent task (dev-only endpoint).
+
+    Transitions a task from 'created' to 'running' state.
+    This endpoint is only available in dev mode.
+
+    Args:
+        task_id: The task ID to start.
+        user_id: User ID extracted from authentication.
+
+    Returns:
+        200 OK with updated task information.
+
+    Raises:
+        403: Endpoint disabled (not in dev mode).
+        404: Task not found.
+        400: Invalid state transition.
+    """
+    # Dev-only check
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Task control endpoints are only available in dev mode",
+            },
+        )
+
+    db = get_db()
+    from handsfree.agents.service import AgentService
+
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.advance_task_state(
+            task_id=task_id,
+            new_state="running",
+            trace_update={
+                "started_at": datetime.now(UTC).isoformat(),
+                "started_via": "api_endpoint",
+            },
+        )
+
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={
+                "task_id": result["task_id"],
+                "state": result["state"],
+                "updated_at": result["updated_at"],
+                "message": "Task started successfully",
+            },
+        )
+    except ValueError as e:
+        if "not found" in str(e).lower():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "not_found",
+                    "message": str(e),
+                },
+            ) from e
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "invalid_transition",
+                    "message": str(e),
+                },
+            ) from e
+
+
+@app.post("/v1/agents/tasks/{task_id}/complete")
+async def complete_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+) -> JSONResponse:
+    """Complete an agent task (dev-only endpoint).
+
+    Transitions a task from 'running' to 'completed' state.
+    This endpoint is only available in dev mode.
+
+    Args:
+        task_id: The task ID to complete.
+        user_id: User ID extracted from authentication.
+
+    Returns:
+        200 OK with updated task information.
+
+    Raises:
+        403: Endpoint disabled (not in dev mode).
+        404: Task not found.
+        400: Invalid state transition.
+    """
+    # Dev-only check
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Task control endpoints are only available in dev mode",
+            },
+        )
+
+    db = get_db()
+    from handsfree.agents.service import AgentService
+
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.advance_task_state(
+            task_id=task_id,
+            new_state="completed",
+            trace_update={
+                "completed_at": datetime.now(UTC).isoformat(),
+                "completed_via": "api_endpoint",
+                "pr_url": None,  # Placeholder for PR link
+            },
+        )
+
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={
+                "task_id": result["task_id"],
+                "state": result["state"],
+                "updated_at": result["updated_at"],
+                "message": "Task completed successfully",
+            },
+        )
+    except ValueError as e:
+        if "not found" in str(e).lower():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "not_found",
+                    "message": str(e),
+                },
+            ) from e
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "invalid_transition",
+                    "message": str(e),
+                },
+            ) from e
+
+
+@app.post("/v1/agents/tasks/{task_id}/fail")
+async def fail_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+) -> JSONResponse:
+    """Fail an agent task (dev-only endpoint).
+
+    Transitions a task to 'failed' state from 'created', 'running', or 'needs_input'.
+    This endpoint is only available in dev mode.
+
+    Args:
+        task_id: The task ID to fail.
+        user_id: User ID extracted from authentication.
+
+    Returns:
+        200 OK with updated task information.
+
+    Raises:
+        403: Endpoint disabled (not in dev mode).
+        404: Task not found.
+        400: Invalid state transition.
+    """
+    # Dev-only check
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Task control endpoints are only available in dev mode",
+            },
+        )
+
+    db = get_db()
+    from handsfree.agents.service import AgentService
+
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.advance_task_state(
+            task_id=task_id,
+            new_state="failed",
+            trace_update={
+                "failed_at": datetime.now(UTC).isoformat(),
+                "failed_via": "api_endpoint",
+                "error": "Task failed via dev endpoint",
+            },
+        )
+
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={
+                "task_id": result["task_id"],
+                "state": result["state"],
+                "updated_at": result["updated_at"],
+                "message": "Task failed successfully",
+            },
+        )
+    except ValueError as e:
+        if "not found" in str(e).lower():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "not_found",
+                    "message": str(e),
+                },
+            ) from e
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "invalid_transition",
+                    "message": str(e),
+                },
+            ) from e

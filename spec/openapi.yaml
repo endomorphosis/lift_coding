@@ -338,6 +338,153 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/agents/tasks/{task_id}/start:
+    post:
+      summary: Start an agent task (dev-only)
+      description: |
+        Transition a task from 'created' to 'running' state.
+        This endpoint is only available in dev mode (HANDSFREE_AUTH_MODE=dev).
+      operationId: startAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to start
+      responses:
+        '200':
+          description: Task started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [task_id, state, updated_at, message]
+                properties:
+                  task_id:
+                    type: string
+                  state:
+                    type: string
+                    enum: [running]
+                  updated_at:
+                    type: string
+                    format: date-time
+                  message:
+                    type: string
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Endpoint disabled (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/complete:
+    post:
+      summary: Complete an agent task (dev-only)
+      description: |
+        Transition a task from 'running' to 'completed' state.
+        This endpoint is only available in dev mode (HANDSFREE_AUTH_MODE=dev).
+      operationId: completeAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to complete
+      responses:
+        '200':
+          description: Task completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [task_id, state, updated_at, message]
+                properties:
+                  task_id:
+                    type: string
+                  state:
+                    type: string
+                    enum: [completed]
+                  updated_at:
+                    type: string
+                    format: date-time
+                  message:
+                    type: string
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Endpoint disabled (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/fail:
+    post:
+      summary: Fail an agent task (dev-only)
+      description: |
+        Transition a task to 'failed' state from 'created', 'running', or 'needs_input'.
+        This endpoint is only available in dev mode (HANDSFREE_AUTH_MODE=dev).
+      operationId: failAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to fail
+      responses:
+        '200':
+          description: Task failed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [task_id, state, updated_at, message]
+                properties:
+                  task_id:
+                    type: string
+                  state:
+                    type: string
+                    enum: [failed]
+                  updated_at:
+                    type: string
+                    format: date-time
+                  message:
+                    type: string
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Endpoint disabled (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
 components:
   schemas:
     Profile:
