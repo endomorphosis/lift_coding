@@ -1,0 +1,53 @@
+{
+  "action": "removed",
+  "installation": {
+    "id": 12345678,
+    "account": {
+      "login": "testorg",
+      "id": 7654321,
+      "type": "Organization"
+    },
+    "repository_selection": "selected",
+    "access_tokens_url": "https://api.github.com/app/installations/12345678/access_tokens",
+    "repositories_url": "https://api.github.com/installation/repositories",
+    "html_url": "https://github.com/organizations/testorg/settings/installations/12345678",
+    "app_id": 123456,
+    "app_slug": "test-github-app",
+    "target_id": 7654321,
+    "target_type": "Organization",
+    "permissions": {
+      "contents": "write",
+      "issues": "write",
+      "metadata": "read",
+      "pull_requests": "write"
+    },
+    "events": [
+      "pull_request",
+      "pull_request_review",
+      "issue_comment"
+    ],
+    "created_at": "2026-01-15T10:00:00Z",
+    "updated_at": "2026-01-15T10:00:00Z",
+    "single_file_name": null,
+    "has_multiple_single_files": false,
+    "single_file_paths": [],
+    "suspended_by": null,
+    "suspended_at": null
+  },
+  "repository_selection": "selected",
+  "repositories_added": [],
+  "repositories_removed": [
+    {
+      "id": 987654321,
+      "node_id": "R_kgDOEurOIQ",
+      "name": "testrepo",
+      "full_name": "testorg/testrepo",
+      "private": false
+    }
+  ],
+  "sender": {
+    "login": "testuser",
+    "id": 1234567,
+    "type": "User"
+  }
+}

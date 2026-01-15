@@ -395,13 +395,21 @@ async def github_webhook(
                 action=normalized.get("action"),
                 event_id=event_id,
             )
+
+            # Process installation lifecycle events
+            from handsfree.installation_lifecycle import process_installation_event
+
+            db = get_db()
+            event_type_normalized = normalized.get("event_type")
+            if event_type_normalized in ("installation", "installation_repositories"):
+                process_installation_event(db, normalized, payload)
+
             # Emit notification for normalized webhook events
             _emit_webhook_notification(normalized, payload)
 
             # Mark as successfully processed
             from handsfree.db.webhook_events import update_webhook_processing_status
 
-            db = get_db()
             update_webhook_processing_status(db, event_id, processed_ok=True)
         else:
             # Event type not supported for normalization - not an error

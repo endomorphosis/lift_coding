@@ -188,6 +188,42 @@ def normalize_github_event(
                 "mentions": mentions,
             }
 
+    elif event_type == "installation":
+        action = payload.get("action")
+        if action in ("created", "deleted"):
+            installation = payload.get("installation", {})
+            account = installation.get("account", {})
+            repositories = payload.get("repositories", [])
+
+            return {
+                "event_type": "installation",
+                "action": action,
+                "installation_id": installation.get("id"),
+                "account_login": account.get("login"),
+                "account_type": account.get("type"),
+                "repository_selection": installation.get("repository_selection"),
+                "repositories": [repo.get("full_name") for repo in repositories],
+            }
+
+    elif event_type == "installation_repositories":
+        action = payload.get("action")
+        if action in ("added", "removed"):
+            installation = payload.get("installation", {})
+            account = installation.get("account", {})
+            repositories_added = payload.get("repositories_added", [])
+            repositories_removed = payload.get("repositories_removed", [])
+
+            return {
+                "event_type": "installation_repositories",
+                "action": action,
+                "installation_id": installation.get("id"),
+                "account_login": account.get("login"),
+                "account_type": account.get("type"),
+                "repository_selection": payload.get("repository_selection"),
+                "repositories_added": [repo.get("full_name") for repo in repositories_added],
+                "repositories_removed": [repo.get("full_name") for repo in repositories_removed],
+            }
+
     # Unsupported event type or action
     return None
 
