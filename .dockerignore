@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Development
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Documentation
+*.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+
+# Project specific
+data/
+*.duckdb
+*.duckdb.wal
+*.duckdb.tmp
+.env
+.env.*
+tests/
+dev/
+implementation_plan/
+tracking/
+work/
+migrations/
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
