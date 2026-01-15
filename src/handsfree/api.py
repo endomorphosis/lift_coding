@@ -256,8 +256,7 @@ def get_metrics():
             detail={
                 "error": "not_found",
                 "message": (
-                    "Metrics endpoint not available. "
-                    "Set HANDSFREE_ENABLE_METRICS=true to enable."
+                    "Metrics endpoint not available. Set HANDSFREE_ENABLE_METRICS=true to enable."
                 ),
             },
         )
