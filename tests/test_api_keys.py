@@ -1,7 +1,6 @@
 """Tests for API key authentication and management."""
 
 import uuid
-from datetime import UTC, datetime
 
 import pytest
 

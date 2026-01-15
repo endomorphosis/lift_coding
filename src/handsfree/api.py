@@ -4310,7 +4310,9 @@ async def create_api_key(
             label=api_key_record.label,
             created_at=api_key_record.created_at.isoformat(),
             revoked_at=api_key_record.revoked_at.isoformat() if api_key_record.revoked_at else None,
-            last_used_at=api_key_record.last_used_at.isoformat() if api_key_record.last_used_at else None,
+            last_used_at=api_key_record.last_used_at.isoformat()
+            if api_key_record.last_used_at
+            else None,
         ),
     )
 
@@ -4385,7 +4387,9 @@ async def revoke_api_key(
 
     # Verify ownership
     if api_key.user_id != user_id:
-        log_warning(f"User {user_id} attempted to revoke API key {key_id} owned by {api_key.user_id}")
+        log_warning(
+            f"User {user_id} attempted to revoke API key {key_id} owned by {api_key.user_id}"
+        )
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You do not have permission to revoke this API key",

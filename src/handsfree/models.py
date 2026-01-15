@@ -372,11 +372,13 @@ class ApiKeyResponse(BaseModel):
 
 class CreateApiKeyResponse(BaseModel):
     """Response when creating a new API key.
-    
+
     This is the ONLY time the plaintext key is returned.
     """
 
-    key: str = Field(..., description="The plaintext API key. Save this - it will not be shown again.")
+    key: str = Field(
+        ..., description="The plaintext API key. Save this - it will not be shown again."
+    )
     api_key: ApiKeyResponse
 
 
