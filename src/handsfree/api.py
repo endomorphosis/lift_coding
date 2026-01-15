@@ -1605,17 +1605,15 @@ async def request_review(
         )
 
         # Return 429 with Retry-After header
-        from fastapi import Response
-        response = Response(status_code=429)
-        if rate_limit_result.retry_after_seconds:
-            response.headers["Retry-After"] = str(rate_limit_result.retry_after_seconds)
-
-        raise HTTPException(
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
             status_code=429,
-            detail={
-                "error": "rate_limited",
-                "message": rate_limit_result.reason,
-                "retry_after": rate_limit_result.retry_after_seconds,
+            content={
+                "detail": {
+                    "error": "rate_limited",
+                    "message": rate_limit_result.reason,
+                    "retry_after": rate_limit_result.retry_after_seconds,
+                }
             },
             headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
@@ -1921,12 +1919,15 @@ async def rerun_checks(
             request_data={},
         )
 
-        raise HTTPException(
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
             status_code=429,
-            detail={
-                "error": "rate_limited",
-                "message": rate_limit_result.reason,
-                "retry_after": rate_limit_result.retry_after_seconds,
+            content={
+                "detail": {
+                    "error": "rate_limited",
+                    "message": rate_limit_result.reason,
+                    "retry_after": rate_limit_result.retry_after_seconds,
+                }
             },
             headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
@@ -2181,12 +2182,15 @@ async def merge_pr(
             request_data={"merge_method": request.merge_method},
         )
 
-        raise HTTPException(
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
             status_code=429,
-            detail={
-                "error": "rate_limited",
-                "message": rate_limit_result.reason,
-                "retry_after": rate_limit_result.retry_after_seconds,
+            content={
+                "detail": {
+                    "error": "rate_limited",
+                    "message": rate_limit_result.reason,
+                    "retry_after": rate_limit_result.retry_after_seconds,
+                }
             },
             headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
         )
