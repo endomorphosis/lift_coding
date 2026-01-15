@@ -5,7 +5,7 @@ Implement the command pipeline: parse transcript text into intents/entities, rou
 
 ## Why (from the plan)
 - `docs/06-command-system.md`: intent parser, router, policy gate, pending action token
-- `spec/command_grammar.md`: phrase sets + disambiguation + negative examples
+- `../../spec/command_grammar.md`: phrase sets + disambiguation + negative examples
 - `docs/01-requirements.md`: profiles; safe actions require confirmation
 
 ## Scope
@@ -26,7 +26,7 @@ Implement the command pipeline: parse transcript text into intents/entities, rou
 - Real side effects like requesting reviews (PR-007)
 
 ## Issues this PR should close (create these issues)
-- Command: implement intent parser using `spec/command_grammar.md`
+- Command: implement intent parser using `../../spec/command_grammar.md`
 - Command: implement confirmation + token lifecycle
 - Profiles: implement profile-based response tuning
 - Tests: transcript fixture suite (clean/noisy/negative)

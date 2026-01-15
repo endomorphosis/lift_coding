@@ -36,4 +36,4 @@
 - Commute: medium verbosity, batch notifications
 
 ## Command grammar file
-See `spec/command_grammar.md` for recommended phrases + disambiguation patterns.
+See `../../spec/command_grammar.md` for recommended phrases + disambiguation patterns.
