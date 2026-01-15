@@ -90,6 +90,8 @@ docker run -d \
 
 Configure the containerized API using these environment variables:
 
+**Quick start:** Copy `.env.example` to `.env` and customize the values for your environment.
+
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PORT` | `8080` | Port for the API server |
