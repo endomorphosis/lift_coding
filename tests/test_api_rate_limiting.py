@@ -6,7 +6,6 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.db import init_db
 from handsfree.db.action_logs import get_action_logs, write_action_log
 
 
@@ -147,9 +146,7 @@ class TestRetryAfterHeaders:
 class TestVoiceCommandRateLimiting:
     """Test voice command responses for rate limiting."""
 
-    def test_voice_command_rate_limit_includes_retry_guidance(
-        self, client, reset_db, monkeypatch
-    ):
+    def test_voice_command_rate_limit_includes_retry_guidance(self, client, reset_db, monkeypatch):
         """Test that voice commands include user-friendly retry guidance."""
         monkeypatch.setenv("HANDSFREE_AUTH_MODE", "dev")
         user_id = str(uuid.uuid4())
@@ -208,7 +205,7 @@ class TestAnomalyAuditLogs:
         db = get_db()
 
         # Create 5 rate limit denials to trigger anomaly detection
-        for i in range(5):
+        for _i in range(5):
             response = client.post(
                 "/v1/actions/request-review",
                 json={
@@ -268,7 +265,8 @@ class TestAnomalyAuditLogs:
 
         db = get_db()
 
-        # Create 5 policy denials manually (not counting towards rate limit by using different timestamps)
+        # Create 5 policy denials manually
+        # (not counting towards rate limit by using different timestamps)
         for _i in range(5):
             write_action_log(
                 db,

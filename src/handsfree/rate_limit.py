@@ -22,7 +22,12 @@ class RateLimitResult:
 
 # Stricter defaults for side-effect actions
 SIDE_EFFECT_RATE_LIMITS = {
-    "request_review": {"window_seconds": 60, "max_requests": 10, "burst_seconds": 10, "burst_max": 3},
+    "request_review": {
+        "window_seconds": 60,
+        "max_requests": 10,
+        "burst_seconds": 10,
+        "burst_max": 3,
+    },
     "rerun": {"window_seconds": 60, "max_requests": 5, "burst_seconds": 10, "burst_max": 2},
     "merge": {"window_seconds": 60, "max_requests": 5, "burst_seconds": 10, "burst_max": 2},
     "comment": {"window_seconds": 60, "max_requests": 10, "burst_seconds": 10, "burst_max": 3},

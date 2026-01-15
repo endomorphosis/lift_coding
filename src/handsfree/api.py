@@ -78,7 +78,6 @@ from handsfree.models import (
     PendingAction as PydanticPendingAction,
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
-from handsfree.rate_limit import check_rate_limit
 from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
@@ -1606,6 +1605,7 @@ async def request_review(
 
         # Return 429 with Retry-After header
         from fastapi.responses import JSONResponse
+
         return JSONResponse(
             status_code=429,
             content={
@@ -1615,7 +1615,9 @@ async def request_review(
                     "retry_after": rate_limit_result.retry_after_seconds,
                 }
             },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
+            if rate_limit_result.retry_after_seconds
+            else {},
         )
 
     # Evaluate policy
@@ -1920,6 +1922,7 @@ async def rerun_checks(
         )
 
         from fastapi.responses import JSONResponse
+
         return JSONResponse(
             status_code=429,
             content={
@@ -1929,7 +1932,9 @@ async def rerun_checks(
                     "retry_after": rate_limit_result.retry_after_seconds,
                 }
             },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
+            if rate_limit_result.retry_after_seconds
+            else {},
         )
 
     # Evaluate policy
@@ -2183,6 +2188,7 @@ async def merge_pr(
         )
 
         from fastapi.responses import JSONResponse
+
         return JSONResponse(
             status_code=429,
             content={
@@ -2192,7 +2198,9 @@ async def merge_pr(
                     "retry_after": rate_limit_result.retry_after_seconds,
                 }
             },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)} if rate_limit_result.retry_after_seconds else {},
+            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
+            if rate_limit_result.retry_after_seconds
+            else {},
         )
 
     # Evaluate policy (merge is denied by default)

@@ -826,7 +826,6 @@ class CommandRouter:
         from handsfree.db.action_logs import write_action_log
         from handsfree.db.pending_actions import create_pending_action
         from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_rate_limit
 
         # Extract entities
         reviewers = intent.entities.get("reviewers", [])

@@ -384,8 +384,8 @@ class TestPRCommentRateLimiting:
             require_confirmation=False,
         )
 
-        # Make 10 requests (should hit rate limit at max_requests=10)
-        for i in range(10):
+        # Make 3 requests (burst_max is 3 for comment, will hit burst limit after this)
+        for i in range(3):
             intent = parser.parse(f"comment on PR {100 + i}: test comment {i}")
             response = db_router.route(
                 intent,
@@ -396,14 +396,14 @@ class TestPRCommentRateLimiting:
             )
             assert response["status"] == "ok"
 
-        # 11th request should be rate limited
+        # 4th request should be rate limited (burst limit exceeded)
         intent = parser.parse("comment on PR 200: should be rate limited")
         response = db_router.route(
             intent,
             Profile.COMMUTE,
             session_id="test-session",
             user_id=TEST_USER_ID,
-            idempotency_key="test-key-rate-11",
+            idempotency_key="test-key-rate-4",
         )
 
         assert response["status"] == "error"

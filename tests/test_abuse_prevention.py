@@ -1,6 +1,5 @@
 """Tests for enhanced rate limiting with burst limits and anomaly detection."""
 
-import time
 import uuid
 
 import pytest

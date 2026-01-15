@@ -192,8 +192,8 @@ def test_request_review_rate_limiting(reset_db):
         require_confirmation=False,
     )
 
-    # Make 10 requests (should all succeed)
-    for i in range(1, 11):  # Start at 1 since pr_number must be >= 1
+    # Make 3 requests (burst_max is 3 for request_review, will hit burst limit after this)
+    for i in range(1, 4):  # Start at 1 since pr_number must be >= 1
         response = client.post(
             "/v1/actions/request-review",
             json={
@@ -204,7 +204,7 @@ def test_request_review_rate_limiting(reset_db):
         )
         assert response.status_code == 200
 
-    # 11th request should be rate limited
+    # 4th request should be rate limited (burst limit exceeded)
     response = client.post(
         "/v1/actions/request-review",
         json={
@@ -216,8 +216,8 @@ def test_request_review_rate_limiting(reset_db):
 
     assert response.status_code == 429
     data = response.json()
-    assert data["error"] == "rate_limited"
-    assert "retry_after" in data
+    assert data["detail"]["error"] == "rate_limited"
+    assert data["detail"]["retry_after"] is not None
 
     # Check audit log shows rate limiting
     logs = get_action_logs(db, action_type="request_review", limit=20)

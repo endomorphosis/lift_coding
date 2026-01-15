@@ -394,8 +394,8 @@ class TestMergeActionEndpoint:
             required_approvals=0,
         )
 
-        # Make multiple requests to trigger rate limit
-        for i in range(5):
+        # Make multiple requests to trigger rate limit (burst_max is 2 for merge)
+        for i in range(2):
             response = self.client.post(
                 "/v1/actions/merge",
                 json={
@@ -405,10 +405,10 @@ class TestMergeActionEndpoint:
                     "idempotency_key": f"merge-{i}",
                 },
             )
-            # First 5 should succeed (create pending actions)
+            # First 2 should succeed (create pending actions)
             assert response.status_code == 200
 
-        # 6th request should be rate limited
+        # 3rd request should be rate limited (burst limit exceeded)
         response = self.client.post(
             "/v1/actions/merge",
             json={
@@ -420,8 +420,8 @@ class TestMergeActionEndpoint:
 
         assert response.status_code == 429
         data = response.json()
-        assert data["error"] == "rate_limited"
-        assert "retry_after" in data
+        assert data["detail"]["error"] == "rate_limited"
+        assert data["detail"]["retry_after"] is not None
 
     def test_merge_audit_logging(self):
         """Test that merge actions are logged in audit log."""
