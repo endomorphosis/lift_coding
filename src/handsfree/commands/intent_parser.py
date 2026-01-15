@@ -45,6 +45,12 @@ class IntentParser:
         """Initialize the intent parser with pattern rules."""
         # Pattern rules: (regex, intent_name, entity_extractors)
         self.patterns: list[tuple[re.Pattern[str], str, dict[str, Any]]] = [
+            # Debug/observability commands
+            (
+                re.compile(r"\b(explain what you heard|what did you hear)\b", re.IGNORECASE),
+                "debug.transcript",
+                {},
+            ),
             # System commands (more flexible patterns)
             (
                 re.compile(r"\b(repeat|say that again)\b", re.IGNORECASE),

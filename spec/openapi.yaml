@@ -282,6 +282,10 @@ components:
         noise_mode:
           type: boolean
           default: false
+        debug:
+          type: boolean
+          default: false
+          description: Enable debug mode to store transcript for troubleshooting
 
     CommandResponse:
       type: object

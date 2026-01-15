@@ -473,6 +473,30 @@ async def submit_command(
     # Parse intent using the intent parser
     parsed_intent = _intent_parser.parse(text)
 
+    # Store command in database if debug mode is enabled or auth mode is dev
+    # Don't store debug.transcript commands themselves to avoid recursive transcript lookup
+    from handsfree.auth import get_auth_mode
+    from handsfree.db.commands import store_command
+
+    db = get_db()
+    should_store_transcript = request.client_context.debug or get_auth_mode() == "dev"
+
+    # Store command with or without transcript based on debug/auth mode
+    # Skip storing debug.transcript commands to avoid self-referential lookups
+    if parsed_intent.name != "debug.transcript":
+        store_command(
+            conn=db,
+            user_id=user_id,
+            input_type="text" if isinstance(request.input, TextInput) else "audio",
+            status="ok",  # Will be updated later if needed
+            profile=request.profile.value,
+            transcript=text if should_store_transcript else None,
+            intent_name=parsed_intent.name,
+            intent_confidence=parsed_intent.confidence,
+            entities=parsed_intent.entities,
+            store_transcript=should_store_transcript,
+        )
+
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":
@@ -513,7 +537,8 @@ async def submit_command(
 
     # For system commands (repeat, next), router returns complete response
     # Don't re-apply fixture handlers - just convert directly
-    if parsed_intent.name.startswith("system."):
+    # Debug commands are also treated as system commands
+    if parsed_intent.name.startswith("system.") or parsed_intent.name.startswith("debug."):
         response = _convert_router_response_direct(router_response, text, request.profile)
     else:
         # Convert router response to CommandResponse
