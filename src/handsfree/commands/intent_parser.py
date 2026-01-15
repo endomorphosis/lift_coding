@@ -233,6 +233,22 @@ class IntentParser:
                 "pr.merge",
                 {"merge_method": "squash", "auto": True},
             ),
+            # Checks rerun (side effect)
+            (
+                re.compile(r"\brerun\s+checks\s+(?:for|on)\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "checks.rerun",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(r"\brerun\s+ci\s+(?:for|on)\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "checks.rerun",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(r"\brerun\s+(?:checks|ci)\b", re.IGNORECASE),
+                "checks.rerun",
+                {},
+            ),
             # Checks status
             (
                 re.compile(r"\bchecks\s+for\s+pr\s+(\d+)\b", re.IGNORECASE),

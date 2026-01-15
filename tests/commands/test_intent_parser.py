@@ -158,6 +158,36 @@ class TestPRIntents:
 class TestChecksIntents:
     """Test checks-related intents."""
 
+    def test_checks_rerun_with_pr(self, parser: IntentParser) -> None:
+        """Test checks.rerun for specific PR."""
+        result = parser.parse("rerun checks for pr 123")
+        assert result.name == "checks.rerun"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("rerun checks on pr 456")
+        assert result.name == "checks.rerun"
+        assert result.entities["pr_number"] == 456
+
+    def test_checks_rerun_ci_with_pr(self, parser: IntentParser) -> None:
+        """Test checks.rerun with 'ci' phrasing."""
+        result = parser.parse("rerun ci for pr 789")
+        assert result.name == "checks.rerun"
+        assert result.entities["pr_number"] == 789
+
+        result = parser.parse("rerun ci on pr 101")
+        assert result.name == "checks.rerun"
+        assert result.entities["pr_number"] == 101
+
+    def test_checks_rerun_without_pr(self, parser: IntentParser) -> None:
+        """Test checks.rerun without explicit PR number."""
+        result = parser.parse("rerun checks")
+        assert result.name == "checks.rerun"
+        assert result.entities == {}
+
+        result = parser.parse("rerun ci")
+        assert result.name == "checks.rerun"
+        assert result.entities == {}
+
     def test_checks_status_for_pr(self, parser: IntentParser) -> None:
         """Test checks.status for specific PR."""
         result = parser.parse("checks for pr 412")
