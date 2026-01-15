@@ -167,14 +167,14 @@ def normalize_github_event(
             comment = payload.get("comment", {})
             issue = payload.get("issue", {})
             comment_body = comment.get("body", "")
-            
+
             # Extract @mentions from comment body
             mentions = re.findall(r"@(\w+)", comment_body)
-            
+
             # Check if this is a PR comment (issue with pull_request field)
             is_pr = "pull_request" in issue
             issue_or_pr_number = issue.get("number")
-            
+
             return {
                 "event_type": "issue_comment",
                 "action": action,

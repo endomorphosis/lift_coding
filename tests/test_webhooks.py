@@ -286,7 +286,10 @@ class TestEventNormalization:
         assert normalized["issue_number"] == 42
         assert normalized["is_pull_request"] is True
         assert normalized["comment_author"] == "commenter"
-        assert normalized["comment_url"] == "https://github.com/testorg/testrepo/issues/42#issuecomment-999888777"
+        assert (
+            normalized["comment_url"]
+            == "https://github.com/testorg/testrepo/issues/42#issuecomment-999888777"
+        )
         assert "testuser" in normalized["mentions"]
         assert "anotheruser" in normalized["mentions"]
         assert len(normalized["mentions"]) == 2

@@ -353,7 +353,7 @@ class TestWebhookUserMapping:
         # Modify the payload to have no mentions
         payload = load_fixture("issue_comment.created.json")
         payload["comment"]["body"] = "This is a comment without any mentions."
-        
+
         response = client.post(
             "/v1/webhooks/github",
             json=payload,
