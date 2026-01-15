@@ -112,16 +112,82 @@ Implemented first-class privacy modes (strict/balanced/debug) enforced across su
 ✅ Debug mode never default (must be explicitly requested)  
 ✅ Transcript logging gated by debug flag  
 ✅ All excerpts in balanced/debug modes are redacted  
+✅ Image URIs never appear in spoken_text  
+✅ Image inputs rejected in strict mode (default)  
+✅ Image inputs accepted but not processed in balanced/debug modes  
+
+## Multimodal Input Support (Image/Camera Snapshots)
+
+### Overview
+Added placeholder support for image input (camera snapshots) with strict privacy enforcement. Images are accepted by the API but **not fetched, stored, or processed** in this PR. Future PRs will add OCR/vision capabilities.
+
+### Changes Made
+
+#### 1. OpenAPI Spec (`spec/openapi.yaml`)
+- Added `ImageInput` schema with:
+  - `type: "image"` (required)
+  - `uri: string` (required) - URI to image/camera snapshot
+  - `content_type: string` (optional) - MIME type (e.g., "image/jpeg")
+- Updated `CommandInput` union type to include `ImageInput`
+- Updated discriminator mapping to include `image` type
+
+#### 2. Pydantic Models (`src/handsfree/models.py`)
+- Added `ImageInput` model class
+- Updated `CommandRequest` to accept `TextInput | AudioInput | ImageInput`
+
+#### 3. API Privacy Enforcement (`src/handsfree/api.py`)
+- **Strict mode (default)**: Rejects image inputs with error response
+  - Returns `error.image_not_supported` intent
+  - Spoken text: "Image input is not supported in strict privacy mode."
+  - Logs rejection without URI (unless debug mode with redaction)
+- **Balanced/debug modes**: Accepts image inputs with stub response
+  - Returns `image.placeholder` intent with status `ok`
+  - Spoken text: "Image received but cannot be processed yet. Please describe what you need help with."
+  - Logs acceptance without URI (unless debug mode with redaction)
+  - Debug mode includes stub message in `debug.tool_calls`
+- **No image data is fetched or stored** - only metadata is processed
+- **Image URIs never appear in spoken_text** in any mode
+- Image inputs are stored with `input_type="image"` in command history
+
+#### 4. Tests (`tests/test_image_input.py`)
+- 12 comprehensive tests covering:
+  - Privacy mode enforcement (strict/balanced/debug)
+  - OpenAPI schema validation
+  - URI privacy (never in spoken_text)
+  - Backward compatibility
+  - Debug mode behavior
+- All tests passing ✅
+
+### Behavior by Privacy Mode
+
+| Mode | Behavior |
+|------|----------|
+| **Strict** (default) | Rejects image input with error, logs rejection |
+| **Balanced** | Accepts image, returns stub response, not processed |
+| **Debug** | Accepts image, returns stub response + debug info, not processed |
+
+### Security Guarantees
+- ✅ No image bytes fetched or stored
+- ✅ Image URIs never in spoken_text
+- ✅ Image URIs only logged in debug mode with redaction
+- ✅ Strict mode (default) rejects images entirely
+- ✅ No external vision/OCR dependencies
+
+### Future Work
+- Add vision/OCR processing in balanced/debug modes
+- Support multiple images in single request
+- Add image content validation
 
 ## Files Changed
-1. `src/handsfree/models.py` - Added PrivacyMode enum and field
-2. `src/handsfree/api.py` - Pass privacy_mode to handlers
+1. `src/handsfree/models.py` - Added PrivacyMode enum and field, ImageInput model
+2. `src/handsfree/api.py` - Pass privacy_mode to handlers, image input enforcement
 3. `src/handsfree/handlers/pr_summary.py` - Enforce privacy modes
 4. `src/handsfree/handlers/inbox.py` - Enforce privacy modes
-5. `spec/openapi.yaml` - Added PrivacyMode schema
+5. `spec/openapi.yaml` - Added PrivacyMode schema and ImageInput schema
 6. `tests/test_pr_summary.py` - Added privacy mode tests
 7. `tests/test_inbox.py` - Added privacy mode tests
 8. `tests/test_privacy_mode_integration.py` - Added integration tests (new file)
+9. `tests/test_image_input.py` - Added image input tests (new file)
 
 ## Validation Commands
 ```bash
