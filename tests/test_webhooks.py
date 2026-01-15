@@ -560,3 +560,326 @@ class TestWebhookProcessingFailures:
         # processed_ok should be None for unsupported events
         assert event["processed_ok"] is None
         assert event["processing_error"] is None
+
+
+class TestInstallationLifecycle:
+    """Test GitHub App installation lifecycle handling."""
+
+    def test_installation_created_normalization(self, client):
+        """Test that installation.created events are normalized correctly."""
+        payload = load_fixture("installation.created.json")
+        normalized = normalize_github_event("installation", payload)
+
+        assert normalized is not None
+        assert normalized["event_type"] == "installation"
+        assert normalized["action"] == "created"
+        assert normalized["installation_id"] == 12345678
+        assert normalized["account_login"] == "testorg"
+        assert normalized["account_type"] == "Organization"
+        assert normalized["repository_selection"] == "selected"
+        assert "testorg/testrepo" in normalized["repositories"]
+        assert "testorg/another-repo" in normalized["repositories"]
+
+    def test_installation_deleted_normalization(self, client):
+        """Test that installation.deleted events are normalized correctly."""
+        payload = load_fixture("installation.deleted.json")
+        normalized = normalize_github_event("installation", payload)
+
+        assert normalized is not None
+        assert normalized["event_type"] == "installation"
+        assert normalized["action"] == "deleted"
+        assert normalized["installation_id"] == 12345678
+        assert normalized["account_login"] == "testorg"
+        assert "testorg/testrepo" in normalized["repositories"]
+
+    def test_installation_repositories_added_normalization(self, client):
+        """Test that installation_repositories.added events are normalized correctly."""
+        payload = load_fixture("installation_repositories.added.json")
+        normalized = normalize_github_event("installation_repositories", payload)
+
+        assert normalized is not None
+        assert normalized["event_type"] == "installation_repositories"
+        assert normalized["action"] == "added"
+        assert normalized["installation_id"] == 12345678
+        assert normalized["account_login"] == "testorg"
+        assert "testorg/new-repo" in normalized["repositories_added"]
+        assert len(normalized["repositories_removed"]) == 0
+
+    def test_installation_repositories_removed_normalization(self, client):
+        """Test that installation_repositories.removed events are normalized correctly."""
+        payload = load_fixture("installation_repositories.removed.json")
+        normalized = normalize_github_event("installation_repositories", payload)
+
+        assert normalized is not None
+        assert normalized["event_type"] == "installation_repositories"
+        assert normalized["action"] == "removed"
+        assert normalized["installation_id"] == 12345678
+        assert "testorg/testrepo" in normalized["repositories_removed"]
+        assert len(normalized["repositories_added"]) == 0
+
+    def test_installation_created_persistence(self, client):
+        """Test that installation.created event creates proper mappings."""
+        from handsfree import api
+        from handsfree.db.github_connections import get_github_connections_by_user
+        from handsfree.db.repo_subscriptions import list_repo_subscriptions
+        from handsfree.installation_lifecycle import SYSTEM_USER_ID
+
+        payload = load_fixture("installation.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-created-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify github_connection was created for system user
+        db = api.get_db()
+        connections = get_github_connections_by_user(db, SYSTEM_USER_ID)
+        assert len(connections) > 0
+        assert any(c.installation_id == 12345678 for c in connections)
+
+        # Verify repo subscriptions were created
+        subscriptions = list_repo_subscriptions(db, SYSTEM_USER_ID)
+        repo_names = [s.repo_full_name for s in subscriptions]
+        assert "testorg/testrepo" in repo_names
+        assert "testorg/another-repo" in repo_names
+
+        # Verify installation_id is set on subscriptions
+        for sub in subscriptions:
+            if sub.repo_full_name in ["testorg/testrepo", "testorg/another-repo"]:
+                assert sub.installation_id == 12345678
+
+    def test_installation_deleted_removes_mappings(self, client):
+        """Test that installation.deleted event removes repo mappings."""
+        from handsfree import api
+        from handsfree.db.repo_subscriptions import (
+            create_repo_subscription,
+            list_repo_subscriptions,
+        )
+        from handsfree.installation_lifecycle import SYSTEM_USER_ID
+
+        # First, set up some subscriptions
+        db = api.get_db()
+        create_repo_subscription(
+            db,
+            user_id=SYSTEM_USER_ID,
+            repo_full_name="testorg/testrepo",
+            installation_id=12345678,
+        )
+
+        # Verify subscription exists
+        subs_before = list_repo_subscriptions(db, SYSTEM_USER_ID)
+        assert len(subs_before) > 0
+
+        # Send installation.deleted event
+        payload = load_fixture("installation.deleted.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-deleted-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify subscriptions were removed
+        subs_after = list_repo_subscriptions(db, SYSTEM_USER_ID)
+        repo_names_after = [s.repo_full_name for s in subs_after]
+        assert "testorg/testrepo" not in repo_names_after
+
+    def test_installation_repositories_added_creates_mappings(self, client):
+        """Test that installation_repositories.added event creates repo mappings."""
+        from handsfree import api
+        from handsfree.db.github_connections import create_github_connection
+        from handsfree.db.repo_subscriptions import list_repo_subscriptions
+        from handsfree.installation_lifecycle import SYSTEM_USER_ID
+
+        # Set up a connection with the installation
+        db = api.get_db()
+        create_github_connection(
+            db,
+            user_id=SYSTEM_USER_ID,
+            installation_id=12345678,
+        )
+
+        # Send installation_repositories.added event
+        payload = load_fixture("installation_repositories.added.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation_repositories",
+                "X-GitHub-Delivery": "test-repos-added-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify new repo subscription was created
+        subscriptions = list_repo_subscriptions(db, SYSTEM_USER_ID)
+        repo_names = [s.repo_full_name for s in subscriptions]
+        assert "testorg/new-repo" in repo_names
+
+        # Verify installation_id is set correctly
+        for sub in subscriptions:
+            if sub.repo_full_name == "testorg/new-repo":
+                assert sub.installation_id == 12345678
+
+    def test_installation_repositories_removed_deletes_mappings(self, client):
+        """Test that installation_repositories.removed event removes repo mappings."""
+        from handsfree import api
+        from handsfree.db.repo_subscriptions import (
+            create_repo_subscription,
+            list_repo_subscriptions,
+        )
+        from handsfree.installation_lifecycle import SYSTEM_USER_ID
+
+        # Set up a subscription to be removed
+        db = api.get_db()
+        create_repo_subscription(
+            db,
+            user_id=SYSTEM_USER_ID,
+            repo_full_name="testorg/testrepo",
+            installation_id=12345678,
+        )
+
+        # Send installation_repositories.removed event
+        payload = load_fixture("installation_repositories.removed.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation_repositories",
+                "X-GitHub-Delivery": "test-repos-removed-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify subscription was removed
+        subscriptions = list_repo_subscriptions(db, SYSTEM_USER_ID)
+        repo_names = [s.repo_full_name for s in subscriptions]
+        assert "testorg/testrepo" not in repo_names
+
+    def test_installation_fixtures_can_be_replayed(self, client):
+        """Test that all installation fixtures can be successfully ingested."""
+        import pathlib
+
+        fixtures_dir = pathlib.Path(__file__).parent / "fixtures" / "github" / "webhooks"
+        installation_fixtures = [
+            "installation.created.json",
+            "installation.deleted.json",
+            "installation_repositories.added.json",
+            "installation_repositories.removed.json",
+        ]
+
+        for fixture_name in installation_fixtures:
+            fixture_file = fixtures_dir / fixture_name
+            if not fixture_file.exists():
+                continue
+
+            payload = load_fixture(fixture_name)
+            event_type = fixture_name.split(".")[0]
+            delivery_id = f"test-fixture-{fixture_name}"
+
+            response = client.post(
+                "/v1/webhooks/github",
+                json=payload,
+                headers={
+                    "X-GitHub-Event": event_type,
+                    "X-GitHub-Delivery": delivery_id,
+                    "X-Hub-Signature-256": "dev",
+                },
+            )
+
+            assert response.status_code == 202, (
+                f"Failed to ingest fixture {fixture_name}: {response.status_code} {response.text}"
+            )
+
+    def test_installation_created_notification(self, client):
+        """Test that installation.created event creates notifications for affected users."""
+        from handsfree import api
+        from handsfree.db.github_connections import create_github_connection
+        from handsfree.db.notifications import list_notifications
+
+        # Create a user with an installation
+        db = api.get_db()
+        test_user_id = "00000000-0000-0000-0000-000000000001"
+        create_github_connection(
+            db,
+            user_id=test_user_id,
+            installation_id=12345678,
+        )
+
+        # Send installation.created event
+        payload = load_fixture("installation.created.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-notif-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify notification was created
+        notifications = list_notifications(db, test_user_id, limit=10)
+        install_notifications = [
+            n for n in notifications if n.event_type == "webhook.installation_created"
+        ]
+        assert len(install_notifications) > 0
+
+        # Check notification content
+        notif = install_notifications[0]
+        assert "testorg" in notif.message
+        assert "installed" in notif.message.lower()
+        assert notif.metadata.get("installation_id") == 12345678
+
+    def test_installation_deleted_notification(self, client):
+        """Test that installation.deleted event creates notifications for affected users."""
+        from handsfree import api
+        from handsfree.db.github_connections import create_github_connection
+        from handsfree.db.notifications import list_notifications
+
+        # Create a user with an installation
+        db = api.get_db()
+        test_user_id = "00000000-0000-0000-0000-000000000002"
+        create_github_connection(
+            db,
+            user_id=test_user_id,
+            installation_id=12345678,
+        )
+
+        # Send installation.deleted event
+        payload = load_fixture("installation.deleted.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "installation",
+                "X-GitHub-Delivery": "test-install-del-notif-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+
+        # Verify notification was created
+        notifications = list_notifications(db, test_user_id, limit=10)
+        install_notifications = [
+            n for n in notifications if n.event_type == "webhook.installation_deleted"
+        ]
+        assert len(install_notifications) > 0
+
+        # Check notification content
+        notif = install_notifications[0]
+        assert "testorg" in notif.message
+        assert "uninstalled" in notif.message.lower()
+        assert notif.metadata.get("installation_id") == 12345678
