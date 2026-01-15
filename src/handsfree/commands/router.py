@@ -1,5 +1,6 @@
 """Command router and response composer."""
 
+import logging
 from typing import Any
 
 import duckdb
@@ -7,6 +8,8 @@ import duckdb
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
 from .profiles import Profile, ProfileConfig
+
+logger = logging.getLogger(__name__)
 
 
 class CommandRouter:
@@ -24,15 +27,18 @@ class CommandRouter:
         self,
         pending_actions: PendingActionManager,
         db_conn: duckdb.DuckDBPyConnection | None = None,
+        github_provider: Any | None = None,
     ) -> None:
         """Initialize the router.
 
         Args:
             pending_actions: Manager for pending confirmation actions
             db_conn: Optional database connection for agent operations
+            github_provider: Optional GitHub provider for fetching PR/check data
         """
         self.pending_actions = pending_actions
         self.db_conn = db_conn
+        self.github_provider = github_provider
         # Session state for system.repeat - maps session_id to last response
         self._last_responses: dict[str, dict[str, Any]] = {}
         # Session state for system.next - maps session_id to (items, current_index)
@@ -394,9 +400,52 @@ class CommandRouter:
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
         """Handle checks-related intents."""
-        spoken_text = "All checks passing."
-        if profile_config.profile == Profile.WORKOUT:
-            spoken_text = "Checks OK."
+        # If no GitHub provider, fall back to placeholder
+        if not self.github_provider:
+            spoken_text = "All checks passing."
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = "Checks OK."
+            spoken_text = profile_config.truncate_spoken_text(spoken_text)
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        # Extract entities
+        pr_number = intent.entities.get("pr_number")
+        repo = intent.entities.get("repo")
+
+        # PR-specific variant (preferred)
+        if pr_number:
+            # Use a default repo if not specified (in real app, would come from context)
+            if not repo:
+                repo = "owner/repo"  # Fallback for fixture mode
+
+            try:
+                checks = self.github_provider.get_pr_checks(repo, pr_number)
+                spoken_text = self._format_checks_summary(checks, pr_number, profile_config)
+            except Exception as e:
+                # Log error and return fallback message
+                logger.warning("Failed to fetch checks for PR %s: %s", pr_number, str(e))
+                spoken_text = f"Could not fetch checks for PR {pr_number}."
+                if profile_config.profile == Profile.WORKOUT:
+                    spoken_text = "Check lookup failed."
+        # Best-effort repo variant
+        elif repo:
+            # In a real implementation, this would query recent PRs or commits for the repo
+            # For now, return a helpful message
+            spoken_text = (
+                "Checks lookup by repo requires more context. Try 'checks for pr <number>'."
+            )
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = "Need PR number."
+        # Generic ci status (best-effort, no context)
+        else:
+            # Without context, we can't determine which PR/repo to check
+            spoken_text = "Please specify a PR number, for example: 'checks for PR 123'."
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = "Need PR number."
 
         # Apply profile-based truncation
         spoken_text = profile_config.truncate_spoken_text(spoken_text)
@@ -406,6 +455,67 @@ class CommandRouter:
             "intent": intent.to_dict(),
             "spoken_text": spoken_text,
         }
+
+    def _format_checks_summary(
+        self, checks: list[dict[str, Any]], pr_number: int, profile_config: ProfileConfig
+    ) -> str:
+        """Format a privacy-safe spoken summary of check results.
+
+        Args:
+            checks: List of check run dictionaries
+            pr_number: PR number
+            profile_config: User's profile configuration
+
+        Returns:
+            Spoken summary string
+        """
+        total = len(checks)
+        if total == 0:
+            if profile_config.profile == Profile.WORKOUT:
+                return "No checks."
+            return f"PR {pr_number} has no checks."
+
+        # Count check statuses
+        passed = sum(1 for c in checks if c.get("conclusion") == "success")
+        failed = sum(1 for c in checks if c.get("conclusion") == "failure")
+        pending = sum(1 for c in checks if c.get("status") != "completed")
+
+        # Build spoken text based on status
+        if failed > 0:
+            # Get the first failing check name (privacy-safe)
+            first_failing = next(
+                (c.get("name", "unknown") for c in checks if c.get("conclusion") == "failure"),
+                None,
+            )
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = f"{failed} failing, {passed} passing."
+                if first_failing:
+                    spoken_text += f" First: {first_failing}."
+            else:
+                spoken_text = (
+                    f"PR {pr_number}: {failed} check{'s' if failed != 1 else ''} failing, "
+                    f"{passed} passing."
+                )
+                if first_failing:
+                    spoken_text += f" First failing check: {first_failing}."
+        elif pending > 0:
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = f"{pending} pending, {passed} passing."
+            else:
+                spoken_text = (
+                    f"PR {pr_number}: {pending} check{'s' if pending != 1 else ''} pending, "
+                    f"{passed} passing."
+                )
+        else:
+            # All passing
+            if profile_config.profile == Profile.WORKOUT:
+                spoken_text = "All checks passing."
+            else:
+                spoken_text = (
+                    f"PR {pr_number}: all {total} check{'s' if total != 1 else ''} passing."
+                )
+
+        return spoken_text
 
     def _handle_agent_intent(
         self, intent: ParsedIntent, profile_config: ProfileConfig
@@ -661,7 +771,11 @@ class CommandRouter:
 
         # Execute via GitHub API if live mode enabled and token available
         if token:
+            import logging
+
             from handsfree.github.client import request_reviewers as github_request_reviewers
+
+            logger = logging.getLogger(__name__)
 
             logger.info(
                 "Executing request_review via GitHub API (live mode) for %s",

@@ -322,6 +322,99 @@ class TestChecksIntents:
         assert response["status"] == "ok"
         assert response["intent"]["name"] == "checks.status"
 
+    def test_checks_status_with_pr_all_passing(
+        self, parser: IntentParser, pending_manager: PendingActionManager
+    ) -> None:
+        """Test checks.status with PR number - all checks passing."""
+        from handsfree.github import GitHubProvider
+
+        # Create router with real provider
+        provider = GitHubProvider()
+        router = CommandRouter(pending_manager, github_provider=provider)
+
+        # Parse "checks for pr 123" (PR 123 has all checks passing)
+        intent = parser.parse("checks for pr 123")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["intent"]["name"] == "checks.status"
+        # Should mention all checks passing
+        assert "all" in response["spoken_text"].lower()
+        assert "passing" in response["spoken_text"].lower()
+        assert "123" in response["spoken_text"]
+
+    def test_checks_status_with_pr_failing(
+        self, parser: IntentParser, pending_manager: PendingActionManager
+    ) -> None:
+        """Test checks.status with PR number - some checks failing."""
+        from handsfree.github import GitHubProvider
+
+        # Create router with real provider
+        provider = GitHubProvider()
+        router = CommandRouter(pending_manager, github_provider=provider)
+
+        # Parse "checks for pr 124" (PR 124 has 1 failing check)
+        intent = parser.parse("checks for pr 124")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["intent"]["name"] == "checks.status"
+        # Should mention failing check
+        assert "failing" in response["spoken_text"].lower()
+        assert "124" in response["spoken_text"]
+        # Should include the name of the first failing check
+        assert "ci / test" in response["spoken_text"].lower()
+
+    def test_checks_status_workout_profile(
+        self, parser: IntentParser, pending_manager: PendingActionManager
+    ) -> None:
+        """Test checks.status with workout profile (shorter response)."""
+        from handsfree.github import GitHubProvider
+
+        # Create router with real provider
+        provider = GitHubProvider()
+        router = CommandRouter(pending_manager, github_provider=provider)
+
+        # Parse "checks for pr 124" with workout profile
+        intent = parser.parse("checks for pr 124")
+        response = router.route(intent, Profile.WORKOUT)
+
+        assert response["status"] == "ok"
+        # Workout response should be shorter
+        assert len(response["spoken_text"].split()) <= 16  # 15 words + potential "..."
+
+    def test_checks_status_without_pr_number(
+        self, parser: IntentParser, pending_manager: PendingActionManager
+    ) -> None:
+        """Test checks.status without PR number requests more context."""
+        from handsfree.github import GitHubProvider
+
+        # Create router with real provider
+        provider = GitHubProvider()
+        router = CommandRouter(pending_manager, github_provider=provider)
+
+        # Parse "ci status" (no PR number)
+        intent = parser.parse("ci status")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        # Should ask for PR number
+        assert (
+            "pr" in response["spoken_text"].lower() or "number" in response["spoken_text"].lower()
+        )
+
+    def test_checks_status_no_github_provider(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test checks.status without GitHub provider falls back gracefully."""
+        # The default router fixture doesn't have a provider
+        intent = parser.parse("checks for pr 123")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        # Should fall back to placeholder
+        assert "passing" in response["spoken_text"].lower()
+
 
 class TestAgentIntents:
     """Test agent intent routing."""
