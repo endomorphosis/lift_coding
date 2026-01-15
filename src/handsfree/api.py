@@ -5,6 +5,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 
 __all__ = ["app", "get_db", "FIXTURE_USER_ID"]
 
+import json
 import logging
 from datetime import UTC, datetime
 from pathlib import Path
@@ -406,6 +407,9 @@ async def github_webhook(
             event_type_normalized = normalized.get("event_type")
             if event_type_normalized in ("installation", "installation_repositories"):
                 process_installation_event(db, normalized, payload)
+
+            # Correlate PR events with agent tasks
+            _correlate_pr_with_agent_tasks(normalized, payload)
 
             # Emit notification for normalized webhook events
             _emit_webhook_notification(normalized, payload)
@@ -3205,6 +3209,150 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
             summary="Automated refactoring PR ready for review",
         ),
     ]
+
+
+def _correlate_pr_with_agent_tasks(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
+    """Correlate PR webhooks with dispatched agent tasks.
+
+    When a PR is opened, checks if it references a dispatch issue or contains
+    task metadata, then updates the corresponding agent task to completed.
+
+    Args:
+        normalized: Normalized webhook event data.
+        raw_payload: Raw webhook payload.
+    """
+    import re
+
+    from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+
+    event_type = normalized.get("event_type")
+    action = normalized.get("action")
+
+    # Only process PR opened events
+    if event_type != "pull_request" or action != "opened":
+        return
+
+    db = get_db()
+    pr_number = normalized.get("pr_number")
+    pr_url = normalized.get("pr_url")
+    repo = normalized.get("repo")
+
+    # Extract PR body from raw payload
+    pr = raw_payload.get("pull_request", {})
+    pr_body = pr.get("body") or ""
+
+    # Try to extract task_id from PR body metadata
+    task_id = None
+
+    # Look for agent_task_metadata comment in PR body
+    metadata_match = re.search(
+        r"<!--\s*agent_task_metadata\s+(.*?)\s*-->",
+        pr_body,
+        re.DOTALL,
+    )
+    if metadata_match:
+        try:
+            metadata = json.loads(metadata_match.group(1))
+            task_id = metadata.get("task_id")
+        except Exception:
+            pass
+
+    # Also check for "Fixes #N" or "Closes #N" references to issues
+    issue_refs = re.findall(r"(?:fixes|closes|resolves)\s+#(\d+)", pr_body, re.IGNORECASE)
+
+    # If we found task_id in metadata, update that task
+    if task_id:
+        try:
+            # Query all tasks to find the matching one
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if task.id == task_id and task.state in ("created", "running"):
+                    # Update task to completed
+                    trace_update = {
+                        "pr_url": pr_url,
+                        "pr_number": pr_number,
+                        "repo_full_name": repo,
+                        "correlated_via": "pr_metadata",
+                    }
+
+                    updated_task = update_agent_task_state(
+                        conn=db,
+                        task_id=task_id,
+                        new_state="completed",
+                        trace_update=trace_update,
+                    )
+
+                    if updated_task:
+                        logger.info(
+                            "Correlated PR %s#%d with task %s via metadata, marked completed",
+                            repo,
+                            pr_number,
+                            task_id,
+                        )
+
+                        # Emit completion notification via agent service
+                        from handsfree.agents.service import AgentService
+
+                        service = AgentService(db)
+                        service._emit_completion_notification(updated_task, "completed")
+
+                    break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via metadata: %s", e)
+
+    # If we found issue references, check if any match dispatch issues
+    if issue_refs:
+        try:
+            # Query all running/created tasks from github_issue_dispatch provider
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if (
+                    task.provider == "github_issue_dispatch"
+                    and task.state in ("created", "running")
+                    and task.trace
+                ):
+                    issue_number = task.trace.get("issue_number")
+                    dispatch_repo = task.trace.get("dispatch_repo")
+
+                    # Check if this PR references the dispatch issue
+                    if (
+                        issue_number
+                        and str(issue_number) in issue_refs
+                        and dispatch_repo == repo
+                    ):
+                        # Update task to completed
+                        trace_update = {
+                            "pr_url": pr_url,
+                            "pr_number": pr_number,
+                            "repo_full_name": repo,
+                            "correlated_via": "issue_reference",
+                        }
+
+                        updated_task = update_agent_task_state(
+                            conn=db,
+                            task_id=task.id,
+                            new_state="completed",
+                            trace_update=trace_update,
+                        )
+
+                        if updated_task:
+                            logger.info(
+                                "Correlated PR %s#%d with task %s via issue reference #%d, marked completed",
+                                repo,
+                                pr_number,
+                                task.id,
+                                issue_number,
+                            )
+
+                            # Emit completion notification via agent service
+                            from handsfree.agents.service import AgentService
+
+                            service = AgentService(db)
+                            service._emit_completion_notification(updated_task, "completed")
+
+                        break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via issue reference: %s", e)
 
 
 def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
