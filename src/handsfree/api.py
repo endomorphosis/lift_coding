@@ -4,7 +4,6 @@ This implementation combines webhook handling with comprehensive API endpoints.
 """
 
 import logging
-import uuid
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -13,7 +12,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from handsfree.auth import FIXTURE_USER_ID, CurrentUser
+from handsfree.auth import CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import ProfileConfig
@@ -2958,9 +2957,7 @@ async def create_notification_subscription(
     )
 
 
-@app.get(
-    "/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse
-)
+@app.get("/v1/notifications/subscriptions", response_model=NotificationSubscriptionsListResponse)
 async def list_notification_subscriptions(
     user_id: CurrentUser,
 ) -> NotificationSubscriptionsListResponse:
@@ -3037,4 +3034,3 @@ async def delete_notification_subscription(
         )
 
     return Response(status_code=204)
-

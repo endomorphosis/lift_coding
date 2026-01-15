@@ -28,7 +28,7 @@ client = TestClient(app)
 
 
 def test_command_endpoint_idempotency(reset_db):
-    """Test that /v1/command returns same response for repeated requests with same idempotency key."""
+    """Test /v1/command returns same response for repeated requests with same key."""
     idempotency_key = f"test-key-{uuid.uuid4()}"
 
     request_body = {

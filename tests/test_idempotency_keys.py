@@ -88,7 +88,7 @@ def test_get_idempotency_key(db_conn):
     response_data = {"test": "data"}
 
     # Store key
-    stored = store_idempotency_key(
+    store_idempotency_key(
         db_conn,
         key=key,
         user_id=user_id,
@@ -236,7 +236,7 @@ def test_idempotency_key_different_endpoints(db_conn):
     key = "same-key"
 
     # Store for first endpoint
-    result1 = store_idempotency_key(
+    store_idempotency_key(
         db_conn,
         key=key,
         user_id=user_id,

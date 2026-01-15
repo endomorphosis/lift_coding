@@ -350,8 +350,7 @@ class TestChecksIntents:
         assert response["status"] == "ok"
         # Should ask for PR number
         assert (
-            "pr" in response["spoken_text"].lower()
-            or "number" in response["spoken_text"].lower()
+            "pr" in response["spoken_text"].lower() or "number" in response["spoken_text"].lower()
         )
 
     def test_checks_status_no_github_provider(

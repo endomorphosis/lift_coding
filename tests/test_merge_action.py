@@ -391,7 +391,8 @@ class TestMergeActionEndpoint:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Make multiple requests to trigger rate limit
         for i in range(5):
@@ -431,7 +432,8 @@ class TestMergeActionEndpoint:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         response = self.client.post(
             "/v1/actions/merge",
@@ -470,7 +472,8 @@ class TestMergeActionEndpoint:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Make the same request twice
         response1 = self.client.post(
@@ -535,7 +538,8 @@ class TestMergeConfirmation:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Create pending action
         response = self.client.post(
@@ -584,7 +588,8 @@ class TestMergeConfirmation:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Create pending action
         response = self.client.post(
@@ -616,6 +621,7 @@ class TestMergeConfirmation:
 
     def test_merge_confirmation_with_live_mode(self, monkeypatch):
         """Test merge confirmation with mocked GitHub API (live mode)."""
+
         # Mock GitHub API responses
         def mock_get(*args, **kwargs):
             return MockResponse(
@@ -650,7 +656,8 @@ class TestMergeConfirmation:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Create pending action
         response = self.client.post(
@@ -684,6 +691,7 @@ class TestMergeConfirmation:
 
     def test_merge_confirmation_pr_not_open(self, monkeypatch):
         """Test merge confirmation fails when PR is not open."""
+
         # Mock GitHub API to return closed PR
         def mock_get(*args, **kwargs):
             return MockResponse(
@@ -710,7 +718,8 @@ class TestMergeConfirmation:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Create pending action
         response = self.client.post(
@@ -733,6 +742,7 @@ class TestMergeConfirmation:
 
     def test_merge_confirmation_conflict(self, monkeypatch):
         """Test merge confirmation handles conflict gracefully."""
+
         # Mock GitHub API to return open PR but merge fails with conflict
         def mock_get(*args, **kwargs):
             return MockResponse(
@@ -763,7 +773,8 @@ class TestMergeConfirmation:
             repo_full_name="test/repo",
             allow_merge=True,
             require_checks_green=False,
-            required_approvals=0,)
+            required_approvals=0,
+        )
 
         # Create and confirm
         response = self.client.post(
