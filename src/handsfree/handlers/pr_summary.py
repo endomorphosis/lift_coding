@@ -85,6 +85,13 @@ def handle_pr_summarize(
         if review_parts:
             spoken_text += f"Reviews: {', '.join(review_parts)}. "
 
+        # Add latest review details
+        latest_review = _get_latest_review(pr_reviews)
+        if latest_review:
+            review_state = latest_review.get("state", "")
+            reviewer = latest_review.get("user", "unknown")
+            spoken_text += f"Latest review: {review_state} by {reviewer}. "
+
     # Add labels if important
     important_labels = [
         label for label in labels if label in ["urgent", "security", "bug", "breaking"]
@@ -151,3 +158,30 @@ def _summarize_reviews(reviews: list[dict[str, Any]]) -> dict[str, Any]:
         "changes_requested": changes_requested,
         "commented": commented,
     }
+
+
+def _get_latest_review(reviews: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Get the latest review by submitted timestamp.
+
+    Args:
+        reviews: List of review objects with 'submitted_at' (ISO 8601 timestamp),
+                 'state', and 'user' fields
+
+    Returns:
+        Latest review dict or None if no reviews exist
+    """
+    if not reviews:
+        return None
+
+    # Filter out reviews without submitted_at timestamp
+    reviews_with_timestamp = [r for r in reviews if r.get("submitted_at")]
+
+    if not reviews_with_timestamp:
+        # If no reviews have timestamps, return the first one
+        return reviews[0]
+
+    # Sort by submitted_at timestamp descending (most recent first)
+    # ISO 8601 timestamps sort correctly as strings
+    sorted_reviews = sorted(reviews_with_timestamp, key=lambda r: r["submitted_at"], reverse=True)
+
+    return sorted_reviews[0]

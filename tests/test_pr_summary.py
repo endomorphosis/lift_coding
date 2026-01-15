@@ -34,7 +34,8 @@ def test_pr_summarize_spoken_text_passing_checks(github_provider):
     expected_spoken = (
         "PR 123: Add new feature X. By contributor. "
         "12 files changed, 450 additions, 120 deletions. "
-        "All 3 checks passing. Reviews: 1 approved."
+        "All 3 checks passing. Reviews: 1 approved. "
+        "Latest review: APPROVED by reviewer2."
     )
 
     assert result["spoken_text"] == expected_spoken
@@ -49,6 +50,7 @@ def test_pr_summarize_spoken_text_failing_checks(github_provider):
         "PR 124: Fix critical bug in authentication. By security-team. "
         "3 files changed, 85 additions, 42 deletions. "
         "Checks: 1 failing, 2 passing. Reviews: 1 requested changes. "
+        "Latest review: CHANGES_REQUESTED by security-lead. "
         "Labels: bug, urgent, security."
     )
 
@@ -171,3 +173,35 @@ def test_pr_summary_mixed_reviews(github_provider):
     spoken = result["spoken_text"]
     assert "1 requested changes" in spoken
     assert "2 approved" in spoken
+
+
+def test_pr_summary_latest_review(github_provider):
+    """Test that the latest review is identified and reported correctly."""
+    result = handle_pr_summarize(github_provider, repo="owner/repo", pr_number=125)
+
+    # PR 125 has 3 reviews:
+    # - reviewer1: CHANGES_REQUESTED at 2026-01-12T12:00:00Z
+    # - reviewer2: APPROVED at 2026-01-12T13:00:00Z
+    # - reviewer3: APPROVED at 2026-01-12T13:30:00Z (latest)
+    spoken = result["spoken_text"]
+    assert "Latest review: APPROVED by reviewer3" in spoken
+
+
+def test_pr_summary_no_reviews(github_provider):
+    """Test PR summary when there are no reviews."""
+    # Create a custom fixture scenario with no reviews
+    from handsfree.handlers.pr_summary import _get_latest_review
+
+    # Test with empty list
+    latest = _get_latest_review([])
+    assert latest is None
+
+    # Test with reviews missing timestamps (edge case)
+    reviews_no_timestamp = [
+        {"user": "reviewer1", "state": "APPROVED"},
+        {"user": "reviewer2", "state": "COMMENTED"},
+    ]
+    latest = _get_latest_review(reviews_no_timestamp)
+    # Should return first review if none have timestamps
+    assert latest is not None
+    assert latest["user"] == "reviewer1"
