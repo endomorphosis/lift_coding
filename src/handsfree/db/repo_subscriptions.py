@@ -59,6 +59,41 @@ def create_repo_subscription(
     )
 
 
+def list_repo_subscriptions(
+    conn: duckdb.DuckDBPyConnection,
+    user_id: str,
+) -> list[RepoSubscription]:
+    """List all repo subscriptions for a user.
+
+    Args:
+        conn: Database connection.
+        user_id: UUID of the user.
+
+    Returns:
+        List of RepoSubscription objects, ordered by created_at DESC.
+    """
+    results = conn.execute(
+        """
+        SELECT id, user_id, repo_full_name, installation_id, created_at
+        FROM repo_subscriptions
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+        """,
+        [user_id],
+    ).fetchall()
+
+    return [
+        RepoSubscription(
+            id=str(row[0]),
+            user_id=str(row[1]),
+            repo_full_name=str(row[2]),
+            installation_id=row[3],
+            created_at=row[4],
+        )
+        for row in results
+    ]
+
+
 def get_users_for_repo(
     conn: duckdb.DuckDBPyConnection,
     repo_full_name: str,
@@ -144,8 +179,9 @@ def delete_repo_subscription(
         """
         DELETE FROM repo_subscriptions
         WHERE user_id = ? AND repo_full_name = ?
+        RETURNING id
         """,
         [user_id, repo_full_name],
-    )
+    ).fetchone()
 
-    return result.rowcount > 0
+    return result is not None

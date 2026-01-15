@@ -225,6 +225,74 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/repos/subscriptions:
+    post:
+      summary: Create a repository subscription for webhook notifications
+      operationId: createRepoSubscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRepoSubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepoSubscriptionResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    get:
+      summary: List repository subscriptions for the current user
+      operationId: listRepoSubscriptions
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepoSubscriptionsListResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/repos/subscriptions/{repo_full_name}:
+    delete:
+      summary: Delete a repository subscription
+      operationId: deleteRepoSubscription
+      parameters:
+        - name: repo_full_name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Full repository name (e.g., "owner/repo")
+      responses:
+        '204':
+          description: Subscription deleted successfully
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
 components:
   schemas:
     Profile:
@@ -593,3 +661,48 @@ components:
           enum: [wav, mp3]
           default: wav
           description: Audio format for the output
+
+    CreateRepoSubscriptionRequest:
+      type: object
+      required: [repo_full_name]
+      properties:
+        repo_full_name:
+          type: string
+          minLength: 1
+          description: Full repository name (e.g., "owner/repo")
+        installation_id:
+          type: integer
+          nullable: true
+          description: GitHub App installation ID (optional)
+
+    RepoSubscriptionResponse:
+      type: object
+      required: [id, user_id, repo_full_name, installation_id, created_at]
+      properties:
+        id:
+          type: string
+          description: Subscription UUID
+        user_id:
+          type: string
+          description: User UUID
+        repo_full_name:
+          type: string
+          description: Full repository name
+        installation_id:
+          type: integer
+          nullable: true
+          description: GitHub App installation ID
+        created_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp
+
+    RepoSubscriptionsListResponse:
+      type: object
+      required: [subscriptions]
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RepoSubscriptionResponse'
+
