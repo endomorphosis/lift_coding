@@ -234,6 +234,39 @@ def get_status():
     )
 
 
+@app.get("/v1/metrics")
+def get_metrics():
+    """Get observability metrics for the command flow.
+
+    This endpoint is gated behind the HANDSFREE_ENABLE_METRICS environment variable.
+    It returns in-memory metrics including command latency percentiles, intent counts,
+    status counts, and confirmation outcomes.
+
+    Returns:
+        JSON with current metrics snapshot.
+
+    Raises:
+        404: If metrics are not enabled via HANDSFREE_ENABLE_METRICS=true
+    """
+    from handsfree.metrics import get_metrics_collector, is_metrics_enabled
+
+    if not is_metrics_enabled():
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": (
+                    "Metrics endpoint not available. Set HANDSFREE_ENABLE_METRICS=true to enable."
+                ),
+            },
+        )
+
+    metrics = get_metrics_collector()
+    snapshot = metrics.get_snapshot()
+
+    return JSONResponse(content=snapshot)
+
+
 @app.get("/simulator")
 async def dev_simulator():
     """Serve the web-based dev simulator interface.
@@ -372,6 +405,9 @@ async def submit_command(
     Returns:
         CommandResponse with status, intent, spoken text, etc.
     """
+    # Record start time for latency measurement
+    start_time = datetime.now(UTC)
+
     # Set up request ID for tracing
     set_request_id(x_request_id)
 
@@ -596,6 +632,18 @@ async def submit_command(
             expires_in_seconds=86400,  # 24 hours
         )
         processed_commands[request.idempotency_key] = response
+
+    # Record metrics for observability
+    from handsfree.metrics import get_metrics_collector
+
+    end_time = datetime.now(UTC)
+    latency_ms = (end_time - start_time).total_seconds() * 1000
+    metrics = get_metrics_collector()
+    metrics.record_command(
+        intent_name=response.intent.name,
+        status=response.status.value,
+        latency_ms=latency_ms,
+    )
 
     # Clear request ID from context
     clear_request_id()
@@ -921,6 +969,12 @@ async def confirm_command(
                 )
                 processed_commands[request.idempotency_key] = response
 
+            # Record confirmation metrics for observability
+            from handsfree.metrics import get_metrics_collector
+
+            metrics = get_metrics_collector()
+            metrics.record_confirmation("ok")
+
             return response
 
     # Check if pending action exists in memory (legacy path)
@@ -934,6 +988,11 @@ async def confirm_command(
         # Check expiration for memory actions
         if datetime.now(UTC) > action_data["expires_at"]:
             del pending_actions_memory[request.token]
+            # Record not_found metric for expired action
+            from handsfree.metrics import get_metrics_collector
+
+            metrics = get_metrics_collector()
+            metrics.record_confirmation("not_found")
             raise HTTPException(
                 status_code=404,
                 detail={
@@ -949,6 +1008,11 @@ async def confirm_command(
         db_action = get_pending_action(db, request.token)
 
         if db_action is None:
+            # Record not_found metric
+            from handsfree.metrics import get_metrics_collector
+
+            metrics = get_metrics_collector()
+            metrics.record_confirmation("not_found")
             raise HTTPException(
                 status_code=404,
                 detail={
@@ -1441,6 +1505,22 @@ async def confirm_command(
             expires_in_seconds=86400,  # 24 hours
         )
         processed_commands[request.idempotency_key] = response
+
+    # Record confirmation metrics for observability
+    from handsfree.metrics import get_metrics_collector
+
+    metrics = get_metrics_collector()
+    if response.status == CommandStatus.OK:
+        metrics.record_confirmation("ok")
+    elif response.status == CommandStatus.ERROR:
+        metrics.record_confirmation("error")
+    elif response.status == CommandStatus.NEEDS_CONFIRMATION:
+        # This shouldn't normally happen for confirmations, but track it
+        metrics.record_confirmation("needs_confirmation")
+    else:
+        # Log unexpected status for debugging
+        logger.warning("Unexpected confirmation status: %s", response.status)
+        metrics.record_confirmation("unexpected")
 
     return response
 

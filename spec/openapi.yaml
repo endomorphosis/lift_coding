@@ -92,6 +92,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/StatusResponse'
 
+  /v1/metrics:
+    get:
+      summary: Get observability metrics
+      operationId: getMetrics
+      description: >
+        Returns lightweight observability metrics for the command flow.
+        Gated behind HANDSFREE_ENABLE_METRICS environment variable.
+        Includes command latency percentiles (p50/p95), intent counts,
+        status counts, and confirmation outcomes.
+      responses:
+        '200':
+          description: Metrics snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsSnapshot'
+        '404':
+          description: Metrics not enabled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/webhooks/github:
     post:
       summary: Receive GitHub webhooks (verified by signature)
@@ -507,6 +529,52 @@ components:
           items:
             $ref: '#/components/schemas/DependencyStatus'
           description: Status of service dependencies
+
+    MetricsSnapshot:
+      type: object
+      required: [intent_counts, status_counts, confirm_outcomes, command_latency_ms]
+      properties:
+        intent_counts:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Count of commands per intent name
+          example:
+            inbox.list: 42
+            pr.summarize: 15
+        status_counts:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Count of commands per status (ok, needs_confirmation, error)
+          example:
+            ok: 45
+            needs_confirmation: 10
+            error: 2
+        confirm_outcomes:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Count of confirmation outcomes (ok, not_found, error)
+          example:
+            ok: 8
+            not_found: 1
+            error: 1
+        command_latency_ms:
+          type: object
+          required: [count]
+          properties:
+            p50:
+              type: number
+              nullable: true
+              description: 50th percentile (median) latency in milliseconds
+            p95:
+              type: number
+              nullable: true
+              description: 95th percentile latency in milliseconds
+            count:
+              type: integer
+              description: Total number of latency samples
 
     TTSRequest:
       type: object
