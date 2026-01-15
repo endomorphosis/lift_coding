@@ -44,6 +44,77 @@ A proof-of-concept AI companion for GitHub that helps manage pull requests, issu
    make compose-down
    ```
 
+## Docker Deployment
+
+### Running with Docker Compose
+
+The easiest way to run the entire stack (API + Redis) is using Docker Compose:
+
+```bash
+# Build and start all services
+docker compose up -d
+
+# View logs
+docker compose logs -f api
+
+# Stop all services
+docker compose down
+```
+
+The API will be available at `http://localhost:8080`.
+
+### Building the Docker Image
+
+To build the Docker image manually:
+
+```bash
+docker build -t handsfree-api .
+```
+
+### Running the Docker Container
+
+Run the API container with environment variables:
+
+```bash
+docker run -d \
+  --name handsfree-api \
+  -p 8080:8080 \
+  -e HANDSFREE_AUTH_MODE=dev \
+  -e REDIS_HOST=redis \
+  -e REDIS_ENABLED=true \
+  -v handsfree-data:/app/data \
+  handsfree-api
+```
+
+### Environment Variables
+
+Configure the containerized API using these environment variables:
+
+**Quick start:** Copy `.env.example` to `.env` and customize the values for your environment.
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `8080` | Port for the API server |
+| `HANDSFREE_AUTH_MODE` | `dev` | Authentication mode: `dev`, `jwt`, or `api_key` |
+| `DUCKDB_PATH` | `/app/data/handsfree.db` | Path to DuckDB database file |
+| `REDIS_HOST` | `redis` | Redis server hostname |
+| `REDIS_PORT` | `6379` | Redis server port |
+| `REDIS_ENABLED` | `true` | Enable/disable Redis caching |
+| `HANDSFREE_ENABLE_METRICS` | `false` | Enable metrics endpoint at `/v1/metrics` |
+| `GITHUB_TOKEN` | - | GitHub personal access token (optional) |
+| `GITHUB_LIVE_MODE` | `false` | Enable live GitHub API mode |
+| `GITHUB_APP_ID` | - | GitHub App ID (optional) |
+| `GITHUB_APP_PRIVATE_KEY_PEM` | - | GitHub App private key (optional) |
+| `GITHUB_INSTALLATION_ID` | - | GitHub App installation ID (optional) |
+
+### Production Considerations
+
+- **Secrets**: Never bake secrets into the image. Use environment variables or secret management systems.
+- **Database**: Mount a persistent volume for `/app/data` to preserve the DuckDB database.
+- **Redis**: For production, use a managed Redis service or ensure Redis has persistent storage.
+- **Auth**: Change `HANDSFREE_AUTH_MODE` to `jwt` or `api_key` for production deployments.
+- **Metrics**: Enable metrics with `HANDSFREE_ENABLE_METRICS=true` for observability.
+
 ## Development Commands
 
 | Command | Description |
