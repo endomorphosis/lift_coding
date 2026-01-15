@@ -722,7 +722,12 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, user_id, request.client_context.privacy_mode
+            router_response,
+            parsed_intent,
+            text,
+            request.profile,
+            user_id,
+            request.client_context.privacy_mode,
         )
 
         # For non-system commands, update the router's stored response with the enhanced version
