@@ -101,9 +101,10 @@ class TestAgentStatus:
         result = agent_service.get_status(user_id=test_user_id)
 
         assert result["total"] == 1
-        assert result["by_state"]["created"] == 1
+        # Mock provider auto-advances to "running" on first status check
+        assert result["by_state"]["running"] == 1
         assert "1 task" in result["spoken_text"]
-        assert "created" in result["spoken_text"]
+        assert "running" in result["spoken_text"]
 
     def test_status_multiple_tasks(self, agent_service, db_conn, test_user_id):
         """Test status with multiple tasks in different states."""
@@ -112,7 +113,7 @@ class TestAgentStatus:
         task2 = agent_service.delegate(user_id=test_user_id, instruction="task2", provider="mock")
         agent_service.delegate(user_id=test_user_id, instruction="task3", provider="mock")
 
-        # Advance some states
+        # Advance some states manually
         update_agent_task_state(conn=db_conn, task_id=task1["task_id"], new_state="running")
         update_agent_task_state(conn=db_conn, task_id=task2["task_id"], new_state="running")
         update_agent_task_state(conn=db_conn, task_id=task2["task_id"], new_state="completed")
@@ -120,9 +121,10 @@ class TestAgentStatus:
         result = agent_service.get_status(user_id=test_user_id)
 
         assert result["total"] == 3
-        assert result["by_state"]["running"] == 1
+        # task1 is running (manually set), task2 is completed (manually set)
+        # task3 auto-advances from created to running on status check
+        assert result["by_state"]["running"] == 2
         assert result["by_state"]["completed"] == 1
-        assert result["by_state"]["created"] == 1
         assert "3 tasks" in result["spoken_text"]
 
     def test_status_returns_recent_tasks(self, agent_service, db_conn, test_user_id):
@@ -374,3 +376,56 @@ class TestNotifications:
         # Should not have PR fields
         assert "pr_url" not in notif.metadata
         assert "pr_number" not in notif.metadata
+
+    def test_mock_provider_auto_advances_on_status_checks(
+        self, agent_service, db_conn, test_user_id
+    ):
+        """Test that mock provider auto-advances task through multiple status checks."""
+        from handsfree.db.notifications import list_notifications
+
+        # Create a task with mock provider
+        task_result = agent_service.delegate(
+            user_id=test_user_id, instruction="test auto-advance", provider="mock"
+        )
+        task_id = task_result["task_id"]
+
+        # Initial state should be "created"
+        assert task_result["state"] == "created"
+
+        # Verify "created" notification exists
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        created_notifs = [n for n in notifications if n.event_type == "task_created"]
+        assert len(created_notifs) >= 1
+
+        # First status check should advance to "running"
+        result1 = agent_service.get_status(user_id=test_user_id)
+        assert result1["total"] == 1
+        assert result1["by_state"]["running"] == 1
+
+        # Verify "running" notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        running_notifs = [n for n in notifications if n.event_type == "task_running"]
+        assert len(running_notifs) >= 1
+
+        # Second status check should keep it "running" (step 0 -> step 1)
+        result2 = agent_service.get_status(user_id=test_user_id)
+        assert result2["by_state"]["running"] == 1
+
+        # Third status check should advance to "completed" (step 2)
+        result3 = agent_service.get_status(user_id=test_user_id)
+        assert result3["by_state"]["completed"] == 1
+
+        # Verify "completed" notification was created
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completed_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completed_notifs) == 1
+
+        # Verify completion notification includes task_id and state
+        notif = completed_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["task_id"] == task_id
+        assert notif.metadata["state"] == "completed"
+        assert task_id in notif.message
+
+        # Verify completion notification includes PR info from trace
+        assert notif.metadata.get("pr_url") == "https://github.com/mock/repo/pull/123"
