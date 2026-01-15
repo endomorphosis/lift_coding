@@ -8,6 +8,7 @@ import duckdb
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
 from .profiles import Profile, ProfileConfig
+from .session_context import SessionContext
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +45,8 @@ class CommandRouter:
         self._last_responses: dict[str, dict[str, Any]] = {}
         # Session state for system.next - maps session_id to (items, current_index)
         self._navigation_state: dict[str, tuple[list[dict[str, Any]], int]] = {}
+        # Session context for tracking repo/PR across commands
+        self._session_context = SessionContext()
 
         # Initialize agent service if DB is available
         self._agent_service = None
@@ -93,15 +96,19 @@ class CommandRouter:
         # Special handling for pr.request_review - integrate with policy engine
         # Policy-based handling takes precedence over profile-based confirmation
         if intent.name == "pr.request_review" and self.db_conn and user_id:
-            return self._handle_request_review_with_policy(intent, user_id, idempotency_key)
+            return self._handle_request_review_with_policy(
+                intent, user_id, session_id, idempotency_key
+            )
 
         # Special handling for checks.rerun - integrate with policy engine
         if intent.name == "checks.rerun" and self.db_conn and user_id:
-            return self._handle_rerun_checks_with_policy(intent, user_id, idempotency_key)
+            return self._handle_rerun_checks_with_policy(
+                intent, user_id, session_id, idempotency_key
+            )
 
         # Special handling for pr.comment - integrate with policy engine
         if intent.name == "pr.comment" and self.db_conn and user_id:
-            return self._handle_comment_with_policy(intent, user_id, idempotency_key)
+            return self._handle_comment_with_policy(intent, user_id, session_id, idempotency_key)
 
         # Check if this is a side-effect intent requiring confirmation (profile-based fallback)
         if intent.name in self.SIDE_EFFECT_INTENTS and profile_config.confirmation_required:
@@ -131,6 +138,9 @@ class CommandRouter:
 
             # Store navigation state for list-like responses
             self._store_navigation_state(session_id, response, intent)
+
+            # Capture repo/PR context from certain intents
+            self._capture_session_context(session_id, intent)
 
         return response
 
@@ -286,6 +296,47 @@ class CommandRouter:
 
         # Store with index 0 (showing first item)
         self._navigation_state[session_id] = (items, 0)
+
+    def _capture_session_context(
+        self,
+        session_id: str,
+        intent: ParsedIntent,
+    ) -> None:
+        """Capture repo/PR context from intents that reference them.
+
+        This allows subsequent commands to omit repo/PR and use the last
+        referenced values from the session.
+
+        Args:
+            session_id: Session identifier
+            intent: The intent that may contain repo/PR references
+        """
+        # Capture context from pr.summarize
+        if intent.name == "pr.summarize":
+            pr_number = intent.entities.get("pr_number")
+            repo = intent.entities.get("repo")
+            if pr_number and repo:
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+            elif pr_number:
+                # If no repo specified, use a default or preserve existing repo
+                context = self._session_context.get_repo_pr(session_id)
+                repo = context.get("repo", "fixture/repo")
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+
+        # Capture context from checks.status
+        elif intent.name == "checks.status":
+            pr_number = intent.entities.get("pr_number")
+            repo = intent.entities.get("repo")
+            if pr_number and repo:
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+            elif pr_number:
+                # If no repo specified, use a default or preserve existing repo
+                context = self._session_context.get_repo_pr(session_id)
+                repo = context.get("repo", "fixture/repo")
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+
+        # Note: inbox.list doesn't capture PR context since it shows multiple PRs
+        # We only capture single PR references for now
 
     def _handle_debug_transcript(
         self, user_id: str | None, profile_config: ProfileConfig, intent: ParsedIntent
@@ -758,6 +809,7 @@ class CommandRouter:
         self,
         intent: ParsedIntent,
         user_id: str,
+        session_id: str | None,
         idempotency_key: str | None,
     ) -> dict[str, Any]:
         """Handle pr.request_review with full policy evaluation, rate limiting, and audit logging.
@@ -765,6 +817,7 @@ class CommandRouter:
         Args:
             intent: The parsed pr.request_review intent
             user_id: User identifier for policy evaluation
+            session_id: Session identifier for context resolution
             idempotency_key: Optional idempotency key
 
         Returns:
@@ -778,7 +831,15 @@ class CommandRouter:
         # Extract entities
         reviewers = intent.entities.get("reviewers", [])
         pr_number = intent.entities.get("pr_number")
-        repo = intent.entities.get("repo", "default/repo")
+        repo = intent.entities.get("repo")
+
+        # Resolve missing repo/pr_number from session context
+        if not pr_number or not repo:
+            context = self._session_context.get_repo_pr(session_id, fallback_repo="default/repo")
+            if not pr_number and "pr_number" in context:
+                pr_number = context["pr_number"]
+            if not repo and "repo" in context:
+                repo = context["repo"]
 
         # Validate required fields
         if not pr_number:
@@ -787,7 +848,8 @@ class CommandRouter:
                 "intent": intent.to_dict(),
                 "spoken_text": (
                     "Please specify a PR number, for example: "
-                    "'request review from alice on PR 123'."
+                    "'request review from alice on PR 123'. "
+                    "Or first check a PR summary to set context."
                 ),
             }
 
@@ -1015,6 +1077,7 @@ class CommandRouter:
         self,
         intent: ParsedIntent,
         user_id: str,
+        session_id: str | None,
         idempotency_key: str | None,
     ) -> dict[str, Any]:
         """Handle checks.rerun with full policy evaluation, rate limiting, and audit logging.
@@ -1022,6 +1085,7 @@ class CommandRouter:
         Args:
             intent: The parsed checks.rerun intent
             user_id: User identifier for policy evaluation
+            session_id: Session identifier for context resolution
             idempotency_key: Optional idempotency key
 
         Returns:
@@ -1034,7 +1098,15 @@ class CommandRouter:
 
         # Extract entities
         pr_number = intent.entities.get("pr_number")
-        repo = intent.entities.get("repo", "default/repo")
+        repo = intent.entities.get("repo")
+
+        # Resolve missing repo/pr_number from session context
+        if not pr_number or not repo:
+            context = self._session_context.get_repo_pr(session_id, fallback_repo="default/repo")
+            if not pr_number and "pr_number" in context:
+                pr_number = context["pr_number"]
+            if not repo and "repo" in context:
+                repo = context["repo"]
 
         # Validate required fields
         if not pr_number:
@@ -1042,7 +1114,8 @@ class CommandRouter:
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": (
-                    "Please specify a PR number, for example: 'rerun checks for PR 123'."
+                    "Please specify a PR number, for example: 'rerun checks for PR 123'. "
+                    "Or first check a PR summary to set context."
                 ),
             }
 
@@ -1254,6 +1327,7 @@ class CommandRouter:
         self,
         intent: ParsedIntent,
         user_id: str,
+        session_id: str | None,
         idempotency_key: str | None,
     ) -> dict[str, Any]:
         """Handle pr.comment with full policy evaluation, rate limiting, and audit logging.
@@ -1261,6 +1335,7 @@ class CommandRouter:
         Args:
             intent: The parsed pr.comment intent
             user_id: User identifier for policy evaluation
+            session_id: Session identifier for context resolution
             idempotency_key: Optional idempotency key
 
         Returns:
@@ -1274,7 +1349,15 @@ class CommandRouter:
         # Extract entities
         pr_number = intent.entities.get("pr_number")
         comment_body = intent.entities.get("comment_body", "")
-        repo = intent.entities.get("repo", "default/repo")
+        repo = intent.entities.get("repo")
+
+        # Resolve missing repo/pr_number from session context
+        if not pr_number or not repo:
+            context = self._session_context.get_repo_pr(session_id, fallback_repo="default/repo")
+            if not pr_number and "pr_number" in context:
+                pr_number = context["pr_number"]
+            if not repo and "repo" in context:
+                repo = context["repo"]
 
         # Validate required fields
         if not pr_number:
@@ -1282,7 +1365,8 @@ class CommandRouter:
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": (
-                    "Please specify a PR number, for example: 'comment on PR 123: looks good'."
+                    "Please specify a PR number, for example: 'comment on PR 123: looks good'. "
+                    "Or first check a PR summary to set context."
                 ),
             }
 
