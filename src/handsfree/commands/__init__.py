@@ -8,16 +8,20 @@ This module implements:
 """
 
 from .intent_parser import IntentParser, ParsedIntent
-from .pending_actions import PendingAction, PendingActionManager
+from .pending_actions import PendingAction, PendingActionManager, RedisPendingActionManager
 from .profiles import Profile, ProfileConfig
 from .router import CommandRouter
+from .session_context import RedisSessionContext, SessionContext
 
 __all__ = [
     "IntentParser",
     "ParsedIntent",
     "PendingActionManager",
+    "RedisPendingActionManager",
     "PendingAction",
     "Profile",
     "ProfileConfig",
     "CommandRouter",
+    "SessionContext",
+    "RedisSessionContext",
 ]
