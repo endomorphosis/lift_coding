@@ -57,6 +57,7 @@ from handsfree.models import (
     DependencyStatus,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
+    ImageInput,
     InboxItem,
     InboxItemType,
     InboxResponse,
@@ -652,6 +653,86 @@ async def submit_command(
                 spoken_text="Audio transcription failed. Please try again or use text input.",
                 debug=DebugInfo(transcript="<audio input - transcription failed>"),
             )
+    elif isinstance(request.input, ImageInput):
+        # Image input - privacy enforcement
+        privacy_mode = request.client_context.privacy_mode
+
+        # In strict mode, reject image inputs
+        if privacy_mode == PrivacyMode.STRICT:
+            # Log the rejection (without URI unless debug mode)
+            if request.client_context.debug:
+                from handsfree.logging_utils import redact_secrets
+
+                redacted_uri = redact_secrets(request.input.uri)
+                log_info(
+                    logger,
+                    "Rejected image input in strict privacy mode",
+                    user_id=user_id,
+                    uri=redacted_uri,
+                )
+            else:
+                log_info(
+                    logger,
+                    "Rejected image input in strict privacy mode",
+                    user_id=user_id,
+                )
+
+            clear_request_id()
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.image_not_supported", confidence=1.0),
+                spoken_text="Image input is not supported in strict privacy mode.",
+                debug=DebugInfo(transcript="<image input - rejected by privacy mode>"),
+            )
+
+        # In balanced/debug mode, accept but don't process
+        # Log acceptance without URI (unless debug mode with redaction)
+        if request.client_context.debug:
+            from handsfree.logging_utils import redact_secrets
+
+            redacted_uri = redact_secrets(request.input.uri)
+            log_info(
+                logger,
+                "Accepted image input (not processed)",
+                user_id=user_id,
+                privacy_mode=privacy_mode.value,
+                uri=redacted_uri,
+                content_type=request.input.content_type,
+            )
+        else:
+            log_info(
+                logger,
+                "Accepted image input (not processed)",
+                user_id=user_id,
+                privacy_mode=privacy_mode.value,
+            )
+
+        # Return stub response indicating image is not processed
+        clear_request_id()
+        debug_info = DebugInfo(
+            transcript="<image input - not processed yet>",
+        )
+        if request.client_context.debug:
+            # Include stub message in debug info
+            debug_info.tool_calls = [
+                {
+                    "note": (
+                        "Image input accepted but not processed. "
+                        "OCR/vision processing not yet implemented."
+                    ),
+                    "content_type": request.input.content_type or "unknown",
+                }
+            ]
+
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(name="image.placeholder", confidence=1.0),
+            spoken_text=(
+                "Image received but cannot be processed yet. "
+                "Please describe what you need help with."
+            ),
+            debug=debug_info,
+        )
     else:
         # Unknown input type
         clear_request_id()
@@ -675,11 +756,21 @@ async def submit_command(
 
     # Store command with or without transcript based on debug/auth mode
     # Skip storing debug.transcript commands to avoid self-referential lookups
+    # Determine input type
+    if isinstance(request.input, TextInput):
+        input_type = "text"
+    elif isinstance(request.input, AudioInput):
+        input_type = "audio"
+    elif isinstance(request.input, ImageInput):
+        input_type = "image"
+    else:
+        input_type = "unknown"
+
     if parsed_intent.name != "debug.transcript":
         store_command(
             conn=db,
             user_id=user_id,
-            input_type="text" if isinstance(request.input, TextInput) else "audio",
+            input_type=input_type,
             status="ok",  # Will be updated later if needed
             profile=request.profile.value,
             transcript=text if should_store_transcript else None,

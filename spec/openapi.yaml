@@ -521,11 +521,13 @@ components:
       oneOf:
         - $ref: '#/components/schemas/TextInput'
         - $ref: '#/components/schemas/AudioInput'
+        - $ref: '#/components/schemas/ImageInput'
       discriminator:
         propertyName: type
         mapping:
           text: '#/components/schemas/TextInput'
           audio: '#/components/schemas/AudioInput'
+          image: '#/components/schemas/ImageInput'
 
     TextInput:
       type: object
@@ -554,6 +556,21 @@ components:
         duration_ms:
           type: integer
           minimum: 0
+
+    ImageInput:
+      type: object
+      required: [type, uri]
+      properties:
+        type:
+          type: string
+          enum: [image]
+        uri:
+          type: string
+          description: URI to the image/camera snapshot (pre-signed URL or local dev placeholder). Not fetched or processed yet.
+        content_type:
+          type: string
+          description: MIME type of the image (e.g., image/jpeg, image/png)
+          example: image/jpeg
 
     ClientContext:
       type: object
