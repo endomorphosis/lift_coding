@@ -6,10 +6,6 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copy dependency files
 COPY requirements-dev.txt .
 COPY pyproject.toml .
@@ -43,5 +39,8 @@ ENV HANDSFREE_ENABLE_METRICS=false
 # Expose port
 EXPOSE 8080
 
+# Set Python path to include src directory
+ENV PYTHONPATH=/app/src
+
 # Run with uvicorn in production mode (no reload)
-CMD uvicorn handsfree.api:app --host 0.0.0.0 --port ${PORT} --log-level info
+CMD ["sh", "-c", "uvicorn handsfree.api:app --host 0.0.0.0 --port ${PORT} --log-level info"]
