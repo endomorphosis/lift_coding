@@ -147,6 +147,17 @@ class VaultSecretManager(SecretManager):
             logger.error("Failed to initialize Vault client: %s", e)
             raise VaultError(f"Failed to initialize Vault client: {e}") from e
 
+    def _normalize_key(self, key: str) -> str:
+        """Normalize a secret key to a Vault path format.
+
+        Args:
+            key: Secret key (e.g., "github_token_user_123")
+
+        Returns:
+            Normalized path (e.g., "github/token/user/123")
+        """
+        return key.replace(".", "/").replace("_", "/")
+
     def _get_secret_path(self, key: str) -> str:
         """Convert a secret key to a Vault path.
 
@@ -156,8 +167,7 @@ class VaultSecretManager(SecretManager):
         Returns:
             Vault path (e.g., "secret/data/github_token_user_123" for KV v2)
         """
-        # Normalize key: replace special characters with forward slashes
-        normalized_key = key.replace(".", "/").replace("_", "/")
+        normalized_key = self._normalize_key(key)
         return f"{self.vault_mount}/data/{normalized_key}"
 
     def _get_metadata_path(self, key: str) -> str:
@@ -169,7 +179,7 @@ class VaultSecretManager(SecretManager):
         Returns:
             Vault metadata path
         """
-        normalized_key = key.replace(".", "/").replace("_", "/")
+        normalized_key = self._normalize_key(key)
         return f"{self.vault_mount}/metadata/{normalized_key}"
 
     def _parse_reference(self, reference: str) -> str:
@@ -210,7 +220,7 @@ class VaultSecretManager(SecretManager):
 
             # Store in Vault (KV v2)
             self.client.secrets.kv.v2.create_or_update_secret(
-                path=key.replace(".", "/").replace("_", "/"),
+                path=self._normalize_key(key),
                 secret=secret_data,
                 mount_point=self.vault_mount,
             )
@@ -239,7 +249,7 @@ class VaultSecretManager(SecretManager):
 
             # Read from Vault (KV v2)
             response = self.client.secrets.kv.v2.read_secret_version(
-                path=key.replace(".", "/").replace("_", "/"),
+                path=self._normalize_key(key),
                 mount_point=self.vault_mount,
             )
 
@@ -273,7 +283,7 @@ class VaultSecretManager(SecretManager):
 
             # Delete metadata (this deletes all versions in KV v2)
             self.client.secrets.kv.v2.delete_metadata_and_all_versions(
-                path=key.replace(".", "/").replace("_", "/"),
+                path=self._normalize_key(key),
                 mount_point=self.vault_mount,
             )
 
@@ -312,7 +322,7 @@ class VaultSecretManager(SecretManager):
             # Check if secret exists first
             try:
                 self.client.secrets.kv.v2.read_secret_version(
-                    path=key.replace(".", "/").replace("_", "/"),
+                    path=self._normalize_key(key),
                     mount_point=self.vault_mount,
                 )
             except InvalidPath:
@@ -325,7 +335,7 @@ class VaultSecretManager(SecretManager):
                 secret_data["metadata"] = metadata
 
             self.client.secrets.kv.v2.create_or_update_secret(
-                path=key.replace(".", "/").replace("_", "/"),
+                path=self._normalize_key(key),
                 secret=secret_data,
                 mount_point=self.vault_mount,
             )
@@ -340,11 +350,12 @@ class VaultSecretManager(SecretManager):
             logger.error("Failed to update secret: %s", e)
             raise VaultError(f"Failed to update secret: {e}") from e
 
-    def list_secrets(self, prefix: str | None = None) -> list[str]:
+    def list_secrets(self, prefix: str | None = None, max_depth: int = 10) -> list[str]:
         """List all secret references in Vault.
 
         Args:
             prefix: Optional prefix to filter secrets
+            max_depth: Maximum directory depth to traverse (default: 10)
 
         Returns:
             List of secret references
@@ -353,29 +364,43 @@ class VaultSecretManager(SecretManager):
             VaultError: If listing fails
         """
         try:
-            # List secrets at the mount point
-            list_path = prefix.replace(".", "/").replace("_", "/") if prefix else ""
-
-            try:
-                response = self.client.secrets.kv.v2.list_secrets(
-                    path=list_path,
-                    mount_point=self.vault_mount,
-                )
-                keys = response["data"]["keys"]
-            except InvalidPath:
-                # No secrets at this path
-                return []
-
-            # Convert keys to references
+            # Use iterative approach with a queue to avoid deep recursion
             refs = []
-            for key in keys:
-                if key.endswith("/"):
-                    # This is a directory, recurse into it
-                    subpath = f"{list_path}/{key}" if list_path else key.rstrip("/")
-                    refs.extend(self.list_secrets(prefix=subpath))
-                else:
-                    full_key = f"{list_path}/{key}" if list_path else key
-                    refs.append(f"vault://{full_key}")
+            queue = [(self._normalize_key(prefix) if prefix else "", 0)]  # (path, depth)
+
+            while queue:
+                current_path, depth = queue.pop(0)
+
+                # Check depth limit
+                if depth >= max_depth:
+                    logger.warning(
+                        "Maximum depth (%d) reached for path: %s", max_depth, current_path
+                    )
+                    continue
+
+                try:
+                    response = self.client.secrets.kv.v2.list_secrets(
+                        path=current_path,
+                        mount_point=self.vault_mount,
+                    )
+                    keys = response["data"]["keys"]
+                except InvalidPath:
+                    # No secrets at this path
+                    continue
+
+                # Process keys
+                for key in keys:
+                    if key.endswith("/"):
+                        # This is a directory, add to queue for processing
+                        stripped_key = key.rstrip("/")
+                        subpath = (
+                            f"{current_path}/{stripped_key}" if current_path else stripped_key
+                        )
+                        queue.append((subpath, depth + 1))
+                    else:
+                        # This is a secret, add reference
+                        full_key = f"{current_path}/{key}" if current_path else key
+                        refs.append(f"vault://{full_key}")
 
             return refs
 
