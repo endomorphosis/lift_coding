@@ -13,7 +13,6 @@ try:
 
     REDIS_AVAILABLE = True
 except ImportError:  # pragma: no cover
-
     class _RedisStubError(Exception):
         pass
 
