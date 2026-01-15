@@ -371,23 +371,163 @@ async def github_webhook(
         signature_ok=signature_ok,
     )
 
-    # Normalize event (if supported)
-    normalized = normalize_github_event(x_github_event, payload)
-    if normalized:
-        log_info(
+    # Normalize event (if supported) and track processing status
+    try:
+        normalized = normalize_github_event(x_github_event, payload)
+        if normalized:
+            log_info(
+                logger,
+                "Normalized webhook event",
+                event_type=x_github_event,
+                action=normalized.get("action"),
+                event_id=event_id,
+            )
+            # Emit notification for normalized webhook events
+            _emit_webhook_notification(normalized, payload)
+
+            # Mark as successfully processed
+            from handsfree.db.webhook_events import update_webhook_processing_status
+
+            db = get_db()
+            update_webhook_processing_status(db, event_id, processed_ok=True)
+        else:
+            # Event type not supported for normalization - not an error
+            log_info(
+                logger,
+                "Webhook event not normalized (unsupported type/action)",
+                event_type=x_github_event,
+                event_id=event_id,
+            )
+    except Exception as e:
+        # Normalization or notification emission failed
+        log_error(
             logger,
-            "Normalized webhook event",
+            "Webhook processing failed",
+            error=type(e).__name__,
             event_type=x_github_event,
-            action=normalized.get("action"),
             event_id=event_id,
         )
-        # Emit notification for normalized webhook events
-        _emit_webhook_notification(normalized, payload)
+        # Store redacted error (no payload in error message)
+        from handsfree.db.webhook_events import update_webhook_processing_status
+
+        db = get_db()
+        error_msg = f"{type(e).__name__}: normalization or notification failed"
+        update_webhook_processing_status(
+            db, event_id, processed_ok=False, processing_error=error_msg
+        )
 
     return JSONResponse(
         status_code=status.HTTP_202_ACCEPTED,
         content={"event_id": event_id, "message": "Webhook accepted"},
     )
+
+
+@app.post("/v1/webhooks/retry/{event_id}")
+async def retry_webhook_processing(
+    event_id: str,
+) -> JSONResponse:
+    """Retry processing a failed webhook event (dev-only endpoint).
+
+    This endpoint retrieves a previously stored webhook event and retries
+    normalization and notification emission. Useful for recovering from
+    transient failures.
+
+    Args:
+        event_id: The webhook event ID to retry.
+
+    Returns:
+        200 OK with processing status.
+
+    Raises:
+        404: Event not found.
+        403: Endpoint disabled (not in dev mode).
+    """
+    # Dev-only check
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Retry endpoint is only available in dev mode",
+            },
+        )
+
+    db = get_db()
+    from handsfree.db.webhook_events import (
+        get_webhook_event_by_id,
+        update_webhook_processing_status,
+    )
+
+    # Retrieve the event
+    event = get_webhook_event_by_id(db, event_id)
+    if not event:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "not_found",
+                "message": f"Webhook event {event_id} not found",
+            },
+        )
+
+    # Retry normalization and notification
+    try:
+        normalized = normalize_github_event(event.event_type, event.payload)
+        if normalized:
+            log_info(
+                logger,
+                "Retried webhook normalization",
+                event_type=event.event_type,
+                action=normalized.get("action"),
+                event_id=event_id,
+            )
+            # Emit notification
+            _emit_webhook_notification(normalized, event.payload)
+
+            # Mark as successfully processed
+            update_webhook_processing_status(db, event_id, processed_ok=True)
+
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content={
+                    "event_id": event_id,
+                    "status": "success",
+                    "message": "Webhook processed successfully",
+                },
+            )
+        else:
+            # Event type not supported
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content={
+                    "event_id": event_id,
+                    "status": "skipped",
+                    "message": "Event type not supported for normalization",
+                },
+            )
+    except Exception as e:
+        # Processing failed again
+        log_error(
+            logger,
+            "Webhook retry failed",
+            error=type(e).__name__,
+            event_type=event.event_type,
+            event_id=event_id,
+        )
+        error_msg = f"{type(e).__name__}: retry normalization or notification failed"
+        update_webhook_processing_status(
+            db, event_id, processed_ok=False, processing_error=error_msg
+        )
+
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content={
+                "event_id": event_id,
+                "status": "failed",
+                "message": error_msg,
+            },
+        )
 
 
 @app.post("/v1/command", response_model=CommandResponse)

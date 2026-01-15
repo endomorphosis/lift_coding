@@ -134,6 +134,51 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/webhooks/retry/{event_id}:
+    post:
+      summary: Retry processing a webhook event (dev-only)
+      operationId: retryWebhookProcessing
+      description: >
+        Retries normalization and notification emission for a failed webhook event.
+        This endpoint is only available in dev mode and is useful for recovering
+        from transient failures during webhook processing.
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The webhook event ID to retry
+      responses:
+        '200':
+          description: Retry completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum: [success, failed, skipped]
+                    description: The status of the retry attempt
+                  message:
+                    type: string
+                    description: A message describing the retry result
+        '403':
+          description: Forbidden - not in dev mode
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Event not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/actions/request-review:
     post:
       summary: Request reviewers on a PR (policy-gated)

@@ -385,3 +385,178 @@ class TestDatabaseBackedStore:
             e["delivery_id"] for e in events if e["delivery_id"].startswith("test-db-list-")
         ]
         assert len(delivery_ids) == 5
+
+
+class TestWebhookProcessingFailures:
+    """Test webhook processing failure tracking and retry mechanism."""
+
+    def test_normalization_failure_recorded(self, client, monkeypatch):
+        """Test that normalization failures are recorded in the database."""
+
+        # Monkeypatch normalize_github_event to raise an exception
+        def failing_normalize(event_type, payload):
+            raise ValueError("Simulated normalization failure")
+
+        # Patch where it's imported in api.py
+        from handsfree import api
+
+        monkeypatch.setattr(api, "normalize_github_event", failing_normalize)
+
+        payload = load_fixture("pull_request.opened.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": "test-failure-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        # Event should still be accepted (202) even if normalization fails
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Check that the failure was recorded
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event is not None
+        assert event["processed_ok"] is False
+        assert event["processing_error"] is not None
+        assert "ValueError" in event["processing_error"]
+        assert "normalization" in event["processing_error"]
+        assert event["processed_at"] is not None
+        # Ensure raw payload is NOT in the error message
+        assert "testuser" not in event["processing_error"]
+
+    def test_successful_processing_recorded(self, client):
+        """Test that successful processing is recorded."""
+        payload = load_fixture("pull_request.opened.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": "test-success-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Check that success was recorded
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event is not None
+        assert event["processed_ok"] is True
+        assert event["processing_error"] is None
+        assert event["processed_at"] is not None
+
+    def test_retry_endpoint_reprocesses_failed_event(self, client, monkeypatch):
+        """Test that the retry endpoint can reprocess a failed event."""
+
+        # First, create a failed event
+        def failing_normalize(event_type, payload):
+            raise ValueError("Simulated normalization failure")
+
+        from handsfree import api
+
+        monkeypatch.setattr(api, "normalize_github_event", failing_normalize)
+
+        payload = load_fixture("pull_request.opened.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": "test-retry-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Verify it failed
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event["processed_ok"] is False
+
+        # Now restore normal normalization and retry
+        monkeypatch.undo()
+
+        retry_response = client.post(f"/v1/webhooks/retry/{event_id}")
+        assert retry_response.status_code == 200
+        retry_data = retry_response.json()
+        assert retry_data["status"] == "success"
+        assert retry_data["event_id"] == event_id
+
+        # Verify it now shows as successful
+        event = store.get_event(event_id)
+        assert event["processed_ok"] is True
+        assert event["processing_error"] is None
+
+    def test_retry_endpoint_handles_invalid_event_id(self, client):
+        """Test that retry endpoint returns 404 for non-existent event."""
+        response = client.post("/v1/webhooks/retry/non-existent-event-id")
+        assert response.status_code == 404
+        data = response.json()
+        assert data["error"] == "not_found"
+
+    def test_retry_endpoint_marks_failure_on_repeated_error(self, client, monkeypatch):
+        """Test that retry endpoint records failure if error persists."""
+        # Create a successful event first
+        payload = load_fixture("pull_request.opened.json")
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "pull_request",
+                "X-GitHub-Delivery": "test-retry-fail-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Now make normalization fail on retry
+        def failing_normalize(event_type, payload):
+            raise RuntimeError("Persistent failure")
+
+        from handsfree import api
+
+        monkeypatch.setattr(api, "normalize_github_event", failing_normalize)
+
+        retry_response = client.post(f"/v1/webhooks/retry/{event_id}")
+        assert retry_response.status_code == 200
+        retry_data = retry_response.json()
+        assert retry_data["status"] == "failed"
+        assert "RuntimeError" in retry_data["message"]
+
+        # Verify failure is recorded
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event["processed_ok"] is False
+        assert "RuntimeError" in event["processing_error"]
+
+    def test_unsupported_event_type_not_marked_as_failure(self, client):
+        """Test that unsupported event types are not marked as failures."""
+        # Create a payload for an unsupported event type
+        payload = {"action": "started", "repository": {"full_name": "test/repo"}}
+        response = client.post(
+            "/v1/webhooks/github",
+            json=payload,
+            headers={
+                "X-GitHub-Event": "unsupported_event",
+                "X-GitHub-Delivery": "test-unsupported-001",
+                "X-Hub-Signature-256": "dev",
+            },
+        )
+        assert response.status_code == 202
+        event_id = response.json()["event_id"]
+
+        # Event should be stored but not marked as failed (since it's just unsupported)
+        store = get_db_webhook_store()
+        event = store.get_event(event_id)
+        assert event is not None
+        # processed_ok should be None for unsupported events
+        assert event["processed_ok"] is None
+        assert event["processing_error"] is None
