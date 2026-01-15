@@ -20,6 +20,7 @@ class RepoPolicy:
     allow_merge: bool
     allow_rerun: bool
     allow_request_review: bool
+    allow_comment: bool
     require_confirmation: bool
     require_checks_green: bool
     required_approvals: int
@@ -45,7 +46,7 @@ def get_repo_policy(
     result = conn.execute(
         """
         SELECT id, user_id, repo_full_name, allow_merge, allow_rerun, 
-               allow_request_review, require_confirmation, require_checks_green,
+               allow_request_review, allow_comment, require_confirmation, require_checks_green,
                required_approvals, created_at, updated_at
         FROM repo_policies
         WHERE user_id = ? AND repo_full_name = ?
@@ -63,11 +64,12 @@ def get_repo_policy(
         allow_merge=result[3],
         allow_rerun=result[4],
         allow_request_review=result[5],
-        require_confirmation=result[6],
-        require_checks_green=result[7],
-        required_approvals=result[8],
-        created_at=result[9],
-        updated_at=result[10],
+        allow_comment=result[6],
+        require_confirmation=result[7],
+        require_checks_green=result[8],
+        required_approvals=result[9],
+        created_at=result[10],
+        updated_at=result[11],
     )
 
 
@@ -78,6 +80,7 @@ def create_or_update_repo_policy(
     allow_merge: bool = False,
     allow_rerun: bool = True,
     allow_request_review: bool = True,
+    allow_comment: bool = True,
     require_confirmation: bool = True,
     require_checks_green: bool = True,
     required_approvals: int = 1,
@@ -91,6 +94,7 @@ def create_or_update_repo_policy(
         allow_merge: Allow merge actions (default: False).
         allow_rerun: Allow rerun actions (default: True).
         allow_request_review: Allow request review actions (default: True).
+        allow_comment: Allow comment actions (default: True).
         require_confirmation: Require user confirmation (default: True).
         require_checks_green: Require all checks to pass (default: True).
         required_approvals: Number of required approvals (default: 1).
@@ -107,7 +111,7 @@ def create_or_update_repo_policy(
             """
             UPDATE repo_policies
             SET allow_merge = ?, allow_rerun = ?, allow_request_review = ?,
-                require_confirmation = ?, require_checks_green = ?,
+                allow_comment = ?, require_confirmation = ?, require_checks_green = ?,
                 required_approvals = ?, updated_at = ?
             WHERE user_id = ? AND repo_full_name = ?
             """,
@@ -115,6 +119,7 @@ def create_or_update_repo_policy(
                 allow_merge,
                 allow_rerun,
                 allow_request_review,
+                allow_comment,
                 require_confirmation,
                 require_checks_green,
                 required_approvals,
@@ -131,9 +136,9 @@ def create_or_update_repo_policy(
             """
             INSERT INTO repo_policies
             (id, user_id, repo_full_name, allow_merge, allow_rerun,
-             allow_request_review, require_confirmation, require_checks_green,
+             allow_request_review, allow_comment, require_confirmation, require_checks_green,
              required_approvals, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             [
                 policy_id,
@@ -142,6 +147,7 @@ def create_or_update_repo_policy(
                 allow_merge,
                 allow_rerun,
                 allow_request_review,
+                allow_comment,
                 require_confirmation,
                 require_checks_green,
                 required_approvals,
@@ -157,6 +163,7 @@ def create_or_update_repo_policy(
         allow_merge=allow_merge,
         allow_rerun=allow_rerun,
         allow_request_review=allow_request_review,
+        allow_comment=allow_comment,
         require_confirmation=require_confirmation,
         require_checks_green=require_checks_green,
         required_approvals=required_approvals,
@@ -179,6 +186,7 @@ def get_default_policy() -> RepoPolicy:
         allow_merge=False,
         allow_rerun=True,
         allow_request_review=True,
+        allow_comment=True,
         require_confirmation=True,
         require_checks_green=True,
         required_approvals=1,

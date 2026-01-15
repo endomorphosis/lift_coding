@@ -70,6 +70,10 @@ def evaluate_action_policy(
         action_allowed = policy.allow_rerun
     elif action_type == "request_review":
         action_allowed = policy.allow_request_review
+    elif action_type == "comment":
+        action_allowed = getattr(
+            policy, "allow_comment", True
+        )  # Default to True for backward compatibility
     else:
         return PolicyEvaluationResult(
             decision=PolicyDecision.DENY,

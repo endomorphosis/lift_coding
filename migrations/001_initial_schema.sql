@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS repo_policies (
   allow_merge     BOOLEAN NOT NULL DEFAULT false,
   allow_rerun     BOOLEAN NOT NULL DEFAULT true,
   allow_request_review BOOLEAN NOT NULL DEFAULT true,
+  allow_comment   BOOLEAN NOT NULL DEFAULT true,
   require_confirmation BOOLEAN NOT NULL DEFAULT true,
   require_checks_green  BOOLEAN NOT NULL DEFAULT true,
   required_approvals    INT NOT NULL DEFAULT 1,

@@ -21,6 +21,7 @@ class CommandRouter:
         "pr.merge",
         "agent.delegate",
         "checks.rerun",
+        "pr.comment",
     }
 
     def __init__(
@@ -97,6 +98,10 @@ class CommandRouter:
         # Special handling for checks.rerun - integrate with policy engine
         if intent.name == "checks.rerun" and self.db_conn and user_id:
             return self._handle_rerun_checks_with_policy(intent, user_id, idempotency_key)
+
+        # Special handling for pr.comment - integrate with policy engine
+        if intent.name == "pr.comment" and self.db_conn and user_id:
+            return self._handle_comment_with_policy(intent, user_id, idempotency_key)
 
         # Check if this is a side-effect intent requiring confirmation (profile-based fallback)
         if intent.name in self.SIDE_EFFECT_INTENTS and profile_config.confirmation_required:
@@ -182,6 +187,12 @@ class CommandRouter:
             if pr_num:
                 return f"I can re-run checks on PR {pr_num}."
             return "I can re-run checks."
+        elif intent.name == "pr.comment":
+            pr_num = intent.entities.get("pr_number")
+            comment_body = intent.entities.get("comment_body", "")
+            # Truncate long comments in confirmation message
+            preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
+            return f"I can post comment on PR {pr_num}: {preview}"
         return "I can execute this action."
 
     def _handle_repeat(
@@ -1223,3 +1234,186 @@ class CommandRouter:
                 "intent": intent.to_dict(),
                 "spoken_text": f"Checks re-run on {target}.",
             }
+
+    def _handle_comment_with_policy(
+        self,
+        intent: ParsedIntent,
+        user_id: str,
+        idempotency_key: str | None,
+    ) -> dict[str, Any]:
+        """Handle pr.comment with full policy evaluation, rate limiting, and audit logging.
+
+        Args:
+            intent: The parsed pr.comment intent
+            user_id: User identifier for policy evaluation
+            idempotency_key: Optional idempotency key
+
+        Returns:
+            Response dict with status, spoken_text, and optional pending_action
+        """
+        from handsfree.db.action_logs import write_action_log
+        from handsfree.db.pending_actions import create_pending_action
+        from handsfree.policy import PolicyDecision, evaluate_action_policy
+        from handsfree.rate_limit import check_rate_limit
+
+        # Extract entities
+        pr_number = intent.entities.get("pr_number")
+        comment_body = intent.entities.get("comment_body", "")
+        repo = intent.entities.get("repo", "default/repo")
+
+        # Validate required fields
+        if not pr_number:
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": (
+                    "Please specify a PR number, for example: 'comment on PR 123: looks good'."
+                ),
+            }
+
+        if not comment_body:
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": "Please specify the comment text.",
+            }
+
+        # Check rate limit
+        rate_limit_result = check_rate_limit(
+            self.db_conn,
+            user_id,
+            "comment",
+            window_seconds=60,
+            max_requests=10,
+        )
+
+        if not rate_limit_result.allowed:
+            # Write audit log for rate limit denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="comment",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={"comment_body": comment_body},
+                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used - this is a retry
+                pass
+
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Rate limit exceeded. {rate_limit_result.reason}",
+            }
+
+        # Evaluate policy
+        policy_result = evaluate_action_policy(
+            self.db_conn,
+            user_id,
+            repo,
+            "comment",
+        )
+
+        # Handle policy decisions
+        if policy_result.decision == PolicyDecision.DENY:
+            # Write audit log for policy denial
+            try:
+                write_action_log(
+                    self.db_conn,
+                    user_id=user_id,
+                    action_type="comment",
+                    ok=False,
+                    target=f"{repo}#{pr_number}",
+                    request={"comment_body": comment_body},
+                    result={"error": "policy_denied", "message": policy_result.reason},
+                    idempotency_key=idempotency_key,
+                )
+            except ValueError:
+                # Idempotency key already used
+                pass
+
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Action not allowed: {policy_result.reason}",
+            }
+
+        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
+            # Create pending action in database
+            # Truncate long comment bodies in summary
+            comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
+            summary = f"Post comment on {repo}#{pr_number}: {comment_preview}"
+            pending_action = create_pending_action(
+                self.db_conn,
+                user_id=user_id,
+                summary=summary,
+                action_type="comment",
+                action_payload={
+                    "repo": repo,
+                    "pr_number": pr_number,
+                    "comment_body": comment_body,
+                },
+                expires_in_seconds=300,  # 5 minutes
+            )
+
+            # Write audit log for confirmation required
+            write_action_log(
+                self.db_conn,
+                user_id=user_id,
+                action_type="comment",
+                ok=True,
+                target=f"{repo}#{pr_number}",
+                request={"comment_body": comment_body},
+                result={
+                    "status": "needs_confirmation",
+                    "token": pending_action.token,
+                    "reason": policy_result.reason,
+                },
+                idempotency_key=idempotency_key,
+            )
+
+            return {
+                "status": "needs_confirmation",
+                "intent": intent.to_dict(),
+                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "pending_action": {
+                    "token": pending_action.token,
+                    "expires_at": pending_action.expires_at.isoformat(),
+                    "summary": summary,
+                },
+            }
+
+        # Policy allows the action - execute it directly (fixture mode)
+        target = f"{repo}#{pr_number}"
+
+        # Fixture mode - simulate success (no real GitHub write)
+        import logging
+
+        logger = logging.getLogger(__name__)
+
+        logger.info(
+            "Executing comment in fixture mode (no live token) for %s",
+            target,
+        )
+
+        write_action_log(
+            self.db_conn,
+            user_id=user_id,
+            action_type="comment",
+            ok=True,
+            target=target,
+            request={"comment_body": comment_body},
+            result={"status": "success", "message": "Comment posted (fixture)"},
+            idempotency_key=idempotency_key,
+        )
+
+        comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
+        return {
+            "status": "ok",
+            "intent": intent.to_dict(),
+            "spoken_text": f"Comment posted on {target}: {comment_preview}",
+        }
