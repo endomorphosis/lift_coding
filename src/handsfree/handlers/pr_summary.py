@@ -4,13 +4,15 @@ from typing import Any
 
 from ..commands.profiles import ProfileConfig
 from ..github import GitHubProvider
+from ..logging_utils import redact_secrets
+from ..models import PrivacyMode
 
 
 def handle_pr_summarize(
     provider: GitHubProvider,
     repo: str,
     pr_number: int,
-    privacy_mode: bool = True,
+    privacy_mode: PrivacyMode = PrivacyMode.STRICT,
     profile_config: ProfileConfig | None = None,
 ) -> dict[str, Any]:
     """
@@ -20,7 +22,7 @@ def handle_pr_summarize(
         provider: GitHub provider instance
         repo: Repository name (e.g., "owner/repo")
         pr_number: PR number
-        privacy_mode: If True, no code snippets are included (default: True)
+        privacy_mode: Privacy mode (strict/balanced/debug), default: strict
         profile_config: Optional profile configuration for response shaping
 
     Returns:
@@ -99,13 +101,20 @@ def handle_pr_summarize(
     if important_labels:
         spoken_text += f"Labels: {', '.join(important_labels)}. "
 
-    # Add description highlight (first 100 chars only, privacy-friendly)
-    if description and not privacy_mode:
-        # Limit to first 100 characters to avoid sentence parsing issues
-        excerpt = description[:100].strip()
-        if len(description) > 100:
-            excerpt += "..."
-        spoken_text += f"Description: {excerpt}"
+    # Handle description based on privacy mode
+    description_excerpt = None
+    if description:
+        if privacy_mode == PrivacyMode.BALANCED:
+            # Balanced: allow short description excerpts with redaction
+            excerpt = redact_secrets(description[:100].strip())
+            if len(description) > 100:
+                excerpt += "..."
+            spoken_text += f"Description: {excerpt}"
+            description_excerpt = excerpt
+        elif privacy_mode == PrivacyMode.DEBUG:
+            # Debug: include full description in debug field (returned separately)
+            description_excerpt = redact_secrets(description)
+        # Strict mode: no description excerpts in spoken text
 
     # Apply profile-based truncation if profile_config is provided
     # Note: Optional truncation maintains backward compatibility with callers
@@ -115,7 +124,7 @@ def handle_pr_summarize(
     else:
         spoken_text = spoken_text.strip()
 
-    return {
+    result = {
         "pr_number": pr_number,
         "title": title,
         "state": state,
@@ -128,6 +137,12 @@ def handle_pr_summarize(
         "reviews": reviews_summary,
         "spoken_text": spoken_text,
     }
+
+    # Include debug info in debug mode
+    if privacy_mode == PrivacyMode.DEBUG and description_excerpt:
+        result["debug_description"] = description_excerpt
+
+    return result
 
 
 def _summarize_checks(checks: list[dict[str, Any]]) -> dict[str, Any]:

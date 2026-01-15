@@ -492,6 +492,16 @@ components:
       enum: [workout, kitchen, commute, default]
       default: default
 
+    PrivacyMode:
+      type: string
+      enum: [strict, balanced, debug]
+      default: strict
+      description: >
+        Privacy mode controls data exposure in responses:
+        - strict: No images, no code snippets, summaries only (default)
+        - balanced: Small excerpts permitted with redaction
+        - debug: Verbose (never default), includes more diagnostics
+
     CommandRequest:
       type: object
       required: [input, profile, client_context]
@@ -568,6 +578,8 @@ components:
           type: boolean
           default: false
           description: Enable debug mode to store transcript for troubleshooting
+        privacy_mode:
+          $ref: '#/components/schemas/PrivacyMode'
 
     CommandResponse:
       type: object

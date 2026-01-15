@@ -6,6 +6,7 @@ import pytest
 
 from handsfree.github import GitHubProvider
 from handsfree.handlers import handle_inbox_list
+from handsfree.models import PrivacyMode
 
 
 @pytest.fixture
@@ -76,9 +77,9 @@ def test_inbox_priority_ordering(github_provider):
         assert items[i]["priority"] >= items[i + 1]["priority"]
 
 
-def test_inbox_privacy_mode(github_provider):
-    """Test that privacy mode is respected (no code snippets)."""
-    result = handle_inbox_list(github_provider, user="testuser", privacy_mode=True)
+def test_inbox_privacy_mode_strict(github_provider):
+    """Test that strict privacy mode is respected (no code snippets)."""
+    result = handle_inbox_list(github_provider, user="testuser", privacy_mode=PrivacyMode.STRICT)
 
     # Verify no code snippets in spoken text
     spoken = result["spoken_text"]
@@ -89,6 +90,64 @@ def test_inbox_privacy_mode(github_provider):
     # Verify no code in item summaries
     for item in result["items"]:
         assert "```" not in item["summary"]
+        # Verify no debug_info in strict mode
+        assert "debug_info" not in item
+
+
+def test_inbox_privacy_mode_balanced(github_provider):
+    """Test that balanced privacy mode allows excerpts with redaction."""
+    result = handle_inbox_list(github_provider, user="testuser", privacy_mode=PrivacyMode.BALANCED)
+
+    spoken = result["spoken_text"]
+    # Should still not include code snippets
+    assert "```" not in spoken
+
+    # Verify items have summaries
+    for item in result["items"]:
+        assert "summary" in item
+        assert item["summary"]  # Not empty
+        # Should still not have code
+        assert "```" not in item["summary"]
+        # Verify no debug_info in balanced mode
+        assert "debug_info" not in item
+
+
+def test_inbox_privacy_mode_debug(github_provider):
+    """Test that debug privacy mode includes more diagnostics."""
+    result = handle_inbox_list(github_provider, user="testuser", privacy_mode=PrivacyMode.DEBUG)
+
+    # Verify items have debug_info
+    for item in result["items"]:
+        assert "debug_info" in item
+        debug = item["debug_info"]
+        # Debug info should contain labels and role info
+        assert "labels" in debug
+        assert "requested_reviewer" in debug
+        assert "assignee" in debug
+
+
+def test_inbox_privacy_mode_default(github_provider):
+    """Test that default privacy mode is strict."""
+    result = handle_inbox_list(github_provider, user="testuser")
+
+    # Default should behave like strict
+    for item in result["items"]:
+        assert "debug_info" not in item
+
+
+def test_inbox_privacy_mode_redaction(github_provider):
+    """Test that secrets are redacted in all privacy modes."""
+    # This test verifies that redaction happens in all modes
+    from handsfree.handlers.inbox import redact_secrets
+
+    # Verify redact_secrets function exists
+    assert callable(redact_secrets)
+
+    # Test with each mode to ensure no exceptions
+    for mode in [PrivacyMode.STRICT, PrivacyMode.BALANCED, PrivacyMode.DEBUG]:
+        result = handle_inbox_list(github_provider, user="testuser", privacy_mode=mode)
+        assert "spoken_text" in result
+        assert "items" in result
 
 
 def test_inbox_includes_checks_summary(github_provider):

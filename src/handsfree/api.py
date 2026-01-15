@@ -64,6 +64,7 @@ from handsfree.models import (
     NotificationSubscriptionResponse,
     NotificationSubscriptionsListResponse,
     ParsedIntent,
+    PrivacyMode,
     Profile,
     RepoSubscriptionResponse,
     RepoSubscriptionsListResponse,
@@ -734,7 +735,12 @@ async def submit_command(
     else:
         # Convert router response to CommandResponse
         response = _convert_router_response_to_command_response(
-            router_response, parsed_intent, text, request.profile, user_id
+            router_response,
+            parsed_intent,
+            text,
+            request.profile,
+            user_id,
+            request.client_context.privacy_mode,
         )
 
         # For non-system commands, update the router's stored response with the enhanced version
@@ -883,6 +889,7 @@ def _convert_router_response_to_command_response(
     transcript: str,
     profile: Profile,
     user_id: str,
+    privacy_mode: PrivacyMode = PrivacyMode.STRICT,
 ) -> CommandResponse:
     """Convert router response dict to CommandResponse model.
 
@@ -892,6 +899,7 @@ def _convert_router_response_to_command_response(
         transcript: Original text transcript
         profile: User profile
         user_id: User ID from header or fixture
+        privacy_mode: Privacy mode for controlling data exposure
 
     Returns:
         CommandResponse object
@@ -922,7 +930,7 @@ def _convert_router_response_to_command_response(
             inbox_result = handle_inbox_list(
                 provider=_github_provider,
                 user="fixture-user",
-                privacy_mode=True,
+                privacy_mode=privacy_mode,
                 profile_config=profile_config,
             )
             items = inbox_result.get("items", [])
@@ -951,7 +959,7 @@ def _convert_router_response_to_command_response(
                     provider=_github_provider,
                     repo="fixture/repo",
                     pr_number=pr_number,
-                    privacy_mode=True,
+                    privacy_mode=privacy_mode,
                     profile_config=profile_config,
                 )
                 spoken_text = pr_result.get("spoken_text", spoken_text)

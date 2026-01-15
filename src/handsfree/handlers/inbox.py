@@ -4,12 +4,14 @@ from typing import Any
 
 from ..commands.profiles import ProfileConfig
 from ..github import GitHubProvider
+from ..logging_utils import redact_secrets
+from ..models import PrivacyMode
 
 
 def handle_inbox_list(
     provider: GitHubProvider,
     user: str,
-    privacy_mode: bool = True,
+    privacy_mode: PrivacyMode = PrivacyMode.STRICT,
     profile_config: ProfileConfig | None = None,
 ) -> dict[str, Any]:
     """
@@ -18,7 +20,7 @@ def handle_inbox_list(
     Args:
         provider: GitHub provider instance
         user: GitHub username
-        privacy_mode: If True, no code snippets are included (default: True)
+        privacy_mode: Privacy mode (strict/balanced/debug), default: strict
         profile_config: Optional profile configuration for response shaping
 
     Returns:
@@ -89,20 +91,36 @@ def handle_inbox_list(
         if role:
             summary = f"{role}: {summary}"
 
-        # Add checks summary to item
-        items.append(
-            {
-                "type": item_type,
-                "title": pr["title"],
-                "priority": priority,
-                "repo": pr["repo"],
-                "url": pr["url"],
-                "summary": summary,
-                "checks_passed": checks_passed,
-                "checks_failed": checks_failed,
-                "checks_pending": checks_pending,
+        # Apply redaction based on privacy mode
+        if privacy_mode == PrivacyMode.BALANCED:
+            # Redact any potential secrets in summary
+            summary = redact_secrets(summary)
+        elif privacy_mode == PrivacyMode.STRICT:
+            # In strict mode, ensure no code-like content
+            summary = redact_secrets(summary)
+
+        item_data = {
+            "type": item_type,
+            "title": pr["title"],
+            "priority": priority,
+            "repo": pr["repo"],
+            "url": pr["url"],
+            "summary": summary,
+            "checks_passed": checks_passed,
+            "checks_failed": checks_failed,
+            "checks_pending": checks_pending,
+        }
+
+        # Add debug info in debug mode
+        if privacy_mode == PrivacyMode.DEBUG:
+            item_data["debug_info"] = {
+                "labels": labels,
+                "requested_reviewer": pr.get("requested_reviewer", False),
+                "assignee": pr.get("assignee", False),
             }
-        )
+
+        # Add checks summary to item
+        items.append(item_data)
 
     # Sort by priority (highest first), then by updated_at
     # Create a mapping for efficient lookup

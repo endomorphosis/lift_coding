@@ -16,6 +16,14 @@ class Profile(str, Enum):
     DEFAULT = "default"
 
 
+class PrivacyMode(str, Enum):
+    """Privacy mode enum for controlling data exposure in responses."""
+
+    STRICT = "strict"  # No images, no code snippets, summaries only
+    BALANCED = "balanced"  # Small excerpts permitted with redaction
+    DEBUG = "debug"  # Verbose (never default)
+
+
 class TextInput(BaseModel):
     """Text input schema."""
 
@@ -50,6 +58,7 @@ class ClientContext(BaseModel):
     app_version: str = Field(..., examples=["0.1.0"])
     noise_mode: bool = False
     debug: bool = False
+    privacy_mode: PrivacyMode = PrivacyMode.STRICT
 
 
 class CommandRequest(BaseModel):
