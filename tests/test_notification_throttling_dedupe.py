@@ -4,11 +4,11 @@ import pytest
 
 from handsfree.db import init_db
 from handsfree.db.notifications import (
-    _generate_dedupe_key,
-    _get_event_priority,
-    _should_throttle_notification,
     create_notification,
+    generate_dedupe_key,
+    get_event_priority,
     list_notifications,
+    should_throttle_notification,
 )
 
 
@@ -34,8 +34,8 @@ class TestDedupeKeyGeneration:
         metadata1 = {"repo": "owner/repo", "pr_number": 123}
         metadata2 = {"repo": "owner/repo", "pr_number": 123}
 
-        key1 = _generate_dedupe_key("webhook.pr_opened", metadata1)
-        key2 = _generate_dedupe_key("webhook.pr_opened", metadata2)
+        key1 = generate_dedupe_key("webhook.pr_opened", metadata1)
+        key2 = generate_dedupe_key("webhook.pr_opened", metadata2)
 
         assert key1 == key2
 
@@ -44,8 +44,8 @@ class TestDedupeKeyGeneration:
         metadata1 = {"repo": "owner/repo1", "pr_number": 123}
         metadata2 = {"repo": "owner/repo2", "pr_number": 123}
 
-        key1 = _generate_dedupe_key("webhook.pr_opened", metadata1)
-        key2 = _generate_dedupe_key("webhook.pr_opened", metadata2)
+        key1 = generate_dedupe_key("webhook.pr_opened", metadata1)
+        key2 = generate_dedupe_key("webhook.pr_opened", metadata2)
 
         assert key1 != key2
 
@@ -54,8 +54,8 @@ class TestDedupeKeyGeneration:
         metadata1 = {"repo": "owner/repo", "pr_number": 123}
         metadata2 = {"repo": "owner/repo", "pr_number": 456}
 
-        key1 = _generate_dedupe_key("webhook.pr_opened", metadata1)
-        key2 = _generate_dedupe_key("webhook.pr_opened", metadata2)
+        key1 = generate_dedupe_key("webhook.pr_opened", metadata1)
+        key2 = generate_dedupe_key("webhook.pr_opened", metadata2)
 
         assert key1 != key2
 
@@ -63,14 +63,14 @@ class TestDedupeKeyGeneration:
         """Test that different event types generate different dedupe keys."""
         metadata = {"repo": "owner/repo", "pr_number": 123}
 
-        key1 = _generate_dedupe_key("webhook.pr_opened", metadata)
-        key2 = _generate_dedupe_key("webhook.pr_closed", metadata)
+        key1 = generate_dedupe_key("webhook.pr_opened", metadata)
+        key2 = generate_dedupe_key("webhook.pr_closed", metadata)
 
         assert key1 != key2
 
     def test_dedupe_key_handles_no_metadata(self):
         """Test that dedupe key can be generated without metadata."""
-        key = _generate_dedupe_key("webhook.simple_event", None)
+        key = generate_dedupe_key("webhook.simple_event", None)
         assert key is not None
         assert len(key) > 0
 
@@ -80,30 +80,30 @@ class TestEventPriority:
 
     def test_high_priority_events(self):
         """Test that critical events get priority 5."""
-        assert _get_event_priority("webhook.pr_merged") == 5
-        assert _get_event_priority("webhook.deployment_failure") == 5
-        assert _get_event_priority("webhook.security_alert") == 5
-        assert _get_event_priority("webhook.check_suite_failure") == 5
+        assert get_event_priority("webhook.pr_merged") == 5
+        assert get_event_priority("webhook.deployment_failure") == 5
+        assert get_event_priority("webhook.security_alert") == 5
+        assert get_event_priority("webhook.check_suite_failure") == 5
 
     def test_important_priority_events(self):
         """Test that important events get priority 4."""
-        assert _get_event_priority("webhook.pr_opened") == 4
-        assert _get_event_priority("webhook.pr_closed") == 4
-        assert _get_event_priority("webhook.review_requested") == 4
+        assert get_event_priority("webhook.pr_opened") == 4
+        assert get_event_priority("webhook.pr_closed") == 4
+        assert get_event_priority("webhook.review_requested") == 4
 
     def test_medium_priority_events(self):
         """Test that medium priority events get priority 3."""
-        assert _get_event_priority("webhook.pr_synchronize") == 3
-        assert _get_event_priority("webhook.check_suite_completed") == 3
+        assert get_event_priority("webhook.pr_synchronize") == 3
+        assert get_event_priority("webhook.check_suite_completed") == 3
 
     def test_low_priority_events(self):
         """Test that low priority events get priority 2."""
-        assert _get_event_priority("webhook.pr_labeled") == 2
-        assert _get_event_priority("webhook.issue_comment") == 2
+        assert get_event_priority("webhook.pr_labeled") == 2
+        assert get_event_priority("webhook.issue_comment") == 2
 
     def test_unknown_events_default_to_medium(self):
         """Test that unknown events default to priority 3."""
-        assert _get_event_priority("webhook.unknown_event") == 3
+        assert get_event_priority("webhook.unknown_event") == 3
 
 
 class TestThrottling:
@@ -111,35 +111,35 @@ class TestThrottling:
 
     def test_workout_profile_throttles_low_priority(self):
         """Test that workout profile throttles events below priority 4."""
-        assert _should_throttle_notification(3, "workout") is True
-        assert _should_throttle_notification(2, "workout") is True
-        assert _should_throttle_notification(1, "workout") is True
-        assert _should_throttle_notification(4, "workout") is False
-        assert _should_throttle_notification(5, "workout") is False
+        assert should_throttle_notification(3, "workout") is True
+        assert should_throttle_notification(2, "workout") is True
+        assert should_throttle_notification(1, "workout") is True
+        assert should_throttle_notification(4, "workout") is False
+        assert should_throttle_notification(5, "workout") is False
 
     def test_commute_profile_throttles_low_priority(self):
         """Test that commute profile throttles events below priority 3."""
-        assert _should_throttle_notification(2, "commute") is True
-        assert _should_throttle_notification(1, "commute") is True
-        assert _should_throttle_notification(3, "commute") is False
-        assert _should_throttle_notification(4, "commute") is False
-        assert _should_throttle_notification(5, "commute") is False
+        assert should_throttle_notification(2, "commute") is True
+        assert should_throttle_notification(1, "commute") is True
+        assert should_throttle_notification(3, "commute") is False
+        assert should_throttle_notification(4, "commute") is False
+        assert should_throttle_notification(5, "commute") is False
 
     def test_kitchen_profile_throttles_very_low_priority(self):
         """Test that kitchen profile throttles events below priority 2."""
-        assert _should_throttle_notification(1, "kitchen") is True
-        assert _should_throttle_notification(2, "kitchen") is False
-        assert _should_throttle_notification(3, "kitchen") is False
-        assert _should_throttle_notification(4, "kitchen") is False
-        assert _should_throttle_notification(5, "kitchen") is False
+        assert should_throttle_notification(1, "kitchen") is True
+        assert should_throttle_notification(2, "kitchen") is False
+        assert should_throttle_notification(3, "kitchen") is False
+        assert should_throttle_notification(4, "kitchen") is False
+        assert should_throttle_notification(5, "kitchen") is False
 
     def test_default_profile_allows_all(self):
         """Test that default profile allows all priority levels."""
-        assert _should_throttle_notification(1, "default") is False
-        assert _should_throttle_notification(2, "default") is False
-        assert _should_throttle_notification(3, "default") is False
-        assert _should_throttle_notification(4, "default") is False
-        assert _should_throttle_notification(5, "default") is False
+        assert should_throttle_notification(1, "default") is False
+        assert should_throttle_notification(2, "default") is False
+        assert should_throttle_notification(3, "default") is False
+        assert should_throttle_notification(4, "default") is False
+        assert should_throttle_notification(5, "default") is False
 
 
 class TestNotificationDeduplication:

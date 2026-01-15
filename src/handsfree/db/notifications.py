@@ -5,12 +5,15 @@ Manages storage and retrieval of user-facing notifications.
 
 import hashlib
 import json
+import logging
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import duckdb
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -40,7 +43,7 @@ class Notification:
         }
 
 
-def _generate_dedupe_key(event_type: str, metadata: dict[str, Any] | None) -> str:
+def generate_dedupe_key(event_type: str, metadata: dict[str, Any] | None) -> str:
     """Generate a deduplication key based on event type and metadata.
 
     Args:
@@ -77,7 +80,7 @@ def _generate_dedupe_key(event_type: str, metadata: dict[str, Any] | None) -> st
     return hashlib.sha256(dedupe_string.encode()).hexdigest()[:16]
 
 
-def _get_event_priority(event_type: str) -> int:
+def get_event_priority(event_type: str) -> int:
     """Get priority level for an event type.
 
     Priority scale: 1 (low) to 5 (high)
@@ -132,7 +135,7 @@ def _get_event_priority(event_type: str) -> int:
     return 3
 
 
-def _should_throttle_notification(priority: int, profile: str) -> bool:
+def should_throttle_notification(priority: int, profile: str) -> bool:
     """Determine if a notification should be throttled based on priority and profile.
 
     Args:
@@ -181,13 +184,10 @@ def create_notification(
     """
     # Determine priority
     if priority is None:
-        priority = _get_event_priority(event_type)
+        priority = get_event_priority(event_type)
 
     # Check throttling
-    if _should_throttle_notification(priority, profile):
-        import logging
-
-        logger = logging.getLogger(__name__)
+    if should_throttle_notification(priority, profile):
         logger.debug(
             "Notification throttled: event_type=%s, priority=%d, profile=%s",
             event_type,
@@ -197,7 +197,7 @@ def create_notification(
         return None
 
     # Generate dedupe key
-    dedupe_key = _generate_dedupe_key(event_type, metadata)
+    dedupe_key = generate_dedupe_key(event_type, metadata)
 
     # Convert user_id to UUID if it's not already one
     try:
@@ -224,17 +224,13 @@ def create_notification(
     ).fetchone()
 
     if existing:
-        import logging
-
-        logger = logging.getLogger(__name__)
         logger.debug(
             "Notification deduplicated: event_type=%s, dedupe_key=%s, existing_id=%s",
             event_type,
             dedupe_key,
             existing[0],
         )
-        # Return the existing notification (converted to Notification object)
-        # We'll just return None to indicate it was deduplicated
+        # Notification deduplicated - return None to indicate no new notification created
         return None
 
     # Create new notification
