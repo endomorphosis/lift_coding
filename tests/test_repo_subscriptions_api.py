@@ -7,8 +7,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app, get_db
-from handsfree.db.repo_subscriptions import create_repo_subscription
 from handsfree.db.notifications import list_notifications
+from handsfree.db.repo_subscriptions import create_repo_subscription
 
 client = TestClient(app)
 
@@ -122,9 +122,7 @@ class TestRepoSubscriptionsAPI:
         assert data["subscriptions"][0]["repo_full_name"] == "owner/repo2"
         assert data["subscriptions"][1]["repo_full_name"] == "owner/repo1"
 
-    def test_list_repo_subscriptions_filters_by_user(
-        self, test_user_id, test_user_id_2
-    ):
+    def test_list_repo_subscriptions_filters_by_user(self, test_user_id, test_user_id_2):
         """Test that listing subscriptions filters by user_id."""
         db = get_db()
 
@@ -337,12 +335,8 @@ class TestRepoSubscriptionsWebhookIntegration:
         assert response.status_code == 202
 
         # Check that both users received notifications
-        notifications_user1 = list_notifications(
-            conn=db, user_id=test_user_id, limit=10
-        )
-        notifications_user2 = list_notifications(
-            conn=db, user_id=test_user_id_2, limit=10
-        )
+        notifications_user1 = list_notifications(conn=db, user_id=test_user_id, limit=10)
+        notifications_user2 = list_notifications(conn=db, user_id=test_user_id_2, limit=10)
 
         assert len(notifications_user1) > 0
         assert len(notifications_user2) > 0
