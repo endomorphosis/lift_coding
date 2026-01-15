@@ -172,7 +172,16 @@ def _get_latest_review(reviews: list[dict[str, Any]]) -> dict[str, Any] | None:
     if not reviews:
         return None
 
-    # Sort by submitted_at timestamp descending (most recent first)
-    sorted_reviews = sorted(reviews, key=lambda r: r.get("submitted_at", ""), reverse=True)
+    # Filter out reviews without submitted_at timestamp
+    reviews_with_timestamp = [r for r in reviews if r.get("submitted_at")]
 
-    return sorted_reviews[0] if sorted_reviews else None
+    if not reviews_with_timestamp:
+        # If no reviews have timestamps, return the first one
+        return reviews[0]
+
+    # Sort by submitted_at timestamp descending (most recent first)
+    sorted_reviews = sorted(
+        reviews_with_timestamp, key=lambda r: r.get("submitted_at", ""), reverse=True
+    )
+
+    return sorted_reviews[0]

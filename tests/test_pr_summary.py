@@ -185,3 +185,23 @@ def test_pr_summary_latest_review(github_provider):
     # - reviewer3: APPROVED at 2026-01-12T13:30:00Z (latest)
     spoken = result["spoken_text"]
     assert "Latest review: APPROVED by reviewer3" in spoken
+
+
+def test_pr_summary_no_reviews(github_provider):
+    """Test PR summary when there are no reviews."""
+    # Create a custom fixture scenario with no reviews
+    from handsfree.handlers.pr_summary import _get_latest_review
+
+    # Test with empty list
+    latest = _get_latest_review([])
+    assert latest is None
+
+    # Test with reviews missing timestamps (edge case)
+    reviews_no_timestamp = [
+        {"user": "reviewer1", "state": "APPROVED"},
+        {"user": "reviewer2", "state": "COMMENTED"},
+    ]
+    latest = _get_latest_review(reviews_no_timestamp)
+    # Should return first review if none have timestamps
+    assert latest is not None
+    assert latest["user"] == "reviewer1"
