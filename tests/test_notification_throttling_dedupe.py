@@ -1,7 +1,5 @@
 """Tests for notification throttling and deduplication."""
 
-from datetime import UTC, datetime, timedelta
-
 import pytest
 
 from handsfree.db import init_db

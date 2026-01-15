@@ -406,7 +406,9 @@ def list_notifications(
             metadata=json.loads(row[4]) if row[4] else None,  # Parse JSON string
             created_at=row[5],
             priority=row[6] if len(row) > 6 else 3,  # Default priority for backward compatibility
-            profile=row[7] if len(row) > 7 else "default",  # Default profile for backward compatibility
+            profile=row[7]
+            if len(row) > 7
+            else "default",  # Default profile for backward compatibility
         )
         for row in result
     ]
