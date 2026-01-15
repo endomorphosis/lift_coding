@@ -52,6 +52,7 @@ from handsfree.models import (
     ConfirmRequest,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
+    CreateRepoSubscriptionRequest,
     DebugInfo,
     DependencyStatus,
     GitHubConnectionResponse,
@@ -64,6 +65,8 @@ from handsfree.models import (
     NotificationSubscriptionsListResponse,
     ParsedIntent,
     Profile,
+    RepoSubscriptionResponse,
+    RepoSubscriptionsListResponse,
     RequestReviewRequest,
     RerunChecksRequest,
     StatusResponse,
@@ -3279,6 +3282,151 @@ async def delete_connection(
         )
 
     delete_github_connection(conn=db, connection_id=connection_id)
+    return Response(status_code=204)
+
+
+@app.post(
+    "/v1/repos/subscriptions",
+    response_model=RepoSubscriptionResponse,
+    status_code=201,
+)
+async def create_repo_subscription(
+    request: CreateRepoSubscriptionRequest,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> RepoSubscriptionResponse:
+    """Create a new repository subscription for webhook notifications.
+
+    Args:
+        request: Subscription creation request.
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        x_user_id_raw: Optional user ID header (dev mode only).
+
+    Returns:
+        Created subscription.
+    """
+    from handsfree.db.repo_subscriptions import (
+        create_repo_subscription as db_create_repo_subscription,
+    )
+
+    db = get_db()
+
+    # In dev/test, some endpoints accept arbitrary user IDs (not UUIDs) via header
+    # for isolation in tests. In non-dev modes, always trust the authenticated user.
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
+    subscription = db_create_repo_subscription(
+        conn=db,
+        user_id=effective_user_id,
+        repo_full_name=request.repo_full_name,
+        installation_id=request.installation_id,
+    )
+
+    return RepoSubscriptionResponse(
+        id=subscription.id,
+        user_id=subscription.user_id,
+        repo_full_name=subscription.repo_full_name,
+        installation_id=subscription.installation_id,
+        created_at=subscription.created_at.isoformat(),
+    )
+
+
+@app.get("/v1/repos/subscriptions", response_model=RepoSubscriptionsListResponse)
+async def list_repo_subscriptions(
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> RepoSubscriptionsListResponse:
+    """List all repository subscriptions for the current user.
+
+    Args:
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        x_user_id_raw: Optional user ID header (dev mode only).
+
+    Returns:
+        List of subscriptions.
+    """
+    from handsfree.db.repo_subscriptions import (
+        list_repo_subscriptions as db_list_repo_subscriptions,
+    )
+
+    db = get_db()
+
+    # In dev/test, some endpoints accept arbitrary user IDs (not UUIDs) via header
+    # for isolation in tests. In non-dev modes, always trust the authenticated user.
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
+    subscriptions = db_list_repo_subscriptions(conn=db, user_id=effective_user_id)
+
+    return RepoSubscriptionsListResponse(
+        subscriptions=[
+            RepoSubscriptionResponse(
+                id=sub.id,
+                user_id=sub.user_id,
+                repo_full_name=sub.repo_full_name,
+                installation_id=sub.installation_id,
+                created_at=sub.created_at.isoformat(),
+            )
+            for sub in subscriptions
+        ]
+    )
+
+
+@app.delete("/v1/repos/subscriptions/{repo_full_name:path}", status_code=204)
+async def delete_repo_subscription(
+    repo_full_name: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> Response:
+    """Delete a repository subscription.
+
+    Args:
+        repo_full_name: Full repository name (e.g., "owner/repo").
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        x_user_id_raw: Optional user ID header (dev mode only).
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: Subscription not found.
+    """
+    from handsfree.db.repo_subscriptions import (
+        delete_repo_subscription as db_delete_repo_subscription,
+    )
+
+    db = get_db()
+
+    # In dev/test, some endpoints accept arbitrary user IDs (not UUIDs) via header
+    # for isolation in tests. In non-dev modes, always trust the authenticated user.
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
+    deleted = db_delete_repo_subscription(
+        conn=db,
+        user_id=effective_user_id,
+        repo_full_name=repo_full_name,
+    )
+
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": "not_found",
+                "message": "Subscription not found",
+            },
+        )
+
     return Response(status_code=204)
 
 

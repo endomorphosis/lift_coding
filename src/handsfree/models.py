@@ -228,6 +228,34 @@ class GitHubConnectionsListResponse(BaseModel):
     connections: list[GitHubConnectionResponse]
 
 
+class CreateRepoSubscriptionRequest(BaseModel):
+    """Request to create a repository subscription."""
+
+    repo_full_name: str = Field(
+        ..., min_length=1, description="Full repository name (e.g., 'owner/repo')"
+    )
+    installation_id: int | None = Field(
+        default=None,
+        description="GitHub App installation ID (optional)",
+    )
+
+
+class RepoSubscriptionResponse(BaseModel):
+    """Response for a repository subscription."""
+
+    id: str
+    user_id: str
+    repo_full_name: str
+    installation_id: int | None
+    created_at: str
+
+
+class RepoSubscriptionsListResponse(BaseModel):
+    """Response for listing repository subscriptions."""
+
+    subscriptions: list[RepoSubscriptionResponse]
+
+
 class TTSRequest(BaseModel):
     """Text-to-speech request."""
 
