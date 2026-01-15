@@ -4,7 +4,8 @@ import time
 from datetime import UTC, datetime
 
 import pytest
-import redis
+
+redis = pytest.importorskip("redis")
 
 from handsfree.commands.pending_actions import RedisPendingActionManager
 

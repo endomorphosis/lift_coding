@@ -15,7 +15,21 @@ import secrets
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 
-import redis
+from types import SimpleNamespace
+
+try:
+    import redis  # type: ignore
+
+    REDIS_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    class _RedisStubError(Exception):
+        pass
+
+    redis = SimpleNamespace(  # type: ignore
+        Redis=object,
+        RedisError=_RedisStubError,
+    )
+    REDIS_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 

@@ -5,7 +5,8 @@ from datetime import UTC, datetime, timedelta
 from unittest.mock import MagicMock
 
 import pytest
-import redis
+
+redis = pytest.importorskip("redis")
 
 from handsfree.sessions import SessionTokenManager
 

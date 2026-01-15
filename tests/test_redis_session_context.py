@@ -3,7 +3,8 @@
 import time
 
 import pytest
-import redis
+
+redis = pytest.importorskip("redis")
 
 from handsfree.commands.session_context import RedisSessionContext
 

@@ -6,7 +6,25 @@ Provides a central point for Redis connection management with graceful fallback.
 import logging
 import os
 
-import redis
+from types import SimpleNamespace
+
+try:
+    import redis  # type: ignore
+
+    REDIS_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    # Make Redis an optional dependency.
+    # We provide a minimal stub so type annotations and exception handlers
+    # don't crash at import time.
+    class _RedisStubError(Exception):
+        pass
+
+    redis = SimpleNamespace(  # type: ignore
+        Redis=object,
+        RedisError=_RedisStubError,
+        ConnectionError=_RedisStubError,
+    )
+    REDIS_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +46,10 @@ def get_redis_client(
     Returns:
         Redis client if available, None if disabled or connection fails
     """
+    if not REDIS_AVAILABLE:
+        logger.info("Redis Python package not installed; Redis integration disabled")
+        return None
+
     # Check if Redis is explicitly disabled
     if os.environ.get("REDIS_ENABLED", "true").lower() == "false":
         logger.info("Redis is disabled via REDIS_ENABLED environment variable")

@@ -1,7 +1,8 @@
 """Integration tests for Redis-backed components."""
 
 import pytest
-import redis
+
+redis = pytest.importorskip("redis")
 
 from handsfree.commands.pending_actions import RedisPendingActionManager
 from handsfree.commands.session_context import RedisSessionContext

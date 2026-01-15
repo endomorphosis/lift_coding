@@ -3,11 +3,25 @@
 import json
 import logging
 import secrets
+from types import SimpleNamespace
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-import redis
+try:
+    import redis  # type: ignore
+
+    REDIS_AVAILABLE = True
+except ImportError:  # pragma: no cover
+    class _RedisStubError(Exception):
+        pass
+
+    redis = SimpleNamespace(  # type: ignore
+        Redis=object,
+        RedisError=_RedisStubError,
+        WatchError=_RedisStubError,
+    )
+    REDIS_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -187,7 +201,7 @@ class RedisPendingActionManager:
         self.key_prefix = key_prefix
 
         # Fallback to in-memory if Redis unavailable
-        if self.redis is None:
+        if (not REDIS_AVAILABLE) or self.redis is None:
             logger.warning("Redis not available, using in-memory fallback for pending actions")
             self._fallback = PendingActionManager(default_expiry_seconds)
         else:
