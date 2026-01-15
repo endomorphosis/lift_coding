@@ -70,7 +70,9 @@ class TestRedisSessionContextSetGet:
 
     def test_get_with_fallback_repo(self, redis_session_context: RedisSessionContext) -> None:
         """Test getting context with fallback repo."""
-        context = redis_session_context.get_repo_pr("nonexistent-session", fallback_repo="default/repo")
+        context = redis_session_context.get_repo_pr(
+            "nonexistent-session", fallback_repo="default/repo"
+        )
         assert context["repo"] == "default/repo"
 
     def test_empty_session_id(self, redis_session_context: RedisSessionContext) -> None:
@@ -169,9 +171,7 @@ class TestRedisSessionContextClear:
         context = redis_session_context.get_repo_pr(session_id)
         assert context == {}
 
-    def test_clear_nonexistent_session(
-        self, redis_session_context: RedisSessionContext
-    ) -> None:
+    def test_clear_nonexistent_session(self, redis_session_context: RedisSessionContext) -> None:
         """Test clearing a non-existent session (should not error)."""
         redis_session_context.clear_session("nonexistent-session")
         # Should not raise error
@@ -222,9 +222,7 @@ class TestRedisSessionContextMultipleSessions:
 class TestFallbackSessionContext:
     """Test fallback to in-memory manager when Redis unavailable."""
 
-    def test_set_get_without_redis(
-        self, fallback_session_context: RedisSessionContext
-    ) -> None:
+    def test_set_get_without_redis(self, fallback_session_context: RedisSessionContext) -> None:
         """Test set/get with in-memory fallback."""
         session_id = "fallback-session"
         fallback_session_context.set_repo_pr(session_id, "owner/repo", pr_number=456)
@@ -233,9 +231,7 @@ class TestFallbackSessionContext:
         assert context["repo"] == "owner/repo"
         assert context["pr_number"] == 456
 
-    def test_clear_without_redis(
-        self, fallback_session_context: RedisSessionContext
-    ) -> None:
+    def test_clear_without_redis(self, fallback_session_context: RedisSessionContext) -> None:
         """Test clear with in-memory fallback."""
         session_id = "fallback-clear"
         fallback_session_context.set_repo_pr(session_id, "owner/repo")
@@ -255,7 +251,5 @@ class TestFallbackSessionContext:
         self, fallback_session_context: RedisSessionContext
     ) -> None:
         """Test fallback repo parameter works with in-memory fallback."""
-        context = fallback_session_context.get_repo_pr(
-            "nonexistent", fallback_repo="default/repo"
-        )
+        context = fallback_session_context.get_repo_pr("nonexistent", fallback_repo="default/repo")
         assert context["repo"] == "default/repo"

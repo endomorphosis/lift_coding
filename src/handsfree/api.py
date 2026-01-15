@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
-from handsfree.commands.pending_actions import PendingActionManager
+from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
 from handsfree.commands.profiles import ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
@@ -78,6 +78,7 @@ from handsfree.models import (
     PendingAction as PydanticPendingAction,
 )
 from handsfree.policy import PolicyDecision, evaluate_action_policy
+from handsfree.redis_client import get_redis_client
 from handsfree.stt import get_stt_provider
 from handsfree.webhooks import (
     normalize_github_event,
@@ -109,7 +110,18 @@ _webhook_store = None
 
 # Initialize command infrastructure
 _intent_parser = IntentParser()
-_pending_action_manager = PendingActionManager()
+
+# Initialize pending action manager with Redis if available
+_redis_client = get_redis_client()
+if _redis_client is not None:
+    logger.info("Using Redis-backed pending action manager")
+    _pending_action_manager = RedisPendingActionManager(
+        redis_client=_redis_client, default_expiry_seconds=60
+    )
+else:
+    logger.info("Redis unavailable, using in-memory pending action manager")
+    _pending_action_manager = PendingActionManager()
+
 _command_router: CommandRouter | None = None
 _github_provider = GitHubProvider()
 

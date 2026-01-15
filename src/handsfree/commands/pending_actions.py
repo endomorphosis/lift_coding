@@ -5,7 +5,7 @@ import logging
 import secrets
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 
 import redis
 
@@ -171,7 +171,7 @@ class RedisPendingActionManager:
 
     def __init__(
         self,
-        redis_client: Optional[redis.Redis] = None,
+        redis_client: redis.Redis | None = None,
         default_expiry_seconds: int = 60,
         key_prefix: str = "pending_action:",
     ) -> None:

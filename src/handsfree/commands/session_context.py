@@ -2,7 +2,7 @@
 
 import json
 import logging
-from typing import Any, Optional
+from typing import Any
 
 import redis
 
@@ -80,7 +80,7 @@ class RedisSessionContext:
 
     def __init__(
         self,
-        redis_client: Optional[redis.Redis] = None,
+        redis_client: redis.Redis | None = None,
         default_ttl_seconds: int = 3600,
         key_prefix: str = "session_context:",
     ) -> None:

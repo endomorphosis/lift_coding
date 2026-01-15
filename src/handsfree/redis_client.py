@@ -5,7 +5,6 @@ Provides a central point for Redis connection management with graceful fallback.
 
 import logging
 import os
-from typing import Optional
 
 import redis
 
@@ -13,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 
 def get_redis_client(
-    host: Optional[str] = None,
-    port: Optional[int] = None,
+    host: str | None = None,
+    port: int | None = None,
     db: int = 0,
     decode_responses: bool = False,
-) -> Optional[redis.Redis]:
+) -> redis.Redis | None:
     """Get a Redis client or None if Redis is unavailable/disabled.
 
     Args:

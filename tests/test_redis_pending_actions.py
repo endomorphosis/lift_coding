@@ -1,7 +1,7 @@
 """Tests for Redis-backed pending actions manager."""
 
 import time
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 import pytest
 import redis
@@ -103,9 +103,7 @@ class TestRedisPendingActionCreation:
         self, redis_manager: RedisPendingActionManager, redis_client
     ) -> None:
         """Test that TTL is set correctly in Redis."""
-        action = redis_manager.create(
-            "test.intent", {}, "Test", expiry_seconds=300
-        )  # 5 minutes
+        action = redis_manager.create("test.intent", {}, "Test", expiry_seconds=300)  # 5 minutes
 
         redis_key = redis_manager._make_redis_key(action.token)
         ttl = redis_client.ttl(redis_key)
@@ -196,9 +194,7 @@ class TestRedisPendingActionConfirmation:
         result = redis_manager.confirm(action.token)
         assert result is None
 
-    def test_atomic_consume(
-        self, redis_manager: RedisPendingActionManager, redis_client
-    ) -> None:
+    def test_atomic_consume(self, redis_manager: RedisPendingActionManager, redis_client) -> None:
         """Test that confirmation consumes the token atomically."""
         action = redis_manager.create("test.intent", {}, "Test")
 
