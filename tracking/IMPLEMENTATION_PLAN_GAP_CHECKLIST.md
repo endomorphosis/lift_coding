@@ -26,7 +26,7 @@ Remaining (client-side / out of repo):
 - [x] “repeat/next” navigation primitives (server-side).
 
 Remaining (backend):
-- [ ] Profile tuning for summary verbosity beyond placeholders (Workout, etc.) if not fully implemented.
+- [ ] Profile tuning for summary verbosity beyond placeholders (Workout, etc.) if not fully implemented. (Tracked in PR-027)
 
 Remaining (client-side):
 - [ ] UX for “repeat/next” and quick confirms in mobile/wearable app.
