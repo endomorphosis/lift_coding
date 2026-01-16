@@ -279,12 +279,6 @@ class TestPlatformProviderSelection:
         assert provider.team_id == "TEST123456"
         assert provider.key_id == "ABC123"
 
-        # Clean up
-        monkeypatch.delenv("HANDSFREE_APNS_TEAM_ID")
-        monkeypatch.delenv("HANDSFREE_APNS_KEY_ID")
-        monkeypatch.delenv("HANDSFREE_APNS_KEY_PATH")
-        monkeypatch.delenv("HANDSFREE_APNS_BUNDLE_ID")
-
     def test_get_provider_for_fcm_platform(self, monkeypatch):
         """Test getting FCM provider for fcm platform."""
         # Configure FCM credentials
@@ -296,10 +290,6 @@ class TestPlatformProviderSelection:
         assert isinstance(provider, FCMProvider)
         assert provider.project_id == "my-project"
         assert provider.credentials_path == "/path/to/creds.json"
-
-        # Clean up
-        monkeypatch.delenv("HANDSFREE_FCM_PROJECT_ID")
-        monkeypatch.delenv("HANDSFREE_FCM_CREDENTIALS_PATH")
 
     def test_get_provider_for_webpush_platform(self, monkeypatch):
         """Test getting WebPush provider for webpush platform."""
@@ -315,17 +305,15 @@ class TestPlatformProviderSelection:
         assert isinstance(provider, WebPushProvider)
         assert provider.vapid_public_key == "test-public"
 
-        # Clean up
-        monkeypatch.delenv("HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY")
-        monkeypatch.delenv("HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY")
-        monkeypatch.delenv("HANDSFREE_WEBPUSH_VAPID_SUBJECT")
-
-    def test_get_provider_returns_none_when_credentials_missing(self):
+    def test_get_provider_returns_none_when_credentials_missing(self, monkeypatch):
         """Test that None is returned when credentials are not configured."""
-        # Clear any environment variables (use list() to avoid RuntimeError)
-        for key in list(os.environ.keys()):
-            if key.startswith("HANDSFREE_APNS_") or key.startswith("HANDSFREE_FCM_"):
-                del os.environ[key]
+        # Clear any environment variables that might be set
+        monkeypatch.delenv("HANDSFREE_APNS_TEAM_ID", raising=False)
+        monkeypatch.delenv("HANDSFREE_APNS_KEY_ID", raising=False)
+        monkeypatch.delenv("HANDSFREE_APNS_KEY_PATH", raising=False)
+        monkeypatch.delenv("HANDSFREE_APNS_BUNDLE_ID", raising=False)
+        monkeypatch.delenv("HANDSFREE_FCM_PROJECT_ID", raising=False)
+        monkeypatch.delenv("HANDSFREE_FCM_CREDENTIALS_PATH", raising=False)
 
         apns_provider = get_provider_for_platform("apns")
         assert apns_provider is None
@@ -354,9 +342,6 @@ class TestPlatformProviderSelection:
 
         webpush_provider = get_provider_for_platform("webpush")
         assert isinstance(webpush_provider, DevLoggerProvider)
-
-        # Clean up
-        monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER")
 
 
 class TestPlatformPersistence:
