@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import time
+from collections import deque
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -98,8 +99,8 @@ def process_task(issue, metadata: dict) -> bool:
         target_repo = metadata.get('target_repo', DISPATCH_REPO)
         instruction = metadata.get('instruction', issue.title)
         
-        # Simulate work
-        time.sleep(5)
+        # Simulate work (placeholder - remove in production)
+        # In a real implementation, this is where you would process the task
         
         # Create a PR with correlation metadata
         # In a real implementation, you would:
@@ -151,7 +152,8 @@ def main():
     gh = Github(GITHUB_TOKEN)
     
     # Track processed issues to avoid duplicate work
-    processed_issues = set()
+    # Using deque with maxlen for automatic LRU eviction
+    processed_issues = deque(maxlen=1000)
     
     while True:
         try:
@@ -184,16 +186,12 @@ def main():
                 success = process_task(issue, metadata)
                 
                 if success:
-                    # Mark as processed
-                    processed_issues.add(issue.number)
+                    # Mark as processed (deque automatically evicts old items when full)
+                    processed_issues.append(issue.number)
                     
                     # Optional: close the issue or add a label
                     # issue.edit(state='closed')
                     # issue.add_to_labels('processed')
-            
-            # Clean up old processed issues from memory (keep last 1000)
-            if len(processed_issues) > 1000:
-                processed_issues = set(list(processed_issues)[-1000:])
             
         except GithubException as e:
             logger.error(f"GitHub API error: {e}", exc_info=True)
