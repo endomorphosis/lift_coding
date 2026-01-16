@@ -84,7 +84,8 @@ EOF
         --title "$title" \
         --body-file "$tracking_file" \
         --draft \
-        --label "copilot-agent" 2>&1 | grep -o 'https://github.com/[^ ]*')
+        --label "copilot-agent" \
+        --json url --jq .url 2>&1)
     
     if [ -n "$pr_url" ]; then
         echo "  ✓ Created: $pr_url"

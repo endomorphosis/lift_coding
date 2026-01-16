@@ -128,8 +128,12 @@ Refer to the tracking document for:
     
     # Commit the plan
     run_command(f"git add {plan_file}")
+    # Use git commit with -F to avoid shell injection
+    commit_msg_file = "/tmp/commit_msg.txt"
     commit_msg = f"PR-{pr_number}: Initial plan\n\nReady for GitHub Copilot agent implementation. See {tracking_file} for details."
-    run_command(f'git commit -m "{commit_msg}"')
+    Path(commit_msg_file).write_text(commit_msg)
+    run_command(f"git commit -F {commit_msg_file}")
+    os.remove(commit_msg_file)
     
     # Push the branch
     print("  Pushing branch...")
@@ -138,21 +142,21 @@ Refer to the tracking document for:
     # Create the draft PR
     print("  Creating draft PR...")
     try:
+        # Use --json for reliable output parsing
         pr_url = run_command(
             f'gh pr create --repo {REPO} --base {BASE_BRANCH} --head {branch_name} '
-            f'--title "{title}" --body-file {tracking_file} --draft --label copilot-agent'
+            f'--title "{title}" --body-file {tracking_file} --draft --label copilot-agent '
+            f'--json url --jq .url'
         )
         
-        # Extract URL from output
-        for line in pr_url.split('\n'):
-            if 'github.com' in line:
-                print(f"  ✓ Created: {line}")
-                print("")
-                return True
-        
-        print(f"  ✓ Draft PR created")
-        print("")
-        return True
+        if pr_url and pr_url.startswith('https://'):
+            print(f"  ✓ Created: {pr_url}")
+            print("")
+            return True
+        else:
+            print(f"  ✓ Draft PR created")
+            print("")
+            return True
     except subprocess.CalledProcessError:
         print("  ✗ Failed to create PR")
         print("")
