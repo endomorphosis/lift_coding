@@ -396,11 +396,8 @@ def _deliver_notification(
     if delivery_success:
         # At least one delivery succeeded
         delivery_status = "success"
-    elif delivery_failure_count == len(subscriptions):
-        # All deliveries failed
-        delivery_status = "failed"
     else:
-        # Mixed results (no successes but not all failures)
+        # All deliveries failed (or no provider available)
         delivery_status = "failed"
 
     conn.execute(
