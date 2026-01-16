@@ -3315,11 +3315,7 @@ def _correlate_pr_with_agent_tasks(normalized: dict[str, Any], raw_payload: dict
                     dispatch_repo = task.trace.get("dispatch_repo")
 
                     # Check if this PR references the dispatch issue
-                    if (
-                        issue_number
-                        and str(issue_number) in issue_refs
-                        and dispatch_repo == repo
-                    ):
+                    if issue_number and str(issue_number) in issue_refs and dispatch_repo == repo:
                         # Update task to completed
                         trace_update = {
                             "pr_url": pr_url,
@@ -3336,8 +3332,12 @@ def _correlate_pr_with_agent_tasks(normalized: dict[str, Any], raw_payload: dict
                         )
 
                         if updated_task:
+                            msg = (
+                                "Correlated PR %s#%d with task %s via issue ref #%d, "
+                                "marked completed"
+                            )
                             logger.info(
-                                "Correlated PR %s#%d with task %s via issue reference #%d, marked completed",
+                                msg,
                                 repo,
                                 pr_number,
                                 task.id,

@@ -5,8 +5,6 @@ import os
 from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from handsfree.agent_providers import GitHubIssueDispatchProvider
 from handsfree.db.agent_tasks import AgentTask
 
