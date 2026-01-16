@@ -4356,12 +4356,14 @@ async def create_notification_subscription(
         user_id=user_id,
         endpoint=request.endpoint,
         subscription_keys=request.subscription_keys,
+        platform=request.platform,
     )
 
     return NotificationSubscriptionResponse(
         id=subscription.id,
         user_id=subscription.user_id,
         endpoint=subscription.endpoint,
+        platform=subscription.platform,
         subscription_keys=subscription.subscription_keys or {},
         created_at=subscription.created_at.isoformat(),
         updated_at=subscription.updated_at.isoformat(),
@@ -4392,6 +4394,7 @@ async def list_notification_subscriptions(
                 id=sub.id,
                 user_id=sub.user_id,
                 endpoint=sub.endpoint,
+                platform=sub.platform,
                 subscription_keys=sub.subscription_keys or {},
                 created_at=sub.created_at.isoformat(),
                 updated_at=sub.updated_at.isoformat(),

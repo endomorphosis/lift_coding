@@ -22,6 +22,7 @@ class NotificationSubscription:
     subscription_keys: dict[str, str] | None
     created_at: datetime
     updated_at: datetime
+    platform: str = "webpush"  # webpush, apns, fcm
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for API responses."""
@@ -30,6 +31,7 @@ class NotificationSubscription:
             "user_id": self.user_id,
             "endpoint": self.endpoint,
             "subscription_keys": self.subscription_keys or {},
+            "platform": self.platform,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),
         }
@@ -40,6 +42,7 @@ def create_subscription(
     user_id: str,
     endpoint: str,
     subscription_keys: dict[str, str] | None = None,
+    platform: str = "webpush",
 ) -> NotificationSubscription:
     """Create a new notification subscription.
 
@@ -48,6 +51,7 @@ def create_subscription(
         user_id: User ID (string, will be converted to UUID).
         endpoint: Subscription endpoint URL or identifier.
         subscription_keys: Optional provider-specific keys (e.g., auth, p256dh for WebPush).
+        platform: Platform type: 'webpush', 'apns', or 'fcm'.
 
     Returns:
         Created NotificationSubscription object.
@@ -67,14 +71,15 @@ def create_subscription(
     conn.execute(
         """
         INSERT INTO notification_subscriptions
-        (id, user_id, endpoint, subscription_keys, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (id, user_id, endpoint, subscription_keys, platform, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
         [
             subscription_id,
             user_uuid,
             endpoint,
             json.dumps(subscription_keys) if subscription_keys else None,
+            platform,
             now,
             now,
         ],
@@ -85,6 +90,7 @@ def create_subscription(
         user_id=user_id,
         endpoint=endpoint,
         subscription_keys=subscription_keys,
+        platform=platform,
         created_at=now,
         updated_at=now,
     )
@@ -113,7 +119,7 @@ def list_subscriptions(
         user_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
 
     query = """
-        SELECT id, user_id, endpoint, subscription_keys, created_at, updated_at
+        SELECT id, user_id, endpoint, subscription_keys, platform, created_at, updated_at
         FROM notification_subscriptions
         WHERE user_id = ?
         ORDER BY created_at DESC
@@ -126,8 +132,9 @@ def list_subscriptions(
             user_id=user_id,  # Return the original string user_id
             endpoint=row[2],
             subscription_keys=json.loads(row[3]) if row[3] else None,
-            created_at=row[4],
-            updated_at=row[5],
+            platform=row[4],
+            created_at=row[5],
+            updated_at=row[6],
         )
         for row in result
     ]
@@ -147,7 +154,7 @@ def get_subscription(
         NotificationSubscription object or None if not found.
     """
     query = """
-        SELECT id, user_id, endpoint, subscription_keys, created_at, updated_at
+        SELECT id, user_id, endpoint, subscription_keys, platform, created_at, updated_at
         FROM notification_subscriptions
         WHERE id = ?
     """
@@ -161,8 +168,9 @@ def get_subscription(
         user_id=str(result[1]),
         endpoint=result[2],
         subscription_keys=json.loads(result[3]) if result[3] else None,
-        created_at=result[4],
-        updated_at=result[5],
+        platform=result[4],
+        created_at=result[5],
+        updated_at=result[6],
     )
 
 
