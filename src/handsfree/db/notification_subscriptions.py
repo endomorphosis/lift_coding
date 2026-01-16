@@ -132,9 +132,9 @@ def list_subscriptions(
             user_id=user_id,  # Return the original string user_id
             endpoint=row[2],
             subscription_keys=json.loads(row[3]) if row[3] else None,
-            platform=row[4] if len(row) > 4 else "webpush",
-            created_at=row[5] if len(row) > 5 else row[4],
-            updated_at=row[6] if len(row) > 6 else row[5],
+            platform=row[4],
+            created_at=row[5],
+            updated_at=row[6],
         )
         for row in result
     ]
@@ -168,9 +168,9 @@ def get_subscription(
         user_id=str(result[1]),
         endpoint=result[2],
         subscription_keys=json.loads(result[3]) if result[3] else None,
-        platform=result[4] if len(result) > 4 else "webpush",
-        created_at=result[5] if len(result) > 5 else result[4],
-        updated_at=result[6] if len(result) > 6 else result[5],
+        platform=result[4],
+        created_at=result[5],
+        updated_at=result[6],
     )
 
 
