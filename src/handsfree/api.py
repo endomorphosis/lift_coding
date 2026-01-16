@@ -10,7 +10,6 @@ import logging
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
@@ -63,6 +62,8 @@ from handsfree.models import (
     DependencyStatus,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
+    GitHubOAuthCallbackResponse,
+    GitHubOAuthStartResponse,
     ImageInput,
     InboxItem,
     InboxItemType,
@@ -3882,6 +3883,307 @@ async def delete_connection(
     return Response(status_code=204)
 
 
+@app.get("/v1/github/oauth/start", response_model=GitHubOAuthStartResponse)
+async def github_oauth_start(
+    user_id: CurrentUser,
+    scopes: str | None = None,
+) -> GitHubOAuthStartResponse:
+    """Start GitHub OAuth flow by redirecting user to GitHub's authorize URL.
+
+    This endpoint constructs the OAuth authorization URL and returns it to the client.
+    The client should redirect the user to this URL to initiate the OAuth flow.
+
+    Args:
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        scopes: Optional comma-separated OAuth scopes (e.g., "repo,user:email").
+                If not provided, uses GITHUB_OAUTH_SCOPES env var or defaults to "repo,user:email".
+
+    Returns:
+        Response containing the GitHub OAuth authorization URL.
+
+    Raises:
+        500: OAuth not configured (missing CLIENT_ID or REDIRECT_URI).
+    """
+    import os
+
+    # Get OAuth configuration from environment
+    client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+    redirect_uri = os.getenv("GITHUB_OAUTH_REDIRECT_URI")
+    default_scopes = os.getenv("GITHUB_OAUTH_SCOPES", "repo,user:email")
+
+    if not client_id or not redirect_uri:
+        log_error(
+            logger,
+            "GitHub OAuth not configured",
+            missing_client_id=not client_id,
+            missing_redirect_uri=not redirect_uri,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "oauth_not_configured",
+                "message": (
+                    "GitHub OAuth is not configured. "
+                    "Set GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_REDIRECT_URI."
+                ),
+            },
+        )
+
+    # Use provided scopes or default
+    oauth_scopes = scopes or default_scopes
+
+    # Construct GitHub OAuth authorization URL
+    # Note: We're not implementing state parameter for CSRF protection in this minimal version
+    # as specified in the non-goals (advanced state mgmt)
+    from urllib.parse import urlencode
+
+    params = {
+        "client_id": client_id,
+        "redirect_uri": redirect_uri,
+        "scope": oauth_scopes,
+    }
+    authorize_url = f"https://github.com/login/oauth/authorize?{urlencode(params)}"
+
+    log_info(
+        logger,
+        "GitHub OAuth start",
+        user_id=user_id,
+        scopes=oauth_scopes,
+    )
+
+    return GitHubOAuthStartResponse(
+        authorize_url=authorize_url,
+        state=None,  # Not implementing state in minimal version
+    )
+
+
+@app.get("/v1/github/oauth/callback", response_model=GitHubOAuthCallbackResponse)
+async def github_oauth_callback(
+    user_id: CurrentUser,
+    code: str | None = None,
+    state: str | None = None,
+) -> GitHubOAuthCallbackResponse:
+    """Handle GitHub OAuth callback and exchange code for access token.
+
+    This endpoint receives the authorization code from GitHub, exchanges it for
+    an access token, stores the token securely, and creates/updates a GitHub connection.
+
+    Args:
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        code: Authorization code from GitHub OAuth callback.
+        state: Optional state parameter for CSRF validation (not used in minimal version).
+
+    Returns:
+        Response containing the created connection ID and granted scopes.
+
+    Raises:
+        400: Missing authorization code.
+        500: OAuth not configured or token exchange failed.
+    """
+    import os
+
+    import httpx
+
+    if not code:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "missing_code",
+                "message": "Authorization code is required",
+            },
+        )
+
+    # Get OAuth configuration from environment
+    client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+    client_secret = os.getenv("GITHUB_OAUTH_CLIENT_SECRET")
+    redirect_uri = os.getenv("GITHUB_OAUTH_REDIRECT_URI")
+
+    if not client_id or not client_secret or not redirect_uri:
+        log_error(
+            logger,
+            "GitHub OAuth not configured for callback",
+            missing_client_id=not client_id,
+            missing_client_secret=not client_secret,
+            missing_redirect_uri=not redirect_uri,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "oauth_not_configured",
+                "message": "GitHub OAuth is not configured properly.",
+            },
+        )
+
+    # Exchange code for access token
+    try:
+        log_info(logger, "Exchanging OAuth code for access token", user_id=user_id)
+
+        response = httpx.post(
+            "https://github.com/login/oauth/access_token",
+            data={
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "code": code,
+                "redirect_uri": redirect_uri,
+            },
+            headers={
+                "Accept": "application/json",
+            },
+            timeout=10.0,
+        )
+
+        if response.status_code != 200:
+            log_error(
+                logger,
+                "GitHub OAuth token exchange failed",
+                status_code=response.status_code,
+                user_id=user_id,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={
+                    "error": "token_exchange_failed",
+                    "message": "Failed to exchange authorization code for access token",
+                },
+            )
+
+        token_data = response.json()
+
+        # Check for error in response
+        if "error" in token_data:
+            error_description = token_data.get("error_description", token_data["error"])
+            log_error(
+                logger,
+                "GitHub OAuth returned error",
+                error=token_data["error"],
+                error_description=error_description,
+                user_id=user_id,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "oauth_error",
+                    "message": f"GitHub OAuth error: {error_description}",
+                },
+            )
+
+        access_token = token_data.get("access_token")
+        granted_scopes = token_data.get("scope", "")
+
+        if not access_token:
+            log_error(logger, "No access token in GitHub OAuth response", user_id=user_id)
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={
+                    "error": "no_access_token",
+                    "message": "No access token received from GitHub",
+                },
+            )
+
+        log_info(
+            logger,
+            "Successfully exchanged OAuth code for token",
+            user_id=user_id,
+            scopes=granted_scopes,
+        )
+
+    except httpx.HTTPError as e:
+        log_error(
+            logger,
+            "HTTP error during OAuth token exchange",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "network_error",
+                "message": "Failed to communicate with GitHub OAuth service",
+            },
+        ) from e
+
+    # Store the token securely using the secret manager
+    db = get_db()
+    secret_manager = get_default_secret_manager()
+
+    try:
+        # Create a unique key for this token
+        secret_key = f"github_token_{user_id}"
+        token_ref = secret_manager.store_secret(
+            key=secret_key,
+            value=access_token,
+            metadata={
+                "user_id": user_id,
+                "scopes": granted_scopes,
+                "source": "oauth",
+                "created_at": datetime.now(UTC).isoformat(),
+            },
+        )
+        log_info(
+            logger,
+            "Stored GitHub OAuth token securely",
+            user_id=user_id,
+            token_ref=token_ref,
+        )
+    except Exception as e:
+        log_error(
+            logger,
+            "Failed to store GitHub OAuth token",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "storage_error",
+                "message": "Failed to store token securely",
+            },
+        ) from e
+
+    # Create GitHub connection record
+    try:
+        connection = create_github_connection(
+            conn=db,
+            user_id=user_id,
+            installation_id=None,  # OAuth tokens don't have installation_id
+            token_ref=token_ref,
+            scopes=granted_scopes,
+        )
+
+        log_info(
+            logger,
+            "Created GitHub connection from OAuth",
+            user_id=user_id,
+            connection_id=connection.id,
+        )
+
+        return GitHubOAuthCallbackResponse(
+            connection_id=connection.id,
+            scopes=granted_scopes,
+        )
+
+    except Exception as e:
+        # If connection creation fails, try to clean up the stored token
+        try:
+            secret_manager.delete_secret(token_ref)
+        except Exception:
+            pass  # Best effort cleanup
+
+        log_error(
+            logger,
+            "Failed to create GitHub connection",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "connection_error",
+                "message": "Failed to create GitHub connection",
+            },
+        ) from e
+
+
 @app.post(
     "/v1/repos/subscriptions",
     response_model=RepoSubscriptionResponse,
@@ -4488,7 +4790,8 @@ async def revoke_api_key(
         404: API key not found.
         403: User does not own this API key.
     """
-    from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
+    from handsfree.db.api_keys import get_api_key
+    from handsfree.db.api_keys import revoke_api_key as db_revoke_api_key
 
     logger.info("Revoking API key %s for user %s", key_id, user_id)
 
