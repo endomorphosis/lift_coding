@@ -124,30 +124,35 @@ def fetch_audio_data(uri: str) -> bytes:
         # Fetch audio data with timeout and size limit
         try:
             with httpx.Client(timeout=timeout) as client:
-                # Use streaming to check content-length before downloading
                 with client.stream("GET", uri) as response:
                     response.raise_for_status()
-                    
-                    # Check content-length header if present
+
+                    # Check content-length header if present. If it claims the body is too large,
+                    # still stream with a hard byte limit (to cap memory) and then reject.
                     content_length = response.headers.get("content-length")
+                    content_length_int: int | None = None
+                    oversize_declared = False
                     if content_length:
-                        content_length_int = int(content_length)
-                        if content_length_int > max_size:
-                            raise RuntimeError(
-                                f"Audio file too large: {content_length_int} bytes "
-                                f"(max: {max_size} bytes)"
-                            )
-                    
+                        try:
+                            content_length_int = int(content_length)
+                            if content_length_int > max_size:
+                                oversize_declared = True
+                        except ValueError:
+                            # Ignore invalid content-length; enforce by streaming size limit.
+                            content_length_int = None
+
                     # Check content-type if present
-                    content_type = response.headers.get("content-type", "").lower().split(";")[0].strip()
+                    content_type = (
+                        response.headers.get("content-type", "").lower().split(";")[0].strip()
+                    )
                     if content_type and content_type not in ALLOWED_AUDIO_CONTENT_TYPES:
                         raise RuntimeError(
                             f"Invalid audio content-type: {content_type}. "
                             f"Expected one of: {', '.join(sorted(ALLOWED_AUDIO_CONTENT_TYPES))}"
                         )
-                    
+
                     # Read response in chunks and enforce size limit
-                    chunks = []
+                    chunks: list[bytes] = []
                     total_size = 0
                     for chunk in response.iter_bytes(chunk_size=8192):
                         total_size += len(chunk)
@@ -156,7 +161,15 @@ def fetch_audio_data(uri: str) -> bytes:
                                 f"Audio download exceeded size limit: {max_size} bytes"
                             )
                         chunks.append(chunk)
-                    
+
+                    # If the declared content-length was too large but we didn't exceed the cap
+                    # while streaming (e.g., mock/lying header), still reject.
+                    if oversize_declared:
+                        declared = content_length_int if content_length_int is not None else content_length
+                        raise RuntimeError(
+                            f"Audio file too large: {declared} bytes (max: {max_size} bytes)"
+                        )
+
                     return b"".join(chunks)
         
         except httpx.TimeoutException as e:

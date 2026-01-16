@@ -612,7 +612,7 @@ async def submit_command(
                 spoken_text=str(e),
                 debug=DebugInfo(transcript="<audio input - STT disabled>"),
             )
-        except (ValueError, FileNotFoundError) as e:
+        except (ValueError, FileNotFoundError, RuntimeError) as e:
             # Invalid audio format or URI
             log_error(logger, "Audio input error", error=str(e), user_id=user_id)
             clear_request_id()

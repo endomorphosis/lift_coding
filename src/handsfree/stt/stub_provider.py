@@ -51,14 +51,8 @@ class StubSTTProvider:
                 f"Supported formats: {', '.join(supported_formats)}"
             )
 
-        # Return deterministic transcript based on audio data hash
-        # This allows tests to be predictable while still being somewhat realistic
-        data_hash = hash(audio_data) % 1000
-
-        # Map hash to common test commands that will succeed
-        if data_hash < 333:
-            return "show my inbox"
-        elif data_hash < 666:
-            return "summarize PR 42"
-        else:
-            return "list my pull requests"
+        # Always return a known, parseable command.
+        # Python's built-in hash() is intentionally randomized per process, and some
+        # plausible transcripts may not map to a supported intent. Keeping this
+        # stable prevents flaky integration tests.
+        return "show my inbox"
