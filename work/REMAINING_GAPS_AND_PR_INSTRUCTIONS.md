@@ -160,7 +160,6 @@ If CLI is not available, create PRs manually:
 1. Push branches:
    ```bash
    git checkout -b draft/pr-026-notification-push-delivery
-   cp tracking/PR-026-notification-push-delivery.md .
    git add tracking/PR-026-notification-push-delivery.md
    git commit -m "PR-026: add tracking doc"
    git push -u origin draft/pr-026-notification-push-delivery
