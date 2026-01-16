@@ -3,9 +3,9 @@
 import json
 import logging
 import secrets
-from types import SimpleNamespace
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 from typing import Any
 
 try:
@@ -13,6 +13,7 @@ try:
 
     REDIS_AVAILABLE = True
 except ImportError:  # pragma: no cover
+
     class _RedisStubError(Exception):
         pass
 
