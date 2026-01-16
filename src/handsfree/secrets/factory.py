@@ -42,10 +42,9 @@ def get_secret_manager() -> SecretManager:
         # return AWSSecretManager()
         raise NotImplementedError("AWS Secrets Manager support coming soon")
     elif manager_type == "vault":
-        # Future implementation
-        # from .vault_secrets import VaultSecretManager
-        # return VaultSecretManager()
-        raise NotImplementedError("HashiCorp Vault support coming soon")
+        from .vault_secrets import VaultSecretManager
+        logger.info("Using VaultSecretManager (production mode)")
+        return VaultSecretManager()
     elif manager_type == "gcp":
         # Future implementation
         # from .gcp_secrets import GCPSecretManager

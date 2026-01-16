@@ -30,13 +30,13 @@ The secret management system uses a pluggable architecture that allows different
 │  - delete_secret()                  │
 └───────────────┬─────────────────────┘
                 │
-        ┌───────┴────────┐
-        ▼                ▼
-┌──────────────┐  ┌──────────────────┐
-│ EnvSecret    │  │ Future: AWS      │
-│ Manager      │  │ Secrets Manager, │
-│ (dev/test)   │  │ Vault, GCP, etc. │
-└──────────────┘  └──────────────────┘
+       ┌────────┴────────┬─────────────┐
+       ▼                 ▼             ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│ EnvSecret    │  │ VaultSecret  │  │ Future: AWS  │
+│ Manager      │  │ Manager      │  │ Secrets Mgr, │
+│ (dev/test)   │  │ (production) │  │ GCP, etc.    │
+└──────────────┘  └──────────────┘  └──────────────┘
 ```
 
 ### Security Model
@@ -125,15 +125,109 @@ export SECRET_MANAGER_TYPE=env
 export SECRET_MANAGER_TYPE=aws
 export AWS_REGION=us-east-1
 
-# Production - HashiCorp Vault (coming soon)
+# Production - HashiCorp Vault
 export SECRET_MANAGER_TYPE=vault
-export VAULT_ADDR=https://vault.example.com
+export VAULT_ADDR=https://vault.example.com:8200
+# Option 1: Token authentication (development/testing)
 export VAULT_TOKEN=s.xxxxxx
+# Option 2: AppRole authentication (production, recommended)
+export VAULT_ROLE_ID=your-role-id
+export VAULT_SECRET_ID=your-secret-id
+# Optional configuration
+export VAULT_MOUNT=secret  # KV mount point (default: secret)
+export VAULT_NAMESPACE=your-namespace  # For Vault Enterprise
 
 # Production - Google Secret Manager (coming soon)
 export SECRET_MANAGER_TYPE=gcp
 export GCP_PROJECT_ID=my-project
 ```
+
+#### HashiCorp Vault Configuration
+
+The VaultSecretManager provides production-ready secret storage with the following features:
+
+**Security Features:**
+- Encryption at rest (handled by Vault)
+- Access audit logging (handled by Vault)
+- Token-based or AppRole authentication
+- TLS/HTTPS communication
+- Support for Vault namespaces (Enterprise)
+
+**Required Configuration:**
+- `VAULT_ADDR`: Vault server address (e.g., `https://vault.example.com:8200`)
+- Authentication (choose one):
+  - `VAULT_TOKEN`: Direct token authentication (development/testing)
+  - `VAULT_ROLE_ID` + `VAULT_SECRET_ID`: AppRole authentication (production, recommended)
+
+**Optional Configuration:**
+- `VAULT_MOUNT`: KV secrets engine mount point (default: `secret`)
+- `VAULT_NAMESPACE`: Vault namespace for Enterprise installations
+
+**Reference Format:**
+Secrets are stored with references in the format `vault://secret_key`. For example:
+```python
+token_ref = secret_manager.store_secret("github_token_user_123", "ghp_xxxx")
+# Returns: "vault://github_token_user_123"
+```
+
+**Setup Example:**
+
+1. Start Vault (development mode for testing):
+```bash
+vault server -dev -dev-root-token-id=root
+```
+
+2. Configure environment:
+```bash
+export SECRET_MANAGER_TYPE=vault
+export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_TOKEN=root
+```
+
+3. Use in code:
+```python
+from handsfree.secrets import get_default_secret_manager
+
+secret_manager = get_default_secret_manager()
+token_ref = secret_manager.store_secret("my_secret", "secret_value")
+# Stores in Vault and returns "vault://my_secret"
+
+retrieved = secret_manager.get_secret(token_ref)
+# Retrieves "secret_value" from Vault
+```
+
+**Production Setup with AppRole:**
+
+1. Enable AppRole authentication in Vault:
+```bash
+vault auth enable approle
+vault write auth/approle/role/handsfree-app \
+    token_policies="handsfree-policy" \
+    token_ttl=1h \
+    token_max_ttl=4h
+```
+
+2. Get credentials:
+```bash
+vault read auth/approle/role/handsfree-app/role-id
+vault write -f auth/approle/role/handsfree-app/secret-id
+```
+
+3. Configure application:
+```bash
+export SECRET_MANAGER_TYPE=vault
+export VAULT_ADDR=https://vault.example.com:8200
+export VAULT_ROLE_ID=<role-id-from-step-2>
+export VAULT_SECRET_ID=<secret-id-from-step-2>
+```
+
+**Error Handling:**
+
+The VaultSecretManager provides fail-fast error handling with clear messages:
+- Missing `VAULT_ADDR`: Raises `ValueError` with clear message
+- Missing authentication credentials: Raises `ValueError` explaining required variables
+- Authentication failure: Raises `VaultError` with connection details
+- Network issues: Raises `VaultError` with underlying error
 
 ### Implementing New Backends
 
@@ -437,7 +531,7 @@ redis-cli
 
 ### Secret Management
 - [ ] AWS Secrets Manager backend
-- [ ] HashiCorp Vault backend
+- [x] HashiCorp Vault backend (completed)
 - [ ] Google Cloud Secret Manager backend
 - [ ] Azure Key Vault backend
 - [ ] Automatic secret rotation

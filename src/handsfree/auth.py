@@ -3,7 +3,7 @@
 Provides production-ready authentication scaffolding with environment-based mode switching:
 - dev mode: allows X-User-Id header fallback (for development/testing)
 - jwt mode: requires JWT bearer token and extracts user_id from claims
-- api_key mode: supports API key authentication (future extension)
+- api_key mode: requires API key authentication with DuckDB-backed validation
 
 Environment Variables:
     HANDSFREE_AUTH_MODE: Authentication mode (dev|jwt|api_key), defaults to "dev"
@@ -111,19 +111,33 @@ def validate_api_key(api_key: str) -> str:
         User ID associated with the API key
 
     Raises:
-        HTTPException: If API key is invalid
-
-    Note:
-        This is a placeholder for future API key implementation.
-        In production, this would look up the key in a database.
+        HTTPException: If API key is invalid or revoked
     """
-    # TODO: Implement actual API key validation with database lookup
-    # For now, reject all API keys as not implemented
-    logger.warning("API key authentication not yet implemented")
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="API key authentication not yet implemented",
-    )
+    # Import here to avoid circular dependency
+    from handsfree.api import get_db
+    from handsfree.db.api_keys import validate_api_key as db_validate_api_key
+
+    try:
+        db = get_db()
+        user_id = db_validate_api_key(db, api_key)
+
+        if user_id is None:
+            logger.warning("Invalid or revoked API key attempted")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid or revoked API key",
+            )
+
+        return user_id
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("Error validating API key: %s", str(e), exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Authentication error",
+        ) from None
 
 
 async def get_current_user(
@@ -137,7 +151,7 @@ async def get_current_user(
     Behavior by auth mode:
     - dev: Accepts X-User-Id header, falls back to fixture user ID
     - jwt: Requires valid JWT bearer token, extracts user_id from claims
-    - api_key: Requires valid API key (not yet fully implemented)
+    - api_key: Requires valid API key, validates against database
 
     Args:
         x_user_id: Optional X-User-Id header (used in dev mode)
