@@ -30,9 +30,10 @@ echo ""
 # Function to create a draft PR
 create_draft_pr() {
     local pr_number=$1
-    local title=$2
-    local branch_name="draft/pr-${pr_number}"
-    local tracking_file="tracking/PR-${pr_number}.md"
+    local pr_suffix=$2
+    local title=$3
+    local branch_name="draft/pr-${pr_number}-${pr_suffix}"
+    local tracking_file="tracking/PR-${pr_number}-${pr_suffix}.md"
     
     echo "Creating PR-${pr_number}: ${title}"
     echo "  Branch: ${branch_name}"
@@ -105,13 +106,13 @@ git checkout "$BASE_BRANCH"
 git pull origin "$BASE_BRANCH"
 
 # Create PR-026: Automatic push notification delivery
-create_draft_pr "026-notification-push-delivery" "PR-026: Automatic push notification delivery"
+create_draft_pr "026" "notification-push-delivery" "PR-026: Automatic push notification delivery"
 
 # Create PR-027: Profile-based summary verbosity tuning
-create_draft_pr "027-profile-verbosity-tuning" "PR-027: Profile-based summary verbosity tuning"
+create_draft_pr "027" "profile-verbosity-tuning" "PR-027: Profile-based summary verbosity tuning"
 
 # Create PR-028: External agent runner setup
-create_draft_pr "028-external-agent-runner-setup" "PR-028: External agent runner setup guide"
+create_draft_pr "028" "external-agent-runner-setup" "PR-028: External agent runner setup guide"
 
 # Return to main branch
 git checkout "$BASE_BRANCH"

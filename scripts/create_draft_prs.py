@@ -20,17 +20,20 @@ BASE_BRANCH = "main"
 # PR definitions
 PRS_TO_CREATE = [
     {
-        "number": "026-notification-push-delivery",
+        "number": "026",
+        "suffix": "notification-push-delivery",
         "title": "PR-026: Automatic push notification delivery",
         "tracking": "tracking/PR-026-notification-push-delivery.md",
     },
     {
-        "number": "027-profile-verbosity-tuning",
+        "number": "027",
+        "suffix": "profile-verbosity-tuning",
         "title": "PR-027: Profile-based summary verbosity tuning",
         "tracking": "tracking/PR-027-profile-verbosity-tuning.md",
     },
     {
-        "number": "028-external-agent-runner-setup",
+        "number": "028",
+        "suffix": "external-agent-runner-setup",
         "title": "PR-028: External agent runner setup guide",
         "tracking": "tracking/PR-028-external-agent-runner-setup.md",
     },
@@ -85,9 +88,10 @@ def check_prerequisites():
 def create_draft_pr(pr_info):
     """Create a draft PR for the given PR info."""
     pr_number = pr_info["number"]
+    pr_suffix = pr_info["suffix"]
     title = pr_info["title"]
     tracking_file = pr_info["tracking"]
-    branch_name = f"draft/pr-{pr_number}"
+    branch_name = f"draft/pr-{pr_number}-{pr_suffix}"
     
     print(f"Creating {title}")
     print(f"  Branch: {branch_name}")
