@@ -224,17 +224,17 @@ class TestAgentServiceNotifications:
         notifs_before = list_notifications(conn=db, user_id=user_id)
         count_before = len(notifs_before)
 
-        # Advance state
-        service.advance_task_state(task_id=task_id, new_state="running")
+        # Advance state (task is already "running", advance to "completed")
+        service.advance_task_state(task_id=task_id, new_state="completed")
 
         # Check that a new notification was created
         notifs_after = list_notifications(conn=db, user_id=user_id)
         assert len(notifs_after) == count_before + 1
 
-        # Find the state_changed notification
-        state_notifs = [n for n in notifs_after if n.event_type == "state_changed"]
-        assert len(state_notifs) >= 1
-        assert task_id in state_notifs[0].message
+        # Find the task_completed notification
+        completion_notifs = [n for n in notifs_after if n.event_type == "task_completed"]
+        assert len(completion_notifs) >= 1
+        assert task_id in completion_notifs[0].message
 
     def test_task_completion_notification_via_api(self):
         """Test that completed task notification is returned by GET /v1/notifications."""
@@ -254,8 +254,7 @@ class TestAgentServiceNotifications:
         )
         task_id = result["task_id"]
 
-        # Advance to running, then complete with PR info
-        service.advance_task_state(task_id, "running")
+        # Task is already "running", complete with PR info
         service.advance_task_state(
             task_id,
             "completed",
