@@ -49,7 +49,8 @@ create_draft_pr() {
     git checkout -b "$branch_name" "$BASE_BRANCH" 2>/dev/null || git checkout "$branch_name"
     
     # Create initial plan file
-    cat > "work/pr-${pr_number}-plan.md" <<EOF
+    local plan_file="work/pr-${pr_number}-plan.md"
+    cat > "$plan_file" <<EOF
 # ${title}
 
 ## Status
@@ -69,7 +70,7 @@ Refer to the tracking document for:
 EOF
     
     # Commit the plan
-    git add "work/pr-${pr_number}-plan.md"
+    git add "$plan_file"
     git commit -m "PR-${pr_number}: Initial plan" -m "Ready for GitHub Copilot agent implementation. See ${tracking_file} for details."
     
     # Push the branch

@@ -132,7 +132,7 @@ Refer to the tracking document for:
     Path(plan_file).write_text(plan_content)
     
     # Commit the plan
-    run_command(f"git add {plan_file}")
+    run_command(f'git add "{plan_file}"')
     # Use git commit with -F to avoid shell injection
     with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
         commit_msg = f"PR-{pr_number}: Initial plan\n\nReady for GitHub Copilot agent implementation. See {tracking_file} for details."
@@ -146,14 +146,15 @@ Refer to the tracking document for:
     
     # Push the branch
     print("  Pushing branch...")
-    run_command(f"git push -u origin {branch_name}")
+    run_command(f'git push -u origin "{branch_name}"')
     
     # Create the draft PR
     print("  Creating draft PR...")
     try:
         # Use --json for reliable output parsing
+        # Note: gh CLI properly handles arguments, so we quote sensitive values
         pr_url = run_command(
-            f'gh pr create --repo {REPO} --base {BASE_BRANCH} --head {branch_name} '
+            f'gh pr create --repo "{REPO}" --base "{BASE_BRANCH}" --head "{branch_name}" '
             f'--title "{title}" --body-file "{tracking_file}" --draft --label copilot-agent '
             f'--json url --jq .url'
         )
@@ -185,8 +186,8 @@ def main():
     
     # Return to base branch
     print(f"Checking out {BASE_BRANCH}...")
-    run_command(f"git checkout {BASE_BRANCH}")
-    run_command(f"git pull origin {BASE_BRANCH}")
+    run_command(f'git checkout "{BASE_BRANCH}"')
+    run_command(f'git pull origin "{BASE_BRANCH}"')
     print("")
     
     # Create each PR
@@ -196,7 +197,7 @@ def main():
             success_count += 1
         
         # Return to base branch for next PR
-        run_command(f"git checkout {BASE_BRANCH}")
+        run_command(f'git checkout "{BASE_BRANCH}"')
     
     print("")
     print(f"✓ Created {success_count}/{len(PRS_TO_CREATE)} draft PRs successfully!")
