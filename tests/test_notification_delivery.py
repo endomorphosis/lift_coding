@@ -552,6 +552,28 @@ class TestBackwardCompatibility:
 class TestAutoPushEnabled:
     """Test NOTIFICATIONS_AUTO_PUSH_ENABLED environment variable."""
 
+    @staticmethod
+    def _setup_delivery_tracking(monkeypatch):
+        """Helper to set up delivery call tracking with mock_send.
+        
+        Returns:
+            List that will be populated with delivery calls.
+        """
+        delivery_calls = []
+        original_send = DevLoggerProvider.send
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(
+                {
+                    "endpoint": subscription_endpoint,
+                    "data": notification_data,
+                }
+            )
+            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
+
+        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+        return delivery_calls
+
     def test_auto_push_disabled_via_env_var(self, db_conn, test_user_id, monkeypatch):
         """Test that notifications are not delivered when NOTIFICATIONS_AUTO_PUSH_ENABLED=false."""
         # Enable provider but disable auto-push
@@ -566,20 +588,7 @@ class TestAutoPushEnabled:
         )
 
         # Track delivery calls
-        delivery_calls = []
-
-        original_send = DevLoggerProvider.send
-
-        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
-            delivery_calls.append(
-                {
-                    "endpoint": subscription_endpoint,
-                    "data": notification_data,
-                }
-            )
-            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
-
-        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+        delivery_calls = self._setup_delivery_tracking(monkeypatch)
 
         # Create a notification
         create_notification(
@@ -606,20 +615,7 @@ class TestAutoPushEnabled:
         )
 
         # Track delivery calls
-        delivery_calls = []
-
-        original_send = DevLoggerProvider.send
-
-        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
-            delivery_calls.append(
-                {
-                    "endpoint": subscription_endpoint,
-                    "data": notification_data,
-                }
-            )
-            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
-
-        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+        delivery_calls = self._setup_delivery_tracking(monkeypatch)
 
         # Create a notification
         create_notification(
@@ -646,20 +642,7 @@ class TestAutoPushEnabled:
         )
 
         # Track delivery calls
-        delivery_calls = []
-
-        original_send = DevLoggerProvider.send
-
-        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
-            delivery_calls.append(
-                {
-                    "endpoint": subscription_endpoint,
-                    "data": notification_data,
-                }
-            )
-            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
-
-        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+        delivery_calls = self._setup_delivery_tracking(monkeypatch)
 
         # Create a notification
         create_notification(

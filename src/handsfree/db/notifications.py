@@ -317,16 +317,7 @@ def _deliver_notification(
 
     if not subscriptions:
         logger.debug("No push subscriptions for user %s, skipping delivery", notification.user_id)
-        # Update delivery status to indicate no subscriptions
-        now = datetime.now(UTC)
-        conn.execute(
-            """
-            UPDATE notifications
-            SET last_delivery_attempt = ?, delivery_status = ?
-            WHERE id = ?
-            """,
-            [now, "success", notification.id],
-        )
+        # Don't update delivery status - leave it as 'pending' to indicate no delivery was attempted
         return
 
     # Prepare notification payload
