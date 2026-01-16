@@ -5,6 +5,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 
 __all__ = ["app", "get_db", "FIXTURE_USER_ID"]
 
+import json
 import logging
 from datetime import UTC, datetime
 from pathlib import Path
@@ -45,11 +46,15 @@ from handsfree.logging_utils import (
 )
 from handsfree.models import (
     ActionResult,
+    ApiKeyResponse,
+    ApiKeysListResponse,
     AudioInput,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
+    CreateApiKeyRequest,
+    CreateApiKeyResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
@@ -406,6 +411,9 @@ async def github_webhook(
             event_type_normalized = normalized.get("event_type")
             if event_type_normalized in ("installation", "installation_repositories"):
                 process_installation_event(db, normalized, payload)
+
+            # Correlate PR events with agent tasks
+            _correlate_pr_with_agent_tasks(normalized, payload)
 
             # Emit notification for normalized webhook events
             _emit_webhook_notification(normalized, payload)
@@ -3207,6 +3215,150 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
     ]
 
 
+def _correlate_pr_with_agent_tasks(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
+    """Correlate PR webhooks with dispatched agent tasks.
+
+    When a PR is opened, checks if it references a dispatch issue or contains
+    task metadata, then updates the corresponding agent task to completed.
+
+    Args:
+        normalized: Normalized webhook event data.
+        raw_payload: Raw webhook payload.
+    """
+    import re
+
+    from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+
+    event_type = normalized.get("event_type")
+    action = normalized.get("action")
+
+    # Only process PR opened events
+    if event_type != "pull_request" or action != "opened":
+        return
+
+    db = get_db()
+    pr_number = normalized.get("pr_number")
+    pr_url = normalized.get("pr_url")
+    repo = normalized.get("repo")
+
+    # Extract PR body from raw payload
+    pr = raw_payload.get("pull_request", {})
+    pr_body = pr.get("body") or ""
+
+    # Try to extract task_id from PR body metadata
+    task_id = None
+
+    # Look for agent_task_metadata comment in PR body
+    metadata_match = re.search(
+        r"<!--\s*agent_task_metadata\s+(.*?)\s*-->",
+        pr_body,
+        re.DOTALL,
+    )
+    if metadata_match:
+        try:
+            metadata = json.loads(metadata_match.group(1))
+            task_id = metadata.get("task_id")
+        except Exception:
+            pass
+
+    # Also check for "Fixes #N" or "Closes #N" references to issues
+    issue_refs = re.findall(r"(?:fixes|closes|resolves)\s+#(\d+)", pr_body, re.IGNORECASE)
+
+    # If we found task_id in metadata, update that task
+    if task_id:
+        try:
+            # Query all tasks to find the matching one
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if task.id == task_id and task.state in ("created", "running"):
+                    # Update task to completed
+                    trace_update = {
+                        "pr_url": pr_url,
+                        "pr_number": pr_number,
+                        "repo_full_name": repo,
+                        "correlated_via": "pr_metadata",
+                    }
+
+                    updated_task = update_agent_task_state(
+                        conn=db,
+                        task_id=task_id,
+                        new_state="completed",
+                        trace_update=trace_update,
+                    )
+
+                    if updated_task:
+                        logger.info(
+                            "Correlated PR %s#%d with task %s via metadata, marked completed",
+                            repo,
+                            pr_number,
+                            task_id,
+                        )
+
+                        # Emit completion notification via agent service
+                        from handsfree.agents.service import AgentService
+
+                        service = AgentService(db)
+                        service._emit_completion_notification(updated_task, "completed")
+
+                    break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via metadata: %s", e)
+
+    # If we found issue references, check if any match dispatch issues
+    if issue_refs:
+        try:
+            # Query all running/created tasks from github_issue_dispatch provider
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if (
+                    task.provider == "github_issue_dispatch"
+                    and task.state in ("created", "running")
+                    and task.trace
+                ):
+                    issue_number = task.trace.get("issue_number")
+                    dispatch_repo = task.trace.get("dispatch_repo")
+
+                    # Check if this PR references the dispatch issue
+                    if issue_number and str(issue_number) in issue_refs and dispatch_repo == repo:
+                        # Update task to completed
+                        trace_update = {
+                            "pr_url": pr_url,
+                            "pr_number": pr_number,
+                            "repo_full_name": repo,
+                            "correlated_via": "issue_reference",
+                        }
+
+                        updated_task = update_agent_task_state(
+                            conn=db,
+                            task_id=task.id,
+                            new_state="completed",
+                            trace_update=trace_update,
+                        )
+
+                        if updated_task:
+                            msg = (
+                                "Correlated PR %s#%d with task %s via issue ref #%d, "
+                                "marked completed"
+                            )
+                            logger.info(
+                                msg,
+                                repo,
+                                pr_number,
+                                task.id,
+                                issue_number,
+                            )
+
+                            # Emit completion notification via agent service
+                            from handsfree.agents.service import AgentService
+
+                            service = AgentService(db)
+                            service._emit_completion_notification(updated_task, "completed")
+
+                        break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via issue reference: %s", e)
+
+
 def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
     """Emit notifications for normalized webhook events.
 
@@ -4258,3 +4410,144 @@ async def fail_agent_task(
                     "message": str(e),
                 },
             ) from e
+
+
+# ============================================================================
+# API Key Management Endpoints (Admin/Dev Only)
+# ============================================================================
+
+
+@app.post("/v1/admin/api-keys", response_model=CreateApiKeyResponse, status_code=201)
+async def create_api_key(
+    request: CreateApiKeyRequest,
+    user_id: CurrentUser,
+) -> CreateApiKeyResponse:
+    """Create a new API key for the current user.
+
+    This endpoint is only available in dev mode or for authenticated users.
+    The plaintext key is returned ONLY in this response - it cannot be retrieved later.
+
+    Args:
+        request: API key creation request.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        Created API key with plaintext key (shown only once).
+
+    Raises:
+        403: Endpoint disabled (not in dev mode and not authenticated).
+    """
+    from handsfree.db.api_keys import create_api_key as db_create_api_key
+
+    logger.info("Creating API key for user %s with label: %s", user_id, request.label)
+
+    db = get_db()
+    plaintext_key, api_key_record = db_create_api_key(
+        db,
+        user_id=user_id,
+        label=request.label,
+    )
+
+    logger.info("API key created with ID: %s", api_key_record.id)
+
+    return CreateApiKeyResponse(
+        key=plaintext_key,
+        api_key=ApiKeyResponse(
+            id=api_key_record.id,
+            user_id=api_key_record.user_id,
+            label=api_key_record.label,
+            created_at=api_key_record.created_at.isoformat(),
+            revoked_at=api_key_record.revoked_at.isoformat() if api_key_record.revoked_at else None,
+            last_used_at=api_key_record.last_used_at.isoformat()
+            if api_key_record.last_used_at
+            else None,
+        ),
+    )
+
+
+@app.get("/v1/admin/api-keys", response_model=ApiKeysListResponse)
+async def list_api_keys(
+    user_id: CurrentUser,
+    include_revoked: bool = False,
+) -> ApiKeysListResponse:
+    """List all API keys for the current user.
+
+    Args:
+        user_id: Current authenticated user ID.
+        include_revoked: Whether to include revoked keys (default: False).
+
+    Returns:
+        List of API keys (without plaintext keys).
+    """
+    from handsfree.db.api_keys import get_api_keys_by_user
+
+    logger.info("Listing API keys for user %s, include_revoked=%s", user_id, include_revoked)
+
+    db = get_db()
+    api_keys = get_api_keys_by_user(db, user_id, include_revoked=include_revoked)
+
+    return ApiKeysListResponse(
+        api_keys=[
+            ApiKeyResponse(
+                id=key.id,
+                user_id=key.user_id,
+                label=key.label,
+                created_at=key.created_at.isoformat(),
+                revoked_at=key.revoked_at.isoformat() if key.revoked_at else None,
+                last_used_at=key.last_used_at.isoformat() if key.last_used_at else None,
+            )
+            for key in api_keys
+        ]
+    )
+
+
+@app.delete("/v1/admin/api-keys/{key_id}", status_code=204)
+async def revoke_api_key(
+    key_id: str,
+    user_id: CurrentUser,
+) -> Response:
+    """Revoke an API key.
+
+    Args:
+        key_id: UUID of the API key to revoke.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: API key not found.
+        403: User does not own this API key.
+    """
+    from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
+
+    logger.info("Revoking API key %s for user %s", key_id, user_id)
+
+    db = get_db()
+
+    # Check if key exists
+    api_key = get_api_key(db, key_id)
+    if api_key is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="API key not found",
+        )
+
+    # Verify ownership
+    if api_key.user_id != user_id:
+        logger.warning(
+            "User %s attempted to revoke API key %s owned by %s",
+            user_id,
+            key_id,
+            api_key.user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have permission to revoke this API key",
+        )
+
+    # Revoke the key
+    db_revoke_api_key(db, key_id)
+    logger.info("API key %s revoked successfully", key_id)
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
