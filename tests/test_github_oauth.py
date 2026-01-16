@@ -1,6 +1,5 @@
 """Tests for GitHub OAuth flow endpoints."""
 
-import os
 from unittest.mock import Mock, patch
 
 import pytest
@@ -46,7 +45,10 @@ class TestGitHubOAuthStart:
         assert "authorize_url" in data
         assert "https://github.com/login/oauth/authorize" in data["authorize_url"]
         assert "client_id=test_client_id" in data["authorize_url"]
-        assert "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fv1%2Fgithub%2Foauth%2Fcallback" in data["authorize_url"]
+        redirect_uri_encoded = (
+            "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fv1%2Fgithub%2Foauth%2Fcallback"
+        )
+        assert redirect_uri_encoded in data["authorize_url"]
         assert "scope=repo%2Cuser%3Aemail" in data["authorize_url"]
 
     def test_oauth_start_custom_scopes(self, client, mock_oauth_env, auth_headers):

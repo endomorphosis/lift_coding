@@ -10,7 +10,6 @@ import logging
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
@@ -3923,7 +3922,10 @@ async def github_oauth_start(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail={
                 "error": "oauth_not_configured",
-                "message": "GitHub OAuth is not configured. Set GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_REDIRECT_URI.",
+                "message": (
+                    "GitHub OAuth is not configured. "
+                    "Set GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_REDIRECT_URI."
+                ),
             },
         )
 
@@ -4785,7 +4787,8 @@ async def revoke_api_key(
         404: API key not found.
         403: User does not own this API key.
     """
-    from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
+    from handsfree.db.api_keys import get_api_key
+    from handsfree.db.api_keys import revoke_api_key as db_revoke_api_key
 
     logger.info("Revoking API key %s for user %s", key_id, user_id)
 
