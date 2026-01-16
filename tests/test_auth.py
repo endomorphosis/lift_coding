@@ -247,13 +247,78 @@ class TestGetCurrentUser:
             assert exc_info.value.status_code == 401
 
     @pytest.mark.asyncio
-    async def test_api_key_mode_not_implemented(self):
-        """Test that API key mode returns not implemented."""
+    async def test_api_key_mode_with_valid_key(self, test_user_id):
+        """Test API key mode with valid key."""
+        from unittest.mock import patch
+
+        from handsfree.db.api_keys import create_api_key
+
+        # Create an in-memory database and API key
+        with patch("handsfree.api.get_db") as mock_get_db:
+            from handsfree.db.connection import init_db
+
+            db = init_db(":memory:")
+            mock_get_db.return_value = db
+
+            # Create API key
+            plaintext_key, _ = create_api_key(db, test_user_id, label="Test")
+
+            # Test validation
+            with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+                credentials = self.create_credentials(plaintext_key)
+                user_id = await get_current_user(x_user_id=None, credentials=credentials)
+                assert user_id == test_user_id
+
+    @pytest.mark.asyncio
+    async def test_api_key_mode_with_invalid_key(self):
+        """Test API key mode with invalid key."""
+        from unittest.mock import patch
+
+        with patch("handsfree.api.get_db") as mock_get_db:
+            from handsfree.db.connection import init_db
+
+            db = init_db(":memory:")
+            mock_get_db.return_value = db
+
+            with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+                credentials = self.create_credentials("invalid-key")
+                with pytest.raises(HTTPException) as exc_info:
+                    await get_current_user(x_user_id=None, credentials=credentials)
+                assert exc_info.value.status_code == 401
+                assert "invalid or revoked" in exc_info.value.detail.lower()
+
+    @pytest.mark.asyncio
+    async def test_api_key_mode_with_revoked_key(self, test_user_id):
+        """Test API key mode with revoked key."""
+        from unittest.mock import patch
+
+        from handsfree.db.api_keys import create_api_key, revoke_api_key
+
+        with patch("handsfree.api.get_db") as mock_get_db:
+            from handsfree.db.connection import init_db
+
+            db = init_db(":memory:")
+            mock_get_db.return_value = db
+
+            # Create and revoke API key
+            plaintext_key, api_key = create_api_key(db, test_user_id, label="Test")
+            revoke_api_key(db, api_key.id)
+
+            # Test validation fails
+            with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+                credentials = self.create_credentials(plaintext_key)
+                with pytest.raises(HTTPException) as exc_info:
+                    await get_current_user(x_user_id=None, credentials=credentials)
+                assert exc_info.value.status_code == 401
+
+    @pytest.mark.asyncio
+    async def test_api_key_mode_without_key(self):
+        """Test API key mode without providing a key."""
         with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
-            credentials = self.create_credentials("some-api-key")
             with pytest.raises(HTTPException) as exc_info:
-                await get_current_user(x_user_id=None, credentials=credentials)
-            assert exc_info.value.status_code == 501
+                await get_current_user(x_user_id=None, credentials=None)
+            assert exc_info.value.status_code == 401
+            assert "api key required" in exc_info.value.detail.lower()
 
     @pytest.mark.asyncio
     async def test_unknown_auth_mode(self):

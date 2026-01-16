@@ -284,14 +284,9 @@ def _deliver_notification(
     """
     import logging
 
-    from handsfree.notifications import get_notification_provider
+    from handsfree.notifications.provider import get_provider_for_platform
 
     logger = logging.getLogger(__name__)
-    provider = get_notification_provider()
-
-    if provider is None:
-        # Push notifications disabled
-        return
 
     # Get subscriptions for this user
     from handsfree.db.notification_subscriptions import list_subscriptions
@@ -311,9 +306,20 @@ def _deliver_notification(
         "created_at": notification.created_at.isoformat(),
     }
 
-    # Send to all subscriptions
+    # Send to all subscriptions using platform-specific providers
     for subscription in subscriptions:
         try:
+            # Get the appropriate provider for this subscription's platform
+            provider = get_provider_for_platform(subscription.platform)
+            
+            if provider is None:
+                logger.warning(
+                    "No provider available for platform %s, skipping subscription %s",
+                    subscription.platform,
+                    subscription.id,
+                )
+                continue
+
             result = provider.send(
                 subscription_endpoint=subscription.endpoint,
                 notification_data=notification_data,
@@ -321,23 +327,26 @@ def _deliver_notification(
             )
             if result["ok"]:
                 logger.info(
-                    "Delivered notification %s to subscription %s: %s",
+                    "Delivered notification %s to subscription %s (platform=%s): %s",
                     notification.id,
                     subscription.id,
+                    subscription.platform,
                     result.get("delivery_id"),
                 )
             else:
                 logger.warning(
-                    "Failed to deliver notification %s to subscription %s: %s",
+                    "Failed to deliver notification %s to subscription %s (platform=%s): %s",
                     notification.id,
                     subscription.id,
+                    subscription.platform,
                     result.get("message"),
                 )
         except Exception as e:
             logger.error(
-                "Error delivering notification %s to subscription %s: %s",
+                "Error delivering notification %s to subscription %s (platform=%s): %s",
                 notification.id,
                 subscription.id,
+                subscription.platform,
                 e,
                 exc_info=True,
             )

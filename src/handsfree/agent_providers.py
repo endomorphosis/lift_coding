@@ -4,7 +4,9 @@ Defines the interface for agent providers and includes stub implementations
 for copilot and custom agents.
 """
 
+import json
 import logging
+import os
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -224,6 +226,235 @@ class CustomAgentProvider(AgentProvider):
         }
 
 
+class GitHubIssueDispatchProvider(AgentProvider):
+    """GitHub issue-based agent delegation provider.
+
+    This provider creates a GitHub issue to represent a delegated agent task.
+    The issue contains task metadata and can be correlated back when a PR is opened.
+
+    Configuration via environment variables:
+    - HANDSFREE_AGENT_DISPATCH_REPO: Repository to create issues in (format: "owner/repo")
+    - GITHUB_TOKEN or GitHub App credentials for authentication
+    """
+
+    def __init__(self, token_provider: Any = None):
+        """Initialize the GitHub issue dispatch provider.
+
+        Args:
+            token_provider: Optional token provider for GitHub API access.
+                          If not provided, will attempt to use environment token.
+        """
+        self.token_provider = token_provider
+        self.dispatch_repo = os.getenv("HANDSFREE_AGENT_DISPATCH_REPO")
+
+    def _get_token(self) -> str | None:
+        """Get GitHub API token for dispatch operations.
+
+        Returns:
+            GitHub token or None if not available.
+        """
+        if self.token_provider:
+            return self.token_provider.get_token()
+        return os.getenv("GITHUB_TOKEN")
+
+    def _is_configured(self) -> bool:
+        """Check if provider is properly configured.
+
+        Returns:
+            True if dispatch repository and token are available.
+        """
+        return bool(self.dispatch_repo and self._get_token())
+
+    def start_task(self, task: AgentTask) -> dict[str, Any]:
+        """Start a task by creating a GitHub issue.
+
+        Args:
+            task: The agent task to execute.
+
+        Returns:
+            Dictionary with status and metadata about the dispatched task.
+        """
+        if not self._is_configured():
+            error_msg = "GitHubIssueDispatchProvider not configured: "
+            if not self.dispatch_repo:
+                error_msg += "HANDSFREE_AGENT_DISPATCH_REPO not set"
+            elif not self._get_token():
+                error_msg += "No GitHub token available"
+
+            logger.error(error_msg)
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": error_msg,
+                "trace": {"error": "configuration_error"},
+            }
+
+        try:
+            # Import here to avoid circular dependency
+            from handsfree.github.client import create_issue
+
+            # Truncate instruction for title (GitHub max is 256 chars)
+            title = task.instruction[:100] if task.instruction else "Agent Task"
+            if task.instruction and len(task.instruction) > 100:
+                title += "..."
+
+            # Build issue body with task metadata
+            body_parts = [
+                "# Agent Task Delegation",
+                "",
+                f"**Task ID:** `{task.id}`",
+                f"**User ID:** `{task.user_id}`",
+                "",
+            ]
+
+            if task.target_type and task.target_ref:
+                body_parts.extend(
+                    [
+                        f"**Target:** {task.target_type} `{task.target_ref}`",
+                        "",
+                    ]
+                )
+
+            if task.instruction:
+                body_parts.extend(
+                    [
+                        "## Instructions",
+                        "",
+                        task.instruction,
+                        "",
+                    ]
+                )
+
+            body_parts.extend(
+                [
+                    "---",
+                    "",
+                    "<!-- agent_task_metadata",
+                    json.dumps(
+                        {
+                            "task_id": task.id,
+                            "user_id": task.user_id,
+                            "provider": "github_issue_dispatch",
+                        }
+                    ),
+                    "-->",
+                ]
+            )
+
+            body = "\n".join(body_parts)
+
+            # Create the issue
+            result = create_issue(
+                repo=self.dispatch_repo,
+                title=title,
+                body=body,
+                labels=["copilot-agent"],
+                token=self._get_token(),
+            )
+
+            if result.get("ok"):
+                issue_url = result.get("issue_url")
+                issue_number = result.get("issue_number")
+
+                logger.info(
+                    "Created dispatch issue for task %s: %s#%d",
+                    task.id,
+                    self.dispatch_repo,
+                    issue_number,
+                )
+
+                return {
+                    "ok": True,
+                    "status": "running",
+                    "message": f"Dispatch issue created: {issue_url}",
+                    "trace": {
+                        "provider": "github_issue_dispatch",
+                        "dispatch_repo": self.dispatch_repo,
+                        "issue_url": issue_url,
+                        "issue_number": issue_number,
+                    },
+                }
+            else:
+                error_msg = result.get("message", "Failed to create issue")
+                logger.error("Failed to create dispatch issue for task %s: %s", task.id, error_msg)
+                return {
+                    "ok": False,
+                    "status": "failed",
+                    "message": f"Failed to create dispatch issue: {error_msg}",
+                    "trace": {
+                        "provider": "github_issue_dispatch",
+                        "error": "issue_creation_failed",
+                    },
+                }
+
+        except Exception as e:
+            logger.exception("Error creating dispatch issue for task %s", task.id)
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": f"Exception during dispatch: {type(e).__name__}: {str(e)}",
+                "trace": {
+                    "provider": "github_issue_dispatch",
+                    "error": "exception",
+                },
+            }
+
+    def check_status(self, task: AgentTask) -> dict[str, Any]:
+        """Check the current status of a dispatched task.
+
+        The task status is primarily updated via webhook correlation,
+        so this method returns the current state without polling GitHub.
+
+        Args:
+            task: The agent task to check.
+
+        Returns:
+            Dictionary with current status.
+        """
+        # Extract trace information
+        trace = task.trace or {}
+        issue_url = trace.get("issue_url")
+        pr_url = trace.get("pr_url")
+
+        if pr_url:
+            return {
+                "ok": True,
+                "status": "completed",
+                "message": f"PR opened: {pr_url}",
+            }
+        elif issue_url:
+            return {
+                "ok": True,
+                "status": "running",
+                "message": f"Dispatch issue created: {issue_url}",
+            }
+        else:
+            return {
+                "ok": True,
+                "status": task.state,
+                "message": "Task status tracked via webhooks",
+            }
+
+    def cancel_task(self, task: AgentTask) -> dict[str, Any]:
+        """Cancel a dispatched task.
+
+        Note: This does not close the GitHub issue, as that could be
+        misleading if work is already in progress.
+
+        Args:
+            task: The agent task to cancel.
+
+        Returns:
+            Dictionary with cancellation status.
+        """
+        logger.info("Cancelling dispatched task %s", task.id)
+        return {
+            "ok": True,
+            "status": "failed",
+            "message": "Task cancelled (dispatch issue remains open)",
+        }
+
+
 def get_provider(provider_name: str) -> AgentProvider:
     """Get an agent provider by name.
 
@@ -231,7 +462,7 @@ def get_provider(provider_name: str) -> AgentProvider:
     For other providers, creates new instances.
 
     Args:
-        provider_name: Name of the provider (copilot, custom, mock).
+        provider_name: Name of the provider (copilot, custom, mock, github_issue_dispatch).
 
     Returns:
         AgentProvider instance.
@@ -249,6 +480,7 @@ def get_provider(provider_name: str) -> AgentProvider:
     providers = {
         "copilot": CopilotAgentProvider,
         "custom": CustomAgentProvider,
+        "github_issue_dispatch": GitHubIssueDispatchProvider,
     }
 
     if provider_name not in providers:

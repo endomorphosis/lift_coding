@@ -5,15 +5,16 @@ This implementation combines webhook handling with comprehensive API endpoints.
 
 __all__ = ["app", "get_db", "FIXTURE_USER_ID"]
 
+import json
 import logging
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
+from handsfree.audio_fetch import fetch_audio_data
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
@@ -45,11 +46,15 @@ from handsfree.logging_utils import (
 )
 from handsfree.models import (
     ActionResult,
+    ApiKeyResponse,
+    ApiKeysListResponse,
     AudioInput,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
+    CreateApiKeyRequest,
+    CreateApiKeyResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
@@ -57,6 +62,8 @@ from handsfree.models import (
     DependencyStatus,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
+    GitHubOAuthCallbackResponse,
+    GitHubOAuthStartResponse,
     ImageInput,
     InboxItem,
     InboxItemType,
@@ -159,43 +166,6 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
-
-
-def _fetch_audio_data(uri: str) -> bytes:
-    """Fetch audio data from URI.
-
-    Supports file:// URIs for local testing and development.
-    In production, this could support pre-signed URLs from S3, etc.
-
-    Args:
-        uri: Audio URI (file:// or local path)
-
-    Returns:
-        Audio data as bytes
-
-    Raises:
-        ValueError: If URI scheme is unsupported
-        FileNotFoundError: If local file doesn't exist
-    """
-    parsed = urlparse(uri)
-
-    # Support file:// URIs and plain paths
-    if parsed.scheme in ("", "file"):
-        # Extract path from file:// URI or use as-is
-        path = parsed.path if parsed.scheme == "file" else uri
-
-        # Convert to Path object and read
-        file_path = Path(path)
-        if not file_path.exists():
-            raise FileNotFoundError(f"Audio file not found: {path}")
-
-        return file_path.read_bytes()
-    else:
-        # Future: Support http/https pre-signed URLs
-        raise ValueError(
-            f"Unsupported audio URI scheme: {parsed.scheme}. "
-            f"Currently only file:// URIs are supported in dev/test mode."
-        )
 
 
 @app.get("/health")
@@ -407,6 +377,9 @@ async def github_webhook(
             if event_type_normalized in ("installation", "installation_repositories"):
                 process_installation_event(db, normalized, payload)
 
+            # Correlate PR events with agent tasks
+            _correlate_pr_with_agent_tasks(normalized, payload)
+
             # Emit notification for normalized webhook events
             _emit_webhook_notification(normalized, payload)
 
@@ -614,7 +587,7 @@ async def submit_command(
         # Audio input - transcribe to text using STT
         try:
             # Fetch audio data from URI
-            audio_data = _fetch_audio_data(request.input.uri)
+            audio_data = fetch_audio_data(request.input.uri)
 
             # Get STT provider and transcribe
             stt_provider = get_stt_provider()
@@ -637,7 +610,7 @@ async def submit_command(
                 spoken_text=str(e),
                 debug=DebugInfo(transcript="<audio input - STT disabled>"),
             )
-        except (ValueError, FileNotFoundError) as e:
+        except (ValueError, FileNotFoundError, RuntimeError) as e:
             # Invalid audio format or URI
             log_error(logger, "Audio input error", error=str(e), user_id=user_id)
             clear_request_id()
@@ -3207,6 +3180,150 @@ def _get_fixture_inbox_items() -> list[InboxItem]:
     ]
 
 
+def _correlate_pr_with_agent_tasks(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
+    """Correlate PR webhooks with dispatched agent tasks.
+
+    When a PR is opened, checks if it references a dispatch issue or contains
+    task metadata, then updates the corresponding agent task to completed.
+
+    Args:
+        normalized: Normalized webhook event data.
+        raw_payload: Raw webhook payload.
+    """
+    import re
+
+    from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+
+    event_type = normalized.get("event_type")
+    action = normalized.get("action")
+
+    # Only process PR opened events
+    if event_type != "pull_request" or action != "opened":
+        return
+
+    db = get_db()
+    pr_number = normalized.get("pr_number")
+    pr_url = normalized.get("pr_url")
+    repo = normalized.get("repo")
+
+    # Extract PR body from raw payload
+    pr = raw_payload.get("pull_request", {})
+    pr_body = pr.get("body") or ""
+
+    # Try to extract task_id from PR body metadata
+    task_id = None
+
+    # Look for agent_task_metadata comment in PR body
+    metadata_match = re.search(
+        r"<!--\s*agent_task_metadata\s+(.*?)\s*-->",
+        pr_body,
+        re.DOTALL,
+    )
+    if metadata_match:
+        try:
+            metadata = json.loads(metadata_match.group(1))
+            task_id = metadata.get("task_id")
+        except Exception:
+            pass
+
+    # Also check for "Fixes #N" or "Closes #N" references to issues
+    issue_refs = re.findall(r"(?:fixes|closes|resolves)\s+#(\d+)", pr_body, re.IGNORECASE)
+
+    # If we found task_id in metadata, update that task
+    if task_id:
+        try:
+            # Query all tasks to find the matching one
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if task.id == task_id and task.state in ("created", "running"):
+                    # Update task to completed
+                    trace_update = {
+                        "pr_url": pr_url,
+                        "pr_number": pr_number,
+                        "repo_full_name": repo,
+                        "correlated_via": "pr_metadata",
+                    }
+
+                    updated_task = update_agent_task_state(
+                        conn=db,
+                        task_id=task_id,
+                        new_state="completed",
+                        trace_update=trace_update,
+                    )
+
+                    if updated_task:
+                        logger.info(
+                            "Correlated PR %s#%d with task %s via metadata, marked completed",
+                            repo,
+                            pr_number,
+                            task_id,
+                        )
+
+                        # Emit completion notification via agent service
+                        from handsfree.agents.service import AgentService
+
+                        service = AgentService(db)
+                        service._emit_completion_notification(updated_task, "completed")
+
+                    break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via metadata: %s", e)
+
+    # If we found issue references, check if any match dispatch issues
+    if issue_refs:
+        try:
+            # Query all running/created tasks from github_issue_dispatch provider
+            tasks = get_agent_tasks(conn=db, limit=1000)
+            for task in tasks:
+                if (
+                    task.provider == "github_issue_dispatch"
+                    and task.state in ("created", "running")
+                    and task.trace
+                ):
+                    issue_number = task.trace.get("issue_number")
+                    dispatch_repo = task.trace.get("dispatch_repo")
+
+                    # Check if this PR references the dispatch issue
+                    if issue_number and str(issue_number) in issue_refs and dispatch_repo == repo:
+                        # Update task to completed
+                        trace_update = {
+                            "pr_url": pr_url,
+                            "pr_number": pr_number,
+                            "repo_full_name": repo,
+                            "correlated_via": "issue_reference",
+                        }
+
+                        updated_task = update_agent_task_state(
+                            conn=db,
+                            task_id=task.id,
+                            new_state="completed",
+                            trace_update=trace_update,
+                        )
+
+                        if updated_task:
+                            msg = (
+                                "Correlated PR %s#%d with task %s via issue ref #%d, "
+                                "marked completed"
+                            )
+                            logger.info(
+                                msg,
+                                repo,
+                                pr_number,
+                                task.id,
+                                issue_number,
+                            )
+
+                            # Emit completion notification via agent service
+                            from handsfree.agents.service import AgentService
+
+                            service = AgentService(db)
+                            service._emit_completion_notification(updated_task, "completed")
+
+                        break
+        except Exception as e:
+            logger.warning("Failed to correlate PR with task via issue reference: %s", e)
+
+
 def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str, Any]) -> None:
     """Emit notifications for normalized webhook events.
 
@@ -3506,7 +3623,7 @@ async def text_to_speech(request: TTSRequest) -> Response:
     Raises:
         400 Bad Request for invalid input (empty text, text too long)
     """
-    from handsfree.tts import StubTTSProvider
+    from handsfree.tts import get_tts_provider
 
     # Input validation
     if not request.text or not request.text.strip():
@@ -3527,10 +3644,9 @@ async def text_to_speech(request: TTSRequest) -> Response:
             },
         )
 
-    # For MVP, always use stub provider
-    # In production, check env var for real TTS provider selection
-    # provider = get_tts_provider()  # Would check HANDSFREE_TTS_PROVIDER env var
-    provider = StubTTSProvider()
+    # Use factory to get configured TTS provider
+    # Defaults to stub, but can be configured via HANDSFREE_TTS_PROVIDER env var
+    provider = get_tts_provider()
 
     try:
         audio_bytes, content_type = provider.synthesize(
@@ -3764,6 +3880,307 @@ async def delete_connection(
     return Response(status_code=204)
 
 
+@app.get("/v1/github/oauth/start", response_model=GitHubOAuthStartResponse)
+async def github_oauth_start(
+    user_id: CurrentUser,
+    scopes: str | None = None,
+) -> GitHubOAuthStartResponse:
+    """Start GitHub OAuth flow by redirecting user to GitHub's authorize URL.
+
+    This endpoint constructs the OAuth authorization URL and returns it to the client.
+    The client should redirect the user to this URL to initiate the OAuth flow.
+
+    Args:
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        scopes: Optional comma-separated OAuth scopes (e.g., "repo,user:email").
+                If not provided, uses GITHUB_OAUTH_SCOPES env var or defaults to "repo,user:email".
+
+    Returns:
+        Response containing the GitHub OAuth authorization URL.
+
+    Raises:
+        500: OAuth not configured (missing CLIENT_ID or REDIRECT_URI).
+    """
+    import os
+
+    # Get OAuth configuration from environment
+    client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+    redirect_uri = os.getenv("GITHUB_OAUTH_REDIRECT_URI")
+    default_scopes = os.getenv("GITHUB_OAUTH_SCOPES", "repo,user:email")
+
+    if not client_id or not redirect_uri:
+        log_error(
+            logger,
+            "GitHub OAuth not configured",
+            missing_client_id=not client_id,
+            missing_redirect_uri=not redirect_uri,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "oauth_not_configured",
+                "message": (
+                    "GitHub OAuth is not configured. "
+                    "Set GITHUB_OAUTH_CLIENT_ID and GITHUB_OAUTH_REDIRECT_URI."
+                ),
+            },
+        )
+
+    # Use provided scopes or default
+    oauth_scopes = scopes or default_scopes
+
+    # Construct GitHub OAuth authorization URL
+    # Note: We're not implementing state parameter for CSRF protection in this minimal version
+    # as specified in the non-goals (advanced state mgmt)
+    from urllib.parse import urlencode
+
+    params = {
+        "client_id": client_id,
+        "redirect_uri": redirect_uri,
+        "scope": oauth_scopes,
+    }
+    authorize_url = f"https://github.com/login/oauth/authorize?{urlencode(params)}"
+
+    log_info(
+        logger,
+        "GitHub OAuth start",
+        user_id=user_id,
+        scopes=oauth_scopes,
+    )
+
+    return GitHubOAuthStartResponse(
+        authorize_url=authorize_url,
+        state=None,  # Not implementing state in minimal version
+    )
+
+
+@app.get("/v1/github/oauth/callback", response_model=GitHubOAuthCallbackResponse)
+async def github_oauth_callback(
+    user_id: CurrentUser,
+    code: str | None = None,
+    state: str | None = None,
+) -> GitHubOAuthCallbackResponse:
+    """Handle GitHub OAuth callback and exchange code for access token.
+
+    This endpoint receives the authorization code from GitHub, exchanges it for
+    an access token, stores the token securely, and creates/updates a GitHub connection.
+
+    Args:
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+        code: Authorization code from GitHub OAuth callback.
+        state: Optional state parameter for CSRF validation (not used in minimal version).
+
+    Returns:
+        Response containing the created connection ID and granted scopes.
+
+    Raises:
+        400: Missing authorization code.
+        500: OAuth not configured or token exchange failed.
+    """
+    import os
+
+    import httpx
+
+    if not code:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "missing_code",
+                "message": "Authorization code is required",
+            },
+        )
+
+    # Get OAuth configuration from environment
+    client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+    client_secret = os.getenv("GITHUB_OAUTH_CLIENT_SECRET")
+    redirect_uri = os.getenv("GITHUB_OAUTH_REDIRECT_URI")
+
+    if not client_id or not client_secret or not redirect_uri:
+        log_error(
+            logger,
+            "GitHub OAuth not configured for callback",
+            missing_client_id=not client_id,
+            missing_client_secret=not client_secret,
+            missing_redirect_uri=not redirect_uri,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "oauth_not_configured",
+                "message": "GitHub OAuth is not configured properly.",
+            },
+        )
+
+    # Exchange code for access token
+    try:
+        log_info(logger, "Exchanging OAuth code for access token", user_id=user_id)
+
+        response = httpx.post(
+            "https://github.com/login/oauth/access_token",
+            data={
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "code": code,
+                "redirect_uri": redirect_uri,
+            },
+            headers={
+                "Accept": "application/json",
+            },
+            timeout=10.0,
+        )
+
+        if response.status_code != 200:
+            log_error(
+                logger,
+                "GitHub OAuth token exchange failed",
+                status_code=response.status_code,
+                user_id=user_id,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={
+                    "error": "token_exchange_failed",
+                    "message": "Failed to exchange authorization code for access token",
+                },
+            )
+
+        token_data = response.json()
+
+        # Check for error in response
+        if "error" in token_data:
+            error_description = token_data.get("error_description", token_data["error"])
+            log_error(
+                logger,
+                "GitHub OAuth returned error",
+                error=token_data["error"],
+                error_description=error_description,
+                user_id=user_id,
+            )
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "oauth_error",
+                    "message": f"GitHub OAuth error: {error_description}",
+                },
+            )
+
+        access_token = token_data.get("access_token")
+        granted_scopes = token_data.get("scope", "")
+
+        if not access_token:
+            log_error(logger, "No access token in GitHub OAuth response", user_id=user_id)
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={
+                    "error": "no_access_token",
+                    "message": "No access token received from GitHub",
+                },
+            )
+
+        log_info(
+            logger,
+            "Successfully exchanged OAuth code for token",
+            user_id=user_id,
+            scopes=granted_scopes,
+        )
+
+    except httpx.HTTPError as e:
+        log_error(
+            logger,
+            "HTTP error during OAuth token exchange",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "network_error",
+                "message": "Failed to communicate with GitHub OAuth service",
+            },
+        ) from e
+
+    # Store the token securely using the secret manager
+    db = get_db()
+    secret_manager = get_default_secret_manager()
+
+    try:
+        # Create a unique key for this token
+        secret_key = f"github_token_{user_id}"
+        token_ref = secret_manager.store_secret(
+            key=secret_key,
+            value=access_token,
+            metadata={
+                "user_id": user_id,
+                "scopes": granted_scopes,
+                "source": "oauth",
+                "created_at": datetime.now(UTC).isoformat(),
+            },
+        )
+        log_info(
+            logger,
+            "Stored GitHub OAuth token securely",
+            user_id=user_id,
+            token_ref=token_ref,
+        )
+    except Exception as e:
+        log_error(
+            logger,
+            "Failed to store GitHub OAuth token",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "storage_error",
+                "message": "Failed to store token securely",
+            },
+        ) from e
+
+    # Create GitHub connection record
+    try:
+        connection = create_github_connection(
+            conn=db,
+            user_id=user_id,
+            installation_id=None,  # OAuth tokens don't have installation_id
+            token_ref=token_ref,
+            scopes=granted_scopes,
+        )
+
+        log_info(
+            logger,
+            "Created GitHub connection from OAuth",
+            user_id=user_id,
+            connection_id=connection.id,
+        )
+
+        return GitHubOAuthCallbackResponse(
+            connection_id=connection.id,
+            scopes=granted_scopes,
+        )
+
+    except Exception as e:
+        # If connection creation fails, try to clean up the stored token
+        try:
+            secret_manager.delete_secret(token_ref)
+        except Exception:
+            pass  # Best effort cleanup
+
+        log_error(
+            logger,
+            "Failed to create GitHub connection",
+            error=str(e),
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={
+                "error": "connection_error",
+                "message": "Failed to create GitHub connection",
+            },
+        ) from e
+
+
 @app.post(
     "/v1/repos/subscriptions",
     response_model=RepoSubscriptionResponse,
@@ -3936,12 +4353,14 @@ async def create_notification_subscription(
         user_id=user_id,
         endpoint=request.endpoint,
         subscription_keys=request.subscription_keys,
+        platform=request.platform,
     )
 
     return NotificationSubscriptionResponse(
         id=subscription.id,
         user_id=subscription.user_id,
         endpoint=subscription.endpoint,
+        platform=subscription.platform,
         subscription_keys=subscription.subscription_keys or {},
         created_at=subscription.created_at.isoformat(),
         updated_at=subscription.updated_at.isoformat(),
@@ -3972,6 +4391,7 @@ async def list_notification_subscriptions(
                 id=sub.id,
                 user_id=sub.user_id,
                 endpoint=sub.endpoint,
+                platform=sub.platform,
                 subscription_keys=sub.subscription_keys or {},
                 created_at=sub.created_at.isoformat(),
                 updated_at=sub.updated_at.isoformat(),
@@ -4258,3 +4678,145 @@ async def fail_agent_task(
                     "message": str(e),
                 },
             ) from e
+
+
+# ============================================================================
+# API Key Management Endpoints (Admin/Dev Only)
+# ============================================================================
+
+
+@app.post("/v1/admin/api-keys", response_model=CreateApiKeyResponse, status_code=201)
+async def create_api_key(
+    request: CreateApiKeyRequest,
+    user_id: CurrentUser,
+) -> CreateApiKeyResponse:
+    """Create a new API key for the current user.
+
+    This endpoint is only available in dev mode or for authenticated users.
+    The plaintext key is returned ONLY in this response - it cannot be retrieved later.
+
+    Args:
+        request: API key creation request.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        Created API key with plaintext key (shown only once).
+
+    Raises:
+        403: Endpoint disabled (not in dev mode and not authenticated).
+    """
+    from handsfree.db.api_keys import create_api_key as db_create_api_key
+
+    logger.info("Creating API key for user %s with label: %s", user_id, request.label)
+
+    db = get_db()
+    plaintext_key, api_key_record = db_create_api_key(
+        db,
+        user_id=user_id,
+        label=request.label,
+    )
+
+    logger.info("API key created with ID: %s", api_key_record.id)
+
+    return CreateApiKeyResponse(
+        key=plaintext_key,
+        api_key=ApiKeyResponse(
+            id=api_key_record.id,
+            user_id=api_key_record.user_id,
+            label=api_key_record.label,
+            created_at=api_key_record.created_at.isoformat(),
+            revoked_at=api_key_record.revoked_at.isoformat() if api_key_record.revoked_at else None,
+            last_used_at=api_key_record.last_used_at.isoformat()
+            if api_key_record.last_used_at
+            else None,
+        ),
+    )
+
+
+@app.get("/v1/admin/api-keys", response_model=ApiKeysListResponse)
+async def list_api_keys(
+    user_id: CurrentUser,
+    include_revoked: bool = False,
+) -> ApiKeysListResponse:
+    """List all API keys for the current user.
+
+    Args:
+        user_id: Current authenticated user ID.
+        include_revoked: Whether to include revoked keys (default: False).
+
+    Returns:
+        List of API keys (without plaintext keys).
+    """
+    from handsfree.db.api_keys import get_api_keys_by_user
+
+    logger.info("Listing API keys for user %s, include_revoked=%s", user_id, include_revoked)
+
+    db = get_db()
+    api_keys = get_api_keys_by_user(db, user_id, include_revoked=include_revoked)
+
+    return ApiKeysListResponse(
+        api_keys=[
+            ApiKeyResponse(
+                id=key.id,
+                user_id=key.user_id,
+                label=key.label,
+                created_at=key.created_at.isoformat(),
+                revoked_at=key.revoked_at.isoformat() if key.revoked_at else None,
+                last_used_at=key.last_used_at.isoformat() if key.last_used_at else None,
+            )
+            for key in api_keys
+        ]
+    )
+
+
+@app.delete("/v1/admin/api-keys/{key_id}", status_code=204)
+async def revoke_api_key(
+    key_id: str,
+    user_id: CurrentUser,
+) -> Response:
+    """Revoke an API key.
+
+    Args:
+        key_id: UUID of the API key to revoke.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: API key not found.
+        403: User does not own this API key.
+    """
+    from handsfree.db.api_keys import get_api_key
+    from handsfree.db.api_keys import revoke_api_key as db_revoke_api_key
+
+    logger.info("Revoking API key %s for user %s", key_id, user_id)
+
+    db = get_db()
+
+    # Check if key exists
+    api_key = get_api_key(db, key_id)
+    if api_key is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="API key not found",
+        )
+
+    # Verify ownership
+    if api_key.user_id != user_id:
+        logger.warning(
+            "User %s attempted to revoke API key %s owned by %s",
+            user_id,
+            key_id,
+            api_key.user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have permission to revoke this API key",
+        )
+
+    # Revoke the key
+    db_revoke_api_key(db, key_id)
+    logger.info("API key %s revoked successfully", key_id)
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

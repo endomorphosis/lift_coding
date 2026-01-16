@@ -52,17 +52,67 @@ result = provider.send(
 )
 ```
 
+#### WebPushProvider
+
+A production-ready provider that sends real Web Push notifications using VAPID authentication.
+
+```python
+from handsfree.notifications import WebPushProvider
+
+provider = WebPushProvider(
+    vapid_public_key="your-public-key",
+    vapid_private_key="your-private-key",
+    vapid_subject="mailto:ops@example.com"
+)
+result = provider.send(
+    subscription_endpoint="https://push.example.com/endpoint",
+    notification_data={
+        "id": "notif-123",
+        "event_type": "test_event",
+        "message": "Test notification",
+    },
+    subscription_keys={
+        "p256dh": "browser-public-key",
+        "auth": "browser-auth-secret"
+    }
+)
+```
+
 ## Configuration
 
 Push notification delivery is controlled by the `HANDSFREE_NOTIFICATION_PROVIDER` environment variable:
 
 - `"logger"` or `"dev"`: Enable DevLoggerProvider (logs notifications)
+- `"webpush"`: Enable WebPushProvider (real Web Push notifications)
 - Empty or not set: Push delivery disabled (polling only)
 
-Example:
+### DevLoggerProvider Configuration
+
 ```bash
 export HANDSFREE_NOTIFICATION_PROVIDER=logger
 ```
+
+### WebPushProvider Configuration
+
+To use WebPush, you need to configure VAPID keys:
+
+```bash
+export HANDSFREE_NOTIFICATION_PROVIDER=webpush
+export HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY="your-vapid-public-key"
+export HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY="your-vapid-private-key"
+export HANDSFREE_WEBPUSH_VAPID_SUBJECT="mailto:ops@example.com"
+```
+
+**Generating VAPID Keys:**
+
+You can generate VAPID keys using the `py-vapid` library:
+
+```bash
+pip install py-vapid
+vapid --gen
+```
+
+This will output a public and private key pair that you can use in your configuration.
 
 ## API Endpoints
 
@@ -202,10 +252,28 @@ pytest tests/test_notification_delivery.py
      -H "X-User-ID: 00000000-0000-0000-0000-000000000001"
    ```
 
+## Implementation Notes
+
+### WebPush Provider
+
+The WebPush provider uses the `pywebpush` library to send notifications to browser endpoints. It requires:
+
+1. **VAPID Authentication**: Uses public/private key pairs for secure authentication
+2. **Subscription Keys**: Requires `p256dh` (browser public key) and `auth` (browser auth secret) from the client
+3. **Graceful Fallback**: If `pywebpush` is not installed, the provider returns an error without crashing
+4. **Error Handling**: All delivery errors are caught and logged without affecting notification creation
+
+### Security Considerations
+
+- Store VAPID private keys securely (use environment variables, not hardcoded values)
+- Validate subscription endpoints to prevent abuse
+- Implement rate limiting on subscription creation
+- Monitor failed deliveries and remove inactive subscriptions
+
 ## Future Enhancements
 
-- **WebPush Provider**: Implement a real WebPush provider using standard libraries (e.g., `pywebpush`)
-- **VAPID Keys**: Store VAPID keys via environment variables for WebPush authentication
+- **APNS/FCM Support**: Add providers for native mobile push (iOS/Android)
 - **Retry Logic**: Add exponential backoff for failed deliveries
-- **Delivery Status**: Track delivery status per subscription
+- **Delivery Status**: Track delivery status per subscription in the database
 - **Subscription Verification**: Add endpoint verification during subscription creation
+- **Batch Delivery**: Optimize delivery for users with many subscriptions

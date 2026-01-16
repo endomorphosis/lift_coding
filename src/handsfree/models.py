@@ -287,6 +287,32 @@ class RepoSubscriptionsListResponse(BaseModel):
     subscriptions: list[RepoSubscriptionResponse]
 
 
+class GitHubOAuthStartResponse(BaseModel):
+    """Response for GitHub OAuth start endpoint."""
+
+    authorize_url: str = Field(
+        ...,
+        description="GitHub OAuth authorization URL to redirect user to",
+    )
+    state: str | None = Field(
+        default=None,
+        description="Optional state parameter for CSRF protection",
+    )
+
+
+class GitHubOAuthCallbackResponse(BaseModel):
+    """Response for successful GitHub OAuth callback."""
+
+    connection_id: str = Field(
+        ...,
+        description="ID of the created/updated GitHub connection",
+    )
+    scopes: str | None = Field(
+        default=None,
+        description="OAuth scopes granted by the user",
+    )
+
+
 class TTSRequest(BaseModel):
     """Text-to-speech request."""
 
@@ -305,7 +331,12 @@ class TTSRequest(BaseModel):
 class CreateNotificationSubscriptionRequest(BaseModel):
     """Request to create a notification subscription."""
 
-    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL")
+    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL or device token")
+    platform: str = Field(
+        default="webpush",
+        description="Platform type: 'webpush', 'apns', or 'fcm'",
+        pattern="^(webpush|apns|fcm)$",
+    )
     subscription_keys: dict[str, str] | None = Field(
         default=None,
         description="Provider-specific subscription keys (e.g., auth, p256dh for WebPush)",
@@ -318,6 +349,7 @@ class NotificationSubscriptionResponse(BaseModel):
     id: str
     user_id: str
     endpoint: str
+    platform: str
     subscription_keys: dict[str, str]
     created_at: str
     updated_at: str
@@ -347,3 +379,42 @@ class StatusResponse(BaseModel):
         default_factory=list,
         description="Status of dependencies like DuckDB, Redis (optional)",
     )
+
+
+class CreateApiKeyRequest(BaseModel):
+    """Request to create a new API key."""
+
+    label: str | None = Field(
+        default=None,
+        max_length=100,
+        description="Optional user-friendly label for the key (e.g., 'Mobile app', 'CI/CD')",
+    )
+
+
+class ApiKeyResponse(BaseModel):
+    """Response for an API key (without the plaintext key)."""
+
+    id: str
+    user_id: str
+    label: str | None
+    created_at: str
+    revoked_at: str | None
+    last_used_at: str | None
+
+
+class CreateApiKeyResponse(BaseModel):
+    """Response when creating a new API key.
+
+    This is the ONLY time the plaintext key is returned.
+    """
+
+    key: str = Field(
+        ..., description="The plaintext API key. Save this - it will not be shown again."
+    )
+    api_key: ApiKeyResponse
+
+
+class ApiKeysListResponse(BaseModel):
+    """Response for listing API keys."""
+
+    api_keys: list[ApiKeyResponse]

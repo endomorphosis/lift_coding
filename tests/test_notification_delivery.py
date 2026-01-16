@@ -7,7 +7,7 @@ import pytest
 from handsfree.db import init_db
 from handsfree.db.notification_subscriptions import create_subscription
 from handsfree.db.notifications import create_notification
-from handsfree.notifications import DevLoggerProvider, get_notification_provider
+from handsfree.notifications import DevLoggerProvider, WebPushProvider, get_notification_provider
 
 
 @pytest.fixture
@@ -81,6 +81,208 @@ class TestGetNotificationProvider:
 
         # Clean up
         os.environ.pop("HANDSFREE_NOTIFICATION_PROVIDER", None)
+
+    def test_returns_webpush_provider_when_configured(self):
+        """Test that WebPush provider is returned when configured with VAPID keys."""
+        os.environ["HANDSFREE_NOTIFICATION_PROVIDER"] = "webpush"
+        os.environ["HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY"] = "test-public-key"
+        os.environ["HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY"] = "test-private-key"
+        os.environ["HANDSFREE_WEBPUSH_VAPID_SUBJECT"] = "mailto:test@example.com"
+
+        provider = get_notification_provider()
+        assert isinstance(provider, WebPushProvider)
+        assert provider.vapid_public_key == "test-public-key"
+        assert provider.vapid_private_key == "test-private-key"
+        assert provider.vapid_subject == "mailto:test@example.com"
+
+        # Clean up
+        os.environ.pop("HANDSFREE_NOTIFICATION_PROVIDER", None)
+        os.environ.pop("HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY", None)
+        os.environ.pop("HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY", None)
+        os.environ.pop("HANDSFREE_WEBPUSH_VAPID_SUBJECT", None)
+
+    def test_returns_none_when_webpush_missing_credentials(self):
+        """Test that None is returned when WebPush is requested but credentials are missing."""
+        os.environ["HANDSFREE_NOTIFICATION_PROVIDER"] = "webpush"
+        # Don't set VAPID keys
+
+        provider = get_notification_provider()
+        assert provider is None
+
+        # Clean up
+        os.environ.pop("HANDSFREE_NOTIFICATION_PROVIDER", None)
+
+
+class TestWebPushProvider:
+    """Test the WebPushProvider."""
+
+    def test_send_notification_success(self, monkeypatch):
+        """Test successful WebPush notification send."""
+
+        # Mock pywebpush.webpush
+        class MockResponse:
+            status_code = 201
+
+        def mock_webpush(subscription_info, data, vapid_private_key, vapid_claims):
+            # Verify parameters
+            assert subscription_info["endpoint"] == "https://push.example.com/test"
+            assert "p256dh" in subscription_info["keys"]
+            assert "auth" in subscription_info["keys"]
+            assert vapid_private_key == "test-private-key"
+            assert vapid_claims["sub"] == "mailto:test@example.com"
+            return MockResponse()
+
+        # Patch webpush
+        import pywebpush
+
+        monkeypatch.setattr(pywebpush, "webpush", mock_webpush)
+
+        # Create provider
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={
+                "id": "notif-123",
+                "event_type": "test_event",
+                "message": "Test notification",
+            },
+            subscription_keys={"p256dh": "test-p256dh", "auth": "test-auth"},
+        )
+
+        assert result["ok"] is True
+        assert "Notification sent" in result["message"]
+        assert result["delivery_id"] is not None
+        assert result["delivery_id"].startswith("webpush-")
+
+    def test_send_notification_missing_subscription_keys(self):
+        """Test WebPush send fails when subscription keys are missing."""
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        # Send without subscription keys
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys=None,
+        )
+
+        assert result["ok"] is False
+        assert "Missing subscription keys" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_send_notification_missing_required_keys(self):
+        """Test WebPush send fails when required keys (p256dh, auth) are missing."""
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        # Send with incomplete keys (missing auth)
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"p256dh": "test-p256dh"},
+        )
+
+        assert result["ok"] is False
+        assert "p256dh and auth are required" in result["message"]
+        assert result["delivery_id"] is None
+
+        # Send with incomplete keys (missing p256dh)
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"auth": "test-auth"},
+        )
+
+        assert result["ok"] is False
+        assert "p256dh and auth are required" in result["message"]
+
+    def test_send_notification_webpush_exception(self, monkeypatch):
+        """Test WebPush send handles WebPushException gracefully."""
+        from pywebpush import WebPushException
+
+        def mock_webpush(subscription_info, data, vapid_private_key, vapid_claims):
+            raise WebPushException("Expired subscription")
+
+        # Patch webpush
+        import pywebpush
+
+        monkeypatch.setattr(pywebpush, "webpush", mock_webpush)
+
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"p256dh": "test-p256dh", "auth": "test-auth"},
+        )
+
+        assert result["ok"] is False
+        assert "WebPush error" in result["message"]
+        assert "Expired subscription" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_send_notification_unexpected_exception(self, monkeypatch):
+        """Test WebPush send handles unexpected exceptions gracefully."""
+
+        def mock_webpush(subscription_info, data, vapid_private_key, vapid_claims):
+            raise ValueError("Unexpected error")
+
+        # Patch webpush
+        import pywebpush
+
+        monkeypatch.setattr(pywebpush, "webpush", mock_webpush)
+
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"p256dh": "test-p256dh", "auth": "test-auth"},
+        )
+
+        assert result["ok"] is False
+        assert "Unexpected error" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_send_notification_pywebpush_not_installed(self, monkeypatch):
+        """Test WebPush gracefully handles missing pywebpush library."""
+        # Create a provider and mark pywebpush as unavailable
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+        provider._pywebpush_available = False
+
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"p256dh": "test-p256dh", "auth": "test-auth"},
+        )
+
+        assert result["ok"] is False
+        assert "pywebpush library not installed" in result["message"]
+        assert result["delivery_id"] is None
 
 
 class TestNotificationDelivery:
