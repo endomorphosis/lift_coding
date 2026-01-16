@@ -359,7 +359,4 @@ class TestAgentResume:
         assert "not available" in response["spoken_text"].lower()
 
 
-@pytest.fixture
-def test_user_id():
-    """Return a test user ID."""
-    return "test-user-123"
+
