@@ -67,9 +67,8 @@ def test_agent_workflow_complete():
     assert status_data["status"] == "ok"
     assert status_data["intent"]["name"] == "agent.status"  # Router uses agent.status
     assert "task" in status_data["spoken_text"].lower()
-    # Copilot provider doesn't auto-advance - tasks stay in "created" state
-    # until real orchestration is implemented
-    assert "created" in status_data["spoken_text"].lower()
+    # Tasks now auto-start to "running" state
+    assert "running" in status_data["spoken_text"].lower()
 
     # Should show the newly created task
     assert len(status_data["cards"]) > 0
@@ -79,8 +78,8 @@ def test_agent_workflow_complete():
     for card in status_data["cards"]:
         if task_id[:8] in card["title"]:
             our_task_found = True
-            # Verify task details - copilot provider tasks stay in "created" state
-            assert "created" in card["subtitle"].lower()
+            # Verify task details - tasks auto-start to "running" state
+            assert "running" in card["subtitle"].lower()
             assert "Instruction: fix" in card["lines"][0]
             break
 
