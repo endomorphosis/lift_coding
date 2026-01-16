@@ -209,9 +209,7 @@ class TestVaultSecretManager:
         """Test VaultSecretManager initialization with AppRole authentication."""
         mock_client = Mock()
         mock_client.is_authenticated.return_value = True
-        mock_client.auth.approle.login.return_value = {
-            "auth": {"client_token": "approle-token"}
-        }
+        mock_client.auth.approle.login.return_value = {"auth": {"client_token": "approle-token"}}
         mock_client_class.return_value = mock_client
 
         VaultSecretManager(
@@ -495,12 +493,15 @@ class TestVaultSecretManager:
         assert hasattr(manager, "update_secret")
         assert hasattr(manager, "list_secrets")
 
-    @patch.dict(os.environ, {
-        "VAULT_ADDR": "https://vault.example.com",
-        "VAULT_TOKEN": "env-token",
-        "VAULT_MOUNT": "custom-mount",
-        "VAULT_NAMESPACE": "test-namespace",
-    })
+    @patch.dict(
+        os.environ,
+        {
+            "VAULT_ADDR": "https://vault.example.com",
+            "VAULT_TOKEN": "env-token",
+            "VAULT_MOUNT": "custom-mount",
+            "VAULT_NAMESPACE": "test-namespace",
+        },
+    )
     @patch("handsfree.secrets.vault_secrets.hvac.Client")
     def test_initialization_from_environment(self, mock_client_class):
         """Test that VaultSecretManager can be initialized from environment variables."""
@@ -519,4 +520,3 @@ class TestVaultSecretManager:
             url="https://vault.example.com",
             namespace="test-namespace",
         )
-

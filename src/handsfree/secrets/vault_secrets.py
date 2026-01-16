@@ -89,9 +89,7 @@ class VaultSecretManager(SecretManager):
             ValueError: If required configuration is missing
         """
         if not self.vault_addr:
-            raise ValueError(
-                "VAULT_ADDR environment variable or vault_addr parameter is required"
-            )
+            raise ValueError("VAULT_ADDR environment variable or vault_addr parameter is required")
 
         # Must have either token or AppRole credentials
         has_token = bool(self.vault_token)
@@ -393,9 +391,7 @@ class VaultSecretManager(SecretManager):
                     if key.endswith("/"):
                         # This is a directory, add to queue for processing
                         stripped_key = key.rstrip("/")
-                        subpath = (
-                            f"{current_path}/{stripped_key}" if current_path else stripped_key
-                        )
+                        subpath = f"{current_path}/{stripped_key}" if current_path else stripped_key
                         queue.append((subpath, depth + 1))
                     else:
                         # This is a secret, add reference

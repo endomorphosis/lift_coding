@@ -43,6 +43,7 @@ def get_secret_manager() -> SecretManager:
         raise NotImplementedError("AWS Secrets Manager support coming soon")
     elif manager_type == "vault":
         from .vault_secrets import VaultSecretManager
+
         logger.info("Using VaultSecretManager (production mode)")
         return VaultSecretManager()
     elif manager_type == "gcp":

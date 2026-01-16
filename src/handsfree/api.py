@@ -168,9 +168,6 @@ def get_db_webhook_store() -> DBWebhookStore:
     return _webhook_store
 
 
-
-
-
 @app.get("/health")
 def health_check():
     """Health check endpoint."""
