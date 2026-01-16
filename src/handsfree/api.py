@@ -4291,7 +4291,7 @@ async def create_api_key(
     """
     from handsfree.db.api_keys import create_api_key as db_create_api_key
 
-    log_info(f"Creating API key for user {user_id} with label: {request.label}")
+    logger.info("Creating API key for user %s with label: %s", user_id, request.label)
 
     db = get_db()
     plaintext_key, api_key_record = db_create_api_key(
@@ -4300,7 +4300,7 @@ async def create_api_key(
         label=request.label,
     )
 
-    log_info(f"API key created with ID: {api_key_record.id}")
+    logger.info("API key created with ID: %s", api_key_record.id)
 
     return CreateApiKeyResponse(
         key=plaintext_key,
@@ -4333,7 +4333,7 @@ async def list_api_keys(
     """
     from handsfree.db.api_keys import get_api_keys_by_user
 
-    log_info(f"Listing API keys for user {user_id}, include_revoked={include_revoked}")
+    logger.info("Listing API keys for user %s, include_revoked=%s", user_id, include_revoked)
 
     db = get_db()
     api_keys = get_api_keys_by_user(db, user_id, include_revoked=include_revoked)
@@ -4373,7 +4373,7 @@ async def revoke_api_key(
     """
     from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
 
-    log_info(f"Revoking API key {key_id} for user {user_id}")
+    logger.info("Revoking API key %s for user %s", key_id, user_id)
 
     db = get_db()
 
@@ -4387,8 +4387,11 @@ async def revoke_api_key(
 
     # Verify ownership
     if api_key.user_id != user_id:
-        log_warning(
-            f"User {user_id} attempted to revoke API key {key_id} owned by {api_key.user_id}"
+        logger.warning(
+            "User %s attempted to revoke API key %s owned by %s",
+            user_id,
+            key_id,
+            api_key.user_id,
         )
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -4397,6 +4400,6 @@ async def revoke_api_key(
 
     # Revoke the key
     db_revoke_api_key(db, key_id)
-    log_info(f"API key {key_id} revoked successfully")
+    logger.info("API key %s revoked successfully", key_id)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
