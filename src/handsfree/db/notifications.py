@@ -305,7 +305,8 @@ def _deliver_notification(
     )
     if not auto_push_enabled:
         logger.debug(
-            "Auto-push disabled via NOTIFICATIONS_AUTO_PUSH_ENABLED, skipping delivery for notification %s",
+            "Auto-push disabled via NOTIFICATIONS_AUTO_PUSH_ENABLED, "
+            "skipping delivery for notification %s",
             notification.id,
         )
         return
