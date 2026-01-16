@@ -3506,7 +3506,7 @@ async def text_to_speech(request: TTSRequest) -> Response:
     Raises:
         400 Bad Request for invalid input (empty text, text too long)
     """
-    from handsfree.tts import StubTTSProvider
+    from handsfree.tts import get_tts_provider
 
     # Input validation
     if not request.text or not request.text.strip():
@@ -3527,10 +3527,9 @@ async def text_to_speech(request: TTSRequest) -> Response:
             },
         )
 
-    # For MVP, always use stub provider
-    # In production, check env var for real TTS provider selection
-    # provider = get_tts_provider()  # Would check HANDSFREE_TTS_PROVIDER env var
-    provider = StubTTSProvider()
+    # Use factory to get configured TTS provider
+    # Defaults to stub, but can be configured via HANDSFREE_TTS_PROVIDER env var
+    provider = get_tts_provider()
 
     try:
         audio_bytes, content_type = provider.synthesize(
