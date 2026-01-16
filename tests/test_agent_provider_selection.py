@@ -53,7 +53,8 @@ class TestProviderSelection:
 
         assert task is not None
         assert task.provider == "copilot"
-        assert task.state == "created"
+        # Task should auto-start to "running" state
+        assert task.state == "running"
         assert task.target_type == "issue"
         assert task.target_ref == "#123"
 
@@ -202,7 +203,7 @@ class TestStateCreation:
     """Test that tasks are created with correct initial state."""
 
     def test_task_created_with_initial_state(self, db_conn):
-        """Test that new tasks start in 'created' state."""
+        """Test that new tasks auto-start to 'running' state."""
         from handsfree.agents.service import AgentService
 
         service = AgentService(db_conn)
@@ -213,10 +214,10 @@ class TestStateCreation:
             provider="copilot",
         )
 
-        # Verify state
+        # Verify state - tasks now auto-start to "running"
         task_id = result["task_id"]
         task = get_agent_task_by_id(db_conn, task_id)
 
         assert task is not None
-        assert task.state == "created"
-        assert result["state"] == "created"
+        assert task.state == "running"
+        assert result["state"] == "running"

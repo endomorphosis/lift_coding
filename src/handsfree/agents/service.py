@@ -4,6 +4,7 @@ Handles agent task delegation and status queries.
 """
 
 import logging
+from datetime import UTC, datetime
 from typing import Any
 
 import duckdb
@@ -39,7 +40,7 @@ class AgentService:
         target_ref: str | None = None,
         trace: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Create a new agent task.
+        """Create a new agent task and start it via the provider.
 
         Args:
             user_id: User ID creating the task.
@@ -75,6 +76,81 @@ class AgentService:
             task_id=task.id,
             message=f"Agent task {task.id} created",
         )
+
+        # Start the task via the provider
+        try:
+            agent_provider = get_provider(provider)
+            start_result = agent_provider.start_task(task)
+
+            if start_result.get("ok"):
+                # Transition to "running" state
+                provider_trace = start_result.get("trace", {})
+                updated_task = update_agent_task_state(
+                    conn=self.conn,
+                    task_id=task.id,
+                    new_state="running",
+                    trace_update=provider_trace,
+                )
+
+                if updated_task:
+                    # Emit "running" notification
+                    self._emit_notification(
+                        user_id=user_id,
+                        event="task_running",
+                        task_id=task.id,
+                        message=f"Agent task {task.id} is now running",
+                    )
+                    
+                    # Update task reference with new state
+                    task = updated_task
+                    
+                    logger.info(
+                        "Started task %s with provider %s, transitioned to running",
+                        task.id,
+                        provider,
+                    )
+            else:
+                # Provider failed to start - log but don't fail the delegation
+                # Task remains in "created" state for manual intervention or retry
+                error_msg = start_result.get("message", "Unknown error")
+                logger.warning(
+                    "Failed to start task %s with provider %s: %s",
+                    task.id,
+                    provider,
+                    error_msg,
+                )
+                
+                # Update trace with error information
+                error_trace = {
+                    "start_error": error_msg,
+                    "start_failed_at": datetime.now(UTC).isoformat(),
+                }
+                updated_task = update_agent_task_state(
+                    conn=self.conn,
+                    task_id=task.id,
+                    new_state="created",  # Keep in created state
+                    trace_update=error_trace,
+                )
+                if updated_task:
+                    task = updated_task
+
+        except Exception as e:
+            # Log exception but don't fail the delegation
+            logger.exception("Exception while starting task %s with provider %s", task.id, provider)
+            
+            # Update trace with exception information
+            error_trace = {
+                "start_exception": str(e),
+                "start_failed_at": datetime.now(UTC).isoformat(),
+            }
+            updated_task = update_agent_task_state(
+                conn=self.conn,
+                task_id=task.id,
+                new_state="created",  # Keep in created state
+                trace_update=error_trace,
+            )
+            if updated_task:
+                task = updated_task
 
         # Generate spoken confirmation
         if target_type and target_ref:

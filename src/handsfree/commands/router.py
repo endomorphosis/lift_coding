@@ -122,7 +122,7 @@ class CommandRouter:
         elif intent.name.startswith("checks."):
             response = self._handle_checks_intent(intent, profile_config)
         elif intent.name.startswith("agent."):
-            response = self._handle_agent_intent(intent, profile_config)
+            response = self._handle_agent_intent(intent, profile_config, user_id)
         elif intent.name == "unknown":
             response = self._handle_unknown(intent, profile_config)
         else:
@@ -649,14 +649,33 @@ class CommandRouter:
         return spoken_text
 
     def _handle_agent_intent(
-        self, intent: ParsedIntent, profile_config: ProfileConfig
+        self,
+        intent: ParsedIntent,
+        profile_config: ProfileConfig,
+        user_id: str | None = None,
     ) -> dict[str, Any]:
-        """Handle agent-related intents."""
+        """Handle agent-related intents.
+        
+        Args:
+            intent: Parsed agent intent
+            profile_config: User's profile configuration
+            user_id: User identifier (required for agent operations)
+        """
         if intent.name == "agent.delegate":
             # This should normally be caught by confirmation flow,
             # but handle it here if confirmation was bypassed
             if not self._agent_service:
                 spoken_text = profile_config.truncate_spoken_text("Agent service not available.")
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
+            if not user_id:
+                spoken_text = profile_config.truncate_spoken_text(
+                    "User authentication required for agent delegation."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -692,9 +711,9 @@ class CommandRouter:
                 "created_at": datetime.now(UTC).isoformat(),
             }
 
-            # Create task (user_id would come from context in real implementation)
+            # Create task with authenticated user_id
             result = self._agent_service.delegate(
-                user_id="default-user",  # Placeholder
+                user_id=user_id,
                 instruction=instruction,
                 provider=provider,
                 target_type=target_type,
@@ -715,9 +734,12 @@ class CommandRouter:
             if not self._agent_service:
                 spoken_text = "Agent service not available."
             else:
-                # Get status (user_id would come from context in real implementation)
-                result = self._agent_service.get_status(user_id="default-user")
-                spoken_text = result.get("spoken_text", "No agent tasks.")
+                if not user_id:
+                    spoken_text = "User authentication required."
+                else:
+                    # Get status for authenticated user
+                    result = self._agent_service.get_status(user_id=user_id)
+                    spoken_text = result.get("spoken_text", "No agent tasks.")
 
             spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
@@ -736,9 +758,19 @@ class CommandRouter:
                     "spoken_text": spoken_text,
                 }
 
+            if not user_id:
+                spoken_text = profile_config.truncate_spoken_text(
+                    "User authentication required."
+                )
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
             task_id = intent.entities.get("task_id")
             try:
-                result = self._agent_service.pause_task(user_id="default-user", task_id=task_id)
+                result = self._agent_service.pause_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task paused.")
                 spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
@@ -764,9 +796,19 @@ class CommandRouter:
                     "spoken_text": spoken_text,
                 }
 
+            if not user_id:
+                spoken_text = profile_config.truncate_spoken_text(
+                    "User authentication required."
+                )
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
             task_id = intent.entities.get("task_id")
             try:
-                result = self._agent_service.resume_task(user_id="default-user", task_id=task_id)
+                result = self._agent_service.resume_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task resumed.")
                 spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
