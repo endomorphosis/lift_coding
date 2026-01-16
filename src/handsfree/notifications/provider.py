@@ -217,13 +217,143 @@ class WebPushProvider(NotificationDeliveryProvider):
             }
 
 
+class APNSProvider(NotificationDeliveryProvider):
+    """Apple Push Notification Service (APNS) provider stub.
+
+    This provider is a placeholder for future APNS integration.
+    It requires APNS credentials and will send notifications to iOS devices.
+    """
+
+    def __init__(
+        self,
+        team_id: str,
+        key_id: str,
+        key_path: str,
+        bundle_id: str,
+        use_sandbox: bool = False,
+    ):
+        """Initialize APNS provider with credentials.
+
+        Args:
+            team_id: Apple Developer Team ID.
+            key_id: APNS Key ID.
+            key_path: Path to the .p8 key file.
+            bundle_id: iOS app bundle identifier.
+            use_sandbox: Whether to use sandbox environment (default: False).
+        """
+        self.team_id = team_id
+        self.key_id = key_id
+        self.key_path = key_path
+        self.bundle_id = bundle_id
+        self.use_sandbox = use_sandbox
+
+        logger.info(
+            "APNSProvider initialized (stub mode) - team_id=%s, bundle_id=%s, sandbox=%s",
+            team_id,
+            bundle_id,
+            use_sandbox,
+        )
+
+    def send(
+        self,
+        subscription_endpoint: str,
+        notification_data: dict[str, Any],
+        subscription_keys: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Send an APNS notification (stub implementation).
+
+        Args:
+            subscription_endpoint: The device token.
+            notification_data: The notification payload to send.
+            subscription_keys: Optional APNS-specific keys (unused in stub).
+
+        Returns:
+            Dictionary with delivery result (stub returns success).
+        """
+        logger.info(
+            "APNSProvider (stub): Would send notification to device token %s: %s",
+            subscription_endpoint[:10] + "...",  # Log only first 10 chars for security
+            notification_data,
+        )
+
+        # In production, this would use aioapns or similar library to send
+        # the notification to Apple's APNS servers
+        return {
+            "ok": True,
+            "message": "APNS notification logged (stub mode)",
+            "delivery_id": f"apns-stub-{hash((subscription_endpoint, str(notification_data)))}",
+        }
+
+
+class FCMProvider(NotificationDeliveryProvider):
+    """Firebase Cloud Messaging (FCM) provider stub.
+
+    This provider is a placeholder for future FCM integration.
+    It requires FCM credentials and will send notifications to Android devices.
+    """
+
+    def __init__(
+        self,
+        project_id: str,
+        credentials_path: str,
+    ):
+        """Initialize FCM provider with credentials.
+
+        Args:
+            project_id: Firebase project ID.
+            credentials_path: Path to the service account JSON credentials file.
+        """
+        self.project_id = project_id
+        self.credentials_path = credentials_path
+
+        logger.info(
+            "FCMProvider initialized (stub mode) - project_id=%s",
+            project_id,
+        )
+
+    def send(
+        self,
+        subscription_endpoint: str,
+        notification_data: dict[str, Any],
+        subscription_keys: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Send an FCM notification (stub implementation).
+
+        Args:
+            subscription_endpoint: The FCM registration token.
+            notification_data: The notification payload to send.
+            subscription_keys: Optional FCM-specific keys (unused in stub).
+
+        Returns:
+            Dictionary with delivery result (stub returns success).
+        """
+        logger.info(
+            "FCMProvider (stub): Would send notification to FCM token %s: %s",
+            subscription_endpoint[:10] + "...",  # Log only first 10 chars for security
+            notification_data,
+        )
+
+        # In production, this would use firebase-admin or similar library
+        # to send the notification to Google's FCM servers
+        return {
+            "ok": True,
+            "message": "FCM notification logged (stub mode)",
+            "delivery_id": f"fcm-stub-{hash((subscription_endpoint, str(notification_data)))}",
+        }
+
+
 def get_notification_provider() -> NotificationDeliveryProvider | None:
     """Get the configured notification delivery provider.
 
     Reads the HANDSFREE_NOTIFICATION_PROVIDER environment variable:
     - "logger" or "dev": Returns DevLoggerProvider
     - "webpush": Returns WebPushProvider with VAPID configuration
+    - "apns": Returns APNSProvider with APNS configuration
+    - "fcm": Returns FCMProvider with FCM configuration
     - None or empty: Returns None (push notifications disabled)
+
+    Note: This function is kept for backward compatibility.
+    For platform-specific delivery, use get_provider_for_platform() instead.
 
     Returns:
         NotificationDeliveryProvider instance or None if disabled.
@@ -254,5 +384,127 @@ def get_notification_provider() -> NotificationDeliveryProvider | None:
             vapid_subject=vapid_subject,
         )
 
+    if provider_name == "apns":
+        # Get APNS configuration from environment
+        team_id = os.getenv("HANDSFREE_APNS_TEAM_ID", "")
+        key_id = os.getenv("HANDSFREE_APNS_KEY_ID", "")
+        key_path = os.getenv("HANDSFREE_APNS_KEY_PATH", "")
+        bundle_id = os.getenv("HANDSFREE_APNS_BUNDLE_ID", "")
+        use_sandbox = os.getenv("HANDSFREE_APNS_USE_SANDBOX", "false").lower() == "true"
+
+        if not team_id or not key_id or not key_path or not bundle_id:
+            logger.error(
+                "APNS provider requested but credentials not configured. "
+                "Required: HANDSFREE_APNS_TEAM_ID, HANDSFREE_APNS_KEY_ID, "
+                "HANDSFREE_APNS_KEY_PATH, HANDSFREE_APNS_BUNDLE_ID"
+            )
+            return None
+
+        return APNSProvider(
+            team_id=team_id,
+            key_id=key_id,
+            key_path=key_path,
+            bundle_id=bundle_id,
+            use_sandbox=use_sandbox,
+        )
+
+    if provider_name == "fcm":
+        # Get FCM configuration from environment
+        project_id = os.getenv("HANDSFREE_FCM_PROJECT_ID", "")
+        credentials_path = os.getenv("HANDSFREE_FCM_CREDENTIALS_PATH", "")
+
+        if not project_id or not credentials_path:
+            logger.error(
+                "FCM provider requested but credentials not configured. "
+                "Required: HANDSFREE_FCM_PROJECT_ID, HANDSFREE_FCM_CREDENTIALS_PATH"
+            )
+            return None
+
+        return FCMProvider(
+            project_id=project_id,
+            credentials_path=credentials_path,
+        )
+
     # Default: push notifications disabled
+    return None
+
+
+def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | None:
+    """Get the appropriate notification provider for a specific platform.
+
+    This function selects the correct provider based on the subscription platform,
+    allowing multi-platform push notification support (WebPush, APNS, FCM).
+
+    Args:
+        platform: Platform type ('webpush', 'apns', or 'fcm').
+
+    Returns:
+        NotificationDeliveryProvider instance or None if platform not supported/configured.
+    """
+    # Use dev logger if explicitly configured
+    default_provider = os.getenv("HANDSFREE_NOTIFICATION_PROVIDER", "").lower()
+    if default_provider in ("logger", "dev"):
+        return DevLoggerProvider()
+
+    # Platform-specific providers
+    if platform == "webpush":
+        vapid_public_key = os.getenv("HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY", "")
+        vapid_private_key = os.getenv("HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY", "")
+        vapid_subject = os.getenv("HANDSFREE_WEBPUSH_VAPID_SUBJECT", "")
+
+        if not vapid_public_key or not vapid_private_key or not vapid_subject:
+            logger.warning(
+                "WebPush credentials not configured. "
+                "Required: HANDSFREE_WEBPUSH_VAPID_PUBLIC_KEY, "
+                "HANDSFREE_WEBPUSH_VAPID_PRIVATE_KEY, "
+                "HANDSFREE_WEBPUSH_VAPID_SUBJECT"
+            )
+            return None
+
+        return WebPushProvider(
+            vapid_public_key=vapid_public_key,
+            vapid_private_key=vapid_private_key,
+            vapid_subject=vapid_subject,
+        )
+
+    if platform == "apns":
+        team_id = os.getenv("HANDSFREE_APNS_TEAM_ID", "")
+        key_id = os.getenv("HANDSFREE_APNS_KEY_ID", "")
+        key_path = os.getenv("HANDSFREE_APNS_KEY_PATH", "")
+        bundle_id = os.getenv("HANDSFREE_APNS_BUNDLE_ID", "")
+        use_sandbox = os.getenv("HANDSFREE_APNS_USE_SANDBOX", "false").lower() == "true"
+
+        if not team_id or not key_id or not key_path or not bundle_id:
+            logger.warning(
+                "APNS credentials not configured. "
+                "Required: HANDSFREE_APNS_TEAM_ID, HANDSFREE_APNS_KEY_ID, "
+                "HANDSFREE_APNS_KEY_PATH, HANDSFREE_APNS_BUNDLE_ID"
+            )
+            return None
+
+        return APNSProvider(
+            team_id=team_id,
+            key_id=key_id,
+            key_path=key_path,
+            bundle_id=bundle_id,
+            use_sandbox=use_sandbox,
+        )
+
+    if platform == "fcm":
+        project_id = os.getenv("HANDSFREE_FCM_PROJECT_ID", "")
+        credentials_path = os.getenv("HANDSFREE_FCM_CREDENTIALS_PATH", "")
+
+        if not project_id or not credentials_path:
+            logger.warning(
+                "FCM credentials not configured. "
+                "Required: HANDSFREE_FCM_PROJECT_ID, HANDSFREE_FCM_CREDENTIALS_PATH"
+            )
+            return None
+
+        return FCMProvider(
+            project_id=project_id,
+            credentials_path=credentials_path,
+        )
+
+    logger.warning("Unknown platform: %s", platform)
     return None

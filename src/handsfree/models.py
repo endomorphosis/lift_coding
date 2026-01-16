@@ -305,7 +305,12 @@ class TTSRequest(BaseModel):
 class CreateNotificationSubscriptionRequest(BaseModel):
     """Request to create a notification subscription."""
 
-    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL")
+    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL or device token")
+    platform: str = Field(
+        default="webpush",
+        description="Platform type: 'webpush', 'apns', or 'fcm'",
+        pattern="^(webpush|apns|fcm)$",
+    )
     subscription_keys: dict[str, str] | None = Field(
         default=None,
         description="Provider-specific subscription keys (e.g., auth, p256dh for WebPush)",
@@ -318,6 +323,7 @@ class NotificationSubscriptionResponse(BaseModel):
     id: str
     user_id: str
     endpoint: str
+    platform: str
     subscription_keys: dict[str, str]
     created_at: str
     updated_at: str
