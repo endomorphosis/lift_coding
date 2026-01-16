@@ -12,8 +12,8 @@ This checklist aligns the plan's MVP1–MVP4 items to what is already implemente
 - [x] Dev simulator: browser-based mic -> `/v1/command` -> TTS playback.
 
 Remaining (backend):
-- [ ] Production audio input fetch: support `https://` audio URIs (pre-signed URLs) with allowlists, size/time limits, and safe error handling.
-- [ ] Push delivery provider beyond dev logger (e.g., WebPush/APNS/FCM integration).
+- [x] Production audio input fetch: support `https://` audio URIs (pre-signed URLs) with allowlists, size/time limits, and safe error handling. ✅ Implemented in PR-020
+- [x] Push delivery provider beyond dev logger (e.g., WebPush/APNS/FCM integration). ✅ Implemented in PR-015 (WebPush) and PR-024 (APNS/FCM scaffolding)
 
 Remaining (client-side / out of repo):
 - [ ] Wearable audio capture -> mobile (or phone) pipeline.
@@ -38,7 +38,7 @@ Remaining (client-side):
 - [x] At least one write action implemented (request review / rerun checks / merge) behind policy.
 
 Remaining (backend):
-- [ ] Tighten auth story for production clients (API keys or session tokens) if needed.
+- [x] Tighten auth story for production clients (API keys or session tokens) if needed. ✅ Implemented in PR-018 (API key auth) and PR-023 (GitHub OAuth)
 
 ## MVP4: Agent delegation
 
@@ -48,8 +48,8 @@ Remaining (backend):
 - [x] Agent intents use authenticated `user_id` end-to-end (removed "default-user" placeholder usage).
 
 Remaining (backend):
-- [ ] Replace placeholder agent provider with a real integration (e.g., dispatcher that creates a GitHub issue/PR work item, plus correlation to webhook events to mark completion).
-- [ ] Notifications on agent task state changes via real push provider.
+- [x] Replace placeholder agent provider with a real integration (e.g., dispatcher that creates a GitHub issue/PR work item, plus correlation to webhook events to mark completion). ✅ Implemented in PR-016 (github_issue_dispatch provider with webhook correlation)
+- [ ] Notifications on agent task state changes via real push provider (currently uses DevLoggerProvider, needs production push provider selection based on user subscriptions).
 
 Remaining (external / infra):
 - [ ] A real agent runner (Copilot agent, workflow automation, or custom runner) that can act on dispatched tasks.
