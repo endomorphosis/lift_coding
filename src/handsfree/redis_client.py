@@ -5,7 +5,6 @@ Provides a central point for Redis connection management with graceful fallback.
 
 import logging
 import os
-
 from types import SimpleNamespace
 
 try:

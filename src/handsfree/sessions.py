@@ -14,7 +14,6 @@ import logging
 import secrets
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
-
 from types import SimpleNamespace
 
 try:
@@ -22,6 +21,7 @@ try:
 
     REDIS_AVAILABLE = True
 except ImportError:  # pragma: no cover
+
     class _RedisStubError(Exception):
         pass
 
