@@ -331,7 +331,6 @@ def _deliver_notification(
 
     # Track delivery results
     delivery_success = False
-    delivery_failure_count = 0
 
     # Send to all subscriptions using platform-specific providers
     for subscription in subscriptions:
@@ -345,7 +344,6 @@ def _deliver_notification(
                     subscription.platform,
                     subscription.id,
                 )
-                delivery_failure_count += 1
                 continue
 
             result = provider.send(
@@ -370,7 +368,6 @@ def _deliver_notification(
                     subscription.platform,
                     result.get("message"),
                 )
-                delivery_failure_count += 1
         except Exception as e:
             logger.error(
                 "Error delivering notification %s to subscription %s (platform=%s): %s",
@@ -380,7 +377,6 @@ def _deliver_notification(
                 e,
                 exc_info=True,
             )
-            delivery_failure_count += 1
 
     # Update delivery tracking in database
     now = datetime.now(UTC)
