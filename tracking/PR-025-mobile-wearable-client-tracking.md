@@ -3,6 +3,17 @@
 ## Goal
 Capture the MVP mobile + wearable deliverables as a concrete checklist and define the integration points to the backend.
 
+## Target Platforms for First Demo
+The first demo will target:
+- **iOS** (iPhone) as the primary mobile platform
+- **Meta AI glasses** (Ray-Ban Meta Smart Glasses) as the wearable device
+
+This combination provides:
+- iOS ecosystem integration (APNS, iOS Speech framework, iOS audio session management)
+- Meta AI glasses for hands-free audio capture and playback via Bluetooth
+- Proven Bluetooth audio pipeline (Meta glasses ↔ iPhone)
+- Growing developer ecosystem for Meta AI glasses
+
 ## Background
 The backend is largely MVP-ready, but the plan requires a mobile/wearable client to:
 - capture audio (wearable → phone)
@@ -14,7 +25,7 @@ This repo does not currently contain the mobile client implementation.
 
 ## Scope (docs-only in this repo)
 - Create a clear checklist of mobile/wearable features:
-  - wearable audio capture → phone bridge
+  - wearable audio capture → phone bridge (Meta AI glasses → iPhone via Bluetooth)
   - push-to-talk UX and error handling
   - STT routing decision (on-device vs backend)
   - TTS playback (phone + wearable)
@@ -26,6 +37,7 @@ This repo does not currently contain the mobile client implementation.
   - `GET /v1/status`
   - push registration endpoint(s) (from PR-024)
 - Recommend repo/project separation (new mobile workspace) and CI strategy.
+- Define Meta AI glasses integration approach (Bluetooth audio, Meta SDK if available)
 
 ## Non-goals
 - Implementing the mobile app in this repo.
@@ -39,7 +51,14 @@ This repo does not currently contain the mobile client implementation.
 ## MVP Feature Checklist
 
 ### 1. Wearable Audio Capture & Phone Bridge
-- [ ] **Wearable → Phone Audio Transfer**
+- [ ] **Meta AI Glasses → iPhone Audio Transfer**
+  - [ ] Configure iOS app to receive Bluetooth audio from Meta AI glasses
+  - [ ] Implement audio session management for Bluetooth input
+  - [ ] Handle audio buffering and format conversion
+  - [ ] Add fallback for connection issues or audio quality degradation
+  - [ ] Test with Ray-Ban Meta Smart Glasses
+
+- [ ] **Apple Watch → iPhone Audio Transfer** (Alternative/Future)
   - [ ] Configure Apple Watch audio session for recording
   - [ ] Implement WatchConnectivity bridge to transfer audio data to iPhone
   - [ ] Handle audio buffering and compression for efficient transfer
@@ -53,17 +72,21 @@ This repo does not currently contain the mobile client implementation.
 
 ### 2. Push-to-Talk UX & Error Handling
 - [ ] **Recording Interface**
-  - [ ] Push-to-talk button with visual feedback (recording indicator)
+  - [ ] Push-to-talk trigger via Meta AI glasses button (capture event from glasses)
+  - [ ] iPhone app button as backup/alternative trigger
+  - [ ] Visual feedback in app (recording indicator)
   - [ ] Audio waveform visualization during recording
   - [ ] Recording duration counter
-  - [ ] Haptic feedback on start/stop
+  - [ ] Haptic feedback on iPhone for start/stop confirmation
 
 - [ ] **Error States**
   - [ ] Handle microphone permission denied
+  - [ ] Handle Meta AI glasses Bluetooth disconnection
   - [ ] Handle no network connectivity (queue for retry)
   - [ ] Handle audio capture failures
   - [ ] Display user-friendly error messages
   - [ ] Implement retry logic with exponential backoff
+  - [ ] Provide audio quality warnings for poor Bluetooth connection
 
 - [ ] **UX Polish**
   - [ ] Loading states while processing command
@@ -109,13 +132,20 @@ This repo does not currently contain the mobile client implementation.
   - [ ] Display debug info in dev panel
 
 ### 5. TTS Playback (Phone + Wearable)
-- [ ] **Phone TTS Playback**
+- [ ] **Meta AI Glasses TTS Playback** (Primary)
   - [ ] Call `/v1/tts` with spoken text from response
-  - [ ] Play audio response through phone speaker
+  - [ ] Play audio response through Meta AI glasses speakers via Bluetooth
+  - [ ] Handle Bluetooth audio routing and connection issues
+  - [ ] Provide fallback to iPhone speaker if glasses disconnected
+  - [ ] Add playback controls (pause, replay via app if glasses don't support)
+
+- [ ] **iPhone TTS Playback** (Backup/Alternative)
+  - [ ] Call `/v1/tts` with spoken text from response
+  - [ ] Play audio response through iPhone speaker
   - [ ] Add playback controls (pause, replay, speed adjust)
   - [ ] Handle TTS errors gracefully
 
-- [ ] **Wearable TTS Playback**
+- [ ] **Apple Watch TTS Playback** (Future)
   - [ ] Transfer TTS audio to Apple Watch
   - [ ] Play audio through watch speaker
   - [ ] Sync playback state between phone and watch
@@ -247,6 +277,101 @@ This repo does not currently contain the mobile client implementation.
   - [ ] Test recording cancellation
   - [ ] Test notification tap actions
   - [ ] Test settings changes
+
+---
+
+## Meta AI Glasses Integration Details
+
+### Hardware: Ray-Ban Meta Smart Glasses
+
+The first demo targets Ray-Ban Meta Smart Glasses, which provide:
+- **Microphones**: Built-in mics for voice capture
+- **Speakers**: Open-ear speakers for audio playback
+- **Button**: Physical button for triggering actions
+- **Bluetooth**: Standard Bluetooth connectivity to iPhone
+- **Battery**: Independent power source
+
+### Integration Architecture
+
+**Audio Capture Flow**:
+1. User presses button on Meta AI glasses
+2. Glasses capture audio via built-in microphones
+3. Audio streams to iPhone via Bluetooth (standard Bluetooth audio profile)
+4. iPhone app receives audio and sends to backend `/v1/command`
+5. Backend processes and returns response
+
+**Audio Playback Flow**:
+1. Backend returns `spoken_text` in response
+2. iPhone app calls `/v1/tts` to get audio
+3. Audio plays through Meta AI glasses speakers via Bluetooth
+4. User hears response through glasses
+
+### Meta SDK/API Considerations
+
+**Option 1: Standard Bluetooth Audio** (Recommended for MVP)
+- Use iOS CoreBluetooth and AVAudioSession APIs
+- Treat Meta glasses as standard Bluetooth audio device
+- No Meta-specific SDK required
+- Works with any Bluetooth audio device (headphones, other smart glasses)
+- **Pros**: Simple, no vendor lock-in, faster to implement
+- **Cons**: Limited to basic audio I/O, no glasses-specific features
+
+**Option 2: Meta SDK Integration** (Future enhancement)
+- Use Meta's official SDK if/when available for developers
+- Access to glasses-specific features (button events, LED indicators, etc.)
+- Potential for richer integration (visual indicators, gesture support)
+- **Pros**: Better UX, more control over glasses features
+- **Cons**: Vendor-specific, SDK availability uncertain, more complex
+
+**MVP Recommendation**: Start with **Option 1** (standard Bluetooth) for fastest time-to-demo. Upgrade to Meta SDK if/when available and if enhanced features are needed.
+
+### Button Trigger Handling
+
+**Approach 1: Audio-Based Trigger** (MVP)
+- User presses button on glasses
+- Glasses emit a specific audio tone or start recording
+- iPhone detects audio start and begins processing
+- Simple to implement with standard Bluetooth audio
+
+**Approach 2: SDK-Based Trigger** (If Meta SDK available)
+- Meta SDK sends button press event to iPhone app
+- App explicitly starts recording audio stream
+- More precise control, better UX
+
+### Testing Strategy
+
+**Hardware Testing**:
+- [ ] Test with actual Ray-Ban Meta Smart Glasses
+- [ ] Test in various environments (quiet, noisy, outdoor)
+- [ ] Test with different Bluetooth distances
+- [ ] Test battery life impact on iPhone
+
+**Fallback Testing**:
+- [ ] Test with standard Bluetooth headphones (AirPods, etc.)
+- [ ] Test with iPhone microphone/speaker only
+- [ ] Ensure graceful degradation without glasses
+
+**Audio Quality Testing**:
+- [ ] Test STT accuracy with glasses microphones
+- [ ] Test TTS clarity through glasses speakers
+- [ ] Compare vs iPhone native audio quality
+
+### Meta AI Glasses Checklist Items
+
+Added to relevant sections above:
+- Bluetooth audio capture from Meta AI glasses
+- Button press trigger handling
+- TTS playback through glasses speakers
+- Connection/disconnection handling
+- Audio quality monitoring for Bluetooth
+- Fallback to iPhone when glasses unavailable
+
+### Future Enhancements for Meta Glasses
+
+- Multi-modal input (audio + camera if Meta provides SDK access)
+- Visual feedback via LED indicators (if SDK supports)
+- Gesture controls (if glasses hardware supports)
+- On-glasses notifications (if SDK supports display/audio cues)
 
 ---
 
@@ -549,14 +674,15 @@ This repo does not currently contain the mobile client implementation.
 ## Implementation Phases
 
 ### Phase 1: Core Command Loop (2-3 weeks)
-- Push-to-talk audio capture
+- Meta AI glasses Bluetooth audio capture
+- Push-to-talk button trigger from glasses
 - `/v1/command` integration (audio)
-- Basic TTS playback
+- Basic TTS playback through glasses speakers
 - Error handling and retry logic
-- **Goal**: End-to-end "record → transcribe → respond → play" loop
+- **Goal**: End-to-end "record via Meta glasses → transcribe → respond → play through glasses" loop
 
 ### Phase 2: Confirmation & Actions (1-2 weeks)
-- Pending action UI
+- Pending action UI (on iPhone)
 - `/v1/commands/confirm` integration
 - UICard rendering
 - Deep linking
@@ -565,23 +691,24 @@ This repo does not currently contain the mobile client implementation.
 ### Phase 3: Push Notifications (1-2 weeks)
 - APNS registration
 - Push notification reception
-- Notification UI and history
-- Optional TTS for notifications
-- **Goal**: Receive backend events in real-time
+- Notification UI and history (on iPhone)
+- Optional TTS playback through Meta glasses for notifications
+- **Goal**: Receive backend events in real-time and speak through glasses
 
 ### Phase 4: Dev Tools & Polish (1-2 weeks)
-- Debug panel and transcript viewer
+- Debug panel and transcript viewer (on iPhone)
 - Fixture replay
-- Settings screen
+- Settings screen (iPhone) - configure glasses behavior
 - Accessibility improvements
+- Bluetooth connection monitoring and diagnostics
 - **Goal**: Developer-friendly testing and refinement
 
 ### Phase 5: Production Readiness (1 week)
 - OAuth login flow
 - Production backend configuration
-- App Store submission prep
+- TestFlight distribution for beta testing with Meta glasses
 - Privacy policy and permissions
-- **Goal**: Submit to App Store
+- **Goal**: Beta testing with real users and Meta glasses
 
 ---
 
@@ -590,12 +717,17 @@ This repo does not currently contain the mobile client implementation.
 **Open Questions**:
 1. Should mobile app include on-device intent parsing?
 2. What's the strategy for offline command queuing?
-3. How to handle wearable-only mode (no phone needed)?
-4. Should we support Android or focus on iOS first?
+3. Does Meta provide an official SDK for Ray-Ban Meta Smart Glasses developer access?
+4. How to handle wearable-only mode (Meta glasses without phone nearby)?
+5. Should we support Android or focus on iOS first? (Meta glasses work with both platforms)
+6. Can we access camera feed from Meta glasses for multi-modal commands?
 
 **Future Enhancements**:
-- Background audio monitoring (always-listening mode)
+- Background audio monitoring (always-listening mode via glasses)
 - Siri Shortcuts integration
 - Widget for quick actions
 - CarPlay support for in-car use
 - Multi-device sync (iPad, Mac)
+- Apple Watch support as alternative wearable
+- Android support for Meta glasses + Android phone
+- Camera-based commands if Meta SDK provides access
