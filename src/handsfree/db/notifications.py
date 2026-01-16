@@ -28,10 +28,12 @@ class Notification:
     created_at: datetime
     priority: int = 3
     profile: str = "default"
+    last_delivery_attempt: datetime | None = None
+    delivery_status: str = "pending"  # pending, success, failed
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for API responses."""
-        return {
+        result = {
             "id": self.id,
             "user_id": self.user_id,
             "event_type": self.event_type,
@@ -41,6 +43,12 @@ class Notification:
             "priority": self.priority,
             "profile": self.profile,
         }
+        # Only include delivery fields if they're set
+        if self.last_delivery_attempt:
+            result["last_delivery_attempt"] = self.last_delivery_attempt.isoformat()
+        if self.delivery_status != "pending":
+            result["delivery_status"] = self.delivery_status
+        return result
 
 
 def generate_dedupe_key(event_type: str, metadata: dict[str, Any] | None) -> str:
@@ -283,10 +291,25 @@ def _deliver_notification(
         notification: Notification to deliver.
     """
     import logging
+    import os
 
     from handsfree.notifications.provider import get_provider_for_platform
 
     logger = logging.getLogger(__name__)
+
+    # Check if auto-push is enabled
+    auto_push_enabled = os.getenv("NOTIFICATIONS_AUTO_PUSH_ENABLED", "true").lower() in (
+        "true",
+        "1",
+        "yes",
+    )
+    if not auto_push_enabled:
+        logger.debug(
+            "Auto-push disabled via NOTIFICATIONS_AUTO_PUSH_ENABLED, "
+            "skipping delivery for notification %s",
+            notification.id,
+        )
+        return
 
     # Get subscriptions for this user
     from handsfree.db.notification_subscriptions import list_subscriptions
@@ -295,6 +318,7 @@ def _deliver_notification(
 
     if not subscriptions:
         logger.debug("No push subscriptions for user %s, skipping delivery", notification.user_id)
+        # Don't update delivery status - leave it as 'pending' to indicate no delivery was attempted
         return
 
     # Prepare notification payload
@@ -305,6 +329,9 @@ def _deliver_notification(
         "metadata": notification.metadata or {},
         "created_at": notification.created_at.isoformat(),
     }
+
+    # Track delivery results
+    delivery_success = False
 
     # Send to all subscriptions using platform-specific providers
     for subscription in subscriptions:
@@ -333,6 +360,7 @@ def _deliver_notification(
                     subscription.platform,
                     result.get("delivery_id"),
                 )
+                delivery_success = True
             else:
                 logger.warning(
                     "Failed to deliver notification %s to subscription %s (platform=%s): %s",
@@ -350,6 +378,24 @@ def _deliver_notification(
                 e,
                 exc_info=True,
             )
+
+    # Update delivery tracking in database
+    now = datetime.now(UTC)
+    if delivery_success:
+        # At least one delivery succeeded
+        delivery_status = "success"
+    else:
+        # All deliveries failed (or no provider available)
+        delivery_status = "failed"
+
+    conn.execute(
+        """
+        UPDATE notifications
+        SET last_delivery_attempt = ?, delivery_status = ?
+        WHERE id = ?
+        """,
+        [now, delivery_status, notification.id],
+    )
 
 
 def list_notifications(
@@ -383,7 +429,8 @@ def list_notifications(
 
     if since:
         query = """
-            SELECT id, user_id, event_type, message, metadata, created_at, priority, profile
+            SELECT id, user_id, event_type, message, metadata, created_at, priority, profile,
+                   last_delivery_attempt, delivery_status
             FROM notifications
             WHERE user_id = ? AND created_at > ?
             ORDER BY created_at DESC
@@ -392,7 +439,8 @@ def list_notifications(
         params = [user_uuid, since, limit]
     else:
         query = """
-            SELECT id, user_id, event_type, message, metadata, created_at, priority, profile
+            SELECT id, user_id, event_type, message, metadata, created_at, priority, profile,
+                   last_delivery_attempt, delivery_status
             FROM notifications
             WHERE user_id = ?
             ORDER BY created_at DESC
@@ -414,6 +462,8 @@ def list_notifications(
             profile=row[7]
             if len(row) > 7
             else "default",  # Default profile for backward compatibility
+            last_delivery_attempt=row[8] if len(row) > 8 else None,
+            delivery_status=row[9] if len(row) > 9 else "pending",
         )
         for row in result
     ]
