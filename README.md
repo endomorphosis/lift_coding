@@ -107,6 +107,80 @@ Configure the containerized API using these environment variables:
 | `GITHUB_APP_PRIVATE_KEY_PEM` | - | GitHub App private key (optional) |
 | `GITHUB_INSTALLATION_ID` | - | GitHub App installation ID (optional) |
 
+### Authentication
+
+HandsFree Dev Companion supports three authentication modes:
+
+#### Development Mode (default)
+```bash
+export HANDSFREE_AUTH_MODE=dev
+```
+- Accepts `X-User-Id` header for testing
+- Falls back to a fixture user ID if no header is provided
+- **Not for production use**
+
+#### JWT Mode
+```bash
+export HANDSFREE_AUTH_MODE=jwt
+export JWT_SECRET_KEY=your-secret-key
+export JWT_ALGORITHM=HS256  # optional, defaults to HS256
+```
+- Requires valid JWT bearer tokens
+- Extracts `user_id` from token claims (`user_id`, `sub`, or `uid`)
+- Suitable for integration with existing auth systems
+
+#### API Key Mode
+```bash
+export HANDSFREE_AUTH_MODE=api_key
+```
+- Requires API keys stored in DuckDB
+- Keys are hashed with SHA256 (never stored in plaintext)
+- Suitable for mobile clients and service-to-service auth
+
+**Creating API Keys:**
+
+Use the CLI tool to manage API keys:
+
+```bash
+# Create a new API key
+python scripts/manage_api_keys.py create USER_ID --label "Mobile app"
+
+# List API keys for a user
+python scripts/manage_api_keys.py list USER_ID
+
+# Revoke an API key
+python scripts/manage_api_keys.py revoke USER_ID KEY_ID
+```
+
+Or use the API endpoints (requires authentication):
+
+```bash
+# Create a new API key
+curl -X POST http://localhost:8080/v1/admin/api-keys \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"label": "Mobile app"}'
+
+# List your API keys
+curl http://localhost:8080/v1/admin/api-keys \
+  -H "Authorization: Bearer YOUR_TOKEN"
+
+# Revoke an API key
+curl -X DELETE http://localhost:8080/v1/admin/api-keys/KEY_ID \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+**Using API Keys:**
+
+Once created, use the API key as a bearer token:
+
+```bash
+curl http://localhost:8080/v1/command \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{...}'
+```
+
 ### Production Considerations
 
 - **Secrets**: Never bake secrets into the image. Use environment variables or secret management systems.
