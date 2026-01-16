@@ -505,7 +505,11 @@ class CommandRouter:
             spoken_text = "You have 2 pull requests waiting for review and 1 check that's failing."
         elif profile == Profile.RELAXED:
             # Detailed: full context
-            spoken_text = "You have 2 pull requests waiting for your review. PR 142 from alice and PR 145 from bob. There's also 1 failing check on PR 145 that needs attention."
+            spoken_text = (
+                "You have 2 pull requests waiting for your review. "
+                "PR 142 from alice and PR 145 from bob. "
+                "There's also 1 failing check on PR 145 that needs attention."
+            )
         else:  # DEFAULT
             # Balanced
             spoken_text = "You have 2 PRs waiting for review and 1 failing check."
@@ -535,16 +539,35 @@ class CommandRouter:
                 spoken_text = f"PR {pr_num}: command system."
             elif profile == Profile.COMMUTE:
                 # Brief: 2-3 sentences, essential info
-                spoken_text = f"PR {pr_num} adds the command system. It includes intent parsing and profile support."
+                spoken_text = (
+                    f"PR {pr_num} adds the command system. "
+                    "It includes intent parsing and profile support."
+                )
             elif profile == Profile.FOCUSED:
                 # Minimal: brief, actionable
-                spoken_text = f"PR {pr_num} adds command system with intent parsing. Ready for review."
+                spoken_text = (
+                    f"PR {pr_num} adds command system with intent parsing. "
+                    "Ready for review."
+                )
             elif profile == Profile.KITCHEN:
                 # Moderate: 3-4 sentences, conversational
-                spoken_text = f"PR {pr_num} adds the command system with intent parsing. It supports profiles like workout and commute. The system includes confirmation flow for side effects."
+                spoken_text = (
+                    f"PR {pr_num} adds the command system with intent parsing. "
+                    "It supports profiles like workout and commute. "
+                    "The system includes confirmation flow for side effects."
+                )
             elif profile == Profile.RELAXED:
                 # Detailed: full context, all details
-                spoken_text = f"PR {pr_num} adds the command system with intent parsing and profile support. The system recognizes voice commands and routes them to appropriate handlers. It includes profiles for workout, commute, kitchen, focused, and relaxed contexts. There's a confirmation flow for side-effect intents, and the spoken responses are adjusted based on the active profile."
+                spoken_text = (
+                    f"PR {pr_num} adds the command system with intent parsing "
+                    "and profile support. "
+                    "The system recognizes voice commands and routes them to "
+                    "appropriate handlers. "
+                    "It includes profiles for workout, commute, kitchen, focused, "
+                    "and relaxed contexts. "
+                    "There's a confirmation flow for side-effect intents, "
+                    "and the spoken responses are adjusted based on the active profile."
+                )
             else:  # DEFAULT
                 # Balanced
                 spoken_text = f"PR {pr_num} adds the command system with intent parsing."

@@ -716,7 +716,6 @@ class TestProfileVerbosityTuning:
         # Get responses for all profiles
         workout = router.route(intent, Profile.WORKOUT)
         focused = router.route(intent, Profile.FOCUSED)
-        commute = router.route(intent, Profile.COMMUTE)
         default = router.route(intent, Profile.DEFAULT)
         kitchen = router.route(intent, Profile.KITCHEN)
         relaxed = router.route(intent, Profile.RELAXED)
@@ -724,12 +723,11 @@ class TestProfileVerbosityTuning:
         # Count words
         workout_words = len(workout["spoken_text"].split())
         focused_words = len(focused["spoken_text"].split())
-        commute_words = len(commute["spoken_text"].split())
         default_words = len(default["spoken_text"].split())
         kitchen_words = len(kitchen["spoken_text"].split())
         relaxed_words = len(relaxed["spoken_text"].split())
         
-        # Verify ordering: workout <= focused <= default <= commute/kitchen <= relaxed
+        # Verify ordering: workout <= focused <= default <= kitchen <= relaxed
         assert workout_words <= focused_words
         assert focused_words <= default_words
         assert relaxed_words >= kitchen_words
