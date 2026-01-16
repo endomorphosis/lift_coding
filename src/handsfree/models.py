@@ -287,6 +287,32 @@ class RepoSubscriptionsListResponse(BaseModel):
     subscriptions: list[RepoSubscriptionResponse]
 
 
+class GitHubOAuthStartResponse(BaseModel):
+    """Response for GitHub OAuth start endpoint."""
+
+    authorize_url: str = Field(
+        ...,
+        description="GitHub OAuth authorization URL to redirect user to",
+    )
+    state: str | None = Field(
+        default=None,
+        description="Optional state parameter for CSRF protection",
+    )
+
+
+class GitHubOAuthCallbackResponse(BaseModel):
+    """Response for successful GitHub OAuth callback."""
+
+    connection_id: str = Field(
+        ...,
+        description="ID of the created/updated GitHub connection",
+    )
+    scopes: str | None = Field(
+        default=None,
+        description="OAuth scopes granted by the user",
+    )
+
+
 class TTSRequest(BaseModel):
     """Text-to-speech request."""
 
