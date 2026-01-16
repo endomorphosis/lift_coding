@@ -322,8 +322,8 @@ class TestPlatformProviderSelection:
 
     def test_get_provider_returns_none_when_credentials_missing(self):
         """Test that None is returned when credentials are not configured."""
-        # Clear any environment variables
-        for key in os.environ.keys():
+        # Clear any environment variables (use list() to avoid RuntimeError)
+        for key in list(os.environ.keys()):
             if key.startswith("HANDSFREE_APNS_") or key.startswith("HANDSFREE_FCM_"):
                 del os.environ[key]
 
@@ -444,13 +444,13 @@ class TestMigrationCompatibility:
 
     def test_platform_field_exists_in_schema(self, db_conn):
         """Test that platform field exists in the notification_subscriptions table."""
-        # Query the table schema
+        # Query the table schema using PRAGMA table_info
         result = db_conn.execute(
-            "SELECT column_name FROM information_schema.columns "
-            "WHERE table_name = 'notification_subscriptions'"
+            "PRAGMA table_info(notification_subscriptions)"
         ).fetchall()
 
-        column_names = [row[0] for row in result]
+        # PRAGMA table_info returns: (cid, name, type, notnull, dflt_value, pk)
+        column_names = [row[1] for row in result]
         assert "platform" in column_names
 
     def test_platform_index_exists(self, db_conn):
