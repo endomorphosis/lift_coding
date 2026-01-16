@@ -45,6 +45,7 @@ Remaining (backend):
 - [x] `agent.delegate` intent exists.
 - [x] Agent task persistence + lifecycle state model exist.
 - [x] Dev-only endpoints exist to drive task transitions.
+- [x] Agent intents use authenticated `user_id` end-to-end (removed "default-user" placeholder usage).
 
 Remaining (backend):
 - [ ] Replace placeholder agent provider with a real integration (e.g., dispatcher that creates a GitHub issue/PR work item, plus correlation to webhook events to mark completion).
