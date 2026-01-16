@@ -65,7 +65,7 @@ If you have access to GitHub Copilot workspace agents, you can configure Copilot
 - Less control over execution logic
 - May require GitHub support to configure
 
-**Setup**: Contact GitHub support to configure a Copilot agent for your dispatch repository. The agent should be instructed to monitor issues with the `copilot-agent` label and create PRs that reference the dispatch issue.
+**Setup**: Configure a GitHub Copilot agent for your dispatch repository through the GitHub web interface or API. The agent should be configured to monitor issues with the `copilot-agent` label and create PRs that reference the dispatch issue. Refer to GitHub Copilot documentation for specific configuration steps.
 
 ### Option 3: Custom Runner (Docker + Python)
 

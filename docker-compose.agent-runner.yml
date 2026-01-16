@@ -28,7 +28,7 @@ services:
       
       # GitHub personal access token with 'repo' scope
       # Or use GitHub App credentials (see below)
-      - GITHUB_TOKEN=${AGENT_RUNNER_GITHUB_TOKEN:?AGENT_RUNNER_GITHUB_TOKEN is required}
+      - GITHUB_TOKEN=${AGENT_RUNNER_GITHUB_TOKEN:?Error: AGENT_RUNNER_GITHUB_TOKEN environment variable is required. Please set your GitHub personal access token.}
       
       # Optional: GitHub App authentication (alternative to personal token)
       # - GITHUB_APP_ID=${GITHUB_APP_ID}

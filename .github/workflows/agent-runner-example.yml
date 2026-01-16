@@ -183,7 +183,7 @@ jobs:
           git config user.email "agent-runner-bot@users.noreply.github.com"
           
           # Read the instruction
-          INSTRUCTION=$(cat ../tmp/instruction.txt)
+          INSTRUCTION=$(cat ../tmp/instruction.txt 2>/dev/null || echo "No instruction provided")
           
           # Example: Create a simple output file
           # In a real agent, you would:
@@ -250,7 +250,7 @@ jobs:
           git push origin "$BRANCH_NAME"
           
           # Read instruction for PR body
-          INSTRUCTION=$(cat ../tmp/instruction.txt)
+          INSTRUCTION=$(cat ../tmp/instruction.txt 2>/dev/null || echo "No instruction provided")
           
           # Create PR with correlation metadata
           # IMPORTANT: The PR body must include either:
