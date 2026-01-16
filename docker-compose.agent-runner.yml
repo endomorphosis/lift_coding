@@ -1,0 +1,265 @@
+# Docker Compose configuration for custom agent runner
+#
+# This docker-compose file demonstrates how to run a custom agent runner
+# that polls the dispatch repository for new issues and processes them.
+#
+# SETUP INSTRUCTIONS:
+# 1. Copy this file to your project root
+# 2. Create a .env file with required environment variables (see .env.example)
+# 3. Build the agent runner image: docker-compose -f docker-compose.agent-runner.yml build
+# 4. Run the agent runner: docker-compose -f docker-compose.agent-runner.yml up -d
+# 5. Monitor logs: docker-compose -f docker-compose.agent-runner.yml logs -f
+#
+# See docs/agent-runner-setup.md for detailed setup instructions.
+
+version: '3.8'
+
+services:
+  agent-runner:
+    build:
+      context: ./agent-runner
+      dockerfile: Dockerfile
+    container_name: handsfree-agent-runner
+    
+    environment:
+      # =========================================
+      # GitHub Configuration (REQUIRED)
+      # =========================================
+      
+      # GitHub personal access token with 'repo' scope
+      # Or use GitHub App credentials (see below)
+      - GITHUB_TOKEN=${AGENT_RUNNER_GITHUB_TOKEN:?AGENT_RUNNER_GITHUB_TOKEN is required}
+      
+      # Optional: GitHub App authentication (alternative to personal token)
+      # - GITHUB_APP_ID=${GITHUB_APP_ID}
+      # - GITHUB_APP_PRIVATE_KEY_PATH=/secrets/github-app-key.pem
+      # - GITHUB_APP_INSTALLATION_ID=${GITHUB_APP_INSTALLATION_ID}
+      
+      # =========================================
+      # Dispatch Repository Configuration
+      # =========================================
+      
+      # Repository where dispatch issues are created
+      # Format: owner/repo (e.g., endomorphosis/lift_coding_dispatch)
+      - DISPATCH_REPO=${HANDSFREE_AGENT_DISPATCH_REPO:-endomorphosis/lift_coding_dispatch}
+      
+      # How often to poll for new issues (in seconds)
+      # Recommended: 30-60 seconds to avoid rate limiting
+      - POLL_INTERVAL_SECONDS=${AGENT_POLL_INTERVAL:-30}
+      
+      # Label to filter dispatch issues
+      # Default: copilot-agent
+      - DISPATCH_LABEL=${DISPATCH_LABEL:-copilot-agent}
+      
+      # =========================================
+      # Agent Configuration
+      # =========================================
+      
+      # Agent name for identification in comments and logs
+      - AGENT_NAME=${AGENT_NAME:-custom-agent}
+      
+      # Maximum number of concurrent tasks to process
+      # Set to 1 for sequential processing
+      - MAX_CONCURRENT_TASKS=${MAX_CONCURRENT_TASKS:-1}
+      
+      # Task processing timeout (in seconds)
+      # Tasks exceeding this timeout will be marked as failed
+      - TASK_TIMEOUT_SECONDS=${TASK_TIMEOUT_SECONDS:-600}
+      
+      # =========================================
+      # LLM Configuration (Optional)
+      # =========================================
+      
+      # LLM provider to use for code generation
+      # Options: openai, anthropic, azure, local
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      
+      # API key for LLM provider
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      
+      # Model to use (e.g., gpt-4, claude-3-opus, etc.)
+      - LLM_MODEL=${LLM_MODEL:-gpt-4}
+      
+      # API endpoint (for custom/local providers)
+      - LLM_API_ENDPOINT=${LLM_API_ENDPOINT:-}
+      
+      # =========================================
+      # Workspace Configuration
+      # =========================================
+      
+      # Directory for cloning and processing repositories
+      - WORKSPACE_DIR=/workspace
+      
+      # Whether to cleanup workspace after each task
+      # Set to false for debugging
+      - CLEANUP_WORKSPACE=${CLEANUP_WORKSPACE:-true}
+      
+      # Maximum workspace size (in MB)
+      # Prevents disk space issues
+      - MAX_WORKSPACE_SIZE_MB=${MAX_WORKSPACE_SIZE_MB:-10240}
+      
+      # =========================================
+      # Logging Configuration
+      # =========================================
+      
+      # Log level: DEBUG, INFO, WARNING, ERROR
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      
+      # Log format: text, json
+      # Use json for better observability in production
+      - LOG_FORMAT=${LOG_FORMAT:-text}
+      
+      # Log output: stdout, file, both
+      - LOG_OUTPUT=${LOG_OUTPUT:-stdout}
+      
+      # Log file path (if LOG_OUTPUT includes 'file')
+      - LOG_FILE_PATH=/app/logs/agent-runner.log
+      
+      # =========================================
+      # Monitoring Configuration (Optional)
+      # =========================================
+      
+      # Enable Prometheus metrics endpoint
+      - ENABLE_METRICS=${ENABLE_METRICS:-false}
+      
+      # Metrics port (exposed if ENABLE_METRICS=true)
+      - METRICS_PORT=${METRICS_PORT:-9090}
+      
+      # Enable health check endpoint
+      - ENABLE_HEALTH_CHECK=${ENABLE_HEALTH_CHECK:-true}
+      
+      # Health check port
+      - HEALTH_CHECK_PORT=${HEALTH_CHECK_PORT:-8080}
+      
+      # =========================================
+      # Error Handling Configuration
+      # =========================================
+      
+      # Maximum retries for failed tasks
+      - MAX_TASK_RETRIES=${MAX_TASK_RETRIES:-3}
+      
+      # Retry delay (in seconds)
+      - RETRY_DELAY_SECONDS=${RETRY_DELAY_SECONDS:-60}
+      
+      # Whether to comment on issues when tasks fail
+      - COMMENT_ON_FAILURE=${COMMENT_ON_FAILURE:-true}
+      
+      # Whether to close issues after successful processing
+      - CLOSE_ISSUES_ON_SUCCESS=${CLOSE_ISSUES_ON_SUCCESS:-false}
+    
+    volumes:
+      # Workspace for cloning and processing repositories
+      - agent-workspace:/workspace
+      
+      # Persistent storage for agent state
+      - agent-data:/app/data
+      
+      # Log storage (if LOG_OUTPUT includes 'file')
+      - agent-logs:/app/logs
+      
+      # Optional: mount custom plugins or scripts
+      # - ./agent-runner/plugins:/app/plugins:ro
+      
+      # Optional: mount GitHub App private key
+      # - ./secrets/github-app-key.pem:/secrets/github-app-key.pem:ro
+    
+    # Expose ports for monitoring (optional)
+    ports:
+      # Metrics endpoint (if enabled)
+      - "${METRICS_PORT:-9090}:${METRICS_PORT:-9090}"
+      # Health check endpoint (if enabled)
+      - "${HEALTH_CHECK_PORT:-8080}:${HEALTH_CHECK_PORT:-8080}"
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Resource limits (adjust based on your needs)
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${HEALTH_CHECK_PORT:-8080}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    networks:
+      - agent-runner-net
+
+  # Optional: Redis for caching and task queue
+  # Uncomment if you want to add Redis for better scalability
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: agent-runner-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   networks:
+  #     - agent-runner-net
+  #   restart: unless-stopped
+
+  # Optional: Prometheus for metrics collection
+  # Uncomment if you want to monitor agent metrics
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: agent-runner-prometheus
+  #   ports:
+  #     - "9091:9090"
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #     - prometheus-data:/prometheus
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #     - '--storage.tsdb.path=/prometheus'
+  #   networks:
+  #     - agent-runner-net
+  #   restart: unless-stopped
+
+  # Optional: Grafana for metrics visualization
+  # Uncomment if you want to visualize metrics
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: agent-runner-grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   networks:
+  #     - agent-runner-net
+  #   restart: unless-stopped
+
+networks:
+  agent-runner-net:
+    driver: bridge
+
+volumes:
+  # Agent workspace for repository processing
+  agent-workspace:
+    driver: local
+  
+  # Persistent agent data (state, cache, etc.)
+  agent-data:
+    driver: local
+  
+  # Log storage
+  agent-logs:
+    driver: local
+  
+  # Optional volumes for monitoring
+  # redis-data:
+  #   driver: local
+  # prometheus-data:
+  #   driver: local
+  # grafana-data:
+  #   driver: local
