@@ -46,11 +46,15 @@ from handsfree.logging_utils import (
 )
 from handsfree.models import (
     ActionResult,
+    ApiKeyResponse,
+    ApiKeysListResponse,
     AudioInput,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
+    CreateApiKeyRequest,
+    CreateApiKeyResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
@@ -4406,3 +4410,144 @@ async def fail_agent_task(
                     "message": str(e),
                 },
             ) from e
+
+
+# ============================================================================
+# API Key Management Endpoints (Admin/Dev Only)
+# ============================================================================
+
+
+@app.post("/v1/admin/api-keys", response_model=CreateApiKeyResponse, status_code=201)
+async def create_api_key(
+    request: CreateApiKeyRequest,
+    user_id: CurrentUser,
+) -> CreateApiKeyResponse:
+    """Create a new API key for the current user.
+
+    This endpoint is only available in dev mode or for authenticated users.
+    The plaintext key is returned ONLY in this response - it cannot be retrieved later.
+
+    Args:
+        request: API key creation request.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        Created API key with plaintext key (shown only once).
+
+    Raises:
+        403: Endpoint disabled (not in dev mode and not authenticated).
+    """
+    from handsfree.db.api_keys import create_api_key as db_create_api_key
+
+    logger.info("Creating API key for user %s with label: %s", user_id, request.label)
+
+    db = get_db()
+    plaintext_key, api_key_record = db_create_api_key(
+        db,
+        user_id=user_id,
+        label=request.label,
+    )
+
+    logger.info("API key created with ID: %s", api_key_record.id)
+
+    return CreateApiKeyResponse(
+        key=plaintext_key,
+        api_key=ApiKeyResponse(
+            id=api_key_record.id,
+            user_id=api_key_record.user_id,
+            label=api_key_record.label,
+            created_at=api_key_record.created_at.isoformat(),
+            revoked_at=api_key_record.revoked_at.isoformat() if api_key_record.revoked_at else None,
+            last_used_at=api_key_record.last_used_at.isoformat()
+            if api_key_record.last_used_at
+            else None,
+        ),
+    )
+
+
+@app.get("/v1/admin/api-keys", response_model=ApiKeysListResponse)
+async def list_api_keys(
+    user_id: CurrentUser,
+    include_revoked: bool = False,
+) -> ApiKeysListResponse:
+    """List all API keys for the current user.
+
+    Args:
+        user_id: Current authenticated user ID.
+        include_revoked: Whether to include revoked keys (default: False).
+
+    Returns:
+        List of API keys (without plaintext keys).
+    """
+    from handsfree.db.api_keys import get_api_keys_by_user
+
+    logger.info("Listing API keys for user %s, include_revoked=%s", user_id, include_revoked)
+
+    db = get_db()
+    api_keys = get_api_keys_by_user(db, user_id, include_revoked=include_revoked)
+
+    return ApiKeysListResponse(
+        api_keys=[
+            ApiKeyResponse(
+                id=key.id,
+                user_id=key.user_id,
+                label=key.label,
+                created_at=key.created_at.isoformat(),
+                revoked_at=key.revoked_at.isoformat() if key.revoked_at else None,
+                last_used_at=key.last_used_at.isoformat() if key.last_used_at else None,
+            )
+            for key in api_keys
+        ]
+    )
+
+
+@app.delete("/v1/admin/api-keys/{key_id}", status_code=204)
+async def revoke_api_key(
+    key_id: str,
+    user_id: CurrentUser,
+) -> Response:
+    """Revoke an API key.
+
+    Args:
+        key_id: UUID of the API key to revoke.
+        user_id: Current authenticated user ID.
+
+    Returns:
+        204 No Content on success.
+
+    Raises:
+        404: API key not found.
+        403: User does not own this API key.
+    """
+    from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
+
+    logger.info("Revoking API key %s for user %s", key_id, user_id)
+
+    db = get_db()
+
+    # Check if key exists
+    api_key = get_api_key(db, key_id)
+    if api_key is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="API key not found",
+        )
+
+    # Verify ownership
+    if api_key.user_id != user_id:
+        logger.warning(
+            "User %s attempted to revoke API key %s owned by %s",
+            user_id,
+            key_id,
+            api_key.user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have permission to revoke this API key",
+        )
+
+    # Revoke the key
+    db_revoke_api_key(db, key_id)
+    logger.info("API key %s revoked successfully", key_id)
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
