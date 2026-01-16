@@ -7,12 +7,10 @@ from unittest.mock import patch
 
 import httpx
 import pytest
-import respx
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.audio_fetch import fetch_audio_data, _get_config
-
+from handsfree.audio_fetch import _get_config, fetch_audio_data
 
 client = TestClient(app)
 
@@ -41,7 +39,7 @@ class TestAudioFetchHTTPS:
         """Test successful HTTPS audio fetch from allowed host."""
         audio_data = b"mock audio data from https"
         mock_url = "https://storage.example.com/audio/sample.wav"
-        
+
         # Mock the HTTP response
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
@@ -53,7 +51,7 @@ class TestAudioFetchHTTPS:
                 },
             )
         )
-        
+
         # Allow this host
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             result = fetch_audio_data(mock_url)
@@ -62,7 +60,7 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_host_not_in_allowlist(self, respx_mock):
         """Test HTTPS audio fetch fails when host is not in allowlist."""
         mock_url = "https://untrusted.example.com/audio/sample.wav"
-        
+
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
                 200,
@@ -70,7 +68,7 @@ class TestAudioFetchHTTPS:
                 headers={"content-type": "audio/wav"},
             )
         )
-        
+
         # Configure allowlist without this host
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "trusted.example.com"}):
             with pytest.raises(ValueError) as exc_info:
@@ -81,7 +79,7 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_host_in_denylist(self, respx_mock):
         """Test HTTPS audio fetch fails when host is in denylist."""
         mock_url = "https://blocked.example.com/audio/sample.wav"
-        
+
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
                 200,
@@ -89,7 +87,7 @@ class TestAudioFetchHTTPS:
                 headers={"content-type": "audio/wav"},
             )
         )
-        
+
         # Configure denylist
         with patch.dict(os.environ, {"AUDIO_DENIED_HOSTS": "blocked.example.com"}):
             with pytest.raises(ValueError) as exc_info:
@@ -101,10 +99,10 @@ class TestAudioFetchHTTPS:
         """Test HTTPS audio fetch fails when content-length exceeds limit."""
         # Get the current max size
         max_size, _, _, _ = _get_config()
-        
+
         mock_url = "https://storage.example.com/audio/large.wav"
         oversized_length = max_size + 1000
-        
+
         # Mock response with oversized content-length header
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
@@ -116,7 +114,7 @@ class TestAudioFetchHTTPS:
                 },
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
@@ -127,11 +125,11 @@ class TestAudioFetchHTTPS:
         """Test HTTPS audio fetch fails when actual download exceeds limit."""
         # Get the current max size
         max_size, _, _, _ = _get_config()
-        
+
         mock_url = "https://storage.example.com/audio/large.wav"
         # Create oversized content
         oversized_content = b"x" * (max_size + 1000)
-        
+
         # Mock response without content-length header (streaming scenario)
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
@@ -140,7 +138,7 @@ class TestAudioFetchHTTPS:
                 headers={"content-type": "audio/wav"},
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
@@ -149,7 +147,7 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_invalid_content_type(self, respx_mock):
         """Test HTTPS audio fetch fails with invalid content-type."""
         mock_url = "https://storage.example.com/audio/sample.wav"
-        
+
         # Mock response with invalid content-type
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
@@ -161,7 +159,7 @@ class TestAudioFetchHTTPS:
                 },
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
@@ -171,14 +169,17 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_timeout(self, respx_mock):
         """Test HTTPS audio fetch times out appropriately."""
         mock_url = "https://storage.example.com/audio/sample.wav"
-        
+
         # Mock timeout
         respx_mock.get(mock_url).mock(side_effect=httpx.TimeoutException("Connection timeout"))
-        
-        with patch.dict(os.environ, {
-            "AUDIO_ALLOWED_HOSTS": "storage.example.com",
-            "AUDIO_FETCH_TIMEOUT_SECONDS": "5",
-        }):
+
+        with patch.dict(
+            os.environ,
+            {
+                "AUDIO_ALLOWED_HOSTS": "storage.example.com",
+                "AUDIO_FETCH_TIMEOUT_SECONDS": "5",
+            },
+        ):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
             assert "timeout" in str(exc_info.value).lower()
@@ -187,12 +188,10 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_http_error(self, respx_mock):
         """Test HTTPS audio fetch handles HTTP errors."""
         mock_url = "https://storage.example.com/audio/notfound.wav"
-        
+
         # Mock 404 response
-        respx_mock.get(mock_url).mock(
-            return_value=httpx.Response(404, content=b"Not Found")
-        )
-        
+        respx_mock.get(mock_url).mock(return_value=httpx.Response(404, content=b"Not Found"))
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
@@ -202,10 +201,10 @@ class TestAudioFetchHTTPS:
     def test_https_audio_fetch_network_error(self, respx_mock):
         """Test HTTPS audio fetch handles network errors."""
         mock_url = "https://storage.example.com/audio/sample.wav"
-        
+
         # Mock network error
         respx_mock.get(mock_url).mock(side_effect=httpx.ConnectError("Connection failed"))
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             with pytest.raises(RuntimeError) as exc_info:
                 fetch_audio_data(mock_url)
@@ -223,11 +222,11 @@ class TestAudioFetchHTTPS:
             "audio/opus",
             "application/octet-stream",
         ]
-        
+
         for content_type in valid_types:
             mock_url = f"https://storage.example.com/audio/{content_type.replace('/', '_')}.dat"
             audio_data = b"test audio"
-            
+
             respx_mock.get(mock_url).mock(
                 return_value=httpx.Response(
                     200,
@@ -238,7 +237,7 @@ class TestAudioFetchHTTPS:
                     },
                 )
             )
-            
+
             with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
                 result = fetch_audio_data(mock_url)
                 assert result == audio_data
@@ -270,7 +269,7 @@ class TestAudioFetchIntegration:
 
         audio_data = b"mock audio data"
         mock_url = "https://storage.example.com/audio/command.wav"
-        
+
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
                 200,
@@ -281,7 +280,7 @@ class TestAudioFetchIntegration:
                 },
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             response = client.post(
                 "/v1/command",
@@ -302,7 +301,7 @@ class TestAudioFetchIntegration:
                     "idempotency_key": f"https-audio-test-{uuid.uuid4()}",
                 },
             )
-        
+
         assert response.status_code == 200
         data = response.json()
         assert data["status"] in ["ok", "needs_confirmation"]
@@ -314,7 +313,7 @@ class TestAudioFetchIntegration:
         import uuid
 
         mock_url = "https://malicious.example.com/audio/command.wav"
-        
+
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
                 200,
@@ -322,7 +321,7 @@ class TestAudioFetchIntegration:
                 headers={"content-type": "audio/wav"},
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "trusted.example.com"}):
             response = client.post(
                 "/v1/command",
@@ -343,7 +342,7 @@ class TestAudioFetchIntegration:
                     "idempotency_key": f"blocked-audio-test-{uuid.uuid4()}",
                 },
             )
-        
+
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "error"
@@ -356,10 +355,10 @@ class TestAudioFetchIntegration:
 
         # Get the current max size
         max_size, _, _, _ = _get_config()
-        
+
         mock_url = "https://storage.example.com/audio/large.wav"
         oversized_length = max_size + 1000
-        
+
         respx_mock.get(mock_url).mock(
             return_value=httpx.Response(
                 200,
@@ -370,7 +369,7 @@ class TestAudioFetchIntegration:
                 },
             )
         )
-        
+
         with patch.dict(os.environ, {"AUDIO_ALLOWED_HOSTS": "storage.example.com"}):
             response = client.post(
                 "/v1/command",
@@ -391,7 +390,7 @@ class TestAudioFetchIntegration:
                     "idempotency_key": f"oversized-audio-test-{uuid.uuid4()}",
                 },
             )
-        
+
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "error"

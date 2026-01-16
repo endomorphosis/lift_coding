@@ -10,7 +10,6 @@ import logging
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
 
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
@@ -165,9 +164,6 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
-
-
-
 
 
 @app.get("/health")
@@ -4485,7 +4481,8 @@ async def revoke_api_key(
         404: API key not found.
         403: User does not own this API key.
     """
-    from handsfree.db.api_keys import get_api_key, revoke_api_key as db_revoke_api_key
+    from handsfree.db.api_keys import get_api_key
+    from handsfree.db.api_keys import revoke_api_key as db_revoke_api_key
 
     logger.info("Revoking API key %s for user %s", key_id, user_id)
 
