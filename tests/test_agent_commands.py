@@ -357,6 +357,3 @@ class TestAgentResume:
 
         assert response["status"] == "error"
         assert "not available" in response["spoken_text"].lower()
-
-
-
