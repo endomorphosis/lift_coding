@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 from fastapi import FastAPI, Header, HTTPException, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
+from handsfree.audio_fetch import fetch_audio_data
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
@@ -166,41 +167,7 @@ def get_db_webhook_store() -> DBWebhookStore:
     return _webhook_store
 
 
-def _fetch_audio_data(uri: str) -> bytes:
-    """Fetch audio data from URI.
 
-    Supports file:// URIs for local testing and development.
-    In production, this could support pre-signed URLs from S3, etc.
-
-    Args:
-        uri: Audio URI (file:// or local path)
-
-    Returns:
-        Audio data as bytes
-
-    Raises:
-        ValueError: If URI scheme is unsupported
-        FileNotFoundError: If local file doesn't exist
-    """
-    parsed = urlparse(uri)
-
-    # Support file:// URIs and plain paths
-    if parsed.scheme in ("", "file"):
-        # Extract path from file:// URI or use as-is
-        path = parsed.path if parsed.scheme == "file" else uri
-
-        # Convert to Path object and read
-        file_path = Path(path)
-        if not file_path.exists():
-            raise FileNotFoundError(f"Audio file not found: {path}")
-
-        return file_path.read_bytes()
-    else:
-        # Future: Support http/https pre-signed URLs
-        raise ValueError(
-            f"Unsupported audio URI scheme: {parsed.scheme}. "
-            f"Currently only file:// URIs are supported in dev/test mode."
-        )
 
 
 @app.get("/health")
@@ -622,7 +589,7 @@ async def submit_command(
         # Audio input - transcribe to text using STT
         try:
             # Fetch audio data from URI
-            audio_data = _fetch_audio_data(request.input.uri)
+            audio_data = fetch_audio_data(request.input.uri)
 
             # Get STT provider and transcribe
             stt_provider = get_stt_provider()
