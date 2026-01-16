@@ -547,3 +547,127 @@ class TestBackwardCompatibility:
         assert response.status_code == 200
         data = response.json()
         assert data["count"] >= 1
+
+
+class TestAutoPushEnabled:
+    """Test NOTIFICATIONS_AUTO_PUSH_ENABLED environment variable."""
+
+    def test_auto_push_disabled_via_env_var(self, db_conn, test_user_id, monkeypatch):
+        """Test that notifications are not delivered when NOTIFICATIONS_AUTO_PUSH_ENABLED=false."""
+        # Enable provider but disable auto-push
+        monkeypatch.setenv("HANDSFREE_NOTIFICATION_PROVIDER", "logger")
+        monkeypatch.setenv("NOTIFICATIONS_AUTO_PUSH_ENABLED", "false")
+
+        # Create a subscription
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="https://push.example.com/test-endpoint",
+        )
+
+        # Track delivery calls
+        delivery_calls = []
+
+        original_send = DevLoggerProvider.send
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(
+                {
+                    "endpoint": subscription_endpoint,
+                    "data": notification_data,
+                }
+            )
+            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
+
+        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+
+        # Create a notification
+        create_notification(
+            conn=db_conn,
+            user_id=test_user_id,
+            event_type="test_event",
+            message="Test notification message",
+        )
+
+        # Verify delivery was NOT called
+        assert len(delivery_calls) == 0
+
+    def test_auto_push_enabled_by_default(self, db_conn, test_user_id, monkeypatch):
+        """Test that auto-push is enabled by default (when env var is not set)."""
+        # Enable provider, don't set NOTIFICATIONS_AUTO_PUSH_ENABLED
+        monkeypatch.setenv("HANDSFREE_NOTIFICATION_PROVIDER", "logger")
+        monkeypatch.delenv("NOTIFICATIONS_AUTO_PUSH_ENABLED", raising=False)
+
+        # Create a subscription
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="https://push.example.com/test-endpoint",
+        )
+
+        # Track delivery calls
+        delivery_calls = []
+
+        original_send = DevLoggerProvider.send
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(
+                {
+                    "endpoint": subscription_endpoint,
+                    "data": notification_data,
+                }
+            )
+            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
+
+        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+
+        # Create a notification
+        create_notification(
+            conn=db_conn,
+            user_id=test_user_id,
+            event_type="test_event",
+            message="Test notification message",
+        )
+
+        # Verify delivery WAS called (auto-push enabled by default)
+        assert len(delivery_calls) == 1
+
+    def test_auto_push_enabled_explicitly(self, db_conn, test_user_id, monkeypatch):
+        """Test that auto-push works when NOTIFICATIONS_AUTO_PUSH_ENABLED=true."""
+        # Enable provider and auto-push explicitly
+        monkeypatch.setenv("HANDSFREE_NOTIFICATION_PROVIDER", "logger")
+        monkeypatch.setenv("NOTIFICATIONS_AUTO_PUSH_ENABLED", "true")
+
+        # Create a subscription
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="https://push.example.com/test-endpoint",
+        )
+
+        # Track delivery calls
+        delivery_calls = []
+
+        original_send = DevLoggerProvider.send
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(
+                {
+                    "endpoint": subscription_endpoint,
+                    "data": notification_data,
+                }
+            )
+            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
+
+        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+
+        # Create a notification
+        create_notification(
+            conn=db_conn,
+            user_id=test_user_id,
+            event_type="test_event",
+            message="Test notification message",
+        )
+
+        # Verify delivery WAS called
+        assert len(delivery_calls) == 1
