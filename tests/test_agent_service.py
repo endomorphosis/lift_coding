@@ -31,14 +31,16 @@ class TestAgentDelegate:
         )
 
         assert "task_id" in result
-        assert result["state"] == "created"
+        # Task should transition to "running" after successful provider start
+        assert result["state"] == "running"
         assert "spoken_text" in result
 
-        # Verify task was created in DB
+        # Verify task was created in DB and transitioned to running
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
         assert len(tasks) == 1
         assert tasks[0].instruction == "fix the bug"
         assert tasks[0].provider == "copilot"
+        assert tasks[0].state == "running"
 
     def test_delegate_with_issue_target(self, agent_service, db_conn, test_user_id):
         """Test delegating with issue target."""
@@ -50,7 +52,8 @@ class TestAgentDelegate:
             target_ref="owner/repo#42",
         )
 
-        assert result["state"] == "created"
+        # Task should transition to "running" after successful provider start
+        assert result["state"] == "running"
         assert "issue" in result["spoken_text"].lower()
         assert "42" in result["spoken_text"]
 
@@ -69,7 +72,8 @@ class TestAgentDelegate:
             target_ref="owner/repo#99",
         )
 
-        assert result["state"] == "created"
+        # Task should transition to "running" after successful provider start
+        assert result["state"] == "running"
         assert "pr" in result["spoken_text"].lower()
         assert "99" in result["spoken_text"]
 
@@ -108,21 +112,18 @@ class TestAgentStatus:
 
     def test_status_multiple_tasks(self, agent_service, db_conn, test_user_id):
         """Test status with multiple tasks in different states."""
-        # Create tasks
+        # Create tasks - they will auto-start to "running"
         task1 = agent_service.delegate(user_id=test_user_id, instruction="task1", provider="mock")
         task2 = agent_service.delegate(user_id=test_user_id, instruction="task2", provider="mock")
         agent_service.delegate(user_id=test_user_id, instruction="task3", provider="mock")
 
-        # Advance some states manually
-        update_agent_task_state(conn=db_conn, task_id=task1["task_id"], new_state="running")
-        update_agent_task_state(conn=db_conn, task_id=task2["task_id"], new_state="running")
+        # Tasks are already "running" after delegate, advance task2 to completed
         update_agent_task_state(conn=db_conn, task_id=task2["task_id"], new_state="completed")
 
         result = agent_service.get_status(user_id=test_user_id)
 
         assert result["total"] == 3
-        # task1 is running (manually set), task2 is completed (manually set)
-        # task3 auto-advances from created to running on status check
+        # task1 and task3 are running, task2 is completed
         assert result["by_state"]["running"] == 2
         assert result["by_state"]["completed"] == 1
         assert "3 tasks" in result["spoken_text"]
@@ -161,10 +162,11 @@ class TestAdvanceTaskState:
         )
         task_id = task_result["task_id"]
 
-        result = agent_service.advance_task_state(task_id, "running")
+        # Task is already "running" after delegation, advance to "completed"
+        result = agent_service.advance_task_state(task_id, "completed")
 
         assert result["task_id"] == task_id
-        assert result["state"] == "running"
+        assert result["state"] == "completed"
         assert "updated_at" in result
 
     def test_advance_task_with_trace(self, agent_service, db_conn, test_user_id):
@@ -174,11 +176,12 @@ class TestAdvanceTaskState:
         )
         task_id = task_result["task_id"]
 
+        # Task is already "running" after delegation, advance to "completed" with trace
         result = agent_service.advance_task_state(
-            task_id, "running", trace_update={"step": "processing"}
+            task_id, "completed", trace_update={"step": "processing"}
         )
 
-        assert result["state"] == "running"
+        assert result["state"] == "completed"
 
         # Verify trace was updated
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
@@ -197,8 +200,9 @@ class TestAdvanceTaskState:
         )
         task_id = task_result["task_id"]
 
+        # Task is in "running" state, try invalid transition to "created"
         with pytest.raises(ValueError, match="Invalid state transition"):
-            agent_service.advance_task_state(task_id, "completed")
+            agent_service.advance_task_state(task_id, "created")
 
 
 class TestNotifications:
@@ -225,27 +229,25 @@ class TestNotifications:
         )
         task_id = task_result["task_id"]
 
-        agent_service.advance_task_state(task_id, "running")
+        # Task is already "running" after delegation, advance to "completed"
+        agent_service.advance_task_state(task_id, "completed")
 
         # Verify notification was created in database
         notifications = list_notifications(conn=db_conn, user_id=test_user_id)
-        state_change_notifs = [n for n in notifications if n.event_type == "state_changed"]
-        assert len(state_change_notifs) >= 1
+        # Should have task_created, task_running, and task_completed notifications
+        assert len(notifications) >= 3
 
     def test_notification_on_task_completion(self, agent_service, db_conn, test_user_id):
         """Test that completing a task writes a notification."""
         from handsfree.db.notifications import list_notifications
 
-        # Create and advance task to running, then complete
+        # Create task - it will auto-start to "running"
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="test task", provider="mock"
         )
         task_id = task_result["task_id"]
 
-        # Advance to running first
-        agent_service.advance_task_state(task_id, "running")
-
-        # Then complete the task
+        # Complete the task (already in "running" state)
         agent_service.advance_task_state(task_id, "completed")
 
         # Verify completion notification was created
@@ -289,16 +291,13 @@ class TestNotifications:
         """Test that completion notification includes PR URL when provided in trace."""
         from handsfree.db.notifications import list_notifications
 
-        # Create task with PR reference in trace
+        # Create task - it will auto-start to "running"
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="fix bug", provider="mock"
         )
         task_id = task_result["task_id"]
 
-        # Advance to running with PR info
-        agent_service.advance_task_state(task_id, "running")
-
-        # Complete with PR URL in trace
+        # Complete with PR URL in trace (task is already "running")
         agent_service.advance_task_state(
             task_id,
             "completed",
@@ -327,13 +326,13 @@ class TestNotifications:
         """Test completion notification with PR number but no URL."""
         from handsfree.db.notifications import list_notifications
 
-        # Create and complete task with only PR number
+        # Create task - it will auto-start to "running"
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="test", provider="mock"
         )
         task_id = task_result["task_id"]
 
-        agent_service.advance_task_state(task_id, "running")
+        # Complete with PR number (task is already "running")
         agent_service.advance_task_state(
             task_id,
             "completed",
@@ -355,13 +354,13 @@ class TestNotifications:
         """Test completion notification works without PR info."""
         from handsfree.db.notifications import list_notifications
 
-        # Create and complete task without PR info
+        # Create task - it will auto-start to "running"
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="test", provider="mock"
         )
         task_id = task_result["task_id"]
 
-        agent_service.advance_task_state(task_id, "running")
+        # Complete without PR info (task is already "running")
         agent_service.advance_task_state(task_id, "completed")
 
         # Verify notification was still created
@@ -383,29 +382,26 @@ class TestNotifications:
         """Test that mock provider auto-advances task through multiple status checks."""
         from handsfree.db.notifications import list_notifications
 
-        # Create a task with mock provider
+        # Create a task with mock provider - it will auto-start to "running"
         task_result = agent_service.delegate(
             user_id=test_user_id, instruction="test auto-advance", provider="mock"
         )
         task_id = task_result["task_id"]
 
-        # Initial state should be "created"
-        assert task_result["state"] == "created"
+        # Initial state should be "running" after auto-start
+        assert task_result["state"] == "running"
 
-        # Verify "created" notification exists
+        # Verify "created" and "running" notifications exist
         notifications = list_notifications(conn=db_conn, user_id=test_user_id)
         created_notifs = [n for n in notifications if n.event_type == "task_created"]
         assert len(created_notifs) >= 1
+        running_notifs = [n for n in notifications if n.event_type == "task_running"]
+        assert len(running_notifs) >= 1
 
-        # First status check should advance to "running"
+        # Status check should show task as running
         result1 = agent_service.get_status(user_id=test_user_id)
         assert result1["total"] == 1
         assert result1["by_state"]["running"] == 1
-
-        # Verify "running" notification was created
-        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
-        running_notifs = [n for n in notifications if n.event_type == "task_running"]
-        assert len(running_notifs) >= 1
 
         # Second status check should keep it "running" (step 0 -> step 1)
         result2 = agent_service.get_status(user_id=test_user_id)
