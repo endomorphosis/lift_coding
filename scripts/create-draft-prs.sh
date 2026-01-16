@@ -85,9 +85,11 @@ EOF
         --body-file "$tracking_file" \
         --draft \
         --label "copilot-agent" \
-        --json url --jq .url 2>&1)
+        --json url --jq .url)
     
-    if [ -n "$pr_url" ]; then
+    local exit_code=$?
+    
+    if [ $exit_code -eq 0 ] && [ -n "$pr_url" ]; then
         echo "  ✓ Created: $pr_url"
         echo ""
         return 0
