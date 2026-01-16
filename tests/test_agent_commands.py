@@ -113,7 +113,7 @@ class TestAgentStatus:
         from handsfree.agents.service import AgentService
 
         service = AgentService(db_conn)
-        service.delegate(user_id="default-user", instruction="test", provider="mock")
+        service.delegate(user_id=test_user_id, instruction="test", provider="mock")
 
         # Now check status
         status_intent = parser.parse("agent status")
@@ -362,4 +362,4 @@ class TestAgentResume:
 @pytest.fixture
 def test_user_id():
     """Return a test user ID."""
-    return "default-user"
+    return "test-user-123"
