@@ -13,6 +13,7 @@ import time
 from collections import deque
 from datetime import datetime
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from github import Github
 from github.GithubException import GithubException
@@ -199,6 +200,56 @@ Processing completed at {datetime.utcnow().isoformat()}Z
         return False
 
 
+def apply_patches_from_instruction(repo_dir: Path, instruction: str) -> bool:
+    """Apply any fenced diff/patch blocks found in the instruction.
+
+    This uses the local helper script `apply_instruction.py` so behavior matches
+    the GitHub Actions workflow.
+    """
+    try:
+        helper_path = Path(__file__).resolve().parent / "apply_instruction.py"
+        if not helper_path.exists():
+            logger.warning("apply_instruction.py not found; skipping patch application")
+            return True
+
+        with NamedTemporaryFile("w", delete=False, suffix=".md") as temp_file:
+            temp_file.write(instruction or "")
+            instruction_path = temp_file.name
+
+        try:
+            result = subprocess.run(
+                [
+                    "python",
+                    str(helper_path),
+                    "--instruction-file",
+                    instruction_path,
+                    "--repo-dir",
+                    str(repo_dir),
+                ],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+            if result.returncode in (0,):
+                stdout = (result.stdout or "").strip()
+                if stdout and stdout != "no patches found":
+                    logger.info(stdout)
+                return True
+
+            stderr = (result.stderr or result.stdout or "").strip()
+            logger.error(f"Failed applying patches from instruction: {stderr}")
+            return False
+        finally:
+            try:
+                os.unlink(instruction_path)
+            except OSError:
+                pass
+    except Exception as e:
+        logger.error(f"Unexpected error applying patches: {e}")
+        return False
+
+
 def commit_and_push_changes(repo_dir: Path, branch_name: str, commit_message: str) -> bool:
     """Commit and push changes to the remote repository."""
     try:
@@ -340,6 +391,11 @@ def process_task(gh_client, issue, metadata: dict) -> bool:
         # Create or checkout branch
         if not create_and_push_branch(repo_dir, branch_name):
             raise RuntimeError("Failed to create/checkout branch")
+
+        # Deterministic mode: apply any diff/patch blocks embedded in the instruction.
+        # If patch application fails, abort so we don't create a misleading PR.
+        if not apply_patches_from_instruction(repo_dir, instruction):
+            raise RuntimeError("Failed to apply patches from instruction")
 
         # Create trace file with task metadata
         if not create_trace_file(repo_dir, task_id, issue.number, instruction):

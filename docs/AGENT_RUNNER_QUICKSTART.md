@@ -10,6 +10,21 @@ The agent runner is a GitHub Actions workflow that:
 3. Creates a pull request with the processed results
 4. Posts status updates back to the issue
 
+## Deterministic Mode (Optional)
+
+If you want the runner to perform **real code changes without any LLM**, include one or more fenced diff blocks in your instruction:
+
+```diff
+diff --git a/README.md b/README.md
+index 0000000..1111111 100644
+--- a/README.md
++++ b/README.md
+@@
++This line was added by an agent-runner patch.
+```
+
+The runner will apply these with `git apply --index` and then open a PR.
+
 ## Prerequisites
 
 - A GitHub repository (this can be your dispatch repository)
@@ -71,6 +86,16 @@ Now let's verify the agent runner works correctly.
    ## Instruction
 
    Create a simple test trace file to verify the agent runner is working correctly.
+
+   ```diff
+   diff --git a/agent-tasks/README.md b/agent-tasks/README.md
+   new file mode 100644
+   index 0000000..1111111
+   --- /dev/null
+   +++ b/agent-tasks/README.md
+   @@
+   +Agent runner deterministic patch test.
+   ```
 
    Target Repository: YOUR_OWNER/YOUR_REPO
    ```
@@ -136,11 +161,13 @@ Now that the agent runner is set up:
 
 ## Customization
 
-The current implementation creates a **placeholder trace file**. To make it do actual work:
+The default implementation always creates a trace file. To make it do more:
 
 1. Edit `.github/workflows/agent-runner.yml`
 2. Find the "Process task" step
-3. Replace the placeholder logic with:
+3. Either:
+   - Use the deterministic diff/patch blocks (recommended for reliability), or
+   - Replace the placeholder logic with:
    - LLM integration (OpenAI, Anthropic, etc.)
    - Code generation tools
    - Custom scripts
