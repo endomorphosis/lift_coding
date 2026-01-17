@@ -11,6 +11,8 @@ class TestProfile:
         assert Profile.WORKOUT.value == "workout"
         assert Profile.KITCHEN.value == "kitchen"
         assert Profile.COMMUTE.value == "commute"
+        assert Profile.FOCUSED.value == "focused"
+        assert Profile.RELAXED.value == "relaxed"
         assert Profile.DEFAULT.value == "default"
 
 
@@ -52,6 +54,24 @@ class TestProfileConfig:
         assert config.max_spoken_words == 25
         assert config.confirmation_required is False
         assert config.speech_rate == 1.0
+
+    def test_focused_profile(self) -> None:
+        """Test focused profile configuration."""
+        config = ProfileConfig.for_profile(Profile.FOCUSED)
+
+        assert config.profile == Profile.FOCUSED
+        assert config.max_spoken_words == 20  # Brief
+        assert config.confirmation_required is False  # No interruptions
+        assert config.speech_rate == 1.1  # Slightly faster
+
+    def test_relaxed_profile(self) -> None:
+        """Test relaxed profile configuration."""
+        config = ProfileConfig.for_profile(Profile.RELAXED)
+
+        assert config.profile == Profile.RELAXED
+        assert config.max_spoken_words == 100  # Detailed
+        assert config.confirmation_required is False
+        assert config.speech_rate == 0.95  # Slightly slower
 
     def test_all_profiles_have_config(self) -> None:
         """Test that all profiles have configurations."""
