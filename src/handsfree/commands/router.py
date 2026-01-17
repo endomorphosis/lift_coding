@@ -121,9 +121,9 @@ class CommandRouter:
 
         # Route to domain handlers
         if intent.name == "inbox.list":
-            response = self._handle_inbox_list(intent, profile_config)
+            response = self._handle_inbox_list(intent, profile_config, user_id)
         elif intent.name.startswith("pr."):
-            response = self._handle_pr_intent(intent, profile_config)
+            response = self._handle_pr_intent(intent, profile_config, user_id)
         elif intent.name.startswith("checks."):
             response = self._handle_checks_intent(intent, profile_config)
         elif intent.name.startswith("agent."):
@@ -488,12 +488,59 @@ class CommandRouter:
         }
 
     def _handle_inbox_list(
-        self, intent: ParsedIntent, profile_config: ProfileConfig
+        self, intent: ParsedIntent, profile_config: ProfileConfig, user_id: str | None = None
     ) -> dict[str, Any]:
         """Handle inbox.list intent with profile-based verbosity."""
-        # Stub data - in production this would come from GitHub provider
-        # For now, generate realistic profile-appropriate responses
-
+        # Get user from intent entities or fall back to fixture user
+        user = intent.entities.get("user", "testuser")
+        
+        # Use GitHub provider if available
+        if self.github_provider:
+            from handsfree.handlers.inbox import handle_inbox_list
+            from handsfree.models import PrivacyMode
+            
+            # Determine privacy mode from profile (for now, use strict)
+            # TODO: Make privacy mode configurable per profile
+            privacy_mode = PrivacyMode.STRICT
+            
+            try:
+                # Call the inbox handler with user_id for live mode support
+                result = handle_inbox_list(
+                    provider=self.github_provider,
+                    user=user,
+                    privacy_mode=privacy_mode,
+                    profile_config=profile_config,
+                    user_id=user_id,
+                )
+                
+                # Return response with inbox items
+                return {
+                    "status": "ok",
+                    "intent": intent.to_dict(),
+                    "spoken_text": result["spoken_text"],
+                    "cards": [
+                        {
+                            "title": item["title"],
+                            "subtitle": f"{item['repo']} • Priority {item['priority']}",
+                            "url": item["url"],
+                        }
+                        for item in result["items"][:5]  # Limit to top 5 for UI
+                    ] if "items" in result and result["items"] else [],
+                }
+            except Exception as e:
+                logger.error("Failed to fetch inbox: %s", str(e))
+                # Fall back to error message
+                spoken_text = "Could not fetch inbox items."
+                if profile_config.profile == Profile.WORKOUT:
+                    spoken_text = "Inbox unavailable."
+                spoken_text = profile_config.truncate_spoken_text(spoken_text)
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+        
+        # Fallback: Stub data if no GitHub provider
         profile = profile_config.profile
 
         if profile == Profile.WORKOUT:
@@ -603,41 +650,91 @@ class CommandRouter:
             return "You have " + " and ".join(parts) + "."
 
     def _handle_pr_intent(
-        self, intent: ParsedIntent, profile_config: ProfileConfig
+        self, intent: ParsedIntent, profile_config: ProfileConfig, user_id: str | None = None
     ) -> dict[str, Any]:
         """Handle PR-related intents with profile-based verbosity."""
         profile = profile_config.profile
 
         if intent.name == "pr.summarize":
-            pr_num = intent.entities.get("pr_number", "unknown")
-
+            pr_num = intent.entities.get("pr_number")
+            repo = intent.entities.get("repo", "owner/repo")  # Default repo for fixture mode
+            
+            # Use GitHub provider if available and pr_number is specified
+            if self.github_provider and pr_num:
+                from handsfree.handlers.pr_summary import handle_pr_summarize
+                from handsfree.models import PrivacyMode
+                
+                # Determine privacy mode from profile (for now, use strict)
+                # TODO: Make privacy mode configurable per profile
+                privacy_mode = PrivacyMode.STRICT
+                
+                try:
+                    # Call the PR summary handler with user_id for live mode support
+                    result = handle_pr_summarize(
+                        provider=self.github_provider,
+                        repo=repo,
+                        pr_number=pr_num,
+                        privacy_mode=privacy_mode,
+                        profile_config=profile_config,
+                        user_id=user_id,
+                    )
+                    
+                    # Return response with PR details
+                    return {
+                        "status": "ok",
+                        "intent": intent.to_dict(),
+                        "spoken_text": result["spoken_text"],
+                        "cards": [
+                            {
+                                "title": result["title"],
+                                "subtitle": f"PR #{pr_num} • {result['state']} • by {result['author']}",
+                                "body": f"{result['changed_files']} files, +{result['additions']} -{result['deletions']}",
+                            }
+                        ],
+                    }
+                except Exception as e:
+                    logger.error("Failed to fetch PR summary for %s#%d: %s", repo, pr_num, str(e))
+                    # Fall back to error message
+                    spoken_text = f"Could not fetch PR {pr_num}."
+                    if profile_config.profile == Profile.WORKOUT:
+                        spoken_text = f"PR {pr_num} unavailable."
+                    spoken_text = profile_config.truncate_spoken_text(spoken_text)
+                    return {
+                        "status": "error",
+                        "intent": intent.to_dict(),
+                        "spoken_text": spoken_text,
+                    }
+            
+            # Fallback: stub data
+            pr_num_str = str(pr_num) if pr_num else "unknown"
+            
             # Stub data - in production this would come from GitHub provider
             # Generate profile-appropriate PR summaries
             if profile == Profile.WORKOUT:
                 # Ultra-brief: 1-2 sentences, key numbers only
-                spoken_text = f"PR {pr_num}: command system."
+                spoken_text = f"PR {pr_num_str}: command system."
             elif profile == Profile.COMMUTE:
                 # Brief: 2-3 sentences, essential info
                 spoken_text = (
-                    f"PR {pr_num} adds the command system. "
+                    f"PR {pr_num_str} adds the command system. "
                     "It includes intent parsing and profile support."
                 )
             elif profile == Profile.FOCUSED:
                 # Minimal: brief, actionable
                 spoken_text = (
-                    f"PR {pr_num} adds command system with intent parsing. Ready for review."
+                    f"PR {pr_num_str} adds command system with intent parsing. Ready for review."
                 )
             elif profile == Profile.KITCHEN:
                 # Moderate: 3-4 sentences, conversational
                 spoken_text = (
-                    f"PR {pr_num} adds the command system with intent parsing. "
+                    f"PR {pr_num_str} adds the command system with intent parsing. "
                     "It supports profiles like workout and commute. "
                     "The system includes confirmation flow for side effects."
                 )
             elif profile == Profile.RELAXED:
                 # Detailed: full context, all details
                 spoken_text = (
-                    f"PR {pr_num} adds the command system with intent parsing "
+                    f"PR {pr_num_str} adds the command system with intent parsing "
                     "and profile support. "
                     "The system recognizes voice commands and routes them to "
                     "appropriate handlers. "
@@ -648,7 +745,7 @@ class CommandRouter:
                 )
             else:  # DEFAULT
                 # Balanced
-                spoken_text = f"PR {pr_num} adds the command system with intent parsing."
+                spoken_text = f"PR {pr_num_str} adds the command system with intent parsing."
 
         elif intent.name == "pr.request_review":
             # Should have been caught by confirmation flow
