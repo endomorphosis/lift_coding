@@ -671,7 +671,7 @@ In your dispatch repository (e.g., `owner/lift_coding_dispatch`), create a new i
 
 **Body**:
 ```markdown
-<!-- agent_task_metadata {"task_id": "smoke-test-12345678"} -->
+<!-- agent_task_metadata {"task_id": "smoke-test-XXXXXXXX"} -->
 
 ## Instruction
 
@@ -680,7 +680,16 @@ Create a simple test file to verify the agent runner is working correctly. This 
 Target Repository: owner/your-target-repo
 ```
 
-Replace `owner/your-target-repo` with your actual target repository name (or omit to use the dispatch repo as target).
+**Note**: Replace:
+- `XXXXXXXX` with a unique 8-character string (e.g., use current timestamp or random hex: `date +%s | md5sum | head -c 8`)
+- `owner/your-target-repo` with your actual target repository name (or omit to use the dispatch repo as target)
+
+Example task ID generation:
+```bash
+# Generate a unique task ID using current timestamp
+echo "smoke-test-$(date +%s | tail -c 9)"
+# Output: smoke-test-12345678
+```
 
 #### Step 2: Monitor Agent Processing
 

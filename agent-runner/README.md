@@ -47,7 +47,7 @@ To verify the runner is working correctly:
    - Label: `copilot-agent`
    - Body:
      ```markdown
-     <!-- agent_task_metadata {"task_id": "test-task-12345678"} -->
+     <!-- agent_task_metadata {"task_id": "test-task-XXXXXXXX"} -->
      
      ## Instruction
      
@@ -55,6 +55,8 @@ To verify the runner is working correctly:
      
      Target Repository: owner/target-repo
      ```
+   
+   **Note**: Replace `XXXXXXXX` with a unique 8-character string (e.g., use `date +%s | tail -c 9` to generate a timestamp-based ID)
 
 2. **Wait for the runner to process the issue** (check logs):
    ```bash

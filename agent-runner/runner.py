@@ -68,8 +68,16 @@ def clone_or_update_repo(repo_url: str, repo_name: str, gh_token: str) -> Path:
     Clone a repository or update if it already exists.
 
     Returns the path to the cloned repository.
+
+    Security Note: This function embeds the GitHub token in the clone URL for
+    authentication. The token is not logged and is only used for git operations.
+    For production use, consider using SSH keys or GitHub App authentication.
     """
     repo_path = WORKSPACE_DIR / repo_name
+
+    # Validate inputs
+    if not repo_url or not repo_name:
+        raise ValueError("Repository URL and name are required")
 
     # Add token to URL for authentication
     if "github.com" in repo_url:
@@ -285,9 +293,16 @@ def commit_and_push(repo_path: Path, branch_name: str, message: str) -> None:
 def find_existing_pr(gh, repo, branch_name: str):
     """Find existing PR for the given branch."""
     try:
+        # Try with head prefix first (for same repo)
         pulls = repo.get_pulls(state="open", head=f"{repo.owner.login}:{branch_name}")
         for pr in pulls:
             return pr
+
+        # If not found, try without prefix (works for forks and same repo)
+        pulls = repo.get_pulls(state="open", head=branch_name)
+        for pr in pulls:
+            return pr
+
         return None
     except Exception as e:
         logger.warning(f"Error checking for existing PR: {e}")
