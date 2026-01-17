@@ -1037,8 +1037,6 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
-            # Use authenticated user_id or fall back to fixture user
-            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.pause_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task paused.")
@@ -1075,8 +1073,6 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
-            # Use authenticated user_id or fall back to fixture user
-            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.resume_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task resumed.")
