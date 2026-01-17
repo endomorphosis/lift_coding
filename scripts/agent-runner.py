@@ -9,12 +9,12 @@ This is a reference implementation - customize the task processing logic for you
 """
 
 import base64
+import json
+import logging
 import os
 import re
-import json
 import time
-import logging
-from typing import Optional, Dict, Any
+from typing import Any
 
 import requests
 
@@ -45,21 +45,21 @@ class GitHubClient:
             "User-Agent": "agent-runner/1.0"
         })
     
-    def get(self, path: str) -> Dict[str, Any]:
+    def get(self, path: str) -> dict[str, Any]:
         """GET request to GitHub API"""
         url = f"{GITHUB_API_BASE}{path}"
         response = self.session.get(url)
         response.raise_for_status()
         return response.json()
     
-    def post(self, path: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    def post(self, path: str, data: dict[str, Any]) -> dict[str, Any]:
         """POST request to GitHub API"""
         url = f"{GITHUB_API_BASE}{path}"
         response = self.session.post(url, json=data)
         response.raise_for_status()
         return response.json()
     
-    def patch(self, path: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    def patch(self, path: str, data: dict[str, Any]) -> dict[str, Any]:
         """PATCH request to GitHub API"""
         url = f"{GITHUB_API_BASE}{path}"
         response = self.session.patch(url, json=data)
@@ -67,7 +67,7 @@ class GitHubClient:
         return response.json()
 
 
-def extract_task_metadata(issue_body: str) -> Optional[Dict[str, Any]]:
+def extract_task_metadata(issue_body: str) -> dict[str, Any] | None:
     """Extract agent_task_metadata from issue body"""
     metadata_match = re.search(
         r'<!--\s*agent_task_metadata\s+(.*?)\s*-->',
@@ -102,7 +102,7 @@ def sanitize_task_id(task_id: str) -> str:
     return sanitized[:8]
 
 
-def process_task(metadata: Dict[str, Any]) -> str:
+def process_task(metadata: dict[str, Any]) -> str:
     """
     Process the agent task and return the result.
     
@@ -147,11 +147,11 @@ Replace this with your actual task processing logic:
 def create_pull_request(
     client: GitHubClient,
     target_repo: str,
-    task_metadata: Dict[str, Any],
+    task_metadata: dict[str, Any],
     task_result: str,
     dispatch_issue_number: int,
     dispatch_repo: str
-) -> Optional[str]:
+) -> str | None:
     """
     Create a pull request in the target repository with correlation metadata.
     
@@ -304,7 +304,11 @@ def poll_dispatch_issues(client: GitHubClient):
                 logger.warning("Issue missing number field, skipping")
                 continue
             
-            issue_labels = [label.get("name", "") for label in issue.get("labels", []) if isinstance(label, dict)]
+            issue_labels = [
+                label.get("name", "")
+                for label in issue.get("labels", [])
+                if isinstance(label, dict)
+            ]
             
             # Skip if already processed
             if "agent-processed" in issue_labels or "agent-failed" in issue_labels:
@@ -321,7 +325,8 @@ def poll_dispatch_issues(client: GitHubClient):
                     DISPATCH_REPO,
                     issue_number,
                     "❌ Could not extract task metadata from issue body. "
-                    "Please ensure the issue was created by the Handsfree backend with proper metadata."
+                    "Please ensure the issue was created by the Handsfree backend "
+                    "with proper metadata."
                 )
                 mark_issue_processed(client, DISPATCH_REPO, issue_number, "agent-failed")
                 continue
@@ -348,8 +353,10 @@ def poll_dispatch_issues(client: GitHubClient):
                         issue_number,
                         f"✅ Task processed successfully!\n\n"
                         f"**Pull Request Created**: {pr_url}\n\n"
-                        f"The PR has been opened in the target repository with correlation metadata. "
-                        f"The Handsfree backend will automatically correlate this PR to the task."
+                        f"The PR has been opened in the target repository "
+                        f"with correlation metadata. "
+                        f"The Handsfree backend will automatically correlate "
+                        f"this PR to the task."
                     )
                     mark_issue_processed(client, DISPATCH_REPO, issue_number)
                 else:
@@ -398,7 +405,7 @@ def main():
         logger.error("TARGET_REPO environment variable is required (format: owner/repo)")
         return
     
-    logger.info(f"Configuration:")
+    logger.info("Configuration:")
     logger.info(f"  Dispatch repo: {DISPATCH_REPO}")
     logger.info(f"  Target repo: {TARGET_REPO}")
     logger.info(f"  Poll interval: {POLL_INTERVAL} seconds")
