@@ -236,9 +236,7 @@ class TestInboxListVerbosity:
         # Should contain numbers
         assert any(char.isdigit() for char in spoken_text)
 
-    def test_inbox_list_relaxed_detailed(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_inbox_list_relaxed_detailed(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test that inbox.list with relaxed profile returns detailed summary."""
         intent = parser.parse("inbox")
         response = router.route(intent, Profile.RELAXED, session_id="test-session")
@@ -282,7 +280,10 @@ class TestCriticalInfoPreservation:
     def test_security_alert_preserved_in_workout(self) -> None:
         """Test that security alerts are preserved even in workout profile."""
         config = ProfileConfig.for_profile(Profile.WORKOUT)
-        text = "Normal sentence. Another sentence. SECURITY ALERT: vulnerability found. Final sentence."
+        text = (
+            "Normal sentence. Another sentence. "
+            "SECURITY ALERT: vulnerability found. Final sentence."
+        )
         result = config.truncate_summary(text)
         # Security alert should be present
         assert "SECURITY ALERT" in result or "vulnerability" in result
