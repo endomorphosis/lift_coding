@@ -14,6 +14,7 @@ def handle_pr_summarize(
     pr_number: int,
     privacy_mode: PrivacyMode = PrivacyMode.STRICT,
     profile_config: ProfileConfig | None = None,
+    user_id: str | None = None,
 ) -> dict[str, Any]:
     """
     Handle pr.summarize command to provide PR summary.
@@ -24,14 +25,15 @@ def handle_pr_summarize(
         pr_number: PR number
         privacy_mode: Privacy mode (strict/balanced/debug), default: strict
         profile_config: Optional profile configuration for response shaping
+        user_id: Optional user ID for authentication (enables live mode)
 
     Returns:
         Response dict with spoken_text and summary details
     """
     # Get PR details
-    pr_details = provider.get_pr_details(repo, pr_number)
-    pr_checks = provider.get_pr_checks(repo, pr_number)
-    pr_reviews = provider.get_pr_reviews(repo, pr_number)
+    pr_details = provider.get_pr_details(repo, pr_number, user_id=user_id)
+    pr_checks = provider.get_pr_checks(repo, pr_number, user_id=user_id)
+    pr_reviews = provider.get_pr_reviews(repo, pr_number, user_id=user_id)
 
     # Extract key information
     title = pr_details["title"]

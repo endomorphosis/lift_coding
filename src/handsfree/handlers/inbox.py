@@ -13,6 +13,7 @@ def handle_inbox_list(
     user: str,
     privacy_mode: PrivacyMode = PrivacyMode.STRICT,
     profile_config: ProfileConfig | None = None,
+    user_id: str | None = None,
 ) -> dict[str, Any]:
     """
     Handle inbox.list command to show attention items.
@@ -22,19 +23,20 @@ def handle_inbox_list(
         user: GitHub username
         privacy_mode: Privacy mode (strict/balanced/debug), default: strict
         profile_config: Optional profile configuration for response shaping
+        user_id: Optional user ID for authentication (enables live mode)
 
     Returns:
         Response dict with spoken_text and items
     """
     # Get user's PRs
-    user_prs = provider.list_user_prs(user)
+    user_prs = provider.list_user_prs(user, user_id=user_id)
 
     # Process PRs into inbox items
     items = []
     for pr in user_prs:
         # Fetch checks for this PR
         try:
-            checks = provider.get_pr_checks(pr["repo"], pr["pr_number"])
+            checks = provider.get_pr_checks(pr["repo"], pr["pr_number"], user_id=user_id)
         except Exception:
             # If checks fetch fails, continue with empty checks
             checks = []
