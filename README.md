@@ -8,6 +8,17 @@ A proof-of-concept AI companion for GitHub that helps manage pull requests, issu
 - **Redis** for caching and job queues
 - **Python 3.11+** with FastAPI (backend server added in PR-002)
 
+## Agent Delegation
+
+Handsfree can delegate tasks to external agent runners that monitor a dispatch repository and perform work:
+
+- **Dispatch**: Create GitHub issues in a dedicated dispatch repository with task metadata
+- **Agent Runners**: External processes (GitHub Actions, Copilot, custom runners) monitor and process tasks
+- **Correlation**: PRs created by agents automatically correlate back to tasks via webhook tracking
+- **Notifications**: Task lifecycle events emit notifications (created, running, completed)
+
+See the [Agent Runner Setup Guide](docs/agent-runner-setup.md) for configuration instructions.
+
 ## Quickstart
 
 ### Prerequisites
