@@ -100,10 +100,10 @@ class AgentService:
                         task_id=task.id,
                         message=f"Agent task {task.id} is now running",
                     )
-                    
+
                     # Update task reference with new state
                     task = updated_task
-                    
+
                     logger.info(
                         "Started task %s with provider %s, transitioned to running",
                         task.id,
@@ -119,7 +119,7 @@ class AgentService:
                     provider,
                     error_msg,
                 )
-                
+
                 # Update trace with error information
                 error_trace = {
                     "start_error": error_msg,
@@ -137,7 +137,7 @@ class AgentService:
         except Exception as e:
             # Log exception but don't fail the delegation
             logger.exception("Exception while starting task %s with provider %s", task.id, provider)
-            
+
             # Update trace with exception information
             error_trace = {
                 "start_exception": str(e),

@@ -555,7 +555,7 @@ class TestAutoPushEnabled:
     @staticmethod
     def _setup_delivery_tracking(monkeypatch):
         """Helper to set up delivery call tracking with mock_send.
-        
+
         Returns:
             List that will be populated with delivery calls.
         """
