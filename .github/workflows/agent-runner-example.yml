@@ -1,0 +1,297 @@
+# Agent Task Runner Example
+#
+# This workflow demonstrates how to process agent tasks dispatched via GitHub issues.
+# It is DISABLED BY DEFAULT (workflow_dispatch only) for safety.
+#
+# To enable automatic processing:
+# 1. Uncomment the 'issues:' trigger section below
+# 2. Ensure AGENT_GITHUB_TOKEN and TARGET_REPO secrets are configured
+# 3. Test with a manual workflow_dispatch first
+#
+# Required Secrets:
+# - AGENT_GITHUB_TOKEN: GitHub token with repo, pull_requests:write, issues:write scopes
+# - TARGET_REPO: Repository where PRs should be created (format: owner/repo)
+
+name: Agent Task Runner (Example)
+
+on:
+  # Automatic trigger (disabled by default - uncomment to enable)
+  # issues:
+  #   types: [opened, labeled]
+  
+  # Manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to process'
+        required: true
+        type: number
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  process-task:
+    runs-on: ubuntu-latest
+    # Only run if issue has copilot-agent label
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.issue.labels.*.name, 'copilot-agent')
+    
+    steps:
+      - name: Get issue details
+        id: issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = context.payload.issue?.number || 
+                               parseInt('${{ github.event.inputs.issue_number }}');
+            
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number
+            });
+            
+            // Check for copilot-agent label
+            const hasLabel = issue.labels.some(l => l.name === 'copilot-agent');
+            if (!hasLabel) {
+              core.setFailed('Issue does not have copilot-agent label');
+              return;
+            }
+            
+            core.setOutput('number', issue_number);
+            core.setOutput('title', issue.title);
+            core.setOutput('body', issue.body || '');
+            
+            console.log(`Processing issue #${issue_number}: ${issue.title}`);
+      
+      - name: Extract task metadata
+        id: metadata
+        run: |
+          # Extract metadata from issue body
+          BODY='${{ steps.issue.outputs.body }}'
+          
+          # Try to extract from agent_task_metadata comment
+          TASK_ID=$(echo "$BODY" | grep -oP '"task_id":\s*"\K[^"]+' | head -1 || echo "unknown")
+          USER_ID=$(echo "$BODY" | grep -oP '"user_id":\s*"\K[^"]+' | head -1 || echo "unknown")
+          PROVIDER=$(echo "$BODY" | grep -oP '"provider":\s*"\K[^"]+' | head -1 || echo "github_issue_dispatch")
+          
+          # Fallback: extract from structured fields
+          if [ "$TASK_ID" = "unknown" ]; then
+            TASK_ID=$(echo "$BODY" | grep -oP '(?i)task_id:\s*\K[\w-]+' | head -1 || echo "unknown")
+          fi
+          if [ "$USER_ID" = "unknown" ]; then
+            USER_ID=$(echo "$BODY" | grep -oP '(?i)user_id:\s*\K[\w-]+' | head -1 || echo "unknown")
+          fi
+          
+          echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+          echo "user_id=$USER_ID" >> $GITHUB_OUTPUT
+          echo "provider=$PROVIDER" >> $GITHUB_OUTPUT
+          
+          echo "Extracted metadata:"
+          echo "  Task ID: $TASK_ID"
+          echo "  User ID: $USER_ID"
+          echo "  Provider: $PROVIDER"
+      
+      - name: Validate configuration
+        run: |
+          if [ -z "${{ secrets.AGENT_GITHUB_TOKEN }}" ]; then
+            echo "ERROR: AGENT_GITHUB_TOKEN secret not configured"
+            exit 1
+          fi
+          if [ -z "${{ secrets.TARGET_REPO }}" ]; then
+            echo "ERROR: TARGET_REPO secret not configured"
+            exit 1
+          fi
+          echo "Configuration validated ✓"
+      
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.TARGET_REPO }}
+          token: ${{ secrets.AGENT_GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Configure git
+        run: |
+          git config user.name "agent-runner[bot]"
+          git config user.email "agent-runner[bot]@users.noreply.github.com"
+      
+      - name: Create feature branch
+        id: branch
+        run: |
+          BRANCH_NAME="agent-task-${{ steps.metadata.outputs.task_id }}"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          
+          # Check if branch already exists
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "Branch $BRANCH_NAME already exists, using existing branch"
+            git checkout "$BRANCH_NAME"
+          else
+            echo "Creating new branch: $BRANCH_NAME"
+            git checkout -b "$BRANCH_NAME"
+          fi
+      
+      - name: Process task
+        id: process
+        run: |
+          INSTRUCTION='${{ steps.issue.outputs.title }}'
+          echo "Processing task: $INSTRUCTION"
+          
+          # =================================================================
+          # TODO: Implement your actual task processing logic here
+          # =================================================================
+          # Examples:
+          # - Call an AI API to generate code changes
+          # - Run a script that modifies files based on the instruction
+          # - Execute predefined automation workflows
+          # - Integrate with other tools (linters, formatters, etc.)
+          # =================================================================
+          
+          # For this example, we'll create a simple task result file
+          mkdir -p .agent-tasks
+          RESULT_FILE=".agent-tasks/task-${{ steps.metadata.outputs.task_id }}.md"
+          
+          cat > "$RESULT_FILE" <<EOF
+          # Agent Task Result
+          
+          **Task ID:** ${{ steps.metadata.outputs.task_id }}
+          **Instruction:** $INSTRUCTION
+          **Processed at:** $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          **Processed by:** GitHub Actions agent-runner
+          
+          ## Result
+          
+          This is a placeholder result file. In a real implementation, this would
+          contain the actual changes made by the agent runner.
+          
+          ## Metadata
+          
+          - User ID: ${{ steps.metadata.outputs.user_id }}
+          - Provider: ${{ steps.metadata.outputs.provider }}
+          - Dispatch Issue: #${{ steps.issue.outputs.number }}
+          EOF
+          
+          echo "Task processing complete. Created: $RESULT_FILE"
+          echo "result_file=$RESULT_FILE" >> $GITHUB_OUTPUT
+      
+      - name: Commit changes
+        id: commit
+        run: |
+          git add -A
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            git commit -m "Agent task: ${{ steps.issue.outputs.title }}
+
+          Task ID: ${{ steps.metadata.outputs.task_id }}
+          Dispatch issue: #${{ steps.issue.outputs.number }}"
+            
+            echo "Changes committed ✓"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Push branch
+        if: steps.commit.outputs.has_changes == 'true'
+        run: |
+          git push origin "${{ steps.branch.outputs.branch_name }}"
+          echo "Branch pushed ✓"
+      
+      - name: Create Pull Request
+        if: steps.commit.outputs.has_changes == 'true'
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.AGENT_GITHUB_TOKEN }}
+        run: |
+          # Prepare PR body with correlation metadata
+          # IMPORTANT: The metadata format must match exactly for backend correlation
+          cat > pr_body.md <<'EOF'
+          # Agent Task: ${{ steps.issue.outputs.title }}
+          
+          This PR was automatically created by the agent runner to address the task
+          dispatched in issue #${{ steps.issue.outputs.number }}.
+          
+          ## Task Details
+          
+          - **Task ID:** `${{ steps.metadata.outputs.task_id }}`
+          - **User ID:** `${{ steps.metadata.outputs.user_id }}`
+          - **Provider:** `${{ steps.metadata.outputs.provider }}`
+          - **Dispatch Issue:** ${{ github.server_url }}/${{ github.repository }}/issues/${{ steps.issue.outputs.number }}
+          
+          ## Changes
+          
+          See commits for details on changes made by the agent runner.
+          
+          ## Correlation Metadata
+          
+          <!-- agent_task_metadata
+          {"task_id": "${{ steps.metadata.outputs.task_id }}", "user_id": "${{ steps.metadata.outputs.user_id }}", "provider": "${{ steps.metadata.outputs.provider }}"}
+          -->
+          EOF
+          
+          # Create the PR
+          PR_URL=$(gh pr create \
+            --title "Agent task: ${{ steps.issue.outputs.title }}" \
+            --body-file pr_body.md \
+            --head "${{ steps.branch.outputs.branch_name }}" \
+            --base main 2>&1) || true
+          
+          if echo "$PR_URL" | grep -q "https://"; then
+            echo "Pull request created: $PR_URL"
+            echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+          else
+            echo "Note: PR may already exist or there was an error"
+            echo "$PR_URL"
+          fi
+      
+      - name: Comment on dispatch issue (success)
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = ${{ steps.issue.outputs.number }};
+            const pr_url = '${{ steps.pr.outputs.pr_url }}';
+            
+            let body = '✅ **Task processed successfully**\n\n';
+            body += `- Task ID: \`${{ steps.metadata.outputs.task_id }}\`\n`;
+            body += `- Branch: \`${{ steps.branch.outputs.branch_name }}\`\n`;
+            
+            if (pr_url) {
+              body += `- Pull Request: ${pr_url}\n`;
+            }
+            
+            body += `\nProcessed by: GitHub Actions agent-runner`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: body
+            });
+      
+      - name: Comment on dispatch issue (failure)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = ${{ steps.issue.outputs.number }};
+            
+            const body = `❌ **Task processing failed**
+
+            - Task ID: \`${{ steps.metadata.outputs.task_id }}\`
+            - Error: See workflow run for details
+            - Workflow: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
+            
+            Please review the workflow logs and retry if appropriate.`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: body
+            });
