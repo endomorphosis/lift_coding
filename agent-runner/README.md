@@ -1,16 +1,48 @@
-# Agent Runner Example
+# Agent Runner
 
-This directory contains an example implementation of a custom agent runner that polls the dispatch repository for new issues and processes them.
+This directory contains a custom agent runner implementation that polls the dispatch repository for new issues and processes them.
+
+## 🚀 Quick Start
+
+**Want to get started in 5 minutes?** See the [Quick Start Guide](../docs/AGENT_RUNNER_QUICKSTART.md)!
+
+The quick start will help you:
+1. Create a GitHub token
+2. Add it as a repository secret
+3. Create a test issue and see the agent runner in action
 
 ## What's Included
 
 - **`Dockerfile`**: Container image definition for the agent runner
 - **`requirements.txt`**: Python dependencies
-- **`runner.py`**: Main agent runner implementation (example/placeholder)
+- **`runner.py`**: Main agent runner implementation
 
-## Usage
+## Two Deployment Options
 
-This is a **reference implementation** that demonstrates the structure of a custom agent runner. The `runner.py` file now includes a complete implementation that:
+### Option 1: GitHub Actions Workflow (Recommended)
+
+A workflow file at `.github/workflows/agent-runner.yml` provides:
+- ✅ Zero infrastructure to maintain
+- ✅ Automatic processing of labeled issues
+- ✅ Built-in secrets management
+- ✅ Native GitHub integration
+- ✅ Safe by default (only runs when secrets are present)
+
+**Setup**: See [Quick Start Guide](../docs/AGENT_RUNNER_QUICKSTART.md)
+
+### Option 2: Docker Container (Advanced)
+
+Use `docker-compose.agent-runner.yml` for:
+- Custom LLM integrations
+- On-premise deployments
+- Advanced error handling
+- High-volume processing
+
+**Setup**: See [Full Setup Guide](../docs/agent-runner-setup.md)
+
+## How It Works
+
+The agent runner (GitHub Actions or Docker) implements a complete workflow that:
 
 1. Polls the dispatch repository for issues labeled with `copilot-agent`
 2. Clones the target repository into `/workspace`
