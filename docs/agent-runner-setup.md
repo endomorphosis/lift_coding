@@ -1,565 +1,863 @@
 # Agent Runner Setup Guide
 
+This guide explains how to set up an external agent runner that processes dispatched agent tasks from the HandsFree Dev Companion system.
+
 ## Overview
 
-The HandsFree Dev Companion can delegate agent tasks to external runners by creating GitHub issues with task metadata. This guide shows you how to set up an external agent runner that:
+The HandsFree system can delegate tasks to external agents by creating GitHub issues in a dispatch repository. An external agent runner monitors these dispatch issues, performs the requested work, and creates pull requests with correlation metadata that the HandsFree backend uses to track task completion.
 
-1. Monitors a GitHub repository for new dispatch issues (labeled `copilot-agent`)
-2. Processes the task instructions
-3. Opens a pull request with correlation metadata
-4. Allows the backend to track task completion via webhook correlation
+### How it Works
 
-## How It Works
+1. **Task Dispatch**: HandsFree creates a GitHub issue in the dispatch repository with:
+   - A descriptive title (derived from the instruction)
+   - A structured body containing task metadata
+   - A `copilot-agent` label for easy filtering
+   - Hidden JSON metadata comment for correlation
 
-### Task Dispatch Flow
+2. **Agent Processing**: An external agent runner:
+   - Monitors the dispatch repository for new issues labeled `copilot-agent`
+   - Reads the task instruction and metadata
+   - Performs the requested work (code changes, analysis, etc.)
+   - Creates a pull request with correlation metadata
 
-```
-User → HandsFree Backend → GitHub Issue (dispatch repo)
-                             ↓
-                    Agent Runner monitors issues
-                             ↓
-                    Processes task & opens PR
-                             ↓
-                    Backend correlates PR → Task (via webhook)
-```
-
-### Correlation Mechanism
-
-When a runner opens a PR, it includes task metadata in the PR body:
-
-```markdown
-<!-- agent_task_metadata
-{"task_id": "task-123", "user_id": "user-456", "provider": "github_issue_dispatch"}
--->
-```
-
-The backend's webhook handler detects this metadata and updates the task state to `completed`.
+3. **Task Correlation**: HandsFree receives the PR webhook and:
+   - Extracts the task_id from the PR body metadata or issue reference
+   - Updates the agent task state to `completed`
+   - Stores the PR URL in the task trace
+   - Emits a completion notification to the user
 
 ## Runner Options
 
-You have three main options for running an agent:
+You can choose from several agent runner implementations based on your deployment needs:
 
-1. **GitHub Actions** - Workflow triggered by dispatch issues
-2. **Docker Compose** - Containerized Python runner for local/cloud deployment
-3. **GitHub Copilot Agent** - Native Copilot integration (if available)
+### Option 1: GitHub Actions Workflow
 
-## Option 1: GitHub Actions Runner
+**Best for**: Simple deployments, CI/CD integration, cloud-hosted runners
 
-### Setup Steps
+A GitHub Actions workflow that triggers on issue events and processes dispatch tasks using GitHub-hosted or self-hosted runners.
 
-1. **Create workflow file** in your **dispatch repository** (e.g., `endomorphosis/lift_coding_dispatch`):
+**Pros**:
+- No infrastructure to maintain
+- Native GitHub integration
+- Built-in secrets management
+- Easy to customize and extend
 
-   `.github/workflows/agent-runner.yml`:
+**Cons**:
+- Requires public workflow or self-hosted runner for private repos
+- Limited execution time (6 hours for public repos, configurable for self-hosted)
+- GitHub Actions usage costs (for private repos on free plan)
 
-   ```yaml
-   name: Agent Task Runner
-   
-   on:
-     issues:
-       types: [opened, labeled]
-     workflow_dispatch:
-       inputs:
-         issue_number:
-           description: 'Issue number to process'
-           required: true
-   
-   permissions:
-     contents: write
-     issues: write
-     pull-requests: write
-   
-   jobs:
-     process-task:
-       runs-on: ubuntu-latest
-       if: contains(github.event.issue.labels.*.name, 'copilot-agent')
-       
-       steps:
-         - name: Extract task metadata
-           id: metadata
-           run: |
-             echo "Extracting metadata from issue #${{ github.event.issue.number }}"
-             BODY="${{ github.event.issue.body }}"
-             
-             # Extract task_id from issue body (adjust parsing as needed)
-             TASK_ID=$(echo "$BODY" | grep -oP '(?<=task_id:\s)[\w-]+' || echo "unknown")
-             USER_ID=$(echo "$BODY" | grep -oP '(?<=user_id:\s)[\w-]+' || echo "unknown")
-             
-             echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
-             echo "user_id=$USER_ID" >> $GITHUB_OUTPUT
-             echo "instruction=${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
-         
-         - name: Checkout target repository
-           uses: actions/checkout@v4
-           with:
-             repository: ${{ secrets.TARGET_REPO }}  # e.g., "owner/repo"
-             token: ${{ secrets.AGENT_GITHUB_TOKEN }}
-         
-         - name: Create feature branch
-           run: |
-             git config user.name "agent-runner[bot]"
-             git config user.email "agent-runner[bot]@users.noreply.github.com"
-             git checkout -b agent-task-${{ steps.metadata.outputs.task_id }}
-         
-         - name: Process task (placeholder)
-           run: |
-             echo "Processing: ${{ steps.metadata.outputs.instruction }}"
-             # TODO: Add your actual task processing logic here
-             # Examples:
-             # - Run a script that makes code changes
-             # - Call an LLM API to generate changes
-             # - Execute predefined automation
-             
-             # For this example, create a simple file
-             echo "# Task: ${{ steps.metadata.outputs.instruction }}" > TASK_RESULT.md
-             echo "Processed by agent runner" >> TASK_RESULT.md
-         
-         - name: Commit changes
-           run: |
-             git add -A
-             git commit -m "Agent task: ${{ steps.metadata.outputs.instruction }}" || echo "No changes to commit"
-         
-         - name: Push branch
-           run: |
-             git push origin agent-task-${{ steps.metadata.outputs.task_id }}
-         
-         - name: Create Pull Request
-           env:
-             GH_TOKEN: ${{ secrets.AGENT_GITHUB_TOKEN }}
-           run: |
-             # Create PR with correlation metadata
-             METADATA='<!-- agent_task_metadata
-             {"task_id": "${{ steps.metadata.outputs.task_id }}", "user_id": "${{ steps.metadata.outputs.user_id }}", "provider": "github_issue_dispatch"}
-             -->'
-             
-             gh pr create \
-               --title "Agent task: ${{ steps.metadata.outputs.instruction }}" \
-               --body "Automated PR for agent task from issue #${{ github.event.issue.number }}
+See [GitHub Actions Example](#github-actions-workflow-example) below.
 
-             $METADATA" \
-               --head agent-task-${{ steps.metadata.outputs.task_id }} \
-               --base main
-         
-         - name: Comment on dispatch issue
-           env:
-             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-           run: |
-             gh issue comment ${{ github.event.issue.number }} \
-               --body "✅ Task processed. PR created in target repository."
-   ```
+### Option 2: GitHub Copilot Agent
 
-2. **Configure secrets** in your dispatch repository:
-   - `AGENT_GITHUB_TOKEN`: Personal access token or GitHub App token with:
-     - `repo` scope (read/write)
-     - `pull_requests:write`
-     - `issues:write`
-   - `TARGET_REPO`: Repository where PRs should be created (e.g., `owner/repo`)
+**Best for**: Organizations with GitHub Copilot for Business/Enterprise
 
-3. **Test the workflow**:
-   - Create a test issue in your dispatch repo with the `copilot-agent` label
-   - Verify the workflow runs and creates a PR
+If you have access to GitHub Copilot workspace agents, you can configure Copilot to monitor dispatch issues and perform work automatically.
 
-### Required Permissions
+**Pros**:
+- Fully managed by GitHub
+- AI-powered task understanding and execution
+- No infrastructure needed
 
-The GitHub token needs:
-- Read issues in dispatch repository
-- Create branches in target repository
-- Open pull requests in target repository
-- Comment on issues in dispatch repository
+**Cons**:
+- Requires GitHub Copilot for Business/Enterprise
+- Less control over execution logic
+- May require GitHub support to configure
 
-## Option 2: Docker Compose Custom Runner
+**Setup**: Configure a GitHub Copilot agent for your dispatch repository through the GitHub web interface or API. The agent should be configured to monitor issues with the `copilot-agent` label and create PRs that reference the dispatch issue. Refer to GitHub Copilot documentation for specific configuration steps.
 
-### Setup Steps
+### Option 3: Custom Runner (Docker + Python)
 
-1. **Create agent runner script**:
+**Best for**: On-premise deployments, custom workflows, advanced automation
 
-   `agent-runner/runner.py`:
+A standalone service that polls the dispatch repository and processes tasks using custom logic or LLM integrations.
 
-   ```python
-   #!/usr/bin/env python3
-   """
-   Simple agent runner that polls GitHub for dispatch issues.
-   """
-   import json
-   import os
-   import re
-   import time
-   from datetime import datetime, timedelta
-   
-   import requests
-   
-   # Configuration
-   DISPATCH_REPO = os.getenv("AGENT_DISPATCH_REPO", "endomorphosis/lift_coding_dispatch")
-   TARGET_REPO = os.getenv("AGENT_TARGET_REPO", "endomorphosis/lift_coding")
-   GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-   POLL_INTERVAL = int(os.getenv("AGENT_POLL_INTERVAL", "60"))  # seconds
-   
-   if not GITHUB_TOKEN:
-       raise ValueError("GITHUB_TOKEN environment variable required")
-   
-   
-   def get_headers():
-       """Get GitHub API headers."""
-       return {
-           "Authorization": f"Bearer {GITHUB_TOKEN}",
-           "Accept": "application/vnd.github+json",
-           "X-GitHub-Api-Version": "2022-11-28",
-       }
-   
-   
-   def get_dispatch_issues():
-       """Fetch open issues with copilot-agent label."""
-       url = f"https://api.github.com/repos/{DISPATCH_REPO}/issues"
-       params = {"labels": "copilot-agent", "state": "open"}
-       
-       resp = requests.get(url, headers=get_headers(), params=params)
-       resp.raise_for_status()
-       return resp.json()
-   
-   
-   def extract_task_metadata(issue_body):
-       """Extract task metadata from issue body."""
-       # Look for metadata comment
-       match = re.search(
-           r"<!--\s*agent_task_metadata\s*\n?(.*?)\n?-->",
-           issue_body,
-           re.DOTALL
-       )
-       if match:
-           try:
-               return json.loads(match.group(1))
-           except json.JSONDecodeError:
-               pass
-       
-       # Fallback: extract from structured fields
-       task_id = re.search(r"task_id:\s*([\w-]+)", issue_body)
-       user_id = re.search(r"user_id:\s*([\w-]+)", issue_body)
-       
-       return {
-           "task_id": task_id.group(1) if task_id else "unknown",
-           "user_id": user_id.group(1) if user_id else "unknown",
-           "provider": "github_issue_dispatch",
-       }
-   
-   
-   def process_task(issue):
-       """Process a dispatch issue and create a PR."""
-       issue_number = issue["number"]
-       title = issue["title"]
-       body = issue["body"] or ""
-       
-       print(f"Processing issue #{issue_number}: {title}")
-       
-       # Extract metadata
-       metadata = extract_task_metadata(body)
-       task_id = metadata.get("task_id", "unknown")
-       
-       # TODO: Implement actual task processing logic
-       # This is a placeholder that creates a simple PR
-       
-       # Create a new branch and PR (simplified - in practice use PyGithub or similar)
-       branch_name = f"agent-task-{task_id}"
-       
-       # For this example, we'll create a PR via GitHub API
-       # In production, you'd clone the repo, make changes, and push
-       
-       pr_body = f"""
-   Automated PR for agent task from issue #{issue_number}
-   
-   Task: {title}
-   
-   <!-- agent_task_metadata
-   {json.dumps(metadata, indent=2)}
-   -->
-   """
-       
-       # Create PR (this is simplified - requires actual branch creation)
-       print(f"Would create PR for task {task_id}")
-       print(f"Metadata: {json.dumps(metadata, indent=2)}")
-       
-       # Comment on issue
-       comment_url = f"https://api.github.com/repos/{DISPATCH_REPO}/issues/{issue_number}/comments"
-       comment_data = {
-           "body": f"✅ Task processed by agent runner. Branch: `{branch_name}`"
-       }
-       requests.post(comment_url, headers=get_headers(), json=comment_data)
-       
-       return True
-   
-   
-   def main():
-       """Main polling loop."""
-       print(f"Agent runner starting...")
-       print(f"Dispatch repo: {DISPATCH_REPO}")
-       print(f"Target repo: {TARGET_REPO}")
-       print(f"Poll interval: {POLL_INTERVAL}s")
-       
-       processed = set()
-       
-       while True:
-           try:
-               issues = get_dispatch_issues()
-               print(f"Found {len(issues)} dispatch issue(s)")
-               
-               for issue in issues:
-                   issue_id = issue["id"]
-                   if issue_id not in processed:
-                       try:
-                           if process_task(issue):
-                               processed.add(issue_id)
-                       except Exception as e:
-                           print(f"Error processing issue #{issue['number']}: {e}")
-               
-               time.sleep(POLL_INTERVAL)
-               
-           except KeyboardInterrupt:
-               print("\nShutting down...")
-               break
-           except Exception as e:
-               print(f"Error in main loop: {e}")
-               time.sleep(POLL_INTERVAL)
-   
-   
-   if __name__ == "__main__":
-       main()
-   ```
+**Pros**:
+- Full control over execution logic
+- Can run on-premise or in any cloud
+- Supports custom LLM providers
+- Advanced error handling and retry logic
 
-2. **Create Docker Compose file**:
+**Cons**:
+- Infrastructure to maintain
+- Need to handle GitHub API rate limits
+- More complex setup and monitoring
 
-   `docker-compose.agent-runner.yml`:
-
-   ```yaml
-   version: '3.8'
-   
-   services:
-     agent-runner:
-       build:
-         context: ./agent-runner
-         dockerfile: Dockerfile
-       environment:
-         - AGENT_DISPATCH_REPO=${AGENT_DISPATCH_REPO:-endomorphosis/lift_coding_dispatch}
-         - AGENT_TARGET_REPO=${AGENT_TARGET_REPO:-endomorphosis/lift_coding}
-         - GITHUB_TOKEN=${GITHUB_TOKEN}
-         - AGENT_POLL_INTERVAL=${AGENT_POLL_INTERVAL:-60}
-       restart: unless-stopped
-       logging:
-         driver: "json-file"
-         options:
-           max-size: "10m"
-           max-file: "3"
-   ```
-
-3. **Create Dockerfile**:
-
-   `agent-runner/Dockerfile`:
-
-   ```dockerfile
-   FROM python:3.11-slim
-   
-   WORKDIR /app
-   
-   # Install dependencies
-   RUN pip install --no-cache-dir requests PyGithub
-   
-   # Copy runner script
-   COPY runner.py .
-   
-   # Run as non-root user
-   RUN useradd -m -u 1000 agent && chown -R agent:agent /app
-   USER agent
-   
-   CMD ["python", "runner.py"]
-   ```
-
-4. **Create .env file** (or export variables):
-
-   ```bash
-   AGENT_DISPATCH_REPO=endomorphosis/lift_coding_dispatch
-   AGENT_TARGET_REPO=endomorphosis/lift_coding
-   GITHUB_TOKEN=ghp_your_token_here
-   AGENT_POLL_INTERVAL=60
-   ```
-
-5. **Run the runner**:
-
-   ```bash
-   docker compose -f docker-compose.agent-runner.yml up -d
-   
-   # View logs
-   docker compose -f docker-compose.agent-runner.yml logs -f
-   
-   # Stop runner
-   docker compose -f docker-compose.agent-runner.yml down
-   ```
-
-### Required Environment Variables
-
-- `AGENT_DISPATCH_REPO`: Repository to monitor for dispatch issues (format: `owner/repo`)
-- `AGENT_TARGET_REPO`: Repository where PRs should be created
-- `GITHUB_TOKEN`: GitHub token with appropriate permissions
-- `AGENT_POLL_INTERVAL`: Polling interval in seconds (default: 60)
-
-### Required Permissions
-
-The GitHub token needs:
-- Read issues in dispatch repository
-- Create branches in target repository
-- Open pull requests in target repository
-- Comment on issues in dispatch repository
-
-## Option 3: GitHub Copilot Agent
-
-If you have access to GitHub Copilot for Business/Enterprise:
-
-1. Configure Copilot to monitor your dispatch repository
-2. Set up Copilot to respond to issues labeled `copilot-agent`
-3. Ensure Copilot includes the correlation metadata in PR bodies
-
-Refer to GitHub's Copilot documentation for specific setup instructions.
+See [Docker Compose Example](#docker-compose-custom-runner) below.
 
 ## Configuration Requirements
 
-All runners must:
+All runners need the following:
 
-1. **Monitor dispatch issues**:
-   - Watch for issues with label `copilot-agent`
-   - Extract task metadata from issue body
+### 1. GitHub Authentication
 
-2. **Process tasks**:
-   - Parse task instruction
-   - Execute task logic (code changes, automation, etc.)
-   - Create a feature branch
+Create a GitHub personal access token or GitHub App with the following permissions:
 
-3. **Create correlated PRs**:
-   - Open PR in target repository
-   - Include correlation metadata in PR body:
-     ```markdown
-     <!-- agent_task_metadata
-     {"task_id": "...", "user_id": "...", "provider": "github_issue_dispatch"}
-     -->
-     ```
+**For Personal Access Token**:
+- `repo` (full control of private repositories)
+  - Or `public_repo` (for public repositories only)
+- `read:org` (if dispatch repo is in an organization)
 
-4. **Report status** (optional):
-   - Comment on dispatch issue with status updates
-   - Handle errors gracefully
+**For GitHub App** (recommended for production):
+- Repository permissions:
+  - Issues: Read & Write
+  - Pull Requests: Read & Write
+  - Contents: Read & Write
+  - Metadata: Read-only
 
-## Smoke Test
+**Security Best Practices**:
+- Use a dedicated bot account, not a personal account
+- Scope tokens to specific repositories when possible
+- Rotate tokens regularly
+- Use GitHub App authentication for better security and auditability
 
-### Prerequisites
-- HandsFree backend running
-- Dispatch repository configured (`HANDSFREE_AGENT_DISPATCH_REPO` env var)
-- Agent runner deployed and running
+### 2. Dispatch Repository Access
 
-### Test Steps
+The runner needs access to:
+- **Dispatch Repository**: Where dispatch issues are created (e.g., `owner/lift_coding_dispatch`)
+- **Target Repository**: Where pull requests will be created (often the same as dispatch repo)
 
-1. **Trigger a test dispatch** via backend API:
+### 3. Correlation Metadata Format
 
+When creating a pull request, include correlation metadata in the PR body to link it back to the agent task:
+
+**Method 1: Agent Task Metadata Comment** (recommended)
+```markdown
+<!-- agent_task_metadata {"task_id": "550e8400-e29b-41d4-a716-446655440000"} -->
+```
+
+**Method 2: Issue Reference**
+```markdown
+Fixes #123
+```
+or
+```markdown
+Closes #123
+```
+or
+```markdown
+Resolves #123
+```
+
+Where `#123` is the issue number of the dispatch issue in the dispatch repository.
+
+**Note**: Method 1 is preferred as it works across repositories and is more explicit.
+
+## GitHub Actions Workflow Example
+
+Create `.github/workflows/agent-runner.yml` in your dispatch repository:
+
+```yaml
+name: Agent Runner
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  process-agent-task:
+    # Only run if the issue has the copilot-agent label
+    if: contains(github.event.issue.labels.*.name, 'copilot-agent')
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    
+    steps:
+      - name: Checkout dispatch repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+      
+      - name: Extract task metadata
+        id: metadata
+        run: |
+          # Parse issue body to extract task metadata
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          
+          # Extract task_id from metadata comment
+          TASK_ID=$(echo "$ISSUE_BODY" | grep -oP '<!-- agent_task_metadata \K[^>]+' | jq -r '.task_id // empty')
+          
+          # Extract instruction
+          INSTRUCTION=$(echo "$ISSUE_BODY" | sed -n '/## Instruction/,/##/p' | sed '1d;$d' | tr -d '\n')
+          
+          # Extract target repository if specified
+          TARGET_REPO=$(echo "$ISSUE_BODY" | grep -oP 'Target Repository: \K[^\s]+' || echo "${{ github.repository }}")
+          
+          echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+          echo "instruction=$INSTRUCTION" >> $GITHUB_OUTPUT
+          echo "target_repo=$TARGET_REPO" >> $GITHUB_OUTPUT
+      
+      - name: Comment on issue (processing started)
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '🤖 Agent runner started processing this task...'
+            });
+      
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.metadata.outputs.target_repo }}
+          token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          path: target-repo
+      
+      - name: Process task (example - customize this step)
+        working-directory: target-repo
+        run: |
+          # This is a placeholder - replace with your actual agent logic
+          # Examples:
+          # - Run an LLM to generate code changes
+          # - Execute a script that makes automated changes
+          # - Call an external API or service
+          
+          echo "Processing instruction: ${{ steps.metadata.outputs.instruction }}"
+          
+          # Example: Create a simple change
+          git config user.name "Agent Runner Bot"
+          git config user.email "agent-runner@example.com"
+          
+          # Make your changes here (this is just an example)
+          echo "# Agent Task Output" > AGENT_OUTPUT.md
+          echo "" >> AGENT_OUTPUT.md
+          echo "Task: ${{ steps.metadata.outputs.instruction }}" >> AGENT_OUTPUT.md
+          echo "Processed at: $(date)" >> AGENT_OUTPUT.md
+          
+          git add AGENT_OUTPUT.md
+          git commit -m "Process agent task from dispatch issue #${{ github.event.issue.number }}"
+      
+      - name: Create Pull Request
+        working-directory: target-repo
+        env:
+          GH_TOKEN: ${{ secrets.AGENT_RUNNER_TOKEN }}
+        run: |
+          # Create a branch
+          BRANCH_NAME="agent-task-${{ github.event.issue.number }}"
+          git checkout -b "$BRANCH_NAME"
+          git push origin "$BRANCH_NAME"
+          
+          # Create PR with correlation metadata
+          PR_BODY="Automated changes from agent task
+
+          Fixes ${{ github.repository }}#${{ github.event.issue.number }}
+
+          <!-- agent_task_metadata {\"task_id\": \"${{ steps.metadata.outputs.task_id }}\"} -->
+
+          ## Changes
+          This PR was automatically generated by the agent runner in response to dispatch issue #${{ github.event.issue.number }}.
+
+          ## Task Instruction
+          ${{ steps.metadata.outputs.instruction }}"
+          
+          gh pr create \
+            --title "Agent task: ${{ github.event.issue.title }}" \
+            --body "$PR_BODY" \
+            --base main
+      
+      - name: Comment on issue (completed)
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ Agent runner completed processing and created a pull request.'
+            });
+      
+      - name: Comment on issue (failed)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '❌ Agent runner failed to process this task. Check the workflow logs for details.'
+            });
+```
+
+### Setup Steps for GitHub Actions
+
+1. **Create the dispatch repository** (if it doesn't exist):
    ```bash
-   curl -X POST http://localhost:8080/v1/agent/tasks \
-     -H "Authorization: Bearer YOUR_TOKEN" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "instruction": "Add a hello world function to utils.py",
-       "provider": "github_issue_dispatch"
-     }'
+   # Create a new repository on GitHub (e.g., owner/lift_coding_dispatch)
+   # This can be public or private based on your security requirements
    ```
 
-2. **Verify dispatch issue created**:
-   - Check dispatch repository for new issue
-   - Confirm `copilot-agent` label applied
-   - Verify task metadata in issue body
+2. **Create a GitHub token**:
+   - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+   - Generate a new token with `repo` scope
+   - Or create a GitHub App with the required permissions
 
-3. **Wait for runner to process**:
-   - Monitor runner logs
-   - Confirm task detected and processed
+3. **Add the token as a secret**:
+   - In your dispatch repository, go to Settings → Secrets and variables → Actions
+   - Create a new secret named `AGENT_RUNNER_TOKEN`
+   - Paste your GitHub token
 
-4. **Verify PR created**:
-   - Check target repository for new PR
-   - Confirm correlation metadata in PR body
-   - Verify branch name matches task_id
+4. **Add the workflow file**:
+   - Create `.github/workflows/agent-runner.yml` in the dispatch repository
+   - Copy the example workflow above and customize the "Process task" step
 
-5. **Verify backend correlation**:
-   - PR webhook should trigger backend correlation
-   - Task state should update to `completed`
-   - Check via API:
+5. **Configure HandsFree**:
+   - Set environment variables:
      ```bash
-     curl http://localhost:8080/v1/agent/tasks/TASK_ID \
-       -H "Authorization: Bearer YOUR_TOKEN"
+     HANDSFREE_AGENT_PROVIDER=github_issue_dispatch
+     HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
+     GITHUB_TOKEN=ghp_your_token_here
      ```
 
-Expected result: Task state is `completed` with `pr_url` in trace.
+6. **Test the workflow**:
+   - Create a test issue with the `copilot-agent` label
+   - Verify the workflow runs and creates a PR
+   - Check that HandsFree marks the task as completed
 
-## Security Considerations
+## Docker Compose Custom Runner
 
-- **Use a dedicated bot account**: Don't use personal tokens
-- **Scope tokens minimally**: Only grant required permissions
-- **Rotate tokens regularly**: Especially for long-running runners
-- **Validate task instructions**: Sanitize inputs before executing
-- **Rate limit API calls**: Respect GitHub API limits (5000 req/hour)
-- **Audit logging**: Log all task processing for security review
-- **Secrets management**: Use environment variables or secret stores, never hardcode
+For a custom runner implementation, create `docker-compose.agent-runner.yml`:
+
+```yaml
+version: '3.8'
+
+services:
+  agent-runner:
+    build:
+      context: ./agent-runner
+      dockerfile: Dockerfile
+    environment:
+      # GitHub authentication
+      - GITHUB_TOKEN=${AGENT_RUNNER_GITHUB_TOKEN}
+      
+      # Dispatch repository configuration
+      - DISPATCH_REPO=${HANDSFREE_AGENT_DISPATCH_REPO:-endomorphosis/lift_coding_dispatch}
+      - POLL_INTERVAL_SECONDS=${AGENT_POLL_INTERVAL:-30}
+      
+      # Agent configuration
+      - AGENT_NAME=${AGENT_NAME:-custom-agent}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - LLM_MODEL=${LLM_MODEL:-gpt-4}
+      
+      # Logging
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    
+    volumes:
+      # Mount workspace for processing tasks
+      - agent-workspace:/workspace
+      # Optional: mount custom scripts or plugins
+      - ./agent-runner/plugins:/app/plugins:ro
+    
+    restart: unless-stopped
+    
+    networks:
+      - agent-runner-net
+
+networks:
+  agent-runner-net:
+    driver: bridge
+
+volumes:
+  agent-workspace:
+```
+
+Create `agent-runner/Dockerfile`:
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy agent runner code
+COPY . .
+
+# Run the agent
+CMD ["python", "runner.py"]
+```
+
+Create `agent-runner/requirements.txt`:
+
+```
+PyGithub>=2.1.1
+openai>=1.0.0
+httpx>=0.24.0
+python-dotenv>=1.0.0
+```
+
+Create `agent-runner/runner.py`:
+
+```python
+#!/usr/bin/env python3
+"""
+Custom agent runner that polls dispatch repository and processes tasks.
+"""
+
+import json
+import logging
+import os
+import re
+import subprocess
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+
+from github import Github
+from github.GithubException import GithubException
+
+# Configure logging
+logging.basicConfig(
+    level=os.environ.get('LOG_LEVEL', 'INFO'),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Configuration
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+DISPATCH_REPO = os.environ.get('DISPATCH_REPO', 'endomorphosis/lift_coding_dispatch')
+POLL_INTERVAL = int(os.environ.get('POLL_INTERVAL_SECONDS', '30'))
+AGENT_NAME = os.environ.get('AGENT_NAME', 'custom-agent')
+WORKSPACE_DIR = Path('/workspace')
+
+
+def extract_task_metadata(issue_body: str) -> dict:
+    """Extract task metadata from issue body."""
+    metadata = {
+        'task_id': None,
+        'instruction': None,
+        'target_repo': None,
+    }
+    
+    # Extract task_id from metadata comment
+    metadata_match = re.search(
+        r'<!-- agent_task_metadata\s+(.*?)\s*-->',
+        issue_body,
+        re.DOTALL
+    )
+    if metadata_match:
+        try:
+            meta = json.loads(metadata_match.group(1))
+            metadata['task_id'] = meta.get('task_id')
+        except json.JSONDecodeError:
+            logger.warning("Failed to parse agent_task_metadata JSON")
+    
+    # Extract instruction (look for ## Instruction section)
+    instruction_match = re.search(
+        r'## Instruction\s*\n+(.*?)(?:\n##|\Z)',
+        issue_body,
+        re.DOTALL | re.IGNORECASE
+    )
+    if instruction_match:
+        metadata['instruction'] = instruction_match.group(1).strip()
+    
+    # Extract target repository
+    repo_match = re.search(
+        r'Target Repository:\s*([^\s\n]+)',
+        issue_body
+    )
+    if repo_match:
+        metadata['target_repo'] = repo_match.group(1)
+    
+    return metadata
+
+
+def process_task(issue, metadata: dict) -> bool:
+    """
+    Process an agent task.
+    
+    Returns True if successful, False otherwise.
+    """
+    logger.info(f"Processing task: {issue.title}")
+    logger.info(f"Task ID: {metadata.get('task_id')}")
+    logger.info(f"Instruction: {metadata.get('instruction')}")
+    
+    try:
+        # Comment on issue that processing started
+        issue.create_comment(
+            f"🤖 {AGENT_NAME} started processing this task at {datetime.utcnow().isoformat()}Z"
+        )
+        
+        # TODO: Implement your actual task processing logic here
+        # Examples:
+        # - Clone the target repository
+        # - Use an LLM to understand the instruction and generate code
+        # - Make the requested changes
+        # - Run tests to verify changes
+        
+        # For this example, we'll just create a placeholder change
+        target_repo = metadata.get('target_repo', DISPATCH_REPO)
+        instruction = metadata.get('instruction', issue.title)
+        
+        # Simulate work
+        time.sleep(5)
+        
+        # Create a PR with correlation metadata
+        # In a real implementation, you would:
+        # 1. Clone the target repository
+        # 2. Create a branch
+        # 3. Make changes based on the instruction
+        # 4. Commit and push changes
+        # 5. Create a PR using GitHub API
+        
+        # For now, just log success
+        logger.info(f"Task processed successfully: {issue.number}")
+        
+        # Create correlation comment
+        task_id = metadata.get('task_id')
+        correlation_metadata = f'<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->' if task_id else ''
+        
+        issue.create_comment(
+            f"✅ {AGENT_NAME} completed processing this task.\n\n"
+            f"**Next steps**: A pull request should be created with the correlation metadata:\n"
+            f"```markdown\n{correlation_metadata}\nFixes #{issue.number}\n```"
+        )
+        
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to process task: {e}", exc_info=True)
+        
+        try:
+            issue.create_comment(
+                f"❌ {AGENT_NAME} failed to process this task: {str(e)}"
+            )
+        except Exception:
+            logger.error("Failed to post error comment to issue")
+        
+        return False
+
+
+def main():
+    """Main agent runner loop."""
+    if not GITHUB_TOKEN:
+        logger.error("GITHUB_TOKEN environment variable is required")
+        return
+    
+    logger.info(f"Starting {AGENT_NAME}")
+    logger.info(f"Monitoring dispatch repository: {DISPATCH_REPO}")
+    logger.info(f"Poll interval: {POLL_INTERVAL} seconds")
+    
+    # Initialize GitHub client
+    gh = Github(GITHUB_TOKEN)
+    
+    # Track processed issues to avoid duplicate work
+    processed_issues = set()
+    
+    while True:
+        try:
+            # Get the dispatch repository
+            repo = gh.get_repo(DISPATCH_REPO)
+            
+            # Get open issues with copilot-agent label
+            issues = repo.get_issues(
+                state='open',
+                labels=['copilot-agent'],
+                sort='created',
+                direction='asc'
+            )
+            
+            for issue in issues:
+                # Skip if already processed
+                if issue.number in processed_issues:
+                    continue
+                
+                logger.info(f"Found new dispatch issue: #{issue.number} - {issue.title}")
+                
+                # Extract task metadata
+                metadata = extract_task_metadata(issue.body)
+                
+                if not metadata.get('task_id'):
+                    logger.warning(f"Issue #{issue.number} missing task_id, skipping")
+                    continue
+                
+                # Process the task
+                success = process_task(issue, metadata)
+                
+                if success:
+                    # Mark as processed
+                    processed_issues.add(issue.number)
+                    
+                    # Optional: close the issue or add a label
+                    # issue.edit(state='closed')
+                    # issue.add_to_labels('processed')
+            
+            # Clean up old processed issues from memory (keep last 1000)
+            if len(processed_issues) > 1000:
+                processed_issues = set(list(processed_issues)[-1000:])
+            
+        except GithubException as e:
+            logger.error(f"GitHub API error: {e}", exc_info=True)
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}", exc_info=True)
+        
+        # Wait before next poll
+        time.sleep(POLL_INTERVAL)
+
+
+if __name__ == '__main__':
+    main()
+```
+
+### Setup Steps for Docker Compose
+
+1. **Create the agent-runner directory**:
+   ```bash
+   mkdir -p agent-runner
+   cd agent-runner
+   ```
+
+2. **Create the files**:
+   - Copy the `Dockerfile`, `requirements.txt`, and `runner.py` from above
+
+3. **Configure environment variables**:
+   - Create `.env` file:
+     ```bash
+     AGENT_RUNNER_GITHUB_TOKEN=ghp_your_token_here
+     HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
+     LLM_API_KEY=your_llm_api_key_here
+     ```
+
+4. **Build and run**:
+   ```bash
+   docker-compose -f docker-compose.agent-runner.yml up -d
+   ```
+
+5. **Monitor logs**:
+   ```bash
+   docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
+   ```
 
 ## Troubleshooting
 
-### Runner not detecting issues
+### Runner not detecting dispatch issues
 
-- Verify `AGENT_DISPATCH_REPO` matches backend `HANDSFREE_AGENT_DISPATCH_REPO`
-- Check GitHub token has `repo` read access
-- Confirm issues have `copilot-agent` label
-- Review runner logs for API errors
+**Problem**: The agent runner doesn't find or process dispatch issues.
 
-### PRs not correlating with tasks
+**Solutions**:
+- Verify the `copilot-agent` label exists on the issues
+- Check that the runner has access to the dispatch repository
+- Verify the GitHub token has the required permissions (`repo` scope)
+- Check the runner logs for authentication errors
+- Ensure the dispatch repository name is correct (format: `owner/repo`)
 
-- Ensure correlation metadata is in PR body (exact format matters)
-- Verify backend webhook is configured for target repository
-- Check task_id matches between issue and PR
-- Review backend logs for webhook processing errors
+### Task not marked as completed
 
-### GitHub API rate limits
+**Problem**: The PR is created but HandsFree doesn't mark the task as completed.
 
-- Reduce polling frequency (`AGENT_POLL_INTERVAL`)
-- Use conditional requests (ETags) to save quota
-- Consider GitHub App authentication (higher limits)
+**Solutions**:
+- Verify the PR body includes correlation metadata:
+  ```markdown
+  <!-- agent_task_metadata {"task_id": "actual-task-id"} -->
+  ```
+  or
+  ```markdown
+  Fixes #123
+  ```
+- Check that the webhook is being received by HandsFree (check webhook logs)
+- Verify the task_id matches exactly (UUIDs are case-sensitive)
+- Check that the PR is opened in the same repository as the dispatch issue (for issue references)
+- Look at HandsFree logs for correlation attempts and errors
 
-### Permission errors
+### GitHub API rate limiting
 
-- Verify token has required scopes
-- Check repository access (public vs private)
-- Confirm bot account has been invited to repositories
+**Problem**: Runner hits GitHub API rate limits.
 
-## Advanced Configuration
+**Solutions**:
+- Increase `POLL_INTERVAL_SECONDS` to reduce API calls
+- Use a GitHub App instead of personal access token (higher rate limits)
+- Implement conditional requests using ETags
+- Use GraphQL API instead of REST API for complex queries
+- Monitor rate limit headers and implement exponential backoff
 
-### Using GitHub Apps
+### Authentication failures
 
-For higher rate limits and better security:
+**Problem**: Runner fails to authenticate with GitHub.
 
-1. Create a GitHub App with required permissions
-2. Install the app on dispatch and target repositories
-3. Use app authentication in runner (JWT + installation token)
+**Solutions**:
+- Regenerate the GitHub token and update secrets
+- Verify token hasn't expired
+- Check token scopes include `repo` permission
+- For GitHub Apps, verify the app installation and permissions
+- Test token manually using `curl`:
+  ```bash
+  curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
+  ```
 
-### Concurrent processing
+### Workflow doesn't trigger
 
-To handle multiple tasks simultaneously:
+**Problem**: GitHub Actions workflow doesn't run when issues are created.
 
-1. Use a job queue (Redis, AWS SQS)
-2. Run multiple runner instances
-3. Implement task locking to prevent duplicates
+**Solutions**:
+- Verify the workflow file is in `.github/workflows/` in the default branch
+- Check that the repository has Actions enabled (Settings → Actions)
+- Verify the workflow has the correct trigger conditions
+- Check the Actions tab for any errors or disabled workflows
+- Ensure the `copilot-agent` label is applied to the issue
 
-### Enhanced task processing
+## Security Considerations
 
-Integrate with:
-- LLM APIs (OpenAI, Anthropic) for intelligent task execution
-- CI/CD systems for testing changes before PR creation
-- Code analysis tools for quality checks
+### Token Security
+- **Never commit tokens to version control**
+- Use GitHub Actions secrets or environment variables
+- Rotate tokens regularly (every 90 days recommended)
+- Use fine-grained tokens with minimal required permissions
+- Consider using GitHub Apps for better auditability
+
+### Bot Account
+- Create a dedicated bot account for the agent runner
+- Don't use personal accounts for automation
+- Document the bot account and its purpose
+- Restrict bot account permissions to only what's needed
+
+### Code Execution
+- Validate and sanitize all inputs from dispatch issues
+- Use sandboxed environments for executing untrusted code
+- Implement timeout limits for task processing
+- Review generated code before merging (don't auto-merge)
+- Use branch protection rules to require reviews
+
+### Secrets Management
+- Use GitHub Actions secrets or external secret managers (Vault, AWS Secrets Manager)
+- Don't log secrets or sensitive data
+- Implement secret scanning in repositories
+- Rotate secrets regularly
+
+### Rate Limiting
+- Respect GitHub API rate limits
+- Implement exponential backoff for retries
+- Cache responses when possible
+- Use conditional requests to save quota
+
+## Monitoring and Observability
+
+### Logging
+- Log all task processing attempts and outcomes
+- Include timestamps and correlation IDs
+- Avoid logging sensitive data (tokens, user data)
+- Use structured logging (JSON) for easier parsing
+
+### Metrics
+- Track task processing success/failure rates
+- Monitor GitHub API rate limit usage
+- Measure task processing duration
+- Count active/completed/failed tasks
+
+### Alerts
+- Alert on repeated failures
+- Alert on API rate limit warnings
+- Alert on authentication failures
+- Alert on extended processing times
+
+### Example Prometheus Metrics
+```python
+from prometheus_client import Counter, Histogram, Gauge
+
+tasks_processed = Counter('agent_tasks_processed_total', 'Total tasks processed', ['status'])
+task_duration = Histogram('agent_task_duration_seconds', 'Task processing duration')
+github_rate_limit = Gauge('github_api_rate_limit_remaining', 'GitHub API rate limit remaining')
+```
+
+## Next Steps
+
+After setting up your agent runner:
+
+1. **Test the full flow (Smoke Test)**:
+   
+   a. **Create a test dispatch issue** in your dispatch repository:
+      - Title: "Test agent task"
+      - Add label: `copilot-agent`
+      - Body:
+        ```markdown
+        ## Instruction
+        Create a simple test file to verify agent runner functionality
+        
+        Target Repository: owner/your-repo
+        
+        <!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->
+        ```
+   
+   b. **Monitor the agent runner**:
+      - For Docker Compose: `docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner`
+      - For GitHub Actions: Check the Actions tab in your dispatch repository
+      
+      Expected log output:
+      - "Found new dispatch issue: #N - Test agent task"
+      - "Cloning owner/your-repo to /workspace/..."
+      - "Creating new branch agent-task-test-123"
+      - "Created trace file: agent-tasks/test-123.md"
+      - "Committed and pushed changes to agent-task-test-123"
+      - "Created PR #N: <PR URL>"
+      - "Task processed successfully: N"
+   
+   c. **Verify the results**:
+      - ✅ A new branch `agent-task-test-123` exists in the target repository
+      - ✅ A new pull request is created with:
+        - Title: "Agent task: Test agent task"
+        - Body contains: `<!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->`
+        - Body contains: `Fixes owner/dispatch-repo#N`
+        - File `agent-tasks/test-123.md` is present in the PR
+      - ✅ The dispatch issue has two comments from the agent:
+        - "🤖 custom-agent started processing this task..."
+        - "✅ custom-agent completed processing this task..."
+      - ✅ The dispatch issue has a `processed` label
+      - ✅ HandsFree backend marks the task as completed (check task status)
+   
+   d. **Clean up**:
+      - Close or merge the test PR
+      - Delete the test branch: `git push origin --delete agent-task-test-123`
+      - Close the test dispatch issue
+
+2. **Customize the processing logic**:
+   - The runner now includes complete PR-creation functionality
+   - Integrate your preferred LLM provider for actual code generation
+   - Add custom validation and testing
+   - Implement error recovery strategies
+
+3. **Monitor and optimize**:
+   - Watch logs for errors and warnings
+   - Optimize polling intervals
+   - Tune timeouts and retries
+
+4. **Scale up**:
+   - Add more runner instances for concurrency
+   - Implement a queue for better load distribution
+   - Use auto-scaling based on dispatch issue volume
 
 ## Related Documentation
 
-- Backend webhook correlation: `src/handsfree/api.py` (`_correlate_pr_with_agent_tasks`)
-- Dispatch provider: `src/handsfree/agent_providers.py` (`GitHubIssueDispatchProvider`)
-- PR correlation tests: `tests/test_pr_correlation.py`
+- [PR-016: Agent delegation integration](../tracking/PR-016-agent-delegation-integration.md) - Details on the dispatch provider
+- [PR-022: Agent delegation polish](../tracking/PR-022-agent-delegation-polish.md) - Auto-start and webhook correlation
+- [PR-008: Agent orchestration stub](../tracking/PR-008-agent-orchestration-stub.md) - Original agent task model
+- [GitHub Webhooks Documentation](./webhooks.md) - Webhook ingestion and processing
 
 ## Support
 
-For issues or questions:
-- Open an issue in the main repository
-- Check existing documentation in `docs/`
-- Review tracking docs: `tracking/PR-016-agent-delegation-integration.md`, `tracking/PR-022-agent-delegation-polish.md`
+If you encounter issues:
+
+1. Check the troubleshooting section above
+2. Review runner logs for specific errors
+3. Verify configuration and permissions
+4. Open an issue in the repository with:
+   - Runner type (Actions, Docker, custom)
+   - Error messages and logs
+   - Configuration (with sensitive data redacted)
+   - Steps to reproduce

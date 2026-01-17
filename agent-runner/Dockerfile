@@ -2,19 +2,17 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy runner script
-COPY runner.py .
+# Copy agent runner code
+COPY . .
 
-# Make script executable
-RUN chmod +x runner.py
-
-# Run as non-root user for security
-RUN useradd -m -u 1000 agent && chown -R agent:agent /app
-USER agent
-
-# Run the agent runner
+# Run the agent
 CMD ["python", "runner.py"]

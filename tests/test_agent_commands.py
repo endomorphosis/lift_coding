@@ -264,7 +264,7 @@ class TestAgentPause:
         assert response["status"] == "ok"
         assert "paused" in response["spoken_text"].lower()
 
-    def test_pause_no_running_tasks(self, router, parser):
+    def test_pause_no_running_tasks(self, router, parser, test_user_id):
         """Test error when no running tasks to pause."""
         intent = parser.parse("pause agent")
         assert response["status"] == "ok"
@@ -353,9 +353,3 @@ class TestAgentResume:
 
         assert response["status"] == "error"
         assert "not available" in response["spoken_text"].lower()
-
-
-@pytest.fixture
-def test_user_id():
-    """Return a test user ID."""
-    return "default-user"
