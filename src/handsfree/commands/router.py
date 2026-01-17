@@ -14,6 +14,9 @@ from .session_context import SessionContext
 
 logger = logging.getLogger(__name__)
 
+# Constants for response formatting
+PR_TITLE_PREVIEW_LENGTH = 30  # Max characters for PR title previews in brief summaries
+
 
 class CommandRouter:
     """Route parsed intents to handlers and compose responses."""
@@ -525,6 +528,80 @@ class CommandRouter:
             "spoken_text": spoken_text,
         }
 
+    def _format_inbox_summary(
+        self, prs: list[dict[str, Any]], profile_config: ProfileConfig
+    ) -> str:
+        """Format inbox summary based on profile verbosity.
+
+        Args:
+            prs: List of PR dictionaries
+            profile_config: User's profile configuration
+
+        Returns:
+            Formatted spoken summary
+        """
+        if not prs:
+            if profile_config.profile == Profile.WORKOUT:
+                return "Inbox empty."
+            return "Your inbox is empty."
+
+        count = len(prs)
+
+        # Count actionable vs informational
+        review_requests = sum(1 for pr in prs if pr.get("requested_reviewer", False))
+        assignments = sum(1 for pr in prs if pr.get("assignee", False))
+
+        # Build summary based on profile
+        if profile_config.profile == Profile.WORKOUT:
+            # Ultra-brief: just counts
+            if review_requests > 0:
+                return f"{review_requests} PRs."
+            return f"{count} items."
+
+        elif profile_config.profile == Profile.FOCUSED:
+            # Brief, actionable items only
+            actionable = review_requests + assignments
+            if actionable > 0:
+                return f"{actionable} actionable PRs."
+            return f"{count} inbox items."
+
+        elif profile_config.profile == Profile.RELAXED:
+            # Detailed: full context
+            parts = []
+            if review_requests > 0:
+                parts.append(
+                    f"{review_requests} pull request{'s' if review_requests != 1 else ''} "
+                    f"waiting for your review"
+                )
+            if assignments > 0:
+                parts.append(f"{assignments} PR{'s' if assignments != 1 else ''} assigned to you")
+            if not parts:
+                parts.append(f"{count} inbox item{'s' if count != 1 else ''}")
+
+            summary = "You have " + " and ".join(parts) + "."
+
+            # Add detail about first PR
+            if prs:
+                first_pr = prs[0]
+                summary += (
+                    f" First item: PR #{first_pr.get('pr_number')} "
+                    f"in {first_pr.get('repo', 'unknown')}: {first_pr.get('title', 'Untitled')}."
+                )
+
+            return summary
+
+        else:
+            # Moderate/default: balanced detail
+            parts = []
+            if review_requests > 0:
+                parts.append(f"{review_requests} PRs for review")
+            if assignments > 0:
+                parts.append(f"{assignments} assigned")
+            if not parts:
+                parts.append(f"{count} items")
+
+            return "You have " + " and ".join(parts) + "."
+
     def _handle_pr_intent(
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
@@ -591,6 +668,124 @@ class CommandRouter:
             "intent": intent.to_dict(),
             "spoken_text": spoken_text,
         }
+
+    def _format_pr_summary(
+        self,
+        pr_details: dict[str, Any],
+        checks: list[dict[str, Any]],
+        reviews: list[dict[str, Any]],
+        profile_config: ProfileConfig,
+    ) -> str:
+        """Format PR summary based on profile verbosity.
+
+        Args:
+            pr_details: PR details dictionary
+            checks: List of check run dictionaries
+            reviews: List of review dictionaries
+            profile_config: User's profile configuration
+
+        Returns:
+            Formatted spoken summary with appropriate detail level
+        """
+        pr_num = pr_details.get("pr_number", "unknown")
+        title = pr_details.get("title", "Untitled")
+        author = pr_details.get("author", "unknown")
+        state = pr_details.get("state", "open")
+
+        # Count check statuses
+        checks_total = len(checks)
+        checks_failing = sum(1 for c in checks if c.get("conclusion") == "failure")
+        checks_pending = sum(1 for c in checks if c.get("status") != "completed")
+
+        # Count reviews
+        approvals = sum(1 for r in reviews if r.get("state") == "APPROVED")
+        changes_requested = sum(1 for r in reviews if r.get("state") == "CHANGES_REQUESTED")
+
+        # Check for security/critical labels
+        labels = pr_details.get("labels", [])
+        has_security = any(label.lower() in ["security", "vulnerability"] for label in labels)
+
+        # Build summary based on profile
+        if profile_config.profile == Profile.WORKOUT:
+            # Ultra-brief: 1-2 sentences, key numbers only
+            summary = f"PR {pr_num}: {title[:PR_TITLE_PREVIEW_LENGTH]}."
+            if checks_failing > 0:
+                summary += f" {checks_failing} failing."
+            elif has_security:
+                summary += " Security."
+            return summary
+
+        elif profile_config.profile == Profile.FOCUSED:
+            # Brief, actionable items only
+            summary = f"PR {pr_num}: {title}."
+            if checks_failing > 0:
+                summary += f" {checks_failing} checks failing."
+            if changes_requested > 0:
+                summary += " Changes requested."
+            elif approvals > 0:
+                summary += f" {approvals} approved."
+            return summary
+
+        elif profile_config.profile == Profile.RELAXED:
+            # Detailed: full context, all details
+            summary = f"Pull request {pr_num} by {author}: {title}."
+
+            # Add description preview if available
+            description = pr_details.get("description", "")
+            if description:
+                # Take first sentence or first 100 chars
+                desc_preview = description.split(".")[0][:100]
+                summary += f" Description: {desc_preview}."
+
+            # Add check status
+            if checks_total > 0:
+                if checks_failing > 0:
+                    summary += f" {checks_failing} of {checks_total} checks failing."
+                elif checks_pending > 0:
+                    summary += f" {checks_pending} checks still pending."
+                else:
+                    summary += f" All {checks_total} checks passing."
+
+            # Add review status
+            if approvals > 0:
+                summary += f" {approvals} approval{'s' if approvals != 1 else ''}."
+            if changes_requested > 0:
+                summary += (
+                    f" {changes_requested} reviewer{'s' if changes_requested != 1 else ''} "
+                    "requested changes."
+                )
+
+            # Add state
+            if state == "open":
+                summary += " PR is open and awaiting review."
+
+            # Security alert always included
+            if has_security:
+                summary += " SECURITY: This PR contains security-related changes."
+
+            return summary
+
+        else:
+            # Moderate/default: balanced detail (2-4 sentences)
+            summary = f"PR {pr_num}: {title}."
+
+            # Add check status
+            if checks_failing > 0:
+                summary += f" {checks_failing} checks failing."
+            elif checks_total > 0:
+                summary += f" All {checks_total} checks passing."
+
+            # Add review status
+            if approvals > 0:
+                summary += f" {approvals} approved."
+            elif changes_requested > 0:
+                summary += " Changes requested."
+
+            # Security alert always included
+            if has_security:
+                summary += " Security changes included."
+
+            return profile_config.truncate_summary(summary)
 
     def _handle_checks_intent(
         self, intent: ParsedIntent, profile_config: ProfileConfig
