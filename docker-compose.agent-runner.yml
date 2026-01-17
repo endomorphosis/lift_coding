@@ -1,0 +1,68 @@
+version: '3.8'
+
+# Docker Compose configuration for agent runner
+# 
+# This runs a containerized agent runner that polls GitHub for dispatch issues
+# and processes them by creating PRs with correlation metadata.
+#
+# Usage:
+#   1. Create a .env file with required variables (see below)
+#   2. Run: docker compose -f docker-compose.agent-runner.yml up -d
+#   3. View logs: docker compose -f docker-compose.agent-runner.yml logs -f
+#   4. Stop: docker compose -f docker-compose.agent-runner.yml down
+#
+# Required Environment Variables (set in .env file):
+#   GITHUB_TOKEN=ghp_your_token_here
+#   AGENT_DISPATCH_REPO=endomorphosis/lift_coding_dispatch
+#   AGENT_TARGET_REPO=endomorphosis/lift_coding
+#
+# Optional Environment Variables:
+#   AGENT_POLL_INTERVAL=60  # Polling interval in seconds
+#   AGENT_PROCESSED_LABEL=agent-processing  # Label for in-progress issues
+
+services:
+  agent-runner:
+    build:
+      context: ./agent-runner
+      dockerfile: Dockerfile
+    
+    environment:
+      # Dispatch repository (where issues are created)
+      - AGENT_DISPATCH_REPO=${AGENT_DISPATCH_REPO:-endomorphosis/lift_coding_dispatch}
+      
+      # Target repository (where PRs are created)
+      - AGENT_TARGET_REPO=${AGENT_TARGET_REPO:-endomorphosis/lift_coding}
+      
+      # GitHub authentication
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      
+      # Runner configuration
+      - AGENT_POLL_INTERVAL=${AGENT_POLL_INTERVAL:-60}
+      - AGENT_PROCESSED_LABEL=${AGENT_PROCESSED_LABEL:-agent-processing}
+    
+    restart: unless-stopped
+    
+    # Resource limits (adjust as needed)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Health check (optional - requires implementing /health endpoint)
+    # healthcheck:
+    #   test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+    #   interval: 60s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 10s

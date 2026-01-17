@@ -19,7 +19,9 @@ def mock_oauth_env(monkeypatch):
     """Mock OAuth environment variables."""
     monkeypatch.setenv("GITHUB_OAUTH_CLIENT_ID", "test_client_id")
     monkeypatch.setenv("GITHUB_OAUTH_CLIENT_SECRET", "test_client_secret")
-    monkeypatch.setenv("GITHUB_OAUTH_REDIRECT_URI", "http://localhost:8080/v1/github/oauth/callback")
+    monkeypatch.setenv(
+        "GITHUB_OAUTH_REDIRECT_URI", "http://localhost:8080/v1/github/oauth/callback"
+    )
     monkeypatch.setenv("GITHUB_OAUTH_SCOPES", "repo,user:email")
 
 

@@ -311,7 +311,7 @@ def _deliver_notification(
         try:
             # Get the appropriate provider for this subscription's platform
             provider = get_provider_for_platform(subscription.platform)
-            
+
             if provider is None:
                 logger.warning(
                     "No provider available for platform %s, skipping subscription %s",
