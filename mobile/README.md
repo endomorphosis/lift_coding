@@ -42,10 +42,10 @@ export OPENAI_API_KEY="your-openai-key"  # Optional, for TTS
 python -m handsfree.db.migrations
 
 # Start the backend server
-uvicorn handsfree.api:app --host 0.0.0.0 --port 8000
+uvicorn handsfree.api:app --host 0.0.0.0 --port 8080
 ```
 
-The backend should now be accessible at `http://localhost:8000`.
+The backend should now be accessible at `http://localhost:8080`.
 
 ## Installation
 
@@ -67,13 +67,13 @@ Edit `src/api/config.js` and update the `BASE_URL`:
 
 ```javascript
 // For iOS Simulator connecting to localhost
-export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'http://localhost:8080';
 
 // For Android Emulator connecting to localhost
-// export const BASE_URL = 'http://10.0.2.2:8000';
+// export const BASE_URL = 'http://10.0.2.2:8080';
 
 // For physical device on same network
-// export const BASE_URL = 'http://YOUR_COMPUTER_IP:8000';
+// export const BASE_URL = 'http://YOUR_COMPUTER_IP:8080';
 ```
 
 ## Running the App
@@ -197,9 +197,9 @@ Future: OAuth, API key auth, secure storage.
 
 ### Cannot connect to backend
 
-- Ensure backend is running: `curl http://localhost:8000/v1/status`
+- Ensure backend is running: `curl http://localhost:8080/v1/status`
 - Check `BASE_URL` in `src/api/config.js`
-- For Android Emulator, use `http://10.0.2.2:8000`
+- For Android Emulator, use `http://10.0.2.2:8080`
 - For physical device, use your computer's IP address
 - Check firewall settings
 
