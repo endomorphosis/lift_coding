@@ -2,6 +2,44 @@
 
 This guide provides step-by-step instructions and code scaffolding for implementing push notifications with TTS playback on iOS and Android mobile clients.
 
+## Quick Start
+
+The Expo mobile app already includes push notification support. To use it:
+
+1. **Install dependencies**:
+   ```bash
+   cd mobile
+   npm install
+   ```
+
+2. **Start the app**:
+   ```bash
+   npm start
+   ```
+
+3. **Enable push notifications**:
+   - Open the app on a physical device (push doesn't work on simulator)
+   - Navigate to the "Status" screen
+   - Tap "Enable Push" to register for notifications
+   - Grant permission when prompted
+
+4. **Test notifications**:
+   - Use the "Test Notification (Polling)" button to fetch and speak the latest notification
+   - Or trigger a real notification from your backend
+
+## Implementation Overview
+
+The push notification system is implemented in `mobile/src/push/`:
+
+- **`pushClient.js`**: Handles token registration and backend subscription management
+- **`notificationsHandler.js`**: Processes incoming notifications and triggers TTS playback
+- **`index.js`**: Exports all push functionality
+
+The Status screen (`mobile/src/screens/StatusScreen.js`) provides the UI for:
+- Enabling/disabling push notifications
+- Viewing current push token and subscription status
+- Testing notification delivery via polling fallback
+
 ## Overview
 
 The mobile push notification system enables real-time delivery of developer notifications (PR updates, CI failures, agent task completion, etc.) with hands-free audio playback via text-to-speech.
