@@ -3704,8 +3704,9 @@ async def upload_dev_audio(request: Request) -> JSONResponse:
             detail={"error": "invalid_base64", "message": str(e)},
         ) from e
     
-    # Create dev/audio directory if needed
-    dev_audio_dir = Path("dev/audio")
+    # Create dev/audio directory if needed (use absolute path from cwd)
+    # In a real deployment, this should be configurable via env var
+    dev_audio_dir = Path.cwd() / "dev" / "audio"
     dev_audio_dir.mkdir(parents=True, exist_ok=True)
     
     # Write to file with unique name

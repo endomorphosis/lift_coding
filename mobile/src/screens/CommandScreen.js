@@ -24,6 +24,7 @@ export default function CommandScreen() {
   const [recording, setRecording] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
+  const [recordingIntervalId, setRecordingIntervalId] = useState(null);
   const [audioUri, setAudioUri] = useState(null);
   const [audioSize, setAudioSize] = useState(0);
 
@@ -78,8 +79,8 @@ export default function CommandScreen() {
         setRecordingDuration((prev) => prev + 1);
       }, 1000);
 
-      // Store interval ID on recording object
-      newRecording._durationInterval = interval;
+      // Store interval ID in state
+      setRecordingIntervalId(interval);
     } catch (err) {
       console.error('Failed to start recording:', err);
       Alert.alert('Error', 'Failed to start recording');
@@ -91,8 +92,9 @@ export default function CommandScreen() {
 
     try {
       // Clear duration interval
-      if (recording._durationInterval) {
-        clearInterval(recording._durationInterval);
+      if (recordingIntervalId) {
+        clearInterval(recordingIntervalId);
+        setRecordingIntervalId(null);
       }
 
       setIsRecording(false);
@@ -129,6 +131,9 @@ export default function CommandScreen() {
       });
 
       // Upload to dev endpoint
+      // Note: Format is hardcoded as 'm4a' which is the default for expo-av HIGH_QUALITY preset
+      // On iOS this produces .caf or .m4a, on Android typically .m4a
+      // For production, consider detecting format from file extension or Recording.getStatusAsync()
       const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
 
       // Send as audio command
