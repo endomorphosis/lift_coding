@@ -5,7 +5,7 @@
 
 // Default to localhost for development
 // Update this based on your environment
-export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'http://localhost:8080';
 
 // Session management
 let sessionToken = null;
