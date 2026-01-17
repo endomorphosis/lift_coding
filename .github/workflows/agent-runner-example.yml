@@ -118,8 +118,11 @@ jobs:
           echo "" >> task_result.txt
           echo "This is a placeholder result. Replace with actual implementation." >> task_result.txt
           
+          # Sanitize task_id for branch name (remove non-alphanumeric except hyphens)
+          TASK_ID_SAFE=$(echo "${{ steps.metadata.outputs.task_id }}" | sed 's/[^a-zA-Z0-9\-]//g' | cut -c1-8)
+          
           # Set outputs for PR creation
-          echo "branch_name=agent-task-${{ steps.metadata.outputs.task_id }}" >> $GITHUB_OUTPUT
+          echo "branch_name=agent-task-${TASK_ID_SAFE}" >> $GITHUB_OUTPUT
           echo "pr_title=Agent task: ${{ steps.metadata.outputs.instruction }}" >> $GITHUB_OUTPUT
       
       - name: Check out target repository

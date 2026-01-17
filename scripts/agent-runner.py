@@ -40,8 +40,8 @@ class GitHubClient:
         self.token = token
         self.session = requests.Session()
         self.session.headers.update({
-            "Authorization": f"token {token}",
-            "Accept": "application/vnd.github.v3+json",
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
             "User-Agent": "agent-runner/1.0"
         })
     
@@ -84,6 +84,22 @@ def extract_task_metadata(issue_body: str) -> Optional[Dict[str, Any]]:
             return None
     
     return None
+
+
+def sanitize_task_id(task_id: str) -> str:
+    """
+    Sanitize task_id to be safe for use in branch names and file paths.
+    Removes all non-alphanumeric characters except hyphens and underscores.
+    """
+    # Remove any character that's not alphanumeric, hyphen, or underscore
+    sanitized = re.sub(r'[^a-zA-Z0-9\-_]', '', task_id)
+    
+    # Ensure it's not empty and has reasonable length
+    if not sanitized:
+        sanitized = "unknown"
+    
+    # Truncate to reasonable length (8 chars is UUID prefix)
+    return sanitized[:8]
 
 
 def process_task(metadata: Dict[str, Any]) -> str:
@@ -142,10 +158,11 @@ def create_pull_request(
     Returns PR URL if successful, None otherwise.
     """
     task_id = task_metadata.get("task_id", "")
+    task_id_safe = sanitize_task_id(task_id)
     instruction = task_metadata.get("instruction", "")
     
     # Create branch name
-    branch_name = f"agent-task-{task_id[:8]}"
+    branch_name = f"agent-task-{task_id_safe}"
     
     # Get default branch
     repo_info = client.get(f"/repos/{target_repo}")
@@ -169,7 +186,7 @@ def create_pull_request(
             raise
     
     # Create file with task result
-    file_path = f"agent-tasks/{task_id[:8]}.md"
+    file_path = f"agent-tasks/{task_id_safe}.md"
     file_content = task_result.encode("utf-8")
     encoded_content = base64.b64encode(file_content).decode("utf-8")
     
