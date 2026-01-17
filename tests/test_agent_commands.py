@@ -265,12 +265,6 @@ class TestAgentPause:
         assert "paused" in response["spoken_text"].lower()
 
     def test_pause_no_running_tasks(self, router, parser, test_user_id):
-        """Test error when no running tasks to pause."""
-        intent = parser.parse("pause agent")
-        assert response["status"] == "ok"
-        assert "paused" in response["spoken_text"].lower()
-
-    def test_pause_no_running_tasks(self, router, parser, test_user_id):
         """Test pausing when no tasks are running."""
         intent = parser.parse("pause agent")
         response = router.route(intent, Profile.DEFAULT, user_id=test_user_id)
