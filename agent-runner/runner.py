@@ -76,19 +76,38 @@ def extract_task_metadata(issue_body: str) -> dict:
 def clone_repository(repo_full_name: str, target_dir: Path) -> bool:
     """Clone a repository to the specified directory."""
     try:
-        # Use GITHUB_TOKEN for authentication
-        clone_url = f"https://{GITHUB_TOKEN}@github.com/{repo_full_name}.git"
+        # Use https URL without embedding token
+        clone_url = f"https://github.com/{repo_full_name}.git"
         
         logger.info(f"Cloning {repo_full_name} to {target_dir}")
+        
+        # Configure git credential helper to use the token from environment
         subprocess.run(
             ["git", "clone", clone_url, str(target_dir)],
             check=True,
             capture_output=True,
-            text=True
+            text=True,
+            env={**os.environ, 'GIT_TERMINAL_PROMPT': '0'}
         )
+        
+        # Configure git to use token for push operations
+        subprocess.run(
+            ["git", "config", "--local", "credential.helper", ""],
+            cwd=target_dir,
+            check=True,
+            capture_output=True
+        )
+        subprocess.run(
+            ["git", "remote", "set-url", "origin",
+             f"https://x-access-token:{GITHUB_TOKEN}@github.com/{repo_full_name}.git"],
+            cwd=target_dir,
+            check=True,
+            capture_output=True
+        )
+        
         return True
     except subprocess.CalledProcessError as e:
-        logger.error(f"Failed to clone repository: {e.stderr}")
+        logger.error(f"Failed to clone repository: {getattr(e, 'stderr', str(e))}")
         return False
 
 
@@ -142,7 +161,7 @@ def create_and_push_branch(repo_dir: Path, branch_name: str) -> bool:
         
         return True
     except subprocess.CalledProcessError as e:
-        error_msg = e.stderr if hasattr(e, 'stderr') else str(e)
+        error_msg = getattr(e, 'stderr', '') or str(e)
         logger.error(f"Failed to create/checkout branch: {error_msg}")
         return False
 
@@ -228,7 +247,7 @@ def commit_and_push_changes(repo_dir: Path, branch_name: str, commit_message: st
         logger.info(f"Committed and pushed changes to {branch_name}")
         return True
     except subprocess.CalledProcessError as e:
-        error_msg = e.stderr if hasattr(e, 'stderr') else str(e)
+        error_msg = getattr(e, 'stderr', '') or str(e)
         logger.error(f"Failed to commit/push changes: {error_msg}")
         return False
 
@@ -279,13 +298,16 @@ See `agent-tasks/{task_id_short}.md` for task trace.
             break
         
         if not pr:
+            # Get the default branch dynamically
+            default_branch = repo.default_branch
+            
             # Create new PR
-            logger.info(f"Creating new PR from {branch_name} to main")
+            logger.info(f"Creating new PR from {branch_name} to {default_branch}")
             pr = repo.create_pull(
                 title=pr_title,
                 body=pr_body,
                 head=branch_name,
-                base="main"
+                base=default_branch
             )
             logger.info(f"Created PR #{pr.number}: {pr.html_url}")
         
@@ -327,7 +349,7 @@ def process_task(gh_client, issue, metadata: dict) -> bool:
             logger.info(f"No target_repo specified, using dispatch repo: {target_repo}")
         
         # Create branch name from task_id prefix
-        task_id_prefix = task_id[:8] if len(task_id) >= 8 else task_id
+        task_id_prefix = task_id[:8] if task_id and len(task_id) >= 8 else task_id
         branch_name = f"agent-task-{task_id_prefix}"
         
         # Prepare workspace directory
