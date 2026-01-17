@@ -105,7 +105,8 @@ jobs:
           TASK_ID=$(echo "$ISSUE_BODY" | grep -oP '<!-- agent_task_metadata \K[^>]+' | jq -r '.task_id // empty' || echo "")
           
           # Extract instruction from ## Instruction section
-          INSTRUCTION=$(echo "$ISSUE_BODY" | sed -n '/## Instruction/,/##/p' | sed '1d;$d' | head -c 500 || echo "$ISSUE_TITLE")
+          # Match from '## Instruction' to next '##' heading or end of text
+          INSTRUCTION=$(echo "$ISSUE_BODY" | sed -n '/## Instruction/,/^## [^I]/p' | sed '1d;$d' | head -c 500 || echo "$ISSUE_TITLE")
           
           # Extract target repository if specified
           # Format: Target Repository: owner/repo
@@ -303,8 +304,8 @@ jobs:
           ---
           *This PR was created by the HandsFree Agent Runner*"
           
-          # Get default branch
-          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+          # Get default branch using gh CLI (more reliable)
+          DEFAULT_BRANCH=$(gh api repos/:owner/:repo --jq '.default_branch' 2>/dev/null || echo "main")
           
           # Create the PR
           PR_URL=$(gh pr create \
