@@ -79,11 +79,17 @@ def clone_or_update_repo(repo_url: str, repo_name: str, gh_token: str) -> Path:
     if not repo_url or not repo_name:
         raise ValueError("Repository URL and name are required")
 
-    # Add token to URL for authentication
-    if "github.com" in repo_url:
-        auth_url = repo_url.replace("https://", f"https://{gh_token}@")
+    # Add token to URL for authentication (only for valid GitHub URLs)
+    # Use proper URL parsing to avoid substring injection attacks
+    if repo_url.startswith("https://github.com/") or repo_url.startswith(
+        "https://www.github.com/"
+    ):
+        auth_url = repo_url.replace("https://", f"https://{gh_token}@", 1)
     else:
+        # For non-GitHub URLs, use the URL as-is
+        # Users should configure git credentials separately
         auth_url = repo_url
+        logger.warning(f"Non-GitHub URL detected: {repo_url}. Using without token.")
 
     if repo_path.exists():
         logger.info(f"Repository already exists at {repo_path}, updating...")
