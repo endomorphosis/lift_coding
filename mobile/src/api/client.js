@@ -13,7 +13,7 @@
  * - POST /v1/tts
  */
 
-import { BASE_URL, getHeaders } from './config';
+import { getBaseUrl, getHeaders } from './config';
 
 function defaultClientContext(overrides = {}) {
   // Keep this dependency-free; callers can override anything they know.
@@ -38,9 +38,12 @@ function defaultProfile(profile) {
  * @returns {Promise<Object>} Status object with { status, version, user_id }
  */
 export async function getStatus() {
-  const response = await fetch(`${BASE_URL}/v1/status`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders(false); // Status doesn't require auth
+
+  const response = await fetch(`${baseUrl}/v1/status`, {
     method: 'GET',
-    headers: getHeaders(false), // Status doesn't require auth
+    headers,
   });
 
   if (!response.ok) {
@@ -57,6 +60,9 @@ export async function getStatus() {
  * @returns {Promise<Object>} Command response with spoken_text, ui_cards, etc.
  */
 export async function sendCommand(text, options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
     input: {
       type: 'text',
@@ -67,9 +73,9 @@ export async function sendCommand(text, options = {}) {
     idempotency_key: options.idempotency_key || undefined,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/command`, {
+  const response = await fetch(`${baseUrl}/v1/command`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -86,6 +92,9 @@ export async function sendCommand(text, options = {}) {
  * Note: the backend expects an audio URI it can fetch (https:// or file:// for dev).
  */
 export async function sendAudioCommand(uri, format = 'm4a', options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
     input: {
       type: 'audio',
@@ -98,9 +107,9 @@ export async function sendAudioCommand(uri, format = 'm4a', options = {}) {
     idempotency_key: options.idempotency_key || undefined,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/command`, {
+  const response = await fetch(`${baseUrl}/v1/command`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -119,14 +128,17 @@ export async function sendAudioCommand(uri, format = 'm4a', options = {}) {
  * @returns {Promise<Object>} Confirmation response
  */
 export async function confirmCommand(token, idempotencyKey = undefined) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
     token,
     idempotency_key: idempotencyKey,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/commands/confirm`, {
+  const response = await fetch(`${baseUrl}/v1/commands/confirm`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -144,11 +156,14 @@ export async function confirmCommand(token, idempotencyKey = undefined) {
  * @returns {Promise<Blob>} Audio data as blob
  */
 export async function fetchTTS(text) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = { text };
 
-  const response = await fetch(`${BASE_URL}/v1/tts`, {
+  const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -164,9 +179,12 @@ export async function fetchTTS(text) {
  * @returns {Promise<Array>} Array of notifications
  */
 export async function getNotifications() {
-  const response = await fetch(`${BASE_URL}/v1/notifications`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/notifications`, {
     method: 'GET',
-    headers: getHeaders(),
+    headers,
   });
 
   if (!response.ok) {
@@ -181,15 +199,18 @@ export async function createNotificationSubscription({
   platform = 'webpush',
   subscription_keys = undefined,
 }) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
     endpoint,
     platform,
     subscription_keys,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/notifications/subscriptions`, {
+  const response = await fetch(`${baseUrl}/v1/notifications/subscriptions`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -202,11 +223,14 @@ export async function createNotificationSubscription({
 }
 
 export async function deleteNotificationSubscription(subscriptionId) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const response = await fetch(
-    `${BASE_URL}/v1/notifications/subscriptions/${encodeURIComponent(subscriptionId)}`,
+    `${baseUrl}/v1/notifications/subscriptions/${encodeURIComponent(subscriptionId)}`,
     {
       method: 'DELETE',
-      headers: getHeaders(),
+      headers,
     }
   );
 
