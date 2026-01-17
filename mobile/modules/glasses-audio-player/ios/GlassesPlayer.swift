@@ -14,7 +14,6 @@ public final class GlassesPlayer {
         let session = AVAudioSession.sharedInstance()
         
         // Configure for Bluetooth playback with glasses
-        // .allowBluetoothA2DP enables high-quality audio routing to Bluetooth devices
         try session.setCategory(
             .playAndRecord,
             mode: .voiceChat,
