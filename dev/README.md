@@ -47,6 +47,68 @@ The simulator includes shortcuts for common commands:
 - **TTS**: Text-to-speech works with fixture data (no external API keys needed)
 - To enable real STT/TTS providers, set environment variables (see below)
 
+### Dev Audio Upload Endpoint
+
+For mobile and local development, the backend provides a dev-only endpoint to upload audio bytes:
+
+**Endpoint**: `POST /v1/dev/audio`
+
+**Requirements**:
+- Only available when `HANDSFREE_AUTH_MODE=dev`
+- Requires `X-User-Id` header for authentication
+
+**Request Body**:
+```json
+{
+  "data_base64": "base64-encoded audio bytes",
+  "format": "m4a"  // Supported: wav, m4a, mp3, opus
+}
+```
+
+**Response**:
+```json
+{
+  "uri": "file:///absolute/path/to/saved/file.m4a",
+  "bytes": 12345,
+  "format": "m4a",
+  "user_id": "fixture-user-001"
+}
+```
+
+**Usage Flow**:
+1. Record or capture audio on your mobile device
+2. Base64-encode the audio bytes
+3. POST to `/v1/dev/audio` with the encoded data
+4. Use the returned `file://` URI in subsequent `/v1/command` requests with `input.type="audio"`
+
+**Configuration**:
+- `HANDSFREE_DEV_AUDIO_DIR`: Directory for uploaded files (default: `data/dev_audio`)
+- `HANDSFREE_DEV_AUDIO_MAX_BYTES`: Max file size (default: 10MB)
+
+**Example with curl**:
+```bash
+# Encode an audio file
+AUDIO_B64=$(base64 -w 0 recording.m4a)
+
+# Upload to dev endpoint
+curl -X POST http://localhost:8080/v1/dev/audio \
+  -H "Content-Type: application/json" \
+  -H "X-User-Id: fixture-user-001" \
+  -d "{\"data_base64\": \"$AUDIO_B64\", \"format\": \"m4a\"}"
+
+# Use the returned URI in a command request
+curl -X POST http://localhost:8080/v1/command \
+  -H "Content-Type: application/json" \
+  -H "X-User-Id: fixture-user-001" \
+  -d '{"input": {"type": "audio", "uri": "file:///path/from/previous/response.m4a"}}'
+```
+
+**Security Notes**:
+- This endpoint is **only** for development and testing
+- Uploaded files are stored locally on the server
+- No cleanup/retention policy is currently enforced (files persist until manually deleted)
+- Do not use this endpoint in production environments
+
 ### Troubleshooting
 
 - **CORS errors**: The simulator is served from the same origin as the API, so CORS should not be an issue

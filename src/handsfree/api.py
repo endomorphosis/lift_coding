@@ -589,14 +589,14 @@ async def dev_upload_audio(
 
     try:
         audio_bytes = base64.b64decode(data_base64, validate=True)
-    except Exception:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
                 "error": "invalid_request",
                 "message": "data_base64 must be valid base64",
             },
-        )
+        ) from e
 
     if len(audio_bytes) > max_size:
         raise HTTPException(
