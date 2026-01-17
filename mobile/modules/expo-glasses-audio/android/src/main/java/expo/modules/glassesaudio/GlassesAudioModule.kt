@@ -18,7 +18,7 @@ class GlassesAudioModule : Module() {
 
         // Module lifecycle
         OnCreate {
-            audioRouteMonitor = AudioRouteMonitor(appContext.reactContext ?: return@OnCreate)
+            audioRouteMonitor = AudioRouteMonitor(appContext)
         }
 
         OnDestroy {
@@ -81,7 +81,4 @@ class GlassesAudioModule : Module() {
             monitor.stopMonitoring()
         }
     }
-
-    private val Context.reactContext: Context?
-        get() = this
 }

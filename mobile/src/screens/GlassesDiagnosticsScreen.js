@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { uploadDevAudio, sendAudioCommand } from '../api/client';
+// Local Expo module for Android audio route monitoring
 import GlassesAudio from '../../modules/expo-glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
