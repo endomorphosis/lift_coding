@@ -1,5 +1,6 @@
 """Profile configuration for context-aware responses."""
 
+import re
 from dataclasses import dataclass
 from enum import Enum
 
@@ -126,8 +127,6 @@ class ProfileConfig:
             return text
 
         # Simple sentence splitting by . ! ?
-        import re
-
         sentences = re.split(r"(?<=[.!?])\s+", text)
 
         # Check for critical keywords that should always be included
@@ -151,7 +150,7 @@ class ProfileConfig:
             if remaining_slots > 0:
                 result_sentences.extend(other_sentences[:remaining_slots])
 
-            return " ".join(result_sentences[:self.max_summary_sentences])
+            return " ".join(result_sentences)
 
         # No critical info, just truncate normally
         if len(sentences) <= self.max_summary_sentences:

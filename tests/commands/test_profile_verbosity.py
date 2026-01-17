@@ -99,10 +99,10 @@ class TestSummaryTruncation:
         config = ProfileConfig.for_profile(Profile.WORKOUT)  # 2 sentences max
         text = "First sentence. Second sentence. Third sentence. Fourth sentence."
         result = config.truncate_summary(text)
-        # Should have exactly 2 sentences
-        assert result.count(".") == 2
+        # Should have first 2 sentences only
         assert "First sentence" in result
         assert "Second sentence" in result
+        assert "Third sentence" not in result
         assert "Fourth sentence" not in result
 
     def test_truncate_summary_preserves_critical_info(self) -> None:

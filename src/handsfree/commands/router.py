@@ -12,6 +12,9 @@ from .session_context import SessionContext
 
 logger = logging.getLogger(__name__)
 
+# Constants for response formatting
+PR_TITLE_PREVIEW_LENGTH = 30  # Max characters for PR title previews in brief summaries
+
 
 class CommandRouter:
     """Route parsed intents to handlers and compose responses."""
@@ -758,7 +761,7 @@ class CommandRouter:
         # Build summary based on profile
         if profile_config.profile == Profile.WORKOUT:
             # Ultra-brief: 1-2 sentences, key numbers only
-            summary = f"PR {pr_num}: {title[:30]}."
+            summary = f"PR {pr_num}: {title[:PR_TITLE_PREVIEW_LENGTH]}."
             if checks_failing > 0:
                 summary += f" {checks_failing} failing."
             elif has_security:
