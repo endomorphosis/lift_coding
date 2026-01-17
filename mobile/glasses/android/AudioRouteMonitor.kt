@@ -14,7 +14,7 @@ import android.os.Build
  */
 class AudioRouteMonitor(private val context: Context) {
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-    private var routeChangeCallback: AudioDeviceCallback? = null
+    private var routeChangeCallback: AudioManager.AudioDeviceCallback? = null
     private var scoStateReceiver: BroadcastReceiver? = null
     private var isMonitoring = false
 
@@ -72,7 +72,7 @@ class AudioRouteMonitor(private val context: Context) {
 
         // Register audio device callback (API 23+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            routeChangeCallback = object : AudioDeviceCallback() {
+            routeChangeCallback = object : AudioManager.AudioDeviceCallback() {
                 override fun onAudioDevicesAdded(addedDevices: Array<out AudioDeviceInfo>?) {
                     callback(getCurrentRoute())
                 }
@@ -208,12 +208,5 @@ class AudioRouteMonitor(private val context: Context) {
         AudioManager.MODE_IN_CALL -> "In Call"
         AudioManager.MODE_IN_COMMUNICATION -> "In Communication"
         else -> "Unknown ($mode)"
-    }
-
-    // AudioDeviceCallback class for API 23+
-    @Suppress("Since15")
-    private abstract class AudioDeviceCallback : AudioManager.AudioDeviceCallback() {
-        abstract override fun onAudioDevicesAdded(addedDevices: Array<out AudioDeviceInfo>?)
-        abstract override fun onAudioDevicesRemoved(removedDevices: Array<out AudioDeviceInfo>?)
     }
 }
