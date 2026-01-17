@@ -154,6 +154,7 @@ export default function GlassesDiagnosticsScreen() {
       setCommandResponse(null);
 
       // Step 1: Read audio file and encode as base64
+      // Note: expo-av HIGH_QUALITY preset uses m4a format on iOS and Android
       const audioBase64 = await FileSystem.readAsStringAsync(lastRecordingUri, {
         encoding: FileSystem.EncodingType.Base64,
       });
@@ -175,7 +176,7 @@ export default function GlassesDiagnosticsScreen() {
 
       Alert.alert(
         'Pipeline Complete',
-        `Command processed successfully!\n\n${response.spoken_text || 'No response text'}\n\nNote: TTS playback not yet implemented.`,
+        `Command processed successfully!\n\n${response.spoken_text || 'Response received (no text content)'}\n\nNote: TTS playback not yet implemented.`,
         [{ text: 'OK' }]
       );
 
