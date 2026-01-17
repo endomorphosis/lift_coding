@@ -113,7 +113,7 @@ class TestAgentStatus:
     def test_status_multiple_tasks(self, agent_service, db_conn, test_user_id):
         """Test status with multiple tasks in different states."""
         # Create tasks - they will auto-start to "running"
-        task1 = agent_service.delegate(user_id=test_user_id, instruction="task1", provider="mock")
+        agent_service.delegate(user_id=test_user_id, instruction="task1", provider="mock")
         task2 = agent_service.delegate(user_id=test_user_id, instruction="task2", provider="mock")
         agent_service.delegate(user_id=test_user_id, instruction="task3", provider="mock")
 

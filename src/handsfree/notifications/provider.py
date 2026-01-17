@@ -268,7 +268,7 @@ class APNSProvider(NotificationDeliveryProvider):
         return "api.sandbox.push.apple.com" if self.use_sandbox else "api.push.apple.com"
 
     def _load_private_key_pem(self) -> str:
-        with open(self.key_path, "r", encoding="utf-8") as f:
+        with open(self.key_path, encoding="utf-8") as f:
             return f.read()
 
     def _get_bearer_token(self) -> str:
@@ -442,7 +442,7 @@ class FCMProvider(NotificationDeliveryProvider):
     def _load_service_account(self) -> dict[str, Any]:
         import json
 
-        with open(self.credentials_path, "r", encoding="utf-8") as f:
+        with open(self.credentials_path, encoding="utf-8") as f:
             return json.load(f)
 
     def _get_access_token(self) -> tuple[str, int]:

@@ -8,9 +8,9 @@ Requirements:
     - Git repository with tracking documents
 """
 
+import os
 import subprocess
 import sys
-import os
 import tempfile
 from pathlib import Path
 
@@ -120,7 +120,8 @@ Ready for implementation by GitHub Copilot agent.
 See `{tracking_file}` for full details.
 
 ## Implementation
-This PR will be implemented by a GitHub Copilot agent according to the specifications in the tracking document.
+This PR will be implemented by a GitHub Copilot agent according to the
+specifications in the tracking document.
 
 Refer to the tracking document for:
 - Full problem statement and context
@@ -164,7 +165,7 @@ Refer to the tracking document for:
             print("")
             return True
         else:
-            print(f"  ✓ Draft PR created")
+            print("  ✓ Draft PR created")
             print("")
             return True
     except subprocess.CalledProcessError:
