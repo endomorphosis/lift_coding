@@ -1,4 +1,5 @@
 import { EventEmitter, Subscription } from 'expo-modules-core';
+import { requireNativeModule } from 'expo-modules-core';
 
 export interface AudioDevice {
   id: number;
@@ -23,18 +24,25 @@ export interface AudioRouteChangeEvent {
   route: AudioRouteInfo;
 }
 
+// Get the native module
+const NativeModule = requireNativeModule('GlassesAudio');
+
 /**
  * Expo module for Meta AI Glasses audio route monitoring.
  * Provides real-time information about Android audio routing, including
  * Bluetooth connections, SCO status, and device changes.
  */
 class GlassesAudioModule extends EventEmitter {
+  constructor() {
+    super(NativeModule);
+  }
+
   /**
    * Get the current audio route information.
    * @returns Promise with current route details including inputs, outputs, and Bluetooth status
    */
   async getCurrentRoute(): Promise<AudioRouteInfo> {
-    throw new Error('Method not implemented - requires native module');
+    return await NativeModule.getCurrentRoute();
   }
 
   /**
@@ -42,7 +50,7 @@ class GlassesAudioModule extends EventEmitter {
    * @returns Promise with human-readable route summary
    */
   async getCurrentRouteSummary(): Promise<string> {
-    throw new Error('Method not implemented - requires native module');
+    return await NativeModule.getCurrentRouteSummary();
   }
 
   /**
@@ -50,7 +58,7 @@ class GlassesAudioModule extends EventEmitter {
    * @returns Promise<boolean> true if Bluetooth device is connected
    */
   async isBluetoothConnected(): Promise<boolean> {
-    throw new Error('Method not implemented - requires native module');
+    return await NativeModule.isBluetoothConnected();
   }
 
   /**
@@ -58,7 +66,7 @@ class GlassesAudioModule extends EventEmitter {
    * @returns Promise<boolean> true if SCO is connected
    */
   async isScoConnected(): Promise<boolean> {
-    throw new Error('Method not implemented - requires native module');
+    return await NativeModule.isScoConnected();
   }
 
   /**
@@ -66,14 +74,14 @@ class GlassesAudioModule extends EventEmitter {
    * Emits 'onAudioRouteChange' events when the route changes.
    */
   startMonitoring(): void {
-    throw new Error('Method not implemented - requires native module');
+    NativeModule.startMonitoring();
   }
 
   /**
    * Stop monitoring audio route changes.
    */
   stopMonitoring(): void {
-    throw new Error('Method not implemented - requires native module');
+    NativeModule.stopMonitoring();
   }
 
   /**
