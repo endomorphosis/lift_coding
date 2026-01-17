@@ -1862,7 +1862,7 @@ async def confirm_command(
 async def get_inbox(profile: Profile | None = None) -> InboxResponse:
     """Get attention items (PRs, mentions, failing checks)."""
     # Use ProfileConfig for profile-aware filtering and truncation
-    profile_config = ProfileConfig.for_profile(profile) if profile else ProfileConfig.for_profile(Profile.DEFAULT)
+    profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
     
     # Use fixture user for deterministic behavior
     user = "testuser"
@@ -1901,23 +1901,17 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
             )
             items.append(item)
         
-        # Apply profile-based filtering
-        # During workout, only show high priority items for focused attention
-        if profile == Profile.WORKOUT:
-            items = [item for item in items if item.priority >= 4]
-        
-        return InboxResponse(items=items)
-        
     except Exception as e:
         logger.error("Failed to fetch inbox via handler: %s", str(e))
         # Fall back to fixture items on error
         items = _get_fixture_inbox_items()
-        
-        # Apply profile filtering as before
-        if profile == Profile.WORKOUT:
-            items = [item for item in items if item.priority >= 4]
-        
-        return InboxResponse(items=items)
+    
+    # Apply profile-based filtering
+    # During workout, only show high priority items for focused attention
+    if profile == Profile.WORKOUT:
+        items = [item for item in items if item.priority >= 4]
+    
+    return InboxResponse(items=items)
 
 
 @app.post("/v1/actions/request-review", response_model=ActionResult)
