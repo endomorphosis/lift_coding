@@ -87,14 +87,19 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
+  const formatDeviceList = (devices) => {
+    if (!devices || devices.length === 0) return 'None';
+    return devices.map(d => d.productName || d.typeName).join(', ');
+  };
+
   const updateAudioRouteFromNative = (route) => {
     if (!route) return;
 
     setAudioRouteDetails(route);
     
     // Format the route information for display
-    const inputDevices = route.inputs?.map(d => d.productName || d.typeName).join(', ') || 'None';
-    const outputDevices = route.outputs?.map(d => d.productName || d.typeName).join(', ') || 'None';
+    const inputDevices = formatDeviceList(route.inputs);
+    const outputDevices = formatDeviceList(route.outputs);
     
     setAudioRoute(`In: ${inputDevices} | Out: ${outputDevices}`);
     

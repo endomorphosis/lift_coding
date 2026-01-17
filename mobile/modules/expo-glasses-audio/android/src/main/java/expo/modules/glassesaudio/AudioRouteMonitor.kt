@@ -173,18 +173,19 @@ class AudioRouteMonitor(private val context: Context) {
     }
 
     private fun deviceToMap(device: AudioDeviceInfo): Map<String, Any> {
-        val map = mutableMapOf<String, Any>(
+        val address = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            device.address
+        } else {
+            "N/A"
+        }
+        
+        return mapOf(
             "id" to device.id,
             "type" to device.type,
             "typeName" to getDeviceTypeName(device.type),
-            "productName" to (device.productName?.toString() ?: "Unknown")
+            "productName" to (device.productName?.toString() ?: "Unknown"),
+            "address" to address
         )
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            map["address"] = device.address
-        }
-        
-        return map
     }
 
     private fun getDeviceTypeName(type: Int): String = when (type) {
