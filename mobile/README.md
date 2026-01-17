@@ -136,7 +136,7 @@ Navigate to the **Command** tab:
   - Confirmation requirement (if needed)
 
 #### Audio Commands (Dev Mode)
-The Command screen now supports recording and sending audio commands:
+The Command screen now supports recording and sending audio commands with automatic TTS playback:
 - Tap "🎤 Start Recording" to begin recording
 - Speak your command
 - Tap "⏹ Stop" to end recording
@@ -151,8 +151,15 @@ The audio flow:
 4. Receives a `file://` URI
 5. Submits to `POST /v1/command` with `input.type=audio`
 6. Displays the command response
+7. **Automatically plays TTS response** (if enabled)
 
-**Note:** Audio commands require the backend dev endpoint to be enabled.
+**Features:**
+- **Auto-play TTS**: Toggle to automatically play text-to-speech for responses
+- **Debug Panel**: Toggle to show/hide detailed debug information (status, intent, debug data)
+- **Manual TTS Control**: Play button to manually trigger TTS playback when auto-play is off
+- **Enhanced Error Messages**: Clear error messages with hints for common issues (backend unreachable, dev mode disabled, etc.)
+
+**Note:** Audio commands require the backend dev endpoint to be enabled (`HANDSFREE_AUTH_MODE=dev`).
 
 ### 3. Confirm Actions
 
@@ -177,14 +184,16 @@ Navigate to the **TTS** tab:
 - Tap "Fetch & Play"
 - The app will fetch audio from the backend and play it
 
-## Smoke Test: Audio Command Flow
+## Smoke Test: Audio Command Flow with TTS Playback
 
-This test verifies the complete audio capture and command submission pipeline.
+This test verifies the complete audio capture, command submission, and TTS playback pipeline.
 
 ### Prerequisites
-- Backend running on `http://localhost:8000` (or configured BASE_URL)
+- Backend running on `http://localhost:8080` (or configured BASE_URL)
+- Backend must have `HANDSFREE_AUTH_MODE=dev` enabled
 - Mobile app running on simulator/device
 - Microphone permissions granted
+- Audio playback permissions granted
 
 ### Test Steps
 
@@ -199,33 +208,54 @@ This test verifies the complete audio capture and command submission pipeline.
    - Open the app
    - Tap the "Command" tab
 
-3. **Record an audio command**
+3. **Configure dev settings** (top of screen)
+   - Verify "Show Debug Panel" is ON
+   - Verify "Auto-play TTS" is ON
+
+4. **Record an audio command**
    - Tap "🎤 Start Recording"
    - Speak a command (e.g., "What's in my inbox?")
    - Tap "⏹ Stop"
    - Verify duration and file size are displayed
 
-4. **Submit the audio command**
+5. **Submit the audio command**
    - Tap "Send Audio"
    - Wait for upload and processing
+   - Should see loading indicator
 
-5. **Verify response**
+6. **Verify response and TTS playback**
    - Check that a response appears with:
-     - `spoken_text` field
+     - Status field (if debug panel is on)
+     - Intent field (if debug panel is on)
+     - `spoken_text` field with the response
      - Optional `ui_cards`
      - No errors
+   - **Verify TTS automatically starts playing** (🔊 Playing TTS... indicator should appear)
+   - TTS audio should play through the device speaker
+   - You can tap "⏹ Stop" to stop TTS playback early
+
+7. **Test manual TTS control** (optional)
+   - Toggle "Auto-play TTS" OFF
+   - Send another command (text or audio)
+   - Verify TTS does NOT auto-play
+   - Verify a "🔊 Play TTS" button appears in the response
+   - Tap the button to manually trigger TTS playback
 
 ### Expected Backend Logs
 ```
 INFO: Wrote dev audio: dev/audio/{id}.m4a (XXXX bytes)
 INFO: Processing audio command with uri: file://...
+INFO: TTS request for text: ...
 ```
 
 ### Common Issues
 - **"No audio recorded"**: Ensure you stopped recording before sending
-- **Upload failed**: Check backend is running and `/v1/dev/audio` endpoint exists
+- **"Upload failed" or 403 error**: Check backend is running with `HANDSFREE_AUTH_MODE=dev` and `/v1/dev/audio` endpoint is accessible
+- **"Backend unreachable"**: Verify backend URL in settings, check network connectivity
 - **Microphone permission denied**: Grant permissions in device settings
 - **"Command failed"**: Check backend logs for audio processing errors
+- **TTS not playing**: Check backend has TTS enabled, verify audio playback permissions, check device volume
+- **No TTS response**: Backend may not have TTS configured or the command may not generate spoken_text
 
 ### Verifying the Dev Endpoint
 
