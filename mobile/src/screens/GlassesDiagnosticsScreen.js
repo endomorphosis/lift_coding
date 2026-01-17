@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
+import { uploadDevAudio, sendAudioCommand } from '../api/client';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
@@ -15,6 +17,8 @@ export default function GlassesDiagnosticsScreen() {
   const [lastRecordingUri, setLastRecordingUri] = useState(null);
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [commandResponse, setCommandResponse] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Load dev mode setting
   useEffect(() => {
@@ -129,12 +133,68 @@ export default function GlassesDiagnosticsScreen() {
       
       Alert.alert(
         'Recording Complete',
-        `Audio saved locally.\n\nIn ${devMode ? 'DEV' : 'Glasses'} mode.\n\nReady to play back or upload to backend.`,
+        `Audio saved locally.\n\nIn ${devMode ? 'DEV' : 'Glasses'} mode.\n\nReady to play back or send to backend.`,
         [{ text: 'OK' }]
       );
     } catch (error) {
       setLastError(`Stop recording failed: ${error.message}`);
       console.error('Failed to stop recording:', error);
+    }
+  };
+
+  const processAudioThroughPipeline = async () => {
+    if (!lastRecordingUri) {
+      Alert.alert('No Recording', 'Please record audio first.');
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      setLastError(null);
+      setCommandResponse(null);
+
+      // Step 1: Read audio file and encode as base64
+      // Note: expo-av HIGH_QUALITY preset uses m4a format on iOS and Android
+      const audioBase64 = await FileSystem.readAsStringAsync(lastRecordingUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      // Step 2: Upload to /v1/dev/audio
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+
+      // Step 3: Send to /v1/command
+      const response = await sendAudioCommand(fileUri, format, {
+        profile: 'dev',
+        client_context: {
+          device: 'mobile',
+          app_version: '1.0.0',
+          mode: devMode ? 'dev' : 'glasses',
+        },
+      });
+
+      setCommandResponse(response);
+
+      Alert.alert(
+        'Pipeline Complete',
+        `Command processed successfully!\n\n${response.spoken_text || 'Response received (no text content)'}\n\nNote: TTS playback not yet implemented.`,
+        [{ text: 'OK' }]
+      );
+
+      // TODO: Step 4 & 5 - Implement TTS playback
+      // Currently the backend returns audio as a blob, but we need to handle
+      // binary audio data differently in React Native. Options:
+      // 1. Have backend return base64-encoded audio
+      // 2. Download audio to file using FileSystem.downloadAsync
+      // 3. Use a streaming approach with expo-av
+      // For now, displaying the text response is sufficient to demonstrate
+      // the pipeline is working.
+
+    } catch (error) {
+      setLastError(`Pipeline failed: ${error.message}`);
+      console.error('Failed to process audio through pipeline:', error);
+      Alert.alert('Error', `Failed to process command: ${error.message}`);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -206,8 +266,8 @@ export default function GlassesDiagnosticsScreen() {
     Alert.alert(
       'Audio Pipeline Flow',
       devMode
-        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nFull pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive /v1/tts response\n5. Play through phone speaker'
-        : '👓 GLASSES MODE\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\nFull pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive /v1/tts response\n5. Play through glasses speakers\n\n⚠️ Requires native Bluetooth implementation',
+        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n\n✓ Steps 1-4 implemented\n⏳ TTS playback (step 5) coming soon'
+        : '👓 GLASSES MODE\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n\n⚠️ Requires native Bluetooth implementation',
       [{ text: 'OK' }]
     );
   };
@@ -303,7 +363,7 @@ export default function GlassesDiagnosticsScreen() {
 
       {/* Playback Controls */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>Audio Playback</Text>
+        <Text style={styles.cardTitle}>Audio Playback (Local)</Text>
         <Text style={styles.text}>
           {devMode
             ? '📱 Playing through phone speaker'
@@ -327,6 +387,46 @@ export default function GlassesDiagnosticsScreen() {
         )}
       </View>
 
+      {/* Backend Pipeline Test */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Backend Command Pipeline</Text>
+        <Text style={styles.text}>
+          Process recording through backend pipeline:
+        </Text>
+        <Text style={styles.mono}>
+          Record → /v1/dev/audio → /v1/command
+        </Text>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            (!lastRecordingUri || isProcessing) && styles.buttonDisabled,
+          ]}
+          onPress={processAudioThroughPipeline}
+          disabled={!lastRecordingUri || isProcessing}
+        >
+          <Text style={styles.buttonText}>
+            {isProcessing ? '⏳ Processing...' : '🚀 Send to Backend & Get Response'}
+          </Text>
+        </TouchableOpacity>
+        {!lastRecordingUri && (
+          <Text style={styles.hintText}>Record audio first to enable</Text>
+        )}
+        {commandResponse && (
+          <View style={styles.responseContainer}>
+            <Text style={styles.responseTitle}>Backend Response:</Text>
+            <Text style={styles.responseText}>{commandResponse.spoken_text}</Text>
+            {commandResponse.ui_cards && commandResponse.ui_cards.length > 0 && (
+              <Text style={styles.hintText}>
+                {commandResponse.ui_cards.length} UI card(s) received
+              </Text>
+            )}
+          </View>
+        )}
+        <Text style={styles.hintText}>
+          Note: TTS playback will be added in a future update
+        </Text>
+      </View>
+
       {/* Pipeline Test */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Audio Command Pipeline</Text>
@@ -334,7 +434,7 @@ export default function GlassesDiagnosticsScreen() {
           Both modes use the same backend pipeline:
         </Text>
         <Text style={styles.mono}>
-          Record → /v1/dev/audio → /v1/command → /v1/tts → Play
+          Record → /v1/dev/audio → /v1/command → Response
         </Text>
         <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={testAudioPipeline}>
           <Text style={styles.buttonTextSecondary}>ℹ️ View Pipeline Details</Text>
@@ -346,9 +446,9 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.cardTitle}>Implementation Status</Text>
         <Text style={styles.text}>✓ DEV mode (phone mic/speaker) - Working</Text>
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
+        <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
         <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
-        <Text style={styles.text}>⚠ Backend integration - Ready for implementation</Text>
       </View>
 
       {/* Docs */}
@@ -488,5 +588,24 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  responseContainer: {
+    marginTop: 12,
+    padding: 12,
+    backgroundColor: '#e8f5e9',
+    borderRadius: 8,
+    borderLeftWidth: 4,
+    borderLeftColor: '#4caf50',
+  },
+  responseTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#2e7d32',
+    marginBottom: 6,
+  },
+  responseText: {
+    fontSize: 14,
+    color: '#1b5e20',
+    lineHeight: 20,
   },
 });
