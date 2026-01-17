@@ -1,0 +1,14 @@
+# Core dependencies
+PyGithub>=2.1.1
+
+# Optional dependencies for extending the runner
+# Uncomment and install based on your needs:
+
+# For LLM integration (OpenAI, Anthropic, etc.)
+# openai>=1.0.0
+
+# For advanced HTTP requests
+# httpx>=0.24.0
+
+# For loading .env files
+# python-dotenv>=1.0.0
