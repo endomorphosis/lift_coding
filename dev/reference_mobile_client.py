@@ -17,12 +17,11 @@ Environment variables:
     HANDSFREE_USER_ID: User ID for authentication (default: test user)
 """
 
+import json
 import os
 import sys
-import json
 import time
 import uuid
-from datetime import datetime, timezone
 from typing import Any
 
 # Try to import requests, provide helpful error if missing
@@ -358,7 +357,7 @@ def demo_confirmation_flow(client: HandsFreeClient) -> None:
 
     if response and response.get("pending_action"):
         pending = response["pending_action"]
-        print(f"\n⚠️  Confirmation required:")
+        print("\n⚠️  Confirmation required:")
         print(f"  Summary: {pending.get('summary')}")
         print(f"  Token: {pending.get('token')}")
         print(f"  Expires: {pending.get('expires_at')}")
