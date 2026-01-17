@@ -49,7 +49,11 @@ Remaining (backend):
 
 Remaining (backend):
 - [x] Replace placeholder agent provider with a real integration (e.g., dispatcher that creates a GitHub issue/PR work item, plus correlation to webhook events to mark completion). ✅ Implemented in PR-016 (github_issue_dispatch provider with webhook correlation)
-- [ ] Notifications on agent task state changes via real push provider (currently uses DevLoggerProvider, needs production push provider selection based on user subscriptions).
+- [x] Notifications on agent task state changes via push subscriptions (auto-delivery + provider selection). ✅ Implemented via notifications auto-push + platform providers
+
+Remaining (client-side / out of repo):
+- [ ] iOS + Android companion apps that integrate with Meta AI Glasses for audio capture/playback.
+- [ ] Register APNS/FCM tokens and handle push receive -> speak via TTS on-device.
 
 Remaining (external / infra):
 - [ ] A real agent runner (Copilot agent, workflow automation, or custom runner) that can act on dispatched tasks.
