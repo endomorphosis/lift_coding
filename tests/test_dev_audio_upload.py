@@ -1,11 +1,11 @@
 import base64
 import os
 from pathlib import Path
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-
 
 client = TestClient(app)
 
@@ -18,8 +18,6 @@ def test_dev_audio_upload_saves_file(tmp_path, test_user_id):
     }
 
     # Use patch.dict style like the existing suite
-    from unittest.mock import patch
-
     with patch.dict(
         os.environ,
         {
@@ -50,8 +48,6 @@ def test_dev_audio_upload_forbidden_outside_dev_mode(test_user_id):
         "data_base64": base64.b64encode(b"hello").decode("ascii"),
         "format": "m4a",
     }
-
-    from unittest.mock import patch
 
     with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "jwt"}):
         resp = client.post(
