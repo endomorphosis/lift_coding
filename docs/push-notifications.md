@@ -216,27 +216,28 @@ CREATE TABLE notification_subscriptions (
 
 ## Implementation Status
 
-### Current Implementation (Stub Mode)
+### Current Implementation
 
-- ✅ **WebPush**: Fully implemented with pywebpush library
-- ⚠️ **APNS**: Stub implementation (logs but doesn't send)
-- ⚠️ **FCM**: Stub implementation (logs but doesn't send)
+- ✅ **WebPush**: Production-ready via `pywebpush`
+- ✅ **APNS**: Supports both stub mode and real delivery via APNS HTTP/2
+- ✅ **FCM**: Supports both stub mode and real delivery via FCM HTTP v1
 
-### Production Hardening (Future Work)
+### Enabling Real APNS/FCM Delivery
 
-To make APNS/FCM production-ready:
+By default, APNS/FCM providers run in **stub** mode (log + return success) to keep
+development and tests deterministic.
 
-1. **APNS**: Integrate `aioapns` library
-   ```bash
-   pip install aioapns
-   ```
+To enable real delivery:
 
-2. **FCM**: Integrate `firebase-admin` library
-   ```bash
-   pip install firebase-admin
-   ```
+- Set `HANDSFREE_APNS_MODE=real` and/or `HANDSFREE_FCM_MODE=real`
+- Provide the required credentials:
+  - APNS: `HANDSFREE_APNS_TEAM_ID`, `HANDSFREE_APNS_KEY_ID`, `HANDSFREE_APNS_KEY_PATH`, `HANDSFREE_APNS_BUNDLE_ID`
+  - FCM: `HANDSFREE_FCM_PROJECT_ID`, `HANDSFREE_FCM_CREDENTIALS_PATH`
 
-3. Update provider implementations to use these libraries instead of stub logic
+Notes:
+
+- APNS real mode requires HTTP/2 support via the `h2` package.
+- FCM real mode uses the OAuth2 JWT bearer flow with the service account JSON.
 
 ## Security Considerations
 
@@ -265,13 +266,13 @@ To make APNS/FCM production-ready:
 - **Invalid VAPID keys**: Regenerate keys using the command above
 - **410 Gone errors**: Subscription expired, client should re-subscribe
 
-### APNS Issues (When Implemented)
+### APNS Issues
 
 - **Invalid credentials**: Verify Team ID, Key ID, and key file path
 - **Sandbox vs Production**: Ensure `USE_SANDBOX` matches your app build
 - **Invalid device token**: Token format should be hex string (64 chars)
 
-### FCM Issues (When Implemented)
+### FCM Issues
 
 - **Invalid credentials**: Verify JSON file path and permissions
 - **Project ID mismatch**: Ensure project ID matches Firebase console

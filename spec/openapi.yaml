@@ -338,6 +338,112 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/notifications:
+    get:
+      summary: List notifications for the current user (polling)
+      operationId: listNotifications
+      parameters:
+        - name: since
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional ISO 8601 timestamp; return notifications after this time.
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+            minimum: 1
+            maximum: 100
+          description: Maximum number of notifications to return.
+      responses:
+        '200':
+          description: Notifications list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationsListResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/notifications/subscriptions:
+    post:
+      summary: Register a push subscription/device token
+      operationId: createNotificationSubscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationSubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSubscriptionResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    get:
+      summary: List push subscriptions/device tokens
+      operationId: listNotificationSubscriptions
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSubscriptionsListResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/notifications/subscriptions/{subscription_id}:
+    delete:
+      summary: Unregister a push subscription/device token
+      operationId: deleteNotificationSubscription
+      parameters:
+        - name: subscription_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Subscription UUID
+      responses:
+        '204':
+          description: Subscription deleted successfully
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/agents/tasks/{task_id}/start:
     post:
       summary: Start an agent task (dev-only)
@@ -926,4 +1032,102 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RepoSubscriptionResponse'
+
+    Notification:
+      type: object
+      required: [id, user_id, event_type, message, metadata, created_at, priority, profile]
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        event_type:
+          type: string
+        message:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 5
+        profile:
+          type: string
+        last_delivery_attempt:
+          type: string
+          format: date-time
+          nullable: true
+        delivery_status:
+          type: string
+          enum: [pending, success, failed]
+          nullable: true
+
+    NotificationsListResponse:
+      type: object
+      required: [notifications, count]
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        count:
+          type: integer
+          minimum: 0
+
+    CreateNotificationSubscriptionRequest:
+      type: object
+      required: [endpoint]
+      properties:
+        endpoint:
+          type: string
+          minLength: 1
+          description: Subscription endpoint URL or device token
+        platform:
+          type: string
+          description: "Platform type: webpush, apns, or fcm"
+          enum: [webpush, apns, fcm]
+          default: webpush
+        subscription_keys:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: string
+          description: Provider-specific subscription keys (e.g., auth, p256dh for WebPush)
+
+    NotificationSubscriptionResponse:
+      type: object
+      required: [id, user_id, endpoint, platform, subscription_keys, created_at, updated_at]
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        endpoint:
+          type: string
+        platform:
+          type: string
+          enum: [webpush, apns, fcm]
+        subscription_keys:
+          type: object
+          additionalProperties:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    NotificationSubscriptionsListResponse:
+      type: object
+      required: [subscriptions]
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationSubscriptionResponse'
 
