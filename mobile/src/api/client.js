@@ -194,48 +194,65 @@ export async function getNotifications() {
   return await response.json();
 }
 
-export async function createNotificationSubscription({
-  endpoint,
-  platform = 'webpush',
-  subscription_keys = undefined,
-}) {
-  const baseUrl = await getBaseUrl();
-  const headers = await getHeaders();
-
+/**
+ * Upload audio bytes to dev endpoint and get file:// URI
+ * @param {string} audioBase64 - Base64-encoded audio data
+ * @param {string} format - Audio format (m4a, wav, mp3, opus)
+ * @returns {Promise<Object>} Object with { uri, format }
+ */
+export async function uploadDevAudio(audioBase64, format = 'm4a') {
   const body = {
-    endpoint,
-    platform,
-    subscription_keys,
+    audio_base64: audioBase64,
+    format,
   };
 
-  const response = await fetch(`${baseUrl}/v1/notifications/subscriptions`, {
+  const response = await fetch(`${BASE_URL}/v1/dev/audio`, {
     method: 'POST',
-    headers,
+    headers: getHeaders(),
     body: JSON.stringify(body),
   });
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.error || `Create subscription failed: ${response.status}`);
+    throw new Error(errorData.message || `Upload failed: ${response.status}`);
   }
 
   return await response.json();
 }
 
-export async function deleteNotificationSubscription(subscriptionId) {
-  const baseUrl = await getBaseUrl();
-  const headers = await getHeaders();
+/**
+ * Send an audio command to the backend
+ * @param {string} uri - Audio URI (file:// or pre-signed URL)
+ * @param {string} format - Audio format (m4a, wav, mp3, opus)
+ * @param {number} durationMs - Optional duration in milliseconds
+ * @param {Object} options - Optional parameters (profile, client_context)
+ * @returns {Promise<Object>} Command response with spoken_text, ui_cards, etc.
+ */
+export async function sendAudioCommand(uri, format = 'm4a', durationMs = null, options = {}) {
+  const body = {
+    input: {
+      type: 'audio',
+      uri,
+      format,
+      ...(durationMs && { duration_ms: durationMs }),
+    },
+    profile: options.profile || 'dev',
+    client_context: options.client_context || {
+      device_type: 'mobile',
+      app_version: '1.0.0',
+    },
+  };
 
-  const response = await fetch(
-    `${baseUrl}/v1/notifications/subscriptions/${encodeURIComponent(subscriptionId)}`,
-    {
-      method: 'DELETE',
-      headers,
-    }
-  );
+  const response = await fetch(`${BASE_URL}/v1/command`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(body),
+  });
 
-  if (response.status === 204) return;
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `Command failed: ${response.status}`);
+  }
 
-  const errorData = await response.json().catch(() => ({}));
-  throw new Error(errorData.error || `Delete subscription failed: ${response.status}`);
+  return await response.json();
 }

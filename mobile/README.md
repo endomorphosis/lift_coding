@@ -126,12 +126,33 @@ Open the app and navigate to the **Status** tab. This will show:
 ### 2. Send Commands
 
 Navigate to the **Command** tab:
+
+#### Text Commands
 - Enter a text command (e.g., "what's in my inbox?")
 - Tap "Send Command"
 - View the response including:
   - Spoken text
   - UI cards
   - Confirmation requirement (if needed)
+
+#### Audio Commands (Dev Mode)
+The Command screen now supports recording and sending audio commands:
+- Tap "🎤 Start Recording" to begin recording
+- Speak your command
+- Tap "⏹ Stop" to end recording
+- Review duration and file size
+- Tap "Send Audio" to upload and submit as a command
+- Or tap "Discard" to delete the recording and start over
+
+The audio flow:
+1. Records audio using the device microphone
+2. Encodes as base64
+3. Uploads to `POST /v1/dev/audio` (dev endpoint)
+4. Receives a `file://` URI
+5. Submits to `POST /v1/command` with `input.type=audio`
+6. Displays the command response
+
+**Note:** Audio commands require the backend dev endpoint to be enabled.
 
 ### 3. Confirm Actions
 
@@ -155,6 +176,71 @@ Navigate to the **TTS** tab:
 - Enter text to convert to speech
 - Tap "Fetch & Play"
 - The app will fetch audio from the backend and play it
+
+## Smoke Test: Audio Command Flow
+
+This test verifies the complete audio capture and command submission pipeline.
+
+### Prerequisites
+- Backend running on `http://localhost:8000` (or configured BASE_URL)
+- Mobile app running on simulator/device
+- Microphone permissions granted
+
+### Test Steps
+
+1. **Start the mobile app**
+   ```bash
+   cd mobile
+   npm start
+   # Then press 'i' for iOS or 'a' for Android
+   ```
+
+2. **Navigate to Command screen**
+   - Open the app
+   - Tap the "Command" tab
+
+3. **Record an audio command**
+   - Tap "🎤 Start Recording"
+   - Speak a command (e.g., "What's in my inbox?")
+   - Tap "⏹ Stop"
+   - Verify duration and file size are displayed
+
+4. **Submit the audio command**
+   - Tap "Send Audio"
+   - Wait for upload and processing
+
+5. **Verify response**
+   - Check that a response appears with:
+     - `spoken_text` field
+     - Optional `ui_cards`
+     - No errors
+
+### Expected Backend Logs
+```
+INFO: Wrote dev audio: dev/audio/{id}.m4a (XXXX bytes)
+INFO: Processing audio command with uri: file://...
+```
+
+### Common Issues
+- **"No audio recorded"**: Ensure you stopped recording before sending
+- **Upload failed**: Check backend is running and `/v1/dev/audio` endpoint exists
+- **Microphone permission denied**: Grant permissions in device settings
+- **"Command failed"**: Check backend logs for audio processing errors
+
+### Verifying the Dev Endpoint
+
+Test the backend dev endpoint directly:
+```bash
+# Create a test audio file
+echo "test" | base64 > /tmp/test_audio.b64
+
+# Upload to dev endpoint
+curl -X POST http://localhost:8000/v1/dev/audio \
+  -H "Content-Type: application/json" \
+  -d '{"audio_base64": "'$(cat /tmp/test_audio.b64)'", "format": "m4a"}'
+
+# Should return: {"uri": "file:///.../dev/audio/{id}.m4a", "format": "m4a"}
+```
 
 ## Project Structure
 
@@ -182,9 +268,29 @@ mobile/
 The app integrates with the following backend endpoints:
 
 - `GET /v1/status` - Check backend status
-- `POST /v1/command` - Send text command
+- `POST /v1/command` - Send text or audio command
 - `POST /v1/commands/confirm` - Confirm/cancel pending action
 - `POST /v1/tts` - Fetch TTS audio
+- `POST /v1/dev/audio` - Upload audio (dev only) and get file:// URI
+
+### Audio Command Support
+
+The app now supports sending audio commands via the `POST /v1/command` endpoint with:
+```json
+{
+  "input": {
+    "type": "audio",
+    "uri": "file:///.../dev/audio/{id}.m4a",
+    "format": "m4a",
+    "duration_ms": 3000
+  },
+  "profile": "dev",
+  "client_context": {
+    "device_type": "mobile",
+    "app_version": "1.0.0"
+  }
+}
+```
 
 See `src/api/client.js` for implementation details.
 
@@ -244,7 +350,8 @@ npm install
 ### Planned Features
 
 - [ ] Push notifications integration (`/v1/notifications/subscriptions`)
-- [ ] Audio input for voice commands
+- [x] Audio input for voice commands (dev mode via `/v1/dev/audio`)
+- [ ] Production audio upload (pre-signed URLs, object storage)
 - [ ] Bluetooth audio routing (Meta AI Glasses)
 - [ ] Secure credential storage (Keychain/Keystore)
 - [ ] Biometric authentication

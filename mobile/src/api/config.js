@@ -3,13 +3,9 @@
  * Update BASE_URL to point to your backend server
  */
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// Default backend URL for development
-export const DEFAULT_BASE_URL = 'http://localhost:8080';
-
-// Current BASE_URL (may be overridden by settings)
-let BASE_URL = DEFAULT_BASE_URL;
+// Default to localhost for development
+// Update this based on your environment
+export const BASE_URL = 'http://localhost:8080';
 
 // Session management
 let sessionToken = null;

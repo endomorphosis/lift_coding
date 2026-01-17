@@ -1,6 +1,5 @@
 """Tests for APNS and FCM platform support in notification subscriptions."""
 
-
 import pytest
 from fastapi.testclient import TestClient
 

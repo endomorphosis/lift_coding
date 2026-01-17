@@ -255,9 +255,7 @@ class HandsFreeClient:
         self._print_section("7. Listing Push Subscriptions")
 
         try:
-            response = self.session.get(
-                f"{self.base_url}/v1/notifications/subscriptions"
-            )
+            response = self.session.get(f"{self.base_url}/v1/notifications/subscriptions")
             self._print_response(response)
 
             if response.ok:
@@ -436,9 +434,7 @@ def main():
     """Main entry point."""
     # Configuration
     base_url = os.environ.get("HANDSFREE_API_URL", "http://localhost:8080")
-    user_id = os.environ.get(
-        "HANDSFREE_USER_ID", "00000000-0000-0000-0000-000000000001"
-    )
+    user_id = os.environ.get("HANDSFREE_USER_ID", "00000000-0000-0000-0000-000000000001")
 
     print("=" * 60)
     print("  HandsFree Mobile Client Reference Implementation")

@@ -493,9 +493,9 @@ class CommandRouter:
         """Handle inbox.list intent with profile-based verbosity."""
         # Stub data - in production this would come from GitHub provider
         # For now, generate realistic profile-appropriate responses
-        
+
         profile = profile_config.profile
-        
+
         if profile == Profile.WORKOUT:
             # Ultra-brief: key numbers only
             spoken_text = "2 PRs, 1 failing."
@@ -607,10 +607,10 @@ class CommandRouter:
     ) -> dict[str, Any]:
         """Handle PR-related intents with profile-based verbosity."""
         profile = profile_config.profile
-        
+
         if intent.name == "pr.summarize":
             pr_num = intent.entities.get("pr_number", "unknown")
-            
+
             # Stub data - in production this would come from GitHub provider
             # Generate profile-appropriate PR summaries
             if profile == Profile.WORKOUT:
@@ -625,8 +625,7 @@ class CommandRouter:
             elif profile == Profile.FOCUSED:
                 # Minimal: brief, actionable
                 spoken_text = (
-                    f"PR {pr_num} adds command system with intent parsing. "
-                    "Ready for review."
+                    f"PR {pr_num} adds command system with intent parsing. Ready for review."
                 )
             elif profile == Profile.KITCHEN:
                 # Moderate: 3-4 sentences, conversational
@@ -650,7 +649,7 @@ class CommandRouter:
             else:  # DEFAULT
                 # Balanced
                 spoken_text = f"PR {pr_num} adds the command system with intent parsing."
-                
+
         elif intent.name == "pr.request_review":
             # Should have been caught by confirmation flow
             spoken_text = "Review request submitted."
@@ -910,10 +909,10 @@ class CommandRouter:
 
     def _get_effective_user_id(self, user_id: str | None) -> str:
         """Get effective user ID, falling back to fixture user if none provided.
-        
+
         Args:
             user_id: Optional user identifier from request.
-            
+
         Returns:
             User ID to use for operations (authenticated user or fixture user).
         """
@@ -1038,8 +1037,6 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
-            # Use authenticated user_id or fall back to fixture user
-            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.pause_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task paused.")
@@ -1076,8 +1073,6 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
-            # Use authenticated user_id or fall back to fixture user
-            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.resume_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task resumed.")

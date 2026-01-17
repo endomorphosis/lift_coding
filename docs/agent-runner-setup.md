@@ -324,6 +324,8 @@ jobs:
    - Verify the workflow runs and creates a PR
    - Check that HandsFree marks the task as completed
 
+See [Smoke Test Procedure](#smoke-test-procedure) below for detailed testing steps.
+
 ## Docker Compose Custom Runner
 
 For a custom runner implementation, create `docker-compose.agent-runner.yml`:
@@ -646,7 +648,217 @@ if __name__ == '__main__':
    docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
    ```
 
-## Troubleshooting
+## Smoke Test Procedure
+
+After setting up your agent runner, follow these steps to verify it's working correctly:
+
+### Prerequisites
+
+- Agent runner is running (either via GitHub Actions, Docker, or custom deployment)
+- Dispatch repository exists and is accessible
+- GitHub token has appropriate permissions
+- Target repository exists (can be same as dispatch repo)
+
+### Test Steps
+
+#### Step 1: Create a Test Dispatch Issue
+
+In your dispatch repository (e.g., `owner/lift_coding_dispatch`), create a new issue:
+
+**Title**: `Test agent task - Hello World`
+
+**Labels**: `copilot-agent`
+
+**Body**:
+```markdown
+<!-- agent_task_metadata {"task_id": "smoke-test-XXXXXXXX"} -->
+
+## Instruction
+
+Create a simple test file to verify the agent runner is working correctly. This is a smoke test.
+
+Target Repository: owner/your-target-repo
+```
+
+**Note**: Replace:
+- `XXXXXXXX` with a unique 8-character string (e.g., use current timestamp or random hex: `date +%s | md5sum | head -c 8`)
+- `owner/your-target-repo` with your actual target repository name (or omit to use the dispatch repo as target)
+
+Example task ID generation:
+```bash
+# Generate a unique task ID using current timestamp
+echo "smoke-test-$(date +%s | tail -c 9)"
+# Output: smoke-test-12345678
+```
+
+#### Step 2: Monitor Agent Processing
+
+**For Docker deployment**:
+```bash
+docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
+```
+
+**For GitHub Actions**:
+- Go to the Actions tab in your dispatch repository
+- Watch for the workflow run to start (triggered by the issue creation/labeling)
+- Click on the workflow run to see detailed logs
+
+**Expected log output**:
+```
+INFO - Found new dispatch issue: #X - Test agent task - Hello World
+INFO - Processing task: Test agent task - Hello World
+INFO - Task ID: smoke-test-12345678
+INFO - Cloning repository to /workspace/...
+INFO - Creating new branch agent-task-smoke-te...
+INFO - Created trace file at .../agent-tasks/smoke-te.md
+INFO - Changes committed
+INFO - Pushed branch agent-task-smoke-te to remote
+INFO - Creating new PR...
+INFO - Created PR: #Y
+INFO - Added 'processed' label to issue
+INFO - Task processed successfully: X
+```
+
+#### Step 3: Verify the Pull Request
+
+Navigate to the target repository and verify:
+
+1. **Branch created**: A new branch named `agent-task-smoke-te` (or similar based on task ID prefix)
+
+2. **PR opened** with:
+   - **Title**: "Agent task: Test agent task - Hello World"
+   - **Body contains**:
+     ```markdown
+     <!-- agent_task_metadata {"task_id": "smoke-test-12345678"} -->
+     
+     Automated changes from agent task
+     
+     Fixes owner/lift_coding_dispatch#X
+     ```
+   - **Files changed**: A new file `agent-tasks/smoke-te.md` containing:
+     - Task ID
+     - Instruction text
+     - Correlation metadata comment
+     - Timestamps
+
+3. **PR references the dispatch issue** (check the "Linked issues" section on GitHub)
+
+#### Step 4: Verify Dispatch Issue Updates
+
+Go back to the dispatch issue and verify:
+
+1. **Comments added**:
+   - "🤖 [agent-name] started processing this task at [timestamp]"
+   - "✅ [agent-name] completed processing this task.\n\nPull request created: [PR URL]"
+
+2. **Label added**: The `processed` label should be present (if the label exists in the repository)
+
+#### Step 5: Test Idempotency
+
+To verify the runner handles existing PRs correctly:
+
+1. **Keep the test issue open** (don't close it yet)
+
+2. **Restart the agent runner**:
+   
+   **For Docker**:
+   ```bash
+   docker-compose -f docker-compose.agent-runner.yml restart agent-runner
+   docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
+   ```
+   
+   **For GitHub Actions**: Manually re-trigger the workflow or create a comment on the issue
+
+3. **Expected behavior**:
+   - Runner should skip the issue (already in processed_issues cache)
+   - OR if cache was cleared, runner should update the existing PR instead of creating a new one
+   - Check logs: "PR already exists: #Y, updating..."
+
+4. **Verify**: No duplicate branches or PRs should be created
+
+#### Step 6: Test HandsFree Correlation (Optional)
+
+If you're running the HandsFree backend:
+
+1. **Check HandsFree logs** for webhook processing:
+   ```
+   INFO - Received webhook: pull_request opened
+   INFO - Extracted task_id from PR body: smoke-test-12345678
+   INFO - Updated agent task status to completed
+   ```
+
+2. **Query the agent task** via API or database:
+   ```bash
+   curl -X GET http://localhost:8000/agent-tasks/smoke-test-12345678 \
+     -H "X-API-Key: your-api-key"
+   ```
+   
+   Verify the task status is `completed` and the trace includes the PR URL.
+
+#### Step 7: Clean Up
+
+After successful testing:
+
+1. **Close the test PR** (or merge if you want to keep the test file)
+2. **Delete the test branch** in the target repository
+3. **Close the test dispatch issue**
+4. **Remove test files** (optional):
+   ```bash
+   # In target repo
+   git checkout main
+   git branch -D agent-task-smoke-te
+   rm -rf agent-tasks/
+   ```
+
+### Troubleshooting
+
+**Issue: Runner doesn't detect the issue**
+- Verify the `copilot-agent` label is applied
+- Check DISPATCH_REPO environment variable is correct
+- Verify GitHub token has access to the repository
+- Check runner logs for authentication errors
+
+**Issue: Clone fails**
+- Verify GitHub token has `repo` scope
+- Check if target repository exists and is accessible
+- Verify network connectivity from runner to GitHub
+
+**Issue: Push fails with authentication error**
+- Ensure GITHUB_TOKEN is passed to git clone URL
+- Verify token hasn't expired
+- Check token permissions (needs write access to target repo)
+
+**Issue: PR creation fails**
+- Verify token has `pull_requests: write` permission
+- Check if base branch (main/master) exists in target repo
+- Ensure branch has at least one commit
+
+**Issue: No 'processed' label added**
+- The `processed` label might not exist in the repository
+- Create the label manually: Settings → Labels → New label
+- Label name: `processed`, color: `#0E8A16` (green)
+- Re-run the test
+
+**Issue: HandsFree doesn't mark task as completed**
+- Verify webhook is configured in target repository
+- Check correlation metadata format in PR body
+- Verify task_id matches exactly (case-sensitive)
+- Check HandsFree logs for webhook processing errors
+
+### Success Criteria
+
+Your agent runner is working correctly if:
+
+✅ Dispatch issue is detected within the poll interval  
+✅ Repository is cloned successfully  
+✅ Branch is created with correct naming pattern  
+✅ Trace file contains correlation metadata  
+✅ PR is created with proper metadata and issue reference  
+✅ Dispatch issue is marked as processed  
+✅ Re-running doesn't create duplicate PRs (idempotency)  
+✅ (Optional) HandsFree marks the task as completed  
+
+Congratulations! Your agent runner is now operational.
 
 ### Runner not detecting dispatch issues
 

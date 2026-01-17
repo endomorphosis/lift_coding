@@ -268,7 +268,7 @@ class APNSProvider(NotificationDeliveryProvider):
         return "api.sandbox.push.apple.com" if self.use_sandbox else "api.push.apple.com"
 
     def _load_private_key_pem(self) -> str:
-        with open(self.key_path, "r", encoding="utf-8") as f:
+        with open(self.key_path, encoding="utf-8") as f:
             return f.read()
 
     def _get_bearer_token(self) -> str:
@@ -337,7 +337,9 @@ class APNSProvider(NotificationDeliveryProvider):
 
             bearer = self._get_bearer_token()
 
-            title = str(notification_data.get("title") or notification_data.get("event_type") or "Handsfree")
+            title = str(
+                notification_data.get("title") or notification_data.get("event_type") or "Handsfree"
+            )
             body = str(notification_data.get("message") or "")
 
             payload: dict[str, Any] = {
@@ -362,14 +364,19 @@ class APNSProvider(NotificationDeliveryProvider):
             except ImportError as e:
                 # httpx HTTP/2 requires the optional 'h2' dependency.
                 logger.error("APNS real mode requires httpx[http2] (h2). %s", e)
-                return {"ok": False, "message": "APNS requires HTTP/2 support (install 'h2')", "delivery_id": None}
+                return {
+                    "ok": False,
+                    "message": "APNS requires HTTP/2 support (install 'h2')",
+                    "delivery_id": None,
+                }
 
             if 200 <= resp.status_code < 300:
                 apns_id = resp.headers.get("apns-id")
                 return {
                     "ok": True,
                     "message": f"APNS sent (status: {resp.status_code})",
-                    "delivery_id": apns_id or f"apns-{hash((subscription_endpoint, str(notification_data)))}",
+                    "delivery_id": apns_id
+                    or f"apns-{hash((subscription_endpoint, str(notification_data)))}",
                 }
 
             reason = None
@@ -391,7 +398,9 @@ class APNSProvider(NotificationDeliveryProvider):
             }
 
         except Exception as e:
-            logger.error("Unexpected error sending APNS to %s: %s", token_preview, str(e), exc_info=True)
+            logger.error(
+                "Unexpected error sending APNS to %s: %s", token_preview, str(e), exc_info=True
+            )
             return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
 
 
@@ -433,7 +442,7 @@ class FCMProvider(NotificationDeliveryProvider):
     def _load_service_account(self) -> dict[str, Any]:
         import json
 
-        with open(self.credentials_path, "r", encoding="utf-8") as f:
+        with open(self.credentials_path, encoding="utf-8") as f:
             return json.load(f)
 
     def _get_access_token(self) -> tuple[str, int]:
@@ -528,7 +537,9 @@ class FCMProvider(NotificationDeliveryProvider):
 
             access_token, _exp = self._get_access_token()
 
-            title = str(notification_data.get("title") or notification_data.get("event_type") or "Handsfree")
+            title = str(
+                notification_data.get("title") or notification_data.get("event_type") or "Handsfree"
+            )
             body = str(notification_data.get("message") or "")
 
             url = f"https://fcm.googleapis.com/v1/projects/{self.project_id}/messages:send"
@@ -556,7 +567,8 @@ class FCMProvider(NotificationDeliveryProvider):
                 return {
                     "ok": True,
                     "message": f"FCM sent (status: {resp.status_code})",
-                    "delivery_id": name or f"fcm-{hash((subscription_endpoint, str(notification_data)))}",
+                    "delivery_id": name
+                    or f"fcm-{hash((subscription_endpoint, str(notification_data)))}",
                 }
 
             logger.warning(
@@ -572,7 +584,9 @@ class FCMProvider(NotificationDeliveryProvider):
             }
 
         except Exception as e:
-            logger.error("Unexpected error sending FCM to %s: %s", token_preview, str(e), exc_info=True)
+            logger.error(
+                "Unexpected error sending FCM to %s: %s", token_preview, str(e), exc_info=True
+            )
             return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
 
 

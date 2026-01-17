@@ -16,6 +16,9 @@ dist/
 .env.*
 data/
 
+# Dev audio uploads (don't commit test audio files)
+dev/audio/
+
 # Mobile app dependencies
 mobile/node_modules/
 mobile/.expo/
