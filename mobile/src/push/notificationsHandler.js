@@ -13,6 +13,10 @@ import { Audio } from 'expo-av';
 import { BASE_URL, getHeaders } from '../api/config';
 import { fetchTTS } from '../api/client';
 
+// Notification queue for sequential TTS playback
+let notificationQueue = [];
+let isProcessingQueue = false;
+
 // Configure how notifications are handled when app is in foreground
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -110,19 +114,16 @@ async function fetchNotificationDetails(notificationId) {
  * @param {string} message - Message to speak
  */
 export async function speakNotification(message) {
+  let sound = null;
+  
   try {
     console.log('Speaking notification:', message);
     
     // Fetch TTS audio from backend
     const audioBlob = await fetchTTS(message);
     
-    // Convert blob to URI for playback
-    const reader = new FileReader();
-    const audioUri = await new Promise((resolve, reject) => {
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(audioBlob);
-    });
+    // Use URL.createObjectURL for better performance
+    const audioUri = URL.createObjectURL(audioBlob);
 
     // Configure audio session for playback
     await Audio.setAudioModeAsync({
@@ -133,20 +134,34 @@ export async function speakNotification(message) {
     });
 
     // Play the audio
-    const { sound } = await Audio.Sound.createAsync(
+    const soundObject = await Audio.Sound.createAsync(
       { uri: audioUri },
       { shouldPlay: true }
     );
+    sound = soundObject.sound;
 
     // Clean up after playback completes
-    sound.setOnPlaybackStatusUpdate((status) => {
-      if (status.didJustFinish) {
-        sound.unloadAsync();
+    sound.setOnPlaybackStatusUpdate(async (status) => {
+      if (status.didJustFinish || status.error) {
+        try {
+          await sound.unloadAsync();
+          URL.revokeObjectURL(audioUri);
+        } catch (cleanupError) {
+          console.error('Cleanup error:', cleanupError);
+        }
       }
     });
 
   } catch (error) {
     console.error('Failed to speak notification:', error);
+    // Clean up on error
+    if (sound) {
+      try {
+        await sound.unloadAsync();
+      } catch (cleanupError) {
+        console.error('Sound cleanup error:', cleanupError);
+      }
+    }
   }
 }
 
@@ -181,10 +196,10 @@ export function startNotificationPolling(onNewNotifications, intervalMs = 30000)
       if (notifications.length > 0) {
         console.log(`Received ${notifications.length} new notifications`);
         
-        // Speak each notification
+        // Queue notifications for sequential playback
         for (const notification of notifications) {
           if (notification.message) {
-            await speakNotification(notification.message);
+            queueNotification(notification.message);
           }
           // Update timestamp to latest
           if (notification.created_at) {
@@ -211,6 +226,39 @@ export function startNotificationPolling(onNewNotifications, intervalMs = 30000)
       clearInterval(intervalId);
     }
   };
+}
+
+/**
+ * Queue a notification message for TTS playback
+ * @param {string} message - Message to queue
+ */
+function queueNotification(message) {
+  notificationQueue.push(message);
+  processNotificationQueue();
+}
+
+/**
+ * Process queued notifications sequentially
+ */
+async function processNotificationQueue() {
+  if (isProcessingQueue || notificationQueue.length === 0) {
+    return;
+  }
+
+  isProcessingQueue = true;
+
+  while (notificationQueue.length > 0) {
+    const message = notificationQueue.shift();
+    try {
+      await speakNotification(message);
+      // Small delay between notifications
+      await new Promise(resolve => setTimeout(resolve, 500));
+    } catch (error) {
+      console.error('Error processing notification from queue:', error);
+    }
+  }
+
+  isProcessingQueue = false;
 }
 
 /**

@@ -29,6 +29,7 @@ export default function StatusScreen() {
   const [pushToken, setPushToken] = useState(null);
   const [subscriptionId, setSubscriptionId] = useState(null);
   const [pushLoading, setPushLoading] = useState(false);
+  const [lastNotification, setLastNotification] = useState(null);
 
   const fetchStatus = async () => {
     setLoading(true);
@@ -120,6 +121,12 @@ export default function StatusScreen() {
     // Setup notification listeners
     const cleanup = setupNotificationListeners((notification) => {
       console.log('Notification received in StatusScreen:', notification);
+      // Update UI with latest notification
+      setLastNotification({
+        title: notification.request.content.title,
+        body: notification.request.content.body,
+        timestamp: new Date().toISOString(),
+      });
     });
     
     return cleanup;
@@ -207,6 +214,19 @@ export default function StatusScreen() {
 
         {pushLoading && <ActivityIndicator size="small" color="#007AFF" />}
         
+        {lastNotification && (
+          <View style={styles.lastNotificationContainer}>
+            <Text style={styles.label}>Last Notification:</Text>
+            <Text style={styles.notificationTitle}>{lastNotification.title || 'N/A'}</Text>
+            <Text style={styles.notificationBody} numberOfLines={2}>
+              {lastNotification.body}
+            </Text>
+            <Text style={styles.notificationTime}>
+              {new Date(lastNotification.timestamp).toLocaleTimeString()}
+            </Text>
+          </View>
+        )}
+        
         <Text style={styles.helpText}>
           Enable push to receive real-time notifications. Use "Test Notification" to poll and speak the latest notification via TTS.
         </Text>
@@ -291,6 +311,29 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     marginTop: 15,
+    fontStyle: 'italic',
+  },
+  lastNotificationContainer: {
+    backgroundColor: '#e3f2fd',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 15,
+  },
+  notificationTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 5,
+    color: '#000',
+  },
+  notificationBody: {
+    fontSize: 13,
+    marginTop: 5,
+    color: '#333',
+  },
+  notificationTime: {
+    fontSize: 11,
+    marginTop: 5,
+    color: '#666',
     fontStyle: 'italic',
   },
 });
