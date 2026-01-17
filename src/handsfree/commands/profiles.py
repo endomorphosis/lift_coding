@@ -133,7 +133,7 @@ class ProfileConfig:
         critical_keywords = ["security", "alert", "failing", "failed", "error", "critical"]
         has_critical = any(keyword in text.lower() for keyword in critical_keywords)
 
-        # If we have critical info, ensure at least the first sentence with critical info is included
+        # If critical info exists, ensure critical sentences are included
         if has_critical and len(sentences) > self.max_summary_sentences:
             critical_sentences = []
             other_sentences = []
@@ -195,7 +195,7 @@ class ProfileConfig:
                     informational.append(item)
 
             # Return actionable items first, up to max_inbox_items
-            result = actionable[:self.max_inbox_items]
+            result = actionable[: self.max_inbox_items]
             remaining_slots = self.max_inbox_items - len(result)
             if remaining_slots > 0:
                 result.extend(informational[:remaining_slots])

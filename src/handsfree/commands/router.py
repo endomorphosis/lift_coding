@@ -489,11 +489,11 @@ class CommandRouter:
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
         """Handle inbox.list intent with profile-based verbosity.
-        
+
         Args:
             intent: The parsed inbox.list intent
             profile_config: User's profile configuration
-            
+
         Returns:
             Response with inbox items filtered and formatted per profile
         """
@@ -503,16 +503,16 @@ class CommandRouter:
                 # Get user from intent or use a default for now
                 user = intent.entities.get("user", "default-user")
                 user_id = intent.entities.get("user_id")
-                
+
                 # Fetch PRs from GitHub
                 prs = self.github_provider.list_user_prs(user, user_id=user_id)
-                
+
                 # Apply profile-based filtering
                 filtered_prs = profile_config.filter_inbox_items(prs)
-                
+
                 # Build spoken text based on profile
                 spoken_text = self._format_inbox_summary(filtered_prs, profile_config)
-                
+
                 # Build cards for UI
                 cards = []
                 for pr in filtered_prs:
@@ -526,7 +526,7 @@ class CommandRouter:
                         },
                     }
                     cards.append(card)
-                
+
                 return {
                     "status": "ok",
                     "intent": intent.to_dict(),
@@ -536,36 +536,39 @@ class CommandRouter:
             except Exception as e:
                 logger.warning("Failed to fetch inbox from GitHub: %s", str(e))
                 # Fall through to fixture mode
-        
+
         # Fixture mode: return stub data with profile-based verbosity
         spoken_text = "You have 2 PRs waiting for review and 1 failing check."
-        
+
         # Apply profile-specific formatting
         if profile_config.profile == Profile.WORKOUT:
             spoken_text = "2 PRs, 1 failing."
         elif profile_config.profile == Profile.FOCUSED:
             spoken_text = "2 actionable PRs, 1 failing check."
         elif profile_config.profile == Profile.RELAXED:
-            spoken_text = "You have 2 pull requests waiting for your review and 1 check that is currently failing. You may want to review these items when you have a chance."
-        
+            spoken_text = (
+                "You have 2 pull requests waiting for your review and 1 check that is "
+                "currently failing. You may want to review these items when you have a chance."
+            )
+
         # Apply profile-based truncation
         spoken_text = profile_config.truncate_spoken_text(spoken_text)
-        
+
         return {
             "status": "ok",
             "intent": intent.to_dict(),
             "spoken_text": spoken_text,
         }
-    
+
     def _format_inbox_summary(
         self, prs: list[dict[str, Any]], profile_config: ProfileConfig
     ) -> str:
         """Format inbox summary based on profile verbosity.
-        
+
         Args:
             prs: List of PR dictionaries
             profile_config: User's profile configuration
-            
+
         Returns:
             Formatted spoken summary
         """
@@ -573,27 +576,27 @@ class CommandRouter:
             if profile_config.profile == Profile.WORKOUT:
                 return "Inbox empty."
             return "Your inbox is empty."
-        
+
         count = len(prs)
-        
+
         # Count actionable vs informational
         review_requests = sum(1 for pr in prs if pr.get("requested_reviewer", False))
         assignments = sum(1 for pr in prs if pr.get("assignee", False))
-        
+
         # Build summary based on profile
         if profile_config.profile == Profile.WORKOUT:
             # Ultra-brief: just counts
             if review_requests > 0:
                 return f"{review_requests} PRs."
             return f"{count} items."
-        
+
         elif profile_config.profile == Profile.FOCUSED:
             # Brief, actionable items only
             actionable = review_requests + assignments
             if actionable > 0:
                 return f"{actionable} actionable PRs."
             return f"{count} inbox items."
-        
+
         elif profile_config.profile == Profile.RELAXED:
             # Detailed: full context
             parts = []
@@ -603,14 +606,12 @@ class CommandRouter:
                     f"waiting for your review"
                 )
             if assignments > 0:
-                parts.append(
-                    f"{assignments} PR{'s' if assignments != 1 else ''} assigned to you"
-                )
+                parts.append(f"{assignments} PR{'s' if assignments != 1 else ''} assigned to you")
             if not parts:
                 parts.append(f"{count} inbox item{'s' if count != 1 else ''}")
-            
+
             summary = "You have " + " and ".join(parts) + "."
-            
+
             # Add detail about first PR
             if prs:
                 first_pr = prs[0]
@@ -618,9 +619,9 @@ class CommandRouter:
                     f" First item: PR #{first_pr.get('pr_number')} "
                     f"in {first_pr.get('repo', 'unknown')}: {first_pr.get('title', 'Untitled')}."
                 )
-            
+
             return summary
-        
+
         else:
             # Moderate/default: balanced detail
             parts = []
@@ -630,7 +631,7 @@ class CommandRouter:
                 parts.append(f"{assignments} assigned")
             if not parts:
                 parts.append(f"{count} items")
-            
+
             return "You have " + " and ".join(parts) + "."
 
     def _handle_pr_intent(
@@ -641,19 +642,19 @@ class CommandRouter:
             pr_num = intent.entities.get("pr_number", "unknown")
             repo = intent.entities.get("repo", "owner/repo")
             user_id = intent.entities.get("user_id")
-            
+
             # If GitHub provider is available, fetch real PR details
             if self.github_provider and pr_num != "unknown":
                 try:
                     pr_details = self.github_provider.get_pr_details(repo, pr_num, user_id=user_id)
                     checks = self.github_provider.get_pr_checks(repo, pr_num, user_id=user_id)
                     reviews = self.github_provider.get_pr_reviews(repo, pr_num, user_id=user_id)
-                    
+
                     # Build comprehensive summary
                     spoken_text = self._format_pr_summary(
                         pr_details, checks, reviews, profile_config
                     )
-                    
+
                     # Build card for UI
                     cards = [
                         {
@@ -673,7 +674,7 @@ class CommandRouter:
                             },
                         }
                     ]
-                    
+
                     return {
                         "status": "ok",
                         "intent": intent.to_dict(),
@@ -683,10 +684,10 @@ class CommandRouter:
                 except Exception as e:
                     logger.warning("Failed to fetch PR details from GitHub: %s", str(e))
                     # Fall through to fixture mode
-            
+
             # Fixture mode: return stub data with profile-based verbosity
             spoken_text = f"PR {pr_num} adds the command system with intent parsing."
-            
+
             # Apply profile-specific formatting
             if profile_config.profile == Profile.WORKOUT:
                 spoken_text = f"PR {pr_num}: command system."
@@ -699,10 +700,10 @@ class CommandRouter:
                     f"a parser for extracting intents from user input. "
                     f"The PR is ready for review."
                 )
-            
+
             # Apply profile-based truncation
             spoken_text = profile_config.truncate_spoken_text(spoken_text)
-            
+
         elif intent.name == "pr.request_review":
             # Should have been caught by confirmation flow
             spoken_text = "Review request submitted."
@@ -720,7 +721,7 @@ class CommandRouter:
             "intent": intent.to_dict(),
             "spoken_text": spoken_text,
         }
-    
+
     def _format_pr_summary(
         self,
         pr_details: dict[str, Any],
@@ -729,13 +730,13 @@ class CommandRouter:
         profile_config: ProfileConfig,
     ) -> str:
         """Format PR summary based on profile verbosity.
-        
+
         Args:
             pr_details: PR details dictionary
             checks: List of check run dictionaries
             reviews: List of review dictionaries
             profile_config: User's profile configuration
-            
+
         Returns:
             Formatted spoken summary with appropriate detail level
         """
@@ -743,21 +744,20 @@ class CommandRouter:
         title = pr_details.get("title", "Untitled")
         author = pr_details.get("author", "unknown")
         state = pr_details.get("state", "open")
-        
+
         # Count check statuses
         checks_total = len(checks)
-        checks_passing = sum(1 for c in checks if c.get("conclusion") == "success")
         checks_failing = sum(1 for c in checks if c.get("conclusion") == "failure")
         checks_pending = sum(1 for c in checks if c.get("status") != "completed")
-        
+
         # Count reviews
         approvals = sum(1 for r in reviews if r.get("state") == "APPROVED")
         changes_requested = sum(1 for r in reviews if r.get("state") == "CHANGES_REQUESTED")
-        
+
         # Check for security/critical labels
         labels = pr_details.get("labels", [])
         has_security = any(label.lower() in ["security", "vulnerability"] for label in labels)
-        
+
         # Build summary based on profile
         if profile_config.profile == Profile.WORKOUT:
             # Ultra-brief: 1-2 sentences, key numbers only
@@ -767,29 +767,29 @@ class CommandRouter:
             elif has_security:
                 summary += " Security."
             return summary
-        
+
         elif profile_config.profile == Profile.FOCUSED:
             # Brief, actionable items only
             summary = f"PR {pr_num}: {title}."
             if checks_failing > 0:
                 summary += f" {checks_failing} checks failing."
             if changes_requested > 0:
-                summary += f" Changes requested."
+                summary += " Changes requested."
             elif approvals > 0:
                 summary += f" {approvals} approved."
             return summary
-        
+
         elif profile_config.profile == Profile.RELAXED:
             # Detailed: full context, all details
             summary = f"Pull request {pr_num} by {author}: {title}."
-            
+
             # Add description preview if available
             description = pr_details.get("description", "")
             if description:
                 # Take first sentence or first 100 chars
                 desc_preview = description.split(".")[0][:100]
                 summary += f" Description: {desc_preview}."
-            
+
             # Add check status
             if checks_total > 0:
                 if checks_failing > 0:
@@ -798,43 +798,46 @@ class CommandRouter:
                     summary += f" {checks_pending} checks still pending."
                 else:
                     summary += f" All {checks_total} checks passing."
-            
+
             # Add review status
             if approvals > 0:
                 summary += f" {approvals} approval{'s' if approvals != 1 else ''}."
             if changes_requested > 0:
-                summary += f" {changes_requested} reviewer{'s' if changes_requested != 1 else ''} requested changes."
-            
+                summary += (
+                    f" {changes_requested} reviewer{'s' if changes_requested != 1 else ''} "
+                    "requested changes."
+                )
+
             # Add state
             if state == "open":
                 summary += " PR is open and awaiting review."
-            
+
             # Security alert always included
             if has_security:
                 summary += " SECURITY: This PR contains security-related changes."
-            
+
             return summary
-        
+
         else:
             # Moderate/default: balanced detail (2-4 sentences)
             summary = f"PR {pr_num}: {title}."
-            
+
             # Add check status
             if checks_failing > 0:
                 summary += f" {checks_failing} checks failing."
             elif checks_total > 0:
                 summary += f" All {checks_total} checks passing."
-            
+
             # Add review status
             if approvals > 0:
                 summary += f" {approvals} approved."
             elif changes_requested > 0:
-                summary += f" Changes requested."
-            
+                summary += " Changes requested."
+
             # Security alert always included
             if has_security:
                 summary += " Security changes included."
-            
+
             return profile_config.truncate_summary(summary)
 
     def _handle_checks_intent(
@@ -965,7 +968,7 @@ class CommandRouter:
         user_id: str | None = None,
     ) -> dict[str, Any]:
         """Handle agent-related intents.
-        
+
         Args:
             intent: Parsed agent intent
             profile_config: User's profile configuration
@@ -1069,9 +1072,7 @@ class CommandRouter:
                 }
 
             if not user_id:
-                spoken_text = profile_config.truncate_spoken_text(
-                    "User authentication required."
-                )
+                spoken_text = profile_config.truncate_spoken_text("User authentication required.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -1107,9 +1108,7 @@ class CommandRouter:
                 }
 
             if not user_id:
-                spoken_text = profile_config.truncate_spoken_text(
-                    "User authentication required."
-                )
+                spoken_text = profile_config.truncate_spoken_text("User authentication required.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),

@@ -1,6 +1,5 @@
 """Tests for APNS and FCM platform support in notification subscriptions."""
 
-import os
 
 import pytest
 from fastapi.testclient import TestClient
@@ -391,9 +390,7 @@ class TestPlatformPersistence:
         from handsfree.db.notification_subscriptions import list_subscriptions
 
         # Create multiple subscriptions with different platforms
-        create_subscription(
-            conn=db_conn, user_id=test_user_id, endpoint="ios-1", platform="apns"
-        )
+        create_subscription(conn=db_conn, user_id=test_user_id, endpoint="ios-1", platform="apns")
         create_subscription(
             conn=db_conn, user_id=test_user_id, endpoint="android-1", platform="fcm"
         )
@@ -430,9 +427,7 @@ class TestMigrationCompatibility:
     def test_platform_field_exists_in_schema(self, db_conn):
         """Test that platform field exists in the notification_subscriptions table."""
         # Query the table schema using PRAGMA table_info
-        result = db_conn.execute(
-            "PRAGMA table_info(notification_subscriptions)"
-        ).fetchall()
+        result = db_conn.execute("PRAGMA table_info(notification_subscriptions)").fetchall()
 
         # PRAGMA table_info returns: (cid, name, type, notnull, dflt_value, pk)
         column_names = [row[1] for row in result]
