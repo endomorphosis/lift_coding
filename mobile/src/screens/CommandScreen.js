@@ -75,15 +75,22 @@ export default function CommandScreen() {
       // Fetch TTS audio
       const audioBlob = await fetchTTS(text);
 
-      // Convert blob to base64 for React Native
+      // Convert blob to base64
       const reader = new FileReader();
       reader.readAsDataURL(audioBlob);
       reader.onloadend = async () => {
         const base64Audio = reader.result;
 
-        // Load and play audio
+        // Write to temporary file for better compatibility
+        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+        const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
+        await FileSystem.writeAsStringAsync(tempUri, base64Data, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        // Load and play audio from file
         const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: base64Audio },
+          { uri: tempUri },
           { shouldPlay: true }
         );
 
@@ -94,6 +101,8 @@ export default function CommandScreen() {
         newSound.setOnPlaybackStatusUpdate((status) => {
           if (status.didJustFinish) {
             setIsTtsPlaying(false);
+            // Clean up temp file
+            FileSystem.deleteAsync(tempUri, { idempotentError: true }).catch(() => {});
           }
         });
       };
@@ -237,6 +246,20 @@ export default function CommandScreen() {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getErrorHint = (errorMessage) => {
+    if (!errorMessage) return null;
+    
+    if (errorMessage.includes('403') || errorMessage.includes('forbidden')) {
+      return '💡 Hint: The backend dev mode may be disabled. Check HANDSFREE_AUTH_MODE=dev.';
+    }
+    
+    if (errorMessage.includes('fetch') || errorMessage.includes('Network') || errorMessage.includes('Failed to fetch')) {
+      return '💡 Hint: Cannot reach backend. Ensure it\'s running and accessible.';
+    }
+    
+    return null;
   };
 
   const renderUICards = (cards) => {
@@ -400,15 +423,9 @@ export default function CommandScreen() {
         <View style={styles.errorContainer}>
           <Text style={styles.errorTitle}>⚠️ Error</Text>
           <Text style={styles.errorText}>{error}</Text>
-          {error.includes('403') || error.includes('forbidden') ? (
-            <Text style={styles.errorHint}>
-              💡 Hint: The backend dev mode may be disabled. Check HANDSFREE_AUTH_MODE=dev.
-            </Text>
-          ) : error.includes('fetch') || error.includes('Network') || error.includes('Failed to fetch') ? (
-            <Text style={styles.errorHint}>
-              💡 Hint: Cannot reach backend. Ensure it's running and accessible.
-            </Text>
-          ) : null}
+          {getErrorHint(error) && (
+            <Text style={styles.errorHint}>{getErrorHint(error)}</Text>
+          )}
         </View>
       )}
 
