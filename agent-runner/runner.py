@@ -19,57 +19,48 @@ from github.GithubException import GithubException
 
 # Configure logging
 logging.basicConfig(
-    level=os.environ.get('LOG_LEVEL', 'INFO'),
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=os.environ.get("LOG_LEVEL", "INFO"),
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
 # Configuration
-GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
-DISPATCH_REPO = os.environ.get('DISPATCH_REPO', 'endomorphosis/lift_coding_dispatch')
-POLL_INTERVAL = int(os.environ.get('POLL_INTERVAL_SECONDS', '30'))
-AGENT_NAME = os.environ.get('AGENT_NAME', 'custom-agent')
-WORKSPACE_DIR = Path('/workspace')
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+DISPATCH_REPO = os.environ.get("DISPATCH_REPO", "endomorphosis/lift_coding_dispatch")
+POLL_INTERVAL = int(os.environ.get("POLL_INTERVAL_SECONDS", "30"))
+AGENT_NAME = os.environ.get("AGENT_NAME", "custom-agent")
+WORKSPACE_DIR = Path("/workspace")
 
 
 def extract_task_metadata(issue_body: str) -> dict:
     """Extract task metadata from issue body."""
     metadata = {
-        'task_id': None,
-        'instruction': None,
-        'target_repo': None,
+        "task_id": None,
+        "instruction": None,
+        "target_repo": None,
     }
-    
+
     # Extract task_id from metadata comment
-    metadata_match = re.search(
-        r'<!-- agent_task_metadata\s+(.*?)\s*-->',
-        issue_body,
-        re.DOTALL
-    )
+    metadata_match = re.search(r"<!-- agent_task_metadata\s+(.*?)\s*-->", issue_body, re.DOTALL)
     if metadata_match:
         try:
             meta = json.loads(metadata_match.group(1))
-            metadata['task_id'] = meta.get('task_id')
+            metadata["task_id"] = meta.get("task_id")
         except json.JSONDecodeError:
             logger.warning("Failed to parse agent_task_metadata JSON")
-    
+
     # Extract instruction (look for ## Instruction section)
     instruction_match = re.search(
-        r'## Instruction\s*\n+(.*?)(?:\n##|\Z)',
-        issue_body,
-        re.DOTALL | re.IGNORECASE
+        r"## Instruction\s*\n+(.*?)(?:\n##|\Z)", issue_body, re.DOTALL | re.IGNORECASE
     )
     if instruction_match:
-        metadata['instruction'] = instruction_match.group(1).strip()
-    
+        metadata["instruction"] = instruction_match.group(1).strip()
+
     # Extract target repository
-    repo_match = re.search(
-        r'Target Repository:\s*([^\s\n]+)',
-        issue_body
-    )
+    repo_match = re.search(r"Target Repository:\s*([^\s\n]+)", issue_body)
     if repo_match:
-        metadata['target_repo'] = repo_match.group(1)
-    
+        metadata["target_repo"] = repo_match.group(1)
+
     return metadata
 
 
@@ -399,17 +390,15 @@ def process_task(gh_client, issue, metadata: dict) -> bool:
             logger.warning(f"Could not add 'processed' label: {e}")
         
         return True
-        
+
     except Exception as e:
         logger.error(f"Failed to process task: {e}", exc_info=True)
-        
+
         try:
-            issue.create_comment(
-                f"❌ {AGENT_NAME} failed to process this task: {str(e)}"
-            )
+            issue.create_comment(f"❌ {AGENT_NAME} failed to process this task: {str(e)}")
         except Exception:
             logger.error("Failed to post error comment to issue")
-        
+
         return False
     finally:
         # Cleanup workspace
@@ -426,64 +415,61 @@ def main():
     if not GITHUB_TOKEN:
         logger.error("GITHUB_TOKEN environment variable is required")
         return
-    
+
     logger.info(f"Starting {AGENT_NAME}")
     logger.info(f"Monitoring dispatch repository: {DISPATCH_REPO}")
     logger.info(f"Poll interval: {POLL_INTERVAL} seconds")
-    
+
     # Initialize GitHub client
     gh = Github(GITHUB_TOKEN)
-    
+
     # Track processed issues to avoid duplicate work
     # Using deque with maxlen for automatic LRU eviction
     processed_issues = deque(maxlen=1000)
-    
+
     while True:
         try:
             # Get the dispatch repository
             repo = gh.get_repo(DISPATCH_REPO)
-            
+
             # Get open issues with copilot-agent label
             issues = repo.get_issues(
-                state='open',
-                labels=['copilot-agent'],
-                sort='created',
-                direction='asc'
+                state="open", labels=["copilot-agent"], sort="created", direction="asc"
             )
-            
+
             for issue in issues:
                 # Skip if already processed
                 if issue.number in processed_issues:
                     continue
-                
+
                 logger.info(f"Found new dispatch issue: #{issue.number} - {issue.title}")
-                
+
                 # Extract task metadata
                 metadata = extract_task_metadata(issue.body)
-                
-                if not metadata.get('task_id'):
+
+                if not metadata.get("task_id"):
                     logger.warning(f"Issue #{issue.number} missing task_id, skipping")
                     continue
-                
+
                 # Process the task
                 success = process_task(gh, issue, metadata)
                 
                 if success:
                     # Mark as processed (deque automatically evicts old items when full)
                     processed_issues.append(issue.number)
-                    
+
                     # Optional: close the issue or add a label
                     # issue.edit(state='closed')
                     # issue.add_to_labels('processed')
-            
+
         except GithubException as e:
             logger.error(f"GitHub API error: {e}", exc_info=True)
         except Exception as e:
             logger.error(f"Unexpected error: {e}", exc_info=True)
-        
+
         # Wait before next poll
         time.sleep(POLL_INTERVAL)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
