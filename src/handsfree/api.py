@@ -135,6 +135,14 @@ else:
 _command_router: CommandRouter | None = None
 _github_provider = GitHubProvider()
 
+# Mapping from handler item types to API model types
+_INBOX_ITEM_TYPE_MAP = {
+    "pr": InboxItemType.PR,
+    "mention": InboxItemType.MENTION,
+    "check": InboxItemType.CHECK,
+    "agent": InboxItemType.AGENT,
+}
+
 
 def get_db():
     """Get or initialize database connection.
@@ -1864,7 +1872,7 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
     # Use ProfileConfig for profile-aware filtering and truncation
     profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
     
-    # Use fixture user for deterministic behavior
+    # Use fixture user for deterministic behavior (defined in FIXTURE_USER_ID constant)
     user = "testuser"
     
     # Call the inbox handler to get rich items with checks summary
@@ -1880,16 +1888,8 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
         # Convert handler items to InboxItem format
         items = []
         for item_data in result.get("items", []):
-            # Map handler item fields to InboxItem
-            item_type_map = {
-                "pr": InboxItemType.PR,
-                "mention": InboxItemType.MENTION,
-                "check": InboxItemType.CHECK,
-                "agent": InboxItemType.AGENT,
-            }
-            
             item = InboxItem(
-                type=item_type_map.get(item_data.get("type", "pr"), InboxItemType.PR),
+                type=_INBOX_ITEM_TYPE_MAP.get(item_data.get("type", "pr"), InboxItemType.PR),
                 title=item_data.get("title", ""),
                 priority=item_data.get("priority", 3),
                 repo=item_data.get("repo", ""),
