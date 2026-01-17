@@ -16,7 +16,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.handsfree.mobile",
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "remote-notification"]
+        "UIBackgroundModes": ["audio", "remote-notification"],
+        "NSMicrophoneUsageDescription": "Record audio from your Meta AI Glasses for diagnostics and voice commands",
+        "NSBluetoothPeripheralUsageDescription": "Connect to Meta AI Glasses for audio routing",
+        "NSBluetoothAlwaysUsageDescription": "Connect to Meta AI Glasses for audio routing and monitoring"
       }
     },
     "android": {
