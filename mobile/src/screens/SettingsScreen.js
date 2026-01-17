@@ -10,6 +10,7 @@ import {
   Switch,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DEFAULT_BASE_URL } from '../api/config';
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
@@ -19,7 +20,7 @@ const STORAGE_KEYS = {
 
 export default function SettingsScreen() {
   const [userId, setUserId] = useState('');
-  const [baseUrl, setBaseUrl] = useState('http://localhost:8080');
+  const [baseUrl, setBaseUrl] = useState(DEFAULT_BASE_URL);
   const [useCustomUrl, setUseCustomUrl] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +71,7 @@ export default function SettingsScreen() {
           style: 'destructive',
           onPress: async () => {
             setUserId('');
-            setBaseUrl('http://localhost:8080');
+            setBaseUrl(DEFAULT_BASE_URL);
             setUseCustomUrl(false);
             try {
               await AsyncStorage.multiRemove([
@@ -156,11 +157,11 @@ export default function SettingsScreen() {
         {useCustomUrl && (
           <>
             <Text style={styles.helpText}>
-              Custom backend URL. Default: http://localhost:8080
+              Custom backend URL. Default: {DEFAULT_BASE_URL}
             </Text>
             <TextInput
               style={styles.input}
-              placeholder="http://localhost:8080"
+              placeholder={DEFAULT_BASE_URL}
               value={baseUrl}
               onChangeText={setBaseUrl}
               autoCapitalize="none"
@@ -172,7 +173,7 @@ export default function SettingsScreen() {
 
         {!useCustomUrl && (
           <Text style={styles.helpText}>
-            Currently using default URL: http://localhost:8080
+            Currently using default URL: {DEFAULT_BASE_URL}
           </Text>
         )}
       </View>
@@ -206,7 +207,7 @@ export default function SettingsScreen() {
         <Text style={styles.debugTitle}>Current Configuration:</Text>
         <Text style={styles.debugText}>User ID: {userId || '(not set)'}</Text>
         <Text style={styles.debugText}>
-          Base URL: {useCustomUrl ? baseUrl : 'http://localhost:8080 (default)'}
+          Base URL: {useCustomUrl ? baseUrl : `${DEFAULT_BASE_URL} (default)`}
         </Text>
         <Text style={styles.debugText}>
           X-User-ID header: {userId ? 'Will be sent' : 'Will not be sent'}

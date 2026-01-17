@@ -5,14 +5,16 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Default to localhost for development
-// Update this based on your environment
-let BASE_URL = 'http://localhost:8080';
+// Default backend URL for development
+export const DEFAULT_BASE_URL = 'http://localhost:8080';
+
+// Current BASE_URL (may be overridden by settings)
+let BASE_URL = DEFAULT_BASE_URL;
 
 // Session management
 let sessionToken = null;
 let userId = null;
-let settingsLoaded = false;
+let settingsLoadPromise = null;
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
@@ -23,27 +25,33 @@ const STORAGE_KEYS = {
 /**
  * Load settings from AsyncStorage
  * This is called automatically before making API requests
+ * Uses a promise to prevent race conditions
  */
 async function loadSettings() {
-  if (settingsLoaded) return;
-
-  try {
-    const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
-    const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
-    const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
-
-    if (savedUserId) {
-      userId = savedUserId;
-    }
-
-    if (savedUseCustomUrl === 'true' && savedBaseUrl) {
-      BASE_URL = savedBaseUrl;
-    }
-
-    settingsLoaded = true;
-  } catch (error) {
-    console.error('Failed to load settings:', error);
+  // If already loading or loaded, return the existing promise
+  if (settingsLoadPromise) {
+    return settingsLoadPromise;
   }
+
+  settingsLoadPromise = (async () => {
+    try {
+      const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
+      const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
+      const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
+
+      if (savedUserId) {
+        userId = savedUserId;
+      }
+
+      if (savedUseCustomUrl === 'true' && savedBaseUrl) {
+        BASE_URL = savedBaseUrl;
+      }
+    } catch (error) {
+      console.error('Failed to load settings:', error);
+    }
+  })();
+
+  return settingsLoadPromise;
 }
 
 /**
