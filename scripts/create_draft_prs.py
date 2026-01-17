@@ -8,9 +8,9 @@ Requirements:
     - Git repository with tracking documents
 """
 
+import os
 import subprocess
 import sys
-import os
 import tempfile
 from pathlib import Path
 
@@ -62,7 +62,7 @@ def run_command(cmd, check=True, capture=True):
 def check_prerequisites():
     """Check if required tools are available."""
     print("Checking prerequisites...")
-    
+
     # Check gh CLI
     try:
         run_command("gh --version")
@@ -71,7 +71,7 @@ def check_prerequisites():
         print("✗ Error: gh CLI is not installed")
         print("  Install from: https://cli.github.com/manual/installation")
         return False
-    
+
     # Check gh auth
     try:
         run_command("gh auth status")
@@ -80,7 +80,7 @@ def check_prerequisites():
         print("✗ Error: Not authenticated with GitHub")
         print("  Run: gh auth login")
         return False
-    
+
     print("")
     return True
 
@@ -92,23 +92,23 @@ def create_draft_pr(pr_info):
     title = pr_info["title"]
     tracking_file = pr_info["tracking"]
     branch_name = f"draft/pr-{pr_number}-{pr_suffix}"
-    
+
     print(f"Creating {title}")
     print(f"  Branch: {branch_name}")
     print(f"  Tracking: {tracking_file}")
-    
+
     # Check if tracking file exists
     if not Path(tracking_file).exists():
         print(f"  ✗ Error: Tracking file not found: {tracking_file}")
         return False
-    
+
     # Create and switch to branch
     try:
         run_command(f"git checkout -b {branch_name} {BASE_BRANCH}", check=False)
     except subprocess.CalledProcessError:
         # Branch might exist, try to check it out
         run_command(f"git checkout {branch_name}")
-    
+
     # Create initial plan file
     plan_file = f"work/pr-{pr_number}-plan.md"
     plan_content = f"""# {title}
@@ -120,7 +120,8 @@ Ready for implementation by GitHub Copilot agent.
 See `{tracking_file}` for full details.
 
 ## Implementation
-This PR will be implemented by a GitHub Copilot agent according to the specifications in the tracking document.
+This PR will be implemented by a GitHub Copilot agent according to the
+specifications in the tracking document.
 
 Refer to the tracking document for:
 - Full problem statement and context
@@ -128,26 +129,30 @@ Refer to the tracking document for:
 - Acceptance criteria
 - Related files and PRs
 """
-    
+
     Path(plan_file).write_text(plan_content)
-    
+
     # Commit the plan
     run_command(f'git add "{plan_file}"')
     # Use git commit with -F to avoid shell injection
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
-        commit_msg = f"PR-{pr_number}: Initial plan\n\nReady for GitHub Copilot agent implementation. See {tracking_file} for details."
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+        commit_msg = (
+            f"PR-{pr_number}: Initial plan\n\n"
+            f"Ready for GitHub Copilot agent implementation. "
+            f"See {tracking_file} for details."
+        )
         f.write(commit_msg)
         commit_msg_file = f.name
-    
+
     try:
         run_command(f'git commit -F "{commit_msg_file}"')
     finally:
         os.remove(commit_msg_file)
-    
+
     # Push the branch
     print("  Pushing branch...")
     run_command(f'git push -u origin "{branch_name}"')
-    
+
     # Create the draft PR
     print("  Creating draft PR...")
     try:
@@ -156,15 +161,15 @@ Refer to the tracking document for:
         pr_url = run_command(
             f'gh pr create --repo "{REPO}" --base "{BASE_BRANCH}" --head "{branch_name}" '
             f'--title "{title}" --body-file "{tracking_file}" --draft --label copilot-agent '
-            f'--json url --jq .url'
+            f"--json url --jq .url"
         )
-        
-        if pr_url and pr_url.startswith('https://'):
+
+        if pr_url and pr_url.startswith("https://"):
             print(f"  ✓ Created: {pr_url}")
             print("")
             return True
         else:
-            print(f"  ✓ Draft PR created")
+            print("  ✓ Draft PR created")
             print("")
             return True
     except subprocess.CalledProcessError:
@@ -179,26 +184,26 @@ def main():
     print(f"Repository: {REPO}")
     print(f"Base branch: {BASE_BRANCH}")
     print("")
-    
+
     # Check prerequisites
     if not check_prerequisites():
         return 1
-    
+
     # Return to base branch
     print(f"Checking out {BASE_BRANCH}...")
     run_command(f'git checkout "{BASE_BRANCH}"')
     run_command(f'git pull origin "{BASE_BRANCH}"')
     print("")
-    
+
     # Create each PR
     success_count = 0
     for pr_info in PRS_TO_CREATE:
         if create_draft_pr(pr_info):
             success_count += 1
-        
+
         # Return to base branch for next PR
         run_command(f'git checkout "{BASE_BRANCH}"')
-    
+
     print("")
     print(f"✓ Created {success_count}/{len(PRS_TO_CREATE)} draft PRs successfully!")
     print("")
@@ -206,7 +211,7 @@ def main():
     print("  1. Review the created PRs on GitHub")
     print("  2. Assign them to GitHub Copilot agents")
     print("  3. Copilot agents will implement according to tracking docs")
-    
+
     return 0 if success_count == len(PRS_TO_CREATE) else 1
 
 
