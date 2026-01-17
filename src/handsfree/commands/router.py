@@ -655,7 +655,7 @@ class CommandRouter:
         user_id: str | None = None,
     ) -> dict[str, Any]:
         """Handle agent-related intents.
-        
+
         Args:
             intent: Parsed agent intent
             profile_config: User's profile configuration
@@ -759,9 +759,7 @@ class CommandRouter:
                 }
 
             if not user_id:
-                spoken_text = profile_config.truncate_spoken_text(
-                    "User authentication required."
-                )
+                spoken_text = profile_config.truncate_spoken_text("User authentication required.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -797,9 +795,7 @@ class CommandRouter:
                 }
 
             if not user_id:
-                spoken_text = profile_config.truncate_spoken_text(
-                    "User authentication required."
-                )
+                spoken_text = profile_config.truncate_spoken_text("User authentication required.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),

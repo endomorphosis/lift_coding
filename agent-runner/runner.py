@@ -50,7 +50,7 @@ def get_headers() -> dict[str, str]:
 def get_dispatch_issues() -> list[dict[str, Any]]:
     """
     Fetch open issues with copilot-agent label from dispatch repository.
-    
+
     Returns:
         List of issue objects from GitHub API.
     """
@@ -61,15 +61,16 @@ def get_dispatch_issues() -> list[dict[str, Any]]:
         "sort": "created",
         "direction": "asc",
     }
-    
+
     try:
         resp = requests.get(url, headers=get_headers(), params=params, timeout=30)
         resp.raise_for_status()
         issues = resp.json()
-        
+
         # Filter out issues already being processed
         return [
-            issue for issue in issues
+            issue
+            for issue in issues
             if not any(label["name"] == PROCESSED_MARKER for label in issue.get("labels", []))
         ]
     except requests.exceptions.RequestException as e:
@@ -80,14 +81,14 @@ def get_dispatch_issues() -> list[dict[str, Any]]:
 def extract_task_metadata(issue_body: str) -> dict[str, Any]:
     """
     Extract task metadata from issue body.
-    
+
     Looks for metadata in two formats:
     1. HTML comment: <!-- agent_task_metadata {...} -->
     2. Structured fields: task_id: xxx, user_id: yyy
-    
+
     Args:
         issue_body: The issue body text.
-    
+
     Returns:
         Dictionary with task_id, user_id, and provider.
     """
@@ -96,12 +97,10 @@ def extract_task_metadata(issue_body: str) -> dict[str, Any]:
         "user_id": "unknown",
         "provider": "github_issue_dispatch",
     }
-    
+
     # Try to extract from HTML comment
     match = re.search(
-        r"<!--\s*agent_task_metadata\s*\n?(.*?)\n?-->",
-        issue_body,
-        re.DOTALL | re.IGNORECASE
+        r"<!--\s*agent_task_metadata\s*\n?(.*?)\n?-->", issue_body, re.DOTALL | re.IGNORECASE
     )
     if match:
         try:
@@ -110,38 +109,33 @@ def extract_task_metadata(issue_body: str) -> dict[str, Any]:
             return metadata
         except json.JSONDecodeError as e:
             print(f"WARNING: Failed to parse metadata JSON: {e}")
-    
+
     # Fallback: extract from structured fields
     task_id_match = re.search(r"(?i)task[_ ]id:\s*([\w-]+)", issue_body)
     user_id_match = re.search(r"(?i)user[_ ]id:\s*([\w-]+)", issue_body)
-    
+
     if task_id_match:
         metadata["task_id"] = task_id_match.group(1)
     if user_id_match:
         metadata["user_id"] = user_id_match.group(1)
-    
+
     return metadata
 
 
 def add_issue_label(issue_number: int, label: str) -> bool:
     """
     Add a label to an issue.
-    
+
     Args:
         issue_number: The issue number.
         label: Label name to add.
-    
+
     Returns:
         True if successful, False otherwise.
     """
     url = f"https://api.github.com/repos/{DISPATCH_REPO}/issues/{issue_number}/labels"
     try:
-        resp = requests.post(
-            url,
-            headers=get_headers(),
-            json={"labels": [label]},
-            timeout=30
-        )
+        resp = requests.post(url, headers=get_headers(), json={"labels": [label]}, timeout=30)
         resp.raise_for_status()
         return True
     except requests.exceptions.RequestException as e:
@@ -152,22 +146,17 @@ def add_issue_label(issue_number: int, label: str) -> bool:
 def comment_on_issue(issue_number: int, comment: str) -> bool:
     """
     Post a comment on an issue.
-    
+
     Args:
         issue_number: The issue number.
         comment: Comment text to post.
-    
+
     Returns:
         True if successful, False otherwise.
     """
     url = f"https://api.github.com/repos/{DISPATCH_REPO}/issues/{issue_number}/comments"
     try:
-        resp = requests.post(
-            url,
-            headers=get_headers(),
-            json={"body": comment},
-            timeout=30
-        )
+        resp = requests.post(url, headers=get_headers(), json={"body": comment}, timeout=30)
         resp.raise_for_status()
         return True
     except requests.exceptions.RequestException as e:
@@ -178,42 +167,42 @@ def comment_on_issue(issue_number: int, comment: str) -> bool:
 def process_task(issue: dict[str, Any]) -> bool:
     """
     Process a dispatch issue and create a PR in the target repository.
-    
+
     This is a placeholder implementation that demonstrates the workflow.
     In production, replace this with actual task processing logic:
     - Clone the target repository
     - Make code changes based on the instruction
     - Commit and push changes
     - Create a PR with correlation metadata
-    
+
     Args:
         issue: GitHub issue object.
-    
+
     Returns:
         True if processing succeeded, False otherwise.
     """
     issue_number = issue["number"]
     title = issue["title"]
     body = issue.get("body", "")
-    
-    print(f"\n{'='*80}")
+
+    print(f"\n{'=' * 80}")
     print(f"Processing issue #{issue_number}: {title}")
-    print(f"{'='*80}")
-    
+    print(f"{'=' * 80}")
+
     # Mark as being processed
     add_issue_label(issue_number, PROCESSED_MARKER)
-    
+
     # Extract metadata
     metadata = extract_task_metadata(body)
     task_id = metadata["task_id"]
     user_id = metadata["user_id"]
     provider = metadata["provider"]
-    
-    print(f"Task metadata:")
+
+    print("Task metadata:")
     print(f"  - Task ID: {task_id}")
     print(f"  - User ID: {user_id}")
     print(f"  - Provider: {provider}")
-    
+
     # =================================================================
     # TODO: Implement actual task processing logic here
     # =================================================================
@@ -225,18 +214,18 @@ def process_task(issue: dict[str, Any]) -> bool:
     # 5. Push branch to GitHub
     # 6. Create PR using GitHub API
     # =================================================================
-    
+
     # For this example, we'll simulate the workflow
     branch_name = f"agent-task-{task_id}"
-    
-    print(f"\nSimulated workflow:")
+
+    print("\nSimulated workflow:")
     print(f"  1. Would clone {TARGET_REPO}")
     print(f"  2. Would create branch: {branch_name}")
     print(f"  3. Would process instruction: {title}")
-    print(f"  4. Would commit changes")
-    print(f"  5. Would push to GitHub")
-    print(f"  6. Would create PR with correlation metadata")
-    
+    print("  4. Would commit changes")
+    print("  5. Would push to GitHub")
+    print("  6. Would create PR with correlation metadata")
+
     # Prepare PR body with correlation metadata
     # CRITICAL: This metadata format is required for backend correlation
     pr_body = f"""# Agent Task: {title}
@@ -261,16 +250,16 @@ dispatched in issue #{issue_number}.
 {json.dumps(metadata, indent=2)}
 -->
 """
-    
+
     print(f"\nPR body prepared (length: {len(pr_body)} chars)")
-    
+
     # In a real implementation, you would:
     # 1. Create the PR using GitHub API or PyGithub
     # 2. Store the PR URL for status updates
-    
+
     # Simulated success
     pr_url = f"https://github.com/{TARGET_REPO}/pull/[SIMULATED]"
-    
+
     # Comment on dispatch issue with status
     success_comment = f"""✅ **Task processed successfully**
 
@@ -283,9 +272,9 @@ Processed by: agent-runner (example implementation)
 
 **Note:** This is a demonstration. Implement actual task processing logic in `process_task()`.
 """
-    
+
     comment_on_issue(issue_number, success_comment)
-    
+
     print(f"\n✓ Task {task_id} processing complete")
     return True
 
@@ -302,30 +291,33 @@ def main():
     print("=" * 80)
     print("\nWaiting for dispatch issues...")
     print("(Press Ctrl+C to stop)\n")
-    
+
     processed_issues = set()
-    
+
     while True:
         try:
             issues = get_dispatch_issues()
-            
+
             if issues:
-                print(f"\n[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}] "
-                      f"Found {len(issues)} unprocessed dispatch issue(s)")
-            
+                print(
+                    f"\n[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}] "
+                    f"Found {len(issues)} unprocessed dispatch issue(s)"
+                )
+
             for issue in issues:
                 issue_id = issue["id"]
-                
+
                 # Skip if already processed in this session
                 if issue_id in processed_issues:
                     continue
-                
+
                 try:
                     if process_task(issue):
                         processed_issues.add(issue_id)
                 except Exception as e:
-                    print(f"\nERROR: Failed to process issue #{issue['number']}: {e}", 
-                          file=sys.stderr)
+                    print(
+                        f"\nERROR: Failed to process issue #{issue['number']}: {e}", file=sys.stderr
+                    )
                     # Comment on issue about failure
                     error_comment = f"""❌ **Task processing failed**
 
@@ -334,10 +326,10 @@ Error: {str(e)}
 Please check the agent runner logs and retry if appropriate.
 """
                     comment_on_issue(issue["number"], error_comment)
-            
+
             # Sleep until next poll
             time.sleep(POLL_INTERVAL)
-            
+
         except KeyboardInterrupt:
             print("\n\nShutting down agent runner...")
             break
