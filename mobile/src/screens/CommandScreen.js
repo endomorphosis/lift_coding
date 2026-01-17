@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,39 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
-import { sendCommand } from '../api/client';
+import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
+import { sendCommand, uploadDevAudio, sendAudioCommand } from '../api/client';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  
+  // Audio recording state
+  const [recording, setRecording] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordingDuration, setRecordingDuration] = useState(0);
+  const [audioUri, setAudioUri] = useState(null);
+  const [audioSize, setAudioSize] = useState(0);
+
+  useEffect(() => {
+    // Request audio permissions on mount
+    (async () => {
+      try {
+        await Audio.requestPermissionsAsync();
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+        });
+      } catch (err) {
+        console.error('Failed to get audio permissions:', err);
+      }
+    })();
+  }, []);
 
   const handleSendCommand = async () => {
     if (!commandText.trim()) {
@@ -35,6 +60,97 @@ export default function CommandScreen() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const startRecording = async () => {
+    try {
+      const { recording: newRecording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
+      );
+      setRecording(newRecording);
+      setIsRecording(true);
+      setRecordingDuration(0);
+      setAudioUri(null);
+      setAudioSize(0);
+
+      // Update duration every second
+      const interval = setInterval(() => {
+        setRecordingDuration((prev) => prev + 1);
+      }, 1000);
+
+      // Store interval ID on recording object
+      newRecording._durationInterval = interval;
+    } catch (err) {
+      console.error('Failed to start recording:', err);
+      Alert.alert('Error', 'Failed to start recording');
+    }
+  };
+
+  const stopRecording = async () => {
+    if (!recording) return;
+
+    try {
+      // Clear duration interval
+      if (recording._durationInterval) {
+        clearInterval(recording._durationInterval);
+      }
+
+      setIsRecording(false);
+      await recording.stopAndUnloadAsync();
+      const uri = recording.getURI();
+      
+      // Get file size
+      const fileInfo = await FileSystem.getInfoAsync(uri);
+      const sizeKB = Math.round(fileInfo.size / 1024);
+
+      setAudioUri(uri);
+      setAudioSize(sizeKB);
+      setRecording(null);
+    } catch (err) {
+      console.error('Failed to stop recording:', err);
+      Alert.alert('Error', 'Failed to stop recording');
+    }
+  };
+
+  const sendAudioAsCommand = async () => {
+    if (!audioUri) {
+      Alert.alert('Error', 'No audio recorded');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setResponse(null);
+
+    try {
+      // Read audio file as base64
+      const audioBase64 = await FileSystem.readAsStringAsync(audioUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      // Upload to dev endpoint
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+
+      // Send as audio command
+      const data = await sendAudioCommand(fileUri, format, recordingDuration * 1000);
+      setResponse(data);
+      
+      // Clear recorded audio
+      setAudioUri(null);
+      setRecordingDuration(0);
+      setAudioSize(0);
+    } catch (err) {
+      console.error('Audio command failed:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatDuration = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const renderUICards = (cards) => {
@@ -62,20 +178,83 @@ export default function CommandScreen() {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Send Command</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Enter command (e.g., 'what's in my inbox?')"
-        value={commandText}
-        onChangeText={setCommandText}
-        multiline
-        editable={!loading}
-      />
+      {/* Text Command Section */}
+      <View style={styles.section}>
+        <Text style={styles.sectionHeader}>Text Command</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter command (e.g., 'what's in my inbox?')"
+          value={commandText}
+          onChangeText={setCommandText}
+          multiline
+          editable={!loading}
+        />
 
-      <Button
-        title={loading ? 'Sending...' : 'Send Command'}
-        onPress={handleSendCommand}
-        disabled={loading}
-      />
+        <Button
+          title={loading ? 'Sending...' : 'Send Command'}
+          onPress={handleSendCommand}
+          disabled={loading}
+        />
+      </View>
+
+      {/* Audio Command Section */}
+      <View style={styles.section}>
+        <Text style={styles.sectionHeader}>Audio Command (Dev)</Text>
+        
+        {!isRecording && !audioUri && (
+          <TouchableOpacity
+            style={styles.recordButton}
+            onPress={startRecording}
+            disabled={loading}
+          >
+            <Text style={styles.recordButtonText}>🎤 Start Recording</Text>
+          </TouchableOpacity>
+        )}
+
+        {isRecording && (
+          <View style={styles.recordingContainer}>
+            <Text style={styles.recordingText}>🔴 Recording...</Text>
+            <Text style={styles.durationText}>{formatDuration(recordingDuration)}</Text>
+            <TouchableOpacity
+              style={styles.stopButton}
+              onPress={stopRecording}
+            >
+              <Text style={styles.stopButtonText}>⏹ Stop</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        {audioUri && !isRecording && (
+          <View style={styles.audioReadyContainer}>
+            <Text style={styles.audioReadyText}>✓ Audio ready</Text>
+            <Text style={styles.audioInfoText}>
+              Duration: {formatDuration(recordingDuration)} • Size: {audioSize} KB
+            </Text>
+            <View style={styles.audioButtonsRow}>
+              <TouchableOpacity
+                style={styles.sendAudioButton}
+                onPress={sendAudioAsCommand}
+                disabled={loading}
+              >
+                <Text style={styles.sendAudioButtonText}>
+                  {loading ? 'Sending...' : 'Send Audio'}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.discardButton}
+                onPress={() => {
+                  setAudioUri(null);
+                  setRecordingDuration(0);
+                  setAudioSize(0);
+                }}
+                disabled={loading}
+              >
+                <Text style={styles.discardButtonText}>Discard</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+      </View>
 
       {loading && (
         <View style={styles.loadingContainer}>
@@ -238,5 +417,101 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'monospace',
     color: '#333',
+  },
+  section: {
+    marginBottom: 25,
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+  },
+  sectionHeader: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    color: '#333',
+  },
+  recordButton: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  recordButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  recordingContainer: {
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#ffebee',
+    borderRadius: 8,
+  },
+  recordingText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#c62828',
+    marginBottom: 10,
+  },
+  durationText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 15,
+  },
+  stopButton: {
+    backgroundColor: '#c62828',
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  stopButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  audioReadyContainer: {
+    padding: 15,
+    backgroundColor: '#e8f5e9',
+    borderRadius: 8,
+  },
+  audioReadyText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#2e7d32',
+    marginBottom: 5,
+  },
+  audioInfoText: {
+    fontSize: 13,
+    color: '#555',
+    marginBottom: 15,
+  },
+  audioButtonsRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  sendAudioButton: {
+    flex: 1,
+    backgroundColor: '#2e7d32',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  sendAudioButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  discardButton: {
+    flex: 1,
+    backgroundColor: '#666',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  discardButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });

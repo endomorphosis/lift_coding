@@ -3673,6 +3673,54 @@ async def text_to_speech(request: TTSRequest) -> Response:
         ) from e
 
 
+@app.post("/v1/dev/audio")
+async def upload_dev_audio(request: Request) -> JSONResponse:
+    """Dev-only endpoint: upload base64 audio and get a file:// URI.
+    
+    Accepts JSON with { "audio_base64": "...", "format": "m4a"|"wav"|... }.
+    Writes to dev/audio/ directory and returns { "uri": "file://..." }.
+    
+    This is for mobile dev loop only. Production should use pre-signed URLs.
+    """
+    import base64
+    import uuid
+    
+    body = await request.json()
+    audio_b64 = body.get("audio_base64", "")
+    audio_format = body.get("format", "m4a")
+    
+    if not audio_b64:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": "missing_audio", "message": "audio_base64 field required"},
+        )
+    
+    # Decode base64
+    try:
+        audio_bytes = base64.b64decode(audio_b64)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": "invalid_base64", "message": str(e)},
+        ) from e
+    
+    # Create dev/audio directory if needed
+    dev_audio_dir = Path("dev/audio")
+    dev_audio_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Write to file with unique name
+    file_id = uuid.uuid4().hex[:12]
+    filename = f"{file_id}.{audio_format}"
+    filepath = dev_audio_dir / filename
+    
+    filepath.write_bytes(audio_bytes)
+    logger.info("Wrote dev audio: %s (%d bytes)", filepath, len(audio_bytes))
+    
+    # Return file:// URI
+    uri = f"file://{filepath.resolve()}"
+    return JSONResponse(content={"uri": uri, "format": audio_format})
+
+
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
     """Handle HTTPExceptions and return Error schema."""
