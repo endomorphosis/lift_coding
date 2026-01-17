@@ -5,6 +5,8 @@ from typing import Any
 
 import duckdb
 
+from handsfree.auth import FIXTURE_USER_ID
+
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
 from .profiles import Profile, ProfileConfig
@@ -711,6 +713,17 @@ class CommandRouter:
 
         return spoken_text
 
+    def _get_effective_user_id(self, user_id: str | None) -> str:
+        """Get effective user ID, falling back to fixture user if none provided.
+        
+        Args:
+            user_id: Optional user identifier from request.
+            
+        Returns:
+            User ID to use for operations (authenticated user or fixture user).
+        """
+        return user_id if user_id else FIXTURE_USER_ID
+
     def _handle_agent_intent(
         self,
         intent: ParsedIntent,
@@ -830,6 +843,8 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
+            # Use authenticated user_id or fall back to fixture user
+            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.pause_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task paused.")
@@ -866,6 +881,8 @@ class CommandRouter:
                 }
 
             task_id = intent.entities.get("task_id")
+            # Use authenticated user_id or fall back to fixture user
+            effective_user_id = self._get_effective_user_id(user_id)
             try:
                 result = self._agent_service.resume_task(user_id=user_id, task_id=task_id)
                 spoken_text = result.get("spoken_text", "Task resumed.")
