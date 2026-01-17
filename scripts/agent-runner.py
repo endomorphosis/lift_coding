@@ -199,7 +199,7 @@ def create_pull_request(
     
     # Create or update file
     commit_data = {
-        "message": f"Process agent task {task_id[:8]}",
+        "message": f"Process agent task {task_id_safe}",
         "content": encoded_content,
         "branch": branch_name
     }
@@ -228,7 +228,7 @@ def create_pull_request(
 
 ## Correlation Metadata
 
-<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->
+<!-- agent_task_metadata {json.dumps({"task_id": task_id})} -->
 
 Fixes {dispatch_repo}#{dispatch_issue_number}
 """
