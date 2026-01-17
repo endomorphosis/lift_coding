@@ -282,8 +282,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      */
     private fun playAudio(audioData: ByteArray) {
         try {
-            // Write audio to temporary file
-            val tempFile = File.createTempFile("tts", ".mp3", cacheDir)
+            // Write audio to temporary file with unique identifier
+            val timestamp = System.currentTimeMillis()
+            val tempFile = File.createTempFile("handsfree_tts_${timestamp}_", ".mp3", cacheDir)
             FileOutputStream(tempFile).use { fos ->
                 fos.write(audioData)
             }

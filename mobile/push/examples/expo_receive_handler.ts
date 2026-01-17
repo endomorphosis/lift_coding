@@ -19,8 +19,9 @@ let currentSound: Audio.Sound | null = null;
 
 /**
  * Setup notification handlers for foreground and background
+ * @returns Cleanup function to remove listeners
  */
-export function setupNotificationHandlers(): void {
+export function setupNotificationHandlers(): () => void {
   // Configure notification handler
   Notifications.setNotificationHandler({
     handleNotification: async (notification) => {

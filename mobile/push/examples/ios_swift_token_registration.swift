@@ -12,8 +12,13 @@ import UserNotifications
 import UIKit
 
 class PushManager {
+    // Shared singleton instance
+    static let shared = PushManager()
+    
     private let backendURL = "http://localhost:8080" // Change to production URL
     private let userID = "00000000-0000-0000-0000-000000000001" // Get from auth
+    
+    private init() {}
     
     // MARK: - Permission Request
     
