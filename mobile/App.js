@@ -7,6 +7,7 @@ import StatusScreen from './src/screens/StatusScreen';
 import CommandScreen from './src/screens/CommandScreen';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
 import TTSScreen from './src/screens/TTSScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,6 +40,11 @@ export default function App() {
           name="TTS"
           component={TTSScreen}
           options={{ title: 'TTS' }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ title: 'Settings' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
