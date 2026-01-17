@@ -28,6 +28,11 @@ class GlassesRecorder(private val context: Context) {
         const val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
         const val BITS_PER_SAMPLE = 16
         const val NUM_CHANNELS = 1
+        const val WAV_HEADER_SIZE = 44
+        const val WAV_RIFF_CHUNK_SIZE_OFFSET = 4
+        const val WAV_DATA_SIZE_OFFSET = 40
+        const val PCM_SUBCHUNK_SIZE = 16
+        const val SCO_CONNECTION_DELAY_MS = 500L
     }
 
     /**
@@ -50,8 +55,9 @@ class GlassesRecorder(private val context: Context) {
             // Setup Bluetooth SCO
             setupBluetoothSco()
             
-            // Wait a moment for SCO to connect
-            Thread.sleep(500)
+            // Note: SCO connection delay should be handled by caller on background thread
+            // to avoid ANR. This is a known limitation for synchronous API.
+            Thread.sleep(SCO_CONNECTION_DELAY_MS)
 
             val bufferSize = AudioRecord.getMinBufferSize(
                 SAMPLE_RATE,
@@ -133,6 +139,8 @@ class GlassesRecorder(private val context: Context) {
 
     /**
      * Stop recording
+     * Note: This method blocks briefly to ensure clean shutdown.
+     * Consider calling from a background thread to avoid ANR in UI code.
      */
     fun stopRecording() {
         isRecording = false
@@ -213,7 +221,7 @@ class GlassesRecorder(private val context: Context) {
         header[1] = 'I'.code.toByte()
         header[2] = 'F'.code.toByte()
         header[3] = 'F'.code.toByte()
-        writeInt(header, 4, dataSize + 36)
+        writeInt(header, WAV_RIFF_CHUNK_SIZE_OFFSET, dataSize + (WAV_HEADER_SIZE - 8))
         header[8] = 'W'.code.toByte()
         header[9] = 'A'.code.toByte()
         header[10] = 'V'.code.toByte()
@@ -224,7 +232,7 @@ class GlassesRecorder(private val context: Context) {
         header[13] = 'm'.code.toByte()
         header[14] = 't'.code.toByte()
         header[15] = ' '.code.toByte()
-        writeInt(header, 16, 16)  // Subchunk1 size (16 for PCM)
+        writeInt(header, 16, PCM_SUBCHUNK_SIZE)  // Subchunk1 size (16 for PCM)
         writeShort(header, 20, 1) // Audio format (1 = PCM)
         writeShort(header, 22, channels)
         writeInt(header, 24, SAMPLE_RATE)
@@ -245,12 +253,12 @@ class GlassesRecorder(private val context: Context) {
     private fun updateWAVHeader(file: File, dataSize: Int) {
         val raf = RandomAccessFile(file, "rw")
         try {
-            // Update file size in RIFF header (offset 4)
-            raf.seek(4)
-            raf.write(intToByteArray(dataSize + 36))
+            // Update file size in RIFF header
+            raf.seek(WAV_RIFF_CHUNK_SIZE_OFFSET.toLong())
+            raf.write(intToByteArray(dataSize + (WAV_HEADER_SIZE - 8)))
             
-            // Update data size in data chunk (offset 40)
-            raf.seek(40)
+            // Update data size in data chunk
+            raf.seek(WAV_DATA_SIZE_OFFSET.toLong())
             raf.write(intToByteArray(dataSize))
         } finally {
             raf.close()

@@ -25,6 +25,8 @@ class GlassesPlayer(private val context: Context) {
         const val SAMPLE_RATE = 16000
         const val CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_MONO
         const val AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT
+        const val WAV_HEADER_SIZE = 44
+        const val SCO_CONNECTION_DELAY_MS = 500L
     }
 
     /**
@@ -74,8 +76,9 @@ class GlassesPlayer(private val context: Context) {
             // Setup Bluetooth SCO
             setupBluetoothSco()
             
-            // Wait a moment for SCO to connect
-            Thread.sleep(500)
+            // Note: SCO connection delay should be handled by caller on background thread
+            // to avoid ANR. This is a known limitation for synchronous API.
+            Thread.sleep(SCO_CONNECTION_DELAY_MS)
 
             // Read WAV file
             val wavData = readWAVFile(file)
@@ -155,6 +158,8 @@ class GlassesPlayer(private val context: Context) {
 
     /**
      * Stop playback
+     * Note: This method blocks briefly to ensure clean shutdown.
+     * Consider calling from a background thread to avoid ANR in UI code.
      */
     fun stop() {
         isPlaying = false
@@ -242,11 +247,11 @@ class GlassesPlayer(private val context: Context) {
     private fun readWAVFile(file: File): ByteArray {
         val raf = RandomAccessFile(file, "r")
         try {
-            // Skip WAV header (44 bytes)
-            raf.seek(44)
+            // Skip WAV header
+            raf.seek(WAV_HEADER_SIZE.toLong())
             
             // Read remaining data
-            val dataSize = (file.length() - 44).toInt()
+            val dataSize = (file.length() - WAV_HEADER_SIZE).toInt()
             val data = ByteArray(dataSize)
             raf.readFully(data)
             
