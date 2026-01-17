@@ -163,10 +163,10 @@ export default function GlassesDiagnosticsScreen() {
       const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
 
       // Step 3: Send to /v1/command
-      const response = await sendAudioCommand(fileUri, format, null, {
+      const response = await sendAudioCommand(fileUri, format, {
         profile: 'dev',
         client_context: {
-          device_type: 'mobile',
+          device: 'mobile',
           app_version: '1.0.0',
           mode: devMode ? 'dev' : 'glasses',
         },
