@@ -12,11 +12,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      "./modules/glasses-audio/app.plugin.js"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.handsfree.mobile",
       "infoPlist": {
-        "UIBackgroundModes": ["audio", "remote-notification"]
+        "UIBackgroundModes": ["audio", "remote-notification"],
+        "NSMicrophoneUsageDescription": "Access microphone for voice commands via Meta AI Glasses",
+        "NSBluetoothPeripheralUsageDescription": "Connect to Meta AI Glasses for audio routing",
+        "NSBluetoothAlwaysUsageDescription": "Connect to Meta AI Glasses for audio routing"
       }
     },
     "android": {
