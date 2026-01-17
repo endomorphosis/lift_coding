@@ -188,7 +188,7 @@ export default function GlassesDiagnosticsScreen() {
     try {
       setIsRecording(false);
       
-      if (!devMode && nativeModuleAvailable && recording === null) {
+      if (!devMode && nativeModuleAvailable) {
         // Stop native recording
         const fileUri = await GlassesAudio.stopRecording();
         setLastRecordingUri(fileUri);

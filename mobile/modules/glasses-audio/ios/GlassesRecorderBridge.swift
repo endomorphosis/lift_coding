@@ -15,7 +15,8 @@ public final class GlassesRecorderBridge {
         
         do {
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .defaultToSpeaker])
+            // Use .allowBluetooth without .defaultToSpeaker for consistent Bluetooth routing
+            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth])
             try session.setActive(true)
             
             // Create output file

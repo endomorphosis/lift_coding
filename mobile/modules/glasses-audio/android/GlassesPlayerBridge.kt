@@ -27,8 +27,9 @@ class GlassesPlayerBridge(private val context: Context) {
             val header = ByteArray(44)
             fileInputStream.read(header)
             
-            // Parse WAV header to get sample rate
-            val sampleRate = ByteBuffer.wrap(header, 24, 4).order(ByteOrder.LITTLE_ENDIAN).int
+            // Parse WAV header to get sample rate (offset 24 in WAV header)
+            val WAV_SAMPLE_RATE_OFFSET = 24
+            val sampleRate = ByteBuffer.wrap(header, WAV_SAMPLE_RATE_OFFSET, 4).order(ByteOrder.LITTLE_ENDIAN).int
             
             // Read audio data
             val audioData = fileInputStream.readBytes()

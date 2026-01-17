@@ -16,7 +16,8 @@ public final class GlassesPlayerBridge {
         
         do {
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .defaultToSpeaker])
+            // Use .allowBluetooth without .defaultToSpeaker for consistent Bluetooth routing
+            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth])
             try session.setActive(true)
             
             let audioFile = try AVAudioFile(forReading: fileURL)

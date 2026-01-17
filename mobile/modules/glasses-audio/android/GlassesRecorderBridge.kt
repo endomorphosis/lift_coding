@@ -59,6 +59,12 @@ class GlassesRecorderBridge(private val context: Context) {
                         if (bytesRead > 0) {
                             fileOutputStream.write(buffer, 0, bytesRead)
                             totalBytes += bytesRead
+                        } else if (bytesRead == AudioRecord.ERROR_INVALID_OPERATION || bytesRead == AudioRecord.ERROR_BAD_VALUE) {
+                            // Error occurred, break loop
+                            break
+                        } else {
+                            // No data available, sleep briefly to avoid busy-wait
+                            Thread.sleep(10)
                         }
                     }
                     
