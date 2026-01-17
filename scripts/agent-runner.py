@@ -8,13 +8,13 @@ processes them, and creates pull requests in the target repository with correlat
 This is a reference implementation - customize the task processing logic for your needs.
 """
 
+import base64
 import os
 import re
 import json
 import time
 import logging
 from typing import Optional, Dict, Any
-from datetime import datetime, timedelta
 
 import requests
 
@@ -171,7 +171,6 @@ def create_pull_request(
     # Create file with task result
     file_path = f"agent-tasks/{task_id[:8]}.md"
     file_content = task_result.encode("utf-8")
-    import base64
     encoded_content = base64.b64encode(file_content).decode("utf-8")
     
     # Check if file exists
