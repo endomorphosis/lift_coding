@@ -55,6 +55,10 @@ def apply_unified_diff(repo_dir: Path, diff_text: str) -> tuple[bool, str]:
     """Apply a unified diff to repo_dir, staging changes.
 
     Returns (success, message)."""
+    # Ensure patch ends with newline (required by git apply)
+    if diff_text and not diff_text.endswith("\n"):
+        diff_text = diff_text + "\n"
+    
     with tempfile.NamedTemporaryFile("w", delete=False, suffix=".diff") as temp_file:
         temp_file.write(diff_text)
         temp_path = temp_file.name
