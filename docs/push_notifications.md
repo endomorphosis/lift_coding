@@ -84,6 +84,8 @@ Push notification delivery is controlled by the `HANDSFREE_NOTIFICATION_PROVIDER
 
 - `"logger"` or `"dev"`: Enable DevLoggerProvider (logs notifications)
 - `"webpush"`: Enable WebPushProvider (real Web Push notifications)
+- `"apns"`: Enable APNSProvider (stub by default; set `HANDSFREE_APNS_MODE=real` for real sends)
+- `"fcm"`: Enable FCMProvider (stub by default; set `HANDSFREE_FCM_MODE=real` for real sends)
 - Empty or not set: Push delivery disabled (polling only)
 
 ### DevLoggerProvider Configuration
@@ -113,6 +115,33 @@ vapid --gen
 ```
 
 This will output a public and private key pair that you can use in your configuration.
+
+### APNS Configuration
+
+```bash
+export HANDSFREE_NOTIFICATION_PROVIDER=apns
+export HANDSFREE_APNS_TEAM_ID="<team-id>"
+export HANDSFREE_APNS_KEY_ID="<key-id>"
+export HANDSFREE_APNS_KEY_PATH="/secrets/AuthKey_<key-id>.p8"
+export HANDSFREE_APNS_BUNDLE_ID="com.example.app"
+export HANDSFREE_APNS_USE_SANDBOX=true  # optional
+
+# Default is stub; set to real to actually send
+export HANDSFREE_APNS_MODE=real
+```
+
+Note: APNS real mode requires HTTP/2 support via the `h2` package.
+
+### FCM Configuration
+
+```bash
+export HANDSFREE_NOTIFICATION_PROVIDER=fcm
+export HANDSFREE_FCM_PROJECT_ID="<firebase-project-id>"
+export HANDSFREE_FCM_CREDENTIALS_PATH="/secrets/firebase-service-account.json"
+
+# Default is stub; set to real to actually send
+export HANDSFREE_FCM_MODE=real
+```
 
 ## API Endpoints
 

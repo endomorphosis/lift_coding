@@ -331,7 +331,9 @@ class TTSRequest(BaseModel):
 class CreateNotificationSubscriptionRequest(BaseModel):
     """Request to create a notification subscription."""
 
-    endpoint: str = Field(..., min_length=1, description="Subscription endpoint URL or device token")
+    endpoint: str = Field(
+        ..., min_length=1, description="Subscription endpoint URL or device token"
+    )
     platform: str = Field(
         default="webpush",
         description="Platform type: 'webpush', 'apns', or 'fcm'",

@@ -6,6 +6,7 @@ a development logger provider for testing.
 
 import logging
 import os
+import time
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -218,10 +219,13 @@ class WebPushProvider(NotificationDeliveryProvider):
 
 
 class APNSProvider(NotificationDeliveryProvider):
-    """Apple Push Notification Service (APNS) provider stub.
+    """Apple Push Notification Service (APNS) provider.
 
-    This provider is a placeholder for future APNS integration.
-    It requires APNS credentials and will send notifications to iOS devices.
+    By default this provider runs in "stub" mode to keep local development and
+    tests deterministic.
+
+    Enable real sends by constructing with mode="real" (or setting
+    HANDSFREE_APNS_MODE=real when using get_provider_for_platform()).
     """
 
     def __init__(
@@ -231,6 +235,7 @@ class APNSProvider(NotificationDeliveryProvider):
         key_path: str,
         bundle_id: str,
         use_sandbox: bool = False,
+        mode: str = "stub",
     ):
         """Initialize APNS provider with credentials.
 
@@ -246,13 +251,53 @@ class APNSProvider(NotificationDeliveryProvider):
         self.key_path = key_path
         self.bundle_id = bundle_id
         self.use_sandbox = use_sandbox
+        self.mode = mode
+
+        self._cached_jwt: str | None = None
+        self._cached_jwt_issued_at: int | None = None
 
         logger.info(
-            "APNSProvider initialized (stub mode) - team_id=%s, bundle_id=%s, sandbox=%s",
+            "APNSProvider initialized (mode=%s) - team_id=%s, bundle_id=%s, sandbox=%s",
+            mode,
             team_id,
             bundle_id,
             use_sandbox,
         )
+
+    def _apns_host(self) -> str:
+        return "api.sandbox.push.apple.com" if self.use_sandbox else "api.push.apple.com"
+
+    def _load_private_key_pem(self) -> str:
+        with open(self.key_path, "r", encoding="utf-8") as f:
+            return f.read()
+
+    def _get_bearer_token(self) -> str:
+        """Get (and cache) the APNS JWT used for Authorization.
+
+        APNS provider tokens are valid for up to 60 minutes; we rotate them
+        proactively after ~50 minutes.
+        """
+        now = int(time.time())
+        if self._cached_jwt and self._cached_jwt_issued_at:
+            if now - self._cached_jwt_issued_at < 50 * 60:
+                return self._cached_jwt
+
+        try:
+            import jwt  # PyJWT
+        except ImportError as e:  # pragma: no cover
+            raise RuntimeError("PyJWT is required for APNS real mode") from e
+
+        private_key_pem = self._load_private_key_pem()
+        token = jwt.encode(
+            {"iss": self.team_id, "iat": now},
+            private_key_pem,
+            algorithm="ES256",
+            headers={"kid": self.key_id},
+        )
+
+        self._cached_jwt = token
+        self._cached_jwt_issued_at = now
+        return token
 
     def send(
         self,
@@ -260,7 +305,10 @@ class APNSProvider(NotificationDeliveryProvider):
         notification_data: dict[str, Any],
         subscription_keys: dict[str, str] | None = None,
     ) -> dict[str, Any]:
-        """Send an APNS notification (stub implementation).
+        """Send an APNS notification.
+
+        In "stub" mode this logs and returns success without sending.
+        In "real" mode this calls the APNS HTTP/2 API.
 
         Args:
             subscription_endpoint: The device token.
@@ -270,32 +318,98 @@ class APNSProvider(NotificationDeliveryProvider):
         Returns:
             Dictionary with delivery result (stub returns success).
         """
-        logger.info(
-            "APNSProvider (stub): Would send notification to device token %s: %s",
-            subscription_endpoint[:10] + "...",  # Log only first 10 chars for security
-            notification_data,
-        )
+        token_preview = subscription_endpoint[:10] + "..." if subscription_endpoint else "<empty>"
 
-        # In production, this would use aioapns or similar library to send
-        # the notification to Apple's APNS servers
-        return {
-            "ok": True,
-            "message": "APNS notification logged (stub mode)",
-            "delivery_id": f"apns-stub-{hash((subscription_endpoint, str(notification_data)))}",
-        }
+        if self.mode != "real":
+            logger.info(
+                "APNSProvider (stub): Would send notification to device token %s: %s",
+                token_preview,
+                notification_data,
+            )
+            return {
+                "ok": True,
+                "message": "APNS notification logged (stub mode)",
+                "delivery_id": f"apns-stub-{hash((subscription_endpoint, str(notification_data)))}",
+            }
+
+        try:
+            import httpx
+
+            bearer = self._get_bearer_token()
+
+            title = str(notification_data.get("title") or notification_data.get("event_type") or "Handsfree")
+            body = str(notification_data.get("message") or "")
+
+            payload: dict[str, Any] = {
+                "aps": {
+                    "alert": {"title": title, "body": body},
+                    "sound": "default",
+                },
+                "data": notification_data,
+            }
+
+            url = f"https://{self._apns_host()}/3/device/{subscription_endpoint}"
+            headers = {
+                "authorization": f"bearer {bearer}",
+                "apns-topic": self.bundle_id,
+                "apns-push-type": "alert",
+                "apns-priority": "10",
+            }
+
+            try:
+                with httpx.Client(http2=True, timeout=10.0) as client:
+                    resp = client.post(url, json=payload, headers=headers)
+            except ImportError as e:
+                # httpx HTTP/2 requires the optional 'h2' dependency.
+                logger.error("APNS real mode requires httpx[http2] (h2). %s", e)
+                return {"ok": False, "message": "APNS requires HTTP/2 support (install 'h2')", "delivery_id": None}
+
+            if 200 <= resp.status_code < 300:
+                apns_id = resp.headers.get("apns-id")
+                return {
+                    "ok": True,
+                    "message": f"APNS sent (status: {resp.status_code})",
+                    "delivery_id": apns_id or f"apns-{hash((subscription_endpoint, str(notification_data)))}",
+                }
+
+            reason = None
+            try:
+                reason = resp.json().get("reason")
+            except Exception:
+                reason = resp.text
+
+            logger.warning(
+                "APNS send failed (status=%s, reason=%s) for token %s",
+                resp.status_code,
+                reason,
+                token_preview,
+            )
+            return {
+                "ok": False,
+                "message": f"APNS error ({resp.status_code}): {reason}",
+                "delivery_id": None,
+            }
+
+        except Exception as e:
+            logger.error("Unexpected error sending APNS to %s: %s", token_preview, str(e), exc_info=True)
+            return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
 
 
 class FCMProvider(NotificationDeliveryProvider):
-    """Firebase Cloud Messaging (FCM) provider stub.
+    """Firebase Cloud Messaging (FCM) provider.
 
-    This provider is a placeholder for future FCM integration.
-    It requires FCM credentials and will send notifications to Android devices.
+    By default this provider runs in "stub" mode.
+    Enable real sends with mode="real" (or HANDSFREE_FCM_MODE=real).
+
+    Real mode uses a service account JSON and performs the OAuth2 JWT Bearer
+    flow to obtain an access token, then sends via FCM HTTP v1.
     """
 
     def __init__(
         self,
         project_id: str,
         credentials_path: str,
+        mode: str = "stub",
     ):
         """Initialize FCM provider with credentials.
 
@@ -305,11 +419,77 @@ class FCMProvider(NotificationDeliveryProvider):
         """
         self.project_id = project_id
         self.credentials_path = credentials_path
+        self.mode = mode
+
+        self._cached_access_token: str | None = None
+        self._cached_access_token_exp: int | None = None
 
         logger.info(
-            "FCMProvider initialized (stub mode) - project_id=%s",
+            "FCMProvider initialized (mode=%s) - project_id=%s",
+            mode,
             project_id,
         )
+
+    def _load_service_account(self) -> dict[str, Any]:
+        import json
+
+        with open(self.credentials_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    def _get_access_token(self) -> tuple[str, int]:
+        """Get (and cache) an OAuth2 access token for FCM."""
+        now = int(time.time())
+        if self._cached_access_token and self._cached_access_token_exp:
+            # Refresh ~2 minutes before expiry.
+            if now < self._cached_access_token_exp - 120:
+                return self._cached_access_token, self._cached_access_token_exp
+
+        try:
+            import jwt  # PyJWT
+        except ImportError as e:  # pragma: no cover
+            raise RuntimeError("PyJWT is required for FCM real mode") from e
+
+        import httpx
+
+        service_account = self._load_service_account()
+        token_uri = str(service_account.get("token_uri") or "https://oauth2.googleapis.com/token")
+        client_email = str(service_account["client_email"])
+        private_key = str(service_account["private_key"])
+        scope = "https://www.googleapis.com/auth/firebase.messaging"
+
+        assertion = jwt.encode(
+            {
+                "iss": client_email,
+                "scope": scope,
+                "aud": token_uri,
+                "iat": now,
+                "exp": now + 3600,
+            },
+            private_key,
+            algorithm="RS256",
+        )
+
+        with httpx.Client(timeout=10.0) as client:
+            resp = client.post(
+                token_uri,
+                data={
+                    "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+                    "assertion": assertion,
+                },
+                headers={"content-type": "application/x-www-form-urlencoded"},
+            )
+
+        if resp.status_code != 200:
+            raise RuntimeError(f"Failed to obtain OAuth token: {resp.status_code} {resp.text}")
+
+        payload = resp.json()
+        access_token = str(payload["access_token"])
+        expires_in = int(payload.get("expires_in", 3600))
+        exp = now + expires_in
+
+        self._cached_access_token = access_token
+        self._cached_access_token_exp = exp
+        return access_token, exp
 
     def send(
         self,
@@ -317,7 +497,10 @@ class FCMProvider(NotificationDeliveryProvider):
         notification_data: dict[str, Any],
         subscription_keys: dict[str, str] | None = None,
     ) -> dict[str, Any]:
-        """Send an FCM notification (stub implementation).
+        """Send an FCM notification.
+
+        In "stub" mode this logs and returns success without sending.
+        In "real" mode this calls FCM HTTP v1.
 
         Args:
             subscription_endpoint: The FCM registration token.
@@ -327,19 +510,70 @@ class FCMProvider(NotificationDeliveryProvider):
         Returns:
             Dictionary with delivery result (stub returns success).
         """
-        logger.info(
-            "FCMProvider (stub): Would send notification to FCM token %s: %s",
-            subscription_endpoint[:10] + "...",  # Log only first 10 chars for security
-            notification_data,
-        )
+        token_preview = subscription_endpoint[:10] + "..." if subscription_endpoint else "<empty>"
+        if self.mode != "real":
+            logger.info(
+                "FCMProvider (stub): Would send notification to FCM token %s: %s",
+                token_preview,
+                notification_data,
+            )
+            return {
+                "ok": True,
+                "message": "FCM notification logged (stub mode)",
+                "delivery_id": f"fcm-stub-{hash((subscription_endpoint, str(notification_data)))}",
+            }
 
-        # In production, this would use firebase-admin or similar library
-        # to send the notification to Google's FCM servers
-        return {
-            "ok": True,
-            "message": "FCM notification logged (stub mode)",
-            "delivery_id": f"fcm-stub-{hash((subscription_endpoint, str(notification_data)))}",
-        }
+        try:
+            import httpx
+
+            access_token, _exp = self._get_access_token()
+
+            title = str(notification_data.get("title") or notification_data.get("event_type") or "Handsfree")
+            body = str(notification_data.get("message") or "")
+
+            url = f"https://fcm.googleapis.com/v1/projects/{self.project_id}/messages:send"
+            payload = {
+                "message": {
+                    "token": subscription_endpoint,
+                    "notification": {"title": title, "body": body},
+                    "data": {k: str(v) for k, v in notification_data.items()},
+                }
+            }
+
+            with httpx.Client(timeout=10.0) as client:
+                resp = client.post(
+                    url,
+                    json=payload,
+                    headers={"authorization": f"Bearer {access_token}"},
+                )
+
+            if 200 <= resp.status_code < 300:
+                name = None
+                try:
+                    name = resp.json().get("name")
+                except Exception:
+                    name = None
+                return {
+                    "ok": True,
+                    "message": f"FCM sent (status: {resp.status_code})",
+                    "delivery_id": name or f"fcm-{hash((subscription_endpoint, str(notification_data)))}",
+                }
+
+            logger.warning(
+                "FCM send failed (status=%s) for token %s: %s",
+                resp.status_code,
+                token_preview,
+                resp.text,
+            )
+            return {
+                "ok": False,
+                "message": f"FCM error ({resp.status_code}): {resp.text}",
+                "delivery_id": None,
+            }
+
+        except Exception as e:
+            logger.error("Unexpected error sending FCM to %s: %s", token_preview, str(e), exc_info=True)
+            return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
 
 
 def get_notification_provider() -> NotificationDeliveryProvider | None:
@@ -400,12 +634,14 @@ def get_notification_provider() -> NotificationDeliveryProvider | None:
             )
             return None
 
+        apns_mode = os.getenv("HANDSFREE_APNS_MODE", "stub").lower()
         return APNSProvider(
             team_id=team_id,
             key_id=key_id,
             key_path=key_path,
             bundle_id=bundle_id,
             use_sandbox=use_sandbox,
+            mode=apns_mode,
         )
 
     if provider_name == "fcm":
@@ -420,9 +656,11 @@ def get_notification_provider() -> NotificationDeliveryProvider | None:
             )
             return None
 
+        fcm_mode = os.getenv("HANDSFREE_FCM_MODE", "stub").lower()
         return FCMProvider(
             project_id=project_id,
             credentials_path=credentials_path,
+            mode=fcm_mode,
         )
 
     # Default: push notifications disabled
@@ -482,12 +720,14 @@ def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | N
             )
             return None
 
+        apns_mode = os.getenv("HANDSFREE_APNS_MODE", "stub").lower()
         return APNSProvider(
             team_id=team_id,
             key_id=key_id,
             key_path=key_path,
             bundle_id=bundle_id,
             use_sandbox=use_sandbox,
+            mode=apns_mode,
         )
 
     if platform == "fcm":
@@ -501,9 +741,11 @@ def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | N
             )
             return None
 
+        fcm_mode = os.getenv("HANDSFREE_FCM_MODE", "stub").lower()
         return FCMProvider(
             project_id=project_id,
             credentials_path=credentials_path,
+            mode=fcm_mode,
         )
 
     logger.warning("Unknown platform: %s", platform)

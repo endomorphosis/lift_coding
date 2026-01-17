@@ -1,23 +1,25 @@
 # Example Agent Runner Workflow
 #
-# This workflow demonstrates how to monitor dispatch issues and process agent tasks.
-# It is DISABLED BY DEFAULT - enable by uncommenting the 'issues' trigger below.
+# This workflow demonstrates how to set up an agent runner that processes
+# dispatched agent tasks from HandsFree Dev Companion.
 #
-# Usage:
-# 1. Copy this file to your dispatch repository's .github/workflows/ directory
-# 2. Configure the secrets (GH_TOKEN, TARGET_REPO)
-# 3. Customize the task processing logic (lines 80-100)
-# 4. Enable by uncommenting the 'issues' trigger
-# 5. Test with a manual workflow_dispatch first
+# SETUP INSTRUCTIONS:
+# 1. Copy this file to your dispatch repository
+# 2. Rename it to remove "-example" (e.g., agent-runner.yml)
+# 3. Create a GitHub token with 'repo' scope
+# 4. Add the token as a secret named AGENT_RUNNER_TOKEN
+# 5. Customize the "Process task" step with your agent logic
+# 6. Commit and push to enable the workflow
+#
+# This workflow is DISABLED by default (workflow_dispatch only).
+# To enable automatic processing, change the 'on' trigger to:
+#   on:
+#     issues:
+#       types: [opened, labeled]
 
-name: Agent Runner Example
+name: Agent Runner (Example - Disabled)
 
-# DISABLED BY DEFAULT - Uncomment to enable automatic triggering
-# on:
-#   issues:
-#     types: [opened, labeled]
-
-# Manual trigger only (for testing)
+# Disabled by default - only runs on manual trigger
 on:
   workflow_dispatch:
     inputs:
@@ -26,266 +28,309 @@ on:
         required: true
         type: number
 
-permissions:
-  issues: write
-  contents: read
-  pull-requests: write
+# Uncomment below and remove workflow_dispatch above to enable automatic processing
+# on:
+#   issues:
+#     types: [opened, labeled]
 
 jobs:
   process-agent-task:
-    # Only run if issue has the 'copilot-agent' label
-    if: contains(github.event.issue.labels.*.name, 'copilot-agent') || github.event_name == 'workflow_dispatch'
+    # Only run if the issue has the copilot-agent label
+    # For workflow_dispatch, this check is skipped
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      contains(github.event.issue.labels.*.name, 'copilot-agent')
+    
     runs-on: ubuntu-latest
     
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    
     steps:
-      - name: Check out dispatch repository
+      - name: Get issue number
+        id: issue
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "number=${{ inputs.issue_number }}" >> $GITHUB_OUTPUT
+          else
+            echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Checkout dispatch repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}
-          token: ${{ secrets.GH_TOKEN || github.token }}
+          # REQUIRED: Set up a secret named AGENT_RUNNER_TOKEN
+          # This token needs 'repo' scope to read issues and create PRs
+          token: ${{ secrets.AGENT_RUNNER_TOKEN }}
       
-      - name: Set up Python
+      - name: Get issue details
+        id: get_issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.issue.outputs.number }}
+            });
+            return issue.data;
+      
+      - name: Extract task metadata
+        id: metadata
+        env:
+          ISSUE_BODY: ${{ fromJSON(steps.get_issue.outputs.result).body }}
+          ISSUE_TITLE: ${{ fromJSON(steps.get_issue.outputs.result).title }}
+        run: |
+          # Parse issue body to extract task metadata
+          
+          # Extract task_id from metadata comment
+          # Format: <!-- agent_task_metadata {"task_id": "uuid"} -->
+          TASK_ID=$(echo "$ISSUE_BODY" | grep -oP '<!-- agent_task_metadata \K[^>]+' | jq -r '.task_id // empty' || echo "")
+          
+          # Extract instruction from ## Instruction section
+          INSTRUCTION=$(echo "$ISSUE_BODY" | sed -n '/## Instruction/,/##/p' | sed '1d;$d' | head -c 500 || echo "$ISSUE_TITLE")
+          
+          # Extract target repository if specified
+          # Format: Target Repository: owner/repo
+          TARGET_REPO=$(echo "$ISSUE_BODY" | grep -oP 'Target Repository: \K[^\s]+' || echo "${{ github.repository }}")
+          
+          # Save to outputs
+          echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+          echo "target_repo=$TARGET_REPO" >> $GITHUB_OUTPUT
+          
+          # Save instruction to file (multiline)
+          echo "$INSTRUCTION" > /tmp/instruction.txt
+          echo "instruction_file=/tmp/instruction.txt" >> $GITHUB_OUTPUT
+          
+          # Log extracted metadata
+          echo "Task ID: $TASK_ID"
+          echo "Target Repository: $TARGET_REPO"
+          echo "Instruction: $INSTRUCTION"
+      
+      - name: Validate metadata
+        run: |
+          if [ -z "${{ steps.metadata.outputs.task_id }}" ]; then
+            echo "::error::Issue #${{ steps.issue.outputs.number }} is missing task_id in agent_task_metadata"
+            exit 1
+          fi
+          
+          if [ -z "${{ steps.metadata.outputs.target_repo }}" ]; then
+            echo "::error::Issue #${{ steps.issue.outputs.number }} is missing target repository"
+            exit 1
+          fi
+      
+      - name: Comment on issue (processing started)
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.issue.outputs.number }},
+              body: '🤖 Agent runner started processing this task at ' + new Date().toISOString()
+            });
+      
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.metadata.outputs.target_repo }}
+          token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          path: target-repo
+      
+      - name: Setup Python (if needed for your agent)
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       
-      - name: Install dependencies
-        run: |
-          pip install PyGithub requests
-      
-      - name: Extract task metadata
-        id: metadata
-        run: |
-          python << 'EOF'
-          import os
-          import re
-          import json
-          
-          # Get issue body
-          issue_body = """${{ github.event.issue.body }}"""
-          
-          # Extract agent_task_metadata from HTML comment
-          metadata_match = re.search(
-              r'<!--\s*agent_task_metadata\s+(.*?)\s*-->',
-              issue_body,
-              re.DOTALL
-          )
-          
-          if metadata_match:
-              try:
-                  metadata = json.loads(metadata_match.group(1))
-                  print(f"task_id={metadata.get('task_id', '')}")
-                  print(f"user_id={metadata.get('user_id', '')}")
-                  print(f"target_repo={metadata.get('target_repo', '')}")
-                  print(f"instruction={metadata.get('instruction', '')}")
-                  
-                  # Write to GitHub outputs
-                  with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                      f.write(f"task_id={metadata.get('task_id', '')}\n")
-                      f.write(f"user_id={metadata.get('user_id', '')}\n")
-                      f.write(f"target_repo={metadata.get('target_repo', '')}\n")
-                      f.write(f"instruction={metadata.get('instruction', '')}\n")
-              except json.JSONDecodeError as e:
-                  print(f"Error parsing metadata: {e}")
-                  exit(1)
-          else:
-              print("No agent_task_metadata found in issue body")
-              exit(1)
-          EOF
-        shell: bash
-        env:
-          ISSUE_BODY: ${{ github.event.issue.body }}
-      
       - name: Process task
         id: process
-        run: |
-          echo "Processing task..."
-          echo "Task ID: ${{ steps.metadata.outputs.task_id }}"
-          echo "Instruction: ${{ steps.metadata.outputs.instruction }}"
-          echo "Target repo: ${{ steps.metadata.outputs.target_repo }}"
-          
-          # TODO: Replace this placeholder with your actual task processing logic
-          # Examples:
-          # - Call an LLM API (OpenAI, Anthropic, etc.)
-          # - Run a code generation script
-          # - Execute a pre-defined automation
-          # - Trigger another workflow
-          
-          # For this example, we'll create a simple placeholder change
-          echo "# Placeholder task processing" > task_result.txt
-          echo "Task ID: ${{ steps.metadata.outputs.task_id }}" >> task_result.txt
-          echo "Instruction: ${{ steps.metadata.outputs.instruction }}" >> task_result.txt
-          echo "" >> task_result.txt
-          echo "This is a placeholder result. Replace with actual implementation." >> task_result.txt
-          
-          # Sanitize task_id for branch name (remove non-alphanumeric except hyphens)
-          TASK_ID_SAFE=$(echo "${{ steps.metadata.outputs.task_id }}" | sed 's/[^a-zA-Z0-9\-]//g' | cut -c1-8)
-          
-          # Set outputs for PR creation
-          echo "branch_name=agent-task-${TASK_ID_SAFE}" >> $GITHUB_OUTPUT
-          echo "pr_title=Agent task: ${{ steps.metadata.outputs.instruction }}" >> $GITHUB_OUTPUT
-      
-      - name: Check out target repository
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ steps.metadata.outputs.target_repo }}
-          token: ${{ secrets.GH_TOKEN }}
-          path: target-repo
-      
-      - name: Create branch and commit changes
         working-directory: target-repo
-        run: |
-          git config user.name "Agent Runner Bot"
-          git config user.email "agent-runner-bot@example.com"
-          
-          # Create new branch
-          git checkout -b "${{ steps.process.outputs.branch_name }}"
-          
-          # Apply changes (placeholder - customize as needed)
-          mkdir -p agent-tasks
-          cp ../task_result.txt agent-tasks/result.txt
-          git add agent-tasks/result.txt
-          
-          # Commit with task reference
-          git commit -m "Process agent task ${{ steps.metadata.outputs.task_id }}
-
-          Task instruction: ${{ steps.metadata.outputs.instruction }}
-          Dispatch issue: ${{ github.repository }}#${{ github.event.issue.number }}"
-          
-          # Push branch
-          git push origin "${{ steps.process.outputs.branch_name }}"
-      
-      - name: Create pull request with correlation metadata
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TASK_ID: ${{ steps.metadata.outputs.task_id }}
+          TARGET_REPO: ${{ steps.metadata.outputs.target_repo }}
         run: |
-          python << 'EOF'
-          import os
-          from github import Github
+          # ============================================================
+          # CUSTOMIZE THIS SECTION WITH YOUR AGENT LOGIC
+          # ============================================================
+          #
+          # This is where you implement your actual agent task processing.
+          # Examples of what you might do here:
+          #
+          # 1. Use an LLM to generate code changes:
+          #    - Call OpenAI, Anthropic, or other LLM APIs
+          #    - Pass the instruction and codebase context
+          #    - Apply the generated changes
+          #
+          # 2. Run automated scripts:
+          #    - Execute code generation tools
+          #    - Run linters or formatters
+          #    - Apply automated refactorings
+          #
+          # 3. Call external services:
+          #    - Trigger CI/CD pipelines
+          #    - Call code analysis APIs
+          #    - Integrate with project management tools
+          #
+          # For this example, we'll create a placeholder file to demonstrate
+          # the flow. Replace this with your actual agent logic.
           
-          # Initialize GitHub client
-          g = Github(os.environ['GH_TOKEN'])
+          # Configure git
+          git config user.name "Agent Runner Bot"
+          git config user.email "agent-runner-bot@users.noreply.github.com"
           
-          # Get target repository
-          target_repo = "${{ steps.metadata.outputs.target_repo }}"
-          repo = g.get_repo(target_repo)
+          # Read the instruction
+          INSTRUCTION=$(cat ../tmp/instruction.txt 2>/dev/null || echo "No instruction provided")
           
-          # PR details
-          task_id = "${{ steps.metadata.outputs.task_id }}"
-          branch_name = "${{ steps.process.outputs.branch_name }}"
-          pr_title = "${{ steps.process.outputs.pr_title }}"
+          # Example: Create a simple output file
+          # In a real agent, you would:
+          # - Analyze the codebase
+          # - Generate or modify code based on the instruction
+          # - Run tests to verify changes
+          # - Format and lint the code
           
-          # PR body with correlation metadata
-          pr_body = f"""This PR was created by the agent runner to address the following task:
+          echo "# Agent Task Output" > AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "**Task ID**: $TASK_ID" >> AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "**Instruction**: $INSTRUCTION" >> AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "**Processed At**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "**Agent**: GitHub Actions Agent Runner" >> AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "## Changes" >> AGENT_TASK_OUTPUT.md
+          echo "" >> AGENT_TASK_OUTPUT.md
+          echo "This file was automatically generated as a placeholder." >> AGENT_TASK_OUTPUT.md
+          echo "In a production agent runner, this would contain the actual" >> AGENT_TASK_OUTPUT.md
+          echo "code changes, documentation updates, or other work products" >> AGENT_TASK_OUTPUT.md
+          echo "requested in the instruction." >> AGENT_TASK_OUTPUT.md
+          
+          # Stage changes
+          git add AGENT_TASK_OUTPUT.md
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            # Commit changes
+            git commit -m "Process agent task from dispatch issue #${{ steps.issue.outputs.number }}
 
-          **Instruction**: ${{ steps.metadata.outputs.instruction }}
+          This commit was automatically generated by the agent runner in response
+          to dispatch issue #${{ steps.issue.outputs.number }}.
 
-          **Task Details**:
-          - Task ID: {task_id}
-          - User ID: ${{ steps.metadata.outputs.user_id }}
-          - Dispatch Issue: ${{ github.repository }}#${{ github.event.issue.number }}
+          Task ID: $TASK_ID
+          
+          Instruction: $INSTRUCTION"
+            
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create Pull Request
+        if: steps.process.outputs.has_changes == 'true'
+        id: create_pr
+        working-directory: target-repo
+        env:
+          GH_TOKEN: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          TASK_ID: ${{ steps.metadata.outputs.task_id }}
+          DISPATCH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
+          ISSUE_TITLE: ${{ fromJSON(steps.get_issue.outputs.result).title }}
+        run: |
+          # Create a unique branch name
+          BRANCH_NAME="agent-task-$ISSUE_NUMBER-$(date +%s)"
+          echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          
+          # Create and push branch
+          git checkout -b "$BRANCH_NAME"
+          git push origin "$BRANCH_NAME"
+          
+          # Read instruction for PR body
+          INSTRUCTION=$(cat ../tmp/instruction.txt 2>/dev/null || echo "No instruction provided")
+          
+          # Create PR with correlation metadata
+          # IMPORTANT: The PR body must include either:
+          # 1. agent_task_metadata comment with task_id (recommended)
+          # 2. Issue reference like "Fixes #123"
+          # This is how HandsFree correlates the PR back to the task
+          
+          PR_BODY="Automated changes from agent task
+
+          **Dispatch Issue**: $DISPATCH_REPO#$ISSUE_NUMBER
+
+          Fixes $DISPATCH_REPO#$ISSUE_NUMBER
+
+          <!-- agent_task_metadata {\"task_id\": \"$TASK_ID\"} -->
+
+          ## Task Instruction
+
+          $INSTRUCTION
 
           ## Changes
 
-          <!-- TODO: Add description of changes made -->
-          Placeholder changes created by agent runner example workflow.
+          This PR was automatically generated by the agent runner in response to the dispatch issue.
+          Review the changes and merge if they meet your requirements.
 
-          ## Correlation Metadata
+          ## Testing
 
-          <!-- agent_task_metadata {{"task_id": "{task_id}"}} -->
+          - [ ] Changes have been reviewed
+          - [ ] Tests pass (if applicable)
+          - [ ] Documentation updated (if needed)
 
-          Fixes ${{ github.repository }}#${{ github.event.issue.number }}
-          """
+          ---
+          *This PR was created by the HandsFree Agent Runner*"
           
-          # Create pull request
-          try:
-              pr = repo.create_pull(
-                  title=pr_title[:100],  # Truncate to avoid overly long titles
-                  body=pr_body,
-                  head=branch_name,
-                  base="main"  # Change if your default branch is different
-              )
-              print(f"Created PR: {pr.html_url}")
-              
-              # Save PR URL for next step
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                  f.write(f"pr_url={pr.html_url}\n")
-                  f.write(f"pr_number={pr.number}\n")
-          except Exception as e:
-              print(f"Error creating PR: {e}")
-              exit(1)
-          EOF
-        id: create_pr
+          # Create the PR
+          PR_URL=$(gh pr create \
+            --title "Agent task: $ISSUE_TITLE" \
+            --body "$PR_BODY" \
+            --base main \
+            --head "$BRANCH_NAME" 2>&1)
+          
+          echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+          echo "Created PR: $PR_URL"
       
-      - name: Comment on dispatch issue
-        if: success()
+      - name: Comment on issue (completed with PR)
+        if: success() && steps.process.outputs.has_changes == 'true'
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || github.token }}
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
+          script: |
+            const prUrl = '${{ steps.create_pr.outputs.pr_url }}';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.issue.outputs.number }},
+              body: `✅ Agent runner completed processing and created a pull request:\n\n${prUrl}\n\nThe task will be marked as completed once the PR is opened.`
+            });
+      
+      - name: Comment on issue (completed without changes)
+        if: success() && steps.process.outputs.has_changes == 'false'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
           script: |
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `✅ Task processed successfully!
-
-              **Pull Request Created**: ${{ steps.create_pr.outputs.pr_url }}
-
-              The PR has been opened in the target repository with correlation metadata.
-              The Handsfree backend will automatically correlate this PR to the task.`
+              issue_number: ${{ steps.issue.outputs.number }},
+              body: '✅ Agent runner completed processing but no changes were needed.'
             });
       
-      - name: Comment on dispatch issue (failure)
+      - name: Comment on issue (failed)
         if: failure()
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GH_TOKEN || github.token }}
+          github-token: ${{ secrets.AGENT_RUNNER_TOKEN }}
           script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: `❌ Task processing failed
-
-              Please check the workflow logs for details:
-              ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-              Error details will be available in the logs.`
+              issue_number: ${{ steps.issue.outputs.number }},
+              body: `❌ Agent runner failed to process this task. Check the [workflow logs](${runUrl}) for details.`
             });
-
-# Configuration Notes:
-#
-# Required Secrets:
-# - GH_TOKEN: Personal Access Token with 'repo' scope
-#   - Must have access to both dispatch and target repositories
-#   - Should be from a dedicated bot account (recommended)
-#
-# Optional Secrets:
-# - OPENAI_API_KEY: If using OpenAI for task processing
-# - ANTHROPIC_API_KEY: If using Anthropic Claude
-# - Any other API keys needed for your task processing logic
-#
-# Required Permissions:
-# - issues: write (to comment on dispatch issues)
-# - contents: read (to read repository contents)
-# - pull-requests: write (to create PRs)
-#
-# Customization Points:
-# 1. Line 15-16: Enable automatic triggering on issue events
-# 2. Line 80-100: Replace placeholder task processing with actual logic
-# 3. Line 130-140: Customize git commit and file changes
-# 4. Line 165: Change default branch if not 'main'
-# 5. Add additional steps for testing, linting, or validation
-#
-# Testing:
-# 1. Use workflow_dispatch to test manually with a specific issue number
-# 2. Verify task metadata extraction works correctly
-# 3. Check that PR is created with proper correlation metadata
-# 4. Confirm Handsfree backend correlates PR to task
-# 5. Enable automatic triggering after successful tests
-#
-# Troubleshooting:
-# - If metadata extraction fails, check issue body format
-# - If PR creation fails, verify GH_TOKEN has correct permissions
-# - If correlation fails, verify metadata comment format in PR body
-# - Check workflow logs for detailed error messages
