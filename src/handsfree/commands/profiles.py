@@ -63,7 +63,7 @@ class ProfileConfig:
                 profile=Profile.FOCUSED,
                 max_spoken_words=20,  # Brief, actionable
                 confirmation_required=False,  # Minimal interruption
-                speech_rate=1.0,
+                speech_rate=1.1,  # Slightly faster
                 max_summary_sentences=2,  # Minimal interruption
                 max_inbox_items=3,  # Only actionable items
                 detail_level="minimal",  # Brief, actionable items only
@@ -72,22 +72,10 @@ class ProfileConfig:
                 profile=Profile.RELAXED,
                 max_spoken_words=100,  # Full detail
                 confirmation_required=False,
-                speech_rate=1.0,
+                speech_rate=0.95,  # Slightly slower for comprehension
                 max_summary_sentences=10,  # Detailed: full context
                 max_inbox_items=10,  # More items
                 detail_level="detailed",  # All details
-            ),
-            Profile.FOCUSED: cls(
-                profile=Profile.FOCUSED,
-                max_spoken_words=20,  # Minimal interruption: brief, actionable items only
-                confirmation_required=False,  # No interruptions
-                speech_rate=1.1,  # Slightly faster
-            ),
-            Profile.RELAXED: cls(
-                profile=Profile.RELAXED,
-                max_spoken_words=100,  # Detailed: full context, all details
-                confirmation_required=False,  # No rush
-                speech_rate=0.95,  # Slightly slower for comprehension
             ),
             Profile.DEFAULT: cls(
                 profile=Profile.DEFAULT,
