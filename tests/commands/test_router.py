@@ -549,11 +549,11 @@ class TestProfileVerbosityTuning:
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Ultra-brief: should be very short
         word_count = len(spoken_text.split())
         assert word_count <= 15  # Max words for workout profile
-        
+
         # Should still mention PR number
         assert "123" in spoken_text
 
@@ -566,12 +566,12 @@ class TestProfileVerbosityTuning:
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Detailed: should be much longer than workout
         workout_response = router.route(intent, Profile.WORKOUT)
         workout_words = len(workout_response["spoken_text"].split())
         relaxed_words = len(spoken_text.split())
-        
+
         assert relaxed_words > workout_words
         assert relaxed_words > 20  # Should be detailed
 
@@ -584,21 +584,19 @@ class TestProfileVerbosityTuning:
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Focused: brief and actionable
         word_count = len(spoken_text.split())
         assert word_count <= 20  # Max words for focused profile
 
-    def test_pr_summarize_commute_brief(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_pr_summarize_commute_brief(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test pr.summarize with profile=commute returns brief summaries."""
         intent = parser.parse("summarize pr 789")
         response = router.route(intent, Profile.COMMUTE)
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Brief: 2-3 sentences
         word_count = len(spoken_text.split())
         assert word_count <= 30  # Max words for commute profile
@@ -613,22 +611,20 @@ class TestProfileVerbosityTuning:
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Moderate: 3-4 sentences, conversational
         word_count = len(spoken_text.split())
         assert word_count <= 40  # Max words for kitchen profile
         assert word_count > 15  # Should be conversational
 
-    def test_inbox_list_workout_brief(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_inbox_list_workout_brief(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test inbox.list with profile=workout returns ultra-brief summaries."""
         intent = parser.parse("inbox")
         response = router.route(intent, Profile.WORKOUT)
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Ultra-brief
         word_count = len(spoken_text.split())
         assert word_count <= 15
@@ -642,51 +638,45 @@ class TestProfileVerbosityTuning:
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Should be actionable and brief
         word_count = len(spoken_text.split())
         assert word_count <= 20
-        
+
         # Should mention actionable items (PRs, checks)
         assert "PR" in spoken_text or "check" in spoken_text.lower()
 
-    def test_inbox_list_relaxed_detailed(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_inbox_list_relaxed_detailed(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test inbox.list with profile=relaxed returns detailed summaries."""
         intent = parser.parse("inbox")
         response = router.route(intent, Profile.RELAXED)
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Should be detailed
         workout_response = router.route(intent, Profile.WORKOUT)
         workout_words = len(workout_response["spoken_text"].split())
         relaxed_words = len(spoken_text.split())
-        
+
         assert relaxed_words > workout_words
 
-    def test_default_behavior_unchanged(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_default_behavior_unchanged(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test that default behavior (no profile) remains unchanged."""
         intent = parser.parse("summarize pr 123")
         response = router.route(intent, Profile.DEFAULT)
 
         assert response["status"] == "ok"
         spoken_text = response["spoken_text"]
-        
+
         # Default should be moderate/balanced
         word_count = len(spoken_text.split())
         assert word_count <= 25  # Max words for default profile
 
-    def test_all_profiles_tested(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_all_profiles_tested(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test that all profiles have appropriate configurations."""
         intent = parser.parse("summarize pr 999")
-        
+
         profiles_tested = [
             Profile.WORKOUT,
             Profile.COMMUTE,
@@ -695,38 +685,37 @@ class TestProfileVerbosityTuning:
             Profile.RELAXED,
             Profile.DEFAULT,
         ]
-        
+
         for profile in profiles_tested:
             response = router.route(intent, profile)
             assert response["status"] == "ok"
             assert len(response["spoken_text"]) > 0
-            
+
             # Verify each profile respects its word limit
             from handsfree.commands.profiles import ProfileConfig
+
             config = ProfileConfig.for_profile(profile)
             word_count = len(response["spoken_text"].split())
             assert word_count <= config.max_spoken_words + 1  # +1 for potential "..."
 
-    def test_profile_verbosity_ordering(
-        self, router: CommandRouter, parser: IntentParser
-    ) -> None:
+    def test_profile_verbosity_ordering(self, router: CommandRouter, parser: IntentParser) -> None:
         """Test that profiles follow expected verbosity ordering."""
         intent = parser.parse("inbox")
-        
+
         # Get responses for all profiles
         workout = router.route(intent, Profile.WORKOUT)
         focused = router.route(intent, Profile.FOCUSED)
         default = router.route(intent, Profile.DEFAULT)
         kitchen = router.route(intent, Profile.KITCHEN)
         relaxed = router.route(intent, Profile.RELAXED)
-        
+
         # Count words
         workout_words = len(workout["spoken_text"].split())
         focused_words = len(focused["spoken_text"].split())
         default_words = len(default["spoken_text"].split())
         kitchen_words = len(kitchen["spoken_text"].split())
         relaxed_words = len(relaxed["spoken_text"].split())
-        
+
         # Verify ordering: workout <= focused <= default <= kitchen <= relaxed
         assert workout_words <= focused_words
         assert focused_words <= default_words
@@ -737,7 +726,7 @@ class TestProfileVerbosityTuning:
     ) -> None:
         """Test that critical information is preserved regardless of profile."""
         intent = parser.parse("summarize pr 456")
-        
+
         # All profiles should include the PR number
         for profile in Profile:
             response = router.route(intent, profile)
