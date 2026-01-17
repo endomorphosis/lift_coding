@@ -116,3 +116,66 @@ export async function getNotifications() {
 
   return await response.json();
 }
+
+/**
+ * Upload audio bytes to dev endpoint and get file:// URI
+ * @param {string} audioBase64 - Base64-encoded audio data
+ * @param {string} format - Audio format (m4a, wav, mp3, opus)
+ * @returns {Promise<Object>} Object with { uri, format }
+ */
+export async function uploadDevAudio(audioBase64, format = 'm4a') {
+  const body = {
+    audio_base64: audioBase64,
+    format,
+  };
+
+  const response = await fetch(`${BASE_URL}/v1/dev/audio`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `Upload failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Send an audio command to the backend
+ * @param {string} uri - Audio URI (file:// or pre-signed URL)
+ * @param {string} format - Audio format (m4a, wav, mp3, opus)
+ * @param {number} durationMs - Optional duration in milliseconds
+ * @param {Object} options - Optional parameters (profile, client_context)
+ * @returns {Promise<Object>} Command response with spoken_text, ui_cards, etc.
+ */
+export async function sendAudioCommand(uri, format = 'm4a', durationMs = null, options = {}) {
+  const body = {
+    input: {
+      type: 'audio',
+      uri,
+      format,
+      ...(durationMs && { duration_ms: durationMs }),
+    },
+    profile: options.profile || 'dev',
+    client_context: options.client_context || {
+      device_type: 'mobile',
+      app_version: '1.0.0',
+    },
+  };
+
+  const response = await fetch(`${BASE_URL}/v1/command`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `Command failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
