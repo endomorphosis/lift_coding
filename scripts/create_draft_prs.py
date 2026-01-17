@@ -136,11 +136,7 @@ Refer to the tracking document for:
     run_command(f'git add "{plan_file}"')
     # Use git commit with -F to avoid shell injection
     with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
-        commit_msg = (
-            f"PR-{pr_number}: Initial plan\n\n"
-            f"Ready for GitHub Copilot agent implementation. "
-            f"See {tracking_file} for details."
-        )
+        commit_msg = f"PR-{pr_number}: Initial plan\n\nReady for GitHub Copilot agent implementation. See {tracking_file} for details."
         f.write(commit_msg)
         commit_msg_file = f.name
 
