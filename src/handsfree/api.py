@@ -527,6 +527,102 @@ async def retry_webhook_processing(
         )
 
 
+@app.post("/v1/dev/audio")
+async def dev_upload_audio(
+    request: dict,
+    user_id: CurrentUser,
+) -> JSONResponse:
+    """Upload audio bytes to the backend for local/mobile development (dev-only).
+
+    This endpoint accepts base64-encoded audio bytes and saves them under a dev-only
+    directory on the server, returning a `file://` URI.
+
+    The returned URI can be used as `input.uri` when calling `POST /v1/command` with
+    `input.type="audio"`, leveraging existing `fetch_audio_data()` support for `file://`.
+
+    Security:
+    - Only enabled when `HANDSFREE_AUTH_MODE=dev`.
+    - Enforces a max decoded payload size.
+    """
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev audio upload is only available in dev mode",
+            },
+        )
+
+    data_base64 = request.get("data_base64")
+    audio_format = str(request.get("format") or "m4a").lower()
+
+    if not isinstance(data_base64, str) or not data_base64.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "Missing required field: data_base64",
+            },
+        )
+
+    allowed_exts = {"wav", "m4a", "mp3", "opus"}
+    if audio_format not in allowed_exts:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": f"Unsupported audio format: {audio_format}",
+            },
+        )
+
+    import base64
+    import os
+    import uuid
+    from pathlib import Path
+
+    max_size = int(os.getenv("HANDSFREE_DEV_AUDIO_MAX_BYTES", str(10 * 1024 * 1024)))
+    dev_dir = Path(os.getenv("HANDSFREE_DEV_AUDIO_DIR", "data/dev_audio")).resolve()
+    dev_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        audio_bytes = base64.b64decode(data_base64, validate=True)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "data_base64 must be valid base64",
+            },
+        ) from e
+
+    if len(audio_bytes) > max_size:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": f"Audio too large (max {max_size} bytes)",
+            },
+        )
+
+    file_id = uuid.uuid4().hex
+    file_path = dev_dir / f"{file_id}.{audio_format}"
+    file_path.write_bytes(audio_bytes)
+
+    uri = f"file://{file_path}"
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "uri": uri,
+            "bytes": len(audio_bytes),
+            "format": audio_format,
+            "user_id": user_id,
+        },
+    )
+
+
 @app.post("/v1/command", response_model=CommandResponse)
 async def submit_command(
     request: CommandRequest,
