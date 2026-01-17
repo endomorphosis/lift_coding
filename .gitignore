@@ -15,3 +15,9 @@ dist/
 .env
 .env.*
 data/
+
+# Mobile app dependencies
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/web-build/

@@ -10,15 +10,14 @@ This directory contains an example implementation of a custom agent runner that 
 
 ## Usage
 
-This is a **reference implementation** that demonstrates a functional agent runner that:
-- Polls dispatch issues labeled `copilot-agent`
-- Clones the target repository
-- Creates a working branch (`agent-task-<task_id_prefix>`)
-- Commits a trace file with correlation metadata
-- Opens a PR referencing the dispatch issue
-- Marks the issue as processed
+This is a **reference implementation** that demonstrates the structure of a custom agent runner. The `runner.py` file now includes a complete implementation that:
 
-The runner implements idempotent PR creation - if a branch or PR already exists, it will update instead of failing.
+1. Polls the dispatch repository for issues labeled with `copilot-agent`
+2. Clones the target repository into `/workspace`
+3. Creates a branch named `agent-task-<task_id_prefix>`
+4. Creates a trace file under `agent-tasks/<task_id_prefix>.md` with task metadata and correlation comment
+5. Commits and pushes changes
+6. Creates a pull request with correlation metadata referencing the dispatch issue
 
 ### Quick Start
 
@@ -40,95 +39,75 @@ The runner implements idempotent PR creation - if a branch or PR already exists,
 
 ### Smoke Test
 
-To verify the runner is working correctly:
+To verify the agent runner is working correctly:
 
 1. **Create a test dispatch issue** in your dispatch repository with:
    - Title: "Test agent task"
    - Label: `copilot-agent`
    - Body:
      ```markdown
-     <!-- agent_task_metadata {"task_id": "test-task-XXXXXXXX"} -->
-     
      ## Instruction
+     Create a simple test file
      
-     Create a simple test file to verify the agent runner is working.
+     Target Repository: owner/your-repo
      
-     Target Repository: owner/target-repo
+     <!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->
      ```
-   
-   **Note**: Replace `XXXXXXXX` with a unique 8-character string (e.g., use `date +%s | tail -c 9` to generate a timestamp-based ID)
 
-2. **Wait for the runner to process the issue** (check logs):
+2. **Monitor the agent runner logs**:
    ```bash
    docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
    ```
    
    You should see:
-   - "Found new dispatch issue: #X - Test agent task"
-   - "Processing task: Test agent task"
-   - "Cloning repository..."
-   - "Creating new branch agent-task-test-tas..."
-   - "Created PR: #Y"
+   - "Found new dispatch issue: #N - Test agent task"
+   - "Cloning owner/your-repo..."
+   - "Creating new branch agent-task-test-123"
+   - "Created trace file..."
+   - "Created PR #N..."
 
 3. **Verify the results**:
-   - A new branch `agent-task-test-tas` (or similar) should exist in the target repository
-   - A PR should be created with:
-     - Correlation metadata: `<!-- agent_task_metadata {"task_id": "test-task-12345678"} -->`
-     - Issue reference: `Fixes owner/dispatch-repo#X`
-     - A trace file in `agent-tasks/test-tas.md`
-   - The dispatch issue should have:
-     - A comment showing the PR URL
-     - A `processed` label (if the label exists in the repository)
+   - A new branch `agent-task-test-123` should exist in the target repository
+   - A new PR should be created with:
+     - Title: "Agent task: Test agent task"
+     - Body containing: `<!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->`
+     - Body containing: `Fixes owner/dispatch-repo#N`
+   - A file `agent-tasks/test-123.md` should exist in the PR
+   - The dispatch issue should have comments from the agent runner
+   - The dispatch issue should have a `processed` label
 
-4. **Test idempotency** by restarting the runner:
-   ```bash
-   docker-compose -f docker-compose.agent-runner.yml restart agent-runner
-   ```
-   
-   The runner should skip the already-processed issue (check logs for "Skip if already processed").
-
-5. **Clean up** when done:
-   ```bash
-   # Close the PR and delete the branch in the target repository
-   # Close or delete the test dispatch issue
-   docker-compose -f docker-compose.agent-runner.yml down
-   ```
+4. **Clean up**:
+   - Close or merge the test PR
+   - Delete the test branch
+   - Close the test dispatch issue
 
 ### Customizing the Runner
 
-The `runner.py` file implements a complete agent workflow that:
+The `runner.py` file includes a complete implementation of the PR-creation workflow. You can customize it further to:
 
-1. **Clones the target repository** into `/workspace`
-2. **Creates a branch** named `agent-task-<task_id_prefix>`
-3. **Generates a trace file** at `agent-tasks/<task_id_prefix>.md` with:
-   - Task ID and correlation metadata
-   - Instruction text
-   - Timestamps
-4. **Commits and pushes** the changes
-5. **Creates a PR** with correlation metadata in the body
-6. **Marks the issue as processed** with a comment and label
+- **Add LLM-powered code generation**: Integrate OpenAI, Anthropic, or other LLM providers to generate actual code changes based on the instruction
+- **Add testing**: Run unit tests, integration tests, or linting before creating the PR
+- **Add validation**: Check if changes compile, pass CI checks, or meet other criteria
+- **Add retry logic**: Implement exponential backoff for transient failures
+- **Add concurrency**: Process multiple tasks in parallel
 
-To customize the runner for your needs, modify the `create_trace_file()` function to make actual code changes instead of just creating a trace file. For example:
+Example of adding LLM integration:
 
 ```python
-def create_trace_file(repo_path: Path, task_id: str, instruction: str, issue_number: int) -> Path:
-    # Instead of creating a trace file, use an LLM to generate code changes
-    # based on the instruction
-    
-    # Example with OpenAI:
-    # response = openai.ChatCompletion.create(
-    #     model="gpt-4",
-    #     messages=[
-    #         {"role": "system", "content": "You are a code generation assistant."},
-    #         {"role": "user", "content": f"Implement the following: {instruction}"}
-    #     ]
-    # )
-    # code = response.choices[0].message.content
-    # 
-    # # Write the generated code to appropriate files
-    # # ...
-    
-    pass
+# In process_task(), before creating the trace file:
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ.get('LLM_API_KEY'))
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful coding assistant."},
+        {"role": "user", "content": f"Implement this task: {instruction}"}
+    ]
+)
+
+# Use response.choices[0].message.content to make code changes
+# Then commit those changes instead of just the trace file
 ```
 
 ### Integration Options

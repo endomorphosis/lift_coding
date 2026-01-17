@@ -992,14 +992,55 @@ github_rate_limit = Gauge('github_api_rate_limit_remaining', 'GitHub API rate li
 
 After setting up your agent runner:
 
-1. **Test the full flow**:
-   - Create a test dispatch issue manually
-   - Verify the runner processes it
-   - Check that a PR is created with correlation metadata
-   - Verify HandsFree marks the task as completed
+1. **Test the full flow (Smoke Test)**:
+   
+   a. **Create a test dispatch issue** in your dispatch repository:
+      - Title: "Test agent task"
+      - Add label: `copilot-agent`
+      - Body:
+        ```markdown
+        ## Instruction
+        Create a simple test file to verify agent runner functionality
+        
+        Target Repository: owner/your-repo
+        
+        <!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->
+        ```
+   
+   b. **Monitor the agent runner**:
+      - For Docker Compose: `docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner`
+      - For GitHub Actions: Check the Actions tab in your dispatch repository
+      
+      Expected log output:
+      - "Found new dispatch issue: #N - Test agent task"
+      - "Cloning owner/your-repo to /workspace/..."
+      - "Creating new branch agent-task-test-123"
+      - "Created trace file: agent-tasks/test-123.md"
+      - "Committed and pushed changes to agent-task-test-123"
+      - "Created PR #N: <PR URL>"
+      - "Task processed successfully: N"
+   
+   c. **Verify the results**:
+      - ✅ A new branch `agent-task-test-123` exists in the target repository
+      - ✅ A new pull request is created with:
+        - Title: "Agent task: Test agent task"
+        - Body contains: `<!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->`
+        - Body contains: `Fixes owner/dispatch-repo#N`
+        - File `agent-tasks/test-123.md` is present in the PR
+      - ✅ The dispatch issue has two comments from the agent:
+        - "🤖 custom-agent started processing this task..."
+        - "✅ custom-agent completed processing this task..."
+      - ✅ The dispatch issue has a `processed` label
+      - ✅ HandsFree backend marks the task as completed (check task status)
+   
+   d. **Clean up**:
+      - Close or merge the test PR
+      - Delete the test branch: `git push origin --delete agent-task-test-123`
+      - Close the test dispatch issue
 
 2. **Customize the processing logic**:
-   - Integrate your preferred LLM provider
+   - The runner now includes complete PR-creation functionality
+   - Integrate your preferred LLM provider for actual code generation
    - Add custom validation and testing
    - Implement error recovery strategies
 
