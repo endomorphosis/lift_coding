@@ -135,6 +135,14 @@ else:
 _command_router: CommandRouter | None = None
 _github_provider = GitHubProvider()
 
+# Mapping from handler item types to API model types
+_INBOX_ITEM_TYPE_MAP = {
+    "pr": InboxItemType.PR,
+    "mention": InboxItemType.MENTION,
+    "check": InboxItemType.CHECK,
+    "agent": InboxItemType.AGENT,
+}
+
 
 def get_db():
     """Get or initialize database connection.
@@ -1861,13 +1869,48 @@ async def confirm_command(
 @app.get("/v1/inbox", response_model=InboxResponse)
 async def get_inbox(profile: Profile | None = None) -> InboxResponse:
     """Get attention items (PRs, mentions, failing checks)."""
-    items = _get_fixture_inbox_items()
-
-    # Filter by profile if needed (stub for now)
+    # Use ProfileConfig for profile-aware filtering and truncation
+    profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
+    
+    # Use fixture user for deterministic behavior (defined in FIXTURE_USER_ID constant)
+    user = "testuser"
+    
+    # Call the inbox handler to get rich items with checks summary
+    try:
+        result = handle_inbox_list(
+            provider=_github_provider,
+            user=user,
+            privacy_mode=PrivacyMode.STRICT,
+            profile_config=profile_config,
+            user_id=None,  # No user_id for fixture mode
+        )
+        
+        # Convert handler items to InboxItem format
+        items = []
+        for item_data in result.get("items", []):
+            item = InboxItem(
+                type=_INBOX_ITEM_TYPE_MAP.get(item_data.get("type", "pr"), InboxItemType.PR),
+                title=item_data.get("title", ""),
+                priority=item_data.get("priority", 3),
+                repo=item_data.get("repo", ""),
+                url=item_data.get("url", ""),
+                summary=item_data.get("summary", ""),
+                checks_passed=item_data.get("checks_passed"),
+                checks_failed=item_data.get("checks_failed"),
+                checks_pending=item_data.get("checks_pending"),
+            )
+            items.append(item)
+        
+    except Exception as e:
+        logger.error("Failed to fetch inbox via handler: %s", str(e))
+        # Fall back to fixture items on error
+        items = _get_fixture_inbox_items()
+    
+    # Apply profile-based filtering
+    # During workout, only show high priority items for focused attention
     if profile == Profile.WORKOUT:
-        # During workout, only show high priority items
         items = [item for item in items if item.priority >= 4]
-
+    
     return InboxResponse(items=items)
 
 
