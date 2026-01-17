@@ -47,9 +47,25 @@ The agent runner (GitHub Actions or Docker) implements a complete workflow that:
 1. Polls the dispatch repository for issues labeled with `copilot-agent`
 2. Clones the target repository into `/workspace`
 3. Creates a branch named `agent-task-<task_id_prefix>`
-4. Creates a trace file under `agent-tasks/<task_id_prefix>.md` with task metadata and correlation comment
-5. Commits and pushes changes
-6. Creates a pull request with correlation metadata referencing the dispatch issue
+4. Optionally applies any fenced `diff`/`patch` blocks embedded in the task instruction
+5. Creates a trace file under `agent-tasks/<task_id_prefix>.md` with task metadata and correlation comment
+6. Commits and pushes changes
+7. Creates a pull request with correlation metadata referencing the dispatch issue
+
+### Deterministic Patch Mode
+
+If the dispatch issue includes fenced code blocks like:
+
+```diff
+diff --git a/README.md b/README.md
+index 0000000..1111111 100644
+--- a/README.md
++++ b/README.md
+@@
++Hello from a deterministic agent-runner patch.
+```
+
+the runner will apply them via `git apply --index` before creating the PR.
 
 ### Quick Start
 
