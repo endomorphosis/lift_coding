@@ -81,9 +81,7 @@ def clone_or_update_repo(repo_url: str, repo_name: str, gh_token: str) -> Path:
 
     # Add token to URL for authentication (only for valid GitHub URLs)
     # Use proper URL parsing to avoid substring injection attacks
-    if repo_url.startswith("https://github.com/") or repo_url.startswith(
-        "https://www.github.com/"
-    ):
+    if repo_url.startswith("https://github.com/") or repo_url.startswith("https://www.github.com/"):
         auth_url = repo_url.replace("https://", f"https://{gh_token}@", 1)
     else:
         # For non-GitHub URLs, use the URL as-is
