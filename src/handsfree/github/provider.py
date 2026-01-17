@@ -106,8 +106,12 @@ class GitHubProvider(GitHubProviderInterface):
             LiveGitHubProvider instance configured for the user
         """
 
-        # Create a simple token provider that wraps the auth_provider
-        class UserTokenProvider:
+        # Create a simple token provider that wraps the auth_provider.
+        # This must implement the TokenProvider ABC because LiveGitHubProvider
+        # enforces the type at runtime.
+        from handsfree.github.auth import TokenProvider
+
+        class UserTokenProvider(TokenProvider):
             def __init__(self, auth_provider: GitHubAuthProvider, user_id: str):
                 self._auth_provider = auth_provider
                 self._user_id = user_id
@@ -381,6 +385,13 @@ class LiveGitHubProvider(GitHubProviderInterface):
         Falls back to fixtures if live mode not available.
         """
         try:
+            # Allow callers (including the API) to pass a placeholder username.
+            # In live mode we can resolve the authenticated user's login.
+            if not user or user in {"me", "fixture-user"}:
+                me = self._make_request("/user")
+                if isinstance(me, dict) and me.get("login"):
+                    user = str(me["login"])
+
             # Search for PRs involving the user (review-requested or assigned)
             query = f"type:pr state:open involves:{user}"
             response = self._make_request("/search/issues", params={"q": query, "per_page": 100})
