@@ -485,13 +485,36 @@ class CommandRouter:
     def _handle_inbox_list(
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
-        """Handle inbox.list intent."""
-        # Stub: in PR-005 this will integrate with GitHub
-        spoken_text = "You have 2 PRs waiting for review and 1 failing check."
-        if profile_config.profile == Profile.WORKOUT:
+        """Handle inbox.list intent with profile-based verbosity."""
+        # Stub data - in production this would come from GitHub provider
+        # For now, generate realistic profile-appropriate responses
+        
+        profile = profile_config.profile
+        
+        if profile == Profile.WORKOUT:
+            # Ultra-brief: key numbers only
             spoken_text = "2 PRs, 1 failing."
+        elif profile == Profile.COMMUTE:
+            # Brief: essential info
+            spoken_text = "You have 2 PRs waiting for review and 1 failing check."
+        elif profile == Profile.FOCUSED:
+            # Minimal: actionable items only
+            spoken_text = "2 PRs need review. 1 check failing on PR 145."
+        elif profile == Profile.KITCHEN:
+            # Moderate: conversational
+            spoken_text = "You have 2 pull requests waiting for review and 1 check that's failing."
+        elif profile == Profile.RELAXED:
+            # Detailed: full context
+            spoken_text = (
+                "You have 2 pull requests waiting for your review. "
+                "PR 142 from alice and PR 145 from bob. "
+                "There's also 1 failing check on PR 145 that needs attention."
+            )
+        else:  # DEFAULT
+            # Balanced
+            spoken_text = "You have 2 PRs waiting for review and 1 failing check."
 
-        # Apply profile-based truncation
+        # Apply profile-based truncation as safety net
         spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
         return {
@@ -503,12 +526,52 @@ class CommandRouter:
     def _handle_pr_intent(
         self, intent: ParsedIntent, profile_config: ProfileConfig
     ) -> dict[str, Any]:
-        """Handle PR-related intents."""
+        """Handle PR-related intents with profile-based verbosity."""
+        profile = profile_config.profile
+        
         if intent.name == "pr.summarize":
             pr_num = intent.entities.get("pr_number", "unknown")
-            spoken_text = f"PR {pr_num} adds the command system with intent parsing."
-            if profile_config.profile == Profile.WORKOUT:
+            
+            # Stub data - in production this would come from GitHub provider
+            # Generate profile-appropriate PR summaries
+            if profile == Profile.WORKOUT:
+                # Ultra-brief: 1-2 sentences, key numbers only
                 spoken_text = f"PR {pr_num}: command system."
+            elif profile == Profile.COMMUTE:
+                # Brief: 2-3 sentences, essential info
+                spoken_text = (
+                    f"PR {pr_num} adds the command system. "
+                    "It includes intent parsing and profile support."
+                )
+            elif profile == Profile.FOCUSED:
+                # Minimal: brief, actionable
+                spoken_text = (
+                    f"PR {pr_num} adds command system with intent parsing. "
+                    "Ready for review."
+                )
+            elif profile == Profile.KITCHEN:
+                # Moderate: 3-4 sentences, conversational
+                spoken_text = (
+                    f"PR {pr_num} adds the command system with intent parsing. "
+                    "It supports profiles like workout and commute. "
+                    "The system includes confirmation flow for side effects."
+                )
+            elif profile == Profile.RELAXED:
+                # Detailed: full context, all details
+                spoken_text = (
+                    f"PR {pr_num} adds the command system with intent parsing "
+                    "and profile support. "
+                    "The system recognizes voice commands and routes them to "
+                    "appropriate handlers. "
+                    "It includes profiles for workout, commute, kitchen, focused, "
+                    "and relaxed contexts. "
+                    "There's a confirmation flow for side-effect intents, "
+                    "and the spoken responses are adjusted based on the active profile."
+                )
+            else:  # DEFAULT
+                # Balanced
+                spoken_text = f"PR {pr_num} adds the command system with intent parsing."
+                
         elif intent.name == "pr.request_review":
             # Should have been caught by confirmation flow
             spoken_text = "Review request submitted."
@@ -518,7 +581,7 @@ class CommandRouter:
         else:
             spoken_text = "PR intent recognized but not implemented."
 
-        # Apply profile-based truncation
+        # Apply profile-based truncation as safety net
         spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
         return {
