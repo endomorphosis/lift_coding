@@ -232,4 +232,5 @@ lift_coding/
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Development workflow and best practices
 - [SECURITY.md](SECURITY.md) - Security policies and reporting
+- [Agent Runner Setup](docs/agent-runner-setup.md) - Guide for setting up external agent runners
 - `implementation_plan/` - Detailed design documents and PR specifications
