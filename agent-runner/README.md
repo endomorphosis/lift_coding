@@ -10,7 +10,14 @@ This directory contains an example implementation of a custom agent runner that 
 
 ## Usage
 
-This is a **reference implementation** that demonstrates the structure of a custom agent runner. The `runner.py` file contains placeholder logic that you should replace with your actual task processing implementation.
+This is a **reference implementation** that demonstrates the structure of a custom agent runner. The `runner.py` file now includes a complete implementation that:
+
+1. Polls the dispatch repository for issues labeled with `copilot-agent`
+2. Clones the target repository into `/workspace`
+3. Creates a branch named `agent-task-<task_id_prefix>`
+4. Creates a trace file under `agent-tasks/<task_id_prefix>.md` with task metadata and correlation comment
+5. Commits and pushes changes
+6. Creates a pull request with correlation metadata referencing the dispatch issue
 
 ### Quick Start
 
@@ -30,20 +37,77 @@ This is a **reference implementation** that demonstrates the structure of a cust
    docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
    ```
 
+### Smoke Test
+
+To verify the agent runner is working correctly:
+
+1. **Create a test dispatch issue** in your dispatch repository with:
+   - Title: "Test agent task"
+   - Label: `copilot-agent`
+   - Body:
+     ```markdown
+     ## Instruction
+     Create a simple test file
+     
+     Target Repository: owner/your-repo
+     
+     <!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->
+     ```
+
+2. **Monitor the agent runner logs**:
+   ```bash
+   docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
+   ```
+   
+   You should see:
+   - "Found new dispatch issue: #N - Test agent task"
+   - "Cloning owner/your-repo..."
+   - "Creating new branch agent-task-test-123"
+   - "Created trace file..."
+   - "Created PR #N..."
+
+3. **Verify the results**:
+   - A new branch `agent-task-test-123` should exist in the target repository
+   - A new PR should be created with:
+     - Title: "Agent task: Test agent task"
+     - Body containing: `<!-- agent_task_metadata {"task_id": "test-1234-5678-abcd"} -->`
+     - Body containing: `Fixes owner/dispatch-repo#N`
+   - A file `agent-tasks/test-123.md` should exist in the PR
+   - The dispatch issue should have comments from the agent runner
+   - The dispatch issue should have a `processed` label
+
+4. **Clean up**:
+   - Close or merge the test PR
+   - Delete the test branch
+   - Close the test dispatch issue
+
 ### Customizing the Runner
 
-The `runner.py` file includes a `process_task()` function where you should implement your actual agent logic:
+The `runner.py` file includes a complete implementation of the PR-creation workflow. You can customize it further to:
+
+- **Add LLM-powered code generation**: Integrate OpenAI, Anthropic, or other LLM providers to generate actual code changes based on the instruction
+- **Add testing**: Run unit tests, integration tests, or linting before creating the PR
+- **Add validation**: Check if changes compile, pass CI checks, or meet other criteria
+- **Add retry logic**: Implement exponential backoff for transient failures
+- **Add concurrency**: Process multiple tasks in parallel
+
+Example of adding LLM integration:
 
 ```python
-def process_task(issue, metadata: dict) -> bool:
-    # TODO: Replace this with your actual implementation
-    # Examples:
-    # - Clone the target repository
-    # - Use an LLM to generate code changes
-    # - Make the requested changes
-    # - Run tests
-    # - Create a PR with correlation metadata
-    pass
+# In process_task(), before creating the trace file:
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ.get('LLM_API_KEY'))
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful coding assistant."},
+        {"role": "user", "content": f"Implement this task: {instruction}"}
+    ]
+)
+
+# Use response.choices[0].message.content to make code changes
+# Then commit those changes instead of just the trace file
 ```
 
 ### Integration Options

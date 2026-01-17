@@ -7,10 +7,11 @@ import json
 import logging
 import os
 import re
+import shutil
 import subprocess
 import time
 from collections import deque
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 from github import Github
@@ -72,9 +73,231 @@ def extract_task_metadata(issue_body: str) -> dict:
     return metadata
 
 
-def process_task(issue, metadata: dict) -> bool:
+def clone_repository(repo_full_name: str, target_dir: Path) -> bool:
+    """Clone a repository to the specified directory."""
+    try:
+        # Use GITHUB_TOKEN for authentication
+        clone_url = f"https://{GITHUB_TOKEN}@github.com/{repo_full_name}.git"
+        
+        logger.info(f"Cloning {repo_full_name} to {target_dir}")
+        subprocess.run(
+            ["git", "clone", clone_url, str(target_dir)],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        return True
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Failed to clone repository: {e.stderr}")
+        return False
+
+
+def create_and_push_branch(repo_dir: Path, branch_name: str) -> bool:
+    """Create a new branch and ensure it doesn't already exist."""
+    try:
+        # Configure git
+        subprocess.run(
+            ["git", "config", "user.name", AGENT_NAME],
+            cwd=repo_dir,
+            check=True,
+            capture_output=True
+        )
+        subprocess.run(
+            ["git", "config", "user.email", f"{AGENT_NAME}@agent-runner.local"],
+            cwd=repo_dir,
+            check=True,
+            capture_output=True
+        )
+        
+        # Check if branch already exists on remote
+        result = subprocess.run(
+            ["git", "ls-remote", "--heads", "origin", branch_name],
+            cwd=repo_dir,
+            capture_output=True,
+            text=True
+        )
+        
+        if result.stdout.strip():
+            logger.info(f"Branch {branch_name} already exists remotely, checking it out")
+            subprocess.run(
+                ["git", "fetch", "origin", branch_name],
+                cwd=repo_dir,
+                check=True,
+                capture_output=True
+            )
+            subprocess.run(
+                ["git", "checkout", branch_name],
+                cwd=repo_dir,
+                check=True,
+                capture_output=True
+            )
+        else:
+            logger.info(f"Creating new branch {branch_name}")
+            subprocess.run(
+                ["git", "checkout", "-b", branch_name],
+                cwd=repo_dir,
+                check=True,
+                capture_output=True
+            )
+        
+        return True
+    except subprocess.CalledProcessError as e:
+        error_msg = e.stderr if hasattr(e, 'stderr') else str(e)
+        logger.error(f"Failed to create/checkout branch: {error_msg}")
+        return False
+
+
+def create_trace_file(repo_dir: Path, task_id: str, issue_number: int, instruction: str) -> bool:
+    """Create a trace file with task metadata."""
+    try:
+        # Create agent-tasks directory if it doesn't exist
+        tasks_dir = repo_dir / "agent-tasks"
+        tasks_dir.mkdir(exist_ok=True)
+        
+        # Create a short prefix from task_id (first 8 chars)
+        task_id_prefix = task_id[:8] if task_id and len(task_id) >= 8 else str(issue_number)
+        trace_file = tasks_dir / f"{task_id_prefix}.md"
+        
+        # Generate trace content
+        trace_content = f"""# Agent Task Trace: {task_id_prefix}
+
+## Task Metadata
+- **Task ID**: {task_id}
+- **Issue Number**: #{issue_number}
+- **Started At**: {datetime.utcnow().isoformat()}Z
+- **Agent**: {AGENT_NAME}
+
+## Instruction
+{instruction}
+
+## Correlation Metadata
+<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->
+
+## Status
+Processing completed at {datetime.utcnow().isoformat()}Z
+"""
+        
+        # Write trace file
+        trace_file.write_text(trace_content)
+        logger.info(f"Created trace file: {trace_file}")
+        
+        return True
+    except Exception as e:
+        logger.error(f"Failed to create trace file: {e}")
+        return False
+
+
+def commit_and_push_changes(repo_dir: Path, branch_name: str, commit_message: str) -> bool:
+    """Commit and push changes to the remote repository."""
+    try:
+        # Stage all changes
+        subprocess.run(
+            ["git", "add", "."],
+            cwd=repo_dir,
+            check=True,
+            capture_output=True
+        )
+        
+        # Check if there are changes to commit
+        result = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"],
+            cwd=repo_dir,
+            capture_output=True
+        )
+        
+        if result.returncode == 0:
+            logger.info("No changes to commit")
+            return True
+        
+        # Commit changes
+        subprocess.run(
+            ["git", "commit", "-m", commit_message],
+            cwd=repo_dir,
+            check=True,
+            capture_output=True
+        )
+        
+        # Push changes
+        subprocess.run(
+            ["git", "push", "origin", branch_name],
+            cwd=repo_dir,
+            check=True,
+            capture_output=True
+        )
+        
+        logger.info(f"Committed and pushed changes to {branch_name}")
+        return True
+    except subprocess.CalledProcessError as e:
+        error_msg = e.stderr if hasattr(e, 'stderr') else str(e)
+        logger.error(f"Failed to commit/push changes: {error_msg}")
+        return False
+
+
+def create_pull_request(
+    gh_client,
+    repo_full_name: str,
+    branch_name: str,
+    issue: object,
+    task_id: str
+) -> bool:
+    """Create or update a pull request with correlation metadata."""
+    try:
+        repo = gh_client.get_repo(repo_full_name)
+        
+        # Check if PR already exists for this branch
+        existing_prs = repo.get_pulls(state='open', head=f"{repo.owner.login}:{branch_name}")
+        
+        pr_title = f"Agent task: {issue.title}"
+        
+        # Build PR body with correlation metadata
+        dispatch_repo = issue.repository.full_name
+        task_id_short = task_id[:8] if task_id and len(task_id) >= 8 else str(issue.number)
+        pr_body = f"""Automated changes from agent task
+
+<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->
+
+Fixes {dispatch_repo}#{issue.number}
+
+## Task Details
+- **Task ID**: {task_id}
+- **Dispatch Issue**: {dispatch_repo}#{issue.number}
+- **Agent**: {AGENT_NAME}
+- **Processed At**: {datetime.utcnow().isoformat()}Z
+
+## Changes
+This PR was automatically generated by the agent runner in response to a dispatch issue.
+
+See `agent-tasks/{task_id_short}.md` for task trace.
+"""
+        
+        # Check if PR already exists
+        pr = None
+        for existing_pr in existing_prs:
+            pr = existing_pr
+            logger.info(f"Updating existing PR #{pr.number}")
+            pr.edit(title=pr_title, body=pr_body)
+            break
+        
+        if not pr:
+            # Create new PR
+            logger.info(f"Creating new PR from {branch_name} to main")
+            pr = repo.create_pull(
+                title=pr_title,
+                body=pr_body,
+                head=branch_name,
+                base="main"
+            )
+            logger.info(f"Created PR #{pr.number}: {pr.html_url}")
+        
+        return True
+    except GithubException as e:
+        logger.error(f"Failed to create/update PR: {e}")
+        return False
+
+
+def process_task(gh_client, issue, metadata: dict) -> bool:
     """
-    Process an agent task.
+    Process an agent task by creating a branch, committing changes, and opening a PR.
     
     Returns True if successful, False otherwise.
     """
@@ -82,46 +305,76 @@ def process_task(issue, metadata: dict) -> bool:
     logger.info(f"Task ID: {metadata.get('task_id')}")
     logger.info(f"Instruction: {metadata.get('instruction')}")
     
+    repo_dir = None
+    
     try:
         # Comment on issue that processing started
         issue.create_comment(
             f"🤖 {AGENT_NAME} started processing this task at {datetime.utcnow().isoformat()}Z"
         )
         
-        # TODO: Implement your actual task processing logic here
-        # Examples:
-        # - Clone the target repository
-        # - Use an LLM to understand the instruction and generate code
-        # - Make the requested changes
-        # - Run tests to verify changes
-        
-        # For this example, we'll just create a placeholder change
-        target_repo = metadata.get('target_repo', DISPATCH_REPO)
+        # Extract task information
+        task_id = metadata.get('task_id')
         instruction = metadata.get('instruction', issue.title)
+        target_repo = metadata.get('target_repo')
         
-        # Simulate work (placeholder - remove in production)
-        # In a real implementation, this is where you would process the task
+        if not task_id:
+            raise ValueError("Missing task_id in metadata")
         
-        # Create a PR with correlation metadata
-        # In a real implementation, you would:
-        # 1. Clone the target repository
-        # 2. Create a branch
-        # 3. Make changes based on the instruction
-        # 4. Commit and push changes
-        # 5. Create a PR using GitHub API
+        # Determine target repository (default to dispatch repo)
+        if not target_repo:
+            target_repo = DISPATCH_REPO
+            logger.info(f"No target_repo specified, using dispatch repo: {target_repo}")
         
-        # For now, just log success
+        # Create branch name from task_id prefix
+        task_id_prefix = task_id[:8] if len(task_id) >= 8 else task_id
+        branch_name = f"agent-task-{task_id_prefix}"
+        
+        # Prepare workspace directory
+        WORKSPACE_DIR.mkdir(exist_ok=True)
+        repo_dir = WORKSPACE_DIR / target_repo.replace('/', '_')
+        
+        # Remove existing directory if present
+        if repo_dir.exists():
+            shutil.rmtree(repo_dir)
+        
+        # Clone the target repository
+        if not clone_repository(target_repo, repo_dir):
+            raise RuntimeError("Failed to clone repository")
+        
+        # Create or checkout branch
+        if not create_and_push_branch(repo_dir, branch_name):
+            raise RuntimeError("Failed to create/checkout branch")
+        
+        # Create trace file with task metadata
+        if not create_trace_file(repo_dir, task_id, issue.number, instruction):
+            raise RuntimeError("Failed to create trace file")
+        
+        # Commit and push changes
+        commit_message = (
+            f"Process agent task from dispatch issue #{issue.number}\n\n"
+            f"Task ID: {task_id}"
+        )
+        if not commit_and_push_changes(repo_dir, branch_name, commit_message):
+            raise RuntimeError("Failed to commit/push changes")
+        
+        # Create pull request with correlation metadata
+        if not create_pull_request(gh_client, target_repo, branch_name, issue, task_id):
+            raise RuntimeError("Failed to create pull request")
+        
         logger.info(f"Task processed successfully: {issue.number}")
         
-        # Create correlation comment
-        task_id = metadata.get('task_id')
-        correlation_metadata = f'<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->' if task_id else ''
-        
+        # Comment on issue with success
         issue.create_comment(
             f"✅ {AGENT_NAME} completed processing this task.\n\n"
-            f"**Next steps**: A pull request should be created with the correlation metadata:\n"
-            f"```markdown\n{correlation_metadata}\nFixes #{issue.number}\n```"
+            f"A pull request has been created with correlation metadata in the target repository."
         )
+        
+        # Add processed label to issue
+        try:
+            issue.add_to_labels('processed')
+        except Exception as e:
+            logger.warning(f"Could not add 'processed' label: {e}")
         
         return True
         
@@ -136,6 +389,14 @@ def process_task(issue, metadata: dict) -> bool:
             logger.error("Failed to post error comment to issue")
         
         return False
+    finally:
+        # Cleanup workspace
+        if repo_dir and repo_dir.exists():
+            try:
+                shutil.rmtree(repo_dir)
+                logger.info(f"Cleaned up workspace: {repo_dir}")
+            except Exception as e:
+                logger.warning(f"Failed to cleanup workspace: {e}")
 
 
 def main():
@@ -183,7 +444,7 @@ def main():
                     continue
                 
                 # Process the task
-                success = process_task(issue, metadata)
+                success = process_task(gh, issue, metadata)
                 
                 if success:
                     # Mark as processed (deque automatically evicts old items when full)
