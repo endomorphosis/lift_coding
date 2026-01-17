@@ -167,12 +167,19 @@ export default function CommandScreen() {
         {cards.map((card, index) => (
           <View key={index} style={styles.card}>
             <Text style={styles.cardTitle}>{card.title || `Card ${index + 1}`}</Text>
-            {card.body && <Text style={styles.cardBody}>{card.body}</Text>}
-            {card.fields && card.fields.map((field, idx) => (
-              <Text key={idx} style={styles.cardField}>
-                {field.label}: {field.value}
-              </Text>
-            ))}
+            {card.subtitle ? (
+              <Text style={styles.cardSubtitle}>{card.subtitle}</Text>
+            ) : null}
+            {Array.isArray(card.lines)
+              ? card.lines.map((line, idx) => (
+                  <Text key={idx} style={styles.cardLine}>
+                    {line}
+                  </Text>
+                ))
+              : null}
+            {card.deep_link ? (
+              <Text style={styles.cardLink}>{card.deep_link}</Text>
+            ) : null}
           </View>
         ))}
       </View>
@@ -277,6 +284,20 @@ export default function CommandScreen() {
         <View style={styles.responseContainer}>
           <Text style={styles.sectionTitle}>Response:</Text>
 
+          {response.status && (
+            <View style={styles.spokenTextContainer}>
+              <Text style={styles.label}>Status:</Text>
+              <Text style={styles.value}>{response.status}</Text>
+            </View>
+          )}
+
+          {response.intent && response.intent.name && (
+            <View style={styles.spokenTextContainer}>
+              <Text style={styles.label}>Intent:</Text>
+              <Text style={styles.value}>{response.intent.name}</Text>
+            </View>
+          )}
+
           {response.spoken_text && (
             <View style={styles.spokenTextContainer}>
               <Text style={styles.label}>Spoken Text:</Text>
@@ -284,26 +305,29 @@ export default function CommandScreen() {
             </View>
           )}
 
-          {response.needs_confirmation && (
+          {response.pending_action && (
             <View style={styles.confirmationNotice}>
               <Text style={styles.confirmationText}>
                 ⚠️ This action requires confirmation
               </Text>
-              {response.action_id && (
+              <Text style={styles.actionIdText}>
+                Token: {response.pending_action.token}
+              </Text>
+              {response.pending_action.summary ? (
                 <Text style={styles.actionIdText}>
-                  Action ID: {response.action_id}
+                  Summary: {response.pending_action.summary}
                 </Text>
-              )}
+              ) : null}
             </View>
           )}
 
-          {renderUICards(response.ui_cards)}
+          {renderUICards(response.cards)}
 
-          {response.debug_info && (
+          {response.debug && (
             <View style={styles.debugContainer}>
               <Text style={styles.label}>Debug Info:</Text>
               <Text style={styles.debugText}>
-                {JSON.stringify(response.debug_info, null, 2)}
+                {JSON.stringify(response.debug, null, 2)}
               </Text>
             </View>
           )}
@@ -402,15 +426,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
-  cardBody: {
-    fontSize: 14,
-    color: '#333',
+  cardSubtitle: {
+    fontSize: 13,
+    color: '#666',
     marginBottom: 5,
   },
-  cardField: {
+  cardLine: {
     fontSize: 13,
-    color: '#555',
+    color: '#333',
     marginTop: 3,
+  },
+  cardLink: {
+    fontSize: 12,
+    color: '#007AFF',
+    marginTop: 6,
   },
   debugContainer: {
     marginTop: 15,

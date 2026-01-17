@@ -10,6 +10,54 @@ export const BASE_URL = 'http://localhost:8080';
 // Session management
 let sessionToken = null;
 let userId = null;
+let settingsLoadPromise = null;
+
+const STORAGE_KEYS = {
+  USER_ID: '@handsfree_user_id',
+  BASE_URL: '@handsfree_base_url',
+  USE_CUSTOM_URL: '@handsfree_use_custom_url',
+};
+
+/**
+ * Load settings from AsyncStorage
+ * This is called automatically before making API requests
+ * Uses a promise to prevent race conditions
+ */
+async function loadSettings() {
+  // If already loading or loaded, return the existing promise
+  if (settingsLoadPromise) {
+    return settingsLoadPromise;
+  }
+
+  settingsLoadPromise = (async () => {
+    try {
+      const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
+      const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
+      const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
+
+      if (savedUserId) {
+        userId = savedUserId;
+      }
+
+      if (savedUseCustomUrl === 'true' && savedBaseUrl) {
+        BASE_URL = savedBaseUrl;
+      }
+    } catch (error) {
+      console.error('Failed to load settings:', error);
+    }
+  })();
+
+  return settingsLoadPromise;
+}
+
+/**
+ * Get the current BASE_URL
+ * Loads settings from storage if not already loaded
+ */
+export async function getBaseUrl() {
+  await loadSettings();
+  return BASE_URL;
+}
 
 export function setSession(token, user) {
   sessionToken = token;
@@ -27,8 +75,11 @@ export function clearSession() {
 
 /**
  * Get headers for API requests
+ * Loads settings from storage if not already loaded
  */
-export function getHeaders(includeAuth = true) {
+export async function getHeaders(includeAuth = true) {
+  await loadSettings();
+
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -43,3 +94,7 @@ export function getHeaders(includeAuth = true) {
 
   return headers;
 }
+
+// Export BASE_URL for backwards compatibility
+// Note: This is the initial value and may change after loadSettings() is called
+export { BASE_URL };

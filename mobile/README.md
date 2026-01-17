@@ -8,6 +8,7 @@ React Native/Expo mobile app for interacting with the Handsfree backend.
 - **Command Input**: Send text commands to the backend
 - **Confirmation Flow**: Confirm/cancel/repeat/next pending actions
 - **Text-to-Speech**: Fetch and play TTS audio from backend
+- **Developer Settings**: Configure X-User-ID header and backend URL in-app
 
 ## Prerequisites
 
@@ -42,10 +43,10 @@ export OPENAI_API_KEY="your-openai-key"  # Optional, for TTS
 python -m handsfree.db.migrations
 
 # Start the backend server
-uvicorn handsfree.api:app --host 0.0.0.0 --port 8000
+uvicorn handsfree.api:app --host 0.0.0.0 --port 8080
 ```
 
-The backend should now be accessible at `http://localhost:8000`.
+The backend should now be accessible at `http://localhost:8080`.
 
 ## Installation
 
@@ -67,13 +68,13 @@ Edit `src/api/config.js` and update the `BASE_URL`:
 
 ```javascript
 // For iOS Simulator connecting to localhost
-export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'http://localhost:8080';
 
 // For Android Emulator connecting to localhost
-// export const BASE_URL = 'http://10.0.2.2:8000';
+// export const BASE_URL = 'http://10.0.2.2:8080';
 
 // For physical device on same network
-// export const BASE_URL = 'http://YOUR_COMPUTER_IP:8000';
+// export const BASE_URL = 'http://YOUR_COMPUTER_IP:8080';
 ```
 
 ## Running the App
@@ -161,7 +162,15 @@ If a command requires confirmation:
 - Enter the action ID
 - Choose: Confirm, Cancel, Repeat, or Next
 
-### 4. Test TTS
+### 4. Configure Settings (Optional)
+
+Navigate to the **Settings** tab:
+- Set a custom **User ID** (used in X-User-ID header)
+- Generate a random UUID if needed
+- Configure a custom **Backend URL** (useful for testing against different environments)
+- Changes are saved to local storage and persist across app restarts
+
+### 5. Test TTS
 
 Navigate to the **TTS** tab:
 - Enter text to convert to speech
@@ -246,7 +255,8 @@ mobile/
 │   │   ├── StatusScreen.js        # Backend status check
 │   │   ├── CommandScreen.js       # Send text commands
 │   │   ├── ConfirmationScreen.js  # Confirm pending actions
-│   │   └── TTSScreen.js           # Text-to-speech playback
+│   │   ├── TTSScreen.js           # Text-to-speech playback
+│   │   └── SettingsScreen.js      # Developer settings (User ID, URL)
 │   └── components/                # Reusable components (future)
 ├── assets/                         # Images, fonts, etc.
 ├── package.json                    # Dependencies
@@ -286,11 +296,22 @@ See `src/api/client.js` for implementation details.
 
 ## Authentication
 
-Currently, the app supports session-based authentication via:
+The app supports session-based authentication via:
 - Bearer token in `Authorization` header
 - User ID in `X-User-ID` header
 
-To set credentials:
+### Setting User ID via Settings Screen
+
+The easiest way to configure authentication:
+1. Open the app and go to the **Settings** tab
+2. Enter or generate a User ID
+3. Tap "Save Settings"
+
+The User ID will be automatically included in the `X-User-ID` header for all API requests.
+
+### Programmatic Authentication
+
+Alternatively, set credentials programmatically:
 
 ```javascript
 import { setSession } from './src/api/config';
@@ -303,9 +324,9 @@ Future: OAuth, API key auth, secure storage.
 
 ### Cannot connect to backend
 
-- Ensure backend is running: `curl http://localhost:8000/v1/status`
-- Check `BASE_URL` in `src/api/config.js`
-- For Android Emulator, use `http://10.0.2.2:8000`
+- Ensure backend is running: `curl http://localhost:8080/v1/status`
+- Use the **Settings** tab in the app to configure the backend URL
+- For Android Emulator, use `http://10.0.2.2:8080`
 - For physical device, use your computer's IP address
 - Check firewall settings
 
@@ -335,7 +356,7 @@ npm install
 - [ ] Secure credential storage (Keychain/Keystore)
 - [ ] Biometric authentication
 - [ ] Offline mode with queue
-- [ ] Settings screen (configure BASE_URL, preferences)
+- [x] Settings screen (configure BASE_URL, User ID)
 
 ### Production Readiness
 

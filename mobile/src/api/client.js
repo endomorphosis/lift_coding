@@ -1,23 +1,49 @@
 /**
  * API Client for Handsfree Backend
- * 
- * Provides methods to interact with:
+ *
+ * Aligned with spec/openapi.yaml.
+ *
+ * Endpoints:
  * - GET /v1/status
  * - POST /v1/command
  * - POST /v1/commands/confirm
+ * - GET /v1/notifications
+ * - POST /v1/notifications/subscriptions
+ * - DELETE /v1/notifications/subscriptions/{subscription_id}
  * - POST /v1/tts
  */
 
-import { BASE_URL, getHeaders } from './config';
+import { getBaseUrl, getHeaders } from './config';
+
+function defaultClientContext(overrides = {}) {
+  // Keep this dependency-free; callers can override anything they know.
+  return {
+    device: 'mobile',
+    locale: 'en-US',
+    timezone: 'UTC',
+    app_version: 'dev',
+    noise_mode: false,
+    debug: false,
+    privacy_mode: 'strict',
+    ...overrides,
+  };
+}
+
+function defaultProfile(profile) {
+  return profile || 'default';
+}
 
 /**
  * Get backend status
  * @returns {Promise<Object>} Status object with { status, version, user_id }
  */
 export async function getStatus() {
-  const response = await fetch(`${BASE_URL}/v1/status`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders(false); // Status doesn't require auth
+
+  const response = await fetch(`${baseUrl}/v1/status`, {
     method: 'GET',
-    headers: getHeaders(false), // Status doesn't require auth
+    headers,
   });
 
   if (!response.ok) {
@@ -34,14 +60,56 @@ export async function getStatus() {
  * @returns {Promise<Object>} Command response with spoken_text, ui_cards, etc.
  */
 export async function sendCommand(text, options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
-    text,
-    ...options,
+    input: {
+      type: 'text',
+      text,
+    },
+    profile: defaultProfile(options.profile),
+    client_context: defaultClientContext(options.client_context),
+    idempotency_key: options.idempotency_key || undefined,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/command`, {
+  const response = await fetch(`${baseUrl}/v1/command`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `Command failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Send an audio command to the backend.
+ * Note: the backend expects an audio URI it can fetch (https:// or file:// for dev).
+ */
+export async function sendAudioCommand(uri, format = 'm4a', options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const body = {
+    input: {
+      type: 'audio',
+      format,
+      uri,
+      duration_ms: options.duration_ms || undefined,
+    },
+    profile: defaultProfile(options.profile),
+    client_context: defaultClientContext(options.client_context),
+    idempotency_key: options.idempotency_key || undefined,
+  };
+
+  const response = await fetch(`${baseUrl}/v1/command`, {
+    method: 'POST',
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -59,15 +127,18 @@ export async function sendCommand(text, options = {}) {
  * @param {string} choice - One of: 'confirm', 'cancel', 'repeat', 'next'
  * @returns {Promise<Object>} Confirmation response
  */
-export async function confirmCommand(actionId, choice = 'confirm') {
+export async function confirmCommand(token, idempotencyKey = undefined) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = {
-    action_id: actionId,
-    choice,
+    token,
+    idempotency_key: idempotencyKey,
   };
 
-  const response = await fetch(`${BASE_URL}/v1/commands/confirm`, {
+  const response = await fetch(`${baseUrl}/v1/commands/confirm`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -85,11 +156,14 @@ export async function confirmCommand(actionId, choice = 'confirm') {
  * @returns {Promise<Blob>} Audio data as blob
  */
 export async function fetchTTS(text) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const body = { text };
 
-  const response = await fetch(`${BASE_URL}/v1/tts`, {
+  const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify(body),
   });
 
@@ -105,9 +179,12 @@ export async function fetchTTS(text) {
  * @returns {Promise<Array>} Array of notifications
  */
 export async function getNotifications() {
-  const response = await fetch(`${BASE_URL}/v1/notifications`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/notifications`, {
     method: 'GET',
-    headers: getHeaders(),
+    headers,
   });
 
   if (!response.ok) {
