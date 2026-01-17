@@ -1867,13 +1867,17 @@ async def confirm_command(
 
 
 @app.get("/v1/inbox", response_model=InboxResponse)
-async def get_inbox(profile: Profile | None = None) -> InboxResponse:
+async def get_inbox(
+    user_id: CurrentUser,
+    profile: Profile | None = None,
+) -> InboxResponse:
     """Get attention items (PRs, mentions, failing checks)."""
     # Use ProfileConfig for profile-aware filtering and truncation
     profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
     
-    # Use fixture user for deterministic behavior (defined in FIXTURE_USER_ID constant)
-    user = "testuser"
+    # Use a placeholder; live mode resolves the authenticated login.
+    # In fixture mode, username doesn't matter because fixtures are static.
+    user = "me"
     
     # Call the inbox handler to get rich items with checks summary
     try:
@@ -1882,7 +1886,7 @@ async def get_inbox(profile: Profile | None = None) -> InboxResponse:
             user=user,
             privacy_mode=PrivacyMode.STRICT,
             profile_config=profile_config,
-            user_id=None,  # No user_id for fixture mode
+            user_id=user_id,
         )
         
         # Convert handler items to InboxItem format

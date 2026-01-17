@@ -162,9 +162,9 @@ class InboxItem(BaseModel):
     repo: str | None = None
     url: str | None = None
     summary: str | None = None
-    checks_passed: int | None = None
-    checks_failed: int | None = None
-    checks_pending: int | None = None
+    checks_passed: int | None = Field(default=None, ge=0)
+    checks_failed: int | None = Field(default=None, ge=0)
+    checks_pending: int | None = Field(default=None, ge=0)
 
 
 class InboxResponse(BaseModel):
