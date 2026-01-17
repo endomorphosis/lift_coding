@@ -282,8 +282,12 @@ def poll_dispatch_issues(client: GitHubClient):
         logger.info(f"Found {len(issues)} open agent task issues")
         
         for issue in issues:
-            issue_number = issue["number"]
-            issue_labels = [label["name"] for label in issue.get("labels", [])]
+            issue_number = issue.get("number")
+            if not issue_number:
+                logger.warning("Issue missing number field, skipping")
+                continue
+            
+            issue_labels = [label.get("name", "") for label in issue.get("labels", []) if isinstance(label, dict)]
             
             # Skip if already processed
             if "agent-processed" in issue_labels or "agent-failed" in issue_labels:
@@ -341,7 +345,7 @@ def poll_dispatch_issues(client: GitHubClient):
                     )
                     mark_issue_processed(client, DISPATCH_REPO, issue_number, "agent-failed")
             
-            except Exception as e:
+            except (requests.HTTPError, json.JSONDecodeError, KeyError, ValueError) as e:
                 logger.error(f"Error processing task: {e}", exc_info=True)
                 comment_on_issue(
                     client,
@@ -356,8 +360,8 @@ def poll_dispatch_issues(client: GitHubClient):
         logger.error(f"Error fetching issues: {e}")
         if e.response is not None:
             logger.error(f"Response: {e.response.text}")
-    except Exception as e:
-        logger.error(f"Unexpected error: {e}", exc_info=True)
+    except (json.JSONDecodeError, KeyError, ValueError) as e:
+        logger.error(f"Error parsing issue data: {e}", exc_info=True)
 
 
 def main():
@@ -398,7 +402,10 @@ def main():
     while True:
         try:
             poll_dispatch_issues(client)
-        except Exception as e:
+        except KeyboardInterrupt:
+            logger.info("Received interrupt signal, shutting down...")
+            break
+        except (requests.RequestException, json.JSONDecodeError) as e:
             logger.error(f"Error in polling loop: {e}", exc_info=True)
         
         logger.info(f"Sleeping for {POLL_INTERVAL} seconds...")
