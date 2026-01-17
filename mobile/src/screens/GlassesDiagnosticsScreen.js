@@ -147,18 +147,20 @@ export default function GlassesDiagnosticsScreen() {
         setRecording(newRecording);
       } else {
         // Glasses mode: Use native Bluetooth recording (10 second duration)
-        const result = await GlassesAudio.startRecording(10);
-        
-        // After 10 seconds, the recording will complete
-        setTimeout(() => {
-          setIsRecording(false);
-          setLastRecordingUri(result.uri);
-          Alert.alert(
-            'Recording Complete',
-            `Audio saved to native storage.\n\nRecorded via Bluetooth from glasses.\n\nFile: ${result.uri}\nSize: ${result.size} bytes`,
-            [{ text: 'OK' }]
-          );
-        }, 10000);
+        GlassesAudio.startRecording(10)
+          .then((result) => {
+            setIsRecording(false);
+            setLastRecordingUri(result.uri);
+            Alert.alert(
+              'Recording Complete',
+              `Audio saved to native storage.\n\nRecorded via Bluetooth from glasses.\n\nFile: ${result.uri}\nSize: ${result.size} bytes`,
+              [{ text: 'OK' }]
+            );
+          })
+          .catch((error) => {
+            setIsRecording(false);
+            setLastError(`Native recording failed: ${error.message}`);
+          });
       }
     } catch (error) {
       setLastError(`Recording failed: ${error.message}`);
@@ -295,7 +297,9 @@ export default function GlassesDiagnosticsScreen() {
         // Glasses mode: Use native Bluetooth playback
         await GlassesAudio.playAudio(lastRecordingUri);
         
-        // Simulate playback completion (in real impl, use playback status listener)
+        // TODO: Replace with native playback status listener
+        // For now, simulate playback completion with estimated duration
+        // In production, use GlassesAudio.addPlaybackStatusListener to get real status
         setTimeout(() => {
           setIsPlaying(false);
         }, 3000);

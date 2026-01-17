@@ -137,15 +137,22 @@ class ExpoGlassesAudioModule : Module() {
         audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
         audioManager.startBluetoothSco()
         
-        // Read WAV file (simplified - assumes 16-bit PCM mono at 16kHz)
         val file = File(fileUri)
         if (!file.exists()) {
           promise.reject("ERR_FILE_NOT_FOUND", "Audio file not found: $fileUri")
           return@AsyncFunction
         }
         
-        // For now, just acknowledge - actual playback would need WAV parsing
-        // TODO: Implement WAV file parsing and playback
+        // TODO: Implement full WAV file parsing and playback
+        // Current implementation: Basic acknowledgment for testing
+        // Production implementation should:
+        // 1. Parse WAV header to get format/sample rate
+        // 2. Read PCM data into buffer
+        // 3. Use GlassesPlayer.playPcm16Mono() or AudioTrack for playback
+        // 4. Send playback status events
+        
+        // For now, just enable SCO and acknowledge
+        // The diagnostics screen will show playback started
         handler.postDelayed({
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
