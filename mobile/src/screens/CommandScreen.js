@@ -9,10 +9,11 @@ import {
   ActivityIndicator,
   Alert,
   TouchableOpacity,
+  Switch,
 } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { sendCommand, uploadDevAudio, sendAudioCommand } from '../api/client';
+import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS } from '../api/client';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
@@ -28,6 +29,15 @@ export default function CommandScreen() {
   const [audioUri, setAudioUri] = useState(null);
   const [audioSize, setAudioSize] = useState(0);
 
+  // TTS playback state
+  const [ttsSound, setTtsSound] = useState(null);
+  const [isTtsPlaying, setIsTtsPlaying] = useState(false);
+  const [ttsLoading, setTtsLoading] = useState(false);
+
+  // Dev mode toggle
+  const [showDebugPanel, setShowDebugPanel] = useState(true);
+  const [autoPlayTts, setAutoPlayTts] = useState(true);
+
   useEffect(() => {
     // Request audio permissions on mount
     (async () => {
@@ -41,7 +51,75 @@ export default function CommandScreen() {
         console.error('Failed to get audio permissions:', err);
       }
     })();
+
+    // Cleanup TTS sound on unmount
+    return () => {
+      if (ttsSound) {
+        ttsSound.unloadAsync();
+      }
+    };
   }, []);
+
+  const playTTS = async (text) => {
+    if (!text) return;
+
+    setTtsLoading(true);
+    try {
+      // Stop any currently playing TTS
+      if (ttsSound) {
+        await ttsSound.stopAsync();
+        await ttsSound.unloadAsync();
+        setTtsSound(null);
+      }
+
+      // Fetch TTS audio
+      const audioBlob = await fetchTTS(text);
+
+      // Convert blob to base64
+      const reader = new FileReader();
+      reader.readAsDataURL(audioBlob);
+      reader.onloadend = async () => {
+        const base64Audio = reader.result;
+
+        // Write to temporary file for better compatibility
+        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+        const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
+        await FileSystem.writeAsStringAsync(tempUri, base64Data, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        // Load and play audio from file
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: tempUri },
+          { shouldPlay: true }
+        );
+
+        setTtsSound(newSound);
+        setIsTtsPlaying(true);
+
+        // Set up playback status listener
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsTtsPlaying(false);
+            // Clean up temp file
+            FileSystem.deleteAsync(tempUri, { idempotentError: true }).catch(() => {});
+          }
+        });
+      };
+    } catch (err) {
+      console.error('TTS playback failed:', err);
+      Alert.alert('TTS Error', `Failed to play audio: ${err.message}`);
+    } finally {
+      setTtsLoading(false);
+    }
+  };
+
+  const stopTTS = async () => {
+    if (ttsSound) {
+      await ttsSound.stopAsync();
+      setIsTtsPlaying(false);
+    }
+  };
 
   const handleSendCommand = async () => {
     if (!commandText.trim()) {
@@ -56,6 +134,11 @@ export default function CommandScreen() {
     try {
       const data = await sendCommand(commandText);
       setResponse(data);
+      
+      // Auto-play TTS if enabled and spoken_text is available
+      if (autoPlayTts && data.spoken_text) {
+        await playTTS(data.spoken_text);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -136,9 +219,16 @@ export default function CommandScreen() {
       // For production, consider detecting format from file extension or Recording.getStatusAsync()
       const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
 
-      // Send as audio command
-      const data = await sendAudioCommand(fileUri, format, recordingDuration * 1000);
+      // Send as audio command with duration in ms
+      const data = await sendAudioCommand(fileUri, format, {
+        duration_ms: recordingDuration * 1000,
+      });
       setResponse(data);
+      
+      // Auto-play TTS if enabled and spoken_text is available
+      if (autoPlayTts && data.spoken_text) {
+        await playTTS(data.spoken_text);
+      }
       
       // Clear recorded audio
       setAudioUri(null);
@@ -156,6 +246,20 @@ export default function CommandScreen() {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getErrorHint = (errorMessage) => {
+    if (!errorMessage) return null;
+    
+    if (errorMessage.includes('403') || errorMessage.includes('forbidden')) {
+      return '💡 Hint: The backend dev mode may be disabled. Check HANDSFREE_AUTH_MODE=dev.';
+    }
+    
+    if (errorMessage.includes('fetch') || errorMessage.includes('Network') || errorMessage.includes('Failed to fetch')) {
+      return '💡 Hint: Cannot reach backend. Ensure it\'s running and accessible.';
+    }
+    
+    return null;
   };
 
   const renderUICards = (cards) => {
@@ -189,6 +293,47 @@ export default function CommandScreen() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Send Command</Text>
+
+      {/* Dev Mode Settings */}
+      <View style={styles.devSettingsSection}>
+        <View style={styles.settingRow}>
+          <Text style={styles.settingLabel}>Show Debug Panel</Text>
+          <Switch
+            value={showDebugPanel}
+            onValueChange={setShowDebugPanel}
+          />
+        </View>
+        <View style={styles.settingRow}>
+          <Text style={styles.settingLabel}>Auto-play TTS</Text>
+          <Switch
+            value={autoPlayTts}
+            onValueChange={setAutoPlayTts}
+          />
+        </View>
+      </View>
+
+      {/* TTS Playback Controls */}
+      {(ttsLoading || isTtsPlaying) && (
+        <View style={styles.ttsControlsSection}>
+          {ttsLoading && (
+            <View style={styles.ttsLoadingContainer}>
+              <ActivityIndicator size="small" color="#007AFF" />
+              <Text style={styles.ttsLoadingText}>Loading TTS...</Text>
+            </View>
+          )}
+          {isTtsPlaying && (
+            <View style={styles.ttsPlayingContainer}>
+              <Text style={styles.ttsPlayingText}>🔊 Playing TTS...</Text>
+              <TouchableOpacity
+                style={styles.ttsStopButton}
+                onPress={stopTTS}
+              >
+                <Text style={styles.ttsStopButtonText}>⏹ Stop</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      )}
 
       {/* Text Command Section */}
       <View style={styles.section}>
@@ -276,7 +421,11 @@ export default function CommandScreen() {
 
       {error && (
         <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Error: {error}</Text>
+          <Text style={styles.errorTitle}>⚠️ Error</Text>
+          <Text style={styles.errorText}>{error}</Text>
+          {getErrorHint(error) && (
+            <Text style={styles.errorHint}>{getErrorHint(error)}</Text>
+          )}
         </View>
       )}
 
@@ -284,14 +433,14 @@ export default function CommandScreen() {
         <View style={styles.responseContainer}>
           <Text style={styles.sectionTitle}>Response:</Text>
 
-          {response.status && (
+          {showDebugPanel && response.status && (
             <View style={styles.spokenTextContainer}>
               <Text style={styles.label}>Status:</Text>
               <Text style={styles.value}>{response.status}</Text>
             </View>
           )}
 
-          {response.intent && response.intent.name && (
+          {showDebugPanel && response.intent && response.intent.name && (
             <View style={styles.spokenTextContainer}>
               <Text style={styles.label}>Intent:</Text>
               <Text style={styles.value}>{response.intent.name}</Text>
@@ -302,6 +451,17 @@ export default function CommandScreen() {
             <View style={styles.spokenTextContainer}>
               <Text style={styles.label}>Spoken Text:</Text>
               <Text style={styles.value}>{response.spoken_text}</Text>
+              {!autoPlayTts && (
+                <TouchableOpacity
+                  style={styles.manualTtsButton}
+                  onPress={() => playTTS(response.spoken_text)}
+                  disabled={ttsLoading || isTtsPlaying}
+                >
+                  <Text style={styles.manualTtsButtonText}>
+                    {ttsLoading ? 'Loading...' : isTtsPlaying ? 'Playing...' : '🔊 Play TTS'}
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           )}
 
@@ -323,7 +483,7 @@ export default function CommandScreen() {
 
           {renderUICards(response.cards)}
 
-          {response.debug && (
+          {showDebugPanel && response.debug && (
             <View style={styles.debugContainer}>
               <Text style={styles.label}>Debug Info:</Text>
               <Text style={styles.debugText}>
@@ -367,8 +527,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 15,
   },
+  errorTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#c62828',
+    marginBottom: 5,
+  },
   errorText: {
     color: '#c62828',
+    fontSize: 14,
+  },
+  errorHint: {
+    color: '#d84315',
+    fontSize: 13,
+    marginTop: 8,
+    fontStyle: 'italic',
   },
   responseContainer: {
     backgroundColor: 'white',
@@ -546,6 +719,70 @@ const styles = StyleSheet.create({
   discardButtonText: {
     color: 'white',
     fontSize: 15,
+    fontWeight: '600',
+  },
+  devSettingsSection: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+  settingRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  settingLabel: {
+    fontSize: 15,
+    color: '#333',
+  },
+  ttsControlsSection: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+  ttsLoadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  ttsLoadingText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  ttsPlayingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  ttsPlayingText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1976d2',
+  },
+  ttsStopButton: {
+    backgroundColor: '#c62828',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
+  ttsStopButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  manualTtsButton: {
+    backgroundColor: '#1976d2',
+    padding: 10,
+    borderRadius: 6,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  manualTtsButtonText: {
+    color: 'white',
+    fontSize: 14,
     fontWeight: '600',
   },
 });
