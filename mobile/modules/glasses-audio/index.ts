@@ -1,4 +1,4 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import { NativeModulesProxy, EventEmitter, EventSubscription } from 'expo-modules-core';
 
 // This module will be implemented as a native module for iOS
 // For now, we'll create a placeholder that returns mock data for development
@@ -13,6 +13,11 @@ export interface AudioRoute {
 export interface AudioRouteChangeEvent {
   route: AudioRoute;
 }
+
+// Event map for type-safe event handling
+type GlassesAudioEvents = {
+  onAudioRouteChange: (event: AudioRouteChangeEvent) => void;
+};
 
 export class GlassesAudio {
   /**
@@ -99,13 +104,18 @@ export class GlassesAudio {
    */
   static addAudioRouteChangeListener(
     listener: (event: AudioRouteChangeEvent) => void
-  ): Subscription | null {
+  ): EventSubscription | null {
     if (!GlassesAudioModule) {
       console.warn('GlassesAudio native module not available, audio route change events will not fire');
       return null;
     }
-    const emitter = new EventEmitter(GlassesAudioModule);
-    return emitter.addListener<AudioRouteChangeEvent>('onAudioRouteChange', listener);
+    // In Expo SDK 52+, native modules are EventEmitters. For SDK 54, we wrap it.
+    // @ts-expect-error - NativeModulesProxy.GlassesAudio returns a ProxyNativeModule which is
+    // structurally compatible with EventEmitter but TypeScript can't verify the type relationship
+    // between the internal EventEmitter types (build/EventEmitter vs ts-declarations/EventEmitter).
+    // This is safe because Expo Modules API guarantees EventEmitter compatibility at runtime.
+    const emitter = new EventEmitter<GlassesAudioEvents>(GlassesAudioModule);
+    return emitter.addListener('onAudioRouteChange', listener);
   }
 }
 
