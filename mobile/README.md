@@ -11,6 +11,11 @@ React Native/Expo mobile app for interacting with the Handsfree backend.
 - **Glasses Audio Diagnostics**: Test Bluetooth audio routing with Meta AI Glasses
 - **Native Bluetooth Support**: Route audio through connected Bluetooth headsets
 - **Developer Settings**: Configure X-User-ID header and backend URL in-app
+- **Glasses Diagnostics**: Test Meta AI Glasses audio routing (iOS native module)
+  - Real-time Bluetooth audio route monitoring
+  - Native recording from glasses microphone
+  - Native playback through glasses speakers
+  - Dev mode bypass for testing without glasses
 
 ## Quick Start
 
@@ -107,10 +112,26 @@ npm run android
 
 ### Run on physical device:
 
-1. Install the [Expo Go](https://expo.dev/go) app on your device
-2. Scan the QR code shown in the terminal
-3. Make sure your device is on the same network as your computer
-4. Update `BASE_URL` in `src/api/config.js` to use your computer's local IP address
+1. **With Expo Go** (limited features):
+   - Install the [Expo Go](https://expo.dev/go) app on your device
+   - Scan the QR code shown in the terminal
+   - Make sure your device is on the same network as your computer
+   - Update `BASE_URL` in `src/api/config.js` to use your computer's local IP address
+   - Note: Native modules (Glasses Audio) not available in Expo Go
+
+2. **With Development Build** (full features, including native modules):
+   ```bash
+   # First time setup
+   npm install expo-dev-client
+   
+   # Build and run on iOS
+   npx expo run:ios --device
+   
+   # Build and run on Android
+   npx expo run:android --device
+   ```
+   - This includes the native Glasses Audio module for Bluetooth support
+   - See `modules/glasses-audio/SETUP.md` for detailed setup instructions
 
 ### Run in web browser:
 
@@ -398,6 +419,19 @@ Future: OAuth, API key auth, secure storage.
 - Verify audio format compatibility
 - Check device volume
 
+### Native module issues (Glasses Audio)
+
+**"Native module not available"**:
+- You're using Expo Go instead of a development build
+- Solution: Run `npx expo run:ios --device` to build with native modules
+- See `modules/glasses-audio/SETUP.md` for detailed instructions
+
+**Bluetooth audio not routing correctly**:
+- Check iOS permissions (Settings → Privacy → Bluetooth)
+- Ensure Meta AI Glasses are paired and connected
+- Try toggling DEV mode in Glasses Diagnostics screen
+- Check console logs for AVAudioSession errors
+
 ### Dependencies issues
 
 ```bash
@@ -413,11 +447,41 @@ npm install
 - [ ] Push notifications integration (`/v1/notifications/subscriptions`)
 - [x] Audio input for voice commands (dev mode via `/v1/dev/audio`)
 - [ ] Production audio upload (pre-signed URLs, object storage)
-- [ ] Bluetooth audio routing (Meta AI Glasses)
+- [x] Bluetooth audio routing (Meta AI Glasses) - **iOS native module implemented**
 - [ ] Secure credential storage (Keychain/Keystore)
 - [ ] Biometric authentication
 - [ ] Offline mode with queue
 - [x] Settings screen (configure BASE_URL, User ID)
+
+### iOS Native Audio Module
+
+The app includes a native iOS module for Meta AI Glasses integration:
+
+**Location**: `modules/glasses-audio/`
+
+**Features**:
+- Real-time AVAudioSession monitoring
+- Bluetooth audio route detection
+- Native recording from Bluetooth mic
+- Native playback through Bluetooth speakers
+- Event-driven route change notifications
+
+**Setup**:
+See detailed instructions in `modules/glasses-audio/SETUP.md`
+
+**Quick start**:
+```bash
+cd mobile
+npm install expo-dev-client
+npx expo run:ios --device
+```
+
+**Testing**:
+1. Build development build with native module
+2. Open app and navigate to "Glasses Diagnostics"
+3. Connect Meta AI Glasses via Bluetooth
+4. Toggle DEV mode off to use native Bluetooth routing
+5. Observe real-time audio route information
 
 ### Production Readiness
 

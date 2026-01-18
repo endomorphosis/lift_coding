@@ -10,7 +10,14 @@ public final class GlassesPlayer {
         audioEngine.connect(playerNode, to: audioEngine.mainMixerNode, format: nil)
     }
 
-    public func play(fileURL: URL) throws {
+    public func play(fileURL: URL, completion: ((Error?) -> Void)? = nil) throws {
+        guard !isPlaying else {
+            throw PlayerError.alreadyPlaying
+        }
+        
+        self.completionHandler = completion
+        
+        // Configure audio session for Bluetooth output
         let session = AVAudioSession.sharedInstance()
         
         // Configure for Bluetooth playback with glasses
@@ -26,12 +33,26 @@ public final class GlassesPlayer {
         currentAudioFile = audioFile
         
         if !audioEngine.isRunning {
-            try audioEngine.start()
+            do {
+                try audioEngine.start()
+            } catch {
+                throw PlayerError.audioEngineStartFailed(error)
+            }
         }
 
         playerNode.stop()
-        playerNode.scheduleFile(audioFile, at: nil)
+        
+        // Schedule file and track completion
+        playerNode.scheduleFile(audioFile, at: nil) { [weak self] in
+            DispatchQueue.main.async {
+                self?.isPlaying = false
+                self?.completionHandler?(nil)
+                self?.completionHandler = nil
+            }
+        }
+        
         playerNode.play()
+        isPlaying = true
     }
 
     public func stop() {
