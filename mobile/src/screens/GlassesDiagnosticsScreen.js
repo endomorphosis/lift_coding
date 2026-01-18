@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { uploadDevAudio, sendAudioCommand } from '../api/client';
+// Local Expo module for Android audio route monitoring
+import GlassesAudio from '../../modules/expo-glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
   const [audioRoute, setAudioRoute] = useState('Unknown');
+  const [audioRouteDetails, setAudioRouteDetails] = useState(null);
   const [connectionState, setConnectionState] = useState('Checking...');
   const [lastError, setLastError] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -20,15 +23,39 @@ export default function GlassesDiagnosticsScreen() {
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Load dev mode setting
+  // Load dev mode setting and start monitoring
   useEffect(() => {
     loadDevMode();
     checkAudioRoute();
+
+    // Start monitoring audio route changes (Android only)
+    let subscription;
+    if (Platform.OS === 'android') {
+      try {
+        GlassesAudio.startMonitoring();
+        subscription = GlassesAudio.addAudioRouteChangeListener((event) => {
+          console.log('Audio route changed:', event.route);
+          updateAudioRouteFromNative(event.route);
+        });
+      } catch (error) {
+        console.error('Failed to start audio monitoring:', error);
+      }
+    }
 
     // Cleanup
     return () => {
       if (sound) {
         sound.unloadAsync();
+      }
+      if (Platform.OS === 'android') {
+        try {
+          GlassesAudio.stopMonitoring();
+          if (subscription) {
+            subscription.remove();
+          }
+        } catch (error) {
+          console.error('Failed to stop audio monitoring:', error);
+        }
       }
     };
   }, []);
@@ -61,6 +88,31 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
+  const formatDeviceList = (devices) => {
+    if (!devices || devices.length === 0) return 'None';
+    return devices.map(d => d.productName || d.typeName).join(', ');
+  };
+
+  const updateAudioRouteFromNative = (route) => {
+    if (!route) return;
+
+    setAudioRouteDetails(route);
+    
+    // Format the route information for display
+    const inputDevices = formatDeviceList(route.inputs);
+    const outputDevices = formatDeviceList(route.outputs);
+    
+    setAudioRoute(`In: ${inputDevices} | Out: ${outputDevices}`);
+    
+    // Update connection state
+    if (route.isBluetoothConnected) {
+      const scoStatus = route.isScoOn ? 'SCO Active' : 'SCO Inactive';
+      setConnectionState(`✓ Bluetooth Connected (${scoStatus})`);
+    } else {
+      setConnectionState('⚠ No Bluetooth Device');
+    }
+  };
+
   const checkAudioRoute = async () => {
     try {
       // Request permissions
@@ -85,10 +137,22 @@ export default function GlassesDiagnosticsScreen() {
         setConnectionState('✓ DEV Mode Active');
         setAudioRoute('Phone mic → Phone speaker');
       } else {
-        // In production mode, we would check for Bluetooth connection
-        // For now, we simulate this
-        setConnectionState('⚠ Glasses mode (native implementation needed)');
-        setAudioRoute('Bluetooth HFP (requires native code)');
+        // For Android, use native module to get real audio route
+        if (Platform.OS === 'android') {
+          try {
+            const route = await GlassesAudio.getCurrentRoute();
+            updateAudioRouteFromNative(route);
+          } catch (error) {
+            console.error('Failed to get audio route:', error);
+            setConnectionState('⚠ Glasses mode (checking...)');
+            setAudioRoute('Native module error - check logs');
+            setLastError(`Native module error: ${error.message}`);
+          }
+        } else {
+          // iOS - to be implemented
+          setConnectionState('⚠ Glasses mode (iOS not yet implemented)');
+          setAudioRoute('Bluetooth HFP (iOS support coming)');
+        }
       }
       setLastError(null);
     } catch (error) {
@@ -326,6 +390,49 @@ export default function GlassesDiagnosticsScreen() {
         </TouchableOpacity>
       </View>
 
+      {/* Detailed Audio Route (Android only) */}
+      {Platform.OS === 'android' && !devMode && audioRouteDetails && (
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>📡 Detailed Audio Routing</Text>
+          
+          {audioRouteDetails.inputs && audioRouteDetails.inputs.length > 0 && (
+            <View style={styles.detailSection}>
+              <Text style={styles.detailTitle}>Input Devices:</Text>
+              {audioRouteDetails.inputs.map((device, index) => (
+                <Text key={index} style={styles.detailText}>
+                  • {device.productName || device.typeName}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {audioRouteDetails.outputs && audioRouteDetails.outputs.length > 0 && (
+            <View style={styles.detailSection}>
+              <Text style={styles.detailTitle}>Output Devices:</Text>
+              {audioRouteDetails.outputs.map((device, index) => (
+                <Text key={index} style={styles.detailText}>
+                  • {device.productName || device.typeName}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.detailSection}>
+            <Text style={styles.detailTitle}>Audio Settings:</Text>
+            <Text style={styles.detailText}>
+              Mode: {audioRouteDetails.audioModeName}
+            </Text>
+            <Text style={styles.detailText}>
+              Bluetooth SCO: {audioRouteDetails.isScoOn ? '✓ Active' : '✗ Inactive'}
+              {audioRouteDetails.isScoAvailable && ' (Available)'}
+            </Text>
+            <Text style={styles.detailText}>
+              Bluetooth Device: {audioRouteDetails.isBluetoothConnected ? '✓ Connected' : '✗ Not Connected'}
+            </Text>
+          </View>
+        </View>
+      )}
+
       {/* Error Display */}
       {lastError && (
         <View style={[styles.card, styles.errorCard]}>
@@ -448,7 +555,10 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
-        <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
+        <Text style={styles.text}>✓ Android native audio route monitoring - Implemented</Text>
+        <Text style={styles.text}>✓ Real-time Bluetooth connection detection - Working</Text>
+        <Text style={styles.text}>✓ SCO status and audio mode display - Working</Text>
+        <Text style={styles.text}>⚠ iOS audio route monitoring - Not yet implemented</Text>
       </View>
 
       {/* Docs */}
@@ -607,5 +717,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#1b5e20',
     lineHeight: 20,
+  },
+  detailSection: {
+    marginBottom: 12,
+  },
+  detailTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  detailText: {
+    fontSize: 13,
+    color: '#555',
+    marginLeft: 8,
+    marginBottom: 2,
+    lineHeight: 18,
   },
 });
