@@ -11,6 +11,7 @@ const DEV_MODE_KEY = '@glasses_dev_mode';
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
   const [audioRoute, setAudioRoute] = useState('Unknown');
+  const [audioRouteDetails, setAudioRouteDetails] = useState(null);
   const [connectionState, setConnectionState] = useState('Checking...');
   const [lastError, setLastError] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
@@ -22,11 +23,25 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
 
-  // Load dev mode setting
+  // Load dev mode setting and start monitoring
   useEffect(() => {
     loadDevMode();
     checkNativeModule();
     checkAudioRoute();
+
+    // Start monitoring audio route changes (Android only)
+    let subscription;
+    if (Platform.OS === 'android') {
+      try {
+        GlassesAudio.startMonitoring();
+        subscription = GlassesAudio.addAudioRouteChangeListener((event) => {
+          console.log('Audio route changed:', event.route);
+          updateAudioRouteFromNative(event.route);
+        });
+      } catch (error) {
+        console.error('Failed to start audio monitoring:', error);
+      }
+    }
 
     // Cleanup
     return () => {
@@ -101,6 +116,31 @@ export default function GlassesDiagnosticsScreen() {
     } catch (error) {
       setLastError('Failed to save dev mode setting');
       console.error('Failed to save dev mode:', error);
+    }
+  };
+
+  const formatDeviceList = (devices) => {
+    if (!devices || devices.length === 0) return 'None';
+    return devices.map(d => d.productName || d.typeName).join(', ');
+  };
+
+  const updateAudioRouteFromNative = (route) => {
+    if (!route) return;
+
+    setAudioRouteDetails(route);
+    
+    // Format the route information for display
+    const inputDevices = formatDeviceList(route.inputs);
+    const outputDevices = formatDeviceList(route.outputs);
+    
+    setAudioRoute(`In: ${inputDevices} | Out: ${outputDevices}`);
+    
+    // Update connection state
+    if (route.isBluetoothConnected) {
+      const scoStatus = route.isScoOn ? 'SCO Active' : 'SCO Inactive';
+      setConnectionState(`✓ Bluetooth Connected (${scoStatus})`);
+    } else {
+      setConnectionState('⚠ No Bluetooth Device');
     }
   };
 
@@ -435,6 +475,49 @@ export default function GlassesDiagnosticsScreen() {
         </TouchableOpacity>
       </View>
 
+      {/* Detailed Audio Route (Android only) */}
+      {Platform.OS === 'android' && !devMode && audioRouteDetails && (
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>📡 Detailed Audio Routing</Text>
+          
+          {audioRouteDetails.inputs && audioRouteDetails.inputs.length > 0 && (
+            <View style={styles.detailSection}>
+              <Text style={styles.detailTitle}>Input Devices:</Text>
+              {audioRouteDetails.inputs.map((device, index) => (
+                <Text key={index} style={styles.detailText}>
+                  • {device.productName || device.typeName}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {audioRouteDetails.outputs && audioRouteDetails.outputs.length > 0 && (
+            <View style={styles.detailSection}>
+              <Text style={styles.detailTitle}>Output Devices:</Text>
+              {audioRouteDetails.outputs.map((device, index) => (
+                <Text key={index} style={styles.detailText}>
+                  • {device.productName || device.typeName}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          <View style={styles.detailSection}>
+            <Text style={styles.detailTitle}>Audio Settings:</Text>
+            <Text style={styles.detailText}>
+              Mode: {audioRouteDetails.audioModeName}
+            </Text>
+            <Text style={styles.detailText}>
+              Bluetooth SCO: {audioRouteDetails.isScoOn ? '✓ Active' : '✗ Inactive'}
+              {audioRouteDetails.isScoAvailable && ' (Available)'}
+            </Text>
+            <Text style={styles.detailText}>
+              Bluetooth Device: {audioRouteDetails.isBluetoothConnected ? '✓ Connected' : '✗ Not Connected'}
+            </Text>
+          </View>
+        </View>
+      )}
+
       {/* Error Display */}
       {lastError && (
         <View style={[styles.card, styles.errorCard]}>
@@ -732,5 +815,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#1b5e20',
     lineHeight: 20,
+  },
+  detailSection: {
+    marginBottom: 12,
+  },
+  detailTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  detailText: {
+    fontSize: 13,
+    color: '#555',
+    marginLeft: 8,
+    marginBottom: 2,
+    lineHeight: 18,
   },
 });
