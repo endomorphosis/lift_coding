@@ -2,125 +2,144 @@ import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 const { GlassesAudioModule } = NativeModules;
 
-let eventEmitter = null;
-if (GlassesAudioModule) {
-  eventEmitter = new NativeEventEmitter(GlassesAudioModule);
-}
+// Create event emitter for native events
+const glassesAudioEmitter = GlassesAudioModule 
+  ? new NativeEventEmitter(GlassesAudioModule)
+  : null;
 
-export const GlassesAudio = {
-  // Check if native module is available
-  isAvailable() {
-    return Platform.OS === 'ios' && GlassesAudioModule != null;
-  },
-
-  // Audio Route Monitor
-  async startRouteMonitoring(callback) {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+/**
+ * GlassesAudio module for interacting with Meta AI Glasses audio routing
+ * 
+ * This module provides:
+ * - Audio route monitoring (detect Bluetooth glasses connection)
+ * - Recording from glasses microphone
+ * - Playback through glasses speakers
+ * - TTS audio playback
+ */
+const GlassesAudio = {
+  /**
+   * Start monitoring audio route changes
+   * @returns {Promise<string>} Current route summary
+   */
+  startMonitoring: async () => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available. Make sure you are running on a device with native code compiled.');
     }
-    
-    const subscription = eventEmitter.addListener('audioRouteChanged', callback);
-    await GlassesAudioModule.startRouteMonitoring();
-    
-    return subscription;
+    return await GlassesAudioModule.startMonitoring();
   },
 
-  async stopRouteMonitoring() {
-    if (!this.isAvailable()) return;
-    await GlassesAudioModule.stopRouteMonitoring();
+  /**
+   * Stop monitoring audio route changes
+   */
+  stopMonitoring: async () => {
+    if (!GlassesAudioModule) {
+      return;
+    }
+    await GlassesAudioModule.stopMonitoring();
   },
 
-  async getCurrentRoute() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Get current audio route information
+   * @returns {Promise<string>} Current route summary
+   */
+  getCurrentRoute: async () => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available');
     }
     return await GlassesAudioModule.getCurrentRoute();
   },
 
-  async isBluetoothConnected() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Start recording audio from glasses microphone
+   * @param {number} durationSeconds - Recording duration in seconds
+   * @returns {Promise<string>} File path/URI of recorded audio
+   */
+  startRecording: async (durationSeconds = 10) => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available');
     }
-    return await GlassesAudioModule.isBluetoothConnected();
+    return await GlassesAudioModule.startRecording(durationSeconds);
   },
 
-  async getDetailedRouteInfo() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
-    }
-    return await GlassesAudioModule.getDetailedRouteInfo();
-  },
-
-  // Recorder
-  async startRecording(duration) {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
-    }
-    return await GlassesAudioModule.startRecording(duration || 10.0);
-  },
-
-  async stopRecording() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Stop recording (if currently recording)
+   * @returns {Promise<string>} File path/URI of recorded audio
+   */
+  stopRecording: async () => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available');
     }
     return await GlassesAudioModule.stopRecording();
   },
 
-  async isRecording() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
-    }
-    return await GlassesAudioModule.isRecording();
-  },
-
-  async getRecordingDuration() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
-    }
-    return await GlassesAudioModule.getRecordingDuration();
-  },
-
-  // Player
-  async playAudio(fileUri) {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Play audio file through glasses speakers
+   * @param {string} fileUri - File path or URI to play
+   * @returns {Promise<void>}
+   */
+  playAudio: async (fileUri) => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available');
     }
     return await GlassesAudioModule.playAudio(fileUri);
   },
 
-  async stopPlayback() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Stop audio playback
+   * @returns {Promise<void>}
+   */
+  stopPlayback: async () => {
+    if (!GlassesAudioModule) {
+      throw new Error('GlassesAudioModule is not available');
     }
     return await GlassesAudioModule.stopPlayback();
   },
 
-  async pausePlayback() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Add listener for audio route changes
+   * @param {Function} callback - Called when route changes with route summary string
+   * @returns {Object} Subscription object with remove() method
+   */
+  addRouteChangeListener: (callback) => {
+    if (!glassesAudioEmitter) {
+      console.warn('GlassesAudioModule event emitter not available');
+      return { remove: () => {} };
     }
-    return await GlassesAudioModule.pausePlayback();
+    return glassesAudioEmitter.addListener('onRouteChange', callback);
   },
 
-  async resumePlayback() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Add listener for recording completion
+   * @param {Function} callback - Called when recording completes with {fileUri, error}
+   * @returns {Object} Subscription object with remove() method
+   */
+  addRecordingCompleteListener: (callback) => {
+    if (!glassesAudioEmitter) {
+      console.warn('GlassesAudioModule event emitter not available');
+      return { remove: () => {} };
     }
-    return await GlassesAudioModule.resumePlayback();
+    return glassesAudioEmitter.addListener('onRecordingComplete', callback);
   },
 
-  async isPlaying() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
+  /**
+   * Add listener for playback completion
+   * @param {Function} callback - Called when playback completes with {error}
+   * @returns {Object} Subscription object with remove() method
+   */
+  addPlaybackCompleteListener: (callback) => {
+    if (!glassesAudioEmitter) {
+      console.warn('GlassesAudioModule event emitter not available');
+      return { remove: () => {} };
     }
-    return await GlassesAudioModule.isPlaying();
+    return glassesAudioEmitter.addListener('onPlaybackComplete', callback);
   },
 
-  async getPlaybackProgress() {
-    if (!this.isAvailable()) {
-      throw new Error('Glasses audio module not available');
-    }
-    return await GlassesAudioModule.getPlaybackProgress();
+  /**
+   * Check if the native module is available
+   * @returns {boolean}
+   */
+  isAvailable: () => {
+    return !!GlassesAudioModule;
   },
 };
 

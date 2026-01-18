@@ -1,19 +1,27 @@
 # Meta AI Glasses Audio Diagnostics
 
-This directory contains audio diagnostics and recording capabilities for testing and validating Bluetooth audio routing with Meta AI Glasses (Ray-Ban Meta Smart Glasses).
+This directory contains audio diagnostics for testing and validating Bluetooth audio routing with Meta AI Glasses (Ray-Ban Meta Smart Glasses).
 
-## Status
+## Status (PR-049)
 
-### iOS Implementation: ✅ COMPLETE
-- Native Bluetooth audio recording at 16kHz WAV format
-- Native Bluetooth audio playback
-- Real-time audio route monitoring with Bluetooth detection
-- React Native bridge for JavaScript integration
-- Full diagnostics UI with DEV mode fallback
+✅ **Implemented:**
+- iOS `GlassesPlayer.swift` with AVAudioEngine and Bluetooth routing
+- React Native bridge using Expo Modules API
+- JavaScript hooks for easy integration (`useGlassesPlayer.js`)
+- UI integration in `GlassesDiagnosticsScreen.js`
+- Bluetooth permissions in `app.json`
+- Comprehensive build & test documentation
 
-### Android Implementation: ⏳ PLANNED
-- Scaffold files exist in `android/` directory
-- Implementation pending
+⏳ **Pending:**
+- Physical device testing with Meta AI Glasses
+- Playback progress tracking
+- Audio interruption handling
+- Android implementation
+
+📖 **Documentation:**
+- [Build & Test Guide](../BUILD_AND_TEST_GLASSES_PLAYER.md)
+- [Module README](../modules/glasses-audio-player/README.md)
+- [Implementation TODO](TODO.md)
 
 ## Purpose
 
