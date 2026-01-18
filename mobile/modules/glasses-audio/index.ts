@@ -1,4 +1,4 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import { NativeModulesProxy, EventEmitter, EventSubscription } from 'expo-modules-core';
 
 // This module will be implemented as a native module for iOS
 // For now, we'll create a placeholder that returns mock data for development
@@ -99,13 +99,16 @@ export class GlassesAudio {
    */
   static addAudioRouteChangeListener(
     listener: (event: AudioRouteChangeEvent) => void
-  ): Subscription | null {
+  ): EventSubscription | null {
     if (!GlassesAudioModule) {
       console.warn('GlassesAudio native module not available, audio route change events will not fire');
       return null;
     }
-    const emitter = new EventEmitter(GlassesAudioModule);
-    return emitter.addListener<AudioRouteChangeEvent>('onAudioRouteChange', listener);
+    // Create an EventEmitter with proper event mapping
+    const emitter = new EventEmitter<{
+      onAudioRouteChange: (event: AudioRouteChangeEvent) => void;
+    }>(GlassesAudioModule as any);
+    return emitter.addListener('onAudioRouteChange', listener);
   }
 }
 
