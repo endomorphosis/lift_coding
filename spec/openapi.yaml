@@ -433,6 +433,35 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/notifications/{notification_id}:
+    get:
+      summary: Get a specific notification by ID
+      operationId: getNotification
+      parameters:
+        - name: notification_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the notification to retrieve.
+      responses:
+        '200':
+          description: Notification details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '404':
+          description: Notification not found or does not belong to the user
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/notifications/subscriptions:
     post:
       summary: Register a push subscription/device token

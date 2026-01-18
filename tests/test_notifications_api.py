@@ -172,6 +172,115 @@ class TestNotificationsEndpoint:
         assert "error" in data or "detail" in data
 
 
+class TestNotificationDetailEndpoint:
+    """Test GET /v1/notifications/{notification_id} endpoint."""
+
+    def test_get_notification_success(self):
+        """Test getting a notification by ID successfully."""
+        from handsfree.api import get_db
+
+        db = get_db()
+        user_id = "detail-test-user-0000-0000-0000-000000000001"
+
+        # Create a notification
+        notification = create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type="test_event",
+            message="Test message",
+            metadata={"key": "value"},
+        )
+
+        # Get the notification by ID
+        response = client.get(
+            f"/v1/notifications/{notification.id}",
+            headers={"X-User-ID": user_id},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["id"] == notification.id
+        assert data["user_id"] == user_id
+        assert data["event_type"] == "test_event"
+        assert data["message"] == "Test message"
+        assert data["metadata"]["key"] == "value"
+        assert "created_at" in data
+        assert "priority" in data
+        assert "profile" in data
+
+    def test_get_notification_not_found(self):
+        """Test getting a notification that doesn't exist returns 404."""
+        user_id = "detail-test-user-0000-0000-0000-000000000001"
+
+        response = client.get(
+            "/v1/notifications/00000000-0000-0000-0000-999999999999",
+            headers={"X-User-ID": user_id},
+        )
+
+        assert response.status_code == 404
+        data = response.json()
+        assert "message" in data or "detail" in data
+        error_msg = data.get("message", data.get("detail", "")).lower()
+        assert "not found" in error_msg
+
+    def test_get_notification_wrong_user(self):
+        """Test getting a notification that belongs to another user returns 404."""
+        from handsfree.api import get_db
+
+        db = get_db()
+        owner_user_id = "notification-owner-0000-0000-0000-000000000001"
+        other_user_id = "other-user-0000-0000-0000-000000000002"
+
+        # Create a notification for one user
+        notification = create_notification(
+            conn=db,
+            user_id=owner_user_id,
+            event_type="test_event",
+            message="Owner's notification",
+            metadata={"key": "value"},
+        )
+
+        # Try to get it as a different user
+        response = client.get(
+            f"/v1/notifications/{notification.id}",
+            headers={"X-User-ID": other_user_id},
+        )
+
+        assert response.status_code == 404
+        data = response.json()
+        assert "message" in data or "detail" in data
+        error_msg = data.get("message", data.get("detail", "")).lower()
+        assert "not found" in error_msg
+
+    def test_get_notification_with_delivery_status(self):
+        """Test getting a notification with delivery status fields."""
+        from handsfree.api import get_db
+
+        db = get_db()
+        user_id = "detail-test-user-delivery-0000-0000-0000-000000000003"
+
+        # Create a notification (delivery will be attempted)
+        notification = create_notification(
+            conn=db,
+            user_id=user_id,
+            event_type="test_event",
+            message="Test with delivery",
+            metadata={"key": "value"},
+        )
+
+        # Get the notification by ID
+        response = client.get(
+            f"/v1/notifications/{notification.id}",
+            headers={"X-User-ID": user_id},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["id"] == notification.id
+        # Delivery fields may or may not be present depending on auto-push setting
+        # Just verify the response is valid
+
+
 class TestAgentServiceNotifications:
     """Test that agent service emits notifications."""
 
