@@ -44,6 +44,21 @@ export default function GlassesDiagnosticsScreen() {
       }
     }
 
+    // Setup native audio route change listener (when not in dev mode)
+    let routeSubscription;
+    if (!devMode) {
+      try {
+        routeSubscription = GlassesAudio.addAudioRouteChangeListener((routeInfo) => {
+          console.log('Audio route changed:', routeInfo);
+          const { inputDevice, outputDevice, isBluetoothConnected } = routeInfo;
+          setAudioRoute(`${inputDevice} → ${outputDevice}`);
+          setConnectionState(isBluetoothConnected ? '✓ Bluetooth Connected' : '⚠ Phone Audio');
+        });
+      } catch (error) {
+        console.log('Native audio monitoring not available:', error);
+      }
+    }
+
     // Cleanup
     return () => {
       if (sound) {
@@ -53,7 +68,7 @@ export default function GlassesDiagnosticsScreen() {
         GlassesAudio.stopMonitoring();
       }
     };
-  }, []);
+  }, [devMode]);
 
   // Monitor audio route when mode changes
   useEffect(() => {
@@ -225,6 +240,15 @@ export default function GlassesDiagnosticsScreen() {
       });
 
       if (devMode) {
+        // Dev mode uses standard expo-av
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false,
+        });
+        
         setConnectionState('✓ DEV Mode Active');
         setAudioRoute('Phone mic → Phone speaker');
       } else if (nativeModuleAvailable) {
@@ -476,6 +500,7 @@ export default function GlassesDiagnosticsScreen() {
 
     try {
       setLastError(null);
+      setIsPlaying(true);
       
       // Use native module in glasses mode if available
       if (!devMode && useNativeModule) {
@@ -496,34 +521,47 @@ export default function GlassesDiagnosticsScreen() {
         setSound(null);
       }
 
-      // Configure audio mode for playback
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: false,
-        playThroughEarpieceAndroid: false,
-      });
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: false,
+          playThroughEarpieceAndroid: false,
+        });
 
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: lastRecordingUri },
-        { shouldPlay: true }
-      );
-      
-      setSound(newSound);
-      setIsPlaying(true);
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: lastRecordingUri },
+          { shouldPlay: true }
+        );
+        
+        setSound(newSound);
 
-      // Set up playback status update
-      newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+          }
+        });
+
+        Alert.alert(
+          'Playing Recording',
+          `Playback through phone speaker`
+        );
+      } else {
+        // Glasses mode: Use native Bluetooth playback
+        await GlassesAudio.playAudio(lastRecordingUri);
+        
+        // TODO: Replace with native playback status listener
+        // For now, simulate playback completion with estimated duration
+        // In production, use GlassesAudio.addPlaybackStatusListener to get real status
+        setTimeout(() => {
           setIsPlaying(false);
-        }
-      });
-
-      Alert.alert(
-        'Playing Recording',
-        `Playback through ${devMode ? 'phone speaker' : 'glasses (if connected, else phone speaker)'}`
-      );
+        }, 3000);
+        
+        Alert.alert(
+          'Playing Recording',
+          `Playback through Bluetooth glasses speakers`
+        );
+      }
     } catch (error) {
       setLastError(`Playback failed: ${error.message}`);
       console.error('Failed to play recording:', error);
@@ -545,6 +583,8 @@ export default function GlassesDiagnosticsScreen() {
         await sound.stopAsync();
         await sound.unloadAsync();
         setSound(null);
+      } else {
+        await GlassesAudio.stopPlayback();
       }
       setIsPlaying(false);
     } catch (error) {
@@ -890,6 +930,7 @@ export default function GlassesDiagnosticsScreen() {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Implementation Status</Text>
         <Text style={styles.text}>✓ DEV mode (phone mic/speaker) - Working</Text>
+        <Text style={styles.text}>✓ Glasses mode native Bluetooth - Implemented</Text>
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>

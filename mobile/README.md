@@ -8,6 +8,8 @@ React Native/Expo mobile app for interacting with the Handsfree backend.
 - **Command Input**: Send text commands to the backend
 - **Confirmation Flow**: Confirm/cancel/repeat/next pending actions
 - **Text-to-Speech**: Fetch and play TTS audio from backend
+- **Glasses Audio Diagnostics**: Test Bluetooth audio routing with Meta AI Glasses
+- **Native Bluetooth Support**: Route audio through connected Bluetooth headsets
 - **Developer Settings**: Configure X-User-ID header and backend URL in-app
 - **Glasses Diagnostics**: Test Meta AI Glasses audio routing (iOS native module)
   - Real-time Bluetooth audio route monitoring
@@ -15,7 +17,11 @@ React Native/Expo mobile app for interacting with the Handsfree backend.
   - Native playback through glasses speakers
   - Dev mode bypass for testing without glasses
 
-## Prerequisites
+## Quick Start
+
+### Standard Development (Expo Go)
+
+For basic testing without native Bluetooth features:
 
 - Node.js (v18 or higher)
 - npm or yarn
@@ -209,7 +215,32 @@ Navigate to the **TTS** tab:
 
 This test verifies the complete audio capture, command submission, and TTS playback pipeline.
 
-### Prerequisites
+#### Standard Development (Expo Go)
+
+For basic testing without native Bluetooth features:
+
+```bash
+cd mobile
+npm install
+npm start
+```
+
+Then scan the QR code with Expo Go app on your device.
+
+**Note**: Native Bluetooth audio features require a development build (see below).
+
+### Development Build (Native Modules)
+
+For testing Bluetooth audio with Meta AI Glasses:
+
+```bash
+cd mobile
+./setup.sh
+```
+
+Then follow the build instructions in [BUILD.md](BUILD.md) to create a development client.
+
+## Prerequisites
 - Backend running on `http://localhost:8080` (or configured BASE_URL)
 - Backend must have `HANDSFREE_AUTH_MODE=dev` enabled
 - Mobile app running on simulator/device
@@ -475,6 +506,53 @@ Before production deployment:
    - Add unit tests
    - Add integration tests
    - Test on multiple devices
+
+## Meta AI Glasses Audio Diagnostics
+
+The **Glasses** tab provides comprehensive diagnostics for testing Bluetooth audio routing with Meta AI Glasses.
+
+### Features
+
+**DEV Mode vs Glasses Mode:**
+- **DEV Mode** (toggle ON): Uses phone mic/speaker for rapid testing
+- **Glasses Mode** (toggle OFF): Uses Bluetooth audio routing via native modules
+
+**Audio Route Monitoring:**
+- Real-time display of audio input/output devices
+- Bluetooth connection status
+- Automatic updates on route changes
+
+**Recording & Playback:**
+- 10-second audio recording from Bluetooth mic (or phone mic in DEV mode)
+- Playback through Bluetooth speakers (or phone speaker in DEV mode)
+- WAV file format with proper headers
+
+**Backend Integration:**
+- Upload recordings to `/v1/dev/audio`
+- Send to `/v1/command` for processing
+- Display backend responses
+
+### Testing Bluetooth Audio
+
+1. **Pair Meta AI Glasses** (or any Bluetooth headset) with your device
+2. **Build development client** (see [BUILD.md](BUILD.md))
+3. **Launch app** and navigate to Glasses tab
+4. **Disable DEV Mode** (toggle should be OFF)
+5. **Check Status**: Verify "✓ Bluetooth Connected"
+6. **Record Audio**: Tap "Start Recording" and speak
+7. **Play Back**: Tap "Play Last Recording" to hear through glasses
+8. **Test Pipeline**: Tap "Send to Backend" to process command
+
+### Troubleshooting
+
+- **"Native module not available"**: Build a development client (not Expo Go)
+- **"No Bluetooth Device"**: Ensure device is paired and connected in system settings
+- **Audio routes to phone**: Check Bluetooth connection, may need to reconnect device
+
+For detailed instructions, see:
+- [BUILD.md](BUILD.md) - Development build setup
+- [glasses/README.md](glasses/README.md) - Native implementation details
+- [../docs/meta-ai-glasses-audio-routing.md](../docs/meta-ai-glasses-audio-routing.md) - Audio routing guide
 
 ## Contributing
 
