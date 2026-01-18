@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { uploadDevAudio, sendAudioCommand } from '../api/client';
+import GlassesAudio from '../../modules/glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
@@ -19,16 +20,22 @@ export default function GlassesDiagnosticsScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
+  const [routeChangeSubscription, setRouteChangeSubscription] = useState(null);
 
-  // Load dev mode setting
+  // Load dev mode setting and check native module availability
   useEffect(() => {
     loadDevMode();
+    setNativeModuleAvailable(GlassesAudio.isAvailable());
     checkAudioRoute();
 
     // Cleanup
     return () => {
       if (sound) {
         sound.unloadAsync();
+      }
+      if (routeChangeSubscription) {
+        routeChangeSubscription.remove();
       }
     };
   }, []);
@@ -72,7 +79,30 @@ export default function GlassesDiagnosticsScreen() {
         return;
       }
 
-      // Set audio mode
+      // Try to use native module if available
+      if (nativeModuleAvailable && !devMode) {
+        try {
+          // Start monitoring with native module
+          const route = await GlassesAudio.getCurrentRoute();
+          
+          // Subscribe to route changes
+          if (routeChangeSubscription) {
+            routeChangeSubscription.remove();
+          }
+          const subscription = GlassesAudio.addAudioRouteChangeListener((event) => {
+            updateRouteFromNative(event.route);
+          });
+          setRouteChangeSubscription(subscription);
+          
+          // Update UI with native route info
+          updateRouteFromNative(route);
+          return;
+        } catch (error) {
+          console.warn('Native audio route monitoring failed, falling back to Expo Audio:', error);
+        }
+      }
+
+      // Fallback to Expo Audio setup
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
@@ -87,8 +117,8 @@ export default function GlassesDiagnosticsScreen() {
       } else {
         // In production mode, we would check for Bluetooth connection
         // For now, we simulate this
-        setConnectionState('⚠ Glasses mode (native implementation needed)');
-        setAudioRoute('Bluetooth HFP (requires native code)');
+        setConnectionState('⚠ Glasses mode (native implementation available)');
+        setAudioRoute(nativeModuleAvailable ? 'Using native module' : 'Bluetooth HFP (requires native code)');
       }
       setLastError(null);
     } catch (error) {
@@ -97,6 +127,21 @@ export default function GlassesDiagnosticsScreen() {
       setAudioRoute('Unknown');
       console.error('Audio route check failed:', error);
     }
+  };
+
+  const updateRouteFromNative = (route) => {
+    const inputStr = route.inputs.join(', ');
+    const outputStr = route.outputs.join(', ');
+    const isBluetooth = inputStr.toLowerCase().includes('bluetooth') || outputStr.toLowerCase().includes('bluetooth');
+    
+    setAudioRoute(`Input: ${inputStr}\nOutput: ${outputStr}\nSampleRate: ${route.sampleRate} Hz`);
+    
+    if (isBluetooth) {
+      setConnectionState('✓ Bluetooth Connected (Glasses)');
+    } else {
+      setConnectionState('✓ Phone Audio Active');
+    }
+    setLastError(null);
   };
 
   const startRecording = async () => {
@@ -448,7 +493,8 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
-        <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
+        <Text style={styles.text}>{nativeModuleAvailable ? '✓' : '⚠'} Native iOS module - {nativeModuleAvailable ? 'Available' : 'Requires development build'}</Text>
+        <Text style={styles.text}>{nativeModuleAvailable && !devMode ? '✓' : '⚠'} Glasses mode - {nativeModuleAvailable && !devMode ? 'Active' : 'Use native module in non-dev mode'}</Text>
       </View>
 
       {/* Docs */}
