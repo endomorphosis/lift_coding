@@ -4594,6 +4594,54 @@ async def delete_notification_subscription(
     return Response(status_code=204)
 
 
+@app.get("/v1/notifications/{notification_id}")
+async def get_notification_detail(
+    notification_id: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> JSONResponse:
+    """Get a specific notification by ID for the current user.
+
+    Used by mobile app when a push notification includes notification_id.
+
+    Args:
+        notification_id: ID of the notification to retrieve.
+        user_id: User ID extracted from authentication (via CurrentUser dependency).
+
+    Returns:
+        JSON response with notification details.
+
+    Raises:
+        HTTPException: 404 if notification not found or doesn't belong to user.
+    """
+    from handsfree.db.notifications import get_notification
+
+    db = get_db()
+
+    # In dev/test, some endpoints accept arbitrary user IDs (not UUIDs) via header
+    # for isolation in tests. In non-dev modes, always trust the authenticated user.
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
+    # Fetch notification
+    notification = get_notification(
+        conn=db,
+        user_id=effective_user_id,
+        notification_id=notification_id,
+    )
+
+    if not notification:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Notification not found",
+        )
+
+    return JSONResponse(content=notification.to_dict())
+
+
 @app.post("/v1/agents/tasks/{task_id}/start")
 async def start_agent_task(
     task_id: str,

@@ -398,6 +398,59 @@ def _deliver_notification(
     )
 
 
+def get_notification(
+    conn: duckdb.DuckDBPyConnection,
+    user_id: str,
+    notification_id: str,
+) -> Notification | None:
+    """Get a single notification by ID for a specific user.
+
+    Args:
+        conn: Database connection.
+        user_id: User ID to filter by (string, will be converted to UUID).
+        notification_id: Notification ID to fetch.
+
+    Returns:
+        Notification object if found and belongs to user, None otherwise.
+    """
+    # Convert user_id to UUID if it's not already one
+    try:
+        user_uuid = (
+            uuid.UUID(user_id) if "-" in user_id else uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+        )
+    except (ValueError, AttributeError):
+        # If conversion fails, generate a UUID from the string
+        user_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, user_id)
+
+    query = """
+        SELECT id, user_id, event_type, message, metadata, created_at, priority, profile,
+               last_delivery_attempt, delivery_status
+        FROM notifications
+        WHERE id = ? AND user_id = ?
+    """
+    params = [notification_id, user_uuid]
+
+    result = conn.execute(query, params).fetchone()
+
+    if not result:
+        return None
+
+    return Notification(
+        id=str(result[0]),  # Convert UUID to string
+        user_id=user_id,  # Return the original string user_id
+        event_type=result[2],
+        message=result[3],
+        metadata=json.loads(result[4]) if result[4] else None,  # Parse JSON string
+        created_at=result[5],
+        priority=result[6] if len(result) > 6 else 3,  # Default priority for backward compatibility
+        profile=result[7]
+        if len(result) > 7
+        else "default",  # Default profile for backward compatibility
+        last_delivery_attempt=result[8] if len(result) > 8 else None,
+        delivery_status=result[9] if len(result) > 9 else "pending",
+    )
+
+
 def list_notifications(
     conn: duckdb.DuckDBPyConnection,
     user_id: str,
