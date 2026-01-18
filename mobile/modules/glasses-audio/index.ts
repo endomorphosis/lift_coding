@@ -110,8 +110,10 @@ export class GlassesAudio {
       return null;
     }
     // In Expo SDK 52+, native modules are EventEmitters. For SDK 54, we wrap it.
-    // @ts-expect-error - Type mismatch between NativeModulesProxy and EventEmitter types
-    // This is a known limitation of the Expo Modules API type system.
+    // @ts-expect-error - NativeModulesProxy.GlassesAudio returns a ProxyNativeModule which is
+    // structurally compatible with EventEmitter but TypeScript can't verify the type relationship
+    // between the internal EventEmitter types (build/EventEmitter vs ts-declarations/EventEmitter).
+    // This is safe because Expo Modules API guarantees EventEmitter compatibility at runtime.
     const emitter = new EventEmitter<GlassesAudioEvents>(GlassesAudioModule);
     return emitter.addListener('onAudioRouteChange', listener);
   }
