@@ -166,6 +166,7 @@ class AgentService:
         return {
             "task_id": task.id,
             "state": task.state,
+            "provider": task.provider,
             "spoken_text": spoken,
         }
 
