@@ -3,6 +3,7 @@
 from handsfree.notifications.provider import (
     APNSProvider,
     DevLoggerProvider,
+    ExpoPushProvider,
     FCMProvider,
     NotificationDeliveryProvider,
     WebPushProvider,
@@ -16,6 +17,7 @@ __all__ = [
     "WebPushProvider",
     "APNSProvider",
     "FCMProvider",
+    "ExpoPushProvider",
     "get_notification_provider",
     "get_provider_for_platform",
 ]
