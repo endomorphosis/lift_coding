@@ -20,9 +20,9 @@
       "bundleIdentifier": "com.handsfree.mobile",
       "infoPlist": {
         "UIBackgroundModes": ["audio", "remote-notification"],
-        "NSMicrophoneUsageDescription": "This app needs access to the microphone to record audio from your Meta AI Glasses for voice commands.",
-        "NSBluetoothPeripheralUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for audio routing.",
-        "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for hands-free audio input and output."
+        "NSMicrophoneUsageDescription": "This app needs microphone access to record audio commands for your Meta AI Glasses.",
+        "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback.",
+        "NSBluetoothPeripheralUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback."
       }
     },
     "android": {
@@ -38,10 +38,7 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
         "POST_NOTIFICATIONS",
-        "BLUETOOTH",
-        "BLUETOOTH_ADMIN",
         "BLUETOOTH_CONNECT",
-        "BLUETOOTH_SCAN",
         "MODIFY_AUDIO_SETTINGS"
       ]
     },

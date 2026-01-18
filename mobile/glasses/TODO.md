@@ -16,12 +16,17 @@
   - [ ] Handle 10-second timed recording
   - [ ] Implement recording level monitoring
   - [ ] Save to Documents/audio_diagnostics/
-- [ ] Implement `GlassesPlayer.swift`
-  - [ ] Configure AVAudioSession for Bluetooth output
-  - [ ] Set up AVAudioEngine with AVAudioPlayerNode
-  - [ ] Load and play WAV files
+- [x] Implement `GlassesPlayer.swift`
+  - [x] Configure AVAudioSession for Bluetooth output
+  - [x] Set up AVAudioEngine with AVAudioPlayerNode
+  - [x] Load and play WAV files
   - [ ] Implement playback progress tracking
-  - [ ] Handle stop/pause functionality
+  - [x] Handle stop/pause functionality
+- [x] Implement React Native bridge for `GlassesPlayer`
+  - [x] Create Expo module with Swift bridge
+  - [x] Add JavaScript/TypeScript interface
+  - [x] Add React hooks for easy integration
+  - [x] Update GlassesDiagnosticsScreen with native player UI
 - [ ] Implement `GlassesAudioDiagnostics.swift`
   - [ ] Create main view controller
   - [ ] Build UI with route display
@@ -29,19 +34,19 @@
   - [ ] Add playback controls
   - [ ] Add file list and export functionality
   - [ ] Wire up all components
-  - [ ] Handle permissions (microphone, Bluetooth)
+  - [x] Handle permissions (microphone, Bluetooth) - Added to app.json
 
 ### UI/UX
-- [ ] Design diagnostics screen layout
-- [ ] Add recording indicator animation
+- [x] Design diagnostics screen layout - React Native implementation
+- [x] Add recording indicator animation - Implemented in GlassesDiagnosticsScreen
 - [ ] Add playback progress indicator
-- [ ] Add Bluetooth connection status icon
+- [x] Add Bluetooth connection status icon - Added in diagnostics screen
 - [ ] Implement share sheet for exports
-- [ ] Add error/success messages
+- [x] Add error/success messages - Implemented with alerts and status displays
 
 ### Integration
-- [ ] Add to app navigation (Settings > Audio Diagnostics)
-- [ ] Update Info.plist with permissions
+- [x] Add to app navigation - GlassesDiagnosticsScreen exists
+- [x] Update Info.plist with permissions - Added to app.json
 - [ ] Test on physical iPhone with Meta AI Glasses
 
 ## Phase 2: Android Implementation

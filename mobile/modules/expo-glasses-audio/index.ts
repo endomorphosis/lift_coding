@@ -1,58 +1,99 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import { EventEmitter, Subscription } from 'expo-modules-core';
+import { requireNativeModule } from 'expo-modules-core';
 
-// Import the native module. On web, it will be resolved to ExpoGlassesAudio.web.ts
-// and on native platforms to ExpoGlassesAudio.ts
-import ExpoGlassesAudioModule from './src/ExpoGlassesAudioModule';
+export interface AudioDevice {
+  id: number;
+  type: number;
+  typeName: string;
+  productName: string;
+  address?: string;
+}
 
 export interface AudioRouteInfo {
-  inputDevice: string;
-  outputDevice: string;
-  sampleRate: number;
+  inputs: AudioDevice[];
+  outputs: AudioDevice[];
+  audioMode: number;
+  audioModeName: string;
+  isScoOn: boolean;
+  isScoAvailable: boolean;
   isBluetoothConnected: boolean;
+  timestamp: number;
 }
 
-export interface RecordingResult {
-  uri: string;
-  duration: number;
-  size: number;
+export interface AudioRouteChangeEvent {
+  route: AudioRouteInfo;
 }
 
-const emitter = new EventEmitter(ExpoGlassesAudioModule);
+// Get the native module
+const NativeModule = requireNativeModule('GlassesAudio');
 
-export function getAudioRoute(): AudioRouteInfo {
-  return ExpoGlassesAudioModule.getAudioRoute();
+/**
+ * Expo module for Meta AI Glasses audio route monitoring.
+ * Provides real-time information about Android audio routing, including
+ * Bluetooth connections, SCO status, and device changes.
+ */
+class GlassesAudioModule extends EventEmitter {
+  constructor() {
+    super(NativeModule);
+  }
+
+  /**
+   * Get the current audio route information.
+   * @returns Promise with current route details including inputs, outputs, and Bluetooth status
+   */
+  async getCurrentRoute(): Promise<AudioRouteInfo> {
+    return await NativeModule.getCurrentRoute();
+  }
+
+  /**
+   * Get the current audio route as a formatted string.
+   * @returns Promise with human-readable route summary
+   */
+  async getCurrentRouteSummary(): Promise<string> {
+    return await NativeModule.getCurrentRouteSummary();
+  }
+
+  /**
+   * Check if any Bluetooth device is currently connected.
+   * @returns Promise<boolean> true if Bluetooth device is connected
+   */
+  async isBluetoothConnected(): Promise<boolean> {
+    return await NativeModule.isBluetoothConnected();
+  }
+
+  /**
+   * Check if Bluetooth SCO is currently connected.
+   * @returns Promise<boolean> true if SCO is connected
+   */
+  async isScoConnected(): Promise<boolean> {
+    return await NativeModule.isScoConnected();
+  }
+
+  /**
+   * Start monitoring audio route changes.
+   * Emits 'onAudioRouteChange' events when the route changes.
+   */
+  startMonitoring(): void {
+    NativeModule.startMonitoring();
+  }
+
+  /**
+   * Stop monitoring audio route changes.
+   */
+  stopMonitoring(): void {
+    NativeModule.stopMonitoring();
+  }
+
+  /**
+   * Add a listener for audio route changes.
+   * @param listener Callback function to handle route changes
+   * @returns Subscription object to remove the listener
+   */
+  addAudioRouteChangeListener(
+    listener: (event: AudioRouteChangeEvent) => void
+  ): Subscription {
+    return this.addListener('onAudioRouteChange', listener);
+  }
 }
 
-export function startRecording(durationSeconds: number): Promise<RecordingResult> {
-  return ExpoGlassesAudioModule.startRecording(durationSeconds);
-}
-
-export function stopRecording(): Promise<RecordingResult> {
-  return ExpoGlassesAudioModule.stopRecording();
-}
-
-export function playAudio(fileUri: string): Promise<void> {
-  return ExpoGlassesAudioModule.playAudio(fileUri);
-}
-
-export function stopPlayback(): Promise<void> {
-  return ExpoGlassesAudioModule.stopPlayback();
-}
-
-export function addAudioRouteChangeListener(
-  listener: (event: AudioRouteInfo) => void
-): Subscription {
-  return emitter.addListener<AudioRouteInfo>('onAudioRouteChange', listener);
-}
-
-export function addRecordingProgressListener(
-  listener: (event: { isRecording: boolean; duration: number }) => void
-): Subscription {
-  return emitter.addListener('onRecordingProgress', listener);
-}
-
-export function addPlaybackStatusListener(
-  listener: (event: { isPlaying: boolean; position: number; duration: number }) => void
-): Subscription {
-  return emitter.addListener('onPlaybackStatus', listener);
-}
+export default new GlassesAudioModule();
