@@ -171,34 +171,7 @@ This document is the recommended execution order for getting to an end-to-end MV
 
 ---
 
-### Stage 5 — Push notifications (MVP4 readiness)
-**Status**: Future work
-
-**Dependencies**: 
-- Backend: Push notification infrastructure (APNS/FCM)
-- Mobile: Push token registration
-- iOS: Background audio session handling
-
-**Goal**:
-- Enable push notifications so commands can be triggered by backend events.
-- Handle notification delivery while app is backgrounded or glasses session is active.
-
-**Related PRs**:
-- [tracking/PR-029-mobile-ios-android-meta-glasses.md](../tracking/PR-029-mobile-ios-android-meta-glasses.md) — Mobile integration contract (push section)
-- Backend push notification PRs (separate tracking)
-
-**Verification checklist**:
-- [ ] Register APNS token with `POST /v1/notifications/subscriptions`
-- [ ] Trigger test notification from backend
-- [ ] Notification appears on device (banner or silent)
-- [ ] App can handle notification while in background
-- [ ] Audio session resumes correctly after notification
-
-**Demo gate**: MVP4 ✓ (push-enabled voice assistant)
-
----
-
-### Stage 6 — Confirmations + safety (MVP3 readiness)
+### Stage 5 — Confirmations + safety (MVP3 readiness)
 **Status**: Future work
 
 **Dependencies**: 
@@ -226,18 +199,45 @@ This document is the recommended execution order for getting to an end-to-end MV
 
 ---
 
+### Stage 6 — Push notifications (MVP4 readiness)
+**Status**: Future work
+
+**Dependencies**: 
+- Backend: Push notification infrastructure (APNS/FCM)
+- Mobile: Push token registration
+- iOS: Background audio session handling
+
+**Goal**:
+- Enable push notifications so commands can be triggered by backend events.
+- Handle notification delivery while app is backgrounded or glasses session is active.
+
+**Related PRs**:
+- [tracking/PR-029-mobile-ios-android-meta-glasses.md](../tracking/PR-029-mobile-ios-android-meta-glasses.md) — Mobile integration contract (push section)
+- Backend push notification PRs (separate tracking)
+
+**Verification checklist**:
+- [ ] Register APNS token with `POST /v1/notifications/subscriptions`
+- [ ] Trigger test notification from backend
+- [ ] Notification appears on device (banner or silent)
+- [ ] App can handle notification while in background
+- [ ] Audio session resumes correctly after notification
+
+**Demo gate**: MVP4 ✓ (push-enabled voice assistant)
+
+---
+
 ## Environment flags (backend)
 
 These environment variables control backend behavior for development and testing.
 
 ### Speech-to-Text (STT)
-- `HANDSFREE_STT_PROVIDER=stub` — Default for dev; returns deterministic transcript
-- `HANDSFREE_STT_PROVIDER=openai` — Use OpenAI Whisper (requires `OPENAI_API_KEY`)
-- `HANDSFREE_STT_ENABLED=false` — Disable audio input path entirely (text-only mode)
+- `HANDS_FREE_STT_PROVIDER=stub` — Default for dev; returns deterministic transcript
+- `HANDS_FREE_STT_PROVIDER=openai` — Use OpenAI Whisper (requires `OPENAI_API_KEY`)
+- `HANDS_FREE_STT_ENABLED=false` — Disable audio input path entirely (text-only mode)
 
 ### Text-to-Speech (TTS)
-- `HANDSFREE_TTS_PROVIDER=stub` — Default for dev; returns sine wave test audio
-- `HANDSFREE_TTS_PROVIDER=openai` — Use OpenAI TTS (requires `OPENAI_API_KEY`)
+- `HANDS_FREE_TTS_PROVIDER=stub` — Default for dev; returns sine wave test audio
+- `HANDS_FREE_TTS_PROVIDER=openai` — Use OpenAI TTS (requires `OPENAI_API_KEY`)
 
 ### GitHub integration
 - `GITHUB_LIVE_MODE=true` — Enable live GitHub API calls (requires `GITHUB_TOKEN`)
@@ -258,8 +258,8 @@ These environment variables control backend behavior for development and testing
 | **MVP1 input** | Stage 2 complete | Can capture voice from glasses or phone |
 | **MVP1 audio input** | Stage 3 complete | Backend understands voice commands |
 | **MVP1 complete** | Stage 4 complete | Full voice loop: speak → hear response |
-| **MVP3 complete** | Stage 6 complete | Safe execution of side-effect commands |
-| **MVP4 complete** | Stage 5 complete | Push-enabled voice assistant |
+| **MVP3 complete** | Stage 5 complete | Safe execution of side-effect commands |
+| **MVP4 complete** | Stage 6 complete | Push-enabled voice assistant |
 
 ---
 
