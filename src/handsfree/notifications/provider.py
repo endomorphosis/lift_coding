@@ -590,6 +590,163 @@ class FCMProvider(NotificationDeliveryProvider):
             return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
 
 
+class ExpoPushProvider(NotificationDeliveryProvider):
+    """Expo Push Notification Service provider.
+
+    By default this provider runs in "stub" mode for local development.
+    Enable real sends with mode="real" (or HANDSFREE_EXPO_MODE=real).
+
+    Real mode sends notifications via Expo's Push API.
+    Expo push tokens look like: ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
+    """
+
+    def __init__(
+        self,
+        access_token: str | None = None,
+        mode: str = "stub",
+    ):
+        """Initialize Expo Push provider.
+
+        Args:
+            access_token: Optional Expo access token for higher rate limits.
+            mode: "stub" or "real" mode.
+        """
+        self.access_token = access_token
+        self.mode = mode
+
+        logger.info(
+            "ExpoPushProvider initialized (mode=%s) - access_token=%s",
+            mode,
+            "configured" if access_token else "not configured",
+        )
+
+    def send(
+        self,
+        subscription_endpoint: str,
+        notification_data: dict[str, Any],
+        subscription_keys: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Send an Expo Push notification.
+
+        In "stub" mode this logs and returns success without sending.
+        In "real" mode this calls the Expo Push API.
+
+        Args:
+            subscription_endpoint: The Expo push token (ExponentPushToken[...]).
+            notification_data: The notification payload to send.
+            subscription_keys: Optional keys (unused for Expo).
+
+        Returns:
+            Dictionary with delivery result (stub returns success).
+        """
+        token_preview = subscription_endpoint[:20] + "..." if len(subscription_endpoint) > 20 else subscription_endpoint
+
+        if self.mode != "real":
+            logger.info(
+                "ExpoPushProvider (stub): Would send notification to Expo token %s: %s",
+                token_preview,
+                notification_data,
+            )
+            return {
+                "ok": True,
+                "message": "Expo notification logged (stub mode)",
+                "delivery_id": f"expo-stub-{hash((subscription_endpoint, str(notification_data)))}",
+            }
+
+        try:
+            import httpx
+
+            title = str(
+                notification_data.get("title") or notification_data.get("event_type") or "Handsfree"
+            )
+            body = str(notification_data.get("message") or "")
+
+            # Prepare Expo push message
+            # https://docs.expo.dev/push-notifications/sending-notifications/
+            message = {
+                "to": subscription_endpoint,
+                "title": title,
+                "body": body,
+                "data": notification_data,
+                "sound": "default",
+                "priority": "high",
+            }
+
+            # Expo Push API endpoint
+            url = "https://exp.host/--/api/v2/push/send"
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            }
+
+            # Add access token if configured (for higher rate limits)
+            if self.access_token:
+                headers["Authorization"] = f"Bearer {self.access_token}"
+
+            with httpx.Client(timeout=10.0) as client:
+                resp = client.post(url, json=message, headers=headers)
+
+            if 200 <= resp.status_code < 300:
+                # Parse response
+                try:
+                    result = resp.json()
+                    data = result.get("data", {})
+                    
+                    # Check if the push ticket indicates success
+                    status = data.get("status")
+                    if status == "ok":
+                        ticket_id = data.get("id", "")
+                        return {
+                            "ok": True,
+                            "message": f"Expo notification sent (status: {resp.status_code})",
+                            "delivery_id": ticket_id or f"expo-{hash((subscription_endpoint, str(notification_data)))}",
+                        }
+                    else:
+                        # Expo returned an error in the ticket
+                        error_message = data.get("message", "Unknown error")
+                        error_details = data.get("details", {})
+                        logger.warning(
+                            "Expo push ticket error for token %s: %s (details: %s)",
+                            token_preview,
+                            error_message,
+                            error_details,
+                        )
+                        return {
+                            "ok": False,
+                            "message": f"Expo error: {error_message}",
+                            "delivery_id": None,
+                        }
+                except Exception as e:
+                    logger.warning("Failed to parse Expo response for token %s: %s", token_preview, e)
+                    return {
+                        "ok": True,  # HTTP success, assume sent
+                        "message": f"Expo notification sent (status: {resp.status_code})",
+                        "delivery_id": f"expo-{hash((subscription_endpoint, str(notification_data)))}",
+                    }
+
+            # HTTP error
+            logger.warning(
+                "Expo send failed (status=%s) for token %s: %s",
+                resp.status_code,
+                token_preview,
+                resp.text,
+            )
+            return {
+                "ok": False,
+                "message": f"Expo error ({resp.status_code}): {resp.text}",
+                "delivery_id": None,
+            }
+
+        except Exception as e:
+            logger.error(
+                "Unexpected error sending Expo notification to %s: %s",
+                token_preview,
+                str(e),
+                exc_info=True,
+            )
+            return {"ok": False, "message": f"Unexpected error: {str(e)}", "delivery_id": None}
+
+
 def get_notification_provider() -> NotificationDeliveryProvider | None:
     """Get the configured notification delivery provider.
 
@@ -760,6 +917,16 @@ def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | N
             project_id=project_id,
             credentials_path=credentials_path,
             mode=fcm_mode,
+        )
+
+    if platform == "expo":
+        access_token = os.getenv("HANDSFREE_EXPO_ACCESS_TOKEN", "")
+        expo_mode = os.getenv("HANDSFREE_EXPO_MODE", "stub").lower()
+        
+        # Expo access token is optional (used for higher rate limits)
+        return ExpoPushProvider(
+            access_token=access_token if access_token else None,
+            mode=expo_mode,
         )
 
     logger.warning("Unknown platform: %s", platform)

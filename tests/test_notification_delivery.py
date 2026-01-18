@@ -654,3 +654,456 @@ class TestAutoPushEnabled:
 
         # Verify delivery WAS called
         assert len(delivery_calls) == 1
+
+
+class TestExpoPushProvider:
+    """Test the ExpoPushProvider."""
+
+    def test_send_notification_stub_mode(self):
+        """Test sending a notification via ExpoPushProvider in stub mode."""
+        from handsfree.notifications import ExpoPushProvider
+
+        provider = ExpoPushProvider(mode="stub")
+
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "id": "notif-123",
+                "event_type": "test_event",
+                "message": "Test notification",
+            },
+        )
+
+        assert result["ok"] is True
+        assert "message" in result
+        assert "delivery_id" in result
+        assert result["message"] == "Expo notification logged (stub mode)"
+        assert result["delivery_id"].startswith("expo-stub-")
+
+    def test_send_notification_real_mode_success(self, monkeypatch):
+        """Test successful Expo notification send in real mode."""
+        from handsfree.notifications import ExpoPushProvider
+
+        # Mock httpx response
+        class MockResponse:
+            status_code = 200
+
+            def json(self):
+                return {
+                    "data": {
+                        "status": "ok",
+                        "id": "test-ticket-id-123",
+                    }
+                }
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                # Verify parameters
+                assert url == "https://exp.host/--/api/v2/push/send"
+                assert json["to"] == "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+                assert json["title"] == "Test Event"
+                assert json["body"] == "Test notification"
+                assert "Authorization" not in headers  # No access token
+                return MockResponse()
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider in real mode
+        provider = ExpoPushProvider(mode="real")
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "id": "notif-123",
+                "event_type": "test_event",
+                "title": "Test Event",
+                "message": "Test notification",
+            },
+        )
+
+        assert result["ok"] is True
+        assert "Expo notification sent" in result["message"]
+        assert result["delivery_id"] == "test-ticket-id-123"
+
+    def test_send_notification_with_access_token(self, monkeypatch):
+        """Test Expo notification send with access token."""
+        from handsfree.notifications import ExpoPushProvider
+
+        # Mock httpx response
+        class MockResponse:
+            status_code = 200
+
+            def json(self):
+                return {
+                    "data": {
+                        "status": "ok",
+                        "id": "test-ticket-id-456",
+                    }
+                }
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                # Verify access token is included
+                assert headers["Authorization"] == "Bearer test-access-token"
+                return MockResponse()
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider with access token
+        provider = ExpoPushProvider(access_token="test-access-token", mode="real")
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "id": "notif-123",
+                "event_type": "test_event",
+                "message": "Test notification",
+            },
+        )
+
+        assert result["ok"] is True
+        assert result["delivery_id"] == "test-ticket-id-456"
+
+    def test_send_notification_expo_error_in_ticket(self, monkeypatch):
+        """Test Expo notification send with error in push ticket."""
+        from handsfree.notifications import ExpoPushProvider
+
+        # Mock httpx response with error in ticket
+        class MockResponse:
+            status_code = 200
+
+            def json(self):
+                return {
+                    "data": {
+                        "status": "error",
+                        "message": "DeviceNotRegistered",
+                        "details": {"error": "DeviceNotRegistered"},
+                    }
+                }
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                return MockResponse()
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider
+        provider = ExpoPushProvider(mode="real")
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "message": "Test",
+            },
+        )
+
+        assert result["ok"] is False
+        assert "DeviceNotRegistered" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_send_notification_http_error(self, monkeypatch):
+        """Test Expo notification send with HTTP error."""
+        from handsfree.notifications import ExpoPushProvider
+
+        # Mock httpx response with HTTP error
+        class MockResponse:
+            status_code = 500
+            text = "Internal server error"
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                return MockResponse()
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider
+        provider = ExpoPushProvider(mode="real")
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "message": "Test",
+            },
+        )
+
+        assert result["ok"] is False
+        assert "500" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_send_notification_unexpected_exception(self, monkeypatch):
+        """Test Expo notification send handles unexpected exceptions."""
+        from handsfree.notifications import ExpoPushProvider
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                raise ValueError("Unexpected error")
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider
+        provider = ExpoPushProvider(mode="real")
+
+        # Send notification
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "message": "Test",
+            },
+        )
+
+        assert result["ok"] is False
+        assert "Unexpected error" in result["message"]
+        assert result["delivery_id"] is None
+
+    def test_default_notification_fields(self, monkeypatch):
+        """Test that notification fields have sensible defaults."""
+        from handsfree.notifications import ExpoPushProvider
+
+        # Mock httpx response
+        class MockResponse:
+            status_code = 200
+
+            def json(self):
+                return {
+                    "data": {
+                        "status": "ok",
+                        "id": "test-id",
+                    }
+                }
+
+        class MockClient:
+            def __init__(self, timeout):
+                pass
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def post(self, url, json, headers):
+                # Verify default fields
+                assert json["title"] == "webhook.test_event"  # Falls back to event_type
+                assert json["body"] == ""  # Empty message
+                assert json["sound"] == "default"
+                assert json["priority"] == "high"
+                return MockResponse()
+
+        # Patch httpx.Client
+        import httpx
+
+        monkeypatch.setattr(httpx, "Client", MockClient)
+
+        # Create provider
+        provider = ExpoPushProvider(mode="real")
+
+        # Send notification with minimal data
+        result = provider.send(
+            subscription_endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            notification_data={
+                "event_type": "webhook.test_event",
+            },
+        )
+
+        assert result["ok"] is True
+
+
+class TestGetProviderForPlatformExpo:
+    """Test get_provider_for_platform with Expo platform."""
+
+    def test_returns_expo_provider_for_expo_platform(self, monkeypatch):
+        """Test that ExpoPushProvider is returned for 'expo' platform."""
+        from handsfree.notifications import ExpoPushProvider, get_provider_for_platform
+
+        # Clear logger override
+        monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
+        
+        # Don't set access token (it's optional)
+        monkeypatch.delenv("HANDSFREE_EXPO_ACCESS_TOKEN", raising=False)
+
+        provider = get_provider_for_platform("expo")
+        assert isinstance(provider, ExpoPushProvider)
+        assert provider.mode == "stub"  # Default mode
+
+    def test_returns_expo_provider_with_access_token(self, monkeypatch):
+        """Test that ExpoPushProvider is configured with access token."""
+        from handsfree.notifications import ExpoPushProvider, get_provider_for_platform
+
+        # Clear logger override
+        monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
+        
+        # Set access token
+        monkeypatch.setenv("HANDSFREE_EXPO_ACCESS_TOKEN", "test-token-123")
+
+        provider = get_provider_for_platform("expo")
+        assert isinstance(provider, ExpoPushProvider)
+        assert provider.access_token == "test-token-123"
+
+    def test_returns_expo_provider_in_real_mode(self, monkeypatch):
+        """Test that ExpoPushProvider can be configured in real mode."""
+        from handsfree.notifications import ExpoPushProvider, get_provider_for_platform
+
+        # Clear logger override
+        monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
+        
+        # Set real mode
+        monkeypatch.setenv("HANDSFREE_EXPO_MODE", "real")
+
+        provider = get_provider_for_platform("expo")
+        assert isinstance(provider, ExpoPushProvider)
+        assert provider.mode == "real"
+
+    def test_logger_override_applies_to_expo(self, monkeypatch):
+        """Test that dev logger override applies to Expo platform."""
+        from handsfree.notifications import DevLoggerProvider, get_provider_for_platform
+
+        # Set logger override
+        monkeypatch.setenv("HANDSFREE_NOTIFICATION_PROVIDER", "logger")
+
+        provider = get_provider_for_platform("expo")
+        assert isinstance(provider, DevLoggerProvider)
+
+
+class TestExpoIntegration:
+    """Test Expo push integration end-to-end."""
+
+    def test_expo_subscription_delivers_notification(self, db_conn, test_user_id, monkeypatch):
+        """Test that notifications are delivered to Expo subscriptions."""
+        from handsfree.db.notification_subscriptions import create_subscription
+        from handsfree.db.notifications import create_notification
+        from handsfree.notifications import ExpoPushProvider
+
+        # Enable Expo provider in stub mode
+        monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
+        monkeypatch.setenv("HANDSFREE_EXPO_MODE", "stub")
+
+        # Create an Expo subscription
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            platform="expo",
+        )
+
+        # Track delivery calls
+        delivery_calls = []
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(
+                {
+                    "endpoint": subscription_endpoint,
+                    "data": notification_data,
+                }
+            )
+            return {
+                "ok": True,
+                "message": "Test delivery",
+                "delivery_id": "test-id",
+            }
+
+        monkeypatch.setattr(ExpoPushProvider, "send", mock_send)
+
+        # Create a notification
+        create_notification(
+            conn=db_conn,
+            user_id=test_user_id,
+            event_type="webhook.pr_opened",
+            message="PR #123 opened",
+        )
+
+        # Verify delivery was called with correct endpoint
+        assert len(delivery_calls) == 1
+        assert delivery_calls[0]["endpoint"] == "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+        assert "webhook.pr_opened" in delivery_calls[0]["data"]["event_type"]
+
+    def test_multiple_platform_subscriptions(self, db_conn, test_user_id, monkeypatch):
+        """Test that user can have both Expo and other platform subscriptions."""
+        from handsfree.db.notification_subscriptions import create_subscription, list_subscriptions
+
+        # Create subscriptions for different platforms
+        expo_sub = create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+            platform="expo",
+        )
+
+        webpush_sub = create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="https://fcm.googleapis.com/fcm/send/...",
+            platform="webpush",
+            subscription_keys={"auth": "test", "p256dh": "test"},
+        )
+
+        # List subscriptions
+        subscriptions = list_subscriptions(conn=db_conn, user_id=test_user_id)
+
+        assert len(subscriptions) == 2
+        platforms = {sub.platform for sub in subscriptions}
+        assert "expo" in platforms
+        assert "webpush" in platforms
