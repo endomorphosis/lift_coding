@@ -1432,8 +1432,8 @@ components:
           description: Subscription endpoint URL or device token
         platform:
           type: string
-          description: "Platform type: webpush, apns, or fcm"
-          enum: [webpush, apns, fcm]
+          description: "Platform type: webpush, apns, fcm, or expo"
+          enum: [webpush, apns, fcm, expo]
           default: webpush
         subscription_keys:
           type: object
@@ -1454,7 +1454,7 @@ components:
           type: string
         platform:
           type: string
-          enum: [webpush, apns, fcm]
+          enum: [webpush, apns, fcm, expo]
         subscription_keys:
           type: object
           additionalProperties:

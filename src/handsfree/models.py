@@ -339,8 +339,8 @@ class CreateNotificationSubscriptionRequest(BaseModel):
     )
     platform: str = Field(
         default="webpush",
-        description="Platform type: 'webpush', 'apns', or 'fcm'",
-        pattern="^(webpush|apns|fcm)$",
+        description="Platform type: 'webpush', 'apns', 'fcm', or 'expo'",
+        pattern="^(webpush|apns|fcm|expo)$",
     )
     subscription_keys: dict[str, str] | None = Field(
         default=None,
