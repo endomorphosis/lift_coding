@@ -69,22 +69,70 @@ class TestProviderSelection:
         assert intent.entities.get("provider") is None  # Not in entities
         assert intent.entities.get("issue_number") == 456
 
-        # Create task with default provider
+        # Create task with None provider (should use default)
         service = AgentService(db_conn)
         result = service.delegate(
             user_id="test-user",
             instruction=intent.entities.get("instruction", "fix"),
-            provider=intent.entities.get("provider", "copilot"),  # Default to copilot
+            provider=intent.entities.get("provider"),  # None - use default
             target_type="issue",
             target_ref="#456",
         )
 
-        # Verify task was created with copilot provider
+        # Verify task was created with copilot provider (default)
         task_id = result["task_id"]
         task = get_agent_task_by_id(db_conn, task_id)
 
         assert task is not None
         assert task.provider == "copilot"
+
+    def test_env_var_overrides_default_provider(self, db_conn, monkeypatch):
+        """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER env var overrides default."""
+        import os
+        from handsfree.agents.service import AgentService
+
+        # Set environment variable to use mock provider
+        monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
+
+        # Create task without specifying provider
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="test task",
+            provider=None,  # Use env var default
+        )
+
+        # Verify task was created with mock provider from env var
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "mock"
+        assert task.state == "running"
+
+    def test_explicit_provider_overrides_env_var(self, db_conn, monkeypatch):
+        """Test that explicit provider argument overrides env var."""
+        import os
+        from handsfree.agents.service import AgentService
+
+        # Set environment variable to use mock provider
+        monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
+
+        # Create task with explicit copilot provider (should override env var)
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="test task",
+            provider="copilot",  # Explicit provider overrides env var
+        )
+
+        # Verify task was created with copilot provider (explicit arg)
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "copilot"
+        assert task.state == "running"
 
 
 class TestTraceScaffolding:

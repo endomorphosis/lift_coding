@@ -35,7 +35,7 @@ class AgentService:
         self,
         user_id: str,
         instruction: str | None,
-        provider: str = "copilot",
+        provider: str | None = None,
         target_type: str | None = None,
         target_ref: str | None = None,
         trace: dict[str, Any] | None = None,
@@ -45,7 +45,8 @@ class AgentService:
         Args:
             user_id: User ID creating the task.
             instruction: Instruction for the agent.
-            provider: Provider name (default: "copilot").
+            provider: Provider name. If None, uses HANDSFREE_AGENT_DEFAULT_PROVIDER
+                     environment variable, defaulting to "copilot".
             target_type: Type of target ("issue", "pr", or None).
             target_ref: Reference to target (e.g., "owner/repo#123").
             trace: Optional trace information (JSON-serializable).
@@ -53,6 +54,10 @@ class AgentService:
         Returns:
             Dictionary with task information and spoken confirmation.
         """
+        # Determine provider: explicit argument > env var > default
+        if provider is None:
+            import os
+            provider = os.getenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "copilot")
         # Merge provided trace with default metadata
         task_trace = trace or {}
         if "created_via" not in task_trace:
