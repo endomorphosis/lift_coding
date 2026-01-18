@@ -842,10 +842,10 @@ def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | N
     """Get the appropriate notification provider for a specific platform.
 
     This function selects the correct provider based on the subscription platform,
-    allowing multi-platform push notification support (WebPush, APNS, FCM).
+    allowing multi-platform push notification support (WebPush, APNS, FCM, Expo).
 
     Args:
-        platform: Platform type ('webpush', 'apns', or 'fcm').
+        platform: Platform type ('webpush', 'apns', 'fcm', or 'expo').
 
     Returns:
         NotificationDeliveryProvider instance or None if platform not supported/configured.
