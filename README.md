@@ -17,6 +17,17 @@ Handsfree can delegate tasks to external agent runners that monitor a dispatch r
 - **Correlation**: PRs created by agents automatically correlate back to tasks via webhook tracking
 - **Notifications**: Task lifecycle events emit notifications (created, running, completed)
 
+### Provider Selection
+
+When delegating tasks without specifying a provider, the system automatically selects the best available provider:
+
+1. **Explicit provider** - Always honored if specified in the API call
+2. **`HANDSFREE_AGENT_DEFAULT_PROVIDER`** - Environment variable override
+3. **`github_issue_dispatch`** - Automatically selected when `HANDSFREE_AGENT_DISPATCH_REPO` + `GITHUB_TOKEN` are configured
+4. **`copilot`** - Fallback when no other provider is configured
+
+This means you can configure `github_issue_dispatch` once via environment variables, and all agent delegation will automatically use real GitHub issue dispatch without needing to specify the provider in every API call.
+
 See the [Agent Runner Setup Guide](docs/agent-runner-setup.md) for configuration instructions.
 
 ## Quickstart
