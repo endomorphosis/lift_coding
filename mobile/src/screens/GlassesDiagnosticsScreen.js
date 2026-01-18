@@ -192,7 +192,30 @@ export default function GlassesDiagnosticsScreen() {
         return;
       }
 
-      // Set audio mode
+      // Try to use native module if available
+      if (nativeModuleAvailable && !devMode) {
+        try {
+          // Start monitoring with native module
+          const route = await GlassesAudio.getCurrentRoute();
+          
+          // Subscribe to route changes
+          if (routeChangeSubscription) {
+            routeChangeSubscription.remove();
+          }
+          const subscription = GlassesAudio.addAudioRouteChangeListener((event) => {
+            updateRouteFromNative(event.route);
+          });
+          setRouteChangeSubscription(subscription);
+          
+          // Update UI with native route info
+          updateRouteFromNative(route);
+          return;
+        } catch (error) {
+          console.warn('Native audio route monitoring failed, falling back to Expo Audio:', error);
+        }
+      }
+
+      // Fallback to Expo Audio setup
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true,
@@ -227,6 +250,21 @@ export default function GlassesDiagnosticsScreen() {
       setAudioRoute('Unknown');
       console.error('Audio route check failed:', error);
     }
+  };
+
+  const updateRouteFromNative = (route) => {
+    const inputStr = route.inputs.join(', ');
+    const outputStr = route.outputs.join(', ');
+    const isBluetooth = inputStr.toLowerCase().includes('bluetooth') || outputStr.toLowerCase().includes('bluetooth');
+    
+    setAudioRoute(`Input: ${inputStr}\nOutput: ${outputStr}\nSampleRate: ${route.sampleRate} Hz`);
+    
+    if (isBluetooth) {
+      setConnectionState('✓ Bluetooth Connected (Glasses)');
+    } else {
+      setConnectionState('✓ Phone Audio Active');
+    }
+    setLastError(null);
   };
 
   const startRecording = async () => {
