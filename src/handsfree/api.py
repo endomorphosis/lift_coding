@@ -2981,9 +2981,9 @@ def _handle_agent_delegate(
     instruction = parsed_intent.entities.get("instruction", text)
     issue_number = parsed_intent.entities.get("issue_number")
     pr_number = parsed_intent.entities.get("pr_number")
-    # Use provider from intent entities, or default to "copilot" if not specified
+    # Use provider from intent entities, or None to let AgentService use env default
     # Note: Tests may override this by explicitly specifying provider in intent
-    provider = parsed_intent.entities.get("provider", "copilot")
+    provider = parsed_intent.entities.get("provider")
 
     # Build target reference
     target_type = None
@@ -3025,6 +3025,7 @@ def _handle_agent_delegate(
         )
 
         task_id = result["task_id"]
+        actual_provider = result["provider"]  # Get actual provider used (may differ from input)
 
         # Build entity response
         target_description = ""
@@ -3052,7 +3053,7 @@ def _handle_agent_delegate(
                     title="Agent Task Created",
                     subtitle=f"Task {task_id[:8]}",
                     lines=[
-                        f"Provider: {provider}",
+                        f"Provider: {actual_provider}",
                         f"Instruction: {instruction}",
                         f"State: {result['state']}",
                     ],
