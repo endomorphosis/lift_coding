@@ -270,6 +270,63 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/dev/audio:
+    post:
+      summary: Upload audio bytes for dev/testing (dev-only)
+      operationId: uploadDevAudio
+      description: >
+        Accepts base64-encoded audio and saves it locally, returning a file:// URI.
+        Only available when HANDSFREE_AUTH_MODE=dev.
+        Use the returned URI with POST /v1/command for testing audio commands.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [data_base64]
+              properties:
+                data_base64:
+                  type: string
+                  description: Base64-encoded audio bytes
+                format:
+                  type: string
+                  enum: [wav, m4a, mp3, opus]
+                  default: m4a
+                  description: Audio format/extension
+      responses:
+        '200':
+          description: Audio uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [uri, bytes, format, user_id]
+                properties:
+                  uri:
+                    type: string
+                    format: uri
+                    description: file:// URI for the uploaded audio
+                  bytes:
+                    type: integer
+                    description: Size of audio in bytes
+                  format:
+                    type: string
+                    description: Audio format
+                  user_id:
+                    type: string
+                    description: User ID that uploaded the audio
+        '400':
+          description: Invalid request (missing/invalid data_base64, bad format, or too large)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/repos/subscriptions:
     post:
       summary: Create a repository subscription for webhook notifications
@@ -587,6 +644,264 @@ paths:
               schema: { $ref: '#/components/schemas/Error' }
         '404':
           description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/github/oauth/start:
+    get:
+      summary: Start GitHub OAuth flow
+      operationId: startGitHubOAuth
+      description: >
+        Initiates GitHub OAuth flow by returning an authorization URL.
+        The user should be redirected to this URL to authorize the app.
+      responses:
+        '200':
+          description: OAuth flow started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubOAuthStartResponse'
+        '500':
+          description: OAuth configuration error
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/github/oauth/callback:
+    get:
+      summary: Handle GitHub OAuth callback
+      operationId: handleGitHubOAuthCallback
+      description: >
+        Handles the OAuth callback from GitHub after user authorization.
+        Exchanges the authorization code for an access token and creates a connection.
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Authorization code from GitHub
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+          description: State parameter for CSRF protection
+      responses:
+        '200':
+          description: OAuth completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubOAuthCallbackResponse'
+        '400':
+          description: Invalid callback (missing code, state mismatch, etc.)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '500':
+          description: Token exchange or connection creation failed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/github/connections:
+    post:
+      summary: Create a GitHub connection
+      operationId: createGitHubConnection
+      description: >
+        Creates a new GitHub connection for the authenticated user.
+        Accepts either a token or token_ref for secure token storage.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGitHubConnectionRequest'
+      responses:
+        '201':
+          description: Connection created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionResponse'
+        '400':
+          description: Invalid request (missing both token and token_ref, or both provided)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    get:
+      summary: List GitHub connections for user
+      operationId: listGitHubConnections
+      description: >
+        Returns all GitHub connections for the authenticated user.
+      responses:
+        '200':
+          description: List of connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionsListResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/github/connections/{connection_id}:
+    get:
+      summary: Get a specific GitHub connection
+      operationId: getGitHubConnection
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Connection ID
+      responses:
+        '200':
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GitHubConnectionResponse'
+        '404':
+          description: Connection not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    delete:
+      summary: Delete a GitHub connection
+      operationId: deleteGitHubConnection
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Connection ID
+      responses:
+        '204':
+          description: Connection deleted successfully
+        '404':
+          description: Connection not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/admin/api-keys:
+    post:
+      summary: Create an API key (admin)
+      operationId: createApiKey
+      description: >
+        Creates a new API key for the authenticated user.
+        Only available to admin users.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+      responses:
+        '201':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApiKeyResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not admin)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    get:
+      summary: List API keys (admin)
+      operationId: listApiKeys
+      description: >
+        Lists all API keys for the authenticated user.
+        Only available to admin users.
+      parameters:
+        - name: include_revoked
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: Include revoked keys in the response
+      responses:
+        '200':
+          description: List of API keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeysListResponse'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not admin)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/admin/api-keys/{key_id}:
+    delete:
+      summary: Revoke an API key (admin)
+      operationId: revokeApiKey
+      description: >
+        Revokes an API key by marking it as revoked.
+        Only available to admin users.
+      parameters:
+        - name: key_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: API key ID
+      responses:
+        '204':
+          description: API key revoked successfully
+        '404':
+          description: API key not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not admin)
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
@@ -1130,4 +1445,131 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NotificationSubscriptionResponse'
+
+    GitHubOAuthStartResponse:
+      type: object
+      required: [authorize_url]
+      properties:
+        authorize_url:
+          type: string
+          format: uri
+          description: GitHub OAuth authorization URL to redirect user to
+        state:
+          type: string
+          description: Optional state parameter for CSRF protection
+
+    GitHubOAuthCallbackResponse:
+      type: object
+      required: [connection_id]
+      properties:
+        connection_id:
+          type: string
+          description: ID of the created/updated GitHub connection
+        scopes:
+          type: string
+          description: OAuth scopes granted by the user
+
+    CreateGitHubConnectionRequest:
+      type: object
+      properties:
+        installation_id:
+          type: integer
+          description: GitHub App installation ID (optional)
+        token:
+          type: string
+          description: GitHub access token (will be stored securely in secret manager)
+        token_ref:
+          type: string
+          description: Reference to token in secret manager (NOT the actual token). Use this OR 'token', not both.
+        scopes:
+          type: string
+          description: Comma-separated OAuth scopes
+
+    GitHubConnectionResponse:
+      type: object
+      required: [id, user_id, created_at, updated_at]
+      properties:
+        id:
+          type: string
+          description: Connection ID
+        user_id:
+          type: string
+          description: User ID that owns this connection
+        installation_id:
+          type: integer
+          description: GitHub App installation ID
+        token_ref:
+          type: string
+          description: Reference to the stored token in secret manager
+        scopes:
+          type: string
+          description: OAuth scopes
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    GitHubConnectionsListResponse:
+      type: object
+      required: [connections]
+      properties:
+        connections:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitHubConnectionResponse'
+
+    CreateApiKeyRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          maxLength: 100
+          description: Optional user-friendly label for the key (e.g., 'Mobile app', 'CI/CD')
+
+    ApiKeyResponse:
+      type: object
+      required: [id, user_id, created_at]
+      properties:
+        id:
+          type: string
+          description: API key ID
+        user_id:
+          type: string
+          description: User ID that owns this key
+        label:
+          type: string
+          description: User-friendly label for the key
+        created_at:
+          type: string
+          format: date-time
+        revoked_at:
+          type: string
+          format: date-time
+          description: Timestamp when the key was revoked (if applicable)
+        last_used_at:
+          type: string
+          format: date-time
+          description: Timestamp when the key was last used (if applicable)
+
+    CreateApiKeyResponse:
+      type: object
+      required: [key, api_key]
+      properties:
+        key:
+          type: string
+          description: The plaintext API key. Save this - it will not be shown again.
+        api_key:
+          $ref: '#/components/schemas/ApiKeyResponse'
+
+    ApiKeysListResponse:
+      type: object
+      required: [api_keys]
+      properties:
+        api_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiKeyResponse'
+
 
