@@ -1,96 +1,123 @@
-import ExpoModulesCore
+import Foundation
+import React
 import AVFoundation
 
-public class GlassesAudioModule: Module {
-  private let audioRouteMonitor = AudioRouteMonitor()
-  private var recorder: GlassesRecorder?
-  private var player: GlassesPlayer?
-  
-  // Define the module name
-  public func definition() -> ModuleDefinition {
-    Name("GlassesAudio")
+@objc(GlassesAudioModule)
+class GlassesAudioModule: RCTEventEmitter {
     
-    // Define events this module can emit
-    Events("onAudioRouteChange")
+    private var routeMonitor: AudioRouteMonitor?
+    private var recorder: GlassesRecorderBridge?
+    private var player: GlassesPlayerBridge?
+    private var recordingTimer: Timer?
+    private var isRecording = false
     
-    // Start monitoring audio route changes
-    AsyncFunction("startMonitoring") { (promise: Promise) in
-      self.audioRouteMonitor.start { [weak self] routeSummary in
-        // Parse the route summary and emit event
-        let route = self?.parseRouteSummary(routeSummary) ?? [:]
-        self?.sendEvent("onAudioRouteChange", [
-          "route": route
-        ])
-      }
-      
-      // Return current route immediately
-      let currentRoute = self.parseRouteSummary(self.audioRouteMonitor.currentRouteSummary())
-      promise.resolve(currentRoute)
+    override init() {
+        super.init()
+        self.routeMonitor = AudioRouteMonitor()
+        self.recorder = GlassesRecorderBridge()
+        self.player = GlassesPlayerBridge()
     }
     
-    // Stop monitoring
-    AsyncFunction("stopMonitoring") {
-      self.audioRouteMonitor.stop()
+    override func supportedEvents() -> [String]! {
+        return ["onRouteChange", "onRecordingComplete", "onPlaybackComplete"]
     }
     
-    // Get current route without starting monitoring
-    AsyncFunction("getCurrentRoute") { () -> [String: Any] in
-      return self.parseRouteSummary(self.audioRouteMonitor.currentRouteSummary())
+    @objc
+    func startMonitoring(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.routeMonitor?.start { [weak self] routeSummary in
+                self?.sendEvent(withName: "onRouteChange", body: ["route": routeSummary])
+            }
+            
+            let currentRoute = self.routeMonitor?.currentRouteSummary() ?? "Unknown"
+            resolve(currentRoute)
+        }
     }
     
-    // Start recording
-    AsyncFunction("startRecording") { (outputPath: String, promise: Promise) in
-      do {
-        let url = URL(fileURLWithPath: outputPath)
-        self.recorder = GlassesRecorder()
-        try self.recorder?.startRecording(outputURL: url)
-        promise.resolve(nil)
-      } catch {
-        promise.reject("RECORDING_ERROR", "Failed to start recording: \(error.localizedDescription)")
-      }
+    @objc
+    func stopMonitoring(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        DispatchQueue.main.async { [weak self] in
+            self?.routeMonitor?.stop()
+            resolve(nil)
+        }
     }
     
-    // Stop recording
-    AsyncFunction("stopRecording") {
-      self.recorder?.stopRecording()
-      self.recorder = nil
+    @objc
+    func getCurrentRoute(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        DispatchQueue.main.async { [weak self] in
+            let currentRoute = self?.routeMonitor?.currentRouteSummary() ?? "Unknown"
+            resolve(currentRoute)
+        }
     }
     
-    // Play audio
-    AsyncFunction("playAudio") { (filePath: String, promise: Promise) in
-      do {
-        let url = URL(fileURLWithPath: filePath)
-        self.player = GlassesPlayer()
-        try self.player?.play(fileURL: url)
-        promise.resolve(nil)
-      } catch {
-        promise.reject("PLAYBACK_ERROR", "Failed to play audio: \(error.localizedDescription)")
-      }
+    @objc
+    func startRecording(_ durationSeconds: Double, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        guard !isRecording else {
+            reject("RECORDING_IN_PROGRESS", "Recording is already in progress", nil)
+            return
+        }
+        
+        isRecording = true
+        
+        recorder?.startRecording(duration: TimeInterval(durationSeconds)) { [weak self] fileURL, error in
+            guard let self = self else { return }
+            self.isRecording = false
+            
+            if let error = error {
+                self.sendEvent(withName: "onRecordingComplete", body: [
+                    "error": error.localizedDescription
+                ])
+                reject("RECORDING_FAILED", error.localizedDescription, error)
+            } else if let fileURL = fileURL {
+                let fileUri = fileURL.path
+                self.sendEvent(withName: "onRecordingComplete", body: [
+                    "fileUri": fileUri
+                ])
+                resolve(fileUri)
+            } else {
+                let error = NSError(domain: "GlassesAudioModule", code: -1, userInfo: [NSLocalizedDescriptionKey: "Recording failed without error"])
+                self.sendEvent(withName: "onRecordingComplete", body: [
+                    "error": "Recording failed"
+                ])
+                reject("RECORDING_FAILED", "Recording failed without error", error)
+            }
+        }
     }
     
-    // Stop playback
-    AsyncFunction("stopPlayback") {
-      self.player?.stop()
-      self.player = nil
-    }
-  }
-  
-  // Helper to parse route summary into structured data
-  private func parseRouteSummary(_ summary: String) -> [String: Any] {
-    let session = AVAudioSession.sharedInstance()
-    
-    let inputs = session.currentRoute.inputs.map { port in
-      "\(port.portName) (\(port.portType.rawValue))"
+    @objc
+    func stopRecording(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        guard isRecording else {
+            reject("NO_RECORDING", "No recording in progress", nil)
+            return
+        }
+        
+        recorder?.stopRecording()
+        isRecording = false
+        resolve(nil)
     }
     
-    let outputs = session.currentRoute.outputs.map { port in
-      "\(port.portName) (\(port.portType.rawValue))"
+    @objc
+    func playAudio(_ fileUri: String, resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        let fileURL = URL(fileURLWithPath: fileUri)
+        
+        player?.playAudio(from: fileURL) { [weak self] error in
+            if let error = error {
+                self?.sendEvent(withName: "onPlaybackComplete", body: [
+                    "error": error.localizedDescription
+                ])
+                reject("PLAYBACK_FAILED", error.localizedDescription, error)
+            } else {
+                self?.sendEvent(withName: "onPlaybackComplete", body: [:])
+                resolve(nil)
+            }
+        }
     }
     
-    return [
-      "inputs": inputs.isEmpty ? ["None"] : inputs,
-      "outputs": outputs.isEmpty ? ["None"] : outputs,
-      "sampleRate": session.sampleRate
-    ]
-  }
+    @objc
+    func stopPlayback(_ resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) {
+        player?.stop()
+        resolve(nil)
+    }
 }

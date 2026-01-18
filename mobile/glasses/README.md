@@ -1,33 +1,96 @@
 # Meta AI Glasses Audio Diagnostics
 
-This directory contains a minimal audio diagnostics scaffold for testing and validating Bluetooth audio routing with Meta AI Glasses (Ray-Ban Meta Smart Glasses).
+This directory contains audio diagnostics for testing and validating Bluetooth audio routing with Meta AI Glasses (Ray-Ban Meta Smart Glasses).
+
+## Status (PR-049)
+
+✅ **Implemented:**
+- iOS `GlassesPlayer.swift` with AVAudioEngine and Bluetooth routing
+- React Native bridge using Expo Modules API
+- JavaScript hooks for easy integration (`useGlassesPlayer.js`)
+- UI integration in `GlassesDiagnosticsScreen.js`
+- Bluetooth permissions in `app.json`
+- Comprehensive build & test documentation
+
+⏳ **Pending:**
+- Physical device testing with Meta AI Glasses
+- Playback progress tracking
+- Audio interruption handling
+- Android implementation
+
+📖 **Documentation:**
+- [Build & Test Guide](../BUILD_AND_TEST_GLASSES_PLAYER.md)
+- [Module README](../modules/glasses-audio-player/README.md)
+- [Implementation TODO](TODO.md)
 
 ## Purpose
 
-Provide a simple diagnostic interface within the mobile companion app to:
+Provide a diagnostic interface within the mobile companion app to:
 1. **Display current audio route** (Bluetooth headset, phone speaker, etc.)
-2. **Record short audio samples** from the glasses microphone
-3. **Play back recorded samples** through the glasses speakers
-4. **Export audio files** for debugging and quality verification
+2. **Record audio samples** from glasses microphone at 16kHz WAV
+3. **Play back recordings** through glasses speakers
+4. **Monitor Bluetooth connection** in real-time
+5. **Toggle DEV mode** for rapid iteration with phone mic/speaker
+
+## Quick Start
+
+### For iOS Development
+
+1. **Build development client**:
+   ```bash
+   cd mobile
+   npx expo prebuild --clean
+   npx expo run:ios
+   ```
+
+2. **Pair Meta AI Glasses**:
+   - Open iOS Settings > Bluetooth
+   - Pair your Meta AI Glasses
+   - Ensure they're connected
+
+3. **Open Diagnostics Screen**:
+   - Launch app
+   - Navigate to "Glasses Diagnostics" tab
+   - Toggle Glasses mode (disable DEV mode)
+
+4. **Test Recording**:
+   - Verify Bluetooth connection indicator is green
+   - Tap "Start Recording"
+   - Speak into glasses microphone
+   - Recording auto-stops after 10 seconds
+   - Audio saved as 16kHz WAV
+
+5. **Test Playback**:
+   - Tap "Play Last Recording"
+   - Audio plays through glasses speakers
+   - Verify audio quality
 
 ## Architecture
 
-The diagnostics scaffold follows a platform-specific implementation pattern:
-
 ```
 mobile/glasses/
-├── README.md                    # This file
-├── TODO.md                      # Implementation checklist
-├── ios/                         # iOS implementation
-│   ├── GlassesAudioDiagnostics.swift
-│   ├── AudioRouteMonitor.swift
-│   ├── GlassesRecorder.swift
-│   └── GlassesPlayer.swift
-└── android/                     # Android implementation
-    ├── GlassesAudioDiagnostics.kt
+├── README.md                           # This file
+├── TODO.md                             # Implementation checklist
+├── IMPLEMENTATION_STATUS.md            # Detailed status
+├── UI_PREVIEW.md                       # UI mockups
+├── ios/                                # iOS implementation ✅
+│   ├── IMPLEMENTATION.md               # iOS implementation guide
+│   ├── AudioRouteMonitor.swift         # Route monitoring
+│   ├── GlassesRecorder.swift           # 16kHz WAV recording
+│   ├── GlassesPlayer.swift             # Playback control
+│   └── GlassesAudioDiagnostics.swift   # Native diagnostics UI
+└── android/                            # Android implementation ⏳
     ├── AudioRouteMonitor.kt
     ├── GlassesRecorder.kt
-    └── GlassesPlayer.kt
+    ├── GlassesPlayer.kt
+    └── GlassesAudioDiagnostics.kt
+
+mobile/modules/glasses-audio/           # React Native bridge ✅
+├── index.js                            # JS wrapper with fallback
+└── ios/                                # iOS bridge
+    ├── GlassesAudioModule.swift        # Native module implementation
+    ├── GlassesAudioModule.m            # ObjC bridge
+    └── GlassesAudio-Bridging-Header.h  # Bridging header
 ```
 
 ## Features
