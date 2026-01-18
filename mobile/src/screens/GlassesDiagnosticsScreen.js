@@ -58,7 +58,7 @@ export default function GlassesDiagnosticsScreen() {
   // Monitor audio route when mode changes
   useEffect(() => {
     checkAudioRoute();
-  }, [devMode]);
+  }, [devMode, useNativeModule]);
 
   // Set up native module listeners
   useEffect(() => {
@@ -108,6 +108,17 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
+  const checkNativeModuleAvailability = () => {
+    const isAvailable = GlassesAudio.isAvailable();
+    setUseNativeModule(isAvailable);
+    
+    if (isAvailable) {
+      console.log('✓ Native Glasses Audio module is available');
+    } else {
+      console.log('⚠️ Native Glasses Audio module not available, using Expo Audio fallback');
+    }
+  };
+
   const toggleDevMode = async (value) => {
     try {
       setDevMode(value);
@@ -147,6 +158,31 @@ export default function GlassesDiagnosticsScreen() {
 
   const checkAudioRoute = async () => {
     try {
+      // In glasses mode with native module available, use native Bluetooth APIs
+      if (!devMode && useNativeModule) {
+        const isConnected = await GlassesAudio.isBluetoothConnected();
+        const routeSummary = await GlassesAudio.getCurrentRoute();
+        
+        if (isConnected) {
+          setConnectionState('✓ Bluetooth Connected');
+          setAudioRoute(routeSummary);
+          setLastError(null);
+          
+          // Start route monitoring if not already started
+          if (!routeSubscription) {
+            const sub = await GlassesAudio.startRouteMonitoring((event) => {
+              setAudioRoute(event.summary);
+            });
+            setRouteSubscription(sub);
+          }
+        } else {
+          setConnectionState('⚠ No Bluetooth Device');
+          setAudioRoute('Built-in mic/speaker');
+        }
+        return;
+      }
+      
+      // In DEV mode or fallback mode, use Expo Audio
       // Request permissions
       const { status } = await Audio.requestPermissionsAsync();
       if (status !== 'granted') {
@@ -403,6 +439,19 @@ export default function GlassesDiagnosticsScreen() {
     try {
       setLastError(null);
       
+      // Use native module in glasses mode if available
+      if (!devMode && useNativeModule) {
+        await GlassesAudio.playAudio(lastRecordingUri);
+        setIsPlaying(true);
+        
+        Alert.alert(
+          'Playing Recording',
+          'Playback through Bluetooth glasses speakers (native)'
+        );
+        return;
+      }
+      
+      // Fallback to Expo Audio
       // Unload any existing sound
       if (sound) {
         await sound.unloadAsync();
@@ -446,6 +495,14 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopPlayback = async () => {
     try {
+      // Use native module in glasses mode if available
+      if (!devMode && useNativeModule) {
+        await GlassesAudio.stopPlayback();
+        setIsPlaying(false);
+        return;
+      }
+      
+      // Fallback to Expo Audio
       if (sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
