@@ -88,7 +88,6 @@ class TestProviderSelection:
 
     def test_env_var_overrides_default_provider(self, db_conn, monkeypatch):
         """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER env var overrides default."""
-        import os
         from handsfree.agents.service import AgentService
 
         # Set environment variable to use mock provider
@@ -112,7 +111,6 @@ class TestProviderSelection:
 
     def test_explicit_provider_overrides_env_var(self, db_conn, monkeypatch):
         """Test that explicit provider argument overrides env var."""
-        import os
         from handsfree.agents.service import AgentService
 
         # Set environment variable to use mock provider

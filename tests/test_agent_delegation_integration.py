@@ -1,7 +1,6 @@
 """Integration tests for agent delegation with environment variable configuration."""
 
 import json
-import os
 
 import pytest
 import respx
