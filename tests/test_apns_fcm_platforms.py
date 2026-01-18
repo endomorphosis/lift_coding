@@ -223,6 +223,49 @@ class TestPlatformSubscriptions:
         # Should fail validation
         assert response.status_code == 422
 
+    def test_create_expo_subscription_via_api(self):
+        """Test creating an Expo subscription via API."""
+        response = client.post(
+            "/v1/notifications/subscriptions",
+            json={
+                "endpoint": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+                "platform": "expo",
+                "subscription_keys": {},
+            },
+            headers={"X-User-Id": "00000000-0000-0000-0000-000000000007"},
+        )
+
+        assert response.status_code == 201
+        data = response.json()
+        assert data["platform"] == "expo"
+        assert data["endpoint"] == "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]"
+
+    def test_list_subscriptions_includes_expo_platform(self):
+        """Test that listing subscriptions includes Expo platform."""
+        user_id = "00000000-0000-0000-0000-000000000008"
+
+        # Create an Expo subscription
+        client.post(
+            "/v1/notifications/subscriptions",
+            json={
+                "endpoint": "ExponentPushToken[mobile-test-token]",
+                "platform": "expo",
+            },
+            headers={"X-User-Id": user_id},
+        )
+
+        # List subscriptions
+        response = client.get(
+            "/v1/notifications/subscriptions",
+            headers={"X-User-Id": user_id},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data["subscriptions"]) == 1
+        assert data["subscriptions"][0]["platform"] == "expo"
+        assert "ExponentPushToken" in data["subscriptions"][0]["endpoint"]
+
     def test_list_subscriptions_includes_platform(self):
         """Test that listing subscriptions includes platform information."""
         user_id = "00000000-0000-0000-0000-000000000006"
@@ -243,6 +286,11 @@ class TestPlatformSubscriptions:
             json={"endpoint": "https://push.example.com/web", "platform": "webpush"},
             headers={"X-User-Id": user_id},
         )
+        client.post(
+            "/v1/notifications/subscriptions",
+            json={"endpoint": "ExponentPushToken[test123]", "platform": "expo"},
+            headers={"X-User-Id": user_id},
+        )
 
         # List subscriptions
         response = client.get(
@@ -252,12 +300,13 @@ class TestPlatformSubscriptions:
 
         assert response.status_code == 200
         data = response.json()
-        assert len(data["subscriptions"]) == 3
+        assert len(data["subscriptions"]) == 4
 
         platforms = {sub["platform"] for sub in data["subscriptions"]}
         assert "apns" in platforms
         assert "fcm" in platforms
         assert "webpush" in platforms
+        assert "expo" in platforms
 
 
 class TestPlatformProviderSelection:
@@ -302,6 +351,17 @@ class TestPlatformProviderSelection:
 
         assert isinstance(provider, WebPushProvider)
         assert provider.vapid_public_key == "test-public"
+
+    def test_get_provider_for_expo_platform(self):
+        """Test getting Expo provider for expo platform."""
+        from handsfree.notifications.provider import ExpoPushProvider
+
+        provider = get_provider_for_platform("expo")
+
+        # Expo provider should be returned even without credentials (access token is optional)
+        assert isinstance(provider, ExpoPushProvider)
+        # Should default to stub mode
+        assert provider.mode == "stub"
 
     def test_get_provider_returns_none_when_credentials_missing(self, monkeypatch):
         """Test that None is returned when credentials are not configured."""
@@ -374,6 +434,15 @@ class TestPlatformPersistence:
         )
         assert webpush_sub.platform == "webpush"
 
+        # Create Expo subscription
+        expo_sub = create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="ExponentPushToken[test-token]",
+            platform="expo",
+        )
+        assert expo_sub.platform == "expo"
+
     def test_platform_defaults_to_webpush(self, db_conn, test_user_id):
         """Test that platform defaults to webpush when not specified."""
         subscription = create_subscription(
@@ -399,11 +468,17 @@ class TestPlatformPersistence:
             endpoint="https://push.example.com/web-1",
             platform="webpush",
         )
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="ExponentPushToken[list-test]",
+            platform="expo",
+        )
 
         # List all subscriptions
         subscriptions = list_subscriptions(conn=db_conn, user_id=test_user_id)
 
-        assert len(subscriptions) == 3
+        assert len(subscriptions) == 4
 
         # Group by platform
         by_platform = {}
@@ -415,9 +490,11 @@ class TestPlatformPersistence:
         assert "apns" in by_platform
         assert "fcm" in by_platform
         assert "webpush" in by_platform
+        assert "expo" in by_platform
         assert len(by_platform["apns"]) == 1
         assert len(by_platform["fcm"]) == 1
         assert len(by_platform["webpush"]) == 1
+        assert len(by_platform["expo"]) == 1
 
 
 class TestMigrationCompatibility:
