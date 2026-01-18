@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { uploadDevAudio, sendAudioCommand } from '../api/client';
+import { 
+  playAudioThroughGlasses, 
+  stopGlassesAudio, 
+  isGlassesPlayerAvailable 
+} from '../hooks/useGlassesPlayer';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
@@ -19,11 +24,14 @@ export default function GlassesDiagnosticsScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isPlayingNative, setIsPlayingNative] = useState(false);
+  const [nativePlayerAvailable, setNativePlayerAvailable] = useState(false);
 
   // Load dev mode setting
   useEffect(() => {
     loadDevMode();
     checkAudioRoute();
+    setNativePlayerAvailable(isGlassesPlayerAvailable());
 
     // Cleanup
     return () => {
@@ -262,6 +270,52 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
+  const playThroughNativeGlassesPlayer = async () => {
+    if (!lastRecordingUri) {
+      Alert.alert('No Recording', 'Please record audio first.');
+      return;
+    }
+
+    if (!nativePlayerAvailable) {
+      Alert.alert(
+        'Native Player Unavailable',
+        'The native glasses audio player is only available in iOS development builds. You are currently running in Expo Go or on Android.\n\nTo use this feature, create an iOS development build with:\n\nexpo prebuild\nexpo run:ios --device'
+      );
+      return;
+    }
+
+    try {
+      setLastError(null);
+      setIsPlayingNative(true);
+      
+      await playAudioThroughGlasses(lastRecordingUri);
+      
+      Alert.alert(
+        'Playing Through Glasses',
+        'Audio is now playing through your Meta AI Glasses speakers via Bluetooth.'
+      );
+    } catch (error) {
+      setLastError(`Native playback failed: ${error.message}`);
+      console.error('Failed to play through native player:', error);
+      setIsPlayingNative(false);
+      
+      Alert.alert(
+        'Playback Error',
+        `Failed to play through glasses: ${error.message}\n\nMake sure:\n• Your Meta AI Glasses are paired via Bluetooth\n• Bluetooth is enabled\n• You're running on a physical iOS device`
+      );
+    }
+  };
+
+  const stopNativePlayback = async () => {
+    try {
+      await stopGlassesAudio();
+      setIsPlayingNative(false);
+    } catch (error) {
+      setLastError(`Stop native playback failed: ${error.message}`);
+      console.error('Failed to stop native playback:', error);
+    }
+  };
+
   const testAudioPipeline = () => {
     Alert.alert(
       'Audio Pipeline Flow',
@@ -387,6 +441,51 @@ export default function GlassesDiagnosticsScreen() {
         )}
       </View>
 
+      {/* Native Glasses Player */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>👓 Native Glasses Player (iOS)</Text>
+        <Text style={styles.text}>
+          Play audio through Meta AI Glasses using native AVAudioEngine with Bluetooth routing.
+        </Text>
+        {nativePlayerAvailable ? (
+          <>
+            <Text style={styles.successText}>✓ Native player available</Text>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                !lastRecordingUri && styles.buttonDisabled,
+                isPlayingNative && styles.buttonRecording,
+              ]}
+              onPress={isPlayingNative ? stopNativePlayback : playThroughNativeGlassesPlayer}
+              disabled={!lastRecordingUri}
+            >
+              <Text style={styles.buttonText}>
+                {isPlayingNative ? '⏹ Stop Native Playback' : '🔊 Play Through Glasses'}
+              </Text>
+            </TouchableOpacity>
+            {!lastRecordingUri && (
+              <Text style={styles.hintText}>Record audio first to enable playback</Text>
+            )}
+            <Text style={styles.hintText}>
+              Ensure Meta AI Glasses are paired via Bluetooth
+            </Text>
+          </>
+        ) : (
+          <>
+            <Text style={styles.errorText}>
+              ⚠️ Native player only available in iOS development builds
+            </Text>
+            <Text style={styles.hintText}>
+              Current platform: {Platform.OS}
+              {Platform.OS === 'ios' ? ' (running in Expo Go)' : ''}
+            </Text>
+            <Text style={styles.hintText}>
+              Create a dev build with: expo prebuild && expo run:ios --device
+            </Text>
+          </>
+        )}
+      </View>
+
       {/* Backend Pipeline Test */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Backend Command Pipeline</Text>
@@ -448,7 +547,13 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
-        <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
+        <Text style={styles.text}>✓ Native iOS glasses player - Implemented</Text>
+        <Text style={styles.text}>✓ Bluetooth audio routing - Configured</Text>
+        <Text style={styles.text}>
+          {nativePlayerAvailable 
+            ? '✓ Native module loaded - Ready to test' 
+            : '⚠ Native module - Requires dev build'}
+        </Text>
       </View>
 
       {/* Docs */}
