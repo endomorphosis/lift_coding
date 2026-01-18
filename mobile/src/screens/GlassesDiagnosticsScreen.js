@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { uploadDevAudio, sendAudioCommand } from '../api/client';
+import * as GlassesAudio from '../../modules/expo-glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
@@ -20,18 +21,36 @@ export default function GlassesDiagnosticsScreen() {
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Load dev mode setting
+  // Load dev mode setting and setup native audio route monitoring
   useEffect(() => {
     loadDevMode();
     checkAudioRoute();
+
+    // Setup native audio route change listener (when not in dev mode)
+    let routeSubscription;
+    if (!devMode) {
+      try {
+        routeSubscription = GlassesAudio.addAudioRouteChangeListener((routeInfo) => {
+          console.log('Audio route changed:', routeInfo);
+          const { inputDevice, outputDevice, isBluetoothConnected } = routeInfo;
+          setAudioRoute(`${inputDevice} → ${outputDevice}`);
+          setConnectionState(isBluetoothConnected ? '✓ Bluetooth Connected' : '⚠ Phone Audio');
+        });
+      } catch (error) {
+        console.log('Native audio monitoring not available:', error);
+      }
+    }
 
     // Cleanup
     return () => {
       if (sound) {
         sound.unloadAsync();
       }
+      if (routeSubscription) {
+        routeSubscription.remove();
+      }
     };
-  }, []);
+  }, [devMode]);
 
   // Monitor audio route when mode changes
   useEffect(() => {
@@ -72,23 +91,31 @@ export default function GlassesDiagnosticsScreen() {
         return;
       }
 
-      // Set audio mode
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: true,
-        playThroughEarpieceAndroid: false,
-      });
-
       if (devMode) {
+        // Dev mode uses standard expo-av
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false,
+        });
+        
         setConnectionState('✓ DEV Mode Active');
         setAudioRoute('Phone mic → Phone speaker');
       } else {
-        // In production mode, we would check for Bluetooth connection
-        // For now, we simulate this
-        setConnectionState('⚠ Glasses mode (native implementation needed)');
-        setAudioRoute('Bluetooth HFP (requires native code)');
+        // Glasses mode uses native Bluetooth routing
+        try {
+          const routeInfo = GlassesAudio.getAudioRoute();
+          const { inputDevice, outputDevice, isBluetoothConnected } = routeInfo;
+          
+          setAudioRoute(`${inputDevice} → ${outputDevice}`);
+          setConnectionState(isBluetoothConnected ? '✓ Bluetooth Connected' : '⚠ No Bluetooth Device');
+        } catch (error) {
+          console.log('Native audio route check failed:', error);
+          setConnectionState('⚠ Native module not available');
+          setAudioRoute('Run in dev client build to use native Bluetooth');
+        }
       }
       setLastError(null);
     } catch (error) {
@@ -102,23 +129,42 @@ export default function GlassesDiagnosticsScreen() {
   const startRecording = async () => {
     try {
       setLastError(null);
-      
-      // Configure recording for current mode
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: true,
-        playThroughEarpieceAndroid: false,
-      });
-
-      const { recording: newRecording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
-      setRecording(newRecording);
       setIsRecording(true);
+      
+      if (devMode) {
+        // Dev mode: Use expo-av for phone recording
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false,
+        });
+
+        const { recording: newRecording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
+        );
+        setRecording(newRecording);
+      } else {
+        // Glasses mode: Use native Bluetooth recording (10 second duration)
+        GlassesAudio.startRecording(10)
+          .then((result) => {
+            setIsRecording(false);
+            setLastRecordingUri(result.uri);
+            Alert.alert(
+              'Recording Complete',
+              `Audio saved to native storage.\n\nRecorded via Bluetooth from glasses.\n\nFile: ${result.uri}\nSize: ${result.size} bytes`,
+              [{ text: 'OK' }]
+            );
+          })
+          .catch((error) => {
+            setIsRecording(false);
+            setLastError(`Native recording failed: ${error.message}`);
+          });
+      }
     } catch (error) {
       setLastError(`Recording failed: ${error.message}`);
+      setIsRecording(false);
       console.error('Failed to start recording:', error);
     }
   };
@@ -126,16 +172,23 @@ export default function GlassesDiagnosticsScreen() {
   const stopRecording = async () => {
     try {
       setIsRecording(false);
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI();
-      setRecording(null);
-      setLastRecordingUri(uri);
       
-      Alert.alert(
-        'Recording Complete',
-        `Audio saved locally.\n\nIn ${devMode ? 'DEV' : 'Glasses'} mode.\n\nReady to play back or send to backend.`,
-        [{ text: 'OK' }]
-      );
+      if (devMode && recording) {
+        // Dev mode: Stop expo-av recording
+        await recording.stopAndUnloadAsync();
+        const uri = recording.getURI();
+        setRecording(null);
+        setLastRecordingUri(uri);
+        
+        Alert.alert(
+          'Recording Complete',
+          `Audio saved locally.\n\nIn DEV mode.\n\nReady to play back or send to backend.`,
+          [{ text: 'OK' }]
+        );
+      } else {
+        // Glasses mode: Native recording stops automatically after duration
+        await GlassesAudio.stopRecording();
+      }
     } catch (error) {
       setLastError(`Stop recording failed: ${error.message}`);
       console.error('Failed to stop recording:', error);
@@ -206,41 +259,56 @@ export default function GlassesDiagnosticsScreen() {
 
     try {
       setLastError(null);
-      
-      // Unload any existing sound
-      if (sound) {
-        await sound.unloadAsync();
-        setSound(null);
-      }
-
-      // Configure audio mode for playback
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: false,
-        playThroughEarpieceAndroid: false,
-      });
-
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: lastRecordingUri },
-        { shouldPlay: true }
-      );
-      
-      setSound(newSound);
       setIsPlaying(true);
-
-      // Set up playback status update
-      newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
-          setIsPlaying(false);
+      
+      if (devMode) {
+        // Dev mode: Use expo-av for playback
+        if (sound) {
+          await sound.unloadAsync();
+          setSound(null);
         }
-      });
 
-      Alert.alert(
-        'Playing Recording',
-        `Playback through ${devMode ? 'phone speaker' : 'glasses (if connected, else phone speaker)'}`
-      );
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: false,
+          playThroughEarpieceAndroid: false,
+        });
+
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: lastRecordingUri },
+          { shouldPlay: true }
+        );
+        
+        setSound(newSound);
+
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+          }
+        });
+
+        Alert.alert(
+          'Playing Recording',
+          `Playback through phone speaker`
+        );
+      } else {
+        // Glasses mode: Use native Bluetooth playback
+        await GlassesAudio.playAudio(lastRecordingUri);
+        
+        // TODO: Replace with native playback status listener
+        // For now, simulate playback completion with estimated duration
+        // In production, use GlassesAudio.addPlaybackStatusListener to get real status
+        setTimeout(() => {
+          setIsPlaying(false);
+        }, 3000);
+        
+        Alert.alert(
+          'Playing Recording',
+          `Playback through Bluetooth glasses speakers`
+        );
+      }
     } catch (error) {
       setLastError(`Playback failed: ${error.message}`);
       console.error('Failed to play recording:', error);
@@ -250,10 +318,12 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopPlayback = async () => {
     try {
-      if (sound) {
+      if (devMode && sound) {
         await sound.stopAsync();
         await sound.unloadAsync();
         setSound(null);
+      } else {
+        await GlassesAudio.stopPlayback();
       }
       setIsPlaying(false);
     } catch (error) {
@@ -445,10 +515,12 @@ export default function GlassesDiagnosticsScreen() {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Implementation Status</Text>
         <Text style={styles.text}>✓ DEV mode (phone mic/speaker) - Working</Text>
+        <Text style={styles.text}>✓ Glasses mode native Bluetooth - Implemented</Text>
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
-        <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
+        <Text style={styles.text}>✓ Native module bridge (iOS/Android) - Complete</Text>
+        <Text style={styles.mono}>⚠️  Requires expo-dev-client build to test native Bluetooth</Text>
       </View>
 
       {/* Docs */}

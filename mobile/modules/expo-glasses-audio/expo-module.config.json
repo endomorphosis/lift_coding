@@ -1,0 +1,16 @@
+{
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "ios": {
+    "modules": [
+      "ExpoGlassesAudioModule"
+    ]
+  },
+  "android": {
+    "modules": [
+      "expo.modules.glassesaudio.ExpoGlassesAudioModule"
+    ]
+  }
+}
