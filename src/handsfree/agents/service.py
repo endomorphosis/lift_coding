@@ -31,6 +31,17 @@ class AgentService:
         """
         self.conn = conn
 
+    def _is_github_dispatch_configured(self) -> bool:
+        """Check if github_issue_dispatch provider is configured.
+
+        Returns:
+            True if HANDSFREE_AGENT_DISPATCH_REPO and GitHub token are available.
+        """
+        import os
+        dispatch_repo = os.getenv("HANDSFREE_AGENT_DISPATCH_REPO")
+        github_token = os.getenv("GITHUB_TOKEN")
+        return bool(dispatch_repo and github_token)
+
     def delegate(
         self,
         user_id: str,
@@ -45,8 +56,10 @@ class AgentService:
         Args:
             user_id: User ID creating the task.
             instruction: Instruction for the agent.
-            provider: Provider name. If None, uses HANDSFREE_AGENT_DEFAULT_PROVIDER
-                     environment variable, defaulting to "copilot".
+            provider: Provider name. If None, uses provider selection precedence:
+                     1. HANDSFREE_AGENT_DEFAULT_PROVIDER environment variable
+                     2. github_issue_dispatch if configured (HANDSFREE_AGENT_DISPATCH_REPO + token)
+                     3. "copilot" as final fallback
             target_type: Type of target ("issue", "pr", or None).
             target_ref: Reference to target (e.g., "owner/repo#123").
             trace: Optional trace information (JSON-serializable).
@@ -54,10 +67,20 @@ class AgentService:
         Returns:
             Dictionary with task information and spoken confirmation.
         """
-        # Determine provider: explicit argument > env var > default
+        # Determine provider with precedence:
+        # 1. Explicit argument
+        # 2. HANDSFREE_AGENT_DEFAULT_PROVIDER env var
+        # 3. github_issue_dispatch if configured
+        # 4. copilot as fallback
         if provider is None:
             import os
-            provider = os.getenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "copilot")
+            provider = os.getenv("HANDSFREE_AGENT_DEFAULT_PROVIDER")
+            if provider is None:
+                # Check if github_issue_dispatch is configured
+                if self._is_github_dispatch_configured():
+                    provider = "github_issue_dispatch"
+                else:
+                    provider = "copilot"
         # Merge provided trace with default metadata
         task_trace = trace or {}
         if "created_via" not in task_trace:

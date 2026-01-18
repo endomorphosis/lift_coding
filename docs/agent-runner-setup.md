@@ -90,6 +90,44 @@ See [Docker Compose Example](#docker-compose-custom-runner) below.
 
 All runners need the following:
 
+### Environment Variables
+
+The HandsFree backend supports several environment variables for configuring agent delegation:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `HANDSFREE_AGENT_DEFAULT_PROVIDER` | Override the default agent provider | _(none)_ |
+| `HANDSFREE_AGENT_DISPATCH_REPO` | GitHub repository for dispatch issues (format: `owner/repo`) | _(none)_ |
+| `GITHUB_TOKEN` | GitHub personal access token or App token | _(none)_ |
+
+**Provider Selection Precedence:**
+
+When calling `agent.delegate` without specifying a provider, the system selects a provider using the following precedence:
+
+1. **Explicit provider argument** - If a provider is specified in the API call, it always takes precedence
+2. **HANDSFREE_AGENT_DEFAULT_PROVIDER** - If set, this environment variable overrides all defaults
+3. **github_issue_dispatch (auto-configured)** - If `HANDSFREE_AGENT_DISPATCH_REPO` and `GITHUB_TOKEN` are both set, `github_issue_dispatch` is automatically selected
+4. **copilot (fallback)** - If none of the above are set, falls back to the `copilot` provider
+
+**Example Configurations:**
+
+```bash
+# Scenario 1: Use github_issue_dispatch automatically (recommended)
+export HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
+export GITHUB_TOKEN=ghp_your_token_here
+# Result: github_issue_dispatch is automatically used
+
+# Scenario 2: Force a specific provider regardless of configuration
+export HANDSFREE_AGENT_DEFAULT_PROVIDER=mock
+export HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
+export GITHUB_TOKEN=ghp_your_token_here
+# Result: mock provider is used (env var takes precedence)
+
+# Scenario 3: Use copilot provider (no dispatch configured)
+# Don't set HANDSFREE_AGENT_DISPATCH_REPO or GITHUB_TOKEN
+# Result: copilot provider is used (fallback)
+```
+
 ### 1. GitHub Authentication
 
 Create a GitHub personal access token or GitHub App with the following permissions:

@@ -132,6 +132,123 @@ class TestProviderSelection:
         assert task.provider == "copilot"
         assert task.state == "running"
 
+    def test_github_dispatch_preferred_when_configured(self, db_conn, monkeypatch):
+        """Test that github_issue_dispatch is preferred when configured and no env var set."""
+        from handsfree.agents.service import AgentService
+        from unittest.mock import patch, MagicMock
+
+        # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
+        monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
+
+        # Configure github_issue_dispatch
+        monkeypatch.setenv("HANDSFREE_AGENT_DISPATCH_REPO", "owner/repo")
+        monkeypatch.setenv("GITHUB_TOKEN", "fake-token")
+
+        # Mock the github_issue_dispatch provider to avoid actual API calls
+        mock_provider = MagicMock()
+        mock_provider.start_task.return_value = {
+            "ok": True,
+            "status": "running",
+            "message": "Mock dispatch issue created",
+            "trace": {"provider": "github_issue_dispatch"},
+        }
+
+        # Create task without specifying provider
+        service = AgentService(db_conn)
+        
+        with patch('handsfree.agents.service.get_provider', return_value=mock_provider):
+            result = service.delegate(
+                user_id="test-user",
+                instruction="test task",
+                provider=None,  # Should use github_issue_dispatch
+            )
+
+        # Verify task was created with github_issue_dispatch provider
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "github_issue_dispatch"
+        assert task.state == "running"  # Should have transitioned to running
+
+    def test_copilot_fallback_when_github_dispatch_not_configured(self, db_conn, monkeypatch):
+        """Test that copilot is used when github_issue_dispatch is not configured."""
+        from handsfree.agents.service import AgentService
+
+        # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
+        monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
+
+        # Ensure github_issue_dispatch is NOT configured
+        monkeypatch.delenv("HANDSFREE_AGENT_DISPATCH_REPO", raising=False)
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+
+        # Create task without specifying provider
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="test task",
+            provider=None,  # Should fall back to copilot
+        )
+
+        # Verify task was created with copilot provider
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "copilot"
+
+    def test_env_var_takes_precedence_over_github_dispatch(self, db_conn, monkeypatch):
+        """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER takes precedence over github_issue_dispatch."""
+        from handsfree.agents.service import AgentService
+
+        # Set environment variable to use mock provider
+        monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
+
+        # Also configure github_issue_dispatch
+        monkeypatch.setenv("HANDSFREE_AGENT_DISPATCH_REPO", "owner/repo")
+        monkeypatch.setenv("GITHUB_TOKEN", "fake-token")
+
+        # Create task without specifying provider
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="test task",
+            provider=None,  # Should use env var (mock), not github_issue_dispatch
+        )
+
+        # Verify task was created with mock provider from env var
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "mock"
+
+    def test_github_dispatch_requires_both_repo_and_token(self, db_conn, monkeypatch):
+        """Test that github_issue_dispatch requires both DISPATCH_REPO and GITHUB_TOKEN."""
+        from handsfree.agents.service import AgentService
+
+        # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
+        monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
+
+        # Only set dispatch repo, not token
+        monkeypatch.setenv("HANDSFREE_AGENT_DISPATCH_REPO", "owner/repo")
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+
+        # Create task without specifying provider
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="test task",
+            provider=None,  # Should fall back to copilot (missing token)
+        )
+
+        # Verify task was created with copilot provider (fallback)
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "copilot"
+
 
 class TestTraceScaffolding:
     """Test trace field storage."""
