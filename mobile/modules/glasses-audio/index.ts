@@ -14,6 +14,11 @@ export interface AudioRouteChangeEvent {
   route: AudioRoute;
 }
 
+// Event map for type-safe event handling
+type GlassesAudioEvents = {
+  onAudioRouteChange: (event: AudioRouteChangeEvent) => void;
+};
+
 export class GlassesAudio {
   /**
    * Check if native module is available
@@ -104,10 +109,10 @@ export class GlassesAudio {
       console.warn('GlassesAudio native module not available, audio route change events will not fire');
       return null;
     }
-    // Create an EventEmitter with proper event mapping
-    const emitter = new EventEmitter<{
-      onAudioRouteChange: (event: AudioRouteChangeEvent) => void;
-    }>(GlassesAudioModule as any);
+    // In Expo SDK 52+, native modules are EventEmitters. For SDK 54, we wrap it.
+    // @ts-expect-error - Type mismatch between NativeModulesProxy and EventEmitter types
+    // This is a known limitation of the Expo Modules API type system.
+    const emitter = new EventEmitter<GlassesAudioEvents>(GlassesAudioModule);
     return emitter.addListener('onAudioRouteChange', listener);
   }
 }
