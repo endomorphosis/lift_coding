@@ -5,7 +5,7 @@ import logging
 import random
 import time
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -308,8 +308,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
                             retry_msg = "unknown time"
                             if reset_timestamp:
                                 try:
-                                    reset_dt = datetime.fromtimestamp(int(reset_timestamp))
-                                    now = datetime.now()
+                                    reset_dt = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
+                                    now = datetime.now(timezone.utc)
                                     if reset_dt > now:
                                         delta = reset_dt - now
                                         minutes = int(delta.total_seconds() / 60)

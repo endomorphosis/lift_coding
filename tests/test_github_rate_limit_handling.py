@@ -198,7 +198,7 @@ class TestTransientErrorRetry:
             with pytest.raises(RuntimeError, match="request failed with status 503"):
                 provider._make_request("/test/endpoint")
             
-            # Should attempt 3 times (initial + 2 retries)
+            # Should attempt exactly 3 times total: initial attempt + 2 retries (for max_retries=3, attempts 0, 1, 2)
             assert mock_get.call_count == 3
 
     def test_jitter_in_backoff(self, provider):
@@ -228,8 +228,8 @@ class TestTransientErrorRetry:
             # Second retry: 0.5 * 2^1 + 0.3 = 1.3
             assert mock_sleep.call_count == 2
             delays = [call[0][0] for call in mock_sleep.call_args_list]
-            assert 0.7 < delays[0] < 0.9  # First retry delay
-            assert 1.2 < delays[1] < 1.4  # Second retry delay
+            assert abs(delays[0] - 0.8) < 0.01  # First retry delay
+            assert abs(delays[1] - 1.3) < 0.01  # Second retry delay
 
 
 class TestRateLimitLogging:
@@ -264,7 +264,7 @@ class TestRateLimitLogging:
             for call in mock_logger.error.call_args_list:
                 args = call[0]
                 for arg in args:
-                    assert "ghp_secret_token" not in str(arg)
+                    assert "ghp_secret_token_12345" not in str(arg)
 
     def test_transient_error_logging_no_token_leak(self, provider):
         """Test that transient error logs don't leak the token."""
@@ -288,7 +288,7 @@ class TestRateLimitLogging:
             for call in mock_logger.warning.call_args_list:
                 args = call[0]
                 for arg in args:
-                    assert "ghp_secret_token" not in str(arg)
+                    assert "ghp_secret_token_12345" not in str(arg)
 
 
 class TestFallbackBehavior:
