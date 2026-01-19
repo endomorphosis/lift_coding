@@ -7,7 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Default to localhost for development
 // Update this based on your environment
-let BASE_URL = 'http://localhost:8080';
+export const DEFAULT_BASE_URL = 'http://localhost:8080';
+let BASE_URL = DEFAULT_BASE_URL;
 
 // Session management
 let sessionToken = null;
@@ -18,6 +19,7 @@ const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
   BASE_URL: '@handsfree_base_url',
   USE_CUSTOM_URL: '@handsfree_use_custom_url',
+  SPEAK_NOTIFICATIONS: '@handsfree_speak_notifications',
 };
 
 /**
@@ -99,6 +101,35 @@ export async function getHeaders(includeAuth = true) {
   }
 
   return headers;
+}
+
+/**
+ * Get whether notifications should be spoken
+ * Defaults to true in development mode, false in production
+ */
+export async function getSpeakNotifications() {
+  try {
+    const value = await AsyncStorage.getItem(STORAGE_KEYS.SPEAK_NOTIFICATIONS);
+    if (value === null) {
+      // Default to ON in dev builds, OFF in production
+      return __DEV__;
+    }
+    return value === 'true';
+  } catch (error) {
+    console.error('Failed to get speak notifications setting:', error);
+    return __DEV__;
+  }
+}
+
+/**
+ * Set whether notifications should be spoken
+ */
+export async function setSpeakNotifications(enabled) {
+  try {
+    await AsyncStorage.setItem(STORAGE_KEYS.SPEAK_NOTIFICATIONS, enabled.toString());
+  } catch (error) {
+    console.error('Failed to set speak notifications setting:', error);
+  }
 }
 
 // Export BASE_URL for backwards compatibility

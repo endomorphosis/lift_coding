@@ -10,7 +10,7 @@ import {
   Switch,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DEFAULT_BASE_URL } from '../api/config';
+import { DEFAULT_BASE_URL, getSpeakNotifications, setSpeakNotifications } from '../api/config';
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
@@ -22,6 +22,7 @@ export default function SettingsScreen() {
   const [userId, setUserId] = useState('');
   const [baseUrl, setBaseUrl] = useState(DEFAULT_BASE_URL);
   const [useCustomUrl, setUseCustomUrl] = useState(false);
+  const [speakNotifications, setSpeakNotificationsState] = useState(__DEV__);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,10 +34,12 @@ export default function SettingsScreen() {
       const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
+      const savedSpeakNotifications = await getSpeakNotifications();
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
+      setSpeakNotificationsState(savedSpeakNotifications);
     } catch (error) {
       console.error('Failed to load settings:', error);
     } finally {
@@ -49,6 +52,7 @@ export default function SettingsScreen() {
       await AsyncStorage.setItem(STORAGE_KEYS.USER_ID, userId);
       await AsyncStorage.setItem(STORAGE_KEYS.BASE_URL, baseUrl);
       await AsyncStorage.setItem(STORAGE_KEYS.USE_CUSTOM_URL, useCustomUrl.toString());
+      await setSpeakNotifications(speakNotifications);
 
       Alert.alert(
         'Success',
@@ -73,12 +77,14 @@ export default function SettingsScreen() {
             setUserId('');
             setBaseUrl(DEFAULT_BASE_URL);
             setUseCustomUrl(false);
+            setSpeakNotificationsState(__DEV__);
             try {
               await AsyncStorage.multiRemove([
                 STORAGE_KEYS.USER_ID,
                 STORAGE_KEYS.BASE_URL,
                 STORAGE_KEYS.USE_CUSTOM_URL,
               ]);
+              await setSpeakNotifications(__DEV__);
               Alert.alert('Success', 'Settings reset to defaults');
             } catch (error) {
               Alert.alert('Error', `Failed to reset settings: ${error.message}`);
@@ -178,6 +184,28 @@ export default function SettingsScreen() {
         )}
       </View>
 
+      {/* Notification Settings */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Notifications</Text>
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>Speak notifications</Text>
+          <Switch
+            value={speakNotifications}
+            onValueChange={setSpeakNotificationsState}
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={speakNotifications ? '#007AFF' : '#f4f3f4'}
+          />
+        </View>
+
+        <Text style={styles.helpText}>
+          When enabled, incoming push notifications will be automatically spoken via TTS.
+          {__DEV__ 
+            ? ' (Default: ON in development)' 
+            : ' (Default: OFF in production)'}
+        </Text>
+      </View>
+
       {/* Action Buttons */}
       <View style={styles.section}>
         <View style={styles.buttonContainer}>
@@ -211,6 +239,9 @@ export default function SettingsScreen() {
         </Text>
         <Text style={styles.debugText}>
           X-User-ID header: {userId ? 'Will be sent' : 'Will not be sent'}
+        </Text>
+        <Text style={styles.debugText}>
+          Speak notifications: {speakNotifications ? 'Enabled' : 'Disabled'}
         </Text>
       </View>
     </ScrollView>
