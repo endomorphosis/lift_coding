@@ -14,6 +14,7 @@ dist/
 *.duckdb.tmp
 .env
 .env.*
+!.env.example.demo
 data/
 
 # Dev audio uploads (don't commit test audio files)
