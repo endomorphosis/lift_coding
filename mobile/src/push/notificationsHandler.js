@@ -197,11 +197,32 @@ function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => {
+      // Validate that we have a result
+      if (!reader.result) {
+        reject(new Error('FileReader returned null result'));
+        return;
+      }
+      
       // Remove the data URL prefix (e.g., "data:audio/mpeg;base64,")
-      const base64 = reader.result.split(',')[1];
+      const resultStr = String(reader.result);
+      const commaIndex = resultStr.indexOf(',');
+      
+      if (commaIndex === -1) {
+        reject(new Error('Invalid data URL format: no comma found'));
+        return;
+      }
+      
+      const base64 = resultStr.substring(commaIndex + 1);
+      if (!base64) {
+        reject(new Error('Empty base64 data after data URL prefix'));
+        return;
+      }
+      
       resolve(base64);
     };
-    reader.onerror = reject;
+    reader.onerror = () => {
+      reject(new Error('FileReader error: ' + (reader.error?.message || 'Unknown error')));
+    };
     reader.readAsDataURL(blob);
   });
 }

@@ -156,21 +156,23 @@ export default function TTSScreen() {
         </View>
       )}
 
-      <View style={styles.devSection}>
-        <Text style={styles.devSectionTitle}>🧪 Dev Helper: Test Notifications</Text>
-        <Text style={styles.devSectionText}>
-          Simulate a push notification with the text above. This tests the notification → TTS flow
-          without needing real push notifications.
-        </Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            title={notificationLoading ? 'Simulating...' : '🔔 Simulate Notification'}
-            onPress={handleTestNotification}
-            disabled={notificationLoading || loading}
-            color="#FF9800"
-          />
+      {__DEV__ && (
+        <View style={styles.devSection}>
+          <Text style={styles.devSectionTitle}>🧪 Dev Helper: Test Notifications</Text>
+          <Text style={styles.devSectionText}>
+            Simulate a push notification with the text above. This tests the notification → TTS flow
+            without needing real push notifications.
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              title={notificationLoading ? 'Simulating...' : '🔔 Simulate Notification'}
+              onPress={handleTestNotification}
+              disabled={notificationLoading || loading}
+              color="#FF9800"
+            />
+          </View>
         </View>
-      </View>
+      )}
 
       <View style={styles.infoContainer}>
         <Text style={styles.infoTitle}>ℹ️ Note:</Text>
