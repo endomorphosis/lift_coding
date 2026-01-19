@@ -12,16 +12,8 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as WebBrowser from 'expo-web-browser';
-import { DEFAULT_BASE_URL } from '../api/config';
+import { DEFAULT_BASE_URL, STORAGE_KEYS } from '../api/config';
 import { startGitHubOAuth, completeGitHubOAuth } from '../api/client';
-
-const STORAGE_KEYS = {
-  USER_ID: '@handsfree_user_id',
-  BASE_URL: '@handsfree_base_url',
-  USE_CUSTOM_URL: '@handsfree_use_custom_url',
-  GITHUB_CONNECTION_ID: '@github_connection_id',
-  GITHUB_OAUTH_PENDING: '@github_oauth_pending',
-};
 
 export default function SettingsScreen() {
   const [userId, setUserId] = useState('');
@@ -252,7 +244,9 @@ export default function SettingsScreen() {
             <View style={styles.connectedContainer}>
               <Text style={styles.connectedText}>✓ GitHub Connected</Text>
               <Text style={styles.connectionIdText}>
-                Connection ID: {githubConnectionId.substring(0, 8)}...
+                Connection ID: {githubConnectionId.length > 8 
+                  ? `${githubConnectionId.substring(0, 8)}...` 
+                  : githubConnectionId}
               </Text>
             </View>
             <View style={styles.buttonContainer}>

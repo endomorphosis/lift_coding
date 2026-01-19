@@ -11,6 +11,7 @@ import ConfirmationScreen from './src/screens/ConfirmationScreen';
 import TTSScreen from './src/screens/TTSScreen';
 import GlassesDiagnosticsScreen from './src/screens/GlassesDiagnosticsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import { STORAGE_KEYS } from './src/api/config';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,7 +57,10 @@ export default function App() {
         
         // Store the OAuth params temporarily so SettingsScreen can process them
         if (code && state) {
-          await AsyncStorage.setItem('@github_oauth_pending', JSON.stringify({ code, state }));
+          await AsyncStorage.setItem(
+            STORAGE_KEYS.GITHUB_OAUTH_PENDING,
+            JSON.stringify({ code, state })
+          );
         }
       }
     } catch (error) {
