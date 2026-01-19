@@ -26,11 +26,16 @@ import {
   setupNotificationListeners,
   checkAndSpeakLatestNotification,
 } from '../push/notificationsHandler';
+import ProfileSelector from '../components/ProfileSelector';
+import { getProfile, setProfile } from '../storage/profileStorage';
 
 export default function StatusScreen() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // Profile state
+  const [currentProfile, setCurrentProfile] = useState('default');
   
   // Push notification state
   const [pushToken, setPushToken] = useState(null);
@@ -53,6 +58,24 @@ export default function StatusScreen() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadProfile = async () => {
+    try {
+      const profile = await getProfile();
+      setCurrentProfile(profile);
+    } catch (err) {
+      console.error('Failed to load profile:', err);
+    }
+  };
+
+  const handleProfileChange = async (profile) => {
+    try {
+      await setProfile(profile);
+      setCurrentProfile(profile);
+    } catch (err) {
+      Alert.alert('Error', `Failed to save profile: ${err.message}`);
     }
   };
 
@@ -194,6 +217,7 @@ export default function StatusScreen() {
 
   useEffect(() => {
     fetchStatus();
+    loadProfile();
     checkExistingSubscription();
     refreshRepoSubscriptions();
     
@@ -214,6 +238,14 @@ export default function StatusScreen() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Backend Status</Text>
+
+      {/* Profile Selector */}
+      <View style={styles.profileSection}>
+        <ProfileSelector
+          currentProfile={currentProfile}
+          onProfileChange={handleProfileChange}
+        />
+      </View>
 
       {loading && <ActivityIndicator size="large" color="#007AFF" />}
 
@@ -378,6 +410,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  profileSection: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 5,
     marginBottom: 20,
   },
   errorContainer: {

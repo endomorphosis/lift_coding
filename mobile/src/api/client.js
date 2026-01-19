@@ -195,6 +195,36 @@ export async function getNotifications() {
 }
 
 /**
+ * Get inbox items (PRs, mentions, failing checks)
+ * @param {Object} options - Optional parameters
+ * @returns {Promise<Object>} Inbox response
+ */
+export async function getInbox(options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  // Build query params
+  const params = new URLSearchParams();
+  if (options.profile) {
+    params.append('profile', options.profile);
+  }
+
+  const queryString = params.toString();
+  const url = `${baseUrl}/v1/inbox${queryString ? `?${queryString}` : ''}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Get inbox failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
  * Upload audio bytes to dev endpoint and get file:// URI
  * @param {string} audioBase64 - Base64-encoded audio data
  * @param {string} format - Audio format (m4a, wav, mp3, opus)
