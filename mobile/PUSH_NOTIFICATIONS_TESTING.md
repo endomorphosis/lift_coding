@@ -97,7 +97,7 @@ The **Glasses Diagnostics** screen includes a "Push Notifications Debug" section
 - **Last Spoken:** Text of most recently spoken message
 - **Last TTS Error:** Any playback errors (if occurred)
 
-This updates in real-time (every 2 seconds) to help diagnose issues.
+This updates periodically (every 5 seconds) to help diagnose issues.
 
 ## Known Limitations
 
