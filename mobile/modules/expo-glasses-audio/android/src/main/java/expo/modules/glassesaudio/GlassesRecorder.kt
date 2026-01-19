@@ -73,7 +73,7 @@ class GlassesRecorder {
 
     fun stop() {
         isRecording = false
-        recordingThread?.join(1000)
+        recordingThread?.join(3000)  // Wait up to 3 seconds for thread to finish writing
         recordingThread = null
         
         recorder?.stop()
@@ -124,21 +124,18 @@ class GlassesRecorder {
         
         // Update RIFF chunk size (file size - 8)
         randomAccessFile.seek(4)
-        randomAccessFile.write(intToByteArray((fileSize - 8).toInt()))
+        val fileSizeBuffer = ByteBuffer.allocate(4)
+        fileSizeBuffer.order(ByteOrder.LITTLE_ENDIAN)
+        fileSizeBuffer.putInt((fileSize - 8).toInt())
+        randomAccessFile.write(fileSizeBuffer.array())
         
         // Update data chunk size
         randomAccessFile.seek(40)
-        randomAccessFile.write(intToByteArray(dataSize.toInt()))
+        val dataSizeBuffer = ByteBuffer.allocate(4)
+        dataSizeBuffer.order(ByteOrder.LITTLE_ENDIAN)
+        dataSizeBuffer.putInt(dataSize.toInt())
+        randomAccessFile.write(dataSizeBuffer.array())
         
         randomAccessFile.close()
-    }
-
-    private fun intToByteArray(value: Int): ByteArray {
-        return byteArrayOf(
-            (value and 0xFF).toByte(),
-            ((value shr 8) and 0xFF).toByte(),
-            ((value shr 16) and 0xFF).toByte(),
-            ((value shr 24) and 0xFF).toByte()
-        )
     }
 }

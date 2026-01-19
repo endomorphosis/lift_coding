@@ -73,17 +73,27 @@ class GlassesPlayer {
         
         // Start playback in background thread
         playbackThread = Thread {
-            t.play()
-            
-            // Wait for playback to complete
-            while (isPlaying && t.playState == AudioTrack.PLAYSTATE_PLAYING) {
-                Thread.sleep(100)
-            }
-            
-            // Check if we reached the end
-            if (isPlaying && t.playbackHeadPosition >= samples.size) {
+            try {
+                t.play()
+                
+                // Wait for playback to complete
+                while (isPlaying && t.playState == AudioTrack.PLAYSTATE_PLAYING) {
+                    try {
+                        Thread.sleep(100)
+                    } catch (e: InterruptedException) {
+                        // Thread interrupted, exit gracefully
+                        break
+                    }
+                }
+                
+                // Check if we reached the end
+                if (isPlaying && t.playbackHeadPosition >= samples.size) {
+                    isPlaying = false
+                    onPlaybackComplete?.invoke()
+                }
+            } catch (e: Exception) {
+                // Handle any playback errors
                 isPlaying = false
-                onPlaybackComplete?.invoke()
             }
         }
         playbackThread?.start()
@@ -92,6 +102,7 @@ class GlassesPlayer {
     fun stop() {
         isPlaying = false
         playbackThread?.interrupt()
+        playbackThread?.join(2000)  // Wait up to 2 seconds for clean shutdown
         playbackThread = null
         track?.stop()
         track?.release()
