@@ -40,8 +40,6 @@ declare module '../../modules/expo-glasses-audio' {
 
   export interface PlaybackStatusEvent {
     isPlaying: boolean;
-    position: number;
-    duration: number;
     error?: string;
   }
 

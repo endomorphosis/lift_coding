@@ -190,10 +190,12 @@ Stop the current recording session before the duration expires.
 
 ##### `playAudio(fileUri: string): Promise<void>`
 
-Play a WAV audio file through Bluetooth SCO. Supports PCM 16-bit mono format.
+Play a WAV audio file through Bluetooth SCO. Supports PCM 16-bit mono format. The promise resolves when playback completes.
 
 **Parameters:**
 - `fileUri`: Absolute path to the WAV file to play
+
+**Returns:** Promise that resolves when playback finishes or rejects on error
 
 ##### `stopPlayback(): Promise<void>`
 
@@ -219,8 +221,6 @@ Add a listener for playback status updates.
 ```typescript
 {
   isPlaying: boolean;
-  position: number;
-  duration: number;
   error?: string;
 }
 ```

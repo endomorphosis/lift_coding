@@ -151,9 +151,7 @@ class ExpoGlassesAudioModule : Module() {
         
         // Emit playback started event
         sendEvent("onPlaybackStatus", mapOf(
-          "isPlaying" to true,
-          "position" to 0,
-          "duration" to 0
+          "isPlaying" to true
         ))
         
         try {
@@ -166,14 +164,15 @@ class ExpoGlassesAudioModule : Module() {
               
               // Emit playback ended event
               sendEvent("onPlaybackStatus", mapOf(
-                "isPlaying" to false,
-                "position" to 0,
-                "duration" to 0
+                "isPlaying" to false
               ))
+              
+              // Resolve promise when playback completes
+              promise.resolve(null)
             }
           }
           
-          promise.resolve(null)
+          // Don't resolve here - wait for completion callback
         } catch (e: Exception) {
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
@@ -181,8 +180,6 @@ class ExpoGlassesAudioModule : Module() {
           // Emit playback error event
           sendEvent("onPlaybackStatus", mapOf(
             "isPlaying" to false,
-            "position" to 0,
-            "duration" to 0,
             "error" to e.message
           ))
           

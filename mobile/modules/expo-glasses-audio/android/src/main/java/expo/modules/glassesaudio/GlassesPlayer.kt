@@ -3,6 +3,7 @@ package expo.modules.glassesaudio
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
+import android.util.Log
 import java.io.File
 import java.io.FileInputStream
 import java.nio.ByteBuffer
@@ -18,15 +19,17 @@ data class WavInfo(
 
 class GlassesPlayer {
     companion object {
+        private const val TAG = "GlassesPlayer"
         private const val WAV_HEADER_SIZE = 44
     }
     
     private var track: AudioTrack? = null
-    private var playbackThread: Thread? = null
     @Volatile
     private var isPlaying = false
     private var onPlaybackComplete: (() -> Unit)? = null
+    private val playbackLock = Object()
 
+    @Synchronized
     fun playWavFile(file: File, onComplete: (() -> Unit)? = null): WavInfo {
         stop()
         
@@ -46,6 +49,7 @@ class GlassesPlayer {
         return wavInfo
     }
 
+    @Synchronized
     fun playPcm16Mono(samples: ShortArray, sampleRate: Int = 16000, onComplete: (() -> Unit)? = null) {
         stop()
         
@@ -71,124 +75,129 @@ class GlassesPlayer {
         track = t
         isPlaying = true
         
-        // Start playback in background thread
-        playbackThread = Thread {
-            try {
-                t.play()
-                
-                // Wait for playback to complete
-                while (isPlaying && t.playState == AudioTrack.PLAYSTATE_PLAYING) {
-                    try {
-                        Thread.sleep(100)
-                    } catch (e: InterruptedException) {
-                        // Thread interrupted, exit gracefully
-                        break
+        // Use notification marker for completion detection
+        t.setNotificationMarkerPosition(samples.size)
+        t.setPlaybackPositionUpdateListener(object : AudioTrack.OnPlaybackPositionUpdateListener {
+            override fun onMarkerReached(track: AudioTrack) {
+                // Playback has reached the end of the buffer
+                synchronized(playbackLock) {
+                    if (isPlaying) {
+                        isPlaying = false
+                        onPlaybackComplete?.invoke()
                     }
                 }
-                
-                // Check if we reached the end
-                if (isPlaying && t.playbackHeadPosition >= samples.size) {
-                    isPlaying = false
-                    onPlaybackComplete?.invoke()
-                }
-            } catch (e: Exception) {
-                // Handle any playback errors
-                isPlaying = false
             }
+
+            override fun onPeriodicNotification(track: AudioTrack) {
+                // Not used
+            }
+        })
+        
+        try {
+            t.play()
+        } catch (e: Exception) {
+            Log.e(TAG, "Playback failed: ${e.message}", e)
+            isPlaying = false
+            throw e
         }
-        playbackThread?.start()
     }
 
+    @Synchronized
     fun stop() {
-        isPlaying = false
-        playbackThread?.interrupt()
-        playbackThread?.join(2000)  // Wait up to 2 seconds for clean shutdown
-        playbackThread = null
-        track?.stop()
-        track?.release()
-        track = null
-        onPlaybackComplete = null
+        synchronized(playbackLock) {
+            isPlaying = false
+            track?.stop()
+            track?.release()
+            track = null
+            onPlaybackComplete = null
+        }
     }
 
     private fun parseWavHeader(file: File): WavInfo {
-        val inputStream = FileInputStream(file)
-        val header = ByteArray(44)
-        inputStream.read(header)
-        inputStream.close()
-        
-        val buffer = ByteBuffer.wrap(header)
-        buffer.order(ByteOrder.LITTLE_ENDIAN)
-        
-        // Verify RIFF header
-        val riff = ByteArray(4)
-        buffer.get(riff)
-        if (String(riff) != "RIFF") {
-            throw IllegalArgumentException("Not a valid WAV file: missing RIFF header")
+        FileInputStream(file).use { inputStream ->
+            val header = ByteArray(WAV_HEADER_SIZE)
+            val bytesRead = inputStream.read(header)
+            if (bytesRead < WAV_HEADER_SIZE) {
+                throw IllegalArgumentException("Not a valid WAV file: file too small")
+            }
+            
+            val buffer = ByteBuffer.wrap(header)
+            buffer.order(ByteOrder.LITTLE_ENDIAN)
+            
+            // Verify RIFF header
+            val riff = ByteArray(4)
+            buffer.get(riff)
+            if (String(riff) != "RIFF") {
+                throw IllegalArgumentException("Not a valid WAV file: missing RIFF header")
+            }
+            
+            buffer.getInt() // File size - 8
+            
+            // Verify WAVE format
+            val wave = ByteArray(4)
+            buffer.get(wave)
+            if (String(wave) != "WAVE") {
+                throw IllegalArgumentException("Not a valid WAV file: missing WAVE format")
+            }
+            
+            // Read fmt chunk
+            val fmt = ByteArray(4)
+            buffer.get(fmt)
+            if (String(fmt) != "fmt ") {
+                throw IllegalArgumentException("Not a valid WAV file: missing fmt chunk")
+            }
+            
+            val fmtSize = buffer.getInt()
+            val audioFormat = buffer.getShort()
+            if (audioFormat.toInt() != 1) {
+                throw IllegalArgumentException("Only PCM format is supported")
+            }
+            
+            val channels = buffer.getShort().toInt()
+            val sampleRate = buffer.getInt()
+            buffer.getInt() // Byte rate
+            buffer.getShort() // Block align
+            val bitsPerSample = buffer.getShort().toInt()
+            
+            // Read data chunk
+            val data = ByteArray(4)
+            buffer.get(data)
+            if (String(data) != "data") {
+                throw IllegalArgumentException("Not a valid WAV file: missing data chunk")
+            }
+            
+            val dataSize = buffer.getInt()
+            
+            return WavInfo(
+                sampleRate = sampleRate,
+                channels = channels,
+                bitsPerSample = bitsPerSample,
+                dataOffset = WAV_HEADER_SIZE,
+                dataSize = dataSize
+            )
         }
-        
-        buffer.getInt() // File size - 8
-        
-        // Verify WAVE format
-        val wave = ByteArray(4)
-        buffer.get(wave)
-        if (String(wave) != "WAVE") {
-            throw IllegalArgumentException("Not a valid WAV file: missing WAVE format")
-        }
-        
-        // Read fmt chunk
-        val fmt = ByteArray(4)
-        buffer.get(fmt)
-        if (String(fmt) != "fmt ") {
-            throw IllegalArgumentException("Not a valid WAV file: missing fmt chunk")
-        }
-        
-        val fmtSize = buffer.getInt()
-        val audioFormat = buffer.getShort()
-        if (audioFormat.toInt() != 1) {
-            throw IllegalArgumentException("Only PCM format is supported")
-        }
-        
-        val channels = buffer.getShort().toInt()
-        val sampleRate = buffer.getInt()
-        buffer.getInt() // Byte rate
-        buffer.getShort() // Block align
-        val bitsPerSample = buffer.getShort().toInt()
-        
-        // Read data chunk
-        val data = ByteArray(4)
-        buffer.get(data)
-        if (String(data) != "data") {
-            throw IllegalArgumentException("Not a valid WAV file: missing data chunk")
-        }
-        
-        val dataSize = buffer.getInt()
-        
-        return WavInfo(
-            sampleRate = sampleRate,
-            channels = channels,
-            bitsPerSample = bitsPerSample,
-            dataOffset = WAV_HEADER_SIZE,
-            dataSize = dataSize
-        )
     }
 
     private fun readPcmData(file: File, wavInfo: WavInfo): ShortArray {
-        val inputStream = FileInputStream(file)
-        inputStream.skip(wavInfo.dataOffset.toLong())
-        
-        val pcmBytes = ByteArray(wavInfo.dataSize)
-        inputStream.read(pcmBytes)
-        inputStream.close()
-        
-        // Convert bytes to shorts (PCM 16-bit)
-        val pcmShorts = ShortArray(pcmBytes.size / 2)
-        val buffer = ByteBuffer.wrap(pcmBytes)
-        buffer.order(ByteOrder.LITTLE_ENDIAN)
-        
-        for (i in pcmShorts.indices) {
-            pcmShorts[i] = buffer.getShort()
+        FileInputStream(file).use { inputStream ->
+            inputStream.skip(wavInfo.dataOffset.toLong())
+            
+            val pcmBytes = ByteArray(wavInfo.dataSize)
+            val totalRead = inputStream.read(pcmBytes)
+            if (totalRead < wavInfo.dataSize) {
+                Log.w(TAG, "Expected ${wavInfo.dataSize} bytes but read $totalRead bytes")
+            }
+            
+            // Convert bytes to shorts (PCM 16-bit)
+            val pcmShorts = ShortArray(pcmBytes.size / 2)
+            val buffer = ByteBuffer.wrap(pcmBytes)
+            buffer.order(ByteOrder.LITTLE_ENDIAN)
+            
+            for (i in pcmShorts.indices) {
+                pcmShorts[i] = buffer.getShort()
+            }
+            
+            return pcmShorts
         }
-        
-        return pcmShorts
     }
 }

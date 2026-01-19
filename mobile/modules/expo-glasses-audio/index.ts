@@ -40,8 +40,6 @@ export interface RecordingProgressEvent {
 
 export interface PlaybackStatusEvent {
   isPlaying: boolean;
-  position: number;
-  duration: number;
   error?: string;
 }
 
