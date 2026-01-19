@@ -34,7 +34,7 @@ cd mobile
 2. Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 ## Building for Development
