@@ -70,7 +70,7 @@ cd mobile
 2. Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 3. Configure the backend URL:

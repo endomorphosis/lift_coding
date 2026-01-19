@@ -40,7 +40,7 @@ mobile/
 cd mobile
 
 # Install dependencies
-npm install
+npm ci
 
 # Generate native iOS project
 expo prebuild --platform ios
@@ -190,7 +190,7 @@ const playTTSFromBackend = async () => {
 ```bash
 cd mobile
 rm -rf ios node_modules
-npm install
+npm ci
 expo prebuild --clean
 ```
 
