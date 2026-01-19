@@ -31,13 +31,11 @@ export function inferConfirmationDecision(transcript) {
   // Use word boundary matching to avoid false positives (e.g., "know" containing "no")
   const hasKeyword = (keywords) => {
     return keywords.some((keyword) => {
-      // For multi-word phrases, check as-is
-      if (keyword.includes(' ')) {
-        return t.includes(keyword);
-      }
-      // For single words, use word boundary regex
       // Escape special regex characters
       const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      // For multi-word phrases, match with word boundaries at start and end
+      // This prevents "never mind" from matching "whenever mindful"
       const regex = new RegExp(`\\b${escapedKeyword}\\b`, 'i');
       return regex.test(t);
     });
