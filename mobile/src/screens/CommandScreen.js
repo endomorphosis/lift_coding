@@ -827,7 +827,7 @@ const styles = StyleSheet.create({
   },
   audioButtonsRow: {
     flexDirection: 'row',
-    gap: 10,
+    justifyContent: 'space-between',
   },
   sendAudioButton: {
     flex: 1,
@@ -835,6 +835,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
+    marginRight: 5,
   },
   sendAudioButtonText: {
     color: 'white',
@@ -847,6 +848,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
+    marginLeft: 5,
   },
   discardButtonText: {
     color: 'white',
@@ -878,11 +880,11 @@ const styles = StyleSheet.create({
   ttsLoadingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
   },
   ttsLoadingText: {
     fontSize: 14,
     color: '#666',
+    marginLeft: 10,
   },
   ttsPlayingContainer: {
     flexDirection: 'row',
@@ -979,7 +981,7 @@ const styles = StyleSheet.create({
   },
   modalButtons: {
     flexDirection: 'row',
-    gap: 10,
+    justifyContent: 'space-between',
   },
   modalButton: {
     flex: 1,
@@ -990,6 +992,7 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     backgroundColor: '#28a745',
+    marginRight: 5,
   },
   confirmButtonText: {
     color: 'white',
@@ -998,6 +1001,7 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     backgroundColor: '#dc3545',
+    marginLeft: 5,
   },
   cancelButtonText: {
     color: 'white',
