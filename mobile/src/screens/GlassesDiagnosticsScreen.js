@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Alert, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
@@ -24,7 +24,7 @@ export default function GlassesDiagnosticsScreen() {
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
-  const [playbackTimeoutId, setPlaybackTimeoutId] = useState(null);
+  const playbackTimeoutRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -36,7 +36,12 @@ export default function GlassesDiagnosticsScreen() {
       }
       // Check if native module is available
       try {
-        if (ExpoGlassesAudio && typeof ExpoGlassesAudio.getAudioRoute === 'function') {
+        if (ExpoGlassesAudio && 
+            typeof ExpoGlassesAudio.getAudioRoute === 'function' &&
+            typeof ExpoGlassesAudio.startRecording === 'function' &&
+            typeof ExpoGlassesAudio.stopRecording === 'function' &&
+            typeof ExpoGlassesAudio.playAudio === 'function' &&
+            typeof ExpoGlassesAudio.stopPlayback === 'function') {
           setNativeModuleAvailable(true);
         }
       } catch {
@@ -49,8 +54,8 @@ export default function GlassesDiagnosticsScreen() {
       if (sound) {
         sound.unloadAsync();
       }
-      if (playbackTimeoutId) {
-        clearTimeout(playbackTimeoutId);
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,8 +153,7 @@ export default function GlassesDiagnosticsScreen() {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
           // Start recording with configured duration (user will manually stop)
-          const result = await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
-          setLastRecordingUri(result.uri);
+          await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           setIsRecording(true);
         } else {
           setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
@@ -175,7 +179,10 @@ export default function GlassesDiagnosticsScreen() {
       } else {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
-          await ExpoGlassesAudio.stopRecording();
+          const result = await ExpoGlassesAudio.stopRecording();
+          if (result && result.uri) {
+            setLastRecordingUri(result.uri);
+          }
           Alert.alert('Recording Complete', 'Saved locally.');
         }
       }
@@ -187,9 +194,9 @@ export default function GlassesDiagnosticsScreen() {
   const stopPlayback = async () => {
     try {
       // Clear any pending timeout
-      if (playbackTimeoutId) {
-        clearTimeout(playbackTimeoutId);
-        setPlaybackTimeoutId(null);
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
       }
       
       if (devMode) {
@@ -212,47 +219,52 @@ export default function GlassesDiagnosticsScreen() {
   };
 
   const playUri = async (uri) => {
-    if (devMode) {
-      // DEV mode: use expo-av
-      if (sound) {
-        await sound.unloadAsync();
-        setSound(null);
-      }
-
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: false,
-        playThroughEarpieceAndroid: false,
-      });
-
-      const { sound: newSound } = await Audio.Sound.createAsync({ uri }, { shouldPlay: true });
-      setSound(newSound);
-      setIsPlaying(true);
-
-      newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
-          setIsPlaying(false);
+    try {
+      if (devMode) {
+        // DEV mode: use expo-av
+        if (sound) {
+          await sound.unloadAsync();
+          setSound(null);
         }
-        if (status.error) {
-          setLastError(`Playback error: ${status.error}`);
-        }
-      });
-    } else {
-      // Glasses mode: use native module if available
-      if (nativeModuleAvailable) {
-        await ExpoGlassesAudio.playAudio(uri);
+
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: false,
+          playThroughEarpieceAndroid: false,
+        });
+
+        const { sound: newSound } = await Audio.Sound.createAsync({ uri }, { shouldPlay: true });
+        setSound(newSound);
         setIsPlaying(true);
-        // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
-        const timeoutId = setTimeout(() => {
-          setIsPlaying(false);
-          setPlaybackTimeoutId(null);
-        }, NATIVE_PLAYBACK_TIMEOUT_MS);
-        setPlaybackTimeoutId(timeoutId);
+
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+          }
+          if (status.error) {
+            setLastError(`Playback error: ${status.error}`);
+          }
+        });
       } else {
-        setLastError('Audio playback unavailable - native module not found. Switch to DEV mode.');
+        // Glasses mode: use native module if available
+        if (nativeModuleAvailable) {
+          await ExpoGlassesAudio.playAudio(uri);
+          setIsPlaying(true);
+          // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
+          const timeoutId = setTimeout(() => {
+            setIsPlaying(false);
+            playbackTimeoutRef.current = null;
+          }, NATIVE_PLAYBACK_TIMEOUT_MS);
+          playbackTimeoutRef.current = timeoutId;
+        } else {
+          setLastError('Audio playback unavailable - native module not found. Switch to DEV mode.');
+        }
       }
+    } catch (error) {
+      setLastError(`Playback failed: ${error.message}`);
+      setIsPlaying(false);
     }
   };
 
