@@ -1,4 +1,4 @@
-package glasses
+package expo.modules.glassesaudio
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
@@ -17,8 +17,13 @@ data class WavInfo(
 )
 
 class GlassesPlayer {
+    companion object {
+        private const val WAV_HEADER_SIZE = 44
+    }
+    
     private var track: AudioTrack? = null
     private var playbackThread: Thread? = null
+    @Volatile
     private var isPlaying = false
     private var onPlaybackComplete: (() -> Unit)? = null
 
@@ -151,7 +156,7 @@ class GlassesPlayer {
             sampleRate = sampleRate,
             channels = channels,
             bitsPerSample = bitsPerSample,
-            dataOffset = 44,
+            dataOffset = WAV_HEADER_SIZE,
             dataSize = dataSize
         )
     }

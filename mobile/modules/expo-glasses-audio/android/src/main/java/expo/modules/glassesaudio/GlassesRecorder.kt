@@ -1,4 +1,4 @@
-package glasses
+package expo.modules.glassesaudio
 
 import android.media.AudioFormat
 import android.media.AudioRecord
@@ -10,8 +10,13 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 class GlassesRecorder {
+    companion object {
+        private const val WAV_HEADER_SIZE = 44
+    }
+    
     private var recorder: AudioRecord? = null
     private var recordingThread: Thread? = null
+    @Volatile
     private var isRecording = false
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
@@ -86,7 +91,7 @@ class GlassesRecorder {
 
     private fun writeWavHeader(file: File, sampleRate: Int, channels: Int, bitsPerSample: Int) {
         val outputStream = FileOutputStream(file)
-        val header = ByteBuffer.allocate(44)
+        val header = ByteBuffer.allocate(WAV_HEADER_SIZE)
         header.order(ByteOrder.LITTLE_ENDIAN)
         
         // RIFF header
@@ -115,7 +120,7 @@ class GlassesRecorder {
     private fun updateWavHeader(file: File) {
         val randomAccessFile = RandomAccessFile(file, "rw")
         val fileSize = randomAccessFile.length()
-        val dataSize = fileSize - 44
+        val dataSize = fileSize - WAV_HEADER_SIZE
         
         // Update RIFF chunk size (file size - 8)
         randomAccessFile.seek(4)

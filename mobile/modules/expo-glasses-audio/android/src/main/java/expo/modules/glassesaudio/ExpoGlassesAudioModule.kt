@@ -7,9 +7,9 @@ import android.content.Context
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
-import glasses.AudioRouteMonitor
-import glasses.GlassesRecorder
-import glasses.GlassesPlayer
+import expo.modules.glassesaudio.AudioRouteMonitor
+import expo.modules.glassesaudio.GlassesRecorder
+import expo.modules.glassesaudio.GlassesPlayer
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
