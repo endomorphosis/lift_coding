@@ -9,7 +9,7 @@
 
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
-import { BASE_URL, getHeaders } from '../api/config';
+import { getBaseUrl, getHeaders } from '../api/config';
 
 /**
  * Request push notification permissions and get token
@@ -53,9 +53,12 @@ export async function registerForPushAsync() {
  * @returns {Promise<Object>} Subscription object with { id, endpoint, platform, ... }
  */
 export async function registerSubscriptionWithBackend(token, platform = 'expo') {
-  const response = await fetch(`${BASE_URL}/v1/notifications/subscriptions`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/notifications/subscriptions`, {
     method: 'POST',
-    headers: getHeaders(),
+    headers,
     body: JSON.stringify({
       endpoint: token,
       platform: platform,
@@ -77,11 +80,14 @@ export async function registerSubscriptionWithBackend(token, platform = 'expo') 
  * @returns {Promise<void>}
  */
 export async function unregisterSubscriptionWithBackend(subscriptionId) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const response = await fetch(
-    `${BASE_URL}/v1/notifications/subscriptions/${subscriptionId}`,
+    `${baseUrl}/v1/notifications/subscriptions/${subscriptionId}`,
     {
       method: 'DELETE',
-      headers: getHeaders(),
+      headers,
     }
   );
 
@@ -95,9 +101,12 @@ export async function unregisterSubscriptionWithBackend(subscriptionId) {
  * @returns {Promise<Array>} Array of subscription objects
  */
 export async function listSubscriptions() {
-  const response = await fetch(`${BASE_URL}/v1/notifications/subscriptions`, {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/notifications/subscriptions`, {
     method: 'GET',
-    headers: getHeaders(),
+    headers,
   });
 
   if (!response.ok) {

@@ -11,7 +11,7 @@
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { BASE_URL, getHeaders } from '../api/config';
+import { getBaseUrl, getHeaders } from '../api/config';
 import { fetchTTS } from '../api/client';
 
 // Notification queue for sequential TTS playback
@@ -95,11 +95,14 @@ async function handleNotification(notification) {
  * @returns {Promise<Object>} Notification details
  */
 async function fetchNotificationDetails(notificationId) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
   const response = await fetch(
-    `${BASE_URL}/v1/notifications/${notificationId}`,
+    `${baseUrl}/v1/notifications/${notificationId}`,
     {
       method: 'GET',
-      headers: getHeaders(),
+      headers,
     }
   );
 
@@ -243,11 +246,13 @@ export function startNotificationPolling(onNewNotifications, intervalMs = 30000)
 
   const poll = async () => {
     try {
+      const baseUrl = await getBaseUrl();
+      const headers = await getHeaders();
       const response = await fetch(
-        `${BASE_URL}/v1/notifications?since=${lastTimestamp}&limit=20`,
+        `${baseUrl}/v1/notifications?since=${lastTimestamp}&limit=20`,
         {
           method: 'GET',
-          headers: getHeaders(),
+          headers,
         }
       );
 
@@ -333,11 +338,13 @@ async function processNotificationQueue() {
  */
 export async function checkAndSpeakLatestNotification() {
   try {
+    const baseUrl = await getBaseUrl();
+    const headers = await getHeaders();
     const response = await fetch(
-      `${BASE_URL}/v1/notifications?limit=1`,
+      `${baseUrl}/v1/notifications?limit=1`,
       {
         method: 'GET',
-        headers: getHeaders(),
+        headers,
       }
     );
 
