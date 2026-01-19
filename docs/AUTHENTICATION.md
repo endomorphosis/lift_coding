@@ -160,7 +160,7 @@ The authentication system includes comprehensive tests:
 - Tests API key revocation and validation
 
 ### Database Tests (`tests/test_api_keys.py`)
-- 29 tests covering API key generation, storage, validation, and management
+- 25 tests covering API key generation, storage, validation, and management
 - Tests secure hashing, revocation, and user isolation
 
 ### Existing Tests
