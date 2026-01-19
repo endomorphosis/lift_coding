@@ -21,6 +21,14 @@ class MockTokenProvider(TokenProvider):
         return self._token
 
 
+class MockResponse:
+    """Mock response for testing rate limit messages."""
+
+    def __init__(self, status_code: int, headers: dict | None = None):
+        self.status_code = status_code
+        self.headers = headers or {}
+
+
 class TestRateLimitDetection:
     """Test rate limit detection logic."""
 
@@ -114,12 +122,9 @@ class TestRetryTimeMessage:
 
         # Mock response with reset in 30 seconds
         reset_time = int((datetime.now() + timedelta(seconds=30)).timestamp())
+        response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        class MockResponse:
-            status_code = 429
-            headers = {"X-RateLimit-Reset": str(reset_time)}
-
-        msg = provider._get_retry_time_message(MockResponse())
+        msg = provider._get_retry_time_message(response)
         assert "second" in msg.lower()
 
     def test_retry_time_message_minutes(self):
@@ -129,12 +134,9 @@ class TestRetryTimeMessage:
 
         # Mock response with reset in 5 minutes
         reset_time = int((datetime.now() + timedelta(minutes=5)).timestamp())
+        response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        class MockResponse:
-            status_code = 429
-            headers = {"X-RateLimit-Reset": str(reset_time)}
-
-        msg = provider._get_retry_time_message(MockResponse())
+        msg = provider._get_retry_time_message(response)
         assert "minute" in msg.lower()
 
     def test_retry_time_message_hours(self):
@@ -144,12 +146,9 @@ class TestRetryTimeMessage:
 
         # Mock response with reset in 2 hours
         reset_time = int((datetime.now() + timedelta(hours=2)).timestamp())
+        response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        class MockResponse:
-            status_code = 429
-            headers = {"X-RateLimit-Reset": str(reset_time)}
-
-        msg = provider._get_retry_time_message(MockResponse())
+        msg = provider._get_retry_time_message(response)
         assert "hour" in msg.lower()
 
     def test_retry_time_message_missing_header(self):
@@ -157,11 +156,9 @@ class TestRetryTimeMessage:
         token_provider = MockTokenProvider()
         provider = LiveGitHubProvider(token_provider)
 
-        class MockResponse:
-            status_code = 429
-            headers = {}
+        response = MockResponse(429, {})
 
-        msg = provider._get_retry_time_message(MockResponse())
+        msg = provider._get_retry_time_message(response)
         assert msg == "unknown time"
 
 

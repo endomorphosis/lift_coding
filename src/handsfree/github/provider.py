@@ -269,9 +269,15 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         # GitHub often returns 403 for rate limits, check remaining header
         if response.status_code == 403:
-            remaining = response.headers.get("X-RateLimit-Remaining", "")
-            if remaining == "0":
-                return True
+            remaining_str = response.headers.get("X-RateLimit-Remaining", "")
+            if remaining_str:
+                try:
+                    remaining = int(remaining_str)
+                    if remaining == 0:
+                        return True
+                except (ValueError, TypeError):
+                    # If we can't parse it, it's not a rate limit
+                    pass
 
         return False
 
@@ -374,8 +380,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
                 if response.status_code in (502, 503, 504):
                     max_retries = 3
                     if _retry_count < max_retries:
-                        # Exponential backoff with jitter
-                        base_delay = 2 ** _retry_count  # 1s, 2s, 4s
+                        # Exponential backoff with jitter: 1s, 2s, 4s on attempts 1, 2, 3
+                        base_delay = 2 ** (_retry_count + 1) / 2  # 1s, 2s, 4s
                         jitter = random.uniform(0, 0.5 * base_delay)
                         delay = base_delay + jitter
 
