@@ -275,10 +275,9 @@ async function processPendingSpeakQueue() {
 
   console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
   
-  // Process all pending messages - use a fixed count to avoid infinite loop
-  // if new messages are added during processing
-  const messagesToProcess = [...pendingSpeakQueue];
-  pendingSpeakQueue = [];
+  // Atomically extract all pending messages to avoid race conditions
+  // Any new messages added during processing will be handled in the next call
+  const messagesToProcess = pendingSpeakQueue.splice(0);
   
   for (const message of messagesToProcess) {
     try {
