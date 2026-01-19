@@ -8,7 +8,7 @@ import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAu
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
-const NATIVE_PLAYBACK_TIMEOUT_MS = 3000;
+const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TTS and audio files
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
 
@@ -26,6 +26,8 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
   const playbackTimeoutRef = useRef(null);
+  const soundRef = useRef(null);
+  const recordingTimeoutRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -52,11 +54,15 @@ export default function GlassesDiagnosticsScreen() {
     })();
 
     return () => {
-      if (sound) {
-        sound.unloadAsync();
+      // Use ref to ensure we cleanup the latest sound instance
+      if (soundRef.current) {
+        soundRef.current.unloadAsync();
       }
       if (playbackTimeoutRef.current) {
         clearTimeout(playbackTimeoutRef.current);
+      }
+      if (recordingTimeoutRef.current) {
+        clearTimeout(recordingTimeoutRef.current);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,6 +109,10 @@ export default function GlassesDiagnosticsScreen() {
         if (nativeModuleAvailable) {
           try {
             const route = await ExpoGlassesAudio.getAudioRoute();
+            // Validate response structure
+            if (!route || typeof route !== 'object') {
+              throw new Error('Invalid audio route returned from native module');
+            }
             const { inputDevice, outputDevice, isBluetoothConnected } = route;
             
             if (isBluetoothConnected) {
@@ -157,6 +167,14 @@ export default function GlassesDiagnosticsScreen() {
           // if the user doesn't manually stop it first.
           await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           setIsRecording(true);
+          
+          // Set up timeout to update UI when native module auto-stops recording
+          const timeoutId = setTimeout(() => {
+            setIsRecording(false);
+            recordingTimeoutRef.current = null;
+            setLastError('Recording automatically stopped after reaching maximum duration.');
+          }, NATIVE_RECORDING_DURATION_SECONDS * 1000);
+          recordingTimeoutRef.current = timeoutId;
         } else {
           setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
         }
@@ -171,21 +189,38 @@ export default function GlassesDiagnosticsScreen() {
     try {
       setIsRecording(false);
       
+      // Clear recording timeout if it exists
+      if (recordingTimeoutRef.current) {
+        clearTimeout(recordingTimeoutRef.current);
+        recordingTimeoutRef.current = null;
+      }
+      
       if (devMode) {
         // DEV mode: use expo-av
-        await recording.stopAndUnloadAsync();
-        const uri = recording.getURI();
-        setRecording(null);
-        setLastRecordingUri(uri);
-        Alert.alert('Recording Complete', 'Saved locally.');
+        if (recording) {
+          await recording.stopAndUnloadAsync();
+          const uri = recording.getURI();
+          setRecording(null);
+          setLastRecordingUri(uri);
+          Alert.alert('Recording Complete', 'Saved locally.');
+        } else {
+          setLastError('No active recording to stop.');
+        }
       } else {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
           const result = await ExpoGlassesAudio.stopRecording();
           if (result && result.uri) {
             setLastRecordingUri(result.uri);
+            Alert.alert('Recording Complete', 'Saved locally.');
+          } else {
+            // No URI returned; avoid implying the recording was saved
+            Alert.alert(
+              'Recording Finished',
+              'Recording stopped, but no file was returned by the glasses.'
+            );
+            setLastError('Glasses recording stopped but no URI was returned by the native module.');
           }
-          Alert.alert('Recording Complete', 'Saved locally.');
         }
       }
     } catch (error) {
@@ -195,7 +230,7 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopPlayback = async () => {
     try {
-      // Clear any pending timeout
+      // Clear any pending timeout and reset ref
       if (playbackTimeoutRef.current) {
         clearTimeout(playbackTimeoutRef.current);
         playbackTimeoutRef.current = null;
@@ -207,6 +242,7 @@ export default function GlassesDiagnosticsScreen() {
           await sound.stopAsync();
           await sound.unloadAsync();
           setSound(null);
+          soundRef.current = null;
         }
       } else {
         // Glasses mode: use native module if available
@@ -217,6 +253,11 @@ export default function GlassesDiagnosticsScreen() {
       setIsPlaying(false);
     } catch (error) {
       setLastError(`Stop playback failed: ${error.message}`);
+      // Ensure ref is cleared even on error
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
+      }
     }
   };
 
@@ -227,6 +268,7 @@ export default function GlassesDiagnosticsScreen() {
         if (sound) {
           await sound.unloadAsync();
           setSound(null);
+          soundRef.current = null;
         }
 
         await Audio.setAudioModeAsync({
@@ -239,6 +281,7 @@ export default function GlassesDiagnosticsScreen() {
 
         const { sound: newSound } = await Audio.Sound.createAsync({ uri }, { shouldPlay: true });
         setSound(newSound);
+        soundRef.current = newSound;
         setIsPlaying(true);
 
         newSound.setOnPlaybackStatusUpdate((status) => {
@@ -268,6 +311,11 @@ export default function GlassesDiagnosticsScreen() {
         }
       }
     } catch (error) {
+      // Ensure any pending native playback timeout is cleared on error
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
+      }
       setLastError(`Playback failed: ${error.message}`);
       setIsPlaying(false);
     }
