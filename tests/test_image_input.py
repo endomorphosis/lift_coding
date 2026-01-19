@@ -1,11 +1,16 @@
 """Tests for image input support with privacy mode enforcement."""
 
+import os
 import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
 
 client = TestClient(app)
+
+# Get absolute path to test fixtures
+FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
+TEST_IMAGE_PATH = os.path.join(FIXTURES_DIR, "test_image.jpg")
 
 
 class TestImageInputPrivacyEnforcement:
@@ -68,14 +73,14 @@ class TestImageInputPrivacyEnforcement:
         assert data["intent"]["name"] == "error.image_not_supported"
 
     def test_image_input_balanced_mode_accepted(self):
-        """Test that image input is accepted in balanced mode with stub response."""
+        """Test that image input is accepted in balanced mode and processed with OCR."""
         response = client.post(
             "/v1/command",
             json={
                 "input": {
                     "type": "image",
-                    "uri": "https://example.com/camera.png",
-                    "content_type": "image/png",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "content_type": "image/jpeg",
                 },
                 "profile": "default",
                 "client_context": {
@@ -91,11 +96,12 @@ class TestImageInputPrivacyEnforcement:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] == "ok"
-        assert data["intent"]["name"] == "image.placeholder"
-        assert "cannot be processed yet" in data["spoken_text"]
+        # With OCR enabled, the image text is extracted and parsed through intent parsing
+        # The stub OCR provider returns "show my inbox" which maps to inbox.list intent
+        assert data["status"] in ["ok", "needs_confirmation"]
+        assert data["intent"]["name"] == "inbox.list"
         # Ensure image URI is not leaked in spoken_text
-        assert "https://example.com/camera.png" not in data["spoken_text"]
+        assert "test_image.jpg" not in data["spoken_text"]
 
     def test_image_input_debug_mode_accepted_with_debug_info(self):
         """Test that image input in debug mode includes debug information."""
@@ -104,7 +110,7 @@ class TestImageInputPrivacyEnforcement:
             json={
                 "input": {
                     "type": "image",
-                    "uri": "https://example.com/debug.jpg",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
                     "content_type": "image/jpeg",
                 },
                 "profile": "default",
@@ -122,21 +128,17 @@ class TestImageInputPrivacyEnforcement:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] == "ok"
-        assert data["intent"]["name"] == "image.placeholder"
+        # With OCR enabled, the image is processed and routed through intent parsing
+        assert data["status"] in ["ok", "needs_confirmation"]
+        assert data["intent"]["name"] == "inbox.list"
 
         # Debug info should be present
         assert data["debug"] is not None
-        assert data["debug"]["transcript"] == "<image input - not processed yet>"
-
-        # Debug info should include stub message
-        assert len(data["debug"]["tool_calls"]) > 0
-        tool_call = data["debug"]["tool_calls"][0]
-        assert "not processed" in tool_call["note"]
-        assert tool_call["content_type"] == "image/jpeg"
+        # The transcript should be the OCR output
+        assert data["debug"]["transcript"] == "show my inbox"
 
         # Image URI should still not be in spoken_text
-        assert "https://example.com/debug.jpg" not in data["spoken_text"]
+        assert "test_image.jpg" not in data["spoken_text"]
 
     def test_image_input_without_content_type(self):
         """Test that image input works without content_type."""
@@ -145,7 +147,7 @@ class TestImageInputPrivacyEnforcement:
             json={
                 "input": {
                     "type": "image",
-                    "uri": "file:///tmp/snapshot.jpg",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
                 },
                 "profile": "default",
                 "client_context": {
@@ -162,11 +164,9 @@ class TestImageInputPrivacyEnforcement:
 
         assert response.status_code == 200
         data = response.json()
-        assert data["status"] == "ok"
-
-        # Debug info should show content_type as unknown
-        tool_call = data["debug"]["tool_calls"][0]
-        assert tool_call["content_type"] == "unknown"
+        # With OCR enabled, the image is processed
+        assert data["status"] in ["ok", "needs_confirmation"]
+        assert data["intent"]["name"] == "inbox.list"
 
 
 class TestImageInputOpenAPISchema:
@@ -248,7 +248,7 @@ class TestImageInputLogging:
             json={
                 "input": {
                     "type": "image",
-                    "uri": "https://secret.example.com/private/image456.jpg",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
                 },
                 "profile": "default",
                 "client_context": {
@@ -263,8 +263,8 @@ class TestImageInputLogging:
         )
 
         data = response.json()
-        assert "secret.example.com" not in data["spoken_text"]
-        assert "image456.jpg" not in data["spoken_text"]
+        assert "test_image.jpg" not in data["spoken_text"]
+        assert "fixtures" not in data["spoken_text"]
 
     def test_image_uri_not_in_spoken_text_debug_mode(self):
         """Test that image URI never appears in spoken_text even in debug mode."""
@@ -273,7 +273,7 @@ class TestImageInputLogging:
             json={
                 "input": {
                     "type": "image",
-                    "uri": "https://secret.example.com/private/image789.jpg",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
                 },
                 "profile": "default",
                 "client_context": {
@@ -290,8 +290,8 @@ class TestImageInputLogging:
 
         data = response.json()
         # URI should not be in spoken_text
-        assert "secret.example.com" not in data["spoken_text"]
-        assert "image789.jpg" not in data["spoken_text"]
+        assert "test_image.jpg" not in data["spoken_text"]
+        assert "fixtures" not in data["spoken_text"]
         # Debug info can contain metadata but not the actual URI
 
 

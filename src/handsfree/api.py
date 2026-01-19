@@ -16,6 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
+from handsfree.image_fetch import fetch_image_data
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
 from handsfree.commands.profiles import ProfileConfig
@@ -94,6 +95,7 @@ from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import get_stt_provider
+from handsfree.ocr import get_ocr_provider
 from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
@@ -776,7 +778,7 @@ async def submit_command(
                 debug=DebugInfo(transcript="<image input - rejected by privacy mode>"),
             )
 
-        # In balanced/debug mode, accept but don't process
+        # In balanced/debug mode, accept and process with OCR
         # Log acceptance without URI (unless debug mode with redaction)
         if request.client_context.debug:
             from handsfree.logging_utils import redact_secrets
@@ -784,7 +786,7 @@ async def submit_command(
             redacted_uri = redact_secrets(request.input.uri)
             log_info(
                 logger,
-                "Accepted image input (not processed)",
+                "Accepted image input for OCR processing",
                 user_id=user_id,
                 privacy_mode=privacy_mode.value,
                 uri=redacted_uri,
@@ -793,37 +795,64 @@ async def submit_command(
         else:
             log_info(
                 logger,
-                "Accepted image input (not processed)",
+                "Accepted image input for OCR processing",
                 user_id=user_id,
                 privacy_mode=privacy_mode.value,
             )
 
-        # Return stub response indicating image is not processed
-        clear_request_id()
-        debug_info = DebugInfo(
-            transcript="<image input - not processed yet>",
-        )
-        if request.client_context.debug:
-            # Include stub message in debug info
-            debug_info.tool_calls = [
-                {
-                    "note": (
-                        "Image input accepted but not processed. "
-                        "OCR/vision processing not yet implemented."
-                    ),
-                    "content_type": request.input.content_type or "unknown",
-                }
-            ]
+        # Fetch and process image with OCR
+        try:
+            # Fetch image data
+            image_data = fetch_image_data(request.input.uri)
 
-        return CommandResponse(
-            status=CommandStatus.OK,
-            intent=ParsedIntent(name="image.placeholder", confidence=1.0),
-            spoken_text=(
-                "Image received but cannot be processed yet. "
-                "Please describe what you need help with."
-            ),
-            debug=debug_info,
-        )
+            # Get OCR provider and extract text
+            ocr_provider = get_ocr_provider()
+            text = ocr_provider.extract_text(
+                image_data, request.input.content_type or "image/jpeg"
+            )
+
+            log_info(
+                logger,
+                "Extracted text from image input",
+                content_type=request.input.content_type,
+                transcript_length=len(text),
+                user_id=user_id,
+            )
+        except NotImplementedError as e:
+            # OCR is disabled
+            clear_request_id()
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.ocr_disabled", confidence=1.0),
+                spoken_text=str(e),
+                debug=DebugInfo(transcript="<image input - OCR disabled>"),
+            )
+        except (ValueError, FileNotFoundError, RuntimeError) as e:
+            # Invalid image format or URI
+            log_error(logger, "Image input error", error=str(e), user_id=user_id)
+            clear_request_id()
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.image_input", confidence=1.0),
+                spoken_text=f"Could not process image input: {str(e)}",
+                debug=DebugInfo(transcript="<image input - error>"),
+            )
+        except Exception as e:
+            # Unexpected error during OCR
+            log_error(
+                logger,
+                "Unexpected OCR error",
+                error=str(e),
+                error_type=type(e).__name__,
+                user_id=user_id,
+            )
+            clear_request_id()
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=ParsedIntent(name="error.ocr_failed", confidence=1.0),
+                spoken_text="Image OCR failed. Please try again or use text input.",
+                debug=DebugInfo(transcript="<image input - OCR failed>"),
+            )
     else:
         # Unknown input type
         clear_request_id()
