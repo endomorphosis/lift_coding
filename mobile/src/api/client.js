@@ -7,6 +7,7 @@
  * - GET /v1/status
  * - POST /v1/command
  * - POST /v1/commands/confirm
+ * - GET /v1/inbox
  * - GET /v1/notifications
  * - POST /v1/notifications/subscriptions
  * - DELETE /v1/notifications/subscriptions/{subscription_id}
