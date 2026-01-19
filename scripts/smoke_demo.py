@@ -113,7 +113,7 @@ class SmokeTest:
         except requests.exceptions.RequestException as e:
             self.log(f"/v1/status request failed: {e}", "error")
             return False
-        except (KeyError, ValueError) as e:
+        except (KeyError, ValueError, requests.exceptions.JSONDecodeError) as e:
             self.log(f"/v1/status response parsing failed: {e}", "error")
             return False
 
@@ -175,7 +175,7 @@ class SmokeTest:
         except requests.exceptions.RequestException as e:
             self.log(f"/v1/tts request failed: {e}", "error")
             return False
-        except Exception as e:
+        except (ValueError, requests.exceptions.JSONDecodeError) as e:
             self.log(f"/v1/tts check failed: {e}", "error")
             return False
 
@@ -251,7 +251,7 @@ class SmokeTest:
         except requests.exceptions.RequestException as e:
             self.log(f"/v1/command request failed: {e}", "error")
             return False
-        except (KeyError, ValueError) as e:
+        except (KeyError, ValueError, requests.exceptions.JSONDecodeError) as e:
             self.log(f"/v1/command response parsing failed: {e}", "error")
             return False
 
