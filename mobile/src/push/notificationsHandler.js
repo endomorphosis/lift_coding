@@ -364,8 +364,14 @@ export async function checkAndSpeakLatestNotification() {
  * This helps verify that the notification → TTS flow works without needing a real push
  * @param {string} message - The message to speak
  * @returns {Promise<void>}
+ * @throws {Error} If called in production mode
  */
 export async function simulateNotificationForDev(message = 'This is a test notification') {
+  // Runtime check to prevent use in production
+  if (!__DEV__) {
+    throw new Error('simulateNotificationForDev is only available in development mode');
+  }
+  
   console.log('[DEV] Simulating notification with message:', message);
   
   try {
