@@ -9,7 +9,7 @@ import logging
 import os
 import time
 import uuid
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from typing import Any
 
 import duckdb
@@ -200,8 +200,17 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
             try:
                 auto_started_at = datetime.fromisoformat(auto_started_at_str)
             except ValueError:
-                # Try with Z replaced if fromisoformat fails
-                auto_started_at = datetime.fromisoformat(auto_started_at_str.replace("Z", "+00:00"))
+                try:
+                    # Try with Z replaced if fromisoformat fails
+                    auto_started_at = datetime.fromisoformat(auto_started_at_str.replace("Z", "+00:00"))
+                except ValueError as e:
+                    logger.warning(
+                        "Task %s has invalid auto_started_at datetime '%s': %s; skipping",
+                        task.id,
+                        auto_started_at_str,
+                        e,
+                    )
+                    continue
 
             # Calculate elapsed time
             elapsed = (now - auto_started_at).total_seconds()

@@ -1,5 +1,6 @@
 """Tests for agent task runner module."""
 
+import json
 import os
 import uuid
 from datetime import UTC, datetime, timedelta
@@ -513,11 +514,8 @@ class TestRunOnce:
         # Manipulate the start time to simulate elapsed time
         # We need to directly update the trace, not use update_agent_task_state
         # because we can't transition running->running
-        import json
-        import uuid as uuid_module
-
         past_time = datetime.now(UTC) - timedelta(seconds=15)
-        task_uuid = uuid_module.UUID(task.id)
+        task_uuid = uuid.UUID(task.id)
 
         # Update the trace directly
         updated_trace = running_task.trace or {}
