@@ -36,7 +36,9 @@ export function inferConfirmationDecision(transcript) {
         return t.includes(keyword);
       }
       // For single words, use word boundary regex
-      const regex = new RegExp(`\\b${keyword.replace(/'/g, "\\'")}\\b`, 'i');
+      // Escape special regex characters
+      const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`\\b${escapedKeyword}\\b`, 'i');
       return regex.test(t);
     });
   };
