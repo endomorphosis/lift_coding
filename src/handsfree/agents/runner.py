@@ -4,15 +4,21 @@ Provides a minimal runner loop that can transition tasks through states.
 Guarded by HANDSFREE_AGENT_RUNNER_ENABLED environment variable.
 """
 
+import json
 import logging
 import os
 import time
+import uuid
 from datetime import UTC, datetime
 from typing import Any
 
 import duckdb
 
-from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+from handsfree.db.agent_tasks import (
+    get_agent_task_by_id,
+    get_agent_tasks,
+    update_agent_task_state,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -85,10 +91,6 @@ def simulate_progress_update(
         True if update succeeded, False otherwise.
     """
     try:
-        import json
-
-        from handsfree.db.agent_tasks import get_agent_task_by_id
-
         task = get_agent_task_by_id(conn, task_id)
         if not task or task.state != "running":
             return False
@@ -105,7 +107,7 @@ def simulate_progress_update(
 
         # Update the database directly since we're not changing state
         try:
-            task_uuid = __import__("uuid").UUID(task_id)
+            task_uuid = uuid.UUID(task_id)
         except ValueError:
             return False
 
@@ -142,8 +144,6 @@ def process_running_task(
         Tuple of (success, error_message). error_message is None on success.
     """
     try:
-        from handsfree.db.agent_tasks import get_agent_task_by_id
-
         task = get_agent_task_by_id(conn, task_id)
         if not task:
             return False, f"Task {task_id} not found"
