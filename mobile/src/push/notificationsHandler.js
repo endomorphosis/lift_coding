@@ -88,8 +88,10 @@ export function setupNotificationListeners(onNotification) {
  * This enables deferred speaking when app is backgrounded
  */
 function setupAppStateMonitoring() {
+  // Only set up once - remove any existing subscription first
   if (appStateSubscription) {
-    return; // Already set up
+    appStateSubscription.remove();
+    appStateSubscription = null;
   }
 
   // Initialize current state
@@ -273,9 +275,12 @@ async function processPendingSpeakQueue() {
 
   console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
   
-  // Process all pending messages
-  while (pendingSpeakQueue.length > 0) {
-    const message = pendingSpeakQueue.shift();
+  // Process all pending messages - use a fixed count to avoid infinite loop
+  // if new messages are added during processing
+  const messagesToProcess = [...pendingSpeakQueue];
+  pendingSpeakQueue = [];
+  
+  for (const message of messagesToProcess) {
     try {
       await speakNotification(message);
       // Small delay between messages

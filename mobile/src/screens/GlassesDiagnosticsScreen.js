@@ -33,7 +33,7 @@ export default function GlassesDiagnosticsScreen() {
       await checkAudioRoute();
     })();
 
-    // Periodically refresh push debug state
+    // Periodically refresh push debug state (every 5 seconds)
     const interval = setInterval(() => {
       try {
         const state = getDebugState();
@@ -41,7 +41,7 @@ export default function GlassesDiagnosticsScreen() {
       } catch (error) {
         console.error('Failed to get push debug state:', error);
       }
-    }, 2000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
