@@ -4,15 +4,17 @@ Provides a minimal runner loop that can transition tasks through states.
 Guarded by HANDSFREE_AGENT_RUNNER_ENABLED environment variable.
 """
 
+import json
 import logging
 import os
 import time
+import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import duckdb
 
-from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+from handsfree.db.agent_tasks import get_agent_task_by_id, get_agent_tasks, update_agent_task_state
 from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
@@ -126,10 +128,6 @@ def simulate_progress_update(
         True if update succeeded, False otherwise.
     """
     try:
-        import json
-
-        from handsfree.db.agent_tasks import get_agent_task_by_id
-
         task = get_agent_task_by_id(conn, task_id)
         if not task or task.state != "running":
             return False
@@ -146,7 +144,7 @@ def simulate_progress_update(
 
         # Update the database directly since we're not changing state
         try:
-            task_uuid = __import__("uuid").UUID(task_id)
+            task_uuid = uuid.UUID(task_id)
         except ValueError:
             return False
 
@@ -198,8 +196,12 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
                 logger.warning("Task %s has no auto_started_at in trace, skipping", task.id)
                 continue
 
-            # Parse the start time
-            auto_started_at = datetime.fromisoformat(auto_started_at_str.replace("Z", "+00:00"))
+            # Parse the start time - handle both Z and +00:00 formats
+            try:
+                auto_started_at = datetime.fromisoformat(auto_started_at_str)
+            except ValueError:
+                # Try with Z replaced if fromisoformat fails
+                auto_started_at = datetime.fromisoformat(auto_started_at_str.replace("Z", "+00:00"))
 
             # Calculate elapsed time
             elapsed = (now - auto_started_at).total_seconds()
