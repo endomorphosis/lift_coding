@@ -2,9 +2,14 @@
 
 import json
 import logging
+import random
+import time
 from abc import ABC, abstractmethod
+from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+import httpx
 
 from handsfree.github.auth import GitHubAuthProvider, get_default_auth_provider
 
@@ -272,13 +277,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
             )
             raise RuntimeError("GitHub token not available for live API calls")
 
-        import random
-        import time
-        from datetime import datetime
-
         try:
-            import httpx
-
             url = f"https://api.github.com{endpoint}"
             headers = self._get_headers()
 
@@ -288,8 +287,9 @@ class LiveGitHubProvider(GitHubProviderInterface):
             max_retries = 3
             base_delay = 0.5  # seconds
 
-            for attempt in range(max_retries):
-                with httpx.Client(timeout=10.0) as client:
+            # Create client once and reuse for all retry attempts
+            with httpx.Client(timeout=10.0) as client:
+                for attempt in range(max_retries):
                     response = client.get(url, headers=headers, params=params or {})
 
                     # Check for rate limiting - GitHub returns 403 with X-RateLimit-Remaining: 0
