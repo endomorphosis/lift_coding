@@ -232,11 +232,12 @@ export async function startGitHubOAuth(scopes = null) {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
-  const url = scopes
-    ? `${baseUrl}/v1/github/oauth/start?scopes=${encodeURIComponent(scopes)}`
-    : `${baseUrl}/v1/github/oauth/start`;
+  const url = new URL('/v1/github/oauth/start', baseUrl);
+  if (scopes) {
+    url.searchParams.set('scopes', scopes);
+  }
 
-  const response = await fetch(url, {
+  const response = await fetch(url.toString(), {
     method: 'GET',
     headers,
   });
@@ -261,11 +262,11 @@ export async function completeGitHubOAuth(code, state) {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
-  const url = `${baseUrl}/v1/github/oauth/callback?code=${encodeURIComponent(
-    code
-  )}&state=${encodeURIComponent(state)}`;
+  const url = new URL('/v1/github/oauth/callback', baseUrl);
+  url.searchParams.set('code', code);
+  url.searchParams.set('state', state);
 
-  const response = await fetch(url, {
+  const response = await fetch(url.toString(), {
     method: 'GET',
     headers,
   });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -27,29 +27,7 @@ export default function SettingsScreen() {
     loadSettings();
   }, []);
 
-  useEffect(() => {
-    // Check for pending OAuth callback
-    checkPendingOAuthCallback();
-  }, []);
-
-  const checkPendingOAuthCallback = async () => {
-    try {
-      const pendingJson = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
-      if (pendingJson) {
-        const { code, state } = JSON.parse(pendingJson);
-        
-        // Clear the pending item immediately to prevent double processing
-        await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
-        
-        // Complete the OAuth flow
-        await handleOAuthCallback(code, state);
-      }
-    } catch (error) {
-      console.error('Error checking pending OAuth:', error);
-    }
-  };
-
-  const handleOAuthCallback = async (code, state) => {
+  const handleOAuthCallback = useCallback(async (code, state) => {
     try {
       setConnectingGithub(true);
       
@@ -76,7 +54,29 @@ export default function SettingsScreen() {
     } finally {
       setConnectingGithub(false);
     }
-  };
+  }, []);
+
+  const checkPendingOAuthCallback = useCallback(async () => {
+    try {
+      const pendingJson = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
+      if (pendingJson) {
+        const { code, state } = JSON.parse(pendingJson);
+        
+        // Clear the pending item immediately to prevent double processing
+        await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
+        
+        // Complete the OAuth flow
+        await handleOAuthCallback(code, state);
+      }
+    } catch (error) {
+      console.error('Error checking pending OAuth:', error);
+    }
+  }, [handleOAuthCallback]);
+
+  useEffect(() => {
+    // Check for pending OAuth callback
+    checkPendingOAuthCallback();
+  }, [checkPendingOAuthCallback]);
 
   const loadSettings = async () => {
     try {
@@ -244,7 +244,7 @@ export default function SettingsScreen() {
             <View style={styles.connectedContainer}>
               <Text style={styles.connectedText}>✓ GitHub Connected</Text>
               <Text style={styles.connectionIdText}>
-                Connection ID: {githubConnectionId.length > 8 
+                Connection ID: {githubConnectionId?.length > 8 
                   ? `${githubConnectionId.substring(0, 8)}...` 
                   : githubConnectionId}
               </Text>
