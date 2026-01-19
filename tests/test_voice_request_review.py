@@ -212,6 +212,107 @@ class TestVoiceCommandConfirmation:
         assert confirmation_logs[0].ok is True
         assert confirmation_logs[0].target == "default/repo#111"
 
+    def test_confirm_via_voice_followup_command(self, reset_db):
+        """Test that saying 'confirm' via /v1/command executes the latest pending action."""
+        from handsfree.api import get_db
+
+        db = get_db()
+
+        # Step 1: Create a pending action
+        response = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "request review from frank on PR 444"},
+                "profile": "default",
+                "client_context": {
+                    "device": "test",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "needs_confirmation"
+        token = data["pending_action"]["token"]
+
+        # Step 2: Follow up with a global voice command "confirm"
+        confirm_via_command = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "confirm"},
+                "profile": "default",
+                "client_context": {
+                    "device": "test",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        assert confirm_via_command.status_code == 200
+        confirm_data = confirm_via_command.json()
+        assert confirm_data["status"] == "ok"
+        assert "review requested" in confirm_data["spoken_text"].lower()
+
+        # Step 3: Ensure token was consumed (cannot confirm again)
+        retry = client.post("/v1/commands/confirm", json={"token": token})
+        assert retry.status_code == 404
+
+        # Step 4: Ensure audit logs show exactly one confirmation execution
+        logs = get_action_logs(db, action_type="request_review", limit=10)
+        confirmation_logs = [log for log in logs if log.result.get("via_confirmation")]
+        assert len(confirmation_logs) == 1
+
+    def test_cancel_via_voice_followup_command(self, reset_db):
+        """Test that saying 'cancel' via /v1/command cancels the latest pending action."""
+        # Step 1: Create a pending action
+        response = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "request review from grace on PR 555"},
+                "profile": "default",
+                "client_context": {
+                    "device": "test",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "needs_confirmation"
+        token = data["pending_action"]["token"]
+
+        # Step 2: Follow up with "cancel"
+        cancel_via_command = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "cancel"},
+                "profile": "default",
+                "client_context": {
+                    "device": "test",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        assert cancel_via_command.status_code == 200
+        cancel_data = cancel_via_command.json()
+        assert cancel_data["status"] == "ok"
+        assert cancel_data["intent"]["name"] == "system.cancel"
+
+        # Step 3: Original token should no longer be confirmable
+        confirm_after_cancel = client.post("/v1/commands/confirm", json={"token": token})
+        assert confirm_after_cancel.status_code == 404
+
     def test_retry_confirmation_fails(self, reset_db):
         """Test that retrying confirmation returns 404 and doesn't duplicate execution."""
         from handsfree.api import get_db

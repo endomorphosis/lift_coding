@@ -871,6 +871,44 @@ async def submit_command(
             store_transcript=should_store_transcript,
         )
 
+    # Global voice follow-ups: allow saying "confirm" or "cancel" without a token.
+    # This bridges the plan's system.confirm/system.cancel intents to the token-based
+    # /v1/commands/confirm endpoint by selecting the latest pending action for the user.
+    if parsed_intent.name in ("system.confirm", "system.cancel"):
+        from handsfree.db.pending_actions import (
+            delete_pending_action,
+            get_latest_pending_action_for_user,
+        )
+
+        latest = get_latest_pending_action_for_user(db, user_id)
+        if latest is None:
+            return CommandResponse(
+                status=CommandStatus.OK,
+                intent=ParsedIntent(name=parsed_intent.name, confidence=1.0),
+                spoken_text=(
+                    "No pending action to confirm."
+                    if parsed_intent.name == "system.confirm"
+                    else "No pending action to cancel."
+                ),
+                debug=DebugInfo(transcript=text),
+            )
+
+        if parsed_intent.name == "system.confirm":
+            # Delegate actual execution + exactly-once semantics to the confirm endpoint.
+            return await confirm_command(
+                ConfirmRequest(token=latest.token, idempotency_key=None),
+                user_id=user_id,
+            )
+
+        # system.cancel
+        delete_pending_action(db, latest.token)
+        return CommandResponse(
+            status=CommandStatus.OK,
+            intent=ParsedIntent(name="system.cancel", confidence=1.0),
+            spoken_text="Cancelled.",
+            debug=DebugInfo(transcript=text),
+        )
+
     # Special handling for pr.request_review - needs policy evaluation, rate limiting, audit logging
     # This bypasses the router because these intents require database operations and policy checks
     if parsed_intent.name == "pr.request_review":

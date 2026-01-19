@@ -158,3 +158,49 @@ def cleanup_expired_actions(conn: duckdb.DuckDBPyConnection) -> int:
     )
     # DuckDB doesn't return row count directly, so we approximate
     return 0  # Could query count before/after if needed
+
+
+def get_latest_pending_action_for_user(
+    conn: duckdb.DuckDBPyConnection,
+    user_id: str,
+) -> PendingAction | None:
+    """Get the most recent non-expired pending action for a user.
+
+    This supports the "global" voice flow where the user says "confirm" or
+    "cancel" without repeating a token.
+
+    Args:
+        conn: Database connection.
+        user_id: User UUID string.
+
+    Returns:
+        Latest PendingAction or None if none are pending.
+    """
+    now = datetime.now(UTC)
+    result = conn.execute(
+        """
+        SELECT token, user_id, summary, action_type, action_payload, expires_at, created_at
+        FROM pending_actions
+        WHERE user_id = ? AND expires_at > ?
+        ORDER BY created_at DESC
+        LIMIT 1
+        """,
+        [user_id, now],
+    ).fetchone()
+
+    if not result:
+        return None
+
+    payload = result[4]
+    if isinstance(payload, str):
+        payload = json.loads(payload)
+
+    return PendingAction(
+        token=result[0],
+        user_id=str(result[1]),
+        summary=result[2],
+        action_type=result[3],
+        action_payload=payload,
+        expires_at=result[5],
+        created_at=result[6],
+    )
