@@ -267,16 +267,22 @@ class SmokeTest:
 
             if response.status_code == 200:
                 data = response.json()
-                # Validate it's an array
-                if not isinstance(data, list):
+                
+                # Handle both array and object responses
+                notification_count = 0
+                if isinstance(data, list):
+                    notification_count = len(data)
+                elif isinstance(data, dict) and "notifications" in data:
+                    notification_count = len(data.get("notifications", []))
+                else:
                     self.log(
-                        "/v1/notifications returned non-array response", "warning"
+                        "/v1/notifications returned unexpected response format", "warning"
                     )
                     self.warnings += 1
                     return True  # Non-fatal
 
                 self.log(
-                    f"/v1/notifications check passed ({len(data)} notifications)",
+                    f"/v1/notifications check passed ({notification_count} notifications)",
                     "success",
                 )
                 return True
