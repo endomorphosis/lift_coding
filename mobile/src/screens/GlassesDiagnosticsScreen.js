@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, AppState, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
@@ -41,8 +41,18 @@ export default function GlassesDiagnosticsScreen() {
       console.error('Failed to get initial push debug state:', error);
     }
 
-    // Periodically refresh push debug state (every 5 seconds)
+    // Track app state to pause polling when backgrounded
+    let isActive = true;
+    
+    const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+      isActive = nextAppState === 'active';
+    });
+
+    // Periodically refresh push debug state (every 5 seconds) but only when active
     const interval = setInterval(() => {
+      if (!isActive) {
+        return; // Skip polling when app is backgrounded
+      }
       try {
         const state = getDebugState();
         setPushDebugState(state);
@@ -53,6 +63,7 @@ export default function GlassesDiagnosticsScreen() {
 
     return () => {
       clearInterval(interval);
+      appStateSubscription.remove();
       if (sound) {
         sound.unloadAsync();
       }

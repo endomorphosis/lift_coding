@@ -24,6 +24,8 @@ let isProcessingQueue = false;
 let isAppInBackground = false;
 let pendingSpeakQueue = [];
 let appStateSubscription = null;
+let isProcessingPendingQueue = false;
+let appStateMonitoringInitialized = false;
 
 // Debug state for UI visibility
 let debugState = {
@@ -88,18 +90,24 @@ export function setupNotificationListeners(onNotification) {
  * This enables deferred speaking when app is backgrounded
  */
 function setupAppStateMonitoring() {
-  // Only set up once - remove any existing subscription first
+  // Only set up once - prevent multiple initializations
+  if (appStateMonitoringInitialized) {
+    return;
+  }
+
+  // Remove any existing subscription first
   if (appStateSubscription) {
     appStateSubscription.remove();
     appStateSubscription = null;
   }
 
-  // Initialize current state
-  isAppInBackground = AppState.currentState.match(/inactive|background/) !== null;
+  // Initialize current state - use explicit comparison instead of regex match
+  const currentState = AppState.currentState;
+  isAppInBackground = currentState === 'background' || currentState === 'inactive';
 
   appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
     const wasInBackground = isAppInBackground;
-    isAppInBackground = nextAppState.match(/inactive|background/) !== null;
+    isAppInBackground = nextAppState === 'background' || nextAppState === 'inactive';
 
     console.log(`AppState changed to: ${nextAppState}, background: ${isAppInBackground}`);
 
@@ -109,6 +117,8 @@ function setupAppStateMonitoring() {
       processPendingSpeakQueue();
     }
   });
+
+  appStateMonitoringInitialized = true;
 }
 
 /**
@@ -181,7 +191,10 @@ export async function speakNotification(message) {
   // If app is in background, defer speaking until app is foregrounded
   if (isAppInBackground) {
     console.log('App is backgrounded, deferring speech:', message);
-    pendingSpeakQueue.push(message);
+    // Avoid enqueueing duplicate messages while backgrounded
+    if (!pendingSpeakQueue.includes(message)) {
+      pendingSpeakQueue.push(message);
+    }
     debugState.lastSpokenText = `(deferred) ${message}`;
     return;
   }
@@ -269,24 +282,31 @@ export async function speakNotification(message) {
  * Process any pending speak requests that were deferred while app was backgrounded
  */
 async function processPendingSpeakQueue() {
-  if (pendingSpeakQueue.length === 0) {
+  // Guard against concurrent execution
+  if (isProcessingPendingQueue || pendingSpeakQueue.length === 0) {
     return;
   }
 
-  console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
-  
-  // Atomically extract all pending messages to avoid race conditions
-  // Any new messages added during processing will be handled in the next call
-  const messagesToProcess = pendingSpeakQueue.splice(0);
-  
-  for (const message of messagesToProcess) {
-    try {
-      await speakNotification(message);
-      // Small delay between messages
-      await new Promise(resolve => setTimeout(resolve, 500));
-    } catch (error) {
-      console.error('Error processing deferred speak request:', error);
+  isProcessingPendingQueue = true;
+
+  try {
+    console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
+    
+    // Atomically extract all pending messages to avoid race conditions
+    // Any new messages added during processing will be handled in the next call
+    const messagesToProcess = pendingSpeakQueue.splice(0);
+    
+    for (const message of messagesToProcess) {
+      try {
+        await speakNotification(message);
+        // Small delay between messages
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } catch (error) {
+        console.error('Error processing deferred speak request:', error);
+      }
     }
+  } finally {
+    isProcessingPendingQueue = false;
   }
 }
 
