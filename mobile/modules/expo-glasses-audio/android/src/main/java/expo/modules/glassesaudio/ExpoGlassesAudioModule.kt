@@ -84,8 +84,11 @@ class ExpoGlassesAudioModule : Module() {
         val outputDir = context.getExternalFilesDir(null)
         val outputFile = File(outputDir, filename)
         
-        // Start recording
-        val audioRecord = recorder.start()
+        // Start recording with WAV file output
+        val audioRecord = recorder.start(outputFile)
+        
+        // Emit recording started event
+        sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
         
         // Schedule stop after duration
         handler.postDelayed({
@@ -94,6 +97,9 @@ class ExpoGlassesAudioModule : Module() {
           audioManager.mode = AudioManager.MODE_NORMAL
           
           val fileSize = if (outputFile.exists()) outputFile.length() else 0L
+          
+          // Emit recording stopped event
+          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
           
           promise.resolve(
             mapOf(
@@ -143,22 +149,45 @@ class ExpoGlassesAudioModule : Module() {
           return@AsyncFunction
         }
         
-        // TODO: Implement full WAV file parsing and playback
-        // Current implementation: Basic acknowledgment for testing
-        // Production implementation should:
-        // 1. Parse WAV header to get format/sample rate
-        // 2. Read PCM data into buffer
-        // 3. Use GlassesPlayer.playPcm16Mono() or AudioTrack for playback
-        // 4. Send playback status events
+        // Emit playback started event
+        sendEvent("onPlaybackStatus", mapOf(
+          "isPlaying" to true,
+          "position" to 0,
+          "duration" to 0
+        ))
         
-        // For now, just enable SCO and acknowledge
-        // The diagnostics screen will show playback started
-        handler.postDelayed({
+        try {
+          // Parse and play WAV file
+          val wavInfo = player.playWavFile(file) {
+            // Playback completed callback
+            handler.post {
+              audioManager.stopBluetoothSco()
+              audioManager.mode = AudioManager.MODE_NORMAL
+              
+              // Emit playback ended event
+              sendEvent("onPlaybackStatus", mapOf(
+                "isPlaying" to false,
+                "position" to 0,
+                "duration" to 0
+              ))
+            }
+          }
+          
+          promise.resolve(null)
+        } catch (e: Exception) {
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
-        }, 3000)
-        
-        promise.resolve(null)
+          
+          // Emit playback error event
+          sendEvent("onPlaybackStatus", mapOf(
+            "isPlaying" to false,
+            "position" to 0,
+            "duration" to 0,
+            "error" to e.message
+          ))
+          
+          promise.reject("ERR_PLAY_AUDIO", "Failed to play WAV file: ${e.message}", e)
+        }
       } catch (e: Exception) {
         promise.reject("ERR_PLAY_AUDIO", "Failed to play audio: ${e.message}", e)
       }
