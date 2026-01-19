@@ -30,6 +30,35 @@ This means you can configure `github_issue_dispatch` once via environment variab
 
 See the [Agent Runner Setup Guide](docs/agent-runner-setup.md) for configuration instructions.
 
+## Quick Demo
+
+Want to quickly test the API? Use the demo environment configuration and smoke test:
+
+1. **Copy the demo environment template**
+   ```bash
+   cp .env.example.demo .env
+   ```
+
+2. **Start the server**
+   ```bash
+   make dev
+   ```
+
+3. **Run the smoke test** (in a separate terminal)
+   ```bash
+   python scripts/smoke_demo.py
+   ```
+
+The smoke test validates that the server is running correctly by checking:
+- `/v1/status` - Service health and dependencies
+- `/v1/tts` - Text-to-speech endpoint
+- `/v1/command` - Command processing with a simple inbox query
+- `/v1/notifications` - Notification listing (non-fatal if not configured)
+
+The script exits with code 0 on success, non-zero on failure, and prints actionable errors for any issues.
+
+**Note:** The demo configuration uses fixture-based responses and doesn't require external services like GitHub or Redis.
+
 ## Quickstart
 
 ### Prerequisites
