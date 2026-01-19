@@ -33,6 +33,14 @@ export default function GlassesDiagnosticsScreen() {
       await checkAudioRoute();
     })();
 
+    // Fetch initial debug state immediately
+    try {
+      const state = getDebugState();
+      setPushDebugState(state);
+    } catch (error) {
+      console.error('Failed to get initial push debug state:', error);
+    }
+
     // Periodically refresh push debug state (every 5 seconds)
     const interval = setInterval(() => {
       try {
