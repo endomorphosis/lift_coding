@@ -7,6 +7,9 @@ import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
 import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
+const NATIVE_RECORDING_DURATION_SECONDS = 10;
+const NATIVE_PLAYBACK_TIMEOUT_MS = 3000;
+const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -21,6 +24,7 @@ export default function GlassesDiagnosticsScreen() {
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
+  const [playbackTimeoutId, setPlaybackTimeoutId] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -44,6 +48,9 @@ export default function GlassesDiagnosticsScreen() {
     return () => {
       if (sound) {
         sound.unloadAsync();
+      }
+      if (playbackTimeoutId) {
+        clearTimeout(playbackTimeoutId);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,12 +147,12 @@ export default function GlassesDiagnosticsScreen() {
       } else {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
-          // Start recording with 10 second duration (user will manually stop)
-          const result = await ExpoGlassesAudio.startRecording(10);
+          // Start recording with configured duration (user will manually stop)
+          const result = await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           setLastRecordingUri(result.uri);
           setIsRecording(true);
         } else {
-          setLastError('Native module not available. Switch to DEV mode.');
+          setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
         }
       }
     } catch (error) {
@@ -179,6 +186,12 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopPlayback = async () => {
     try {
+      // Clear any pending timeout
+      if (playbackTimeoutId) {
+        clearTimeout(playbackTimeoutId);
+        setPlaybackTimeoutId(null);
+      }
+      
       if (devMode) {
         // DEV mode: use expo-av
         if (sound) {
@@ -232,11 +245,13 @@ export default function GlassesDiagnosticsScreen() {
         await ExpoGlassesAudio.playAudio(uri);
         setIsPlaying(true);
         // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
           setIsPlaying(false);
-        }, 3000);
+          setPlaybackTimeoutId(null);
+        }, NATIVE_PLAYBACK_TIMEOUT_MS);
+        setPlaybackTimeoutId(timeoutId);
       } else {
-        setLastError('Native module not available. Switch to DEV mode.');
+        setLastError('Audio playback unavailable - native module not found. Switch to DEV mode.');
       }
     }
   };
