@@ -2,7 +2,10 @@
 
 import json
 import logging
+import random
+import time
 from abc import ABC, abstractmethod
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -250,14 +253,71 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         return headers
 
+    def _is_rate_limited(self, response) -> bool:
+        """Check if response indicates rate limiting.
+
+        GitHub typically returns 403 with X-RateLimit-Remaining: 0 for rate limits.
+
+        Args:
+            response: httpx Response object
+
+        Returns:
+            True if the response indicates rate limiting
+        """
+        if response.status_code == 429:
+            return True
+
+        # GitHub often returns 403 for rate limits, check remaining header
+        if response.status_code == 403:
+            remaining = response.headers.get("X-RateLimit-Remaining", "")
+            if remaining == "0":
+                return True
+
+        return False
+
+    def _get_retry_time_message(self, response) -> str:
+        """Get a human-readable retry time message from rate limit headers.
+
+        Args:
+            response: httpx Response object with rate limit headers
+
+        Returns:
+            Human-readable message about when to retry
+        """
+        reset_timestamp = response.headers.get("X-RateLimit-Reset", "")
+        if not reset_timestamp:
+            return "unknown time"
+
+        try:
+            reset_time = datetime.fromtimestamp(int(reset_timestamp))
+            now = datetime.now()
+            delta = reset_time - now
+
+            if delta.total_seconds() <= 0:
+                return "now"
+
+            # Format as human-readable duration
+            seconds = int(delta.total_seconds())
+            if seconds < 60:
+                return f"{seconds} seconds"
+            elif seconds < 3600:
+                minutes = seconds // 60
+                return f"{minutes} minute{'s' if minutes != 1 else ''}"
+            else:
+                hours = seconds // 3600
+                return f"{hours} hour{'s' if hours != 1 else ''}"
+        except (ValueError, OSError):
+            return reset_timestamp
+
     def _make_request(
-        self, endpoint: str, params: dict[str, Any] | None = None
+        self, endpoint: str, params: dict[str, Any] | None = None, _retry_count: int = 0
     ) -> dict[str, Any] | list[dict[str, Any]]:
-        """Make a GET request to GitHub API.
+        """Make a GET request to GitHub API with retry logic.
 
         Args:
             endpoint: API endpoint path (e.g., "/repos/owner/repo/pulls/123")
             params: Optional query parameters
+            _retry_count: Internal retry counter (do not set manually)
 
         Returns:
             JSON response as dict or list
@@ -283,26 +343,59 @@ class LiveGitHubProvider(GitHubProviderInterface):
             with httpx.Client(timeout=10.0) as client:
                 response = client.get(url, headers=headers, params=params or {})
 
-                # Check for rate limiting
-                if response.status_code == 429:
-                    rate_limit_reset = response.headers.get("X-RateLimit-Reset", "unknown")
-                    logger.error("GitHub API rate limit exceeded. Reset at: %s", rate_limit_reset)
+                # Check for rate limiting (429 or 403 with remaining=0)
+                if self._is_rate_limited(response):
+                    retry_msg = self._get_retry_time_message(response)
+                    logger.error(
+                        "GitHub API rate limit exceeded for %s. Try again in %s",
+                        endpoint,
+                        retry_msg,
+                    )
                     raise RuntimeError(
-                        f"GitHub API rate limit exceeded. Try again after {rate_limit_reset}"
+                        f"GitHub API rate limit exceeded. Try again in {retry_msg}"
                     )
 
-                # Check for authentication errors
+                # Check for authentication errors (do not retry)
                 if response.status_code == 401:
                     logger.error("GitHub API authentication failed: 401 Unauthorized")
                     raise RuntimeError(
                         "GitHub API authentication failed. Token may be invalid or expired."
                     )
 
+                # Check for permission errors (do not retry)
                 if response.status_code == 403:
+                    # If we get here, it's a 403 but not rate-limited (remaining != 0)
                     logger.error("GitHub API access forbidden: 403 Forbidden")
                     raise RuntimeError(
                         "GitHub API access forbidden. Token may lack required permissions."
                     )
+
+                # Check for transient server errors (retry with backoff)
+                if response.status_code in (502, 503, 504):
+                    max_retries = 3
+                    if _retry_count < max_retries:
+                        # Exponential backoff with jitter
+                        base_delay = 2 ** _retry_count  # 1s, 2s, 4s
+                        jitter = random.uniform(0, 0.5 * base_delay)
+                        delay = base_delay + jitter
+
+                        logger.warning(
+                            "Transient error (HTTP %d) for %s, retrying in %.2fs (attempt %d/%d)",
+                            response.status_code,
+                            endpoint,
+                            delay,
+                            _retry_count + 1,
+                            max_retries,
+                        )
+                        time.sleep(delay)
+                        return self._make_request(endpoint, params, _retry_count + 1)
+                    else:
+                        logger.error(
+                            "Max retries (%d) exceeded for transient error (HTTP %d) on %s",
+                            max_retries,
+                            response.status_code,
+                            endpoint,
+                        )
 
                 # Raise for other HTTP errors
                 if response.status_code >= 400:
