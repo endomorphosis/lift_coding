@@ -5,6 +5,7 @@ import uuid
 import pytest
 from fastapi.testclient import TestClient
 
+from handsfree import api as api_module
 from handsfree.api import app
 from handsfree.db.agent_tasks import create_agent_task
 
@@ -14,8 +15,6 @@ client = TestClient(app)
 @pytest.fixture
 def reset_db():
     """Reset the database connection before each test."""
-    import handsfree.api as api_module
-
     api_module._db_conn = None
     yield
     api_module._db_conn = None
@@ -102,7 +101,7 @@ class TestListAgentTasks:
             provider="copilot",
             instruction="User 1 task",
         )
-        task2 = create_agent_task(
+        create_agent_task(
             conn=db,
             user_id=test_user_id_2,
             provider="copilot",
@@ -240,7 +239,7 @@ class TestListAgentTasks:
         db = get_db()
 
         # Create task with pr_url in trace
-        task = create_agent_task(
+        _ = create_agent_task(
             conn=db,
             user_id=FIXTURE_USER_ID,
             provider="copilot",
