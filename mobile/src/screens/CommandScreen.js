@@ -10,10 +10,11 @@ import {
   Alert,
   TouchableOpacity,
   Switch,
+  Modal,
 } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS } from '../api/client';
+import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
@@ -37,6 +38,11 @@ export default function CommandScreen() {
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
   const [autoPlayTts, setAutoPlayTts] = useState(true);
+
+  // Confirmation modal state
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [pendingAction, setPendingAction] = useState(null);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   useEffect(() => {
     // Request audio permissions on mount
@@ -135,9 +141,25 @@ export default function CommandScreen() {
       const data = await sendCommand(commandText);
       setResponse(data);
       
-      // Auto-play TTS if enabled and spoken_text is available
-      if (autoPlayTts && data.spoken_text) {
-        await playTTS(data.spoken_text);
+      // Check if confirmation is required
+      if (data.pending_action) {
+        console.log('[CommandScreen] Pending action detected:', {
+          token: data.pending_action.token,
+          summary: data.pending_action.summary,
+          expires_at: data.pending_action.expires_at,
+        });
+        setPendingAction(data.pending_action);
+        setShowConfirmModal(true);
+        
+        // Auto-play confirmation prompt if TTS is enabled
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
+      } else {
+        // Auto-play TTS if enabled and spoken_text is available
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -225,9 +247,25 @@ export default function CommandScreen() {
       });
       setResponse(data);
       
-      // Auto-play TTS if enabled and spoken_text is available
-      if (autoPlayTts && data.spoken_text) {
-        await playTTS(data.spoken_text);
+      // Check if confirmation is required
+      if (data.pending_action) {
+        console.log('[CommandScreen] Pending action detected (audio):', {
+          token: data.pending_action.token,
+          summary: data.pending_action.summary,
+          expires_at: data.pending_action.expires_at,
+        });
+        setPendingAction(data.pending_action);
+        setShowConfirmModal(true);
+        
+        // Auto-play confirmation prompt if TTS is enabled
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
+      } else {
+        // Auto-play TTS if enabled and spoken_text is available
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
       }
       
       // Clear recorded audio
@@ -246,6 +284,42 @@ export default function CommandScreen() {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleConfirmAction = async () => {
+    if (!pendingAction?.token) return;
+
+    console.log('[CommandScreen] Confirming action with token:', pendingAction.token);
+    setConfirmLoading(true);
+
+    try {
+      const confirmResponse = await confirmCommand(pendingAction.token);
+      console.log('[CommandScreen] Confirmation successful:', confirmResponse);
+      
+      // Update response with confirmation result
+      setResponse(confirmResponse);
+      setShowConfirmModal(false);
+      setPendingAction(null);
+      
+      // Auto-play TTS if enabled
+      if (autoPlayTts && confirmResponse.spoken_text) {
+        await playTTS(confirmResponse.spoken_text);
+      }
+      
+      Alert.alert('Success', 'Action confirmed successfully');
+    } catch (err) {
+      console.error('[CommandScreen] Confirmation failed:', err);
+      Alert.alert('Error', `Confirmation failed: ${err.message}`);
+    } finally {
+      setConfirmLoading(false);
+    }
+  };
+
+  const handleCancelAction = () => {
+    console.log('[CommandScreen] User cancelled confirmation');
+    setShowConfirmModal(false);
+    setPendingAction(null);
+    Alert.alert('Cancelled', 'Action was not confirmed');
   };
 
   const getErrorHint = (errorMessage) => {
@@ -292,6 +366,64 @@ export default function CommandScreen() {
 
   return (
     <ScrollView style={styles.container}>
+      {/* Confirmation Modal */}
+      <Modal
+        visible={showConfirmModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={handleCancelAction}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>⚠️ Confirmation Required</Text>
+            
+            {pendingAction?.summary && (
+              <Text style={styles.modalSummary}>{pendingAction.summary}</Text>
+            )}
+            
+            {showDebugPanel && pendingAction?.token && (
+              <View style={styles.modalDebug}>
+                <Text style={styles.modalDebugLabel}>Token:</Text>
+                <Text style={styles.modalDebugText}>{pendingAction.token}</Text>
+              </View>
+            )}
+            
+            {showDebugPanel && pendingAction?.expires_at && (
+              <View style={styles.modalDebug}>
+                <Text style={styles.modalDebugLabel}>Expires:</Text>
+                <Text style={styles.modalDebugText}>
+                  {new Date(pendingAction.expires_at).toLocaleString()}
+                </Text>
+              </View>
+            )}
+            
+            <Text style={styles.modalPrompt}>
+              Do you want to proceed with this action?
+            </Text>
+            
+            {confirmLoading ? (
+              <ActivityIndicator size="large" color="#007AFF" style={styles.modalLoading} />
+            ) : (
+              <View style={styles.modalButtons}>
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.confirmButton]}
+                  onPress={handleConfirmAction}
+                >
+                  <Text style={styles.confirmButtonText}>✓ Confirm</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.cancelButton]}
+                  onPress={handleCancelAction}
+                >
+                  <Text style={styles.cancelButtonText}>✗ Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        </View>
+      </Modal>
+
       <Text style={styles.title}>Send Command</Text>
 
       {/* Dev Mode Settings */}
@@ -784,5 +916,92 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 14,
     fontWeight: '600',
+  },
+  // Confirmation Modal styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 20,
+    width: '100%',
+    maxWidth: 400,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#ff6b00',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalSummary: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 15,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  modalPrompt: {
+    fontSize: 15,
+    color: '#666',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  modalDebug: {
+    backgroundColor: '#f5f5f5',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  modalDebugLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#666',
+    marginBottom: 3,
+  },
+  modalDebugText: {
+    fontSize: 11,
+    fontFamily: 'monospace',
+    color: '#333',
+  },
+  modalLoading: {
+    marginVertical: 20,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  modalButton: {
+    flex: 1,
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  confirmButton: {
+    backgroundColor: '#28a745',
+  },
+  confirmButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  cancelButton: {
+    backgroundColor: '#dc3545',
+  },
+  cancelButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
