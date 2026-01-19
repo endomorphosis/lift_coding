@@ -4081,12 +4081,14 @@ async def github_oauth_start(
     oauth_scopes = scopes or default_scopes
 
     # Generate CSRF protection state token
+    # TTL can be configured via GITHUB_OAUTH_STATE_TTL_MINUTES (default: 10)
+    state_ttl_minutes = int(os.getenv("GITHUB_OAUTH_STATE_TTL_MINUTES", "10"))
     db = get_db()
     state_token = generate_oauth_state(
         conn=db,
         user_id=user_id,
         scopes=oauth_scopes,
-        ttl_minutes=10,
+        ttl_minutes=state_ttl_minutes,
     )
 
     # Construct GitHub OAuth authorization URL with state parameter

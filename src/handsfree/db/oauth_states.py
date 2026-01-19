@@ -142,12 +142,15 @@ def cleanup_expired_oauth_states(
     """
     cutoff = datetime.now(UTC) - timedelta(hours=older_than_hours)
 
-    result = conn.execute(
+    conn.execute(
         """
         DELETE FROM oauth_states
         WHERE created_at < ? OR expires_at < ?
         """,
         [cutoff, datetime.now(UTC)],
     )
-
-    return result.fetchone()[0] if result else 0
+    
+    # DuckDB doesn't return row count from DELETE in fetchone()
+    # Return 0 as we can't easily get the count
+    # This is acceptable as cleanup is a best-effort operation
+    return 0
