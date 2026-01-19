@@ -14,9 +14,11 @@ declare module '../../modules/expo-glasses-audio' {
     size: number;
   }
 
+  export type AudioSource = 'phone' | 'glasses' | 'auto';
+
   export function getAudioRoute(): AudioRouteInfo;
   
-  export function startRecording(durationSeconds: number): Promise<RecordingResult>;
+  export function startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult>;
   
   export function stopRecording(): Promise<RecordingResult>;
   
