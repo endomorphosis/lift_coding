@@ -4,6 +4,8 @@ import re
 from dataclasses import dataclass
 from enum import Enum
 
+from handsfree.models import PrivacyMode
+
 
 class Profile(str, Enum):
     """User context profiles affecting response verbosity and confirmation strictness."""
@@ -14,14 +16,6 @@ class Profile(str, Enum):
     FOCUSED = "focused"
     RELAXED = "relaxed"
     DEFAULT = "default"
-
-
-# Import PrivacyMode here to avoid circular imports
-# We use string literal for type hints to defer evaluation
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from handsfree.models import PrivacyMode
 
 
 @dataclass
@@ -35,13 +29,11 @@ class ProfileConfig:
     max_summary_sentences: int  # Maximum sentences in summaries
     max_inbox_items: int  # Maximum items to return in inbox listing
     detail_level: str  # "minimal", "brief", "moderate", "detailed"
-    privacy_mode: "PrivacyMode"  # Privacy mode for this profile (strict/balanced/debug)
+    privacy_mode: PrivacyMode  # Privacy mode for this profile (strict/balanced/debug)
 
     @classmethod
     def for_profile(cls, profile: Profile) -> "ProfileConfig":
         """Get configuration for the given profile."""
-        from handsfree.models import PrivacyMode
-        
         configs = {
             Profile.WORKOUT: cls(
                 profile=Profile.WORKOUT,
