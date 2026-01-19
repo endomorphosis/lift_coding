@@ -43,6 +43,8 @@ export default function CommandScreen() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [voiceConfirmLoading, setVoiceConfirmLoading] = useState(false);
+  const [voiceConfirmTranscript, setVoiceConfirmTranscript] = useState(null);
 
   useEffect(() => {
     // Request audio permissions on mount
@@ -286,27 +288,30 @@ export default function CommandScreen() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const handleConfirmAction = async () => {
+  const confirmPendingAction = async ({ source = 'tap' } = {}) => {
     if (!pendingAction?.token) return;
 
-    console.log('[CommandScreen] Confirming action with token:', pendingAction.token);
+    console.log('[CommandScreen] Confirming action with token:', pendingAction.token, 'source:', source);
     setConfirmLoading(true);
 
     try {
       const confirmResponse = await confirmCommand(pendingAction.token);
       console.log('[CommandScreen] Confirmation successful:', confirmResponse);
-      
+
       // Update response with confirmation result
       setResponse(confirmResponse);
       setShowConfirmModal(false);
       setPendingAction(null);
-      
+      setVoiceConfirmTranscript(null);
+
       // Auto-play TTS if enabled
       if (autoPlayTts && confirmResponse.spoken_text) {
         await playTTS(confirmResponse.spoken_text);
       }
-      
-      Alert.alert('Success', 'Action confirmed successfully');
+
+      if (source === 'tap') {
+        Alert.alert('Success', 'Action confirmed successfully');
+      }
     } catch (err) {
       console.error('[CommandScreen] Confirmation failed:', err);
       Alert.alert('Error', `Confirmation failed: ${err.message}`);
@@ -315,11 +320,106 @@ export default function CommandScreen() {
     }
   };
 
-  const handleCancelAction = () => {
+  const handleConfirmAction = async () => {
+    await confirmPendingAction({ source: 'tap' });
+  };
+
+  const handleCancelAction = ({ silent = false } = {}) => {
     console.log('[CommandScreen] User cancelled confirmation');
     setShowConfirmModal(false);
     setPendingAction(null);
-    Alert.alert('Cancelled', 'Action was not confirmed');
+    setVoiceConfirmTranscript(null);
+    if (!silent) {
+      Alert.alert('Cancelled', 'Action was not confirmed');
+    }
+  };
+
+  const inferConfirmationDecision = (transcript) => {
+    if (!transcript) return null;
+
+    const t = transcript.toLowerCase().trim();
+    // Prefer explicit cancel if present
+    const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', 'dont', "don't"];
+    const confirmKeywords = ['confirm', 'yes', 'do it', 'proceed', 'ok', 'okay', 'approve'];
+
+    if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
+    if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
+    return null;
+  };
+
+  const handleVoiceConfirm = async () => {
+    if (!pendingAction?.token) return;
+
+    setVoiceConfirmLoading(true);
+    setVoiceConfirmTranscript(null);
+    try {
+      const { status } = await Audio.requestPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permission Required', 'Microphone permission is required for voice confirmation.');
+        return;
+      }
+
+      // Record a short clip (kept short to reduce latency)
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+
+      const { recording: voiceRecording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
+      );
+
+      const clipDurationMs = 1400;
+      await new Promise((resolve) => setTimeout(resolve, clipDurationMs));
+      await voiceRecording.stopAndUnloadAsync();
+      const voiceUri = voiceRecording.getURI();
+
+      if (!voiceUri) {
+        throw new Error('No recording URI returned');
+      }
+
+      // Upload the clip and run it through /v1/command with debug transcript enabled
+      const audioBase64 = await FileSystem.readAsStringAsync(voiceUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+
+      const sttResult = await sendAudioCommand(fileUri, format, {
+        duration_ms: clipDurationMs,
+        profile: 'workout',
+        client_context: {
+          debug: true,
+          // Avoid redaction in transcript during dev testing
+          privacy_mode: 'off',
+        },
+      });
+
+      const transcript = (sttResult?.debug?.transcript || '').trim();
+      setVoiceConfirmTranscript(transcript || '(no transcript)');
+
+      const decision = inferConfirmationDecision(transcript);
+      if (decision === 'confirm') {
+        await confirmPendingAction({ source: 'voice' });
+        return;
+      }
+
+      if (decision === 'cancel') {
+        handleCancelAction({ silent: true });
+        return;
+      }
+
+      Alert.alert(
+        'Voice Confirmation',
+        `I heard: "${transcript || '...'}"\n\nSay "confirm" or "cancel", or use the buttons.`,
+        [{ text: 'OK' }]
+      );
+    } catch (err) {
+      console.error('[CommandScreen] Voice confirmation failed:', err);
+      Alert.alert('Voice Confirmation Failed', err.message);
+    } finally {
+      setVoiceConfirmLoading(false);
+    }
   };
 
   const getErrorHint = (errorMessage) => {
@@ -414,12 +514,32 @@ export default function CommandScreen() {
                 
                 <TouchableOpacity
                   style={[styles.modalButton, styles.cancelButton]}
-                  onPress={handleCancelAction}
+                  onPress={() => handleCancelAction()}
                 >
                   <Text style={styles.cancelButtonText}>✗ Cancel</Text>
                 </TouchableOpacity>
               </View>
             )}
+
+            <View style={styles.modalVoiceSection}>
+              {voiceConfirmLoading ? (
+                <View style={styles.modalVoiceLoading}>
+                  <ActivityIndicator size="small" color="#007AFF" />
+                  <Text style={styles.modalVoiceText}>Listening…</Text>
+                </View>
+              ) : (
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.voiceButton]}
+                  onPress={handleVoiceConfirm}
+                >
+                  <Text style={styles.voiceButtonText}>🎙 Voice: say “confirm” or “cancel”</Text>
+                </TouchableOpacity>
+              )}
+
+              {showDebugPanel && voiceConfirmTranscript ? (
+                <Text style={styles.modalVoiceTranscript}>Heard: {voiceConfirmTranscript}</Text>
+              ) : null}
+            </View>
           </View>
         </View>
       </Modal>
@@ -1007,5 +1127,38 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  modalVoiceSection: {
+    marginTop: 12,
+  },
+  modalVoiceLoading: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+  },
+  modalVoiceText: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: '#007AFF',
+    fontWeight: '600',
+  },
+  voiceButton: {
+    backgroundColor: '#f0f7ff',
+    borderWidth: 1,
+    borderColor: '#cfe6ff',
+    marginTop: 8,
+  },
+  voiceButtonText: {
+    color: '#007AFF',
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  modalVoiceTranscript: {
+    marginTop: 8,
+    fontSize: 12,
+    color: '#555',
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
 });
