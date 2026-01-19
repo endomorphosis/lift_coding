@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    marginHorizontal: -4,
   },
   profileButton: {
     paddingHorizontal: 16,
@@ -59,6 +59,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderWidth: 1,
     borderColor: '#ddd',
+    marginHorizontal: 4,
+    marginBottom: 8,
   },
   profileButtonActive: {
     backgroundColor: '#007AFF',
