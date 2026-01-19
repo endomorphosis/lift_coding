@@ -6,17 +6,32 @@
  * - Parsing incoming notification payloads
  * - Fetching TTS audio and playing it
  * - Polling fallback for development/testing
+ * - Background-safe TTS deferral
  */
 
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import { AppState } from 'react-native';
 import { getBaseUrl, getHeaders } from '../api/config';
 import { fetchTTS } from '../api/client';
 
 // Notification queue for sequential TTS playback
 let notificationQueue = [];
 let isProcessingQueue = false;
+
+// Background state tracking
+let isAppInBackground = false;
+let pendingSpeakQueue = [];
+let appStateSubscription = null;
+
+// Debug state for UI visibility
+let debugState = {
+  lastNotificationReceived: null,
+  lastSpokenText: null,
+  lastPlaybackError: null,
+  lastNotificationTime: null,
+};
 
 // Configure how notifications are handled when app is in foreground
 Notifications.setNotificationHandler({
@@ -28,10 +43,13 @@ Notifications.setNotificationHandler({
 });
 
 /**
- * Set up notification listeners
+ * Set up notification listeners and background state monitoring
  * @param {Function} onNotification - Callback when notification is received
  */
 export function setupNotificationListeners(onNotification) {
+  // Set up AppState monitoring for background/foreground detection
+  setupAppStateMonitoring();
+
   // Handle notifications received while app is foregrounded
   const foregroundSubscription = Notifications.addNotificationReceivedListener(
     async (notification) => {
@@ -58,7 +76,37 @@ export function setupNotificationListeners(onNotification) {
   return () => {
     foregroundSubscription.remove();
     responseSubscription.remove();
+    if (appStateSubscription) {
+      appStateSubscription.remove();
+      appStateSubscription = null;
+    }
   };
+}
+
+/**
+ * Set up AppState monitoring to detect background/foreground transitions
+ * This enables deferred speaking when app is backgrounded
+ */
+function setupAppStateMonitoring() {
+  if (appStateSubscription) {
+    return; // Already set up
+  }
+
+  // Initialize current state
+  isAppInBackground = AppState.currentState.match(/inactive|background/) !== null;
+
+  appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+    const wasInBackground = isAppInBackground;
+    isAppInBackground = nextAppState.match(/inactive|background/) !== null;
+
+    console.log(`AppState changed to: ${nextAppState}, background: ${isAppInBackground}`);
+
+    // If app just came to foreground, process any pending speak requests
+    if (wasInBackground && !isAppInBackground) {
+      console.log('App foregrounded, processing pending speak queue');
+      processPendingSpeakQueue();
+    }
+  });
 }
 
 /**
@@ -68,6 +116,14 @@ export function setupNotificationListeners(onNotification) {
 async function handleNotification(notification) {
   const data = notification.request.content.data;
   const body = notification.request.content.body;
+  
+  // Update debug state
+  debugState.lastNotificationReceived = {
+    data,
+    body,
+    time: new Date().toISOString(),
+  };
+  debugState.lastNotificationTime = new Date().toISOString();
   
   // Extract message from notification
   let message = data.message || body || 'New notification';
@@ -86,7 +142,7 @@ async function handleNotification(notification) {
     }
   }
 
-  // Speak the notification via TTS
+  // Speak the notification via TTS (with background awareness)
   await speakNotification(message);
 }
 
@@ -116,14 +172,24 @@ async function fetchNotificationDetails(notificationId) {
 
 /**
  * Convert notification text to speech and play it
+ * Background-safe: defers speaking if app is backgrounded
  * @param {string} message - Message to speak
  */
 export async function speakNotification(message) {
+  // If app is in background, defer speaking until app is foregrounded
+  if (isAppInBackground) {
+    console.log('App is backgrounded, deferring speech:', message);
+    pendingSpeakQueue.push(message);
+    debugState.lastSpokenText = `(deferred) ${message}`;
+    return;
+  }
+
   let sound = null;
   let tempFileUri = null;
   
   try {
     console.log('Speaking notification:', message);
+    debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
     const audioBlob = await fetchTTS(message);
@@ -171,8 +237,13 @@ export async function speakNotification(message) {
       }
     });
 
+    // Clear error state on success
+    debugState.lastPlaybackError = null;
+
   } catch (error) {
     console.error('Failed to speak notification:', error);
+    debugState.lastPlaybackError = error.message;
+    
     // Clean up on error
     if (sound) {
       try {
@@ -188,6 +259,29 @@ export async function speakNotification(message) {
       } catch (cleanupError) {
         console.error('Temp file cleanup error:', cleanupError);
       }
+    }
+  }
+}
+
+/**
+ * Process any pending speak requests that were deferred while app was backgrounded
+ */
+async function processPendingSpeakQueue() {
+  if (pendingSpeakQueue.length === 0) {
+    return;
+  }
+
+  console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
+  
+  // Process all pending messages
+  while (pendingSpeakQueue.length > 0) {
+    const message = pendingSpeakQueue.shift();
+    try {
+      await speakNotification(message);
+      // Small delay between messages
+      await new Promise(resolve => setTimeout(resolve, 500));
+    } catch (error) {
+      console.error('Error processing deferred speak request:', error);
     }
   }
 }
@@ -408,4 +502,16 @@ export async function simulateNotificationForDev(message = 'This is a test notif
     console.error('[DEV] Failed to simulate notification:', error);
     throw error;
   }
+}
+
+/**
+ * Get the current debug state for UI display
+ * @returns {Object} Debug state with last notification, spoken text, and error
+ */
+export function getDebugState() {
+  return {
+    ...debugState,
+    isAppInBackground,
+    pendingCount: pendingSpeakQueue.length,
+  };
 }
