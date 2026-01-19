@@ -40,14 +40,22 @@ public class ExpoGlassesAudioModule: Module {
     }
     
     // Start recording audio
-    AsyncFunction("startRecording") { (durationSeconds: Int, promise: Promise) in
+    AsyncFunction("startRecording") { (durationSeconds: Int, audioSourceString: String?, promise: Promise) in
       do {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let timestamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
         let filename = "glasses_recording_\(timestamp).wav"
         let fileURL = documentsPath.appendingPathComponent(filename)
         
-        try recorder.startRecording(outputURL: fileURL)
+        // Parse audio source
+        let audioSource: AudioSource
+        if let sourceStr = audioSourceString {
+          audioSource = AudioSource(rawValue: sourceStr) ?? .auto
+        } else {
+          audioSource = .auto
+        }
+        
+        try recorder.startRecording(outputURL: fileURL, audioSource: audioSource)
         
         // Schedule stop after duration
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds)) {
