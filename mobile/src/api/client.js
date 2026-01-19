@@ -7,6 +7,7 @@
  * - GET /v1/status
  * - POST /v1/command
  * - POST /v1/commands/confirm
+ * - GET /v1/inbox
  * - GET /v1/notifications
  * - POST /v1/notifications/subscriptions
  * - DELETE /v1/notifications/subscriptions/{subscription_id}
@@ -189,6 +190,36 @@ export async function getNotifications() {
 
   if (!response.ok) {
     throw new Error(`Get notifications failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Get inbox items (PRs, mentions, failing checks)
+ * @param {Object} options - Optional parameters
+ * @returns {Promise<Object>} Inbox response
+ */
+export async function getInbox(options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  // Build query params
+  const params = new URLSearchParams();
+  if (options.profile) {
+    params.append('profile', options.profile);
+  }
+
+  const queryString = params.toString();
+  const url = `${baseUrl}/v1/inbox${queryString ? `?${queryString}` : ''}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Get inbox failed: ${response.status}`);
   }
 
   return await response.json();
