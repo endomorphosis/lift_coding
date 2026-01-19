@@ -222,3 +222,61 @@ export async function uploadDevAudio(audioBase64, format = 'm4a') {
 
   return await response.json();
 }
+
+/**
+ * Start GitHub OAuth flow
+ * @param {string} scopes - Optional comma-separated OAuth scopes
+ * @returns {Promise<Object>} Object with { authorize_url, state }
+ */
+export async function startGitHubOAuth(scopes = null) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const url = new URL('/v1/github/oauth/start', baseUrl);
+  if (scopes) {
+    url.searchParams.set('scopes', scopes);
+  }
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || errorData.message || `OAuth start failed: ${response.status}`
+    );
+  }
+
+  return await response.json();
+}
+
+/**
+ * Complete GitHub OAuth callback
+ * @param {string} code - Authorization code from GitHub
+ * @param {string} state - State parameter for CSRF validation
+ * @returns {Promise<Object>} Object with { connection_id, scopes }
+ */
+export async function completeGitHubOAuth(code, state) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const url = new URL('/v1/github/oauth/callback', baseUrl);
+  url.searchParams.set('code', code);
+  url.searchParams.set('state', state);
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || errorData.message || `OAuth callback failed: ${response.status}`
+    );
+  }
+
+  return await response.json();
+}

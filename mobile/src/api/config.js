@@ -18,6 +18,8 @@ const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
   BASE_URL: '@handsfree_base_url',
   USE_CUSTOM_URL: '@handsfree_use_custom_url',
+  GITHUB_CONNECTION_ID: '@github_connection_id',
+  GITHUB_OAUTH_PENDING: '@github_oauth_pending',
 };
 
 /**
@@ -104,3 +106,6 @@ export async function getHeaders(includeAuth = true) {
 // Export BASE_URL for backwards compatibility
 // Note: This is the initial value and may change after loadSettings() is called
 export { BASE_URL };
+
+// Export STORAGE_KEYS for use across the app
+export { STORAGE_KEYS };
