@@ -15,6 +15,7 @@ import {
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
+import { inferConfirmationDecision } from '../utils/voiceConfirmation';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
@@ -332,19 +333,6 @@ export default function CommandScreen() {
     if (!silent) {
       Alert.alert('Cancelled', 'Action was not confirmed');
     }
-  };
-
-  const inferConfirmationDecision = (transcript) => {
-    if (!transcript) return null;
-
-    const t = transcript.toLowerCase().trim();
-    // Prefer explicit cancel if present
-    const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', 'dont', "don't"];
-    const confirmKeywords = ['confirm', 'yes', 'do it', 'proceed', 'ok', 'okay', 'approve'];
-
-    if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
-    if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
-    return null;
   };
 
   const handleVoiceConfirm = async () => {
