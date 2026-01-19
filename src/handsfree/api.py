@@ -27,6 +27,10 @@ from handsfree.db.github_connections import (
     get_github_connection,
     get_github_connections_by_user,
 )
+from handsfree.db.oauth_states import (
+    generate_oauth_state,
+    validate_and_consume_oauth_state,
+)
 from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
     create_pending_action,
@@ -4076,15 +4080,23 @@ async def github_oauth_start(
     # Use provided scopes or default
     oauth_scopes = scopes or default_scopes
 
-    # Construct GitHub OAuth authorization URL
-    # Note: We're not implementing state parameter for CSRF protection in this minimal version
-    # as specified in the non-goals (advanced state mgmt)
+    # Generate CSRF protection state token
+    db = get_db()
+    state_token = generate_oauth_state(
+        conn=db,
+        user_id=user_id,
+        scopes=oauth_scopes,
+        ttl_minutes=10,
+    )
+
+    # Construct GitHub OAuth authorization URL with state parameter
     from urllib.parse import urlencode
 
     params = {
         "client_id": client_id,
         "redirect_uri": redirect_uri,
         "scope": oauth_scopes,
+        "state": state_token,
     }
     authorize_url = f"https://github.com/login/oauth/authorize?{urlencode(params)}"
 
@@ -4093,11 +4105,12 @@ async def github_oauth_start(
         "GitHub OAuth start",
         user_id=user_id,
         scopes=oauth_scopes,
+        state_generated=True,
     )
 
     return GitHubOAuthStartResponse(
         authorize_url=authorize_url,
-        state=None,  # Not implementing state in minimal version
+        state=state_token,
     )
 
 
@@ -4115,13 +4128,13 @@ async def github_oauth_callback(
     Args:
         user_id: User ID extracted from authentication (via CurrentUser dependency).
         code: Authorization code from GitHub OAuth callback.
-        state: Optional state parameter for CSRF validation (not used in minimal version).
+        state: State parameter for CSRF validation (required).
 
     Returns:
         Response containing the created connection ID and granted scopes.
 
     Raises:
-        400: Missing authorization code.
+        400: Missing authorization code, missing state, or invalid/expired state.
         500: OAuth not configured or token exchange failed.
     """
     import os
@@ -4136,6 +4149,50 @@ async def github_oauth_callback(
                 "message": "Authorization code is required",
             },
         )
+
+    # Validate state parameter for CSRF protection
+    if not state:
+        log_warning(
+            logger,
+            "OAuth callback missing state parameter",
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "missing_state",
+                "message": "State parameter is required for CSRF protection",
+            },
+        )
+
+    # Validate and consume the state token
+    db = get_db()
+    oauth_state = validate_and_consume_oauth_state(
+        conn=db,
+        state=state,
+        user_id=user_id,
+    )
+
+    if not oauth_state:
+        log_warning(
+            logger,
+            "OAuth callback with invalid or expired state",
+            user_id=user_id,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_state",
+                "message": "Invalid or expired state parameter",
+            },
+        )
+
+    log_info(
+        logger,
+        "OAuth state validated successfully",
+        user_id=user_id,
+        state_consumed=True,
+    )
 
     # Get OAuth configuration from environment
     client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
