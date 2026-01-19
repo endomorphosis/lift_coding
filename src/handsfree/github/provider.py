@@ -255,14 +255,77 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         return headers
 
+    def _is_rate_limited(self, response) -> bool:
+        """Check if response indicates rate limiting.
+
+        GitHub typically returns 403 with X-RateLimit-Remaining: 0 for rate limits.
+
+        Args:
+            response: httpx Response object
+
+        Returns:
+            True if the response indicates rate limiting
+        """
+        if response.status_code == 429:
+            return True
+
+        # GitHub often returns 403 for rate limits, check remaining header
+        if response.status_code == 403:
+            remaining_str = response.headers.get("X-RateLimit-Remaining", "")
+            if remaining_str:
+                try:
+                    remaining = int(remaining_str)
+                    if remaining == 0:
+                        return True
+                except (ValueError, TypeError):
+                    # If we can't parse it, it's not a rate limit
+                    pass
+
+        return False
+
+    def _get_rate_limit_reset_message(self, response) -> str:
+        """Get a human-readable message for when rate limit will reset.
+
+        Args:
+            response: httpx Response object with rate limit headers
+
+        Returns:
+            Human-readable message about when rate limit resets
+        """
+        reset_timestamp = response.headers.get("X-RateLimit-Reset", "")
+        if not reset_timestamp:
+            return "unknown time"
+
+        try:
+            reset_time = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
+            now = datetime.now(timezone.utc)
+            delta = reset_time - now
+
+            if delta.total_seconds() <= 0:
+                return "now"
+
+            # Format as human-readable duration
+            seconds = int(delta.total_seconds())
+            if seconds < 60:
+                return f"{seconds} second{'s' if seconds != 1 else ''}"
+            elif seconds < 3600:
+                minutes = seconds // 60
+                return f"{minutes} minute{'s' if minutes != 1 else ''}"
+            else:
+                hours = seconds // 3600
+                return f"{hours} hour{'s' if hours != 1 else ''}"
+        except (ValueError, OSError):
+            return "unknown time"
+
     def _make_request(
-        self, endpoint: str, params: dict[str, Any] | None = None
+        self, endpoint: str, params: dict[str, Any] | None = None, _retry_count: int = 0
     ) -> dict[str, Any] | list[dict[str, Any]]:
         """Make a GET request to GitHub API with retry logic.
 
         Args:
             endpoint: API endpoint path (e.g., "/repos/owner/repo/pulls/123")
             params: Optional query parameters
+            _retry_count: Internal retry counter (do not set manually)
 
         Returns:
             JSON response as dict or list
