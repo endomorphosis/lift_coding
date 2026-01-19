@@ -25,7 +25,7 @@ export function inferConfirmationDecision(transcript) {
   const t = transcript.toLowerCase().trim();
   
   // Prefer explicit cancel if present (safety first)
-  const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', 'dont', "don't"];
+  const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', "don't"];
   const confirmKeywords = ['confirm', 'yes', 'do it', 'proceed', 'ok', 'okay', 'approve'];
 
   // Use word boundary matching to avoid false positives (e.g., "know" containing "no")
@@ -34,9 +34,12 @@ export function inferConfirmationDecision(transcript) {
       // Escape special regex characters
       const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       
+      // Make apostrophes optional to match both "don't" and "dont"
+      const patternWithOptionalApostrophe = escapedKeyword.replace(/'/g, "'?");
+      
       // For multi-word phrases, match with word boundaries at start and end
       // This prevents "never mind" from matching "whenever mindful"
-      const regex = new RegExp(`\\b${escapedKeyword}\\b`, 'i');
+      const regex = new RegExp(`\\b${patternWithOptionalApostrophe}\\b`, 'i');
       return regex.test(t);
     });
   };
