@@ -381,7 +381,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     max_retries = 3
                     if _retry_count < max_retries:
                         # Exponential backoff with jitter: 1s, 2s, 4s on attempts 1, 2, 3
-                        base_delay = 2 ** (_retry_count + 1) / 2  # 1s, 2s, 4s
+                        # Using bit shift for clarity: 1<<0=1, 1<<1=2, 1<<2=4
+                        base_delay = 1 << _retry_count  # 1s, 2s, 4s
                         jitter = random.uniform(0, 0.5 * base_delay)
                         delay = base_delay + jitter
 
@@ -414,7 +415,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
                         f"GitHub API request failed with status {response.status_code}"
                     )
 
-                response.raise_for_status()
+                # Success - return JSON response
                 return response.json()
 
         except httpx.TimeoutException as e:
