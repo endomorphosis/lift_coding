@@ -30,11 +30,9 @@ This document provides the authoritative mapping of the implementation plan (`im
 - **MVP4:** ⚠️ Mostly complete (task status UI + notifications)
 
 **Critical Demo Blockers (iOS + Ray-Ban Meta):**
-1. 🔴 Mobile settings screen for backend URL configuration
-2. 🔴 Bluetooth microphone reliability (workaround exists: use phone mic)
+1. 🔴 Bluetooth microphone reliability (workaround exists: use phone mic)
 
 **Recommended Next Steps:**
-- **PR-067:** Mobile settings screen (HIGH priority, unblocks demo setup)
 - **PR-068:** Audio source selector (HIGH priority, improves reliability)
 - **PR-069-075:** Mobile UI polish + production config (MEDIUM/LOW priority)
 
@@ -115,7 +113,7 @@ This document provides the authoritative mapping of the implementation plan (`im
 | **Fetch PRs** | Fetch PR list + checks | ✅ Implemented | GitHub provider: [`github/`](../src/handsfree/github/), Live client: [`github/live_provider.py`](../src/handsfree/github/live_provider.py), Fixtures: [`github/fixture_provider.py`](../src/handsfree/github/fixture_provider.py) | Live mode requires `GITHUB_TOKEN` or OAuth. Fetches open PRs, checks status, reviews. Falls back to fixtures. |
 | **TTS Playback** | TTS response playback | ✅ Implemented | Backend: [`tts/`](../src/handsfree/tts/), Mobile: iOS player: [`glasses/ios/GlassesPlayer.swift`](../mobile/glasses/ios/GlassesPlayer.swift), Android: [`glasses/android/GlassesPlayer.kt`](../mobile/glasses/android/GlassesPlayer.kt), React Native hook: [`hooks/useGlassesPlayer.js`](../mobile/src/hooks/useGlassesPlayer.js) | **Config:** `HANDSFREE_TTS_PROVIDER=openai` for realistic voice. Stub returns deterministic audio. **Mobile:** Playback through glasses speakers working. Known latency: ~100-200ms Bluetooth. |
 | **Action Log** | Basic action log | ✅ Implemented | DB table: [`db/action_logs.py`](../src/handsfree/db/action_logs.py), Audit logging in all action endpoints | Logs all side-effect actions (request_review, rerun_checks, merge). Includes user_id, timestamp, action_type, outcome. |
-| **E2E Demo** | Complete MVP1 demo flow | ⚠️ **Partial** | Runbook: [`docs/ios-rayban-mvp1-demo-runbook.md`](../docs/ios-rayban-mvp1-demo-runbook.md), Checklist: [`docs/mvp1-demo-checklist.md`](../docs/mvp1-demo-checklist.md) | **Working:** Backend + mobile components all built. **Gap:** Mobile UI needs polish (settings screen for backend URL, OAuth flow not integrated). **Workaround:** Command-line curl + manual token setup works. |
+| **E2E Demo** | Complete MVP1 demo flow | ✅ **Complete** | Runbook: [`docs/ios-rayban-mvp1-demo-runbook.md`](../docs/ios-rayban-mvp1-demo-runbook.md), Checklist: [`docs/mvp1-demo-checklist.md`](../docs/mvp1-demo-checklist.md) | **Working:** Backend + mobile components all built. Settings screen includes backend URL configuration. **Recommended:** Use phone mic + glasses playback for reliability. |
 
 ### MVP2: PR Summary
 
@@ -145,7 +143,7 @@ This document provides the authoritative mapping of the implementation plan (`im
 
 ### Summary
 
-- **MVP1:** ✅ **Functionally complete.** All backend + mobile components implemented. Minor UI polish needed (settings, OAuth flow).
+- **MVP1:** ✅ **Complete.** All backend + mobile components implemented including settings screen for backend URL configuration.
 - **MVP2:** ✅ **Functionally complete.** PR summary and navigation working. Profile selection not in mobile UI.
 - **MVP3:** ⚠️ **Mostly complete.** Write actions + confirmation backend working. Voice confirmation flow not integrated in mobile UI.
 - **MVP4:** ⚠️ **Mostly complete.** Agent delegation backend working. Mobile task status UI and notification automation missing.
@@ -154,24 +152,7 @@ This document provides the authoritative mapping of the implementation plan (`im
 
 Based on the MVP1 demo requirements and current implementation status, here are the critical blockers ranked by impact:
 
-### 1. **Mobile Settings Screen: Backend URL Configuration** (HIGH - Demo Blocker)
-**Problem:** No UI for setting backend URL. Current demo requires hardcoded IP or manual config file edits.
-
-**Impact:** Cannot easily switch between local backend (dev machine) and remote backend (demo server). First-time demo setup is error-prone.
-
-**Current State:** [`SettingsScreen.js`](../mobile/src/screens/SettingsScreen.js) exists but lacks backend URL input field.
-
-**Fix Required:**
-- Add backend URL input to Settings screen
-- Persist URL to AsyncStorage
-- Update [`api/config.js`](../mobile/src/api/config.js) to read from storage
-- Add "Test Connection" button that calls `/v1/status`
-
-**Workaround:** Manually edit `mobile/src/api/config.js` before build. Works but not demo-friendly.
-
----
-
-### 2. **Bluetooth Microphone Reliability on iOS** (HIGH - Demo Blocker)
+### 1. **Bluetooth Microphone Reliability on iOS** (HIGH - Demo Blocker)
 **Problem:** iOS Bluetooth microphone (via Ray-Ban Meta glasses) can be unreliable. Audio profile switching (A2DP ↔ HFP/HSP) causes dropouts, latency spikes, or complete audio loss.
 
 **Impact:** Voice commands may not be captured consistently. Demo can fail mid-flow if Bluetooth mic disconnects or switches profiles.
@@ -188,7 +169,7 @@ Based on the MVP1 demo requirements and current implementation status, here are 
 
 ---
 
-### 3. **OAuth Flow Not Integrated in Mobile UI** (MEDIUM - Not Critical for MVP1)
+### 2. **OAuth Flow Not Integrated in Mobile UI** (MEDIUM - Not Critical for MVP1)
 **Problem:** GitHub OAuth flow works on backend, but mobile app doesn't have UI to initiate OAuth or handle callback.
 
 **Impact:** Cannot demo "login with GitHub" flow. Must use pre-configured PAT or manual token setup.
@@ -206,7 +187,7 @@ Based on the MVP1 demo requirements and current implementation status, here are 
 
 ---
 
-### 4. **Voice Confirmation Flow (MVP3)** (MEDIUM - Required for Write Actions)
+### 3. **Voice Confirmation Flow (MVP3)** (MEDIUM - Required for Write Actions)
 **Problem:** Confirmation screen exists ([`ConfirmationScreen.js`](../mobile/src/screens/ConfirmationScreen.js)) but requires tapping buttons. No voice-based "yes"/"no" confirmation.
 
 **Impact:** Cannot demo hands-free write actions (request review, rerun checks, merge). Must touch phone screen to confirm.
@@ -223,7 +204,7 @@ Based on the MVP1 demo requirements and current implementation status, here are 
 
 ---
 
-### 5. **Push Notification → Spoken Summary (MVP1/MVP4)** (LOW - Not Critical)
+### 4. **Push Notification → Spoken Summary (MVP1/MVP4)** (LOW - Not Critical)
 **Problem:** Push notifications work (backend → mobile), but TTS playback of notification content is not automated. User must open app and navigate to notification screen.
 
 **Impact:** Cannot demo "notification arrives, spoken aloud immediately" flow. Reduces hands-free value.
@@ -243,7 +224,7 @@ Based on the MVP1 demo requirements and current implementation status, here are 
 
 ---
 
-### 6. **Profile Selection in Mobile UI** (LOW - Not Critical)
+### 5. **Profile Selection in Mobile UI** (LOW - Not Critical)
 **Problem:** Backend supports profiles (workout, commute, default) but mobile UI has no profile selector.
 
 **Impact:** Cannot demo "shorter summaries during workout" or other profile-based behavior changes. Always uses default profile.
@@ -261,38 +242,13 @@ Based on the MVP1 demo requirements and current implementation status, here are 
 
 ### Priority Fix for Next PR
 
-For a **fully hands-free iOS + Ray-Ban Meta MVP1 demo**, fix **#1 (Settings Screen)** and use **#2 workaround (phone mic + glasses playback)**. This makes the demo setup reproducible and reliable.
+For a **fully hands-free iOS + Ray-Ban Meta MVP1 demo**, use **#1 workaround (phone mic + glasses playback)**. This makes the demo reliable.
 
-Items #3-#6 are enhancements for future MVPs (MVP2-MVP4) but do not block MVP1 inbox/summary demo. 
+Items #2-#5 are enhancements for future MVPs (MVP2-MVP4) but do not block MVP1 inbox/summary demo. 
 
 ## Proposed PR sequence
 
 This section proposes 5-10 PRs to close the remaining gaps, prioritized by MVP and demo impact. Each PR builds on previous work and has clear dependencies.
-
----
-
-### PR-067: Mobile Settings Screen - Backend URL + Connection Test
-**Goal:** Enable easy backend URL configuration in mobile UI for demos.
-
-**Scope:**
-- Add backend URL input field to Settings screen
-- Persist URL to AsyncStorage
-- Add "Test Connection" button → calls `/v1/status`
-- Display connection status (✅ connected / ❌ failed)
-
-**Dependencies:** None
-
-**Files:**
-- `mobile/src/screens/SettingsScreen.js`
-- `mobile/src/api/config.js`
-
-**Acceptance Criteria:**
-- User can enter backend URL (e.g., `http://192.168.1.100:8080`)
-- URL persisted across app restarts
-- Test connection validates URL before saving
-- Error handling for invalid URLs or unreachable backends
-
-**Priority:** 🔴 **HIGH - MVP1 Demo Blocker**
 
 ---
 
@@ -316,8 +272,6 @@ This section proposes 5-10 PRs to close the remaining gaps, prioritized by MVP a
 - User can force phone mic or Bluetooth mic
 - Route change notifications appear in UI
 - Audio diagnostics screen shows current input/output devices
-
-**Priority:** 🔴 **HIGH - MVP1 Demo Reliability**
 
 ---
 
@@ -358,7 +312,7 @@ This section proposes 5-10 PRs to close the remaining gaps, prioritized by MVP a
 - On "no": Dismiss screen, no action taken
 - Show 5-minute countdown timer, auto-cancel on timeout
 
-**Dependencies:** PR-067 (backend URL config)
+**Dependencies:** None (backend URL config already exists in SettingsScreen.js)
 
 **Files:**
 - `mobile/src/screens/ConfirmationScreen.js`
@@ -503,11 +457,8 @@ This section proposes 5-10 PRs to close the remaining gaps, prioritized by MVP a
 ### Dependencies Graph
 
 ```
-PR-067 (Settings Screen) ──────┐
+PR-068 (Audio Source) ─────────┐
                                ├──> PR-070 (Voice Confirmation)
-                               │
-PR-068 (Audio Source) ─────────┤
-                               │
 PR-069 (OAuth Flow) ───────────┤
                                │
                                └──> [All future PRs can proceed independently]
@@ -523,14 +474,13 @@ PR-075 (Agent Notif) ─────────> [Independent]
 
 ### Recommended Sequence
 
-**For MVP1 Demo (Next 1-2 PRs):**
-1. ✅ **PR-067** (Settings Screen) - Unblocks repeatable demo setup
-2. ✅ **PR-068** (Audio Source Selector) - Improves demo reliability
+**For MVP1 Demo (Next 1 PR):**
+1. ✅ **PR-068** (Audio Source Selector) - Improves demo reliability
 
 **For MVP2/MVP3 (Next 3-4 PRs):**
-3. **PR-069** (OAuth Flow) - Polishes user experience
-4. **PR-070** (Voice Confirmation) - Enables MVP3 hands-free write actions
-5. **PR-071** (Profile UI) - Completes MVP2 profile feature
+2. **PR-069** (OAuth Flow) - Polishes user experience
+3. **PR-070** (Voice Confirmation) - Enables MVP3 hands-free write actions
+4. **PR-071** (Profile UI) - Completes MVP2 profile feature
 
 **For MVP4 (Future PRs):**
 6. **PR-072** (Auto-TTS Notifications) - Enhances notification UX
@@ -540,6 +490,6 @@ PR-075 (Agent Notif) ─────────> [Independent]
 
 ---
 
-**Total PRs:** 9 (PR-067 through PR-075)
+**Total PRs:** 8 (PR-068 through PR-075)
 
 All backend work is complete. These PRs focus on **mobile UI polish** and **production configuration** to close the remaining MVP gaps. 

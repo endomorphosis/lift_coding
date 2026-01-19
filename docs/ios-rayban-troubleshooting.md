@@ -162,7 +162,7 @@ See: `tracking/PR-047-ios-audio-route-monitor.md`
 2. **Use dev endpoint for testing**:
    ```
    POST /v1/dev/audio
-   Body: { "audio_base64": "...", "format": "wav" }
+   Body: { "data_base64": "...", "format": "wav" }
    Returns: { "audio_uri": "file://..." }
    ```
 3. **Check WAV header** - if using raw PCM, ensure proper WAV wrapper

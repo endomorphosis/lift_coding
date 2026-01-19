@@ -319,7 +319,7 @@ echo "test" | base64 > /tmp/test_audio.b64
 # Upload to dev endpoint
 curl -X POST http://localhost:8000/v1/dev/audio \
   -H "Content-Type: application/json" \
-  -d '{"audio_base64": "'$(cat /tmp/test_audio.b64)'", "format": "m4a"}'
+  -d '{"data_base64": "'$(cat /tmp/test_audio.b64)'", "format": "m4a"}'
 
 # Should return: {"uri": "file:///.../dev/audio/{id}.m4a", "format": "m4a"}
 ```
