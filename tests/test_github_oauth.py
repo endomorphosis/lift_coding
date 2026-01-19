@@ -28,7 +28,9 @@ def mock_oauth_env(monkeypatch):
 @pytest.fixture
 def auth_headers():
     """Create authentication headers for dev mode."""
-    return {"X-User-ID": "test-user-123"}
+    # Use FIXTURE_USER_ID from handsfree.auth for consistent testing
+    from handsfree.auth import FIXTURE_USER_ID
+    return {"X-User-ID": FIXTURE_USER_ID}
 
 
 class TestGitHubOAuthStart:
@@ -45,6 +47,11 @@ class TestGitHubOAuthStart:
         data = response.json()
 
         assert "authorize_url" in data
+        assert "state" in data
+        assert data["state"] is not None
+        assert len(data["state"]) > 20  # State should be a reasonably long random string
+        
+        # Check that state is included in the authorize URL
         assert "https://github.com/login/oauth/authorize" in data["authorize_url"]
         assert "client_id=test_client_id" in data["authorize_url"]
         redirect_uri_encoded = (
@@ -52,6 +59,7 @@ class TestGitHubOAuthStart:
         )
         assert redirect_uri_encoded in data["authorize_url"]
         assert "scope=repo%2Cuser%3Aemail" in data["authorize_url"]
+        assert f"state={data['state']}" in data["authorize_url"]
 
     def test_oauth_start_custom_scopes(self, client, mock_oauth_env, auth_headers):
         """Test OAuth start with custom scopes."""
@@ -64,7 +72,10 @@ class TestGitHubOAuthStart:
         data = response.json()
 
         assert "authorize_url" in data
+        assert "state" in data
+        assert data["state"] is not None
         assert "scope=repo%2Cadmin%3Aorg" in data["authorize_url"]
+        assert f"state={data['state']}" in data["authorize_url"]
 
     def test_oauth_start_missing_config(self, client, auth_headers, monkeypatch):
         """Test OAuth start with missing configuration."""
@@ -97,6 +108,14 @@ class TestGitHubOAuthCallback:
         auth_headers,
     ):
         """Test successful OAuth callback."""
+        # Step 1: Generate a valid state token via start endpoint
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        assert start_response.status_code == 200
+        state_token = start_response.json()["state"]
+        
         # Mock GitHub OAuth token exchange response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -112,8 +131,9 @@ class TestGitHubOAuthCallback:
         mock_sm.store_secret.return_value = "secret_ref_123"
         mock_secret_manager.return_value = mock_sm
 
+        # Step 2: Call callback with valid state
         response = client.get(
-            "/v1/github/oauth/callback?code=test_auth_code",
+            f"/v1/github/oauth/callback?code=test_auth_code&state={state_token}",
             headers=auth_headers,
         )
 
@@ -139,14 +159,92 @@ class TestGitHubOAuthCallback:
 
     def test_oauth_callback_missing_code(self, client, mock_oauth_env, auth_headers):
         """Test OAuth callback with missing code."""
+        # Generate a valid state first
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
         response = client.get(
-            "/v1/github/oauth/callback",
+            f"/v1/github/oauth/callback?state={state_token}",
             headers=auth_headers,
         )
 
         assert response.status_code == 400
         data = response.json()
         assert data["error"] == "missing_code"
+
+    def test_oauth_callback_missing_state(self, client, mock_oauth_env, auth_headers):
+        """Test OAuth callback with missing state."""
+        response = client.get(
+            "/v1/github/oauth/callback?code=test_code",
+            headers=auth_headers,
+        )
+
+        assert response.status_code == 400
+        data = response.json()
+        assert data["error"] == "missing_state"
+
+    def test_oauth_callback_invalid_state(self, client, mock_oauth_env, auth_headers):
+        """Test OAuth callback with invalid state."""
+        response = client.get(
+            "/v1/github/oauth/callback?code=test_code&state=invalid_state_token",
+            headers=auth_headers,
+        )
+
+        assert response.status_code == 400
+        data = response.json()
+        assert data["error"] == "invalid_state"
+
+    @patch("httpx.post")
+    @patch("handsfree.api.get_default_secret_manager")
+    def test_oauth_callback_state_reuse_prevention(
+        self,
+        mock_secret_manager,
+        mock_httpx_post,
+        client,
+        mock_oauth_env,
+        auth_headers,
+    ):
+        """Test that state tokens cannot be reused (one-time use)."""
+        # Generate a valid state token
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
+        # Mock GitHub OAuth token exchange response
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "access_token": "gho_test_token_123",
+            "token_type": "bearer",
+            "scope": "repo,user:email",
+        }
+        mock_httpx_post.return_value = mock_response
+
+        # Mock secret manager
+        mock_sm = Mock()
+        mock_sm.store_secret.return_value = "secret_ref_123"
+        mock_secret_manager.return_value = mock_sm
+
+        # First callback should succeed
+        response1 = client.get(
+            f"/v1/github/oauth/callback?code=test_code&state={state_token}",
+            headers=auth_headers,
+        )
+        assert response1.status_code == 200
+
+        # Second callback with same state should fail
+        response2 = client.get(
+            f"/v1/github/oauth/callback?code=test_code&state={state_token}",
+            headers=auth_headers,
+        )
+        assert response2.status_code == 400
+        data = response2.json()
+        assert data["error"] == "invalid_state"
 
     @patch("httpx.post")
     def test_oauth_callback_github_error(
@@ -157,6 +255,13 @@ class TestGitHubOAuthCallback:
         auth_headers,
     ):
         """Test OAuth callback when GitHub returns an error."""
+        # Generate a valid state token
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
         # Mock GitHub OAuth error response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -167,7 +272,7 @@ class TestGitHubOAuthCallback:
         mock_httpx_post.return_value = mock_response
 
         response = client.get(
-            "/v1/github/oauth/callback?code=invalid_code",
+            f"/v1/github/oauth/callback?code=invalid_code&state={state_token}",
             headers=auth_headers,
         )
 
@@ -185,13 +290,20 @@ class TestGitHubOAuthCallback:
         auth_headers,
     ):
         """Test OAuth callback with HTTP error."""
+        # Generate a valid state token
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
         # Mock HTTP error
         mock_response = Mock()
         mock_response.status_code = 500
         mock_httpx_post.return_value = mock_response
 
         response = client.get(
-            "/v1/github/oauth/callback?code=test_code",
+            f"/v1/github/oauth/callback?code=test_code&state={state_token}",
             headers=auth_headers,
         )
 
@@ -210,6 +322,13 @@ class TestGitHubOAuthCallback:
         auth_headers,
     ):
         """Test OAuth callback when secret storage fails."""
+        # Generate a valid state token
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
         # Mock successful GitHub response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -226,7 +345,7 @@ class TestGitHubOAuthCallback:
         mock_secret_manager.return_value = mock_sm
 
         response = client.get(
-            "/v1/github/oauth/callback?code=test_code",
+            f"/v1/github/oauth/callback?code=test_code&state={state_token}",
             headers=auth_headers,
         )
 
@@ -234,15 +353,22 @@ class TestGitHubOAuthCallback:
         data = response.json()
         assert data["error"] == "storage_error"
 
-    def test_oauth_callback_missing_config(self, client, auth_headers, monkeypatch):
+    def test_oauth_callback_missing_config(self, client, auth_headers, monkeypatch, mock_oauth_env):
         """Test OAuth callback with missing configuration."""
+        # Generate a valid state token first (before clearing config)
+        start_response = client.get(
+            "/v1/github/oauth/start",
+            headers=auth_headers,
+        )
+        state_token = start_response.json()["state"]
+        
         # Clear OAuth env vars
         monkeypatch.delenv("GITHUB_OAUTH_CLIENT_ID", raising=False)
         monkeypatch.delenv("GITHUB_OAUTH_CLIENT_SECRET", raising=False)
         monkeypatch.delenv("GITHUB_OAUTH_REDIRECT_URI", raising=False)
 
         response = client.get(
-            "/v1/github/oauth/callback?code=test_code",
+            f"/v1/github/oauth/callback?code=test_code&state={state_token}",
             headers=auth_headers,
         )
 
@@ -265,14 +391,19 @@ class TestOAuthIntegration:
         auth_headers,
     ):
         """Test complete OAuth flow from start to callback."""
-        # Step 1: Get authorization URL
+        # Step 1: Get authorization URL with state
         start_response = client.get(
             "/v1/github/oauth/start",
             headers=auth_headers,
         )
         assert start_response.status_code == 200
-        authorize_url = start_response.json()["authorize_url"]
+        start_data = start_response.json()
+        authorize_url = start_data["authorize_url"]
+        state_token = start_data["state"]
+        
         assert "github.com/login/oauth/authorize" in authorize_url
+        assert state_token is not None
+        assert f"state={state_token}" in authorize_url
 
         # Step 2: Mock GitHub token exchange
         mock_response = Mock()
@@ -289,9 +420,9 @@ class TestOAuthIntegration:
         mock_sm.store_secret.return_value = "secret_ref_integration"
         mock_secret_manager.return_value = mock_sm
 
-        # Step 3: Complete callback
+        # Step 3: Complete callback with state
         callback_response = client.get(
-            "/v1/github/oauth/callback?code=integration_code",
+            f"/v1/github/oauth/callback?code=integration_code&state={state_token}",
             headers=auth_headers,
         )
         assert callback_response.status_code == 200
