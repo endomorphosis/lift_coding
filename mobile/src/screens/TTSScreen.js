@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { fetchTTS } from '../api/client';
 import { Audio } from 'expo-av';
+import { simulateNotificationForDev } from '../push/notificationsHandler';
 
 export default function TTSScreen() {
   const [text, setText] = useState('');
@@ -19,6 +20,7 @@ export default function TTSScreen() {
   const [error, setError] = useState(null);
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [notificationLoading, setNotificationLoading] = useState(false);
 
   const handleFetchAndPlay = async () => {
     if (!text.trim()) {
@@ -73,6 +75,26 @@ export default function TTSScreen() {
     if (sound) {
       await sound.stopAsync();
       setIsPlaying(false);
+    }
+  };
+
+  const handleTestNotification = async () => {
+    if (!text.trim()) {
+      Alert.alert('Error', 'Please enter some text to simulate a notification');
+      return;
+    }
+
+    setNotificationLoading(true);
+    setError(null);
+
+    try {
+      await simulateNotificationForDev(text);
+      Alert.alert('Success', 'Notification simulated! TTS should play automatically.');
+    } catch (err) {
+      setError(`Notification simulation failed: ${err.message}`);
+      Alert.alert('Error', `Failed to simulate notification: ${err.message}`);
+    } finally {
+      setNotificationLoading(false);
     }
   };
 
@@ -133,6 +155,22 @@ export default function TTSScreen() {
           <Text style={styles.errorText}>Error: {error}</Text>
         </View>
       )}
+
+      <View style={styles.devSection}>
+        <Text style={styles.devSectionTitle}>🧪 Dev Helper: Test Notifications</Text>
+        <Text style={styles.devSectionText}>
+          Simulate a push notification with the text above. This tests the notification → TTS flow
+          without needing real push notifications.
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            title={notificationLoading ? 'Simulating...' : '🔔 Simulate Notification'}
+            onPress={handleTestNotification}
+            disabled={notificationLoading || loading}
+            color="#FF9800"
+          />
+        </View>
+      </View>
 
       <View style={styles.infoContainer}>
         <Text style={styles.infoTitle}>ℹ️ Note:</Text>
@@ -216,5 +254,23 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 13,
     color: '#2e7d32',
+  },
+  devSection: {
+    backgroundColor: '#fff3e0',
+    padding: 15,
+    borderRadius: 5,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  devSectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+    color: '#e65100',
+  },
+  devSectionText: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 10,
   },
 });

@@ -10,6 +10,7 @@
 
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
 import { BASE_URL, getHeaders } from '../api/config';
 import { fetchTTS } from '../api/client';
 
@@ -115,6 +116,7 @@ async function fetchNotificationDetails(notificationId) {
  */
 export async function speakNotification(message) {
   let sound = null;
+  let tempFileUri = null;
   
   try {
     console.log('Speaking notification:', message);
@@ -122,8 +124,18 @@ export async function speakNotification(message) {
     // Fetch TTS audio from backend
     const audioBlob = await fetchTTS(message);
     
-    // Use URL.createObjectURL for better performance
-    const audioUri = URL.createObjectURL(audioBlob);
+    // Convert blob to base64
+    const base64Audio = await blobToBase64(audioBlob);
+    
+    // Save to temporary file using expo-file-system
+    const filename = `tts_${Date.now()}.mp3`;
+    tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
+    
+    await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    console.log('TTS audio saved to:', tempFileUri);
 
     // Configure audio session for playback
     await Audio.setAudioModeAsync({
@@ -135,7 +147,7 @@ export async function speakNotification(message) {
 
     // Play the audio
     const soundObject = await Audio.Sound.createAsync(
-      { uri: audioUri },
+      { uri: tempFileUri },
       { shouldPlay: true }
     );
     sound = soundObject.sound;
@@ -145,7 +157,10 @@ export async function speakNotification(message) {
       if (status.didJustFinish || status.error) {
         try {
           await sound.unloadAsync();
-          URL.revokeObjectURL(audioUri);
+          // Delete the temporary file
+          if (tempFileUri) {
+            await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+          }
         } catch (cleanupError) {
           console.error('Cleanup error:', cleanupError);
         }
@@ -162,7 +177,33 @@ export async function speakNotification(message) {
         console.error('Sound cleanup error:', cleanupError);
       }
     }
+    // Delete temp file on error
+    if (tempFileUri) {
+      try {
+        await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+      } catch (cleanupError) {
+        console.error('Temp file cleanup error:', cleanupError);
+      }
+    }
   }
+}
+
+/**
+ * Convert a Blob to base64 string
+ * @param {Blob} blob - Blob to convert
+ * @returns {Promise<string>} Base64 string
+ */
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      // Remove the data URL prefix (e.g., "data:audio/mpeg;base64,")
+      const base64 = reader.result.split(',')[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 }
 
 /**
@@ -293,6 +334,39 @@ export async function checkAndSpeakLatestNotification() {
     return null;
   } catch (error) {
     console.error('Failed to check latest notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * DEV-ONLY: Simulate a notification with a custom message for testing TTS playback
+ * This helps verify that the notification → TTS flow works without needing a real push
+ * @param {string} message - The message to speak
+ * @returns {Promise<void>}
+ */
+export async function simulateNotificationForDev(message = 'This is a test notification') {
+  console.log('[DEV] Simulating notification with message:', message);
+  
+  try {
+    // Create a mock notification object similar to what Expo sends
+    const mockNotification = {
+      request: {
+        content: {
+          data: {
+            message: message,
+            notification_id: 'dev-test-' + Date.now(),
+          },
+          body: message,
+        },
+      },
+    };
+
+    // Handle the notification as if it came from Expo
+    await handleNotification(mockNotification);
+    
+    console.log('[DEV] Simulated notification processed successfully');
+  } catch (error) {
+    console.error('[DEV] Failed to simulate notification:', error);
     throw error;
   }
 }
