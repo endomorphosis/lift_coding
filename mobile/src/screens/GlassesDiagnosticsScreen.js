@@ -10,6 +10,7 @@ const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
 const NATIVE_PLAYBACK_TIMEOUT_MS = 3000;
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
+const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -36,13 +37,13 @@ export default function GlassesDiagnosticsScreen() {
       }
       // Check if native module is available
       try {
-        if (ExpoGlassesAudio && 
-            typeof ExpoGlassesAudio.getAudioRoute === 'function' &&
-            typeof ExpoGlassesAudio.startRecording === 'function' &&
-            typeof ExpoGlassesAudio.stopRecording === 'function' &&
-            typeof ExpoGlassesAudio.playAudio === 'function' &&
-            typeof ExpoGlassesAudio.stopPlayback === 'function') {
-          setNativeModuleAvailable(true);
+        if (ExpoGlassesAudio) {
+          const allMethodsAvailable = NATIVE_MODULE_REQUIRED_METHODS.every(
+            method => typeof ExpoGlassesAudio[method] === 'function'
+          );
+          if (allMethodsAvailable) {
+            setNativeModuleAvailable(true);
+          }
         }
       } catch {
         setNativeModuleAvailable(false);
@@ -152,7 +153,8 @@ export default function GlassesDiagnosticsScreen() {
       } else {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
-          // Start recording with configured duration (user will manually stop)
+          // Start recording with configured duration. The native module will auto-stop after this duration
+          // if the user doesn't manually stop it first.
           await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           setIsRecording(true);
         } else {
@@ -254,12 +256,15 @@ export default function GlassesDiagnosticsScreen() {
           setIsPlaying(true);
           // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
           const timeoutId = setTimeout(() => {
-            setIsPlaying(false);
-            playbackTimeoutRef.current = null;
+            // Only update state if component is still mounted (playbackTimeoutRef will be cleared on unmount)
+            if (playbackTimeoutRef.current === timeoutId) {
+              setIsPlaying(false);
+              playbackTimeoutRef.current = null;
+            }
           }, NATIVE_PLAYBACK_TIMEOUT_MS);
           playbackTimeoutRef.current = timeoutId;
         } else {
-          setLastError('Audio playback unavailable - native module not found. Switch to DEV mode.');
+          setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
         }
       }
     } catch (error) {
