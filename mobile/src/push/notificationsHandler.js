@@ -128,7 +128,7 @@ export async function speakNotification(message) {
     const base64Audio = await blobToBase64(audioBlob);
     
     // Save to temporary file using expo-file-system
-    const filename = `tts_${Date.now()}.mp3`;
+    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.mp3`;
     tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
     
     await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
@@ -190,8 +190,12 @@ export async function speakNotification(message) {
 
 /**
  * Convert a Blob to base64 string
- * @param {Blob} blob - Blob to convert
- * @returns {Promise<string>} Base64 string
+ * Uses FileReader to read the blob as a data URL, then extracts the base64 portion.
+ * Includes comprehensive error handling for invalid data URLs and reader errors.
+ * 
+ * @param {Blob} blob - The Blob object to convert (typically audio data)
+ * @returns {Promise<string>} Promise that resolves to the base64-encoded string (without data URL prefix)
+ * @throws {Error} If FileReader fails, returns null result, or produces invalid data URL format
  */
 function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
