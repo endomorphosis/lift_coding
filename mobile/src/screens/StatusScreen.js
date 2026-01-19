@@ -5,10 +5,17 @@ import {
   StyleSheet,
   ActivityIndicator,
   Button,
+  TextInput,
   ScrollView,
   Alert,
 } from 'react-native';
-import { getStatus } from '../api/client';
+import {
+  getStatus,
+  listRepoSubscriptions,
+  createRepoSubscription,
+  deleteRepoSubscription,
+  sendTestPullRequestOpenedWebhook,
+} from '../api/client';
 import {
   registerForPushAsync,
   registerSubscriptionWithBackend,
@@ -30,6 +37,11 @@ export default function StatusScreen() {
   const [subscriptionId, setSubscriptionId] = useState(null);
   const [pushLoading, setPushLoading] = useState(false);
   const [lastNotification, setLastNotification] = useState(null);
+
+  // Repo subscriptions (used to map webhooks -> users)
+  const [repoSubscriptions, setRepoSubscriptions] = useState([]);
+  const [repoSubLoading, setRepoSubLoading] = useState(false);
+  const [repoFullName, setRepoFullName] = useState('');
 
   const fetchStatus = async () => {
     setLoading(true);
@@ -114,9 +126,76 @@ export default function StatusScreen() {
     }
   };
 
+  const refreshRepoSubscriptions = async () => {
+    setRepoSubLoading(true);
+    try {
+      const subs = await listRepoSubscriptions();
+      setRepoSubscriptions(subs);
+    } catch (err) {
+      console.log('Could not list repo subscriptions:', err.message);
+    } finally {
+      setRepoSubLoading(false);
+    }
+  };
+
+  const handleSubscribeRepo = async () => {
+    const repo = (repoFullName || '').trim();
+    if (!repo) {
+      Alert.alert('Missing Repo', "Enter a repo like 'owner/repo'.");
+      return;
+    }
+
+    setRepoSubLoading(true);
+    try {
+      await createRepoSubscription(repo);
+      setRepoFullName('');
+      await refreshRepoSubscriptions();
+      Alert.alert('Subscribed', `Subscribed to ${repo}`);
+    } catch (err) {
+      Alert.alert('Error', `Failed to subscribe: ${err.message}`);
+    } finally {
+      setRepoSubLoading(false);
+    }
+  };
+
+  const handleUnsubscribeRepo = async (repo) => {
+    setRepoSubLoading(true);
+    try {
+      await deleteRepoSubscription(repo);
+      await refreshRepoSubscriptions();
+    } catch (err) {
+      Alert.alert('Error', `Failed to unsubscribe: ${err.message}`);
+    } finally {
+      setRepoSubLoading(false);
+    }
+  };
+
+  const handleSendTestWebhook = async () => {
+    const repo = (repoFullName || '').trim() || (repoSubscriptions[0] && repoSubscriptions[0].repo_full_name);
+    if (!repo) {
+      Alert.alert('Missing Repo', "Enter a repo like 'owner/repo' or subscribe to one first.");
+      return;
+    }
+
+    setRepoSubLoading(true);
+    try {
+      await sendTestPullRequestOpenedWebhook({
+        repo_full_name: repo,
+        pr_number: 123,
+        pr_title: 'Test PR opened (mobile)',
+      });
+      Alert.alert('Webhook Sent', 'Sent pull_request.opened webhook. If you are subscribed and push is enabled, a notification should arrive shortly.');
+    } catch (err) {
+      Alert.alert('Error', `Failed to send webhook: ${err.message}`);
+    } finally {
+      setRepoSubLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchStatus();
     checkExistingSubscription();
+    refreshRepoSubscriptions();
     
     // Setup notification listeners
     const cleanup = setupNotificationListeners((notification) => {
@@ -231,6 +310,61 @@ export default function StatusScreen() {
           Enable push to receive real-time notifications. Use "Test Notification" to poll and speak the latest notification via TTS.
         </Text>
       </View>
+
+      {/* Repo Subscriptions Section */}
+      <View style={styles.pushContainer}>
+        <Text style={styles.sectionTitle}>Repo Subscriptions</Text>
+        <Text style={styles.helperText}>
+          Subscribe to repos so webhook replays generate notifications for you.
+        </Text>
+
+        <View style={styles.repoInputRow}>
+          <TextInput
+            style={styles.repoInput}
+            placeholder="owner/repo"
+            value={repoFullName}
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={setRepoFullName}
+          />
+          <View style={styles.repoButton}>
+            <Button title="Subscribe" onPress={handleSubscribeRepo} disabled={repoSubLoading} />
+          </View>
+        </View>
+
+        <View style={styles.buttonRow}>
+          <Button title="Refresh" onPress={refreshRepoSubscriptions} disabled={repoSubLoading} />
+        </View>
+
+        <View style={styles.buttonRow}>
+          <Button
+            title="Send Test Webhook (PR Opened)"
+            onPress={handleSendTestWebhook}
+            disabled={repoSubLoading}
+            color="#4CAF50"
+          />
+        </View>
+
+        {repoSubLoading && <ActivityIndicator size="small" color="#007AFF" />}
+
+        {repoSubscriptions.length === 0 ? (
+          <Text style={styles.emptyText}>No repo subscriptions yet.</Text>
+        ) : (
+          <View style={styles.repoList}>
+            {repoSubscriptions.map((sub) => (
+              <View key={sub.id} style={styles.repoRow}>
+                <Text style={styles.repoText}>{sub.repo_full_name}</Text>
+                <Button
+                  title="Remove"
+                  color="#c62828"
+                  onPress={() => handleUnsubscribeRepo(sub.repo_full_name)}
+                  disabled={repoSubLoading}
+                />
+              </View>
+            ))}
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -280,6 +414,51 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     marginTop: 20,
+  },
+  helperText: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 10,
+  },
+  repoInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  repoInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 14,
+  },
+  repoButton: {
+    marginLeft: 10,
+  },
+  repoList: {
+    marginTop: 8,
+  },
+  repoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  repoText: {
+    flex: 1,
+    marginRight: 10,
+    fontSize: 14,
+    color: '#111',
+  },
+  emptyText: {
+    fontSize: 13,
+    color: '#666',
+    marginTop: 6,
   },
   sectionTitle: {
     fontSize: 20,

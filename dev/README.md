@@ -127,6 +127,48 @@ make dev
 
 This will start the FastAPI server with auto-reload enabled for development.
 
+## Push Notifications Demo (Expo)
+
+This repo supports Expo push delivery via notification subscriptions (`platform=expo`).
+
+**Server configuration**
+
+- Set `HANDSFREE_EXPO_MODE=real` to actually send push tickets to Expo.
+- Ensure `HANDSFREE_NOTIFICATION_PROVIDER` is **not** set to `logger`/`dev` (that overrides platform-specific providers).
+- Optional: set `HANDSFREE_EXPO_ACCESS_TOKEN` for higher rate limits.
+
+Example:
+
+```bash
+export HANDSFREE_AUTH_MODE=dev
+export HANDSFREE_EXPO_MODE=real
+unset HANDSFREE_NOTIFICATION_PROVIDER
+make dev
+```
+
+**Device setup (mobile app)**
+
+1) In the mobile app, point the base URL at your backend (must be reachable from the phone).
+2) Go to the **Status** tab → **Enable Push**.
+3) In the same screen, add a **Repo Subscription** for a repo you’ll replay webhooks for (e.g. `endomorphosis/lift_coding`).
+
+**Trigger a notification (webhook replay)**
+
+Option A (phone-only):
+
+- In the mobile app → **Status** → **Repo Subscriptions** → **Send Test Webhook (PR Opened)**
+
+Option B (CLI):
+
+From this repo root, replay a webhook fixture into your running backend:
+
+```bash
+/home/barberb/lift_coding/.venv/bin/python dev/replay_webhook.py \
+  tests/fixtures/github/webhooks/pull_request.opened.json
+```
+
+If you have push enabled and are subscribed to that repo, you should receive a push; when the app is foregrounded it will speak the message via TTS.
+
 ### Install dependencies
 
 First time setup:
