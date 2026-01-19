@@ -42,7 +42,8 @@ export default function GlassesDiagnosticsScreen() {
     }
 
     // Track app state to pause polling when backgrounded
-    let isActive = true;
+    // Initialize based on current state rather than defaulting to true
+    let isActive = AppState.currentState === 'active';
     
     const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
       isActive = nextAppState === 'active';

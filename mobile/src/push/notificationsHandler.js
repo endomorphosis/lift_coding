@@ -27,6 +27,15 @@ let appStateSubscription = null;
 let isProcessingPendingQueue = false;
 let appStateMonitoringInitialized = false;
 
+/**
+ * Helper to check if an app state represents background/inactive
+ * @param {string} state - AppState value
+ * @returns {boolean} True if app is backgrounded or inactive
+ */
+function isBackgroundState(state) {
+  return state === 'background' || state === 'inactive';
+}
+
 // Debug state for UI visibility
 let debugState = {
   lastNotificationReceived: null,
@@ -103,11 +112,11 @@ function setupAppStateMonitoring() {
 
   // Initialize current state - use explicit comparison instead of regex match
   const currentState = AppState.currentState;
-  isAppInBackground = currentState === 'background' || currentState === 'inactive';
+  isAppInBackground = isBackgroundState(currentState);
 
   appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
     const wasInBackground = isAppInBackground;
-    isAppInBackground = nextAppState === 'background' || nextAppState === 'inactive';
+    isAppInBackground = isBackgroundState(nextAppState);
 
     console.log(`AppState changed to: ${nextAppState}, background: ${isAppInBackground}`);
 
@@ -192,6 +201,8 @@ export async function speakNotification(message) {
   if (isAppInBackground) {
     console.log('App is backgrounded, deferring speech:', message);
     // Avoid enqueueing duplicate messages while backgrounded
+    // Note: includes() is O(n) but acceptable for typical queue sizes (< 100 items)
+    // For high-volume scenarios, consider using a Set for O(1) lookups
     if (!pendingSpeakQueue.includes(message)) {
       pendingSpeakQueue.push(message);
     }
