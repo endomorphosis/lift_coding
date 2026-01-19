@@ -5,7 +5,7 @@ import logging
 import random
 import time
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -281,22 +281,22 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         return False
 
-    def _get_retry_time_message(self, response) -> str:
-        """Get a human-readable retry time message from rate limit headers.
+    def _get_rate_limit_reset_message(self, response) -> str:
+        """Get a human-readable message for when rate limit will reset.
 
         Args:
             response: httpx Response object with rate limit headers
 
         Returns:
-            Human-readable message about when to retry
+            Human-readable message about when rate limit resets
         """
         reset_timestamp = response.headers.get("X-RateLimit-Reset", "")
         if not reset_timestamp:
             return "unknown time"
 
         try:
-            reset_time = datetime.fromtimestamp(int(reset_timestamp))
-            now = datetime.now()
+            reset_time = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
+            now = datetime.now(timezone.utc)
             delta = reset_time - now
 
             if delta.total_seconds() <= 0:
@@ -305,7 +305,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
             # Format as human-readable duration
             seconds = int(delta.total_seconds())
             if seconds < 60:
-                return f"{seconds} seconds"
+                return f"{seconds} second{'s' if seconds != 1 else ''}"
             elif seconds < 3600:
                 minutes = seconds // 60
                 return f"{minutes} minute{'s' if minutes != 1 else ''}"
@@ -313,12 +313,16 @@ class LiveGitHubProvider(GitHubProviderInterface):
                 hours = seconds // 3600
                 return f"{hours} hour{'s' if hours != 1 else ''}"
         except (ValueError, OSError):
-            return reset_timestamp
+            return "unknown time"
 
     def _make_request(
         self, endpoint: str, params: dict[str, Any] | None = None, _retry_count: int = 0
     ) -> dict[str, Any] | list[dict[str, Any]]:
-        """Make a GET request to GitHub API with retry logic.
+        """Make a GET request to the GitHub API with automatic retries and exponential backoff.
+
+        This method automatically retries certain transient HTTP errors (such as 502, 503,
+        and 504) using exponential backoff, and also handles rate limiting when indicated
+        by the response headers.
 
         Args:
             endpoint: API endpoint path (e.g., "/repos/owner/repo/pulls/123")
@@ -351,7 +355,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
                 # Check for rate limiting (429 or 403 with remaining=0)
                 if self._is_rate_limited(response):
-                    retry_msg = self._get_retry_time_message(response)
+                    retry_msg = self._get_rate_limit_reset_message(response)
                     logger.error(
                         "GitHub API rate limit exceeded for %s. Try again in %s",
                         endpoint,
@@ -416,7 +420,18 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     )
 
                 # Success - return JSON response
-                return response.json()
+                try:
+                    return response.json()
+                except ValueError as e:
+                    # JSONDecodeError is a subclass of ValueError
+                    logger.error(
+                        "GitHub API returned invalid JSON for %s: %s",
+                        endpoint,
+                        str(e),
+                    )
+                    raise RuntimeError(
+                        f"GitHub API returned invalid JSON response: {e}"
+                    ) from e
 
         except httpx.TimeoutException as e:
             logger.error("GitHub API request timed out: %s", str(e))

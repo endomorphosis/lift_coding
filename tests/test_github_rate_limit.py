@@ -1,7 +1,7 @@
 """Tests for GitHub rate limit handling and retry logic."""
 
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import httpx
 import pytest
@@ -97,6 +97,26 @@ class TestRateLimitDetection:
             provider._make_request("/repos/private/repo/pulls/1")
 
     @respx.mock
+    def test_403_with_invalid_remaining_header(self):
+        """Test that 403 with invalid X-RateLimit-Remaining is treated as permission error."""
+        token_provider = MockTokenProvider()
+        provider = LiveGitHubProvider(token_provider)
+
+        # Mock a 403 response with invalid remaining header
+        respx.get("https://api.github.com/repos/private/repo/pulls/1").mock(
+            return_value=httpx.Response(
+                403,
+                headers={
+                    "X-RateLimit-Remaining": "invalid",  # Can't parse as int
+                },
+            )
+        )
+
+        # Should raise RuntimeError about forbidden access, not rate limit
+        with pytest.raises(RuntimeError, match="access forbidden"):
+            provider._make_request("/repos/private/repo/pulls/1")
+
+    @respx.mock
     def test_401_not_retried(self):
         """Test that 401 authentication errors are not retried."""
         token_provider = MockTokenProvider()
@@ -113,7 +133,7 @@ class TestRateLimitDetection:
 
 
 class TestRetryTimeMessage:
-    """Test human-readable retry time message generation."""
+    """Test human-readable rate limit reset time message generation."""
 
     def test_retry_time_message_seconds(self):
         """Test retry message for times less than a minute."""
@@ -121,11 +141,27 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 30 seconds
-        reset_time = int((datetime.now() + timedelta(seconds=30)).timestamp())
+        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=30)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        msg = provider._get_retry_time_message(response)
+        msg = provider._get_rate_limit_reset_message(response)
         assert "second" in msg.lower()
+
+    def test_retry_time_message_one_second(self):
+        """Test retry message for exactly 1 second (singular)."""
+        token_provider = MockTokenProvider()
+        provider = LiveGitHubProvider(token_provider)
+
+        # Mock response with reset in 2 seconds to avoid timing issues
+        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=2)).timestamp())
+        response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
+
+        msg = provider._get_rate_limit_reset_message(response)
+        # Should be singular (1 or 2 seconds, but singular form)
+        assert "second" in msg.lower()
+        # Verify no plural when single digit
+        if msg.startswith("1 "):
+            assert msg == "1 second"
 
     def test_retry_time_message_minutes(self):
         """Test retry message for times in minutes."""
@@ -133,10 +169,10 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 5 minutes
-        reset_time = int((datetime.now() + timedelta(minutes=5)).timestamp())
+        reset_time = int((datetime.now(timezone.utc) + timedelta(minutes=5)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        msg = provider._get_retry_time_message(response)
+        msg = provider._get_rate_limit_reset_message(response)
         assert "minute" in msg.lower()
 
     def test_retry_time_message_hours(self):
@@ -145,11 +181,23 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 2 hours
-        reset_time = int((datetime.now() + timedelta(hours=2)).timestamp())
+        reset_time = int((datetime.now(timezone.utc) + timedelta(hours=2)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
-        msg = provider._get_retry_time_message(response)
+        msg = provider._get_rate_limit_reset_message(response)
         assert "hour" in msg.lower()
+
+    def test_retry_time_message_now(self):
+        """Test retry message when reset time is in the past."""
+        token_provider = MockTokenProvider()
+        provider = LiveGitHubProvider(token_provider)
+
+        # Mock response with reset in the past
+        reset_time = int((datetime.now(timezone.utc) - timedelta(minutes=5)).timestamp())
+        response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
+
+        msg = provider._get_rate_limit_reset_message(response)
+        assert msg == "now"
 
     def test_retry_time_message_missing_header(self):
         """Test retry message when reset header is missing."""
@@ -158,7 +206,17 @@ class TestRetryTimeMessage:
 
         response = MockResponse(429, {})
 
-        msg = provider._get_retry_time_message(response)
+        msg = provider._get_rate_limit_reset_message(response)
+        assert msg == "unknown time"
+
+    def test_retry_time_message_invalid_timestamp(self):
+        """Test retry message when reset header is invalid."""
+        token_provider = MockTokenProvider()
+        provider = LiveGitHubProvider(token_provider)
+
+        response = MockResponse(429, {"X-RateLimit-Reset": "invalid"})
+
+        msg = provider._get_rate_limit_reset_message(response)
         assert msg == "unknown time"
 
 
@@ -309,9 +367,10 @@ class TestRateLimitWithFallback:
         token_provider = MockTokenProvider()
         provider = LiveGitHubProvider(token_provider)
 
-        # Mock rate limit response
+        # Mock rate limit response on the search endpoint (not /user)
+        # list_user_prs uses /search/issues for regular usernames
         reset_time = int((datetime.now() + timedelta(hours=1)).timestamp())
-        respx.get("https://api.github.com/user").mock(
+        respx.get("https://api.github.com/search/issues").mock(
             return_value=httpx.Response(
                 403,
                 headers={
