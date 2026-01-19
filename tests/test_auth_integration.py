@@ -304,3 +304,189 @@ class TestJWTModeUserIsolation:
             data1 = list_response1.json()
             # User 1 should have at least 1 connection
             assert len(data1["connections"]) >= 1
+
+
+class TestApiKeyModeAuthentication:
+    """Test API key authentication mode."""
+
+    def test_command_requires_api_key(self):
+        """Test that command endpoint requires API key in api_key mode."""
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/command",
+                json={
+                    "input": {"type": "text", "text": "inbox"},
+                    "profile": "default",
+                    "client_context": {
+                        "device": "test",
+                        "locale": "en-US",
+                        "timezone": "America/Los_Angeles",
+                        "app_version": "0.1.0",
+                    },
+                },
+            )
+            assert response.status_code == 401
+            data = response.json()
+            assert "api key required" in str(data).lower()
+
+    def test_command_with_invalid_api_key(self):
+        """Test that invalid API keys are rejected."""
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/command",
+                headers={"Authorization": "Bearer invalid-api-key-12345"},
+                json={
+                    "input": {"type": "text", "text": "inbox"},
+                    "profile": "default",
+                    "client_context": {
+                        "device": "test",
+                        "locale": "en-US",
+                        "timezone": "America/Los_Angeles",
+                        "app_version": "0.1.0",
+                    },
+                },
+            )
+            assert response.status_code == 401
+            data = response.json()
+            assert "invalid" in str(data).lower() or "revoked" in str(data).lower()
+
+    def test_command_with_valid_api_key(self, test_user_id):
+        """Test command endpoint with valid API key."""
+        from handsfree.db.api_keys import create_api_key
+        from handsfree.api import get_db
+
+        db = get_db()
+        plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
+
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/command",
+                headers={"Authorization": f"Bearer {plaintext_key}"},
+                json={
+                    "input": {"type": "text", "text": "inbox"},
+                    "profile": "default",
+                    "client_context": {
+                        "device": "test",
+                        "locale": "en-US",
+                        "timezone": "America/Los_Angeles",
+                        "app_version": "0.1.0",
+                    },
+                },
+            )
+            assert response.status_code == 200
+
+    def test_command_with_revoked_api_key(self, test_user_id):
+        """Test that revoked API keys are rejected."""
+        from handsfree.db.api_keys import create_api_key, revoke_api_key
+        from handsfree.api import get_db
+
+        db = get_db()
+        plaintext_key, api_key = create_api_key(db, test_user_id, label="Revoked key")
+        revoke_api_key(db, api_key.id)
+
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/command",
+                headers={"Authorization": f"Bearer {plaintext_key}"},
+                json={
+                    "input": {"type": "text", "text": "inbox"},
+                    "profile": "default",
+                    "client_context": {
+                        "device": "test",
+                        "locale": "en-US",
+                        "timezone": "America/Los_Angeles",
+                        "app_version": "0.1.0",
+                    },
+                },
+            )
+            assert response.status_code == 401
+            data = response.json()
+            assert "invalid" in str(data).lower() or "revoked" in str(data).lower()
+
+    def test_github_connection_with_valid_api_key(self, test_user_id):
+        """Test GitHub connection creation with valid API key."""
+        from handsfree.db.api_keys import create_api_key
+        from handsfree.api import get_db
+
+        db = get_db()
+        plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
+
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/github/connections",
+                headers={"Authorization": f"Bearer {plaintext_key}"},
+                json={"installation_id": 12345},
+            )
+            assert response.status_code == 201
+            data = response.json()
+            # Should use user_id from API key
+            assert data["user_id"] == test_user_id
+
+    def test_github_connection_requires_api_key(self):
+        """Test GitHub connection creation requires API key in api_key mode."""
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.post(
+                "/v1/github/connections",
+                json={"installation_id": 12345},
+            )
+            assert response.status_code == 401
+
+    def test_list_connections_with_valid_api_key(self, test_user_id):
+        """Test listing connections with valid API key."""
+        from handsfree.db.api_keys import create_api_key
+        from handsfree.api import get_db
+
+        db = get_db()
+        plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
+
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            response = client.get(
+                "/v1/github/connections",
+                headers={"Authorization": f"Bearer {plaintext_key}"},
+            )
+            assert response.status_code == 200
+
+
+class TestApiKeyModeUserIsolation:
+    """Test that API key mode properly isolates users."""
+
+    def test_different_api_keys_have_different_connections(self):
+        """Test that different API key users see different connections."""
+        from handsfree.db.api_keys import create_api_key
+        from handsfree.api import get_db
+
+        user1_id = str(uuid.uuid4())
+        user2_id = str(uuid.uuid4())
+
+        db = get_db()
+        plaintext_key1, _ = create_api_key(db, user1_id, label="User 1 key")
+        plaintext_key2, _ = create_api_key(db, user2_id, label="User 2 key")
+
+        with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "api_key"}):
+            # User 1 creates a connection
+            create_response = client.post(
+                "/v1/github/connections",
+                headers={"Authorization": f"Bearer {plaintext_key1}"},
+                json={"installation_id": 22222},
+            )
+            assert create_response.status_code == 201
+
+            # User 2 lists connections (should not see user 1's connection)
+            list_response = client.get(
+                "/v1/github/connections",
+                headers={"Authorization": f"Bearer {plaintext_key2}"},
+            )
+            assert list_response.status_code == 200
+            data = list_response.json()
+            # User 2 should have no connections
+            assert len(data["connections"]) == 0
+
+            # User 1 lists connections (should see their connection)
+            list_response1 = client.get(
+                "/v1/github/connections",
+                headers={"Authorization": f"Bearer {plaintext_key1}"},
+            )
+            assert list_response1.status_code == 200
+            data1 = list_response1.json()
+            # User 1 should have at least 1 connection
+            assert len(data1["connections"]) >= 1

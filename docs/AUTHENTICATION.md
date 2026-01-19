@@ -15,7 +15,7 @@ export HANDSFREE_AUTH_MODE=jwt
 export JWT_SECRET_KEY=your-secret-key-here
 export JWT_ALGORITHM=HS256  # Optional, defaults to HS256
 
-# API Key mode - not yet fully implemented
+# API Key mode - requires valid API keys
 export HANDSFREE_AUTH_MODE=api_key
 ```
 
@@ -86,10 +86,43 @@ curl -X POST http://localhost:8080/v1/command \
 
 ### API Key Mode
 
-API key authentication is planned but not yet fully implemented. When enabled:
+API key authentication allows machine-to-machine communication using API keys managed through the admin endpoints.
 
-- Requires an API key in the Authorization header
-- Returns `501 Not Implemented` currently
+**Requirements:**
+- API keys must be created via the admin API endpoints (`/v1/admin/api-keys`)
+- Keys are sent in the `Authorization: Bearer <api_key>` header
+- Keys are validated against the database and checked for revocation
+- Each key is associated with a specific user_id
+
+**Creating an API Key:**
+```bash
+# Using the admin endpoint (requires appropriate authorization)
+curl -X POST http://localhost:8080/v1/admin/api-keys \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "12345678-1234-1234-1234-123456789012",
+    "label": "Production API key"
+  }'
+```
+
+**Using an API Key:**
+```bash
+curl -X POST http://localhost:8080/v1/command \
+  -H "Authorization: Bearer YOUR_API_KEY_HERE" \
+  -H "Content-Type: application/json" \
+  -d '{"input": {"type": "text", "text": "inbox"}, "profile": "default", "client_context": {"device": "test", "locale": "en-US", "timezone": "UTC", "app_version": "0.1.0"}}'
+```
+
+**Error responses:**
+- `401 Unauthorized`: Missing API key
+- `401 Unauthorized`: Invalid API key
+- `401 Unauthorized`: Revoked API key
+
+**Security Features:**
+- API keys are stored as SHA256 hashes, never in plaintext
+- Keys can be revoked without deletion (maintains audit trail)
+- Each key tracks last_used_at timestamp
+- Keys are scoped to a specific user_id
 
 ## Supported JWT Claims
 
@@ -118,11 +151,17 @@ All endpoints that read or write user data are protected by authentication:
 The authentication system includes comprehensive tests:
 
 ### Unit Tests (`tests/test_auth.py`)
-- 21 tests covering auth mode detection, JWT validation, and dependency behavior
+- 24 tests covering auth mode detection, JWT validation, API key validation, and dependency behavior
+- Tests for all three authentication modes: dev, jwt, and api_key
 
 ### Integration Tests (`tests/test_auth_integration.py`)
-- 15 tests covering real API calls in dev and JWT modes
-- Tests user isolation and data segregation
+- 23 tests covering real API calls in dev, JWT, and API key modes
+- Tests user isolation and data segregation across all modes
+- Tests API key revocation and validation
+
+### Database Tests (`tests/test_api_keys.py`)
+- 25 tests covering API key generation, storage, validation, and management
+- Tests secure hashing, revocation, and user isolation
 
 ### Existing Tests
 - All existing tests continue to pass with dev mode (default)
@@ -131,13 +170,16 @@ The authentication system includes comprehensive tests:
 **Run tests:**
 ```bash
 # All auth tests
-pytest tests/test_auth.py tests/test_auth_integration.py -v
+pytest tests/test_auth.py tests/test_auth_integration.py tests/test_api_keys.py -v
 
 # Specific test class
 pytest tests/test_auth.py::TestJWTValidation -v
 
 # Integration tests only
 pytest tests/test_auth_integration.py -v
+
+# API key tests only
+pytest tests/test_api_keys.py -v
 ```
 
 ## Migration Guide
@@ -186,8 +228,9 @@ token = create_user_token(user_id, secret)
 
 ## Future Enhancements
 
-- **API Key authentication**: Full implementation with database-backed key storage
 - **OAuth2/OIDC**: Support for third-party identity providers
-- **Token refresh**: Automatic token renewal mechanisms
+- **Token refresh**: Automatic token renewal mechanisms for JWT mode
 - **Rate limiting**: Per-user rate limits based on authentication
 - **Audit logging**: Enhanced logging of authentication events
+- **API key rotation**: Automatic key rotation policies
+- **X-API-Key header**: Optional support for X-API-Key header as alternative to Bearer token
