@@ -199,8 +199,10 @@ export default function SettingsScreen() {
         </View>
 
         <Text style={styles.helpText}>
-          When enabled, incoming push notifications will be automatically spoken via TTS. 
-          {__DEV__ ? ' (Default: ON in development)' : ' (Default: OFF in production)'}
+          When enabled, incoming push notifications will be automatically spoken via TTS.
+          {__DEV__ 
+            ? ' (Default: ON in development)' 
+            : ' (Default: OFF in production)'}
         </Text>
       </View>
 
