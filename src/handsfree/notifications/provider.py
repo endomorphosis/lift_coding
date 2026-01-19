@@ -654,6 +654,8 @@ class ExpoPushProvider(NotificationDeliveryProvider):
             }
 
         try:
+            import os
+
             import httpx
 
             title = str(
@@ -663,12 +665,15 @@ class ExpoPushProvider(NotificationDeliveryProvider):
 
             # Prepare Expo push message
             # https://docs.expo.dev/push-notifications/sending-notifications/
+            expo_sound = os.getenv("HANDSFREE_EXPO_SOUND", "").strip() or None
             message = {
                 "to": subscription_endpoint,
                 "title": title,
                 "body": body,
                 "data": notification_data,
-                "sound": "default",
+                # Default to silent so the app can speak via TTS.
+                # Set HANDSFREE_EXPO_SOUND=default if you want a system sound.
+                "sound": expo_sound,
                 "priority": "high",
             }
 

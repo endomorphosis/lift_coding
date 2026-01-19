@@ -323,6 +323,9 @@ def _deliver_notification(
 
     # Prepare notification payload
     notification_data = {
+        # Mobile clients expect this key when deciding whether to fetch full details.
+        # Keep `id` as well for backward compatibility.
+        "notification_id": notification.id,
         "id": notification.id,
         "event_type": notification.event_type,
         "message": notification.message,

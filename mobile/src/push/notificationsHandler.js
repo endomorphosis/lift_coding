@@ -73,9 +73,10 @@ async function handleNotification(notification) {
   let message = data.message || body || 'New notification';
   
   // If notification has an ID, we could fetch full details from backend
-  if (data.notification_id) {
+  const notificationId = data.notification_id || data.id;
+  if (notificationId) {
     try {
-      const details = await fetchNotificationDetails(data.notification_id);
+      const details = await fetchNotificationDetails(notificationId);
       if (details && details.message) {
         message = details.message;
       }

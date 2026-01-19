@@ -22,7 +22,7 @@ class NotificationSubscription:
     subscription_keys: dict[str, str] | None
     created_at: datetime
     updated_at: datetime
-    platform: str = "webpush"  # webpush, apns, fcm
+    platform: str = "webpush"  # webpush, apns, fcm, expo
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for API responses."""

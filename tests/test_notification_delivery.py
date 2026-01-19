@@ -330,6 +330,7 @@ class TestNotificationDelivery:
         # Verify delivery was called
         assert len(delivery_calls) == 1
         assert delivery_calls[0]["endpoint"] == "https://push.example.com/test-endpoint"
+        assert delivery_calls[0]["data"]["notification_id"] == delivery_calls[0]["data"]["id"]
         assert delivery_calls[0]["data"]["event_type"] == "test_event"
         assert delivery_calls[0]["data"]["message"] == "Test notification message"
         assert delivery_calls[0]["keys"] == {"auth": "secret"}
@@ -949,7 +950,8 @@ class TestExpoPushProvider:
                 # Verify default fields
                 assert json["title"] == "webhook.test_event"  # Falls back to event_type
                 assert json["body"] == ""  # Empty message
-                assert json["sound"] == "default"
+                # Default to silent so the app can speak via TTS.
+                assert json["sound"] is None
                 assert json["priority"] == "high"
                 return MockResponse()
 
