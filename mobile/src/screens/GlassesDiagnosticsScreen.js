@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert, Pl
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { uploadDevAudio, sendAudioCommand } from '../api/client';
+import { uploadDevAudio, sendAudioCommand, fetchTTS } from '../api/client';
 import GlassesAudio from '../../modules/glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
@@ -456,31 +456,71 @@ export default function GlassesDiagnosticsScreen() {
 
       setCommandResponse(response);
 
-      // If we have TTS audio in response and glasses mode is active, play it
-      if (response.audio_base64 && !devMode && nativeModuleAvailable) {
-        // Save TTS audio to file
+      // Step 5: Fetch TTS and play it through the active route.
+      // The backend returns `spoken_text`; audio bytes are provided by POST /v1/tts.
+      if (response.spoken_text) {
+        const ttsBlob = await fetchTTS(response.spoken_text, { accept: 'audio/wav' });
+
+        // Convert Blob -> base64 (Expo FileSystem writes base64 strings)
+        const base64Data = await new Promise((resolve, reject) => {
+          try {
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error('Failed to read TTS audio'));
+            reader.onloadend = () => {
+              const result = String(reader.result || '');
+              const parts = result.split(',');
+              resolve(parts.length > 1 ? parts[1] : result);
+            };
+            reader.readAsDataURL(ttsBlob);
+          } catch (e) {
+            reject(e);
+          }
+        });
+
         const ttsDir = FileSystem.documentDirectory + 'tts/';
         await FileSystem.makeDirectoryAsync(ttsDir, { intermediates: true });
         const ttsFilePath = ttsDir + `tts_${Date.now()}.wav`;
-        await FileSystem.writeAsStringAsync(ttsFilePath, response.audio_base64, {
+        await FileSystem.writeAsStringAsync(ttsFilePath, base64Data, {
           encoding: FileSystem.EncodingType.Base64,
         });
-        
-        // Play TTS through glasses
-        await GlassesAudio.playAudio(ttsFilePath);
-        
-        Alert.alert(
-          'Pipeline Complete',
-          `Command processed!\n\n"${response.spoken_text}"\n\nTTS playing through glasses...`,
-          [{ text: 'OK' }]
-        );
-      } else {
-        Alert.alert(
-          'Pipeline Complete',
-          `Command processed successfully!\n\n${response.spoken_text || 'Response received (no text content)'}\n\n${!devMode && nativeModuleAvailable ? 'TTS playback would play through glasses here' : 'Note: TTS playback not yet implemented for dev mode'}`,
-          [{ text: 'OK' }]
-        );
+
+        if (!devMode && nativeModuleAvailable) {
+          await GlassesAudio.playAudio(ttsFilePath);
+        } else {
+          // Fallback to Expo playback (will still route to a connected BT output).
+          if (sound) {
+            await sound.stopAsync();
+            await sound.unloadAsync();
+            setSound(null);
+          }
+
+          await Audio.setAudioModeAsync({
+            allowsRecordingIOS: false,
+            playsInSilentModeIOS: true,
+            staysActiveInBackground: false,
+            shouldDuckAndroid: false,
+            playThroughEarpieceAndroid: false,
+          });
+
+          const { sound: ttsSound } = await Audio.Sound.createAsync(
+            { uri: ttsFilePath },
+            { shouldPlay: true }
+          );
+
+          setSound(ttsSound);
+          ttsSound.setOnPlaybackStatusUpdate((status) => {
+            if (status.didJustFinish) {
+              setIsPlaying(false);
+            }
+          });
+        }
       }
+
+      Alert.alert(
+        'Pipeline Complete',
+        `Command processed!\n\n${response.spoken_text || 'Response received (no text content)'}${response.spoken_text ? '\n\nPlaying TTS...' : ''}`,
+        [{ text: 'OK' }]
+      );
 
     } catch (error) {
       setLastError(`Pipeline failed: ${error.message}`);
@@ -488,108 +528,6 @@ export default function GlassesDiagnosticsScreen() {
       Alert.alert('Error', `Failed to process command: ${error.message}`);
     } finally {
       setIsProcessing(false);
-    }
-  };
-
-
-  const playRecording = async () => {
-    if (!lastRecordingUri) {
-      Alert.alert('No Recording', 'Please record audio first.');
-      return;
-    }
-
-    try {
-      setLastError(null);
-      setIsPlaying(true);
-      
-      // Use native module in glasses mode if available
-      if (!devMode && useNativeModule) {
-        await GlassesAudio.playAudio(lastRecordingUri);
-        setIsPlaying(true);
-        
-        Alert.alert(
-          'Playing Recording',
-          'Playback through Bluetooth glasses speakers (native)'
-        );
-        return;
-      }
-      
-      // Fallback to Expo Audio
-      // Unload any existing sound
-      if (sound) {
-        await sound.unloadAsync();
-        setSound(null);
-      }
-
-        await Audio.setAudioModeAsync({
-          allowsRecordingIOS: false,
-          playsInSilentModeIOS: true,
-          staysActiveInBackground: false,
-          shouldDuckAndroid: false,
-          playThroughEarpieceAndroid: false,
-        });
-
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: lastRecordingUri },
-          { shouldPlay: true }
-        );
-        
-        setSound(newSound);
-
-        newSound.setOnPlaybackStatusUpdate((status) => {
-          if (status.didJustFinish) {
-            setIsPlaying(false);
-          }
-        });
-
-        Alert.alert(
-          'Playing Recording',
-          `Playback through phone speaker`
-        );
-      } else {
-        // Glasses mode: Use native Bluetooth playback
-        await GlassesAudio.playAudio(lastRecordingUri);
-        
-        // TODO: Replace with native playback status listener
-        // For now, simulate playback completion with estimated duration
-        // In production, use GlassesAudio.addPlaybackStatusListener to get real status
-        setTimeout(() => {
-          setIsPlaying(false);
-        }, 3000);
-        
-        Alert.alert(
-          'Playing Recording',
-          `Playback through Bluetooth glasses speakers`
-        );
-      }
-    } catch (error) {
-      setLastError(`Playback failed: ${error.message}`);
-      console.error('Failed to play recording:', error);
-      setIsPlaying(false);
-    }
-  };
-
-  const stopPlayback = async () => {
-    try {
-      // Use native module in glasses mode if available
-      if (!devMode && useNativeModule) {
-        await GlassesAudio.stopPlayback();
-        setIsPlaying(false);
-        return;
-      }
-      
-      // Fallback to Expo Audio
-      if (sound) {
-        await sound.stopAsync();
-        await sound.unloadAsync();
-        setSound(null);
-      } else {
-        await GlassesAudio.stopPlayback();
-      }
-      setIsPlaying(false);
-    } catch (error) {
-      setLastError(`Stop playback failed: ${error.message}`);
-      console.error('Failed to stop playback:', error);
     }
   };
 
@@ -643,7 +581,7 @@ export default function GlassesDiagnosticsScreen() {
     Alert.alert(
       'Audio Pipeline Flow',
       devMode
-        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n5. (TTS playback TBD)\n\n✓ Steps 1-4 implemented'
+        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n5. Fetch /v1/tts and play\n\n✓ Steps 1-5 implemented'
         : nativeModuleAvailable
         ? '👓 GLASSES MODE (Native)\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n5. Play TTS through glasses\n\n✓ Native module compiled\n✓ Full pipeline ready'
         : '👓 GLASSES MODE (Build Required)\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\n⚠️ Native module not available\n\nTo enable:\n1. Run `expo prebuild`\n2. Open ios/ or android/ in IDE\n3. Build and run native app',
