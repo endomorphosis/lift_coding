@@ -84,6 +84,7 @@ export default function GlassesDiagnosticsScreen() {
       if (devMode) {
         setConnectionState('✓ DEV Mode Active');
         setAudioRoute('Phone mic → Phone speaker');
+        setLastError(null);
       } else {
         // Use native module if available
         if (nativeModuleAvailable) {
@@ -98,6 +99,7 @@ export default function GlassesDiagnosticsScreen() {
               setConnectionState('⚠ Glasses Mode (Bluetooth not connected)');
               setAudioRoute(`${inputDevice} → ${outputDevice}`);
             }
+            setLastError(null);
           } catch (err) {
             setConnectionState('⚠ Glasses mode (native module error)');
             setAudioRoute('Could not read native route');
@@ -106,9 +108,9 @@ export default function GlassesDiagnosticsScreen() {
         } else {
           setConnectionState('⚠ Glasses mode (native routing module required)');
           setAudioRoute('Bluetooth HFP routing not active in Expo-only build');
+          setLastError(null);
         }
       }
-      setLastError(null);
     } catch (error) {
       setLastError(`Audio setup failed: ${error.message}`);
       setConnectionState('✗ Error');
