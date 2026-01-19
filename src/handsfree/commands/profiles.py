@@ -16,6 +16,14 @@ class Profile(str, Enum):
     DEFAULT = "default"
 
 
+# Import PrivacyMode here to avoid circular imports
+# We use string literal for type hints to defer evaluation
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from handsfree.models import PrivacyMode
+
+
 @dataclass
 class ProfileConfig:
     """Configuration settings for each profile."""
@@ -27,10 +35,13 @@ class ProfileConfig:
     max_summary_sentences: int  # Maximum sentences in summaries
     max_inbox_items: int  # Maximum items to return in inbox listing
     detail_level: str  # "minimal", "brief", "moderate", "detailed"
+    privacy_mode: "PrivacyMode"  # Privacy mode for this profile (strict/balanced/debug)
 
     @classmethod
     def for_profile(cls, profile: Profile) -> "ProfileConfig":
         """Get configuration for the given profile."""
+        from handsfree.models import PrivacyMode
+        
         configs = {
             Profile.WORKOUT: cls(
                 profile=Profile.WORKOUT,
@@ -40,6 +51,7 @@ class ProfileConfig:
                 max_summary_sentences=2,  # Ultra-brief: 1-2 sentences max
                 max_inbox_items=3,  # Only top 3 items
                 detail_level="minimal",  # Key numbers only
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
             Profile.KITCHEN: cls(
                 profile=Profile.KITCHEN,
@@ -49,6 +61,7 @@ class ProfileConfig:
                 max_summary_sentences=4,  # Moderate: 3-4 sentences
                 max_inbox_items=5,
                 detail_level="moderate",  # Conversational
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
             Profile.COMMUTE: cls(
                 profile=Profile.COMMUTE,
@@ -58,6 +71,7 @@ class ProfileConfig:
                 max_summary_sentences=3,  # Brief: 2-3 sentences
                 max_inbox_items=5,
                 detail_level="brief",  # Essential info
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
             Profile.FOCUSED: cls(
                 profile=Profile.FOCUSED,
@@ -67,6 +81,7 @@ class ProfileConfig:
                 max_summary_sentences=2,  # Minimal interruption
                 max_inbox_items=3,  # Only actionable items
                 detail_level="minimal",  # Brief, actionable items only
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
             Profile.RELAXED: cls(
                 profile=Profile.RELAXED,
@@ -76,6 +91,7 @@ class ProfileConfig:
                 max_summary_sentences=10,  # Detailed: full context
                 max_inbox_items=10,  # More items
                 detail_level="detailed",  # All details
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
             Profile.DEFAULT: cls(
                 profile=Profile.DEFAULT,
@@ -85,6 +101,7 @@ class ProfileConfig:
                 max_summary_sentences=4,  # Moderate: balanced detail
                 max_inbox_items=5,
                 detail_level="moderate",  # Balanced detail
+                privacy_mode=PrivacyMode.STRICT,  # Default: strict for safety
             ),
         }
         return configs[profile]
