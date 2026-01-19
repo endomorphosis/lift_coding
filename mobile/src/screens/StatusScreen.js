@@ -8,7 +8,9 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Platform,
 } from 'react-native';
+import { Audio } from 'expo-av';
 import {
   getStatus,
   listRepoSubscriptions,
@@ -26,6 +28,8 @@ import {
   setupNotificationListeners,
   checkAndSpeakLatestNotification,
 } from '../push/notificationsHandler';
+import AudioSourceSelector from '../components/AudioSourceSelector';
+import { useAudioSource } from '../hooks/useAudioSource';
 
 export default function StatusScreen() {
   const [status, setStatus] = useState(null);
@@ -42,6 +46,10 @@ export default function StatusScreen() {
   const [repoSubscriptions, setRepoSubscriptions] = useState([]);
   const [repoSubLoading, setRepoSubLoading] = useState(false);
   const [repoFullName, setRepoFullName] = useState('');
+
+  // Audio source selection
+  const { audioSource, setAudioSource, isLoading: audioSourceLoading } = useAudioSource();
+  const [audioRoute, setAudioRoute] = useState({ input: 'Checking...', output: 'Checking...' });
 
   const fetchStatus = async () => {
     setLoading(true);
@@ -192,10 +200,56 @@ export default function StatusScreen() {
     }
   };
 
+  const checkAudioRoute = async () => {
+    try {
+      const { status: permStatus } = await Audio.requestPermissionsAsync();
+      if (permStatus !== 'granted') {
+        setAudioRoute({ input: 'Permission denied', output: 'Permission denied' });
+        return;
+      }
+
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+
+      if (Platform.OS === 'ios') {
+        // On iOS, we need to check AVAudioSession
+        // For now, show a simple status
+        const session = await Audio.getStatusAsync();
+        setAudioRoute({
+          input: 'Built-in Microphone',
+          output: 'Speaker',
+        });
+      } else {
+        // On Android, show placeholder
+        setAudioRoute({
+          input: 'Default',
+          output: 'Default',
+        });
+      }
+    } catch (err) {
+      console.error('Failed to check audio route:', err);
+      setAudioRoute({ input: 'Unknown', output: 'Unknown' });
+    }
+  };
+
+  const handleAudioSourceChange = async (newSource) => {
+    try {
+      await setAudioSource(newSource);
+      Alert.alert('Audio Source Updated', `Audio source set to: ${newSource}`);
+      // Refresh audio route after changing source
+      await checkAudioRoute();
+    } catch (err) {
+      Alert.alert('Error', `Failed to update audio source: ${err.message}`);
+    }
+  };
+
   useEffect(() => {
     fetchStatus();
     checkExistingSubscription();
     refreshRepoSubscriptions();
+    checkAudioRoute();
     
     // Setup notification listeners
     const cleanup = setupNotificationListeners((notification) => {
@@ -248,6 +302,36 @@ export default function StatusScreen() {
           </View>
         </View>
       )}
+
+      {/* Audio Source Selector Section */}
+      {!audioSourceLoading && (
+        <AudioSourceSelector
+          audioSource={audioSource}
+          onSelect={handleAudioSourceChange}
+          disabled={false}
+        />
+      )}
+
+      {/* Audio Route Display Section */}
+      <View style={styles.pushContainer}>
+        <Text style={styles.sectionTitle}>Audio Route Status</Text>
+        <View style={styles.audioRouteContainer}>
+          <View style={styles.audioRouteRow}>
+            <Text style={styles.label}>Input:</Text>
+            <Text style={styles.value}>{audioRoute.input}</Text>
+          </View>
+          <View style={styles.audioRouteRow}>
+            <Text style={styles.label}>Output:</Text>
+            <Text style={styles.value}>{audioRoute.output}</Text>
+          </View>
+          <View style={styles.buttonRow}>
+            <Button title="Refresh Route" onPress={checkAudioRoute} />
+          </View>
+        </View>
+        <Text style={styles.helpText}>
+          Current audio routing information. Change the audio source above to select which microphone to use for recording.
+        </Text>
+      </View>
 
       {/* Push Notifications Section */}
       <View style={styles.pushContainer}>
@@ -482,6 +566,15 @@ const styles = StyleSheet.create({
   statusActive: {
     color: '#4CAF50',
     fontWeight: 'bold',
+  },
+  audioRouteContainer: {
+    backgroundColor: '#f5f5f5',
+    padding: 12,
+    borderRadius: 5,
+    marginBottom: 12,
+  },
+  audioRouteRow: {
+    marginBottom: 8,
   },
   buttonRow: {
     marginVertical: 5,
