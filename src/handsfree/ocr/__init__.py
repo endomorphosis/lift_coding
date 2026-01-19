@@ -34,17 +34,17 @@ def get_ocr_provider() -> OCRProvider:
     """Get the configured OCR provider.
 
     Returns the appropriate OCR provider based on environment configuration:
-    - If HANDS_FREE_OCR_PROVIDER=stub or unset: returns StubOCRProvider
+    - If HANDSFREE_OCR_PROVIDER=stub or unset: returns StubOCRProvider
     - If HANDSFREE_OCR_ENABLED=false: returns disabled StubOCRProvider
 
     Returns:
         An OCRProvider instance
 
     Environment variables:
-        HANDS_FREE_OCR_PROVIDER: Provider type (default: "stub", options: "stub")
+        HANDSFREE_OCR_PROVIDER: Provider type (default: "stub", options: "stub")
         HANDSFREE_OCR_ENABLED: Whether OCR is enabled (default: "true")
     """
-    provider_type = os.environ.get("HANDS_FREE_OCR_PROVIDER", "stub").lower()
+    provider_type = os.environ.get("HANDSFREE_OCR_PROVIDER", "stub").lower()
     enabled = os.environ.get("HANDSFREE_OCR_ENABLED", "true").lower() in (
         "true",
         "1",

@@ -387,11 +387,6 @@ class TestImageInputOCRIntegration:
         """Test that OCR can be disabled via environment variable."""
         monkeypatch.setenv("HANDSFREE_OCR_ENABLED", "false")
 
-        # Need to reload the module to pick up the new env var
-        import importlib
-        import handsfree.ocr
-        importlib.reload(handsfree.ocr)
-
         response = client.post(
             "/v1/command",
             json={
