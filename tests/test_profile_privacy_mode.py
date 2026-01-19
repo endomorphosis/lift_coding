@@ -1,7 +1,5 @@
 """Tests for per-profile privacy mode configuration."""
 
-import pytest
-
 from handsfree.commands.profiles import Profile, ProfileConfig
 from handsfree.models import PrivacyMode
 
