@@ -1,11 +1,52 @@
 # Plan vs code gap matrix
 
-This document maps the implementation plan and OpenAPI contract to what exists in the repo today, and enumerates what remains.
+**Last Updated:** 2026-01-19  
+**Status:** ✅ Complete
+
+## Executive Summary
+
+This document provides the authoritative mapping of the implementation plan (`implementation_plan/docs/*` and `spec/openapi.yaml`) to the current backend and mobile implementation in `src/handsfree/*` and `mobile/*`.
+
+### Key Findings
+
+**Backend Implementation:**
+- ✅ **31/31 OpenAPI endpoints implemented** (100% coverage)
+- ✅ All core MVP1-MVP4 backend features functional
+- ✅ Comprehensive fixture/stub support for offline development
+- ✅ Live GitHub API integration available via env config
+- ✅ Full policy engine, confirmation flow, audit logging
+
+**Mobile Implementation:**
+- ✅ iOS + Android audio capture (Ray-Ban Meta glasses support)
+- ✅ Audio playback through Bluetooth devices
+- ✅ Push notification delivery working
+- ✅ Command submission + TTS playback integrated
+- ⚠️ UI polish needed (settings, OAuth flow, profile selector)
+
+**MVP Status:**
+- **MVP1:** ✅ Functionally complete (minor UI polish needed)
+- **MVP2:** ✅ Functionally complete (profile UI missing)
+- **MVP3:** ⚠️ Mostly complete (voice confirmation UI needed)
+- **MVP4:** ⚠️ Mostly complete (task status UI + notifications)
+
+**Critical Demo Blockers (iOS + Ray-Ban Meta):**
+1. 🔴 Mobile settings screen for backend URL configuration
+2. 🔴 Bluetooth microphone reliability (workaround exists: use phone mic)
+
+**Recommended Next Steps:**
+- **PR-067:** Mobile settings screen (HIGH priority, unblocks demo setup)
+- **PR-068:** Audio source selector (HIGH priority, improves reliability)
+- **PR-069-075:** Mobile UI polish + production config (MEDIUM/LOW priority)
+
+---
 
 ## Sources
 - Implementation plan: `implementation_plan/docs/*`
 - API contract: `spec/openapi.yaml`
 - Implementation: `src/handsfree/*`
+- Mobile: `mobile/*`
+
+---
 
 ## Matrix: OpenAPI coverage
 
