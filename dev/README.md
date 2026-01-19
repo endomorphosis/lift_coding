@@ -372,9 +372,17 @@ make lint
 ## Current Limitations (by design)
 
 - Live GitHub mode uses a single `GITHUB_TOKEN` for all users (per-user tokens in future PRs)
-- Real GitHub API calls are planned but not yet implemented (falls back to fixtures)
+- By default, GitHub data may come from fixtures unless live mode is enabled/configured
 - GitHub App installation UI and OAuth redirects are out of scope for now
 - Audio input returns an error - transcription coming in future PRs
+
+### GitHub fixtures vs live mode
+
+The dev stack supports both fixture mode (safe, deterministic) and live GitHub API calls.
+
+- **Fixture mode** (default when no token is configured): the GitHub provider falls back to fixture data.
+- **Live mode**: provide `GITHUB_TOKEN` (and optionally set `GITHUB_LIVE_MODE=true`) to enable real GitHub API calls.
+- **Force fixtures**: set `HANDS_FREE_GITHUB_MODE=fixtures` to force fixture mode even if a token is present.
 
 ## OpenAPI Documentation
 
