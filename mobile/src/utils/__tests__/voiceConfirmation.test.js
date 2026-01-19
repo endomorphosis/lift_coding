@@ -110,6 +110,7 @@ describe('inferConfirmationDecision', () => {
       expect(inferConfirmationDecision('hmm')).toBe(null);
       expect(inferConfirmationDecision('uh')).toBe(null);
       expect(inferConfirmationDecision('what')).toBe(null);
+      expect(inferConfirmationDecision('I know')).toBe(null); // "no" is substring, not word
     });
 
     it('should return null for empty or null input', () => {
@@ -139,14 +140,20 @@ describe('inferConfirmationDecision', () => {
       expect(inferConfirmationDecision('confirm,')).toBe('confirm');
     });
 
-    it('should handle partial word matches', () => {
+    it('should handle partial word matches correctly', () => {
       // "ok" should match in "okay" and "ok"
       expect(inferConfirmationDecision('okay')).toBe('confirm');
       expect(inferConfirmationDecision('ok')).toBe('confirm');
       
-      // "no" in "know" should match - conservative approach
-      // This is intentional: better to be safe and ask again
-      expect(inferConfirmationDecision('I know')).toBe('cancel');
+      // "no" in "know" should NOT match (word boundary)
+      expect(inferConfirmationDecision('I know')).toBe(null);
+      
+      // "ok" in "bokay" should NOT match (word boundary)
+      expect(inferConfirmationDecision('bokay')).toBe(null);
+      
+      // But actual word "no" should match
+      expect(inferConfirmationDecision('no way')).toBe('cancel');
+      expect(inferConfirmationDecision('I said no')).toBe('cancel');
     });
   });
 

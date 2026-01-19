@@ -17,6 +17,7 @@
  * - Returns null if no keywords match (ambiguous/unclear)
  * 
  * Keywords are conservative to avoid false positives.
+ * Uses word boundary matching to prevent partial word matches.
  */
 export function inferConfirmationDecision(transcript) {
   if (!transcript) return null;
@@ -27,8 +28,21 @@ export function inferConfirmationDecision(transcript) {
   const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', 'dont', "don't"];
   const confirmKeywords = ['confirm', 'yes', 'do it', 'proceed', 'ok', 'okay', 'approve'];
 
-  if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
-  if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
+  // Use word boundary matching to avoid false positives (e.g., "know" containing "no")
+  const hasKeyword = (keywords) => {
+    return keywords.some((keyword) => {
+      // For multi-word phrases, check as-is
+      if (keyword.includes(' ')) {
+        return t.includes(keyword);
+      }
+      // For single words, use word boundary regex
+      const regex = new RegExp(`\\b${keyword.replace(/'/g, "\\'")}\\b`, 'i');
+      return regex.test(t);
+    });
+  };
+
+  if (hasKeyword(cancelKeywords)) return 'cancel';
+  if (hasKeyword(confirmKeywords)) return 'confirm';
   
   return null;
 }
