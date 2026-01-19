@@ -18,7 +18,7 @@ This guide explains how to build and test the iOS native Bluetooth audio functio
 
 ```bash
 cd mobile
-npm install
+npm ci
 ```
 
 ### 2. Prebuild iOS Project

@@ -105,8 +105,8 @@ The diagnostics screen implements the full audio command pipeline:
 
 1. **Record audio** (via glasses mic in Glasses mode, phone mic in DEV mode)
 2. **Upload to `/v1/dev/audio`** (converts to base64, uploads, gets file:// URI)
-3. **Send to `/v1/command`** (processes audio, returns response with `spoken_text`)
-4. **Fetch `/v1/tts` + play** (use `spoken_text`, then play through glasses speakers in Glasses mode)
+3. **Send to `/v1/command`** (processes audio, returns response with TTS)
+4. **Play TTS** (through glasses speakers in Glasses mode)
 
 This matches the backend API specification and enables end-to-end testing.
 

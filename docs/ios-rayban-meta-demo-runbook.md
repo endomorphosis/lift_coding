@@ -30,7 +30,7 @@ This runbook is for the end-to-end “handsfree” demo on iOS with Ray-Ban Meta
 ### 1) Install dependencies
 
 - From `mobile/`:
-  - `npm install`
+  - `npm ci` (uses the synced lockfile for reproducible builds)
 
 ### 2) Use a development build for native glasses diagnostics
 
