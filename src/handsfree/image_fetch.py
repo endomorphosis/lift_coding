@@ -126,6 +126,11 @@ def fetch_image_data(uri: str) -> bytes:
             raise ValueError(reason)
 
         # Fetch image data with timeout and size limit
+        # Note: This uses user-provided URI but with SSRF mitigations:
+        # - Only HTTPS is allowed (not http, file, etc.)
+        # - Host allowlist/denylist enforced above
+        # - Timeout and size limits
+        # - Content-type validation
         try:
             with httpx.Client(timeout=timeout) as client:
                 with client.stream("GET", uri) as response:

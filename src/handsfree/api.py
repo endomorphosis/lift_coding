@@ -690,7 +690,8 @@ async def submit_command(
         if request.idempotency_key in processed_commands:
             return processed_commands[request.idempotency_key]
 
-    # Extract text from input
+    # Extract text from input (all branches either set text or return early)
+    text: str
     if isinstance(request.input, TextInput):
         text = request.input.text.strip()
     elif isinstance(request.input, AudioInput):
