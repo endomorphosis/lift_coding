@@ -536,12 +536,17 @@ def process_task(issue, metadata: dict) -> bool:
             f"🤖 {AGENT_NAME} started processing this task at {datetime.utcnow().isoformat()}Z"
         )
         
-        # TODO: Implement your actual task processing logic here
-        # Examples:
+        # IMPLEMENTATION NOTE: This is a placeholder for task processing logic.
+        # For a minimal working implementation that processes tasks from a local database,
+        # see the Minimal Agent Runner documentation: docs/MINIMAL_AGENT_RUNNER.md
+        #
+        # For full GitHub integration with PR creation, see the complete implementation
+        # in agent-runner/runner.py which includes:
         # - Clone the target repository
         # - Use an LLM to understand the instruction and generate code
         # - Make the requested changes
         # - Run tests to verify changes
+        # - Create a PR with correlation metadata
         
         # For this example, we'll just create a placeholder change
         target_repo = metadata.get('target_repo', DISPATCH_REPO)
