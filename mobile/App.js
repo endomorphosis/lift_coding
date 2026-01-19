@@ -1,19 +1,71 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
+import * as Linking from 'expo-linking';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import StatusScreen from './src/screens/StatusScreen';
 import CommandScreen from './src/screens/CommandScreen';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
 import TTSScreen from './src/screens/TTSScreen';
 import GlassesDiagnosticsScreen from './src/screens/GlassesDiagnosticsScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
+// Deep linking configuration
+const linking = {
+  prefixes: ['handsfree://'],
+  config: {
+    screens: {
+      Settings: 'oauth/callback',
+    },
+  },
+};
+
 export default function App() {
+  useEffect(() => {
+    // Handle initial URL if app was opened from a deep link
+    const handleInitialURL = async () => {
+      const initialUrl = await Linking.getInitialURL();
+      if (initialUrl) {
+        await handleDeepLink(initialUrl);
+      }
+    };
+
+    // Handle URL events while app is running
+    const subscription = Linking.addEventListener('url', (event) => {
+      handleDeepLink(event.url);
+    });
+
+    handleInitialURL();
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  const handleDeepLink = async (url) => {
+    try {
+      const { path, queryParams } = Linking.parse(url);
+      
+      // Check if this is an OAuth callback
+      if (path === 'oauth/callback' && queryParams) {
+        const { code, state } = queryParams;
+        
+        // Store the OAuth params temporarily so SettingsScreen can process them
+        if (code && state) {
+          await AsyncStorage.setItem('@github_oauth_pending', JSON.stringify({ code, state }));
+        }
+      }
+    } catch (error) {
+      console.error('Error handling deep link:', error);
+    }
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <StatusBar style="auto" />
       <Tab.Navigator
         screenOptions={{
@@ -45,6 +97,11 @@ export default function App() {
           name="Glasses"
           component={GlassesDiagnosticsScreen}
           options={{ title: 'Glasses' }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ title: 'Settings' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
