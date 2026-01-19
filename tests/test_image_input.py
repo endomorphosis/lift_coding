@@ -347,3 +347,73 @@ class TestImageInputBackwardCompatibility:
         data = response.json()
         # Will be error because file doesn't exist, but that's expected
         assert data["status"] == "error"
+
+
+class TestImageInputOCRIntegration:
+    """Test that OCR text flows through intent parsing correctly."""
+
+    def test_ocr_text_routed_through_intent_parser(self):
+        """Test that OCR extracted text is routed through intent parsing."""
+        response = client.post(
+            "/v1/command",
+            json={
+                "input": {
+                    "type": "image",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "content_type": "image/jpeg",
+                },
+                "profile": "default",
+                "client_context": {
+                    "device": "simulator",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                    "privacy_mode": "balanced",
+                    "debug": True,
+                },
+            },
+            headers={"X-User-ID": "test-user"},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+
+        # The stub OCR returns "show my inbox" which should parse to inbox.list
+        assert data["debug"]["transcript"] == "show my inbox"
+        assert data["intent"]["name"] == "inbox.list"
+        assert data["status"] in ["ok", "needs_confirmation"]
+
+    def test_ocr_disabled_mode(self, monkeypatch):
+        """Test that OCR can be disabled via environment variable."""
+        monkeypatch.setenv("HANDSFREE_OCR_ENABLED", "false")
+
+        # Need to reload the module to pick up the new env var
+        import importlib
+        import handsfree.ocr
+        importlib.reload(handsfree.ocr)
+
+        response = client.post(
+            "/v1/command",
+            json={
+                "input": {
+                    "type": "image",
+                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "content_type": "image/jpeg",
+                },
+                "profile": "default",
+                "client_context": {
+                    "device": "simulator",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                    "privacy_mode": "balanced",
+                },
+            },
+            headers={"X-User-ID": "test-user"},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["status"] == "error"
+        assert data["intent"]["name"] == "error.ocr_disabled"
+        assert "OCR is disabled" in data["spoken_text"]
