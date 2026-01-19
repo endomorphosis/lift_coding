@@ -515,7 +515,9 @@ export default function GlassesDiagnosticsScreen() {
             // Clean up sound after playback
             ttsSound.setOnPlaybackStatusUpdate((status) => {
               if (status.didJustFinish) {
-                ttsSound.unloadAsync();
+                ttsSound.unloadAsync().catch(err => {
+                  console.warn('Failed to unload TTS sound:', err);
+                });
               }
             });
           }
