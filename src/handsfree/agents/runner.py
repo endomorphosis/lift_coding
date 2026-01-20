@@ -14,8 +14,12 @@ from typing import Any
 
 import duckdb
 
-from handsfree.db.agent_tasks import get_agent_task_by_id, get_agent_tasks, update_agent_task_state
 from handsfree.db.notifications import create_notification
+from handsfree.db.agent_tasks import (
+    get_agent_task_by_id,
+    get_agent_tasks,
+    update_agent_task_state,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -162,151 +166,105 @@ def simulate_progress_update(
         return False
 
 
-def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
-    """Process running tasks and transition them to completed or failed.
+def process_running_task(
+    conn: duckdb.DuckDBPyConnection,
+    task_id: str,
+    simulate_work: bool = True,
+) -> tuple[bool, str | None]:
+    """Process a running task by simulating work and transitioning to completed or failed.
 
-    For each running task:
-    1. Add progress updates if the task has been running for a while
-    2. Check if the task has been running long enough to complete
-    3. Transition to completed (or failed if configured) and create notification
+    This is a minimal "do work" routine that simulates task execution.
+    In a real implementation, this would call external agents or execute code.
+
+    Args:
+        conn: Database connection.
+        task_id: Task ID to process.
+        simulate_work: If True, simulate work with a short delay (default: True).
+
+    Returns:
+        Tuple of (success, error_message). error_message is None on success.
+    """
+    try:
+        task = get_agent_task_by_id(conn, task_id)
+        if not task:
+            return False, f"Task {task_id} not found"
+
+        if task.state != "running":
+            return False, f"Task {task_id} is not in running state (current: {task.state})"
+
+        logger.info("Processing task %s: %s", task_id, task.instruction or "No instruction")
+
+        # Simulate work (in production, this would call the actual agent provider)
+        if simulate_work:
+            time.sleep(0.5)  # Minimal delay to simulate work
+
+        # Simulate progress update
+        simulate_progress_update(conn, task_id, "Work completed successfully")
+
+        # Transition to completed
+        update_agent_task_state(
+            conn=conn,
+            task_id=task_id,
+            new_state="completed",
+            trace_update={
+                "completed_at": datetime.now(UTC).isoformat(),
+                "completed_by": "runner_loop",
+                "result": "Task completed successfully (simulated)",
+            },
+        )
+        logger.info("Task %s completed successfully", task_id)
+        return True, None
+
+    except ValueError as e:
+        # Invalid transition
+        error_msg = f"Invalid state transition: {e}"
+        logger.warning("Failed to process task %s: %s", task_id, error_msg)
+        return False, error_msg
+    except Exception as e:
+        # Unexpected error - mark task as failed
+        error_msg = f"Unexpected error: {e}"
+        logger.error("Error processing task %s: %s", task_id, error_msg)
+        try:
+            update_agent_task_state(
+                conn=conn,
+                task_id=task_id,
+                new_state="failed",
+                trace_update={
+                    "failed_at": datetime.now(UTC).isoformat(),
+                    "failed_by": "runner_loop",
+                    "error": error_msg,
+                },
+            )
+        except Exception as fe:
+            logger.error("Failed to mark task %s as failed: %s", task_id, fe)
+        return False, error_msg
+
+
+def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
+    """Process all running tasks.
 
     Args:
         conn: Database connection.
 
     Returns:
-        Dictionary with counts of progressed, completed, and failed tasks.
+        Dictionary with counts of completed, failed, and skipped tasks.
     """
     tasks = get_agent_tasks(conn=conn, state="running", limit=100)
 
-    progressed_count = 0
-    completed_count = 0
-    failed_count = 0
-
-    completion_delay = get_task_completion_delay()
-    simulate_failure = should_simulate_failure()
-
-    now = datetime.now(UTC)
+    completed = 0
+    failed = 0
+    skipped = 0
 
     for task in tasks:
-        try:
-            # Extract auto_started_at from trace
-            auto_started_at_str = (task.trace or {}).get("auto_started_at")
-            if not auto_started_at_str:
-                # If no start time recorded, skip this task
-                logger.warning("Task %s has no auto_started_at in trace, skipping", task.id)
-                continue
+        success, error = process_running_task(conn, task.id)
+        if success:
+            completed += 1
+        elif error:
+            failed += 1
+        else:
+            skipped += 1
 
-            # Parse the start time - handle both Z and +00:00 formats by normalizing once
-            normalized_auto_started_at_str = auto_started_at_str.replace("Z", "+00:00")
-            try:
-                auto_started_at = datetime.fromisoformat(normalized_auto_started_at_str)
-            except ValueError as e:
-                logger.warning(
-                    "Task %s has invalid auto_started_at datetime '%s': %s; skipping",
-                    task.id,
-                    auto_started_at_str,
-                    e,
-                )
-                continue
-
-            # Calculate elapsed time
-            elapsed = (now - auto_started_at).total_seconds()
-
-            # Add progress update if task has been running for at least half the completion delay
-            # and hasn't had a recent progress update
-            last_progress_at_str = (task.trace or {}).get("last_progress_at")
-            if elapsed >= completion_delay / 2:
-                # Check if we already added a progress update
-                if not last_progress_at_str:
-                    progress_msg = f"Task in progress... (elapsed: {int(elapsed)}s)"
-                    if simulate_progress_update(conn, task.id, progress_msg):
-                        progressed_count += 1
-                        logger.info("Added progress update to task %s", task.id)
-
-            # Check if task should complete or fail
-            if elapsed >= completion_delay:
-                if simulate_failure:
-                    # Transition to failed
-                    update_agent_task_state(
-                        conn=conn,
-                        task_id=task.id,
-                        new_state="failed",
-                        trace_update={
-                            "completed_at": now.isoformat(),
-                            "completed_by": "runner_loop",
-                            "result": "simulated_failure",
-                            "error": "Task failed for testing purposes",
-                        },
-                    )
-                    failed_count += 1
-                    logger.info("Auto-failed task %s (simulated failure)", task.id)
-
-                    # Create notification for failure (priority 4 - important)
-                    try:
-                        create_notification(
-                            conn=conn,
-                            user_id=task.user_id,
-                            event_type="agent.task_failed",
-                            message=f"Agent task failed: {task.instruction or 'No instruction'}",
-                            metadata={
-                                "task_id": task.id,
-                                "provider": task.provider,
-                                "target_type": task.target_type,
-                                "target_ref": task.target_ref,
-                                "error": "Task failed for testing purposes",
-                            },
-                            priority=4,
-                        )
-                    except Exception as e:
-                        logger.warning("Failed to create failure notification for task %s: %s", task.id, e)
-
-                else:
-                    # Transition to completed
-                    update_agent_task_state(
-                        conn=conn,
-                        task_id=task.id,
-                        new_state="completed",
-                        trace_update={
-                            "completed_at": now.isoformat(),
-                            "completed_by": "runner_loop",
-                            "result": "success",
-                            "summary": "Task completed successfully (simulated)",
-                        },
-                    )
-                    completed_count += 1
-                    logger.info("Auto-completed task %s", task.id)
-
-                    # Create notification for completion (priority 4 - important)
-                    try:
-                        create_notification(
-                            conn=conn,
-                            user_id=task.user_id,
-                            event_type="agent.task_completed",
-                            message=f"Agent task completed: {task.instruction or 'No instruction'}",
-                            metadata={
-                                "task_id": task.id,
-                                "provider": task.provider,
-                                "target_type": task.target_type,
-                                "target_ref": task.target_ref,
-                                "summary": "Task completed successfully (simulated)",
-                            },
-                            priority=4,
-                        )
-                    except Exception as e:
-                        logger.warning("Failed to create completion notification for task %s: %s", task.id, e)
-
-        except ValueError as e:
-            # Invalid transition or task not found
-            logger.warning("Failed to process running task %s: %s", task.id, e)
-        except Exception as e:
-            # Unexpected error
-            logger.error("Unexpected error processing running task %s: %s", task.id, e)
-
-    return {
-        "progressed": progressed_count,
-        "completed": completed_count,
-        "failed": failed_count,
-    }
+    return {"completed": completed, "failed": failed, "skipped": skipped}
 
 
 def run_once(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
@@ -314,7 +272,7 @@ def run_once(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
 
     Performs:
     - Auto-start created tasks
-    - Process running tasks (progress updates and completion)
+    - Process running tasks to completion or failure
 
     Args:
         conn: Database connection.
@@ -326,21 +284,20 @@ def run_once(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         return {
             "enabled": False,
             "tasks_started": 0,
-            "tasks_progressed": 0,
             "tasks_completed": 0,
             "tasks_failed": 0,
             "message": "Agent runner is disabled",
         }
 
     started_count = auto_start_created_tasks(conn)
-    running_stats = process_running_tasks(conn)
+    process_results = process_running_tasks(conn)
 
     return {
         "enabled": True,
         "tasks_started": started_count,
-        "tasks_progressed": running_stats["progressed"],
-        "tasks_completed": running_stats["completed"],
-        "tasks_failed": running_stats["failed"],
+        "tasks_completed": process_results["completed"],
+        "tasks_failed": process_results["failed"],
+        "tasks_skipped": process_results["skipped"],
         "timestamp": datetime.now(UTC).isoformat(),
     }
 
@@ -364,13 +321,12 @@ def run_loop(conn: duckdb.DuckDBPyConnection, interval_seconds: int = 5) -> None
     while True:
         try:
             result = run_once(conn)
-            if result["tasks_started"] > 0 or result["tasks_completed"] > 0 or result["tasks_failed"] > 0:
+            if result.get("tasks_started", 0) > 0 or result.get("tasks_completed", 0) > 0:
                 logger.info(
-                    "Runner iteration: started=%d, progressed=%d, completed=%d, failed=%d",
-                    result["tasks_started"],
-                    result["tasks_progressed"],
-                    result["tasks_completed"],
-                    result["tasks_failed"],
+                    "Runner iteration: started=%d, completed=%d, failed=%d",
+                    result.get("tasks_started", 0),
+                    result.get("tasks_completed", 0),
+                    result.get("tasks_failed", 0),
                 )
         except Exception as e:
             logger.error("Error in runner loop iteration: %s", e)
