@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   Alert,
   Switch,
+  ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DEFAULT_BASE_URL } from '../api/config';
@@ -21,17 +22,22 @@ import {
   getAutoSpeakEnabled,
   setAutoSpeakEnabled,
 } from '../utils/notificationSettings';
+import { DEFAULT_BASE_URL, getSpeakNotifications, setSpeakNotifications } from '../api/config';
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
   BASE_URL: '@handsfree_base_url',
   USE_CUSTOM_URL: '@handsfree_use_custom_url',
 };
+import * as WebBrowser from 'expo-web-browser';
+import { DEFAULT_BASE_URL, STORAGE_KEYS } from '../api/config';
+import { startGitHubOAuth, completeGitHubOAuth } from '../api/client';
 
 export default function SettingsScreen() {
   const [userId, setUserId] = useState('');
   const [baseUrl, setBaseUrl] = useState(DEFAULT_BASE_URL);
   const [useCustomUrl, setUseCustomUrl] = useState(false);
+  const [speakNotifications, setSpeakNotificationsState] = useState(__DEV__);
   const [loading, setLoading] = useState(true);
   
   // Push notification state
@@ -39,10 +45,63 @@ export default function SettingsScreen() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
   const [pushLoading, setPushLoading] = useState(false);
+  const [githubConnectionId, setGithubConnectionId] = useState(null);
+  const [connectingGithub, setConnectingGithub] = useState(false);
 
   useEffect(() => {
     loadSettings();
   }, []);
+
+  const handleOAuthCallback = useCallback(async (code, state) => {
+    try {
+      setConnectingGithub(true);
+      
+      const response = await completeGitHubOAuth(code, state);
+      
+      if (response.connection_id) {
+        // Store the connection ID
+        await AsyncStorage.setItem(STORAGE_KEYS.GITHUB_CONNECTION_ID, response.connection_id);
+        setGithubConnectionId(response.connection_id);
+        
+        Alert.alert(
+          'Success',
+          `GitHub connected successfully!\nScopes: ${response.scopes || 'default'}`,
+          [{ text: 'OK' }]
+        );
+      }
+    } catch (error) {
+      console.error('OAuth callback error:', error);
+      Alert.alert(
+        'OAuth Error',
+        `Failed to complete GitHub connection: ${error.message}`,
+        [{ text: 'OK' }]
+      );
+    } finally {
+      setConnectingGithub(false);
+    }
+  }, []);
+
+  const checkPendingOAuthCallback = useCallback(async () => {
+    try {
+      const pendingJson = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
+      if (pendingJson) {
+        const { code, state } = JSON.parse(pendingJson);
+        
+        // Clear the pending item immediately to prevent double processing
+        await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
+        
+        // Complete the OAuth flow
+        await handleOAuthCallback(code, state);
+      }
+    } catch (error) {
+      console.error('Error checking pending OAuth:', error);
+    }
+  }, [handleOAuthCallback]);
+
+  useEffect(() => {
+    // Check for pending OAuth callback
+    checkPendingOAuthCallback();
+  }, [checkPendingOAuthCallback]);
 
   const loadSettings = async () => {
     try {
@@ -50,6 +109,7 @@ export default function SettingsScreen() {
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
       const savedAutoSpeak = await getAutoSpeakEnabled();
+      const savedGithubConnectionId = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_CONNECTION_ID);
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
@@ -58,6 +118,7 @@ export default function SettingsScreen() {
       
       // Load push subscriptions
       await loadPushStatus();
+      if (savedGithubConnectionId) setGithubConnectionId(savedGithubConnectionId);
     } catch (error) {
       console.error('Failed to load settings:', error);
     } finally {
@@ -158,6 +219,7 @@ export default function SettingsScreen() {
       await AsyncStorage.setItem(STORAGE_KEYS.USER_ID, userId);
       await AsyncStorage.setItem(STORAGE_KEYS.BASE_URL, baseUrl);
       await AsyncStorage.setItem(STORAGE_KEYS.USE_CUSTOM_URL, useCustomUrl.toString());
+      await setSpeakNotifications(speakNotifications);
 
       Alert.alert(
         'Success',
@@ -182,12 +244,14 @@ export default function SettingsScreen() {
             setUserId('');
             setBaseUrl(DEFAULT_BASE_URL);
             setUseCustomUrl(false);
+            setSpeakNotificationsState(__DEV__);
             try {
               await AsyncStorage.multiRemove([
                 STORAGE_KEYS.USER_ID,
                 STORAGE_KEYS.BASE_URL,
                 STORAGE_KEYS.USE_CUSTOM_URL,
               ]);
+              await setSpeakNotifications(__DEV__);
               Alert.alert('Success', 'Settings reset to defaults');
             } catch (error) {
               Alert.alert('Error', `Failed to reset settings: ${error.message}`);
@@ -208,6 +272,64 @@ export default function SettingsScreen() {
     setUserId(uuid);
   };
 
+  const connectGitHub = async () => {
+    try {
+      setConnectingGithub(true);
+
+      // Start OAuth flow
+      const response = await startGitHubOAuth();
+      
+      if (!response.authorize_url) {
+        throw new Error('No authorization URL received from server');
+      }
+
+      // Open GitHub OAuth page in system browser
+      const result = await WebBrowser.openAuthSessionAsync(
+        response.authorize_url,
+        'handsfree://oauth/callback'
+      );
+
+      if (result.type === 'cancel') {
+        Alert.alert('Cancelled', 'GitHub authorization was cancelled');
+      } else if (result.type === 'dismiss') {
+        Alert.alert('Dismissed', 'GitHub authorization was dismissed');
+      }
+      // If successful, the deep link handler will process the callback
+    } catch (error) {
+      console.error('GitHub OAuth error:', error);
+      Alert.alert(
+        'Connection Error',
+        `Failed to connect GitHub: ${error.message}`,
+        [{ text: 'OK' }]
+      );
+    } finally {
+      setConnectingGithub(false);
+    }
+  };
+
+  const disconnectGitHub = async () => {
+    Alert.alert(
+      'Disconnect GitHub',
+      'Are you sure you want to disconnect GitHub?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Disconnect',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_CONNECTION_ID);
+              setGithubConnectionId(null);
+              Alert.alert('Success', 'GitHub disconnected');
+            } catch (error) {
+              Alert.alert('Error', `Failed to disconnect: ${error.message}`);
+            }
+          },
+        },
+      ]
+    );
+  };
+
   if (loading) {
     return (
       <View style={styles.container}>
@@ -223,6 +345,51 @@ export default function SettingsScreen() {
       <Text style={styles.description}>
         Configure the X-User-ID header and backend URL for testing.
       </Text>
+
+      {/* GitHub Connection Section */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>GitHub Connection</Text>
+        <Text style={styles.helpText}>
+          Connect your GitHub account to enable OAuth-based features.
+        </Text>
+
+        {connectingGithub && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color="#007AFF" />
+            <Text style={styles.loadingText}>Connecting to GitHub...</Text>
+          </View>
+        )}
+
+        {githubConnectionId ? (
+          <>
+            <View style={styles.connectedContainer}>
+              <Text style={styles.connectedText}>✓ GitHub Connected</Text>
+              <Text style={styles.connectionIdText}>
+                Connection ID: {githubConnectionId?.length > 8 
+                  ? `${githubConnectionId.substring(0, 8)}...` 
+                  : githubConnectionId}
+              </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Disconnect GitHub"
+                onPress={disconnectGitHub}
+                color="#dc3545"
+                disabled={connectingGithub}
+              />
+            </View>
+          </>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Connect GitHub"
+              onPress={connectGitHub}
+              color="#28a745"
+              disabled={connectingGithub}
+            />
+          </View>
+        )}
+      </View>
 
       {/* User ID Configuration */}
       <View style={styles.section}>
@@ -364,6 +531,25 @@ export default function SettingsScreen() {
         </View>
         <Text style={styles.helpText}>
           When enabled, notifications will be automatically spoken aloud.
+      {/* Notification Settings */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Notifications</Text>
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>Speak notifications</Text>
+          <Switch
+            value={speakNotifications}
+            onValueChange={setSpeakNotificationsState}
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={speakNotifications ? '#007AFF' : '#f4f3f4'}
+          />
+        </View>
+
+        <Text style={styles.helpText}>
+          When enabled, incoming push notifications will be automatically spoken via TTS.
+          {__DEV__ 
+            ? ' (Default: ON in development)' 
+            : ' (Default: OFF in production)'}
         </Text>
       </View>
 
@@ -400,6 +586,9 @@ export default function SettingsScreen() {
         </Text>
         <Text style={styles.debugText}>
           X-User-ID header: {userId ? 'Will be sent' : 'Will not be sent'}
+        </Text>
+        <Text style={styles.debugText}>
+          Speak notifications: {speakNotifications ? 'Enabled' : 'Disabled'}
         </Text>
       </View>
     </ScrollView>
@@ -551,5 +740,36 @@ const styles = StyleSheet.create({
   subscriptionActions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+  },
+  loadingText: {
+    marginLeft: 10,
+    fontSize: 14,
+    color: '#666',
+  },
+  connectedContainer: {
+    backgroundColor: '#d4edda',
+    padding: 12,
+    borderRadius: 5,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#c3e6cb',
+  },
+  connectedText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#155724',
+    marginBottom: 5,
+  },
+  connectionIdText: {
+    fontSize: 12,
+    fontFamily: 'monospace',
+    color: '#155724',
   },
 });

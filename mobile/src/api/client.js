@@ -7,6 +7,7 @@
  * - GET /v1/status
  * - POST /v1/command
  * - POST /v1/commands/confirm
+ * - GET /v1/inbox
  * - GET /v1/notifications
  * - POST /v1/notifications/subscriptions
  * - DELETE /v1/notifications/subscriptions/{subscription_id}
@@ -195,6 +196,36 @@ export async function getNotifications() {
 }
 
 /**
+ * Get inbox items (PRs, mentions, failing checks)
+ * @param {Object} options - Optional parameters
+ * @returns {Promise<Object>} Inbox response
+ */
+export async function getInbox(options = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  // Build query params
+  const params = new URLSearchParams();
+  if (options.profile) {
+    params.append('profile', options.profile);
+  }
+
+  const queryString = params.toString();
+  const url = `${baseUrl}/v1/inbox${queryString ? `?${queryString}` : ''}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Get inbox failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
  * Upload audio bytes to dev endpoint and get file:// URI
  * @param {string} audioBase64 - Base64-encoded audio data
  * @param {string} format - Audio format (m4a, wav, mp3, opus)
@@ -218,6 +249,64 @@ export async function uploadDevAudio(audioBase64, format = 'm4a') {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || `Upload failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Start GitHub OAuth flow
+ * @param {string} scopes - Optional comma-separated OAuth scopes
+ * @returns {Promise<Object>} Object with { authorize_url, state }
+ */
+export async function startGitHubOAuth(scopes = null) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const url = new URL('/v1/github/oauth/start', baseUrl);
+  if (scopes) {
+    url.searchParams.set('scopes', scopes);
+  }
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || errorData.message || `OAuth start failed: ${response.status}`
+    );
+  }
+
+  return await response.json();
+}
+
+/**
+ * Complete GitHub OAuth callback
+ * @param {string} code - Authorization code from GitHub
+ * @param {string} state - State parameter for CSRF validation
+ * @returns {Promise<Object>} Object with { connection_id, scopes }
+ */
+export async function completeGitHubOAuth(code, state) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const url = new URL('/v1/github/oauth/callback', baseUrl);
+  url.searchParams.set('code', code);
+  url.searchParams.set('state', state);
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || errorData.message || `OAuth callback failed: ${response.status}`
+    );
   }
 
   return await response.json();
