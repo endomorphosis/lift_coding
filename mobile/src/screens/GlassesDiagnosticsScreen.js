@@ -300,7 +300,7 @@ export default function GlassesDiagnosticsScreen() {
           setIsPlaying(true);
           // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
           // NOTE: This is a limitation - if playback finishes earlier or runs longer than the timeout,
-          // the UI state will be inaccurate. Future enhancement: add event-based status updates to native module.
+          // the UI state will be inaccurate. TODO: add event-based status updates to native module.
           const timeoutId = setTimeout(() => {
             // Only update state if component is still mounted (playbackTimeoutRef will be cleared on unmount)
             if (playbackTimeoutRef.current === timeoutId) {
