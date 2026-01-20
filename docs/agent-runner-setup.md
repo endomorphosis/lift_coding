@@ -495,7 +495,75 @@ The `agent-runner/runner.py` file is provided in the repository and implements a
 
 ### Deterministic Patch Mode
 
-The runner supports deterministic patch application for tasks that include specific code changes. If the dispatch issue instruction contains fenced code blocks with `diff` or `patch` language tags, the runner will:
+def process_task(issue, metadata: dict) -> bool:
+    """
+    Process an agent task.
+    
+    Returns True if successful, False otherwise.
+    """
+    logger.info(f"Processing task: {issue.title}")
+    logger.info(f"Task ID: {metadata.get('task_id')}")
+    logger.info(f"Instruction: {metadata.get('instruction')}")
+    
+    try:
+        # Comment on issue that processing started
+        issue.create_comment(
+            f"🤖 {AGENT_NAME} started processing this task at {datetime.utcnow().isoformat()}Z"
+        )
+        
+        # IMPLEMENTATION NOTE: This is a placeholder for task processing logic.
+        # For a minimal working implementation that processes tasks from a local database,
+        # see the Minimal Agent Runner documentation: docs/MINIMAL_AGENT_RUNNER.md
+        #
+        # For full GitHub integration with PR creation, see the complete implementation
+        # in agent-runner/runner.py which includes:
+        # - Clone the target repository
+        # - Use an LLM to understand the instruction and generate code
+        # - Make the requested changes
+        # - Run tests to verify changes
+        # - Create a PR with correlation metadata
+        
+        # For this example, we'll just create a placeholder change
+        target_repo = metadata.get('target_repo', DISPATCH_REPO)
+        instruction = metadata.get('instruction', issue.title)
+        
+        # Simulate work
+        time.sleep(5)
+        
+        # Create a PR with correlation metadata
+        # In a real implementation, you would:
+        # 1. Clone the target repository
+        # 2. Create a branch
+        # 3. Make changes based on the instruction
+        # 4. Commit and push changes
+        # 5. Create a PR using GitHub API
+        
+        # For now, just log success
+        logger.info(f"Task processed successfully: {issue.number}")
+        
+        # Create correlation comment
+        task_id = metadata.get('task_id')
+        correlation_metadata = f'<!-- agent_task_metadata {{"task_id": "{task_id}"}} -->' if task_id else ''
+        
+        issue.create_comment(
+            f"✅ {AGENT_NAME} completed processing this task.\n\n"
+            f"**Next steps**: A pull request should be created with the correlation metadata:\n"
+            f"```markdown\n{correlation_metadata}\nFixes #{issue.number}\n```"
+        )
+        
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to process task: {e}", exc_info=True)
+        
+        try:
+            issue.create_comment(
+                f"❌ {AGENT_NAME} failed to process this task: {str(e)}"
+            )
+        except Exception:
+            logger.error("Failed to post error comment to issue")
+        
+        return False
 
 1. Extract all fenced `diff` and `patch` blocks from the instruction
 2. Apply them sequentially using `git apply --index`
