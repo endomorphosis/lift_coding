@@ -154,7 +154,7 @@ The iOS implementation provides audio route monitoring using AVAudioSession:
 
 **iOS API Differences:**
 - iOS uses simplified route monitoring through AVAudioSession
-- Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) may return fallback values - iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
+- Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) may return fallback values. iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
 - `audioMode` field may not be populated - iOS uses audio session categories (e.g., playAndRecord, record) instead of Android's audio modes
 - Device enumeration provides iOS-specific port types (e.g., MicrophoneBuiltIn, Speaker, BluetoothHFP)
 
