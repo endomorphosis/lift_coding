@@ -5,6 +5,7 @@ public final class GlassesPlayer {
     private let playerNode = AVAudioPlayerNode()
     private var isInterrupted = false
     private var shouldResumeAfterInterruption = false
+    private var completionHandler: (() -> Void)?
 
     public init() {
         audioEngine.attach(playerNode)
@@ -78,6 +79,10 @@ public final class GlassesPlayer {
     }
 
     public func play(fileURL: URL) throws {
+        try play(fileURL: fileURL, onComplete: nil)
+    }
+
+    public func play(fileURL: URL, onComplete: (() -> Void)? = nil) throws {
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .defaultToSpeaker])
         try session.setActive(true)
@@ -87,8 +92,17 @@ public final class GlassesPlayer {
             try audioEngine.start()
         }
 
+        completionHandler = onComplete
+
         playerNode.stop()
-        playerNode.scheduleFile(audioFile, at: nil)
+        playerNode.scheduleFile(audioFile, at: nil) { [weak self] in
+            guard let self else { return }
+            // AVAudioPlayerNode completion happens on an internal queue.
+            DispatchQueue.main.async {
+                self.completionHandler?()
+                self.completionHandler = nil
+            }
+        }
         
         // Only play if not currently interrupted
         if !isInterrupted {
@@ -103,6 +117,7 @@ public final class GlassesPlayer {
 
     public func stop() {
         shouldResumeAfterInterruption = false
+        completionHandler = nil
         playerNode.stop()
         audioEngine.stop()
     }

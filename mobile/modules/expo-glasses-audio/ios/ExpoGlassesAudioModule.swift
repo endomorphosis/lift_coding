@@ -6,6 +6,12 @@ public class ExpoGlassesAudioModule: Module {
   private let recorder = GlassesRecorder()
   private let player = GlassesPlayer()
   private var foregroundObserver: NSObjectProtocol?
+
+  private var isRecording = false
+  private var recordingFileURL: URL?
+  private var recordingStartedAt: Date?
+  private var recordingStopWorkItem: DispatchWorkItem?
+  private var pendingStartRecordingPromise: Promise?
   
   public func definition() -> ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -44,6 +50,11 @@ public class ExpoGlassesAudioModule: Module {
     // Start recording audio
     AsyncFunction("startRecording") { (durationSeconds: Int, audioSourceString: String?, promise: Promise) in
       do {
+        if self.isRecording {
+          promise.reject("ERR_ALREADY_RECORDING", "Recording already in progress")
+          return
+        }
+
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let timestamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
         let filename = "glasses_recording_\(timestamp).wav"
@@ -56,26 +67,27 @@ public class ExpoGlassesAudioModule: Module {
         } else {
           audioSource = .auto
         }
-        
+
         try recorder.startRecording(outputURL: fileURL, audioSource: audioSource)
-        
+
+        self.isRecording = true
+        self.recordingFileURL = fileURL
+        self.recordingStartedAt = Date()
+        self.pendingStartRecordingPromise = promise
+
+        // Emit recording started event
+        self.sendEvent("onRecordingProgress", [
+          "isRecording": true,
+          "duration": 0
+        ])
+
         // Schedule stop after duration
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds)) {
-          self.recorder.stopRecording()
-          
-          do {
-            let attributes = try FileManager.default.attributesOfItem(atPath: fileURL.path)
-            let fileSize = attributes[.size] as? Int ?? 0
-            
-            promise.resolve([
-              "uri": fileURL.absoluteString,
-              "duration": durationSeconds,
-              "size": fileSize
-            ])
-          } catch {
-            promise.reject("ERR_FILE_ATTRIBUTES", "Failed to get file attributes: \(error.localizedDescription)")
-          }
+        let workItem = DispatchWorkItem { [weak self] in
+          self?.finishRecording(reason: "timer", promisedDurationSeconds: durationSeconds)
         }
+        self.recordingStopWorkItem?.cancel()
+        self.recordingStopWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds), execute: workItem)
       } catch {
         promise.reject("ERR_START_RECORDING", "Failed to start recording: \(error.localizedDescription)")
       }
@@ -83,12 +95,16 @@ public class ExpoGlassesAudioModule: Module {
     
     // Stop recording
     AsyncFunction("stopRecording") { (promise: Promise) in
-      recorder.stopRecording()
-      promise.resolve([
-        "uri": "",
-        "duration": 0,
-        "size": 0
-      ])
+      if !self.isRecording {
+        promise.resolve([
+          "uri": "",
+          "duration": 0,
+          "size": 0
+        ])
+        return
+      }
+
+      self.finishRecording(reason: "manual", promisedDurationSeconds: nil, stopPromise: promise)
     }
     
     // Play audio file
@@ -98,10 +114,18 @@ public class ExpoGlassesAudioModule: Module {
           promise.reject("ERR_INVALID_URI", "Invalid file URI")
           return
         }
-        
-        try player.play(fileURL: url)
+
+        self.sendEvent("onPlaybackStatus", ["isPlaying": true])
+
+        try player.play(fileURL: url) { [weak self] in
+          self?.sendEvent("onPlaybackStatus", ["isPlaying": false])
+        }
         promise.resolve(nil)
       } catch {
+        self.sendEvent("onPlaybackStatus", [
+          "isPlaying": false,
+          "error": error.localizedDescription
+        ])
         promise.reject("ERR_PLAY_AUDIO", "Failed to play audio: \(error.localizedDescription)")
       }
     }
@@ -109,6 +133,7 @@ public class ExpoGlassesAudioModule: Module {
     // Stop playback
     AsyncFunction("stopPlayback") { (promise: Promise) in
       player.stop()
+      self.sendEvent("onPlaybackStatus", ["isPlaying": false])
       promise.resolve(nil)
     }
     
@@ -153,10 +178,75 @@ public class ExpoGlassesAudioModule: Module {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
+      recordingStopWorkItem?.cancel()
+      recordingStopWorkItem = nil
+      pendingStartRecordingPromise = nil
+      recordingFileURL = nil
+      recordingStartedAt = nil
+      isRecording = false
       if let observer = foregroundObserver {
         NotificationCenter.default.removeObserver(observer)
       }
     }
+  }
+
+  private func finishRecording(
+    reason: String,
+    promisedDurationSeconds: Int?,
+    stopPromise: Promise? = nil
+  ) {
+    guard isRecording else {
+      stopPromise?.resolve([
+        "uri": "",
+        "duration": 0,
+        "size": 0
+      ])
+      return
+    }
+
+    // Ensure we only finish once
+    isRecording = false
+    recordingStopWorkItem?.cancel()
+    recordingStopWorkItem = nil
+
+    recorder.stopRecording()
+
+    let fileURL = recordingFileURL
+    let startedAt = recordingStartedAt
+    recordingFileURL = nil
+    recordingStartedAt = nil
+
+    let elapsed = startedAt.map { max(0, Date().timeIntervalSince($0)) } ?? 0
+    let durationSeconds = promisedDurationSeconds ?? Int(elapsed.rounded())
+
+    var fileSize = 0
+    if let fileURL {
+      do {
+        let attributes = try FileManager.default.attributesOfItem(atPath: fileURL.path)
+        fileSize = attributes[.size] as? Int ?? 0
+      } catch {
+        // If we can't read attributes, still return the URI.
+      }
+    }
+
+    let result: [String: Any] = [
+      "uri": fileURL?.absoluteString ?? "",
+      "duration": durationSeconds,
+      "size": fileSize
+    ]
+
+    // Emit recording stopped event
+    sendEvent("onRecordingProgress", [
+      "isRecording": false,
+      "duration": durationSeconds
+    ])
+
+    // Resolve both the original startRecording promise (if any) and the explicit stopRecording promise.
+    if let startPromise = pendingStartRecordingPromise {
+      startPromise.resolve(result)
+      pendingStartRecordingPromise = nil
+    }
+    stopPromise?.resolve(result)
   }
   
   private func reapplyAudioSessionConfiguration() {
