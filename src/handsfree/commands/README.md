@@ -37,7 +37,8 @@ Features:
 - Automatic confirmation flow for side-effect intents
 - Profile-aware response formatting
 - Session-based `system.repeat` functionality
-- Stub implementations for PR-005/PR-007 integration
+- Integration with GitHub API for live execution when authenticated
+- Agent orchestration for task delegation
 
 ## Usage
 
@@ -108,8 +109,7 @@ All code must pass:
 
 ## Future Work
 
-- Real GitHub integration (PR-005)
-- Real side-effect execution (PR-007)
-- Agent orchestration integration (PR-008)
-- Redis-backed pending action storage
-- Machine learning-based intent classification (beyond regex)
+- Enhanced machine learning-based intent classification (beyond regex)
+- Multi-turn conversation support with context tracking
+- Voice-specific error recovery and clarification flows
+- Redis-backed pending action storage for production scalability
