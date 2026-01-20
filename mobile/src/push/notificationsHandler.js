@@ -16,6 +16,10 @@ import { AppState } from 'react-native';
 import { getBaseUrl, getHeaders } from '../api/config';
 import { fetchTTS } from '../api/client';
 
+// Configuration constants
+const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
+const INTER_MESSAGE_DELAY_MS = 500; // Delay between processing messages to prevent audio overlap
+
 // Notification queue for sequential TTS playback
 let notificationQueue = [];
 let isProcessingQueue = false;
@@ -23,6 +27,7 @@ let isProcessingQueue = false;
 // Background state tracking
 let isAppInBackground = false;
 let pendingSpeakQueue = [];
+let pendingSpeakSet = new Set(); // Track unique messages for O(1) duplicate detection
 let appStateSubscription = null;
 let isProcessingPendingQueue = false;
 let appStateMonitoringInitialized = false;
@@ -200,12 +205,21 @@ export async function speakNotification(message) {
   // If app is in background, defer speaking until app is foregrounded
   if (isAppInBackground) {
     console.log('App is backgrounded, deferring speech:', message);
-    // Avoid enqueueing duplicate messages while backgrounded
-    // Note: includes() is O(n) but acceptable for typical queue sizes (< 100 items)
-    // For high-volume scenarios, consider using a Set for O(1) lookups
-    if (!pendingSpeakQueue.includes(message)) {
+    
+    // Avoid enqueueing duplicate messages while backgrounded using Set for O(1) lookup
+    if (!pendingSpeakSet.has(message)) {
       pendingSpeakQueue.push(message);
+      pendingSpeakSet.add(message);
+      
+      // Warn if queue size exceeds expected threshold
+      if (pendingSpeakQueue.length > MAX_PENDING_QUEUE_SIZE) {
+        console.warn(
+          `Pending speak queue size (${pendingSpeakQueue.length}) exceeds threshold (${MAX_PENDING_QUEUE_SIZE}). ` +
+          'Consider processing or clearing old messages.'
+        );
+      }
     }
+    
     debugState.lastSpokenText = `(deferred) ${message}`;
     return;
   }
@@ -307,11 +321,14 @@ async function processPendingSpeakQueue() {
     // Any new messages added during processing will be handled in the next call
     const messagesToProcess = pendingSpeakQueue.splice(0);
     
+    // Clear the Set since we're processing all messages
+    pendingSpeakSet.clear();
+    
     for (const message of messagesToProcess) {
       try {
         await speakNotification(message);
-        // Small delay between messages
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Delay between messages to prevent audio overlap
+        await new Promise(resolve => setTimeout(resolve, INTER_MESSAGE_DELAY_MS));
       } catch (error) {
         console.error('Error processing deferred speak request:', error);
       }
