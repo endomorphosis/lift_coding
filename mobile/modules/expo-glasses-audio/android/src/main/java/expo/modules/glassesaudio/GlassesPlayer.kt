@@ -193,7 +193,7 @@ class GlassesPlayer {
             val totalRead = inputStream.read(pcmBytes)
             
             if (totalRead == -1) {
-                throw IllegalArgumentException("WAV file is empty or invalid - no PCM data available")
+                throw IllegalArgumentException("WAV file contains no PCM data - reached end of stream")
             }
             if (totalRead < wavInfo.dataSize) {
                 Log.w(TAG, "Expected ${wavInfo.dataSize} bytes but read $totalRead bytes")
