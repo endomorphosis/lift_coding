@@ -11,6 +11,16 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DEFAULT_BASE_URL } from '../api/config';
+import {
+  registerForPushAsync,
+  registerSubscriptionWithBackend,
+  unregisterSubscriptionWithBackend,
+  listSubscriptions,
+} from '../push/pushClient';
+import {
+  getAutoSpeakEnabled,
+  setAutoSpeakEnabled,
+} from '../utils/notificationSettings';
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
@@ -23,6 +33,12 @@ export default function SettingsScreen() {
   const [baseUrl, setBaseUrl] = useState(DEFAULT_BASE_URL);
   const [useCustomUrl, setUseCustomUrl] = useState(false);
   const [loading, setLoading] = useState(true);
+  
+  // Push notification state
+  const [pushToken, setPushToken] = useState(null);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
+  const [pushLoading, setPushLoading] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -33,15 +49,108 @@ export default function SettingsScreen() {
       const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
+      const savedAutoSpeak = await getAutoSpeakEnabled();
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
+      setAutoSpeakNotifications(savedAutoSpeak);
+      
+      // Load push subscriptions
+      await loadPushStatus();
     } catch (error) {
       console.error('Failed to load settings:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const loadPushStatus = async () => {
+    try {
+      const subs = await listSubscriptions();
+      setSubscriptions(subs);
+    } catch (error) {
+      console.error('Failed to load subscriptions:', error);
+    }
+  };
+
+  const handleRequestPermission = async () => {
+    setPushLoading(true);
+    try {
+      const token = await registerForPushAsync();
+      if (token) {
+        setPushToken(token);
+        Alert.alert('Success', 'Push permission granted and token obtained!');
+      } else {
+        Alert.alert('Error', 'Failed to get push token. Make sure you are on a physical device.');
+      }
+    } catch (error) {
+      Alert.alert('Error', `Failed to request permission: ${error.message}`);
+    } finally {
+      setPushLoading(false);
+    }
+  };
+
+  const handleRegisterSubscription = async () => {
+    if (!pushToken) {
+      Alert.alert('Error', 'Please request push permission first to get a token.');
+      return;
+    }
+
+    setPushLoading(true);
+    try {
+      const subscription = await registerSubscriptionWithBackend(pushToken);
+      await loadPushStatus();
+      Alert.alert('Success', `Registered subscription: ${subscription.id}`);
+    } catch (error) {
+      Alert.alert('Error', `Failed to register: ${error.message}`);
+    } finally {
+      setPushLoading(false);
+    }
+  };
+
+  const handleUnregisterSubscription = async (subscriptionId) => {
+    Alert.alert(
+      'Unregister Subscription',
+      `Are you sure you want to unregister subscription ${subscriptionId}?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Unregister',
+          style: 'destructive',
+          onPress: async () => {
+            setPushLoading(true);
+            try {
+              await unregisterSubscriptionWithBackend(subscriptionId);
+              await loadPushStatus();
+              Alert.alert('Success', 'Subscription unregistered');
+            } catch (error) {
+              Alert.alert('Error', `Failed to unregister: ${error.message}`);
+            } finally {
+              setPushLoading(false);
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handleAutoSpeakToggle = async (value) => {
+    const previousValue = autoSpeakNotifications;
+    setAutoSpeakNotifications(value);
+    try {
+      await setAutoSpeakEnabled(value);
+    } catch (error) {
+      console.error('Failed to save auto-speak setting:', error);
+      setAutoSpeakNotifications(previousValue);
+      Alert.alert('Error', 'Failed to save auto-speak setting');
+    }
+  };
+
+  const maskToken = (token) => {
+    if (!token) return 'Not set';
+    if (token.length <= 10) return token;
+    return `${token.substring(0, 6)}...${token.substring(token.length - 4)}`;
   };
 
   const saveSettings = async () => {
@@ -178,6 +287,86 @@ export default function SettingsScreen() {
         )}
       </View>
 
+      {/* Push Notifications Configuration */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Push Notifications</Text>
+        
+        <Text style={styles.helpText}>
+          Manage push notification permissions and subscriptions.
+        </Text>
+
+        {/* Push Token Display */}
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Push Token:</Text>
+          <Text style={styles.infoValue}>{maskToken(pushToken)}</Text>
+        </View>
+
+        {/* Subscription Status */}
+        <View style={styles.infoRow}>
+          <Text style={styles.infoLabel}>Active Subscriptions:</Text>
+          <Text style={styles.infoValue}>{subscriptions.length}</Text>
+        </View>
+
+        {/* Push Action Buttons */}
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Request Permission & Get Token"
+            onPress={handleRequestPermission}
+            disabled={pushLoading}
+            color="#007AFF"
+          />
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Register Subscription"
+            onPress={handleRegisterSubscription}
+            disabled={pushLoading || !pushToken}
+            color="#28a745"
+          />
+        </View>
+
+        {/* List Active Subscriptions */}
+        {subscriptions.length > 0 && (
+          <View style={styles.subscriptionList}>
+            <Text style={styles.subscriptionListTitle}>Active Subscriptions:</Text>
+            {subscriptions.map((sub) => (
+              <View key={sub.id} style={styles.subscriptionItem}>
+                <View style={styles.subscriptionInfo}>
+                  <Text style={styles.subscriptionId}>ID: {sub.id}</Text>
+                  <Text style={styles.subscriptionPlatform}>Platform: {sub.platform}</Text>
+                  <Text style={styles.subscriptionEndpoint}>
+                    Token: {maskToken(sub.endpoint)}
+                  </Text>
+                </View>
+                <View style={styles.subscriptionActions}>
+                  <Button
+                    title="Unregister"
+                    onPress={() => handleUnregisterSubscription(sub.id)}
+                    disabled={pushLoading}
+                    color="#dc3545"
+                  />
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* Auto-speak Toggle */}
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>Auto-speak notifications</Text>
+          <Switch
+            value={autoSpeakNotifications}
+            onValueChange={handleAutoSpeakToggle}
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={autoSpeakNotifications ? '#007AFF' : '#f4f3f4'}
+          />
+        </View>
+        <Text style={styles.helpText}>
+          When enabled, notifications will be automatically spoken aloud.
+        </Text>
+      </View>
+
       {/* Action Buttons */}
       <View style={styles.section}>
         <View style={styles.buttonContainer}>
@@ -303,5 +492,64 @@ const styles = StyleSheet.create({
     fontFamily: 'monospace',
     color: '#333',
     marginBottom: 5,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    paddingVertical: 5,
+  },
+  infoLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+  },
+  infoValue: {
+    fontSize: 14,
+    color: '#666',
+    fontFamily: 'monospace',
+  },
+  subscriptionList: {
+    marginTop: 15,
+    paddingTop: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+  },
+  subscriptionListTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#333',
+  },
+  subscriptionItem: {
+    backgroundColor: '#f8f9fa',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  subscriptionInfo: {
+    marginBottom: 10,
+  },
+  subscriptionId: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 3,
+    color: '#333',
+  },
+  subscriptionPlatform: {
+    fontSize: 12,
+    marginBottom: 3,
+    color: '#666',
+  },
+  subscriptionEndpoint: {
+    fontSize: 11,
+    color: '#666',
+    fontFamily: 'monospace',
+  },
+  subscriptionActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
