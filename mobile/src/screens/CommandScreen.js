@@ -15,12 +15,17 @@ import {
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
+import { inferConfirmationDecision } from '../utils/voiceConfirmation';
+import { getProfile } from '../storage/profileStorage';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  
+  // Profile state
+  const [currentProfile, setCurrentProfile] = useState('default');
   
   // Audio recording state
   const [recording, setRecording] = useState(null);
@@ -57,6 +62,16 @@ export default function CommandScreen() {
         });
       } catch (err) {
         console.error('Failed to get audio permissions:', err);
+      }
+    })();
+
+    // Load current profile
+    (async () => {
+      try {
+        const profile = await getProfile();
+        setCurrentProfile(profile);
+      } catch (err) {
+        console.error('Failed to load profile:', err);
       }
     })();
 
@@ -140,7 +155,7 @@ export default function CommandScreen() {
     setResponse(null);
 
     try {
-      const data = await sendCommand(commandText);
+      const data = await sendCommand(commandText, { profile: currentProfile });
       setResponse(data);
       
       // Check if confirmation is required
@@ -243,9 +258,10 @@ export default function CommandScreen() {
       // For production, consider detecting format from file extension or Recording.getStatusAsync()
       const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
 
-      // Send as audio command with duration in ms
+      // Send as audio command with duration in ms and current profile
       const data = await sendAudioCommand(fileUri, format, {
         duration_ms: recordingDuration * 1000,
+        profile: currentProfile,
       });
       setResponse(data);
       
@@ -332,19 +348,6 @@ export default function CommandScreen() {
     if (!silent) {
       Alert.alert('Cancelled', 'Action was not confirmed');
     }
-  };
-
-  const inferConfirmationDecision = (transcript) => {
-    if (!transcript) return null;
-
-    const t = transcript.toLowerCase().trim();
-    // Prefer explicit cancel if present
-    const cancelKeywords = ['cancel', 'stop', 'no', 'never mind', 'nevermind', 'abort', 'dont', "don't"];
-    const confirmKeywords = ['confirm', 'yes', 'do it', 'proceed', 'ok', 'okay', 'approve'];
-
-    if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
-    if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
-    return null;
   };
 
   const handleVoiceConfirm = async () => {
@@ -545,6 +548,12 @@ export default function CommandScreen() {
       </Modal>
 
       <Text style={styles.title}>Send Command</Text>
+
+      {/* Profile Indicator */}
+      <View style={styles.profileIndicator}>
+        <Text style={styles.profileLabel}>Current Profile:</Text>
+        <Text style={styles.profileValue}>{currentProfile}</Text>
+      </View>
 
       {/* Dev Mode Settings */}
       <View style={styles.devSettingsSection}>
@@ -759,6 +768,26 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  profileIndicator: {
+    backgroundColor: '#e3f2fd',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1976d2',
+    marginRight: 8,
+  },
+  profileValue: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#1565c0',
   },
   input: {
     backgroundColor: 'white',

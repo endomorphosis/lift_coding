@@ -279,6 +279,7 @@ def get_agent_tasks(
     provider: str | None = None,
     state: str | None = None,
     limit: int = 100,
+    offset: int = 0,
 ) -> list[AgentTask]:
     """Query agent tasks with optional filters.
 
@@ -288,6 +289,7 @@ def get_agent_tasks(
         provider: Filter by provider.
         state: Filter by state.
         limit: Maximum number of tasks to return.
+        offset: Number of tasks to skip (for pagination).
 
     Returns:
         List of AgentTask objects, ordered by created_at DESC.
@@ -318,8 +320,9 @@ def get_agent_tasks(
         query += " AND status = ?"
         params.append(state)
 
-    query += " ORDER BY created_at DESC LIMIT ?"
+    query += " ORDER BY created_at DESC LIMIT ? OFFSET ?"
     params.append(limit)
+    params.append(offset)
 
     results = conn.execute(query, params).fetchall()
 
