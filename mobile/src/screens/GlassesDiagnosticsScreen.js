@@ -1,9 +1,10 @@
+import { Alert, AppState, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
-import { Alert, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
+import { getDebugState, simulateNotificationForDev } from '../push';
 import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
@@ -24,6 +25,7 @@ export default function GlassesDiagnosticsScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [pushDebugState, setPushDebugState] = useState(null);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
   const playbackTimeoutRef = useRef(null);
   const soundRef = useRef(null);
@@ -53,7 +55,40 @@ export default function GlassesDiagnosticsScreen() {
       await checkAudioRoute();
     })();
 
+    // Fetch initial debug state immediately
+    try {
+      const state = getDebugState();
+      setPushDebugState(state);
+    } catch (error) {
+      console.error('Failed to get initial push debug state:', error);
+    }
+
+    // Track app state to pause polling when backgrounded
+    // Initialize based on current state rather than defaulting to true
+    let isActive = AppState.currentState === 'active';
+    
+    const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+      isActive = nextAppState === 'active';
+    });
+
+    // Periodically refresh push debug state (every 5 seconds) but only when active
+    const interval = setInterval(() => {
+      if (!isActive) {
+        return; // Skip polling when app is backgrounded
+      }
+      try {
+        const state = getDebugState();
+        setPushDebugState(state);
+      } catch (error) {
+        console.error('Failed to get push debug state:', error);
+      }
+    }, 5000);
+
     return () => {
+      clearInterval(interval);
+      appStateSubscription.remove();
+      if (sound) {
+        sound.unloadAsync();
       // Use ref to ensure we cleanup the latest sound instance
       if (soundRef.current) {
         soundRef.current.unloadAsync();
@@ -460,6 +495,65 @@ export default function GlassesDiagnosticsScreen() {
           </View>
         ) : null}
       </View>
+
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Push Notifications Debug</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={async () => {
+            try {
+              setLastError(null);
+              await simulateNotificationForDev('Test notification from diagnostics screen');
+              Alert.alert('Success', 'Simulated notification sent');
+            } catch (error) {
+              setLastError(`Simulate notification failed: ${error.message}`);
+            }
+          }}
+        >
+          <Text style={styles.buttonText}>🔔 Simulate Test Notification</Text>
+        </TouchableOpacity>
+        
+        {pushDebugState && (
+          <View style={styles.debugInfo}>
+            <Text style={styles.debugLabel}>App State:</Text>
+            <Text style={styles.debugValue}>
+              {pushDebugState.isAppInBackground ? '🌙 Backgrounded' : '☀️ Foreground'}
+            </Text>
+            
+            {pushDebugState.pendingCount > 0 && (
+              <>
+                <Text style={styles.debugLabel}>Pending Speak Queue:</Text>
+                <Text style={styles.debugValue}>{pushDebugState.pendingCount} deferred</Text>
+              </>
+            )}
+            
+            {pushDebugState.lastNotificationTime && (
+              <>
+                <Text style={styles.debugLabel}>Last Notification:</Text>
+                <Text style={styles.debugValue}>
+                  {new Date(pushDebugState.lastNotificationTime).toLocaleTimeString()}
+                </Text>
+              </>
+            )}
+            
+            {pushDebugState.lastSpokenText && (
+              <>
+                <Text style={styles.debugLabel}>Last Spoken:</Text>
+                <Text style={styles.debugValue}>{pushDebugState.lastSpokenText}</Text>
+              </>
+            )}
+            
+            {pushDebugState.lastPlaybackError && (
+              <>
+                <Text style={styles.debugLabel}>Last TTS Error:</Text>
+                <Text style={[styles.debugValue, styles.errorText]}>
+                  {pushDebugState.lastPlaybackError}
+                </Text>
+              </>
+            )}
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -497,4 +591,7 @@ const styles = StyleSheet.create({
   responseContainer: { marginTop: 12, padding: 12, backgroundColor: '#e8f5e9', borderRadius: 8, borderLeftWidth: 4, borderLeftColor: '#4caf50' },
   responseTitle: { fontSize: 14, fontWeight: '600', color: '#2e7d32', marginBottom: 6 },
   responseText: { fontSize: 14, color: '#1b5e20', lineHeight: 20 },
+  debugInfo: { marginTop: 12, padding: 12, backgroundColor: '#f5f5f5', borderRadius: 8 },
+  debugLabel: { fontSize: 13, fontWeight: '600', color: '#666', marginTop: 8 },
+  debugValue: { fontSize: 13, color: '#333', marginTop: 2, marginLeft: 8 },
 });

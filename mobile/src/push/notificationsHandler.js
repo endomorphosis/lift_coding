@@ -6,17 +6,48 @@
  * - Parsing incoming notification payloads
  * - Fetching TTS audio and playing it
  * - Polling fallback for development/testing
+ * - Background-safe TTS deferral
  */
 
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import { AppState } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
+
+// Configuration constants
+const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
+const INTER_MESSAGE_DELAY_MS = 500; // Delay between processing messages to prevent audio overlap
 
 // Notification queue for sequential TTS playback
 let notificationQueue = [];
 let isProcessingQueue = false;
+
+// Background state tracking
+let isAppInBackground = false;
+let pendingSpeakQueue = [];
+let pendingSpeakSet = new Set(); // Track unique messages for O(1) duplicate detection
+let appStateSubscription = null;
+let isProcessingPendingQueue = false;
+let appStateMonitoringInitialized = false;
+
+/**
+ * Helper to check if an app state represents background/inactive
+ * @param {string} state - AppState value
+ * @returns {boolean} True if app is backgrounded or inactive
+ */
+function isBackgroundState(state) {
+  return state === 'background' || state === 'inactive';
+}
+
+// Debug state for UI visibility
+let debugState = {
+  lastNotificationReceived: null,
+  lastSpokenText: null,
+  lastPlaybackError: null,
+  lastNotificationTime: null,
+};
 
 // Configure how notifications are handled when app is in foreground
 Notifications.setNotificationHandler({
@@ -28,10 +59,13 @@ Notifications.setNotificationHandler({
 });
 
 /**
- * Set up notification listeners
+ * Set up notification listeners and background state monitoring
  * @param {Function} onNotification - Callback when notification is received
  */
 export function setupNotificationListeners(onNotification) {
+  // Set up AppState monitoring for background/foreground detection
+  setupAppStateMonitoring();
+
   // Handle notifications received while app is foregrounded
   const foregroundSubscription = Notifications.addNotificationReceivedListener(
     async (notification) => {
@@ -58,7 +92,47 @@ export function setupNotificationListeners(onNotification) {
   return () => {
     foregroundSubscription.remove();
     responseSubscription.remove();
+    if (appStateSubscription) {
+      appStateSubscription.remove();
+      appStateSubscription = null;
+    }
   };
+}
+
+/**
+ * Set up AppState monitoring to detect background/foreground transitions
+ * This enables deferred speaking when app is backgrounded
+ */
+function setupAppStateMonitoring() {
+  // Only set up once - prevent multiple initializations
+  if (appStateMonitoringInitialized) {
+    return;
+  }
+
+  // Remove any existing subscription first
+  if (appStateSubscription) {
+    appStateSubscription.remove();
+    appStateSubscription = null;
+  }
+
+  // Initialize current state - use explicit comparison instead of regex match
+  const currentState = AppState.currentState;
+  isAppInBackground = isBackgroundState(currentState);
+
+  appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+    const wasInBackground = isAppInBackground;
+    isAppInBackground = isBackgroundState(nextAppState);
+
+    console.log(`AppState changed to: ${nextAppState}, background: ${isAppInBackground}`);
+
+    // If app just came to foreground, process any pending speak requests
+    if (wasInBackground && !isAppInBackground) {
+      console.log('App foregrounded, processing pending speak queue');
+      processPendingSpeakQueue();
+    }
+  });
+
+  appStateMonitoringInitialized = true;
 }
 
 /**
@@ -75,6 +149,14 @@ async function handleNotification(notification) {
 
   const data = notification.request.content.data;
   const body = notification.request.content.body;
+  
+  // Update debug state
+  debugState.lastNotificationReceived = {
+    data,
+    body,
+    time: new Date().toISOString(),
+  };
+  debugState.lastNotificationTime = new Date().toISOString();
   
   // Extract message from notification
   let message = data.message || body || 'New notification';
@@ -93,7 +175,7 @@ async function handleNotification(notification) {
     }
   }
 
-  // Speak the notification via TTS
+  // Speak the notification via TTS (with background awareness)
   await speakNotification(message);
 }
 
@@ -123,14 +205,38 @@ async function fetchNotificationDetails(notificationId) {
 
 /**
  * Convert notification text to speech and play it
+ * Background-safe: defers speaking if app is backgrounded
  * @param {string} message - Message to speak
  */
 export async function speakNotification(message) {
+  // If app is in background, defer speaking until app is foregrounded
+  if (isAppInBackground) {
+    console.log('App is backgrounded, deferring speech:', message);
+    
+    // Avoid enqueueing duplicate messages while backgrounded using Set for O(1) lookup
+    if (!pendingSpeakSet.has(message)) {
+      pendingSpeakQueue.push(message);
+      pendingSpeakSet.add(message);
+      
+      // Warn if queue size exceeds expected threshold
+      if (pendingSpeakQueue.length > MAX_PENDING_QUEUE_SIZE) {
+        console.warn(
+          `Pending speak queue size (${pendingSpeakQueue.length}) exceeds threshold (${MAX_PENDING_QUEUE_SIZE}). ` +
+          'Consider processing or clearing old messages.'
+        );
+      }
+    }
+    
+    debugState.lastSpokenText = `(deferred) ${message}`;
+    return;
+  }
+
   let sound = null;
   let tempFileUri = null;
   
   try {
     console.log('Speaking notification:', message);
+    debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
     const audioBlob = await fetchTTS(message);
@@ -178,8 +284,13 @@ export async function speakNotification(message) {
       }
     });
 
+    // Clear error state on success
+    debugState.lastPlaybackError = null;
+
   } catch (error) {
     console.error('Failed to speak notification:', error);
+    debugState.lastPlaybackError = error.message;
+    
     // Clean up on error
     if (sound) {
       try {
@@ -196,6 +307,43 @@ export async function speakNotification(message) {
         console.error('Temp file cleanup error:', cleanupError);
       }
     }
+  }
+}
+
+/**
+ * Process any pending speak requests that were deferred while app was backgrounded
+ */
+async function processPendingSpeakQueue() {
+  // Guard against concurrent execution
+  if (isProcessingPendingQueue || pendingSpeakQueue.length === 0) {
+    return;
+  }
+
+  isProcessingPendingQueue = true;
+
+  try {
+    console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
+    
+    // Atomically extract all pending messages to avoid race conditions
+    // Any new messages added during processing will be handled in the next call
+    const messagesToProcess = pendingSpeakQueue.splice(0);
+    
+    // Remove processed messages from the tracking Set, keeping any newly added ones
+    for (const msg of messagesToProcess) {
+      pendingSpeakSet.delete(msg);
+    }
+    
+    for (const message of messagesToProcess) {
+      try {
+        await speakNotification(message);
+        // Delay between messages to prevent audio overlap
+        await new Promise(resolve => setTimeout(resolve, INTER_MESSAGE_DELAY_MS));
+      } catch (error) {
+        console.error('Error processing deferred speak request:', error);
+      }
+    }
+  } finally {
+    isProcessingPendingQueue = false;
   }
 }
 
@@ -415,4 +563,16 @@ export async function simulateNotificationForDev(message = 'This is a test notif
     console.error('[DEV] Failed to simulate notification:', error);
     throw error;
   }
+}
+
+/**
+ * Get the current debug state for UI display
+ * @returns {Object} Debug state with last notification, spoken text, and error
+ */
+export function getDebugState() {
+  return {
+    ...debugState,
+    isAppInBackground,
+    pendingCount: pendingSpeakQueue.length,
+  };
 }

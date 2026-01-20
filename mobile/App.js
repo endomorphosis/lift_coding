@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
+import { setupNotificationListeners } from './src/push';
 import * as Linking from 'expo-linking';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,6 +28,16 @@ const linking = {
 
 export default function App() {
   useEffect(() => {
+    // Set up notification listeners when app starts
+    console.log('Setting up notification listeners');
+    const cleanup = setupNotificationListeners((notification) => {
+      console.log('Notification received in App:', notification);
+    });
+
+    // Clean up listeners when app unmounts
+    return cleanup;
+  }, []);
+
     // Handle initial URL if app was opened from a deep link
     const handleInitialURL = async () => {
       const initialUrl = await Linking.getInitialURL();
