@@ -172,7 +172,8 @@ export default function GlassesDiagnosticsScreen() {
           const timeoutId = setTimeout(() => {
             setIsRecording(false);
             recordingTimeoutRef.current = null;
-            setLastError('Recording automatically stopped after reaching maximum duration.');
+            // This is expected behavior, not an error - recording duration limit reached
+            Alert.alert('Recording Complete', `Recording stopped after ${NATIVE_RECORDING_DURATION_SECONDS} seconds.`);
           }, NATIVE_RECORDING_DURATION_SECONDS * 1000);
           recordingTimeoutRef.current = timeoutId;
         } else {
@@ -217,9 +218,9 @@ export default function GlassesDiagnosticsScreen() {
             // No URI returned; avoid implying the recording was saved
             Alert.alert(
               'Recording Finished',
-              'Recording stopped, but no file was returned by the glasses.'
+              'Recording stopped, but no file URI was returned by the native module.'
             );
-            setLastError('Glasses recording stopped but no URI was returned by the native module.');
+            setLastError('Recording stopped, but no file URI was returned by the native module.');
           }
         }
       }
@@ -298,6 +299,8 @@ export default function GlassesDiagnosticsScreen() {
           await ExpoGlassesAudio.playAudio(uri);
           setIsPlaying(true);
           // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
+          // NOTE: This is a limitation - if playback finishes earlier or runs longer than the timeout,
+          // the UI state will be inaccurate. Future enhancement: add event-based status updates to native module.
           const timeoutId = setTimeout(() => {
             // Only update state if component is still mounted (playbackTimeoutRef will be cleared on unmount)
             if (playbackTimeoutRef.current === timeoutId) {
