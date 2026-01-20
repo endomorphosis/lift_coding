@@ -7,19 +7,24 @@ import android.content.Context
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
-import glasses.AudioRouteMonitor
-import glasses.GlassesRecorder
-import glasses.GlassesPlayer
+import expo.modules.glassesaudio.AudioRouteMonitor
+import expo.modules.glassesaudio.GlassesRecorder
+import expo.modules.glassesaudio.GlassesPlayer
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ExpoGlassesAudioModule : Module() {
+  companion object {
+    private const val PLAYBACK_TIMEOUT_MS = 5 * 60 * 1000L // 5 minutes timeout for playback
+  }
+  
   private lateinit var context: Context
   private lateinit var routeMonitor: AudioRouteMonitor
   private lateinit var recorder: GlassesRecorder
   private lateinit var player: GlassesPlayer
   private val handler = Handler(Looper.getMainLooper())
+  private var playbackTimeoutRunnable: Runnable? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -69,13 +74,36 @@ class ExpoGlassesAudioModule : Module() {
       )
     }
 
-    AsyncFunction("startRecording") { durationSeconds: Int, promise: Promise ->
+    AsyncFunction("startRecording") { durationSeconds: Int, audioSourceString: String?, promise: Promise ->
       try {
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         
-        // Enable Bluetooth SCO if available
-        audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
-        audioManager.startBluetoothSco()
+        // Parse audio source
+        val audioSource = when (audioSourceString) {
+          "phone" -> glasses.AudioSource.PHONE
+          "glasses" -> glasses.AudioSource.GLASSES
+          else -> glasses.AudioSource.AUTO
+        }
+        
+        // Configure Bluetooth SCO based on audio source
+        when (audioSource) {
+          glasses.AudioSource.GLASSES -> {
+            // Enable Bluetooth SCO for glasses/Bluetooth mic
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            audioManager.startBluetoothSco()
+          }
+          glasses.AudioSource.PHONE -> {
+            // Use phone mic - don't enable Bluetooth SCO
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+          }
+          glasses.AudioSource.AUTO -> {
+            // Auto mode - enable SCO if available
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            if (audioManager.isBluetoothScoAvailableOffCall) {
+              audioManager.startBluetoothSco()
+            }
+          }
+        }
         
         // Create output file
         val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
@@ -84,8 +112,8 @@ class ExpoGlassesAudioModule : Module() {
         val outputDir = context.getExternalFilesDir(null)
         val outputFile = File(outputDir, filename)
         
-        // Start recording
-        val audioRecord = recorder.start()
+        // Start recording with specified audio source
+        val audioRecord = recorder.start(audioSource)
         
         // Schedule stop after duration
         handler.postDelayed({
@@ -94,6 +122,9 @@ class ExpoGlassesAudioModule : Module() {
           audioManager.mode = AudioManager.MODE_NORMAL
           
           val fileSize = if (outputFile.exists()) outputFile.length() else 0L
+          
+          // Emit recording stopped event
+          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
           
           promise.resolve(
             mapOf(
@@ -143,22 +174,88 @@ class ExpoGlassesAudioModule : Module() {
           return@AsyncFunction
         }
         
-        // TODO: Implement full WAV file parsing and playback
-        // Current implementation: Basic acknowledgment for testing
-        // Production implementation should:
-        // 1. Parse WAV header to get format/sample rate
-        // 2. Read PCM data into buffer
-        // 3. Use GlassesPlayer.playPcm16Mono() or AudioTrack for playback
-        // 4. Send playback status events
+        // Emit playback started event
+        sendEvent("onPlaybackStatus", mapOf(
+          "isPlaying" to true
+        ))
         
-        // For now, just enable SCO and acknowledge
-        // The diagnostics screen will show playback started
-        handler.postDelayed({
-          audioManager.stopBluetoothSco()
-          audioManager.mode = AudioManager.MODE_NORMAL
-        }, 3000)
+        // Track if promise has been resolved/rejected
+        var promiseSettled = false
         
-        promise.resolve(null)
+        // Setup timeout to prevent promise from hanging indefinitely
+        synchronized(this@ExpoGlassesAudioModule) {
+          val timeoutRunnable = Runnable {
+            synchronized(this@ExpoGlassesAudioModule) {
+              if (!promiseSettled) {
+                promiseSettled = true
+                player.stop()
+                audioManager.stopBluetoothSco()
+                audioManager.mode = AudioManager.MODE_NORMAL
+                
+                sendEvent("onPlaybackStatus", mapOf(
+                  "isPlaying" to false,
+                  "error" to "Playback timeout after ${PLAYBACK_TIMEOUT_MS / 60000} minutes"
+                ))
+                
+                promise.reject("ERR_PLAYBACK_TIMEOUT", "Playback did not complete within ${PLAYBACK_TIMEOUT_MS / 60000} minutes")
+              }
+            }
+          }
+          playbackTimeoutRunnable = timeoutRunnable
+          handler.postDelayed(timeoutRunnable, PLAYBACK_TIMEOUT_MS)
+        }
+        
+        try {
+          // Parse and play WAV file
+          val wavInfo = player.playWavFile(file) {
+            // Playback completed callback
+            handler.post {
+              synchronized(this@ExpoGlassesAudioModule) {
+                if (!promiseSettled) {
+                  promiseSettled = true
+                  
+                  // Cancel timeout
+                  playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
+                  playbackTimeoutRunnable = null
+                  
+                  audioManager.stopBluetoothSco()
+                  audioManager.mode = AudioManager.MODE_NORMAL
+                  
+                  // Emit playback ended event
+                  sendEvent("onPlaybackStatus", mapOf(
+                    "isPlaying" to false
+                  ))
+                  
+                  // Resolve promise when playback completes
+                  promise.resolve(null)
+                }
+              }
+            }
+          }
+          
+          // Don't resolve here - wait for completion callback
+        } catch (e: Exception) {
+          synchronized(this@ExpoGlassesAudioModule) {
+            if (!promiseSettled) {
+              promiseSettled = true
+              
+              // Cancel timeout
+              playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
+              playbackTimeoutRunnable = null
+              
+              audioManager.stopBluetoothSco()
+              audioManager.mode = AudioManager.MODE_NORMAL
+              
+              // Emit playback error event
+              sendEvent("onPlaybackStatus", mapOf(
+                "isPlaying" to false,
+                "error" to e.message
+              ))
+              
+              promise.reject("ERR_PLAY_AUDIO", "Failed to play WAV file: ${e.message}", e)
+            }
+          }
+        }
       } catch (e: Exception) {
         promise.reject("ERR_PLAY_AUDIO", "Failed to play audio: ${e.message}", e)
       }
@@ -167,6 +264,10 @@ class ExpoGlassesAudioModule : Module() {
     AsyncFunction("stopPlayback") { promise: Promise ->
       try {
         player.stop()
+        
+        // Cancel any pending timeout
+        playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
+        playbackTimeoutRunnable = null
         
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.stopBluetoothSco()
@@ -179,6 +280,8 @@ class ExpoGlassesAudioModule : Module() {
     }
 
     OnDestroy {
+      playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
+      playbackTimeoutRunnable = null
       recorder.stop()
       player.stop()
     }
