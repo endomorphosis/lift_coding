@@ -139,34 +139,24 @@ interface AudioRouteInfo {
 ## Platform Support
 
 - ✅ Android (API 23+) - Full audio route monitoring with Bluetooth SCO support
-- ✅ iOS (11.0+) - Audio route monitoring with recording and playback capabilities
+- ✅ iOS (11.0+) - Audio route monitoring with AVAudioSession
 
 ### iOS Implementation Notes
 
-The iOS implementation provides audio route monitoring using AVAudioSession with additional recording and playback features:
+The iOS implementation provides audio route monitoring using AVAudioSession:
 
 **Supported on iOS:**
 - Real-time audio route monitoring via AVAudioSession
 - Audio route change notifications
 - Bluetooth device detection
 - Device enumeration (inputs/outputs)
-- Audio recording (via `startRecording`/`stopRecording`)
-- Audio playback (via `playAudio`/`stopPlayback`)
-- Diagnostics UI
+- Diagnostics UI (native iOS implementation available)
 
 **iOS API Differences:**
-- `getAudioRoute()` returns simplified route info:
-  ```typescript
-  {
-    inputDevice: string;      // e.g., "iPhone Microphone (MicrophoneBuiltIn)"
-    outputDevice: string;     // e.g., "iPhone Speaker (Speaker)"
-    sampleRate: number;       // e.g., 48000
-    isBluetoothConnected: boolean;
-  }
-  ```
-- No Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) - iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
-- No `audioMode` field - iOS uses audio session categories (e.g., playAndRecord, record) instead of Android's audio modes
-- Recording and playback methods are iOS-specific extensions
+- iOS uses simplified route monitoring through AVAudioSession
+- Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) may return fallback values - iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
+- `audioMode` field may not be populated - iOS uses audio session categories (e.g., playAndRecord, record) instead of Android's audio modes
+- Device enumeration provides iOS-specific port types (e.g., MicrophoneBuiltIn, Speaker, BluetoothHFP)
 
 ## Permissions
 
@@ -183,7 +173,7 @@ The module requires the following Android permissions:
 
 The module requires the following iOS permissions (configured in `app.json` under `ios.infoPlist`):
 
-- **NSMicrophoneUsageDescription**: Required for audio recording
+- **NSMicrophoneUsageDescription**: Required for audio input monitoring
 - **NSBluetoothAlwaysUsageDescription**: Required for Bluetooth device access
 - **NSBluetoothPeripheralUsageDescription**: Required for Bluetooth peripheral communication
 - **UIBackgroundModes**: Array containing "audio" for background audio support
@@ -202,7 +192,7 @@ Info.plist format (configured automatically via app.json):
 </array>
 ```
 
-These permissions are already configured in `app.json`.
+All permissions are configured in `app.json`.
 
 ## Implementation Details
 
@@ -221,33 +211,6 @@ The module uses iOS's AVAudioSession API for audio routing:
 
 - `AVAudioSession.currentRoute` - Get current input/output devices
 - `AVAudioSession.routeChangeNotification` - Monitor route changes
-- `AVAudioRecorder` - Record audio from the selected input device
-- `AVAudioPlayer` - Play audio to the selected output device
-
-## iOS-Specific API Extensions
-
-The iOS implementation includes additional methods for recording and playback:
-
-### Recording
-
-```typescript
-// Start recording for a specified duration (in seconds)
-const result = await GlassesAudio.startRecording(10); // Records for 10 seconds
-console.log('Recording saved to:', result.uri);
-
-// Stop recording early
-await GlassesAudio.stopRecording();
-```
-
-### Playback
-
-```typescript
-// Play an audio file
-await GlassesAudio.playAudio('file:///path/to/audio.wav');
-
-// Stop playback
-await GlassesAudio.stopPlayback();
-```
 
 ## References
 
