@@ -835,7 +835,7 @@ async def submit_command(
             return CommandResponse(
                 status=CommandStatus.ERROR,
                 intent=ParsedIntent(name="error.image_input", confidence=1.0),
-                spoken_text=f"Could not process image input: {str(e)}",
+                spoken_text="Could not process image input.",
                 debug=DebugInfo(transcript="<image input - error>"),
             )
         except Exception as e:

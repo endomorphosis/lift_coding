@@ -74,8 +74,13 @@ def _is_host_allowed(
             "Configure IMAGE_ALLOWED_HOSTS to allow this host.",
         )
 
-    # No allowlist configured - allow all (except denied)
-    return True, ""
+    # No allowlist configured - default deny for production safety
+    # This prevents SSRF attacks when the service is misconfigured
+    return (
+        False,
+        f"Host '{hostname}' is not allowed. "
+        "Configure IMAGE_ALLOWED_HOSTS to specify allowed hosts for image fetching.",
+    )
 
 
 def fetch_image_data(uri: str) -> bytes:
@@ -101,13 +106,46 @@ def fetch_image_data(uri: str) -> bytes:
 
     # Support file:// URIs and plain paths (dev/test mode)
     if parsed.scheme in ("", "file"):
+        # Local file access is gated behind an explicit env flag to avoid
+        # arbitrary file reads in production.
+        allow_local = os.getenv("HANDSFREE_ALLOW_LOCAL_IMAGE_URIS", "").lower() in (
+            "1",
+            "true",
+            "yes",
+        )
+        if not allow_local:
+            raise ValueError(
+                "Local file image URIs are disabled. "
+                "Set HANDSFREE_ALLOW_LOCAL_IMAGE_URIS=1 to enable for dev/test."
+            )
+
         # Extract path from file:// URI or use as-is
         path = parsed.path if parsed.scheme == "file" else uri
 
-        # Convert to Path object and read
+        # Convert to Path object and read with size limit
         file_path = Path(path)
         if not file_path.exists():
             raise FileNotFoundError(f"Image file not found: {path}")
+
+        # Apply the same max-size protection used for HTTPS downloads
+        max_size, _, _, _ = _get_config()
+        try:
+            file_size = file_path.stat().st_size
+        except OSError:
+            # If we cannot stat the file, fall back to reading and checking size
+            data = file_path.read_bytes()
+            if len(data) > max_size:
+                raise RuntimeError(
+                    f"Local image size {len(data)} bytes exceeds maximum "
+                    f"allowed size of {max_size} bytes"
+                )
+            return data
+
+        if file_size > max_size:
+            raise RuntimeError(
+                f"Local image size {file_size} bytes exceeds maximum "
+                f"allowed size of {max_size} bytes"
+            )
 
         return file_path.read_bytes()
 
@@ -138,15 +176,17 @@ def fetch_image_data(uri: str) -> bytes:
 
                     # Check content-length header if present
                     content_length = response.headers.get("content-length")
-                    content_length_int: int | None = None
-                    oversize_declared = False
                     if content_length:
                         try:
                             content_length_int = int(content_length)
+                            # Fail fast if declared size exceeds limit
                             if content_length_int > max_size:
-                                oversize_declared = True
+                                raise RuntimeError(
+                                    f"Image file too large: {content_length_int} bytes (max: {max_size} bytes)"
+                                )
                         except ValueError:
-                            content_length_int = None
+                            # Invalid content-length header, continue without it
+                            pass
 
                     # Check content-type if present
                     content_type = (
@@ -168,16 +208,6 @@ def fetch_image_data(uri: str) -> bytes:
                                 f"Image download exceeded size limit: {max_size} bytes"
                             )
                         chunks.append(chunk)
-
-                    # If the declared content-length was too large but we didn't exceed the cap
-                    # while streaming, still reject
-                    if oversize_declared:
-                        declared = (
-                            content_length_int if content_length_int is not None else content_length
-                        )
-                        raise RuntimeError(
-                            f"Image file too large: {declared} bytes (max: {max_size} bytes)"
-                        )
 
                     return b"".join(chunks)
 

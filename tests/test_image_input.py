@@ -1,6 +1,7 @@
 """Tests for image input support with privacy mode enforcement."""
 
 import os
+from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
@@ -11,6 +12,7 @@ client = TestClient(app)
 # Get absolute path to test fixtures
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 TEST_IMAGE_PATH = os.path.join(FIXTURES_DIR, "test_image.jpg")
+TEST_IMAGE_URI = Path(TEST_IMAGE_PATH).as_uri()
 
 
 class TestImageInputPrivacyEnforcement:
@@ -79,7 +81,7 @@ class TestImageInputPrivacyEnforcement:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                     "content_type": "image/jpeg",
                 },
                 "profile": "default",
@@ -110,7 +112,7 @@ class TestImageInputPrivacyEnforcement:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                     "content_type": "image/jpeg",
                 },
                 "profile": "default",
@@ -147,7 +149,7 @@ class TestImageInputPrivacyEnforcement:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                 },
                 "profile": "default",
                 "client_context": {
@@ -248,7 +250,7 @@ class TestImageInputLogging:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                 },
                 "profile": "default",
                 "client_context": {
@@ -273,7 +275,7 @@ class TestImageInputLogging:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                 },
                 "profile": "default",
                 "client_context": {
@@ -359,7 +361,7 @@ class TestImageInputOCRIntegration:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                     "content_type": "image/jpeg",
                 },
                 "profile": "default",
@@ -392,7 +394,7 @@ class TestImageInputOCRIntegration:
             json={
                 "input": {
                     "type": "image",
-                    "uri": f"file://{TEST_IMAGE_PATH}",
+                    "uri": TEST_IMAGE_URI,
                     "content_type": "image/jpeg",
                 },
                 "profile": "default",

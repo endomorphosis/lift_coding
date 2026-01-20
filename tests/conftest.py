@@ -14,6 +14,9 @@ sys.path.insert(0, str(src_path))
 # Set DUCKDB_PATH to :memory: for all tests to ensure test isolation
 os.environ["DUCKDB_PATH"] = ":memory:"
 
+# Enable local image URIs for testing (gated by env var for security)
+os.environ["HANDSFREE_ALLOW_LOCAL_IMAGE_URIS"] = "1"
+
 
 @pytest.fixture
 def test_user_id():
