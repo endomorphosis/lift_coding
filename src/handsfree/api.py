@@ -1295,7 +1295,23 @@ async def confirm_command(
                 repo = entities.get("repo", "unknown/unknown")
                 
                 if not pr_num:
-                    # Missing required entity
+                    # Missing required entity - log error for observability
+                    write_action_log(
+                        db,
+                        user_id=user_id,
+                        action_type="request_review",
+                        ok=False,
+                        target="unknown",
+                        request={"reviewers": reviewers, "confirmed": True},
+                        result={
+                            "status": "error",
+                            "message": "PR number is required for review request",
+                            "via_confirmation": True,
+                            "via_router_token": True,
+                        },
+                        idempotency_key=request.idempotency_key,
+                    )
+                    
                     response = CommandResponse(
                         status=CommandStatus.ERROR,
                         intent=ParsedIntent(
@@ -1430,6 +1446,23 @@ async def confirm_command(
                 merge_method = entities.get("merge_method", "squash")
                 
                 if not pr_num:
+                    # Missing required entity - log error for observability
+                    write_action_log(
+                        db,
+                        user_id=user_id,
+                        action_type="merge",
+                        ok=False,
+                        target="unknown",
+                        request={"confirmed": True, "merge_method": merge_method},
+                        result={
+                            "status": "error",
+                            "message": "PR number is required for merge",
+                            "via_confirmation": True,
+                            "via_router_token": True,
+                        },
+                        idempotency_key=request.idempotency_key,
+                    )
+                    
                     response = CommandResponse(
                         status=CommandStatus.ERROR,
                         intent=ParsedIntent(
@@ -1596,8 +1629,6 @@ async def confirm_command(
                         target_ref = f"#{pr_num}"
                     
                     # Build trace with confirmation metadata
-                    from datetime import UTC, datetime
-                    
                     trace = {
                         "intent_name": intent_name,
                         "entities": entities,
@@ -1646,6 +1677,9 @@ async def confirm_command(
                             ),
                             spoken_text=spoken_text,
                         )
+                    except (KeyboardInterrupt, SystemExit):
+                        # Re-raise critical exceptions to avoid masking shutdown signals
+                        raise
                     except Exception as e:
                         logger.error("Failed to delegate to agent: %s", e)
                         
@@ -1676,7 +1710,23 @@ async def confirm_command(
                         )
             
             else:
-                # Unknown intent from router
+                # Unknown intent from router - log for debugging
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="unknown",
+                    ok=False,
+                    target="unknown",
+                    request={"intent_name": intent_name, "entities": entities, "confirmed": True},
+                    result={
+                        "status": "error",
+                        "message": f"Unknown action type: {intent_name}",
+                        "via_confirmation": True,
+                        "via_router_token": True,
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+                
                 response = CommandResponse(
                     status=CommandStatus.ERROR,
                     intent=ParsedIntent(

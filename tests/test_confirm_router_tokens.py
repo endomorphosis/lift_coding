@@ -4,11 +4,9 @@ This test suite validates that router-issued tokens (from PendingActionManager)
 execute real action handlers instead of returning fixture responses.
 """
 
-import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
-from handsfree.auth import FIXTURE_USER_ID
 
 client = TestClient(app)
 
@@ -55,7 +53,7 @@ class TestConfirmRouterTokens:
         assert "(Fixture response)" not in data["spoken_text"]
         
         # Should mention the action was executed
-        assert "review requested" in data["spoken_text"].lower() or "alice" in data["spoken_text"].lower()
+        assert "review requested" in data["spoken_text"].lower() and ("alice" in data["spoken_text"].lower() or "reviewer" in data["spoken_text"].lower())
 
     def test_confirm_pr_merge_router_token(self):
         """Test that confirming a router-issued pr.merge token executes real handler."""
