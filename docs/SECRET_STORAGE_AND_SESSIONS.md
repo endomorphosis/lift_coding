@@ -121,7 +121,7 @@ Set the `SECRET_MANAGER_TYPE` environment variable to choose the backend:
 # Development (default) - stores secrets as environment variables
 export SECRET_MANAGER_TYPE=env
 
-# Production - AWS Secrets Manager
+# Production - AWS Secrets Manager (NOT YET IMPLEMENTED - see documentation below for planned specification)
 export SECRET_MANAGER_TYPE=aws
 export AWS_REGION=us-east-1
 # Option 1: IAM role authentication (recommended for EC2/ECS/Lambda)
@@ -144,7 +144,7 @@ export VAULT_SECRET_ID=your-secret-id
 export VAULT_MOUNT=secret  # KV mount point (default: secret)
 export VAULT_NAMESPACE=your-namespace  # For Vault Enterprise
 
-# Production - Google Secret Manager
+# Production - Google Secret Manager (NOT YET IMPLEMENTED - see documentation below for planned specification)
 export SECRET_MANAGER_TYPE=gcp
 export GCP_PROJECT_ID=my-project
 # Option 1: Application Default Credentials (recommended for GCE/GKE/Cloud Run)
@@ -244,7 +244,7 @@ The VaultSecretManager provides fail-fast error handling with clear messages:
 
 #### AWS Secrets Manager Configuration
 
-> **Note:** AWS Secrets Manager backend is fully documented below. If the implementation is not yet available in your version, it will be coming soon. The factory will raise `NotImplementedError` until the implementation is complete.
+> ⚠️ **WARNING: Not Yet Implemented** - The AWS Secrets Manager backend is not yet implemented. Setting `SECRET_MANAGER_TYPE=aws` currently raises `NotImplementedError`. The documentation in this section is provided as a specification for the planned implementation.
 
 The AWSSecretManager provides production-ready secret storage with the following features:
 
@@ -358,7 +358,8 @@ The AWSSecretManager provides clear error handling:
 
 #### Google Secret Manager Configuration
 
-> **Note:** Google Secret Manager backend is fully documented below. If the implementation is not yet available in your version, it will be coming soon. The factory will raise `NotImplementedError` until the implementation is complete.
+> ⚠️ **WARNING: Not Yet Implemented**  
+> The Google Secret Manager backend is not yet implemented. Setting `SECRET_MANAGER_TYPE=gcp` currently raises `NotImplementedError`. The documentation below is provided as a specification for the planned implementation.
 
 The GCPSecretManager provides production-ready secret storage with the following features:
 
@@ -767,9 +768,9 @@ redis-cli
 ## Future Enhancements
 
 ### Secret Management
-- [ ] AWS Secrets Manager backend implementation
+- [ ] AWS Secrets Manager backend (documentation complete, implementation pending)
 - [x] HashiCorp Vault backend (completed)
-- [ ] Google Cloud Secret Manager backend implementation
+- [ ] Google Cloud Secret Manager backend (documentation complete, implementation pending)
 - [ ] Azure Key Vault backend
 - [ ] Automatic secret rotation
 - [ ] Secret versioning
