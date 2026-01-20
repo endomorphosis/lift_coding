@@ -199,9 +199,17 @@ class GlassesPlayer {
                 Log.w(TAG, "Expected ${wavInfo.dataSize} bytes but read $totalRead bytes")
             }
             
+            // Ensure we have an even number of bytes for 16-bit PCM data
+            val validBytes = if (totalRead % 2 != 0) {
+                Log.w(TAG, "Odd number of bytes read ($totalRead), truncating to ${totalRead - 1}")
+                totalRead - 1
+            } else {
+                totalRead
+            }
+            
             // Convert bytes to shorts (PCM 16-bit), based on actual bytes read
-            val pcmShorts = ShortArray(totalRead / 2)
-            val buffer = ByteBuffer.wrap(pcmBytes, 0, totalRead)
+            val pcmShorts = ShortArray(validBytes / 2)
+            val buffer = ByteBuffer.wrap(pcmBytes, 0, validBytes)
             buffer.order(ByteOrder.LITTLE_ENDIAN)
             
             for (i in pcmShorts.indices) {
