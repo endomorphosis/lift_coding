@@ -4,10 +4,6 @@ This is the default implementation used in CI and dev environments.
 It doesn't require any external dependencies or API keys.
 """
 
-import logging
-
-logger = logging.getLogger(__name__)
-
 
 class StubOCRProvider:
     """Stub OCR provider that returns deterministic responses for testing.
@@ -28,11 +24,11 @@ class StubOCRProvider:
         """Return a deterministic text extraction for testing.
 
         Args:
-            image_data: Raw image data bytes (analyzed for deterministic response)
+            image_data: Raw image data bytes (currently unused)
             content_type: MIME type of the image (e.g., image/jpeg, image/png)
 
         Returns:
-            Deterministic text based on image data
+            Deterministic text for testing purposes
 
         Raises:
             NotImplementedError: If OCR is disabled
