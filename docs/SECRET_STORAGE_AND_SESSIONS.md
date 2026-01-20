@@ -151,6 +151,8 @@ export GCP_PROJECT_ID=my-project
 # Uses the instance/pod service account automatically - no additional env vars needed
 # Option 2: Service account key authentication (development/testing)
 export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+# Optional configuration
+export GCP_SECRET_MANAGER_ENDPOINT=https://secretmanager.googleapis.com  # Custom endpoint
 ```
 
 #### HashiCorp Vault Configuration
