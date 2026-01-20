@@ -74,13 +74,22 @@ def _is_host_allowed(
             "Configure IMAGE_ALLOWED_HOSTS to allow this host.",
         )
 
-    # No allowlist configured - default deny for production safety
-    # This prevents SSRF attacks when the service is misconfigured
-    return (
-        False,
-        f"Host '{hostname}' is not allowed. "
-        "Configure IMAGE_ALLOWED_HOSTS to specify allowed hosts for image fetching.",
-    )
+    # No allowlist configured.
+    # Check if strict host checking is enabled (default: enabled for security)
+    strict_host_checking = os.getenv("IMAGE_STRICT_HOST_CHECKING", "1").strip()
+    if strict_host_checking and strict_host_checking.lower() not in ("0", "false", "no", ""):
+        # Strict mode: default deny when no explicit allowlist is configured.
+        # This helps prevent SSRF attacks when the service is misconfigured.
+        return (
+            False,
+            f"Host '{hostname}' is not allowed. "
+            "Configure IMAGE_ALLOWED_HOSTS or set IMAGE_STRICT_HOST_CHECKING=0 "
+            "to allow this host.",
+        )
+
+    # Non-strict mode: default-allow when no allowlist is configured.
+    # This preserves backward compatibility but is less secure.
+    return True, ""
 
 
 def fetch_image_data(uri: str) -> bytes:
@@ -125,15 +134,21 @@ def fetch_image_data(uri: str) -> bytes:
         # Convert to Path object and read with size limit
         file_path = Path(path)
         if not file_path.exists():
-            raise FileNotFoundError(f"Image file not found: {path}")
+            # Use a generic error message to avoid leaking filesystem paths
+            raise FileNotFoundError("Image file not found")
 
         # Apply the same max-size protection used for HTTPS downloads
         max_size, _, _, _ = _get_config()
         try:
             file_size = file_path.stat().st_size
-        except OSError:
+        except OSError as e:
             # If we cannot stat the file, fall back to reading and checking size
-            data = file_path.read_bytes()
+            # Wrap OSError in RuntimeError for consistent error handling
+            try:
+                data = file_path.read_bytes()
+            except OSError as read_err:
+                raise RuntimeError("Cannot read image file") from read_err
+            
             if len(data) > max_size:
                 raise RuntimeError(
                     f"Local image size {len(data)} bytes exceeds maximum "
@@ -147,7 +162,11 @@ def fetch_image_data(uri: str) -> bytes:
                 f"allowed size of {max_size} bytes"
             )
 
-        return file_path.read_bytes()
+        try:
+            return file_path.read_bytes()
+        except OSError as e:
+            # Convert OSError to RuntimeError for consistent error handling
+            raise RuntimeError("Cannot read image file") from e
 
     # Support https:// URIs (production mode)
     elif parsed.scheme == "https":
