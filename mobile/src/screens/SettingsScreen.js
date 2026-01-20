@@ -76,6 +76,7 @@ export default function SettingsScreen() {
       return;
     }
     
+    setPushLoading(true);
     try {
       const subs = await listSubscriptions();
       setSubscriptions(subs);
@@ -100,6 +101,8 @@ export default function SettingsScreen() {
           ]
         );
       }
+    } finally {
+      setPushLoading(false);
     }
   };
 
