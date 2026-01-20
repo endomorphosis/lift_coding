@@ -40,6 +40,7 @@ class AWSSecretManager(SecretManager):
         region: str | None = None,
         prefix: str | None = None,
         boto3_client: Any | None = None,
+        force_delete: bool | None = None,
     ):
         """Initialize the AWS Secrets Manager secret manager.
 
@@ -48,6 +49,8 @@ class AWSSecretManager(SecretManager):
             prefix: Prefix for secret names (default: from HANDSFREE_AWS_SECRETS_PREFIX
                 or "handsfree/")
             boto3_client: Optional boto3 client for testing (default: creates new client)
+            force_delete: Whether to force delete without recovery window
+                (default: from AWS_SECRETS_FORCE_DELETE env var or False)
 
         Raises:
             ImportError: If boto3 is not installed
@@ -70,6 +73,13 @@ class AWSSecretManager(SecretManager):
         # Load configuration
         self.region = region or os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION")
         self.prefix = prefix or os.getenv("HANDSFREE_AWS_SECRETS_PREFIX", "handsfree/")
+        
+        # Configure deletion behavior (default to False for production safety)
+        if force_delete is None:
+            force_delete_env = os.getenv("AWS_SECRETS_FORCE_DELETE", "false").lower()
+            self.force_delete = force_delete_env in ("true", "1", "yes")
+        else:
+            self.force_delete = force_delete
 
         # Validate configuration
         if not self.region:
@@ -91,7 +101,10 @@ class AWSSecretManager(SecretManager):
                 raise ValueError(f"Failed to initialize AWS client: {e}") from e
 
         logger.info(
-            "Initialized AWSSecretManager with region: %s, prefix: %s", self.region, self.prefix
+            "Initialized AWSSecretManager with region: %s, prefix: %s, force_delete: %s",
+            self.region,
+            self.prefix,
+            self.force_delete,
         )
 
     def _make_secret_name(self, key: str) -> str:
@@ -165,8 +178,22 @@ class AWSSecretManager(SecretManager):
                         SecretId=secret_name,
                         SecretString=secret_string,
                     )
-                    # Update tags if provided
+                    # Replace tags if provided (remove old tags first)
                     if tags:
+                        try:
+                            current = self.client.describe_secret(SecretId=secret_name)
+                            existing_tags = current.get("Tags", []) or []
+                            if existing_tags:
+                                self.client.untag_resource(
+                                    SecretId=secret_name,
+                                    TagKeys=[t["Key"] for t in existing_tags if "Key" in t],
+                                )
+                        except self._ClientError as describe_err:
+                            logger.warning(
+                                "Failed to clear existing tags for secret %s: %s",
+                                secret_name,
+                                describe_err,
+                            )
                         self.client.tag_resource(SecretId=secret_name, Tags=tags)
                     logger.debug("Updated existing secret with key: %s", key)
                 else:
@@ -202,9 +229,12 @@ class AWSSecretManager(SecretManager):
 
         except self._ClientError as e:
             error_code = e.response["Error"]["Code"]
-            if error_code in ("ResourceNotFoundException", "InvalidRequestException"):
+            if error_code == "ResourceNotFoundException":
                 logger.warning("Secret not found: %s", reference)
                 return None
+            if error_code == "InvalidRequestException":
+                logger.error("Invalid request while retrieving secret %s: %s", reference, e)
+                raise Exception(f"Invalid request while retrieving secret: {e}") from e
             logger.error("Failed to retrieve secret: %s", e)
             raise Exception(f"Failed to retrieve secret: {e}") from e
         except ValueError as e:
@@ -217,9 +247,9 @@ class AWSSecretManager(SecretManager):
     def delete_secret(self, reference: str) -> bool:
         """Delete a secret from AWS Secrets Manager.
 
-        Note: AWS Secrets Manager schedules secrets for deletion with a recovery window.
-        This uses ForceDeleteWithoutRecovery=True for immediate deletion in tests/dev.
-        For production, consider using a recovery window.
+        Note: By default, AWS Secrets Manager schedules secrets for deletion with a 
+        recovery window. Set AWS_SECRETS_FORCE_DELETE=true or pass force_delete=True
+        during initialization for immediate deletion without recovery window.
 
         Args:
             reference: The reference to the secret
@@ -233,21 +263,29 @@ class AWSSecretManager(SecretManager):
         try:
             secret_name = self._parse_reference(reference)
 
-            # Delete the secret (with immediate deletion, no recovery window)
-            self.client.delete_secret(
-                SecretId=secret_name,
-                ForceDeleteWithoutRecovery=True,
-            )
+            # Delete the secret with or without recovery window based on configuration
+            delete_params = {"SecretId": secret_name}
+            if self.force_delete:
+                delete_params["ForceDeleteWithoutRecovery"] = True
+            else:
+                # Use default 30-day recovery window
+                delete_params["RecoveryWindowInDays"] = 30
+            
+            self.client.delete_secret(**delete_params)
 
             logger.debug("Deleted secret: %s", reference)
             return True
 
         except self._ClientError as e:
             error_code = e.response["Error"]["Code"]
-            if error_code in ("ResourceNotFoundException", "InvalidRequestException"):
+            if error_code == "ResourceNotFoundException":
                 logger.warning("Secret not found for deletion: %s", reference)
                 return False
+            if error_code == "InvalidRequestException":
+                logger.error("Invalid request while deleting secret %s: %s", reference, e)
+                return False
             logger.error("Failed to delete secret: %s", e)
+            raise Exception(f"Failed to delete secret: {e}") from e
             raise Exception(f"Failed to delete secret: {e}") from e
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
@@ -264,7 +302,7 @@ class AWSSecretManager(SecretManager):
         Args:
             reference: The reference to the secret
             value: New secret value
-            metadata: Optional new metadata (updates tags)
+            metadata: Optional new metadata (replaces existing tags)
 
         Returns:
             True if updated, False if not found
@@ -275,25 +313,40 @@ class AWSSecretManager(SecretManager):
         try:
             secret_name = self._parse_reference(reference)
 
-            # Check if secret exists by attempting to describe it
+            # Update the secret value directly (will fail if secret doesn't exist)
+            secret_string = json.dumps({"value": value})
             try:
-                self.client.describe_secret(SecretId=secret_name)
+                self.client.put_secret_value(
+                    SecretId=secret_name,
+                    SecretString=secret_string,
+                )
             except self._ClientError as e:
                 error_code = e.response["Error"]["Code"]
-                if error_code in ("ResourceNotFoundException", "InvalidRequestException"):
+                if error_code == "ResourceNotFoundException":
                     logger.warning("Secret not found for update: %s", reference)
                     return False
+                if error_code == "InvalidRequestException":
+                    logger.error("Invalid request while updating secret %s: %s", reference, e)
+                    raise Exception(f"Invalid request while updating secret: {e}") from e
                 raise
 
-            # Update the secret value
-            secret_string = json.dumps({"value": value})
-            self.client.put_secret_value(
-                SecretId=secret_name,
-                SecretString=secret_string,
-            )
-
-            # Update tags if metadata provided
+            # Replace tags if metadata provided (remove old tags first)
             if metadata:
+                try:
+                    current = self.client.describe_secret(SecretId=secret_name)
+                    existing_tags = current.get("Tags", []) or []
+                    if existing_tags:
+                        self.client.untag_resource(
+                            SecretId=secret_name,
+                            TagKeys=[t["Key"] for t in existing_tags if "Key" in t],
+                        )
+                except self._ClientError as describe_err:
+                    logger.warning(
+                        "Failed to clear existing tags for secret %s: %s",
+                        secret_name,
+                        describe_err,
+                    )
+                
                 tags = [{"Key": k, "Value": v} for k, v in metadata.items()]
                 self.client.tag_resource(SecretId=secret_name, Tags=tags)
 
@@ -309,6 +362,11 @@ class AWSSecretManager(SecretManager):
 
     def list_secrets(self, prefix: str | None = None) -> list[str]:
         """List all secret references in AWS Secrets Manager.
+
+        Note: AWS Secrets Manager does not support efficient prefix filtering in the API.
+        This method fetches all secrets and filters in memory, which may be inefficient
+        for large deployments. Consider using descriptive prefixes and the 
+        HANDSFREE_AWS_SECRETS_PREFIX to limit the scope.
 
         Args:
             prefix: Optional prefix to filter secrets (appended to the manager's prefix)
@@ -331,7 +389,7 @@ class AWSSecretManager(SecretManager):
             paginator = self.client.get_paginator("list_secrets")
 
             # List all secrets (AWS doesn't support prefix filtering directly)
-            # We'll filter in memory after retrieving
+            # We filter in memory after retrieving all secrets
             for page in paginator.paginate():
                 for secret in page.get("SecretList", []):
                     secret_name = secret["Name"]
