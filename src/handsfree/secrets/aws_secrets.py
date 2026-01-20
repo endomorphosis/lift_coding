@@ -286,7 +286,6 @@ class AWSSecretManager(SecretManager):
                 return False
             logger.error("Failed to delete secret: %s", e)
             raise Exception(f"Failed to delete secret: {e}") from e
-            raise Exception(f"Failed to delete secret: {e}") from e
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return False
@@ -363,10 +362,8 @@ class AWSSecretManager(SecretManager):
     def list_secrets(self, prefix: str | None = None) -> list[str]:
         """List all secret references in AWS Secrets Manager.
 
-        Note: AWS Secrets Manager does not support efficient prefix filtering in the API.
-        This method fetches all secrets and filters in memory, which may be inefficient
-        for large deployments. Consider using descriptive prefixes and the 
-        HANDSFREE_AWS_SECRETS_PREFIX to limit the scope.
+        Uses AWS Secrets Manager's Filters parameter to efficiently filter secrets
+        by prefix, reducing data transfer and improving performance.
 
         Args:
             prefix: Optional prefix to filter secrets (appended to the manager's prefix)
@@ -388,15 +385,16 @@ class AWSSecretManager(SecretManager):
             # Use paginator to handle large numbers of secrets
             paginator = self.client.get_paginator("list_secrets")
 
-            # List all secrets (AWS doesn't support prefix filtering directly)
-            # We filter in memory after retrieving all secrets
-            for page in paginator.paginate():
+            # Use AWS Filters parameter for better performance when prefix is specified
+            paginate_kwargs = {}
+            if search_prefix:
+                paginate_kwargs["Filters"] = [
+                    {"Key": "name", "Values": [search_prefix]}
+                ]
+
+            for page in paginator.paginate(**paginate_kwargs):
                 for secret in page.get("SecretList", []):
                     secret_name = secret["Name"]
-
-                    # Filter by prefix if specified
-                    if search_prefix and not secret_name.startswith(search_prefix):
-                        continue
 
                     # Skip secrets scheduled for deletion
                     if "DeletedDate" in secret:
