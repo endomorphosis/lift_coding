@@ -61,15 +61,15 @@ public final class GlassesPlayer {
                         if #available(iOS 15.0, *) {
                             print("[GlassesPlayer] Interruption ended - resumed playback")
                         }
+                        // Clear the flag only after successful resumption
+                        shouldResumeAfterInterruption = false
                     }
                 } catch {
-                    shouldResumeAfterInterruption = false
                     if #available(iOS 15.0, *) {
                         print("[GlassesPlayer] Failed to re-activate session after interruption: \(error)")
                     }
                 }
             }
-            shouldResumeAfterInterruption = false
             
         @unknown default:
             break
