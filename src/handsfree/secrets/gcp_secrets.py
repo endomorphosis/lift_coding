@@ -7,7 +7,7 @@ It uses Application Default Credentials (ADC) for authentication.
 import logging
 import os
 
-from google.api_core.exceptions import NotFound, GoogleAPIError
+from google.api_core.exceptions import AlreadyExists, NotFound, GoogleAPIError
 from google.cloud import secretmanager
 
 from .interface import SecretManager
@@ -138,6 +138,26 @@ class GCPSecretManager(SecretManager):
             raise ValueError(f"Invalid reference format: {reference}")
         return reference[6:]  # Strip "gcp://" prefix
 
+    def _normalize_metadata_to_labels(self, metadata: dict[str, str] | None) -> dict[str, str]:
+        """Normalize metadata to GCP-compliant labels.
+
+        GCP labels have restrictions: lowercase, alphanumeric, hyphens.
+        Label values are truncated to 63 characters.
+
+        Args:
+            metadata: Optional metadata dictionary
+
+        Returns:
+            Dictionary of normalized labels
+        """
+        labels = {}
+        if metadata:
+            for k, v in metadata.items():
+                label_key = k.lower().replace("_", "-").replace(".", "-")
+                label_value = v.lower().replace("_", "-").replace(".", "-")[:63]
+                labels[label_key] = label_value
+        return labels
+
     def store_secret(self, key: str, value: str, metadata: dict[str, str] | None = None) -> str:
         """Store a secret in Google Cloud Secret Manager.
 
@@ -157,13 +177,7 @@ class GCPSecretManager(SecretManager):
             parent = f"projects/{self.project_id}"
 
             # Prepare labels from metadata
-            labels = {}
-            if metadata:
-                # GCP labels have restrictions: lowercase, alphanumeric, hyphens
-                for k, v in metadata.items():
-                    label_key = k.lower().replace("_", "-").replace(".", "-")
-                    label_value = v.lower().replace("_", "-").replace(".", "-")[:63]
-                    labels[label_key] = label_value
+            labels = self._normalize_metadata_to_labels(metadata)
 
             # Create the secret
             try:
@@ -178,12 +192,9 @@ class GCPSecretManager(SecretManager):
                     }
                 )
                 logger.debug("Created secret: %s", secret_name)
-            except GoogleAPIError as e:
-                # Secret might already exist
-                if "already exists" in str(e).lower():
-                    logger.debug("Secret already exists: %s", secret_name)
-                else:
-                    raise
+            except AlreadyExists:
+                # Secret already exists, just add new version
+                logger.debug("Secret already exists: %s", secret_name)
 
             # Add the secret version with the actual value
             secret_path = self._get_secret_path(secret_name)
@@ -296,11 +307,7 @@ class GCPSecretManager(SecretManager):
 
             # Update labels if metadata provided
             if metadata:
-                labels = {}
-                for k, v in metadata.items():
-                    label_key = k.lower().replace("_", "-").replace(".", "-")
-                    label_value = v.lower().replace("_", "-").replace(".", "-")[:63]
-                    labels[label_key] = label_value
+                labels = self._normalize_metadata_to_labels(metadata)
 
                 self.client.update_secret(
                     request={

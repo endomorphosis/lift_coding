@@ -4,7 +4,7 @@ import os
 from unittest.mock import Mock, patch
 
 import pytest
-from google.api_core.exceptions import NotFound, GoogleAPIError
+from google.api_core.exceptions import AlreadyExists, NotFound, GoogleAPIError
 from hvac.exceptions import InvalidPath, VaultError
 
 from handsfree.secrets import EnvSecretManager, GCPSecretManager, SecretManager, VaultSecretManager
@@ -650,7 +650,7 @@ class TestGCPSecretManager:
         mock_client_class.return_value = mock_client
 
         # Mock that secret already exists
-        mock_client.create_secret.side_effect = GoogleAPIError("already exists")
+        mock_client.create_secret.side_effect = AlreadyExists("secret already exists")
 
         manager = GCPSecretManager(project_id="test-project")
 
