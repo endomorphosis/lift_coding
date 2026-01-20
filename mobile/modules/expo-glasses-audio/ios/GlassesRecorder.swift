@@ -61,6 +61,7 @@ public final class GlassesRecorder {
                         }
                     }
                 } catch {
+                    shouldResumeAfterInterruption = false
                     if #available(iOS 15.0, *) {
                         print("[GlassesRecorder] Failed to re-activate session after interruption: \(error)")
                     }

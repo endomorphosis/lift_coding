@@ -5,6 +5,7 @@ public class ExpoGlassesAudioModule: Module {
   private let routeMonitor = AudioRouteMonitor()
   private let recorder = GlassesRecorder()
   private let player = GlassesPlayer()
+  private var foregroundObserver: NSObjectProtocol?
   
   public func definition() -> ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -131,7 +132,7 @@ public class ExpoGlassesAudioModule: Module {
       }
       
       // Observe app lifecycle events to re-apply audio session configuration
-      NotificationCenter.default.addObserver(
+      foregroundObserver = NotificationCenter.default.addObserver(
         forName: UIApplication.willEnterForegroundNotification,
         object: nil,
         queue: .main
@@ -144,7 +145,9 @@ public class ExpoGlassesAudioModule: Module {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
-      NotificationCenter.default.removeObserver(self)
+      if let observer = foregroundObserver {
+        NotificationCenter.default.removeObserver(observer)
+      }
     }
   }
   
