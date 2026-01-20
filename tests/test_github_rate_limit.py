@@ -253,9 +253,11 @@ class TestTransientErrorRetry:
 
         # Should have slept twice (for first two failures)
         assert len(sleep_calls) == 2
-        # First sleep should be around 0.5 seconds (base_delay=0.5, jitter up to 0.25)
+        # With proportional jitter: base_delay_no_jitter + uniform(0, base_delay_no_jitter * 0.5)
+        # where base_delay_no_jitter = base_delay * (2^attempt)
+        # First sleep (attempt=0): 0.5 * 2^0 + jitter(0, 0.25) = [0.5, 0.75]
         assert 0.5 <= sleep_calls[0] <= 0.75
-        # Second sleep should be around 1.0 seconds (base_delay=1.0, jitter up to 0.5)
+        # Second sleep (attempt=1): 0.5 * 2^1 + jitter(0, 0.5) = [1.0, 1.5]
         assert 1.0 <= sleep_calls[1] <= 1.5
 
     @respx.mock
@@ -324,7 +326,7 @@ class TestTransientErrorRetry:
         with pytest.raises(RuntimeError, match="request failed with status 503"):
             provider._make_request("/user")
 
-        # Should have slept 2 times (between 3 attempts: 0->1, 1->2)
+        # Should have made 3 total attempts (0, 1, 2) with 2 sleeps between them
         assert len(sleep_calls) == 2
 
     @respx.mock

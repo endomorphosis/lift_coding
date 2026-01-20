@@ -220,15 +220,13 @@ class LiveGitHubProvider(GitHubProviderInterface):
     Falls back to fixture behavior if no token is available.
     """
 
-    # Retry policy configuration
-    _max_retries = 3
-    _base_delay = 0.5  # seconds
-
-    def __init__(self, token_provider):
+    def __init__(self, token_provider, max_retries: int = 3, base_delay: float = 0.5):
         """Initialize with a token provider.
 
         Args:
             token_provider: TokenProvider instance for authentication
+            max_retries: Maximum number of retries for transient errors (default: 3)
+            base_delay: Base delay in seconds for exponential backoff (default: 0.5)
         """
         from handsfree.github.auth import TokenProvider
 
@@ -240,6 +238,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         self._token_provider = token_provider
         self._fallback_provider = GitHubProvider()  # For fixture fallback
+        self._max_retries = max_retries
+        self._base_delay = base_delay
 
     def _get_headers(self) -> dict[str, str]:
         """Get HTTP headers for GitHub API requests.
@@ -350,6 +350,10 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
             logger.debug("Making GitHub API request: %s", url)
 
+            # Use instance-level retry policy configuration
+            max_retries = self._max_retries
+            base_delay = self._base_delay
+
             # Create client once and reuse for all retry attempts
             with httpx.Client(timeout=10.0) as client:
                 for attempt in range(self._max_retries):
@@ -357,6 +361,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
                     # Check for rate limiting using helper method
                     if self._is_rate_limited(response):
+                        # Use helper method for consistent message formatting
                         retry_msg = self._get_rate_limit_reset_message(response)
                         
                         # SECURITY: Log without token
@@ -371,6 +376,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
                         )
                     
                     # Check for other 403 errors (not rate limits) - don't retry
+                    # Check for non-rate-limit 403 (permission/auth error) - don't retry
                     if response.status_code == 403:
                         logger.error("GitHub API access forbidden: 403 Forbidden")
                         raise RuntimeError(
@@ -388,6 +394,9 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
                         # Exponential backoff with jitter up to 50% of the base delay
                         base_delay_no_jitter = self._base_delay * (2 ** attempt)
+                    if response.status_code in (502, 503, 504) and attempt < max_retries - 1:
+                        # Exponential backoff with proportional jitter
+                        base_delay_no_jitter = base_delay * (2 ** attempt)
                         delay = base_delay_no_jitter + random.uniform(0, base_delay_no_jitter * 0.5)
                         logger.warning(
                             "GitHub API transient error %d on attempt %d/%d. "
