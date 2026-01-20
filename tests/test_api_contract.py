@@ -551,3 +551,68 @@ def test_next_without_list() -> None:
 
     assert data["status"] == "ok"
     assert "no list" in data["spoken_text"].lower()
+
+
+def test_list_agent_tasks_contract(reset_db) -> None:
+    """Test GET /v1/agents/tasks matches OpenAPI contract."""
+    response = client.get("/v1/agents/tasks")
+
+    assert response.status_code == 200
+    data = response.json()
+
+    # Validate response structure per OpenAPI spec
+    assert "tasks" in data
+    assert "pagination" in data
+    assert isinstance(data["tasks"], list)
+    assert isinstance(data["pagination"], dict)
+
+    # Validate pagination structure
+    pagination = data["pagination"]
+    assert "limit" in pagination
+    assert "offset" in pagination
+    assert "has_more" in pagination
+    assert isinstance(pagination["limit"], int)
+    assert isinstance(pagination["offset"], int)
+    assert isinstance(pagination["has_more"], bool)
+
+    # If there are tasks, validate task structure
+    if data["tasks"]:
+        for task in data["tasks"]:
+            assert "id" in task
+            assert "state" in task
+            assert "description" in task
+            assert "created_at" in task
+            assert "updated_at" in task
+            assert isinstance(task["id"], str)
+            assert task["state"] in ["created", "running", "needs_input", "completed", "failed"]
+            assert isinstance(task["description"], str)
+            # pr_url is optional
+            if "pr_url" in task:
+                assert isinstance(task["pr_url"], str)
+
+
+def test_list_agent_tasks_with_filters_contract(reset_db) -> None:
+    """Test GET /v1/agents/tasks with filters matches OpenAPI contract."""
+    # Test with status filter
+    response = client.get("/v1/agents/tasks?status=created")
+    assert response.status_code == 200
+    data = response.json()
+    assert "tasks" in data
+    assert "pagination" in data
+
+    # Test with pagination
+    response = client.get("/v1/agents/tasks?limit=10&offset=0")
+    assert response.status_code == 200
+    data = response.json()
+    assert "tasks" in data
+    assert data["pagination"]["limit"] == 10
+    assert data["pagination"]["offset"] == 0
+
+    # Test with all filters combined
+    response = client.get("/v1/agents/tasks?status=running&limit=5&offset=2")
+    assert response.status_code == 200
+    data = response.json()
+    assert "tasks" in data
+    assert data["pagination"]["limit"] == 5
+    assert data["pagination"]["offset"] == 2
+
