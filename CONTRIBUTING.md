@@ -427,4 +427,7 @@ Report violations to the project maintainers via GitHub Issues or email.
 
 ---
 
+**Contributing Guide Version**: 1.0  
+**Last Updated**: 2026-01-20
+
 Thank you for contributing! 🚀

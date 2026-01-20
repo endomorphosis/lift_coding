@@ -784,4 +784,7 @@ For more troubleshooting, see:
 
 ---
 
+**Getting Started Guide Version**: 1.0  
+**Last Updated**: 2026-01-20
+
 **Ready to build hands-free development experiences? Let's go! 🚀**
