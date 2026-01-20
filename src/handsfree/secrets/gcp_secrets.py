@@ -95,8 +95,8 @@ class GCPSecretManager(SecretManager):
         Returns:
             Secret name with prefix (e.g., "handsfree-github-token-user-123")
         """
-        # GCP secret names must match ^[a-zA-Z0-9_-]+$
-        # For consistency, convert underscores to hyphens and replace other invalid characters
+        # GCP secret names can contain [a-zA-Z0-9_-]. For consistency, we normalize
+        # underscores and all other non-alphanumeric characters to hyphens.
         normalized = re.sub(r'[^a-zA-Z0-9-]', '-', key).lower()
         # Remove consecutive hyphens
         normalized = re.sub(r'-+', '-', normalized)
@@ -250,9 +250,6 @@ class GCPSecretManager(SecretManager):
             logger.debug("Stored secret with key: %s", key)
             return f"gcp://{secret_name}"
 
-        except (AlreadyExists, NotFound, ValueError):
-            # These are already handled above
-            raise
         except GoogleAPIError:
             # Don't wrap GoogleAPIError in another GoogleAPIError
             raise
@@ -387,9 +384,6 @@ class GCPSecretManager(SecretManager):
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return False
-        except NotFound:
-            # This is handled in the method body
-            raise
         except GoogleAPIError:
             # Don't wrap GoogleAPIError in another GoogleAPIError
             raise
