@@ -17,12 +17,15 @@ import {
   unregisterSubscriptionWithBackend,
   listSubscriptions,
 } from '../push/pushClient';
+import {
+  getAutoSpeakEnabled,
+  setAutoSpeakEnabled,
+} from '../utils/notificationSettings';
 
 const STORAGE_KEYS = {
   USER_ID: '@handsfree_user_id',
   BASE_URL: '@handsfree_base_url',
   USE_CUSTOM_URL: '@handsfree_use_custom_url',
-  AUTO_SPEAK_NOTIFICATIONS: '@handsfree_auto_speak_notifications',
 };
 
 export default function SettingsScreen() {
@@ -46,12 +49,12 @@ export default function SettingsScreen() {
       const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
-      const savedAutoSpeak = await AsyncStorage.getItem(STORAGE_KEYS.AUTO_SPEAK_NOTIFICATIONS);
+      const savedAutoSpeak = await getAutoSpeakEnabled();
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
-      if (savedAutoSpeak) setAutoSpeakNotifications(savedAutoSpeak === 'true');
+      setAutoSpeakNotifications(savedAutoSpeak);
       
       // Load push subscriptions
       await loadPushStatus();
@@ -135,7 +138,7 @@ export default function SettingsScreen() {
   const handleAutoSpeakToggle = async (value) => {
     setAutoSpeakNotifications(value);
     try {
-      await AsyncStorage.setItem(STORAGE_KEYS.AUTO_SPEAK_NOTIFICATIONS, value.toString());
+      await setAutoSpeakEnabled(value);
     } catch (error) {
       console.error('Failed to save auto-speak setting:', error);
       Alert.alert('Error', 'Failed to save auto-speak setting');
