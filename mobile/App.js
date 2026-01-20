@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
+import { setupNotificationListeners } from './src/push';
 
 import StatusScreen from './src/screens/StatusScreen';
 import CommandScreen from './src/screens/CommandScreen';
@@ -12,6 +13,17 @@ import GlassesDiagnosticsScreen from './src/screens/GlassesDiagnosticsScreen';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  useEffect(() => {
+    // Set up notification listeners when app starts
+    console.log('Setting up notification listeners');
+    const cleanup = setupNotificationListeners((notification) => {
+      console.log('Notification received in App:', notification);
+    });
+
+    // Clean up listeners when app unmounts
+    return cleanup;
+  }, []);
+
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
