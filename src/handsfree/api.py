@@ -11,7 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, Header, HTTPException, Request, status
+from fastapi import FastAPI, Header, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
@@ -4737,6 +4737,113 @@ async def get_notification_detail(
         )
 
     return JSONResponse(content=notification.to_dict())
+
+
+@app.get("/v1/agents/tasks")
+async def list_agent_tasks(
+    user_id: CurrentUser,
+    task_status: str | None = Query(None, alias="status"),
+    limit: int = 100,
+    offset: int = 0,
+) -> JSONResponse:
+    """List agent tasks for the authenticated user.
+
+    Returns a list of agent tasks scoped to the current user, with optional filtering
+    and pagination support.
+
+    Args:
+        user_id: User ID extracted from authentication.
+        task_status: Optional filter by task status/state (e.g., "created", "running", "completed", "failed").
+        limit: Maximum number of tasks to return (default: 100, max: 100).
+        offset: Number of tasks to skip for pagination (default: 0).
+
+    Returns:
+        200 OK with list of tasks.
+
+    Response format:
+        {
+            "tasks": [
+                {
+                    "id": "task-uuid",
+                    "state": "running",
+                    "description": "instruction text",
+                    "created_at": "2024-01-01T00:00:00Z",
+                    "updated_at": "2024-01-01T00:00:00Z",
+                    "pr_url": "https://github.com/owner/repo/pull/123" (optional)
+                }
+            ],
+            "pagination": {
+                "limit": 100,
+                "offset": 0,
+                "has_more": false
+            }
+        }
+    """
+    # Validate limit
+    if limit < 1 or limit > 100:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "limit must be between 1 and 100",
+            },
+        )
+
+    # Validate offset
+    if offset < 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "offset must be non-negative",
+            },
+        )
+
+    db = get_db()
+    from handsfree.db.agent_tasks import get_agent_tasks
+
+    # Query tasks with filters, fetch one extra to check if there are more
+    tasks = get_agent_tasks(
+        conn=db,
+        user_id=user_id,
+        state=task_status,
+        limit=limit + 1,
+        offset=offset,
+    )
+
+    # Check if there are more results
+    has_more = len(tasks) > limit
+    if has_more:
+        tasks = tasks[:limit]
+
+    # Format response
+    task_list = []
+    for task in tasks:
+        task_data = {
+            "id": task.id,
+            "state": task.state,
+            "description": task.instruction or "",
+            "created_at": task.created_at.isoformat() if task.created_at else None,
+            "updated_at": task.updated_at.isoformat() if task.updated_at else None,
+        }
+
+        # Add pr_url if available in trace
+        if task.trace and isinstance(task.trace, dict) and "pr_url" in task.trace:
+            task_data["pr_url"] = task.trace["pr_url"]
+
+        task_list.append(task_data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "tasks": task_list,
+            "pagination": {
+                "limit": limit,
+                "offset": offset,
+                "has_more": has_more,
+            },
+        },
+    )
 
 
 @app.post("/v1/agents/tasks/{task_id}/start")
