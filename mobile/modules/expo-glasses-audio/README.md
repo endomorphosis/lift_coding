@@ -164,8 +164,8 @@ The iOS implementation provides audio route monitoring using AVAudioSession with
     isBluetoothConnected: boolean;
   }
   ```
-- No Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) as iOS uses a different audio architecture
-- No `audioMode` field - iOS handles audio sessions differently
+- No Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) - iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
+- No `audioMode` field - iOS uses audio session categories (e.g., playAndRecord, record) instead of Android's audio modes
 - Recording and playback methods are iOS-specific extensions
 
 ## Permissions
