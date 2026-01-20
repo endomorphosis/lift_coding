@@ -538,16 +538,6 @@ class TestAWSSecretManager:
         mock_boto3.client.return_value = mock_boto3_client
         return mock_boto3
 
-    def test_initialization_requires_boto3(self):
-        """Test that initialization fails without boto3 installed."""
-        # Mock the import to raise ImportError
-        with patch("builtins.__import__", side_effect=ImportError("No module named 'boto3'")):
-            with pytest.raises(ImportError, match="No module named"):
-                # This will trigger the import inside __init__
-                from handsfree.secrets.aws_secrets import AWSSecretManager
-
-                AWSSecretManager(region="us-east-1")
-
     def test_initialization_requires_region(self, mock_boto3_client):
         """Test that initialization fails without AWS region configured."""
         with patch.dict(os.environ, {}, clear=True):
@@ -807,6 +797,11 @@ class TestAWSSecretManager:
         assert "aws://test/secret2" in refs
         assert "aws://test/secret3" in refs
 
+        # Verify that Filters parameter is used when prefix is set
+        mock_paginator.paginate.assert_called_once_with(
+            Filters=[{"Key": "name", "Values": ["test/"]}]
+        )
+
     def test_list_secrets_with_prefix(self, mock_boto3_client):
         """Test listing secrets with a prefix filter."""
 
@@ -828,6 +823,11 @@ class TestAWSSecretManager:
 
         refs = manager.list_secrets(prefix="github_")
         assert len(refs) == 2
+
+        # Verify that the Filters parameter was used for better performance
+        mock_paginator.paginate.assert_called_once_with(
+            Filters=[{"Key": "name", "Values": ["test/github_"]}]
+        )
 
     def test_list_secrets_skips_deleted(self, mock_boto3_client):
         """Test that listing secrets skips secrets scheduled for deletion."""

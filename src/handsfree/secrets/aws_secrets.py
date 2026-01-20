@@ -286,7 +286,6 @@ class AWSSecretManager(SecretManager):
                 return False
             logger.error("Failed to delete secret: %s", e)
             raise Exception(f"Failed to delete secret: {e}") from e
-            raise Exception(f"Failed to delete secret: {e}") from e
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return False
@@ -388,13 +387,19 @@ class AWSSecretManager(SecretManager):
             # Use paginator to handle large numbers of secrets
             paginator = self.client.get_paginator("list_secrets")
 
-            # List all secrets (AWS doesn't support prefix filtering directly)
-            # We filter in memory after retrieving all secrets
-            for page in paginator.paginate():
+            # Use AWS Filters parameter for better performance when prefix is specified
+            paginate_kwargs = {}
+            if search_prefix:
+                paginate_kwargs["Filters"] = [
+                    {"Key": "name", "Values": [search_prefix]}
+                ]
+
+            for page in paginator.paginate(**paginate_kwargs):
                 for secret in page.get("SecretList", []):
                     secret_name = secret["Name"]
 
-                    # Filter by prefix if specified
+                    # AWS Filters use "begins-with" comparison, so we still need
+                    # to verify the exact prefix match for edge cases
                     if search_prefix and not secret_name.startswith(search_prefix):
                         continue
 
