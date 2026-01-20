@@ -20,6 +20,8 @@ import {
 import {
   getAutoSpeakEnabled,
   setAutoSpeakEnabled,
+  getPushToken,
+  setPushToken as savePushToken,
 } from '../utils/notificationSettings';
 
 const STORAGE_KEYS = {
@@ -50,11 +52,13 @@ export default function SettingsScreen() {
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
       const savedAutoSpeak = await getAutoSpeakEnabled();
+      const savedPushToken = await getPushToken();
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
       setAutoSpeakNotifications(savedAutoSpeak);
+      if (savedPushToken) setPushToken(savedPushToken);
       
       // Load push subscriptions
       await loadPushStatus();
@@ -71,6 +75,14 @@ export default function SettingsScreen() {
       setSubscriptions(subs);
     } catch (error) {
       console.error('Failed to load subscriptions:', error);
+      Alert.alert(
+        'Connection Error',
+        'Unable to load push notification subscriptions. Please check your network connection and try again.',
+        [
+          { text: 'OK' },
+          { text: 'Retry', onPress: () => loadPushStatus() }
+        ]
+      );
     }
   };
 
@@ -80,6 +92,7 @@ export default function SettingsScreen() {
       const token = await registerForPushAsync();
       if (token) {
         setPushToken(token);
+        await savePushToken(token);
         Alert.alert('Success', 'Push permission granted and token obtained!');
       } else {
         Alert.alert('Error', 'Failed to get push token. Make sure you are on a physical device.');
