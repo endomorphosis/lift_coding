@@ -15,10 +15,73 @@ import * as FileSystem from 'expo-file-system';
 import { AppState } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 
 // Configuration constants
 const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
 const INTER_MESSAGE_DELAY_MS = 500; // Delay between processing messages to prevent audio overlap
+const NATIVE_PLAYBACK_TIMEOUT_MS = 45000;
+
+function isNativeGlassesPlaybackAvailable() {
+  try {
+    return (
+      ExpoGlassesAudio &&
+      typeof ExpoGlassesAudio.playAudio === 'function' &&
+      typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function'
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function playViaNativeGlasses(fileUri) {
+  return await new Promise(async (resolve, reject) => {
+    let timeoutId = null;
+    let subscription = null;
+    let sawStart = false;
+
+    const cleanup = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+      try {
+        subscription?.remove?.();
+      } catch {
+        // ignore
+      }
+      subscription = null;
+    };
+
+    try {
+      subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+        if (!event || typeof event !== 'object') return;
+        if (event.error) {
+          cleanup();
+          reject(new Error(event.error));
+          return;
+        }
+        if (event.isPlaying === true) {
+          sawStart = true;
+        }
+        if (event.isPlaying === false && sawStart) {
+          cleanup();
+          resolve();
+        }
+      });
+
+      timeoutId = setTimeout(() => {
+        cleanup();
+        resolve(); // Timeout fallback: avoid blocking the queue forever
+      }, NATIVE_PLAYBACK_TIMEOUT_MS);
+
+      await ExpoGlassesAudio.playAudio(fileUri);
+    } catch (error) {
+      cleanup();
+      reject(error);
+    }
+  });
+}
 
 // Notification queue for sequential TTS playback
 let notificationQueue = [];
@@ -239,13 +302,14 @@ export async function speakNotification(message) {
     debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
-    const audioBlob = await fetchTTS(message);
+    const ttsFormat = 'wav';
+    const audioBlob = await fetchTTS(message, { format: ttsFormat });
     
     // Convert blob to base64
     const base64Audio = await blobToBase64(audioBlob);
     
     // Save to temporary file using expo-file-system
-    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.mp3`;
+    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${ttsFormat}`;
     tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
     
     await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
@@ -254,35 +318,39 @@ export async function speakNotification(message) {
 
     console.log('TTS audio saved to:', tempFileUri);
 
-    // Configure audio session for playback
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      playsInSilentModeIOS: true,
-      staysActiveInBackground: true,
-      shouldDuckAndroid: true,
-    });
+    if (isNativeGlassesPlaybackAvailable()) {
+      // Prefer native playback so audio routes through glasses.
+      await playViaNativeGlasses(tempFileUri);
+      await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+      tempFileUri = null;
+    } else {
+      // Fallback to expo-av playback (DEV / non-native builds)
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: true,
+        shouldDuckAndroid: true,
+      });
 
-    // Play the audio
-    const soundObject = await Audio.Sound.createAsync(
-      { uri: tempFileUri },
-      { shouldPlay: true }
-    );
-    sound = soundObject.sound;
+      const soundObject = await Audio.Sound.createAsync(
+        { uri: tempFileUri },
+        { shouldPlay: true }
+      );
+      sound = soundObject.sound;
 
-    // Clean up after playback completes
-    sound.setOnPlaybackStatusUpdate(async (status) => {
-      if (status.didJustFinish || status.error) {
-        try {
-          await sound.unloadAsync();
-          // Delete the temporary file
-          if (tempFileUri) {
-            await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish || status.error) {
+          try {
+            await sound.unloadAsync();
+            if (tempFileUri) {
+              await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+            }
+          } catch (cleanupError) {
+            console.error('Cleanup error:', cleanupError);
           }
-        } catch (cleanupError) {
-          console.error('Cleanup error:', cleanupError);
         }
-      }
-    });
+      });
+    }
 
     // Clear error state on success
     debugState.lastPlaybackError = null;
