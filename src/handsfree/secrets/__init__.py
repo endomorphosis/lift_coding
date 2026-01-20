@@ -6,6 +6,7 @@ secrets (like GitHub tokens) from various secret management backends.
 
 from .env_secrets import EnvSecretManager
 from .factory import get_default_secret_manager, get_secret_manager, reset_secret_manager
+from .gcp_secrets import GCPSecretManager
 from .interface import SecretManager
 from .vault_secrets import VaultSecretManager
 
@@ -20,6 +21,7 @@ __all__ = [
     "EnvSecretManager",
     "VaultSecretManager",
     "AWSSecretManager",
+    "GCPSecretManager",
     "get_secret_manager",
     "get_default_secret_manager",
     "reset_secret_manager",

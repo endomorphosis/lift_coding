@@ -188,9 +188,10 @@ Set environment variables before starting the server:
 
 ```bash
 export GITHUB_TOKEN=ghp_YOUR_PERSONAL_ACCESS_TOKEN_HERE
-export GITHUB_LIVE_MODE=true
 make dev
 ```
+
+**Note:** Setting `GITHUB_TOKEN` alone is sufficient to enable live mode with the current authentication implementation (`get_token_provider()`). The `GITHUB_LIVE_MODE` environment variable is only used by legacy authentication providers (`EnvironmentTokenProvider`) and is not required for standard usage.
 
 #### Get a GitHub Token
 
@@ -249,9 +250,10 @@ When multiple authentication methods are configured, the system uses this priori
 - **`GITHUB_APP_ID`**: Your GitHub App ID (numeric)
 - **`GITHUB_APP_PRIVATE_KEY_PEM`**: Your GitHub App private key in PEM format (supports escaped newlines)
 - **`GITHUB_INSTALLATION_ID`**: The installation ID for your GitHub App
-- **`GITHUB_TOKEN`**: Your GitHub personal access token (for simple auth)
-- **`GITHUB_LIVE_MODE`**: Set to `true`, `1`, or `yes` to enable live mode with personal tokens
-- When not set or disabled, the system uses fixture data (default behavior)
+- **`GITHUB_TOKEN`**: Your GitHub personal access token (for simple auth) - setting this alone enables live mode
+- **`GITHUB_LIVE_MODE`**: Optional, only used by legacy providers (`EnvironmentTokenProvider`); set to `true`, `1`, or `yes` to enable live mode with those providers
+- **`HANDS_FREE_GITHUB_MODE`**: Set to `fixtures` to force fixture mode even when tokens are configured
+- When no authentication is configured, the system uses fixture data (default behavior)
 
 ### User Identity in Live Mode
 
@@ -372,9 +374,17 @@ make lint
 ## Current Limitations (by design)
 
 - Live GitHub mode uses a single `GITHUB_TOKEN` for all users (per-user tokens in future PRs)
-- Real GitHub API calls are planned but not yet implemented (falls back to fixtures)
+- By default, GitHub data may come from fixtures unless live mode is enabled/configured
 - GitHub App installation UI and OAuth redirects are out of scope for now
 - Audio input returns an error - transcription coming in future PRs
+
+### GitHub fixtures vs live mode
+
+The dev stack supports both fixture mode (safe, deterministic) and live GitHub API calls.
+
+- **Fixture mode** (default when no token is configured): the GitHub provider falls back to fixture data.
+- **Live mode**: provide `GITHUB_TOKEN` or GitHub App credentials to enable real GitHub API calls.
+- **Force fixtures**: set `HANDS_FREE_GITHUB_MODE=fixtures` to force fixture mode even if tokens are configured.
 
 ## OpenAPI Documentation
 

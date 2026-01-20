@@ -19,8 +19,8 @@ def get_secret_manager() -> SecretManager:
     The secret manager type is determined by the SECRET_MANAGER_TYPE environment variable:
     - "env": EnvSecretManager (default, for development)
     - "aws": AWS Secrets Manager (future implementation)
-    - "vault": HashiCorp Vault (future implementation)
-    - "gcp": Google Secret Manager (future implementation)
+    - "vault": HashiCorp Vault (production)
+    - "gcp": Google Secret Manager (production)
 
     Environment Variables:
         SECRET_MANAGER_TYPE: Type of secret manager to use (default: "env")
@@ -47,10 +47,10 @@ def get_secret_manager() -> SecretManager:
         logger.info("Using VaultSecretManager (production mode)")
         return VaultSecretManager()
     elif manager_type == "gcp":
-        # Future implementation
-        # from .gcp_secrets import GCPSecretManager
-        # return GCPSecretManager()
-        raise NotImplementedError("Google Secret Manager support coming soon")
+        from .gcp_secrets import GCPSecretManager
+
+        logger.info("Using GCPSecretManager (production mode)")
+        return GCPSecretManager()
     else:
         raise ValueError(f"Unsupported secret manager type: {manager_type}")
 

@@ -248,28 +248,49 @@ jobs:
           token: ${{ secrets.AGENT_RUNNER_TOKEN }}
           path: target-repo
       
-      - name: Process task (example - customize this step)
+      - name: Process task (customize this step)
         working-directory: target-repo
         run: |
-          # This is a placeholder - replace with your actual agent logic
-          # Examples:
-          # - Run an LLM to generate code changes
-          # - Execute a script that makes automated changes
-          # - Call an external API or service
+          # IMPORTANT: This is an example workflow step.
+          # For a complete implementation, see agent-runner/runner.py in the repository.
+          #
+          # This step should:
+          # - Apply patches from fenced diff/patch blocks (see apply_instruction.py)
+          # - Generate code changes (using LLM or other tools)
+          # - Create trace files with task metadata
+          # - Run tests and validation
           
           echo "Processing instruction: ${{ steps.metadata.outputs.instruction }}"
           
-          # Example: Create a simple change
+          # Example: Create a simple trace file
           git config user.name "Agent Runner Bot"
           git config user.email "agent-runner@example.com"
           
-          # Make your changes here (this is just an example)
-          echo "# Agent Task Output" > AGENT_OUTPUT.md
-          echo "" >> AGENT_OUTPUT.md
-          echo "Task: ${{ steps.metadata.outputs.instruction }}" >> AGENT_OUTPUT.md
-          echo "Processed at: $(date)" >> AGENT_OUTPUT.md
+          # Create agent-tasks directory and trace file
+          mkdir -p agent-tasks
+          TASK_ID="${{ steps.metadata.outputs.task_id }}"
+          if [ -z "$TASK_ID" ]; then
+            echo "Error: TASK_ID is empty; metadata parsing may have failed."
+            exit 1
+          fi
+          TASK_PREFIX="${TASK_ID:0:8}"
           
-          git add AGENT_OUTPUT.md
+          cat > "agent-tasks/${TASK_PREFIX}.md" << EOF
+          # Agent Task Trace: ${TASK_PREFIX}
+          
+          ## Task Metadata
+          - **Task ID**: ${TASK_ID}
+          - **Issue Number**: #${{ github.event.issue.number }}
+          - **Processed At**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          ## Instruction
+          ${{ steps.metadata.outputs.instruction }}
+          
+          ## Correlation Metadata
+          <!-- agent_task_metadata {"task_id": "${TASK_ID}"} -->
+          EOF
+          
+          git add agent-tasks/
           git commit -m "Process agent task from dispatch issue #${{ github.event.issue.number }}"
       
       - name: Create Pull Request
@@ -277,8 +298,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AGENT_RUNNER_TOKEN }}
         run: |
-          # Create a branch
-          BRANCH_NAME="agent-task-${{ github.event.issue.number }}"
+          # Create a branch using task_id prefix (matches runner.py behavior)
+          TASK_ID="${{ steps.metadata.outputs.task_id }}"
+          TASK_PREFIX="${TASK_ID:0:8}"
+          BRANCH_NAME="agent-task-${TASK_PREFIX}"
           git checkout -b "$BRANCH_NAME"
           git push origin "$BRANCH_NAME"
           
@@ -438,87 +461,39 @@ CMD ["python", "runner.py"]
 Create `agent-runner/requirements.txt`:
 
 ```
+# Core dependencies
 PyGithub>=2.1.1
-openai>=1.0.0
-httpx>=0.24.0
-python-dotenv>=1.0.0
+
+# Optional dependencies for extending the runner
+# Uncomment and install based on your needs:
+
+# For LLM integration (OpenAI, Anthropic, etc.)
+# openai>=1.0.0
+
+# For advanced HTTP requests
+# httpx>=0.24.0
+
+# For loading .env files
+# python-dotenv>=1.0.0
 ```
 
-Create `agent-runner/runner.py`:
+The `agent-runner/runner.py` file is provided in the repository and implements a complete workflow that:
 
-```python
-#!/usr/bin/env python3
-"""
-Custom agent runner that polls dispatch repository and processes tasks.
-"""
+1. **Polls for dispatch issues**: Monitors the dispatch repository for issues labeled `copilot-agent`
+2. **Extracts task metadata**: Parses the issue body to extract `task_id`, `instruction`, and `target_repo`
+3. **Clones the target repository**: Uses git to clone the repository into `/workspace`
+4. **Creates a branch**: Names the branch `agent-task-<task_id_prefix>` where `task_id_prefix` is the first 8 characters of the task ID
+5. **Applies deterministic patches**: If the instruction contains fenced `diff` or `patch` blocks, applies them using `apply_instruction.py` and `git apply`
+6. **Creates a trace file**: Generates `agent-tasks/<task_id_prefix>.md` with task metadata and correlation information
+7. **Commits and pushes**: Commits all changes and pushes the branch to the remote repository
+8. **Creates a pull request**: Opens a PR with:
+   - Title: `"Agent task: {issue.title}"`
+   - Body containing correlation metadata: `<!-- agent_task_metadata {"task_id": "{task_id}"} -->`
+   - Issue reference: `Fixes {dispatch_repo}#{issue_number}`
+9. **Adds processed label**: Labels the dispatch issue with `processed` to prevent reprocessing
+10. **Cleans up workspace**: Removes the cloned repository from `/workspace` after processing
 
-import json
-import logging
-import os
-import re
-import subprocess
-import time
-from datetime import datetime, timedelta
-from pathlib import Path
-
-from github import Github
-from github.GithubException import GithubException
-
-# Configure logging
-logging.basicConfig(
-    level=os.environ.get('LOG_LEVEL', 'INFO'),
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
-
-# Configuration
-GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
-DISPATCH_REPO = os.environ.get('DISPATCH_REPO', 'endomorphosis/lift_coding_dispatch')
-POLL_INTERVAL = int(os.environ.get('POLL_INTERVAL_SECONDS', '30'))
-AGENT_NAME = os.environ.get('AGENT_NAME', 'custom-agent')
-WORKSPACE_DIR = Path('/workspace')
-
-
-def extract_task_metadata(issue_body: str) -> dict:
-    """Extract task metadata from issue body."""
-    metadata = {
-        'task_id': None,
-        'instruction': None,
-        'target_repo': None,
-    }
-    
-    # Extract task_id from metadata comment
-    metadata_match = re.search(
-        r'<!-- agent_task_metadata\s+(.*?)\s*-->',
-        issue_body,
-        re.DOTALL
-    )
-    if metadata_match:
-        try:
-            meta = json.loads(metadata_match.group(1))
-            metadata['task_id'] = meta.get('task_id')
-        except json.JSONDecodeError:
-            logger.warning("Failed to parse agent_task_metadata JSON")
-    
-    # Extract instruction (look for ## Instruction section)
-    instruction_match = re.search(
-        r'## Instruction\s*\n+(.*?)(?:\n##|\Z)',
-        issue_body,
-        re.DOTALL | re.IGNORECASE
-    )
-    if instruction_match:
-        metadata['instruction'] = instruction_match.group(1).strip()
-    
-    # Extract target repository
-    repo_match = re.search(
-        r'Target Repository:\s*([^\s\n]+)',
-        issue_body
-    )
-    if repo_match:
-        metadata['target_repo'] = repo_match.group(1)
-    
-    return metadata
-
+### Deterministic Patch Mode
 
 def process_task(issue, metadata: dict) -> bool:
     """
@@ -536,12 +511,17 @@ def process_task(issue, metadata: dict) -> bool:
             f"🤖 {AGENT_NAME} started processing this task at {datetime.utcnow().isoformat()}Z"
         )
         
-        # TODO: Implement your actual task processing logic here
-        # Examples:
+        # IMPLEMENTATION NOTE: This is a placeholder for task processing logic.
+        # For a minimal working implementation that processes tasks from a local database,
+        # see the Minimal Agent Runner documentation: docs/MINIMAL_AGENT_RUNNER.md
+        #
+        # For full GitHub integration with PR creation, see the complete implementation
+        # in agent-runner/runner.py which includes:
         # - Clone the target repository
         # - Use an LLM to understand the instruction and generate code
         # - Make the requested changes
         # - Run tests to verify changes
+        # - Create a PR with correlation metadata
         
         # For this example, we'll just create a placeholder change
         target_repo = metadata.get('target_repo', DISPATCH_REPO)
@@ -585,90 +565,59 @@ def process_task(issue, metadata: dict) -> bool:
         
         return False
 
+1. Extract all fenced `diff` and `patch` blocks from the instruction
+2. Apply them sequentially using `git apply --index`
+3. Abort the task if any patch fails to apply (preventing misleading PRs)
 
-def main():
-    """Main agent runner loop."""
-    if not GITHUB_TOKEN:
-        logger.error("GITHUB_TOKEN environment variable is required")
-        return
-    
-    logger.info(f"Starting {AGENT_NAME}")
-    logger.info(f"Monitoring dispatch repository: {DISPATCH_REPO}")
-    logger.info(f"Poll interval: {POLL_INTERVAL} seconds")
-    
-    # Initialize GitHub client
-    gh = Github(GITHUB_TOKEN)
-    
-    # Track processed issues to avoid duplicate work
-    processed_issues = set()
-    
-    while True:
-        try:
-            # Get the dispatch repository
-            repo = gh.get_repo(DISPATCH_REPO)
-            
-            # Get open issues with copilot-agent label
-            issues = repo.get_issues(
-                state='open',
-                labels=['copilot-agent'],
-                sort='created',
-                direction='asc'
-            )
-            
-            for issue in issues:
-                # Skip if already processed
-                if issue.number in processed_issues:
-                    continue
-                
-                logger.info(f"Found new dispatch issue: #{issue.number} - {issue.title}")
-                
-                # Extract task metadata
-                metadata = extract_task_metadata(issue.body)
-                
-                if not metadata.get('task_id'):
-                    logger.warning(f"Issue #{issue.number} missing task_id, skipping")
-                    continue
-                
-                # Process the task
-                success = process_task(issue, metadata)
-                
-                if success:
-                    # Mark as processed
-                    processed_issues.add(issue.number)
-                    
-                    # Optional: close the issue or add a label
-                    # issue.edit(state='closed')
-                    # issue.add_to_labels('processed')
-            
-            # Clean up old processed issues from memory (keep last 1000)
-            if len(processed_issues) > 1000:
-                processed_issues = set(list(processed_issues)[-1000:])
-            
-        except GithubException as e:
-            logger.error(f"GitHub API error: {e}", exc_info=True)
-        except Exception as e:
-            logger.error(f"Unexpected error: {e}", exc_info=True)
-        
-        # Wait before next poll
-        time.sleep(POLL_INTERVAL)
+**Example instruction with patch:**
 
+````markdown
+## Instruction
 
-if __name__ == '__main__':
-    main()
+Update the README to add a new section.
+
+```diff
+diff --git a/README.md b/README.md
+index 1234567..abcdefg 100644
+--- a/README.md
++++ b/README.md
+@@ -10,0 +11,3 @@
++## New Section
++
++This is a new section added by the agent runner.
 ```
+````
+
+This deterministic mode is implemented via the `apply_instruction.py` helper script, which:
+- Parses fenced code blocks from the instruction markdown
+- Filters for `diff` and `patch` language tags
+- Creates temporary patch files
+- Applies them using `git apply --index`
+- Reports success or failure
+
+**Reference implementation**: See `agent-runner/runner.py` (function `apply_patches_from_instruction`) and `agent-runner/apply_instruction.py` for the complete implementation.
+
+### Customizing the Runner
+
+You can extend the runner to add:
+
+- **LLM-powered code generation**: Integrate OpenAI, Anthropic, or other providers to generate code changes from natural language instructions
+- **Testing and validation**: Run unit tests, linters, or build checks before creating the PR
+- **Advanced error handling**: Implement retry logic, exponential backoff, and detailed error reporting
+- **Concurrency**: Process multiple tasks in parallel using threading or async/await
+
+For customization examples and integration patterns, see `agent-runner/README.md`.
 
 ### Setup Steps for Docker Compose
 
-1. **Create the agent-runner directory**:
-   ```bash
-   mkdir -p agent-runner
-   cd agent-runner
-   ```
+1. **The agent-runner directory is already included** in the repository at `agent-runner/`:
+   - `Dockerfile` - Container image definition
+   - `requirements.txt` - Core Python dependencies (PyGithub; optional extras such as `openai`, `httpx`, and `python-dotenv` may also be listed)
+   - `runner.py` - Complete runner implementation
+   - `apply_instruction.py` - Helper script for deterministic patch mode
+   - `README.md` - Additional setup and customization information
 
-2. **Create the files**:
-   - Copy the `Dockerfile`, `requirements.txt`, and `runner.py` from above
-
-3. **Configure environment variables**:
+2. **Configure environment variables**:
    - Create `.env` file:
      ```bash
      AGENT_RUNNER_GITHUB_TOKEN=ghp_your_token_here
@@ -676,12 +625,12 @@ if __name__ == '__main__':
      LLM_API_KEY=your_llm_api_key_here
      ```
 
-4. **Build and run**:
+3. **Build and run**:
    ```bash
    docker-compose -f docker-compose.agent-runner.yml up -d
    ```
 
-5. **Monitor logs**:
+4. **Monitor logs**:
    ```bash
    docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
    ```
@@ -1076,24 +1025,51 @@ After setting up your agent runner:
       - Delete the test branch: `git push origin --delete agent-task-test-123`
       - Close the test dispatch issue
 
-2. **Customize the processing logic**:
-   - The runner now includes complete PR-creation functionality
-   - Integrate your preferred LLM provider for actual code generation
-   - Add custom validation and testing
-   - Implement error recovery strategies
+2. **Test deterministic patch mode** (optional):
+   
+   Create a dispatch issue with an embedded patch:
+   
+   ````markdown
+   ## Instruction
+   
+   Add a new section to the README.
+   
+   ```diff
+   diff --git a/README.md b/README.md
+   index 1234567..abcdefg 100644
+   --- a/README.md
+   +++ b/README.md
+   @@ -1,0 +2,3 @@
+   +## New Section
+   +
+   +This section was added by deterministic patch mode.
+   ```
+   
+   <!-- agent_task_metadata {"task_id": "patch-test-12345678"} -->
+   ````
+   
+   The runner will apply the patch using `git apply` before creating the PR.
 
-3. **Monitor and optimize**:
+3. **Customize for your needs**:
+   - The runner in `agent-runner/runner.py` provides a complete working implementation
+   - For LLM integration, see customization examples in `agent-runner/README.md`
+   - Add validation, testing, or other custom logic as needed
+
+4. **Monitor and optimize**:
    - Watch logs for errors and warnings
-   - Optimize polling intervals
-   - Tune timeouts and retries
+   - Optimize polling intervals to balance responsiveness and API rate limits
+   - Tune timeouts and retries for your workload
 
-4. **Scale up**:
+5. **Scale up** (optional):
    - Add more runner instances for concurrency
    - Implement a queue for better load distribution
    - Use auto-scaling based on dispatch issue volume
 
 ## Related Documentation
 
+- **[Agent Runner Quick Start](./AGENT_RUNNER_QUICKSTART.md)** - Get started in 5 minutes with GitHub Actions
+- **[Agent Runner README](../agent-runner/README.md)** - Implementation details and customization guide
+- **[Docker Compose Configuration](../docker-compose.agent-runner.yml)** - Full configuration reference
 - [PR-016: Agent delegation integration](../tracking/PR-016-agent-delegation-integration.md) - Details on the dispatch provider
 - [PR-022: Agent delegation polish](../tracking/PR-022-agent-delegation-polish.md) - Auto-start and webhook correlation
 - [PR-008: Agent orchestration stub](../tracking/PR-008-agent-orchestration-stub.md) - Original agent task model

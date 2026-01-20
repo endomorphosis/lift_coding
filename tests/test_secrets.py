@@ -4,9 +4,10 @@ import os
 from unittest.mock import Mock, patch
 
 import pytest
+from google.api_core.exceptions import AlreadyExists, NotFound
 from hvac.exceptions import InvalidPath, VaultError
 
-from handsfree.secrets import AWSSecretManager, EnvSecretManager, SecretManager, VaultSecretManager
+from handsfree.secrets import EnvSecretManager, GCPSecretManager, SecretManager, VaultSecretManager
 
 
 class TestEnvSecretManager:
@@ -522,368 +523,307 @@ class TestVaultSecretManager:
         )
 
 
-class TestAWSSecretManager:
-    """Tests for AWSSecretManager."""
+class TestGCPSecretManager:
+    """Tests for GCPSecretManager."""
 
-    @pytest.fixture
-    def mock_boto3_client(self):
-        """Create a mock boto3 client."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization(self, mock_client_class):
+        """Test GCPSecretManager initialization."""
         mock_client = Mock()
-        return mock_client
+        mock_client_class.return_value = mock_client
 
-    @pytest.fixture
-    def mock_boto3_module(self, mock_boto3_client):
-        """Create a mock boto3 module."""
-        mock_boto3 = Mock()
-        mock_boto3.client.return_value = mock_boto3_client
-        return mock_boto3
-
-    def test_initialization_requires_region(self, mock_boto3_client):
-        """Test that initialization fails without AWS region configured."""
-        with patch.dict(os.environ, {}, clear=True):
-            from handsfree.secrets import AWSSecretManager
-
-            with pytest.raises(ValueError, match="AWS region is required"):
-                AWSSecretManager(boto3_client=mock_boto3_client)
-
-    def test_initialization_with_region_parameter(self, mock_boto3_client):
-        """Test AWSSecretManager initialization with region parameter."""
-
-        manager = AWSSecretManager(
-            region="us-west-2", prefix="test/", boto3_client=mock_boto3_client
+        manager = GCPSecretManager(
+            project_id="test-project",
+            prefix="testprefix",
         )
 
-        assert manager.region == "us-west-2"
-        assert manager.prefix == "test/"
-        assert manager.client == mock_boto3_client
+        assert manager.project_id == "test-project"
+        assert manager.prefix == "testprefix"
+        mock_client_class.assert_called_once()
 
-    @patch.dict(os.environ, {"AWS_REGION": "us-east-1"})
-    def test_initialization_from_environment(self, mock_boto3_client):
-        """Test that AWSSecretManager can be initialized from environment variables."""
-
-        manager = AWSSecretManager(boto3_client=mock_boto3_client)
-
-        assert manager.region == "us-east-1"
-        assert manager.prefix == "handsfree/"
+    def test_initialization_missing_project_id(self):
+        """Test that initialization fails without project ID."""
+        with pytest.raises(ValueError, match="GOOGLE_CLOUD_PROJECT or GCP_PROJECT_ID"):
+            GCPSecretManager()
 
     @patch.dict(
-        os.environ, {"AWS_DEFAULT_REGION": "eu-west-1", "HANDSFREE_AWS_SECRETS_PREFIX": "myapp/"}
+        os.environ,
+        {
+            "GOOGLE_CLOUD_PROJECT": "env-project",
+            "HANDSFREE_GCP_SECRETS_PREFIX": "env-prefix",
+        },
     )
-    def test_initialization_with_custom_prefix(self, mock_boto3_client):
-        """Test initialization with custom prefix from environment."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization_from_environment(self, mock_client_class):
+        """Test that GCPSecretManager can be initialized from environment variables."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        manager = AWSSecretManager(boto3_client=mock_boto3_client)
+        manager = GCPSecretManager()
 
-        assert manager.region == "eu-west-1"
-        assert manager.prefix == "myapp/"
+        assert manager.project_id == "env-project"
+        assert manager.prefix == "env-prefix"
 
-    def test_prefix_normalization(self, mock_boto3_client):
-        """Test that prefix is normalized to end with /."""
+    @patch.dict(
+        os.environ,
+        {
+            "GCP_PROJECT_ID": "alt-project",
+        },
+    )
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization_gcp_project_id_env(self, mock_client_class):
+        """Test that GCP_PROJECT_ID environment variable works."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager()
 
-        assert manager.prefix == "test/"
+        assert manager.project_id == "alt-project"
 
-    def test_store_and_retrieve_secret(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_and_retrieve_secret(self, mock_client_class):
         """Test storing and retrieving a secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        # Mock create_secret response
-        mock_boto3_client.create_secret.return_value = {"ARN": "arn:aws:secretsmanager:..."}
+        # Mock the create secret response
+        mock_client.create_secret.return_value = Mock()
 
-        # Mock get_secret_value response
-        mock_boto3_client.get_secret_value.return_value = {
-            "SecretString": '{"value": "ghp_test_token_12345"}'
-        }
+        # Mock the add version response
+        mock_client.add_secret_version.return_value = Mock()
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        # Mock the access version response
+        mock_payload = Mock()
+        mock_payload.data = b"ghp_test_token_12345"
+        mock_response = Mock()
+        mock_response.payload = mock_payload
+        mock_client.access_secret_version.return_value = mock_response
+
+        manager = GCPSecretManager(project_id="test-project")
 
         # Store secret
         secret_value = "ghp_test_token_12345"
         reference = manager.store_secret("github_token_user_123", secret_value)
 
-        assert reference == "aws://test/github_token_user_123"
-        mock_boto3_client.create_secret.assert_called_once()
+        assert reference.startswith("gcp://")
+        assert "handsfree-github-token-user-123" in reference
+
+        # Verify create_secret was called
+        mock_client.create_secret.assert_called_once()
+        call_args = mock_client.create_secret.call_args[1]
+        assert call_args["request"]["parent"] == "projects/test-project"
+        assert call_args["request"]["secret_id"] == "handsfree-github-token-user-123"
+
+        # Verify add_secret_version was called
+        mock_client.add_secret_version.assert_called_once()
+        version_call_args = mock_client.add_secret_version.call_args[1]
+        assert version_call_args["request"]["payload"]["data"] == b"ghp_test_token_12345"
 
         # Retrieve secret
         retrieved = manager.get_secret(reference)
         assert retrieved == secret_value
-        mock_boto3_client.get_secret_value.assert_called_once_with(
-            SecretId="test/github_token_user_123"
-        )
 
-    def test_store_secret_with_metadata(self, mock_boto3_client):
-        """Test storing a secret with metadata (stored as tags)."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_secret_with_metadata(self, mock_client_class):
+        """Test storing a secret with metadata."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         secret_value = "ghp_test_token_12345"
         metadata = {"scopes": "repo,user", "expires_at": "2026-12-31"}
 
         manager.store_secret("github_token_user_123", secret_value, metadata)
 
-        # Verify the call included tags
-        call_args = mock_boto3_client.create_secret.call_args
-        assert call_args[1]["Name"] == "test/github_token_user_123"
-        assert call_args[1]["Tags"] == [
-            {"Key": "scopes", "Value": "repo,user"},
-            {"Key": "expires_at", "Value": "2026-12-31"},
-        ]
+        # Verify the call included labels
+        call_args = mock_client.create_secret.call_args[1]
+        assert "labels" in call_args["request"]["secret"]
+        labels = call_args["request"]["secret"]["labels"]
+        assert "scopes" in labels
+        assert "expires-at" in labels
 
-    def test_store_secret_updates_existing(self, mock_boto3_client):
-        """Test that storing an existing secret updates it."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_secret_already_exists(self, mock_client_class):
+        """Test storing a secret that already exists."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        # Mock ResourceExistsException
-        from botocore.exceptions import ClientError
+        # Mock that secret already exists
+        mock_client.create_secret.side_effect = AlreadyExists("secret already exists")
 
-        mock_boto3_client.create_secret.side_effect = ClientError(
-            {"Error": {"Code": "ResourceExistsException"}}, "CreateSecret"
-        )
-        mock_boto3_client.put_secret_value.return_value = {}
+        manager = GCPSecretManager(project_id="test-project")
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
-
+        # Should not raise, just add new version
         reference = manager.store_secret("existing_secret", "new_value")
 
-        assert reference == "aws://test/existing_secret"
-        mock_boto3_client.put_secret_value.assert_called_once()
+        assert reference.startswith("gcp://")
+        # Verify add_secret_version was still called
+        mock_client.add_secret_version.assert_called_once()
 
-    def test_get_nonexistent_secret(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_get_nonexistent_secret(self, mock_client_class):
         """Test retrieving a non-existent secret returns None."""
-        from botocore.exceptions import ClientError
+        mock_client = Mock()
+        mock_client.access_secret_version.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
 
-        mock_boto3_client.get_secret_value.side_effect = ClientError(
-            {"Error": {"Code": "ResourceNotFoundException"}}, "GetSecretValue"
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
-
-        result = manager.get_secret("aws://test/nonexistent_secret")
+        result = manager.get_secret("gcp://nonexistent-secret")
         assert result is None
 
-    def test_update_secret(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_secret(self, mock_client_class):
         """Test updating an existing secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        # Mock describe_secret (secret exists)
-        mock_boto3_client.describe_secret.return_value = {"Name": "test/test_secret"}
-        mock_boto3_client.put_secret_value.return_value = {}
+        # Mock that secret exists
+        mock_client.get_secret.return_value = Mock()
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         # Update the secret
-        success = manager.update_secret("aws://test/test_secret", "new_value")
+        success = manager.update_secret("gcp://test-secret", "new_value")
         assert success is True
 
-        mock_boto3_client.put_secret_value.assert_called_once()
+        # Verify add_secret_version was called with new value
+        mock_client.add_secret_version.assert_called_once()
+        call_args = mock_client.add_secret_version.call_args[1]
+        assert call_args["request"]["payload"]["data"] == b"new_value"
 
-    def test_update_nonexistent_secret(self, mock_boto3_client):
-        """Test updating a non-existent secret returns False."""
-        from botocore.exceptions import ClientError
-
-        mock_boto3_client.put_secret_value.side_effect = ClientError(
-            {"Error": {"Code": "ResourceNotFoundException"}}, "PutSecretValue"
-        )
-
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
-
-        success = manager.update_secret("aws://test/nonexistent_secret", "new_value")
-        assert success is False
-
-    def test_update_secret_with_metadata(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_secret_with_metadata(self, mock_client_class):
         """Test updating a secret with new metadata."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        mock_boto3_client.describe_secret.return_value = {"Name": "test/test_secret"}
-        mock_boto3_client.put_secret_value.return_value = {}
-        mock_boto3_client.tag_resource.return_value = {}
+        # Mock that secret exists
+        mock_client.get_secret.return_value = Mock()
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         metadata = {"updated": "true"}
-        success = manager.update_secret("aws://test/test_secret", "new_value", metadata)
+        success = manager.update_secret("gcp://test-secret", "new_value", metadata)
         assert success is True
 
-        mock_boto3_client.tag_resource.assert_called_once_with(
-            SecretId="test/test_secret", Tags=[{"Key": "updated", "Value": "true"}]
-        )
+        # Verify update_secret was called to update labels
+        mock_client.update_secret.assert_called_once()
+        call_args = mock_client.update_secret.call_args[1]
+        assert "labels" in call_args["request"]["secret"]
 
-    def test_delete_secret(self, mock_boto3_client):
-        """Test deleting a secret."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_nonexistent_secret(self, mock_client_class):
+        """Test updating a non-existent secret returns False."""
+        mock_client = Mock()
+        mock_client.get_secret.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
 
-        mock_boto3_client.delete_secret.return_value = {}
+        manager = GCPSecretManager(project_id="test-project")
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=True
-        )
-
-        # Delete the secret
-        success = manager.delete_secret("aws://test/test_secret")
-        assert success is True
-
-        mock_boto3_client.delete_secret.assert_called_once_with(
-            SecretId="test/test_secret", ForceDeleteWithoutRecovery=True
-        )
-
-    def test_delete_nonexistent_secret(self, mock_boto3_client):
-        """Test deleting a non-existent secret returns False."""
-        from botocore.exceptions import ClientError
-
-        mock_boto3_client.delete_secret.side_effect = ClientError(
-            {"Error": {"Code": "ResourceNotFoundException"}}, "DeleteSecret"
-        )
-
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=True
-        )
-
-        success = manager.delete_secret("aws://test/nonexistent_secret")
+        success = manager.update_secret("gcp://nonexistent-secret", "new_value")
         assert success is False
 
-    def test_delete_secret_with_recovery_window(self, mock_boto3_client):
-        """Test deleting a secret with recovery window (production mode)."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_delete_secret(self, mock_client_class):
+        """Test deleting a secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        mock_boto3_client.delete_secret.return_value = {}
-
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=False
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         # Delete the secret
-        success = manager.delete_secret("aws://test/test_secret")
+        success = manager.delete_secret("gcp://test-secret")
         assert success is True
 
-        # Should use recovery window instead of force delete
-        mock_boto3_client.delete_secret.assert_called_once_with(
-            SecretId="test/test_secret", RecoveryWindowInDays=30
-        )
+        # Verify delete_secret was called
+        mock_client.delete_secret.assert_called_once()
+        call_args = mock_client.delete_secret.call_args[1]
+        assert "projects/test-project/secrets/test-secret" in call_args["request"]["name"]
 
-    def test_list_secrets(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_delete_nonexistent_secret(self, mock_client_class):
+        """Test deleting a non-existent secret returns False."""
+        mock_client = Mock()
+        mock_client.delete_secret.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        success = manager.delete_secret("gcp://nonexistent-secret")
+        assert success is False
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets(self, mock_client_class):
         """Test listing all secrets."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        # Mock paginator
-        mock_paginator = Mock()
-        mock_paginator.paginate.return_value = [
-            {
-                "SecretList": [
-                    {"Name": "test/secret1"},
-                    {"Name": "test/secret2"},
-                    {"Name": "test/secret3"},
-                ]
-            }
-        ]
-        mock_boto3_client.get_paginator.return_value = mock_paginator
+        # Mock list response
+        mock_secret1 = Mock()
+        mock_secret1.name = "projects/test-project/secrets/handsfree-secret1"
+        mock_secret2 = Mock()
+        mock_secret2.name = "projects/test-project/secrets/handsfree-secret2"
+        mock_secret3 = Mock()
+        mock_secret3.name = "projects/test-project/secrets/other-secret3"
+        
+        mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
+        mock_client.list_secrets.return_value = mock_secrets
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         refs = manager.list_secrets()
-        assert len(refs) == 3
-        assert "aws://test/secret1" in refs
-        assert "aws://test/secret2" in refs
-        assert "aws://test/secret3" in refs
-        # Verify all returned secrets match the manager's prefix
-        for ref in refs:
-            assert ref.startswith("aws://test/")
+        # Should only include secrets with handsfree prefix
+        assert len(refs) == 2
+        assert "gcp://handsfree-secret1" in refs
+        assert "gcp://handsfree-secret2" in refs
+        assert "gcp://other-secret3" not in refs
 
-        # Verify that Filters parameter is used when prefix is set
-        mock_paginator.paginate.assert_called_once_with(
-            Filters=[{"Key": "name", "Values": ["test/"]}]
-        )
-
-    def test_list_secrets_with_prefix(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets_with_prefix(self, mock_client_class):
         """Test listing secrets with a prefix filter."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        # Mock paginator
-        mock_paginator = Mock()
-        mock_paginator.paginate.return_value = [
-            {
-                "SecretList": [
-                    {"Name": "test/github_token1"},
-                    {"Name": "test/github_token2"},
-                ]
-            }
-        ]
-        mock_boto3_client.get_paginator.return_value = mock_paginator
+        # Mock list response
+        mock_secret1 = Mock()
+        mock_secret1.name = "projects/test-project/secrets/handsfree-github-token-1"
+        mock_secret2 = Mock()
+        mock_secret2.name = "projects/test-project/secrets/handsfree-github-token-2"
+        mock_secret3 = Mock()
+        mock_secret3.name = "projects/test-project/secrets/handsfree-slack-token-1"
+        
+        mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
+        mock_client.list_secrets.return_value = mock_secrets
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
-        refs = manager.list_secrets(prefix="github_")
+        refs = manager.list_secrets(prefix="github_token")
         assert len(refs) == 2
-        # Verify all returned secrets match the prefix
-        for ref in refs:
-            assert ref.startswith("aws://test/github_")
+        assert all("github-token" in ref for ref in refs)
 
-        # Verify that the Filters parameter was used for better performance
-        mock_paginator.paginate.assert_called_once_with(
-            Filters=[{"Key": "name", "Values": ["test/github_"]}]
-        )
-
-    def test_list_secrets_skips_deleted(self, mock_boto3_client):
-        """Test that listing secrets skips secrets scheduled for deletion."""
-
-        # Mock paginator with one deleted secret
-        mock_paginator = Mock()
-        mock_paginator.paginate.return_value = [
-            {
-                "SecretList": [
-                    {"Name": "test/secret1"},
-                    {"Name": "test/secret2", "DeletedDate": "2026-01-20T00:00:00Z"},
-                    {"Name": "test/secret3"},
-                ]
-            }
-        ]
-        mock_boto3_client.get_paginator.return_value = mock_paginator
-
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
-
-        refs = manager.list_secrets()
-        assert len(refs) == 2
-        assert "aws://test/secret1" in refs
-        assert "aws://test/secret3" in refs
-        assert "aws://test/secret2" not in refs
-
-    def test_list_secrets_empty(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets_empty(self, mock_client_class):
         """Test listing secrets when none exist."""
+        mock_client = Mock()
+        mock_client.list_secrets.return_value = []
+        mock_client_class.return_value = mock_client
 
-        # Mock empty paginator
-        mock_paginator = Mock()
-        mock_paginator.paginate.return_value = [{"SecretList": []}]
-        mock_boto3_client.get_paginator.return_value = mock_paginator
-
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         refs = manager.list_secrets()
         assert len(refs) == 0
 
-    def test_invalid_reference_format(self, mock_boto3_client):
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_invalid_reference_format(self, mock_client_class):
         """Test handling of invalid reference format."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
-        # Missing "aws://" prefix
+        # Missing "gcp://" prefix
         result = manager.get_secret("INVALID_FORMAT")
         assert result is None
 
@@ -893,12 +833,13 @@ class TestAWSSecretManager:
         success = manager.update_secret("INVALID_FORMAT", "new_value")
         assert success is False
 
-    def test_aws_manager_implements_interface(self, mock_boto3_client):
-        """Test that AWSSecretManager implements SecretManager interface."""
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_gcp_manager_implements_interface(self, mock_client_class):
+        """Test that GCPSecretManager implements SecretManager interface."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
 
-        manager = AWSSecretManager(
-            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
-        )
+        manager = GCPSecretManager(project_id="test-project")
 
         assert isinstance(manager, SecretManager)
 
@@ -909,3 +850,16 @@ class TestAWSSecretManager:
         assert hasattr(manager, "update_secret")
         assert hasattr(manager, "list_secrets")
 
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_key_normalization(self, mock_client_class):
+        """Test that keys are normalized to GCP secret name format."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Keys with special characters should be normalized
+        reference = manager.store_secret("github.token_user/123", "token")
+
+        # Should normalize to lowercase with hyphens
+        assert "handsfree-github-token-user-123" in reference
