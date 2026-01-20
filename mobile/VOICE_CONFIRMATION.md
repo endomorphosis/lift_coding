@@ -19,7 +19,7 @@ When a command requires confirmation, a modal appears with:
 
 ### 2. Voice Recognition Flow
 1. User taps voice button
-2. App records 1.4 seconds of audio
+2. App records 1.4 seconds of audio (sufficient for single-word responses like "yes" or "no" while minimizing latency)
 3. Audio is uploaded to backend for transcription
 4. Transcript is parsed using `inferConfirmationDecision()`
 5. Action is taken based on decision:
@@ -43,7 +43,7 @@ When a command requires confirmation, a modal appears with:
 - "stop"
 - "never mind" / "nevermind"
 - "abort"
-- "don't" / "dont"
+- "don't"
 
 **Note**: Cancel keywords take priority for safety. If both "yes" and "no" appear in transcript, the system treats it as cancel.
 
@@ -98,7 +98,7 @@ Audio is recorded at HIGH_QUALITY preset (44.1kHz) and uploaded as base64 m4a.
 
 ## Privacy Considerations
 
-- Voice recording duration is limited to 1.4 seconds
+- Voice recording duration is limited to 1.4 seconds (sufficient for single-word responses while minimizing data collection)
 - Audio is deleted after transcription
 - Transcript is only stored temporarily for display
 - Users can always use manual buttons as fallback
