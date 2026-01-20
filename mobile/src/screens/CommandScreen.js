@@ -39,6 +39,10 @@ export default function CommandScreen() {
   const [showDebugPanel, setShowDebugPanel] = useState(true);
   const [autoPlayTts, setAutoPlayTts] = useState(true);
 
+  // State for repeat/next functionality
+  const [lastSpokenText, setLastSpokenText] = useState(null);
+  const [lastCommandText, setLastCommandText] = useState(null);
+
   // Confirmation modal state
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
@@ -142,6 +146,12 @@ export default function CommandScreen() {
     try {
       const data = await sendCommand(commandText);
       setResponse(data);
+      
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+        setLastCommandText(commandText);
+      }
       
       // Check if confirmation is required
       if (data.pending_action) {
@@ -249,6 +259,12 @@ export default function CommandScreen() {
       });
       setResponse(data);
       
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+        setLastCommandText(null); // Audio commands don't have text
+      }
+      
       // Check if confirmation is required
       if (data.pending_action) {
         console.log('[CommandScreen] Pending action detected (audio):', {
@@ -345,6 +361,55 @@ export default function CommandScreen() {
     if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
     if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
     return null;
+  };
+
+  const handleRepeat = async () => {
+    if (!lastSpokenText) {
+      Alert.alert('No Response', 'No previous response to repeat');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    
+    try {
+      // First, try to replay the stored TTS
+      await playTTS(lastSpokenText);
+      
+      // Optionally, we could also send a "repeat" command to the server
+      // to get updated context, but for now we just replay locally
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleNext = async () => {
+    setLoading(true);
+    setError(null);
+    setResponse(null);
+
+    try {
+      // Send canonical "next" command to server
+      const data = await sendCommand('next');
+      setResponse(data);
+      
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+        setLastCommandText('next');
+      }
+      
+      // Auto-play TTS if enabled
+      if (autoPlayTts && data.spoken_text) {
+        await playTTS(data.spoken_text);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVoiceConfirm = async () => {
@@ -586,6 +651,33 @@ export default function CommandScreen() {
           )}
         </View>
       )}
+
+      {/* Repeat/Next Quick Controls */}
+      <View style={styles.quickControlsSection}>
+        <Text style={styles.quickControlsHeader}>Quick Controls</Text>
+        <Text style={styles.quickControlsHelper}>
+          Use these buttons to navigate through responses:
+        </Text>
+        <View style={styles.quickControlsRow}>
+          <TouchableOpacity
+            style={[styles.quickControlButton, !lastSpokenText && styles.quickControlButtonDisabled]}
+            onPress={handleRepeat}
+            disabled={loading || !lastSpokenText}
+          >
+            <Text style={styles.quickControlButtonText}>🔄 Repeat</Text>
+            <Text style={styles.quickControlButtonSubtext}>Replay last response</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            style={styles.quickControlButton}
+            onPress={handleNext}
+            disabled={loading}
+          >
+            <Text style={styles.quickControlButtonText}>⏭ Next</Text>
+            <Text style={styles.quickControlButtonSubtext}>Advance to next item</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       {/* Text Command Section */}
       <View style={styles.section}>
@@ -1160,5 +1252,50 @@ const styles = StyleSheet.create({
     color: '#555',
     fontStyle: 'italic',
     textAlign: 'center',
+  },
+  // Quick Controls styles
+  quickControlsSection: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+  quickControlsHeader: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 5,
+  },
+  quickControlsHelper: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 12,
+  },
+  quickControlsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  quickControlButton: {
+    flex: 1,
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  quickControlButtonDisabled: {
+    backgroundColor: '#cccccc',
+    opacity: 0.6,
+  },
+  quickControlButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  quickControlButtonSubtext: {
+    color: 'white',
+    fontSize: 11,
+    opacity: 0.9,
   },
 });
