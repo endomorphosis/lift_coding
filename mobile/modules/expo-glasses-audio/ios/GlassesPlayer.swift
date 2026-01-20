@@ -65,6 +65,7 @@ public final class GlassesPlayer {
                         shouldResumeAfterInterruption = false
                     }
                 } catch {
+                    shouldResumeAfterInterruption = false
                     if #available(iOS 15.0, *) {
                         print("[GlassesPlayer] Failed to re-activate session after interruption: \(error)")
                     }
