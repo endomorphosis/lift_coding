@@ -53,6 +53,13 @@ class GlassesPlayer {
     fun playPcm16Mono(samples: ShortArray, sampleRate: Int = 16000, onComplete: (() -> Unit)? = null) {
         stop()
         
+        // Guard against empty sample arrays
+        if (samples.isEmpty()) {
+            Log.w(TAG, "Cannot play empty sample array")
+            onComplete?.invoke()
+            return
+        }
+        
         this.onPlaybackComplete = onComplete
 
         val bufferBytes = samples.size * 2
@@ -184,13 +191,18 @@ class GlassesPlayer {
             
             val pcmBytes = ByteArray(wavInfo.dataSize)
             val totalRead = inputStream.read(pcmBytes)
+            
+            if (totalRead == -1) {
+                throw IllegalArgumentException("No PCM data could be read from WAV file")
+            }
             if (totalRead < wavInfo.dataSize) {
                 Log.w(TAG, "Expected ${wavInfo.dataSize} bytes but read $totalRead bytes")
             }
             
-            // Convert bytes to shorts (PCM 16-bit)
-            val pcmShorts = ShortArray(pcmBytes.size / 2)
-            val buffer = ByteBuffer.wrap(pcmBytes)
+            // Convert bytes to shorts (PCM 16-bit), based on actual bytes read
+            val bytesToConvert = totalRead.coerceAtLeast(0)
+            val pcmShorts = ShortArray(bytesToConvert / 2)
+            val buffer = ByteBuffer.wrap(pcmBytes, 0, bytesToConvert)
             buffer.order(ByteOrder.LITTLE_ENDIAN)
             
             for (i in pcmShorts.indices) {

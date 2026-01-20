@@ -14,6 +14,7 @@ class GlassesRecorder {
     companion object {
         private const val TAG = "GlassesRecorder"
         private const val WAV_HEADER_SIZE = 44
+        private const val RECORDING_THREAD_JOIN_TIMEOUT_MS = 3000L
     }
     
     private var recorder: AudioRecord? = null
@@ -100,7 +101,7 @@ class GlassesRecorder {
         
         // Then signal the thread to finish
         isRecording = false
-        recordingThread?.join(3000)  // Wait up to 3 seconds for thread to finish writing
+        recordingThread?.join(RECORDING_THREAD_JOIN_TIMEOUT_MS)
         recordingThread = null
         
         recorder?.release()
