@@ -5,6 +5,7 @@ requires-python = ">=3.11"
 
 [project.optional-dependencies]
 openai = ["openai>=1.0.0"]
+aws = ["boto3>=1.26.0"]
 
 [build-system]
 requires = ["setuptools>=45", "wheel"]
