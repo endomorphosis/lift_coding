@@ -356,7 +356,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
             # Create client once and reuse for all retry attempts
             with httpx.Client(timeout=10.0) as client:
-                for attempt in range(max_retries):
+                for attempt in range(self._max_retries):
                     response = client.get(url, headers=headers, params=params or {})
 
                     # Check for rate limiting using helper method
@@ -375,6 +375,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
                             f"GitHub API rate limit exceeded. Try again after {retry_msg}"
                         )
                     
+                    # Check for other 403 errors (not rate limits) - don't retry
                     # Check for non-rate-limit 403 (permission/auth error) - don't retry
                     if response.status_code == 403:
                         logger.error("GitHub API access forbidden: 403 Forbidden")
@@ -390,6 +391,9 @@ class LiveGitHubProvider(GitHubProviderInterface):
                         )
 
                     # Retry transient server errors (502, 503, 504)
+                    if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
+                        # Exponential backoff with jitter up to 50% of the base delay
+                        base_delay_no_jitter = self._base_delay * (2 ** attempt)
                     if response.status_code in (502, 503, 504) and attempt < max_retries - 1:
                         # Exponential backoff with proportional jitter
                         base_delay_no_jitter = base_delay * (2 ** attempt)
@@ -399,7 +403,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
                             "Retrying in %.2f seconds...",
                             response.status_code,
                             attempt + 1,
-                            max_retries,
+                            self._max_retries,
                             delay
                         )
                         time.sleep(delay)
