@@ -16,7 +16,7 @@ import java.util.*
 
 class ExpoGlassesAudioModule : Module() {
   companion object {
-    private const val PLAYBACK_TIMEOUT_MS = 300000L // 5 minutes timeout for playback
+    private const val PLAYBACK_TIMEOUT_MS = 5 * 60 * 1000L // 5 minutes timeout for playback
   }
   
   private lateinit var context: Context
