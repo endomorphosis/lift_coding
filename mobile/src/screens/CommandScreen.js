@@ -41,7 +41,6 @@ export default function CommandScreen() {
 
   // State for repeat/next functionality
   const [lastSpokenText, setLastSpokenText] = useState(null);
-  const [lastCommandText, setLastCommandText] = useState(null);
 
   // Confirmation modal state
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -150,7 +149,6 @@ export default function CommandScreen() {
       // Store for repeat functionality
       if (data.spoken_text) {
         setLastSpokenText(data.spoken_text);
-        setLastCommandText(commandText);
       }
       
       // Check if confirmation is required
@@ -262,7 +260,6 @@ export default function CommandScreen() {
       // Store for repeat functionality
       if (data.spoken_text) {
         setLastSpokenText(data.spoken_text);
-        setLastCommandText('audio command'); // Audio commands don't have text
       }
       
       // Check if confirmation is required
@@ -395,7 +392,6 @@ export default function CommandScreen() {
       // Store for repeat functionality
       if (data.spoken_text) {
         setLastSpokenText(data.spoken_text);
-        setLastCommandText('next');
       }
       
       // Auto-play TTS if enabled
@@ -657,7 +653,7 @@ export default function CommandScreen() {
         </Text>
         <View style={styles.quickControlsRow}>
           <TouchableOpacity
-            style={[styles.quickControlButton, !lastSpokenText && styles.quickControlButtonDisabled]}
+            style={[styles.quickControlButton, (loading || !lastSpokenText) && styles.quickControlButtonDisabled]}
             onPress={handleRepeat}
             disabled={loading || !lastSpokenText}
             accessibilityLabel="Repeat last response"
@@ -669,7 +665,7 @@ export default function CommandScreen() {
           </TouchableOpacity>
           
           <TouchableOpacity
-            style={styles.quickControlButton}
+            style={[styles.quickControlButton, loading && styles.quickControlButtonDisabled]}
             onPress={handleNext}
             disabled={loading}
             accessibilityLabel="Next item"
@@ -1288,7 +1284,6 @@ const styles = StyleSheet.create({
   },
   quickControlButtonDisabled: {
     backgroundColor: '#cccccc',
-    opacity: 0.6,
   },
   quickControlButtonText: {
     color: 'white',
