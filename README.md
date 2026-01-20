@@ -1,12 +1,32 @@
-# Handsfree Dev Companion
+# HandsFree Dev Companion
 
-A proof-of-concept AI companion for GitHub that helps manage pull requests, issues, and code reviews using fixture-based development and safe policy-driven automation.
+A hands-free AI companion for GitHub that helps manage pull requests, issues, and code reviews using voice commands through mobile devices and Meta AI Glasses.
 
-## Stack
+## 🚀 Quick Links
 
-- **DuckDB** (embedded) for persistence
-- **Redis** for caching and job queues
-- **Python 3.11+** with FastAPI (backend server added in PR-002)
+- **[Getting Started Guide](GETTING_STARTED.md)** - Complete setup guide for developers and testers
+- **[Architecture Documentation](ARCHITECTURE.md)** - System design and component relationships
+- **[Contributing Guide](CONTRIBUTING.md)** - Development workflow and best practices
+- **[Mobile App Documentation](mobile/README.md)** - iOS/Android app setup and features
+- **[iPhone & Meta Glasses Testing](docs/ios-rayban-mvp1-runbook.md)** - Complete runbook for hardware testing
+
+## 📱 Key Features
+
+- **Voice Commands**: Hands-free GitHub operations via mobile app
+- **Meta AI Glasses Integration**: Bluetooth audio I/O for truly hands-free experience
+- **Text-to-Speech Responses**: Hear your PR summaries and notifications
+- **Push Notifications**: Real-time updates with auto-speaking (configurable)
+- **Agent Delegation**: Offload complex tasks to external agents
+- **Safe Operations**: Confirmation required for destructive actions
+
+## 🏗️ Stack
+
+- **Backend**: Python 3.11+ with FastAPI
+- **Database**: DuckDB (embedded) for persistence
+- **Cache**: Redis for caching and job queues
+- **Mobile**: React Native with Expo
+- **Native Modules**: iOS/Android Bluetooth audio integration
+- **External Services**: GitHub API, OpenAI (TTS/STT), Expo Push
 
 ## Agent Delegation
 
@@ -59,15 +79,109 @@ The script exits with code 0 on success, non-zero on failure, and prints actiona
 
 **Note:** The demo configuration uses fixture-based responses and doesn't require external services like GitHub or Redis.
 
-## Quickstart
+## 🎯 Quick Start
 
-### Prerequisites
+**New to the project?** Start with the [Getting Started Guide](GETTING_STARTED.md) for comprehensive setup instructions.
+
+### Backend Quick Start (5 minutes)
+
+```bash
+# 1. Clone and setup
+git clone https://github.com/endomorphosis/lift_coding.git
+cd lift_coding
+make deps
+
+# 2. Start services
+make compose-up  # Redis
+make dev         # Backend server
+
+# 3. Verify it works
+curl http://localhost:8080/v1/status
+```
+
+### Mobile Quick Start (15 minutes)
+
+**Prerequisites**: Backend running (see above)
+
+```bash
+# 1. Install and run
+cd mobile
+npm ci
+npm start
+
+# 2. Run on simulator
+npm run ios      # or: npm run android
+```
+
+### iPhone & Meta Glasses Testing (30 minutes)
+
+**Prerequisites**: Physical iPhone + Meta AI Glasses
+
+See the complete [iPhone & Meta Glasses Testing Guide](docs/ios-rayban-mvp1-runbook.md) for detailed instructions including:
+- Bluetooth pairing and audio routing
+- Native module development build
+- Voice command testing
+- Troubleshooting common issues
+
+## 📚 Documentation
+
+**→ [Complete Documentation Index](DOCUMENTATION_INDEX.md)** - Find all documentation organized by role and topic
+
+### For Developers
+
+- **[Getting Started](GETTING_STARTED.md)** - Setup guide for all components
+- **[Architecture](ARCHITECTURE.md)** - System design and data flows  
+- **[Contributing](CONTRIBUTING.md)** - Development workflow and guidelines
+- **[Configuration](CONFIGURATION.md)** - Environment variables and settings
+- **[API Reference](spec/openapi.yaml)** - OpenAPI specification
+
+### For Mobile Development
+
+- **[Mobile App README](mobile/README.md)** - Features and setup
+- **[Build Instructions](mobile/BUILD.md)** - Native module development
+- **[Glasses Integration](docs/meta-ai-glasses.md)** - Bluetooth audio guide
+- **[Mobile Client Integration](docs/mobile-client-integration.md)** - API usage
+
+### For iPhone & Meta Glasses Testing
+
+- **[Testing Quick Reference](docs/TESTING_QUICK_REFERENCE.md)** - Quick reference card
+- **[MVP1 Runbook](docs/ios-rayban-mvp1-runbook.md)** - Complete testing guide
+- **[Troubleshooting](docs/ios-rayban-troubleshooting.md)** - Common issues and solutions
+- **[Audio Routing](docs/meta-ai-glasses-audio-routing.md)** - Technical details
+- **[Demo Checklist](docs/mvp1-demo-checklist.md)** - Pre-demo verification
+
+### Configuration & Setup
+
+- **[Authentication](docs/AUTHENTICATION.md)** - Auth modes and API keys
+- **[Agent Runner Setup](docs/agent-runner-setup.md)** - External agent configuration
+- **[Secret Management](docs/SECRET_STORAGE_AND_SESSIONS.md)** - Vault and credentials
+- **[Push Notifications](docs/push-notifications.md)** - Notification setup
+
+## 🔧 Prerequisites
+
+### For Backend Development
 
 - Python 3.11 or later
-- Docker & Docker Compose
+- Docker & Docker Compose (for Redis)
 - Git
 
-### Local Setup
+### For Mobile Development
+
+- Node.js 18+ and npm
+- Expo CLI: `npm install -g expo-cli`
+- **iOS**: macOS with Xcode 14.0+, iOS Simulator or physical device
+- **Android**: Android Studio, Android Emulator or physical device
+
+### For iPhone & Meta Glasses Testing
+
+- Physical iPhone (iOS 15+) - Simulator doesn't support Bluetooth
+- Meta AI Glasses (Ray-Ban Meta or compatible)
+- Apple Developer account (for device deployment)
+- Backend accessible from iPhone's network
+
+## 🏃 Local Development Setup
+
+### Backend Setup
 
 1. **Clone the repository**
    ```bash
@@ -85,12 +199,17 @@ The script exits with code 0 on success, non-zero on failure, and prints actiona
    make compose-up
    ```
 
-4. **Run tests**
+4. **Start backend server**
+   ```bash
+   make dev
+   ```
+
+5. **Run tests**
    ```bash
    make test
    ```
 
-5. **Stop Docker services** when done
+6. **Stop Docker services** when done
    ```bash
    make compose-down
    ```
@@ -264,24 +383,54 @@ Pull requests automatically run:
 
 See `.github/workflows/ci.yml` for the full CI configuration.
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 lift_coding/
-├── .github/workflows/     # CI/CD workflows
-├── implementation_plan/   # Design docs and PR specs
-├── spec/                  # OpenAPI specification
-├── src/handsfree/         # Main application code
-├── tests/                 # Test suite with fixtures
-│   └── fixtures/          # Canonical test fixtures
-├── scripts/               # Utility scripts
-├── tracking/              # PR tracking documents
-└── Makefile               # Development commands
+├── .github/workflows/          # CI/CD workflows
+├── docs/                       # Documentation
+│   ├── ios-rayban-mvp1-runbook.md         # iPhone + Glasses testing guide
+│   ├── meta-ai-glasses.md                 # Glasses integration guide
+│   ├── mobile-client-integration.md       # Mobile API usage
+│   └── agent-runner-setup.md              # Agent delegation setup
+├── mobile/                     # React Native mobile app
+│   ├── src/                   # App source code
+│   ├── modules/               # Native modules (Bluetooth)
+│   ├── BUILD.md               # Native build instructions
+│   └── README.md              # Mobile app documentation
+├── src/handsfree/             # Backend application code
+│   ├── api/                   # FastAPI endpoints
+│   ├── services/              # Business logic
+│   ├── db/                    # Database models
+│   └── providers/             # External integrations
+├── tests/                     # Test suite with fixtures
+│   └── fixtures/              # Canonical test fixtures
+├── spec/                      # OpenAPI specification
+├── implementation_plan/       # Design docs and PR specs
+├── scripts/                   # Utility scripts
+├── GETTING_STARTED.md         # Comprehensive setup guide
+├── ARCHITECTURE.md            # System architecture docs
+├── CONTRIBUTING.md            # Development guidelines
+├── README.md                  # This file
+└── Makefile                   # Development commands
 ```
 
-## Documentation
+## 🌟 System Architecture
 
-- [CONTRIBUTING.md](CONTRIBUTING.md) - Development workflow and best practices
-- [SECURITY.md](SECURITY.md) - Security policies and reporting
-- [Agent Runner Setup](docs/agent-runner-setup.md) - Guide for setting up external agent runners
-- `implementation_plan/` - Detailed design documents and PR specifications
+```
+┌─────────────────┐     Bluetooth      ┌──────────────────┐      HTTPS       ┌─────────────────┐
+│   Meta Glasses  │ ◄───────────────── │  Mobile App      │ ◄──────────────► │  Backend API    │
+│   (Audio I/O)   │                    │  (iOS/Android)   │                  │  (FastAPI)      │
+└─────────────────┘                    └──────────────────┘                  └─────────────────┘
+                                              │                                       │
+                                              │ Push                                  │
+                                              │ Notifications                         │
+                                              ▼                                       ▼
+                                       ┌──────────────────┐                  ┌─────────────────┐
+                                       │  Expo Push       │                  │   GitHub API    │
+                                       │  Service         │                  │   Redis         │
+                                       └──────────────────┘                  │   DuckDB        │
+                                                                              └─────────────────┘
+```
+
+For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
