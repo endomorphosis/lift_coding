@@ -253,7 +253,8 @@ class TestTransientErrorRetry:
 
         # Should have slept twice (for first two failures)
         assert len(sleep_calls) == 2
-        # With proportional jitter: base_delay * (2^attempt) + uniform(0, base_delay * (2^attempt) * 0.5)
+        # With proportional jitter: base_delay_no_jitter + uniform(0, base_delay_no_jitter * 0.5)
+        # where base_delay_no_jitter = base_delay * (2^attempt)
         # First sleep (attempt=0): 0.5 * 2^0 + jitter(0, 0.25) = [0.5, 0.75]
         assert 0.5 <= sleep_calls[0] <= 0.75
         # Second sleep (attempt=1): 0.5 * 2^1 + jitter(0, 0.5) = [1.0, 1.5]

@@ -227,7 +227,8 @@ class TestTransientErrorRetry:
             provider._make_request("/test/endpoint")
             
             # Check that sleep was called with expected delays
-            # With proportional jitter: base_delay_no_jitter * (2^attempt) + uniform(0, base_delay_no_jitter * 0.5)
+            # With proportional jitter: base_delay_no_jitter + uniform(0, base_delay_no_jitter * 0.5)
+            # where base_delay_no_jitter = base_delay * (2^attempt)
             # First retry (attempt=0): 0.5 * 2^0 + 0.15 = 0.5 + 0.15 = 0.65
             # Second retry (attempt=1): 0.5 * 2^1 + 0.3 = 1.0 + 0.3 = 1.3
             assert mock_sleep.call_count == 2
