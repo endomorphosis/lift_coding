@@ -336,7 +336,7 @@ class TestApiKeyModeAuthentication:
             response = client.post("/v1/command", json=command_payload)
             assert response.status_code == 401
             data = response.json()
-            assert "error" in data or "detail" in data
+            assert ("error" in data and data["error"]) or ("detail" in data and data["detail"])
 
     def test_command_with_invalid_api_key(self, api_key_mode_env, command_payload):
         """Test that invalid API keys are rejected."""
@@ -348,7 +348,7 @@ class TestApiKeyModeAuthentication:
             )
             assert response.status_code == 401
             data = response.json()
-            assert "error" in data or "detail" in data
+            assert ("error" in data and data["error"]) or ("detail" in data and data["detail"])
 
     def test_command_with_valid_api_key(self, test_user_id, api_key_mode_env, command_payload):
         """Test command endpoint with valid API key."""
@@ -383,7 +383,7 @@ class TestApiKeyModeAuthentication:
             )
             assert response.status_code == 401
             data = response.json()
-            assert "error" in data or "detail" in data
+            assert ("error" in data and data["error"]) or ("detail" in data and data["detail"])
 
     def test_github_connection_with_valid_api_key(self, test_user_id, api_key_mode_env):
         """Test GitHub connection creation with valid API key."""
