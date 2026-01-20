@@ -153,10 +153,21 @@ class GCPSecretManager(SecretManager):
         labels = {}
         if metadata:
             for k, v in metadata.items():
-                label_key = k.lower().replace("_", "-").replace(".", "-")
-                label_value = v.lower().replace("_", "-").replace(".", "-")[:63]
+                label_key = self._normalize_label_string(k)
+                label_value = self._normalize_label_string(v)[:63]
                 labels[label_key] = label_value
         return labels
+
+    def _normalize_label_string(self, text: str) -> str:
+        """Normalize a string to GCP label format.
+
+        Args:
+            text: String to normalize
+
+        Returns:
+            Normalized string (lowercase, underscores and dots replaced with hyphens)
+        """
+        return text.lower().replace("_", "-").replace(".", "-")
 
     def store_secret(self, key: str, value: str, metadata: dict[str, str] | None = None) -> str:
         """Store a secret in Google Cloud Secret Manager.
