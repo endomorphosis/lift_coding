@@ -93,9 +93,9 @@ export default function SettingsScreen() {
             { text: 'OK' },
             { 
               text: 'Retry', 
-              onPress: () => {
+              onPress: async () => {
                 setPushStatusErrorShown(false); // Allow retry
-                loadPushStatus();
+                await loadPushStatus();
               }
             }
           ]
