@@ -8,6 +8,7 @@ import CommandScreen from './src/screens/CommandScreen';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
 import TTSScreen from './src/screens/TTSScreen';
 import GlassesDiagnosticsScreen from './src/screens/GlassesDiagnosticsScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +46,11 @@ export default function App() {
           name="Glasses"
           component={GlassesDiagnosticsScreen}
           options={{ title: 'Glasses' }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ title: 'Settings' }}
         />
       </Tab.Navigator>
     </NavigationContainer>
