@@ -71,6 +71,11 @@ export default function SettingsScreen() {
   };
 
   const loadPushStatus = async () => {
+    // Prevent concurrent calls
+    if (pushLoading) {
+      return;
+    }
+    
     try {
       const subs = await listSubscriptions();
       setSubscriptions(subs);

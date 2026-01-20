@@ -59,7 +59,7 @@ export async function getPushToken() {
  */
 export async function setPushToken(token) {
   try {
-    if (!token || typeof token !== 'string' || token.trim() === '') {
+    if (!token || typeof token !== 'string' || token === '') {
       throw new Error('Invalid push token: token must be a non-empty string');
     }
     await AsyncStorage.setItem(STORAGE_KEY_PUSH_TOKEN, token);
