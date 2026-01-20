@@ -8,6 +8,7 @@ React Native/Expo mobile app for interacting with the Handsfree backend.
 - **Command Input**: Send text commands to the backend
 - **Confirmation Flow**: Confirm/cancel/repeat/next pending actions
 - **Text-to-Speech**: Fetch and play TTS audio from backend
+- **Push Notifications**: Receive and automatically speak push notifications (configurable in Settings)
 - **Glasses Audio Diagnostics**: Test Bluetooth audio routing with Meta AI Glasses
 - **Native Bluetooth Support**: Route audio through connected Bluetooth headsets
 - **Developer Settings**: Configure X-User-ID header and backend URL in-app
@@ -196,15 +197,52 @@ If a command requires confirmation:
 - Enter the action ID
 - Choose: Confirm, Cancel, Repeat, or Next
 
-### 4. Configure Settings (Optional)
+### Configure Settings (Optional)
 
 Navigate to the **Settings** tab:
 - Set a custom **User ID** (used in X-User-ID header)
 - Generate a random UUID if needed
 - Configure a custom **Backend URL** (useful for testing against different environments)
+- **Speak notifications** toggle: Enable/disable automatic speaking of push notifications
+  - Defaults to ON in development builds, OFF in production
+  - When enabled, push notifications are automatically spoken via TTS through the selected audio output (glasses when connected)
 - Changes are saved to local storage and persist across app restarts
 
-### 5. Test TTS
+### 5. Push Notifications
+
+The app supports push notification delivery and automatic speaking of notifications.
+
+#### Setup
+1. Ensure the backend has push notification provider configured (Expo)
+2. The app automatically requests notification permissions on physical devices
+3. Push tokens are registered with the backend at app launch
+
+#### Foreground Behavior
+- When a push notification arrives while the app is in the foreground:
+  - The notification is received by the app
+  - If "Speak notifications" is enabled in Settings, the notification text is automatically fetched and spoken via TTS
+  - Audio is played through the current audio output (glasses when connected, phone speaker otherwise)
+  - The notification is displayed as a banner at the top of the screen
+
+#### Background Behavior
+- When a push notification arrives while the app is in the background:
+  - On **iOS**: The system displays the notification, but background execution is limited. The app may not be able to speak the notification automatically due to iOS background restrictions.
+  - On **Android**: The system displays the notification. Background task limitations may prevent automatic TTS playback.
+  - When the user taps on the notification, the app opens and the notification can be spoken if the toggle is enabled.
+
+**Platform Limitations:**
+- iOS restricts background audio playback and task execution for push notifications
+- Android has similar restrictions depending on the device's power-saving settings
+- For reliable auto-speaking, notifications should arrive while the app is in the foreground
+- Background behavior depends on OS version and device settings
+
+#### Configuring Notification Speech
+Navigate to **Settings** → **Notifications**:
+- Toggle "Speak notifications" ON/OFF
+- When disabled, notifications are still received but not automatically spoken
+- This is useful if you prefer silent notifications or want to manually check them
+
+### 6. Test TTS
 
 Navigate to the **TTS** tab:
 - Enter text to convert to speech
@@ -214,6 +252,69 @@ Navigate to the **TTS** tab:
 ## Smoke Test: Audio Command Flow with TTS Playback
 
 This test verifies the complete audio capture, command submission, and TTS playback pipeline.
+
+## Smoke Test: Push Notification Auto-Speaking
+
+This test verifies that push notifications are automatically spoken when received.
+
+### Prerequisites
+- Backend running with push notification provider configured
+- Mobile app running on a physical device (push notifications don't work in simulators)
+- Notification permissions granted
+- "Speak notifications" toggle enabled in Settings (default ON in dev builds)
+
+### Test Steps
+
+1. **Start the mobile app on a physical device**
+   ```bash
+   cd mobile
+   npx expo start
+   # Use Expo Go app or development build
+   ```
+
+2. **Verify Settings**
+   - Navigate to **Settings** tab
+   - Check that "Speak notifications" is enabled (toggle should be ON)
+   - Note your User ID
+
+3. **Trigger a test notification from backend**
+   ```bash
+   # From backend terminal, send a test notification
+   curl -X POST http://localhost:8080/v1/dev/send-test-notification \
+     -H "Content-Type: application/json" \
+     -H "X-User-ID: YOUR_USER_ID" \
+     -d '{"message": "Test notification from backend"}'
+   ```
+
+4. **Verify foreground behavior**
+   - With the app in the foreground, trigger a notification
+   - You should hear the notification spoken via TTS
+   - Audio should play through the current audio output (glasses if connected)
+   - A notification banner should appear at the top of the screen
+
+5. **Test the toggle**
+   - Navigate to **Settings** and disable "Speak notifications"
+   - Trigger another notification
+   - Verify that it is NOT spoken (silent notification)
+   - Re-enable the toggle and test again
+
+6. **Document background behavior** (informational only)
+   - Send the app to background (press home button)
+   - Trigger a notification
+   - Note: iOS and Android have limitations on background TTS playback
+   - Notification will display, but may not be automatically spoken
+   - Tapping the notification should open the app
+
+### Expected Results
+- ✅ Foreground notifications are spoken automatically when toggle is ON
+- ✅ Notifications are silent when toggle is OFF
+- ✅ Audio routes through selected output (glasses when connected)
+- ⚠️ Background notifications may not be spoken due to platform limitations
+
+### Common Issues
+- **No sound**: Check device volume, verify backend TTS is configured
+- **Notifications not received**: Check notification permissions, verify push token is registered
+- **Background speaking not working**: This is expected due to iOS/Android limitations
 
 #### Standard Development (Expo Go)
 
@@ -444,7 +545,8 @@ npm install
 
 ### Planned Features
 
-- [ ] Push notifications integration (`/v1/notifications/subscriptions`)
+- [x] Push notifications integration (`/v1/notifications/subscriptions`)
+- [x] Auto-speak push notifications with toggle (Settings screen)
 - [x] Audio input for voice commands (dev mode via `/v1/dev/audio`)
 - [ ] Production audio upload (pre-signed URLs, object storage)
 - [x] Bluetooth audio routing (Meta AI Glasses) - **iOS native module implemented**

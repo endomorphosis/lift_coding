@@ -497,11 +497,9 @@ class CommandRouter:
         # Use GitHub provider if available
         if self.github_provider:
             from handsfree.handlers.inbox import handle_inbox_list
-            from handsfree.models import PrivacyMode
             
-            # Determine privacy mode from profile (for now, use strict)
-            # TODO: Make privacy mode configurable per profile
-            privacy_mode = PrivacyMode.STRICT
+            # Use privacy mode from profile configuration
+            privacy_mode = profile_config.privacy_mode
             
             try:
                 # Call the inbox handler with user_id for live mode support
@@ -662,11 +660,9 @@ class CommandRouter:
             # Use GitHub provider if available and pr_number is specified
             if self.github_provider and pr_num:
                 from handsfree.handlers.pr_summary import handle_pr_summarize
-                from handsfree.models import PrivacyMode
                 
-                # Determine privacy mode from profile (for now, use strict)
-                # TODO: Make privacy mode configurable per profile
-                privacy_mode = PrivacyMode.STRICT
+                # Use privacy mode from profile configuration
+                privacy_mode = profile_config.privacy_mode
                 
                 try:
                     # Call the PR summary handler with user_id for live mode support

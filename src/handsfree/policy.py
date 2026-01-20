@@ -5,11 +5,13 @@ based on repository policies.
 """
 
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from enum import Enum
 
 import duckdb
 
-from handsfree.db.repo_policies import get_default_policy, get_repo_policy
+from handsfree.db.repo_policies import RepoPolicy, get_default_policy, get_repo_policy
+from handsfree.policy_config import get_policy_config
 
 
 class PolicyDecision(str, Enum):
@@ -55,12 +57,32 @@ def evaluate_action_policy(
     # Get policy for this user + repo, or use default
     policy = get_repo_policy(conn, user_id, repo_full_name)
     if not policy:
-        policy = get_default_policy()
-        # Test harness convenience: allow merge for repos under test/* so that
-        # integration tests can exercise idempotency/confirmation flows without
-        # having to seed per-repo policies.
-        if action_type == "merge" and repo_full_name.startswith("test/"):
-            policy.allow_merge = True
+        # Check if there's a repo-specific override in the config file
+        config = get_policy_config()
+        if repo_full_name in config.repos:
+            repo_config = config.repos[repo_full_name]
+            now = datetime.now(UTC)
+            policy = RepoPolicy(
+                id=f"config-{repo_full_name}",
+                user_id=user_id,
+                repo_full_name=repo_full_name,
+                allow_merge=repo_config.allow_merge,
+                allow_rerun=repo_config.allow_rerun,
+                allow_request_review=repo_config.allow_request_review,
+                allow_comment=repo_config.allow_comment,
+                require_confirmation=repo_config.require_confirmation,
+                require_checks_green=repo_config.require_checks_green,
+                required_approvals=repo_config.required_approvals,
+                created_at=now,
+                updated_at=now,
+            )
+        else:
+            policy = get_default_policy()
+            # Test harness convenience: allow merge for repos under test/* so that
+            # integration tests can exercise idempotency/confirmation flows without
+            # having to seed per-repo policies.
+            if action_type == "merge" and repo_full_name.startswith("test/"):
+                policy.allow_merge = True
 
     # Check if action type is allowed
     action_allowed = False

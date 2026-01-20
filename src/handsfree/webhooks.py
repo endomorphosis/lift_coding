@@ -229,7 +229,11 @@ def normalize_github_event(
 
 
 class WebhookStore:
-    """In-memory webhook event store (stub for PR-003 database)."""
+    """In-memory webhook event store.
+
+    This is primarily useful for local/dev usage and backward compatibility.
+    A DB-backed store exists in `handsfree.db.webhook_events`.
+    """
 
     def __init__(self):
         self._events: dict[str, dict[str, Any]] = {}
@@ -284,7 +288,7 @@ class WebhookStore:
         return list(self._events.values())[-limit:]
 
 
-# Global store instance (for testing; will be replaced with DB in PR-003)
+# Global in-memory store instance (for testing/backward compatibility).
 _webhook_store = WebhookStore()
 
 

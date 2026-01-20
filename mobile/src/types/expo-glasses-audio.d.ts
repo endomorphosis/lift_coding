@@ -1,7 +1,26 @@
 declare module '../../modules/expo-glasses-audio' {
   import { Subscription } from 'expo-modules-core';
 
+  export interface AudioDevice {
+    id: number;
+    type: number;
+    typeName: string;
+    productName: string;
+    address?: string;
+  }
+
   export interface AudioRouteInfo {
+    inputs: AudioDevice[];
+    outputs: AudioDevice[];
+    audioMode: number;
+    audioModeName: string;
+    isScoOn: boolean;
+    isScoAvailable: boolean;
+    isBluetoothConnected: boolean;
+    timestamp: number;
+  }
+
+  export interface SimpleAudioRouteInfo {
     inputDevice: string;
     outputDevice: string;
     sampleRate: number;
@@ -14,9 +33,11 @@ declare module '../../modules/expo-glasses-audio' {
     size: number;
   }
 
+  export type AudioSource = 'phone' | 'glasses' | 'auto';
+
   export function getAudioRoute(): AudioRouteInfo;
   
-  export function startRecording(durationSeconds: number): Promise<RecordingResult>;
+  export function startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult>;
   
   export function stopRecording(): Promise<RecordingResult>;
   

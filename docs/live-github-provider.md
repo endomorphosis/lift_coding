@@ -200,7 +200,26 @@ RuntimeError: GitHub token not available for live API calls
 The provider automatically falls back to fixtures in this case.
 
 ### Rate Limiting
-(Not yet implemented) Will handle GitHub API rate limits gracefully and potentially fall back to cached data.
+
+The provider handles GitHub API rate limits as follows (implemented in [PR-077](https://github.com/endomorphosis/lift_coding/pull/289)):
+
+1. **Primary Rate Limit Detection**: When the GitHub API returns HTTP 429 (rate limit exceeded), the provider:
+   - Extracts the `X-RateLimit-Reset` header to determine when the limit resets
+   - Logs an error with the reset time
+   - Raises a `RuntimeError` with details about when to retry
+
+2. **Automatic Fallback**: When a rate limit error occurs, the provider automatically falls back to fixture data to maintain functionality during development and testing.
+
+3. **Authentication Errors**: The provider also detects and handles:
+   - HTTP 401 (Unauthorized) - invalid or expired token
+   - HTTP 403 (Forbidden) - insufficient permissions
+
+**User-facing errors:**
+- Rate limit exceeded: `"GitHub API rate limit exceeded. Try again after {reset_time}"`
+- Authentication failures: `"GitHub API authentication failed. Token may be invalid or expired."`
+- Permission issues: `"GitHub API access forbidden. Token may lack required permissions."`
+
+**Note**: The current implementation does not include automatic retry with exponential backoff. When rate limits are hit, the user must wait until the rate limit reset time before retrying, or the system will use cached fixture data.
 
 ## Security Considerations
 

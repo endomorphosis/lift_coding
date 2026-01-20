@@ -259,3 +259,119 @@ def test_evaluate_action_policy_uses_default_when_no_policy(db_conn):
 
     # Default policy allows request_review but requires confirmation
     assert result.decision == PolicyDecision.REQUIRE_CONFIRMATION
+
+
+def test_evaluate_action_policy_with_config_repo_override(db_conn):
+    """Test that repo-specific config overrides are applied."""
+    import tempfile
+    from pathlib import Path
+
+    from handsfree.policy_config import reload_policy_config
+
+    user_id = str(uuid.uuid4())
+    repo = "owner/test-repo"
+
+    # Create a config with repo override
+    yaml_content = """
+default:
+  allow_merge: false
+  allow_rerun: true
+  allow_request_review: true
+  allow_comment: true
+  require_confirmation: true
+  require_checks_green: true
+  required_approvals: 1
+
+repos:
+  owner/test-repo:
+    allow_merge: true
+    require_confirmation: false
+    required_approvals: 0
+"""
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
+        f.write(yaml_content)
+        temp_path = f.name
+
+    try:
+        # Reload config with test file
+        reload_policy_config(temp_path)
+
+        # Evaluate policy - should use repo override
+        result = evaluate_action_policy(
+            db_conn,
+            user_id=user_id,
+            repo_full_name=repo,
+            action_type="merge",
+            pr_checks_status="passing",
+        )
+
+        # Should allow merge without confirmation due to repo override
+        assert result.decision == PolicyDecision.ALLOW
+    finally:
+        Path(temp_path).unlink()
+        # Reset to default config
+        from handsfree.policy_config import clear_policy_config_cache
+
+        clear_policy_config_cache()
+
+
+def test_evaluate_action_policy_config_override_vs_db_policy(db_conn):
+    """Test that database policy takes precedence over config override."""
+    import tempfile
+    from pathlib import Path
+
+    from handsfree.policy_config import reload_policy_config
+
+    user_id = str(uuid.uuid4())
+    repo = "owner/test-repo"
+
+    # Create a config with repo override
+    yaml_content = """
+default:
+  allow_merge: false
+  allow_rerun: true
+  allow_request_review: true
+  allow_comment: true
+  require_confirmation: true
+  require_checks_green: true
+  required_approvals: 1
+
+repos:
+  owner/test-repo:
+    allow_merge: true
+    require_confirmation: false
+"""
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
+        f.write(yaml_content)
+        temp_path = f.name
+
+    try:
+        # Reload config with test file
+        reload_policy_config(temp_path)
+
+        # Create database policy that denies merge
+        create_or_update_repo_policy(
+            db_conn,
+            user_id=user_id,
+            repo_full_name=repo,
+            allow_merge=False,  # DB policy denies merge
+        )
+
+        # Evaluate policy - should use DB policy, not config override
+        result = evaluate_action_policy(
+            db_conn,
+            user_id=user_id,
+            repo_full_name=repo,
+            action_type="merge",
+        )
+
+        # Should deny merge because DB policy takes precedence
+        assert result.decision == PolicyDecision.DENY
+    finally:
+        Path(temp_path).unlink()
+        # Reset to default config
+        from handsfree.policy_config import clear_policy_config_cache
+
+        clear_policy_config_cache()

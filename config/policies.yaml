@@ -1,0 +1,31 @@
+# Policy configuration file
+#
+# This file defines the default policy rules and per-repository overrides
+# for the hands-free dev companion.
+#
+# Policy decisions can be: ALLOW, REQUIRE_CONFIRMATION, or DENY
+# 
+# Structure:
+#   default: Default policy applied when no repo-specific override exists
+#   repos: Per-repository policy overrides (key: owner/repo)
+
+default:
+  # Action permissions
+  allow_merge: false          # Allow merge actions
+  allow_rerun: true           # Allow workflow rerun actions
+  allow_request_review: true  # Allow request review actions
+  allow_comment: true         # Allow comment actions
+  
+  # Additional requirements
+  require_confirmation: true  # Require user confirmation before executing actions
+  require_checks_green: true  # Require all CI checks to pass (for merge)
+  required_approvals: 1       # Minimum number of required approvals (for merge)
+
+# Per-repository overrides
+# Example:
+# repos:
+#   owner/repo-name:
+#     allow_merge: true
+#     require_confirmation: false
+#     required_approvals: 2
+repos: {}

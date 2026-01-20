@@ -1,9 +1,11 @@
 import ExpoModulesCore
+import UIKit
 
 public class ExpoGlassesAudioModule: Module {
   private let routeMonitor = AudioRouteMonitor()
   private let recorder = GlassesRecorder()
   private let player = GlassesPlayer()
+  private var foregroundObserver: NSObjectProtocol?
   
   public func definition() -> ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -40,14 +42,22 @@ public class ExpoGlassesAudioModule: Module {
     }
     
     // Start recording audio
-    AsyncFunction("startRecording") { (durationSeconds: Int, promise: Promise) in
+    AsyncFunction("startRecording") { (durationSeconds: Int, audioSourceString: String?, promise: Promise) in
       do {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let timestamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
         let filename = "glasses_recording_\(timestamp).wav"
         let fileURL = documentsPath.appendingPathComponent(filename)
         
-        try recorder.startRecording(outputURL: fileURL)
+        // Parse audio source
+        let audioSource: AudioSource
+        if let sourceStr = audioSourceString {
+          audioSource = AudioSource(rawValue: sourceStr) ?? .auto
+        } else {
+          audioSource = .auto
+        }
+        
+        try recorder.startRecording(outputURL: fileURL, audioSource: audioSource)
         
         // Schedule stop after duration
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds)) {
@@ -102,8 +112,9 @@ public class ExpoGlassesAudioModule: Module {
       promise.resolve(nil)
     }
     
-    // Setup audio route monitoring
+    // Setup audio route monitoring and lifecycle handling
     OnCreate {
+      // Setup route monitoring
       routeMonitor.start { [weak self] summary in
         let session = AVAudioSession.sharedInstance()
         let lines = summary.components(separatedBy: "\n")
@@ -127,12 +138,43 @@ public class ExpoGlassesAudioModule: Module {
           "isBluetoothConnected": isBluetoothConnected
         ])
       }
+      
+      // Observe app lifecycle events to re-apply audio session configuration
+      foregroundObserver = NotificationCenter.default.addObserver(
+        forName: UIApplication.willEnterForegroundNotification,
+        object: nil,
+        queue: .main
+      ) { [weak self] _ in
+        self?.reapplyAudioSessionConfiguration()
+      }
     }
     
     OnDestroy {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
+      if let observer = foregroundObserver {
+        NotificationCenter.default.removeObserver(observer)
+      }
+    }
+  }
+  
+  private func reapplyAudioSessionConfiguration() {
+    do {
+      let session = AVAudioSession.sharedInstance()
+      try session.setCategory(
+        .playAndRecord,
+        mode: .voiceChat,
+        options: [.allowBluetooth, .defaultToSpeaker]
+      )
+      try session.setActive(true)
+      if #available(iOS 15.0, *) {
+        print("[ExpoGlassesAudio] Re-applied audio session configuration on foreground")
+      }
+    } catch {
+      if #available(iOS 15.0, *) {
+        print("[ExpoGlassesAudio] Failed to re-apply audio session: \(error)")
+      }
     }
   }
 }

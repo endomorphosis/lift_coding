@@ -9,6 +9,8 @@ from datetime import UTC, datetime
 
 import duckdb
 
+from handsfree.policy_config import get_policy_config
+
 
 @dataclass
 class RepoPolicy:
@@ -175,21 +177,26 @@ def create_or_update_repo_policy(
 def get_default_policy() -> RepoPolicy:
     """Get the default policy for repositories without explicit configuration.
 
+    Loads policy from config/policies.yaml if available, otherwise uses safe defaults.
+
     Returns:
-        Default RepoPolicy with conservative settings.
+        Default RepoPolicy with conservative settings from config file.
     """
     now = datetime.now(UTC)
+    config = get_policy_config()
+    default = config.default
+
     return RepoPolicy(
         id="default",
         user_id="default",
         repo_full_name="default",
-        allow_merge=False,
-        allow_rerun=True,
-        allow_request_review=True,
-        allow_comment=True,
-        require_confirmation=True,
-        require_checks_green=True,
-        required_approvals=1,
+        allow_merge=default.allow_merge,
+        allow_rerun=default.allow_rerun,
+        allow_request_review=default.allow_request_review,
+        allow_comment=default.allow_comment,
+        require_confirmation=default.require_confirmation,
+        require_checks_green=default.require_checks_green,
+        required_approvals=default.required_approvals,
         created_at=now,
         updated_at=now,
     )

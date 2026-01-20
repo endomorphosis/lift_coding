@@ -31,7 +31,7 @@ This PR adds placeholder support for camera snapshot/image input to the command 
 #### Debug Mode
 - **Behavior**: Same as balanced mode + additional debug information
 - **Debug Info**: Includes stub message about image not being processed
-- **Tool Calls**: Contains note about OCR/vision not yet implemented
+- **Tool Calls**: OCR/vision is not performed by this placeholder path; OCR work is tracked separately (see PR-082: https://github.com/endomorphosis/lift_coding/pull/294)
 
 ### 3. Security & Privacy Guarantees
 
@@ -132,7 +132,7 @@ All required checks pass:
 
 This PR provides the foundation for future multimodal capabilities:
 
-1. **OCR/Vision Processing**: Add image analysis in balanced/debug modes
+1. **OCR/Vision Processing**: Add image analysis in balanced/debug modes (tracked in PR-082: https://github.com/endomorphosis/lift_coding/pull/294)
 2. **Multiple Images**: Support arrays of images in single request
 3. **Image Validation**: Content-type verification, size limits
 4. **Vision Models**: Integration with GPT-4 Vision, Claude Vision, or similar
