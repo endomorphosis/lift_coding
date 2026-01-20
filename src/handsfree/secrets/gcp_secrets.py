@@ -95,8 +95,8 @@ class GCPSecretManager(SecretManager):
         Returns:
             Secret name with prefix (e.g., "handsfree-github-token-user-123")
         """
-        # GCP secret names can contain [a-zA-Z0-9_-], but for consistency we convert
-        # all special characters including underscores to hyphens.
+        # GCP secret names can contain [a-zA-Z0-9_-]. For consistency, we normalize
+        # underscores and all other non-alphanumeric characters to hyphens.
         normalized = re.sub(r'[^a-zA-Z0-9-]', '-', key).lower()
         # Remove consecutive hyphens
         normalized = re.sub(r'-+', '-', normalized)
