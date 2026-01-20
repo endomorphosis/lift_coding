@@ -61,6 +61,8 @@ public final class GlassesPlayer {
                         if #available(iOS 15.0, *) {
                             print("[GlassesPlayer] Interruption ended - resumed playback")
                         }
+                        // Clear the flag only after successful resumption
+                        shouldResumeAfterInterruption = false
                     }
                 } catch {
                     shouldResumeAfterInterruption = false
@@ -69,7 +71,6 @@ public final class GlassesPlayer {
                     }
                 }
             }
-            shouldResumeAfterInterruption = false
             
         @unknown default:
             break

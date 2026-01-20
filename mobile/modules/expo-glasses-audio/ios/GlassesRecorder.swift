@@ -59,6 +59,8 @@ public final class GlassesRecorder {
                         if #available(iOS 15.0, *) {
                             print("[GlassesRecorder] Interruption ended - resumed recording")
                         }
+                        // Clear the flag only after successful resumption
+                        shouldResumeAfterInterruption = false
                     }
                 } catch {
                     shouldResumeAfterInterruption = false
@@ -67,7 +69,6 @@ public final class GlassesRecorder {
                     }
                 }
             }
-            shouldResumeAfterInterruption = false
             
         @unknown default:
             break
