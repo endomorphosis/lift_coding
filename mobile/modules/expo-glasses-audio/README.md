@@ -315,10 +315,29 @@ interface RecordingResult {
 
 ## Platform Support
 
-- ✅ Android (API 23+)
-- ⚠️ iOS (not yet implemented)
+- ✅ Android (API 23+) - Full audio route monitoring with Bluetooth SCO support
+- ✅ iOS (11.0+) - Audio route monitoring with AVAudioSession
+
+### iOS Implementation Notes
+
+The iOS implementation provides audio route monitoring using AVAudioSession:
+
+**Supported on iOS:**
+- Real-time audio route monitoring via AVAudioSession
+- Audio route change notifications
+- Bluetooth device detection
+- Device enumeration (inputs/outputs)
+- Diagnostics UI (native iOS implementation available)
+
+**iOS API Differences:**
+- iOS uses simplified route monitoring through AVAudioSession
+- Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) may return fallback values. This is because iOS manages Bluetooth audio connections automatically through AVAudioSession route changes rather than explicit SCO state management
+- `audioMode` field may not be populated - iOS uses audio session categories (e.g., playAndRecord, record) instead of Android's audio modes
+- Device enumeration provides iOS-specific port types (e.g., MicrophoneBuiltIn, Speaker, BluetoothHFP)
 
 ## Permissions
+
+### Android
 
 The module requires the following Android permissions:
 
@@ -328,7 +347,30 @@ The module requires the following Android permissions:
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 ```
 
-These are already configured in `app.json`.
+### iOS
+
+The module requires the following iOS permissions (configured in `app.json` under `ios.infoPlist`):
+
+- **NSMicrophoneUsageDescription**: Required for audio input monitoring
+- **NSBluetoothAlwaysUsageDescription**: Required for Bluetooth device access
+- **NSBluetoothPeripheralUsageDescription**: Required for Bluetooth peripheral communication
+- **UIBackgroundModes**: Array containing "audio" for background audio support
+
+Info.plist format (configured automatically via app.json):
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access to record audio commands for your Meta AI Glasses.</string>
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback.</string>
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+</array>
+```
+
+All permissions are configured in `app.json`.
 
 ## Implementation Details
 
