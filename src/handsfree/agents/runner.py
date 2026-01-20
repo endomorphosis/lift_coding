@@ -14,6 +14,7 @@ from typing import Any
 
 import duckdb
 
+from handsfree.db.notifications import create_notification
 from handsfree.db.agent_tasks import (
     get_agent_task_by_id,
     get_agent_tasks,
@@ -32,10 +33,29 @@ def is_runner_enabled() -> bool:
     return os.environ.get("HANDSFREE_AGENT_RUNNER_ENABLED", "").lower() == "true"
 
 
+def get_task_completion_delay() -> int:
+    """Get the delay in seconds before auto-completing tasks.
+
+    Returns:
+        Delay in seconds (default: 10).
+    """
+    return int(os.environ.get("HANDSFREE_AGENT_TASK_COMPLETION_DELAY", "10"))
+
+
+def should_simulate_failure() -> bool:
+    """Check if tasks should simulate failure for testing.
+
+    Returns:
+        True if HANDSFREE_AGENT_SIMULATE_FAILURE=true, False otherwise.
+    """
+    return os.environ.get("HANDSFREE_AGENT_SIMULATE_FAILURE", "").lower() == "true"
+
+
 def auto_start_created_tasks(conn: duckdb.DuckDBPyConnection) -> int:
     """Auto-transition created tasks to running state.
 
     This simulates the beginning of agent execution without real code changes.
+    Creates an optional notification on transition to running.
 
     Args:
         conn: Database connection.
@@ -62,6 +82,27 @@ def auto_start_created_tasks(conn: duckdb.DuckDBPyConnection) -> int:
             )
             count += 1
             logger.info("Auto-started task %s", task.id)
+
+            # Optional: Create notification on transition to running
+            # Priority 3 (medium) - may be throttled based on user profile
+            try:
+                create_notification(
+                    conn=conn,
+                    user_id=task.user_id,
+                    event_type="agent.task_started",
+                    message=f"Agent task started: {task.instruction or 'No instruction'}",
+                    metadata={
+                        "task_id": task.id,
+                        "provider": task.provider,
+                        "target_type": task.target_type,
+                        "target_ref": task.target_ref,
+                    },
+                    priority=3,
+                )
+            except Exception as e:
+                # Don't fail the task transition if notification creation fails
+                logger.warning("Failed to create notification for task %s: %s", task.id, e)
+
         except ValueError as e:
             # Invalid transition or task not found
             logger.warning("Failed to auto-start task %s: %s", task.id, e)
