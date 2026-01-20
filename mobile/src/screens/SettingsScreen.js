@@ -41,6 +41,7 @@ export default function SettingsScreen() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
   const [pushLoading, setPushLoading] = useState(false);
+  const [pushStatusErrorShown, setPushStatusErrorShown] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -73,16 +74,27 @@ export default function SettingsScreen() {
     try {
       const subs = await listSubscriptions();
       setSubscriptions(subs);
+      setPushStatusErrorShown(false); // Reset error flag on success
     } catch (error) {
       console.error('Failed to load subscriptions:', error);
-      Alert.alert(
-        'Connection Error',
-        'Unable to load push notification subscriptions. Please check your network connection and try again.',
-        [
-          { text: 'OK' },
-          { text: 'Retry', onPress: () => loadPushStatus() }
-        ]
-      );
+      // Only show the alert once per session to avoid infinite loops
+      if (!pushStatusErrorShown) {
+        setPushStatusErrorShown(true);
+        Alert.alert(
+          'Connection Error',
+          'Unable to load push notification subscriptions. Please check your network connection and try again.',
+          [
+            { text: 'OK' },
+            { 
+              text: 'Retry', 
+              onPress: () => {
+                setPushStatusErrorShown(false); // Allow retry
+                loadPushStatus();
+              }
+            }
+          ]
+        );
+      }
     }
   };
 
