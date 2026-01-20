@@ -196,21 +196,18 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
                 logger.warning("Task %s has no auto_started_at in trace, skipping", task.id)
                 continue
 
-            # Parse the start time - handle both Z and +00:00 formats
+            # Parse the start time - handle both Z and +00:00 formats by normalizing once
+            normalized_auto_started_at_str = auto_started_at_str.replace("Z", "+00:00")
             try:
-                auto_started_at = datetime.fromisoformat(auto_started_at_str)
-            except ValueError:
-                try:
-                    # Try with Z replaced if fromisoformat fails
-                    auto_started_at = datetime.fromisoformat(auto_started_at_str.replace("Z", "+00:00"))
-                except ValueError as e:
-                    logger.warning(
-                        "Task %s has invalid auto_started_at datetime '%s': %s; skipping",
-                        task.id,
-                        auto_started_at_str,
-                        e,
-                    )
-                    continue
+                auto_started_at = datetime.fromisoformat(normalized_auto_started_at_str)
+            except ValueError as e:
+                logger.warning(
+                    "Task %s has invalid auto_started_at datetime '%s': %s; skipping",
+                    task.id,
+                    auto_started_at_str,
+                    e,
+                )
+                continue
 
             # Calculate elapsed time
             elapsed = (now - auto_started_at).total_seconds()
