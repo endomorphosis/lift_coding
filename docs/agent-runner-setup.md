@@ -269,6 +269,10 @@ jobs:
           # Create agent-tasks directory and trace file
           mkdir -p agent-tasks
           TASK_ID="${{ steps.metadata.outputs.task_id }}"
+          if [ -z "$TASK_ID" ]; then
+            echo "Error: TASK_ID is empty; metadata parsing may have failed."
+            exit 1
+          fi
           TASK_PREFIX="${TASK_ID:0:8}"
           
           cat > "agent-tasks/${TASK_PREFIX}.md" << EOF
@@ -294,8 +298,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AGENT_RUNNER_TOKEN }}
         run: |
-          # Create a branch
-          BRANCH_NAME="agent-task-${{ github.event.issue.number }}"
+          # Create a branch using task_id prefix (matches runner.py behavior)
+          TASK_ID="${{ steps.metadata.outputs.task_id }}"
+          TASK_PREFIX="${TASK_ID:0:8}"
+          BRANCH_NAME="agent-task-${TASK_PREFIX}"
           git checkout -b "$BRANCH_NAME"
           git push origin "$BRANCH_NAME"
           
@@ -455,10 +461,20 @@ CMD ["python", "runner.py"]
 Create `agent-runner/requirements.txt`:
 
 ```
+# Core dependencies
 PyGithub>=2.1.1
-openai>=1.0.0
-httpx>=0.24.0
-python-dotenv>=1.0.0
+
+# Optional dependencies for extending the runner
+# Uncomment and install based on your needs:
+
+# For LLM integration (OpenAI, Anthropic, etc.)
+# openai>=1.0.0
+
+# For advanced HTTP requests
+# httpx>=0.24.0
+
+# For loading .env files
+# python-dotenv>=1.0.0
 ```
 
 The `agent-runner/runner.py` file is provided in the repository and implements a complete workflow that:
@@ -528,7 +544,7 @@ For customization examples and integration patterns, see `agent-runner/README.md
 
 1. **The agent-runner directory is already included** in the repository at `agent-runner/`:
    - `Dockerfile` - Container image definition
-   - `requirements.txt` - Python dependencies (PyGithub)
+   - `requirements.txt` - Core Python dependencies (PyGithub; optional extras such as `openai`, `httpx`, and `python-dotenv` may also be listed)
    - `runner.py` - Complete runner implementation
    - `apply_instruction.py` - Helper script for deterministic patch mode
    - `README.md` - Additional setup and customization information
