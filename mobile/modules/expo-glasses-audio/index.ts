@@ -1,5 +1,5 @@
 import { EventEmitter, Subscription } from 'expo-modules-core';
-import { requireNativeModule } from 'expo-modules-core';
+import { requireNativeModule, requireOptionalNativeModule } from 'expo-modules-core';
 
 export interface AudioDevice {
   id: number;
@@ -48,7 +48,9 @@ export interface AudioRouteChangeEvent {
 }
 
 // Get the native modules
-const GlassesAudioModule = requireNativeModule('GlassesAudio');
+// Note: 'GlassesAudio' is implemented on Android in this repo, but may be absent on iOS.
+// Use optional loading to avoid crashing on import.
+const GlassesAudioModule = requireOptionalNativeModule('GlassesAudio');
 const ExpoGlassesAudioModule = requireNativeModule('ExpoGlassesAudio');
 
 /**
@@ -58,7 +60,8 @@ const ExpoGlassesAudioModule = requireNativeModule('ExpoGlassesAudio');
  */
 class GlassesAudio extends EventEmitter {
   constructor() {
-    super(GlassesAudioModule);
+    // If the module is missing (e.g., iOS), pass a dummy object to EventEmitter.
+    super(GlassesAudioModule || ({} as any));
   }
 
   /**
@@ -66,6 +69,9 @@ class GlassesAudio extends EventEmitter {
    * @returns Promise with current route details including inputs, outputs, and Bluetooth status
    */
   async getCurrentRoute(): Promise<AudioRouteInfo> {
+    if (!GlassesAudioModule) {
+      throw new Error("GlassesAudio native module not available on this platform/build");
+    }
     return await GlassesAudioModule.getCurrentRoute();
   }
 
@@ -74,6 +80,9 @@ class GlassesAudio extends EventEmitter {
    * @returns Promise with human-readable route summary
    */
   async getCurrentRouteSummary(): Promise<string> {
+    if (!GlassesAudioModule) {
+      throw new Error("GlassesAudio native module not available on this platform/build");
+    }
     return await GlassesAudioModule.getCurrentRouteSummary();
   }
 
@@ -82,6 +91,9 @@ class GlassesAudio extends EventEmitter {
    * @returns Promise<boolean> true if Bluetooth device is connected
    */
   async isBluetoothConnected(): Promise<boolean> {
+    if (!GlassesAudioModule) {
+      return false;
+    }
     return await GlassesAudioModule.isBluetoothConnected();
   }
 
@@ -90,6 +102,9 @@ class GlassesAudio extends EventEmitter {
    * @returns Promise<boolean> true if SCO is connected
    */
   async isScoConnected(): Promise<boolean> {
+    if (!GlassesAudioModule) {
+      return false;
+    }
     return await GlassesAudioModule.isScoConnected();
   }
 
@@ -98,6 +113,7 @@ class GlassesAudio extends EventEmitter {
    * Emits 'onAudioRouteChange' events when the route changes.
    */
   startMonitoring(): void {
+    if (!GlassesAudioModule) return;
     GlassesAudioModule.startMonitoring();
   }
 
@@ -105,6 +121,7 @@ class GlassesAudio extends EventEmitter {
    * Stop monitoring audio route changes.
    */
   stopMonitoring(): void {
+    if (!GlassesAudioModule) return;
     GlassesAudioModule.stopMonitoring();
   }
 
@@ -116,6 +133,9 @@ class GlassesAudio extends EventEmitter {
   addAudioRouteChangeListener(
     listener: (event: AudioRouteChangeEvent) => void
   ): Subscription {
+    if (!GlassesAudioModule) {
+      throw new Error("GlassesAudio native module not available on this platform/build");
+    }
     return this.addListener('onAudioRouteChange', listener);
   }
 }
