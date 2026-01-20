@@ -45,4 +45,5 @@ We already have route monitoring (e.g., PR-047), but we need a concrete, end-to-
 
 ## Validation
 - Manual on-device test (iPhone + Bluetooth glasses/headset).
-- Follow the checklist in the tracking doc.
+- Follow the manual test checklist in `docs/ios-audio-interruption-testing.md`.
+
