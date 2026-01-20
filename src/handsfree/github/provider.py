@@ -386,7 +386,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
                     # Retry transient server errors (502, 503, 504)
                     if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
-                        # Exponential backoff with jitter proportional to the current delay
+                        # Exponential backoff with jitter up to 50% of the base delay
                         base_delay_no_jitter = self._base_delay * (2 ** attempt)
                         delay = base_delay_no_jitter + random.uniform(0, base_delay_no_jitter * 0.5)
                         logger.warning(
