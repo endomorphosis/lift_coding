@@ -74,13 +74,36 @@ class ExpoGlassesAudioModule : Module() {
       )
     }
 
-    AsyncFunction("startRecording") { durationSeconds: Int, promise: Promise ->
+    AsyncFunction("startRecording") { durationSeconds: Int, audioSourceString: String?, promise: Promise ->
       try {
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         
-        // Enable Bluetooth SCO if available
-        audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
-        audioManager.startBluetoothSco()
+        // Parse audio source
+        val audioSource = when (audioSourceString) {
+          "phone" -> glasses.AudioSource.PHONE
+          "glasses" -> glasses.AudioSource.GLASSES
+          else -> glasses.AudioSource.AUTO
+        }
+        
+        // Configure Bluetooth SCO based on audio source
+        when (audioSource) {
+          glasses.AudioSource.GLASSES -> {
+            // Enable Bluetooth SCO for glasses/Bluetooth mic
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            audioManager.startBluetoothSco()
+          }
+          glasses.AudioSource.PHONE -> {
+            // Use phone mic - don't enable Bluetooth SCO
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+          }
+          glasses.AudioSource.AUTO -> {
+            // Auto mode - enable SCO if available
+            audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+            if (audioManager.isBluetoothScoAvailableOffCall) {
+              audioManager.startBluetoothSco()
+            }
+          }
+        }
         
         // Create output file
         val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
@@ -89,11 +112,8 @@ class ExpoGlassesAudioModule : Module() {
         val outputDir = context.getExternalFilesDir(null)
         val outputFile = File(outputDir, filename)
         
-        // Start recording with WAV file output
-        val audioRecord = recorder.start(outputFile)
-        
-        // Emit recording started event
-        sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
+        // Start recording with specified audio source
+        val audioRecord = recorder.start(audioSource)
         
         // Schedule stop after duration
         handler.postDelayed({

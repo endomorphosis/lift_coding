@@ -11,7 +11,7 @@
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { getBaseUrl, getHeaders } from '../api/config';
+import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
 
 // Notification queue for sequential TTS playback
@@ -66,6 +66,13 @@ export function setupNotificationListeners(onNotification) {
  * @param {Object} notification - Notification object from Expo
  */
 async function handleNotification(notification) {
+  // Check if we should speak notifications
+  const shouldSpeak = await getSpeakNotifications();
+  if (!shouldSpeak) {
+    console.log('Speak notifications is disabled, skipping TTS');
+    return;
+  }
+
   const data = notification.request.content.data;
   const body = notification.request.content.body;
   

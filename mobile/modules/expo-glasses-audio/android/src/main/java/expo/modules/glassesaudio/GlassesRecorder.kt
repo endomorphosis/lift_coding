@@ -10,6 +10,12 @@ import java.io.RandomAccessFile
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+enum class AudioSource(val value: String) {
+    PHONE("phone"),
+    GLASSES("glasses"),
+    AUTO("auto")
+}
+
 class GlassesRecorder {
     companion object {
         private const val TAG = "GlassesRecorder"
@@ -24,17 +30,21 @@ class GlassesRecorder {
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
 
-    fun start(outputFile: File): AudioRecord {
-        this.outputFile = outputFile
-        this.totalBytesWritten = 0L
-        
+    fun start(audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
         val sampleRate = 16000
         val channel = AudioFormat.CHANNEL_IN_MONO
         val encoding = AudioFormat.ENCODING_PCM_16BIT
         val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding)
 
+        // Select audio source based on preference
+        val androidAudioSource = when (audioSource) {
+            AudioSource.PHONE -> MediaRecorder.AudioSource.MIC // Built-in mic
+            AudioSource.GLASSES -> MediaRecorder.AudioSource.VOICE_COMMUNICATION // Bluetooth/Headset mic
+            AudioSource.AUTO -> MediaRecorder.AudioSource.VOICE_COMMUNICATION // Default to voice comm
+        }
+
         val r = AudioRecord(
-            MediaRecorder.AudioSource.VOICE_COMMUNICATION,
+            androidAudioSource,
             sampleRate,
             channel,
             encoding,

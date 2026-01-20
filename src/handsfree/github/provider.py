@@ -2,9 +2,14 @@
 
 import json
 import logging
+import random
+import time
 from abc import ABC, abstractmethod
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+import httpx
 
 from handsfree.github.auth import GitHubAuthProvider, get_default_auth_provider
 
@@ -215,11 +220,13 @@ class LiveGitHubProvider(GitHubProviderInterface):
     Falls back to fixture behavior if no token is available.
     """
 
-    def __init__(self, token_provider):
+    def __init__(self, token_provider, max_retries: int = 3, base_delay: float = 0.5):
         """Initialize with a token provider.
 
         Args:
             token_provider: TokenProvider instance for authentication
+            max_retries: Maximum number of retries for transient errors (default: 3)
+            base_delay: Base delay in seconds for exponential backoff (default: 0.5)
         """
         from handsfree.github.auth import TokenProvider
 
@@ -231,6 +238,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         self._token_provider = token_provider
         self._fallback_provider = GitHubProvider()  # For fixture fallback
+        self._max_retries = max_retries
+        self._base_delay = base_delay
 
     def _get_headers(self) -> dict[str, str]:
         """Get HTTP headers for GitHub API requests.
@@ -250,14 +259,77 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
         return headers
 
+    def _is_rate_limited(self, response) -> bool:
+        """Check if response indicates rate limiting.
+
+        GitHub typically returns 403 with X-RateLimit-Remaining: 0 for rate limits.
+
+        Args:
+            response: httpx Response object
+
+        Returns:
+            True if the response indicates rate limiting
+        """
+        if response.status_code == 429:
+            return True
+
+        # GitHub often returns 403 for rate limits, check remaining header
+        if response.status_code == 403:
+            remaining_str = response.headers.get("X-RateLimit-Remaining", "")
+            if remaining_str:
+                try:
+                    remaining = int(remaining_str)
+                    if remaining == 0:
+                        return True
+                except (ValueError, TypeError):
+                    # If we can't parse it, it's not a rate limit
+                    pass
+
+        return False
+
+    def _get_rate_limit_reset_message(self, response) -> str:
+        """Get a human-readable message for when rate limit will reset.
+
+        Args:
+            response: httpx Response object with rate limit headers
+
+        Returns:
+            Human-readable message about when rate limit resets
+        """
+        reset_timestamp = response.headers.get("X-RateLimit-Reset", "")
+        if not reset_timestamp:
+            return "unknown time"
+
+        try:
+            reset_time = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
+            now = datetime.now(timezone.utc)
+            delta = reset_time - now
+
+            if delta.total_seconds() <= 0:
+                return "now"
+
+            # Format as human-readable duration
+            seconds = int(delta.total_seconds())
+            if seconds < 60:
+                return f"{seconds} second{'s' if seconds != 1 else ''}"
+            elif seconds < 3600:
+                minutes = seconds // 60
+                return f"{minutes} minute{'s' if minutes != 1 else ''}"
+            else:
+                hours = seconds // 3600
+                return f"{hours} hour{'s' if hours != 1 else ''}"
+        except (ValueError, OSError):
+            return "unknown time"
+
     def _make_request(
-        self, endpoint: str, params: dict[str, Any] | None = None
+        self, endpoint: str, params: dict[str, Any] | None = None, _retry_count: int = 0
     ) -> dict[str, Any] | list[dict[str, Any]]:
-        """Make a GET request to GitHub API.
+        """Make a GET request to GitHub API with retry logic.
 
         Args:
             endpoint: API endpoint path (e.g., "/repos/owner/repo/pulls/123")
             params: Optional query parameters
+            _retry_count: Internal retry counter (do not set manually)
 
         Returns:
             JSON response as dict or list
@@ -273,50 +345,83 @@ class LiveGitHubProvider(GitHubProviderInterface):
             raise RuntimeError("GitHub token not available for live API calls")
 
         try:
-            import httpx
-
             url = f"https://api.github.com{endpoint}"
             headers = self._get_headers()
 
             logger.debug("Making GitHub API request: %s", url)
 
+            # Use instance-level retry policy configuration
+            max_retries = self._max_retries
+            base_delay = self._base_delay
+
+            # Create client once and reuse for all retry attempts
             with httpx.Client(timeout=10.0) as client:
-                response = client.get(url, headers=headers, params=params or {})
+                for attempt in range(self._max_retries):
+                    response = client.get(url, headers=headers, params=params or {})
 
-                # Check for rate limiting
-                if response.status_code == 429:
-                    rate_limit_reset = response.headers.get("X-RateLimit-Reset", "unknown")
-                    logger.error("GitHub API rate limit exceeded. Reset at: %s", rate_limit_reset)
-                    raise RuntimeError(
-                        f"GitHub API rate limit exceeded. Try again after {rate_limit_reset}"
-                    )
+                    # Check for rate limiting using helper method
+                    if self._is_rate_limited(response):
+                        # Use helper method for consistent message formatting
+                        retry_msg = self._get_rate_limit_reset_message(response)
+                        
+                        # SECURITY: Log without token
+                        logger.error(
+                            "GitHub API rate limit exceeded for endpoint %s. "
+                            "Retry after: %s",
+                            endpoint,
+                            retry_msg
+                        )
+                        raise RuntimeError(
+                            f"GitHub API rate limit exceeded. Try again after {retry_msg}"
+                        )
+                    
+                    # Check for other 403 errors (not rate limits) - don't retry
+                    # Check for non-rate-limit 403 (permission/auth error) - don't retry
+                    if response.status_code == 403:
+                        logger.error("GitHub API access forbidden: 403 Forbidden")
+                        raise RuntimeError(
+                            "GitHub API access forbidden. Token may lack required permissions."
+                        )
 
-                # Check for authentication errors
-                if response.status_code == 401:
-                    logger.error("GitHub API authentication failed: 401 Unauthorized")
-                    raise RuntimeError(
-                        "GitHub API authentication failed. Token may be invalid or expired."
-                    )
+                    # Check for authentication errors - don't retry these
+                    if response.status_code == 401:
+                        logger.error("GitHub API authentication failed: 401 Unauthorized")
+                        raise RuntimeError(
+                            "GitHub API authentication failed. Token may be invalid or expired."
+                        )
 
-                if response.status_code == 403:
-                    logger.error("GitHub API access forbidden: 403 Forbidden")
-                    raise RuntimeError(
-                        "GitHub API access forbidden. Token may lack required permissions."
-                    )
+                    # Retry transient server errors (502, 503, 504)
+                    if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
+                        # Exponential backoff with jitter up to 50% of the base delay
+                        base_delay_no_jitter = self._base_delay * (2 ** attempt)
+                    if response.status_code in (502, 503, 504) and attempt < max_retries - 1:
+                        # Exponential backoff with proportional jitter
+                        base_delay_no_jitter = base_delay * (2 ** attempt)
+                        delay = base_delay_no_jitter + random.uniform(0, base_delay_no_jitter * 0.5)
+                        logger.warning(
+                            "GitHub API transient error %d on attempt %d/%d. "
+                            "Retrying in %.2f seconds...",
+                            response.status_code,
+                            attempt + 1,
+                            self._max_retries,
+                            delay
+                        )
+                        time.sleep(delay)
+                        continue
 
-                # Raise for other HTTP errors
-                if response.status_code >= 400:
-                    logger.error(
-                        "GitHub API request failed: HTTP %d - %s",
-                        response.status_code,
-                        response.text[:200],
-                    )
-                    raise RuntimeError(
-                        f"GitHub API request failed with status {response.status_code}"
-                    )
+                    # Raise for other HTTP errors
+                    if response.status_code >= 400:
+                        logger.error(
+                            "GitHub API request failed: HTTP %d - %s",
+                            response.status_code,
+                            response.text[:200],
+                        )
+                        raise RuntimeError(
+                            f"GitHub API request failed with status {response.status_code}"
+                        )
 
-                response.raise_for_status()
-                return response.json()
+                    response.raise_for_status()
+                    return response.json()
 
         except httpx.TimeoutException as e:
             logger.error("GitHub API request timed out: %s", str(e))
