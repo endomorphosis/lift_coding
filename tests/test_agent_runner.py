@@ -513,7 +513,14 @@ class TestRunOnce:
 
         # Manipulate the start time to simulate elapsed time
         # We need to directly update the trace, not use update_agent_task_state
-        # because we can't transition running->running
+        # because we can't transition running->running.
+        # 
+        # NOTE: This test intentionally uses raw SQL to manipulate database state
+        # to test the runner's behavior when a task has been running for a specific
+        # duration. This is necessary because:
+        # 1. The state transition API doesn't allow running->running transitions
+        # 2. We need to backdate the auto_started_at timestamp to simulate elapsed time
+        # 3. This approach is acceptable in tests to set up specific scenarios
         past_time = datetime.now(UTC) - timedelta(seconds=15)
         task_uuid = uuid.UUID(task.id)
 
