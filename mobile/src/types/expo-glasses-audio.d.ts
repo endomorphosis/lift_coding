@@ -1,7 +1,26 @@
 declare module '../../modules/expo-glasses-audio' {
   import { Subscription } from 'expo-modules-core';
 
+  export interface AudioDevice {
+    id: number;
+    type: number;
+    typeName: string;
+    productName: string;
+    address?: string;
+  }
+
   export interface AudioRouteInfo {
+    inputs: AudioDevice[];
+    outputs: AudioDevice[];
+    audioMode: number;
+    audioModeName: string;
+    isScoOn: boolean;
+    isScoAvailable: boolean;
+    isBluetoothConnected: boolean;
+    timestamp: number;
+  }
+
+  export interface SimpleAudioRouteInfo {
     inputDevice: string;
     outputDevice: string;
     sampleRate: number;
