@@ -37,10 +37,10 @@ def get_secret_manager() -> SecretManager:
         logger.info("Using EnvSecretManager (development mode)")
         return EnvSecretManager()
     elif manager_type == "aws":
-        # Future implementation
-        # from .aws_secrets import AWSSecretManager
-        # return AWSSecretManager()
-        raise NotImplementedError("AWS Secrets Manager support coming soon")
+        from .aws_secrets import AWSSecretManager
+
+        logger.info("Using AWSSecretManager (production mode)")
+        return AWSSecretManager()
     elif manager_type == "vault":
         from .vault_secrets import VaultSecretManager
 
