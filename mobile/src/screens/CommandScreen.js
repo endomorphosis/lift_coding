@@ -369,14 +369,9 @@ export default function CommandScreen() {
     setLoading(true);
     setError(null);
     
-    try {
-      // Replay the stored TTS locally
-      await playTTS(lastSpokenText);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    // Replay the stored TTS locally
+    await playTTS(lastSpokenText);
+    setLoading(false);
   };
 
   const handleNext = async () => {
@@ -394,9 +389,25 @@ export default function CommandScreen() {
         setLastSpokenText(data.spoken_text);
       }
       
-      // Auto-play TTS if enabled
-      if (autoPlayTts && data.spoken_text) {
-        await playTTS(data.spoken_text);
+      // Check if confirmation is required
+      if (data.pending_action) {
+        console.log('[CommandScreen] Pending action detected (next):', {
+          token: data.pending_action.token,
+          summary: data.pending_action.summary,
+          expires_at: data.pending_action.expires_at,
+        });
+        setPendingAction(data.pending_action);
+        setShowConfirmModal(true);
+        
+        // Auto-play confirmation prompt if TTS is enabled
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
+      } else {
+        // Auto-play TTS if enabled and spoken_text is available
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
       }
     } catch (err) {
       setError(err.message);
