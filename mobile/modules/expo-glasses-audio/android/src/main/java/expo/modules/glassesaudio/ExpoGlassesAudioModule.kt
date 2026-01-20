@@ -163,25 +163,27 @@ class ExpoGlassesAudioModule : Module() {
         var promiseSettled = false
         
         // Setup timeout to prevent promise from hanging indefinitely
-        val timeoutRunnable = Runnable {
-          synchronized(this@ExpoGlassesAudioModule) {
-            if (!promiseSettled) {
-              promiseSettled = true
-              player.stop()
-              audioManager.stopBluetoothSco()
-              audioManager.mode = AudioManager.MODE_NORMAL
-              
-              sendEvent("onPlaybackStatus", mapOf(
-                "isPlaying" to false,
-                "error" to "Playback timeout"
-              ))
-              
-              promise.reject("ERR_PLAYBACK_TIMEOUT", "Playback did not complete within timeout period")
+        synchronized(this@ExpoGlassesAudioModule) {
+          val timeoutRunnable = Runnable {
+            synchronized(this@ExpoGlassesAudioModule) {
+              if (!promiseSettled) {
+                promiseSettled = true
+                player.stop()
+                audioManager.stopBluetoothSco()
+                audioManager.mode = AudioManager.MODE_NORMAL
+                
+                sendEvent("onPlaybackStatus", mapOf(
+                  "isPlaying" to false,
+                  "error" to "Playback timeout after ${PLAYBACK_TIMEOUT_MS / 60000} minutes"
+                ))
+                
+                promise.reject("ERR_PLAYBACK_TIMEOUT", "Playback did not complete within ${PLAYBACK_TIMEOUT_MS / 60000} minutes")
+              }
             }
           }
+          playbackTimeoutRunnable = timeoutRunnable
+          handler.postDelayed(timeoutRunnable, PLAYBACK_TIMEOUT_MS)
         }
-        playbackTimeoutRunnable = timeoutRunnable
-        handler.postDelayed(timeoutRunnable, PLAYBACK_TIMEOUT_MS)
         
         try {
           // Parse and play WAV file

@@ -207,6 +207,13 @@ class GlassesPlayer {
                 totalRead
             }
             
+            // At least 2 bytes are required for a single 16-bit PCM sample
+            if (validBytes < 2) {
+                throw IllegalArgumentException(
+                    "WAV file too small to contain valid 16-bit PCM data: read $totalRead byte(s)"
+                )
+            }
+            
             // Convert bytes to shorts (PCM 16-bit), based on actual bytes read
             val pcmShorts = ShortArray(validBytes / 2)
             val buffer = ByteBuffer.wrap(pcmBytes, 0, validBytes)
