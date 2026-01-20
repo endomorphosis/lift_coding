@@ -202,12 +202,15 @@ class TestTransientErrorRetry:
             assert mock_get.call_count == 3
 
     def test_jitter_in_backoff(self, provider):
-        """Test that retry delays include jitter."""
+        """Test that retry delays include proportional jitter."""
         with patch("httpx.Client") as mock_client, \
              patch("time.sleep") as mock_sleep, \
              patch("random.uniform") as mock_random:
             
-            mock_random.return_value = 0.3  # Fixed jitter for testing
+            # Mock uniform to return a fixed fraction of the range
+            # First call: range is (0, 0.25), return 0.15
+            # Second call: range is (0, 0.5), return 0.3
+            mock_random.side_effect = [0.15, 0.3]
             
             mock_response_503 = MagicMock()
             mock_response_503.status_code = 503
@@ -223,12 +226,14 @@ class TestTransientErrorRetry:
 
             provider._make_request("/test/endpoint")
             
-            # Check that sleep was called with expected delays (base * 2^attempt + jitter)
-            # First retry: 0.5 * 2^0 + 0.3 = 0.8
-            # Second retry: 0.5 * 2^1 + 0.3 = 1.3
+            # Check that sleep was called with expected delays
+            # With proportional jitter: base_delay_no_jitter + uniform(0, base_delay_no_jitter * 0.5)
+            # where base_delay_no_jitter = base_delay * (2^attempt)
+            # First retry (attempt=0): 0.5 * 2^0 + 0.15 = 0.5 + 0.15 = 0.65
+            # Second retry (attempt=1): 0.5 * 2^1 + 0.3 = 1.0 + 0.3 = 1.3
             assert mock_sleep.call_count == 2
             delays = [call[0][0] for call in mock_sleep.call_args_list]
-            assert abs(delays[0] - 0.8) < 0.01  # First retry delay
+            assert abs(delays[0] - 0.65) < 0.01  # First retry delay
             assert abs(delays[1] - 1.3) < 0.01  # Second retry delay
 
 
