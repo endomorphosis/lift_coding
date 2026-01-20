@@ -262,7 +262,7 @@ export default function CommandScreen() {
       // Store for repeat functionality
       if (data.spoken_text) {
         setLastSpokenText(data.spoken_text);
-        setLastCommandText(null); // Audio commands don't have text
+        setLastCommandText('audio command'); // Audio commands don't have text
       }
       
       // Check if confirmation is required
@@ -373,11 +373,8 @@ export default function CommandScreen() {
     setError(null);
     
     try {
-      // First, try to replay the stored TTS
+      // Replay the stored TTS locally
       await playTTS(lastSpokenText);
-      
-      // Optionally, we could also send a "repeat" command to the server
-      // to get updated context, but for now we just replay locally
     } catch (err) {
       setError(err.message);
     } finally {
@@ -665,7 +662,7 @@ export default function CommandScreen() {
             disabled={loading || !lastSpokenText}
           >
             <Text style={styles.quickControlButtonText}>🔄 Repeat</Text>
-            <Text style={styles.quickControlButtonSubtext}>Replay last response</Text>
+            <Text style={styles.quickControlButtonSubtext}>Replay last TTS response</Text>
           </TouchableOpacity>
           
           <TouchableOpacity
