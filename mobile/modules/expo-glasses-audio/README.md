@@ -155,7 +155,15 @@ The iOS implementation provides audio route monitoring using AVAudioSession with
 - Diagnostics UI
 
 **iOS API Differences:**
-- `getAudioRoute()` returns simplified route info (inputDevice, outputDevice, sampleRate, isBluetoothConnected)
+- `getAudioRoute()` returns simplified route info:
+  ```typescript
+  {
+    inputDevice: string;      // e.g., "iPhone Microphone (MicrophoneBuiltIn)"
+    outputDevice: string;     // e.g., "iPhone Speaker (Speaker)"
+    sampleRate: number;       // e.g., 48000
+    isBluetoothConnected: boolean;
+  }
+  ```
 - No Bluetooth SCO-specific methods (`isScoConnected`, `isScoAvailable`) as iOS uses a different audio architecture
 - No `audioMode` field - iOS handles audio sessions differently
 - Recording and playback methods are iOS-specific extensions
@@ -173,8 +181,14 @@ The module requires the following Android permissions:
 
 ### iOS
 
-The module requires the following iOS permissions (configured in `app.json`):
+The module requires the following iOS permissions (configured in `app.json` under `ios.infoPlist`):
 
+- **NSMicrophoneUsageDescription**: Required for audio recording
+- **NSBluetoothAlwaysUsageDescription**: Required for Bluetooth device access
+- **NSBluetoothPeripheralUsageDescription**: Required for Bluetooth peripheral communication
+- **UIBackgroundModes**: Array containing "audio" for background audio support
+
+Info.plist format (configured automatically via app.json):
 ```xml
 <key>NSMicrophoneUsageDescription</key>
 <string>This app needs microphone access to record audio commands for your Meta AI Glasses.</string>
