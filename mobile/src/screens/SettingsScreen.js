@@ -136,11 +136,13 @@ export default function SettingsScreen() {
   };
 
   const handleAutoSpeakToggle = async (value) => {
+    const previousValue = autoSpeakNotifications;
     setAutoSpeakNotifications(value);
     try {
       await setAutoSpeakEnabled(value);
     } catch (error) {
       console.error('Failed to save auto-speak setting:', error);
+      setAutoSpeakNotifications(previousValue);
       Alert.alert('Error', 'Failed to save auto-speak setting');
     }
   };
