@@ -191,7 +191,7 @@ export GITHUB_TOKEN=ghp_YOUR_PERSONAL_ACCESS_TOKEN_HERE
 make dev
 ```
 
-**Note:** Setting `GITHUB_TOKEN` alone is sufficient to enable live mode. The `GITHUB_LIVE_MODE` environment variable is optional and only used by legacy authentication providers.
+**Note:** Setting `GITHUB_TOKEN` alone is sufficient to enable live mode with the current authentication implementation (`get_token_provider()`). The `GITHUB_LIVE_MODE` environment variable is only used by legacy authentication providers (`EnvironmentTokenProvider`) and is not required for standard usage.
 
 #### Get a GitHub Token
 
@@ -251,7 +251,7 @@ When multiple authentication methods are configured, the system uses this priori
 - **`GITHUB_APP_PRIVATE_KEY_PEM`**: Your GitHub App private key in PEM format (supports escaped newlines)
 - **`GITHUB_INSTALLATION_ID`**: The installation ID for your GitHub App
 - **`GITHUB_TOKEN`**: Your GitHub personal access token (for simple auth) - setting this alone enables live mode
-- **`GITHUB_LIVE_MODE`**: Optional, legacy setting; set to `true`, `1`, or `yes` (only used by legacy auth providers)
+- **`GITHUB_LIVE_MODE`**: Optional, only used by legacy providers (`EnvironmentTokenProvider`); set to `true`, `1`, or `yes` to enable live mode with those providers
 - **`HANDS_FREE_GITHUB_MODE`**: Set to `fixtures` to force fixture mode even when tokens are configured
 - When no authentication is configured, the system uses fixture data (default behavior)
 
