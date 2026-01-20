@@ -21,6 +21,8 @@ import {
 import {
   getAutoSpeakEnabled,
   setAutoSpeakEnabled,
+  getPushToken,
+  setPushToken as savePushToken,
 } from '../utils/notificationSettings';
 import { DEFAULT_BASE_URL, getSpeakNotifications, setSpeakNotifications } from '../api/config';
 
@@ -45,6 +47,7 @@ export default function SettingsScreen() {
   const [subscriptions, setSubscriptions] = useState([]);
   const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
   const [pushLoading, setPushLoading] = useState(false);
+  const [pushStatusErrorShown, setPushStatusErrorShown] = useState(false);
   const [githubConnectionId, setGithubConnectionId] = useState(null);
   const [connectingGithub, setConnectingGithub] = useState(false);
 
@@ -109,12 +112,14 @@ export default function SettingsScreen() {
       const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
       const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
       const savedAutoSpeak = await getAutoSpeakEnabled();
+      const savedPushToken = await getPushToken();
       const savedGithubConnectionId = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_CONNECTION_ID);
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
       setAutoSpeakNotifications(savedAutoSpeak);
+      if (savedPushToken) setPushToken(savedPushToken);
       
       // Load push subscriptions
       await loadPushStatus();
@@ -127,11 +132,38 @@ export default function SettingsScreen() {
   };
 
   const loadPushStatus = async () => {
+    // Prevent concurrent calls
+    if (pushLoading) {
+      return;
+    }
+    
+    setPushLoading(true);
     try {
       const subs = await listSubscriptions();
       setSubscriptions(subs);
+      setPushStatusErrorShown(false); // Reset error flag on success
     } catch (error) {
       console.error('Failed to load subscriptions:', error);
+      // Only show the alert once per session to avoid infinite loops
+      if (!pushStatusErrorShown) {
+        setPushStatusErrorShown(true);
+        Alert.alert(
+          'Connection Error',
+          'Unable to load push notification subscriptions. Please check your network connection and try again.',
+          [
+            { text: 'OK' },
+            { 
+              text: 'Retry', 
+              onPress: async () => {
+                setPushStatusErrorShown(false); // Allow retry
+                await loadPushStatus();
+              }
+            }
+          ]
+        );
+      }
+    } finally {
+      setPushLoading(false);
     }
   };
 
@@ -141,6 +173,7 @@ export default function SettingsScreen() {
       const token = await registerForPushAsync();
       if (token) {
         setPushToken(token);
+        await savePushToken(token);
         Alert.alert('Success', 'Push permission granted and token obtained!');
       } else {
         Alert.alert('Error', 'Failed to get push token. Make sure you are on a physical device.');
