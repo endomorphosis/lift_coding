@@ -1310,16 +1310,16 @@ async def confirm_command(
                     target = f"{repo}#{pr_num}"
                     reviewers_str = ", ".join(reviewers)
                     
-                    # Check if live mode is enabled and token is available
+                    # Check if live mode is enabled and GitHub token is available
                     from handsfree.github.auth import get_default_auth_provider
                     
                     auth_provider = get_default_auth_provider()
-                    token = None
+                    github_token = None
                     if auth_provider.supports_live_mode():
-                        token = auth_provider.get_token(user_id)
+                        github_token = auth_provider.get_token(user_id)
                     
                     # Execute via GitHub API if live mode enabled and token available
-                    if token:
+                    if github_token:
                         from handsfree.github.client import request_reviewers as github_request_reviewers
                         
                         logger.info(
@@ -1331,7 +1331,7 @@ async def confirm_command(
                             repo=repo,
                             pr_number=pr_num,
                             reviewers=reviewers,
-                            token=token,
+                            token=github_token,
                         )
                         
                         if github_result["ok"]:
@@ -1445,11 +1445,11 @@ async def confirm_command(
                     from handsfree.github.auth import get_default_auth_provider
                     
                     auth_provider = get_default_auth_provider()
-                    token = None
+                    github_token = None
                     if auth_provider.supports_live_mode():
-                        token = auth_provider.get_token(user_id)
+                        github_token = auth_provider.get_token(user_id)
                     
-                    if token:
+                    if github_token:
                         from handsfree.github.client import merge_pull_request
                         
                         logger.info(
@@ -1461,7 +1461,7 @@ async def confirm_command(
                             repo=repo,
                             pr_number=pr_num,
                             merge_method=merge_method,
-                            token=token,
+                            token=github_token,
                         )
                         
                         if github_result["ok"]:
