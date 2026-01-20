@@ -200,9 +200,8 @@ class GlassesPlayer {
             }
             
             // Convert bytes to shorts (PCM 16-bit), based on actual bytes read
-            val bytesToConvert = totalRead.coerceAtLeast(0)
-            val pcmShorts = ShortArray(bytesToConvert / 2)
-            val buffer = ByteBuffer.wrap(pcmBytes, 0, bytesToConvert)
+            val pcmShorts = ShortArray(totalRead / 2)
+            val buffer = ByteBuffer.wrap(pcmBytes, 0, totalRead)
             buffer.order(ByteOrder.LITTLE_ENDIAN)
             
             for (i in pcmShorts.indices) {

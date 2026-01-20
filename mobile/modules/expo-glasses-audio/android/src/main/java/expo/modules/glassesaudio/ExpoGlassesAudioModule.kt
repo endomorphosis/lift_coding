@@ -15,12 +15,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ExpoGlassesAudioModule : Module() {
+  companion object {
+    private const val PLAYBACK_TIMEOUT_MS = 300000L // 5 minutes timeout for playback
+  }
+  
   private lateinit var context: Context
   private lateinit var routeMonitor: AudioRouteMonitor
   private lateinit var recorder: GlassesRecorder
   private lateinit var player: GlassesPlayer
   private val handler = Handler(Looper.getMainLooper())
-  private val playbackTimeoutMs = 300000L // 5 minutes timeout for playback
   private var playbackTimeoutRunnable: Runnable? = null
 
   override fun definition() = ModuleDefinition {
@@ -178,7 +181,7 @@ class ExpoGlassesAudioModule : Module() {
           }
         }
         playbackTimeoutRunnable = timeoutRunnable
-        handler.postDelayed(timeoutRunnable, playbackTimeoutMs)
+        handler.postDelayed(timeoutRunnable, PLAYBACK_TIMEOUT_MS)
         
         try {
           // Parse and play WAV file
