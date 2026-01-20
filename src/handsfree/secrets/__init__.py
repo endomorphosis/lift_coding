@@ -9,10 +9,17 @@ from .factory import get_default_secret_manager, get_secret_manager, reset_secre
 from .interface import SecretManager
 from .vault_secrets import VaultSecretManager
 
+# Lazy import for AWSSecretManager (requires optional boto3 dependency)
+try:
+    from .aws_secrets import AWSSecretManager
+except ImportError:
+    AWSSecretManager = None  # type: ignore
+
 __all__ = [
     "SecretManager",
     "EnvSecretManager",
     "VaultSecretManager",
+    "AWSSecretManager",
     "get_secret_manager",
     "get_default_secret_manager",
     "reset_secret_manager",

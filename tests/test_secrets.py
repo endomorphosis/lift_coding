@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 import pytest
 from hvac.exceptions import InvalidPath, VaultError
 
-from handsfree.secrets import EnvSecretManager, SecretManager, VaultSecretManager
+from handsfree.secrets import AWSSecretManager, EnvSecretManager, SecretManager, VaultSecretManager
 
 
 class TestEnvSecretManager:
@@ -520,3 +520,386 @@ class TestVaultSecretManager:
             url="https://vault.example.com",
             namespace="test-namespace",
         )
+
+
+class TestAWSSecretManager:
+    """Tests for AWSSecretManager."""
+
+    @pytest.fixture
+    def mock_boto3_client(self):
+        """Create a mock boto3 client."""
+        mock_client = Mock()
+        return mock_client
+
+    @pytest.fixture
+    def mock_boto3_module(self, mock_boto3_client):
+        """Create a mock boto3 module."""
+        mock_boto3 = Mock()
+        mock_boto3.client.return_value = mock_boto3_client
+        return mock_boto3
+
+    def test_initialization_requires_boto3(self):
+        """Test that initialization fails without boto3 installed."""
+        # Mock the import to raise ImportError
+        with patch("builtins.__import__", side_effect=ImportError("No module named 'boto3'")):
+            with pytest.raises(ImportError, match="No module named"):
+                # This will trigger the import inside __init__
+                from handsfree.secrets.aws_secrets import AWSSecretManager
+
+                AWSSecretManager(region="us-east-1")
+
+    def test_initialization_requires_region(self, mock_boto3_client):
+        """Test that initialization fails without AWS region configured."""
+        with patch.dict(os.environ, {}, clear=True):
+            from handsfree.secrets import AWSSecretManager
+
+            with pytest.raises(ValueError, match="AWS region is required"):
+                AWSSecretManager(boto3_client=mock_boto3_client)
+
+    def test_initialization_with_region_parameter(self, mock_boto3_client):
+        """Test AWSSecretManager initialization with region parameter."""
+
+        manager = AWSSecretManager(
+            region="us-west-2", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        assert manager.region == "us-west-2"
+        assert manager.prefix == "test/"
+        assert manager.client == mock_boto3_client
+
+    @patch.dict(os.environ, {"AWS_REGION": "us-east-1"})
+    def test_initialization_from_environment(self, mock_boto3_client):
+        """Test that AWSSecretManager can be initialized from environment variables."""
+
+        manager = AWSSecretManager(boto3_client=mock_boto3_client)
+
+        assert manager.region == "us-east-1"
+        assert manager.prefix == "handsfree/"
+
+    @patch.dict(
+        os.environ, {"AWS_DEFAULT_REGION": "eu-west-1", "HANDSFREE_AWS_SECRETS_PREFIX": "myapp/"}
+    )
+    def test_initialization_with_custom_prefix(self, mock_boto3_client):
+        """Test initialization with custom prefix from environment."""
+
+        manager = AWSSecretManager(boto3_client=mock_boto3_client)
+
+        assert manager.region == "eu-west-1"
+        assert manager.prefix == "myapp/"
+
+    def test_prefix_normalization(self, mock_boto3_client):
+        """Test that prefix is normalized to end with /."""
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test", boto3_client=mock_boto3_client
+        )
+
+        assert manager.prefix == "test/"
+
+    def test_store_and_retrieve_secret(self, mock_boto3_client):
+        """Test storing and retrieving a secret."""
+
+        # Mock create_secret response
+        mock_boto3_client.create_secret.return_value = {"ARN": "arn:aws:secretsmanager:..."}
+
+        # Mock get_secret_value response
+        mock_boto3_client.get_secret_value.return_value = {
+            "SecretString": '{"value": "ghp_test_token_12345"}'
+        }
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        # Store secret
+        secret_value = "ghp_test_token_12345"
+        reference = manager.store_secret("github_token_user_123", secret_value)
+
+        assert reference == "aws://test/github_token_user_123"
+        mock_boto3_client.create_secret.assert_called_once()
+
+        # Retrieve secret
+        retrieved = manager.get_secret(reference)
+        assert retrieved == secret_value
+        mock_boto3_client.get_secret_value.assert_called_once_with(
+            SecretId="test/github_token_user_123"
+        )
+
+    def test_store_secret_with_metadata(self, mock_boto3_client):
+        """Test storing a secret with metadata (stored as tags)."""
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        secret_value = "ghp_test_token_12345"
+        metadata = {"scopes": "repo,user", "expires_at": "2026-12-31"}
+
+        manager.store_secret("github_token_user_123", secret_value, metadata)
+
+        # Verify the call included tags
+        call_args = mock_boto3_client.create_secret.call_args
+        assert call_args[1]["Name"] == "test/github_token_user_123"
+        assert call_args[1]["Tags"] == [
+            {"Key": "scopes", "Value": "repo,user"},
+            {"Key": "expires_at", "Value": "2026-12-31"},
+        ]
+
+    def test_store_secret_updates_existing(self, mock_boto3_client):
+        """Test that storing an existing secret updates it."""
+
+        # Mock ResourceExistsException
+        from botocore.exceptions import ClientError
+
+        mock_boto3_client.create_secret.side_effect = ClientError(
+            {"Error": {"Code": "ResourceExistsException"}}, "CreateSecret"
+        )
+        mock_boto3_client.put_secret_value.return_value = {}
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        reference = manager.store_secret("existing_secret", "new_value")
+
+        assert reference == "aws://test/existing_secret"
+        mock_boto3_client.put_secret_value.assert_called_once()
+
+    def test_get_nonexistent_secret(self, mock_boto3_client):
+        """Test retrieving a non-existent secret returns None."""
+        from botocore.exceptions import ClientError
+
+        mock_boto3_client.get_secret_value.side_effect = ClientError(
+            {"Error": {"Code": "ResourceNotFoundException"}}, "GetSecretValue"
+        )
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        result = manager.get_secret("aws://test/nonexistent_secret")
+        assert result is None
+
+    def test_update_secret(self, mock_boto3_client):
+        """Test updating an existing secret."""
+
+        # Mock describe_secret (secret exists)
+        mock_boto3_client.describe_secret.return_value = {"Name": "test/test_secret"}
+        mock_boto3_client.put_secret_value.return_value = {}
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        # Update the secret
+        success = manager.update_secret("aws://test/test_secret", "new_value")
+        assert success is True
+
+        mock_boto3_client.put_secret_value.assert_called_once()
+
+    def test_update_nonexistent_secret(self, mock_boto3_client):
+        """Test updating a non-existent secret returns False."""
+        from botocore.exceptions import ClientError
+
+        mock_boto3_client.put_secret_value.side_effect = ClientError(
+            {"Error": {"Code": "ResourceNotFoundException"}}, "PutSecretValue"
+        )
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        success = manager.update_secret("aws://test/nonexistent_secret", "new_value")
+        assert success is False
+
+    def test_update_secret_with_metadata(self, mock_boto3_client):
+        """Test updating a secret with new metadata."""
+
+        mock_boto3_client.describe_secret.return_value = {"Name": "test/test_secret"}
+        mock_boto3_client.put_secret_value.return_value = {}
+        mock_boto3_client.tag_resource.return_value = {}
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        metadata = {"updated": "true"}
+        success = manager.update_secret("aws://test/test_secret", "new_value", metadata)
+        assert success is True
+
+        mock_boto3_client.tag_resource.assert_called_once_with(
+            SecretId="test/test_secret", Tags=[{"Key": "updated", "Value": "true"}]
+        )
+
+    def test_delete_secret(self, mock_boto3_client):
+        """Test deleting a secret."""
+
+        mock_boto3_client.delete_secret.return_value = {}
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=True
+        )
+
+        # Delete the secret
+        success = manager.delete_secret("aws://test/test_secret")
+        assert success is True
+
+        mock_boto3_client.delete_secret.assert_called_once_with(
+            SecretId="test/test_secret", ForceDeleteWithoutRecovery=True
+        )
+
+    def test_delete_nonexistent_secret(self, mock_boto3_client):
+        """Test deleting a non-existent secret returns False."""
+        from botocore.exceptions import ClientError
+
+        mock_boto3_client.delete_secret.side_effect = ClientError(
+            {"Error": {"Code": "ResourceNotFoundException"}}, "DeleteSecret"
+        )
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=True
+        )
+
+        success = manager.delete_secret("aws://test/nonexistent_secret")
+        assert success is False
+
+    def test_delete_secret_with_recovery_window(self, mock_boto3_client):
+        """Test deleting a secret with recovery window (production mode)."""
+
+        mock_boto3_client.delete_secret.return_value = {}
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client, force_delete=False
+        )
+
+        # Delete the secret
+        success = manager.delete_secret("aws://test/test_secret")
+        assert success is True
+
+        # Should use recovery window instead of force delete
+        mock_boto3_client.delete_secret.assert_called_once_with(
+            SecretId="test/test_secret", RecoveryWindowInDays=30
+        )
+
+    def test_list_secrets(self, mock_boto3_client):
+        """Test listing all secrets."""
+
+        # Mock paginator
+        mock_paginator = Mock()
+        mock_paginator.paginate.return_value = [
+            {
+                "SecretList": [
+                    {"Name": "test/secret1"},
+                    {"Name": "test/secret2"},
+                    {"Name": "test/secret3"},
+                ]
+            }
+        ]
+        mock_boto3_client.get_paginator.return_value = mock_paginator
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        refs = manager.list_secrets()
+        assert len(refs) == 3
+        assert "aws://test/secret1" in refs
+        assert "aws://test/secret2" in refs
+        assert "aws://test/secret3" in refs
+
+    def test_list_secrets_with_prefix(self, mock_boto3_client):
+        """Test listing secrets with a prefix filter."""
+
+        # Mock paginator
+        mock_paginator = Mock()
+        mock_paginator.paginate.return_value = [
+            {
+                "SecretList": [
+                    {"Name": "test/github_token1"},
+                    {"Name": "test/github_token2"},
+                ]
+            }
+        ]
+        mock_boto3_client.get_paginator.return_value = mock_paginator
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        refs = manager.list_secrets(prefix="github_")
+        assert len(refs) == 2
+
+    def test_list_secrets_skips_deleted(self, mock_boto3_client):
+        """Test that listing secrets skips secrets scheduled for deletion."""
+
+        # Mock paginator with one deleted secret
+        mock_paginator = Mock()
+        mock_paginator.paginate.return_value = [
+            {
+                "SecretList": [
+                    {"Name": "test/secret1"},
+                    {"Name": "test/secret2", "DeletedDate": "2026-01-20T00:00:00Z"},
+                    {"Name": "test/secret3"},
+                ]
+            }
+        ]
+        mock_boto3_client.get_paginator.return_value = mock_paginator
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        refs = manager.list_secrets()
+        assert len(refs) == 2
+        assert "aws://test/secret1" in refs
+        assert "aws://test/secret3" in refs
+        assert "aws://test/secret2" not in refs
+
+    def test_list_secrets_empty(self, mock_boto3_client):
+        """Test listing secrets when none exist."""
+
+        # Mock empty paginator
+        mock_paginator = Mock()
+        mock_paginator.paginate.return_value = [{"SecretList": []}]
+        mock_boto3_client.get_paginator.return_value = mock_paginator
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        refs = manager.list_secrets()
+        assert len(refs) == 0
+
+    def test_invalid_reference_format(self, mock_boto3_client):
+        """Test handling of invalid reference format."""
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        # Missing "aws://" prefix
+        result = manager.get_secret("INVALID_FORMAT")
+        assert result is None
+
+        success = manager.delete_secret("INVALID_FORMAT")
+        assert success is False
+
+        success = manager.update_secret("INVALID_FORMAT", "new_value")
+        assert success is False
+
+    def test_aws_manager_implements_interface(self, mock_boto3_client):
+        """Test that AWSSecretManager implements SecretManager interface."""
+
+        manager = AWSSecretManager(
+            region="us-east-1", prefix="test/", boto3_client=mock_boto3_client
+        )
+
+        assert isinstance(manager, SecretManager)
+
+        # Check that all required methods exist
+        assert hasattr(manager, "store_secret")
+        assert hasattr(manager, "get_secret")
+        assert hasattr(manager, "delete_secret")
+        assert hasattr(manager, "update_secret")
+        assert hasattr(manager, "list_secrets")
+
