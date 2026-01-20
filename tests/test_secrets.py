@@ -4,9 +4,10 @@ import os
 from unittest.mock import Mock, patch
 
 import pytest
+from google.api_core.exceptions import AlreadyExists, NotFound
 from hvac.exceptions import InvalidPath, VaultError
 
-from handsfree.secrets import EnvSecretManager, SecretManager, VaultSecretManager
+from handsfree.secrets import EnvSecretManager, GCPSecretManager, SecretManager, VaultSecretManager
 
 
 class TestEnvSecretManager:
@@ -520,3 +521,345 @@ class TestVaultSecretManager:
             url="https://vault.example.com",
             namespace="test-namespace",
         )
+
+
+class TestGCPSecretManager:
+    """Tests for GCPSecretManager."""
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization(self, mock_client_class):
+        """Test GCPSecretManager initialization."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(
+            project_id="test-project",
+            prefix="testprefix",
+        )
+
+        assert manager.project_id == "test-project"
+        assert manager.prefix == "testprefix"
+        mock_client_class.assert_called_once()
+
+    def test_initialization_missing_project_id(self):
+        """Test that initialization fails without project ID."""
+        with pytest.raises(ValueError, match="GOOGLE_CLOUD_PROJECT or GCP_PROJECT_ID"):
+            GCPSecretManager()
+
+    @patch.dict(
+        os.environ,
+        {
+            "GOOGLE_CLOUD_PROJECT": "env-project",
+            "HANDSFREE_GCP_SECRETS_PREFIX": "env-prefix",
+        },
+    )
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization_from_environment(self, mock_client_class):
+        """Test that GCPSecretManager can be initialized from environment variables."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager()
+
+        assert manager.project_id == "env-project"
+        assert manager.prefix == "env-prefix"
+
+    @patch.dict(
+        os.environ,
+        {
+            "GCP_PROJECT_ID": "alt-project",
+        },
+    )
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_initialization_gcp_project_id_env(self, mock_client_class):
+        """Test that GCP_PROJECT_ID environment variable works."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager()
+
+        assert manager.project_id == "alt-project"
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_and_retrieve_secret(self, mock_client_class):
+        """Test storing and retrieving a secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock the create secret response
+        mock_client.create_secret.return_value = Mock()
+
+        # Mock the add version response
+        mock_client.add_secret_version.return_value = Mock()
+
+        # Mock the access version response
+        mock_payload = Mock()
+        mock_payload.data = b"ghp_test_token_12345"
+        mock_response = Mock()
+        mock_response.payload = mock_payload
+        mock_client.access_secret_version.return_value = mock_response
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Store secret
+        secret_value = "ghp_test_token_12345"
+        reference = manager.store_secret("github_token_user_123", secret_value)
+
+        assert reference.startswith("gcp://")
+        assert "handsfree-github-token-user-123" in reference
+
+        # Verify create_secret was called
+        mock_client.create_secret.assert_called_once()
+        call_args = mock_client.create_secret.call_args[1]
+        assert call_args["request"]["parent"] == "projects/test-project"
+        assert call_args["request"]["secret_id"] == "handsfree-github-token-user-123"
+
+        # Verify add_secret_version was called
+        mock_client.add_secret_version.assert_called_once()
+        version_call_args = mock_client.add_secret_version.call_args[1]
+        assert version_call_args["request"]["payload"]["data"] == b"ghp_test_token_12345"
+
+        # Retrieve secret
+        retrieved = manager.get_secret(reference)
+        assert retrieved == secret_value
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_secret_with_metadata(self, mock_client_class):
+        """Test storing a secret with metadata."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        secret_value = "ghp_test_token_12345"
+        metadata = {"scopes": "repo,user", "expires_at": "2026-12-31"}
+
+        manager.store_secret("github_token_user_123", secret_value, metadata)
+
+        # Verify the call included labels
+        call_args = mock_client.create_secret.call_args[1]
+        assert "labels" in call_args["request"]["secret"]
+        labels = call_args["request"]["secret"]["labels"]
+        assert "scopes" in labels
+        assert "expires-at" in labels
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_store_secret_already_exists(self, mock_client_class):
+        """Test storing a secret that already exists."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock that secret already exists
+        mock_client.create_secret.side_effect = AlreadyExists("secret already exists")
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Should not raise, just add new version
+        reference = manager.store_secret("existing_secret", "new_value")
+
+        assert reference.startswith("gcp://")
+        # Verify add_secret_version was still called
+        mock_client.add_secret_version.assert_called_once()
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_get_nonexistent_secret(self, mock_client_class):
+        """Test retrieving a non-existent secret returns None."""
+        mock_client = Mock()
+        mock_client.access_secret_version.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        result = manager.get_secret("gcp://nonexistent-secret")
+        assert result is None
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_secret(self, mock_client_class):
+        """Test updating an existing secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock that secret exists
+        mock_client.get_secret.return_value = Mock()
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Update the secret
+        success = manager.update_secret("gcp://test-secret", "new_value")
+        assert success is True
+
+        # Verify add_secret_version was called with new value
+        mock_client.add_secret_version.assert_called_once()
+        call_args = mock_client.add_secret_version.call_args[1]
+        assert call_args["request"]["payload"]["data"] == b"new_value"
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_secret_with_metadata(self, mock_client_class):
+        """Test updating a secret with new metadata."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock that secret exists
+        mock_client.get_secret.return_value = Mock()
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        metadata = {"updated": "true"}
+        success = manager.update_secret("gcp://test-secret", "new_value", metadata)
+        assert success is True
+
+        # Verify update_secret was called to update labels
+        mock_client.update_secret.assert_called_once()
+        call_args = mock_client.update_secret.call_args[1]
+        assert "labels" in call_args["request"]["secret"]
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_update_nonexistent_secret(self, mock_client_class):
+        """Test updating a non-existent secret returns False."""
+        mock_client = Mock()
+        mock_client.get_secret.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        success = manager.update_secret("gcp://nonexistent-secret", "new_value")
+        assert success is False
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_delete_secret(self, mock_client_class):
+        """Test deleting a secret."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Delete the secret
+        success = manager.delete_secret("gcp://test-secret")
+        assert success is True
+
+        # Verify delete_secret was called
+        mock_client.delete_secret.assert_called_once()
+        call_args = mock_client.delete_secret.call_args[1]
+        assert "projects/test-project/secrets/test-secret" in call_args["request"]["name"]
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_delete_nonexistent_secret(self, mock_client_class):
+        """Test deleting a non-existent secret returns False."""
+        mock_client = Mock()
+        mock_client.delete_secret.side_effect = NotFound("secret not found")
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        success = manager.delete_secret("gcp://nonexistent-secret")
+        assert success is False
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets(self, mock_client_class):
+        """Test listing all secrets."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock list response
+        mock_secret1 = Mock()
+        mock_secret1.name = "projects/test-project/secrets/handsfree-secret1"
+        mock_secret2 = Mock()
+        mock_secret2.name = "projects/test-project/secrets/handsfree-secret2"
+        mock_secret3 = Mock()
+        mock_secret3.name = "projects/test-project/secrets/other-secret3"
+        
+        mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
+        mock_client.list_secrets.return_value = mock_secrets
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        refs = manager.list_secrets()
+        # Should only include secrets with handsfree prefix
+        assert len(refs) == 2
+        assert "gcp://handsfree-secret1" in refs
+        assert "gcp://handsfree-secret2" in refs
+        assert "gcp://other-secret3" not in refs
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets_with_prefix(self, mock_client_class):
+        """Test listing secrets with a prefix filter."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        # Mock list response
+        mock_secret1 = Mock()
+        mock_secret1.name = "projects/test-project/secrets/handsfree-github-token-1"
+        mock_secret2 = Mock()
+        mock_secret2.name = "projects/test-project/secrets/handsfree-github-token-2"
+        mock_secret3 = Mock()
+        mock_secret3.name = "projects/test-project/secrets/handsfree-slack-token-1"
+        
+        mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
+        mock_client.list_secrets.return_value = mock_secrets
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        refs = manager.list_secrets(prefix="github_token")
+        assert len(refs) == 2
+        assert all("github-token" in ref for ref in refs)
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_list_secrets_empty(self, mock_client_class):
+        """Test listing secrets when none exist."""
+        mock_client = Mock()
+        mock_client.list_secrets.return_value = []
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        refs = manager.list_secrets()
+        assert len(refs) == 0
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_invalid_reference_format(self, mock_client_class):
+        """Test handling of invalid reference format."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Missing "gcp://" prefix
+        result = manager.get_secret("INVALID_FORMAT")
+        assert result is None
+
+        success = manager.delete_secret("INVALID_FORMAT")
+        assert success is False
+
+        success = manager.update_secret("INVALID_FORMAT", "new_value")
+        assert success is False
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_gcp_manager_implements_interface(self, mock_client_class):
+        """Test that GCPSecretManager implements SecretManager interface."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        assert isinstance(manager, SecretManager)
+
+        # Check that all required methods exist
+        assert hasattr(manager, "store_secret")
+        assert hasattr(manager, "get_secret")
+        assert hasattr(manager, "delete_secret")
+        assert hasattr(manager, "update_secret")
+        assert hasattr(manager, "list_secrets")
+
+    @patch("handsfree.secrets.gcp_secrets.secretmanager.SecretManagerServiceClient")
+    def test_key_normalization(self, mock_client_class):
+        """Test that keys are normalized to GCP secret name format."""
+        mock_client = Mock()
+        mock_client_class.return_value = mock_client
+
+        manager = GCPSecretManager(project_id="test-project")
+
+        # Keys with special characters should be normalized
+        reference = manager.store_secret("github.token_user/123", "token")
+
+        # Should normalize to lowercase with hyphens
+        assert "handsfree-github-token-user-123" in reference
