@@ -16,4 +16,6 @@ export {
   speakNotification,
   startNotificationPolling,
   checkAndSpeakLatestNotification,
+  simulateNotificationForDev,
+  getDebugState,
 } from './notificationsHandler';

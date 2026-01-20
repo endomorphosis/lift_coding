@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, AppState, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
+import { getDebugState, simulateNotificationForDev } from '../push';
+import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
+const NATIVE_RECORDING_DURATION_SECONDS = 10;
+const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TTS and audio files
+const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
+const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -19,6 +25,11 @@ export default function GlassesDiagnosticsScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [commandResponse, setCommandResponse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [pushDebugState, setPushDebugState] = useState(null);
+  const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
+  const playbackTimeoutRef = useRef(null);
+  const soundRef = useRef(null);
+  const recordingTimeoutRef = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -28,12 +39,65 @@ export default function GlassesDiagnosticsScreen() {
       } catch {
         // ignore
       }
+      // Check if native module is available
+      try {
+        if (ExpoGlassesAudio) {
+          const allMethodsAvailable = NATIVE_MODULE_REQUIRED_METHODS.every(
+            method => typeof ExpoGlassesAudio[method] === 'function'
+          );
+          if (allMethodsAvailable) {
+            setNativeModuleAvailable(true);
+          }
+        }
+      } catch {
+        setNativeModuleAvailable(false);
+      }
       await checkAudioRoute();
     })();
 
+    // Fetch initial debug state immediately
+    try {
+      const state = getDebugState();
+      setPushDebugState(state);
+    } catch (error) {
+      console.error('Failed to get initial push debug state:', error);
+    }
+
+    // Track app state to pause polling when backgrounded
+    // Initialize based on current state rather than defaulting to true
+    let isActive = AppState.currentState === 'active';
+    
+    const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+      isActive = nextAppState === 'active';
+    });
+
+    // Periodically refresh push debug state (every 5 seconds) but only when active
+    const interval = setInterval(() => {
+      if (!isActive) {
+        return; // Skip polling when app is backgrounded
+      }
+      try {
+        const state = getDebugState();
+        setPushDebugState(state);
+      } catch (error) {
+        console.error('Failed to get push debug state:', error);
+      }
+    }, 5000);
+
     return () => {
+      clearInterval(interval);
+      appStateSubscription.remove();
       if (sound) {
         sound.unloadAsync();
+      // Use ref to ensure we cleanup the latest sound instance
+      if (soundRef.current) {
+        soundRef.current.unloadAsync();
+      }
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+      }
+      if (recordingTimeoutRef.current) {
+        clearTimeout(recordingTimeoutRef.current);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,11 +138,37 @@ export default function GlassesDiagnosticsScreen() {
       if (devMode) {
         setConnectionState('✓ DEV Mode Active');
         setAudioRoute('Phone mic → Phone speaker');
+        setLastError(null);
       } else {
-        setConnectionState('⚠ Glasses mode (native routing module required)');
-        setAudioRoute('Bluetooth HFP routing not active in Expo-only build');
+        // Use native module if available
+        if (nativeModuleAvailable) {
+          try {
+            const route = await ExpoGlassesAudio.getAudioRoute();
+            // Validate response structure
+            if (!route || typeof route !== 'object') {
+              throw new Error('Invalid audio route returned from native module');
+            }
+            const { inputDevice, outputDevice, isBluetoothConnected } = route;
+            
+            if (isBluetoothConnected) {
+              setConnectionState('✓ Glasses Mode Active');
+              setAudioRoute(`${inputDevice} → ${outputDevice}`);
+            } else {
+              setConnectionState('⚠ Glasses Mode (Bluetooth not connected)');
+              setAudioRoute(`${inputDevice} → ${outputDevice}`);
+            }
+            setLastError(null);
+          } catch (err) {
+            setConnectionState('⚠ Glasses mode (native module error)');
+            setAudioRoute('Could not read native route');
+            setLastError(`Native module error: ${err.message}`);
+          }
+        } else {
+          setConnectionState('⚠ Glasses mode (native routing module required)');
+          setAudioRoute('Bluetooth HFP routing not active in Expo-only build');
+          setLastError(null);
+        }
       }
-      setLastError(null);
     } catch (error) {
       setLastError(`Audio setup failed: ${error.message}`);
       setConnectionState('✗ Error');
@@ -90,19 +180,41 @@ export default function GlassesDiagnosticsScreen() {
     try {
       setLastError(null);
 
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-        staysActiveInBackground: false,
-        shouldDuckAndroid: true,
-        playThroughEarpieceAndroid: false,
-      });
+      if (devMode) {
+        // DEV mode: use expo-av
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false,
+        });
 
-      const { recording: newRecording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
-      setRecording(newRecording);
-      setIsRecording(true);
+        const { recording: newRecording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
+        );
+        setRecording(newRecording);
+        setIsRecording(true);
+      } else {
+        // Glasses mode: use native module if available
+        if (nativeModuleAvailable) {
+          // Start recording with configured duration. The native module will auto-stop after this duration
+          // if the user doesn't manually stop it first.
+          await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
+          setIsRecording(true);
+          
+          // Set up timeout to update UI when native module auto-stops recording
+          const timeoutId = setTimeout(() => {
+            setIsRecording(false);
+            recordingTimeoutRef.current = null;
+            // This is expected behavior, not an error - recording duration limit reached
+            Alert.alert('Recording Complete', `Recording stopped after ${NATIVE_RECORDING_DURATION_SECONDS} seconds.`);
+          }, NATIVE_RECORDING_DURATION_SECONDS * 1000);
+          recordingTimeoutRef.current = timeoutId;
+        } else {
+          setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
+        }
+      }
     } catch (error) {
       setLastError(`Recording failed: ${error.message}`);
       setIsRecording(false);
@@ -112,11 +224,41 @@ export default function GlassesDiagnosticsScreen() {
   const stopRecording = async () => {
     try {
       setIsRecording(false);
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI();
-      setRecording(null);
-      setLastRecordingUri(uri);
-      Alert.alert('Recording Complete', 'Saved locally.');
+      
+      // Clear recording timeout if it exists
+      if (recordingTimeoutRef.current) {
+        clearTimeout(recordingTimeoutRef.current);
+        recordingTimeoutRef.current = null;
+      }
+      
+      if (devMode) {
+        // DEV mode: use expo-av
+        if (recording) {
+          await recording.stopAndUnloadAsync();
+          const uri = recording.getURI();
+          setRecording(null);
+          setLastRecordingUri(uri);
+          Alert.alert('Recording Complete', 'Saved locally.');
+        } else {
+          setLastError('No active recording to stop.');
+        }
+      } else {
+        // Glasses mode: use native module if available
+        if (nativeModuleAvailable) {
+          const result = await ExpoGlassesAudio.stopRecording();
+          if (result && result.uri) {
+            setLastRecordingUri(result.uri);
+            Alert.alert('Recording Complete', 'Saved locally.');
+          } else {
+            // No URI returned; avoid implying the recording was saved
+            Alert.alert(
+              'Recording Finished',
+              'Recording stopped, but no file URI was returned by the native module.'
+            );
+            setLastError('Recording stopped, but no file URI was returned by the native module.');
+          }
+        }
+      }
     } catch (error) {
       setLastError(`Stop recording failed: ${error.message}`);
     }
@@ -124,43 +266,97 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopPlayback = async () => {
     try {
-      if (sound) {
-        await sound.stopAsync();
-        await sound.unloadAsync();
-        setSound(null);
+      // Clear any pending timeout and reset ref
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
+      }
+      
+      if (devMode) {
+        // DEV mode: use expo-av
+        if (sound) {
+          await sound.stopAsync();
+          await sound.unloadAsync();
+          setSound(null);
+          soundRef.current = null;
+        }
+      } else {
+        // Glasses mode: use native module if available
+        if (nativeModuleAvailable) {
+          await ExpoGlassesAudio.stopPlayback();
+        }
       }
       setIsPlaying(false);
     } catch (error) {
       setLastError(`Stop playback failed: ${error.message}`);
+      // Ensure ref is cleared even on error
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
+      }
     }
   };
 
   const playUri = async (uri) => {
-    if (sound) {
-      await sound.unloadAsync();
-      setSound(null);
+    try {
+      if (devMode) {
+        // DEV mode: use expo-av
+        if (sound) {
+          await sound.unloadAsync();
+          setSound(null);
+          soundRef.current = null;
+        }
+
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          staysActiveInBackground: false,
+          shouldDuckAndroid: false,
+          playThroughEarpieceAndroid: false,
+        });
+
+        const { sound: newSound } = await Audio.Sound.createAsync({ uri }, { shouldPlay: true });
+        setSound(newSound);
+        soundRef.current = newSound;
+        setIsPlaying(true);
+
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+          }
+          if (status.error) {
+            setLastError(`Playback error: ${status.error}`);
+          }
+        });
+      } else {
+        // Glasses mode: use native module if available
+        if (nativeModuleAvailable) {
+          await ExpoGlassesAudio.playAudio(uri);
+          setIsPlaying(true);
+          // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
+          // NOTE: This is a limitation - if playback finishes earlier or runs longer than the timeout,
+          // the UI state will be inaccurate. TODO: add event-based status updates to native module.
+          const timeoutId = setTimeout(() => {
+            // Only update state if component is still mounted (playbackTimeoutRef will be cleared on unmount)
+            if (playbackTimeoutRef.current === timeoutId) {
+              setIsPlaying(false);
+              playbackTimeoutRef.current = null;
+            }
+          }, NATIVE_PLAYBACK_TIMEOUT_MS);
+          playbackTimeoutRef.current = timeoutId;
+        } else {
+          setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
+        }
+      }
+    } catch (error) {
+      // Ensure any pending native playback timeout is cleared on error
+      if (playbackTimeoutRef.current) {
+        clearTimeout(playbackTimeoutRef.current);
+        playbackTimeoutRef.current = null;
+      }
+      setLastError(`Playback failed: ${error.message}`);
+      setIsPlaying(false);
     }
-
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      playsInSilentModeIOS: true,
-      staysActiveInBackground: false,
-      shouldDuckAndroid: false,
-      playThroughEarpieceAndroid: false,
-    });
-
-    const { sound: newSound } = await Audio.Sound.createAsync({ uri }, { shouldPlay: true });
-    setSound(newSound);
-    setIsPlaying(true);
-
-    newSound.setOnPlaybackStatusUpdate((status) => {
-      if (status.didJustFinish) {
-        setIsPlaying(false);
-      }
-      if (status.error) {
-        setLastError(`Playback error: ${status.error}`);
-      }
-    });
   };
 
   const playRecording = async () => {
@@ -299,6 +495,65 @@ export default function GlassesDiagnosticsScreen() {
           </View>
         ) : null}
       </View>
+
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Push Notifications Debug</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={async () => {
+            try {
+              setLastError(null);
+              await simulateNotificationForDev('Test notification from diagnostics screen');
+              Alert.alert('Success', 'Simulated notification sent');
+            } catch (error) {
+              setLastError(`Simulate notification failed: ${error.message}`);
+            }
+          }}
+        >
+          <Text style={styles.buttonText}>🔔 Simulate Test Notification</Text>
+        </TouchableOpacity>
+        
+        {pushDebugState && (
+          <View style={styles.debugInfo}>
+            <Text style={styles.debugLabel}>App State:</Text>
+            <Text style={styles.debugValue}>
+              {pushDebugState.isAppInBackground ? '🌙 Backgrounded' : '☀️ Foreground'}
+            </Text>
+            
+            {pushDebugState.pendingCount > 0 && (
+              <>
+                <Text style={styles.debugLabel}>Pending Speak Queue:</Text>
+                <Text style={styles.debugValue}>{pushDebugState.pendingCount} deferred</Text>
+              </>
+            )}
+            
+            {pushDebugState.lastNotificationTime && (
+              <>
+                <Text style={styles.debugLabel}>Last Notification:</Text>
+                <Text style={styles.debugValue}>
+                  {new Date(pushDebugState.lastNotificationTime).toLocaleTimeString()}
+                </Text>
+              </>
+            )}
+            
+            {pushDebugState.lastSpokenText && (
+              <>
+                <Text style={styles.debugLabel}>Last Spoken:</Text>
+                <Text style={styles.debugValue}>{pushDebugState.lastSpokenText}</Text>
+              </>
+            )}
+            
+            {pushDebugState.lastPlaybackError && (
+              <>
+                <Text style={styles.debugLabel}>Last TTS Error:</Text>
+                <Text style={[styles.debugValue, styles.errorText]}>
+                  {pushDebugState.lastPlaybackError}
+                </Text>
+              </>
+            )}
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 }
@@ -343,6 +598,7 @@ const styles = StyleSheet.create({
   },
   responseTitle: { fontSize: 14, fontWeight: '600', color: '#2e7d32', marginBottom: 6 },
   responseText: { fontSize: 14, color: '#1b5e20', lineHeight: 20 },
+  debugInfo: { marginTop: 12, padding: 12, backgroundColor: '#f5f5f5', borderRadius: 8 },
+  debugLabel: { fontSize: 13, fontWeight: '600', color: '#666', marginTop: 8 },
+  debugValue: { fontSize: 13, color: '#333', marginTop: 2, marginLeft: 8 },
 });
-
-// Legacy diagnostics implementation available in GlassesDiagnosticsScreen.original.js
