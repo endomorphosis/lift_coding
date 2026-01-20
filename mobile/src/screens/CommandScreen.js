@@ -660,6 +660,9 @@ export default function CommandScreen() {
             style={[styles.quickControlButton, !lastSpokenText && styles.quickControlButtonDisabled]}
             onPress={handleRepeat}
             disabled={loading || !lastSpokenText}
+            accessibilityLabel="Repeat last response"
+            accessibilityHint="Replays the text-to-speech audio from the most recent command response"
+            accessibilityState={{ disabled: loading || !lastSpokenText }}
           >
             <Text style={styles.quickControlButtonText}>🔄 Repeat</Text>
             <Text style={styles.quickControlButtonSubtext}>Replay last TTS response</Text>
@@ -669,6 +672,9 @@ export default function CommandScreen() {
             style={styles.quickControlButton}
             onPress={handleNext}
             disabled={loading}
+            accessibilityLabel="Next item"
+            accessibilityHint="Advances to the next item in the current inbox or summary sequence"
+            accessibilityState={{ disabled: loading }}
           >
             <Text style={styles.quickControlButtonText}>⏭ Next</Text>
             <Text style={styles.quickControlButtonSubtext}>Advance to next item</Text>
