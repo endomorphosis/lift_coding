@@ -1284,58 +1284,457 @@ async def confirm_command(
         confirmed_action = _pending_action_manager.confirm(request.token)
         if confirmed_action:
             # Execute the intent that was pending
-            # For now, just return a success response
-            # In a full implementation, this would execute the actual side effect
             intent_name = confirmed_action.intent_name
             entities = confirmed_action.entities
 
+            # Map router intents to DB-backed action handlers for real execution
             if intent_name == "pr.request_review":
+                # Extract entities and map to request_review handler format
                 reviewers = entities.get("reviewers", [])
-                pr_num = entities.get("pr_number", "unknown")
-                reviewers_str = " and ".join(reviewers)
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name=intent_name,
-                        confidence=1.0,
-                        entities=entities,
-                    ),
-                    spoken_text=(
-                        f"Review request sent to {reviewers_str} "
-                        f"for PR {pr_num}. (Fixture response)"
-                    ),
-                )
+                pr_num = entities.get("pr_number")
+                repo = entities.get("repo", "unknown/unknown")
+                
+                if not pr_num:
+                    # Missing required entity - log error for observability
+                    write_action_log(
+                        db,
+                        user_id=user_id,
+                        action_type="request_review",
+                        ok=False,
+                        target="unknown",
+                        request={"reviewers": reviewers, "confirmed": True},
+                        result={
+                            "status": "error",
+                            "message": "PR number is required for review request",
+                            "via_confirmation": True,
+                            "via_router_token": True,
+                        },
+                        idempotency_key=request.idempotency_key,
+                    )
+                    
+                    response = CommandResponse(
+                        status=CommandStatus.ERROR,
+                        intent=ParsedIntent(
+                            name=intent_name,
+                            confidence=1.0,
+                            entities=entities,
+                        ),
+                        spoken_text="PR number is required for review request.",
+                    )
+                else:
+                    # Execute using the same handler as DB-backed actions
+                    target = f"{repo}#{pr_num}"
+                    reviewers_str = ", ".join(reviewers)
+                    
+                    # Check if live mode is enabled and GitHub token is available
+                    from handsfree.github.auth import get_default_auth_provider
+                    
+                    auth_provider = get_default_auth_provider()
+                    github_token = None
+                    if auth_provider.supports_live_mode():
+                        github_token = auth_provider.get_token(user_id)
+                    
+                    # Execute via GitHub API if live mode enabled and token available
+                    if github_token:
+                        from handsfree.github.client import request_reviewers as github_request_reviewers
+                        
+                        logger.info(
+                            "Executing confirmed request_review (router token) via GitHub API (live mode) for %s",
+                            target,
+                        )
+                        
+                        github_result = github_request_reviewers(
+                            repo=repo,
+                            pr_number=pr_num,
+                            reviewers=reviewers,
+                            token=github_token,
+                        )
+                        
+                        if github_result["ok"]:
+                            # Write audit log for successful execution
+                            write_action_log(
+                                db,
+                                user_id=user_id,
+                                action_type="request_review",
+                                ok=True,
+                                target=target,
+                                request={"reviewers": reviewers, "confirmed": True},
+                                result={
+                                    "status": "success",
+                                    "message": "Review requested (live mode)",
+                                    "via_confirmation": True,
+                                    "via_router_token": True,
+                                    "github_response": github_result.get("response_data"),
+                                },
+                                idempotency_key=request.idempotency_key,
+                            )
+                            
+                            response = CommandResponse(
+                                status=CommandStatus.OK,
+                                intent=ParsedIntent(
+                                    name="request_review.confirmed",
+                                    confidence=1.0,
+                                    entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
+                                ),
+                                spoken_text=f"Review requested from {reviewers_str} on {target}.",
+                            )
+                        else:
+                            # GitHub API call failed
+                            write_action_log(
+                                db,
+                                user_id=user_id,
+                                action_type="request_review",
+                                ok=False,
+                                target=target,
+                                request={"reviewers": reviewers, "confirmed": True},
+                                result={
+                                    "status": "error",
+                                    "message": github_result["message"],
+                                    "via_confirmation": True,
+                                    "via_router_token": True,
+                                    "status_code": github_result.get("status_code"),
+                                },
+                                idempotency_key=request.idempotency_key,
+                            )
+                            
+                            response = CommandResponse(
+                                status=CommandStatus.ERROR,
+                                intent=ParsedIntent(
+                                    name="request_review.confirmed",
+                                    confidence=1.0,
+                                    entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
+                                ),
+                                spoken_text=f"Failed to request reviewers: {github_result['message']}",
+                            )
+                    else:
+                        # Fixture mode - simulate success
+                        logger.info(
+                            "Executing confirmed request_review (router token) in fixture mode (no live token) for %s",
+                            target,
+                        )
+                        
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="request_review",
+                            ok=True,
+                            target=target,
+                            request={"reviewers": reviewers, "confirmed": True},
+                            result={
+                                "status": "success",
+                                "message": "Review requested (fixture)",
+                                "via_confirmation": True,
+                                "via_router_token": True,
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+                        
+                        response = CommandResponse(
+                            status=CommandStatus.OK,
+                            intent=ParsedIntent(
+                                name="request_review.confirmed",
+                                confidence=1.0,
+                                entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
+                            ),
+                            spoken_text=f"Review requested from {reviewers_str} on {target}.",
+                        )
+            
             elif intent_name == "pr.merge":
-                pr_num = entities.get("pr_number", "unknown")
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name=intent_name,
-                        confidence=1.0,
-                        entities=entities,
-                    ),
-                    spoken_text=f"PR {pr_num} merged successfully. (Fixture response)",
-                )
+                # Extract entities and map to merge handler format
+                pr_num = entities.get("pr_number")
+                repo = entities.get("repo", "unknown/unknown")
+                merge_method = entities.get("merge_method", "squash")
+                
+                if not pr_num:
+                    # Missing required entity - log error for observability
+                    write_action_log(
+                        db,
+                        user_id=user_id,
+                        action_type="merge",
+                        ok=False,
+                        target="unknown",
+                        request={"confirmed": True, "merge_method": merge_method},
+                        result={
+                            "status": "error",
+                            "message": "PR number is required for merge",
+                            "via_confirmation": True,
+                            "via_router_token": True,
+                        },
+                        idempotency_key=request.idempotency_key,
+                    )
+                    
+                    response = CommandResponse(
+                        status=CommandStatus.ERROR,
+                        intent=ParsedIntent(
+                            name=intent_name,
+                            confidence=1.0,
+                            entities=entities,
+                        ),
+                        spoken_text="PR number is required for merge.",
+                    )
+                else:
+                    target = f"{repo}#{pr_num}"
+                    
+                    from handsfree.github.auth import get_default_auth_provider
+                    
+                    auth_provider = get_default_auth_provider()
+                    github_token = None
+                    if auth_provider.supports_live_mode():
+                        github_token = auth_provider.get_token(user_id)
+                    
+                    if github_token:
+                        from handsfree.github.client import merge_pull_request
+                        
+                        logger.info(
+                            "Executing confirmed merge (router token) via GitHub API (live mode) for %s",
+                            target,
+                        )
+                        
+                        github_result = merge_pull_request(
+                            repo=repo,
+                            pr_number=pr_num,
+                            merge_method=merge_method,
+                            token=github_token,
+                        )
+                        
+                        if github_result["ok"]:
+                            write_action_log(
+                                db,
+                                user_id=user_id,
+                                action_type="merge",
+                                ok=True,
+                                target=target,
+                                request={"confirmed": True, "merge_method": merge_method},
+                                result={
+                                    "status": "success",
+                                    "message": "Merged (live mode)",
+                                    "via_confirmation": True,
+                                    "via_router_token": True,
+                                    "github_response": github_result.get("response_data"),
+                                },
+                                idempotency_key=request.idempotency_key,
+                            )
+                            
+                            response = CommandResponse(
+                                status=CommandStatus.OK,
+                                intent=ParsedIntent(
+                                    name="merge.confirmed",
+                                    confidence=1.0,
+                                    entities={
+                                        "repo": repo,
+                                        "pr_number": pr_num,
+                                        "merge_method": merge_method,
+                                    },
+                                ),
+                                spoken_text=f"Merged successfully {target}.",
+                            )
+                        else:
+                            write_action_log(
+                                db,
+                                user_id=user_id,
+                                action_type="merge",
+                                ok=False,
+                                target=target,
+                                request={"confirmed": True, "merge_method": merge_method},
+                                result={
+                                    "status": "error",
+                                    "message": github_result["message"],
+                                    "via_confirmation": True,
+                                    "via_router_token": True,
+                                    "status_code": github_result.get("status_code"),
+                                    "error_type": github_result.get("error_type"),
+                                },
+                                idempotency_key=request.idempotency_key,
+                            )
+                            
+                            response = CommandResponse(
+                                status=CommandStatus.ERROR,
+                                intent=ParsedIntent(
+                                    name="merge.confirmed",
+                                    confidence=1.0,
+                                    entities={
+                                        "repo": repo,
+                                        "pr_number": pr_num,
+                                        "merge_method": merge_method,
+                                    },
+                                ),
+                                spoken_text=f"Failed to merge: {github_result['message']}",
+                            )
+                    else:
+                        logger.info(
+                            "Executing confirmed merge (router token) in fixture mode (no live token) for %s",
+                            target,
+                        )
+                        
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="merge",
+                            ok=True,
+                            target=target,
+                            request={"confirmed": True, "merge_method": merge_method},
+                            result={
+                                "status": "success",
+                                "message": "PR merged (fixture)",
+                                "via_confirmation": True,
+                                "via_router_token": True,
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+                        
+                        response = CommandResponse(
+                            status=CommandStatus.OK,
+                            intent=ParsedIntent(
+                                name="merge.confirmed",
+                                confidence=1.0,
+                                entities={
+                                    "repo": repo,
+                                    "pr_number": pr_num,
+                                    "merge_method": merge_method,
+                                },
+                            ),
+                            spoken_text=f"Merged successfully {target}.",
+                        )
+            
             elif intent_name == "agent.delegate":
+                # Execute agent delegation via agent service
                 instruction = entities.get("instruction", "handle this")
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name=intent_name,
-                        confidence=1.0,
-                        entities=entities,
-                    ),
-                    spoken_text=f"Agent task created: {instruction}. (Fixture response)",
-                )
+                issue_num = entities.get("issue_number")
+                pr_num = entities.get("pr_number")
+                provider = entities.get("provider")
+                
+                # Check if agent service is available (requires DB connection)
+                if not db:
+                    response = CommandResponse(
+                        status=CommandStatus.ERROR,
+                        intent=ParsedIntent(
+                            name=intent_name,
+                            confidence=1.0,
+                            entities=entities,
+                        ),
+                        spoken_text="Agent service not available. Database connection required.",
+                    )
+                else:
+                    from handsfree.agents.service import AgentService
+                    
+                    agent_service = AgentService(db)
+                    
+                    target_type = None
+                    target_ref = None
+                    if issue_num:
+                        target_type = "issue"
+                        target_ref = f"#{issue_num}"
+                    elif pr_num:
+                        target_type = "pr"
+                        target_ref = f"#{pr_num}"
+                    
+                    # Build trace with confirmation metadata
+                    trace = {
+                        "intent_name": intent_name,
+                        "entities": entities,
+                        "confirmed_at": datetime.now(UTC).isoformat(),
+                        "via_router_token": True,
+                    }
+                    
+                    try:
+                        # Create and start the agent task
+                        result = agent_service.delegate(
+                            user_id=user_id,
+                            instruction=instruction,
+                            provider=provider,
+                            target_type=target_type,
+                            target_ref=target_ref,
+                            trace=trace,
+                        )
+                        
+                        spoken_text = result.get("spoken_text", "Agent task created.")
+                        
+                        # Write audit log
+                        task_id = result.get("task_id")
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="agent_delegate",
+                            ok=True,
+                            target=target_ref or "general",
+                            request={"instruction": instruction, "confirmed": True},
+                            result={
+                                "status": "success",
+                                "message": "Agent task created",
+                                "via_confirmation": True,
+                                "via_router_token": True,
+                                "task_id": task_id,
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+                        
+                        response = CommandResponse(
+                            status=CommandStatus.OK,
+                            intent=ParsedIntent(
+                                name="agent.delegate.confirmed",
+                                confidence=1.0,
+                                entities=entities,
+                            ),
+                            spoken_text=spoken_text,
+                        )
+                    except (KeyboardInterrupt, SystemExit):
+                        # Re-raise critical exceptions to avoid masking shutdown signals
+                        raise
+                    except Exception as e:
+                        logger.error("Failed to delegate to agent: %s", e)
+                        
+                        write_action_log(
+                            db,
+                            user_id=user_id,
+                            action_type="agent_delegate",
+                            ok=False,
+                            target=target_ref or "general",
+                            request={"instruction": instruction, "confirmed": True},
+                            result={
+                                "status": "error",
+                                "message": str(e),
+                                "via_confirmation": True,
+                                "via_router_token": True,
+                            },
+                            idempotency_key=request.idempotency_key,
+                        )
+                        
+                        response = CommandResponse(
+                            status=CommandStatus.ERROR,
+                            intent=ParsedIntent(
+                                name="agent.delegate.confirmed",
+                                confidence=1.0,
+                                entities=entities,
+                            ),
+                            spoken_text=f"Failed to create agent task: {str(e)}",
+                        )
+            
             else:
+                # Unknown intent from router - log for debugging
+                write_action_log(
+                    db,
+                    user_id=user_id,
+                    action_type="unknown",
+                    ok=False,
+                    target="unknown",
+                    request={"intent_name": intent_name, "entities": entities, "confirmed": True},
+                    result={
+                        "status": "error",
+                        "message": f"Unknown action type: {intent_name}",
+                        "via_confirmation": True,
+                        "via_router_token": True,
+                    },
+                    idempotency_key=request.idempotency_key,
+                )
+                
                 response = CommandResponse(
-                    status=CommandStatus.OK,
+                    status=CommandStatus.ERROR,
                     intent=ParsedIntent(
                         name=intent_name,
                         confidence=1.0,
                         entities=entities,
                     ),
-                    spoken_text="Action confirmed. (Fixture response)",
+                    spoken_text=f"Unknown action type: {intent_name}",
                 )
 
             # Store for idempotency (both persistent and in-memory)
@@ -1356,7 +1755,10 @@ async def confirm_command(
             from handsfree.metrics import get_metrics_collector
 
             metrics = get_metrics_collector()
-            metrics.record_confirmation("ok")
+            if response.status == CommandStatus.OK:
+                metrics.record_confirmation("ok")
+            else:
+                metrics.record_confirmation("error")
 
             return response
 
@@ -1419,15 +1821,14 @@ async def confirm_command(
                 confidence=1.0,
                 entities={"pr_number": pr_number},
             ),
-            spoken_text=f"PR {pr_number} summary: This is a fixture response. "
-            f"Real GitHub integration coming in PR-005.",
+            spoken_text=f"PR {pr_number} summary: This is a fixture response.",
             cards=[
                 UICard(
                     title=f"PR #{pr_number}",
                     subtitle="Fixture data",
                     lines=[
                         "This is a stubbed response.",
-                        "Real PR data will be fetched from GitHub in PR-005.",
+                        "Enable live mode with GitHub authentication for real data.",
                     ],
                 )
             ],
