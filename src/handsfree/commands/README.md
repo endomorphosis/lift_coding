@@ -37,8 +37,7 @@ Features:
 - Automatic confirmation flow for side-effect intents
 - Profile-aware response formatting
 - Session-based `system.repeat` functionality
-- Integration with GitHub API for live execution when authenticated
-- Agent orchestration for task delegation
+- Integrates with the configured GitHub provider and policy/confirmation gating
 
 ## Usage
 
@@ -109,7 +108,6 @@ All code must pass:
 
 ## Future Work
 
-- Enhanced machine learning-based intent classification (beyond regex)
-- Multi-turn conversation support with context tracking
-- Voice-specific error recovery and clarification flows
-- Redis-backed pending action storage for production scalability
+- Expand/standardize integrations (GitHub provider capabilities, policy enforcement, confirmations)
+- Redis-backed pending action storage
+- Machine learning-based intent classification (beyond regex)
