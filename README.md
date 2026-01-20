@@ -125,11 +125,14 @@ See the complete [iPhone & Meta Glasses Testing Guide](docs/ios-rayban-mvp1-runb
 
 ## 📚 Documentation
 
+**→ [Complete Documentation Index](DOCUMENTATION_INDEX.md)** - Find all documentation organized by role and topic
+
 ### For Developers
 
 - **[Getting Started](GETTING_STARTED.md)** - Setup guide for all components
 - **[Architecture](ARCHITECTURE.md)** - System design and data flows  
 - **[Contributing](CONTRIBUTING.md)** - Development workflow and guidelines
+- **[Configuration](CONFIGURATION.md)** - Environment variables and settings
 - **[API Reference](spec/openapi.yaml)** - OpenAPI specification
 
 ### For Mobile Development
@@ -141,6 +144,7 @@ See the complete [iPhone & Meta Glasses Testing Guide](docs/ios-rayban-mvp1-runb
 
 ### For iPhone & Meta Glasses Testing
 
+- **[Testing Quick Reference](docs/TESTING_QUICK_REFERENCE.md)** - Quick reference card
 - **[MVP1 Runbook](docs/ios-rayban-mvp1-runbook.md)** - Complete testing guide
 - **[Troubleshooting](docs/ios-rayban-troubleshooting.md)** - Common issues and solutions
 - **[Audio Routing](docs/meta-ai-glasses-audio-routing.md)** - Technical details
