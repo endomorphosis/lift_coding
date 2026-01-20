@@ -317,12 +317,16 @@ async function processPendingSpeakQueue() {
   try {
     console.log(`Processing ${pendingSpeakQueue.length} deferred speak requests`);
     
-    // Atomically extract all pending messages to avoid race conditions
+    // Atomically extract all pending messages and clear Set to avoid race conditions
     // Any new messages added during processing will be handled in the next call
     const messagesToProcess = pendingSpeakQueue.splice(0);
+    // Create a temporary Set of messages being processed
+    const processingSet = new Set(messagesToProcess);
     
-    // Clear the Set since we're processing all messages
-    pendingSpeakSet.clear();
+    // Remove processed messages from the Set, keeping any newly added ones
+    for (const msg of processingSet) {
+      pendingSpeakSet.delete(msg);
+    }
     
     for (const message of messagesToProcess) {
       try {
