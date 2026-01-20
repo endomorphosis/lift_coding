@@ -119,9 +119,9 @@ curl -X POST http://localhost:8080/v1/command \
 - `401 Unauthorized`: Revoked API key
 
 **Security Features:**
-- API keys are stored as SHA256 hashes, never in plaintext
+- API keys are stored as cryptographic hashes, never in plaintext
 - Keys can be revoked without deletion (maintains audit trail)
-- Each key tracks last_used_at timestamp
+- Implementations may track usage metadata such as a last-used timestamp
 - Keys are scoped to a specific user_id
 
 ## Supported JWT Claims
@@ -151,16 +151,16 @@ All endpoints that read or write user data are protected by authentication:
 The authentication system includes comprehensive tests:
 
 ### Unit Tests (`tests/test_auth.py`)
-- 24 tests covering auth mode detection, JWT validation, API key validation, and dependency behavior
+- Covers auth mode detection, JWT validation, API key validation, and dependency behavior
 - Tests for all three authentication modes: dev, jwt, and api_key
 
 ### Integration Tests (`tests/test_auth_integration.py`)
-- 23 tests covering real API calls in dev, JWT, and API key modes
+- Covers real API calls in dev, JWT, and API key modes
 - Tests user isolation and data segregation across all modes
 - Tests API key revocation and validation
 
 ### Database Tests (`tests/test_api_keys.py`)
-- 25 tests covering API key generation, storage, validation, and management
+- Covers API key generation, storage, validation, and management
 - Tests secure hashing, revocation, and user isolation
 
 ### Existing Tests
