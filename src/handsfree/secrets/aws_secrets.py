@@ -321,39 +321,29 @@ class AWSSecretManager(SecretManager):
         """
         try:
             refs = []
-            
+
             # Determine the full prefix to search for
             search_prefix = self.prefix
             if prefix:
-                search_prefix = self._make_secret_name(prefix)
+                search_prefix = f"{self.prefix}{prefix}"
 
             # Use paginator to handle large numbers of secrets
             paginator = self.client.get_paginator("list_secrets")
-            
-            # List secrets with optional filter
-            page_params = {}
-            if search_prefix:
-                # AWS Secrets Manager doesn't have a direct prefix filter,
-                # so we'll filter in memory after retrieving
-                page_params["Filters"] = [
-                    {
-                        "Key": "name",
-                        "Values": [search_prefix],
-                    }
-                ]
 
-            for page in paginator.paginate(**page_params):
+            # List all secrets (AWS doesn't support prefix filtering directly)
+            # We'll filter in memory after retrieving
+            for page in paginator.paginate():
                 for secret in page.get("SecretList", []):
                     secret_name = secret["Name"]
-                    
+
                     # Filter by prefix if specified
                     if search_prefix and not secret_name.startswith(search_prefix):
                         continue
-                    
+
                     # Skip secrets scheduled for deletion
                     if "DeletedDate" in secret:
                         continue
-                    
+
                     refs.append(f"aws://{secret_name}")
 
             return refs
