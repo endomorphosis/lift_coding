@@ -362,10 +362,8 @@ class AWSSecretManager(SecretManager):
     def list_secrets(self, prefix: str | None = None) -> list[str]:
         """List all secret references in AWS Secrets Manager.
 
-        Note: AWS Secrets Manager does not support efficient prefix filtering in the API.
-        This method fetches all secrets and filters in memory, which may be inefficient
-        for large deployments. Consider using descriptive prefixes and the 
-        HANDSFREE_AWS_SECRETS_PREFIX to limit the scope.
+        Uses AWS Secrets Manager's Filters parameter to efficiently filter secrets
+        by prefix, reducing data transfer and improving performance.
 
         Args:
             prefix: Optional prefix to filter secrets (appended to the manager's prefix)
