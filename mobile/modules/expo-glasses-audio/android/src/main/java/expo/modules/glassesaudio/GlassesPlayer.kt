@@ -53,6 +53,13 @@ class GlassesPlayer {
     fun playPcm16Mono(samples: ShortArray, sampleRate: Int = 16000, onComplete: (() -> Unit)? = null) {
         stop()
         
+        // Guard against empty sample arrays
+        if (samples.isEmpty()) {
+            Log.w(TAG, "Cannot play empty sample array")
+            onComplete?.invoke()
+            return
+        }
+        
         this.onPlaybackComplete = onComplete
 
         val bufferBytes = samples.size * 2
@@ -184,13 +191,32 @@ class GlassesPlayer {
             
             val pcmBytes = ByteArray(wavInfo.dataSize)
             val totalRead = inputStream.read(pcmBytes)
+            
+            if (totalRead == -1) {
+                throw IllegalArgumentException("WAV file contains no PCM data - reached end of stream")
+            }
             if (totalRead < wavInfo.dataSize) {
                 Log.w(TAG, "Expected ${wavInfo.dataSize} bytes but read $totalRead bytes")
             }
             
-            // Convert bytes to shorts (PCM 16-bit)
-            val pcmShorts = ShortArray(pcmBytes.size / 2)
-            val buffer = ByteBuffer.wrap(pcmBytes)
+            // Ensure we have an even number of bytes for 16-bit PCM data
+            val validBytes = if (totalRead % 2 != 0) {
+                Log.w(TAG, "Odd number of bytes read ($totalRead), truncating to ${totalRead - 1}")
+                totalRead - 1
+            } else {
+                totalRead
+            }
+            
+            // At least 2 bytes are required for a single 16-bit PCM sample
+            if (validBytes < 2) {
+                throw IllegalArgumentException(
+                    "WAV file too small to contain valid 16-bit PCM data: read $totalRead byte(s)"
+                )
+            }
+            
+            // Convert bytes to shorts (PCM 16-bit), based on actual bytes read
+            val pcmShorts = ShortArray(validBytes / 2)
+            val buffer = ByteBuffer.wrap(pcmBytes, 0, validBytes)
             buffer.order(ByteOrder.LITTLE_ENDIAN)
             
             for (i in pcmShorts.indices) {
