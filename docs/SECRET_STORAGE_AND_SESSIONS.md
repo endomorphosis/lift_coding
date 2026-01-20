@@ -30,13 +30,13 @@ The secret management system uses a pluggable architecture that allows different
 │  - delete_secret()                  │
 └───────────────┬─────────────────────┘
                 │
-       ┌────────┴────────┬─────────────┐
-       ▼                 ▼             ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│ EnvSecret    │  │ VaultSecret  │  │ Future: AWS  │
-│ Manager      │  │ Manager      │  │ Secrets Mgr, │
-│ (dev/test)   │  │ (production) │  │ GCP, etc.    │
-└──────────────┘  └──────────────┘  └──────────────┘
+    ┌───────────┴───────────┬─────────────┬──────────────┐
+    ▼                       ▼             ▼              ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│ EnvSecret    │  │ VaultSecret  │  │ AWSSecret    │  │ GCPSecret    │
+│ Manager      │  │ Manager      │  │ Manager      │  │ Manager      │
+│ (dev/test)   │  │ (production) │  │ (production) │  │ (production) │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
 ```
 
 ### Security Model
@@ -121,9 +121,16 @@ Set the `SECRET_MANAGER_TYPE` environment variable to choose the backend:
 # Development (default) - stores secrets as environment variables
 export SECRET_MANAGER_TYPE=env
 
-# Production - AWS Secrets Manager (coming soon)
+# Production - AWS Secrets Manager
 export SECRET_MANAGER_TYPE=aws
 export AWS_REGION=us-east-1
+# Option 1: IAM role authentication (recommended for EC2/ECS/Lambda)
+# Uses the instance/task IAM role automatically - no additional env vars needed
+# Option 2: Access key authentication (development/testing)
+export AWS_ACCESS_KEY_ID=your-access-key
+export AWS_SECRET_ACCESS_KEY=your-secret-key
+# Optional configuration
+export AWS_SECRETS_MANAGER_ENDPOINT=https://secretsmanager.us-east-1.amazonaws.com  # Custom endpoint
 
 # Production - HashiCorp Vault
 export SECRET_MANAGER_TYPE=vault
@@ -137,9 +144,15 @@ export VAULT_SECRET_ID=your-secret-id
 export VAULT_MOUNT=secret  # KV mount point (default: secret)
 export VAULT_NAMESPACE=your-namespace  # For Vault Enterprise
 
-# Production - Google Secret Manager (coming soon)
+# Production - Google Secret Manager
 export SECRET_MANAGER_TYPE=gcp
 export GCP_PROJECT_ID=my-project
+# Option 1: Application Default Credentials (recommended for GCE/GKE/Cloud Run)
+# Uses the instance/pod service account automatically - no additional env vars needed
+# Option 2: Service account key authentication (development/testing)
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+# Optional configuration
+export GCP_SECRET_MANAGER_ENDPOINT=https://secretmanager.googleapis.com  # Custom endpoint
 ```
 
 #### HashiCorp Vault Configuration
@@ -228,6 +241,230 @@ The VaultSecretManager provides fail-fast error handling with clear messages:
 - Missing authentication credentials: Raises `ValueError` explaining required variables
 - Authentication failure: Raises `VaultError` with connection details
 - Network issues: Raises `VaultError` with underlying error
+
+#### AWS Secrets Manager Configuration
+
+> **Note:** AWS Secrets Manager backend is fully documented below. If the implementation is not yet available in your version, it will be coming soon. The factory will raise `NotImplementedError` until the implementation is complete.
+
+The AWSSecretManager provides production-ready secret storage with the following features:
+
+**Security Features:**
+- Encryption at rest with AWS KMS (handled by AWS)
+- Automatic secret rotation support (configurable)
+- Fine-grained IAM access control
+- Audit logging via AWS CloudTrail
+- VPC endpoint support for private networks
+- Automatic versioning of secrets
+
+**Required Configuration:**
+- `AWS_REGION`: AWS region (e.g., `us-east-1`, `eu-west-1`)
+- Authentication (choose one):
+  - IAM role authentication (recommended): Automatically uses EC2 instance role, ECS task role, or Lambda execution role
+  - Access key authentication: `AWS_ACCESS_KEY_ID` + `AWS_SECRET_ACCESS_KEY` (development/testing)
+
+**Optional Configuration:**
+- `AWS_SECRETS_MANAGER_ENDPOINT`: Custom endpoint URL (for VPC endpoints or LocalStack testing)
+- `AWS_SESSION_TOKEN`: Session token for temporary credentials
+
+**Reference Format:**
+Secrets are stored with references in the format `aws://secret_name`. For example:
+```python
+token_ref = secret_manager.store_secret("github_token_user_123", "ghp_xxxx")
+# Returns: "aws://github_token_user_123"
+```
+
+**Setup Example:**
+
+1. Configure IAM permissions (production, recommended):
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:DeleteSecret",
+        "secretsmanager:ListSecrets"
+      ],
+      "Resource": "arn:aws:secretsmanager:*:*:secret:handsfree/*"
+    }
+  ]
+}
+```
+
+2. Configure environment (using IAM role):
+```bash
+export SECRET_MANAGER_TYPE=aws
+export AWS_REGION=us-east-1
+# IAM role is used automatically - no credentials needed
+```
+
+3. Or configure with access keys (development/testing):
+```bash
+export SECRET_MANAGER_TYPE=aws
+export AWS_REGION=us-east-1
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
+
+4. Use in code:
+```python
+from handsfree.secrets import get_default_secret_manager
+
+secret_manager = get_default_secret_manager()
+token_ref = secret_manager.store_secret("my_secret", "secret_value")
+# Stores in AWS Secrets Manager and returns "aws://my_secret"
+
+retrieved = secret_manager.get_secret(token_ref)
+# Retrieves "secret_value" from AWS Secrets Manager
+```
+
+**Production Setup with IAM Role:**
+
+1. Create IAM policy and attach to your service role:
+```bash
+aws iam create-policy \
+    --policy-name HandsfreeSecretsPolicy \
+    --policy-document file://policy.json
+
+aws iam attach-role-policy \
+    --role-name YourServiceRole \
+    --policy-arn arn:aws:iam::ACCOUNT_ID:policy/HandsfreeSecretsPolicy
+```
+
+2. Deploy application with the service role attached (EC2, ECS, Lambda, etc.)
+
+3. Application automatically uses the attached IAM role for authentication
+
+**Using with VPC Endpoints (enhanced security):**
+
+```bash
+export SECRET_MANAGER_TYPE=aws
+export AWS_REGION=us-east-1
+export AWS_SECRETS_MANAGER_ENDPOINT=https://vpce-xxxxx-yyyyy.secretsmanager.us-east-1.vpce.amazonaws.com
+```
+
+**Error Handling:**
+
+The AWSSecretManager provides clear error handling:
+- Missing `AWS_REGION`: Raises `ValueError` with clear message
+- Authentication failure: Raises `ClientError` with AWS error details
+- Secret not found: Returns `None` from `get_secret()`
+- Permission denied: Raises `ClientError` with IAM policy requirements
+- Network issues: Raises `EndpointConnectionError` with connection details
+
+#### Google Secret Manager Configuration
+
+> **Note:** Google Secret Manager backend is fully documented below. If the implementation is not yet available in your version, it will be coming soon. The factory will raise `NotImplementedError` until the implementation is complete.
+
+The GCPSecretManager provides production-ready secret storage with the following features:
+
+**Security Features:**
+- Encryption at rest (handled by Google Cloud)
+- Automatic secret replication across regions
+- Fine-grained IAM access control
+- Audit logging via Cloud Audit Logs
+- Secret versioning with automatic cleanup
+- Customer-managed encryption keys (CMEK) support
+
+**Required Configuration:**
+- `GCP_PROJECT_ID`: Google Cloud project ID (e.g., `my-project-123`)
+- Authentication (choose one):
+  - Application Default Credentials (recommended): Automatically uses Compute Engine service account, GKE Workload Identity, or Cloud Run service identity
+  - Service account key: `GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json` (development/testing)
+
+**Optional Configuration:**
+- `GCP_SECRET_MANAGER_ENDPOINT`: Custom endpoint URL (for testing or private service connect)
+
+**Reference Format:**
+Secrets are stored with references in the format `gcp://secret_name`. For example:
+```python
+token_ref = secret_manager.store_secret("github_token_user_123", "ghp_xxxx")
+# Returns: "gcp://github_token_user_123"
+```
+
+**Setup Example:**
+
+1. Configure IAM permissions (production, recommended):
+```bash
+# Grant Secret Manager Admin role to your service account
+gcloud projects add-iam-policy-binding PROJECT_ID \
+    --member="serviceAccount:SERVICE_ACCOUNT_EMAIL" \
+    --role="roles/secretmanager.admin"
+
+# Or use more granular roles:
+# - roles/secretmanager.secretAccessor (read secrets)
+# - roles/secretmanager.secretVersionManager (create/update secrets)
+```
+
+2. Configure environment (using Application Default Credentials):
+```bash
+export SECRET_MANAGER_TYPE=gcp
+export GCP_PROJECT_ID=my-project-123
+# Application Default Credentials are used automatically
+```
+
+3. Or configure with service account key (development/testing):
+```bash
+export SECRET_MANAGER_TYPE=gcp
+export GCP_PROJECT_ID=my-project-123
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+```
+
+4. Use in code:
+```python
+from handsfree.secrets import get_default_secret_manager
+
+secret_manager = get_default_secret_manager()
+token_ref = secret_manager.store_secret("my_secret", "secret_value")
+# Stores in Google Secret Manager and returns "gcp://my_secret"
+
+retrieved = secret_manager.get_secret(token_ref)
+# Retrieves "secret_value" from Google Secret Manager
+```
+
+**Production Setup with Workload Identity (GKE):**
+
+1. Enable Workload Identity on your GKE cluster:
+```bash
+gcloud container clusters update CLUSTER_NAME \
+    --workload-pool=PROJECT_ID.svc.id.goog
+```
+
+2. Create Kubernetes service account and bind to GCP service account:
+```bash
+kubectl create serviceaccount handsfree-app
+
+gcloud iam service-accounts add-iam-policy-binding \
+    SERVICE_ACCOUNT_EMAIL \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:PROJECT_ID.svc.id.goog[NAMESPACE/handsfree-app]"
+
+kubectl annotate serviceaccount handsfree-app \
+    iam.gke.io/gcp-service-account=SERVICE_ACCOUNT_EMAIL
+```
+
+3. Deploy application using the Kubernetes service account
+
+**Using with Private Service Connect:**
+
+```bash
+export SECRET_MANAGER_TYPE=gcp
+export GCP_PROJECT_ID=my-project-123
+export GCP_SECRET_MANAGER_ENDPOINT=https://your-private-endpoint.p.googleapis.com
+```
+
+**Error Handling:**
+
+The GCPSecretManager provides clear error handling:
+- Missing `GCP_PROJECT_ID`: Raises `ValueError` with clear message
+- Authentication failure: Raises `DefaultCredentialsError` with credential details
+- Secret not found: Returns `None` from `get_secret()`
+- Permission denied: Raises `PermissionDenied` with required IAM roles
+- Network issues: Raises connection errors with details
 
 ### Implementing New Backends
 
@@ -530,9 +767,9 @@ redis-cli
 ## Future Enhancements
 
 ### Secret Management
-- [ ] AWS Secrets Manager backend
+- [ ] AWS Secrets Manager backend implementation
 - [x] HashiCorp Vault backend (completed)
-- [ ] Google Cloud Secret Manager backend
+- [ ] Google Cloud Secret Manager backend implementation
 - [ ] Azure Key Vault backend
 - [ ] Automatic secret rotation
 - [ ] Secret versioning
