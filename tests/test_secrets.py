@@ -796,6 +796,9 @@ class TestAWSSecretManager:
         assert "aws://test/secret1" in refs
         assert "aws://test/secret2" in refs
         assert "aws://test/secret3" in refs
+        # Verify all returned secrets match the manager's prefix
+        for ref in refs:
+            assert ref.startswith("aws://test/")
 
         # Verify that Filters parameter is used when prefix is set
         mock_paginator.paginate.assert_called_once_with(
@@ -823,6 +826,9 @@ class TestAWSSecretManager:
 
         refs = manager.list_secrets(prefix="github_")
         assert len(refs) == 2
+        # Verify all returned secrets match the prefix
+        for ref in refs:
+            assert ref.startswith("aws://test/github_")
 
         # Verify that the Filters parameter was used for better performance
         mock_paginator.paginate.assert_called_once_with(

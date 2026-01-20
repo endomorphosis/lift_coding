@@ -396,11 +396,6 @@ class AWSSecretManager(SecretManager):
                 for secret in page.get("SecretList", []):
                     secret_name = secret["Name"]
 
-                    # AWS Filters use "begins-with" comparison, so we still need
-                    # to verify the exact prefix match for edge cases
-                    if search_prefix and not secret_name.startswith(search_prefix):
-                        continue
-
                     # Skip secrets scheduled for deletion
                     if "DeletedDate" in secret:
                         continue
