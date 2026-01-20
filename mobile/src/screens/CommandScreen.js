@@ -15,12 +15,17 @@ import {
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
+import { inferConfirmationDecision } from '../utils/voiceConfirmation';
+import { getProfile } from '../storage/profileStorage';
 
 export default function CommandScreen() {
   const [commandText, setCommandText] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  
+  // Profile state
+  const [currentProfile, setCurrentProfile] = useState('default');
   
   // Audio recording state
   const [recording, setRecording] = useState(null);
@@ -38,6 +43,9 @@ export default function CommandScreen() {
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
   const [autoPlayTts, setAutoPlayTts] = useState(true);
+
+  // State for repeat/next functionality
+  const [lastSpokenText, setLastSpokenText] = useState(null);
 
   // Confirmation modal state
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -57,6 +65,16 @@ export default function CommandScreen() {
         });
       } catch (err) {
         console.error('Failed to get audio permissions:', err);
+      }
+    })();
+
+    // Load current profile
+    (async () => {
+      try {
+        const profile = await getProfile();
+        setCurrentProfile(profile);
+      } catch (err) {
+        console.error('Failed to load profile:', err);
       }
     })();
 
@@ -140,8 +158,13 @@ export default function CommandScreen() {
     setResponse(null);
 
     try {
-      const data = await sendCommand(commandText);
+      const data = await sendCommand(commandText, { profile: currentProfile });
       setResponse(data);
+      
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+      }
       
       // Check if confirmation is required
       if (data.pending_action) {
@@ -243,11 +266,17 @@ export default function CommandScreen() {
       // For production, consider detecting format from file extension or Recording.getStatusAsync()
       const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
 
-      // Send as audio command with duration in ms
+      // Send as audio command with duration in ms and current profile
       const data = await sendAudioCommand(fileUri, format, {
         duration_ms: recordingDuration * 1000,
+        profile: currentProfile,
       });
       setResponse(data);
+      
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+      }
       
       // Check if confirmation is required
       if (data.pending_action) {
@@ -345,6 +374,62 @@ export default function CommandScreen() {
     if (cancelKeywords.some((k) => t.includes(k))) return 'cancel';
     if (confirmKeywords.some((k) => t.includes(k))) return 'confirm';
     return null;
+  };
+
+  const handleRepeat = async () => {
+    if (!lastSpokenText) {
+      Alert.alert('No Response', 'No previous response to repeat');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    
+    // Replay the stored TTS locally
+    await playTTS(lastSpokenText);
+    setLoading(false);
+  };
+
+  const handleNext = async () => {
+    setLoading(true);
+    setError(null);
+    setResponse(null);
+
+    try {
+      // Send canonical "next" command to server
+      const data = await sendCommand('next');
+      setResponse(data);
+      
+      // Store for repeat functionality
+      if (data.spoken_text) {
+        setLastSpokenText(data.spoken_text);
+      }
+      
+      // Check if confirmation is required
+      if (data.pending_action) {
+        console.log('[CommandScreen] Pending action detected (next):', {
+          token: data.pending_action.token,
+          summary: data.pending_action.summary,
+          expires_at: data.pending_action.expires_at,
+        });
+        setPendingAction(data.pending_action);
+        setShowConfirmModal(true);
+        
+        // Auto-play confirmation prompt if TTS is enabled
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
+      } else {
+        // Auto-play TTS if enabled and spoken_text is available
+        if (autoPlayTts && data.spoken_text) {
+          await playTTS(data.spoken_text);
+        }
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVoiceConfirm = async () => {
@@ -546,6 +631,12 @@ export default function CommandScreen() {
 
       <Text style={styles.title}>Send Command</Text>
 
+      {/* Profile Indicator */}
+      <View style={styles.profileIndicator}>
+        <Text style={styles.profileLabel}>Current Profile:</Text>
+        <Text style={styles.profileValue}>{currentProfile}</Text>
+      </View>
+
       {/* Dev Mode Settings */}
       <View style={styles.devSettingsSection}>
         <View style={styles.settingRow}>
@@ -586,6 +677,39 @@ export default function CommandScreen() {
           )}
         </View>
       )}
+
+      {/* Repeat/Next Quick Controls */}
+      <View style={styles.quickControlsSection}>
+        <Text style={styles.quickControlsHeader}>Quick Controls</Text>
+        <Text style={styles.quickControlsHelper}>
+          Use these buttons to navigate through responses:
+        </Text>
+        <View style={styles.quickControlsRow}>
+          <TouchableOpacity
+            style={[styles.quickControlButton, (loading || !lastSpokenText) && styles.quickControlButtonDisabled]}
+            onPress={handleRepeat}
+            disabled={loading || !lastSpokenText}
+            accessibilityLabel="Repeat last response"
+            accessibilityHint="Replays the text-to-speech audio from the most recent command response"
+            accessibilityState={{ disabled: loading || !lastSpokenText }}
+          >
+            <Text style={styles.quickControlButtonText}>🔄 Repeat</Text>
+            <Text style={styles.quickControlButtonSubtext}>Replay last TTS response</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            style={[styles.quickControlButton, loading && styles.quickControlButtonDisabled]}
+            onPress={handleNext}
+            disabled={loading}
+            accessibilityLabel="Next item"
+            accessibilityHint="Advances to the next item in the current inbox or summary sequence"
+            accessibilityState={{ disabled: loading }}
+          >
+            <Text style={styles.quickControlButtonText}>⏭ Next</Text>
+            <Text style={styles.quickControlButtonSubtext}>Advance to next item</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       {/* Text Command Section */}
       <View style={styles.section}>
@@ -759,6 +883,26 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  profileIndicator: {
+    backgroundColor: '#e3f2fd',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1976d2',
+    marginRight: 8,
+  },
+  profileValue: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#1565c0',
   },
   input: {
     backgroundColor: 'white',
@@ -1160,5 +1304,49 @@ const styles = StyleSheet.create({
     color: '#555',
     fontStyle: 'italic',
     textAlign: 'center',
+  },
+  // Quick Controls styles
+  quickControlsSection: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+  },
+  quickControlsHeader: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 5,
+  },
+  quickControlsHelper: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 12,
+  },
+  quickControlsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  quickControlButton: {
+    flex: 1,
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  quickControlButtonDisabled: {
+    backgroundColor: '#cccccc',
+  },
+  quickControlButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  quickControlButtonSubtext: {
+    color: 'white',
+    fontSize: 11,
+    opacity: 0.9,
   },
 });
