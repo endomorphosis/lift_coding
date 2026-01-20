@@ -6,6 +6,7 @@ It uses Application Default Credentials (ADC) for authentication.
 
 import logging
 import os
+import re
 
 from google.api_core.exceptions import AlreadyExists, NotFound, GoogleAPIError
 from google.cloud import secretmanager
@@ -94,9 +95,13 @@ class GCPSecretManager(SecretManager):
         Returns:
             Secret name with prefix (e.g., "handsfree-github-token-user-123")
         """
-        # Convert to lowercase and replace special chars with hyphens
         # GCP secret names must match ^[a-zA-Z0-9_-]+$
-        normalized = key.replace(".", "-").replace("_", "-").replace("/", "-").lower()
+        # For consistency, convert underscores to hyphens and replace other invalid characters
+        normalized = re.sub(r'[^a-zA-Z0-9-]', '-', key).lower()
+        # Remove consecutive hyphens
+        normalized = re.sub(r'-+', '-', normalized)
+        # Remove leading/trailing hyphens
+        normalized = normalized.strip('-')
         return f"{self.prefix}-{normalized}"
 
     def _get_secret_path(self, secret_name: str) -> str:
@@ -142,7 +147,8 @@ class GCPSecretManager(SecretManager):
         """Normalize metadata to GCP-compliant labels.
 
         GCP labels have restrictions: lowercase, alphanumeric, hyphens.
-        Label values are truncated to 63 characters.
+        Label keys and values are truncated to 63 characters.
+        Label keys must start with a lowercase letter.
 
         Args:
             metadata: Optional metadata dictionary
@@ -153,21 +159,34 @@ class GCPSecretManager(SecretManager):
         labels = {}
         if metadata:
             for k, v in metadata.items():
-                label_key = self._normalize_label_string(k)
+                label_key = self._normalize_label_string(k)[:63]
                 label_value = self._normalize_label_string(v)[:63]
-                labels[label_key] = label_value
+                # Ensure key starts with a lowercase letter
+                if label_key and not label_key[0].islower():
+                    label_key = f"x-{label_key}"[:63]
+                if label_key:  # Only add if key is non-empty after normalization
+                    labels[label_key] = label_value
         return labels
 
     def _normalize_label_string(self, text: str) -> str:
         """Normalize a string to GCP label format.
 
+        GCP labels can only contain lowercase letters, numbers, underscores, and hyphens.
+        For consistency, convert underscores to hyphens.
+
         Args:
             text: String to normalize
 
         Returns:
-            Normalized string (lowercase, underscores and dots replaced with hyphens)
+            Normalized string (lowercase, invalid characters replaced with hyphens)
         """
-        return text.lower().replace("_", "-").replace(".", "-")
+        # Convert to lowercase and replace invalid characters (including underscores) with hyphens
+        normalized = re.sub(r'[^a-z0-9-]', '-', text.lower())
+        # Remove consecutive hyphens
+        normalized = re.sub(r'-+', '-', normalized)
+        # Remove leading/trailing hyphens
+        normalized = normalized.strip('-')
+        return normalized
 
     def store_secret(self, key: str, value: str, metadata: dict[str, str] | None = None) -> str:
         """Store a secret in Google Cloud Secret Manager.
@@ -192,7 +211,7 @@ class GCPSecretManager(SecretManager):
 
             # Create the secret
             try:
-                secret = self.client.create_secret(
+                self.client.create_secret(
                     request={
                         "parent": parent,
                         "secret_id": secret_name,
@@ -204,8 +223,20 @@ class GCPSecretManager(SecretManager):
                 )
                 logger.debug("Created secret: %s", secret_name)
             except AlreadyExists:
-                # Secret already exists, just add new version
+                # Secret already exists, update labels if metadata provided
                 logger.debug("Secret already exists: %s", secret_name)
+                if metadata:
+                    secret_path = self._get_secret_path(secret_name)
+                    self.client.update_secret(
+                        request={
+                            "secret": {
+                                "name": secret_path,
+                                "labels": labels,
+                            },
+                            "update_mask": {"paths": ["labels"]},
+                        }
+                    )
+                    logger.debug("Updated labels for existing secret: %s", secret_name)
 
             # Add the secret version with the actual value
             secret_path = self._get_secret_path(secret_name)
@@ -219,6 +250,12 @@ class GCPSecretManager(SecretManager):
             logger.debug("Stored secret with key: %s", key)
             return f"gcp://{secret_name}"
 
+        except (AlreadyExists, NotFound, ValueError):
+            # These are already handled above
+            raise
+        except GoogleAPIError:
+            # Don't wrap GoogleAPIError in another GoogleAPIError
+            raise
         except Exception as e:
             logger.error("Failed to store secret: %s", e)
             raise GoogleAPIError(f"Failed to store secret: {e}") from e
@@ -251,6 +288,9 @@ class GCPSecretManager(SecretManager):
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return None
+        except GoogleAPIError:
+            # Don't wrap GoogleAPIError in another GoogleAPIError
+            raise
         except Exception as e:
             logger.error("Failed to retrieve secret: %s", e)
             raise GoogleAPIError(f"Failed to retrieve secret: {e}") from e
@@ -283,6 +323,9 @@ class GCPSecretManager(SecretManager):
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return False
+        except GoogleAPIError:
+            # Don't wrap GoogleAPIError in another GoogleAPIError
+            raise
         except Exception as e:
             logger.error("Failed to delete secret: %s", e)
             raise GoogleAPIError(f"Failed to delete secret: {e}") from e
@@ -344,6 +387,12 @@ class GCPSecretManager(SecretManager):
         except ValueError as e:
             logger.error("Invalid reference format: %s", e)
             return False
+        except NotFound:
+            # This is handled in the method body
+            raise
+        except GoogleAPIError:
+            # Don't wrap GoogleAPIError in another GoogleAPIError
+            raise
         except Exception as e:
             logger.error("Failed to update secret: %s", e)
             raise GoogleAPIError(f"Failed to update secret: {e}") from e
@@ -383,6 +432,9 @@ class GCPSecretManager(SecretManager):
 
             return refs
 
+        except GoogleAPIError:
+            # Don't wrap GoogleAPIError in another GoogleAPIError
+            raise
         except Exception as e:
             logger.error("Failed to list secrets: %s", e)
             raise GoogleAPIError(f"Failed to list secrets: {e}") from e

@@ -4,7 +4,7 @@ import os
 from unittest.mock import Mock, patch
 
 import pytest
-from google.api_core.exceptions import AlreadyExists, NotFound, GoogleAPIError
+from google.api_core.exceptions import AlreadyExists, NotFound
 from hvac.exceptions import InvalidPath, VaultError
 
 from handsfree.secrets import EnvSecretManager, GCPSecretManager, SecretManager, VaultSecretManager
