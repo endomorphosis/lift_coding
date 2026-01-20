@@ -1,146 +1,657 @@
-# Handsfree Mobile Companion App
+# HandsFree Mobile Companion App
 
-React Native/Expo mobile app for interacting with the Handsfree backend.
+React Native/Expo mobile app for hands-free GitHub operations through voice commands and Meta AI Glasses integration.
 
-## Features
+## 📱 Features
 
-- **Status Check**: View backend connectivity and status
-- **Command Input**: Send text commands to the backend
-- **Confirmation Flow**: Confirm/cancel/repeat/next pending actions
-- **Text-to-Speech**: Fetch and play TTS audio from backend
-- **Push Notifications**: Receive and automatically speak push notifications (configurable in Settings)
-- **Glasses Audio Diagnostics**: Test Bluetooth audio routing with Meta AI Glasses
-- **Native Bluetooth Support**: Route audio through connected Bluetooth headsets
-- **Developer Settings**: Configure X-User-ID header and backend URL in-app
-- **Glasses Diagnostics**: Test Meta AI Glasses audio routing (iOS native module)
-  - Real-time Bluetooth audio route monitoring
-  - Native recording from glasses microphone
-  - Native playback through glasses speakers
-  - Dev mode bypass for testing without glasses
+### Core Functionality
+- **Voice Commands**: Record and send voice commands to backend
+- **Text Commands**: Type commands for quick testing
+- **TTS Playback**: Hear responses through phone or Bluetooth device
+- **Push Notifications**: Real-time updates with auto-speaking (optional)
+- **Confirmation Flow**: Safe confirmation for destructive operations
 
-## Quick Start
+### Meta AI Glasses Integration
+- **Bluetooth Audio Routing**: Route audio to/from glasses
+- **Native Recording**: Capture audio from glasses microphone
+- **Native Playback**: Play TTS through glasses speakers
+- **Real-time Monitoring**: Audio route change detection
+- **Diagnostics Screen**: Test and debug Bluetooth connectivity
 
-### Standard Development (Expo Go)
+### Developer Features
+- **In-App Settings**: Configure backend URL and user ID
+- **Debug Panel**: View request/response details
+- **Audio Upload**: Dev endpoint for audio testing
+- **Auto-play TTS**: Toggle automatic TTS playback
 
-For basic testing without native Bluetooth features:
+## 🚀 Quick Start
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Expo CLI (installed globally: `npm install -g expo-cli`)
-- iOS Simulator (macOS only) or Android Emulator
-- Alternatively, use the Expo Go app on your physical device
+Choose your path based on what you want to test:
 
-## Backend Setup
+### Path 1: Basic Testing (Expo Go)
 
-Before running the mobile app, ensure the backend is running and accessible:
+**Best for**: UI testing without Bluetooth features
+
+**Time**: 5 minutes
 
 ```bash
-# From the repository root
-cd /path/to/lift_coding
-
-# Set up Python environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -e .
-pip install -r requirements-dev.txt
-
-# Set environment variables
-export DATABASE_URL="sqlite:///./handsfree.db"
-export SECRET_KEY="your-secret-key"
-export OPENAI_API_KEY="your-openai-key"  # Optional, for TTS
-
-# Run migrations
-python -m handsfree.db.migrations
-
-# Start the backend server
-uvicorn handsfree.api:app --host 0.0.0.0 --port 8080
+cd mobile
+npm ci
+npm start
+# Scan QR code with Expo Go app
 ```
 
-The backend should now be accessible at `http://localhost:8080`.
+**⚠️ Limitations**: Native Bluetooth features won't work in Expo Go
 
-## Installation
+---
 
-1. Navigate to the mobile directory:
+### Path 2: Simulator Testing
+
+**Best for**: Full feature testing without hardware
+
+**Time**: 10 minutes
+
+```bash
+cd mobile
+npm ci
+
+# iOS Simulator (macOS only)
+npm run ios
+
+# Android Emulator
+npm run android
+```
+
+**⚠️ Limitations**: No Bluetooth, no physical device features
+
+---
+
+### Path 3: Full Hardware Testing
+
+**Best for**: Complete iPhone + Meta Glasses integration
+
+**Time**: 30 minutes
+
+**Requirements**:
+- Physical iPhone (iOS 15+)
+- Meta AI Glasses (optional but recommended)
+- Backend accessible from iPhone
+
+```bash
+cd mobile
+
+# Build development client with native modules
+npx expo run:ios --device
+
+# Follow on-screen instructions
+```
+
+See [iPhone & Glasses Testing](#iphone--meta-glasses-testing) section for complete setup.
+
+---
+
+## 📋 Prerequisites
+
+### For All Paths
+
+- **Node.js** 18+ and npm
+- **Expo CLI**: `npm install -g expo-cli`
+- **Backend server** running and accessible
+
+### For iOS Development
+
+- macOS with **Xcode 14.0+**
+- iOS Simulator or physical iPhone (iOS 15+)
+- **Apple Developer account** (for device deployment)
+
+### For Android Development
+
+- **Android Studio**
+- Android Emulator or physical device
+- **JDK 17**
+
+### For iPhone & Meta Glasses Testing
+
+- **Physical iPhone** (iOS 15+) - Simulator doesn't support Bluetooth
+- **Meta AI Glasses** (Ray-Ban Meta or compatible)
+- Glasses paired with iPhone via Bluetooth
+
+---
+
+## 🔧 Installation
+
+### 1. Navigate to Mobile Directory
 
 ```bash
 cd mobile
 ```
 
-2. Install dependencies:
+### 2. Install Dependencies
 
 ```bash
 npm ci
 ```
 
-3. Configure the backend URL:
+### 3. Configure Backend URL
 
-Edit `src/api/config.js` and update the `BASE_URL`:
+**Option A: In-App Settings** (Recommended)
+
+1. Launch the app
+2. Navigate to **Settings** tab
+3. Enter backend URL (e.g., `http://192.168.1.100:8080`)
+4. Tap **Save Settings**
+
+**Option B: Configuration File**
+
+Edit `src/api/config.js`:
 
 ```javascript
-// For iOS Simulator connecting to localhost
+// iOS Simulator
 export const BASE_URL = 'http://localhost:8080';
 
-// For Android Emulator connecting to localhost
+// Android Emulator
 // export const BASE_URL = 'http://10.0.2.2:8080';
 
-// For physical device on same network
-// export const BASE_URL = 'http://YOUR_COMPUTER_IP:8080';
+// Physical device on same network
+// export const BASE_URL = 'http://192.168.1.100:8080';
 ```
 
-## Running the App
+**Finding Your Computer's IP**:
 
-### Start the development server:
+```bash
+# macOS/Linux
+ifconfig | grep "inet "
+
+# Windows
+ipconfig
+```
+
+---
+
+## 🏃 Running the App
+
+### Start Development Server
 
 ```bash
 npm start
 ```
 
-This will start the Expo development server and show a QR code.
+This will:
+- Start Expo development server
+- Show QR code and menu
+- Display available options
 
-### Run on iOS Simulator (macOS only):
+### Run on Simulator
+
+**iOS Simulator** (macOS only):
 
 ```bash
 npm run ios
 ```
 
-### Run on Android Emulator:
+**Android Emulator**:
 
 ```bash
 npm run android
 ```
 
-### Run on physical device:
+### Run on Physical Device
 
-1. **With Expo Go** (limited features):
-   - Install the [Expo Go](https://expo.dev/go) app on your device
-   - Scan the QR code shown in the terminal
-   - Make sure your device is on the same network as your computer
-   - Update `BASE_URL` in `src/api/config.js` to use your computer's local IP address
-   - Note: Native modules (Glasses Audio) not available in Expo Go
+**Option 1: Expo Go** (Limited Features)
 
-2. **With Development Build** (full features, including native modules):
-   ```bash
-   # First time setup
-   npm install expo-dev-client
-   
-   # Build and run on iOS
-   npx expo run:ios --device
-   
-   # Build and run on Android
-   npx expo run:android --device
-   ```
-   - This includes the native Glasses Audio module for Bluetooth support
-   - See `modules/glasses-audio/SETUP.md` for detailed setup instructions
+1. Install [Expo Go](https://expo.dev/go) on your device
+2. Scan QR code from `npm start`
+3. ⚠️ Native Bluetooth features won't work
 
-### Run in web browser:
+**Option 2: Development Build** (Full Features)
 
 ```bash
-npm run web
+# Build and install on iOS device
+npx expo run:ios --device
+
+# Build and install on Android device
+npx expo run:android --device
 ```
 
-Note: Audio playback may have limited functionality in web mode.
+For detailed build instructions, see [BUILD.md](BUILD.md).
+
+---
+
+## 📱 App Screens
+
+### Status Screen
+
+- View backend connection status
+- Check API version
+- Verify authentication
+
+### Command Screen
+
+**Text Commands**:
+- Type command (e.g., "show my inbox")
+- Send to backend
+- View response with TTS
+
+**Voice Commands**:
+- 🎤 Record audio
+- ⏹ Stop recording
+- 📤 Send to backend
+- 🔊 Auto-play TTS response (optional)
+
+**Features**:
+- Debug panel (toggle on/off)
+- Manual TTS control
+- Response cards display
+
+### Confirmation Screen
+
+- View pending actions requiring confirmation
+- Confirm, cancel, or repeat actions
+- Enter action ID from previous command
+
+### TTS Screen
+
+- Test text-to-speech generation
+- Enter text and generate audio
+- Play through current audio output
+
+### Settings Screen
+
+- **Backend URL**: Configure server address
+- **User ID**: Set user identifier
+- **Generate UUID**: Create random user ID
+- **Notification Settings**: Toggle auto-speaking
+- Persists across app restarts
+
+### Glasses Diagnostics Screen
+
+**Status Information**:
+- Bluetooth connection state
+- Audio input/output devices
+- Real-time route monitoring
+
+**Testing Tools**:
+- 🎤 Record from Bluetooth mic
+- ▶️ Play last recording
+- 🚀 Send to backend and process
+- 🔄 Refresh audio route status
+
+**Dev Mode Toggle**:
+- ON: Use phone mic/speaker (fast testing)
+- OFF: Use Bluetooth audio (real glasses)
+
+---
+
+## 🎧 iPhone & Meta Glasses Testing
+
+### Complete Setup Guide
+
+**See**: [docs/ios-rayban-mvp1-runbook.md](../docs/ios-rayban-mvp1-runbook.md) for the complete, step-by-step runbook.
+
+### Quick Overview
+
+#### 1. Pair Glasses with iPhone
+
+1. Open **Settings** → **Bluetooth**
+2. Turn on Meta AI Glasses
+3. Tap "Ray-Ban Meta..." to pair
+4. Verify status shows "Connected"
+
+#### 2. Build Native Development Client
+
+```bash
+cd mobile
+npx expo run:ios --device
+```
+
+This builds the app with native Bluetooth modules.
+
+#### 3. Configure Audio Routing
+
+1. Play test audio (Music app)
+2. Open **Control Center**
+3. Long-press audio card
+4. Select "Ray-Ban Meta..." as output
+5. Verify audio plays through glasses
+
+#### 4. Test Voice Commands
+
+1. Open app → **Command** tab
+2. Tap **🎤 Start Recording**
+3. Speak: "Show my inbox"
+4. Tap **⏹ Stop** → **Send Audio**
+5. **Verify**: Response plays through glasses
+
+#### 5. Verify Bluetooth Integration
+
+1. Navigate to **Glasses** tab
+2. Check status: "✓ Bluetooth Connected"
+3. Test recording from glasses mic
+4. Test playback through glasses speakers
+
+### Troubleshooting
+
+**Audio plays on phone instead of glasses**:
+- Manually set audio route in Control Center
+- Restart iOS app
+- Reconnect glasses via Bluetooth settings
+
+**Native module not available**:
+- Build with `npx expo run:ios --device` (not Expo Go)
+- Clean and rebuild if necessary
+
+**Bluetooth connection unstable**:
+- Check glasses battery level
+- Reduce Bluetooth interference
+- Keep phone within 1-2 meters of glasses
+
+For comprehensive troubleshooting, see [docs/ios-rayban-troubleshooting.md](../docs/ios-rayban-troubleshooting.md).
+
+---
+
+## 🧪 Testing
+
+### Smoke Test: Voice Command Flow
+
+**Purpose**: Verify complete audio → command → TTS pipeline
+
+**Prerequisites**:
+- Backend running with `HANDSFREE_AUTH_MODE=dev`
+- Mobile app with microphone permissions
+- Audio playback enabled
+
+**Steps**:
+
+1. **Navigate to Command screen**
+2. **Enable settings**:
+   - Toggle "Auto-play TTS" ON
+   - Toggle "Show Debug Panel" ON (optional)
+3. **Record command**:
+   - Tap "🎤 Start Recording"
+   - Speak: "Show my inbox"
+   - Tap "⏹ Stop"
+4. **Send command**:
+   - Tap "Send Audio"
+   - Wait for upload and processing
+5. **Verify response**:
+   - ✅ Response appears with spoken text
+   - ✅ TTS auto-plays
+   - ✅ Audio plays through correct device (glasses if connected)
+   - ✅ No errors in debug panel
+
+**Expected Result**: Complete voice → text → response → audio flow works end-to-end
+
+### Smoke Test: Push Notifications
+
+**Purpose**: Verify push notifications are received and auto-spoken
+
+**Prerequisites**:
+- Physical device (push notifications don't work in simulator)
+- Backend with push notifications configured
+- "Speak notifications" enabled in Settings
+
+**Steps**:
+
+1. **Verify settings**:
+   - Navigate to Settings tab
+   - Check "Speak notifications" is ON
+2. **Trigger test notification**:
+   ```bash
+   curl -X POST http://localhost:8080/v1/dev/send-test-notification \
+     -H "Content-Type: application/json" \
+     -H "X-User-ID: YOUR_USER_ID" \
+     -d '{"message": "Test notification"}'
+   ```
+3. **Verify foreground behavior**:
+   - App receives notification
+   - TTS auto-plays notification text
+   - Banner appears at top of screen
+
+**Expected Result**: Notification is received and automatically spoken
+
+For more tests, see [PUSH_NOTIFICATIONS_TESTING.md](PUSH_NOTIFICATIONS_TESTING.md)
+
+---
+
+## 🏗️ Project Structure
+
+```
+mobile/
+├── src/
+│   ├── api/                      # Backend API client
+│   │   ├── config.js            # Configuration (BASE_URL, auth)
+│   │   └── client.js            # API methods
+│   │
+│   ├── screens/                 # App screens (navigation)
+│   │   ├── StatusScreen.js      # Backend status check
+│   │   ├── CommandScreen.js     # Voice/text commands
+│   │   ├── ConfirmationScreen.js
+│   │   ├── TTSScreen.js
+│   │   ├── SettingsScreen.js
+│   │   └── GlassesDiagnosticsScreen.js
+│   │
+│   ├── components/              # Reusable UI components
+│   │   ├── AudioRecorder.js
+│   │   ├── AudioPlayer.js
+│   │   └── NotificationBanner.js
+│   │
+│   └── utils/                   # Utilities
+│       ├── storage.js           # AsyncStorage wrapper
+│       ├── permissions.js
+│       └── bluetooth.js
+│
+├── modules/                     # Native modules
+│   └── expo-glasses-audio/      # Bluetooth audio routing
+│       ├── ios/                 # Swift native code
+│       │   ├── ExpoGlassesAudioModule.swift
+│       │   ├── AudioRouteMonitor.swift
+│       │   ├── GlassesRecorder.swift
+│       │   └── GlassesPlayer.swift
+│       ├── android/             # Kotlin native code
+│       └── index.ts             # TypeScript interface
+│
+├── assets/                      # Images, fonts, etc.
+├── App.js                       # Root component
+├── index.js                     # Entry point
+├── app.json                     # Expo configuration
+├── package.json                 # Dependencies
+├── BUILD.md                     # Native build instructions
+└── README.md                    # This file
+```
+
+---
+
+## 🔌 API Integration
+
+### Backend Endpoints
+
+The app integrates with these backend endpoints:
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/v1/status` | GET | Health check |
+| `/v1/command` | POST | Process command |
+| `/v1/commands/confirm` | POST | Confirm action |
+| `/v1/tts` | POST | Generate TTS audio |
+| `/v1/dev/audio` | POST | Upload audio (dev only) |
+| `/v1/notifications` | GET | List notifications |
+| `/v1/notifications/subscriptions` | POST | Register device |
+
+### Command Request Example
+
+```javascript
+const response = await fetch(`${BASE_URL}/v1/command`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-User-ID': userId,
+  },
+  body: JSON.stringify({
+    input: {
+      type: 'audio',
+      uri: 'file:///path/to/audio.m4a',
+      format: 'm4a',
+      duration_ms: 3000
+    },
+    profile: 'terse',
+    client_context: {
+      device_type: 'mobile',
+      app_version: '1.0.0'
+    }
+  })
+});
+
+const data = await response.json();
+// {
+//   status: 'success',
+//   intent: 'inbox.summary',
+//   spoken_text: 'You have 3 PRs...',
+//   ui_cards: [...]
+// }
+```
+
+For detailed API documentation, see [../spec/openapi.yaml](../spec/openapi.yaml)
+
+---
+
+## 🔐 Authentication
+
+The app supports session-based authentication:
+
+### X-User-ID Header (Dev Mode)
+
+```javascript
+headers: {
+  'X-User-ID': 'your-user-id'
+}
+```
+
+- Set via Settings screen
+- Stored in AsyncStorage
+- Automatically included in all requests
+
+### Bearer Token (Production)
+
+```javascript
+headers: {
+  'Authorization': 'Bearer YOUR_API_KEY'
+}
+```
+
+- API key generated via backend
+- Stored securely (future: Keychain/Keystore)
+
+For authentication setup, see [../docs/AUTHENTICATION.md](../docs/AUTHENTICATION.md)
+
+---
+
+## 📚 Additional Documentation
+
+### Core Documentation
+- **[Getting Started](../GETTING_STARTED.md)** - Complete setup guide
+- **[Architecture](../ARCHITECTURE.md)** - System design
+- **[Configuration](../CONFIGURATION.md)** - Environment variables
+
+### Mobile-Specific
+- **[Build Instructions](BUILD.md)** - Native module development
+- **[Meta Glasses Integration](../docs/meta-ai-glasses.md)** - Bluetooth audio guide
+- **[Mobile Client Integration](../docs/mobile-client-integration.md)** - API usage patterns
+
+### iPhone & Glasses Testing
+- **[MVP1 Runbook](../docs/ios-rayban-mvp1-runbook.md)** - Complete testing guide
+- **[Troubleshooting](../docs/ios-rayban-troubleshooting.md)** - Common issues
+- **[Audio Routing](../docs/meta-ai-glasses-audio-routing.md)** - Technical details
+
+---
+
+## 🐛 Troubleshooting
+
+### Can't Connect to Backend
+
+**Symptom**: Status screen shows "Connection failed"
+
+**Solutions**:
+1. Verify backend is running: `curl http://localhost:8080/v1/status`
+2. Check backend URL in Settings:
+   - iOS Simulator: `http://localhost:8080`
+   - Android Emulator: `http://10.0.2.2:8080`
+   - Physical Device: `http://YOUR_COMPUTER_IP:8080`
+3. Check firewall settings
+4. Ensure backend binds to `0.0.0.0` not `127.0.0.1`
+
+### Audio Not Playing
+
+**Symptom**: TTS response doesn't play
+
+**Solutions**:
+1. Check device volume
+2. Verify backend TTS is configured (OpenAI API key)
+3. Check audio format compatibility
+4. Try toggling "Auto-play TTS" off/on
+5. Manually tap "🔊 Play TTS" button
+
+### Native Module Not Available
+
+**Symptom**: "Native module not available" error in Glasses tab
+
+**Solutions**:
+1. Build development client:
+   ```bash
+   npx expo run:ios --device
+   ```
+2. Clean and rebuild:
+   ```bash
+   cd ios
+   rm -rf build/ Pods/ Podfile.lock
+   pod install
+   cd ..
+   npx expo run:ios --device
+   ```
+3. Verify you're NOT using Expo Go
+
+### Bluetooth Audio Routing Issues
+
+**Symptom**: Audio plays on phone instead of glasses
+
+**Solutions**:
+1. Manually set audio route in Control Center
+2. Restart iOS app
+3. Toggle Bluetooth off/on
+4. Re-pair glasses if necessary
+
+**See**: [../docs/ios-rayban-troubleshooting.md](../docs/ios-rayban-troubleshooting.md) for comprehensive troubleshooting
+
+---
+
+## 🚀 Next Steps
+
+### Planned Features
+
+- [ ] Production audio upload (pre-signed URLs, S3)
+- [ ] Secure credential storage (Keychain/Keystore)
+- [ ] Biometric authentication
+- [ ] Offline mode with queue sync
+- [ ] Multiple user profiles
+- [ ] Voice customization (speed, voice selection)
+
+### Contributing
+
+See the main repository [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines on:
+- Development workflow
+- Code style
+- Testing requirements
+- PR process
+
+---
+
+## 📄 License
+
+See [LICENSE](../LICENSE) in the repository root.
+
+---
+
+**Mobile App Documentation Version**: 1.0  
+**Last Updated**: 2026-01-20
 
 ## Development Workflow
 
