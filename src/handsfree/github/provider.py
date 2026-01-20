@@ -220,6 +220,10 @@ class LiveGitHubProvider(GitHubProviderInterface):
     Falls back to fixture behavior if no token is available.
     """
 
+    # Retry policy configuration
+    _max_retries = 3
+    _base_delay = 0.5  # seconds
+
     def __init__(self, token_provider):
         """Initialize with a token provider.
 
@@ -346,56 +350,28 @@ class LiveGitHubProvider(GitHubProviderInterface):
 
             logger.debug("Making GitHub API request: %s", url)
 
-            # Retry policy for transient errors
-            max_retries = 3
-            base_delay = 0.5  # seconds
-
             # Create client once and reuse for all retry attempts
             with httpx.Client(timeout=10.0) as client:
-                for attempt in range(max_retries):
+                for attempt in range(self._max_retries):
                     response = client.get(url, headers=headers, params=params or {})
 
-                    # Check for rate limiting - GitHub returns 403 with X-RateLimit-Remaining: 0
-                    if response.status_code in (403, 429):
-                        remaining = response.headers.get("X-RateLimit-Remaining", "")
-                        reset_timestamp = response.headers.get("X-RateLimit-Reset", "")
+                    # Check for rate limiting using helper method
+                    if self._is_rate_limited(response):
+                        retry_msg = self._get_rate_limit_reset_message(response)
                         
-                        # Check if this is a rate limit error (403 with remaining=0 or 429)
-                        is_rate_limit = (
-                            response.status_code == 429 or 
-                            (response.status_code == 403 and remaining == "0")
+                        # SECURITY: Log without token
+                        logger.error(
+                            "GitHub API rate limit exceeded for endpoint %s. "
+                            "Retry after: %s",
+                            endpoint,
+                            retry_msg
                         )
-                        
-                        if is_rate_limit:
-                            # Compute human-readable retry time
-                            retry_msg = "unknown time"
-                            if reset_timestamp:
-                                try:
-                                    reset_dt = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
-                                    now = datetime.now(timezone.utc)
-                                    if reset_dt > now:
-                                        delta = reset_dt - now
-                                        minutes = int(delta.total_seconds() / 60)
-                                        seconds = int(delta.total_seconds() % 60)
-                                        if minutes > 0:
-                                            retry_msg = f"{minutes} minute(s) {seconds} second(s)"
-                                        else:
-                                            retry_msg = f"{seconds} second(s)"
-                                except (ValueError, OSError):
-                                    retry_msg = f"timestamp {reset_timestamp}"
-                            
-                            # SECURITY: Log without token
-                            logger.error(
-                                "GitHub API rate limit exceeded for endpoint %s. "
-                                "Retry after: %s",
-                                endpoint,
-                                retry_msg
-                            )
-                            raise RuntimeError(
-                                f"GitHub API rate limit exceeded. Try again after {retry_msg}"
-                            )
-                        
-                        # Not a rate limit, it's a permission/auth error - don't retry
+                        raise RuntimeError(
+                            f"GitHub API rate limit exceeded. Try again after {retry_msg}"
+                        )
+                    
+                    # Check for other 403 errors (not rate limits) - don't retry
+                    if response.status_code == 403:
                         logger.error("GitHub API access forbidden: 403 Forbidden")
                         raise RuntimeError(
                             "GitHub API access forbidden. Token may lack required permissions."
@@ -409,15 +385,16 @@ class LiveGitHubProvider(GitHubProviderInterface):
                         )
 
                     # Retry transient server errors (502, 503, 504)
-                    if response.status_code in (502, 503, 504) and attempt < max_retries - 1:
-                        # Exponential backoff with jitter
-                        delay = base_delay * (2 ** attempt) + random.uniform(0, 0.5)
+                    if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
+                        # Exponential backoff with jitter proportional to the current delay
+                        base_delay_no_jitter = self._base_delay * (2 ** attempt)
+                        delay = base_delay_no_jitter + random.uniform(0, base_delay_no_jitter * 0.5)
                         logger.warning(
                             "GitHub API transient error %d on attempt %d/%d. "
                             "Retrying in %.2f seconds...",
                             response.status_code,
                             attempt + 1,
-                            max_retries,
+                            self._max_retries,
                             delay
                         )
                         time.sleep(delay)

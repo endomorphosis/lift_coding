@@ -253,10 +253,10 @@ class TestTransientErrorRetry:
 
         # Should have slept twice (for first two failures)
         assert len(sleep_calls) == 2
-        # First sleep should be around 1 second (base_delay=1, jitter up to 0.5)
-        assert 1.0 <= sleep_calls[0] <= 1.5
-        # Second sleep should be around 2 seconds (base_delay=2, jitter up to 1.0)
-        assert 2.0 <= sleep_calls[1] <= 3.0
+        # First sleep should be around 0.5 seconds (base_delay=0.5, jitter up to 0.25)
+        assert 0.5 <= sleep_calls[0] <= 0.75
+        # Second sleep should be around 1.0 seconds (base_delay=1.0, jitter up to 0.5)
+        assert 1.0 <= sleep_calls[1] <= 1.5
 
     @respx.mock
     def test_502_retries(self, monkeypatch):
@@ -324,8 +324,8 @@ class TestTransientErrorRetry:
         with pytest.raises(RuntimeError, match="request failed with status 503"):
             provider._make_request("/user")
 
-        # Should have attempted 3 retries (slept 3 times)
-        assert len(sleep_calls) == 3
+        # Should have slept 2 times (between 3 attempts: 0->1, 1->2)
+        assert len(sleep_calls) == 2
 
     @respx.mock
     def test_400_not_retried(self):
