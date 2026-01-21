@@ -164,7 +164,7 @@ export async function fetchTTS(text, options = {}) {
 
   const body = { 
     text,
-    ...(options.format && { format: options.format }),
+    ...(options.format ? { format: options.format } : {}),
   };
 
   const response = await fetch(`${baseUrl}/v1/tts`, {
