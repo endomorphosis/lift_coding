@@ -115,7 +115,7 @@ class ExpoGlassesAudioModule : Module() {
         // Start recording with output file and audio source
         recorder.start(outputFile, audioSource)
         
-        // Emit recording started event
+        // Emit recording started event after successful start
         sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
         
         // Schedule stop after duration
@@ -136,7 +136,7 @@ class ExpoGlassesAudioModule : Module() {
               )
             )
           } else {
-            promise.reject("ERR_STOP_RECORDING", "Recording failed to produce a result")
+            promise.reject("ERR_STOP_RECORDING", "Recording was not active or failed to complete properly")
           }
         }, (durationSeconds * 1000).toLong())
         
