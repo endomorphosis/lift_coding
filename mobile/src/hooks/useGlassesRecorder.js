@@ -1,7 +1,23 @@
 import { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
-import ExpoGlassesAudio from '../../modules/expo-glasses-audio';
 import { useAudioSource, AUDIO_SOURCES } from './useAudioSource';
+
+let ExpoGlassesAudio = null;
+
+try {
+  ExpoGlassesAudio = require('expo-glasses-audio').default;
+} catch (error) {
+  // Module missing in Expo Go / non-dev-client builds.
+}
+
+function getExpoGlassesAudioOrThrow() {
+  if (!ExpoGlassesAudio) {
+    throw new Error(
+      'Native expo-glasses-audio module not available. This feature requires a development build (expo-dev-client).'
+    );
+  }
+  return ExpoGlassesAudio;
+}
 
 /**
  * Hook to record audio using the expo-glasses-audio module
@@ -14,6 +30,7 @@ export function useGlassesRecorder() {
 
   const startRecording = useCallback(async (durationSeconds = 5) => {
     try {
+      const module = getExpoGlassesAudioOrThrow();
       setIsRecording(true);
       setRecordingUri(null);
 
@@ -22,7 +39,7 @@ export function useGlassesRecorder() {
       
       // If glasses/Bluetooth is selected, check if it's available
       if (audioSource === AUDIO_SOURCES.GLASSES) {
-        const routeInfo = await ExpoGlassesAudio.getAudioRoute();
+        const routeInfo = await module.getAudioRoute();
         if (!routeInfo.isBluetoothConnected) {
           Alert.alert(
             'Bluetooth Not Available',
@@ -33,7 +50,7 @@ export function useGlassesRecorder() {
         }
       }
 
-      const result = await ExpoGlassesAudio.startRecording(durationSeconds, nativeAudioSource);
+      const result = await module.startRecording(durationSeconds, nativeAudioSource);
       
       setRecordingUri(result.uri);
       setIsRecording(false);
@@ -48,7 +65,8 @@ export function useGlassesRecorder() {
 
   const stopRecording = useCallback(async () => {
     try {
-      const result = await ExpoGlassesAudio.stopRecording();
+      const module = getExpoGlassesAudioOrThrow();
+      const result = await module.stopRecording();
       setIsRecording(false);
       if (result.uri) {
         setRecordingUri(result.uri);

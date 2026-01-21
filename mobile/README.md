@@ -1036,7 +1036,7 @@ Future: OAuth, API key auth, secure storage.
 **"Native module not available"**:
 - You're using Expo Go instead of a development build
 - Solution: Run `npx expo run:ios --device` to build with native modules
-- See `modules/glasses-audio/SETUP.md` for detailed instructions
+- The canonical module is `modules/expo-glasses-audio/` (package: `expo-glasses-audio`)
 
 **Bluetooth audio not routing correctly**:
 - Check iOS permissions (Settings → Privacy → Bluetooth)
@@ -1070,7 +1070,7 @@ npm install
 
 The app includes a native iOS module for Meta AI Glasses integration:
 
-**Location**: `modules/glasses-audio/`
+**Location**: `modules/expo-glasses-audio/`
 
 **Features**:
 - Real-time AVAudioSession monitoring
@@ -1080,7 +1080,7 @@ The app includes a native iOS module for Meta AI Glasses integration:
 - Event-driven route change notifications
 
 **Setup**:
-See detailed instructions in `modules/glasses-audio/SETUP.md`
+Build a development client so the native module is included:
 
 **Quick start**:
 ```bash

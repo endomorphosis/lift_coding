@@ -1,6 +1,6 @@
 # expo-glasses-audio
 
-Expo native module for Meta AI Glasses audio route monitoring, recording, and playback on Android.
+Expo native module for Meta AI Glasses audio route monitoring, recording, and playback.
 
 ## Features
 
@@ -33,7 +33,7 @@ npm install
 ### Audio Route Monitoring
 
 ```typescript
-import { glassesAudio } from './modules/expo-glasses-audio';
+import { glassesAudio } from 'expo-glasses-audio';
 
 // Get current audio route
 const route = await glassesAudio.getCurrentRoute();
@@ -61,7 +61,7 @@ subscription.remove();
 ### Audio Recording
 
 ```typescript
-import expoGlassesAudio from './modules/expo-glasses-audio';
+import expoGlassesAudio from 'expo-glasses-audio';
 
 // Start recording for 3 seconds
 const result = await expoGlassesAudio.startRecording(3);
@@ -82,7 +82,7 @@ progressSub.remove();
 ### Audio Playback
 
 ```typescript
-import expoGlassesAudio from './modules/expo-glasses-audio';
+import expoGlassesAudio from 'expo-glasses-audio';
 
 // Play a WAV file
 await expoGlassesAudio.playAudio('/path/to/audio.wav');

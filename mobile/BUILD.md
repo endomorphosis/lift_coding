@@ -204,24 +204,24 @@ mobile/
 ## Native Module API
 
 ```typescript
-import * as GlassesAudio from '../modules/expo-glasses-audio';
+import expoGlassesAudio from 'expo-glasses-audio';
 
 // Get current audio route
-const route = GlassesAudio.getAudioRoute();
+const route = expoGlassesAudio.getAudioRoute();
 // { inputDevice, outputDevice, sampleRate, isBluetoothConnected }
 
 // Start recording (10 seconds)
-const result = await GlassesAudio.startRecording(10);
+const result = await expoGlassesAudio.startRecording(10);
 // { uri, duration, size }
 
 // Play audio file
-await GlassesAudio.playAudio(fileUri);
+await expoGlassesAudio.playAudio(fileUri);
 
 // Stop playback
-await GlassesAudio.stopPlayback();
+await expoGlassesAudio.stopPlayback();
 
 // Listen for route changes
-const subscription = GlassesAudio.addAudioRouteChangeListener((route) => {
+const subscription = expoGlassesAudio.addAudioRouteChangeListener((route) => {
   console.log('Route changed:', route);
 });
 ```
