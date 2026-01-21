@@ -1,14 +1,37 @@
 import { Platform } from 'react-native';
 
-let GlassesAudioPlayer = null;
+let ExpoGlassesAudio = null;
+let lastIsPlaying = false;
+let playbackStatusSubscription = null;
 
 // Try to load the native module, but gracefully handle if it's not available
 try {
-  if (Platform.OS === 'ios') {
-    GlassesAudioPlayer = require('../../modules/glasses-audio-player').default;
-  }
+  ExpoGlassesAudio = require('expo-glasses-audio').default;
 } catch (error) {
-  console.log('Native glasses audio player not available:', error.message);
+  console.log('Native expo-glasses-audio module not available:', error.message);
+}
+
+function ensurePlaybackListener() {
+  if (!ExpoGlassesAudio || playbackStatusSubscription) return;
+
+  try {
+    playbackStatusSubscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+      if (event && typeof event.isPlaying === 'boolean') {
+        lastIsPlaying = event.isPlaying;
+      }
+    });
+  } catch (error) {
+    console.warn('Failed to add glasses playback status listener; events may not be available in this runtime:', error);
+  }
+}
+
+function getExpoGlassesAudioOrThrow() {
+  if (!ExpoGlassesAudio) {
+    throw new Error(
+      'Native expo-glasses-audio module not available. This feature requires a development build (expo-dev-client).'
+    );
+  }
+  return ExpoGlassesAudio;
 }
 
 /**
@@ -17,11 +40,14 @@ try {
  * @returns {Promise<void>}
  */
 export async function playAudioThroughGlasses(fileUri) {
-  if (!GlassesAudioPlayer) {
-    throw new Error('Native glasses audio player not available. This feature requires a development build on iOS.');
+  if (Platform.OS !== 'ios') {
+    throw new Error('Glasses audio playback is currently supported on iOS only.');
   }
-  
-  return await GlassesAudioPlayer.playAudio(fileUri);
+
+  const module = getExpoGlassesAudioOrThrow();
+  ensurePlaybackListener();
+  await module.playAudio(fileUri);
+  lastIsPlaying = true;
 }
 
 /**
@@ -29,23 +55,33 @@ export async function playAudioThroughGlasses(fileUri) {
  * @returns {Promise<void>}
  */
 export async function stopGlassesAudio() {
-  if (!GlassesAudioPlayer) {
-    throw new Error('Native glasses audio player not available.');
-  }
-  
-  return await GlassesAudioPlayer.stopAudio();
+  const module = getExpoGlassesAudioOrThrow();
+  ensurePlaybackListener();
+  await module.stopPlayback();
+  lastIsPlaying = false;
 }
 
 /**
  * Check if audio is currently playing through glasses
- * @returns {Promise<boolean>}
+ * Note: Returns cached playback state from the last event or API call.
+ * May be stale if playback completes naturally without calling stopGlassesAudio().
+ * @returns {boolean}
  */
-export async function isGlassesAudioPlaying() {
-  if (!GlassesAudioPlayer) {
-    return false;
+export function isGlassesAudioPlaying() {
+  ensurePlaybackListener();
+  return lastIsPlaying;
+}
+
+/**
+ * Clean up the playback status subscription
+ * Call this when shutting down to prevent memory leaks
+ */
+export function cleanupGlassesPlayer() {
+  if (playbackStatusSubscription) {
+    playbackStatusSubscription.remove();
+    playbackStatusSubscription = null;
   }
-  
-  return await GlassesAudioPlayer.isPlaying();
+  lastIsPlaying = false;
 }
 
 /**
@@ -53,5 +89,5 @@ export async function isGlassesAudioPlaying() {
  * @returns {boolean}
  */
 export function isGlassesPlayerAvailable() {
-  return GlassesAudioPlayer !== null && Platform.OS === 'ios';
+  return ExpoGlassesAudio !== null && Platform.OS === 'ios';
 }

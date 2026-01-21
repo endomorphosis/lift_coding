@@ -1,20 +1,19 @@
-# iOS Glasses Audio Player - Build & Test Guide
+# Glasses Audio Playback - Build & Test Guide
 
 ## Overview
 
-This implementation provides native iOS audio playback through Meta AI Glasses using AVAudioEngine with proper Bluetooth routing.
+This implementation provides native audio playback through Meta AI Glasses using the `expo-glasses-audio` Expo module (AVAudioEngine routing on iOS; Bluetooth SCO routing on Android).
 
 ## Architecture
 
 ```
 mobile/
-├── modules/glasses-audio-player/      # Native Expo module
+├── modules/expo-glasses-audio/        # Native Expo module (record + playback)
 │   ├── ios/
-│   │   ├── GlassesPlayer.swift        # Core audio player with Bluetooth routing
-│   │   └── GlassesAudioPlayerModule.swift  # Expo module bridge
-│   ├── src/
-│   │   └── GlassesAudioPlayerModule.ts     # Native module loader
-│   └── index.ts                        # Public API
+│   │   └── GlassesPlayer.swift        # Core audio player with Bluetooth routing
+│   ├── android/
+│   │   └── ...                        # Bluetooth SCO playback + WAV parsing
+│   └── index.ts                        # Public JS API
 ├── src/
 │   ├── hooks/
 │   │   └── useGlassesPlayer.js        # React hook for native player
@@ -271,11 +270,10 @@ player.stop()
 
 ## Known Limitations
 
-1. **iOS only:** Android implementation not yet available
+1. **Expo Go not supported:** Requires a development build with native code
 2. **Physical device required:** Bluetooth doesn't work in iOS Simulator
-3. **Expo Go not supported:** Requires development build with native code
-4. **No progress tracking:** Currently no playback progress callbacks
-5. **No volume control:** Uses system volume
+3. **No progress tracking:** Currently no playback progress callbacks
+4. **No volume control:** Uses system volume
 
 ## Next Steps
 

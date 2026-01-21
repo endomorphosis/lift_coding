@@ -15,9 +15,9 @@ This copy is maintained for:
 The Expo app uses the version in the `expo-glasses-audio` module, which is automatically linked and accessible via JavaScript/TypeScript:
 
 ```javascript
-import GlassesAudio from '../../modules/expo-glasses-audio';
+import { glassesAudio } from 'expo-glasses-audio';
 
-const route = await GlassesAudio.getCurrentRoute();
+const route = await glassesAudio.getCurrentRoute();
 ```
 
 ## Standalone Usage (Non-Expo)
