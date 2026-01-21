@@ -12,6 +12,13 @@ const NATIVE_RECORDING_DURATION_SECONDS = 10;
 const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TTS and audio files
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
+// Supported audio formats that the backend can accept
+// Note: 'caf' is not included here as it needs to be converted to 'm4a' (see inferAudioFormatFromUri)
+const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
+// Regex pattern to match audio file extensions before query params or hash fragments
+// Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
+// Group 1 captures the format (e.g., 'wav', 'mp3', 'opus', 'm4a')
+const AUDIO_FORMAT_REGEX = new RegExp(`\\.(${SUPPORTED_AUDIO_FORMATS.join('|')})(?=\\?|#|$)`);
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -35,17 +42,11 @@ export default function GlassesDiagnosticsScreen() {
     if (!uri) return 'm4a';
     const lower = String(uri).toLowerCase();
 
-    if (lower.endsWith('.wav')) return 'wav';
-    if (lower.endsWith('.mp3')) return 'mp3';
-    if (lower.endsWith('.opus')) return 'opus';
-    if (lower.endsWith('.m4a')) return 'm4a';
+    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
+    if (lower.endsWith('.caf')) return 'm4a';
 
-    // file://.../foo.wav?x=y
-    const match = lower.match(/\.([a-z0-9]+)(\?|#|$)/);
-    if (match?.[1] === 'wav') return 'wav';
-    if (match?.[1] === 'mp3') return 'mp3';
-    if (match?.[1] === 'opus') return 'opus';
-    if (match?.[1] === 'm4a') return 'm4a';
+    const match = lower.match(AUDIO_FORMAT_REGEX);
+    if (match?.[1]) return match[1];
 
     return 'm4a';
   };
