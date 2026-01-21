@@ -1,4 +1,4 @@
-# Build Instructions for iOS Glasses Audio Module
+# Build Instructions for iOS Glasses Audio (Expo Module)
 
 This guide explains how to build and test the iOS native Bluetooth audio functionality.
 
@@ -49,24 +49,14 @@ In Xcode:
 4. Select your development team
 5. Xcode will automatically manage provisioning
 
-### 5. Add Native Files (if not auto-linked)
+### 5. Verify Native Module Linking
 
-If the native module files aren't automatically included:
+This project uses the Expo Module at `mobile/modules/expo-glasses-audio/`.
 
-1. In Xcode, right-click on project
-2. Select "Add Files to mobiletemp..."
-3. Navigate to `mobile/modules/glasses-audio/ios/`
-4. Select all `.swift` and `.m` files
-5. Ensure "Copy items if needed" is checked
-6. Click "Add"
+After `npx expo prebuild --platform ios --clean`, the module should be auto-linked.
+If the app reports "Native module not available", rebuild the dev client and ensure you are not using Expo Go.
 
-### 6. Configure Bridging Header (if needed)
-
-1. Go to Build Settings
-2. Search for "Objective-C Bridging Header"
-3. Set value to: `modules/glasses-audio/ios/GlassesAudio-Bridging-Header.h`
-
-### 7. Build and Run
+### 6. Build and Run
 
 From Xcode:
 1. Select your physical iOS device (not simulator)
@@ -276,5 +266,5 @@ After confirming iOS works:
 ## Support
 
 - iOS Issues: Check `mobile/glasses/ios/IMPLEMENTATION.md`
-- Module API: Check `mobile/modules/glasses-audio/README.md`
+- Module API: Check `mobile/modules/expo-glasses-audio/README.md`
 - General: Check `mobile/glasses/README.md`
