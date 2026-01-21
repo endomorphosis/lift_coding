@@ -29,11 +29,27 @@ function normalizeLocalFileUriForFileSystem(uri) {
 
 function inferAudioFormatFromUri(uri) {
   const lower = String(uri || '').toLowerCase();
-  if (lower.includes('.wav')) return 'wav';
-  if (lower.includes('.mp3')) return 'mp3';
-  if (lower.includes('.m4a')) return 'm4a';
-  if (lower.includes('.aac')) return 'aac';
-  return 'm4a';
+
+  // Remove query parameters and fragments to focus on the path / filename.
+  const pathWithoutQueryOrFragment = lower.split('?')[0].split('#')[0];
+
+  const lastDotIndex = pathWithoutQueryOrFragment.lastIndexOf('.');
+  if (lastDotIndex === -1) {
+    // No extension found; fall back to default.
+    return 'm4a';
+  }
+
+  const ext = pathWithoutQueryOrFragment.slice(lastDotIndex + 1);
+  switch (ext) {
+    case 'wav':
+    case 'mp3':
+    case 'm4a':
+    case 'aac':
+      return ext;
+    default:
+      // Unknown extension; keep existing behavior of defaulting to m4a.
+      return 'm4a';
+  }
 }
 
 export default function GlassesDiagnosticsScreen() {
@@ -272,11 +288,14 @@ export default function GlassesDiagnosticsScreen() {
         if (nativeModuleAvailable) {
           // Start recording with configured duration. The native module will auto-stop after this duration
           // if the user doesn't manually stop it first.
-          setIsRecording(true);
           const recordingPromise = ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           recordingPromiseRef.current = recordingPromise;
+          // Recording has started; update UI state immediately.
+          setIsRecording(true);
           recordingPromise
             .then((result) => {
+              // Recording has completed successfully.
+              setIsRecording(false);
               if (result?.uri) {
                 setLastRecordingUri(result.uri);
               }
@@ -302,8 +321,6 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopRecording = async () => {
     try {
-      setIsRecording(false);
-      
       if (devMode) {
         // DEV mode: use expo-av
         if (recording) {
@@ -311,6 +328,7 @@ export default function GlassesDiagnosticsScreen() {
           const uri = recording.getURI();
           setRecording(null);
           setLastRecordingUri(uri);
+          setIsRecording(false);
           Alert.alert('Recording Complete', 'Saved locally.');
         } else {
           setLastError('No active recording to stop.');
@@ -319,6 +337,7 @@ export default function GlassesDiagnosticsScreen() {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
           const result = await ExpoGlassesAudio.stopRecording();
+          setIsRecording(false);
           if (result && result.uri) {
             setLastRecordingUri(result.uri);
             Alert.alert('Recording Complete', 'Saved locally.');
@@ -334,6 +353,7 @@ export default function GlassesDiagnosticsScreen() {
       }
     } catch (error) {
       setLastError(`Stop recording failed: ${error.message}`);
+      setIsRecording(false);
     }
   };
 
@@ -465,7 +485,11 @@ export default function GlassesDiagnosticsScreen() {
       await playUri(tempUri);
     } catch (error) {
       setLastError(`TTS failed: ${error.message}`);
-      if (tempUri && pendingTtsTempUriRef.current === tempUri) {
+      // Best-effort cleanup of the temp file if anything failed after creation.
+      if (tempUri) {
+        FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+      }
+      if (pendingTtsTempUriRef.current === tempUri) {
         pendingTtsTempUriRef.current = null;
       }
     }
@@ -488,6 +512,11 @@ export default function GlassesDiagnosticsScreen() {
       });
       const uploaded = await uploadDevAudio(audioBase64, uploadFormat);
       const fileUri = uploaded?.uri;
+      if (!fileUri) {
+        setLastError('Pipeline failed: missing file URI from upload.');
+        Alert.alert('Upload Error', 'The audio upload did not return a valid file location.');
+        return;
+      }
       const commandFormat = uploaded?.format || uploadFormat;
       const response = await sendAudioCommand(fileUri, commandFormat, {
         profile: 'dev',
