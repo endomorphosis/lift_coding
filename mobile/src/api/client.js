@@ -165,7 +165,7 @@ export async function fetchTTS(text, options = {}) {
 
   // Add Accept header if specified
   if (options.accept) {
-    headers.Accept = options.accept;
+    headers['Accept'] = options.accept;
   }
 
   const body = { text };
