@@ -289,7 +289,7 @@ Notes:
 
 2. Register a test subscription:
    ```bash
-  curl -X POST http://localhost:8080/v1/notifications/subscriptions \
+    curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -H "X-User-ID: test-user" \
      -d '{"endpoint": "test-device-token", "platform": "apns"}'
