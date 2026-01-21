@@ -46,13 +46,8 @@ export async function playAudioThroughGlasses(fileUri) {
 
   const module = getExpoGlassesAudioOrThrow();
   ensurePlaybackListener();
-  try {
-    await module.playAudio(fileUri);
-    lastIsPlaying = true;
-  } catch (error) {
-    // Preserve lastIsPlaying state if playAudio fails
-    throw error;
-  }
+  await module.playAudio(fileUri);
+  lastIsPlaying = true;
 }
 
 /**
@@ -62,22 +57,17 @@ export async function playAudioThroughGlasses(fileUri) {
 export async function stopGlassesAudio() {
   const module = getExpoGlassesAudioOrThrow();
   ensurePlaybackListener();
-  try {
-    await module.stopPlayback();
-    lastIsPlaying = false;
-  } catch (error) {
-    // Preserve lastIsPlaying state if stopPlayback fails
-    throw error;
-  }
+  await module.stopPlayback();
+  lastIsPlaying = false;
 }
 
 /**
  * Check if audio is currently playing through glasses
  * Note: Returns cached playback state from the last event or API call.
  * May be stale if playback completes naturally without calling stopGlassesAudio().
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-export async function isGlassesAudioPlaying() {
+export function isGlassesAudioPlaying() {
   ensurePlaybackListener();
   return lastIsPlaying;
 }
