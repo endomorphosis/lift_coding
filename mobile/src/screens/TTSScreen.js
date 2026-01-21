@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -27,7 +27,7 @@ export default function TTSScreen() {
   const nativePlaybackSubscriptionRef = React.useRef(null);
   const tempFileUriRef = React.useRef(null);
 
-  const cleanupTempFile = async () => {
+  const cleanupTempFile = useCallback(async () => {
     const uri = tempFileUriRef.current;
     if (!uri) return;
     try {
@@ -39,7 +39,7 @@ export default function TTSScreen() {
     } catch {
       // ignore; keep tempFileUriRef so deletion can be retried later
     }
-  };
+  }, []);
 
   const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
@@ -67,7 +67,7 @@ export default function TTSScreen() {
     });
   };
 
-  const stopNativePlaybackListener = () => {
+  const stopNativePlaybackListener = useCallback(() => {
     if (nativePlaybackSubscriptionRef.current) {
       try {
         nativePlaybackSubscriptionRef.current.remove();
@@ -76,7 +76,7 @@ export default function TTSScreen() {
       }
       nativePlaybackSubscriptionRef.current = null;
     }
-  };
+  }, []);
 
   const handleFetchAndPlay = async () => {
     if (!text.trim()) {
@@ -135,7 +135,6 @@ export default function TTSScreen() {
           setIsPlaying(true);
         } catch (err) {
           stopNativePlaybackListener();
-          setIsPlaying(false);
           await cleanupTempFile();
           throw err;
         }
@@ -149,6 +148,7 @@ export default function TTSScreen() {
         playsInSilentModeIOS: true,
         staysActiveInBackground: true,
         shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: false,
       });
 
       const { sound: newSound } = await Audio.Sound.createAsync(
@@ -159,16 +159,19 @@ export default function TTSScreen() {
       setSound(newSound);
       setIsPlaying(true);
 
-      newSound.setOnPlaybackStatusUpdate(async (status) => {
+      newSound.setOnPlaybackStatusUpdate((status) => {
         if (status?.didJustFinish) {
           setIsPlaying(false);
-          try {
-            await newSound.unloadAsync();
-          } catch {
-            // ignore unload errors
-          }
-          setSound(null);
-          await cleanupTempFile();
+          setSound((currentSound) => {
+            if (currentSound === newSound) {
+              currentSound.unloadAsync().catch(() => {
+                // ignore unload errors
+              });
+              cleanupTempFile();
+              return null;
+            }
+            return currentSound;
+          });
         }
       });
     } catch (err) {
@@ -197,9 +200,9 @@ export default function TTSScreen() {
         // ignore stop/unload errors
       } finally {
         setSound(null);
-        setIsPlaying(false);
       }
     }
+    setIsPlaying(false);
     await cleanupTempFile();
   };
 
@@ -231,7 +234,7 @@ export default function TTSScreen() {
       stopNativePlaybackListener();
       cleanupTempFile();
     };
-  }, [sound]);
+  }, [sound, stopNativePlaybackListener, cleanupTempFile]);
 
   return (
     <ScrollView style={styles.container}>
