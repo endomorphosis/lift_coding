@@ -379,7 +379,7 @@ export default function GlassesDiagnosticsScreen() {
 
     let tempUri = null;
     try {
-      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+      const audioBlob = await fetchTTS(text);
       const base64Audio = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onerror = () => reject(new Error('Failed to read TTS audio'));

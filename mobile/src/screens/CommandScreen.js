@@ -149,7 +149,7 @@ export default function CommandScreen() {
       }
 
       // Fetch TTS audio
-      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+      const audioBlob = await fetchTTS(text);
 
       // Convert blob to base64
       const reader = new FileReader();
