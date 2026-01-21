@@ -179,7 +179,7 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
    - Notifications (optional): **Allow**
 3. **Configure Backend URL**:
    - Navigate to app settings screen
-   - Enter backend URL, e.g., `http://192.168.1.100:8000` or `https://api.example.com`
+   - Enter backend URL, e.g., `http://192.168.1.100:8080` or `https://api.example.com`
    - Tap **Save** and verify connection indicator shows green/connected
 4. **Verify Glasses Connection Status**:
    - Check app UI for Bluetooth status indicator
@@ -205,11 +205,14 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
 
 3. **Start the Server**:
    ```bash
-   # Development mode
-   python -m src.main
-   
+   # Development mode (recommended)
+   make dev
+
+   # Or run the module directly
+   python -m handsfree.server
+
    # Or via uvicorn directly
-   uvicorn src.main:app --reload --host 0.0.0.0 --port 8080
+   uvicorn handsfree.api:app --reload --host 0.0.0.0 --port 8080
    ```
 
 4. **Verify Server Started**:
@@ -626,7 +629,7 @@ export OPENAI_API_KEY=sk-...  # Your OpenAI API key
 
 **Step 3**: Restart backend
 ```bash
-python -m src.main
+make dev
 ```
 
 **Step 4**: Verify configuration
@@ -681,7 +684,7 @@ curl http://localhost:8080/v1/status -v
 
 **Root Causes**:
 1. Backend server is not running
-2. Firewall is blocking port 8000
+2. Firewall is blocking port 8080
 3. Backend is bound to localhost only (not accessible from network)
 4. iOS app has wrong backend URL configured
 
