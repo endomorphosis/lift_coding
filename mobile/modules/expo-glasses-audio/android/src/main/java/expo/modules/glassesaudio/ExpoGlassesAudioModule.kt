@@ -51,7 +51,8 @@ class ExpoGlassesAudioModule : Module() {
         ?: (firstOutput?.get("typeName") as? String)
         ?: "Unknown"
 
-      val isBluetoothConnected = route["isBluetoothConnected"] as? Boolean
+      // Trust structured isBluetoothConnected value first, only fallback to string matching if null
+      val isBluetoothConnected = (route["isBluetoothConnected"] as? Boolean)
         ?: (inputDevice.contains("Bluetooth", ignoreCase = true) || outputDevice.contains("Bluetooth", ignoreCase = true))
 
       mapOf(
