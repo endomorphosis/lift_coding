@@ -12,6 +12,7 @@ import {
 import { fetchTTS } from '../api/client';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { simulateNotificationForDev } from '../push/notificationsHandler';
 
 export default function TTSScreen() {
@@ -21,6 +22,57 @@ export default function TTSScreen() {
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [notificationLoading, setNotificationLoading] = useState(false);
+
+  const nativePlaybackSubscriptionRef = React.useRef(null);
+  const tempFileUriRef = React.useRef(null);
+
+  const cleanupTempFile = async () => {
+    const uri = tempFileUriRef.current;
+    tempFileUriRef.current = null;
+    if (!uri) return;
+    try {
+      await FileSystem.deleteAsync(uri, { idempotent: true });
+    } catch {
+      // ignore
+    }
+  };
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        const resultStr = String(reader.result);
+        const commaIndex = resultStr.indexOf(',');
+        if (commaIndex === -1) {
+          reject(new Error('Invalid data URL format'));
+          return;
+        }
+        const base64 = resultStr.substring(commaIndex + 1);
+        if (!base64) {
+          reject(new Error('Empty base64 data'));
+          return;
+        }
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const stopNativePlaybackListener = () => {
+    if (nativePlaybackSubscriptionRef.current) {
+      try {
+        nativePlaybackSubscriptionRef.current.remove();
+      } catch {
+        // ignore
+      }
+      nativePlaybackSubscriptionRef.current = null;
+    }
+  };
 
   const handleFetchAndPlay = async () => {
     if (!text.trim()) {
@@ -39,23 +91,48 @@ export default function TTSScreen() {
         setSound(null);
       }
 
-      // Fetch TTS audio (default backend format is WAV)
+       stopNativePlaybackListener();
+       await cleanupTempFile();
+
+      // Fetch TTS audio (explicit format)
       const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
 
-      const base64Audio = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onerror = () => reject(new Error('Failed to read TTS audio'));
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(audioBlob);
-      });
-
-      const base64Data = String(base64Audio).split(',')[1];
+      // Convert blob to base64, write to temp file
+      const base64Audio = await blobToBase64(audioBlob);
       const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
-
-      await FileSystem.writeAsStringAsync(tempUri, base64Data, {
+      tempFileUriRef.current = tempUri;
+      await FileSystem.writeAsStringAsync(tempUri, base64Audio, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
+      // Prefer native glasses playback when available
+      const hasNativePlayback =
+        ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
+
+      if (hasNativePlayback) {
+        setIsPlaying(true);
+
+        nativePlaybackSubscriptionRef.current =
+          typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function'
+            ? ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
+                if (!event?.isPlaying) {
+                  stopNativePlaybackListener();
+                  setIsPlaying(false);
+                  await cleanupTempFile();
+                }
+              })
+            : null;
+
+        const nativeUri =
+          Platform.OS === 'android'
+            ? tempUri.replace(/^file:\/\//, '')
+            : tempUri;
+
+        await ExpoGlassesAudio.playAudio(nativeUri);
+        return;
+      }
+
+      // Fallback to Expo AV playback
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: tempUri },
         { shouldPlay: true }
@@ -65,9 +142,9 @@ export default function TTSScreen() {
       setIsPlaying(true);
 
       newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
+        if (status?.didJustFinish) {
           setIsPlaying(false);
-          FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+          cleanupTempFile();
         }
       });
     } catch (err) {
@@ -78,10 +155,21 @@ export default function TTSScreen() {
   };
 
   const handleStop = async () => {
+    stopNativePlaybackListener();
+
+    try {
+      if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+        await ExpoGlassesAudio.stopPlayback();
+      }
+    } catch {
+      // ignore
+    }
+
     if (sound) {
       await sound.stopAsync();
       setIsPlaying(false);
     }
+    await cleanupTempFile();
   };
 
   const handleTestNotification = async () => {
@@ -108,6 +196,8 @@ export default function TTSScreen() {
     return sound
       ? () => {
           sound.unloadAsync();
+          stopNativePlaybackListener();
+          cleanupTempFile();
         }
       : undefined;
   }, [sound]);

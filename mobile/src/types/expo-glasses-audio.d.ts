@@ -1,4 +1,4 @@
-declare module '../../modules/expo-glasses-audio' {
+declare module 'expo-glasses-audio' {
   import { Subscription } from 'expo-modules-core';
 
   export interface AudioDevice {
@@ -35,7 +35,7 @@ declare module '../../modules/expo-glasses-audio' {
 
   export type AudioSource = 'phone' | 'glasses' | 'auto';
 
-  export function getAudioRoute(): AudioRouteInfo;
+  export function getAudioRoute(): SimpleAudioRouteInfo;
   
   export function startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult>;
   
@@ -46,7 +46,7 @@ declare module '../../modules/expo-glasses-audio' {
   export function stopPlayback(): Promise<void>;
   
   export function addAudioRouteChangeListener(
-    listener: (event: AudioRouteInfo) => void
+    listener: (event: SimpleAudioRouteInfo) => void
   ): Subscription;
   
   export function addRecordingProgressListener(
@@ -54,6 +54,6 @@ declare module '../../modules/expo-glasses-audio' {
   ): Subscription;
   
   export function addPlaybackStatusListener(
-    listener: (event: { isPlaying: boolean; position: number; duration: number }) => void
+    listener: (event: { isPlaying: boolean; error?: string }) => void
   ): Subscription;
 }
