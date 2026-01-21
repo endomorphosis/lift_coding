@@ -174,6 +174,11 @@ export async function fetchTTS(text, options = {}) {
     voice: options.voice || undefined,
   };
 
+  // Add format to body if specified
+  if (options.format) {
+    body.format = options.format;
+  }
+
   const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
     headers,
