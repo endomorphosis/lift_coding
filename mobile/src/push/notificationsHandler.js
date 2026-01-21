@@ -54,45 +54,38 @@ async function playViaNativeGlasses(fileUri) {
       subscription = null;
     };
 
-    try {
-      subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
-        if (settled) return; // Prevent execution after promise is settled
-        if (!event || typeof event !== 'object') return;
-        if (event.error) {
-          cleanup();
-          settled = true;
-          reject(new Error(event.error));
-          return;
-        }
-        if (event.isPlaying === true) {
-          sawStart = true;
-        }
-        if (event.isPlaying === false && sawStart) {
-          cleanup();
-          settled = true;
-          resolve();
-        }
-      });
-
-      timeoutId = setTimeout(() => {
-        if (settled) return; // Prevent execution after promise is settled
+    subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+      if (settled) return; // Prevent execution after promise is settled
+      if (!event || typeof event !== 'object') return;
+      if (event.error) {
         cleanup();
         settled = true;
-        resolve(); // Timeout fallback: avoid blocking the queue forever
-      }, NATIVE_PLAYBACK_TIMEOUT_MS);
-
-      ExpoGlassesAudio.playAudio(fileUri).catch((error) => {
-        if (settled) return; // Prevent execution after promise is settled
+        reject(new Error(event.error));
+        return;
+      }
+      if (event.isPlaying === true) {
+        sawStart = true;
+      }
+      if (event.isPlaying === false && sawStart) {
         cleanup();
         settled = true;
-        reject(error);
-      });
-    } catch (error) {
+        resolve();
+      }
+    });
+
+    timeoutId = setTimeout(() => {
+      if (settled) return; // Prevent execution after promise is settled
+      cleanup();
+      settled = true;
+      resolve(); // Timeout fallback: avoid blocking the queue forever
+    }, NATIVE_PLAYBACK_TIMEOUT_MS);
+
+    ExpoGlassesAudio.playAudio(fileUri).catch((error) => {
       if (settled) return; // Prevent execution after promise is settled
       cleanup();
       settled = true;
       reject(error);
-    }
+    });
   });
 }
 
