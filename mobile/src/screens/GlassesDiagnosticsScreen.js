@@ -15,7 +15,8 @@ const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stop
 const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
 // Regex pattern to match audio file extensions before query params or hash fragments
 // Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
-const AUDIO_FORMAT_REGEX = new RegExp(`\\.((?:${SUPPORTED_AUDIO_FORMATS.join('|')}))(?=(\\?|#|$))`);
+// Group 1 captures the format (e.g., 'wav', 'mp3', 'opus', 'm4a')
+const AUDIO_FORMAT_REGEX = new RegExp(`\\.(${SUPPORTED_AUDIO_FORMATS.join('|')})(?=\\?|#|$)`);
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -38,6 +39,9 @@ export default function GlassesDiagnosticsScreen() {
   const inferAudioFormatFromUri = (uri) => {
     if (!uri) return 'm4a';
     const lower = String(uri).toLowerCase();
+
+    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
+    if (lower.endsWith('.caf')) return 'm4a';
 
     const match = lower.match(AUDIO_FORMAT_REGEX);
     if (match?.[1]) return match[1];
