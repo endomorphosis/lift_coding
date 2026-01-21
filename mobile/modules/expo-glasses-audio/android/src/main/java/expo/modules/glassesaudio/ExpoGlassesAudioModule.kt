@@ -134,7 +134,14 @@ class ExpoGlassesAudioModule : Module() {
               )
             )
           } else {
-            promise.reject("ERR_STOP_RECORDING", "Failed to get recording result")
+            // If result is null, return empty values (e.g., if recording was already stopped)
+            promise.resolve(
+              mapOf(
+                "uri" to "",
+                "duration" to 0,
+                "size" to 0
+              )
+            )
           }
         }, (durationSeconds * 1000).toLong())
         
@@ -160,6 +167,7 @@ class ExpoGlassesAudioModule : Module() {
             )
           )
         } else {
+          // If result is null, return empty values (e.g., if recording was not running)
           promise.resolve(
             mapOf(
               "uri" to "",
