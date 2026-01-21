@@ -118,13 +118,8 @@ public final class GlassesPlayer {
     public func stop() {
         shouldResumeAfterInterruption = false
         
-        // Invoke completion handler before clearing it
-        if let handler = completionHandler {
-            completionHandler = nil
-            DispatchQueue.main.async {
-                handler()
-            }
-        }
+        // Clear completion handler without calling it (only natural completion calls it)
+        completionHandler = nil
         
         playerNode.stop()
         audioEngine.stop()

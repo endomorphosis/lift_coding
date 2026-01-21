@@ -197,13 +197,13 @@ public class ExpoGlassesAudioModule: Module {
       recorder.stopRecording()
       player.stop()
       
-      // Use recordingQueue to ensure thread-safe cleanup
-      recordingQueue.sync {
-        recordingStopWorkItem?.cancel()
-        recordingStopWorkItem = nil
+      // Use recordingQueue.async to avoid deadlock risk
+      recordingQueue.async {
+        self.recordingStopWorkItem?.cancel()
+        self.recordingStopWorkItem = nil
         
         // Reject pending promise before clearing
-        if let promise = pendingStartRecordingPromise {
+        if let promise = self.pendingStartRecordingPromise {
           let error = NSError(
             domain: "ERR_MODULE_DESTROYED",
             code: 0,
@@ -211,11 +211,11 @@ public class ExpoGlassesAudioModule: Module {
           )
           promise.reject(error)
         }
-        pendingStartRecordingPromise = nil
+        self.pendingStartRecordingPromise = nil
         
-        recordingFileURL = nil
-        recordingStartedAt = nil
-        isRecording = false
+        self.recordingFileURL = nil
+        self.recordingStartedAt = nil
+        self.isRecording = false
       }
       
       if let observer = foregroundObserver {
