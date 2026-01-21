@@ -5,7 +5,7 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
 import { getDebugState, simulateNotificationForDev } from '../push';
-import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;

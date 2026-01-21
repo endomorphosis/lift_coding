@@ -85,13 +85,11 @@ mobile/glasses/
     ├── GlassesPlayer.kt
     └── GlassesAudioDiagnostics.kt
 
-mobile/modules/expo-glasses-audio/      # Local Expo module ✅ (current)
-├── index.ts
-├── ios/
-└── android/
-
-# Legacy (deprecated)
-# - mobile/modules/glasses-audio/
+mobile/modules/expo-glasses-audio/      # Expo Module (current) ✅
+├── index.ts                            # TypeScript wrapper
+└── ios/                                # iOS implementation
+    ├── ExpoGlassesAudioModule.swift    # Native module
+    └── ExpoGlassesAudio.podspec        # CocoaPods spec
 ```
 
 ## Features

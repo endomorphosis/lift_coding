@@ -33,6 +33,8 @@ export interface RecordingResult {
   size: number;
 }
 
+export type AudioSource = 'phone' | 'glasses' | 'auto';
+
 export interface RecordingProgressEvent {
   isRecording: boolean;
   duration: number;
@@ -140,10 +142,11 @@ class ExpoGlassesAudio extends EventEmitter {
   /**
    * Start recording audio to a WAV file.
    * @param durationSeconds Duration of recording in seconds
+   * @param audioSource Optional audio source preference ('phone', 'glasses', or 'auto')
    * @returns Promise with recording result (uri, duration, size)
    */
-  async startRecording(durationSeconds: number): Promise<RecordingResult> {
-    return await ExpoGlassesAudioModule.startRecording(durationSeconds);
+  async startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult> {
+    return await ExpoGlassesAudioModule.startRecording(durationSeconds, audioSource);
   }
 
   /**
