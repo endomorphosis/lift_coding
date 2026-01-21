@@ -16,6 +16,12 @@ enum class AudioSource(val value: String) {
     AUTO("auto")
 }
 
+data class RecordingResult(
+    val file: File,
+    val sizeBytes: Long,
+    val durationSeconds: Int,
+)
+
 class GlassesRecorder {
     companion object {
         private const val TAG = "GlassesRecorder"
@@ -29,12 +35,28 @@ class GlassesRecorder {
     private var isRecording = false
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
+    private var startedAtMs: Long? = null
 
-    fun start(audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
+    @Synchronized
+    fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO) {
+        if (isRecording || recorder != null) {
+            throw IllegalStateException("Recorder is already running")
+        }
+
         val sampleRate = 16000
         val channel = AudioFormat.CHANNEL_IN_MONO
         val encoding = AudioFormat.ENCODING_PCM_16BIT
-        val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding)
+        val minBufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding)
+        if (minBufferSize == AudioRecord.ERROR || minBufferSize == AudioRecord.ERROR_BAD_VALUE) {
+            throw IllegalStateException("AudioRecord.getMinBufferSize failed: $minBufferSize")
+        }
+
+        val bufferSize = minBufferSize.coerceAtLeast(2048)
+
+        outputFile.parentFile?.mkdirs()
+        this.outputFile = outputFile
+        totalBytesWritten = 0L
+        startedAtMs = System.currentTimeMillis()
 
         // Select audio source based on preference
         val androidAudioSource = when (audioSource) {
@@ -51,6 +73,11 @@ class GlassesRecorder {
             bufferSize
         )
 
+        if (r.state != AudioRecord.STATE_INITIALIZED) {
+            r.release()
+            throw IllegalStateException("AudioRecord failed to initialize (state=${r.state})")
+        }
+
         // Write initial WAV header (will be updated with correct sizes on stop)
         writeWavHeader(outputFile, sampleRate, 1, 16)
         
@@ -61,10 +88,8 @@ class GlassesRecorder {
         // Start background thread to read and write audio data
         recordingThread = Thread {
             writeAudioData(r, outputFile, bufferSize)
-        }
+        }.apply { name = "GlassesRecorderThread" }
         recordingThread?.start()
-        
-        return r
     }
 
     private fun writeAudioData(recorder: AudioRecord, file: File, bufferSize: Int) {
@@ -105,29 +130,64 @@ class GlassesRecorder {
         }
     }
 
-    fun stop() {
-        // Stop the recorder first to unblock the read() call
-        recorder?.stop()
-        
-        // Then signal the thread to finish
-        isRecording = false
-        recordingThread?.join(RECORDING_THREAD_JOIN_TIMEOUT_MS)
-        recordingThread = null
-        
-        recorder?.release()
-        recorder = null
-        
-        // Update WAV header with actual data size
-        outputFile?.let { file ->
-            if (file.exists()) {
-                try {
-                    updateWavHeader(file)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error updating WAV header: ${e.message}", e)
-                }
+    @Synchronized
+    fun stop(): RecordingResult? {
+        val file = outputFile
+
+        if (!isRecording && recorder == null) {
+            return file?.takeIf { it.exists() }?.let {
+                RecordingResult(
+                    file = it,
+                    sizeBytes = it.length(),
+                    durationSeconds = 0,
+                )
             }
         }
+
+        // Signal the writer loop to finish, then stop AudioRecord to unblock read().
+        isRecording = false
+        try {
+            recorder?.stop()
+        } catch (e: Exception) {
+            Log.w(TAG, "Error stopping AudioRecord: ${e.message}")
+        }
+
+        recordingThread?.join(RECORDING_THREAD_JOIN_TIMEOUT_MS)
+        if (recordingThread?.isAlive == true) {
+            recordingThread?.interrupt()
+        }
+        recordingThread = null
+
+        try {
+            recorder?.release()
+        } catch (e: Exception) {
+            Log.w(TAG, "Error releasing AudioRecord: ${e.message}")
+        }
+        recorder = null
+
+        // Update WAV header with actual data size
+        if (file != null && file.exists()) {
+            try {
+                updateWavHeader(file)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error updating WAV header: ${e.message}", e)
+            }
+        }
+
+        val durationSeconds = startedAtMs?.let { startMs ->
+            ((System.currentTimeMillis() - startMs) / 1000L).toInt().coerceAtLeast(0)
+        } ?: 0
+
+        startedAtMs = null
         outputFile = null
+
+        return file?.takeIf { it.exists() }?.let {
+            RecordingResult(
+                file = it,
+                sizeBytes = it.length(),
+                durationSeconds = durationSeconds,
+            )
+        }
     }
 
     private fun writeWavHeader(file: File, sampleRate: Int, channels: Int, bitsPerSample: Int) {

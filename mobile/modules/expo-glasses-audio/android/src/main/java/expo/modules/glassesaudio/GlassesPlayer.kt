@@ -6,6 +6,7 @@ import android.media.AudioTrack
 import android.util.Log
 import java.io.File
 import java.io.FileInputStream
+import java.io.RandomAccessFile
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
@@ -113,74 +114,108 @@ class GlassesPlayer {
     fun stop() {
         synchronized(playbackLock) {
             isPlaying = false
-            track?.stop()
-            track?.release()
+            try {
+                track?.stop()
+            } catch (e: Exception) {
+                Log.w(TAG, "AudioTrack.stop() failed: ${e.message}")
+            }
+            try {
+                track?.release()
+            } catch (e: Exception) {
+                Log.w(TAG, "AudioTrack.release() failed: ${e.message}")
+            }
             track = null
             onPlaybackComplete = null
         }
     }
 
     private fun parseWavHeader(file: File): WavInfo {
-        FileInputStream(file).use { inputStream ->
-            val header = ByteArray(WAV_HEADER_SIZE)
-            val bytesRead = inputStream.read(header)
-            if (bytesRead < WAV_HEADER_SIZE) {
+        RandomAccessFile(file, "r").use { raf ->
+            fun readFourCC(): String {
+                val b = ByteArray(4)
+                raf.readFully(b)
+                return String(b)
+            }
+
+            fun readLEInt(): Int {
+                val b = ByteArray(4)
+                raf.readFully(b)
+                return ByteBuffer.wrap(b).order(ByteOrder.LITTLE_ENDIAN).int
+            }
+
+            fun readLEShort(): Short {
+                val b = ByteArray(2)
+                raf.readFully(b)
+                return ByteBuffer.wrap(b).order(ByteOrder.LITTLE_ENDIAN).short
+            }
+
+            if (raf.length() < 12) {
                 throw IllegalArgumentException("Not a valid WAV file: file too small")
             }
-            
-            val buffer = ByteBuffer.wrap(header)
-            buffer.order(ByteOrder.LITTLE_ENDIAN)
-            
-            // Verify RIFF header
-            val riff = ByteArray(4)
-            buffer.get(riff)
-            if (String(riff) != "RIFF") {
+
+            val riff = readFourCC()
+            if (riff != "RIFF") {
                 throw IllegalArgumentException("Not a valid WAV file: missing RIFF header")
             }
-            
-            buffer.getInt() // File size - 8
-            
-            // Verify WAVE format
-            val wave = ByteArray(4)
-            buffer.get(wave)
-            if (String(wave) != "WAVE") {
+
+            readLEInt() // file size - 8
+
+            val wave = readFourCC()
+            if (wave != "WAVE") {
                 throw IllegalArgumentException("Not a valid WAV file: missing WAVE format")
             }
-            
-            // Read fmt chunk
-            val fmt = ByteArray(4)
-            buffer.get(fmt)
-            if (String(fmt) != "fmt ") {
-                throw IllegalArgumentException("Not a valid WAV file: missing fmt chunk")
+
+            var sampleRate: Int? = null
+            var channels: Int? = null
+            var bitsPerSample: Int? = null
+            var dataOffset: Int? = null
+            var dataSize: Int? = null
+
+            while (raf.filePointer + 8 <= raf.length()) {
+                val chunkId = readFourCC()
+                val chunkSize = readLEInt()
+                val chunkDataStart = raf.filePointer
+
+                when (chunkId) {
+                    "fmt " -> {
+                        if (chunkSize < 16) {
+                            throw IllegalArgumentException("Invalid WAV fmt chunk size: $chunkSize")
+                        }
+                        val audioFormat = readLEShort().toInt()
+                        if (audioFormat != 1) {
+                            throw IllegalArgumentException("Only PCM WAV is supported (format=$audioFormat)")
+                        }
+
+                        channels = readLEShort().toInt()
+                        sampleRate = readLEInt()
+                        readLEInt() // byte rate
+                        readLEShort() // block align
+                        bitsPerSample = readLEShort().toInt()
+                    }
+                    "data" -> {
+                        dataOffset = raf.filePointer.toInt()
+                        dataSize = chunkSize
+                        break
+                    }
+                }
+
+                // Move to end of chunk (chunks are word-aligned; pad to even)
+                val chunkEnd = chunkDataStart + chunkSize
+                raf.seek(chunkEnd + (chunkSize % 2))
             }
-            
-            val fmtSize = buffer.getInt()
-            val audioFormat = buffer.getShort()
-            if (audioFormat.toInt() != 1) {
-                throw IllegalArgumentException("Only PCM format is supported")
-            }
-            
-            val channels = buffer.getShort().toInt()
-            val sampleRate = buffer.getInt()
-            buffer.getInt() // Byte rate
-            buffer.getShort() // Block align
-            val bitsPerSample = buffer.getShort().toInt()
-            
-            // Read data chunk
-            val data = ByteArray(4)
-            buffer.get(data)
-            if (String(data) != "data") {
-                throw IllegalArgumentException("Not a valid WAV file: missing data chunk")
-            }
-            
-            val dataSize = buffer.getInt()
-            
+
+            val finalSampleRate = sampleRate ?: throw IllegalArgumentException("WAV missing fmt chunk")
+            val finalChannels = channels ?: throw IllegalArgumentException("WAV missing fmt chunk")
+            val finalBits = bitsPerSample ?: throw IllegalArgumentException("WAV missing fmt chunk")
+            val finalOffset = dataOffset ?: throw IllegalArgumentException("WAV missing data chunk")
+            val finalSize = dataSize ?: throw IllegalArgumentException("WAV missing data chunk")
+
             return WavInfo(
-                sampleRate = sampleRate,
-                channels = channels,
-                bitsPerSample = bitsPerSample,
-                dataOffset = WAV_HEADER_SIZE,
-                dataSize = dataSize
+                sampleRate = finalSampleRate,
+                channels = finalChannels,
+                bitsPerSample = finalBits,
+                dataOffset = finalOffset,
+                dataSize = finalSize,
             )
         }
     }
