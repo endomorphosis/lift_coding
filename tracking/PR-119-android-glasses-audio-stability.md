@@ -1,14 +1,14 @@
-# PR-119: Android glasses audio stability
+# PR-120: iOS autolinking and WAV correctness
 
 ## Goal
-Reduce on-device flakiness in the Android `expo-glasses-audio` module by making recording/playback lifecycle handling correct and resilient.
+Ensure the iOS `expo-glasses-audio` module autolinks correctly in React Native projects and that WAV files are recorded and played back with correct headers and parsing behavior on iOS.
 
 ## Why
-- The Android recorder implementation had API mismatches vs the module wrapper (output file + stop result), which can lead to build/runtime breakage.
-- AudioTrack stop/release can throw depending on state; unhandled exceptions here can cause intermittent failures.
-- WAV parsing assumed a fixed 44-byte header; real-world WAV files may include extra chunks (metadata), causing playback failures.
+- iOS autolinking for `expo-glasses-audio` can fail or require manual configuration, leading to integration friction and build issues.
+- Incorrect or incomplete WAV headers can cause duration/size mismatches and playback problems in iOS audio APIs.
+- WAV parsing on iOS must handle files with additional metadata chunks, not just minimal 44-byte headers, to avoid intermittent playback failures.
 
 ## Acceptance criteria
-- `GlassesRecorder.start(...)` accepts an output `File` and records to a valid WAV.
-- `GlassesRecorder.stop()` returns `{ file, sizeBytes, durationSeconds }` and updates the WAV header.
-- `GlassesPlayer` can parse WAVs with non-trivial chunk layouts and cleans up AudioTrack safely.
+- The iOS `expo-glasses-audio` module autolinks without manual changes to Xcode projects for supported React Native configurations.
+- WAV files produced or consumed by the iOS implementation have correct headers, with size and duration fields updated consistently.
+- The iOS audio pipeline can successfully parse and play WAV files that include non-trivial chunk layouts (e.g., additional metadata) without crashes or silent failures.
