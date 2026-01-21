@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { useAudioSource, AUDIO_SOURCES } from './useAudioSource';
 
 let ExpoGlassesAudio = null;

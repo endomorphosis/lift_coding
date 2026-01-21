@@ -1,5 +1,5 @@
 declare module 'expo-glasses-audio' {
-  export type Subscription = { remove: () => void };
+  import { Subscription } from 'expo-modules-core';
 
   export interface AudioDevice {
     id: number;
@@ -35,26 +35,25 @@ declare module 'expo-glasses-audio' {
 
   export type AudioSource = 'phone' | 'glasses' | 'auto';
 
-  export interface RecordingProgressEvent {
-    isRecording: boolean;
-    duration: number;
-  }
-
-  export interface PlaybackStatusEvent {
-    isPlaying: boolean;
-    error?: string;
-  }
-
-  export const expoGlassesAudio: {
-    getAudioRoute(): SimpleAudioRouteInfo;
-    startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult>;
-    stopRecording(): Promise<RecordingResult>;
-    playAudio(fileUri: string): Promise<void>;
-    stopPlayback(): Promise<void>;
-    addAudioRouteChangeListener(listener: (event: SimpleAudioRouteInfo) => void): Subscription;
-    addRecordingProgressListener(listener: (event: RecordingProgressEvent) => void): Subscription;
-    addPlaybackStatusListener(listener: (event: PlaybackStatusEvent) => void): Subscription;
-  };
-
-  export default expoGlassesAudio;
+  export function getAudioRoute(): SimpleAudioRouteInfo;
+  
+  export function startRecording(durationSeconds: number, audioSource?: AudioSource): Promise<RecordingResult>;
+  
+  export function stopRecording(): Promise<RecordingResult>;
+  
+  export function playAudio(fileUri: string): Promise<void>;
+  
+  export function stopPlayback(): Promise<void>;
+  
+  export function addAudioRouteChangeListener(
+    listener: (event: SimpleAudioRouteInfo) => void
+  ): Subscription;
+  
+  export function addRecordingProgressListener(
+    listener: (event: { isRecording: boolean; duration: number }) => void
+  ): Subscription;
+  
+  export function addPlaybackStatusListener(
+    listener: (event: { isPlaying: boolean; error?: string }) => void
+  ): Subscription;
 }

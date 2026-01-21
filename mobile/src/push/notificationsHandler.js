@@ -12,13 +12,81 @@
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
 
 // Configuration constants
 const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
 const INTER_MESSAGE_DELAY_MS = 500; // Delay between processing messages to prevent audio overlap
+const NATIVE_PLAYBACK_TIMEOUT_MS = 45000;
+
+function isNativeGlassesPlaybackAvailable() {
+  try {
+    return (
+      ExpoGlassesAudio &&
+      typeof ExpoGlassesAudio.playAudio === 'function' &&
+      typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function'
+    );
+  } catch {
+    return false;
+  }
+}
+
+async function playViaNativeGlasses(fileUri) {
+  return new Promise((resolve, reject) => {
+    let timeoutId = null;
+    let subscription = null;
+    let sawStart = false;
+    let settled = false;
+
+    const cleanup = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+      try {
+        subscription?.remove?.();
+      } catch {
+        // ignore
+      }
+      subscription = null;
+    };
+
+    subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+      if (settled) return; // Prevent execution after promise is settled
+      if (!event || typeof event !== 'object') return;
+      if (event.error) {
+        cleanup();
+        settled = true;
+        reject(new Error(event.error));
+        return;
+      }
+      if (event.isPlaying === true) {
+        sawStart = true;
+      }
+      if (event.isPlaying === false && sawStart) {
+        cleanup();
+        settled = true;
+        resolve();
+      }
+    });
+
+    timeoutId = setTimeout(() => {
+      if (settled) return; // Prevent execution after promise is settled
+      cleanup();
+      settled = true;
+      resolve(); // Timeout fallback: avoid blocking the queue forever
+    }, NATIVE_PLAYBACK_TIMEOUT_MS);
+
+    ExpoGlassesAudio.playAudio(fileUri).catch((error) => {
+      if (settled) return; // Prevent execution after promise is settled
+      cleanup();
+      settled = true;
+      reject(error);
+    });
+  });
+}
 
 // Notification queue for sequential TTS playback
 let notificationQueue = [];
@@ -233,6 +301,7 @@ export async function speakNotification(message) {
 
   let sound = null;
   let tempFileUri = null;
+  let nativePlaybackSub = null;
   
   try {
     console.log('Speaking notification:', message);
@@ -254,13 +323,19 @@ export async function speakNotification(message) {
 
     console.log('TTS audio saved to:', tempFileUri);
 
-    // Configure audio session for playback
-    await Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      playsInSilentModeIOS: true,
-      staysActiveInBackground: true,
-      shouldDuckAndroid: true,
-    });
+    if (isNativeGlassesPlaybackAvailable()) {
+      // Prefer native playback so audio routes through glasses.
+      await playViaNativeGlasses(tempFileUri);
+      await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+      tempFileUri = null;
+    } else {
+      // Fallback to expo-av playback (DEV / non-native builds)
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: true,
+        shouldDuckAndroid: true,
+      });
 
     // Play the audio
     const soundObject = await Audio.Sound.createAsync(
@@ -297,6 +372,13 @@ export async function speakNotification(message) {
         await sound.unloadAsync();
       } catch (cleanupError) {
         console.error('Sound cleanup error:', cleanupError);
+      }
+    }
+    if (nativePlaybackSub) {
+      try {
+        nativePlaybackSub.remove?.();
+      } catch {
+        // ignore
       }
     }
     // Delete temp file on error

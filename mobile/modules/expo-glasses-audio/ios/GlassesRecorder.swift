@@ -89,47 +89,57 @@ public final class GlassesRecorder {
         case .phone:
             // Force phone microphone - don't allow Bluetooth
             try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.defaultToSpeaker])
-            try session.setActive(true)
-            // Override route to prefer built-in mic
-            try session.overrideOutputAudioPort(.speaker)
             
         case .glasses:
             // Prefer Bluetooth microphone
             try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .allowBluetoothA2DP])
-            try session.setActive(true)
             
+        case .auto:
+            // Auto mode - allow Bluetooth but don't force it
+            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .defaultToSpeaker])
+        }
+
+        // Prefer a 16kHz mono capture format for STT and backend consistency.
+        // The underlying hardware route may not support it directly; AVAudioEngine
+        // will format-convert buffers delivered to the tap.
+        try? session.setPreferredSampleRate(16000)
+        try session.setActive(true)
+
+        switch audioSource {
+        case .phone:
+            // Prefer built-in output (and avoid surprising Bluetooth routes).
+            try? session.overrideOutputAudioPort(.speaker)
+        case .glasses:
             // Check if Bluetooth is actually available
             let currentRoute = session.currentRoute
             let hasBluetoothInput = currentRoute.inputs.contains { input in
                 input.portType == .bluetoothHFP || input.portType == .bluetoothLE || input.portType == .bluetoothA2DP
             }
-            
             if !hasBluetoothInput {
                 print("⚠️ Warning: Glasses/Bluetooth source selected but no Bluetooth device detected. Falling back to built-in mic.")
             }
-            
         case .auto:
-            // Auto mode - allow Bluetooth but don't force it
-            try session.setCategory(.playAndRecord, mode: .voiceChat, options: [.allowBluetooth, .defaultToSpeaker])
-            try session.setActive(true)
+            break
+        }
+
+        guard let desiredFormat = AVAudioFormat(
+            commonFormat: .pcmFormatInt16,
+            sampleRate: 16000,
+            channels: 1,
+            interleaved: true
+        ) else {
+            throw NSError(
+                domain: "GlassesRecorder",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to create desired audio format"]
+            )
         }
 
         let inputNode = audioEngine.inputNode
-        let inputFormat = inputNode.outputFormat(forBus: 0)
 
-        audioFile = try AVAudioFile(
-            forWriting: outputURL,
-            settings: [
-                AVFormatIDKey: kAudioFormatLinearPCM,
-                AVSampleRateKey: 16000,
-                AVNumberOfChannelsKey: 1,
-                AVLinearPCMBitDepthKey: 16,
-                AVLinearPCMIsFloatKey: false,
-                AVLinearPCMIsBigEndianKey: false
-            ]
-        )
+        audioFile = try AVAudioFile(forWriting: outputURL, settings: desiredFormat.settings)
 
-        inputNode.installTap(onBus: 0, bufferSize: 4096, format: inputFormat) { [weak self] buffer, _ in
+        inputNode.installTap(onBus: 0, bufferSize: 4096, format: desiredFormat) { [weak self] buffer, _ in
             guard let self, let file = self.audioFile else { return }
             try? file.write(from: buffer)
         }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,13 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
-  Platform,
 } from 'react-native';
 import { fetchTTS } from '../api/client';
 import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { simulateNotificationForDev } from '../push/notificationsHandler';
+import * as FileSystem from 'expo-file-system';
 
 export default function TTSScreen() {
   const [text, setText] = useState('');
@@ -21,6 +23,60 @@ export default function TTSScreen() {
   const [sound, setSound] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [notificationLoading, setNotificationLoading] = useState(false);
+
+  const nativePlaybackSubscriptionRef = React.useRef(null);
+  const tempFileUriRef = React.useRef(null);
+
+  const cleanupTempFile = useCallback(async () => {
+    const uri = tempFileUriRef.current;
+    if (!uri) return;
+    try {
+      await FileSystem.deleteAsync(uri, { idempotent: true });
+      // Only clear the ref if it still points to the same URI we just deleted
+      if (tempFileUriRef.current === uri) {
+        tempFileUriRef.current = null;
+      }
+    } catch {
+      // ignore; keep tempFileUriRef so deletion can be retried later
+    }
+  }, []);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        const resultStr = String(reader.result);
+        const commaIndex = resultStr.indexOf(',');
+        if (commaIndex === -1) {
+          reject(new Error('Invalid data URL format'));
+          return;
+        }
+        const base64 = resultStr.substring(commaIndex + 1);
+        if (!base64) {
+          reject(new Error('Empty base64 data'));
+          return;
+        }
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const stopNativePlaybackListener = useCallback(() => {
+    if (nativePlaybackSubscriptionRef.current) {
+      try {
+        nativePlaybackSubscriptionRef.current.remove();
+      } catch {
+        // ignore
+      }
+      nativePlaybackSubscriptionRef.current = null;
+    }
+  }, []);
 
   const handleFetchAndPlay = async () => {
     if (!text.trim()) {
@@ -31,6 +87,20 @@ export default function TTSScreen() {
     setLoading(true);
     setError(null);
 
+    let tempFileUri = null;
+    let cleanedUp = false;
+
+    const cleanupTempFile = async () => {
+      if (!cleanedUp && tempFileUri) {
+        cleanedUp = true;
+        try {
+          await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+        } catch (error) {
+          // Ignore cleanup errors
+        }
+      }
+    };
+
     try {
       // Stop any currently playing sound
       if (sound) {
@@ -39,8 +109,11 @@ export default function TTSScreen() {
         setSound(null);
       }
 
-      // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+       stopNativePlaybackListener();
+       await cleanupTempFile();
+
+      // Fetch TTS audio (explicit format)
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
 
       // Convert blob to base64 for React Native
       const reader = new FileReader();
@@ -54,8 +127,8 @@ export default function TTSScreen() {
           { shouldPlay: true }
         );
 
-        setSound(newSound);
-        setIsPlaying(true);
+      setSound(newSound);
+      setIsPlaying(true);
 
         // Set up playback status listener
         newSound.setOnPlaybackStatusUpdate((status) => {
@@ -66,16 +139,35 @@ export default function TTSScreen() {
       };
     } catch (err) {
       setError(err.message);
+      await cleanupTempFile();
     } finally {
       setLoading(false);
     }
   };
 
   const handleStop = async () => {
-    if (sound) {
-      await sound.stopAsync();
-      setIsPlaying(false);
+    stopNativePlaybackListener();
+
+    try {
+      if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+        await ExpoGlassesAudio.stopPlayback();
+      }
+    } catch {
+      // ignore
     }
+
+    if (sound) {
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      } catch {
+        // ignore stop/unload errors
+      } finally {
+        setSound(null);
+      }
+    }
+    setIsPlaying(false);
+    await cleanupTempFile();
   };
 
   const handleTestNotification = async () => {
@@ -99,12 +191,14 @@ export default function TTSScreen() {
   };
 
   React.useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+      stopNativePlaybackListener();
+      cleanupTempFile();
+    };
+  }, [sound, stopNativePlaybackListener, cleanupTempFile]);
 
   return (
     <ScrollView style={styles.container}>
