@@ -85,10 +85,11 @@ mobile/glasses/
     ├── GlassesPlayer.kt
     └── GlassesAudioDiagnostics.kt
 
-mobile/modules/expo-glasses-audio/      # Expo module (source of truth)
-├── index.ts                            # JS/TS API surface
-├── ios/                                # iOS native implementation
-└── android/                            # Android native implementation
+mobile/modules/expo-glasses-audio/      # Expo Module (current) ✅
+├── index.ts                            # TypeScript wrapper
+└── ios/                                # iOS implementation
+    ├── ExpoGlassesAudioModule.swift    # Native module
+    └── ExpoGlassesAudio.podspec        # CocoaPods spec
 ```
 
 ## Features
