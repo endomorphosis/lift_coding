@@ -121,10 +121,10 @@ class ExpoGlassesAudioModule : Module() {
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
           
-          // Emit recording stopped event
-          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-          
           if (result != null) {
+            // Emit recording stopped event with actual recorded duration
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to result.durationSeconds))
+            
             promise.resolve(
               mapOf(
                 "uri" to result.file.absolutePath,
@@ -133,6 +133,8 @@ class ExpoGlassesAudioModule : Module() {
               )
             )
           } else {
+            // Emit recording stopped event with scheduled duration as fallback
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
             promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available")
           }
         }, (durationSeconds * 1000).toLong())
