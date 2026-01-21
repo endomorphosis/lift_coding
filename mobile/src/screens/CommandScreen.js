@@ -149,7 +149,7 @@ export default function CommandScreen() {
       }
 
       // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
 
       // Convert blob to base64
       const reader = new FileReader();
@@ -158,7 +158,7 @@ export default function CommandScreen() {
         const base64Audio = reader.result;
 
         // Write to temporary file for better compatibility
-        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
         const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
         await FileSystem.writeAsStringAsync(tempUri, base64Data, {
           encoding: FileSystem.EncodingType.Base64,
@@ -178,7 +178,7 @@ export default function CommandScreen() {
           if (status.didJustFinish) {
             setIsTtsPlaying(false);
             // Clean up temp file
-            FileSystem.deleteAsync(tempUri, { idempotentError: true }).catch(() => {});
+            FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
           }
         });
       };

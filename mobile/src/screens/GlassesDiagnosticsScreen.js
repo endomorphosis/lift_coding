@@ -379,7 +379,7 @@ export default function GlassesDiagnosticsScreen() {
 
     let tempUri = null;
     try {
-      const audioBlob = await fetchTTS(text);
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
       const base64Audio = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onerror = () => reject(new Error('Failed to read TTS audio'));
@@ -388,7 +388,7 @@ export default function GlassesDiagnosticsScreen() {
       });
 
       const base64Data = String(base64Audio).split(',')[1];
-      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
       await FileSystem.writeAsStringAsync(tempUri, base64Data, {
         encoding: FileSystem.EncodingType.Base64,
       });
