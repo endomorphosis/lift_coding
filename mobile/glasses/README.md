@@ -20,7 +20,7 @@ This directory contains audio diagnostics for testing and validating Bluetooth a
 
 📖 **Documentation:**
 - [Build & Test Guide](../BUILD_AND_TEST_GLASSES_PLAYER.md)
-- [Module README](../modules/glasses-audio-player/README.md)
+- [Module README](../modules/expo-glasses-audio/README.md)
 - [Implementation TODO](TODO.md)
 
 ## Purpose
