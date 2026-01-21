@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -27,16 +27,19 @@ export default function TTSScreen() {
   const nativePlaybackSubscriptionRef = React.useRef(null);
   const tempFileUriRef = React.useRef(null);
 
-  const cleanupTempFile = async () => {
+  const cleanupTempFile = useCallback(async () => {
     const uri = tempFileUriRef.current;
-    tempFileUriRef.current = null;
     if (!uri) return;
     try {
       await FileSystem.deleteAsync(uri, { idempotent: true });
+      // Only clear the ref if it still points to the same URI we just deleted
+      if (tempFileUriRef.current === uri) {
+        tempFileUriRef.current = null;
+      }
     } catch {
-      // ignore
+      // ignore; keep tempFileUriRef so deletion can be retried later
     }
-  };
+  }, []);
 
   const blobToBase64 = (blob) => {
     return new Promise((resolve, reject) => {
@@ -64,7 +67,7 @@ export default function TTSScreen() {
     });
   };
 
-  const stopNativePlaybackListener = () => {
+  const stopNativePlaybackListener = useCallback(() => {
     if (nativePlaybackSubscriptionRef.current) {
       try {
         nativePlaybackSubscriptionRef.current.remove();
@@ -73,7 +76,7 @@ export default function TTSScreen() {
       }
       nativePlaybackSubscriptionRef.current = null;
     }
-  };
+  }, []);
 
   const handleFetchAndPlay = async () => {
     if (!text.trim()) {
@@ -154,9 +157,16 @@ export default function TTSScreen() {
     }
 
     if (sound) {
-      await sound.stopAsync();
-      setIsPlaying(false);
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      } catch {
+        // ignore stop/unload errors
+      } finally {
+        setSound(null);
+      }
     }
+    setIsPlaying(false);
     await cleanupTempFile();
   };
 
@@ -181,14 +191,14 @@ export default function TTSScreen() {
   };
 
   React.useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-          stopNativePlaybackListener();
-          cleanupTempFile();
-        }
-      : undefined;
-  }, [sound]);
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+      stopNativePlaybackListener();
+      cleanupTempFile();
+    };
+  }, [sound, stopNativePlaybackListener, cleanupTempFile]);
 
   return (
     <ScrollView style={styles.container}>
