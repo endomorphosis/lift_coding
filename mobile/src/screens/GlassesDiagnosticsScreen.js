@@ -12,6 +12,8 @@ const NATIVE_RECORDING_DURATION_SECONDS = 10;
 const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TTS and audio files
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
+// Supported audio formats that the backend can accept
+// Note: 'caf' is not included here as it needs to be converted to 'm4a' (see inferAudioFormatFromUri)
 const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
 // Regex pattern to match audio file extensions before query params or hash fragments
 // Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
