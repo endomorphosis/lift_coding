@@ -44,6 +44,7 @@ export default function CommandScreen() {
 
   const nativeTtsPlaybackSubRef = useRef(null);
   const ttsTempUriRef = useRef(null);
+  const ttsTempFilesRef = useRef(new Set());
 
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
@@ -86,7 +87,16 @@ export default function CommandScreen() {
     // Cleanup TTS sound on unmount
     return () => {
       if (ttsSound) {
-        ttsSound.unloadAsync();
+        (async () => {
+          try {
+            await ttsSound.unloadAsync();
+          } catch {
+            // ignore unload errors during cleanup
+          } finally {
+            setTtsSound(null);
+            setIsTtsPlaying(false);
+          }
+        })();
       }
 
       if (nativeTtsPlaybackSubRef.current) {
@@ -102,6 +112,12 @@ export default function CommandScreen() {
         FileSystem.deleteAsync(ttsTempUriRef.current, { idempotent: true }).catch(() => {});
         ttsTempUriRef.current = null;
       }
+
+      // Cleanup all tracked temp files
+      ttsTempFilesRef.current.forEach((uri) => {
+        FileSystem.deleteAsync(uri, { idempotent: true }).catch(() => {});
+      });
+      ttsTempFilesRef.current.clear();
     };
   }, []);
 
@@ -141,12 +157,22 @@ export default function CommandScreen() {
     nativeTtsPlaybackSubRef.current = null;
   };
 
-  const cleanupTtsTempFile = async () => {
-    const uri = ttsTempUriRef.current;
-    ttsTempUriRef.current = null;
-    if (!uri) return;
+  const cleanupTtsTempFile = async (uri) => {
+    // If no URI is provided, clean up the current one
+    const fileUri = uri || ttsTempUriRef.current;
+    
+    // Clear current ref if cleaning up the current file
+    if (!uri || uri === ttsTempUriRef.current) {
+      ttsTempUriRef.current = null;
+    }
+    
+    if (!fileUri) return;
+    
+    // Remove from tracked files
+    ttsTempFilesRef.current.delete(fileUri);
+    
     try {
-      await FileSystem.deleteAsync(uri, { idempotent: true });
+      await FileSystem.deleteAsync(fileUri, { idempotent: true });
     } catch {
       // ignore
     }
@@ -180,6 +206,7 @@ export default function CommandScreen() {
 
       const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
       ttsTempUriRef.current = tempUri;
+      ttsTempFilesRef.current.add(tempUri); // Track this temp file
       await FileSystem.writeAsStringAsync(tempUri, base64Audio, {
         encoding: FileSystem.EncodingType.Base64,
       });
@@ -191,23 +218,35 @@ export default function CommandScreen() {
         setIsTtsPlaying(true);
 
         if (typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function') {
+          const currentTempUri = tempUri; // Capture for listener
           nativeTtsPlaybackSubRef.current = ExpoGlassesAudio.addPlaybackStatusListener(
             async (event) => {
               if (!event?.isPlaying) {
                 stopNativeTtsListener();
                 setIsTtsPlaying(false);
-                await cleanupTtsTempFile();
+                // Only cleanup if this listener's file matches current temp file
+                if (ttsTempUriRef.current === currentTempUri) {
+                  await cleanupTtsTempFile(currentTempUri);
+                }
               }
             }
           );
         }
 
-        const nativeUri =
-          Platform.OS === 'android' ? tempUri.replace(/^file:\/\//, '') : tempUri;
-        await ExpoGlassesAudio.playAudio(nativeUri);
-        return;
+        try {
+          const nativeUri =
+            Platform.OS === 'android' ? tempUri.replace(/^file:\/\//, '') : tempUri;
+          await ExpoGlassesAudio.playAudio(nativeUri);
+          return;
+        } catch (error) {
+          console.warn('Native TTS playback failed, falling back to expo-av', error);
+          // Ensure native listener is cleaned up and state reset before fallback
+          stopNativeTtsListener();
+          setIsTtsPlaying(false);
+        }
       }
 
+      // Fallback to expo-av (or if native playback failed)
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: tempUri },
         { shouldPlay: true }
@@ -216,10 +255,14 @@ export default function CommandScreen() {
       setTtsSound(newSound);
       setIsTtsPlaying(true);
 
-      newSound.setOnPlaybackStatusUpdate((status) => {
+      const currentTempUri = tempUri; // Capture for listener
+      newSound.setOnPlaybackStatusUpdate(async (status) => {
         if (status?.didJustFinish) {
           setIsTtsPlaying(false);
-          cleanupTtsTempFile();
+          // Only cleanup if this listener's file matches current temp file
+          if (ttsTempUriRef.current === currentTempUri) {
+            await cleanupTtsTempFile(currentTempUri);
+          }
         }
       });
     } catch (err) {
