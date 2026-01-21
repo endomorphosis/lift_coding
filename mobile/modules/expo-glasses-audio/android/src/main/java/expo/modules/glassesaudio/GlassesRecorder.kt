@@ -27,6 +27,10 @@ class GlassesRecorder {
         private const val TAG = "GlassesRecorder"
         private const val WAV_HEADER_SIZE = 44
         private const val RECORDING_THREAD_JOIN_TIMEOUT_MS = 3000L
+        private const val SAMPLE_RATE = 16000
+        private const val CHANNELS = 1 // MONO
+        private const val BYTES_PER_SAMPLE = 2 // 16-bit = 2 bytes per sample
+        private const val BITS_PER_SAMPLE = 16 // 16-bit audio
     }
     
     private var recorder: AudioRecord? = null
@@ -35,14 +39,12 @@ class GlassesRecorder {
     private var isRecording = false
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
-    private var recordingStartedAtMs: Long = 0L
 
     fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
-        val sampleRate = 16000
         val channel = AudioFormat.CHANNEL_IN_MONO
         val encoding = AudioFormat.ENCODING_PCM_16BIT
-        val minBufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding)
-        val bufferSize = if (minBufferSize > 0) minBufferSize else (sampleRate * 2)
+        val minBufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, channel, encoding)
+        val bufferSize = if (minBufferSize > 0) minBufferSize else (SAMPLE_RATE * 2)
 
         // Select audio source based on preference
         val androidAudioSource = when (audioSource) {
@@ -53,7 +55,7 @@ class GlassesRecorder {
 
         val r = AudioRecord(
             androidAudioSource,
-            sampleRate,
+            SAMPLE_RATE,
             channel,
             encoding,
             bufferSize
@@ -63,10 +65,9 @@ class GlassesRecorder {
         outputFile.parentFile?.mkdirs()
         this.outputFile = outputFile
         totalBytesWritten = 0L
-        recordingStartedAtMs = System.currentTimeMillis()
 
         // Write initial WAV header (will be updated with correct sizes on stop)
-        writeWavHeader(outputFile, sampleRate, 1, 16)
+        writeWavHeader(outputFile, SAMPLE_RATE, CHANNELS, BITS_PER_SAMPLE)
         
         r.startRecording()
         recorder = r
@@ -145,19 +146,16 @@ class GlassesRecorder {
                 Log.e(TAG, "Error updating WAV header: ${e.message}", e)
             }
 
-            val durationSeconds = kotlin.math.max(
-                0,
-                ((System.currentTimeMillis() - recordingStartedAtMs) / 1000L).toInt()
-            )
+            // Calculate duration based on actual audio data written
+            // duration = totalBytesWritten / (sampleRate * channels * bytesPerSample)
+            val durationSeconds = (totalBytesWritten / (SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE)).toInt()
             val sizeBytes = file.length()
 
             outputFile = null
-            recordingStartedAtMs = 0L
             return RecordingResult(file = file, durationSeconds = durationSeconds, sizeBytes = sizeBytes)
         }
 
         outputFile = null
-        recordingStartedAtMs = 0L
         return null
     }
 
