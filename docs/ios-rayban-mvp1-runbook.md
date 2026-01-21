@@ -685,7 +685,7 @@ curl http://localhost:8080/v1/status -v
 
 **Root Causes**:
 1. Backend server is not running
-2. Firewall is blocking port 8000
+2. Firewall is blocking port 8080
 3. Backend is bound to localhost only (not accessible from network)
 4. iOS app has wrong backend URL configured
 
@@ -697,14 +697,14 @@ curl http://localhost:8080/v1/status -v
 ps aux | grep uvicorn
 
 # Check listening ports
-lsof -i :8000  # macOS/Linux
-netstat -an | grep 8000  # Windows
+lsof -i :8080  # macOS/Linux
+netstat -an | grep 8080  # Windows
 ```
 
 **Step 2**: Ensure server binds to 0.0.0.0 (all interfaces)
 ```bash
 # Start with explicit host
-uvicorn src.main:app --host 0.0.0.0 --port 8000
+uvicorn src.main:app --host 0.0.0.0 --port 8080
 ```
 
 **Step 3**: Check firewall rules
@@ -714,11 +714,11 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
 
 # Linux (ufw)
 sudo ufw status
-sudo ufw allow 8000/tcp
+sudo ufw allow 8080/tcp
 
 # Linux (firewalld)
 sudo firewall-cmd --list-ports
-sudo firewall-cmd --add-port=8000/tcp --permanent
+sudo firewall-cmd --add-port=8080/tcp --permanent
 sudo firewall-cmd --reload
 ```
 

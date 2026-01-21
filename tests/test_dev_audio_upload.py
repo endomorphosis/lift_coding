@@ -56,3 +56,36 @@ def test_dev_audio_upload_forbidden_outside_dev_mode(test_user_id):
             json=payload,
         )
         assert resp.status_code in (401, 403)
+
+
+def test_dev_audio_upload_accepts_audio_base64_alias(tmp_path, test_user_id):
+    """Test that audio_base64 is accepted as a backwards-compatible alias for data_base64."""
+    audio_bytes = b"RIFFxxxxWAVEfmt "
+    payload = {
+        "audio_base64": base64.b64encode(audio_bytes).decode("ascii"),  # Using alias
+        "format": "wav",
+    }
+
+    with patch.dict(
+        os.environ,
+        {
+            "HANDSFREE_AUTH_MODE": "dev",
+            "HANDSFREE_DEV_AUDIO_DIR": str(tmp_path),
+            "HANDSFREE_DEV_AUDIO_MAX_BYTES": "1048576",
+        },
+    ):
+        resp = client.post(
+            "/v1/dev/audio",
+            headers={"X-User-Id": test_user_id},
+            json=payload,
+        )
+        assert resp.status_code == 200
+        body = resp.json()
+        assert body["format"] == "wav"
+        assert body["bytes"] == len(audio_bytes)
+        assert body["uri"].startswith("file://")
+
+        # Verify the saved file exists
+        saved_path = Path(body["uri"].removeprefix("file://"))
+        assert saved_path.exists()
+        assert saved_path.read_bytes() == audio_bytes
