@@ -261,7 +261,7 @@ Use this approach to demonstrate the complete audio pipeline:
    ```bash
    # From iOS app code:
    const audioBase64 = await convertToBase64(recordingUri);
-  const response = await fetch('http://localhost:8080/v1/dev/audio', {
+   const response = await fetch('http://localhost:8080/v1/dev/audio', {
      method: 'POST',
      headers: { 'Content-Type': 'application/json' },
      body: JSON.stringify({
@@ -275,7 +275,7 @@ Use this approach to demonstrate the complete audio pipeline:
 
 3. **Submit command with audio URI**:
    ```bash
-  curl -X POST http://localhost:8080/v1/command \
+   curl -X POST http://localhost:8080/v1/command \
      -H "Content-Type: application/json" \
      -d '{
        "input": {
@@ -315,7 +315,7 @@ Use this approach to demonstrate the complete audio pipeline:
 
 2. **Call TTS endpoint**
    ```bash
-  curl -X POST http://localhost:8080/v1/tts \
+   curl -X POST http://localhost:8080/v1/tts \
      -H "Content-Type: application/json" \
      -d '{
        "text": "You have 3 pull requests awaiting review...",

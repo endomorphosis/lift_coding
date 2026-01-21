@@ -179,7 +179,7 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
    - Notifications (optional): **Allow**
 3. **Configure Backend URL**:
    - Navigate to app settings screen
-  - Enter backend URL, e.g., `http://192.168.1.100:8080` or `https://api.example.com`
+   - Enter backend URL, e.g., `http://192.168.1.100:8080` or `https://api.example.com`
    - Tap **Save** and verify connection indicator shows green/connected
 4. **Verify Glasses Connection Status**:
    - Check app UI for Bluetooth status indicator
@@ -205,18 +205,18 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
 
 3. **Start the Server**:
    ```bash
-  # Development mode (recommended)
-  make dev
+   # Development mode (recommended)
+   make dev
 
-  # Or run the module directly
-  python -m handsfree.server
+   # Or run the module directly
+   python -m handsfree.server
 
-  # Or via uvicorn directly
-  uvicorn handsfree.api:app --reload --host 0.0.0.0 --port 8080
+   # Or via uvicorn directly
+   uvicorn handsfree.api:app --reload --host 0.0.0.0 --port 8080
    ```
 
 4. **Verify Server Started**:
-  - Look for output: `Uvicorn running on http://0.0.0.0:8080`
+   - Look for output: `Uvicorn running on http://0.0.0.0:8080`
    - Server should be listening and ready
 
 ### Step 2: Verify Backend Health
@@ -472,7 +472,6 @@ curl -X POST http://localhost:8080/v1/commands/confirm \
   -d '{
     "confirmation_token": "abc123..."
   }'
-
 ```
 
 **Final Response**:
@@ -865,7 +864,7 @@ If demonstrating push notifications and deep-linking:
 
 2. **Create a Notification Subscription**:
    ```bash
-  curl -X POST http://localhost:8080/v1/notifications/subscriptions \
+   curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -d '{
        "push_token": "ExponentPushToken[YOUR_TOKEN]",
