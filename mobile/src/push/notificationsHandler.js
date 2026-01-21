@@ -12,9 +12,10 @@
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 
 // Configuration constants
 const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
@@ -233,19 +234,20 @@ export async function speakNotification(message) {
 
   let sound = null;
   let tempFileUri = null;
+  let nativePlaybackSub = null;
   
   try {
     console.log('Speaking notification:', message);
     debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
-    const audioBlob = await fetchTTS(message);
+    const audioBlob = await fetchTTS(message, { format: 'wav', accept: 'audio/wav' });
     
     // Convert blob to base64
     const base64Audio = await blobToBase64(audioBlob);
     
     // Save to temporary file using expo-file-system
-    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.mp3`;
+    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.wav`;
     tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
     
     await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
@@ -262,27 +264,57 @@ export async function speakNotification(message) {
       shouldDuckAndroid: true,
     });
 
-    // Play the audio
-    const soundObject = await Audio.Sound.createAsync(
-      { uri: tempFileUri },
-      { shouldPlay: true }
-    );
-    sound = soundObject.sound;
+    const hasNativePlayback =
+      ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
-    // Clean up after playback completes
-    sound.setOnPlaybackStatusUpdate(async (status) => {
-      if (status.didJustFinish || status.error) {
-        try {
-          await sound.unloadAsync();
-          // Delete the temporary file
-          if (tempFileUri) {
-            await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+    if (hasNativePlayback) {
+      if (typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function') {
+        nativePlaybackSub = ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
+          if (!event?.isPlaying) {
+            try {
+              nativePlaybackSub?.remove?.();
+            } catch {
+              // ignore
+            }
+            nativePlaybackSub = null;
+
+            if (tempFileUri) {
+              await FileSystem.deleteAsync(tempFileUri, { idempotent: true }).catch(() => {});
+              tempFileUri = null;
+            }
           }
-        } catch (cleanupError) {
-          console.error('Cleanup error:', cleanupError);
-        }
+        });
       }
-    });
+
+      const nativeUri =
+        Platform.OS === 'android'
+          ? tempFileUri.replace(/^file:\/\//, '')
+          : tempFileUri;
+
+      await ExpoGlassesAudio.playAudio(nativeUri);
+    } else {
+      // Fallback: Play via Expo AV
+      const soundObject = await Audio.Sound.createAsync(
+        { uri: tempFileUri },
+        { shouldPlay: true }
+      );
+      sound = soundObject.sound;
+
+      // Clean up after playback completes
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish || status.error) {
+          try {
+            await sound.unloadAsync();
+            // Delete the temporary file
+            if (tempFileUri) {
+              await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+            }
+          } catch (cleanupError) {
+            console.error('Cleanup error:', cleanupError);
+          }
+        }
+      });
+    }
 
     // Clear error state on success
     debugState.lastPlaybackError = null;
@@ -297,6 +329,13 @@ export async function speakNotification(message) {
         await sound.unloadAsync();
       } catch (cleanupError) {
         console.error('Sound cleanup error:', cleanupError);
+      }
+    }
+    if (nativePlaybackSub) {
+      try {
+        nativePlaybackSub.remove?.();
+      } catch {
+        // ignore
       }
     }
     // Delete temp file on error
