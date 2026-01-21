@@ -33,6 +33,18 @@ export default function TTSScreen() {
     setError(null);
 
     let tempFileUri = null;
+    let cleanedUp = false;
+
+    const cleanupTempFile = async () => {
+      if (!cleanedUp && tempFileUri) {
+        cleanedUp = true;
+        try {
+          await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+        } catch (error) {
+          // Ignore cleanup errors
+        }
+      }
+    };
 
     try {
       // Stop any currently playing sound
@@ -71,14 +83,12 @@ export default function TTSScreen() {
       newSound.setOnPlaybackStatusUpdate(async (status) => {
         if (status.didJustFinish) {
           setIsPlaying(false);
-          if (tempFileUri) {
-            FileSystem.deleteAsync(tempFileUri, { idempotent: true }).catch(() => {});
-            tempFileUri = null;
-          }
+          await cleanupTempFile();
         }
       });
     } catch (err) {
       setError(err.message);
+      await cleanupTempFile();
     } finally {
       setLoading(false);
     }

@@ -35,10 +35,11 @@ function isNativeGlassesPlaybackAvailable() {
 }
 
 async function playViaNativeGlasses(fileUri) {
-  return await new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     let timeoutId = null;
     let subscription = null;
     let sawStart = false;
+    let settled = false;
 
     const cleanup = () => {
       if (timeoutId) {
@@ -53,33 +54,38 @@ async function playViaNativeGlasses(fileUri) {
       subscription = null;
     };
 
-    try {
-      subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
-        if (!event || typeof event !== 'object') return;
-        if (event.error) {
-          cleanup();
-          reject(new Error(event.error));
-          return;
-        }
-        if (event.isPlaying === true) {
-          sawStart = true;
-        }
-        if (event.isPlaying === false && sawStart) {
-          cleanup();
-          resolve();
-        }
-      });
-
-      timeoutId = setTimeout(() => {
+    subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+      if (settled) return; // Prevent execution after promise is settled
+      if (!event || typeof event !== 'object') return;
+      if (event.error) {
         cleanup();
-        resolve(); // Timeout fallback: avoid blocking the queue forever
-      }, NATIVE_PLAYBACK_TIMEOUT_MS);
+        settled = true;
+        reject(new Error(event.error));
+        return;
+      }
+      if (event.isPlaying === true) {
+        sawStart = true;
+      }
+      if (event.isPlaying === false && sawStart) {
+        cleanup();
+        settled = true;
+        resolve();
+      }
+    });
 
-      await ExpoGlassesAudio.playAudio(fileUri);
-    } catch (error) {
+    timeoutId = setTimeout(() => {
+      if (settled) return; // Prevent execution after promise is settled
       cleanup();
+      settled = true;
+      resolve(); // Timeout fallback: avoid blocking the queue forever
+    }, NATIVE_PLAYBACK_TIMEOUT_MS);
+
+    ExpoGlassesAudio.playAudio(fileUri).catch((error) => {
+      if (settled) return; // Prevent execution after promise is settled
+      cleanup();
+      settled = true;
       reject(error);
-    }
+    });
   });
 }
 
