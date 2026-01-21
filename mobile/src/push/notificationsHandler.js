@@ -239,7 +239,7 @@ export async function speakNotification(message) {
     debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
-    const audioBlob = await fetchTTS(message, { format: 'wav', accept: 'audio/wav' });
+    const audioBlob = await fetchTTS(message);
     
     // Convert blob to base64
     const base64Audio = await blobToBase64(audioBlob);
