@@ -10,6 +10,14 @@ import ExpoGlassesAudio from 'expo-glasses-audio';
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
+const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
+// Supported audio formats that the backend can accept
+// Note: 'caf' is not included here as it needs to be converted to 'm4a' (see inferAudioFormatFromUri)
+const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
+// Regex pattern to match audio file extensions before query params or hash fragments
+// Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
+// Group 1 captures the format (e.g., 'wav', 'mp3', 'opus', 'm4a')
+const AUDIO_FORMAT_REGEX = new RegExp(`\\.(${SUPPORTED_AUDIO_FORMATS.join('|')})(?=\\?|#|$)`);
 const NATIVE_MODULE_REQUIRED_METHODS = [
   'getAudioRoute',
   'startRecording',
@@ -69,6 +77,19 @@ export default function GlassesDiagnosticsScreen() {
   const soundRef = useRef(null);
   const pendingTtsTempUriRef = useRef(null);
   const recordingPromiseRef = useRef(null);
+
+  const inferAudioFormatFromUri = (uri) => {
+    if (!uri) return 'm4a';
+    const lower = String(uri).toLowerCase();
+
+    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
+    if (lower.endsWith('.caf')) return 'm4a';
+
+    const match = lower.match(AUDIO_FORMAT_REGEX);
+    if (match?.[1]) return match[1];
+
+    return 'm4a';
+  };
 
   useEffect(() => {
     (async () => {
@@ -510,6 +531,9 @@ export default function GlassesDiagnosticsScreen() {
       const audioBase64 = await FileSystem.readAsStringAsync(localUriForRead, {
         encoding: FileSystem.EncodingType.Base64,
       });
+      const uploadFormat = inferAudioFormatFromUri(lastRecordingUri);
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
+      const response = await sendAudioCommand(fileUri, format, {
       const uploaded = await uploadDevAudio(audioBase64, uploadFormat);
       const fileUri = uploaded?.uri;
       if (!fileUri) {
