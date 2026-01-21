@@ -29,12 +29,15 @@ export default function TTSScreen() {
 
   const cleanupTempFile = async () => {
     const uri = tempFileUriRef.current;
-    tempFileUriRef.current = null;
     if (!uri) return;
     try {
       await FileSystem.deleteAsync(uri, { idempotent: true });
+      // Only clear the ref if it still points to the same URI we just deleted
+      if (tempFileUriRef.current === uri) {
+        tempFileUriRef.current = null;
+      }
     } catch {
-      // ignore
+      // ignore; keep tempFileUriRef so deletion can be retried later
     }
   };
 
@@ -111,8 +114,6 @@ export default function TTSScreen() {
         ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
       if (hasNativePlayback) {
-        setIsPlaying(true);
-
         nativePlaybackSubscriptionRef.current =
           typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function'
             ? ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
@@ -129,11 +130,27 @@ export default function TTSScreen() {
             ? tempUri.replace(/^file:\/\//, '')
             : tempUri;
 
-        await ExpoGlassesAudio.playAudio(nativeUri);
+        try {
+          await ExpoGlassesAudio.playAudio(nativeUri);
+          setIsPlaying(true);
+        } catch (err) {
+          stopNativePlaybackListener();
+          setIsPlaying(false);
+          await cleanupTempFile();
+          throw err;
+        }
         return;
       }
 
       // Fallback to Expo AV playback
+      // Configure audio session for playback
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: true,
+        shouldDuckAndroid: true,
+      });
+
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: tempUri },
         { shouldPlay: true }
@@ -142,10 +159,16 @@ export default function TTSScreen() {
       setSound(newSound);
       setIsPlaying(true);
 
-      newSound.setOnPlaybackStatusUpdate((status) => {
+      newSound.setOnPlaybackStatusUpdate(async (status) => {
         if (status?.didJustFinish) {
           setIsPlaying(false);
-          cleanupTempFile();
+          try {
+            await newSound.unloadAsync();
+          } catch {
+            // ignore unload errors
+          }
+          setSound(null);
+          await cleanupTempFile();
         }
       });
     } catch (err) {
@@ -167,8 +190,15 @@ export default function TTSScreen() {
     }
 
     if (sound) {
-      await sound.stopAsync();
-      setIsPlaying(false);
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      } catch {
+        // ignore stop/unload errors
+      } finally {
+        setSound(null);
+        setIsPlaying(false);
+      }
     }
     await cleanupTempFile();
   };
@@ -194,13 +224,13 @@ export default function TTSScreen() {
   };
 
   React.useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-          stopNativePlaybackListener();
-          cleanupTempFile();
-        }
-      : undefined;
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+      stopNativePlaybackListener();
+      cleanupTempFile();
+    };
   }, [sound]);
 
   return (
