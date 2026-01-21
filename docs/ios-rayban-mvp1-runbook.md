@@ -209,11 +209,11 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
    python -m src.main
    
    # Or via uvicorn directly
-   uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+  uvicorn src.main:app --reload --host 0.0.0.0 --port 8080
    ```
 
 4. **Verify Server Started**:
-   - Look for output: `Uvicorn running on http://0.0.0.0:8000`
+  - Look for output: `Uvicorn running on http://0.0.0.0:8080`
    - Server should be listening and ready
 
 ### Step 2: Verify Backend Health
@@ -221,7 +221,7 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
 #### Test 1: Status Endpoint
 
 ```bash
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 ```
 
 **Expected Response**:
@@ -242,7 +242,7 @@ curl http://localhost:8000/v1/status
 #### Test 2: TTS Endpoint
 
 ```bash
-curl -X POST http://localhost:8000/v1/tts \
+curl -X POST http://localhost:8080/v1/tts \
   -H "Content-Type: application/json" \
   -d '{
     "text": "Hello from the backend.",
@@ -274,7 +274,7 @@ aplay /tmp/test-tts.wav
 #### Test 3: Command Endpoint (Text Input)
 
 ```bash
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -464,7 +464,7 @@ Execute these commands in sequence for a successful demo. Each command should re
 
 **Confirmation Request**:
 ```bash
-curl -X POST http://localhost:8000/v1/commands/confirm \
+curl -X POST http://localhost:8080/v1/commands/confirm \
   -H "Content-Type: application/json" \
   -d '{
     "confirmation_token": "abc123..."
@@ -549,7 +549,7 @@ This section covers the **5 most common failure modes** with diagnosis and resol
 **Diagnosis**:
 ```bash
 # Test authentication
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{"input": {"type": "text", "text": "test"}, "context": {}}' \
   -v
@@ -584,7 +584,7 @@ python -m src.main
 
 **Step 4**: Verify status endpoint confirms dev mode
 ```bash
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 # Should include: "auth_mode": "dev"
 ```
 
@@ -602,7 +602,7 @@ curl http://localhost:8000/v1/status
 **Diagnosis**:
 ```bash
 # Check STT provider configuration
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 
 # Look for: "stt_provider": "stub"
 ```
@@ -631,19 +631,19 @@ python -m src.main
 
 **Step 4**: Verify configuration
 ```bash
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 # Should show: "stt_provider": "openai"
 ```
 
 **Step 5**: Test with audio command
 ```bash
 # Upload test audio
-curl -X POST http://localhost:8000/v1/dev/audio \
+curl -X POST http://localhost:8080/v1/dev/audio \
   -H "Content-Type: application/json" \
-  -d '{"audio_data": "base64_encoded_audio_here", "format": "m4a"}'
+  -d '{"data_base64": "base64_encoded_audio_here", "format": "m4a"}'
 
 # Use returned URI in command
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -673,10 +673,10 @@ curl -X POST http://localhost:8000/v1/command \
 **Diagnosis**:
 ```bash
 # From iOS device (via SSH or terminal app)
-curl http://BACKEND_IP:8000/v1/status -v
+curl http://BACKEND_IP:8080/v1/status -v
 
 # From backend machine
-curl http://localhost:8000/v1/status -v
+curl http://localhost:8080/v1/status -v
 ```
 
 **Root Causes**:
@@ -693,14 +693,14 @@ curl http://localhost:8000/v1/status -v
 ps aux | grep uvicorn
 
 # Check listening ports
-lsof -i :8000  # macOS/Linux
-netstat -an | grep 8000  # Windows
+lsof -i :8080  # macOS/Linux
+netstat -an | grep 8080  # Windows
 ```
 
 **Step 2**: Ensure server binds to 0.0.0.0 (all interfaces)
 ```bash
 # Start with explicit host
-uvicorn src.main:app --host 0.0.0.0 --port 8000
+uvicorn src.main:app --host 0.0.0.0 --port 8080
 ```
 
 **Step 3**: Check firewall rules
@@ -710,11 +710,11 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
 
 # Linux (ufw)
 sudo ufw status
-sudo ufw allow 8000/tcp
+sudo ufw allow 8080/tcp
 
 # Linux (firewalld)
 sudo firewall-cmd --list-ports
-sudo firewall-cmd --add-port=8000/tcp --permanent
+sudo firewall-cmd --add-port=8080/tcp --permanent
 sudo firewall-cmd --reload
 ```
 
@@ -730,8 +730,8 @@ ping BACKEND_IP
 
 **Step 5**: Update iOS app backend URL
 - Open app settings
-- Change from `http://localhost:8000` to `http://ACTUAL_IP:8000`
-- Example: `http://192.168.1.100:8000`
+- Change from `http://localhost:8080` to `http://ACTUAL_IP:8080`
+- Example: `http://192.168.1.100:8080`
 - Save and retry
 
 **Prevention**:
@@ -749,7 +749,7 @@ ping BACKEND_IP
 **Diagnosis**:
 ```bash
 # Test TTS endpoint directly
-curl -X POST http://localhost:8000/v1/tts \
+curl -X POST http://localhost:8080/v1/tts \
   -H "Content-Type: application/json" \
   -d '{"text": "Test audio", "voice": "alloy", "format": "wav"}' \
   --output /tmp/test.wav
@@ -772,7 +772,7 @@ aplay /tmp/test.wav   # Linux
 
 **Step 1**: Verify TTS provider is working
 ```bash
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 # Check "tts_provider" field
 
 # If "stub", switch to OpenAI for realistic audio
@@ -861,7 +861,7 @@ If demonstrating push notifications and deep-linking:
 
 2. **Create a Notification Subscription**:
    ```bash
-   curl -X POST http://localhost:8000/v1/notifications/subscriptions \
+  curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -d '{
        "push_token": "ExponentPushToken[YOUR_TOKEN]",
@@ -874,7 +874,7 @@ If demonstrating push notifications and deep-linking:
 
 ```bash
 # Simulate a webhook event that generates a notification
-curl -X POST http://localhost:8000/v1/webhooks/github \
+curl -X POST http://localhost:8080/v1/webhooks/github \
   -H "Content-Type: application/json" \
   -H "X-GitHub-Event: pull_request" \
   -d '{
@@ -894,10 +894,10 @@ curl -X POST http://localhost:8000/v1/webhooks/github \
 
 ```bash
 # List notifications
-curl http://localhost:8000/v1/notifications
+curl http://localhost:8080/v1/notifications
 
 # Get specific notification
-curl http://localhost:8000/v1/notifications/{notification_id}
+curl http://localhost:8080/v1/notifications/{notification_id}
 ```
 
 **Expected Response**:
