@@ -33,7 +33,7 @@ npm install
 ### Audio Route Monitoring
 
 ```typescript
-import { glassesAudio } from 'expo-glasses-audio';
+import glassesAudio from 'expo-glasses-audio';
 
 // Get current audio route
 const route = await glassesAudio.getCurrentRoute();
