@@ -1,5 +1,29 @@
 # Glasses Audio Player Module
 
+> **⚠️ DEPRECATED**: This module has been superseded by [`expo-glasses-audio`](../expo-glasses-audio/). 
+> 
+> Please use `expo-glasses-audio` instead, which provides:
+> - Cross-platform support (iOS + Android)
+> - Recording + playback capabilities
+> - Audio route monitoring
+> - Better error handling and graceful fallbacks
+>
+> **Migration:** Update your imports from:
+> ```typescript
+> import { playAudio } from './modules/glasses-audio-player';
+> ```
+> to:
+> ```typescript
+> import ExpoGlassesAudio from 'expo-glasses-audio';
+> await ExpoGlassesAudio.playAudio(fileUri);
+> ```
+> 
+> See the [expo-glasses-audio README](../expo-glasses-audio/README.md) for full documentation.
+
+---
+
+## Legacy Documentation
+
 Native iOS module for playing audio through Meta AI Glasses via Bluetooth.
 
 ## Features

@@ -5,7 +5,15 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
 import { getDebugState, simulateNotificationForDev } from '../push';
-import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
+
+// Use canonical expo-glasses-audio package import with graceful fallback
+let ExpoGlassesAudio = null;
+try {
+  ExpoGlassesAudio = require('expo-glasses-audio').default;
+} catch (error) {
+  // Module not available in Expo Go or non-dev-client builds
+  console.log('Native expo-glasses-audio module not available:', error.message);
+}
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
