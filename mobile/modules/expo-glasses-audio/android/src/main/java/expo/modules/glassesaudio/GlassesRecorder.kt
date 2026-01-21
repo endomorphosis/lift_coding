@@ -30,6 +30,7 @@ class GlassesRecorder {
         private const val SAMPLE_RATE = 16000
         private const val CHANNELS = 1 // MONO
         private const val BYTES_PER_SAMPLE = 2 // 16-bit = 2 bytes per sample
+        private const val BITS_PER_SAMPLE = 16 // 16-bit audio
     }
     
     private var recorder: AudioRecord? = null
@@ -39,9 +40,6 @@ class GlassesRecorder {
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
     private var recordingStartedAtMs: Long = 0L
-    private var sampleRate: Int = 0
-    private var channels: Int = 0
-    private var bytesPerSample: Int = 0
 
     fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
         val channel = AudioFormat.CHANNEL_IN_MONO
@@ -69,14 +67,9 @@ class GlassesRecorder {
         this.outputFile = outputFile
         totalBytesWritten = 0L
         recordingStartedAtMs = System.currentTimeMillis()
-        
-        // Store audio format parameters for duration calculation
-        this.sampleRate = SAMPLE_RATE
-        this.channels = CHANNELS
-        this.bytesPerSample = BYTES_PER_SAMPLE
 
         // Write initial WAV header (will be updated with correct sizes on stop)
-        writeWavHeader(outputFile, SAMPLE_RATE, CHANNELS, BYTES_PER_SAMPLE * 8)
+        writeWavHeader(outputFile, SAMPLE_RATE, CHANNELS, BITS_PER_SAMPLE)
         
         r.startRecording()
         recorder = r
@@ -157,33 +150,19 @@ class GlassesRecorder {
 
             // Calculate duration based on actual audio data written
             // duration = totalBytesWritten / (sampleRate * channels * bytesPerSample)
-            val durationSeconds = if (sampleRate > 0 && channels > 0 && bytesPerSample > 0) {
-                kotlin.math.max(
-                    0,
-                    (totalBytesWritten / (sampleRate * channels * bytesPerSample)).toInt()
-                )
-            } else {
-                // Fallback to wall-clock time if format parameters are not available
-                kotlin.math.max(
-                    0,
-                    ((System.currentTimeMillis() - recordingStartedAtMs) / 1000L).toInt()
-                )
-            }
+            val durationSeconds = kotlin.math.max(
+                0,
+                (totalBytesWritten / (SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE)).toInt()
+            )
             val sizeBytes = file.length()
 
             outputFile = null
             recordingStartedAtMs = 0L
-            sampleRate = 0
-            channels = 0
-            bytesPerSample = 0
             return RecordingResult(file = file, durationSeconds = durationSeconds, sizeBytes = sizeBytes)
         }
 
         outputFile = null
         recordingStartedAtMs = 0L
-        sampleRate = 0
-        channels = 0
-        bytesPerSample = 0
         return null
     }
 
