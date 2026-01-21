@@ -13,6 +13,9 @@ const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TT
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
 const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
+// Regex pattern to match audio file extensions before query params or hash fragments
+// Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
+const AUDIO_FORMAT_REGEX = new RegExp(`\\.((?:${SUPPORTED_AUDIO_FORMATS.join('|')}))(?=(\\?|#|$))`);
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -36,10 +39,7 @@ export default function GlassesDiagnosticsScreen() {
     if (!uri) return 'm4a';
     const lower = String(uri).toLowerCase();
 
-    // Match file extension before query params or hash fragments
-    // Build regex pattern dynamically from SUPPORTED_AUDIO_FORMATS
-    const pattern = new RegExp(`\\.((?:${SUPPORTED_AUDIO_FORMATS.join('|')}))(?=(\\?|#|$))`);
-    const match = lower.match(pattern);
+    const match = lower.match(AUDIO_FORMAT_REGEX);
     if (match?.[1]) return match[1];
 
     return 'm4a';
