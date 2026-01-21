@@ -64,7 +64,7 @@ try session.setCategory(
 ## File Changes
 
 ### New Files
-- `mobile/modules/glasses-audio-player/` - Complete Expo module
+- `mobile/modules/expo-glasses-audio/` - Complete Expo module (formerly `glasses-audio-player`)
 - `mobile/src/hooks/useGlassesPlayer.js` - React hook
 - `mobile/BUILD_AND_TEST_GLASSES_PLAYER.md` - Build guide
 
