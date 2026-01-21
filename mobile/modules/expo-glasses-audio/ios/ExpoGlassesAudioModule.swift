@@ -193,23 +193,28 @@ public class ExpoGlassesAudioModule: Module {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
-      recordingStopWorkItem?.cancel()
-      recordingStopWorkItem = nil
       
-      // Reject pending promise before clearing
-      if let promise = pendingStartRecordingPromise {
-        let error = NSError(
-          domain: "ERR_MODULE_DESTROYED",
-          code: 0,
-          userInfo: [NSLocalizedDescriptionKey: "Module was destroyed while starting recording."]
-        )
-        promise.reject(error)
+      // Use recordingQueue to ensure thread-safe cleanup
+      recordingQueue.sync {
+        recordingStopWorkItem?.cancel()
+        recordingStopWorkItem = nil
+        
+        // Reject pending promise before clearing
+        if let promise = pendingStartRecordingPromise {
+          let error = NSError(
+            domain: "ERR_MODULE_DESTROYED",
+            code: 0,
+            userInfo: [NSLocalizedDescriptionKey: "Module was destroyed while starting recording."]
+          )
+          promise.reject(error)
+        }
+        pendingStartRecordingPromise = nil
+        
+        recordingFileURL = nil
+        recordingStartedAt = nil
+        isRecording = false
       }
-      pendingStartRecordingPromise = nil
       
-      recordingFileURL = nil
-      recordingStartedAt = nil
-      isRecording = false
       if let observer = foregroundObserver {
         NotificationCenter.default.removeObserver(observer)
       }
@@ -221,9 +226,7 @@ public class ExpoGlassesAudioModule: Module {
     promisedDurationSeconds: Int?,
     stopPromise: Promise? = nil
   ) {
-    if #available(iOS 15.0, *) {
-      print("[ExpoGlassesAudio] finishRecording called, reason: \(reason)")
-    }
+    print("[ExpoGlassesAudio] finishRecording called, reason: \(reason)")
     
     guard isRecording else {
       stopPromise?.resolve([
