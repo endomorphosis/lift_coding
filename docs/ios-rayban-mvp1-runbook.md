@@ -209,11 +209,11 @@ EXPO_PUSH_TOKEN=ExponentPushToken[...]
    python -m src.main
    
    # Or via uvicorn directly
-  uvicorn src.main:app --reload --host 0.0.0.0 --port 8080
+   uvicorn src.main:app --reload --host 0.0.0.0 --port 8080
    ```
 
 4. **Verify Server Started**:
-  - Look for output: `Uvicorn running on http://0.0.0.0:8080`
+   - Look for output: `Uvicorn running on http://0.0.0.0:8080`
    - Server should be listening and ready
 
 ### Step 2: Verify Backend Health
@@ -861,7 +861,7 @@ If demonstrating push notifications and deep-linking:
 
 2. **Create a Notification Subscription**:
    ```bash
-  curl -X POST http://localhost:8080/v1/notifications/subscriptions \
+   curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -d '{
        "push_token": "ExponentPushToken[YOUR_TOKEN]",
