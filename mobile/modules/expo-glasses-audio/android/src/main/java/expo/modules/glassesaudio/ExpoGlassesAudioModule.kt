@@ -118,30 +118,34 @@ class ExpoGlassesAudioModule : Module() {
         
         // Schedule stop after duration
         handler.postDelayed({
-          val result = recorder.stop()
-          audioManager.stopBluetoothSco()
-          audioManager.mode = AudioManager.MODE_NORMAL
-          
-          // Emit recording stopped event
-          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-          
-          if (result != null) {
-            promise.resolve(
-              mapOf(
-                "uri" to result.file.absolutePath,
-                "duration" to result.durationSeconds,
-                "size" to result.sizeBytes.toInt()
+          try {
+            val result = recorder.stop()
+            audioManager.stopBluetoothSco()
+            audioManager.mode = AudioManager.MODE_NORMAL
+            
+            // Emit recording stopped event
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+            
+            if (result != null) {
+              promise.resolve(
+                mapOf(
+                  "uri" to result.file.absolutePath,
+                  "duration" to result.durationSeconds,
+                  "size" to result.sizeBytes
+                )
               )
-            )
-          } else {
-            // If result is null, return empty values (e.g., if recording was already stopped)
-            promise.resolve(
-              mapOf(
-                "uri" to "",
-                "duration" to 0,
-                "size" to 0
+            } else {
+              // If result is null, return empty values (e.g., if recording was already stopped)
+              promise.resolve(
+                mapOf(
+                  "uri" to "",
+                  "duration" to 0,
+                  "size" to 0
+                )
               )
-            )
+            }
+          } catch (e: Exception) {
+            promise.reject("ERR_STOP_RECORDING", "Failed to stop recording in callback: ${e.message}", e)
           }
         }, (durationSeconds * 1000).toLong())
         
@@ -163,7 +167,7 @@ class ExpoGlassesAudioModule : Module() {
             mapOf(
               "uri" to result.file.absolutePath,
               "duration" to result.durationSeconds,
-              "size" to result.sizeBytes.toInt()
+              "size" to result.sizeBytes
             )
           )
         } else {
