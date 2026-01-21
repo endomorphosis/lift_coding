@@ -34,6 +34,7 @@ class GlassesRecorder {
     @Volatile
     private var isRecording = false
     private var outputFile: File? = null
+    @Volatile
     private var totalBytesWritten = 0L
     private var startedAtMs: Long? = null
 
@@ -134,7 +135,7 @@ class GlassesRecorder {
     fun stop(): RecordingResult? {
         val file = outputFile
 
-        if (!isRecording && recorder == null) {
+        if (recorder == null) {
             return file?.takeIf { it.exists() }?.let {
                 RecordingResult(
                     file = it,
@@ -145,11 +146,13 @@ class GlassesRecorder {
         }
 
         // Signal the writer loop to finish, then stop AudioRecord to unblock read().
-        isRecording = false
-        try {
-            recorder?.stop()
-        } catch (e: Exception) {
-            Log.w(TAG, "Error stopping AudioRecord: ${e.message}")
+        if (isRecording) {
+            isRecording = false
+            try {
+                recorder?.stop()
+            } catch (e: Exception) {
+                Log.w(TAG, "Error stopping AudioRecord: ${e.message}")
+            }
         }
 
         recordingThread?.join(RECORDING_THREAD_JOIN_TIMEOUT_MS)
