@@ -7,6 +7,9 @@ public class ExpoGlassesAudioModule: Module {
   private let player = GlassesPlayer()
   private var foregroundObserver: NSObjectProtocol?
 
+  // Serial queue for thread-safe access to recording state
+  private let recordingQueue = DispatchQueue(label: "com.expo.glassesaudio.recording")
+  
   private var isRecording = false
   private var recordingFileURL: URL?
   private var recordingStartedAt: Date?
@@ -49,62 +52,77 @@ public class ExpoGlassesAudioModule: Module {
     
     // Start recording audio
     AsyncFunction("startRecording") { (durationSeconds: Int, audioSourceString: String?, promise: Promise) in
-      do {
-        if self.isRecording {
-          promise.reject("ERR_ALREADY_RECORDING", "Recording already in progress")
-          return
+      self.recordingQueue.async {
+        do {
+          if self.isRecording {
+            promise.reject("ERR_ALREADY_RECORDING", "Recording already in progress")
+            return
+          }
+
+          let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+          let timestamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
+          let filename = "glasses_recording_\(timestamp).wav"
+          let fileURL = documentsPath.appendingPathComponent(filename)
+          
+          // Parse audio source
+          let audioSource: AudioSource
+          if let sourceStr = audioSourceString {
+            audioSource = AudioSource(rawValue: sourceStr) ?? .auto
+          } else {
+            audioSource = .auto
+          }
+
+          try self.recorder.startRecording(outputURL: fileURL, audioSource: audioSource)
+
+          self.isRecording = true
+          self.recordingFileURL = fileURL
+          self.recordingStartedAt = Date()
+          self.pendingStartRecordingPromise = promise
+
+          // Emit recording started event
+          self.sendEvent("onRecordingProgress", [
+            "isRecording": true,
+            "duration": 0
+          ])
+
+          // Schedule stop after duration
+          let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.recordingQueue.async {
+              self.finishRecording(reason: "timer", promisedDurationSeconds: durationSeconds)
+            }
+          }
+          self.recordingStopWorkItem?.cancel()
+          self.recordingStopWorkItem = workItem
+          DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds), execute: workItem)
+        } catch {
+          // Ensure recording state is fully reset on any error
+          self.isRecording = false
+          self.recordingFileURL = nil
+          self.recordingStartedAt = nil
+          self.recordingStopWorkItem?.cancel()
+          self.recordingStopWorkItem = nil
+          self.pendingStartRecordingPromise = nil
+          
+          promise.reject("ERR_START_RECORDING", "Failed to start recording: \(error.localizedDescription)")
         }
-
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let timestamp = ISO8601DateFormatter().string(from: Date()).replacingOccurrences(of: ":", with: "-")
-        let filename = "glasses_recording_\(timestamp).wav"
-        let fileURL = documentsPath.appendingPathComponent(filename)
-        
-        // Parse audio source
-        let audioSource: AudioSource
-        if let sourceStr = audioSourceString {
-          audioSource = AudioSource(rawValue: sourceStr) ?? .auto
-        } else {
-          audioSource = .auto
-        }
-
-        try recorder.startRecording(outputURL: fileURL, audioSource: audioSource)
-
-        self.isRecording = true
-        self.recordingFileURL = fileURL
-        self.recordingStartedAt = Date()
-        self.pendingStartRecordingPromise = promise
-
-        // Emit recording started event
-        self.sendEvent("onRecordingProgress", [
-          "isRecording": true,
-          "duration": 0
-        ])
-
-        // Schedule stop after duration
-        let workItem = DispatchWorkItem { [weak self] in
-          self?.finishRecording(reason: "timer", promisedDurationSeconds: durationSeconds)
-        }
-        self.recordingStopWorkItem?.cancel()
-        self.recordingStopWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(durationSeconds), execute: workItem)
-      } catch {
-        promise.reject("ERR_START_RECORDING", "Failed to start recording: \(error.localizedDescription)")
       }
     }
     
     // Stop recording
     AsyncFunction("stopRecording") { (promise: Promise) in
-      if !self.isRecording {
-        promise.resolve([
-          "uri": "",
-          "duration": 0,
-          "size": 0
-        ])
-        return
-      }
+      self.recordingQueue.async {
+        if !self.isRecording {
+          promise.resolve([
+            "uri": "",
+            "duration": 0,
+            "size": 0
+          ])
+          return
+        }
 
-      self.finishRecording(reason: "manual", promisedDurationSeconds: nil, stopPromise: promise)
+        self.finishRecording(reason: "manual", promisedDurationSeconds: nil, stopPromise: promise)
+      }
     }
     
     // Play audio file
@@ -115,11 +133,11 @@ public class ExpoGlassesAudioModule: Module {
           return
         }
 
-        self.sendEvent("onPlaybackStatus", ["isPlaying": true])
-
         try player.play(fileURL: url) { [weak self] in
           self?.sendEvent("onPlaybackStatus", ["isPlaying": false])
         }
+        
+        self.sendEvent("onPlaybackStatus", ["isPlaying": true])
         promise.resolve(nil)
       } catch {
         self.sendEvent("onPlaybackStatus", [
@@ -178,23 +196,42 @@ public class ExpoGlassesAudioModule: Module {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
-      recordingStopWorkItem?.cancel()
-      recordingStopWorkItem = nil
-      pendingStartRecordingPromise = nil
-      recordingFileURL = nil
-      recordingStartedAt = nil
-      isRecording = false
+      
+      // Use recordingQueue.async to avoid deadlock risk
+      recordingQueue.async {
+        self.recordingStopWorkItem?.cancel()
+        self.recordingStopWorkItem = nil
+        
+        // Reject pending promise before clearing
+        if let promise = self.pendingStartRecordingPromise {
+          let error = NSError(
+            domain: "ERR_MODULE_DESTROYED",
+            code: 0,
+            userInfo: [NSLocalizedDescriptionKey: "Module was destroyed while starting recording."]
+          )
+          promise.reject(error)
+        }
+        self.pendingStartRecordingPromise = nil
+        
+        self.recordingFileURL = nil
+        self.recordingStartedAt = nil
+        self.isRecording = false
+      }
+      
       if let observer = foregroundObserver {
         NotificationCenter.default.removeObserver(observer)
       }
     }
   }
 
+  // This method must be called on recordingQueue to ensure thread safety
   private func finishRecording(
     reason: String,
     promisedDurationSeconds: Int?,
     stopPromise: Promise? = nil
   ) {
+    print("[ExpoGlassesAudio] finishRecording called, reason: \(reason)")
+    
     guard isRecording else {
       stopPromise?.resolve([
         "uri": "",

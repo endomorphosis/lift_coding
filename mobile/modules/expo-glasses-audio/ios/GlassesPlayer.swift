@@ -117,7 +117,10 @@ public final class GlassesPlayer {
 
     public func stop() {
         shouldResumeAfterInterruption = false
+        
+        // Clear completion handler without calling it (only natural completion calls it)
         completionHandler = nil
+        
         playerNode.stop()
         audioEngine.stop()
     }
