@@ -39,7 +39,6 @@ class GlassesRecorder {
     private var isRecording = false
     private var outputFile: File? = null
     private var totalBytesWritten = 0L
-    private var recordingStartedAtMs: Long = 0L
 
     fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
         val channel = AudioFormat.CHANNEL_IN_MONO
@@ -66,7 +65,6 @@ class GlassesRecorder {
         outputFile.parentFile?.mkdirs()
         this.outputFile = outputFile
         totalBytesWritten = 0L
-        recordingStartedAtMs = System.currentTimeMillis()
 
         // Write initial WAV header (will be updated with correct sizes on stop)
         writeWavHeader(outputFile, SAMPLE_RATE, CHANNELS, BITS_PER_SAMPLE)
@@ -150,19 +148,14 @@ class GlassesRecorder {
 
             // Calculate duration based on actual audio data written
             // duration = totalBytesWritten / (sampleRate * channels * bytesPerSample)
-            val durationSeconds = kotlin.math.max(
-                0,
-                (totalBytesWritten / (SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE)).toInt()
-            )
+            val durationSeconds = (totalBytesWritten / (SAMPLE_RATE * CHANNELS * BYTES_PER_SAMPLE)).toInt()
             val sizeBytes = file.length()
 
             outputFile = null
-            recordingStartedAtMs = 0L
             return RecordingResult(file = file, durationSeconds = durationSeconds, sizeBytes = sizeBytes)
         }
 
         outputFile = null
-        recordingStartedAtMs = 0L
         return null
     }
 
