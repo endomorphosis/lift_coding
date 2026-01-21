@@ -148,10 +148,6 @@ ffprobe glasses_test_*.wav
 - Run `npx expo prebuild --clean` again
 - Ensure you're opening `.xcworkspace`, not `.xcodeproj`
 
-**"Bridging header not found"**
-- Check bridging header path in Build Settings
-- Verify file exists at specified path
-
 **"Undefined symbols for architecture arm64"**
 - Clean build folder (⌘⇧K)
 - Delete `ios/build/` directory
