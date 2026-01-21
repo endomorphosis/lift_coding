@@ -8,10 +8,10 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
-  Platform,
 } from 'react-native';
 import { fetchTTS } from '../api/client';
 import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
 import { simulateNotificationForDev } from '../push/notificationsHandler';
 
 export default function TTSScreen() {
@@ -39,31 +39,37 @@ export default function TTSScreen() {
         setSound(null);
       }
 
-      // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+      // Fetch TTS audio (default backend format is WAV)
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
 
-      // Convert blob to base64 for React Native
-      const reader = new FileReader();
-      reader.readAsDataURL(audioBlob);
-      reader.onloadend = async () => {
-        const base64Audio = reader.result;
+      const base64Audio = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Failed to read TTS audio'));
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(audioBlob);
+      });
 
-        // Load and play audio
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: base64Audio },
-          { shouldPlay: true }
-        );
+      const base64Data = String(base64Audio).split(',')[1];
+      const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
 
-        setSound(newSound);
-        setIsPlaying(true);
+      await FileSystem.writeAsStringAsync(tempUri, base64Data, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
-        // Set up playback status listener
-        newSound.setOnPlaybackStatusUpdate((status) => {
-          if (status.didJustFinish) {
-            setIsPlaying(false);
-          }
-        });
-      };
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: tempUri },
+        { shouldPlay: true }
+      );
+
+      setSound(newSound);
+      setIsPlaying(true);
+
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          setIsPlaying(false);
+          FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+        }
+      });
     } catch (err) {
       setError(err.message);
     } finally {
