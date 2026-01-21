@@ -20,8 +20,8 @@ function ensurePlaybackListener() {
         lastIsPlaying = event.isPlaying;
       }
     });
-  } catch {
-    // Optional: if events aren't available in the current runtime.
+  } catch (error) {
+    console.warn('Failed to add glasses playback status listener; events may not be available in this runtime:', error);
   }
 }
 
@@ -46,8 +46,8 @@ export async function playAudioThroughGlasses(fileUri) {
 
   const module = getExpoGlassesAudioOrThrow();
   ensurePlaybackListener();
+  await module.playAudio(fileUri);
   lastIsPlaying = true;
-  return await module.playAudio(fileUri);
 }
 
 /**
@@ -57,17 +57,31 @@ export async function playAudioThroughGlasses(fileUri) {
 export async function stopGlassesAudio() {
   const module = getExpoGlassesAudioOrThrow();
   ensurePlaybackListener();
+  await module.stopPlayback();
   lastIsPlaying = false;
-  return await module.stopPlayback();
 }
 
 /**
  * Check if audio is currently playing through glasses
- * @returns {Promise<boolean>}
+ * Note: Returns cached playback state from the last event or API call.
+ * May be stale if playback completes naturally without calling stopGlassesAudio().
+ * @returns {boolean}
  */
-export async function isGlassesAudioPlaying() {
+export function isGlassesAudioPlaying() {
   ensurePlaybackListener();
   return lastIsPlaying;
+}
+
+/**
+ * Clean up the playback status subscription
+ * Call this when shutting down to prevent memory leaks
+ */
+export function cleanupGlassesPlayer() {
+  if (playbackStatusSubscription) {
+    playbackStatusSubscription.remove();
+    playbackStatusSubscription = null;
+  }
+  lastIsPlaying = false;
 }
 
 /**

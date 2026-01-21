@@ -10,7 +10,7 @@
 >
 > **Migration:** Update your imports from:
 > ```typescript
-> import { playAudio } from './modules/glasses-audio-player';
+> import { playAudio } from '../../modules/glasses-audio-player';
 > ```
 > to:
 > ```typescript
