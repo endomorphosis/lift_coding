@@ -196,7 +196,6 @@ class GlassesPlayer {
                         readLEInt() // byte rate
                         readLEShort() // block align
                         bitsPerSample = readLEShort().toInt()
-                        
                         // Continue to general seek logic below
                     }
                     "data" -> {
