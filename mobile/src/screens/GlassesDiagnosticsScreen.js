@@ -472,7 +472,7 @@ export default function GlassesDiagnosticsScreen() {
       });
 
       const base64Data = String(base64Audio).split(',')[1];
-      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.${ttsFormat}`;
+      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
       await FileSystem.writeAsStringAsync(tempUri, base64Data, {
         encoding: FileSystem.EncodingType.Base64,
       });

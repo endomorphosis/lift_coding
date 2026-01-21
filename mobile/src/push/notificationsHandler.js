@@ -245,7 +245,7 @@ export async function speakNotification(message) {
     const base64Audio = await blobToBase64(audioBlob);
     
     // Save to temporary file using expo-file-system
-    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.mp3`;
+    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.wav`;
     tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
     
     await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
