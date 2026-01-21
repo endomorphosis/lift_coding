@@ -55,18 +55,14 @@ If the native module files aren't automatically included:
 
 1. In Xcode, right-click on project
 2. Select "Add Files to mobiletemp..."
-3. Navigate to `mobile/modules/glasses-audio/ios/`
-4. Select all `.swift` and `.m` files
+3. Navigate to `mobile/modules/expo-glasses-audio/ios/`
+4. Select all `.swift` files
 5. Ensure "Copy items if needed" is checked
 6. Click "Add"
 
-### 6. Configure Bridging Header (if needed)
+Note: With Expo Modules (`expo-glasses-audio`), `expo prebuild` should auto-link the module. If you need to add files manually, it's usually a sign the prebuild output is stale; try re-running `npx expo prebuild --platform ios --clean`.
 
-1. Go to Build Settings
-2. Search for "Objective-C Bridging Header"
-3. Set value to: `modules/glasses-audio/ios/GlassesAudio-Bridging-Header.h`
-
-### 7. Build and Run
+### 6. Build and Run
 
 From Xcode:
 1. Select your physical iOS device (not simulator)

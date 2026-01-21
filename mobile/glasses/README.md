@@ -85,12 +85,10 @@ mobile/glasses/
     ├── GlassesPlayer.kt
     └── GlassesAudioDiagnostics.kt
 
-mobile/modules/glasses-audio/           # React Native bridge ✅
-├── index.js                            # JS wrapper with fallback
-└── ios/                                # iOS bridge
-    ├── GlassesAudioModule.swift        # Native module implementation
-    ├── GlassesAudioModule.m            # ObjC bridge
-    └── GlassesAudio-Bridging-Header.h  # Bridging header
+mobile/modules/expo-glasses-audio/      # Expo module (source of truth)
+├── index.ts                            # JS/TS API surface
+├── ios/                                # iOS native implementation
+└── android/                            # Android native implementation
 ```
 
 ## Features
