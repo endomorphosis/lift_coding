@@ -154,13 +154,42 @@ export async function confirmCommand(token, idempotencyKey = undefined) {
 /**
  * Fetch TTS audio for given text
  * @param {string} text - Text to convert to speech
+<<<<<<< HEAD
+ * @param {Object} options - Optional parameters
+ * @param {string} options.format - Audio format (e.g., 'wav', 'mp3', 'opus')
+=======
+ * @param {Object} [options] - Optional TTS configuration
+ * @param {string} [options.format='wav'] - Output audio format (e.g. 'wav')
+ * @param {string} [options.voice] - Voice identifier to use for synthesis
+ * @param {string} [options.accept] - Value for the HTTP Accept header (e.g. 'audio/wav')
+>>>>>>> origin/main
  * @returns {Promise<Blob>} Audio data as blob
  */
-export async function fetchTTS(text) {
+export async function fetchTTS(text, options = {}) {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
-  const body = { text };
+<<<<<<< HEAD
+  const body = { 
+    text,
+    ...(options.format ? { format: options.format } : {}),
+  };
+=======
+  if (options.accept) {
+    headers.Accept = options.accept;
+  }
+
+  const body = {
+    text,
+    format: options.format || 'wav',
+    voice: options.voice || undefined,
+  };
+
+  // Add format to body if specified
+  if (options.format) {
+    body.format = options.format;
+  }
+>>>>>>> origin/main
 
   const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
@@ -236,7 +265,7 @@ export async function uploadDevAudio(audioBase64, format = 'm4a') {
   const headers = await getHeaders();
 
   const body = {
-    audio_base64: audioBase64,
+    data_base64: audioBase64,
     format,
   };
 

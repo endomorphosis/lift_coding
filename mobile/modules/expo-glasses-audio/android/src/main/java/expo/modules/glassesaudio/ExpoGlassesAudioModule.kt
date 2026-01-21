@@ -4,6 +4,7 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import expo.modules.kotlin.Promise
 import android.content.Context
+import android.net.Uri
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
@@ -26,6 +27,7 @@ class ExpoGlassesAudioModule : Module() {
   private lateinit var player: GlassesPlayer
   private val handler = Handler(Looper.getMainLooper())
   private var playbackTimeoutRunnable: Runnable? = null
+  private var recordingStopRunnable: Runnable? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -40,33 +42,23 @@ class ExpoGlassesAudioModule : Module() {
     }
 
     Function("getAudioRoute") {
-      val summary = routeMonitor.currentRouteSummary()
-      val lines = summary.split("\n")
-      
-      var inputDevice = "Unknown"
-      var outputDevice = "Unknown"
-      
-      for (line in lines) {
-        when {
-          line.startsWith("Inputs:") -> {
-            val inputIndex = lines.indexOf(line)
-            if (inputIndex + 1 < lines.size) {
-              inputDevice = lines[inputIndex + 1].trim()
-            }
-          }
-          line.startsWith("Outputs:") -> {
-            val outputIndex = lines.indexOf(line)
-            if (outputIndex + 1 < lines.size) {
-              outputDevice = lines[outputIndex + 1].trim()
-            }
-          }
-        }
-      }
-      
-      val isBluetoothConnected = summary.contains("SCO=true") || 
-                                 outputDevice.contains("Bluetooth", ignoreCase = true) ||
-                                 inputDevice.contains("Bluetooth", ignoreCase = true)
-      
+      val route = routeMonitor.getCurrentRoute()
+      val inputs = route["inputs"] as? List<*>
+      val outputs = route["outputs"] as? List<*>
+
+      val firstInput = inputs?.firstOrNull() as? Map<*, *>
+      val firstOutput = outputs?.firstOrNull() as? Map<*, *>
+
+      val inputDevice = (firstInput?.get("productName") as? String)
+        ?: (firstInput?.get("typeName") as? String)
+        ?: "Unknown"
+      val outputDevice = (firstOutput?.get("productName") as? String)
+        ?: (firstOutput?.get("typeName") as? String)
+        ?: "Unknown"
+
+      val isBluetoothConnected = route["isBluetoothConnected"] as? Boolean
+        ?: (inputDevice.contains("Bluetooth", ignoreCase = true) || outputDevice.contains("Bluetooth", ignoreCase = true))
+
       mapOf(
         "inputDevice" to inputDevice,
         "outputDevice" to outputDevice,
@@ -110,42 +102,46 @@ class ExpoGlassesAudioModule : Module() {
         val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
         val timestamp = dateFormat.format(Date())
         val filename = "glasses_recording_$timestamp.wav"
-        val outputDir = context.getExternalFilesDir(null)
+        val outputDir = context.getExternalFilesDir(null) ?: context.filesDir
         val outputFile = File(outputDir, filename)
+        outputFile.parentFile?.mkdirs()
         
         // Start recording with specified audio source
         recorder.start(outputFile, audioSource)
         
         // Schedule stop after duration
         handler.postDelayed({
-          try {
-            val result = recorder.stop()
-            audioManager.stopBluetoothSco()
-            audioManager.mode = AudioManager.MODE_NORMAL
+          val result = recorder.stop()
+          audioManager.stopBluetoothSco()
+          audioManager.mode = AudioManager.MODE_NORMAL
+          
+          if (result != null) {
+            // Emit recording stopped event with actual recorded duration
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to result.durationSeconds))
             
-            // Emit recording stopped event
+            promise.resolve(
+              mapOf(
+                "uri" to result.file.absolutePath,
+                "duration" to result.durationSeconds,
+                "size" to result.sizeBytes.toInt()
+              )
+          val finalFile = result?.file ?: outputFile
+          val fileSize = if (finalFile.exists()) finalFile.length() else 0L
+          val uri = Uri.fromFile(finalFile).toString()
+          
+          // Emit recording stopped event
+          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+          
+          promise.resolve(
+            mapOf(
+              "uri" to uri,
+              "duration" to durationSeconds,
+              "size" to fileSize.toInt()
+            )
+          } else {
+            // Emit recording stopped event with scheduled duration as fallback
             sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-            
-            if (result != null) {
-              promise.resolve(
-                mapOf(
-                  "uri" to result.file.absolutePath,
-                  "duration" to result.durationSeconds,
-                  "size" to result.sizeBytes
-                )
-              )
-            } else {
-              // If result is null, return empty values (e.g., if recording was already stopped)
-              promise.resolve(
-                mapOf(
-                  "uri" to "",
-                  "duration" to 0,
-                  "size" to 0
-                )
-              )
-            }
-          } catch (e: Exception) {
-            promise.reject("ERR_STOP_RECORDING", "Failed to stop recording in callback: ${e.message}", e)
+            promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available")
           }
         }, (durationSeconds * 1000).toLong())
         
@@ -161,23 +157,16 @@ class ExpoGlassesAudioModule : Module() {
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.stopBluetoothSco()
         audioManager.mode = AudioManager.MODE_NORMAL
+
+        val uri = result?.file?.let { Uri.fromFile(it).toString() } ?: ""
+        val size = result?.sizeBytes?.toInt() ?: 0
+        val duration = result?.durationSeconds ?: 0
         
-        if (result != null) {
-          promise.resolve(
-            mapOf(
-              "uri" to result.file.absolutePath,
-              "duration" to result.durationSeconds,
-              "size" to result.sizeBytes
-            )
-          )
-        } else {
-          // If result is null, return empty values (e.g., if recording was not running)
-          promise.resolve(
-            mapOf(
-              "uri" to "",
-              "duration" to 0,
-              "size" to 0
-            )
+        promise.resolve(
+          mapOf(
+            "uri" to uri,
+            "duration" to duration,
+            "size" to size
           )
         }
       } catch (e: Exception) {
@@ -193,7 +182,16 @@ class ExpoGlassesAudioModule : Module() {
         audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
         audioManager.startBluetoothSco()
         
-        val file = File(fileUri)
+        val file = if (fileUri.startsWith("file://")) {
+          val path = Uri.parse(fileUri).path
+          if (path.isNullOrEmpty()) {
+            promise.reject("ERR_INVALID_URI", "Invalid file URI: $fileUri")
+            return@AsyncFunction
+          }
+          File(path)
+        } else {
+          File(fileUri)
+        }
         if (!file.exists()) {
           promise.reject("ERR_FILE_NOT_FOUND", "Audio file not found: $fileUri")
           return@AsyncFunction
@@ -307,6 +305,8 @@ class ExpoGlassesAudioModule : Module() {
     OnDestroy {
       playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
       playbackTimeoutRunnable = null
+      recordingStopRunnable?.let { handler.removeCallbacks(it) }
+      recordingStopRunnable = null
       recorder.stop()
       player.stop()
     }

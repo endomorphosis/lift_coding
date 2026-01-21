@@ -176,6 +176,11 @@ class GlassesPlayer {
                 val chunkSize = readLEInt()
                 val chunkDataStart = raf.filePointer
 
+                // Validate chunk size to prevent issues with malformed WAV files
+                if (chunkSize < 0) {
+                    throw IllegalArgumentException("Invalid chunk size: $chunkSize for chunk $chunkId")
+                }
+
                 when (chunkId) {
                     "fmt " -> {
                         if (chunkSize < 16) {
@@ -200,8 +205,11 @@ class GlassesPlayer {
                 }
 
                 // Move to end of chunk (chunks are word-aligned; pad to even)
-                val chunkEnd = chunkDataStart + chunkSize
-                raf.seek(chunkEnd + (chunkSize % 2))
+                // This applies to all chunks except "data" which breaks out of the loop
+                if (chunkId != "data") {
+                    val chunkEnd = chunkDataStart + chunkSize
+                    raf.seek(chunkEnd + (chunkSize % 2))
+                }
             }
 
             val finalSampleRate = sampleRate ?: throw IllegalArgumentException("WAV missing fmt chunk")

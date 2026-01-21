@@ -570,7 +570,7 @@ async def dev_upload_audio(
             },
         )
 
-    data_base64 = request.get("data_base64")
+    data_base64 = request.get("data_base64") or request.get("audio_base64")
     audio_format = str(request.get("format") or "m4a").lower()
 
     if not isinstance(data_base64, str) or not data_base64.strip():
@@ -578,7 +578,7 @@ async def dev_upload_audio(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
                 "error": "invalid_request",
-                "message": "Missing required field: data_base64",
+                "message": "Missing required field: data_base64 (or audio_base64)",
             },
         )
 
