@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
 import { inferConfirmationDecision } from '../utils/voiceConfirmation';
 import { getProfile } from '../storage/profileStorage';
@@ -40,6 +41,10 @@ export default function CommandScreen() {
   const [ttsSound, setTtsSound] = useState(null);
   const [isTtsPlaying, setIsTtsPlaying] = useState(false);
   const [ttsLoading, setTtsLoading] = useState(false);
+
+  const nativeTtsPlaybackSubRef = useRef(null);
+  const ttsTempUriRef = useRef(null);
+  const ttsTempFilesRef = useRef(new Set());
 
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
@@ -131,10 +136,96 @@ export default function CommandScreen() {
     // Cleanup TTS sound on unmount
     return () => {
       if (ttsSound) {
-        ttsSound.unloadAsync();
+        (async () => {
+          try {
+            await ttsSound.unloadAsync();
+          } catch {
+            // ignore unload errors during cleanup
+          } finally {
+            setTtsSound(null);
+            setIsTtsPlaying(false);
+          }
+        })();
       }
+
+      if (nativeTtsPlaybackSubRef.current) {
+        try {
+          nativeTtsPlaybackSubRef.current.remove?.();
+        } catch {
+          // ignore
+        }
+        nativeTtsPlaybackSubRef.current = null;
+      }
+
+      if (ttsTempUriRef.current) {
+        FileSystem.deleteAsync(ttsTempUriRef.current, { idempotent: true }).catch(() => {});
+        ttsTempUriRef.current = null;
+      }
+
+      // Cleanup all tracked temp files
+      ttsTempFilesRef.current.forEach((uri) => {
+        FileSystem.deleteAsync(uri, { idempotent: true }).catch(() => {});
+      });
+      ttsTempFilesRef.current.clear();
     };
   }, []);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        const resultStr = String(reader.result);
+        const commaIndex = resultStr.indexOf(',');
+        if (commaIndex === -1) {
+          reject(new Error('Invalid data URL format'));
+          return;
+        }
+        const base64 = resultStr.substring(commaIndex + 1);
+        if (!base64) {
+          reject(new Error('Empty base64 data'));
+          return;
+        }
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const stopNativeTtsListener = () => {
+    if (!nativeTtsPlaybackSubRef.current) return;
+    try {
+      nativeTtsPlaybackSubRef.current.remove?.();
+    } catch {
+      // ignore
+    }
+    nativeTtsPlaybackSubRef.current = null;
+  };
+
+  const cleanupTtsTempFile = async (uri) => {
+    // If no URI is provided, clean up the current one
+    const fileUri = uri || ttsTempUriRef.current;
+    
+    // Clear current ref if cleaning up the current file
+    if (!uri || uri === ttsTempUriRef.current) {
+      ttsTempUriRef.current = null;
+    }
+    
+    if (!fileUri) return;
+    
+    // Remove from tracked files
+    ttsTempFilesRef.current.delete(fileUri);
+    
+    try {
+      await FileSystem.deleteAsync(fileUri, { idempotent: true });
+    } catch {
+      // ignore
+    }
+  };
 
   const playTTS = async (text) => {
     if (!text) return;
@@ -148,8 +239,19 @@ export default function CommandScreen() {
         setTtsSound(null);
       }
 
+      stopNativeTtsListener();
+      try {
+        if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+          await ExpoGlassesAudio.stopPlayback();
+        }
+      } catch {
+        // ignore
+      }
+      await cleanupTtsTempFile();
+
       // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+      const base64Audio = await blobToBase64(audioBlob);
 
       // Convert blob to base64
       const reader = new FileReader();
@@ -164,13 +266,10 @@ export default function CommandScreen() {
           encoding: FileSystem.EncodingType.Base64,
         });
 
-        // Load and play audio from file
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: tempUri },
-          { shouldPlay: true }
-        );
+      const hasNativePlayback =
+        ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
-        setTtsSound(newSound);
+      if (hasNativePlayback) {
         setIsTtsPlaying(true);
 
         // Set up playback status listener
@@ -180,8 +279,8 @@ export default function CommandScreen() {
             // Clean up temp file
             FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
           }
-        });
-      };
+        }
+      });
     } catch (err) {
       console.error('TTS playback failed:', err);
       Alert.alert('TTS Error', `Failed to play audio: ${err.message}`);
@@ -191,10 +290,22 @@ export default function CommandScreen() {
   };
 
   const stopTTS = async () => {
+    stopNativeTtsListener();
+
+    try {
+      if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+        await ExpoGlassesAudio.stopPlayback();
+      }
+    } catch {
+      // ignore
+    }
+
     if (ttsSound) {
       await ttsSound.stopAsync();
       setIsTtsPlaying(false);
     }
+
+    await cleanupTtsTempFile();
   };
 
   const handleSendCommand = async () => {
