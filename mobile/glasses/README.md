@@ -20,7 +20,7 @@ This directory contains audio diagnostics for testing and validating Bluetooth a
 
 📖 **Documentation:**
 - [Build & Test Guide](../BUILD_AND_TEST_GLASSES_PLAYER.md)
-- [Module README](../modules/glasses-audio-player/README.md)
+- [Module README](../modules/expo-glasses-audio/README.md)
 - [Implementation TODO](TODO.md)
 
 ## Purpose
@@ -85,12 +85,13 @@ mobile/glasses/
     ├── GlassesPlayer.kt
     └── GlassesAudioDiagnostics.kt
 
-mobile/modules/glasses-audio/           # React Native bridge ✅
-├── index.js                            # JS wrapper with fallback
-└── ios/                                # iOS bridge
-    ├── GlassesAudioModule.swift        # Native module implementation
-    ├── GlassesAudioModule.m            # ObjC bridge
-    └── GlassesAudio-Bridging-Header.h  # Bridging header
+mobile/modules/expo-glasses-audio/      # Local Expo module ✅ (current)
+├── index.ts
+├── ios/
+└── android/
+
+# Legacy (deprecated)
+# - mobile/modules/glasses-audio/
 ```
 
 ## Features
