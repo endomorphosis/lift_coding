@@ -196,21 +196,21 @@ class GlassesPlayer {
                         readLEInt() // byte rate
                         readLEShort() // block align
                         bitsPerSample = readLEShort().toInt()
-
-                        // Explicitly skip any remaining fmt chunk bytes (including padding)
-                        val fmtChunkEnd = chunkDataStart + chunkSize
-                        raf.seek(fmtChunkEnd + (chunkSize % 2))
+                        
+                        // Continue to general seek logic below
                     }
                     "data" -> {
                         dataOffset = raf.filePointer.toInt()
                         dataSize = chunkSize
                         break
                     }
-                    else -> {
-                        // Move to end of chunk (chunks are word-aligned; pad to even)
-                        val chunkEnd = chunkDataStart + chunkSize
-                        raf.seek(chunkEnd + (chunkSize % 2))
-                    }
+                }
+
+                // Move to end of chunk (chunks are word-aligned; pad to even)
+                // This applies to all chunks except "data" which breaks above
+                if (chunkId != "data") {
+                    val chunkEnd = chunkDataStart + chunkSize
+                    raf.seek(chunkEnd + (chunkSize % 2))
                 }
             }
 
