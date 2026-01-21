@@ -8,6 +8,10 @@ import android.net.Uri
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
+import expo.modules.glassesaudio.AudioRouteMonitor
+import expo.modules.glassesaudio.AudioSource
+import expo.modules.glassesaudio.GlassesRecorder
+import expo.modules.glassesaudio.GlassesPlayer
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +27,7 @@ class ExpoGlassesAudioModule : Module() {
   private lateinit var player: GlassesPlayer
   private val handler = Handler(Looper.getMainLooper())
   private var playbackTimeoutRunnable: Runnable? = null
+  private var recordingStopRunnable: Runnable? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -110,6 +115,16 @@ class ExpoGlassesAudioModule : Module() {
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
           
+          if (result != null) {
+            // Emit recording stopped event with actual recorded duration
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to result.durationSeconds))
+            
+            promise.resolve(
+              mapOf(
+                "uri" to result.file.absolutePath,
+                "duration" to result.durationSeconds,
+                "size" to result.sizeBytes.toInt()
+              )
           val finalFile = result?.file ?: outputFile
           val fileSize = if (finalFile.exists()) finalFile.length() else 0L
           val uri = Uri.fromFile(finalFile).toString()
@@ -123,7 +138,11 @@ class ExpoGlassesAudioModule : Module() {
               "duration" to durationSeconds,
               "size" to fileSize.toInt()
             )
-          )
+          } else {
+            // Emit recording stopped event with scheduled duration as fallback
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+            promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available")
+          }
         }, (durationSeconds * 1000).toLong())
         
       } catch (e: Exception) {
@@ -286,6 +305,8 @@ class ExpoGlassesAudioModule : Module() {
     OnDestroy {
       playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
       playbackTimeoutRunnable = null
+      recordingStopRunnable?.let { handler.removeCallbacks(it) }
+      recordingStopRunnable = null
       recorder.stop()
       player.stop()
     }

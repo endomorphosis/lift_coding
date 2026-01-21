@@ -38,7 +38,15 @@ class GlassesRecorder {
     @Volatile
     private var isRecording = false
     private var outputFile: File? = null
+    @Volatile
     private var totalBytesWritten = 0L
+    private var startedAtMs: Long? = null
+
+    @Synchronized
+    fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO) {
+        if (isRecording || recorder != null) {
+            throw IllegalStateException("Recorder is already running")
+        }
 
     fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
         val channel = AudioFormat.CHANNEL_IN_MONO
@@ -76,10 +84,8 @@ class GlassesRecorder {
         // Start background thread to read and write audio data
         recordingThread = Thread {
             writeAudioData(r, outputFile, bufferSize)
-        }
+        }.apply { name = "GlassesRecorderThread" }
         recordingThread?.start()
-        
-        return r
     }
 
     private fun writeAudioData(recorder: AudioRecord, file: File, bufferSize: Int) {
@@ -133,11 +139,18 @@ class GlassesRecorder {
         // Then signal the thread to finish
         isRecording = false
         recordingThread?.join(RECORDING_THREAD_JOIN_TIMEOUT_MS)
+        if (recordingThread?.isAlive == true) {
+            recordingThread?.interrupt()
+        }
         recordingThread = null
-        
-        recorder?.release()
+
+        try {
+            recorder?.release()
+        } catch (e: Exception) {
+            Log.w(TAG, "Error releasing AudioRecord: ${e.message}")
+        }
         recorder = null
-        
+
         // Update WAV header with actual data size
         if (file != null && file.exists()) {
             try {
