@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,11 @@ import {
   TouchableOpacity,
   Switch,
   Modal,
+  Platform,
 } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
 import { inferConfirmationDecision } from '../utils/voiceConfirmation';
 import { getProfile } from '../storage/profileStorage';
@@ -39,6 +41,9 @@ export default function CommandScreen() {
   const [ttsSound, setTtsSound] = useState(null);
   const [isTtsPlaying, setIsTtsPlaying] = useState(false);
   const [ttsLoading, setTtsLoading] = useState(false);
+
+  const nativeTtsPlaybackSubRef = useRef(null);
+  const ttsTempUriRef = useRef(null);
 
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
@@ -83,8 +88,69 @@ export default function CommandScreen() {
       if (ttsSound) {
         ttsSound.unloadAsync();
       }
+
+      if (nativeTtsPlaybackSubRef.current) {
+        try {
+          nativeTtsPlaybackSubRef.current.remove?.();
+        } catch {
+          // ignore
+        }
+        nativeTtsPlaybackSubRef.current = null;
+      }
+
+      if (ttsTempUriRef.current) {
+        FileSystem.deleteAsync(ttsTempUriRef.current, { idempotent: true }).catch(() => {});
+        ttsTempUriRef.current = null;
+      }
     };
   }, []);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        const resultStr = String(reader.result);
+        const commaIndex = resultStr.indexOf(',');
+        if (commaIndex === -1) {
+          reject(new Error('Invalid data URL format'));
+          return;
+        }
+        const base64 = resultStr.substring(commaIndex + 1);
+        if (!base64) {
+          reject(new Error('Empty base64 data'));
+          return;
+        }
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const stopNativeTtsListener = () => {
+    if (!nativeTtsPlaybackSubRef.current) return;
+    try {
+      nativeTtsPlaybackSubRef.current.remove?.();
+    } catch {
+      // ignore
+    }
+    nativeTtsPlaybackSubRef.current = null;
+  };
+
+  const cleanupTtsTempFile = async () => {
+    const uri = ttsTempUriRef.current;
+    ttsTempUriRef.current = null;
+    if (!uri) return;
+    try {
+      await FileSystem.deleteAsync(uri, { idempotent: true });
+    } catch {
+      // ignore
+    }
+  };
 
   const playTTS = async (text) => {
     if (!text) return;
@@ -98,40 +164,64 @@ export default function CommandScreen() {
         setTtsSound(null);
       }
 
+      stopNativeTtsListener();
+      try {
+        if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+          await ExpoGlassesAudio.stopPlayback();
+        }
+      } catch {
+        // ignore
+      }
+      await cleanupTtsTempFile();
+
       // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+      const base64Audio = await blobToBase64(audioBlob);
 
-      // Convert blob to base64
-      const reader = new FileReader();
-      reader.readAsDataURL(audioBlob);
-      reader.onloadend = async () => {
-        const base64Audio = reader.result;
+      const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
+      ttsTempUriRef.current = tempUri;
+      await FileSystem.writeAsStringAsync(tempUri, base64Audio, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
-        // Write to temporary file for better compatibility
-        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
-        const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
-        await FileSystem.writeAsStringAsync(tempUri, base64Data, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
+      const hasNativePlayback =
+        ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
-        // Load and play audio from file
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: tempUri },
-          { shouldPlay: true }
-        );
-
-        setTtsSound(newSound);
+      if (hasNativePlayback) {
         setIsTtsPlaying(true);
 
-        // Set up playback status listener
-        newSound.setOnPlaybackStatusUpdate((status) => {
-          if (status.didJustFinish) {
-            setIsTtsPlaying(false);
-            // Clean up temp file
-            FileSystem.deleteAsync(tempUri, { idempotentError: true }).catch(() => {});
-          }
-        });
-      };
+        if (typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function') {
+          nativeTtsPlaybackSubRef.current = ExpoGlassesAudio.addPlaybackStatusListener(
+            async (event) => {
+              if (!event?.isPlaying) {
+                stopNativeTtsListener();
+                setIsTtsPlaying(false);
+                await cleanupTtsTempFile();
+              }
+            }
+          );
+        }
+
+        const nativeUri =
+          Platform.OS === 'android' ? tempUri.replace(/^file:\/\//, '') : tempUri;
+        await ExpoGlassesAudio.playAudio(nativeUri);
+        return;
+      }
+
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: tempUri },
+        { shouldPlay: true }
+      );
+
+      setTtsSound(newSound);
+      setIsTtsPlaying(true);
+
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status?.didJustFinish) {
+          setIsTtsPlaying(false);
+          cleanupTtsTempFile();
+        }
+      });
     } catch (err) {
       console.error('TTS playback failed:', err);
       Alert.alert('TTS Error', `Failed to play audio: ${err.message}`);
@@ -141,10 +231,22 @@ export default function CommandScreen() {
   };
 
   const stopTTS = async () => {
+    stopNativeTtsListener();
+
+    try {
+      if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+        await ExpoGlassesAudio.stopPlayback();
+      }
+    } catch {
+      // ignore
+    }
+
     if (ttsSound) {
       await ttsSound.stopAsync();
       setIsTtsPlaying(false);
     }
+
+    await cleanupTtsTempFile();
   };
 
   const handleSendCommand = async () => {
