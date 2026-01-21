@@ -19,6 +19,9 @@
       "bundleIdentifier": "com.handsfree.mobile",
       "infoPlist": {
         "UIBackgroundModes": ["audio", "remote-notification"],
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoadsInLocalNetwork": true
+        },
         "NSMicrophoneUsageDescription": "This app needs microphone access to record audio commands for your Meta AI Glasses.",
         "NSBluetoothAlwaysUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback.",
         "NSBluetoothPeripheralUsageDescription": "This app needs Bluetooth access to connect to your Meta AI Glasses for audio playback."

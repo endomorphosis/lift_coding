@@ -168,7 +168,7 @@ class ExpoGlassesAudioModule : Module() {
             "duration" to duration,
             "size" to size
           )
-        )
+        }
       } catch (e: Exception) {
         promise.reject("ERR_STOP_RECORDING", "Failed to stop recording: ${e.message}", e)
       }
