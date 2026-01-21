@@ -196,7 +196,7 @@ class GlassesPlayer {
                         readLEInt() // byte rate
                         readLEShort() // block align
                         bitsPerSample = readLEShort().toInt()
-                        // Fall through to unified seeking logic below
+                        // Continue to unified seeking logic after when block
                     }
                     "data" -> {
                         dataOffset = raf.filePointer.toInt()

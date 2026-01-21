@@ -80,23 +80,23 @@ class ExpoGlassesAudioModule : Module() {
         
         // Parse audio source
         val audioSource = when (audioSourceString) {
-          "phone" -> glasses.AudioSource.PHONE
-          "glasses" -> glasses.AudioSource.GLASSES
-          else -> glasses.AudioSource.AUTO
+          "phone" -> AudioSource.PHONE
+          "glasses" -> AudioSource.GLASSES
+          else -> AudioSource.AUTO
         }
         
         // Configure Bluetooth SCO based on audio source
         when (audioSource) {
-          glasses.AudioSource.GLASSES -> {
+          AudioSource.GLASSES -> {
             // Enable Bluetooth SCO for glasses/Bluetooth mic
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             audioManager.startBluetoothSco()
           }
-          glasses.AudioSource.PHONE -> {
+          AudioSource.PHONE -> {
             // Use phone mic - don't enable Bluetooth SCO
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
           }
-          glasses.AudioSource.AUTO -> {
+          AudioSource.AUTO -> {
             // Auto mode - enable SCO if available
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             if (audioManager.isBluetoothScoAvailableOffCall) {
