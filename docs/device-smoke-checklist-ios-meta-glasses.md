@@ -14,6 +14,10 @@ This is a quick, copy/paste checklist for validating end-to-end on a physical iP
 curl -sS http://localhost:8080/v1/status | cat
 ```
 
+Expected:
+- HTTP 200
+- JSON payload indicating the server is up (exact fields may vary)
+
 If testing from a phone, use your laptop’s LAN IP (example):
 
 ```bash
@@ -39,7 +43,13 @@ curl -sS -X POST "$BACKEND_URL/v1/dev/audio" \
   -d '{"data_base64":"'"$B64"'","format":"wav"}' | cat
 ```
 
-Expected: JSON response with a `uri`.
+Expected:
+- HTTP 200
+- JSON response that includes a `uri` field (often a `file://...` URI)
+
+Common failure modes:
+- 401/403: backend not in dev auth mode
+- 400: wrong payload field (must be `data_base64`)
 
 ## 3) Mobile: install/run an iOS dev build
 
@@ -70,6 +80,10 @@ In the app:
 - Confirm the native module is available (development build required).
 - Confirm the audio route shows Bluetooth/glasses as the active input/output when in “glasses mode”.
 
+Expected (high level):
+- “Native module available” indicator is true/green
+- Route shows Bluetooth/glasses in the input/output names
+
 ## 6) Record → upload → command pipeline (dev)
 
 In **Glasses Diagnostics** (or whichever screen drives the flow), run:
@@ -77,6 +91,11 @@ In **Glasses Diagnostics** (or whichever screen drives the flow), run:
 2. Upload to `POST /v1/dev/audio`.
 3. Send to `/v1/command`.
 4. (Optional) TTS/playback if enabled.
+
+Expected (high level):
+- Recording returns a non-empty `uri`
+- Upload returns 200 and a JSON payload containing a `uri`
+- Command request returns 200 with a response payload (exact shape depends on agent setup)
 
 If upload fails:
 - Ensure the payload field is `data_base64` (not `audio_data`).
