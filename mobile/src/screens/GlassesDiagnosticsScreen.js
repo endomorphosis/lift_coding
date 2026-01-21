@@ -290,9 +290,12 @@ export default function GlassesDiagnosticsScreen() {
           // if the user doesn't manually stop it first.
           const recordingPromise = ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
           recordingPromiseRef.current = recordingPromise;
+          // Recording has started; update UI state immediately.
+          setIsRecording(true);
           recordingPromise
             .then((result) => {
-              setIsRecording(true);
+              // Recording has completed successfully.
+              setIsRecording(false);
               if (result?.uri) {
                 setLastRecordingUri(result.uri);
               }
