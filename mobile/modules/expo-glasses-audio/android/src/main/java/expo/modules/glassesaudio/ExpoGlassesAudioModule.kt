@@ -114,44 +114,32 @@ class ExpoGlassesAudioModule : Module() {
         val outputDir = context.getExternalFilesDir(null)
         val outputFile = File(outputDir, filename)
         
-        // Start recording with output file and audio source
+        // Start recording with specified audio source
         recorder.start(outputFile, audioSource)
         
-        // Emit recording started event after successful start
-        sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
-        
         // Schedule stop after duration
-        synchronized(this@ExpoGlassesAudioModule) {
-          val stopRunnable = Runnable {
-            try {
-              val result = recorder.stop()
-              
-              // Emit recording stopped event
-              sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-              
-              if (result != null) {
-                promise.resolve(
-                  mapOf(
-                    "uri" to result.file.absolutePath,
-                    "duration" to result.durationSeconds,
-                    "size" to result.sizeBytes
-                  )
-                )
-              } else {
-                promise.reject("ERR_STOP_RECORDING", "Recording stopped but no result available - recorder may have been stopped previously")
-              }
-            } finally {
-              // Always cleanup audio manager state (get fresh instance)
-              val audioMgr = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-              audioMgr.stopBluetoothSco()
-              audioMgr.mode = AudioManager.MODE_NORMAL
-              // Clear runnable reference
-              recordingStopRunnable = null
-            }
+        handler.postDelayed({
+          val result = recorder.stop()
+          audioManager.stopBluetoothSco()
+          audioManager.mode = AudioManager.MODE_NORMAL
+          
+          if (result != null) {
+            // Emit recording stopped event with actual recorded duration
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to result.durationSeconds))
+            
+            promise.resolve(
+              mapOf(
+                "uri" to result.file.absolutePath,
+                "duration" to result.durationSeconds,
+                "size" to result.sizeBytes.toInt()
+              )
+            )
+          } else {
+            // Emit recording stopped event with scheduled duration as fallback
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+            promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available")
           }
-          recordingStopRunnable = stopRunnable
-          handler.postDelayed(stopRunnable, (durationSeconds * 1000).toLong())
-        }
+        }, (durationSeconds * 1000).toLong())
         
       } catch (e: Exception) {
         promise.reject("ERR_START_RECORDING", "Failed to start recording: ${e.message}", e)
