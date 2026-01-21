@@ -140,10 +140,11 @@ class ExpoGlassesAudio extends EventEmitter {
   /**
    * Start recording audio to a WAV file.
    * @param durationSeconds Duration of recording in seconds
+   * @param audioSource Optional audio source: 'phone', 'glasses', or 'auto' (default)
    * @returns Promise with recording result (uri, duration, size)
    */
-  async startRecording(durationSeconds: number): Promise<RecordingResult> {
-    return await ExpoGlassesAudioModule.startRecording(durationSeconds);
+  async startRecording(durationSeconds: number, audioSource?: string): Promise<RecordingResult> {
+    return await ExpoGlassesAudioModule.startRecording(durationSeconds, audioSource);
   }
 
   /**
