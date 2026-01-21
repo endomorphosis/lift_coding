@@ -35,10 +35,11 @@ function isNativeGlassesPlaybackAvailable() {
 }
 
 async function playViaNativeGlasses(fileUri) {
-  return await new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     let timeoutId = null;
     let subscription = null;
     let sawStart = false;
+    let settled = false;
 
     const cleanup = () => {
       if (timeoutId) {
@@ -55,9 +56,11 @@ async function playViaNativeGlasses(fileUri) {
 
     try {
       subscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+        if (settled) return; // Prevent execution after promise is settled
         if (!event || typeof event !== 'object') return;
         if (event.error) {
           cleanup();
+          settled = true;
           reject(new Error(event.error));
           return;
         }
@@ -66,18 +69,28 @@ async function playViaNativeGlasses(fileUri) {
         }
         if (event.isPlaying === false && sawStart) {
           cleanup();
+          settled = true;
           resolve();
         }
       });
 
       timeoutId = setTimeout(() => {
+        if (settled) return; // Prevent execution after promise is settled
         cleanup();
+        settled = true;
         resolve(); // Timeout fallback: avoid blocking the queue forever
       }, NATIVE_PLAYBACK_TIMEOUT_MS);
 
-      await ExpoGlassesAudio.playAudio(fileUri);
+      ExpoGlassesAudio.playAudio(fileUri).catch((error) => {
+        if (settled) return; // Prevent execution after promise is settled
+        cleanup();
+        settled = true;
+        reject(error);
+      });
     } catch (error) {
+      if (settled) return; // Prevent execution after promise is settled
       cleanup();
+      settled = true;
       reject(error);
     }
   });

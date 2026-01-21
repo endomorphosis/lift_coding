@@ -79,6 +79,15 @@ export default function TTSScreen() {
       });
     } catch (err) {
       setError(err.message);
+      if (tempFileUri) {
+        try {
+          await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+        } catch (cleanupError) {
+          // Ignore cleanup errors to avoid masking the original error
+        } finally {
+          tempFileUri = null;
+        }
+      }
     } finally {
       setLoading(false);
     }
