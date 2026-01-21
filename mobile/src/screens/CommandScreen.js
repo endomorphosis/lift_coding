@@ -87,9 +87,16 @@ export default function CommandScreen() {
     // Cleanup TTS sound on unmount
     return () => {
       if (ttsSound) {
-        ttsSound.unloadAsync();
-        setTtsSound(null);
-        setIsTtsPlaying(false);
+        (async () => {
+          try {
+            await ttsSound.unloadAsync();
+          } catch {
+            // ignore unload errors during cleanup
+          } finally {
+            setTtsSound(null);
+            setIsTtsPlaying(false);
+          }
+        })();
       }
 
       if (nativeTtsPlaybackSubRef.current) {
