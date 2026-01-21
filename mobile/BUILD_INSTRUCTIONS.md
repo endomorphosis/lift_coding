@@ -154,10 +154,6 @@ ffprobe glasses_test_*.wav
 - Run `npx expo prebuild --clean` again
 - Ensure you're opening `.xcworkspace`, not `.xcodeproj`
 
-**"Bridging header not found"**
-- Check bridging header path in Build Settings
-- Verify file exists at specified path
-
 **"Undefined symbols for architecture arm64"**
 - Clean build folder (⌘⇧K)
 - Delete `ios/build/` directory
@@ -272,5 +268,5 @@ After confirming iOS works:
 ## Support
 
 - iOS Issues: Check `mobile/glasses/ios/IMPLEMENTATION.md`
-- Module API: Check `mobile/modules/glasses-audio/README.md`
+- Module API: Check `mobile/modules/expo-glasses-audio/README.md`
 - General: Check `mobile/glasses/README.md`
