@@ -25,7 +25,7 @@ This document is the recommended execution order for getting to an end-to-end MV
 - OpenAPI contract: `spec/openapi.yaml`
 
 **Verification checklist**:
-- [ ] `curl GET http://localhost:8000/v1/status` returns `{"status": "ok"}`
+- [ ] `curl GET http://localhost:8080/v1/status` returns `{"status": "ok"}`
 - [ ] `POST /v1/command` with `{"input": {"type": "text", "text": "inbox"}}` returns `CommandResponse` with non-empty `spoken_text`
 - [ ] `POST /v1/tts` with `{"text": "hello"}` returns playable audio bytes
 - [ ] Play TTS response locally on laptop with `ffplay` or similar

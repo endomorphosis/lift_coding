@@ -88,7 +88,7 @@ EOF
 **Example**:
 
 ```bash
-PORT=8000
+PORT=8080
 HOST=0.0.0.0
 LOG_LEVEL=debug
 ```
