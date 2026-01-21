@@ -27,6 +27,9 @@ class GlassesRecorder {
         private const val TAG = "GlassesRecorder"
         private const val WAV_HEADER_SIZE = 44
         private const val RECORDING_THREAD_JOIN_TIMEOUT_MS = 3000L
+        private const val SAMPLE_RATE = 16000
+        private const val CHANNELS = 1 // MONO
+        private const val BYTES_PER_SAMPLE = 2 // 16-bit = 2 bytes per sample
     }
     
     private var recorder: AudioRecord? = null
@@ -41,11 +44,10 @@ class GlassesRecorder {
     private var bytesPerSample: Int = 0
 
     fun start(outputFile: File, audioSource: AudioSource = AudioSource.AUTO): AudioRecord {
-        val sampleRate = 16000
         val channel = AudioFormat.CHANNEL_IN_MONO
         val encoding = AudioFormat.ENCODING_PCM_16BIT
-        val minBufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding)
-        val bufferSize = if (minBufferSize > 0) minBufferSize else (sampleRate * 2)
+        val minBufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, channel, encoding)
+        val bufferSize = if (minBufferSize > 0) minBufferSize else (SAMPLE_RATE * 2)
 
         // Select audio source based on preference
         val androidAudioSource = when (audioSource) {
@@ -56,7 +58,7 @@ class GlassesRecorder {
 
         val r = AudioRecord(
             androidAudioSource,
-            sampleRate,
+            SAMPLE_RATE,
             channel,
             encoding,
             bufferSize
@@ -69,12 +71,12 @@ class GlassesRecorder {
         recordingStartedAtMs = System.currentTimeMillis()
         
         // Store audio format parameters for duration calculation
-        this.sampleRate = sampleRate
-        this.channels = 1 // MONO
-        this.bytesPerSample = 2 // 16-bit = 2 bytes per sample
+        this.sampleRate = SAMPLE_RATE
+        this.channels = CHANNELS
+        this.bytesPerSample = BYTES_PER_SAMPLE
 
         // Write initial WAV header (will be updated with correct sizes on stop)
-        writeWavHeader(outputFile, sampleRate, 1, 16)
+        writeWavHeader(outputFile, SAMPLE_RATE, CHANNELS, BYTES_PER_SAMPLE * 8)
         
         r.startRecording()
         recorder = r
