@@ -37,8 +37,9 @@ export default function GlassesDiagnosticsScreen() {
     const lower = String(uri).toLowerCase();
 
     // Match file extension before query params or hash fragments
-    // Only match supported formats: wav, mp3, opus, m4a
-    const match = lower.match(/\.((?:wav|mp3|opus|m4a))(?=(\?|#|$))/);
+    // Build regex pattern dynamically from SUPPORTED_AUDIO_FORMATS
+    const pattern = new RegExp(`\\.((?:${SUPPORTED_AUDIO_FORMATS.join('|')}))(?=(\\?|#|$))`);
+    const match = lower.match(pattern);
     if (match?.[1]) return match[1];
 
     return 'm4a';
