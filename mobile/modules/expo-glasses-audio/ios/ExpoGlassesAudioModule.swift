@@ -87,7 +87,10 @@ public class ExpoGlassesAudioModule: Module {
 
           // Schedule stop after duration
           let workItem = DispatchWorkItem { [weak self] in
-            self?.finishRecording(reason: "timer", promisedDurationSeconds: durationSeconds)
+            guard let self = self else { return }
+            self.recordingQueue.async {
+              self.finishRecording(reason: "timer", promisedDurationSeconds: durationSeconds)
+            }
           }
           self.recordingStopWorkItem?.cancel()
           self.recordingStopWorkItem = workItem
@@ -221,6 +224,7 @@ public class ExpoGlassesAudioModule: Module {
     }
   }
 
+  // This method must be called on recordingQueue to ensure thread safety
   private func finishRecording(
     reason: String,
     promisedDurationSeconds: Int?,
