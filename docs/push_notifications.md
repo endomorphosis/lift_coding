@@ -262,7 +262,7 @@ pytest tests/test_notification_delivery.py
 
 2. **Create a subscription:**
    ```bash
-   curl -X POST http://localhost:8000/v1/notifications/subscriptions \
+  curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -H "X-User-Id: 00000000-0000-0000-0000-000000000001" \
      -d '{"endpoint": "https://push.example.com/test"}'
@@ -277,7 +277,7 @@ pytest tests/test_notification_delivery.py
 
 5. **Verify polling still works:**
    ```bash
-   curl http://localhost:8000/v1/notifications \
+  curl http://localhost:8080/v1/notifications \
      -H "X-User-ID: 00000000-0000-0000-0000-000000000001"
    ```
 

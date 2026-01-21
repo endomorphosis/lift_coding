@@ -929,7 +929,7 @@ Test the backend dev endpoint directly:
 echo "test" | base64 > /tmp/test_audio.b64
 
 # Upload to dev endpoint
-curl -X POST http://localhost:8000/v1/dev/audio \
+curl -X POST http://localhost:8080/v1/dev/audio \
   -H "Content-Type: application/json" \
   -d '{"data_base64": "'$(cat /tmp/test_audio.b64)'", "format": "m4a"}'
 
