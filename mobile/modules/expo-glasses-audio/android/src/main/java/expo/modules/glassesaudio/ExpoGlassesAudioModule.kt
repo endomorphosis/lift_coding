@@ -8,6 +8,7 @@ import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
 import expo.modules.glassesaudio.AudioRouteMonitor
+import expo.modules.glassesaudio.AudioSource
 import expo.modules.glassesaudio.GlassesRecorder
 import expo.modules.glassesaudio.GlassesPlayer
 import java.io.File
@@ -140,9 +141,10 @@ class ExpoGlassesAudioModule : Module() {
                 promise.reject("ERR_STOP_RECORDING", "Recording stopped but no result available - recorder may have been stopped previously")
               }
             } finally {
-              // Always cleanup audio manager state
-              audioManager.stopBluetoothSco()
-              audioManager.mode = AudioManager.MODE_NORMAL
+              // Always cleanup audio manager state (get fresh instance)
+              val audioMgr = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+              audioMgr.stopBluetoothSco()
+              audioMgr.mode = AudioManager.MODE_NORMAL
               // Clear runnable reference
               recordingStopRunnable = null
             }
