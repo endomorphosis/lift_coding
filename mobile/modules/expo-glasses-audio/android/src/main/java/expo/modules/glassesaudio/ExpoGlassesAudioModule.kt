@@ -25,6 +25,7 @@ class ExpoGlassesAudioModule : Module() {
   private lateinit var player: GlassesPlayer
   private val handler = Handler(Looper.getMainLooper())
   private var playbackTimeoutRunnable: Runnable? = null
+  private var recordingStopRunnable: Runnable? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoGlassesAudio")
@@ -119,26 +120,37 @@ class ExpoGlassesAudioModule : Module() {
         sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
         
         // Schedule stop after duration
-        handler.postDelayed({
-          val result = recorder.stop()
-          audioManager.stopBluetoothSco()
-          audioManager.mode = AudioManager.MODE_NORMAL
-          
-          // Emit recording stopped event
-          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-          
-          if (result != null) {
-            promise.resolve(
-              mapOf(
-                "uri" to result.file.absolutePath,
-                "duration" to result.durationSeconds,
-                "size" to result.sizeBytes.toInt()
-              )
-            )
-          } else {
-            promise.reject("ERR_STOP_RECORDING", "Recording was not active or failed to complete properly")
+        synchronized(this@ExpoGlassesAudioModule) {
+          val stopRunnable = Runnable {
+            try {
+              val result = recorder.stop()
+              
+              // Emit recording stopped event
+              sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+              
+              if (result != null) {
+                promise.resolve(
+                  mapOf(
+                    "uri" to result.file.absolutePath,
+                    "duration" to result.durationSeconds,
+                    "size" to result.sizeBytes
+                  )
+                )
+              } else {
+                promise.reject("ERR_STOP_RECORDING", "Recording stopped but no result available - recorder may have been stopped previously")
+              }
+            } finally {
+              // Always cleanup audio manager state
+              audioManager.stopBluetoothSco()
+              audioManager.mode = AudioManager.MODE_NORMAL
+              synchronized(this@ExpoGlassesAudioModule) {
+                recordingStopRunnable = null
+              }
+            }
           }
-        }, (durationSeconds * 1000).toLong())
+          recordingStopRunnable = stopRunnable
+          handler.postDelayed(stopRunnable, (durationSeconds * 1000).toLong())
+        }
         
       } catch (e: Exception) {
         promise.reject("ERR_START_RECORDING", "Failed to start recording: ${e.message}", e)
@@ -147,6 +159,12 @@ class ExpoGlassesAudioModule : Module() {
 
     AsyncFunction("stopRecording") { promise: Promise ->
       try {
+        // Cancel any pending scheduled stop
+        synchronized(this@ExpoGlassesAudioModule) {
+          recordingStopRunnable?.let { handler.removeCallbacks(it) }
+          recordingStopRunnable = null
+        }
+        
         val result = recorder.stop()
         
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -158,7 +176,7 @@ class ExpoGlassesAudioModule : Module() {
             mapOf(
               "uri" to result.file.absolutePath,
               "duration" to result.durationSeconds,
-              "size" to result.sizeBytes.toInt()
+              "size" to result.sizeBytes
             )
           )
         } else {
@@ -297,6 +315,8 @@ class ExpoGlassesAudioModule : Module() {
     OnDestroy {
       playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
       playbackTimeoutRunnable = null
+      recordingStopRunnable?.let { handler.removeCallbacks(it) }
+      recordingStopRunnable = null
       recorder.stop()
       player.stop()
     }
