@@ -14,6 +14,7 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import ExpoGlassesAudio from 'expo-glasses-audio';
 import { simulateNotificationForDev } from '../push/notificationsHandler';
+import * as FileSystem from 'expo-file-system';
 
 export default function TTSScreen() {
   const [text, setText] = useState('');
@@ -83,6 +84,20 @@ export default function TTSScreen() {
     setLoading(true);
     setError(null);
 
+    let tempFileUri = null;
+    let cleanedUp = false;
+
+    const cleanupTempFile = async () => {
+      if (!cleanedUp && tempFileUri) {
+        cleanedUp = true;
+        try {
+          await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+        } catch (error) {
+          // Ignore cleanup errors
+        }
+      }
+    };
+
     try {
       // Stop any currently playing sound
       if (sound) {
@@ -97,58 +112,31 @@ export default function TTSScreen() {
       // Fetch TTS audio (explicit format)
       const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
 
-      // Convert blob to base64, write to temp file
-      const base64Audio = await blobToBase64(audioBlob);
-      const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
-      tempFileUriRef.current = tempUri;
-      await FileSystem.writeAsStringAsync(tempUri, base64Audio, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
+      // Convert blob to base64 for React Native
+      const reader = new FileReader();
+      reader.readAsDataURL(audioBlob);
+      reader.onloadend = async () => {
+        const base64Audio = reader.result;
 
-      // Prefer native glasses playback when available
-      const hasNativePlayback =
-        ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
-
-      if (hasNativePlayback) {
-        setIsPlaying(true);
-
-        nativePlaybackSubscriptionRef.current =
-          typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function'
-            ? ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
-                if (!event?.isPlaying) {
-                  stopNativePlaybackListener();
-                  setIsPlaying(false);
-                  await cleanupTempFile();
-                }
-              })
-            : null;
-
-        const nativeUri =
-          Platform.OS === 'android'
-            ? tempUri.replace(/^file:\/\//, '')
-            : tempUri;
-
-        await ExpoGlassesAudio.playAudio(nativeUri);
-        return;
-      }
-
-      // Fallback to Expo AV playback
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: tempUri },
-        { shouldPlay: true }
-      );
+        // Load and play audio
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: base64Audio },
+          { shouldPlay: true }
+        );
 
       setSound(newSound);
       setIsPlaying(true);
 
-      newSound.setOnPlaybackStatusUpdate((status) => {
-        if (status?.didJustFinish) {
-          setIsPlaying(false);
-          cleanupTempFile();
-        }
-      });
+        // Set up playback status listener
+        newSound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            setIsPlaying(false);
+          }
+        });
+      };
     } catch (err) {
       setError(err.message);
+      await cleanupTempFile();
     } finally {
       setLoading(false);
     }
