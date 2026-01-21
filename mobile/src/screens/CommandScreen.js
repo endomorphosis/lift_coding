@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,11 @@ import {
   TouchableOpacity,
   Switch,
   Modal,
+  Platform,
 } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
 import { inferConfirmationDecision } from '../utils/voiceConfirmation';
 import { getProfile } from '../storage/profileStorage';
@@ -40,6 +42,10 @@ export default function CommandScreen() {
   const [isTtsPlaying, setIsTtsPlaying] = useState(false);
   const [ttsLoading, setTtsLoading] = useState(false);
 
+  const nativeTtsPlaybackSubRef = useRef(null);
+  const ttsTempUriRef = useRef(null);
+  const ttsTempFilesRef = useRef(new Set());
+
   // Dev mode toggle
   const [showDebugPanel, setShowDebugPanel] = useState(true);
   const [autoPlayTts, setAutoPlayTts] = useState(true);
@@ -53,6 +59,55 @@ export default function CommandScreen() {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [voiceConfirmLoading, setVoiceConfirmLoading] = useState(false);
   const [voiceConfirmTranscript, setVoiceConfirmTranscript] = useState(null);
+
+  const RECORDING_OPTIONS_M4A = {
+    android: {
+      extension: '.m4a',
+      outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+      audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      bitRate: 128000,
+    },
+    ios: {
+      extension: '.m4a',
+      audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
+      outputFormat: Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_MPEG4AAC,
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      bitRate: 128000,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: false,
+    },
+    web: {
+      mimeType: 'audio/webm',
+      bitsPerSecond: 128000,
+    },
+  };
+
+  const inferAudioFormatFromUri = (uri) => {
+    if (!uri) return 'm4a';
+    const lower = String(uri).toLowerCase();
+
+    // Handle common/expected extensions
+    if (lower.endsWith('.wav')) return 'wav';
+    if (lower.endsWith('.mp3')) return 'mp3';
+    if (lower.endsWith('.opus')) return 'opus';
+    if (lower.endsWith('.m4a')) return 'm4a';
+
+    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
+    if (lower.endsWith('.caf')) return 'm4a';
+
+    // Fallback: try to parse last extension
+    const match = lower.match(/\.([a-z0-9]+)(\?|#|$)/);
+    if (match?.[1] === 'wav') return 'wav';
+    if (match?.[1] === 'mp3') return 'mp3';
+    if (match?.[1] === 'opus') return 'opus';
+    if (match?.[1] === 'm4a') return 'm4a';
+
+    return 'm4a';
+  };
 
   useEffect(() => {
     // Request audio permissions on mount
@@ -81,10 +136,96 @@ export default function CommandScreen() {
     // Cleanup TTS sound on unmount
     return () => {
       if (ttsSound) {
-        ttsSound.unloadAsync();
+        (async () => {
+          try {
+            await ttsSound.unloadAsync();
+          } catch {
+            // ignore unload errors during cleanup
+          } finally {
+            setTtsSound(null);
+            setIsTtsPlaying(false);
+          }
+        })();
       }
+
+      if (nativeTtsPlaybackSubRef.current) {
+        try {
+          nativeTtsPlaybackSubRef.current.remove?.();
+        } catch {
+          // ignore
+        }
+        nativeTtsPlaybackSubRef.current = null;
+      }
+
+      if (ttsTempUriRef.current) {
+        FileSystem.deleteAsync(ttsTempUriRef.current, { idempotent: true }).catch(() => {});
+        ttsTempUriRef.current = null;
+      }
+
+      // Cleanup all tracked temp files
+      ttsTempFilesRef.current.forEach((uri) => {
+        FileSystem.deleteAsync(uri, { idempotent: true }).catch(() => {});
+      });
+      ttsTempFilesRef.current.clear();
     };
   }, []);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        const resultStr = String(reader.result);
+        const commaIndex = resultStr.indexOf(',');
+        if (commaIndex === -1) {
+          reject(new Error('Invalid data URL format'));
+          return;
+        }
+        const base64 = resultStr.substring(commaIndex + 1);
+        if (!base64) {
+          reject(new Error('Empty base64 data'));
+          return;
+        }
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Failed to read audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const stopNativeTtsListener = () => {
+    if (!nativeTtsPlaybackSubRef.current) return;
+    try {
+      nativeTtsPlaybackSubRef.current.remove?.();
+    } catch {
+      // ignore
+    }
+    nativeTtsPlaybackSubRef.current = null;
+  };
+
+  const cleanupTtsTempFile = async (uri) => {
+    // If no URI is provided, clean up the current one
+    const fileUri = uri || ttsTempUriRef.current;
+    
+    // Clear current ref if cleaning up the current file
+    if (!uri || uri === ttsTempUriRef.current) {
+      ttsTempUriRef.current = null;
+    }
+    
+    if (!fileUri) return;
+    
+    // Remove from tracked files
+    ttsTempFilesRef.current.delete(fileUri);
+    
+    try {
+      await FileSystem.deleteAsync(fileUri, { idempotent: true });
+    } catch {
+      // ignore
+    }
+  };
 
   const playTTS = async (text) => {
     if (!text) return;
@@ -98,8 +239,19 @@ export default function CommandScreen() {
         setTtsSound(null);
       }
 
+      stopNativeTtsListener();
+      try {
+        if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+          await ExpoGlassesAudio.stopPlayback();
+        }
+      } catch {
+        // ignore
+      }
+      await cleanupTtsTempFile();
+
       // Fetch TTS audio
-      const audioBlob = await fetchTTS(text);
+      const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+      const base64Audio = await blobToBase64(audioBlob);
 
       // Convert blob to base64
       const reader = new FileReader();
@@ -108,19 +260,16 @@ export default function CommandScreen() {
         const base64Audio = reader.result;
 
         // Write to temporary file for better compatibility
-        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
         const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
         await FileSystem.writeAsStringAsync(tempUri, base64Data, {
           encoding: FileSystem.EncodingType.Base64,
         });
 
-        // Load and play audio from file
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: tempUri },
-          { shouldPlay: true }
-        );
+      const hasNativePlayback =
+        ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
-        setTtsSound(newSound);
+      if (hasNativePlayback) {
         setIsTtsPlaying(true);
 
         // Set up playback status listener
@@ -128,10 +277,10 @@ export default function CommandScreen() {
           if (status.didJustFinish) {
             setIsTtsPlaying(false);
             // Clean up temp file
-            FileSystem.deleteAsync(tempUri, { idempotentError: true }).catch(() => {});
+            FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
           }
-        });
-      };
+        }
+      });
     } catch (err) {
       console.error('TTS playback failed:', err);
       Alert.alert('TTS Error', `Failed to play audio: ${err.message}`);
@@ -141,10 +290,22 @@ export default function CommandScreen() {
   };
 
   const stopTTS = async () => {
+    stopNativeTtsListener();
+
+    try {
+      if (ExpoGlassesAudio && typeof ExpoGlassesAudio.stopPlayback === 'function') {
+        await ExpoGlassesAudio.stopPlayback();
+      }
+    } catch {
+      // ignore
+    }
+
     if (ttsSound) {
       await ttsSound.stopAsync();
       setIsTtsPlaying(false);
     }
+
+    await cleanupTtsTempFile();
   };
 
   const handleSendCommand = async () => {
@@ -196,7 +357,7 @@ export default function CommandScreen() {
   const startRecording = async () => {
     try {
       const { recording: newRecording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
+        RECORDING_OPTIONS_M4A
       );
       setRecording(newRecording);
       setIsRecording(true);
@@ -255,16 +416,15 @@ export default function CommandScreen() {
     setResponse(null);
 
     try {
+      const uploadFormat = inferAudioFormatFromUri(audioUri);
+
       // Read audio file as base64
       const audioBase64 = await FileSystem.readAsStringAsync(audioUri, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
       // Upload to dev endpoint
-      // Note: Format is hardcoded as 'm4a' which is the default for expo-av HIGH_QUALITY preset
-      // On iOS this produces .caf or .m4a, on Android typically .m4a
-      // For production, consider detecting format from file extension or Recording.getStatusAsync()
-      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
 
       // Send as audio command with duration in ms and current profile
       const data = await sendAudioCommand(fileUri, format, {
@@ -450,9 +610,7 @@ export default function CommandScreen() {
         playsInSilentModeIOS: true,
       });
 
-      const { recording: voiceRecording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
+      const { recording: voiceRecording } = await Audio.Recording.createAsync(RECORDING_OPTIONS_M4A);
 
       const clipDurationMs = 1400;
       await new Promise((resolve) => setTimeout(resolve, clipDurationMs));
@@ -463,12 +621,14 @@ export default function CommandScreen() {
         throw new Error('No recording URI returned');
       }
 
+      const uploadFormat = inferAudioFormatFromUri(voiceUri);
+
       // Upload the clip and run it through /v1/command with debug transcript enabled
       const audioBase64 = await FileSystem.readAsStringAsync(voiceUri, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
-      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
 
       const sttResult = await sendAudioCommand(fileUri, format, {
         duration_ms: clipDurationMs,

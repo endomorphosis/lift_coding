@@ -12,10 +12,9 @@
 import * as Notifications from 'expo-notifications';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
-import ExpoGlassesAudio from 'expo-glasses-audio';
 
 // Configuration constants
 const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
@@ -302,20 +301,20 @@ export async function speakNotification(message) {
 
   let sound = null;
   let tempFileUri = null;
+  let nativePlaybackSub = null;
   
   try {
     console.log('Speaking notification:', message);
     debugState.lastSpokenText = message;
     
     // Fetch TTS audio from backend
-    const ttsFormat = 'wav';
-    const audioBlob = await fetchTTS(message, { format: ttsFormat });
+    const audioBlob = await fetchTTS(message);
     
     // Convert blob to base64
     const base64Audio = await blobToBase64(audioBlob);
     
     // Save to temporary file using expo-file-system
-    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${ttsFormat}`;
+    const filename = `tts_${Date.now()}_${Math.random().toString(36).substring(2, 9)}.mp3`;
     tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
     
     await FileSystem.writeAsStringAsync(tempFileUri, base64Audio, {
@@ -338,25 +337,27 @@ export async function speakNotification(message) {
         shouldDuckAndroid: true,
       });
 
-      const soundObject = await Audio.Sound.createAsync(
-        { uri: tempFileUri },
-        { shouldPlay: true }
-      );
-      sound = soundObject.sound;
+    // Play the audio
+    const soundObject = await Audio.Sound.createAsync(
+      { uri: tempFileUri },
+      { shouldPlay: true }
+    );
+    sound = soundObject.sound;
 
-      sound.setOnPlaybackStatusUpdate(async (status) => {
-        if (status.didJustFinish || status.error) {
-          try {
-            await sound.unloadAsync();
-            if (tempFileUri) {
-              await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
-            }
-          } catch (cleanupError) {
-            console.error('Cleanup error:', cleanupError);
+    // Clean up after playback completes
+    sound.setOnPlaybackStatusUpdate(async (status) => {
+      if (status.didJustFinish || status.error) {
+        try {
+          await sound.unloadAsync();
+          // Delete the temporary file
+          if (tempFileUri) {
+            await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
           }
+        } catch (cleanupError) {
+          console.error('Cleanup error:', cleanupError);
         }
-      });
-    }
+      }
+    });
 
     // Clear error state on success
     debugState.lastPlaybackError = null;
@@ -371,6 +372,13 @@ export async function speakNotification(message) {
         await sound.unloadAsync();
       } catch (cleanupError) {
         console.error('Sound cleanup error:', cleanupError);
+      }
+    }
+    if (nativePlaybackSub) {
+      try {
+        nativePlaybackSub.remove?.();
+      } catch {
+        // ignore
       }
     }
     // Delete temp file on error

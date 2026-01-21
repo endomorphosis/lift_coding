@@ -213,7 +213,7 @@ This hybrid approach maximizes reliability while still providing a hands-free li
 **Test the status endpoint:**
 
 ```bash
-curl http://localhost:8000/v1/status
+curl http://localhost:8080/v1/status
 ```
 
 **Expected response:**
@@ -233,7 +233,7 @@ curl http://localhost:8000/v1/status
 Use this approach to quickly verify the command loop without audio recording:
 
 ```bash
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -261,11 +261,11 @@ Use this approach to demonstrate the complete audio pipeline:
    ```bash
    # From iOS app code:
    const audioBase64 = await convertToBase64(recordingUri);
-   const response = await fetch('http://localhost:8000/v1/dev/audio', {
+   const response = await fetch('http://localhost:8080/v1/dev/audio', {
      method: 'POST',
      headers: { 'Content-Type': 'application/json' },
      body: JSON.stringify({
-       audio_data: audioBase64,
+       data_base64: audioBase64,
        format: 'm4a'
      })
    });
@@ -275,7 +275,7 @@ Use this approach to demonstrate the complete audio pipeline:
 
 3. **Submit command with audio URI**:
    ```bash
-   curl -X POST http://localhost:8000/v1/command \
+   curl -X POST http://localhost:8080/v1/command \
      -H "Content-Type: application/json" \
      -d '{
        "input": {
@@ -315,7 +315,7 @@ Use this approach to demonstrate the complete audio pipeline:
 
 2. **Call TTS endpoint**
    ```bash
-   curl -X POST http://localhost:8000/v1/tts \
+   curl -X POST http://localhost:8080/v1/tts \
      -H "Content-Type: application/json" \
      -d '{
        "text": "You have 3 pull requests awaiting review...",
@@ -353,7 +353,7 @@ Test the navigation intents:
 
 **"Next" command**:
 ```bash
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -371,7 +371,7 @@ curl -X POST http://localhost:8000/v1/command \
 
 **"Repeat" command**:
 ```bash
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -392,7 +392,7 @@ curl -X POST http://localhost:8000/v1/command \
 Demonstrate a specific PR query:
 
 ```bash
-curl -X POST http://localhost:8000/v1/command \
+curl -X POST http://localhost:8080/v1/command \
   -H "Content-Type: application/json" \
   -d '{
     "input": {
@@ -444,7 +444,7 @@ curl -X POST http://localhost:8000/v1/command \
 **Symptoms**: Connection refused or timeout errors
 
 **Solutions**:
-1. Verify backend is running: `curl http://localhost:8000/v1/status`
+1. Verify backend is running: `curl http://localhost:8080/v1/status`
 2. Check firewall settings if accessing over network
 3. Verify correct IP address in mobile app config
 4. Check backend logs for errors

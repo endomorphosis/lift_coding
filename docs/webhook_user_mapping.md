@@ -18,7 +18,7 @@ By default (when `GITHUB_WEBHOOK_SECRET` is not set), the webhook endpoint accep
 
 ```bash
 # No environment variable needed - dev mode is default
-curl -X POST http://localhost:8000/v1/webhooks/github \
+curl -X POST http://localhost:8080/v1/webhooks/github \
   -H "X-GitHub-Event: pull_request" \
   -H "X-GitHub-Delivery: test-12345" \
   -H "X-Hub-Signature-256: dev" \

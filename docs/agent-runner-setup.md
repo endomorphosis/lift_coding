@@ -776,7 +776,7 @@ If you're running the HandsFree backend:
 
 2. **Query the agent task** via API or database:
    ```bash
-   curl -X GET http://localhost:8000/agent-tasks/smoke-test-12345678 \
+   curl -X GET http://localhost:8080/agent-tasks/smoke-test-12345678 \
      -H "X-API-Key: your-api-key"
    ```
    

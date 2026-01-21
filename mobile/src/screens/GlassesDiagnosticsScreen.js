@@ -5,13 +5,60 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
 import { getDebugState, simulateNotificationForDev } from '../push';
-import ExpoGlassesAudio from '../../modules/expo-glasses-audio/src/ExpoGlassesAudioModule';
+import ExpoGlassesAudio from 'expo-glasses-audio';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
-const NATIVE_PLAYBACK_TIMEOUT_MS = 30000; // 30 seconds to accommodate longer TTS and audio files
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
 const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
+// Supported audio formats that the backend can accept
+// Note: 'caf' is not included here as it needs to be converted to 'm4a' (see inferAudioFormatFromUri)
+const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
+// Regex pattern to match audio file extensions before query params or hash fragments
+// Matches: .wav, .mp3, .opus, or .m4a followed by end of string, ?, or #
+// Group 1 captures the format (e.g., 'wav', 'mp3', 'opus', 'm4a')
+const AUDIO_FORMAT_REGEX = new RegExp(`\\.(${SUPPORTED_AUDIO_FORMATS.join('|')})(?=\\?|#|$)`);
+const NATIVE_MODULE_REQUIRED_METHODS = [
+  'getAudioRoute',
+  'startRecording',
+  'stopRecording',
+  'playAudio',
+  'stopPlayback',
+  'addRecordingProgressListener',
+  'addPlaybackStatusListener',
+];
+
+function normalizeLocalFileUriForFileSystem(uri) {
+  if (!uri || typeof uri !== 'string') return uri;
+  if (uri.startsWith('file://')) return uri;
+  if (uri.startsWith('/')) return `file://${uri}`;
+  return uri;
+}
+
+function inferAudioFormatFromUri(uri) {
+  const lower = String(uri || '').toLowerCase();
+
+  // Remove query parameters and fragments to focus on the path / filename.
+  const pathWithoutQueryOrFragment = lower.split('?')[0].split('#')[0];
+
+  const lastDotIndex = pathWithoutQueryOrFragment.lastIndexOf('.');
+  if (lastDotIndex === -1) {
+    // No extension found; fall back to default.
+    return 'm4a';
+  }
+
+  const ext = pathWithoutQueryOrFragment.slice(lastDotIndex + 1);
+  switch (ext) {
+    case 'wav':
+    case 'mp3':
+    case 'm4a':
+    case 'aac':
+      return ext;
+    default:
+      // Unknown extension; keep existing behavior of defaulting to m4a.
+      return 'm4a';
+  }
+}
 
 export default function GlassesDiagnosticsScreen() {
   const [devMode, setDevMode] = useState(false);
@@ -27,9 +74,22 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [pushDebugState, setPushDebugState] = useState(null);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
-  const playbackTimeoutRef = useRef(null);
   const soundRef = useRef(null);
-  const recordingTimeoutRef = useRef(null);
+  const pendingTtsTempUriRef = useRef(null);
+  const recordingPromiseRef = useRef(null);
+
+  const inferAudioFormatFromUri = (uri) => {
+    if (!uri) return 'm4a';
+    const lower = String(uri).toLowerCase();
+
+    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
+    if (lower.endsWith('.caf')) return 'm4a';
+
+    const match = lower.match(AUDIO_FORMAT_REGEX);
+    if (match?.[1]) return match[1];
+
+    return 'm4a';
+  };
 
   useEffect(() => {
     (async () => {
@@ -87,21 +147,70 @@ export default function GlassesDiagnosticsScreen() {
     return () => {
       clearInterval(interval);
       appStateSubscription.remove();
-      if (sound) {
-        sound.unloadAsync();
       // Use ref to ensure we cleanup the latest sound instance
       if (soundRef.current) {
-        soundRef.current.unloadAsync();
+        soundRef.current.unloadAsync().catch(() => {});
+        soundRef.current = null;
       }
-      if (playbackTimeoutRef.current) {
-        clearTimeout(playbackTimeoutRef.current);
-      }
-      if (recordingTimeoutRef.current) {
-        clearTimeout(recordingTimeoutRef.current);
+      if (pendingTtsTempUriRef.current) {
+        FileSystem.deleteAsync(pendingTtsTempUriRef.current, { idempotent: true }).catch(() => {});
+        pendingTtsTempUriRef.current = null;
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (devMode || !nativeModuleAvailable) {
+      return;
+    }
+
+    let recordingSub = null;
+    let playbackSub = null;
+
+    try {
+      recordingSub = ExpoGlassesAudio.addRecordingProgressListener((event) => {
+        if (!event || typeof event !== 'object') return;
+        if (typeof event.isRecording === 'boolean') {
+          setIsRecording(event.isRecording);
+        }
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to recording progress:', error);
+    }
+
+    try {
+      playbackSub = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+        if (!event || typeof event !== 'object') return;
+        if (typeof event.isPlaying === 'boolean') {
+          setIsPlaying(event.isPlaying);
+          if (event.isPlaying === false && pendingTtsTempUriRef.current) {
+            const tempUri = pendingTtsTempUriRef.current;
+            pendingTtsTempUriRef.current = null;
+            FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+          }
+        }
+        if (event.error) {
+          setLastError(`Playback error: ${event.error}`);
+        }
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to playback status:', error);
+    }
+
+    return () => {
+      try {
+        recordingSub?.remove?.();
+      } catch {
+        // ignore
+      }
+      try {
+        playbackSub?.remove?.();
+      } catch {
+        // ignore
+      }
+    };
+  }, [devMode, nativeModuleAvailable]);
 
   useEffect(() => {
     checkAudioRoute();
@@ -200,17 +309,27 @@ export default function GlassesDiagnosticsScreen() {
         if (nativeModuleAvailable) {
           // Start recording with configured duration. The native module will auto-stop after this duration
           // if the user doesn't manually stop it first.
-          await ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
+          const recordingPromise = ExpoGlassesAudio.startRecording(NATIVE_RECORDING_DURATION_SECONDS);
+          recordingPromiseRef.current = recordingPromise;
+          // Recording has started; update UI state immediately.
           setIsRecording(true);
-          
-          // Set up timeout to update UI when native module auto-stops recording
-          const timeoutId = setTimeout(() => {
-            setIsRecording(false);
-            recordingTimeoutRef.current = null;
-            // This is expected behavior, not an error - recording duration limit reached
-            Alert.alert('Recording Complete', `Recording stopped after ${NATIVE_RECORDING_DURATION_SECONDS} seconds.`);
-          }, NATIVE_RECORDING_DURATION_SECONDS * 1000);
-          recordingTimeoutRef.current = timeoutId;
+          recordingPromise
+            .then((result) => {
+              // Recording has completed successfully.
+              setIsRecording(false);
+              if (result?.uri) {
+                setLastRecordingUri(result.uri);
+              }
+            })
+            .catch((error) => {
+              setLastError(`Recording failed: ${error.message}`);
+              setIsRecording(false);
+            })
+            .finally(() => {
+              if (recordingPromiseRef.current === recordingPromise) {
+                recordingPromiseRef.current = null;
+              }
+            });
         } else {
           setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
         }
@@ -223,14 +342,6 @@ export default function GlassesDiagnosticsScreen() {
 
   const stopRecording = async () => {
     try {
-      setIsRecording(false);
-      
-      // Clear recording timeout if it exists
-      if (recordingTimeoutRef.current) {
-        clearTimeout(recordingTimeoutRef.current);
-        recordingTimeoutRef.current = null;
-      }
-      
       if (devMode) {
         // DEV mode: use expo-av
         if (recording) {
@@ -238,6 +349,7 @@ export default function GlassesDiagnosticsScreen() {
           const uri = recording.getURI();
           setRecording(null);
           setLastRecordingUri(uri);
+          setIsRecording(false);
           Alert.alert('Recording Complete', 'Saved locally.');
         } else {
           setLastError('No active recording to stop.');
@@ -246,6 +358,7 @@ export default function GlassesDiagnosticsScreen() {
         // Glasses mode: use native module if available
         if (nativeModuleAvailable) {
           const result = await ExpoGlassesAudio.stopRecording();
+          setIsRecording(false);
           if (result && result.uri) {
             setLastRecordingUri(result.uri);
             Alert.alert('Recording Complete', 'Saved locally.');
@@ -261,17 +374,12 @@ export default function GlassesDiagnosticsScreen() {
       }
     } catch (error) {
       setLastError(`Stop recording failed: ${error.message}`);
+      setIsRecording(false);
     }
   };
 
   const stopPlayback = async () => {
     try {
-      // Clear any pending timeout and reset ref
-      if (playbackTimeoutRef.current) {
-        clearTimeout(playbackTimeoutRef.current);
-        playbackTimeoutRef.current = null;
-      }
-      
       if (devMode) {
         // DEV mode: use expo-av
         if (sound) {
@@ -286,13 +394,20 @@ export default function GlassesDiagnosticsScreen() {
           await ExpoGlassesAudio.stopPlayback();
         }
       }
+
+      if (pendingTtsTempUriRef.current) {
+        const tempUri = pendingTtsTempUriRef.current;
+        pendingTtsTempUriRef.current = null;
+        FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+      }
       setIsPlaying(false);
     } catch (error) {
       setLastError(`Stop playback failed: ${error.message}`);
-      // Ensure ref is cleared even on error
-      if (playbackTimeoutRef.current) {
-        clearTimeout(playbackTimeoutRef.current);
-        playbackTimeoutRef.current = null;
+
+      if (pendingTtsTempUriRef.current) {
+        const tempUri = pendingTtsTempUriRef.current;
+        pendingTtsTempUriRef.current = null;
+        FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
       }
     }
   };
@@ -323,6 +438,11 @@ export default function GlassesDiagnosticsScreen() {
         newSound.setOnPlaybackStatusUpdate((status) => {
           if (status.didJustFinish) {
             setIsPlaying(false);
+            if (pendingTtsTempUriRef.current) {
+              const tempUri = pendingTtsTempUriRef.current;
+              pendingTtsTempUriRef.current = null;
+              FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+            }
           }
           if (status.error) {
             setLastError(`Playback error: ${status.error}`);
@@ -333,27 +453,11 @@ export default function GlassesDiagnosticsScreen() {
         if (nativeModuleAvailable) {
           await ExpoGlassesAudio.playAudio(uri);
           setIsPlaying(true);
-          // Set a timeout to mark playback as finished (since native module doesn't have status callbacks yet)
-          // NOTE: This is a limitation - if playback finishes earlier or runs longer than the timeout,
-          // the UI state will be inaccurate. TODO: add event-based status updates to native module.
-          const timeoutId = setTimeout(() => {
-            // Only update state if component is still mounted (playbackTimeoutRef will be cleared on unmount)
-            if (playbackTimeoutRef.current === timeoutId) {
-              setIsPlaying(false);
-              playbackTimeoutRef.current = null;
-            }
-          }, NATIVE_PLAYBACK_TIMEOUT_MS);
-          playbackTimeoutRef.current = timeoutId;
         } else {
           setLastError(NATIVE_MODULE_NOT_AVAILABLE_MESSAGE);
         }
       }
     } catch (error) {
-      // Ensure any pending native playback timeout is cleared on error
-      if (playbackTimeoutRef.current) {
-        clearTimeout(playbackTimeoutRef.current);
-        playbackTimeoutRef.current = null;
-      }
       setLastError(`Playback failed: ${error.message}`);
       setIsPlaying(false);
     }
@@ -379,7 +483,8 @@ export default function GlassesDiagnosticsScreen() {
 
     let tempUri = null;
     try {
-      const audioBlob = await fetchTTS(text);
+      const ttsFormat = 'wav';
+      const audioBlob = await fetchTTS(text, { format: ttsFormat });
       const base64Audio = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onerror = () => reject(new Error('Failed to read TTS audio'));
@@ -388,14 +493,25 @@ export default function GlassesDiagnosticsScreen() {
       });
 
       const base64Data = String(base64Audio).split(',')[1];
-      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.mp3`;
+      tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
       await FileSystem.writeAsStringAsync(tempUri, base64Data, {
         encoding: FileSystem.EncodingType.Base64,
       });
+
+      // Ensure any previous temp file is removed before we swap.
+      if (pendingTtsTempUriRef.current) {
+        FileSystem.deleteAsync(pendingTtsTempUriRef.current, { idempotent: true }).catch(() => {});
+      }
+      pendingTtsTempUriRef.current = tempUri;
       await playUri(tempUri);
-    } finally {
+    } catch (error) {
+      setLastError(`TTS failed: ${error.message}`);
+      // Best-effort cleanup of the temp file if anything failed after creation.
       if (tempUri) {
         FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+      }
+      if (pendingTtsTempUriRef.current === tempUri) {
+        pendingTtsTempUriRef.current = null;
       }
     }
   };
@@ -410,11 +526,23 @@ export default function GlassesDiagnosticsScreen() {
     setLastError(null);
     setCommandResponse(null);
     try {
-      const audioBase64 = await FileSystem.readAsStringAsync(lastRecordingUri, {
+      const localUriForRead = normalizeLocalFileUriForFileSystem(lastRecordingUri);
+      const uploadFormat = inferAudioFormatFromUri(lastRecordingUri);
+      const audioBase64 = await FileSystem.readAsStringAsync(localUriForRead, {
         encoding: FileSystem.EncodingType.Base64,
       });
-      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+      const uploadFormat = inferAudioFormatFromUri(lastRecordingUri);
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
       const response = await sendAudioCommand(fileUri, format, {
+      const uploaded = await uploadDevAudio(audioBase64, uploadFormat);
+      const fileUri = uploaded?.uri;
+      if (!fileUri) {
+        setLastError('Pipeline failed: missing file URI from upload.');
+        Alert.alert('Upload Error', 'The audio upload did not return a valid file location.');
+        return;
+      }
+      const commandFormat = uploaded?.format || uploadFormat;
+      const response = await sendAudioCommand(fileUri, commandFormat, {
         profile: 'dev',
         client_context: { device: 'mobile', mode: devMode ? 'dev' : 'glasses' },
       });
