@@ -266,5 +266,5 @@ After confirming iOS works:
 ## Support
 
 - iOS Issues: Check `mobile/glasses/ios/IMPLEMENTATION.md`
-- Module API: Check `mobile/modules/glasses-audio/README.md`
+- Module API: Check `mobile/modules/expo-glasses-audio/README.md`
 - General: Check `mobile/glasses/README.md`
