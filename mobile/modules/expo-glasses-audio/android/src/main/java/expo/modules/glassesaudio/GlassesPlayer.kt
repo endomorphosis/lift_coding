@@ -196,7 +196,7 @@ class GlassesPlayer {
                         readLEInt() // byte rate
                         readLEShort() // block align
                         bitsPerSample = readLEShort().toInt()
-                        // Continue to general seek logic below
+                        // Fall through to unified seeking logic below
                     }
                     "data" -> {
                         dataOffset = raf.filePointer.toInt()
@@ -206,7 +206,7 @@ class GlassesPlayer {
                 }
 
                 // Move to end of chunk (chunks are word-aligned; pad to even)
-                // This applies to all chunks except "data" which breaks above
+                // This applies to all chunks except "data" which breaks out of the loop
                 if (chunkId != "data") {
                     val chunkEnd = chunkDataStart + chunkSize
                     raf.seek(chunkEnd + (chunkSize % 2))
