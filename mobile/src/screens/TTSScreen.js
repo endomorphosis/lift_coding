@@ -8,7 +8,6 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
-  Platform,
 } from 'react-native';
 import { fetchTTS } from '../api/client';
 import { Audio } from 'expo-av';
