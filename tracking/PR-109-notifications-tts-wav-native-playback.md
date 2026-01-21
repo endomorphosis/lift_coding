@@ -7,7 +7,7 @@ Make the notification → TTS playback path device-ready by:
 - Preferring native playback via `expo-glasses-audio` when available (routes to glasses), with `expo-av` fallback.
 
 ## Why
-Today notifications use `fetchTTS()` default (WAV) but save the file as `.mp3`, and playback is via `expo-av` only. That’s brittle and often won’t route to glasses.
+Today notifications use `fetchTTS()` default (mp3) but save the file as `.mp3`, and playback is via `expo-av` only. That's brittle and often won't route to glasses.
 
 ## Acceptance criteria
 - `speakNotification()` requests `{ format: 'wav' }` and writes a `.wav` temp file.

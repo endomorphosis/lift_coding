@@ -15,7 +15,7 @@ import * as FileSystem from 'expo-file-system';
 import { AppState, Platform } from 'react-native';
 import { getBaseUrl, getHeaders, getSpeakNotifications } from '../api/config';
 import { fetchTTS } from '../api/client';
-import ExpoGlassesAudio from 'expo-glasses-audio';
+import ExpoGlassesAudio from '../../modules/expo-glasses-audio';
 
 // Configuration constants
 const MAX_PENDING_QUEUE_SIZE = 100; // Maximum pending messages before warning
@@ -264,27 +264,34 @@ export async function speakNotification(message) {
       shouldDuckAndroid: true,
     });
 
+    // Check if native playback is available and has both required methods
     const hasNativePlayback =
-      ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
+      ExpoGlassesAudio && 
+      typeof ExpoGlassesAudio.playAudio === 'function' &&
+      typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function';
 
     if (hasNativePlayback) {
-      if (typeof ExpoGlassesAudio.addPlaybackStatusListener === 'function') {
-        nativePlaybackSub = ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
-          if (!event?.isPlaying) {
-            try {
-              nativePlaybackSub?.remove?.();
-            } catch {
-              // ignore
-            }
-            nativePlaybackSub = null;
-
-            if (tempFileUri) {
-              await FileSystem.deleteAsync(tempFileUri, { idempotent: true }).catch(() => {});
-              tempFileUri = null;
-            }
+      nativePlaybackSub = ExpoGlassesAudio.addPlaybackStatusListener(async (event) => {
+        // Check for playback errors first
+        if (event?.error) {
+          console.error('Native playback error:', event.error);
+          debugState.lastPlaybackError = event.error;
+        }
+        
+        if (!event?.isPlaying) {
+          try {
+            nativePlaybackSub?.remove?.();
+          } catch {
+            // ignore
           }
-        });
-      }
+          nativePlaybackSub = null;
+
+          if (tempFileUri) {
+            await FileSystem.deleteAsync(tempFileUri, { idempotent: true }).catch(() => {});
+            tempFileUri = null;
+          }
+        }
+      });
 
       const nativeUri =
         Platform.OS === 'android'
