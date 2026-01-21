@@ -31,6 +31,25 @@ export default function GlassesDiagnosticsScreen() {
   const soundRef = useRef(null);
   const recordingTimeoutRef = useRef(null);
 
+  const inferAudioFormatFromUri = (uri) => {
+    if (!uri) return 'm4a';
+    const lower = String(uri).toLowerCase();
+
+    if (lower.endsWith('.wav')) return 'wav';
+    if (lower.endsWith('.mp3')) return 'mp3';
+    if (lower.endsWith('.opus')) return 'opus';
+    if (lower.endsWith('.m4a')) return 'm4a';
+
+    // file://.../foo.wav?x=y
+    const match = lower.match(/\.([a-z0-9]+)(\?|#|$)/);
+    if (match?.[1] === 'wav') return 'wav';
+    if (match?.[1] === 'mp3') return 'mp3';
+    if (match?.[1] === 'opus') return 'opus';
+    if (match?.[1] === 'm4a') return 'm4a';
+
+    return 'm4a';
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -413,7 +432,8 @@ export default function GlassesDiagnosticsScreen() {
       const audioBase64 = await FileSystem.readAsStringAsync(lastRecordingUri, {
         encoding: FileSystem.EncodingType.Base64,
       });
-      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, 'm4a');
+      const uploadFormat = inferAudioFormatFromUri(lastRecordingUri);
+      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
       const response = await sendAudioCommand(fileUri, format, {
         profile: 'dev',
         client_context: { device: 'mobile', mode: devMode ? 'dev' : 'glasses' },
