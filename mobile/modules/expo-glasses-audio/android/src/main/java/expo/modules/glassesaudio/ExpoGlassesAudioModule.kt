@@ -8,6 +8,7 @@ import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
 import expo.modules.glassesaudio.AudioRouteMonitor
+import expo.modules.glassesaudio.AudioSource
 import expo.modules.glassesaudio.GlassesRecorder
 import expo.modules.glassesaudio.GlassesPlayer
 import java.io.File
@@ -80,23 +81,23 @@ class ExpoGlassesAudioModule : Module() {
         
         // Parse audio source
         val audioSource = when (audioSourceString) {
-          "phone" -> glasses.AudioSource.PHONE
-          "glasses" -> glasses.AudioSource.GLASSES
-          else -> glasses.AudioSource.AUTO
+          "phone" -> AudioSource.PHONE
+          "glasses" -> AudioSource.GLASSES
+          else -> AudioSource.AUTO
         }
         
         // Configure Bluetooth SCO based on audio source
         when (audioSource) {
-          glasses.AudioSource.GLASSES -> {
+          AudioSource.GLASSES -> {
             // Enable Bluetooth SCO for glasses/Bluetooth mic
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             audioManager.startBluetoothSco()
           }
-          glasses.AudioSource.PHONE -> {
+          AudioSource.PHONE -> {
             // Use phone mic - don't enable Bluetooth SCO
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
           }
-          glasses.AudioSource.AUTO -> {
+          AudioSource.AUTO -> {
             // Auto mode - enable SCO if available
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             if (audioManager.isBluetoothScoAvailableOffCall) {
@@ -113,26 +114,39 @@ class ExpoGlassesAudioModule : Module() {
         val outputFile = File(outputDir, filename)
         
         // Start recording with specified audio source
-        val audioRecord = recorder.start(audioSource)
+        recorder.start(outputFile, audioSource)
         
         // Schedule stop after duration
         handler.postDelayed({
-          recorder.stop()
-          audioManager.stopBluetoothSco()
-          audioManager.mode = AudioManager.MODE_NORMAL
-          
-          val fileSize = if (outputFile.exists()) outputFile.length() else 0L
-          
-          // Emit recording stopped event
-          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-          
-          promise.resolve(
-            mapOf(
-              "uri" to outputFile.absolutePath,
-              "duration" to durationSeconds,
-              "size" to fileSize.toInt()
-            )
-          )
+          try {
+            val result = recorder.stop()
+            audioManager.stopBluetoothSco()
+            audioManager.mode = AudioManager.MODE_NORMAL
+            
+            // Emit recording stopped event
+            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
+            
+            if (result != null) {
+              promise.resolve(
+                mapOf(
+                  "uri" to result.file.absolutePath,
+                  "duration" to result.durationSeconds,
+                  "size" to result.sizeBytes
+                )
+              )
+            } else {
+              // If result is null, return empty values (e.g., if recording was already stopped)
+              promise.resolve(
+                mapOf(
+                  "uri" to "",
+                  "duration" to 0,
+                  "size" to 0
+                )
+              )
+            }
+          } catch (e: Exception) {
+            promise.reject("ERR_STOP_RECORDING", "Failed to stop recording in callback: ${e.message}", e)
+          }
         }, (durationSeconds * 1000).toLong())
         
       } catch (e: Exception) {
@@ -142,19 +156,30 @@ class ExpoGlassesAudioModule : Module() {
 
     AsyncFunction("stopRecording") { promise: Promise ->
       try {
-        recorder.stop()
+        val result = recorder.stop()
         
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.stopBluetoothSco()
         audioManager.mode = AudioManager.MODE_NORMAL
         
-        promise.resolve(
-          mapOf(
-            "uri" to "",
-            "duration" to 0,
-            "size" to 0
+        if (result != null) {
+          promise.resolve(
+            mapOf(
+              "uri" to result.file.absolutePath,
+              "duration" to result.durationSeconds,
+              "size" to result.sizeBytes
+            )
           )
-        )
+        } else {
+          // If result is null, return empty values (e.g., if recording was not running)
+          promise.resolve(
+            mapOf(
+              "uri" to "",
+              "duration" to 0,
+              "size" to 0
+            )
+          )
+        }
       } catch (e: Exception) {
         promise.reject("ERR_STOP_RECORDING", "Failed to stop recording: ${e.message}", e)
       }
