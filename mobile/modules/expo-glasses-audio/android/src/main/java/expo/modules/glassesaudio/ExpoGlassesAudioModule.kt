@@ -143,9 +143,8 @@ class ExpoGlassesAudioModule : Module() {
               // Always cleanup audio manager state
               audioManager.stopBluetoothSco()
               audioManager.mode = AudioManager.MODE_NORMAL
-              synchronized(this@ExpoGlassesAudioModule) {
-                recordingStopRunnable = null
-              }
+              // Clear runnable reference
+              recordingStopRunnable = null
             }
           }
           recordingStopRunnable = stopRunnable
