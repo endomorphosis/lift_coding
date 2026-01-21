@@ -656,7 +656,7 @@ Added to relevant sections above:
 
 **Local Development**:
 - Run backend locally (Docker Compose)
-- Mobile app points to `http://localhost:8000`
+- Mobile app points to `http://localhost:8080`
 - Use dev mode with fixture responses
 
 **Staging Environment**:
