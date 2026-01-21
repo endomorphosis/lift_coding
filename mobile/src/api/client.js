@@ -154,13 +154,25 @@ export async function confirmCommand(token, idempotencyKey = undefined) {
 /**
  * Fetch TTS audio for given text
  * @param {string} text - Text to convert to speech
+ * @param {Object} [options] - Optional TTS configuration
+ * @param {string} [options.format='wav'] - Output audio format (e.g. 'wav')
+ * @param {string} [options.voice] - Voice identifier to use for synthesis
+ * @param {string} [options.accept] - Value for the HTTP Accept header (e.g. 'audio/wav')
  * @returns {Promise<Blob>} Audio data as blob
  */
-export async function fetchTTS(text) {
+export async function fetchTTS(text, options = {}) {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
-  const body = { text };
+  if (options.accept) {
+    headers.Accept = options.accept;
+  }
+
+  const body = {
+    text,
+    format: options.format || 'wav',
+    voice: options.voice || undefined,
+  };
 
   const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
