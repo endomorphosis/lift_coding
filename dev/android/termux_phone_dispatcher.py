@@ -15,6 +15,7 @@ Why this exists:
 Environment:
 - GITHUB_TOKEN: GitHub token with repo scope (or fine-grained token with Issues:write on target repo)
 - DISPATCH_REPO: owner/repo
+- DISPATCHER_SHARED_SECRET: optional shared secret; if set, requests must include header X-Handsfree-Dispatcher-Secret
 - PORT: optional, default 8765
 
 Run:
@@ -90,6 +91,12 @@ class Handler(BaseHTTPRequestHandler):
         if self.path != "/dispatch":
             return _json_response(self, 404, {"error": "not found"})
 
+        shared_secret = os.environ.get("DISPATCHER_SHARED_SECRET", "").strip()
+        if shared_secret:
+            provided = (self.headers.get("X-Handsfree-Dispatcher-Secret") or "").strip()
+            if provided != shared_secret:
+                return _json_response(self, 401, {"error": "Unauthorized"})
+
         token = os.environ.get("GITHUB_TOKEN", "").strip()
         repo = os.environ.get("DISPATCH_REPO", "").strip()
         if not token or not repo:
@@ -141,6 +148,8 @@ def main() -> int:
     httpd = HTTPServer((host, port), Handler)
     print(f"[dispatcher] listening on http://{host}:{port}")
     print("[dispatcher] endpoints: GET /health, POST /dispatch")
+    if os.environ.get("DISPATCHER_SHARED_SECRET", "").strip():
+        print("[dispatcher] auth: X-Handsfree-Dispatcher-Secret required")
     httpd.serve_forever()
     return 0
 
