@@ -109,7 +109,7 @@ This index helps you find the right documentation for your needs, whether you're
 | [Glasses Module](mobile/glasses/README.md) | Native module docs | Mobile developers |
 | [Push Notifications](docs/push-notifications.md) | Notification setup | Mobile developers |
 
-### Android Workflows (In Flight)
+### Android Workflows (In-Flight)
 
 These Android workflow docs/tools are being developed in draft PRs and may not be on `main` yet:
 
