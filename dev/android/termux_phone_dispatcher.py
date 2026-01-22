@@ -58,6 +58,10 @@ def create_issue(repo_full_name: str, token: str, title: str, body: str, labels:
             f"Invalid DISPATCH_REPO format; expected 'owner/repo' but got {repo_full_name!r}"
         )
     owner, repo = repo_full_name.split("/", 1)
+    if not owner or not repo:
+        raise ValueError(
+            f"Invalid DISPATCH_REPO format; expected 'owner/repo' but got {repo_full_name!r}"
+        )
     url = f"https://api.github.com/repos/{owner}/{repo}/issues"
 
     payload = {"title": title}
