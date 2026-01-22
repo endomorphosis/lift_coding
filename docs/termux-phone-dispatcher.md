@@ -26,5 +26,5 @@ If you set `DISPATCHER_SHARED_SECRET` on the phone, the dispatcher will require:
 
 - HTTP header: `X-Handsfree-Dispatcher-Secret: <value>`
 
-The mobile client supports configuring this via `EXPO_PUBLIC_PHONE_DISPATCHER_SECRET` (or by storing a secret in local storage).
+The mobile client is expected to send this header when configured to do so. Support for configuring this via `EXPO_PUBLIC_PHONE_DISPATCHER_SECRET` (or by storing a secret in local storage) is planned but may not yet be implemented in the mobile app.
 
