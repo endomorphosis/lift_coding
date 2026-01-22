@@ -1,24 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
-import ExpoGlassesAudio from 'expo-glasses-audio';
 import { useAudioSource, AUDIO_SOURCES } from './useAudioSource';
-
-let ExpoGlassesAudio = null;
-
-try {
-  ExpoGlassesAudio = require('expo-glasses-audio').default;
-} catch (error) {
-  // Module missing in Expo Go / non-dev-client builds.
-}
-
-function getExpoGlassesAudioOrThrow() {
-  if (!ExpoGlassesAudio) {
-    throw new Error(
-      'Native expo-glasses-audio module not available. This feature requires a development build (expo-dev-client).'
-    );
-  }
-  return ExpoGlassesAudio;
-}
+import { getGlassesAudio } from '../native/glassesAudio';
 
 /**
  * Hook to record audio using the expo-glasses-audio module
@@ -31,7 +14,7 @@ export function useGlassesRecorder() {
 
   const startRecording = useCallback(async (durationSeconds = 5) => {
     try {
-      const module = getExpoGlassesAudioOrThrow();
+      const module = await getGlassesAudio();
       setIsRecording(true);
       setRecordingUri(null);
 
@@ -66,7 +49,7 @@ export function useGlassesRecorder() {
 
   const stopRecording = useCallback(async () => {
     try {
-      const module = getExpoGlassesAudioOrThrow();
+      const module = await getGlassesAudio();
       const result = await module.stopRecording();
       setIsRecording(false);
       if (result.uri) {

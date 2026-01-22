@@ -1,81 +1,74 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  View,
+  ActivityIndicator,
+  Alert,
+  Button,
+  ScrollView,
+  StyleSheet,
+  Switch,
   Text,
   TextInput,
-  Button,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Switch,
-  ActivityIndicator,
+  View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DEFAULT_BASE_URL } from '../api/config';
-import {
-  registerForPushAsync,
-  registerSubscriptionWithBackend,
-  unregisterSubscriptionWithBackend,
-  listSubscriptions,
-} from '../push/pushClient';
-import {
-  getAutoSpeakEnabled,
-  setAutoSpeakEnabled,
-} from '../utils/notificationSettings';
-import { DEFAULT_BASE_URL, getSpeakNotifications, setSpeakNotifications } from '../api/config';
-
-const STORAGE_KEYS = {
-  USER_ID: '@handsfree_user_id',
-  BASE_URL: '@handsfree_base_url',
-  USE_CUSTOM_URL: '@handsfree_use_custom_url',
-};
 import * as WebBrowser from 'expo-web-browser';
-import { DEFAULT_BASE_URL, STORAGE_KEYS } from '../api/config';
-import { startGitHubOAuth, completeGitHubOAuth } from '../api/client';
+import { completeGitHubOAuth, startGitHubOAuth } from '../api/client';
+import {
+  DEFAULT_BASE_URL,
+  STORAGE_KEYS,
+  getSpeakNotifications,
+  setSpeakNotifications,
+} from '../api/config';
+import { dispatchViaPhone, getPhoneDispatcherUrl, setPhoneDispatcherUrl } from '../api/phoneDispatcher';
+import { registerForPushAsync, registerSubscriptionWithBackend, unregisterSubscriptionWithBackend, listSubscriptions } from '../push/pushClient';
+import { getAutoSpeakEnabled, setAutoSpeakEnabled } from '../utils/notificationSettings';
+import { clearGlassesAudioCache, getSimulateGlassesAudio, setSimulateGlassesAudio } from '../native/glassesAudio';
 
 export default function SettingsScreen() {
+  const [loading, setLoading] = useState(true);
+
   const [userId, setUserId] = useState('');
   const [baseUrl, setBaseUrl] = useState(DEFAULT_BASE_URL);
   const [useCustomUrl, setUseCustomUrl] = useState(false);
+
   const [speakNotifications, setSpeakNotificationsState] = useState(__DEV__);
-  const [loading, setLoading] = useState(true);
-  
+  const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
+
   // Push notification state
   const [pushToken, setPushToken] = useState(null);
   const [subscriptions, setSubscriptions] = useState([]);
-  const [autoSpeakNotifications, setAutoSpeakNotifications] = useState(false);
   const [pushLoading, setPushLoading] = useState(false);
+
+  // GitHub OAuth state
   const [githubConnectionId, setGithubConnectionId] = useState(null);
   const [connectingGithub, setConnectingGithub] = useState(false);
 
-  useEffect(() => {
-    loadSettings();
+  // Dev tooling state
+  const [simulateGlassesAudio, setSimulateGlassesAudioState] = useState(false);
+  const [phoneDispatcherUrl, setPhoneDispatcherUrlState] = useState('');
+  const [dispatchTesting, setDispatchTesting] = useState(false);
+
+  const loadPushStatus = useCallback(async () => {
+    try {
+      const subs = await listSubscriptions();
+      setSubscriptions(subs);
+    } catch (error) {
+      console.error('Failed to load subscriptions:', error);
+    }
   }, []);
 
   const handleOAuthCallback = useCallback(async (code, state) => {
     try {
       setConnectingGithub(true);
-      
       const response = await completeGitHubOAuth(code, state);
-      
       if (response.connection_id) {
-        // Store the connection ID
         await AsyncStorage.setItem(STORAGE_KEYS.GITHUB_CONNECTION_ID, response.connection_id);
         setGithubConnectionId(response.connection_id);
-        
-        Alert.alert(
-          'Success',
-          `GitHub connected successfully!\nScopes: ${response.scopes || 'default'}`,
-          [{ text: 'OK' }]
-        );
+        Alert.alert('Success', `GitHub connected successfully!\nScopes: ${response.scopes || 'default'}`);
       }
     } catch (error) {
       console.error('OAuth callback error:', error);
-      Alert.alert(
-        'OAuth Error',
-        `Failed to complete GitHub connection: ${error.message}`,
-        [{ text: 'OK' }]
-      );
+      Alert.alert('OAuth Error', `Failed to complete GitHub connection: ${error.message}`);
     } finally {
       setConnectingGithub(false);
     }
@@ -84,55 +77,64 @@ export default function SettingsScreen() {
   const checkPendingOAuthCallback = useCallback(async () => {
     try {
       const pendingJson = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
-      if (pendingJson) {
-        const { code, state } = JSON.parse(pendingJson);
-        
-        // Clear the pending item immediately to prevent double processing
-        await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
-        
-        // Complete the OAuth flow
-        await handleOAuthCallback(code, state);
-      }
+      if (!pendingJson) return;
+      const { code, state } = JSON.parse(pendingJson);
+      await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_OAUTH_PENDING);
+      await handleOAuthCallback(code, state);
     } catch (error) {
       console.error('Error checking pending OAuth:', error);
     }
   }, [handleOAuthCallback]);
 
-  useEffect(() => {
-    // Check for pending OAuth callback
-    checkPendingOAuthCallback();
-  }, [checkPendingOAuthCallback]);
-
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
-      const savedUserId = await AsyncStorage.getItem(STORAGE_KEYS.USER_ID);
-      const savedBaseUrl = await AsyncStorage.getItem(STORAGE_KEYS.BASE_URL);
-      const savedUseCustomUrl = await AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL);
-      const savedAutoSpeak = await getAutoSpeakEnabled();
-      const savedGithubConnectionId = await AsyncStorage.getItem(STORAGE_KEYS.GITHUB_CONNECTION_ID);
+      const [
+        savedUserId,
+        savedBaseUrl,
+        savedUseCustomUrl,
+        savedGithubConnectionId,
+        savedSpeakNotifications,
+        savedAutoSpeak,
+        savedSimulate,
+        savedPhoneUrl,
+      ] = await Promise.all([
+        AsyncStorage.getItem(STORAGE_KEYS.USER_ID),
+        AsyncStorage.getItem(STORAGE_KEYS.BASE_URL),
+        AsyncStorage.getItem(STORAGE_KEYS.USE_CUSTOM_URL),
+        AsyncStorage.getItem(STORAGE_KEYS.GITHUB_CONNECTION_ID),
+        getSpeakNotifications(),
+        getAutoSpeakEnabled(),
+        getSimulateGlassesAudio(),
+        getPhoneDispatcherUrl(),
+      ]);
 
       if (savedUserId) setUserId(savedUserId);
       if (savedBaseUrl) setBaseUrl(savedBaseUrl);
       if (savedUseCustomUrl) setUseCustomUrl(savedUseCustomUrl === 'true');
-      setAutoSpeakNotifications(savedAutoSpeak);
-      
-      // Load push subscriptions
-      await loadPushStatus();
       if (savedGithubConnectionId) setGithubConnectionId(savedGithubConnectionId);
+
+      setSpeakNotificationsState(Boolean(savedSpeakNotifications));
+      setAutoSpeakNotifications(Boolean(savedAutoSpeak));
+      setSimulateGlassesAudioState(Boolean(savedSimulate));
+      setPhoneDispatcherUrlState(savedPhoneUrl || '');
+
+      await loadPushStatus();
+      await checkPendingOAuthCallback();
     } catch (error) {
       console.error('Failed to load settings:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [checkPendingOAuthCallback, loadPushStatus]);
 
-  const loadPushStatus = async () => {
-    try {
-      const subs = await listSubscriptions();
-      setSubscriptions(subs);
-    } catch (error) {
-      console.error('Failed to load subscriptions:', error);
-    }
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
+
+  const maskToken = (token) => {
+    if (!token) return 'Not set';
+    if (token.length <= 10) return token;
+    return `${token.substring(0, 6)}...${token.substring(token.length - 4)}`;
   };
 
   const handleRequestPermission = async () => {
@@ -171,29 +173,25 @@ export default function SettingsScreen() {
   };
 
   const handleUnregisterSubscription = async (subscriptionId) => {
-    Alert.alert(
-      'Unregister Subscription',
-      `Are you sure you want to unregister subscription ${subscriptionId}?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Unregister',
-          style: 'destructive',
-          onPress: async () => {
-            setPushLoading(true);
-            try {
-              await unregisterSubscriptionWithBackend(subscriptionId);
-              await loadPushStatus();
-              Alert.alert('Success', 'Subscription unregistered');
-            } catch (error) {
-              Alert.alert('Error', `Failed to unregister: ${error.message}`);
-            } finally {
-              setPushLoading(false);
-            }
-          },
+    Alert.alert('Unregister Subscription', `Are you sure you want to unregister subscription ${subscriptionId}?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Unregister',
+        style: 'destructive',
+        onPress: async () => {
+          setPushLoading(true);
+          try {
+            await unregisterSubscriptionWithBackend(subscriptionId);
+            await loadPushStatus();
+            Alert.alert('Success', 'Subscription unregistered');
+          } catch (error) {
+            Alert.alert('Error', `Failed to unregister: ${error.message}`);
+          } finally {
+            setPushLoading(false);
+          }
         },
-      ]
-    );
+      },
+    ]);
   };
 
   const handleAutoSpeakToggle = async (value) => {
@@ -208,10 +206,58 @@ export default function SettingsScreen() {
     }
   };
 
-  const maskToken = (token) => {
-    if (!token) return 'Not set';
-    if (token.length <= 10) return token;
-    return `${token.substring(0, 6)}...${token.substring(token.length - 4)}`;
+  const generateUserId = () => {
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+    setUserId(uuid);
+  };
+
+  const connectGitHub = async () => {
+    try {
+      setConnectingGithub(true);
+      const response = await startGitHubOAuth();
+      if (!response.authorize_url) {
+        throw new Error('No authorization URL received from server');
+      }
+
+      const result = await WebBrowser.openAuthSessionAsync(
+        response.authorize_url,
+        'handsfree://oauth/callback'
+      );
+
+      if (result.type === 'cancel') {
+        Alert.alert('Cancelled', 'GitHub authorization was cancelled');
+      } else if (result.type === 'dismiss') {
+        Alert.alert('Dismissed', 'GitHub authorization was dismissed');
+      }
+    } catch (error) {
+      console.error('GitHub OAuth error:', error);
+      Alert.alert('Connection Error', `Failed to connect GitHub: ${error.message}`);
+    } finally {
+      setConnectingGithub(false);
+    }
+  };
+
+  const disconnectGitHub = async () => {
+    Alert.alert('Disconnect GitHub', 'Are you sure you want to disconnect GitHub?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Disconnect',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await AsyncStorage.removeItem(STORAGE_KEYS.GITHUB_CONNECTION_ID);
+            setGithubConnectionId(null);
+            Alert.alert('Success', 'GitHub disconnected');
+          } catch (error) {
+            Alert.alert('Error', `Failed to disconnect: ${error.message}`);
+          }
+        },
+      },
+    ]);
   };
 
   const saveSettings = async () => {
@@ -221,45 +267,70 @@ export default function SettingsScreen() {
       await AsyncStorage.setItem(STORAGE_KEYS.USE_CUSTOM_URL, useCustomUrl.toString());
       await setSpeakNotifications(speakNotifications);
 
-      Alert.alert(
-        'Success',
-        'Settings saved! Please restart the app for changes to take full effect.',
-        [{ text: 'OK' }]
-      );
+      await setSimulateGlassesAudio(simulateGlassesAudio);
+      clearGlassesAudioCache();
+
+      await setPhoneDispatcherUrl(phoneDispatcherUrl);
+
+      Alert.alert('Success', 'Settings saved! Changes take effect immediately on next use.');
     } catch (error) {
       Alert.alert('Error', `Failed to save settings: ${error.message}`);
     }
   };
 
   const resetToDefaults = () => {
-    Alert.alert(
-      'Reset Settings',
-      'Are you sure you want to reset to default values?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Reset',
-          style: 'destructive',
-          onPress: async () => {
-            setUserId('');
-            setBaseUrl(DEFAULT_BASE_URL);
-            setUseCustomUrl(false);
-            setSpeakNotificationsState(__DEV__);
-            try {
-              await AsyncStorage.multiRemove([
-                STORAGE_KEYS.USER_ID,
-                STORAGE_KEYS.BASE_URL,
-                STORAGE_KEYS.USE_CUSTOM_URL,
-              ]);
-              await setSpeakNotifications(__DEV__);
-              Alert.alert('Success', 'Settings reset to defaults');
-            } catch (error) {
-              Alert.alert('Error', `Failed to reset settings: ${error.message}`);
-            }
-          },
+    Alert.alert('Reset Settings', 'Are you sure you want to reset to default values?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Reset',
+        style: 'destructive',
+        onPress: async () => {
+          setUserId('');
+          setBaseUrl(DEFAULT_BASE_URL);
+          setUseCustomUrl(false);
+          setSpeakNotificationsState(__DEV__);
+          setAutoSpeakNotifications(false);
+          setSimulateGlassesAudioState(false);
+          setPhoneDispatcherUrlState('');
+
+          try {
+            await AsyncStorage.multiRemove([
+              STORAGE_KEYS.USER_ID,
+              STORAGE_KEYS.BASE_URL,
+              STORAGE_KEYS.USE_CUSTOM_URL,
+              STORAGE_KEYS.GITHUB_CONNECTION_ID,
+              STORAGE_KEYS.SPEAK_NOTIFICATIONS,
+            ]);
+            await setSpeakNotifications(__DEV__);
+            await setAutoSpeakEnabled(false);
+            await setSimulateGlassesAudio(false);
+            clearGlassesAudioCache();
+            await setPhoneDispatcherUrl('');
+
+            Alert.alert('Success', 'Settings reset to defaults');
+          } catch (error) {
+            Alert.alert('Error', `Failed to reset settings: ${error.message}`);
+          }
         },
-      ]
-    );
+      },
+    ]);
+  };
+
+  const testPhoneDispatch = async () => {
+    setDispatchTesting(true);
+    try {
+      const result = await dispatchViaPhone({
+        title: `handsfree mobile dispatch test (${new Date().toISOString()})`,
+        body: 'This is a test dispatch from the mobile app. If you see this, the phone-local dispatcher wiring works.',
+        labels: ['handsfree', 'mobile-test'],
+      });
+      const pretty = typeof result === 'string' ? result : JSON.stringify(result, null, 2);
+      Alert.alert('Dispatch Succeeded', pretty.length > 200 ? `${pretty.slice(0, 200)}…` : pretty);
+    } catch (error) {
+      Alert.alert('Dispatch Failed', String(error?.message || error));
+    } finally {
+      setDispatchTesting(false);
+    }
   };
 
   const generateUserId = () => {
@@ -454,6 +525,46 @@ export default function SettingsScreen() {
         )}
       </View>
 
+      {/* Dev Tools */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Dev Tools</Text>
+
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>Simulate glasses audio</Text>
+          <Switch
+            value={simulateGlassesAudio}
+            onValueChange={setSimulateGlassesAudioState}
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={simulateGlassesAudio ? '#007AFF' : '#f4f3f4'}
+          />
+        </View>
+        <Text style={styles.helpText}>
+          When enabled, the app uses an expo-av based simulation instead of the native glasses module.
+        </Text>
+
+        <Text style={styles.sectionSubtitle}>Phone Dispatcher</Text>
+        <Text style={styles.helpText}>
+          Base URL for a phone-local dispatcher service (expects POST /dispatch). Example: http://192.168.1.42:8765
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="http://192.168.1.42:8765"
+          value={phoneDispatcherUrl}
+          onChangeText={setPhoneDispatcherUrlState}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="url"
+        />
+        <View style={styles.buttonContainer}>
+          <Button
+            title={dispatchTesting ? 'Testing…' : 'Test Phone Dispatch'}
+            onPress={testPhoneDispatch}
+            disabled={dispatchTesting}
+            color="#4CAF50"
+          />
+        </View>
+      </View>
+
       {/* Push Notifications Configuration */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Push Notifications</Text>
@@ -531,6 +642,9 @@ export default function SettingsScreen() {
         </View>
         <Text style={styles.helpText}>
           When enabled, notifications will be automatically spoken aloud.
+        </Text>
+      </View>
+
       {/* Notification Settings */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Notifications</Text>
@@ -546,10 +660,8 @@ export default function SettingsScreen() {
         </View>
 
         <Text style={styles.helpText}>
-          When enabled, incoming push notifications will be automatically spoken via TTS.
-          {__DEV__ 
-            ? ' (Default: ON in development)' 
-            : ' (Default: OFF in production)'}
+          When enabled, incoming notifications will be spoken via TTS.
+          {__DEV__ ? ' (Default: ON in development)' : ' (Default: OFF in production)'}
         </Text>
       </View>
 
@@ -590,6 +702,12 @@ export default function SettingsScreen() {
         <Text style={styles.debugText}>
           Speak notifications: {speakNotifications ? 'Enabled' : 'Disabled'}
         </Text>
+        <Text style={styles.debugText}>
+          Simulate glasses audio: {simulateGlassesAudio ? 'Enabled' : 'Disabled'}
+        </Text>
+        <Text style={styles.debugText}>
+          Phone dispatcher URL: {phoneDispatcherUrl || '(not set)'}
+        </Text>
       </View>
     </ScrollView>
   );
@@ -621,6 +739,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 10,
+  },
+  sectionSubtitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    marginTop: 5,
+    marginBottom: 5,
   },
   helpText: {
     fontSize: 13,
@@ -740,6 +864,7 @@ const styles = StyleSheet.create({
   subscriptionActions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
   loadingContainer: {
     flexDirection: 'row',
     alignItems: 'center',

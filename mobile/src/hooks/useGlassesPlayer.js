@@ -1,37 +1,25 @@
-import { Platform } from 'react-native';
+import { getGlassesAudio } from '../native/glassesAudio';
 
 let ExpoGlassesAudio = null;
 let lastIsPlaying = false;
 let playbackStatusSubscription = null;
 
 // Try to load the native module, but gracefully handle if it's not available
-try {
-  ExpoGlassesAudio = require('expo-glasses-audio').default;
-} catch (error) {
-  console.log('Native expo-glasses-audio module not available:', error.message);
-}
-
-function ensurePlaybackListener() {
-  if (!ExpoGlassesAudio || playbackStatusSubscription) return;
+async function ensurePlaybackListener(module) {
+  if (!module || playbackStatusSubscription) return;
 
   try {
-    playbackStatusSubscription = ExpoGlassesAudio.addPlaybackStatusListener((event) => {
+    playbackStatusSubscription = module.addPlaybackStatusListener((event) => {
       if (event && typeof event.isPlaying === 'boolean') {
         lastIsPlaying = event.isPlaying;
       }
     });
   } catch (error) {
-    console.warn('Failed to add glasses playback status listener; events may not be available in this runtime:', error);
-  }
-}
-
-function getExpoGlassesAudioOrThrow() {
-  if (!ExpoGlassesAudio) {
-    throw new Error(
-      'Native expo-glasses-audio module not available. This feature requires a development build (expo-dev-client).'
+    console.warn(
+      'Failed to add glasses playback status listener; events may not be available in this runtime:',
+      error
     );
   }
-  return ExpoGlassesAudio;
 }
 
 /**
@@ -40,14 +28,10 @@ function getExpoGlassesAudioOrThrow() {
  * @returns {Promise<void>}
  */
 export async function playAudioThroughGlasses(fileUri) {
-  if (Platform.OS !== 'ios') {
-    throw new Error('Glasses audio playback is currently supported on iOS only.');
-  }
-
-  const module = getExpoGlassesAudioOrThrow();
-  ensurePlaybackListener();
+  const module = await getGlassesAudio();
+  ExpoGlassesAudio = module;
+  await ensurePlaybackListener(module);
   await module.playAudio(fileUri);
-  lastIsPlaying = true;
 }
 
 /**
@@ -55,10 +39,10 @@ export async function playAudioThroughGlasses(fileUri) {
  * @returns {Promise<void>}
  */
 export async function stopGlassesAudio() {
-  const module = getExpoGlassesAudioOrThrow();
-  ensurePlaybackListener();
+  const module = await getGlassesAudio();
+  ExpoGlassesAudio = module;
+  await ensurePlaybackListener(module);
   await module.stopPlayback();
-  lastIsPlaying = false;
 }
 
 /**
@@ -68,7 +52,6 @@ export async function stopGlassesAudio() {
  * @returns {boolean}
  */
 export function isGlassesAudioPlaying() {
-  ensurePlaybackListener();
   return lastIsPlaying;
 }
 
@@ -89,5 +72,5 @@ export function cleanupGlassesPlayer() {
  * @returns {boolean}
  */
 export function isGlassesPlayerAvailable() {
-  return ExpoGlassesAudio !== null && Platform.OS === 'ios';
+  return ExpoGlassesAudio !== null;
 }
