@@ -100,6 +100,14 @@ This index helps you find the right documentation for your needs, whether you're
 | [Audio Routing](docs/meta-ai-glasses-audio-routing.md) | Bluetooth details | Developers |
 | [Troubleshooting](docs/ios-rayban-troubleshooting.md) | Common issues | Testers |
 
+### Android & Emulator
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| [Mobile README (Android)](mobile/README.md#run-on-simulator) | Android emulator setup and run commands | Mobile developers |
+| [Meta Glasses Integration](docs/meta-ai-glasses.md) | Notes on Android + emulator Bluetooth/audio limitations | Developers |
+| [Termux Phone Dispatcher](docs/termux-phone-dispatcher.md) | Run a phone-local GitHub dispatcher | Developers |
+
 ### Mobile Development
 
 | Document | Description | Audience |
@@ -168,6 +176,17 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 4. [Troubleshooting](docs/ios-rayban-troubleshooting.md) - Fix issues
 5. [Demo Checklist](docs/mvp1-demo-checklist.md) - Preparation
 
+### Use Case: "I want to test on Android (emulator or device)"
+
+1. [Mobile README](mobile/README.md#run-on-simulator) - Emulator setup and run
+2. [Mobile README](mobile/README.md#run-on-physical-device) - Install on a physical device
+3. [Meta Glasses Integration](docs/meta-ai-glasses.md) - Bluetooth/audio routing notes
+
+### Use Case: "I want to dispatch GitHub tasks from my phone"
+
+1. [Termux Phone Dispatcher](docs/termux-phone-dispatcher.md) - Run the phone-local dispatcher
+2. [Mobile README](mobile/README.md) - Configure the app to call the dispatcher
+
 ### Use Case: "I want to understand the system architecture"
 
 1. [README](README.md#system-architecture) - High-level overview
@@ -221,6 +240,7 @@ docs/
 ├── agent-runner-setup.md             # Agent delegation
 ├── SECRET_STORAGE_AND_SESSIONS.md    # Secret management
 ├── push-notifications.md             # Push notification setup
+├── termux-phone-dispatcher.md        # Phone-local GitHub dispatcher
 ├── webhooks.md                        # Webhook integration
 ├── mvp1-demo-checklist.md            # Demo preparation
 └── ... (more specialized docs)
