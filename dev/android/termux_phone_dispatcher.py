@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import os
+import secrets
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.error import HTTPError
@@ -52,6 +53,10 @@ def _read_json(handler: BaseHTTPRequestHandler) -> dict:
 
 
 def create_issue(repo_full_name: str, token: str, title: str, body: str, labels: list[str]) -> dict:
+    if "/" not in repo_full_name:
+        raise ValueError(
+            f"Invalid DISPATCH_REPO format; expected 'owner/repo' but got {repo_full_name!r}"
+        )
     owner, repo = repo_full_name.split("/", 1)
     url = f"https://api.github.com/repos/{owner}/{repo}/issues"
 
@@ -94,7 +99,7 @@ class Handler(BaseHTTPRequestHandler):
         shared_secret = os.environ.get("DISPATCHER_SHARED_SECRET", "").strip()
         if shared_secret:
             provided = (self.headers.get("X-Handsfree-Dispatcher-Secret") or "").strip()
-            if provided != shared_secret:
+            if not secrets.compare_digest(provided, shared_secret):
                 return _json_response(self, 401, {"error": "Unauthorized"})
 
         token = os.environ.get("GITHUB_TOKEN", "").strip()
