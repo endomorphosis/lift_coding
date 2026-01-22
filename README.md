@@ -9,6 +9,7 @@ A hands-free AI companion for GitHub that helps manage pull requests, issues, an
 - **[Contributing Guide](CONTRIBUTING.md)** - Development workflow and best practices
 - **[Mobile App Documentation](mobile/README.md)** - iOS/Android app setup and features
 - **[iPhone & Meta Glasses Testing](docs/ios-rayban-mvp1-runbook.md)** - Complete runbook for hardware testing
+- **[Android Networking Matrix](docs/android-networking-matrix.md)** - Which backend URL to use (emulator vs device)
 
 ## 📱 Key Features
 
