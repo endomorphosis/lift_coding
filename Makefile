@@ -28,6 +28,9 @@ openapi-validate:
 compose-up:
 	docker compose up -d
 
+compose-logs:
+	docker compose logs -f --tail=200
+
 compose-down:
 	docker compose down
 
