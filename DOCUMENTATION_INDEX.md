@@ -109,6 +109,20 @@ This index helps you find the right documentation for your needs, whether you're
 | [Glasses Module](mobile/glasses/README.md) | Native module docs | Mobile developers |
 | [Push Notifications](docs/push-notifications.md) | Notification setup | Mobile developers |
 
+### Android Workflows (In-Flight)
+
+These Android workflow docs/tools are being developed in draft PRs and may not be on `main` yet:
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| [PR #424](https://github.com/endomorphosis/lift_coding/pull/424) | Android emulator setup docs | Mobile developers |
+| [PR #425](https://github.com/endomorphosis/lift_coding/pull/425) | Android emulator smoke script | Mobile developers |
+| [PR #426](https://github.com/endomorphosis/lift_coding/pull/426) | Android physical device workflow + `adb reverse` helper | Mobile developers |
+| [PR #428](https://github.com/endomorphosis/lift_coding/pull/428) | Dockerized Android emulator runner docs | Mobile developers |
+| [PR #430](https://github.com/endomorphosis/lift_coding/pull/430) | Mobile Settings: backend URL presets (emulator vs device) | Mobile developers |
+| [PR #432](https://github.com/endomorphosis/lift_coding/pull/432) | Phone dispatcher shared-secret auth | Mobile developers |
+| [PR #433](https://github.com/endomorphosis/lift_coding/pull/433) | Android networking matrix | Mobile developers |
+
 ### Configuration & Deployment
 
 | Document | Description | Audience |
