@@ -104,7 +104,7 @@ This index helps you find the right documentation for your needs, whether you're
 
 | Document | Description | Audience |
 |----------|-------------|----------|
-| [Mobile README (Android)](mobile/README.md#android-emulator) | Android emulator setup and run commands | Mobile developers |
+| [Mobile README (Android)](mobile/README.md#run-on-simulator) | Android emulator setup and run commands | Mobile developers |
 | [Meta Glasses Integration](docs/meta-ai-glasses.md) | Notes on Android + emulator Bluetooth/audio limitations | Developers |
 | [Termux Phone Dispatcher](docs/termux-phone-dispatcher.md) | Run a phone-local GitHub dispatcher | Developers |
 
@@ -164,8 +164,8 @@ This index helps you find the right documentation for your needs, whether you're
 
 ### Use Case: "I want to test on Android (emulator or device)"
 
-1. [Mobile README](mobile/README.md#android-emulator) - Emulator setup and run
-2. [Mobile README](mobile/README.md#build-and-install-on-android-device) - Install on a physical device
+1. [Mobile README](mobile/README.md#run-on-simulator) - Emulator setup and run
+2. [Mobile README](mobile/README.md#run-on-physical-device) - Install on a physical device
 3. [Meta Glasses Integration](docs/meta-ai-glasses.md) - Bluetooth/audio routing notes
 
 ### Use Case: "I want to dispatch GitHub tasks from my phone"
