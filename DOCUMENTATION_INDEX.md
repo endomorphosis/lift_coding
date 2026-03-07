@@ -58,6 +58,7 @@ This index helps you find the right documentation for your needs, whether you're
 - [Database Schema](ARCHITECTURE.md#database-schema) - Data models
 - [Authentication](docs/AUTHENTICATION.md) - Auth flows
 - [Agent Delegation](docs/agent-runner-setup.md) - Agent system
+- [GitHub CLI + Copilot CLI Plan](implementation_plan/docs/12-github-cli-copilot-integration.md) - AI/ML integration roadmap
 
 ---
 
@@ -89,6 +90,7 @@ This index helps you find the right documentation for your needs, whether you're
 | [Mobile Client Integration](docs/mobile-client-integration.md) | API usage patterns | Mobile developers |
 | [Webhooks](docs/webhooks.md) | GitHub webhook integration | Developers |
 | [Authentication](docs/AUTHENTICATION.md) | Auth modes and flows | Developers |
+| [GitHub CLI + Copilot CLI Plan](implementation_plan/docs/12-github-cli-copilot-integration.md) | AI/ML service integration roadmap | Developers |
 
 ### iPhone & Meta Glasses
 
