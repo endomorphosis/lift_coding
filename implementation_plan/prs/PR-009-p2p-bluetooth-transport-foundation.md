@@ -1,4 +1,4 @@
-# PR-009: P2P Bluetooth transport foundation (py-libp2p + protocol contract)
+# PR-009: P2P Bluetooth transport foundation (Berty v1 network -> py-libp2p)
 
 ## Goal
 Deliver the first production-grade slice of handset peer networking by hardening the backend libp2p bluetooth transport path and defining a versioned protocol contract compatible with future mobile data-channel work.
@@ -9,6 +9,9 @@ Deliver the first production-grade slice of handset peer networking by hardening
 - Existing scaffold in `src/handsfree/transport/` provides safe provider fallback and needs protocol/session hardening.
 
 ## Scope
+- Add a Berty-parity mapping appendix for this slice:
+  - which Berty networking behaviors are matched in PR-009
+  - which behaviors remain for PR-010+
 - Define and document wire envelopes:
   - handshake, message, ack, error
   - version fields + compatibility rules
