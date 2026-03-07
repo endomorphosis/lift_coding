@@ -20,7 +20,7 @@ Additionally, Berty-inspired implementation packets for PR-009 through PR-013 no
 3. **Automation Scripts Ready**
    - `scripts/create_draft_prs.py` - Python script to create all 3 PRs
    - `scripts/create-draft-prs.sh` - Bash script alternative
-   - `scripts/create_draft_prs.sh` - Another bash variant
+   - `scripts/create-placeholder-pr-queue-draft-prs.sh` - Placeholder branch queue PR opener (PR-001..PR-013)
    - `scripts/README.md` - Full documentation
 
 4. **Checklist Updated**
@@ -137,6 +137,8 @@ For PR-009..PR-013, expected PR numbers will be whichever next draft slots are a
 - Tracking documents written
 - Scripts created and tested
 
-❌ **Action required**: Run `scripts/create_draft_prs.py` for the remaining implementation gaps and use `scripts/create_draft_prs.sh` for draft PRs including PR-009..PR-013.
+❌ **Action required**:
+- Run `scripts/create_draft_prs.py` (or `scripts/create-draft-prs.sh`) for PR-026/PR-027/PR-028.
+- Run `scripts/create-placeholder-pr-queue-draft-prs.sh` for the placeholder draft PR queue (PR-001..PR-013, including PR-009..PR-013).
 
 Once the PRs are created, Copilot agents can implement the features according to the tracking document specifications.

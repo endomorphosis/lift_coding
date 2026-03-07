@@ -25,7 +25,7 @@ This directory contains automation scripts to create draft PRs for the 3 remaini
 
 ## Quick Start
 
-### Option 1: Bash Script (Recommended)
+### Option 1: Bash Script (PR-026/027/028 gap set)
 
 ```bash
 cd /path/to/lift_coding
@@ -38,7 +38,7 @@ If you are working from the implementation-plan placeholder branches and want to
 
 ```bash
 cd /path/to/lift_coding
-./scripts/create_draft_prs.sh
+./scripts/create-placeholder-pr-queue-draft-prs.sh
 ```
 
 ### Option 2: Python Script
@@ -47,6 +47,11 @@ cd /path/to/lift_coding
 cd /path/to/lift_coding
 python3 scripts/create_draft_prs.py
 ```
+
+Script usage summary (exact filenames):
+
+- `scripts/create-draft-prs.sh` (hyphenated) and `scripts/create_draft_prs.py` (underscored): create draft PRs for PR-026/PR-027/PR-028.
+- `scripts/create-placeholder-pr-queue-draft-prs.sh`: opens the placeholder branch queue draft PRs (PR-001..PR-013, including PR-009..PR-013).
 
 ### Option 3: Manual Creation
 
