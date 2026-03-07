@@ -13,6 +13,7 @@ Then parallelize:
 - PR-008 (agent orchestration) depends on PR-004 + PR-003
 - PR-009 (MCP++ IPFS providers) depends on PR-008
 - PR-010 (Meta glasses IPFS direct prototype + MCP production) depends on PR-009
+- PR-011 (NL prompt -> hierarchical IPFS tool planning) depends on PR-010
 
 Files:
 - PR-001-repo-foundation.md
@@ -25,3 +26,4 @@ Files:
 - PR-008-agent-orchestration-stub.md
 - PR-009-mcp-plus-plus-ipfs-integration.md
 - PR-010-meta-glasses-ipfs-tooling-prototype-and-mcp-production.md
+- PR-011-nl-prompt-to-hierarchical-ipfs-tool-planning.md

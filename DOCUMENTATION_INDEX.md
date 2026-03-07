@@ -81,6 +81,7 @@ This index helps you find the right documentation for your needs, whether you're
 | [Implementation Plan](implementation_plan/) | Design documents | Developers |
 | [MCP++ IPFS Integration Plan](implementation_plan/prs/PR-009-mcp-plus-plus-ipfs-integration.md) | MCP server integration rollout | Developers |
 | [Meta Glasses + IPFS Tool Integration Plan](implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md) | Direct prototype + MCP production strategy | Developers |
+| [NL Prompt to Hierarchical IPFS Tool Plan](implementation_plan/docs/13-nl-prompt-to-hierarchical-tools-ipfs-datasets.md) | Intent parsing + logic/prover + hierarchical execution design | Developers |
 | [Command Grammar](spec/command_grammar.md) | Supported intents | Developers |
 
 ### API & Integration
