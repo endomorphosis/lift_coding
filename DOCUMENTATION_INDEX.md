@@ -79,6 +79,7 @@ This index helps you find the right documentation for your needs, whether you're
 | [Architecture](ARCHITECTURE.md) | System design | All |
 | [README](README.md#system-architecture) | High-level overview | All |
 | [Implementation Plan](implementation_plan/) | Design documents | Developers |
+| [MCP++ IPFS Integration Plan](implementation_plan/prs/PR-009-mcp-plus-plus-ipfs-integration.md) | MCP server integration rollout | Developers |
 | [Command Grammar](spec/command_grammar.md) | Supported intents | Developers |
 
 ### API & Integration
