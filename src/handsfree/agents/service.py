@@ -9,7 +9,7 @@ from typing import Any
 
 import duckdb
 
-from handsfree.agent_providers import get_provider
+from handsfree.agent_providers import get_provider, is_copilot_cli_available
 from handsfree.db.agent_tasks import (
     create_agent_task,
     get_agent_tasks,
@@ -59,7 +59,8 @@ class AgentService:
             provider: Provider name. If None, uses provider selection precedence:
                      1. HANDSFREE_AGENT_DEFAULT_PROVIDER environment variable
                      2. github_issue_dispatch if configured (HANDSFREE_AGENT_DISPATCH_REPO + token)
-                     3. "copilot" as final fallback
+                     3. copilot_cli when `gh copilot` is available
+                     4. "copilot" as final fallback
             target_type: Type of target ("issue", "pr", or None).
             target_ref: Reference to target (e.g., "owner/repo#123").
             trace: Optional trace information (JSON-serializable).
@@ -71,7 +72,8 @@ class AgentService:
         # 1. Explicit argument
         # 2. HANDSFREE_AGENT_DEFAULT_PROVIDER env var
         # 3. github_issue_dispatch if configured
-        # 4. copilot as fallback
+        # 4. copilot_cli if available
+        # 5. copilot as fallback
         if provider is None:
             import os
             provider = os.getenv("HANDSFREE_AGENT_DEFAULT_PROVIDER")
@@ -79,6 +81,8 @@ class AgentService:
                 # Check if github_issue_dispatch is configured
                 if self._is_github_dispatch_configured():
                     provider = "github_issue_dispatch"
+                elif is_copilot_cli_available():
+                    provider = "copilot_cli"
                 else:
                     provider = "copilot"
         # Merge provided trace with default metadata
