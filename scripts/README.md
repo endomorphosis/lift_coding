@@ -32,6 +32,15 @@ cd /path/to/lift_coding
 ./scripts/create-draft-prs.sh
 ```
 
+### Option 1b: Open placeholder draft PR queue (PR-001..PR-013)
+
+If you are working from the implementation-plan placeholder branches and want to open the queue of draft PRs (including PR-009..PR-013), run:
+
+```bash
+cd /path/to/lift_coding
+./scripts/create_draft_prs.sh
+```
+
 ### Option 2: Python Script
 
 ```bash

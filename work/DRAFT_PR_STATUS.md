@@ -3,6 +3,7 @@
 ## Current Status
 
 The implementation plan gap analysis has been completed. All tracking documents for the remaining work have been created, and automation scripts are ready to create the draft PRs. However, the actual GitHub pull requests have not yet been created.
+Additionally, Berty-inspired implementation packets for PR-009 through PR-013 now have paired `tracking/` + `work/` docs and are ready to be opened as draft PRs for Copilot execution.
 
 ## What Has Been Done ✅
 
@@ -47,6 +48,17 @@ The following draft PRs need to be created on GitHub:
 - **Purpose**: Document and provide examples for external agent runners
 - **Impact**: Enable external agents to process dispatched tasks
 - **Status**: Ready for creation
+
+### PR-009..PR-013: Berty-inspired Bluetooth/libp2p implementation stack
+- **Branches**:
+  - `draft/pr-009-p2p-bluetooth-transport-foundation`
+  - `draft/pr-010-mobile-bluetooth-data-channel-bridge`
+  - `draft/pr-011-peer-session-handshake-and-identity`
+  - `draft/pr-012-peer-messaging-ux-and-command-integration`
+  - `draft/pr-013-resilience-security-and-rollout-controls`
+- **Purpose**: Open execution-ready draft PRs from implementation plan packets
+- **Impact**: Enables immediate Copilot-driven implementation for the networking stack
+- **Status**: Ready for creation (tracking/work packets prepared)
 
 ## How to Create the Draft PRs
 
@@ -93,7 +105,7 @@ The automation scripts were created to enable manual or CI-based execution outsi
 
 ## Next Steps
 
-1. **Run the script** to create all 3 draft PRs:
+1. **Run the script** to create the queued draft PRs:
    ```bash
    python3 scripts/create_draft_prs.py
    ```
@@ -116,6 +128,8 @@ Based on recent PR history, the new PRs will likely be:
 
 (Exact numbers depend on other PR activity in the repository)
 
+For PR-009..PR-013, expected PR numbers will be whichever next draft slots are available at creation time.
+
 ## Summary
 
 ✅ **All preparatory work is complete**
@@ -123,6 +137,6 @@ Based on recent PR history, the new PRs will likely be:
 - Tracking documents written
 - Scripts created and tested
 
-❌ **Action required**: Run `scripts/create_draft_prs.py` to create the 3 remaining draft PRs on GitHub
+❌ **Action required**: Run `scripts/create_draft_prs.py` for the remaining implementation gaps and use `scripts/create_draft_prs.sh` for draft PRs including PR-009..PR-013.
 
 Once the PRs are created, Copilot agents can implement the features according to the tracking document specifications.
