@@ -7,6 +7,7 @@ from handsfree.agent_providers import (
     CopilotCLIAgentProvider,
     get_provider,
     is_copilot_cli_available,
+    reset_copilot_cli_availability_cache,
 )
 
 
@@ -15,6 +16,7 @@ class TestCopilotCLIAvailability:
 
     def test_returns_false_when_gh_missing(self, monkeypatch):
         """Availability check should return False when gh is not installed."""
+        reset_copilot_cli_availability_cache()
         monkeypatch.setattr("handsfree.agent_providers.shutil.which", lambda _: None)
         assert is_copilot_cli_available() is False
 

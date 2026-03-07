@@ -10,11 +10,13 @@ import os
 import shutil
 import subprocess
 from abc import ABC, abstractmethod
+from functools import lru_cache
 from typing import Any
 
 from handsfree.db.agent_tasks import AgentTask
 
 logger = logging.getLogger(__name__)
+CLI_DETECTION_TIMEOUT_SECONDS = 2
 
 
 class AgentProvider(ABC):
@@ -190,8 +192,9 @@ class CopilotAgentProvider(AgentProvider):
         }
 
 
-def is_copilot_cli_available() -> bool:
-    """Check whether GitHub Copilot CLI is available via gh.
+@lru_cache(maxsize=1)
+def _detect_copilot_cli_available() -> bool:
+    """Detect whether GitHub Copilot CLI is available via gh.
 
     Returns:
         True when `gh` is installed and `gh copilot --help` exits successfully.
@@ -205,12 +208,22 @@ def is_copilot_cli_available() -> bool:
             [gh_path, "copilot", "--help"],
             capture_output=True,
             text=True,
-            timeout=2,
+            timeout=CLI_DETECTION_TIMEOUT_SECONDS,
             check=False,
         )
         return result.returncode == 0
     except (OSError, subprocess.SubprocessError):
         return False
+
+
+def is_copilot_cli_available() -> bool:
+    """Return cached Copilot CLI availability."""
+    return _detect_copilot_cli_available()
+
+
+def reset_copilot_cli_availability_cache() -> None:
+    """Clear cached Copilot CLI availability (primarily for tests)."""
+    _detect_copilot_cli_available.cache_clear()
 
 
 class CopilotCLIAgentProvider(AgentProvider):
