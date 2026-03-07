@@ -96,11 +96,21 @@ def _encode_envelope(peer_id: str, payload: bytes) -> bytes:
 
 
 def _decode_envelope(frame: bytes) -> tuple[str, bytes]:
-    data = json.loads(frame.decode("utf-8"))
+    try:
+        data = json.loads(frame.decode("utf-8"))
+    except UnicodeDecodeError as exc:
+        raise ValueError("Envelope frame is not valid UTF-8 data") from exc
+    except json.JSONDecodeError as exc:
+        raise ValueError("Envelope frame is not valid JSON data") from exc
+
     peer_id = data.get("peer_id")
     payload_b64 = data.get("payload_b64")
     if not isinstance(peer_id, str) or not peer_id:
         raise ValueError("Envelope peer_id must be a non-empty string")
     if not isinstance(payload_b64, str) or not payload_b64:
         raise ValueError("Envelope payload_b64 must be a non-empty string")
-    return peer_id, base64.b64decode(payload_b64.encode("ascii"))
+    try:
+        payload = base64.b64decode(payload_b64.encode("ascii"))
+    except (UnicodeEncodeError, ValueError) as exc:
+        raise ValueError("Envelope payload_b64 is not valid ASCII base64 data") from exc
+    return peer_id, payload

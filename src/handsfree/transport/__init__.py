@@ -40,9 +40,7 @@ def get_transport_provider() -> TransportProvider:
     provider_type = os.environ.get("HANDSFREE_TRANSPORT_PROVIDER", "stub").lower()
 
     if provider_type == "stub":
-        from handsfree.transport.stub_provider import StubTransportProvider
-
-        return StubTransportProvider()
+        return _stub_fallback()
     if provider_type == "libp2p_bluetooth":
         try:
             from handsfree.transport.libp2p_bluetooth import Libp2pBluetoothTransport
@@ -64,6 +62,10 @@ def get_transport_provider() -> TransportProvider:
     else:
         logger.warning("Unknown transport provider '%s', falling back to stub", provider_type)
 
+    return _stub_fallback()
+
+
+def _stub_fallback() -> TransportProvider:
     from handsfree.transport.stub_provider import StubTransportProvider
 
     return StubTransportProvider()

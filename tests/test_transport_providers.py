@@ -6,6 +6,11 @@ from unittest.mock import MagicMock
 import pytest
 
 
+@pytest.fixture
+def mock_libp2p_runtime(monkeypatch):
+    monkeypatch.setitem(sys.modules, "libp2p", MagicMock())
+
+
 def test_get_transport_provider_default_stub():
     from handsfree.transport import get_transport_provider
     from handsfree.transport.stub_provider import StubTransportProvider
@@ -25,10 +30,8 @@ def test_get_transport_provider_libp2p_fallback(monkeypatch):
     assert isinstance(provider, StubTransportProvider)
 
 
-def test_libp2p_transport_send_and_receive(monkeypatch):
+def test_libp2p_transport_send_and_receive(mock_libp2p_runtime):
     from handsfree.transport.libp2p_bluetooth import Libp2pBluetoothTransport
-
-    monkeypatch.setitem(sys.modules, "libp2p", MagicMock())
 
     class FakeBluetoothDriver:
         def __init__(self):
@@ -59,10 +62,8 @@ def test_libp2p_transport_send_and_receive(monkeypatch):
     assert received == [("peerA", b"hello")]
 
 
-def test_libp2p_transport_validates_inputs(monkeypatch):
+def test_libp2p_transport_validates_inputs(mock_libp2p_runtime):
     from handsfree.transport.libp2p_bluetooth import Libp2pBluetoothTransport
-
-    monkeypatch.setitem(sys.modules, "libp2p", MagicMock())
 
     class FakeBluetoothDriver:
         def send_frame(self, frame: bytes) -> None:
