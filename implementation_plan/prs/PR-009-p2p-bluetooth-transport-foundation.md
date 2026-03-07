@@ -1,4 +1,4 @@
-# PR-009: P2P Bluetooth transport foundation (Berty v1 network -> py-libp2p)
+# PR-009: P2P Bluetooth transport foundation (Berty v1 network port)
 
 ## Goal
 Deliver the first production-grade slice of handset peer networking by hardening the backend libp2p bluetooth transport path and defining a versioned protocol contract compatible with future mobile data-channel work.

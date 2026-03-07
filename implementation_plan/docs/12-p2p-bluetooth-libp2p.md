@@ -14,6 +14,9 @@ Define a concrete, phased plan to evolve HandsFree from server-centric mobile au
   - https://github.com/berty/berty/tree/v1/network
 - Python libp2p target runtime:
   - https://github.com/libp2p/py-libp2p
+- Source pinning requirement:
+  - During Phase 0, pin Berty references to a specific commit/tag and maintain a stable mirror list of referenced files/interfaces.
+  - For any pin update, require: (1) compatibility impact note, (2) refreshed parity checklist, (3) rerun of transport fixture suite.
 
 ## Current state (verified in-repo)
 - Mobile Bluetooth support exists for audio integration (`mobile/modules/expo-glasses-audio`).
@@ -38,7 +41,7 @@ This plan is a **conceptual port**, not a line-by-line code translation. We pres
 
 ### Component mapping matrix
 | Berty v1 network concept (Go) | HandsFree py-libp2p target | Porting notes |
-|---|---|---|
+| --- | --- | --- |
 | Bluetooth driver wrappers around native platform APIs | Mobile module Bluetooth data-channel bridge | Keep native iOS/Android adapter boundaries and expose minimal JS events/API |
 | go-libp2p transport integration for BLE links | `handsfree.transport.libp2p_bluetooth` provider implementation | Preserve provider factory + stub fallback contract |
 | Multiaddr-based peer addressing | py-libp2p-compatible peer addressing abstraction | Define canonical peer addressing and conversion at transport boundary |
