@@ -49,8 +49,17 @@ def test_fallback_llm_router_when_dependency_missing():
 def test_delegates_to_embeddings_router_module(monkeypatch):
     """Embeddings adapter should delegate to ipfs_datasets_py embeddings_router."""
     module = ModuleType("ipfs_datasets_py.embeddings_router")
-    module.embed_text = lambda text, **kwargs: [0.1, float(len(text))]
-    module.embed_texts = lambda texts, **kwargs: [[float(len(text))] for text in texts]
+
+    def embed_text(text, **kwargs):
+        _ = kwargs
+        return [0.1, float(len(text))]
+
+    def embed_texts(texts, **kwargs):
+        _ = kwargs
+        return [[float(len(text))] for text in texts]
+
+    module.embed_text = embed_text
+    module.embed_texts = embed_texts
 
     monkeypatch.setitem(sys.modules, "ipfs_datasets_py.embeddings_router", module)
     reset_ipfs_datasets_router_caches()
@@ -64,8 +73,16 @@ def test_delegates_to_embeddings_router_module(monkeypatch):
 def test_delegates_to_ipfs_backend_router_module(monkeypatch):
     """IPFS adapter should delegate to ipfs_datasets_py ipfs_backend_router."""
     module = ModuleType("ipfs_datasets_py.ipfs_backend_router")
-    module.add_bytes = lambda data, **kwargs: f"cid-{len(data)}"
-    module.cat = lambda cid: f"payload:{cid}".encode()
+
+    def add_bytes(data, **kwargs):
+        _ = kwargs
+        return f"cid-{len(data)}"
+
+    def cat(cid):
+        return f"payload:{cid}".encode()
+
+    module.add_bytes = add_bytes
+    module.cat = cat
 
     monkeypatch.setitem(sys.modules, "ipfs_datasets_py.ipfs_backend_router", module)
     reset_ipfs_datasets_router_caches()
@@ -79,7 +96,12 @@ def test_delegates_to_ipfs_backend_router_module(monkeypatch):
 def test_delegates_to_llm_router_module(monkeypatch):
     """LLM adapter should delegate to ipfs_datasets_py llm_router."""
     module = ModuleType("ipfs_datasets_py.llm_router")
-    module.generate_text = lambda prompt, **kwargs: f"generated:{prompt}"
+
+    def generate_text(prompt, **kwargs):
+        _ = kwargs
+        return f"generated:{prompt}"
+
+    module.generate_text = generate_text
 
     monkeypatch.setitem(sys.modules, "ipfs_datasets_py.llm_router", module)
     reset_ipfs_datasets_router_caches()

@@ -13,7 +13,7 @@ from __future__ import annotations
 import importlib
 import logging
 from functools import lru_cache
-from typing import Any, Protocol
+from typing import Any, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ class _UnavailableRouter:
     def __init__(self, router_name: str) -> None:
         self._router_name = router_name
 
-    def _raise(self, method: str) -> None:
+    def _raise(self, method: str) -> NoReturn:
         raise NotImplementedError(
             f"{self._router_name}.{method} is unavailable: install ipfs_datasets_py"
         )
@@ -64,12 +64,10 @@ class _UnavailableEmbeddingsRouter(_UnavailableRouter):
     def __init__(self) -> None:
         super().__init__("embeddings_router")
 
-    def embed_text(self, text: str, **kwargs: Any) -> list[float]:
-        _ = (text, kwargs)
+    def embed_text(self, text: str, **kwargs: Any) -> NoReturn:
         self._raise("embed_text")
 
-    def embed_texts(self, texts: list[str], **kwargs: Any) -> list[list[float]]:
-        _ = (texts, kwargs)
+    def embed_texts(self, texts: list[str], **kwargs: Any) -> NoReturn:
         self._raise("embed_texts")
 
 
@@ -77,12 +75,10 @@ class _UnavailableIPFSRouter(_UnavailableRouter):
     def __init__(self) -> None:
         super().__init__("ipfs_router")
 
-    def add_bytes(self, data: bytes, **kwargs: Any) -> str:
-        _ = (data, kwargs)
+    def add_bytes(self, data: bytes, **kwargs: Any) -> NoReturn:
         self._raise("add_bytes")
 
-    def cat(self, cid: str) -> bytes:
-        _ = cid
+    def cat(self, cid: str) -> NoReturn:
         self._raise("cat")
 
 
@@ -90,8 +86,7 @@ class _UnavailableLLMRouter(_UnavailableRouter):
     def __init__(self) -> None:
         super().__init__("llm_router")
 
-    def generate_text(self, prompt: str, **kwargs: Any) -> str:
-        _ = (prompt, kwargs)
+    def generate_text(self, prompt: str, **kwargs: Any) -> NoReturn:
         self._raise("generate_text")
 
 
