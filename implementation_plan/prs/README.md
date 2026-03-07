@@ -12,6 +12,10 @@ Then parallelize:
 - PR-007 (policy + safe write action) depends on PR-004 + PR-005
 - PR-008 (agent orchestration) depends on PR-004 + PR-003
 - PR-009 (p2p bluetooth transport foundation) extends transport/provider baseline and can proceed in parallel with mobile data-channel preparation
+- PR-010 (mobile bluetooth data-channel bridge) depends on PR-009 protocol contract
+- PR-011 (peer session handshake + identity) depends on PR-010 + PR-009
+- PR-012 (peer messaging UX + command integration) depends on PR-011
+- PR-013 (resilience/security/rollout) depends on PR-009 through PR-012
 
 Files:
 - PR-001-repo-foundation.md
@@ -23,3 +27,7 @@ Files:
 - PR-007-policy-engine-and-safe-action.md
 - PR-008-agent-orchestration-stub.md
 - PR-009-p2p-bluetooth-transport-foundation.md
+- PR-010-mobile-bluetooth-data-channel-bridge.md
+- PR-011-peer-session-handshake-and-identity.md
+- PR-012-peer-messaging-ux-and-command-integration.md
+- PR-013-resilience-security-and-rollout-controls.md
