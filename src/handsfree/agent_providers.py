@@ -212,6 +212,12 @@ def _detect_copilot_cli_available() -> bool:
             check=False,
         )
         return result.returncode == 0
+    except subprocess.TimeoutExpired:
+        logger.debug(
+            "Timed out after %ss while detecting Copilot CLI availability",
+            CLI_DETECTION_TIMEOUT_SECONDS,
+        )
+        return False
     except (OSError, subprocess.SubprocessError):
         return False
 

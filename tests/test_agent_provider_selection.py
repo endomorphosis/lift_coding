@@ -59,7 +59,7 @@ class TestProviderSelection:
         assert task.target_ref == "#123"
 
     def test_default_provider_when_not_specified(self, db_conn, parser):
-        """Test that provider falls back to copilot when CLI and dispatch are unavailable."""
+        """Test fallback chain ends at copilot when dispatch and CLI are unavailable."""
         # Parse intent without explicit provider
         intent = parser.parse("ask agent to fix issue 456")
 
