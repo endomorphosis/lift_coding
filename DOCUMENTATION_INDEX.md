@@ -273,8 +273,18 @@ spec/
 
 ```
 implementation_plan/
-├── PR-*.md                            # PR implementation plans
-└── ... (design documents)
+├── docs/
+│   ├── 00-overview.md                 # Plan overview
+│   ├── 11-devloop-vscode.md           # Dev loop guidance
+│   └── 12-p2p-bluetooth-libp2p.md     # Berty-inspired py-libp2p bluetooth roadmap
+├── prs/
+│   ├── README.md                      # PR draft index
+│   ├── PR-009-p2p-bluetooth-transport-foundation.md
+│   ├── PR-010-mobile-bluetooth-data-channel-bridge.md
+│   ├── PR-011-peer-session-handshake-and-identity.md
+│   ├── PR-012-peer-messaging-ux-and-command-integration.md
+│   └── PR-013-resilience-security-and-rollout-controls.md
+└── ... (additional implementation docs)
 ```
 
 ---

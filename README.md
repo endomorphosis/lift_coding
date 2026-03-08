@@ -29,6 +29,13 @@ A hands-free AI companion for GitHub that helps manage pull requests, issues, an
 - **Native Modules**: iOS/Android Bluetooth audio integration
 - **External Services**: GitHub API, OpenAI (TTS/STT), Expo Push
 
+### Experimental P2P Transport Template
+
+The backend now includes an experimental `handsfree.transport` module with a
+`libp2p_bluetooth` provider scaffold inspired by Berty's layered network design.
+Set `HANDSFREE_TRANSPORT_PROVIDER=libp2p_bluetooth` to try the wrapper with a
+local py-libp2p installation, or keep the default `stub` provider in CI/dev.
+
 ## Agent Delegation
 
 Handsfree can delegate tasks to external agent runners that monitor a dispatch repository and perform work:
