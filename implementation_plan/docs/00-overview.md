@@ -13,6 +13,11 @@ short, safe, spoken feedback.
 - Profiles for different contexts (Workout, Kitchen, Walk, Commute)
 - Tight dev loop with VS Code: local simulator, fixtures, contract tests, and CI
 
+## Current expansion tracks
+- MCP and IPFS toolchain integration for Meta glasses workflows:
+  - `implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md`
+  - `implementation_plan/docs/13-nl-prompt-to-hierarchical-tools-ipfs-datasets.md`
+
 ## Non-goals (for MVP)
 - Full IDE-in-the-glasses
 - Long-form code editing by voice
