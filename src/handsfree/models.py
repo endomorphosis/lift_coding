@@ -207,6 +207,15 @@ class MergeRequest(BaseModel):
     idempotency_key: str | None = None
 
 
+class CommentRequest(BaseModel):
+    """PR comment request."""
+
+    repo: str
+    pr_number: int = Field(..., ge=1)
+    comment_body: str
+    idempotency_key: str | None = None
+
+
 class ActionResult(BaseModel):
     """Action result."""
 
@@ -329,6 +338,28 @@ class TTSRequest(BaseModel):
         description="Audio format (wav, mp3)",
         pattern="^(wav|mp3)$",
     )
+
+
+class DevPeerEnvelopeRequest(BaseModel):
+    """Dev-only peer envelope ingress request."""
+
+    peer_ref: str = Field(..., min_length=1)
+    frame_base64: str = Field(..., min_length=1)
+
+
+class DevPeerEnvelopeResponse(BaseModel):
+    """Dev-only peer envelope ingress response."""
+
+    accepted: bool
+    peer_ref: str
+    peer_id: str
+    kind: str
+    session_id: str
+    message_id: str
+    protocol: str | None = None
+    payload_text: str | None = None
+    payload_json: dict[str, Any] | None = None
+    ack_frame_base64: str | None = None
 
 
 class CreateNotificationSubscriptionRequest(BaseModel):

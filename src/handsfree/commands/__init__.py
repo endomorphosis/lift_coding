@@ -10,7 +10,6 @@ This module implements:
 from .intent_parser import IntentParser, ParsedIntent
 from .pending_actions import PendingAction, PendingActionManager, RedisPendingActionManager
 from .profiles import Profile, ProfileConfig
-from .router import CommandRouter
 from .session_context import RedisSessionContext, SessionContext
 
 __all__ = [
@@ -25,3 +24,12 @@ __all__ = [
     "SessionContext",
     "RedisSessionContext",
 ]
+
+
+def __getattr__(name: str):
+    """Lazily import router types to avoid package-level cycles."""
+    if name == "CommandRouter":
+        from .router import CommandRouter
+
+        return CommandRouter
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

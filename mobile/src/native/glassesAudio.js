@@ -12,10 +12,16 @@ function createSubscription(removeFn) {
 function createSimulatedGlassesAudio() {
   let currentRecording = null;
   let currentSound = null;
+  const peers = new Map();
+  const connectedPeers = new Set();
 
   const recordingListeners = new Set();
   const playbackListeners = new Set();
   const routeListeners = new Set();
+  const peerDiscoveredListeners = new Set();
+  const peerConnectedListeners = new Set();
+  const peerDisconnectedListeners = new Set();
+  const frameReceivedListeners = new Set();
 
   function emitRecordingProgress(isRecording, duration) {
     for (const listener of recordingListeners) {
@@ -41,6 +47,46 @@ function createSimulatedGlassesAudio() {
     for (const listener of routeListeners) {
       try {
         listener(route);
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  function emitPeerDiscovered(peer) {
+    for (const listener of peerDiscoveredListeners) {
+      try {
+        listener({ peer });
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  function emitPeerConnected(event) {
+    for (const listener of peerConnectedListeners) {
+      try {
+        listener(event);
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  function emitPeerDisconnected(event) {
+    for (const listener of peerDisconnectedListeners) {
+      try {
+        listener(event);
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  function emitFrameReceived(event) {
+    for (const listener of frameReceivedListeners) {
+      try {
+        listener(event);
       } catch {
         // ignore
       }
@@ -74,6 +120,26 @@ function createSimulatedGlassesAudio() {
     addPlaybackStatusListener(listener) {
       playbackListeners.add(listener);
       return createSubscription(() => playbackListeners.delete(listener));
+    },
+
+    addPeerDiscoveredListener(listener) {
+      peerDiscoveredListeners.add(listener);
+      return createSubscription(() => peerDiscoveredListeners.delete(listener));
+    },
+
+    addPeerConnectedListener(listener) {
+      peerConnectedListeners.add(listener);
+      return createSubscription(() => peerConnectedListeners.delete(listener));
+    },
+
+    addPeerDisconnectedListener(listener) {
+      peerDisconnectedListeners.add(listener);
+      return createSubscription(() => peerDisconnectedListeners.delete(listener));
+    },
+
+    addFrameReceivedListener(listener) {
+      frameReceivedListeners.add(listener);
+      return createSubscription(() => frameReceivedListeners.delete(listener));
     },
 
     async startRecording(durationSeconds = 5, _audioSource) {
@@ -175,6 +241,97 @@ function createSimulatedGlassesAudio() {
       }
       currentSound = null;
       emitPlaybackStatus(false);
+    },
+
+    async scanPeers(_timeoutMs = 5000) {
+      return Array.from(peers.values());
+    },
+
+    async getPeerAdapterState() {
+      return {
+        transport: 'simulated',
+        adapterAvailable: true,
+        adapterEnabled: true,
+        scanPermissionGranted: true,
+        connectPermissionGranted: true,
+        advertisePermissionGranted: true,
+        advertising: false,
+        scanning: false,
+        state: 'simulated',
+      };
+    },
+
+    async advertiseIdentity(identity) {
+      if (!identity?.peerId) {
+        throw new Error('peerId cannot be empty');
+      }
+      return {
+        peerId: identity.peerId,
+        displayName: identity.displayName || '',
+      };
+    },
+
+    async connectPeer(peerRef) {
+      if (!peerRef) {
+        throw new Error('peerRef cannot be empty');
+      }
+      connectedPeers.add(peerRef);
+      const peer = peers.get(peerRef);
+      const event = {
+        peerRef,
+        peerId: peer?.peerId || '',
+        transport: peer?.transport || 'simulated',
+        connectedAt: Date.now(),
+      };
+      emitPeerConnected(event);
+      return event;
+    },
+
+    async disconnectPeer(peerRef, reason = 'manual') {
+      connectedPeers.delete(peerRef);
+      emitPeerDisconnected({ peerRef, reason });
+    },
+
+    async sendFrame(peerRef, payloadBase64) {
+      if (!connectedPeers.has(peerRef)) {
+        throw new Error('peerRef is not connected');
+      }
+      if (!payloadBase64) {
+        throw new Error('payloadBase64 cannot be empty');
+      }
+    },
+
+    async simulatePeerDiscovery(peer) {
+      if (!peer?.peerRef || !peer?.peerId) {
+        throw new Error('peerRef and peerId are required');
+      }
+      const normalized = {
+        peerRef: peer.peerRef,
+        peerId: peer.peerId,
+        displayName: peer.displayName,
+        transport: peer.transport || 'simulated',
+        rssi: peer.rssi,
+      };
+      peers.set(normalized.peerRef, normalized);
+      emitPeerDiscovered(normalized);
+      return normalized;
+    },
+
+    async simulatePeerConnection(peerRef) {
+      return await this.connectPeer(peerRef);
+    },
+
+    async simulateFrameReceived(peerRef, payloadBase64, peerId) {
+      emitFrameReceived({
+        peerRef,
+        peerId: peerId || peers.get(peerRef)?.peerId || '',
+        payloadBase64,
+      });
+    },
+
+    async resetPeerSimulation() {
+      peers.clear();
+      connectedPeers.clear();
     },
   };
 }

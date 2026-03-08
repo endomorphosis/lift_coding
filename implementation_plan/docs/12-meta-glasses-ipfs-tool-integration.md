@@ -1,5 +1,8 @@
 # Meta AI Glasses + IPFS Tooling Integration Plan
 
+Detailed MCP++ server/provider integration design now lives in:
+- `implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md`
+
 ## Goal
 Integrate `ipfs_datasets`, `ipfs_kit`, and `ipfs_accelerate` capabilities into the Meta AI glasses workflow with a two-mode strategy:
 

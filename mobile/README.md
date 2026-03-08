@@ -211,6 +211,24 @@ npx expo run:ios --device
 
 # Build and install on Android device
 npx expo run:android --device
+
+# Reproduce the verified local Android debug APK build
+npm run android:debug:local
+
+# Build, install, grant permissions, and verify one connected handset
+npm run android:prepare:local
+
+# Install and launch that APK on a connected Android handset
+npm run android:install:local
+
+# Grant the app runtime permissions needed for Bluetooth testing
+npm run android:grant:local
+
+# Inspect install state and granted permissions on the handset
+npm run android:check:local
+
+# Tail Android logs for the peer bridge and app runtime
+npm run android:logcat:local
 ```
 
 For detailed build instructions, see [BUILD.md](BUILD.md).

@@ -16,7 +16,7 @@ class TestAgentProviders:
     """Test agent provider implementations."""
 
     def test_copilot_provider_is_stub(self):
-        """Test that CopilotProvider is a placeholder."""
+        """Test that CopilotProvider routes through the canonical stub provider."""
         provider = CopilotProvider()
 
         result = provider.invoke(
@@ -26,13 +26,13 @@ class TestAgentProviders:
             target_ref="owner/repo#42",
         )
 
-        assert result.success is False
-        assert "not implemented" in result.message.lower()
+        assert result.success is True
+        assert "copilot agent" in result.message.lower()
         assert result.trace is not None
         assert result.trace["provider"] == "copilot"
 
     def test_custom_provider_is_stub(self):
-        """Test that CustomProvider is a placeholder."""
+        """Test that CustomProvider routes through the canonical stub provider."""
         provider = CustomProvider()
 
         result = provider.invoke(
@@ -42,8 +42,8 @@ class TestAgentProviders:
             target_ref="owner/repo#99",
         )
 
-        assert result.success is False
-        assert "not implemented" in result.message.lower()
+        assert result.success is True
+        assert "custom agent" in result.message.lower()
         assert result.trace is not None
         assert result.trace["provider"] == "custom"
 
@@ -57,6 +57,20 @@ class TestAgentProviders:
 
         mock = get_provider("mock")
         assert isinstance(mock, MockProvider)
+
+    def test_get_provider_supports_canonical_only_provider_names(self):
+        """Legacy factory should expose newer canonical provider names."""
+        provider = get_provider("copilot_cli")
+
+        result = provider.invoke(
+            task_id="task-456",
+            instruction="explain pull request",
+            target_type="pr",
+            target_ref="owner/repo#123",
+        )
+
+        assert result.trace is not None
+        assert result.trace["provider"] == "copilot_cli"
 
     def test_get_provider_unknown(self):
         """Test provider factory with unknown provider."""

@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "exit_code": 0,
+  "duration_ms": 47,
+  "stdout": "{\"headline\":\"Failure analysis for PR 123 / CI Linux\",\"summary\":\"The CI Linux job is failing during environment setup, which suggests a missing dependency or changed bootstrap command rather than an application-level regression.\",\"spoken_text\":\"The CI Linux workflow on PR 123 is failing in setup, so the first place to look is dependency installation or bootstrap changes.\"}",
+  "stderr": ""
+}

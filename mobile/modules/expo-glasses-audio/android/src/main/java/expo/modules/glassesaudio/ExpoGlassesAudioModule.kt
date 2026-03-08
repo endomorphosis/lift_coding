@@ -25,6 +25,7 @@ class ExpoGlassesAudioModule : Module() {
   private lateinit var routeMonitor: AudioRouteMonitor
   private lateinit var recorder: GlassesRecorder
   private lateinit var player: GlassesPlayer
+  private lateinit var peerBridge: BluetoothPeerBridge
   private val handler = Handler(Looper.getMainLooper())
   private var playbackTimeoutRunnable: Runnable? = null
   private var recordingStopRunnable: Runnable? = null
@@ -32,13 +33,24 @@ class ExpoGlassesAudioModule : Module() {
   override fun definition() = ModuleDefinition {
     Name("ExpoGlassesAudio")
 
-    Events("onAudioRouteChange", "onRecordingProgress", "onPlaybackStatus")
+    Events(
+      "onAudioRouteChange",
+      "onRecordingProgress",
+      "onPlaybackStatus",
+      "peerDiscovered",
+      "peerConnected",
+      "peerDisconnected",
+      "frameReceived"
+    )
 
     OnCreate {
       context = appContext.reactContext ?: throw IllegalStateException("React context is null")
       routeMonitor = AudioRouteMonitor(context)
       recorder = GlassesRecorder()
       player = GlassesPlayer()
+      peerBridge = BluetoothPeerBridge(context) { eventName, payload ->
+        sendEvent(eventName, payload)
+      }
     }
 
     Function("getAudioRoute") {
@@ -70,81 +82,66 @@ class ExpoGlassesAudioModule : Module() {
     AsyncFunction("startRecording") { durationSeconds: Int, audioSourceString: String?, promise: Promise ->
       try {
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        
-        // Parse audio source
+
         val audioSource = when (audioSourceString) {
           "phone" -> AudioSource.PHONE
           "glasses" -> AudioSource.GLASSES
           else -> AudioSource.AUTO
         }
-        
-        // Configure Bluetooth SCO based on audio source
+
         when (audioSource) {
           AudioSource.GLASSES -> {
-            // Enable Bluetooth SCO for glasses/Bluetooth mic
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             audioManager.startBluetoothSco()
           }
           AudioSource.PHONE -> {
-            // Use phone mic - don't enable Bluetooth SCO
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
           }
           AudioSource.AUTO -> {
-            // Auto mode - enable SCO if available
             audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
             if (audioManager.isBluetoothScoAvailableOffCall) {
               audioManager.startBluetoothSco()
             }
           }
         }
-        
-        // Create output file
+
         val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
         val timestamp = dateFormat.format(Date())
         val filename = "glasses_recording_$timestamp.wav"
         val outputDir = context.getExternalFilesDir(null) ?: context.filesDir
         val outputFile = File(outputDir, filename)
         outputFile.parentFile?.mkdirs()
-        
-        // Start recording with specified audio source
+
         recorder.start(outputFile, audioSource)
-        
-        // Schedule stop after duration
-        handler.postDelayed({
-          val result = recorder.stop()
+        sendEvent("onRecordingProgress", mapOf("isRecording" to true, "duration" to 0))
+
+        recordingStopRunnable?.let { handler.removeCallbacks(it) }
+        recordingStopRunnable = Runnable {
+          val result = this@ExpoGlassesAudioModule.recorder.stop()
           audioManager.stopBluetoothSco()
           audioManager.mode = AudioManager.MODE_NORMAL
-          
+
           if (result != null) {
-            // Emit recording stopped event with actual recorded duration
-            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to result.durationSeconds))
-            
+            sendEvent(
+              "onRecordingProgress",
+              mapOf("isRecording" to false, "duration" to result.durationSeconds)
+            )
             promise.resolve(
               mapOf(
-                "uri" to result.file.absolutePath,
+                "uri" to Uri.fromFile(result.file).toString(),
                 "duration" to result.durationSeconds,
                 "size" to result.sizeBytes.toInt()
               )
-          val finalFile = result?.file ?: outputFile
-          val fileSize = if (finalFile.exists()) finalFile.length() else 0L
-          val uri = Uri.fromFile(finalFile).toString()
-          
-          // Emit recording stopped event
-          sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-          
-          promise.resolve(
-            mapOf(
-              "uri" to uri,
-              "duration" to durationSeconds,
-              "size" to fileSize.toInt()
             )
           } else {
-            // Emit recording stopped event with scheduled duration as fallback
-            sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to durationSeconds))
-            promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available")
+            sendEvent(
+              "onRecordingProgress",
+              mapOf("isRecording" to false, "duration" to durationSeconds)
+            )
+            promise.reject("ERR_RECORDING_RESULT", "Recording stopped but no result available", null)
           }
-        }, (durationSeconds * 1000).toLong())
-        
+        }
+        handler.postDelayed(recordingStopRunnable!!, (durationSeconds * 1000).toLong())
       } catch (e: Exception) {
         promise.reject("ERR_START_RECORDING", "Failed to start recording: ${e.message}", e)
       }
@@ -152,23 +149,26 @@ class ExpoGlassesAudioModule : Module() {
 
     AsyncFunction("stopRecording") { promise: Promise ->
       try {
-        val result = recorder.stop()
-        
+        recordingStopRunnable?.let { handler.removeCallbacks(it) }
+        recordingStopRunnable = null
+
+        val result = this@ExpoGlassesAudioModule.recorder.stop()
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.stopBluetoothSco()
         audioManager.mode = AudioManager.MODE_NORMAL
 
-        val uri = result?.file?.let { Uri.fromFile(it).toString() } ?: ""
+        val uri = if (result != null) Uri.fromFile(result.file).toString() else ""
         val size = result?.sizeBytes?.toInt() ?: 0
         val duration = result?.durationSeconds ?: 0
-        
+
+        sendEvent("onRecordingProgress", mapOf("isRecording" to false, "duration" to duration))
         promise.resolve(
           mapOf(
             "uri" to uri,
             "duration" to duration,
             "size" to size
           )
-        }
+        )
       } catch (e: Exception) {
         promise.reject("ERR_STOP_RECORDING", "Failed to stop recording: ${e.message}", e)
       }
@@ -185,7 +185,7 @@ class ExpoGlassesAudioModule : Module() {
         val file = if (fileUri.startsWith("file://")) {
           val path = Uri.parse(fileUri).path
           if (path.isNullOrEmpty()) {
-            promise.reject("ERR_INVALID_URI", "Invalid file URI: $fileUri")
+            promise.reject("ERR_INVALID_URI", "Invalid file URI: $fileUri", null)
             return@AsyncFunction
           }
           File(path)
@@ -193,7 +193,7 @@ class ExpoGlassesAudioModule : Module() {
           File(fileUri)
         }
         if (!file.exists()) {
-          promise.reject("ERR_FILE_NOT_FOUND", "Audio file not found: $fileUri")
+          promise.reject("ERR_FILE_NOT_FOUND", "Audio file not found: $fileUri", null)
           return@AsyncFunction
         }
         
@@ -211,7 +211,7 @@ class ExpoGlassesAudioModule : Module() {
             synchronized(this@ExpoGlassesAudioModule) {
               if (!promiseSettled) {
                 promiseSettled = true
-                player.stop()
+                this@ExpoGlassesAudioModule.player.stop()
                 audioManager.stopBluetoothSco()
                 audioManager.mode = AudioManager.MODE_NORMAL
                 
@@ -220,7 +220,7 @@ class ExpoGlassesAudioModule : Module() {
                   "error" to "Playback timeout after ${PLAYBACK_TIMEOUT_MS / 60000} minutes"
                 ))
                 
-                promise.reject("ERR_PLAYBACK_TIMEOUT", "Playback did not complete within ${PLAYBACK_TIMEOUT_MS / 60000} minutes")
+                promise.reject("ERR_PLAYBACK_TIMEOUT", "Playback did not complete within ${PLAYBACK_TIMEOUT_MS / 60000} minutes", null)
               }
             }
           }
@@ -286,7 +286,7 @@ class ExpoGlassesAudioModule : Module() {
 
     AsyncFunction("stopPlayback") { promise: Promise ->
       try {
-        player.stop()
+        this@ExpoGlassesAudioModule.player.stop()
         
         // Cancel any pending timeout
         playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
@@ -302,13 +302,58 @@ class ExpoGlassesAudioModule : Module() {
       }
     }
 
+    AsyncFunction("scanPeers") { timeoutMs: Int ->
+      peerBridge.scanPeers(timeoutMs)
+    }
+
+    Function("getPeerAdapterState") {
+      peerBridge.getAdapterState()
+    }
+
+    AsyncFunction("advertiseIdentity") { peerId: String, displayName: String? ->
+      peerBridge.advertiseIdentity(peerId, displayName)
+    }
+
+    AsyncFunction("connectPeer") { peerRef: String ->
+      peerBridge.connectPeer(peerRef)
+    }
+
+    AsyncFunction("disconnectPeer") { peerRef: String, reason: String? ->
+      peerBridge.disconnectPeer(peerRef, reason)
+      null
+    }
+
+    AsyncFunction("sendFrame") { peerRef: String, payloadBase64: String ->
+      peerBridge.sendFrame(peerRef, payloadBase64)
+      null
+    }
+
+    AsyncFunction("simulatePeerDiscovery") { peer: Map<String, Any?> ->
+      peerBridge.simulatePeerDiscovery(peer)
+    }
+
+    AsyncFunction("simulatePeerConnection") { peerRef: String ->
+      peerBridge.simulatePeerConnection(peerRef)
+    }
+
+    AsyncFunction("simulateFrameReceived") { peerRef: String, payloadBase64: String, peerId: String? ->
+      peerBridge.simulateFrameReceived(peerRef, payloadBase64, peerId)
+      null
+    }
+
+    AsyncFunction("resetPeerSimulation") {
+      peerBridge.resetSimulation()
+      null
+    }
+
     OnDestroy {
       playbackTimeoutRunnable?.let { handler.removeCallbacks(it) }
       playbackTimeoutRunnable = null
       recordingStopRunnable?.let { handler.removeCallbacks(it) }
       recordingStopRunnable = null
-      recorder.stop()
-      player.stop()
+      peerBridge.resetSimulation()
+      this@ExpoGlassesAudioModule.recorder.stop()
+      this@ExpoGlassesAudioModule.player.stop()
     }
   }
 }

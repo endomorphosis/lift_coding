@@ -1,4 +1,4 @@
-package glasses
+package expo.modules.glassesaudio
 
 import android.content.Context
 

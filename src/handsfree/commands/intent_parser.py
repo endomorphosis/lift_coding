@@ -4,6 +4,13 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from handsfree.mcp import resolve_provider_alias
+
+
+PROVIDER_ALIASES = {
+    "copilot": "copilot",
+}
+
 
 @dataclass
 class ParsedIntent:
@@ -36,6 +43,12 @@ def _parse_reviewers(text: str) -> list[str]:
         return [r.strip() for r in text.replace(" and ", ",").split(",") if r.strip()]
     # Otherwise, split by spaces
     return [r.strip() for r in text.split() if r.strip()]
+
+
+def _parse_agent_provider(text: str) -> str:
+    """Resolve agent provider aliases, including MCP-backed IPFS providers."""
+    normalized = text.strip().lower()
+    return PROVIDER_ALIASES.get(normalized) or resolve_provider_alias(normalized) or normalized
 
 
 class IntentParser:
@@ -103,6 +116,277 @@ class IntentParser:
                 "pr.summarize",
                 {"pr_number": lambda m: int(m.group(1))},
             ),
+            # AI / Copilot read-only commands
+            (
+                re.compile(
+                    r"\bexplain\s+pr\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_pr",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(r"\bexplain\s+pr\s+(\d+)\b", re.IGNORECASE),
+                "ai.explain_pr",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+summarize\s+diff\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.summarize_diff",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+summarize\s+diff\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.summarize_diff",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "failure_target_type": lambda m: m.group(1).lower(),
+                    "failure_target": lambda m: m.group(2).strip(),
+                    "pr_number": lambda m: int(m.group(3)),
+                    "repo": lambda m: m.group(4),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "failure_target_type": lambda m: m.group(1).lower(),
+                    "failure_target": lambda m: m.group(2).strip(),
+                    "pr_number": lambda m: int(m.group(3)),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\bsummarize\s+diff\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.summarize_diff",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bsummarize\s+diff\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.summarize_diff",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(r"\bsummarize\s+diff\b", re.IGNORECASE),
+                "ai.summarize_diff",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "failure_target_type": lambda m: m.group(1).lower(),
+                    "failure_target": lambda m: m.group(2).strip(),
+                    "pr_number": lambda m: int(m.group(3)),
+                    "repo": lambda m: m.group(4),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "failure_target_type": lambda m: m.group(1).lower(),
+                    "failure_target": lambda m: m.group(2).strip(),
+                    "pr_number": lambda m: int(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:explain|summarize)\s+(?:the\s+)?failing?\s+(?:checks?|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(
+                    r"\b(?:explain|summarize)\s+(?:the\s+)?failing?\s+(?:checks?|failure)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_pr",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_pr",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "provider": "copilot_cli",
+                },
+            ),
+            (
+                re.compile(
+                    r"\bask\s+copilot\s+to\s+explain\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_pr",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "provider": "copilot_cli",
+                },
+            ),
+            # Direct MCP-backed IPFS intents
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\b(?:find|search|discover)\s+(.+?\s+datasets?)\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: f"{m.group(0).strip()}",
+                    "provider": "ipfs_datasets_mcp",
+                    "mcp_capability": "dataset_discovery",
+                    "mcp_input": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\b(?:add|upload|store)\s+(.+?)\s+to\s+ipfs\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(0).strip(),
+                    "provider": "ipfs_kit_mcp",
+                    "mcp_capability": "ipfs_add",
+                    "mcp_input": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\b(?:cat|fetch|get|read|download)\s+(.+?)\s+(?:from|on|in)\s+ipfs\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(0).strip(),
+                    "provider": "ipfs_kit_mcp",
+                    "mcp_capability": "ipfs_cat",
+                    "mcp_input": lambda m: m.group(1).strip(),
+                    "mcp_cid": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\b(pin|unpin)\s+(.+?)\s+(?:from|on|in)\s+ipfs\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(0).strip(),
+                    "provider": "ipfs_kit_mcp",
+                    "mcp_capability": "ipfs_pin",
+                    "mcp_input": lambda m: m.group(2).strip(),
+                    "mcp_cid": lambda m: m.group(2).strip(),
+                    "mcp_pin_action": lambda m: m.group(1).strip().lower(),
+                },
+            ),
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\b(?:run|start|create)\s+(?:an?\s+)?(?:p2p\s+|distributed\s+)?workflow\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(0).strip(),
+                    "provider": "ipfs_accelerate_mcp",
+                    "mcp_capability": "workflow",
+                },
+            ),
+            (
+                re.compile(
+                    r"^(?!.*\bagent\b).*\bdiscover\s+and\s+fetch\s+(.+?)\s+from\s+(https?://\S+)\b.*$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "instruction": lambda m: m.group(0).strip(),
+                    "provider": "ipfs_accelerate_mcp",
+                    "mcp_capability": "agentic_fetch",
+                    "mcp_input": lambda m: m.group(1).strip(),
+                    "mcp_seed_url": lambda m: m.group(2).strip(),
+                },
+            ),
             # PR request review (side effect)
             (
                 re.compile(
@@ -166,6 +450,41 @@ class IntentParser:
                 },
             ),
             # Agent delegation (placed before less specific PR patterns to take precedence)
+            (
+                re.compile(
+                    r"\b(?:ask|have|tell)\s+(?:the\s+)?(ipfs\s+datasets|ipfs\s+dataset|ipfs\s+kit|ipfs\s+accelerate)\s+agent\s+(?:to\s+)?(.*?)\s+(?:on\s+)?(?:pr|pull\s+request)\s+(\d+)$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "provider": lambda m: _parse_agent_provider(m.group(1)),
+                    "instruction": lambda m: m.group(2).strip(),
+                    "pr_number": lambda m: int(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:ask|have|tell)\s+(?:the\s+)?(ipfs\s+datasets|ipfs\s+dataset|ipfs\s+kit|ipfs\s+accelerate)\s+agent\s+(?:to\s+)?(.*?)\s+(?:issue|on\s+issue)\s+(\d+)$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "provider": lambda m: _parse_agent_provider(m.group(1)),
+                    "instruction": lambda m: m.group(2).strip(),
+                    "issue_number": lambda m: int(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:ask|have|tell)\s+(?:the\s+)?(ipfs\s+datasets|ipfs\s+dataset|ipfs\s+kit|ipfs\s+accelerate)\s+agent\s+(?:to\s+)?(.+)$",
+                    re.IGNORECASE,
+                ),
+                "agent.delegate",
+                {
+                    "provider": lambda m: _parse_agent_provider(m.group(1)),
+                    "instruction": lambda m: m.group(2).strip(),
+                },
+            ),
             (
                 re.compile(
                     r"\b(?:ask|have|tell)\s+(?:the\s+)?agent\s+(?:to\s+)?(.*?)\s+(?:on\s+)?(?:pr|pull\s+request)\s+(\d+)$",

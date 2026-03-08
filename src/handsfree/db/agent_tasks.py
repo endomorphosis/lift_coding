@@ -211,6 +211,48 @@ def update_agent_task_state(
     )
 
 
+def update_agent_task_trace(
+    conn: duckdb.DuckDBPyConnection,
+    task_id: str,
+    trace_update: dict[str, Any],
+) -> AgentTask | None:
+    """Merge new trace metadata without changing state."""
+    task = get_agent_task_by_id(conn, task_id)
+    if not task:
+        return None
+
+    updated_trace = task.trace or {}
+    updated_trace.update(trace_update)
+    now = datetime.now(UTC)
+
+    try:
+        task_uuid = uuid.UUID(task_id)
+    except ValueError:
+        return None
+
+    conn.execute(
+        """
+        UPDATE agent_tasks
+        SET last_update = ?, updated_at = ?
+        WHERE id = ?
+        """,
+        [json.dumps(updated_trace), now, task_uuid],
+    )
+
+    return AgentTask(
+        id=task.id,
+        user_id=task.user_id,
+        provider=task.provider,
+        target_type=task.target_type,
+        target_ref=task.target_ref,
+        instruction=task.instruction,
+        state=task.state,
+        trace=updated_trace,
+        created_at=task.created_at,
+        updated_at=now,
+    )
+
+
 def get_agent_task_by_id(
     conn: duckdb.DuckDBPyConnection,
     task_id: str,

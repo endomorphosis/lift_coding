@@ -1,5 +1,9 @@
 # P2P Bluetooth + py-libp2p Improvement Plan (Berty-inspired port blueprint)
 
+Coordination note:
+- the MCP++ IPFS server rollout is planned separately in `implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md`
+- this Bluetooth/libp2p track may later provide an edge transport or relay path for MCP-style requests, but that is not part of the initial MCP++ scope
+
 ## Goal
 Define a concrete, phased plan to evolve HandsFree from server-centric mobile audio routing to direct handset-to-handset peer communication over Bluetooth-backed py-libp2p transport, so smart glasses users can communicate with each other when backend connectivity is constrained.
 
@@ -14,6 +18,9 @@ Define a concrete, phased plan to evolve HandsFree from server-centric mobile au
   - https://github.com/berty/berty/tree/v1/network
 - Python libp2p target runtime:
   - https://github.com/libp2p/py-libp2p
+- Practical py-libp2p constraint:
+  - Upstream py-libp2p is still an experimental runtime and does not ship a Bluetooth transport.
+  - Therefore this design uses py-libp2p for peer identity, protocol naming, secure-stream conventions, and future host integration, while HandsFree owns the Bluetooth driver bridge and session envelope layer.
 - Source pinning requirement:
   - During Phase 0, pin Berty references to a specific commit/tag and maintain a stable mirror list of referenced files/interfaces.
   - For any pin update, require: (1) compatibility impact note, (2) refreshed parity checklist, (3) rerun of transport fixture suite.
@@ -39,6 +46,18 @@ Define a concrete, phased plan to evolve HandsFree from server-centric mobile au
 ## Porting charter: Berty (Go) -> HandsFree (Python)
 This plan is a **conceptual port**, not a line-by-line code translation. We preserve Berty’s architecture patterns and runtime behavior while implementing them with Python-native interfaces and py-libp2p extension points.
 
+### What gets ported from Berty’s shape
+- Separation between native Bluetooth plumbing and libp2p/session logic.
+- Explicit protocol IDs and version negotiation at the transport boundary.
+- Session-oriented lifecycle instead of raw frame passing.
+- Capability exchange before application messaging.
+- Clear room for offline-first retry/ack behavior.
+
+### What does not port 1:1
+- We do not attempt to mirror Go interfaces or Berty package layout.
+- We do not assume py-libp2p already has a BLE transport implementation.
+- We do not bypass mobile-native Bluetooth APIs; those remain in iOS/Android modules and are only surfaced to Python/JS through a narrow bridge.
+
 ### Component mapping matrix
 | Berty v1 network concept (Go) | HandsFree py-libp2p target | Porting notes |
 | --- | --- | --- |
@@ -59,6 +78,32 @@ This plan is a **conceptual port**, not a line-by-line code translation. We pres
   - `scanPeers()`, `advertiseIdentity()`, `connectPeer(peerRef)`, `sendFrame(peerRef, bytes)`
   - events: `peerDiscovered`, `peerConnected`, `peerDisconnected`, `frameReceived`
 
+### A.1) Driver contract between native mobile and Python transport
+The mobile bridge should look like a narrow Berty-style driver boundary rather than embedding session logic in native code.
+
+Required driver methods:
+- `start()`
+- `sendFrame(peerRef, bytes)`
+- `setFrameHandler((peerRef, bytes) => void)`
+
+Required driver events:
+- `peerDiscovered`
+- `peerConnected`
+- `peerDisconnected`
+- `frameReceived`
+
+Native responsibilities:
+- BLE scan/advertise/connect lifecycle
+- MTU-aware fragmentation/reassembly if platform requires it
+- permission and adapter diagnostics
+
+Python transport responsibilities:
+- protocol version checks
+- session IDs
+- capability negotiation
+- ack/retry/error envelopes
+- application payload dispatch
+
 ### B) Backend transport runtime (expand existing scaffold)
 - Keep `TransportProvider` factory model with env-based selection.
 - Expand `libp2p_bluetooth` from envelope shim to session-aware transport:
@@ -73,6 +118,68 @@ This plan is a **conceptual port**, not a line-by-line code translation. We pres
   - protocol version, sender peer id, conversation id, nonce, timestamp
 - Add compatibility strategy:
   - reject unsupported major versions, tolerate newer optional fields
+
+### C.1) Wire contract for PR-009 foundation
+Protocol ID:
+- `/handsfree/bluetooth/1.0.0`
+
+Envelope kinds:
+- `handshake`
+- `message`
+- `ack`
+- `error`
+
+Required fields on every frame:
+- `protocol_id`
+- `version_major`
+- `version_minor`
+- `kind`
+- `peer_id`
+- `session_id`
+- `message_id`
+- `timestamp_ms`
+- `nonce`
+
+Kind-specific fields:
+- `handshake`: `capabilities[]`
+- `message`: `payload_b64`
+- `ack`: `acked_message_id`
+- `error`: `error_code`, optional `error_detail`
+
+Compatibility rules:
+- reject mismatched `version_major`
+- accept newer `version_minor` when required fields still validate
+- reject unknown `kind`
+- reject frames above Bluetooth transport size budget
+
+### C.2) Session state machine
+- `new`
+- `handshaking`
+- `established`
+- `degraded`
+- `closed`
+
+Transitions:
+- outbound first send: `new -> handshaking -> established`
+- inbound valid handshake: `new -> established`
+- protocol or auth failure: `* -> degraded`
+- explicit disconnect or timeout: `* -> closed`
+
+### C.3) py-libp2p integration strategy
+Phase 1 does not require a custom upstream py-libp2p Bluetooth transport. Instead it uses py-libp2p as the runtime dependency that informs:
+- peer identity representation
+- protocol naming
+- future secure channel and stream multiplexing integration
+- capability detection for host/muxer support
+
+This avoids blocking on upstream transport gaps while keeping the architecture compatible with a later real py-libp2p transport adapter.
+
+Current HandsFree implementation note:
+- `handsfree.transport.libp2p_bluetooth` now includes a transport-adapter seam between the Bluetooth frame driver and future py-libp2p session wiring.
+- The current default adapter is an in-memory session registry used to preserve connection metadata until a real py-libp2p-backed adapter is added.
+- Duplicate `message_id` frames are treated as replay/retry events and return a fresh `ack` without redispatching the application payload.
+- The transport now supports protocol-scoped message routing on top of the existing frame envelope so future chat / command / notification channels can share one Bluetooth-backed session.
+- The first concrete logical channel is now `/handsfree/chat/1.0.0`, with JSON chat payloads carried inside the Bluetooth transport message wrapper.
 
 ### D) Product integration layer (new)
 - Add “peer mode” policy controls:
@@ -128,6 +235,19 @@ This plan is a **conceptual port**, not a line-by-line code translation. We pres
 - Unsupported protocol versions fail safely with actionable diagnostics.
 - Feature can be toggled off with no impact to existing backend flows.
 - Telemetry can explain connection failures without leaking payloads.
+
+## Reference implementation shape in this repo
+Backend:
+- `src/handsfree/transport/libp2p_bluetooth.py`
+  - owns envelope codec, session state, and py-libp2p runtime bootstrap
+
+Mobile:
+- `mobile/modules/expo-glasses-audio`
+  - should grow from audio-only routing into the Bluetooth data-channel bridge
+
+Provider boundary:
+- `src/handsfree/transport/__init__.py`
+  - keeps feature-flagged provider selection with safe stub fallback
 
 ## Test strategy
 - Unit tests:

@@ -3,8 +3,10 @@
 import pytest
 
 from handsfree.agents.service import AgentService
+from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
+from test_mcp_ipfs_provider import _FakeMCPClient
 
 
 @pytest.fixture
@@ -85,6 +87,30 @@ class TestAgentDelegate:
         tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
         assert tasks[0].trace is not None
         assert "created_via" in tasks[0].trace
+
+    def test_delegate_adds_mcp_provider_metadata(
+        self, agent_service, db_conn, test_user_id, monkeypatch
+    ):
+        """Test that MCP providers get normalized capability metadata."""
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
+        fake_provider = IPFSDatasetsMCPAgentProvider(client=_FakeMCPClient())
+        monkeypatch.setattr(
+            "handsfree.agents.service.get_provider",
+            lambda provider_name: fake_provider if provider_name == "ipfs_datasets_mcp" else None,
+        )
+        result = agent_service.delegate(
+            user_id=test_user_id,
+            instruction="find legal datasets",
+            provider="ipfs_datasets_mcp",
+        )
+
+        tasks = get_agent_tasks(conn=db_conn, user_id=test_user_id)
+        assert result["spoken_text"] == "Expanded legal query"
+        assert result["state"] == "completed"
+        assert tasks[0].trace is not None
+        assert tasks[0].state == "completed"
+        assert tasks[0].trace["provider_label"] == "IPFS Datasets"
+        assert tasks[0].trace["mcp_capability"] == "dataset_discovery"
 
 
 class TestAgentStatus:

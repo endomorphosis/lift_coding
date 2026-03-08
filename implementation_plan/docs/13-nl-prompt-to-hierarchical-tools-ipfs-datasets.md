@@ -1,5 +1,8 @@
 # Natural Language Prompt → Hierarchical Tools (IPFS Datasets + Logic + Theorem Prover)
 
+Detailed MCP++ execution and provider integration design now lives in:
+- `implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md`
+
 ## Objective
 Define a production-ready pipeline that transforms a natural language prompt into safe, deterministic hierarchical tool execution, using:
 - `ipfs_datasets_py` for dataset/tool capability grounding and dataset-aware parsing

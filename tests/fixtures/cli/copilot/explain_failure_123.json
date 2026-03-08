@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "exit_code": 0,
+  "duration_ms": 44,
+  "stdout": "{\"headline\":\"Failure analysis for PR 123\",\"summary\":\"The failing checks point to a missing parser fixture and an unguarded Copilot CLI parse path. The likely fix is to add the fixture and degrade safely when the CLI emits non-JSON output.\",\"spoken_text\":\"The failures on PR 123 look like a missing fixture plus a Copilot CLI parsing path that needs a safe fallback.\"}",
+  "stderr": ""
+}

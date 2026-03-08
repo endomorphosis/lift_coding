@@ -3,14 +3,23 @@ import React, { useEffect, useState, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { fetchTTS, sendAudioCommand, uploadDevAudio } from '../api/client';
+import { fetchTTS, postDevPeerEnvelope, sendAudioCommand, uploadDevAudio } from '../api/client';
 import { getDebugState, simulateNotificationForDev } from '../push';
 import ExpoGlassesAudio from 'expo-glasses-audio';
+import {
+  createAckEnvelope,
+  createChatMessageEnvelope,
+  createHandshakeEnvelope,
+  createSessionId,
+  decodeEnvelopeBase64,
+  encodeEnvelopeBase64,
+} from '../utils/peerEnvelope';
+import { buildPeerBackendValidationResult, replayBackendAckFrame } from '../utils/peerDiagnostics';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
 const NATIVE_MODULE_NOT_AVAILABLE_MESSAGE = 'Native glasses audio module not available. Please switch to DEV mode or ensure the native module is properly installed.';
-const NATIVE_MODULE_REQUIRED_METHODS = ['getAudioRoute', 'startRecording', 'stopRecording', 'playAudio', 'stopPlayback'];
+const PEER_TEST_PAYLOAD_BASE64 = 'cGluZw==';
 // Supported audio formats that the backend can accept
 // Note: 'caf' is not included here as it needs to be converted to 'm4a' (see inferAudioFormatFromUri)
 const SUPPORTED_AUDIO_FORMATS = ['wav', 'mp3', 'opus', 'm4a'];
@@ -26,6 +35,15 @@ const NATIVE_MODULE_REQUIRED_METHODS = [
   'stopPlayback',
   'addRecordingProgressListener',
   'addPlaybackStatusListener',
+  'getPeerAdapterState',
+  'scanPeers',
+  'advertiseIdentity',
+  'connectPeer',
+  'sendFrame',
+  'addPeerDiscoveredListener',
+  'addPeerConnectedListener',
+  'addPeerDisconnectedListener',
+  'addFrameReceivedListener',
 ];
 
 function normalizeLocalFileUriForFileSystem(uri) {
@@ -74,21 +92,48 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [pushDebugState, setPushDebugState] = useState(null);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
+  const [discoveredPeers, setDiscoveredPeers] = useState([]);
+  const [selectedPeerRef, setSelectedPeerRef] = useState(null);
+  const [activePeer, setActivePeer] = useState(null);
+  const [lastPeerEvent, setLastPeerEvent] = useState('No peer activity yet');
+  const [isScanningPeers, setIsScanningPeers] = useState(false);
+  const [peerAdapterState, setPeerAdapterState] = useState(null);
+  const [advertisedPeerIdentity, setAdvertisedPeerIdentity] = useState(null);
+  const [autoValidateInboundPeerFrames, setAutoValidateInboundPeerFrames] = useState(false);
+  const [lastInboundBackendValidation, setLastInboundBackendValidation] = useState(null);
+  const [lastOutboundPeerFrameBase64, setLastOutboundPeerFrameBase64] = useState(null);
+  const [lastOutboundPeerEnvelope, setLastOutboundPeerEnvelope] = useState(null);
+  const [lastInboundPeerEnvelope, setLastInboundPeerEnvelope] = useState(null);
+  const [peerBackendValidation, setPeerBackendValidation] = useState(null);
+  const [isValidatingPeerFrame, setIsValidatingPeerFrame] = useState(false);
+  const peerSessionRef = useRef(createSessionId());
+  const localPeerIdRef = useRef(`12D3KooWlocal${createSessionId()}`);
   const soundRef = useRef(null);
   const pendingTtsTempUriRef = useRef(null);
   const recordingPromiseRef = useRef(null);
 
-  const inferAudioFormatFromUri = (uri) => {
-    if (!uri) return 'm4a';
-    const lower = String(uri).toLowerCase();
+  const handleInboundPeerFrame = async (event, envelope = null) => {
+    if (!event?.peerRef || !autoValidateInboundPeerFrames) {
+      return;
+    }
 
-    // iOS can sometimes produce .caf with defaults; backend doesn't accept 'caf'.
-    if (lower.endsWith('.caf')) return 'm4a';
-
-    const match = lower.match(AUDIO_FORMAT_REGEX);
-    if (match?.[1]) return match[1];
-
-    return 'm4a';
+    try {
+      const response = await postDevPeerEnvelope(event.peerRef, event.payloadBase64);
+      const validationResult = buildPeerBackendValidationResult(response);
+      setLastInboundBackendValidation(validationResult);
+      if (validationResult.ack_frame_base64) {
+        await ExpoGlassesAudio.sendFrame(event.peerRef, validationResult.ack_frame_base64);
+        setLastPeerEvent(
+          `Auto-acked ${validationResult.kind} for ${event.peerId || event.peerRef}`
+        );
+      } else if (envelope?.kind) {
+        setLastPeerEvent(
+          `Validated inbound ${envelope.kind} for ${event.peerId || event.peerRef}`
+        );
+      }
+    } catch (error) {
+      setLastError(`Inbound backend validation failed: ${error.message}`);
+    }
   };
 
   useEffect(() => {
@@ -113,6 +158,7 @@ export default function GlassesDiagnosticsScreen() {
         setNativeModuleAvailable(false);
       }
       await checkAudioRoute();
+      await refreshPeerAdapterState();
     })();
 
     // Fetch initial debug state immediately
@@ -167,6 +213,10 @@ export default function GlassesDiagnosticsScreen() {
 
     let recordingSub = null;
     let playbackSub = null;
+    let peerDiscoveredSub = null;
+    let peerConnectedSub = null;
+    let peerDisconnectedSub = null;
+    let frameReceivedSub = null;
 
     try {
       recordingSub = ExpoGlassesAudio.addRecordingProgressListener((event) => {
@@ -198,6 +248,61 @@ export default function GlassesDiagnosticsScreen() {
       console.warn('Failed to subscribe to playback status:', error);
     }
 
+    try {
+      peerDiscoveredSub = ExpoGlassesAudio.addPeerDiscoveredListener((event) => {
+        const peer = event?.peer;
+        if (!peer?.peerRef) return;
+        setDiscoveredPeers((current) => {
+          const next = current.filter((item) => item.peerRef !== peer.peerRef);
+          return [...next, peer];
+        });
+        setLastPeerEvent(`Discovered ${peer.displayName || peer.peerId || peer.peerRef}`);
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to peer discovery:', error);
+    }
+
+    try {
+      peerConnectedSub = ExpoGlassesAudio.addPeerConnectedListener((event) => {
+        if (!event?.peerRef) return;
+        setActivePeer(event);
+        setLastPeerEvent(`Connected to ${event.peerId || event.peerRef}`);
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to peer connection:', error);
+    }
+
+    try {
+      peerDisconnectedSub = ExpoGlassesAudio.addPeerDisconnectedListener((event) => {
+        if (event?.peerRef && activePeer?.peerRef === event.peerRef) {
+          setActivePeer(null);
+        }
+        setLastPeerEvent(`Disconnected ${event?.peerRef || 'peer'} (${event?.reason || 'unknown'})`);
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to peer disconnects:', error);
+    }
+
+    try {
+      frameReceivedSub = ExpoGlassesAudio.addFrameReceivedListener((event) => {
+        if (!event?.peerRef) return;
+        try {
+          const envelope = decodeEnvelopeBase64(event.payloadBase64);
+          setLastInboundPeerEnvelope(envelope);
+          setLastPeerEvent(
+            `Frame received from ${event.peerId || event.peerRef}: ${envelope.kind} ${envelope.message_id}`
+          );
+          handleInboundPeerFrame(event, envelope).catch(() => {});
+        } catch {
+          setLastInboundPeerEnvelope(null);
+          setLastPeerEvent(`Frame received from ${event.peerId || event.peerRef}: ${event.payloadBase64}`);
+          handleInboundPeerFrame(event, null).catch(() => {});
+        }
+      });
+    } catch (error) {
+      console.warn('Failed to subscribe to peer frames:', error);
+    }
+
     return () => {
       try {
         recordingSub?.remove?.();
@@ -209,11 +314,32 @@ export default function GlassesDiagnosticsScreen() {
       } catch {
         // ignore
       }
+      try {
+        peerDiscoveredSub?.remove?.();
+      } catch {
+        // ignore
+      }
+      try {
+        peerConnectedSub?.remove?.();
+      } catch {
+        // ignore
+      }
+      try {
+        peerDisconnectedSub?.remove?.();
+      } catch {
+        // ignore
+      }
+      try {
+        frameReceivedSub?.remove?.();
+      } catch {
+        // ignore
+      }
     };
-  }, [devMode, nativeModuleAvailable]);
+  }, [activePeer?.peerRef, autoValidateInboundPeerFrames, devMode, nativeModuleAvailable]);
 
   useEffect(() => {
     checkAudioRoute();
+    refreshPeerAdapterState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [devMode]);
 
@@ -282,6 +408,19 @@ export default function GlassesDiagnosticsScreen() {
       setLastError(`Audio setup failed: ${error.message}`);
       setConnectionState('✗ Error');
       setAudioRoute('Unknown');
+    }
+  };
+
+  const refreshPeerAdapterState = async () => {
+    try {
+      if (typeof ExpoGlassesAudio.getPeerAdapterState === 'function') {
+        const adapterState = await ExpoGlassesAudio.getPeerAdapterState();
+        setPeerAdapterState(adapterState);
+      } else {
+        setPeerAdapterState(null);
+      }
+    } catch (error) {
+      setLastError(`Peer adapter check failed: ${error.message}`);
     }
   };
 
@@ -531,9 +670,6 @@ export default function GlassesDiagnosticsScreen() {
       const audioBase64 = await FileSystem.readAsStringAsync(localUriForRead, {
         encoding: FileSystem.EncodingType.Base64,
       });
-      const uploadFormat = inferAudioFormatFromUri(lastRecordingUri);
-      const { uri: fileUri, format } = await uploadDevAudio(audioBase64, uploadFormat);
-      const response = await sendAudioCommand(fileUri, format, {
       const uploaded = await uploadDevAudio(audioBase64, uploadFormat);
       const fileUri = uploaded?.uri;
       if (!fileUri) {
@@ -554,6 +690,224 @@ export default function GlassesDiagnosticsScreen() {
       setLastError(`Pipeline failed: ${error.message}`);
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const scanPeers = async () => {
+    try {
+      setLastError(null);
+      setIsScanningPeers(true);
+      await refreshPeerAdapterState();
+      const peers = await ExpoGlassesAudio.scanPeers(5000);
+      setDiscoveredPeers(Array.isArray(peers) ? peers : []);
+      setLastPeerEvent(`Scan complete (${Array.isArray(peers) ? peers.length : 0} peers)`);
+    } catch (error) {
+      setLastError(`Peer scan failed: ${error.message}`);
+    } finally {
+      setIsScanningPeers(false);
+    }
+  };
+
+  const seedDemoPeer = async () => {
+    try {
+      setLastError(null);
+      await refreshPeerAdapterState();
+      const peer = await ExpoGlassesAudio.simulatePeerDiscovery({
+        peerRef: 'peer://demo-glasses',
+        peerId: '12D3KooWdemoGlasses',
+        displayName: 'Demo Glasses Peer',
+        transport: 'simulated',
+        rssi: -42,
+      });
+      setDiscoveredPeers((current) => {
+        const next = current.filter((item) => item.peerRef !== peer.peerRef);
+        return [...next, peer];
+      });
+    } catch (error) {
+      setLastError(`Demo peer failed: ${error.message}`);
+    }
+  };
+
+  const advertiseLocalPeer = async () => {
+    try {
+      setLastError(null);
+      const identity = await ExpoGlassesAudio.advertiseIdentity({
+        peerId: localPeerIdRef.current,
+        displayName: 'HandsFree Glasses',
+      });
+      setAdvertisedPeerIdentity(identity);
+      await refreshPeerAdapterState();
+      setLastPeerEvent(`Advertising as ${identity.displayName || identity.peerId}`);
+    } catch (error) {
+      setLastError(`Advertise identity failed: ${error.message}`);
+    }
+  };
+
+  const sendEnvelopeToPeer = async (peerRef, envelope, successMessage) => {
+    const encodedEnvelope = encodeEnvelopeBase64(envelope);
+    await ExpoGlassesAudio.sendFrame(peerRef, encodedEnvelope);
+    setLastOutboundPeerEnvelope(envelope);
+    setLastOutboundPeerFrameBase64(encodedEnvelope);
+    setPeerBackendValidation(null);
+    setLastPeerEvent(successMessage);
+    return encodedEnvelope;
+  };
+
+  const getSelectedOrActivePeer = () => {
+    if (activePeer?.peerRef) {
+      return {
+        peerRef: activePeer.peerRef,
+        peerId: activePeer.peerId || activePeer.peerRef,
+      };
+    }
+    const selectedPeer = discoveredPeers.find((peer) => peer.peerRef === selectedPeerRef);
+    if (selectedPeer?.peerRef) {
+      return {
+        peerRef: selectedPeer.peerRef,
+        peerId: selectedPeer.peerId || selectedPeer.peerRef,
+      };
+    }
+    return null;
+  };
+
+  const connectToPeer = async (peer) => {
+    try {
+      setLastError(null);
+      await refreshPeerAdapterState();
+      if (!peer?.peerRef) {
+        Alert.alert('No Peer', 'Run a peer scan or add the demo peer first.');
+        return;
+      }
+      const connection = await ExpoGlassesAudio.connectPeer(peer.peerRef);
+      setActivePeer(connection);
+      setSelectedPeerRef(peer.peerRef);
+      const handshake = createHandshakeEnvelope({
+        peerId: connection.peerId || connection.peerRef,
+        sessionId: peerSessionRef.current,
+        capabilities: ['bluetooth-driver-bridge', 'handshake-v1', 'ack-v1'],
+      });
+      await sendEnvelopeToPeer(
+        connection.peerRef,
+        handshake,
+        `Connected and sent handshake to ${connection.peerId || connection.peerRef}`
+      );
+    } catch (error) {
+      setLastError(`Peer connect failed: ${error.message}`);
+    }
+  };
+
+  const connectFirstPeer = async () => {
+    await connectToPeer(discoveredPeers[0]);
+  };
+
+  const disconnectActivePeer = async () => {
+    try {
+      setLastError(null);
+      if (!activePeer?.peerRef) {
+        Alert.alert('No Active Peer', 'Connect to a peer first.');
+        return;
+      }
+      await ExpoGlassesAudio.disconnectPeer(activePeer.peerRef, 'manual');
+      setLastPeerEvent(`Disconnected ${activePeer.peerId || activePeer.peerRef}`);
+      setActivePeer(null);
+    } catch (error) {
+      setLastError(`Peer disconnect failed: ${error.message}`);
+    }
+  };
+
+  const clearPeerState = () => {
+    setDiscoveredPeers([]);
+    setSelectedPeerRef(null);
+    setActivePeer(null);
+    setLastPeerEvent('Peer state cleared');
+    setLastOutboundPeerFrameBase64(null);
+    setLastOutboundPeerEnvelope(null);
+    setLastInboundPeerEnvelope(null);
+    setPeerBackendValidation(null);
+    setLastInboundBackendValidation(null);
+  };
+
+  const resetPeerSimulation = async () => {
+    try {
+      setLastError(null);
+      if (typeof ExpoGlassesAudio.resetPeerSimulation === 'function') {
+        await ExpoGlassesAudio.resetPeerSimulation();
+      }
+      clearPeerState();
+      await refreshPeerAdapterState();
+      setLastPeerEvent('Peer simulation reset');
+    } catch (error) {
+      setLastError(`Peer simulation reset failed: ${error.message}`);
+    }
+  };
+
+  const sendPeerPing = async () => {
+    try {
+      setLastError(null);
+      if (!activePeer?.peerRef) {
+        Alert.alert('No Active Peer', 'Connect to a peer first.');
+        return;
+      }
+      const messageEnvelope = createChatMessageEnvelope({
+        peerId: activePeer.peerId || activePeer.peerRef,
+        sessionId: peerSessionRef.current,
+        text: `ping:${atob(PEER_TEST_PAYLOAD_BASE64)}`,
+        senderPeerId: localPeerIdRef.current,
+      });
+      await sendEnvelopeToPeer(
+        activePeer.peerRef,
+        messageEnvelope,
+        `Sent message envelope to ${activePeer.peerId || activePeer.peerRef}`
+      );
+    } catch (error) {
+      setLastError(`Send frame failed: ${error.message}`);
+    }
+  };
+
+  const simulatePeerReply = async () => {
+    try {
+      setLastError(null);
+      const targetPeer = getSelectedOrActivePeer();
+      if (!targetPeer?.peerRef) {
+        Alert.alert('No Peer', 'Select or connect to a peer first.');
+        return;
+      }
+      const ackEnvelope = createAckEnvelope({
+        peerId: targetPeer.peerId,
+        sessionId: peerSessionRef.current,
+        ackedMessageId: 'simulated-ack',
+      });
+      await ExpoGlassesAudio.simulateFrameReceived(
+        targetPeer.peerRef,
+        encodeEnvelopeBase64(ackEnvelope),
+        targetPeer.peerId
+      );
+    } catch (error) {
+      setLastError(`Simulate frame failed: ${error.message}`);
+    }
+  };
+
+  const validateLastPeerFrameViaBackend = async () => {
+    try {
+      setLastError(null);
+      setIsValidatingPeerFrame(true);
+      const targetPeer = getSelectedOrActivePeer();
+      if (!targetPeer?.peerRef || !lastOutboundPeerFrameBase64) {
+        Alert.alert('No Frame', 'Select or connect to a peer, then send a handshake or ping frame first.');
+        return;
+      }
+      const response = await postDevPeerEnvelope(targetPeer.peerRef, lastOutboundPeerFrameBase64);
+      const validationResult = buildPeerBackendValidationResult(response);
+      if (validationResult.ackEnvelope) {
+        setLastInboundPeerEnvelope(validationResult.ackEnvelope);
+        await replayBackendAckFrame(ExpoGlassesAudio, targetPeer.peerRef, validationResult);
+      }
+      setPeerBackendValidation(validationResult);
+      setLastPeerEvent(`Backend accepted ${response.kind} envelope for ${response.peer_id}`);
+    } catch (error) {
+      setLastError(`Backend validation failed: ${error.message}`);
+    } finally {
+      setIsValidatingPeerFrame(false);
     }
   };
 
@@ -578,6 +932,218 @@ export default function GlassesDiagnosticsScreen() {
         <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={checkAudioRoute}>
           <Text style={styles.buttonTextSecondary}>Refresh</Text>
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Peer Bridge</Text>
+        <Text style={styles.subtext}>Exercise Bluetooth peer discovery, connection, and frame events.</Text>
+        <Text style={styles.subtext}>Backend validation accepts the last outbound frame and replays any ack into the local diagnostics event flow.</Text>
+        <Text style={styles.text}>
+          Adapter: {peerAdapterState?.state || 'unknown'} / {peerAdapterState?.transport || 'n/a'}
+        </Text>
+        <Text style={styles.text}>
+          Ready: {peerAdapterState ? `${peerAdapterState.adapterEnabled ? 'adapter-on' : 'adapter-off'}, ${peerAdapterState.scanPermissionGranted ? 'scan-ok' : 'scan-missing'}, ${peerAdapterState.connectPermissionGranted ? 'connect-ok' : 'connect-missing'}, ${peerAdapterState.advertisePermissionGranted === false ? 'advertise-missing' : 'advertise-ok'}` : 'not checked'}
+        </Text>
+        <Text style={styles.text}>
+          Activity: {peerAdapterState ? `${peerAdapterState.scanning ? 'scanning' : 'idle'} / ${peerAdapterState.advertising ? 'advertising' : 'not-advertising'}` : 'unknown'}
+        </Text>
+        <Text style={styles.text}>Local peer ID: {localPeerIdRef.current}</Text>
+        <Text style={styles.text}>
+          Advertised identity: {advertisedPeerIdentity?.displayName || advertisedPeerIdentity?.peerId || 'none'}
+        </Text>
+        <Text style={styles.text}>
+          Auto-validate inbound frames: {autoValidateInboundPeerFrames ? 'on' : 'off'}
+        </Text>
+        <Text style={styles.text}>
+          Selected peer: {selectedPeerRef || 'None'}
+        </Text>
+        <Text style={styles.text}>Active peer: {activePeer?.peerId || activePeer?.peerRef || 'None'}</Text>
+        <Text style={styles.text}>Last event: {lastPeerEvent}</Text>
+        <Text style={styles.text}>
+          Last outbound frame: {lastOutboundPeerEnvelope?.kind || 'None'}
+        </Text>
+        <Text style={styles.text}>
+          Last inbound frame: {lastInboundPeerEnvelope?.kind || 'None'}
+        </Text>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={refreshPeerAdapterState}
+        >
+          <Text style={styles.buttonTextSecondary}>Refresh Peer Adapter State</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={advertiseLocalPeer}
+        >
+          <Text style={styles.buttonTextSecondary}>Advertise Local Identity</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={() => setAutoValidateInboundPeerFrames((current) => !current)}
+        >
+          <Text style={styles.buttonTextSecondary}>
+            {autoValidateInboundPeerFrames ? 'Disable Auto Inbound Validation' : 'Enable Auto Inbound Validation'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={clearPeerState}
+        >
+          <Text style={styles.buttonTextSecondary}>Clear Peer State</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={resetPeerSimulation}
+        >
+          <Text style={styles.buttonTextSecondary}>Reset Peer Simulation</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, (isScanningPeers || !nativeModuleAvailable) && styles.buttonDisabled]}
+          onPress={scanPeers}
+          disabled={isScanningPeers || !nativeModuleAvailable}
+        >
+          <Text style={styles.buttonText}>{isScanningPeers ? 'Scanning...' : 'Scan Nearby Peers'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={seedDemoPeer}>
+          <Text style={styles.buttonTextSecondary}>Add Demo Peer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, discoveredPeers.length === 0 && styles.buttonDisabled]}
+          onPress={connectFirstPeer}
+          disabled={discoveredPeers.length === 0}
+        >
+          <Text style={styles.buttonText}>Connect First Peer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary, !activePeer?.peerRef && styles.buttonDisabled]}
+          onPress={disconnectActivePeer}
+          disabled={!activePeer?.peerRef}
+        >
+          <Text style={styles.buttonTextSecondary}>Disconnect Active Peer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, !activePeer?.peerRef && styles.buttonDisabled]}
+          onPress={sendPeerPing}
+          disabled={!activePeer?.peerRef}
+        >
+          <Text style={styles.buttonText}>Send Ping Frame</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary, discoveredPeers.length === 0 && styles.buttonDisabled]}
+          onPress={simulatePeerReply}
+          disabled={discoveredPeers.length === 0}
+        >
+          <Text style={styles.buttonTextSecondary}>Simulate Inbound Frame</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            styles.buttonSecondary,
+            (!lastOutboundPeerFrameBase64 || isValidatingPeerFrame) && styles.buttonDisabled,
+          ]}
+          onPress={validateLastPeerFrameViaBackend}
+          disabled={!lastOutboundPeerFrameBase64 || isValidatingPeerFrame}
+        >
+          <Text style={styles.buttonTextSecondary}>
+            {isValidatingPeerFrame ? 'Validating...' : 'Validate + Replay Ack via Backend'}
+          </Text>
+        </TouchableOpacity>
+        {lastOutboundPeerEnvelope ? (
+          <View style={styles.debugInfo}>
+            <Text style={styles.debugLabel}>Outbound Envelope</Text>
+            <Text style={styles.debugValue}>
+              {lastOutboundPeerEnvelope.kind} • {lastOutboundPeerEnvelope.message_id}
+            </Text>
+            <Text style={styles.debugValue}>{lastOutboundPeerEnvelope.peer_id}</Text>
+            <Text style={styles.debugValue}>{lastOutboundPeerEnvelope.session_id}</Text>
+          </View>
+        ) : null}
+        {peerBackendValidation ? (
+          <View style={styles.responseContainer}>
+            <Text style={styles.responseTitle}>Backend Validation</Text>
+            <Text style={styles.responseText}>
+              Accepted {peerBackendValidation.kind} for {peerBackendValidation.peer_id}
+            </Text>
+            <Text style={styles.responseText}>
+              session {peerBackendValidation.session_id} • message {peerBackendValidation.message_id}
+            </Text>
+            {peerBackendValidation.protocol ? (
+              <Text style={styles.responseText}>
+                protocol {peerBackendValidation.protocol}
+              </Text>
+            ) : null}
+            {peerBackendValidation.payload_text ? (
+              <Text style={styles.responseText}>
+                payload {peerBackendValidation.payload_text}
+              </Text>
+            ) : null}
+            {peerBackendValidation.payload_json ? (
+              <Text style={styles.responseText}>
+                payload json {JSON.stringify(peerBackendValidation.payload_json)}
+              </Text>
+            ) : null}
+            {peerBackendValidation.ackEnvelope ? (
+              <Text style={styles.responseText}>
+                ack {peerBackendValidation.ackEnvelope.kind} for {peerBackendValidation.ackEnvelope.acked_message_id}
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
+        {lastInboundBackendValidation ? (
+          <View style={styles.responseContainer}>
+            <Text style={styles.responseTitle}>Inbound Backend Validation</Text>
+            <Text style={styles.responseText}>
+              Accepted {lastInboundBackendValidation.kind} for {lastInboundBackendValidation.peer_id}
+            </Text>
+            <Text style={styles.responseText}>
+              session {lastInboundBackendValidation.session_id} • message {lastInboundBackendValidation.message_id}
+            </Text>
+            {lastInboundBackendValidation.ackEnvelope ? (
+              <Text style={styles.responseText}>
+                ack {lastInboundBackendValidation.ackEnvelope.kind} for {lastInboundBackendValidation.ackEnvelope.acked_message_id}
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
+        {discoveredPeers.length > 0 ? (
+          <View style={styles.peerList}>
+            {discoveredPeers.map((peer) => (
+              <View key={peer.peerRef} style={styles.peerRow}>
+                <Text style={styles.peerTitle}>{peer.displayName || peer.peerId}</Text>
+                <Text style={styles.peerMeta}>{peer.peerRef}</Text>
+                <Text style={styles.peerMeta}>
+                  {peer.transport}
+                  {typeof peer.rssi === 'number' ? ` • RSSI ${peer.rssi}` : ''}
+                </Text>
+                <TouchableOpacity
+                  style={[
+                    styles.peerActionButton,
+                    styles.peerActionButtonSecondary,
+                    selectedPeerRef === peer.peerRef ? styles.buttonDisabled : null,
+                  ]}
+                  onPress={() => setSelectedPeerRef(peer.peerRef)}
+                  disabled={selectedPeerRef === peer.peerRef}
+                >
+                  <Text style={styles.peerActionTextSecondary}>
+                    {selectedPeerRef === peer.peerRef ? 'Selected' : 'Select Peer'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.peerActionButton,
+                    activePeer?.peerRef === peer.peerRef ? styles.buttonDisabled : null,
+                  ]}
+                  onPress={() => connectToPeer(peer)}
+                  disabled={activePeer?.peerRef === peer.peerRef}
+                >
+                  <Text style={styles.peerActionText}>
+                    {activePeer?.peerRef === peer.peerRef ? 'Connected' : 'Connect This Peer'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        ) : null}
       </View>
 
       {lastError && (
@@ -729,4 +1295,12 @@ const styles = StyleSheet.create({
   debugInfo: { marginTop: 12, padding: 12, backgroundColor: '#f5f5f5', borderRadius: 8 },
   debugLabel: { fontSize: 13, fontWeight: '600', color: '#666', marginTop: 8 },
   debugValue: { fontSize: 13, color: '#333', marginTop: 2, marginLeft: 8 },
+  peerList: { marginTop: 12, gap: 8 },
+  peerRow: { padding: 10, borderRadius: 6, backgroundColor: '#f5f5f5' },
+  peerTitle: { fontSize: 14, fontWeight: '600', color: '#111' },
+  peerMeta: { fontSize: 12, color: '#666', marginTop: 2 },
+  peerActionButton: { marginTop: 10, backgroundColor: '#007AFF', paddingVertical: 8, paddingHorizontal: 10, borderRadius: 6, alignItems: 'center' },
+  peerActionText: { color: '#fff', fontSize: 13, fontWeight: '600' },
+  peerActionButtonSecondary: { backgroundColor: '#f0f0f0' },
+  peerActionTextSecondary: { color: '#007AFF', fontSize: 13, fontWeight: '600' },
 });

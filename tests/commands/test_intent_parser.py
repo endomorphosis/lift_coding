@@ -97,6 +97,68 @@ class TestPRIntents:
         assert result.name == "pr.summarize"
         assert result.entities["pr_number"] == 99
 
+    def test_ai_explain_pr(self, parser: IntentParser) -> None:
+        """Test ai.explain_pr intent."""
+        result = parser.parse("explain pr 123")
+        assert result.name == "ai.explain_pr"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("explain pr 123 on owner/repo")
+        assert result.name == "ai.explain_pr"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["repo"] == "owner/repo"
+
+        result = parser.parse("use copilot to explain pull request 456")
+        assert result.name == "ai.explain_pr"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["provider"] == "copilot_cli"
+
+    def test_ai_summarize_diff(self, parser: IntentParser) -> None:
+        """Test ai.summarize_diff intent."""
+        result = parser.parse("summarize diff for pr 123")
+        assert result.name == "ai.summarize_diff"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("summarize diff")
+        assert result.name == "ai.summarize_diff"
+        assert result.entities == {}
+
+        result = parser.parse("use copilot to summarize diff for pull request 456")
+        assert result.name == "ai.summarize_diff"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["provider"] == "copilot_cli"
+
+        result = parser.parse("summarize diff for pr 123 on owner/repo")
+        assert result.name == "ai.summarize_diff"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["repo"] == "owner/repo"
+
+    def test_ai_explain_failure(self, parser: IntentParser) -> None:
+        """Test ai.explain_failure intent."""
+        result = parser.parse("explain failing checks for pr 123")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("explain failing checks")
+        assert result.name == "ai.explain_failure"
+        assert result.entities == {}
+
+        result = parser.parse("use copilot to explain failure for pull request 456")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["provider"] == "copilot_cli"
+
+        result = parser.parse("explain workflow CI Linux for pr 789")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 789
+        assert result.entities["failure_target_type"] == "workflow"
+        assert result.entities["failure_target"] == "CI Linux"
+
+        result = parser.parse("explain workflow CI Linux for pr 789 on owner/repo")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 789
+        assert result.entities["repo"] == "owner/repo"
+
     def test_pr_request_review_single(self, parser: IntentParser) -> None:
         """Test pr.request_review with single reviewer."""
         result = parser.parse("ask bob to review")
@@ -251,6 +313,72 @@ class TestAgentIntents:
         assert result.entities["instruction"] == "handle"
         assert result.entities["issue_number"] == 100
         assert result.entities["provider"] == "copilot"
+
+    def test_agent_delegate_ipfs_datasets_provider(self, parser: IntentParser) -> None:
+        """Test agent.delegate with ipfs_datasets_mcp provider."""
+        result = parser.parse("ask the ipfs datasets agent to find legal datasets")
+        assert result.name == "agent.delegate"
+        assert result.entities["instruction"] == "find legal datasets"
+        assert result.entities["provider"] == "ipfs_datasets_mcp"
+
+    def test_direct_dataset_discovery_maps_to_ipfs_datasets(self, parser: IntentParser) -> None:
+        """Test direct dataset discovery phrase maps to datasets MCP provider."""
+        result = parser.parse("find legal datasets")
+        assert result.name == "agent.delegate"
+        assert result.entities["instruction"] == "find legal datasets"
+        assert result.entities["provider"] == "ipfs_datasets_mcp"
+        assert result.entities["mcp_capability"] == "dataset_discovery"
+        assert result.entities["mcp_input"] == "legal datasets"
+
+    def test_agent_delegate_ipfs_kit_provider_with_pr(self, parser: IntentParser) -> None:
+        """Test provider-specific agent.delegate with PR target."""
+        result = parser.parse("ask the ipfs kit agent to pin this CID on pr 412")
+        assert result.name == "agent.delegate"
+        assert result.entities["instruction"] == "pin this CID"
+        assert result.entities["provider"] == "ipfs_kit_mcp"
+        assert result.entities["pr_number"] == 412
+
+    def test_direct_ipfs_add_maps_to_ipfs_kit(self, parser: IntentParser) -> None:
+        """Test direct IPFS add phrase maps to kit MCP provider."""
+        result = parser.parse("add this file to ipfs")
+        assert result.name == "agent.delegate"
+        assert result.entities["instruction"] == "add this file to ipfs"
+        assert result.entities["provider"] == "ipfs_kit_mcp"
+        assert result.entities["mcp_capability"] == "ipfs_add"
+        assert result.entities["mcp_input"] == "this file"
+
+    def test_direct_ipfs_cat_maps_to_ipfs_kit(self, parser: IntentParser) -> None:
+        """Test direct IPFS fetch phrase maps to kit MCP provider and CID payload."""
+        result = parser.parse("get bafytestcid from ipfs")
+        assert result.name == "agent.delegate"
+        assert result.entities["provider"] == "ipfs_kit_mcp"
+        assert result.entities["mcp_capability"] == "ipfs_cat"
+        assert result.entities["mcp_cid"] == "bafytestcid"
+
+    def test_direct_ipfs_pin_maps_to_ipfs_kit(self, parser: IntentParser) -> None:
+        """Test direct IPFS pin phrase maps to kit MCP pin capability."""
+        result = parser.parse("pin bafytestcid on ipfs")
+        assert result.name == "agent.delegate"
+        assert result.entities["provider"] == "ipfs_kit_mcp"
+        assert result.entities["mcp_capability"] == "ipfs_pin"
+        assert result.entities["mcp_cid"] == "bafytestcid"
+        assert result.entities["mcp_pin_action"] == "pin"
+
+    def test_direct_workflow_maps_to_ipfs_accelerate(self, parser: IntentParser) -> None:
+        """Test direct workflow phrase maps to accelerate MCP provider."""
+        result = parser.parse("run a workflow")
+        assert result.name == "agent.delegate"
+        assert result.entities["instruction"] == "run a workflow"
+        assert result.entities["provider"] == "ipfs_accelerate_mcp"
+
+    def test_direct_agentic_fetch_maps_to_ipfs_accelerate(self, parser: IntentParser) -> None:
+        """Test direct discover-and-fetch phrase maps to accelerate MCP provider."""
+        result = parser.parse("discover and fetch climate regulations from https://example.com")
+        assert result.name == "agent.delegate"
+        assert result.entities["provider"] == "ipfs_accelerate_mcp"
+        assert result.entities["mcp_capability"] == "agentic_fetch"
+        assert result.entities["mcp_input"] == "climate regulations"
+        assert result.entities["mcp_seed_url"] == "https://example.com"
 
     def test_agent_progress(self, parser: IntentParser) -> None:
         """Test agent.status intent (and backwards compatibility with 'progress' phrase)."""

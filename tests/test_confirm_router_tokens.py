@@ -4,6 +4,7 @@ This test suite validates that router-issued tokens (from PendingActionManager)
 execute real action handlers instead of returning fixture responses.
 """
 
+import pytest
 from fastapi.testclient import TestClient
 
 from handsfree.api import app
@@ -55,6 +56,35 @@ class TestConfirmRouterTokens:
         # Should mention the action was executed
         assert "review requested" in data["spoken_text"].lower() and ("alice" in data["spoken_text"].lower() or "reviewer" in data["spoken_text"].lower())
 
+    def test_confirm_pr_request_review_router_token_cli_fixture(
+        self, monkeypatch: pytest.MonkeyPatch
+    ):
+        """Test router-token request-review confirmation via CLI fixture mode."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        cmd_response = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "request review from alice on pr 100"},
+                "profile": "workout",
+                "client_context": {
+                    "device": "simulator",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        token = cmd_response.json()["pending_action"]["token"]
+        confirm_response = client.post("/v1/commands/confirm", json={"token": token})
+
+        assert confirm_response.status_code == 200
+        data = confirm_response.json()
+        assert data["status"] == "ok"
+        assert "review requested" in data["spoken_text"].lower()
+
     def test_confirm_pr_merge_router_token(self):
         """Test that confirming a router-issued pr.merge token executes real handler."""
         # Create pending action using pr.merge intent in workout profile
@@ -94,6 +124,35 @@ class TestConfirmRouterTokens:
         
         # Should mention merge action
         assert "merged" in data["spoken_text"].lower()
+
+    def test_confirm_pr_merge_router_token_cli_fixture(
+        self, monkeypatch: pytest.MonkeyPatch
+    ):
+        """Test router-token merge confirmation via CLI fixture mode."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        cmd_response = client.post(
+            "/v1/command",
+            json={
+                "input": {"type": "text", "text": "merge pr 200"},
+                "profile": "workout",
+                "client_context": {
+                    "device": "simulator",
+                    "locale": "en-US",
+                    "timezone": "America/Los_Angeles",
+                    "app_version": "0.1.0",
+                },
+            },
+        )
+
+        token = cmd_response.json()["pending_action"]["token"]
+        confirm_response = client.post("/v1/commands/confirm", json={"token": token})
+
+        assert confirm_response.status_code == 200
+        data = confirm_response.json()
+        assert data["status"] == "ok"
+        assert "merged successfully" in data["spoken_text"].lower()
 
     def test_confirm_agent_delegate_router_token(self):
         """Test that confirming a router-issued agent.delegate token creates an agent task."""

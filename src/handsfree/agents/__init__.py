@@ -1,12 +1,23 @@
-"""Agent providers for delegating tasks to different agent systems.
+"""Legacy compatibility facade for agent providers.
 
-This module defines the provider interface and implements placeholder providers
-for Copilot and custom agents, plus a deterministic mock runner for testing.
+Runtime code should use ``handsfree.agent_providers`` and ``handsfree.agents.service``.
+This module keeps older imports working while delegating provider ownership to the
+canonical registry where possible.
 """
+
+from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from typing import Any
+
+from handsfree.agent_providers import (
+    CopilotAgentProvider as _CopilotAgentProvider,
+    CustomAgentProvider as _CustomAgentProvider,
+    get_provider as _get_canonical_provider,
+)
+from handsfree.db.agent_tasks import AgentTask
 
 
 @dataclass
@@ -19,7 +30,7 @@ class AgentInvocationResult:
 
 
 class AgentProvider(ABC):
-    """Abstract interface for agent providers."""
+    """Compatibility interface for older provider imports."""
 
     @abstractmethod
     def invoke(
@@ -29,69 +40,43 @@ class AgentProvider(ABC):
         target_type: str | None,
         target_ref: str | None,
     ) -> AgentInvocationResult:
-        """Invoke the agent with a task.
-
-        Args:
-            task_id: Unique task identifier.
-            instruction: Instruction text for the agent.
-            target_type: Type of target ("issue", "pr", or None).
-            target_ref: Reference to target (e.g., "owner/repo#123").
-
-        Returns:
-            AgentInvocationResult with success status and details.
-        """
-        pass
+        """Invoke the agent with a task."""
 
     @abstractmethod
     def get_status(self, task_id: str) -> dict[str, Any]:
-        """Get status of a task.
-
-        Args:
-            task_id: Unique task identifier.
-
-        Returns:
-            Dictionary with task status information.
-        """
-        pass
+        """Get status of a task."""
 
 
-class CopilotProvider(AgentProvider):
-    """Placeholder provider for GitHub Copilot agent.
-
-    NOTE: This is a stub implementation that does NOT perform real invocation.
-    Real implementation will be added in a future PR.
-    """
-
-    def invoke(
-        self,
-        task_id: str,
-        instruction: str | None,
-        target_type: str | None,
-        target_ref: str | None,
-    ) -> AgentInvocationResult:
-        """Placeholder invocation - does not perform real agent call."""
-        return AgentInvocationResult(
-            success=False,
-            message="Copilot invocation not implemented (placeholder only)",
-            trace={"provider": "copilot", "task_id": task_id, "stub": True},
-        )
-
-    def get_status(self, task_id: str) -> dict[str, Any]:
-        """Placeholder status - returns stub data."""
-        return {
-            "task_id": task_id,
-            "provider": "copilot",
-            "status": "not_implemented",
-            "message": "Copilot status not implemented (placeholder only)",
-        }
+def _build_task(
+    provider_name: str,
+    task_id: str,
+    instruction: str | None,
+    target_type: str | None,
+    target_ref: str | None,
+) -> AgentTask:
+    now = datetime.now(UTC)
+    return AgentTask(
+        id=task_id,
+        user_id="legacy-compat",
+        provider=provider_name,
+        target_type=target_type,
+        target_ref=target_ref,
+        instruction=instruction,
+        state="created",
+        trace=None,
+        created_at=now,
+        updated_at=now,
+    )
 
 
-class CustomProvider(AgentProvider):
-    """Placeholder provider for custom agent implementations.
+class _CanonicalProviderAdapter(AgentProvider):
+    """Adapt canonical provider lifecycle hooks to the older invoke/status API."""
 
-    NOTE: This is a stub implementation that does NOT perform real invocation.
-    Real implementation will be added in a future PR.
-    """
+    provider_name = ""
+
+    def __init__(self, provider_name: str | None = None) -> None:
+        self.provider_name = provider_name or self.provider_name
+        self._provider = _get_canonical_provider(self.provider_name)
 
     def invoke(
         self,
@@ -100,32 +85,43 @@ class CustomProvider(AgentProvider):
         target_type: str | None,
         target_ref: str | None,
     ) -> AgentInvocationResult:
-        """Placeholder invocation - does not perform real agent call."""
+        result = self._provider.start_task(
+            _build_task(self.provider_name, task_id, instruction, target_type, target_ref)
+        )
         return AgentInvocationResult(
-            success=False,
-            message="Custom provider invocation not implemented (placeholder only)",
-            trace={"provider": "custom", "task_id": task_id, "stub": True},
+            success=bool(result.get("ok")),
+            message=result.get("message", ""),
+            trace=result.get("trace"),
         )
 
     def get_status(self, task_id: str) -> dict[str, Any]:
-        """Placeholder status - returns stub data."""
-        return {
-            "task_id": task_id,
-            "provider": "custom",
-            "status": "not_implemented",
-            "message": "Custom provider status not implemented (placeholder only)",
-        }
+        task = _build_task(self.provider_name, task_id, None, None, None)
+        task.state = "running"
+        return self._provider.check_status(task)
+
+
+class CopilotProvider(_CanonicalProviderAdapter):
+    """Compatibility wrapper for the canonical Copilot provider."""
+
+    provider_name = "copilot"
+
+    def __init__(self) -> None:
+        self._provider = _CopilotAgentProvider()
+
+
+class CustomProvider(_CanonicalProviderAdapter):
+    """Compatibility wrapper for the canonical custom provider."""
+
+    provider_name = "custom"
+
+    def __init__(self) -> None:
+        self._provider = _CustomAgentProvider()
 
 
 class MockAgentRunner:
-    """Deterministic mock agent runner for testing.
-
-    This runner does NOT use timers and requires explicit state transitions
-    via API calls to ensure stable, deterministic tests.
-    """
+    """Deterministic compatibility runner retained for legacy tests."""
 
     def __init__(self) -> None:
-        """Initialize the mock runner."""
         self._tasks: dict[str, dict[str, Any]] = {}
 
     def register_task(
@@ -135,14 +131,6 @@ class MockAgentRunner:
         target_type: str | None,
         target_ref: str | None,
     ) -> None:
-        """Register a task with the mock runner.
-
-        Args:
-            task_id: Unique task identifier.
-            instruction: Instruction text for the agent.
-            target_type: Type of target ("issue", "pr", or None).
-            target_ref: Reference to target (e.g., "owner/repo#123").
-        """
         self._tasks[task_id] = {
             "instruction": instruction,
             "target_type": target_type,
@@ -152,18 +140,11 @@ class MockAgentRunner:
         }
 
     def advance_task(
-        self, task_id: str, new_state: str, step_info: dict[str, Any] | None = None
+        self,
+        task_id: str,
+        new_state: str,
+        step_info: dict[str, Any] | None = None,
     ) -> bool:
-        """Explicitly advance task to a new state.
-
-        Args:
-            task_id: Task identifier.
-            new_state: New state to transition to.
-            step_info: Optional information about this step.
-
-        Returns:
-            True if transition succeeded, False if task not found.
-        """
         if task_id not in self._tasks:
             return False
 
@@ -173,39 +154,24 @@ class MockAgentRunner:
         return True
 
     def get_task_info(self, task_id: str) -> dict[str, Any] | None:
-        """Get information about a task.
-
-        Args:
-            task_id: Task identifier.
-
-        Returns:
-            Task information dict or None if not found.
-        """
         return self._tasks.get(task_id)
 
     def clear(self) -> None:
-        """Clear all registered tasks."""
         self._tasks.clear()
 
 
-# Global mock runner instance for testing
 _mock_runner = MockAgentRunner()
 
 
 def get_mock_runner() -> MockAgentRunner:
-    """Get the global mock runner instance."""
+    """Get the legacy compatibility mock runner."""
     return _mock_runner
 
 
 class MockProvider(AgentProvider):
-    """Mock provider that uses the deterministic mock runner."""
+    """Compatibility mock provider backed by the legacy mock runner."""
 
     def __init__(self, runner: MockAgentRunner | None = None) -> None:
-        """Initialize mock provider.
-
-        Args:
-            runner: Optional mock runner instance. If None, uses global instance.
-        """
         self.runner = runner or get_mock_runner()
 
     def invoke(
@@ -215,7 +181,6 @@ class MockProvider(AgentProvider):
         target_type: str | None,
         target_ref: str | None,
     ) -> AgentInvocationResult:
-        """Register task with mock runner."""
         self.runner.register_task(task_id, instruction, target_type, target_ref)
         return AgentInvocationResult(
             success=True,
@@ -224,7 +189,6 @@ class MockProvider(AgentProvider):
         )
 
     def get_status(self, task_id: str) -> dict[str, Any]:
-        """Get task status from mock runner."""
         info = self.runner.get_task_info(task_id)
         if not info:
             return {"task_id": task_id, "found": False}
@@ -238,27 +202,27 @@ class MockProvider(AgentProvider):
 
 
 def get_provider(provider_name: str) -> AgentProvider:
-    """Factory function to get an agent provider by name.
+    """Return a compatibility provider adapter for legacy imports."""
+    normalized = provider_name.lower()
+    if normalized == "copilot":
+        return CopilotProvider()
+    if normalized == "custom":
+        return CustomProvider()
+    if normalized == "mock":
+        return MockProvider()
 
-    Args:
-        provider_name: Name of the provider ("copilot", "custom", "mock").
+    # Defer provider validation and ownership to the canonical registry.
+    _get_canonical_provider(normalized)
+    return _CanonicalProviderAdapter(normalized)
 
-    Returns:
-        AgentProvider instance.
 
-    Raises:
-        ValueError: If provider_name is unknown.
-    """
-    providers = {
-        "copilot": CopilotProvider(),
-        "custom": CustomProvider(),
-        "mock": MockProvider(),
-    }
-
-    provider = providers.get(provider_name.lower())
-    if not provider:
-        raise ValueError(
-            f"Unknown provider: {provider_name}. Valid providers: {', '.join(providers.keys())}"
-        )
-
-    return provider
+__all__ = [
+    "AgentInvocationResult",
+    "AgentProvider",
+    "CopilotProvider",
+    "CustomProvider",
+    "MockAgentRunner",
+    "MockProvider",
+    "get_mock_runner",
+    "get_provider",
+]

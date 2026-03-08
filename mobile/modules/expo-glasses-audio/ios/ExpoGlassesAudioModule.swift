@@ -5,6 +5,7 @@ public class ExpoGlassesAudioModule: Module {
   private let routeMonitor = AudioRouteMonitor()
   private let recorder = GlassesRecorder()
   private let player = GlassesPlayer()
+  private let peerBridge = BluetoothPeerBridge()
   private var foregroundObserver: NSObjectProtocol?
 
   // Serial queue for thread-safe access to recording state
@@ -20,7 +21,15 @@ public class ExpoGlassesAudioModule: Module {
     Name("ExpoGlassesAudio")
     
     // Events
-    Events("onAudioRouteChange", "onRecordingProgress", "onPlaybackStatus")
+    Events(
+      "onAudioRouteChange",
+      "onRecordingProgress",
+      "onPlaybackStatus",
+      "peerDiscovered",
+      "peerConnected",
+      "peerDisconnected",
+      "frameReceived"
+    )
     
     // Get current audio route information
     Function("getAudioRoute") { () -> [String: Any] in
@@ -154,9 +163,62 @@ public class ExpoGlassesAudioModule: Module {
       self.sendEvent("onPlaybackStatus", ["isPlaying": false])
       promise.resolve(nil)
     }
+
+    AsyncFunction("scanPeers") { (timeoutMs: Int) -> [[String: Any]] in
+      return self.peerBridge.scanPeers(timeoutMs: timeoutMs)
+    }
+
+    Function("getPeerAdapterState") { () -> [String: Any] in
+      return self.peerBridge.getAdapterState()
+    }
+
+    AsyncFunction("advertiseIdentity") { (peerId: String, displayName: String?) -> [String: Any] in
+      return try self.peerBridge.advertiseIdentity(peerId: peerId, displayName: displayName)
+    }
+
+    AsyncFunction("connectPeer") { (peerRef: String) -> [String: Any] in
+      return try self.peerBridge.connectPeer(peerRef)
+    }
+
+    AsyncFunction("disconnectPeer") { (peerRef: String, reason: String?) in
+      self.peerBridge.disconnectPeer(peerRef, reason: reason)
+    }
+
+    AsyncFunction("sendFrame") { (peerRef: String, payloadBase64: String) in
+      try self.peerBridge.sendFrame(peerRef: peerRef, payloadBase64: payloadBase64)
+    }
+
+    AsyncFunction("simulatePeerDiscovery") { (peer: [String: Any]) -> [String: Any] in
+      return try self.peerBridge.simulatePeerDiscovery(peer)
+    }
+
+    AsyncFunction("simulatePeerConnection") { (peerRef: String) -> [String: Any] in
+      return try self.peerBridge.simulatePeerConnection(peerRef)
+    }
+
+    AsyncFunction("simulateFrameReceived") { (peerRef: String, payloadBase64: String, peerId: String?) in
+      try self.peerBridge.simulateFrameReceived(peerRef: peerRef, payloadBase64: payloadBase64, peerId: peerId)
+    }
+
+    AsyncFunction("resetPeerSimulation") {
+      self.peerBridge.resetSimulation()
+    }
     
     // Setup audio route monitoring and lifecycle handling
     OnCreate {
+      peerBridge.onPeerDiscovered = { [weak self] peer in
+        self?.sendEvent("peerDiscovered", ["peer": peer])
+      }
+      peerBridge.onPeerConnected = { [weak self] event in
+        self?.sendEvent("peerConnected", event)
+      }
+      peerBridge.onPeerDisconnected = { [weak self] event in
+        self?.sendEvent("peerDisconnected", event)
+      }
+      peerBridge.onFrameReceived = { [weak self] event in
+        self?.sendEvent("frameReceived", event)
+      }
+
       // Setup route monitoring
       routeMonitor.start { [weak self] summary in
         let session = AVAudioSession.sharedInstance()
@@ -196,6 +258,7 @@ public class ExpoGlassesAudioModule: Module {
       routeMonitor.stop()
       recorder.stopRecording()
       player.stop()
+      peerBridge.resetSimulation()
       
       // Use recordingQueue.async to avoid deadlock risk
       recordingQueue.async {

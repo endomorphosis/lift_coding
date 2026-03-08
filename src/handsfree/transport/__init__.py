@@ -6,6 +6,8 @@ from typing import Protocol
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_PROTOCOL = "/handsfree/app/1.0.0"
+
 
 class TransportProvider(Protocol):
     """Protocol for transport providers."""
@@ -20,6 +22,14 @@ class TransportProvider(Protocol):
 
     def send(self, peer_id: str, payload: bytes) -> None:
         """Send a binary payload to a peer."""
+        ...
+
+    def register_protocol_handler(self, protocol: str, handler: "MessageHandler") -> None:
+        """Register a protocol-scoped inbound message handler."""
+        ...
+
+    def send_protocol_message(self, peer_id: str, protocol: str, payload: bytes) -> None:
+        """Send a protocol-scoped binary payload to a peer."""
         ...
 
 

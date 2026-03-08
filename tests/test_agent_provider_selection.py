@@ -260,6 +260,27 @@ class TestProviderSelection:
         assert task is not None
         assert task.provider == "copilot_cli"
 
+    def test_copilot_cli_selected_in_fixture_mode(self, db_conn, monkeypatch):
+        """Test that copilot_cli is selected when CLI fixture mode is enabled."""
+        monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
+        monkeypatch.delenv("HANDSFREE_AGENT_DISPATCH_REPO", raising=False)
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+
+        service = AgentService(db_conn)
+        result = service.delegate(
+            user_id="test-user",
+            instruction="explain pr 123",
+            provider=None,
+            target_type="pr",
+            target_ref="owner/repo#123",
+        )
+
+        task = get_agent_task_by_id(db_conn, result["task_id"])
+
+        assert task is not None
+        assert task.provider == "copilot_cli"
+
 
 class TestTraceScaffolding:
     """Test trace field storage."""

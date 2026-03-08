@@ -2,6 +2,7 @@ package expo.modules.glassesaudio
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
+import android.media.AudioManager
 import android.media.AudioTrack
 import android.util.Log
 import java.io.File
@@ -76,7 +77,7 @@ class GlassesPlayer {
                 .build(),
             bufferBytes,
             AudioTrack.MODE_STATIC,
-            AudioTrack.AUDIO_SESSION_ID_GENERATE
+            AudioManager.AUDIO_SESSION_ID_GENERATE
         )
 
         t.write(samples, 0, samples.size)

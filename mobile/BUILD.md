@@ -37,6 +37,66 @@ cd mobile
 npm ci
 ```
 
+## Verified Local Android Build
+
+This repo now has a host-verified Android debug build path that uses the repo-local toolchains already bootstrapped under `/home/barberb/lift_coding/.tools`.
+
+From `mobile/`:
+
+```bash
+npm run android:debug:local
+```
+
+Or prepare a connected Android handset end-to-end in one command:
+
+```bash
+npm run android:prepare:local
+```
+
+What it does:
+- sets `JAVA_HOME` to the repo-local JDK 17
+- sets `ANDROID_HOME` / `ANDROID_SDK_ROOT` to the repo-local Android SDK
+- rewrites `android/local.properties` with that SDK path
+- runs Expo Android prebuild with Node 20
+- runs `./gradlew assembleDebug`
+
+APK output:
+
+```bash
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+Install and launch it on a connected Android handset:
+
+```bash
+npm run android:install:local
+```
+
+Grant the runtime permissions needed for Bluetooth peer testing:
+
+```bash
+npm run android:grant:local
+```
+
+Inspect install state, granted permissions, and current foreground activity:
+
+```bash
+npm run android:check:local
+```
+
+Tail Android logs relevant to the peer bridge and app runtime:
+
+```bash
+npm run android:logcat:local
+```
+
+To target a specific device when multiple phones are connected:
+
+```bash
+./scripts/install-android-debug-apk.sh <adb-serial>
+./scripts/prepare-android-local-device.sh <adb-serial>
+```
+
 ## Building for Development
 
 ### Option 1: Local Build (Recommended for Development)
@@ -79,6 +139,12 @@ npx expo prebuild --platform android
 npx expo run:android --device
 ```
 
+If you want the known-good host build path used in verification, use:
+
+```bash
+npm run android:debug:local
+```
+
 ### Option 2: EAS Build (Cloud Build)
 
 1. Configure EAS:
@@ -108,6 +174,26 @@ npx expo start --dev-client
 ```
 
 ## Testing Native Bluetooth Audio
+
+## Android Peer Bring-Up
+
+After `npm run android:debug:local`, use this exact sequence on two Android handsets:
+
+1. Install and launch the debug APK on each handset.
+2. The shortest setup path is `npm run android:prepare:local` once per handset.
+3. If two handsets are attached at once, run `./scripts/prepare-android-local-device.sh <adb-serial>` for each one.
+4. Open the `Glasses` tab in the app.
+5. On device A, tap `Advertise Local Identity`.
+6. On device B, tap `Scan Nearby Peers`.
+7. Select the discovered row for device A and tap `Connect This Peer`.
+8. On either side, tap `Send Ping Frame`.
+9. On the receiving side, use `Validate + Replay Ack via Backend` or enable auto inbound validation.
+10. Confirm that `frameReceived` and decoded `ack` details appear in the diagnostics card.
+
+If anything fails during steps 5-10, run `npm run android:logcat:local` and repeat the action to capture:
+- `BluetoothPeerBridge` scan, advertise, connect, and frame logs
+- `ReactNativeJS` diagnostics screen logs
+- `AndroidRuntime` crashes
 
 ### Setup
 

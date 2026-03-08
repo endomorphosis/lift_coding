@@ -2,11 +2,13 @@
 
 import pytest
 
+from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import Profile
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
+from test_mcp_ipfs_provider import _FakeMCPClient
 
 
 @pytest.fixture
@@ -71,6 +73,26 @@ class TestAgentDelegate:
 
         assert response["status"] == "ok"
         assert "42" in response["spoken_text"]
+
+    def test_direct_dataset_phrase_routes_to_mcp_provider(
+        self, router, parser, db_conn, test_user_id, monkeypatch
+    ):
+        """Test direct dataset phrase is routed through the datasets MCP provider."""
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
+        fake_provider = IPFSDatasetsMCPAgentProvider(client=_FakeMCPClient())
+        monkeypatch.setattr(
+            "handsfree.agents.service.get_provider",
+            lambda provider_name: fake_provider if provider_name == "ipfs_datasets_mcp" else None,
+        )
+        intent = parser.parse("find legal datasets")
+
+        response = router.route(intent, Profile.DEFAULT, user_id=test_user_id)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Expanded legal query"
+        assert response["intent"]["entities"]["task_id"] is not None
+        assert response["intent"]["entities"]["state"] == "completed"
+        assert response["cards"][0]["title"] == "IPFS Datasets dataset discovery"
 
     def test_delegate_with_pr_target(self, router, parser, test_user_id):
         """Test delegating with PR target."""
@@ -170,6 +192,14 @@ class TestAgentIntentParsing:
         assert intent.entities["issue_number"] == 42
         assert intent.entities.get("provider") == "copilot"
 
+    def test_parse_delegate_ipfs_accelerate_specific(self, parser):
+        """Test parsing delegation with MCP-backed IPFS provider alias."""
+        intent = parser.parse("tell the ipfs accelerate agent to run a workflow on issue 42")
+
+        assert intent.name == "agent.delegate"
+        assert intent.entities["issue_number"] == 42
+        assert intent.entities.get("provider") == "ipfs_accelerate_mcp"
+
     def test_parse_agent_status(self, parser):
         """Test parsing agent status."""
         intent = parser.parse("agent status")
@@ -207,6 +237,16 @@ class TestAgentConfirmationFlow:
         summary = response["pending_action"]["summary"]
         assert "99" in summary
         assert "pr" in summary.lower()
+
+    def test_confirmation_summary_includes_mcp_provider_label(self, router, parser):
+        """Test confirmation summary uses MCP provider display name."""
+        intent = parser.parse("ask the ipfs datasets agent to find legal datasets")
+
+        response = router.route(intent, Profile.WORKOUT)
+
+        assert response["status"] == "needs_confirmation"
+        summary = response["pending_action"]["summary"]
+        assert "IPFS Datasets" in summary
 
     def test_confirmation_summary_without_target(self, router, parser):
         """Test confirmation summary without specific target."""

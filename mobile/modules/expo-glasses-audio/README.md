@@ -19,6 +19,12 @@ Expo native module for Meta AI Glasses audio route monitoring, recording, and pl
 - Playback status events
 - Automatic SCO routing for glasses/BT audio
 
+### Peer Data Channel Bridge
+- Peer discovery and connection bridge APIs for handset-to-handset Bluetooth work
+- Event surface for `peerDiscovered`, `peerConnected`, `peerDisconnected`, and `frameReceived`
+- Development simulation hooks for PR-010 bring-up before full BLE data transport lands
+- Native scaffolding now includes CoreBluetooth service/characteristic wiring on iOS and Bluetooth LE scan/GATT connection scaffolding on Android
+
 ## Installation
 
 This is a local Expo module. It's automatically linked when you run the app.
@@ -98,6 +104,42 @@ const playbackSub = expoGlassesAudio.addPlaybackStatusListener((event) => {
 // Stop playback
 await expoGlassesAudio.stopPlayback();
 playbackSub.remove();
+```
+
+### Peer Data Bridge
+
+```typescript
+import expoGlassesAudio from 'expo-glasses-audio';
+
+const discoveredSub = expoGlassesAudio.addPeerDiscoveredListener(({ peer }) => {
+  console.log('Peer discovered:', peer.peerRef, peer.peerId);
+});
+
+const frameSub = expoGlassesAudio.addFrameReceivedListener((event) => {
+  console.log('Frame received from', event.peerRef, event.payloadBase64);
+});
+
+const adapterState = await expoGlassesAudio.getPeerAdapterState();
+console.log('Peer adapter state:', adapterState);
+
+await expoGlassesAudio.advertiseIdentity({
+  peerId: '12D3KooWlocaldemo',
+  displayName: 'Demo glasses',
+});
+
+await expoGlassesAudio.simulatePeerDiscovery({
+  peerRef: 'peer://demo-1',
+  peerId: '12D3KooWdemo1',
+  displayName: 'Demo glasses',
+  transport: 'simulated',
+});
+
+await expoGlassesAudio.connectPeer('peer://demo-1');
+await expoGlassesAudio.sendFrame('peer://demo-1', 'aGVsbG8=');
+await expoGlassesAudio.simulateFrameReceived('peer://demo-1', 'd29ybGQ=');
+
+discoveredSub.remove();
+frameSub.remove();
 ```
 
 ## API Reference
@@ -201,6 +243,67 @@ Play a WAV audio file through Bluetooth SCO. Supports PCM 16-bit mono format. Th
 
 Stop the current audio playback.
 
+##### `scanPeers(timeoutMs?: number): Promise<PeerInfo[]>`
+
+Return currently discovered Bluetooth peer candidates. In the current PR-010 bridge this is primarily backed by simulation/native stub state.
+
+##### `getPeerAdapterState(): Promise<PeerAdapterState>`
+
+Return Bluetooth peer-adapter state for bring-up diagnostics.
+
+**Returns:**
+```typescript
+{
+  transport: 'bluetooth' | 'simulated';
+  adapterAvailable: boolean;
+  adapterEnabled: boolean;
+  scanPermissionGranted: boolean;
+  connectPermissionGranted: boolean;
+  advertisePermissionGranted?: boolean;
+  advertising: boolean;
+  scanning: boolean;
+  state: string;
+}
+```
+
+##### `advertiseIdentity(identity: { peerId: string; displayName?: string }): Promise<{ peerId: string; displayName?: string }>`
+
+Set the local identity to advertise for nearby discovery. The current bridge starts CoreBluetooth peripheral advertising on iOS and BLE advertiser scaffolding on Android when platform permissions allow it, and both platforms now prefer advertised identity data during peer discovery.
+
+Android note:
+- Android 12+ requires `BLUETOOTH_ADVERTISE` in addition to `BLUETOOTH_SCAN` and `BLUETOOTH_CONNECT`.
+
+Diagnostics note:
+- The Glasses Diagnostics screen can optionally auto-submit inbound frames to `/v1/dev/peer-envelope` and send any returned ack back over the active peer bridge.
+
+##### `connectPeer(peerRef: string): Promise<PeerConnectionResult>`
+
+Open a peer link for the given peer reference.
+
+##### `disconnectPeer(peerRef: string, reason?: string): Promise<void>`
+
+Close an active peer link.
+
+##### `sendFrame(peerRef: string, payloadBase64: string): Promise<void>`
+
+Send a frame over the peer bridge. The JS/native boundary currently uses base64 strings instead of raw bytes.
+
+##### `simulatePeerDiscovery(peer: PeerInfo): Promise<PeerInfo>`
+
+Development helper that emits a `peerDiscovered` event and stores a simulated peer.
+
+##### `simulatePeerConnection(peerRef: string): Promise<PeerConnectionResult>`
+
+Development helper that marks a simulated peer as connected and emits `peerConnected`.
+
+##### `simulateFrameReceived(peerRef: string, payloadBase64: string, peerId?: string): Promise<void>`
+
+Development helper that emits an inbound `frameReceived` event.
+
+##### `resetPeerSimulation(): Promise<void>`
+
+Clear simulated peer/link state.
+
 ##### `addRecordingProgressListener(listener: (event: RecordingProgressEvent) => void): Subscription`
 
 Add a listener for recording progress updates.
@@ -249,6 +352,22 @@ Emitted when recording starts or stops.
 ##### `onPlaybackStatus`
 
 Emitted when playback starts, stops, or encounters an error.
+
+##### `peerDiscovered`
+
+Emitted when a nearby peer is discovered.
+
+##### `peerConnected`
+
+Emitted when a peer link is opened.
+
+##### `peerDisconnected`
+
+Emitted when a peer link closes.
+
+##### `frameReceived`
+
+Emitted when a peer frame is delivered to JS.
 
 ## Types
 

@@ -7,6 +7,13 @@ const glassesAudioEmitter = GlassesAudioModule
   ? new NativeEventEmitter(GlassesAudioModule)
   : null;
 
+const MODULE_UNAVAILABLE_ERROR =
+  'Glasses audio module not available. Make sure you are running on a device with native code compiled.';
+
+function unavailableError() {
+  return new Error(MODULE_UNAVAILABLE_ERROR);
+}
+
 /**
  * GlassesAudio module for interacting with Meta AI Glasses audio routing
  * 
@@ -23,7 +30,7 @@ const GlassesAudio = {
    */
   startMonitoring: async () => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available. Make sure you are running on a device with native code compiled.');
+      throw unavailableError();
     }
     return await GlassesAudioModule.startMonitoring();
   },
@@ -44,9 +51,55 @@ const GlassesAudio = {
    */
   getCurrentRoute: async () => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available');
+      throw unavailableError();
     }
     return await GlassesAudioModule.getCurrentRoute();
+  },
+
+  /**
+   * Legacy alias for startMonitoring with optional callback registration.
+   * Preserved for older JS callers and tests.
+   */
+  startRouteMonitoring: async (callback) => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    const summary = await GlassesAudio.startMonitoring();
+    if (typeof callback === 'function') {
+      GlassesAudio.addRouteChangeListener(callback);
+    }
+    return summary;
+  },
+
+  /**
+   * Legacy alias for stopMonitoring.
+   */
+  stopRouteMonitoring: async () => {
+    await GlassesAudio.stopMonitoring();
+  },
+
+  /**
+   * Legacy helper retained for compatibility.
+   */
+  isBluetoothConnected: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    const route = await GlassesAudio.getCurrentRoute();
+    if (typeof route === 'object' && route !== null) {
+      return Boolean(route.isBluetoothConnected);
+    }
+    return String(route).toLowerCase().includes('bluetooth');
+  },
+
+  /**
+   * Legacy detailed route info helper retained for compatibility.
+   */
+  getDetailedRouteInfo: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    return await GlassesAudio.getCurrentRoute();
   },
 
   /**
@@ -56,7 +109,7 @@ const GlassesAudio = {
    */
   startRecording: async (durationSeconds = 10) => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available');
+      throw unavailableError();
     }
     return await GlassesAudioModule.startRecording(durationSeconds);
   },
@@ -67,9 +120,35 @@ const GlassesAudio = {
    */
   stopRecording: async () => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available');
+      throw unavailableError();
     }
     return await GlassesAudioModule.stopRecording();
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  isRecording: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.isRecording === 'function') {
+      return await GlassesAudioModule.isRecording();
+    }
+    return false;
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  getRecordingDuration: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.getRecordingDuration === 'function') {
+      return await GlassesAudioModule.getRecordingDuration();
+    }
+    return 0;
   },
 
   /**
@@ -79,7 +158,7 @@ const GlassesAudio = {
    */
   playAudio: async (fileUri) => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available');
+      throw unavailableError();
     }
     return await GlassesAudioModule.playAudio(fileUri);
   },
@@ -90,9 +169,59 @@ const GlassesAudio = {
    */
   stopPlayback: async () => {
     if (!GlassesAudioModule) {
-      throw new Error('GlassesAudioModule is not available');
+      throw unavailableError();
     }
     return await GlassesAudioModule.stopPlayback();
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  pausePlayback: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.pausePlayback === 'function') {
+      return await GlassesAudioModule.pausePlayback();
+    }
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  resumePlayback: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.resumePlayback === 'function') {
+      return await GlassesAudioModule.resumePlayback();
+    }
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  isPlaying: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.isPlaying === 'function') {
+      return await GlassesAudioModule.isPlaying();
+    }
+    return false;
+  },
+
+  /**
+   * Compatibility stub retained for the legacy wrapper contract.
+   */
+  getPlaybackProgress: async () => {
+    if (!GlassesAudioModule) {
+      throw unavailableError();
+    }
+    if (typeof GlassesAudioModule.getPlaybackProgress === 'function') {
+      return await GlassesAudioModule.getPlaybackProgress();
+    }
+    return 0;
   },
 
   /**

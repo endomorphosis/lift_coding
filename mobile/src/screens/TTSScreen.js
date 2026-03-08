@@ -14,7 +14,6 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import ExpoGlassesAudio from 'expo-glasses-audio';
 import { simulateNotificationForDev } from '../push/notificationsHandler';
-import * as FileSystem from 'expo-file-system';
 
 export default function TTSScreen() {
   const [text, setText] = useState('');

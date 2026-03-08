@@ -18,7 +18,8 @@ class GlassesAudioModule : Module() {
 
         // Module lifecycle
         OnCreate {
-            audioRouteMonitor = AudioRouteMonitor(appContext)
+            val context = appContext.reactContext ?: throw IllegalStateException("React context is null")
+            audioRouteMonitor = AudioRouteMonitor(context)
         }
 
         OnDestroy {
@@ -32,7 +33,7 @@ class GlassesAudioModule : Module() {
          */
         AsyncFunction("getCurrentRoute") {
             val monitor = audioRouteMonitor ?: throw Exception("AudioRouteMonitor not initialized")
-            return@AsyncFunction monitor.getCurrentRoute()
+            monitor.getCurrentRoute()
         }
 
         /**
@@ -40,7 +41,7 @@ class GlassesAudioModule : Module() {
          */
         AsyncFunction("getCurrentRouteSummary") {
             val monitor = audioRouteMonitor ?: throw Exception("AudioRouteMonitor not initialized")
-            return@AsyncFunction monitor.currentRouteSummary()
+            monitor.currentRouteSummary()
         }
 
         /**
@@ -48,7 +49,7 @@ class GlassesAudioModule : Module() {
          */
         AsyncFunction("isBluetoothConnected") {
             val monitor = audioRouteMonitor ?: throw Exception("AudioRouteMonitor not initialized")
-            return@AsyncFunction monitor.isBluetoothDeviceConnected()
+            monitor.isBluetoothDeviceConnected()
         }
 
         /**
@@ -56,7 +57,7 @@ class GlassesAudioModule : Module() {
          */
         AsyncFunction("isScoConnected") {
             val monitor = audioRouteMonitor ?: throw Exception("AudioRouteMonitor not initialized")
-            return@AsyncFunction monitor.isScoConnected()
+            monitor.isScoConnected()
         }
 
         /**
@@ -77,8 +78,9 @@ class GlassesAudioModule : Module() {
          * Stop monitoring audio route changes.
          */
         Function("stopMonitoring") {
-            val monitor = audioRouteMonitor ?: return@Function
+            val monitor = audioRouteMonitor ?: return@Function null
             monitor.stopMonitoring()
+            null
         }
     }
 }

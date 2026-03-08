@@ -49,6 +49,59 @@ export interface AudioRouteChangeEvent {
   route: AudioRouteInfo;
 }
 
+export interface PeerInfo {
+  peerRef: string;
+  peerId: string;
+  displayName?: string;
+  transport: 'bluetooth' | 'simulated';
+  rssi?: number;
+}
+
+export interface PeerDiscoveredEvent {
+  peer: PeerInfo;
+}
+
+export interface PeerConnectedEvent {
+  peerRef: string;
+  peerId?: string;
+  transport: 'bluetooth' | 'simulated';
+}
+
+export interface PeerDisconnectedEvent {
+  peerRef: string;
+  reason?: string;
+}
+
+export interface PeerFrameReceivedEvent {
+  peerRef: string;
+  peerId?: string;
+  payloadBase64: string;
+}
+
+export interface AdvertisedPeerIdentity {
+  peerId: string;
+  displayName?: string;
+}
+
+export interface PeerConnectionResult {
+  peerRef: string;
+  peerId?: string;
+  transport: 'bluetooth' | 'simulated';
+  connectedAt: number;
+}
+
+export interface PeerAdapterState {
+  transport: 'bluetooth' | 'simulated';
+  adapterAvailable: boolean;
+  adapterEnabled: boolean;
+  scanPermissionGranted: boolean;
+  connectPermissionGranted: boolean;
+  advertisePermissionGranted?: boolean;
+  advertising: boolean;
+  scanning: boolean;
+  state: string;
+}
+
 // Get the native modules
 // Note: 'GlassesAudio' is implemented on Android in this repo, but may be absent on iOS.
 // Use optional loading to avoid crashing on import.
@@ -195,6 +248,70 @@ class ExpoGlassesAudio extends EventEmitter {
   }
 
   /**
+   * Scan for nearby Bluetooth peer candidates.
+   * The current native implementation is a bridge/stub surface for PR-010 and
+   * returns simulated peers until platform BLE data channels are wired.
+   */
+  async scanPeers(timeoutMs: number = 5_000): Promise<PeerInfo[]> {
+    return await ExpoGlassesAudioModule.scanPeers(timeoutMs);
+  }
+
+  /**
+   * Return Bluetooth adapter state for peer transport bring-up diagnostics.
+   */
+  async getPeerAdapterState(): Promise<PeerAdapterState> {
+    return await ExpoGlassesAudioModule.getPeerAdapterState();
+  }
+
+  /**
+   * Advertise the local peer identity for nearby discovery.
+   */
+  async advertiseIdentity(identity: AdvertisedPeerIdentity): Promise<AdvertisedPeerIdentity> {
+    return await ExpoGlassesAudioModule.advertiseIdentity(identity.peerId, identity.displayName);
+  }
+
+  /**
+   * Connect to a previously discovered peer reference.
+   */
+  async connectPeer(peerRef: string): Promise<PeerConnectionResult> {
+    return await ExpoGlassesAudioModule.connectPeer(peerRef);
+  }
+
+  /**
+   * Disconnect from an active peer link.
+   */
+  async disconnectPeer(peerRef: string, reason?: string): Promise<void> {
+    return await ExpoGlassesAudioModule.disconnectPeer(peerRef, reason);
+  }
+
+  /**
+   * Send a frame over the Bluetooth peer bridge.
+   * `payloadBase64` is used at the JS/native boundary to avoid platform-specific byte marshaling.
+   */
+  async sendFrame(peerRef: string, payloadBase64: string): Promise<void> {
+    return await ExpoGlassesAudioModule.sendFrame(peerRef, payloadBase64);
+  }
+
+  /**
+   * Development-only helpers for PR-010 bring-up and local testing.
+   */
+  async simulatePeerDiscovery(peer: PeerInfo): Promise<PeerInfo> {
+    return await ExpoGlassesAudioModule.simulatePeerDiscovery(peer);
+  }
+
+  async simulatePeerConnection(peerRef: string): Promise<PeerConnectionResult> {
+    return await ExpoGlassesAudioModule.simulatePeerConnection(peerRef);
+  }
+
+  async simulateFrameReceived(peerRef: string, payloadBase64: string, peerId?: string): Promise<void> {
+    return await ExpoGlassesAudioModule.simulateFrameReceived(peerRef, payloadBase64, peerId);
+  }
+
+  async resetPeerSimulation(): Promise<void> {
+    return await ExpoGlassesAudioModule.resetPeerSimulation();
+  }
+
+  /**
    * Add a listener for audio route changes.
    * @param listener Callback function to handle route changes
    * @returns Subscription object to remove the listener
@@ -225,6 +342,30 @@ class ExpoGlassesAudio extends EventEmitter {
     listener: (event: PlaybackStatusEvent) => void
   ): Subscription {
     return this.addListener('onPlaybackStatus', listener);
+  }
+
+  addPeerDiscoveredListener(
+    listener: (event: PeerDiscoveredEvent) => void
+  ): Subscription {
+    return this.addListener('peerDiscovered', listener);
+  }
+
+  addPeerConnectedListener(
+    listener: (event: PeerConnectedEvent) => void
+  ): Subscription {
+    return this.addListener('peerConnected', listener);
+  }
+
+  addPeerDisconnectedListener(
+    listener: (event: PeerDisconnectedEvent) => void
+  ): Subscription {
+    return this.addListener('peerDisconnected', listener);
+  }
+
+  addFrameReceivedListener(
+    listener: (event: PeerFrameReceivedEvent) => void
+  ): Subscription {
+    return this.addListener('frameReceived', listener);
   }
 }
 

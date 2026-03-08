@@ -262,6 +262,70 @@ def rerun_workflow(
         }
 
 
+def post_pull_request_comment(
+    repo: str,
+    pr_number: int,
+    body: str,
+    token: str,
+    timeout: float = 10.0,
+) -> dict[str, Any]:
+    """Post a comment on a pull request via the issues comments API."""
+    if not repo or "/" not in repo:
+        raise ValueError(f"Invalid repo format: {repo}. Expected 'owner/name'")
+    if pr_number < 1:
+        raise ValueError(f"Invalid pr_number: {pr_number}. Must be >= 1")
+    if not body:
+        raise ValueError("body cannot be empty")
+    if not token:
+        raise ValueError("token cannot be empty")
+
+    httpx = _import_httpx()
+    endpoint = f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments"
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}",
+        "User-Agent": "HandsFree-Dev-Companion/1.0",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+    try:
+        response = httpx.post(
+            endpoint,
+            json={"body": body},
+            headers=headers,
+            timeout=timeout,
+        )
+        if 200 <= response.status_code < 300:
+            data = response.json()
+            return {
+                "ok": True,
+                "message": "Comment posted",
+                "status_code": response.status_code,
+                "response_data": data,
+                "url": data.get("html_url"),
+            }
+
+        error_msg = f"GitHub API returned HTTP {response.status_code}"
+        try:
+            error_data = response.json()
+            if isinstance(error_data, dict) and error_data.get("message"):
+                error_msg = f"{error_msg}: {error_data['message']}"
+        except Exception:
+            if response.text:
+                error_msg = f"{error_msg}: {response.text[:200]}"
+        return {
+            "ok": False,
+            "message": error_msg,
+            "status_code": response.status_code,
+        }
+    except Exception as e:
+        return {
+            "ok": False,
+            "message": f"Request failed: {type(e).__name__}: {str(e)}",
+            "status_code": 0,
+        }
+
+
 def get_pull_request(
     repo: str,
     pr_number: int,

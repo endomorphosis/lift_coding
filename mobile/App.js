@@ -28,17 +28,10 @@ const linking = {
 
 export default function App() {
   useEffect(() => {
-    // Set up notification listeners when app starts
-    console.log('Setting up notification listeners');
-    const cleanup = setupNotificationListeners((notification) => {
+    const notificationCleanup = setupNotificationListeners((notification) => {
       console.log('Notification received in App:', notification);
     });
 
-    // Clean up listeners when app unmounts
-    return cleanup;
-  }, []);
-
-    // Handle initial URL if app was opened from a deep link
     const handleInitialURL = async () => {
       const initialUrl = await Linking.getInitialURL();
       if (initialUrl) {
@@ -54,6 +47,7 @@ export default function App() {
     handleInitialURL();
 
     return () => {
+      notificationCleanup?.();
       subscription.remove();
     };
   }, []);

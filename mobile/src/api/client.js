@@ -154,27 +154,16 @@ export async function confirmCommand(token, idempotencyKey = undefined) {
 /**
  * Fetch TTS audio for given text
  * @param {string} text - Text to convert to speech
-<<<<<<< HEAD
- * @param {Object} options - Optional parameters
- * @param {string} options.format - Audio format (e.g., 'wav', 'mp3', 'opus')
-=======
  * @param {Object} [options] - Optional TTS configuration
  * @param {string} [options.format='wav'] - Output audio format (e.g. 'wav')
  * @param {string} [options.voice] - Voice identifier to use for synthesis
  * @param {string} [options.accept] - Value for the HTTP Accept header (e.g. 'audio/wav')
->>>>>>> origin/main
  * @returns {Promise<Blob>} Audio data as blob
  */
 export async function fetchTTS(text, options = {}) {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
-<<<<<<< HEAD
-  const body = { 
-    text,
-    ...(options.format ? { format: options.format } : {}),
-  };
-=======
   if (options.accept) {
     headers.Accept = options.accept;
   }
@@ -189,7 +178,6 @@ export async function fetchTTS(text, options = {}) {
   if (options.format) {
     body.format = options.format;
   }
->>>>>>> origin/main
 
   const response = await fetch(`${baseUrl}/v1/tts`, {
     method: 'POST',
@@ -278,6 +266,37 @@ export async function uploadDevAudio(audioBase64, format = 'm4a') {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || `Upload failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Validate a peer transport frame against the backend dev ingress endpoint.
+ * @param {string} peerRef - Stable peer reference from the mobile bridge
+ * @param {string} frameBase64 - Base64-encoded transport envelope
+ * @returns {Promise<Object>} Dev ingress response with optional ack_frame_base64
+ */
+export async function postDevPeerEnvelope(peerRef, frameBase64) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const body = {
+    peer_ref: peerRef,
+    frame_base64: frameBase64,
+  };
+
+  const response = await fetch(`${baseUrl}/v1/dev/peer-envelope`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.detail?.message || errorData.message || `Peer envelope validation failed: ${response.status}`
+    );
   }
 
   return await response.json();

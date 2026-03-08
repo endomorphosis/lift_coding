@@ -258,6 +258,73 @@ OPENAI_API_KEY=sk-your-openai-api-key-here
 
 **Getting an API Key**:
 1. Go to https://platform.openai.com/api-keys
+
+#### MCP++ IPFS Providers
+
+HandsFree can now delegate agent tasks through MCP-backed IPFS providers:
+- `ipfs_datasets_mcp`
+- `ipfs_kit_mcp`
+- `ipfs_accelerate_mcp`
+
+Recommended baseline configuration:
+
+```bash
+HANDSFREE_MCP_ENABLED=true
+HANDSFREE_AGENT_DEFAULT_PROVIDER=ipfs_datasets_mcp
+
+HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP=true
+HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP=true
+HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP=true
+
+HANDSFREE_MCP_DEFAULT_TIMEOUT_S=30
+HANDSFREE_MCP_DEFAULT_POLL_INTERVAL_S=2
+HANDSFREE_MCP_PROTOCOL_VERSION=2024-11-05
+HANDSFREE_MCP_RPC_PATH=/mcp
+HANDSFREE_MCP_TRANSPORT=http
+
+HANDSFREE_MCP_IPFS_DATASETS_URL=http://localhost:8010
+HANDSFREE_MCP_IPFS_KIT_URL=http://localhost:8011
+HANDSFREE_MCP_IPFS_ACCELERATE_URL=http://localhost:8012
+
+# Optional auth secrets or bearer tokens
+HANDSFREE_MCP_IPFS_DATASETS_AUTH_SECRET=
+HANDSFREE_MCP_IPFS_KIT_AUTH_SECRET=
+HANDSFREE_MCP_IPFS_ACCELERATE_AUTH_SECRET=
+
+# Optional tool name overrides
+HANDSFREE_MCP_IPFS_DATASETS_TOOL_NAME=tools_dispatch
+# ipfs_kit has no default generic task-delegation tool; set this explicitly
+HANDSFREE_MCP_IPFS_KIT_TOOL_NAME=
+HANDSFREE_MCP_IPFS_ACCELERATE_TOOL_NAME=tools_dispatch
+HANDSFREE_MCP_IPFS_DATASETS_RPC_PATH=/mcp
+HANDSFREE_MCP_IPFS_KIT_RPC_PATH=/mcp
+HANDSFREE_MCP_IPFS_ACCELERATE_RPC_PATH=/mcp
+
+# Optional task-dispatch bindings for meta-tool servers
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CATEGORY=background_task_tools
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CREATE_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_DATASETS_TASK_STATUS_TOOL=get_task_status
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CANCEL_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CATEGORY=background_task_tools
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CREATE_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_STATUS_TOOL=get_task_status
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CANCEL_TOOL=manage_background_tasks
+
+# Optional stdio transport per server
+HANDSFREE_MCP_IPFS_DATASETS_TRANSPORT=stdio
+HANDSFREE_MCP_IPFS_DATASETS_COMMAND=python
+HANDSFREE_MCP_IPFS_DATASETS_ARGS=-m ipfs_datasets_py.mcp_server
+```
+
+Notes:
+- `HANDSFREE_MCP_ENABLED=false` disables all MCP-backed providers globally.
+- Each `HANDSFREE_AGENT_ENABLE_*` flag can disable one provider without affecting the others.
+- If a provider is selected without a configured `*_URL`, task startup fails fast with a configuration error and keeps the failure in the task trace.
+- The current MCP client now speaks JSON-RPC MCP methods (`initialize`, `tools/list`, `tools/call`) over HTTP.
+- `HANDSFREE_MCP_TRANSPORT=http|stdio` selects the default transport. You can override it per server with `*_TRANSPORT`.
+- For `stdio`, set `*_COMMAND` and `*_ARGS`. The client uses header-framed JSON-RPC over subprocess stdio and reuses the same provider interface.
+- `ipfs_datasets_py` and `ipfs_accelerate_py` now default to real upstream meta-dispatch via `tools_dispatch` and the background-task category bindings above.
+- `ipfs_kit_py` does not expose a single generic agent-delegation tool, so `HANDSFREE_MCP_IPFS_KIT_TOOL_NAME` must be set explicitly to a concrete upstream tool for task delegation.
 2. Create a new API key
 3. Add to `.env`
 

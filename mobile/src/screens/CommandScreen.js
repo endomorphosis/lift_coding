@@ -252,35 +252,50 @@ export default function CommandScreen() {
       // Fetch TTS audio
       const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
       const base64Audio = await blobToBase64(audioBlob);
-
-      // Convert blob to base64
-      const reader = new FileReader();
-      reader.readAsDataURL(audioBlob);
-      reader.onloadend = async () => {
-        const base64Audio = reader.result;
-
-        // Write to temporary file for better compatibility
-        const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
-        const base64Data = base64Audio.split(',')[1]; // Remove data:audio/...;base64, prefix
-        await FileSystem.writeAsStringAsync(tempUri, base64Data, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
+      const tempUri = `${FileSystem.cacheDirectory}tts_${Date.now()}.wav`;
+      ttsTempUriRef.current = tempUri;
+      ttsTempFilesRef.current.add(tempUri);
+      await FileSystem.writeAsStringAsync(tempUri, base64Audio, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
       const hasNativePlayback =
         ExpoGlassesAudio && typeof ExpoGlassesAudio.playAudio === 'function';
 
       if (hasNativePlayback) {
+        nativeTtsPlaybackSubRef.current =
+          ExpoGlassesAudio.addPlaybackStatusListener?.((status) => {
+            if (status?.isPlaying === false) {
+              setIsTtsPlaying(false);
+              cleanupTtsTempFile(tempUri).catch(() => {});
+            }
+            if (status?.error) {
+              setError(`TTS playback failed: ${status.error}`);
+            }
+          }) || null;
+
+        setIsTtsPlaying(true);
+        await ExpoGlassesAudio.playAudio(tempUri);
+      } else {
+        const dataUri = `data:audio/wav;base64,${base64Audio}`;
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: dataUri },
+          { shouldPlay: true }
+        );
+        setTtsSound(newSound);
         setIsTtsPlaying(true);
 
-        // Set up playback status listener
         newSound.setOnPlaybackStatusUpdate((status) => {
+          if (!status?.isLoaded) return;
           if (status.didJustFinish) {
             setIsTtsPlaying(false);
-            // Clean up temp file
-            FileSystem.deleteAsync(tempUri, { idempotent: true }).catch(() => {});
+            cleanupTtsTempFile(tempUri).catch(() => {});
           }
-        }
-      });
+          if (status.error) {
+            setError(`TTS playback failed: ${status.error}`);
+          }
+        });
+      }
     } catch (err) {
       console.error('TTS playback failed:', err);
       Alert.alert('TTS Error', `Failed to play audio: ${err.message}`);

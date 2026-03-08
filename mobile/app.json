@@ -41,6 +41,8 @@
         "WRITE_EXTERNAL_STORAGE",
         "POST_NOTIFICATIONS",
         "BLUETOOTH_CONNECT",
+        "BLUETOOTH_SCAN",
+        "BLUETOOTH_ADVERTISE",
         "MODIFY_AUDIO_SETTINGS"
       ],
       "intentFilters": [
@@ -65,7 +67,7 @@
       "favicon": "./assets/favicon.png"
     },
     "notification": {
-      "icon": "./assets/notification-icon.png",
+      "icon": "./assets/icon.png",
       "color": "#007AFF",
       "iosDisplayInForeground": true,
       "androidMode": "default",

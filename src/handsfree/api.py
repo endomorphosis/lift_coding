@@ -5,6 +5,7 @@ This implementation combines webhook handling with comprehensive API endpoints.
 
 __all__ = ["app", "get_db", "FIXTURE_USER_ID"]
 
+import base64
 import json
 import logging
 from datetime import UTC, datetime
@@ -15,6 +16,12 @@ from fastapi import FastAPI, Header, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
+from handsfree.actions import (
+    DirectActionRequest,
+    execute_confirmed_action,
+    process_direct_action_request,
+    process_direct_action_request_detailed,
+)
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.image_fetch import fetch_image_data
 from handsfree.commands.intent_parser import IntentParser
@@ -54,12 +61,15 @@ from handsfree.models import (
     ApiKeyResponse,
     ApiKeysListResponse,
     AudioInput,
+    CommentRequest,
     CommandRequest,
     CommandResponse,
     CommandStatus,
     ConfirmRequest,
     CreateApiKeyRequest,
     CreateApiKeyResponse,
+    DevPeerEnvelopeRequest,
+    DevPeerEnvelopeResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
@@ -100,6 +110,15 @@ from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
 )
+from handsfree.transport.libp2p_bluetooth import (
+    CHAT_PROTOCOL_ID,
+    PeerEnvelope,
+    decode_chat_message_payload,
+    decode_transport_message,
+    decode_transport_envelope,
+    decode_transport_payload,
+    encode_transport_envelope,
+)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -119,6 +138,7 @@ webhook_payloads: list[dict[str, Any]] = []
 pending_actions: dict[str, dict[str, Any]] = {}
 processed_commands: dict[str, CommandResponse] = {}
 idempotency_store: dict[str, ActionResult] = {}
+dev_peer_sessions: dict[str, str] = {}
 
 # Webhook store (DB-backed, initialized lazily)
 _webhook_store = None
@@ -634,6 +654,87 @@ async def dev_upload_audio(
             "format": audio_format,
             "user_id": user_id,
         },
+    )
+
+
+@app.post("/v1/dev/peer-envelope", response_model=DevPeerEnvelopeResponse)
+async def dev_ingest_peer_envelope(
+    request: DevPeerEnvelopeRequest,
+    user_id: CurrentUser,
+) -> DevPeerEnvelopeResponse:
+    """Validate and ingest a dev peer envelope (dev-only).
+
+    This endpoint is intended for mobile bring-up. It accepts a base64-encoded
+    Bluetooth transport frame, validates it with the same transport codec used
+    by the backend, and returns an ack frame for valid message envelopes.
+    """
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer envelope ingress is only available in dev mode",
+            },
+        )
+
+    try:
+        frame = base64.b64decode(request.frame_base64, validate=True)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "frame_base64 must be valid base64",
+            },
+        ) from exc
+
+    try:
+        envelope = decode_transport_envelope(frame)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": str(exc),
+            },
+        ) from exc
+
+    dev_peer_sessions[envelope.peer_id] = envelope.session_id
+
+    protocol: str | None = None
+    payload_text: str | None = None
+    payload_json: dict[str, Any] | None = None
+    ack_frame_base64: str | None = None
+    if envelope.kind == "message":
+        protocol, payload_bytes = decode_transport_message(envelope.payload_b64)
+        payload_text = payload_bytes.decode("utf-8", errors="replace")
+        if protocol == CHAT_PROTOCOL_ID:
+            try:
+                payload_json = decode_chat_message_payload(payload_bytes)
+            except Exception:
+                payload_json = None
+        ack = PeerEnvelope(
+            kind="ack",
+            peer_id=envelope.peer_id,
+            session_id=envelope.session_id,
+            acked_message_id=envelope.message_id,
+        )
+        ack_frame_base64 = base64.b64encode(encode_transport_envelope(ack)).decode("ascii")
+
+    return DevPeerEnvelopeResponse(
+        accepted=True,
+        peer_ref=request.peer_ref,
+        peer_id=envelope.peer_id,
+        kind=envelope.kind,
+        session_id=envelope.session_id,
+        message_id=envelope.message_id,
+        protocol=protocol,
+        payload_text=payload_text,
+        payload_json=payload_json,
+        ack_frame_base64=ack_frame_base64,
     )
 
 
@@ -1231,9 +1332,23 @@ def _convert_router_response_to_command_response(
                 pass
 
     elif parsed_intent.name == "agent.delegate" and status == CommandStatus.OK:
-        # Agent delegate commands - use old handler for backward compatibility
-        # This ensures task_id is included in entities as tests expect
-        return _handle_agent_delegate(parsed_intent, transcript, "api", user_id)
+        intent_entities = router_response.get("intent", {}).get("entities", {})
+        if "task_id" not in intent_entities:
+            # Fall back only when the router did not include task/task-result metadata.
+            return _handle_agent_delegate(parsed_intent, transcript, "api", user_id)
+        if intent_entities.get("state") != "completed":
+            task_id = intent_entities.get("task_id", "")
+            issue_number = intent_entities.get("issue_number")
+            pr_number = intent_entities.get("pr_number")
+            target_description = ""
+            if issue_number:
+                target_description = f" for issue #{issue_number}"
+            elif pr_number:
+                target_description = f" for PR #{pr_number}"
+            spoken_text = (
+                f"I've delegated the task{target_description} to an agent. "
+                f"Task ID is {str(task_id)[:8]}. Say 'agent status' to check progress."
+            )
 
     elif parsed_intent.name == "agent.status" and status == CommandStatus.OK:
         # Agent status commands - use old handler for backward compatibility
@@ -1270,6 +1385,9 @@ def _convert_router_response_to_command_response(
             "speech_rate": profile_config.speech_rate,
         },
     )
+    tool_calls = router_response.get("debug", {}).get("tool_calls")
+    if isinstance(tool_calls, list):
+        debug.tool_calls = tool_calls
 
     return CommandResponse(
         status=status,
@@ -1318,314 +1436,21 @@ async def confirm_command(
             entities = confirmed_action.entities
 
             # Map router intents to DB-backed action handlers for real execution
-            if intent_name == "pr.request_review":
-                # Extract entities and map to request_review handler format
-                reviewers = entities.get("reviewers", [])
-                pr_num = entities.get("pr_number")
-                repo = entities.get("repo", "unknown/unknown")
-                
-                if not pr_num:
-                    # Missing required entity - log error for observability
-                    write_action_log(
-                        db,
-                        user_id=user_id,
-                        action_type="request_review",
-                        ok=False,
-                        target="unknown",
-                        request={"reviewers": reviewers, "confirmed": True},
-                        result={
-                            "status": "error",
-                            "message": "PR number is required for review request",
-                            "via_confirmation": True,
-                            "via_router_token": True,
-                        },
-                        idempotency_key=request.idempotency_key,
-                    )
-                    
-                    response = CommandResponse(
-                        status=CommandStatus.ERROR,
-                        intent=ParsedIntent(
-                            name=intent_name,
-                            confidence=1.0,
-                            entities=entities,
-                        ),
-                        spoken_text="PR number is required for review request.",
-                    )
-                else:
-                    # Execute using the same handler as DB-backed actions
-                    target = f"{repo}#{pr_num}"
-                    reviewers_str = ", ".join(reviewers)
-                    
-                    # Check if live mode is enabled and GitHub token is available
-                    from handsfree.github.auth import get_default_auth_provider
-                    
-                    auth_provider = get_default_auth_provider()
-                    github_token = None
-                    if auth_provider.supports_live_mode():
-                        github_token = auth_provider.get_token(user_id)
-                    
-                    # Execute via GitHub API if live mode enabled and token available
-                    if github_token:
-                        from handsfree.github.client import request_reviewers as github_request_reviewers
-                        
-                        logger.info(
-                            "Executing confirmed request_review (router token) via GitHub API (live mode) for %s",
-                            target,
-                        )
-                        
-                        github_result = github_request_reviewers(
-                            repo=repo,
-                            pr_number=pr_num,
-                            reviewers=reviewers,
-                            token=github_token,
-                        )
-                        
-                        if github_result["ok"]:
-                            # Write audit log for successful execution
-                            write_action_log(
-                                db,
-                                user_id=user_id,
-                                action_type="request_review",
-                                ok=True,
-                                target=target,
-                                request={"reviewers": reviewers, "confirmed": True},
-                                result={
-                                    "status": "success",
-                                    "message": "Review requested (live mode)",
-                                    "via_confirmation": True,
-                                    "via_router_token": True,
-                                    "github_response": github_result.get("response_data"),
-                                },
-                                idempotency_key=request.idempotency_key,
-                            )
-                            
-                            response = CommandResponse(
-                                status=CommandStatus.OK,
-                                intent=ParsedIntent(
-                                    name="request_review.confirmed",
-                                    confidence=1.0,
-                                    entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
-                                ),
-                                spoken_text=f"Review requested from {reviewers_str} on {target}.",
-                            )
-                        else:
-                            # GitHub API call failed
-                            write_action_log(
-                                db,
-                                user_id=user_id,
-                                action_type="request_review",
-                                ok=False,
-                                target=target,
-                                request={"reviewers": reviewers, "confirmed": True},
-                                result={
-                                    "status": "error",
-                                    "message": github_result["message"],
-                                    "via_confirmation": True,
-                                    "via_router_token": True,
-                                    "status_code": github_result.get("status_code"),
-                                },
-                                idempotency_key=request.idempotency_key,
-                            )
-                            
-                            response = CommandResponse(
-                                status=CommandStatus.ERROR,
-                                intent=ParsedIntent(
-                                    name="request_review.confirmed",
-                                    confidence=1.0,
-                                    entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
-                                ),
-                                spoken_text=f"Failed to request reviewers: {github_result['message']}",
-                            )
-                    else:
-                        # Fixture mode - simulate success
-                        logger.info(
-                            "Executing confirmed request_review (router token) in fixture mode (no live token) for %s",
-                            target,
-                        )
-                        
-                        write_action_log(
-                            db,
-                            user_id=user_id,
-                            action_type="request_review",
-                            ok=True,
-                            target=target,
-                            request={"reviewers": reviewers, "confirmed": True},
-                            result={
-                                "status": "success",
-                                "message": "Review requested (fixture)",
-                                "via_confirmation": True,
-                                "via_router_token": True,
-                            },
-                            idempotency_key=request.idempotency_key,
-                        )
-                        
-                        response = CommandResponse(
-                            status=CommandStatus.OK,
-                            intent=ParsedIntent(
-                                name="request_review.confirmed",
-                                confidence=1.0,
-                                entities={"repo": repo, "pr_number": pr_num, "reviewers": reviewers},
-                            ),
-                            spoken_text=f"Review requested from {reviewers_str} on {target}.",
-                        )
-            
-            elif intent_name == "pr.merge":
-                # Extract entities and map to merge handler format
-                pr_num = entities.get("pr_number")
-                repo = entities.get("repo", "unknown/unknown")
-                merge_method = entities.get("merge_method", "squash")
-                
-                if not pr_num:
-                    # Missing required entity - log error for observability
-                    write_action_log(
-                        db,
-                        user_id=user_id,
-                        action_type="merge",
-                        ok=False,
-                        target="unknown",
-                        request={"confirmed": True, "merge_method": merge_method},
-                        result={
-                            "status": "error",
-                            "message": "PR number is required for merge",
-                            "via_confirmation": True,
-                            "via_router_token": True,
-                        },
-                        idempotency_key=request.idempotency_key,
-                    )
-                    
-                    response = CommandResponse(
-                        status=CommandStatus.ERROR,
-                        intent=ParsedIntent(
-                            name=intent_name,
-                            confidence=1.0,
-                            entities=entities,
-                        ),
-                        spoken_text="PR number is required for merge.",
-                    )
-                else:
-                    target = f"{repo}#{pr_num}"
-                    
-                    from handsfree.github.auth import get_default_auth_provider
-                    
-                    auth_provider = get_default_auth_provider()
-                    github_token = None
-                    if auth_provider.supports_live_mode():
-                        github_token = auth_provider.get_token(user_id)
-                    
-                    if github_token:
-                        from handsfree.github.client import merge_pull_request
-                        
-                        logger.info(
-                            "Executing confirmed merge (router token) via GitHub API (live mode) for %s",
-                            target,
-                        )
-                        
-                        github_result = merge_pull_request(
-                            repo=repo,
-                            pr_number=pr_num,
-                            merge_method=merge_method,
-                            token=github_token,
-                        )
-                        
-                        if github_result["ok"]:
-                            write_action_log(
-                                db,
-                                user_id=user_id,
-                                action_type="merge",
-                                ok=True,
-                                target=target,
-                                request={"confirmed": True, "merge_method": merge_method},
-                                result={
-                                    "status": "success",
-                                    "message": "Merged (live mode)",
-                                    "via_confirmation": True,
-                                    "via_router_token": True,
-                                    "github_response": github_result.get("response_data"),
-                                },
-                                idempotency_key=request.idempotency_key,
-                            )
-                            
-                            response = CommandResponse(
-                                status=CommandStatus.OK,
-                                intent=ParsedIntent(
-                                    name="merge.confirmed",
-                                    confidence=1.0,
-                                    entities={
-                                        "repo": repo,
-                                        "pr_number": pr_num,
-                                        "merge_method": merge_method,
-                                    },
-                                ),
-                                spoken_text=f"Merged successfully {target}.",
-                            )
-                        else:
-                            write_action_log(
-                                db,
-                                user_id=user_id,
-                                action_type="merge",
-                                ok=False,
-                                target=target,
-                                request={"confirmed": True, "merge_method": merge_method},
-                                result={
-                                    "status": "error",
-                                    "message": github_result["message"],
-                                    "via_confirmation": True,
-                                    "via_router_token": True,
-                                    "status_code": github_result.get("status_code"),
-                                    "error_type": github_result.get("error_type"),
-                                },
-                                idempotency_key=request.idempotency_key,
-                            )
-                            
-                            response = CommandResponse(
-                                status=CommandStatus.ERROR,
-                                intent=ParsedIntent(
-                                    name="merge.confirmed",
-                                    confidence=1.0,
-                                    entities={
-                                        "repo": repo,
-                                        "pr_number": pr_num,
-                                        "merge_method": merge_method,
-                                    },
-                                ),
-                                spoken_text=f"Failed to merge: {github_result['message']}",
-                            )
-                    else:
-                        logger.info(
-                            "Executing confirmed merge (router token) in fixture mode (no live token) for %s",
-                            target,
-                        )
-                        
-                        write_action_log(
-                            db,
-                            user_id=user_id,
-                            action_type="merge",
-                            ok=True,
-                            target=target,
-                            request={"confirmed": True, "merge_method": merge_method},
-                            result={
-                                "status": "success",
-                                "message": "PR merged (fixture)",
-                                "via_confirmation": True,
-                                "via_router_token": True,
-                            },
-                            idempotency_key=request.idempotency_key,
-                        )
-                        
-                        response = CommandResponse(
-                            status=CommandStatus.OK,
-                            intent=ParsedIntent(
-                                name="merge.confirmed",
-                                confidence=1.0,
-                                entities={
-                                    "repo": repo,
-                                    "pr_number": pr_num,
-                                    "merge_method": merge_method,
-                                },
-                            ),
-                            spoken_text=f"Merged successfully {target}.",
-                        )
-            
+            if intent_name in ("pr.request_review", "pr.comment", "pr.merge"):
+                action_type_map = {
+                    "pr.request_review": "request_review",
+                    "pr.comment": "comment",
+                    "pr.merge": "merge",
+                }
+                response = execute_confirmed_action(
+                    conn=db,
+                    user_id=user_id,
+                    action_type=action_type_map[intent_name],
+                    action_payload=entities,
+                    idempotency_key=request.idempotency_key,
+                    via_router_token=True,
+                )
+
             elif intent_name == "agent.delegate":
                 # Execute agent delegation via agent service
                 instruction = entities.get("instruction", "handle this")
@@ -1863,304 +1688,7 @@ async def confirm_command(
                 )
             ],
         )
-    elif action_type == "request_review":
-        # Handle DB-backed request_review action with exactly-once semantics
-        # Atomically delete the pending action to prevent duplicate execution.
-        # Note: get_pending_action already verified the action exists and is not expired,
-        # but between that check and this delete, another concurrent request could have
-        # consumed it, or it could have been cleaned up. The atomic delete with RETURNING
-        # ensures exactly-once execution - if the delete fails, the action is gone and
-        # we correctly return 404 to prevent re-execution.
-        deleted = delete_pending_action(db, request.token)
-
-        if not deleted:
-            # Action was already consumed or cleaned up between the get and delete
-            # This ensures idempotency even without an idempotency_key
-            raise HTTPException(
-                status_code=404,
-                detail={
-                    "error": "not_found",
-                    "message": "Pending action not found or already consumed",
-                },
-            )
-
-        # Execute the side-effect
-        repo = action_payload.get("repo")
-        pr_number = action_payload.get("pr_number")
-        reviewers = action_payload.get("reviewers", [])
-
-        target = f"{repo}#{pr_number}"
-        reviewers_str = ", ".join(reviewers)
-
-        # Check if live mode is enabled and token is available
-        from handsfree.github.auth import get_default_auth_provider
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        # Execute via GitHub API if live mode enabled and token available
-        if token:
-            from handsfree.github.client import request_reviewers as github_request_reviewers
-
-            logger.info(
-                "Executing confirmed request_review via GitHub API (live mode) for %s",
-                target,
-            )
-
-            github_result = github_request_reviewers(
-                repo=repo,
-                pr_number=pr_number,
-                reviewers=reviewers,
-                token=token,
-            )
-
-            if github_result["ok"]:
-                # Write audit log for successful execution
-                audit_log = write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="request_review",
-                    ok=True,
-                    target=target,
-                    request={"reviewers": reviewers, "confirmed": True},
-                    result={
-                        "status": "success",
-                        "message": "Review requested (live mode)",
-                        "via_confirmation": True,
-                        "github_response": github_result.get("response_data"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name="request_review.confirmed",
-                        confidence=1.0,
-                        entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
-                    ),
-                    spoken_text=f"Review requested from {reviewers_str} on {target}.",
-                )
-
-                # Store for idempotency with link to audit log
-                if request.idempotency_key:
-                    from handsfree.db.idempotency_keys import store_idempotency_key
-
-                    store_idempotency_key(
-                        db,
-                        key=request.idempotency_key,
-                        user_id=user_id,
-                        endpoint="/v1/commands/confirm",
-                        response_data=response.model_dump(mode="json"),
-                        audit_log_id=audit_log.id,
-                        expires_in_seconds=86400,  # 24 hours
-                    )
-                    processed_commands[request.idempotency_key] = response
-            else:
-                # GitHub API call failed
-                audit_log = write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="request_review",
-                    ok=False,
-                    target=target,
-                    request={"reviewers": reviewers, "confirmed": True},
-                    result={
-                        "status": "error",
-                        "message": github_result["message"],
-                        "via_confirmation": True,
-                        "status_code": github_result.get("status_code"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.ERROR,
-                    intent=ParsedIntent(
-                        name="request_review.confirmed",
-                        confidence=1.0,
-                        entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
-                    ),
-                    spoken_text=f"Failed to request reviewers: {github_result['message']}",
-                )
-
-                # Store for idempotency with link to audit log
-                if request.idempotency_key:
-                    from handsfree.db.idempotency_keys import store_idempotency_key
-
-                    store_idempotency_key(
-                        db,
-                        key=request.idempotency_key,
-                        user_id=user_id,
-                        endpoint="/v1/commands/confirm",
-                        response_data=response.model_dump(mode="json"),
-                        audit_log_id=audit_log.id,
-                        expires_in_seconds=86400,  # 24 hours
-                    )
-                    processed_commands[request.idempotency_key] = response
-        else:
-            # Fixture mode - simulate success
-            logger.info(
-                "Executing confirmed request_review in fixture mode (no live token) for %s",
-                target,
-            )
-
-            audit_log = write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=True,
-                target=target,
-                request={"reviewers": reviewers, "confirmed": True},
-                result={
-                    "status": "success",
-                    "message": "Review requested (fixture)",
-                    "via_confirmation": True,
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            response = CommandResponse(
-                status=CommandStatus.OK,
-                intent=ParsedIntent(
-                    name="request_review.confirmed",
-                    confidence=1.0,
-                    entities={"repo": repo, "pr_number": pr_number, "reviewers": reviewers},
-                ),
-                spoken_text=f"Review requested from {reviewers_str} on {target}.",
-            )
-    elif action_type == "rerun_checks":
-        # Handle DB-backed rerun_checks action with exactly-once semantics
-        deleted = delete_pending_action(db, request.token)
-
-        if not deleted:
-            # Action was already consumed or cleaned up
-            raise HTTPException(
-                status_code=404,
-                detail={
-                    "error": "not_found",
-                    "message": "Pending action not found or already consumed",
-                },
-            )
-
-        # Execute the side-effect
-        repo = action_payload.get("repo")
-        pr_number = action_payload.get("pr_number")
-
-        target = f"{repo}#{pr_number}"
-
-        # Check if live mode is enabled and token is available
-        from handsfree.github.auth import get_default_auth_provider
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        # Execute via GitHub API if live mode enabled and token available
-        if token:
-            from handsfree.github.client import rerun_workflow
-
-            logger.info(
-                "Executing confirmed rerun_checks via GitHub API (live mode) for %s",
-                target,
-            )
-
-            github_result = rerun_workflow(
-                repo=repo,
-                pr_number=pr_number,
-                token=token,
-            )
-
-            if github_result["ok"]:
-                # Write audit log for successful execution
-                write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="rerun",
-                    ok=True,
-                    target=target,
-                    request={"confirmed": True},
-                    result={
-                        "status": "success",
-                        "message": "Checks re-run (live mode)",
-                        "via_confirmation": True,
-                        "run_id": github_result.get("run_id"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name="rerun_checks.confirmed",
-                        confidence=1.0,
-                        entities={"repo": repo, "pr_number": pr_number},
-                    ),
-                    spoken_text=f"Workflow checks re-run on {target}.",
-                )
-            else:
-                # GitHub API call failed
-                write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="rerun",
-                    ok=False,
-                    target=target,
-                    request={"confirmed": True},
-                    result={
-                        "status": "error",
-                        "message": github_result["message"],
-                        "via_confirmation": True,
-                        "status_code": github_result.get("status_code"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.ERROR,
-                    intent=ParsedIntent(
-                        name="rerun_checks.confirmed",
-                        confidence=1.0,
-                        entities={"repo": repo, "pr_number": pr_number},
-                    ),
-                    spoken_text=f"Failed to re-run checks: {github_result['message']}",
-                )
-        else:
-            # Fixture mode - simulate success
-            logger.info(
-                "Executing confirmed rerun_checks in fixture mode (no live token) for %s",
-                target,
-            )
-
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="rerun",
-                ok=True,
-                target=target,
-                request={"confirmed": True},
-                result={
-                    "status": "success",
-                    "message": "Checks re-run (fixture)",
-                    "via_confirmation": True,
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            response = CommandResponse(
-                status=CommandStatus.OK,
-                intent=ParsedIntent(
-                    name="rerun_checks.confirmed",
-                    confidence=1.0,
-                    entities={"repo": repo, "pr_number": pr_number},
-                ),
-                spoken_text=f"Workflow checks re-run on {target}.",
-            )
-    elif action_type == "merge":
-        # Handle DB-backed merge action with exactly-once semantics
+    elif action_type in ("request_review", "rerun_checks", "comment", "merge"):
         deleted = delete_pending_action(db, request.token)
 
         if not deleted:
@@ -2172,129 +1700,13 @@ async def confirm_command(
                 },
             )
 
-        repo = action_payload.get("repo")
-        pr_number = action_payload.get("pr_number")
-        merge_method = action_payload.get("merge_method") or "squash"
-
-        target = f"{repo}#{pr_number}"
-
-        from handsfree.github.auth import get_default_auth_provider
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        if token:
-            from handsfree.github.client import merge_pull_request
-
-            logger.info(
-                "Executing confirmed merge via GitHub API (live mode) for %s",
-                target,
-            )
-
-            github_result = merge_pull_request(
-                repo=repo,
-                pr_number=pr_number,
-                merge_method=merge_method,
-                token=token,
-            )
-
-            if github_result["ok"]:
-                write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="merge",
-                    ok=True,
-                    target=target,
-                    request={"confirmed": True, "merge_method": merge_method},
-                    result={
-                        "status": "success",
-                        "message": "Merged (live mode)",
-                        "via_confirmation": True,
-                        "github_response": github_result.get("response_data"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.OK,
-                    intent=ParsedIntent(
-                        name="merge.confirmed",
-                        confidence=1.0,
-                        entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                    ),
-                    spoken_text=f"Merged successfully {target}.",
-                )
-            else:
-                write_action_log(
-                    db,
-                    user_id=user_id,
-                    action_type="merge",
-                    ok=False,
-                    target=target,
-                    request={"confirmed": True, "merge_method": merge_method},
-                    result={
-                        "status": "error",
-                        "message": github_result["message"],
-                        "via_confirmation": True,
-                        "status_code": github_result.get("status_code"),
-                        "error_type": github_result.get("error_type"),
-                    },
-                    idempotency_key=request.idempotency_key,
-                )
-
-                response = CommandResponse(
-                    status=CommandStatus.ERROR,
-                    intent=ParsedIntent(
-                        name="merge.confirmed",
-                        confidence=1.0,
-                        entities={
-                            "repo": repo,
-                            "pr_number": pr_number,
-                            "merge_method": merge_method,
-                        },
-                    ),
-                    spoken_text=f"Failed to merge: {github_result['message']}",
-                )
-        else:
-            logger.info(
-                "Executing confirmed merge in fixture mode (no live token) for %s",
-                target,
-            )
-
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="merge",
-                ok=True,
-                target=target,
-                request={"confirmed": True, "merge_method": merge_method},
-                result={
-                    "status": "success",
-                    "message": "PR merged (fixture)",
-                    "via_confirmation": True,
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            response = CommandResponse(
-                status=CommandStatus.OK,
-                intent=ParsedIntent(
-                    name="merge.confirmed",
-                    confidence=1.0,
-                    entities={
-                        "repo": repo,
-                        "pr_number": pr_number,
-                        "merge_method": merge_method,
-                    },
-                ),
-                spoken_text=f"Merged successfully {target}.",
-            )
+        response = execute_confirmed_action(
+            conn=db,
+            user_id=user_id,
+            action_type=action_type,
+            action_payload=action_payload,
+            idempotency_key=request.idempotency_key,
+        )
     else:
         response = CommandResponse(
             status=CommandStatus.ERROR,
@@ -2403,316 +1815,29 @@ async def request_review(
         user_id: User ID extracted from authentication (via CurrentUser dependency).
     """
     db = get_db()
-
-    # Check idempotency first - database first, then in-memory cache as optimization
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            # Reconstruct ActionResult from cached data
-            return ActionResult(**cached_response)
-
-        # Also check in-memory cache (backward compatibility)
-        if request.idempotency_key in idempotency_store:
-            return idempotency_store[request.idempotency_key]
-
-    # Check rate limit with burst limiting
-    from handsfree.rate_limit import check_side_effect_rate_limit
-    from handsfree.security import check_and_log_anomaly
-
-    rate_limit_result = check_side_effect_rate_limit(
-        db,
-        user_id,
-        "request_review",
-    )
-
-    if not rate_limit_result.allowed:
-        # Write audit log for rate limit denial (only if not already logged)
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=False,
-                target=f"{request.repo}#{request.pr_number}",
-                request={"reviewers": request.reviewers},
-                result={"error": "rate_limited", "message": rate_limit_result.reason},
-                idempotency_key=request.idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used in audit log - this is a retry
-            pass
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "request_review",
-            "rate_limited",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={"reviewers": request.reviewers},
-        )
-
-        # Return 429 with Retry-After header
-        from fastapi.responses import JSONResponse
-
-        return JSONResponse(
-            status_code=429,
-            content={
-                "detail": {
-                    "error": "rate_limited",
-                    "message": rate_limit_result.reason,
-                    "retry_after": rate_limit_result.retry_after_seconds,
-                }
-            },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
-            if rate_limit_result.retry_after_seconds
-            else {},
-        )
-
-    # Evaluate policy
-    policy_result = evaluate_action_policy(
-        db,
-        user_id,
-        request.repo,
-        "request_review",
-    )
-
-    # Handle policy decisions
-    if policy_result.decision == PolicyDecision.DENY:
-        # Write audit log for policy denial (only if not already logged)
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=False,
-                target=f"{request.repo}#{request.pr_number}",
-                request={"reviewers": request.reviewers},
-                result={"error": "policy_denied", "message": policy_result.reason},
-                idempotency_key=request.idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used in audit log - this is a retry
-            pass
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "request_review",
-            "policy_denied",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={"reviewers": request.reviewers},
-        )
-
-        raise HTTPException(
-            status_code=403,
-            detail={
-                "error": "policy_denied",
-                "message": policy_result.reason,
-            },
-        )
-
-    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-        # Create pending action in database
-        reviewers_str = ", ".join(request.reviewers)
-        summary = f"Request review from {reviewers_str} on {request.repo}#{request.pr_number}"
-        pending_action = create_pending_action(
-            db,
-            user_id=user_id,
-            summary=summary,
+    reviewers_str = ", ".join(request.reviewers)
+    return process_direct_action_request(
+        conn=db,
+        user_id=user_id,
+        request=DirectActionRequest(
+            endpoint="/v1/actions/request-review",
             action_type="request_review",
+            execution_action_type="request_review",
+            pending_action_type="request_review",
+            repo=request.repo,
+            pr_number=request.pr_number,
             action_payload={
                 "repo": request.repo,
                 "pr_number": request.pr_number,
                 "reviewers": request.reviewers,
             },
-            expires_in_seconds=300,  # 5 minutes
-        )
-
-        # Write audit log for confirmation required
-        audit_log = write_action_log(
-            db,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=f"{request.repo}#{request.pr_number}",
-            request={"reviewers": request.reviewers},
-            result={
-                "status": "needs_confirmation",
-                "token": pending_action.token,
-                "reason": policy_result.reason,
-            },
+            log_request={"reviewers": request.reviewers},
+            pending_summary=f"Request review from {reviewers_str} on {request.repo}#{request.pr_number}",
             idempotency_key=request.idempotency_key,
-        )
-
-        result = ActionResult(
-            ok=False,
-            message=f"Confirmation required: {policy_result.reason}. "
-            f"Use token '{pending_action.token}' to confirm.",
-            url=None,
-        )
-
-        # Store for idempotency (both persistent and in-memory)
-        if request.idempotency_key:
-            from handsfree.db.idempotency_keys import store_idempotency_key
-
-            store_idempotency_key(
-                db,
-                key=request.idempotency_key,
-                user_id=user_id,
-                endpoint="/v1/actions/request-review",
-                response_data=result.model_dump(mode="json"),
-                audit_log_id=audit_log.id,
-                expires_in_seconds=86400,  # 24 hours
-            )
-            idempotency_store[request.idempotency_key] = result
-
-        return result
-
-    # Policy allows the action - execute it
-    target = f"{request.repo}#{request.pr_number}"
-
-    # Check if live mode is enabled and token is available
-    from handsfree.github.auth import get_default_auth_provider
-
-    auth_provider = get_default_auth_provider()
-    token = None
-    if auth_provider.supports_live_mode():
-        token = auth_provider.get_token(user_id)
-
-    # Execute via GitHub API if live mode enabled and token available
-    if token:
-        from handsfree.github.client import request_reviewers
-
-        logger.info(
-            "Executing request_review via GitHub API (live mode) for %s",
-            target,
-        )
-
-        github_result = request_reviewers(
-            repo=request.repo,
-            pr_number=request.pr_number,
-            reviewers=request.reviewers,
-            token=token,
-        )
-
-        if github_result["ok"]:
-            # Write audit log for successful execution
-            audit_log = write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=True,
-                target=target,
-                request={"reviewers": request.reviewers},
-                result={
-                    "status": "success",
-                    "message": "Review requested (live mode)",
-                    "github_response": github_result.get("response_data"),
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            result = ActionResult(
-                ok=True,
-                message=github_result["message"],
-                url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
-            )
-
-            # Store for idempotency with link to audit log
-            if request.idempotency_key:
-                from handsfree.db.idempotency_keys import store_idempotency_key
-
-                store_idempotency_key(
-                    db,
-                    key=request.idempotency_key,
-                    user_id=user_id,
-                    endpoint="/v1/actions/request-review",
-                    response_data=result.model_dump(mode="json"),
-                    audit_log_id=audit_log.id,
-                    expires_in_seconds=86400,  # 24 hours
-                )
-                idempotency_store[request.idempotency_key] = result
-        else:
-            # GitHub API call failed
-            audit_log = write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=False,
-                target=target,
-                request={"reviewers": request.reviewers},
-                result={
-                    "status": "error",
-                    "message": github_result["message"],
-                    "status_code": github_result.get("status_code"),
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            result = ActionResult(
-                ok=False,
-                message=f"GitHub API error: {github_result['message']}",
-                url=None,
-            )
-
-            # Store for idempotency with link to audit log
-            if request.idempotency_key:
-                from handsfree.db.idempotency_keys import store_idempotency_key
-
-                store_idempotency_key(
-                    db,
-                    key=request.idempotency_key,
-                    user_id=user_id,
-                    endpoint="/v1/actions/request-review",
-                    response_data=result.model_dump(mode="json"),
-                    audit_log_id=audit_log.id,
-                    expires_in_seconds=86400,  # 24 hours
-                )
-                idempotency_store[request.idempotency_key] = result
-    else:
-        # Fixture mode - simulate success
-        logger.info(
-            "Executing request_review in fixture mode (no live token) for %s",
-            target,
-        )
-
-        audit_log = write_action_log(
-            db,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=target,
-            request={"reviewers": request.reviewers},
-            result={"status": "success", "message": "Review requested (fixture)"},
-            idempotency_key=request.idempotency_key,
-        )
-
-        result = ActionResult(
-            ok=True,
-            message=f"Review requested from {', '.join(request.reviewers)} on {target}",
-            url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
-        )
-
-        # Store for idempotency with link to audit log
-        if request.idempotency_key:
-            from handsfree.db.idempotency_keys import store_idempotency_key
-
-            store_idempotency_key(
-                db,
-                key=request.idempotency_key,
-                user_id=user_id,
-                endpoint="/v1/actions/request-review",
-                response_data=result.model_dump(mode="json"),
-                audit_log_id=audit_log.id,
-                expires_in_seconds=86400,  # 24 hours
-            )
-            idempotency_store[request.idempotency_key] = result
-
-    return result
+            anomaly_request_data={"reviewers": request.reviewers},
+        ),
+        idempotency_store=idempotency_store,
+    )
 
 
 @app.post("/v1/actions/rerun-checks", response_model=ActionResult)
@@ -2721,270 +1846,60 @@ async def rerun_checks(
     user_id: CurrentUser,
 ) -> ActionResult:
     """Re-run CI checks with policy evaluation and rate limiting."""
-    # Get DB connection
     db = get_db()
-
-    # Check idempotency - database first, then in-memory cache as optimization
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            return ActionResult(**cached_response)
-
-        if request.idempotency_key in idempotency_store:
-            logger.info(
-                "Returning cached result for idempotency key: %s",
-                request.idempotency_key,
-            )
-            return idempotency_store[request.idempotency_key]
-
-    # Rate limiting with burst limiting
-    from handsfree.rate_limit import check_side_effect_rate_limit
-    from handsfree.security import check_and_log_anomaly
-
-    rate_limit_result = check_side_effect_rate_limit(
-        db,
-        user_id,
-        "rerun",
-    )
-
-    if not rate_limit_result.allowed:
-        # Write audit log for rate limit
-        write_action_log(
-            db,
-            user_id=user_id,
+    return process_direct_action_request(
+        conn=db,
+        user_id=user_id,
+        request=DirectActionRequest(
+            endpoint="/v1/actions/rerun-checks",
             action_type="rerun",
-            ok=False,
-            target=f"{request.repo}#{request.pr_number}",
-            request={},
-            result={"error": "rate_limited", "message": rate_limit_result.reason},
+            execution_action_type="rerun",
+            pending_action_type="rerun_checks",
+            repo=request.repo,
+            pr_number=request.pr_number,
+            action_payload={"repo": request.repo, "pr_number": request.pr_number},
+            log_request={},
+            pending_summary=f"Re-run checks on {request.repo}#{request.pr_number}",
             idempotency_key=request.idempotency_key,
-        )
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "rerun",
-            "rate_limited",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={},
-        )
-
-        from fastapi.responses import JSONResponse
-
-        return JSONResponse(
-            status_code=429,
-            content={
-                "detail": {
-                    "error": "rate_limited",
-                    "message": rate_limit_result.reason,
-                    "retry_after": rate_limit_result.retry_after_seconds,
-                }
-            },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
-            if rate_limit_result.retry_after_seconds
-            else {},
-        )
-
-    # Evaluate policy
-    policy_result = evaluate_action_policy(
-        db,
-        user_id,
-        request.repo,
-        "rerun",
+        ),
+        idempotency_store=idempotency_store,
     )
 
-    # Handle policy decisions
-    if policy_result.decision == PolicyDecision.DENY:
-        # Write audit log for policy denial
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="rerun",
-                ok=False,
-                target=f"{request.repo}#{request.pr_number}",
-                request={},
-                result={"error": "policy_denied", "message": policy_result.reason},
-                idempotency_key=request.idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used - this is a retry
-            pass
 
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "rerun",
-            "policy_denied",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={},
-        )
-
-        raise HTTPException(
-            status_code=403,
-            detail={
-                "error": "policy_denied",
-                "message": policy_result.reason,
-            },
-        )
-
-    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-        # Create pending action in database
-        summary = f"Re-run checks on {request.repo}#{request.pr_number}"
-        pending_action = create_pending_action(
-            db,
-            user_id=user_id,
-            summary=summary,
-            action_type="rerun_checks",
+@app.post("/v1/actions/comment", response_model=ActionResult)
+async def comment_on_pr(
+    request: CommentRequest,
+    user_id: CurrentUser,
+) -> ActionResult:
+    """Post a PR comment with policy evaluation and audit logging."""
+    db = get_db()
+    preview = (
+        request.comment_body[:50] + "..."
+        if len(request.comment_body) > 50
+        else request.comment_body
+    )
+    return process_direct_action_request(
+        conn=db,
+        user_id=user_id,
+        request=DirectActionRequest(
+            endpoint="/v1/actions/comment",
+            action_type="comment",
+            execution_action_type="comment",
+            pending_action_type="comment",
+            repo=request.repo,
+            pr_number=request.pr_number,
             action_payload={
                 "repo": request.repo,
                 "pr_number": request.pr_number,
+                "comment_body": request.comment_body,
             },
-            expires_in_seconds=300,  # 5 minutes
-        )
-
-        # Write audit log for confirmation required
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="rerun",
-            ok=True,
-            target=f"{request.repo}#{request.pr_number}",
-            request={},
-            result={
-                "status": "needs_confirmation",
-                "token": pending_action.token,
-                "reason": policy_result.reason,
-            },
+            log_request={"comment_body": request.comment_body},
+            pending_summary=f"Post comment on {request.repo}#{request.pr_number}: {preview}",
             idempotency_key=request.idempotency_key,
-        )
-
-        result = ActionResult(
-            ok=False,
-            message=f"Confirmation required: {policy_result.reason}. "
-            f"Use token '{pending_action.token}' to confirm.",
-            url=None,
-        )
-
-        # Store for idempotency
-        if request.idempotency_key:
-            idempotency_store[request.idempotency_key] = result
-
-        return result
-
-    # Policy allows the action - execute it
-    target = f"{request.repo}#{request.pr_number}"
-
-    # Check if live mode is enabled and token is available
-    from handsfree.github.auth import get_default_auth_provider
-
-    auth_provider = get_default_auth_provider()
-    token = None
-    if auth_provider.supports_live_mode():
-        token = auth_provider.get_token(user_id)
-
-    # Execute via GitHub API if live mode enabled and token available
-    if token:
-        from handsfree.github.client import rerun_workflow
-
-        logger.info(
-            "Executing rerun_checks via GitHub API (live mode) for %s",
-            target,
-        )
-
-        github_result = rerun_workflow(
-            repo=request.repo,
-            pr_number=request.pr_number,
-            token=token,
-        )
-
-        if github_result["ok"]:
-            # Write audit log for successful execution
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="rerun",
-                ok=True,
-                target=target,
-                request={},
-                result={
-                    "status": "success",
-                    "message": "Checks re-run (live mode)",
-                    "run_id": github_result.get("run_id"),
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            result = ActionResult(
-                ok=True,
-                message=github_result["message"],
-                url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
-            )
-        else:
-            # GitHub API call failed
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="rerun",
-                ok=False,
-                target=target,
-                request={},
-                result={
-                    "status": "error",
-                    "message": github_result["message"],
-                    "status_code": github_result.get("status_code"),
-                },
-                idempotency_key=request.idempotency_key,
-            )
-
-            result = ActionResult(
-                ok=False,
-                message=f"GitHub API error: {github_result['message']}",
-                url=None,
-            )
-    else:
-        # Fixture mode - simulate success
-        logger.info(
-            "Executing rerun_checks in fixture mode (no live token) for %s",
-            target,
-        )
-
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="rerun",
-            ok=True,
-            target=target,
-            request={},
-            result={"status": "success", "message": "Checks re-run (fixture)"},
-            idempotency_key=request.idempotency_key,
-        )
-
-        result = ActionResult(
-            ok=True,
-            message=f"Workflow checks re-run on {target}",
-            url=f"https://github.com/{request.repo}/pull/{request.pr_number}",
-        )
-
-    # Store for idempotency
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import store_idempotency_key
-
-        store_idempotency_key(
-            db,
-            key=request.idempotency_key,
-            user_id=user_id,
-            endpoint="/v1/actions/rerun-checks",
-            response_data=result.model_dump(mode="json"),
-            expires_in_seconds=86400,  # 24 hours
-        )
-        idempotency_store[request.idempotency_key] = result
-
-    return result
+            anomaly_request_data={"comment_body": request.comment_body},
+        ),
+        idempotency_store=idempotency_store,
+    )
 
 
 @app.post("/v1/actions/merge", response_model=ActionResult)
@@ -2994,157 +1909,30 @@ async def merge_pr(
 ) -> ActionResult:
     """Merge a PR with strict policy gating and confirmation."""
     db = get_db()
-
-    # Check idempotency first - database first, then in-memory cache as optimization
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            return ActionResult(**cached_response)
-
-        if request.idempotency_key in idempotency_store:
-            return idempotency_store[request.idempotency_key]
-
-    # Rate limiting (strict) with burst limiting
-    from handsfree.rate_limit import check_side_effect_rate_limit
-    from handsfree.security import check_and_log_anomaly
-
-    rate_limit_result = check_side_effect_rate_limit(
-        db,
-        user_id,
-        "merge",
-    )
-
-    if not rate_limit_result.allowed:
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="merge",
-            ok=False,
-            target=f"{request.repo}#{request.pr_number}",
-            request={"merge_method": request.merge_method},
-            result={"error": "rate_limited", "message": rate_limit_result.reason},
-            idempotency_key=request.idempotency_key,
-        )
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "merge",
-            "rate_limited",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={"merge_method": request.merge_method},
-        )
-
-        from fastapi.responses import JSONResponse
-
-        return JSONResponse(
-            status_code=429,
-            content={
-                "detail": {
-                    "error": "rate_limited",
-                    "message": rate_limit_result.reason,
-                    "retry_after": rate_limit_result.retry_after_seconds,
-                }
-            },
-            headers={"Retry-After": str(rate_limit_result.retry_after_seconds)}
-            if rate_limit_result.retry_after_seconds
-            else {},
-        )
-
-    # Evaluate policy (merge is denied by default)
-    policy_result = evaluate_action_policy(
-        db,
-        user_id,
-        request.repo,
-        "merge",
-        pr_checks_status=None,
-        pr_approvals_count=0,
-    )
-
-    if policy_result.decision == PolicyDecision.DENY:
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="merge",
-            ok=False,
-            target=f"{request.repo}#{request.pr_number}",
-            request={"merge_method": request.merge_method},
-            result={"error": "policy_denied", "message": policy_result.reason},
-            idempotency_key=request.idempotency_key,
-        )
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "merge",
-            "policy_denied",
-            target=f"{request.repo}#{request.pr_number}",
-            request_data={"merge_method": request.merge_method},
-        )
-
-        raise HTTPException(
-            status_code=403,
-            detail={"error": "policy_denied", "message": policy_result.reason},
-        )
-
-    # Always require confirmation for merge
-    summary = f"Merge {request.repo}#{request.pr_number} using {request.merge_method}"
-    pending_action = create_pending_action(
-        db,
+    return process_direct_action_request(
+        conn=db,
         user_id=user_id,
-        summary=summary,
-        action_type="merge",
-        action_payload={
-            "repo": request.repo,
-            "pr_number": request.pr_number,
-            "merge_method": request.merge_method,
-        },
-        expires_in_seconds=300,
-    )
-
-    audit_log = write_action_log(
-        db,
-        user_id=user_id,
-        action_type="merge",
-        ok=True,
-        target=f"{request.repo}#{request.pr_number}",
-        request={"merge_method": request.merge_method},
-        result={
-            "status": "needs_confirmation",
-            "token": pending_action.token,
-            "reason": policy_result.reason,
-        },
-        idempotency_key=request.idempotency_key,
-    )
-
-    result = ActionResult(
-        ok=False,
-        message=(
-            f"Confirmation required: {policy_result.reason}. "
-            f"Use token '{pending_action.token}' to confirm."
-        ),
-        url=None,
-    )
-
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import store_idempotency_key
-
-        store_idempotency_key(
-            db,
-            key=request.idempotency_key,
-            user_id=user_id,
+        request=DirectActionRequest(
             endpoint="/v1/actions/merge",
-            response_data=result.model_dump(mode="json"),
-            audit_log_id=audit_log.id,
-            expires_in_seconds=86400,  # 24 hours
-        )
-        idempotency_store[request.idempotency_key] = result
-
-    return result
+            action_type="merge",
+            execution_action_type=None,
+            pending_action_type="merge",
+            repo=request.repo,
+            pr_number=request.pr_number,
+            action_payload={
+                "repo": request.repo,
+                "pr_number": request.pr_number,
+                "merge_method": request.merge_method,
+            },
+            log_request={"merge_method": request.merge_method},
+            pending_summary=f"Merge {request.repo}#{request.pr_number} using {request.merge_method}",
+            idempotency_key=request.idempotency_key,
+            anomaly_request_data={"merge_method": request.merge_method},
+            policy_kwargs={"pr_checks_status": None, "pr_approvals_count": 0},
+            always_require_confirmation=True,
+        ),
+        idempotency_store=idempotency_store,
+    )
 
 
 async def _handle_request_review_command(
@@ -3191,50 +1979,43 @@ async def _handle_request_review_command(
     # Use a default repo for now (in production, this would come from context)
     repo = parsed_intent.entities.get("repo", "default/repo")
 
-    # Check rate limit with burst limiting
-    from handsfree.rate_limit import check_side_effect_rate_limit
-    from handsfree.security import check_and_log_anomaly
-
-    rate_limit_result = check_side_effect_rate_limit(
-        db,
-        user_id,
-        "request_review",
-    )
-
-    if not rate_limit_result.allowed:
-        # Write audit log for rate limit denial
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
+    reviewers_str = ", ".join(reviewers)
+    try:
+        detailed = process_direct_action_request_detailed(
+            conn=db,
+            user_id=user_id,
+            request=DirectActionRequest(
+                endpoint="/v1/command",
                 action_type="request_review",
-                ok=False,
-                target=f"{repo}#{pr_number}",
-                request={"reviewers": reviewers},
-                result={"error": "rate_limited", "message": rate_limit_result.reason},
+                execution_action_type="request_review",
+                pending_action_type="request_review",
+                repo=repo,
+                pr_number=pr_number,
+                action_payload={
+                    "repo": repo,
+                    "pr_number": pr_number,
+                    "reviewers": reviewers,
+                },
+                log_request={"reviewers": reviewers},
+                pending_summary=f"Request review from {reviewers_str} on {repo}#{pr_number}",
                 idempotency_key=idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used - this is a retry
-            logger.debug(
-                "Idempotency key %s already used for rate limit audit log", idempotency_key
-            )
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "request_review",
-            "rate_limited",
-            target=f"{repo}#{pr_number}",
-            request_data={"reviewers": reviewers},
+                anomaly_request_data={"reviewers": reviewers},
+            ),
+            idempotency_store=idempotency_store,
         )
+    except HTTPException as exc:
+        if exc.status_code == 403 and isinstance(exc.detail, dict):
+            return CommandResponse(
+                status=CommandStatus.ERROR,
+                intent=parsed_intent,
+                spoken_text=f"Action not allowed: {exc.detail.get('message', 'policy denied')}",
+                debug=DebugInfo(transcript=text),
+            )
+        raise
 
-        # Create user-friendly spoken message with retry guidance
-        retry_msg = ""
-        if rate_limit_result.retry_after_seconds:
-            retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
-
+    if detailed.http_response is not None:
+        retry_after = detailed.http_response.headers.get("Retry-After")
+        retry_msg = f" Please try again in {retry_after} seconds." if retry_after else ""
         return CommandResponse(
             status=CommandStatus.ERROR,
             intent=parsed_intent,
@@ -3242,196 +2023,35 @@ async def _handle_request_review_command(
             debug=DebugInfo(transcript=text),
         )
 
-    # Evaluate policy
-    policy_result = evaluate_action_policy(
-        db,
-        user_id,
-        repo,
-        "request_review",
-    )
-
-    # Handle policy decisions
-    if policy_result.decision == PolicyDecision.DENY:
-        # Write audit log for policy denial
-        try:
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=False,
-                target=f"{repo}#{pr_number}",
-                request={"reviewers": reviewers},
-                result={"error": "policy_denied", "message": policy_result.reason},
-                idempotency_key=idempotency_key,
-            )
-        except ValueError:
-            # Idempotency key already used
-            logger.debug(
-                "Idempotency key %s already used for policy denial audit log",
-                idempotency_key,
-            )
-
-        # Check for suspicious activity patterns
-        check_and_log_anomaly(
-            db,
-            user_id,
-            "request_review",
-            "policy_denied",
-            target=f"{repo}#{pr_number}",
-            request_data={"reviewers": reviewers},
-        )
-
-        return CommandResponse(
-            status=CommandStatus.ERROR,
-            intent=parsed_intent,
-            spoken_text=f"Action not allowed: {policy_result.reason}",
-            debug=DebugInfo(transcript=text),
-        )
-
-    elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-        # Create pending action in database
-        reviewers_str = ", ".join(reviewers)
-        summary = f"Request review from {reviewers_str} on {repo}#{pr_number}"
-        pending_action = create_pending_action(
-            db,
-            user_id=user_id,
-            summary=summary,
-            action_type="request_review",
-            action_payload={
-                "repo": repo,
-                "pr_number": pr_number,
-                "reviewers": reviewers,
-            },
-            expires_in_seconds=300,  # 5 minutes
-        )
-
-        # Write audit log for confirmation required
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=f"{repo}#{pr_number}",
-            request={"reviewers": reviewers},
-            result={
-                "status": "needs_confirmation",
-                "token": pending_action.token,
-                "reason": policy_result.reason,
-            },
-            idempotency_key=idempotency_key,
-        )
-
+    if detailed.pending_token:
         return CommandResponse(
             status=CommandStatus.NEEDS_CONFIRMATION,
             intent=parsed_intent,
-            spoken_text=f"{summary}. Say 'confirm' to proceed.",
+            spoken_text=f"{detailed.pending_summary}. Say 'confirm' to proceed.",
             pending_action=PydanticPendingAction(
-                token=pending_action.token,
-                expires_at=pending_action.expires_at,
-                summary=summary,
+                token=detailed.pending_token,
+                expires_at=detailed.pending_expires_at,
+                summary=detailed.pending_summary or "",
             ),
             debug=DebugInfo(transcript=text),
         )
 
-    # Policy allows the action - execute it directly
-    target = f"{repo}#{pr_number}"
-
-    # Check if live mode is enabled and token is available
-    from handsfree.github.auth import get_default_auth_provider
-
-    auth_provider = get_default_auth_provider()
-    token = None
-    if auth_provider.supports_live_mode():
-        token = auth_provider.get_token(user_id)
-
-    # Execute via GitHub API if live mode enabled and token available
-    if token:
-        from handsfree.github.client import request_reviewers as github_request_reviewers
-
-        logger.info(
-            "Executing request_review via GitHub API (live mode) for %s",
-            target,
-        )
-
-        github_result = github_request_reviewers(
-            repo=repo,
-            pr_number=pr_number,
-            reviewers=reviewers,
-            token=token,
-        )
-
-        if github_result["ok"]:
-            # Write audit log for successful execution
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=True,
-                target=target,
-                request={"reviewers": reviewers},
-                result={
-                    "status": "success",
-                    "message": "Review requested (live mode)",
-                    "github_response": github_result.get("response_data"),
-                },
-                idempotency_key=idempotency_key,
-            )
-
-            reviewers_str = ", ".join(reviewers)
-            return CommandResponse(
-                status=CommandStatus.OK,
-                intent=parsed_intent,
-                spoken_text=f"Review requested from {reviewers_str} on {target}.",
-                debug=DebugInfo(transcript=text),
-            )
-        else:
-            # GitHub API call failed
-            write_action_log(
-                db,
-                user_id=user_id,
-                action_type="request_review",
-                ok=False,
-                target=target,
-                request={"reviewers": reviewers},
-                result={
-                    "status": "error",
-                    "message": github_result["message"],
-                    "status_code": github_result.get("status_code"),
-                },
-                idempotency_key=idempotency_key,
-            )
-
-            return CommandResponse(
-                status=CommandStatus.ERROR,
-                intent=parsed_intent,
-                spoken_text=f"Failed to request reviewers: {github_result['message']}",
-                debug=DebugInfo(transcript=text),
-            )
-    else:
-        # Fixture mode - simulate success
-        logger.info(
-            "Executing request_review in fixture mode (no live token) for %s",
-            target,
-        )
-
-        write_action_log(
-            db,
-            user_id=user_id,
-            action_type="request_review",
-            ok=True,
-            target=target,
-            request={"reviewers": reviewers},
-            result={"status": "success", "message": "Review requested (fixture)"},
-            idempotency_key=idempotency_key,
-        )
-
-        reviewers_str = ", ".join(reviewers)
+    result = detailed.action_result
+    if result and result.ok:
         return CommandResponse(
             status=CommandStatus.OK,
             intent=parsed_intent,
-            spoken_text=f"Review requested from {reviewers_str} on {target}.",
+            spoken_text=f"Review requested from {reviewers_str} on {repo}#{pr_number}.",
             debug=DebugInfo(transcript=text),
         )
+
+    message = result.message if result else "Failed to request reviewers."
+    return CommandResponse(
+        status=CommandStatus.ERROR,
+        intent=parsed_intent,
+        spoken_text=message,
+        debug=DebugInfo(transcript=text),
+    )
 
 
 def _handle_agent_delegate(

@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.media.AudioDeviceCallback
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Build
@@ -14,7 +15,7 @@ import android.os.Build
  */
 class AudioRouteMonitor(private val context: Context) {
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-    private var routeChangeCallback: AudioManager.AudioDeviceCallback? = null
+    private var routeChangeCallback: AudioDeviceCallback? = null
     private var scoStateReceiver: BroadcastReceiver? = null
     private var isMonitoring = false
 
@@ -72,7 +73,7 @@ class AudioRouteMonitor(private val context: Context) {
 
         // Register audio device callback (API 23+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            routeChangeCallback = object : AudioManager.AudioDeviceCallback() {
+            routeChangeCallback = object : AudioDeviceCallback() {
                 override fun onAudioDevicesAdded(addedDevices: Array<out AudioDeviceInfo>?) {
                     callback(getCurrentRoute())
                 }
@@ -120,8 +121,9 @@ class AudioRouteMonitor(private val context: Context) {
 
         // Unregister audio device callback
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            routeChangeCallback?.let {
-                audioManager.unregisterAudioDeviceCallback(it)
+            val callback = routeChangeCallback
+            if (callback != null) {
+                audioManager.unregisterAudioDeviceCallback(callback)
             }
             routeChangeCallback = null
         }

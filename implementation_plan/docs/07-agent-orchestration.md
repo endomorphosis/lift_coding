@@ -20,6 +20,7 @@ To support MCP-native agent execution, add a dedicated provider track using
 - `endomorphosis/ipfs_accelerate_py`
 
 Plan details and rollout sequencing are captured in:
+- `implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md`
 - `implementation_plan/prs/PR-009-mcp-plus-plus-ipfs-integration.md`
 
 ## Agent task lifecycle

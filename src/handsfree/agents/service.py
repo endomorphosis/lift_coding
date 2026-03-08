@@ -10,9 +10,11 @@ from typing import Any
 import duckdb
 
 from handsfree.agent_providers import get_provider, is_copilot_cli_available
+from handsfree.mcp import get_provider_descriptor, infer_provider_capability
 from handsfree.db.agent_tasks import (
     create_agent_task,
     get_agent_tasks,
+    update_agent_task_trace,
     update_agent_task_state,
 )
 from handsfree.db.notifications import create_notification
@@ -89,6 +91,13 @@ class AgentService:
         task_trace = trace or {}
         if "created_via" not in task_trace:
             task_trace["created_via"] = "delegate_command"
+        provider_descriptor = get_provider_descriptor(provider)
+        if provider_descriptor is not None:
+            task_trace.setdefault("provider_label", provider_descriptor.display_name)
+            task_trace.setdefault(
+                "mcp_capability",
+                infer_provider_capability(provider, instruction),
+            )
 
         # Create task in database (starts in "created" state)
         task = create_agent_task(
@@ -115,31 +124,48 @@ class AgentService:
             start_result = agent_provider.start_task(task)
 
             if start_result.get("ok"):
-                # Transition to "running" state
                 provider_trace = start_result.get("trace", {})
-                updated_task = update_agent_task_state(
-                    conn=self.conn,
-                    task_id=task.id,
-                    new_state="running",
-                    trace_update=provider_trace,
-                )
+                next_state = "completed" if provider_trace.get("mcp_sync_completed") else "running"
+                if next_state == "completed":
+                    updated_task = update_agent_task_state(
+                        conn=self.conn,
+                        task_id=task.id,
+                        new_state="running",
+                        trace_update=provider_trace,
+                    )
+                    if updated_task is not None:
+                        updated_task = update_agent_task_state(
+                            conn=self.conn,
+                            task_id=task.id,
+                            new_state="completed",
+                        )
+                else:
+                    updated_task = update_agent_task_state(
+                        conn=self.conn,
+                        task_id=task.id,
+                        new_state=next_state,
+                        trace_update=provider_trace,
+                    )
 
                 if updated_task:
-                    # Emit "running" notification
-                    self._emit_notification(
-                        user_id=user_id,
-                        event="task_running",
-                        task_id=task.id,
-                        message=f"Agent task {task.id} is now running",
-                    )
+                    if next_state == "completed":
+                        self._emit_completion_notification(updated_task, next_state)
+                    else:
+                        self._emit_notification(
+                            user_id=user_id,
+                            event="task_running",
+                            task_id=task.id,
+                            message=f"Agent task {task.id} is now running",
+                        )
 
                     # Update task reference with new state
                     task = updated_task
 
                     logger.info(
-                        "Started task %s with provider %s, transitioned to running",
+                        "Started task %s with provider %s, transitioned to %s",
                         task.id,
                         provider,
+                        next_state,
                     )
             else:
                 # Provider failed to start - log but don't fail the delegation
@@ -157,10 +183,9 @@ class AgentService:
                     "start_error": error_msg,
                     "start_failed_at": datetime.now(UTC).isoformat(),
                 }
-                updated_task = update_agent_task_state(
+                updated_task = update_agent_task_trace(
                     conn=self.conn,
                     task_id=task.id,
-                    new_state="created",  # Keep in created state
                     trace_update=error_trace,
                 )
                 if updated_task:
@@ -175,26 +200,48 @@ class AgentService:
                 "start_exception": str(e),
                 "start_failed_at": datetime.now(UTC).isoformat(),
             }
-            updated_task = update_agent_task_state(
+            updated_task = update_agent_task_trace(
                 conn=self.conn,
                 task_id=task.id,
-                new_state="created",  # Keep in created state
                 trace_update=error_trace,
             )
             if updated_task:
                 task = updated_task
 
         # Generate spoken confirmation
-        if target_type and target_ref:
+        provider_label = provider_descriptor.display_name if provider_descriptor else None
+        capability = (
+            infer_provider_capability(provider, instruction)
+            if provider_descriptor is not None
+            else None
+        )
+        if provider_label and target_type and target_ref:
+            spoken = f"{provider_label} task created for {target_type} {target_ref}."
+        elif provider_label and capability:
+            spoken = f"{provider_label} {capability.replace('_', ' ')} task created."
+        elif target_type and target_ref:
             spoken = f"Task created for {target_type} {target_ref}."
         else:
             spoken = "Agent task created."
+
+        if task.trace and task.trace.get("mcp_sync_completed"):
+            preview = task.trace.get("mcp_result_preview")
+            if isinstance(preview, str) and preview.strip():
+                spoken = preview.strip()
+            elif provider_label and capability:
+                spoken = f"{provider_label} {capability.replace('_', ' ')} completed."
+            elif provider_label:
+                spoken = f"{provider_label} completed."
+            else:
+                spoken = "Agent task completed."
 
         return {
             "task_id": task.id,
             "state": task.state,
             "provider": task.provider,
             "spoken_text": spoken,
+            "result_preview": task.trace.get("mcp_result_preview") if task.trace else None,
+            "result_output": task.trace.get("mcp_result_output") if task.trace else None,
         }
 
     def get_status(self, user_id: str) -> dict[str, Any]:
@@ -212,9 +259,14 @@ class AgentService:
         # Query all tasks for user
         tasks = get_agent_tasks(conn=self.conn, user_id=user_id, limit=100)
 
-        # Check status of mock provider tasks and auto-advance states
+        # Check status of providers that expose pull-based lifecycle updates.
         for task in tasks:
-            if task.provider == "mock" and task.state in ("created", "running"):
+            if task.provider in (
+                "mock",
+                "ipfs_datasets_mcp",
+                "ipfs_kit_mcp",
+                "ipfs_accelerate_mcp",
+            ) and task.state in ("created", "running"):
                 try:
                     # For created tasks, start them first
                     if task.state == "created":

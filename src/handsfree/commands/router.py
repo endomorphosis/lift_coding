@@ -1,11 +1,14 @@
 """Command router and response composer."""
 
 import logging
+import os
 from typing import Any
 
 import duckdb
 
+from handsfree.ai import execute_ai_capability
 from handsfree.auth import FIXTURE_USER_ID
+from handsfree.mcp import get_provider_descriptor, infer_provider_capability
 
 from .intent_parser import ParsedIntent
 from .pending_actions import PendingActionManager
@@ -128,6 +131,8 @@ class CommandRouter:
             response = self._handle_checks_intent(intent, profile_config)
         elif intent.name.startswith("agent."):
             response = self._handle_agent_intent(intent, profile_config, user_id)
+        elif intent.name.startswith("ai."):
+            response = self._handle_ai_intent(intent, profile_config, session_id)
         elif intent.name == "unknown":
             response = self._handle_unknown(intent, profile_config)
         else:
@@ -192,11 +197,14 @@ class CommandRouter:
             instruction = intent.entities.get("instruction", "handle this")
             issue_num = intent.entities.get("issue_number")
             pr_num = intent.entities.get("pr_number")
+            provider = intent.entities.get("provider", "copilot")
+            provider_descriptor = get_provider_descriptor(provider)
+            provider_label = provider_descriptor.display_name if provider_descriptor else "the agent"
             if issue_num:
-                return f"I can ask the agent to {instruction} issue {issue_num}."
+                return f"I can ask {provider_label} to {instruction} issue {issue_num}."
             elif pr_num:
-                return f"I can ask the agent to {instruction} PR {pr_num}."
-            return f"I can delegate to the agent: {instruction}."
+                return f"I can ask {provider_label} to {instruction} PR {pr_num}."
+            return f"I can delegate to {provider_label}: {instruction}."
         elif intent.name == "checks.rerun":
             pr_num = intent.entities.get("pr_number")
             if pr_num:
@@ -336,6 +344,16 @@ class CommandRouter:
                 self._session_context.set_repo_pr(session_id, repo, pr_number)
             elif pr_number:
                 # If no repo specified, use a default or preserve existing repo
+                context = self._session_context.get_repo_pr(session_id)
+                repo = context.get("repo", "default/repo")
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+
+        elif intent.name.startswith("ai."):
+            pr_number = intent.entities.get("pr_number")
+            repo = intent.entities.get("repo")
+            if pr_number and repo:
+                self._session_context.set_repo_pr(session_id, repo, pr_number)
+            elif pr_number:
                 context = self._session_context.get_repo_pr(session_id)
                 repo = context.get("repo", "default/repo")
                 self._session_context.set_repo_pr(session_id, repo, pr_number)
@@ -656,14 +674,42 @@ class CommandRouter:
         if intent.name == "pr.summarize":
             pr_num = intent.entities.get("pr_number")
             repo = intent.entities.get("repo", "owner/repo")  # Default repo for fixture mode
-            
+
+            if pr_num and self._use_cli_for_read_intents():
+                try:
+                    from handsfree.cli import GitHubCLIAdapter
+
+                    result = GitHubCLIAdapter().summarize_pr(pr_num, profile_config)
+                    return {
+                        "status": "ok",
+                        "intent": intent.to_dict(),
+                        "spoken_text": result["spoken_text"],
+                        "cards": [
+                            {
+                                "title": result["title"],
+                                "subtitle": (
+                                    f"PR #{pr_num} • {result['state']} • by {result['author']}"
+                                ),
+                                "lines": [
+                                    (
+                                        f"{result['changed_files']} files, "
+                                        f"+{result['additions']} -{result['deletions']}"
+                                    )
+                                ],
+                            }
+                        ],
+                        "debug": {"tool_calls": [result["trace"]]},
+                    }
+                except Exception as e:
+                    logger.info("CLI PR summary unavailable, falling back: %s", str(e))
+
             # Use GitHub provider if available and pr_number is specified
             if self.github_provider and pr_num:
                 from handsfree.handlers.pr_summary import handle_pr_summarize
-                
+
                 # Use privacy mode from profile configuration
                 privacy_mode = profile_config.privacy_mode
-                
+
                 try:
                     # Call the PR summary handler with user_id for live mode support
                     result = handle_pr_summarize(
@@ -760,6 +806,124 @@ class CommandRouter:
             "intent": intent.to_dict(),
             "spoken_text": spoken_text,
         }
+
+    def _handle_ai_intent(
+        self,
+        intent: ParsedIntent,
+        profile_config: ProfileConfig,
+        session_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Handle AI / Copilot read-only intents."""
+        command_map = {
+            "ai.explain_pr": {
+                "capability_id": "copilot.pr.explain",
+                "card_title": "Copilot explanation",
+                "error_label": "explain",
+            },
+            "ai.summarize_diff": {
+                "capability_id": "copilot.pr.diff_summary",
+                "card_title": "Copilot diff summary",
+                "error_label": "summarize diff for",
+            },
+            "ai.explain_failure": {
+                "capability_id": "copilot.pr.failure_explain",
+                "card_title": "Copilot failure analysis",
+                "error_label": "explain failing checks for",
+            },
+        }
+        if intent.name not in command_map:
+            spoken_text = profile_config.truncate_spoken_text("I don't know that AI command yet.")
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        pr_num = intent.entities.get("pr_number")
+        repo = intent.entities.get("repo")
+        if not pr_num:
+            context = self._session_context.get_repo_pr(session_id, fallback_repo="default/repo")
+            pr_num = context.get("pr_number")
+            if not repo:
+                repo = context.get("repo")
+        if not pr_num:
+            spoken_text = profile_config.truncate_spoken_text("Please specify a PR number.")
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        if not self._use_cli_for_read_intents():
+            spoken_text = profile_config.truncate_spoken_text(
+                "Copilot CLI explain is not enabled."
+            )
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        try:
+            config = command_map[intent.name]
+            adapter_kwargs: dict[str, Any] = {}
+            if intent.name == "ai.explain_failure":
+                adapter_kwargs["failure_target"] = intent.entities.get("failure_target")
+                adapter_kwargs["failure_target_type"] = intent.entities.get("failure_target_type")
+            execution = execute_ai_capability(
+                config["capability_id"],
+                pr_number=pr_num,
+                profile_config=profile_config,
+                **adapter_kwargs,
+            )
+            result = execution.output
+            card_title = f"{config['card_title']} for PR #{pr_num}"
+            if repo:
+                card_title = f"{card_title} on {repo}"
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": result["spoken_text"],
+                "cards": [
+                    {
+                        "title": card_title,
+                        "subtitle": result["headline"],
+                        "lines": [result["summary"]],
+                    }
+                ],
+                "debug": {
+                    "tool_calls": [result["trace"]],
+                    "resolved_context": {"pr_number": pr_num, "repo": repo},
+                    "capability_id": execution.capability_id,
+                    "execution_mode": execution.execution_mode.value,
+                },
+            }
+        except Exception as e:
+            logger.error("Failed AI CLI command %s for PR %s: %s", intent.name, pr_num, str(e))
+            spoken_text = profile_config.truncate_spoken_text(
+                f"Could not {command_map[intent.name]['error_label']} PR {pr_num} with Copilot."
+            )
+            return {
+                "status": "error",
+                "intent": intent.to_dict(),
+                "spoken_text": spoken_text,
+            }
+
+        spoken_text = profile_config.truncate_spoken_text(
+            "I don't know how to handle that AI request yet."
+        )
+        return {
+            "status": "error",
+            "intent": intent.to_dict(),
+            "spoken_text": spoken_text,
+        }
+
+    def _use_cli_for_read_intents(self) -> bool:
+        """Return whether CLI-backed read intents are enabled."""
+        return (
+            os.getenv("HANDSFREE_GH_CLI_ENABLED", "false").lower() == "true"
+            or os.getenv("HANDSFREE_CLI_FIXTURE_MODE", "false").lower() == "true"
+        )
 
     def _format_pr_summary(
         self,
@@ -1050,6 +1214,9 @@ class CommandRouter:
             issue_num = intent.entities.get("issue_number")
             pr_num = intent.entities.get("pr_number")
             provider = intent.entities.get("provider", "copilot")
+            provider_descriptor = get_provider_descriptor(provider)
+            provider_label = provider_descriptor.display_name if provider_descriptor else provider
+            inferred_capability = infer_provider_capability(provider, instruction)
 
             target_type = None
             target_ref = None
@@ -1070,6 +1237,8 @@ class CommandRouter:
                     "issue_number": issue_num,
                     "pr_number": pr_num,
                     "provider": provider,
+                    "provider_label": provider_label,
+                    "mcp_capability": inferred_capability,
                 },
                 "created_at": datetime.now(UTC).isoformat(),
             }
@@ -1087,11 +1256,65 @@ class CommandRouter:
             spoken_text = result.get("spoken_text", "Agent task created.")
             spoken_text = profile_config.truncate_spoken_text(spoken_text)
 
-            return {
-                "status": "ok",
-                "intent": intent.to_dict(),
-                "spoken_text": spoken_text,
+            response_intent = intent.to_dict()
+            response_intent.setdefault("entities", {})
+            response_intent["entities"] = dict(response_intent["entities"]) | {
+                "task_id": result.get("task_id"),
+                "provider": provider,
+                "state": result.get("state"),
             }
+
+            response: dict[str, Any] = {
+                "status": "ok",
+                "intent": response_intent,
+                "spoken_text": spoken_text,
+                "debug": {
+                    "tool_calls": [
+                        {
+                            "task_id": result.get("task_id"),
+                            "provider": result.get("provider"),
+                            "state": result.get("state"),
+                        }
+                    ]
+                },
+            }
+
+            if result.get("state") == "completed" and result.get("result_output"):
+                output = result["result_output"]
+                capability_label = (inferred_capability or "result").replace("_", " ")
+                card_lines: list[str] = []
+                if isinstance(output, dict):
+                    for key in ("message", "status", "expanded_queries", "target_terms", "seed_urls"):
+                        value = output.get(key)
+                        if value is None:
+                            continue
+                        if isinstance(value, list):
+                            rendered = ", ".join(str(item) for item in value[:3])
+                        else:
+                            rendered = str(value)
+                        card_lines.append(f"{key}: {rendered}")
+                response["cards"] = [
+                    {
+                        "title": f"{provider_label} {capability_label}",
+                        "subtitle": f"Task {str(result.get('task_id', ''))[:8]} • completed",
+                        "lines": card_lines[:3] or [spoken_text],
+                    }
+                ]
+                response["debug"]["tool_calls"][0]["result_output"] = output
+            else:
+                response["cards"] = [
+                    {
+                        "title": "Agent Task Created",
+                        "subtitle": f"Task {str(result.get('task_id', ''))[:8]}",
+                        "lines": [
+                            f"Provider: {result.get('provider')}",
+                            f"Instruction: {instruction}",
+                            f"State: {result.get('state')}",
+                        ],
+                    }
+                ]
+
+            return response
 
         elif intent.name == "agent.status":
             if not self._agent_service:
@@ -1224,9 +1447,9 @@ class CommandRouter:
         Returns:
             Response dict with status, spoken_text, and optional pending_action
         """
-        from handsfree.db.action_logs import write_action_log
-        from handsfree.db.pending_actions import create_pending_action
-        from handsfree.policy import PolicyDecision, evaluate_action_policy
+        from fastapi import HTTPException
+
+        from handsfree.actions import DirectActionRequest, process_direct_action_request_detailed
 
         # Extract entities
         reviewers = intent.entities.get("reviewers", [])
@@ -1260,244 +1483,73 @@ class CommandRouter:
                 "spoken_text": "Please specify at least one reviewer.",
             }
 
-        # Check rate limit with burst limiting
-        from handsfree.rate_limit import check_side_effect_rate_limit
-        from handsfree.security import check_and_log_anomaly
-
-        rate_limit_result = check_side_effect_rate_limit(
-            self.db_conn,
-            user_id,
-            "request_review",
-        )
-
-        if not rate_limit_result.allowed:
-            # Write audit log for rate limit denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
+        reviewers_str = ", ".join(reviewers)
+        try:
+            detailed = process_direct_action_request_detailed(
+                conn=self.db_conn,
+                user_id=user_id,
+                request=DirectActionRequest(
+                    endpoint="/v1/command",
                     action_type="request_review",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={"reviewers": reviewers},
-                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    execution_action_type="request_review",
+                    pending_action_type="request_review",
+                    repo=repo,
+                    pr_number=pr_number,
+                    action_payload={
+                        "repo": repo,
+                        "pr_number": pr_number,
+                        "reviewers": reviewers,
+                    },
+                    log_request={"reviewers": reviewers},
+                    pending_summary=f"Request review from {reviewers_str} on {repo}#{pr_number}",
                     idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used - this is a retry
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "request_review",
-                "rate_limited",
-                target=f"{repo}#{pr_number}",
-                request_data={"reviewers": reviewers},
+                    anomaly_request_data={"reviewers": reviewers},
+                ),
+                idempotency_store={},
             )
+        except HTTPException as exc:
+            if exc.status_code == 403 and isinstance(exc.detail, dict):
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Action not allowed: {exc.detail.get('message', 'policy denied')}",
+                }
+            raise
 
-            # Create user-friendly spoken message with retry guidance
-            retry_msg = ""
-            if rate_limit_result.retry_after_seconds:
-                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
-
+        if detailed.http_response is not None:
+            retry_after = detailed.http_response.headers.get("Retry-After")
+            retry_msg = f" Please try again in {retry_after} seconds." if retry_after else ""
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
-        # Evaluate policy
-        policy_result = evaluate_action_policy(
-            self.db_conn,
-            user_id,
-            repo,
-            "request_review",
-        )
-
-        # Handle policy decisions
-        if policy_result.decision == PolicyDecision.DENY:
-            # Write audit log for policy denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="request_review",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={"reviewers": reviewers},
-                    result={"error": "policy_denied", "message": policy_result.reason},
-                    idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "request_review",
-                "policy_denied",
-                target=f"{repo}#{pr_number}",
-                request_data={"reviewers": reviewers},
-            )
-
-            return {
-                "status": "error",
-                "intent": intent.to_dict(),
-                "spoken_text": f"Action not allowed: {policy_result.reason}",
-            }
-
-        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-            # Create pending action in database
-            reviewers_str = ", ".join(reviewers)
-            summary = f"Request review from {reviewers_str} on {repo}#{pr_number}"
-            pending_action = create_pending_action(
-                self.db_conn,
-                user_id=user_id,
-                summary=summary,
-                action_type="request_review",
-                action_payload={
-                    "repo": repo,
-                    "pr_number": pr_number,
-                    "reviewers": reviewers,
-                },
-                expires_in_seconds=300,  # 5 minutes
-            )
-
-            # Write audit log for confirmation required
-            write_action_log(
-                self.db_conn,
-                user_id=user_id,
-                action_type="request_review",
-                ok=True,
-                target=f"{repo}#{pr_number}",
-                request={"reviewers": reviewers},
-                result={
-                    "status": "needs_confirmation",
-                    "token": pending_action.token,
-                    "reason": policy_result.reason,
-                },
-                idempotency_key=idempotency_key,
-            )
-
+        if detailed.pending_token:
             return {
                 "status": "needs_confirmation",
                 "intent": intent.to_dict(),
-                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "spoken_text": f"{detailed.pending_summary}. Say 'confirm' to proceed.",
                 "pending_action": {
-                    "token": pending_action.token,
-                    "expires_at": pending_action.expires_at.isoformat(),
-                    "summary": summary,
+                    "token": detailed.pending_token,
+                    "expires_at": detailed.pending_expires_at.isoformat(),
+                    "summary": detailed.pending_summary,
                 },
             }
 
-        # Policy allows the action - execute it directly
-        target = f"{repo}#{pr_number}"
-
-        # Check if live mode is enabled and token is available
-        import logging
-
-        from handsfree.github.auth import get_default_auth_provider
-
-        logger = logging.getLogger(__name__)
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        # Execute via GitHub API if live mode enabled and token available
-        if token:
-            import logging
-
-            from handsfree.github.client import request_reviewers as github_request_reviewers
-
-            logger = logging.getLogger(__name__)
-
-            logger.info(
-                "Executing request_review via GitHub API (live mode) for %s",
-                target,
-            )
-
-            github_result = github_request_reviewers(
-                repo=repo,
-                pr_number=pr_number,
-                reviewers=reviewers,
-                token=token,
-            )
-
-            if github_result["ok"]:
-                # Write audit log for successful execution
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="request_review",
-                    ok=True,
-                    target=target,
-                    request={"reviewers": reviewers},
-                    result={
-                        "status": "success",
-                        "message": "Review requested (live mode)",
-                        "github_response": github_result.get("response_data"),
-                    },
-                    idempotency_key=idempotency_key,
-                )
-
-                reviewers_str = ", ".join(reviewers)
-                return {
-                    "status": "ok",
-                    "intent": intent.to_dict(),
-                    "spoken_text": f"Review requested from {reviewers_str} on {target}.",
-                }
-            else:
-                # GitHub API call failed
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="request_review",
-                    ok=False,
-                    target=target,
-                    request={"reviewers": reviewers},
-                    result={
-                        "status": "error",
-                        "message": github_result["message"],
-                        "status_code": github_result.get("status_code"),
-                    },
-                    idempotency_key=idempotency_key,
-                )
-
-                return {
-                    "status": "error",
-                    "intent": intent.to_dict(),
-                    "spoken_text": f"Failed to request reviewers: {github_result['message']}",
-                }
-        else:
-            # Fixture mode - simulate success
-            logger.info(
-                "Executing request_review in fixture mode (no live token) for %s",
-                target,
-            )
-
-            write_action_log(
-                self.db_conn,
-                user_id=user_id,
-                action_type="request_review",
-                ok=True,
-                target=target,
-                request={"reviewers": reviewers},
-                result={"status": "success", "message": "Review requested (fixture)"},
-                idempotency_key=idempotency_key,
-            )
-
-            reviewers_str = ", ".join(reviewers)
+        result = detailed.action_result
+        if result and result.ok:
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
-                "spoken_text": f"Review requested from {reviewers_str} on {target}.",
+                "spoken_text": f"Review requested from {reviewers_str} on {repo}#{pr_number}.",
             }
+
+        return {
+            "status": "error",
+            "intent": intent.to_dict(),
+            "spoken_text": result.message if result else "Failed to request reviewers.",
+        }
 
     def _handle_rerun_checks_with_policy(
         self,
@@ -1517,11 +1569,9 @@ class CommandRouter:
         Returns:
             Response dict with status, spoken_text, and optional pending_action
         """
-        from handsfree.db.action_logs import write_action_log
-        from handsfree.db.pending_actions import create_pending_action
-        from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_side_effect_rate_limit
-        from handsfree.security import check_and_log_anomaly
+        from fastapi import HTTPException
+
+        from handsfree.actions import DirectActionRequest, process_direct_action_request_detailed
 
         # Extract entities
         pr_number = intent.entities.get("pr_number")
@@ -1546,232 +1596,67 @@ class CommandRouter:
                 ),
             }
 
-        # Check rate limit with burst limiting
-        rate_limit_result = check_side_effect_rate_limit(
-            self.db_conn,
-            user_id,
-            "rerun",
-        )
-
-        if not rate_limit_result.allowed:
-            # Write audit log for rate limit denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
+        try:
+            detailed = process_direct_action_request_detailed(
+                conn=self.db_conn,
+                user_id=user_id,
+                request=DirectActionRequest(
+                    endpoint="/v1/command",
                     action_type="rerun",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={},
-                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    execution_action_type="rerun",
+                    pending_action_type="rerun_checks",
+                    repo=repo,
+                    pr_number=pr_number,
+                    action_payload={"repo": repo, "pr_number": pr_number},
+                    log_request={},
+                    pending_summary=f"Re-run checks on {repo}#{pr_number}",
                     idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used - this is a retry
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "rerun",
-                "rate_limited",
-                target=f"{repo}#{pr_number}",
-                request_data={},
+                ),
+                idempotency_store={},
             )
+        except HTTPException as exc:
+            if exc.status_code == 403 and isinstance(exc.detail, dict):
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Action not allowed: {exc.detail.get('message', 'policy denied')}",
+                }
+            raise
 
-            # Create user-friendly spoken message with retry guidance
-            retry_msg = ""
-            if rate_limit_result.retry_after_seconds:
-                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
-
+        if detailed.http_response is not None:
+            retry_after = detailed.http_response.headers.get("Retry-After")
+            retry_msg = f" Please try again in {retry_after} seconds." if retry_after else ""
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
-        # Evaluate policy
-        policy_result = evaluate_action_policy(
-            self.db_conn,
-            user_id,
-            repo,
-            "rerun",
-        )
-
-        # Handle policy decisions
-        if policy_result.decision == PolicyDecision.DENY:
-            # Write audit log for policy denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="rerun",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={},
-                    result={"error": "policy_denied", "message": policy_result.reason},
-                    idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "rerun",
-                "policy_denied",
-                target=f"{repo}#{pr_number}",
-                request_data={},
-            )
-
-            return {
-                "status": "error",
-                "intent": intent.to_dict(),
-                "spoken_text": f"Action not allowed: {policy_result.reason}",
-            }
-
-        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-            # Create pending action in database
-            summary = f"Re-run checks on {repo}#{pr_number}"
-            pending_action = create_pending_action(
-                self.db_conn,
-                user_id=user_id,
-                summary=summary,
-                action_type="rerun_checks",
-                action_payload={
-                    "repo": repo,
-                    "pr_number": pr_number,
-                },
-                expires_in_seconds=300,  # 5 minutes
-            )
-
-            # Write audit log for confirmation required
-            write_action_log(
-                self.db_conn,
-                user_id=user_id,
-                action_type="rerun",
-                ok=True,
-                target=f"{repo}#{pr_number}",
-                request={},
-                result={
-                    "status": "needs_confirmation",
-                    "token": pending_action.token,
-                    "reason": policy_result.reason,
-                },
-                idempotency_key=idempotency_key,
-            )
-
+        if detailed.pending_token:
             return {
                 "status": "needs_confirmation",
                 "intent": intent.to_dict(),
-                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "spoken_text": f"{detailed.pending_summary}. Say 'confirm' to proceed.",
                 "pending_action": {
-                    "token": pending_action.token,
-                    "expires_at": pending_action.expires_at.isoformat(),
-                    "summary": summary,
+                    "token": detailed.pending_token,
+                    "expires_at": detailed.pending_expires_at.isoformat(),
+                    "summary": detailed.pending_summary,
                 },
             }
 
-        # Policy allows the action - execute it directly
-        target = f"{repo}#{pr_number}"
-
-        # Check if live mode is enabled and token is available
-        import logging
-
-        from handsfree.github.auth import get_default_auth_provider
-
-        logger = logging.getLogger(__name__)
-
-        auth_provider = get_default_auth_provider()
-        token = None
-        if auth_provider.supports_live_mode():
-            token = auth_provider.get_token(user_id)
-
-        # Execute via GitHub API if live mode enabled and token available
-        if token:
-            from handsfree.github.client import rerun_workflow
-
-            logger.info(
-                "Executing rerun_checks via GitHub API (live mode) for %s",
-                target,
-            )
-
-            github_result = rerun_workflow(
-                repo=repo,
-                pr_number=pr_number,
-                token=token,
-            )
-
-            if github_result["ok"]:
-                # Write audit log for successful execution
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="rerun",
-                    ok=True,
-                    target=target,
-                    request={},
-                    result={
-                        "status": "success",
-                        "message": "Checks re-run (live mode)",
-                        "run_id": github_result.get("run_id"),
-                    },
-                    idempotency_key=idempotency_key,
-                )
-
-                return {
-                    "status": "ok",
-                    "intent": intent.to_dict(),
-                    "spoken_text": f"Checks re-run on {target}.",
-                }
-            else:
-                # GitHub API call failed
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="rerun",
-                    ok=False,
-                    target=target,
-                    request={},
-                    result={
-                        "status": "error",
-                        "message": github_result["message"],
-                        "status_code": github_result.get("status_code"),
-                    },
-                    idempotency_key=idempotency_key,
-                )
-
-                return {
-                    "status": "error",
-                    "intent": intent.to_dict(),
-                    "spoken_text": f"Failed to rerun checks: {github_result['message']}",
-                }
-        else:
-            # Fixture mode - simulate success
-            logger.info(
-                "Executing rerun_checks in fixture mode (no live token) for %s",
-                target,
-            )
-
-            write_action_log(
-                self.db_conn,
-                user_id=user_id,
-                action_type="rerun",
-                ok=True,
-                target=target,
-                request={},
-                result={"status": "success", "message": "Checks re-run (fixture)"},
-                idempotency_key=idempotency_key,
-            )
-
+        result = detailed.action_result
+        if result and result.ok:
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
-                "spoken_text": f"Checks re-run on {target}.",
+                "spoken_text": f"Checks re-run on {repo}#{pr_number}.",
             }
+
+        return {
+            "status": "error",
+            "intent": intent.to_dict(),
+            "spoken_text": result.message if result else "Failed to rerun checks.",
+        }
 
     def _handle_comment_with_policy(
         self,
@@ -1791,11 +1676,9 @@ class CommandRouter:
         Returns:
             Response dict with status, spoken_text, and optional pending_action
         """
-        from handsfree.db.action_logs import write_action_log
-        from handsfree.db.pending_actions import create_pending_action
-        from handsfree.policy import PolicyDecision, evaluate_action_policy
-        from handsfree.rate_limit import check_side_effect_rate_limit
-        from handsfree.security import check_and_log_anomaly
+        from fastapi import HTTPException
+
+        from handsfree.actions import DirectActionRequest, process_direct_action_request_detailed
 
         # Extract entities
         pr_number = intent.entities.get("pr_number")
@@ -1828,165 +1711,70 @@ class CommandRouter:
                 "spoken_text": "Please specify the comment text.",
             }
 
-        # Check rate limit with burst limiting
-        rate_limit_result = check_side_effect_rate_limit(
-            self.db_conn,
-            user_id,
-            "comment",
-        )
-
-        if not rate_limit_result.allowed:
-            # Write audit log for rate limit denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
+        comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
+        try:
+            detailed = process_direct_action_request_detailed(
+                conn=self.db_conn,
+                user_id=user_id,
+                request=DirectActionRequest(
+                    endpoint="/v1/command",
                     action_type="comment",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={"comment_body": comment_body},
-                    result={"error": "rate_limited", "message": rate_limit_result.reason},
+                    execution_action_type="comment",
+                    pending_action_type="comment",
+                    repo=repo,
+                    pr_number=pr_number,
+                    action_payload={
+                        "repo": repo,
+                        "pr_number": pr_number,
+                        "comment_body": comment_body,
+                    },
+                    log_request={"comment_body": comment_body},
+                    pending_summary=f"Post comment on {repo}#{pr_number}: {comment_preview}",
                     idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used - this is a retry
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "comment",
-                "rate_limited",
-                target=f"{repo}#{pr_number}",
-                request_data={"comment_body": comment_body},
+                    anomaly_request_data={"comment_body": comment_body},
+                ),
+                idempotency_store={},
             )
+        except HTTPException as exc:
+            if exc.status_code == 403 and isinstance(exc.detail, dict):
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": f"Action not allowed: {exc.detail.get('message', 'policy denied')}",
+                }
+            raise
 
-            # Create user-friendly spoken message with retry guidance
-            retry_msg = ""
-            if rate_limit_result.retry_after_seconds:
-                retry_msg = f" Please try again in {rate_limit_result.retry_after_seconds} seconds."
-
+        if detailed.http_response is not None:
+            retry_after = detailed.http_response.headers.get("Retry-After")
+            retry_msg = f" Please try again in {retry_after} seconds." if retry_after else ""
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
                 "spoken_text": f"Rate limit exceeded.{retry_msg}",
             }
 
-        # Evaluate policy
-        policy_result = evaluate_action_policy(
-            self.db_conn,
-            user_id,
-            repo,
-            "comment",
-        )
-
-        # Handle policy decisions
-        if policy_result.decision == PolicyDecision.DENY:
-            # Write audit log for policy denial
-            try:
-                write_action_log(
-                    self.db_conn,
-                    user_id=user_id,
-                    action_type="comment",
-                    ok=False,
-                    target=f"{repo}#{pr_number}",
-                    request={"comment_body": comment_body},
-                    result={"error": "policy_denied", "message": policy_result.reason},
-                    idempotency_key=idempotency_key,
-                )
-            except ValueError:
-                # Idempotency key already used
-                pass
-
-            # Check for suspicious activity patterns
-            check_and_log_anomaly(
-                self.db_conn,
-                user_id,
-                "comment",
-                "policy_denied",
-                target=f"{repo}#{pr_number}",
-                request_data={"comment_body": comment_body},
-            )
-
-            return {
-                "status": "error",
-                "intent": intent.to_dict(),
-                "spoken_text": f"Action not allowed: {policy_result.reason}",
-            }
-
-        elif policy_result.decision == PolicyDecision.REQUIRE_CONFIRMATION:
-            # Create pending action in database
-            # Truncate long comment bodies in summary
-            comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
-            summary = f"Post comment on {repo}#{pr_number}: {comment_preview}"
-            pending_action = create_pending_action(
-                self.db_conn,
-                user_id=user_id,
-                summary=summary,
-                action_type="comment",
-                action_payload={
-                    "repo": repo,
-                    "pr_number": pr_number,
-                    "comment_body": comment_body,
-                },
-                expires_in_seconds=300,  # 5 minutes
-            )
-
-            # Write audit log for confirmation required
-            write_action_log(
-                self.db_conn,
-                user_id=user_id,
-                action_type="comment",
-                ok=True,
-                target=f"{repo}#{pr_number}",
-                request={"comment_body": comment_body},
-                result={
-                    "status": "needs_confirmation",
-                    "token": pending_action.token,
-                    "reason": policy_result.reason,
-                },
-                idempotency_key=idempotency_key,
-            )
-
+        if detailed.pending_token:
             return {
                 "status": "needs_confirmation",
                 "intent": intent.to_dict(),
-                "spoken_text": f"{summary}. Say 'confirm' to proceed.",
+                "spoken_text": f"{detailed.pending_summary}. Say 'confirm' to proceed.",
                 "pending_action": {
-                    "token": pending_action.token,
-                    "expires_at": pending_action.expires_at.isoformat(),
-                    "summary": summary,
+                    "token": detailed.pending_token,
+                    "expires_at": detailed.pending_expires_at.isoformat(),
+                    "summary": detailed.pending_summary,
                 },
             }
 
-        # Policy allows the action - execute it directly (fixture mode)
-        target = f"{repo}#{pr_number}"
+        result = detailed.action_result
+        if result and result.ok:
+            return {
+                "status": "ok",
+                "intent": intent.to_dict(),
+                "spoken_text": f"Comment posted on {repo}#{pr_number}: {comment_preview}",
+            }
 
-        # Fixture mode - simulate success (no real GitHub write)
-        import logging
-
-        logger = logging.getLogger(__name__)
-
-        logger.info(
-            "Executing comment in fixture mode (no live token) for %s",
-            target,
-        )
-
-        write_action_log(
-            self.db_conn,
-            user_id=user_id,
-            action_type="comment",
-            ok=True,
-            target=target,
-            request={"comment_body": comment_body},
-            result={"status": "success", "message": "Comment posted (fixture)"},
-            idempotency_key=idempotency_key,
-        )
-
-        comment_preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
         return {
-            "status": "ok",
+            "status": "error",
             "intent": intent.to_dict(),
-            "spoken_text": f"Comment posted on {target}: {comment_preview}",
+            "spoken_text": result.message if result else "Failed to post comment.",
         }

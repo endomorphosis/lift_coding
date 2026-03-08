@@ -337,27 +337,28 @@ export async function speakNotification(message) {
         shouldDuckAndroid: true,
       });
 
-    // Play the audio
-    const soundObject = await Audio.Sound.createAsync(
-      { uri: tempFileUri },
-      { shouldPlay: true }
-    );
-    sound = soundObject.sound;
+      // Play the audio
+      const soundObject = await Audio.Sound.createAsync(
+        { uri: tempFileUri },
+        { shouldPlay: true }
+      );
+      sound = soundObject.sound;
 
-    // Clean up after playback completes
-    sound.setOnPlaybackStatusUpdate(async (status) => {
-      if (status.didJustFinish || status.error) {
-        try {
-          await sound.unloadAsync();
-          // Delete the temporary file
-          if (tempFileUri) {
-            await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+      // Clean up after playback completes
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish || status.error) {
+          try {
+            await sound.unloadAsync();
+            // Delete the temporary file
+            if (tempFileUri) {
+              await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+            }
+          } catch (cleanupError) {
+            console.error('Cleanup error:', cleanupError);
           }
-        } catch (cleanupError) {
-          console.error('Cleanup error:', cleanupError);
         }
-      }
-    });
+      });
+    }
 
     // Clear error state on success
     debugState.lastPlaybackError = null;

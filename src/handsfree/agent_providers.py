@@ -9,11 +9,26 @@ import logging
 import os
 import shutil
 import subprocess
+import re
+import shutil
+import subprocess
+import uuid
 from abc import ABC, abstractmethod
 from functools import lru_cache
 from typing import Any
 
+from handsfree.cli.executor import CLIExecutor
+from handsfree.cli.parsers import parse_output
 from handsfree.db.agent_tasks import AgentTask
+from handsfree.mcp import (
+    MCPClient,
+    MCPClientError,
+    MCPConfigurationError,
+    MCPToolInvocationResult,
+    get_mcp_server_config,
+    is_mcp_provider_enabled,
+    resolve_task_binding,
+)
 
 logger = logging.getLogger(__name__)
 CLI_DETECTION_TIMEOUT_SECONDS = 2
@@ -243,6 +258,11 @@ class CopilotCLIAgentProvider(AgentProvider):
     def start_task(self, task: AgentTask) -> dict[str, Any]:
         """Start a Copilot CLI task (scaffold)."""
         if not is_copilot_cli_available():
+        executor = CLIExecutor()
+        fixture_mode = executor.fixture_mode()
+        cli_available = is_copilot_cli_available()
+
+        if not fixture_mode and not cli_available:
             return {
                 "ok": False,
                 "status": "failed",
@@ -252,6 +272,56 @@ class CopilotCLIAgentProvider(AgentProvider):
                     "cli_available": False,
                 },
             }
+
+        trace = {
+            "provider": "copilot_cli",
+            "instruction": task.instruction,
+            "cli_available": cli_available,
+            "fixture_mode": fixture_mode,
+        }
+
+        pr_number = _extract_target_number(task.target_ref)
+        if task.target_type == "pr" and pr_number:
+            result = executor.execute("gh.copilot.explain_pr", "copilot", pr_number=pr_number)
+            if result.ok:
+                try:
+                    parsed = parse_output("gh_copilot_explain_pr", result.stdout)
+                except Exception:
+                    logger.warning(
+                        "Failed to parse Copilot CLI output for task %s",
+                        task.id,
+                        exc_info=True,
+                    )
+                    preview = result.stdout.strip().splitlines()[0] if result.stdout.strip() else ""
+                    trace.update(
+                        {
+                            "command_id": result.command_id,
+                            "source": result.source,
+                            "duration_ms": result.duration_ms,
+                            "parse_error": True,
+                            "preview": preview[:200],
+                        }
+                    )
+                    return {
+                        "ok": True,
+                        "status": "running",
+                        "message": preview or "[STUB] Copilot CLI task started",
+                        "trace": trace,
+                    }
+                trace.update(
+                    {
+                        "command_id": result.command_id,
+                        "source": result.source,
+                        "duration_ms": result.duration_ms,
+                        "preview": parsed.get("spoken_text") or parsed.get("summary"),
+                    }
+                )
+                return {
+                    "ok": True,
+                    "status": "running",
+                    "message": parsed.get("spoken_text", "[STUB] Copilot CLI task started"),
+                    "trace": trace,
+                }
 
         return {
             "ok": True,
@@ -548,6 +618,389 @@ class GitHubIssueDispatchProvider(AgentProvider):
         }
 
 
+def _map_mcp_status_to_task_state(status: str) -> str:
+    normalized = status.strip().lower()
+    if normalized in {"completed", "succeeded", "success"}:
+        return "completed"
+    if normalized in {"failed", "error", "cancelled", "canceled"}:
+        return "failed"
+    if normalized in {"needs_input", "requires_input", "awaiting_input"}:
+        return "needs_input"
+    return "running"
+
+
+class MCPAgentProvider(AgentProvider):
+    """Shared MCP-backed agent provider implementation."""
+
+    provider_name = "mcp"
+    server_family = ""
+
+    def __init__(self, client: MCPClient | None = None):
+        self._client = client
+
+    def _get_client(self) -> MCPClient:
+        if self._client is None:
+            self._client = MCPClient(get_mcp_server_config(self.server_family))
+        return self._client
+
+    def _tool_name(self) -> str:
+        config = get_mcp_server_config(self.server_family)
+        return config.tool_name or f"{self.server_family}.run_task"
+
+    def _base_trace(self, task: AgentTask) -> dict[str, Any]:
+        endpoint = ""
+        try:
+            endpoint = get_mcp_server_config(self.server_family).endpoint
+        except Exception:
+            endpoint = ""
+        return {
+            "provider": self.provider_name,
+            "mcp_server_family": self.server_family,
+            "mcp_endpoint": endpoint,
+            "correlation_id": str(uuid.uuid4()),
+            "task_id": task.id,
+        }
+
+    def _build_arguments(self, task: AgentTask) -> dict[str, Any]:
+        arguments = {
+            "task_id": task.id,
+            "instruction": task.instruction,
+            "target_type": task.target_type,
+            "target_ref": task.target_ref,
+            "provider": self.provider_name,
+        }
+        trace = task.trace or {}
+        for key in (
+            "mcp_capability",
+            "mcp_input",
+            "mcp_cid",
+            "mcp_pin_action",
+            "mcp_seed_url",
+            "provider_label",
+        ):
+            value = trace.get(key)
+            if value is not None:
+                arguments[key] = value
+        return arguments
+
+    def start_task(self, task: AgentTask) -> dict[str, Any]:
+        trace = self._base_trace(task)
+
+        if not is_mcp_provider_enabled(self.provider_name):
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": f"{self.provider_name} is disabled by configuration",
+                "trace": trace | {"error": "provider_disabled"},
+            }
+
+        client = self._get_client()
+        try:
+            config = get_mcp_server_config(self.server_family)
+            client.validate_configuration()
+            handshake = client.handshake()
+            binding = resolve_task_binding(
+                server_family=self.server_family,
+                config=config,
+                base_arguments=self._build_arguments(task),
+            )
+            result = client.invoke_tool(
+                tool_name=binding.start_call.tool_name,
+                arguments=binding.start_call.arguments,
+                correlation_id=trace["correlation_id"],
+            )
+        except MCPConfigurationError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+                "trace": trace | {"error": "configuration_error"},
+            }
+        except MCPClientError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+                "trace": trace | {"error": "protocol_error"},
+            }
+
+        remote_task_id = self._extract_remote_task_id(result, binding.remote_id_field)
+        if remote_task_id and binding.supports_remote_status:
+            return {
+                "ok": True,
+                "status": "running",
+                "message": f"{self.provider_name} task submitted",
+                "trace": trace
+                | {
+                    "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
+                    "tool_name": result.tool_name,
+                    "mcp_request_id": result.request_id,
+                    "mcp_run_id": None,
+                    "mcp_remote_task_id": remote_task_id,
+                    "mcp_status_strategy": "tool_polling",
+                    "last_protocol_state": result.output.get("status", result.status),
+                    "mcp_result_preview": result.output.get("message")
+                    or result.content[0].get("text")
+                    if result.content and isinstance(result.content[0], dict)
+                    else None,
+                    "mcp_sync_completed": False,
+                },
+            }
+
+        return {
+            "ok": True,
+            "status": "running",
+            "message": f"{self.provider_name} task started",
+            "trace": trace
+            | {
+                "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
+                "tool_name": result.tool_name,
+                "mcp_request_id": result.request_id,
+                "mcp_run_id": result.run_id,
+                "last_protocol_state": result.status,
+                "mcp_result_preview": self._extract_remote_message(result),
+                "mcp_result_output": result.output if result.run_id is None else None,
+                "mcp_sync_completed": result.run_id is None and result.status == "completed",
+            },
+        }
+
+    def check_status(self, task: AgentTask) -> dict[str, Any]:
+        trace = task.trace or {}
+        if trace.get("mcp_status_strategy") == "tool_polling":
+            return self._check_remote_task_status(task, trace)
+        run_id = trace.get("mcp_run_id")
+        if not run_id and trace.get("mcp_sync_completed"):
+            return {
+                "ok": True,
+                "status": "completed",
+                "message": trace.get("mcp_result_preview") or f"{self.provider_name} task completed",
+                "trace": {
+                    "last_protocol_state": "completed",
+                },
+            }
+        if not run_id:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": "Task trace is missing mcp_run_id",
+            }
+
+        try:
+            status = self._get_client().get_run_status(
+                str(run_id),
+                correlation_id=trace.get("correlation_id"),
+            )
+        except MCPClientError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+                "trace": {"last_protocol_state": "status_error"},
+            }
+
+        mapped_status = _map_mcp_status_to_task_state(status.status)
+        return {
+            "ok": True,
+            "status": mapped_status,
+            "message": status.message or f"{self.provider_name} task is {mapped_status}",
+            "trace": {
+                "last_protocol_state": status.status,
+                "mcp_run_id": status.run_id,
+            },
+        }
+
+    def _check_remote_task_status(self, task: AgentTask, trace: dict[str, Any]) -> dict[str, Any]:
+        remote_task_id = trace.get("mcp_remote_task_id")
+        if not remote_task_id:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": "Task trace is missing mcp_remote_task_id",
+            }
+
+        try:
+            config = get_mcp_server_config(self.server_family)
+            binding = resolve_task_binding(
+                server_family=self.server_family,
+                config=config,
+                base_arguments=self._build_arguments(task),
+                remote_task_id=str(remote_task_id),
+            )
+            if binding.status_call is None:
+                return {
+                    "ok": False,
+                    "status": "failed",
+                    "message": "Provider does not define a remote status tool",
+                }
+            result = self._get_client().invoke_tool(
+                tool_name=binding.status_call.tool_name,
+                arguments=binding.status_call.arguments,
+                correlation_id=trace.get("correlation_id") or str(uuid.uuid4()),
+            )
+        except MCPClientError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+                "trace": {"last_protocol_state": "status_error"},
+            }
+
+        protocol_status = self._extract_remote_status(result)
+        return {
+            "ok": True,
+            "status": _map_mcp_status_to_task_state(protocol_status),
+            "message": self._extract_remote_message(result)
+            or f"{self.provider_name} task is {_map_mcp_status_to_task_state(protocol_status)}",
+            "trace": {
+                "last_protocol_state": protocol_status,
+                "mcp_remote_task_id": remote_task_id,
+            },
+        }
+
+    def cancel_task(self, task: AgentTask) -> dict[str, Any]:
+        trace = task.trace or {}
+        if trace.get("mcp_status_strategy") == "tool_polling":
+            return self._cancel_remote_task(task, trace)
+        run_id = (task.trace or {}).get("mcp_run_id")
+        if not run_id:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": "Task trace is missing mcp_run_id",
+            }
+
+        try:
+            self._get_client().cancel_run(
+                str(run_id),
+                correlation_id=(task.trace or {}).get("correlation_id"),
+            )
+        except MCPClientError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+            }
+
+        return {
+            "ok": True,
+            "status": "failed",
+            "message": "Task cancelled",
+            "trace": {
+                "last_protocol_state": "cancelled",
+                "mcp_run_id": run_id,
+            },
+        }
+
+    def _cancel_remote_task(self, task: AgentTask, trace: dict[str, Any]) -> dict[str, Any]:
+        remote_task_id = trace.get("mcp_remote_task_id")
+        if not remote_task_id:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": "Task trace is missing mcp_remote_task_id",
+            }
+
+        try:
+            config = get_mcp_server_config(self.server_family)
+            binding = resolve_task_binding(
+                server_family=self.server_family,
+                config=config,
+                base_arguments=self._build_arguments(task),
+                remote_task_id=str(remote_task_id),
+            )
+            if binding.cancel_call is None:
+                return {
+                    "ok": False,
+                    "status": "failed",
+                    "message": "Provider does not define a remote cancel tool",
+                }
+            self._get_client().invoke_tool(
+                tool_name=binding.cancel_call.tool_name,
+                arguments=binding.cancel_call.arguments,
+                correlation_id=trace.get("correlation_id") or str(uuid.uuid4()),
+            )
+        except MCPClientError as exc:
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": str(exc),
+            }
+
+        return {
+            "ok": True,
+            "status": "failed",
+            "message": "Task cancelled",
+            "trace": {
+                "last_protocol_state": "cancelled",
+                "mcp_remote_task_id": remote_task_id,
+            },
+        }
+
+    def _extract_remote_task_id(
+        self,
+        result: MCPToolInvocationResult,
+        field_name: str | None,
+    ) -> str | None:
+        if not field_name:
+            return None
+        value = result.output.get(field_name)
+        if value is None:
+            value = result.output.get("result", {}).get(field_name) if isinstance(result.output.get("result"), dict) else None
+        if value is None:
+            return None
+        return str(value)
+
+    def _extract_remote_status(self, result: MCPToolInvocationResult) -> str:
+        for key in ("status", "task_status", "state"):
+            value = result.output.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip().lower()
+        task = result.output.get("task")
+        if isinstance(task, dict):
+            for key in ("status", "state"):
+                value = task.get(key)
+                if isinstance(value, str) and value.strip():
+                    return value.strip().lower()
+        summary = result.output.get("summary")
+        if isinstance(summary, dict):
+            status_value = summary.get("status")
+            if isinstance(status_value, str) and status_value.strip():
+                return status_value.strip().lower()
+        return result.status
+
+    def _extract_remote_message(self, result: MCPToolInvocationResult) -> str | None:
+        for key in ("message", "detail"):
+            value = result.output.get(key)
+            if isinstance(value, str) and value.strip():
+                return value
+        if result.content and isinstance(result.content[0], dict):
+            text = result.content[0].get("text")
+            if isinstance(text, str) and text.strip():
+                return text
+        return None
+
+
+class IPFSDatasetsMCPAgentProvider(MCPAgentProvider):
+    """MCP-backed provider for ipfs_datasets_py server tasks."""
+
+    provider_name = "ipfs_datasets_mcp"
+    server_family = "ipfs_datasets"
+
+
+class IPFSKitMCPAgentProvider(MCPAgentProvider):
+    """MCP-backed provider for ipfs_kit_py server tasks."""
+
+    provider_name = "ipfs_kit_mcp"
+    server_family = "ipfs_kit"
+
+
+class IPFSAccelerateMCPAgentProvider(MCPAgentProvider):
+    """MCP-backed provider for ipfs_accelerate_py server tasks."""
+
+    provider_name = "ipfs_accelerate_mcp"
+    server_family = "ipfs_accelerate"
+
+
 def get_provider(provider_name: str) -> AgentProvider:
     """Get an agent provider by name.
 
@@ -576,6 +1029,9 @@ def get_provider(provider_name: str) -> AgentProvider:
         "copilot_cli": CopilotCLIAgentProvider,
         "custom": CustomAgentProvider,
         "github_issue_dispatch": GitHubIssueDispatchProvider,
+        "ipfs_datasets_mcp": IPFSDatasetsMCPAgentProvider,
+        "ipfs_kit_mcp": IPFSKitMCPAgentProvider,
+        "ipfs_accelerate_mcp": IPFSAccelerateMCPAgentProvider,
     }
 
     if provider_name not in providers:
@@ -595,3 +1051,15 @@ def reset_mock_provider() -> None:
 
 # Global mock provider instance
 _mock_provider_instance: MockAgentProvider | None = None
+
+
+def _extract_target_number(target_ref: str | None) -> int | None:
+    """Extract a numeric item identifier from refs like owner/repo#123."""
+    if not target_ref:
+        return None
+
+    match = re.search(r"#(\d+)$", target_ref)
+    if not match:
+        return None
+
+    return int(match.group(1))

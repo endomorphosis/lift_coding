@@ -135,6 +135,34 @@ class TestPRCommentConfirmationFlow:
         assert "pending_action" not in response
         assert "comment posted" in response["spoken_text"].lower()
 
+    def test_no_confirmation_with_policy_allow_cli_fixture(
+        self, db_router: CommandRouter, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Test pr.comment direct execution through CLI fixture mode."""
+        from handsfree.db.repo_policies import create_or_update_repo_policy
+
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        create_or_update_repo_policy(
+            db_router.db_conn,
+            user_id=TEST_USER_ID,
+            repo_full_name="default/repo",
+            allow_comment=True,
+            require_confirmation=False,
+        )
+
+        intent = parser.parse("comment on PR 123: looks good")
+        response = db_router.route(
+            intent,
+            Profile.COMMUTE,
+            session_id="test-session",
+            user_id=TEST_USER_ID,
+        )
+
+        assert response["status"] == "ok"
+        assert "comment posted" in response["spoken_text"].lower()
+
 
 class TestPRCommentPolicyIntegration:
     """Test policy integration for pr.comment intent."""

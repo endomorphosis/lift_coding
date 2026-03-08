@@ -23,6 +23,26 @@ Deliver the first production-grade slice of handset peer networking by hardening
   - connection attempt outcomes
   - protocol rejection reasons (redacted)
 
+## Concrete implementation contract
+Backend transport module must provide:
+- protocol ID: `/handsfree/bluetooth/1.0.0`
+- envelope kinds: `handshake`, `message`, `ack`, `error`
+- session states: `new`, `handshaking`, `established`, `degraded`, `closed`
+- driver bridge contract:
+  - `start()`
+  - `send_frame(peer_ref, frame)`
+  - `set_frame_handler(handler)`
+
+Validation requirements:
+- reject mismatched major protocol versions
+- reject malformed or oversized frames
+- reject message/ack/error frames for unknown sessions
+- auto-ack valid inbound message frames
+
+py-libp2p integration requirement:
+- runtime must stay optional at import time and only activate when `HANDSFREE_TRANSPORT_PROVIDER=libp2p_bluetooth`
+- foundation code should detect py-libp2p capabilities, but not assume upstream Bluetooth transport support exists
+
 ## Out of scope
 - Mobile native Bluetooth data-channel implementation.
 - Full two-device pairing UX in the mobile app.

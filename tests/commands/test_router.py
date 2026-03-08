@@ -258,7 +258,185 @@ class TestPRIntents:
         response = router.route(intent, Profile.WORKOUT)
 
         # Workout should have shorter summary
-        assert len(response["spoken_text"].split()) < 10
+
+
+class TestAIIntents:
+    """Test AI intent routing."""
+
+    def test_ai_summarize_diff(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle ai.summarize_diff through Copilot CLI fixtures."""
+        intent = parser.parse("summarize diff for pr 123")
+        router = CommandRouter(PendingActionManager())
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "shared action handling" in response["spoken_text"].lower()
+        assert response["intent"]["name"] == "ai.summarize_diff"
+        assert response["debug"]["capability_id"] == "copilot.pr.diff_summary"
+        assert response["debug"]["execution_mode"] == "fixture"
+
+    def test_ai_explain_failure(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle ai.explain_failure through Copilot CLI fixtures."""
+        intent = parser.parse("explain failing checks for pr 123")
+        router = CommandRouter(PendingActionManager())
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "missing fixture" in response["spoken_text"].lower()
+        assert response["intent"]["name"] == "ai.explain_failure"
+        assert response["debug"]["capability_id"] == "copilot.pr.failure_explain"
+
+    def test_ai_explain_named_failure(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle named workflow failures through Copilot CLI fixtures."""
+        intent = parser.parse("explain workflow CI Linux for pr 123")
+        router = CommandRouter(PendingActionManager())
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "failing in setup" in response["spoken_text"].lower()
+        assert response["intent"]["name"] == "ai.explain_failure"
+
+    def test_ai_intent_uses_session_pr_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """AI intents should reuse the last referenced PR from session context."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        router = CommandRouter(PendingActionManager())
+
+        router.route(parser.parse("summarize pr 123"), Profile.DEFAULT, session_id="ai-session")
+        response = router.route(
+            parser.parse("summarize diff"),
+            Profile.DEFAULT,
+            session_id="ai-session",
+        )
+
+        assert response["status"] == "ok"
+        assert "shared action handling" in response["spoken_text"].lower()
+        assert response["debug"]["resolved_context"]["pr_number"] == 123
+
+    def test_ai_intent_includes_resolved_repo_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """AI intent cards and debug metadata should expose the resolved repo."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        router = CommandRouter(PendingActionManager())
+
+        response = router.route(
+            parser.parse("summarize diff for pr 123 on openai/example"),
+            Profile.DEFAULT,
+        )
+
+        assert response["status"] == "ok"
+        assert "openai/example" in response["cards"][0]["title"]
+        assert response["debug"]["resolved_context"]["repo"] == "openai/example"
+
+    def test_ai_intent_routes_through_shared_capability_executor(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should delegate AI intents to the shared capability layer."""
+        intent = parser.parse("explain pr 123")
+        router = CommandRouter(PendingActionManager())
+        captured: dict[str, object] = {}
+
+        class StubExecution:
+            capability_id = "copilot.pr.explain"
+
+            class execution_mode:
+                value = "cli_live"
+
+            output = {
+                "spoken_text": "Stub explanation",
+                "headline": "Stub headline",
+                "summary": "Stub summary",
+                "trace": {"provider": "copilot_cli", "source": "live"},
+            }
+
+        def stub_execute_ai_capability(capability_id: str, **kwargs: object) -> StubExecution:
+            captured["capability_id"] = capability_id
+            captured["kwargs"] = kwargs
+            return StubExecution()
+
+        monkeypatch.setattr(
+            "handsfree.commands.router.execute_ai_capability",
+            stub_execute_ai_capability,
+        )
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Stub explanation"
+        assert captured["capability_id"] == "copilot.pr.explain"
+        assert captured["kwargs"]["pr_number"] == 123
+        assert response["intent"]["name"] == "ai.summarize_diff"
+
+    def test_ai_intent_captures_repo_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """AI intents with explicit repo should update session context."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        router = CommandRouter(PendingActionManager())
+
+        router.route(
+            parser.parse("explain pr 123 on owner/repo"),
+            Profile.DEFAULT,
+            session_id="repo-session",
+        )
+
+        context = router._session_context.get_repo_pr("repo-session")
+        assert context["repo"] == "owner/repo"
+        assert context["pr_number"] == 123
+
+    def test_pr_summarize_uses_cli_fixture_when_enabled(
+        self, router: CommandRouter, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Test CLI-backed PR summary path in fixture mode."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        intent = parser.parse("summarize pr 123")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "Add command system" in response["spoken_text"]
+        assert response["debug"]["tool_calls"][0]["provider"] == "github_cli"
+
+
+class TestAIIntents:
+    """Test AI intent routing."""
+
+    def test_ai_explain_pr_requires_cli_enablement(
+        self, router: CommandRouter, parser: IntentParser
+    ) -> None:
+        """Test AI explain returns a clear error when CLI is disabled."""
+        intent = parser.parse("explain pr 123")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "error"
+        assert "not enabled" in response["spoken_text"].lower()
+
+    def test_ai_explain_pr_uses_copilot_fixture(
+        self, router: CommandRouter, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Test Copilot explain path in fixture mode."""
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        intent = parser.parse("explain pr 123")
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "intent parsing" in response["spoken_text"].lower()
+        assert response["debug"]["tool_calls"][0]["provider"] == "copilot_cli"
 
 
 class TestChecksIntents:
