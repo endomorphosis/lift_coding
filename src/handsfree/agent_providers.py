@@ -7,12 +7,16 @@ for copilot and custom agents.
 import json
 import logging
 import os
+import shutil
+import subprocess
 from abc import ABC, abstractmethod
+from functools import lru_cache
 from typing import Any
 
 from handsfree.db.agent_tasks import AgentTask
 
 logger = logging.getLogger(__name__)
+CLI_DETECTION_TIMEOUT_SECONDS = 2
 
 
 class AgentProvider(ABC):
@@ -185,6 +189,95 @@ class CopilotAgentProvider(AgentProvider):
             "ok": True,
             "status": "failed",
             "message": "[STUB] Copilot task would be cancelled here",
+        }
+
+
+@lru_cache(maxsize=1)
+def _detect_copilot_cli_available() -> bool:
+    """Detect whether GitHub Copilot CLI is available via gh.
+
+    Returns:
+        True when `gh` is installed and `gh copilot --help` exits successfully.
+    """
+    gh_path = shutil.which("gh")
+    if not gh_path:
+        return False
+
+    try:
+        result = subprocess.run(
+            [gh_path, "copilot", "--help"],
+            capture_output=True,
+            text=True,
+            timeout=CLI_DETECTION_TIMEOUT_SECONDS,
+            check=False,
+        )
+        return result.returncode == 0
+    except subprocess.TimeoutExpired:
+        logger.debug(
+            "Timed out after %ss while detecting Copilot CLI availability",
+            CLI_DETECTION_TIMEOUT_SECONDS,
+        )
+        return False
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def is_copilot_cli_available() -> bool:
+    """Return cached Copilot CLI availability."""
+    return _detect_copilot_cli_available()
+
+
+def reset_copilot_cli_availability_cache() -> None:
+    """Clear cached Copilot CLI availability (primarily for tests)."""
+    _detect_copilot_cli_available.cache_clear()
+
+
+class CopilotCLIAgentProvider(AgentProvider):
+    """GitHub Copilot CLI provider scaffold.
+
+    This provider is the first implementation step toward real CLI-backed
+    Copilot task delegation. It currently validates CLI availability and
+    returns structured trace metadata for future command execution phases.
+    """
+
+    def start_task(self, task: AgentTask) -> dict[str, Any]:
+        """Start a Copilot CLI task (scaffold)."""
+        if not is_copilot_cli_available():
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": "Copilot CLI is not available (`gh copilot` not detected)",
+                "trace": {
+                    "provider": "copilot_cli",
+                    "cli_available": False,
+                },
+            }
+
+        return {
+            "ok": True,
+            "status": "running",
+            "message": "[STUB] Copilot CLI agent would be invoked here",
+            "trace": {
+                "provider": "copilot_cli",
+                "instruction": task.instruction,
+                "cli_available": True,
+            },
+        }
+
+    def check_status(self, task: AgentTask) -> dict[str, Any]:
+        """Check Copilot CLI task status (stubbed)."""
+        return {
+            "ok": True,
+            "status": "running",
+            "message": "[STUB] Copilot CLI task status would be checked here",
+        }
+
+    def cancel_task(self, task: AgentTask) -> dict[str, Any]:
+        """Cancel a Copilot CLI task (stubbed)."""
+        return {
+            "ok": True,
+            "status": "failed",
+            "message": "[STUB] Copilot CLI task would be cancelled here",
         }
 
 
@@ -462,7 +555,8 @@ def get_provider(provider_name: str) -> AgentProvider:
     For other providers, creates new instances.
 
     Args:
-        provider_name: Name of the provider (copilot, custom, mock, github_issue_dispatch).
+        provider_name: Name of the provider
+            (copilot, copilot_cli, custom, mock, github_issue_dispatch).
 
     Returns:
         AgentProvider instance.
@@ -479,6 +573,7 @@ def get_provider(provider_name: str) -> AgentProvider:
 
     providers = {
         "copilot": CopilotAgentProvider,
+        "copilot_cli": CopilotCLIAgentProvider,
         "custom": CustomAgentProvider,
         "github_issue_dispatch": GitHubIssueDispatchProvider,
     }

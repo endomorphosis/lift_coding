@@ -1,9 +1,11 @@
 """Tests for agent provider selection and trace scaffolding."""
 
 import json
+from unittest.mock import MagicMock, patch
 
 import pytest
 
+from handsfree.agents.service import AgentService
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_task_by_id
@@ -28,8 +30,6 @@ class TestProviderSelection:
 
     def test_copilot_provider_from_intent(self, db_conn, parser):
         """Test that 'tell copilot to...' creates task with provider=copilot."""
-        from handsfree.agents.service import AgentService
-
         # Parse intent
         intent = parser.parse("tell copilot to handle issue 123")
 
@@ -59,9 +59,7 @@ class TestProviderSelection:
         assert task.target_ref == "#123"
 
     def test_default_provider_when_not_specified(self, db_conn, parser):
-        """Test that provider defaults to copilot when not specified."""
-        from handsfree.agents.service import AgentService
-
+        """Test fallback chain ends at copilot when dispatch and CLI are unavailable."""
         # Parse intent without explicit provider
         intent = parser.parse("ask agent to fix issue 456")
 
@@ -71,13 +69,14 @@ class TestProviderSelection:
 
         # Create task with None provider (should use default)
         service = AgentService(db_conn)
-        result = service.delegate(
-            user_id="test-user",
-            instruction=intent.entities.get("instruction", "fix"),
-            provider=intent.entities.get("provider"),  # None - use default
-            target_type="issue",
-            target_ref="#456",
-        )
+        with patch("handsfree.agents.service.is_copilot_cli_available", return_value=False):
+            result = service.delegate(
+                user_id="test-user",
+                instruction=intent.entities.get("instruction", "fix"),
+                provider=intent.entities.get("provider"),  # None - use default
+                target_type="issue",
+                target_ref="#456",
+            )
 
         # Verify task was created with copilot provider (default)
         task_id = result["task_id"]
@@ -88,8 +87,6 @@ class TestProviderSelection:
 
     def test_env_var_overrides_default_provider(self, db_conn, monkeypatch):
         """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER env var overrides default."""
-        from handsfree.agents.service import AgentService
-
         # Set environment variable to use mock provider
         monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
 
@@ -111,8 +108,6 @@ class TestProviderSelection:
 
     def test_explicit_provider_overrides_env_var(self, db_conn, monkeypatch):
         """Test that explicit provider argument overrides env var."""
-        from handsfree.agents.service import AgentService
-
         # Set environment variable to use mock provider
         monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
 
@@ -134,9 +129,6 @@ class TestProviderSelection:
 
     def test_github_dispatch_preferred_when_configured(self, db_conn, monkeypatch):
         """Test that github_issue_dispatch is preferred when configured and no env var set."""
-        from handsfree.agents.service import AgentService
-        from unittest.mock import patch, MagicMock
-
         # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
         monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
 
@@ -173,8 +165,6 @@ class TestProviderSelection:
 
     def test_copilot_fallback_when_github_dispatch_not_configured(self, db_conn, monkeypatch):
         """Test that copilot is used when github_issue_dispatch is not configured."""
-        from handsfree.agents.service import AgentService
-
         # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
         monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
 
@@ -184,11 +174,12 @@ class TestProviderSelection:
 
         # Create task without specifying provider
         service = AgentService(db_conn)
-        result = service.delegate(
-            user_id="test-user",
-            instruction="test task",
-            provider=None,  # Should fall back to copilot
-        )
+        with patch("handsfree.agents.service.is_copilot_cli_available", return_value=False):
+            result = service.delegate(
+                user_id="test-user",
+                instruction="test task",
+                provider=None,  # Should fall back to copilot
+            )
 
         # Verify task was created with copilot provider
         task_id = result["task_id"]
@@ -198,9 +189,7 @@ class TestProviderSelection:
         assert task.provider == "copilot"
 
     def test_env_var_takes_precedence_over_github_dispatch(self, db_conn, monkeypatch):
-        """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER takes precedence over github_issue_dispatch."""
-        from handsfree.agents.service import AgentService
-
+        """Test that HANDSFREE_AGENT_DEFAULT_PROVIDER takes precedence."""
         # Set environment variable to use mock provider
         monkeypatch.setenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", "mock")
 
@@ -225,8 +214,6 @@ class TestProviderSelection:
 
     def test_github_dispatch_requires_both_repo_and_token(self, db_conn, monkeypatch):
         """Test that github_issue_dispatch requires both DISPATCH_REPO and GITHUB_TOKEN."""
-        from handsfree.agents.service import AgentService
-
         # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
         monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
 
@@ -236,11 +223,12 @@ class TestProviderSelection:
 
         # Create task without specifying provider
         service = AgentService(db_conn)
-        result = service.delegate(
-            user_id="test-user",
-            instruction="test task",
-            provider=None,  # Should fall back to copilot (missing token)
-        )
+        with patch("handsfree.agents.service.is_copilot_cli_available", return_value=False):
+            result = service.delegate(
+                user_id="test-user",
+                instruction="test task",
+                provider=None,  # Should fall back to copilot (missing token)
+            )
 
         # Verify task was created with copilot provider (fallback)
         task_id = result["task_id"]
@@ -249,6 +237,29 @@ class TestProviderSelection:
         assert task is not None
         assert task.provider == "copilot"
 
+    def test_copilot_cli_selected_when_available(self, db_conn, monkeypatch):
+        """Test that copilot_cli is selected when dispatch is unavailable and CLI is available."""
+        # Ensure HANDSFREE_AGENT_DEFAULT_PROVIDER is not set
+        monkeypatch.delenv("HANDSFREE_AGENT_DEFAULT_PROVIDER", raising=False)
+
+        # Ensure github_issue_dispatch is NOT configured
+        monkeypatch.delenv("HANDSFREE_AGENT_DISPATCH_REPO", raising=False)
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+
+        service = AgentService(db_conn)
+        with patch("handsfree.agents.service.is_copilot_cli_available", return_value=True):
+            result = service.delegate(
+                user_id="test-user",
+                instruction="test task",
+                provider=None,
+            )
+
+        task_id = result["task_id"]
+        task = get_agent_task_by_id(db_conn, task_id)
+
+        assert task is not None
+        assert task.provider == "copilot_cli"
+
 
 class TestTraceScaffolding:
     """Test trace field storage."""
@@ -256,8 +267,6 @@ class TestTraceScaffolding:
     def test_trace_stores_intent_and_entities(self, db_conn):
         """Test that trace stores parsed intent and entities."""
         from datetime import UTC, datetime
-
-        from handsfree.agents.service import AgentService
 
         # Create task with trace
         service = AgentService(db_conn)
@@ -298,8 +307,6 @@ class TestTraceScaffolding:
     def test_trace_is_json_serializable(self, db_conn):
         """Test that trace can be serialized to JSON."""
         from datetime import UTC, datetime
-
-        from handsfree.agents.service import AgentService
 
         # Create task with trace
         service = AgentService(db_conn)
