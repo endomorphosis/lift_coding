@@ -20,6 +20,11 @@ branches=(
   "draft/pr-006-github-webhook-ingestion-and-replay"
   "draft/pr-007-policy-engine-and-safe-action"
   "draft/pr-008-agent-orchestration-stub"
+  "draft/pr-009-p2p-bluetooth-transport-foundation"
+  "draft/pr-010-mobile-bluetooth-data-channel-bridge"
+  "draft/pr-011-peer-session-handshake-and-identity"
+  "draft/pr-012-peer-messaging-ux-and-command-integration"
+  "draft/pr-013-resilience-security-and-rollout-controls"
 )
 
 start_branch=$(git branch --show-current)
