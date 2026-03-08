@@ -491,6 +491,31 @@ export default function SettingsScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Backend URL</Text>
 
+        <Text style={styles.helpText}>Presets (copy/paste friendly):</Text>
+        <View style={styles.presetRow}>
+          <View style={styles.presetButton}>
+            <Button
+              title="Emulator (10.0.2.2)"
+              onPress={() => {
+                setUseCustomUrl(true);
+                setBaseUrl('http://10.0.2.2:8080');
+              }}
+            />
+          </View>
+          <View style={styles.presetButton}>
+            <Button
+              title="USB reverse (localhost)"
+              onPress={() => {
+                setUseCustomUrl(true);
+                setBaseUrl('http://localhost:8080');
+              }}
+            />
+          </View>
+        </View>
+        <Text style={styles.helpText}>
+          For a physical Android phone, run `adb reverse tcp:8080 tcp:8080` and use localhost. For emulator, use 10.0.2.2.
+        </Text>
+
         <View style={styles.switchContainer}>
           <Text style={styles.switchLabel}>Use custom URL</Text>
           <Switch
@@ -772,6 +797,14 @@ const styles = StyleSheet.create({
   switchLabel: {
     fontSize: 16,
     color: '#333',
+  },
+  presetRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 10,
+  },
+  presetButton: {
+    flex: 1,
   },
   infoContainer: {
     backgroundColor: '#e3f2fd',
