@@ -59,6 +59,34 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/commands/action:
+    post:
+      summary: Execute a structured card action by action ID
+      operationId: submitActionCommand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionCommandRequest'
+      responses:
+        '200':
+          description: Action handled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommandResponse'
+        '400':
+          description: Invalid action request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task, notification, or card context not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/inbox:
     get:
       summary: Get attention items (PRs, mentions, failing checks)
@@ -233,6 +261,782 @@ paths:
               schema: { $ref: '#/components/schemas/ActionResult' }
         '409':
           description: Policy denied or needs confirmation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/execute:
+    post:
+      summary: Execute a shared AI capability or workflow
+      operationId: executeAiCapability
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AICapabilityExecuteRequest' }
+            examples:
+              prRagSummary:
+                summary: Generic workflow dispatch for augmented PR summary
+                value:
+                  workflow: pr_rag_summary
+                  profile: default
+                  context:
+                    repo: openai/example
+                    pr_number: 123
+                  persist_output: true
+                  embeddings:
+                    dimensions: 384
+                  ipfs:
+                    pin: true
+      responses:
+        '200':
+          description: AI capability executed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                ragSummary:
+                  summary: Augmented PR summary response
+                  value:
+                    ok: true
+                    capability_id: github.pr.rag_summary
+                    workflow: pr_rag_summary
+                    execution_mode: orchestrated
+                    output_type: rag_summary
+                    typed_output:
+                      schema_name: rag_summary
+                      schema_version: 1
+                      headline: Augmented PR summary
+                      summary: This PR centralizes AI capability routing.
+                      spoken_text: PR 123 centralizes AI capability routing and typed workflow execution.
+                      repo: openai/example
+                      pr_number: 123
+                      source_summary: PR summary from GitHub context
+                      embedding_dimensions: 384
+                      ipfs_cid: bafyexample123
+                    output:
+                      headline: Augmented PR summary
+                      summary: This PR centralizes AI capability routing.
+                      spoken_text: PR 123 centralizes AI capability routing and typed workflow execution.
+                    trace:
+                      capability_id: github.pr.rag_summary
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingWorkflow:
+                  summary: Missing workflow and capability ID
+                  value:
+                    error: invalid_request
+                    message: Either capability_id or workflow must be provided
+                missingPrNumber:
+                  summary: Missing PR number for a PR-based workflow
+                  value:
+                    error: invalid_request
+                    message: github.pr.rag_summary requires context.pr_number
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/copilot/explain-pr:
+    post:
+      summary: Explain a PR through the typed Copilot workflow
+      operationId: executeAiCopilotExplainPr
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AICopilotExplainPRExecuteRequest' }
+            examples:
+              explainPr:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  profile: default
+      responses:
+        '200':
+          description: Copilot PR explanation generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                copilotExplain:
+                  value:
+                    ok: true
+                    capability_id: copilot.pr.explain
+                    workflow: copilot_explain_pr
+                    execution_mode: fixture
+                    output_type: copilot_output
+                    typed_output:
+                      schema_name: copilot_output
+                      schema_version: 1
+                      headline: Copilot explanation
+                      summary: This PR refactors AI execution into one shared contract.
+                      spoken_text: PR 123 moves Copilot and IPFS-backed AI execution onto one shared path.
+                    output:
+                      headline: Copilot explanation
+                      summary: This PR refactors AI execution into one shared contract.
+                      spoken_text: PR 123 moves Copilot and IPFS-backed AI execution onto one shared path.
+                    trace:
+                      command_id: gh.copilot.explain
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/copilot/summarize-diff:
+    post:
+      summary: Summarize a PR diff through the typed Copilot workflow
+      operationId: executeAiCopilotSummarizeDiff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AICopilotSummarizeDiffExecuteRequest' }
+            examples:
+              summarizeDiff:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  profile: default
+      responses:
+        '200':
+          description: Copilot diff summary generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                copilotDiffSummary:
+                  value:
+                    ok: true
+                    capability_id: copilot.pr.diff_summary
+                    workflow: copilot_summarize_diff
+                    execution_mode: fixture
+                    output_type: copilot_output
+                    typed_output:
+                      schema_name: copilot_output
+                      schema_version: 1
+                      headline: Copilot diff summary
+                      summary: The diff primarily unifies AI request routing and typed API models.
+                      spoken_text: This diff mostly consolidates AI execution and adds typed workflow contracts.
+                    output:
+                      headline: Copilot diff summary
+                      summary: The diff primarily unifies AI request routing and typed API models.
+                      spoken_text: This diff mostly consolidates AI execution and adds typed workflow contracts.
+                    trace:
+                      command_id: gh.copilot.summarize_diff
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingPrNumber:
+                  value:
+                    error: invalid_request
+                    message: copilot.pr.diff_summary requires context.pr_number
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/copilot/explain-failure:
+    post:
+      summary: Explain a failing PR check or workflow through the typed Copilot workflow
+      operationId: executeAiCopilotExplainFailure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AICopilotExplainFailureExecuteRequest' }
+            examples:
+              explainWorkflowFailure:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+      responses:
+        '200':
+          description: Copilot failure explanation generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                copilotFailure:
+                  value:
+                    ok: true
+                    capability_id: copilot.pr.failure_explain
+                    workflow: copilot_explain_failure
+                    execution_mode: fixture
+                    output_type: copilot_output
+                    typed_output:
+                      schema_name: copilot_output
+                      schema_version: 1
+                      headline: Failure analysis
+                      summary: CI Linux is failing while preparing the environment.
+                      spoken_text: Copilot thinks the CI Linux workflow is failing during environment setup.
+                    output:
+                      headline: Failure analysis
+                      summary: CI Linux is failing while preparing the environment.
+                      spoken_text: Copilot thinks the CI Linux workflow is failing during environment setup.
+                    trace:
+                      command_id: gh.copilot.explain_failure
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                conflictingTargets:
+                  value:
+                    error: invalid_request
+                    message: workflow_name and check_name are mutually exclusive
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/rag-summary:
+    post:
+      summary: Build an augmented PR summary through the typed RAG workflow
+      operationId: executeAiRagSummary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIPRRAGSummaryExecuteRequest' }
+            examples:
+              ragSummary:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  profile: default
+                  persist_output: true
+                  summary_backend: accelerated
+                  embeddings:
+                    dimensions: 384
+                  ipfs:
+                    pin: true
+      responses:
+        '200':
+          description: Augmented PR summary generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                ragSummary:
+                  value:
+                    ok: true
+                    capability_id: github.pr.rag_summary
+                    workflow: pr_rag_summary
+                    execution_mode: orchestrated
+                    output_type: rag_summary
+                    typed_output:
+                      schema_name: rag_summary
+                      schema_version: 1
+                      headline: Augmented PR summary
+                      summary: This PR unifies AI workflow execution and typed endpoint coverage.
+                      spoken_text: The PR adds typed AI workflow endpoints and centralizes AI capability routing.
+                      repo: openai/example
+                      pr_number: 123
+                      source_summary: PR summary from GitHub context
+                      embedding_dimensions: 384
+                      ipfs_cid: bafyexample123
+                    output:
+                      headline: Augmented PR summary
+                      summary: This PR unifies AI workflow execution and typed endpoint coverage.
+                      spoken_text: The PR adds typed AI workflow endpoints and centralizes AI capability routing.
+                    trace:
+                      capability_id: github.pr.rag_summary
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingPrNumber:
+                  value:
+                    error: invalid_request
+                    message: github.pr.rag_summary requires context.pr_number
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/accelerated-rag-summary:
+    post:
+      summary: Build an accelerated augmented PR summary through ipfs_accelerate
+      operationId: executeAiAcceleratedPrSummary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIAcceleratedPRSummaryExecuteRequest' }
+            examples:
+              acceleratedRagSummary:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  profile: default
+                  generation:
+                    model: llama3
+                  embeddings:
+                    dimensions: 256
+      responses:
+        '200':
+          description: Accelerated PR summary generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                acceleratedRagSummary:
+                  value:
+                    ok: true
+                    capability_id: github.pr.accelerated_summary
+                    workflow: accelerated_pr_summary
+                    execution_mode: orchestrated
+                    output_type: rag_summary
+                    typed_output:
+                      schema_name: rag_summary
+                      schema_version: 1
+                      headline: Accelerated summary for PR #123
+                      summary: The PR centralizes AI execution and tightens typed API contracts.
+                      spoken_text: PR 123 centralizes AI execution and tightens typed API contracts.
+                      repo: openai/example
+                      pr_number: 123
+                      source_summary: Base GitHub summary for PR 123
+                      embedding_dimensions: 256
+                    output:
+                      headline: Accelerated summary for PR #123
+                      summary: The PR centralizes AI execution and tightens typed API contracts.
+                      spoken_text: PR 123 centralizes AI execution and tightens typed API contracts.
+                    trace:
+                      capability_id: github.pr.accelerated_summary
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingPrNumber:
+                  value:
+                    error: invalid_request
+                    message: github.pr.accelerated_summary requires context.pr_number
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/failure-rag-explain:
+    post:
+      summary: Build an augmented failure analysis through the typed RAG workflow
+      description: >-
+        `history_cids` are optional. When omitted, the server may auto-discover
+        recent matching persisted failure-analysis outputs for the same repo and
+        failure target.
+      operationId: executeAiFailureRagExplain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIFailureRAGExplainExecuteRequest' }
+            examples:
+              failureRag:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  failure_backend: accelerated
+                  history_cids:
+                    - bafy-history-1
+                  generation:
+                    model: llama3
+                  embeddings:
+                    dimensions: 384
+              failureRagAutoHistory:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  generation:
+                    model: llama3
+                  embeddings:
+                    dimensions: 384
+      responses:
+        '200':
+          description: Augmented failure analysis generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                failureAnalysis:
+                  value:
+                    ok: true
+                    capability_id: github.check.failure_rag_explain
+                    workflow: failure_rag_explain
+                    execution_mode: orchestrated
+                    output_type: failure_analysis
+                    typed_output:
+                      schema_name: failure_analysis
+                      schema_version: 1
+                      headline: Failure analysis
+                      summary: CI Linux is failing during dependency setup.
+                      spoken_text: The CI Linux workflow is failing during setup before the test phase starts.
+                      repo: openai/example
+                      pr_number: 123
+                      failure_target: CI Linux
+                      failure_target_type: workflow
+                      checks_context: setup-python failed after dependency install
+                      embedding_dimensions: 384
+                    output:
+                      headline: Failure analysis
+                      summary: CI Linux is failing during dependency setup.
+                      spoken_text: The CI Linux workflow is failing during setup before the test phase starts.
+                    trace:
+                      capability_id: github.check.failure_rag_explain
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                conflictingTargets:
+                  value:
+                    error: invalid_request
+                    message: workflow_name and check_name are mutually exclusive
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/accelerated-failure-explain:
+    post:
+      summary: Build an accelerated failure analysis through ipfs_accelerate
+      description: >-
+        `history_cids` are optional. When omitted, the server may auto-discover
+        recent matching persisted failure-analysis outputs for the same repo and
+        failure target.
+      operationId: executeAiAcceleratedFailureExplain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIAcceleratedFailureExplainExecuteRequest' }
+            examples:
+              acceleratedFailureExplain:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  history_cids:
+                    - bafy-history-1
+                  generation:
+                    model: llama3
+                  embeddings:
+                    dimensions: 256
+              acceleratedFailureExplainAutoHistory:
+                value:
+                  pr_number: 123
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  generation:
+                    model: llama3
+                  embeddings:
+                    dimensions: 256
+      responses:
+        '200':
+          description: Accelerated failure analysis generated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                acceleratedFailureAnalysis:
+                  value:
+                    ok: true
+                    capability_id: github.check.accelerated_failure_explain
+                    workflow: accelerated_failure_explain
+                    execution_mode: orchestrated
+                    output_type: failure_analysis
+                    typed_output:
+                      schema_name: failure_analysis
+                      schema_version: 1
+                      headline: Failure analysis
+                      summary: CI Linux is failing during dependency setup.
+                      spoken_text: The accelerated analysis says CI Linux is failing during setup before the test phase starts.
+                      repo: openai/example
+                      pr_number: 123
+                      failure_target: CI Linux
+                      failure_target_type: workflow
+                      checks_context: setup-python failed after dependency install
+                      embedding_dimensions: 256
+                    output:
+                      headline: Failure analysis
+                      summary: CI Linux is failing during dependency setup.
+                      spoken_text: The accelerated analysis says CI Linux is failing during setup before the test phase starts.
+                    trace:
+                      capability_id: github.check.accelerated_failure_explain
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                conflictingTargets:
+                  value:
+                    error: invalid_request
+                    message: workflow_name and check_name are mutually exclusive
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/find-similar-failures:
+    post:
+      summary: Rank similar prior failures against current PR failure context
+      description: >-
+        `history_cids` are optional. When omitted, the server may auto-discover
+        recent matching persisted failure-analysis outputs for the same repo and
+        failure target.
+      operationId: executeAiFindSimilarFailures
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIFindSimilarFailuresExecuteRequest' }
+            examples:
+              similarFailures:
+                value:
+                  pr_number: 125
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  top_k: 2
+                  history_cids:
+                    - bafy-history-1
+                  history_candidates:
+                    - summary: Dependency install failed during CI Linux setup.
+                      repo: openai/example
+                      pr_number: 101
+                      failure_target: CI Linux
+                      failure_target_type: workflow
+                    - summary: A UI snapshot changed unexpectedly.
+                      repo: openai/example
+                      pr_number: 99
+                      failure_target: Visual tests
+                      failure_target_type: check
+              similarFailuresAutoHistory:
+                value:
+                  pr_number: 125
+                  repo: openai/example
+                  workflow_name: CI Linux
+                  profile: default
+                  top_k: 2
+      responses:
+        '200':
+          description: Similar failures ranked
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                similarFailures:
+                  value:
+                    ok: true
+                    capability_id: github.check.find_similar_failures
+                    workflow: find_similar_failures
+                    execution_mode: orchestrated
+                    output_type: similar_failures
+                    typed_output:
+                      schema_name: similar_failures
+                      schema_version: 1
+                      repo: openai/example
+                      pr_number: 125
+                      failure_target: CI Linux
+                      failure_target_type: workflow
+                      checks_context: "CI Linux: status=completed, conclusion=failure"
+                      embedding_dimensions: 2
+                      ranked_matches:
+                        - score: 0.98
+                          summary: Dependency install failed during CI Linux setup.
+                          repo: openai/example
+                          pr_number: 101
+                          failure_target: CI Linux
+                          failure_target_type: workflow
+                    output:
+                      checks_context: "CI Linux: status=completed, conclusion=failure"
+                    trace:
+                      capability_id: github.check.find_similar_failures
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingPrNumber:
+                  value:
+                    error: invalid_request
+                    message: github.check.find_similar_failures requires context.pr_number
+                conflictingTargets:
+                  value:
+                    error: invalid_request
+                    message: workflow_name and check_name are mutually exclusive
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/read-stored-output:
+    post:
+      summary: Read a previously stored AI output by CID
+      operationId: executeAiReadStoredOutput
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIStoredOutputReadExecuteRequest' }
+            examples:
+              readCid:
+                value:
+                  cid: bafyexample123
+                  profile: default
+      responses:
+        '200':
+          description: Stored AI output loaded
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                storedOutput:
+                  value:
+                    ok: true
+                    capability_id: ipfs.content.read_ai_output
+                    workflow: read_stored_output
+                    execution_mode: direct_import
+                    output_type: stored_output
+                    typed_output:
+                      schema_name: stored_output
+                      schema_version: 1
+                      headline: Stored AI output
+                      summary: Recovered a previously stored augmented PR summary.
+                      spoken_text: I loaded the stored AI output from CID bafyexample123.
+                      cid: bafyexample123
+                      stored_capability_id: github.pr.rag_summary
+                      metadata:
+                        schema_version: 1
+                        repo: openai/example
+                        pr_number: 123
+                      payload:
+                        summary: This PR centralizes AI capability routing.
+                    output:
+                      headline: Stored AI output
+                      summary: Recovered a previously stored augmented PR summary.
+                      spoken_text: I loaded the stored AI output from CID bafyexample123.
+                    trace:
+                      capability_id: ipfs.content.read_ai_output
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingCid:
+                  value:
+                    error: invalid_request
+                    message: ipfs.content.read_ai_output requires inputs.cid or options.cid
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/ai/accelerate-generate-and-store:
+    post:
+      summary: Generate text through ipfs_accelerate and store the result to IPFS
+      operationId: executeAiAccelerateGenerateAndStore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AIAccelerateGenerateAndStoreExecuteRequest' }
+            examples:
+              accelerateGenerateAndStore:
+                value:
+                  prompt: Summarize the current CI failure cluster for voice playback.
+                  profile: default
+                  generation:
+                    model: llama3
+                  ipfs:
+                    pin: false
+                  kit_pin: true
+                  metadata:
+                    repo: openai/example
+                    source: devloop
+      responses:
+        '200':
+          description: Accelerated output generated and stored
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AICapabilityExecuteResponse' }
+              examples:
+                acceleratedStoredOutput:
+                  value:
+                    ok: true
+                    capability_id: ipfs.accelerate.generate_and_store
+                    workflow: accelerate_generate_and_store
+                    execution_mode: orchestrated
+                    output_type: accelerated_stored_output
+                    typed_output:
+                      schema_name: accelerated_stored_output
+                      schema_version: 1
+                      prompt: Summarize the current CI failure cluster for voice playback.
+                      generated:
+                        text: CI Linux failures cluster around dependency setup.
+                      cid: bafy-accelerated
+                      stored_bytes: 212
+                      kit_pin:
+                        ok: true
+                        cid: bafy-accelerated
+                    output:
+                      prompt: Summarize the current CI failure cluster for voice playback.
+                      generated:
+                        text: CI Linux failures cluster around dependency setup.
+                      cid: bafy-accelerated
+                      stored_bytes: 212
+                    trace:
+                      capability_id: ipfs.accelerate.generate_and_store
+        '400':
+          description: Invalid AI request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                missingPrompt:
+                  value:
+                    error: invalid_request
+                    message: ipfs.accelerate.generate_and_store requires inputs.prompt or options.prompt
+        '401':
+          description: Not authenticated
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
@@ -643,20 +1447,7 @@ paths:
           description: Task started successfully
           content:
             application/json:
-              schema:
-                type: object
-                required: [task_id, state, updated_at, message]
-                properties:
-                  task_id:
-                    type: string
-                  state:
-                    type: string
-                    enum: [running]
-                  updated_at:
-                    type: string
-                    format: date-time
-                  message:
-                    type: string
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
         '400':
           description: Invalid state transition
           content:
@@ -664,6 +1455,112 @@ paths:
               schema: { $ref: '#/components/schemas/Error' }
         '403':
           description: Endpoint disabled (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/pause:
+    post:
+      summary: Pause an agent task
+      description: |
+        Transition a task from 'running' to 'needs_input' for the current user.
+      operationId: pauseAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to pause
+      responses:
+        '200':
+          description: Task paused successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/resume:
+    post:
+      summary: Resume an agent task
+      description: |
+        Transition a task from 'needs_input' back to 'running' for the current user.
+      operationId: resumeAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to resume
+      responses:
+        '200':
+          description: Task resumed successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/cancel:
+    post:
+      summary: Cancel an agent task
+      description: |
+        Cancel an active task for the current user. The task is marked failed locally with
+        cancellation metadata, and remote MCP cancellation is attempted when supported.
+      operationId: cancelAgentTask
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to cancel
+      responses:
+        '200':
+          description: Task cancelled successfully
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
+        '400':
+          description: Invalid state transition
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
@@ -692,20 +1589,7 @@ paths:
           description: Task completed successfully
           content:
             application/json:
-              schema:
-                type: object
-                required: [task_id, state, updated_at, message]
-                properties:
-                  task_id:
-                    type: string
-                  state:
-                    type: string
-                    enum: [completed]
-                  updated_at:
-                    type: string
-                    format: date-time
-                  message:
-                    type: string
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
         '400':
           description: Invalid state transition
           content:
@@ -741,20 +1625,7 @@ paths:
           description: Task failed successfully
           content:
             application/json:
-              schema:
-                type: object
-                required: [task_id, state, updated_at, message]
-                properties:
-                  task_id:
-                    type: string
-                  state:
-                    type: string
-                    enum: [failed]
-                  updated_at:
-                    type: string
-                    format: date-time
-                  message:
-                    type: string
+              schema: { $ref: '#/components/schemas/AgentTaskControlResponse' }
         '400':
           description: Invalid state transition
           content:
@@ -1029,6 +1900,116 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/admin/ai/backend-policy:
+    get:
+      summary: Get current AI backend policy and recent remap counts (admin)
+      operationId: getAiBackendPolicyReport
+      description: >
+        Returns the resolved AI backend policy plus recent workflow remap counts
+        derived from recent AI execution audit logs for the authenticated user.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 200
+          description: Maximum number of recent action logs to inspect
+      responses:
+        '200':
+          description: AI backend policy report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIBackendPolicyReport'
+              example:
+                policy:
+                  summary_backend: accelerated
+                  failure_backend: composite
+                recent_window:
+                  log_limit: 200
+                  ai_execute_logs: 12
+                  policy_applied_count: 5
+                time_buckets:
+                  last_hour:
+                    ai_execute_logs: 2
+                    policy_applied_count: 1
+                    remapped_capability_counts:
+                      github.pr.accelerated_summary: 2
+                    direct_capability_counts: {}
+                    requested_workflow_counts:
+                      pr_rag_summary: 1
+                    resolved_workflow_counts:
+                      accelerated_pr_summary: 1
+                    remap_counts:
+                      pr_rag_summary->accelerated_pr_summary: 1
+                    action_counts:
+                      ai.execute.github.pr.accelerated_summary: 2
+                  last_24_hours:
+                    ai_execute_logs: 7
+                    policy_applied_count: 3
+                    remapped_capability_counts:
+                      github.pr.accelerated_summary: 2
+                      github.check.accelerated_failure_explain: 1
+                    direct_capability_counts:
+                      github.check.failure_rag_explain: 4
+                    requested_workflow_counts:
+                      pr_rag_summary: 2
+                      failure_rag_explain: 1
+                    resolved_workflow_counts:
+                      accelerated_pr_summary: 2
+                      accelerated_failure_explain: 1
+                    remap_counts:
+                      pr_rag_summary->accelerated_pr_summary: 2
+                      failure_rag_explain->accelerated_failure_explain: 1
+                    action_counts:
+                      ai.execute.github.pr.accelerated_summary: 3
+                      ai.execute.github.check.accelerated_failure_explain: 4
+                top_capabilities:
+                  overall:
+                    - capability_id: github.check.failure_rag_explain
+                      count: 3
+                    - capability_id: github.pr.accelerated_summary
+                      count: 3
+                  remapped:
+                    - capability_id: github.pr.accelerated_summary
+                      count: 3
+                    - capability_id: github.check.accelerated_failure_explain
+                      count: 2
+                  direct:
+                    - capability_id: github.check.failure_rag_explain
+                      count: 3
+                top_remaps:
+                  - remap_key: pr_rag_summary->accelerated_pr_summary
+                    count: 3
+                  - remap_key: failure_rag_explain->accelerated_failure_explain
+                    count: 2
+                remapped_capability_counts:
+                  github.pr.accelerated_summary: 3
+                  github.check.accelerated_failure_explain: 2
+                direct_capability_counts:
+                  github.check.failure_rag_explain: 3
+                requested_workflow_counts:
+                  pr_rag_summary: 3
+                  failure_rag_explain: 2
+                resolved_workflow_counts:
+                  accelerated_pr_summary: 3
+                  accelerated_failure_explain: 2
+                remap_counts:
+                  pr_rag_summary->accelerated_pr_summary: 3
+                  failure_rag_explain->accelerated_failure_explain: 2
+                action_counts:
+                  ai.execute.github.pr.accelerated_summary: 4
+                  ai.execute.github.check.failure_rag_explain: 3
+                  ai.execute.github.check.accelerated_failure_explain: 5
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
 components:
   schemas:
     Profile:
@@ -1052,6 +2033,27 @@ components:
       properties:
         input:
           $ref: '#/components/schemas/CommandInput'
+        profile:
+          $ref: '#/components/schemas/Profile'
+        client_context:
+          $ref: '#/components/schemas/ClientContext'
+        idempotency_key:
+          type: string
+          description: Client-provided idempotency key for de-duping.
+
+    ActionCommandRequest:
+      type: object
+      required: [action_id, profile, client_context]
+      properties:
+        action_id:
+          type: string
+          description: Stable card action identifier such as read_cid or rerun_dataset_search.
+        params:
+          type: object
+          additionalProperties: true
+          description: >
+            Optional action parameters. Supported context sources include embedded
+            card payloads, task_id, or notification_id.
         profile:
           $ref: '#/components/schemas/Profile'
         client_context:
@@ -1159,8 +2161,27 @@ components:
           items: { $ref: '#/components/schemas/UICard' }
         pending_action:
           $ref: '#/components/schemas/PendingAction'
+        follow_on_task:
+          $ref: '#/components/schemas/FollowOnTask'
         debug:
           $ref: '#/components/schemas/DebugInfo'
+
+    FollowOnTask:
+      type: object
+      required: [task_id]
+      properties:
+        task_id:
+          type: string
+        state:
+          type: string
+        provider:
+          type: string
+        provider_label:
+          type: string
+        capability:
+          type: string
+        summary:
+          type: string
 
     ParsedIntent:
       type: object
@@ -1217,6 +2238,57 @@ components:
         deep_link:
           type: string
           description: Optional link to open on phone.
+        actions:
+          type: array
+          description: Backward-compatible example phrases for available card actions.
+          items:
+            type: string
+        action_items:
+          type: array
+          description: Structured client-facing action metadata.
+          items:
+            $ref: '#/components/schemas/ActionItem'
+
+    ActionItem:
+      type: object
+      required: [id, label, phrase]
+      properties:
+        id:
+          type: string
+          description: Stable action identifier suitable for POST /v1/commands/action.
+        label:
+          type: string
+          description: Short UI label for buttons or menus.
+        phrase:
+          type: string
+          description: Canonical voice/text phrase equivalent for this action.
+        execution_mode:
+          type: string
+          nullable: true
+          description: Optional execution routing hint such as direct_import or mcp_remote.
+        execution_mode_label:
+          type: string
+          nullable: true
+          description: Optional short UI badge for the execution mode, such as Local or Remote.
+        params:
+          type: object
+          additionalProperties: true
+          description: Optional action parameters or template values.
+
+    AgentTaskControlResponse:
+      type: object
+      required: [task_id, state, message]
+      properties:
+        task_id:
+          type: string
+        state:
+          type: string
+        message:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
 
     DebugInfo:
       type: object
@@ -1316,6 +2388,920 @@ components:
         ok: { type: boolean }
         message: { type: string }
         url: { type: string }
+
+    AIWorkflow:
+      type: string
+      enum:
+        - copilot_explain_pr
+        - copilot_summarize_diff
+        - copilot_explain_failure
+        - pr_rag_summary
+        - accelerated_pr_summary
+        - failure_rag_explain
+        - accelerated_failure_explain
+        - find_similar_failures
+        - read_stored_output
+        - accelerate_generate_and_store
+
+    AISummaryBackend:
+      type: string
+      enum:
+        - default
+        - accelerated
+
+    AIFailureAnalysisBackend:
+      type: string
+      enum:
+        - default
+        - accelerated
+
+    AICapabilityContext:
+      type: object
+      properties:
+        repo:
+          type: string
+        pr_number:
+          type: integer
+          minimum: 1
+        workflow_name:
+          type: string
+        check_name:
+          type: string
+        failure_target:
+          type: string
+        failure_target_type:
+          type: string
+        session_id:
+          type: string
+
+    AIGenerationOptions:
+      type: object
+      properties:
+        model:
+          type: string
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+          minimum: 1
+        extra:
+          type: object
+          additionalProperties: true
+
+    AIEmbeddingOptions:
+      type: object
+      properties:
+        model:
+          type: string
+        dimensions:
+          type: integer
+          minimum: 1
+        extra:
+          type: object
+          additionalProperties: true
+
+    AIIPFSOptions:
+      type: object
+      properties:
+        pin:
+          type: boolean
+        extra:
+          type: object
+          additionalProperties: true
+
+    AICapabilityExecuteRequest:
+      type: object
+      properties:
+        capability_id:
+          type: string
+        workflow:
+          $ref: '#/components/schemas/AIWorkflow'
+        profile:
+          $ref: '#/components/schemas/Profile'
+        context:
+          $ref: '#/components/schemas/AICapabilityContext'
+        inputs:
+          type: object
+          additionalProperties: true
+        persist_output:
+          type: boolean
+        generation:
+          $ref: '#/components/schemas/AIGenerationOptions'
+        embeddings:
+          $ref: '#/components/schemas/AIEmbeddingOptions'
+        ipfs:
+          $ref: '#/components/schemas/AIIPFSOptions'
+        options:
+          type: object
+          additionalProperties: true
+        idempotency_key:
+          type: string
+      description: >
+        Generic AI execution request. Callers must provide either capability_id or workflow.
+      example:
+        workflow: pr_rag_summary
+        profile: default
+        context:
+          repo: openai/example
+          pr_number: 123
+        persist_output: true
+        embeddings:
+          dimensions: 384
+        ipfs:
+          pin: true
+
+    AIWorkflowExecuteRequestBase:
+      type: object
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+        persist_output:
+          type: boolean
+        generation:
+          $ref: '#/components/schemas/AIGenerationOptions'
+        embeddings:
+          $ref: '#/components/schemas/AIEmbeddingOptions'
+        ipfs:
+          $ref: '#/components/schemas/AIIPFSOptions'
+        options:
+          type: object
+          additionalProperties: true
+        idempotency_key:
+          type: string
+
+    AICopilotExplainPRExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+
+    AICopilotSummarizeDiffExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+
+    AICopilotExplainFailureExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+            workflow_name:
+              type: string
+            check_name:
+              type: string
+            failure_target:
+              type: string
+            failure_target_type:
+              type: string
+
+    AIPRRAGSummaryExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+            summary_backend:
+              $ref: '#/components/schemas/AISummaryBackend'
+
+    AIAcceleratedPRSummaryExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+
+    AIFailureRAGExplainExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+            workflow_name:
+              type: string
+            check_name:
+              type: string
+            failure_target:
+              type: string
+            failure_target_type:
+              type: string
+            history_cids:
+              type: array
+              description: >-
+                Optional explicit IPFS CIDs containing prior persisted failure
+                analyses. When omitted, the server may auto-discover recent
+                matching persisted history for the same repo and target.
+              items:
+                type: string
+            failure_backend:
+              $ref: '#/components/schemas/AIFailureAnalysisBackend'
+
+    AIAcceleratedFailureExplainExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            repo:
+              type: string
+            session_id:
+              type: string
+            workflow_name:
+              type: string
+            check_name:
+              type: string
+            failure_target:
+              type: string
+            failure_target_type:
+              type: string
+            history_cids:
+              type: array
+              description: >-
+                Optional explicit IPFS CIDs containing prior persisted failure
+                analyses. When omitted, the server may auto-discover recent
+                matching persisted history for the same repo and target.
+              items:
+                type: string
+
+    AIFindSimilarFailuresExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [pr_number]
+          properties:
+            pr_number:
+              type: integer
+              minimum: 1
+            history_candidates:
+              type: array
+              items: {}
+            repo:
+              type: string
+            session_id:
+              type: string
+            workflow_name:
+              type: string
+            check_name:
+              type: string
+            failure_target:
+              type: string
+            failure_target_type:
+              type: string
+            history_cids:
+              type: array
+              description: >-
+                Optional explicit IPFS CIDs containing prior persisted failure
+                analyses. When omitted, the server may auto-discover recent
+                matching persisted history for the same repo and target.
+              items:
+                type: string
+            top_k:
+              type: integer
+              minimum: 1
+
+    AIStoredOutputReadExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [cid]
+          properties:
+            cid:
+              type: string
+              minLength: 1
+
+    AIAccelerateGenerateAndStoreExecuteRequest:
+      allOf:
+        - $ref: '#/components/schemas/AIWorkflowExecuteRequestBase'
+        - type: object
+          required: [prompt]
+          properties:
+            prompt:
+              type: string
+              minLength: 1
+            kit_pin:
+              type: boolean
+            metadata:
+              type: object
+              additionalProperties: true
+
+    AICopilotOutput:
+      type: object
+      required: [schema_name, schema_version, headline, summary, spoken_text]
+      properties:
+        schema_name:
+          type: string
+          enum: [copilot_output]
+        schema_version:
+          type: integer
+          enum: [1]
+        headline:
+          type: string
+        summary:
+          type: string
+        spoken_text:
+          type: string
+      example:
+        schema_name: copilot_output
+        schema_version: 1
+        headline: Copilot explanation
+        summary: This PR refactors AI execution into one shared contract.
+        spoken_text: PR 123 moves Copilot and IPFS-backed AI execution onto one shared path.
+
+    AIRAGSummaryOutput:
+      type: object
+      required:
+        [schema_name, schema_version, headline, summary, spoken_text]
+      properties:
+        schema_name:
+          type: string
+          enum: [rag_summary]
+        schema_version:
+          type: integer
+          enum: [1]
+        headline:
+          type: string
+        summary:
+          type: string
+        spoken_text:
+          type: string
+        repo:
+          type: string
+        pr_number:
+          type: integer
+        source_summary:
+          type: string
+        embedding_dimensions:
+          type: integer
+        ipfs_cid:
+          type: string
+      example:
+        schema_name: rag_summary
+        schema_version: 1
+        headline: Augmented PR summary
+        summary: This PR centralizes AI capability routing.
+        spoken_text: PR 123 centralizes AI capability routing and typed workflow execution.
+        repo: openai/example
+        pr_number: 123
+        source_summary: PR summary from GitHub context
+        embedding_dimensions: 384
+        ipfs_cid: bafyexample123
+
+    AIFailureAnalysisOutput:
+      type: object
+      required:
+        [schema_name, schema_version, headline, summary, spoken_text]
+      properties:
+        schema_name:
+          type: string
+          enum: [failure_analysis]
+        schema_version:
+          type: integer
+          enum: [1]
+        headline:
+          type: string
+        summary:
+          type: string
+        spoken_text:
+          type: string
+        repo:
+          type: string
+        pr_number:
+          type: integer
+        failure_target:
+          type: string
+        failure_target_type:
+          type: string
+        checks_context:
+          type: string
+        embedding_dimensions:
+          type: integer
+        ipfs_cid:
+          type: string
+      example:
+        schema_name: failure_analysis
+        schema_version: 1
+        headline: Failure analysis
+        summary: CI Linux is failing during dependency setup.
+        spoken_text: The CI Linux workflow is failing during setup before the test phase starts.
+        repo: openai/example
+        pr_number: 123
+        failure_target: CI Linux
+        failure_target_type: workflow
+        checks_context: setup-python failed after dependency install
+        embedding_dimensions: 384
+
+    AISimilarFailuresOutput:
+      type: object
+      required:
+        [schema_name, schema_version, checks_context, embedding_dimensions, ranked_matches]
+      properties:
+        schema_name:
+          type: string
+          enum: [similar_failures]
+        schema_version:
+          type: integer
+          enum: [1]
+        repo:
+          type: string
+        pr_number:
+          type: integer
+        failure_target:
+          type: string
+        failure_target_type:
+          type: string
+        checks_context:
+          type: string
+        embedding_dimensions:
+          type: integer
+        ranked_matches:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      example:
+        schema_name: similar_failures
+        schema_version: 1
+        repo: openai/example
+        pr_number: 125
+        failure_target: CI Linux
+        failure_target_type: workflow
+        checks_context: "CI Linux: status=completed, conclusion=failure"
+        embedding_dimensions: 2
+        ranked_matches:
+          - score: 0.98
+            summary: Dependency install failed during CI Linux setup.
+            repo: openai/example
+            pr_number: 101
+            failure_target: CI Linux
+            failure_target_type: workflow
+
+    AIStoredOutputRead:
+      type: object
+      required:
+        [schema_name, schema_version, headline, summary, spoken_text, cid, metadata, payload]
+      properties:
+        schema_name:
+          type: string
+          enum: [stored_output]
+        schema_version:
+          type: integer
+          enum: [1]
+        headline:
+          type: string
+        summary:
+          type: string
+        spoken_text:
+          type: string
+        cid:
+          type: string
+        stored_capability_id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        payload:
+          type: object
+          additionalProperties: true
+      example:
+        schema_name: stored_output
+        schema_version: 1
+        headline: Stored AI output
+        summary: Recovered a previously stored augmented PR summary.
+        spoken_text: I loaded the stored AI output from CID bafyexample123.
+        cid: bafyexample123
+        stored_capability_id: github.pr.rag_summary
+        metadata:
+          schema_version: 1
+          repo: openai/example
+          pr_number: 123
+        payload:
+          summary: This PR centralizes AI capability routing.
+
+    AIAcceleratedStoredOutput:
+      type: object
+      required:
+        [schema_name, schema_version, prompt, generated, cid, stored_bytes]
+      properties:
+        schema_name:
+          type: string
+          enum: [accelerated_stored_output]
+        schema_version:
+          type: integer
+          enum: [1]
+        prompt:
+          type: string
+        generated:
+          type: object
+          additionalProperties: true
+        cid:
+          type: string
+        stored_bytes:
+          type: integer
+        kit_pin:
+          type: object
+          nullable: true
+          additionalProperties: true
+      example:
+        schema_name: accelerated_stored_output
+        schema_version: 1
+        prompt: Summarize the current CI failure cluster for voice playback.
+        generated:
+          text: CI Linux failures cluster around dependency setup.
+        cid: bafy-accelerated
+        stored_bytes: 212
+        kit_pin:
+          ok: true
+          cid: bafy-accelerated
+
+    AIPolicyResolution:
+      type: object
+      required: [resolved_capability_id, policy_applied]
+      properties:
+        requested_workflow:
+          $ref: '#/components/schemas/AIWorkflow'
+        resolved_workflow:
+          $ref: '#/components/schemas/AIWorkflow'
+        requested_capability_id:
+          type: string
+        resolved_capability_id:
+          type: string
+        policy_applied:
+          type: boolean
+      example:
+        requested_workflow: pr_rag_summary
+        resolved_workflow: accelerated_pr_summary
+        requested_capability_id:
+        resolved_capability_id: github.pr.accelerated_summary
+        policy_applied: true
+
+    AIBackendPolicyConfig:
+      type: object
+      required: [summary_backend, failure_backend, github_auth_source, github_live_mode_requested]
+      properties:
+        summary_backend:
+          type: string
+        failure_backend:
+          type: string
+        github_auth_source:
+          type: string
+          description: Non-secret GitHub auth source currently selected for live-mode requests.
+          enum: [github_app, env_token, gh_cli, fixtures]
+        github_live_mode_requested:
+          type: boolean
+      example:
+        summary_backend: accelerated
+        failure_backend: composite
+        github_auth_source: gh_cli
+        github_live_mode_requested: true
+
+    AIBackendPolicyWindow:
+      type: object
+      required: [log_limit, ai_execute_logs, policy_applied_count]
+      properties:
+        log_limit:
+          type: integer
+        ai_execute_logs:
+          type: integer
+        policy_applied_count:
+          type: integer
+      example:
+        log_limit: 200
+        ai_execute_logs: 12
+        policy_applied_count: 5
+
+    AIBackendPolicyBucketReport:
+      type: object
+      required:
+        [ai_execute_logs, policy_applied_count, remapped_capability_counts, direct_capability_counts, requested_workflow_counts, resolved_workflow_counts, remap_counts, action_counts]
+      properties:
+        ai_execute_logs:
+          type: integer
+        policy_applied_count:
+          type: integer
+        remapped_capability_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        direct_capability_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        requested_workflow_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        resolved_workflow_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        remap_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        action_counts:
+          type: object
+          additionalProperties:
+            type: integer
+      example:
+        ai_execute_logs: 2
+        policy_applied_count: 1
+        remapped_capability_counts:
+          github.pr.accelerated_summary: 2
+        direct_capability_counts: {}
+        requested_workflow_counts:
+          pr_rag_summary: 1
+        resolved_workflow_counts:
+          accelerated_pr_summary: 1
+        remap_counts:
+          pr_rag_summary->accelerated_pr_summary: 1
+        action_counts:
+          ai.execute.github.pr.accelerated_summary: 2
+
+    AICapabilityUsageCount:
+      type: object
+      required: [capability_id, count]
+      properties:
+        capability_id:
+          type: string
+        count:
+          type: integer
+      example:
+        capability_id: github.pr.accelerated_summary
+        count: 3
+
+    AITopCapabilities:
+      type: object
+      required: [overall, remapped, direct]
+      properties:
+        overall:
+          type: array
+          items:
+            $ref: '#/components/schemas/AICapabilityUsageCount'
+        remapped:
+          type: array
+          items:
+            $ref: '#/components/schemas/AICapabilityUsageCount'
+        direct:
+          type: array
+          items:
+            $ref: '#/components/schemas/AICapabilityUsageCount'
+      example:
+        overall:
+          - capability_id: github.check.failure_rag_explain
+            count: 3
+          - capability_id: github.pr.accelerated_summary
+            count: 3
+        remapped:
+          - capability_id: github.pr.accelerated_summary
+            count: 3
+        direct:
+          - capability_id: github.check.failure_rag_explain
+            count: 3
+
+    AIRemapCount:
+      type: object
+      required: [remap_key, count]
+      properties:
+        remap_key:
+          type: string
+        count:
+          type: integer
+      example:
+        remap_key: pr_rag_summary->accelerated_pr_summary
+        count: 3
+
+    AIBackendPolicyReport:
+      type: object
+      required:
+        [policy, recent_window, time_buckets, top_capabilities, top_remaps, remapped_capability_counts, direct_capability_counts, requested_workflow_counts, resolved_workflow_counts, remap_counts, action_counts]
+      properties:
+        policy:
+          $ref: '#/components/schemas/AIBackendPolicyConfig'
+        recent_window:
+          $ref: '#/components/schemas/AIBackendPolicyWindow'
+        time_buckets:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AIBackendPolicyBucketReport'
+        top_capabilities:
+          $ref: '#/components/schemas/AITopCapabilities'
+        top_remaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIRemapCount'
+        remapped_capability_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        direct_capability_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        requested_workflow_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        resolved_workflow_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        remap_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        action_counts:
+          type: object
+          additionalProperties:
+            type: integer
+      example:
+        policy:
+          summary_backend: accelerated
+          failure_backend: composite
+        recent_window:
+          log_limit: 200
+          ai_execute_logs: 12
+          policy_applied_count: 5
+        time_buckets:
+          last_hour:
+            ai_execute_logs: 2
+            policy_applied_count: 1
+            remapped_capability_counts:
+              github.pr.accelerated_summary: 2
+            direct_capability_counts: {}
+            requested_workflow_counts:
+              pr_rag_summary: 1
+            resolved_workflow_counts:
+              accelerated_pr_summary: 1
+            remap_counts:
+              pr_rag_summary->accelerated_pr_summary: 1
+            action_counts:
+              ai.execute.github.pr.accelerated_summary: 2
+          last_24_hours:
+            ai_execute_logs: 7
+            policy_applied_count: 3
+            remapped_capability_counts:
+              github.pr.accelerated_summary: 2
+              github.check.accelerated_failure_explain: 1
+            direct_capability_counts:
+              github.check.failure_rag_explain: 4
+            requested_workflow_counts:
+              pr_rag_summary: 2
+              failure_rag_explain: 1
+            resolved_workflow_counts:
+              accelerated_pr_summary: 2
+              accelerated_failure_explain: 1
+            remap_counts:
+              pr_rag_summary->accelerated_pr_summary: 2
+              failure_rag_explain->accelerated_failure_explain: 1
+            action_counts:
+              ai.execute.github.pr.accelerated_summary: 3
+              ai.execute.github.check.accelerated_failure_explain: 4
+        top_capabilities:
+          overall:
+            - capability_id: github.check.failure_rag_explain
+              count: 3
+            - capability_id: github.pr.accelerated_summary
+              count: 3
+          remapped:
+            - capability_id: github.pr.accelerated_summary
+              count: 3
+            - capability_id: github.check.accelerated_failure_explain
+              count: 2
+          direct:
+            - capability_id: github.check.failure_rag_explain
+              count: 3
+        top_remaps:
+          - remap_key: pr_rag_summary->accelerated_pr_summary
+            count: 3
+          - remap_key: failure_rag_explain->accelerated_failure_explain
+            count: 2
+        remapped_capability_counts:
+          github.pr.accelerated_summary: 3
+          github.check.accelerated_failure_explain: 2
+        direct_capability_counts:
+          github.check.failure_rag_explain: 3
+        requested_workflow_counts:
+          pr_rag_summary: 3
+          failure_rag_explain: 2
+        resolved_workflow_counts:
+          accelerated_pr_summary: 3
+          accelerated_failure_explain: 2
+        remap_counts:
+          pr_rag_summary->accelerated_pr_summary: 3
+          failure_rag_explain->accelerated_failure_explain: 2
+        action_counts:
+          ai.execute.github.pr.accelerated_summary: 4
+          ai.execute.github.check.failure_rag_explain: 3
+          ai.execute.github.check.accelerated_failure_explain: 5
+
+    AICapabilityExecuteResponse:
+      type: object
+      required: [ok, capability_id, execution_mode, output, trace]
+      properties:
+        ok:
+          type: boolean
+        capability_id:
+          type: string
+        workflow:
+          $ref: '#/components/schemas/AIWorkflow'
+        execution_mode:
+          type: string
+          description: Normalized execution mode such as fixture, direct_import, cli_live, or orchestrated.
+        output_type:
+          type: string
+        policy_resolution:
+          $ref: '#/components/schemas/AIPolicyResolution'
+        typed_output:
+          oneOf:
+            - $ref: '#/components/schemas/AICopilotOutput'
+            - $ref: '#/components/schemas/AIRAGSummaryOutput'
+            - $ref: '#/components/schemas/AIFailureAnalysisOutput'
+            - $ref: '#/components/schemas/AISimilarFailuresOutput'
+            - $ref: '#/components/schemas/AIStoredOutputRead'
+            - $ref: '#/components/schemas/AIAcceleratedStoredOutput'
+        output:
+          type: object
+          additionalProperties: true
+        trace:
+          type: object
+          additionalProperties: true
+      example:
+        ok: true
+        capability_id: github.pr.rag_summary
+        workflow: pr_rag_summary
+        execution_mode: orchestrated
+        output_type: rag_summary
+        policy_resolution:
+          requested_workflow: pr_rag_summary
+          resolved_workflow: accelerated_pr_summary
+          requested_capability_id:
+          resolved_capability_id: github.pr.accelerated_summary
+          policy_applied: true
+        typed_output:
+          schema_name: rag_summary
+          schema_version: 1
+          headline: Augmented PR summary
+          summary: This PR centralizes AI capability routing.
+          spoken_text: PR 123 centralizes AI capability routing and typed workflow execution.
+          repo: openai/example
+          pr_number: 123
+          source_summary: PR summary from GitHub context
+          embedding_dimensions: 384
+          ipfs_cid: bafyexample123
+        output:
+          headline: Augmented PR summary
+          summary: This PR centralizes AI capability routing.
+          spoken_text: PR 123 centralizes AI capability routing and typed workflow execution.
+        trace:
+          capability_id: github.pr.rag_summary
 
     Error:
       type: object
@@ -1694,5 +3680,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiKeyResponse'
-
-

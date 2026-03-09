@@ -13,7 +13,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": [],
+    "plugins": [
+      [
+        "./modules/expo-meta-wearables-dat/app.plugin.js",
+        {
+          "iosAnalyticsOptOut": true,
+          "androidAnalyticsOptOut": true,
+          "androidApplicationId": "handsfree-dev"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.handsfree.mobile",

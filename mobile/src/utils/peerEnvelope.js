@@ -90,9 +90,19 @@ export function createProtocolMessageEnvelope({ peerId, sessionId, protocol, pay
   });
 }
 
-export function createChatMessageEnvelope({ peerId, sessionId, text, senderPeerId }) {
+export function createChatMessageEnvelope({
+  peerId,
+  sessionId,
+  text,
+  senderPeerId,
+  conversationId,
+  priority = 'normal',
+}) {
   if (!text) {
     throw new Error('text is required');
+  }
+  if (!['normal', 'urgent'].includes(priority)) {
+    throw new Error('priority must be normal or urgent');
   }
   return createProtocolMessageEnvelope({
     peerId,
@@ -101,7 +111,10 @@ export function createChatMessageEnvelope({ peerId, sessionId, text, senderPeerI
     payload: {
       type: 'chat',
       text,
+      priority,
+      ...(conversationId ? { conversation_id: conversationId } : {}),
       ...(senderPeerId ? { sender_peer_id: senderPeerId } : {}),
+      timestamp_ms: timestampMs(),
     },
   });
 }

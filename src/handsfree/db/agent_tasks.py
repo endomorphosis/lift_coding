@@ -320,6 +320,8 @@ def get_agent_tasks(
     user_id: str | None = None,
     provider: str | None = None,
     state: str | None = None,
+    sort_by: str = "created_at",
+    direction: str = "desc",
     limit: int = 100,
     offset: int = 0,
 ) -> list[AgentTask]:
@@ -330,6 +332,8 @@ def get_agent_tasks(
         user_id: Filter by user ID (string, will be converted to UUID).
         provider: Filter by provider.
         state: Filter by state.
+        sort_by: Sort field (`created_at` or `updated_at`).
+        direction: Sort direction (`asc` or `desc`).
         limit: Maximum number of tasks to return.
         offset: Number of tasks to skip (for pagination).
 
@@ -362,7 +366,10 @@ def get_agent_tasks(
         query += " AND status = ?"
         params.append(state)
 
-    query += " ORDER BY created_at DESC LIMIT ? OFFSET ?"
+    sort_column = "updated_at" if sort_by == "updated_at" else "created_at"
+    sort_direction = "ASC" if direction.lower() == "asc" else "DESC"
+
+    query += f" ORDER BY {sort_column} {sort_direction} LIMIT ? OFFSET ?"
     params.append(limit)
     params.append(offset)
 

@@ -16,11 +16,20 @@ import {
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import ExpoGlassesAudio from 'expo-glasses-audio';
-import { sendCommand, uploadDevAudio, sendAudioCommand, fetchTTS, confirmCommand } from '../api/client';
+import FollowOnTaskCard from '../components/FollowOnTaskCard';
+import UICardList from '../components/UICardList';
+import {
+  sendCommand,
+  sendActionCommand,
+  uploadDevAudio,
+  sendAudioCommand,
+  fetchTTS,
+  confirmCommand,
+} from '../api/client';
 import { inferConfirmationDecision } from '../utils/voiceConfirmation';
 import { getProfile } from '../storage/profileStorage';
 
-export default function CommandScreen() {
+export default function CommandScreen({ navigation }) {
   const [commandText, setCommandText] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -323,6 +332,46 @@ export default function CommandScreen() {
     await cleanupTtsTempFile();
   };
 
+  const applyCommandResponse = async (data, options = {}) => {
+    const {
+      clearResponse = false,
+      clearPendingAction = false,
+      autoPlay = autoPlayTts,
+    } = options;
+
+    if (clearResponse) {
+      setResponse(null);
+    }
+    if (clearPendingAction) {
+      setPendingAction(null);
+      setShowConfirmModal(false);
+      setVoiceConfirmTranscript(null);
+    }
+
+    setResponse(data);
+
+    if (data.spoken_text) {
+      setLastSpokenText(data.spoken_text);
+    }
+
+    if (data.pending_action) {
+      console.log('[CommandScreen] Pending action detected:', {
+        token: data.pending_action.token,
+        summary: data.pending_action.summary,
+        expires_at: data.pending_action.expires_at,
+      });
+      setPendingAction(data.pending_action);
+      setShowConfirmModal(true);
+    } else if (clearPendingAction) {
+      setPendingAction(null);
+      setShowConfirmModal(false);
+    }
+
+    if (autoPlay && data.spoken_text) {
+      await playTTS(data.spoken_text);
+    }
+  };
+
   const handleSendCommand = async () => {
     if (!commandText.trim()) {
       Alert.alert('Error', 'Please enter a command');
@@ -335,33 +384,7 @@ export default function CommandScreen() {
 
     try {
       const data = await sendCommand(commandText, { profile: currentProfile });
-      setResponse(data);
-      
-      // Store for repeat functionality
-      if (data.spoken_text) {
-        setLastSpokenText(data.spoken_text);
-      }
-      
-      // Check if confirmation is required
-      if (data.pending_action) {
-        console.log('[CommandScreen] Pending action detected:', {
-          token: data.pending_action.token,
-          summary: data.pending_action.summary,
-          expires_at: data.pending_action.expires_at,
-        });
-        setPendingAction(data.pending_action);
-        setShowConfirmModal(true);
-        
-        // Auto-play confirmation prompt if TTS is enabled
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      } else {
-        // Auto-play TTS if enabled and spoken_text is available
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      }
+      await applyCommandResponse(data, { clearResponse: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -446,33 +469,7 @@ export default function CommandScreen() {
         duration_ms: recordingDuration * 1000,
         profile: currentProfile,
       });
-      setResponse(data);
-      
-      // Store for repeat functionality
-      if (data.spoken_text) {
-        setLastSpokenText(data.spoken_text);
-      }
-      
-      // Check if confirmation is required
-      if (data.pending_action) {
-        console.log('[CommandScreen] Pending action detected (audio):', {
-          token: data.pending_action.token,
-          summary: data.pending_action.summary,
-          expires_at: data.pending_action.expires_at,
-        });
-        setPendingAction(data.pending_action);
-        setShowConfirmModal(true);
-        
-        // Auto-play confirmation prompt if TTS is enabled
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      } else {
-        // Auto-play TTS if enabled and spoken_text is available
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      }
+      await applyCommandResponse(data, { clearResponse: true });
       
       // Clear recorded audio
       setAudioUri(null);
@@ -502,16 +499,7 @@ export default function CommandScreen() {
       const confirmResponse = await confirmCommand(pendingAction.token);
       console.log('[CommandScreen] Confirmation successful:', confirmResponse);
 
-      // Update response with confirmation result
-      setResponse(confirmResponse);
-      setShowConfirmModal(false);
-      setPendingAction(null);
-      setVoiceConfirmTranscript(null);
-
-      // Auto-play TTS if enabled
-      if (autoPlayTts && confirmResponse.spoken_text) {
-        await playTTS(confirmResponse.spoken_text);
-      }
+      await applyCommandResponse(confirmResponse, { clearPendingAction: true });
 
       if (source === 'tap') {
         Alert.alert('Success', 'Action confirmed successfully');
@@ -573,34 +561,34 @@ export default function CommandScreen() {
     try {
       // Send canonical "next" command to server
       const data = await sendCommand('next');
-      setResponse(data);
-      
-      // Store for repeat functionality
-      if (data.spoken_text) {
-        setLastSpokenText(data.spoken_text);
-      }
-      
-      // Check if confirmation is required
-      if (data.pending_action) {
-        console.log('[CommandScreen] Pending action detected (next):', {
-          token: data.pending_action.token,
-          summary: data.pending_action.summary,
-          expires_at: data.pending_action.expires_at,
-        });
-        setPendingAction(data.pending_action);
-        setShowConfirmModal(true);
-        
-        // Auto-play confirmation prompt if TTS is enabled
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      } else {
-        // Auto-play TTS if enabled and spoken_text is available
-        if (autoPlayTts && data.spoken_text) {
-          await playTTS(data.spoken_text);
-        }
-      }
+      await applyCommandResponse(data, { clearResponse: true });
     } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCardAction = async (actionItem, card) => {
+    if (!actionItem?.id) {
+      Alert.alert('Error', 'This card action is missing an action ID.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await sendActionCommand(actionItem.id, {
+        profile: currentProfile,
+        params: {
+          ...(actionItem.params || {}),
+          card,
+        },
+      });
+      await applyCommandResponse(data, { clearPendingAction: true });
+    } catch (err) {
+      console.error('[CommandScreen] Card action failed:', err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -694,34 +682,6 @@ export default function CommandScreen() {
     }
     
     return null;
-  };
-
-  const renderUICards = (cards) => {
-    if (!cards || cards.length === 0) return null;
-
-    return (
-      <View style={styles.cardsContainer}>
-        <Text style={styles.sectionTitle}>UI Cards:</Text>
-        {cards.map((card, index) => (
-          <View key={index} style={styles.card}>
-            <Text style={styles.cardTitle}>{card.title || `Card ${index + 1}`}</Text>
-            {card.subtitle ? (
-              <Text style={styles.cardSubtitle}>{card.subtitle}</Text>
-            ) : null}
-            {Array.isArray(card.lines)
-              ? card.lines.map((line, idx) => (
-                  <Text key={idx} style={styles.cardLine}>
-                    {line}
-                  </Text>
-                ))
-              : null}
-            {card.deep_link ? (
-              <Text style={styles.cardLink}>{card.deep_link}</Text>
-            ) : null}
-          </View>
-        ))}
-      </View>
-    );
   };
 
   return (
@@ -1032,7 +992,17 @@ export default function CommandScreen() {
             </View>
           )}
 
-          {renderUICards(response.cards)}
+          <FollowOnTaskCard
+            followOnTask={response.follow_on_task}
+            onOpenTask={(taskId) => navigation?.navigate?.('TaskDetail', { taskId })}
+          />
+
+          <UICardList
+            cards={response.cards}
+            title="UI Cards:"
+            disabled={loading}
+            onActionPress={handleCardAction}
+          />
 
           {showDebugPanel && response.debug && (
             <View style={styles.debugContainer}>
@@ -1153,37 +1123,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#856404',
     marginTop: 5,
-  },
-  cardsContainer: {
-    marginTop: 10,
-  },
-  card: {
-    backgroundColor: '#f8f9fa',
-    padding: 12,
-    borderRadius: 5,
-    marginBottom: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: '#007AFF',
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  cardSubtitle: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 5,
-  },
-  cardLine: {
-    fontSize: 13,
-    color: '#333',
-    marginTop: 3,
-  },
-  cardLink: {
-    fontSize: 12,
-    color: '#007AFF',
-    marginTop: 6,
   },
   debugContainer: {
     marginTop: 15,

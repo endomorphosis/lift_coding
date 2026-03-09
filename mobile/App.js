@@ -7,10 +7,15 @@ import * as Linking from 'expo-linking';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import StatusScreen from './src/screens/StatusScreen';
+import ActiveTasksScreen from './src/screens/ActiveTasksScreen';
 import CommandScreen from './src/screens/CommandScreen';
+import NotificationsScreen from './src/screens/NotificationsScreen';
+import ResultsScreen from './src/screens/ResultsScreen';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
+import TaskDetailScreen from './src/screens/TaskDetailScreen';
 import TTSScreen from './src/screens/TTSScreen';
 import GlassesDiagnosticsScreen from './src/screens/GlassesDiagnosticsScreen';
+import PeerChatDiagnosticsScreen from './src/screens/PeerChatDiagnosticsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { STORAGE_KEYS } from './src/api/config';
 
@@ -93,6 +98,30 @@ export default function App() {
           options={{ title: 'Command' }}
         />
         <Tab.Screen
+          name="Active"
+          component={ActiveTasksScreen}
+          options={{ title: 'Active' }}
+        />
+        <Tab.Screen
+          name="Notifications"
+          component={NotificationsScreen}
+          options={{ title: 'Notifications' }}
+        />
+        <Tab.Screen
+          name="Results"
+          component={ResultsScreen}
+          options={{ title: 'Results' }}
+        />
+        <Tab.Screen
+          name="TaskDetail"
+          component={TaskDetailScreen}
+          options={{
+            title: 'Task Detail',
+            tabBarButton: () => null,
+            tabBarStyle: { display: 'none' },
+          }}
+        />
+        <Tab.Screen
           name="Confirm"
           component={ConfirmationScreen}
           options={{ title: 'Confirm' }}
@@ -106,6 +135,11 @@ export default function App() {
           name="Glasses"
           component={GlassesDiagnosticsScreen}
           options={{ title: 'Glasses' }}
+        />
+        <Tab.Screen
+          name="PeerChat"
+          component={PeerChatDiagnosticsScreen}
+          options={{ title: 'Peer Chat' }}
         />
         <Tab.Screen
           name="Settings"

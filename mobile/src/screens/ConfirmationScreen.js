@@ -10,8 +10,9 @@ import {
   Alert,
 } from 'react-native';
 import { confirmCommand } from '../api/client';
+import FollowOnTaskCard from '../components/FollowOnTaskCard';
 
-export default function ConfirmationScreen() {
+export default function ConfirmationScreen({ navigation }) {
   const [token, setToken] = useState('');
   const [idempotencyKey, setIdempotencyKey] = useState('');
   const [loading, setLoading] = useState(false);
@@ -117,6 +118,11 @@ export default function ConfirmationScreen() {
               <Text style={styles.value}>{response.status}</Text>
             </View>
           )}
+
+          <FollowOnTaskCard
+            followOnTask={response.follow_on_task}
+            onOpenTask={(taskId) => navigation?.navigate?.('TaskDetail', { taskId })}
+          />
 
           <View style={styles.rawContainer}>
             <Text style={styles.label}>Full Response:</Text>

@@ -1,9 +1,18 @@
 """Tests for notifications API endpoint and integration."""
 
+import sys
+import types
 from datetime import UTC, datetime
 
 import pytest
 from fastapi.testclient import TestClient
+
+if "handsfree.secrets" not in sys.modules:
+    secrets_module = types.ModuleType("handsfree.secrets")
+    secrets_module.get_default_secret_manager = lambda: None
+    secrets_module.get_secret_manager = lambda *args, **kwargs: None
+    secrets_module.reset_secret_manager = lambda: None
+    sys.modules["handsfree.secrets"] = secrets_module
 
 from handsfree.api import app
 from handsfree.db.notifications import create_notification
@@ -396,6 +405,9 @@ class TestAgentServiceNotifications:
         assert notif["metadata"]["pr_number"] == 999
         assert notif["metadata"]["repo_full_name"] == "test/repo"
         assert "https://github.com/test/repo/pull/999" in notif["message"]
+        assert notif["card"]["title"] == "Copilot Completed"
+        assert notif["card"]["subtitle"].startswith(f"Task {task_id[:8]} • completed")
+        assert notif["card"]["deep_link"] == "https://github.com/test/repo/pull/999"
 
     def test_task_failure_notification_via_api(self):
         """Test that failed task notification is returned by GET /v1/notifications."""
@@ -444,6 +456,159 @@ class TestAgentServiceNotifications:
         assert notif["metadata"]["pr_number"] == 888
         assert notif["metadata"]["repo_full_name"] == "test/repo"
         assert "test/repo#888" in notif["message"]
+
+    def test_mcp_completion_notification_card_via_api(self):
+        """MCP completion notifications should include a structured card."""
+        from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
+
+        db = get_db()
+        service = AgentService(db)
+        user_id = "mcp-completion-card-user-0000-0000-0000-000000000004"
+
+        result = service.delegate(
+            user_id=user_id,
+            instruction="find legal datasets",
+            provider="copilot",
+        )
+        task_id = result["task_id"]
+
+        service.advance_task_state(
+            task_id,
+            "completed",
+            trace_update={
+                "provider_label": "IPFS Datasets",
+                "mcp_capability": "dataset_discovery",
+                "mcp_result_preview": "Expanded legal query",
+                "mcp_result_output": {
+                    "message": "Expanded legal query",
+                    "status": "success",
+                    "expanded_queries": ["legal datasets", "legal datasets statutes"],
+                },
+            },
+        )
+
+        response = client.get("/v1/notifications", headers={"X-User-ID": user_id})
+
+        assert response.status_code == 200
+        data = response.json()
+        completion_notifs = [
+            n for n in data["notifications"] if n["event_type"] == "task_completed"
+        ]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif["card"]["title"] == "Ipfs Datasets Completed"
+        assert notif["card"]["subtitle"].startswith(f"Task {task_id[:8]} • completed")
+        assert notif["card"]["lines"][0] == "Instruction: find legal datasets"
+        assert "message: Expanded legal query" in notif["card"]["lines"]
+        assert "expanded_queries: legal datasets, legal datasets statutes" in notif["card"]["lines"]
+        assert notif["card"]["deep_link"] == f"/v1/agents/tasks/{task_id}"
+        assert "show task details for that result" in notif["card"]["actions"]
+        assert "rerun that dataset search with labor law datasets remotely" in notif["card"]["actions"]
+        assert notif["card"]["action_items"][0]["id"] == "open_result"
+        assert notif["card"]["action_items"][-1]["id"] == "rerun_dataset_search"
+        assert notif["card"]["action_items"][-1]["execution_mode"] == "mcp_remote"
+        assert notif["card"]["action_items"][-1]["execution_mode_label"] == "Remote"
+
+    def test_ipfs_notification_card_uses_ipfs_deep_link(self):
+        """IPFS-capable task notifications should deep-link to the CID."""
+        from handsfree.agents.service import AgentService
+        from handsfree.api import get_db
+
+        db = get_db()
+        service = AgentService(db)
+        user_id = "mcp-ipfs-card-user-0000-0000-0000-000000000005"
+
+        result = service.delegate(
+            user_id=user_id,
+            instruction="pin bafy123 on ipfs",
+            provider="copilot",
+        )
+        task_id = result["task_id"]
+
+        service.advance_task_state(
+            task_id,
+            "completed",
+            trace_update={
+                "provider_label": "IPFS Kit",
+                "mcp_capability": "ipfs_pin",
+                "mcp_cid": "bafy123",
+                "mcp_result_preview": "Pinned bafy123",
+            },
+        )
+
+        response = client.get("/v1/notifications", headers={"X-User-ID": user_id})
+
+        assert response.status_code == 200
+        data = response.json()
+        completion_notifs = [
+            n for n in data["notifications"] if n["event_type"] == "task_completed"
+        ]
+        assert len(completion_notifs) == 1
+        assert completion_notifs[0]["card"]["deep_link"] == "ipfs://bafy123"
+        assert "read the cid" in completion_notifs[0]["card"]["actions"]
+        assert "unpin that" in completion_notifs[0]["card"]["actions"]
+        assert "unpin that locally" in completion_notifs[0]["card"]["actions"]
+        assert "unpin that remotely" in completion_notifs[0]["card"]["actions"]
+        assert completion_notifs[0]["card"]["action_items"][4]["id"] == "read_cid"
+        assert completion_notifs[0]["card"]["action_items"][-1]["id"] == "unpin_result"
+        local_unpin = next(
+            item
+            for item in completion_notifs[0]["card"]["action_items"]
+            if item["id"] == "unpin_result_local"
+        )
+        assert local_unpin["execution_mode"] == "direct_import"
+        assert local_unpin["execution_mode_label"] == "Local"
+
+    def test_notification_card_prefers_result_envelope(self):
+        """Envelope-backed notifications should still render deep links and actions."""
+        from handsfree.db.notifications import build_notification_card
+
+        card = build_notification_card(
+            "notif-1",
+            "task_completed",
+            "Task completed",
+            {
+                "task_id": "12345678-1234-1234-1234-123456789012",
+                "state": "completed",
+                "provider_label": "IPFS Kit",
+                "mcp_capability": "ipfs_pin",
+                "result_envelope": {
+                    "summary": "Pinned bafy123.",
+                    "structured_output": {"message": "Pinned bafy123."},
+                    "artifact_refs": {"result_cid": "bafy123"},
+                },
+            },
+        )
+
+        assert card is not None
+        assert card["deep_link"] == "ipfs://bafy123"
+        assert "read the cid" in card["actions"]
+        assert "message: Pinned bafy123." in card["lines"]
+
+    def test_notification_card_includes_remote_fallback_execution_line(self):
+        """Notification cards should explain when local execution falls back to remote."""
+        from handsfree.db.notifications import build_notification_card
+
+        card = build_notification_card(
+            "notif-2",
+            "task_completed",
+            "Task completed",
+            {
+                "task_id": "12345678-1234-1234-1234-123456789012",
+                "state": "completed",
+                "provider_label": "IPFS Kit",
+                "mcp_capability": "ipfs_pin",
+                "mcp_preferred_execution_mode": "direct_import",
+                "mcp_execution_mode": "mcp_remote",
+                "result_preview": "Pinned bafy123.",
+                "mcp_cid": "bafy123",
+            },
+        )
+
+        assert card is not None
+        assert "Execution: Remote (local unavailable)" in card["lines"]
 
 
 class TestWebhookNotifications:

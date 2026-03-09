@@ -13,6 +13,7 @@ Security notes:
 
 import logging
 import os
+import subprocess
 import threading
 import time
 from abc import ABC, abstractmethod
@@ -24,6 +25,34 @@ logger = logging.getLogger(__name__)
 # Lazy imports for JWT functionality to avoid dependencies when not needed
 _jwt = None
 _httpx = None
+
+
+def _is_live_mode_requested() -> bool:
+    """Check whether live GitHub access was explicitly requested."""
+    return (
+        os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live"
+        or os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
+    )
+
+
+def resolve_github_auth_source() -> str:
+    """Resolve the current non-secret GitHub auth source."""
+    app_id = os.getenv("GITHUB_APP_ID")
+    private_key = os.getenv("GITHUB_APP_PRIVATE_KEY_PEM")
+    installation_id = os.getenv("GITHUB_INSTALLATION_ID")
+    if app_id and private_key and installation_id:
+        return "github_app"
+
+    env_provider = EnvTokenProvider()
+    if env_provider.get_token():
+        return "env_token"
+
+    if _is_live_mode_requested():
+        gh_cli_provider = GhCliTokenProvider()
+        if gh_cli_provider.get_token():
+            return "gh_cli"
+
+    return "fixtures"
 
 
 def _import_jwt():
@@ -132,6 +161,42 @@ class EnvTokenProvider(TokenProvider):
             GitHub token from GITHUB_TOKEN env var, or None if not set.
         """
         return self.token
+
+
+class GhCliTokenProvider(TokenProvider):
+    """Token provider that reads from `gh auth token` as a dev fallback."""
+
+    def __init__(self):
+        """Initialize the provider with an empty cached token."""
+        self._token: str | None = None
+        self._loaded = False
+
+    def get_token(self) -> str | None:
+        """Get a GitHub token from the local GitHub CLI auth session."""
+        if self._loaded:
+            return self._token
+
+        self._loaded = True
+        try:
+            result = subprocess.run(
+                ["gh", "auth", "token"],
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=5.0,
+            )
+        except (FileNotFoundError, subprocess.SubprocessError, OSError):
+            return None
+
+        if result.returncode != 0:
+            return None
+
+        token = result.stdout.strip()
+        if not token:
+            return None
+
+        self._token = token
+        return self._token
 
 
 class GitHubAppTokenProvider(TokenProvider):
@@ -358,7 +423,8 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
 
     def __init__(self):
         """Initialize the environment token provider."""
-        self.token = os.getenv("GITHUB_TOKEN")
+        self._env_provider = EnvTokenProvider()
+        self._gh_cli_provider = GhCliTokenProvider()
         self.live_mode_enabled = os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
 
     def get_token(self, user_id: str) -> str | None:
@@ -370,7 +436,9 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
         Returns:
             GitHub token from GITHUB_TOKEN env var, or None if not set.
         """
-        return self.token if self.live_mode_enabled else None
+        if not self.live_mode_enabled:
+            return None
+        return self._env_provider.get_token() or self._gh_cli_provider.get_token()
 
     def supports_live_mode(self) -> bool:
         """Check if live mode is enabled via environment variable.
@@ -378,7 +446,7 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
         Returns:
             True if GITHUB_LIVE_MODE is set to true/1/yes and GITHUB_TOKEN is available.
         """
-        return self.live_mode_enabled and self.token is not None
+        return self.live_mode_enabled and self.get_token("system") is not None
 
 
 class FixtureOnlyProvider(GitHubAuthProvider):
@@ -502,12 +570,19 @@ class UserTokenProvider(TokenProvider):
             )
 
         # Priority 2: Environment token fallback (only for users with connections)
-        # Users with connections are real users, so they can use env token for dev
-        if has_connections and os.getenv("GITHUB_TOKEN"):
-            self._cached_provider = EnvTokenProvider()
+        # Users with connections are real users, so they can use env token for dev.
+        env_provider = EnvTokenProvider()
+        if has_connections and env_provider.get_token():
+            self._cached_provider = env_provider
             return self._cached_provider
 
-        # Priority 3: Fixture-only mode (users without connections for isolation)
+        # Priority 3: GitHub CLI token fallback (only for users with connections)
+        gh_cli_provider = GhCliTokenProvider()
+        if has_connections and _is_live_mode_requested() and gh_cli_provider.get_token():
+            self._cached_provider = gh_cli_provider
+            return self._cached_provider
+
+        # Priority 4: Fixture-only mode (users without connections for isolation)
         self._cached_provider = FixtureTokenProvider()
         return self._cached_provider
 
@@ -539,7 +614,8 @@ def get_token_provider() -> TokenProvider:
     1. GitHub App installation token minting (JWT -> installation access token)
        when app config present
     2. GITHUB_TOKEN env fallback for dev
-    3. fixture-only mode otherwise
+    3. `gh auth token` fallback for dev
+    4. fixture-only mode otherwise
 
     Can be explicitly set to fixture mode with HANDS_FREE_GITHUB_MODE=fixtures
 
@@ -562,10 +638,16 @@ def get_token_provider() -> TokenProvider:
         )
 
     # Priority 2: Environment token
-    if os.getenv("GITHUB_TOKEN"):
-        return EnvTokenProvider()
+    env_provider = EnvTokenProvider()
+    if env_provider.get_token():
+        return env_provider
 
-    # Priority 3: Fixture-only mode
+    # Priority 3: GitHub CLI token, but only when live mode was explicitly requested
+    gh_cli_provider = GhCliTokenProvider()
+    if _is_live_mode_requested() and gh_cli_provider.get_token():
+        return gh_cli_provider
+
+    # Priority 4: Fixture-only mode
     return FixtureTokenProvider()
 
 

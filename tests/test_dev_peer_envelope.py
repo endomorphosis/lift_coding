@@ -100,13 +100,19 @@ def test_dev_peer_envelope_returns_ack_for_message(test_user_id):
 
 
 def test_dev_peer_envelope_decodes_chat_protocol_message(test_user_id):
+    conversation_id = "chat:test-conversation"
     envelope = PeerEnvelope(
         kind="message",
         peer_id="12D3KooWpeerChat",
         session_id="session-chat-1",
         payload_b64=encode_transport_message(
             CHAT_PROTOCOL_ID,
-            encode_chat_message_payload("hello from glasses", sender_peer_id="12D3KooWpeerChat"),
+            encode_chat_message_payload(
+                "hello from glasses",
+                sender_peer_id="12D3KooWpeerChat",
+                conversation_id=conversation_id,
+                timestamp_ms=123456789,
+            ),
         ),
     )
     payload = {
@@ -118,10 +124,13 @@ def test_dev_peer_envelope_decodes_chat_protocol_message(test_user_id):
 
     assert response.accepted is True
     assert response.protocol == CHAT_PROTOCOL_ID
+    assert response.conversation_id == conversation_id
     assert response.payload_json == {
-        "type": "chat",
-        "text": "hello from glasses",
+        "conversation_id": conversation_id,
+        "peer_id": "12D3KooWpeerChat",
         "sender_peer_id": "12D3KooWpeerChat",
+        "text": "hello from glasses",
+        "timestamp_ms": 123456789,
     }
 
 

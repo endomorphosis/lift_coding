@@ -15,6 +15,8 @@ class AIBackendFamily(str, Enum):
     IPFS_LLM_ROUTER = "ipfs_llm_router"
     IPFS_EMBEDDINGS_ROUTER = "ipfs_embeddings_router"
     IPFS_CONTENT_ROUTER = "ipfs_content_router"
+    IPFS_ACCELERATE = "ipfs_accelerate"
+    IPFS_KIT = "ipfs_kit"
     MCP_REMOTE = "mcp_remote"
     COMPOSITE = "composite"
 

@@ -16,6 +16,16 @@ from fastapi import FastAPI, Header, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
+from handsfree.ai import (
+    AIRequestContext,
+    AICapabilityRequest,
+    build_ai_backend_policy_report,
+    build_policy_resolution,
+    build_api_execute_response,
+    discover_failure_history_cids,
+    execute_ai_request,
+    resolve_policy_workflow,
+)
 from handsfree.actions import (
     DirectActionRequest,
     execute_confirmed_action,
@@ -23,13 +33,15 @@ from handsfree.actions import (
     process_direct_action_request_detailed,
 )
 from handsfree.auth import FIXTURE_USER_ID, CurrentUser
+from handsfree.agents.results_views import resolve_result_query
 from handsfree.image_fetch import fetch_image_data
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
-from handsfree.commands.profiles import ProfileConfig
+from handsfree.commands.profiles import Profile as CommandProfile, ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
+from handsfree.db.ai_history_index import store_ai_history_record
 from handsfree.db.github_connections import (
     create_github_connection,
     get_github_connection,
@@ -56,8 +68,25 @@ from handsfree.logging_utils import (
     log_warning,
     set_request_id,
 )
+from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.models import (
     ActionResult,
+    ActionCommandRequest,
+    AIAccelerateGenerateAndStoreExecuteRequest,
+    AIAcceleratedPRSummaryExecuteRequest,
+    AIAcceleratedFailureExplainExecuteRequest,
+    AIBackendPolicyReport,
+    AICapabilityContext,
+    AICapabilityExecuteRequest,
+    AICapabilityExecuteResponse,
+    AICopilotExplainFailureExecuteRequest,
+    AICopilotExplainPRExecuteRequest,
+    AICopilotSummarizeDiffExecuteRequest,
+    AIFailureRAGExplainExecuteRequest,
+    AIFindSimilarFailuresExecuteRequest,
+    AIPRRAGSummaryExecuteRequest,
+    AIStoredOutputReadExecuteRequest,
+    AgentTaskControlResponse,
     ApiKeyResponse,
     ApiKeysListResponse,
     AudioInput,
@@ -68,13 +97,30 @@ from handsfree.models import (
     ConfirmRequest,
     CreateApiKeyRequest,
     CreateApiKeyResponse,
+    DevPeerChatConversationsResponse,
+    DevPeerChatHistoryResponse,
+    DevPeerChatHandsetHeartbeatRequest,
+    DevPeerChatHandsetSessionResponse,
+    DevPeerChatOutboxAckRequest,
+    DevPeerChatOutboxAckResponse,
+    DevPeerChatOutboxReleaseRequest,
+    DevPeerChatOutboxReleaseResponse,
+    DevPeerChatOutboxPromoteRequest,
+    DevPeerChatOutboxPromoteResponse,
+    DevPeerChatOutboxResponse,
+    DevPeerChatSendRequest,
+    DevPeerChatSendResponse,
     DevPeerEnvelopeRequest,
     DevPeerEnvelopeResponse,
+    DevTransportSessionClearResponse,
+    DevTransportSessionCursor,
+    DevTransportSessionsResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
     DebugInfo,
     DependencyStatus,
+    FollowOnTask,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
     GitHubOAuthCallbackResponse,
@@ -98,6 +144,7 @@ from handsfree.models import (
     TTSRequest,
     UICard,
 )
+from handsfree.mcp.catalog import get_capability_descriptor, get_provider_descriptor
 from handsfree.models import (
     PendingAction as PydanticPendingAction,
 )
@@ -106,6 +153,7 @@ from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import get_stt_provider
 from handsfree.ocr import get_ocr_provider
+from handsfree.peer_chat import PeerChatSessionService
 from handsfree.webhooks import (
     normalize_github_event,
     verify_github_signature,
@@ -113,6 +161,8 @@ from handsfree.webhooks import (
 from handsfree.transport.libp2p_bluetooth import (
     CHAT_PROTOCOL_ID,
     PeerEnvelope,
+    PersistedTransportSessionCursor,
+    encode_chat_message_payload,
     decode_chat_message_payload,
     decode_transport_message,
     decode_transport_envelope,
@@ -138,10 +188,173 @@ webhook_payloads: list[dict[str, Any]] = []
 pending_actions: dict[str, dict[str, Any]] = {}
 processed_commands: dict[str, CommandResponse] = {}
 idempotency_store: dict[str, ActionResult] = {}
+processed_ai_requests: dict[str, AICapabilityExecuteResponse] = {}
 dev_peer_sessions: dict[str, str] = {}
+dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
+_peer_transport_provider = None
+
+FOLLOW_ON_TASK_INTENTS = {
+    "agent.delegate",
+    "agent.delegate.confirmed",
+    "agent.result_pin",
+    "agent.result_unpin",
+    "agent.result_rerun",
+    "agent.result_rerun_fetch",
+    "agent.result_rerun_dataset",
+    "agent.result_save_ipfs",
+}
 
 # Webhook store (DB-backed, initialized lazily)
 _webhook_store = None
+
+
+def _extract_follow_on_task(
+    *,
+    intent_name: str,
+    status: CommandStatus,
+    entities: dict[str, Any],
+    tool_calls: list[dict[str, Any]] | None = None,
+) -> FollowOnTask | None:
+    """Build explicit spawned-task metadata for task-creating command responses."""
+    if status != CommandStatus.OK or intent_name not in FOLLOW_ON_TASK_INTENTS:
+        return None
+
+    task_id = entities.get("task_id")
+    if not isinstance(task_id, str) or not task_id:
+        return None
+
+    state = entities.get("state") if isinstance(entities.get("state"), str) else None
+    provider = entities.get("provider") if isinstance(entities.get("provider"), str) else None
+    provider_label = (
+        entities.get("provider_label") if isinstance(entities.get("provider_label"), str) else None
+    )
+    capability = None
+    for capability_key in ("capability", "mcp_capability"):
+        if isinstance(entities.get(capability_key), str):
+            capability = entities[capability_key]
+            break
+
+    if isinstance(tool_calls, list):
+        matching_call = next(
+            (
+                call
+                for call in tool_calls
+                if isinstance(call, dict) and call.get("task_id") == task_id
+            ),
+            None,
+        )
+        if matching_call is not None:
+            if state is None and isinstance(matching_call.get("state"), str):
+                state = matching_call["state"]
+            if provider is None and isinstance(matching_call.get("provider"), str):
+                provider = matching_call["provider"]
+            if provider_label is None and isinstance(matching_call.get("provider_label"), str):
+                provider_label = matching_call["provider_label"]
+            if capability is None:
+                for capability_key in ("capability", "mcp_capability"):
+                    if isinstance(matching_call.get(capability_key), str):
+                        capability = matching_call[capability_key]
+                        break
+
+    return _build_follow_on_task(
+        task_id=task_id,
+        state=state,
+        provider=provider,
+        provider_label=provider_label,
+        capability=capability,
+    )
+
+
+def _humanize_identifier(identifier: str | None) -> str | None:
+    if not isinstance(identifier, str) or not identifier.strip():
+        return None
+    return identifier.replace("_", " ").replace("-", " ").strip().title()
+
+
+def _derive_provider_label(provider: str | None, provider_label: str | None = None) -> str | None:
+    if isinstance(provider_label, str) and provider_label.strip():
+        return provider_label.strip()
+    if not isinstance(provider, str) or not provider.strip():
+        return None
+    descriptor = get_provider_descriptor(provider)
+    if descriptor is not None:
+        return descriptor.display_name
+    return _humanize_identifier(provider)
+
+
+def _derive_capability_label(capability: str | None) -> str | None:
+    if not isinstance(capability, str) or not capability.strip():
+        return None
+    descriptor = get_capability_descriptor(capability)
+    if descriptor is not None:
+        return descriptor.title
+    return _humanize_identifier(capability)
+
+
+def _build_follow_on_task(
+    *,
+    task_id: str,
+    state: str | None = None,
+    provider: str | None = None,
+    provider_label: str | None = None,
+    capability: str | None = None,
+) -> FollowOnTask:
+    resolved_provider_label = _derive_provider_label(provider, provider_label)
+    resolved_capability = capability if isinstance(capability, str) and capability.strip() else None
+    capability_label = _derive_capability_label(resolved_capability)
+
+    summary_parts: list[str] = []
+    if resolved_provider_label:
+        summary_parts.append(resolved_provider_label)
+    if capability_label:
+        summary_parts.append(capability_label.lower())
+    summary_base = " ".join(summary_parts).strip() or "Task"
+    summary = f"{summary_base} {state}.".strip() if state else f"{summary_base} created."
+
+    return FollowOnTask(
+        task_id=task_id,
+        state=state,
+        provider=provider,
+        provider_label=resolved_provider_label,
+        capability=resolved_capability,
+        summary=summary,
+    )
+
+
+def _parsed_intent_from_action_id(
+    action_id: str, params: dict[str, Any] | None = None
+) -> RouterParsedIntent:
+    """Translate a structured card action ID into a router intent."""
+    params = params or {}
+    action_map: dict[str, tuple[str, tuple[str, ...]]] = {
+        "open_result": ("agent.result_open", ()),
+        "show_result_details": ("agent.result_details", ()),
+        "show_related_results": ("agent.result_related", ()),
+        "save_result_to_ipfs": ("agent.result_save_ipfs", ()),
+        "read_cid": ("agent.result_read", ("cid",)),
+        "share_cid": ("agent.result_share", ("cid",)),
+        "pin_result": ("agent.result_pin", ("cid", "mcp_preferred_execution_mode")),
+        "pin_result_local": ("agent.result_pin", ("cid", "mcp_preferred_execution_mode")),
+        "pin_result_remote": ("agent.result_pin", ("cid", "mcp_preferred_execution_mode")),
+        "unpin_result": ("agent.result_unpin", ("cid", "mcp_preferred_execution_mode")),
+        "unpin_result_local": ("agent.result_unpin", ("cid", "mcp_preferred_execution_mode")),
+        "unpin_result_remote": ("agent.result_unpin", ("cid", "mcp_preferred_execution_mode")),
+        "rerun_workflow": ("agent.result_rerun", ("mcp_preferred_execution_mode",)),
+        "rerun_fetch_with_url": (
+            "agent.result_rerun_fetch",
+            ("mcp_seed_url", "mcp_preferred_execution_mode"),
+        ),
+        "rerun_dataset_search": (
+            "agent.result_rerun_dataset",
+            ("mcp_input", "mcp_preferred_execution_mode"),
+        ),
+    }
+    resolved = action_map.get(action_id)
+    if resolved is None:
+        raise ValueError(f"Unsupported action_id: {action_id}")
+    intent_name, allowed_keys = resolved
+    entities = {key: params[key] for key in allowed_keys if key in params}
+    return RouterParsedIntent(name=intent_name, confidence=1.0, entities=entities)
 
 
 # Initialize command infrastructure
@@ -167,6 +380,13 @@ _INBOX_ITEM_TYPE_MAP = {
     "mention": InboxItemType.MENTION,
     "check": InboxItemType.CHECK,
     "agent": InboxItemType.AGENT,
+}
+
+_PROFILE_TO_COMMAND_PROFILE = {
+    Profile.WORKOUT: CommandProfile.WORKOUT,
+    Profile.KITCHEN: CommandProfile.KITCHEN,
+    Profile.COMMUTE: CommandProfile.COMMUTE,
+    Profile.DEFAULT: CommandProfile.DEFAULT,
 }
 
 
@@ -200,6 +420,511 @@ def get_db_webhook_store() -> DBWebhookStore:
         db = get_db()
         _webhook_store = DBWebhookStore(db)
     return _webhook_store
+
+
+async def _execute_ai_capability_request(
+    request: AICapabilityExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute a shared AI capability request through the unified AI contract."""
+    try:
+        policy_workflow, policy_capability_id = resolve_policy_workflow(
+            workflow=request.workflow,
+            capability_id=request.capability_id,
+        )
+        resolved_capability_id = policy_capability_id or request.resolve_capability_id()
+        request.validate_execution_requirements()
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": str(exc),
+            },
+        ) from exc
+    resolved_workflow = policy_workflow or request.resolve_workflow()
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        db = get_db()
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return AICapabilityExecuteResponse(**cached_response)
+
+        if request.idempotency_key in processed_ai_requests:
+            return processed_ai_requests[request.idempotency_key]
+
+    command_profile = _PROFILE_TO_COMMAND_PROFILE.get(request.profile, CommandProfile.DEFAULT)
+    profile_config = ProfileConfig.for_profile(command_profile)
+    normalized_context = request.normalized_context()
+
+    options = request.build_options_dict()
+    if resolved_capability_id in {
+        "github.check.failure_rag_explain",
+        "github.check.accelerated_failure_explain",
+    } and "github_provider" not in options:
+        options["github_provider"] = _github_provider
+    request_inputs = dict(request.inputs)
+    if (
+        "history_cids" not in request_inputs
+        and resolved_capability_id in {
+            "github.check.failure_rag_explain",
+            "github.check.accelerated_failure_explain",
+            "github.check.find_similar_failures",
+        }
+    ):
+        auto_history_cids = discover_failure_history_cids(
+            get_db(),
+            user_id=user_id,
+            repo=normalized_context.repo,
+            pr_number=normalized_context.pr_number,
+            workflow_name=normalized_context.workflow_name,
+            check_name=normalized_context.check_name,
+            failure_target=normalized_context.failure_target,
+            failure_target_type=normalized_context.failure_target_type,
+        )
+        if auto_history_cids:
+            request_inputs["history_cids"] = auto_history_cids
+
+    ai_request = AICapabilityRequest(
+        capability_id=resolved_capability_id,
+        context=AIRequestContext(
+            repo=normalized_context.repo,
+            pr_number=normalized_context.pr_number,
+            workflow_name=normalized_context.workflow_name,
+            check_name=normalized_context.check_name,
+            failure_target=normalized_context.failure_target,
+            failure_target_type=normalized_context.failure_target_type,
+            session_id=normalized_context.session_id,
+            user_id=user_id,
+        ),
+        inputs=request_inputs,
+        options=options,
+    )
+    result = execute_ai_request(ai_request, profile_config=profile_config)
+    output = result.output if isinstance(result.output, dict) else {"value": result.output}
+
+    response = build_api_execute_response(result)
+    response.workflow = resolved_workflow
+    response.policy_resolution = build_policy_resolution(
+        requested_workflow=request.workflow,
+        resolved_workflow=resolved_workflow,
+        requested_capability_id=request.capability_id,
+        resolved_capability_id=resolved_capability_id,
+    )
+    response.trace = dict(response.trace)
+    response.trace["policy_resolution"] = response.policy_resolution.model_dump(mode="json")
+    db = get_db()
+    target_parts = []
+    if normalized_context.repo:
+        target_parts.append(normalized_context.repo)
+    if normalized_context.pr_number is not None:
+        target_parts.append(f"#{normalized_context.pr_number}")
+    if normalized_context.failure_target:
+        target_parts.append(str(normalized_context.failure_target))
+    if not target_parts and "cid" in request.options:
+        target_parts.append(str(request.options["cid"]))
+
+    write_action_log(
+        conn=db,
+        user_id=user_id,
+        action_type=f"ai.execute.{resolved_capability_id}",
+        ok=result.ok,
+        target=" ".join(target_parts) or None,
+        request={
+            "capability_id": resolved_capability_id,
+            "workflow": resolved_workflow.value if resolved_workflow else None,
+            "profile": request.profile.value,
+            "context": normalized_context.model_dump(),
+            "inputs": request_inputs,
+            "options": options,
+        },
+        result=response.model_dump(),
+        idempotency_key=request.idempotency_key,
+    )
+
+    if (
+        resolved_capability_id in {
+            "github.check.failure_rag_explain",
+            "github.check.accelerated_failure_explain",
+        }
+        and isinstance(output, dict)
+        and isinstance(output.get("ipfs_cid"), str)
+        and output["ipfs_cid"].strip()
+    ):
+        store_ai_history_record(
+            db,
+            user_id=user_id,
+            capability_id=resolved_capability_id,
+            repo=output.get("repo") or normalized_context.repo,
+            pr_number=output.get("pr_number") or normalized_context.pr_number,
+            failure_target=output.get("failure_target") or normalized_context.failure_target,
+            failure_target_type=output.get("failure_target_type")
+            or normalized_context.failure_target_type,
+            ipfs_cid=output["ipfs_cid"].strip(),
+        )
+
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        store_idempotency_key(
+            conn=db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/ai/execute",
+            response_data=response.model_dump(),
+        )
+        processed_ai_requests[request.idempotency_key] = response
+
+    return response
+
+
+@app.post("/v1/ai/execute", response_model=AICapabilityExecuteResponse)
+async def execute_ai_capability_endpoint(
+    request: AICapabilityExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute a shared AI capability through the unified AI contract."""
+    return await _execute_ai_capability_request(request, user_id)
+
+
+@app.post("/v1/ai/copilot/explain-pr", response_model=AICapabilityExecuteResponse)
+async def execute_ai_copilot_explain_pr_endpoint(
+    request: AICopilotExplainPRExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed Copilot PR explanation workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/copilot/summarize-diff", response_model=AICapabilityExecuteResponse)
+async def execute_ai_copilot_summarize_diff_endpoint(
+    request: AICopilotSummarizeDiffExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed Copilot diff summary workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/copilot/explain-failure", response_model=AICapabilityExecuteResponse)
+async def execute_ai_copilot_explain_failure_endpoint(
+    request: AICopilotExplainFailureExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed Copilot failure explanation workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/rag-summary", response_model=AICapabilityExecuteResponse)
+async def execute_ai_pr_rag_summary_endpoint(
+    request: AIPRRAGSummaryExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed PR RAG summary workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/accelerated-rag-summary", response_model=AICapabilityExecuteResponse)
+async def execute_ai_accelerated_pr_summary_endpoint(
+    request: AIAcceleratedPRSummaryExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed accelerated PR summary workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/failure-rag-explain", response_model=AICapabilityExecuteResponse)
+async def execute_ai_failure_rag_explain_endpoint(
+    request: AIFailureRAGExplainExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed failure RAG explanation workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/accelerated-failure-explain", response_model=AICapabilityExecuteResponse)
+async def execute_ai_accelerated_failure_explain_endpoint(
+    request: AIAcceleratedFailureExplainExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed accelerated failure explanation workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/find-similar-failures", response_model=AICapabilityExecuteResponse)
+async def execute_ai_find_similar_failures_endpoint(
+    request: AIFindSimilarFailuresExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed similar-failures retrieval workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/read-stored-output", response_model=AICapabilityExecuteResponse)
+async def execute_ai_read_stored_output_endpoint(
+    request: AIStoredOutputReadExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed stored-output read workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+@app.post("/v1/ai/accelerate-generate-and-store", response_model=AICapabilityExecuteResponse)
+async def execute_ai_accelerate_generate_and_store_endpoint(
+    request: AIAccelerateGenerateAndStoreExecuteRequest,
+    user_id: CurrentUser,
+) -> AICapabilityExecuteResponse:
+    """Execute the typed accelerated generation plus storage workflow."""
+    return await _execute_ai_capability_request(request.to_execute_request(), user_id)
+
+
+def _normalize_mcp_task_result(task: Any) -> dict[str, Any] | None:
+    """Return a client-friendly MCP result summary for an agent task."""
+    trace = task.trace or {}
+    if not isinstance(trace, dict):
+        return None
+
+    envelope = trace.get("mcp_result_envelope")
+    envelope = envelope if isinstance(envelope, dict) else None
+
+    capability = trace.get("mcp_capability")
+    provider_label = trace.get("provider_label")
+    result_output = envelope.get("structured_output") if envelope else trace.get("mcp_result_output")
+    result_preview = envelope.get("summary") if envelope else trace.get("mcp_result_preview")
+
+    normalized: dict[str, Any] = {
+        "provider_label": provider_label,
+        "capability": capability,
+        "preview": result_preview,
+    }
+
+    if isinstance(result_output, dict):
+        if "status" in result_output:
+            normalized["status"] = result_output["status"]
+        if "message" in result_output:
+            normalized["message"] = result_output["message"]
+        if "task" in result_output and isinstance(result_output["task"], dict):
+            normalized["remote_task"] = result_output["task"]
+
+    cid = trace.get("mcp_cid")
+    if not cid and isinstance(result_output, dict):
+        cid = result_output.get("cid")
+    if cid:
+        normalized["cid"] = cid
+
+    if capability == "dataset_discovery" and isinstance(result_output, dict):
+        queries = result_output.get("expanded_queries")
+        if isinstance(queries, list):
+            normalized["dataset_queries"] = queries
+
+    if capability == "agentic_fetch":
+        seed_url = trace.get("mcp_seed_url")
+        if seed_url:
+            normalized["seed_urls"] = [seed_url]
+        if isinstance(result_output, dict):
+            target_terms = result_output.get("target_terms")
+            if isinstance(target_terms, list):
+                normalized["target_terms"] = target_terms
+            seed_urls = result_output.get("seed_urls")
+            if isinstance(seed_urls, list):
+                normalized["seed_urls"] = seed_urls
+
+    if capability == "ipfs_pin":
+        pin_action = trace.get("mcp_pin_action")
+        if pin_action:
+            normalized["pin_action"] = pin_action
+
+    if envelope:
+        normalized["execution_mode"] = envelope.get("execution_mode")
+        normalized["status"] = envelope.get("status", normalized.get("status"))
+        artifact_refs = envelope.get("artifact_refs")
+        if isinstance(artifact_refs, dict):
+            normalized["artifact_refs"] = artifact_refs
+            cid = artifact_refs.get("result_cid")
+            if cid and "cid" not in normalized:
+                normalized["cid"] = cid
+        follow_up_actions = envelope.get("follow_up_actions")
+        if isinstance(follow_up_actions, list) and follow_up_actions:
+            normalized["follow_up_actions"] = follow_up_actions
+
+    if len(normalized) == 3 and not any(normalized.values()):
+        return None
+    return normalized
+
+
+def _serialize_agent_task(task: Any) -> dict[str, Any]:
+    """Serialize an AgentTask into API shape."""
+    task_data = {
+        "id": task.id,
+        "state": task.state,
+        "provider": task.provider,
+        "description": task.instruction or "",
+        "created_at": task.created_at.isoformat() if task.created_at else None,
+        "updated_at": task.updated_at.isoformat() if task.updated_at else None,
+    }
+    if task.target_type:
+        task_data["target_type"] = task.target_type
+    if task.target_ref:
+        task_data["target_ref"] = task.target_ref
+    if task.trace and isinstance(task.trace, dict):
+        task_data["trace"] = task.trace
+        if "pr_url" in task.trace:
+            task_data["pr_url"] = task.trace["pr_url"]
+        envelope = task.trace.get("mcp_result_envelope")
+        envelope = envelope if isinstance(envelope, dict) else None
+        if envelope and isinstance(envelope.get("summary"), str):
+            task_data["result_preview"] = envelope["summary"]
+        elif "mcp_result_preview" in task.trace:
+            task_data["result_preview"] = task.trace["mcp_result_preview"]
+        if envelope and "structured_output" in envelope:
+            task_data["result_output"] = envelope.get("structured_output")
+            task_data["result_envelope"] = envelope
+            follow_up_actions = envelope.get("follow_up_actions")
+            if isinstance(follow_up_actions, list):
+                task_data["follow_up_actions"] = follow_up_actions
+        elif "mcp_result_output" in task.trace:
+            task_data["result_output"] = task.trace["mcp_result_output"]
+    normalized_result = _normalize_mcp_task_result(task)
+    if normalized_result is not None:
+        task_data["result"] = normalized_result
+    return task_data
+
+
+def _resolve_effective_user_id(user_id: str, x_user_id_raw: str | None = None) -> str:
+    """Resolve the effective user id, honoring dev-mode header override."""
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+    return effective_user_id
+
+
+def _normalize_user_id_for_lookup(user_id: str) -> str:
+    """Normalize raw user ids to the UUID form stored in the DB."""
+    from uuid import NAMESPACE_DNS, UUID, uuid5
+
+    try:
+        normalized_user_id = (
+            str(UUID(user_id)) if "-" in user_id else str(uuid5(NAMESPACE_DNS, user_id))
+        )
+    except (ValueError, AttributeError):
+        normalized_user_id = str(uuid5(NAMESPACE_DNS, user_id))
+    return normalized_user_id
+
+
+def _get_scoped_agent_task(conn: Any, task_id: str, user_id: str) -> Any:
+    """Load a task and enforce user ownership."""
+    from handsfree.db.agent_tasks import get_agent_task_by_id
+
+    task = get_agent_task_by_id(conn=conn, task_id=task_id)
+    if not task or task.user_id != _normalize_user_id_for_lookup(user_id):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task not found",
+        )
+    return task
+
+
+def _apply_task_result_view(
+    task_data: dict[str, Any],
+    result_view: str,
+) -> dict[str, Any]:
+    """Project task result fields for the requested response view."""
+    if result_view == "normalized":
+        task_data.pop("trace", None)
+        task_data.pop("result_output", None)
+        return task_data
+    if result_view == "raw":
+        task_data.pop("result", None)
+        return task_data
+    return task_data
+
+
+def _filter_agent_tasks_for_results(
+    tasks: list[Any],
+    *,
+    capability: str | None = None,
+    results_only: bool = False,
+) -> list[Any]:
+    """Apply capability/result availability filtering to a task list."""
+    if capability:
+        tasks = [
+            task for task in tasks
+            if isinstance(task.trace, dict) and task.trace.get("mcp_capability") == capability
+        ]
+    if results_only:
+        tasks = [
+            task for task in tasks
+            if task.state == "completed"
+            and isinstance(task.trace, dict)
+            and (
+                task.trace.get("mcp_result_envelope") is not None
+                or task.trace.get("mcp_result_preview") is not None
+                or task.trace.get("mcp_result_output") is not None
+            )
+        ]
+    return tasks
+
+
+def _paginate_task_list(tasks: list[Any], *, limit: int, offset: int) -> tuple[list[Any], bool]:
+    """Paginate an in-memory task list and return page plus has_more flag."""
+    has_more = len(tasks) > offset + limit
+    return tasks[offset: offset + limit], has_more
+
+
+def _latest_tasks_by_result_key(tasks: list[Any]) -> list[Any]:
+    """Keep only the first task for each provider/capability combination."""
+    latest: list[Any] = []
+    seen: set[tuple[str, str | None]] = set()
+    for task in tasks:
+        trace = task.trace if isinstance(task.trace, dict) else {}
+        key = (task.provider, trace.get("mcp_capability"))
+        if key in seen:
+            continue
+        seen.add(key)
+        latest.append(task)
+    return latest
+
+
+def _summarize_result_tasks(tasks: list[Any]) -> dict[str, Any]:
+    """Build aggregate counts for a filtered result task set."""
+    by_provider: dict[str, int] = {}
+    by_capability: dict[str, int] = {}
+    for task in tasks:
+        by_provider[task.provider] = by_provider.get(task.provider, 0) + 1
+        trace = task.trace if isinstance(task.trace, dict) else {}
+        capability = trace.get("mcp_capability")
+        if isinstance(capability, str) and capability:
+            by_capability[capability] = by_capability.get(capability, 0) + 1
+    return {
+        "total_results": len(tasks),
+        "by_provider": by_provider,
+        "by_capability": by_capability,
+    }
+
+
+def get_peer_transport():
+    """Get or initialize the configured peer transport provider."""
+    global _peer_transport_provider
+    if _peer_transport_provider is None:
+        from handsfree.transport import get_transport_provider
+
+        _peer_transport_provider = get_transport_provider()
+    return _peer_transport_provider
+
+
+def _serialize_transport_session_cursor(
+    cursor: PersistedTransportSessionCursor,
+) -> DevTransportSessionCursor:
+    return DevTransportSessionCursor(
+        peer_id=cursor.peer_id,
+        peer_ref=cursor.peer_ref,
+        session_id=cursor.session_id,
+        resume_token=cursor.resume_token,
+        capabilities=list(cursor.capabilities),
+        updated_at_ms=cursor.updated_at_ms,
+    )
 
 
 @app.get("/health")
@@ -705,6 +1430,7 @@ async def dev_ingest_peer_envelope(
     dev_peer_sessions[envelope.peer_id] = envelope.session_id
 
     protocol: str | None = None
+    conversation_id: str | None = None
     payload_text: str | None = None
     payload_json: dict[str, Any] | None = None
     ack_frame_base64: str | None = None
@@ -714,6 +1440,17 @@ async def dev_ingest_peer_envelope(
         if protocol == CHAT_PROTOCOL_ID:
             try:
                 payload_json = decode_chat_message_payload(payload_bytes)
+                stored_message = dev_peer_chat_service.ingest_chat_payload(
+                    envelope.peer_id, payload_json
+                )
+                conversation_id = stored_message.conversation_id
+                payload_json = {
+                    "conversation_id": stored_message.conversation_id,
+                    "peer_id": stored_message.peer_id,
+                    "sender_peer_id": stored_message.sender_peer_id,
+                    "text": stored_message.text,
+                    "timestamp_ms": stored_message.timestamp_ms,
+                }
             except Exception:
                 payload_json = None
         ack = PeerEnvelope(
@@ -732,10 +1469,494 @@ async def dev_ingest_peer_envelope(
         session_id=envelope.session_id,
         message_id=envelope.message_id,
         protocol=protocol,
+        conversation_id=conversation_id,
         payload_text=payload_text,
         payload_json=payload_json,
         ack_frame_base64=ack_frame_base64,
     )
+
+
+@app.get("/v1/dev/peer-chat/{conversation_id}", response_model=DevPeerChatHistoryResponse)
+async def dev_get_peer_chat_history(
+    conversation_id: str,
+    user_id: CurrentUser,
+) -> DevPeerChatHistoryResponse:
+    """Return normalized dev peer chat history for a conversation id (dev-only)."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat history is only available in dev mode",
+            },
+        )
+
+    if not conversation_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "conversation_id must be provided",
+            },
+        )
+
+    return DevPeerChatHistoryResponse(
+        conversation_id=conversation_id,
+        messages=dev_peer_chat_service.list_messages(conversation_id),
+    )
+
+
+@app.get("/v1/dev/peer-chat", response_model=DevPeerChatConversationsResponse)
+async def dev_list_peer_chat_conversations(
+    user_id: CurrentUser,
+    limit: int = Query(default=20, ge=1, le=100),
+) -> DevPeerChatConversationsResponse:
+    """Return recent normalized dev peer chat conversations (dev-only)."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat conversations are only available in dev mode",
+            },
+        )
+
+    return DevPeerChatConversationsResponse(
+        conversations=dev_peer_chat_service.list_recent_conversations(limit=limit),
+    )
+
+
+@app.get("/v1/dev/transport-sessions", response_model=DevTransportSessionsResponse)
+async def dev_list_transport_sessions(user_id: CurrentUser) -> DevTransportSessionsResponse:
+    """Return persisted transport session cursors for transport diagnostics (dev-only)."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev transport sessions are only available in dev mode",
+            },
+        )
+
+    transport = get_peer_transport()
+    list_cursors = getattr(transport, "list_persisted_session_cursors", None)
+    cursors = list_cursors() if list_cursors is not None else []
+    return DevTransportSessionsResponse(
+        sessions=[_serialize_transport_session_cursor(cursor) for cursor in cursors],
+    )
+
+
+@app.delete(
+    "/v1/dev/transport-sessions/{peer_id}",
+    response_model=DevTransportSessionClearResponse,
+)
+async def dev_clear_transport_session(
+    peer_id: str,
+    user_id: CurrentUser,
+) -> DevTransportSessionClearResponse:
+    """Clear a persisted transport session cursor for transport diagnostics (dev-only)."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev transport session clearing is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    transport = get_peer_transport()
+    clear_cursor = getattr(transport, "clear_persisted_session_cursor", None)
+    cleared = bool(clear_cursor(peer_id)) if clear_cursor is not None else False
+    return DevTransportSessionClearResponse(peer_id=peer_id, cleared=cleared)
+
+
+@app.post("/v1/dev/peer-chat/send", response_model=DevPeerChatSendResponse)
+async def dev_send_peer_chat(
+    request: DevPeerChatSendRequest,
+    user_id: CurrentUser,
+) -> DevPeerChatSendResponse:
+    """Send an outbound dev peer chat message via the configured transport."""
+
+    from handsfree.auth import get_auth_mode
+    from handsfree.peer_chat import build_conversation_id
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat send is only available in dev mode",
+            },
+        )
+
+    transport = get_peer_transport()
+    local_identity = getattr(transport, "get_local_identity", lambda: None)()
+    sender_peer_id = getattr(local_identity, "peer_id", None) or "local-dev-peer"
+    conversation_id = request.conversation_id or build_conversation_id(request.peer_id, sender_peer_id)
+    timestamp_ms = int(datetime.now(UTC).timestamp() * 1000)
+    payload = encode_chat_message_payload(
+        request.text,
+        sender_peer_id=sender_peer_id,
+        conversation_id=conversation_id,
+        priority=request.priority,
+        timestamp_ms=timestamp_ms,
+    )
+
+    try:
+        if hasattr(transport, "send_protocol_message"):
+            transport.send_protocol_message(request.peer_id, CHAT_PROTOCOL_ID, payload)
+        else:
+            transport.send(request.peer_id, payload)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={
+                "error": "transport_unavailable",
+                "message": str(exc),
+            },
+        ) from exc
+
+    dev_peer_chat_service.ingest_chat_payload(
+        request.peer_id,
+        {
+            "conversation_id": conversation_id,
+            "sender_peer_id": sender_peer_id,
+            "text": request.text,
+            "priority": request.priority,
+            "timestamp_ms": timestamp_ms,
+        },
+    )
+    dev_peer_chat_service.queue_outbound_message(
+        recipient_peer_id=request.peer_id,
+        sender_peer_id=sender_peer_id,
+        conversation_id=conversation_id,
+        text=request.text,
+        priority=request.priority,
+        timestamp_ms=timestamp_ms,
+    )
+
+    return DevPeerChatSendResponse(
+        accepted=True,
+        peer_id=request.peer_id,
+        sender_peer_id=sender_peer_id,
+        protocol=CHAT_PROTOCOL_ID,
+        conversation_id=conversation_id,
+        text=request.text,
+        priority=request.priority,
+        transport_provider=type(transport).__name__,
+        timestamp_ms=timestamp_ms,
+    )
+
+
+@app.get("/v1/dev/peer-chat/outbox/{peer_id}", response_model=DevPeerChatOutboxResponse)
+async def dev_get_peer_chat_outbox(
+    peer_id: str,
+    user_id: CurrentUser,
+    lease_ms: int | None = Query(default=None, ge=0, le=120000),
+) -> DevPeerChatOutboxResponse:
+    """Fetch queued outbound dev peer chat messages for a handset peer id."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat outbox is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+    )
+
+    policy = dev_peer_chat_service.get_handset_delivery_policy(peer_id)
+    summary = dev_peer_chat_service.summarize_outbound_messages(peer_id)
+    preview_messages = dev_peer_chat_service.preview_outbound_messages(peer_id)
+    messages = dev_peer_chat_service.fetch_outbound_messages(peer_id, lease_ms=lease_ms)
+    dev_peer_chat_service.record_handset_heartbeat(peer_id, fetched_outbox=True)
+    return DevPeerChatOutboxResponse(
+        peer_id=peer_id,
+        delivery_mode=policy["delivery_mode"],
+        recommended_lease_ms=policy["recommended_lease_ms"],
+        recommended_poll_ms=policy["recommended_poll_ms"],
+        queued_total=summary["queued_total"],
+        queued_urgent=summary["queued_urgent"],
+        queued_normal=summary["queued_normal"],
+        deliverable_now=summary["deliverable_now"],
+        held_now=summary["held_now"],
+        messages=messages,
+        preview_messages=preview_messages,
+    )
+
+
+@app.get(
+    "/v1/dev/peer-chat/outbox/{peer_id}/status",
+    response_model=DevPeerChatOutboxResponse,
+)
+async def dev_get_peer_chat_outbox_status(
+    peer_id: str,
+    user_id: CurrentUser,
+) -> DevPeerChatOutboxResponse:
+    """Return queued outbox status without leasing or replay side effects."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat outbox status is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    policy = dev_peer_chat_service.get_handset_delivery_policy(peer_id)
+    summary = dev_peer_chat_service.summarize_outbound_messages(peer_id)
+    preview_messages = dev_peer_chat_service.preview_outbound_messages(peer_id)
+    return DevPeerChatOutboxResponse(
+        peer_id=peer_id,
+        delivery_mode=policy["delivery_mode"],
+        recommended_lease_ms=policy["recommended_lease_ms"],
+        recommended_poll_ms=policy["recommended_poll_ms"],
+        queued_total=summary["queued_total"],
+        queued_urgent=summary["queued_urgent"],
+        queued_normal=summary["queued_normal"],
+        deliverable_now=summary["deliverable_now"],
+        held_now=summary["held_now"],
+        messages=[],
+        preview_messages=preview_messages,
+    )
+
+
+@app.post(
+    "/v1/dev/peer-chat/outbox/{peer_id}/ack",
+    response_model=DevPeerChatOutboxAckResponse,
+)
+async def dev_ack_peer_chat_outbox(
+    peer_id: str,
+    request: DevPeerChatOutboxAckRequest,
+    user_id: CurrentUser,
+) -> DevPeerChatOutboxAckResponse:
+    """Acknowledge handset-delivered dev peer chat outbox messages."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat outbox ack is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    dev_peer_chat_service.record_handset_heartbeat(peer_id, acknowledged_outbox=True)
+    return DevPeerChatOutboxAckResponse(
+        peer_id=peer_id,
+        acknowledged_message_ids=dev_peer_chat_service.acknowledge_outbound_messages(
+            peer_id,
+            request.outbox_message_ids,
+        ),
+    )
+
+
+@app.post(
+    "/v1/dev/peer-chat/outbox/{peer_id}/release",
+    response_model=DevPeerChatOutboxReleaseResponse,
+)
+async def dev_release_peer_chat_outbox(
+    peer_id: str,
+    request: DevPeerChatOutboxReleaseRequest,
+    user_id: CurrentUser,
+) -> DevPeerChatOutboxReleaseResponse:
+    """Release leased outbox messages so they are deliverable again."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat outbox release is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    return DevPeerChatOutboxReleaseResponse(
+        peer_id=peer_id,
+        released_message_ids=dev_peer_chat_service.release_outbound_leases(
+            peer_id,
+            request.outbox_message_ids,
+        ),
+    )
+
+
+@app.post(
+    "/v1/dev/peer-chat/outbox/{peer_id}/promote",
+    response_model=DevPeerChatOutboxPromoteResponse,
+)
+async def dev_promote_peer_chat_outbox(
+    peer_id: str,
+    request: DevPeerChatOutboxPromoteRequest,
+    user_id: CurrentUser,
+) -> DevPeerChatOutboxPromoteResponse:
+    """Promote queued outbox messages to urgent priority."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat outbox promote is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    return DevPeerChatOutboxPromoteResponse(
+        peer_id=peer_id,
+        promoted_message_ids=dev_peer_chat_service.promote_outbound_messages(
+            peer_id,
+            request.outbox_message_ids,
+        ),
+    )
+
+
+@app.post(
+    "/v1/dev/peer-chat/handsets/{peer_id}/heartbeat",
+    response_model=DevPeerChatHandsetSessionResponse,
+)
+async def dev_record_peer_chat_handset_heartbeat(
+    peer_id: str,
+    request: DevPeerChatHandsetHeartbeatRequest,
+    user_id: CurrentUser,
+) -> DevPeerChatHandsetSessionResponse:
+    """Record a lightweight handset heartbeat for the dev peer chat relay."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat handset heartbeat is only available in dev mode",
+            },
+        )
+
+    if not peer_id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "peer_id must be provided",
+            },
+        )
+
+    return DevPeerChatHandsetSessionResponse(
+        **dev_peer_chat_service.record_handset_heartbeat(
+            peer_id,
+            display_name=request.display_name,
+        )
+    )
+
+
+@app.get(
+    "/v1/dev/peer-chat/handsets/{peer_id}",
+    response_model=DevPeerChatHandsetSessionResponse,
+)
+async def dev_get_peer_chat_handset_session(
+    peer_id: str,
+    user_id: CurrentUser,
+) -> DevPeerChatHandsetSessionResponse:
+    """Get the currently observed handset relay session state."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev peer chat handset status is only available in dev mode",
+            },
+        )
+
+    session = dev_peer_chat_service.get_handset_session(peer_id)
+    if session is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "not_found",
+                "message": f"No handset relay session found for {peer_id}",
+            },
+        )
+
+    return DevPeerChatHandsetSessionResponse(**session)
 
 
 @app.post("/v1/command", response_model=CommandResponse)
@@ -1109,6 +2330,8 @@ async def submit_command(
                 "spoken_text": response.spoken_text,
                 "cards": [card.model_dump() for card in response.cards] if response.cards else [],
             }
+            if response.follow_on_task:
+                enhanced_dict["follow_on_task"] = response.follow_on_task.model_dump()
             if response.pending_action:
                 enhanced_dict["pending_action"] = {
                     "token": response.pending_action.token,
@@ -1160,6 +2383,211 @@ async def submit_command(
     # Clear request ID from context
     clear_request_id()
 
+    return response
+
+
+@app.post("/v1/commands/action", response_model=CommandResponse)
+async def submit_action_command(
+    request: ActionCommandRequest,
+    user_id: CurrentUser,
+    x_session_id: str | None = Header(default=None, alias="X-Session-Id"),
+    x_request_id: str | None = Header(default=None, alias="X-Request-ID"),
+) -> CommandResponse:
+    """Submit a structured action command using a card action ID."""
+    start_time = datetime.now(UTC)
+    set_request_id(x_request_id)
+    session_id = x_session_id or request.idempotency_key
+
+    log_info(
+        logger,
+        "Received action command request",
+        user_id=user_id,
+        session_id=session_id or "none",
+        idempotency_key=request.idempotency_key or "none",
+        action_id=request.action_id,
+        endpoint="/v1/commands/action",
+    )
+
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import get_idempotency_response
+
+        db = get_db()
+        cached_response = get_idempotency_response(db, request.idempotency_key)
+        if cached_response:
+            return CommandResponse(**cached_response)
+        if request.idempotency_key in processed_commands:
+            return processed_commands[request.idempotency_key]
+
+    try:
+        parsed_intent = _parsed_intent_from_action_id(request.action_id, request.params)
+    except ValueError as exc:
+        clear_request_id()
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_action_id",
+                "message": str(exc),
+            },
+        ) from exc
+
+    router = get_command_router()
+    action_session_id = session_id
+    embedded_card = request.params.get("card")
+    task_id = request.params.get("task_id")
+    notification_id = request.params.get("notification_id")
+    if isinstance(embedded_card, dict):
+        title = embedded_card.get("title")
+        if not isinstance(title, str) or not title.strip():
+            clear_request_id()
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail={
+                    "error": "invalid_card_context",
+                    "message": "Embedded card context requires a title",
+                },
+            )
+        action_session_id = action_session_id or "action-card-context"
+        router.seed_navigation_card(action_session_id, embedded_card)
+    elif isinstance(task_id, str) and task_id.strip():
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+        from handsfree.commands.router import _build_result_card
+
+        db = get_db()
+        task = get_agent_task_by_id(db, task_id.strip())
+        if task is None or task.user_id != user_id:
+            clear_request_id()
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "task_not_found",
+                    "message": f"No accessible task found for {task_id}",
+                },
+            )
+        action_session_id = action_session_id or f"action-task-{task.id}"
+        router.seed_navigation_card(action_session_id, _build_result_card(task))
+    elif isinstance(notification_id, str) and notification_id.strip():
+        from handsfree.commands.router import _build_result_card
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+        from handsfree.db.notifications import build_notification_card, get_notification
+
+        db = get_db()
+        notification = get_notification(db, user_id=user_id, notification_id=notification_id.strip())
+        if notification is None:
+            clear_request_id()
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "notification_not_found",
+                    "message": f"No accessible notification found for {notification_id}",
+                },
+            )
+
+        seeded_card: dict[str, Any] | None = None
+        metadata = notification.metadata or {}
+        notification_task_id = metadata.get("task_id")
+        if isinstance(notification_task_id, str) and notification_task_id.strip():
+            task = get_agent_task_by_id(db, notification_task_id.strip())
+            if task is not None and task.user_id == user_id:
+                seeded_card = _build_result_card(task)
+
+        if seeded_card is None:
+            notification_card = build_notification_card(
+                notification.id,
+                notification.event_type,
+                notification.message,
+                notification.metadata,
+            )
+            if notification_card is not None:
+                seeded_card = notification_card
+
+        if seeded_card is None:
+            clear_request_id()
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "notification_context_unavailable",
+                    "message": f"Notification {notification_id} does not include actionable result context",
+                },
+            )
+
+        action_session_id = action_session_id or f"action-notification-{notification.id}"
+        router.seed_navigation_card(action_session_id, seeded_card)
+
+    router_response = router.route(
+        intent=parsed_intent,
+        profile=request.profile,
+        session_id=action_session_id,
+        user_id=user_id,
+        idempotency_key=request.idempotency_key,
+    )
+
+    transcript = f"<action:{request.action_id}>"
+    response = _convert_router_response_to_command_response(
+        router_response,
+        parsed_intent,
+        transcript,
+        request.profile,
+        user_id,
+        request.client_context.privacy_mode,
+    )
+
+    if action_session_id:
+        enhanced_dict = {
+            "status": response.status.value,
+            "intent": {
+                "name": response.intent.name,
+                "confidence": response.intent.confidence,
+                "entities": response.intent.entities,
+            },
+            "spoken_text": response.spoken_text,
+            "cards": [card.model_dump() for card in response.cards] if response.cards else [],
+        }
+        if response.follow_on_task:
+            enhanced_dict["follow_on_task"] = response.follow_on_task.model_dump()
+        if response.pending_action:
+            enhanced_dict["pending_action"] = {
+                "token": response.pending_action.token,
+                "expires_at": response.pending_action.expires_at.isoformat(),
+                "summary": response.pending_action.summary,
+            }
+        router._last_responses[action_session_id] = enhanced_dict
+        if response.cards:
+            items = [
+                {
+                    "type": "card",
+                    "intent_name": response.intent.name,
+                    "data": card.model_dump(),
+                }
+                for card in response.cards
+            ]
+            router._navigation_state[action_session_id] = (items, 0)
+
+    if request.idempotency_key:
+        from handsfree.db.idempotency_keys import store_idempotency_key
+
+        db = get_db()
+        store_idempotency_key(
+            db,
+            key=request.idempotency_key,
+            user_id=user_id,
+            endpoint="/v1/commands/action",
+            response_data=response.model_dump(mode="json"),
+            expires_in_seconds=86400,
+        )
+        processed_commands[request.idempotency_key] = response
+
+    from handsfree.metrics import get_metrics_collector
+
+    end_time = datetime.now(UTC)
+    latency_ms = (end_time - start_time).total_seconds() * 1000
+    metrics = get_metrics_collector()
+    metrics.record_command(
+        intent_name=response.intent.name,
+        status=response.status.value,
+        latency_ms=latency_ms,
+    )
+
+    clear_request_id()
     return response
 
 
@@ -1230,6 +2658,11 @@ def _convert_router_response_direct(
         spoken_text=spoken_text,
         cards=cards,
         pending_action=pending_action,
+        follow_on_task=_extract_follow_on_task(
+            intent_name=intent.name,
+            status=status,
+            entities=intent.entities,
+        ),
         debug=debug,
     )
 
@@ -1395,6 +2828,12 @@ def _convert_router_response_to_command_response(
         spoken_text=spoken_text,
         cards=cards,
         pending_action=pending_action,
+        follow_on_task=_extract_follow_on_task(
+            intent_name=intent.name,
+            status=status,
+            entities=intent.entities,
+            tool_calls=debug.tool_calls,
+        ),
         debug=debug,
     )
 
@@ -1531,6 +2970,11 @@ async def confirm_command(
                                 entities=entities,
                             ),
                             spoken_text=spoken_text,
+                            follow_on_task=_build_follow_on_task(
+                                task_id=result["task_id"],
+                                state=result.get("state"),
+                                provider=result.get("provider"),
+                            ),
                         )
                     except (KeyboardInterrupt, SystemExit):
                         # Re-raise critical exceptions to avoid masking shutdown signals
@@ -2152,6 +3596,11 @@ def _handle_agent_delegate(
                     ],
                 )
             ],
+            follow_on_task=_build_follow_on_task(
+                task_id=task_id,
+                state=result.get("state"),
+                provider=actual_provider,
+            ),
             debug=DebugInfo(transcript=text, tool_calls=[{"task_id": task_id}]),
         )
     except Exception as e:
@@ -2214,8 +3663,39 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
             f"You have {len(tasks)} agent task{'s' if len(tasks) != 1 else ''}: {', '.join(parts)}."
         )
 
+        def render_agent_result_lines(
+            preview: str | None,
+            output: dict[str, Any] | None,
+        ) -> list[str]:
+            lines: list[str] = []
+            if isinstance(output, dict):
+                for key in ("message", "status", "expanded_queries", "target_terms", "seed_urls"):
+                    value = output.get(key)
+                    if value is None:
+                        continue
+                    if isinstance(value, list):
+                        rendered = ", ".join(str(item) for item in value[:3])
+                    else:
+                        rendered = str(value)
+                    if rendered:
+                        lines.append(f"{key}: {rendered}")
+
+                task_info = output.get("task")
+                if isinstance(task_info, dict):
+                    task_status = task_info.get("status")
+                    task_id = task_info.get("task_id")
+                    if task_status:
+                        lines.append(f"task.status: {task_status}")
+                    if task_id:
+                        lines.append(f"task.id: {task_id}")
+
+            if not lines and preview:
+                lines.append(f"Result: {preview}")
+            return lines[:3]
+
         # Build cards for recent tasks
         cards = []
+        tool_calls = []
         for task in tasks[:5]:  # Show top 5 most recent
             state_emoji = {
                 "created": "⏱️",
@@ -2231,15 +3711,28 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
             else:
                 instruction_display = instruction or "No instruction"
 
+            card_lines = [f"Instruction: {instruction_display}"]
+            card_lines.extend(
+                render_agent_result_lines(
+                    task.get("result_preview"),
+                    task.get("result_output"),
+                )
+            )
             cards.append(
                 UICard(
                     title=f"{state_emoji} Task {task['id'][:8]}",
                     subtitle=f"{task['state']} • {task.get('provider', 'unknown')}",
-                    lines=[
-                        f"Instruction: {instruction_display}",
-                    ],
+                    lines=card_lines,
                 )
             )
+            tool_call = {
+                "task_id": task["id"],
+                "provider": task.get("provider"),
+                "state": task["state"],
+            }
+            if task.get("result_output") is not None:
+                tool_call["result_output"] = task["result_output"]
+            tool_calls.append(tool_call)
 
         return CommandResponse(
             status=CommandStatus.OK,
@@ -2250,7 +3743,7 @@ def _handle_agent_status(text: str, device: str, user_id: str) -> CommandRespons
             ),
             spoken_text=spoken_text,
             cards=cards,
-            debug=DebugInfo(transcript=text),
+            debug=DebugInfo(transcript=text, tool_calls=tool_calls),
         )
     except Exception as e:
         return CommandResponse(
@@ -3793,7 +5286,14 @@ async def get_notification_detail(
 @app.get("/v1/agents/tasks")
 async def list_agent_tasks(
     user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
     task_status: str | None = Query(None, alias="status"),
+    provider: str | None = Query(None),
+    capability: str | None = Query(None),
+    result_view: str = Query("full"),
+    results_only: bool = Query(False),
+    sort: str = Query("created_at"),
+    direction: str = Query("desc"),
     limit: int = 100,
     offset: int = 0,
 ) -> JSONResponse:
@@ -3805,6 +5305,12 @@ async def list_agent_tasks(
     Args:
         user_id: User ID extracted from authentication.
         task_status: Optional filter by task status/state (e.g., "created", "running", "completed", "failed").
+        provider: Optional provider filter.
+        capability: Optional normalized MCP capability filter.
+        result_view: One of `full`, `normalized`, or `raw`.
+        results_only: When true, return only completed tasks with MCP result data.
+        sort: Sort field (`created_at` or `updated_at`).
+        direction: Sort direction (`asc` or `desc`).
         limit: Maximum number of tasks to return (default: 100, max: 100).
         offset: Number of tasks to skip for pagination (default: 0).
 
@@ -3850,39 +5356,69 @@ async def list_agent_tasks(
             },
         )
 
+    if result_view not in {"full", "normalized", "raw"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "result_view must be one of: full, normalized, raw",
+            },
+        )
+    if sort not in {"created_at", "updated_at"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "sort must be one of: created_at, updated_at",
+            },
+        )
+    if direction not in {"asc", "desc"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "direction must be one of: asc, desc",
+            },
+        )
+
     db = get_db()
     from handsfree.db.agent_tasks import get_agent_tasks
+    from handsfree.auth import get_auth_mode
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
 
     # Query tasks with filters, fetch one extra to check if there are more
     tasks = get_agent_tasks(
         conn=db,
-        user_id=user_id,
-        state=task_status,
-        limit=limit + 1,
-        offset=offset,
+        user_id=effective_user_id,
+        provider=provider,
+        state="completed" if results_only and task_status is None else task_status,
+        sort_by=sort,
+        direction=direction,
+        limit=1000 if (capability or results_only) else limit + 1,
+        offset=0 if (capability or results_only) else offset,
     )
 
-    # Check if there are more results
-    has_more = len(tasks) > limit
-    if has_more:
-        tasks = tasks[:limit]
+    tasks = _filter_agent_tasks_for_results(
+        tasks,
+        capability=capability,
+        results_only=results_only,
+    )
+    if capability or results_only:
+        tasks, has_more = _paginate_task_list(tasks, limit=limit, offset=offset)
+    else:
+        # Check if there are more results
+        has_more = len(tasks) > limit
+        if has_more:
+            tasks = tasks[:limit]
 
     # Format response
-    task_list = []
-    for task in tasks:
-        task_data = {
-            "id": task.id,
-            "state": task.state,
-            "description": task.instruction or "",
-            "created_at": task.created_at.isoformat() if task.created_at else None,
-            "updated_at": task.updated_at.isoformat() if task.updated_at else None,
-        }
-
-        # Add pr_url if available in trace
-        if task.trace and isinstance(task.trace, dict) and "pr_url" in task.trace:
-            task_data["pr_url"] = task.trace["pr_url"]
-
-        task_list.append(task_data)
+    task_list = [
+        _apply_task_result_view(_serialize_agent_task(task), result_view)
+        for task in tasks
+    ]
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
@@ -3893,15 +5429,318 @@ async def list_agent_tasks(
                 "offset": offset,
                 "has_more": has_more,
             },
+            "filters": {
+                "status": task_status,
+                "provider": provider,
+                "capability": capability,
+                "result_view": result_view,
+                "results_only": results_only,
+                "sort": sort,
+                "direction": direction,
+            },
         },
     )
 
 
-@app.post("/v1/agents/tasks/{task_id}/start")
+@app.get("/v1/agents/tasks/{task_id}")
+async def get_agent_task_detail(
+    task_id: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> JSONResponse:
+    """Get a specific agent task for the current user."""
+    effective_user_id = _resolve_effective_user_id(user_id, x_user_id_raw)
+    db = get_db()
+    task = _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
+
+    task_data = {
+        "id": task.id,
+        "state": task.state,
+        "provider": task.provider,
+        "description": task.instruction or "",
+        "created_at": task.created_at.isoformat() if task.created_at else None,
+        "updated_at": task.updated_at.isoformat() if task.updated_at else None,
+        "target_type": task.target_type,
+        "target_ref": task.target_ref,
+        "trace": task.trace or {},
+    }
+    serialized_task = _serialize_agent_task(task)
+    for key in (
+        "result_preview",
+        "result_output",
+        "result_envelope",
+        "follow_up_actions",
+        "pr_url",
+    ):
+        if key in serialized_task:
+            task_data[key] = serialized_task[key]
+    normalized_result = _normalize_mcp_task_result(task)
+    if normalized_result is not None:
+        task_data["result"] = normalized_result
+
+    return JSONResponse(status_code=status.HTTP_200_OK, content=task_data)
+
+
+def _task_control_response(
+    task_id: str,
+    state: str,
+    message: str,
+    updated_at: str | None = None,
+) -> AgentTaskControlResponse:
+    return AgentTaskControlResponse(
+        task_id=task_id,
+        state=state,
+        message=message,
+        updated_at=updated_at,
+    )
+
+
+@app.get("/v1/agents/results")
+async def list_agent_results(
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+    view: str | None = Query(None),
+    provider: str | None = Query(None),
+    capability: str | None = Query(None),
+    preset: str | None = Query(None),
+    latest_only: bool = Query(False),
+    sort: str = Query("updated_at"),
+    direction: str = Query("desc"),
+    limit: int = 50,
+    offset: int = 0,
+) -> JSONResponse:
+    """List completed MCP-backed task results with normalized payloads."""
+    if limit < 1 or limit > 100:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "limit must be between 1 and 100",
+            },
+        )
+    if offset < 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "offset must be non-negative",
+            },
+        )
+    if sort not in {"created_at", "updated_at"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "sort must be one of: created_at, updated_at",
+            },
+        )
+    if direction not in {"asc", "desc"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": "direction must be one of: asc, desc",
+            },
+        )
+
+    try:
+        resolved_query = resolve_result_query(
+            view=view,
+            provider=provider,
+            capability=capability,
+            preset=preset,
+            latest_only=latest_only,
+            sort=sort,
+            direction=direction,
+        )
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_parameter",
+                "message": str(exc),
+            },
+        ) from exc
+    view = resolved_query["view"]
+    provider = resolved_query["provider"]
+    capability = resolved_query["capability"]
+    preset = resolved_query["preset"]
+    latest_only = resolved_query["latest_only"]
+    sort = resolved_query["sort"]
+    direction = resolved_query["direction"]
+
+    db = get_db()
+    from handsfree.auth import get_auth_mode
+    from handsfree.db.agent_tasks import get_agent_tasks
+
+    effective_user_id = user_id
+    if get_auth_mode() == "dev" and x_user_id_raw:
+        effective_user_id = x_user_id_raw
+
+    tasks = get_agent_tasks(
+        conn=db,
+        user_id=effective_user_id,
+        provider=provider,
+        state="completed",
+        sort_by=sort,
+        direction=direction,
+        limit=1000,
+        offset=0,
+    )
+    tasks = _filter_agent_tasks_for_results(
+        tasks,
+        capability=capability,
+        results_only=True,
+    )
+    summary = _summarize_result_tasks(tasks)
+    if latest_only:
+        tasks = _latest_tasks_by_result_key(tasks)
+    tasks, has_more = _paginate_task_list(tasks, limit=limit, offset=offset)
+
+    results: list[dict[str, Any]] = []
+    for task in tasks:
+        task_data = _serialize_agent_task(task)
+        results.append(
+            {
+                "task_id": task.id,
+                "provider": task.provider,
+                "state": task.state,
+                "description": task.instruction or "",
+                "created_at": task.created_at.isoformat() if task.created_at else None,
+                "updated_at": task.updated_at.isoformat() if task.updated_at else None,
+                "result": task_data.get("result"),
+                "result_preview": task_data.get("result_preview"),
+                "result_output": task_data.get("result_output"),
+            }
+        )
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "results": results,
+            "pagination": {
+                "limit": limit,
+                "offset": offset,
+                "has_more": has_more,
+            },
+            "summary": summary,
+            "filters": {
+                "view": view,
+                "provider": provider,
+                "capability": capability,
+                "preset": preset,
+                "latest_only": latest_only,
+                "sort": sort,
+                "direction": direction,
+            },
+        },
+    )
+
+
+@app.post("/v1/agents/tasks/{task_id}/pause", response_model=AgentTaskControlResponse)
+async def pause_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> AgentTaskControlResponse:
+    """Pause a running task for the current user."""
+    from handsfree.agents.service import AgentService
+
+    effective_user_id = _resolve_effective_user_id(user_id, x_user_id_raw)
+    db = get_db()
+    _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.pause_task(user_id=effective_user_id, task_id=task_id)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_transition",
+                "message": str(exc),
+            },
+        ) from exc
+
+    return _task_control_response(
+        task_id=result["task_id"],
+        state=result["state"],
+        message="Task paused successfully",
+        updated_at=result.get("updated_at"),
+    )
+
+
+@app.post("/v1/agents/tasks/{task_id}/resume", response_model=AgentTaskControlResponse)
+async def resume_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> AgentTaskControlResponse:
+    """Resume a paused task for the current user."""
+    from handsfree.agents.service import AgentService
+
+    effective_user_id = _resolve_effective_user_id(user_id, x_user_id_raw)
+    db = get_db()
+    _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.resume_task(user_id=effective_user_id, task_id=task_id)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_transition",
+                "message": str(exc),
+            },
+        ) from exc
+
+    return _task_control_response(
+        task_id=result["task_id"],
+        state=result["state"],
+        message="Task resumed successfully",
+        updated_at=result.get("updated_at"),
+    )
+
+
+@app.post("/v1/agents/tasks/{task_id}/cancel", response_model=AgentTaskControlResponse)
+async def cancel_agent_task(
+    task_id: str,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> AgentTaskControlResponse:
+    """Cancel an active task for the current user."""
+    from handsfree.agents.service import AgentService
+
+    effective_user_id = _resolve_effective_user_id(user_id, x_user_id_raw)
+    db = get_db()
+    _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
+    agent_service = AgentService(db)
+
+    try:
+        result = agent_service.cancel_task(user_id=effective_user_id, task_id=task_id)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_transition",
+                "message": str(exc),
+            },
+        ) from exc
+
+    return _task_control_response(
+        task_id=result["task_id"],
+        state=result["state"],
+        message="Task cancelled successfully",
+        updated_at=result.get("updated_at"),
+    )
+
+
+@app.post("/v1/agents/tasks/{task_id}/start", response_model=AgentTaskControlResponse)
 async def start_agent_task(
     task_id: str,
     user_id: CurrentUser,
-) -> JSONResponse:
+) -> AgentTaskControlResponse:
     """Start an agent task (dev-only endpoint).
 
     Transitions a task from 'created' to 'running' state.
@@ -3946,14 +5785,11 @@ async def start_agent_task(
             },
         )
 
-        return JSONResponse(
-            status_code=status.HTTP_200_OK,
-            content={
-                "task_id": result["task_id"],
-                "state": result["state"],
-                "updated_at": result["updated_at"],
-                "message": "Task started successfully",
-            },
+        return _task_control_response(
+            task_id=result["task_id"],
+            state=result["state"],
+            message="Task started successfully",
+            updated_at=result.get("updated_at"),
         )
     except ValueError as e:
         if "not found" in str(e).lower():
@@ -3974,11 +5810,11 @@ async def start_agent_task(
             ) from e
 
 
-@app.post("/v1/agents/tasks/{task_id}/complete")
+@app.post("/v1/agents/tasks/{task_id}/complete", response_model=AgentTaskControlResponse)
 async def complete_agent_task(
     task_id: str,
     user_id: CurrentUser,
-) -> JSONResponse:
+) -> AgentTaskControlResponse:
     """Complete an agent task (dev-only endpoint).
 
     Transitions a task from 'running' to 'completed' state.
@@ -4024,14 +5860,11 @@ async def complete_agent_task(
             },
         )
 
-        return JSONResponse(
-            status_code=status.HTTP_200_OK,
-            content={
-                "task_id": result["task_id"],
-                "state": result["state"],
-                "updated_at": result["updated_at"],
-                "message": "Task completed successfully",
-            },
+        return _task_control_response(
+            task_id=result["task_id"],
+            state=result["state"],
+            message="Task completed successfully",
+            updated_at=result.get("updated_at"),
         )
     except ValueError as e:
         if "not found" in str(e).lower():
@@ -4052,11 +5885,11 @@ async def complete_agent_task(
             ) from e
 
 
-@app.post("/v1/agents/tasks/{task_id}/fail")
+@app.post("/v1/agents/tasks/{task_id}/fail", response_model=AgentTaskControlResponse)
 async def fail_agent_task(
     task_id: str,
     user_id: CurrentUser,
-) -> JSONResponse:
+) -> AgentTaskControlResponse:
     """Fail an agent task (dev-only endpoint).
 
     Transitions a task to 'failed' state from 'created', 'running', or 'needs_input'.
@@ -4102,14 +5935,11 @@ async def fail_agent_task(
             },
         )
 
-        return JSONResponse(
-            status_code=status.HTTP_200_OK,
-            content={
-                "task_id": result["task_id"],
-                "state": result["state"],
-                "updated_at": result["updated_at"],
-                "message": "Task failed successfully",
-            },
+        return _task_control_response(
+            task_id=result["task_id"],
+            state=result["state"],
+            message="Task failed successfully",
+            updated_at=result.get("updated_at"),
         )
     except ValueError as e:
         if "not found" in str(e).lower():
@@ -4270,3 +6100,13 @@ async def revoke_api_key(
     logger.info("API key %s revoked successfully", key_id)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@app.get("/v1/admin/ai/backend-policy", response_model=AIBackendPolicyReport)
+async def get_ai_backend_policy_report(
+    user_id: CurrentUser,
+    limit: int = Query(default=200, ge=1, le=1000),
+) -> AIBackendPolicyReport:
+    """Return current AI backend policy and recent workflow remap counts."""
+    db = get_db()
+    return build_ai_backend_policy_report(db, user_id=user_id, limit=limit)

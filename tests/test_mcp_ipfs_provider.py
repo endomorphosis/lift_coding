@@ -167,6 +167,7 @@ class TestMCPIPFSProviders:
         assert result["trace"]["provider"] == "ipfs_datasets_mcp"
         assert result["trace"]["mcp_request_id"] == "req-123"
         assert result["trace"]["mcp_run_id"] is None
+        assert result["trace"]["mcp_execution_mode"] == "mcp_remote"
         assert result["trace"]["mcp_sync_completed"] is False
         assert result["trace"]["mcp_remote_task_id"] == "remote-task-123"
         assert result["trace"]["tool_name"] == "tools_dispatch"
@@ -320,22 +321,223 @@ class TestMCPIPFSProviders:
             },
         )
 
+    def test_ipfs_kit_direct_import_pin_uses_local_adapter(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+
+        class _FakeKitAdapter:
+            def pin(self, cid: str, **kwargs):
+                return {"ok": True, "cid": cid, "mode": "pin", "options": kwargs}
+
+            def unpin(self, cid: str, **kwargs):
+                return {"ok": True, "cid": cid, "mode": "unpin", "options": kwargs}
+
+        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        client = _FakeMCPClient()
+        provider = IPFSKitMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-128",
+            instruction="pin bafy123",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "ipfs_pin",
+                "mcp_cid": "bafy123",
+                "mcp_pin_action": "pin",
+                "mcp_preferred_execution_mode": "direct_import",
+            },
+        )
+
         result = provider.start_task(task)
 
         assert result["ok"] is True
-        assert result["trace"]["tool_name"] == "tools_dispatch"
+        assert result["trace"]["mcp_execution_mode"] == "direct_import"
         assert result["trace"]["mcp_sync_completed"] is True
-        assert provider._client.calls[-1] == (  # type: ignore[union-attr]
-            "tools_dispatch",
-            {
-                "category": "web_archive_tools",
-                "tool_name": "unified_agentic_discover_and_fetch",
-                "parameters": {
-                    "seed_urls": ["https://example.com"],
-                    "target_terms": ["climate regulations"],
-                },
+        assert result["trace"]["tool_name"] == "ipfs_kit.pin"
+        assert result["trace"]["mcp_result_output"] == {
+            "ok": True,
+            "cid": "bafy123",
+            "mode": "pin",
+            "options": {},
+        }
+        assert client.calls == []
+
+    def test_ipfs_kit_direct_import_add_uses_local_adapter(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+
+        class _FakeKitAdapter:
+            def add_bytes(self, data: bytes, **kwargs):
+                return {"cid": "bafyadd123", "size": len(data), "options": kwargs}
+
+        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        client = _FakeMCPClient()
+        provider = IPFSKitMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-128c",
+            instruction="save content to ipfs",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "ipfs_add",
+                "mcp_input": "hello ipfs",
+                "mcp_preferred_execution_mode": "direct_import",
             },
         )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is True
+        assert result["trace"]["mcp_execution_mode"] == "direct_import"
+        assert result["trace"]["mcp_cid"] == "bafyadd123"
+        assert result["trace"]["tool_name"] == "ipfs_kit.add_bytes"
+        assert result["trace"]["mcp_result_output"]["cid"] == "bafyadd123"
+        assert client.calls == []
+
+    def test_ipfs_kit_direct_import_cat_uses_local_adapter(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+
+        class _FakeKitAdapter:
+            def cat(self, cid: str, **kwargs):
+                return b"hello from ipfs"
+
+        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        client = _FakeMCPClient()
+        provider = IPFSKitMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-128d",
+            instruction="read bafycat123",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "ipfs_cat",
+                "mcp_cid": "bafycat123",
+                "mcp_preferred_execution_mode": "direct_import",
+            },
+        )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is True
+        assert result["trace"]["mcp_execution_mode"] == "direct_import"
+        assert result["trace"]["tool_name"] == "ipfs_kit.cat"
+        assert result["trace"]["mcp_result_output"] == {
+            "cid": "bafycat123",
+            "content": "hello from ipfs",
+        }
+        assert client.calls == []
+
+    def test_ipfs_kit_remote_only_policy_disables_direct_import(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+        monkeypatch.setenv("HANDSFREE_MCP_IPFS_KIT_ALLOW_DIRECT_EXECUTION", "false")
+
+        client = _FakeMCPClient()
+        provider = IPFSKitMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-128e",
+            instruction="pin bafy123",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "ipfs_pin",
+                "mcp_cid": "bafy123",
+                "mcp_pin_action": "pin",
+                "mcp_preferred_execution_mode": "direct_import",
+            },
+        )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is True
+        assert result["trace"]["mcp_execution_mode"] == "mcp_remote"
+        assert client.calls[-1] == ("ipfs_pin_add", {"cid": "bafy123"})
+
+    def test_ipfs_kit_env_preferred_mode_uses_local_adapter(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+        monkeypatch.setenv("HANDSFREE_MCP_IPFS_KIT_PREFERRED_EXECUTION_MODE", "direct_import")
+
+        class _FakeKitAdapter:
+            def pin(self, cid: str, **kwargs):
+                return {"ok": True, "cid": cid, "mode": "pin", "options": kwargs}
+
+            def unpin(self, cid: str, **kwargs):
+                return {"ok": True, "cid": cid, "mode": "unpin", "options": kwargs}
+
+        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        client = _FakeMCPClient()
+        provider = IPFSKitMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-128b",
+            instruction="pin bafy999",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "ipfs_pin",
+                "mcp_cid": "bafy999",
+                "mcp_pin_action": "pin",
+            },
+        )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is True
+        assert result["trace"]["mcp_execution_mode"] == "direct_import"
+        assert result["trace"]["mcp_result_output"]["cid"] == "bafy999"
+        assert client.calls == []
+
+    def test_ipfs_datasets_direct_import_embedding_uses_local_router(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
+
+        class _FakeEmbeddingsRouter:
+            def embed_text(self, text: str, **kwargs):
+                return [float(len(text))]
+
+            def embed_texts(self, texts: list[str], **kwargs):
+                return [[float(len(text))] for text in texts]
+
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_embeddings_router",
+            lambda: _FakeEmbeddingsRouter(),
+        )
+        client = _FakeMCPClient()
+        provider = IPFSDatasetsMCPAgentProvider(client=client)
+        task = SimpleNamespace(
+            id="task-129",
+            instruction="embed this text",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "embedding",
+                "mcp_input": "labor law",
+                "mcp_preferred_execution_mode": "direct_import",
+            },
+        )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is True
+        assert result["trace"]["mcp_execution_mode"] == "direct_import"
+        assert result["trace"]["mcp_sync_completed"] is True
+        assert result["trace"]["tool_name"] == "ipfs_datasets.embed_text"
+        assert result["trace"]["mcp_result_output"] == [9.0]
+        assert client.calls == []
+
+    def test_ipfs_kit_rejects_capability_from_other_provider(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP", "true")
+        provider = IPFSKitMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-128",
+            instruction="find legal datasets",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "mcp_capability": "dataset_discovery",
+            },
+        )
+
+        result = provider.start_task(task)
+
+        assert result["ok"] is False
+        assert result["status"] == "failed"
+        assert "not supported" in result["message"]
 
 
 class TestMCPAgentParserAndService:
@@ -403,8 +605,19 @@ class TestMCPAgentParserAndService:
         task = get_agent_task_by_id(db_conn, result["task_id"])
 
         assert status["by_state"]["completed"] == 1
+        assert status["tasks"][0]["result_preview"] == "Expanded legal query"
+        assert status["tasks"][0]["result_output"]["expanded_queries"] == [
+            "find legal datasets",
+            "find legal datasets statutes",
+        ]
         assert task is not None
         assert task.state == "completed"
+        assert task.trace is not None
+        assert task.trace["mcp_result_preview"] == "Expanded legal query"
+        assert task.trace["mcp_result_output"]["expanded_queries"] == [
+            "find legal datasets",
+            "find legal datasets statutes",
+        ]
 
 
 class TestMCPClientJSONRPC:

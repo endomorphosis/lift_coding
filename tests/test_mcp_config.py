@@ -51,6 +51,14 @@ class TestMCPConfig:
         assert config.task_status_tool == "get_task_status"
         assert config.task_cancel_tool == "manage_background_tasks"
 
+    def test_config_reads_preferred_execution_mode(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_MCP_IPFS_KIT_URL", "http://localhost:8011")
+        monkeypatch.setenv("HANDSFREE_MCP_IPFS_KIT_PREFERRED_EXECUTION_MODE", "direct_import")
+
+        config = get_mcp_server_config("ipfs_kit")
+
+        assert config.preferred_execution_mode == "direct_import"
+
     def test_provider_enablement_defaults_true(self, monkeypatch):
         monkeypatch.delenv("HANDSFREE_MCP_ENABLED", raising=False)
         monkeypatch.delenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", raising=False)

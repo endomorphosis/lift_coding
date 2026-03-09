@@ -53,9 +53,13 @@ def get_transport_provider() -> TransportProvider:
         return _stub_fallback()
     if provider_type == "libp2p_bluetooth":
         try:
+            from handsfree.db.connection import init_db
+            from handsfree.db.transport_session_cursors import DuckDBTransportSessionStore
             from handsfree.transport.libp2p_bluetooth import Libp2pBluetoothTransport
 
-            provider = Libp2pBluetoothTransport()
+            provider = Libp2pBluetoothTransport(
+                session_store=DuckDBTransportSessionStore(lambda: init_db())
+            )
             provider.start()
             return provider
         except ImportError as exc:

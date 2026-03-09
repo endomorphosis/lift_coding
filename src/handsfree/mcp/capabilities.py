@@ -6,7 +6,18 @@ from dataclasses import dataclass
 from typing import Any
 
 from .client import MCPConfigurationError
-from .models import MCPServerConfig
+from .catalog import (
+    resolve_capability_execution_mode,
+    resolve_provider_capability,
+    resolve_provider_name_for_server_family,
+)
+from .models import (
+    MCPArtifactRefs,
+    MCPExecutionResultEnvelope,
+    MCPExecutionTrace,
+    MCPServerConfig,
+    MCPToolInvocationResult,
+)
 
 
 @dataclass(frozen=True)
@@ -26,6 +37,197 @@ class MCPTaskBinding:
     cancel_call: MCPToolCall | None = None
     remote_id_field: str | None = None
     supports_remote_status: bool = False
+    capability_id: str | None = None
+    execution_mode: str | None = None
+
+
+def build_result_envelope(
+    *,
+    provider_name: str,
+    server_family: str,
+    capability_id: str | None,
+    execution_mode: str,
+    status: str,
+    tool_name: str | None,
+    spoken_text: str | None = None,
+    summary: str | None = None,
+    structured_output: Any = None,
+    request_id: str | None = None,
+    run_id: str | None = None,
+    remote_task_id: str | None = None,
+    last_protocol_state: str | None = None,
+    artifact_refs: MCPArtifactRefs | None = None,
+    provider_profiles: tuple[str, ...] = (),
+    follow_up_actions: list[dict[str, Any]] | None = None,
+    needs_input_schema: dict[str, Any] | None = None,
+) -> MCPExecutionResultEnvelope:
+    """Build a canonical HandsFree result envelope."""
+    normalized_status = _normalize_envelope_status(status)
+    resolved_summary = (summary or spoken_text or _infer_summary(structured_output) or "").strip()
+    resolved_spoken_text = (spoken_text or resolved_summary or _default_spoken_text(normalized_status)).strip()
+    return MCPExecutionResultEnvelope(
+        capability_id=capability_id,
+        provider=provider_name,
+        server_family=server_family,
+        execution_mode=execution_mode,
+        status=normalized_status,
+        spoken_text=resolved_spoken_text,
+        summary=resolved_summary or resolved_spoken_text,
+        structured_output=structured_output,
+        follow_up_actions=list(follow_up_actions or ()),
+        artifact_refs=artifact_refs or _artifact_refs_from_output(structured_output),
+        trace=MCPExecutionTrace(
+            request_id=request_id,
+            run_id=run_id,
+            remote_task_id=remote_task_id,
+            tool_name=tool_name,
+            last_protocol_state=last_protocol_state or normalized_status,
+            provider_profiles=provider_profiles,
+        ),
+        needs_input_schema=needs_input_schema,
+    )
+
+
+def build_result_envelope_from_invocation(
+    *,
+    provider_name: str,
+    server_family: str,
+    capability_id: str | None,
+    execution_mode: str,
+    invocation: MCPToolInvocationResult,
+    remote_task_id: str | None = None,
+    status: str | None = None,
+) -> MCPExecutionResultEnvelope:
+    """Build an execution envelope from an MCP invocation result."""
+    resolved_status = status or invocation.output.get("status") or invocation.status
+    return build_result_envelope(
+        provider_name=provider_name,
+        server_family=server_family,
+        capability_id=capability_id,
+        execution_mode=execution_mode,
+        status=str(resolved_status),
+        tool_name=invocation.tool_name,
+        spoken_text=_extract_message(invocation.output, invocation.content),
+        structured_output=invocation.output,
+        request_id=invocation.request_id,
+        run_id=invocation.run_id,
+        remote_task_id=remote_task_id,
+        last_protocol_state=str(invocation.output.get("status") or invocation.status),
+    )
+
+
+def envelope_to_trace(envelope: MCPExecutionResultEnvelope) -> dict[str, Any]:
+    """Project a canonical envelope into the task-trace representation."""
+    return {
+        "mcp_result_envelope": {
+            "capability_id": envelope.capability_id,
+            "provider": envelope.provider,
+            "server_family": envelope.server_family,
+            "execution_mode": envelope.execution_mode,
+            "status": envelope.status,
+            "spoken_text": envelope.spoken_text,
+            "summary": envelope.summary,
+            "structured_output": envelope.structured_output,
+            "follow_up_actions": envelope.follow_up_actions,
+            "artifact_refs": {
+                "result_cid": envelope.artifact_refs.result_cid,
+                "receipt_ref": envelope.artifact_refs.receipt_ref,
+                "event_dag_ref": envelope.artifact_refs.event_dag_ref,
+                "delegation_ref": envelope.artifact_refs.delegation_ref,
+            },
+            "trace": {
+                "request_id": envelope.trace.request_id,
+                "run_id": envelope.trace.run_id,
+                "remote_task_id": envelope.trace.remote_task_id,
+                "tool_name": envelope.trace.tool_name,
+                "last_protocol_state": envelope.trace.last_protocol_state,
+                "provider_profiles": list(envelope.trace.provider_profiles),
+            },
+            "needs_input_schema": envelope.needs_input_schema,
+        },
+        "mcp_result_preview": envelope.summary,
+        "mcp_result_output": envelope.structured_output,
+        "mcp_request_id": envelope.trace.request_id,
+        "mcp_run_id": envelope.trace.run_id,
+        "mcp_remote_task_id": envelope.trace.remote_task_id,
+        "tool_name": envelope.trace.tool_name,
+        "last_protocol_state": envelope.trace.last_protocol_state,
+        "mcp_result_cid": envelope.artifact_refs.result_cid,
+        "mcp_receipt_ref": envelope.artifact_refs.receipt_ref,
+        "mcp_event_dag_ref": envelope.artifact_refs.event_dag_ref,
+        "mcp_delegation_ref": envelope.artifact_refs.delegation_ref,
+        "mcp_follow_up_actions": envelope.follow_up_actions,
+        "mcp_needs_input_schema": envelope.needs_input_schema,
+    }
+
+
+def _normalize_envelope_status(status: str | None) -> str:
+    normalized = (status or "").strip().lower()
+    if normalized in {"completed", "success", "succeeded"}:
+        return "completed"
+    if normalized in {"needs_input", "requires_input", "awaiting_input"}:
+        return "needs_input"
+    if normalized in {"failed", "error", "cancelled", "canceled"}:
+        return "failed"
+    if normalized:
+        return "running"
+    return "running"
+
+
+def _default_spoken_text(status: str) -> str:
+    if status == "completed":
+        return "Task completed."
+    if status == "needs_input":
+        return "I need more information."
+    if status == "failed":
+        return "Task failed."
+    return "Task started."
+
+
+def _extract_message(output: Any, content: list[dict[str, Any]]) -> str | None:
+    if isinstance(output, dict):
+        for key in ("message", "detail", "summary"):
+            value = output.get(key)
+            if isinstance(value, str) and value.strip():
+                return value
+    for item in content:
+        if not isinstance(item, dict):
+            continue
+        text = item.get("text")
+        if isinstance(text, str) and text.strip():
+            return text.strip()
+    return None
+
+
+def _infer_summary(structured_output: Any) -> str | None:
+    if isinstance(structured_output, dict):
+        for key in ("message", "summary", "detail"):
+            value = structured_output.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+        cid = structured_output.get("cid")
+        if isinstance(cid, str) and cid.strip():
+            return f"Result CID {cid.strip()}"
+    return None
+
+
+def _artifact_refs_from_output(structured_output: Any) -> MCPArtifactRefs:
+    if not isinstance(structured_output, dict):
+        return MCPArtifactRefs()
+    return MCPArtifactRefs(
+        result_cid=_first_str(structured_output, "cid", "ipfs_cid", "result_cid"),
+        receipt_ref=_first_str(structured_output, "receipt_cid", "receipt_ref"),
+        event_dag_ref=_first_str(structured_output, "event_dag_cid", "event_dag_ref"),
+        delegation_ref=_first_str(structured_output, "delegation_cid", "delegation_ref"),
+    )
+
+
+def _first_str(data: dict[str, Any], *keys: str) -> str | None:
+    for key in keys:
+        value = data.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
 
 
 def resolve_task_binding(
@@ -36,26 +238,112 @@ def resolve_task_binding(
     remote_task_id: str | None = None,
 ) -> MCPTaskBinding:
     """Resolve the start/status/cancel tools for a provider family."""
+    provider_name = _resolve_provider_name(server_family, base_arguments)
+    requested_capability = str(base_arguments.get("mcp_capability") or "").strip().lower() or None
+    resolved_capability = _resolve_capability(
+        provider_name=provider_name,
+        requested_capability=requested_capability,
+        instruction=str(base_arguments.get("instruction") or ""),
+    )
+    resolved_execution_mode = (
+        resolve_capability_execution_mode(
+            provider_name,
+            resolved_capability,
+            preferred_mode=str(
+                base_arguments.get("mcp_preferred_execution_mode")
+                or base_arguments.get("mcp_execution_mode")
+                or config.preferred_execution_mode
+                or ""
+            ),
+        )
+        if provider_name
+        else None
+    )
+    normalized_arguments = dict(base_arguments)
+    if resolved_capability:
+        normalized_arguments["mcp_capability"] = resolved_capability
+
     if server_family == "ipfs_datasets":
-        return _resolve_ipfs_datasets_binding(
+        return _with_binding_metadata(
+            _resolve_ipfs_datasets_binding(
             config=config,
-            base_arguments=base_arguments,
+            base_arguments=normalized_arguments,
             remote_task_id=remote_task_id,
             status_tool_default="get_task_status",
+            ),
+            capability_id=resolved_capability,
+            execution_mode=resolved_execution_mode,
         )
 
     if server_family == "ipfs_accelerate":
-        return _resolve_ipfs_accelerate_binding(
+        return _with_binding_metadata(
+            _resolve_ipfs_accelerate_binding(
             config=config,
-            base_arguments=base_arguments,
+            base_arguments=normalized_arguments,
             remote_task_id=remote_task_id,
             status_tool_default="get_task_status",
+            ),
+            capability_id=resolved_capability,
+            execution_mode=resolved_execution_mode,
         )
 
     if server_family == "ipfs_kit":
-        return _resolve_ipfs_kit_binding(config=config, base_arguments=base_arguments)
+        return _with_binding_metadata(
+            _resolve_ipfs_kit_binding(config=config, base_arguments=normalized_arguments),
+            capability_id=resolved_capability,
+            execution_mode=resolved_execution_mode,
+        )
 
     raise MCPConfigurationError(f"Unsupported MCP server family: {server_family}")
+
+
+def _resolve_provider_name(server_family: str, base_arguments: dict[str, Any]) -> str | None:
+    provider_name = str(base_arguments.get("provider") or "").strip().lower()
+    if provider_name:
+        return provider_name
+    return resolve_provider_name_for_server_family(server_family)
+
+
+def _resolve_capability(
+    *,
+    provider_name: str | None,
+    requested_capability: str | None,
+    instruction: str,
+) -> str | None:
+    del instruction
+
+    if not requested_capability:
+        return None
+
+    if not provider_name:
+        return requested_capability
+
+    resolved_capability = resolve_provider_capability(
+        provider_name,
+        requested_capability=requested_capability,
+    )
+    if requested_capability and resolved_capability is None:
+        raise MCPConfigurationError(
+            f"Capability '{requested_capability}' is not supported by provider '{provider_name}'"
+        )
+    return resolved_capability
+
+
+def _with_binding_metadata(
+    binding: MCPTaskBinding,
+    *,
+    capability_id: str | None,
+    execution_mode: str | None,
+) -> MCPTaskBinding:
+    return MCPTaskBinding(
+        start_call=binding.start_call,
+        status_call=binding.status_call,
+        cancel_call=binding.cancel_call,
+        remote_id_field=binding.remote_id_field,
+        supports_remote_status=binding.supports_remote_status,
+        capability_id=capability_id,
+        execution_mode=execution_mode,
+    )
 
 
 def _resolve_meta_dispatch_binding(

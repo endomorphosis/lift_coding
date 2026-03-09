@@ -11,11 +11,16 @@ import {
   Platform,
 } from 'react-native';
 import { Audio } from 'expo-av';
+import UICardList from '../components/UICardList';
 import {
+  getAgentTaskDetail,
   getStatus,
+  getNotificationDetail,
   listRepoSubscriptions,
   createRepoSubscription,
   deleteRepoSubscription,
+  postAgentTaskControl,
+  sendActionCommand,
   sendTestPullRequestOpenedWebhook,
 } from '../api/client';
 import {
@@ -32,8 +37,17 @@ import ProfileSelector from '../components/ProfileSelector';
 import { getProfile, setProfile } from '../storage/profileStorage';
 import AudioSourceSelector from '../components/AudioSourceSelector';
 import { useAudioSource } from '../hooks/useAudioSource';
+import { buildAgentNotificationCard } from '../utils/agentCards';
+import {
+  buildNotificationPreview,
+  isActiveTaskNotification,
+  mergeNotificationTaskDetail,
+} from '../utils/notificationCards';
+import { applyNotificationTaskControlResponse } from '../utils/taskControlState';
 
-export default function StatusScreen() {
+const ACTIVE_NOTIFICATION_POLL_INTERVAL_MS = 5000;
+
+export default function StatusScreen({ navigation }) {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -46,6 +60,7 @@ export default function StatusScreen() {
   const [subscriptionId, setSubscriptionId] = useState(null);
   const [pushLoading, setPushLoading] = useState(false);
   const [lastNotification, setLastNotification] = useState(null);
+  const [notificationActionLoading, setNotificationActionLoading] = useState(false);
 
   // Repo subscriptions (used to map webhooks -> users)
   const [repoSubscriptions, setRepoSubscriptions] = useState([]);
@@ -148,6 +163,11 @@ export default function StatusScreen() {
     try {
       const notification = await checkAndSpeakLatestNotification();
       if (notification) {
+        const normalized = buildNotificationPreview(notification);
+        setLastNotification(normalized);
+        if (normalized?.id) {
+          await loadNotificationDetail(normalized.id);
+        }
         Alert.alert('Success', 'Spoke latest notification via TTS!');
       } else {
         Alert.alert('No Notifications', 'No notifications available to speak.');
@@ -268,6 +288,83 @@ export default function StatusScreen() {
     }
   };
 
+  const loadNotificationDetail = async (notificationId) => {
+    if (!notificationId) return null;
+    try {
+      const detail = await getNotificationDetail(notificationId);
+      let normalized = buildNotificationPreview(detail);
+      if (isActiveTaskNotification(normalized)) {
+        const taskId = normalized?.metadata?.task_id || normalized?.card?.task_id;
+        if (taskId) {
+          try {
+            const taskDetail = await getAgentTaskDetail(taskId);
+            normalized = mergeNotificationTaskDetail(normalized, taskDetail);
+          } catch (taskErr) {
+            // Keep notification detail even if the task refresh fails.
+          }
+        }
+      }
+      setLastNotification(normalized);
+      return normalized;
+    } catch (err) {
+      console.log('Could not load notification detail:', err.message);
+      return null;
+    }
+  };
+
+  const handleNotificationAction = async (actionItem) => {
+    const notificationId = lastNotification?.id;
+    const taskId = lastNotification?.metadata?.task_id || lastNotification?.card?.task_id;
+    if (!actionItem?.id || !notificationId) {
+      Alert.alert('Action Unavailable', 'This notification action is missing context.');
+      return;
+    }
+
+    setNotificationActionLoading(true);
+    try {
+      if (actionItem.id === 'mobile_pause_task' && taskId) {
+        const response = await postAgentTaskControl(taskId, 'pause');
+        setLastNotification((current) => applyNotificationTaskControlResponse(current, response));
+        Alert.alert('Task Paused', response.message || 'Task paused successfully.');
+        return;
+      }
+      if (actionItem.id === 'mobile_resume_task' && taskId) {
+        const response = await postAgentTaskControl(taskId, 'resume');
+        setLastNotification((current) => applyNotificationTaskControlResponse(current, response));
+        Alert.alert('Task Resumed', response.message || 'Task resumed successfully.');
+        return;
+      }
+      if (actionItem.id === 'mobile_cancel_task' && taskId) {
+        const response = await postAgentTaskControl(taskId, 'cancel');
+        setLastNotification((current) => applyNotificationTaskControlResponse(current, response));
+        Alert.alert('Task Cancelled', response.message || 'Task cancelled successfully.');
+        return;
+      }
+
+      const response = await sendActionCommand(actionItem.id, {
+        profile: currentProfile,
+        params: {
+          ...(actionItem.params || {}),
+          notification_id: notificationId,
+        },
+      });
+
+      if (response.pending_action?.summary) {
+        Alert.alert('Confirmation Required', response.pending_action.summary);
+      } else if (response.spoken_text) {
+        Alert.alert('Action Complete', response.spoken_text);
+      } else {
+        Alert.alert('Action Complete', 'Notification action completed.');
+      }
+
+      await loadNotificationDetail(notificationId);
+    } catch (err) {
+      Alert.alert('Error', `Failed to run notification action: ${err.message}`);
+    } finally {
+      setNotificationActionLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchStatus();
     loadProfile();
@@ -278,16 +375,43 @@ export default function StatusScreen() {
     // Setup notification listeners
     const cleanup = setupNotificationListeners((notification) => {
       console.log('Notification received in StatusScreen:', notification);
-      // Update UI with latest notification
-      setLastNotification({
-        title: notification.request.content.title,
-        body: notification.request.content.body,
+      const notificationId =
+        notification?.request?.content?.data?.notification_id ||
+        notification?.request?.content?.data?.id;
+      const fallbackNotification = buildNotificationPreview({
+        id: notificationId,
+        title: notification?.request?.content?.title,
+        body: notification?.request?.content?.body,
+        message:
+          notification?.request?.content?.data?.message ||
+          notification?.request?.content?.body,
         timestamp: new Date().toISOString(),
       });
+      setLastNotification(fallbackNotification);
+      if (notificationId) {
+        loadNotificationDetail(notificationId);
+      }
     });
     
     return cleanup;
   }, []);
+
+  useEffect(() => {
+    if (!isActiveTaskNotification(lastNotification) || notificationActionLoading) {
+      return undefined;
+    }
+
+    const notificationId = lastNotification?.id;
+    if (!notificationId) {
+      return undefined;
+    }
+
+    const intervalId = setInterval(() => {
+      loadNotificationDetail(notificationId).catch(() => {});
+    }, ACTIVE_NOTIFICATION_POLL_INTERVAL_MS);
+
+    return () => clearInterval(intervalId);
+  }, [lastNotification, notificationActionLoading]);
 
   return (
     <ScrollView style={styles.container}>
@@ -419,6 +543,34 @@ export default function StatusScreen() {
             <Text style={styles.notificationTime}>
               {new Date(lastNotification.timestamp).toLocaleTimeString()}
             </Text>
+            <UICardList
+              cards={
+                lastNotification
+                  ? [
+                      {
+                        ...buildAgentNotificationCard(lastNotification),
+                        sync_hint: isActiveTaskNotification(lastNotification)
+                          ? notificationActionLoading
+                            ? 'Updating linked task...'
+                            : 'Watching linked task status'
+                          : null,
+                        is_syncing: notificationActionLoading,
+                      },
+                    ]
+                  : []
+              }
+              title={null}
+              disabled={notificationActionLoading}
+              onActionPress={handleNotificationAction}
+              onCardPress={
+                lastNotification.metadata?.task_id
+                  ? (card) => {
+                      navigation.navigate('TaskDetail', { taskId: card.task_id });
+                    }
+                  : null
+              }
+              cardPressLabel="Open Task Detail"
+            />
           </View>
         )}
         

@@ -24,8 +24,11 @@ def test_run_migrations_creates_tables():
             "github_connections",
             "repo_policies",
             "commands",
+            "peer_chat_messages",
+            "transport_session_cursors",
             "pending_actions",
             "action_logs",
+            "ai_history_index",
             "webhook_events",
             "agent_tasks",
         ]
@@ -33,6 +36,10 @@ def test_run_migrations_creates_tables():
         for table in tables:
             # Try to select from each table to verify it exists
             conn.execute(f"SELECT COUNT(*) FROM {table}")
+
+        columns = conn.execute("PRAGMA table_info('peer_chat_messages')").fetchall()
+        column_names = [row[1] for row in columns]
+        assert "priority" in column_names
 
         conn.close()
 

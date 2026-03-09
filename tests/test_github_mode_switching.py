@@ -5,6 +5,7 @@ import pytest
 from handsfree.github.auth import (
     EnvTokenProvider,
     FixtureTokenProvider,
+    GhCliTokenProvider,
     get_token_provider,
 )
 from handsfree.github.provider import GitHubProvider, LiveGitHubProvider
@@ -62,9 +63,20 @@ class TestEnvironmentVariableSwitching:
         """Test that live mode without token falls back to fixture."""
         monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
         monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
 
         provider = get_token_provider()
         assert isinstance(provider, FixtureTokenProvider)
+
+    def test_live_mode_without_env_token_uses_gh_cli(self, monkeypatch):
+        """Live mode should use gh CLI auth when environment token is absent."""
+        monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: "gho_cli_token")
+
+        provider = get_token_provider()
+        assert isinstance(provider, GhCliTokenProvider)
+        assert provider.get_token() == "gho_cli_token"
 
     def test_fixture_mode_explicit(self, monkeypatch):
         """Test explicit fixture mode setting."""

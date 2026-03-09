@@ -363,6 +363,20 @@ class TestAgentServicePauseResume:
         with pytest.raises(ValueError, match="No running tasks found"):
             service.pause_task(user_id=test_user_id)
 
+    def test_pause_task_rejects_other_users_task(self, db_conn, test_user_id):
+        """Pausing by explicit ID should enforce task ownership."""
+        from handsfree.agents.service import AgentService
+
+        owner_task = create_agent_task(
+            conn=db_conn, user_id="other-user@example.com", provider="copilot", instruction="other task"
+        )
+        owner_task = update_agent_task_state(conn=db_conn, task_id=owner_task.id, new_state="running")
+
+        service = AgentService(db_conn)
+
+        with pytest.raises(ValueError, match="not found"):
+            service.pause_task(user_id=test_user_id, task_id=owner_task.id)
+
     def test_resume_task_by_id(self, db_conn, test_user_id):
         """Test resuming a task by ID."""
         from handsfree.agents.service import AgentService
@@ -427,6 +441,67 @@ class TestAgentServicePauseResume:
 
         with pytest.raises(ValueError, match="No paused tasks found"):
             service.resume_task(user_id=test_user_id)
+
+    def test_resume_task_rejects_other_users_task(self, db_conn, test_user_id):
+        """Resuming by explicit ID should enforce task ownership."""
+        from handsfree.agents.service import AgentService
+
+        owner_task = create_agent_task(
+            conn=db_conn, user_id="other-user@example.com", provider="copilot", instruction="other task"
+        )
+        owner_task = update_agent_task_state(conn=db_conn, task_id=owner_task.id, new_state="running")
+        owner_task = update_agent_task_state(
+            conn=db_conn, task_id=owner_task.id, new_state="needs_input"
+        )
+
+        service = AgentService(db_conn)
+
+        with pytest.raises(ValueError, match="not found"):
+            service.resume_task(user_id=test_user_id, task_id=owner_task.id)
+
+    def test_cancel_running_task(self, db_conn, test_user_id):
+        """Cancelling a running task should fail it with cancellation metadata."""
+        from handsfree.agents.service import AgentService
+        from handsfree.db.notifications import list_notifications
+
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="mock", instruction="cancel me"
+        )
+        task = update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+
+        service = AgentService(db_conn)
+        result = service.cancel_task(user_id=test_user_id, task_id=task.id)
+
+        assert result["task_id"] == task.id
+        assert result["state"] == "failed"
+        assert "cancelled" in result["spoken_text"].lower()
+
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task.id)
+        assert updated_task is not None
+        assert updated_task.state == "failed"
+        assert updated_task.trace.get("cancelled") is True
+        assert updated_task.trace.get("cancelled_via") == "task_control_api"
+
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        cancelled_notifications = [n for n in notifications if n.event_type == "task_cancelled"]
+        assert len(cancelled_notifications) > 0
+        assert cancelled_notifications[0].metadata["task_id"] == task.id
+
+    def test_cancel_created_task_without_remote_cancel(self, db_conn, test_user_id):
+        """Created tasks should be cancellable even before a provider run exists."""
+        from handsfree.agents.service import AgentService
+
+        task = create_agent_task(
+            conn=db_conn, user_id=test_user_id, provider="ipfs_datasets_mcp", instruction="queued task"
+        )
+
+        service = AgentService(db_conn)
+        result = service.cancel_task(user_id=test_user_id, task_id=task.id)
+
+        assert result["state"] == "failed"
+        updated_task = get_agent_task_by_id(conn=db_conn, task_id=task.id)
+        assert updated_task is not None
+        assert updated_task.trace.get("cancelled") is True
 
     def test_pause_creates_notification(self, db_conn, test_user_id):
         """Test that pausing a task creates a notification."""

@@ -1,0 +1,23 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.metawearablesdat'
+version = '1.0.0'
+def datSdkVersion = (findProperty("metaWearablesDatAndroidVersion") ?: "0.4.0").toString()
+def datSdkEnabled = (findProperty("metaWearablesDatAndroidEnabled") ?: "false").toString().toBoolean()
+
+android {
+  namespace "expo.modules.metawearablesdat"
+  buildFeatures {
+    buildConfig true
+  }
+
+  defaultConfig {
+    versionCode 1
+    versionName "1.0.0"
+    buildConfigField "boolean", "META_WEARABLES_DAT_SDK_ENABLED", datSdkEnabled.toString()
+    buildConfigField "String", "META_WEARABLES_DAT_ANDROID_VERSION", "\"${datSdkVersion}\""
+  }
+}

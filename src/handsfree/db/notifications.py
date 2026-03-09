@@ -16,6 +16,337 @@ import duckdb
 logger = logging.getLogger(__name__)
 
 
+def _execution_mode_label(mode: str | None) -> str | None:
+    """Return a short label for a resolved execution mode."""
+    normalized = str(mode or "").strip().lower()
+    return {
+        "direct_import": "Local",
+        "mcp_remote": "Remote",
+    }.get(normalized)
+
+
+def _resolve_execution_modes(metadata: dict[str, Any] | None) -> tuple[str | None, str | None]:
+    """Extract preferred and resolved execution modes from notification metadata."""
+    metadata = metadata or {}
+    envelope = metadata.get("result_envelope")
+    preferred_mode = metadata.get("mcp_preferred_execution_mode")
+    resolved_mode = metadata.get("mcp_execution_mode")
+
+    if not isinstance(preferred_mode, str) and isinstance(envelope, dict):
+        preferred_mode = envelope.get("preferred_execution_mode")
+    if not isinstance(resolved_mode, str) and isinstance(envelope, dict):
+        resolved_mode = envelope.get("execution_mode")
+
+    preferred = (
+        preferred_mode.strip().lower()
+        if isinstance(preferred_mode, str) and preferred_mode.strip()
+        else None
+    )
+    resolved = (
+        resolved_mode.strip().lower()
+        if isinstance(resolved_mode, str) and resolved_mode.strip()
+        else None
+    )
+    return preferred, resolved
+
+
+def _execution_mode_detail_line(metadata: dict[str, Any] | None) -> str | None:
+    """Return an execution detail line for notification cards."""
+    preferred_mode, resolved_mode = _resolve_execution_modes(metadata)
+    label = _execution_mode_label(resolved_mode)
+    if not label:
+        return None
+    if preferred_mode == "direct_import" and resolved_mode == "mcp_remote":
+        return f"Execution: {label} (local unavailable)"
+    return f"Execution: {label}"
+
+
+def _render_result_lines(metadata: dict[str, Any] | None) -> list[str]:
+    """Render compact result lines from notification metadata."""
+    if not metadata:
+        return []
+
+    lines: list[str] = []
+    result_envelope = metadata.get("result_envelope")
+    result_output = (
+        result_envelope.get("structured_output")
+        if isinstance(result_envelope, dict)
+        else metadata.get("result_output")
+    )
+    if isinstance(result_output, dict):
+        for key in ("message", "status", "expanded_queries", "target_terms", "seed_urls"):
+            value = result_output.get(key)
+            if value is None:
+                continue
+            if isinstance(value, list):
+                rendered = ", ".join(str(item) for item in value[:3])
+            else:
+                rendered = str(value)
+            if rendered:
+                lines.append(f"{key}: {rendered}")
+
+        task_info = result_output.get("task")
+        if isinstance(task_info, dict):
+            task_status = task_info.get("status")
+            task_id = task_info.get("task_id")
+            if task_status:
+                lines.append(f"task.status: {task_status}")
+            if task_id:
+                lines.append(f"task.id: {task_id}")
+
+    preview = (
+        result_envelope.get("summary")
+        if isinstance(result_envelope, dict)
+        else metadata.get("result_preview")
+    )
+    if not lines and isinstance(preview, str) and preview.strip():
+        lines.append(f"Result: {preview.strip()}")
+    execution_line = _execution_mode_detail_line(metadata)
+    if execution_line and execution_line not in lines:
+        if len(lines) >= 3:
+            lines = lines[:2]
+        lines.append(execution_line)
+    return lines[:3]
+
+
+def _notification_result_actions(
+    capability: str | None,
+    deep_link: str | None,
+) -> list[str]:
+    """Return user-facing result actions for notification cards."""
+    actions = [
+        "open that result",
+        "show task details for that result",
+        "show another result like this",
+        "save that result to ipfs",
+        "save that result to ipfs locally",
+        "save that result to ipfs remotely",
+    ]
+    if isinstance(deep_link, str) and deep_link.startswith("ipfs://"):
+        actions.extend(
+            [
+                "read the cid",
+                "share that cid",
+                "pin that",
+                "pin that locally",
+                "pin that remotely",
+                "unpin that",
+                "unpin that locally",
+                "unpin that remotely",
+            ]
+        )
+    normalized_capability = (capability or "").strip().lower()
+    if normalized_capability in {"workflow", "agentic_fetch"}:
+        actions.append("rerun that workflow remotely")
+    if normalized_capability == "agentic_fetch":
+        actions.append("rerun that fetch with https://example.com remotely")
+    if normalized_capability == "dataset_discovery":
+        actions.append("rerun that dataset search with labor law datasets remotely")
+    return actions
+
+
+def _notification_result_action_items(
+    capability: str | None,
+    deep_link: str | None,
+) -> list[dict[str, Any]]:
+    """Return structured actions for notification cards."""
+    save_mode_items: list[dict[str, Any]] = [
+        {
+            "id": "save_result_to_ipfs_local",
+            "label": "Save To IPFS Locally",
+            "phrase": "save that result to ipfs locally",
+            "execution_mode": "direct_import",
+            "execution_mode_label": "Local",
+            "params": {"mcp_preferred_execution_mode": "direct_import"},
+        },
+        {
+            "id": "save_result_to_ipfs_remote",
+            "label": "Save To IPFS Remotely",
+            "phrase": "save that result to ipfs remotely",
+            "execution_mode": "mcp_remote",
+            "execution_mode_label": "Remote",
+            "params": {"mcp_preferred_execution_mode": "mcp_remote"},
+        },
+    ]
+
+    items: list[dict[str, Any]] = [
+        {"id": "open_result", "label": "Open Result", "phrase": "open that result"},
+        {
+            "id": "show_result_details",
+            "label": "Task Details",
+            "phrase": "show task details for that result",
+        },
+        {
+            "id": "show_related_results",
+            "label": "Related Results",
+            "phrase": "show another result like this",
+        },
+        {
+            "id": "save_result_to_ipfs",
+            "label": "Save To IPFS",
+            "phrase": "save that result to ipfs",
+        },
+    ]
+    cid: str | None = None
+    if isinstance(deep_link, str) and deep_link.startswith("ipfs://"):
+        cid = deep_link.removeprefix("ipfs://").strip() or None
+    if cid:
+        items.extend(
+            [
+                {"id": "read_cid", "label": "Read CID", "phrase": "read the cid", "params": {"cid": cid}},
+                {"id": "share_cid", "label": "Share CID", "phrase": "share that cid", "params": {"cid": cid}},
+                {"id": "pin_result", "label": "Pin", "phrase": "pin that", "params": {"cid": cid}},
+                {
+                    "id": "pin_result_local",
+                    "label": "Pin Locally",
+                    "phrase": "pin that locally",
+                    "execution_mode": "direct_import",
+                    "execution_mode_label": "Local",
+                    "params": {"cid": cid, "mcp_preferred_execution_mode": "direct_import"},
+                },
+                {
+                    "id": "pin_result_remote",
+                    "label": "Pin Remotely",
+                    "phrase": "pin that remotely",
+                    "execution_mode": "mcp_remote",
+                    "execution_mode_label": "Remote",
+                    "params": {"cid": cid, "mcp_preferred_execution_mode": "mcp_remote"},
+                },
+                {
+                    "id": "unpin_result_local",
+                    "label": "Unpin Locally",
+                    "phrase": "unpin that locally",
+                    "execution_mode": "direct_import",
+                    "execution_mode_label": "Local",
+                    "params": {"cid": cid, "mcp_preferred_execution_mode": "direct_import"},
+                },
+                {
+                    "id": "unpin_result_remote",
+                    "label": "Unpin Remotely",
+                    "phrase": "unpin that remotely",
+                    "execution_mode": "mcp_remote",
+                    "execution_mode_label": "Remote",
+                    "params": {"cid": cid, "mcp_preferred_execution_mode": "mcp_remote"},
+                },
+            ]
+        )
+        items.extend(save_mode_items)
+        items.append({"id": "unpin_result", "label": "Unpin", "phrase": "unpin that", "params": {"cid": cid}})
+    else:
+        items.extend(save_mode_items)
+    normalized_capability = (capability or "").strip().lower()
+    if normalized_capability in {"workflow", "agentic_fetch"}:
+        items.append(
+            {
+                "id": "rerun_workflow",
+                "label": "Rerun Workflow",
+                "phrase": "rerun that workflow remotely",
+                "execution_mode": "mcp_remote",
+                "execution_mode_label": "Remote",
+                "params": {"mcp_preferred_execution_mode": "mcp_remote"},
+            }
+        )
+    if normalized_capability == "agentic_fetch":
+        items.append(
+            {
+                "id": "rerun_fetch_with_url",
+                "label": "Rerun Fetch",
+                "phrase": "rerun that fetch with https://example.com remotely",
+                "execution_mode": "mcp_remote",
+                "execution_mode_label": "Remote",
+                "params": {
+                    "mcp_seed_url": "https://example.com",
+                    "mcp_preferred_execution_mode": "mcp_remote",
+                },
+            }
+        )
+    if normalized_capability == "dataset_discovery":
+        items.append(
+            {
+                "id": "rerun_dataset_search",
+                "label": "Rerun Dataset Search",
+                "phrase": "rerun that dataset search with labor law datasets remotely",
+                "execution_mode": "mcp_remote",
+                "execution_mode_label": "Remote",
+                "params": {
+                    "mcp_input": "labor law datasets",
+                    "mcp_preferred_execution_mode": "mcp_remote",
+                },
+            }
+        )
+    return items
+
+
+def build_notification_card(
+    notification_id: str,
+    event_type: str,
+    message: str,
+    metadata: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Build a compact UI card payload for notification consumers."""
+    if not event_type.startswith("task_"):
+        return None
+
+    metadata = metadata or {}
+    state = metadata.get("state", event_type.removeprefix("task_"))
+    provider_label = metadata.get("provider_label") or metadata.get("provider") or "Agent task"
+    task_id = str(metadata.get("task_id", ""))[:8]
+    title = f"{provider_label} {state}".strip().title()
+
+    instruction = metadata.get("instruction")
+    lines: list[str] = []
+    if isinstance(instruction, str) and instruction.strip():
+        lines.append(f"Instruction: {instruction[:60]}")
+
+    lines.extend(_render_result_lines(metadata))
+    if not lines:
+        lines.append(message)
+
+    deep_link: str | None = None
+    result_envelope = metadata.get("result_envelope")
+    if isinstance(metadata.get("pr_url"), str) and metadata["pr_url"].strip():
+        deep_link = metadata["pr_url"].strip()
+    else:
+        cid = metadata.get("mcp_cid")
+        if not cid and isinstance(result_envelope, dict):
+            artifact_refs = result_envelope.get("artifact_refs")
+            if isinstance(artifact_refs, dict):
+                cid = artifact_refs.get("result_cid")
+        if not cid and isinstance(metadata.get("result_output"), dict):
+            cid = metadata["result_output"].get("cid")
+        if isinstance(cid, str) and cid.strip():
+            deep_link = f"ipfs://{cid.strip()}"
+        elif (
+            metadata.get("mcp_capability") == "agentic_fetch"
+            and isinstance(metadata.get("mcp_seed_url"), str)
+            and metadata["mcp_seed_url"].strip()
+        ):
+            deep_link = metadata["mcp_seed_url"].strip()
+        elif isinstance(metadata.get("task_id"), str) and metadata["task_id"].strip():
+            deep_link = f"/v1/agents/tasks/{metadata['task_id'].strip()}"
+        else:
+            deep_link = f"/v1/notifications/{notification_id}"
+
+    return {
+        "title": title,
+        "subtitle": f"Task {task_id} • {state}" if task_id else state,
+        "lines": lines[:4],
+        "deep_link": deep_link,
+        "action_items": (
+            metadata.get("follow_up_actions")
+            if isinstance(metadata.get("follow_up_actions"), list) and metadata.get("follow_up_actions")
+            else _notification_result_action_items(
+                metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
+                deep_link,
+            )
+        ),
+        "actions": _notification_result_actions(
+            metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
+            deep_link,
+        ),
+    }
+
+
 @dataclass
 class Notification:
     """Represents a user notification."""
@@ -48,6 +379,9 @@ class Notification:
             result["last_delivery_attempt"] = self.last_delivery_attempt.isoformat()
         if self.delivery_status != "pending":
             result["delivery_status"] = self.delivery_status
+        card = build_notification_card(self.id, self.event_type, self.message, self.metadata)
+        if card is not None:
+            result["card"] = card
         return result
 
 
@@ -332,6 +666,14 @@ def _deliver_notification(
         "metadata": notification.metadata or {},
         "created_at": notification.created_at.isoformat(),
     }
+    card = build_notification_card(
+        notification.id,
+        notification.event_type,
+        notification.message,
+        notification.metadata,
+    )
+    if card is not None:
+        notification_data["card"] = card
 
     # Track delivery results
     delivery_success = False

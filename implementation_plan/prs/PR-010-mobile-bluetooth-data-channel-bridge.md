@@ -21,6 +21,7 @@ Implement the first production-usable mobile Bluetooth data-channel APIs needed 
   - backend transport-envelope validation and local ack replay for bring-up
   - local advertising state and discoverability controls
   - optional auto-validation of inbound frames against backend dev ingress
+  - dedicated backend peer-chat diagnostics surface for conversation history, relay queue controls, and persisted transport-session cursor inspection/clearing
 - Add development simulation hooks for local testing without two physical devices.
 
 ## Concrete bridge contract
@@ -60,6 +61,9 @@ Bridge note:
 - Diagnostics screen can submit a captured frame to `/v1/dev/peer-envelope` and display or replay the returned ack.
 - Diagnostics screen can advertise a local identity and expose adapter readiness during handset-to-handset bring-up.
 - Diagnostics screen can optionally auto-ack inbound `message` envelopes by round-tripping them through backend dev ingress.
+- Diagnostics surfaces are split cleanly:
+  - `Glasses`: Bluetooth adapter/audio/session/frame bring-up
+  - `Peer Chat`: backend chat history, outbox policy, release/promote controls, and transport-session cursor controls
 - API surface is stable and documented for PR-011 session integration.
 
 ## Dependencies

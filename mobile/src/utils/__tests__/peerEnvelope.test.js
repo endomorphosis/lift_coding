@@ -56,15 +56,17 @@ describe('peerEnvelope', () => {
       sessionId: 'session-chat',
       text: 'hello from glasses',
       senderPeerId: '12D3KooWsender',
+      priority: 'urgent',
     });
 
     expect(decodeEnvelopePayload(envelope.payload_b64)).toEqual({
       protocol: CHAT_PROTOCOL,
-      payload: {
+      payload: expect.objectContaining({
         type: 'chat',
         text: 'hello from glasses',
         sender_peer_id: '12D3KooWsender',
-      },
+        priority: 'urgent',
+      }),
     });
   });
 

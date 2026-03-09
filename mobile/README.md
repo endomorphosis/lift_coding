@@ -287,16 +287,42 @@ For detailed build instructions, see [BUILD.md](BUILD.md).
 - Bluetooth connection state
 - Audio input/output devices
 - Real-time route monitoring
+- Persisted transport-session cursor count for reconnect debugging
+- Matched transport-session health and age for the selected or active peer
 
 **Testing Tools**:
 - 🎤 Record from Bluetooth mic
 - ▶️ Play last recording
 - 🚀 Send to backend and process
 - 🔄 Refresh audio route status
+- Load and clear persisted transport-session cursors without leaving the transport diagnostics flow
+- Detect likely stale transport cursors with `fresh`, `aging`, or `stale` health labels
 
 **Dev Mode Toggle**:
 - ON: Use phone mic/speaker (fast testing)
 - OFF: Use Bluetooth audio (real glasses)
+
+### Peer Chat Diagnostics Screen
+
+**Backend Chat Tools**:
+- Load recent peer-chat conversations from the backend
+- Load normalized chat history for the selected conversation
+- Send normal or urgent backend chat messages
+
+**Relay Diagnostics**:
+- Inspect backend outbox delivery mode and queue counts
+- Inspect per-message outbox state and selected message detail
+- Release leased messages or promote policy-held messages to urgent
+- Load persisted transport-session cursors from the backend runtime
+- Clear a stuck transport-session cursor for a specific peer during reconnect testing
+- Use `Refresh All Peer Chat Diagnostics` to resync conversations, outbox state, and handset session in one pass
+- Summary card shows a live `Last synced` freshness label like `just now` or `45s ago`
+- Summary card also classifies sync freshness as `fresh`, `aging`, `stale`, or `unknown`
+- Full refresh button shows progress while the diagnostics resync is running
+
+**Diagnostics split**:
+- `Glasses` tab: BLE/audio/session, raw transport-envelope diagnostics, compact transport-session cursor recovery controls, and matched-cursor health indicators
+- `Peer Chat` tab: backend chat history, relay queue policy, outbox controls, and persisted transport-session cursor controls
 
 ---
 
@@ -1141,6 +1167,8 @@ Before production deployment:
 ## Meta AI Glasses Audio Diagnostics
 
 The **Glasses** tab provides comprehensive diagnostics for testing Bluetooth audio routing with Meta AI Glasses.
+
+The app also includes a dedicated **Peer Chat** tab for backend-facing peer chat and relay diagnostics. Use that tab for recent conversations, chat history, backend send actions, and outbox inspection. Use the **Glasses** tab for Bluetooth peer discovery, frame validation, and audio route testing.
 
 ### Features
 

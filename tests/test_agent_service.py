@@ -177,6 +177,31 @@ class TestAgentStatus:
         assert result["total"] == 2
         assert all(t["id"] for t in result["tasks"])  # Has task IDs
 
+    def test_status_prefers_result_envelope_fields(self, agent_service, db_conn, test_user_id):
+        """Status payload should use normalized envelope fields when available."""
+        from handsfree.db.agent_tasks import create_agent_task
+
+        create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_kit_mcp",
+            instruction="pin bafy123",
+            trace={
+                "mcp_capability": "ipfs_pin",
+                "mcp_result_envelope": {
+                    "summary": "Pinned bafy123.",
+                    "structured_output": {"cid": "bafy123", "message": "Pinned bafy123."},
+                    "follow_up_actions": [{"id": "read_cid", "label": "Read CID"}],
+                },
+            },
+        )
+
+        result = agent_service.get_status(user_id=test_user_id)
+
+        assert result["tasks"][0]["result_preview"] == "Pinned bafy123."
+        assert result["tasks"][0]["result_output"]["cid"] == "bafy123"
+        assert result["tasks"][0]["follow_up_actions"][0]["id"] == "read_cid"
+
 
 class TestAdvanceTaskState:
     """Test advancing task states via service."""
@@ -451,3 +476,47 @@ class TestNotifications:
 
         # Verify completion notification includes PR info from trace
         assert notif.metadata.get("pr_url") == "https://github.com/mock/repo/pull/123"
+
+    def test_async_mcp_completion_notification_includes_result(
+        self, db_conn, test_user_id, monkeypatch
+    ):
+        """Completed MCP tasks should notify with stored result preview/output."""
+        from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
+        from handsfree.agents.service import AgentService
+        from handsfree.db.notifications import list_notifications
+        from test_mcp_ipfs_provider import _FakeMCPClient
+
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
+        fake_provider = IPFSDatasetsMCPAgentProvider(client=_FakeMCPClient())
+        monkeypatch.setattr(
+            "handsfree.agents.service.get_provider",
+            lambda provider_name: fake_provider if provider_name == "ipfs_datasets_mcp" else None,
+        )
+
+        service = AgentService(db_conn)
+        task_result = service.delegate(
+            user_id=test_user_id,
+            instruction="find legal datasets",
+            provider="ipfs_datasets_mcp",
+        )
+
+        status = service.get_status(user_id=test_user_id)
+
+        assert status["by_state"]["completed"] == 1
+
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        completion_notifs = [n for n in notifications if n.event_type == "task_completed"]
+        assert len(completion_notifs) == 1
+
+        notif = completion_notifs[0]
+        assert notif.metadata is not None
+        assert notif.metadata["task_id"] == task_result["task_id"]
+        assert notif.metadata["provider"] == "ipfs_datasets_mcp"
+        assert notif.metadata["provider_label"] == "IPFS Datasets"
+        assert notif.metadata["mcp_capability"] == "dataset_discovery"
+        assert notif.metadata["result_preview"] == "Expanded legal query"
+        assert notif.metadata["result_output"]["expanded_queries"] == [
+            "find legal datasets",
+            "find legal datasets statutes",
+        ]
+        assert "Result: Expanded legal query" in notif.message

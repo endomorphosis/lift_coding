@@ -4,15 +4,23 @@ Handles agent task delegation and status queries.
 """
 
 import logging
+import os
 from datetime import UTC, datetime
 from typing import Any
+from uuid import NAMESPACE_DNS, UUID, uuid5
 
 import duckdb
 
 from handsfree.agent_providers import get_provider, is_copilot_cli_available
-from handsfree.mcp import get_provider_descriptor, infer_provider_capability
+from handsfree.mcp import (
+    get_provider_descriptor,
+    infer_provider_capability,
+    resolve_capability_execution_mode,
+    resolve_provider_capability,
+)
 from handsfree.db.agent_tasks import (
     create_agent_task,
+    get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_trace,
     update_agent_task_state,
@@ -20,6 +28,37 @@ from handsfree.db.agent_tasks import (
 from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
+
+
+def _trace_result_envelope(trace: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(trace, dict):
+        return None
+    envelope = trace.get("mcp_result_envelope")
+    return envelope if isinstance(envelope, dict) else None
+
+
+def _trace_result_preview(trace: dict[str, Any] | None) -> str | None:
+    envelope = _trace_result_envelope(trace)
+    summary = envelope.get("summary") if envelope else None
+    if isinstance(summary, str) and summary.strip():
+        return summary.strip()
+    preview = (trace or {}).get("mcp_result_preview")
+    if isinstance(preview, str) and preview.strip():
+        return preview.strip()
+    return None
+
+
+def _trace_result_output(trace: dict[str, Any] | None) -> Any:
+    envelope = _trace_result_envelope(trace)
+    if envelope and "structured_output" in envelope:
+        return envelope.get("structured_output")
+    return (trace or {}).get("mcp_result_output")
+
+
+def _trace_follow_up_actions(trace: dict[str, Any] | None) -> list[dict[str, Any]]:
+    envelope = _trace_result_envelope(trace)
+    actions = envelope.get("follow_up_actions") if envelope else None
+    return actions if isinstance(actions, list) else []
 
 
 class AgentService:
@@ -39,10 +78,15 @@ class AgentService:
         Returns:
             True if HANDSFREE_AGENT_DISPATCH_REPO and GitHub token are available.
         """
-        import os
         dispatch_repo = os.getenv("HANDSFREE_AGENT_DISPATCH_REPO")
         github_token = os.getenv("GITHUB_TOKEN")
         return bool(dispatch_repo and github_token)
+
+    def _is_copilot_cli_runnable(self) -> bool:
+        """Return whether Copilot CLI can run either live or in fixture mode."""
+        if os.getenv("HANDSFREE_CLI_FIXTURE_MODE", "false").lower() == "true":
+            return True
+        return is_copilot_cli_available()
 
     def delegate(
         self,
@@ -77,13 +121,12 @@ class AgentService:
         # 4. copilot_cli if available
         # 5. copilot as fallback
         if provider is None:
-            import os
             provider = os.getenv("HANDSFREE_AGENT_DEFAULT_PROVIDER")
             if provider is None:
                 # Check if github_issue_dispatch is configured
                 if self._is_github_dispatch_configured():
                     provider = "github_issue_dispatch"
-                elif is_copilot_cli_available():
+                elif self._is_copilot_cli_runnable():
                     provider = "copilot_cli"
                 else:
                     provider = "copilot"
@@ -93,11 +136,23 @@ class AgentService:
             task_trace["created_via"] = "delegate_command"
         provider_descriptor = get_provider_descriptor(provider)
         if provider_descriptor is not None:
+            resolved_capability = resolve_provider_capability(
+                provider,
+                task_trace.get("mcp_capability"),
+                instruction,
+            )
             task_trace.setdefault("provider_label", provider_descriptor.display_name)
             task_trace.setdefault(
                 "mcp_capability",
-                infer_provider_capability(provider, instruction),
+                resolved_capability or infer_provider_capability(provider, instruction),
             )
+            resolved_execution_mode = resolve_capability_execution_mode(
+                provider,
+                task_trace.get("mcp_capability"),
+                task_trace.get("mcp_preferred_execution_mode"),
+            )
+            if resolved_execution_mode is not None:
+                task_trace.setdefault("mcp_execution_mode", resolved_execution_mode)
 
         # Create task in database (starts in "created" state)
         task = create_agent_task(
@@ -225,9 +280,9 @@ class AgentService:
             spoken = "Agent task created."
 
         if task.trace and task.trace.get("mcp_sync_completed"):
-            preview = task.trace.get("mcp_result_preview")
-            if isinstance(preview, str) and preview.strip():
-                spoken = preview.strip()
+            preview = _trace_result_preview(task.trace)
+            if preview:
+                spoken = preview
             elif provider_label and capability:
                 spoken = f"{provider_label} {capability.replace('_', ' ')} completed."
             elif provider_label:
@@ -240,8 +295,9 @@ class AgentService:
             "state": task.state,
             "provider": task.provider,
             "spoken_text": spoken,
-            "result_preview": task.trace.get("mcp_result_preview") if task.trace else None,
-            "result_output": task.trace.get("mcp_result_output") if task.trace else None,
+            "result_preview": _trace_result_preview(task.trace),
+            "result_output": _trace_result_output(task.trace),
+            "follow_up_actions": _trace_follow_up_actions(task.trace),
         }
 
     def get_status(self, user_id: str) -> dict[str, Any]:
@@ -365,14 +421,33 @@ class AgentService:
                 {
                     "id": t.id,
                     "state": t.state,
+                    "provider": t.provider,
                     "target_type": t.target_type,
                     "target_ref": t.target_ref,
                     "instruction": t.instruction,
+                    "result_preview": _trace_result_preview(t.trace),
+                    "result_output": _trace_result_output(t.trace),
+                    "follow_up_actions": _trace_follow_up_actions(t.trace),
                 }
                 for t in tasks[:10]  # Return up to 10 recent tasks
             ],
             "spoken_text": spoken,
         }
+
+    def _get_task_for_user(self, user_id: str, task_id: str) -> Any:
+        """Load a task and enforce user ownership."""
+        task = get_agent_task_by_id(conn=self.conn, task_id=task_id)
+        if not task:
+            raise ValueError(f"Task {task_id} not found")
+        try:
+            effective_user_id = (
+                str(UUID(user_id)) if "-" in user_id else str(uuid5(NAMESPACE_DNS, user_id))
+            )
+        except (ValueError, AttributeError):
+            effective_user_id = str(uuid5(NAMESPACE_DNS, user_id))
+        if task.user_id != effective_user_id:
+            raise ValueError(f"Task {task_id} not found")
+        return task
 
     def pause_task(
         self,
@@ -397,6 +472,8 @@ class AgentService:
             if not tasks:
                 raise ValueError("No running tasks found to pause")
             task_id = tasks[0].id
+        else:
+            self._get_task_for_user(user_id=user_id, task_id=task_id)
 
         # Transition from running to needs_input (pause state)
         task = update_agent_task_state(
@@ -446,6 +523,8 @@ class AgentService:
             if not tasks:
                 raise ValueError("No paused tasks found to resume")
             task_id = tasks[0].id
+        else:
+            self._get_task_for_user(user_id=user_id, task_id=task_id)
 
         # Transition from needs_input back to running (resume)
         task = update_agent_task_state(
@@ -470,6 +549,55 @@ class AgentService:
             "task_id": task.id,
             "state": task.state,
             "spoken_text": f"Task {task.id[:8]} resumed.",
+        }
+
+    def cancel_task(
+        self,
+        user_id: str,
+        task_id: str,
+    ) -> dict[str, Any]:
+        """Cancel an agent task and mark it failed with cancellation metadata."""
+        task = self._get_task_for_user(user_id=user_id, task_id=task_id)
+        if task.state not in ("created", "running", "needs_input"):
+            raise ValueError(f"Task {task_id} cannot be cancelled from state '{task.state}'")
+
+        trace_update = {
+            "cancelled_at": datetime.now(UTC).isoformat(),
+            "cancelled_via": "task_control_api",
+            "cancelled": True,
+        }
+
+        if task.state != "created":
+            provider_result = get_provider(task.provider).cancel_task(task)
+            if not provider_result.get("ok"):
+                raise ValueError(provider_result.get("message", "Failed to cancel task"))
+            provider_trace = provider_result.get("trace")
+            if isinstance(provider_trace, dict):
+                trace_update.update(provider_trace)
+            provider_message = provider_result.get("message")
+            if isinstance(provider_message, str) and provider_message.strip():
+                trace_update["cancel_message"] = provider_message.strip()
+
+        updated_task = update_agent_task_state(
+            conn=self.conn,
+            task_id=task.id,
+            new_state="failed",
+            trace_update=trace_update,
+        )
+        if not updated_task:
+            raise ValueError(f"Task {task_id} not found")
+
+        self._emit_notification(
+            user_id=updated_task.user_id,
+            event="task_cancelled",
+            task_id=updated_task.id,
+            message=f"Agent task {updated_task.id} cancelled",
+        )
+
+        return {
+            "task_id": updated_task.id,
+            "state": updated_task.state,
+            "spoken_text": f"Task {updated_task.id[:8]} cancelled.",
         }
 
     def advance_task_state(
@@ -562,10 +690,30 @@ class AgentService:
         metadata = {
             "task_id": task.id,
             "state": new_state,
+            "provider": task.provider,
         }
+        if task.instruction:
+            metadata["instruction"] = task.instruction
 
         # Extract PR information from trace if available
         if task.trace:
+            if "provider_label" in task.trace:
+                metadata["provider_label"] = task.trace["provider_label"]
+            if "mcp_capability" in task.trace:
+                metadata["mcp_capability"] = task.trace["mcp_capability"]
+            if "mcp_cid" in task.trace:
+                metadata["mcp_cid"] = task.trace["mcp_cid"]
+            if "mcp_seed_url" in task.trace:
+                metadata["mcp_seed_url"] = task.trace["mcp_seed_url"]
+            if "mcp_result_preview" in task.trace:
+                metadata["result_preview"] = _trace_result_preview(task.trace)
+            if "mcp_result_output" in task.trace or "mcp_result_envelope" in task.trace:
+                metadata["result_output"] = _trace_result_output(task.trace)
+            if "mcp_result_envelope" in task.trace:
+                metadata["result_envelope"] = task.trace["mcp_result_envelope"]
+            follow_up_actions = _trace_follow_up_actions(task.trace)
+            if follow_up_actions:
+                metadata["follow_up_actions"] = follow_up_actions
             # Check for PR URL
             if "pr_url" in task.trace:
                 metadata["pr_url"] = task.trace["pr_url"]
@@ -586,6 +734,8 @@ class AgentService:
             message_parts.append(f"PR: {metadata['repo_full_name']}#{metadata['pr_number']}")
         elif "pr_number" in metadata:
             message_parts.append(f"PR #{metadata['pr_number']}")
+        if isinstance(metadata.get("result_preview"), str) and metadata["result_preview"].strip():
+            message_parts.append(f"Result: {metadata['result_preview'].strip()}")
 
         message = ". ".join(message_parts)
 

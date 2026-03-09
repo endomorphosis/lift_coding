@@ -20,6 +20,36 @@ It is intended to complement, not replace:
 - `docs/meta-ai-glasses.md`
 - `ARCHITECTURE.md`
 
+## Repository snapshot (2026-03-09)
+Planning assumptions in this document are based on the current checked-out upstream state:
+
+- `external/meta-wearables-dat-android` at `437020ce09a578c80bb131df018aa7d19c991c3c`
+- `external/meta-wearables-dat-ios` at `6fba4ee1aa58d87a94560662f5b42648320cc8ae`
+- `external/ipfs_kit` at `06d6dae977673f6496df6417c27440fa8ab12eb3`
+- `external/ipfs_accelerate` at `17a9b1a67932e39043fcd6f9f0e610541b43eb49`
+- `external/ipfs_datasets` at `8cef1878ec958641d9aedabea691145f158178fc`
+- `endomorphosis/Mcp-Plus-Plus` remote `HEAD` at `29343be704da4e193ff143bac7daae9b0f98435d`
+
+If any upstream contract or packaging model changes after these revisions, update this roadmap before starting platform-specific implementation.
+
+## Current codebase facts that shape the plan
+
+### Mobile app
+- React Native + Expo development client under `mobile/`
+- existing local native module pattern already exists through `mobile/modules/expo-glasses-audio`
+- `mobile/app.json` currently has no Expo config plugins registered
+- current glasses integration is audio-first, with diagnostics and Bluetooth peer-bridge work already present
+
+### Backend control plane
+- FastAPI backend already owns command routing, task lifecycle, notifications, persistence, and voice-safe response shaping
+- MCP server-family configuration already exists in `src/handsfree/mcp/config.py`
+- canonical provider and capability catalog seams already exist in `src/handsfree/mcp/catalog.py`
+- optional direct-import adapter seams already exist for `ipfs_kit_py` and `ipfs_accelerate_py`
+- command router already understands MCP execution-mode preferences and capability-aware reruns
+
+### Architectural consequence
+This is not a greenfield integration. The correct strategy is to extend the existing seams and avoid introducing a second orchestration layer in mobile or in a standalone MCP gateway.
+
 ## Executive summary
 The project already has the right high-level shape for this integration:
 
@@ -43,6 +73,13 @@ The recommended rollout is **not** a big-bang rewrite. We should preserve the ex
 - MCP++ runtime hardening
 - provider parity across direct and remote execution
 - voice-safe flows for task creation, progress, completion, and result follow-up
+
+## Non-goals
+
+- replacing the current audio routing module on the first DAT milestone
+- exposing raw MCP++ protocol concepts directly in the mobile UI
+- making every `ipfs_datasets_py` tool available to users on day one
+- coupling mobile-native DAT SDK calls directly to IPFS or MCP++ servers without backend control-plane mediation
 
 ---
 
@@ -251,6 +288,38 @@ The planner, command system, mobile UI cards, and notifications should target ca
                     [IPFS / storage layer]
 ```
 
+## Cross-repository implementation matrix
+
+| Repository | Primary role in end-state | First integration milestone | Main owners in this repo |
+| --- | --- | --- | --- |
+| `lift_coding` | control plane, mobile UX, routing, persistence | capability registry + DAT wrapper shells | `src/handsfree/*`, `mobile/*` |
+| `meta-wearables-dat-ios` | official iOS wearable access | native Expo module bridge, session state, media capture | `mobile/modules/expo-meta-wearables-dat/ios/*` |
+| `meta-wearables-dat-android` | official Android wearable access | Android Expo module bridge, package auth, mock-device harness | `mobile/modules/expo-meta-wearables-dat/android/*` |
+| `ipfs_kit_py` | storage, pinning, packaging, CID lifecycle | normalized add/pin/read/resolve capabilities | `src/handsfree/ipfs_kit_adapters.py`, `src/handsfree/mcp/*` |
+| `ipfs_datasets_py` | discovery, search, ingestion, enrichment | dataset search/load/vector capabilities | `src/handsfree/mcp/*`, command/planner bindings |
+| `ipfs_accelerate_py` | accelerated compute + strongest current MCP path | first full remote MCP++ production path | `src/handsfree/ipfs_accelerate_adapters.py`, provider/task runtime |
+| `Mcp-Plus-Plus` | protocol and profile contract | negotiation, receipts, provenance model | `src/handsfree/mcp/*`, trace persistence |
+
+## Environment and secret prerequisites
+
+### Meta DAT prerequisites
+- Wearables Developer Center application and release-channel setup for both mobile platforms
+- iOS target configuration for `MWDAT` analytics opt-out and release metadata
+- Android `GITHUB_TOKEN` or `github_token` local property for GitHub Packages resolution
+- Android app manifest metadata for `APPLICATION_ID` and analytics opt-out
+
+### MCP/IPFS prerequisites
+- one reachable MCP endpoint per server family for staging and production
+- auth secret distribution for each MCP server family
+- explicit execution-mode policy per environment: local hybrid vs staging shadow vs production remote-only
+- CID persistence policy for user-generated content and task outputs
+
+### CI/CD prerequisites
+- separate mobile jobs for DAT-disabled and DAT-enabled builds
+- secret-scoped Android package resolution in CI
+- integration environments for long-running MCP task polling
+- a contract-test fixture set so capability behavior can be validated without live wearable hardware
+
 ---
 
 ## Workstream A: mobile integration with Meta Wearables DAT
@@ -285,6 +354,12 @@ Responsibilities:
 - official session lifecycle hooks
 - metadata surfaced to JS
 
+Recommended implementation detail:
+
+- model it after the existing local Expo module pattern, not as ad hoc native code inside generated app folders
+- add an Expo config plugin so iOS `Info.plist` and Android `AndroidManifest.xml` entries can be injected from app config
+- keep all DAT-specific identifiers in environment-driven or app-config driven settings rather than hardcoded constants
+
 ### A3. Expose DAT capabilities to React Native via a narrow JS contract
 Recommended JS-facing contract:
 
@@ -298,6 +373,14 @@ Recommended JS-facing contract:
 - `subscribeDeviceEvents()`
 
 This contract should be intentionally smaller than the native SDK surface.
+
+Recommended JS module layout:
+
+- `mobile/modules/expo-meta-wearables-dat/package.json`
+- `mobile/modules/expo-meta-wearables-dat/app.plugin.js`
+- `mobile/src/native/metaWearablesDat.js`
+- `mobile/src/hooks/useMetaWearablesDat.js`
+- `mobile/src/hooks/useWearablesCapabilityMatrix.js`
 
 ### A4. Use capability detection, not hard assumptions
 Per platform, the app should dynamically decide whether to use:
@@ -336,6 +419,22 @@ Extend diagnostics UI to show:
 4. diagnostics and feature capability UI
 5. camera/media capture workflows wired into backend uploads
 6. analytics opt-out configuration documented and applied
+
+## Mobile phase gates
+
+### Gate A1: diagnostics-only integration
+- prove the DAT module loads on device builds
+- expose availability, session state, and capability discovery in diagnostics
+- no command-surface dependency yet
+
+### Gate A2: media artifact capture
+- capture photo or stream metadata through DAT
+- upload artifacts to backend
+- attach artifacts to tasks or result records
+
+### Gate A3: command-surface usage
+- allow a limited command set such as photo capture and attach
+- keep audio capture/TTS on the current path until DAT adds measurable reliability or feature advantage
 
 ---
 
@@ -381,6 +480,14 @@ Every execution route should produce a normalized object containing:
 - `ipfs_cid` if relevant
 - `follow_up_actions`
 
+Additional normalized fields needed for MCP++:
+
+- `receipt_ref`
+- `event_dag_ref`
+- `delegation_ref`
+- `provider_profiles`
+- `needs_input_schema`
+
 ### B4. Make cards and task results capability-driven
 Mobile cards and notifications should be derived from normalized capability results rather than provider-specific one-offs.
 
@@ -417,6 +524,13 @@ Align client behavior with upstream MCP++ concepts:
 
 HandsFree should not require every profile at first, but it should record which profiles a server advertises and use that to enable progressive behavior.
 
+Minimum viable negotiation contract:
+
+1. baseline MCP transport and tool discovery
+2. optional profile advertisement capture
+3. per-run storage of negotiated profile set
+4. graceful downgrade when advanced profiles are absent
+
 ### C3. Long-running run lifecycle support
 For any remote server that supports asynchronous runs, HandsFree should track:
 
@@ -445,6 +559,9 @@ When upstream servers expose richer provenance, HandsFree should persist referen
 - policy evaluation summaries
 - delegation chain references
 
+Persistence rule:
+store references and normalized summaries by default, and only store full raw envelopes when needed for replay, debugging, or explicit audit retention policy.
+
 ### C5. Runtime policy shims
 Use HandsFree policy gates before submission, and preserve room for server-side policy evaluation after submission.
 
@@ -456,6 +573,12 @@ That means two layers:
 ---
 
 ## Workstream D: provider-family integration plans
+
+## Provider sequencing rationale
+
+1. `ipfs_accelerate_py` first because it already presents a concrete MCP server runtime and long-running workflow shape.
+2. `ipfs_kit_py` second because storage and CID lifecycle are core follow-up actions for many other features.
+3. `ipfs_datasets_py` third because its breadth is high; it should be integrated behind the registry only after the runtime and result-envelope model are stable.
 
 ## D1. `ipfs_kit_py` integration plan
 Primary responsibilities:
@@ -611,6 +734,15 @@ Likely persistence expansions:
 - `device_context`
 - `media_artifact_ids`
 
+## Suggested new persistence tables or expansions
+
+- `wearable_device_sessions`
+- `wearable_capability_snapshots`
+- `media_artifacts`
+- `mcp_execution_receipts`
+- `mcp_event_dag_refs`
+- `mcp_profile_negotiations`
+
 ---
 
 ## Workstream G: security, privacy, and policy
@@ -668,6 +800,31 @@ Recommended dashboard groups:
 4. task/result funnel
 5. security and policy exceptions
 
+## Testing and validation strategy
+
+### Unit and contract tests
+- capability-registry resolution and provider alias tests
+- execution-mode selection tests
+- MCP result-envelope normalization tests
+- DAT JS hook tests with native module mocks
+- provenance and receipt serialization tests
+
+### Integration tests
+- backend-to-MCP task lifecycle tests against fixture MCP servers
+- direct-import vs remote parity tests for the initial six capability IDs
+- backend artifact upload plus CID persistence tests
+- mobile diagnostics tests for DAT availability and capability rendering
+
+### Hardware and platform tests
+- iOS physical-device DAT validation with supported Meta glasses
+- Android physical-device DAT validation with supported Meta glasses
+- Android mock-device validation using DAT mock-device support
+- regression runs for the existing Bluetooth audio path after each DAT milestone
+
+### Rollout tests
+- shadow-mode execution where remote MCP runs in parallel with the existing direct path for selected capabilities
+- canary rollout on one provider family before enabling remote-only production policy
+
 ---
 
 ## Delivery plan
@@ -678,6 +835,7 @@ Completed / immediate:
 - add DAT iOS and Android repos as submodules under `external/`
 - inventory current MCP scaffold and mobile native module seams
 - capture upstream package install constraints and auth requirements
+- capture exact upstream revision snapshots used for planning
 
 ## Phase 1 — capability and routing foundation
 Deliverables:
@@ -686,6 +844,7 @@ Deliverables:
 - execution-mode selector
 - output normalization contract
 - parity test matrix for direct vs MCP routes
+- provider-profile negotiation storage
 
 Acceptance criteria:
 
@@ -699,6 +858,7 @@ Deliverables:
 - Android DAT wrapper module
 - JS API + diagnostics UI
 - analytics opt-out support documented and implemented
+- Expo config plugin wiring for both platforms
 
 Acceptance criteria:
 
@@ -712,6 +872,7 @@ Deliverables:
 - recommended first target: `ipfs_accelerate_py` because it already emphasizes canonical MCP++ runtime behavior
 - receipt / run-id persistence
 - task polling + cancellation parity
+- negotiated profile capture and downgrade behavior
 
 Acceptance criteria:
 
@@ -724,6 +885,7 @@ Deliverables:
 - `ipfs_kit_py` storage capabilities
 - `ipfs_datasets_py` search/discovery capabilities
 - CID-backed result cards and follow-up actions
+- artifact attachment model for DAT-captured media
 
 Acceptance criteria:
 
@@ -785,6 +947,38 @@ voice/card/task UX polish for follow-up actions and result navigation
 
 ### PR 10
 policy/provenance/observability hardening and remote-only rollout controls
+
+## Detailed engineering backlog by layer
+
+### Mobile native layer
+- create `expo-meta-wearables-dat` local module scaffold
+- add iOS Swift bridge for DAT availability, session lifecycle, and media APIs
+- add Android Kotlin bridge for DAT availability, session lifecycle, and media APIs
+- add config plugin for Info.plist and AndroidManifest metadata injection
+- add build flags so app still compiles when DAT credentials or package access are absent
+
+### Mobile JS layer
+- add a native wrapper and hook-based state model
+- extend diagnostics screen with a DAT capability matrix
+- add media capture actions and upload flows
+- add cards and task detail views for media artifacts and CID-backed outputs
+
+### Backend MCP/runtime layer
+- harden tool discovery, schema caching, and health checks
+- persist negotiated profile metadata and receipt references
+- add task submit/status/cancel wrappers with normalized errors
+- add remote-only enforcement switch and shadow-mode instrumentation
+
+### Backend product layer
+- map canonical capability IDs to spoken summaries and card builders
+- attach DAT media artifacts to tasks, notifications, and result views
+- expose diagnostics endpoints for wearable capability state and backend routing state
+- add policy checks for external publishing, pinning, and long-running workflows
+
+### Ops layer
+- document developer setup for DAT iOS, DAT Android, MCP endpoints, and IPFS servers
+- add dashboards for routing decisions, remote task health, and wearable session reliability
+- add CI jobs for fixture MCP integration and DAT-disabled mobile safety builds
 
 ---
 
@@ -875,3 +1069,4 @@ This roadmap is successful when all of the following are true:
 3. start Phase 1 with a concrete capability registry and execution parity matrix
 4. start Phase 2 with DAT diagnostics wrappers before attempting full media workflows
 5. choose `ipfs_accelerate_py` as the first full MCP++ production-path integration target
+6. split the first implementation PRs so mobile DAT diagnostics and backend MCP runtime changes can land independently

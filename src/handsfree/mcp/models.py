@@ -24,6 +24,7 @@ class MCPServerConfig:
     transport: str = "http"
     command: str | None = None
     args: list[str] = field(default_factory=list)
+    preferred_execution_mode: str | None = None
     task_category: str | None = None
     task_create_tool: str | None = None
     task_status_tool: str | None = None
@@ -52,3 +53,43 @@ class MCPRunStatus:
     message: str | None = None
     output: dict[str, Any] = field(default_factory=dict)
     raw_response: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class MCPArtifactRefs:
+    """Normalized artifact and provenance references for one execution."""
+
+    result_cid: str | None = None
+    receipt_ref: str | None = None
+    event_dag_ref: str | None = None
+    delegation_ref: str | None = None
+
+
+@dataclass(frozen=True)
+class MCPExecutionTrace:
+    """Normalized execution trace metadata."""
+
+    request_id: str | None = None
+    run_id: str | None = None
+    remote_task_id: str | None = None
+    tool_name: str | None = None
+    last_protocol_state: str | None = None
+    provider_profiles: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class MCPExecutionResultEnvelope:
+    """Canonical HandsFree result envelope for direct or MCP-backed execution."""
+
+    capability_id: str | None
+    provider: str
+    server_family: str
+    execution_mode: str
+    status: str
+    spoken_text: str
+    summary: str
+    structured_output: Any = None
+    follow_up_actions: list[dict[str, Any]] = field(default_factory=list)
+    artifact_refs: MCPArtifactRefs = field(default_factory=MCPArtifactRefs)
+    trace: MCPExecutionTrace = field(default_factory=MCPExecutionTrace)
+    needs_input_schema: dict[str, Any] | None = None

@@ -180,6 +180,11 @@ Current HandsFree implementation note:
 - Duplicate `message_id` frames are treated as replay/retry events and return a fresh `ack` without redispatching the application payload.
 - The transport now supports protocol-scoped message routing on top of the existing frame envelope so future chat / command / notification channels can share one Bluetooth-backed session.
 - The first concrete logical channel is now `/handsfree/chat/1.0.0`, with JSON chat payloads carried inside the Bluetooth transport message wrapper.
+- Dev bring-up now includes normalized in-memory chat history retrieval by `conversation_id`, so a peer chat session can be inspected across multiple validated frames.
+- Chat history now persists to DuckDB via `peer_chat_messages`, with the in-memory store retained only as a fallback if DB access is unavailable.
+- Dev peer chat now supports outbound backend-originated sends through the configured transport provider, which makes the backend capable of injecting `/handsfree/chat/1.0.0` traffic instead of only validating inbound mobile frames.
+- A thin dev outbox queue now bridges backend-originated peer chat to the mobile diagnostics flow when the real handset transport is not yet directly attached to the backend runtime.
+- Runtime session cursors now persist to DuckDB, and dev diagnostics can list or clear those cursors during handset reconnect bring-up.
 
 ### D) Product integration layer (new)
 - Add “peer mode” policy controls:

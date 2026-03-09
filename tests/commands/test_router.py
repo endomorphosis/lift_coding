@@ -1,11 +1,15 @@
 """Tests for command router."""
 
+import uuid
+
 import pytest
 
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import Profile
 from handsfree.commands.router import CommandRouter
+from handsfree.db import init_db
+from handsfree.db.action_logs import write_action_log
 
 
 @pytest.fixture
@@ -278,6 +282,335 @@ class TestAIIntents:
         assert response["debug"]["capability_id"] == "copilot.pr.diff_summary"
         assert response["debug"]["execution_mode"] == "fixture"
 
+    def test_ai_rag_summary(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle ai.rag_summary through the shared AI executor."""
+        intent = parser.parse("rag summary for pr 123 on openai/example")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.rag_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Augmented summary",
+                "headline": "RAG summary for PR #123",
+                "summary": "Augmented summary with risks.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.rag_summary"
+            assert request.context.repo == "openai/example"
+            assert request.context.pr_number == 123
+            assert kwargs["profile_config"].profile == Profile.DEFAULT
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Augmented summary"
+        assert response["debug"]["capability_id"] == "github.pr.rag_summary"
+        assert response["debug"]["execution_mode"] == "orchestrated"
+        assert response["debug"]["policy_resolution"]["requested_workflow"] == "pr_rag_summary"
+        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "pr_rag_summary"
+        assert response["debug"]["policy_resolution"]["policy_applied"] is False
+
+    def test_ai_accelerated_rag_summary(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle ai.accelerated_rag_summary through the shared AI executor."""
+        intent = parser.parse("accelerated rag summary for pr 123 on openai/example")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.accelerated_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Accelerated summary",
+                "headline": "Accelerated summary for PR #123",
+                "summary": "Accelerated summary with risks.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.accelerated_summary"
+            assert request.context.repo == "openai/example"
+            assert request.context.pr_number == 123
+            assert kwargs["profile_config"].profile == Profile.DEFAULT
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Accelerated summary"
+        assert response["debug"]["capability_id"] == "github.pr.accelerated_summary"
+        assert response["debug"]["execution_mode"] == "orchestrated"
+
+    def test_ai_rag_summary_can_select_accelerated_backend_from_env(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Standard rag summary intent should switch to accelerated backend from env."""
+        intent = parser.parse("rag summary for pr 123 on openai/example")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.accelerated_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Accelerated summary",
+                "headline": "Accelerated summary for PR #123",
+                "summary": "Accelerated summary with risks.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.accelerated_summary"
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_SUMMARY_BACKEND", "accelerated")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["capability_id"] == "github.pr.accelerated_summary"
+        assert response["debug"]["policy_resolution"]["requested_workflow"] == "pr_rag_summary"
+        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "accelerated_pr_summary"
+        assert response["debug"]["policy_resolution"]["policy_applied"] is True
+
+    def test_ai_rag_summary_can_select_accelerated_backend_from_phrase(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Standard rag summary intent should switch to accelerated backend from phrase hint."""
+        intent = parser.parse("use acceleration for augmented summary for pr 123")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.accelerated_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Accelerated summary",
+                "headline": "Accelerated summary for PR #123",
+                "summary": "Accelerated summary with risks.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.accelerated_summary"
+            assert request.context.pr_number == 123
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["capability_id"] == "github.pr.accelerated_summary"
+
+    def test_ai_rag_summary_can_select_accelerated_backend_and_persist(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Standard rag summary intent should combine accelerated backend selection with persistence."""
+        intent = parser.parse("use acceleration for augmented summary for pr 123 to ipfs")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.accelerated_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Persisted accelerated summary",
+                "headline": "Accelerated summary for PR #123",
+                "summary": "Accelerated summary with risks.",
+                "ipfs_cid": "bafy-accelerated-summary",
+                "trace": {"provider": "composite", "ipfs_cid": "bafy-accelerated-summary"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.accelerated_summary"
+            assert request.options["persist_output"] is True
+            assert request.options["ipfs_options"] == {"pin": True}
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["capability_id"] == "github.pr.accelerated_summary"
+        assert response["debug"]["persist_output"] is True
+        assert response["debug"]["ipfs_cid"] == "bafy-accelerated-summary"
+
+    def test_ai_accelerate_generate_and_store(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle accelerated generate/store through the shared AI executor."""
+        intent = parser.parse(
+            "generate and store with acceleration summarize the failure cluster to ipfs"
+        )
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "ipfs.accelerate.generate_and_store"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Stored accelerated output as bafy-accelerated.",
+                "headline": "Accelerated stored output",
+                "summary": "Stored accelerated output in IPFS.",
+                "cid": "bafy-accelerated",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "ipfs.accelerate.generate_and_store"
+            assert request.inputs["prompt"] == "summarize the failure cluster"
+            assert request.inputs["kit_pin"] is True
+            assert request.options["ipfs_options"] == {"pin": False}
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Stored accelerated output as bafy-accelerated."
+        assert response["debug"]["capability_id"] == "ipfs.accelerate.generate_and_store"
+        assert response["debug"]["resolved_context"]["prompt"] == "summarize the failure cluster"
+
+    def test_ai_accelerated_explain_failure(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle accelerated failure analysis through the shared AI executor."""
+        intent = parser.parse("accelerated explain workflow CI Linux for pr 123")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.check.accelerated_failure_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Accelerated failure analysis is ready.",
+                "headline": "Accelerated failure analysis",
+                "summary": "CI Linux is failing during setup.",
+                "repo": "default/repo",
+                "pr_number": 123,
+                "failure_target": "CI Linux",
+                "failure_target_type": "workflow",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.accelerated_failure_explain"
+            assert request.context.pr_number == 123
+            assert request.context.workflow_name == "CI Linux"
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Accelerated failure analysis is ready."
+        assert response["debug"]["capability_id"] == "github.check.accelerated_failure_explain"
+        assert response["debug"]["resolved_context"]["repo"] == "openai/example"
+
+    def test_ai_rag_summary_can_request_ipfs_persistence(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """RAG summary intents should pass persistence options into the AI request."""
+        intent = parser.parse("store augmented summary for pull request 123 to ipfs")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "github.pr.rag_summary"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Persisted summary",
+                "headline": "RAG summary for PR #123",
+                "summary": "Augmented summary with risks.",
+                "ipfs_cid": "bafy-summary",
+                "trace": {"provider": "composite", "ipfs_cid": "bafy-summary"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.pr.rag_summary"
+            assert request.options["persist_output"] is True
+            assert request.options["ipfs_options"] == {"pin": True}
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert "Stored in IPFS as bafy-summary" in response["cards"][0]["lines"]
+        assert response["debug"]["persist_output"] is True
+        assert response["debug"]["ipfs_cid"] == "bafy-summary"
+
+    def test_ai_read_cid_routes_to_ipfs_read_capability(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Stored AI outputs should be readable through the shared AI request path."""
+        intent = parser.parse("read summary from cid bafy123")
+        router = CommandRouter(PendingActionManager())
+
+        class StubExecution:
+            capability_id = "ipfs.content.read_ai_output"
+
+            class execution_mode:
+                value = "direct_import"
+
+            output = {
+                "spoken_text": "Recovered summary text.",
+                "headline": "Stored summary",
+                "summary": "Recovered summary text.",
+                "cid": "bafy123",
+                "trace": {"provider": "ipfs_content_router", "operation": "cat", "cid": "bafy123"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "ipfs.content.read_ai_output"
+            assert request.options["cid"] == "bafy123"
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Recovered summary text."
+        assert response["debug"]["capability_id"] == "ipfs.content.read_ai_output"
+        assert response["debug"]["resolved_context"]["cid"] == "bafy123"
+
     def test_ai_explain_failure(
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
     ) -> None:
@@ -292,6 +625,194 @@ class TestAIIntents:
         assert response["intent"]["name"] == "ai.explain_failure"
         assert response["debug"]["capability_id"] == "copilot.pr.failure_explain"
 
+    def test_ai_explain_failure_can_use_composite_capability(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Failure analysis should switch to the composite path when enabled."""
+        intent = parser.parse("explain failing checks for pr 124 on openai/example")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.failure_rag_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Augmented failure analysis",
+                "headline": "Failure analysis for PR #124",
+                "summary": "Check CI Linux setup first.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.failure_rag_explain"
+            assert request.context.repo == "openai/example"
+            assert request.context.pr_number == 124
+            assert request.options["github_provider"] is router.github_provider
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Augmented failure analysis"
+        assert response["debug"]["capability_id"] == "github.check.failure_rag_explain"
+        assert response["debug"]["execution_mode"] == "orchestrated"
+        assert response["debug"]["policy_resolution"]["requested_workflow"] == "failure_rag_explain"
+        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "failure_rag_explain"
+        assert response["debug"]["policy_resolution"]["policy_applied"] is False
+
+    def test_ai_explain_failure_persistence_flows_to_composite_request(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Failure analysis persistence requests should pass IPFS options through."""
+        intent = parser.parse("persist explain failure for pull request 124 to ipfs")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.failure_rag_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Persisted failure analysis",
+                "headline": "Failure analysis for PR #124",
+                "summary": "Start with the first failing check.",
+                "ipfs_cid": "bafy-failure",
+                "trace": {"provider": "composite", "ipfs_cid": "bafy-failure"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.failure_rag_explain"
+            assert request.options["persist_output"] is True
+            assert request.options["ipfs_options"] == {"pin": True}
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["persist_output"] is True
+        assert response["debug"]["ipfs_cid"] == "bafy-failure"
+
+    def test_ai_explain_failure_can_select_accelerated_backend_from_phrase(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Standard failure intent should switch to accelerated backend from phrase hint."""
+        intent = parser.parse("use acceleration for explain workflow CI Linux for pr 456")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.accelerated_failure_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Accelerated failure analysis",
+                "headline": "Accelerated failure analysis for PR #456",
+                "summary": "CI Linux is failing during setup.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.accelerated_failure_explain"
+            assert request.context.pr_number == 456
+            assert request.context.workflow_name == "CI Linux"
+            assert request.options["github_provider"] is router.github_provider
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["spoken_text"] == "Accelerated failure analysis"
+        assert response["debug"]["capability_id"] == "github.check.accelerated_failure_explain"
+        assert response["debug"]["policy_resolution"]["requested_workflow"] == "failure_rag_explain"
+        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "accelerated_failure_explain"
+        assert response["debug"]["policy_resolution"]["policy_applied"] is True
+
+    def test_ai_explain_failure_can_select_accelerated_backend_and_persist(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Standard failure intent should combine accelerated backend selection with persistence."""
+        intent = parser.parse("use acceleration for explain failure for pr 456 to ipfs")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.accelerated_failure_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Persisted accelerated failure analysis",
+                "headline": "Accelerated failure analysis for PR #456",
+                "summary": "CI Linux is failing during setup.",
+                "ipfs_cid": "bafy-accelerated-failure",
+                "trace": {"provider": "composite", "ipfs_cid": "bafy-accelerated-failure"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.accelerated_failure_explain"
+            assert request.options["persist_output"] is True
+            assert request.options["ipfs_options"] == {"pin": True}
+            assert request.options["github_provider"] is router.github_provider
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["capability_id"] == "github.check.accelerated_failure_explain"
+        assert response["debug"]["persist_output"] is True
+        assert response["debug"]["ipfs_cid"] == "bafy-accelerated-failure"
+
+    def test_ai_explain_failure_explicit_copilot_overrides_composite_flag(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Explicit Copilot phrasing should keep the Copilot failure capability."""
+        intent = parser.parse("use copilot to explain failure for pull request 456")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+        captured: dict[str, object] = {}
+
+        class StubExecution:
+            capability_id = "copilot.pr.failure_explain"
+
+            class execution_mode:
+                value = "cli_live"
+
+            output = {
+                "spoken_text": "Copilot failure analysis",
+                "headline": "Failure analysis",
+                "summary": "Copilot summary",
+                "trace": {"provider": "copilot_cli", "source": "live"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            captured["request"] = request
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+        monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert captured["request"].capability_id == "copilot.pr.failure_explain"
+        assert response["debug"]["capability_id"] == "copilot.pr.failure_explain"
+
     def test_ai_explain_named_failure(
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
     ) -> None:
@@ -304,6 +825,66 @@ class TestAIIntents:
         assert response["status"] == "ok"
         assert "failing in setup" in response["spoken_text"].lower()
         assert response["intent"]["name"] == "ai.explain_failure"
+
+    def test_ai_explain_named_failure_passes_workflow_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should pass workflow_name through the AI request context."""
+        intent = parser.parse("explain workflow CI Linux for pr 123")
+        router = CommandRouter(PendingActionManager())
+        captured = {}
+
+        class StubExecution:
+            output = {
+                "spoken_text": "CI Linux is failing in setup.",
+                "headline": "Failure analysis",
+                "summary": "CI Linux setup is failing.",
+                "trace": {"step": "copilot"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            captured["request"] = request
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert captured["request"].context.workflow_name == "CI Linux"
+        assert captured["request"].context.check_name is None
+        assert captured["request"].context.failure_target is None
+
+    def test_ai_explain_named_check_passes_check_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should pass check_name through the AI request context."""
+        intent = parser.parse("explain check unit tests for pr 123")
+        router = CommandRouter(PendingActionManager())
+        captured = {}
+
+        class StubExecution:
+            output = {
+                "spoken_text": "Unit tests are failing.",
+                "headline": "Failure analysis",
+                "summary": "Unit tests are failing.",
+                "trace": {"step": "copilot"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            captured["request"] = request
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert captured["request"].context.check_name == "unit tests"
+        assert captured["request"].context.workflow_name is None
+        assert captured["request"].context.failure_target is None
 
     def test_ai_intent_uses_session_pr_context(
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
@@ -339,6 +920,269 @@ class TestAIIntents:
         assert "openai/example" in response["cards"][0]["title"]
         assert response["debug"]["resolved_context"]["repo"] == "openai/example"
 
+    def test_ai_find_similar_failures_uses_shared_ai_executor(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should handle similar-failure lookup through the shared AI executor."""
+        intent = parser.parse("find similar failures for pr 125 on openai/example")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.find_similar_failures"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "headline": "Similar failures for PR #125",
+                "summary": "Top match: PR 101 in openai/example with score 0.98. Dependency install failed.",
+                "spoken_text": "Top match: PR 101 in openai/example with score 0.98.",
+                "ranked_matches": [
+                    {
+                        "score": 0.98,
+                        "summary": "Dependency install failed.",
+                        "repo": "openai/example",
+                        "pr_number": 101,
+                    }
+                ],
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.find_similar_failures"
+            assert request.context.repo == "openai/example"
+            assert request.context.pr_number == 125
+            assert request.options["github_provider"] is router.github_provider
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["intent"]["name"] == "ai.find_similar_failures"
+        assert response["debug"]["capability_id"] == "github.check.find_similar_failures"
+        assert response["spoken_text"].startswith("Top match:")
+
+    def test_ai_find_similar_failures_passes_history_cids(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should forward CID-backed history inputs to similar-failure retrieval."""
+        intent = parser.parse("find similar failures for pr 125 using cids bafy123 and bafy456")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.find_similar_failures"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "headline": "Similar failures for PR #125",
+                "summary": "No similar prior failures were found in the current candidate set.",
+                "spoken_text": "No similar prior failures were found in the current candidate set.",
+                "ranked_matches": [],
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.inputs["history_cids"] == ["bafy123", "bafy456"]
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["intent"]["entities"]["history_cids"] == ["bafy123", "bafy456"]
+
+    def test_ai_find_similar_failures_can_use_session_pr_context(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Similar-failure lookup should reuse the last referenced PR from session context."""
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+        captured = {}
+
+        class StubExecution:
+            capability_id = "github.check.find_similar_failures"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "headline": "Similar failures for PR #123",
+                "summary": "No similar prior failures were found in the current candidate set.",
+                "spoken_text": "No similar prior failures were found in the current candidate set.",
+                "ranked_matches": [],
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            captured["request"] = request
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        router.route(parser.parse("summarize pr 123"), Profile.DEFAULT, session_id="similar-session")
+        response = router.route(
+            parser.parse("find similar failures"),
+            Profile.DEFAULT,
+            session_id="similar-session",
+        )
+
+        assert response["status"] == "ok"
+        assert captured["request"].context.pr_number == 123
+
+    def test_ai_explain_failure_passes_history_cids_to_composite_backend(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Composite failure analysis should receive CID-backed history inputs."""
+        intent = parser.parse("explain workflow CI Linux for pr 123 using cids bafy123, bafy456")
+        router = CommandRouter(PendingActionManager(), github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.failure_rag_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Failure analysis with history.",
+                "headline": "Failure analysis",
+                "summary": "Retrieved two related failures from CID-backed history.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.capability_id == "github.check.failure_rag_explain"
+            assert request.context.workflow_name == "CI Linux"
+            assert request.inputs["history_cids"] == ["bafy123", "bafy456"]
+            assert request.options["github_provider"] is router.github_provider
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+
+        response = router.route(intent, Profile.DEFAULT)
+
+        assert response["status"] == "ok"
+        assert response["intent"]["name"] == "ai.explain_failure"
+
+    def test_ai_find_similar_failures_auto_discovers_history_cids_from_logs(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Router should auto-discover recent persisted failure-analysis CIDs for retrieval."""
+        db_conn = init_db(":memory:")
+        user_id = str(uuid.uuid4())
+        write_action_log(
+            db_conn,
+            user_id=user_id,
+            action_type="ai.execute.github.check.failure_rag_explain",
+            ok=True,
+            result={
+                "output": {
+                    "repo": "openai/example",
+                    "pr_number": 101,
+                    "failure_target": "CI Linux",
+                    "failure_target_type": "workflow",
+                    "ipfs_cid": "bafy-history-1",
+                }
+            },
+        )
+        write_action_log(
+            db_conn,
+            user_id=user_id,
+            action_type="ai.execute.github.check.failure_rag_explain",
+            ok=True,
+            result={
+                "output": {
+                    "repo": "other/repo",
+                    "pr_number": 102,
+                    "failure_target": "CI Linux",
+                    "failure_target_type": "workflow",
+                    "ipfs_cid": "bafy-ignore",
+                }
+            },
+        )
+        intent = parser.parse("find similar workflow CI Linux failures for pr 125 on openai/example")
+        router = CommandRouter(PendingActionManager(), db_conn=db_conn, github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.find_similar_failures"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "headline": "Similar failures for PR #125",
+                "summary": "Found one related failure.",
+                "spoken_text": "Found one related failure.",
+                "ranked_matches": [],
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.inputs["history_cids"] == ["bafy-history-1"]
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+
+        response = router.route(intent, Profile.DEFAULT, user_id=user_id)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["resolved_context"]["history_cids"] == ["bafy-history-1"]
+        db_conn.close()
+
+    def test_ai_explain_failure_auto_discovers_history_cids_from_logs(
+        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Composite failure analysis should auto-discover matching persisted history CIDs."""
+        db_conn = init_db(":memory:")
+        user_id = str(uuid.uuid4())
+        write_action_log(
+            db_conn,
+            user_id=user_id,
+            action_type="ai.execute.github.check.failure_rag_explain",
+            ok=True,
+            result={
+                "output": {
+                    "repo": "openai/example",
+                    "pr_number": 98,
+                    "failure_target": "CI Linux",
+                    "failure_target_type": "workflow",
+                    "ipfs_cid": "bafy-history-2",
+                }
+            },
+        )
+        intent = parser.parse("explain workflow CI Linux for pr 123 on openai/example")
+        router = CommandRouter(PendingActionManager(), db_conn=db_conn, github_provider=object())
+
+        class StubExecution:
+            capability_id = "github.check.failure_rag_explain"
+
+            class execution_mode:
+                value = "orchestrated"
+
+            output = {
+                "spoken_text": "Failure analysis with discovered history.",
+                "headline": "Failure analysis",
+                "summary": "Loaded one prior related failure from persisted history.",
+                "trace": {"provider": "composite"},
+            }
+
+        def stub_execute_ai_request(request, **kwargs):
+            assert request.inputs["history_cids"] == ["bafy-history-2"]
+            return StubExecution()
+
+        monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
+        monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+
+        response = router.route(intent, Profile.DEFAULT, user_id=user_id)
+
+        assert response["status"] == "ok"
+        assert response["debug"]["resolved_context"]["history_cids"] == ["bafy-history-2"]
+        db_conn.close()
+
     def test_ai_intent_routes_through_shared_capability_executor(
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
     ) -> None:
@@ -360,14 +1204,14 @@ class TestAIIntents:
                 "trace": {"provider": "copilot_cli", "source": "live"},
             }
 
-        def stub_execute_ai_capability(capability_id: str, **kwargs: object) -> StubExecution:
-            captured["capability_id"] = capability_id
+        def stub_execute_ai_request(request, **kwargs: object) -> StubExecution:
+            captured["request"] = request
             captured["kwargs"] = kwargs
             return StubExecution()
 
         monkeypatch.setattr(
-            "handsfree.commands.router.execute_ai_capability",
-            stub_execute_ai_capability,
+            "handsfree.commands.router.execute_ai_request",
+            stub_execute_ai_request,
         )
         monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
 
@@ -375,8 +1219,8 @@ class TestAIIntents:
 
         assert response["status"] == "ok"
         assert response["spoken_text"] == "Stub explanation"
-        assert captured["capability_id"] == "copilot.pr.explain"
-        assert captured["kwargs"]["pr_number"] == 123
+        assert captured["request"].capability_id == "copilot.pr.explain"
+        assert captured["request"].context.pr_number == 123
         assert response["intent"]["name"] == "ai.summarize_diff"
 
     def test_ai_intent_captures_repo_context(

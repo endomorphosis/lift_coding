@@ -51,6 +51,39 @@ def _parse_agent_provider(text: str) -> str:
     return PROVIDER_ALIASES.get(normalized) or resolve_provider_alias(normalized) or normalized
 
 
+def _parse_cids(text: str) -> list[str]:
+    """Parse one or more CIDs from a phrase like 'bafy1, bafy2 and bafy3'."""
+    normalized = re.sub(r"\s+(?:and|&)\s+", ",", text.strip(), flags=re.IGNORECASE)
+    return [cid.strip() for cid in normalized.split(",") if cid.strip()]
+
+
+def _infer_agent_execution_mode(text: str) -> str | None:
+    """Infer a preferred execution mode from natural language phrasing."""
+    normalized = text.strip().lower()
+
+    direct_import_patterns = (
+        r"\blocally\b",
+        r"\blocal\s+only\b",
+        r"\bon[ -]?device\b",
+        r"\bdirect[ -]?import\b",
+    )
+    mcp_remote_patterns = (
+        r"\bremotely\b",
+        r"\bremote\s+only\b",
+        r"\bvia\s+mcp\b",
+        r"\bthrough\s+mcp\b",
+        r"\busing\s+mcp\b",
+        r"\bin\s+the\s+background\b",
+        r"\bas\s+a\s+background\s+task\b",
+    )
+
+    if any(re.search(pattern, normalized, re.IGNORECASE) for pattern in direct_import_patterns):
+        return "direct_import"
+    if any(re.search(pattern, normalized, re.IGNORECASE) for pattern in mcp_remote_patterns):
+        return "mcp_remote"
+    return None
+
+
 class IntentParser:
     """Parse text transcripts into structured intents using pattern matching."""
 
@@ -75,6 +108,110 @@ class IntentParser:
                 "system.next",
                 {},
             ),
+            (
+                re.compile(r"\b(next result|next results)\b", re.IGNORECASE),
+                "system.next",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\b(show|read|give me)\s+more\s+(?:results|dataset discoveries|ipfs results|fetches)\b",
+                    re.IGNORECASE,
+                ),
+                "system.next",
+                {},
+            ),
+            (
+                re.compile(r"\bopen\s+(?:that|the|current)\s+result\b", re.IGNORECASE),
+                "agent.result_open",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\b(?:what\s+can\s+i\s+do\s+with|show)\s+(?:that|the|current)\s+result\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_actions",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\b(?:show|open|read)\s+(?:task\s+)?details?\s+for\s+(?:that|the|current)\s+result\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_details",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\bshow\s+another\s+result\s+like\s+(?:this|that)\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_related",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\brerun\s+(?:that|the|current)\s+fetch\s+with\s+(https?://\S+)\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_rerun_fetch",
+                {
+                    "mcp_seed_url": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"\brerun\s+(?:that|the|current)\s+dataset\s+(?:search|discovery)\s+with\s+(.+)$",
+                    re.IGNORECASE,
+                ),
+                "agent.result_rerun_dataset",
+                {
+                    "mcp_input": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:that|the|current)\s+result\s+to\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_save_ipfs",
+                {},
+            ),
+            (
+                re.compile(r"\bread\s+(?:the|that|current)\s+cid\b", re.IGNORECASE),
+                "agent.result_read",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\bshare\s+(?:the|that|current)\s+cid\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_share",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\bunpin\s+(?:that|the|current)(?:\s+cid|\s+result)?\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_unpin",
+                {},
+            ),
+            (
+                re.compile(r"\bpin\s+(?:that|the|current)(?:\s+cid|\s+result)?\b", re.IGNORECASE),
+                "agent.result_pin",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\brerun\s+(?:that|the|current)\s+workflow\b",
+                    re.IGNORECASE,
+                ),
+                "agent.result_rerun",
+                {},
+            ),
             (re.compile(r"\bcancel\b", re.IGNORECASE), "system.cancel", {}),
             (
                 re.compile(r"\b(confirm|confirmed)\b", re.IGNORECASE),
@@ -96,6 +233,258 @@ class IntentParser:
                 {},
             ),
             # PR summarize
+            (
+                re.compile(
+                    r"\b(?:read|load|open|show)\s+(?:summary|analysis|result)?\s*(?:from\s+)?cid\s+([A-Za-z0-9]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.read_cid",
+                {"cid": lambda m: m.group(1)},
+            ),
+            (
+                re.compile(
+                    r"\b(?:read|load|open|show)\s+(?:summary|analysis|result)?\s*(?:from\s+)?ipfs\s+([A-Za-z0-9]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.read_cid",
+                {"cid": lambda m: m.group(1)},
+            ),
+            (
+                re.compile(
+                    r"\b(?:accelerate\s+and\s+store|generate\s+and\s+store\s+with\s+acceleration)\s+(.+?)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerate_generate_and_store",
+                {
+                    "prompt": lambda m: m.group(1).strip(),
+                    "kit_pin": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:accelerate\s+and\s+store|generate\s+and\s+store\s+with\s+acceleration)\s+(.+)$",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerate_generate_and_store",
+                {
+                    "prompt": lambda m: m.group(1).strip(),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:use\s+acceleration\s+for|use\s+accelerated\s+summary\s+for)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "summary_backend": "accelerated",
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:use\s+acceleration\s+for|use\s+accelerated\s+summary\s+for)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "summary_backend": "accelerated",
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:use\s+acceleration\s+for|use\s+accelerated\s+summary\s+for)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "summary_backend": "accelerated",
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:use\s+acceleration\s+for|use\s+accelerated\s+summary\s+for)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "summary_backend": "accelerated",
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_rag_summary",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+(?:rag\s+summary|augmented\s+summary)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_rag_summary",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\b(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:rag\s+summary|augmented\s+summary)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.rag_summary",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(r"\b(?:rag\s+summary|augmented\s+summary)\b", re.IGNORECASE),
+                "ai.rag_summary",
+                {},
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "history_cids": lambda m: _parse_cids(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "history_cids": lambda m: _parse_cids(m.group(2)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+workflow\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "workflow_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                    "history_cids": lambda m: _parse_cids(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+check\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "check_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                    "history_cids": lambda m: _parse_cids(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {"pr_number": lambda m: int(m.group(1))},
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+workflow\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "workflow_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+check\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "check_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                },
+            ),
+            (
+                re.compile(r"\bfind\s+similar\s+failures\b", re.IGNORECASE),
+                "ai.find_similar_failures",
+                {},
+            ),
             (
                 re.compile(r"\bsummarize\s+(pr|pull\s+request)\s+(\d+)\b", re.IGNORECASE),
                 "pr.summarize",
@@ -158,6 +547,89 @@ class IntentParser:
             ),
             (
                 re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "failure_backend": "accelerated",
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "failure_backend": "accelerated",
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                    "failure_backend": "accelerated",
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "failure_backend": "accelerated",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "failure_backend": "accelerated",
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+acceleration\s+for\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                    "failure_backend": "accelerated",
+                },
+            ),
+            (
+                re.compile(
                     r"\buse\s+copilot\s+to\s+explain\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
                     re.IGNORECASE,
                 ),
@@ -181,13 +653,54 @@ class IntentParser:
             ),
             (
                 re.compile(
-                    r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    r"\baccelerated\s+(?:failure\s+analysis|explain\s+failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
                     re.IGNORECASE,
+                ),
+                "ai.accelerated_explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                },
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+(?:failure\s+analysis|explain\s+failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "failure_target_type": lambda m: m.group(1).lower(),
-                    "failure_target": lambda m: m.group(2).strip(),
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
                     "pr_number": lambda m: int(m.group(3)),
                     "repo": lambda m: m.group(4),
                     "provider": "copilot_cli",
@@ -196,12 +709,16 @@ class IntentParser:
             (
                 re.compile(
                     r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
-                    re.IGNORECASE,
+                re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "failure_target_type": lambda m: m.group(1).lower(),
-                    "failure_target": lambda m: m.group(2).strip(),
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
                     "pr_number": lambda m: int(m.group(3)),
                     "provider": "copilot_cli",
                 },
@@ -232,13 +749,52 @@ class IntentParser:
             ),
             (
                 re.compile(
-                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
                     re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "failure_target_type": lambda m: m.group(1).lower(),
-                    "failure_target": lambda m: m.group(2).strip(),
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                    "repo": lambda m: m.group(4),
+                    "history_cids": lambda m: _parse_cids(m.group(5)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                    "history_cids": lambda m: _parse_cids(m.group(4)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
                     "pr_number": lambda m: int(m.group(3)),
                     "repo": lambda m: m.group(4),
                 },
@@ -246,13 +802,88 @@ class IntentParser:
             (
                 re.compile(
                     r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
+                re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "workflow_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "workflow"
+                    else None,
+                    "check_name": lambda m: m.group(2).strip()
+                    if m.group(1).lower() == "check"
+                    else None,
+                    "pr_number": lambda m: int(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\s+(?:to|in)\s+ipfs\b",
                     re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "failure_target_type": lambda m: m.group(1).lower(),
-                    "failure_target": lambda m: m.group(2).strip(),
-                    "pr_number": lambda m: int(m.group(3)),
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "history_cids": lambda m: _parse_cids(m.group(3)),
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "history_cids": lambda m: _parse_cids(m.group(2)),
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "history_cids": lambda m: _parse_cids(m.group(3)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+using\s+cids?\s+([A-Za-z0-9,\s&-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "history_cids": lambda m: _parse_cids(m.group(2)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
+                    "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:save|store|persist)\s+(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:to|in)\s+ipfs\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "persist_output": True,
                 },
             ),
             (
@@ -634,6 +1265,39 @@ class IntentParser:
                 "agent.status",
                 {},
             ),
+            (
+                re.compile(
+                    r"\b(?:show|list|summarize|read)\s+(?:the\s+)?latest\s+(dataset\s+discoveries|ipfs\s+results|fetches)\b",
+                    re.IGNORECASE,
+                ),
+                "agent.results",
+                {
+                    "view": lambda m: {
+                        "dataset discoveries": "datasets",
+                        "ipfs results": "ipfs",
+                        "fetches": "fetches",
+                    }[m.group(1).strip().lower()],
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:show|list|summarize|read)\s+(?:the\s+)?recent\s+(dataset\s+discoveries|ipfs\s+results|fetches)\b",
+                    re.IGNORECASE,
+                ),
+                "agent.results",
+                {
+                    "view": lambda m: {
+                        "dataset discoveries": "datasets",
+                        "ipfs results": "ipfs",
+                        "fetches": "fetches",
+                    }[m.group(1).strip().lower()],
+                },
+            ),
+            (
+                re.compile(r"\bagent\s+results\b", re.IGNORECASE),
+                "agent.results",
+                {"view": "overview"},
+            ),
             # Agent pause
             (
                 re.compile(r"\bpause\s+task\s+([a-f0-9-]+)\b", re.IGNORECASE),
@@ -686,6 +1350,19 @@ class IntentParser:
                 # Calculate confidence based on pattern match quality
                 # For now, use 1.0 for exact matches, 0.9 for partial
                 confidence = 1.0 if pattern.match(text) else 0.9
+
+                if intent_name in {
+                    "agent.delegate",
+                    "agent.result_save_ipfs",
+                    "agent.result_pin",
+                    "agent.result_unpin",
+                    "agent.result_rerun",
+                    "agent.result_rerun_fetch",
+                    "agent.result_rerun_dataset",
+                }:
+                    preferred_mode = _infer_agent_execution_mode(text)
+                    if preferred_mode is not None:
+                        entities.setdefault("mcp_preferred_execution_mode", preferred_mode)
 
                 return ParsedIntent(name=intent_name, confidence=confidence, entities=entities)
 

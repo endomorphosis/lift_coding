@@ -66,6 +66,24 @@ APK output:
 android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
+## Meta DAT Reference Mode
+
+The checked-in `expo-meta-wearables-dat` module is now treated as a first-party bridge and diagnostics surface, not as a hard dependency on Meta's GitHub Packages artifacts.
+
+Reason:
+- the official Android DAT artifacts exist in GitHub Packages, but this environment does not currently have package-read access to that feed
+- the app build should remain reproducible without private or preview package credentials
+
+Current behavior:
+- the mobile app builds without the official DAT Maven artifacts
+- the native module still exposes a stable diagnostics and session interface
+- Android uses reflection so the bridge can detect DAT classes if they are ever added by some other path later
+- the Meta DAT repositories remain in the repo as reference implementations and API examples
+
+Engineering direction:
+- keep iterating on the local bridge contract for discovery, registration, transport, audio, and camera diagnostics
+- use the upstream DAT repositories as reference material rather than required build inputs
+
 Install and launch it on a connected Android handset:
 
 ```bash
@@ -189,6 +207,13 @@ After `npm run android:debug:local`, use this exact sequence on two Android hand
 8. On either side, tap `Send Ping Frame`.
 9. On the receiving side, use `Validate + Replay Ack via Backend` or enable auto inbound validation.
 10. Confirm that `frameReceived` and decoded `ack` details appear in the diagnostics card.
+11. If reconnects look stuck after backend restart or app reset, use `Load Transport Sessions` in the `Glasses` tab first and inspect the matched cursor health.
+12. Treat `fresh` as likely expected, `aging` as suspicious, and `stale` as a strong signal that the persisted cursor may need to be cleared before reconnect.
+13. Use `Clear Matched Transport Session` or `Clear Transport Session` for the affected peer before retrying the connect flow when the matched cursor looks stale.
+14. For backend relay validation, switch to the `Peer Chat` tab and use:
+    `Refresh All Peer Chat Diagnostics`, `Load Chat History`, `Refresh Backend Outbox Status`, the transport-session controls, and the urgent/leased-message controls.
+15. If a handset reconnect path still looks stuck, use `Load Transport Sessions` in the `Peer Chat` tab to inspect the same persisted runtime cursors with more backend context.
+16. Watch the `Last synced` and `Sync health` lines in the `Peer Chat` summary card. They now update as relative freshness signals, so you can see when the diagnostics state is fresh, aging, or stale without comparing wall-clock times.
 
 If anything fails during steps 5-10, run `npm run android:logcat:local` and repeat the action to capture:
 - `BluetoothPeerBridge` scan, advertise, connect, and frame logs
@@ -281,7 +306,8 @@ mobile/
 │       └── expo-module.config.json   # Module configuration
 ├── src/
 │   └── screens/
-│       └── GlassesDiagnosticsScreen.js  # Main diagnostics UI
+│       ├── GlassesDiagnosticsScreen.js  # BLE/audio/session diagnostics UI
+│       └── PeerChatDiagnosticsScreen.js # Backend chat/outbox diagnostics UI
 ├── app.json                          # Expo configuration
 ├── package.json
 └── BUILD.md                          # This file

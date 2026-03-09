@@ -3,9 +3,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { fetchTTS, postDevPeerEnvelope, sendAudioCommand, uploadDevAudio } from '../api/client';
+import {
+  deleteDevTransportSession,
+  fetchTTS,
+  getDevTransportSessions,
+  postDevPeerEnvelope,
+  sendAudioCommand,
+  uploadDevAudio,
+} from '../api/client';
 import { getDebugState, simulateNotificationForDev } from '../push';
 import ExpoGlassesAudio from 'expo-glasses-audio';
+import { getWearablesBridge } from '../native/wearablesBridge';
 import {
   createAckEnvelope,
   createChatMessageEnvelope,
@@ -14,7 +22,15 @@ import {
   decodeEnvelopeBase64,
   encodeEnvelopeBase64,
 } from '../utils/peerEnvelope';
+import { getOrCreateLocalPeerId } from '../utils/localPeerIdentity';
 import { buildPeerBackendValidationResult, replayBackendAckFrame } from '../utils/peerDiagnostics';
+import {
+  findMatchingTransportSession,
+  formatTransportSessionAge,
+  getTransportSessionPeerTarget,
+  getTransportSessionHealth,
+  isStaleTransportSessionSuspected,
+} from '../utils/peerTransportSessions';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
@@ -92,6 +108,9 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [pushDebugState, setPushDebugState] = useState(null);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
+  const [wearablesBridgeAvailable, setWearablesBridgeAvailable] = useState(false);
+  const [wearablesDiagnostics, setWearablesDiagnostics] = useState(null);
+  const [wearablesSessionState, setWearablesSessionState] = useState('unknown');
   const [discoveredPeers, setDiscoveredPeers] = useState([]);
   const [selectedPeerRef, setSelectedPeerRef] = useState(null);
   const [activePeer, setActivePeer] = useState(null);
@@ -106,11 +125,29 @@ export default function GlassesDiagnosticsScreen() {
   const [lastInboundPeerEnvelope, setLastInboundPeerEnvelope] = useState(null);
   const [peerBackendValidation, setPeerBackendValidation] = useState(null);
   const [isValidatingPeerFrame, setIsValidatingPeerFrame] = useState(false);
+  const [transportSessions, setTransportSessions] = useState([]);
+  const [isLoadingTransportSessions, setIsLoadingTransportSessions] = useState(false);
+  const [isClearingTransportSession, setIsClearingTransportSession] = useState(false);
+  const [localPeerId, setLocalPeerId] = useState(`12D3KooWlocal${createSessionId()}`);
   const peerSessionRef = useRef(createSessionId());
-  const localPeerIdRef = useRef(`12D3KooWlocal${createSessionId()}`);
+  const peerConversationRef = useRef(`chat-${createSessionId()}`);
+  const localPeerIdRef = useRef(localPeerId);
   const soundRef = useRef(null);
   const pendingTtsTempUriRef = useRef(null);
   const recordingPromiseRef = useRef(null);
+  const appIsActiveRef = useRef(AppState.currentState === 'active');
+  const wearablesBridgeRef = useRef(null);
+  const transportSessionTarget = getTransportSessionPeerTarget({
+    activePeer,
+    selectedPeerRef,
+    discoveredPeers,
+  });
+  const matchedTransportSession = findMatchingTransportSession(transportSessions, transportSessionTarget);
+  const staleTransportSessionSuspected = isStaleTransportSessionSuspected({
+    targetPeer: transportSessionTarget,
+    matchedSession: matchedTransportSession,
+    activePeer,
+  });
 
   const handleInboundPeerFrame = async (event, envelope = null) => {
     if (!event?.peerRef || !autoValidateInboundPeerFrames) {
@@ -144,6 +181,19 @@ export default function GlassesDiagnosticsScreen() {
       } catch {
         // ignore
       }
+      try {
+        const resolvedLocalPeerId = await getOrCreateLocalPeerId();
+        localPeerIdRef.current = resolvedLocalPeerId;
+        setLocalPeerId(resolvedLocalPeerId);
+        try {
+          const response = await getDevTransportSessions();
+          setTransportSessions(Array.isArray(response?.sessions) ? response.sessions : []);
+        } catch {
+          // keep transport-session diagnostics best-effort
+        }
+      } catch {
+        // keep fallback in-memory peer id
+      }
       // Check if native module is available
       try {
         if (ExpoGlassesAudio) {
@@ -159,6 +209,7 @@ export default function GlassesDiagnosticsScreen() {
       }
       await checkAudioRoute();
       await refreshPeerAdapterState();
+      await refreshWearablesDiagnostics();
     })();
 
     // Fetch initial debug state immediately
@@ -171,15 +222,13 @@ export default function GlassesDiagnosticsScreen() {
 
     // Track app state to pause polling when backgrounded
     // Initialize based on current state rather than defaulting to true
-    let isActive = AppState.currentState === 'active';
-    
     const appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
-      isActive = nextAppState === 'active';
+      appIsActiveRef.current = nextAppState === 'active';
     });
 
     // Periodically refresh push debug state (every 5 seconds) but only when active
     const interval = setInterval(() => {
-      if (!isActive) {
+      if (!appIsActiveRef.current) {
         return; // Skip polling when app is backgrounded
       }
       try {
@@ -201,6 +250,37 @@ export default function GlassesDiagnosticsScreen() {
       if (pendingTtsTempUriRef.current) {
         FileSystem.deleteAsync(pendingTtsTempUriRef.current, { idempotent: true }).catch(() => {});
         pendingTtsTempUriRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let subscription = null;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const module = wearablesBridgeRef.current || (await getWearablesBridge());
+        if (cancelled || !module?.addStateListener) {
+          return;
+        }
+        wearablesBridgeRef.current = module;
+        subscription = module.addStateListener((event) => {
+          setWearablesSessionState(event?.state || 'unknown');
+          refreshWearablesDiagnostics().catch(() => {});
+        });
+      } catch {
+        // keep DAT diagnostics best-effort
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      try {
+        subscription?.remove?.();
+      } catch {
+        // ignore
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -340,6 +420,7 @@ export default function GlassesDiagnosticsScreen() {
   useEffect(() => {
     checkAudioRoute();
     refreshPeerAdapterState();
+    refreshWearablesDiagnostics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [devMode]);
 
@@ -421,6 +502,78 @@ export default function GlassesDiagnosticsScreen() {
       }
     } catch (error) {
       setLastError(`Peer adapter check failed: ${error.message}`);
+    }
+  };
+
+  const refreshWearablesDiagnostics = async () => {
+    try {
+      const module = await getWearablesBridge();
+      wearablesBridgeRef.current = module;
+      setWearablesBridgeAvailable(Boolean(module?.isBridgeAvailable?.()));
+      const diagnostics = await module.getDiagnostics();
+      setWearablesDiagnostics(diagnostics);
+      setWearablesSessionState(diagnostics?.sessionState || 'unknown');
+    } catch (error) {
+      setLastError(`Wearables bridge diagnostics failed: ${error.message}`);
+    }
+  };
+
+  const startWearablesSession = async () => {
+    try {
+      setLastError(null);
+      const module = wearablesBridgeRef.current || (await getWearablesBridge());
+      wearablesBridgeRef.current = module;
+      const result = await module.startBridgeSession();
+      setWearablesSessionState(result?.state || 'unknown');
+      await refreshWearablesDiagnostics();
+    } catch (error) {
+      setLastError(`Wearables bridge session start failed: ${error.message}`);
+    }
+  };
+
+  const stopWearablesSession = async () => {
+    try {
+      setLastError(null);
+      const module = wearablesBridgeRef.current || (await getWearablesBridge());
+      wearablesBridgeRef.current = module;
+      const result = await module.stopBridgeSession();
+      setWearablesSessionState(result?.state || 'unknown');
+      await refreshWearablesDiagnostics();
+    } catch (error) {
+      setLastError(`Wearables bridge session stop failed: ${error.message}`);
+    }
+  };
+
+  const loadTransportSessions = async () => {
+    try {
+      setLastError(null);
+      setIsLoadingTransportSessions(true);
+      const response = await getDevTransportSessions();
+      const sessions = Array.isArray(response?.sessions) ? response.sessions : [];
+      setTransportSessions(sessions);
+      setLastPeerEvent(`Loaded ${sessions.length} transport session cursor${sessions.length === 1 ? '' : 's'}`);
+    } catch (error) {
+      setLastError(`Transport session load failed: ${error.message}`);
+    } finally {
+      setIsLoadingTransportSessions(false);
+    }
+  };
+
+  const clearTransportSession = async (peerId) => {
+    try {
+      setLastError(null);
+      setIsClearingTransportSession(true);
+      const response = await deleteDevTransportSession(peerId);
+      setTransportSessions((current) => current.filter((session) => session.peer_id !== peerId));
+      setLastPeerEvent(
+        response?.cleared
+          ? `Cleared transport session for ${peerId}`
+          : `No transport session found for ${peerId}`
+      );
+    } catch (error) {
+      setLastError(`Transport session clear failed: ${error.message}`);
+    } finally {
+      setIsClearingTransportSession(false);
     }
   };
 
@@ -853,6 +1006,7 @@ export default function GlassesDiagnosticsScreen() {
         sessionId: peerSessionRef.current,
         text: `ping:${atob(PEER_TEST_PAYLOAD_BASE64)}`,
         senderPeerId: localPeerIdRef.current,
+        conversationId: peerConversationRef.current,
       });
       await sendEnvelopeToPeer(
         activePeer.peerRef,
@@ -935,6 +1089,44 @@ export default function GlassesDiagnosticsScreen() {
       </View>
 
       <View style={styles.card}>
+        <Text style={styles.cardTitle}>Wearables Bridge</Text>
+        <Text style={styles.subtext}>First-party wearables diagnostics bridge for config, capability, and session visibility.</Text>
+        <Text style={styles.text}>Module available: {wearablesBridgeAvailable ? 'yes' : 'no'}</Text>
+        <Text style={styles.text}>Provider: {wearablesDiagnostics?.provider || 'internal_bridge'}</Text>
+        <Text style={styles.text}>Integration mode: {wearablesDiagnostics?.integrationMode || 'unknown'}</Text>
+        <Text style={styles.text}>Platform: {wearablesDiagnostics?.platform || 'unknown'}</Text>
+        <Text style={styles.text}>SDK linked: {wearablesDiagnostics?.sdkLinked ? 'yes' : 'no'}</Text>
+        <Text style={styles.text}>SDK configured: {wearablesDiagnostics?.sdkConfigured ? 'yes' : 'no'}</Text>
+        <Text style={styles.text}>SDK version: {wearablesDiagnostics?.sdkVersion || 'not linked'}</Text>
+        <Text style={styles.text}>Analytics opt-out: {wearablesDiagnostics?.analyticsOptOut ? 'enabled' : 'disabled'}</Text>
+        <Text style={styles.text}>Application ID: {wearablesDiagnostics?.applicationId || 'not configured'}</Text>
+        <Text style={styles.text}>Session state: {wearablesSessionState}</Text>
+        <Text style={styles.text}>Registration state: {wearablesDiagnostics?.registrationState || 'unknown'}</Text>
+        <Text style={styles.text}>Active device: {wearablesDiagnostics?.activeDeviceId || 'none'}</Text>
+        <Text style={styles.text}>Device count: {wearablesDiagnostics?.deviceCount ?? 0}</Text>
+        <Text style={styles.text}>
+          Capabilities: {wearablesDiagnostics?.capabilities
+            ? [
+                wearablesDiagnostics.capabilities.session ? 'session' : null,
+                wearablesDiagnostics.capabilities.camera ? 'camera' : null,
+                wearablesDiagnostics.capabilities.photoCapture ? 'photo' : null,
+                wearablesDiagnostics.capabilities.videoStream ? 'video' : null,
+                wearablesDiagnostics.capabilities.audio ? 'audio' : null,
+              ].filter(Boolean).join(', ') || 'none'
+            : 'unknown'}
+        </Text>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={refreshWearablesDiagnostics}>
+          <Text style={styles.buttonTextSecondary}>Refresh Bridge Diagnostics</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={startWearablesSession} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonText}>Start Bridge Session</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={stopWearablesSession} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Stop Bridge Session</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.card}>
         <Text style={styles.cardTitle}>Peer Bridge</Text>
         <Text style={styles.subtext}>Exercise Bluetooth peer discovery, connection, and frame events.</Text>
         <Text style={styles.subtext}>Backend validation accepts the last outbound frame and replays any ack into the local diagnostics event flow.</Text>
@@ -947,7 +1139,7 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>
           Activity: {peerAdapterState ? `${peerAdapterState.scanning ? 'scanning' : 'idle'} / ${peerAdapterState.advertising ? 'advertising' : 'not-advertising'}` : 'unknown'}
         </Text>
-        <Text style={styles.text}>Local peer ID: {localPeerIdRef.current}</Text>
+        <Text style={styles.text}>Local peer ID: {localPeerId}</Text>
         <Text style={styles.text}>
           Advertised identity: {advertisedPeerIdentity?.displayName || advertisedPeerIdentity?.peerId || 'none'}
         </Text>
@@ -958,6 +1150,18 @@ export default function GlassesDiagnosticsScreen() {
           Selected peer: {selectedPeerRef || 'None'}
         </Text>
         <Text style={styles.text}>Active peer: {activePeer?.peerId || activePeer?.peerRef || 'None'}</Text>
+        <Text style={styles.text}>Transport sessions: {transportSessions.length}</Text>
+        <Text style={styles.text}>
+          Matched transport session: {matchedTransportSession?.session_id || 'none'}
+        </Text>
+        <Text style={styles.text}>
+          Matched transport session health: {getTransportSessionHealth(matchedTransportSession?.updated_at_ms)} • {formatTransportSessionAge(matchedTransportSession?.updated_at_ms)}
+        </Text>
+        {staleTransportSessionSuspected ? (
+          <Text style={styles.errorText}>
+            Stale cursor suspected: matched persisted transport session exists without an active peer connection.
+          </Text>
+        ) : null}
         <Text style={styles.text}>Last event: {lastPeerEvent}</Text>
         <Text style={styles.text}>
           Last outbound frame: {lastOutboundPeerEnvelope?.kind || 'None'}
@@ -970,6 +1174,15 @@ export default function GlassesDiagnosticsScreen() {
           onPress={refreshPeerAdapterState}
         >
           <Text style={styles.buttonTextSecondary}>Refresh Peer Adapter State</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary, isLoadingTransportSessions && styles.buttonDisabled]}
+          onPress={loadTransportSessions}
+          disabled={isLoadingTransportSessions}
+        >
+          <Text style={styles.buttonTextSecondary}>
+            {isLoadingTransportSessions ? 'Loading Transport Sessions...' : 'Load Transport Sessions'}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.buttonSecondary]}
@@ -1072,6 +1285,11 @@ export default function GlassesDiagnosticsScreen() {
                 protocol {peerBackendValidation.protocol}
               </Text>
             ) : null}
+            {peerBackendValidation.conversation_id ? (
+              <Text style={styles.responseText}>
+                conversation {peerBackendValidation.conversation_id}
+              </Text>
+            ) : null}
             {peerBackendValidation.payload_text ? (
               <Text style={styles.responseText}>
                 payload {peerBackendValidation.payload_text}
@@ -1138,6 +1356,72 @@ export default function GlassesDiagnosticsScreen() {
                 >
                   <Text style={styles.peerActionText}>
                     {activePeer?.peerRef === peer.peerRef ? 'Connected' : 'Connect This Peer'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+        ) : null}
+        {transportSessionTarget ? (
+          <View style={styles.debugInfo}>
+            <Text style={styles.debugLabel}>Transport Session Target</Text>
+            <Text style={styles.debugValue}>
+              {transportSessionTarget.source} peer {transportSessionTarget.label}
+            </Text>
+            <Text style={styles.debugValue}>
+              {matchedTransportSession
+                ? `matched ${matchedTransportSession.session_id}`
+                : 'no persisted transport session matched this peer'}
+            </Text>
+            {matchedTransportSession ? (
+              <TouchableOpacity
+                style={[
+                  styles.peerActionButton,
+                  styles.peerActionButtonSecondary,
+                  isClearingTransportSession ? styles.buttonDisabled : null,
+                ]}
+                onPress={() => clearTransportSession(matchedTransportSession.peer_id)}
+                disabled={isClearingTransportSession}
+              >
+                <Text style={styles.peerActionTextSecondary}>
+                  {isClearingTransportSession
+                    ? 'Clearing Matched Transport Session...'
+                    : 'Clear Matched Transport Session'}
+                </Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        ) : null}
+        {transportSessions.length > 0 ? (
+          <View style={styles.peerList}>
+            {transportSessions.map((session) => (
+              <View key={`${session.peer_id}-${session.session_id}`} style={styles.peerRow}>
+                <Text style={styles.peerTitle}>{session.peer_id}</Text>
+                {matchedTransportSession?.session_id === session.session_id ? (
+                  <Text style={styles.selectedText}>Matched Current Peer</Text>
+                ) : null}
+                <Text style={styles.peerMeta}>session {session.session_id}</Text>
+                {session.peer_ref ? (
+                  <Text style={styles.peerMeta}>{session.peer_ref}</Text>
+                ) : null}
+                <Text style={styles.peerMeta}>
+                  {getTransportSessionHealth(session.updated_at_ms)} • {formatTransportSessionAge(session.updated_at_ms)}
+                </Text>
+                <Text style={styles.peerMeta}>resume {session.resume_token}</Text>
+                <Text style={styles.peerMeta}>
+                  capabilities: {(session.capabilities || []).join(', ') || 'none'}
+                </Text>
+                <TouchableOpacity
+                  style={[
+                    styles.peerActionButton,
+                    styles.peerActionButtonSecondary,
+                    isClearingTransportSession ? styles.buttonDisabled : null,
+                  ]}
+                  onPress={() => clearTransportSession(session.peer_id)}
+                  disabled={isClearingTransportSession}
+                >
+                  <Text style={styles.peerActionTextSecondary}>
+                    {isClearingTransportSession ? 'Clearing Transport Session...' : 'Clear Transport Session'}
                   </Text>
                 </TouchableOpacity>
               </View>

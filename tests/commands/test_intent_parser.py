@@ -54,6 +54,25 @@ class TestSystemIntents:
             assert result.name == "system.set_profile"
             assert result.entities["profile"] == profile
 
+    def test_result_followup_actions(self, parser: IntentParser) -> None:
+        """Test result-navigation follow-up intents."""
+        assert parser.parse("open that result").name == "agent.result_open"
+        assert parser.parse("what can i do with that result").name == "agent.result_actions"
+        assert parser.parse("show task details for that result").name == "agent.result_details"
+        assert parser.parse("show another result like this").name == "agent.result_related"
+        fetch_rerun = parser.parse("rerun that fetch with https://example.org")
+        assert fetch_rerun.name == "agent.result_rerun_fetch"
+        assert fetch_rerun.entities["mcp_seed_url"] == "https://example.org"
+        dataset_rerun = parser.parse("rerun that dataset search with labor law datasets")
+        assert dataset_rerun.name == "agent.result_rerun_dataset"
+        assert dataset_rerun.entities["mcp_input"] == "labor law datasets"
+        assert parser.parse("save that result to ipfs").name == "agent.result_save_ipfs"
+        assert parser.parse("read the cid").name == "agent.result_read"
+        assert parser.parse("share that cid").name == "agent.result_share"
+        assert parser.parse("unpin that").name == "agent.result_unpin"
+        assert parser.parse("pin that").name == "agent.result_pin"
+        assert parser.parse("rerun that workflow").name == "agent.result_rerun"
+
 
 class TestInboxIntents:
     """Test inbox-related intents."""
@@ -133,6 +152,76 @@ class TestPRIntents:
         assert result.entities["pr_number"] == 123
         assert result.entities["repo"] == "owner/repo"
 
+    def test_ai_rag_summary(self, parser: IntentParser) -> None:
+        """Test ai.rag_summary intent."""
+        result = parser.parse("rag summary for pr 123")
+        assert result.name == "ai.rag_summary"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("augmented summary for pull request 456 on owner/repo")
+        assert result.name == "ai.rag_summary"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["repo"] == "owner/repo"
+
+        result = parser.parse("augmented summary")
+        assert result.name == "ai.rag_summary"
+        assert result.entities == {}
+
+        result = parser.parse("store augmented summary for pull request 456 on owner/repo to ipfs")
+        assert result.name == "ai.rag_summary"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["repo"] == "owner/repo"
+        assert result.entities["persist_output"] is True
+
+        result = parser.parse("use acceleration for augmented summary for pr 123")
+        assert result.name == "ai.rag_summary"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["summary_backend"] == "accelerated"
+
+        result = parser.parse("use acceleration for augmented summary for pr 124 to ipfs")
+        assert result.name == "ai.rag_summary"
+        assert result.entities["pr_number"] == 124
+        assert result.entities["summary_backend"] == "accelerated"
+        assert result.entities["persist_output"] is True
+
+    def test_ai_accelerated_rag_summary(self, parser: IntentParser) -> None:
+        """Test ai.accelerated_rag_summary intent."""
+        result = parser.parse("accelerated rag summary for pr 123")
+        assert result.name == "ai.accelerated_rag_summary"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("accelerated augmented summary for pull request 456 on owner/repo")
+        assert result.name == "ai.accelerated_rag_summary"
+        assert result.entities["pr_number"] == 456
+        assert result.entities["repo"] == "owner/repo"
+
+        result = parser.parse("accelerated augmented summary")
+        assert result.name == "ai.accelerated_rag_summary"
+        assert result.entities == {}
+
+    def test_ai_read_cid(self, parser: IntentParser) -> None:
+        """Test ai.read_cid intent."""
+        result = parser.parse("read summary from cid bafy123")
+        assert result.name == "ai.read_cid"
+        assert result.entities["cid"] == "bafy123"
+
+        result = parser.parse("show result from ipfs bafy456")
+        assert result.name == "ai.read_cid"
+        assert result.entities["cid"] == "bafy456"
+
+    def test_ai_accelerate_generate_and_store(self, parser: IntentParser) -> None:
+        """Test ai.accelerate_generate_and_store intent."""
+        result = parser.parse("accelerate and store summarize the failure cluster")
+        assert result.name == "ai.accelerate_generate_and_store"
+        assert result.entities["prompt"] == "summarize the failure cluster"
+
+        result = parser.parse(
+            "generate and store with acceleration summarize the failure cluster to ipfs"
+        )
+        assert result.name == "ai.accelerate_generate_and_store"
+        assert result.entities["prompt"] == "summarize the failure cluster"
+        assert result.entities["kit_pin"] is True
+
     def test_ai_explain_failure(self, parser: IntentParser) -> None:
         """Test ai.explain_failure intent."""
         result = parser.parse("explain failing checks for pr 123")
@@ -151,13 +240,103 @@ class TestPRIntents:
         result = parser.parse("explain workflow CI Linux for pr 789")
         assert result.name == "ai.explain_failure"
         assert result.entities["pr_number"] == 789
-        assert result.entities["failure_target_type"] == "workflow"
-        assert result.entities["failure_target"] == "CI Linux"
+        assert result.entities["workflow_name"] == "CI Linux"
+        assert "failure_target" not in result.entities
+        assert "failure_target_type" not in result.entities
+
+        result = parser.parse("explain check unit tests for pr 790")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 790
+        assert result.entities["check_name"] == "unit tests"
+        assert "failure_target" not in result.entities
+        assert "failure_target_type" not in result.entities
 
         result = parser.parse("explain workflow CI Linux for pr 789 on owner/repo")
         assert result.name == "ai.explain_failure"
         assert result.entities["pr_number"] == 789
         assert result.entities["repo"] == "owner/repo"
+
+        result = parser.parse("persist explain failure for pull request 123 to ipfs")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["persist_output"] is True
+
+        result = parser.parse("use acceleration for explain failure for pr 321")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 321
+        assert result.entities["failure_backend"] == "accelerated"
+
+        result = parser.parse("use acceleration for explain workflow CI Linux for pr 322")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 322
+        assert result.entities["workflow_name"] == "CI Linux"
+        assert result.entities["failure_backend"] == "accelerated"
+
+        result = parser.parse("use acceleration for explain failure for pr 323 to ipfs")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 323
+        assert result.entities["failure_backend"] == "accelerated"
+        assert result.entities["persist_output"] is True
+
+    def test_ai_accelerated_explain_failure(self, parser: IntentParser) -> None:
+        """Test ai.accelerated_explain_failure intent."""
+        result = parser.parse("accelerated failure analysis for pr 123")
+        assert result.name == "ai.accelerated_explain_failure"
+        assert result.entities["pr_number"] == 123
+
+        result = parser.parse("accelerated explain workflow CI Linux for pr 123")
+        assert result.name == "ai.accelerated_explain_failure"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["workflow_name"] == "CI Linux"
+
+    def test_ai_find_similar_failures(self, parser: IntentParser) -> None:
+        """Test ai.find_similar_failures intent."""
+        result = parser.parse("find similar failures for pr 125")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["pr_number"] == 125
+
+        result = parser.parse("find similar failures for pull request 125 on owner/repo")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["pr_number"] == 125
+        assert result.entities["repo"] == "owner/repo"
+
+        result = parser.parse("find similar workflow CI Linux failures for pr 125")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["workflow_name"] == "CI Linux"
+
+        result = parser.parse("find similar check unit tests failures for pr 125")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["check_name"] == "unit tests"
+
+        result = parser.parse("find similar failures")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities == {}
+
+    def test_ai_find_similar_failures_with_history_cids(self, parser: IntentParser) -> None:
+        """Test similar-failure retrieval with explicit history CIDs."""
+        result = parser.parse("find similar failures for pr 125 using cids bafy123 and bafy456")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["pr_number"] == 125
+        assert result.entities["history_cids"] == ["bafy123", "bafy456"]
+
+        result = parser.parse("find similar workflow CI Linux failures for pr 125 using cid bafy789")
+        assert result.name == "ai.find_similar_failures"
+        assert result.entities["workflow_name"] == "CI Linux"
+        assert result.entities["history_cids"] == ["bafy789"]
+
+    def test_ai_explain_failure_with_history_cids(self, parser: IntentParser) -> None:
+        """Test failure analysis with explicit history CIDs."""
+        result = parser.parse("explain failure for pr 123 using cid bafy123")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["history_cids"] == ["bafy123"]
+
+        result = parser.parse("explain workflow CI Linux for pr 123 on owner/repo using cids bafy1, bafy2")
+        assert result.name == "ai.explain_failure"
+        assert result.entities["pr_number"] == 123
+        assert result.entities["repo"] == "owner/repo"
+        assert result.entities["workflow_name"] == "CI Linux"
+        assert result.entities["history_cids"] == ["bafy1", "bafy2"]
 
     def test_pr_request_review_single(self, parser: IntentParser) -> None:
         """Test pr.request_review with single reviewer."""
@@ -355,6 +534,12 @@ class TestAgentIntents:
         assert result.entities["mcp_capability"] == "ipfs_cat"
         assert result.entities["mcp_cid"] == "bafytestcid"
 
+    def test_result_save_ipfs_local_phrase_sets_direct_import_mode(self, parser: IntentParser) -> None:
+        result = parser.parse("save that result to ipfs locally")
+
+        assert result.name == "agent.result_save_ipfs"
+        assert result.entities["mcp_preferred_execution_mode"] == "direct_import"
+
     def test_direct_ipfs_pin_maps_to_ipfs_kit(self, parser: IntentParser) -> None:
         """Test direct IPFS pin phrase maps to kit MCP pin capability."""
         result = parser.parse("pin bafytestcid on ipfs")
@@ -391,6 +576,37 @@ class TestAgentIntents:
         for phrase in phrases:
             result = parser.parse(phrase)
             assert result.name == "agent.status", f"Failed for: {phrase}"
+
+    def test_agent_results_views(self, parser: IntentParser) -> None:
+        """Test agent.results saved-view phrases."""
+        cases = {
+            "agent results": "overview",
+            "show latest dataset discoveries": "datasets",
+            "show recent ipfs results": "ipfs",
+            "summarize latest fetches": "fetches",
+        }
+        for phrase, expected_view in cases.items():
+            result = parser.parse(phrase)
+            assert result.name == "agent.results", f"Failed for: {phrase}"
+            assert result.entities["view"] == expected_view
+
+    def test_result_navigation_phrases(self, parser: IntentParser) -> None:
+        """Result follow-up phrases should reuse system.next."""
+        phrases = [
+            "next result",
+            "show more results",
+            "show more dataset discoveries",
+            "read more ipfs results",
+        ]
+        for phrase in phrases:
+            result = parser.parse(phrase)
+            assert result.name == "system.next", f"Failed for: {phrase}"
+
+    def test_result_open_and_read_followups(self, parser: IntentParser) -> None:
+        """Result follow-up action phrases should resolve explicitly."""
+        assert parser.parse("open that result").name == "agent.result_open"
+        assert parser.parse("read the cid").name == "agent.result_read"
+        assert parser.parse("pin that").name == "agent.result_pin"
 
     def test_agent_pause_without_task_id(self, parser: IntentParser) -> None:
         """Test agent.pause intent without task ID."""

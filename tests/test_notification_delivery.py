@@ -1,8 +1,23 @@
 """Tests for notification delivery provider."""
 
 import os
+import sys
+import types
 
 import pytest
+
+if "pywebpush" not in sys.modules:
+    pywebpush_module = types.ModuleType("pywebpush")
+
+    class WebPushException(Exception):
+        pass
+
+    def webpush(*args, **kwargs):
+        raise NotImplementedError("pywebpush test stub should be monkeypatched in tests")
+
+    pywebpush_module.WebPushException = WebPushException
+    pywebpush_module.webpush = webpush
+    sys.modules["pywebpush"] = pywebpush_module
 
 from handsfree.db import init_db
 from handsfree.db.notification_subscriptions import create_subscription
@@ -334,6 +349,51 @@ class TestNotificationDelivery:
         assert delivery_calls[0]["data"]["event_type"] == "test_event"
         assert delivery_calls[0]["data"]["message"] == "Test notification message"
         assert delivery_calls[0]["keys"] == {"auth": "secret"}
+
+    def test_task_completion_delivery_includes_card(self, db_conn, test_user_id, monkeypatch):
+        """Task completion push payloads should include the derived notification card."""
+        monkeypatch.setenv("HANDSFREE_NOTIFICATION_PROVIDER", "logger")
+
+        create_subscription(
+            conn=db_conn,
+            user_id=test_user_id,
+            endpoint="https://push.example.com/test-endpoint",
+            subscription_keys={"auth": "secret"},
+        )
+
+        delivery_calls = []
+        original_send = DevLoggerProvider.send
+
+        def mock_send(self, subscription_endpoint, notification_data, subscription_keys=None):
+            delivery_calls.append(notification_data)
+            return original_send(self, subscription_endpoint, notification_data, subscription_keys)
+
+        monkeypatch.setattr(DevLoggerProvider, "send", mock_send)
+
+        create_notification(
+            conn=db_conn,
+            user_id=test_user_id,
+            event_type="task_completed",
+            message="Agent task abc123 completed. Result: Expanded legal query",
+            metadata={
+                "task_id": "abc12345-0000-0000-0000-000000000000",
+                "state": "completed",
+                "provider_label": "IPFS Datasets",
+                "instruction": "find legal datasets",
+                "result_preview": "Expanded legal query",
+                "result_output": {
+                    "message": "Expanded legal query",
+                    "status": "success",
+                    "expanded_queries": ["legal datasets", "legal datasets statutes"],
+                },
+            },
+        )
+
+        assert len(delivery_calls) == 1
+        assert delivery_calls[0]["card"]["title"] == "Ipfs Datasets Completed"
+        assert delivery_calls[0]["card"]["lines"][0] == "Instruction: find legal datasets"
+        assert "message: Expanded legal query" in delivery_calls[0]["card"]["lines"]
+        assert delivery_calls[0]["card"]["deep_link"] == "/v1/agents/tasks/abc12345-0000-0000-0000-000000000000"
 
     def test_notification_not_delivered_when_provider_disabled(
         self, db_conn, test_user_id, monkeypatch

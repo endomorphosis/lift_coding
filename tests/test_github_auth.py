@@ -3,6 +3,7 @@
 from handsfree.github.auth import (
     EnvironmentTokenProvider,
     FixtureOnlyProvider,
+    GhCliTokenProvider,
     get_default_auth_provider,
 )
 
@@ -43,13 +44,14 @@ class TestEnvironmentTokenProvider:
         assert provider.supports_live_mode() is False
 
     def test_live_mode_enabled_but_no_token(self, monkeypatch):
-        """When live mode is enabled but no token, should not support live mode."""
+        """When live mode is enabled, gh CLI auth may satisfy the token lookup."""
         monkeypatch.delenv("GITHUB_TOKEN", raising=False)
         monkeypatch.setenv("GITHUB_LIVE_MODE", "true")
+        monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: "gho_cli_token")
 
         provider = EnvironmentTokenProvider()
-        assert provider.get_token("user123") is None
-        assert provider.supports_live_mode() is False
+        assert provider.get_token("user123") == "gho_cli_token"
+        assert provider.supports_live_mode() is True
 
     def test_both_token_and_live_mode_enabled(self, monkeypatch):
         """When both token and live mode are set, should support live mode."""
@@ -80,6 +82,16 @@ class TestEnvironmentTokenProvider:
             monkeypatch.setenv("GITHUB_LIVE_MODE", false_value)
             provider = EnvironmentTokenProvider()
             assert provider.supports_live_mode() is False, f"Failed for value: {false_value}"
+
+    def test_falls_back_to_gh_cli_when_env_token_missing(self, monkeypatch):
+        """Live mode should use gh CLI auth when env token is unavailable."""
+        monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+        monkeypatch.setenv("GITHUB_LIVE_MODE", "true")
+        monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: "gho_cli_token")
+
+        provider = EnvironmentTokenProvider()
+        assert provider.get_token("user123") == "gho_cli_token"
+        assert provider.supports_live_mode() is True
 
 
 class TestGetDefaultAuthProvider:

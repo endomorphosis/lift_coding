@@ -19,12 +19,19 @@ from typing import Any
 
 from handsfree.cli.executor import CLIExecutor
 from handsfree.cli.parsers import parse_output
+from handsfree.commands.profiles import Profile, ProfileConfig
 from handsfree.db.agent_tasks import AgentTask
+from handsfree.ipfs_datasets_routers import get_embeddings_router
+from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
 from handsfree.mcp import (
     MCPClient,
     MCPClientError,
     MCPConfigurationError,
+    MCPTaskBinding,
     MCPToolInvocationResult,
+    build_result_envelope,
+    build_result_envelope_from_invocation,
+    envelope_to_trace,
     get_mcp_server_config,
     is_mcp_provider_enabled,
     resolve_task_binding,
@@ -256,8 +263,7 @@ class CopilotCLIAgentProvider(AgentProvider):
     """
 
     def start_task(self, task: AgentTask) -> dict[str, Any]:
-        """Start a Copilot CLI task (scaffold)."""
-        if not is_copilot_cli_available():
+        """Start a Copilot CLI task through the shared AI request contract."""
         executor = CLIExecutor()
         fixture_mode = executor.fixture_mode()
         cli_available = is_copilot_cli_available()
@@ -281,47 +287,87 @@ class CopilotCLIAgentProvider(AgentProvider):
         }
 
         pr_number = _extract_target_number(task.target_ref)
+        repo = _extract_target_repo(task.target_ref)
         if task.target_type == "pr" and pr_number:
-            result = executor.execute("gh.copilot.explain_pr", "copilot", pr_number=pr_number)
-            if result.ok:
-                try:
-                    parsed = parse_output("gh_copilot_explain_pr", result.stdout)
-                except Exception:
-                    logger.warning(
-                        "Failed to parse Copilot CLI output for task %s",
-                        task.id,
-                        exc_info=True,
-                    )
-                    preview = result.stdout.strip().splitlines()[0] if result.stdout.strip() else ""
+            from handsfree.ai.capabilities import execute_ai_request
+            from handsfree.ai.models import AIRequestContext, AICapabilityRequest
+            from handsfree.ai.policy import build_policy_resolution
+            from handsfree.models import AIWorkflow
+
+            capability_id = _select_delegated_ai_capability(task.instruction)
+            requested_workflow = _infer_delegated_requested_workflow(task.instruction)
+            request = AICapabilityRequest(
+                capability_id=capability_id,
+                context=AIRequestContext(repo=repo, pr_number=pr_number),
+            )
+            try:
+                execution = execute_ai_request(
+                    request,
+                    cli_executor=executor,
+                    profile_config=ProfileConfig.for_profile(Profile.DEFAULT),
+                )
+                result = execution.output
+                if isinstance(result, dict):
+                    result_trace = result.get("trace", {})
                     trace.update(
                         {
-                            "command_id": result.command_id,
-                            "source": result.source,
-                            "duration_ms": result.duration_ms,
-                            "parse_error": True,
-                            "preview": preview[:200],
+                            "capability_id": execution.capability_id,
+                            "execution_mode": execution.execution_mode.value,
+                            "command_id": result_trace.get("command_id"),
+                            "source": result_trace.get("source"),
+                            "duration_ms": result_trace.get("duration_ms"),
+                            "preview": result.get("spoken_text") or result.get("summary"),
+                            "policy_resolution": build_policy_resolution(
+                                requested_workflow=requested_workflow,
+                                resolved_workflow={
+                                    "github.pr.rag_summary": AIWorkflow.PR_RAG_SUMMARY,
+                                    "github.pr.accelerated_summary": AIWorkflow.ACCELERATED_PR_SUMMARY,
+                                    "github.check.failure_rag_explain": AIWorkflow.FAILURE_RAG_EXPLAIN,
+                                    "github.check.accelerated_failure_explain": AIWorkflow.ACCELERATED_FAILURE_EXPLAIN,
+                                }.get(execution.capability_id, requested_workflow),
+                                requested_capability_id=None,
+                                resolved_capability_id=execution.capability_id,
+                            ).model_dump(mode="json")
+                            if requested_workflow is not None
+                            else None,
                         }
                     )
                     return {
                         "ok": True,
                         "status": "running",
-                        "message": preview or "[STUB] Copilot CLI task started",
+                        "message": result.get("spoken_text", "[STUB] Copilot CLI task started"),
                         "trace": trace,
                     }
-                trace.update(
-                    {
-                        "command_id": result.command_id,
-                        "source": result.source,
-                        "duration_ms": result.duration_ms,
-                        "preview": parsed.get("spoken_text") or parsed.get("summary"),
-                    }
+            except Exception:
+                logger.warning(
+                    "Failed to execute shared AI request for Copilot task %s",
+                    task.id,
+                    exc_info=True,
                 )
-                return {
-                    "ok": True,
-                    "status": "running",
-                    "message": parsed.get("spoken_text", "[STUB] Copilot CLI task started"),
-                    "trace": trace,
-                }
+                if capability_id.startswith("copilot.pr."):
+                    raw_result = executor.execute(
+                        _command_id_for_copilot_capability(capability_id),
+                        "copilot",
+                        pr_number=pr_number,
+                    )
+                    if raw_result.ok:
+                        preview = raw_result.stdout.strip().splitlines()[0] if raw_result.stdout.strip() else ""
+                        trace.update(
+                            {
+                                "capability_id": capability_id,
+                                "command_id": raw_result.command_id,
+                                "source": raw_result.source,
+                                "duration_ms": raw_result.duration_ms,
+                                "parse_error": True,
+                                "preview": preview[:200],
+                            }
+                        )
+                        return {
+                            "ok": True,
+                            "status": "running",
+                            "message": preview or "[STUB] Copilot CLI task started",
+                            "trace": trace,
+                        }
 
         return {
             "ok": True,
@@ -674,8 +720,11 @@ class MCPAgentProvider(AgentProvider):
             "mcp_capability",
             "mcp_input",
             "mcp_cid",
+            "mcp_execution_mode",
             "mcp_pin_action",
+            "mcp_preferred_execution_mode",
             "mcp_seed_url",
+            "mcp_texts",
             "provider_label",
         ):
             value = trace.get(key)
@@ -704,6 +753,14 @@ class MCPAgentProvider(AgentProvider):
                 config=config,
                 base_arguments=self._build_arguments(task),
             )
+            local_result = self._execute_local_binding(task, binding)
+            if local_result is not None:
+                return {
+                    "ok": True,
+                    "status": "running",
+                    "message": local_result["message"],
+                    "trace": trace | local_result["trace"],
+                }
             result = client.invoke_tool(
                 tool_name=binding.start_call.tool_name,
                 arguments=binding.start_call.arguments,
@@ -726,41 +783,51 @@ class MCPAgentProvider(AgentProvider):
 
         remote_task_id = self._extract_remote_task_id(result, binding.remote_id_field)
         if remote_task_id and binding.supports_remote_status:
+            envelope = build_result_envelope_from_invocation(
+                provider_name=self.provider_name,
+                server_family=self.server_family,
+                capability_id=binding.capability_id,
+                execution_mode=binding.execution_mode or "mcp_remote",
+                invocation=result,
+                remote_task_id=remote_task_id,
+                status="running",
+            )
             return {
                 "ok": True,
                 "status": "running",
-                "message": f"{self.provider_name} task submitted",
+                "message": envelope.spoken_text,
                 "trace": trace
                 | {
                     "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
-                    "tool_name": result.tool_name,
-                    "mcp_request_id": result.request_id,
-                    "mcp_run_id": None,
-                    "mcp_remote_task_id": remote_task_id,
+                    "mcp_capability": binding.capability_id,
+                    "mcp_execution_mode": binding.execution_mode or "mcp_remote",
                     "mcp_status_strategy": "tool_polling",
-                    "last_protocol_state": result.output.get("status", result.status),
-                    "mcp_result_preview": result.output.get("message")
-                    or result.content[0].get("text")
-                    if result.content and isinstance(result.content[0], dict)
-                    else None,
                     "mcp_sync_completed": False,
-                },
+                }
+                | envelope_to_trace(envelope),
             }
 
+        envelope = build_result_envelope_from_invocation(
+            provider_name=self.provider_name,
+            server_family=self.server_family,
+            capability_id=binding.capability_id,
+            execution_mode=binding.execution_mode or "mcp_remote",
+            invocation=result,
+        )
         return {
             "ok": True,
             "status": "running",
-            "message": f"{self.provider_name} task started",
+            "message": envelope.spoken_text,
             "trace": trace
             | {
                 "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
-                "tool_name": result.tool_name,
-                "mcp_request_id": result.request_id,
-                "mcp_run_id": result.run_id,
-                "last_protocol_state": result.status,
-                "mcp_result_preview": self._extract_remote_message(result),
-                "mcp_result_output": result.output if result.run_id is None else None,
+                "mcp_capability": binding.capability_id,
+                "mcp_execution_mode": binding.execution_mode or "mcp_remote",
                 "mcp_sync_completed": result.run_id is None and result.status == "completed",
+            }
+            | envelope_to_trace(envelope)
+            | {
+                "mcp_result_output": result.output if result.run_id is None else None,
             },
         }
 
@@ -799,13 +866,25 @@ class MCPAgentProvider(AgentProvider):
             }
 
         mapped_status = _map_mcp_status_to_task_state(status.status)
+        envelope = build_result_envelope(
+            provider_name=self.provider_name,
+            server_family=self.server_family,
+            capability_id=str(trace.get("mcp_capability") or "").strip() or None,
+            execution_mode=str(trace.get("mcp_execution_mode") or "mcp_remote"),
+            status=mapped_status,
+            tool_name=str(trace.get("tool_name") or "") or None,
+            spoken_text=status.message,
+            structured_output=status.output,
+            run_id=status.run_id,
+            last_protocol_state=status.status,
+        )
         return {
             "ok": True,
             "status": mapped_status,
-            "message": status.message or f"{self.provider_name} task is {mapped_status}",
-            "trace": {
-                "last_protocol_state": status.status,
-                "mcp_run_id": status.run_id,
+            "message": envelope.spoken_text,
+            "trace": envelope_to_trace(envelope)
+            | {
+                "mcp_result_output": status.output if mapped_status == "completed" else None,
             },
         }
 
@@ -846,14 +925,24 @@ class MCPAgentProvider(AgentProvider):
             }
 
         protocol_status = self._extract_remote_status(result)
+        envelope = build_result_envelope_from_invocation(
+            provider_name=self.provider_name,
+            server_family=self.server_family,
+            capability_id=str(trace.get("mcp_capability") or "").strip() or None,
+            execution_mode=str(trace.get("mcp_execution_mode") or "mcp_remote"),
+            invocation=result,
+            remote_task_id=str(remote_task_id),
+            status=_map_mcp_status_to_task_state(protocol_status),
+        )
         return {
             "ok": True,
             "status": _map_mcp_status_to_task_state(protocol_status),
-            "message": self._extract_remote_message(result)
-            or f"{self.provider_name} task is {_map_mcp_status_to_task_state(protocol_status)}",
-            "trace": {
-                "last_protocol_state": protocol_status,
-                "mcp_remote_task_id": remote_task_id,
+            "message": envelope.spoken_text,
+            "trace": envelope_to_trace(envelope)
+            | {
+                "mcp_result_output": result.output
+                if _map_mcp_status_to_task_state(protocol_status) == "completed"
+                else None,
             },
         }
 
@@ -979,6 +1068,173 @@ class MCPAgentProvider(AgentProvider):
                 return text
         return None
 
+    def _execute_local_binding(
+        self,
+        task: AgentTask,
+        binding: MCPTaskBinding,
+    ) -> dict[str, Any] | None:
+        if binding.execution_mode != "direct_import":
+            return None
+
+        trace = task.trace or {}
+        capability_id = binding.capability_id
+        if capability_id == "ipfs_pin":
+            cid = str(trace.get("mcp_cid") or "").strip()
+            if not cid:
+                raise MCPConfigurationError("ipfs_pin requires a CID")
+
+            pin_action = str(trace.get("mcp_pin_action") or "").strip().lower()
+            adapter = get_ipfs_kit_adapter()
+            if pin_action == "unpin":
+                output = adapter.unpin(cid)
+                tool_name = "ipfs_kit.unpin"
+                preview = f"Unpinned {cid}."
+            else:
+                output = adapter.pin(cid)
+                tool_name = "ipfs_kit.pin"
+                preview = f"Pinned {cid}."
+
+            return {
+                "message": preview,
+                "trace": {
+                    "mcp_capability": capability_id,
+                    "mcp_execution_mode": "direct_import",
+                    "mcp_sync_completed": True,
+                }
+                | envelope_to_trace(
+                    build_result_envelope(
+                        provider_name=self.provider_name,
+                        server_family=self.server_family,
+                        capability_id=capability_id,
+                        execution_mode="direct_import",
+                        status="completed",
+                        tool_name=tool_name,
+                        spoken_text=preview,
+                        structured_output=output,
+                    )
+                ),
+            }
+
+        if capability_id == "ipfs_add":
+            content = str(trace.get("mcp_input") or task.instruction or "").strip()
+            if not content:
+                raise MCPConfigurationError("ipfs_add requires content to add to IPFS")
+
+            adapter = get_ipfs_kit_adapter()
+            output = adapter.add_bytes(content.encode("utf-8"))
+
+            if isinstance(output, str):
+                cid = output.strip() or None
+                structured_output: Any = {"cid": cid} if cid else {"result": output}
+            else:
+                structured_output = output
+                cid = None
+                if isinstance(output, dict):
+                    cid = str(
+                        output.get("cid")
+                        or output.get("Hash")
+                        or output.get("hash")
+                        or output.get("value")
+                        or ""
+                    ).strip() or None
+
+            preview = f"Saved content to IPFS as {cid}." if cid else "Saved content to IPFS."
+            return {
+                "message": preview,
+                "trace": {
+                    "mcp_capability": capability_id,
+                    "mcp_execution_mode": "direct_import",
+                    "mcp_sync_completed": True,
+                    **({"mcp_cid": cid} if cid else {}),
+                }
+                | envelope_to_trace(
+                    build_result_envelope(
+                        provider_name=self.provider_name,
+                        server_family=self.server_family,
+                        capability_id=capability_id,
+                        execution_mode="direct_import",
+                        status="completed",
+                        tool_name="ipfs_kit.add_bytes",
+                        spoken_text=preview,
+                        structured_output=structured_output,
+                    )
+                ),
+            }
+
+        if capability_id == "ipfs_cat":
+            cid = str(trace.get("mcp_cid") or trace.get("mcp_input") or "").strip()
+            if not cid:
+                raise MCPConfigurationError("ipfs_cat requires a CID or IPFS path")
+
+            adapter = get_ipfs_kit_adapter()
+            output = adapter.cat(cid)
+            structured_output = {
+                "cid": cid,
+                "content": output.decode("utf-8", errors="replace") if isinstance(output, bytes) else output,
+            }
+            preview = f"Read content from {cid}."
+            return {
+                "message": preview,
+                "trace": {
+                    "mcp_capability": capability_id,
+                    "mcp_execution_mode": "direct_import",
+                    "mcp_sync_completed": True,
+                    "mcp_cid": cid,
+                }
+                | envelope_to_trace(
+                    build_result_envelope(
+                        provider_name=self.provider_name,
+                        server_family=self.server_family,
+                        capability_id=capability_id,
+                        execution_mode="direct_import",
+                        status="completed",
+                        tool_name="ipfs_kit.cat",
+                        spoken_text=preview,
+                        structured_output=structured_output,
+                    )
+                ),
+            }
+
+        if capability_id == "embedding":
+            router = get_embeddings_router()
+            texts = trace.get("mcp_texts")
+            if isinstance(texts, list) and texts:
+                output = router.embed_texts([str(text) for text in texts])
+                preview = f"Generated embeddings for {len(texts)} texts."
+                tool_name = "ipfs_datasets.embed_texts"
+            else:
+                text = str(trace.get("mcp_input") or task.instruction or "").strip()
+                if not text:
+                    raise MCPConfigurationError("embedding requires input text")
+                output = router.embed_text(text)
+                preview = "Generated embedding."
+                tool_name = "ipfs_datasets.embed_text"
+
+            return {
+                "message": preview,
+                "trace": {
+                    "mcp_capability": capability_id,
+                    "mcp_execution_mode": "direct_import",
+                    "mcp_sync_completed": True,
+                }
+                | envelope_to_trace(
+                    build_result_envelope(
+                        provider_name=self.provider_name,
+                        server_family=self.server_family,
+                        capability_id=capability_id,
+                        execution_mode="direct_import",
+                        status="completed",
+                        tool_name=tool_name,
+                        spoken_text=preview,
+                        structured_output=output,
+                    )
+                ),
+            }
+
+        raise MCPConfigurationError(
+            f"Direct execution is not implemented for capability '{capability_id}'"
+        )
+
 
 class IPFSDatasetsMCPAgentProvider(MCPAgentProvider):
     """MCP-backed provider for ipfs_datasets_py server tasks."""
@@ -1063,3 +1319,55 @@ def _extract_target_number(target_ref: str | None) -> int | None:
         return None
 
     return int(match.group(1))
+
+
+def _extract_target_repo(target_ref: str | None) -> str | None:
+    """Extract owner/repo from refs like owner/repo#123."""
+    if not target_ref or "#" not in target_ref:
+        return None
+
+    repo, _sep, _suffix = target_ref.partition("#")
+    return repo or None
+
+
+def _select_delegated_ai_capability(instruction: str | None) -> str:
+    """Map delegated PR instructions onto shared AI capabilities."""
+    from handsfree.ai.policy import get_ai_backend_policy
+
+    normalized = (instruction or "").lower()
+    policy = get_ai_backend_policy()
+    if "fail" in normalized or "check" in normalized:
+        if policy.failure_backend == "accelerated":
+            return "github.check.accelerated_failure_explain"
+        if policy.failure_backend == "composite":
+            return "github.check.failure_rag_explain"
+        return "copilot.pr.failure_explain"
+    if "diff" in normalized:
+        return "copilot.pr.diff_summary"
+    if "summary" in normalized or "summarize" in normalized:
+        if policy.summary_backend == "accelerated":
+            return "github.pr.accelerated_summary"
+        return "github.pr.rag_summary"
+    return "copilot.pr.explain"
+
+
+def _infer_delegated_requested_workflow(instruction: str | None):
+    """Infer the requested workflow alias for delegated PR tasks, if any."""
+    from handsfree.models import AIWorkflow
+
+    normalized = (instruction or "").lower()
+    if "fail" in normalized or "check" in normalized:
+        return AIWorkflow.FAILURE_RAG_EXPLAIN
+    if "summary" in normalized or "summarize" in normalized:
+        return AIWorkflow.PR_RAG_SUMMARY
+    return None
+
+
+def _command_id_for_copilot_capability(capability_id: str) -> str:
+    """Map shared Copilot capabilities back to raw CLI command ids for fallback."""
+    mapping = {
+        "copilot.pr.explain": "gh.copilot.explain_pr",
+        "copilot.pr.diff_summary": "gh.copilot.summarize_diff",
+        "copilot.pr.failure_explain": "gh.copilot.explain_failure",
+    }
+    return mapping.get(capability_id, "gh.copilot.explain_pr")

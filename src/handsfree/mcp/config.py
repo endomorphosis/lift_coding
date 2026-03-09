@@ -88,6 +88,9 @@ def get_mcp_server_config(server_family: str) -> MCPServerConfig:
             for part in os.getenv(f"{prefix}_ARGS", "").split(" ")
             if part.strip()
         ],
+        preferred_execution_mode=(
+            os.getenv(f"{prefix}_PREFERRED_EXECUTION_MODE", "").strip().lower() or None
+        ),
         task_category=(os.getenv(f"{prefix}_TASK_CATEGORY", "").strip() or None),
         task_create_tool=(os.getenv(f"{prefix}_TASK_CREATE_TOOL", "").strip() or None),
         task_status_tool=(os.getenv(f"{prefix}_TASK_STATUS_TOOL", "").strip() or None),
