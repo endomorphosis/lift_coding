@@ -349,6 +349,26 @@ curl -s http://localhost:8080/v1/commands/confirm \
   -d '{"token":"<PENDING_ACTION_TOKEN>","idempotency_key":"dev-confirm-1"}' | jq
 ```
 
+#### Inspect follow-on task summaries
+
+Commands that spawn MCP-backed work now return a normalized `follow_on_task` block. For example:
+
+```bash
+curl -s http://localhost:8080/v1/command \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "input": {"type":"text","text":"run a workflow"},
+    "profile":"default",
+    "client_context":{"device":"simulator","locale":"en-US","timezone":"America/Los_Angeles","app_version":"0.1.0"},
+    "idempotency_key":"dev-follow-on-1"
+  }' | jq '.follow_on_task'
+```
+
+Look for:
+- `summary`: normalized display text for the spawned task
+- `task_id`: stable identifier for follow-up status/detail requests
+- `provider_label` and `capability`: user-facing routing metadata
+
 ## CI Checks
 
 Run all CI checks before committing:
@@ -460,4 +480,3 @@ The demo script demonstrates:
 - Uses stub/fixture provider by default (returns deterministic audio)
 - Real TTS providers can be enabled via environment variables in production
 - No secrets required for fixture mode
-

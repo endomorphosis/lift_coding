@@ -5,6 +5,11 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from handsfree.agent_providers import (
+    _infer_delegated_requested_workflow_with_trace,
+    _select_delegated_capability_with_trace,
+)
+from handsfree.agents.delegation import enrich_delegate_trace_for_client_context
 from handsfree.agents.service import AgentService
 from handsfree.commands.intent_parser import IntentParser
 from handsfree.db import init_db
@@ -236,6 +241,32 @@ class TestProviderSelection:
 
         assert task is not None
         assert task.provider == "copilot"
+
+    def test_wearables_bridge_delegate_defaults_to_ipfs_accelerate_provider(self):
+        """Wearables bridge triggers should seed MCP workflow metadata and provider defaults."""
+        provider, trace = enrich_delegate_trace_for_client_context(
+            None,
+            {"intent_name": "agent.delegate"},
+            {"feature": "wearables_bridge", "trigger": "target_connected"},
+        )
+
+        assert provider == "ipfs_accelerate_mcp"
+        assert trace["created_via"] == "wearables_bridge"
+        assert trace["mcp_capability"] == "workflow"
+        assert trace["wearables_bridge_requested_workflow"] == "wearables_bridge_connectivity"
+
+    def test_trace_hints_override_generic_delegate_heuristics(self):
+        """Trace-supplied wearables workflow hints should beat text-only inference."""
+        trace = {
+            "mcp_capability": "workflow",
+            "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+        }
+
+        assert _select_delegated_capability_with_trace("summarize this PR", trace) == "workflow"
+        assert (
+            _infer_delegated_requested_workflow_with_trace("summarize this PR", trace)
+            == "wearables_bridge_connectivity"
+        )
 
     def test_copilot_cli_selected_when_available(self, db_conn, monkeypatch):
         """Test that copilot_cli is selected when dispatch is unavailable and CLI is available."""

@@ -25,11 +25,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommandResponse'
+              examples:
+                task_spawn:
+                  summary: Spawned MCP task
+                  value:
+                    status: ok
+                    intent:
+                      name: agent.result_rerun
+                      confidence: 1.0
+                      entities:
+                        task_id: task-9b2b1d9d
+                    spoken_text: Workflow rerun requested.
+                    cards: []
+                    pending_action: null
+                    follow_on_task:
+                      task_id: task-9b2b1d9d
+                      state: running
+                      provider: ipfs_accelerate_mcp
+                      provider_label: IPFS Accelerate
+                      capability: agentic_fetch
+                      summary: IPFS Accelerate agentic fetch running.
+                needs_confirmation:
+                  summary: Confirmation required
+                  value:
+                    status: needs_confirmation
+                    intent:
+                      name: pr.merge
+                      confidence: 1.0
+                      entities:
+                        pr_number: 456
+                    spoken_text: Ready to merge PR 456. Say confirm to proceed.
+                    cards: []
+                    pending_action:
+                      token: conf-abc123xyz
+                      expires_at: '2026-01-17T01:00:00Z'
+                      summary: Merge PR #456 in owner/repo
+                    follow_on_task: null
         '400':
           description: Invalid request
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                invalid_request:
+                  summary: Invalid request payload
+                  value:
+                    error: validation_error
+                    message: Request body failed schema validation
         '401':
           description: Not authenticated
           content:
@@ -53,11 +95,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommandResponse'
+              examples:
+                needs_confirmation:
+                  summary: Confirmation required
+                  value:
+                    status: needs_confirmation
+                    intent:
+                      name: pr.merge
+                      confidence: 1.0
+                      entities:
+                        pr_number: 456
+                    spoken_text: Ready to merge PR 456. Say confirm to proceed.
+                    cards: []
+                    pending_action:
+                      token: conf-abc123xyz
+                      expires_at: '2026-01-17T01:00:00Z'
+                      summary: Merge PR #456 in owner/repo
+                    follow_on_task: null
+                task_spawn:
+                  summary: Spawned MCP task
+                  value:
+                    status: ok
+                    intent:
+                      name: agent.delegate.confirmed
+                      confidence: 1.0
+                      entities:
+                        task_id: task-9b2b1d9d
+                    spoken_text: IPFS Accelerate workflow created.
+                    cards: []
+                    pending_action: null
+                    follow_on_task:
+                      task_id: task-9b2b1d9d
+                      state: running
+                      provider: ipfs_accelerate_mcp
+                      provider_label: IPFS Accelerate
+                      capability: agentic_fetch
+                      summary: IPFS Accelerate agentic fetch running.
         '404':
           description: Pending action not found/expired
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                expired_pending_action:
+                  summary: Expired confirmation token
+                  value:
+                    error: expired
+                    message: Pending action has expired
 
   /v1/commands/action:
     post:
@@ -76,11 +160,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommandResponse'
+              examples:
+                task_spawn:
+                  summary: Spawned MCP task
+                  value:
+                    status: ok
+                    intent:
+                      name: agent.result_rerun
+                      confidence: 1.0
+                      entities:
+                        task_id: task-9b2b1d9d
+                    spoken_text: Workflow rerun requested.
+                    cards: []
+                    pending_action: null
+                    follow_on_task:
+                      task_id: task-9b2b1d9d
+                      state: running
+                      provider: ipfs_accelerate_mcp
+                      provider_label: IPFS Accelerate
+                      capability: agentic_fetch
+                      summary: IPFS Accelerate agentic fetch running.
+                needs_confirmation:
+                  summary: Confirmation required
+                  value:
+                    status: needs_confirmation
+                    intent:
+                      name: pr.merge
+                      confidence: 1.0
+                      entities:
+                        pr_number: 456
+                    spoken_text: Ready to merge PR 456. Say confirm to proceed.
+                    cards: []
+                    pending_action:
+                      token: conf-abc123xyz
+                      expires_at: '2026-01-17T01:00:00Z'
+                      summary: Merge PR #456 in owner/repo
+                    follow_on_task: null
         '400':
           description: Invalid action request
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                invalid_action_id:
+                  summary: Unsupported action ID
+                  value:
+                    error: invalid_action_id
+                    message: 'Unsupported action_id: unknown_action'
+                invalid_request:
+                  summary: Invalid request payload
+                  value:
+                    error: validation_error
+                    message: Request body failed schema validation
         '404':
           description: Task, notification, or card context not found
           content:
@@ -1917,6 +2048,13 @@ paths:
             maximum: 1000
             default: 200
           description: Maximum number of recent action logs to inspect
+        - name: capture
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+          description: When true, persist a point-in-time snapshot while serving the report
       responses:
         '200':
           description: AI backend policy report
@@ -2004,6 +2142,119 @@ paths:
                   ai.execute.github.pr.accelerated_summary: 4
                   ai.execute.github.check.failure_rag_explain: 3
                   ai.execute.github.check.accelerated_failure_explain: 5
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/admin/ai/backend-policy/history:
+    get:
+      summary: Get historical AI backend policy activity (admin)
+      operationId: getAiBackendPolicyHistoryReport
+      description: >
+        Returns bucketed historical AI execution and remap activity derived
+        from recent action logs for the authenticated user.
+      parameters:
+        - name: window_hours
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 168
+            default: 24
+        - name: bucket_hours
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 24
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+            default: 1000
+      responses:
+        '200':
+          description: Historical AI backend policy report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIBackendPolicyHistoryReport'
+              example:
+                policy:
+                  summary_backend: accelerated
+                  failure_backend: composite
+                  github_auth_source: gh_cli
+                  github_live_mode_requested: true
+                window_hours: 24
+                bucket_hours: 1
+                buckets:
+                  - started_at: '2026-03-08T18:00:00Z'
+                    ended_at: '2026-03-08T19:00:00Z'
+                    ai_execute_logs: 2
+                    policy_applied_count: 1
+                    remap_counts:
+                      pr_rag_summary->accelerated_pr_summary: 1
+                  - started_at: '2026-03-08T19:00:00Z'
+                    ended_at: '2026-03-08T20:00:00Z'
+                    ai_execute_logs: 1
+                    policy_applied_count: 0
+                    remap_counts: {}
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/admin/ai/backend-policy/snapshots:
+    get:
+      summary: List persisted AI backend policy snapshots (admin)
+      operationId: listAiBackendPolicySnapshots
+      description: >
+        Returns point-in-time backend-policy snapshots previously captured
+        from the admin backend-policy report route.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+            default: 50
+      responses:
+        '200':
+          description: Persisted backend-policy snapshots
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIBackendPolicySnapshotsResponse'
+              example:
+                snapshots:
+                  - id: snapshot-1
+                    created_at: '2026-03-08T20:00:00Z'
+                    summary_backend: accelerated
+                    failure_backend: composite
+                    github_auth_source: gh_cli
+                    github_live_mode_requested: true
+                    ai_execute_logs: 12
+                    policy_applied_count: 5
+                    remap_counts:
+                      pr_rag_summary->accelerated_pr_summary: 3
+                    top_capabilities:
+                      overall:
+                        - capability_id: github.pr.accelerated_summary
+                          count: 3
+                    top_remaps:
+                      - remap_key: pr_rag_summary->accelerated_pr_summary
+                        count: 3
         '401':
           description: Not authenticated
           content:
@@ -2147,6 +2398,65 @@ components:
     CommandResponse:
       type: object
       required: [spoken_text, intent, status]
+      example:
+        status: ok
+        intent:
+          name: agent.result_rerun
+          confidence: 1.0
+          entities:
+            task_id: task-9b2b1d9d
+        spoken_text: Workflow rerun requested.
+        cards: []
+        pending_action: null
+        follow_on_task:
+          task_id: task-9b2b1d9d
+          state: running
+          provider: ipfs_accelerate_mcp
+          provider_label: IPFS Accelerate
+          capability: agentic_fetch
+          summary: IPFS Accelerate agentic fetch running.
+        debug:
+          transcript: rerun that fetch with https://example.com
+          tool_calls:
+            - task_id: task-9b2b1d9d
+              provider: ipfs_accelerate_mcp
+              state: running
+      x-examples:
+        task_spawn:
+          summary: Spawned MCP task
+          value:
+            status: ok
+            intent:
+              name: agent.result_rerun
+              confidence: 1.0
+              entities:
+                task_id: task-9b2b1d9d
+            spoken_text: Workflow rerun requested.
+            cards: []
+            pending_action: null
+            follow_on_task:
+              task_id: task-9b2b1d9d
+              state: running
+              provider: ipfs_accelerate_mcp
+              provider_label: IPFS Accelerate
+              capability: agentic_fetch
+              summary: IPFS Accelerate agentic fetch running.
+        needs_confirmation:
+          summary: Confirmation required
+          value:
+            status: needs_confirmation
+            intent:
+              name: pr.merge
+              confidence: 1.0
+              entities:
+                pr_number: 456
+            spoken_text: Ready to merge PR 456. Say confirm to proceed.
+            cards: []
+            pending_action:
+              token: conf-abc123xyz
+              expires_at: '2026-01-17T01:00:00Z'
+              summary: Merge PR #456 in owner/repo
+            follow_on_task: null
       properties:
         status:
           type: string
@@ -2169,6 +2479,13 @@ components:
     FollowOnTask:
       type: object
       required: [task_id]
+      example:
+        task_id: task-9b2b1d9d
+        state: running
+        provider: ipfs_accelerate_mcp
+        provider_label: IPFS Accelerate
+        capability: agentic_fetch
+        summary: IPFS Accelerate agentic fetch running.
       properties:
         task_id:
           type: string
@@ -3241,6 +3558,148 @@ components:
           ai.execute.github.pr.accelerated_summary: 4
           ai.execute.github.check.failure_rag_explain: 3
           ai.execute.github.check.accelerated_failure_explain: 5
+
+    AIBackendPolicyHistoryBucket:
+      type: object
+      required: [started_at, ended_at, ai_execute_logs, policy_applied_count, remap_counts]
+      properties:
+        started_at:
+          type: string
+          format: date-time
+        ended_at:
+          type: string
+          format: date-time
+        ai_execute_logs:
+          type: integer
+        policy_applied_count:
+          type: integer
+        remap_counts:
+          type: object
+          additionalProperties:
+            type: integer
+      example:
+        started_at: '2026-03-08T18:00:00Z'
+        ended_at: '2026-03-08T19:00:00Z'
+        ai_execute_logs: 2
+        policy_applied_count: 1
+        remap_counts:
+          pr_rag_summary->accelerated_pr_summary: 1
+
+    AIBackendPolicyHistoryReport:
+      type: object
+      required: [policy, window_hours, bucket_hours, buckets]
+      properties:
+        policy:
+          $ref: '#/components/schemas/AIBackendPolicyConfig'
+        window_hours:
+          type: integer
+        bucket_hours:
+          type: integer
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIBackendPolicyHistoryBucket'
+      example:
+        policy:
+          summary_backend: accelerated
+          failure_backend: composite
+          github_auth_source: gh_cli
+          github_live_mode_requested: true
+        window_hours: 24
+        bucket_hours: 1
+        buckets:
+          - started_at: '2026-03-08T18:00:00Z'
+            ended_at: '2026-03-08T19:00:00Z'
+            ai_execute_logs: 2
+            policy_applied_count: 1
+            remap_counts:
+              pr_rag_summary->accelerated_pr_summary: 1
+          - started_at: '2026-03-08T19:00:00Z'
+            ended_at: '2026-03-08T20:00:00Z'
+            ai_execute_logs: 1
+            policy_applied_count: 0
+            remap_counts: {}
+
+    AIBackendPolicySnapshotResponse:
+      type: object
+      required:
+        [id, created_at, summary_backend, failure_backend, github_live_mode_requested, ai_execute_logs, policy_applied_count, remap_counts, top_capabilities, top_remaps]
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        summary_backend:
+          type: string
+        failure_backend:
+          type: string
+        github_auth_source:
+          type: string
+        github_live_mode_requested:
+          type: boolean
+        ai_execute_logs:
+          type: integer
+        policy_applied_count:
+          type: integer
+        remap_counts:
+          type: object
+          additionalProperties:
+            type: integer
+        top_capabilities:
+          type: object
+          additionalProperties: true
+        top_remaps:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+      example:
+        id: snapshot-1
+        created_at: '2026-03-08T20:00:00Z'
+        summary_backend: accelerated
+        failure_backend: composite
+        github_auth_source: gh_cli
+        github_live_mode_requested: true
+        ai_execute_logs: 12
+        policy_applied_count: 5
+        remap_counts:
+          pr_rag_summary->accelerated_pr_summary: 3
+        top_capabilities:
+          overall:
+            - capability_id: github.pr.accelerated_summary
+              count: 3
+        top_remaps:
+          - remap_key: pr_rag_summary->accelerated_pr_summary
+            count: 3
+
+    AIBackendPolicySnapshotsResponse:
+      type: object
+      required: [snapshots]
+      properties:
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIBackendPolicySnapshotResponse'
+      example:
+        snapshots:
+          - id: snapshot-1
+            created_at: '2026-03-08T20:00:00Z'
+            summary_backend: accelerated
+            failure_backend: composite
+            github_auth_source: gh_cli
+            github_live_mode_requested: true
+            ai_execute_logs: 12
+            policy_applied_count: 5
+            remap_counts:
+              pr_rag_summary->accelerated_pr_summary: 3
+            top_capabilities:
+              overall:
+                - capability_id: github.pr.accelerated_summary
+                  count: 3
+            top_remaps:
+              - remap_key: pr_rag_summary->accelerated_pr_summary
+                count: 3
 
     AICapabilityExecuteResponse:
       type: object

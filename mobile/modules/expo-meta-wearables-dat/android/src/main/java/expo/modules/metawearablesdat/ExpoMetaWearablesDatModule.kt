@@ -1,21 +1,40 @@
 package expo.modules.metawearablesdat
 
+import android.Manifest
 import android.app.Activity
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import androidx.core.content.ContextCompat
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 class ExpoMetaWearablesDatModule : Module() {
   private var sessionState: String = "idle"
+  private var selectedDeviceId: String? = null
+  private var selectedDeviceLastSeenAt: Long? = null
+  private var selectedDeviceRssi: Int? = null
+  private var lastCandidateDevices: List<Map<String, Any?>> = emptyList()
 
   override fun definition() = ModuleDefinition {
     Name("ExpoMetaWearablesDat")
 
     Events("onDatStateChanged")
+
+    OnCreate {
+      selectedDeviceId = preferences().getString(PREF_SELECTED_DEVICE_ID, null)
+    }
 
     AsyncFunction("isDatAvailable") {
       isDatSdkLinked()
@@ -42,15 +61,17 @@ class ExpoMetaWearablesDatModule : Module() {
     AsyncFunction("getConnectedDevice") {
       val metadata = manifestMetadata()
       val snapshot = getWearablesSnapshot()
+      val knownDevices = getKnownDevicesSnapshot()
+      val primaryDevice = knownDevices.firstOrNull()
       mapOf(
         "platform" to "android",
         "sdkLinked" to snapshot.sdkLinked,
         "sdkConfigured" to BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
         "applicationId" to metadata?.getString(METADATA_APPLICATION_ID),
-        "deviceId" to snapshot.activeDeviceId,
+        "deviceId" to (snapshot.activeDeviceId ?: primaryDevice?.get("deviceId")),
         "registrationState" to snapshot.registrationState,
-        "deviceName" to snapshot.activeDeviceId,
-        "deviceModel" to Build.MODEL
+        "deviceName" to (primaryDevice?.get("deviceName") ?: snapshot.activeDeviceId),
+        "deviceModel" to (primaryDevice?.get("deviceClassName") ?: Build.MODEL)
       )
     }
 
@@ -58,9 +79,44 @@ class ExpoMetaWearablesDatModule : Module() {
       sessionState
     }
 
+    AsyncFunction("getAdapterState") {
+      getBluetoothAdapterState()
+    }
+
+    AsyncFunction("getKnownDevices") {
+      getKnownDevicesSnapshot()
+    }
+
+    AsyncFunction("scanKnownAndNearbyDevices") { timeoutMs: Int ->
+      scanKnownAndNearbyDevices(timeoutMs)
+    }
+
+    AsyncFunction("getSelectedDeviceTarget") {
+      getSelectedDeviceTarget()
+    }
+
+    AsyncFunction("selectDeviceTarget") { deviceId: String ->
+      selectDeviceTarget(deviceId)
+    }
+
+    AsyncFunction("clearDeviceTarget") {
+      clearDeviceTarget()
+    }
+
+    AsyncFunction("reconnectSelectedDeviceTarget") {
+      reconnectSelectedDeviceTarget()
+    }
+
+    AsyncFunction("connectSelectedDeviceTarget") {
+      connectSelectedDeviceTarget()
+    }
+
     AsyncFunction("getDiagnostics") {
       val metadata = manifestMetadata()
       val snapshot = getWearablesSnapshot()
+      val adapterState = getBluetoothAdapterState()
+      val knownDevices = getKnownDevicesSnapshot()
+      val selectedTarget = getSelectedDeviceTarget()
       mapOf(
         "available" to true,
         "platform" to "android",
@@ -75,7 +131,14 @@ class ExpoMetaWearablesDatModule : Module() {
         "sessionState" to sessionState,
         "registrationState" to snapshot.registrationState,
         "deviceCount" to snapshot.deviceCount,
-        "activeDeviceId" to snapshot.activeDeviceId
+        "activeDeviceId" to snapshot.activeDeviceId,
+        "adapterState" to adapterState,
+        "knownDeviceCount" to knownDevices.size,
+        "selectedDeviceId" to selectedTarget?.get("deviceId"),
+        "selectedDeviceName" to selectedTarget?.get("deviceName"),
+        "targetConnectionState" to targetConnectionState(snapshot.activeDeviceId, selectedTarget),
+        "targetLastSeenAt" to selectedTarget?.get("lastSeenAt"),
+        "targetRssi" to selectedTarget?.get("rssi")
       )
     }
 
@@ -83,9 +146,15 @@ class ExpoMetaWearablesDatModule : Module() {
       val result = if (BuildConfig.META_WEARABLES_DAT_SDK_ENABLED && isDatSdkLinked()) {
         startRegistration()
       } else {
-        sessionState = "simulated_ready"
+        val selectedTarget = getSelectedDeviceTarget()
+        sessionState = if (selectedTarget == null) "awaiting_target" else "target_ready"
         emitStateChanged()
-        mapOf("state" to sessionState, "mode" to "simulated")
+        mapOf(
+          "state" to sessionState,
+          "mode" to "reference_only",
+          "deviceId" to selectedTarget?.get("deviceId"),
+          "targetConnectionState" to targetConnectionState(selectedTarget?.get("deviceId") as? String, selectedTarget)
+        )
       }
       result
     }
@@ -96,7 +165,12 @@ class ExpoMetaWearablesDatModule : Module() {
       } else {
         sessionState = "idle"
         emitStateChanged()
-        mapOf("state" to sessionState, "mode" to "simulated")
+        mapOf(
+          "state" to sessionState,
+          "mode" to "reference_only",
+          "deviceId" to selectedDeviceId,
+          "targetConnectionState" to targetConnectionState(null, getSelectedDeviceTarget())
+        )
       }
       result
     }
@@ -122,6 +196,12 @@ class ExpoMetaWearablesDatModule : Module() {
 
   private fun currentActivityOrThrow(): Activity =
     appContext.currentActivity ?: throw IllegalStateException("Current activity is null")
+
+  private fun preferences() =
+    reactContextOrThrow().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+  private fun bluetoothAdapter(): BluetoothAdapter? =
+    (reactContextOrThrow().getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter
 
   private fun isDatSdkLinked(): Boolean = wearablesClass() != null
 
@@ -169,11 +249,13 @@ class ExpoMetaWearablesDatModule : Module() {
 
   private fun getWearablesSnapshot(): DatSnapshot {
     if (!isDatSdkLinked()) {
+      val activeDeviceId =
+        if (sessionState == "target_ready" || sessionState == "simulated_ready") selectedDeviceId else null
       return DatSnapshot(
         sdkLinked = false,
         registrationState = sessionState,
-        deviceCount = 0,
-        activeDeviceId = null
+        deviceCount = if (activeDeviceId == null) 0 else 1,
+        activeDeviceId = activeDeviceId
       )
     }
 
@@ -218,11 +300,307 @@ class ExpoMetaWearablesDatModule : Module() {
   }
 
   private fun emitStateChanged() {
-    sendEvent("onDatStateChanged", mapOf("state" to sessionState))
+    val selectedTarget = getSelectedDeviceTarget()
+    sendEvent(
+      "onDatStateChanged",
+      mapOf(
+        "state" to sessionState,
+        "sessionState" to sessionState,
+        "deviceId" to selectedTarget?.get("deviceId"),
+        "deviceName" to selectedTarget?.get("deviceName"),
+        "targetConnectionState" to targetConnectionState(null, selectedTarget),
+        "targetLastSeenAt" to selectedTarget?.get("lastSeenAt"),
+        "targetRssi" to selectedTarget?.get("rssi")
+      )
+    )
   }
 
   private fun integrationMode(sdkLinked: Boolean): String =
     if (sdkLinked) "sdk_reflection" else "reference_only"
+
+  private fun getBluetoothAdapterState(): Map<String, Any> {
+    val adapter = bluetoothAdapter()
+    val adapterAvailable = adapter != null
+    val adapterEnabled = adapter?.isEnabled == true
+    return mapOf(
+      "transport" to "bluetooth",
+      "adapterAvailable" to adapterAvailable,
+      "adapterEnabled" to adapterEnabled,
+      "scanPermissionGranted" to canScanPermission(),
+      "connectPermissionGranted" to canConnectPermission(),
+      "advertisePermissionGranted" to canAdvertisePermission(),
+      "state" to when {
+        !adapterAvailable -> "unavailable"
+        !adapterEnabled -> "powered_off"
+        else -> "powered_on"
+      }
+    )
+  }
+
+  private fun getKnownDevicesSnapshot(): List<Map<String, Any?>> {
+    val adapter = bluetoothAdapter() ?: return emptyList()
+    if (!canConnectPermission()) {
+      return emptyList()
+    }
+
+    return adapter.bondedDevices
+      ?.sortedBy { it.name ?: it.address }
+      ?.map { device ->
+        val lastSeenAt = System.currentTimeMillis()
+        mapOf(
+          "deviceId" to device.address,
+          "deviceName" to (device.name ?: device.address),
+          "deviceClassName" to device.bluetoothClass?.majorDeviceClass?.toString(),
+          "bondState" to bondStateLabel(device.bondState),
+          "type" to deviceTypeLabel(device.type),
+          "lastSeenAt" to lastSeenAt
+        )
+      }
+      ?: emptyList()
+  }
+
+  private fun scanKnownAndNearbyDevices(timeoutMs: Int): List<Map<String, Any?>> {
+    val merged = linkedMapOf<String, Map<String, Any?>>()
+    getKnownDevicesSnapshot().forEach { device ->
+      val deviceId = device["deviceId"] as? String ?: return@forEach
+      merged[deviceId] = device + mapOf("source" to "bonded")
+    }
+
+    val adapter = bluetoothAdapter() ?: return merged.values.toList()
+    if (!adapter.isEnabled || !canScanPermission()) {
+      return merged.values.toList()
+    }
+
+    val scanner = adapter.bluetoothLeScanner ?: return merged.values.toList()
+    val latch = CountDownLatch(1)
+    val timeout = timeoutMs.coerceIn(0, 10_000)
+    val handler = Handler(Looper.getMainLooper())
+
+    val callback = object : ScanCallback() {
+      override fun onScanResult(callbackType: Int, result: ScanResult) {
+        val device = result.device ?: return
+        val deviceId = device.address ?: return
+        val existing = merged[deviceId] ?: emptyMap()
+        merged[deviceId] =
+          existing + mapOf(
+            "deviceId" to deviceId,
+            "deviceName" to (device.name ?: existing["deviceName"] ?: deviceId),
+            "deviceClassName" to existing["deviceClassName"],
+            "bondState" to bondStateLabel(device.bondState),
+            "type" to deviceTypeLabel(device.type),
+            "source" to if (existing.isEmpty()) "scan" else "bonded+scan",
+            "rssi" to result.rssi,
+            "lastSeenAt" to System.currentTimeMillis()
+          )
+      }
+
+      override fun onScanFailed(errorCode: Int) {
+        latch.countDown()
+      }
+    }
+
+    try {
+      scanner.startScan(callback)
+      handler.postDelayed({
+        try {
+          scanner.stopScan(callback)
+        } catch (_: Throwable) {
+          // ignore
+        } finally {
+          latch.countDown()
+        }
+      }, timeout.toLong())
+      latch.await((timeout + 500).toLong(), TimeUnit.MILLISECONDS)
+    } catch (_: Throwable) {
+      // keep bonded snapshot best-effort
+    } finally {
+      try {
+        scanner.stopScan(callback)
+      } catch (_: Throwable) {
+        // ignore
+      }
+    }
+
+    lastCandidateDevices = merged.values.toList()
+    refreshSelectedTargetMetadata(lastCandidateDevices)
+    return lastCandidateDevices
+  }
+
+  private fun getSelectedDeviceTarget(): Map<String, Any?>? {
+    val deviceId = selectedDeviceId ?: return null
+    val candidates = if (lastCandidateDevices.isNotEmpty()) lastCandidateDevices else getKnownDevicesSnapshot()
+    return candidates.firstOrNull { it["deviceId"] == deviceId }
+      ?: mapOf(
+        "deviceId" to deviceId,
+        "deviceName" to deviceId,
+        "source" to "selected_only",
+        "lastSeenAt" to selectedDeviceLastSeenAt,
+        "rssi" to selectedDeviceRssi
+      )
+  }
+
+  private fun selectDeviceTarget(deviceId: String): Map<String, Any?> {
+    require(deviceId.isNotBlank()) { "deviceId cannot be empty" }
+    selectedDeviceId = deviceId
+    selectedDeviceLastSeenAt = System.currentTimeMillis()
+    selectedDeviceRssi = null
+    preferences().edit().putString(PREF_SELECTED_DEVICE_ID, deviceId).apply()
+    return getSelectedDeviceTarget()
+      ?: mapOf(
+        "deviceId" to deviceId,
+        "deviceName" to deviceId,
+        "source" to "selected_only",
+        "lastSeenAt" to selectedDeviceLastSeenAt,
+        "rssi" to selectedDeviceRssi
+      )
+  }
+
+  private fun clearDeviceTarget(): Map<String, Any?> {
+    val previous = getSelectedDeviceTarget()
+    selectedDeviceId = null
+    selectedDeviceLastSeenAt = null
+    selectedDeviceRssi = null
+    preferences().edit().remove(PREF_SELECTED_DEVICE_ID).apply()
+    return previous ?: emptyMap()
+  }
+
+  private fun reconnectSelectedDeviceTarget(): Map<String, Any?> {
+    if (selectedDeviceId == null) {
+      selectedDeviceId = preferences().getString(PREF_SELECTED_DEVICE_ID, null)
+    }
+    val selectedId = selectedDeviceId
+    if (selectedId == null) {
+      sessionState = "awaiting_target"
+      emitStateChanged()
+      return mapOf(
+        "state" to sessionState,
+        "mode" to "reference_only",
+        "deviceId" to null,
+        "targetConnectionState" to "unselected"
+      )
+    }
+
+    val previousSessionState = sessionState
+    sessionState = "reconnecting_target"
+    emitStateChanged()
+
+    val candidates = scanKnownAndNearbyDevices(2000)
+    val matchedTarget = candidates.firstOrNull { it["deviceId"] == selectedId }
+    if (matchedTarget != null) {
+      selectedDeviceLastSeenAt = (matchedTarget["lastSeenAt"] as? Number)?.toLong() ?: System.currentTimeMillis()
+      selectedDeviceRssi = (matchedTarget["rssi"] as? Number)?.toInt()
+      sessionState = if (previousSessionState == "target_ready") "target_ready" else "target_discovered"
+    }
+
+    val selectedTarget = matchedTarget ?: getSelectedDeviceTarget()
+    if (matchedTarget == null) {
+      sessionState = "reconnecting_target"
+    }
+    emitStateChanged()
+    return mapOf(
+      "state" to sessionState,
+      "mode" to "reference_only",
+      "deviceId" to selectedTarget?.get("deviceId"),
+      "targetConnectionState" to targetConnectionState(null, selectedTarget),
+      "targetLastSeenAt" to selectedTarget?.get("lastSeenAt"),
+      "targetRssi" to selectedTarget?.get("rssi")
+    )
+  }
+
+  private fun connectSelectedDeviceTarget(): Map<String, Any?> {
+    if (selectedDeviceId == null) {
+      selectedDeviceId = preferences().getString(PREF_SELECTED_DEVICE_ID, null)
+    }
+    val selectedTarget = getSelectedDeviceTarget()
+    if (selectedTarget == null) {
+      sessionState = "awaiting_target"
+      emitStateChanged()
+      return mapOf(
+        "state" to sessionState,
+        "mode" to "reference_only",
+        "deviceId" to null,
+        "targetConnectionState" to "unselected"
+      )
+    }
+
+    selectedDeviceLastSeenAt = (selectedTarget["lastSeenAt"] as? Number)?.toLong() ?: System.currentTimeMillis()
+    selectedDeviceRssi = (selectedTarget["rssi"] as? Number)?.toInt() ?: selectedDeviceRssi
+    sessionState = "target_connected"
+    emitStateChanged()
+    return mapOf(
+      "state" to sessionState,
+      "mode" to "reference_only",
+      "deviceId" to selectedTarget["deviceId"],
+      "targetConnectionState" to "connected",
+      "targetLastSeenAt" to selectedDeviceLastSeenAt,
+      "targetRssi" to selectedDeviceRssi
+    )
+  }
+
+  private fun refreshSelectedTargetMetadata(candidates: List<Map<String, Any?>>) {
+    val deviceId = selectedDeviceId ?: return
+    val selected = candidates.firstOrNull { it["deviceId"] == deviceId } ?: return
+    selectedDeviceLastSeenAt = (selected["lastSeenAt"] as? Number)?.toLong() ?: selectedDeviceLastSeenAt
+    selectedDeviceRssi = (selected["rssi"] as? Number)?.toInt() ?: selectedDeviceRssi
+  }
+
+  private fun targetConnectionState(
+    activeDeviceId: String?,
+    selectedTarget: Map<String, Any?>?
+  ): String {
+    val selectedId = selectedTarget?.get("deviceId") as? String ?: return "unselected"
+    if (activeDeviceId != null && activeDeviceId == selectedId) {
+      return "active"
+    }
+    return when (sessionState) {
+      "target_connected" -> "connected"
+      "target_ready", "simulated_ready" -> "ready"
+      "target_discovered" -> "discovered"
+      "reconnecting_target" -> "reconnecting"
+      "registering" -> "connecting"
+      "awaiting_target" -> "unselected"
+      else -> when (selectedTarget["source"] as? String) {
+        "selected_only" -> "selected"
+        else -> "discovered"
+      }
+    }
+  }
+
+  private fun canScanPermission(): Boolean =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      ContextCompat.checkSelfPermission(reactContextOrThrow(), Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
+    } else {
+      true
+    }
+
+  private fun canConnectPermission(): Boolean =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      ContextCompat.checkSelfPermission(reactContextOrThrow(), Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+    } else {
+      true
+    }
+
+  private fun canAdvertisePermission(): Boolean =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      ContextCompat.checkSelfPermission(reactContextOrThrow(), Manifest.permission.BLUETOOTH_ADVERTISE) == PackageManager.PERMISSION_GRANTED
+    } else {
+      true
+    }
+
+  private fun bondStateLabel(bondState: Int): String =
+    when (bondState) {
+      BluetoothDevice.BOND_BONDED -> "bonded"
+      BluetoothDevice.BOND_BONDING -> "bonding"
+      else -> "none"
+    }
+
+  private fun deviceTypeLabel(deviceType: Int): String =
+    when (deviceType) {
+      BluetoothDevice.DEVICE_TYPE_CLASSIC -> "classic"
+      BluetoothDevice.DEVICE_TYPE_DUAL -> "dual"
+      BluetoothDevice.DEVICE_TYPE_LE -> "le"
+      else -> "unknown"
+    }
 
   private data class DatSnapshot(
     val sdkLinked: Boolean,
@@ -232,6 +610,8 @@ class ExpoMetaWearablesDatModule : Module() {
   )
 
   private companion object {
+    const val PREFS_NAME = "expo_meta_wearables_dat"
+    const val PREF_SELECTED_DEVICE_ID = "selected_device_id"
     const val WEARABLES_CLASS_NAME = "com.meta.wearable.dat.core.Wearables"
     const val METADATA_APPLICATION_ID = "com.meta.wearable.mwdat.APPLICATION_ID"
     const val METADATA_ANALYTICS_OPT_OUT = "com.meta.wearable.mwdat.ANALYTICS_OPT_OUT"

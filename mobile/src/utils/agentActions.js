@@ -47,7 +47,39 @@ export function extractActionTaskUpdate(response) {
           : typeof response?.intent?.entities?.provider === 'string'
             ? response.intent.entities.provider
             : null,
+    provider_label:
+      typeof response?.follow_on_task?.provider_label === 'string'
+        ? response.follow_on_task.provider_label
+        : typeof toolTask?.provider_label === 'string'
+          ? toolTask.provider_label
+          : null,
+    capability:
+      typeof response?.follow_on_task?.capability === 'string'
+        ? response.follow_on_task.capability
+        : typeof toolTask?.capability === 'string'
+          ? toolTask.capability
+          : null,
+    summary:
+      typeof response?.follow_on_task?.summary === 'string'
+        ? response.follow_on_task.summary
+        : null,
   };
+}
+
+export function buildLastActionLines(lastAction) {
+  if (!lastAction?.message) {
+    return [];
+  }
+
+  const lines = [lastAction.message];
+  if (
+    typeof lastAction?.taskUpdate?.summary === 'string' &&
+    lastAction.taskUpdate.summary &&
+    lastAction.taskUpdate.summary !== lastAction.message
+  ) {
+    lines.push(lastAction.taskUpdate.summary);
+  }
+  return lines;
 }
 
 export async function executeStructuredAction({

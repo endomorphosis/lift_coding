@@ -68,16 +68,15 @@ Send a text command to the backend for processing:
 **Response:**
 ```json
 {
-  "response": {
-    "type": "text",
-    "text": "You have 3 open pull requests..."
-  },
+  "status": "ok",
+  "spoken_text": "You have 3 open pull requests...",
   "intent": {
     "name": "inbox.list",
     "confidence": 0.95,
     "entities": {}
   },
   "pending_action": null,
+  "follow_on_task": null,
   "cards": [
     {
       "title": "PR #123: Add feature X",
@@ -122,11 +121,41 @@ The backend will:
 
 The `CommandResponse` includes several fields:
 
-- **`response`** - The main response (text, audio URI, or error)
+- **`status`** - High-level command outcome (`ok`, `needs_confirmation`, `error`)
+- **`spoken_text`** - Primary user-facing summary for speech and compact UI
 - **`intent`** - Parsed intent with confidence score and extracted entities
 - **`pending_action`** - If present, contains a confirmation token for actions requiring approval
+- **`follow_on_task`** - If present, contains normalized spawned-task metadata including `summary`, `task_id`, `provider_label`, `capability`, and `state`
 - **`cards`** - Optional UI cards with structured data for display
 - **`debug`** - Debug information (only if `client_context.debug: true`)
+
+### Handling Spawned Tasks
+
+When a command or structured action starts MCP-backed work, the response includes `follow_on_task`:
+
+```json
+{
+  "status": "ok",
+  "spoken_text": "Workflow rerun requested.",
+  "intent": {
+    "name": "agent.result_rerun",
+    "confidence": 1.0,
+    "entities": {
+      "task_id": "task-9b2b1d9d"
+    }
+  },
+  "follow_on_task": {
+    "task_id": "task-9b2b1d9d",
+    "state": "running",
+    "provider": "ipfs_accelerate_mcp",
+    "provider_label": "IPFS Accelerate",
+    "capability": "agentic_fetch",
+    "summary": "IPFS Accelerate agentic fetch running."
+  }
+}
+```
+
+Clients should prefer `follow_on_task.summary` for display rather than rebuilding task text from raw fields.
 
 ## 2. Confirmation Flow
 
@@ -138,10 +167,8 @@ If the `CommandResponse` includes a `pending_action` field:
 
 ```json
 {
-  "response": {
-    "type": "text",
-    "text": "Ready to merge PR #456. Say 'confirm' to proceed."
-  },
+  "status": "needs_confirmation",
+  "spoken_text": "Ready to merge PR #456. Say 'confirm' to proceed.",
   "pending_action": {
     "token": "conf-abc123xyz",
     "expires_at": "2026-01-17T01:00:00Z",
@@ -167,17 +194,16 @@ To confirm, send the token to the confirmation endpoint:
 **Response:**
 ```json
 {
-  "response": {
-    "type": "text",
-    "text": "PR #456 merged successfully."
-  },
+  "status": "ok",
+  "spoken_text": "PR #456 merged successfully.",
   "intent": {
     "name": "pr.merge",
     "confidence": 1.0,
     "entities": {
       "pr_number": 456
     }
-  }
+  },
+  "follow_on_task": null
 }
 ```
 

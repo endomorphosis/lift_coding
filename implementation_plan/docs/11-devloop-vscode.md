@@ -136,6 +136,14 @@ If this request uses `workflow` instead of an explicit `capability_id`, the back
 Check the response `policy_resolution` field when you want to confirm whether remapping actually happened.
 For command-surface testing, the same metadata is now available under `debug.policy_resolution`.
 For a quick admin-side snapshot of the currently resolved defaults and recent remaps, use `GET /v1/admin/ai/backend-policy`.
+If you do not want that read to create a persisted snapshot, use `GET /v1/admin/ai/backend-policy?capture=false`.
+For bucketed recent history, use `GET /v1/admin/ai/backend-policy/history?window_hours=24&bucket_hours=1`.
+For persisted point-in-time samples, use `GET /v1/admin/ai/backend-policy/snapshots`.
+If you are exercising snapshot persistence repeatedly, optionally set
+`HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS` and
+`HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER` and
+`HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS`
+to keep the snapshot table bounded during local test runs.
 That report now includes:
 - fixed `last_hour` and `last_24_hours` buckets
 - per-workflow remap totals by requested and resolved workflow

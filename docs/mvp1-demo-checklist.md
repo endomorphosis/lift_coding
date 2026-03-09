@@ -90,6 +90,7 @@ Follow this script in order. Each step includes the voice command, expected back
 - [ ] Audio captured from glasses mic
 - [ ] Command recognized correctly
 - [ ] Backend returns `CommandResponse` with `spoken_text`
+- [ ] MCP-backed commands also expose `follow_on_task.summary` and `follow_on_task.task_id`
 - [ ] Audio plays through glasses speakers
 - [ ] Response summarizes PRs with key details
 

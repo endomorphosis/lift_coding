@@ -17,6 +17,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
 from handsfree.ai import (
+    build_ai_backend_policy_history_report,
     AIRequestContext,
     AICapabilityRequest,
     build_ai_backend_policy_report,
@@ -41,6 +42,10 @@ from handsfree.commands.profiles import Profile as CommandProfile, ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
+from handsfree.db.ai_backend_policy_snapshots import (
+    get_ai_backend_policy_snapshots,
+    store_ai_backend_policy_snapshot,
+)
 from handsfree.db.ai_history_index import store_ai_history_record
 from handsfree.db.github_connections import (
     create_github_connection,
@@ -75,7 +80,10 @@ from handsfree.models import (
     AIAccelerateGenerateAndStoreExecuteRequest,
     AIAcceleratedPRSummaryExecuteRequest,
     AIAcceleratedFailureExplainExecuteRequest,
+    AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
+    AIBackendPolicySnapshotsResponse,
+    AIBackendPolicySnapshotResponse,
     AICapabilityContext,
     AICapabilityExecuteRequest,
     AICapabilityExecuteResponse,
@@ -202,6 +210,105 @@ FOLLOW_ON_TASK_INTENTS = {
     "agent.result_rerun_fetch",
     "agent.result_rerun_dataset",
     "agent.result_save_ipfs",
+}
+
+COMMAND_RESPONSE_EXAMPLES = {
+    "task_spawn": {
+        "summary": "Spawned MCP task",
+        "value": {
+            "status": "ok",
+            "intent": {
+                "name": "agent.result_rerun",
+                "confidence": 1.0,
+                "entities": {
+                    "task_id": "task-9b2b1d9d",
+                },
+            },
+            "spoken_text": "Workflow rerun requested.",
+            "cards": [],
+            "pending_action": None,
+            "follow_on_task": {
+                "task_id": "task-9b2b1d9d",
+                "state": "running",
+                "provider": "ipfs_accelerate_mcp",
+                "provider_label": "IPFS Accelerate",
+                "capability": "agentic_fetch",
+                "summary": "IPFS Accelerate agentic fetch running.",
+            },
+        },
+    },
+    "needs_confirmation": {
+        "summary": "Confirmation required",
+        "value": {
+            "status": "needs_confirmation",
+            "intent": {
+                "name": "pr.merge",
+                "confidence": 1.0,
+                "entities": {
+                    "pr_number": 456,
+                },
+            },
+            "spoken_text": "Ready to merge PR 456. Say confirm to proceed.",
+            "cards": [],
+            "pending_action": {
+                "token": "conf-abc123xyz",
+                "expires_at": "2026-01-17T01:00:00Z",
+                "summary": "Merge PR #456 in owner/repo",
+            },
+        },
+    },
+}
+
+CONFIRM_COMMAND_RESPONSE_EXAMPLES = {
+    "needs_confirmation": COMMAND_RESPONSE_EXAMPLES["needs_confirmation"],
+    "task_spawn": {
+        "summary": "Confirmed action spawned MCP task",
+        "value": {
+            "status": "ok",
+            "intent": {
+                "name": "agent.delegate.confirmed",
+                "confidence": 1.0,
+                "entities": {
+                    "task_id": "task-9b2b1d9d",
+                },
+            },
+            "spoken_text": "IPFS Accelerate workflow created.",
+            "cards": [],
+            "pending_action": None,
+            "follow_on_task": {
+                "task_id": "task-9b2b1d9d",
+                "state": "running",
+                "provider": "ipfs_accelerate_mcp",
+                "provider_label": "IPFS Accelerate",
+                "capability": "agentic_fetch",
+                "summary": "IPFS Accelerate agentic fetch running.",
+            },
+        },
+    },
+}
+
+COMMAND_ERROR_EXAMPLES = {
+    "invalid_request": {
+        "summary": "Invalid request payload",
+        "value": {
+            "error": "validation_error",
+            "message": "Request body failed schema validation",
+        },
+    },
+    "invalid_action_id": {
+        "summary": "Unsupported action ID",
+        "value": {
+            "error": "invalid_action_id",
+            "message": "Unsupported action_id: unknown_action",
+        },
+    },
+    "expired_pending_action": {
+        "summary": "Expired confirmation token",
+        "value": {
+            "error": "expired",
+            "message": "Pending action has expired",
+        },
+    },
 }
 
 # Webhook store (DB-backed, initialized lazily)
@@ -1959,7 +2066,30 @@ async def dev_get_peer_chat_handset_session(
     return DevPeerChatHandsetSessionResponse(**session)
 
 
-@app.post("/v1/command", response_model=CommandResponse)
+@app.post(
+    "/v1/command",
+    response_model=CommandResponse,
+    responses={
+        200: {
+            "description": "Command handled",
+            "content": {
+                "application/json": {
+                    "examples": COMMAND_RESPONSE_EXAMPLES,
+                }
+            },
+        },
+        400: {
+            "description": "Invalid request",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "invalid_request": COMMAND_ERROR_EXAMPLES["invalid_request"],
+                    }
+                }
+            },
+        },
+    },
+)
 async def submit_command(
     request: CommandRequest,
     user_id: CurrentUser,
@@ -2386,7 +2516,31 @@ async def submit_command(
     return response
 
 
-@app.post("/v1/commands/action", response_model=CommandResponse)
+@app.post(
+    "/v1/commands/action",
+    response_model=CommandResponse,
+    responses={
+        200: {
+            "description": "Action handled",
+            "content": {
+                "application/json": {
+                    "examples": COMMAND_RESPONSE_EXAMPLES,
+                }
+            },
+        },
+        400: {
+            "description": "Invalid action request",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "invalid_action_id": COMMAND_ERROR_EXAMPLES["invalid_action_id"],
+                        "invalid_request": COMMAND_ERROR_EXAMPLES["invalid_request"],
+                    }
+                }
+            },
+        }
+    },
+)
 async def submit_action_command(
     request: ActionCommandRequest,
     user_id: CurrentUser,
@@ -2768,7 +2922,13 @@ def _convert_router_response_to_command_response(
         intent_entities = router_response.get("intent", {}).get("entities", {})
         if "task_id" not in intent_entities:
             # Fall back only when the router did not include task/task-result metadata.
-            return _handle_agent_delegate(parsed_intent, transcript, "api", user_id)
+            return _handle_agent_delegate(
+                parsed_intent,
+                transcript,
+                "api",
+                user_id,
+                client_context=request.client_context.model_dump(mode="json"),
+            )
         if intent_entities.get("state") != "completed":
             task_id = intent_entities.get("task_id", "")
             issue_number = intent_entities.get("issue_number")
@@ -2838,7 +2998,30 @@ def _convert_router_response_to_command_response(
     )
 
 
-@app.post("/v1/commands/confirm", response_model=CommandResponse)
+@app.post(
+    "/v1/commands/confirm",
+    response_model=CommandResponse,
+    responses={
+        200: {
+            "description": "Confirmation processed",
+            "content": {
+                "application/json": {
+                    "examples": CONFIRM_COMMAND_RESPONSE_EXAMPLES,
+                }
+            },
+        },
+        404: {
+            "description": "Pending action not found/expired",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "expired_pending_action": COMMAND_ERROR_EXAMPLES["expired_pending_action"],
+                    }
+                }
+            },
+        }
+    },
+)
 async def confirm_command(
     request: ConfirmRequest,
     user_id: CurrentUser,
@@ -3499,7 +3682,11 @@ async def _handle_request_review_command(
 
 
 def _handle_agent_delegate(
-    parsed_intent: ParsedIntent, text: str, device: str, user_id: str
+    parsed_intent: ParsedIntent,
+    text: str,
+    device: str,
+    user_id: str,
+    client_context: dict[str, Any] | None = None,
 ) -> CommandResponse:
     """Handle agent.delegate intent.
 
@@ -3513,6 +3700,7 @@ def _handle_agent_delegate(
         user_id: User ID from header or fixture
     """
     from handsfree.agents.service import AgentService
+    from handsfree.agents.delegation import enrich_delegate_trace_for_client_context
 
     # Extract entities from parsed intent
     instruction = parsed_intent.entities.get("instruction", text)
@@ -3521,6 +3709,8 @@ def _handle_agent_delegate(
     # Use provider from intent entities, or None to let AgentService use env default
     # Note: Tests may override this by explicitly specifying provider in intent
     provider = parsed_intent.entities.get("provider")
+
+    normalized_client_context = client_context or {}
 
     # Build target reference
     target_type = None
@@ -3548,6 +3738,11 @@ def _handle_agent_delegate(
             },
             "created_at": datetime.now(UTC).isoformat(),
         }
+        provider, trace = enrich_delegate_trace_for_client_context(
+            provider,
+            trace,
+            normalized_client_context,
+        )
 
         # Create task via AgentService
         db = get_db()
@@ -6106,7 +6301,57 @@ async def revoke_api_key(
 async def get_ai_backend_policy_report(
     user_id: CurrentUser,
     limit: int = Query(default=200, ge=1, le=1000),
+    capture: bool = Query(default=True),
 ) -> AIBackendPolicyReport:
     """Return current AI backend policy and recent workflow remap counts."""
     db = get_db()
-    return build_ai_backend_policy_report(db, user_id=user_id, limit=limit)
+    report = build_ai_backend_policy_report(db, user_id=user_id, limit=limit)
+    if capture:
+        store_ai_backend_policy_snapshot(db, user_id=user_id, report=report)
+    return report
+
+
+@app.get("/v1/admin/ai/backend-policy/history", response_model=AIBackendPolicyHistoryReport)
+async def get_ai_backend_policy_history_report(
+    user_id: CurrentUser,
+    window_hours: int = Query(default=24, ge=1, le=168),
+    bucket_hours: int = Query(default=1, ge=1, le=24),
+    limit: int = Query(default=1000, ge=1, le=5000),
+) -> AIBackendPolicyHistoryReport:
+    """Return bucketed historical AI backend policy activity."""
+    db = get_db()
+    return build_ai_backend_policy_history_report(
+        db,
+        user_id=user_id,
+        window_hours=window_hours,
+        bucket_hours=bucket_hours,
+        limit=limit,
+    )
+
+
+@app.get("/v1/admin/ai/backend-policy/snapshots", response_model=AIBackendPolicySnapshotsResponse)
+async def list_ai_backend_policy_snapshots(
+    user_id: CurrentUser,
+    limit: int = Query(default=50, ge=1, le=500),
+) -> AIBackendPolicySnapshotsResponse:
+    """Return persisted backend-policy snapshots for the current user."""
+    db = get_db()
+    snapshots = get_ai_backend_policy_snapshots(db, user_id=user_id, limit=limit)
+    return AIBackendPolicySnapshotsResponse(
+        snapshots=[
+            AIBackendPolicySnapshotResponse(
+                id=snapshot.id,
+                created_at=snapshot.created_at,
+                summary_backend=snapshot.summary_backend,
+                failure_backend=snapshot.failure_backend,
+                github_auth_source=snapshot.github_auth_source,
+                github_live_mode_requested=snapshot.github_live_mode_requested,
+                ai_execute_logs=snapshot.ai_execute_logs,
+                policy_applied_count=snapshot.policy_applied_count,
+                remap_counts=dict(snapshot.remap_counts),
+                top_capabilities=dict(snapshot.top_capabilities),
+                top_remaps=list(snapshot.top_remaps),
+            )
+            for snapshot in snapshots
+        ]
+    )

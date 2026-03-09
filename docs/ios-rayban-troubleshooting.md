@@ -178,6 +178,25 @@ See: `docs/meta-ai-glasses-audio-routing.md` §Audio Format Recommendations
 
 ---
 
+### 4b. Spawned task details are unclear after a successful command
+
+**Symptoms**:
+- `POST /v1/command` returns success but the UI only shows generic spoken text
+- An MCP-backed workflow was started, but there is no obvious task summary
+
+**Quick checks**:
+1. Inspect `follow_on_task.summary` in the command response
+2. Save `follow_on_task.task_id` for later task detail/status checks
+3. Verify whether the command returned a synchronous result instead of spawning background work
+
+**Expected fields**:
+- `follow_on_task.summary`
+- `follow_on_task.task_id`
+- `follow_on_task.provider_label`
+- `follow_on_task.capability`
+
+---
+
 ### 5. Sample rate / format mismatch
 
 **Symptoms**:

@@ -22,7 +22,7 @@ import {
   getActiveTasksScreenState,
   setActiveTasksScreenState,
 } from '../storage/agentSurfaceStorage';
-import { buildTaskLifecycleActionItems } from '../utils/agentCards';
+import { buildAgentTaskCard } from '../utils/agentCards';
 import { applyTaskControlResponse } from '../utils/taskControlState';
 
 const POLL_INTERVAL_MS = 5000;
@@ -47,32 +47,14 @@ function dedupeTasks(tasks) {
 }
 
 function buildTaskCard(task) {
-  const lines = [];
-  if (task.description) {
-    lines.push(task.description);
-  }
-  if (task.provider) {
-    lines.push(`Provider: ${task.provider}`);
-  }
-  if (task.result?.capability) {
-    lines.push(`Capability: ${task.result.capability}`);
-  }
-  if (task.updated_at) {
-    lines.push(`Updated: ${new Date(task.updated_at).toLocaleTimeString()}`);
-  }
-
-  const actionItems = [
-    { id: 'mobile_refresh_task', label: 'Refresh Task', phrase: 'refresh this task' },
-    { id: 'mobile_open_task_detail', label: 'Open Detail', phrase: 'open task detail' },
-    ...buildTaskLifecycleActionItems(task),
-  ];
-
+  const baseCard = buildAgentTaskCard(task);
   return {
-    title: task.provider_label || task.provider || 'Agent Task',
-    subtitle: `${task.state || 'unknown'}${task.result?.capability ? ` • ${task.result.capability}` : ''}`,
-    lines,
-    action_items: actionItems,
-    task_id: task.id,
+    ...baseCard,
+    action_items: [
+      { id: 'mobile_refresh_task', label: 'Refresh Task', phrase: 'refresh this task' },
+      { id: 'mobile_open_task_detail', label: 'Open Detail', phrase: 'open task detail' },
+      ...(baseCard.action_items || []),
+    ],
   };
 }
 

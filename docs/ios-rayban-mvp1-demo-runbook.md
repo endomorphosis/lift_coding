@@ -131,6 +131,7 @@ Content-Type: application/json
   "status": "success",
   "intent": "inbox.summary",
   "spoken_text": "You have 3 pull requests awaiting review...",
+  "follow_on_task": null,
   "cards": [
     {
       "type": "pr_summary",
@@ -313,7 +314,13 @@ Use this approach to demonstrate the complete audio pipeline:
    const { spoken_text } = commandResponse;
    ```
 
-2. **Call TTS endpoint**
+2. **If present, inspect `follow_on_task.summary` for spawned MCP work**
+   ```javascript
+   const followOnSummary = commandResponse.follow_on_task?.summary;
+   const followOnTaskId = commandResponse.follow_on_task?.task_id;
+   ```
+
+3. **Call TTS endpoint**
    ```bash
    curl -X POST http://localhost:8080/v1/tts \
      -H "Content-Type: application/json" \
@@ -325,7 +332,7 @@ Use this approach to demonstrate the complete audio pipeline:
      --output /tmp/tts-response.wav
    ```
 
-3. **Play audio through glasses**
+4. **Play audio through glasses**
    - iOS app should:
      - Configure `AVAudioSession` for Bluetooth output
      - Load TTS audio bytes

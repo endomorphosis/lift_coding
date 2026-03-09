@@ -84,6 +84,21 @@ describe('buildAgentTaskCard', () => {
 
     expect(card.lines).toContain('Execution: Remote (local unavailable)');
   });
+
+  it('uses task description when instruction is absent', () => {
+    const card = buildAgentTaskCard({
+      id: 'task-791',
+      state: 'completed',
+      provider: 'ipfs_datasets_mcp',
+      description: 'find legal datasets',
+      result: {
+        capability: 'dataset_discovery',
+        message: 'Expanded legal query',
+      },
+    });
+
+    expect(card.lines).toContain('Instruction: find legal datasets');
+  });
 });
 
 describe('buildAgentNotificationCard', () => {

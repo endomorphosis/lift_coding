@@ -58,6 +58,21 @@ class HandsFreeClient:
         print(f"Status: {response.status_code}")
         try:
             data = response.json()
+            follow_on_task = data.get("follow_on_task")
+            if isinstance(follow_on_task, dict) and follow_on_task.get("task_id"):
+                print("Follow-on Task:")
+                if follow_on_task.get("summary"):
+                    print(f"  Summary: {follow_on_task['summary']}")
+                print(f"  Task ID: {follow_on_task['task_id']}")
+                if follow_on_task.get("provider_label") or follow_on_task.get("provider"):
+                    print(
+                        "  Provider: "
+                        f"{follow_on_task.get('provider_label') or follow_on_task.get('provider')}"
+                    )
+                if follow_on_task.get("capability"):
+                    print(f"  Capability: {follow_on_task['capability']}")
+                if follow_on_task.get("state"):
+                    print(f"  State: {follow_on_task['state']}")
             print(f"Response: {json.dumps(data, indent=2)}")
         except Exception:
             print(f"Response: {response.text[:500]}")

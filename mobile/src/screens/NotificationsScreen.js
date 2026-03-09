@@ -25,7 +25,7 @@ import {
   setNotificationsScreenState,
 } from '../storage/agentSurfaceStorage';
 import { getProfile } from '../storage/profileStorage';
-import { executeStructuredAction } from '../utils/agentActions';
+import { buildLastActionLines, executeStructuredAction } from '../utils/agentActions';
 import { buildAgentNotificationCard } from '../utils/agentCards';
 import {
   buildNotificationPreview,
@@ -321,7 +321,7 @@ export default function NotificationsScreen({ navigation }) {
           title="Last Action"
           tone="warning"
           accent={lastAction.status || 'completed'}
-          lines={[lastAction.message]}
+          lines={buildLastActionLines(lastAction)}
           actionLabel={lastAction.taskUpdate?.task_id ? 'Open Task Detail' : null}
           onActionPress={
             lastAction.taskUpdate?.task_id

@@ -45,6 +45,31 @@ export interface DatDiagnostics {
   registrationState?: string | null;
   deviceCount?: number;
   activeDeviceId?: string | null;
+  selectedDeviceId?: string | null;
+  selectedDeviceName?: string | null;
+  targetConnectionState?: string | null;
+  targetLastSeenAt?: number | null;
+  targetRssi?: number | null;
+  adapterState?: {
+    transport: string;
+    adapterAvailable: boolean;
+    adapterEnabled: boolean;
+    scanPermissionGranted: boolean;
+    connectPermissionGranted: boolean;
+    advertisePermissionGranted?: boolean;
+    state: string;
+  };
+  knownDeviceCount?: number;
+}
+
+export interface DatStateChangedEvent {
+  state: string;
+  sessionState?: string;
+  deviceId?: string | null;
+  deviceName?: string | null;
+  targetConnectionState?: string | null;
+  targetLastSeenAt?: number | null;
+  targetRssi?: number | null;
 }
 
 const ExpoMetaWearablesDatModule = requireOptionalNativeModule('ExpoMetaWearablesDat');
@@ -78,6 +103,38 @@ class ExpoMetaWearablesDat extends EventEmitter {
     return await ExpoMetaWearablesDatModule.getSessionState();
   }
 
+  async getAdapterState(): Promise<DatDiagnostics['adapterState']> {
+    return await ExpoMetaWearablesDatModule.getAdapterState();
+  }
+
+  async getKnownDevices(): Promise<Array<Record<string, unknown>>> {
+    return await ExpoMetaWearablesDatModule.getKnownDevices();
+  }
+
+  async scanKnownAndNearbyDevices(timeoutMs: number = 2500): Promise<Array<Record<string, unknown>>> {
+    return await ExpoMetaWearablesDatModule.scanKnownAndNearbyDevices(timeoutMs);
+  }
+
+  async getSelectedDeviceTarget(): Promise<Record<string, unknown> | null> {
+    return (await ExpoMetaWearablesDatModule.getSelectedDeviceTarget()) ?? null;
+  }
+
+  async selectDeviceTarget(deviceId: string): Promise<Record<string, unknown>> {
+    return await ExpoMetaWearablesDatModule.selectDeviceTarget(deviceId);
+  }
+
+  async clearDeviceTarget(): Promise<Record<string, unknown>> {
+    return await ExpoMetaWearablesDatModule.clearDeviceTarget();
+  }
+
+  async reconnectSelectedDeviceTarget(): Promise<Record<string, unknown>> {
+    return await ExpoMetaWearablesDatModule.reconnectSelectedDeviceTarget();
+  }
+
+  async connectSelectedDeviceTarget(): Promise<Record<string, unknown>> {
+    return await ExpoMetaWearablesDatModule.connectSelectedDeviceTarget();
+  }
+
   async getDiagnostics(): Promise<DatDiagnostics> {
     return await ExpoMetaWearablesDatModule.getDiagnostics();
   }
@@ -90,7 +147,7 @@ class ExpoMetaWearablesDat extends EventEmitter {
     return await ExpoMetaWearablesDatModule.stopDeviceSession();
   }
 
-  addStateListener(listener: (event: { state: string }) => void): Subscription {
+  addStateListener(listener: (event: DatStateChangedEvent) => void): Subscription {
     return this.addListener('onDatStateChanged', listener);
   }
 }

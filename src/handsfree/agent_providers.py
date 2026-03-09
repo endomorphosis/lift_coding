@@ -294,8 +294,11 @@ class CopilotCLIAgentProvider(AgentProvider):
             from handsfree.ai.policy import build_policy_resolution
             from handsfree.models import AIWorkflow
 
-            capability_id = _select_delegated_ai_capability(task.instruction)
-            requested_workflow = _infer_delegated_requested_workflow(task.instruction)
+            task_trace = getattr(task, "trace", None) or {}
+            capability_id = _select_delegated_capability_with_trace(task.instruction, task_trace)
+            requested_workflow = _infer_delegated_requested_workflow_with_trace(
+                task.instruction, task_trace
+            )
             request = AICapabilityRequest(
                 capability_id=capability_id,
                 context=AIRequestContext(repo=repo, pr_number=pr_number),
@@ -1361,6 +1364,30 @@ def _infer_delegated_requested_workflow(instruction: str | None):
     if "summary" in normalized or "summarize" in normalized:
         return AIWorkflow.PR_RAG_SUMMARY
     return None
+
+
+def _select_delegated_capability_with_trace(
+    instruction: str | None, trace: dict[str, Any] | None
+) -> str:
+    """Prefer explicit orchestration hints from task trace before text heuristics."""
+    normalized_trace = trace or {}
+    if normalized_trace.get("wearables_bridge_requested_workflow") == "wearables_bridge_connectivity":
+        return "workflow"
+    trace_capability = normalized_trace.get("mcp_capability")
+    if isinstance(trace_capability, str) and trace_capability.strip():
+        return trace_capability
+    return _select_delegated_ai_capability(instruction)
+
+
+def _infer_delegated_requested_workflow_with_trace(
+    instruction: str | None, trace: dict[str, Any] | None
+):
+    """Prefer explicit workflow hints from task trace before text heuristics."""
+    normalized_trace = trace or {}
+    trace_workflow = normalized_trace.get("wearables_bridge_requested_workflow")
+    if isinstance(trace_workflow, str) and trace_workflow.strip():
+        return trace_workflow
+    return _infer_delegated_requested_workflow(instruction)
 
 
 def _command_id_for_copilot_capability(capability_id: str) -> str:

@@ -19,7 +19,11 @@ import {
   getTaskDetailScreenState,
   setTaskDetailScreenState,
 } from '../storage/taskDetailStorage';
-import { executeStructuredAction } from '../utils/agentActions';
+import {
+  buildLastActionLines,
+  buildPromptDraft,
+  executeStructuredAction,
+} from '../utils/agentActions';
 import { buildAgentTaskCard } from '../utils/agentCards';
 import { shouldClearLastActionFromTaskDetail } from '../utils/lastActionState';
 import { applyTaskControlResponse } from '../utils/taskControlState';
@@ -271,9 +275,9 @@ export default function TaskDetailScreen({ route }) {
           title="Last Action"
           tone="warning"
           accent={lastAction.status || 'completed'}
-          lines={[lastAction.message]}
-          actionLabel={lastAction.taskUpdate?.task_id ? 'Open Task Detail' : null}
-          onActionPress={
+            lines={buildLastActionLines(lastAction)}
+            actionLabel={lastAction.taskUpdate?.task_id ? 'Open Task Detail' : null}
+            onActionPress={
             lastAction.taskUpdate?.task_id
               ? () => {
                   const nextTaskId = lastAction.taskUpdate.task_id;

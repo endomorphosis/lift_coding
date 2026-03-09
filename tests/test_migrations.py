@@ -28,6 +28,7 @@ def test_run_migrations_creates_tables():
             "transport_session_cursors",
             "pending_actions",
             "action_logs",
+            "ai_backend_policy_snapshots",
             "ai_history_index",
             "webhook_events",
             "agent_tasks",

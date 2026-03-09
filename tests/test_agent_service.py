@@ -202,6 +202,28 @@ class TestAgentStatus:
         assert result["tasks"][0]["result_output"]["cid"] == "bafy123"
         assert result["tasks"][0]["follow_up_actions"][0]["id"] == "read_cid"
 
+    def test_status_includes_execution_mode_metadata(self, agent_service, db_conn, test_user_id):
+        """Status payload should surface preferred and resolved execution mode metadata."""
+        from handsfree.db.agent_tasks import create_agent_task
+
+        create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_kit_mcp",
+            instruction="pin bafy123",
+            trace={
+                "mcp_capability": "ipfs_pin",
+                "mcp_preferred_execution_mode": "direct_import",
+                "mcp_execution_mode": "mcp_remote",
+                "mcp_result_preview": "Pinned bafy123.",
+            },
+        )
+
+        result = agent_service.get_status(user_id=test_user_id)
+
+        assert result["tasks"][0]["mcp_preferred_execution_mode"] == "direct_import"
+        assert result["tasks"][0]["mcp_execution_mode"] == "mcp_remote"
+
 
 class TestAdvanceTaskState:
     """Test advancing task states via service."""
@@ -258,6 +280,38 @@ class TestAdvanceTaskState:
 
 class TestNotifications:
     """Test notification emission."""
+
+    def test_completion_notification_message_mentions_remote_fallback(
+        self, agent_service, db_conn, test_user_id
+    ):
+        """Completion notifications should mention when local execution fell back to remote."""
+        from handsfree.db.agent_tasks import create_agent_task, get_agent_tasks
+        from handsfree.db.notifications import list_notifications
+
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_kit_mcp",
+            instruction="pin bafy123 on ipfs",
+        )
+        update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+
+        agent_service.advance_task_state(
+            task.id,
+            "completed",
+            trace_update={
+                "provider_label": "IPFS Kit",
+                "mcp_capability": "ipfs_pin",
+                "mcp_cid": "bafy123",
+                "mcp_result_preview": "Pinned bafy123",
+                "mcp_preferred_execution_mode": "direct_import",
+                "mcp_execution_mode": "mcp_remote",
+            },
+        )
+
+        notifications = list_notifications(conn=db_conn, user_id=test_user_id)
+        assert notifications
+        assert "Execution: remote (local unavailable)" in notifications[0].message
 
     def test_notification_on_task_creation(self, agent_service, db_conn, test_user_id):
         """Test that notification is persisted on task creation."""

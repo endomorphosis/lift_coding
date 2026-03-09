@@ -27,6 +27,7 @@ import {
   getNotificationDetail,
   getNotifications,
   sendCommand,
+  delegateWearablesBridgeTask,
   sendActionCommand,
   confirmCommand,
 } from '../client';
@@ -156,6 +157,65 @@ describe('sendActionCommand', () => {
     });
 
     await expect(sendActionCommand('unknown_action')).rejects.toThrow('invalid_action_id');
+  });
+});
+
+describe('delegateWearablesBridgeTask', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('delegates a wearables bridge follow-on task through the command API', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        status: 'ok',
+        spoken_text: 'Wearables bridge task started.',
+        follow_on_task: {
+          task_id: 'task-bridge-1',
+          state: 'running',
+          provider: 'ipfs_accelerate_mcp',
+          provider_label: 'IPFS Accelerate',
+          capability: 'agentic_fetch',
+          summary: 'Wearables bridge inspection running.',
+        },
+      }),
+    });
+
+    const response = await delegateWearablesBridgeTask({
+      deviceId: 'AA:BB',
+      deviceName: 'Ray-Ban Meta',
+      targetConnectionState: 'connected',
+      targetRssi: -42,
+      targetLastSeenAt: 1700000000000,
+    });
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://example.test/v1/command',
+      expect.objectContaining({
+        method: 'POST',
+      })
+    );
+    const [, request] = global.fetch.mock.calls[0];
+    const body = JSON.parse(request.body);
+    expect(body.input.type).toBe('text');
+    expect(body.input.text).toContain('Ray-Ban Meta');
+    expect(body.input.text).toContain('Device id: AA:BB.');
+    expect(body.input.text).toContain('Observed RSSI: -42.');
+    expect(body.client_context.feature).toBe('wearables_bridge');
+    expect(body.client_context.trigger).toBe('target_connected');
+    expect(response.follow_on_task).toEqual({
+      task_id: 'task-bridge-1',
+      state: 'running',
+      provider: 'ipfs_accelerate_mcp',
+      provider_label: 'IPFS Accelerate',
+      capability: 'agentic_fetch',
+      summary: 'Wearables bridge inspection running.',
+    });
   });
 });
 
@@ -304,6 +364,12 @@ describe('getAgentTaskDetail', () => {
       json: jest.fn().mockResolvedValue({
         id: 'task-123',
         provider: 'ipfs_datasets_mcp',
+        description: 'find legal datasets',
+        trace: {
+          provider_label: 'IPFS Datasets',
+          mcp_preferred_execution_mode: 'direct_import',
+          mcp_execution_mode: 'mcp_remote',
+        },
         result: { capability: 'dataset_discovery' },
       }),
     });
@@ -317,6 +383,10 @@ describe('getAgentTaskDetail', () => {
       })
     );
     expect(response.id).toBe('task-123');
+    expect(response.instruction).toBe('find legal datasets');
+    expect(response.provider_label).toBe('IPFS Datasets');
+    expect(response.mcp_preferred_execution_mode).toBe('direct_import');
+    expect(response.mcp_execution_mode).toBe('mcp_remote');
   });
 });
 
@@ -352,6 +422,33 @@ describe('getAgentTasks', () => {
         method: 'GET',
       })
     );
+  });
+
+  it('normalizes task list items with top-level execution metadata fallbacks', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        tasks: [
+          {
+            id: 'task-789',
+            provider: 'ipfs_kit_mcp',
+            description: 'pin bafy123 on ipfs',
+            trace: {
+              mcp_preferred_execution_mode: 'direct_import',
+              mcp_execution_mode: 'mcp_remote',
+            },
+          },
+        ],
+        pagination: { limit: 20, offset: 0, has_more: false },
+        filters: { status: 'running', result_view: 'normalized' },
+      }),
+    });
+
+    const response = await getAgentTasks({ status: 'running', result_view: 'normalized' });
+
+    expect(response.tasks[0].instruction).toBe('pin bafy123 on ipfs');
+    expect(response.tasks[0].mcp_preferred_execution_mode).toBe('direct_import');
+    expect(response.tasks[0].mcp_execution_mode).toBe('mcp_remote');
   });
 });
 

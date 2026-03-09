@@ -77,6 +77,15 @@ export function mergeNotificationTaskDetail(notification, taskDetail) {
   if (taskDetail.result_envelope && typeof taskDetail.result_envelope === 'object') {
     nextMetadata.result_envelope = taskDetail.result_envelope;
   }
+  if (typeof taskDetail.mcp_execution_mode === 'string' && taskDetail.mcp_execution_mode) {
+    nextMetadata.mcp_execution_mode = taskDetail.mcp_execution_mode;
+  }
+  if (
+    typeof taskDetail.mcp_preferred_execution_mode === 'string' &&
+    taskDetail.mcp_preferred_execution_mode
+  ) {
+    nextMetadata.mcp_preferred_execution_mode = taskDetail.mcp_preferred_execution_mode;
+  }
   if (Array.isArray(taskDetail.follow_up_actions)) {
     nextMetadata.follow_up_actions = taskDetail.follow_up_actions;
   }

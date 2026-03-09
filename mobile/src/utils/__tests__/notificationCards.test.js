@@ -68,4 +68,23 @@ describe('notificationCards helpers', () => {
     expect(merged.metadata.result_envelope.summary).toBe('Pinned bafy123.');
     expect(merged.metadata.follow_up_actions[0].id).toBe('read_cid');
   });
+
+  it('propagates execution-mode metadata from task detail', () => {
+    const merged = mergeNotificationTaskDetail(
+      buildNotificationPreview({
+        id: 'notif-4',
+        event_type: 'task_running',
+        metadata: { task_id: 'task-999', state: 'running' },
+      }),
+      {
+        id: 'task-999',
+        state: 'completed',
+        mcp_preferred_execution_mode: 'direct_import',
+        mcp_execution_mode: 'mcp_remote',
+      }
+    );
+
+    expect(merged.metadata.mcp_preferred_execution_mode).toBe('direct_import');
+    expect(merged.metadata.mcp_execution_mode).toBe('mcp_remote');
+  });
 });

@@ -5,7 +5,10 @@ import uuid
 
 import pytest
 
-from handsfree.ai.observability import build_ai_backend_policy_report
+from handsfree.ai.observability import (
+    build_ai_backend_policy_history_report,
+    build_ai_backend_policy_report,
+)
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.github.auth import GhCliTokenProvider
@@ -264,3 +267,72 @@ def test_build_ai_backend_policy_report_prefers_env_auth_source(db_conn, monkeyp
 
     assert report.policy.github_auth_source == "env_token"
     assert report.policy.github_live_mode_requested is True
+
+
+def test_build_ai_backend_policy_history_report_buckets_activity(db_conn, monkeypatch):
+    """History report should bucket AI executions and remaps over time."""
+    user_id = str(uuid.uuid4())
+    monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
+
+    first = write_action_log(
+        db_conn,
+        user_id=user_id,
+        action_type="ai.execute.github.pr.accelerated_summary",
+        ok=True,
+        result={
+            "policy_resolution": {
+                "requested_workflow": "pr_rag_summary",
+                "resolved_workflow": "accelerated_pr_summary",
+                "requested_capability_id": None,
+                "resolved_capability_id": "github.pr.accelerated_summary",
+                "policy_applied": True,
+            }
+        },
+    )
+    second = write_action_log(
+        db_conn,
+        user_id=user_id,
+        action_type="ai.execute.github.check.failure_rag_explain",
+        ok=True,
+        result={
+            "policy_resolution": {
+                "requested_workflow": "failure_rag_explain",
+                "resolved_workflow": "failure_rag_explain",
+                "requested_capability_id": None,
+                "resolved_capability_id": "github.check.failure_rag_explain",
+                "policy_applied": False,
+            }
+        },
+    )
+
+    now = datetime.now(UTC)
+    db_conn.execute(
+        "UPDATE action_logs SET created_at = ? WHERE id = ?",
+        [now - timedelta(hours=3, minutes=30), first.id],
+    )
+    db_conn.execute(
+        "UPDATE action_logs SET created_at = ? WHERE id = ?",
+        [now - timedelta(hours=1, minutes=15), second.id],
+    )
+
+    report = build_ai_backend_policy_history_report(
+        db_conn,
+        user_id=user_id,
+        window_hours=4,
+        bucket_hours=2,
+        limit=20,
+    )
+
+    assert report.window_hours == 4
+    assert report.bucket_hours == 2
+    assert len(report.buckets) == 2
+    assert report.policy.github_auth_source == "fixtures"
+    assert report.buckets[0].ai_execute_logs == 1
+    assert report.buckets[0].policy_applied_count == 1
+    assert report.buckets[0].remap_counts == {"pr_rag_summary->accelerated_pr_summary": 1}
+    assert report.buckets[1].ai_execute_logs == 1
+    assert report.buckets[1].policy_applied_count == 0
+    assert report.buckets[1].remap_counts == {}

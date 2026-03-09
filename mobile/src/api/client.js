@@ -89,6 +89,90 @@ function normalizeCommandResponse(data) {
   };
 }
 
+function normalizeAgentTask(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Agent task returned an invalid response payload');
+  }
+
+  const trace = data.trace && typeof data.trace === 'object' ? data.trace : {};
+  const resultEnvelope =
+    data.result_envelope && typeof data.result_envelope === 'object'
+      ? data.result_envelope
+      : trace.mcp_result_envelope && typeof trace.mcp_result_envelope === 'object'
+        ? trace.mcp_result_envelope
+        : null;
+  const normalized = {
+    ...data,
+  };
+
+  if (typeof normalized.description !== 'string' && typeof normalized.instruction === 'string') {
+    normalized.description = normalized.instruction;
+  }
+  if (typeof normalized.instruction !== 'string' && typeof normalized.description === 'string') {
+    normalized.instruction = normalized.description;
+  }
+  if (typeof normalized.provider_label !== 'string' && typeof trace.provider_label === 'string') {
+    normalized.provider_label = trace.provider_label;
+  }
+  if (
+    typeof normalized.mcp_execution_mode !== 'string' &&
+    typeof trace.mcp_execution_mode === 'string'
+  ) {
+    normalized.mcp_execution_mode = trace.mcp_execution_mode;
+  }
+  if (
+    typeof normalized.mcp_preferred_execution_mode !== 'string' &&
+    typeof trace.mcp_preferred_execution_mode === 'string'
+  ) {
+    normalized.mcp_preferred_execution_mode = trace.mcp_preferred_execution_mode;
+  }
+  if (
+    typeof normalized.mcp_execution_mode !== 'string' &&
+    typeof resultEnvelope?.execution_mode === 'string'
+  ) {
+    normalized.mcp_execution_mode = resultEnvelope.execution_mode;
+  }
+  if (
+    typeof normalized.mcp_preferred_execution_mode !== 'string' &&
+    typeof resultEnvelope?.preferred_execution_mode === 'string'
+  ) {
+    normalized.mcp_preferred_execution_mode = resultEnvelope.preferred_execution_mode;
+  }
+  if (typeof normalized.result_preview !== 'string') {
+    if (typeof trace.mcp_result_preview === 'string') {
+      normalized.result_preview = trace.mcp_result_preview;
+    } else if (typeof resultEnvelope?.summary === 'string') {
+      normalized.result_preview = resultEnvelope.summary;
+    }
+  }
+  if (normalized.result_output === undefined) {
+    if (trace.mcp_result_output !== undefined) {
+      normalized.result_output = trace.mcp_result_output;
+    } else if (resultEnvelope && resultEnvelope.structured_output !== undefined) {
+      normalized.result_output = resultEnvelope.structured_output;
+    }
+  }
+  if (!normalized.result_envelope && resultEnvelope) {
+    normalized.result_envelope = resultEnvelope;
+  }
+  if (!Array.isArray(normalized.follow_up_actions) && Array.isArray(resultEnvelope?.follow_up_actions)) {
+    normalized.follow_up_actions = resultEnvelope.follow_up_actions;
+  }
+
+  return normalized;
+}
+
+function normalizeAgentTaskListResponse(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Agent task list returned an invalid response payload');
+  }
+
+  return {
+    ...data,
+    tasks: Array.isArray(data.tasks) ? data.tasks.map(normalizeAgentTask) : [],
+  };
+}
+
 /**
  * Get backend status
  * @returns {Promise<Object>} Status object with { status, version, user_id }
@@ -141,6 +225,43 @@ export async function sendCommand(text, options = {}) {
   }
 
   return normalizeCommandResponse(await response.json());
+}
+
+function buildWearablesBridgeDelegationPrompt(device = {}, options = {}) {
+  const deviceName = device?.deviceName || device?.deviceId || 'connected wearable target';
+  const targetState = device?.targetConnectionState || 'connected';
+  const parts = [
+    `Delegate to an agent: inspect the ${deviceName} wearables bridge target connection.`,
+    `Use the MCP and IPFS toolchain to capture a connectivity receipt and summarize next steps.`,
+    `Target state is ${targetState}.`,
+  ];
+
+  if (device?.deviceId) {
+    parts.push(`Device id: ${device.deviceId}.`);
+  }
+  if (device?.targetRssi != null) {
+    parts.push(`Observed RSSI: ${device.targetRssi}.`);
+  }
+  if (device?.targetLastSeenAt) {
+    parts.push(`Last seen at unix ms ${device.targetLastSeenAt}.`);
+  }
+  if (options?.extraContext) {
+    parts.push(String(options.extraContext));
+  }
+
+  return parts.join(' ');
+}
+
+export async function delegateWearablesBridgeTask(device = {}, options = {}) {
+  const prompt = buildWearablesBridgeDelegationPrompt(device, options);
+  return await sendCommand(prompt, {
+    ...options,
+    client_context: defaultClientContext({
+      feature: 'wearables_bridge',
+      trigger: 'target_connected',
+      ...(options.client_context || {}),
+    }),
+  });
 }
 
 /**
@@ -411,7 +532,7 @@ export async function getAgentTaskDetail(taskId) {
     throw new Error(errorData.error || `Get agent task failed: ${response.status}`);
   }
 
-  return await response.json();
+  return normalizeAgentTask(await response.json());
 }
 
 /**
@@ -465,7 +586,7 @@ export async function getAgentTasks(options = {}) {
     throw new Error(errorData.error || `Get agent tasks failed: ${response.status}`);
   }
 
-  return await response.json();
+  return normalizeAgentTaskListResponse(await response.json());
 }
 
 /**

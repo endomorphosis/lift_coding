@@ -14,12 +14,78 @@ from handsfree.models import (
     AIRemapCount,
     AIBackendPolicyBucketReport,
     AIBackendPolicyConfig,
+    AIBackendPolicyHistoryBucket,
+    AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
     AITopCapabilities,
     AIBackendPolicyWindow,
 )
 
 from .policy import get_ai_backend_policy
+
+
+def build_ai_backend_policy_history_report(
+    conn: duckdb.DuckDBPyConnection,
+    *,
+    user_id: str,
+    window_hours: int = 24,
+    bucket_hours: int = 1,
+    limit: int = 1000,
+) -> AIBackendPolicyHistoryReport:
+    """Return bucketed historical backend-policy activity from action logs."""
+    policy = get_ai_backend_policy()
+    logs = get_action_logs(conn, user_id=user_id, limit=limit)
+    now = datetime.now(UTC)
+    window_start = now - timedelta(hours=window_hours)
+
+    buckets: list[AIBackendPolicyHistoryBucket] = []
+    current_start = window_start
+    while current_start < now:
+        current_end = min(current_start + timedelta(hours=bucket_hours), now)
+        ai_execute_logs = 0
+        policy_applied_count = 0
+        remap_counter: Counter[str] = Counter()
+
+        for log in logs:
+            if not log.action_type.startswith("ai.execute."):
+                continue
+            log_time = log.created_at.astimezone(UTC)
+            if not (current_start <= log_time < current_end):
+                continue
+            ai_execute_logs += 1
+            result = log.result if isinstance(log.result, dict) else {}
+            policy_resolution = result.get("policy_resolution")
+            if not isinstance(policy_resolution, dict):
+                continue
+            if not policy_resolution.get("policy_applied"):
+                continue
+            policy_applied_count += 1
+            requested = policy_resolution.get("requested_workflow") or "unknown"
+            resolved = policy_resolution.get("resolved_workflow") or "unknown"
+            remap_counter[f"{requested}->{resolved}"] += 1
+
+        buckets.append(
+            AIBackendPolicyHistoryBucket(
+                started_at=current_start,
+                ended_at=current_end,
+                ai_execute_logs=ai_execute_logs,
+                policy_applied_count=policy_applied_count,
+                remap_counts=dict(sorted(remap_counter.items())),
+            )
+        )
+        current_start = current_end
+
+    return AIBackendPolicyHistoryReport(
+        policy=AIBackendPolicyConfig(
+            summary_backend=policy.summary_backend,
+            failure_backend=policy.failure_backend,
+            github_auth_source=resolve_github_auth_source(),
+            github_live_mode_requested=_is_live_mode_requested(),
+        ),
+        window_hours=window_hours,
+        bucket_hours=bucket_hours,
+        buckets=buckets,
+    )
 
 
 def build_ai_backend_policy_report(

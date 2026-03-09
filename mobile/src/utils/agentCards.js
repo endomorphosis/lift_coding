@@ -368,9 +368,10 @@ export function buildAgentResultCard(item) {
 export function buildAgentTaskCard(task) {
   const result = normalizeResult(task);
   const state = task?.state;
+  const instruction = task?.instruction || task?.description || '';
   const fallbackActionItems = buildAgentActionItems({
     provider: task?.provider,
-    instruction: task?.instruction || '',
+    instruction,
     result,
     includeDetails: false,
   });
@@ -384,7 +385,7 @@ export function buildAgentTaskCard(task) {
     timestamp_label: relativeTimestampLabel(task?.updated_at || task?.created_at),
     lines: appendExecutionModeLine(
       buildResultLines(result, {
-        instruction: task?.instruction,
+        instruction,
         resultPreview: getResultPreview(task),
       }),
       task,

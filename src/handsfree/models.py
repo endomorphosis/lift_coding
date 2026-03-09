@@ -152,6 +152,19 @@ class CommandStatus(str, Enum):
 class FollowOnTask(BaseModel):
     """Explicit spawned-task metadata attached to command responses."""
 
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "task_id": "task-9b2b1d9d",
+                "state": "running",
+                "provider": "ipfs_accelerate_mcp",
+                "provider_label": "IPFS Accelerate",
+                "capability": "agentic_fetch",
+                "summary": "IPFS Accelerate agentic fetch running.",
+            }
+        }
+    }
+
     task_id: str
     state: str | None = None
     provider: str | None = None
@@ -162,6 +175,84 @@ class FollowOnTask(BaseModel):
 
 class CommandResponse(BaseModel):
     """Command response."""
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "status": "ok",
+                "intent": {
+                    "name": "agent.result_rerun",
+                    "confidence": 1.0,
+                    "entities": {
+                        "task_id": "task-9b2b1d9d",
+                    },
+                },
+                "spoken_text": "Workflow rerun requested.",
+                "cards": [],
+                "pending_action": None,
+                "follow_on_task": {
+                    "task_id": "task-9b2b1d9d",
+                    "state": "running",
+                    "provider": "ipfs_accelerate_mcp",
+                    "provider_label": "IPFS Accelerate",
+                    "capability": "agentic_fetch",
+                    "summary": "IPFS Accelerate agentic fetch running.",
+                },
+                "debug": {
+                    "transcript": "rerun that fetch with https://example.com",
+                    "tool_calls": [
+                        {
+                            "task_id": "task-9b2b1d9d",
+                            "provider": "ipfs_accelerate_mcp",
+                            "state": "running",
+                        }
+                    ],
+                },
+            }
+            ,
+            "examples": [
+                {
+                    "status": "ok",
+                    "intent": {
+                        "name": "agent.result_rerun",
+                        "confidence": 1.0,
+                        "entities": {
+                            "task_id": "task-9b2b1d9d",
+                        },
+                    },
+                    "spoken_text": "Workflow rerun requested.",
+                    "cards": [],
+                    "pending_action": None,
+                    "follow_on_task": {
+                        "task_id": "task-9b2b1d9d",
+                        "state": "running",
+                        "provider": "ipfs_accelerate_mcp",
+                        "provider_label": "IPFS Accelerate",
+                        "capability": "agentic_fetch",
+                        "summary": "IPFS Accelerate agentic fetch running.",
+                    },
+                },
+                {
+                    "status": "needs_confirmation",
+                    "intent": {
+                        "name": "pr.merge",
+                        "confidence": 1.0,
+                        "entities": {
+                            "pr_number": 456,
+                        },
+                    },
+                    "spoken_text": "Ready to merge PR 456. Say confirm to proceed.",
+                    "cards": [],
+                    "pending_action": {
+                        "token": "conf-abc123xyz",
+                        "expires_at": "2026-01-17T01:00:00Z",
+                        "summary": "Merge PR #456 in owner/repo",
+                    },
+                    "follow_on_task": None,
+                },
+            ],
+        }
+    }
 
     status: CommandStatus
     intent: ParsedIntent
@@ -939,6 +1030,47 @@ class AIBackendPolicyReport(BaseModel):
     resolved_workflow_counts: dict[str, int] = Field(default_factory=dict)
     remap_counts: dict[str, int] = Field(default_factory=dict)
     action_counts: dict[str, int] = Field(default_factory=dict)
+
+
+class AIBackendPolicyHistoryBucket(BaseModel):
+    """Time-series bucket for backend policy observability."""
+
+    started_at: datetime
+    ended_at: datetime
+    ai_execute_logs: int
+    policy_applied_count: int
+    remap_counts: dict[str, int] = Field(default_factory=dict)
+
+
+class AIBackendPolicyHistoryReport(BaseModel):
+    """Historical backend-policy trend report."""
+
+    policy: AIBackendPolicyConfig
+    window_hours: int
+    bucket_hours: int
+    buckets: list[AIBackendPolicyHistoryBucket] = Field(default_factory=list)
+
+
+class AIBackendPolicySnapshotResponse(BaseModel):
+    """Persisted backend-policy snapshot response."""
+
+    id: str
+    created_at: datetime
+    summary_backend: str
+    failure_backend: str
+    github_auth_source: str | None = None
+    github_live_mode_requested: bool = False
+    ai_execute_logs: int
+    policy_applied_count: int
+    remap_counts: dict[str, int] = Field(default_factory=dict)
+    top_capabilities: dict[str, Any] = Field(default_factory=dict)
+    top_remaps: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class AIBackendPolicySnapshotsResponse(BaseModel):
+    """List response for persisted backend-policy snapshots."""
+
+    snapshots: list[AIBackendPolicySnapshotResponse] = Field(default_factory=list)
 
 
 class AICapabilityExecuteResponse(BaseModel):

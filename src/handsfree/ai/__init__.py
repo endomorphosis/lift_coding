@@ -7,7 +7,10 @@ from .capabilities import (
     list_ai_capabilities,
 )
 from .history import discover_failure_history_cids
-from .observability import build_ai_backend_policy_report
+from .observability import (
+    build_ai_backend_policy_history_report,
+    build_ai_backend_policy_report,
+)
 from .models import (
     AICapabilityRequest,
     AICapabilityResult,
@@ -32,6 +35,7 @@ __all__ = [
     "AIBackendPolicy",
     "AIExecutionMode",
     "AIRequestContext",
+    "build_ai_backend_policy_history_report",
     "build_ai_backend_policy_report",
     "build_policy_resolution",
     "build_api_execute_response",

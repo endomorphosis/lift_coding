@@ -457,6 +457,8 @@ Command-router debug payloads now expose the same `policy_resolution` shape for 
 Delegated PR-oriented agent task traces now expose the same `policy_resolution` shape as well.
 There is now also a small admin/debug report route:
 - `GET /v1/admin/ai/backend-policy`
+- `GET /v1/admin/ai/backend-policy/history`
+- `GET /v1/admin/ai/backend-policy/snapshots`
 
 That report exposes:
 - the currently resolved summary and failure backend policy
@@ -479,6 +481,26 @@ That report exposes:
 - fixed recency buckets:
   - `last_hour`
   - `last_24_hours`
+
+The history route exposes:
+- bucketed `ai.execute.*` activity over a caller-selected recent window
+- bucketed `policy_applied_count`
+- bucketed remap-pair counts
+- the same current non-secret policy/auth context used by the snapshot route
+
+The snapshots route exposes:
+- persisted point-in-time backend-policy snapshots
+- current backend defaults and GitHub auth source at snapshot time
+- snapshot-level remap counts, top capabilities, and top remaps
+
+Current behavior:
+- `GET /v1/admin/ai/backend-policy` now stores a point-in-time snapshot opportunistically by default
+- `GET /v1/admin/ai/backend-policy?capture=false` skips snapshot persistence for read-only inspection
+- the snapshots route lists those stored observations newest-first
+- snapshot persistence now supports best-effort retention controls:
+  - `HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS`
+  - `HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER`
+  - `HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS`
 
 ### PR summary backend selection
 The command-layer PR summary flow now supports backend selection without requiring separate user-facing command families.

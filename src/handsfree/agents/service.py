@@ -61,6 +61,19 @@ def _trace_follow_up_actions(trace: dict[str, Any] | None) -> list[dict[str, Any
     return actions if isinstance(actions, list) else []
 
 
+def _requested_local_fallback(preferred_mode: str | None, resolved_mode: str | None) -> bool:
+    return (
+        str(preferred_mode or "").strip().lower() == "direct_import"
+        and str(resolved_mode or "").strip().lower() == "mcp_remote"
+    )
+
+
+def _execution_fallback_message(preferred_mode: str | None, resolved_mode: str | None) -> str | None:
+    if _requested_local_fallback(preferred_mode, resolved_mode):
+        return "Execution: remote (local unavailable)"
+    return None
+
+
 class AgentService:
     """Service for managing agent task delegation and status."""
 
@@ -427,6 +440,12 @@ class AgentService:
                     "instruction": t.instruction,
                     "result_preview": _trace_result_preview(t.trace),
                     "result_output": _trace_result_output(t.trace),
+                    "result_envelope": _trace_result_envelope(t.trace),
+                    "provider_label": (t.trace or {}).get("provider_label") if t.trace else None,
+                    "mcp_execution_mode": (t.trace or {}).get("mcp_execution_mode") if t.trace else None,
+                    "mcp_preferred_execution_mode": (
+                        (t.trace or {}).get("mcp_preferred_execution_mode") if t.trace else None
+                    ),
                     "follow_up_actions": _trace_follow_up_actions(t.trace),
                 }
                 for t in tasks[:10]  # Return up to 10 recent tasks
@@ -703,6 +722,12 @@ class AgentService:
                 metadata["mcp_capability"] = task.trace["mcp_capability"]
             if "mcp_cid" in task.trace:
                 metadata["mcp_cid"] = task.trace["mcp_cid"]
+            if "mcp_execution_mode" in task.trace:
+                metadata["mcp_execution_mode"] = task.trace["mcp_execution_mode"]
+            if "mcp_preferred_execution_mode" in task.trace:
+                metadata["mcp_preferred_execution_mode"] = task.trace[
+                    "mcp_preferred_execution_mode"
+                ]
             if "mcp_seed_url" in task.trace:
                 metadata["mcp_seed_url"] = task.trace["mcp_seed_url"]
             if "mcp_result_preview" in task.trace:
@@ -736,6 +761,13 @@ class AgentService:
             message_parts.append(f"PR #{metadata['pr_number']}")
         if isinstance(metadata.get("result_preview"), str) and metadata["result_preview"].strip():
             message_parts.append(f"Result: {metadata['result_preview'].strip()}")
+
+        fallback_message = _execution_fallback_message(
+            metadata.get("mcp_preferred_execution_mode"),
+            metadata.get("mcp_execution_mode"),
+        )
+        if fallback_message:
+            message_parts.append(fallback_message)
 
         message = ". ".join(message_parts)
 

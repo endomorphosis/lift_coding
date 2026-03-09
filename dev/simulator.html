@@ -901,6 +901,44 @@
                 responseItem.appendChild(pending);
             }
 
+            // Follow-on task
+            if (data.follow_on_task && data.follow_on_task.task_id) {
+                const followOnTask = document.createElement('div');
+                followOnTask.className = 'pending-action';
+
+                const title = document.createElement('div');
+                title.className = 'pending-action-title';
+                title.textContent = '📌 Follow-on Task';
+                followOnTask.appendChild(title);
+
+                if (data.follow_on_task.summary) {
+                    const summary = document.createElement('div');
+                    summary.textContent = data.follow_on_task.summary;
+                    summary.style.marginBottom = '8px';
+                    followOnTask.appendChild(summary);
+                }
+
+                const lines = [];
+                lines.push(`Task ID: ${data.follow_on_task.task_id}`);
+                if (data.follow_on_task.provider_label || data.follow_on_task.provider) {
+                    lines.push(`Provider: ${data.follow_on_task.provider_label || data.follow_on_task.provider}`);
+                }
+                if (data.follow_on_task.capability) {
+                    lines.push(`Capability: ${data.follow_on_task.capability}`);
+                }
+                if (data.follow_on_task.state) {
+                    lines.push(`State: ${data.follow_on_task.state}`);
+                }
+
+                const details = document.createElement('div');
+                details.style.fontSize = '0.9rem';
+                details.style.color = '#4a5568';
+                details.innerHTML = lines.map(line => `• ${line}`).join('<br>');
+                followOnTask.appendChild(details);
+
+                responseItem.appendChild(followOnTask);
+            }
+
             // Debug info
             if (showDebug.checked && data.debug) {
                 const debug = document.createElement('details');

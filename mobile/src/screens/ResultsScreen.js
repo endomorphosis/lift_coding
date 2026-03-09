@@ -21,7 +21,11 @@ import {
   getResultsScreenState,
   setResultsScreenState,
 } from '../storage/resultsScreenStorage';
-import { buildPromptDraft, executeStructuredAction } from '../utils/agentActions';
+import {
+  buildLastActionLines,
+  buildPromptDraft,
+  executeStructuredAction,
+} from '../utils/agentActions';
 import { buildAgentResultCard } from '../utils/agentCards';
 import { shouldClearLastActionFromResults } from '../utils/lastActionState';
 
@@ -351,7 +355,7 @@ export default function ResultsScreen({ navigation }) {
           title="Last Action"
           tone="warning"
           accent={lastAction.status || 'completed'}
-          lines={[lastAction.message]}
+          lines={buildLastActionLines(lastAction)}
           actionLabel={lastAction.taskUpdate?.task_id ? 'Open Task Detail' : null}
           onActionPress={
             lastAction.taskUpdate?.task_id

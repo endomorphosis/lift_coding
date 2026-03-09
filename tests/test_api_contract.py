@@ -349,6 +349,33 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "/v1/agents/tasks/{task_id}/pause" in schema["paths"]
     assert "/v1/agents/tasks/{task_id}/resume" in schema["paths"]
     assert "/v1/agents/tasks/{task_id}/cancel" in schema["paths"]
+    command_examples = (
+        schema["paths"]["/v1/command"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert command_examples["task_spawn"]["value"]["follow_on_task"]["summary"] == (
+        "IPFS Accelerate agentic fetch running."
+    )
+    assert command_examples["needs_confirmation"]["value"]["pending_action"]["token"] == "conf-abc123xyz"
+    action_examples = (
+        schema["paths"]["/v1/commands/action"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert action_examples["task_spawn"]["value"]["intent"]["name"] == "agent.result_rerun"
+    confirm_examples = (
+        schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert confirm_examples["task_spawn"]["value"]["intent"]["name"] == "agent.delegate.confirmed"
+    command_error_examples = (
+        schema["paths"]["/v1/command"]["post"]["responses"]["400"]["content"]["application/json"]["examples"]
+    )
+    assert command_error_examples["invalid_request"]["value"]["error"] == "validation_error"
+    action_error_examples = (
+        schema["paths"]["/v1/commands/action"]["post"]["responses"]["400"]["content"]["application/json"]["examples"]
+    )
+    assert action_error_examples["invalid_action_id"]["value"]["error"] == "invalid_action_id"
+    confirm_error_examples = (
+        schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["404"]["content"]["application/json"]["examples"]
+    )
+    assert confirm_error_examples["expired_pending_action"]["value"]["error"] == "expired"
     task_control = schema["components"]["schemas"]["AgentTaskControlResponse"]
     assert "task_id" in task_control["properties"]
     assert "state" in task_control["properties"]
@@ -358,11 +385,17 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "action_id" in action_request["properties"]
     command_response = schema["components"]["schemas"]["CommandResponse"]
     assert "follow_on_task" in command_response["properties"]
+    assert command_response["example"]["follow_on_task"]["summary"] == (
+        "IPFS Accelerate agentic fetch running."
+    )
+    assert command_response["examples"][1]["status"] == "needs_confirmation"
+    assert command_response["examples"][1]["pending_action"]["token"] == "conf-abc123xyz"
     follow_on_task = schema["components"]["schemas"]["FollowOnTask"]
     assert "task_id" in follow_on_task["properties"]
     assert "provider_label" in follow_on_task["properties"]
     assert "capability" in follow_on_task["properties"]
     assert "summary" in follow_on_task["properties"]
+    assert follow_on_task["example"]["provider_label"] == "IPFS Accelerate"
     ui_card = schema["components"]["schemas"]["UICard"]
     assert "actions" in ui_card["properties"]
     assert "action_items" in ui_card["properties"]
