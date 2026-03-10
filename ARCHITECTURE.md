@@ -503,7 +503,7 @@ Reference: [docs/confirmation-flow.md](docs/confirmation-flow.md)
       ▼
 ┌──────────────────┐
 │  GitHub API      │
-│ POST /repos/.../│
+│ POST /repos/.../ │
 │     issues       │
 └─────┬────────────┘
       │ 2. Issue created
