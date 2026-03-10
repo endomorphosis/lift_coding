@@ -352,7 +352,7 @@ mobile/
 
 ### Confirmation Flow
 
-Reference: [docs/confirmation-flow.md](docs/confirmation-flow.md)
+Reference: [docs/confirmation-flow.md](confirmation-flow.md)
 
 ```
 ┌──────────┐
@@ -574,7 +574,7 @@ Reference: [docs/confirmation-flow.md](docs/confirmation-flow.md)
 
 The backend currently exposes a broad API surface (70+ route handlers in `src/handsfree/api.py`) across command handling, notifications, webhooks, OAuth/auth, admin operations, agent task lifecycle, peer chat/dev tooling, and AI capability execution.
 
-Treat [spec/openapi.yaml](spec/openapi.yaml) as the request/response contract source of truth.
+Treat [spec/openapi.yaml](../spec/openapi.yaml) as the request/response contract source of truth.
 
 #### Representative Core Endpoints
 
@@ -624,7 +624,7 @@ POST   /v1/agents/tasks/{id}/cancel
 
 ### Authentication Modes
 
-Reference: [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md)
+Reference: [docs/AUTHENTICATION.md](AUTHENTICATION.md)
 
 1. **Dev Mode** (`HANDSFREE_AUTH_MODE=dev`)
    - Accepts `X-User-ID` header
@@ -789,7 +789,7 @@ public class ExpoGlassesAudioModule: Module {
 
 The schema has evolved across multiple migrations to support command workflows, notification delivery, webhook processing, agent orchestration, AI history/policy snapshots, and peer/transport diagnostics.
 
-For the full table inventory and migration mapping, see [docs/database-schema.md](docs/database-schema.md).
+For the full table inventory and migration mapping, see [docs/database-schema.md](database-schema.md).
 
 ### Core Tables
 
@@ -1166,7 +1166,7 @@ When proposing architectural changes:
 4. **Security First**: Review security implications
 5. **Test Strategy**: Plan for testing and rollback
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for detailed guidelines.
 
 ---
 

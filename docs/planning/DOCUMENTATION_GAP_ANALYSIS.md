@@ -28,11 +28,11 @@ The codebase has **47 identified documentation gaps** across 10 categories. **18
 - **Missing:** Foreign keys, indexes, constraints, query patterns, data lifecycle
 
 **Code Location:**
-- [migrations/](migrations/) - 15 migration files
-- [src/handsfree/db/](src/handsfree/db/) - Connection and model files
-- [src/handsfree/db/](src/handsfree/db/): commands.py, notifications.py, webhook_events.py, etc.
+- [migrations/](../../migrations/) - 15 migration files
+- [src/handsfree/db/](../../src/handsfree/db/) - Connection and model files
+- [src/handsfree/db/](../../src/handsfree/db/): commands.py, notifications.py, webhook_events.py, etc.
 
-**Should Be Documented In:** [ARCHITECTURE.md](ARCHITECTURE.md#database-schema) - expand section with:
+**Should Be Documented In:** [ARCHITECTURE.md](../ARCHITECTURE.md#database-schema) - expand section with:
 - Complete ERD diagram
 - All 20 tables with purposes and key fields
 - Relationship map
@@ -69,11 +69,11 @@ Title: Docs: Add complete database schema documentation with ERD
 
 **Code Location:**
 - [spec/openapi.yaml](../../spec/openapi.yaml) - definition file
-- [src/handsfree/api.py](src/handsfree/api.py) - endpoint handlers
+- [src/handsfree/api.py](../../src/handsfree/api.py) - endpoint handlers
 
 **Should Be Documented In:** 
 - [spec/openapi.yaml](../../spec/openapi.yaml) - complete spec
-- [ARCHITECTURE.md#api-architecture](ARCHITECTURE.md#api-architecture) - endpoint summary table
+- [ARCHITECTURE.md#api-architecture](../ARCHITECTURE.md#api-architecture) - endpoint summary table
 
 **PR Suggestion:**
 ```
@@ -103,13 +103,13 @@ Title: Docs: Complete OpenAPI specification with all endpoints
   - How results are retrieved and surfaced to user
 
 **Code Location:**
-- [src/handsfree/agents/](src/handsfree/agents/) - service.py, delegation.py, runner.py, results_views.py
-- [src/handsfree/commands/](src/handsfree/commands/) - router.py (agent intent handlers)
-- [src/handsfree/db/agent_tasks.py](src/handsfree/db/agent_tasks.py) - task lifecycle
+- [src/handsfree/agents/](../../src/handsfree/agents/) - service.py, delegation.py, runner.py, results_views.py
+- [src/handsfree/commands/](../../src/handsfree/commands/) - router.py (agent intent handlers)
+- [src/handsfree/db/agent_tasks.py](../../src/handsfree/db/agent_tasks.py) - task lifecycle
 
 **Should Be Documented In:** 
 - New file: `docs/agent-delegation-workflow.md`
-- Update: [ARCHITECTURE.md](ARCHITECTURE.md#agent-delegation) (expand section)
+- Update: [ARCHITECTURE.md](../ARCHITECTURE.md#agent-delegation) (expand section)
 
 **PR Suggestion:**
 ```
@@ -146,11 +146,11 @@ Title: Docs: Add comprehensive agent delegation workflow guide
   - Profile selector UI
 
 **Code Location:**
-- [mobile/src/screens/](mobile/src/screens/) - all screen components
-- [mobile/src/components/](mobile/src/components/) - reusable UI components
+- [mobile/src/screens/](../../mobile/src/screens/) - all screen components
+- [mobile/src/components/](../../mobile/src/components/) - reusable UI components
 
 **Should Be Documented In:** 
-- Update: [mobile/README.md](mobile/README.md#-app-screens) - expand section
+- Update: [mobile/README.md](../../mobile/README.md#-app-screens) - expand section
 - New file: `mobile/SCREENS_REFERENCE.md` - detailed screen guide
 
 **PR Suggestion:**
@@ -186,14 +186,14 @@ Title: Docs: Add complete mobile app screens reference
   - Auth error codes and troubleshooting
 
 **Code Location:**
-- [src/handsfree/auth.py](src/handsfree/auth.py) - auth implementation
-- [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) - existing guide
+- [src/handsfree/auth.py](../../src/handsfree/auth.py) - auth implementation
+- [docs/AUTHENTICATION.md](../AUTHENTICATION.md) - existing guide
 
 **Should Be Documented In:**
 - [README.md](../../README.md) - add link to AUTHENTICATION.md
 - [GETTING_STARTED.md](../GETTING_STARTED.md) - add auth setup section
 - [spec/openapi.yaml](../../spec/openapi.yaml) - add auth scheme definitions
-- Expand [AUTHENTICATION.md](docs/AUTHENTICATION.md) with:
+- Expand [AUTHENTICATION.md](../AUTHENTICATION.md) with:
   - Protected vs public endpoints table
   - Auth error codes reference
   - Migration guide from dev → prod modes
@@ -239,8 +239,8 @@ From codebase analysis, these vars exist in code but not in CONFIGURATION.md:
   - IPFS provider URLs and auth
 
 **Code Location:**
-- [src/handsfree/api.py](src/handsfree/api.py) - env var usage
-- [src/handsfree/config/](src/handsfree/) - scattered config loading
+- [src/handsfree/api.py](../../src/handsfree/api.py) - env var usage
+- [src/handsfree/config/](../../src/handsfree/) - scattered config loading
 
 **Should Be Documented In:** 
 - [CONFIGURATION.md](../CONFIGURATION.md) - add "Advanced Configuration" section
@@ -278,9 +278,9 @@ Title: Docs: Add complete configuration reference for all environment variables
   - How webhook events trigger agent tasks
 
 **Code Location:**
-- [src/handsfree/webhooks.py](src/handsfree/webhooks.py) - signature verification
-- [src/handsfree/db/webhook_events.py](src/handsfree/db/webhook_events.py) - event storage
-- [src/handsfree/db/notifications.py](src/handsfree/db/notifications.py) - throttling/dedup
+- [src/handsfree/webhooks.py](../../src/handsfree/webhooks.py) - signature verification
+- [src/handsfree/db/webhook_events.py](../../src/handsfree/db/webhook_events.py) - event storage
+- [src/handsfree/db/notifications.py](../../src/handsfree/db/notifications.py) - throttling/dedup
 
 **Should Be Documented In:**
 - New file: `docs/webhook-processing.md`
@@ -316,14 +316,14 @@ Title: Docs: Add webhook processing and deduplication guide
   - Profile impact on response format
 
 **Code Location:**
-- [src/handsfree/commands/profiles.py](src/handsfree/commands/profiles.py)
-- [mobile/src/components/ProfileSelector.js](mobile/src/components/ProfileSelector.js)
-- [mobile/src/screens/SettingsScreen.js](mobile/src/screens/SettingsScreen.js)
+- [src/handsfree/commands/profiles.py](../../src/handsfree/commands/profiles.py)
+- [mobile/src/components/ProfileSelector.js](../../mobile/src/components/ProfileSelector.js)
+- [mobile/src/screens/SettingsScreen.js](../../mobile/src/screens/SettingsScreen.js)
 
 **Should Be Documented In:**
 - New file: `docs/profiles-guide.md`
 - Update: [README.md](../../README.md) - expand Profiles section
-- Update: [mobile/README.md](mobile/README.md) - explain profile selection
+- Update: [mobile/README.md](../../mobile/README.md) - explain profile selection
 
 **PR Suggestion:**
 ```
@@ -354,12 +354,12 @@ Title: Docs: Add profiles reference guide
   - Confirmation failure handling
 
 **Code Location:**
-- [src/handsfree/commands/pending_actions.py](src/handsfree/commands/pending_actions.py)
-- [src/handsfree/db/pending_actions.py](src/handsfree/db/pending_actions.py)
+- [src/handsfree/commands/pending_actions.py](../../src/handsfree/commands/pending_actions.py)
+- [src/handsfree/db/pending_actions.py](../../src/handsfree/db/pending_actions.py)
 
 **Should Be Documented In:**
-- Update: [ARCHITECTURE.md#data-flow](ARCHITECTURE.md#data-flow) - add confirmation flow diagram
-- Update: [mobile/README.md](mobile/README.md#confirmation-screen) or new section
+- Update: [ARCHITECTURE.md#data-flow](../ARCHITECTURE.md#data-flow) - add confirmation flow diagram
+- Update: [mobile/README.md](../../mobile/README.md#confirmation-screen) or new section
 
 **PR Suggestion:**
 ```
@@ -387,9 +387,9 @@ Title: Docs: Add confirmation flow and pending actions guide
   - ARCHITECTURE.md doesn't explain modes
 
 **Code Location:**
-- [src/handsfree/models.py](src/handsfree/models.py) - PrivacyMode enum
-- [src/handsfree/handlers/pr_summary.py](src/handsfree/handlers/pr_summary.py) - privacy enforcement
-- [src/handsfree/handlers/inbox.py](src/handsfree/handlers/inbox.py) - privacy enforcement
+- [src/handsfree/models.py](../../src/handsfree/models.py) - PrivacyMode enum
+- [src/handsfree/handlers/pr_summary.py](../../src/handsfree/handlers/pr_summary.py) - privacy enforcement
+- [src/handsfree/handlers/inbox.py](../../src/handsfree/handlers/inbox.py) - privacy enforcement
 
 **Should Be Documented In:**
 - New section in [README.md](../../README.md) - "Privacy Modes"
@@ -465,8 +465,8 @@ Title: Docs: Add experimental features guide and stability matrix
   - Cost implications of different providers
 
 **Code Location:**
-- [src/handsfree/tts/](src/handsfree/tts/) - TTS providers
-- [src/handsfree/stt/](src/handsfree/stt/) - STT providers
+- [src/handsfree/tts/](../../src/handsfree/tts/) - TTS providers
+- [src/handsfree/stt/](../../src/handsfree/stt/) - STT providers
 
 **Should Be Documented In:**
 - New file: `docs/provider-systems.md` - complete provider guide
@@ -500,12 +500,12 @@ Title: Docs: Add provider system architecture and extension guide
   - When to use P2P vs direct connection
 
 **Code Location:**
-- [src/handsfree/transport/](src/handsfree/transport/) - transport providers
-- [src/handsfree/db/transport_session_cursors.py](src/handsfree/db/transport_session_cursors.py)
+- [src/handsfree/transport/](../../src/handsfree/transport/) - transport providers
+- [src/handsfree/db/transport_session_cursors.py](../../src/handsfree/db/transport_session_cursors.py)
 
 **Should Be Documented In:**
 - New file: `docs/transport-architecture.md`
-- Update: [ARCHITECTURE.md](ARCHITECTURE.md#transport-layer)
+- Update: [ARCHITECTURE.md](../ARCHITECTURE.md#transport-layer)
 
 **PR Suggestion:**
 ```
@@ -537,8 +537,8 @@ Title: Docs: Add transport layer architecture documentation
   - MCP capability discovery
 
 **Code Location:**
-- [src/handsfree/mcp/](src/handsfree/mcp/) - client, config, catalog, capabilities, models
-- [src/handsfree/agents/delegation.py](src/handsfree/agents/delegation.py) - MCP task dispatch
+- [src/handsfree/mcp/](../../src/handsfree/mcp/) - client, config, catalog, capabilities, models
+- [src/handsfree/agents/delegation.py](../../src/handsfree/agents/delegation.py) - MCP task dispatch
 
 **Should Be Documented In:**
 - New file: `docs/mcp-integration.md` - MCP setup and usage guide
@@ -573,12 +573,12 @@ Title: Docs: Add MCP integration documentation and configuration guide
   - Secrets access patterns (automatic, on-demand, cached)
 
 **Code Location:**
-- [src/handsfree/secrets/](src/handsfree/secrets/) - all implementations
+- [src/handsfree/secrets/](../../src/handsfree/secrets/) - all implementations
 
 **Should Be Documented In:**
 - New file: `docs/secrets-management.md`
 - Update: [CONFIGURATION.md](../CONFIGURATION.md) - expand secrets section
-- Update: [docs/SECRET_STORAGE_AND_SESSIONS.md](docs/SECRET_STORAGE_AND_SESSIONS.md)
+- Update: [docs/SECRET_STORAGE_AND_SESSIONS.md](../SECRET_STORAGE_AND_SESSIONS.md)
 
 **PR Suggestion:**
 ```
@@ -610,13 +610,13 @@ Title: Docs: Add secrets management comparison and setup guide
   - Testing notifications locally
 
 **Code Location:**
-- [src/handsfree/push/](src/handsfree/push/) - Expo provider
-- [src/handsfree/db/notification_delivery_tracking.py](src/handsfree/db/notification_delivery_tracking.py)
-- [mobile/src/hooks/](mobile/src/hooks/) - notification handling
+- [src/handsfree/notifications/](../../src/handsfree/notifications/) - Notification providers
+- [src/handsfree/db/notifications.py](../../src/handsfree/db/notifications.py)
+- [mobile/src/hooks/](../../mobile/src/hooks/) - notification handling
 
 **Should Be Documented In:**
 - New file: `docs/push-notifications-setup.md` (expand existing push_notifications.md)
-- Update: [mobile/README.md](mobile/README.md) - add notification section
+- Update: [mobile/README.md](../../mobile/README.md) - add notification section
 
 **PR Suggestion:**
 ```
@@ -648,12 +648,12 @@ Title: Docs: Expand push notification documentation and setup guide
   - GitHub App vs Personal Token differences
 
 **Code Location:**
-- [src/handsfree/github/](src/handsfree/github/) - client, provider, auth, execution
-- [src/handsfree/db/github_connections.py](src/handsfree/db/github_connections.py)
+- [src/handsfree/github/](../../src/handsfree/github/) - client, provider, auth, execution
+- [src/handsfree/db/github_connections.py](../../src/handsfree/db/github_connections.py)
 
 **Should Be Documented In:**
 - New file: `docs/github-integration-guide.md`
-- Update: [ARCHITECTURE.md](ARCHITECTURE.md#github-integration) - detailed integration section
+- Update: [ARCHITECTURE.md](../ARCHITECTURE.md#github-integration) - detailed integration section
 
 **PR Suggestion:**
 ```
@@ -691,7 +691,7 @@ Title: Docs: Add comprehensive GitHub integration guide
   - How cards map to intents
 
 **Code Location:**
-- [mobile/src/components/UICardList.js](mobile/src/components/UICardList.js)
+- [mobile/src/components/UICardList.js](../../mobile/src/components/UICardList.js)
 - [spec/openapi.yaml](../../spec/openapi.yaml) - needs card type definitions
 
 **Should Be Documented In:**
@@ -720,7 +720,7 @@ Title: Docs: Add API response card types reference
 
 Files exist (`spec/command_grammar.md`) but not linked from main docs or README. CODEBASE_INVENTORY lists 100+ intents but users don't know the complete intent vocabulary.
 
-**Should Document:** Voice command examples for all major intents in [spec/command_grammar.md](spec/command_grammar.md), link from [README.md](../../README.md).
+**Should Document:** Voice command examples for all major intents in [spec/command_grammar.md](../../spec/command_grammar.md), link from [README.md](../../README.md).
 
 ---
 
@@ -730,7 +730,7 @@ Files exist (`spec/command_grammar.md`) but not linked from main docs or README.
 
 Code has `policy.py` and `policy_config.py` for safe operation policies, but policy rules not documented. Users don't understand what operations are gated.
 
-**Code Location:** [src/handsfree/policy.py](src/handsfree/policy.py), [src/handsfree/policy_config.py](src/handsfree/policy_config.py)
+**Code Location:** [src/handsfree/policy.py](../../src/handsfree/policy.py), [src/handsfree/policy_config.py](../../src/handsfree/policy_config.py)
 
 **Should Document:** Policy rules, how to configure repo-level policies, default safe operations in `docs/policy-evaluation.md`.
 
@@ -752,7 +752,7 @@ Code has `rate_limit.py` with Retry-After headers. Users don't know rate limits 
 
 Code uses Redis for caching but cache keys, TTLs, invalidation not documented.
 
-**Code Location:** [src/handsfree/redis_client.py](src/handsfree/redis_client.py)
+**Code Location:** [src/handsfree/redis_client.py](../../src/handsfree/redis_client.py)
 
 **Should Document:** Cache key patterns, TTL policy, cache invalidation triggers in [ARCHITECTURE.md](../ARCHITECTURE.md).
 
@@ -764,7 +764,7 @@ Code uses Redis for caching but cache keys, TTLs, invalidation not documented.
 
 Code extracts entities from user input (PR numbers, user names, etc.) but extraction rules not documented.
 
-**Code Location:** [src/handsfree/commands/intent_parser.py](src/handsfree/commands/intent_parser.py)
+**Code Location:** [src/handsfree/commands/intent_parser.py](../../src/handsfree/commands/intent_parser.py)
 
 **Should Document:** Entity types, extraction patterns, validation rules in `docs/command-processing.md`.
 
@@ -796,7 +796,7 @@ Code has `/v1/metrics` endpoint and `metrics.py` module, but available metrics n
 
 Code supports multiple notification platforms but what subscriptions look like not shown.
 
-**Code Location:** [src/handsfree/db/notification_subscriptions.py](src/handsfree/db/notification_subscriptions.py)
+**Code Location:** [src/handsfree/db/notification_subscriptions.py](../../src/handsfree/db/notification_subscriptions.py)
 
 **Should Document:** Subscription fields, platform types (APNS/FCM), user preferences in [CONFIGURATION.md](../CONFIGURATION.md).
 
@@ -818,7 +818,7 @@ Code has 6+ custom hooks (useGlassesRecorder, useAudioSource, usePeerChatDiagnos
 
 Code has `idempotency_keys` table for request deduplication but feature not mentioned in docs.
 
-**Should Document:** When idempotency is used, how to leverage in client requests in [ARCHITECTURE.md](ARCHITECTURE.md#api-architecture).
+**Should Document:** When idempotency is used, how to leverage in client requests in [ARCHITECTURE.md](../ARCHITECTURE.md#api-architecture).
 
 ---
 
@@ -828,7 +828,7 @@ Code has `idempotency_keys` table for request deduplication but feature not ment
 
 Response schema has `follow_on_task` field but current documentation doesn't explain what it means or how users interact with it.
 
-**Code Location:** [src/handsfree/models.py](src/handsfree/models.py) - follow_on_task field
+**Code Location:** [src/handsfree/models.py](../../src/handsfree/models.py) - follow_on_task field
 
 **Should Document:** When follow-on tasks are created, how users see/interact with them, examples in agent-delegation-workflow.md.
 
@@ -1001,7 +1001,7 @@ Code mentions async processing for TTS, webhooks, but job queueing strategy not 
 | 1 | Database Schema | - | [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks data understanding |
 | 2 | OpenAPI Completeness | Add to [spec/openapi.yaml](../../spec/openapi.yaml) | [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks API integration |
 | 3 | Agent Delegation | `docs/agent-delegation-workflow.md` | [README.md](../../README.md) | Blocks agent feature use |
-| 4 | Mobile Screens | `mobile/SCREENS_REFERENCE.md` | [mobile/README.md](mobile/README.md) | Blocks mobile development |
+| 4 | Mobile Screens | `mobile/SCREENS_REFERENCE.md` | [mobile/README.md](../../mobile/README.md) | Blocks mobile development |
 | 5 | Auth Integration | - | Multiple | Blocks auth setup |
 | 6 | Advanced Config | `docs/configuration-reference.md` | [CONFIGURATION.md](../CONFIGURATION.md) | Blocks optimization |
 | 7 | Webhook Processing | `docs/webhook-processing.md` | [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks webhook understanding |
@@ -1013,7 +1013,7 @@ Code mentions async processing for TTS, webhooks, but job queueing strategy not 
 | 13 | Transport Layer | `docs/transport-architecture.md` | [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks P2P understanding |
 | 14 | MCP Integration | `docs/mcp-integration.md` | [README.md](../../README.md), [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks MCP use |
 | 15 | Secrets Management | `docs/secrets-management.md` | [CONFIGURATION.md](../CONFIGURATION.md) | Blocks secure deployment |
-| 16 | Push Notifications | Expand `docs/push-notifications.md` | [mobile/README.md](mobile/README.md) | Blocks notification setup |
+| 16 | Push Notifications | Expand `docs/push-notifications.md` | [mobile/README.md](../../mobile/README.md) | Blocks notification setup |
 | 17 | GitHub Integration | `docs/github-integration-guide.md` | [ARCHITECTURE.md](../ARCHITECTURE.md) | Blocks GitHub feature use |
 | 18 | Card Types | `docs/api-card-types.md` | [spec/openapi.yaml](../../spec/openapi.yaml) | Blocks UI integration |
 

@@ -21,8 +21,8 @@ This guide covers all configuration options for the HandsFree Dev Companion syst
 
 For a code-aligned inventory of backend environment variables currently read by the application, see:
 
-- [docs/configuration-reference.md](docs/configuration-reference.md)
-- [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md) for module-level runtime context
+- [docs/configuration-reference.md](configuration-reference.md)
+- [docs/PACKAGE_GUIDE.md](PACKAGE_GUIDE.md) for module-level runtime context
 
 ---
 
@@ -375,7 +375,7 @@ GITHUB_TOKEN=ghp_...
 # Will automatically use github_issue_dispatch provider
 ```
 
-For detailed setup, see [docs/agent-runner-setup.md](docs/agent-runner-setup.md).
+For detailed setup, see [docs/agent-runner-setup.md](agent-runner-setup.md).
 
 ---
 
@@ -817,9 +817,9 @@ HANDSFREE_ENABLE_METRICS=true
 
 - **[Getting Started Guide](GETTING_STARTED.md)** - Full setup instructions
 - **[Architecture Documentation](ARCHITECTURE.md)** - System design
-- **[Authentication Guide](docs/AUTHENTICATION.md)** - Detailed auth documentation
-- **[Agent Runner Setup](docs/agent-runner-setup.md)** - Agent delegation
-- **[Secret Management](docs/SECRET_STORAGE_AND_SESSIONS.md)** - Vault and secret storage
+- **[Authentication Guide](AUTHENTICATION.md)** - Detailed auth documentation
+- **[Agent Runner Setup](agent-runner-setup.md)** - Agent delegation
+- **[Secret Management](SECRET_STORAGE_AND_SESSIONS.md)** - Vault and secret storage
 
 ---
 

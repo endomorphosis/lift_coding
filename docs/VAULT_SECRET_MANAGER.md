@@ -447,7 +447,7 @@ To migrate from `EnvSecretManager` to `VaultSecretManager`:
 ## Support
 
 For issues or questions:
-1. Check the [main documentation](../SECRET_STORAGE_AND_SESSIONS.md)
+1. Check the [main documentation](SECRET_STORAGE_AND_SESSIONS.md)
 2. Review Vault logs for error details
 3. Enable debug logging: `export VAULT_LOG_LEVEL=debug`
 4. File an issue with relevant logs and configuration (sanitized)

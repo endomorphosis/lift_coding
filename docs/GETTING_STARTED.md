@@ -16,8 +16,8 @@
 
 Related references:
 
-- [Package Guide](docs/PACKAGE_GUIDE.md) - current backend module map and API surface
-- [Configuration Reference](docs/configuration-reference.md) - exhaustive backend env keys
+- [Package Guide](PACKAGE_GUIDE.md) - current backend module map and API surface
+- [Configuration Reference](configuration-reference.md) - exhaustive backend env keys
 
 ---
 
@@ -221,8 +221,8 @@ cp .env.example .env
 Reference docs:
 
 - [CONFIGURATION.md](CONFIGURATION.md) for setup-oriented examples
-- [docs/configuration-reference.md](docs/configuration-reference.md) for full backend key inventory
-- [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) for auth mode behavior (`dev`, `jwt`, `api_key`)
+- [docs/configuration-reference.md](configuration-reference.md) for full backend key inventory
+- [docs/AUTHENTICATION.md](AUTHENTICATION.md) for auth mode behavior (`dev`, `jwt`, `api_key`)
 
 **Minimal Configuration (Dev Mode)**:
 
@@ -396,7 +396,7 @@ npx expo run:ios --device
 npx expo run:android --device
 ```
 
-See [mobile/BUILD.md](mobile/BUILD.md) for detailed build instructions.
+See [mobile/BUILD.md](../mobile/BUILD.md) for detailed build instructions.
 
 ### Step 6: Verify Mobile App
 
@@ -455,7 +455,7 @@ npx expo run:ios --device
 # - Install on connected iPhone
 ```
 
-See [mobile/BUILD.md](mobile/BUILD.md) for troubleshooting build issues.
+See [mobile/BUILD.md](../mobile/BUILD.md) for troubleshooting build issues.
 
 ### Step 3: Configure Audio Routing
 
@@ -620,33 +620,33 @@ npm test
 
 ### For Backend Developers
 
-1. Review [CONTRIBUTING.md](CONTRIBUTING.md) for development workflow
-2. Explore [implementation_plan/](implementation_plan/) for design docs
-3. Check [spec/openapi.yaml](spec/openapi.yaml) for API reference
-4. Read [docs/agent-runner-setup.md](docs/agent-runner-setup.md) for agent delegation
+1. Review [CONTRIBUTING.md](../CONTRIBUTING.md) for development workflow
+2. Explore [implementation_plan/](../implementation_plan/) for design docs
+3. Check [spec/openapi.yaml](../spec/openapi.yaml) for API reference
+4. Read [docs/agent-runner-setup.md](agent-runner-setup.md) for agent delegation
 
 ### For Mobile Developers
 
-1. Review [mobile/README.md](mobile/README.md) for app architecture
-2. Check [mobile/BUILD.md](mobile/BUILD.md) for native module development
-3. Explore [mobile/glasses/](mobile/glasses/) for Bluetooth implementation
-4. Read [docs/mobile-client-integration.md](docs/mobile-client-integration.md)
-5. Review [docs/profiles-guide.md](docs/profiles-guide.md) for profile behavior
+1. Review [mobile/README.md](../mobile/README.md) for app architecture
+2. Check [mobile/BUILD.md](../mobile/BUILD.md) for native module development
+3. Explore [mobile/glasses/](../mobile/glasses/) for Bluetooth implementation
+4. Read [docs/mobile-client-integration.md](mobile-client-integration.md)
+5. Review [docs/profiles-guide.md](profiles-guide.md) for profile behavior
 
 ### For Testing with Meta Glasses
 
-1. Review [docs/meta-ai-glasses.md](docs/meta-ai-glasses.md) for integration guide
-2. Check [docs/ios-rayban-mvp1-runbook.md](docs/ios-rayban-mvp1-runbook.md) for demo runbook
-3. Read [docs/ios-rayban-troubleshooting.md](docs/ios-rayban-troubleshooting.md) for common issues
-4. See [docs/meta-ai-glasses-audio-routing.md](docs/meta-ai-glasses-audio-routing.md) for technical details
+1. Review [docs/meta-ai-glasses.md](meta-ai-glasses.md) for integration guide
+2. Check [docs/ios-rayban-mvp1-runbook.md](ios-rayban-mvp1-runbook.md) for demo runbook
+3. Read [docs/ios-rayban-troubleshooting.md](ios-rayban-troubleshooting.md) for common issues
+4. See [docs/meta-ai-glasses-audio-routing.md](meta-ai-glasses-audio-routing.md) for technical details
 
 ### For Agents/Autonomous Development
 
 1. Review [ARCHITECTURE.md](ARCHITECTURE.md) for system design (see below)
-2. Check [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) for auth flows
-3. Explore API endpoints in [spec/openapi.yaml](spec/openapi.yaml)
-4. Review [docs/confirmation-flow.md](docs/confirmation-flow.md) for pending-action semantics
-5. Read [SECURITY.md](SECURITY.md) for security considerations
+2. Check [docs/AUTHENTICATION.md](AUTHENTICATION.md) for auth flows
+3. Explore API endpoints in [spec/openapi.yaml](../spec/openapi.yaml)
+4. Review [docs/confirmation-flow.md](confirmation-flow.md) for pending-action semantics
+5. Read [SECURITY.md](../SECURITY.md) for security considerations
 
 ---
 
@@ -782,18 +782,18 @@ npm test
    ```
 
 For more troubleshooting, see:
-- [docs/ios-rayban-troubleshooting.md](docs/ios-rayban-troubleshooting.md)
-- [mobile/README.md](mobile/README.md) - Troubleshooting section
+- [docs/ios-rayban-troubleshooting.md](ios-rayban-troubleshooting.md)
+- [mobile/README.md](../mobile/README.md) - Troubleshooting section
 - [GitHub Issues](https://github.com/endomorphosis/lift_coding/issues)
 
 ---
 
 ## Getting Help
 
-- **Documentation**: Check [docs/](docs/) directory for detailed guides
+- **Documentation**: Check [docs/]() directory for detailed guides
 - **Issues**: Search or open [GitHub Issues](https://github.com/endomorphosis/lift_coding/issues)
-- **Contributing**: See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
-- **Security**: See [SECURITY.md](SECURITY.md) for reporting vulnerabilities
+- **Contributing**: See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines
+- **Security**: See [SECURITY.md](../SECURITY.md) for reporting vulnerabilities
 
 ---
 

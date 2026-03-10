@@ -209,11 +209,11 @@ After each test session, verify:
 ## 📞 Getting Help
 
 **Documentation**:
-- Full Runbook: [docs/ios-rayban-mvp1-runbook.md](docs/ios-rayban-mvp1-runbook.md)
-- Troubleshooting: [docs/ios-rayban-troubleshooting.md](docs/ios-rayban-troubleshooting.md)
+- Full Runbook: [docs/ios-rayban-mvp1-runbook.md](ios-rayban-mvp1-runbook.md)
+- Troubleshooting: [docs/ios-rayban-troubleshooting.md](ios-rayban-troubleshooting.md)
 - Getting Started: [GETTING_STARTED.md](GETTING_STARTED.md)
-- Backend Package Guide: [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md)
-- Backend API Spec: [spec/openapi.yaml](spec/openapi.yaml)
+- Backend Package Guide: [docs/PACKAGE_GUIDE.md](PACKAGE_GUIDE.md)
+- Backend API Spec: [spec/openapi.yaml](../spec/openapi.yaml)
 
 **Quick Checks**:
 
