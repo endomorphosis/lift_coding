@@ -610,6 +610,47 @@ class TestAgentServiceNotifications:
         assert card is not None
         assert "Execution: Remote (local unavailable)" in card["lines"]
 
+    def test_notification_card_prepends_wearables_local_actions(self):
+        """Wearables connectivity notifications should carry local bridge actions."""
+        from handsfree.db.notifications import build_notification_card
+
+        card = build_notification_card(
+            "notif-bridge",
+            "task_completed",
+            "Task completed",
+            {
+                "task_id": "12345678-1234-1234-1234-123456789012",
+                "state": "completed",
+                "provider_label": "IPFS Accelerate",
+                "mcp_capability": "workflow",
+                "result_envelope": {
+                    "summary": "Wearables bridge connectivity receipt captured for Ray-Ban Meta.",
+                    "structured_output": {
+                        "workflow": "wearables_bridge_connectivity",
+                        "device_id": "AA:BB",
+                        "device_name": "Ray-Ban Meta",
+                        "target_connection_state": "connected",
+                        "target_rssi": -42,
+                        "cid": "bafyreceipt",
+                    },
+                    "artifact_refs": {"result_cid": "bafyreceipt"},
+                    "follow_up_actions": [
+                        {"id": "read_cid", "label": "Read Receipt", "phrase": "read the wearables receipt"}
+                    ],
+                },
+                "follow_up_actions": [
+                    {"id": "read_cid", "label": "Read Receipt", "phrase": "read the wearables receipt"}
+                ],
+            },
+        )
+
+        assert card is not None
+        assert card["action_items"][0]["id"] == "mobile_open_wearables_diagnostics"
+        assert card["action_items"][1]["id"] == "mobile_reconnect_wearables_target"
+        assert card["action_items"][2]["id"] == "read_cid"
+        assert card["actions"][0] == "open wearables bridge diagnostics"
+        assert card["actions"][1] == "reconnect the selected wearables target"
+
 
 class TestWebhookNotifications:
     """Test that webhook events create notifications."""

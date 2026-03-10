@@ -2,6 +2,9 @@
 
 These are *draft* pull request descriptions derived from the documents in `implementation_plan/`.
 
+Execution checklist:
+- `implementation_plan/docs/17-wearables-mcp-execution-checklist.md`
+
 Recommended order:
 1. PR-001: repo + CI + dev loop scaffolding
 2. PR-002: backend API skeleton (OpenAPI-aligned)
@@ -19,8 +22,8 @@ Then parallelize:
 - PR-014 (peer session handshake + identity) depends on PR-010 + PR-009
 - PR-015 (peer messaging UX + command integration) depends on PR-011
 - PR-016 (resilience/security/rollout) depends on PR-009 through PR-012
-- PR-017 (capability registry + execution parity) should land before DAT-specific command integrations and before remote-only rollout hardening
-- PR-018 (Meta Wearables DAT diagnostics + native bridge baseline) depends on the current mobile native-module pattern and can run in parallel with PR-017
+- PR-017 (capability registry + execution parity) should land before wearables-specific command integrations and before remote-only rollout hardening
+- PR-018 (wearables bridge diagnostics + native bridge baseline) depends on the current mobile native-module pattern and can run in parallel with PR-017
 
 Files:
 - PR-001-repo-foundation.md
@@ -41,3 +44,4 @@ Files:
 - PR-016-resilience-security-and-rollout-controls.md
 - PR-017-capability-registry-and-execution-parity.md
 - PR-018-meta-wearables-dat-diagnostics-and-native-bridge.md
+  - current scope: wearables bridge baseline; filename retained for continuity

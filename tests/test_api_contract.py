@@ -349,6 +349,42 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "/v1/agents/tasks/{task_id}/pause" in schema["paths"]
     assert "/v1/agents/tasks/{task_id}/resume" in schema["paths"]
     assert "/v1/agents/tasks/{task_id}/cancel" in schema["paths"]
+    assert "/v1/agents/tasks/{task_id}" in schema["paths"]
+    assert "/v1/agents/results" in schema["paths"]
+    assert "/v1/notifications" in schema["paths"]
+    assert "/v1/notifications/{notification_id}" in schema["paths"]
+    notifications_examples = (
+        schema["paths"]["/v1/notifications"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert notifications_examples["notifications_feed"]["value"]["count"] == 1
+    assert (
+        notifications_examples["notifications_feed"]["value"]["notifications"][0]["card"]["action_items"][0]["id"]
+        == "mobile_open_wearables_diagnostics"
+    )
+    notifications_error_examples = (
+        schema["paths"]["/v1/notifications"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
+    )
+    assert notifications_error_examples["invalid_since"]["value"]["error"] == "invalid_parameter"
+    notification_detail_examples = (
+        schema["paths"]["/v1/notifications/{notification_id}"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert notification_detail_examples["mcp_completion_notification"]["value"]["card"]["title"] == (
+        "Wearables Connectivity Receipt"
+    )
+    notification_detail_error_examples = (
+        schema["paths"]["/v1/notifications/{notification_id}"]["get"]["responses"]["404"]["content"]["application/json"]["examples"]
+    )
+    assert notification_detail_error_examples["notification_not_found"]["value"]["error"] == "not_found"
+    task_list_examples = (
+        schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert task_list_examples["filtered_task_list"]["value"]["tasks"][0]["result"]["capability"] == (
+        "dataset_discovery"
+    )
+    task_list_error_examples = (
+        schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
+    )
+    assert task_list_error_examples["invalid_parameter"]["value"]["error"] == "invalid_parameter"
     command_examples = (
         schema["paths"]["/v1/command"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
     )
@@ -376,6 +412,24 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
         schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["404"]["content"]["application/json"]["examples"]
     )
     assert confirm_error_examples["expired_pending_action"]["value"]["error"] == "expired"
+    task_detail_examples = (
+        schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert task_detail_examples["completed_dataset_result"]["value"]["result"]["capability"] == (
+        "dataset_discovery"
+    )
+    task_detail_error_examples = (
+        schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"]["404"]["content"]["application/json"]["examples"]
+    )
+    assert task_detail_error_examples["task_not_found"]["value"]["error"] == "task_not_found"
+    agent_results_examples = (
+        schema["paths"]["/v1/agents/results"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    )
+    assert agent_results_examples["datasets_view"]["value"]["summary"]["total_results"] == 1
+    agent_results_error_examples = (
+        schema["paths"]["/v1/agents/results"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
+    )
+    assert agent_results_error_examples["invalid_parameter"]["value"]["error"] == "invalid_parameter"
     task_control = schema["components"]["schemas"]["AgentTaskControlResponse"]
     assert "task_id" in task_control["properties"]
     assert "state" in task_control["properties"]
@@ -383,6 +437,7 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "updated_at" in task_control["properties"]
     action_request = schema["components"]["schemas"]["ActionCommandRequest"]
     assert "action_id" in action_request["properties"]
+    assert "mobile_open_wearables_diagnostics" in action_request["properties"]["action_id"]["description"]
     command_response = schema["components"]["schemas"]["CommandResponse"]
     assert "follow_on_task" in command_response["properties"]
     assert command_response["example"]["follow_on_task"]["summary"] == (
@@ -396,11 +451,16 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "capability" in follow_on_task["properties"]
     assert "summary" in follow_on_task["properties"]
     assert follow_on_task["example"]["provider_label"] == "IPFS Accelerate"
+    notification_schema = schema["components"]["schemas"]["Notification"]
+    assert notification_schema["example"]["card"]["title"] == "Wearables Connectivity Receipt"
+    notifications_list_schema = schema["components"]["schemas"]["NotificationsListResponse"]
+    assert notifications_list_schema["example"]["count"] == 1
     ui_card = schema["components"]["schemas"]["UICard"]
     assert "actions" in ui_card["properties"]
     assert "action_items" in ui_card["properties"]
     action_item = schema["components"]["schemas"]["ActionItem"]
     assert "id" in action_item["properties"]
+    assert "mobile_open_wearables_diagnostics" in action_item["properties"]["id"]["description"]
     assert "execution_mode" in action_item["properties"]
     assert "execution_mode_label" in action_item["properties"]
 

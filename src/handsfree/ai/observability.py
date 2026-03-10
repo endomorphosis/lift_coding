@@ -4,24 +4,124 @@ from __future__ import annotations
 
 from collections import Counter
 from datetime import UTC, datetime, timedelta
+import os
 
 import duckdb
 
 from handsfree.db.action_logs import get_action_logs
+from handsfree.db.ai_backend_policy_snapshots import get_latest_ai_backend_policy_snapshot
 from handsfree.github.auth import _is_live_mode_requested, resolve_github_auth_source
 from handsfree.models import (
     AICapabilityUsageCount,
+    AILatestSnapshotInfo,
     AIRemapCount,
     AIBackendPolicyBucketReport,
     AIBackendPolicyConfig,
     AIBackendPolicyHistoryBucket,
     AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
+    AISnapshotHealth,
+    AISnapshotPolicyConfig,
+    AISnapshotSummary,
     AITopCapabilities,
     AIBackendPolicyWindow,
 )
 
 from .policy import get_ai_backend_policy
+
+
+def _get_optional_non_negative_int_env(name: str) -> int | None:
+    raw_value = os.getenv(name, "").strip()
+    if not raw_value:
+        return None
+    try:
+        parsed = int(raw_value)
+    except ValueError:
+        return None
+    if parsed < 0:
+        return None
+    return parsed
+
+
+def build_ai_backend_policy_config() -> AIBackendPolicyConfig:
+    policy = get_ai_backend_policy()
+    return AIBackendPolicyConfig(
+        summary_backend=policy.summary_backend,
+        failure_backend=policy.failure_backend,
+        github_auth_source=resolve_github_auth_source(),
+        github_live_mode_requested=_is_live_mode_requested(),
+        snapshot_retention_days=_get_optional_non_negative_int_env(
+            "HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS"
+        ),
+        snapshot_max_records_per_user=_get_optional_non_negative_int_env(
+            "HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER"
+        ),
+        snapshot_min_interval_seconds=_get_optional_non_negative_int_env(
+            "HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS"
+        ),
+    )
+
+
+def build_latest_snapshot_info(
+    conn: duckdb.DuckDBPyConnection,
+    *,
+    user_id: str,
+) -> AILatestSnapshotInfo | None:
+    snapshot = get_latest_ai_backend_policy_snapshot(conn, user_id=user_id)
+    if snapshot is None:
+        return None
+    created_at = snapshot.created_at
+    if created_at.tzinfo is None:
+        local_tz = datetime.now().astimezone().tzinfo or UTC
+        created_at = created_at.replace(tzinfo=local_tz).astimezone(UTC)
+    age_seconds = max(
+        0,
+        int((datetime.now(UTC) - created_at.astimezone(UTC)).total_seconds()),
+    )
+    freshness_threshold = _get_optional_non_negative_int_env(
+        "HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS"
+    )
+    if freshness_threshold is None:
+        freshness_threshold = 3600
+    return AILatestSnapshotInfo(
+        id=snapshot.id,
+        created_at=created_at,
+        age_seconds=age_seconds,
+        freshness_threshold_seconds=freshness_threshold,
+        freshness="fresh" if age_seconds <= freshness_threshold else "stale",
+    )
+
+
+def build_snapshot_health(latest_snapshot: AILatestSnapshotInfo | None) -> AISnapshotHealth:
+    if latest_snapshot is None:
+        return AISnapshotHealth(status="missing")
+    if latest_snapshot.freshness == "fresh":
+        return AISnapshotHealth(status="healthy")
+    return AISnapshotHealth(status="stale")
+
+
+def build_snapshot_policy_config(policy: AIBackendPolicyConfig) -> AISnapshotPolicyConfig:
+    return AISnapshotPolicyConfig(
+        retention_days=policy.snapshot_retention_days,
+        max_records_per_user=policy.snapshot_max_records_per_user,
+        min_interval_seconds=policy.snapshot_min_interval_seconds,
+    )
+
+
+def build_snapshot_summary(
+    *,
+    policy: AIBackendPolicyConfig,
+    latest_snapshot: AILatestSnapshotInfo | None,
+    snapshot_capture: dict[str, object] | None = None,
+    next_capture: dict[str, object] | None = None,
+) -> AISnapshotSummary:
+    return AISnapshotSummary(
+        latest_snapshot=latest_snapshot,
+        snapshot_health=build_snapshot_health(latest_snapshot),
+        policy=build_snapshot_policy_config(policy),
+        snapshot_capture=snapshot_capture,
+        next_capture=next_capture,
+    )
 
 
 def build_ai_backend_policy_history_report(
@@ -33,7 +133,6 @@ def build_ai_backend_policy_history_report(
     limit: int = 1000,
 ) -> AIBackendPolicyHistoryReport:
     """Return bucketed historical backend-policy activity from action logs."""
-    policy = get_ai_backend_policy()
     logs = get_action_logs(conn, user_id=user_id, limit=limit)
     now = datetime.now(UTC)
     window_start = now - timedelta(hours=window_hours)
@@ -75,16 +174,17 @@ def build_ai_backend_policy_history_report(
         )
         current_start = current_end
 
+    policy = build_ai_backend_policy_config()
+    latest_snapshot = build_latest_snapshot_info(conn, user_id=user_id)
     return AIBackendPolicyHistoryReport(
-        policy=AIBackendPolicyConfig(
-            summary_backend=policy.summary_backend,
-            failure_backend=policy.failure_backend,
-            github_auth_source=resolve_github_auth_source(),
-            github_live_mode_requested=_is_live_mode_requested(),
-        ),
+        report_generated_at=now,
+        policy=policy,
         window_hours=window_hours,
         bucket_hours=bucket_hours,
         buckets=buckets,
+        snapshot_summary=build_snapshot_summary(policy=policy, latest_snapshot=latest_snapshot),
+        latest_snapshot=latest_snapshot,
+        snapshot_health=build_snapshot_health(latest_snapshot),
     )
 
 
@@ -95,7 +195,6 @@ def build_ai_backend_policy_report(
     limit: int = 200,
 ) -> AIBackendPolicyReport:
     """Return current backend policy plus recent remap counts from action logs."""
-    policy = get_ai_backend_policy()
     logs = get_action_logs(conn, user_id=user_id, limit=limit)
     now = datetime.now(UTC)
 
@@ -189,13 +288,11 @@ def build_ai_backend_policy_report(
             ]
         ]
 
+    policy = build_ai_backend_policy_config()
+    latest_snapshot = build_latest_snapshot_info(conn, user_id=user_id)
     return AIBackendPolicyReport(
-        policy=AIBackendPolicyConfig(
-            summary_backend=policy.summary_backend,
-            failure_backend=policy.failure_backend,
-            github_auth_source=resolve_github_auth_source(),
-            github_live_mode_requested=_is_live_mode_requested(),
-        ),
+        report_generated_at=now,
+        policy=policy,
         recent_window=AIBackendPolicyWindow(
             log_limit=limit,
             ai_execute_logs=sum(action_counter.values()),
@@ -236,4 +333,7 @@ def build_ai_backend_policy_report(
         resolved_workflow_counts=dict(sorted(resolved_workflow_counter.items())),
         remap_counts=dict(sorted(remap_counter.items())),
         action_counts=dict(sorted(action_counter.items())),
+        snapshot_summary=build_snapshot_summary(policy=policy, latest_snapshot=latest_snapshot),
+        latest_snapshot=latest_snapshot,
+        snapshot_health=build_snapshot_health(latest_snapshot),
     )

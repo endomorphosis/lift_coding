@@ -93,6 +93,18 @@ def _render_agent_result_lines(
     """Render compact user-facing lines from structured agent output."""
     lines: list[str] = []
     if isinstance(output, dict):
+        if output.get("workflow") == "wearables_bridge_connectivity":
+            device_name = output.get("device_name") or output.get("device_id")
+            target_state = output.get("target_connection_state")
+            target_rssi = output.get("target_rssi")
+            if device_name:
+                lines.append(f"device: {device_name}")
+            if target_state:
+                lines.append(f"state: {target_state}")
+            if target_rssi is not None:
+                lines.append(f"rssi: {target_rssi}")
+            if lines:
+                return lines[:3]
         for key in ("message", "status", "expanded_queries", "target_terms", "seed_urls"):
             value = output.get(key)
             if value is None:
@@ -188,8 +200,11 @@ def _build_result_card(task: Any) -> dict[str, Any]:
     output = _trace_result_output(trace)
     provider_label = trace.get("provider_label") or task.provider
     capability = trace.get("mcp_capability") or "result"
+    workflow = output.get("workflow") if isinstance(output, dict) else None
     card = {
-        "title": f"{provider_label} {str(capability).replace('_', ' ')}",
+        "title": "Wearables Connectivity Receipt"
+        if workflow == "wearables_bridge_connectivity"
+        else f"{provider_label} {str(capability).replace('_', ' ')}",
         "subtitle": f"Task {task.id[:8]} • completed",
         "lines": _render_agent_result_lines(
             preview,
@@ -230,6 +245,7 @@ def _build_result_action_items(card: dict[str, Any]) -> list[dict[str, Any]]:
     deep_link = card.get("deep_link")
     cid = _extract_cid_from_deep_link(deep_link if isinstance(deep_link, str) else None)
     capability = str(card.get("capability") or "").strip().lower()
+    is_wearables_receipt = str(card.get("title") or "").lower() == "wearables connectivity receipt"
 
     save_mode_items: list[dict[str, Any]] = [
         {
@@ -269,13 +285,28 @@ def _build_result_action_items(card: dict[str, Any]) -> list[dict[str, Any]]:
         },
     ]
 
+    if is_wearables_receipt:
+        items = [
+            {
+                "id": "mobile_open_wearables_diagnostics",
+                "label": "Open Diagnostics",
+                "phrase": "open wearables bridge diagnostics",
+            },
+            {
+                "id": "mobile_reconnect_wearables_target",
+                "label": "Reconnect Target",
+                "phrase": "reconnect the selected wearables target",
+            },
+            *items,
+        ]
+
     if cid:
         items.extend(
             [
                 {
                     "id": "read_cid",
-                    "label": "Read CID",
-                    "phrase": "read the cid",
+                    "label": "Read Receipt" if is_wearables_receipt else "Read CID",
+                    "phrase": "read the wearables receipt" if is_wearables_receipt else "read the cid",
                     "params": {"cid": cid},
                 },
                 {

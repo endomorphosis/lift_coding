@@ -8,8 +8,13 @@ from .capabilities import (
 )
 from .history import discover_failure_history_cids
 from .observability import (
+    build_ai_backend_policy_config,
     build_ai_backend_policy_history_report,
     build_ai_backend_policy_report,
+    build_latest_snapshot_info,
+    build_snapshot_policy_config,
+    build_snapshot_health,
+    build_snapshot_summary,
 )
 from .models import (
     AICapabilityRequest,
@@ -35,8 +40,13 @@ __all__ = [
     "AIBackendPolicy",
     "AIExecutionMode",
     "AIRequestContext",
+    "build_ai_backend_policy_config",
     "build_ai_backend_policy_history_report",
     "build_ai_backend_policy_report",
+    "build_latest_snapshot_info",
+    "build_snapshot_policy_config",
+    "build_snapshot_health",
+    "build_snapshot_summary",
     "build_policy_resolution",
     "build_api_execute_response",
     "discover_failure_history_cids",

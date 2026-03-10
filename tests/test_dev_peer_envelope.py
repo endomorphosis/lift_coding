@@ -101,6 +101,13 @@ def test_dev_peer_envelope_returns_ack_for_message(test_user_id):
 
 def test_dev_peer_envelope_decodes_chat_protocol_message(test_user_id):
     conversation_id = "chat:test-conversation"
+    task_snapshot = {
+        "task_id": "task-envelope-1",
+        "provider": "ipfs_accelerate_mcp",
+        "provider_label": "IPFS Accelerate",
+        "summary": "IPFS Accelerate agentic fetch running.",
+        "mcp_execution_mode": "mcp_remote",
+    }
     envelope = PeerEnvelope(
         kind="message",
         peer_id="12D3KooWpeerChat",
@@ -111,7 +118,9 @@ def test_dev_peer_envelope_decodes_chat_protocol_message(test_user_id):
                 "hello from glasses",
                 sender_peer_id="12D3KooWpeerChat",
                 conversation_id=conversation_id,
+                priority="urgent",
                 timestamp_ms=123456789,
+                task_snapshot=task_snapshot,
             ),
         ),
     )
@@ -130,7 +139,9 @@ def test_dev_peer_envelope_decodes_chat_protocol_message(test_user_id):
         "peer_id": "12D3KooWpeerChat",
         "sender_peer_id": "12D3KooWpeerChat",
         "text": "hello from glasses",
+        "priority": "urgent",
         "timestamp_ms": 123456789,
+        "task_snapshot": task_snapshot,
     }
 
 

@@ -1,9 +1,34 @@
 import base64
 import os
+import sys
+import types
 from pathlib import Path
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
+
+google_module = types.ModuleType("google")
+google_api_core = types.ModuleType("google.api_core")
+google_api_core_exceptions = types.ModuleType("google.api_core.exceptions")
+google_api_core_exceptions.AlreadyExists = Exception
+google_api_core_exceptions.NotFound = Exception
+google_api_core_exceptions.GoogleAPIError = Exception
+google_cloud = types.ModuleType("google.cloud")
+google_secretmanager = types.ModuleType("google.cloud.secretmanager")
+google_secretmanager.SecretManagerServiceClient = object
+hvac_module = types.ModuleType("hvac")
+hvac_module.Client = object
+hvac_exceptions_module = types.ModuleType("hvac.exceptions")
+hvac_exceptions_module.InvalidPath = Exception
+hvac_exceptions_module.VaultError = Exception
+
+sys.modules.setdefault("google", google_module)
+sys.modules.setdefault("google.api_core", google_api_core)
+sys.modules.setdefault("google.api_core.exceptions", google_api_core_exceptions)
+sys.modules.setdefault("google.cloud", google_cloud)
+sys.modules.setdefault("google.cloud.secretmanager", google_secretmanager)
+sys.modules.setdefault("hvac", hvac_module)
+sys.modules.setdefault("hvac.exceptions", hvac_exceptions_module)
 
 from handsfree.api import app
 

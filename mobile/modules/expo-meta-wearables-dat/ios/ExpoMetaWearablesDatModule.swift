@@ -19,6 +19,25 @@ public class ExpoMetaWearablesDatModule: Module {
     ]
   }
 
+  private func mediaActionResult(
+    action: String,
+    message: String,
+    supported: Bool = false,
+    mode: String = "reference_only"
+  ) -> [String: Any] {
+    return [
+      "state": supported ? "ready" : "not_supported",
+      "mode": mode,
+      "supported": supported,
+      "action": action,
+      "message": message,
+      "deviceId": self.selectedDeviceId as Any,
+      "targetConnectionState": self.selectedDeviceId == nil ? "unselected" : (self.sessionState == "target_connected" ? "connected" : (self.sessionState == "target_ready" ? "ready" : "selected")),
+      "assetUri": NSNull(),
+      "mimeType": NSNull()
+    ]
+  }
+
   public func definition() -> ModuleDefinition {
     Name("ExpoMetaWearablesDat")
 
@@ -241,6 +260,27 @@ public class ExpoMetaWearablesDatModule: Module {
         "deviceId": self.selectedDeviceId as Any,
         "targetConnectionState": self.selectedDeviceId == nil ? "unselected" : "selected"
       ]
+    }
+
+    AsyncFunction("capturePhoto") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "capture_photo",
+        message: "Photo capture is not implemented in the iOS reference-only DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("startVideoStream") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "start_video_stream",
+        message: "Video streaming is not implemented in the iOS reference-only DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("stopVideoStream") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "stop_video_stream",
+        message: "Video streaming is not implemented in the iOS reference-only DAT bridge yet."
+      )
     }
   }
 }

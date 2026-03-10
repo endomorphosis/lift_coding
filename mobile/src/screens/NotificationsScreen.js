@@ -25,7 +25,11 @@ import {
   setNotificationsScreenState,
 } from '../storage/agentSurfaceStorage';
 import { getProfile } from '../storage/profileStorage';
-import { buildLastActionLines, executeStructuredAction } from '../utils/agentActions';
+import {
+  buildLastActionLines,
+  executeLocalStructuredAction,
+  executeStructuredAction,
+} from '../utils/agentActions';
 import { buildAgentNotificationCard } from '../utils/agentCards';
 import {
   buildNotificationPreview,
@@ -180,6 +184,13 @@ export default function NotificationsScreen({ navigation }) {
   const handleNotificationAction = async (actionItem, card) => {
     const notificationId = card?.notification_id;
     const taskId = card?.task_id;
+
+    const localOutcome = await executeLocalStructuredAction({ actionItem, navigation });
+    if (localOutcome.handled) {
+      Alert.alert('Wearables Bridge', localOutcome.message);
+      return;
+    }
+
     if (!actionItem?.id || !notificationId) {
       Alert.alert('Action Unavailable', 'This notification action is missing context.');
       return;

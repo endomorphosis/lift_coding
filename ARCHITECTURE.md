@@ -377,6 +377,8 @@ mobile/
 
 ### Confirmation Flow
 
+Reference: [docs/confirmation-flow.md](docs/confirmation-flow.md)
+
 ```
 ┌──────────┐
 │   User   │ Speaks: "Merge PR 123"
@@ -595,7 +597,11 @@ mobile/
 
 **API Version**: v1
 
-#### Core Endpoints
+The backend currently exposes a broad API surface (70+ route handlers in `src/handsfree/api.py`) across command handling, notifications, webhooks, OAuth/auth, admin operations, agent task lifecycle, peer chat/dev tooling, and AI capability execution.
+
+Treat [spec/openapi.yaml](spec/openapi.yaml) as the request/response contract source of truth.
+
+#### Representative Core Endpoints
 
 ```
 POST   /v1/command              # Process voice/text command
@@ -605,7 +611,7 @@ POST   /v1/tts                  # Generate TTS audio
 POST   /v1/dev/audio            # Upload audio (dev mode)
 ```
 
-#### Notifications
+#### Representative Notifications Endpoints
 
 ```
 GET    /v1/notifications                      # List notifications
@@ -614,7 +620,7 @@ POST   /v1/notifications/subscriptions        # Register device
 DELETE /v1/notifications/subscriptions/{id}   # Unregister device
 ```
 
-#### Admin
+#### Representative Admin Endpoints
 
 ```
 POST   /v1/admin/api-keys        # Create API key
@@ -622,21 +628,28 @@ GET    /v1/admin/api-keys         # List API keys
 DELETE /v1/admin/api-keys/{id}    # Revoke API key
 ```
 
-#### Webhooks
+#### Representative Webhook Endpoints
 
 ```
 POST   /v1/webhooks/github       # GitHub webhook ingestion
+POST   /v1/webhooks/retry/{id}   # Retry webhook processing (dev mode)
 ```
 
-#### Agent Delegation
+#### Representative Agent Endpoints
 
 ```
-POST   /v1/agent/delegate        # Delegate task to agent
-GET    /v1/agent/tasks           # List agent tasks
-GET    /v1/agent/tasks/{id}      # Get task status
+GET    /v1/agents/tasks          # List user tasks
+GET    /v1/agents/tasks/{id}     # Task details
+GET    /v1/agents/results        # Result-oriented task view
+POST   /v1/agents/tasks/{id}/start
+POST   /v1/agents/tasks/{id}/pause
+POST   /v1/agents/tasks/{id}/resume
+POST   /v1/agents/tasks/{id}/cancel
 ```
 
 ### Authentication Modes
+
+Reference: [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md)
 
 1. **Dev Mode** (`HANDSFREE_AUTH_MODE=dev`)
    - Accepts `X-User-ID` header
@@ -798,6 +811,10 @@ public class ExpoGlassesAudioModule: Module {
 ## Database Schema
 
 **Technology**: DuckDB (embedded SQL database)
+
+The schema has evolved across multiple migrations to support command workflows, notification delivery, webhook processing, agent orchestration, AI history/policy snapshots, and peer/transport diagnostics.
+
+For the full table inventory and migration mapping, see [docs/database-schema.md](docs/database-schema.md).
 
 ### Core Tables
 

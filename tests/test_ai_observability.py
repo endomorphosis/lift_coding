@@ -11,6 +11,7 @@ from handsfree.ai.observability import (
 )
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
+from handsfree.db.ai_backend_policy_snapshots import store_ai_backend_policy_snapshot
 from handsfree.github.auth import GhCliTokenProvider
 
 
@@ -27,6 +28,9 @@ def test_build_ai_backend_policy_report_returns_typed_summary(db_conn, monkeypat
     user_id = str(uuid.uuid4())
     monkeypatch.setenv("HANDSFREE_AI_DEFAULT_SUMMARY_BACKEND", "accelerated")
     monkeypatch.setenv("HANDSFREE_AI_DEFAULT_FAILURE_BACKEND", "composite")
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS", "30")
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER", "25")
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS", "300")
     monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: "gho_cli_token")
@@ -71,10 +75,14 @@ def test_build_ai_backend_policy_report_returns_typed_summary(db_conn, monkeypat
 
     report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=50)
 
+    assert report.report_generated_at.tzinfo == UTC
     assert report.policy.summary_backend == "accelerated"
     assert report.policy.failure_backend == "composite"
     assert report.policy.github_auth_source == "gh_cli"
     assert report.policy.github_live_mode_requested is True
+    assert report.policy.snapshot_retention_days == 30
+    assert report.policy.snapshot_max_records_per_user == 25
+    assert report.policy.snapshot_min_interval_seconds == 300
     assert report.recent_window.log_limit == 50
     assert report.recent_window.ai_execute_logs == 2
     assert report.recent_window.policy_applied_count == 1
@@ -100,6 +108,11 @@ def test_build_ai_backend_policy_report_returns_typed_summary(db_conn, monkeypat
         "ai.execute.github.check.failure_rag_explain": 1,
         "ai.execute.github.pr.accelerated_summary": 1,
     }
+    assert report.latest_snapshot is None
+    assert report.snapshot_health.status == "missing"
+    assert report.snapshot_summary.snapshot_health.status == "missing"
+    assert report.snapshot_summary.latest_snapshot is None
+    assert report.snapshot_summary.policy.min_interval_seconds == 300
 
 
 def test_build_ai_backend_policy_report_ignores_other_users_and_missing_policy_data(
@@ -139,6 +152,7 @@ def test_build_ai_backend_policy_report_ignores_other_users_and_missing_policy_d
 
     report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=10)
 
+    assert report.report_generated_at.tzinfo == UTC
     assert report.policy.github_auth_source == "fixtures"
     assert report.policy.github_live_mode_requested is False
     assert report.recent_window.ai_execute_logs == 1
@@ -153,6 +167,28 @@ def test_build_ai_backend_policy_report_ignores_other_users_and_missing_policy_d
     assert report.resolved_workflow_counts == {}
     assert report.remap_counts == {}
     assert report.action_counts == {"ai.execute.github.pr.rag_summary": 1}
+
+
+def test_build_ai_backend_policy_report_ignores_invalid_snapshot_policy_env_values(
+    db_conn,
+    monkeypatch,
+):
+    """Invalid snapshot-policy env values should surface as unset config."""
+    user_id = str(uuid.uuid4())
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS", "not-a-number")
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER", "-5")
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS", "")
+    monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
+
+    report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=10)
+
+    assert report.report_generated_at.tzinfo == UTC
+    assert report.policy.snapshot_retention_days is None
+    assert report.policy.snapshot_max_records_per_user is None
+    assert report.policy.snapshot_min_interval_seconds is None
 
 
 def test_build_ai_backend_policy_report_includes_time_buckets(db_conn, monkeypatch):
@@ -222,6 +258,7 @@ def test_build_ai_backend_policy_report_includes_time_buckets(db_conn, monkeypat
 
     report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=20)
 
+    assert report.report_generated_at.tzinfo == UTC
     assert report.time_buckets["last_hour"].ai_execute_logs == 1
     assert report.time_buckets["last_hour"].policy_applied_count == 1
     assert report.time_buckets["last_hour"].remapped_capability_counts == {
@@ -254,6 +291,8 @@ def test_build_ai_backend_policy_report_includes_time_buckets(db_conn, monkeypat
         "failure_rag_explain->accelerated_failure_explain": 1,
         "pr_rag_summary->accelerated_pr_summary": 1,
     }
+    assert report.snapshot_health.status == "missing"
+    assert report.snapshot_summary.snapshot_health.status == "missing"
 
 
 def test_build_ai_backend_policy_report_prefers_env_auth_source(db_conn, monkeypatch):
@@ -326,6 +365,7 @@ def test_build_ai_backend_policy_history_report_buckets_activity(db_conn, monkey
         limit=20,
     )
 
+    assert report.report_generated_at.tzinfo == UTC
     assert report.window_hours == 4
     assert report.bucket_hours == 2
     assert len(report.buckets) == 2
@@ -336,3 +376,65 @@ def test_build_ai_backend_policy_history_report_buckets_activity(db_conn, monkey
     assert report.buckets[1].ai_execute_logs == 1
     assert report.buckets[1].policy_applied_count == 0
     assert report.buckets[1].remap_counts == {}
+    assert report.latest_snapshot is None
+    assert report.snapshot_health.status == "missing"
+    assert report.snapshot_summary.snapshot_health.status == "missing"
+
+
+def test_build_ai_backend_policy_history_report_includes_latest_snapshot(db_conn, monkeypatch):
+    """History report should expose newest persisted snapshot metadata."""
+    user_id = str(uuid.uuid4())
+    monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
+
+    report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=10)
+    snapshot = store_ai_backend_policy_snapshot(db_conn, user_id=user_id, report=report)
+
+    history = build_ai_backend_policy_history_report(
+        db_conn,
+        user_id=user_id,
+        window_hours=24,
+        bucket_hours=1,
+        limit=100,
+    )
+
+    assert history.report_generated_at.tzinfo == UTC
+    assert history.latest_snapshot is not None
+    assert history.latest_snapshot.id == snapshot.id
+    assert history.latest_snapshot.created_at == snapshot.created_at
+    assert history.latest_snapshot.age_seconds >= 0
+    assert history.latest_snapshot.freshness_threshold_seconds == 3600
+    assert history.latest_snapshot.freshness == "fresh"
+    assert history.snapshot_health.status == "healthy"
+    assert history.snapshot_summary.snapshot_health.status == "healthy"
+    assert history.snapshot_summary.latest_snapshot is not None
+    assert history.snapshot_summary.latest_snapshot.id == snapshot.id
+
+
+def test_build_ai_backend_policy_report_marks_latest_snapshot_stale_when_old(db_conn, monkeypatch):
+    """Latest snapshot should be marked stale when older than the freshness threshold."""
+    user_id = str(uuid.uuid4())
+    monkeypatch.setenv("HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS", "60")
+    monkeypatch.delenv("HANDS_FREE_GITHUB_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_LIVE_MODE", raising=False)
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
+
+    report = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=10)
+    snapshot = store_ai_backend_policy_snapshot(db_conn, user_id=user_id, report=report)
+    db_conn.execute(
+        "UPDATE ai_backend_policy_snapshots SET created_at = ? WHERE id = ?",
+        [datetime.now(UTC) - timedelta(minutes=5), snapshot.id],
+    )
+
+    refreshed = build_ai_backend_policy_report(db_conn, user_id=user_id, limit=10)
+
+    assert refreshed.report_generated_at.tzinfo == UTC
+    assert refreshed.latest_snapshot is not None
+    assert refreshed.latest_snapshot.id == snapshot.id
+    assert refreshed.latest_snapshot.freshness_threshold_seconds == 60
+    assert refreshed.latest_snapshot.freshness == "stale"
+    assert refreshed.snapshot_health.status == "stale"
+    assert refreshed.snapshot_summary.snapshot_health.status == "stale"

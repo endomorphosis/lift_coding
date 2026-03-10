@@ -75,6 +75,13 @@ function normalizeFollowOnTask(data) {
     provider_label: typeof data.provider_label === 'string' ? data.provider_label : null,
     capability: typeof data.capability === 'string' ? data.capability : null,
     summary: typeof data.summary === 'string' ? data.summary : null,
+    mcp_execution_mode:
+      typeof data.mcp_execution_mode === 'string' ? data.mcp_execution_mode : null,
+    mcp_preferred_execution_mode:
+      typeof data.mcp_preferred_execution_mode === 'string'
+        ? data.mcp_preferred_execution_mode
+        : null,
+    result_preview: typeof data.result_preview === 'string' ? data.result_preview : null,
   };
 }
 
@@ -158,6 +165,9 @@ function normalizeAgentTask(data) {
   if (!Array.isArray(normalized.follow_up_actions) && Array.isArray(resultEnvelope?.follow_up_actions)) {
     normalized.follow_up_actions = resultEnvelope.follow_up_actions;
   }
+  if (!Array.isArray(normalized.media_attachments) && Array.isArray(trace.wearables_dat_media)) {
+    normalized.media_attachments = trace.wearables_dat_media;
+  }
 
   return normalized;
 }
@@ -170,6 +180,69 @@ function normalizeAgentTaskListResponse(data) {
   return {
     ...data,
     tasks: Array.isArray(data.tasks) ? data.tasks.map(normalizeAgentTask) : [],
+  };
+}
+
+function normalizePeerChatMessage(message) {
+  if (!message || typeof message !== 'object') {
+    return message;
+  }
+
+  return {
+    ...message,
+    task_snapshot: normalizeFollowOnTask(message.task_snapshot),
+  };
+}
+
+function normalizePeerChatHistoryResponse(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Peer chat history returned an invalid response payload');
+  }
+
+  return {
+    ...data,
+    messages: Array.isArray(data.messages) ? data.messages.map(normalizePeerChatMessage) : [],
+  };
+}
+
+function normalizePeerChatConversationsResponse(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Peer chat conversations returned an invalid response payload');
+  }
+
+  return {
+    ...data,
+    conversations: Array.isArray(data.conversations)
+      ? data.conversations.map(normalizePeerChatMessage)
+      : [],
+  };
+}
+
+function normalizePeerChatOutboxResponse(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Peer chat outbox returned an invalid response payload');
+  }
+
+  return {
+    ...data,
+    messages: Array.isArray(data.messages) ? data.messages.map(normalizePeerChatMessage) : [],
+    preview_messages: Array.isArray(data.preview_messages)
+      ? data.preview_messages.map(normalizePeerChatMessage)
+      : [],
+  };
+}
+
+function normalizePeerEnvelopeResponse(data) {
+  if (!data || typeof data !== 'object') {
+    throw new Error('Peer envelope returned an invalid response payload');
+  }
+
+  return {
+    ...data,
+    payload_json:
+      data.payload_json && typeof data.payload_json === 'object'
+        ? normalizePeerChatMessage(data.payload_json)
+        : data.payload_json ?? null,
   };
 }
 
@@ -259,6 +332,11 @@ export async function delegateWearablesBridgeTask(device = {}, options = {}) {
     client_context: defaultClientContext({
       feature: 'wearables_bridge',
       trigger: 'target_connected',
+      device_id: device?.deviceId || null,
+      device_name: device?.deviceName || null,
+      target_connection_state: device?.targetConnectionState || null,
+      target_last_seen_at: device?.targetLastSeenAt || null,
+      target_rssi: device?.targetRssi ?? null,
       ...(options.client_context || {}),
     }),
   });
@@ -650,6 +728,24 @@ export async function getInbox(options = {}) {
   return await response.json();
 }
 
+export async function attachAgentTaskMedia(taskId, media = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/agents/tasks/${taskId}/media`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(media),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail?.message || errorData.message || `Task media attach failed: ${response.status}`);
+  }
+
+  return await response.json();
+}
+
 /**
  * Upload audio bytes to dev endpoint and get file:// URI
  * @param {string} audioBase64 - Base64-encoded audio data
@@ -657,15 +753,31 @@ export async function getInbox(options = {}) {
  * @returns {Promise<Object>} Object with { uri, format }
  */
 export async function uploadDevAudio(audioBase64, format = 'm4a') {
+  return await uploadDevMedia(audioBase64, {
+    media_kind: 'audio',
+    format,
+  }, '/v1/dev/audio');
+}
+
+/**
+ * Upload generic media bytes to a dev endpoint and get a file:// URI.
+ * @param {string} dataBase64 - Base64-encoded media data
+ * @param {Object} options - Media metadata such as format, media_kind, and mime_type
+ * @param {string} pathname - Endpoint pathname override for compatibility wrappers
+ * @returns {Promise<Object>} Object with upload metadata including uri and bytes
+ */
+export async function uploadDevMedia(dataBase64, options = {}, pathname = '/v1/dev/media') {
   const baseUrl = await getBaseUrl();
   const headers = await getHeaders();
 
   const body = {
-    data_base64: audioBase64,
-    format,
+    data_base64: dataBase64,
+    format: options.format || 'jpg',
+    media_kind: options.media_kind || 'image',
+    mime_type: options.mime_type || undefined,
   };
 
-  const response = await fetch(`${baseUrl}/v1/dev/audio`, {
+  const response = await fetch(`${baseUrl}${pathname}`, {
     method: 'POST',
     headers,
     body: JSON.stringify(body),
@@ -730,7 +842,7 @@ async function peerChatRequest(pathname, {
  * @returns {Promise<Object>} Dev ingress response with optional ack_frame_base64
  */
 export async function postDevPeerEnvelope(peerRef, frameBase64) {
-  return await peerChatRequest('/v1/dev/peer-envelope', {
+  const response = await peerChatRequest('/v1/dev/peer-envelope', {
     method: 'POST',
     body: {
       peer_ref: peerRef,
@@ -738,6 +850,8 @@ export async function postDevPeerEnvelope(peerRef, frameBase64) {
     },
     fallbackMessage: 'Peer envelope validation failed',
   });
+
+  return normalizePeerEnvelopeResponse(response);
 }
 
 /**
@@ -746,9 +860,11 @@ export async function postDevPeerEnvelope(peerRef, frameBase64) {
  * @returns {Promise<Object>} Chat history response
  */
 export async function getDevPeerChatHistory(conversationId) {
-  return await peerChatRequest(`/v1/dev/peer-chat/${encodeURIComponent(conversationId)}`, {
+  const response = await peerChatRequest(`/v1/dev/peer-chat/${encodeURIComponent(conversationId)}`, {
     fallbackMessage: 'Peer chat history fetch failed',
   });
+
+  return normalizePeerChatHistoryResponse(response);
 }
 
 /**
@@ -757,10 +873,12 @@ export async function getDevPeerChatHistory(conversationId) {
  * @returns {Promise<Object>} Recent chat conversation summaries
  */
 export async function getDevPeerChatConversations(limit = 20) {
-  return await peerChatRequest('/v1/dev/peer-chat', {
+  const response = await peerChatRequest('/v1/dev/peer-chat', {
     searchParams: { limit },
     fallbackMessage: 'Peer chat conversations fetch failed',
   });
+
+  return normalizePeerChatConversationsResponse(response);
 }
 
 /**
@@ -771,17 +889,26 @@ export async function getDevPeerChatConversations(limit = 20) {
  * @param {string} priority - Message delivery priority: normal or urgent
  * @returns {Promise<Object>} Outbound chat send response
  */
-export async function postDevPeerChatSend(peerId, text, conversationId = null, priority = 'normal') {
-  return await peerChatRequest('/v1/dev/peer-chat/send', {
+export async function postDevPeerChatSend(
+  peerId,
+  text,
+  conversationId = null,
+  priority = 'normal',
+  taskId = null
+) {
+  const response = await peerChatRequest('/v1/dev/peer-chat/send', {
     method: 'POST',
     body: {
       peer_id: peerId,
       text,
       conversation_id: conversationId,
       priority,
+      task_id: taskId,
     },
     fallbackMessage: 'Peer chat send failed',
   });
+
+  return normalizePeerChatMessage(response);
 }
 
 /**
@@ -791,10 +918,12 @@ export async function postDevPeerChatSend(peerId, text, conversationId = null, p
  * @returns {Promise<Object>} Outbox response
  */
 export async function getDevPeerChatOutbox(peerId, leaseMs = undefined) {
-  return await peerChatRequest(`/v1/dev/peer-chat/outbox/${encodeURIComponent(peerId)}`, {
+  const response = await peerChatRequest(`/v1/dev/peer-chat/outbox/${encodeURIComponent(peerId)}`, {
     searchParams: { lease_ms: leaseMs },
     fallbackMessage: 'Peer chat outbox fetch failed',
   });
+
+  return normalizePeerChatOutboxResponse(response);
 }
 
 /**
@@ -803,9 +932,11 @@ export async function getDevPeerChatOutbox(peerId, leaseMs = undefined) {
  * @returns {Promise<Object>} Outbox status response
  */
 export async function getDevPeerChatOutboxStatus(peerId) {
-  return await peerChatRequest(`/v1/dev/peer-chat/outbox/${encodeURIComponent(peerId)}/status`, {
+  const response = await peerChatRequest(`/v1/dev/peer-chat/outbox/${encodeURIComponent(peerId)}/status`, {
     fallbackMessage: 'Peer chat outbox status failed',
   });
+
+  return normalizePeerChatOutboxResponse(response);
 }
 
 /**

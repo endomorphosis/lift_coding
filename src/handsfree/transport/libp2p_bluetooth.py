@@ -1390,6 +1390,7 @@ def encode_chat_message_payload(
     conversation_id: str | None = None,
     priority: str | None = None,
     timestamp_ms: int | None = None,
+    task_snapshot: dict[str, Any] | None = None,
 ) -> bytes:
     """Encode a HandsFree chat protocol payload."""
     if not text:
@@ -1407,6 +1408,10 @@ def encode_chat_message_payload(
         if priority not in {"normal", "urgent"}:
             raise TransportEnvelopeError("Chat payload priority must be 'normal' or 'urgent'")
         payload["priority"] = priority
+    if task_snapshot is not None:
+        if not isinstance(task_snapshot, dict):
+            raise TransportEnvelopeError("Chat payload task_snapshot must be an object")
+        payload["task_snapshot"] = task_snapshot
     return json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8")
 
 
@@ -1429,6 +1434,9 @@ def decode_chat_message_payload(payload: bytes) -> dict[str, Any]:
     priority = data.get("priority", "normal")
     if not isinstance(priority, str) or priority not in {"normal", "urgent"}:
         raise TransportEnvelopeError("Chat payload priority must be 'normal' or 'urgent'")
+    task_snapshot = data.get("task_snapshot")
+    if task_snapshot is not None and not isinstance(task_snapshot, dict):
+        raise TransportEnvelopeError("Chat payload task_snapshot must be an object")
     return data
 
 

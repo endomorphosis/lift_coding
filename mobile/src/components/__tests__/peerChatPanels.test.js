@@ -90,6 +90,13 @@ describe('PeerChatOutboxPanel', () => {
         timestamp_ms: 333,
         leased_until_ms: null,
         hold_reason: 'offline_normal_held',
+        task_snapshot: {
+          task_id: 'task-2',
+          provider: 'ipfs_accelerate_mcp',
+          provider_label: 'IPFS Accelerate',
+          summary: 'IPFS Accelerate agentic fetch running.',
+          mcp_execution_mode: 'mcp_remote',
+        },
       },
     ],
   };
@@ -114,6 +121,8 @@ describe('PeerChatOutboxPanel', () => {
     expect(normalizedText).toContain('total 2');
     expect(normalizedText).toContain('Selected Outbox Message');
     expect(normalizedText).toContain('hold reason offline_normal_held');
+    expect(normalizedText).toContain('task task-2');
+    expect(normalizedText).toContain('execution mcp_remote');
 
     findPressableByText(tree, 'Release This Message', { exact: true }).props.onPress();
     findPressableByText(tree, 'Promote This Message', { exact: true }).props.onPress();
@@ -170,7 +179,17 @@ describe('PeerChatDiagnosticsPanel', () => {
       peerChatHistory: {
         conversation_id: 'chat-1',
         messages: [
-          { timestamp_ms: 1, priority: 'urgent', sender_peer_id: 'peer-a', text: 'hello' },
+          {
+            timestamp_ms: 1,
+            priority: 'urgent',
+            sender_peer_id: 'peer-a',
+            text: 'hello',
+            task_snapshot: {
+              task_id: 'task-history',
+              provider_label: 'IPFS Accelerate',
+              summary: 'IPFS Accelerate agentic fetch running.',
+            },
+          },
         ],
       },
       peerChatConversations: [
@@ -180,6 +199,11 @@ describe('PeerChatDiagnosticsPanel', () => {
           priority: 'urgent',
           sender_peer_id: 'peer-a',
           last_text: 'latest',
+          task_snapshot: {
+            task_id: 'task-conversation',
+            provider_label: 'IPFS Accelerate',
+            summary: 'IPFS Accelerate agentic fetch running.',
+          },
         },
       ],
       selectedConversationId: 'chat-1',
@@ -203,6 +227,7 @@ describe('PeerChatDiagnosticsPanel', () => {
     expect(normalizedText).toContain('Backend-focused peer chat controls.');
     expect(normalizedText).toContain('Selected Conversation');
     expect(normalizedText).toContain('[ urgent ] peer-a : hello');
+    expect(normalizedText).toContain('task IPFS Accelerate • IPFS Accelerate agentic fetch running.');
     expect(normalizedText).toContain('Transport Sessions');
     expect(normalizedText).toContain('session session-1');
 

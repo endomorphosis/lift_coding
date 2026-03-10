@@ -172,6 +172,107 @@ class TestMCPIPFSProviders:
         assert result["trace"]["mcp_remote_task_id"] == "remote-task-123"
         assert result["trace"]["tool_name"] == "tools_dispatch"
 
+    def test_accelerate_wearables_bridge_workflow_decorates_result_envelope(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-123",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "target_connection_state": "connected",
+                    "target_last_seen_at": 1700000000000,
+                    "target_rssi": -42,
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert result["ok"] is True
+        assert envelope["summary"] == "Wearables bridge connectivity workflow running for Ray-Ban Meta."
+        assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
+        assert envelope["structured_output"]["device_id"] == "AA:BB"
+        assert envelope["structured_output"]["target_rssi"] == -42
+        assert envelope["follow_up_actions"][0]["id"] == "agent_status"
+        assert result["trace"]["mcp_started_at"]
+        assert result["trace"]["mcp_timeout_s"] == 30.0
+        assert result["trace"]["mcp_poll_interval_s"] == 2.0
+
+    def test_accelerate_wearables_bridge_remote_task_times_out(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+
+        class _RunningStatusClient(_FakeMCPClient):
+            def invoke_tool(
+                self,
+                tool_name: str,
+                arguments: dict[str, object],
+                correlation_id: str,
+            ) -> MCPToolInvocationResult:
+                result = super().invoke_tool(tool_name, arguments, correlation_id)
+                nested_tool_name = str(arguments.get("tool_name") or arguments.get("tool"))
+                parameters = arguments.get("parameters") or arguments.get("params") or {}
+                if tool_name == "tools_dispatch" and nested_tool_name in {"get_task_status", "check_task_status"}:
+                    return MCPToolInvocationResult(
+                        request_id="req-999",
+                        run_id=None,
+                        status="running",
+                        tool_name=tool_name,
+                        output={
+                            "status": "running",
+                            "task": {
+                                "task_id": parameters.get("task_id"),
+                                "status": "running",
+                            },
+                            "message": "Still running",
+                        },
+                        raw_response={"ok": True},
+                        content=[{"type": "text", "text": "Still running"}],
+                    )
+                return result
+
+        provider = IPFSAccelerateMCPAgentProvider(client=_RunningStatusClient())
+        task = SimpleNamespace(
+            id="task-bridge-timeout",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "mcp_execution_mode": "mcp_remote",
+                "mcp_status_strategy": "tool_polling",
+                "mcp_remote_task_id": "remote-task-123",
+                "mcp_started_at": "2026-03-09T00:00:00+00:00",
+                "mcp_timeout_s": 1,
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "target_connection_state": "connected",
+                    "target_last_seen_at": 1700000000000,
+                    "target_rssi": -42,
+                },
+            },
+        )
+
+        result = provider.check_status(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert result["ok"] is False
+        assert result["status"] == "failed"
+        assert result["message"] == "Wearables bridge connectivity workflow timed out for Ray-Ban Meta."
+        assert envelope["status"] == "failed"
+        assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
+        assert envelope["structured_output"]["receipt"]["timeout"] is True
+        assert envelope["trace"]["last_protocol_state"] == "timeout"
+
     def test_start_task_fails_when_endpoint_missing(self, monkeypatch):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
 

@@ -15,6 +15,16 @@ This guide covers all configuration options for the HandsFree Dev Companion syst
 
 ---
 
+## Complete Configuration Key Inventory
+
+`CONFIGURATION.md` focuses on practical setup paths and common deployment profiles.
+
+For a code-aligned inventory of backend environment variables currently read by the application, see:
+
+- [docs/configuration-reference.md](docs/configuration-reference.md)
+
+---
+
 ## Environment Variables
 
 ### Quick Setup
@@ -228,9 +238,13 @@ GITHUB_TOKEN=ghp_your-personal-access-token-here
 |----------|---------|-------------|
 | `HANDSFREE_TTS_PROVIDER` | `stub` | TTS provider: `stub`, `openai` |
 | `HANDS_FREE_STT_PROVIDER` | `stub` | STT provider: `stub`, `openai` |
+| `HANDSFREE_STT_ENABLED` | `true` | Enable/disable STT transcription |
+| `HANDSFREE_OCR_PROVIDER` | `stub` | OCR provider (currently `stub`) |
+| `HANDSFREE_OCR_ENABLED` | `true` | Enable/disable OCR processing |
 | `OPENAI_API_KEY` | _(empty)_ | OpenAI API key |
 | `OPENAI_TTS_MODEL` | `tts-1` | TTS model: `tts-1`, `tts-1-hd` |
 | `OPENAI_STT_MODEL` | `whisper-1` | STT model |
+| `OPENAI_TTS_VOICE` | `alloy` | Default OpenAI TTS voice |
 
 **Stub Mode** (no API key needed):
 

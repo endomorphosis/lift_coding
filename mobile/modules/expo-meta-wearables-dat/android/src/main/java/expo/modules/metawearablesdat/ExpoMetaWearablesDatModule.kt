@@ -174,6 +174,27 @@ class ExpoMetaWearablesDatModule : Module() {
       }
       result
     }
+
+    AsyncFunction("capturePhoto") {
+      mediaActionResult(
+        action = "capture_photo",
+        message = "Photo capture is not implemented in the Android DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("startVideoStream") {
+      mediaActionResult(
+        action = "start_video_stream",
+        message = "Video streaming is not implemented in the Android DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("stopVideoStream") {
+      mediaActionResult(
+        action = "stop_video_stream",
+        message = "Video streaming is not implemented in the Android DAT bridge yet."
+      )
+    }
   }
 
   private fun buildCapabilitiesMap(realSdkActive: Boolean): Map<String, Boolean> =
@@ -183,6 +204,23 @@ class ExpoMetaWearablesDatModule : Module() {
       "photoCapture" to realSdkActive,
       "videoStream" to realSdkActive,
       "audio" to false
+    )
+
+  private fun mediaActionResult(
+    action: String,
+    message: String,
+    supported: Boolean = false
+  ): Map<String, Any?> =
+    mapOf(
+      "state" to if (supported) "ready" else "not_supported",
+      "mode" to integrationMode(isDatSdkLinked()),
+      "supported" to supported,
+      "action" to action,
+      "message" to message,
+      "deviceId" to selectedDeviceId,
+      "targetConnectionState" to targetConnectionState(null, getSelectedDeviceTarget()),
+      "assetUri" to null,
+      "mimeType" to null
     )
 
   private fun manifestMetadata() =

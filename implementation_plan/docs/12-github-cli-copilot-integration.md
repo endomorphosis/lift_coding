@@ -461,12 +461,32 @@ There is now also a small admin/debug report route:
 - `GET /v1/admin/ai/backend-policy/snapshots`
 
 That report exposes:
+- `report_generated_at`, the server timestamp for the response payload
 - the currently resolved summary and failure backend policy
 - the current non-secret GitHub auth source for live-mode requests:
   - `github_app`
   - `env_token`
   - `gh_cli`
   - `fixtures`
+- the currently resolved snapshot capture policy values:
+  - `snapshot_retention_days`
+  - `snapshot_max_records_per_user`
+  - `snapshot_min_interval_seconds`
+- `latest_snapshot`, which tells callers the id, timestamp, and freshness of the newest persisted backend-policy snapshot
+  - includes:
+    - `age_seconds`
+    - `freshness_threshold_seconds`
+    - `freshness` (`fresh` or `stale`)
+- `snapshot_health`, a compact top-level summary:
+  - `healthy`
+  - `stale`
+  - `missing`
+- `snapshot_summary`, a reusable nested block that bundles:
+  - snapshot policy settings
+  - latest snapshot freshness
+  - capture metadata where that route exposes it
+  - this is now the preferred client-facing snapshot contract
+  - the older top-level fields (`latest_snapshot`, `snapshot_health`, `snapshot_capture`, `next_capture`) remain as compatibility mirrors
 - capability-usage totals split into:
   - `remapped_capability_counts`
   - `direct_capability_counts`
@@ -483,20 +503,36 @@ That report exposes:
   - `last_24_hours`
 
 The history route exposes:
+- `report_generated_at`, the server timestamp for the response payload
 - bucketed `ai.execute.*` activity over a caller-selected recent window
 - bucketed `policy_applied_count`
 - bucketed remap-pair counts
 - the same current non-secret policy/auth context used by the snapshot route
+- `latest_snapshot`, so the bucketed history view stays anchored to the freshest persisted snapshot metadata too
+- `snapshot_health`, so the trend view also exposes a one-field snapshot status summary
+- `snapshot_summary`, so clients can consume the same nested snapshot block on the history route too
 
 The snapshots route exposes:
+- `report_generated_at`, the server timestamp for the response payload
 - persisted point-in-time backend-policy snapshots
+- the same effective backend-policy config block exposed by the main report, including snapshot retention/reuse settings
+- the same top-level `snapshot_health` summary exposed by the report and history routes
+- `snapshot_summary`, so the snapshots route shares the same nested snapshot contract as the report and history routes
 - current backend defaults and GitHub auth source at snapshot time
 - snapshot-level remap counts, top capabilities, and top remaps
+- `next_capture`, which tells callers whether the next captured admin read would:
+  - reuse the latest stored snapshot
+  - create a new snapshot
 
 Current behavior:
 - `GET /v1/admin/ai/backend-policy` now stores a point-in-time snapshot opportunistically by default
 - `GET /v1/admin/ai/backend-policy?capture=false` skips snapshot persistence for read-only inspection
+- the report response now includes `snapshot_capture` so callers can tell whether that read:
+  - created a new snapshot
+  - reused a recent snapshot because of `HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS`
+  - skipped capture entirely
 - the snapshots route lists those stored observations newest-first
+- the snapshots route also reports whether the next captured read would currently reuse the newest snapshot or create a new one
 - snapshot persistence now supports best-effort retention controls:
   - `HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS`
   - `HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER`

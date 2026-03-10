@@ -29,6 +29,7 @@ class AIBackendPolicySnapshot:
     top_capabilities: dict[str, object]
     top_remaps: list[dict[str, object]]
     created_at: datetime
+    reused: bool = False
 
 
 def store_ai_backend_policy_snapshot(
@@ -41,6 +42,7 @@ def store_ai_backend_policy_snapshot(
     _maybe_prune_ai_backend_policy_snapshots(conn, user_id=user_id)
     existing = _get_reusable_recent_snapshot(conn, user_id=user_id)
     if existing is not None:
+        existing.reused = True
         return existing
 
     snapshot_id = str(uuid.uuid4())
@@ -111,6 +113,29 @@ def get_ai_backend_policy_snapshots(
         [user_id, limit],
     ).fetchall()
     return [_row_to_snapshot(row) for row in rows]
+
+
+def get_next_ai_backend_policy_snapshot_capture(
+    conn: duckdb.DuckDBPyConnection,
+    *,
+    user_id: str,
+) -> tuple[str, AIBackendPolicySnapshot | None]:
+    """Return whether the next captured read would create or reuse a snapshot."""
+    reusable = _get_reusable_recent_snapshot(conn, user_id=user_id)
+    if reusable is not None:
+        reusable.reused = True
+        return ("reused", reusable)
+    latest = _get_latest_snapshot(conn, user_id=user_id)
+    return ("created", latest)
+
+
+def get_latest_ai_backend_policy_snapshot(
+    conn: duckdb.DuckDBPyConnection,
+    *,
+    user_id: str,
+) -> AIBackendPolicySnapshot | None:
+    """Return the latest persisted backend-policy snapshot for a user."""
+    return _get_latest_snapshot(conn, user_id=user_id)
 
 
 def prune_ai_backend_policy_snapshots(
@@ -233,6 +258,28 @@ def _get_reusable_recent_snapshot(
     if now - snapshot_created_at <= timedelta(seconds=min_interval_seconds):
         return snapshot
     return None
+
+
+def _get_latest_snapshot(
+    conn: duckdb.DuckDBPyConnection,
+    *,
+    user_id: str,
+) -> AIBackendPolicySnapshot | None:
+    row = conn.execute(
+        """
+        SELECT id, user_id, summary_backend, failure_backend, github_auth_source,
+               github_live_mode_requested, ai_execute_logs, policy_applied_count,
+               remap_counts, top_capabilities, top_remaps, created_at
+        FROM ai_backend_policy_snapshots
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+        LIMIT 1
+        """,
+        [user_id],
+    ).fetchone()
+    if not row:
+        return None
+    return _row_to_snapshot(row)
 
 
 def _row_to_snapshot(row: tuple[object, ...]) -> AIBackendPolicySnapshot:

@@ -1,7 +1,16 @@
 # Meta Wearables DAT + MCP++ Integration Roadmap
 
 ## Status
-Draft implementation roadmap for integrating the newly added Meta Wearables DAT repositories with the existing HandsFree backend, mobile app, and MCP++/IPFS execution stack.
+Active implementation roadmap for integrating the Meta wearables reference repositories with the existing HandsFree backend, mobile app, and MCP++/IPFS execution stack.
+
+Current implementation baseline in this repo:
+
+- Meta DAT repositories are retained as reference submodules, not required runtime dependencies
+- the shipping mobile integration path is a first-party wearables bridge rooted in `mobile/modules/expo-meta-wearables-dat`
+- normalized MCP result envelopes are already flowing through backend tasks, notifications, router cards, and mobile card builders
+- wearables connectivity receipts now expose a documented local action contract:
+  - `mobile_open_wearables_diagnostics`
+  - `mobile_reconnect_wearables_target`
 
 ## Scope
 This roadmap covers integration across these repositories:
@@ -60,7 +69,7 @@ The project already has the right high-level shape for this integration:
 
 The new opportunity is to turn those separate pieces into one coherent execution fabric:
 
-- **Meta Wearables DAT** becomes the supported device-access layer on iOS and Android
+- **HandsFree wearables bridge** becomes the supported device-access layer on iOS and Android, using Meta DAT repos as reference inputs and optional future acceleration points
 - **HandsFree mobile** remains the end-user orchestration shell for voice, cards, notifications, and task review
 - **HandsFree backend** remains the control plane and policy boundary
 - **MCP++** becomes the protocol contract for remote tool execution, provenance, delegation, and policy-aware routing
@@ -68,7 +77,7 @@ The new opportunity is to turn those separate pieces into one coherent execution
 
 The recommended rollout is **not** a big-bang rewrite. We should preserve the existing glasses audio path and current agent/task abstractions, then incrementally add:
 
-- DAT-backed device access on mobile
+- bridge-backed device access on mobile
 - a stable HandsFree capability registry
 - MCP++ runtime hardening
 - provider parity across direct and remote execution
@@ -131,6 +140,12 @@ Important facts from upstream:
 - requires package registry access and a `GITHUB_TOKEN` or local package credential
 - analytics opt-out is manifest driven
 - explicitly supports wearable device access and camera workflows
+
+Planning consequence in this repo:
+
+- Android DAT package access is not assumed
+- the production baseline must continue to compile and function without GitHub Packages resolution
+- official DAT artifacts remain an optional future enhancement rather than a hard dependency
 
 ### 4. `endomorphosis/ipfs_kit_py`
 Role in target architecture:
@@ -209,7 +224,7 @@ A user wearing Meta AI glasses should be able to say commands like:
 
 And the system should:
 
-1. capture the voice or device event through DAT-backed mobile integrations
+1. capture the voice or device event through bridge-backed mobile integrations
 2. send a normalized command to HandsFree backend
 3. resolve a canonical HandsFree capability
 4. route execution via direct mode or MCP++ remote mode
@@ -322,7 +337,7 @@ The planner, command system, mobile UI cards, and notifications should target ca
 
 ---
 
-## Workstream A: mobile integration with Meta Wearables DAT
+## Workstream A: mobile integration with first-party wearables bridge
 
 ## Goal
 Adopt the official DAT SDKs where they add reliability or new capabilities, without breaking the existing Expo/React Native experience.
@@ -340,7 +355,7 @@ Current path remains useful for:
 - fallback when DAT integration is unavailable
 - regression comparison
 
-### A2. Introduce a new native abstraction for DAT-backed device access
+### A2. Introduce a new native abstraction for wearable device access
 Add a new mobile native bridge, for example:
 
 - `mobile/modules/expo-meta-wearables-dat/ios/*`
@@ -353,6 +368,9 @@ Responsibilities:
 - camera/photo/video capability access
 - official session lifecycle hooks
 - metadata surfaced to JS
+- selected target persistence
+- reconnect and connect flows
+- rich state-change events for MCP-trigger handoff
 
 Recommended implementation detail:
 
@@ -360,7 +378,7 @@ Recommended implementation detail:
 - add an Expo config plugin so iOS `Info.plist` and Android `AndroidManifest.xml` entries can be injected from app config
 - keep all DAT-specific identifiers in environment-driven or app-config driven settings rather than hardcoded constants
 
-### A3. Expose DAT capabilities to React Native via a narrow JS contract
+### A3. Expose bridge capabilities to React Native via a narrow JS contract
 Recommended JS-facing contract:
 
 - `isDatAvailable()`
@@ -368,6 +386,11 @@ Recommended JS-facing contract:
 - `getCapabilities()`
 - `startDeviceSession()`
 - `stopDeviceSession()`
+- `getAdapterState()`
+- `scanKnownAndNearbyDevices()`
+- `getSelectedDeviceTarget()`
+- `reconnectSelectedDeviceTarget()`
+- `connectSelectedDeviceTarget()`
 - `capturePhoto()`
 - `startVideoStream()` / `stopVideoStream()`
 - `subscribeDeviceEvents()`
@@ -393,11 +416,13 @@ Per platform, the app should dynamically decide whether to use:
 Extend diagnostics UI to show:
 
 - connected device model
-- DAT session status
+- bridge session status
 - available features: audio, camera, media, controls
 - analytics opt-out state
 - current backend routing mode
 - last task / last result / last CID
+- selected target, RSSI, and last-seen state
+- local receipt actions for diagnostics and reconnect
 
 ## Expected DAT-driven feature additions
 
@@ -423,9 +448,15 @@ Extend diagnostics UI to show:
 ## Mobile phase gates
 
 ### Gate A1: diagnostics-only integration
-- prove the DAT module loads on device builds
-- expose availability, session state, and capability discovery in diagnostics
+- prove the bridge module loads on device builds
+- expose availability, session state, target state, and capability discovery in diagnostics
 - no command-surface dependency yet
+
+Current status:
+
+- completed in a bridge-first form for DAT-disabled Android builds
+- diagnostics, selection, reconnect, connect, and event payloads are implemented
+- wearables receipt actions are now consistent across backend cards, notifications, mobile builders, and OpenAPI examples
 
 ### Gate A2: media artifact capture
 - capture photo or stream metadata through DAT
@@ -693,6 +724,13 @@ Examples:
 - pin result
 - rerun with new query
 - summarize result
+
+Current wearables-specific baseline:
+
+- connectivity receipts render as a distinct receipt type
+- normalized `follow_up_actions` flow through result envelopes
+- backend and mobile both prepend local wearables actions for diagnostics and reconnect
+- OpenAPI now documents those local `mobile_*` action IDs
 
 ### E5. DAT-only media actions should degrade gracefully
 If a device supports photo/video via DAT but not on the current platform/build, the app should explain the limitation and offer fallback capture paths.

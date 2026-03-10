@@ -33,6 +33,12 @@ export default function PeerChatOutboxPanel({
               [{message.priority}] {message.state} • {message.text}
               {message.hold_reason ? ` (${message.hold_reason})` : ''}
             </Text>
+            {message.task_snapshot ? (
+              <Text style={styles.text}>
+                task {message.task_snapshot.provider_label || message.task_snapshot.provider || 'Task'} •{' '}
+                {message.task_snapshot.summary || message.task_snapshot.task_id}
+              </Text>
+            ) : null}
             {message.state === 'leased' ? (
               <TouchableOpacity
                 style={[styles.button, styles.buttonSecondary]}
@@ -65,6 +71,17 @@ export default function PeerChatOutboxPanel({
           <Text style={styles.text}>lease {selectedMessage.leased_until_ms || 'none'}</Text>
           <Text style={styles.text}>hold reason {selectedMessage.hold_reason || 'none'}</Text>
           <Text style={styles.text}>text {selectedMessage.text}</Text>
+          {selectedMessage.task_snapshot ? (
+            <>
+              <Text style={styles.text}>task {selectedMessage.task_snapshot.task_id}</Text>
+              <Text style={styles.text}>
+                task summary {selectedMessage.task_snapshot.summary || 'none'}
+              </Text>
+              <Text style={styles.text}>
+                execution {selectedMessage.task_snapshot.mcp_execution_mode || 'none'}
+              </Text>
+            </>
+          ) : null}
         </View>
       ) : null}
     </>

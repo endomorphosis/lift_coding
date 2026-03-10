@@ -14,6 +14,7 @@ import {
   getDevPeerChatOutboxStatus,
   getDevTransportSessions,
   getAgentResults,
+  attachAgentTaskMedia,
   getAgentTasks,
   getAgentTaskDetail,
   deleteDevTransportSession,
@@ -30,6 +31,8 @@ import {
   delegateWearablesBridgeTask,
   sendActionCommand,
   confirmCommand,
+  uploadDevAudio,
+  uploadDevMedia,
 } from '../client';
 
 describe('sendCommand', () => {
@@ -65,6 +68,9 @@ describe('sendCommand', () => {
       provider_label: null,
       capability: null,
       summary: null,
+      mcp_execution_mode: null,
+      mcp_preferred_execution_mode: null,
+      result_preview: null,
     });
   });
 });
@@ -92,6 +98,9 @@ describe('sendActionCommand', () => {
           provider_label: 'IPFS Kit',
           capability: 'ipfs_pin',
           summary: 'IPFS Kit pin content running.',
+          mcp_execution_mode: 'mcp_remote',
+          mcp_preferred_execution_mode: 'direct_import',
+          result_preview: 'Pinned bafy123.',
         },
       }),
     });
@@ -145,6 +154,9 @@ describe('sendActionCommand', () => {
       provider_label: 'IPFS Kit',
       capability: 'ipfs_pin',
       summary: 'IPFS Kit pin content running.',
+      mcp_execution_mode: 'mcp_remote',
+      mcp_preferred_execution_mode: 'direct_import',
+      result_preview: 'Pinned bafy123.',
     });
   });
 
@@ -182,6 +194,9 @@ describe('delegateWearablesBridgeTask', () => {
           provider_label: 'IPFS Accelerate',
           capability: 'agentic_fetch',
           summary: 'Wearables bridge inspection running.',
+          mcp_execution_mode: 'mcp_remote',
+          mcp_preferred_execution_mode: 'direct_import',
+          result_preview: 'Connectivity receipt capture started.',
         },
       }),
     });
@@ -208,6 +223,11 @@ describe('delegateWearablesBridgeTask', () => {
     expect(body.input.text).toContain('Observed RSSI: -42.');
     expect(body.client_context.feature).toBe('wearables_bridge');
     expect(body.client_context.trigger).toBe('target_connected');
+    expect(body.client_context.device_id).toBe('AA:BB');
+    expect(body.client_context.device_name).toBe('Ray-Ban Meta');
+    expect(body.client_context.target_connection_state).toBe('connected');
+    expect(body.client_context.target_last_seen_at).toBe(1700000000000);
+    expect(body.client_context.target_rssi).toBe(-42);
     expect(response.follow_on_task).toEqual({
       task_id: 'task-bridge-1',
       state: 'running',
@@ -215,6 +235,9 @@ describe('delegateWearablesBridgeTask', () => {
       provider_label: 'IPFS Accelerate',
       capability: 'agentic_fetch',
       summary: 'Wearables bridge inspection running.',
+      mcp_execution_mode: 'mcp_remote',
+      mcp_preferred_execution_mode: 'direct_import',
+      result_preview: 'Connectivity receipt capture started.',
     });
   });
 });
@@ -255,6 +278,9 @@ describe('confirmCommand', () => {
       provider_label: 'IPFS Accelerate',
       capability: 'agentic_fetch',
       summary: 'IPFS Accelerate agentic fetch running.',
+      mcp_execution_mode: null,
+      mcp_preferred_execution_mode: null,
+      result_preview: null,
     });
   });
 });
@@ -369,6 +395,12 @@ describe('getAgentTaskDetail', () => {
           provider_label: 'IPFS Datasets',
           mcp_preferred_execution_mode: 'direct_import',
           mcp_execution_mode: 'mcp_remote',
+          wearables_dat_media: [
+            {
+              uri: 'file:///tmp/dat-photo.jpg',
+              media_kind: 'image',
+            },
+          ],
         },
         result: { capability: 'dataset_discovery' },
       }),
@@ -387,6 +419,58 @@ describe('getAgentTaskDetail', () => {
     expect(response.provider_label).toBe('IPFS Datasets');
     expect(response.mcp_preferred_execution_mode).toBe('direct_import');
     expect(response.mcp_execution_mode).toBe('mcp_remote');
+    expect(response.media_attachments).toEqual([
+      {
+        uri: 'file:///tmp/dat-photo.jpg',
+        media_kind: 'image',
+      },
+    ]);
+  });
+});
+
+describe('attachAgentTaskMedia', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('posts uploaded media metadata to the task attach endpoint', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        task_id: 'task-123',
+        state: 'running',
+        message: 'Task media attached successfully',
+        media_count: 1,
+      }),
+    });
+
+    const response = await attachAgentTaskMedia('task-123', {
+      uri: 'file:///tmp/uploaded-image.jpg',
+      media_kind: 'image',
+      format: 'jpg',
+      mime_type: 'image/jpeg',
+      action: 'capture_photo',
+    });
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://example.test/v1/agents/tasks/task-123/media',
+      expect.objectContaining({
+        method: 'POST',
+      })
+    );
+    const [, request] = global.fetch.mock.calls[0];
+    expect(JSON.parse(request.body)).toEqual({
+      uri: 'file:///tmp/uploaded-image.jpg',
+      media_kind: 'image',
+      format: 'jpg',
+      mime_type: 'image/jpeg',
+      action: 'capture_photo',
+    });
+    expect(response.media_count).toBe(1);
   });
 });
 
@@ -520,10 +604,25 @@ describe('peer chat client helpers', () => {
   it('posts dev peer envelopes to the validation endpoint', async () => {
     global.fetch.mockResolvedValue({
       ok: true,
-      json: jest.fn().mockResolvedValue({ accepted: true }),
+      json: jest.fn().mockResolvedValue({
+        accepted: true,
+        payload_json: {
+          conversation_id: 'chat-1',
+          peer_id: 'peer-a',
+          sender_peer_id: 'peer-a',
+          text: 'hello',
+          priority: 'urgent',
+          timestamp_ms: 1,
+          task_snapshot: {
+            task_id: 'task-envelope',
+            provider_label: 'IPFS Accelerate',
+            summary: 'IPFS Accelerate agentic fetch running.',
+          },
+        },
+      }),
     });
 
-    await postDevPeerEnvelope('peer://demo', 'ZmFrZS1mcmFtZQ==');
+    const response = await postDevPeerEnvelope('peer://demo', 'ZmFrZS1mcmFtZQ==');
 
     expect(global.fetch).toHaveBeenCalledWith(
       'http://example.test/v1/dev/peer-envelope',
@@ -536,21 +635,67 @@ describe('peer chat client helpers', () => {
       peer_ref: 'peer://demo',
       frame_base64: 'ZmFrZS1mcmFtZQ==',
     });
+    expect(response.payload_json.task_snapshot).toEqual({
+      task_id: 'task-envelope',
+      state: null,
+      provider: null,
+      provider_label: 'IPFS Accelerate',
+      capability: null,
+      summary: 'IPFS Accelerate agentic fetch running.',
+      mcp_execution_mode: null,
+      mcp_preferred_execution_mode: null,
+      result_preview: null,
+    });
   });
 
   it('fetches peer chat history and recent conversations', async () => {
     global.fetch
       .mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ conversation_id: 'chat-1', messages: [] }),
+        json: jest.fn().mockResolvedValue({
+          conversation_id: 'chat-1',
+          messages: [
+            {
+              conversation_id: 'chat-1',
+              sender_peer_id: 'peer-a',
+              text: 'history message',
+              priority: 'urgent',
+              timestamp_ms: 1,
+              task_snapshot: {
+                task_id: 'task-history',
+                provider_label: 'IPFS Accelerate',
+                summary: 'IPFS Accelerate agentic fetch running.',
+              },
+            },
+          ],
+        }),
       })
       .mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ conversations: [] }),
+        json: jest.fn().mockResolvedValue({
+          conversations: [
+            {
+              conversation_id: 'chat-1',
+              peer_id: 'peer-a',
+              sender_peer_id: 'peer-a',
+              last_text: 'latest message',
+              priority: 'urgent',
+              last_timestamp_ms: 2,
+              message_count: 3,
+              task_snapshot: {
+                task_id: 'task-convo',
+                provider: 'ipfs_accelerate_mcp',
+                provider_label: 'IPFS Accelerate',
+                summary: 'IPFS Accelerate agentic fetch running.',
+                mcp_execution_mode: 'mcp_remote',
+              },
+            },
+          ],
+        }),
       });
 
-    await getDevPeerChatHistory('chat-1');
-    await getDevPeerChatConversations(5);
+    const history = await getDevPeerChatHistory('chat-1');
+    const conversations = await getDevPeerChatConversations(5);
 
     expect(global.fetch).toHaveBeenNthCalledWith(
       1,
@@ -562,15 +707,56 @@ describe('peer chat client helpers', () => {
       'http://example.test/v1/dev/peer-chat?limit=5',
       expect.objectContaining({ method: 'GET' })
     );
+    expect(history.messages[0].task_snapshot).toEqual({
+      task_id: 'task-history',
+      state: null,
+      provider: null,
+      provider_label: 'IPFS Accelerate',
+      capability: null,
+      summary: 'IPFS Accelerate agentic fetch running.',
+      mcp_execution_mode: null,
+      mcp_preferred_execution_mode: null,
+      result_preview: null,
+    });
+    expect(conversations.conversations[0].task_snapshot).toEqual({
+      task_id: 'task-convo',
+      state: null,
+      provider: 'ipfs_accelerate_mcp',
+      provider_label: 'IPFS Accelerate',
+      capability: null,
+      summary: 'IPFS Accelerate agentic fetch running.',
+      mcp_execution_mode: 'mcp_remote',
+      mcp_preferred_execution_mode: null,
+      result_preview: null,
+    });
   });
 
-  it('posts backend peer chat sends with conversation and priority', async () => {
+  it('posts backend peer chat sends with conversation, priority, and task snapshot metadata', async () => {
     global.fetch.mockResolvedValue({
       ok: true,
-      json: jest.fn().mockResolvedValue({ conversation_id: 'chat-1' }),
+      json: jest.fn().mockResolvedValue({
+        conversation_id: 'chat-1',
+        task_snapshot: {
+          task_id: 'task-1',
+          state: 'running',
+          provider: 'ipfs_accelerate_mcp',
+          provider_label: 'IPFS Accelerate',
+          capability: 'agentic_fetch',
+          summary: 'IPFS Accelerate agentic fetch running.',
+          mcp_execution_mode: 'mcp_remote',
+          mcp_preferred_execution_mode: 'direct_import',
+          result_preview: 'Connectivity receipt captured',
+        },
+      }),
     });
 
-    await postDevPeerChatSend('12D3KooWpeer', 'hello', 'chat-1', 'urgent');
+    const response = await postDevPeerChatSend(
+      '12D3KooWpeer',
+      'hello',
+      'chat-1',
+      'urgent',
+      'task-1'
+    );
 
     expect(global.fetch).toHaveBeenCalledWith(
       'http://example.test/v1/dev/peer-chat/send',
@@ -582,6 +768,18 @@ describe('peer chat client helpers', () => {
       text: 'hello',
       conversation_id: 'chat-1',
       priority: 'urgent',
+      task_id: 'task-1',
+    });
+    expect(response.task_snapshot).toEqual({
+      task_id: 'task-1',
+      state: 'running',
+      provider: 'ipfs_accelerate_mcp',
+      provider_label: 'IPFS Accelerate',
+      capability: 'agentic_fetch',
+      summary: 'IPFS Accelerate agentic fetch running.',
+      mcp_execution_mode: 'mcp_remote',
+      mcp_preferred_execution_mode: 'direct_import',
+      result_preview: 'Connectivity receipt captured',
     });
   });
 
@@ -738,5 +936,79 @@ describe('peer chat client helpers', () => {
     });
 
     await expect(getDevPeerChatOutboxStatus('12D3KooWlocal')).rejects.toThrow('dev mode required');
+  });
+});
+
+describe('dev media upload helpers', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('uploads dev audio through the audio compatibility endpoint', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        uri: 'file:///tmp/test-audio.m4a',
+        bytes: 123,
+        format: 'm4a',
+        media_kind: 'audio',
+        user_id: 'user-1',
+      }),
+    });
+
+    const response = await uploadDevAudio('ZmFrZS1hdWRpbw==', 'm4a');
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://example.test/v1/dev/audio',
+      expect.objectContaining({
+        method: 'POST',
+      })
+    );
+    const [, request] = global.fetch.mock.calls[0];
+    expect(JSON.parse(request.body)).toEqual({
+      data_base64: 'ZmFrZS1hdWRpbw==',
+      format: 'm4a',
+      media_kind: 'audio',
+    });
+    expect(response.media_kind).toBe('audio');
+  });
+
+  it('uploads generic dev media through the media endpoint', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        uri: 'file:///tmp/test-image.jpg',
+        bytes: 456,
+        format: 'jpg',
+        media_kind: 'image',
+        mime_type: 'image/jpeg',
+        user_id: 'user-1',
+      }),
+    });
+
+    const response = await uploadDevMedia('ZmFrZS1pbWFnZQ==', {
+      media_kind: 'image',
+      format: 'jpg',
+      mime_type: 'image/jpeg',
+    });
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      'http://example.test/v1/dev/media',
+      expect.objectContaining({
+        method: 'POST',
+      })
+    );
+    const [, request] = global.fetch.mock.calls[0];
+    expect(JSON.parse(request.body)).toEqual({
+      data_base64: 'ZmFrZS1pbWFnZQ==',
+      format: 'jpg',
+      media_kind: 'image',
+      mime_type: 'image/jpeg',
+    });
+    expect(response.mime_type).toBe('image/jpeg');
   });
 });

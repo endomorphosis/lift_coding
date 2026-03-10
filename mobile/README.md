@@ -237,6 +237,8 @@ For detailed build instructions, see [BUILD.md](BUILD.md).
 
 ## 📱 App Screens
 
+For a complete, code-aligned screen inventory, see [SCREENS_REFERENCE.md](SCREENS_REFERENCE.md).
+
 ### Status Screen
 
 - View backend connection status
@@ -472,7 +474,12 @@ mobile/
 │   │   ├── ConfirmationScreen.js
 │   │   ├── TTSScreen.js
 │   │   ├── SettingsScreen.js
-│   │   └── GlassesDiagnosticsScreen.js
+│   │   ├── NotificationsScreen.js
+│   │   ├── ResultsScreen.js
+│   │   ├── ActiveTasksScreen.js
+│   │   ├── TaskDetailScreen.js
+│   │   ├── GlassesDiagnosticsScreen.js
+│   │   └── PeerChatDiagnosticsScreen.js
 │   │
 │   ├── components/              # Reusable UI components
 │   │   ├── AudioRecorder.js
@@ -500,6 +507,7 @@ mobile/
 ├── app.json                     # Expo configuration
 ├── package.json                 # Dependencies
 ├── BUILD.md                     # Native build instructions
+├── SCREENS_REFERENCE.md          # Complete screen reference
 └── README.md                    # This file
 ```
 

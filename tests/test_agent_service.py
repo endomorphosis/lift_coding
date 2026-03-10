@@ -224,6 +224,35 @@ class TestAgentStatus:
         assert result["tasks"][0]["mcp_preferred_execution_mode"] == "direct_import"
         assert result["tasks"][0]["mcp_execution_mode"] == "mcp_remote"
 
+    def test_status_includes_runtime_metadata(self, agent_service, db_conn, test_user_id):
+        """Status payload should surface MCP runtime timing metadata."""
+        from handsfree.db.agent_tasks import create_agent_task
+
+        create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect connected wearable",
+            trace={
+                "mcp_capability": "workflow",
+                "mcp_started_at": "2026-03-09T00:00:00+00:00",
+                "mcp_timeout_s": 30.0,
+                "mcp_poll_interval_s": 2.0,
+                "mcp_result_envelope": {
+                    "summary": "Wearables bridge connectivity workflow running for Ray-Ban Meta.",
+                    "structured_output": {"workflow": "wearables_bridge_connectivity"},
+                    "follow_up_actions": [{"id": "agent_status", "label": "Check Task"}],
+                },
+            },
+        )
+
+        result = agent_service.get_status(user_id=test_user_id)
+
+        assert result["tasks"][0]["mcp_started_at"] == "2026-03-09T00:00:00+00:00"
+        assert result["tasks"][0]["mcp_timeout_s"] == 30.0
+        assert result["tasks"][0]["mcp_poll_interval_s"] == 2.0
+        assert isinstance(result["tasks"][0]["mcp_elapsed_s"], int)
+
 
 class TestAdvanceTaskState:
     """Test advancing task states via service."""
