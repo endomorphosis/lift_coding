@@ -124,6 +124,9 @@ from handsfree.models import (
     DevPeerChatOutboxResponse,
     DevPeerChatSendRequest,
     DevPeerChatSendResponse,
+    DevAudioUploadRequest,
+    DevMediaUploadRequest,
+    AgentTaskMediaAttachRequest,
     DevPeerEnvelopeRequest,
     DevPeerEnvelopeResponse,
     DevTransportSessionClearResponse,
@@ -208,6 +211,24 @@ processed_ai_requests: dict[str, AICapabilityExecuteResponse] = {}
 dev_peer_sessions: dict[str, str] = {}
 dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
 _peer_transport_provider = None
+
+
+def _get_cached_command_response(db: Any, key: str, endpoint: str) -> CommandResponse | None:
+    from handsfree.db.idempotency_keys import get_idempotency_key
+
+    cached_entry = get_idempotency_key(db, key)
+    if not cached_entry or cached_entry.endpoint != endpoint:
+        return None
+
+    try:
+        return CommandResponse(**cached_entry.response_data)
+    except Exception:
+        logger.warning(
+            "Ignoring incompatible idempotency payload for endpoint %s and key %s",
+            endpoint,
+            key,
+        )
+        return None
 
 FOLLOW_ON_TASK_INTENTS = {
     "agent.delegate",
@@ -798,8 +819,8 @@ def get_db():
 def get_command_router() -> CommandRouter:
     """Get or initialize command router with database connection."""
     global _command_router
-    if _command_router is None:
-        db = get_db()
+    db = get_db()
+    if _command_router is None or getattr(_command_router, "db_conn", None) is not db:
         _command_router = CommandRouter(
             _pending_action_manager, db_conn=db, github_provider=_github_provider
         )
@@ -830,6 +851,46 @@ def _not_found(
     )
 
 
+def _require_dev_mode(message: str) -> None:
+    """Guard dev-only endpoints behind HANDSFREE_AUTH_MODE=dev."""
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": message,
+            },
+        )
+
+
+def _invalid_request(
+    message: str,
+    *,
+    status_code: int = status.HTTP_400_BAD_REQUEST,
+) -> HTTPException:
+    """Build a consistent invalid_request API error."""
+    return HTTPException(
+        status_code=status_code,
+        detail={
+            "error": "invalid_request",
+            "message": message,
+        },
+    )
+
+
+def _invalid_parameter(message: str) -> HTTPException:
+    """Build a consistent invalid_parameter API error."""
+    return HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail={
+            "error": "invalid_parameter",
+            "message": message,
+        },
+    )
+
+
 async def _execute_ai_capability_request(
     request: AICapabilityExecuteRequest,
     user_id: CurrentUser,
@@ -843,13 +904,7 @@ async def _execute_ai_capability_request(
         resolved_capability_id = policy_capability_id or request.resolve_capability_id()
         request.validate_execution_requirements()
     except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": str(exc),
-            },
-        ) from exc
+        raise _invalid_request(str(exc)) from exc
     resolved_workflow = policy_workflow or request.resolve_workflow()
     if request.idempotency_key:
         from handsfree.db.idempotency_keys import get_idempotency_response
@@ -1630,16 +1685,7 @@ async def retry_webhook_processing(
         403: Endpoint disabled (not in dev mode).
     """
     # Dev-only check
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Retry endpoint is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Retry endpoint is only available in dev mode")
 
     db = get_db()
     from handsfree.db.webhook_events import (
@@ -1719,7 +1765,7 @@ async def retry_webhook_processing(
 
 @app.post("/v1/dev/audio")
 async def dev_upload_audio(
-    request: dict,
+    request: DevAudioUploadRequest,
     user_id: CurrentUser,
 ) -> JSONResponse:
     """Upload audio bytes to the backend for local/mobile development (dev-only).
@@ -1735,38 +1781,17 @@ async def dev_upload_audio(
     - Enforces a max decoded payload size.
     """
 
-    from handsfree.auth import get_auth_mode
+    _require_dev_mode("Dev audio upload is only available in dev mode")
 
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev audio upload is only available in dev mode",
-            },
-        )
-
-    data_base64 = request.get("data_base64") or request.get("audio_base64")
-    audio_format = str(request.get("format") or "m4a").lower()
+    data_base64 = request.resolved_data_base64()
+    audio_format = request.resolved_format()
 
     if not isinstance(data_base64, str) or not data_base64.strip():
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "Missing required field: data_base64 (or audio_base64)",
-            },
-        )
+        raise _invalid_request("Missing required field: data_base64 (or audio_base64)")
 
     allowed_exts = {"wav", "m4a", "mp3", "opus"}
     if audio_format not in allowed_exts:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": f"Unsupported audio format: {audio_format}",
-            },
-        )
+        raise _invalid_request(f"Unsupported audio format: {audio_format}")
 
     import base64
     import os
@@ -1780,22 +1805,10 @@ async def dev_upload_audio(
     try:
         audio_bytes = base64.b64decode(data_base64, validate=True)
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "data_base64 must be valid base64",
-            },
-        ) from e
+        raise _invalid_request("data_base64 must be valid base64") from e
 
     if len(audio_bytes) > max_size:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": f"Audio too large (max {max_size} bytes)",
-            },
-        )
+        raise _invalid_request(f"Audio too large (max {max_size} bytes)")
 
     file_id = uuid.uuid4().hex
     file_path = dev_dir / f"{file_id}.{audio_format}"
@@ -1815,54 +1828,27 @@ async def dev_upload_audio(
 
 @app.post("/v1/dev/media")
 async def dev_upload_media(
-    request: dict,
+    request: DevMediaUploadRequest,
     user_id: CurrentUser,
 ) -> JSONResponse:
     """Upload generic image or video bytes for local/mobile development (dev-only)."""
 
-    from handsfree.auth import get_auth_mode
+    _require_dev_mode("Dev media upload is only available in dev mode")
 
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev media upload is only available in dev mode",
-            },
-        )
-
-    media_kind = str(request.get("media_kind") or "image").lower()
+    media_kind = request.resolved_media_kind()
     if media_kind not in {"image", "video"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "media_kind must be one of: image, video",
-            },
-        )
+        raise _invalid_request("media_kind must be one of: image, video")
 
-    data_base64 = request.get("data_base64")
-    media_format = str(request.get("format") or ("jpg" if media_kind == "image" else "mp4")).lower()
+    data_base64 = request.resolved_data_base64()
+    media_format = request.resolved_format(media_kind)
     allowed_exts = {
         "image": {"jpg", "jpeg", "png", "heic", "webp"},
         "video": {"mp4", "mov", "m4v", "webm"},
     }
     if not isinstance(data_base64, str) or not data_base64.strip():
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "Missing required field: data_base64",
-            },
-        )
+        raise _invalid_request("Missing required field: data_base64")
     if media_format not in allowed_exts[media_kind]:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": f"Unsupported {media_kind} format: {media_format}",
-            },
-        )
+        raise _invalid_request(f"Unsupported {media_kind} format: {media_format}")
 
     import os
     import uuid
@@ -1874,27 +1860,15 @@ async def dev_upload_media(
     try:
         media_bytes = base64.b64decode(data_base64, validate=True)
     except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "data_base64 must be valid base64",
-            },
-        ) from exc
+        raise _invalid_request("data_base64 must be valid base64") from exc
 
     if len(media_bytes) > max_size:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": f"{media_kind.capitalize()} too large (max {max_size} bytes)",
-            },
-        )
+        raise _invalid_request(f"{media_kind.capitalize()} too large (max {max_size} bytes)")
 
     file_id = uuid.uuid4().hex
     file_path = dev_dir / f"{file_id}.{media_format}"
     file_path.write_bytes(media_bytes)
-    mime_type = request.get("mime_type")
+    mime_type = request.mime_type
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
@@ -1921,38 +1895,17 @@ async def dev_ingest_peer_envelope(
     by the backend, and returns an ack frame for valid message envelopes.
     """
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer envelope ingress is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer envelope ingress is only available in dev mode")
 
     try:
         frame = base64.b64decode(request.frame_base64, validate=True)
     except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "frame_base64 must be valid base64",
-            },
-        ) from exc
+        raise _invalid_request("frame_base64 must be valid base64") from exc
 
     try:
         envelope = decode_transport_envelope(frame)
     except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": str(exc),
-            },
-        ) from exc
+        raise _invalid_request(str(exc)) from exc
 
     dev_peer_sessions[envelope.peer_id] = envelope.session_id
 
@@ -2013,25 +1966,10 @@ async def dev_get_peer_chat_history(
 ) -> DevPeerChatHistoryResponse:
     """Return normalized dev peer chat history for a conversation id (dev-only)."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat history is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat history is only available in dev mode")
 
     if not conversation_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "conversation_id must be provided",
-            },
-        )
+        raise _invalid_request("conversation_id must be provided")
 
     return DevPeerChatHistoryResponse(
         conversation_id=conversation_id,
@@ -2046,16 +1984,7 @@ async def dev_list_peer_chat_conversations(
 ) -> DevPeerChatConversationsResponse:
     """Return recent normalized dev peer chat conversations (dev-only)."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat conversations are only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat conversations are only available in dev mode")
 
     return DevPeerChatConversationsResponse(
         conversations=dev_peer_chat_service.list_recent_conversations(limit=limit),
@@ -2066,16 +1995,7 @@ async def dev_list_peer_chat_conversations(
 async def dev_list_transport_sessions(user_id: CurrentUser) -> DevTransportSessionsResponse:
     """Return persisted transport session cursors for transport diagnostics (dev-only)."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev transport sessions are only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev transport sessions are only available in dev mode")
 
     transport = get_peer_transport()
     list_cursors = getattr(transport, "list_persisted_session_cursors", None)
@@ -2095,25 +2015,10 @@ async def dev_clear_transport_session(
 ) -> DevTransportSessionClearResponse:
     """Clear a persisted transport session cursor for transport diagnostics (dev-only)."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev transport session clearing is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev transport session clearing is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     transport = get_peer_transport()
     clear_cursor = getattr(transport, "clear_persisted_session_cursor", None)
@@ -2128,17 +2033,9 @@ async def dev_send_peer_chat(
 ) -> DevPeerChatSendResponse:
     """Send an outbound dev peer chat message via the configured transport."""
 
-    from handsfree.auth import get_auth_mode
     from handsfree.peer_chat import build_conversation_id
 
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat send is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat send is only available in dev mode")
 
     transport = get_peer_transport()
     local_identity = getattr(transport, "get_local_identity", lambda: None)()
@@ -2221,25 +2118,10 @@ async def dev_get_peer_chat_outbox(
 ) -> DevPeerChatOutboxResponse:
     """Fetch queued outbound dev peer chat messages for a handset peer id."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat outbox is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat outbox is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-    )
+        raise _invalid_request("peer_id must be provided")
 
     policy = dev_peer_chat_service.get_handset_delivery_policy(peer_id)
     summary = dev_peer_chat_service.summarize_outbound_messages(peer_id)
@@ -2271,25 +2153,10 @@ async def dev_get_peer_chat_outbox_status(
 ) -> DevPeerChatOutboxResponse:
     """Return queued outbox status without leasing or replay side effects."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat outbox status is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat outbox status is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     policy = dev_peer_chat_service.get_handset_delivery_policy(peer_id)
     summary = dev_peer_chat_service.summarize_outbound_messages(peer_id)
@@ -2320,25 +2187,10 @@ async def dev_ack_peer_chat_outbox(
 ) -> DevPeerChatOutboxAckResponse:
     """Acknowledge handset-delivered dev peer chat outbox messages."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat outbox ack is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat outbox ack is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     dev_peer_chat_service.record_handset_heartbeat(peer_id, acknowledged_outbox=True)
     return DevPeerChatOutboxAckResponse(
@@ -2361,25 +2213,10 @@ async def dev_release_peer_chat_outbox(
 ) -> DevPeerChatOutboxReleaseResponse:
     """Release leased outbox messages so they are deliverable again."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat outbox release is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat outbox release is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     return DevPeerChatOutboxReleaseResponse(
         peer_id=peer_id,
@@ -2401,25 +2238,10 @@ async def dev_promote_peer_chat_outbox(
 ) -> DevPeerChatOutboxPromoteResponse:
     """Promote queued outbox messages to urgent priority."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat outbox promote is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat outbox promote is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     return DevPeerChatOutboxPromoteResponse(
         peer_id=peer_id,
@@ -2441,25 +2263,10 @@ async def dev_record_peer_chat_handset_heartbeat(
 ) -> DevPeerChatHandsetSessionResponse:
     """Record a lightweight handset heartbeat for the dev peer chat relay."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat handset heartbeat is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat handset heartbeat is only available in dev mode")
 
     if not peer_id:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "peer_id must be provided",
-            },
-        )
+        raise _invalid_request("peer_id must be provided")
 
     return DevPeerChatHandsetSessionResponse(
         **dev_peer_chat_service.record_handset_heartbeat(
@@ -2479,16 +2286,7 @@ async def dev_get_peer_chat_handset_session(
 ) -> DevPeerChatHandsetSessionResponse:
     """Get the currently observed handset relay session state."""
 
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Dev peer chat handset status is only available in dev mode",
-            },
-        )
+    _require_dev_mode("Dev peer chat handset status is only available in dev mode")
 
     session = dev_peer_chat_service.get_handset_session(peer_id)
     if session is None:
@@ -2552,6 +2350,9 @@ async def submit_command(
 
     # Determine session ID: prefer header, fallback to idempotency_key
     session_id = x_session_id or request.idempotency_key
+    command_idempotency_key = (
+        f"command:{request.idempotency_key}" if request.idempotency_key else None
+    )
 
     # user_id is provided via authentication dependency (CurrentUser)
 
@@ -2566,18 +2367,19 @@ async def submit_command(
     )
 
     # Check idempotency - database first, then in-memory cache as optimization
-    if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
+    if command_idempotency_key:
         db = get_db()
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            # Reconstruct CommandResponse from cached data
-            return CommandResponse(**cached_response)
+        cached_response = _get_cached_command_response(
+            db,
+            command_idempotency_key,
+            "/v1/command",
+        )
+        if cached_response is not None:
+            return cached_response
 
         # Also check in-memory cache (backward compatibility)
-        if request.idempotency_key in processed_commands:
-            return processed_commands[request.idempotency_key]
+        if command_idempotency_key in processed_commands:
+            return processed_commands[command_idempotency_key]
 
     # Extract text from input (all branches either set text or return early)
     text: str
@@ -2838,22 +2640,22 @@ async def submit_command(
             entities=parsed_intent.entities,
         )
         response = await _handle_request_review_command(
-            pydantic_intent, text, request.idempotency_key, user_id
+            pydantic_intent, text, request.idempotency_key, user_id, request.profile
         )
         # Store for idempotency (both persistent and in-memory)
-        if request.idempotency_key:
+        if command_idempotency_key:
             from handsfree.db.idempotency_keys import store_idempotency_key
 
             db = get_db()
             store_idempotency_key(
                 db,
-                key=request.idempotency_key,
+                key=command_idempotency_key,
                 user_id=user_id,
                 endpoint="/v1/command",
                 response_data=response.model_dump(mode="json"),
                 expires_in_seconds=86400,  # 24 hours
             )
-            processed_commands[request.idempotency_key] = response
+            processed_commands[command_idempotency_key] = response
         return response
 
     # Route through CommandRouter for other intents
@@ -2921,19 +2723,19 @@ async def submit_command(
                 router._navigation_state[session_id] = (items, 0)
 
     # Store for idempotency (both persistent and in-memory)
-    if request.idempotency_key:
+    if command_idempotency_key:
         from handsfree.db.idempotency_keys import store_idempotency_key
 
         db = get_db()
         store_idempotency_key(
             db,
-            key=request.idempotency_key,
+            key=command_idempotency_key,
             user_id=user_id,
             endpoint="/v1/command",
             response_data=response.model_dump(mode="json"),
             expires_in_seconds=86400,  # 24 hours
         )
-        processed_commands[request.idempotency_key] = response
+        processed_commands[command_idempotency_key] = response
 
     # Record metrics for observability
     from handsfree.metrics import get_metrics_collector
@@ -3473,12 +3275,13 @@ async def confirm_command(
 
     # Check idempotency - database first, then in-memory cache as optimization
     if request.idempotency_key:
-        from handsfree.db.idempotency_keys import get_idempotency_response
-
-        cached_response = get_idempotency_response(db, request.idempotency_key)
-        if cached_response:
-            # Reconstruct CommandResponse from cached data
-            return CommandResponse(**cached_response)
+        cached_response = _get_cached_command_response(
+            db,
+            request.idempotency_key,
+            "/v1/commands/confirm",
+        )
+        if cached_response is not None:
+            return cached_response
 
         # Also check in-memory cache (backward compatibility)
         if request.idempotency_key in processed_commands:
@@ -4000,7 +3803,11 @@ async def merge_pr(
 
 
 async def _handle_request_review_command(
-    parsed_intent: ParsedIntent, text: str, idempotency_key: str | None, user_id: str
+    parsed_intent: ParsedIntent,
+    text: str,
+    idempotency_key: str | None,
+    user_id: str,
+    profile: Profile,
 ) -> CommandResponse:
     """Handle pr.request_review intent with policy evaluation.
 
@@ -4062,8 +3869,9 @@ async def _handle_request_review_command(
                 },
                 log_request={"reviewers": reviewers},
                 pending_summary=f"Request review from {reviewers_str} on {repo}#{pr_number}",
-                idempotency_key=idempotency_key,
+                idempotency_key=None,
                 anomaly_request_data={"reviewers": reviewers},
+                always_require_confirmation=profile == Profile.WORKOUT,
             ),
             idempotency_store=idempotency_store,
         )
@@ -4970,12 +4778,8 @@ async def get_notifications(
             since_clean = since.replace(" ", "+").replace("Z", "+00:00")
             since_dt = datetime.fromisoformat(since_clean)
         except (ValueError, TypeError) as e:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail={
-                    "error": "invalid_parameter",
-                    "message": f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}",
-                },
+            raise _invalid_parameter(
+                f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}"
             ) from e
 
     # Fetch notifications
@@ -6042,48 +5846,18 @@ async def list_agent_tasks(
     """
     # Validate limit
     if limit < 1 or limit > 100:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "limit must be between 1 and 100",
-            },
-        )
+        raise _invalid_parameter("limit must be between 1 and 100")
 
     # Validate offset
     if offset < 0:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "offset must be non-negative",
-            },
-        )
+        raise _invalid_parameter("offset must be non-negative")
 
     if result_view not in {"full", "normalized", "raw"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "result_view must be one of: full, normalized, raw",
-            },
-        )
+        raise _invalid_parameter("result_view must be one of: full, normalized, raw")
     if sort not in {"created_at", "updated_at"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "sort must be one of: created_at, updated_at",
-            },
-        )
+        raise _invalid_parameter("sort must be one of: created_at, updated_at")
     if direction not in {"asc", "desc"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "direction must be one of: asc, desc",
-            },
-        )
+        raise _invalid_parameter("direction must be one of: asc, desc")
 
     db = get_db()
     from handsfree.db.agent_tasks import get_agent_tasks
@@ -6212,7 +5986,7 @@ async def get_agent_task_detail(
 @app.post("/v1/agents/tasks/{task_id}/media")
 async def attach_agent_task_media(
     task_id: str,
-    request: dict,
+    request: AgentTaskMediaAttachRequest,
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
 ) -> JSONResponse:
@@ -6223,25 +5997,13 @@ async def attach_agent_task_media(
     db = get_db()
     task = _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
 
-    uri = request.get("uri")
+    uri = request.resolved_uri()
     if not isinstance(uri, str) or not uri.strip():
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "uri is required",
-            },
-        )
+        raise _invalid_request("uri is required")
 
-    media_kind = str(request.get("media_kind") or "image").lower()
+    media_kind = request.resolved_media_kind()
     if media_kind not in {"image", "video", "audio"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_request",
-                "message": "media_kind must be one of: image, video, audio",
-            },
-        )
+        raise _invalid_request("media_kind must be one of: image, video, audio")
 
     trace = task.trace if isinstance(task.trace, dict) else {}
     existing_media = trace.get("wearables_dat_media")
@@ -6249,13 +6011,13 @@ async def attach_agent_task_media(
     media_entry = {
         "uri": uri.strip(),
         "media_kind": media_kind,
-        "format": request.get("format"),
-        "mime_type": request.get("mime_type"),
-        "source_asset_uri": request.get("source_asset_uri"),
-        "action": request.get("action"),
-        "device_id": request.get("device_id"),
-        "device_name": request.get("device_name"),
-        "captured_at": request.get("captured_at") or datetime.now(UTC).isoformat(),
+        "format": request.format,
+        "mime_type": request.mime_type,
+        "source_asset_uri": request.source_asset_uri,
+        "action": request.action,
+        "device_id": request.device_id,
+        "device_name": request.device_name,
+        "captured_at": request.captured_at or datetime.now(UTC).isoformat(),
     }
     media_entry = {key: value for key, value in media_entry.items() if value is not None}
 
@@ -6358,37 +6120,13 @@ async def list_agent_results(
 ) -> JSONResponse:
     """List completed MCP-backed task results with normalized payloads."""
     if limit < 1 or limit > 100:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "limit must be between 1 and 100",
-            },
-        )
+        raise _invalid_parameter("limit must be between 1 and 100")
     if offset < 0:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "offset must be non-negative",
-            },
-        )
+        raise _invalid_parameter("offset must be non-negative")
     if sort not in {"created_at", "updated_at"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "sort must be one of: created_at, updated_at",
-            },
-        )
+        raise _invalid_parameter("sort must be one of: created_at, updated_at")
     if direction not in {"asc", "desc"}:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": "direction must be one of: asc, desc",
-            },
-        )
+        raise _invalid_parameter("direction must be one of: asc, desc")
 
     try:
         resolved_query = resolve_result_query(
@@ -6401,13 +6139,7 @@ async def list_agent_results(
             direction=direction,
         )
     except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "error": "invalid_parameter",
-                "message": str(exc),
-            },
-        ) from exc
+        raise _invalid_parameter(str(exc)) from exc
     view = resolved_query["view"]
     provider = resolved_query["provider"]
     capability = resolved_query["capability"]
@@ -6606,16 +6338,7 @@ async def start_agent_task(
         400: Invalid state transition.
     """
     # Dev-only check
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Task control endpoints are only available in dev mode",
-            },
-        )
+    _require_dev_mode("Task control endpoints are only available in dev mode")
 
     db = get_db()
     from handsfree.agents.service import AgentService
@@ -6680,16 +6403,7 @@ async def complete_agent_task(
         400: Invalid state transition.
     """
     # Dev-only check
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Task control endpoints are only available in dev mode",
-            },
-        )
+    _require_dev_mode("Task control endpoints are only available in dev mode")
 
     db = get_db()
     from handsfree.agents.service import AgentService
@@ -6755,16 +6469,7 @@ async def fail_agent_task(
         400: Invalid state transition.
     """
     # Dev-only check
-    from handsfree.auth import get_auth_mode
-
-    if get_auth_mode() != "dev":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": "forbidden",
-                "message": "Task control endpoints are only available in dev mode",
-            },
-        )
+    _require_dev_mode("Task control endpoints are only available in dev mode")
 
     db = get_db()
     from handsfree.agents.service import AgentService

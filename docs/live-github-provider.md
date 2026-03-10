@@ -48,8 +48,8 @@ def get_token_provider() -> TokenProvider:
 ```
 
 Checks the following environment variables (in order):
-1. `HANDS_FREE_GITHUB_MODE=live` - New, preferred environment variable
-2. `GITHUB_LIVE_MODE=true|1|yes` - Legacy compatibility
+1. `HANDS_FREE_GITHUB_MODE=live` - Explicit live-mode selector
+2. `GITHUB_LIVE_MODE=true|1|yes` - Alternate live-mode flag
 
 Requires `GITHUB_TOKEN` to be set for live mode to activate.
 
@@ -73,13 +73,13 @@ reviews = provider.get_pr_reviews("owner/repo", 123)
 
 ### Environment Configuration
 
-#### Enable Live Mode (Recommended)
+#### Enable Live Mode
 ```bash
 export HANDS_FREE_GITHUB_MODE=live
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-#### Legacy Configuration
+#### Alternate Configuration
 ```bash
 export GITHUB_LIVE_MODE=true
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx

@@ -875,6 +875,62 @@ class TestAgentTaskMediaAttach:
 
         assert response.status_code == 404
 
+    def test_attach_media_rejects_blank_uri(self, reset_db):
+        """Attach endpoint should reject missing or blank uri values."""
+        from handsfree.api import get_db
+        from handsfree.auth import FIXTURE_USER_ID
+
+        db = get_db()
+        task = create_agent_task(
+            conn=db,
+            user_id=FIXTURE_USER_ID,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect wearables bridge",
+        )
+
+        response = client.post(
+            f"/v1/agents/tasks/{task.id}/media",
+            json={
+                "uri": "   ",
+                "media_kind": "image",
+            },
+        )
+
+        assert response.status_code == 400
+        body = response.json()
+        assert body["error"] == "invalid_request"
+        assert body["message"] == "uri is required"
+
+    def test_attach_media_normalizes_media_kind_case(self, reset_db):
+        """Attach endpoint should normalize media_kind casing before persistence."""
+        from handsfree.api import get_db
+        from handsfree.auth import FIXTURE_USER_ID
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+
+        db = get_db()
+        task = create_agent_task(
+            conn=db,
+            user_id=FIXTURE_USER_ID,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect wearables bridge",
+        )
+
+        response = client.post(
+            f"/v1/agents/tasks/{task.id}/media",
+            json={
+                "uri": "file:///tmp/uploaded-audio.m4a",
+                "media_kind": "AuDiO",
+            },
+        )
+
+        assert response.status_code == 200
+        body = response.json()
+        assert body["media"]["media_kind"] == "audio"
+
+        updated_task = get_agent_task_by_id(conn=db, task_id=task.id)
+        assert updated_task is not None
+        assert updated_task.trace["wearables_dat_media"][0]["media_kind"] == "audio"
+
 
 class TestListAgentResults:
     """Test GET /v1/agents/results endpoint."""

@@ -12,6 +12,12 @@ from handsfree.models import ActionResult, CommandResponse, CommandStatus, Parse
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 
 
+def _format_execution_mode(mode: str | None) -> str:
+    if not mode:
+        return "unknown"
+    return "live mode" if mode == "api_live" else mode
+
+
 @dataclass
 class DirectActionRequest:
     """Configuration for processing a direct side-effect action request."""
@@ -415,7 +421,7 @@ def _execute_request_review(
             request={"reviewers": reviewers, "confirmed": True},
             result={
                 "status": "success",
-                "message": f"Review requested ({github_result.get('mode', 'unknown')})",
+                "message": f"Review requested ({_format_execution_mode(github_result.get('mode'))})",
                 "via_confirmation": True,
                 "via_router_token": via_router_token,
                 "github_response": github_result.get("response_data"),
@@ -486,7 +492,7 @@ def _execute_rerun_checks(
             request={"confirmed": True},
             result={
                 "status": "success",
-                "message": f"Checks re-run ({github_result.get('mode', 'unknown')})",
+                "message": f"Checks re-run ({_format_execution_mode(github_result.get('mode'))})",
                 "via_confirmation": True,
                 "run_id": github_result.get("run_id"),
             },
@@ -572,7 +578,7 @@ def _execute_comment(
             request={"comment_body": comment_body, "confirmed": True},
             result={
                 "status": "success",
-                "message": f"Comment posted ({github_result.get('mode', 'unknown')})",
+                "message": f"Comment posted ({_format_execution_mode(github_result.get('mode'))})",
                 "via_confirmation": True,
                 "via_router_token": via_router_token,
                 "github_response": github_result.get("response_data"),
@@ -655,7 +661,7 @@ def _execute_merge(
             request={"confirmed": True, "merge_method": merge_method},
             result={
                 "status": "success",
-                "message": f"Merged ({github_result.get('mode', 'unknown')})",
+                "message": f"PR merged ({_format_execution_mode(github_result.get('mode'))})",
                 "via_confirmation": True,
                 "via_router_token": via_router_token,
                 "github_response": github_result.get("response_data"),
@@ -737,7 +743,7 @@ def _execute_direct_request_review(
             request={"reviewers": reviewers},
             result={
                 "status": "success",
-                "message": f"Review requested ({github_result.get('mode', 'unknown')})",
+                "message": f"Review requested ({_format_execution_mode(github_result.get('mode'))})",
                 "github_response": github_result.get("response_data"),
             },
             idempotency_key=idempotency_key,
@@ -788,7 +794,7 @@ def _execute_direct_rerun(
             request={},
             result={
                 "status": "success",
-                "message": f"Checks re-run ({github_result.get('mode', 'unknown')})",
+                "message": f"Checks re-run ({_format_execution_mode(github_result.get('mode'))})",
                 "run_id": github_result.get("run_id"),
             },
             idempotency_key=idempotency_key,

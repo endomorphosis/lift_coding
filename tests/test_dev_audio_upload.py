@@ -114,3 +114,63 @@ def test_dev_audio_upload_accepts_audio_base64_alias(tmp_path, test_user_id):
         saved_path = Path(body["uri"].removeprefix("file://"))
         assert saved_path.exists()
         assert saved_path.read_bytes() == audio_bytes
+
+
+def test_dev_audio_upload_normalizes_format_case(tmp_path, test_user_id):
+    audio_bytes = b"RIFFxxxxWAVEfmt case"
+    payload = {
+        "data_base64": base64.b64encode(audio_bytes).decode("ascii"),
+        "format": "WAV",
+    }
+
+    with patch.dict(
+        os.environ,
+        {
+            "HANDSFREE_AUTH_MODE": "dev",
+            "HANDSFREE_DEV_AUDIO_DIR": str(tmp_path),
+            "HANDSFREE_DEV_AUDIO_MAX_BYTES": "1048576",
+        },
+    ):
+        resp = client.post(
+            "/v1/dev/audio",
+            headers={"X-User-Id": test_user_id},
+            json=payload,
+        )
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["format"] == "wav"
+    saved_path = Path(body["uri"].removeprefix("file://"))
+    assert saved_path.suffix == ".wav"
+    assert saved_path.exists()
+    assert saved_path.read_bytes() == audio_bytes
+
+
+def test_dev_audio_upload_prefers_data_base64_when_both_fields_present(tmp_path, test_user_id):
+    primary_audio_bytes = b"RIFFxxxxWAVEfmt primary"
+    alias_audio_bytes = b"RIFFxxxxWAVEfmt alias"
+    payload = {
+        "data_base64": base64.b64encode(primary_audio_bytes).decode("ascii"),
+        "audio_base64": base64.b64encode(alias_audio_bytes).decode("ascii"),
+        "format": "wav",
+    }
+
+    with patch.dict(
+        os.environ,
+        {
+            "HANDSFREE_AUTH_MODE": "dev",
+            "HANDSFREE_DEV_AUDIO_DIR": str(tmp_path),
+            "HANDSFREE_DEV_AUDIO_MAX_BYTES": "1048576",
+        },
+    ):
+        resp = client.post(
+            "/v1/dev/audio",
+            headers={"X-User-Id": test_user_id},
+            json=payload,
+        )
+
+    assert resp.status_code == 200
+    body = resp.json()
+    saved_path = Path(body["uri"].removeprefix("file://"))
+    assert saved_path.exists()
+    assert saved_path.read_bytes() == primary_audio_bytes

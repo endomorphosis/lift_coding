@@ -1291,6 +1291,124 @@ class TTSRequest(BaseModel):
     )
 
 
+class DevAudioUploadRequest(BaseModel):
+    """Dev-only audio upload payload."""
+
+    data_base64: str | None = Field(
+        default=None,
+        description="Base64-encoded audio payload.",
+    )
+    audio_base64: str | None = Field(
+        default=None,
+        description="Backward-compatible alias for data_base64.",
+    )
+    format: str = Field(
+        default="m4a",
+        description="Audio file extension/format (e.g. wav, m4a, mp3, opus).",
+    )
+
+    def resolved_data_base64(self) -> str | None:
+        """Return canonical base64 audio payload from either accepted field."""
+        payload = self.data_base64 if isinstance(self.data_base64, str) else self.audio_base64
+        if not isinstance(payload, str):
+            return None
+        payload = payload.strip()
+        return payload or None
+
+    def resolved_format(self) -> str:
+        """Return normalized audio format with default fallback."""
+        return str(self.format or "m4a").lower()
+
+
+class DevMediaUploadRequest(BaseModel):
+    """Dev-only generic media upload payload."""
+
+    data_base64: str | None = Field(
+        default=None,
+        description="Base64-encoded media payload.",
+    )
+    media_kind: str | None = Field(
+        default="image",
+        description="Media kind hint (image or video).",
+    )
+    format: str | None = Field(
+        default=None,
+        description="Media file extension/format.",
+    )
+    mime_type: str | None = Field(
+        default=None,
+        description="Optional MIME type for downstream consumers.",
+    )
+
+    def resolved_data_base64(self) -> str | None:
+        """Return stripped media base64 payload when present."""
+        if not isinstance(self.data_base64, str):
+            return None
+        payload = self.data_base64.strip()
+        return payload or None
+
+    def resolved_media_kind(self) -> str:
+        """Return normalized media kind defaulting to image."""
+        return str(self.media_kind or "image").lower()
+
+    def resolved_format(self, media_kind: str) -> str:
+        """Return normalized format with media-kind-aware fallback."""
+        default_format = "jpg" if media_kind == "image" else "mp4"
+        return str(self.format or default_format).lower()
+
+
+class AgentTaskMediaAttachRequest(BaseModel):
+    """Request payload to attach media metadata to an agent task trace."""
+
+    uri: str | None = Field(
+        default=None,
+        description="Stored media URI to attach to task trace.",
+    )
+    media_kind: str | None = Field(
+        default="image",
+        description="Media kind (image, video, or audio).",
+    )
+    format: str | None = Field(
+        default=None,
+        description="Media file extension/format.",
+    )
+    mime_type: str | None = Field(
+        default=None,
+        description="Optional MIME type associated with the media.",
+    )
+    source_asset_uri: str | None = Field(
+        default=None,
+        description="Original client-side asset URI (if available).",
+    )
+    action: str | None = Field(
+        default=None,
+        description="Capture action identifier (photo, video_start, etc).",
+    )
+    device_id: str | None = Field(
+        default=None,
+        description="Source wearable device identifier.",
+    )
+    device_name: str | None = Field(
+        default=None,
+        description="Human-readable source wearable name.",
+    )
+    captured_at: str | None = Field(
+        default=None,
+        description="ISO-8601 timestamp for when media was captured.",
+    )
+
+    def resolved_uri(self) -> str | None:
+        """Return stripped media URI when present."""
+        if not isinstance(self.uri, str):
+            return None
+        uri = self.uri.strip()
+        return uri or None
+
+    def resolved_media_kind(self) -> str:
+        """Return normalized media kind defaulting to image."""
+        return str(self.media_kind or "image").lower()
+
+
 class DevPeerEnvelopeRequest(BaseModel):
     """Dev-only peer envelope ingress request."""
 

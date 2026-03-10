@@ -100,3 +100,64 @@ def test_dev_media_upload_forbidden_outside_dev_mode(test_user_id):
             json=payload,
         )
         assert resp.status_code in (401, 403)
+
+
+def test_dev_media_upload_normalizes_media_kind_case(tmp_path, test_user_id):
+    image_bytes = b"\x89PNG\r\n\x1a\ncasekind"
+    payload = {
+        "data_base64": base64.b64encode(image_bytes).decode("ascii"),
+        "media_kind": "ImAgE",
+        "format": "png",
+    }
+
+    with patch.dict(
+        os.environ,
+        {
+            "HANDSFREE_AUTH_MODE": "dev",
+            "HANDSFREE_DEV_MEDIA_DIR": str(tmp_path),
+            "HANDSFREE_DEV_MEDIA_MAX_BYTES": "1048576",
+        },
+    ):
+        resp = client.post(
+            "/v1/dev/media",
+            headers={"X-User-Id": test_user_id},
+            json=payload,
+        )
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["media_kind"] == "image"
+    saved_path = Path(body["uri"].removeprefix("file://"))
+    assert saved_path.exists()
+    assert saved_path.read_bytes() == image_bytes
+
+
+def test_dev_media_upload_uses_default_video_format(tmp_path, test_user_id):
+    video_bytes = b"\x00\x00\x00\x20ftypisomvideodata"
+    payload = {
+        "data_base64": base64.b64encode(video_bytes).decode("ascii"),
+        "media_kind": "video",
+    }
+
+    with patch.dict(
+        os.environ,
+        {
+            "HANDSFREE_AUTH_MODE": "dev",
+            "HANDSFREE_DEV_MEDIA_DIR": str(tmp_path),
+            "HANDSFREE_DEV_MEDIA_MAX_BYTES": "1048576",
+        },
+    ):
+        resp = client.post(
+            "/v1/dev/media",
+            headers={"X-User-Id": test_user_id},
+            json=payload,
+        )
+
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["media_kind"] == "video"
+    assert body["format"] == "mp4"
+    saved_path = Path(body["uri"].removeprefix("file://"))
+    assert saved_path.suffix == ".mp4"
+    assert saved_path.exists()
+    assert saved_path.read_bytes() == video_bytes

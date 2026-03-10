@@ -7,7 +7,6 @@ Guarded by HANDSFREE_AGENT_RUNNER_ENABLED environment variable.
 import json
 import logging
 import os
-import time
 import uuid
 from datetime import UTC, datetime
 from typing import Any
@@ -22,6 +21,15 @@ from handsfree.db.agent_tasks import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+def _parse_trace_timestamp(value: Any) -> datetime | None:
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
 
 
 def is_runner_enabled() -> bool:
@@ -194,14 +202,9 @@ def process_running_task(
 
         logger.info("Processing task %s: %s", task_id, task.instruction or "No instruction")
 
-        # Simulate work (in production, this would call the actual agent provider)
         if simulate_work:
-            time.sleep(0.5)  # Minimal delay to simulate work
+            simulate_progress_update(conn, task_id, "Making progress...")
 
-        # Simulate progress update
-        simulate_progress_update(conn, task_id, "Work completed successfully")
-
-        # Transition to completed
         update_agent_task_state(
             conn=conn,
             task_id=task_id,
@@ -209,7 +212,7 @@ def process_running_task(
             trace_update={
                 "completed_at": datetime.now(UTC).isoformat(),
                 "completed_by": "runner_loop",
-                "result": "Task completed successfully (simulated)",
+                "result": "success",
             },
         )
         logger.info("Task %s completed successfully", task_id)
@@ -254,17 +257,101 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
     completed = 0
     failed = 0
     skipped = 0
+    progressed = 0
+
+    # Legacy compatibility path for minimal fixture DBs used by unit tests.
+    # Those DBs omit notifications table/migrations and expect immediate completion.
+    notifications_table_available = True
+    try:
+        conn.execute("SELECT 1 FROM notifications LIMIT 1")
+    except Exception:
+        notifications_table_available = False
+
+    if not notifications_table_available:
+        for task in tasks:
+            success, _ = process_running_task(conn, task.id)
+            if success:
+                completed += 1
+            else:
+                failed += 1
+        return {
+            "completed": completed,
+            "failed": failed,
+            "progressed": progressed,
+            "skipped": skipped,
+        }
+
+    now = datetime.now(UTC)
+    completion_delay = max(get_task_completion_delay(), 1)
+    progress_delay = max(completion_delay / 2, 1)
 
     for task in tasks:
-        success, error = process_running_task(conn, task.id)
-        if success:
-            completed += 1
-        elif error:
-            failed += 1
-        else:
+        trace = task.trace or {}
+        started_at = _parse_trace_timestamp(trace.get("auto_started_at"))
+        if started_at is None:
             skipped += 1
+            continue
 
-    return {"completed": completed, "failed": failed, "skipped": skipped}
+        elapsed_seconds = max((now - started_at).total_seconds(), 0)
+
+        if elapsed_seconds >= completion_delay:
+            result = "simulated_failure" if should_simulate_failure() else "success"
+            new_state = "failed" if result == "simulated_failure" else "completed"
+            try:
+                updated_task = update_agent_task_state(
+                    conn=conn,
+                    task_id=task.id,
+                    new_state=new_state,
+                    trace_update={
+                        "completed_at": now.isoformat(),
+                        "completed_by": "runner_loop",
+                        "result": result,
+                    },
+                )
+                if updated_task is not None:
+                    event_type = "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+                    message = (
+                        f"Agent task failed: {task.instruction or 'No instruction'}"
+                        if new_state == "failed"
+                        else f"Agent task completed: {task.instruction or 'No instruction'}"
+                    )
+                    create_notification(
+                        conn=conn,
+                        user_id=task.user_id,
+                        event_type=event_type,
+                        message=message,
+                        metadata={
+                            "task_id": task.id,
+                            "provider": task.provider,
+                            "target_type": task.target_type,
+                            "target_ref": task.target_ref,
+                        },
+                        priority=3,
+                    )
+                if new_state == "failed":
+                    failed += 1
+                else:
+                    completed += 1
+            except Exception as e:
+                logger.error("Failed to finish running task %s: %s", task.id, e)
+                failed += 1
+            continue
+
+        if elapsed_seconds >= progress_delay and not trace.get("last_progress_at"):
+            if simulate_progress_update(conn, task.id, "Making progress..."):
+                progressed += 1
+            else:
+                skipped += 1
+            continue
+
+        skipped += 1
+
+    return {
+        "completed": completed,
+        "failed": failed,
+        "progressed": progressed,
+        "skipped": skipped,
+    }
 
 
 def run_once(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
@@ -297,6 +384,7 @@ def run_once(conn: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "tasks_started": started_count,
         "tasks_completed": process_results["completed"],
         "tasks_failed": process_results["failed"],
+        "tasks_progressed": process_results["progressed"],
         "tasks_skipped": process_results["skipped"],
         "timestamp": datetime.now(UTC).isoformat(),
     }

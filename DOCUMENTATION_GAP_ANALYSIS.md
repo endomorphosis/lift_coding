@@ -1,5 +1,7 @@
 # Documentation Gap Analysis: HandsFree Dev Companion
 
+Historical note: this file is a point-in-time audit snapshot from March 9, 2026. It may intentionally describe gaps that have since been closed, so treat the current active docs and code as the source of truth.
+
 **Analysis Date:** March 9, 2026  
 **Scope:** Comparison of CODEBASE_INVENTORY.md features against README.md, GETTING_STARTED.md, ARCHITECTURE.md, CONFIGURATION.md, mobile/README.md, AUTHENTICATION.md, and spec/openapi.yaml
 

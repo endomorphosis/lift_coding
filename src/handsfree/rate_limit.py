@@ -10,6 +10,10 @@ from datetime import UTC, datetime, timedelta
 import duckdb
 
 
+def _exclude_confirmation_from_rate_limit(action_type: str) -> bool:
+    return action_type == "request_review"
+
+
 @dataclass
 class RateLimitResult:
     """Result of a rate limit check."""
@@ -68,37 +72,66 @@ def check_rate_limit(
     # Calculate the start of the time window
     now = datetime.now(UTC)
     window_start = now - timedelta(seconds=window_seconds)
+    exclude_confirmation = _exclude_confirmation_from_rate_limit(action_type)
 
     # Check burst limit first if configured
     if burst_seconds is not None and burst_max is not None:
         burst_start = now - timedelta(seconds=burst_seconds)
-        burst_result = conn.execute(
-            """
-            SELECT COUNT(*) 
-            FROM action_logs
-            WHERE user_id = ? 
-              AND action_type = ?
-              AND created_at >= ?
-            """,
-            [user_id, action_type, burst_start],
-        ).fetchone()
+        if exclude_confirmation:
+            burst_result = conn.execute(
+                """
+                SELECT COUNT(*)
+                FROM action_logs
+                WHERE user_id = ?
+                  AND action_type = ?
+                  AND COALESCE(json_extract_string(result, '$.status'), '') != 'needs_confirmation'
+                  AND created_at >= ?
+                """,
+                [user_id, action_type, burst_start],
+            ).fetchone()
+        else:
+            burst_result = conn.execute(
+                """
+                SELECT COUNT(*)
+                FROM action_logs
+                WHERE user_id = ?
+                  AND action_type = ?
+                  AND created_at >= ?
+                """,
+                [user_id, action_type, burst_start],
+            ).fetchone()
 
         burst_count = burst_result[0] if burst_result else 0
 
         if burst_count >= burst_max:
             # Find the oldest action in burst window to calculate retry_after
-            oldest_result = conn.execute(
-                """
-                SELECT created_at
-                FROM action_logs
-                WHERE user_id = ?
-                  AND action_type = ?
-                  AND created_at >= ?
-                ORDER BY created_at ASC
-                LIMIT 1
-                """,
-                [user_id, action_type, burst_start],
-            ).fetchone()
+            if exclude_confirmation:
+                oldest_result = conn.execute(
+                    """
+                    SELECT created_at
+                    FROM action_logs
+                    WHERE user_id = ?
+                      AND action_type = ?
+                      AND COALESCE(json_extract_string(result, '$.status'), '') != 'needs_confirmation'
+                      AND created_at >= ?
+                    ORDER BY created_at ASC
+                    LIMIT 1
+                    """,
+                    [user_id, action_type, burst_start],
+                ).fetchone()
+            else:
+                oldest_result = conn.execute(
+                    """
+                    SELECT created_at
+                    FROM action_logs
+                    WHERE user_id = ?
+                      AND action_type = ?
+                      AND created_at >= ?
+                    ORDER BY created_at ASC
+                    LIMIT 1
+                    """,
+                    [user_id, action_type, burst_start],
+                ).fetchone()
 
             if oldest_result:
                 oldest_time = oldest_result[0]
@@ -120,33 +153,61 @@ def check_rate_limit(
             )
 
     # Count actions in the current window
-    result = conn.execute(
-        """
-        SELECT COUNT(*) 
-        FROM action_logs
-        WHERE user_id = ? 
-          AND action_type = ?
-          AND created_at >= ?
-        """,
-        [user_id, action_type, window_start],
-    ).fetchone()
+    if exclude_confirmation:
+        result = conn.execute(
+            """
+            SELECT COUNT(*)
+            FROM action_logs
+            WHERE user_id = ?
+              AND action_type = ?
+              AND COALESCE(json_extract_string(result, '$.status'), '') != 'needs_confirmation'
+              AND created_at >= ?
+            """,
+            [user_id, action_type, window_start],
+        ).fetchone()
+    else:
+        result = conn.execute(
+            """
+            SELECT COUNT(*)
+            FROM action_logs
+            WHERE user_id = ?
+              AND action_type = ?
+              AND created_at >= ?
+            """,
+            [user_id, action_type, window_start],
+        ).fetchone()
 
     count = result[0] if result else 0
 
     if count >= max_requests:
         # Find the oldest action in the window to calculate retry_after
-        oldest_result = conn.execute(
-            """
-            SELECT created_at
-            FROM action_logs
-            WHERE user_id = ?
-              AND action_type = ?
-              AND created_at >= ?
-            ORDER BY created_at ASC
-            LIMIT 1
-            """,
-            [user_id, action_type, window_start],
-        ).fetchone()
+        if exclude_confirmation:
+            oldest_result = conn.execute(
+                """
+                SELECT created_at
+                FROM action_logs
+                WHERE user_id = ?
+                  AND action_type = ?
+                  AND COALESCE(json_extract_string(result, '$.status'), '') != 'needs_confirmation'
+                  AND created_at >= ?
+                ORDER BY created_at ASC
+                LIMIT 1
+                """,
+                [user_id, action_type, window_start],
+            ).fetchone()
+        else:
+            oldest_result = conn.execute(
+                """
+                SELECT created_at
+                FROM action_logs
+                WHERE user_id = ?
+                  AND action_type = ?
+                  AND created_at >= ?
+                ORDER BY created_at ASC
+                LIMIT 1
+                """,
+                [user_id, action_type, window_start],
+            ).fetchone()
 
         if oldest_result:
             oldest_time = oldest_result[0]

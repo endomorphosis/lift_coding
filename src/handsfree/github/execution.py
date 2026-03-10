@@ -13,6 +13,14 @@ from handsfree.github.client import (
 )
 
 
+def _normalize_mode_label(mode: str) -> str:
+    if mode == "api_live":
+        return "api_live"
+    if mode.startswith("fixture"):
+        return "fixture"
+    return mode.replace("_", " ")
+
+
 def cli_enabled() -> bool:
     """Return whether CLI-backed GitHub actions are enabled."""
     return os.getenv("HANDSFREE_GH_CLI_ENABLED", "false").lower() == "true"
@@ -32,7 +40,7 @@ def execute_request_review_action(
     """Execute request-review through CLI, API, or fixture fallback."""
     if cli_enabled() or fixture_mode_enabled():
         result = GitHubCLIAdapter().request_review(repo, pr_number, reviewers)
-        result["mode"] = result["trace"]["source"]
+        result["mode"] = _normalize_mode_label(result["trace"]["source"])
         return result
 
     auth_provider = get_default_auth_provider()
@@ -47,7 +55,7 @@ def execute_request_review_action(
             reviewers=reviewers,
             token=token,
         )
-        result["mode"] = "api_live"
+        result["mode"] = _normalize_mode_label("api_live")
         return result
 
     return {
@@ -55,7 +63,7 @@ def execute_request_review_action(
         "message": f"Review requested from {', '.join(reviewers)}",
         "url": f"https://github.com/{repo}/pull/{pr_number}",
         "response_data": None,
-        "mode": "fixture",
+        "mode": _normalize_mode_label("fixture"),
     }
 
 
@@ -68,7 +76,7 @@ def execute_merge_action(
     """Execute merge through CLI, API, or fixture fallback."""
     if cli_enabled() or fixture_mode_enabled():
         result = GitHubCLIAdapter().merge_pr(repo, pr_number, merge_method)
-        result["mode"] = result["trace"]["source"]
+        result["mode"] = _normalize_mode_label(result["trace"]["source"])
         return result
 
     auth_provider = get_default_auth_provider()
@@ -83,7 +91,7 @@ def execute_merge_action(
             merge_method=merge_method,
             token=token,
         )
-        result["mode"] = "api_live"
+        result["mode"] = _normalize_mode_label("api_live")
         return result
 
     return {
@@ -91,7 +99,7 @@ def execute_merge_action(
         "message": f"PR #{pr_number} merged successfully",
         "url": f"https://github.com/{repo}/pull/{pr_number}",
         "response_data": None,
-        "mode": "fixture",
+        "mode": _normalize_mode_label("fixture"),
     }
 
 
@@ -112,7 +120,7 @@ def execute_rerun_action(
             pr_number=pr_number,
             token=token,
         )
-        result["mode"] = "api_live"
+        result["mode"] = _normalize_mode_label("api_live")
         return result
 
     return {
@@ -120,7 +128,7 @@ def execute_rerun_action(
         "message": f"Workflow checks re-run on {repo}#{pr_number}",
         "url": f"https://github.com/{repo}/pull/{pr_number}",
         "response_data": None,
-        "mode": "fixture",
+        "mode": _normalize_mode_label("fixture"),
     }
 
 
@@ -133,7 +141,7 @@ def execute_comment_action(
     """Execute comment through CLI, API, or fixture fallback."""
     if cli_enabled() or fixture_mode_enabled():
         result = GitHubCLIAdapter().comment_on_pr(repo, pr_number, comment_body)
-        result["mode"] = result["trace"]["source"]
+        result["mode"] = _normalize_mode_label(result["trace"]["source"])
         return result
 
     auth_provider = get_default_auth_provider()
@@ -148,7 +156,7 @@ def execute_comment_action(
             body=comment_body,
             token=token,
         )
-        result["mode"] = "api_live"
+        result["mode"] = _normalize_mode_label("api_live")
         return result
 
     preview = comment_body[:50] + "..." if len(comment_body) > 50 else comment_body
@@ -157,5 +165,5 @@ def execute_comment_action(
         "message": "Comment posted",
         "url": f"https://github.com/{repo}/pull/{pr_number}",
         "response_data": {"preview": preview},
-        "mode": "fixture",
+        "mode": _normalize_mode_label("fixture"),
     }

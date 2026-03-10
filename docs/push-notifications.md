@@ -1,14 +1,15 @@
 # Push Notifications Configuration
 
-This document describes how to configure push notifications for mobile (APNS/FCM) and web (WebPush) clients in the HandsFree Dev Companion backend.
+This document describes how to configure push notifications for mobile and web clients in the HandsFree Dev Companion backend.
 
 ## Overview
 
-The notification system supports three delivery platforms:
+The notification system supports four delivery platforms:
 
 1. **WebPush** - For browser-based push notifications
 2. **APNS** (Apple Push Notification Service) - For iOS devices
 3. **FCM** (Firebase Cloud Messaging) - For Android devices
+4. **Expo** - For Expo-managed mobile clients using Expo Push tokens
 
 ## Architecture
 
@@ -20,7 +21,7 @@ Mobile clients register their push tokens via the API endpoint:
 POST /v1/notifications/subscriptions
 {
   "endpoint": "<device-token-or-url>",
-  "platform": "apns|fcm|webpush",
+   "platform": "apns|fcm|webpush|expo",
   "subscription_keys": { /* platform-specific keys */ }
 }
 ```
@@ -34,7 +35,7 @@ POST /v1/notifications/subscriptions
 
 ### Provider Selection
 
-- Each subscription has a `platform` field (`webpush`, `apns`, or `fcm`)
+- Each subscription has a `platform` field (`webpush`, `apns`, `fcm`, or `expo`)
 - The `get_provider_for_platform()` function selects the correct provider
 - Providers are initialized with credentials from environment variables
 
@@ -49,6 +50,37 @@ HANDSFREE_NOTIFICATION_PROVIDER=dev
 ```
 
 This logs notifications without sending them to any external service.
+
+### Expo (Expo Push Service)
+
+Expo-managed mobile clients can register Expo push tokens directly with the backend.
+
+#### Backend Configuration
+
+```bash
+HANDSFREE_EXPO_MODE=real
+HANDSFREE_EXPO_ACCESS_TOKEN=<optional-expo-access-token>
+```
+
+Notes:
+
+- `HANDSFREE_EXPO_MODE=stub` keeps Expo delivery disabled while preserving registration flows for development.
+- `HANDSFREE_EXPO_ACCESS_TOKEN` is optional and mainly useful for authenticated or higher-throughput Expo sends.
+
+#### Client Registration
+
+Expo clients should:
+1. Request notification permission in the app
+2. Obtain the Expo push token
+3. Register that token with `platform: "expo"`
+
+```json
+{
+   "endpoint": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+   "platform": "expo",
+   "subscription_keys": {}
+}
+```
 
 ### WebPush (Browser Push)
 
@@ -166,7 +198,7 @@ X-User-ID: <user-id>
 
 {
   "endpoint": "<device-token-or-subscription-url>",
-  "platform": "apns",
+   "platform": "apns",
   "subscription_keys": {}
 }
 ```
@@ -207,7 +239,7 @@ CREATE TABLE notification_subscriptions (
   id                  UUID PRIMARY KEY,
   user_id             UUID NOT NULL,
   endpoint            TEXT NOT NULL,        -- Device token or subscription URL
-  platform            VARCHAR(20) NOT NULL, -- 'webpush', 'apns', or 'fcm'
+   platform            VARCHAR(20) NOT NULL, -- 'webpush', 'apns', 'fcm', or 'expo'
   subscription_keys   JSON,                 -- Platform-specific keys
   created_at          TIMESTAMPTZ NOT NULL,
   updated_at          TIMESTAMPTZ NOT NULL
@@ -221,6 +253,7 @@ CREATE TABLE notification_subscriptions (
 - ✅ **WebPush**: Production-ready via `pywebpush`
 - ✅ **APNS**: Supports both stub mode and real delivery via APNS HTTP/2
 - ✅ **FCM**: Supports both stub mode and real delivery via FCM HTTP v1
+- ✅ **Expo**: Supports both stub mode and real delivery via Expo Push
 
 ### Enabling Real APNS/FCM Delivery
 

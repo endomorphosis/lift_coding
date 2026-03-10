@@ -438,7 +438,10 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
         """
         if not self.live_mode_enabled:
             return None
-        return self._env_provider.get_token() or self._gh_cli_provider.get_token()
+        token = self._env_provider.get_token()
+        if token:
+            return token
+        return self._gh_cli_provider.get_token()
 
     def supports_live_mode(self) -> bool:
         """Check if live mode is enabled via environment variable.
@@ -446,7 +449,9 @@ class EnvironmentTokenProvider(GitHubAuthProvider):
         Returns:
             True if GITHUB_LIVE_MODE is set to true/1/yes and GITHUB_TOKEN is available.
         """
-        return self.live_mode_enabled and self.get_token("system") is not None
+        if not self.live_mode_enabled:
+            return False
+        return self.get_token("system") is not None
 
 
 class FixtureOnlyProvider(GitHubAuthProvider):
@@ -601,7 +606,14 @@ def get_default_auth_provider() -> GitHubAuthProvider:
         otherwise FixtureOnlyProvider.
     """
     if os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes"):
-        return EnvironmentTokenProvider()
+        has_env_token = bool(EnvTokenProvider().get_token())
+        gh_cli_explicitly_enabled = os.getenv("HANDSFREE_GH_CLI_ENABLED", "").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
+        if has_env_token or gh_cli_explicitly_enabled:
+            return EnvironmentTokenProvider()
     return FixtureOnlyProvider()
 
 

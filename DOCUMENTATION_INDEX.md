@@ -86,7 +86,7 @@ This index helps you find the right documentation for your needs, whether you're
 |----------|-------------|----------|
 | [Architecture](ARCHITECTURE.md) | System design | All |
 | [Database Schema Reference](docs/database-schema.md) | Table inventory and migration map | Developers |
-| [README](README.md#system-architecture) | High-level overview | All |
+| [README](README.md) | High-level overview and quick start | All |
 | [Implementation Plan](implementation_plan/) | Design documents | Developers |
 | [MCP++ IPFS Integration Plan](implementation_plan/prs/PR-009-mcp-plus-plus-ipfs-integration.md) | MCP server integration rollout | Developers |
 | [Meta Glasses + IPFS Tool Integration Plan](implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md) | Direct prototype + MCP production strategy | Developers |
@@ -173,7 +173,7 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 ### Use Case: "I want to start developing the backend"
 
 1. [Getting Started](GETTING_STARTED.md#backend-setup) - Setup instructions
-2. [Architecture](ARCHITECTURE.md#backend-server) - Understand components
+2. [Architecture](ARCHITECTURE.md#component-architecture) - Understand components
 3. [Configuration](CONFIGURATION.md#backend-configuration) - Configure environment
 4. [Contributing](CONTRIBUTING.md#backend-development) - Development workflow
 5. [OpenAPI Spec](spec/openapi.yaml) - API reference
@@ -208,7 +208,7 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 
 ### Use Case: "I want to understand the system architecture"
 
-1. [README](README.md#system-architecture) - High-level overview
+1. [README](README.md) - High-level overview
 2. [Architecture](ARCHITECTURE.md) - Detailed design
 3. [Getting Started](GETTING_STARTED.md#overview) - Component overview
 4. [Implementation Plan](implementation_plan/) - Design decisions

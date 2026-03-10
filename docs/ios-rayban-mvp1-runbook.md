@@ -122,8 +122,10 @@ GITHUB_TOKEN=ghp_...
 
 #### Push Notifications (Optional)
 ```bash
-# Expo push notification token (if demonstrating notification deep-links)
-EXPO_PUSH_TOKEN=ExponentPushToken[...]
+# Backend push provider credentials (if demonstrating notification deep-links)
+HANDSFREE_NOTIFICATION_PROVIDER=expo
+HANDSFREE_EXPO_MODE=real
+HANDSFREE_EXPO_ACCESS_TOKEN=your-expo-access-token
 ```
 
 ---
@@ -857,9 +859,11 @@ If demonstrating push notifications and deep-linking:
 
 ### Setup Push Notifications
 
-1. **Configure Expo Push Token**:
+1. **Configure the backend Expo provider**:
    ```bash
-   export EXPO_PUSH_TOKEN=ExponentPushToken[YOUR_TOKEN]
+  export HANDSFREE_NOTIFICATION_PROVIDER=expo
+  export HANDSFREE_EXPO_MODE=real
+  export HANDSFREE_EXPO_ACCESS_TOKEN=your-expo-access-token
    ```
 
 2. **Create a Notification Subscription**:
@@ -867,9 +871,9 @@ If demonstrating push notifications and deep-linking:
    curl -X POST http://localhost:8080/v1/notifications/subscriptions \
      -H "Content-Type: application/json" \
      -d '{
-       "push_token": "ExponentPushToken[YOUR_TOKEN]",
-       "platform": "ios",
-       "device_id": "test-device"
+     "endpoint": "ExponentPushToken[YOUR_TOKEN]",
+     "platform": "expo",
+     "subscription_keys": {}
      }'
    ```
 
