@@ -160,9 +160,17 @@ export default function PeerChatDiagnosticsPanel({
           <Text style={styles.title}>Chat History</Text>
           <Text style={styles.text}>conversation {peerChatHistory.conversation_id}</Text>
           {peerChatHistory.messages.map((message, index) => (
-            <Text key={`${message.timestamp_ms}-${index}`} style={styles.text}>
-              [{message.priority || 'normal'}] {message.sender_peer_id}: {message.text}
-            </Text>
+            <View key={`${message.timestamp_ms}-${index}`}>
+              <Text style={styles.text}>
+                [{message.priority || 'normal'}] {message.sender_peer_id}: {message.text}
+              </Text>
+              {message.task_snapshot ? (
+                <Text style={styles.text}>
+                  task {message.task_snapshot.provider_label || message.task_snapshot.provider || 'Task'} •{' '}
+                  {message.task_snapshot.summary || message.task_snapshot.task_id}
+                </Text>
+              ) : null}
+            </View>
           ))}
         </View>
       ) : null}
@@ -182,6 +190,12 @@ export default function PeerChatDiagnosticsPanel({
               <Text style={styles.text}>
                 [{conversation.priority || 'normal'}] {conversation.sender_peer_id}: {conversation.last_text}
               </Text>
+              {conversation.task_snapshot ? (
+                <Text style={styles.text}>
+                  task {conversation.task_snapshot.provider_label || conversation.task_snapshot.provider || 'Task'} •{' '}
+                  {conversation.task_snapshot.summary || conversation.task_snapshot.task_id}
+                </Text>
+              ) : null}
               {selectedConversationId === conversation.conversation_id ? (
                 <Text style={styles.selectedText}>Selected Conversation</Text>
               ) : null}

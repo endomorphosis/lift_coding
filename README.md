@@ -6,10 +6,18 @@ A hands-free AI companion for GitHub that helps manage pull requests, issues, an
 
 - **[Getting Started Guide](GETTING_STARTED.md)** - Complete setup guide for developers and testers
 - **[Architecture Documentation](ARCHITECTURE.md)** - System design and component relationships
+- **[Database Schema Reference](docs/database-schema.md)** - Table inventory and migration map
 - **[Contributing Guide](CONTRIBUTING.md)** - Development workflow and best practices
 - **[Mobile App Documentation](mobile/README.md)** - iOS/Android app setup and features
+- **[Authentication](docs/AUTHENTICATION.md)** - Dev/JWT/API key authentication modes
+- **[Configuration Reference](docs/configuration-reference.md)** - Code-aligned environment variable list
 - **[iPhone & Meta Glasses Testing](docs/ios-rayban-mvp1-runbook.md)** - Complete runbook for hardware testing
+- **[Android Emulator & Device](mobile/README.md#android-emulator)** - Run and test on Android
 - **[Android Networking Matrix](docs/android-networking-matrix.md)** - Which backend URL to use (emulator vs device)
+- **[Termux Phone Dispatcher](docs/termux-phone-dispatcher.md)** - Dispatch GitHub tasks directly from your phone
+- **[Profiles Guide](docs/profiles-guide.md)** - Response-style and safety profiles
+- **[Confirmation Flow](docs/confirmation-flow.md)** - Token-based confirmation lifecycle
+- **[MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow)** - Command -> task -> notification -> action workflow
 
 ## 📱 Key Features
 
@@ -141,6 +149,10 @@ See the complete [iPhone & Meta Glasses Testing Guide](docs/ios-rayban-mvp1-runb
 - **[Architecture](ARCHITECTURE.md)** - System design and data flows  
 - **[Contributing](CONTRIBUTING.md)** - Development workflow and guidelines
 - **[Configuration](CONFIGURATION.md)** - Environment variables and settings
+- **[Configuration Reference](docs/configuration-reference.md)** - Full key inventory from code
+- **[Database Schema](docs/database-schema.md)** - Table-level data model reference
+- **[Profiles Guide](docs/profiles-guide.md)** - Profile behavior and tuning
+- **[Confirmation Flow](docs/confirmation-flow.md)** - Confirmation token lifecycle
 - **[API Reference](spec/openapi.yaml)** - OpenAPI specification
 
 ### For Mobile Development
@@ -149,6 +161,7 @@ See the complete [iPhone & Meta Glasses Testing Guide](docs/ios-rayban-mvp1-runb
 - **[Build Instructions](mobile/BUILD.md)** - Native module development
 - **[Glasses Integration](docs/meta-ai-glasses.md)** - Bluetooth audio guide
 - **[Mobile Client Integration](docs/mobile-client-integration.md)** - API usage
+- **[MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow)** - Spawned-task and result handling
 
 ### For iPhone & Meta Glasses Testing
 

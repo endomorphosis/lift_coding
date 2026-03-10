@@ -213,6 +213,12 @@ cp .env.example .env
 # Edit .env with your settings
 ```
 
+Reference docs:
+
+- [CONFIGURATION.md](CONFIGURATION.md) for setup-oriented examples
+- [docs/configuration-reference.md](docs/configuration-reference.md) for full backend key inventory
+- [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) for auth mode behavior (`dev`, `jwt`, `api_key`)
+
 **Minimal Configuration (Dev Mode)**:
 
 ```bash
@@ -620,6 +626,7 @@ npm test
 2. Check [mobile/BUILD.md](mobile/BUILD.md) for native module development
 3. Explore [mobile/glasses/](mobile/glasses/) for Bluetooth implementation
 4. Read [docs/mobile-client-integration.md](docs/mobile-client-integration.md)
+5. Review [docs/profiles-guide.md](docs/profiles-guide.md) for profile behavior
 
 ### For Testing with Meta Glasses
 
@@ -633,7 +640,8 @@ npm test
 1. Review [ARCHITECTURE.md](ARCHITECTURE.md) for system design (see below)
 2. Check [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) for auth flows
 3. Explore API endpoints in [spec/openapi.yaml](spec/openapi.yaml)
-4. Read [SECURITY.md](SECURITY.md) for security considerations
+4. Review [docs/confirmation-flow.md](docs/confirmation-flow.md) for pending-action semantics
+5. Read [SECURITY.md](SECURITY.md) for security considerations
 
 ---
 

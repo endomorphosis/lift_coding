@@ -24,6 +24,7 @@ import {
 import {
   buildLastActionLines,
   buildPromptDraft,
+  executeLocalStructuredAction,
   executeStructuredAction,
 } from '../utils/agentActions';
 import { buildAgentResultCard } from '../utils/agentCards';
@@ -163,6 +164,12 @@ export default function ResultsScreen({ navigation }) {
   };
 
   const handleActionPress = async (actionItem, card) => {
+    const localOutcome = await executeLocalStructuredAction({ actionItem, navigation });
+    if (localOutcome.handled) {
+      Alert.alert('Wearables Bridge', localOutcome.message);
+      return;
+    }
+
     if (actionItem?.prompt_key) {
       const nextPromptDraft = buildPromptDraft(actionItem, card);
       setPromptAction({ actionItem, card });

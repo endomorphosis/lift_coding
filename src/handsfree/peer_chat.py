@@ -24,6 +24,7 @@ class PeerChatMessage:
     text: str
     priority: str
     timestamp_ms: int
+    task_snapshot: dict[str, Any] | None = None
 
 
 @dataclass(slots=True)
@@ -38,6 +39,7 @@ class OutboxMessage:
     priority: str
     timestamp_ms: int
     leased_until_ms: int | None = None
+    task_snapshot: dict[str, Any] | None = None
 
 
 @dataclass(slots=True)
@@ -91,6 +93,9 @@ class PeerChatSessionService:
         priority = str(payload.get("priority") or "normal").lower()
         if priority not in self.SUPPORTED_PRIORITIES:
             raise ValueError("Chat payload priority must be 'normal' or 'urgent'")
+        task_snapshot = payload.get("task_snapshot")
+        if task_snapshot is not None and not isinstance(task_snapshot, dict):
+            raise ValueError("Chat payload task_snapshot must be an object when provided")
 
         message = PeerChatMessage(
             conversation_id=conversation_id,
@@ -99,6 +104,7 @@ class PeerChatSessionService:
             text=text,
             priority=priority,
             timestamp_ms=timestamp_ms,
+            task_snapshot=task_snapshot,
         )
         if self._db_conn_factory is not None:
             try:
@@ -111,6 +117,7 @@ class PeerChatSessionService:
                     text=text,
                     priority=priority,
                     timestamp_ms=timestamp_ms,
+                    task_snapshot=task_snapshot,
                 )
             except Exception:
                 pass
@@ -129,6 +136,7 @@ class PeerChatSessionService:
                         "text": item.text,
                         "priority": item.priority,
                         "timestamp_ms": item.timestamp_ms,
+                        "task_snapshot": item.task_snapshot,
                     }
                     for item in list_peer_chat_messages(conn, conversation_id)
                 ]
@@ -146,8 +154,10 @@ class PeerChatSessionService:
                         "peer_id": item.peer_id,
                         "sender_peer_id": item.sender_peer_id,
                         "last_text": item.last_text,
+                        "priority": item.priority,
                         "last_timestamp_ms": item.last_timestamp_ms,
                         "message_count": item.message_count,
+                        "task_snapshot": item.task_snapshot,
                     }
                     for item in list_recent_peer_chat_conversations(conn, limit)
                 ]
@@ -167,6 +177,7 @@ class PeerChatSessionService:
                         "priority": item.priority,
                         "last_timestamp_ms": item.timestamp_ms,
                         "message_count": len(items),
+                        "task_snapshot": item.task_snapshot,
                     }
         return sorted(
             conversations.values(),
@@ -182,6 +193,7 @@ class PeerChatSessionService:
         text: str,
         priority: str,
         timestamp_ms: int,
+        task_snapshot: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         resolved_priority = str(priority or "normal").lower()
         if resolved_priority not in self.SUPPORTED_PRIORITIES:
@@ -194,6 +206,7 @@ class PeerChatSessionService:
             text=text,
             priority=resolved_priority,
             timestamp_ms=timestamp_ms,
+            task_snapshot=task_snapshot,
         )
         self._outbox.setdefault(recipient_peer_id, []).append(message)
         return asdict(message)

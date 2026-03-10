@@ -22,6 +22,7 @@ import {
 import {
   buildLastActionLines,
   buildPromptDraft,
+  executeLocalStructuredAction,
   executeStructuredAction,
 } from '../utils/agentActions';
 import { buildAgentTaskCard } from '../utils/agentCards';
@@ -226,6 +227,12 @@ export default function TaskDetailScreen({ route }) {
   };
 
   const handleActionPress = async (actionItem) => {
+    const localOutcome = await executeLocalStructuredAction({ actionItem, navigation });
+    if (localOutcome.handled) {
+      Alert.alert('Wearables Bridge', localOutcome.message);
+      return;
+    }
+
     if (actionItem?.id === 'mobile_pause_task') {
       await executeLifecycleControl('pause', 'Task Paused', 'Pause Failed');
       return;

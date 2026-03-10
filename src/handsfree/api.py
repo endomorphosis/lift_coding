@@ -17,14 +17,18 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 from handsfree.audio_fetch import fetch_audio_data
 from handsfree.ai import (
+    build_ai_backend_policy_config,
     build_ai_backend_policy_history_report,
     AIRequestContext,
     AICapabilityRequest,
     build_ai_backend_policy_report,
+    build_snapshot_health,
+    build_snapshot_summary,
     build_policy_resolution,
     build_api_execute_response,
     discover_failure_history_cids,
     execute_ai_request,
+    build_latest_snapshot_info,
     resolve_policy_workflow,
 )
 from handsfree.actions import (
@@ -44,6 +48,8 @@ from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
 from handsfree.db.ai_backend_policy_snapshots import (
     get_ai_backend_policy_snapshots,
+    get_latest_ai_backend_policy_snapshot,
+    get_next_ai_backend_policy_snapshot_capture,
     store_ai_backend_policy_snapshot,
 )
 from handsfree.db.ai_history_index import store_ai_history_record
@@ -140,6 +146,8 @@ from handsfree.models import (
     MergeRequest,
     NotificationSubscriptionResponse,
     NotificationSubscriptionsListResponse,
+    Notification,
+    NotificationsListResponse,
     ParsedIntent,
     PrivacyMode,
     Profile,
@@ -311,6 +319,229 @@ COMMAND_ERROR_EXAMPLES = {
     },
 }
 
+AGENT_TASK_DETAIL_EXAMPLES = {
+    "completed_dataset_result": {
+        "summary": "Completed dataset discovery task",
+        "value": {
+            "id": "task-9b2b1d9d",
+            "state": "completed",
+            "provider": "ipfs_datasets_mcp",
+            "provider_label": "IPFS Datasets",
+            "description": "find legal datasets",
+            "created_at": "2026-03-09T12:00:00Z",
+            "updated_at": "2026-03-09T12:01:15Z",
+            "trace": {
+                "provider_label": "IPFS Datasets",
+                "mcp_capability": "dataset_discovery",
+            },
+            "result_preview": "Expanded legal query",
+            "result_output": {
+                "message": "Expanded legal query",
+                "expanded_queries": ["federal labor law dataset", "employment regulation dataset"],
+            },
+            "result": {
+                "provider_label": "IPFS Datasets",
+                "capability": "dataset_discovery",
+                "preview": "Expanded legal query",
+                "message": "Expanded legal query",
+                "dataset_queries": ["federal labor law dataset", "employment regulation dataset"],
+            },
+        },
+    },
+}
+
+AGENT_RESULTS_EXAMPLES = {
+    "datasets_view": {
+        "summary": "Dataset results view",
+        "value": {
+            "results": [
+                {
+                    "task_id": "task-9b2b1d9d",
+                    "state": "completed",
+                    "provider": "ipfs_datasets_mcp",
+                    "provider_label": "IPFS Datasets",
+                    "instruction": "find legal datasets",
+                    "created_at": "2026-03-09T12:00:00Z",
+                    "updated_at": "2026-03-09T12:01:15Z",
+                    "result_preview": "Expanded legal query",
+                    "result_output": {
+                        "message": "Expanded legal query",
+                        "expanded_queries": [
+                            "federal labor law dataset",
+                            "employment regulation dataset",
+                        ],
+                    },
+                    "result": {
+                        "provider_label": "IPFS Datasets",
+                        "capability": "dataset_discovery",
+                        "preview": "Expanded legal query",
+                        "message": "Expanded legal query",
+                        "dataset_queries": [
+                            "federal labor law dataset",
+                            "employment regulation dataset",
+                        ],
+                    },
+                }
+            ],
+            "pagination": {
+                "limit": 50,
+                "offset": 0,
+                "has_more": False,
+            },
+            "filters": {
+                "view": "datasets",
+                "provider": None,
+                "capability": "dataset_discovery",
+                "preset": "dataset_discoveries",
+                "latest_only": True,
+                "sort": "updated_at",
+                "direction": "desc",
+            },
+            "summary": {
+                "total_results": 1,
+                "by_provider": {"ipfs_datasets_mcp": 1},
+                "by_capability": {"dataset_discovery": 1},
+            },
+        },
+    },
+}
+
+AGENT_ERROR_EXAMPLES = {
+    "task_not_found": {
+        "summary": "Task not found",
+        "value": {
+            "error": "task_not_found",
+            "message": "No accessible task found for task-missing",
+        },
+    },
+    "invalid_parameter": {
+        "summary": "Invalid query parameter",
+        "value": {
+            "error": "invalid_parameter",
+            "message": "sort must be one of: created_at, updated_at",
+        },
+    },
+}
+
+AGENT_TASK_LIST_EXAMPLES = {
+    "filtered_task_list": {
+        "summary": "Filtered task list with normalized MCP result",
+        "value": {
+            "tasks": [
+                {
+                    "id": "task-9b2b1d9d",
+                    "state": "completed",
+                    "provider": "ipfs_datasets_mcp",
+                    "provider_label": "IPFS Datasets",
+                    "description": "find legal datasets",
+                    "created_at": "2026-03-09T12:00:00Z",
+                    "updated_at": "2026-03-09T12:01:15Z",
+                    "result_preview": "Expanded legal query",
+                    "result": {
+                        "provider_label": "IPFS Datasets",
+                        "capability": "dataset_discovery",
+                        "preview": "Expanded legal query",
+                        "message": "Expanded legal query",
+                        "dataset_queries": [
+                            "federal labor law dataset",
+                            "employment regulation dataset",
+                        ],
+                    },
+                }
+            ],
+            "pagination": {
+                "limit": 50,
+                "offset": 0,
+                "has_more": False,
+            },
+            "filters": {
+                "status": "completed",
+                "provider": "ipfs_datasets_mcp",
+                "capability": "dataset_discovery",
+                "result_view": "normalized",
+                "results_only": True,
+                "sort": "updated_at",
+                "direction": "desc",
+            },
+        },
+    },
+}
+
+NOTIFICATION_EXAMPLES = {
+    "mcp_completion_notification": {
+        "summary": "MCP completion notification with actionable card",
+        "value": {
+            "id": "notif-9b2b1d9d",
+            "user_id": "00000000-0000-0000-0000-000000000001",
+            "event_type": "task_completed",
+            "message": "IPFS Accelerate completed. Result: Wearables connectivity receipt captured.",
+            "metadata": {
+                "task_id": "task-9b2b1d9d",
+                "provider": "ipfs_accelerate_mcp",
+                "provider_label": "IPFS Accelerate",
+                "mcp_capability": "workflow",
+            },
+            "created_at": "2026-03-09T12:01:15Z",
+            "priority": 3,
+            "profile": "default",
+            "delivery_status": "success",
+            "card": {
+                "title": "Wearables Connectivity Receipt",
+                "subtitle": "Ray-Ban Meta",
+                "lines": [
+                    "device: Ray-Ban Meta",
+                    "state: connected",
+                ],
+                "deep_link": "ipfs://bafyreceipt",
+                "action_items": [
+                    {
+                        "id": "mobile_open_wearables_diagnostics",
+                        "label": "Open Diagnostics",
+                        "phrase": "open wearables bridge diagnostics",
+                    },
+                    {
+                        "id": "mobile_reconnect_wearables_target",
+                        "label": "Reconnect Target",
+                        "phrase": "reconnect the selected wearables target",
+                    },
+                    {
+                        "id": "read_cid",
+                        "label": "Read Receipt",
+                        "phrase": "read the wearables receipt",
+                    }
+                ],
+            },
+        },
+    },
+}
+
+NOTIFICATIONS_LIST_EXAMPLES = {
+    "notifications_feed": {
+        "summary": "Notification feed with MCP-derived card",
+        "value": {
+            "notifications": [NOTIFICATION_EXAMPLES["mcp_completion_notification"]["value"]],
+            "count": 1,
+        },
+    },
+}
+
+NOTIFICATION_ERROR_EXAMPLES = {
+    "invalid_since": {
+        "summary": "Invalid since timestamp",
+        "value": {
+            "error": "invalid_parameter",
+            "message": "Invalid 'since' timestamp format. Use ISO 8601 format.",
+        },
+    },
+    "notification_not_found": {
+        "summary": "Notification not found",
+        "value": {
+            "error": "not_found",
+            "message": "Notification not found",
+        },
+    },
+}
+
 # Webhook store (DB-backed, initialized lazily)
 _webhook_store = None
 
@@ -406,9 +637,61 @@ def _build_follow_on_task(
     provider_label: str | None = None,
     capability: str | None = None,
 ) -> FollowOnTask:
+    from handsfree.db.agent_tasks import get_agent_task_by_id
+
+    task = get_agent_task_by_id(conn=get_db(), task_id=task_id)
+    serialized_task = _serialize_agent_task(task) if task is not None else None
+
+    if state is None and task is not None and isinstance(task.state, str):
+        state = task.state
+    if provider is None and task is not None and isinstance(task.provider, str):
+        provider = task.provider
+    if provider_label is None and isinstance(serialized_task, dict):
+        trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+        if isinstance(trace.get("provider_label"), str):
+            provider_label = trace["provider_label"]
+    if capability is None and isinstance(serialized_task, dict):
+        if isinstance(serialized_task.get("result"), dict) and isinstance(
+            serialized_task["result"].get("capability"), str
+        ):
+            capability = serialized_task["result"]["capability"]
+        else:
+            trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+            if isinstance(trace.get("mcp_capability"), str):
+                capability = trace["mcp_capability"]
+
     resolved_provider_label = _derive_provider_label(provider, provider_label)
     resolved_capability = capability if isinstance(capability, str) and capability.strip() else None
     capability_label = _derive_capability_label(resolved_capability)
+    serialized_trace = (
+        serialized_task.get("trace")
+        if isinstance(serialized_task, dict) and isinstance(serialized_task.get("trace"), dict)
+        else {}
+    )
+    execution_mode = (
+        serialized_task.get("mcp_execution_mode")
+        if isinstance(serialized_task, dict)
+        and isinstance(serialized_task.get("mcp_execution_mode"), str)
+        else serialized_trace.get("mcp_execution_mode")
+        if isinstance(serialized_trace.get("mcp_execution_mode"), str)
+        else None
+    )
+    preferred_execution_mode = (
+        serialized_task.get("mcp_preferred_execution_mode")
+        if isinstance(serialized_task, dict)
+        and isinstance(serialized_task.get("mcp_preferred_execution_mode"), str)
+        else serialized_trace.get("mcp_preferred_execution_mode")
+        if isinstance(serialized_trace.get("mcp_preferred_execution_mode"), str)
+        else None
+    )
+    result_preview = (
+        serialized_task.get("result_preview")
+        if isinstance(serialized_task, dict)
+        and isinstance(serialized_task.get("result_preview"), str)
+        else serialized_trace.get("mcp_result_preview")
+        if isinstance(serialized_trace.get("mcp_result_preview"), str)
+        else None
+    )
 
     summary_parts: list[str] = []
     if resolved_provider_label:
@@ -425,6 +708,9 @@ def _build_follow_on_task(
         provider_label=resolved_provider_label,
         capability=resolved_capability,
         summary=summary,
+        mcp_execution_mode=execution_mode,
+        mcp_preferred_execution_mode=preferred_execution_mode,
+        result_preview=result_preview,
     )
 
 
@@ -854,6 +1140,21 @@ def _normalize_mcp_task_result(task: Any) -> dict[str, Any] | None:
         if isinstance(follow_up_actions, list) and follow_up_actions:
             normalized["follow_up_actions"] = follow_up_actions
 
+    started_at = trace.get("mcp_started_at")
+    if isinstance(started_at, str) and started_at.strip():
+        normalized["mcp_started_at"] = started_at
+        try:
+            started = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
+            normalized["mcp_elapsed_s"] = max(0, int((datetime.now(UTC) - started).total_seconds()))
+        except ValueError:
+            pass
+    timeout_s = trace.get("mcp_timeout_s")
+    if isinstance(timeout_s, (int, float)):
+        normalized["mcp_timeout_s"] = timeout_s
+    poll_interval_s = trace.get("mcp_poll_interval_s")
+    if isinstance(poll_interval_s, (int, float)):
+        normalized["mcp_poll_interval_s"] = poll_interval_s
+
     if len(normalized) == 3 and not any(normalized.values()):
         return None
     return normalized
@@ -891,6 +1192,17 @@ def _serialize_agent_task(task: Any) -> dict[str, Any]:
                 task_data["follow_up_actions"] = follow_up_actions
         elif "mcp_result_output" in task.trace:
             task_data["result_output"] = task.trace["mcp_result_output"]
+        if isinstance(task.trace.get("mcp_started_at"), str):
+            task_data["mcp_started_at"] = task.trace["mcp_started_at"]
+            try:
+                started = datetime.fromisoformat(task.trace["mcp_started_at"].replace("Z", "+00:00"))
+                task_data["mcp_elapsed_s"] = max(0, int((datetime.now(UTC) - started).total_seconds()))
+            except ValueError:
+                pass
+        if isinstance(task.trace.get("mcp_timeout_s"), (int, float)):
+            task_data["mcp_timeout_s"] = task.trace["mcp_timeout_s"]
+        if isinstance(task.trace.get("mcp_poll_interval_s"), (int, float)):
+            task_data["mcp_poll_interval_s"] = task.trace["mcp_poll_interval_s"]
     normalized_result = _normalize_mcp_task_result(task)
     if normalized_result is not None:
         task_data["result"] = normalized_result
@@ -1489,6 +1801,102 @@ async def dev_upload_audio(
     )
 
 
+@app.post("/v1/dev/media")
+async def dev_upload_media(
+    request: dict,
+    user_id: CurrentUser,
+) -> JSONResponse:
+    """Upload generic image or video bytes for local/mobile development (dev-only)."""
+
+    from handsfree.auth import get_auth_mode
+
+    if get_auth_mode() != "dev":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": "forbidden",
+                "message": "Dev media upload is only available in dev mode",
+            },
+        )
+
+    media_kind = str(request.get("media_kind") or "image").lower()
+    if media_kind not in {"image", "video"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "media_kind must be one of: image, video",
+            },
+        )
+
+    data_base64 = request.get("data_base64")
+    media_format = str(request.get("format") or ("jpg" if media_kind == "image" else "mp4")).lower()
+    allowed_exts = {
+        "image": {"jpg", "jpeg", "png", "heic", "webp"},
+        "video": {"mp4", "mov", "m4v", "webm"},
+    }
+    if not isinstance(data_base64, str) or not data_base64.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "Missing required field: data_base64",
+            },
+        )
+    if media_format not in allowed_exts[media_kind]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": f"Unsupported {media_kind} format: {media_format}",
+            },
+        )
+
+    import os
+    import uuid
+
+    max_size = int(os.getenv("HANDSFREE_DEV_MEDIA_MAX_BYTES", str(10 * 1024 * 1024)))
+    dev_dir = Path(os.getenv("HANDSFREE_DEV_MEDIA_DIR", "data/dev_media")).resolve()
+    dev_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        media_bytes = base64.b64decode(data_base64, validate=True)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "data_base64 must be valid base64",
+            },
+        ) from exc
+
+    if len(media_bytes) > max_size:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": f"{media_kind.capitalize()} too large (max {max_size} bytes)",
+            },
+        )
+
+    file_id = uuid.uuid4().hex
+    file_path = dev_dir / f"{file_id}.{media_format}"
+    file_path.write_bytes(media_bytes)
+    mime_type = request.get("mime_type")
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "uri": f"file://{file_path}",
+            "bytes": len(media_bytes),
+            "format": media_format,
+            "mime_type": mime_type if isinstance(mime_type, str) and mime_type.strip() else None,
+            "media_kind": media_kind,
+            "user_id": user_id,
+        },
+    )
+
+
 @app.post("/v1/dev/peer-envelope", response_model=DevPeerEnvelopeResponse)
 async def dev_ingest_peer_envelope(
     request: DevPeerEnvelopeRequest,
@@ -1556,8 +1964,11 @@ async def dev_ingest_peer_envelope(
                     "peer_id": stored_message.peer_id,
                     "sender_peer_id": stored_message.sender_peer_id,
                     "text": stored_message.text,
+                    "priority": stored_message.priority,
                     "timestamp_ms": stored_message.timestamp_ms,
                 }
+                if isinstance(stored_message.task_snapshot, dict):
+                    payload_json["task_snapshot"] = stored_message.task_snapshot
             except Exception:
                 payload_json = None
         ack = PeerEnvelope(
@@ -1722,12 +2133,23 @@ async def dev_send_peer_chat(
     sender_peer_id = getattr(local_identity, "peer_id", None) or "local-dev-peer"
     conversation_id = request.conversation_id or build_conversation_id(request.peer_id, sender_peer_id)
     timestamp_ms = int(datetime.now(UTC).timestamp() * 1000)
+    task_snapshot = None
+    task_snapshot_data = None
+    if request.task_id:
+        task = _get_scoped_agent_task(get_db(), request.task_id, user_id)
+        task_snapshot = _build_follow_on_task(
+            task_id=task.id,
+            state=task.state,
+            provider=task.provider,
+        )
+        task_snapshot_data = task_snapshot.model_dump(mode="json")
     payload = encode_chat_message_payload(
         request.text,
         sender_peer_id=sender_peer_id,
         conversation_id=conversation_id,
         priority=request.priority,
         timestamp_ms=timestamp_ms,
+        task_snapshot=task_snapshot_data,
     )
 
     try:
@@ -1752,6 +2174,7 @@ async def dev_send_peer_chat(
             "text": request.text,
             "priority": request.priority,
             "timestamp_ms": timestamp_ms,
+            "task_snapshot": task_snapshot_data,
         },
     )
     dev_peer_chat_service.queue_outbound_message(
@@ -1761,6 +2184,7 @@ async def dev_send_peer_chat(
         text=request.text,
         priority=request.priority,
         timestamp_ms=timestamp_ms,
+        task_snapshot=task_snapshot_data,
     )
 
     return DevPeerChatSendResponse(
@@ -1773,6 +2197,7 @@ async def dev_send_peer_chat(
         priority=request.priority,
         transport_provider=type(transport).__name__,
         timestamp_ms=timestamp_ms,
+        task_snapshot=task_snapshot,
     )
 
 
@@ -4470,13 +4895,36 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
         )
 
 
-@app.get("/v1/notifications")
+@app.get(
+    "/v1/notifications",
+    response_model=NotificationsListResponse,
+    responses={
+        200: {
+            "description": "Notifications list",
+            "content": {
+                "application/json": {
+                    "examples": NOTIFICATIONS_LIST_EXAMPLES,
+                }
+            },
+        },
+        400: {
+            "description": "Invalid request",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "invalid_since": NOTIFICATION_ERROR_EXAMPLES["invalid_since"],
+                    }
+                }
+            },
+        },
+    },
+) 
 async def get_notifications(
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
     since: str | None = None,
     limit: int = 50,
-) -> JSONResponse:
+) -> NotificationsListResponse:
     """Get notifications for the current user.
 
     Poll-based notification retrieval endpoint. Clients can poll this endpoint
@@ -4512,7 +4960,10 @@ async def get_notifications(
         except (ValueError, TypeError) as e:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}",
+                detail={
+                    "error": "invalid_parameter",
+                    "message": f"Invalid 'since' timestamp format. Use ISO 8601 format. Error: {e}",
+                },
             ) from e
 
     # Fetch notifications
@@ -4523,11 +4974,9 @@ async def get_notifications(
         limit=limit,
     )
 
-    return JSONResponse(
-        content={
-            "notifications": [n.to_dict() for n in notifications],
-            "count": len(notifications),
-        }
+    return NotificationsListResponse(
+        notifications=[Notification(**n.to_dict()) for n in notifications],
+        count=len(notifications),
     )
 
 
@@ -5430,12 +5879,35 @@ async def delete_notification_subscription(
     return Response(status_code=204)
 
 
-@app.get("/v1/notifications/{notification_id}")
+@app.get(
+    "/v1/notifications/{notification_id}",
+    response_model=Notification,
+    responses={
+        200: {
+            "description": "Notification details",
+            "content": {
+                "application/json": {
+                    "examples": NOTIFICATION_EXAMPLES,
+                }
+            },
+        },
+        404: {
+            "description": "Notification not found or does not belong to the user",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "notification_not_found": NOTIFICATION_ERROR_EXAMPLES["notification_not_found"],
+                    }
+                }
+            },
+        },
+    },
+) 
 async def get_notification_detail(
     notification_id: str,
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
-) -> JSONResponse:
+) -> Notification:
     """Get a specific notification by ID for the current user.
 
     Used by mobile app when a push notification includes notification_id.
@@ -5472,13 +5944,38 @@ async def get_notification_detail(
     if not notification:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Notification not found",
+            detail={
+                "error": "not_found",
+                "message": "Notification not found",
+            },
         )
 
-    return JSONResponse(content=notification.to_dict())
+    return Notification(**notification.to_dict())
 
 
-@app.get("/v1/agents/tasks")
+@app.get(
+    "/v1/agents/tasks",
+    responses={
+        200: {
+            "description": "List of tasks for the user",
+            "content": {
+                "application/json": {
+                    "examples": AGENT_TASK_LIST_EXAMPLES,
+                }
+            },
+        },
+        400: {
+            "description": "Invalid query parameters",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "invalid_parameter": AGENT_ERROR_EXAMPLES["invalid_parameter"],
+                    }
+                }
+            },
+        },
+    },
+)
 async def list_agent_tasks(
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
@@ -5637,7 +6134,29 @@ async def list_agent_tasks(
     )
 
 
-@app.get("/v1/agents/tasks/{task_id}")
+@app.get(
+    "/v1/agents/tasks/{task_id}",
+    responses={
+        200: {
+            "description": "Agent task detail",
+            "content": {
+                "application/json": {
+                    "examples": AGENT_TASK_DETAIL_EXAMPLES,
+                }
+            },
+        },
+        404: {
+            "description": "Task not found",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "task_not_found": AGENT_ERROR_EXAMPLES["task_not_found"],
+                    }
+                }
+            },
+        },
+    },
+)
 async def get_agent_task_detail(
     task_id: str,
     user_id: CurrentUser,
@@ -5665,6 +6184,10 @@ async def get_agent_task_detail(
         "result_output",
         "result_envelope",
         "follow_up_actions",
+        "mcp_started_at",
+        "mcp_elapsed_s",
+        "mcp_timeout_s",
+        "mcp_poll_interval_s",
         "pr_url",
     ):
         if key in serialized_task:
@@ -5674,6 +6197,101 @@ async def get_agent_task_detail(
         task_data["result"] = normalized_result
 
     return JSONResponse(status_code=status.HTTP_200_OK, content=task_data)
+@app.post("/v1/agents/tasks/{task_id}/media")
+async def attach_agent_task_media(
+    task_id: str,
+    request: dict,
+    user_id: CurrentUser,
+    x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
+) -> JSONResponse:
+    """Attach uploaded DAT media metadata to an existing agent task trace."""
+    from handsfree.db.agent_tasks import update_agent_task_trace
+
+    effective_user_id = _resolve_effective_user_id(user_id, x_user_id_raw)
+    db = get_db()
+    task = _get_scoped_agent_task(conn=db, task_id=task_id, user_id=effective_user_id)
+
+    uri = request.get("uri")
+    if not isinstance(uri, str) or not uri.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "uri is required",
+            },
+        )
+
+    media_kind = str(request.get("media_kind") or "image").lower()
+    if media_kind not in {"image", "video", "audio"}:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "error": "invalid_request",
+                "message": "media_kind must be one of: image, video, audio",
+            },
+        )
+
+    trace = task.trace if isinstance(task.trace, dict) else {}
+    existing_media = trace.get("wearables_dat_media")
+    media_entries = list(existing_media) if isinstance(existing_media, list) else []
+    media_entry = {
+        "uri": uri.strip(),
+        "media_kind": media_kind,
+        "format": request.get("format"),
+        "mime_type": request.get("mime_type"),
+        "source_asset_uri": request.get("source_asset_uri"),
+        "action": request.get("action"),
+        "device_id": request.get("device_id"),
+        "device_name": request.get("device_name"),
+        "captured_at": request.get("captured_at") or datetime.now(UTC).isoformat(),
+    }
+    media_entry = {key: value for key, value in media_entry.items() if value is not None}
+
+    duplicate_index = next(
+        (
+            index
+            for index, candidate in enumerate(media_entries)
+            if isinstance(candidate, dict)
+            and candidate.get("uri") == media_entry["uri"]
+            and candidate.get("media_kind") == media_entry["media_kind"]
+        ),
+        None,
+    )
+    if duplicate_index is None:
+        media_entries.append(media_entry)
+    else:
+        media_entries[duplicate_index] = media_entry
+
+    updated_task = update_agent_task_trace(
+        conn=db,
+        task_id=task_id,
+        trace_update={
+            "wearables_dat_media": media_entries,
+            "wearables_dat_latest_media": media_entry,
+            "wearables_dat_media_count": len(media_entries),
+            "wearables_dat_last_media_at": media_entry["captured_at"],
+        },
+    )
+    if updated_task is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "task_not_found",
+                "message": f"No accessible task found for {task_id}",
+            },
+        )
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={
+            "task_id": updated_task.id,
+            "state": updated_task.state,
+            "message": "Task media attached successfully",
+            "updated_at": updated_task.updated_at.isoformat() if updated_task.updated_at else None,
+            "media": media_entry,
+            "media_count": len(media_entries),
+        },
+    )
 
 
 def _task_control_response(
@@ -5690,7 +6308,29 @@ def _task_control_response(
     )
 
 
-@app.get("/v1/agents/results")
+@app.get(
+    "/v1/agents/results",
+    responses={
+        200: {
+            "description": "Completed MCP-backed task results",
+            "content": {
+                "application/json": {
+                    "examples": AGENT_RESULTS_EXAMPLES,
+                }
+            },
+        },
+        400: {
+            "description": "Invalid query parameters",
+            "content": {
+                "application/json": {
+                    "examples": {
+                        "invalid_parameter": AGENT_ERROR_EXAMPLES["invalid_parameter"],
+                    }
+                }
+            },
+        },
+    },
+)
 async def list_agent_results(
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
@@ -6306,8 +6946,41 @@ async def get_ai_backend_policy_report(
     """Return current AI backend policy and recent workflow remap counts."""
     db = get_db()
     report = build_ai_backend_policy_report(db, user_id=user_id, limit=limit)
+    latest_snapshot = None
+    snapshot_capture = None
     if capture:
-        store_ai_backend_policy_snapshot(db, user_id=user_id, report=report)
+        snapshot = store_ai_backend_policy_snapshot(db, user_id=user_id, report=report)
+        latest_snapshot = snapshot
+        snapshot_capture = {
+            "capture_requested": True,
+            "capture_mode": "reused" if snapshot.reused else "created",
+            "snapshot_id": snapshot.id,
+            "snapshot_created_at": snapshot.created_at,
+        }
+        report.snapshot_capture = snapshot_capture
+    else:
+        snapshot_capture = {
+            "capture_requested": False,
+            "capture_mode": "skipped",
+            "snapshot_id": None,
+            "snapshot_created_at": None,
+        }
+        report.snapshot_capture = snapshot_capture
+        latest_snapshot = get_latest_ai_backend_policy_snapshot(db, user_id=user_id)
+    if latest_snapshot is not None:
+        report.latest_snapshot = {
+            "id": latest_snapshot.id,
+            "created_at": latest_snapshot.created_at,
+            "age_seconds": max(
+                0,
+                int((datetime.now(UTC) - latest_snapshot.created_at.astimezone(UTC)).total_seconds()),
+            ),
+        }
+    report.snapshot_summary = build_snapshot_summary(
+        policy=report.policy,
+        latest_snapshot=report.latest_snapshot,
+        snapshot_capture=snapshot_capture,
+    )
     return report
 
 
@@ -6336,8 +7009,26 @@ async def list_ai_backend_policy_snapshots(
 ) -> AIBackendPolicySnapshotsResponse:
     """Return persisted backend-policy snapshots for the current user."""
     db = get_db()
+    report_generated_at = datetime.now(UTC)
     snapshots = get_ai_backend_policy_snapshots(db, user_id=user_id, limit=limit)
+    policy = build_ai_backend_policy_config()
+    next_capture_mode, next_capture_snapshot = get_next_ai_backend_policy_snapshot_capture(
+        db,
+        user_id=user_id,
+    )
+    latest_snapshot = build_latest_snapshot_info(db, user_id=user_id)
+    next_capture = {
+        "capture_requested": True,
+        "capture_mode": next_capture_mode,
+        "snapshot_id": None if next_capture_mode != "reused" else next_capture_snapshot.id,
+        "snapshot_created_at": (
+            None
+            if next_capture_mode != "reused" or next_capture_snapshot is None
+            else next_capture_snapshot.created_at
+        ),
+    }
     return AIBackendPolicySnapshotsResponse(
+        report_generated_at=report_generated_at,
         snapshots=[
             AIBackendPolicySnapshotResponse(
                 id=snapshot.id,
@@ -6353,5 +7044,13 @@ async def list_ai_backend_policy_snapshots(
                 top_remaps=list(snapshot.top_remaps),
             )
             for snapshot in snapshots
-        ]
+        ],
+        policy=policy,
+        snapshot_summary=build_snapshot_summary(
+            policy=policy,
+            latest_snapshot=latest_snapshot,
+            next_capture=next_capture,
+        ),
+        snapshot_health=build_snapshot_health(latest_snapshot),
+        next_capture=next_capture,
     )

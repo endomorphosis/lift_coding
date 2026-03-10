@@ -187,6 +187,9 @@ describe('FollowOnTaskCard', () => {
         provider_label: 'IPFS Accelerate',
         capability: 'workflow',
         summary: 'IPFS Accelerate workflow running.',
+        result_preview: 'Pinned bafy123.',
+        mcp_preferred_execution_mode: 'direct_import',
+        mcp_execution_mode: 'mcp_remote',
       },
       onOpenTask,
     });
@@ -197,6 +200,8 @@ describe('FollowOnTaskCard', () => {
     expect(collectText(tree)).toContain('State: running');
     expect(collectText(tree)).toContain('Provider: IPFS Accelerate');
     expect(collectText(tree)).toContain('Capability: workflow');
+    expect(collectText(tree)).toContain('Result: Pinned bafy123.');
+    expect(collectText(tree)).toContain('Execution: Remote (local unavailable)');
     expect(collectText(tree)).toContain('Provider ID: ipfs_accelerate_mcp');
     expect(collectText(tree)).toContain('Open Task Detail');
 

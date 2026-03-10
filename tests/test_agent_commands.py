@@ -7,7 +7,7 @@ from handsfree.agent_providers import (
     IPFSDatasetsMCPAgentProvider,
     IPFSKitMCPAgentProvider,
 )
-from handsfree.commands.intent_parser import IntentParser
+from handsfree.commands.intent_parser import IntentParser, ParsedIntent
 from handsfree.commands.pending_actions import PendingActionManager
 from handsfree.commands.profiles import Profile
 from handsfree.commands.router import CommandRouter
@@ -317,13 +317,52 @@ class TestAgentStatus:
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="completed")
 
-        intent = parser.parse("show recent ipfs results")
+        intent = ParsedIntent(name="agent.results", confidence=1.0, entities={"view": None})
         response = router.route(intent, Profile.DEFAULT, user_id=test_user_id)
 
         assert response["status"] == "ok"
         assert response["cards"][0]["deep_link"] == "ipfs://bafy123"
         assert response["cards"][0]["lines"][0] == "message: Pinned bafy123."
         assert response["cards"][0]["action_items"][0]["id"] == "read_cid"
+
+    def test_results_saved_view_renders_wearables_connectivity_receipt(
+        self, router, parser, db_conn, test_user_id
+    ):
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect connected wearable",
+            trace={
+                "mcp_capability": "workflow",
+                "provider_label": "IPFS Accelerate",
+                "mcp_result_envelope": {
+                    "summary": "Wearables bridge connectivity receipt captured for Ray-Ban Meta.",
+                    "structured_output": {
+                        "workflow": "wearables_bridge_connectivity",
+                        "device_id": "AA:BB",
+                        "device_name": "Ray-Ban Meta",
+                        "target_connection_state": "connected",
+                        "target_rssi": -42,
+                        "cid": "bafyreceipt",
+                    },
+                    "artifact_refs": {"result_cid": "bafyreceipt"},
+                },
+            },
+        )
+        update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
+        update_agent_task_state(conn=db_conn, task_id=task.id, new_state="completed")
+
+        intent = ParsedIntent(name="agent.results", confidence=1.0, entities={"view": None})
+        response = router.route(intent, Profile.DEFAULT, user_id=test_user_id)
+
+        assert response["status"] == "ok"
+        assert response["cards"][0]["title"] == "Wearables Connectivity Receipt"
+        assert "device: Ray-Ban Meta" in response["cards"][0]["lines"]
+        assert response["cards"][0]["deep_link"] == "ipfs://bafyreceipt"
+        assert response["cards"][0]["action_items"][0]["id"] == "mobile_open_wearables_diagnostics"
+        assert response["cards"][0]["action_items"][1]["id"] == "mobile_reconnect_wearables_target"
+        assert response["cards"][0]["action_items"][6]["label"] == "Read Receipt"
 
     def test_results_saved_view_supports_next_navigation(
         self, router, parser, db_conn, test_user_id

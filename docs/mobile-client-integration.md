@@ -157,6 +157,45 @@ When a command or structured action starts MCP-backed work, the response include
 
 Clients should prefer `follow_on_task.summary` for display rather than rebuilding task text from raw fields.
 
+### MCP Task Flow
+
+For MCP-backed commands and card actions, treat the API as a small workflow instead of a single request/response:
+
+1. Submit `POST /v1/command` or `POST /v1/commands/action`.
+2. If `follow_on_task` is present, store `follow_on_task.task_id` and show `follow_on_task.summary`.
+3. Read `GET /v1/agents/tasks/{task_id}` for the latest normalized task/result state.
+4. Use `GET /v1/agents/results` when you want a completed-results feed instead of one task at a time.
+5. Poll or subscribe to `GET /v1/notifications` for completion updates and actionable cards.
+6. Execute `card.action_items` through `POST /v1/commands/action`, passing `task_id`, `notification_id`, or an embedded `card` when available.
+
+Typical async path:
+
+```text
+/v1/command
+  -> follow_on_task.task_id
+  -> /v1/agents/tasks/{task_id}
+  -> /v1/notifications
+  -> /v1/commands/action
+```
+
+Typical action request using task context:
+
+```json
+{
+  "action_id": "rerun_dataset_search",
+  "params": {
+    "task_id": "task-9b2b1d9d",
+    "query": "state privacy regulations"
+  }
+}
+```
+
+### Sync vs Async MCP Results
+
+- Some MCP calls complete synchronously. In those cases, the initial command response may already contain the useful cards/result text, and `follow_on_task` can be `null`.
+- Background MCP work returns `follow_on_task`, then converges through task detail, results, and notifications.
+- Clients should not assume every MCP-backed command creates a long-lived task; check `follow_on_task` first.
+
 ## 2. Confirmation Flow
 
 Some commands (like merging a PR or delegating to an agent) require explicit confirmation for safety.

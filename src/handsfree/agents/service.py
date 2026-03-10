@@ -61,6 +61,31 @@ def _trace_follow_up_actions(trace: dict[str, Any] | None) -> list[dict[str, Any
     return actions if isinstance(actions, list) else []
 
 
+def _trace_runtime_metadata(trace: dict[str, Any] | None) -> dict[str, Any]:
+    """Project MCP runtime timing metadata from task trace."""
+    normalized_trace = trace or {}
+    metadata: dict[str, Any] = {}
+
+    started_at = normalized_trace.get("mcp_started_at")
+    if isinstance(started_at, str) and started_at.strip():
+        metadata["mcp_started_at"] = started_at
+        try:
+            started = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
+            metadata["mcp_elapsed_s"] = max(0, int((datetime.now(UTC) - started).total_seconds()))
+        except ValueError:
+            pass
+
+    timeout_s = normalized_trace.get("mcp_timeout_s")
+    if isinstance(timeout_s, (int, float)):
+        metadata["mcp_timeout_s"] = timeout_s
+
+    poll_interval_s = normalized_trace.get("mcp_poll_interval_s")
+    if isinstance(poll_interval_s, (int, float)):
+        metadata["mcp_poll_interval_s"] = poll_interval_s
+
+    return metadata
+
+
 def _requested_local_fallback(preferred_mode: str | None, resolved_mode: str | None) -> bool:
     return (
         str(preferred_mode or "").strip().lower() == "direct_import"
@@ -311,6 +336,7 @@ class AgentService:
             "result_preview": _trace_result_preview(task.trace),
             "result_output": _trace_result_output(task.trace),
             "follow_up_actions": _trace_follow_up_actions(task.trace),
+            **_trace_runtime_metadata(task.trace),
         }
 
     def get_status(self, user_id: str) -> dict[str, Any]:
@@ -447,6 +473,7 @@ class AgentService:
                         (t.trace or {}).get("mcp_preferred_execution_mode") if t.trace else None
                     ),
                     "follow_up_actions": _trace_follow_up_actions(t.trace),
+                    **_trace_runtime_metadata(t.trace),
                 }
                 for t in tasks[:10]  # Return up to 10 recent tasks
             ],

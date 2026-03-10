@@ -1,4 +1,5 @@
 import { sendActionCommand } from '../api/client';
+import { getMetaWearablesDat } from '../native/metaWearablesDat';
 
 export function buildPromptDraft(actionItem, card, valueOverride = undefined) {
   if (!actionItem?.prompt_key) {
@@ -119,6 +120,43 @@ export async function executeStructuredAction({
     kind: 'completed',
     message: 'Action completed.',
     taskUpdate: extractActionTaskUpdate(response),
+    response,
+  };
+}
+
+export async function executeLocalStructuredAction({ actionItem, navigation }) {
+  if (actionItem?.id === 'mobile_open_wearables_diagnostics') {
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+
+    return {
+      handled: true,
+      message: 'Opened wearables bridge diagnostics.',
+      response: null,
+    };
+  }
+
+  if (actionItem?.id !== 'mobile_reconnect_wearables_target') {
+    return { handled: false };
+  }
+
+  const dat = await getMetaWearablesDat();
+  const response = await dat.reconnectSelectedDeviceTarget();
+  const targetLabel = response?.deviceName || response?.deviceId || 'selected target';
+  const connectionState = response?.targetConnectionState || response?.state || 'unknown';
+  const message =
+    connectionState === 'unselected' || !response?.deviceId
+      ? 'No selected wearables target is available to reconnect.'
+      : `Reconnect attempted for ${targetLabel}. State: ${connectionState}.`;
+
+  if (navigation?.navigate) {
+    navigation.navigate('Glasses');
+  }
+
+  return {
+    handled: true,
+    message,
     response,
   };
 }

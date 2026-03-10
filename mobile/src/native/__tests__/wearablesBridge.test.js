@@ -15,6 +15,7 @@ describe('wearablesBridge wrapper', () => {
     const diagnostics = await bridge.getDiagnostics();
     const reconnect = await bridge.reconnectSelectedDeviceTarget();
     const connect = await bridge.connectSelectedDeviceTarget();
+    const photo = await bridge.capturePhoto();
 
     expect(bridge.isBridgeAvailable()).toBe(false);
     expect(diagnostics).toEqual({
@@ -65,6 +66,10 @@ describe('wearablesBridge wrapper', () => {
       mode: 'unavailable',
       deviceId: null,
       targetConnectionState: 'unselected',
+    });
+    expect(photo).toMatchObject({
+      action: 'capture_photo',
+      supported: false,
     });
   });
 
@@ -182,6 +187,13 @@ describe('wearablesBridge wrapper', () => {
         deviceId: 'AA:BB',
         targetConnectionState: 'selected',
       })),
+      capturePhoto: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        action: 'capture_photo',
+        message: 'Captured photo.',
+      })),
       addStateListener: jest.fn(() => ({ remove() {} })),
     };
 
@@ -200,6 +212,7 @@ describe('wearablesBridge wrapper', () => {
     const selected = await bridge.getSelectedDeviceTarget();
     const reconnect = await bridge.reconnectSelectedDeviceTarget();
     const connect = await bridge.connectSelectedDeviceTarget();
+    const photo = await bridge.capturePhoto();
 
     expect(bridge.isBridgeAvailable()).toBe(true);
     expect(configuration.provider).toBe('internal_bridge');
@@ -219,6 +232,10 @@ describe('wearablesBridge wrapper', () => {
       state: 'target_connected',
       targetConnectionState: 'connected',
       targetRssi: -42,
+    });
+    expect(photo).toMatchObject({
+      action: 'capture_photo',
+      supported: true,
     });
     await expect(bridge.startBridgeSession()).resolves.toMatchObject({
       state: 'target_ready',

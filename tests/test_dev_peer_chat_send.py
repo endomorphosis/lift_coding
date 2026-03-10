@@ -32,6 +32,7 @@ sys.modules.setdefault("hvac", hvac_module)
 sys.modules.setdefault("hvac.exceptions", hvac_exceptions_module)
 
 from handsfree.api import app, dev_peer_chat_service, get_db
+from handsfree.db.agent_tasks import create_agent_task
 
 
 client = TestClient(app)
@@ -201,6 +202,83 @@ def test_dev_peer_chat_send_populates_outbox(test_user_id):
 
     assert empty.status_code == 200
     assert empty.json()["messages"] == []
+
+
+def test_dev_peer_chat_send_includes_task_snapshot_in_send_and_outbox(test_user_id):
+    fake_transport = FakeTransport()
+    dev_peer_chat_service._messages.clear()
+    dev_peer_chat_service._outbox.clear()
+
+    task = create_agent_task(
+        get_db(),
+        user_id=test_user_id,
+        provider="ipfs_accelerate_mcp",
+        instruction="inspect wearables bridge",
+        trace={
+            "provider_label": "IPFS Accelerate",
+            "mcp_capability": "agentic_fetch",
+            "mcp_execution_mode": "mcp_remote",
+            "mcp_preferred_execution_mode": "direct_import",
+            "mcp_result_preview": "Connectivity receipt captured",
+        },
+    )
+
+    with patch.dict(os.environ, {"HANDSFREE_AUTH_MODE": "dev"}):
+        with patch("handsfree.api.get_peer_transport", return_value=fake_transport):
+            send_response = client.post(
+                "/v1/dev/peer-chat/send",
+                json={
+                    "peer_id": "12D3KooWpeerTask",
+                    "text": "share task snapshot",
+                    "priority": "urgent",
+                    "task_id": task.id,
+                },
+                headers={"X-User-Id": test_user_id},
+            )
+
+            assert send_response.status_code == 200
+            send_body = send_response.json()
+            assert send_body["task_snapshot"] == {
+                "task_id": task.id,
+                "state": "created",
+                "provider": "ipfs_accelerate_mcp",
+                "provider_label": "IPFS Accelerate",
+                "capability": "agentic_fetch",
+                "summary": "IPFS Accelerate agentic fetch created.",
+                "mcp_execution_mode": "mcp_remote",
+                "mcp_preferred_execution_mode": "direct_import",
+                "result_preview": "Connectivity receipt captured",
+            }
+
+            payload = fake_transport.sent[0][2].decode("utf-8")
+            assert '"task_snapshot"' in payload
+            assert task.id in payload
+
+            outbox_response = client.get(
+                "/v1/dev/peer-chat/outbox/12D3KooWpeerTask/status",
+                headers={"X-User-Id": test_user_id},
+            )
+            history_response = client.get(
+                f"/v1/dev/peer-chat/{send_body['conversation_id']}",
+                headers={"X-User-Id": test_user_id},
+            )
+            conversations_response = client.get(
+                "/v1/dev/peer-chat?limit=5",
+                headers={"X-User-Id": test_user_id},
+            )
+
+    assert outbox_response.status_code == 200
+    preview = outbox_response.json()["preview_messages"][0]
+    assert preview["task_snapshot"]["task_id"] == task.id
+    assert preview["task_snapshot"]["mcp_execution_mode"] == "mcp_remote"
+    assert history_response.status_code == 200
+    history_message = history_response.json()["messages"][0]
+    assert history_message["task_snapshot"]["task_id"] == task.id
+    assert history_message["task_snapshot"]["result_preview"] == "Connectivity receipt captured"
+    assert conversations_response.status_code == 200
+    conversation = conversations_response.json()["conversations"][0]
+    assert conversation["task_snapshot"]["task_id"] == task.id
+    assert conversation["priority"] == "urgent"
 
 
 def test_dev_peer_chat_outbox_lease_expiry_requeues_message(test_user_id):

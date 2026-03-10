@@ -137,13 +137,19 @@ Check the response `policy_resolution` field when you want to confirm whether re
 For command-surface testing, the same metadata is now available under `debug.policy_resolution`.
 For a quick admin-side snapshot of the currently resolved defaults and recent remaps, use `GET /v1/admin/ai/backend-policy`.
 If you do not want that read to create a persisted snapshot, use `GET /v1/admin/ai/backend-policy?capture=false`.
+The report response now includes `report_generated_at`, `snapshot_capture` so you can tell whether the read created, reused, or skipped snapshot persistence, `latest_snapshot` so you can see the freshness of the newest persisted sample via `age_seconds`, `freshness_threshold_seconds`, and `freshness`, `snapshot_health` for a one-field status summary, and `snapshot_summary` as the reusable nested snapshot block shared across the admin observability routes. Prefer `snapshot_summary` for new client code; the older top-level snapshot fields remain as compatibility mirrors.
 For bucketed recent history, use `GET /v1/admin/ai/backend-policy/history?window_hours=24&bucket_hours=1`.
+That history response now also includes `report_generated_at`, `latest_snapshot`, and the shared `snapshot_summary` block so the trend view has the same snapshot-freshness contract as the main report.
 For persisted point-in-time samples, use `GET /v1/admin/ai/backend-policy/snapshots`.
+That snapshots response now includes `next_capture` so you can tell whether the next captured admin read would reuse the newest snapshot or create a new one.
+It now also includes the same effective backend snapshot-policy config block as the main backend-policy report.
+It also now exposes `report_generated_at`, the same top-level `snapshot_health` summary, and the shared `snapshot_summary` block as the report and history routes.
 If you are exercising snapshot persistence repeatedly, optionally set
 `HANDSFREE_AI_POLICY_SNAPSHOT_RETENTION_DAYS` and
 `HANDSFREE_AI_POLICY_SNAPSHOT_MAX_RECORDS_PER_USER` and
 `HANDSFREE_AI_POLICY_SNAPSHOT_MIN_INTERVAL_SECONDS`
 to keep the snapshot table bounded during local test runs.
+Those same values are now echoed back in the admin backend-policy report so you can confirm the effective snapshot policy without checking shell state separately.
 That report now includes:
 - fixed `last_hour` and `last_24_hours` buckets
 - per-workflow remap totals by requested and resolved workflow

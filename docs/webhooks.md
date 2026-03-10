@@ -19,6 +19,7 @@ This directory contains the GitHub webhook ingestion system with signature verif
 
 ```
 POST /v1/webhooks/github
+POST /v1/webhooks/retry/{event_id}
 ```
 
 **Headers:**
@@ -29,6 +30,9 @@ POST /v1/webhooks/github
 **Response:**
 - `202 Accepted`: Webhook ingested successfully
 - `400 Bad Request`: Invalid signature or duplicate delivery
+
+For replay and processing fields, see the webhook-related migration updates in:
+- `migrations/006_add_webhook_processing_fields.sql`
 
 ## Local Development
 
@@ -90,7 +94,7 @@ The test suite includes:
 
 ## Implementation Notes
 
-- **Storage**: Currently uses in-memory store; will be replaced with database in PR-003
+- **Storage**: Database-backed (`webhook_events` in DuckDB), with migration-managed processing fields
 - **Secrets**: Dev mode (webhook_secret=None) allows `"dev"` signature
 - **Normalization**: Unsupported event types/actions are stored but not normalized
-- **Notifications**: Normalized events are logged; inbox/notification updates will be added in future PRs
+- **Notifications**: Normalized events are persisted and can fan out into notifications and downstream workflows

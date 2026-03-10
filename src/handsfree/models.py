@@ -88,7 +88,14 @@ class CommandRequest(BaseModel):
 class ActionCommandRequest(BaseModel):
     """Structured action command request."""
 
-    action_id: str
+    action_id: str = Field(
+        ...,
+        description=(
+            "Stable card action identifier such as read_cid or rerun_dataset_search. "
+            "Some client-local actions may also use mobile_* identifiers such as "
+            "mobile_open_wearables_diagnostics."
+        ),
+    )
     params: dict[str, Any] = Field(default_factory=dict)
     profile: Profile
     client_context: ClientContext
@@ -114,7 +121,14 @@ class PendingAction(BaseModel):
 class ActionItem(BaseModel):
     """Structured card action metadata."""
 
-    id: str
+    id: str = Field(
+        ...,
+        description=(
+            "Stable action identifier. Server-routed actions are suitable for POST "
+            "/v1/commands/action, while some app-local actions may use mobile_* IDs "
+            "such as mobile_open_wearables_diagnostics."
+        ),
+    )
     label: str
     phrase: str
     execution_mode: str | None = None
@@ -161,6 +175,9 @@ class FollowOnTask(BaseModel):
                 "provider_label": "IPFS Accelerate",
                 "capability": "agentic_fetch",
                 "summary": "IPFS Accelerate agentic fetch running.",
+                "mcp_execution_mode": "mcp_remote",
+                "mcp_preferred_execution_mode": "direct_import",
+                "result_preview": "Connectivity receipt captured",
             }
         }
     }
@@ -171,6 +188,9 @@ class FollowOnTask(BaseModel):
     provider_label: str | None = None
     capability: str | None = None
     summary: str | None = None
+    mcp_execution_mode: str | None = None
+    mcp_preferred_execution_mode: str | None = None
+    result_preview: str | None = None
 
 
 class CommandResponse(BaseModel):
@@ -971,6 +991,9 @@ class AIBackendPolicyConfig(BaseModel):
     failure_backend: str
     github_auth_source: str | None = None
     github_live_mode_requested: bool = False
+    snapshot_retention_days: int | None = None
+    snapshot_max_records_per_user: int | None = None
+    snapshot_min_interval_seconds: int | None = None
 
 
 class AIBackendPolicyWindow(BaseModel):
@@ -1016,9 +1039,44 @@ class AIRemapCount(BaseModel):
     count: int
 
 
+class AILatestSnapshotInfo(BaseModel):
+    """Latest persisted backend-policy snapshot metadata."""
+
+    id: str
+    created_at: datetime
+    age_seconds: int = Field(ge=0)
+    freshness_threshold_seconds: int = Field(ge=0)
+    freshness: Literal["fresh", "stale"]
+
+
+class AISnapshotHealth(BaseModel):
+    """Compact snapshot health summary for admin observability responses."""
+
+    status: Literal["healthy", "stale", "missing"]
+
+
+class AISnapshotPolicyConfig(BaseModel):
+    """Snapshot-specific policy settings surfaced in admin observability responses."""
+
+    retention_days: int | None = None
+    max_records_per_user: int | None = None
+    min_interval_seconds: int | None = None
+
+
+class AISnapshotSummary(BaseModel):
+    """Reusable snapshot status block shared by admin observability responses."""
+
+    latest_snapshot: AILatestSnapshotInfo | None = None
+    snapshot_health: AISnapshotHealth
+    policy: AISnapshotPolicyConfig
+    snapshot_capture: "AISnapshotCaptureInfo | None" = None
+    next_capture: "AISnapshotCaptureInfo | None" = None
+
+
 class AIBackendPolicyReport(BaseModel):
     """Admin/debug report for AI backend policy and recent remaps."""
 
+    report_generated_at: datetime
     policy: AIBackendPolicyConfig
     recent_window: AIBackendPolicyWindow
     time_buckets: dict[str, AIBackendPolicyBucketReport] = Field(default_factory=dict)
@@ -1030,6 +1088,10 @@ class AIBackendPolicyReport(BaseModel):
     resolved_workflow_counts: dict[str, int] = Field(default_factory=dict)
     remap_counts: dict[str, int] = Field(default_factory=dict)
     action_counts: dict[str, int] = Field(default_factory=dict)
+    snapshot_summary: AISnapshotSummary
+    latest_snapshot: AILatestSnapshotInfo | None = None
+    snapshot_health: AISnapshotHealth
+    snapshot_capture: "AISnapshotCaptureInfo | None" = None
 
 
 class AIBackendPolicyHistoryBucket(BaseModel):
@@ -1045,10 +1107,23 @@ class AIBackendPolicyHistoryBucket(BaseModel):
 class AIBackendPolicyHistoryReport(BaseModel):
     """Historical backend-policy trend report."""
 
+    report_generated_at: datetime
     policy: AIBackendPolicyConfig
     window_hours: int
     bucket_hours: int
     buckets: list[AIBackendPolicyHistoryBucket] = Field(default_factory=list)
+    snapshot_summary: AISnapshotSummary
+    latest_snapshot: AILatestSnapshotInfo | None = None
+    snapshot_health: AISnapshotHealth
+
+
+class AISnapshotCaptureInfo(BaseModel):
+    """Snapshot capture metadata for admin backend-policy reads."""
+
+    capture_requested: bool
+    capture_mode: Literal["created", "reused", "skipped"]
+    snapshot_id: str | None = None
+    snapshot_created_at: datetime | None = None
 
 
 class AIBackendPolicySnapshotResponse(BaseModel):
@@ -1070,7 +1145,12 @@ class AIBackendPolicySnapshotResponse(BaseModel):
 class AIBackendPolicySnapshotsResponse(BaseModel):
     """List response for persisted backend-policy snapshots."""
 
+    report_generated_at: datetime
     snapshots: list[AIBackendPolicySnapshotResponse] = Field(default_factory=list)
+    policy: AIBackendPolicyConfig | None = None
+    snapshot_summary: AISnapshotSummary
+    snapshot_health: AISnapshotHealth
+    next_capture: AISnapshotCaptureInfo | None = None
 
 
 class AICapabilityExecuteResponse(BaseModel):
@@ -1243,6 +1323,7 @@ class DevPeerChatMessage(BaseModel):
     text: str
     priority: str = "normal"
     timestamp_ms: int
+    task_snapshot: FollowOnTask | None = None
 
 
 class DevPeerChatConversation(BaseModel):
@@ -1255,6 +1336,7 @@ class DevPeerChatConversation(BaseModel):
     priority: str = "normal"
     last_timestamp_ms: int
     message_count: int
+    task_snapshot: FollowOnTask | None = None
 
 
 class DevPeerChatHistoryResponse(BaseModel):
@@ -1277,6 +1359,7 @@ class DevPeerChatSendRequest(BaseModel):
     text: str = Field(..., min_length=1)
     conversation_id: str | None = None
     priority: str = Field(default="normal", pattern="^(normal|urgent)$")
+    task_id: str | None = None
 
 
 class DevPeerChatSendResponse(BaseModel):
@@ -1291,6 +1374,7 @@ class DevPeerChatSendResponse(BaseModel):
     priority: str
     transport_provider: str
     timestamp_ms: int
+    task_snapshot: FollowOnTask | None = None
 
 
 class DevPeerChatOutboxMessage(BaseModel):
@@ -1304,6 +1388,7 @@ class DevPeerChatOutboxMessage(BaseModel):
     priority: str = "normal"
     timestamp_ms: int
     leased_until_ms: int | None = None
+    task_snapshot: FollowOnTask | None = None
 
 
 class DevPeerChatOutboxPreviewMessage(BaseModel):
@@ -1319,6 +1404,7 @@ class DevPeerChatOutboxPreviewMessage(BaseModel):
     leased_until_ms: int | None = None
     state: str
     hold_reason: str | None = None
+    task_snapshot: FollowOnTask | None = None
 
 
 class DevPeerChatOutboxResponse(BaseModel):
@@ -1454,6 +1540,128 @@ class NotificationSubscriptionsListResponse(BaseModel):
     """Response for listing notification subscriptions."""
 
     subscriptions: list[NotificationSubscriptionResponse]
+
+
+class Notification(BaseModel):
+    """User notification payload exposed via the API."""
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "id": "notif-9b2b1d9d",
+                "user_id": "00000000-0000-0000-0000-000000000001",
+                "event_type": "task_completed",
+                "message": "IPFS Datasets completed. Result: Expanded legal query",
+                "metadata": {
+                    "task_id": "task-9b2b1d9d",
+                    "provider": "ipfs_datasets_mcp",
+                    "provider_label": "IPFS Datasets",
+                    "mcp_capability": "dataset_discovery",
+                },
+                "created_at": "2026-03-09T12:01:15Z",
+                "priority": 3,
+                "profile": "default",
+                "delivery_status": "success",
+                "card": {
+                    "title": "Wearables Connectivity Receipt",
+                    "subtitle": "Ray-Ban Meta",
+                    "lines": [
+                        "device: Ray-Ban Meta",
+                        "state: connected",
+                    ],
+                    "deep_link": "ipfs://bafyreceipt",
+                    "action_items": [
+                        {
+                            "id": "mobile_open_wearables_diagnostics",
+                            "label": "Open Diagnostics",
+                            "phrase": "open wearables bridge diagnostics",
+                        },
+                        {
+                            "id": "mobile_reconnect_wearables_target",
+                            "label": "Reconnect Target",
+                            "phrase": "reconnect the selected wearables target",
+                        },
+                        {
+                            "id": "read_cid",
+                            "label": "Read Receipt",
+                            "phrase": "read the wearables receipt",
+                        }
+                    ],
+                },
+            }
+        }
+    }
+
+    id: str
+    user_id: str
+    event_type: str
+    message: str
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    created_at: str
+    priority: int = Field(..., ge=1, le=5)
+    profile: str
+    last_delivery_attempt: str | None = None
+    delivery_status: str | None = None
+    card: UICard | None = None
+
+
+class NotificationsListResponse(BaseModel):
+    """Response for listing notifications."""
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "notifications": [
+                    {
+                        "id": "notif-9b2b1d9d",
+                        "user_id": "00000000-0000-0000-0000-000000000001",
+                        "event_type": "task_completed",
+                        "message": "IPFS Datasets completed. Result: Expanded legal query",
+                        "metadata": {
+                            "task_id": "task-9b2b1d9d",
+                            "provider": "ipfs_accelerate_mcp",
+                            "provider_label": "IPFS Accelerate",
+                            "mcp_capability": "workflow",
+                        },
+                        "created_at": "2026-03-09T12:01:15Z",
+                        "priority": 3,
+                        "profile": "default",
+                        "delivery_status": "success",
+                        "card": {
+                            "title": "Wearables Connectivity Receipt",
+                            "subtitle": "Ray-Ban Meta",
+                            "lines": [
+                                "device: Ray-Ban Meta",
+                                "state: connected",
+                            ],
+                            "deep_link": "ipfs://bafyreceipt",
+                            "action_items": [
+                                {
+                                    "id": "mobile_open_wearables_diagnostics",
+                                    "label": "Open Diagnostics",
+                                    "phrase": "open wearables bridge diagnostics",
+                                },
+                                {
+                                    "id": "mobile_reconnect_wearables_target",
+                                    "label": "Reconnect Target",
+                                    "phrase": "reconnect the selected wearables target",
+                                },
+                                {
+                                    "id": "read_cid",
+                                    "label": "Read Receipt",
+                                    "phrase": "read the wearables receipt",
+                                }
+                            ],
+                        },
+                    }
+                ],
+                "count": 1,
+            }
+        }
+    }
+
+    notifications: list[Notification] = Field(default_factory=list)
+    count: int = Field(..., ge=0)
 
 
 class DependencyStatus(BaseModel):

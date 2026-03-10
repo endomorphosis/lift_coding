@@ -44,6 +44,7 @@ import {
   mergeNotificationTaskDetail,
 } from '../utils/notificationCards';
 import { applyNotificationTaskControlResponse } from '../utils/taskControlState';
+import { executeLocalStructuredAction } from '../utils/agentActions';
 
 const ACTIVE_NOTIFICATION_POLL_INTERVAL_MS = 5000;
 
@@ -315,6 +316,13 @@ export default function StatusScreen({ navigation }) {
   const handleNotificationAction = async (actionItem) => {
     const notificationId = lastNotification?.id;
     const taskId = lastNotification?.metadata?.task_id || lastNotification?.card?.task_id;
+
+    const localOutcome = await executeLocalStructuredAction({ actionItem, navigation });
+    if (localOutcome.handled) {
+      Alert.alert('Wearables Bridge', localOutcome.message);
+      return;
+    }
+
     if (!actionItem?.id || !notificationId) {
       Alert.alert('Action Unavailable', 'This notification action is missing context.');
       return;

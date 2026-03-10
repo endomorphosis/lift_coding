@@ -25,13 +25,17 @@ This index helps you find the right documentation for your needs, whether you're
 - [Architecture](ARCHITECTURE.md) - System design
 - [Contributing](CONTRIBUTING.md) - Development workflow
 - [Configuration](CONFIGURATION.md) - Environment variables
+- [Configuration Reference](docs/configuration-reference.md) - Code-aligned env var inventory
 - [API Reference](spec/openapi.yaml) - OpenAPI specification
+- [Database Schema Reference](docs/database-schema.md) - Tables and migration map
 
 **Mobile Development**:
 - [Mobile README](mobile/README.md) - App documentation
+- [Mobile Screens Reference](mobile/SCREENS_REFERENCE.md) - Code-aligned screen inventory
 - [Build Instructions](mobile/BUILD.md) - Native module setup
 - [Getting Started](GETTING_STARTED.md#mobile-app-setup) - Mobile setup
 - [Mobile Client Integration](docs/mobile-client-integration.md) - API usage
+- [MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow) - Command to task to notification workflow
 
 ### I'm a Tester
 
@@ -57,6 +61,8 @@ This index helps you find the right documentation for your needs, whether you're
 **Implementation Details**:
 - [Database Schema](ARCHITECTURE.md#database-schema) - Data models
 - [Authentication](docs/AUTHENTICATION.md) - Auth flows
+- [Profiles Guide](docs/profiles-guide.md) - Profile behavior and defaults
+- [Confirmation Flow](docs/confirmation-flow.md) - Pending action confirmation lifecycle
 - [Agent Delegation](docs/agent-runner-setup.md) - Agent system
 - [GitHub CLI + Copilot CLI Plan](implementation_plan/docs/12-github-cli-copilot-integration.md) - AI/ML integration roadmap
 
@@ -70,6 +76,7 @@ This index helps you find the right documentation for your needs, whether you're
 |----------|-------------|----------|
 | [Getting Started](GETTING_STARTED.md) | Complete setup guide | All |
 | [Configuration](CONFIGURATION.md) | Environment variables | Developers |
+| [Configuration Reference](docs/configuration-reference.md) | Full backend env key inventory | Developers |
 | [Mobile README](mobile/README.md) | Mobile app setup | Mobile developers |
 | [Build Instructions](mobile/BUILD.md) | Native module build | Mobile developers |
 
@@ -78,6 +85,7 @@ This index helps you find the right documentation for your needs, whether you're
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [Architecture](ARCHITECTURE.md) | System design | All |
+| [Database Schema Reference](docs/database-schema.md) | Table inventory and migration map | Developers |
 | [README](README.md#system-architecture) | High-level overview | All |
 | [Implementation Plan](implementation_plan/) | Design documents | Developers |
 | [MCP++ IPFS Integration Plan](implementation_plan/prs/PR-009-mcp-plus-plus-ipfs-integration.md) | MCP server integration rollout | Developers |
@@ -91,8 +99,10 @@ This index helps you find the right documentation for your needs, whether you're
 |----------|-------------|----------|
 | [OpenAPI Spec](spec/openapi.yaml) | Complete API reference | Developers |
 | [Mobile Client Integration](docs/mobile-client-integration.md) | API usage patterns | Mobile developers |
+| [MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow) | Spawned-task lifecycle and action flow | Mobile developers |
 | [Webhooks](docs/webhooks.md) | GitHub webhook integration | Developers |
 | [Authentication](docs/AUTHENTICATION.md) | Auth modes and flows | Developers |
+| [Confirmation Flow](docs/confirmation-flow.md) | Pending action token lifecycle | Developers |
 | [GitHub CLI + Copilot CLI Plan](implementation_plan/docs/12-github-cli-copilot-integration.md) | AI/ML service integration roadmap | Developers |
 
 ### iPhone & Meta Glasses
@@ -118,6 +128,8 @@ This index helps you find the right documentation for your needs, whether you're
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [Mobile README](mobile/README.md) | Complete app guide | Mobile developers |
+| [Mobile Screens Reference](mobile/SCREENS_REFERENCE.md) | Implemented screen inventory | Mobile developers |
+| [Profiles Guide](docs/profiles-guide.md) | Response profile behavior | Mobile developers |
 | [Build Instructions](mobile/BUILD.md) | Native builds | Mobile developers |
 | [Glasses Module](mobile/glasses/README.md) | Native module docs | Mobile developers |
 | [Push Notifications](docs/push-notifications.md) | Notification setup | Mobile developers |
@@ -171,7 +183,8 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 2. [Mobile README](mobile/README.md) - App documentation
 3. [Build Instructions](mobile/BUILD.md) - Native module setup
 4. [Mobile Client Integration](docs/mobile-client-integration.md) - API patterns
-5. [Contributing](CONTRIBUTING.md#mobile-development) - Mobile workflow
+5. [MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow) - Spawned-task workflow
+6. [Contributing](CONTRIBUTING.md#mobile-development) - Mobile workflow
 
 ### Use Case: "I want to test with iPhone and Meta Glasses"
 
@@ -242,6 +255,10 @@ docs/
 ├── meta-ai-glasses-audio-routing.md  # Bluetooth audio technical
 ├── mobile-client-integration.md      # API usage patterns
 ├── AUTHENTICATION.md                  # Auth modes
+├── confirmation-flow.md               # Pending action confirmation lifecycle
+├── configuration-reference.md         # Code-aligned env var inventory
+├── database-schema.md                 # Table inventory and migrations
+├── profiles-guide.md                  # Response profile behavior
 ├── agent-runner-setup.md             # Agent delegation
 ├── SECRET_STORAGE_AND_SESSIONS.md    # Secret management
 ├── push-notifications.md             # Push notification setup

@@ -1,5 +1,6 @@
 import {
   buildAgentNotificationCard,
+  buildAgentResultCard,
   buildAgentTaskCard,
   buildTaskLifecycleActionItems,
 } from '../agentCards';
@@ -83,6 +84,70 @@ describe('buildAgentTaskCard', () => {
     });
 
     expect(card.lines).toContain('Execution: Remote (local unavailable)');
+  });
+
+  it('shows MCP runtime metadata on running task cards', () => {
+    jest.spyOn(Date, 'now').mockReturnValue(new Date('2026-03-09T00:05:00.000Z').getTime());
+    const card = buildAgentTaskCard({
+      id: 'task-runtime',
+      state: 'running',
+      provider: 'ipfs_accelerate_mcp',
+      instruction: 'inspect connected wearable',
+      mcp_started_at: '2026-03-09T00:00:00+00:00',
+      mcp_timeout_s: 30,
+      mcp_poll_interval_s: 2,
+      result_envelope: {
+        summary: 'Wearables bridge connectivity workflow running for Ray-Ban Meta.',
+        status: 'running',
+        structured_output: {
+          workflow: 'wearables_bridge_connectivity',
+          device_name: 'Ray-Ban Meta',
+          target_connection_state: 'connected',
+        },
+      },
+    });
+
+    expect(card.lines).toContain('Age: 5m');
+    expect(card.lines).toContain('Timeout: 30s');
+    expect(card.lines).toContain('Poll: 2s');
+    Date.now.mockRestore();
+  });
+
+  it('renders wearables connectivity receipts with receipt-specific title and labels', () => {
+    const card = buildAgentTaskCard({
+      id: 'task-bridge',
+      state: 'completed',
+      provider: 'ipfs_accelerate_mcp',
+      result_envelope: {
+        summary: 'Wearables bridge connectivity receipt captured for Ray-Ban Meta.',
+        structured_output: {
+          workflow: 'wearables_bridge_connectivity',
+          device_id: 'AA:BB',
+          device_name: 'Ray-Ban Meta',
+          target_connection_state: 'connected',
+          target_rssi: -42,
+          cid: 'bafyreceipt',
+        },
+        artifact_refs: { result_cid: 'bafyreceipt' },
+      },
+    });
+
+    expect(card.title).toBe('Wearables Connectivity Receipt');
+    expect(card.subtitle).toBe('Ray-Ban Meta');
+    expect(card.lines).toContain('Device: Ray-Ban Meta');
+    expect(card.lines).toContain('State: connected');
+    expect(card.action_items[0]).toMatchObject({
+      id: 'mobile_open_wearables_diagnostics',
+      label: 'Open Diagnostics',
+    });
+    expect(card.action_items[1]).toMatchObject({
+      id: 'mobile_reconnect_wearables_target',
+      label: 'Reconnect Target',
+    });
+    expect(card.action_items.find((item) => item.id === 'read_cid')).toMatchObject({
+      label: 'Read Receipt',
+      phrase: 'read the wearables receipt',
+    });
   });
 
   it('uses task description when instruction is absent', () => {
@@ -188,5 +253,134 @@ describe('buildAgentNotificationCard', () => {
     });
 
     expect(card.lines).toContain('Execution: Remote (local unavailable)');
+  });
+
+  it('prepends local wearables actions for connectivity receipt notifications', () => {
+    const card = buildAgentNotificationCard({
+      id: 'notif-bridge',
+      event_type: 'task_completed',
+      timestamp: '2026-03-08T10:04:00.000Z',
+      metadata: {
+        task_id: 'task-bridge',
+        result_envelope: {
+          summary: 'Wearables bridge connectivity receipt captured for Ray-Ban Meta.',
+          structured_output: {
+            workflow: 'wearables_bridge_connectivity',
+            device_id: 'AA:BB',
+            device_name: 'Ray-Ban Meta',
+            target_connection_state: 'connected',
+            target_rssi: -42,
+            cid: 'bafyreceipt',
+          },
+          artifact_refs: { result_cid: 'bafyreceipt' },
+        },
+      },
+      card: {
+        title: 'Wearables Connectivity Receipt',
+        subtitle: 'Ray-Ban Meta',
+        lines: ['Device: Ray-Ban Meta', 'State: connected'],
+        action_items: [{ id: 'read_cid', label: 'Read Receipt', phrase: 'read the wearables receipt' }],
+      },
+    });
+
+    expect(card.action_items[0]).toMatchObject({
+      id: 'mobile_open_wearables_diagnostics',
+      label: 'Open Diagnostics',
+    });
+    expect(card.action_items[1]).toMatchObject({
+      id: 'mobile_reconnect_wearables_target',
+      label: 'Reconnect Target',
+    });
+    expect(card.action_items[2]).toMatchObject({
+      id: 'read_cid',
+      label: 'Read Receipt',
+    });
+  });
+
+  it('shows runtime metadata on notification cards when present', () => {
+    jest.spyOn(Date, 'now').mockReturnValue(new Date('2026-03-09T00:05:00.000Z').getTime());
+    const card = buildAgentNotificationCard({
+      id: 'notif-runtime',
+      event_type: 'task_running',
+      timestamp: '2026-03-09T00:04:00.000Z',
+      metadata: {
+        task_id: 'task-runtime',
+        state: 'running',
+        mcp_started_at: '2026-03-09T00:00:00+00:00',
+        mcp_timeout_s: 30,
+        mcp_poll_interval_s: 2,
+      },
+      card: {
+        title: 'IPFS Accelerate running',
+        subtitle: 'Task task-runtime • running',
+        lines: ['Task is running'],
+        action_items: [{ id: 'show_result_details', label: 'Task Details', phrase: 'show task details for that result' }],
+      },
+    });
+
+    expect(card.lines).toContain('Age: 5m');
+    expect(card.lines).toContain('Timeout: 30s');
+    expect(card.lines).toContain('Poll: 2s');
+    Date.now.mockRestore();
+  });
+});
+
+describe('buildAgentResultCard', () => {
+  it('renders wearables connectivity result cards distinctly', () => {
+    const card = buildAgentResultCard({
+      task_id: 'task-bridge',
+      state: 'completed',
+      provider: 'ipfs_accelerate_mcp',
+      updated_at: '2026-03-08T10:00:00.000Z',
+      result_envelope: {
+        summary: 'Wearables bridge connectivity receipt captured for Ray-Ban Meta.',
+        structured_output: {
+          workflow: 'wearables_bridge_connectivity',
+          device_name: 'Ray-Ban Meta',
+          target_connection_state: 'connected',
+          target_rssi: -42,
+          cid: 'bafyreceipt',
+        },
+        artifact_refs: { result_cid: 'bafyreceipt' },
+      },
+    });
+
+    expect(card.title).toBe('Wearables Connectivity Receipt');
+    expect(card.subtitle).toBe('Ray-Ban Meta');
+    expect(card.deep_link).toBe('ipfs://bafyreceipt');
+    expect(card.lines).toContain('Device: Ray-Ban Meta');
+    expect(card.action_items[0]).toMatchObject({
+      id: 'mobile_open_wearables_diagnostics',
+      label: 'Open Diagnostics',
+    });
+    expect(card.action_items[1]).toMatchObject({
+      id: 'mobile_reconnect_wearables_target',
+      label: 'Reconnect Target',
+    });
+  });
+
+  it('shows runtime metadata on result cards when present', () => {
+    jest.spyOn(Date, 'now').mockReturnValue(new Date('2026-03-09T00:05:00.000Z').getTime());
+    const card = buildAgentResultCard({
+      task_id: 'task-runtime',
+      state: 'running',
+      provider: 'ipfs_accelerate_mcp',
+      mcp_started_at: '2026-03-09T00:00:00+00:00',
+      mcp_timeout_s: 30,
+      mcp_poll_interval_s: 2,
+      result_envelope: {
+        summary: 'Wearables bridge connectivity workflow running for Ray-Ban Meta.',
+        structured_output: {
+          workflow: 'wearables_bridge_connectivity',
+          device_name: 'Ray-Ban Meta',
+          target_connection_state: 'connected',
+        },
+      },
+    });
+
+    expect(card.lines).toContain('Age: 5m');
+    expect(card.lines).toContain('Timeout: 30s');
+    expect(card.lines).toContain('Poll: 2s');
+    Date.now.mockRestore();
   });
 });

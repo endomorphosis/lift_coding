@@ -136,7 +136,7 @@ All claims must contain a valid UUID string.
 
 ## Protected Endpoints
 
-All endpoints that read or write user data are protected by authentication:
+Representative protected endpoints (not exhaustive):
 
 - `POST /v1/command` - Submit voice/text commands
 - `POST /v1/commands/confirm` - Confirm pending actions
@@ -145,6 +145,21 @@ All endpoints that read or write user data are protected by authentication:
 - `GET /v1/github/connections` - List GitHub connections
 - `GET /v1/github/connections/{id}` - Get specific connection
 - `GET /v1/notifications` - Get user notifications
+
+For complete route coverage and request/response contracts, use [spec/openapi.yaml](../spec/openapi.yaml).
+
+## Route Access Expectations
+
+The backend currently exposes a broad API surface in `src/handsfree/api.py`.
+
+Use this practical model when integrating:
+
+- Most `v1` business endpoints require authenticated user context via the `CurrentUser` dependency.
+- In `dev` auth mode, `X-User-ID` may be supplied to override the effective user for local testing.
+- Health and local simulator utility endpoints (for example `/health`, `/v1/status`, `/simulator`) are typically used as non-user bootstrap checks.
+- Webhook ingestion endpoints use webhook signature verification rather than end-user auth headers.
+
+For precise request/response schema contracts, use [spec/openapi.yaml](../spec/openapi.yaml).
 
 ## Testing
 

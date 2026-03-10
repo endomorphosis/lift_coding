@@ -109,6 +109,68 @@ def _render_result_lines(metadata: dict[str, Any] | None) -> list[str]:
     return lines[:3]
 
 
+def _notification_workflow(metadata: dict[str, Any] | None) -> str | None:
+    """Extract workflow name from notification metadata."""
+    metadata = metadata or {}
+    result_envelope = metadata.get("result_envelope")
+    structured_output = (
+        result_envelope.get("structured_output")
+        if isinstance(result_envelope, dict)
+        else metadata.get("result_output")
+    )
+    if isinstance(structured_output, dict):
+        workflow = structured_output.get("workflow")
+        if isinstance(workflow, str) and workflow.strip():
+            return workflow.strip()
+    return None
+
+
+def _append_local_wearables_actions(
+    items: list[dict[str, Any]],
+    workflow: str | None,
+) -> list[dict[str, Any]]:
+    """Prepend app-local wearables actions for connectivity receipts."""
+    if workflow != "wearables_bridge_connectivity":
+        return list(items)
+
+    next_items = list(items)
+    if not any(item.get("id") == "mobile_reconnect_wearables_target" for item in next_items):
+        next_items.insert(
+            0,
+            {
+                "id": "mobile_reconnect_wearables_target",
+                "label": "Reconnect Target",
+                "phrase": "reconnect the selected wearables target",
+            },
+        )
+    if not any(item.get("id") == "mobile_open_wearables_diagnostics" for item in next_items):
+        next_items.insert(
+            0,
+            {
+                "id": "mobile_open_wearables_diagnostics",
+                "label": "Open Diagnostics",
+                "phrase": "open wearables bridge diagnostics",
+            },
+        )
+    return next_items
+
+
+def _append_local_wearables_action_phrases(
+    actions: list[str],
+    workflow: str | None,
+) -> list[str]:
+    """Prepend user-facing wearables local action phrases."""
+    if workflow != "wearables_bridge_connectivity":
+        return list(actions)
+
+    next_actions = list(actions)
+    if "reconnect the selected wearables target" not in next_actions:
+        next_actions.insert(0, "reconnect the selected wearables target")
+    if "open wearables bridge diagnostics" not in next_actions:
+        next_actions.insert(0, "open wearables bridge diagnostics")
+    return next_actions
+
+
 def _notification_result_actions(
     capability: str | None,
     deep_link: str | None,
@@ -288,6 +350,7 @@ def build_notification_card(
         return None
 
     metadata = metadata or {}
+    workflow = _notification_workflow(metadata)
     state = metadata.get("state", event_type.removeprefix("task_"))
     provider_label = metadata.get("provider_label") or metadata.get("provider") or "Agent task"
     task_id = str(metadata.get("task_id", ""))[:8]
@@ -327,22 +390,27 @@ def build_notification_card(
         else:
             deep_link = f"/v1/notifications/{notification_id}"
 
+    action_items = (
+        metadata.get("follow_up_actions")
+        if isinstance(metadata.get("follow_up_actions"), list) and metadata.get("follow_up_actions")
+        else _notification_result_action_items(
+            metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
+            deep_link,
+        )
+    )
+
     return {
         "title": title,
         "subtitle": f"Task {task_id} • {state}" if task_id else state,
         "lines": lines[:4],
         "deep_link": deep_link,
-        "action_items": (
-            metadata.get("follow_up_actions")
-            if isinstance(metadata.get("follow_up_actions"), list) and metadata.get("follow_up_actions")
-            else _notification_result_action_items(
+        "action_items": _append_local_wearables_actions(action_items, workflow),
+        "actions": _append_local_wearables_action_phrases(
+            _notification_result_actions(
                 metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
                 deep_link,
-            )
-        ),
-        "actions": _notification_result_actions(
-            metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
-            deep_link,
+            ),
+            workflow,
         ),
     }
 

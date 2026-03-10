@@ -46,6 +46,11 @@ client = TestClient(app)
 
 def test_dev_peer_chat_history_returns_normalized_messages(test_user_id):
     conversation_id = "chat:test-history"
+    task_snapshot = {
+        "task_id": "task-history-1",
+        "provider_label": "IPFS Accelerate",
+        "summary": "IPFS Accelerate agentic fetch running.",
+    }
     envelope = PeerEnvelope(
         kind="message",
         peer_id="12D3KooWpeerChat",
@@ -58,6 +63,7 @@ def test_dev_peer_chat_history_returns_normalized_messages(test_user_id):
                 conversation_id=conversation_id,
                 priority="urgent",
                 timestamp_ms=222222,
+                        task_snapshot=task_snapshot,
             ),
         ),
     )
@@ -92,6 +98,17 @@ def test_dev_peer_chat_history_returns_normalized_messages(test_user_id):
             "text": "history hello",
             "priority": "urgent",
             "timestamp_ms": 222222,
+            "task_snapshot": {
+                "task_id": "task-history-1",
+                "state": None,
+                "provider": None,
+                "provider_label": "IPFS Accelerate",
+                "capability": None,
+                "summary": "IPFS Accelerate agentic fetch running.",
+                "mcp_execution_mode": None,
+                "mcp_preferred_execution_mode": None,
+                "result_preview": None,
+            },
         }
     ]
 

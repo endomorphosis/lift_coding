@@ -4,17 +4,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import {
+  attachAgentTaskMedia,
   deleteDevTransportSession,
   delegateWearablesBridgeTask,
   fetchTTS,
   getDevTransportSessions,
+  getAgentTaskDetail,
   postDevPeerEnvelope,
   sendAudioCommand,
   uploadDevAudio,
 } from '../api/client';
+import FollowOnTaskCard from '../components/FollowOnTaskCard';
+import { useMetaWearablesDat } from '../hooks/useMetaWearablesDat';
 import { getDebugState, simulateNotificationForDev } from '../push';
 import ExpoGlassesAudio from 'expo-glasses-audio';
-import { getWearablesBridge } from '../native/wearablesBridge';
+import { summarizeMetaWearablesDat } from '../utils/metaWearablesDatCapabilities';
 import {
   createAckEnvelope,
   createChatMessageEnvelope,
@@ -32,6 +36,7 @@ import {
   getTransportSessionHealth,
   isStaleTransportSessionSuspected,
 } from '../utils/peerTransportSessions';
+import { uploadWearablesDatAsset } from '../utils/metaWearablesDatMedia';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
@@ -106,7 +111,32 @@ function formatWearablesLastSeen(timestamp) {
   }
 }
 
-export default function GlassesDiagnosticsScreen() {
+function isActiveWearablesTask(taskState) {
+  return taskState === 'created' || taskState === 'running' || taskState === 'needs_input';
+}
+
+function mergeWearablesFollowOnTask(followOnTask, detail) {
+  if (!followOnTask?.task_id || !detail?.id) {
+    return followOnTask;
+  }
+
+  return {
+    ...followOnTask,
+    task_id: detail.id || followOnTask.task_id,
+    state: detail.state || followOnTask.state,
+    provider: detail.provider || followOnTask.provider,
+    provider_label: detail.provider_label || followOnTask.provider_label,
+    capability:
+      detail?.result?.capability || detail?.trace?.mcp_capability || followOnTask.capability,
+    summary: detail.result_preview || followOnTask.summary,
+    result_preview: detail.result_preview || followOnTask.result_preview,
+    mcp_execution_mode: detail.mcp_execution_mode || followOnTask.mcp_execution_mode,
+    mcp_preferred_execution_mode:
+      detail.mcp_preferred_execution_mode || followOnTask.mcp_preferred_execution_mode,
+  };
+}
+
+export default function GlassesDiagnosticsScreen({ navigation }) {
   const [devMode, setDevMode] = useState(false);
   const [audioRoute, setAudioRoute] = useState('Unknown');
   const [connectionState, setConnectionState] = useState('Checking...');
@@ -120,11 +150,8 @@ export default function GlassesDiagnosticsScreen() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [pushDebugState, setPushDebugState] = useState(null);
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
-  const [wearablesBridgeAvailable, setWearablesBridgeAvailable] = useState(false);
-  const [wearablesDiagnostics, setWearablesDiagnostics] = useState(null);
-  const [wearablesSessionState, setWearablesSessionState] = useState('unknown');
-  const [wearablesCandidates, setWearablesCandidates] = useState([]);
   const [wearablesFollowOnTask, setWearablesFollowOnTask] = useState(null);
+  const [wearablesMediaStatus, setWearablesMediaStatus] = useState('No DAT media action yet');
   const [discoveredPeers, setDiscoveredPeers] = useState([]);
   const [selectedPeerRef, setSelectedPeerRef] = useState(null);
   const [activePeer, setActivePeer] = useState(null);
@@ -150,7 +177,6 @@ export default function GlassesDiagnosticsScreen() {
   const pendingTtsTempUriRef = useRef(null);
   const recordingPromiseRef = useRef(null);
   const appIsActiveRef = useRef(AppState.currentState === 'active');
-  const wearablesBridgeRef = useRef(null);
   const wearablesTaskTriggerRef = useRef(null);
   const transportSessionTarget = getTransportSessionPeerTarget({
     activePeer,
@@ -163,6 +189,66 @@ export default function GlassesDiagnosticsScreen() {
     matchedSession: matchedTransportSession,
     activePeer,
   });
+  const handleWearablesBridgeError = (message) => {
+    setLastError(message);
+  };
+  const handleWearablesStateChanged = (event) => {
+    if (event?.targetConnectionState === 'connected' && event?.deviceId) {
+      if (wearablesTaskTriggerRef.current !== event.deviceId) {
+        wearablesTaskTriggerRef.current = event.deviceId;
+        delegateWearablesBridgeTask({
+          deviceId: event.deviceId,
+          deviceName: event.deviceName,
+          targetConnectionState: event.targetConnectionState,
+          targetLastSeenAt: event.targetLastSeenAt,
+          targetRssi: event.targetRssi,
+        }).then((response) => {
+          hydrateWearablesFollowOnTask(response?.follow_on_task || null).catch(() => {});
+        }).catch((error) => {
+          setLastError(`Wearables bridge orchestration failed: ${error.message}`);
+        });
+      }
+    } else if (!event?.deviceId || event?.targetConnectionState === 'unselected') {
+      wearablesTaskTriggerRef.current = null;
+    }
+  };
+  const {
+    isAvailable: wearablesBridgeAvailable,
+    diagnostics: wearablesDiagnostics,
+    sessionState: wearablesSessionState,
+    candidates: wearablesCandidates,
+    refreshDiagnostics: refreshWearablesDiagnostics,
+    startBridgeSession: startWearablesBridgeSession,
+    stopBridgeSession: stopWearablesBridgeSession,
+    selectDeviceTarget: selectWearablesDeviceTarget,
+    clearDeviceTarget: clearWearablesDeviceTarget,
+    reconnectSelectedDeviceTarget: reconnectWearablesDeviceTarget,
+    connectSelectedDeviceTarget: connectWearablesDeviceTarget,
+    capturePhoto: captureWearablesPhoto,
+    startVideoStream: startWearablesVideoStream,
+    stopVideoStream: stopWearablesVideoStream,
+  } = useMetaWearablesDat({
+    onError: handleWearablesBridgeError,
+    onStateChanged: handleWearablesStateChanged,
+  });
+  const wearablesCapabilitySummary = summarizeMetaWearablesDat(wearablesDiagnostics);
+
+  const hydrateWearablesFollowOnTask = async (followOnTask) => {
+    if (!followOnTask?.task_id) {
+      setWearablesFollowOnTask(followOnTask || null);
+      return followOnTask || null;
+    }
+
+    setWearablesFollowOnTask(followOnTask);
+    try {
+      const detail = await getAgentTaskDetail(followOnTask.task_id);
+      const enrichedTask = mergeWearablesFollowOnTask(followOnTask, detail);
+      setWearablesFollowOnTask(enrichedTask);
+      return enrichedTask;
+    } catch {
+      return followOnTask;
+    }
+  };
 
   const handleInboundPeerFrame = async (event, envelope = null) => {
     if (!event?.peerRef || !autoValidateInboundPeerFrames) {
@@ -224,7 +310,6 @@ export default function GlassesDiagnosticsScreen() {
       }
       await checkAudioRoute();
       await refreshPeerAdapterState();
-      await refreshWearablesDiagnostics();
     })();
 
     // Fetch initial debug state immediately
@@ -271,65 +356,33 @@ export default function GlassesDiagnosticsScreen() {
   }, []);
 
   useEffect(() => {
-    let subscription = null;
-    let cancelled = false;
+    if (!wearablesFollowOnTask?.task_id || !isActiveWearablesTask(wearablesFollowOnTask?.state)) {
+      return;
+    }
 
-    (async () => {
+    let cancelled = false;
+    const refreshTask = async () => {
       try {
-        const module = wearablesBridgeRef.current || (await getWearablesBridge());
-        if (cancelled || !module?.addStateListener) {
+        const detail = await getAgentTaskDetail(wearablesFollowOnTask.task_id);
+        if (cancelled) {
           return;
         }
-        wearablesBridgeRef.current = module;
-        subscription = module.addStateListener((event) => {
-          setWearablesSessionState(event?.state || 'unknown');
-          if (event && typeof event === 'object') {
-            setWearablesDiagnostics((current) => ({
-              ...(current || {}),
-              sessionState: event?.sessionState || event?.state || current?.sessionState || 'unknown',
-              activeDeviceId: event?.deviceId ?? current?.activeDeviceId ?? null,
-              selectedDeviceId: event?.deviceId ?? current?.selectedDeviceId ?? null,
-              selectedDeviceName: event?.deviceName ?? current?.selectedDeviceName ?? null,
-              targetConnectionState: event?.targetConnectionState ?? current?.targetConnectionState ?? 'unknown',
-              targetLastSeenAt: event?.targetLastSeenAt ?? current?.targetLastSeenAt ?? null,
-              targetRssi: event?.targetRssi ?? current?.targetRssi ?? null,
-            }));
-          }
-          if (event?.targetConnectionState === 'connected' && event?.deviceId) {
-            if (wearablesTaskTriggerRef.current !== event.deviceId) {
-              wearablesTaskTriggerRef.current = event.deviceId;
-              delegateWearablesBridgeTask({
-                deviceId: event.deviceId,
-                deviceName: event.deviceName,
-                targetConnectionState: event.targetConnectionState,
-                targetLastSeenAt: event.targetLastSeenAt,
-                targetRssi: event.targetRssi,
-              }).then((response) => {
-                setWearablesFollowOnTask(response?.follow_on_task || null);
-              }).catch((error) => {
-                setLastError(`Wearables bridge orchestration failed: ${error.message}`);
-              });
-            }
-          } else if (!event?.deviceId || event?.targetConnectionState === 'unselected') {
-            wearablesTaskTriggerRef.current = null;
-          }
-          refreshWearablesDiagnostics().catch(() => {});
-        });
+        setWearablesFollowOnTask((current) => mergeWearablesFollowOnTask(current, detail));
       } catch {
-        // keep DAT diagnostics best-effort
+        // Keep bridge task hydration best-effort.
       }
-    })();
+    };
+
+    refreshTask().catch(() => {});
+    const intervalId = setInterval(() => {
+      refreshTask().catch(() => {});
+    }, 5000);
 
     return () => {
       cancelled = true;
-      try {
-        subscription?.remove?.();
-      } catch {
-        // ignore
-      }
+      clearInterval(intervalId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [wearablesFollowOnTask?.task_id, wearablesFollowOnTask?.state]);
 
   useEffect(() => {
     if (devMode || !nativeModuleAvailable) {
@@ -465,7 +518,7 @@ export default function GlassesDiagnosticsScreen() {
   useEffect(() => {
     checkAudioRoute();
     refreshPeerAdapterState();
-    refreshWearablesDiagnostics();
+    refreshWearablesDiagnostics().catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [devMode]);
 
@@ -550,46 +603,21 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
-  const refreshWearablesDiagnostics = async () => {
-    try {
-      const module = await getWearablesBridge();
-      wearablesBridgeRef.current = module;
-      setWearablesBridgeAvailable(Boolean(module?.isBridgeAvailable?.()));
-      const diagnostics = await module.getDiagnostics();
-      const candidates = typeof module.scanKnownAndNearbyDevices === 'function'
-        ? await module.scanKnownAndNearbyDevices(2000)
-        : [];
-      setWearablesDiagnostics(diagnostics);
-      setWearablesSessionState(diagnostics?.sessionState || 'unknown');
-      setWearablesCandidates(Array.isArray(candidates) ? candidates : []);
-    } catch (error) {
-      setLastError(`Wearables bridge diagnostics failed: ${error.message}`);
-    }
-  };
-
   const startWearablesSession = async () => {
     try {
       setLastError(null);
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      const result = await module.startBridgeSession();
-      setWearablesSessionState(result?.state || 'unknown');
-      await refreshWearablesDiagnostics();
-    } catch (error) {
-      setLastError(`Wearables bridge session start failed: ${error.message}`);
+      await startWearablesBridgeSession();
+    } catch {
+      // hook already reported the error
     }
   };
 
   const stopWearablesSession = async () => {
     try {
       setLastError(null);
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      const result = await module.stopBridgeSession();
-      setWearablesSessionState(result?.state || 'unknown');
-      await refreshWearablesDiagnostics();
-    } catch (error) {
-      setLastError(`Wearables bridge session stop failed: ${error.message}`);
+      await stopWearablesBridgeSession();
+    } catch {
+      // hook already reported the error
     }
   };
 
@@ -601,52 +629,101 @@ export default function GlassesDiagnosticsScreen() {
         setLastError('No wearables candidate available to select');
         return;
       }
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      await module.selectDeviceTarget(candidate.deviceId);
-      await refreshWearablesDiagnostics();
-    } catch (error) {
-      setLastError(`Wearables bridge target select failed: ${error.message}`);
+      await selectWearablesDeviceTarget(candidate.deviceId);
+    } catch {
+      // hook already reported the error
     }
   };
 
   const clearWearablesTarget = async () => {
     try {
       setLastError(null);
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      await module.clearDeviceTarget();
+      await clearWearablesDeviceTarget();
       wearablesTaskTriggerRef.current = null;
       setWearablesFollowOnTask(null);
-      await refreshWearablesDiagnostics();
-    } catch (error) {
-      setLastError(`Wearables bridge target clear failed: ${error.message}`);
+    } catch {
+      // hook already reported the error
     }
   };
 
   const reconnectWearablesTarget = async () => {
     try {
       setLastError(null);
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      const result = await module.reconnectSelectedDeviceTarget();
-      setWearablesSessionState(result?.state || 'unknown');
-      await refreshWearablesDiagnostics();
-    } catch (error) {
-      setLastError(`Wearables bridge reconnect failed: ${error.message}`);
+      await reconnectWearablesDeviceTarget();
+    } catch {
+      // hook already reported the error
     }
   };
 
   const connectWearablesTarget = async () => {
     try {
       setLastError(null);
-      const module = wearablesBridgeRef.current || (await getWearablesBridge());
-      wearablesBridgeRef.current = module;
-      const result = await module.connectSelectedDeviceTarget();
-      setWearablesSessionState(result?.state || 'unknown');
-      await refreshWearablesDiagnostics();
+      await connectWearablesDeviceTarget();
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const handleWearablesMediaResult = async (result) => {
+    const action = result?.action || 'media_action';
+    const message = result?.message || result?.state || 'unknown';
+    setWearablesMediaStatus(`${action}: ${message}`);
+
+    if (!result?.assetUri) {
+      return;
+    }
+
+    setWearablesMediaStatus(`${action}: ${message}. Uploading asset...`);
+    try {
+      const uploaded = await uploadWearablesDatAsset(result);
+      if (uploaded?.uri) {
+        let nextStatus = `${action}: ${message}. Uploaded ${uploaded.media_kind || 'media'} to ${uploaded.uri}`;
+        const taskId = wearablesFollowOnTask?.task_id;
+        if (taskId) {
+          await attachAgentTaskMedia(taskId, {
+            ...uploaded,
+            action,
+            device_id: wearablesDiagnostics?.selectedDeviceId || wearablesDiagnostics?.activeDeviceId || null,
+            device_name: wearablesDiagnostics?.selectedDeviceName || null,
+          });
+          await hydrateWearablesFollowOnTask(wearablesFollowOnTask);
+          nextStatus = `${nextStatus}. Attached to task ${taskId}.`;
+        }
+        setWearablesMediaStatus(nextStatus);
+      }
     } catch (error) {
-      setLastError(`Wearables bridge connect failed: ${error.message}`);
+      setWearablesMediaStatus(`${action}: ${message}. Upload failed.`);
+      setLastError(`Wearables DAT media upload failed: ${error.message}`);
+    }
+  };
+
+  const triggerWearablesPhotoCapture = async () => {
+    try {
+      setLastError(null);
+      const result = await captureWearablesPhoto();
+      await handleWearablesMediaResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const triggerWearablesVideoStart = async () => {
+    try {
+      setLastError(null);
+      const result = await startWearablesVideoStream();
+      await handleWearablesMediaResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const triggerWearablesVideoStop = async () => {
+    try {
+      setLastError(null);
+      const result = await stopWearablesVideoStream();
+      await handleWearablesMediaResult(result);
+    } catch {
+      // hook already reported the error
     }
   };
 
@@ -1206,6 +1283,7 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>SDK version: {wearablesDiagnostics?.sdkVersion || 'not linked'}</Text>
         <Text style={styles.text}>Analytics opt-out: {wearablesDiagnostics?.analyticsOptOut ? 'enabled' : 'disabled'}</Text>
         <Text style={styles.text}>Application ID: {wearablesDiagnostics?.applicationId || 'not configured'}</Text>
+        <Text style={styles.text}>Readiness: {wearablesCapabilitySummary.readiness}</Text>
         <Text style={styles.text}>Session state: {wearablesSessionState}</Text>
         <Text style={styles.text}>Registration state: {wearablesDiagnostics?.registrationState || 'unknown'}</Text>
         <Text style={styles.text}>Active device: {wearablesDiagnostics?.activeDeviceId || 'none'}</Text>
@@ -1216,6 +1294,10 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>
           Bridge task: {wearablesFollowOnTask?.summary || wearablesFollowOnTask?.task_id || 'none'}
         </Text>
+        <FollowOnTaskCard
+          followOnTask={wearablesFollowOnTask}
+          onOpenTask={(taskId) => navigation?.navigate?.('TaskDetail', { taskId })}
+        />
         <Text style={styles.text}>Device count: {wearablesDiagnostics?.deviceCount ?? 0}</Text>
         <Text style={styles.text}>
           Adapter: {wearablesDiagnostics?.adapterState
@@ -1228,6 +1310,8 @@ export default function GlassesDiagnosticsScreen() {
             : 'unknown'}
         </Text>
         <Text style={styles.text}>Known devices: {wearablesDiagnostics?.knownDeviceCount ?? 0}</Text>
+        <Text style={styles.text}>Capability matrix: {wearablesCapabilitySummary.matrixSummary}</Text>
+        <Text style={styles.text}>Media action: {wearablesMediaStatus}</Text>
         <Text style={styles.text}>
           Candidate devices: {wearablesCandidates.length > 0
             ? wearablesCandidates
@@ -1241,15 +1325,7 @@ export default function GlassesDiagnosticsScreen() {
             : 'none'}
         </Text>
         <Text style={styles.text}>
-          Capabilities: {wearablesDiagnostics?.capabilities
-            ? [
-                wearablesDiagnostics.capabilities.session ? 'session' : null,
-                wearablesDiagnostics.capabilities.camera ? 'camera' : null,
-                wearablesDiagnostics.capabilities.photoCapture ? 'photo' : null,
-                wearablesDiagnostics.capabilities.videoStream ? 'video' : null,
-                wearablesDiagnostics.capabilities.audio ? 'audio' : null,
-              ].filter(Boolean).join(', ') || 'none'
-            : 'unknown'}
+          Capabilities: {wearablesCapabilitySummary.availableSummary}
         </Text>
         <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={refreshWearablesDiagnostics}>
           <Text style={styles.buttonTextSecondary}>Refresh Bridge Diagnostics</Text>
@@ -1265,6 +1341,15 @@ export default function GlassesDiagnosticsScreen() {
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, !wearablesDiagnostics?.selectedDeviceId && styles.buttonDisabled]} onPress={connectWearablesTarget} disabled={!wearablesDiagnostics?.selectedDeviceId}>
           <Text style={styles.buttonText}>Connect Selected Target</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesPhotoCapture} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Capture DAT Photo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesVideoStart} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Start DAT Video</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesVideoStop} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Stop DAT Video</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={startWearablesSession} disabled={!wearablesBridgeAvailable}>
           <Text style={styles.buttonText}>Start Bridge Session</Text>

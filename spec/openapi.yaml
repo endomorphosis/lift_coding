@@ -8,6 +8,34 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
+  /health:
+    get:
+      summary: Process health check
+      operationId: processHealth
+      responses:
+        '200':
+          description: Process is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  /simulator:
+    get:
+      summary: Return simulator landing page
+      operationId: getSimulatorPage
+      responses:
+        '200':
+          description: HTML simulator page
+          content:
+            text/html:
+              schema:
+                type: string
+
   /v1/command:
     post:
       summary: Submit a hands-free command (text or audio metadata)
@@ -21,6 +49,7 @@ paths:
       responses:
         '200':
           description: Command handled
+
           content:
             application/json:
               schema:
@@ -32,6 +61,7 @@ paths:
                     status: ok
                     intent:
                       name: agent.result_rerun
+
                       confidence: 1.0
                       entities:
                         task_id: task-9b2b1d9d
@@ -94,6 +124,7 @@ paths:
           content:
             application/json:
               schema:
+
                 $ref: '#/components/schemas/CommandResponse'
               examples:
                 needs_confirmation:
@@ -114,6 +145,7 @@ paths:
                     follow_on_task: null
                 task_spawn:
                   summary: Spawned MCP task
+
                   value:
                     status: ok
                     intent:
@@ -374,6 +406,27 @@ paths:
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ActionResult' }
+
+  /v1/actions/comment:
+    post:
+      summary: Post a PR comment (policy-gated)
+      operationId: commentOnPr
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CommentRequest' }
+      responses:
+        '200':
+          description: Comment submission handled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+        '409':
+          description: Policy denied or needs confirmation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
 
   /v1/actions/merge:
     post:
@@ -1262,6 +1315,451 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+  /v1/dev/media:
+    post:
+      summary: Upload image/video bytes for dev/testing (dev-only)
+      operationId: uploadDevMedia
+      description: >
+        Accepts base64-encoded media and saves it locally, returning a file:// URI.
+        Only available when HANDSFREE_AUTH_MODE=dev.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [data_base64]
+              properties:
+                data_base64:
+                  type: string
+                  description: Base64-encoded media bytes
+                media_kind:
+                  type: string
+                  enum: [image, video]
+                  default: image
+                format:
+                  type: string
+                  description: Media format/extension (jpg, png, mp4, mov, etc.)
+                mime_type:
+                  type: string
+                  description: Optional MIME type hint
+      responses:
+        '200':
+          description: Media uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [uri, bytes, format, media_kind, user_id]
+                properties:
+                  uri:
+                    type: string
+                    format: uri
+                  bytes:
+                    type: integer
+                  format:
+                    type: string
+                  mime_type:
+                    type: string
+                    nullable: true
+                  media_kind:
+                    type: string
+                    enum: [image, video]
+                  user_id:
+                    type: string
+        '400':
+          description: Invalid request (bad media_kind, invalid base64, unsupported format, or too large)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/{conversation_id}:
+    get:
+      summary: Get normalized dev peer chat history for a conversation (dev-only)
+      operationId: getDevPeerChatHistory
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Peer chat history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatHistoryResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat:
+    get:
+      summary: List recent normalized dev peer chat conversations (dev-only)
+      operationId: listDevPeerChatConversations
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Recent peer chat conversation summaries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatConversationsResponse'
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/send:
+    post:
+      summary: Send a dev peer chat message via the backend relay (dev-only)
+      operationId: sendDevPeerChatMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerChatSendRequest'
+      responses:
+        '200':
+          description: Outbound peer chat accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatSendResponse'
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '503':
+          description: Transport unavailable
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}:
+    get:
+      summary: Fetch queued dev peer chat outbox messages for a handset peer (dev-only)
+      operationId: getDevPeerChatOutbox
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: lease_ms
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 120000
+      responses:
+        '200':
+          description: Peer chat outbox state and leased messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatOutboxResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}/status:
+    get:
+      summary: Get peer chat outbox status without leasing messages (dev-only)
+      operationId: getDevPeerChatOutboxStatus
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Peer chat outbox status without replay side effects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatOutboxResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}/ack:
+    post:
+      summary: Acknowledge delivered peer chat outbox messages (dev-only)
+      operationId: ackDevPeerChatOutbox
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerChatOutboxAckRequest'
+      responses:
+        '200':
+          description: Outbox messages acknowledged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatOutboxAckResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}/release:
+    post:
+      summary: Release leased peer chat outbox messages (dev-only)
+      operationId: releaseDevPeerChatOutbox
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerChatOutboxReleaseRequest'
+      responses:
+        '200':
+          description: Outbox message leases released
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatOutboxReleaseResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}/promote:
+    post:
+      summary: Promote queued peer chat outbox messages to urgent priority (dev-only)
+      operationId: promoteDevPeerChatOutbox
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerChatOutboxPromoteRequest'
+      responses:
+        '200':
+          description: Outbox messages promoted to urgent priority
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatOutboxPromoteResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/handsets/{peer_id}/heartbeat:
+    post:
+      summary: Record a dev peer chat handset heartbeat (dev-only)
+      operationId: heartbeatDevPeerChatHandset
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerChatHandsetHeartbeatRequest'
+      responses:
+        '200':
+          description: Updated handset relay session state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatHandsetSessionResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/handsets/{peer_id}:
+    get:
+      summary: Get observed dev peer chat handset session state (dev-only)
+      operationId: getDevPeerChatHandsetSession
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current handset relay session state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerChatHandsetSessionResponse'
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Handset session not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-envelope:
+    post:
+      summary: Submit a dev transport envelope for decoding and ingestion (dev-only)
+      operationId: postDevPeerEnvelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevPeerEnvelopeRequest'
+      responses:
+        '200':
+          description: Transport envelope accepted and decoded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevPeerEnvelopeResponse'
+        '400':
+          description: Invalid request or malformed transport envelope
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/transport-sessions:
+    get:
+      summary: List persisted transport session cursors (dev-only)
+      operationId: listDevTransportSessions
+      responses:
+        '200':
+          description: Persisted transport session cursors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevTransportSessionsResponse'
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/transport-sessions/{peer_id}:
+    delete:
+      summary: Clear a persisted transport session cursor (dev-only)
+      operationId: clearDevTransportSession
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transport session cursor cleared state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevTransportSessionClearResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/repos/subscriptions:
     post:
       summary: Create a repository subscription for webhook notifications
@@ -1357,11 +1855,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotificationsListResponse'
+              examples:
+                notifications_feed:
+                  summary: Notification feed with MCP-derived card
+                  value:
+                    notifications:
+                      - id: notif-9b2b1d9d
+                        user_id: 00000000-0000-0000-0000-000000000001
+                        event_type: task_completed
+                        message: "IPFS Datasets completed. Result: Expanded legal query"
+                        metadata:
+                          task_id: task-9b2b1d9d
+                          provider: ipfs_datasets_mcp
+                          provider_label: IPFS Datasets
+                          mcp_capability: dataset_discovery
+                        created_at: '2026-03-09T12:01:15Z'
+                        priority: 3
+                        profile: default
+                        delivery_status: success
+                        card:
+                          title: IPFS Datasets completed
+                          subtitle: dataset discovery
+                          lines:
+                            - 'Instruction: find legal datasets'
+                            - 'Result: Expanded legal query'
+                          deep_link: /v1/agents/tasks/task-9b2b1d9d
+                          action_items:
+                            - id: show_result_details
+                              label: Details
+                              phrase: show task details for that result
+                    count: 1
         '400':
           description: Invalid request
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                invalid_since:
+                  summary: Invalid since timestamp
+                  value:
+                    error: invalid_parameter
+                    message: "Invalid 'since' timestamp format. Use ISO 8601 format."
         '401':
           description: Not authenticated
           content:
@@ -1386,11 +1920,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Notification'
+              examples:
+                mcp_completion_notification:
+                  summary: MCP completion notification with actionable card
+                  value:
+                    id: notif-9b2b1d9d
+                    user_id: 00000000-0000-0000-0000-000000000001
+                    event_type: task_completed
+                    message: 'IPFS Datasets completed. Result: Expanded legal query'
+                    metadata:
+                      task_id: task-9b2b1d9d
+                      provider: ipfs_datasets_mcp
+                      provider_label: IPFS Datasets
+                      mcp_capability: dataset_discovery
+                    created_at: '2026-03-09T12:01:15Z'
+                    priority: 3
+                    profile: default
+                    delivery_status: success
+                    card:
+                      title: IPFS Datasets completed
+                      subtitle: dataset discovery
+                      lines:
+                        - 'Instruction: find legal datasets'
+                        - 'Result: Expanded legal query'
+                      deep_link: /v1/agents/tasks/task-9b2b1d9d
+                      action_items:
+                        - id: show_result_details
+                          label: Details
+                          phrase: show task details for that result
         '404':
           description: Notification not found or does not belong to the user
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                notification_not_found:
+                  summary: Notification not found
+                  value:
+                    error: not_found
+                    message: Notification not found
         '401':
           description: Not authenticated
           content:
@@ -1548,11 +2116,355 @@ paths:
                       has_more:
                         type: boolean
                         description: Whether more results are available
+              examples:
+                filtered_task_list:
+                  summary: Filtered task list with normalized MCP result
+                  value:
+                    tasks:
+                      - id: task-9b2b1d9d
+                        state: completed
+                        provider: ipfs_datasets_mcp
+                        provider_label: IPFS Datasets
+                        description: find legal datasets
+                        created_at: '2026-03-09T12:00:00Z'
+                        updated_at: '2026-03-09T12:01:15Z'
+                        result_preview: Expanded legal query
+                        result:
+                          provider_label: IPFS Datasets
+                          capability: dataset_discovery
+                          preview: Expanded legal query
+                          message: Expanded legal query
+                          dataset_queries:
+                            - federal labor law dataset
+                            - employment regulation dataset
+                    pagination:
+                      limit: 50
+                      offset: 0
+                      has_more: false
+                    filters:
+                      status: completed
+                      provider: ipfs_datasets_mcp
+                      capability: dataset_discovery
+                      result_view: normalized
+                      results_only: true
+                      sort: updated_at
+                      direction: desc
         '400':
           description: Invalid query parameters
           content:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                invalid_parameter:
+                  summary: Invalid query parameter
+                  value:
+                    error: invalid_parameter
+                    message: 'sort must be one of: created_at, updated_at'
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}:
+    get:
+      summary: Get a specific agent task for the authenticated user
+      operationId: getAgentTaskDetail
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The task ID to retrieve
+      responses:
+        '200':
+          description: Agent task detail
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, state, provider, description, trace]
+                properties:
+                  id:
+                    type: string
+                  state:
+                    type: string
+                  provider:
+                    type: string
+                  provider_label:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  trace:
+                    type: object
+                    additionalProperties: true
+                  result_preview:
+                    type: string
+                  result_output:
+                    type: object
+                    additionalProperties: true
+                  result:
+                    type: object
+                    additionalProperties: true
+              examples:
+                completed_dataset_result:
+                  summary: Completed dataset discovery task
+                  value:
+                    id: task-9b2b1d9d
+                    state: completed
+                    provider: ipfs_datasets_mcp
+                    provider_label: IPFS Datasets
+                    description: find legal datasets
+                    created_at: '2026-03-09T12:00:00Z'
+                    updated_at: '2026-03-09T12:01:15Z'
+                    trace:
+                      provider_label: IPFS Datasets
+                      mcp_capability: dataset_discovery
+                    result_preview: Expanded legal query
+                    result_output:
+                      message: Expanded legal query
+                      expanded_queries:
+                        - federal labor law dataset
+                        - employment regulation dataset
+                    result:
+                      provider_label: IPFS Datasets
+                      capability: dataset_discovery
+                      preview: Expanded legal query
+                      message: Expanded legal query
+                      dataset_queries:
+                        - federal labor law dataset
+                        - employment regulation dataset
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}/media:
+    post:
+      summary: Attach uploaded media metadata to an agent task
+      operationId: attachAgentTaskMedia
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [uri]
+              properties:
+                uri:
+                  type: string
+                  description: Uploaded media URI (for example file:// from /v1/dev/media)
+                media_kind:
+                  type: string
+                  enum: [image, video, audio]
+                  default: image
+                format:
+                  type: string
+                mime_type:
+                  type: string
+                source_asset_uri:
+                  type: string
+                action:
+                  type: string
+                device_id:
+                  type: string
+                device_name:
+                  type: string
+                captured_at:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Task media attached
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_id:
+                    type: string
+                  state:
+                    type: string
+                  message:
+                    type: string
+                  updated_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  media:
+                    type: object
+                  media_count:
+                    type: integer
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                task_not_found:
+                  summary: Task not found
+                  value:
+                    error: task_not_found
+                    message: No accessible task found for task-missing
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/results:
+    get:
+      summary: List completed MCP-backed task results
+      operationId: listAgentResults
+      parameters:
+        - name: view
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Saved results view such as overview, datasets, ipfs, or fetches
+        - name: provider
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: capability
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: latest_only
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [created_at, updated_at]
+            default: updated_at
+        - name: direction
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Completed MCP-backed task results
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [results, pagination, filters, summary]
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  pagination:
+                    type: object
+                    additionalProperties: true
+                  filters:
+                    type: object
+                    additionalProperties: true
+                  summary:
+                    type: object
+                    additionalProperties: true
+              examples:
+                datasets_view:
+                  summary: Dataset results view
+                  value:
+                    results:
+                      - task_id: task-9b2b1d9d
+                        state: completed
+                        provider: ipfs_datasets_mcp
+                        provider_label: IPFS Datasets
+                        instruction: find legal datasets
+                        created_at: '2026-03-09T12:00:00Z'
+                        updated_at: '2026-03-09T12:01:15Z'
+                        result_preview: Expanded legal query
+                        result_output:
+                          message: Expanded legal query
+                          expanded_queries:
+                            - federal labor law dataset
+                            - employment regulation dataset
+                        result:
+                          provider_label: IPFS Datasets
+                          capability: dataset_discovery
+                          preview: Expanded legal query
+                          message: Expanded legal query
+                          dataset_queries:
+                            - federal labor law dataset
+                            - employment regulation dataset
+                    pagination:
+                      limit: 50
+                      offset: 0
+                      has_more: false
+                    filters:
+                      view: datasets
+                      provider: null
+                      capability: dataset_discovery
+                      preset: dataset_discoveries
+                      latest_only: true
+                      sort: updated_at
+                      direction: desc
+                    summary:
+                      total_results: 1
+                      by_provider:
+                        ipfs_datasets_mcp: 1
+                      by_capability:
+                        dataset_discovery: 1
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+              examples:
+                invalid_parameter:
+                  summary: Invalid query parameter
+                  value:
+                    error: invalid_parameter
+                    message: 'sort must be one of: created_at, updated_at'
         '401':
           description: Not authenticated
           content:
@@ -2486,6 +3398,9 @@ components:
         provider_label: IPFS Accelerate
         capability: agentic_fetch
         summary: IPFS Accelerate agentic fetch running.
+        mcp_execution_mode: mcp_remote
+        mcp_preferred_execution_mode: direct_import
+        result_preview: Connectivity receipt captured
       properties:
         task_id:
           type: string
@@ -2499,6 +3414,377 @@ components:
           type: string
         summary:
           type: string
+
+        mcp_execution_mode:
+          type: string
+          nullable: true
+        mcp_preferred_execution_mode:
+          type: string
+          nullable: true
+        result_preview:
+          type: string
+          nullable: true
+
+    DevPeerChatMessage:
+      type: object
+      required: [conversation_id, peer_id, sender_peer_id, text, timestamp_ms]
+      properties:
+        conversation_id:
+          type: string
+        peer_id:
+          type: string
+        sender_peer_id:
+          type: string
+        text:
+          type: string
+        priority:
+          type: string
+          default: normal
+          enum: [normal, urgent]
+        timestamp_ms:
+          type: integer
+        task_snapshot:
+          allOf:
+            - $ref: '#/components/schemas/FollowOnTask'
+          nullable: true
+
+    DevPeerChatConversation:
+      type: object
+      required: [conversation_id, peer_id, sender_peer_id, last_text, last_timestamp_ms, message_count]
+      properties:
+        conversation_id:
+          type: string
+        peer_id:
+          type: string
+        sender_peer_id:
+          type: string
+        last_text:
+          type: string
+        priority:
+          type: string
+          default: normal
+          enum: [normal, urgent]
+        last_timestamp_ms:
+          type: integer
+        message_count:
+          type: integer
+        task_snapshot:
+          allOf:
+            - $ref: '#/components/schemas/FollowOnTask'
+          nullable: true
+
+    DevPeerChatHistoryResponse:
+      type: object
+      required: [conversation_id, messages]
+      properties:
+        conversation_id:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevPeerChatMessage'
+
+    DevPeerChatConversationsResponse:
+      type: object
+      required: [conversations]
+      properties:
+        conversations:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevPeerChatConversation'
+
+    DevPeerChatSendRequest:
+      type: object
+      required: [peer_id, text]
+      properties:
+        peer_id:
+          type: string
+        text:
+          type: string
+        conversation_id:
+          type: string
+          nullable: true
+        priority:
+          type: string
+          default: normal
+          enum: [normal, urgent]
+        task_id:
+          type: string
+          nullable: true
+
+    DevPeerChatSendResponse:
+      type: object
+      required:
+        [accepted, peer_id, sender_peer_id, protocol, conversation_id, text, priority, transport_provider, timestamp_ms]
+      properties:
+        accepted:
+          type: boolean
+        peer_id:
+          type: string
+        sender_peer_id:
+          type: string
+        protocol:
+          type: string
+        conversation_id:
+          type: string
+        text:
+          type: string
+        priority:
+          type: string
+          enum: [normal, urgent]
+        transport_provider:
+          type: string
+        timestamp_ms:
+          type: integer
+        task_snapshot:
+          allOf:
+            - $ref: '#/components/schemas/FollowOnTask'
+          nullable: true
+
+    DevPeerChatOutboxMessage:
+      type: object
+      required: [outbox_message_id, conversation_id, peer_id, sender_peer_id, text, timestamp_ms]
+      properties:
+        outbox_message_id:
+          type: string
+        conversation_id:
+          type: string
+        peer_id:
+          type: string
+        sender_peer_id:
+          type: string
+        text:
+          type: string
+        priority:
+          type: string
+          default: normal
+          enum: [normal, urgent]
+        timestamp_ms:
+          type: integer
+        leased_until_ms:
+          type: integer
+          nullable: true
+        task_snapshot:
+          allOf:
+            - $ref: '#/components/schemas/FollowOnTask'
+          nullable: true
+
+    DevPeerChatOutboxPreviewMessage:
+      allOf:
+        - $ref: '#/components/schemas/DevPeerChatOutboxMessage'
+        - type: object
+          required: [state]
+          properties:
+            state:
+              type: string
+            hold_reason:
+              type: string
+              nullable: true
+
+    DevPeerChatOutboxResponse:
+      type: object
+      required:
+        [peer_id, delivery_mode, recommended_lease_ms, recommended_poll_ms, queued_total, queued_urgent, queued_normal, deliverable_now, held_now, messages, preview_messages]
+      properties:
+        peer_id:
+          type: string
+        delivery_mode:
+          type: string
+        recommended_lease_ms:
+          type: integer
+        recommended_poll_ms:
+          type: integer
+        queued_total:
+          type: integer
+        queued_urgent:
+          type: integer
+        queued_normal:
+          type: integer
+        deliverable_now:
+          type: integer
+        held_now:
+          type: integer
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevPeerChatOutboxMessage'
+        preview_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevPeerChatOutboxPreviewMessage'
+
+    DevPeerChatOutboxAckRequest:
+      type: object
+      properties:
+        outbox_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatOutboxAckResponse:
+      type: object
+      required: [peer_id, acknowledged_message_ids]
+      properties:
+        peer_id:
+          type: string
+        acknowledged_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatOutboxReleaseRequest:
+      type: object
+      properties:
+        outbox_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatOutboxReleaseResponse:
+      type: object
+      required: [peer_id, released_message_ids]
+      properties:
+        peer_id:
+          type: string
+        released_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatOutboxPromoteRequest:
+      type: object
+      properties:
+        outbox_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatOutboxPromoteResponse:
+      type: object
+      required: [peer_id, promoted_message_ids]
+      properties:
+        peer_id:
+          type: string
+        promoted_message_ids:
+          type: array
+          items:
+            type: string
+
+    DevPeerChatHandsetHeartbeatRequest:
+      type: object
+      properties:
+        display_name:
+          type: string
+          nullable: true
+
+    DevPeerChatHandsetSessionResponse:
+      type: object
+      required:
+        [peer_id, status, delivery_mode, recommended_lease_ms, recommended_poll_ms, last_seen_ms, last_seen_age_ms]
+      properties:
+        peer_id:
+          type: string
+        display_name:
+          type: string
+          nullable: true
+        status:
+          type: string
+        delivery_mode:
+          type: string
+        recommended_lease_ms:
+          type: integer
+        recommended_poll_ms:
+          type: integer
+        last_seen_ms:
+          type: integer
+        last_seen_age_ms:
+          type: integer
+        last_fetch_ms:
+          type: integer
+          nullable: true
+        last_ack_ms:
+          type: integer
+          nullable: true
+
+    DevPeerEnvelopeRequest:
+      type: object
+      required: [peer_ref, frame_base64]
+      properties:
+        peer_ref:
+          type: string
+        frame_base64:
+          type: string
+
+    DevPeerEnvelopeResponse:
+      type: object
+      required: [accepted, peer_ref, peer_id, kind, session_id, message_id]
+      properties:
+        accepted:
+          type: boolean
+        peer_ref:
+          type: string
+        peer_id:
+          type: string
+        kind:
+          type: string
+        session_id:
+          type: string
+        message_id:
+          type: string
+        protocol:
+          type: string
+          nullable: true
+        conversation_id:
+          type: string
+          nullable: true
+        payload_text:
+          type: string
+          nullable: true
+        payload_json:
+          type: object
+          additionalProperties: true
+          nullable: true
+        ack_frame_base64:
+          type: string
+          nullable: true
+
+    DevTransportSessionCursor:
+      type: object
+      required: [peer_id, peer_ref, session_id, resume_token, capabilities]
+      properties:
+        peer_id:
+          type: string
+        peer_ref:
+          type: string
+        session_id:
+          type: string
+        resume_token:
+          type: string
+        capabilities:
+          type: array
+          items:
+            type: string
+        updated_at_ms:
+          type: integer
+          nullable: true
+
+    DevTransportSessionsResponse:
+      type: object
+      required: [sessions]
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevTransportSessionCursor'
+
+    DevTransportSessionClearResponse:
+      type: object
+      required: [peer_id, cleared]
+      properties:
+        peer_id:
+          type: string
+        cleared:
+          type: boolean
 
     ParsedIntent:
       type: object
@@ -3313,11 +4599,23 @@ components:
           enum: [github_app, env_token, gh_cli, fixtures]
         github_live_mode_requested:
           type: boolean
+        snapshot_retention_days:
+          type: integer
+          nullable: true
+        snapshot_max_records_per_user:
+          type: integer
+          nullable: true
+        snapshot_min_interval_seconds:
+          type: integer
+          nullable: true
       example:
         summary_backend: accelerated
         failure_backend: composite
         github_auth_source: gh_cli
         github_live_mode_requested: true
+        snapshot_retention_days: 30
+        snapshot_max_records_per_user: 25
+        snapshot_min_interval_seconds: 300
 
     AIBackendPolicyWindow:
       type: object
@@ -3435,11 +4733,100 @@ components:
         remap_key: pr_rag_summary->accelerated_pr_summary
         count: 3
 
+    AILatestSnapshotInfo:
+      type: object
+      required: [id, created_at, age_seconds, freshness_threshold_seconds, freshness]
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        age_seconds:
+          type: integer
+          minimum: 0
+        freshness_threshold_seconds:
+          type: integer
+          minimum: 0
+        freshness:
+          type: string
+          enum: [fresh, stale]
+      example:
+        id: snapshot-1
+        created_at: '2026-03-08T20:00:00Z'
+        age_seconds: 42
+        freshness_threshold_seconds: 300
+        freshness: fresh
+
+    AISnapshotHealth:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [healthy, stale, missing]
+      example:
+        status: healthy
+
+    AISnapshotPolicyConfig:
+      type: object
+      properties:
+        retention_days:
+          type: integer
+          nullable: true
+        max_records_per_user:
+          type: integer
+          nullable: true
+        min_interval_seconds:
+          type: integer
+          nullable: true
+      example:
+        retention_days: 30
+        max_records_per_user: 25
+        min_interval_seconds: 300
+
+    AISnapshotSummary:
+      type: object
+      description: Preferred nested snapshot-status contract for new clients.
+      required: [snapshot_health, policy]
+      properties:
+        latest_snapshot:
+          $ref: '#/components/schemas/AILatestSnapshotInfo'
+        snapshot_health:
+          $ref: '#/components/schemas/AISnapshotHealth'
+        policy:
+          $ref: '#/components/schemas/AISnapshotPolicyConfig'
+        snapshot_capture:
+          $ref: '#/components/schemas/AISnapshotCaptureInfo'
+        next_capture:
+          $ref: '#/components/schemas/AISnapshotCaptureInfo'
+      example:
+        latest_snapshot:
+          id: snapshot-1
+          created_at: '2026-03-08T20:00:00Z'
+          age_seconds: 42
+          freshness_threshold_seconds: 300
+          freshness: fresh
+        snapshot_health:
+          status: healthy
+        policy:
+          retention_days: 30
+          max_records_per_user: 25
+          min_interval_seconds: 300
+        snapshot_capture:
+          capture_requested: true
+          capture_mode: created
+          snapshot_id: snapshot-1
+          snapshot_created_at: '2026-03-08T20:00:00Z'
+
     AIBackendPolicyReport:
       type: object
       required:
-        [policy, recent_window, time_buckets, top_capabilities, top_remaps, remapped_capability_counts, direct_capability_counts, requested_workflow_counts, resolved_workflow_counts, remap_counts, action_counts]
+        [report_generated_at, policy, recent_window, time_buckets, top_capabilities, top_remaps, remapped_capability_counts, direct_capability_counts, requested_workflow_counts, resolved_workflow_counts, remap_counts, action_counts, snapshot_health]
       properties:
+        report_generated_at:
+          type: string
+          format: date-time
         policy:
           $ref: '#/components/schemas/AIBackendPolicyConfig'
         recent_window:
@@ -3478,7 +4865,19 @@ components:
           type: object
           additionalProperties:
             type: integer
+        snapshot_summary:
+          $ref: '#/components/schemas/AISnapshotSummary'
+        latest_snapshot:
+          $ref: '#/components/schemas/AILatestSnapshotInfo'
+          description: Compatibility mirror of snapshot_summary.latest_snapshot.
+        snapshot_health:
+          $ref: '#/components/schemas/AISnapshotHealth'
+          description: Compatibility mirror of snapshot_summary.snapshot_health.
+        snapshot_capture:
+          $ref: '#/components/schemas/AISnapshotCaptureInfo'
+          description: Compatibility mirror of snapshot_summary.snapshot_capture.
       example:
+        report_generated_at: '2026-03-08T20:00:42Z'
         policy:
           summary_backend: accelerated
           failure_backend: composite
@@ -3499,8 +4898,6 @@ components:
               accelerated_pr_summary: 1
             remap_counts:
               pr_rag_summary->accelerated_pr_summary: 1
-            action_counts:
-              ai.execute.github.pr.accelerated_summary: 2
           last_24_hours:
             ai_execute_logs: 7
             policy_applied_count: 3
@@ -3551,13 +4948,66 @@ components:
         resolved_workflow_counts:
           accelerated_pr_summary: 3
           accelerated_failure_explain: 2
+        action_counts:
+          ai.execute.github.pr.accelerated_summary: 3
+          ai.execute.github.check.failure_rag_explain: 3
+          ai.execute.github.check.accelerated_failure_explain: 2
         remap_counts:
           pr_rag_summary->accelerated_pr_summary: 3
           failure_rag_explain->accelerated_failure_explain: 2
-        action_counts:
-          ai.execute.github.pr.accelerated_summary: 4
-          ai.execute.github.check.failure_rag_explain: 3
-          ai.execute.github.check.accelerated_failure_explain: 5
+        snapshot_summary:
+          latest_snapshot:
+            id: snapshot-1
+            created_at: '2026-03-08T20:00:00Z'
+            age_seconds: 42
+            freshness_threshold_seconds: 300
+            freshness: fresh
+          snapshot_health:
+            status: healthy
+          policy:
+            retention_days: 30
+            max_records_per_user: 25
+            min_interval_seconds: 300
+          snapshot_capture:
+            capture_requested: true
+            capture_mode: created
+            snapshot_id: snapshot-1
+            snapshot_created_at: '2026-03-08T20:00:00Z'
+        latest_snapshot:
+          id: snapshot-1
+          created_at: '2026-03-08T20:00:00Z'
+          age_seconds: 42
+          freshness_threshold_seconds: 300
+          freshness: fresh
+        snapshot_health:
+          status: healthy
+        snapshot_capture:
+          capture_requested: true
+          capture_mode: created
+          snapshot_id: snapshot-1
+          snapshot_created_at: '2026-03-08T20:00:00Z'
+
+    AISnapshotCaptureInfo:
+      type: object
+      required: [capture_requested, capture_mode]
+      properties:
+        capture_requested:
+          type: boolean
+        capture_mode:
+          type: string
+          enum: [created, reused, skipped]
+        snapshot_id:
+          type: string
+          nullable: true
+        snapshot_created_at:
+          type: string
+          format: date-time
+          nullable: true
+      example:
+        capture_requested: true
+        capture_mode: reused
+        snapshot_id: snapshot-1
+        snapshot_created_at: '2026-03-08T20:00:00Z'
 
     AIBackendPolicyHistoryBucket:
       type: object
@@ -3587,8 +5037,11 @@ components:
 
     AIBackendPolicyHistoryReport:
       type: object
-      required: [policy, window_hours, bucket_hours, buckets]
+      required: [report_generated_at, policy, window_hours, bucket_hours, buckets, snapshot_health]
       properties:
+        report_generated_at:
+          type: string
+          format: date-time
         policy:
           $ref: '#/components/schemas/AIBackendPolicyConfig'
         window_hours:
@@ -3599,7 +5052,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AIBackendPolicyHistoryBucket'
+        snapshot_summary:
+          $ref: '#/components/schemas/AISnapshotSummary'
+        latest_snapshot:
+          $ref: '#/components/schemas/AILatestSnapshotInfo'
+          description: Compatibility mirror of snapshot_summary.latest_snapshot.
+        snapshot_health:
+          $ref: '#/components/schemas/AISnapshotHealth'
+          description: Compatibility mirror of snapshot_summary.snapshot_health.
       example:
+        report_generated_at: '2026-03-08T20:00:42Z'
         policy:
           summary_backend: accelerated
           failure_backend: composite
@@ -3619,6 +5081,27 @@ components:
             ai_execute_logs: 1
             policy_applied_count: 0
             remap_counts: {}
+        snapshot_summary:
+          latest_snapshot:
+            id: snapshot-1
+            created_at: '2026-03-08T20:00:00Z'
+            age_seconds: 42
+            freshness_threshold_seconds: 300
+            freshness: fresh
+          snapshot_health:
+            status: healthy
+          policy:
+            retention_days: 30
+            max_records_per_user: 25
+            min_interval_seconds: 300
+        latest_snapshot:
+          id: snapshot-1
+          created_at: '2026-03-08T20:00:00Z'
+          age_seconds: 42
+          freshness_threshold_seconds: 300
+          freshness: fresh
+        snapshot_health:
+          status: healthy
 
     AIBackendPolicySnapshotResponse:
       type: object
@@ -3675,13 +5158,27 @@ components:
 
     AIBackendPolicySnapshotsResponse:
       type: object
-      required: [snapshots]
+      required: [report_generated_at, snapshots, snapshot_health]
       properties:
+        report_generated_at:
+          type: string
+          format: date-time
         snapshots:
           type: array
           items:
             $ref: '#/components/schemas/AIBackendPolicySnapshotResponse'
+        policy:
+          $ref: '#/components/schemas/AIBackendPolicyConfig'
+        snapshot_summary:
+          $ref: '#/components/schemas/AISnapshotSummary'
+        snapshot_health:
+          $ref: '#/components/schemas/AISnapshotHealth'
+          description: Compatibility mirror of snapshot_summary.snapshot_health.
+        next_capture:
+          $ref: '#/components/schemas/AISnapshotCaptureInfo'
+          description: Compatibility mirror of snapshot_summary.next_capture.
       example:
+        report_generated_at: '2026-03-08T20:00:42Z'
         snapshots:
           - id: snapshot-1
             created_at: '2026-03-08T20:00:00Z'
@@ -3700,6 +5197,64 @@ components:
             top_remaps:
               - remap_key: pr_rag_summary->accelerated_pr_summary
                 count: 3
+        policy:
+          summary_backend: accelerated
+          failure_backend: composite
+          github_auth_source: gh_cli
+          github_live_mode_requested: true
+        snapshot_summary:
+          latest_snapshot:
+            id: snapshot-1
+            created_at: '2026-03-08T20:00:00Z'
+            age_seconds: 42
+            freshness_threshold_seconds: 300
+            freshness: fresh
+          snapshot_health:
+            status: healthy
+          policy:
+            retention_days: 30
+            max_records_per_user: 25
+            min_interval_seconds: 300
+          next_capture:
+            capture_requested: true
+            capture_mode: reused
+            snapshot_id: snapshot-1
+            snapshot_created_at: '2026-03-08T20:00:00Z'
+        snapshot_health:
+          status: healthy
+        next_capture:
+          capture_requested: true
+          capture_mode: reused
+          snapshot_id: snapshot-1
+          snapshot_created_at: '2026-03-08T20:00:00Z'
+          snapshot_retention_days: 30
+          snapshot_max_records_per_user: 25
+          snapshot_min_interval_seconds: 300
+        snapshot_summary:
+          latest_snapshot:
+            id: snapshot-1
+            created_at: '2026-03-08T20:00:00Z'
+            age_seconds: 42
+            freshness_threshold_seconds: 300
+            freshness: fresh
+          snapshot_health:
+            status: healthy
+          policy:
+            retention_days: 30
+            max_records_per_user: 25
+            min_interval_seconds: 300
+          next_capture:
+            capture_requested: true
+            capture_mode: reused
+            snapshot_id: snapshot-1
+            snapshot_created_at: '2026-03-08T20:00:00Z'
+        snapshot_health:
+          status: healthy
+        next_capture:
+          capture_requested: true
+          capture_mode: reused
+          snapshot_id: snapshot-1
+          snapshot_created_at: '2026-03-08T20:00:00Z'
 
     AICapabilityExecuteResponse:
       type: object
@@ -3948,6 +5503,8 @@ components:
           type: string
           enum: [pending, success, failed]
           nullable: true
+        card:
+          $ref: '#/components/schemas/UICard'
 
     NotificationsListResponse:
       type: object

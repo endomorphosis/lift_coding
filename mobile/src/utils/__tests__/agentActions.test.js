@@ -1,6 +1,19 @@
-import { buildLastActionLines, extractActionTaskUpdate } from '../agentActions';
+jest.mock('../../native/metaWearablesDat', () => ({
+  getMetaWearablesDat: jest.fn(),
+}));
+
+import {
+  buildLastActionLines,
+  executeLocalStructuredAction,
+  extractActionTaskUpdate,
+} from '../agentActions';
+import { getMetaWearablesDat } from '../../native/metaWearablesDat';
 
 describe('agentActions helpers', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('extracts task metadata from structured action responses', () => {
     expect(
       extractActionTaskUpdate({
@@ -59,5 +72,58 @@ describe('agentActions helpers', () => {
         debug: { tool_calls: [] },
       })
     ).toBeNull();
+  });
+
+  it('runs wearables reconnect locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    getMetaWearablesDat.mockResolvedValue({
+      reconnectSelectedDeviceTarget: jest.fn(async () => ({
+        deviceId: 'AA:BB',
+        deviceName: 'Ray-Ban Meta',
+        targetConnectionState: 'discovered',
+      })),
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_reconnect_wearables_target' },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Reconnect attempted for Ray-Ban Meta. State: discovered.',
+      response: {
+        deviceId: 'AA:BB',
+        deviceName: 'Ray-Ban Meta',
+        targetConnectionState: 'discovered',
+      },
+    });
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
+  it('opens wearables diagnostics locally without calling the bridge', async () => {
+    const navigate = jest.fn();
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_open_wearables_diagnostics' },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Opened wearables bridge diagnostics.',
+      response: null,
+    });
+    expect(getMetaWearablesDat).not.toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
+  it('returns handled false for non-local actions', async () => {
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'read_cid' },
+      navigation: { navigate: jest.fn() },
+    });
+
+    expect(outcome).toEqual({ handled: false });
   });
 });

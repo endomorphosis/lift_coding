@@ -7,6 +7,7 @@ for copilot and custom agents.
 import json
 import logging
 import os
+from datetime import UTC, datetime
 import shutil
 import subprocess
 import re
@@ -735,6 +736,19 @@ class MCPAgentProvider(AgentProvider):
                 arguments[key] = value
         return arguments
 
+    def _decorate_envelope_for_task(
+        self,
+        task: AgentTask,
+        envelope,
+    ):
+        trace = task.trace or {}
+        if (
+            self.provider_name != "ipfs_accelerate_mcp"
+            or trace.get("wearables_bridge_requested_workflow") != "wearables_bridge_connectivity"
+        ):
+            return envelope
+        return _build_wearables_bridge_connectivity_envelope(task, envelope)
+
     def start_task(self, task: AgentTask) -> dict[str, Any]:
         trace = self._base_trace(task)
 
@@ -795,6 +809,7 @@ class MCPAgentProvider(AgentProvider):
                 remote_task_id=remote_task_id,
                 status="running",
             )
+            envelope = self._decorate_envelope_for_task(task, envelope)
             return {
                 "ok": True,
                 "status": "running",
@@ -804,6 +819,9 @@ class MCPAgentProvider(AgentProvider):
                     "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
                     "mcp_capability": binding.capability_id,
                     "mcp_execution_mode": binding.execution_mode or "mcp_remote",
+                    "mcp_started_at": _now_iso(),
+                    "mcp_timeout_s": config.timeout_s,
+                    "mcp_poll_interval_s": config.poll_interval_s,
                     "mcp_status_strategy": "tool_polling",
                     "mcp_sync_completed": False,
                 }
@@ -817,6 +835,7 @@ class MCPAgentProvider(AgentProvider):
             execution_mode=binding.execution_mode or "mcp_remote",
             invocation=result,
         )
+        envelope = self._decorate_envelope_for_task(task, envelope)
         return {
             "ok": True,
             "status": "running",
@@ -826,6 +845,9 @@ class MCPAgentProvider(AgentProvider):
                 "mcp_handshake": handshake.get("server") or handshake.get("result") or "ok",
                 "mcp_capability": binding.capability_id,
                 "mcp_execution_mode": binding.execution_mode or "mcp_remote",
+                "mcp_started_at": _now_iso(),
+                "mcp_timeout_s": config.timeout_s,
+                "mcp_poll_interval_s": config.poll_interval_s,
                 "mcp_sync_completed": result.run_id is None and result.status == "completed",
             }
             | envelope_to_trace(envelope)
@@ -881,6 +903,36 @@ class MCPAgentProvider(AgentProvider):
             run_id=status.run_id,
             last_protocol_state=status.status,
         )
+        timed_out, elapsed_s, timeout_s = _trace_timeout_state(trace)
+        if mapped_status == "running" and timed_out:
+            timeout_summary = (
+                f"{self.provider_name} task timed out after {timeout_s}s."
+                if timeout_s is not None
+                else f"{self.provider_name} task timed out."
+            )
+            timeout_envelope = build_result_envelope(
+                provider_name=self.provider_name,
+                server_family=self.server_family,
+                capability_id=str(trace.get("mcp_capability") or "").strip() or None,
+                execution_mode=str(trace.get("mcp_execution_mode") or "mcp_remote"),
+                status="failed",
+                tool_name=str(trace.get("tool_name") or "") or None,
+                spoken_text=timeout_summary,
+                summary=timeout_summary,
+                structured_output={"status": "timeout", "timeout": True, "elapsed_s": elapsed_s},
+                request_id=str(trace.get("mcp_request_id") or "") or None,
+                run_id=status.run_id,
+                last_protocol_state="timeout",
+            )
+            timeout_envelope = self._decorate_envelope_for_task(task, timeout_envelope)
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": timeout_envelope.spoken_text,
+                "trace": envelope_to_trace(timeout_envelope)
+                | {"mcp_result_output": timeout_envelope.structured_output},
+            }
+        envelope = self._decorate_envelope_for_task(task, envelope)
         return {
             "ok": True,
             "status": mapped_status,
@@ -928,6 +980,7 @@ class MCPAgentProvider(AgentProvider):
             }
 
         protocol_status = self._extract_remote_status(result)
+        mapped_status = _map_mcp_status_to_task_state(protocol_status)
         envelope = build_result_envelope_from_invocation(
             provider_name=self.provider_name,
             server_family=self.server_family,
@@ -935,16 +988,46 @@ class MCPAgentProvider(AgentProvider):
             execution_mode=str(trace.get("mcp_execution_mode") or "mcp_remote"),
             invocation=result,
             remote_task_id=str(remote_task_id),
-            status=_map_mcp_status_to_task_state(protocol_status),
+            status=mapped_status,
         )
+        timed_out, elapsed_s, timeout_s = _trace_timeout_state(trace)
+        if mapped_status == "running" and timed_out:
+            timeout_summary = (
+                f"{self.provider_name} task timed out after {timeout_s}s."
+                if timeout_s is not None
+                else f"{self.provider_name} task timed out."
+            )
+            timeout_envelope = build_result_envelope(
+                provider_name=self.provider_name,
+                server_family=self.server_family,
+                capability_id=str(trace.get("mcp_capability") or "").strip() or None,
+                execution_mode=str(trace.get("mcp_execution_mode") or "mcp_remote"),
+                status="failed",
+                tool_name=envelope.trace.tool_name,
+                spoken_text=timeout_summary,
+                summary=timeout_summary,
+                structured_output={"status": "timeout", "timeout": True, "elapsed_s": elapsed_s},
+                request_id=envelope.trace.request_id,
+                remote_task_id=str(remote_task_id),
+                last_protocol_state="timeout",
+            )
+            timeout_envelope = self._decorate_envelope_for_task(task, timeout_envelope)
+            return {
+                "ok": False,
+                "status": "failed",
+                "message": timeout_envelope.spoken_text,
+                "trace": envelope_to_trace(timeout_envelope)
+                | {"mcp_result_output": timeout_envelope.structured_output},
+            }
+        envelope = self._decorate_envelope_for_task(task, envelope)
         return {
             "ok": True,
-            "status": _map_mcp_status_to_task_state(protocol_status),
+            "status": mapped_status,
             "message": envelope.spoken_text,
             "trace": envelope_to_trace(envelope)
             | {
                 "mcp_result_output": result.output
-                if _map_mcp_status_to_task_state(protocol_status) == "completed"
+                if mapped_status == "completed"
                 else None,
             },
         }
@@ -1312,6 +1395,32 @@ def reset_mock_provider() -> None:
 _mock_provider_instance: MockAgentProvider | None = None
 
 
+def _now_iso() -> str:
+    """Return a UTC ISO-8601 timestamp for MCP trace metadata."""
+    return datetime.now(UTC).isoformat()
+
+
+def _trace_timeout_state(trace: dict[str, Any] | None) -> tuple[bool, int | None, int | None]:
+    """Return whether an MCP task has exceeded its configured timeout."""
+    normalized_trace = trace or {}
+    started_at = normalized_trace.get("mcp_started_at")
+    timeout_s = normalized_trace.get("mcp_timeout_s")
+
+    if not isinstance(started_at, str) or not started_at.strip():
+        return False, None, None
+    if not isinstance(timeout_s, (int, float)) or timeout_s <= 0:
+        return False, None, None
+
+    try:
+        started = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
+    except ValueError:
+        return False, None, None
+
+    elapsed_s = max(0, int((datetime.now(UTC) - started).total_seconds()))
+    timeout_int = int(timeout_s)
+    return elapsed_s > timeout_int, elapsed_s, timeout_int
+
+
 def _extract_target_number(target_ref: str | None) -> int | None:
     """Extract a numeric item identifier from refs like owner/repo#123."""
     if not target_ref:
@@ -1388,6 +1497,77 @@ def _infer_delegated_requested_workflow_with_trace(
     if isinstance(trace_workflow, str) and trace_workflow.strip():
         return trace_workflow
     return _infer_delegated_requested_workflow(instruction)
+
+
+def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
+    """Wrap a generic MCP workflow result in a wearables connectivity receipt."""
+    trace = task.trace or {}
+    client_context = trace.get("client_context") if isinstance(trace.get("client_context"), dict) else {}
+    device_id = client_context.get("device_id")
+    device_name = client_context.get("device_name") or device_id or "wearable target"
+    target_state = client_context.get("target_connection_state") or "connected"
+    target_last_seen_at = client_context.get("target_last_seen_at")
+    target_rssi = client_context.get("target_rssi")
+    receipt = envelope.structured_output if isinstance(envelope.structured_output, dict) else {}
+
+    if envelope.status == "completed":
+        summary = f"Wearables bridge connectivity receipt captured for {device_name}."
+    elif envelope.status == "failed" and receipt.get("timeout"):
+        summary = f"Wearables bridge connectivity workflow timed out for {device_name}."
+    elif envelope.status == "running":
+        summary = f"Wearables bridge connectivity workflow running for {device_name}."
+    elif envelope.status == "failed":
+        summary = f"Wearables bridge connectivity workflow failed for {device_name}."
+    else:
+        summary = f"Wearables bridge connectivity workflow needs input for {device_name}."
+
+    structured_output = {
+        "workflow": "wearables_bridge_connectivity",
+        "device_id": device_id,
+        "device_name": device_name,
+        "target_connection_state": target_state,
+        "target_last_seen_at": target_last_seen_at,
+        "target_rssi": target_rssi,
+        "provider": envelope.provider,
+        "execution_mode": envelope.execution_mode,
+        "status": envelope.status,
+        "receipt": envelope.structured_output,
+    }
+    follow_up_actions = [
+        {
+            "id": "agent_status",
+            "label": "Check Task",
+            "phrase": "check the wearables bridge task",
+        }
+    ]
+    if envelope.artifact_refs.result_cid:
+        follow_up_actions.append(
+            {
+                "id": "read_cid",
+                "label": "Read Receipt",
+                "phrase": "read the wearables receipt",
+            }
+        )
+
+    return build_result_envelope(
+        provider_name=envelope.provider,
+        server_family=envelope.server_family,
+        capability_id="workflow",
+        execution_mode=envelope.execution_mode,
+        status=envelope.status,
+        tool_name=envelope.trace.tool_name,
+        spoken_text=summary,
+        summary=summary,
+        structured_output=structured_output,
+        request_id=envelope.trace.request_id,
+        run_id=envelope.trace.run_id,
+        remote_task_id=envelope.trace.remote_task_id,
+        last_protocol_state=envelope.trace.last_protocol_state,
+        artifact_refs=envelope.artifact_refs,
+        provider_profiles=envelope.trace.provider_profiles,
+        follow_up_actions=follow_up_actions,
+        needs_input_schema=envelope.needs_input_schema,
+    )
 
 
 def _command_id_for_copilot_capability(capability_id: str) -> str:

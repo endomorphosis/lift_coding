@@ -38,6 +38,21 @@ function normalizeResult(item = {}) {
   if (!result.cid && typeof structuredOutput?.cid === 'string') {
     result.cid = structuredOutput.cid;
   }
+  if (!result.workflow && typeof structuredOutput?.workflow === 'string') {
+    result.workflow = structuredOutput.workflow;
+  }
+  if (!result.device_name && typeof structuredOutput?.device_name === 'string') {
+    result.device_name = structuredOutput.device_name;
+  }
+  if (!result.device_id && typeof structuredOutput?.device_id === 'string') {
+    result.device_id = structuredOutput.device_id;
+  }
+  if (!result.target_connection_state && typeof structuredOutput?.target_connection_state === 'string') {
+    result.target_connection_state = structuredOutput.target_connection_state;
+  }
+  if (result.target_rssi == null && structuredOutput?.target_rssi != null) {
+    result.target_rssi = structuredOutput.target_rssi;
+  }
 
   return result;
 }
@@ -54,6 +69,32 @@ function getFollowUpActionItems(item = {}, fallbackItems = []) {
   const envelope = getResultEnvelope(item);
   const actions = envelope?.follow_up_actions || envelope?.followUpActions || item?.follow_up_actions;
   return Array.isArray(actions) && actions.length > 0 ? actions : fallbackItems;
+}
+
+function appendLocalActionItems(actions = [], result = {}) {
+  const nextActions = Array.isArray(actions) ? [...actions] : [];
+
+  if (result.workflow !== 'wearables_bridge_connectivity') {
+    return nextActions;
+  }
+
+  if (!nextActions.some((action) => action?.id === 'mobile_reconnect_wearables_target')) {
+    nextActions.unshift({
+      id: 'mobile_reconnect_wearables_target',
+      label: 'Reconnect Target',
+      phrase: 'reconnect the selected wearables target',
+    });
+  }
+
+  if (!nextActions.some((action) => action?.id === 'mobile_open_wearables_diagnostics')) {
+    nextActions.unshift({
+      id: 'mobile_open_wearables_diagnostics',
+      label: 'Open Diagnostics',
+      phrase: 'open wearables bridge diagnostics',
+    });
+  }
+
+  return nextActions;
 }
 
 function relativeTimestampLabel(value) {
@@ -80,6 +121,58 @@ function relativeTimestampLabel(value) {
   }
   const days = Math.floor(deltaSeconds / 86400);
   return `Updated ${days}d ago`;
+}
+
+function formatRuntimeSeconds(value) {
+  if (typeof value !== 'number' || Number.isNaN(value) || value < 0) {
+    return null;
+  }
+  if (value < 60) {
+    return `${Math.round(value)}s`;
+  }
+  if (value < 3600) {
+    return `${Math.floor(value / 60)}m`;
+  }
+  if (value < 86400) {
+    return `${Math.floor(value / 3600)}h`;
+  }
+  return `${Math.floor(value / 86400)}d`;
+}
+
+function runtimeMetadata(source = {}) {
+  const startedAt = source?.mcp_started_at || source?.mcpStartedAt || null;
+  const timeoutS = source?.mcp_timeout_s ?? source?.mcpTimeoutS ?? null;
+  const pollIntervalS = source?.mcp_poll_interval_s ?? source?.mcpPollIntervalS ?? null;
+  let elapsedS = source?.mcp_elapsed_s ?? source?.mcpElapsedS ?? null;
+
+  if (elapsedS == null && typeof startedAt === 'string') {
+    const started = new Date(startedAt);
+    if (!Number.isNaN(started.getTime())) {
+      elapsedS = Math.max(0, Math.round((Date.now() - started.getTime()) / 1000));
+    }
+  }
+
+  return { elapsedS, timeoutS, pollIntervalS };
+}
+
+function appendRuntimeLines(lines = [], source = {}) {
+  const nextLines = [...lines];
+  const { elapsedS, timeoutS, pollIntervalS } = runtimeMetadata(source);
+  const ageLabel = formatRuntimeSeconds(elapsedS);
+  const timeoutLabel = formatRuntimeSeconds(typeof timeoutS === 'number' ? timeoutS : null);
+  const pollLabel = formatRuntimeSeconds(typeof pollIntervalS === 'number' ? pollIntervalS : null);
+
+  if (ageLabel) {
+    nextLines.push(`Age: ${ageLabel}`);
+  }
+  if (timeoutLabel) {
+    nextLines.push(`Timeout: ${timeoutLabel}`);
+  }
+  if (pollLabel) {
+    nextLines.push(`Poll: ${pollLabel}`);
+  }
+
+  return nextLines;
 }
 
 function statusTone(state) {
@@ -117,6 +210,17 @@ function buildResultLines(result = {}, options = {}) {
 
   if (options.instruction) {
     lines.push(`Instruction: ${options.instruction}`);
+  }
+  if (result.workflow === 'wearables_bridge_connectivity') {
+    if (result.device_name || result.device_id) {
+      lines.push(`Device: ${result.device_name || result.device_id}`);
+    }
+    if (result.target_connection_state) {
+      lines.push(`State: ${result.target_connection_state}`);
+    }
+    if (result.target_rssi != null) {
+      lines.push(`RSSI: ${result.target_rssi}`);
+    }
   }
   if (result.message) {
     lines.push(result.message);
@@ -229,7 +333,12 @@ export function buildAgentActionItems({
   if (result.cid) {
     actions.push(
       { id: 'open_result', label: 'Open', phrase: 'open that result', params: { cid: result.cid } },
-      { id: 'read_cid', label: 'Read CID', phrase: 'read the cid', params: { cid: result.cid } },
+      {
+        id: 'read_cid',
+        label: result.workflow === 'wearables_bridge_connectivity' ? 'Read Receipt' : 'Read CID',
+        phrase: result.workflow === 'wearables_bridge_connectivity' ? 'read the wearables receipt' : 'read the cid',
+        params: { cid: result.cid },
+      },
       { id: 'share_cid', label: 'Share CID', phrase: 'share that cid', params: { cid: result.cid } },
       {
         id: 'save_result_to_ipfs_local',
@@ -345,22 +454,31 @@ export function buildAgentResultCard(item) {
     includeDetails: true,
   });
   return {
-    title: result.provider_label || item?.provider || 'Result',
-    subtitle: item?.description || result.capability || item?.state,
+    title:
+      result.workflow === 'wearables_bridge_connectivity'
+        ? 'Wearables Connectivity Receipt'
+        : result.provider_label || item?.provider || 'Result',
+    subtitle:
+      result.workflow === 'wearables_bridge_connectivity'
+        ? (result.device_name || result.device_id || 'Connected target')
+        : item?.description || result.capability || item?.state,
     status_badge: statusBadge(state),
     status_tone: statusTone(state),
     is_live: isLiveState(state),
     live_label: isLiveState(state) ? 'Live' : null,
     timestamp_label: relativeTimestampLabel(item?.updated_at || item?.created_at),
-    lines: appendExecutionModeLine(
-      buildResultLines(result, {
-        resultPreview: getResultPreview(item),
-      }),
-      item,
-      result
+    lines: appendRuntimeLines(
+      appendExecutionModeLine(
+        buildResultLines(result, {
+          resultPreview: getResultPreview(item),
+        }),
+        item,
+        result
+      ),
+      item
     ),
     deep_link: buildAgentDeepLink(result),
-    action_items: getFollowUpActionItems(item, fallbackActionItems),
+    action_items: appendLocalActionItems(getFollowUpActionItems(item, fallbackActionItems), result),
     task_id: item?.task_id,
   };
 }
@@ -376,25 +494,34 @@ export function buildAgentTaskCard(task) {
     includeDetails: false,
   });
   return {
-    title: task?.provider_label || task?.provider || 'Task',
-    subtitle: result.capability || state || 'detail',
+    title:
+      result.workflow === 'wearables_bridge_connectivity'
+        ? 'Wearables Connectivity Receipt'
+        : task?.provider_label || task?.provider || 'Task',
+    subtitle:
+      result.workflow === 'wearables_bridge_connectivity'
+        ? (result.device_name || result.device_id || 'Connected target')
+        : result.capability || state || 'detail',
     status_badge: statusBadge(state),
     status_tone: statusTone(state),
     is_live: isLiveState(state),
     live_label: isLiveState(state) ? 'Live' : null,
     timestamp_label: relativeTimestampLabel(task?.updated_at || task?.created_at),
-    lines: appendExecutionModeLine(
-      buildResultLines(result, {
-        instruction,
-        resultPreview: getResultPreview(task),
-      }),
-      task,
-      result
+    lines: appendRuntimeLines(
+      appendExecutionModeLine(
+        buildResultLines(result, {
+          instruction,
+          resultPreview: getResultPreview(task),
+        }),
+        task,
+        result
+      ),
+      task
     ),
     deep_link: buildAgentDeepLink(result),
     action_items: [
       ...buildTaskLifecycleActionItems(task),
-      ...getFollowUpActionItems(task, fallbackActionItems),
+      ...appendLocalActionItems(getFollowUpActionItems(task, fallbackActionItems), result),
     ],
     task_id: task?.id,
   };
@@ -402,6 +529,7 @@ export function buildAgentTaskCard(task) {
 
 export function buildAgentNotificationCard(notification) {
   const taskId = notification?.metadata?.task_id || notification?.card?.task_id || null;
+  const result = normalizeResult(notification?.metadata || {});
   const baseCard = notification?.card || {
     title: notification?.title || 'Notification',
     subtitle: notification?.body || notification?.message || '',
@@ -420,12 +548,18 @@ export function buildAgentNotificationCard(notification) {
     is_live: isLiveState(lifecycleState),
     live_label: isLiveState(lifecycleState) ? 'Live' : null,
     timestamp_label: relativeTimestampLabel(notification?.timestamp || notification?.created_at),
-    lines: appendExecutionModeLine(
-      baseCard.lines || [],
-      notification?.metadata || {},
-      normalizeResult(notification?.metadata || {})
+    lines: appendRuntimeLines(
+      appendExecutionModeLine(
+        baseCard.lines || [],
+        notification?.metadata || {},
+        result
+      ),
+      notification?.metadata || {}
     ),
-    action_items: [...lifecycleActions, ...(baseCard.action_items || [])],
+    action_items: [
+      ...lifecycleActions,
+      ...appendLocalActionItems(baseCard.action_items || [], result),
+    ],
     task_id: taskId,
     notification_id: notification?.id,
   };

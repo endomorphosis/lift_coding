@@ -645,6 +645,46 @@ class TestGetAgentTaskDetail:
         assert data["follow_up_actions"][0]["id"] == "read_cid"
         assert data["result"]["artifact_refs"]["result_cid"] == "bafy123"
 
+    def test_get_task_detail_exposes_runtime_metadata(self, reset_db):
+        """Task detail should surface MCP runtime timing metadata."""
+        from handsfree.api import get_db
+        from handsfree.auth import FIXTURE_USER_ID
+        from handsfree.db.agent_tasks import create_agent_task
+
+        db = get_db()
+        task = create_agent_task(
+            conn=db,
+            user_id=FIXTURE_USER_ID,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect connected wearable",
+            trace={
+                "mcp_capability": "workflow",
+                "mcp_started_at": "2026-03-09T00:00:00+00:00",
+                "mcp_timeout_s": 30.0,
+                "mcp_poll_interval_s": 2.0,
+                "mcp_result_envelope": {
+                    "provider": "ipfs_accelerate_mcp",
+                    "server_family": "ipfs_accelerate",
+                    "execution_mode": "mcp_remote",
+                    "status": "running",
+                    "summary": "Wearables bridge connectivity workflow running for Ray-Ban Meta.",
+                    "spoken_text": "Wearables bridge connectivity workflow running for Ray-Ban Meta.",
+                    "structured_output": {"workflow": "wearables_bridge_connectivity"},
+                    "follow_up_actions": [{"id": "agent_status", "label": "Check Task"}],
+                },
+            },
+        )
+
+        response = client.get(f"/v1/agents/tasks/{task.id}")
+
+        assert response.status_code == 200
+        data = response.json()
+        assert data["mcp_started_at"] == "2026-03-09T00:00:00+00:00"
+        assert data["mcp_timeout_s"] == 30.0
+        assert data["mcp_poll_interval_s"] == 2.0
+        assert isinstance(data["mcp_elapsed_s"], int)
+        assert data["result"]["mcp_timeout_s"] == 30.0
+
     def test_get_task_detail_normalizes_agentic_fetch_result(self, reset_db):
         """Task detail should expose normalized fetch inputs and outputs."""
         from handsfree.api import get_db
@@ -761,6 +801,76 @@ class TestAgentTaskControls:
         response = client.post(
             f"/v1/agents/tasks/{task.id}/pause",
             headers={"X-User-ID": test_user_id_2},
+        )
+
+        assert response.status_code == 404
+
+
+class TestAgentTaskMediaAttach:
+    """Test DAT media attachment endpoint for agent tasks."""
+
+    def test_attach_media_updates_task_trace(self, reset_db):
+        """Attaching DAT media should append attachment metadata to task trace."""
+        from handsfree.api import get_db
+        from handsfree.auth import FIXTURE_USER_ID
+        from handsfree.db.agent_tasks import get_agent_task_by_id
+
+        db = get_db()
+        task = create_agent_task(
+            conn=db,
+            user_id=FIXTURE_USER_ID,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect wearables bridge",
+            trace={"client_context": {"feature": "wearables_bridge"}},
+        )
+
+        response = client.post(
+            f"/v1/agents/tasks/{task.id}/media",
+            json={
+                "uri": "file:///tmp/uploaded-image.jpg",
+                "media_kind": "image",
+                "format": "jpg",
+                "mime_type": "image/jpeg",
+                "source_asset_uri": "file:///tmp/raw-image.jpg",
+                "action": "capture_photo",
+                "device_id": "AA:BB",
+                "device_name": "Ray-Ban Meta",
+            },
+        )
+
+        assert response.status_code == 200
+        body = response.json()
+        assert body["task_id"] == task.id
+        assert body["media_count"] == 1
+        assert body["media"]["uri"] == "file:///tmp/uploaded-image.jpg"
+        assert body["media"]["device_name"] == "Ray-Ban Meta"
+
+        updated_task = get_agent_task_by_id(conn=db, task_id=task.id)
+        assert updated_task is not None
+        assert updated_task.trace["wearables_dat_media_count"] == 1
+        assert updated_task.trace["wearables_dat_latest_media"]["uri"] == "file:///tmp/uploaded-image.jpg"
+        assert updated_task.trace["wearables_dat_media"][0]["media_kind"] == "image"
+
+    def test_attach_media_is_user_scoped(self, reset_db, test_user_id_2):
+        """Users should not be able to attach media to another user's task."""
+        from handsfree.api import get_db
+        from handsfree.auth import FIXTURE_USER_ID
+
+        db = get_db()
+        task = create_agent_task(
+            conn=db,
+            user_id=FIXTURE_USER_ID,
+            provider="ipfs_accelerate_mcp",
+            instruction="inspect wearables bridge",
+        )
+
+        response = client.post(
+            f"/v1/agents/tasks/{task.id}/media",
+            headers={"X-User-ID": test_user_id_2},
+            json={
+                "uri": "file:///tmp/uploaded-image.jpg",
+                "media_kind": "image",
+            },
         )
 
         assert response.status_code == 404
