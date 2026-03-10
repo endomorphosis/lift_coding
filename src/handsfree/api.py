@@ -815,6 +815,21 @@ def get_db_webhook_store() -> DBWebhookStore:
     return _webhook_store
 
 
+def _not_found(
+    message: str,
+    *,
+    error: str = "not_found",
+) -> HTTPException:
+    """Build a consistent not-found API error."""
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail={
+            "error": error,
+            "message": message,
+        },
+    )
+
+
 async def _execute_ai_capability_request(
     request: AICapabilityExecuteRequest,
     user_id: CurrentUser,
@@ -1238,10 +1253,7 @@ def _get_scoped_agent_task(conn: Any, task_id: str, user_id: str) -> Any:
 
     task = get_agent_task_by_id(conn=conn, task_id=task_id)
     if not task or task.user_id != _normalize_user_id_for_lookup(user_id):
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Task not found",
-        )
+        raise _not_found("Task not found")
     return task
 
 
@@ -6912,10 +6924,7 @@ async def revoke_api_key(
     # Check if key exists
     api_key = get_api_key(db, key_id)
     if api_key is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="API key not found",
-        )
+        raise _not_found("API key not found")
 
     # Verify ownership
     if api_key.user_id != user_id:
