@@ -11,6 +11,13 @@ The HandsFree system provides a complete hands-free developer assistant experien
 3. **Notifications** - Receive updates via polling or push notifications
 4. **TTS playback** - Get audio responses for hands-free interaction
 
+Related docs:
+
+- [Package Guide](./PACKAGE_GUIDE.md)
+- [Authentication](./AUTHENTICATION.md)
+- [Push Notifications](./push-notifications.md)
+- [API Specification](../spec/openapi.yaml)
+
 ## Architecture
 
 ```
@@ -30,14 +37,18 @@ All endpoints use `http://localhost:8080` as the base URL in development. In pro
 
 ### Authentication
 
-All API requests require authentication via the `X-User-ID` header:
+Authentication depends on backend auth mode:
+
+- `HANDSFREE_AUTH_MODE=dev`: `X-User-ID` is commonly used for local testing.
+- `HANDSFREE_AUTH_MODE=jwt`: use `Authorization: Bearer <jwt-token>`.
+- `HANDSFREE_AUTH_MODE=api_key`: use `Authorization: Bearer <api-key>`.
+
+Example dev-mode request using `X-User-ID`:
 
 ```bash
 curl -H "X-User-ID: 00000000-0000-0000-0000-000000000001" \
      http://localhost:8080/v1/status
 ```
-
-For production deployments, you would use OAuth tokens or API keys instead of the X-User-ID header.
 
 ## 1. Command Submission Flow
 

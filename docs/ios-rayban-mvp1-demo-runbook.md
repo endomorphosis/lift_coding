@@ -67,7 +67,7 @@ OPENAI_API_KEY=sk-...
 # - Uses canned fixture data
 
 # Live mode (real GitHub API)
-GITHUB_LIVE_MODE=true
+HANDS_FREE_GITHUB_MODE=live
 GITHUB_TOKEN=ghp_...
 ```
 

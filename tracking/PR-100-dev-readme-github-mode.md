@@ -9,11 +9,11 @@ This doc should reflect the current behavior and the knobs to control it.
 
 ## Scope
 - Update `dev/README.md` to describe fixture vs live GitHub modes accurately.
-- Mention the relevant environment variables (`GITHUB_TOKEN`, `GITHUB_LIVE_MODE`, and `HANDS_FREE_GITHUB_MODE=fixtures`).
+- Mention the relevant environment variables (`GITHUB_TOKEN`, `HANDS_FREE_GITHUB_MODE`, `GITHUB_LIVE_MODE`, and `HANDSFREE_GH_CLI_ENABLED`).
 - Doc-only change.
 
 ## Acceptance Criteria
 - `dev/README.md` no longer claims live GitHub is “not yet implemented”.
-- `dev/README.md` documents how to enable live mode and how to force fixture mode.
+- `dev/README.md` documents how to enable live mode, how to force fixture mode, and when CLI fallback applies.
 - No behavior changes.
 - Tests continue to pass.

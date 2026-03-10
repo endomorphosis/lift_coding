@@ -22,6 +22,7 @@ This guide covers all configuration options for the HandsFree Dev Companion syst
 For a code-aligned inventory of backend environment variables currently read by the application, see:
 
 - [docs/configuration-reference.md](docs/configuration-reference.md)
+- [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md) for module-level runtime context
 
 ---
 

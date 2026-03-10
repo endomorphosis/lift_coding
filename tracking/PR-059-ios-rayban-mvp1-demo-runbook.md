@@ -53,7 +53,9 @@ TTS:
 
 GitHub:
 - Fixture-only (default): no env needed
-- Live mode (simple demo): `GITHUB_LIVE_MODE=true` and `GITHUB_TOKEN=...`
+- Live mode (simple demo): `HANDS_FREE_GITHUB_MODE=live` and `GITHUB_TOKEN=...`
+- Alternate legacy live-mode flag: `GITHUB_LIVE_MODE=true`
+- Explicit CLI-backed fallback for legacy action/auth flows: `HANDSFREE_GH_CLI_ENABLED=true`
 
 Webhooks (optional):
 - Dev signature accepted when secret unset; prod should set `GITHUB_WEBHOOK_SECRET`.

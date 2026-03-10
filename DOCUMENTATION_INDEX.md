@@ -13,6 +13,7 @@ This index helps you find the right documentation for your needs, whether you're
 - **[Getting Started Guide](GETTING_STARTED.md)** - Complete setup for backend, mobile, and iPhone/Glasses testing
 - **[README](README.md)** - Project overview and quick start
 - **[Architecture](ARCHITECTURE.md)** - Understand system design and components
+- **[Package Guide](docs/PACKAGE_GUIDE.md)** - Current backend package map, runtime flows, and API groups
 
 ---
 
@@ -23,6 +24,7 @@ This index helps you find the right documentation for your needs, whether you're
 **Backend Development**:
 - [Getting Started](GETTING_STARTED.md) - Setup guide
 - [Architecture](ARCHITECTURE.md) - System design
+- [Package Guide](docs/PACKAGE_GUIDE.md) - Backend module responsibilities and operational flows
 - [Contributing](CONTRIBUTING.md) - Development workflow
 - [Configuration](CONFIGURATION.md) - Environment variables
 - [Configuration Reference](docs/configuration-reference.md) - Code-aligned env var inventory
@@ -85,6 +87,7 @@ This index helps you find the right documentation for your needs, whether you're
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [Architecture](ARCHITECTURE.md) | System design | All |
+| [Package Guide](docs/PACKAGE_GUIDE.md) | Backend package map and runtime behavior | All |
 | [Database Schema Reference](docs/database-schema.md) | Table inventory and migration map | Developers |
 | [README](README.md) | High-level overview and quick start | All |
 | [Implementation Plan](implementation_plan/) | Design documents | Developers |
@@ -98,6 +101,7 @@ This index helps you find the right documentation for your needs, whether you're
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [OpenAPI Spec](spec/openapi.yaml) | Complete API reference | Developers |
+| [Package Guide](docs/PACKAGE_GUIDE.md) | API endpoint group overview + core runtime flows | Developers |
 | [Mobile Client Integration](docs/mobile-client-integration.md) | API usage patterns | Mobile developers |
 | [MCP Task Flow](docs/mobile-client-integration.md#mcp-task-flow) | Spawned-task lifecycle and action flow | Mobile developers |
 | [Webhooks](docs/webhooks.md) | GitHub webhook integration | Developers |
@@ -236,19 +240,22 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 
 ```
 ├── README.md                          # Project overview
+├── DOCUMENTATION_INDEX.md             # Documentation navigation index
 ├── GETTING_STARTED.md                 # Complete setup guide
 ├── ARCHITECTURE.md                    # System architecture
 ├── CONFIGURATION.md                   # Configuration guide
 ├── CONTRIBUTING.md                    # Development workflow
 ├── SECURITY.md                        # Security policies
+├── PR_SUMMARY.md                      # Recent PR summary context
 ├── LICENSE                            # License
-└── CHANGELOG.md                       # Version history (future)
+└── ...                                # Additional implementation summaries
 ```
 
 ### docs/ Directory
 
 ```
 docs/
+├── PACKAGE_GUIDE.md                   # Backend package map and usage
 ├── TESTING_QUICK_REFERENCE.md         # Testing quick guide
 ├── ios-rayban-mvp1-runbook.md        # Complete iOS/Glasses runbook
 ├── ios-rayban-troubleshooting.md     # Troubleshooting guide
@@ -377,20 +384,10 @@ Found a typo? Missing information? See [CONTRIBUTING.md](CONTRIBUTING.md) for ho
 
 ## 📊 Documentation Status
 
-| Document | Status | Last Updated |
-|----------|--------|--------------|
-| README.md | ✅ Complete | 2026-01-20 |
-| GETTING_STARTED.md | ✅ Complete | 2026-01-20 |
-| ARCHITECTURE.md | ✅ Complete | 2026-01-20 |
-| CONFIGURATION.md | ✅ Complete | 2026-01-20 |
-| CONTRIBUTING.md | ✅ Complete | 2026-01-20 |
-| mobile/README.md | ✅ Complete | 2026-01-20 |
-| TESTING_QUICK_REFERENCE.md | ✅ Complete | 2026-01-20 |
-| OpenAPI Spec | ✅ Up to date | (check spec) |
+This documentation set is maintained as a living reference and updated continuously with implementation changes.
 
----
+- Canonical API contract: [spec/openapi.yaml](spec/openapi.yaml)
+- Canonical backend package map: [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md)
+- Canonical environment key inventory: [docs/configuration-reference.md](docs/configuration-reference.md)
 
-**Documentation Index Version**: 1.0  
-**Last Updated**: 2026-01-20
-
-**Feedback**: Help improve this documentation by opening an issue or PR!
+Feedback: Help improve this documentation by opening an issue or PR.

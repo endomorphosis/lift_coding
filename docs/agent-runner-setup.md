@@ -2,6 +2,13 @@
 
 This guide explains how to set up an external agent runner that processes dispatched agent tasks from the HandsFree Dev Companion system.
 
+Related docs:
+
+- [Package Guide](./PACKAGE_GUIDE.md)
+- [Authentication](./AUTHENTICATION.md)
+- [Webhooks](./webhooks.md)
+- [API Specification](../spec/openapi.yaml)
+
 ## Overview
 
 The HandsFree system can delegate tasks to external agents by creating GitHub issues in a dispatch repository. An external agent runner monitors these dispatch issues, performs the requested work, and creates pull requests with correlation metadata that the HandsFree backend uses to track task completion.

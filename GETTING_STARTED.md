@@ -14,6 +14,11 @@
 8. [Next Steps](#next-steps)
 9. [Troubleshooting](#troubleshooting)
 
+Related references:
+
+- [Package Guide](docs/PACKAGE_GUIDE.md) - current backend module map and API surface
+- [Configuration Reference](docs/configuration-reference.md) - exhaustive backend env keys
+
 ---
 
 ## Overview

@@ -44,7 +44,7 @@ Use `.env` files (git-ignored) or system environment variables:
 
 ```bash
 export GITHUB_TOKEN="ghp_..."
-export REDIS_PASSWORD="..."
+export OPENAI_API_KEY="sk-..."
 ```
 
 Never commit `.env` files to the repository.

@@ -212,6 +212,8 @@ After each test session, verify:
 - Full Runbook: [docs/ios-rayban-mvp1-runbook.md](docs/ios-rayban-mvp1-runbook.md)
 - Troubleshooting: [docs/ios-rayban-troubleshooting.md](docs/ios-rayban-troubleshooting.md)
 - Getting Started: [GETTING_STARTED.md](GETTING_STARTED.md)
+- Backend Package Guide: [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md)
+- Backend API Spec: [spec/openapi.yaml](spec/openapi.yaml)
 
 **Quick Checks**:
 

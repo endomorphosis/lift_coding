@@ -114,9 +114,11 @@ OPENAI_API_KEY=sk-...
 ```bash
 # Option 1: Fixture mode (default, no token needed, uses canned data)
 # No configuration required
+# Optional explicit override:
+# HANDS_FREE_GITHUB_MODE=fixtures
 
 # Option 2: Live mode (real GitHub API, requires token)
-GITHUB_LIVE_MODE=true
+HANDS_FREE_GITHUB_MODE=live
 GITHUB_TOKEN=ghp_...
 ```
 
@@ -317,7 +319,7 @@ curl -X POST http://localhost:8080/v1/command \
 
 ### Step 3: Seed Sample Data (If Using Fixtures)
 
-If using fixture mode (default when `GITHUB_LIVE_MODE` is not set):
+If using fixture mode (default when no live GitHub auth is selected, or when `HANDS_FREE_GITHUB_MODE=fixtures` is set):
 
 ```bash
 # No seeding required - fixtures are loaded automatically

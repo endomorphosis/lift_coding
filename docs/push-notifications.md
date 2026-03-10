@@ -2,6 +2,13 @@
 
 This document describes how to configure push notifications for mobile and web clients in the HandsFree Dev Companion backend.
 
+Related docs:
+
+- [Package Guide](./PACKAGE_GUIDE.md)
+- [Authentication](./AUTHENTICATION.md)
+- [Mobile Client Integration](./mobile-client-integration.md)
+- [API Specification](../spec/openapi.yaml)
+
 ## Overview
 
 The notification system supports four delivery platforms:
@@ -202,6 +209,11 @@ X-User-ID: <user-id>
   "subscription_keys": {}
 }
 ```
+
+Authentication note:
+
+- In `HANDSFREE_AUTH_MODE=dev`, `X-User-ID` is commonly used for local testing.
+- In `jwt` or `api_key` modes, send `Authorization: Bearer <token-or-api-key>` and do not rely on dev-only user header behavior.
 
 **Response:**
 ```json

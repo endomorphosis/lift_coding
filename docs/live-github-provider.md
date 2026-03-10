@@ -51,7 +51,16 @@ Checks the following environment variables (in order):
 1. `HANDS_FREE_GITHUB_MODE=live` - Explicit live-mode selector
 2. `GITHUB_LIVE_MODE=true|1|yes` - Alternate live-mode flag
 
-Requires `GITHUB_TOKEN` to be set for live mode to activate.
+`get_token_provider()` selects providers in this order:
+1. GitHub App config (`GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY_PEM`, `GITHUB_INSTALLATION_ID`)
+2. `GITHUB_TOKEN`
+3. `gh auth token` fallback when live mode was explicitly requested
+4. Fixtures otherwise
+
+Important distinction:
+
+- Token-provider-based GitHub reads can activate from `GITHUB_TOKEN` alone.
+- Some legacy side-effect/auth flows use `get_default_auth_provider()` and still require `GITHUB_LIVE_MODE=true` plus either `GITHUB_TOKEN` or `HANDSFREE_GH_CLI_ENABLED=true`.
 
 ## Usage
 
@@ -84,6 +93,15 @@ export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 export GITHUB_LIVE_MODE=true
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
+
+#### CLI-Backed Legacy Action/Auth Flow
+```bash
+export GITHUB_LIVE_MODE=true
+export HANDSFREE_GH_CLI_ENABLED=true
+gh auth status
+```
+
+Use this only when you intentionally want legacy action/auth flows to source credentials from the GitHub CLI instead of `GITHUB_TOKEN`.
 
 #### Fixture Mode (Default)
 ```bash
@@ -266,10 +284,20 @@ Note: `user_id` parameter is no longer needed as authentication is handled by th
 ## Troubleshooting
 
 ### Live mode not activating
-Check that both environment variables are set:
+Check the selector that matches the path you are testing:
+
+For token-provider-based GitHub reads:
 ```bash
-echo $HANDS_FREE_GITHUB_MODE  # Should be "live"
-echo $GITHUB_TOKEN  # Should be your token
+echo $GITHUB_TOKEN
+echo $HANDS_FREE_GITHUB_MODE
+echo $GITHUB_LIVE_MODE
+```
+
+For legacy action/auth flows, also verify:
+
+```bash
+echo $HANDSFREE_GH_CLI_ENABLED
+gh auth status
 ```
 
 ### Tests using live API instead of fixtures
@@ -286,6 +314,6 @@ Verify token provider is correctly instantiated:
 ```python
 from handsfree.github.auth import get_token_provider
 provider = get_token_provider()
-print(type(provider))  # Should be EnvTokenProvider if live mode enabled
+print(type(provider))  # Could be EnvTokenProvider, GitHubAppTokenProvider, GhCliTokenProvider, or FixtureTokenProvider
 print(provider.get_token())  # Should print your token (be careful!)
 ```

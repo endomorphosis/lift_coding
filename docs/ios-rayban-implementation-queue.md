@@ -233,14 +233,15 @@ These environment variables control backend behavior for development and testing
 ### Speech-to-Text (STT)
 - `HANDS_FREE_STT_PROVIDER=stub` — Default for dev; returns deterministic transcript
 - `HANDS_FREE_STT_PROVIDER=openai` — Use OpenAI Whisper (requires `OPENAI_API_KEY`)
-- `HANDS_FREE_STT_ENABLED=false` — Disable audio input path entirely (text-only mode)
+- `HANDSFREE_STT_ENABLED=false` — Disable audio input path entirely (text-only mode)
 
 ### Text-to-Speech (TTS)
-- `HANDS_FREE_TTS_PROVIDER=stub` — Default for dev; returns sine wave test audio
-- `HANDS_FREE_TTS_PROVIDER=openai` — Use OpenAI TTS (requires `OPENAI_API_KEY`)
+- `HANDSFREE_TTS_PROVIDER=stub` — Default for dev; returns sine wave test audio
+- `HANDSFREE_TTS_PROVIDER=openai` — Use OpenAI TTS (requires `OPENAI_API_KEY`)
 
 ### GitHub integration
-- `GITHUB_LIVE_MODE=true` — Enable live GitHub API calls (requires `GITHUB_TOKEN`)
+- `HANDS_FREE_GITHUB_MODE=live` — Preferred explicit selector for live GitHub API calls
+- `GITHUB_LIVE_MODE=true` — Alternate legacy live-mode flag
 - `GITHUB_TOKEN=ghp_...` — Personal access token for GitHub API
 
 ### Dev audio upload

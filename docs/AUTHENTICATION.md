@@ -2,6 +2,13 @@
 
 The HandsFree Dev Companion API supports multiple authentication modes to enable both local development/testing and production deployment.
 
+Related docs:
+
+- [Package Guide](./PACKAGE_GUIDE.md)
+- [Configuration Guide](../CONFIGURATION.md)
+- [Configuration Reference](./configuration-reference.md)
+- [API Specification](../spec/openapi.yaml)
+
 ## Configuration
 
 Authentication is configured via the `HANDSFREE_AUTH_MODE` environment variable:
@@ -140,11 +147,21 @@ Representative protected endpoints (not exhaustive):
 
 - `POST /v1/command` - Submit voice/text commands
 - `POST /v1/commands/confirm` - Confirm pending actions
+- `POST /v1/commands/action` - Structured command actions
 - `POST /v1/actions/request-review` - Request PR reviews
+- `POST /v1/actions/rerun-checks` - Re-run CI checks
+- `POST /v1/actions/comment` - Post PR comments
+- `POST /v1/actions/merge` - Merge PR (policy/confirmation gated)
+- `GET /v1/agents/tasks` - List user tasks
+- `GET /v1/agents/tasks/{task_id}` - Get task detail
+- `GET /v1/agents/results` - Completed task result views
 - `POST /v1/github/connections` - Create GitHub connections
 - `GET /v1/github/connections` - List GitHub connections
 - `GET /v1/github/connections/{id}` - Get specific connection
 - `GET /v1/notifications` - Get user notifications
+- `GET /v1/notifications/subscriptions` - List delivery subscriptions
+- `POST /v1/admin/api-keys` - Manage API keys
+- `GET /v1/admin/ai/backend-policy` - AI backend policy reports
 
 For complete route coverage and request/response contracts, use [spec/openapi.yaml](../spec/openapi.yaml).
 

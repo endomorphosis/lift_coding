@@ -2,6 +2,14 @@
 
 React Native/Expo mobile app for hands-free GitHub operations through voice commands and Meta AI Glasses integration.
 
+## Documentation Links
+
+- [Backend Package Guide](../docs/PACKAGE_GUIDE.md)
+- [Backend API Spec](../spec/openapi.yaml)
+- [Mobile Client Integration Guide](../docs/mobile-client-integration.md)
+- [Authentication](../docs/AUTHENTICATION.md)
+- [Push Notifications](../docs/push-notifications.md)
+
 ## 📱 Features
 
 ### Core Functionality
@@ -257,6 +265,38 @@ For a complete, code-aligned screen inventory, see [SCREENS_REFERENCE.md](SCREEN
 - ⏹ Stop recording
 - 📤 Send to backend
 - 🔊 Auto-play TTS response (optional)
+
+## Backend Integration Contract
+
+The mobile app primarily integrates with these backend endpoint groups:
+
+- Commands and confirmations:
+   - `POST /v1/command`
+   - `POST /v1/commands/confirm`
+   - `POST /v1/commands/action`
+- Side-effect actions:
+   - `POST /v1/actions/request-review`
+   - `POST /v1/actions/rerun-checks`
+   - `POST /v1/actions/comment`
+   - `POST /v1/actions/merge`
+- Agent tasks:
+   - `GET /v1/agents/tasks`
+   - `GET /v1/agents/tasks/{task_id}`
+   - `GET /v1/agents/results`
+- Notifications:
+   - `GET /v1/notifications`
+   - `POST /v1/notifications/subscriptions`
+- Media/dev endpoints used by the app flow:
+   - `POST /v1/tts`
+   - `POST /v1/dev/audio`
+   - `POST /v1/dev/media`
+
+Notes for client behavior:
+
+- Prefer `spoken_text` as the primary verbal/UI summary for commands.
+- If `pending_action` is returned, require explicit user confirmation before execution.
+- If `follow_on_task` is returned, track by `task_id` and query task/results endpoints for async completion.
+- Use `cards` as structured display hints; do not rely on fixed text parsing.
 
 **Features**:
 - Debug panel (toggle on/off)

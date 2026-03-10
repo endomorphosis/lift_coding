@@ -188,10 +188,15 @@ Set environment variables before starting the server:
 
 ```bash
 export GITHUB_TOKEN=ghp_YOUR_PERSONAL_ACCESS_TOKEN_HERE
+export HANDS_FREE_GITHUB_MODE=live
 make dev
 ```
 
-**Note:** Setting `GITHUB_TOKEN` alone is sufficient to enable live mode with the current authentication implementation (`get_token_provider()`). The `GITHUB_LIVE_MODE` environment variable is only used by legacy authentication providers (`EnvironmentTokenProvider`) and is not required for standard usage.
+**Note:** The backend currently has two GitHub auth paths:
+- `get_token_provider()`-based reads can use `GITHUB_TOKEN` directly.
+- Some legacy side-effect/auth flows still expect explicit live-mode request via `HANDS_FREE_GITHUB_MODE=live` or `GITHUB_LIVE_MODE=true`.
+
+For consistent behavior across inbox, action, and review flows, set both a token and an explicit live-mode selector during development.
 
 #### Get a GitHub Token
 
@@ -250,9 +255,10 @@ When multiple authentication methods are configured, the system uses this priori
 - **`GITHUB_APP_ID`**: Your GitHub App ID (numeric)
 - **`GITHUB_APP_PRIVATE_KEY_PEM`**: Your GitHub App private key in PEM format (supports escaped newlines)
 - **`GITHUB_INSTALLATION_ID`**: The installation ID for your GitHub App
-- **`GITHUB_TOKEN`**: Your GitHub personal access token (for simple auth) - setting this alone enables live mode
-- **`GITHUB_LIVE_MODE`**: Optional, only used by legacy providers (`EnvironmentTokenProvider`); set to `true`, `1`, or `yes` to enable live mode with those providers
-- **`HANDS_FREE_GITHUB_MODE`**: Set to `fixtures` to force fixture mode even when tokens are configured
+- **`GITHUB_TOKEN`**: Your GitHub personal access token for env-token auth
+- **`GITHUB_LIVE_MODE`**: Alternate/legacy live-mode flag for flows that check explicit live-mode request
+- **`HANDS_FREE_GITHUB_MODE`**: Explicit selector; use `live` to request live mode or `fixtures` to force fixtures
+- **`HANDSFREE_GH_CLI_ENABLED`**: Enables `gh auth token` fallback for legacy action/auth flows when live mode is explicitly requested
 - When no authentication is configured, the system uses fixture data (default behavior)
 
 ### User Identity in Live Mode

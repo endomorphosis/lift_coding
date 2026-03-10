@@ -102,6 +102,7 @@ The authoritative source is code usage (`os.getenv` / `getenv`) under [src/hands
 ## MCP and Tool Transport
 
 - `HANDSFREE_MCP_ENABLED`
+- `HANDSFREE_MCP_ALLOW_DIRECT_EXECUTION`
 - `HANDSFREE_MCP_TRANSPORT`
 - `HANDSFREE_MCP_RPC_PATH`
 - `HANDSFREE_MCP_CLIENT_NAME`
@@ -117,6 +118,7 @@ The authoritative source is code usage (`os.getenv` / `getenv`) under [src/hands
 - `HANDSFREE_MCP_IPFS_DATASETS_COMMAND`
 - `HANDSFREE_MCP_IPFS_DATASETS_ARGS`
 - `HANDSFREE_MCP_IPFS_DATASETS_PREFERRED_EXECUTION_MODE`
+- `HANDSFREE_MCP_IPFS_DATASETS_ALLOW_DIRECT_EXECUTION`
 - `HANDSFREE_MCP_IPFS_DATASETS_TASK_CATEGORY`
 - `HANDSFREE_MCP_IPFS_DATASETS_TASK_CREATE_TOOL`
 - `HANDSFREE_MCP_IPFS_DATASETS_TASK_STATUS_TOOL`
@@ -129,6 +131,7 @@ The authoritative source is code usage (`os.getenv` / `getenv`) under [src/hands
 - `HANDSFREE_MCP_IPFS_KIT_COMMAND`
 - `HANDSFREE_MCP_IPFS_KIT_ARGS`
 - `HANDSFREE_MCP_IPFS_KIT_PREFERRED_EXECUTION_MODE`
+- `HANDSFREE_MCP_IPFS_KIT_ALLOW_DIRECT_EXECUTION`
 - `HANDSFREE_MCP_IPFS_KIT_TASK_CATEGORY`
 - `HANDSFREE_MCP_IPFS_KIT_TASK_CREATE_TOOL`
 - `HANDSFREE_MCP_IPFS_KIT_TASK_STATUS_TOOL`
@@ -141,6 +144,7 @@ The authoritative source is code usage (`os.getenv` / `getenv`) under [src/hands
 - `HANDSFREE_MCP_IPFS_ACCELERATE_COMMAND`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_ARGS`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_PREFERRED_EXECUTION_MODE`
+- `HANDSFREE_MCP_IPFS_ACCELERATE_ALLOW_DIRECT_EXECUTION`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CATEGORY`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CREATE_TOOL`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_TASK_STATUS_TOOL`
@@ -194,6 +198,7 @@ GCP:
 
 - Variables in this file are intentionally listed by presence in code paths, not by deployment recommendation.
 - For runnable setup examples and defaults, use [CONFIGURATION.md](../CONFIGURATION.md).
-- `HANDS_FREE_GITHUB_MODE` and `GITHUB_LIVE_MODE` are both honored for GitHub live-mode selection.
+- `HANDS_FREE_GITHUB_MODE` and `GITHUB_LIVE_MODE` are both honored for GitHub live-mode selection; `HANDS_FREE_GITHUB_MODE=fixtures` also forces fixture mode.
+- `HANDSFREE_GH_CLI_ENABLED=true` allows GitHub CLI-backed live auth/action flows when explicit live mode is requested and no `GITHUB_TOKEN` is present.
 - `HANDS_FREE_STT_PROVIDER` is the STT provider selector currently read by the backend.
 - If you add a new `getenv` key in backend code, update this file in the same PR.

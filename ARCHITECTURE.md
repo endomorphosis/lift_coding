@@ -112,50 +112,25 @@ HandsFree Dev Companion is a voice-first AI assistant for GitHub development wor
 
 ```
 src/handsfree/
-├── api/                    # FastAPI endpoints
-│   ├── v1/                # API v1 routes
-│   │   ├── commands.py    # Command processing
-│   │   ├── tts.py         # Text-to-speech
-│   │   ├── notifications.py
-│   │   ├── webhooks.py
-│   │   └── admin.py
-│   └── middleware/        # Auth, logging, CORS
-│
-├── services/              # Business logic
-│   ├── command_processor.py
-│   ├── intent_recognizer.py
-│   ├── tts_service.py
-│   ├── stt_service.py
-│   ├── github_service.py
-│   ├── notification_service.py
-│   └── agent_delegate.py
-│
-├── db/                    # Database models & queries
-│   ├── connection.py      # DuckDB connection
-│   ├── migrations.py      # Schema migrations
-│   ├── commands.py        # Command history
-│   ├── notifications.py
-│   ├── api_keys.py
-│   └── pending_actions.py
-│
-├── providers/             # External service integrations
-│   ├── github/
-│   │   ├── client.py
-│   │   ├── webhook_parser.py
-│   │   └── fixtures.py    # Fixture mode
-│   ├── tts/
-│   │   ├── openai.py
-│   │   └── stub.py
-│   ├── stt/
-│   │   ├── openai.py
-│   │   └── stub.py
-│   └── push/
-│       └── expo.py
-│
-└── secrets/               # Secret management
-    ├── factory.py
-    ├── vault_secrets.py
-    └── gcp_secrets.py
+├── api.py                  # FastAPI app + endpoint handlers
+├── models.py               # Request/response schemas
+├── auth.py                 # Current user and auth mode resolution
+├── actions/                # Shared side-effect action orchestration
+│   └── service.py
+├── commands/               # Intent parser, router, pending actions, profiles
+├── agents/                 # Delegation service, runners, result views
+├── ai/                     # AI capability execution + backend policy plumbing
+├── github/                 # GitHub provider, auth/token sources, action execution
+├── db/                     # Persistence modules + migrations orchestration
+├── notifications/          # Notification providers and dispatch helpers
+├── tts/                    # TTS providers/factory
+├── stt/                    # STT providers/factory
+├── ocr/                    # OCR providers/factory
+├── transport/              # Dev/experimental transport providers
+├── rate_limit.py           # Abuse prevention + side-effect rate limit policy
+├── policy.py               # Repo policy evaluation
+├── security.py             # Anomaly detection and security helpers
+└── secrets/                # Secret manager adapters
 ```
 
 **Key Services**:
