@@ -16,11 +16,11 @@ It supports command execution, confirmation-gated side effects, agent delegation
 
 ## Quick Links
 
-- [Getting Started](GETTING_STARTED.md)
-- [Documentation Index](DOCUMENTATION_INDEX.md)
+- [Getting Started](docs/GETTING_STARTED.md)
+- [Documentation Index](docs/DOCUMENTATION_INDEX.md)
 - [Package Guide](docs/PACKAGE_GUIDE.md)
-- [Architecture](ARCHITECTURE.md)
-- [Configuration Guide](CONFIGURATION.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Configuration Guide](docs/CONFIGURATION.md)
 - [Configuration Reference](docs/configuration-reference.md)
 - [Authentication](docs/AUTHENTICATION.md)
 - [Mobile App Docs](mobile/README.md)
@@ -160,7 +160,7 @@ See full details in [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md).
 
 Start with:
 
-- [CONFIGURATION.md](CONFIGURATION.md) for practical setup paths
+- [CONFIGURATION.md](docs/CONFIGURATION.md) for practical setup paths
 - [docs/configuration-reference.md](docs/configuration-reference.md) for exhaustive env keys
 
 Key integrations include:
@@ -230,8 +230,8 @@ Top-level directories and key docs:
 - [spec](spec): OpenAPI and command grammar
 - [migrations](migrations): SQL migrations
 - [implementation_plan](implementation_plan): design and rollout docs
-- [GETTING_STARTED.md](GETTING_STARTED.md): setup guide
-- [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md): full docs navigator
+- [GETTING_STARTED.md](docs/GETTING_STARTED.md): setup guide
+- [DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md): full docs navigator
 
 ## Contributing
 

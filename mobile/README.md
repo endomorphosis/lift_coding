@@ -639,9 +639,9 @@ For authentication setup, see [../docs/AUTHENTICATION.md](../docs/AUTHENTICATION
 ## 📚 Additional Documentation
 
 ### Core Documentation
-- **[Getting Started](../GETTING_STARTED.md)** - Complete setup guide
-- **[Architecture](../ARCHITECTURE.md)** - System design
-- **[Configuration](../CONFIGURATION.md)** - Environment variables
+- **[Getting Started](../docs/GETTING_STARTED.md)** - Complete setup guide
+- **[Architecture](../docs/ARCHITECTURE.md)** - System design
+- **[Configuration](../docs/CONFIGURATION.md)** - Environment variables
 
 ### Mobile-Specific
 - **[Build Instructions](BUILD.md)** - Native module development

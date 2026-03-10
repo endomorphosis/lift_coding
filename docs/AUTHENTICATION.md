@@ -5,7 +5,7 @@ The HandsFree Dev Companion API supports multiple authentication modes to enable
 Related docs:
 
 - [Package Guide](./PACKAGE_GUIDE.md)
-- [Configuration Guide](../CONFIGURATION.md)
+- [Configuration Guide](CONFIGURATION.md)
 - [Configuration Reference](./configuration-reference.md)
 - [API Specification](../spec/openapi.yaml)
 

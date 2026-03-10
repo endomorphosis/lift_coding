@@ -4,9 +4,9 @@ Thank you for your interest in contributing! This guide covers the development w
 
 ## 📚 Quick Links
 
-- **[Getting Started](GETTING_STARTED.md)** - Setup guide for new contributors
-- **[Architecture](ARCHITECTURE.md)** - System design and components
-- **[Configuration](CONFIGURATION.md)** - Environment setup
+- **[Getting Started](docs/GETTING_STARTED.md)** - Setup guide for new contributors
+- **[Architecture](docs/ARCHITECTURE.md)** - System design and components
+- **[Configuration](docs/CONFIGURATION.md)** - Environment setup
 - **Backend Development** - See below
 - **Mobile Development** - See [mobile/README.md](mobile/README.md)
 
@@ -30,7 +30,7 @@ This project follows a **fixtures-first** approach:
 3. **Start services**: `make compose-up` (Redis)
 4. **Run tests**: `make test`
 
-See [GETTING_STARTED.md](GETTING_STARTED.md) for detailed setup.
+See [GETTING_STARTED.md](docs/GETTING_STARTED.md) for detailed setup.
 
 ### For Mobile Development
 
@@ -348,9 +348,9 @@ If you modify the API:
 When adding features or changing behavior:
 
 1. **Update relevant docs**:
-   - [GETTING_STARTED.md](GETTING_STARTED.md) - If setup changes
-   - [ARCHITECTURE.md](ARCHITECTURE.md) - If architecture changes
-   - [CONFIGURATION.md](CONFIGURATION.md) - If config changes
+   - [GETTING_STARTED.md](docs/GETTING_STARTED.md) - If setup changes
+   - [ARCHITECTURE.md](docs/ARCHITECTURE.md) - If architecture changes
+   - [CONFIGURATION.md](docs/CONFIGURATION.md) - If config changes
    - [mobile/README.md](mobile/README.md) - If mobile features change
 
 2. **Add inline documentation**:
@@ -392,8 +392,8 @@ We follow [Semantic Versioning](https://semver.org/):
 
 ### Documentation
 
-- **[Getting Started](GETTING_STARTED.md)** - Setup guide
-- **[Architecture](ARCHITECTURE.md)** - System design
+- **[Getting Started](docs/GETTING_STARTED.md)** - Setup guide
+- **[Architecture](docs/ARCHITECTURE.md)** - System design
 - **[Mobile README](mobile/README.md)** - Mobile development
 - **implementation_plan/** - Design documents
 

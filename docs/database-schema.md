@@ -1,6 +1,6 @@
 # Database Schema Reference
 
-This document is the database-oriented companion to [ARCHITECTURE.md](../ARCHITECTURE.md#database-schema).
+This document is the database-oriented companion to [ARCHITECTURE.md](ARCHITECTURE.md#database-schema).
 
 The source of truth for schema shape is:
 - SQL migrations in [migrations/](../migrations/)
@@ -67,6 +67,6 @@ Notable peer chat schema evolution:
 
 ## Related Docs
 
-- [ARCHITECTURE.md](../ARCHITECTURE.md#database-schema)
+- [ARCHITECTURE.md](ARCHITECTURE.md#database-schema)
 - [docs/persistent-database.md](persistent-database.md)
 - [migrations/README.md](../migrations/README.md)

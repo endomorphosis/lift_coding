@@ -1,6 +1,6 @@
 # Configuration Reference
 
-This file complements [CONFIGURATION.md](../CONFIGURATION.md) with a code-aligned list of environment variables currently read by the backend.
+This file complements [CONFIGURATION.md](CONFIGURATION.md) with a code-aligned list of environment variables currently read by the backend.
 
 The authoritative source is code usage (`os.getenv` / `getenv`) under [src/handsfree/](../src/handsfree/).
 
@@ -197,7 +197,7 @@ GCP:
 ## Notes
 
 - Variables in this file are intentionally listed by presence in code paths, not by deployment recommendation.
-- For runnable setup examples and defaults, use [CONFIGURATION.md](../CONFIGURATION.md).
+- For runnable setup examples and defaults, use [CONFIGURATION.md](CONFIGURATION.md).
 - `HANDS_FREE_GITHUB_MODE` and `GITHUB_LIVE_MODE` are both honored for GitHub live-mode selection; `HANDS_FREE_GITHUB_MODE=fixtures` also forces fixture mode.
 - `HANDSFREE_GH_CLI_ENABLED=true` allows GitHub CLI-backed live auth/action flows when explicit live mode is requested and no `GITHUB_TOKEN` is present.
 - `HANDS_FREE_STT_PROVIDER` is the STT provider selector currently read by the backend.

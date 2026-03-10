@@ -1,0 +1,827 @@
+# Configuration Guide
+
+This guide covers all configuration options for the HandsFree Dev Companion system, including environment variables, mobile app settings, and deployment configurations.
+
+## Table of Contents
+
+1. [Environment Variables](#environment-variables)
+2. [Backend Configuration](#backend-configuration)
+3. [Mobile App Configuration](#mobile-app-configuration)
+4. [Development vs Production](#development-vs-production)
+5. [Authentication Configuration](#authentication-configuration)
+6. [External Services](#external-services)
+7. [Feature Flags](#feature-flags)
+8. [Troubleshooting Configuration Issues](#troubleshooting-configuration-issues)
+
+---
+
+## Complete Configuration Key Inventory
+
+`CONFIGURATION.md` focuses on practical setup paths and common deployment profiles.
+
+For a code-aligned inventory of backend environment variables currently read by the application, see:
+
+- [docs/configuration-reference.md](docs/configuration-reference.md)
+- [docs/PACKAGE_GUIDE.md](docs/PACKAGE_GUIDE.md) for module-level runtime context
+
+---
+
+## Environment Variables
+
+### Quick Setup
+
+**For Development** (minimal configuration):
+
+```bash
+# Copy example environment
+cp .env.example .env
+
+# Or create .env with minimal settings:
+cat > .env << 'EOF'
+# Authentication
+HANDSFREE_AUTH_MODE=dev
+
+# TTS/STT (stub = no API keys needed)
+HANDSFREE_TTS_PROVIDER=stub
+HANDS_FREE_STT_PROVIDER=stub
+
+# GitHub (fixture = uses sample data)
+GITHUB_LIVE_MODE=false
+
+# Redis
+REDIS_ENABLED=true
+REDIS_HOST=localhost
+REDIS_PORT=6379
+EOF
+```
+
+**For Production/Realistic Testing**:
+
+```bash
+cat > .env << 'EOF'
+# Authentication
+HANDSFREE_AUTH_MODE=api_key
+
+# TTS/STT (requires OpenAI API key)
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=sk-your-key-here
+
+# GitHub (requires personal access token)
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=ghp_your-token-here
+
+# Redis
+REDIS_ENABLED=true
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# Push Notifications (optional backend provider credentials)
+HANDSFREE_NOTIFICATION_PROVIDER=expo
+HANDSFREE_EXPO_MODE=real
+HANDSFREE_EXPO_ACCESS_TOKEN=your-expo-access-token
+EOF
+```
+
+---
+
+## Backend Configuration
+
+### Core Settings
+
+#### Server Launch Settings
+
+The backend examples in this repo run Uvicorn on `0.0.0.0:8080`. These are launch-time flags, not backend environment variables read under `src/handsfree/`.
+
+**Example**:
+
+```bash
+uvicorn handsfree.api:app --host 0.0.0.0 --port 8080 --reload
+```
+
+#### Database Configuration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DUCKDB_PATH` | `./data/handsfree.db` | Path to DuckDB database file |
+
+**Example**:
+
+```bash
+DUCKDB_PATH=/app/data/handsfree.db
+```
+
+**Note**: For Docker deployments, mount a persistent volume at the database path to preserve data across container restarts.
+
+#### Redis Configuration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `REDIS_ENABLED` | `true` | Enable/disable Redis caching |
+| `REDIS_HOST` | `localhost` | Redis server hostname |
+| `REDIS_PORT` | `6379` | Redis server port |
+
+**Example**:
+
+```bash
+REDIS_ENABLED=true
+REDIS_HOST=redis.example.com
+REDIS_PORT=6379
+```
+
+---
+
+### Authentication Configuration
+
+#### Auth Modes
+
+| Variable | Options | Description |
+|----------|---------|-------------|
+| `HANDSFREE_AUTH_MODE` | `dev`, `jwt`, `api_key` | Authentication mode |
+
+**Development Mode** (`dev`):
+
+```bash
+HANDSFREE_AUTH_MODE=dev
+```
+
+- No authentication required
+- Accepts `X-User-ID` header for testing
+- Falls back to fixture user if not provided
+- **⚠️ NOT FOR PRODUCTION**
+
+**JWT Mode** (`jwt`):
+
+```bash
+HANDSFREE_AUTH_MODE=jwt
+JWT_SECRET_KEY=your-secret-key-here
+JWT_ALGORITHM=HS256  # Optional, defaults to HS256
+```
+
+- Requires valid JWT bearer tokens
+- Extracts `user_id` from token claims (`user_id`, `sub`, or `uid`)
+- Token verification using shared secret
+
+**API Key Mode** (`api_key`):
+
+```bash
+HANDSFREE_AUTH_MODE=api_key
+```
+
+- Requires API keys stored in database
+- Keys are hashed (SHA256) before storage
+- Manage keys via CLI: `python scripts/manage_api_keys.py`
+
+---
+
+### External Services
+
+#### GitHub Integration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `GITHUB_LIVE_MODE` | `false` | Use real GitHub API vs fixtures |
+| `GITHUB_TOKEN` | _(empty)_ | Personal access token for GitHub API |
+| `GITHUB_APP_ID` | _(empty)_ | GitHub App ID (optional) |
+| `GITHUB_APP_PRIVATE_KEY_PEM` | _(empty)_ | GitHub App private key (optional) |
+| `GITHUB_INSTALLATION_ID` | _(empty)_ | GitHub App installation ID (optional) |
+
+**Fixture Mode** (default):
+
+```bash
+GITHUB_LIVE_MODE=false
+# No token required - uses canned sample data
+```
+
+- Fast and predictable
+- No rate limits
+- No external dependencies
+- Perfect for development and testing
+
+**Live Mode**:
+
+```bash
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=ghp_your-personal-access-token-here
+```
+
+- Real GitHub API calls
+- Requires valid token
+- Subject to rate limits
+- Use for realistic testing
+
+**Token Scopes Required**:
+- `repo` - Full control of private repositories
+- `read:org` - Read org membership
+- `workflow` - Update GitHub Actions workflows (optional)
+
+**Creating a Token**:
+1. Go to https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Select required scopes
+4. Copy token and add to `.env`
+
+#### OpenAI Integration (TTS/STT)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `HANDSFREE_TTS_PROVIDER` | `stub` | TTS provider: `stub`, `openai` |
+| `HANDS_FREE_STT_PROVIDER` | `stub` | STT provider: `stub`, `openai` |
+| `HANDSFREE_STT_ENABLED` | `true` | Enable/disable STT transcription |
+| `HANDSFREE_OCR_PROVIDER` | `stub` | OCR provider (currently `stub`) |
+| `HANDSFREE_OCR_ENABLED` | `true` | Enable/disable OCR processing |
+| `OPENAI_API_KEY` | _(empty)_ | OpenAI API key |
+| `OPENAI_TTS_MODEL` | `tts-1` | TTS model: `tts-1`, `tts-1-hd` |
+| `OPENAI_STT_MODEL` | `whisper-1` | STT model |
+| `OPENAI_TTS_VOICE` | `alloy` | Default OpenAI TTS voice |
+
+**Stub Mode** (no API key needed):
+
+```bash
+HANDSFREE_TTS_PROVIDER=stub
+HANDS_FREE_STT_PROVIDER=stub
+# No API key required
+```
+
+- Returns deterministic placeholder responses
+- Fast and free
+- Great for development without external dependencies
+
+**OpenAI Mode** (realistic audio):
+
+```bash
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=sk-your-openai-api-key-here
+```
+
+- High-quality TTS and STT
+- Requires valid API key and billing
+- Costs: ~$0.015 per 1000 TTS characters, ~$0.006 per minute STT
+
+**Getting an API Key**:
+1. Go to https://platform.openai.com/api-keys
+
+#### MCP++ IPFS Providers
+
+HandsFree can now delegate agent tasks through MCP-backed IPFS providers:
+- `ipfs_datasets_mcp`
+- `ipfs_kit_mcp`
+- `ipfs_accelerate_mcp`
+
+Recommended baseline configuration:
+
+```bash
+HANDSFREE_MCP_ENABLED=true
+HANDSFREE_AGENT_DEFAULT_PROVIDER=ipfs_datasets_mcp
+
+HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP=true
+HANDSFREE_AGENT_ENABLE_IPFS_KIT_MCP=true
+HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP=true
+
+HANDSFREE_MCP_DEFAULT_TIMEOUT_S=30
+HANDSFREE_MCP_DEFAULT_POLL_INTERVAL_S=2
+HANDSFREE_MCP_PROTOCOL_VERSION=2024-11-05
+HANDSFREE_MCP_RPC_PATH=/mcp
+HANDSFREE_MCP_TRANSPORT=http
+
+HANDSFREE_MCP_IPFS_DATASETS_URL=http://localhost:8010
+HANDSFREE_MCP_IPFS_KIT_URL=http://localhost:8011
+HANDSFREE_MCP_IPFS_ACCELERATE_URL=http://localhost:8012
+
+# Optional auth secrets or bearer tokens
+HANDSFREE_MCP_IPFS_DATASETS_AUTH_SECRET=
+HANDSFREE_MCP_IPFS_KIT_AUTH_SECRET=
+HANDSFREE_MCP_IPFS_ACCELERATE_AUTH_SECRET=
+
+# Optional tool name overrides
+HANDSFREE_MCP_IPFS_DATASETS_TOOL_NAME=tools_dispatch
+# ipfs_kit has no default generic task-delegation tool; set this explicitly
+HANDSFREE_MCP_IPFS_KIT_TOOL_NAME=
+HANDSFREE_MCP_IPFS_ACCELERATE_TOOL_NAME=tools_dispatch
+HANDSFREE_MCP_IPFS_DATASETS_RPC_PATH=/mcp
+HANDSFREE_MCP_IPFS_KIT_RPC_PATH=/mcp
+HANDSFREE_MCP_IPFS_ACCELERATE_RPC_PATH=/mcp
+
+# Optional task-dispatch bindings for meta-tool servers
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CATEGORY=background_task_tools
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CREATE_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_DATASETS_TASK_STATUS_TOOL=get_task_status
+HANDSFREE_MCP_IPFS_DATASETS_TASK_CANCEL_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CATEGORY=background_task_tools
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CREATE_TOOL=manage_background_tasks
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_STATUS_TOOL=get_task_status
+HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CANCEL_TOOL=manage_background_tasks
+
+# Optional stdio transport per server
+HANDSFREE_MCP_IPFS_DATASETS_TRANSPORT=stdio
+HANDSFREE_MCP_IPFS_DATASETS_COMMAND=python
+HANDSFREE_MCP_IPFS_DATASETS_ARGS=-m ipfs_datasets_py.mcp_server
+```
+
+Notes:
+- `HANDSFREE_MCP_ENABLED=false` disables all MCP-backed providers globally.
+- Each `HANDSFREE_AGENT_ENABLE_*` flag can disable one provider without affecting the others.
+- If a provider is selected without a configured `*_URL`, task startup fails fast with a configuration error and keeps the failure in the task trace.
+- The current MCP client now speaks JSON-RPC MCP methods (`initialize`, `tools/list`, `tools/call`) over HTTP.
+- `HANDSFREE_MCP_TRANSPORT=http|stdio` selects the default transport. You can override it per server with `*_TRANSPORT`.
+- For `stdio`, set `*_COMMAND` and `*_ARGS`. The client uses header-framed JSON-RPC over subprocess stdio and reuses the same provider interface.
+- `ipfs_datasets_py` and `ipfs_accelerate_py` now default to real upstream meta-dispatch via `tools_dispatch` and the background-task category bindings above.
+- `ipfs_kit_py` does not expose a single generic agent-delegation tool, so `HANDSFREE_MCP_IPFS_KIT_TOOL_NAME` must be set explicitly to a concrete upstream tool for task delegation.
+2. Create a new API key
+3. Add to `.env`
+
+#### Push Notifications (Expo)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `HANDSFREE_NOTIFICATION_PROVIDER` | _(empty)_ | Push provider selector; set to `expo` for Expo delivery |
+| `HANDSFREE_EXPO_MODE` | `stub` | Expo delivery mode; set to `real` to send live notifications |
+| `HANDSFREE_EXPO_ACCESS_TOKEN` | _(empty)_ | Optional Expo access token for authenticated push sends |
+
+**Setup**:
+
+```bash
+HANDSFREE_NOTIFICATION_PROVIDER=expo
+HANDSFREE_EXPO_MODE=real
+HANDSFREE_EXPO_ACCESS_TOKEN=your-expo-access-token
+```
+
+- Client device tokens are registered via `POST /v1/notifications/subscriptions`
+- For Expo clients, send the device token as the request `endpoint` with `platform=expo`
+- Leave `HANDSFREE_EXPO_MODE=stub` for dev flows that should not send live push notifications
+
+---
+
+### Agent Delegation
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `HANDSFREE_AGENT_DEFAULT_PROVIDER` | _(auto)_ | Default agent provider: `copilot`, `github_issue_dispatch` |
+| `HANDSFREE_AGENT_DISPATCH_REPO` | _(empty)_ | GitHub repo for issue dispatch (e.g., `owner/dispatch-repo`) |
+
+**Automatic Provider Selection**:
+
+1. **Explicit provider** in API call → Always used
+2. **`HANDSFREE_AGENT_DEFAULT_PROVIDER`** → If set, use this
+3. **`github_issue_dispatch`** → If `HANDSFREE_AGENT_DISPATCH_REPO` + `GITHUB_TOKEN` configured
+4. **`copilot`** → Fallback
+
+**Example Configuration**:
+
+```bash
+HANDSFREE_AGENT_DISPATCH_REPO=myorg/agent-dispatch
+GITHUB_TOKEN=ghp_...
+# Will automatically use github_issue_dispatch provider
+```
+
+For detailed setup, see [docs/agent-runner-setup.md](docs/agent-runner-setup.md).
+
+---
+
+### Implemented Feature Flags
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `HANDSFREE_ENABLE_METRICS` | `false` | Enable Prometheus metrics at `/v1/metrics` |
+
+**Example**:
+
+```bash
+HANDSFREE_ENABLE_METRICS=true
+```
+
+Webhook and notification endpoints are implemented without a separate global enable/disable environment flag.
+
+---
+
+## Mobile App Configuration
+
+### In-App Settings
+
+The mobile app includes an in-app Settings screen for configuration:
+
+1. **User ID**: Set your user identifier (used in `X-User-ID` header)
+2. **Backend URL**: Configure backend server URL
+3. **Notification Settings**: Enable/disable auto-speaking notifications
+
+**Default Values**:
+
+- **Backend URL**: `http://localhost:8080` (iOS Simulator)
+- **User ID**: Auto-generated UUID
+- **Auto-speak notifications**: Enabled in dev builds, disabled in production
+
+### Configuration File
+
+Edit `mobile/src/api/config.js` to set default backend URL:
+
+```javascript
+// For iOS Simulator
+export const BASE_URL = 'http://localhost:8080';
+
+// For Android Emulator
+// export const BASE_URL = 'http://10.0.2.2:8080';
+
+// For physical device on same network
+// export const BASE_URL = 'http://192.168.1.100:8080';
+
+// For production
+// export const BASE_URL = 'https://api.handsfree.dev';
+```
+
+### app.json Configuration
+
+Expo configuration in `mobile/app.json`:
+
+```json
+{
+  "expo": {
+    "name": "handsfree-mobile",
+    "slug": "handsfree-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "com.handsfree.mobile",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Record voice commands",
+        "NSBluetoothAlwaysUsageDescription": "Connect to Meta AI Glasses"
+      }
+    },
+    "android": {
+      "package": "com.handsfree.mobile",
+      "permissions": [
+        "RECORD_AUDIO",
+        "BLUETOOTH",
+        "BLUETOOTH_CONNECT"
+      ]
+    }
+  }
+}
+```
+
+---
+
+## Development vs Production
+
+### Development Configuration
+
+**Purpose**: Fast iteration, no external dependencies
+
+```bash
+# .env.development
+HANDSFREE_AUTH_MODE=dev
+HANDSFREE_TTS_PROVIDER=stub
+HANDS_FREE_STT_PROVIDER=stub
+GITHUB_LIVE_MODE=false
+REDIS_HOST=localhost
+```
+
+**Characteristics**:
+- ✅ No API keys required
+- ✅ Fast and predictable responses
+- ✅ No rate limits
+- ✅ Detailed debug logging
+- ⚠️ Not secure - dev auth mode only
+
+### Staging Configuration
+
+**Purpose**: Realistic testing before production
+
+```bash
+# .env.staging
+HANDSFREE_AUTH_MODE=jwt
+JWT_SECRET_KEY=staging-secret-key-here
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=sk-staging-key-here
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=ghp_staging-token-here
+REDIS_HOST=redis-staging.example.com
+```
+
+**Characteristics**:
+- ✅ Real external services
+- ✅ JWT authentication
+- ✅ Isolated from production data
+- ✅ Safe for testing
+
+### Production Configuration
+
+**Purpose**: Live deployment
+
+```bash
+# .env.production
+HANDSFREE_AUTH_MODE=api_key
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=sk-prod-key-here
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=ghp_prod-token-here
+REDIS_HOST=redis-prod.example.com
+HANDSFREE_ENABLE_METRICS=true
+```
+
+**Characteristics**:
+- ✅ Secure authentication (API keys)
+- ✅ Metrics enabled
+- ⚠️ Never commit this file to git!
+
+**Production Checklist**:
+
+- [ ] `HANDSFREE_AUTH_MODE` set to `jwt` or `api_key` (NOT `dev`)
+- [ ] Secrets stored in secure secret manager (Vault, AWS Secrets Manager)
+- [ ] HTTPS enabled with valid certificates
+- [ ] Redis uses SSL/TLS
+- [ ] Database backed up regularly
+- [ ] Metrics and monitoring enabled
+- [ ] Log aggregation configured
+- [ ] Rate limiting enabled
+
+---
+
+## Docker Configuration
+
+### docker-compose.yml
+
+```yaml
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - HANDSFREE_AUTH_MODE=${HANDSFREE_AUTH_MODE:-dev}
+      - REDIS_HOST=redis
+      - DUCKDB_PATH=/app/data/handsfree.db
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    env_file:
+      - .env
+    volumes:
+      - handsfree-data:/app/data
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+
+volumes:
+  handsfree-data:
+  redis-data:
+```
+
+### Dockerfile
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application
+COPY src/ ./src/
+COPY pyproject.toml .
+
+# Install package
+RUN pip install -e .
+
+# Create data directory
+RUN mkdir -p /app/data
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/v1/status || exit 1
+
+# Run server
+CMD ["uvicorn", "handsfree.api:app", "--host", "0.0.0.0", "--port", "8080"]
+```
+
+### Running with Docker
+
+```bash
+# Build image
+docker build -t handsfree-api .
+
+# Run with environment file
+docker run -d \
+  --name handsfree-api \
+  -p 8080:8080 \
+  --env-file .env \
+  -v handsfree-data:/app/data \
+  handsfree-api
+
+# Or use docker compose
+docker compose up -d
+
+# View logs
+docker compose logs -f api
+
+# Stop services
+docker compose down
+```
+
+---
+
+## Troubleshooting Configuration Issues
+
+### Backend Won't Start
+
+**Symptom**: Server crashes on startup
+
+**Check**:
+
+1. **Environment variables are loaded**:
+   ```bash
+   printenv | grep HANDSFREE
+   ```
+
+2. **Python version is 3.11+**:
+   ```bash
+   python --version
+   ```
+
+3. **Dependencies are installed**:
+   ```bash
+   pip list | grep fastapi
+   ```
+
+4. **Redis is accessible** (if enabled):
+   ```bash
+   redis-cli ping  # Should return PONG
+   ```
+
+### Mobile App Can't Connect
+
+**Symptom**: "Connection failed" in Status screen
+
+**Check**:
+
+1. **Backend URL is correct**:
+   - iOS Simulator: `http://localhost:8080`
+   - Android Emulator: `http://10.0.2.2:8080`
+   - Physical Device: `http://YOUR_COMPUTER_IP:8080`
+
+2. **Backend is accessible from device**:
+   ```bash
+   # From device, try:
+   curl http://YOUR_BACKEND_IP:8080/v1/status
+   ```
+
+3. **Firewall allows connections**:
+   ```bash
+   # macOS
+   sudo /usr/libexec/ApplicationFirewall/socketfilterfw --listapps
+   
+   # Linux
+   sudo ufw status
+   ```
+
+4. **Backend binds to 0.0.0.0** (not 127.0.0.1):
+   ```bash
+   uvicorn handsfree.api:app --host 0.0.0.0 --port 8080
+   ```
+
+### API Keys Not Working
+
+**Symptom**: 401 Unauthorized with API key auth
+
+**Check**:
+
+1. **Auth mode is set to api_key**:
+   ```bash
+   echo $HANDSFREE_AUTH_MODE  # Should be "api_key"
+   ```
+
+2. **API key exists in database**:
+   ```bash
+   python scripts/manage_api_keys.py list USER_ID
+   ```
+
+3. **Key is not revoked**:
+   - Check `active` and `revoked_at` columns
+
+4. **Authorization header is correct**:
+   ```bash
+   curl -H "Authorization: Bearer YOUR_API_KEY" http://localhost:8080/v1/command
+   ```
+
+### TTS/STT Not Working
+
+**Symptom**: Stub responses or errors
+
+**Check**:
+
+1. **Provider is set correctly**:
+   ```bash
+   echo $HANDSFREE_TTS_PROVIDER  # Should be "openai" for realistic audio
+   ```
+
+2. **API key is valid**:
+   ```bash
+   curl https://api.openai.com/v1/models \
+     -H "Authorization: Bearer $OPENAI_API_KEY"
+   # Should return list of models
+   ```
+
+3. **Check backend logs** for API errors
+
+### GitHub Integration Not Working
+
+**Symptom**: Empty inbox or errors
+
+**Check**:
+
+1. **Live mode is enabled**:
+   ```bash
+   echo $GITHUB_LIVE_MODE  # Should be "true"
+   ```
+
+2. **Token has correct scopes**:
+   - Visit https://github.com/settings/tokens
+   - Verify token has `repo` and `read:org` scopes
+
+3. **Token is not expired**:
+   ```bash
+   curl -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/user
+   # Should return your user info
+   ```
+
+4. **Rate limit not exceeded**:
+   ```bash
+   curl -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/rate_limit
+   ```
+
+---
+
+## Configuration Examples
+
+### Minimal Development Setup
+
+```bash
+# .env
+HANDSFREE_AUTH_MODE=dev
+HANDSFREE_TTS_PROVIDER=stub
+HANDS_FREE_STT_PROVIDER=stub
+GITHUB_LIVE_MODE=false
+REDIS_ENABLED=true
+REDIS_HOST=localhost
+```
+
+### Realistic Testing Setup
+
+```bash
+# .env
+HANDSFREE_AUTH_MODE=dev
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=ghp_...
+REDIS_ENABLED=true
+REDIS_HOST=localhost
+```
+
+### Production Setup
+
+```bash
+# .env (managed by secret manager, not committed to git)
+HANDSFREE_AUTH_MODE=api_key
+HANDSFREE_TTS_PROVIDER=openai
+HANDS_FREE_STT_PROVIDER=openai
+OPENAI_API_KEY=${SECRET_OPENAI_API_KEY}
+GITHUB_LIVE_MODE=true
+GITHUB_TOKEN=${SECRET_GITHUB_TOKEN}
+REDIS_ENABLED=true
+REDIS_HOST=redis-prod.example.com
+REDIS_PORT=6380
+HANDSFREE_ENABLE_METRICS=true
+```
+
+---
+
+## Additional Resources
+
+- **[Getting Started Guide](GETTING_STARTED.md)** - Full setup instructions
+- **[Architecture Documentation](ARCHITECTURE.md)** - System design
+- **[Authentication Guide](docs/AUTHENTICATION.md)** - Detailed auth documentation
+- **[Agent Runner Setup](docs/agent-runner-setup.md)** - Agent delegation
+- **[Secret Management](docs/SECRET_STORAGE_AND_SESSIONS.md)** - Vault and secret storage
+
+---
+
+**Configuration Guide Version**: 1.0  
+**Last Updated**: 2026-01-20
