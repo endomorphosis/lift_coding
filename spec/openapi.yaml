@@ -3173,6 +3173,438 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/Error' }
 
+
+  /health:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  /simulator:
+    get:
+      summary: Serve the web-based dev simulator
+      operationId: getSimulatorPage
+      responses:
+        '200':
+          description: HTML simulator page
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Simulator file not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/actions/comment:
+    post:
+      summary: Post a pull request comment
+      operationId: commentOnPullRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [repo, pr_number, comment_body]
+              properties:
+                repo:
+                  type: string
+                pr_number:
+                  type: integer
+                  minimum: 1
+                comment_body:
+                  type: string
+                idempotency_key:
+                  type: string
+      responses:
+        '200':
+          description: Action processed or queued for confirmation
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ActionResult' }
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/tasks/{task_id}:
+    get:
+      summary: Get a specific agent task for the current user
+      operationId: getAgentTaskDetail
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Agent task detail
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, state, provider, trace]
+                properties:
+                  id:
+                    type: string
+                  state:
+                    type: string
+                  provider:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  target_type:
+                    type: string
+                  target_ref:
+                    type: string
+                  trace:
+                    type: object
+                    additionalProperties: true
+                  result_preview:
+                    type: string
+                  result_output:
+                    type: object
+                    additionalProperties: true
+                  result:
+                    type: object
+                    additionalProperties: true
+        '404':
+          description: Task not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/agents/results:
+    get:
+      summary: List completed MCP-backed task results for the current user
+      operationId: listAgentResults
+      parameters:
+        - name: view
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: provider
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: capability
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: preset
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: latest_only
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [created_at, updated_at]
+            default: updated_at
+        - name: direction
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Filtered agent task results
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [tasks, pagination, filters]
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  pagination:
+                    type: object
+                    required: [limit, offset, has_more]
+                    properties:
+                      limit:
+                        type: integer
+                      offset:
+                        type: integer
+                      has_more:
+                        type: boolean
+                  filters:
+                    type: object
+                    additionalProperties: true
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-envelope:
+    post:
+      summary: Validate and ingest a dev peer envelope (dev-only)
+      operationId: ingestDevPeerEnvelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [peer_ref, frame_base64]
+              properties:
+                peer_ref:
+                  type: string
+                frame_base64:
+                  type: string
+      responses:
+        '200':
+          description: Envelope accepted and decoded
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/{conversation_id}:
+    get:
+      summary: Get dev peer chat history for a conversation (dev-only)
+      operationId: getDevPeerChatHistory
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Conversation history
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [conversation_id, messages]
+                properties:
+                  conversation_id:
+                    type: string
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat:
+    get:
+      summary: List recent dev peer chat conversations (dev-only)
+      operationId: listDevPeerChatConversations
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Recent conversations
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [conversations]
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/send:
+    post:
+      summary: Send outbound dev peer chat message (dev-only)
+      operationId: sendDevPeerChatMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [peer_id, text]
+              properties:
+                peer_id:
+                  type: string
+                text:
+                  type: string
+                conversation_id:
+                  type: string
+                priority:
+                  type: string
+                  enum: [normal, urgent]
+                  default: normal
+                task_id:
+                  type: string
+      responses:
+        '200':
+          description: Message queued and emitted to transport
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '503':
+          description: Transport unavailable
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/peer-chat/outbox/{peer_id}:
+    get:
+      summary: Fetch queued outbound peer chat messages (dev-only)
+      operationId: getDevPeerChatOutbox
+      parameters:
+        - name: peer_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: lease_ms
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 120000
+      responses:
+        '200':
+          description: Outbox state and leased messages
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /v1/dev/transport-sessions:
+    get:
+      summary: List persisted transport session cursors (dev-only)
+      operationId: listDevTransportSessions
+      responses:
+        '200':
+          description: Persisted transport sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [sessions]
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+        '403':
+          description: Forbidden (not in dev mode)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
 components:
   schemas:
     Profile:

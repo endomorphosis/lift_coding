@@ -443,10 +443,9 @@ For comprehensive troubleshooting, see [docs/ios-rayban-troubleshooting.md](../d
    - Check "Speak notifications" is ON
 2. **Trigger test notification**:
    ```bash
-   curl -X POST http://localhost:8080/v1/dev/send-test-notification \
-     -H "Content-Type: application/json" \
-     -H "X-User-ID: YOUR_USER_ID" \
-     -d '{"message": "Test notification"}'
+   # Replay a webhook fixture to generate a notification event
+   python ../dev/replay_webhook.py \
+     ../tests/fixtures/github/webhooks/pull_request.opened.json
    ```
 3. **Verify foreground behavior**:
    - App receives notification
@@ -842,11 +841,9 @@ This test verifies that push notifications are automatically spoken when receive
 
 3. **Trigger a test notification from backend**
    ```bash
-   # From backend terminal, send a test notification
-   curl -X POST http://localhost:8080/v1/dev/send-test-notification \
-     -H "Content-Type: application/json" \
-     -H "X-User-ID: YOUR_USER_ID" \
-     -d '{"message": "Test notification from backend"}'
+   # Replay a webhook fixture to create a notification event
+   python ../dev/replay_webhook.py \
+     ../tests/fixtures/github/webhooks/pull_request.opened.json
    ```
 
 4. **Verify foreground behavior**

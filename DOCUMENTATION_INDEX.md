@@ -153,6 +153,7 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 | Document | Description | Audience |
 |----------|-------------|----------|
 | [Configuration](CONFIGURATION.md) | All config options | Developers |
+| [Configuration Reference](docs/configuration-reference.md) | Exhaustive backend env vars | Developers |
 | [Secret Management](docs/SECRET_STORAGE_AND_SESSIONS.md) | Vault integration | DevOps |
 | [Agent Runner Setup](docs/agent-runner-setup.md) | Agent delegation | Developers |
 | [Persistent Database](docs/persistent-database.md) | Database setup | DevOps |

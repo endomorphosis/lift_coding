@@ -318,11 +318,9 @@ make dev
 ### Test Push Notifications
 
 ```bash
-# Send test notification
-curl -X POST http://localhost:8080/v1/dev/send-test-notification \
-  -H "Content-Type: application/json" \
-  -H "X-User-ID: YOUR_USER_ID" \
-  -d '{"message": "Test notification"}'
+# Replay a webhook fixture to generate a notification event
+python dev/replay_webhook.py \
+   tests/fixtures/github/webhooks/pull_request.opened.json
 ```
 
 ### Test Confirmation Flow
