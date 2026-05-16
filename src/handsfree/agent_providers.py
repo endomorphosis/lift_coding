@@ -40,6 +40,28 @@ from handsfree.mcp import (
 
 logger = logging.getLogger(__name__)
 CLI_DETECTION_TIMEOUT_SECONDS = 2
+WEARABLES_MOBILE_BASE_ACTIONS: tuple[dict[str, str], ...] = (
+    {
+        "id": "mobile_open_wearables_diagnostics",
+        "label": "Open Diagnostics",
+        "phrase": "open wearables bridge diagnostics",
+    },
+    {
+        "id": "mobile_reconnect_wearables_target",
+        "label": "Reconnect Target",
+        "phrase": "reconnect the selected wearables target",
+    },
+    {
+        "id": "mobile_render_wearables_display_test",
+        "label": "Render Display Test",
+        "phrase": "render a wearables display test card",
+    },
+)
+WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION = {
+    "id": "mobile_clear_wearables_display",
+    "label": "Clear Display",
+    "phrase": "clear the wearables display",
+}
 
 
 class AgentProvider(ABC):
@@ -1550,31 +1572,9 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         },
         "receipt": envelope.structured_output,
     }
-    mobile_actions: list[dict[str, str]] = [
-        {
-            "id": "mobile_open_wearables_diagnostics",
-            "label": "Open Diagnostics",
-            "phrase": "open wearables bridge diagnostics",
-        },
-        {
-            "id": "mobile_reconnect_wearables_target",
-            "label": "Reconnect Target",
-            "phrase": "reconnect the selected wearables target",
-        },
-        {
-            "id": "mobile_render_wearables_display_test",
-            "label": "Render Display Test",
-            "phrase": "render a wearables display test card",
-        },
-    ]
+    mobile_actions: list[dict[str, str]] = [dict(action) for action in WEARABLES_MOBILE_BASE_ACTIONS]
     if display_capable:
-        mobile_actions.append(
-            {
-                "id": "mobile_clear_wearables_display",
-                "label": "Clear Display",
-                "phrase": "clear the wearables display",
-            }
-        )
+        mobile_actions.append(dict(WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION))
 
     follow_up_actions = [
         *mobile_actions,
