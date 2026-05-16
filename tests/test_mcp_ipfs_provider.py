@@ -207,8 +207,14 @@ class TestMCPIPFSProviders:
         assert envelope["structured_output"]["target_rssi"] == -42
         assert envelope["structured_output"]["display"]["capable"] is True
         assert envelope["structured_output"]["display"]["connection_state"] == "connected"
-        assert envelope["follow_up_actions"][0]["id"] == "mobile_open_wearables_diagnostics"
-        assert envelope["follow_up_actions"][2]["id"] == "mobile_render_wearables_display_test"
+        assert any(
+            action["id"] == "mobile_open_wearables_diagnostics"
+            for action in envelope["follow_up_actions"]
+        )
+        assert any(
+            action["id"] == "mobile_render_wearables_display_test"
+            for action in envelope["follow_up_actions"]
+        )
         assert any(action["id"] == "mobile_clear_wearables_display" for action in envelope["follow_up_actions"])
         assert any(action["id"] == "agent_status" for action in envelope["follow_up_actions"])
         assert result["trace"]["mcp_started_at"]

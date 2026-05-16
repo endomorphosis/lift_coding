@@ -1508,10 +1508,17 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     target_state = client_context.get("target_connection_state") or "connected"
     target_last_seen_at = client_context.get("target_last_seen_at")
     target_rssi = client_context.get("target_rssi")
-    display_capable = bool(client_context.get("display_capable"))
+    raw_display_capable = client_context.get("display_capable")
+    display_capable = raw_display_capable if isinstance(raw_display_capable, bool) else False
     display_connection_state = client_context.get("display_connection_state")
+    if not isinstance(display_connection_state, str) or not display_connection_state.strip():
+        display_connection_state = "unknown"
     display_last_action = client_context.get("display_last_action")
+    if not isinstance(display_last_action, str) or not display_last_action.strip():
+        display_last_action = None
     display_last_status = client_context.get("display_last_status")
+    if not isinstance(display_last_status, str) or not display_last_status.strip():
+        display_last_status = None
     receipt = envelope.structured_output if isinstance(envelope.structured_output, dict) else {}
 
     if envelope.status == "completed":
@@ -1543,7 +1550,7 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         },
         "receipt": envelope.structured_output,
     }
-    follow_up_actions = [
+    mobile_actions: list[dict[str, str]] = [
         {
             "id": "mobile_open_wearables_diagnostics",
             "label": "Open Diagnostics",
@@ -1559,20 +1566,24 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
             "label": "Render Display Test",
             "phrase": "render a wearables display test card",
         },
-        {
-            "id": "agent_status",
-            "label": "Check Task",
-            "phrase": "check the wearables bridge task",
-        }
     ]
     if display_capable:
-        follow_up_actions.append(
+        mobile_actions.append(
             {
                 "id": "mobile_clear_wearables_display",
                 "label": "Clear Display",
                 "phrase": "clear the wearables display",
             }
         )
+
+    follow_up_actions = [
+        *mobile_actions,
+        {
+            "id": "agent_status",
+            "label": "Check Task",
+            "phrase": "check the wearables bridge task",
+        }
+    ]
     if envelope.artifact_refs.result_cid:
         follow_up_actions.append(
             {
