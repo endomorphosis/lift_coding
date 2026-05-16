@@ -189,6 +189,10 @@ class TestMCPIPFSProviders:
                     "target_connection_state": "connected",
                     "target_last_seen_at": 1700000000000,
                     "target_rssi": -42,
+                    "display_capable": True,
+                    "display_connection_state": "connected",
+                    "display_last_action": "render_display_test",
+                    "display_last_status": "ready",
                 },
             },
         )
@@ -201,7 +205,12 @@ class TestMCPIPFSProviders:
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
         assert envelope["structured_output"]["device_id"] == "AA:BB"
         assert envelope["structured_output"]["target_rssi"] == -42
-        assert envelope["follow_up_actions"][0]["id"] == "agent_status"
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert envelope["structured_output"]["display"]["connection_state"] == "connected"
+        assert envelope["follow_up_actions"][0]["id"] == "mobile_open_wearables_diagnostics"
+        assert envelope["follow_up_actions"][2]["id"] == "mobile_render_wearables_display_test"
+        assert any(action["id"] == "mobile_clear_wearables_display" for action in envelope["follow_up_actions"])
+        assert any(action["id"] == "agent_status" for action in envelope["follow_up_actions"])
         assert result["trace"]["mcp_started_at"]
         assert result["trace"]["mcp_timeout_s"] == 30.0
         assert result["trace"]["mcp_poll_interval_s"] == 2.0
@@ -258,6 +267,8 @@ class TestMCPIPFSProviders:
                     "target_connection_state": "connected",
                     "target_last_seen_at": 1700000000000,
                     "target_rssi": -42,
+                    "display_capable": False,
+                    "display_connection_state": "unavailable",
                 },
             },
         )
@@ -270,6 +281,7 @@ class TestMCPIPFSProviders:
         assert result["message"] == "Wearables bridge connectivity workflow timed out for Ray-Ban Meta."
         assert envelope["status"] == "failed"
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
+        assert envelope["structured_output"]["display"]["capable"] is False
         assert envelope["structured_output"]["receipt"]["timeout"] is True
         assert envelope["trace"]["last_protocol_state"] == "timeout"
 

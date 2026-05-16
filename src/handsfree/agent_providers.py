@@ -1508,6 +1508,10 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     target_state = client_context.get("target_connection_state") or "connected"
     target_last_seen_at = client_context.get("target_last_seen_at")
     target_rssi = client_context.get("target_rssi")
+    display_capable = bool(client_context.get("display_capable"))
+    display_connection_state = client_context.get("display_connection_state")
+    display_last_action = client_context.get("display_last_action")
+    display_last_status = client_context.get("display_last_status")
     receipt = envelope.structured_output if isinstance(envelope.structured_output, dict) else {}
 
     if envelope.status == "completed":
@@ -1531,15 +1535,44 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         "provider": envelope.provider,
         "execution_mode": envelope.execution_mode,
         "status": envelope.status,
+        "display": {
+            "capable": display_capable,
+            "connection_state": display_connection_state,
+            "last_action": display_last_action,
+            "last_status": display_last_status,
+        },
         "receipt": envelope.structured_output,
     }
     follow_up_actions = [
+        {
+            "id": "mobile_open_wearables_diagnostics",
+            "label": "Open Diagnostics",
+            "phrase": "open wearables bridge diagnostics",
+        },
+        {
+            "id": "mobile_reconnect_wearables_target",
+            "label": "Reconnect Target",
+            "phrase": "reconnect the selected wearables target",
+        },
+        {
+            "id": "mobile_render_wearables_display_test",
+            "label": "Render Display Test",
+            "phrase": "render a wearables display test card",
+        },
         {
             "id": "agent_status",
             "label": "Check Task",
             "phrase": "check the wearables bridge task",
         }
     ]
+    if display_capable:
+        follow_up_actions.append(
+            {
+                "id": "mobile_clear_wearables_display",
+                "label": "Clear Display",
+                "phrase": "clear the wearables display",
+            }
+        )
     if envelope.artifact_refs.result_cid:
         follow_up_actions.append(
             {
