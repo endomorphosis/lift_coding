@@ -40,6 +40,8 @@ describe('expo-meta-wearables-dat module wrapper', () => {
       photoCapture: false,
       videoStream: false,
       audio: false,
+      display: false,
+      displayVideo: false,
     });
     await expect(module.getDiagnostics()).resolves.toMatchObject({
       available: false,
@@ -83,6 +85,8 @@ describe('expo-meta-wearables-dat module wrapper', () => {
         photoCapture: true,
         videoStream: false,
         audio: false,
+        display: true,
+        displayVideo: true,
       })),
       getDiagnostics: jest.fn(async () => ({
         available: true,
@@ -100,6 +104,8 @@ describe('expo-meta-wearables-dat module wrapper', () => {
           photoCapture: true,
           videoStream: false,
           audio: false,
+          display: true,
+          displayVideo: true,
         },
         sessionState: 'target_ready',
       })),

@@ -152,6 +152,14 @@ def _append_local_wearables_actions(
                 "phrase": "open wearables bridge diagnostics",
             },
         )
+    if not any(item.get("id") == "mobile_render_wearables_display_test" for item in next_items):
+        next_items.append(
+            {
+                "id": "mobile_render_wearables_display_test",
+                "label": "Render Display Test",
+                "phrase": "render a wearables display test card",
+            }
+        )
     return next_items
 
 
@@ -168,6 +176,8 @@ def _append_local_wearables_action_phrases(
         next_actions.insert(0, "reconnect the selected wearables target")
     if "open wearables bridge diagnostics" not in next_actions:
         next_actions.insert(0, "open wearables bridge diagnostics")
+    if "render a wearables display test card" not in next_actions:
+        next_actions.append("render a wearables display test card")
     return next_actions
 
 

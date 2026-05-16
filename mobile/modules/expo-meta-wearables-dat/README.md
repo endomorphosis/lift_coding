@@ -7,6 +7,8 @@ Current scope:
 - safe JS wrapper when the native module is not linked yet
 - diagnostics, capability discovery, and session-state access
 - Expo config plugin support for iOS `Info.plist` and Android manifest metadata
+- DAT 0.7.0 target metadata and DAM app-model metadata scaffolding
+- display-capability diagnostics and display test action scaffolding
 - bridge-first baseline for future DAT SDK session and media capture wiring
 
 This module is intentionally not a full DAT feature surface yet. It provides a stable contract for diagnostics and incremental rollout while native SDK linking, packaging, and platform-specific session flows are hardened.

@@ -137,6 +137,34 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     };
   }
 
+  if (actionItem?.id === 'mobile_render_wearables_display_test') {
+    const dat = await getMetaWearablesDat();
+    const response = await dat.renderDisplayTest();
+    const message = response?.message || 'Triggered wearables display test rendering.';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
+  if (actionItem?.id === 'mobile_clear_wearables_display') {
+    const dat = await getMetaWearablesDat();
+    const response = await dat.clearDisplay();
+    const message = response?.message || 'Cleared wearables display session content.';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
   if (actionItem?.id !== 'mobile_reconnect_wearables_target') {
     return { handled: false };
   }

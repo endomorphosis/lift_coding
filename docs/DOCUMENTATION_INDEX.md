@@ -117,6 +117,7 @@ This index helps you find the right documentation for your needs, whether you're
 | [MVP1 Runbook](ios-rayban-mvp1-runbook.md) | Complete runbook | Testers |
 | [Meta Glasses Integration](meta-ai-glasses.md) | Technical guide | Developers |
 | [Audio Routing](meta-ai-glasses-audio-routing.md) | Bluetooth details | Developers |
+| [DAT Display Integration Baseline](meta-wearables-dat-display-integration.md) | DAT 0.7 + DAM/display rollout baseline | Developers |
 | [Troubleshooting](ios-rayban-troubleshooting.md) | Common issues | Testers |
 
 ### Android & Emulator
@@ -261,6 +262,7 @@ docs/
 ├── ios-rayban-troubleshooting.md     # Troubleshooting guide
 ├── meta-ai-glasses.md                # Glasses integration
 ├── meta-ai-glasses-audio-routing.md  # Bluetooth audio technical
+├── meta-wearables-dat-display-integration.md # DAT 0.7 display baseline
 ├── mobile-client-integration.md      # API usage patterns
 ├── AUTHENTICATION.md                  # Auth modes
 ├── confirmation-flow.md               # Pending action confirmation lifecycle

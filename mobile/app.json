@@ -17,8 +17,13 @@
       [
         "./modules/expo-meta-wearables-dat/app.plugin.js",
         {
+          "datSdkVersion": "0.7.0",
+          "enableDisplay": false,
           "iosAnalyticsOptOut": true,
+          "iosDamEnabled": false,
+          "iosApplicationId": "handsfree-dev",
           "androidAnalyticsOptOut": true,
+          "androidDamEnabled": false,
           "androidApplicationId": "handsfree-dev"
         }
       ]

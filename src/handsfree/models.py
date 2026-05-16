@@ -93,7 +93,8 @@ class ActionCommandRequest(BaseModel):
         description=(
             "Stable card action identifier such as read_cid or rerun_dataset_search. "
             "Some client-local actions may also use mobile_* identifiers such as "
-            "mobile_open_wearables_diagnostics."
+            "mobile_open_wearables_diagnostics, mobile_render_wearables_display_test, "
+            "or mobile_clear_wearables_display."
         ),
     )
     params: dict[str, Any] = Field(default_factory=dict)
@@ -126,7 +127,8 @@ class ActionItem(BaseModel):
         description=(
             "Stable action identifier. Server-routed actions are suitable for POST "
             "/v1/commands/action, while some app-local actions may use mobile_* IDs "
-            "such as mobile_open_wearables_diagnostics."
+            "such as mobile_open_wearables_diagnostics, "
+            "mobile_render_wearables_display_test, or mobile_clear_wearables_display."
         ),
     )
     label: str

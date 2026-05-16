@@ -4,6 +4,8 @@ const CAPABILITY_LABELS = {
   photoCapture: 'photo',
   videoStream: 'video',
   audio: 'audio',
+  display: 'display',
+  displayVideo: 'display_video',
 };
 
 function buildCapabilityEntries(capabilities = {}) {
@@ -36,6 +38,9 @@ export function summarizeMetaWearablesDat(diagnostics) {
     readiness,
     availableCapabilities,
     unavailableCapabilities,
+    displayReady: Boolean(diagnostics?.displayReady),
+    sdkMeetsMinimum: diagnostics?.sdkMeetsMinimum !== false,
+    configWarnings: Array.isArray(diagnostics?.configWarnings) ? diagnostics.configWarnings : [],
     availableSummary: availableCapabilities.join(', ') || 'none',
     matrixSummary: entries
       .map((entry) => `${entry.label}:${entry.available ? 'on' : 'off'}`)

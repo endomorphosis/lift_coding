@@ -1,15 +1,39 @@
 const { withAndroidManifest, withInfoPlist } = require('expo/config-plugins');
 
 function withMetaWearablesDat(config, options = {}) {
+  const enableDisplay = options.enableDisplay === true;
+  const datSdkVersion = options.datSdkVersion || '0.7.0';
   const iosAnalyticsOptOut = options.iosAnalyticsOptOut !== false;
+  const iosDamEnabled = options.iosDamEnabled === true || enableDisplay;
+  const iosApplicationId = options.iosApplicationId || options.androidApplicationId || '';
   const androidAnalyticsOptOut = options.androidAnalyticsOptOut !== false;
   const androidApplicationId = options.androidApplicationId || '';
+  const androidDamEnabled = options.androidDamEnabled === true || enableDisplay;
+
+  if (enableDisplay && !androidApplicationId) {
+    throw new Error(
+      'expo-meta-wearables-dat: enableDisplay=true requires androidApplicationId for DAM setup.'
+    );
+  }
+  if (enableDisplay && !iosApplicationId) {
+    throw new Error(
+      'expo-meta-wearables-dat: enableDisplay=true requires iosApplicationId for DAM setup.'
+    );
+  }
 
   config = withInfoPlist(config, (configWithInfo) => {
+    const currentMwdat = configWithInfo.modResults.MWDAT || {};
+    const currentAppModel = currentMwdat.AppModel || {};
     configWithInfo.modResults.MWDAT = {
-      ...(configWithInfo.modResults.MWDAT || {}),
+      ...currentMwdat,
+      ApplicationId: iosApplicationId || currentMwdat.ApplicationId,
+      DATSDKVersionTarget: datSdkVersion,
+      AppModel: {
+        ...currentAppModel,
+        DAMEnabled: iosDamEnabled,
+      },
       Analytics: {
-        ...((configWithInfo.modResults.MWDAT || {}).Analytics || {}),
+        ...(currentMwdat.Analytics || {}),
         OptOut: iosAnalyticsOptOut,
       },
     };
@@ -38,6 +62,8 @@ function withMetaWearablesDat(config, options = {}) {
     };
 
     setMetaData('com.meta.wearable.mwdat.APPLICATION_ID', androidApplicationId);
+    setMetaData('com.meta.wearable.mwdat.DAM_ENABLED', androidDamEnabled ? 'true' : 'false');
+    setMetaData('com.meta.wearable.mwdat.DAT_SDK_VERSION_TARGET', String(datSdkVersion));
     setMetaData(
       'com.meta.wearable.mwdat.ANALYTICS_OPT_OUT',
       androidAnalyticsOptOut ? 'true' : 'false'

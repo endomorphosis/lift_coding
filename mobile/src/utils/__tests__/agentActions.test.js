@@ -118,6 +118,56 @@ describe('agentActions helpers', () => {
     expect(navigate).toHaveBeenCalledWith('Glasses');
   });
 
+  it('renders wearables display test locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    getMetaWearablesDat.mockResolvedValue({
+      renderDisplayTest: jest.fn(async () => ({
+        action: 'render_display_test',
+        message: 'Display test rendering is not implemented in the DAT bridge yet.',
+      })),
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_render_wearables_display_test' },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Display test rendering is not implemented in the DAT bridge yet.',
+      response: {
+        action: 'render_display_test',
+        message: 'Display test rendering is not implemented in the DAT bridge yet.',
+      },
+    });
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
+  it('clears wearables display locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    getMetaWearablesDat.mockResolvedValue({
+      clearDisplay: jest.fn(async () => ({
+        action: 'clear_display',
+        message: 'Display clearing is not implemented in the DAT bridge yet.',
+      })),
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_clear_wearables_display' },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Display clearing is not implemented in the DAT bridge yet.',
+      response: {
+        action: 'clear_display',
+        message: 'Display clearing is not implemented in the DAT bridge yet.',
+      },
+    });
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
   it('returns handled false for non-local actions', async () => {
     const outcome = await executeLocalStructuredAction({
       actionItem: { id: 'read_cid' },

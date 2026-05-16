@@ -42,12 +42,22 @@ class ExpoMetaWearablesDatModule : Module() {
 
     AsyncFunction("getConfiguration") {
       val metadata = manifestMetadata()
+      val damEnabled = metadata?.getBoolean(METADATA_DAM_ENABLED) ?: false
+      val sdkMeetsMinimum = isDatVersionAtLeast(
+        BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+        MINIMUM_DAT_SDK_VERSION
+      )
       mapOf(
         "platform" to "android",
         "sdkLinked" to isDatSdkLinked(),
         "sdkConfigured" to BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+        "sdkMeetsMinimum" to sdkMeetsMinimum,
         "analyticsOptOut" to (metadata?.getBoolean(METADATA_ANALYTICS_OPT_OUT) ?: false),
         "sdkVersion" to BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+        "sdkVersionTarget" to MINIMUM_DAT_SDK_VERSION,
+        "datAppModelEnabled" to damEnabled,
+        "displayDamRequired" to true,
+        "displayDamEnabled" to damEnabled,
         "applicationId" to metadata?.getString(METADATA_APPLICATION_ID),
         "provider" to "internal_bridge",
         "integrationMode" to integrationMode(isDatSdkLinked())
@@ -55,7 +65,14 @@ class ExpoMetaWearablesDatModule : Module() {
     }
 
     AsyncFunction("getCapabilities") {
-      buildCapabilitiesMap(isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED)
+      buildCapabilitiesMap(
+        realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+        damEnabled = (manifestMetadata()?.getBoolean(METADATA_DAM_ENABLED) ?: false),
+        sdkMeetsMinimum = isDatVersionAtLeast(
+          BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+          MINIMUM_DAT_SDK_VERSION
+        )
+      )
     }
 
     AsyncFunction("getConnectedDevice") {
@@ -114,20 +131,50 @@ class ExpoMetaWearablesDatModule : Module() {
     AsyncFunction("getDiagnostics") {
       val metadata = manifestMetadata()
       val snapshot = getWearablesSnapshot()
+      val damEnabled = metadata?.getBoolean(METADATA_DAM_ENABLED) ?: false
+      val sdkMeetsMinimum = isDatVersionAtLeast(
+        BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+        MINIMUM_DAT_SDK_VERSION
+      )
+      val displayReady =
+        snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED && sdkMeetsMinimum && damEnabled
       val adapterState = getBluetoothAdapterState()
       val knownDevices = getKnownDevicesSnapshot()
       val selectedTarget = getSelectedDeviceTarget()
+      val configWarnings = mutableListOf<String>()
+      if (!sdkMeetsMinimum) {
+        configWarnings.add(
+          "Configured DAT SDK ${BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION} is below required ${MINIMUM_DAT_SDK_VERSION} for display."
+        )
+      }
+      if (!damEnabled) {
+        configWarnings.add("DAM app-model is disabled; display capability remains unavailable.")
+      }
+      if (!BuildConfig.META_WEARABLES_DAT_SDK_ENABLED) {
+        configWarnings.add("DAT SDK integration is disabled for this build flavor.")
+      }
       mapOf(
         "available" to true,
         "platform" to "android",
         "sdkLinked" to snapshot.sdkLinked,
         "sdkConfigured" to BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+        "sdkMeetsMinimum" to sdkMeetsMinimum,
         "analyticsOptOut" to (metadata?.getBoolean(METADATA_ANALYTICS_OPT_OUT) ?: false),
         "sdkVersion" to BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+        "sdkVersionTarget" to MINIMUM_DAT_SDK_VERSION,
+        "datAppModelEnabled" to damEnabled,
+        "displayDamRequired" to true,
+        "displayDamEnabled" to damEnabled,
+        "displayReady" to displayReady,
+        "configWarnings" to configWarnings,
         "applicationId" to metadata?.getString(METADATA_APPLICATION_ID),
         "provider" to "internal_bridge",
         "integrationMode" to integrationMode(snapshot.sdkLinked),
-        "capabilities" to buildCapabilitiesMap(snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED),
+        "capabilities" to buildCapabilitiesMap(
+          realSdkActive = snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+          damEnabled = damEnabled,
+          sdkMeetsMinimum = sdkMeetsMinimum
+        ),
         "sessionState" to sessionState,
         "registrationState" to snapshot.registrationState,
         "deviceCount" to snapshot.deviceCount,
@@ -195,15 +242,53 @@ class ExpoMetaWearablesDatModule : Module() {
         message = "Video streaming is not implemented in the Android DAT bridge yet."
       )
     }
+
+    AsyncFunction("renderDisplayTest") {
+      mediaActionResult(
+        action = "render_display_test",
+        message = "Display test rendering is not implemented in the Android DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("clearDisplay") {
+      mediaActionResult(
+        action = "clear_display",
+        message = "Display clearing is not implemented in the Android DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("playDisplayVideo") { videoUrl: String? ->
+      mediaActionResult(
+        action = "play_display_video",
+        message = if (videoUrl.isNullOrBlank()) {
+          "Display video playback requires an MP4 URL and DAM app-model support."
+        } else {
+          "Display video playback is not implemented in the Android DAT bridge yet."
+        }
+      )
+    }
+
+    AsyncFunction("resetDisplaySession") {
+      mediaActionResult(
+        action = "reset_display_session",
+        message = "Display session reset is not implemented in the Android DAT bridge yet."
+      )
+    }
   }
 
-  private fun buildCapabilitiesMap(realSdkActive: Boolean): Map<String, Boolean> =
+  private fun buildCapabilitiesMap(
+    realSdkActive: Boolean,
+    damEnabled: Boolean = false,
+    sdkMeetsMinimum: Boolean = false
+  ): Map<String, Boolean> =
     mapOf(
       "session" to true,
       "camera" to realSdkActive,
       "photoCapture" to realSdkActive,
       "videoStream" to realSdkActive,
-      "audio" to false
+      "audio" to false,
+      "display" to (realSdkActive && damEnabled && sdkMeetsMinimum),
+      "displayVideo" to (realSdkActive && damEnabled && sdkMeetsMinimum)
     )
 
   private fun mediaActionResult(
@@ -355,6 +440,23 @@ class ExpoMetaWearablesDatModule : Module() {
 
   private fun integrationMode(sdkLinked: Boolean): String =
     if (sdkLinked) "sdk_reflection" else "reference_only"
+
+  private fun isDatVersionAtLeast(current: String?, minimum: String): Boolean {
+    fun parse(version: String?): List<Int> =
+      (version ?: "")
+        .split(".")
+        .map { token -> token.toIntOrNull() ?: 0 }
+    val left = parse(current)
+    val right = parse(minimum)
+    val max = maxOf(left.size, right.size)
+    for (index in 0 until max) {
+      val lhs = left.getOrElse(index) { 0 }
+      val rhs = right.getOrElse(index) { 0 }
+      if (lhs > rhs) return true
+      if (lhs < rhs) return false
+    }
+    return true
+  }
 
   private fun getBluetoothAdapterState(): Map<String, Any> {
     val adapter = bluetoothAdapter()
@@ -653,5 +755,7 @@ class ExpoMetaWearablesDatModule : Module() {
     const val WEARABLES_CLASS_NAME = "com.meta.wearable.dat.core.Wearables"
     const val METADATA_APPLICATION_ID = "com.meta.wearable.mwdat.APPLICATION_ID"
     const val METADATA_ANALYTICS_OPT_OUT = "com.meta.wearable.mwdat.ANALYTICS_OPT_OUT"
+    const val METADATA_DAM_ENABLED = "com.meta.wearable.mwdat.DAM_ENABLED"
+    const val MINIMUM_DAT_SDK_VERSION = "0.7.0"
   }
 }

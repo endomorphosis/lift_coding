@@ -1,6 +1,7 @@
 import ExpoModulesCore
 
 public class ExpoMetaWearablesDatModule: Module {
+  private let minimumDatSdkVersion = "0.7.0"
   private let selectedDeviceDefaultsKey = "expo.meta.wearables.selectedDeviceId"
   private var sessionState = "idle"
   private var selectedDeviceId: String?
@@ -38,6 +39,31 @@ public class ExpoMetaWearablesDatModule: Module {
     ]
   }
 
+  private func mwdatInfo() -> [String: Any] {
+    return (Bundle.main.infoDictionary ?? [:])["MWDAT"] as? [String: Any] ?? [:]
+  }
+
+  private func analyticsOptOut(from mwdat: [String: Any]) -> Bool {
+    let analytics = mwdat["Analytics"] as? [String: Any]
+    return analytics?["OptOut"] as? Bool ?? false
+  }
+
+  private func appModelDamEnabled(from mwdat: [String: Any]) -> Bool {
+    let appModel = mwdat["AppModel"] as? [String: Any]
+    return appModel?["DAMEnabled"] as? Bool ?? false
+  }
+
+  private func appModelDisplayReady() -> Bool {
+    return appModelDamEnabled(from: mwdatInfo()) && self.selectedDeviceId != nil
+  }
+
+  private func datConfigWarnings() -> [String] {
+    if appModelDamEnabled(from: mwdatInfo()) {
+      return ["DAT SDK linkage is not active; display capability is in bridge-reference mode."]
+    }
+    return ["DAM app-model is disabled; DAT display capability remains unavailable in this build."]
+  }
+
   public func definition() -> ModuleDefinition {
     Name("ExpoMetaWearablesDat")
 
@@ -52,16 +78,19 @@ public class ExpoMetaWearablesDatModule: Module {
     }
 
     AsyncFunction("getConfiguration") { () -> [String: Any] in
-      let info = Bundle.main.infoDictionary ?? [:]
-      let mwdat = info["MWDAT"] as? [String: Any]
-      let analytics = mwdat?["Analytics"] as? [String: Any]
+      let mwdat = mwdatInfo()
       return [
         "platform": "ios",
         "sdkLinked": false,
         "sdkConfigured": false,
-        "analyticsOptOut": analytics?["OptOut"] as? Bool ?? false,
+        "sdkMeetsMinimum": false,
+        "analyticsOptOut": analyticsOptOut(from: mwdat),
         "sdkVersion": NSNull(),
-        "applicationId": mwdat?["ApplicationId"] as? String,
+        "sdkVersionTarget": minimumDatSdkVersion,
+        "datAppModelEnabled": appModelDamEnabled(from: mwdat),
+        "displayDamRequired": true,
+        "displayDamEnabled": appModelDamEnabled(from: mwdat),
+        "applicationId": mwdat["ApplicationId"] as? String,
         "provider": "internal_bridge",
         "integrationMode": "reference_only"
       ]
@@ -73,7 +102,9 @@ public class ExpoMetaWearablesDatModule: Module {
         "camera": false,
         "photoCapture": false,
         "videoStream": false,
-        "audio": false
+        "audio": false,
+        "display": false,
+        "displayVideo": false
       ]
     }
 
@@ -198,17 +229,23 @@ public class ExpoMetaWearablesDatModule: Module {
     }
 
     AsyncFunction("getDiagnostics") { () -> [String: Any] in
-      let info = Bundle.main.infoDictionary ?? [:]
-      let mwdat = info["MWDAT"] as? [String: Any]
-      let analytics = mwdat?["Analytics"] as? [String: Any]
+      let mwdat = mwdatInfo()
+      let damEnabled = appModelDamEnabled(from: mwdat)
       return [
         "available": true,
         "platform": "ios",
         "sdkLinked": false,
         "sdkConfigured": false,
-        "analyticsOptOut": analytics?["OptOut"] as? Bool ?? false,
+        "sdkMeetsMinimum": false,
+        "analyticsOptOut": analyticsOptOut(from: mwdat),
         "sdkVersion": NSNull(),
-        "applicationId": mwdat?["ApplicationId"] as? String as Any,
+        "sdkVersionTarget": minimumDatSdkVersion,
+        "datAppModelEnabled": damEnabled,
+        "displayDamRequired": true,
+        "displayDamEnabled": damEnabled,
+        "displayReady": appModelDisplayReady(),
+        "configWarnings": datConfigWarnings(),
+        "applicationId": mwdat["ApplicationId"] as? String as Any,
         "provider": "internal_bridge",
         "integrationMode": "reference_only",
         "capabilities": [
@@ -216,7 +253,9 @@ public class ExpoMetaWearablesDatModule: Module {
           "camera": false,
           "photoCapture": false,
           "videoStream": false,
-          "audio": false
+          "audio": false,
+          "display": false,
+          "displayVideo": false
         ],
         "sessionState": self.sessionState,
         "registrationState": self.sessionState,
@@ -280,6 +319,38 @@ public class ExpoMetaWearablesDatModule: Module {
       self.mediaActionResult(
         action: "stop_video_stream",
         message: "Video streaming is not implemented in the iOS reference-only DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("renderDisplayTest") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "render_display_test",
+        message: appModelDamEnabled(from: mwdatInfo())
+          ? "Display test rendering is not implemented in the iOS DAT bridge yet."
+          : "Display test rendering requires DAM app-model enablement."
+      )
+    }
+
+    AsyncFunction("clearDisplay") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "clear_display",
+        message: "Display clearing is not implemented in the iOS DAT bridge yet."
+      )
+    }
+
+    AsyncFunction("playDisplayVideo") { (_ videoUrl: String?) -> [String: Any] in
+      self.mediaActionResult(
+        action: "play_display_video",
+        message: (videoUrl?.isEmpty == false)
+          ? "Display video playback is not implemented in the iOS DAT bridge yet."
+          : "Display video playback requires an MP4 URL and DAM app-model support."
+      )
+    }
+
+    AsyncFunction("resetDisplaySession") { () -> [String: Any] in
+      self.mediaActionResult(
+        action: "reset_display_session",
+        message: "Display session reset is not implemented in the iOS DAT bridge yet."
       )
     }
   }
