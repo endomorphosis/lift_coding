@@ -12,12 +12,12 @@ function withMetaWearablesDat(config, options = {}) {
 
   if (enableDisplay && !androidApplicationId) {
     throw new Error(
-      'expo-meta-wearables-dat: enableDisplay=true requires androidApplicationId for DAM setup.'
+      'expo-meta-wearables-dat: enableDisplay=true requires androidApplicationId (your Meta Wearables application identifier from Wearables Developer Center) for DAM setup.'
     );
   }
   if (enableDisplay && !iosApplicationId) {
     throw new Error(
-      'expo-meta-wearables-dat: enableDisplay=true requires iosApplicationId for DAM setup.'
+      'expo-meta-wearables-dat: enableDisplay=true requires iosApplicationId (your Meta Wearables application identifier from Wearables Developer Center) for DAM setup.'
     );
   }
 

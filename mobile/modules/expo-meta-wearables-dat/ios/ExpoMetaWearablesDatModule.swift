@@ -53,8 +53,25 @@ public class ExpoMetaWearablesDatModule: Module {
     return appModel?["DAMEnabled"] as? Bool ?? false
   }
 
+  private func sdkMeetsMinimum(from mwdat: [String: Any]) -> Bool {
+    guard let sdkVersion = mwdat["SDKVersion"] as? String else {
+      return false
+    }
+    let actualVersionComponents = sdkVersion.split(separator: ".").map { Int($0) ?? 0 }
+    let minimumVersionComponents = minimumDatSdkVersion.split(separator: ".").map { Int($0) ?? 0 }
+    let maxCount = max(actualVersionComponents.count, minimumVersionComponents.count)
+    for idx in 0..<maxCount {
+      let lhs = idx < actualVersionComponents.count ? actualVersionComponents[idx] : 0
+      let rhs = idx < minimumVersionComponents.count ? minimumVersionComponents[idx] : 0
+      if lhs > rhs { return true }
+      if lhs < rhs { return false }
+    }
+    return true
+  }
+
   private func appModelDisplayReady() -> Bool {
-    return appModelDamEnabled(from: mwdatInfo()) && self.selectedDeviceId != nil
+    let mwdat = mwdatInfo()
+    return appModelDamEnabled(from: mwdat) && sdkMeetsMinimum(from: mwdat) && self.selectedDeviceId != nil
   }
 
   private func datConfigWarnings() -> [String] {
@@ -62,6 +79,28 @@ public class ExpoMetaWearablesDatModule: Module {
       return ["DAT SDK linkage is not active; display capability is in bridge-reference mode."]
     }
     return ["DAM app-model is disabled; DAT display capability remains unavailable in this build."]
+  }
+
+  private func displayStubMessage(action: String, videoUrl: String? = nil) -> String {
+    let damEnabled = appModelDamEnabled(from: mwdatInfo())
+    if !damEnabled {
+      return "Display actions require DAM app-model enablement."
+    }
+    if action == "play_display_video", videoUrl?.isEmpty != false {
+      return "Display video playback requires an MP4 URL and DAM app-model support."
+    }
+    switch action {
+    case "render_display_test":
+      return "Display test rendering is not implemented in the iOS DAT bridge yet."
+    case "clear_display":
+      return "Display clearing is not implemented in the iOS DAT bridge yet."
+    case "play_display_video":
+      return "Display video playback is not implemented in the iOS DAT bridge yet."
+    case "reset_display_session":
+      return "Display session reset is not implemented in the iOS DAT bridge yet."
+    default:
+      return "Display action is not implemented in the iOS DAT bridge yet."
+    }
   }
 
   public func definition() -> ModuleDefinition {
@@ -83,7 +122,7 @@ public class ExpoMetaWearablesDatModule: Module {
         "platform": "ios",
         "sdkLinked": false,
         "sdkConfigured": false,
-        "sdkMeetsMinimum": false,
+        "sdkMeetsMinimum": sdkMeetsMinimum(from: mwdat),
         "analyticsOptOut": analyticsOptOut(from: mwdat),
         "sdkVersion": NSNull(),
         "sdkVersionTarget": minimumDatSdkVersion,
@@ -231,19 +270,20 @@ public class ExpoMetaWearablesDatModule: Module {
     AsyncFunction("getDiagnostics") { () -> [String: Any] in
       let mwdat = mwdatInfo()
       let damEnabled = appModelDamEnabled(from: mwdat)
+      let sdkMeetsMinimumValue = sdkMeetsMinimum(from: mwdat)
       return [
         "available": true,
         "platform": "ios",
         "sdkLinked": false,
         "sdkConfigured": false,
-        "sdkMeetsMinimum": false,
+        "sdkMeetsMinimum": sdkMeetsMinimumValue,
         "analyticsOptOut": analyticsOptOut(from: mwdat),
         "sdkVersion": NSNull(),
         "sdkVersionTarget": minimumDatSdkVersion,
         "datAppModelEnabled": damEnabled,
         "displayDamRequired": true,
         "displayDamEnabled": damEnabled,
-        "displayReady": appModelDisplayReady(),
+        "displayReady": damEnabled && sdkMeetsMinimumValue && appModelDisplayReady(),
         "configWarnings": datConfigWarnings(),
         "applicationId": mwdat["ApplicationId"] as? String as Any,
         "provider": "internal_bridge",
@@ -325,32 +365,28 @@ public class ExpoMetaWearablesDatModule: Module {
     AsyncFunction("renderDisplayTest") { () -> [String: Any] in
       self.mediaActionResult(
         action: "render_display_test",
-        message: appModelDamEnabled(from: mwdatInfo())
-          ? "Display test rendering is not implemented in the iOS DAT bridge yet."
-          : "Display test rendering requires DAM app-model enablement."
+        message: displayStubMessage(action: "render_display_test")
       )
     }
 
     AsyncFunction("clearDisplay") { () -> [String: Any] in
       self.mediaActionResult(
         action: "clear_display",
-        message: "Display clearing is not implemented in the iOS DAT bridge yet."
+        message: displayStubMessage(action: "clear_display")
       )
     }
 
     AsyncFunction("playDisplayVideo") { (_ videoUrl: String?) -> [String: Any] in
       self.mediaActionResult(
         action: "play_display_video",
-        message: (videoUrl?.isEmpty == false)
-          ? "Display video playback is not implemented in the iOS DAT bridge yet."
-          : "Display video playback requires an MP4 URL and DAM app-model support."
+        message: displayStubMessage(action: "play_display_video", videoUrl: videoUrl)
       )
     }
 
     AsyncFunction("resetDisplaySession") { () -> [String: Any] in
       self.mediaActionResult(
         action: "reset_display_session",
-        message: "Display session reset is not implemented in the iOS DAT bridge yet."
+        message: displayStubMessage(action: "reset_display_session")
       )
     }
   }

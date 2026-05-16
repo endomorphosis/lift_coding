@@ -140,7 +140,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
   if (actionItem?.id === 'mobile_render_wearables_display_test') {
     const dat = await getMetaWearablesDat();
     const response = await dat.renderDisplayTest();
-    const message = response?.message || 'Triggered wearables display test rendering.';
+    const message = response?.message || 'Display test rendering requested (not yet implemented in DAT bridge).';
     if (navigation?.navigate) {
       navigation.navigate('Glasses');
     }
@@ -154,7 +154,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
   if (actionItem?.id === 'mobile_clear_wearables_display') {
     const dat = await getMetaWearablesDat();
     const response = await dat.clearDisplay();
-    const message = response?.message || 'Cleared wearables display session content.';
+    const message = response?.message || 'Display clear requested (not yet implemented in DAT bridge).';
     if (navigation?.navigate) {
       navigation.navigate('Glasses');
     }

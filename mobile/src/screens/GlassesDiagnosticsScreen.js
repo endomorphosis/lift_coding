@@ -1368,7 +1368,12 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         <Text style={styles.text}>Display ready: {wearablesCapabilitySummary.displayReady ? 'yes' : 'no'}</Text>
         <Text style={styles.text}>SDK minimum met: {wearablesCapabilitySummary.sdkMeetsMinimum ? 'yes' : 'no'}</Text>
         {!!wearablesCapabilitySummary.configWarnings?.length && (
-          <Text style={styles.text}>Config warnings: {wearablesCapabilitySummary.configWarnings.join(' | ')}</Text>
+          <Text
+            style={styles.text}
+            accessibilityLabel="Wearables bridge configuration warnings"
+          >
+            Config warnings: {wearablesCapabilitySummary.configWarnings.join(' | ')}
+          </Text>
         )}
         <Text style={styles.text}>Media action: {wearablesMediaStatus}</Text>
         <Text style={styles.text}>Display action: {wearablesDisplayStatus}</Text>

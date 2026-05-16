@@ -442,6 +442,9 @@ class ExpoMetaWearablesDatModule : Module() {
     if (sdkLinked) "sdk_reflection" else "reference_only"
 
   private fun isDatVersionAtLeast(current: String?, minimum: String): Boolean {
+    // Missing version segments are treated as zeros so that, for example,
+    // "0.7" compares equal to "0.7.0" and "0.7.0.0". This is a lenient
+    // vendor-version comparison, not a strict semver parser.
     fun parse(version: String?): List<Int> =
       (version ?: "")
         .split(".")
