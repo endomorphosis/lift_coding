@@ -1572,9 +1572,9 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         },
         "receipt": envelope.structured_output,
     }
-    mobile_actions: list[dict[str, str]] = [dict(action) for action in WEARABLES_MOBILE_BASE_ACTIONS]
+    mobile_actions: list[dict[str, str]] = list(WEARABLES_MOBILE_BASE_ACTIONS)
     if display_capable:
-        mobile_actions.append(dict(WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION))
+        mobile_actions.append(WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION)
 
     follow_up_actions = [
         *mobile_actions,
