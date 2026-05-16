@@ -1529,7 +1529,12 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     target_last_seen_at = client_context.get("target_last_seen_at")
     target_rssi = client_context.get("target_rssi")
     raw_display_capable = client_context.get("display_capable")
-    display_capable = raw_display_capable if isinstance(raw_display_capable, bool) else False
+    if isinstance(raw_display_capable, bool):
+        display_capable = raw_display_capable
+    elif isinstance(raw_display_capable, str):
+        display_capable = raw_display_capable.strip().lower() in {"1", "true", "yes", "on"}
+    else:
+        display_capable = False
     display_connection_state = client_context.get("display_connection_state")
     if not isinstance(display_connection_state, str) or not display_connection_state.strip():
         display_connection_state = "unknown"
