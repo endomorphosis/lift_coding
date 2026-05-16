@@ -215,7 +215,10 @@ class TestMCPIPFSProviders:
             action["id"] == "mobile_render_wearables_display_test"
             for action in envelope["follow_up_actions"]
         )
-        assert any(action["id"] == "mobile_clear_wearables_display" for action in envelope["follow_up_actions"])
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
         assert any(action["id"] == "agent_status" for action in envelope["follow_up_actions"])
         assert result["trace"]["mcp_started_at"]
         assert result["trace"]["mcp_timeout_s"] == 30.0
