@@ -27,5 +27,8 @@ jobs:
       - name: Test
         run: make test
 
+      - name: Validate display webapp readiness
+        run: PYTHONPATH=${{ github.workspace }}/src python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
+
       - name: Validate OpenAPI
         run: make openapi-validate

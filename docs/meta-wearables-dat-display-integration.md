@@ -48,7 +48,7 @@ Blocked fetch targets (must be validated manually in release checklist):
 | Display lifecycle actions | render/clear/video/reset | bridge methods exposed across JS/native | previously stub-only responses; now bridge lifecycle state added |
 | Display diagnostics | session/readiness/error visibility | readiness + config warnings + capability matrix | needs hardware-backed validation paths |
 | Backend follow-up actions | include display-safe actions by capability | diagnostics/reconnect/render/clear existed | expanded actions added for play video + reset |
-| Web-app display constraints | 600x600, D-pad focus, high contrast, HTTPS deployment | no dedicated in-repo checker/linter yet | still pending |
+| Web-app display constraints | 600x600, D-pad focus, high contrast, HTTPS deployment | dedicated evaluator + linter + example readiness descriptor in-repo | physical-device UX verification and staged rollout evidence remain pending |
 
 ## Delta against upstream DAT 0.7
 
