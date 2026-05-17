@@ -27,8 +27,8 @@ function applyDatDisplayModeOverride(expoConfig, mode) {
       {
         ...options,
         enableDisplay,
-        iosDamEnabled: enableDisplay ? true : options.iosDamEnabled === true,
-        androidDamEnabled: enableDisplay ? true : options.androidDamEnabled === true,
+        iosDamEnabled: enableDisplay || options.iosDamEnabled === true,
+        androidDamEnabled: enableDisplay || options.androidDamEnabled === true,
       },
     ];
   });
@@ -46,4 +46,3 @@ module.exports = {
   ...config,
   expo,
 };
-

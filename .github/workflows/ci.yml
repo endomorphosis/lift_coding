@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -60,32 +63,8 @@ jobs:
         env:
           MWDAT_DISPLAY_MODE: ${{ matrix.dat_display_mode }}
         run: |
-          npx expo config --type prebuild --json > /tmp/expo-config-${{ matrix.dat_display_mode }}.json
-          python3 - <<'PY'
-          import json
-          import os
-
-          mode = os.environ["MWDAT_DISPLAY_MODE"]
-          expected_enabled = mode == "enabled"
-          path = f"/tmp/expo-config-{mode}.json"
-
-          with open(path, encoding="utf-8") as fh:
-              config = json.load(fh)
-
-          plugin_options = None
-          for entry in config.get("plugins", []):
-              if isinstance(entry, list) and "expo-meta-wearables-dat/app.plugin.js" in str(entry[0]):
-                  plugin_options = entry[1] if len(entry) > 1 and isinstance(entry[1], dict) else {}
-                  break
-
-          if plugin_options is None:
-              raise SystemExit("expo-meta-wearables-dat plugin configuration was not found in resolved expo config")
-
-          actual_enabled = bool(plugin_options.get("enableDisplay"))
-          if actual_enabled != expected_enabled:
-              raise SystemExit(
-                  f"MWDAT_DISPLAY_MODE={mode} expected enableDisplay={expected_enabled}, got {actual_enabled}"
-              )
-
-          print(f"Validated DAT lane {mode}: enableDisplay={actual_enabled}")
-          PY
+          CONFIG_PATH="${{ runner.temp }}/expo-config-${{ matrix.dat_display_mode }}.json"
+          npx expo config --type prebuild --json > "$CONFIG_PATH"
+          python3 scripts/validate_dat_expo_config.py \
+            --mode "$MWDAT_DISPLAY_MODE" \
+            --config-path "$CONFIG_PATH"
