@@ -91,6 +91,48 @@ Implemented in this repository as scaffolding:
 - Existing audio-first and diagnostics-first flow remains the primary reliable path.
 - Display actions are surfaced as unsupported/bridge-reference in diagnostics instead of failing silently.
 
+## Web-app display support module (Phase F)
+
+This repository now includes a dedicated compatibility evaluator for display-glasses web-app readiness:
+
+- Evaluator module: `/home/runner/work/lift_coding/lift_coding/src/handsfree/display_webapp_compat.py`
+- Linter script: `/home/runner/work/lift_coding/lift_coding/scripts/lint_display_webapp_readiness.py`
+- Example checklist payload:
+  `/home/runner/work/lift_coding/lift_coding/config/display_webapp_readiness.example.json`
+
+Current enforced checks:
+
+- HTTPS + publicly reachable deployment URL
+- 600x600 viewport requirement
+- D-pad/focus navigation contract (`dpad_focus` + focusable targets + validated order)
+- dark-theme support
+- contrast ratio floor (`>= 4.5`)
+- documented app-connection onboarding path
+
+Run the linter:
+
+```bash
+cd /home/runner/work/lift_coding/lift_coding
+PYTHONPATH=/home/runner/work/lift_coding/lift_coding/src python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
+```
+
+Exit codes:
+
+- `0` = readiness checks pass
+- `1` = one or more blocking checks failed
+
+## Web-app deployment + onboarding path (Phase F)
+
+Recommended deployment flow for display web-apps:
+
+1. Publish the web-app to a publicly reachable HTTPS origin.
+2. Validate readiness using the internal linter before onboarding.
+3. Record onboarding guidance for operators/users:
+   - app endpoint URL
+   - prerequisites and account/permission needs
+   - app-connection steps in wearables companion flow
+4. Store readiness artifacts and onboarding notes with release evidence for staged rollout.
+
 ## Minimum SDK targets
 
 - Android DAT: `0.7.0` default target
