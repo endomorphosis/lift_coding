@@ -74,6 +74,10 @@ export interface DatDiagnostics {
     state: string;
   };
   knownDeviceCount?: number;
+  displayConnectionState?: string;
+  displayLastAction?: string | null;
+  displayLastStatus?: string | null;
+  displayLastUpdatedAt?: number | null;
 }
 
 export interface DatStateChangedEvent {
@@ -103,6 +107,10 @@ export interface DatMediaActionResult {
   targetConnectionState?: string;
   assetUri?: string | null;
   mimeType?: string | null;
+  displayConnectionState?: string;
+  displayLastAction?: string | null;
+  displayLastStatus?: string | null;
+  displayLastUpdatedAt?: number | null;
 }
 
 const ExpoMetaWearablesDatModule = requireOptionalNativeModule('ExpoMetaWearablesDat');
@@ -166,6 +174,10 @@ function getUnavailableDiagnostics(): DatDiagnostics {
       state: 'unavailable',
     },
     knownDeviceCount: 0,
+    displayConnectionState: 'unavailable',
+    displayLastAction: null,
+    displayLastStatus: null,
+    displayLastUpdatedAt: null,
   };
 }
 
@@ -197,6 +209,10 @@ function getUnavailableMediaResult(
     targetConnectionState: 'unselected',
     assetUri: null,
     mimeType: null,
+    displayConnectionState: 'unavailable',
+    displayLastAction: action,
+    displayLastStatus: 'unavailable',
+    displayLastUpdatedAt: Date.now(),
   };
 }
 

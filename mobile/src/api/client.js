@@ -337,6 +337,10 @@ export async function delegateWearablesBridgeTask(device = {}, options = {}) {
       target_connection_state: device?.targetConnectionState || null,
       target_last_seen_at: device?.targetLastSeenAt || null,
       target_rssi: device?.targetRssi ?? null,
+      display_capable: device?.displayCapable ?? null,
+      display_connection_state: device?.displayConnectionState || null,
+      display_last_action: device?.displayLastAction || null,
+      display_last_status: device?.displayLastStatus || null,
       ...(options.client_context || {}),
     }),
   });

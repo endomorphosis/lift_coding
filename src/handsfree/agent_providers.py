@@ -60,6 +60,16 @@ WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION = {
     "label": "Clear Display",
     "phrase": "clear the wearables display",
 }
+WEARABLES_MOBILE_PLAY_DISPLAY_VIDEO_ACTION = {
+    "id": "mobile_play_wearables_display_video",
+    "label": "Play Display Video",
+    "phrase": "play a wearables display video",
+}
+WEARABLES_MOBILE_RESET_DISPLAY_ACTION = {
+    "id": "mobile_reset_wearables_display_session",
+    "label": "Reset Display Session",
+    "phrase": "reset the wearables display session",
+}
 
 
 class AgentProvider(ABC):
@@ -1582,7 +1592,13 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     }
     mobile_actions: list[dict[str, str]] = list(WEARABLES_MOBILE_BASE_ACTIONS)
     if display_capable:
-        mobile_actions.append(WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION)
+        mobile_actions.extend(
+            [
+                WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION,
+                WEARABLES_MOBILE_PLAY_DISPLAY_VIDEO_ACTION,
+                WEARABLES_MOBILE_RESET_DISPLAY_ACTION,
+            ]
+        )
 
     follow_up_actions = [
         *mobile_actions,

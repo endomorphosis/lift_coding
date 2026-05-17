@@ -203,6 +203,10 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
           targetConnectionState: event.targetConnectionState,
           targetLastSeenAt: event.targetLastSeenAt,
           targetRssi: event.targetRssi,
+          displayCapable: wearablesCapabilitySummary.displayReady,
+          displayConnectionState: wearablesDiagnostics?.displayConnectionState,
+          displayLastAction: wearablesDiagnostics?.displayLastAction,
+          displayLastStatus: wearablesDiagnostics?.displayLastStatus,
         }).then((response) => {
           hydrateWearablesFollowOnTask(response?.follow_on_task || null).catch(() => {});
         }).catch((error) => {
@@ -735,7 +739,9 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const handleWearablesDisplayResult = async (result) => {
     const action = result?.action || 'display_action';
     const message = result?.message || result?.state || 'unknown';
-    setWearablesDisplayStatus(`${action}: ${message}`);
+    const connectionState = result?.displayConnectionState || wearablesDiagnostics?.displayConnectionState || 'unknown';
+    const status = result?.displayLastStatus || result?.state || 'unknown';
+    setWearablesDisplayStatus(`${action}: ${message} (state=${connectionState}, status=${status})`);
     if (result?.supported === false && result?.state !== 'ready') {
       setLastError(`${action}: ${message}`);
     }
@@ -1366,6 +1372,9 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         <Text style={styles.text}>Known devices: {wearablesDiagnostics?.knownDeviceCount ?? 0}</Text>
         <Text style={styles.text}>Capability matrix: {wearablesCapabilitySummary.matrixSummary}</Text>
         <Text style={styles.text}>Display ready: {wearablesCapabilitySummary.displayReady ? 'yes' : 'no'}</Text>
+        <Text style={styles.text}>Display state: {wearablesDiagnostics?.displayConnectionState || 'unknown'}</Text>
+        <Text style={styles.text}>Display last action: {wearablesDiagnostics?.displayLastAction || 'none'}</Text>
+        <Text style={styles.text}>Display last status: {wearablesDiagnostics?.displayLastStatus || 'none'}</Text>
         <Text style={styles.text}>SDK minimum met: {wearablesCapabilitySummary.sdkMeetsMinimum ? 'yes' : 'no'}</Text>
         {!!wearablesCapabilitySummary.configWarnings?.length && (
           <Text

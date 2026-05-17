@@ -168,6 +168,56 @@ describe('agentActions helpers', () => {
     expect(navigate).toHaveBeenCalledWith('Glasses');
   });
 
+  it('plays wearables display video locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    getMetaWearablesDat.mockResolvedValue({
+      playDisplayVideo: jest.fn(async () => ({
+        action: 'play_display_video',
+        message: 'Display video playback requested.',
+      })),
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_play_wearables_display_video', params: { video_url: 'https://example.com/test.mp4' } },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Display video playback requested.',
+      response: {
+        action: 'play_display_video',
+        message: 'Display video playback requested.',
+      },
+    });
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
+  it('resets wearables display session locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    getMetaWearablesDat.mockResolvedValue({
+      resetDisplaySession: jest.fn(async () => ({
+        action: 'reset_display_session',
+        message: 'Display session reset requested.',
+      })),
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem: { id: 'mobile_reset_wearables_display_session' },
+      navigation: { navigate },
+    });
+
+    expect(outcome).toEqual({
+      handled: true,
+      message: 'Display session reset requested.',
+      response: {
+        action: 'reset_display_session',
+        message: 'Display session reset requested.',
+      },
+    });
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
   it('returns handled false for non-local actions', async () => {
     const outcome = await executeLocalStructuredAction({
       actionItem: { id: 'read_cid' },

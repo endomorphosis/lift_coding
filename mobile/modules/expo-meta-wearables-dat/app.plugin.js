@@ -10,6 +10,23 @@ function withMetaWearablesDat(config, options = {}) {
   const androidApplicationId = options.androidApplicationId || '';
   const androidDamEnabled = options.androidDamEnabled === true || enableDisplay;
 
+  const parseVersion = (version) =>
+    String(version || '')
+      .split('.')
+      .map((token) => Number.parseInt(token, 10) || 0);
+  const versionAtLeast = (current, minimum) => {
+    const lhs = parseVersion(current);
+    const rhs = parseVersion(minimum);
+    const length = Math.max(lhs.length, rhs.length);
+    for (let idx = 0; idx < length; idx += 1) {
+      const left = lhs[idx] || 0;
+      const right = rhs[idx] || 0;
+      if (left > right) return true;
+      if (left < right) return false;
+    }
+    return true;
+  };
+
   if (enableDisplay && !androidApplicationId) {
     throw new Error(
       'expo-meta-wearables-dat: enableDisplay=true requires androidApplicationId (your Meta Wearables application identifier from Wearables Developer Center) for DAM setup.'
@@ -18,6 +35,11 @@ function withMetaWearablesDat(config, options = {}) {
   if (enableDisplay && !iosApplicationId) {
     throw new Error(
       'expo-meta-wearables-dat: enableDisplay=true requires iosApplicationId (your Meta Wearables application identifier from Wearables Developer Center) for DAM setup.'
+    );
+  }
+  if (enableDisplay && !versionAtLeast(datSdkVersion, '0.7.0')) {
+    throw new Error(
+      `expo-meta-wearables-dat: enableDisplay=true requires datSdkVersion >= 0.7.0 (received ${datSdkVersion}).`
     );
   }
 

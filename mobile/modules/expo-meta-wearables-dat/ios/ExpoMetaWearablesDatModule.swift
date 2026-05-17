@@ -7,6 +7,10 @@ public class ExpoMetaWearablesDatModule: Module {
   private var selectedDeviceId: String?
   private var selectedDeviceLastSeenAt: Double?
   private var selectedDeviceRssi: Int?
+  private var displayConnectionState = "idle"
+  private var displayLastAction: String?
+  private var displayLastStatus: String?
+  private var displayLastUpdatedAt: Double?
 
   private func stateChangedPayload() -> [String: Any] {
     return [
@@ -35,7 +39,11 @@ public class ExpoMetaWearablesDatModule: Module {
       "deviceId": self.selectedDeviceId as Any,
       "targetConnectionState": self.selectedDeviceId == nil ? "unselected" : (self.sessionState == "target_connected" ? "connected" : (self.sessionState == "target_ready" ? "ready" : "selected")),
       "assetUri": NSNull(),
-      "mimeType": NSNull()
+      "mimeType": NSNull(),
+      "displayConnectionState": self.displayConnectionState,
+      "displayLastAction": self.displayLastAction as Any,
+      "displayLastStatus": self.displayLastStatus as Any,
+      "displayLastUpdatedAt": self.displayLastUpdatedAt as Any
     ]
   }
 
@@ -101,6 +109,25 @@ public class ExpoMetaWearablesDatModule: Module {
     default:
       return "Display action is not implemented in the iOS DAT bridge yet."
     }
+  }
+
+  private func canExecuteDisplayAction(videoUrl: String? = nil) -> Bool {
+    let damEnabled = appModelDamEnabled(from: mwdatInfo())
+    let sdkReady = sdkMeetsMinimum(from: mwdatInfo())
+    let hasTarget = self.selectedDeviceId != nil
+    let hasVideoIfNeeded = videoUrl == nil || !(videoUrl?.isEmpty ?? true)
+    return damEnabled && sdkReady && hasTarget && hasVideoIfNeeded
+  }
+
+  private func fallbackDisplayConnectionState() -> String {
+    return self.selectedDeviceId == nil ? "awaiting_target" : "blocked"
+  }
+
+  private func updateDisplayState(action: String, status: String, connectionState: String) {
+    self.displayLastAction = action
+    self.displayLastStatus = status
+    self.displayConnectionState = connectionState
+    self.displayLastUpdatedAt = Date().timeIntervalSince1970 * 1000
   }
 
   public func definition() -> ModuleDefinition {
@@ -315,7 +342,11 @@ public class ExpoMetaWearablesDatModule: Module {
         "selectedDeviceName": self.selectedDeviceId as Any,
         "targetConnectionState": self.selectedDeviceId == nil ? "unselected" : (self.sessionState == "target_connected" ? "connected" : (self.sessionState == "target_ready" ? "ready" : (self.sessionState == "target_discovered" ? "discovered" : "selected"))),
         "targetLastSeenAt": self.selectedDeviceLastSeenAt as Any,
-        "targetRssi": self.selectedDeviceRssi as Any
+        "targetRssi": self.selectedDeviceRssi as Any,
+        "displayConnectionState": self.displayConnectionState,
+        "displayLastAction": self.displayLastAction as Any,
+        "displayLastStatus": self.displayLastStatus as Any,
+        "displayLastUpdatedAt": self.displayLastUpdatedAt as Any
       ]
     }
 
@@ -363,30 +394,66 @@ public class ExpoMetaWearablesDatModule: Module {
     }
 
     AsyncFunction("renderDisplayTest") { () -> [String: Any] in
+      let displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action: "render_display_test",
+        status: displayEnabled ? "ready" : "blocked",
+        connectionState: displayEnabled ? "rendered" : fallbackDisplayConnectionState()
+      )
       self.mediaActionResult(
         action: "render_display_test",
-        message: displayStubMessage(action: "render_display_test")
+        message: displayEnabled
+          ? "Display test card queued by the iOS DAT bridge lifecycle."
+          : displayStubMessage(action: "render_display_test"),
+        supported: displayEnabled
       )
     }
 
     AsyncFunction("clearDisplay") { () -> [String: Any] in
+      let displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action: "clear_display",
+        status: displayEnabled ? "ready" : "blocked",
+        connectionState: displayEnabled ? "cleared" : fallbackDisplayConnectionState()
+      )
       self.mediaActionResult(
         action: "clear_display",
-        message: displayStubMessage(action: "clear_display")
+        message: displayEnabled
+          ? "Display clear queued by the iOS DAT bridge lifecycle."
+          : displayStubMessage(action: "clear_display"),
+        supported: displayEnabled
       )
     }
 
     AsyncFunction("playDisplayVideo") { (_ videoUrl: String?) -> [String: Any] in
+      let displayEnabled = canExecuteDisplayAction(videoUrl: videoUrl)
+      updateDisplayState(
+        action: "play_display_video",
+        status: displayEnabled ? "ready" : "blocked",
+        connectionState: displayEnabled ? "video_playing" : fallbackDisplayConnectionState()
+      )
       self.mediaActionResult(
         action: "play_display_video",
-        message: displayStubMessage(action: "play_display_video", videoUrl: videoUrl)
+        message: displayEnabled
+          ? "Display video playback queued by the iOS DAT bridge lifecycle."
+          : displayStubMessage(action: "play_display_video", videoUrl: videoUrl),
+        supported: displayEnabled
       )
     }
 
     AsyncFunction("resetDisplaySession") { () -> [String: Any] in
+      let displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action: "reset_display_session",
+        status: displayEnabled ? "ready" : "blocked",
+        connectionState: displayEnabled ? "reset" : fallbackDisplayConnectionState()
+      )
       self.mediaActionResult(
         action: "reset_display_session",
-        message: displayStubMessage(action: "reset_display_session")
+        message: displayEnabled
+          ? "Display session reset queued by the iOS DAT bridge lifecycle."
+          : displayStubMessage(action: "reset_display_session"),
+        supported: displayEnabled
       )
     }
   }

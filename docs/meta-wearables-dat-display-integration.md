@@ -24,6 +24,32 @@ This document captures the current in-repo baseline and immediate upgrade scaffo
 - API schema descriptions:
   - `/home/runner/work/lift_coding/lift_coding/src/handsfree/models.py`
 
+## Source alignment (validated in this environment)
+
+Accessible upstream sources used for this integration baseline:
+
+- `https://github.com/facebook/meta-wearables-dat-ios` (README + CHANGELOG)
+- `https://github.com/facebook/meta-wearables-dat-android` (README + setup requirements)
+- `https://github.com/facebookincubator/meta-wearables-webapp` (web-app constraints/tooling)
+
+Blocked fetch targets (must be validated manually in release checklist):
+
+- `https://developers.meta.com/blog/build-for-display-glasses/`
+- `https://wearables.developer.meta.com/docs/develop/webapps`
+- `https://developers.facebook.com/docs/ray-ban/...`
+
+## DAT 0.7 requirements matrix (current state)
+
+| Area | DAT 0.7 expectation | Current repo state | Gap |
+|---|---|---|---|
+| Android SDK target | 0.7.0+ | `0.7.0` default target configured | Environment-specific enablement still mostly off |
+| iOS SDK target metadata | 0.7.0+ | `0.7.0` target exposed in diagnostics/config | Native link path still bridge-first |
+| DAM app model | required for display | plugin + metadata scaffolding present | production DAM rollout matrix needed |
+| Display lifecycle actions | render/clear/video/reset | bridge methods exposed across JS/native | previously stub-only responses; now bridge lifecycle state added |
+| Display diagnostics | session/readiness/error visibility | readiness + config warnings + capability matrix | needs hardware-backed validation paths |
+| Backend follow-up actions | include display-safe actions by capability | diagnostics/reconnect/render/clear existed | expanded actions added for play video + reset |
+| Web-app display constraints | 600x600, D-pad focus, high contrast, HTTPS deployment | no dedicated in-repo checker/linter yet | still pending |
+
 ## Delta against upstream DAT 0.7
 
 Upstream 0.7 introduces app-model + display capability flows (DAM + display rendering/video support) and additional session/typed error semantics.

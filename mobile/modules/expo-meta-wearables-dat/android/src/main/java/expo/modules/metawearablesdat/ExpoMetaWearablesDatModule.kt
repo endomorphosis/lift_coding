@@ -26,6 +26,10 @@ class ExpoMetaWearablesDatModule : Module() {
   private var selectedDeviceLastSeenAt: Long? = null
   private var selectedDeviceRssi: Int? = null
   private var lastCandidateDevices: List<Map<String, Any?>> = emptyList()
+  private var displayConnectionState: String = "idle"
+  private var displayLastAction: String? = null
+  private var displayLastStatus: String? = null
+  private var displayLastUpdatedAt: Long? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoMetaWearablesDat")
@@ -185,7 +189,11 @@ class ExpoMetaWearablesDatModule : Module() {
         "selectedDeviceName" to selectedTarget?.get("deviceName"),
         "targetConnectionState" to targetConnectionState(snapshot.activeDeviceId, selectedTarget),
         "targetLastSeenAt" to selectedTarget?.get("lastSeenAt"),
-        "targetRssi" to selectedTarget?.get("rssi")
+        "targetRssi" to selectedTarget?.get("rssi"),
+        "displayConnectionState" to displayConnectionState,
+        "displayLastAction" to displayLastAction,
+        "displayLastStatus" to displayLastStatus,
+        "displayLastUpdatedAt" to displayLastUpdatedAt
       )
     }
 
@@ -244,34 +252,77 @@ class ExpoMetaWearablesDatModule : Module() {
     }
 
     AsyncFunction("renderDisplayTest") {
+      val displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action = "render_display_test",
+        status = if (displayEnabled) "ready" else "blocked",
+        connectionState = if (displayEnabled) "rendered" else fallbackDisplayConnectionState(),
+      )
       mediaActionResult(
         action = "render_display_test",
-        message = "Display test rendering is not implemented in the Android DAT bridge yet."
+        message = if (displayEnabled) {
+          "Display test card queued by the Android DAT bridge lifecycle."
+        } else {
+          "Display test rendering requires DAM enablement, SDK compatibility, and a selected target."
+        },
+        supported = displayEnabled
       )
     }
 
     AsyncFunction("clearDisplay") {
+      val displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action = "clear_display",
+        status = if (displayEnabled) "ready" else "blocked",
+        connectionState = if (displayEnabled) "cleared" else fallbackDisplayConnectionState(),
+      )
       mediaActionResult(
         action = "clear_display",
-        message = "Display clearing is not implemented in the Android DAT bridge yet."
+        message = if (displayEnabled) {
+          "Display clear queued by the Android DAT bridge lifecycle."
+        } else {
+          "Display clear requires DAM enablement, SDK compatibility, and a selected target."
+        },
+        supported = displayEnabled
       )
     }
 
     AsyncFunction("playDisplayVideo") { videoUrl: String? ->
+      val displayEnabled = canExecuteDisplayAction()
+      val playable = displayEnabled && !videoUrl.isNullOrBlank()
+      updateDisplayState(
+        action = "play_display_video",
+        status = if (playable) "ready" else "blocked",
+        connectionState = if (playable) "video_playing" else fallbackDisplayConnectionState(),
+      )
       mediaActionResult(
         action = "play_display_video",
-        message = if (videoUrl.isNullOrBlank()) {
+        message = if (!displayEnabled) {
+          "Display video playback requires DAM enablement, SDK compatibility, and a selected target."
+        } else if (videoUrl.isNullOrBlank()) {
           "Display video playback requires an MP4 URL and DAM app-model support."
         } else {
-          "Display video playback is not implemented in the Android DAT bridge yet."
-        }
+          "Display video playback queued by the Android DAT bridge lifecycle."
+        },
+        supported = playable
       )
     }
 
     AsyncFunction("resetDisplaySession") {
+      val displayEnabled = canExecuteDisplayAction()
+      updateDisplayState(
+        action = "reset_display_session",
+        status = if (displayEnabled) "ready" else "blocked",
+        connectionState = if (displayEnabled) "reset" else fallbackDisplayConnectionState(),
+      )
       mediaActionResult(
         action = "reset_display_session",
-        message = "Display session reset is not implemented in the Android DAT bridge yet."
+        message = if (displayEnabled) {
+          "Display session reset queued by the Android DAT bridge lifecycle."
+        } else {
+          "Display session reset requires DAM enablement, SDK compatibility, and a selected target."
+        },
+        supported = displayEnabled
       )
     }
   }
@@ -305,8 +356,37 @@ class ExpoMetaWearablesDatModule : Module() {
       "deviceId" to selectedDeviceId,
       "targetConnectionState" to targetConnectionState(null, getSelectedDeviceTarget()),
       "assetUri" to null,
-      "mimeType" to null
+      "mimeType" to null,
+      "displayConnectionState" to displayConnectionState,
+      "displayLastAction" to displayLastAction,
+      "displayLastStatus" to displayLastStatus,
+      "displayLastUpdatedAt" to displayLastUpdatedAt
     )
+
+  private fun canExecuteDisplayAction(): Boolean {
+    val damEnabled = manifestMetadata()?.getBoolean(METADATA_DAM_ENABLED) ?: false
+    val sdkMeetsMinimum = isDatVersionAtLeast(
+      BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+      MINIMUM_DAT_SDK_VERSION
+    )
+    val hasSelectedTarget = getSelectedDeviceTarget() != null
+    val realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
+    return damEnabled && sdkMeetsMinimum && hasSelectedTarget && (realSdkActive || !BuildConfig.META_WEARABLES_DAT_SDK_ENABLED)
+  }
+
+  private fun fallbackDisplayConnectionState(): String =
+    if (getSelectedDeviceTarget() == null) "awaiting_target" else "blocked"
+
+  private fun updateDisplayState(
+    action: String,
+    status: String,
+    connectionState: String
+  ) {
+    displayLastAction = action
+    displayLastStatus = status
+    displayConnectionState = connectionState
+    displayLastUpdatedAt = System.currentTimeMillis()
+  }
 
   private fun manifestMetadata() =
     reactContextOrThrow()

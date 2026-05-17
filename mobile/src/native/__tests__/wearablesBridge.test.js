@@ -63,6 +63,10 @@ describe('wearablesBridge wrapper', () => {
       targetConnectionState: 'unselected',
       targetLastSeenAt: null,
       targetRssi: null,
+      displayConnectionState: 'unavailable',
+      displayLastAction: null,
+      displayLastStatus: null,
+      displayLastUpdatedAt: null,
     });
     expect(reconnect).toEqual({
       state: 'awaiting_target',
