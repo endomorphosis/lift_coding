@@ -156,5 +156,3 @@ Recommended gate sequence:
 
 1. Replace display test stubs with real DAT session/display attach APIs where SDK linkage is available.
 2. Add backend-driven display action orchestration with follow-up action contracts.
-3. Add CI split lanes for DAT-disabled and DAT-enabled mobile builds.
-4. Add physical-device validation checklist for display-capable models.

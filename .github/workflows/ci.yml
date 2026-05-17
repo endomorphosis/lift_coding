@@ -34,3 +34,58 @@ jobs:
 
       - name: Validate OpenAPI
         run: make openapi-validate
+
+  mobile-dat-config-lanes:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dat_display_mode: [disabled, enabled]
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mobile/package-lock.json
+
+      - name: Install mobile deps
+        run: npm ci
+
+      - name: Validate DAT lane expo config
+        env:
+          MWDAT_DISPLAY_MODE: ${{ matrix.dat_display_mode }}
+        run: |
+          npx expo config --type prebuild --json > /tmp/expo-config-${{ matrix.dat_display_mode }}.json
+          python3 - <<'PY'
+          import json
+          import os
+
+          mode = os.environ["MWDAT_DISPLAY_MODE"]
+          expected_enabled = mode == "enabled"
+          path = f"/tmp/expo-config-{mode}.json"
+
+          with open(path, encoding="utf-8") as fh:
+              config = json.load(fh)
+
+          plugin_options = None
+          for entry in config.get("plugins", []):
+              if isinstance(entry, list) and "expo-meta-wearables-dat/app.plugin.js" in str(entry[0]):
+                  plugin_options = entry[1] if len(entry) > 1 and isinstance(entry[1], dict) else {}
+                  break
+
+          if plugin_options is None:
+              raise SystemExit("expo-meta-wearables-dat plugin configuration was not found in resolved expo config")
+
+          actual_enabled = bool(plugin_options.get("enableDisplay"))
+          if actual_enabled != expected_enabled:
+              raise SystemExit(
+                  f"MWDAT_DISPLAY_MODE={mode} expected enableDisplay={expected_enabled}, got {actual_enabled}"
+              )
+
+          print(f"Validated DAT lane {mode}: enableDisplay={actual_enabled}")
+          PY
