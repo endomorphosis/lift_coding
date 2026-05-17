@@ -115,7 +115,7 @@ public class ExpoMetaWearablesDatModule: Module {
     let damEnabled = appModelDamEnabled(from: mwdatInfo())
     let sdkReady = sdkMeetsMinimum(from: mwdatInfo())
     let hasTarget = self.selectedDeviceId != nil
-    let hasVideoIfNeeded = videoUrl == nil || !(videoUrl?.isEmpty ?? true)
+    let hasVideoIfNeeded = videoUrl.map { !$0.isEmpty } ?? true
     return damEnabled && sdkReady && hasTarget && hasVideoIfNeeded
   }
 

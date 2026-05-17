@@ -311,7 +311,7 @@ def _build_result_action_items(card: dict[str, Any]) -> list[dict[str, Any]]:
                 "id": "mobile_play_wearables_display_video",
                 "label": "Play Display Video",
                 "phrase": "play a wearables display video",
-                "params": {"video_url": "https://example.com/demo.mp4"},
+                "params": {"video_url": ""},
             },
             {
                 "id": "mobile_reset_wearables_display_session",

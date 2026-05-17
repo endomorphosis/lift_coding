@@ -115,6 +115,14 @@ function isActiveWearablesTask(taskState) {
   return taskState === 'created' || taskState === 'running' || taskState === 'needs_input';
 }
 
+function formatWearablesDisplayActionStatus(result, diagnostics) {
+  const action = result?.action || 'display_action';
+  const message = result?.message || result?.state || 'unknown';
+  const connectionState = result?.displayConnectionState || diagnostics?.displayConnectionState || 'unknown';
+  const status = result?.displayLastStatus || result?.state || 'unknown';
+  return `${action}: ${message} (state=${connectionState}, status=${status})`;
+}
+
 function mergeWearablesFollowOnTask(followOnTask, detail) {
   if (!followOnTask?.task_id || !detail?.id) {
     return followOnTask;
@@ -739,9 +747,7 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const handleWearablesDisplayResult = async (result) => {
     const action = result?.action || 'display_action';
     const message = result?.message || result?.state || 'unknown';
-    const connectionState = result?.displayConnectionState || wearablesDiagnostics?.displayConnectionState || 'unknown';
-    const status = result?.displayLastStatus || result?.state || 'unknown';
-    setWearablesDisplayStatus(`${action}: ${message} (state=${connectionState}, status=${status})`);
+    setWearablesDisplayStatus(formatWearablesDisplayActionStatus(result, wearablesDiagnostics));
     if (result?.supported === false && result?.state !== 'ready') {
       setLastError(`${action}: ${message}`);
     }

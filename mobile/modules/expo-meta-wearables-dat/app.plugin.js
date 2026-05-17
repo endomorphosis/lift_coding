@@ -1,5 +1,24 @@
 const { withAndroidManifest, withInfoPlist } = require('expo/config-plugins');
 
+function parseVersion(version) {
+  return String(version || '')
+    .split('.')
+    .map((part) => Number.parseInt(part, 10) || 0);
+}
+
+function versionAtLeast(current, minimum) {
+  const lhs = parseVersion(current);
+  const rhs = parseVersion(minimum);
+  const length = Math.max(lhs.length, rhs.length);
+  for (let index = 0; index < length; index += 1) {
+    const left = lhs[index] || 0;
+    const right = rhs[index] || 0;
+    if (left > right) return true;
+    if (left < right) return false;
+  }
+  return true;
+}
+
 function withMetaWearablesDat(config, options = {}) {
   const enableDisplay = options.enableDisplay === true;
   const datSdkVersion = options.datSdkVersion || '0.7.0';
@@ -9,23 +28,6 @@ function withMetaWearablesDat(config, options = {}) {
   const androidAnalyticsOptOut = options.androidAnalyticsOptOut !== false;
   const androidApplicationId = options.androidApplicationId || '';
   const androidDamEnabled = options.androidDamEnabled === true || enableDisplay;
-
-  const parseVersion = (version) =>
-    String(version || '')
-      .split('.')
-      .map((token) => Number.parseInt(token, 10) || 0);
-  const versionAtLeast = (current, minimum) => {
-    const lhs = parseVersion(current);
-    const rhs = parseVersion(minimum);
-    const length = Math.max(lhs.length, rhs.length);
-    for (let idx = 0; idx < length; idx += 1) {
-      const left = lhs[idx] || 0;
-      const right = rhs[idx] || 0;
-      if (left > right) return true;
-      if (left < right) return false;
-    }
-    return true;
-  };
 
   if (enableDisplay && !androidApplicationId) {
     throw new Error(

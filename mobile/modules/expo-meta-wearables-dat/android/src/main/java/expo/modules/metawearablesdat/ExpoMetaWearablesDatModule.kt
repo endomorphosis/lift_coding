@@ -289,11 +289,11 @@ class ExpoMetaWearablesDatModule : Module() {
 
     AsyncFunction("playDisplayVideo") { videoUrl: String? ->
       val displayEnabled = canExecuteDisplayAction()
-      val playable = displayEnabled && !videoUrl.isNullOrBlank()
+      val canPlayVideo = displayEnabled && !videoUrl.isNullOrBlank()
       updateDisplayState(
         action = "play_display_video",
-        status = if (playable) "ready" else "blocked",
-        connectionState = if (playable) "video_playing" else fallbackDisplayConnectionState(),
+        status = if (canPlayVideo) "ready" else "blocked",
+        connectionState = if (canPlayVideo) "video_playing" else fallbackDisplayConnectionState(),
       )
       mediaActionResult(
         action = "play_display_video",
@@ -304,7 +304,7 @@ class ExpoMetaWearablesDatModule : Module() {
         } else {
           "Display video playback queued by the Android DAT bridge lifecycle."
         },
-        supported = playable
+        supported = canPlayVideo
       )
     }
 
@@ -371,7 +371,10 @@ class ExpoMetaWearablesDatModule : Module() {
     )
     val hasSelectedTarget = getSelectedDeviceTarget() != null
     val realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
-    return damEnabled && sdkMeetsMinimum && hasSelectedTarget && (realSdkActive || !BuildConfig.META_WEARABLES_DAT_SDK_ENABLED)
+    // When SDK integration is disabled for the build flavor, we still allow
+    // bridge-lifecycle simulation for diagnostics and contract validation.
+    val bridgeSimulationMode = !BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
+    return damEnabled && sdkMeetsMinimum && hasSelectedTarget && (realSdkActive || bridgeSimulationMode)
   }
 
   private fun fallbackDisplayConnectionState(): String =
