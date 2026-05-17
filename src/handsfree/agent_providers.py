@@ -1531,7 +1531,7 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     raw_display_capable = client_context.get("display_capable")
     if isinstance(raw_display_capable, bool):
         display_capable = raw_display_capable
-    elif isinstance(raw_display_capable, int):
+    elif isinstance(raw_display_capable, (int, float)):
         display_capable = raw_display_capable == 1
     elif isinstance(raw_display_capable, str):
         display_capable = raw_display_capable.strip().lower() in {"1", "true", "yes", "on"}

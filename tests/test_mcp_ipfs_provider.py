@@ -350,6 +350,34 @@ class TestMCPIPFSProviders:
             for action in envelope["follow_up_actions"]
         )
 
+    def test_accelerate_wearables_bridge_display_capable_accepts_numeric_float_true(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-true-float",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "display_capable": 1.0,
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
+
     def test_start_task_fails_when_endpoint_missing(self, monkeypatch):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
 
