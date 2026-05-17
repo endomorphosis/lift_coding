@@ -48,7 +48,7 @@ Blocked fetch targets (must be validated manually in release checklist):
 | Display lifecycle actions | render/clear/video/reset | bridge methods exposed across JS/native | previously stub-only responses; now bridge lifecycle state added |
 | Display diagnostics | session/readiness/error visibility | readiness + config warnings + capability matrix | needs hardware-backed validation paths |
 | Backend follow-up actions | include display-safe actions by capability | diagnostics/reconnect/render/clear existed | expanded actions added for play video + reset |
-| Web-app display constraints | 600x600, D-pad focus, high contrast, HTTPS deployment | dedicated evaluator + linter + example readiness descriptor in-repo | physical-device UX verification and staged rollout evidence remain pending |
+| Web-app display constraints | 600x600, D-pad focus, high contrast, HTTPS deployment | dedicated evaluator + linter + example readiness descriptor in-repo | execute physical-device checklist runs and capture staged rollout evidence artifacts |
 
 ## Delta against upstream DAT 0.7
 
@@ -131,6 +131,21 @@ Recommended deployment flow for display web-apps:
    - prerequisites and account/permission needs
    - app-connection steps in wearables companion flow
 4. Store readiness artifacts and onboarding notes with release evidence for staged rollout.
+
+## Physical validation + staged rollout artifacts (Phase G)
+
+This repository now includes templates to run and record hardware-backed validation:
+
+- Physical validation checklist:
+  - `docs/meta-wearables-dat-display-physical-validation-checklist.md`
+- Staged rollout evidence template:
+  - `docs/meta-wearables-dat-display-rollout-evidence-template.md`
+
+Recommended gate sequence:
+
+1. Run the webapp readiness linter for the target deployment metadata.
+2. Execute the physical-device checklist on display-capable hardware.
+3. Record outcomes, artifacts, and rollout decision in the evidence template.
 
 ## Minimum SDK targets
 
