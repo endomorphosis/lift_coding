@@ -1534,6 +1534,7 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     elif isinstance(raw_display_capable, int):
         display_capable = raw_display_capable == 1
     elif isinstance(raw_display_capable, float):
+        # Only the numeric true sentinel (1/1.0) is treated as display-capable.
         display_capable = raw_display_capable.is_integer() and int(raw_display_capable) == 1
     elif isinstance(raw_display_capable, str):
         display_capable = raw_display_capable.strip().lower() in {"1", "true", "yes", "on"}
