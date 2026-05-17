@@ -95,10 +95,9 @@ Implemented in this repository as scaffolding:
 
 This repository now includes a dedicated compatibility evaluator for display-glasses web-app readiness:
 
-- Evaluator module: `/home/runner/work/lift_coding/lift_coding/src/handsfree/display_webapp_compat.py`
-- Linter script: `/home/runner/work/lift_coding/lift_coding/scripts/lint_display_webapp_readiness.py`
-- Example checklist payload:
-  `/home/runner/work/lift_coding/lift_coding/config/display_webapp_readiness.example.json`
+- Evaluator module: `src/handsfree/display_webapp_compat.py`
+- Linter script: `scripts/lint_display_webapp_readiness.py`
+- Example checklist payload: `config/display_webapp_readiness.example.json`
 
 Current enforced checks:
 
@@ -112,8 +111,8 @@ Current enforced checks:
 Run the linter:
 
 ```bash
-cd /home/runner/work/lift_coding/lift_coding
-PYTHONPATH=/home/runner/work/lift_coding/lift_coding/src python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
+cd <repo-root>
+PYTHONPATH=./src python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
 ```
 
 Exit codes:
