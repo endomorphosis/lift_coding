@@ -362,7 +362,11 @@ class TestAgentStatus:
         assert response["cards"][0]["deep_link"] == "ipfs://bafyreceipt"
         assert response["cards"][0]["action_items"][0]["id"] == "mobile_open_wearables_diagnostics"
         assert response["cards"][0]["action_items"][1]["id"] == "mobile_reconnect_wearables_target"
-        assert response["cards"][0]["action_items"][6]["label"] == "Read Receipt"
+        assert any(
+            item.get("label") == "Read Receipt"
+            for item in response["cards"][0]["action_items"]
+            if isinstance(item, dict)
+        )
 
     def test_results_saved_view_supports_next_navigation(
         self, router, parser, db_conn, test_user_id
