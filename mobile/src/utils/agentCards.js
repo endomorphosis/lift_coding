@@ -94,6 +94,14 @@ function appendLocalActionItems(actions = [], result = {}) {
     });
   }
 
+  if (!nextActions.some((action) => action?.id === 'mobile_render_wearables_display_test')) {
+    nextActions.push({
+      id: 'mobile_render_wearables_display_test',
+      label: 'Render Display Test',
+      phrase: 'render a wearables display test card',
+    });
+  }
+
   return nextActions;
 }
 

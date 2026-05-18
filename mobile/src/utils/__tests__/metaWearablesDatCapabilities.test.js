@@ -5,9 +5,12 @@ describe('summarizeMetaWearablesDat', () => {
     expect(summarizeMetaWearablesDat(null)).toEqual({
       readiness: 'unavailable',
       availableCapabilities: [],
-      unavailableCapabilities: ['session', 'camera', 'photo', 'video', 'audio'],
+      unavailableCapabilities: ['session', 'camera', 'photo', 'video', 'audio', 'display', 'display_video'],
+      displayReady: false,
+      sdkMeetsMinimum: true,
+      configWarnings: [],
       availableSummary: 'none',
-      matrixSummary: 'session:off, camera:off, photo:off, video:off, audio:off',
+      matrixSummary: 'session:off, camera:off, photo:off, video:off, audio:off, display:off, display_video:off',
     });
   });
 
@@ -23,12 +26,15 @@ describe('summarizeMetaWearablesDat', () => {
           photoCapture: false,
           videoStream: false,
           audio: false,
+          display: false,
+          displayVideo: false,
         },
       })
     ).toMatchObject({
       readiness: 'bridge_ready',
       availableSummary: 'session',
-      matrixSummary: 'session:on, camera:off, photo:off, video:off, audio:off',
+      matrixSummary:
+        'session:on, camera:off, photo:off, video:off, audio:off, display:off, display_video:off',
     });
 
     expect(
@@ -42,11 +48,13 @@ describe('summarizeMetaWearablesDat', () => {
           photoCapture: true,
           videoStream: true,
           audio: false,
+          display: true,
+          displayVideo: true,
         },
       })
     ).toMatchObject({
       readiness: 'sdk_ready',
-      availableCapabilities: ['session', 'camera', 'photo', 'video'],
+      availableCapabilities: ['session', 'camera', 'photo', 'video', 'display', 'display_video'],
     });
   });
 });

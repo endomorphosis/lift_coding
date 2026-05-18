@@ -11,8 +11,6 @@ from datetime import UTC, datetime
 import shutil
 import subprocess
 import re
-import shutil
-import subprocess
 import uuid
 from abc import ABC, abstractmethod
 from functools import lru_cache
@@ -40,6 +38,38 @@ from handsfree.mcp import (
 
 logger = logging.getLogger(__name__)
 CLI_DETECTION_TIMEOUT_SECONDS = 2
+WEARABLES_MOBILE_BASE_ACTIONS: tuple[dict[str, str], ...] = (
+    {
+        "id": "mobile_open_wearables_diagnostics",
+        "label": "Open Diagnostics",
+        "phrase": "open wearables bridge diagnostics",
+    },
+    {
+        "id": "mobile_reconnect_wearables_target",
+        "label": "Reconnect Target",
+        "phrase": "reconnect the selected wearables target",
+    },
+    {
+        "id": "mobile_render_wearables_display_test",
+        "label": "Render Display Test",
+        "phrase": "render a wearables display test card",
+    },
+)
+WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION = {
+    "id": "mobile_clear_wearables_display",
+    "label": "Clear Display",
+    "phrase": "clear the wearables display",
+}
+WEARABLES_MOBILE_PLAY_DISPLAY_VIDEO_ACTION = {
+    "id": "mobile_play_wearables_display_video",
+    "label": "Play Display Video",
+    "phrase": "play a wearables display video",
+}
+WEARABLES_MOBILE_RESET_DISPLAY_ACTION = {
+    "id": "mobile_reset_wearables_display_session",
+    "label": "Reset Display Session",
+    "phrase": "reset the wearables display session",
+}
 
 
 class AgentProvider(ABC):
@@ -1508,6 +1538,27 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     target_state = client_context.get("target_connection_state") or "connected"
     target_last_seen_at = client_context.get("target_last_seen_at")
     target_rssi = client_context.get("target_rssi")
+    raw_display_capable = client_context.get("display_capable")
+    if isinstance(raw_display_capable, bool):
+        display_capable = raw_display_capable
+    elif isinstance(raw_display_capable, int):
+        display_capable = raw_display_capable == 1
+    elif isinstance(raw_display_capable, float):
+        # Only the numeric true sentinel (1/1.0) is treated as display-capable.
+        display_capable = raw_display_capable.is_integer() and int(raw_display_capable) == 1
+    elif isinstance(raw_display_capable, str):
+        display_capable = raw_display_capable.strip().lower() in {"1", "true", "yes", "on"}
+    else:
+        display_capable = False
+    display_connection_state = client_context.get("display_connection_state")
+    if not isinstance(display_connection_state, str) or not display_connection_state.strip():
+        display_connection_state = "unknown"
+    display_last_action = client_context.get("display_last_action")
+    if not isinstance(display_last_action, str) or not display_last_action.strip():
+        display_last_action = None
+    display_last_status = client_context.get("display_last_status")
+    if not isinstance(display_last_status, str) or not display_last_status.strip():
+        display_last_status = None
     receipt = envelope.structured_output if isinstance(envelope.structured_output, dict) else {}
 
     if envelope.status == "completed":
@@ -1531,9 +1582,26 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         "provider": envelope.provider,
         "execution_mode": envelope.execution_mode,
         "status": envelope.status,
+        "display": {
+            "capable": display_capable,
+            "connection_state": display_connection_state,
+            "last_action": display_last_action,
+            "last_status": display_last_status,
+        },
         "receipt": envelope.structured_output,
     }
+    mobile_actions: list[dict[str, str]] = list(WEARABLES_MOBILE_BASE_ACTIONS)
+    if display_capable:
+        mobile_actions.extend(
+            [
+                WEARABLES_MOBILE_CLEAR_DISPLAY_ACTION,
+                WEARABLES_MOBILE_PLAY_DISPLAY_VIDEO_ACTION,
+                WEARABLES_MOBILE_RESET_DISPLAY_ACTION,
+            ]
+        )
+
     follow_up_actions = [
+        *mobile_actions,
         {
             "id": "agent_status",
             "label": "Check Task",

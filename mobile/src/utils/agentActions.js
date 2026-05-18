@@ -137,6 +137,63 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     };
   }
 
+  if (actionItem?.id === 'mobile_render_wearables_display_test') {
+    const dat = await getMetaWearablesDat();
+    const response = await dat.renderDisplayTest();
+    const message = response?.message || 'Display test rendering requested (not yet implemented in DAT bridge).';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
+  if (actionItem?.id === 'mobile_clear_wearables_display') {
+    const dat = await getMetaWearablesDat();
+    const response = await dat.clearDisplay();
+    const message = response?.message || 'Display clear requested (not yet implemented in DAT bridge).';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
+  if (actionItem?.id === 'mobile_play_wearables_display_video') {
+    const dat = await getMetaWearablesDat();
+    const videoUrl = String(actionItem?.params?.video_url || 'https://example.com/demo.mp4');
+    const response = await dat.playDisplayVideo(videoUrl);
+    const message = response?.message || 'Display video playback requested.';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
+  if (actionItem?.id === 'mobile_reset_wearables_display_session') {
+    const dat = await getMetaWearablesDat();
+    const response = await dat.resetDisplaySession();
+    const message = response?.message || 'Display session reset requested.';
+    if (navigation?.navigate) {
+      navigation.navigate('Glasses');
+    }
+    return {
+      handled: true,
+      message,
+      response,
+    };
+  }
+
   if (actionItem?.id !== 'mobile_reconnect_wearables_target') {
     return { handled: false };
   }

@@ -5,7 +5,7 @@ plugins {
 
 group = 'expo.modules.metawearablesdat'
 version = '1.0.0'
-def datSdkVersion = (findProperty("metaWearablesDatAndroidVersion") ?: "0.4.0").toString()
+def datSdkVersion = (findProperty("metaWearablesDatAndroidVersion") ?: "0.7.0").toString()
 def datSdkEnabled = (findProperty("metaWearablesDatAndroidEnabled") ?: "false").toString().toBoolean()
 
 android {
@@ -19,5 +19,14 @@ android {
     versionName "1.0.0"
     buildConfigField "boolean", "META_WEARABLES_DAT_SDK_ENABLED", datSdkEnabled.toString()
     buildConfigField "String", "META_WEARABLES_DAT_ANDROID_VERSION", "\"${datSdkVersion}\""
+  }
+}
+
+dependencies {
+  if (datSdkEnabled) {
+    implementation("com.meta.wearable:mwdat-core:${datSdkVersion}")
+    implementation("com.meta.wearable:mwdat-camera:${datSdkVersion}")
+    implementation("com.meta.wearable:mwdat-display:${datSdkVersion}")
+    implementation("com.meta.wearable:mwdat-mockdevice:${datSdkVersion}")
   }
 }

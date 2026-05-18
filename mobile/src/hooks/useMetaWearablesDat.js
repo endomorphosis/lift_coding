@@ -148,6 +148,22 @@ export function useMetaWearablesDat(options = {}) {
     return await runAction('stopVideoStream', 'Wearables DAT video stop failed');
   }, [runAction]);
 
+  const renderDisplayTest = useCallback(async () => {
+    return await runAction('renderDisplayTest', 'Wearables DAT display test render failed');
+  }, [runAction]);
+
+  const clearDisplay = useCallback(async () => {
+    return await runAction('clearDisplay', 'Wearables DAT display clear failed');
+  }, [runAction]);
+
+  const playDisplayVideo = useCallback(async (videoUrl) => {
+    return await runAction('playDisplayVideo', 'Wearables DAT display video playback failed', videoUrl);
+  }, [runAction]);
+
+  const resetDisplaySession = useCallback(async () => {
+    return await runAction('resetDisplaySession', 'Wearables DAT display session reset failed');
+  }, [runAction]);
+
   return {
     isAvailable,
     diagnostics,
@@ -163,5 +179,9 @@ export function useMetaWearablesDat(options = {}) {
     capturePhoto,
     startVideoStream,
     stopVideoStream,
+    renderDisplayTest,
+    clearDisplay,
+    playDisplayVideo,
+    resetDisplaySession,
   };
 }

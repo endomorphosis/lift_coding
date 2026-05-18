@@ -189,6 +189,10 @@ class TestMCPIPFSProviders:
                     "target_connection_state": "connected",
                     "target_last_seen_at": 1700000000000,
                     "target_rssi": -42,
+                    "display_capable": True,
+                    "display_connection_state": "connected",
+                    "display_last_action": "render_display_test",
+                    "display_last_status": "ready",
                 },
             },
         )
@@ -201,7 +205,21 @@ class TestMCPIPFSProviders:
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
         assert envelope["structured_output"]["device_id"] == "AA:BB"
         assert envelope["structured_output"]["target_rssi"] == -42
-        assert envelope["follow_up_actions"][0]["id"] == "agent_status"
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert envelope["structured_output"]["display"]["connection_state"] == "connected"
+        assert any(
+            action["id"] == "mobile_open_wearables_diagnostics"
+            for action in envelope["follow_up_actions"]
+        )
+        assert any(
+            action["id"] == "mobile_render_wearables_display_test"
+            for action in envelope["follow_up_actions"]
+        )
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
+        assert any(action["id"] == "agent_status" for action in envelope["follow_up_actions"])
         assert result["trace"]["mcp_started_at"]
         assert result["trace"]["mcp_timeout_s"] == 30.0
         assert result["trace"]["mcp_poll_interval_s"] == 2.0
@@ -258,6 +276,8 @@ class TestMCPIPFSProviders:
                     "target_connection_state": "connected",
                     "target_last_seen_at": 1700000000000,
                     "target_rssi": -42,
+                    "display_capable": False,
+                    "display_connection_state": "unavailable",
                 },
             },
         )
@@ -270,8 +290,121 @@ class TestMCPIPFSProviders:
         assert result["message"] == "Wearables bridge connectivity workflow timed out for Ray-Ban Meta."
         assert envelope["status"] == "failed"
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
+        assert envelope["structured_output"]["display"]["capable"] is False
         assert envelope["structured_output"]["receipt"]["timeout"] is True
         assert envelope["trace"]["last_protocol_state"] == "timeout"
+
+    def test_accelerate_wearables_bridge_display_capable_accepts_truthy_string(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-true-string",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "display_capable": "true",
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
+
+    def test_accelerate_wearables_bridge_display_capable_accepts_numeric_true(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-true-int",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "display_capable": 1,
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
+
+    def test_accelerate_wearables_bridge_display_capable_accepts_numeric_float_true(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-true-float",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "display_capable": 1.0,
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert envelope["structured_output"]["display"]["capable"] is True
+        assert any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
+
+    def test_accelerate_wearables_bridge_display_capable_rejects_non_integer_float(self, monkeypatch):
+        monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
+        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        task = SimpleNamespace(
+            id="task-bridge-float-false",
+            instruction="inspect the connected wearable",
+            target_type=None,
+            target_ref=None,
+            trace={
+                "wearables_bridge_requested_workflow": "wearables_bridge_connectivity",
+                "mcp_capability": "workflow",
+                "client_context": {
+                    "device_id": "AA:BB",
+                    "device_name": "Ray-Ban Meta",
+                    "display_capable": 1.5,
+                },
+            },
+        )
+
+        result = provider.start_task(task)
+
+        envelope = result["trace"]["mcp_result_envelope"]
+        assert envelope["structured_output"]["display"]["capable"] is False
+        assert not any(
+            action["id"] == "mobile_clear_wearables_display"
+            for action in envelope["follow_up_actions"]
+        )
 
     def test_start_task_fails_when_endpoint_missing(self, monkeypatch):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")

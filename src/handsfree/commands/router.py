@@ -297,6 +297,27 @@ def _build_result_action_items(card: dict[str, Any]) -> list[dict[str, Any]]:
                 "label": "Reconnect Target",
                 "phrase": "reconnect the selected wearables target",
             },
+            {
+                "id": "mobile_render_wearables_display_test",
+                "label": "Render Display Test",
+                "phrase": "render a wearables display test card",
+            },
+            {
+                "id": "mobile_clear_wearables_display",
+                "label": "Clear Display",
+                "phrase": "clear the wearables display",
+            },
+            {
+                "id": "mobile_play_wearables_display_video",
+                "label": "Play Display Video",
+                "phrase": "play a wearables display video",
+                "params": {"video_url": ""},
+            },
+            {
+                "id": "mobile_reset_wearables_display_session",
+                "label": "Reset Display Session",
+                "phrase": "reset the wearables display session",
+            },
             *items,
         ]
 

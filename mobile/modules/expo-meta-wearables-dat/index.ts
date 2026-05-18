@@ -17,14 +17,21 @@ export interface DatCapabilities {
   photoCapture: boolean;
   videoStream: boolean;
   audio: boolean;
+  display: boolean;
+  displayVideo: boolean;
 }
 
 export interface DatConfiguration {
   platform: 'ios' | 'android';
   sdkLinked: boolean;
   sdkConfigured?: boolean;
+  sdkMeetsMinimum?: boolean;
   analyticsOptOut: boolean;
   sdkVersion?: string | null;
+  sdkVersionTarget?: string | null;
+  datAppModelEnabled?: boolean;
+  displayDamRequired?: boolean;
+  displayDamEnabled?: boolean;
   applicationId?: string | null;
   provider?: string;
   integrationMode?: string;
@@ -35,8 +42,15 @@ export interface DatDiagnostics {
   platform: 'ios' | 'android';
   sdkLinked: boolean;
   sdkConfigured?: boolean;
+  sdkMeetsMinimum?: boolean;
   analyticsOptOut: boolean;
   sdkVersion?: string | null;
+  sdkVersionTarget?: string | null;
+  datAppModelEnabled?: boolean;
+  displayDamRequired?: boolean;
+  displayDamEnabled?: boolean;
+  displayReady?: boolean;
+  configWarnings?: string[];
   applicationId?: string | null;
   provider?: string;
   integrationMode?: string;
@@ -60,6 +74,10 @@ export interface DatDiagnostics {
     state: string;
   };
   knownDeviceCount?: number;
+  displayConnectionState?: string;
+  displayLastAction?: string | null;
+  displayLastStatus?: string | null;
+  displayLastUpdatedAt?: number | null;
 }
 
 export interface DatStateChangedEvent {
@@ -76,12 +94,23 @@ export interface DatMediaActionResult {
   state: string;
   mode: string;
   supported: boolean;
-  action: 'capture_photo' | 'start_video_stream' | 'stop_video_stream';
+  action:
+    | 'capture_photo'
+    | 'start_video_stream'
+    | 'stop_video_stream'
+    | 'render_display_test'
+    | 'clear_display'
+    | 'play_display_video'
+    | 'reset_display_session';
   message: string;
   deviceId?: string | null;
   targetConnectionState?: string;
   assetUri?: string | null;
   mimeType?: string | null;
+  displayConnectionState?: string;
+  displayLastAction?: string | null;
+  displayLastStatus?: string | null;
+  displayLastUpdatedAt?: number | null;
 }
 
 const ExpoMetaWearablesDatModule = requireOptionalNativeModule('ExpoMetaWearablesDat');
@@ -92,6 +121,8 @@ const unavailableCapabilities: DatCapabilities = {
   photoCapture: false,
   videoStream: false,
   audio: false,
+  display: false,
+  displayVideo: false,
 };
 
 function inferPlatform(): 'ios' | 'android' {
@@ -103,8 +134,13 @@ function getUnavailableConfiguration(): DatConfiguration {
     platform: inferPlatform(),
     sdkLinked: false,
     sdkConfigured: false,
+    sdkMeetsMinimum: false,
     analyticsOptOut: false,
     sdkVersion: null,
+    sdkVersionTarget: '0.7.0',
+    datAppModelEnabled: false,
+    displayDamRequired: true,
+    displayDamEnabled: false,
     applicationId: null,
     provider: 'internal_bridge',
     integrationMode: 'unavailable',
@@ -118,6 +154,8 @@ function getUnavailableDiagnostics(): DatDiagnostics {
     ...configuration,
     capabilities: unavailableCapabilities,
     sessionState: 'unavailable',
+    displayReady: false,
+    configWarnings: ['DAT native module is unavailable in this build.'],
     registrationState: 'unavailable',
     deviceCount: 0,
     activeDeviceId: null,
@@ -136,6 +174,10 @@ function getUnavailableDiagnostics(): DatDiagnostics {
       state: 'unavailable',
     },
     knownDeviceCount: 0,
+    displayConnectionState: 'unavailable',
+    displayLastAction: null,
+    displayLastStatus: null,
+    displayLastUpdatedAt: null,
   };
 }
 
@@ -167,6 +209,10 @@ function getUnavailableMediaResult(
     targetConnectionState: 'unselected',
     assetUri: null,
     mimeType: null,
+    displayConnectionState: 'unavailable',
+    displayLastAction: action,
+    displayLastStatus: 'unavailable',
+    displayLastUpdatedAt: Date.now(),
   };
 }
 
@@ -265,6 +311,38 @@ class ExpoMetaWearablesDat extends EventEmitter {
   async stopVideoStream(): Promise<DatMediaActionResult> {
     return (await ExpoMetaWearablesDatModule?.stopVideoStream?.())
       ?? getUnavailableMediaResult('stop_video_stream');
+  }
+
+  async renderDisplayTest(): Promise<DatMediaActionResult> {
+    return (await ExpoMetaWearablesDatModule?.renderDisplayTest?.())
+      ?? getUnavailableMediaResult(
+        'render_display_test',
+        'Meta Wearables DAT display rendering is unavailable in this build.'
+      );
+  }
+
+  async clearDisplay(): Promise<DatMediaActionResult> {
+    return (await ExpoMetaWearablesDatModule?.clearDisplay?.())
+      ?? getUnavailableMediaResult(
+        'clear_display',
+        'Meta Wearables DAT display clearing is unavailable in this build.'
+      );
+  }
+
+  async playDisplayVideo(videoUrl?: string): Promise<DatMediaActionResult> {
+    return (await ExpoMetaWearablesDatModule?.playDisplayVideo?.(videoUrl))
+      ?? getUnavailableMediaResult(
+        'play_display_video',
+        'Meta Wearables DAT display video playback is unavailable in this build.'
+      );
+  }
+
+  async resetDisplaySession(): Promise<DatMediaActionResult> {
+    return (await ExpoMetaWearablesDatModule?.resetDisplaySession?.())
+      ?? getUnavailableMediaResult(
+        'reset_display_session',
+        'Meta Wearables DAT display session reset is unavailable in this build.'
+      );
   }
 
   addStateListener(listener: (event: DatStateChangedEvent) => void): Subscription {

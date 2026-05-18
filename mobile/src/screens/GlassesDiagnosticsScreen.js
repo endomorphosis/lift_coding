@@ -115,6 +115,14 @@ function isActiveWearablesTask(taskState) {
   return taskState === 'created' || taskState === 'running' || taskState === 'needs_input';
 }
 
+function formatWearablesDisplayActionStatus(result, diagnostics) {
+  const action = result?.action || 'display_action';
+  const message = result?.message || result?.state || 'unknown';
+  const connectionState = result?.displayConnectionState || diagnostics?.displayConnectionState || 'unknown';
+  const status = result?.displayLastStatus || result?.state || 'unknown';
+  return `${action}: ${message} (state=${connectionState}, status=${status})`;
+}
+
 function mergeWearablesFollowOnTask(followOnTask, detail) {
   if (!followOnTask?.task_id || !detail?.id) {
     return followOnTask;
@@ -152,6 +160,7 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const [nativeModuleAvailable, setNativeModuleAvailable] = useState(false);
   const [wearablesFollowOnTask, setWearablesFollowOnTask] = useState(null);
   const [wearablesMediaStatus, setWearablesMediaStatus] = useState('No DAT media action yet');
+  const [wearablesDisplayStatus, setWearablesDisplayStatus] = useState('No DAT display action yet');
   const [discoveredPeers, setDiscoveredPeers] = useState([]);
   const [selectedPeerRef, setSelectedPeerRef] = useState(null);
   const [activePeer, setActivePeer] = useState(null);
@@ -202,6 +211,10 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
           targetConnectionState: event.targetConnectionState,
           targetLastSeenAt: event.targetLastSeenAt,
           targetRssi: event.targetRssi,
+          displayCapable: wearablesCapabilitySummary.displayReady,
+          displayConnectionState: wearablesDiagnostics?.displayConnectionState,
+          displayLastAction: wearablesDiagnostics?.displayLastAction,
+          displayLastStatus: wearablesDiagnostics?.displayLastStatus,
         }).then((response) => {
           hydrateWearablesFollowOnTask(response?.follow_on_task || null).catch(() => {});
         }).catch((error) => {
@@ -227,6 +240,10 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
     capturePhoto: captureWearablesPhoto,
     startVideoStream: startWearablesVideoStream,
     stopVideoStream: stopWearablesVideoStream,
+    renderDisplayTest: renderWearablesDisplayTest,
+    clearDisplay: clearWearablesDisplay,
+    playDisplayVideo: playWearablesDisplayVideo,
+    resetDisplaySession: resetWearablesDisplaySession,
   } = useMetaWearablesDat({
     onError: handleWearablesBridgeError,
     onStateChanged: handleWearablesStateChanged,
@@ -722,6 +739,55 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
       setLastError(null);
       const result = await stopWearablesVideoStream();
       await handleWearablesMediaResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const handleWearablesDisplayResult = async (result) => {
+    const action = result?.action || 'display_action';
+    const message = result?.message || result?.state || 'unknown';
+    setWearablesDisplayStatus(formatWearablesDisplayActionStatus(result, wearablesDiagnostics));
+    if (result?.supported === false && result?.state !== 'ready') {
+      setLastError(`${action}: ${message}`);
+    }
+  };
+
+  const triggerWearablesDisplayRender = async () => {
+    try {
+      setLastError(null);
+      const result = await renderWearablesDisplayTest();
+      await handleWearablesDisplayResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const triggerWearablesDisplayClear = async () => {
+    try {
+      setLastError(null);
+      const result = await clearWearablesDisplay();
+      await handleWearablesDisplayResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const triggerWearablesDisplayVideo = async () => {
+    try {
+      setLastError(null);
+      const result = await playWearablesDisplayVideo('https://example.com/demo.mp4');
+      await handleWearablesDisplayResult(result);
+    } catch {
+      // hook already reported the error
+    }
+  };
+
+  const triggerWearablesDisplayReset = async () => {
+    try {
+      setLastError(null);
+      const result = await resetWearablesDisplaySession();
+      await handleWearablesDisplayResult(result);
     } catch {
       // hook already reported the error
     }
@@ -1311,7 +1377,21 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         </Text>
         <Text style={styles.text}>Known devices: {wearablesDiagnostics?.knownDeviceCount ?? 0}</Text>
         <Text style={styles.text}>Capability matrix: {wearablesCapabilitySummary.matrixSummary}</Text>
+        <Text style={styles.text}>Display ready: {wearablesCapabilitySummary.displayReady ? 'yes' : 'no'}</Text>
+        <Text style={styles.text}>Display state: {wearablesDiagnostics?.displayConnectionState || 'unknown'}</Text>
+        <Text style={styles.text}>Display last action: {wearablesDiagnostics?.displayLastAction || 'none'}</Text>
+        <Text style={styles.text}>Display last status: {wearablesDiagnostics?.displayLastStatus || 'none'}</Text>
+        <Text style={styles.text}>SDK minimum met: {wearablesCapabilitySummary.sdkMeetsMinimum ? 'yes' : 'no'}</Text>
+        {!!wearablesCapabilitySummary.configWarnings?.length && (
+          <Text
+            style={styles.text}
+            accessibilityLabel="Wearables bridge configuration warnings"
+          >
+            Config warnings: {wearablesCapabilitySummary.configWarnings.join(' | ')}
+          </Text>
+        )}
         <Text style={styles.text}>Media action: {wearablesMediaStatus}</Text>
+        <Text style={styles.text}>Display action: {wearablesDisplayStatus}</Text>
         <Text style={styles.text}>
           Candidate devices: {wearablesCandidates.length > 0
             ? wearablesCandidates
@@ -1350,6 +1430,18 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesVideoStop} disabled={!wearablesBridgeAvailable}>
           <Text style={styles.buttonTextSecondary}>Stop DAT Video</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesDisplayRender} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Render DAT Display Test</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesDisplayVideo} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Play DAT Display Video</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesDisplayClear} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Clear DAT Display</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonSecondary, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={triggerWearablesDisplayReset} disabled={!wearablesBridgeAvailable}>
+          <Text style={styles.buttonTextSecondary}>Reset DAT Display Session</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, !wearablesBridgeAvailable && styles.buttonDisabled]} onPress={startWearablesSession} disabled={!wearablesBridgeAvailable}>
           <Text style={styles.buttonText}>Start Bridge Session</Text>

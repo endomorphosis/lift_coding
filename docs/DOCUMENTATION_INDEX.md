@@ -46,6 +46,7 @@ This index helps you find the right documentation for your needs, whether you're
 - [MVP1 Runbook](ios-rayban-mvp1-runbook.md) - Complete testing guide
 - [Troubleshooting](ios-rayban-troubleshooting.md) - Common issues
 - [Demo Checklist](mvp1-demo-checklist.md) - Pre-demo verification
+- [DAT Display Physical Validation Checklist](meta-wearables-dat-display-physical-validation-checklist.md) - Hardware-backed display readiness gate
 
 **General Testing**:
 - [Getting Started](GETTING_STARTED.md#verification--testing) - Testing procedures
@@ -117,6 +118,9 @@ This index helps you find the right documentation for your needs, whether you're
 | [MVP1 Runbook](ios-rayban-mvp1-runbook.md) | Complete runbook | Testers |
 | [Meta Glasses Integration](meta-ai-glasses.md) | Technical guide | Developers |
 | [Audio Routing](meta-ai-glasses-audio-routing.md) | Bluetooth details | Developers |
+| [DAT Display Integration Baseline](meta-wearables-dat-display-integration.md) | DAT 0.7 + DAM/display rollout baseline | Developers |
+| [DAT Display Physical Validation Checklist](meta-wearables-dat-display-physical-validation-checklist.md) | Hardware validation checklist for display-capable models | Developers/Testers |
+| [DAT Display Rollout Evidence Template](meta-wearables-dat-display-rollout-evidence-template.md) | Template for staged rollout evidence capture | Developers/Testers |
 | [Troubleshooting](ios-rayban-troubleshooting.md) | Common issues | Testers |
 
 ### Android & Emulator
@@ -198,6 +202,7 @@ These Android workflow docs/tools are being developed in draft PRs and may not b
 3. [MVP1 Runbook](ios-rayban-mvp1-runbook.md) - Complete guide
 4. [Troubleshooting](ios-rayban-troubleshooting.md) - Fix issues
 5. [Demo Checklist](mvp1-demo-checklist.md) - Preparation
+6. [DAT Display Physical Validation Checklist](meta-wearables-dat-display-physical-validation-checklist.md) - Display-capable hardware gate
 
 ### Use Case: "I want to test on Android (emulator or device)"
 
@@ -261,6 +266,9 @@ docs/
 ├── ios-rayban-troubleshooting.md     # Troubleshooting guide
 ├── meta-ai-glasses.md                # Glasses integration
 ├── meta-ai-glasses-audio-routing.md  # Bluetooth audio technical
+├── meta-wearables-dat-display-integration.md # DAT 0.7 display baseline
+├── meta-wearables-dat-display-physical-validation-checklist.md # Display hardware validation gate
+├── meta-wearables-dat-display-rollout-evidence-template.md # Staged rollout evidence template
 ├── mobile-client-integration.md      # API usage patterns
 ├── AUTHENTICATION.md                  # Auth modes
 ├── confirmation-flow.md               # Pending action confirmation lifecycle
