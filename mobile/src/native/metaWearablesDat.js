@@ -12,6 +12,8 @@ function createMetaWearablesDatAdapter(bridge) {
     focusDisplayWidget: (...args) => bridge.focusDisplayWidget(...args),
     activateDisplayWidgetAction: (...args) => bridge.activateDisplayWidgetAction(...args),
     resetDisplayWidgetSession: (...args) => bridge.resetDisplayWidgetSession(...args),
+    playDisplayWidgetVideo: (...args) => bridge.playDisplayWidgetVideo(...args),
+    subscribeDisplayWidgetUpdates: (...args) => bridge.subscribeDisplayWidgetUpdates(...args),
   };
 }
 

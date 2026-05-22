@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 import sys
 from pathlib import Path
@@ -13,10 +14,23 @@ IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
-LOCAL_JDK = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
-LOCAL_ANDROID_SDK = REPO_ROOT / ".tools" / "android-sdk"
+DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
+DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "meta_glasses_display_todo_daemon.py"
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
+
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from meta_glasses_display_todo_daemon import (  # noqa: E402
+    _bootstrap_android_validation_env,
+    android_validation_environment,
+    enforce_android_validation_environment,
+    record_retry_budget_findings,
+)
+
+logger = logging.getLogger("meta_glasses_display_todo_supervisor")
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 
@@ -49,18 +63,6 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     return [flag, value, *argv]
 
 
-def _bootstrap_android_validation_env() -> None:
-    if (LOCAL_JDK / "bin" / "java").exists():
-        os.environ["JAVA_HOME"] = str(LOCAL_JDK)
-        os.environ["PATH"] = os.pathsep.join([str(LOCAL_JDK / "bin"), os.environ.get("PATH", "")])
-    if (LOCAL_ANDROID_SDK / "platform-tools").exists():
-        os.environ["ANDROID_HOME"] = str(LOCAL_ANDROID_SDK)
-        os.environ["ANDROID_SDK_ROOT"] = str(LOCAL_ANDROID_SDK)
-        os.environ["PATH"] = os.pathsep.join(
-            [str(LOCAL_ANDROID_SDK / "platform-tools"), os.environ.get("PATH", "")]
-        )
-
-
 def _task_is_present(todo_text: str, task_id: str) -> bool:
     return f"## {task_id} " in todo_text
 
@@ -86,25 +88,89 @@ def ensure_post_initial_discovery_backlog(todo_path: Path = TODO_PATH) -> bool:
     return True
 
 
+def validation_environment_summary() -> dict[str, object]:
+    """Expose the enforced Android validation environment for tests and operators."""
+
+    return android_validation_environment(REPO_ROOT)
+
+
+def _run_supervisor(argv: list[str]) -> None:
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+        parse_args,
+    )
+
+    parsed = parse_args(argv)
+    logging.basicConfig(
+        level=getattr(logging, parsed.log_level),
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
+    state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
+    strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
+    events_path = parsed.state_dir / f"{parsed.state_prefix}_supervisor_events.jsonl"
+    daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
+    record_retry_budget_findings(
+        todo_path=parsed.todo_path,
+        events_path=daemon_events_path,
+        strategy_path=strategy_path,
+        discovery_dir=DISCOVERY_DIR,
+        task_header_prefix=parsed.task_prefix,
+    )
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=parsed.todo_path,
+            state_path=state_path,
+            strategy_path=strategy_path,
+            events_path=events_path,
+            state_dir=parsed.state_dir,
+            stale_seconds=parsed.stale_seconds,
+            check_interval=parsed.check_interval,
+            max_restarts=parsed.max_restarts,
+            daemon_interval=parsed.daemon_interval,
+            task_prefix=parsed.task_prefix,
+            state_prefix=parsed.state_prefix,
+            implement=parsed.implement,
+            implementation_command=parsed.implementation_command,
+            implementation_timeout=parsed.implementation_timeout,
+            use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
+            worktree_root=parsed.worktree_root,
+            repo_root=REPO_ROOT,
+            daemon_script_path=DAEMON_SCRIPT_PATH,
+        )
+    )
+    if parsed.once:
+        result = supervisor.run_once()
+        record_retry_budget_findings(
+            todo_path=parsed.todo_path,
+            events_path=daemon_events_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=parsed.task_prefix,
+        )
+        logger.info("Display-widget implementation supervisor check complete: %s", result)
+        return
+    supervisor.run_forever()
+
+
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     os.chdir(REPO_ROOT)
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(TODO_PATH)
+    enforce_android_validation_environment(TODO_PATH)
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
     existing = os.environ.get("PYTHONPATH", "")
     os.environ["PYTHONPATH"] = os.pathsep.join(
         [str(IPFS_DATASETS_ROOT), existing] if existing else [str(IPFS_DATASETS_ROOT)]
     )
 
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor import main as supervisor_main
-
     args = _with_default(args, "--todo-path", str(TODO_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
     args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
-    supervisor_main(args)
+    _run_supervisor(args)
 
 
 if __name__ == "__main__":

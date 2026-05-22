@@ -3647,8 +3647,9 @@ components:
             Client-local Meta glasses display widget actions include
             mobile_render_display_widget, mobile_update_display_widget,
             mobile_clear_display_widget, mobile_focus_display_widget,
-            mobile_activate_display_widget_action, and
-            mobile_reset_display_widget_session.
+            mobile_activate_display_widget_action,
+            mobile_reset_display_widget_session, mobile_play_display_widget_video,
+            and mobile_subscribe_display_widget_updates.
         params:
           type: object
           additionalProperties: true
@@ -3926,6 +3927,44 @@ components:
                       policy_decision:
                         outcome: permit
                       correlation_id: corr-widget-reset
+                  - id: mobile_play_display_widget_video
+                    label: Play Video
+                    phrase: play display widget video
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_play_display_widget_video
+                      action: play_video
+                      operation: play_video
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-video
+                      video:
+                        media_id: preview
+                        uri: ipfs://bafybeivideo
+                        content_type: video/mp4
+                  - id: mobile_subscribe_display_widget_updates
+                    label: Subscribe Updates
+                    phrase: subscribe to display widget updates
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_subscribe_display_widget_updates
+                      action: subscribe_updates
+                      operation: subscribe_updates
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-subscribe
+                      subscription:
+                        stream: display_widget_update
             pending_action: null
             follow_on_task: null
       properties:
@@ -4388,11 +4427,11 @@ components:
 
     MetaGlassesDisplayWidgetAction:
       type: string
-      enum: [render, update, clear, focus, activate, reset]
+      enum: [render, update, clear, focus, activate, reset, play_video, subscribe_updates]
 
     MetaGlassesDisplayWidgetOperation:
       type: string
-      enum: [render_widget, update_widget, clear_widget, focus_next, focus_previous, activate, reset_session]
+      enum: [render_widget, update_widget, clear_widget, focus_next, focus_previous, activate, reset_session, play_video, subscribe_updates]
 
     MetaGlassesDisplayWidgetMobileActionType:
       type: string
@@ -4403,6 +4442,8 @@ components:
         - mobile_focus_display_widget
         - mobile_activate_display_widget_action
         - mobile_reset_display_widget_session
+        - mobile_play_display_widget_video
+        - mobile_subscribe_display_widget_updates
 
     MetaGlassesDisplayWidgetPolicyDecision:
       type: object
@@ -4526,6 +4567,14 @@ components:
           nullable: true
         activated_action_id:
           type: string
+          nullable: true
+        video:
+          type: object
+          additionalProperties: true
+          nullable: true
+        subscription:
+          type: object
+          additionalProperties: true
           nullable: true
         fallback:
           type: object

@@ -98,7 +98,8 @@ class ActionCommandRequest(BaseModel):
             "mobile_reset_wearables_display_session, mobile_render_display_widget, "
             "mobile_update_display_widget, mobile_clear_display_widget, "
             "mobile_focus_display_widget, mobile_activate_display_widget_action, "
-            "or mobile_reset_display_widget_session."
+            "mobile_reset_display_widget_session, mobile_play_display_widget_video, "
+            "or mobile_subscribe_display_widget_updates."
         ),
     )
     params: dict[str, Any] = Field(default_factory=dict)
@@ -132,6 +133,8 @@ class MetaGlassesDisplayWidgetAction(str, Enum):
     FOCUS = "focus"
     ACTIVATE = "activate"
     RESET = "reset"
+    PLAY_VIDEO = "play_video"
+    SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
 class MetaGlassesDisplayWidgetOperation(str, Enum):
@@ -144,6 +147,8 @@ class MetaGlassesDisplayWidgetOperation(str, Enum):
     FOCUS_PREVIOUS = "focus_previous"
     ACTIVATE = "activate"
     RESET_SESSION = "reset_session"
+    PLAY_VIDEO = "play_video"
+    SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
 class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
@@ -155,6 +160,8 @@ class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
     FOCUS = "mobile_focus_display_widget"
     ACTIVATE = "mobile_activate_display_widget_action"
     RESET = "mobile_reset_display_widget_session"
+    PLAY_VIDEO = "mobile_play_display_widget_video"
+    SUBSCRIBE_UPDATES = "mobile_subscribe_display_widget_updates"
 
 
 class MetaGlassesDisplayWidgetFocusDirection(str, Enum):
@@ -209,6 +216,11 @@ class MetaGlassesDisplayWidgetMobileActionPayload(BaseModel):
                     "render_path": "mobile-card",
                     "message": "Display unavailable; showing this widget on the phone.",
                 },
+                "video": {
+                    "media_id": "preview",
+                    "uri": "ipfs://bafybeivideo",
+                    "content_type": "video/mp4",
+                },
             }
         }
     }
@@ -240,6 +252,8 @@ class MetaGlassesDisplayWidgetMobileActionPayload(BaseModel):
     manifest: dict[str, Any] | None = None
     focus: MetaGlassesDisplayWidgetFocusPayload | None = None
     activated_action_id: str | None = None
+    video: dict[str, Any] | None = None
+    subscription: dict[str, Any] | None = None
     fallback: dict[str, Any] | None = None
 
     @model_validator(mode="after")
@@ -263,7 +277,8 @@ class ActionItem(BaseModel):
             "mobile_play_wearables_display_video, mobile_reset_wearables_display_session, "
             "mobile_render_display_widget, mobile_update_display_widget, "
             "mobile_clear_display_widget, mobile_focus_display_widget, "
-            "mobile_activate_display_widget_action, or mobile_reset_display_widget_session."
+            "mobile_activate_display_widget_action, mobile_reset_display_widget_session, "
+            "mobile_play_display_widget_video, or mobile_subscribe_display_widget_updates."
         ),
     )
     label: str
@@ -541,6 +556,48 @@ class CommandResponse(BaseModel):
                                         "orb_receipt_cid": "bafybeiorbreceipt",
                                         "policy_decision": {"outcome": "permit"},
                                         "correlation_id": "corr-widget-reset",
+                                    },
+                                },
+                                {
+                                    "id": "mobile_play_display_widget_video",
+                                    "label": "Play Video",
+                                    "phrase": "play display widget video",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_play_display_widget_video",
+                                        "action": "play_video",
+                                        "operation": "play_video",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-video",
+                                        "video": {
+                                            "media_id": "preview",
+                                            "uri": "ipfs://bafybeivideo",
+                                            "content_type": "video/mp4",
+                                        },
+                                    },
+                                },
+                                {
+                                    "id": "mobile_subscribe_display_widget_updates",
+                                    "label": "Subscribe Updates",
+                                    "phrase": "subscribe to display widget updates",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_subscribe_display_widget_updates",
+                                        "action": "subscribe_updates",
+                                        "operation": "subscribe_updates",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-subscribe",
+                                        "subscription": {"stream": "display_widget_update"},
                                     },
                                 },
                             ],

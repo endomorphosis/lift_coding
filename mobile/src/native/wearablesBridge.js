@@ -35,6 +35,16 @@ const DISPLAY_WIDGET_ACTIONS = {
     operation: 'reset_session',
     message: 'Meta Wearables DAT display widget session reset is unavailable in this build.',
   },
+  playDisplayWidgetVideo: {
+    action: 'play_display_widget_video',
+    operation: 'play_video',
+    message: 'Meta Wearables DAT display widget video playback is unavailable in this build.',
+  },
+  subscribeDisplayWidgetUpdates: {
+    action: 'subscribe_display_widget_updates',
+    operation: 'subscribe_updates',
+    message: 'Meta Wearables DAT display widget update subscriptions are unavailable in this build.',
+  },
 };
 
 function isObject(value) {
@@ -87,6 +97,21 @@ function getDisplayWidgetMetadata(input, context = {}) {
     issuedAt: payload.issued_at || payload.issuedAt || null,
     fallback,
   };
+}
+
+function getDisplayWidgetVideoUri(input, context = {}) {
+  const payload = getDisplayWidgetPayload(input, context);
+  const video = isObject(input) ? input : payload?.video;
+  return (
+    video?.uri ||
+    video?.url ||
+    video?.video_url ||
+    video?.videoUrl ||
+    payload?.video?.uri ||
+    payload?.video_url ||
+    payload?.videoUrl ||
+    null
+  );
 }
 
 function createUnavailableMediaResult(action, message) {
@@ -353,6 +378,16 @@ function createUnavailableBridge() {
       context,
       context
     ),
+    playDisplayWidgetVideo: async (video, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
+      isObject(video) ? video : { uri: video },
+      context
+    ),
+    subscribeDisplayWidgetUpdates: async (subscription, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
+      isObject(subscription) ? subscription : {},
+      context
+    ),
     addStateListener: () => ({ remove() {} }),
     addBridgeStateListener: () => ({ remove() {} }),
   };
@@ -495,6 +530,42 @@ function wrapBridgeModule(module) {
         );
       }
       return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession, context, context);
+    },
+    playDisplayWidgetVideo: async (video, context) => {
+      const input = isObject(video) ? video : { uri: video };
+      if (typeof module.playDisplayWidgetVideo === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.playDisplayWidgetVideo(video),
+          DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
+          input,
+          context
+        );
+      }
+      if (typeof module.playDisplayVideo === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.playDisplayVideo(getDisplayWidgetVideoUri(input, context)),
+          DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
+          input,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo, input, context);
+    },
+    subscribeDisplayWidgetUpdates: async (subscription, context) => {
+      const input = isObject(subscription) ? subscription : {};
+      if (typeof module.subscribeDisplayWidgetUpdates === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.subscribeDisplayWidgetUpdates(subscription),
+          DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
+          input,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(
+        DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
+        input,
+        context
+      );
     },
     addStateListener: (...args) => module.addStateListener?.(...args) || { remove() {} },
     addBridgeStateListener: (...args) => module.addStateListener?.(...args) || { remove() {} },

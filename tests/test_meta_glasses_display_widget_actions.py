@@ -35,6 +35,8 @@ DISPLAY_WIDGET_ACTION_IDS = [
     "mobile_focus_display_widget",
     "mobile_activate_display_widget_action",
     "mobile_reset_display_widget_session",
+    "mobile_play_display_widget_video",
+    "mobile_subscribe_display_widget_updates",
 ]
 
 
@@ -53,6 +55,12 @@ def _contract_kwargs() -> dict[str, object]:
         "request_id": "render-1",
         "state": {"status": "running", "progress": 0.42},
         "patch": {"progress": 0.43},
+        "video": {
+            "media_id": "preview",
+            "uri": "ipfs://bafybeivideo",
+            "content_type": "video/mp4",
+        },
+        "subscription": {"stream": "display_widget_update"},
         "fallback": {"render_path": "mobile-card", "message": "Display unavailable."},
     }
 
@@ -72,6 +80,33 @@ def test_display_widget_payload_model_requires_receipt_and_policy_fields() -> No
 
     assert payload.interface_cid == "bafybeidescriptor"
     assert payload.policy_decision.outcome == "permit"
+
+    video_payload = MetaGlassesDisplayWidgetMobileActionPayload(
+        type="mobile_play_display_widget_video",
+        action="play_video",
+        operation="play_video",
+        descriptor_cid="bafybeidescriptor",
+        widget_id="handsfree.task-progress-widget",
+        widget_cid="bafybeiwidget",
+        orb_receipt_cid="bafybeiorbreceipt",
+        policy_decision={"outcome": "permit", "reasons": ["trusted descriptor"]},
+        correlation_id="corr-widget-video",
+        video={"uri": "ipfs://bafybeivideo", "content_type": "video/mp4"},
+    )
+    subscribe_payload = MetaGlassesDisplayWidgetMobileActionPayload(
+        type="mobile_subscribe_display_widget_updates",
+        action="subscribe_updates",
+        operation="subscribe_updates",
+        descriptor_cid="bafybeidescriptor",
+        widget_id="handsfree.task-progress-widget",
+        widget_cid="bafybeiwidget",
+        orb_receipt_cid="bafybeiorbreceipt",
+        policy_decision={"outcome": "permit", "reasons": ["trusted descriptor"]},
+        correlation_id="corr-widget-subscribe",
+        subscription={"stream": "display_widget_update"},
+    )
+    assert video_payload.video["uri"] == "ipfs://bafybeivideo"
+    assert subscribe_payload.subscription == {"stream": "display_widget_update"}
 
     with pytest.raises(ValidationError):
         MetaGlassesDisplayWidgetMobileActionPayload(
@@ -105,6 +140,18 @@ def test_provider_helper_builds_all_widget_mobile_actions() -> None:
     assert focus_payload["action"] == "focus"
     assert focus_payload["operation"] == "focus_next"
     assert focus_payload["focus"] == {"direction": "next"}
+
+    video_payload = actions[6]["mobile_payload"]
+    assert video_payload["action"] == "play_video"
+    assert video_payload["operation"] == "play_video"
+    assert video_payload["video"]["uri"] == "ipfs://bafybeivideo"
+    assert video_payload["fallback"]["render_path"] == "mobile-card"
+
+    subscribe_payload = actions[7]["mobile_payload"]
+    assert subscribe_payload["action"] == "subscribe_updates"
+    assert subscribe_payload["operation"] == "subscribe_updates"
+    assert subscribe_payload["subscription"] == {"stream": "display_widget_update"}
+    assert subscribe_payload["fallback"]["message"] == "Display unavailable."
 
 
 def test_wearables_provider_envelope_adds_widget_action_contract(monkeypatch) -> None:

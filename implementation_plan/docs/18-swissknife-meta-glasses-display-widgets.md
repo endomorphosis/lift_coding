@@ -475,6 +475,26 @@ P2:
 - [ ] Add physical-device evidence automation.
 - [ ] Add iOS native display path once SDK APIs are available and linked.
 
+## Discovery Expansion
+
+MGW-013 ran the post-initial unknown unknowns investigation on 2026-05-22 after MGW-001 through MGW-012 were marked complete in the daemon board. The discovery report is recorded at `data/meta_glasses_display_widgets/discovery/2026-05-22-mgw-013-discovery-expansion.md`.
+
+The investigation found concrete follow-up work, so the daemon board was expanded instead of filing a no-new-unknowns report:
+
+- `MGW-015`: close the `play_video` and `subscribe_updates` contract gap between Swissknife ORB/CLI output, HandsFree backend models/OpenAPI, and mobile local-action execution.
+- `MGW-016`: preserve full widget action payload metadata through the native DAT bridge boundary instead of using it only for JS-side normalization.
+- `MGW-017`: render compiled manifest regions/actions/media on Android native DAT display, rather than sending only a title/detail/footer summary.
+- `MGW-018`: add iOS DisplayAccess native-display bridge parity or explicit SDK-unlinked widget responses matching the Android fallback contract.
+- `MGW-019`: broaden hardware-free harness coverage for focus, activate, reset, video, subscription, denial, native-unavailable, update-required, and lifecycle error paths.
+
+Evidence summary:
+
+- Swissknife declares `play_video` and `subscribe_updates` operations and maps them to `mobile_play_display_widget_video` and `mobile_subscribe_display_widget_updates`, while the backend and mobile action lists stop at render/update/clear/focus/activate/reset.
+- Android bridge lifecycle code follows DisplayAccess-style session start, display attach, display ready, and content send stages, but `renderNativeDisplayScope` currently constructs summary text from metadata instead of consuming the compiled manifest `regions`, `actions`, `media`, and `focus_order`.
+- The external Android and iOS DisplayAccess references document root `flexBox`/`VideoPlayer`, image, button, video, display state, and update-required flows that are not fully represented in the current native widget renderer or hardware-free harness.
+- The iOS DAT bridge reports reference-only display actions and does not expose native display widget methods yet, even though the external iOS DisplayAccess sample and skill document the `MWDATDisplay` lifecycle.
+- Current end-to-end harnesses exercise the narrow render/update/clear path, leaving several discovered widget operation and failure-mode branches without daemon-friendly regression coverage.
+
 ## First Vertical Slice
 
 The first slice should be intentionally narrow:

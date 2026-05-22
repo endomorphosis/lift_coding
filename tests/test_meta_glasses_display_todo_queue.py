@@ -1,14 +1,27 @@
 from __future__ import annotations
 
 import importlib.util
+import json
+import os
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+
+
+def _load_script_module(name: str):
+    script_path = REPO_ROOT / "scripts" / f"{name}.py"
+    spec = importlib.util.spec_from_file_location(name, script_path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _load_tasks():
@@ -60,12 +73,7 @@ def test_discovered_supervisor_guardrail_depends_on_discovery_task():
 
 
 def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
-    supervisor_path = REPO_ROOT / "scripts" / "meta_glasses_display_todo_supervisor.py"
-    spec = importlib.util.spec_from_file_location("meta_glasses_display_todo_supervisor", supervisor_path)
-    assert spec is not None
-    assert spec.loader is not None
-    supervisor_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(supervisor_module)
+    supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
     ensure_post_initial_discovery_backlog = supervisor_module.ensure_post_initial_discovery_backlog
 
     todo_path = tmp_path / "todo.md"
@@ -95,6 +103,166 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
     assert "## MGW-014 Add supervisor validation-environment and retry-budget guardrails" in updated
     assert "Depends on: MGW-013" in updated
     assert not ensure_post_initial_discovery_backlog(todo_path)
+
+
+def test_android_validation_environment_uses_repo_local_tools(monkeypatch):
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    jdk = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
+    sdk = REPO_ROOT / ".tools" / "android-sdk"
+
+    monkeypatch.delenv("JAVA_HOME", raising=False)
+    monkeypatch.delenv("ANDROID_HOME", raising=False)
+    monkeypatch.delenv("ANDROID_SDK_ROOT", raising=False)
+    monkeypatch.setenv("PATH", "/usr/bin")
+
+    contract = daemon_module._bootstrap_android_validation_env(REPO_ROOT)
+
+    assert contract["env"]["JAVA_HOME"] == str(jdk)
+    assert os.environ["JAVA_HOME"] == str(jdk)
+    assert os.environ["ANDROID_HOME"] == str(sdk)
+    assert os.environ["ANDROID_SDK_ROOT"] == str(sdk)
+    assert os.environ["PATH"].split(os.pathsep)[0] == str(jdk / "bin")
+
+
+def test_android_gradle_validations_are_env_wrapped_in_board():
+    tasks = _load_tasks()
+    gradle_validations = [
+        command
+        for task in tasks
+        for command in task.validation
+        if "./gradlew" in command and "mobile/android" in command
+    ]
+
+    assert gradle_validations
+    assert all(".tools/jdk17/jdk-17.0.18+8" in command for command in gradle_validations)
+    assert all("JAVA_HOME=" in command for command in gradle_validations)
+
+
+def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp_path):
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    todo_path = tmp_path / "todo.md"
+    todo_path.write_text(
+        """# Temporary Board
+
+## MGW-001 Android task
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on:
+- Outputs: mobile/android
+- Validation: cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Build Android.
+""",
+        encoding="utf-8",
+    )
+
+    assert daemon_module.enforce_android_validation_environment(todo_path, REPO_ROOT)
+    updated = todo_path.read_text(encoding="utf-8")
+
+    assert "env JAVA_HOME=" in updated
+    assert ".tools/jdk17/jdk-17.0.18+8" in updated
+    assert "ANDROID_SDK_ROOT=" in updated
+    assert not daemon_module.enforce_android_validation_environment(todo_path, REPO_ROOT)
+
+
+def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    todo_path = tmp_path / "todo.md"
+    events_path = tmp_path / "events.jsonl"
+    strategy_path = tmp_path / "strategy.json"
+    discovery_dir = tmp_path / "discovery"
+    todo_path.write_text(
+        """# Temporary Board
+
+## MGW-001 Android task
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on:
+- Outputs: mobile/android/app/build.gradle
+- Validation: cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Build Android.
+
+## MGW-014 Guardrails
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: scripts/meta_glasses_display_todo_daemon.py
+- Validation: true
+- Acceptance: Guardrails are installed.
+""",
+        encoding="utf-8",
+    )
+    failed_command = "cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false"
+    events = [
+        {
+            "type": "implementation_finished",
+            "timestamp": f"2026-05-22T00:0{index}:00+00:00",
+            "task_id": "MGW-001",
+            "attempt": index,
+            "returncode": 1,
+            "log_path": str(tmp_path / f"mgw-001-attempt-{index}.log"),
+            "validation_result": {
+                "attempted": True,
+                "passed": False,
+                "returncode": 1,
+                "failed_command": failed_command,
+                "results": [{"command": failed_command, "returncode": 1}],
+            },
+        }
+        for index in range(1, 4)
+    ]
+    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+
+    findings = daemon_module.record_retry_budget_findings(
+        todo_path=todo_path,
+        events_path=events_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        retry_budget=3,
+    )
+
+    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-014-mgw-001-retry-budget.md"
+    assert findings == [
+        {
+            "source_task_id": "MGW-001",
+            "follow_up_task_id": "MGW-015",
+            "failure_count": 3,
+            "failed_command": failed_command,
+            "discovery_path": str(expected_discovery),
+        }
+    ]
+    updated = todo_path.read_text(encoding="utf-8")
+    assert "## MGW-015 Resolve validation retry-budget failure for MGW-001" in updated
+    assert "Depends on: MGW-014" in updated
+    assert "env JAVA_HOME=" in updated
+
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+
+    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## MGW-")}
+    assert tasks["MGW-015"].depends_on == ["MGW-014"]
+    assert "retry-budget" in tasks["MGW-015"].title
+
+    strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
+    assert "MGW-001" in strategy["blocked_tasks"]
+    discovery = expected_discovery.read_text(encoding="utf-8")
+    assert failed_command in discovery
+    assert "Observed consecutive validation failures: 3" in discovery
+    assert not daemon_module.record_retry_budget_findings(
+        todo_path=todo_path,
+        events_path=events_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        retry_budget=3,
+    )
 
 
 def test_meta_glasses_llm_router_preflight_does_not_call_model():

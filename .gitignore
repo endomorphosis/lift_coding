@@ -15,7 +15,11 @@ dist/
 .env
 .env.*
 !.env.example.demo
-data/
+data/*
+!data/meta_glasses_display_widgets/
+data/meta_glasses_display_widgets/*
+!data/meta_glasses_display_widgets/discovery/
+!data/meta_glasses_display_widgets/discovery/**
 .tools
 # Dev audio uploads (don't commit test audio files)
 dev/audio/

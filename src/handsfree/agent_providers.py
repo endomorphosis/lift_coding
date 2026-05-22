@@ -116,6 +116,20 @@ DISPLAY_WIDGET_ACTION_DEFINITIONS: tuple[dict[str, str], ...] = (
         "label": "Reset Widget",
         "phrase": "reset the display widget session",
     },
+    {
+        "action": "play_video",
+        "operation": "play_video",
+        "id": "mobile_play_display_widget_video",
+        "label": "Play Widget Video",
+        "phrase": "play display widget video",
+    },
+    {
+        "action": "subscribe_updates",
+        "operation": "subscribe_updates",
+        "id": "mobile_subscribe_display_widget_updates",
+        "label": "Subscribe Widget Updates",
+        "phrase": "subscribe to display widget updates",
+    },
 )
 
 
@@ -205,6 +219,8 @@ def build_meta_glasses_display_widget_action_items(
     manifest: dict[str, Any] | None = None,
     focus: dict[str, Any] | None = None,
     activated_action_id: str | None = None,
+    video: dict[str, Any] | None = None,
+    subscription: dict[str, Any] | None = None,
     fallback: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Build local mobile action items for Meta glasses display widget operations."""
@@ -242,19 +258,23 @@ def build_meta_glasses_display_widget_action_items(
         }
         if request_id:
             payload["request_id"] = request_id
-        if definition["action"] == "render":
+        if definition["action"] in {"render", "play_video", "subscribe_updates"}:
             if state:
                 payload["state"] = state
             if manifest:
                 payload["manifest"] = manifest
-            if fallback:
-                payload["fallback"] = fallback
         elif definition["action"] == "update" and patch:
             payload["patch"] = patch
         elif definition["action"] == "focus":
             payload["focus"] = focus or {"direction": "next"}
         elif definition["action"] == "activate" and activated_action_id:
             payload["activated_action_id"] = activated_action_id
+        if definition["action"] == "play_video" and video:
+            payload["video"] = video
+        elif definition["action"] == "subscribe_updates" and subscription:
+            payload["subscription"] = subscription
+        if fallback:
+            payload["fallback"] = fallback
 
         params = {
             "descriptor_cid": required_values["descriptor_cid"],
@@ -377,6 +397,12 @@ def _display_widget_action_items_from_context(
             ),
             focus=_record_or_empty(receipt.get("focus")) or _record_or_empty(mobile_action.get("focus")) or None,
             activated_action_id=activated_action_id,
+            video=_record_or_empty(receipt.get("video")) or _record_or_empty(mobile_action.get("video")) or None,
+            subscription=(
+                _record_or_empty(receipt.get("subscription"))
+                or _record_or_empty(mobile_action.get("subscription"))
+                or None
+            ),
             fallback=fallback,
         )
     except ValueError:

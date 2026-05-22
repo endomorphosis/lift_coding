@@ -158,7 +158,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-013 Investigate implementation unknowns and expand the backlog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
@@ -169,7 +169,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-014 Add supervisor validation-environment and retry-budget guardrails
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -177,3 +177,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: scripts/meta_glasses_display_todo_supervisor.py, scripts/meta_glasses_display_todo_daemon.py, tests/test_meta_glasses_display_todo_queue.py, data/meta_glasses_display_widgets/discovery
 - Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; PYTHONPATH=external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
 - Acceptance: Discovered during MGW-010: Android validation needs the repo-local JDK 17/Android SDK environment, and repeated validation failures should become evidence-backed discovery follow-up items instead of indefinite retry loops. The supervisor documents/enforces the validation environment and records retry-budget findings as daemon-parseable backlog work.
+
+## MGW-015 Close optional display widget operation contract gaps
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: backend
+- Depends on: MGW-013
+- Outputs: src/handsfree/models.py, src/handsfree/agent_providers.py, spec/openapi.yaml, mobile/src/native/wearablesBridge.js, mobile/src/native/metaWearablesDat.js, mobile/src/utils/agentActions.js, tests/test_meta_glasses_display_widget_actions.py, mobile/src/native/__tests__/wearablesBridge.test.js, mobile/src/utils/__tests__/agentActions.test.js, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_display_widget_actions.py; cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js src/utils/__tests__/agentActions.test.js
+- Acceptance: Discovered during MGW-013 Discovery Expansion: Swissknife emits `mobile_play_display_widget_video` and `mobile_subscribe_display_widget_updates` for `play_video` and `subscribe_updates`, but the HandsFree backend models/OpenAPI contract and mobile local-action executor only accept render/update/clear/focus/activate/reset. Backend and mobile serialize, validate, execute, and return structured fallback results for `play_video` and `subscribe_updates` with ORB receipt, policy, correlation, and diagnostics metadata.
+
+## MGW-016 Preserve full widget action metadata through native DAT bridge calls
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: MGW-013, MGW-015
+- Outputs: mobile/modules/expo-meta-wearables-dat/index.ts, mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/ios/ExpoMetaWearablesDatModule.swift, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, mobile/src/native/wearablesBridge.js, mobile/src/native/__tests__/wearablesBridge.test.js, data/meta_glasses_display_widgets/discovery
+- Validation: cd mobile && npm test -- --runInBand modules/expo-meta-wearables-dat/__tests__/index.test.js src/native/__tests__/wearablesBridge.test.js; cd mobile/android && env JAVA_HOME=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8 PATH=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8/bin:$PATH ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Discovered during MGW-013 Discovery Expansion: JS action execution passes a full widget action payload as context, but the native module boundary currently receives only the manifest, patch, widget id, focus direction, or action id. Native bridge methods accept and preserve the full widget action payload/context for display widget operations, diagnostics expose descriptor CID, widget CID, receipt CID, policy decision, correlation ID, request ID, fallback, and render path consistently, and bridge-only/default builds keep structured unsupported responses.
+
+## MGW-017 Render compiled widget manifest regions on Android native DAT display
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: MGW-013, MGW-016
+- Outputs: mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md, data/meta_glasses_display_widgets/discovery
+- Validation: cd mobile && npm test -- --runInBand modules/expo-meta-wearables-dat/__tests__/index.test.js; cd mobile/android && env JAVA_HOME=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8 PATH=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8/bin:$PATH ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Discovered during MGW-013 Discovery Expansion: Android follows the DisplayAccess session lifecycle, but the native content sender renders a title/detail/footer summary instead of the compiled manifest regions, actions, media, focus order, and video fallbacks. Android maps safe manifest text/progress/action/media regions into the DAT Display DSL root content, respects the 600x600 manifest constraints and DisplayAccess root view rules, and records unsupported region/media fallbacks without crashing.
+
+## MGW-018 Add iOS DisplayAccess native-display bridge parity
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: mobile
+- Depends on: MGW-013, MGW-016
+- Outputs: mobile/modules/expo-meta-wearables-dat/ios/ExpoMetaWearablesDatModule.swift, mobile/modules/expo-meta-wearables-dat/index.ts, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md, data/meta_glasses_display_widgets/discovery
+- Validation: cd mobile && npm test -- --runInBand modules/expo-meta-wearables-dat/__tests__/index.test.js
+- Acceptance: Discovered during MGW-013 Discovery Expansion: the external iOS DisplayAccess sample and `MWDATDisplay` skill document a native display lifecycle, but this repo's iOS DAT module remains reference-only and exposes no display widget native methods. iOS either implements a gated `MWDATDisplay` render/update/clear/focus/activate/reset path when SDK linkage is available or returns explicit SDK-unlinked widget responses with the same diagnostics and fallback contract as Android.
+
+## MGW-019 Broaden the hardware-free display widget harness for discovered lifecycle gaps
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: quality
+- Depends on: MGW-013, MGW-015, MGW-016
+- Outputs: tests/test_meta_glasses_display_widget_harness.py, mobile/src/utils/__tests__/displayWidgetHarness.test.js, swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts, mobile/src/native/__fixtures__/metaWearablesDisplayStates.js, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_display_widget_harness.py; cd mobile && npm test -- --runInBand src/utils/__tests__/displayWidgetHarness.test.js; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-display-harness.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Discovered during MGW-013 Discovery Expansion: the current hardware-free harness proves render/update/clear success, while focus, activate, reset, `play_video`, `subscribe_updates`, policy denial, native-unavailable fallback, firmware update required, DAT glasses app update required, and lifecycle error paths remain unverified end to end. Harness fixtures and tests cover those paths and assert receipt, diagnostic, fallback, and event metadata without requiring Meta credentials, DAT package access, or paired glasses.
