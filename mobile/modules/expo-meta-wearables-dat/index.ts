@@ -82,7 +82,15 @@ export interface DatDiagnostics {
   displayLastError?: string | null;
   displayActiveWidgetId?: string | null;
   displayDescriptorCid?: string | null;
+  displayInterfaceCid?: string | null;
   displayManifestCid?: string | null;
+  displayWidgetCid?: string | null;
+  displayOrbReceiptCid?: string | null;
+  displayReceiptCid?: string | null;
+  displayPolicyDecision?: unknown;
+  displayCorrelationId?: string | null;
+  displayRequestId?: string | null;
+  displayFallback?: Record<string, unknown> | null;
   displayFocusTarget?: string | null;
   displayUpdateCount?: number;
   displayLifecycleStages?: string[];
@@ -127,7 +135,9 @@ export type DatDisplayWidgetAction =
   | 'clear_display_widget'
   | 'focus_display_widget'
   | 'activate_display_widget_action'
-  | 'reset_display_widget_session';
+  | 'reset_display_widget_session'
+  | 'play_display_widget_video'
+  | 'subscribe_display_widget_updates';
 
 export interface DatDisplayWidgetActionResult extends Omit<DatMediaActionResult, 'action'> {
   action: DatDisplayWidgetAction;
@@ -145,7 +155,7 @@ export interface DatDisplayWidgetActionResult extends Omit<DatMediaActionResult,
   interfaceCid?: string | null;
   manifestCid?: string | null;
   orbReceiptCid?: string | null;
-  policyDecision?: string | null;
+  policyDecision?: unknown;
   correlationId?: string | null;
   requestId?: string | null;
   issuedAt?: string | null;
@@ -223,7 +233,15 @@ function getUnavailableDiagnostics(): DatDiagnostics {
     displayLastError: 'dat_native_display_unavailable',
     displayActiveWidgetId: null,
     displayDescriptorCid: null,
+    displayInterfaceCid: null,
     displayManifestCid: null,
+    displayWidgetCid: null,
+    displayOrbReceiptCid: null,
+    displayReceiptCid: null,
+    displayPolicyDecision: null,
+    displayCorrelationId: null,
+    displayRequestId: null,
+    displayFallback: null,
     displayFocusTarget: null,
     displayUpdateCount: 0,
     displayLifecycleStages: [],
@@ -268,24 +286,40 @@ function getUnavailableMediaResult(
 function getUnavailableDisplayWidgetResult(
   action: DatDisplayWidgetAction,
   message: string = 'Meta Wearables DAT display widget rendering is unavailable in this build.',
-  operation: string = getDisplayWidgetOperation(action)
+  operation: string = getDisplayWidgetOperation(action),
+  input: Record<string, unknown> = {},
+  context: Record<string, unknown> | null = null
 ): DatDisplayWidgetActionResult {
+  const metadata = getDisplayWidgetMetadata(input, context);
+  const fallback = normalizeDisplayWidgetFallback(metadata.fallback, message);
+  const reason = stringValue(fallback.reason) || 'dat_native_display_unavailable';
+  const renderPath = stringValue(fallback.renderPath) || 'mobile-card';
+
   return {
     ...getUnavailableMediaResult('render_display_test', message),
     action,
-    operation,
-    reason: 'dat_native_display_unavailable',
-    renderPath: 'mobile-card',
+    operation: metadata.operation || operation,
+    reason,
+    message: stringValue(fallback.message) || message,
+    renderPath,
     requiredAction: null,
-    displayRenderPath: 'mobile-card',
+    displayRenderPath: renderPath,
     displayLastAction: action,
-    displayLastError: 'dat_native_display_unavailable',
+    displayLastError: reason,
     displayUpdateCount: 0,
-    fallback: {
-      reason: 'dat_native_display_unavailable',
-      renderPath: 'mobile-card',
-      message,
-    },
+    contract: metadata.contract,
+    type: metadata.type,
+    descriptorCid: metadata.descriptorCid,
+    interfaceCid: metadata.interfaceCid,
+    manifestCid: metadata.manifestCid,
+    widgetId: metadata.widgetId,
+    widgetCid: metadata.widgetCid,
+    orbReceiptCid: metadata.orbReceiptCid,
+    policyDecision: metadata.policyDecision,
+    correlationId: metadata.correlationId,
+    requestId: metadata.requestId,
+    issuedAt: metadata.issuedAt,
+    fallback,
   };
 }
 
@@ -303,9 +337,127 @@ function getDisplayWidgetOperation(action: DatDisplayWidgetAction): string {
       return 'activate';
     case 'reset_display_widget_session':
       return 'reset_session';
+    case 'play_display_widget_video':
+      return 'play_video';
+    case 'subscribe_display_widget_updates':
+      return 'subscribe_updates';
     default:
       return action;
   }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function stringValue(value: unknown): string | null {
+  return typeof value === 'string' && value.length > 0 ? value : null;
+}
+
+function getDisplayWidgetPayload(
+  input: Record<string, unknown> = {},
+  context: Record<string, unknown> | null = null
+): Record<string, unknown> {
+  if (isRecord(context?.display_widget_action)) {
+    return context.display_widget_action;
+  }
+  if (isRecord(context?.mobile_payload)) {
+    return context.mobile_payload;
+  }
+  if (isRecord(context)) {
+    return context;
+  }
+  if (isRecord(input.display_widget_action)) {
+    return input.display_widget_action;
+  }
+  if (isRecord(input.mobile_payload)) {
+    return input.mobile_payload;
+  }
+  return isRecord(input) ? input : {};
+}
+
+function normalizeDisplayWidgetFallback(
+  fallback: unknown,
+  message: string = 'DAT native display is unavailable. Showing display widget content on phone.'
+): Record<string, unknown> {
+  const source = isRecord(fallback) ? fallback : {};
+  return {
+    ...source,
+    reason: source.reason || 'dat_native_display_unavailable',
+    renderPath: source.renderPath || source.render_path || 'mobile-card',
+    message: source.message || message,
+  };
+}
+
+function getManifestObject(input: Record<string, unknown>, payload: Record<string, unknown>): Record<string, unknown> {
+  return isRecord(payload.manifest) ? payload.manifest : input;
+}
+
+function getDisplayWidgetMetadata(input: Record<string, unknown> = {}, context: Record<string, unknown> | null = null) {
+  const payload = getDisplayWidgetPayload(input, context);
+  const manifest = getManifestObject(input, payload);
+
+  return {
+    contract: stringValue(payload.contract),
+    type: stringValue(payload.type),
+    operation: stringValue(payload.operation),
+    descriptorCid: stringValue(payload.descriptor_cid) || stringValue(payload.descriptorCid),
+    interfaceCid: stringValue(payload.interface_cid) || stringValue(payload.interfaceCid),
+    manifestCid:
+      stringValue(payload.manifest_cid) ||
+      stringValue(payload.manifestCid) ||
+      stringValue(manifest.manifest_cid) ||
+      stringValue(manifest.manifestCid),
+    widgetId:
+      stringValue(payload.widget_id) ||
+      stringValue(payload.widgetId) ||
+      stringValue(manifest.widget_id) ||
+      stringValue(manifest.widgetId) ||
+      stringValue(manifest.id),
+    widgetCid:
+      stringValue(payload.widget_cid) ||
+      stringValue(payload.widgetCid) ||
+      stringValue(manifest.widget_cid) ||
+      stringValue(manifest.widgetCid) ||
+      stringValue(manifest.cid),
+    orbReceiptCid:
+      stringValue(payload.orb_receipt_cid) ||
+      stringValue(payload.orbReceiptCid) ||
+      stringValue(payload.receipt_cid) ||
+      stringValue(payload.receiptCid),
+    policyDecision: payload.policy_decision ?? payload.policyDecision ?? null,
+    correlationId: stringValue(payload.correlation_id) || stringValue(payload.correlationId),
+    requestId: stringValue(payload.request_id) || stringValue(payload.requestId),
+    issuedAt: stringValue(payload.issued_at) || stringValue(payload.issuedAt),
+    fallback: normalizeDisplayWidgetFallback(payload.fallback),
+  };
+}
+
+function normalizeRecordInput(value: unknown): Record<string, unknown> {
+  return isRecord(value) ? value : {};
+}
+
+function buildDisplayWidgetNativePayload(
+  action: DatDisplayWidgetAction,
+  input: Record<string, unknown> = {},
+  context: Record<string, unknown> | null = null,
+  extra: Record<string, unknown> = {}
+): Record<string, unknown> {
+  const payload = {
+    ...getDisplayWidgetPayload(input, context),
+  };
+  Object.entries(extra).forEach(([key, value]) => {
+    if (value !== undefined && payload[key] === undefined) {
+      payload[key] = value;
+    }
+  });
+  if (!payload.operation) {
+    payload.operation = stringValue(extra.operation) || getDisplayWidgetOperation(action);
+  }
+  if (!payload.action) {
+    payload.action = action;
+  }
+  return payload;
 }
 
 class ExpoMetaWearablesDat extends EventEmitter {
@@ -437,52 +589,132 @@ class ExpoMetaWearablesDat extends EventEmitter {
       );
   }
 
-  async renderDisplayWidget(manifest: Record<string, unknown> = {}): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.renderDisplayWidget?.(manifest))
+  async renderDisplayWidget(
+    manifest: Record<string, unknown> = {},
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const payload = buildDisplayWidgetNativePayload('render_display_widget', manifest, context, { manifest });
+    return (await ExpoMetaWearablesDatModule?.renderDisplayWidget?.(manifest, payload))
       ?? getUnavailableDisplayWidgetResult(
         'render_display_widget',
-        'Meta Wearables DAT display widget rendering is unavailable in this build.'
+        'Meta Wearables DAT display widget rendering is unavailable in this build.',
+        'render_widget',
+        manifest,
+        payload
       );
   }
 
-  async updateDisplayWidget(patch: Record<string, unknown> = {}): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.updateDisplayWidget?.(patch))
+  async updateDisplayWidget(
+    patch: Record<string, unknown> = {},
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const payload = buildDisplayWidgetNativePayload('update_display_widget', patch, context, { patch });
+    return (await ExpoMetaWearablesDatModule?.updateDisplayWidget?.(patch, payload))
       ?? getUnavailableDisplayWidgetResult(
         'update_display_widget',
-        'Meta Wearables DAT display widget updates are unavailable in this build.'
+        'Meta Wearables DAT display widget updates are unavailable in this build.',
+        'update_widget',
+        patch,
+        payload
       );
   }
 
-  async clearDisplayWidget(widgetId?: string | null): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.clearDisplayWidget?.(widgetId))
+  async clearDisplayWidget(
+    widgetId?: string | null,
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const input = { widget_id: widgetId };
+    const payload = buildDisplayWidgetNativePayload('clear_display_widget', input, context, input);
+    return (await ExpoMetaWearablesDatModule?.clearDisplayWidget?.(widgetId, payload))
       ?? getUnavailableDisplayWidgetResult(
         'clear_display_widget',
-        'Meta Wearables DAT display widget clearing is unavailable in this build.'
+        'Meta Wearables DAT display widget clearing is unavailable in this build.',
+        'clear_widget',
+        input,
+        payload
       );
   }
 
-  async focusDisplayWidget(direction?: string | null): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.focusDisplayWidget?.(direction))
+  async focusDisplayWidget(
+    direction?: string | null,
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const input = {
+      focus: { direction },
+      operation: direction === 'previous' ? 'focus_previous' : 'focus_next',
+    };
+    const payload = buildDisplayWidgetNativePayload('focus_display_widget', input, context, input);
+    return (await ExpoMetaWearablesDatModule?.focusDisplayWidget?.(direction, payload))
       ?? getUnavailableDisplayWidgetResult(
         'focus_display_widget',
         'Meta Wearables DAT display widget focus is unavailable in this build.',
-        direction === 'previous' ? 'focus_previous' : 'focus_next'
+        direction === 'previous' ? 'focus_previous' : 'focus_next',
+        input,
+        payload
       );
   }
 
-  async activateDisplayWidgetAction(actionId?: string | null): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.activateDisplayWidgetAction?.(actionId))
+  async activateDisplayWidgetAction(
+    actionId?: string | null,
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const input = { activated_action_id: actionId };
+    const payload = buildDisplayWidgetNativePayload('activate_display_widget_action', input, context, input);
+    return (await ExpoMetaWearablesDatModule?.activateDisplayWidgetAction?.(actionId, payload))
       ?? getUnavailableDisplayWidgetResult(
         'activate_display_widget_action',
-        'Meta Wearables DAT display widget actions are unavailable in this build.'
+        'Meta Wearables DAT display widget actions are unavailable in this build.',
+        'activate',
+        input,
+        payload
       );
   }
 
-  async resetDisplayWidgetSession(): Promise<DatDisplayWidgetActionResult> {
-    return (await ExpoMetaWearablesDatModule?.resetDisplayWidgetSession?.())
+  async resetDisplayWidgetSession(context: Record<string, unknown> | null = null): Promise<DatDisplayWidgetActionResult> {
+    const payload = buildDisplayWidgetNativePayload('reset_display_widget_session', normalizeRecordInput(context), context);
+    return (await ExpoMetaWearablesDatModule?.resetDisplayWidgetSession?.(payload))
       ?? getUnavailableDisplayWidgetResult(
         'reset_display_widget_session',
-        'Meta Wearables DAT display widget session reset is unavailable in this build.'
+        'Meta Wearables DAT display widget session reset is unavailable in this build.',
+        'reset_session',
+        payload,
+        payload
+      );
+  }
+
+  async playDisplayWidgetVideo(
+    video: Record<string, unknown> | string | null = null,
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const input = isRecord(video) ? video : { uri: video };
+    const payload = buildDisplayWidgetNativePayload('play_display_widget_video', input, context, { video: input });
+    return (await ExpoMetaWearablesDatModule?.playDisplayWidgetVideo?.(input, payload))
+      ?? getUnavailableDisplayWidgetResult(
+        'play_display_widget_video',
+        'Meta Wearables DAT display widget video playback is unavailable in this build.',
+        'play_video',
+        input,
+        payload
+      );
+  }
+
+  async subscribeDisplayWidgetUpdates(
+    subscription: Record<string, unknown> = {},
+    context: Record<string, unknown> | null = null
+  ): Promise<DatDisplayWidgetActionResult> {
+    const payload = buildDisplayWidgetNativePayload(
+      'subscribe_display_widget_updates',
+      subscription,
+      context,
+      { subscription }
+    );
+    return (await ExpoMetaWearablesDatModule?.subscribeDisplayWidgetUpdates?.(subscription, payload))
+      ?? getUnavailableDisplayWidgetResult(
+        'subscribe_display_widget_updates',
+        'Meta Wearables DAT display widget update subscriptions are unavailable in this build.',
+        'subscribe_updates',
+        subscription,
+        payload
       );
   }
 

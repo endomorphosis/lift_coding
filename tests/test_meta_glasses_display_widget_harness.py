@@ -96,6 +96,8 @@ def _backend_payload_for(receipt: dict[str, Any], action_id: str) -> dict[str, A
         "mobile_focus_display_widget",
         "mobile_activate_display_widget_action",
         "mobile_reset_display_widget_session",
+        "mobile_play_display_widget_video",
+        "mobile_subscribe_display_widget_updates",
     ]
     return next(action["mobile_payload"] for action in actions if action["id"] == action_id)
 

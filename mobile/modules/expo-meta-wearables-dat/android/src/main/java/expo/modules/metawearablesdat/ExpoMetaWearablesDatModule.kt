@@ -40,7 +40,14 @@ class ExpoMetaWearablesDatModule : Module() {
   private var displayLastError: String? = null
   private var displayActiveWidgetId: String? = null
   private var displayDescriptorCid: String? = null
+  private var displayInterfaceCid: String? = null
   private var displayManifestCid: String? = null
+  private var displayWidgetCid: String? = null
+  private var displayOrbReceiptCid: String? = null
+  private var displayPolicyDecision: Any? = null
+  private var displayCorrelationId: String? = null
+  private var displayRequestId: String? = null
+  private var displayFallback: Map<String, Any?>? = null
   private var displayFocusTarget: String? = null
   private var displayUpdateCount: Int = 0
   private var displayLifecycleStages: List<String> = emptyList()
@@ -231,7 +238,15 @@ class ExpoMetaWearablesDatModule : Module() {
         "displayLastError" to displayLastError,
         "displayActiveWidgetId" to displayActiveWidgetId,
         "displayDescriptorCid" to displayDescriptorCid,
+        "displayInterfaceCid" to displayInterfaceCid,
         "displayManifestCid" to displayManifestCid,
+        "displayWidgetCid" to displayWidgetCid,
+        "displayOrbReceiptCid" to displayOrbReceiptCid,
+        "displayReceiptCid" to displayOrbReceiptCid,
+        "displayPolicyDecision" to displayPolicyDecision,
+        "displayCorrelationId" to displayCorrelationId,
+        "displayRequestId" to displayRequestId,
+        "displayFallback" to displayFallback,
         "displayFocusTarget" to displayFocusTarget,
         "displayUpdateCount" to displayUpdateCount,
         "displayLifecycleStages" to displayLifecycleStages
@@ -367,40 +382,75 @@ class ExpoMetaWearablesDatModule : Module() {
       )
     }
 
-    AsyncFunction("renderDisplayWidget") { manifest: Map<String, Any?> ->
-      executeDisplayWidgetAction(DISPLAY_WIDGET_RENDER, manifest)
-    }
-
-    AsyncFunction("updateDisplayWidget") { patch: Map<String, Any?> ->
-      executeDisplayWidgetAction(DISPLAY_WIDGET_UPDATE, patch)
-    }
-
-    AsyncFunction("clearDisplayWidget") { widgetId: String? ->
+    AsyncFunction("renderDisplayWidget") { manifest: Map<String, Any?>, context: Map<String, Any?>? ->
       executeDisplayWidgetAction(
-        DISPLAY_WIDGET_CLEAR,
-        mapOf("widget_id" to widgetId)
+        DISPLAY_WIDGET_RENDER,
+        displayWidgetActionInput(DISPLAY_WIDGET_RENDER, manifest, context, "manifest")
       )
     }
 
-    AsyncFunction("focusDisplayWidget") { direction: String? ->
+    AsyncFunction("updateDisplayWidget") { patch: Map<String, Any?>, context: Map<String, Any?>? ->
       executeDisplayWidgetAction(
-        DISPLAY_WIDGET_FOCUS,
-        mapOf(
-          "focus" to mapOf("direction" to direction),
-          "operation" to if (direction == "previous") "focus_previous" else "focus_next"
+        DISPLAY_WIDGET_UPDATE,
+        displayWidgetActionInput(DISPLAY_WIDGET_UPDATE, patch, context, "patch")
+      )
+    }
+
+    AsyncFunction("clearDisplayWidget") { widgetId: String?, context: Map<String, Any?>? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_CLEAR,
+        displayWidgetActionInput(
+          DISPLAY_WIDGET_CLEAR,
+          mapOf("widget_id" to widgetId),
+          context
         )
       )
     }
 
-    AsyncFunction("activateDisplayWidgetAction") { actionId: String? ->
+    AsyncFunction("focusDisplayWidget") { direction: String?, context: Map<String, Any?>? ->
       executeDisplayWidgetAction(
-        DISPLAY_WIDGET_ACTIVATE,
-        mapOf("activated_action_id" to actionId)
+        DISPLAY_WIDGET_FOCUS,
+        displayWidgetActionInput(
+          DISPLAY_WIDGET_FOCUS,
+          mapOf(
+          "focus" to mapOf("direction" to direction),
+          "operation" to if (direction == "previous") "focus_previous" else "focus_next"
+          ),
+          context
+        )
       )
     }
 
-    AsyncFunction("resetDisplayWidgetSession") {
-      executeDisplayWidgetAction(DISPLAY_WIDGET_RESET, emptyMap())
+    AsyncFunction("activateDisplayWidgetAction") { actionId: String?, context: Map<String, Any?>? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_ACTIVATE,
+        displayWidgetActionInput(
+          DISPLAY_WIDGET_ACTIVATE,
+          mapOf("activated_action_id" to actionId),
+          context
+        )
+      )
+    }
+
+    AsyncFunction("resetDisplayWidgetSession") { context: Map<String, Any?>? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_RESET,
+        displayWidgetActionInput(DISPLAY_WIDGET_RESET, emptyMap(), context)
+      )
+    }
+
+    AsyncFunction("playDisplayWidgetVideo") { video: Map<String, Any?>?, context: Map<String, Any?>? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_PLAY_VIDEO,
+        displayWidgetActionInput(DISPLAY_WIDGET_PLAY_VIDEO, video ?: emptyMap(), context, "video")
+      )
+    }
+
+    AsyncFunction("subscribeDisplayWidgetUpdates") { subscription: Map<String, Any?>?, context: Map<String, Any?>? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_SUBSCRIBE_UPDATES,
+        displayWidgetActionInput(DISPLAY_WIDGET_SUBSCRIBE_UPDATES, subscription ?: emptyMap(), context, "subscription")
+      )
     }
   }
 
@@ -493,7 +543,7 @@ class ExpoMetaWearablesDatModule : Module() {
       }
     }
 
-    applyDisplayWidgetState(config, metadata, supported, reason, displayState, renderPath)
+    applyDisplayWidgetState(config, metadata, supported, reason, displayState, renderPath, message)
 
     val result = displayWidgetActionResult(
       config = config,
@@ -787,20 +837,17 @@ class ExpoMetaWearablesDatModule : Module() {
     supported: Boolean,
     reason: String?,
     connectionState: String,
-    renderPath: String?
+    renderPath: String?,
+    message: String
   ) {
     if (supported || config.clearsLocalWidgetState) {
       when (config.action) {
         "render_display_widget" -> {
           displayActiveWidgetId = metadata.widgetId
-          displayDescriptorCid = metadata.descriptorCid
-          displayManifestCid = metadata.manifestCid
           displayUpdateCount = 0
         }
         "update_display_widget" -> {
           displayActiveWidgetId = metadata.widgetId ?: displayActiveWidgetId
-          displayDescriptorCid = metadata.descriptorCid ?: displayDescriptorCid
-          displayManifestCid = metadata.manifestCid ?: displayManifestCid
           displayUpdateCount += 1
         }
         "clear_display_widget" -> {
@@ -812,18 +859,25 @@ class ExpoMetaWearablesDatModule : Module() {
         }
         "reset_display_widget_session" -> {
           displayActiveWidgetId = null
-          displayDescriptorCid = null
-          displayManifestCid = null
           displayFocusTarget = null
           displayUpdateCount = 0
         }
       }
     }
+    displayDescriptorCid = metadata.descriptorCid ?: displayDescriptorCid
+    displayInterfaceCid = metadata.interfaceCid ?: displayInterfaceCid
+    displayManifestCid = metadata.manifestCid ?: displayManifestCid
+    displayWidgetCid = metadata.widgetCid ?: displayWidgetCid
+    displayOrbReceiptCid = metadata.orbReceiptCid ?: displayOrbReceiptCid
+    displayPolicyDecision = metadata.policyDecision ?: displayPolicyDecision
+    displayCorrelationId = metadata.correlationId ?: displayCorrelationId
+    displayRequestId = metadata.requestId ?: displayRequestId
+    displayFallback = metadata.fallback ?: if (supported) null else displayWidgetFallback(metadata, reason, message)
     updateDisplayState(
       action = config.action,
       status = if (supported) "ready" else "blocked",
       connectionState = if (supported) config.successConnectionState else connectionState,
-      renderPath = if (supported) renderPath ?: "native-dat" else "mobile-card",
+      renderPath = if (supported) renderPath ?: "native-dat" else fallbackRenderPath(metadata),
       error = reason
     )
   }
@@ -835,6 +889,8 @@ class ExpoMetaWearablesDatModule : Module() {
       "clear_display_widget" -> "DAT display widget cleared."
       "focus_display_widget" -> "DAT display widget focused."
       "activate_display_widget_action" -> "DAT display widget action activated."
+      "play_display_widget_video" -> "DAT display widget video playback queued."
+      "subscribe_display_widget_updates" -> "DAT display widget update subscription queued."
       else -> "DAT display content sent."
     }
 
@@ -855,7 +911,7 @@ class ExpoMetaWearablesDatModule : Module() {
       "operation" to metadata.operation.orEmpty().ifBlank { config.operation },
       "reason" to reason,
       "message" to message,
-      "renderPath" to if (supported) displayRenderPath.orEmpty().ifBlank { "native-dat" } else "mobile-card",
+      "renderPath" to if (supported) displayRenderPath.orEmpty().ifBlank { "native-dat" } else fallbackRenderPath(metadata),
       "requiredAction" to requiredAction,
       "deviceId" to selectedDeviceId,
       "targetConnectionState" to targetConnectionState(selectedDeviceId, getSelectedDeviceTarget()),
@@ -881,11 +937,7 @@ class ExpoMetaWearablesDatModule : Module() {
       "issuedAt" to metadata.issuedAt,
       "focusDirection" to metadata.focusDirection,
       "activatedActionId" to metadata.activatedActionId,
-      "fallback" to if (supported) null else mapOf(
-        "reason" to (reason ?: "dat_native_display_unavailable"),
-        "renderPath" to "mobile-card",
-        "message" to message
-      )
+      "fallback" to if (supported) null else displayWidgetFallback(metadata, reason, message)
     )
 
   private fun emitDisplayWidgetEvent(
@@ -909,6 +961,57 @@ class ExpoMetaWearablesDatModule : Module() {
     }
   }
 
+  private fun displayWidgetPayload(context: Map<String, Any?>?): Map<String, Any?>? {
+    if (context == null) {
+      return null
+    }
+    return mapValue(context["display_widget_action"])
+      ?: mapValue(context["mobile_payload"])
+      ?: context
+  }
+
+  private fun displayWidgetActionInput(
+    config: DisplayActionConfig,
+    input: Map<String, Any?>,
+    context: Map<String, Any?>?,
+    inputKey: String? = null
+  ): Map<String, Any?> {
+    val contextPayload = displayWidgetPayload(context)
+    val inputPayload = if (contextPayload == null) displayWidgetPayload(input) else null
+    val payload = (contextPayload ?: inputPayload ?: input).toMutableMap()
+    if (inputKey != null && !payload.containsKey(inputKey)) {
+      payload[inputKey] = input
+    }
+    if (!payload.containsKey("operation")) {
+      payload["operation"] = config.operation
+    }
+    if (!payload.containsKey("action")) {
+      payload["action"] = config.action
+    }
+    return payload
+  }
+
+  private fun fallbackRenderPath(metadata: DisplayWidgetMetadata): String =
+    firstString(metadata.fallback?.get("renderPath"), metadata.fallback?.get("render_path")) ?: "mobile-card"
+
+  private fun displayWidgetFallback(
+    metadata: DisplayWidgetMetadata,
+    reason: String?,
+    message: String
+  ): Map<String, Any?> {
+    val fallback = metadata.fallback?.toMutableMap() ?: mutableMapOf()
+    if (firstString(fallback["reason"]) == null) {
+      fallback["reason"] = reason ?: "dat_native_display_unavailable"
+    }
+    if (firstString(fallback["renderPath"]) == null) {
+      fallback["renderPath"] = firstString(fallback["render_path"]) ?: "mobile-card"
+    }
+    if (firstString(fallback["message"]) == null) {
+      fallback["message"] = message
+    }
+    return fallback
+  }
+
   private fun displayWidgetMetadata(input: Map<String, Any?>): DisplayWidgetMetadata {
     val manifest = mapValue(input["manifest"]) ?: input
     val focus = mapValue(input["focus"])
@@ -929,14 +1032,15 @@ class ExpoMetaWearablesDatModule : Module() {
       ),
       widgetCid = firstString(input["widget_cid"], input["widgetCid"], manifest["widget_cid"], manifest["widgetCid"], manifest["cid"]),
       orbReceiptCid = firstString(input["orb_receipt_cid"], input["orbReceiptCid"], input["receipt_cid"], input["receiptCid"]),
-      policyDecision = firstString(input["policy_decision"], input["policyDecision"]),
+      policyDecision = firstValue(input["policy_decision"], input["policyDecision"]),
       correlationId = firstString(input["correlation_id"], input["correlationId"]),
       requestId = firstString(input["request_id"], input["requestId"]),
       issuedAt = firstString(input["issued_at"], input["issuedAt"]),
       title = firstString(manifest["title"], manifest["name"], manifest["label"], input["title"], input["name"]),
       subtitle = firstString(manifest["summary"], manifest["description"], input["summary"], input["description"]),
       focusDirection = firstString(focus?.get("direction"), input["direction"]),
-      activatedActionId = firstString(input["activated_action_id"], input["activatedActionId"], input["action_id"], input["actionId"])
+      activatedActionId = firstString(input["activated_action_id"], input["activatedActionId"], input["action_id"], input["actionId"]),
+      fallback = mapValue(input["fallback"])
     )
   }
 
@@ -1382,6 +1486,9 @@ class ExpoMetaWearablesDatModule : Module() {
 
   private fun firstString(vararg values: Any?): String? =
     values.firstNotNullOfOrNull { stringValue(it)?.takeIf { value -> value.isNotBlank() } }
+
+  private fun firstValue(vararg values: Any?): Any? =
+    values.firstOrNull { it != null }
 
   private fun stringValue(value: Any?): String? =
     when (value) {
@@ -1908,14 +2015,15 @@ class ExpoMetaWearablesDatModule : Module() {
     val widgetId: String?,
     val widgetCid: String?,
     val orbReceiptCid: String?,
-    val policyDecision: String?,
+    val policyDecision: Any?,
     val correlationId: String?,
     val requestId: String?,
     val issuedAt: String?,
     val title: String?,
     val subtitle: String?,
     val focusDirection: String?,
-    val activatedActionId: String?
+    val activatedActionId: String?,
+    val fallback: Map<String, Any?>?
   )
 
   private data class DisplayDeviceTarget(
@@ -2092,6 +2200,19 @@ class ExpoMetaWearablesDatModule : Module() {
       unavailableMessage = "Display widget session reset requires DAT display lifecycle availability.",
       sendsContent = false,
       clearsLocalWidgetState = true
+    )
+    val DISPLAY_WIDGET_PLAY_VIDEO = DisplayActionConfig(
+      action = "play_display_widget_video",
+      operation = "play_video",
+      successConnectionState = "video_playing",
+      unavailableMessage = "Display widget video playback requires an active DAT display session."
+    )
+    val DISPLAY_WIDGET_SUBSCRIBE_UPDATES = DisplayActionConfig(
+      action = "subscribe_display_widget_updates",
+      operation = "subscribe_updates",
+      successConnectionState = "updates_subscribed",
+      unavailableMessage = "Display widget update subscriptions require an active DAT display session.",
+      sendsContent = false
     )
   }
 }

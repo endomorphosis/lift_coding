@@ -70,6 +70,29 @@ function getDisplayWidgetPayload(input, context) {
   return isObject(input) ? input : {};
 }
 
+function getFallbackValue(fallback, key) {
+  if (!isObject(fallback)) {
+    return undefined;
+  }
+  if (fallback[key] !== undefined) {
+    return fallback[key];
+  }
+  if (key === 'renderPath') {
+    return fallback.render_path;
+  }
+  return undefined;
+}
+
+function normalizeDisplayWidgetFallback(fallback, message) {
+  const source = isObject(fallback) ? fallback : DISPLAY_WIDGET_FALLBACK;
+  return {
+    ...source,
+    reason: getFallbackValue(source, 'reason') || DISPLAY_WIDGET_FALLBACK.reason,
+    renderPath: getFallbackValue(source, 'renderPath') || DISPLAY_WIDGET_FALLBACK.renderPath,
+    message: getFallbackValue(source, 'message') || message || DISPLAY_WIDGET_FALLBACK.message,
+  };
+}
+
 function getManifestObject(input, payload) {
   if (isObject(payload?.manifest)) {
     return payload.manifest;
@@ -88,6 +111,7 @@ function getDisplayWidgetMetadata(input, context = {}) {
     operation: payload.operation || null,
     descriptorCid: payload.descriptor_cid || payload.descriptorCid || null,
     interfaceCid: payload.interface_cid || payload.interfaceCid || null,
+    manifestCid: payload.manifest_cid || payload.manifestCid || manifest.manifest_cid || manifest.manifestCid || null,
     widgetId: payload.widget_id || payload.widgetId || manifest.widget_id || manifest.widgetId || manifest.id || null,
     widgetCid: payload.widget_cid || payload.widgetCid || manifest.widget_cid || manifest.widgetCid || manifest.cid || null,
     orbReceiptCid: payload.orb_receipt_cid || payload.orbReceiptCid || payload.receipt_cid || payload.receiptCid || null,
@@ -95,8 +119,28 @@ function getDisplayWidgetMetadata(input, context = {}) {
     correlationId: payload.correlation_id || payload.correlationId || null,
     requestId: payload.request_id || payload.requestId || null,
     issuedAt: payload.issued_at || payload.issuedAt || null,
-    fallback,
+    fallback: normalizeDisplayWidgetFallback(fallback),
   };
+}
+
+function buildDisplayWidgetNativePayload(config, input, context, extra = {}) {
+  const payload = {
+    ...getDisplayWidgetPayload(input, context),
+  };
+
+  Object.entries(extra).forEach(([key, value]) => {
+    if (value !== undefined && payload[key] === undefined) {
+      payload[key] = value;
+    }
+  });
+
+  if (!payload.operation) {
+    payload.operation = extra.operation || config.operation;
+  }
+  if (!payload.action) {
+    payload.action = config.action;
+  }
+  return payload;
 }
 
 function getDisplayWidgetVideoUri(input, context = {}) {
@@ -134,7 +178,9 @@ function createUnavailableMediaResult(action, message) {
 
 function createUnsupportedDisplayWidgetResult(config, input, context = {}) {
   const metadata = getDisplayWidgetMetadata(input, context);
-  const fallback = metadata.fallback || DISPLAY_WIDGET_FALLBACK;
+  const fallback = normalizeDisplayWidgetFallback(metadata.fallback, config.message);
+  const reason = fallback.reason || DISPLAY_WIDGET_FALLBACK.reason;
+  const renderPath = fallback.renderPath || DISPLAY_WIDGET_FALLBACK.renderPath;
 
   return {
     state: 'unavailable',
@@ -142,9 +188,9 @@ function createUnsupportedDisplayWidgetResult(config, input, context = {}) {
     supported: false,
     action: config.action,
     operation: metadata.operation || config.operation,
-    reason: fallback.reason || DISPLAY_WIDGET_FALLBACK.reason,
+    reason,
     message: fallback.message || config.message,
-    renderPath: fallback.renderPath || DISPLAY_WIDGET_FALLBACK.renderPath,
+    renderPath,
     targetConnectionState: 'unselected',
     deviceId: null,
     assetUri: null,
@@ -153,10 +199,13 @@ function createUnsupportedDisplayWidgetResult(config, input, context = {}) {
     displayLastAction: config.action,
     displayLastStatus: 'unsupported',
     displayLastUpdatedAt: Date.now(),
+    displayRenderPath: renderPath,
+    displayLastError: reason,
     contract: metadata.contract,
     type: metadata.type,
     descriptorCid: metadata.descriptorCid,
     interfaceCid: metadata.interfaceCid,
+    manifestCid: metadata.manifestCid,
     widgetId: metadata.widgetId,
     widgetCid: metadata.widgetCid,
     orbReceiptCid: metadata.orbReceiptCid,
@@ -172,6 +221,12 @@ function normalizeDisplayWidgetResult(response, config, input, context = {}) {
   const fallbackResult = createUnsupportedDisplayWidgetResult(config, input, context);
   const nativeResponse = isObject(response) ? response : {};
   const supported = nativeResponse.supported ?? fallbackResult.supported;
+  const nativeFallback = isObject(nativeResponse.fallback)
+    ? normalizeDisplayWidgetFallback(nativeResponse.fallback, nativeResponse.message || fallbackResult.message)
+    : null;
+  const fallback = supported ? null : (nativeFallback || fallbackResult.fallback);
+  const renderPath = nativeResponse.renderPath || (supported ? 'native-dat' : fallback?.renderPath || fallbackResult.renderPath);
+  const reason = nativeResponse.reason ?? (supported ? null : fallback?.reason || fallbackResult.reason);
 
   return {
     ...fallbackResult,
@@ -179,16 +234,38 @@ function normalizeDisplayWidgetResult(response, config, input, context = {}) {
     supported,
     action: config.action,
     operation: nativeResponse.operation || fallbackResult.operation,
-    reason: nativeResponse.reason ?? (supported ? null : fallbackResult.reason),
+    reason,
     message: nativeResponse.message || fallbackResult.message,
-    renderPath: nativeResponse.renderPath || (supported ? 'native-dat' : fallbackResult.renderPath),
+    renderPath,
     displayLastAction: nativeResponse.displayLastAction || config.action,
     displayLastStatus: nativeResponse.displayLastStatus || (supported ? 'sent' : fallbackResult.displayLastStatus),
-    fallback: nativeResponse.fallback ?? (supported ? null : fallbackResult.fallback),
+    displayRenderPath: nativeResponse.displayRenderPath || renderPath,
+    displayLastError: nativeResponse.displayLastError ?? reason,
+    contract: nativeResponse.contract ?? fallbackResult.contract,
+    type: nativeResponse.type ?? fallbackResult.type,
+    descriptorCid: nativeResponse.descriptorCid ?? fallbackResult.descriptorCid,
+    interfaceCid: nativeResponse.interfaceCid ?? fallbackResult.interfaceCid,
+    manifestCid: nativeResponse.manifestCid ?? fallbackResult.manifestCid,
+    widgetId: nativeResponse.widgetId ?? fallbackResult.widgetId,
+    widgetCid: nativeResponse.widgetCid ?? fallbackResult.widgetCid,
+    orbReceiptCid: nativeResponse.orbReceiptCid ?? fallbackResult.orbReceiptCid,
+    policyDecision: nativeResponse.policyDecision ?? fallbackResult.policyDecision,
+    correlationId: nativeResponse.correlationId ?? fallbackResult.correlationId,
+    requestId: nativeResponse.requestId ?? fallbackResult.requestId,
+    issuedAt: nativeResponse.issuedAt ?? fallbackResult.issuedAt,
+    fallback,
   };
 }
 
 function createUnavailableBridge() {
+  let lastDisplayWidgetResult = null;
+
+  const createTrackedUnsupportedDisplayWidgetResult = (config, input, context = {}) => {
+    const result = createUnsupportedDisplayWidgetResult(config, input, context);
+    lastDisplayWidgetResult = result;
+    return result;
+  };
+
   return {
     isAvailable: () => false,
     isBridgeAvailable: () => false,
@@ -289,9 +366,24 @@ function createUnavailableBridge() {
         targetLastSeenAt: null,
         targetRssi: null,
         displayConnectionState: 'unavailable',
-        displayLastAction: null,
-        displayLastStatus: null,
-        displayLastUpdatedAt: null,
+        displayLastAction: lastDisplayWidgetResult?.displayLastAction || null,
+        displayLastStatus: lastDisplayWidgetResult?.displayLastStatus || null,
+        displayLastUpdatedAt: lastDisplayWidgetResult?.displayLastUpdatedAt || null,
+        displayRenderPath: lastDisplayWidgetResult?.displayRenderPath || 'mobile-card',
+        displayLastError: lastDisplayWidgetResult?.displayLastError || null,
+        displayActiveWidgetId: lastDisplayWidgetResult?.widgetId || null,
+        displayDescriptorCid: lastDisplayWidgetResult?.descriptorCid || null,
+        displayInterfaceCid: lastDisplayWidgetResult?.interfaceCid || null,
+        displayManifestCid: lastDisplayWidgetResult?.manifestCid || null,
+        displayWidgetCid: lastDisplayWidgetResult?.widgetCid || null,
+        displayOrbReceiptCid: lastDisplayWidgetResult?.orbReceiptCid || null,
+        displayReceiptCid: lastDisplayWidgetResult?.orbReceiptCid || null,
+        displayPolicyDecision: lastDisplayWidgetResult?.policyDecision || null,
+        displayCorrelationId: lastDisplayWidgetResult?.correlationId || null,
+        displayRequestId: lastDisplayWidgetResult?.requestId || null,
+        displayFallback: lastDisplayWidgetResult?.fallback || null,
+        displayUpdateCount: 0,
+        displayLifecycleStages: [],
       }),
     startDeviceSession: async () => ({
       state: 'unavailable',
@@ -345,22 +437,22 @@ function createUnavailableBridge() {
       'reset_display_session',
       'Meta Wearables DAT display session reset is unavailable in this build.'
     ),
-    renderDisplayWidget: async (manifest, context) => createUnsupportedDisplayWidgetResult(
+    renderDisplayWidget: async (manifest, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
       manifest,
       context
     ),
-    updateDisplayWidget: async (patch, context) => createUnsupportedDisplayWidgetResult(
+    updateDisplayWidget: async (patch, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.updateDisplayWidget,
       patch,
       context
     ),
-    clearDisplayWidget: async (widgetId, context) => createUnsupportedDisplayWidgetResult(
+    clearDisplayWidget: async (widgetId, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
       { widget_id: widgetId },
       context
     ),
-    focusDisplayWidget: async (direction, context) => createUnsupportedDisplayWidgetResult(
+    focusDisplayWidget: async (direction, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.focusDisplayWidget,
       {
         focus: { direction },
@@ -368,22 +460,22 @@ function createUnavailableBridge() {
       },
       context
     ),
-    activateDisplayWidgetAction: async (actionId, context) => createUnsupportedDisplayWidgetResult(
+    activateDisplayWidgetAction: async (actionId, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction,
       { activated_action_id: actionId },
       context
     ),
-    resetDisplayWidgetSession: async (context) => createUnsupportedDisplayWidgetResult(
+    resetDisplayWidgetSession: async (context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
       context,
       context
     ),
-    playDisplayWidgetVideo: async (video, context) => createUnsupportedDisplayWidgetResult(
+    playDisplayWidgetVideo: async (video, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
       isObject(video) ? video : { uri: video },
       context
     ),
-    subscribeDisplayWidgetUpdates: async (subscription, context) => createUnsupportedDisplayWidgetResult(
+    subscribeDisplayWidgetUpdates: async (subscription, context) => createTrackedUnsupportedDisplayWidgetResult(
       DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
       isObject(subscription) ? subscription : {},
       context
@@ -436,12 +528,18 @@ function wrapBridgeModule(module) {
     playDisplayVideo: async (videoUrl) => await module.playDisplayVideo(videoUrl),
     resetDisplaySession: async () => await module.resetDisplaySession(),
     renderDisplayWidget: async (manifest, context) => {
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
+        manifest,
+        context,
+        { manifest }
+      );
       if (typeof module.renderDisplayWidget === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.renderDisplayWidget(manifest),
+          await module.renderDisplayWidget(manifest, payload),
           DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
           manifest,
-          context
+          payload
         );
       }
       if (typeof module.renderDisplayTest === 'function') {
@@ -449,30 +547,42 @@ function wrapBridgeModule(module) {
           await module.renderDisplayTest(),
           DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
           manifest,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.renderDisplayWidget, manifest, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.renderDisplayWidget, manifest, payload);
     },
     updateDisplayWidget: async (patch, context) => {
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.updateDisplayWidget,
+        patch,
+        context,
+        { patch }
+      );
       if (typeof module.updateDisplayWidget === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.updateDisplayWidget(patch),
+          await module.updateDisplayWidget(patch, payload),
           DISPLAY_WIDGET_ACTIONS.updateDisplayWidget,
           patch,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.updateDisplayWidget, patch, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.updateDisplayWidget, patch, payload);
     },
     clearDisplayWidget: async (widgetId, context) => {
       const input = { widget_id: widgetId };
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
+        input,
+        context,
+        input
+      );
       if (typeof module.clearDisplayWidget === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.clearDisplayWidget(widgetId),
+          await module.clearDisplayWidget(widgetId, payload),
           DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
           input,
-          context
+          payload
         );
       }
       if (typeof module.clearDisplay === 'function') {
@@ -480,91 +590,120 @@ function wrapBridgeModule(module) {
           await module.clearDisplay(),
           DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
           input,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.clearDisplayWidget, input, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.clearDisplayWidget, input, payload);
     },
     focusDisplayWidget: async (direction, context) => {
       const input = {
         focus: { direction },
         operation: direction === 'previous' ? 'focus_previous' : 'focus_next',
       };
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.focusDisplayWidget,
+        input,
+        context,
+        input
+      );
       if (typeof module.focusDisplayWidget === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.focusDisplayWidget(direction),
+          await module.focusDisplayWidget(direction, payload),
           DISPLAY_WIDGET_ACTIONS.focusDisplayWidget,
           input,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.focusDisplayWidget, input, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.focusDisplayWidget, input, payload);
     },
     activateDisplayWidgetAction: async (actionId, context) => {
       const input = { activated_action_id: actionId };
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction,
+        input,
+        context,
+        input
+      );
       if (typeof module.activateDisplayWidgetAction === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.activateDisplayWidgetAction(actionId),
+          await module.activateDisplayWidgetAction(actionId, payload),
           DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction,
           input,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction, input, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction, input, payload);
     },
     resetDisplayWidgetSession: async (context) => {
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
+        context,
+        context
+      );
       if (typeof module.resetDisplayWidgetSession === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.resetDisplayWidgetSession(),
+          await module.resetDisplayWidgetSession(payload),
           DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
-          context,
-          context
+          payload,
+          payload
         );
       }
       if (typeof module.resetDisplaySession === 'function') {
         return normalizeDisplayWidgetResult(
           await module.resetDisplaySession(),
           DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
-          context,
-          context
+          payload,
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession, context, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession, payload, payload);
     },
     playDisplayWidgetVideo: async (video, context) => {
       const input = isObject(video) ? video : { uri: video };
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
+        input,
+        context,
+        { video: input }
+      );
       if (typeof module.playDisplayWidgetVideo === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.playDisplayWidgetVideo(video),
+          await module.playDisplayWidgetVideo(input, payload),
           DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
           input,
-          context
+          payload
         );
       }
       if (typeof module.playDisplayVideo === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.playDisplayVideo(getDisplayWidgetVideoUri(input, context)),
+          await module.playDisplayVideo(getDisplayWidgetVideoUri(input, payload)),
           DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo,
           input,
-          context
+          payload
         );
       }
-      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo, input, context);
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.playDisplayWidgetVideo, input, payload);
     },
     subscribeDisplayWidgetUpdates: async (subscription, context) => {
       const input = isObject(subscription) ? subscription : {};
+      const payload = buildDisplayWidgetNativePayload(
+        DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
+        input,
+        context,
+        { subscription: input }
+      );
       if (typeof module.subscribeDisplayWidgetUpdates === 'function') {
         return normalizeDisplayWidgetResult(
-          await module.subscribeDisplayWidgetUpdates(subscription),
+          await module.subscribeDisplayWidgetUpdates(input, payload),
           DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
           input,
-          context
+          payload
         );
       }
       return createUnsupportedDisplayWidgetResult(
         DISPLAY_WIDGET_ACTIONS.subscribeDisplayWidgetUpdates,
         input,
-        context
+        payload
       );
     },
     addStateListener: (...args) => module.addStateListener?.(...args) || { remove() {} },

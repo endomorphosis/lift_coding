@@ -23,11 +23,20 @@ describe('wearablesBridge wrapper', () => {
       widget_id: 'handsfree.task-progress-widget',
       widget_cid: 'bafybeiwidget',
       orb_receipt_cid: 'bafybeiorbreceipt',
+      policy_decision: { outcome: 'permit', reasons: ['trusted descriptor'] },
       correlation_id: 'corr-widget',
       fallback: {
         reason: 'dat_native_display_unavailable',
         renderPath: 'display-webapp',
         message: 'Native display unavailable. Opening display webapp preview.',
+      },
+      video: {
+        media_id: 'preview',
+        uri: 'ipfs://bafybeivideo',
+        content_type: 'video/mp4',
+      },
+      subscription: {
+        stream: 'display_widget_update',
       },
     };
     const renderedWidget = await bridge.renderDisplayWidget(
@@ -39,6 +48,8 @@ describe('wearablesBridge wrapper', () => {
     const focusedWidget = await bridge.focusDisplayWidget('next', widgetPayload);
     const activatedWidget = await bridge.activateDisplayWidgetAction('primary', widgetPayload);
     const resetWidget = await bridge.resetDisplayWidgetSession(widgetPayload);
+    const videoWidget = await bridge.playDisplayWidgetVideo(widgetPayload.video, widgetPayload);
+    const subscribedWidget = await bridge.subscribeDisplayWidgetUpdates(widgetPayload.subscription, widgetPayload);
 
     expect(bridge.isBridgeAvailable()).toBe(false);
     expect(diagnostics).toEqual({
@@ -118,6 +129,7 @@ describe('wearablesBridge wrapper', () => {
       widgetId: 'handsfree.task-progress-widget',
       widgetCid: 'bafybeiwidget',
       orbReceiptCid: 'bafybeiorbreceipt',
+      policyDecision: { outcome: 'permit', reasons: ['trusted descriptor'] },
       correlationId: 'corr-widget',
       displayConnectionState: 'unavailable',
       displayLastStatus: 'unsupported',
@@ -151,6 +163,32 @@ describe('wearablesBridge wrapper', () => {
       operation: 'reset_session',
       supported: false,
       widgetId: 'handsfree.task-progress-widget',
+    });
+    expect(videoWidget).toMatchObject({
+      action: 'play_display_widget_video',
+      operation: 'play_video',
+      supported: false,
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+      widgetCid: 'bafybeiwidget',
+      orbReceiptCid: 'bafybeiorbreceipt',
+      policyDecision: { outcome: 'permit', reasons: ['trusted descriptor'] },
+      correlationId: 'corr-widget',
+      displayLastStatus: 'unsupported',
+      renderPath: 'display-webapp',
+    });
+    expect(subscribedWidget).toMatchObject({
+      action: 'subscribe_display_widget_updates',
+      operation: 'subscribe_updates',
+      supported: false,
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+      widgetCid: 'bafybeiwidget',
+      orbReceiptCid: 'bafybeiorbreceipt',
+      policyDecision: { outcome: 'permit', reasons: ['trusted descriptor'] },
+      correlationId: 'corr-widget',
+      displayLastStatus: 'unsupported',
+      renderPath: 'display-webapp',
     });
   });
 
@@ -194,6 +232,18 @@ describe('wearablesBridge wrapper', () => {
         supported: true,
         message: 'Widget session reset.',
       })),
+      playDisplayWidgetVideo: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget video started.',
+      })),
+      subscribeDisplayWidgetUpdates: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget updates subscribed.',
+      })),
     };
 
     jest.doMock('expo-meta-wearables-dat', () => ({
@@ -214,6 +264,8 @@ describe('wearablesBridge wrapper', () => {
     };
     const manifest = { id: 'handsfree.task-progress-widget' };
     const patch = { progress: 75 };
+    const video = { uri: 'ipfs://bafybeivideo', content_type: 'video/mp4' };
+    const subscription = { stream: 'display_widget_update' };
 
     await expect(bridge.renderDisplayWidget(manifest, payload)).resolves.toMatchObject({
       action: 'render_display_widget',
@@ -249,6 +301,20 @@ describe('wearablesBridge wrapper', () => {
       operation: 'reset_session',
       supported: true,
     });
+    await expect(bridge.playDisplayWidgetVideo(video, payload)).resolves.toMatchObject({
+      action: 'play_display_widget_video',
+      operation: 'play_video',
+      supported: true,
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    await expect(bridge.subscribeDisplayWidgetUpdates(subscription, payload)).resolves.toMatchObject({
+      action: 'subscribe_display_widget_updates',
+      operation: 'subscribe_updates',
+      supported: true,
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+    });
 
     expect(nativeModule.renderDisplayWidget).toHaveBeenCalledWith(manifest);
     expect(nativeModule.updateDisplayWidget).toHaveBeenCalledWith(patch);
@@ -256,6 +322,8 @@ describe('wearablesBridge wrapper', () => {
     expect(nativeModule.focusDisplayWidget).toHaveBeenCalledWith('next');
     expect(nativeModule.activateDisplayWidgetAction).toHaveBeenCalledWith('primary');
     expect(nativeModule.resetDisplayWidgetSession).toHaveBeenCalledWith();
+    expect(nativeModule.playDisplayWidgetVideo).toHaveBeenCalledWith(video);
+    expect(nativeModule.subscribeDisplayWidgetUpdates).toHaveBeenCalledWith(subscription);
   });
 
   test('normalizes resolved native module diagnostics into bridge metadata', async () => {

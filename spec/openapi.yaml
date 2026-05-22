@@ -4612,7 +4612,13 @@ components:
       properties:
         id:
           type: string
-          description: Stable action identifier suitable for POST /v1/commands/action.
+          description: >
+            Stable action identifier suitable for POST /v1/commands/action.
+            Client-local display widget IDs include mobile_render_display_widget,
+            mobile_update_display_widget, mobile_clear_display_widget,
+            mobile_focus_display_widget, mobile_activate_display_widget_action,
+            mobile_reset_display_widget_session, mobile_play_display_widget_video,
+            and mobile_subscribe_display_widget_updates.
         label:
           type: string
           description: Short UI label for buttons or menus.

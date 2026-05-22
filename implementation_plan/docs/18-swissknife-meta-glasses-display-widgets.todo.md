@@ -180,7 +180,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-015 Close optional display widget operation contract gaps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: backend

@@ -11,6 +11,21 @@ public class ExpoMetaWearablesDatModule: Module {
   private var displayLastAction: String?
   private var displayLastStatus: String?
   private var displayLastUpdatedAt: Double?
+  private var displayRenderPath: String?
+  private var displayLastError: String?
+  private var displayActiveWidgetId: String?
+  private var displayDescriptorCid: String?
+  private var displayInterfaceCid: String?
+  private var displayManifestCid: String?
+  private var displayWidgetCid: String?
+  private var displayOrbReceiptCid: String?
+  private var displayPolicyDecision: Any?
+  private var displayCorrelationId: String?
+  private var displayRequestId: String?
+  private var displayFallback: [String: Any]?
+  private var displayFocusTarget: String?
+  private var displayUpdateCount = 0
+  private var displayLifecycleStages: [String] = []
 
   private func stateChangedPayload() -> [String: Any] {
     return [
@@ -123,11 +138,24 @@ public class ExpoMetaWearablesDatModule: Module {
     return self.selectedDeviceId == nil ? "awaiting_target" : "blocked"
   }
 
-  private func updateDisplayState(action: String, status: String, connectionState: String) {
+  private func updateDisplayState(
+    action: String,
+    status: String,
+    connectionState: String,
+    renderPath: String? = nil,
+    error: String? = nil,
+    lifecycleStage: String? = nil
+  ) {
     self.displayLastAction = action
     self.displayLastStatus = status
     self.displayConnectionState = connectionState
     self.displayLastUpdatedAt = Date().timeIntervalSince1970 * 1000
+    self.displayRenderPath = renderPath
+    self.displayLastError = error
+    if let lifecycleStage, !lifecycleStage.isEmpty, self.displayLifecycleStages.last != lifecycleStage {
+      self.displayLifecycleStages.append(lifecycleStage)
+      self.displayLifecycleStages = Array(self.displayLifecycleStages.suffix(16))
+    }
   }
 
   public func definition() -> ModuleDefinition {

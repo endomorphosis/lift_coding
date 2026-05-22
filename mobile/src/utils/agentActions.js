@@ -168,6 +168,33 @@ function getDisplayWidgetActivatedActionId(payload) {
   );
 }
 
+function getDisplayWidgetVideoPayload(payload) {
+  if (payload?.video && typeof payload.video === 'object') {
+    return payload.video;
+  }
+  if (payload?.video_url || payload?.videoUrl) {
+    return { uri: payload.video_url || payload.videoUrl };
+  }
+  if (Array.isArray(payload?.manifest?.media)) {
+    const video = payload.manifest.media.find((item) => item?.type === 'video');
+    if (video) {
+      return video;
+    }
+  }
+  return payload;
+}
+
+function getDisplayWidgetSubscriptionPayload(payload) {
+  if (payload?.subscription && typeof payload.subscription === 'object') {
+    return payload.subscription;
+  }
+  return {
+    widget_id: getDisplayWidgetId(payload),
+    correlation_id: payload?.correlation_id || payload?.correlationId || null,
+    request_id: payload?.request_id || payload?.requestId || null,
+  };
+}
+
 const DISPLAY_WIDGET_ACTION_IDS = new Set([
   'mobile_render_display_widget',
   'mobile_update_display_widget',
@@ -175,6 +202,8 @@ const DISPLAY_WIDGET_ACTION_IDS = new Set([
   'mobile_focus_display_widget',
   'mobile_activate_display_widget_action',
   'mobile_reset_display_widget_session',
+  'mobile_play_display_widget_video',
+  'mobile_subscribe_display_widget_updates',
 ]);
 
 async function executeLocalDisplayWidgetAction({ actionItem, navigation }) {
@@ -198,6 +227,10 @@ async function executeLocalDisplayWidgetAction({ actionItem, navigation }) {
     response = await dat.activateDisplayWidgetAction(getDisplayWidgetActivatedActionId(payload), payload);
   } else if (actionItem?.id === 'mobile_reset_display_widget_session') {
     response = await dat.resetDisplayWidgetSession(payload);
+  } else if (actionItem?.id === 'mobile_play_display_widget_video') {
+    response = await dat.playDisplayWidgetVideo(getDisplayWidgetVideoPayload(payload), payload);
+  } else if (actionItem?.id === 'mobile_subscribe_display_widget_updates') {
+    response = await dat.subscribeDisplayWidgetUpdates(getDisplayWidgetSubscriptionPayload(payload), payload);
   } else {
     return { handled: false };
   }

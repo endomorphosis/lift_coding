@@ -245,6 +245,14 @@ describe('agentActions helpers', () => {
         action: 'reset_display_widget_session',
         message: 'Widget session reset.',
       })),
+      playDisplayWidgetVideo: jest.fn(async () => ({
+        action: 'play_display_widget_video',
+        message: 'Widget video playback requested.',
+      })),
+      subscribeDisplayWidgetUpdates: jest.fn(async () => ({
+        action: 'subscribe_display_widget_updates',
+        message: 'Widget update subscription requested.',
+      })),
     };
     getMetaWearablesDat.mockResolvedValue(dat);
 
@@ -255,11 +263,20 @@ describe('agentActions helpers', () => {
       widget_id: 'handsfree.task-progress-widget',
       widget_cid: 'bafybeiwidget',
       orb_receipt_cid: 'bafybeiorbreceipt',
+      policy_decision: { outcome: 'permit', reasons: ['trusted descriptor'] },
       correlation_id: 'corr-widget',
       manifest: { id: 'handsfree.task-progress-widget', template: 'status' },
       patch: { progress: 75 },
       focus: { direction: 'previous' },
       activated_action_id: 'primary',
+      video: {
+        media_id: 'preview',
+        uri: 'ipfs://bafybeivideo',
+        content_type: 'video/mp4',
+      },
+      subscription: {
+        stream: 'display_widget_update',
+      },
     };
     const actionItem = (id) => ({
       id,
@@ -301,6 +318,14 @@ describe('agentActions helpers', () => {
       actionItem: actionItem('mobile_reset_display_widget_session'),
       navigation: { navigate },
     });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_play_display_widget_video'),
+      navigation: { navigate },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_subscribe_display_widget_updates'),
+      navigation: { navigate },
+    });
 
     expect(dat.renderDisplayWidget).toHaveBeenCalledWith(payload.manifest, expect.objectContaining({
       type: 'mobile_render_display_widget',
@@ -321,7 +346,18 @@ describe('agentActions helpers', () => {
     expect(dat.resetDisplayWidgetSession).toHaveBeenCalledWith(expect.objectContaining({
       type: 'mobile_reset_display_widget_session',
     }));
-    expect(navigate).toHaveBeenCalledTimes(6);
+    expect(dat.playDisplayWidgetVideo).toHaveBeenCalledWith(payload.video, expect.objectContaining({
+      type: 'mobile_play_display_widget_video',
+      orb_receipt_cid: 'bafybeiorbreceipt',
+      policy_decision: { outcome: 'permit', reasons: ['trusted descriptor'] },
+      correlation_id: 'corr-widget',
+    }));
+    expect(dat.subscribeDisplayWidgetUpdates).toHaveBeenCalledWith(payload.subscription, expect.objectContaining({
+      type: 'mobile_subscribe_display_widget_updates',
+      orb_receipt_cid: 'bafybeiorbreceipt',
+      correlation_id: 'corr-widget',
+    }));
+    expect(navigate).toHaveBeenCalledTimes(8);
     expect(navigate).toHaveBeenCalledWith('Glasses');
   });
 
