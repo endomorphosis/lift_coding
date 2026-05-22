@@ -218,6 +218,113 @@ describe('agentActions helpers', () => {
     expect(navigate).toHaveBeenCalledWith('Glasses');
   });
 
+  it('executes display widget mobile action contract locally and navigates to diagnostics', async () => {
+    const navigate = jest.fn();
+    const dat = {
+      renderDisplayWidget: jest.fn(async () => ({
+        action: 'render_display_widget',
+        message: 'Widget rendered.',
+      })),
+      updateDisplayWidget: jest.fn(async () => ({
+        action: 'update_display_widget',
+        message: 'Widget updated.',
+      })),
+      clearDisplayWidget: jest.fn(async () => ({
+        action: 'clear_display_widget',
+        message: 'Widget cleared.',
+      })),
+      focusDisplayWidget: jest.fn(async () => ({
+        action: 'focus_display_widget',
+        message: 'Widget focused.',
+      })),
+      activateDisplayWidgetAction: jest.fn(async () => ({
+        action: 'activate_display_widget_action',
+        message: 'Widget action activated.',
+      })),
+      resetDisplayWidgetSession: jest.fn(async () => ({
+        action: 'reset_display_widget_session',
+        message: 'Widget session reset.',
+      })),
+    };
+    getMetaWearablesDat.mockResolvedValue(dat);
+
+    const payload = {
+      contract: 'handsfree.meta-glasses/display-widget-action@0.1.0',
+      type: 'mobile_render_display_widget',
+      descriptor_cid: 'bafybeidescriptor',
+      widget_id: 'handsfree.task-progress-widget',
+      widget_cid: 'bafybeiwidget',
+      orb_receipt_cid: 'bafybeiorbreceipt',
+      correlation_id: 'corr-widget',
+      manifest: { id: 'handsfree.task-progress-widget', template: 'status' },
+      patch: { progress: 75 },
+      focus: { direction: 'previous' },
+      activated_action_id: 'primary',
+    };
+    const actionItem = (id) => ({
+      id,
+      params: {
+        display_widget_action: {
+          ...payload,
+          type: id,
+        },
+      },
+    });
+
+    await expect(
+      executeLocalStructuredAction({
+        actionItem: actionItem('mobile_render_display_widget'),
+        navigation: { navigate },
+      })
+    ).resolves.toMatchObject({
+      handled: true,
+      message: 'Widget rendered.',
+      response: { action: 'render_display_widget' },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_update_display_widget'),
+      navigation: { navigate },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_clear_display_widget'),
+      navigation: { navigate },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_focus_display_widget'),
+      navigation: { navigate },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_activate_display_widget_action'),
+      navigation: { navigate },
+    });
+    await executeLocalStructuredAction({
+      actionItem: actionItem('mobile_reset_display_widget_session'),
+      navigation: { navigate },
+    });
+
+    expect(dat.renderDisplayWidget).toHaveBeenCalledWith(payload.manifest, expect.objectContaining({
+      type: 'mobile_render_display_widget',
+      widget_id: 'handsfree.task-progress-widget',
+    }));
+    expect(dat.updateDisplayWidget).toHaveBeenCalledWith(payload.patch, expect.objectContaining({
+      type: 'mobile_update_display_widget',
+    }));
+    expect(dat.clearDisplayWidget).toHaveBeenCalledWith('handsfree.task-progress-widget', expect.objectContaining({
+      type: 'mobile_clear_display_widget',
+    }));
+    expect(dat.focusDisplayWidget).toHaveBeenCalledWith('previous', expect.objectContaining({
+      type: 'mobile_focus_display_widget',
+    }));
+    expect(dat.activateDisplayWidgetAction).toHaveBeenCalledWith('primary', expect.objectContaining({
+      type: 'mobile_activate_display_widget_action',
+    }));
+    expect(dat.resetDisplayWidgetSession).toHaveBeenCalledWith(expect.objectContaining({
+      type: 'mobile_reset_display_widget_session',
+    }));
+    expect(navigate).toHaveBeenCalledTimes(6);
+    expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
   it('returns handled false for non-local actions', async () => {
     const outcome = await executeLocalStructuredAction({
       actionItem: { id: 'read_cid' },

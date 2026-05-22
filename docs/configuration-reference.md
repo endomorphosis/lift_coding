@@ -150,6 +150,33 @@ The authoritative source is code usage (`os.getenv` / `getenv`) under [src/hands
 - `HANDSFREE_MCP_IPFS_ACCELERATE_TASK_STATUS_TOOL`
 - `HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CANCEL_TOOL`
 
+## Meta Glasses Display Widgets
+
+- `HANDSFREE_DISPLAY_WIDGETS_ENABLED`
+- `HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR`
+- `HANDSFREE_DISPLAY_WIDGETS_ALLOW_WEBAPP_FALLBACK`
+- `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_ANDROID`
+- `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS`
+
+Defaults in [src/handsfree/config.py](../src/handsfree/config.py):
+
+| Variable | Default | Operational effect |
+|---|---:|---|
+| `HANDSFREE_DISPLAY_WIDGETS_ENABLED` | `true` | Master rollback flag. `false` suppresses display widget mobile action emission from the backend. |
+| `HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR` | `true` | Requires a permit policy decision before widget render/update/focus/reset actions are emitted. Denials are counted in display widget metrics. |
+| `HANDSFREE_DISPLAY_WIDGETS_ALLOW_WEBAPP_FALLBACK` | `true` | Allows render payloads to carry the display-webapp fallback metadata used when native DAT display is unavailable. |
+| `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_ANDROID` | `false` | Marks Android native DAT display rendering as enabled for rollout evidence and diagnostics. |
+| `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS` | `false` | Marks iOS native DAT display rendering as enabled for rollout evidence and diagnostics. |
+
+Display widget rollout observability uses these metric names in the `/v1/metrics` snapshot:
+
+| Metric | Meaning |
+|---|---|
+| `handsfree_display_widget_render_success_total` | Successful render count, grouped by render path. |
+| `handsfree_display_widget_policy_denial_total` | Trusted-descriptor or policy denials that blocked widget rendering. |
+| `handsfree_display_widget_bridge_error_total` | Mobile bridge errors reported for widget rendering. |
+| `handsfree_display_widget_render_latency_ms` | Display widget render latency samples in milliseconds, reported with p50/p95/count. |
+
 ## TTS/STT and OCR
 
 - `OPENAI_API_KEY`
@@ -201,4 +228,5 @@ GCP:
 - `HANDS_FREE_GITHUB_MODE` and `GITHUB_LIVE_MODE` are both honored for GitHub live-mode selection; `HANDS_FREE_GITHUB_MODE=fixtures` also forces fixture mode.
 - `HANDSFREE_GH_CLI_ENABLED=true` allows GitHub CLI-backed live auth/action flows when explicit live mode is requested and no `GITHUB_TOKEN` is present.
 - `HANDS_FREE_STT_PROVIDER` is the STT provider selector currently read by the backend.
+- `HANDSFREE_DISPLAY_WIDGETS_ENABLED=false` is the backend rollback switch for Meta glasses display widget rendering; pair it with the rollout evidence template before re-enabling native DAT paths.
 - If you add a new `getenv` key in backend code, update this file in the same PR.

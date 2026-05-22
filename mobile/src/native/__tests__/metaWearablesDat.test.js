@@ -13,8 +13,24 @@ describe('metaWearablesDat wrapper', () => {
 
     const module = await getMetaWearablesDat();
     const diagnostics = await module.getDiagnostics();
+    const renderedWidget = await module.renderDisplayWidget(
+      { id: 'handsfree.task-progress-widget' },
+      {
+        descriptor_cid: 'bafybeidescriptor',
+        widget_id: 'handsfree.task-progress-widget',
+        widget_cid: 'bafybeiwidget',
+        orb_receipt_cid: 'bafybeiorbreceipt',
+        correlation_id: 'corr-widget',
+      }
+    );
 
     expect(module.isAvailable()).toBe(false);
+    expect(typeof module.renderDisplayWidget).toBe('function');
+    expect(typeof module.updateDisplayWidget).toBe('function');
+    expect(typeof module.clearDisplayWidget).toBe('function');
+    expect(typeof module.focusDisplayWidget).toBe('function');
+    expect(typeof module.activateDisplayWidgetAction).toBe('function');
+    expect(typeof module.resetDisplayWidgetSession).toBe('function');
     expect(diagnostics).toEqual({
       available: false,
       platform: 'unknown',
@@ -64,6 +80,17 @@ describe('metaWearablesDat wrapper', () => {
       displayLastAction: null,
       displayLastStatus: null,
       displayLastUpdatedAt: null,
+    });
+    expect(renderedWidget).toMatchObject({
+      action: 'render_display_widget',
+      operation: 'render_widget',
+      supported: false,
+      reason: 'dat_native_display_unavailable',
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+      widgetCid: 'bafybeiwidget',
+      orbReceiptCid: 'bafybeiorbreceipt',
+      correlationId: 'corr-widget',
     });
   });
 

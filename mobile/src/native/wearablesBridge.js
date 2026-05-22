@@ -1,3 +1,168 @@
+const DISPLAY_WIDGET_FALLBACK = {
+  reason: 'dat_native_display_unavailable',
+  renderPath: 'mobile-card',
+  message: 'DAT native display is unavailable. Showing display widget content on phone.',
+};
+
+const DISPLAY_WIDGET_ACTIONS = {
+  renderDisplayWidget: {
+    action: 'render_display_widget',
+    operation: 'render_widget',
+    message: 'Meta Wearables DAT display widget rendering is unavailable in this build.',
+  },
+  updateDisplayWidget: {
+    action: 'update_display_widget',
+    operation: 'update_widget',
+    message: 'Meta Wearables DAT display widget updates are unavailable in this build.',
+  },
+  clearDisplayWidget: {
+    action: 'clear_display_widget',
+    operation: 'clear_widget',
+    message: 'Meta Wearables DAT display widget clearing is unavailable in this build.',
+  },
+  focusDisplayWidget: {
+    action: 'focus_display_widget',
+    operation: 'focus_next',
+    message: 'Meta Wearables DAT display widget focus is unavailable in this build.',
+  },
+  activateDisplayWidgetAction: {
+    action: 'activate_display_widget_action',
+    operation: 'activate',
+    message: 'Meta Wearables DAT display widget actions are unavailable in this build.',
+  },
+  resetDisplayWidgetSession: {
+    action: 'reset_display_widget_session',
+    operation: 'reset_session',
+    message: 'Meta Wearables DAT display widget session reset is unavailable in this build.',
+  },
+};
+
+function isObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function getDisplayWidgetPayload(input, context) {
+  if (isObject(context?.display_widget_action)) {
+    return context.display_widget_action;
+  }
+  if (isObject(context?.mobile_payload)) {
+    return context.mobile_payload;
+  }
+  if (isObject(context)) {
+    return context;
+  }
+  if (isObject(input?.display_widget_action)) {
+    return input.display_widget_action;
+  }
+  if (isObject(input?.mobile_payload)) {
+    return input.mobile_payload;
+  }
+  return isObject(input) ? input : {};
+}
+
+function getManifestObject(input, payload) {
+  if (isObject(payload?.manifest)) {
+    return payload.manifest;
+  }
+  return isObject(input) ? input : {};
+}
+
+function getDisplayWidgetMetadata(input, context = {}) {
+  const payload = getDisplayWidgetPayload(input, context);
+  const manifest = getManifestObject(input, payload);
+  const fallback = isObject(payload.fallback) ? payload.fallback : DISPLAY_WIDGET_FALLBACK;
+
+  return {
+    contract: payload.contract || null,
+    type: payload.type || null,
+    operation: payload.operation || null,
+    descriptorCid: payload.descriptor_cid || payload.descriptorCid || null,
+    interfaceCid: payload.interface_cid || payload.interfaceCid || null,
+    widgetId: payload.widget_id || payload.widgetId || manifest.widget_id || manifest.widgetId || manifest.id || null,
+    widgetCid: payload.widget_cid || payload.widgetCid || manifest.widget_cid || manifest.widgetCid || manifest.cid || null,
+    orbReceiptCid: payload.orb_receipt_cid || payload.orbReceiptCid || payload.receipt_cid || payload.receiptCid || null,
+    policyDecision: payload.policy_decision || payload.policyDecision || null,
+    correlationId: payload.correlation_id || payload.correlationId || null,
+    requestId: payload.request_id || payload.requestId || null,
+    issuedAt: payload.issued_at || payload.issuedAt || null,
+    fallback,
+  };
+}
+
+function createUnavailableMediaResult(action, message) {
+  return {
+    state: 'unavailable',
+    mode: 'unavailable',
+    supported: false,
+    action,
+    message,
+    targetConnectionState: 'unselected',
+    deviceId: null,
+    assetUri: null,
+    mimeType: null,
+    displayConnectionState: 'unavailable',
+    displayLastAction: action,
+    displayLastStatus: 'unavailable',
+    displayLastUpdatedAt: Date.now(),
+  };
+}
+
+function createUnsupportedDisplayWidgetResult(config, input, context = {}) {
+  const metadata = getDisplayWidgetMetadata(input, context);
+  const fallback = metadata.fallback || DISPLAY_WIDGET_FALLBACK;
+
+  return {
+    state: 'unavailable',
+    mode: 'unavailable',
+    supported: false,
+    action: config.action,
+    operation: metadata.operation || config.operation,
+    reason: fallback.reason || DISPLAY_WIDGET_FALLBACK.reason,
+    message: fallback.message || config.message,
+    renderPath: fallback.renderPath || DISPLAY_WIDGET_FALLBACK.renderPath,
+    targetConnectionState: 'unselected',
+    deviceId: null,
+    assetUri: null,
+    mimeType: null,
+    displayConnectionState: 'unavailable',
+    displayLastAction: config.action,
+    displayLastStatus: 'unsupported',
+    displayLastUpdatedAt: Date.now(),
+    contract: metadata.contract,
+    type: metadata.type,
+    descriptorCid: metadata.descriptorCid,
+    interfaceCid: metadata.interfaceCid,
+    widgetId: metadata.widgetId,
+    widgetCid: metadata.widgetCid,
+    orbReceiptCid: metadata.orbReceiptCid,
+    policyDecision: metadata.policyDecision,
+    correlationId: metadata.correlationId,
+    requestId: metadata.requestId,
+    issuedAt: metadata.issuedAt,
+    fallback,
+  };
+}
+
+function normalizeDisplayWidgetResult(response, config, input, context = {}) {
+  const fallbackResult = createUnsupportedDisplayWidgetResult(config, input, context);
+  const nativeResponse = isObject(response) ? response : {};
+  const supported = nativeResponse.supported ?? fallbackResult.supported;
+
+  return {
+    ...fallbackResult,
+    ...nativeResponse,
+    supported,
+    action: config.action,
+    operation: nativeResponse.operation || fallbackResult.operation,
+    reason: nativeResponse.reason ?? (supported ? null : fallbackResult.reason),
+    message: nativeResponse.message || fallbackResult.message,
+    renderPath: nativeResponse.renderPath || (supported ? 'native-dat' : fallbackResult.renderPath),
+    displayLastAction: nativeResponse.displayLastAction || config.action,
+    displayLastStatus: nativeResponse.displayLastStatus || (supported ? 'sent' : fallbackResult.displayLastStatus),
+    fallback: nativeResponse.fallback ?? (supported ? null : fallbackResult.fallback),
+  };
+}
+
 function createUnavailableBridge() {
   return {
     isAvailable: () => false,
@@ -127,99 +292,67 @@ function createUnavailableBridge() {
       targetConnectionState: 'unselected',
       deviceId: null,
     }),
-    capturePhoto: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'capture_photo',
-      message: 'Meta Wearables DAT photo capture is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-      displayConnectionState: 'unavailable',
-      displayLastAction: 'render_display_test',
-      displayLastStatus: 'unavailable',
-      displayLastUpdatedAt: Date.now(),
-    }),
-    startVideoStream: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'start_video_stream',
-      message: 'Meta Wearables DAT video streaming is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-      displayConnectionState: 'unavailable',
-      displayLastAction: 'clear_display',
-      displayLastStatus: 'unavailable',
-      displayLastUpdatedAt: Date.now(),
-    }),
-    stopVideoStream: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'stop_video_stream',
-      message: 'Meta Wearables DAT video streaming is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-      displayConnectionState: 'unavailable',
-      displayLastAction: 'play_display_video',
-      displayLastStatus: 'unavailable',
-      displayLastUpdatedAt: Date.now(),
-    }),
-    renderDisplayTest: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'render_display_test',
-      message: 'Meta Wearables DAT display rendering is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-      displayConnectionState: 'unavailable',
-      displayLastAction: 'reset_display_session',
-      displayLastStatus: 'unavailable',
-      displayLastUpdatedAt: Date.now(),
-    }),
-    clearDisplay: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'clear_display',
-      message: 'Meta Wearables DAT display clearing is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-    }),
-    playDisplayVideo: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'play_display_video',
-      message: 'Meta Wearables DAT display video playback is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-    }),
-    resetDisplaySession: async () => ({
-      state: 'unavailable',
-      mode: 'unavailable',
-      supported: false,
-      action: 'reset_display_session',
-      message: 'Meta Wearables DAT display session reset is unavailable in this build.',
-      targetConnectionState: 'unselected',
-      deviceId: null,
-      assetUri: null,
-      mimeType: null,
-    }),
+    capturePhoto: async () => createUnavailableMediaResult(
+      'capture_photo',
+      'Meta Wearables DAT photo capture is unavailable in this build.'
+    ),
+    startVideoStream: async () => createUnavailableMediaResult(
+      'start_video_stream',
+      'Meta Wearables DAT video streaming is unavailable in this build.'
+    ),
+    stopVideoStream: async () => createUnavailableMediaResult(
+      'stop_video_stream',
+      'Meta Wearables DAT video streaming is unavailable in this build.'
+    ),
+    renderDisplayTest: async () => createUnavailableMediaResult(
+      'render_display_test',
+      'Meta Wearables DAT display rendering is unavailable in this build.'
+    ),
+    clearDisplay: async () => createUnavailableMediaResult(
+      'clear_display',
+      'Meta Wearables DAT display clearing is unavailable in this build.'
+    ),
+    playDisplayVideo: async () => createUnavailableMediaResult(
+      'play_display_video',
+      'Meta Wearables DAT display video playback is unavailable in this build.'
+    ),
+    resetDisplaySession: async () => createUnavailableMediaResult(
+      'reset_display_session',
+      'Meta Wearables DAT display session reset is unavailable in this build.'
+    ),
+    renderDisplayWidget: async (manifest, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
+      manifest,
+      context
+    ),
+    updateDisplayWidget: async (patch, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.updateDisplayWidget,
+      patch,
+      context
+    ),
+    clearDisplayWidget: async (widgetId, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
+      { widget_id: widgetId },
+      context
+    ),
+    focusDisplayWidget: async (direction, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.focusDisplayWidget,
+      {
+        focus: { direction },
+        operation: direction === 'previous' ? 'focus_previous' : 'focus_next',
+      },
+      context
+    ),
+    activateDisplayWidgetAction: async (actionId, context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction,
+      { activated_action_id: actionId },
+      context
+    ),
+    resetDisplayWidgetSession: async (context) => createUnsupportedDisplayWidgetResult(
+      DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
+      context,
+      context
+    ),
     addStateListener: () => ({ remove() {} }),
     addBridgeStateListener: () => ({ remove() {} }),
   };
@@ -267,8 +400,104 @@ function wrapBridgeModule(module) {
     clearDisplay: async () => await module.clearDisplay(),
     playDisplayVideo: async (videoUrl) => await module.playDisplayVideo(videoUrl),
     resetDisplaySession: async () => await module.resetDisplaySession(),
-    addStateListener: (...args) => module.addStateListener(...args),
-    addBridgeStateListener: (...args) => module.addStateListener(...args),
+    renderDisplayWidget: async (manifest, context) => {
+      if (typeof module.renderDisplayWidget === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.renderDisplayWidget(manifest),
+          DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
+          manifest,
+          context
+        );
+      }
+      if (typeof module.renderDisplayTest === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.renderDisplayTest(),
+          DISPLAY_WIDGET_ACTIONS.renderDisplayWidget,
+          manifest,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.renderDisplayWidget, manifest, context);
+    },
+    updateDisplayWidget: async (patch, context) => {
+      if (typeof module.updateDisplayWidget === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.updateDisplayWidget(patch),
+          DISPLAY_WIDGET_ACTIONS.updateDisplayWidget,
+          patch,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.updateDisplayWidget, patch, context);
+    },
+    clearDisplayWidget: async (widgetId, context) => {
+      const input = { widget_id: widgetId };
+      if (typeof module.clearDisplayWidget === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.clearDisplayWidget(widgetId),
+          DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
+          input,
+          context
+        );
+      }
+      if (typeof module.clearDisplay === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.clearDisplay(),
+          DISPLAY_WIDGET_ACTIONS.clearDisplayWidget,
+          input,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.clearDisplayWidget, input, context);
+    },
+    focusDisplayWidget: async (direction, context) => {
+      const input = {
+        focus: { direction },
+        operation: direction === 'previous' ? 'focus_previous' : 'focus_next',
+      };
+      if (typeof module.focusDisplayWidget === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.focusDisplayWidget(direction),
+          DISPLAY_WIDGET_ACTIONS.focusDisplayWidget,
+          input,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.focusDisplayWidget, input, context);
+    },
+    activateDisplayWidgetAction: async (actionId, context) => {
+      const input = { activated_action_id: actionId };
+      if (typeof module.activateDisplayWidgetAction === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.activateDisplayWidgetAction(actionId),
+          DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction,
+          input,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.activateDisplayWidgetAction, input, context);
+    },
+    resetDisplayWidgetSession: async (context) => {
+      if (typeof module.resetDisplayWidgetSession === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.resetDisplayWidgetSession(),
+          DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
+          context,
+          context
+        );
+      }
+      if (typeof module.resetDisplaySession === 'function') {
+        return normalizeDisplayWidgetResult(
+          await module.resetDisplaySession(),
+          DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession,
+          context,
+          context
+        );
+      }
+      return createUnsupportedDisplayWidgetResult(DISPLAY_WIDGET_ACTIONS.resetDisplayWidgetSession, context, context);
+    },
+    addStateListener: (...args) => module.addStateListener?.(...args) || { remove() {} },
+    addBridgeStateListener: (...args) => module.addStateListener?.(...args) || { remove() {} },
   };
 }
 

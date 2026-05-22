@@ -95,7 +95,10 @@ class ActionCommandRequest(BaseModel):
             "Some client-local actions may also use mobile_* identifiers such as "
             "mobile_open_wearables_diagnostics, mobile_render_wearables_display_test, "
             "mobile_clear_wearables_display, mobile_play_wearables_display_video, "
-            "or mobile_reset_wearables_display_session."
+            "mobile_reset_wearables_display_session, mobile_render_display_widget, "
+            "mobile_update_display_widget, mobile_clear_display_widget, "
+            "mobile_focus_display_widget, mobile_activate_display_widget_action, "
+            "or mobile_reset_display_widget_session."
         ),
     )
     params: dict[str, Any] = Field(default_factory=dict)
@@ -120,6 +123,133 @@ class PendingAction(BaseModel):
     summary: str
 
 
+class MetaGlassesDisplayWidgetAction(str, Enum):
+    """Backend-visible display widget action names for mobile dispatch."""
+
+    RENDER = "render"
+    UPDATE = "update"
+    CLEAR = "clear"
+    FOCUS = "focus"
+    ACTIVATE = "activate"
+    RESET = "reset"
+
+
+class MetaGlassesDisplayWidgetOperation(str, Enum):
+    """Swissknife ORB display widget operations accepted by HandsFree."""
+
+    RENDER_WIDGET = "render_widget"
+    UPDATE_WIDGET = "update_widget"
+    CLEAR_WIDGET = "clear_widget"
+    FOCUS_NEXT = "focus_next"
+    FOCUS_PREVIOUS = "focus_previous"
+    ACTIVATE = "activate"
+    RESET_SESSION = "reset_session"
+
+
+class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
+    """Client-local mobile action IDs for display widget operations."""
+
+    RENDER = "mobile_render_display_widget"
+    UPDATE = "mobile_update_display_widget"
+    CLEAR = "mobile_clear_display_widget"
+    FOCUS = "mobile_focus_display_widget"
+    ACTIVATE = "mobile_activate_display_widget_action"
+    RESET = "mobile_reset_display_widget_session"
+
+
+class MetaGlassesDisplayWidgetFocusDirection(str, Enum):
+    """Display widget focus movement direction."""
+
+    NEXT = "next"
+    PREVIOUS = "previous"
+
+
+class MetaGlassesDisplayWidgetPolicyDecision(BaseModel):
+    """Policy outcome attached to a display widget action payload."""
+
+    outcome: Literal["permit", "deny", "require_confirmation"]
+    reasons: list[str] = Field(default_factory=list)
+    policy_id: str | None = None
+    source: str | None = "handsfree"
+
+
+class MetaGlassesDisplayWidgetFocusPayload(BaseModel):
+    """Focus metadata for a mobile display widget focus action."""
+
+    direction: MetaGlassesDisplayWidgetFocusDirection
+    action_id: str | None = None
+    focus_index: int | None = Field(default=None, ge=0)
+
+
+class MetaGlassesDisplayWidgetMobileActionPayload(BaseModel):
+    """Typed local mobile payload for Meta glasses display widget actions."""
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                "type": "mobile_render_display_widget",
+                "action": "render",
+                "operation": "render_widget",
+                "descriptor_cid": "bafybeidescriptor",
+                "interface_cid": "bafybeidescriptor",
+                "widget_id": "handsfree.task-progress-widget",
+                "widget_cid": "bafybeiwidget",
+                "orb_receipt_cid": "bafybeiorbreceipt",
+                "policy_decision": {
+                    "outcome": "permit",
+                    "reasons": ["trusted descriptor"],
+                    "policy_id": "display-widget-default",
+                    "source": "handsfree",
+                },
+                "correlation_id": "corr-widget-render",
+                "request_id": "render-1",
+                "issued_at": "2026-05-22T12:00:00Z",
+                "fallback": {
+                    "render_path": "mobile-card",
+                    "message": "Display unavailable; showing this widget on the phone.",
+                },
+            }
+        }
+    }
+
+    contract: Literal["handsfree.meta-glasses/display-widget-action@0.1.0"] = (
+        "handsfree.meta-glasses/display-widget-action@0.1.0"
+    )
+    type: MetaGlassesDisplayWidgetMobileActionType
+    action: MetaGlassesDisplayWidgetAction
+    operation: MetaGlassesDisplayWidgetOperation
+    descriptor_cid: str = Field(
+        ...,
+        min_length=1,
+        description="Descriptor or interface CID authorized by the ORB.",
+    )
+    interface_cid: str | None = Field(
+        default=None,
+        description="Swissknife interface CID; mirrors descriptor_cid when available.",
+    )
+    widget_id: str = Field(..., min_length=1)
+    widget_cid: str = Field(..., min_length=1)
+    orb_receipt_cid: str = Field(..., min_length=1)
+    policy_decision: MetaGlassesDisplayWidgetPolicyDecision
+    correlation_id: str = Field(..., min_length=1)
+    request_id: str | None = None
+    issued_at: str | None = None
+    state: dict[str, Any] | None = None
+    patch: dict[str, Any] | None = None
+    manifest: dict[str, Any] | None = None
+    focus: MetaGlassesDisplayWidgetFocusPayload | None = None
+    activated_action_id: str | None = None
+    fallback: dict[str, Any] | None = None
+
+    @model_validator(mode="after")
+    def default_interface_cid(self):
+        """Keep the Swissknife interface alias populated for mobile clients."""
+        if self.interface_cid is None:
+            self.interface_cid = self.descriptor_cid
+        return self
+
+
 class ActionItem(BaseModel):
     """Structured card action metadata."""
 
@@ -130,7 +260,10 @@ class ActionItem(BaseModel):
             "/v1/commands/action, while some app-local actions may use mobile_* IDs "
             "such as mobile_open_wearables_diagnostics, "
             "mobile_render_wearables_display_test, mobile_clear_wearables_display, "
-            "mobile_play_wearables_display_video, or mobile_reset_wearables_display_session."
+            "mobile_play_wearables_display_video, mobile_reset_wearables_display_session, "
+            "mobile_render_display_widget, mobile_update_display_widget, "
+            "mobile_clear_display_widget, mobile_focus_display_widget, "
+            "mobile_activate_display_widget_action, or mobile_reset_display_widget_session."
         ),
     )
     label: str
@@ -138,6 +271,10 @@ class ActionItem(BaseModel):
     execution_mode: str | None = None
     execution_mode_label: str | None = None
     params: dict[str, Any] = Field(default_factory=dict)
+    mobile_payload: "MetaGlassesDisplayWidgetMobileActionPayload | None" = Field(
+        default=None,
+        description="Typed client-local payload for Meta glasses display widget actions.",
+    )
 
 
 class UICard(BaseModel):
@@ -272,6 +409,144 @@ class CommandResponse(BaseModel):
                         "expires_at": "2026-01-17T01:00:00Z",
                         "summary": "Merge PR #456 in owner/repo",
                     },
+                    "follow_on_task": None,
+                },
+                {
+                    "status": "ok",
+                    "intent": {
+                        "name": "agent.result_details",
+                        "confidence": 1.0,
+                        "entities": {
+                            "task_id": "task-widget-1",
+                            "descriptor_cid": "bafybeidescriptor",
+                            "widget_cid": "bafybeiwidget",
+                            "orb_receipt_cid": "bafybeiorbreceipt",
+                        },
+                    },
+                    "spoken_text": "Display widget actions are ready.",
+                    "cards": [
+                        {
+                            "title": "Task Progress Widget",
+                            "subtitle": "Meta glasses display",
+                            "lines": [
+                                "descriptor: bafybeidescriptor",
+                                "widget: bafybeiwidget",
+                                "policy: permit",
+                            ],
+                            "action_items": [
+                                {
+                                    "id": "mobile_render_display_widget",
+                                    "label": "Render",
+                                    "phrase": "render the display widget",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_render_display_widget",
+                                        "action": "render",
+                                        "operation": "render_widget",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-render",
+                                    },
+                                },
+                                {
+                                    "id": "mobile_update_display_widget",
+                                    "label": "Update",
+                                    "phrase": "update the display widget",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_update_display_widget",
+                                        "action": "update",
+                                        "operation": "update_widget",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-update",
+                                    },
+                                },
+                                {
+                                    "id": "mobile_clear_display_widget",
+                                    "label": "Clear",
+                                    "phrase": "clear the display widget",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_clear_display_widget",
+                                        "action": "clear",
+                                        "operation": "clear_widget",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-clear",
+                                    },
+                                },
+                                {
+                                    "id": "mobile_focus_display_widget",
+                                    "label": "Focus",
+                                    "phrase": "focus the display widget",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_focus_display_widget",
+                                        "action": "focus",
+                                        "operation": "focus_next",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-focus",
+                                        "focus": {"direction": "next"},
+                                    },
+                                },
+                                {
+                                    "id": "mobile_activate_display_widget_action",
+                                    "label": "Activate",
+                                    "phrase": "activate the selected display widget action",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_activate_display_widget_action",
+                                        "action": "activate",
+                                        "operation": "activate",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-activate",
+                                    },
+                                },
+                                {
+                                    "id": "mobile_reset_display_widget_session",
+                                    "label": "Reset",
+                                    "phrase": "reset the display widget session",
+                                    "mobile_payload": {
+                                        "contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+                                        "type": "mobile_reset_display_widget_session",
+                                        "action": "reset",
+                                        "operation": "reset_session",
+                                        "descriptor_cid": "bafybeidescriptor",
+                                        "interface_cid": "bafybeidescriptor",
+                                        "widget_id": "handsfree.task-progress-widget",
+                                        "widget_cid": "bafybeiwidget",
+                                        "orb_receipt_cid": "bafybeiorbreceipt",
+                                        "policy_decision": {"outcome": "permit"},
+                                        "correlation_id": "corr-widget-reset",
+                                    },
+                                },
+                            ],
+                        }
+                    ],
+                    "pending_action": None,
                     "follow_on_task": None,
                 },
             ],

@@ -1,4 +1,4 @@
-"""Lightweight observability metrics for command flow.
+"""Lightweight observability metrics for command and display-widget flow.
 
 This module provides in-process metrics collection without external dependencies.
 Metrics are best-effort in multi-worker environments (each worker has its own state).
@@ -7,6 +7,11 @@ Metrics are best-effort in multi-worker environments (each worker has its own st
 import threading
 from dataclasses import dataclass, field
 from typing import Any
+
+
+def _metric_label(value: Any) -> str:
+    label = str(value or "").strip()
+    return label or "unknown"
 
 
 @dataclass
@@ -28,6 +33,12 @@ class MetricsCollector:
 
     # Latency samples for /v1/command endpoint (in milliseconds)
     command_latencies: list[float] = field(default_factory=list)
+
+    # Display widget rollout counters and latency samples.
+    display_widget_render_success_counts: dict[str, int] = field(default_factory=dict)
+    display_widget_policy_denial_counts: dict[str, int] = field(default_factory=dict)
+    display_widget_bridge_error_counts: dict[str, int] = field(default_factory=dict)
+    display_widget_render_latencies: list[float] = field(default_factory=list)
 
     # Thread lock for safe concurrent access
     _lock: threading.Lock = field(default_factory=threading.Lock)
@@ -64,6 +75,55 @@ class MetricsCollector:
         with self._lock:
             self.confirm_outcomes[outcome] = self.confirm_outcomes.get(outcome, 0) + 1
 
+    def record_display_widget_render_success(
+        self,
+        *,
+        render_path: str = "unknown",
+        latency_ms: float | None = None,
+    ) -> None:
+        """Record a successful display widget render."""
+        key = _metric_label(render_path)
+        with self._lock:
+            self.display_widget_render_success_counts[key] = (
+                self.display_widget_render_success_counts.get(key, 0) + 1
+            )
+            if latency_ms is not None and latency_ms >= 0:
+                self.display_widget_render_latencies.append(latency_ms)
+
+    def record_display_widget_policy_denial(
+        self,
+        *,
+        reason: str = "unknown",
+    ) -> None:
+        """Record a policy denial that prevented display widget rendering."""
+        key = _metric_label(reason)
+        with self._lock:
+            self.display_widget_policy_denial_counts[key] = (
+                self.display_widget_policy_denial_counts.get(key, 0) + 1
+            )
+
+    def record_display_widget_bridge_error(
+        self,
+        *,
+        error_code: str = "unknown",
+        latency_ms: float | None = None,
+    ) -> None:
+        """Record a mobile bridge error for a display widget render path."""
+        key = _metric_label(error_code)
+        with self._lock:
+            self.display_widget_bridge_error_counts[key] = (
+                self.display_widget_bridge_error_counts.get(key, 0) + 1
+            )
+            if latency_ms is not None and latency_ms >= 0:
+                self.display_widget_render_latencies.append(latency_ms)
+
+    def record_display_widget_render_latency(self, latency_ms: float) -> None:
+        """Record display widget render latency in milliseconds."""
+        if latency_ms < 0:
+            return
+        with self._lock:
+            self.display_widget_render_latencies.append(latency_ms)
+
     def _calculate_percentile(self, sorted_values: list[float], percentile: float) -> float | None:
         """Calculate a percentile from sorted values.
 
@@ -97,6 +157,19 @@ class MetricsCollector:
                 latency_p50 = self._calculate_percentile(sorted_latencies, 0.5)
                 latency_p95 = self._calculate_percentile(sorted_latencies, 0.95)
 
+            display_widget_latency_p50 = None
+            display_widget_latency_p95 = None
+            if self.display_widget_render_latencies:
+                sorted_display_widget_latencies = sorted(self.display_widget_render_latencies)
+                display_widget_latency_p50 = self._calculate_percentile(
+                    sorted_display_widget_latencies,
+                    0.5,
+                )
+                display_widget_latency_p95 = self._calculate_percentile(
+                    sorted_display_widget_latencies,
+                    0.95,
+                )
+
             return {
                 "intent_counts": dict(self.intent_counts),
                 "status_counts": dict(self.status_counts),
@@ -105,6 +178,29 @@ class MetricsCollector:
                     "p50": latency_p50,
                     "p95": latency_p95,
                     "count": len(self.command_latencies),
+                },
+                "display_widget_metrics": {
+                    "render_success_total": sum(
+                        self.display_widget_render_success_counts.values()
+                    ),
+                    "render_success_counts": dict(
+                        self.display_widget_render_success_counts
+                    ),
+                    "policy_denial_total": sum(
+                        self.display_widget_policy_denial_counts.values()
+                    ),
+                    "policy_denial_counts": dict(
+                        self.display_widget_policy_denial_counts
+                    ),
+                    "bridge_error_total": sum(
+                        self.display_widget_bridge_error_counts.values()
+                    ),
+                    "bridge_error_counts": dict(self.display_widget_bridge_error_counts),
+                    "render_latency_ms": {
+                        "p50": display_widget_latency_p50,
+                        "p95": display_widget_latency_p95,
+                        "count": len(self.display_widget_render_latencies),
+                    },
                 },
             }
 
@@ -115,6 +211,10 @@ class MetricsCollector:
             self.status_counts.clear()
             self.confirm_outcomes.clear()
             self.command_latencies.clear()
+            self.display_widget_render_success_counts.clear()
+            self.display_widget_policy_denial_counts.clear()
+            self.display_widget_bridge_error_counts.clear()
+            self.display_widget_render_latencies.clear()
 
 
 # Global metrics collector instance

@@ -19,9 +19,11 @@ from typing import Any
 from handsfree.cli.executor import CLIExecutor
 from handsfree.cli.parsers import parse_output
 from handsfree.commands.profiles import Profile, ProfileConfig
+from handsfree.config import get_meta_glasses_display_widget_config
 from handsfree.db.agent_tasks import AgentTask
 from handsfree.ipfs_datasets_routers import get_embeddings_router
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
+from handsfree.metrics import get_metrics_collector
 from handsfree.mcp import (
     MCPClient,
     MCPClientError,
@@ -70,6 +72,315 @@ WEARABLES_MOBILE_RESET_DISPLAY_ACTION = {
     "label": "Reset Display Session",
     "phrase": "reset the wearables display session",
 }
+DISPLAY_WIDGET_ACTION_CONTRACT = "handsfree.meta-glasses/display-widget-action@0.1.0"
+DISPLAY_WIDGET_ACTION_DEFINITIONS: tuple[dict[str, str], ...] = (
+    {
+        "action": "render",
+        "operation": "render_widget",
+        "id": "mobile_render_display_widget",
+        "label": "Render Widget",
+        "phrase": "render the display widget",
+    },
+    {
+        "action": "update",
+        "operation": "update_widget",
+        "id": "mobile_update_display_widget",
+        "label": "Update Widget",
+        "phrase": "update the display widget",
+    },
+    {
+        "action": "clear",
+        "operation": "clear_widget",
+        "id": "mobile_clear_display_widget",
+        "label": "Clear Widget",
+        "phrase": "clear the display widget",
+    },
+    {
+        "action": "focus",
+        "operation": "focus_next",
+        "id": "mobile_focus_display_widget",
+        "label": "Focus Widget",
+        "phrase": "focus the display widget",
+    },
+    {
+        "action": "activate",
+        "operation": "activate",
+        "id": "mobile_activate_display_widget_action",
+        "label": "Activate Widget",
+        "phrase": "activate the selected display widget action",
+    },
+    {
+        "action": "reset",
+        "operation": "reset_session",
+        "id": "mobile_reset_display_widget_session",
+        "label": "Reset Widget",
+        "phrase": "reset the display widget session",
+    },
+)
+
+
+def _nonempty_string(value: Any) -> str | None:
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
+
+
+def _first_nonempty_string(*values: Any) -> str | None:
+    for value in values:
+        normalized = _nonempty_string(value)
+        if normalized is not None:
+            return normalized
+    return None
+
+
+def _record_or_empty(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
+
+
+def _normalize_display_widget_policy_decision(policy_decision: Any) -> dict[str, Any] | None:
+    """Normalize HandsFree and Swissknife policy decisions into one wire shape."""
+    if policy_decision is None:
+        return None
+
+    raw_reasons: Any = None
+    policy_id: str | None = None
+    source: str | None = "handsfree"
+    if isinstance(policy_decision, dict):
+        raw_outcome = (
+            policy_decision.get("outcome")
+            or policy_decision.get("decision")
+            or policy_decision.get("policy_outcome")
+        )
+        raw_reasons = policy_decision.get("reasons", policy_decision.get("reason"))
+        policy_id = _nonempty_string(policy_decision.get("policy_id"))
+        source = _nonempty_string(policy_decision.get("source")) or source
+    else:
+        raw_outcome = policy_decision
+
+    outcome = str(raw_outcome or "").strip().lower()
+    outcome = {
+        "allow": "permit",
+        "allowed": "permit",
+        "approved": "permit",
+        "confirm": "require_confirmation",
+        "confirmation": "require_confirmation",
+        "needs_confirmation": "require_confirmation",
+        "require-confirmation": "require_confirmation",
+        "required_confirmation": "require_confirmation",
+        "policy_denied": "deny",
+        "denied": "deny",
+    }.get(outcome, outcome)
+    if outcome not in {"permit", "deny", "require_confirmation"}:
+        return None
+
+    reasons: list[str] = []
+    if isinstance(raw_reasons, list):
+        reasons = [str(reason) for reason in raw_reasons if str(reason).strip()]
+    elif isinstance(raw_reasons, str) and raw_reasons.strip():
+        reasons = [raw_reasons.strip()]
+
+    normalized: dict[str, Any] = {"outcome": outcome}
+    if reasons:
+        normalized["reasons"] = reasons
+    if policy_id:
+        normalized["policy_id"] = policy_id
+    if source:
+        normalized["source"] = source
+    return normalized
+
+
+def build_meta_glasses_display_widget_action_items(
+    *,
+    descriptor_cid: str,
+    widget_cid: str,
+    orb_receipt_cid: str,
+    policy_decision: dict[str, Any] | str,
+    widget_id: str,
+    correlation_id: str,
+    interface_cid: str | None = None,
+    request_id: str | None = None,
+    issued_at: str | None = None,
+    state: dict[str, Any] | None = None,
+    patch: dict[str, Any] | None = None,
+    manifest: dict[str, Any] | None = None,
+    focus: dict[str, Any] | None = None,
+    activated_action_id: str | None = None,
+    fallback: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Build local mobile action items for Meta glasses display widget operations."""
+    required_values = {
+        "descriptor_cid": _nonempty_string(descriptor_cid),
+        "widget_cid": _nonempty_string(widget_cid),
+        "orb_receipt_cid": _nonempty_string(orb_receipt_cid),
+        "widget_id": _nonempty_string(widget_id),
+        "correlation_id": _nonempty_string(correlation_id),
+    }
+    missing = [key for key, value in required_values.items() if value is None]
+    normalized_policy = _normalize_display_widget_policy_decision(policy_decision)
+    if normalized_policy is None:
+        missing.append("policy_decision")
+    if missing:
+        raise ValueError(f"Missing display widget action contract fields: {', '.join(missing)}")
+
+    resolved_issued_at = issued_at or _now_iso()
+    resolved_interface_cid = _nonempty_string(interface_cid) or required_values["descriptor_cid"]
+    action_items: list[dict[str, Any]] = []
+    for definition in DISPLAY_WIDGET_ACTION_DEFINITIONS:
+        payload: dict[str, Any] = {
+            "contract": DISPLAY_WIDGET_ACTION_CONTRACT,
+            "type": definition["id"],
+            "action": definition["action"],
+            "operation": definition["operation"],
+            "descriptor_cid": required_values["descriptor_cid"],
+            "interface_cid": resolved_interface_cid,
+            "widget_id": required_values["widget_id"],
+            "widget_cid": required_values["widget_cid"],
+            "orb_receipt_cid": required_values["orb_receipt_cid"],
+            "policy_decision": normalized_policy,
+            "correlation_id": required_values["correlation_id"],
+            "issued_at": resolved_issued_at,
+        }
+        if request_id:
+            payload["request_id"] = request_id
+        if definition["action"] == "render":
+            if state:
+                payload["state"] = state
+            if manifest:
+                payload["manifest"] = manifest
+            if fallback:
+                payload["fallback"] = fallback
+        elif definition["action"] == "update" and patch:
+            payload["patch"] = patch
+        elif definition["action"] == "focus":
+            payload["focus"] = focus or {"direction": "next"}
+        elif definition["action"] == "activate" and activated_action_id:
+            payload["activated_action_id"] = activated_action_id
+
+        params = {
+            "descriptor_cid": required_values["descriptor_cid"],
+            "widget_cid": required_values["widget_cid"],
+            "orb_receipt_cid": required_values["orb_receipt_cid"],
+            "policy_decision": normalized_policy,
+            "display_widget_action": payload,
+        }
+        action_items.append(
+            {
+                "id": definition["id"],
+                "label": definition["label"],
+                "phrase": definition["phrase"],
+                "params": params,
+                "mobile_payload": payload,
+            }
+        )
+    return action_items
+
+
+def _display_widget_action_items_from_context(
+    client_context: dict[str, Any],
+    receipt: dict[str, Any],
+    envelope: Any,
+) -> list[dict[str, Any]]:
+    mobile_action = _record_or_empty(receipt.get("mobile_action"))
+    artifact_refs = getattr(envelope, "artifact_refs", None)
+    trace = getattr(envelope, "trace", None)
+    descriptor_cid = _first_nonempty_string(
+        client_context.get("display_widget_descriptor_cid"),
+        client_context.get("display_widget_interface_cid"),
+        receipt.get("descriptor_cid"),
+        receipt.get("interface_cid"),
+        receipt.get("source_interface_cid"),
+        mobile_action.get("descriptor_cid"),
+        mobile_action.get("interface_cid"),
+    )
+    widget_cid = _first_nonempty_string(
+        client_context.get("display_widget_cid"),
+        receipt.get("widget_cid"),
+        mobile_action.get("widget_cid"),
+    )
+    orb_receipt_cid = _first_nonempty_string(
+        client_context.get("display_widget_orb_receipt_cid"),
+        client_context.get("display_widget_receipt_cid"),
+        receipt.get("orb_receipt_cid"),
+        receipt.get("receipt_cid"),
+        getattr(artifact_refs, "receipt_ref", None),
+    )
+    widget_id = _first_nonempty_string(
+        client_context.get("display_widget_id"),
+        receipt.get("widget_id"),
+        mobile_action.get("widget_id"),
+    )
+    correlation_id = _first_nonempty_string(
+        client_context.get("display_widget_correlation_id"),
+        receipt.get("correlation_id"),
+        mobile_action.get("correlation_id"),
+        getattr(trace, "request_id", None),
+    )
+    policy_decision = (
+        client_context.get("display_widget_policy_decision")
+        or receipt.get("policy_decision")
+        or receipt.get("policy_outcome")
+        or mobile_action.get("policy_decision")
+    )
+    if not all([descriptor_cid, widget_cid, orb_receipt_cid, widget_id, correlation_id]):
+        return []
+
+    display_widget_config = get_meta_glasses_display_widget_config()
+    if not display_widget_config.enabled:
+        return []
+
+    normalized_policy = _normalize_display_widget_policy_decision(policy_decision)
+    if display_widget_config.require_trusted_descriptor:
+        if normalized_policy is None:
+            get_metrics_collector().record_display_widget_policy_denial(
+                reason="missing_or_invalid_policy_decision",
+            )
+            return []
+        if normalized_policy["outcome"] != "permit":
+            get_metrics_collector().record_display_widget_policy_denial(
+                reason=normalized_policy["outcome"],
+            )
+            return []
+
+    activated_action = _record_or_empty(receipt.get("activated_action"))
+    activated_action_id = _first_nonempty_string(
+        client_context.get("display_widget_activated_action_id"),
+        receipt.get("activated_action_id"),
+        activated_action.get("action_id"),
+        activated_action.get("backend_action_id"),
+        mobile_action.get("activated_action_id"),
+    )
+    fallback = (
+        _record_or_empty(receipt.get("fallback"))
+        or _record_or_empty(mobile_action.get("fallback"))
+        or None
+    )
+    if not display_widget_config.allow_webapp_fallback:
+        fallback = None
+
+    try:
+        return build_meta_glasses_display_widget_action_items(
+            descriptor_cid=descriptor_cid,
+            interface_cid=_first_nonempty_string(receipt.get("interface_cid"), mobile_action.get("interface_cid")),
+            widget_cid=widget_cid,
+            orb_receipt_cid=orb_receipt_cid,
+            policy_decision=normalized_policy or policy_decision,
+            widget_id=widget_id,
+            correlation_id=correlation_id,
+            request_id=_first_nonempty_string(receipt.get("request_id"), mobile_action.get("request_id")),
+            issued_at=_first_nonempty_string(receipt.get("issued_at"), mobile_action.get("issued_at")),
+            state=_record_or_empty(mobile_action.get("state")) or None,
+            patch=_record_or_empty(receipt.get("patch")) or _record_or_empty(mobile_action.get("patch")) or None,
+            manifest=(
+                _record_or_empty(receipt.get("manifest"))
+                or _record_or_empty(mobile_action.get("manifest"))
+                or None
+            ),
+            focus=_record_or_empty(receipt.get("focus")) or _record_or_empty(mobile_action.get("focus")) or None,
+            activated_action_id=activated_action_id,
+            fallback=fallback,
+        )
+    except ValueError:
+        return []
 
 
 class AgentProvider(ABC):
@@ -1590,7 +1901,7 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
         },
         "receipt": envelope.structured_output,
     }
-    mobile_actions: list[dict[str, str]] = list(WEARABLES_MOBILE_BASE_ACTIONS)
+    mobile_actions: list[dict[str, Any]] = list(WEARABLES_MOBILE_BASE_ACTIONS)
     if display_capable:
         mobile_actions.extend(
             [
@@ -1598,6 +1909,9 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
                 WEARABLES_MOBILE_PLAY_DISPLAY_VIDEO_ACTION,
                 WEARABLES_MOBILE_RESET_DISPLAY_ACTION,
             ]
+        )
+        mobile_actions.extend(
+            _display_widget_action_items_from_context(client_context, receipt, envelope)
         )
 
     follow_up_actions = [

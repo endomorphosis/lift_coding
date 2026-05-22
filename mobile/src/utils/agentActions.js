@@ -124,11 +124,95 @@ export async function executeStructuredAction({
   };
 }
 
+function navigateToWearablesDiagnostics(navigation) {
+  if (navigation?.navigate) {
+    navigation.navigate('Glasses');
+  }
+}
+
+function getDisplayWidgetActionPayload(actionItem) {
+  const params = actionItem?.params || {};
+  if (params.display_widget_action && typeof params.display_widget_action === 'object') {
+    return params.display_widget_action;
+  }
+  if (actionItem?.mobile_payload && typeof actionItem.mobile_payload === 'object') {
+    return actionItem.mobile_payload;
+  }
+  if (params.mobile_payload && typeof params.mobile_payload === 'object') {
+    return params.mobile_payload;
+  }
+  return params;
+}
+
+function getDisplayWidgetId(payload) {
+  return payload?.widget_id || payload?.widgetId || payload?.manifest?.widget_id || payload?.manifest?.id || null;
+}
+
+function getDisplayWidgetFocusDirection(payload) {
+  if (payload?.focus?.direction) {
+    return payload.focus.direction;
+  }
+  if (payload?.operation === 'focus_previous') {
+    return 'previous';
+  }
+  return payload?.direction || 'next';
+}
+
+function getDisplayWidgetActivatedActionId(payload) {
+  return (
+    payload?.activated_action_id ||
+    payload?.activatedActionId ||
+    payload?.action_id ||
+    payload?.actionId ||
+    null
+  );
+}
+
+const DISPLAY_WIDGET_ACTION_IDS = new Set([
+  'mobile_render_display_widget',
+  'mobile_update_display_widget',
+  'mobile_clear_display_widget',
+  'mobile_focus_display_widget',
+  'mobile_activate_display_widget_action',
+  'mobile_reset_display_widget_session',
+]);
+
+async function executeLocalDisplayWidgetAction({ actionItem, navigation }) {
+  if (!DISPLAY_WIDGET_ACTION_IDS.has(actionItem?.id)) {
+    return { handled: false };
+  }
+
+  const payload = getDisplayWidgetActionPayload(actionItem);
+  const dat = await getMetaWearablesDat();
+  let response;
+
+  if (actionItem?.id === 'mobile_render_display_widget') {
+    response = await dat.renderDisplayWidget(payload?.manifest || payload, payload);
+  } else if (actionItem?.id === 'mobile_update_display_widget') {
+    response = await dat.updateDisplayWidget(payload?.patch || payload, payload);
+  } else if (actionItem?.id === 'mobile_clear_display_widget') {
+    response = await dat.clearDisplayWidget(getDisplayWidgetId(payload), payload);
+  } else if (actionItem?.id === 'mobile_focus_display_widget') {
+    response = await dat.focusDisplayWidget(getDisplayWidgetFocusDirection(payload), payload);
+  } else if (actionItem?.id === 'mobile_activate_display_widget_action') {
+    response = await dat.activateDisplayWidgetAction(getDisplayWidgetActivatedActionId(payload), payload);
+  } else if (actionItem?.id === 'mobile_reset_display_widget_session') {
+    response = await dat.resetDisplayWidgetSession(payload);
+  } else {
+    return { handled: false };
+  }
+
+  navigateToWearablesDiagnostics(navigation);
+  return {
+    handled: true,
+    message: response?.message || 'Display widget action requested.',
+    response,
+  };
+}
+
 export async function executeLocalStructuredAction({ actionItem, navigation }) {
   if (actionItem?.id === 'mobile_open_wearables_diagnostics') {
-    if (navigation?.navigate) {
-      navigation.navigate('Glasses');
-    }
+    navigateToWearablesDiagnostics(navigation);
 
     return {
       handled: true,
@@ -141,9 +225,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     const dat = await getMetaWearablesDat();
     const response = await dat.renderDisplayTest();
     const message = response?.message || 'Display test rendering requested (not yet implemented in DAT bridge).';
-    if (navigation?.navigate) {
-      navigation.navigate('Glasses');
-    }
+    navigateToWearablesDiagnostics(navigation);
     return {
       handled: true,
       message,
@@ -155,9 +237,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     const dat = await getMetaWearablesDat();
     const response = await dat.clearDisplay();
     const message = response?.message || 'Display clear requested (not yet implemented in DAT bridge).';
-    if (navigation?.navigate) {
-      navigation.navigate('Glasses');
-    }
+    navigateToWearablesDiagnostics(navigation);
     return {
       handled: true,
       message,
@@ -170,9 +250,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     const videoUrl = String(actionItem?.params?.video_url || 'https://example.com/demo.mp4');
     const response = await dat.playDisplayVideo(videoUrl);
     const message = response?.message || 'Display video playback requested.';
-    if (navigation?.navigate) {
-      navigation.navigate('Glasses');
-    }
+    navigateToWearablesDiagnostics(navigation);
     return {
       handled: true,
       message,
@@ -184,14 +262,17 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
     const dat = await getMetaWearablesDat();
     const response = await dat.resetDisplaySession();
     const message = response?.message || 'Display session reset requested.';
-    if (navigation?.navigate) {
-      navigation.navigate('Glasses');
-    }
+    navigateToWearablesDiagnostics(navigation);
     return {
       handled: true,
       message,
       response,
     };
+  }
+
+  const displayWidgetOutcome = await executeLocalDisplayWidgetAction({ actionItem, navigation });
+  if (displayWidgetOutcome.handled) {
+    return displayWidgetOutcome;
   }
 
   if (actionItem?.id !== 'mobile_reconnect_wearables_target') {
@@ -207,9 +288,7 @@ export async function executeLocalStructuredAction({ actionItem, navigation }) {
       ? 'No selected wearables target is available to reconnect.'
       : `Reconnect attempted for ${targetLabel}. State: ${connectionState}.`;
 
-  if (navigation?.navigate) {
-    navigation.navigate('Glasses');
-  }
+  navigateToWearablesDiagnostics(navigation);
 
   return {
     handled: true,

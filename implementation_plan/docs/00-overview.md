@@ -17,6 +17,8 @@ short, safe, spoken feedback.
 - MCP and IPFS toolchain integration for Meta glasses workflows:
   - `implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md`
   - `implementation_plan/docs/13-nl-prompt-to-hierarchical-tools-ipfs-datasets.md`
+- Swissknife descriptor/ORB-driven Meta display widgets:
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`
 
 ## Non-goals (for MVP)
 - Full IDE-in-the-glasses

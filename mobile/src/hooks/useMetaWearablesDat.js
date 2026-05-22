@@ -164,6 +164,39 @@ export function useMetaWearablesDat(options = {}) {
     return await runAction('resetDisplaySession', 'Wearables DAT display session reset failed');
   }, [runAction]);
 
+  const renderDisplayWidget = useCallback(async (manifest, context) => {
+    return await runAction('renderDisplayWidget', 'Wearables DAT display widget render failed', manifest, context);
+  }, [runAction]);
+
+  const updateDisplayWidget = useCallback(async (patch, context) => {
+    return await runAction('updateDisplayWidget', 'Wearables DAT display widget update failed', patch, context);
+  }, [runAction]);
+
+  const clearDisplayWidget = useCallback(async (widgetId, context) => {
+    return await runAction('clearDisplayWidget', 'Wearables DAT display widget clear failed', widgetId, context);
+  }, [runAction]);
+
+  const focusDisplayWidget = useCallback(async (direction, context) => {
+    return await runAction('focusDisplayWidget', 'Wearables DAT display widget focus failed', direction, context);
+  }, [runAction]);
+
+  const activateDisplayWidgetAction = useCallback(async (actionId, context) => {
+    return await runAction(
+      'activateDisplayWidgetAction',
+      'Wearables DAT display widget action activation failed',
+      actionId,
+      context
+    );
+  }, [runAction]);
+
+  const resetDisplayWidgetSession = useCallback(async (context) => {
+    return await runAction(
+      'resetDisplayWidgetSession',
+      'Wearables DAT display widget session reset failed',
+      context
+    );
+  }, [runAction]);
+
   return {
     isAvailable,
     diagnostics,
@@ -183,5 +216,11 @@ export function useMetaWearablesDat(options = {}) {
     clearDisplay,
     playDisplayVideo,
     resetDisplaySession,
+    renderDisplayWidget,
+    updateDisplayWidget,
+    clearDisplayWidget,
+    focusDisplayWidget,
+    activateDisplayWidgetAction,
+    resetDisplayWidgetSession,
   };
 }

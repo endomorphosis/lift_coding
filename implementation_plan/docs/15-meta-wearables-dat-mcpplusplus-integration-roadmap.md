@@ -41,6 +41,17 @@ Planning assumptions in this document are based on the current checked-out upstr
 
 If any upstream contract or packaging model changes after these revisions, update this roadmap before starting platform-specific implementation.
 
+## Display widget source alignment (2026-05-22)
+
+MGW-001 adds the following source pins and guardrails for the Swissknife-driven Meta DAT display-widget plan:
+
+- Swissknife baseline: local package `swissknife@0.0.53` checked out at `/home/barberb/lift_coding/swissknife`, commit `5b4598e15709203c0fe2265fdab2f51ea822b0f2`.
+- Meta DAT Android display sample baseline: `samples/DisplayAccess` from the initialized local checkout at `/home/barberb/lift_coding/external/meta-wearables-dat-android`, commit `25f3a6d4479b7a4a72f877977b865a11af990d04`.
+- Meta DAT iOS display sample baseline: `samples/DisplayAccess` from the initialized local checkout at `/home/barberb/lift_coding/external/meta-wearables-dat-ios`, commit `a739e94181221e7f321304273bcda2272821b163`.
+- Meta display APIs remain developer preview surfaces. Release-channel access, organization enablement, app-model metadata, platform entitlements, and package registry permissions can change independently of this repository; implementation tasks must gate native display code with runtime capability detection and operator-visible diagnostics.
+- Android `mwdat-display` packaging stays optional until the target release channel confirms GitHub Packages access and artifact availability. DAT-disabled builds must continue to compile without resolving `mwdat-display`.
+- Every display widget must define a native-display-unavailable fallback. When DAT native display is unavailable, mobile should return a structured `display unavailable` response and route to a safe fallback such as display-webapp preview, simulator preview, mobile card, notification, or audio-first summary instead of failing silently.
+
 ## Current codebase facts that shape the plan
 
 ### Mobile app

@@ -2,16 +2,26 @@ import { clearWearablesBridgeCache, getWearablesBridge } from './wearablesBridge
 
 let cached = null;
 
+function createMetaWearablesDatAdapter(bridge) {
+  return {
+    ...bridge,
+    isDatAvailable: async () => bridge.isBridgeAvailable(),
+    renderDisplayWidget: (...args) => bridge.renderDisplayWidget(...args),
+    updateDisplayWidget: (...args) => bridge.updateDisplayWidget(...args),
+    clearDisplayWidget: (...args) => bridge.clearDisplayWidget(...args),
+    focusDisplayWidget: (...args) => bridge.focusDisplayWidget(...args),
+    activateDisplayWidgetAction: (...args) => bridge.activateDisplayWidgetAction(...args),
+    resetDisplayWidgetSession: (...args) => bridge.resetDisplayWidgetSession(...args),
+  };
+}
+
 export async function getMetaWearablesDat() {
   if (cached) {
     return cached;
   }
 
   const bridge = await getWearablesBridge();
-  cached = {
-    ...bridge,
-    isDatAvailable: async () => bridge.isBridgeAvailable(),
-  };
+  cached = createMetaWearablesDatAdapter(bridge);
   return cached;
 }
 

@@ -1,0 +1,179 @@
+# Swissknife Meta Glasses Display Widgets Todo Board
+
+This is the machine-readable backlog for the ipfs_datasets_py todo supervisor/daemon.
+It operationalizes `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`.
+
+Run from the repository root:
+
+```bash
+python3 scripts/meta_glasses_display_todo_daemon.py --once
+python3 scripts/meta_glasses_display_todo_supervisor.py --once
+python3 scripts/meta_glasses_display_llm_router.py --task-id MGW-001
+```
+
+To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
+
+## MGW-000 Bootstrap supervised display-widget backlog processing
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: ops
+- Depends on:
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md, scripts/meta_glasses_display_todo_daemon.py, scripts/meta_glasses_display_todo_supervisor.py, scripts/meta_glasses_display_llm_router.py, tests/test_meta_glasses_display_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_datasets python3 scripts/meta_glasses_display_todo_daemon.py --once; PYTHONPATH=external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once; PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: The display-widget roadmap is available as a daemon-parseable MGW task board with wrapper scripts and parser tests.
+
+## MGW-001 Record source alignment and version guardrails
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: ops
+- Depends on: MGW-000
+- Outputs: implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: rg -n "Swissknife|Meta DAT|developer preview|mwdat-display|display unavailable" implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Acceptance: The roadmap records the Swissknife version/commit, Meta DAT sample revisions, developer-preview caveats, optional mwdat-display packaging, and a native-display-unavailable fallback.
+
+## MGW-002 Define the Swissknife glasses display profile
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-001
+- Outputs: swissknife/src/services/meta-glasses-display-profile.ts, swissknife/test/mcp-plus-plus/meta-glasses-display-profile.test.ts
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-display-profile.ts src/services/mcp-ui-profile.ts src/services/mcp-idl.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-display-profile.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: A descriptor validates as both a Swissknife MCP UI profile and a Meta glasses display widget profile, with stable validation error codes for unsafe display contracts.
+
+## MGW-003 Build descriptor, native, and lifecycle fixture foundations
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: MGW-002
+- Outputs: swissknife/test/fixtures/meta-glasses-display/valid-task-progress-widget.json, swissknife/test/fixtures/meta-glasses-display/invalid-widget-cases.json, mobile/src/native/__fixtures__/metaWearablesDisplayStates.js
+- Validation: cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-display-profile.test.ts --config=config/jest/jest.config.cjs --runInBand; cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js
+- Acceptance: Hardware-free fixtures cover valid and invalid descriptors, DAT unavailable/disabled/unsupported/ready states, Android DisplayAccess-style lifecycle states, and iOS fallback states.
+
+## MGW-004 Implement deterministic widget schema and compiler
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-002, MGW-003
+- Outputs: swissknife/src/services/meta-glasses-widget-compiler.ts, swissknife/test/mcp-plus-plus/meta-glasses-widget-compiler.test.ts
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-display-profile.ts src/services/meta-glasses-widget-compiler.ts src/services/mcp-idl.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-widget-compiler.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Valid widget descriptors compile to deterministic manifests with widget CIDs, viewport, regions, focus order, actions, media, state, TTL, and fallback metadata; unsafe layouts are rejected.
+
+## MGW-005 Add ORB widget runtime and policy handling
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-004
+- Outputs: swissknife/src/services/meta-glasses-display-orb-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-display-orb-adapter.test.ts
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-display-orb-adapter.ts src/services/mcp-orb-capability-router.ts src/services/meta-glasses-widget-compiler.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-display-orb-adapter.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: ORB handlers cover render/update/clear/focus/activate/reset/video/stream operations with receipts, policy denials, idempotency, rate limits, retry, circuit breaker behavior, and stream recovery tests.
+
+## MGW-006 Add HandsFree backend widget action contract
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: backend
+- Depends on: MGW-004
+- Outputs: src/handsfree/models.py, src/handsfree/agent_providers.py, spec/openapi.yaml, tests/test_meta_glasses_display_widget_actions.py
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_display_widget_actions.py tests/test_api_contract.py
+- Acceptance: Backend models and OpenAPI examples support display widget render/update/clear/focus/activate/reset actions with descriptor CID, widget CID, ORB receipt CID, policy decision, and mobile action payloads.
+
+## MGW-007 Add mobile bridge widget methods and mocked fallback states
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: mobile
+- Depends on: MGW-003, MGW-006
+- Outputs: mobile/src/native/wearablesBridge.js, mobile/src/native/metaWearablesDat.js, mobile/src/hooks/useMetaWearablesDat.js, mobile/src/utils/agentActions.js, mobile/src/native/__tests__/wearablesBridge.test.js, mobile/src/utils/__tests__/agentActions.test.js
+- Validation: cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js src/native/__tests__/metaWearablesDat.test.js src/utils/__tests__/agentActions.test.js
+- Acceptance: Mobile exposes renderDisplayWidget/updateDisplayWidget/clearDisplayWidget/focusDisplayWidget/activateDisplayWidgetAction/resetDisplayWidgetSession and returns structured unsupported responses when native DAT display is unavailable.
+
+## MGW-008 Build full hardware-free descriptor-to-mobile-render harness
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: MGW-005, MGW-006, MGW-007
+- Outputs: tests/test_meta_glasses_display_widget_harness.py, mobile/src/utils/__tests__/displayWidgetHarness.test.js, swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_display_widget_harness.py; cd mobile && npm test -- --runInBand src/utils/__tests__/displayWidgetHarness.test.js; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-display-harness.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: A complete lifecycle can run without hardware: publish descriptor, compile manifest, ORB discover/bind/invoke, backend serialize action, mobile execute action, mocked bridge render/update/clear, and receipt/diagnostics update.
+
+## MGW-009 Add display webapp fallback renderer and readiness gates
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ui
+- Depends on: MGW-004, MGW-006
+- Outputs: swissknife/src/services/meta-glasses-webapp-renderer.ts, config/display_webapp_readiness.meta_glasses_widget.example.json, tests/test_display_webapp_widget_readiness.py
+- Validation: PYTHONPATH=./src python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.meta_glasses_widget.example.json; PYTHONPATH=./src pytest tests/test_display_webapp_widget_readiness.py
+- Acceptance: Every webapp-target widget can render in a browser preview and pass HTTPS, 600x600 viewport, focus navigation, dark theme, and contrast readiness checks before rollout.
+
+## MGW-010 Add Android native DAT display renderer path
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: MGW-007, MGW-008
+- Outputs: mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md
+- Validation: cd mobile/android && env JAVA_HOME=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8 PATH=/home/barberb/lift_coding/.tools/jdk17/jdk-17.0.18+8/bin:$PATH ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Android follows the DisplayAccess lifecycle when DAT display SDK linkage is available, while the default bridge-only build still succeeds without Meta package credentials or paired glasses.
+
+## MGW-011 Add Swissknife widget authoring CLI and gallery
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ui
+- Depends on: MGW-004, MGW-005, MGW-008
+- Outputs: swissknife/src/commands/meta-glasses-widget.ts, swissknife/test/mcp-plus-plus/meta-glasses-widget-cli.test.ts, swissknife/docs/meta-glasses-display-widgets.md
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/commands/meta-glasses-widget.ts src/services/meta-glasses-widget-compiler.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-widget-cli.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Developers can init, lint, compile, preview, publish, and invoke display widgets without editing mobile native code, and the gallery includes task progress, confirmation, summary, timer, media, checklist, and metric examples.
+
+## MGW-012 Add rollout flags, observability, and physical evidence workflow
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: MGW-008, MGW-009, MGW-010
+- Outputs: docs/meta-wearables-dat-display-rollout-evidence-template.md, docs/configuration-reference.md, src/handsfree/config.py, tests/test_meta_glasses_display_config.py
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_display_config.py; rg -n "HANDSFREE_DISPLAY_WIDGETS" docs src tests
+- Acceptance: Display widget rendering is feature-flagged, observable, and rollback-safe, with documented rollout evidence, failure modes, privacy review notes, and metrics for render success, policy denials, bridge errors, and latency.
+
+## MGW-013 Investigate implementation unknowns and expand the backlog
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: MGW-001, MGW-002, MGW-003, MGW-004, MGW-005, MGW-006, MGW-007, MGW-008, MGW-009, MGW-010, MGW-011, MGW-012
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Acceptance: After the initial backlog completes, investigate the Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT references, and hardware-free test harness code paths for missed work. Append new daemon-parseable MGW tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
+
+## MGW-014 Add supervisor validation-environment and retry-budget guardrails
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-013
+- Outputs: scripts/meta_glasses_display_todo_supervisor.py, scripts/meta_glasses_display_todo_daemon.py, tests/test_meta_glasses_display_todo_queue.py, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; PYTHONPATH=external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
+- Acceptance: Discovered during MGW-010: Android validation needs the repo-local JDK 17/Android SDK environment, and repeated validation failures should become evidence-backed discovery follow-up items instead of indefinite retry loops. The supervisor documents/enforces the validation environment and records retry-budget findings as daemon-parseable backlog work.

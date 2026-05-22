@@ -15,10 +15,16 @@ import android.os.Looper
 import androidx.core.content.ContextCompat
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 
 class ExpoMetaWearablesDatModule : Module() {
   private var sessionState: String = "idle"
@@ -30,11 +36,31 @@ class ExpoMetaWearablesDatModule : Module() {
   private var displayLastAction: String? = null
   private var displayLastStatus: String? = null
   private var displayLastUpdatedAt: Long? = null
+  private var displayRenderPath: String? = null
+  private var displayLastError: String? = null
+  private var displayActiveWidgetId: String? = null
+  private var displayDescriptorCid: String? = null
+  private var displayManifestCid: String? = null
+  private var displayFocusTarget: String? = null
+  private var displayUpdateCount: Int = 0
+  private var displayLifecycleStages: List<String> = emptyList()
+  private val nativeDisplayLock = Any()
+  private var nativeDisplaySession: Any? = null
+  private var nativeDisplay: Any? = null
+  private var nativeDisplayDeviceId: String? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoMetaWearablesDat")
 
-    Events("onDatStateChanged")
+    Events(
+      "onDatStateChanged",
+      "display_widget_rendered",
+      "display_widget_updated",
+      "display_widget_cleared",
+      "display_widget_action",
+      "display_widget_error",
+      "display_widget_session_reset"
+    )
 
     OnCreate {
       selectedDeviceId = preferences().getString(PREF_SELECTED_DEVICE_ID, null)
@@ -69,13 +95,15 @@ class ExpoMetaWearablesDatModule : Module() {
     }
 
     AsyncFunction("getCapabilities") {
+      val realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
       buildCapabilitiesMap(
-        realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+        realSdkActive = realSdkActive,
         damEnabled = (manifestMetadata()?.getBoolean(METADATA_DAM_ENABLED) ?: false),
         sdkMeetsMinimum = isDatVersionAtLeast(
           BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
           MINIMUM_DAT_SDK_VERSION
-        )
+        ),
+        displaySdkLinked = realSdkActive && isDisplaySdkLinked()
       )
     }
 
@@ -140,8 +168,9 @@ class ExpoMetaWearablesDatModule : Module() {
         BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
         MINIMUM_DAT_SDK_VERSION
       )
-      val displayReady =
-        snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED && sdkMeetsMinimum && damEnabled
+      val realSdkActive = snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
+      val displaySdkLinked = realSdkActive && isDisplaySdkLinked()
+      val displayReady = realSdkActive && displaySdkLinked && sdkMeetsMinimum && damEnabled
       val adapterState = getBluetoothAdapterState()
       val knownDevices = getKnownDevicesSnapshot()
       val selectedTarget = getSelectedDeviceTarget()
@@ -156,6 +185,9 @@ class ExpoMetaWearablesDatModule : Module() {
       }
       if (!BuildConfig.META_WEARABLES_DAT_SDK_ENABLED) {
         configWarnings.add("DAT SDK integration is disabled for this build flavor.")
+      }
+      if (realSdkActive && !displaySdkLinked) {
+        configWarnings.add("DAT display SDK classes are not linked into this Android build.")
       }
       mapOf(
         "available" to true,
@@ -175,9 +207,10 @@ class ExpoMetaWearablesDatModule : Module() {
         "provider" to "internal_bridge",
         "integrationMode" to integrationMode(snapshot.sdkLinked),
         "capabilities" to buildCapabilitiesMap(
-          realSdkActive = snapshot.sdkLinked && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED,
+          realSdkActive = realSdkActive,
           damEnabled = damEnabled,
-          sdkMeetsMinimum = sdkMeetsMinimum
+          sdkMeetsMinimum = sdkMeetsMinimum,
+          displaySdkLinked = displaySdkLinked
         ),
         "sessionState" to sessionState,
         "registrationState" to snapshot.registrationState,
@@ -193,7 +226,15 @@ class ExpoMetaWearablesDatModule : Module() {
         "displayConnectionState" to displayConnectionState,
         "displayLastAction" to displayLastAction,
         "displayLastStatus" to displayLastStatus,
-        "displayLastUpdatedAt" to displayLastUpdatedAt
+        "displayLastUpdatedAt" to displayLastUpdatedAt,
+        "displayRenderPath" to displayRenderPath,
+        "displayLastError" to displayLastError,
+        "displayActiveWidgetId" to displayActiveWidgetId,
+        "displayDescriptorCid" to displayDescriptorCid,
+        "displayManifestCid" to displayManifestCid,
+        "displayFocusTarget" to displayFocusTarget,
+        "displayUpdateCount" to displayUpdateCount,
+        "displayLifecycleStages" to displayLifecycleStages
       )
     }
 
@@ -325,12 +366,49 @@ class ExpoMetaWearablesDatModule : Module() {
         supported = displayEnabled
       )
     }
+
+    AsyncFunction("renderDisplayWidget") { manifest: Map<String, Any?> ->
+      executeDisplayWidgetAction(DISPLAY_WIDGET_RENDER, manifest)
+    }
+
+    AsyncFunction("updateDisplayWidget") { patch: Map<String, Any?> ->
+      executeDisplayWidgetAction(DISPLAY_WIDGET_UPDATE, patch)
+    }
+
+    AsyncFunction("clearDisplayWidget") { widgetId: String? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_CLEAR,
+        mapOf("widget_id" to widgetId)
+      )
+    }
+
+    AsyncFunction("focusDisplayWidget") { direction: String? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_FOCUS,
+        mapOf(
+          "focus" to mapOf("direction" to direction),
+          "operation" to if (direction == "previous") "focus_previous" else "focus_next"
+        )
+      )
+    }
+
+    AsyncFunction("activateDisplayWidgetAction") { actionId: String? ->
+      executeDisplayWidgetAction(
+        DISPLAY_WIDGET_ACTIVATE,
+        mapOf("activated_action_id" to actionId)
+      )
+    }
+
+    AsyncFunction("resetDisplayWidgetSession") {
+      executeDisplayWidgetAction(DISPLAY_WIDGET_RESET, emptyMap())
+    }
   }
 
   private fun buildCapabilitiesMap(
     realSdkActive: Boolean,
     damEnabled: Boolean = false,
-    sdkMeetsMinimum: Boolean = false
+    sdkMeetsMinimum: Boolean = false,
+    displaySdkLinked: Boolean = realSdkActive
   ): Map<String, Boolean> =
     mapOf(
       "session" to true,
@@ -338,8 +416,8 @@ class ExpoMetaWearablesDatModule : Module() {
       "photoCapture" to realSdkActive,
       "videoStream" to realSdkActive,
       "audio" to false,
-      "display" to (realSdkActive && damEnabled && sdkMeetsMinimum),
-      "displayVideo" to (realSdkActive && damEnabled && sdkMeetsMinimum)
+      "display" to (realSdkActive && displaySdkLinked && damEnabled && sdkMeetsMinimum),
+      "displayVideo" to (realSdkActive && displaySdkLinked && damEnabled && sdkMeetsMinimum)
     )
 
   private fun mediaActionResult(
@@ -377,18 +455,978 @@ class ExpoMetaWearablesDatModule : Module() {
     return damEnabled && sdkMeetsMinimum && hasSelectedTarget && (realSdkActive || bridgeSimulationMode)
   }
 
+  private fun executeDisplayWidgetAction(
+    config: DisplayActionConfig,
+    input: Map<String, Any?>
+  ): Map<String, Any?> {
+    if (config.action == "render_display_widget") {
+      displayLifecycleStages = emptyList()
+    }
+    val metadata = displayWidgetMetadata(input)
+    val lifecycle = prepareDisplayLifecycle(config, metadata)
+    var supported = lifecycle.supported
+    var reason = lifecycle.reason
+    var message = lifecycle.message
+    var displayState = lifecycle.state
+    var renderPath = lifecycle.renderPath
+
+    if (supported && config.sendsContent && lifecycle.display != null) {
+      val sendResult = try {
+        sendNativeDisplayContent(lifecycle.display, config, metadata)
+      } catch (error: Throwable) {
+        val nativeError = unwrapDatError(error)
+        DatCallResult.failure(
+          description = datErrorDescription(nativeError) ?: "DAT display content send failed.",
+          error = nativeError
+        )
+      }
+      if (!sendResult.success) {
+        supported = false
+        reason = datErrorReason(sendResult.error)
+        message = sendResult.description ?: "DAT display content send failed."
+        displayState = "display_send_failed"
+        renderPath = "mobile-card"
+        recordDisplayLifecycleStage("content_send_failed")
+      } else {
+        message = nativeDisplayContentSentMessage(config)
+        recordDisplayLifecycleStage("content_sent")
+      }
+    }
+
+    applyDisplayWidgetState(config, metadata, supported, reason, displayState, renderPath)
+
+    val result = displayWidgetActionResult(
+      config = config,
+      metadata = metadata,
+      supported = supported,
+      state = if (supported) "ready" else "not_supported",
+      reason = reason,
+      message = message,
+      requiredAction = lifecycle.requiredAction
+    )
+    emitDisplayWidgetEvent(config, supported, result)
+    return result
+  }
+
+  private fun prepareDisplayLifecycle(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata
+  ): DisplayLifecycleResult {
+    val damEnabled = manifestMetadata()?.getBoolean(METADATA_DAM_ENABLED) ?: false
+    val sdkMeetsMinimum = isDatVersionAtLeast(
+      BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
+      MINIMUM_DAT_SDK_VERSION
+    )
+    if (!BuildConfig.META_WEARABLES_DAT_SDK_ENABLED) {
+      return DisplayLifecycleResult.blocked(
+        state = "native_display_unavailable",
+        reason = "dat_native_display_unavailable",
+        message = "DAT native display is unavailable in this bridge-only Android build."
+      )
+    }
+    if (!damEnabled) {
+      return DisplayLifecycleResult.blocked(
+        state = "dam_disabled",
+        reason = "dam_disabled",
+        message = "DAT display actions require DAM app-model enablement."
+      )
+    }
+    if (!sdkMeetsMinimum) {
+      return DisplayLifecycleResult.blocked(
+        state = "sdk_version_unsupported",
+        reason = "sdk_version_unsupported",
+        message = "DAT display actions require Android DAT SDK $MINIMUM_DAT_SDK_VERSION or newer."
+      )
+    }
+    if (!isDatSdkLinked()) {
+      return DisplayLifecycleResult.blocked(
+        state = "sdk_unlinked",
+        reason = "dat_sdk_unlinked",
+        message = "DAT SDK classes are not linked into this Android build."
+      )
+    }
+    if (!isDisplaySdkLinked()) {
+      return DisplayLifecycleResult.blocked(
+        state = "display_sdk_unlinked",
+        reason = "display_sdk_unlinked",
+        message = "DAT display SDK classes are not linked into this Android build."
+      )
+    }
+    if (config.action == DISPLAY_WIDGET_RESET.action) {
+      synchronized(nativeDisplayLock) {
+        detachNativeDisplayLocked()
+      }
+      sessionState = if (selectedDeviceId == null) "idle" else "target_ready"
+      emitStateChanged()
+      recordDisplayLifecycleStage("display_session_reset")
+      return DisplayLifecycleResult.ready(
+        state = config.successConnectionState,
+        message = "DAT display widget session reset.",
+        display = null,
+        renderPath = "native-dat"
+      )
+    }
+
+    return try {
+      initializeWearables()
+      val registrationState = normalizedStateName(readFlowValue(invokeWearablesMethod("getRegistrationState")))
+      if (registrationState != null && registrationState != "REGISTERED") {
+        DisplayLifecycleResult.blocked(
+          state = "registration_required",
+          reason = "registration_required",
+          message = "Register with Meta AI before starting a DAT display session."
+        )
+      } else {
+        val target = resolveDisplayDeviceTarget()
+        if (target == null) {
+          DisplayLifecycleResult.blocked(
+            state = "awaiting_target",
+            reason = "target_required",
+            message = "Select a display-capable glasses target before rendering a DAT display widget."
+          )
+        } else {
+          selectedDeviceId = target.deviceId
+          recordDisplayLifecycleStage("target_selected")
+          val deviceGate = displayDeviceGate(target)
+          if (deviceGate != null) {
+            deviceGate
+          } else {
+            synchronized(nativeDisplayLock) {
+              ensureNativeDisplayReadyLocked(target, metadata)
+            }
+          }
+        }
+      }
+    } catch (error: Throwable) {
+      val nativeError = unwrapDatError(error)
+      synchronized(nativeDisplayLock) {
+        detachNativeDisplayLocked()
+      }
+      DisplayLifecycleResult.blocked(
+        state = "native_display_error",
+        reason = datErrorReason(nativeError),
+        message = datErrorDescription(nativeError) ?: "DAT display lifecycle failed.",
+        requiredAction = requiredActionForError(nativeError)
+      )
+    }
+  }
+
+  private fun ensureNativeDisplayReadyLocked(
+    target: DisplayDeviceTarget,
+    metadata: DisplayWidgetMetadata
+  ): DisplayLifecycleResult {
+    if (nativeDisplaySession != null && nativeDisplayDeviceId != null && nativeDisplayDeviceId != target.deviceId) {
+      detachNativeDisplayLocked()
+      recordDisplayLifecycleStage("target_changed_session_reset")
+    }
+
+    var session = nativeDisplaySession
+    if (session == null) {
+      updateDisplayState(
+        action = DISPLAY_WIDGET_RENDER.action,
+        status = "starting_session",
+        connectionState = "session_starting",
+        renderPath = "native-dat",
+        lifecycleStage = "starting_session"
+      )
+      val selector = createSpecificDeviceSelector(target.nativeIdentifier)
+        ?: return DisplayLifecycleResult.blocked(
+          state = "selector_unavailable",
+          reason = "selector_unavailable",
+          message = "DAT SpecificDeviceSelector is unavailable for display session creation."
+        )
+      val sessionResult = unwrapDatResult(invokeWearablesMethod("createSession", selector))
+      if (!sessionResult.success || sessionResult.value == null) {
+        return DisplayLifecycleResult.blocked(
+          state = "session_create_failed",
+          reason = datErrorReason(sessionResult.error),
+          message = sessionResult.description ?: "DAT display device session creation failed.",
+          requiredAction = requiredActionForError(sessionResult.error)
+        )
+      }
+      session = sessionResult.value
+      nativeDisplaySession = session
+      nativeDisplayDeviceId = target.deviceId
+      sessionState = "display_session_starting"
+      val startResult = unwrapDatResult(invokeInstanceMethod(session, "start"))
+      if (!startResult.success) {
+        detachNativeDisplayLocked()
+        return DisplayLifecycleResult.blocked(
+          state = "session_start_failed",
+          reason = datErrorReason(startResult.error),
+          message = startResult.description ?: "DAT display device session start failed.",
+          requiredAction = requiredActionForError(startResult.error)
+        )
+      }
+      val sessionStarted = waitForOwnerState(session, "STARTED", DISPLAY_SESSION_TIMEOUT_MS)
+      if (sessionStarted != "STARTED") {
+        latestDatOwnerError(session)?.let { error ->
+          detachNativeDisplayLocked()
+          return DisplayLifecycleResult.blocked(
+            state = datErrorReason(error),
+            reason = datErrorReason(error),
+            message = datErrorDescription(error) ?: "DAT display device session failed before STARTED.",
+            requiredAction = requiredActionForError(error)
+          )
+        }
+        detachNativeDisplayLocked()
+        return DisplayLifecycleResult.blocked(
+          state = "session_start_timeout",
+          reason = "session_start_timeout",
+          message = "DAT display device session did not reach STARTED before timeout."
+        )
+      }
+      sessionState = "target_ready"
+      recordDisplayLifecycleStage("session_started")
+      emitStateChanged()
+    }
+
+    var display = nativeDisplay
+    if (display == null) {
+      updateDisplayState(
+        action = DISPLAY_WIDGET_RENDER.action,
+        status = "attaching_display",
+        connectionState = "display_attaching",
+        renderPath = "native-dat",
+        lifecycleStage = "attaching_display"
+      )
+      val displayResult = addDisplayToSession(session)
+      if (!displayResult.success || displayResult.value == null) {
+        detachNativeDisplayLocked()
+        return DisplayLifecycleResult.blocked(
+          state = "display_attach_failed",
+          reason = datErrorReason(displayResult.error),
+          message = displayResult.description ?: "DAT display capability attach failed.",
+          requiredAction = requiredActionForError(displayResult.error)
+        )
+      }
+      display = displayResult.value
+      nativeDisplay = display
+      recordDisplayLifecycleStage("display_attached")
+      recordDisplayLifecycleStage("display_starting")
+      val displayStarted = waitForOwnerState(display, "STARTED", DISPLAY_SESSION_TIMEOUT_MS)
+      if (displayStarted != "STARTED") {
+        latestDatOwnerError(display)?.let { error ->
+          detachNativeDisplayLocked()
+          return DisplayLifecycleResult.blocked(
+            state = datErrorReason(error),
+            reason = datErrorReason(error),
+            message = datErrorDescription(error) ?: "DAT display capability failed before STARTED.",
+            requiredAction = requiredActionForError(error)
+          )
+        }
+        detachNativeDisplayLocked()
+        return DisplayLifecycleResult.blocked(
+          state = "display_start_timeout",
+          reason = "display_start_timeout",
+          message = "DAT display capability did not reach STARTED before timeout."
+        )
+      }
+      recordDisplayLifecycleStage("display_started")
+    }
+
+    recordDisplayLifecycleStage("display_ready")
+    return DisplayLifecycleResult.ready(
+      state = "display_ready",
+      message = "DAT display lifecycle is ready for ${metadata.widgetId ?: "widget"} content.",
+      display = display,
+      renderPath = "native-dat"
+    )
+  }
+
+  private fun sendNativeDisplayContent(
+    display: Any,
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata
+  ): DatCallResult {
+    val contentBuilder: (Any) -> Unit = { scope ->
+      renderNativeDisplayScope(scope, config, metadata)
+    }
+    val result = invokeInstanceMethod(display, "sendContent", contentBuilder)
+      ?: invokeTopLevelDisplayFunction("sendContent", display, contentBuilder)
+      ?: invokeSuspendInstanceMethod(display, "sendContent", contentBuilder)
+      ?: invokeSuspendTopLevelDisplayFunction("sendContent", display, contentBuilder)
+      ?: return DatCallResult.failure("DAT display sendContent API is unavailable.")
+    return unwrapDatResult(result)
+  }
+
+  private fun renderNativeDisplayScope(
+    scope: Any,
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata
+  ) {
+    val title = when (config.action) {
+      "clear_display_widget" -> "Display cleared"
+      "reset_display_widget_session" -> "Display session reset"
+      else -> metadata.title ?: "HandsFree widget"
+    }
+    val detail = when (config.action) {
+      "focus_display_widget" -> "Focus: ${metadata.focusDirection ?: displayFocusTarget ?: "next"}"
+      "activate_display_widget_action" -> "Action: ${metadata.activatedActionId ?: "selected"}"
+      "update_display_widget" -> metadata.subtitle ?: "Widget updated"
+      else -> metadata.subtitle ?: metadata.widgetId ?: config.operation
+    }
+    val footer = listOfNotNull(
+      metadata.widgetId,
+      metadata.manifestCid ?: metadata.descriptorCid
+    ).joinToString(" | ").ifBlank { config.operation }
+
+    val rendered = invokeDisplayDslMethod(scope, "flexBox") { box ->
+      invokeDisplayText(box, title, "HEADING", null)
+      invokeDisplayText(box, detail, "BODY", "SECONDARY")
+      invokeDisplayText(box, footer, "META", "SECONDARY")
+    }
+    if (!rendered && !invokeDisplayText(scope, title, "HEADING", null)) {
+      throw IllegalStateException("DAT display ContentScope did not expose supported text/flexBox builders")
+    }
+  }
+
+  private fun applyDisplayWidgetState(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata,
+    supported: Boolean,
+    reason: String?,
+    connectionState: String,
+    renderPath: String?
+  ) {
+    if (supported || config.clearsLocalWidgetState) {
+      when (config.action) {
+        "render_display_widget" -> {
+          displayActiveWidgetId = metadata.widgetId
+          displayDescriptorCid = metadata.descriptorCid
+          displayManifestCid = metadata.manifestCid
+          displayUpdateCount = 0
+        }
+        "update_display_widget" -> {
+          displayActiveWidgetId = metadata.widgetId ?: displayActiveWidgetId
+          displayDescriptorCid = metadata.descriptorCid ?: displayDescriptorCid
+          displayManifestCid = metadata.manifestCid ?: displayManifestCid
+          displayUpdateCount += 1
+        }
+        "clear_display_widget" -> {
+          displayActiveWidgetId = null
+          displayFocusTarget = null
+        }
+        "focus_display_widget" -> {
+          displayFocusTarget = metadata.focusDirection
+        }
+        "reset_display_widget_session" -> {
+          displayActiveWidgetId = null
+          displayDescriptorCid = null
+          displayManifestCid = null
+          displayFocusTarget = null
+          displayUpdateCount = 0
+        }
+      }
+    }
+    updateDisplayState(
+      action = config.action,
+      status = if (supported) "ready" else "blocked",
+      connectionState = if (supported) config.successConnectionState else connectionState,
+      renderPath = if (supported) renderPath ?: "native-dat" else "mobile-card",
+      error = reason
+    )
+  }
+
+  private fun nativeDisplayContentSentMessage(config: DisplayActionConfig): String =
+    when (config.action) {
+      "render_display_widget" -> "DAT display widget sent."
+      "update_display_widget" -> "DAT display widget updated."
+      "clear_display_widget" -> "DAT display widget cleared."
+      "focus_display_widget" -> "DAT display widget focused."
+      "activate_display_widget_action" -> "DAT display widget action activated."
+      else -> "DAT display content sent."
+    }
+
+  private fun displayWidgetActionResult(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata,
+    supported: Boolean,
+    state: String,
+    reason: String?,
+    message: String,
+    requiredAction: String?
+  ): Map<String, Any?> =
+    mapOf(
+      "state" to state,
+      "mode" to if (supported && displayRenderPath == "native-dat") "native_display" else integrationMode(isDatSdkLinked()),
+      "supported" to supported,
+      "action" to config.action,
+      "operation" to metadata.operation.orEmpty().ifBlank { config.operation },
+      "reason" to reason,
+      "message" to message,
+      "renderPath" to if (supported) displayRenderPath.orEmpty().ifBlank { "native-dat" } else "mobile-card",
+      "requiredAction" to requiredAction,
+      "deviceId" to selectedDeviceId,
+      "targetConnectionState" to targetConnectionState(selectedDeviceId, getSelectedDeviceTarget()),
+      "assetUri" to null,
+      "mimeType" to null,
+      "displayConnectionState" to displayConnectionState,
+      "displayLastAction" to displayLastAction,
+      "displayLastStatus" to displayLastStatus,
+      "displayLastUpdatedAt" to displayLastUpdatedAt,
+      "displayRenderPath" to displayRenderPath,
+      "displayLastError" to displayLastError,
+      "displayUpdateCount" to displayUpdateCount,
+      "displayLifecycleStages" to displayLifecycleStages,
+      "widgetId" to metadata.widgetId,
+      "widgetCid" to metadata.widgetCid,
+      "descriptorCid" to metadata.descriptorCid,
+      "interfaceCid" to metadata.interfaceCid,
+      "manifestCid" to metadata.manifestCid,
+      "orbReceiptCid" to metadata.orbReceiptCid,
+      "policyDecision" to metadata.policyDecision,
+      "correlationId" to metadata.correlationId,
+      "requestId" to metadata.requestId,
+      "issuedAt" to metadata.issuedAt,
+      "focusDirection" to metadata.focusDirection,
+      "activatedActionId" to metadata.activatedActionId,
+      "fallback" to if (supported) null else mapOf(
+        "reason" to (reason ?: "dat_native_display_unavailable"),
+        "renderPath" to "mobile-card",
+        "message" to message
+      )
+    )
+
+  private fun emitDisplayWidgetEvent(
+    config: DisplayActionConfig,
+    supported: Boolean,
+    payload: Map<String, Any?>
+  ) {
+    sendEvent(displayWidgetEventName(config, supported), payload)
+  }
+
+  private fun displayWidgetEventName(config: DisplayActionConfig, supported: Boolean): String {
+    if (!supported) {
+      return "display_widget_error"
+    }
+    return when (config.action) {
+      "render_display_widget" -> "display_widget_rendered"
+      "update_display_widget" -> "display_widget_updated"
+      "clear_display_widget" -> "display_widget_cleared"
+      "reset_display_widget_session" -> "display_widget_session_reset"
+      else -> "display_widget_action"
+    }
+  }
+
+  private fun displayWidgetMetadata(input: Map<String, Any?>): DisplayWidgetMetadata {
+    val manifest = mapValue(input["manifest"]) ?: input
+    val focus = mapValue(input["focus"])
+    return DisplayWidgetMetadata(
+      contract = stringValue(input["contract"]),
+      type = stringValue(input["type"]),
+      operation = firstString(input["operation"], manifest["operation"]),
+      descriptorCid = firstString(input["descriptor_cid"], input["descriptorCid"], manifest["descriptor_cid"], manifest["descriptorCid"]),
+      interfaceCid = firstString(input["interface_cid"], input["interfaceCid"], manifest["interface_cid"], manifest["interfaceCid"]),
+      manifestCid = firstString(input["manifest_cid"], input["manifestCid"], manifest["manifest_cid"], manifest["manifestCid"]),
+      widgetId = firstString(
+        input["widget_id"],
+        input["widgetId"],
+        manifest["widget_id"],
+        manifest["widgetId"],
+        manifest["id"],
+        displayActiveWidgetId
+      ),
+      widgetCid = firstString(input["widget_cid"], input["widgetCid"], manifest["widget_cid"], manifest["widgetCid"], manifest["cid"]),
+      orbReceiptCid = firstString(input["orb_receipt_cid"], input["orbReceiptCid"], input["receipt_cid"], input["receiptCid"]),
+      policyDecision = firstString(input["policy_decision"], input["policyDecision"]),
+      correlationId = firstString(input["correlation_id"], input["correlationId"]),
+      requestId = firstString(input["request_id"], input["requestId"]),
+      issuedAt = firstString(input["issued_at"], input["issuedAt"]),
+      title = firstString(manifest["title"], manifest["name"], manifest["label"], input["title"], input["name"]),
+      subtitle = firstString(manifest["summary"], manifest["description"], input["summary"], input["description"]),
+      focusDirection = firstString(focus?.get("direction"), input["direction"]),
+      activatedActionId = firstString(input["activated_action_id"], input["activatedActionId"], input["action_id"], input["actionId"])
+    )
+  }
+
+  private fun resolveDisplayDeviceTarget(): DisplayDeviceTarget? {
+    val targets = getWearablesDeviceTargets()
+    val selectedId = selectedDeviceId
+    if (selectedId != null && targets.isEmpty()) {
+      return DisplayDeviceTarget(selectedId, selectedId)
+    }
+    targets.firstOrNull { it.deviceId == selectedId }?.let { return it }
+    return targets.firstOrNull { target ->
+      val metadata = getWearablesDeviceMetadata(target)
+      isDisplayCapableDevice(metadata) != false && normalizedPropertyState(metadata, "getLinkState") != "DISCONNECTED"
+    } ?: targets.firstOrNull() ?: selectedId?.let { DisplayDeviceTarget(it, it) }
+  }
+
+  private fun displayDeviceGate(target: DisplayDeviceTarget): DisplayLifecycleResult? {
+    val metadata = getWearablesDeviceMetadata(target) ?: return null
+    val compatibility = normalizedToken(normalizedPropertyState(metadata, "getCompatibility"))
+    if ("DEVICE_UPDATE_REQUIRED" in compatibility) {
+      return DisplayLifecycleResult.blocked(
+        state = "firmware_update_required",
+        reason = "firmware_update_required",
+        message = "Glasses firmware update is required before DAT display rendering.",
+        requiredAction = "open_firmware_update"
+      )
+    }
+    if ("DAT_APP_ON_THE_GLASSES_UPDATE_REQUIRED" in compatibility) {
+      return DisplayLifecycleResult.blocked(
+        state = "dat_app_update_required",
+        reason = "dat_app_update_required",
+        message = "DAT glasses app update is required before display rendering.",
+        requiredAction = "open_dat_glasses_app_update"
+      )
+    }
+    val linkState = normalizedPropertyState(metadata, "getLinkState")
+    if (linkState != null && linkState != "CONNECTED") {
+      return DisplayLifecycleResult.blocked(
+        state = "device_not_connected",
+        reason = "device_not_connected",
+        message = "Selected glasses must be connected before starting a DAT display session."
+      )
+    }
+    if (isDisplayCapableDevice(metadata) == false) {
+      return DisplayLifecycleResult.blocked(
+        state = "device_display_unsupported",
+        reason = "device_display_unsupported",
+        message = "Selected glasses do not report DAT display capability."
+      )
+    }
+    return null
+  }
+
+  private fun getWearablesDeviceIds(): List<String> {
+    return getWearablesDeviceTargets().map { it.deviceId }
+  }
+
+  private fun getWearablesDeviceTargets(): List<DisplayDeviceTarget> {
+    val devicesFlow = invokeWearablesMethod("getDevices")
+    val devicesValue = readFlowValue(devicesFlow)
+    return (devicesValue as? Collection<*>)
+      ?.mapNotNull { identifier ->
+        deviceIdentifierKey(identifier)?.takeIf { it.isNotBlank() }?.let { deviceId ->
+          DisplayDeviceTarget(deviceId, identifier ?: deviceId)
+        }
+      }
+      ?: emptyList()
+  }
+
+  private fun getWearablesDeviceMetadata(target: DisplayDeviceTarget): Any? {
+    val metadataMap = invokeWearablesMethod("getDevicesMetadata") as? Map<*, *> ?: return null
+    metadataMap[target.nativeIdentifier]?.let { return readFlowValue(it) }
+    val matchedEntry = metadataMap.entries.firstOrNull { (key, _) ->
+      deviceIdentifierKey(key) == target.deviceId
+    }
+    return readFlowValue(matchedEntry?.value)
+  }
+
+  private fun isDisplayCapableDevice(device: Any?): Boolean? {
+    if (device == null) {
+      return null
+    }
+    invokeInstanceMethod(device, "isDisplayCapable")?.let { value ->
+      return value as? Boolean
+    }
+    val deviceType = invokeInstanceMethod(device, "getDeviceType")
+    invokeInstanceMethod(deviceType ?: return null, "isDisplayCapable")?.let { value ->
+      return value as? Boolean
+    }
+    return null
+  }
+
+  private fun createSpecificDeviceSelector(deviceIdentifier: Any): Any? =
+    try {
+      val clazz = Class.forName(SPECIFIC_DEVICE_SELECTOR_CLASS_NAME)
+      listOfNotNull(deviceIdentifier, deviceIdentifierKey(deviceIdentifier))
+        .distinct()
+        .firstNotNullOfOrNull { candidate ->
+          val constructor = clazz.constructors.firstOrNull { ctor ->
+            ctor.parameterTypes.size == 1 && isArgumentCompatible(ctor.parameterTypes[0], candidate)
+          }
+          constructor?.newInstance(candidate)
+        }
+    } catch (_: Throwable) {
+      null
+    }
+
+  private fun addDisplayToSession(session: Any): DatCallResult {
+    invokeInstanceMethod(session, "addDisplay")?.let { return unwrapDatResult(it) }
+    invokeTopLevelDisplayFunction("addDisplay", session)?.let { return unwrapDatResult(it) }
+
+    val config = instantiateNoArg(DISPLAY_CONFIGURATION_CLASS_NAME)
+    if (config != null) {
+      invokeInstanceMethod(session, "addDisplay", config)?.let { return unwrapDatResult(it) }
+      invokeTopLevelDisplayFunction("addDisplay", session, config)?.let { return unwrapDatResult(it) }
+    }
+
+    invokeTopLevelDisplayFunction("addDisplay\$default", session, null, 1, null)
+      ?.let { return unwrapDatResult(it) }
+
+    return DatCallResult.failure("DAT display addDisplay API is unavailable.")
+  }
+
+  private fun detachNativeDisplayLocked() {
+    val session = nativeDisplaySession
+    if (session != null) {
+      try {
+        invokeInstanceMethod(session, "removeDisplay")
+          ?: invokeTopLevelDisplayFunction("removeDisplay", session)
+      } catch (_: Throwable) {
+        // Best-effort cleanup; session stop below is the recovery path.
+      }
+      try {
+        invokeInstanceMethod(session, "stop")
+      } catch (_: Throwable) {
+        // Best-effort cleanup.
+      }
+    }
+    nativeDisplay = null
+    nativeDisplaySession = null
+    nativeDisplayDeviceId = null
+  }
+
+  private fun waitForOwnerState(owner: Any, expected: String, timeoutMs: Long): String? {
+    val deadline = System.currentTimeMillis() + timeoutMs
+    var lastState: String? = null
+    while (System.currentTimeMillis() <= deadline) {
+      lastState = normalizedStateName(readFlowValue(invokeInstanceMethod(owner, "getState")))
+        ?: normalizedStateName(invokeInstanceMethod(owner, "getState"))
+      if (lastState == expected) {
+        return lastState
+      }
+      Thread.sleep(DISPLAY_STATE_POLL_MS)
+    }
+    return lastState
+  }
+
+  private fun isDisplaySdkLinked(): Boolean =
+    classExists(DISPLAY_INTERFACE_CLASS_NAME) && (
+      displayExtensionClass() != null || classExists(DISPLAY_CONFIGURATION_CLASS_NAME)
+    )
+
+  private fun displayExtensionClass(): Class<*>? =
+    DISPLAY_EXTENSION_CLASS_NAMES.firstNotNullOfOrNull { className ->
+      try {
+        Class.forName(className)
+      } catch (_: ClassNotFoundException) {
+        null
+      }
+    }
+
+  private fun invokeTopLevelDisplayFunction(name: String, vararg args: Any?): Any? {
+    val method = DISPLAY_EXTENSION_CLASS_NAMES.firstNotNullOfOrNull { className ->
+      try {
+        val clazz = Class.forName(className)
+        findMethod(clazz, name, args)
+      } catch (_: Throwable) {
+        null
+      }
+    } ?: return null
+    return method.invoke(null, *args)
+  }
+
+  private fun invokeSuspendTopLevelDisplayFunction(name: String, vararg args: Any?): Any? {
+    val continuation = BlockingContinuation()
+    val invocationArgs = args.toMutableList().apply { add(continuation) }.toTypedArray()
+    val method = DISPLAY_EXTENSION_CLASS_NAMES.firstNotNullOfOrNull { className ->
+      try {
+        val clazz = Class.forName(className)
+        findMethod(clazz, name, invocationArgs)
+      } catch (_: Throwable) {
+        null
+      }
+    } ?: return null
+    return continuation.resolve(method.invoke(null, *invocationArgs))
+  }
+
+  private fun invokeSuspendInstanceMethod(target: Any?, name: String, vararg args: Any?): Any? {
+    if (target == null) {
+      return null
+    }
+    val continuation = BlockingContinuation()
+    val invocationArgs = args.toMutableList().apply { add(continuation) }.toTypedArray()
+    val method = findMethod(target.javaClass, name, invocationArgs) ?: return null
+    return continuation.resolve(method.invoke(target, *invocationArgs))
+  }
+
+  private fun invokeInstanceMethod(target: Any?, name: String, vararg args: Any?): Any? {
+    if (target == null) {
+      return null
+    }
+    val method = findMethod(target.javaClass, name, args) ?: return null
+    return method.invoke(target, *args)
+  }
+
+  private fun unwrapDatResult(result: Any?): DatCallResult {
+    if (result == null) {
+      return DatCallResult.success(null)
+    }
+    val resultClass = result.javaClass
+    if (resultClass.name.startsWith("com.meta.wearable") || resultClass.methods.any { it.name == "fold" }) {
+      var successValue: Any? = null
+      var failureValue: Any? = null
+      val onSuccess: (Any?) -> Any? = { value ->
+        successValue = value
+        value
+      }
+      val onFailure: (Any?, Any?) -> Any? = { error, _ ->
+        failureValue = error
+        null
+      }
+      findMethod(resultClass, "fold", arrayOf(onSuccess, onFailure))?.let { method ->
+        method.invoke(result, onSuccess, onFailure)
+        return if (failureValue == null) {
+          DatCallResult.success(successValue)
+        } else {
+          DatCallResult.failure(error = failureValue)
+        }
+      }
+
+      var fallbackError: Any? = null
+      val fallback: (Any?) -> Any? = { error ->
+        fallbackError = error
+        null
+      }
+      findMethod(resultClass, "getOrElse", arrayOf(fallback))?.let { method ->
+        val value = method.invoke(result, fallback)
+        return if (fallbackError == null) {
+          DatCallResult.success(value)
+        } else {
+          DatCallResult.failure(error = fallbackError)
+        }
+      }
+
+      invokeInstanceMethod(result, "exceptionOrNull")?.let { error ->
+        return DatCallResult.failure(error = error)
+      }
+      invokeInstanceMethod(result, "getOrNull")?.let { value ->
+        return DatCallResult.success(value)
+      }
+    }
+    return DatCallResult.success(result)
+  }
+
+  private fun invokeDisplayText(
+    target: Any,
+    text: String,
+    style: String?,
+    color: String?
+  ): Boolean =
+    invokeDisplayDslMethod(
+      target = target,
+      name = "text",
+      text = text,
+      enumHints = mapOf(
+        "TextStyle" to (style ?: "BODY"),
+        "TextColor" to (color ?: "PRIMARY")
+      )
+    )
+
+  private fun invokeDisplayDslMethod(
+    target: Any,
+    name: String,
+    text: String? = null,
+    enumHints: Map<String, String> = emptyMap(),
+    block: ((Any) -> Unit)? = null
+  ): Boolean {
+    val methods = target.javaClass.methods
+      .filter { it.name == name }
+      .sortedBy { it.parameterTypes.size }
+
+    for (method in methods) {
+      val args = buildDisplayDslArgs(method.parameterTypes, text, enumHints, block) ?: continue
+      try {
+        method.invoke(target, *args)
+        return true
+      } catch (_: Throwable) {
+        // Try the next overload; DAT display DSL signatures can differ across preview SDK drops.
+      }
+    }
+    return false
+  }
+
+  private fun buildDisplayDslArgs(
+    parameterTypes: Array<Class<*>>,
+    text: String?,
+    enumHints: Map<String, String>,
+    block: ((Any) -> Unit)?
+  ): Array<Any?>? {
+    var textUsed = false
+    return parameterTypes.map { parameterType ->
+      when {
+        parameterType == String::class.java -> {
+          textUsed = true
+          text ?: ""
+        }
+        parameterType.isEnum -> enumConstant(parameterType, enumHints[parameterType.simpleName])
+        parameterType == Integer.TYPE || parameterType == Int::class.javaObjectType -> 12
+        parameterType == java.lang.Float.TYPE || parameterType == Float::class.javaObjectType -> 1f
+        parameterType == java.lang.Boolean.TYPE || parameterType == Boolean::class.javaObjectType -> false
+        parameterType.name == "kotlin.jvm.functions.Function1" -> ({ child: Any ->
+          block?.invoke(child)
+          Unit
+        })
+        parameterType.name == "kotlin.jvm.functions.Function0" -> ({
+          Unit
+        })
+        !parameterType.isPrimitive -> null
+        else -> return null
+      }
+    }.toTypedArray().also {
+      if (text != null && !textUsed) {
+        return null
+      }
+    }
+  }
+
+  private fun enumConstant(enumClass: Class<*>, preferredName: String?): Any? {
+    val constants = enumClass.enumConstants ?: return null
+    val names = listOfNotNull(preferredName, "COLUMN", "CARD", "CENTER", "PRIMARY", "BODY", "NONE")
+    return names.firstNotNullOfOrNull { name ->
+      constants.firstOrNull { constant -> normalizedStateName(constant) == name }
+    } ?: constants.firstOrNull()
+  }
+
+  private fun instantiateNoArg(className: String): Any? =
+    try {
+      Class.forName(className).constructors.firstOrNull { it.parameterCount == 0 }?.newInstance()
+    } catch (_: Throwable) {
+      null
+    }
+
+  private fun classExists(className: String): Boolean =
+    try {
+      Class.forName(className)
+      true
+    } catch (_: ClassNotFoundException) {
+      false
+    }
+
+  private fun normalizedPropertyState(target: Any?, getter: String): String? =
+    normalizedStateName(invokeInstanceMethod(target, getter))
+
+  private fun normalizedStateName(value: Any?): String? {
+    if (value == null) {
+      return null
+    }
+    if (value is Enum<*>) {
+      return value.name.uppercase()
+    }
+    val text = value.toString().substringAfterLast(".")
+    if (text.isNotBlank() && "@" !in text) {
+      return text.uppercase()
+    }
+    return value.javaClass.simpleName?.uppercase()
+  }
+
+  private fun latestDatOwnerError(owner: Any?): Any? =
+    readFlowLatestValue(invokeInstanceMethod(owner, "getErrors"))
+      ?: readFlowLatestValue(invokeInstanceMethod(owner, "getErrorStream"))
+
+  private fun readFlowLatestValue(flowLike: Any?): Any? =
+    readFlowValue(flowLike)
+      ?: (invokeInstanceMethod(flowLike, "getReplayCache") as? List<*>)?.lastOrNull()
+
+  private fun unwrapDatError(error: Any?): Any? =
+    when (error) {
+      is InvocationTargetException -> unwrapDatError(error.targetException ?: error.cause ?: error)
+      else -> error
+    }
+
+  private fun datErrorDescription(error: Any?): String? {
+    val actual = unwrapDatError(error) ?: return null
+    val description = try {
+      actual.javaClass.methods.firstOrNull { method ->
+        method.name == "getDescription" && method.parameterCount == 0
+      }?.invoke(actual) as? String
+    } catch (_: Throwable) {
+      null
+    }
+    return description
+      ?: (actual as? Throwable)?.message?.takeIf { it.isNotBlank() }
+      ?: actual.toString().takeIf { it.isNotBlank() }
+  }
+
+  private fun datErrorReason(error: Any?): String {
+    val normalized = normalizedErrorToken(error)
+    return when {
+      "DEVICE_UPDATE_REQUIRED" in normalized -> "firmware_update_required"
+      "DAT_APP_ON_THE_GLASSES_UPDATE_REQUIRED" in normalized -> "dat_app_update_required"
+      "TIMEOUT" in normalized -> "display_timeout"
+      "UNAVAILABLE" in normalized -> "display_unavailable"
+      normalized.isNotBlank() -> normalized.lowercase()
+      else -> "native_display_error"
+    }
+  }
+
+  private fun requiredActionForError(error: Any?): String? {
+    val normalized = normalizedErrorToken(error)
+    return when {
+      "DEVICE_UPDATE_REQUIRED" in normalized -> "open_firmware_update"
+      "DAT_APP_ON_THE_GLASSES_UPDATE_REQUIRED" in normalized -> "open_dat_glasses_app_update"
+      else -> null
+    }
+  }
+
+  private fun normalizedErrorToken(error: Any?): String {
+    val actual = unwrapDatError(error)
+    val stateName = normalizedStateName(actual).orEmpty()
+    val description = datErrorDescription(actual).orEmpty()
+    return normalizedToken(listOf(stateName, description).joinToString("_"))
+  }
+
+  private fun normalizedToken(value: String?): String =
+    value.orEmpty()
+      .uppercase()
+      .replace(Regex("[^A-Z0-9]+"), "_")
+
+  private fun mapValue(value: Any?): Map<String, Any?>? =
+    (value as? Map<*, *>)?.mapNotNull { (key, mapValue) ->
+      (key as? String)?.let { it to mapValue }
+    }?.toMap()
+
+  private fun firstString(vararg values: Any?): String? =
+    values.firstNotNullOfOrNull { stringValue(it)?.takeIf { value -> value.isNotBlank() } }
+
+  private fun stringValue(value: Any?): String? =
+    when (value) {
+      null -> null
+      is String -> value
+      else -> value.toString()
+    }
+
+  private fun deviceIdentifierKey(identifier: Any?): String? =
+    firstString(
+      invokeInstanceMethod(identifier, "getValue"),
+      invokeInstanceMethod(identifier, "getId"),
+      invokeInstanceMethod(identifier, "getIdentifier"),
+      identifier
+    )?.takeUnless { it.contains("@") && it.contains(".") }
+
   private fun fallbackDisplayConnectionState(): String =
     if (getSelectedDeviceTarget() == null) "awaiting_target" else "blocked"
 
   private fun updateDisplayState(
     action: String,
     status: String,
-    connectionState: String
+    connectionState: String,
+    renderPath: String? = displayRenderPath,
+    error: String? = displayLastError,
+    lifecycleStage: String? = null
   ) {
     displayLastAction = action
     displayLastStatus = status
     displayConnectionState = connectionState
     displayLastUpdatedAt = System.currentTimeMillis()
+    displayRenderPath = renderPath
+    displayLastError = error
+    lifecycleStage?.let { recordDisplayLifecycleStage(it) }
+  }
+
+  private fun recordDisplayLifecycleStage(stage: String) {
+    if (stage.isBlank()) {
+      return
+    }
+    val stages = displayLifecycleStages.toMutableList()
+    if (stages.lastOrNull() != stage) {
+      stages.add(stage)
+    }
+    displayLifecycleStages = stages.takeLast(MAX_DISPLAY_LIFECYCLE_STAGES)
   }
 
   private fun manifestMetadata() =
@@ -425,21 +1463,47 @@ class ExpoMetaWearablesDatModule : Module() {
       null
     }
 
-  private fun invokeWearablesMethod(name: String, vararg args: Any): Any? {
+  private fun invokeWearablesMethod(name: String, vararg args: Any?): Any? {
     val clazz = wearablesClass() ?: return null
     val method = findMethod(clazz, name, args) ?: return null
     val target = if (Modifier.isStatic(method.modifiers)) null else wearablesInstance(clazz)
     return method.invoke(target, *args)
   }
 
-  private fun findMethod(clazz: Class<*>, name: String, args: Array<out Any>): Method? =
+  private fun invokeWearablesMethodOrThrow(name: String, vararg args: Any?) {
+    val clazz = wearablesClass()
+      ?: throw IllegalStateException("Wearables SDK class is unavailable")
+    val method = findMethod(clazz, name, args)
+      ?: throw IllegalStateException("Wearables.$name is unavailable")
+    val target = if (Modifier.isStatic(method.modifiers)) null else wearablesInstance(clazz)
+    method.invoke(target, *args)
+  }
+
+  private fun findMethod(clazz: Class<*>, name: String, args: Array<out Any?>): Method? =
     clazz.methods.firstOrNull { method ->
       method.name == name &&
         method.parameterTypes.size == args.size &&
         method.parameterTypes.indices.all { index ->
-          method.parameterTypes[index].isAssignableFrom(args[index].javaClass)
+          isArgumentCompatible(method.parameterTypes[index], args[index])
         }
     }
+
+  private fun isArgumentCompatible(parameterType: Class<*>, arg: Any?): Boolean {
+    if (arg == null) {
+      return !parameterType.isPrimitive
+    }
+    if (parameterType.isAssignableFrom(arg.javaClass)) {
+      return true
+    }
+    return when (parameterType) {
+      java.lang.Boolean.TYPE -> arg is Boolean
+      java.lang.Integer.TYPE -> arg is Int
+      java.lang.Long.TYPE -> arg is Long
+      java.lang.Float.TYPE -> arg is Float
+      java.lang.Double.TYPE -> arg is Double
+      else -> false
+    }
+  }
 
   private fun readFlowValue(flowLike: Any?): Any? {
     if (flowLike == null) {
@@ -483,14 +1547,12 @@ class ExpoMetaWearablesDatModule : Module() {
   }
 
   private fun initializeWearables() {
-    invokeWearablesMethod("initialize", reactContextOrThrow())
-      ?: throw IllegalStateException("Wearables.initialize(Context) is unavailable")
+    invokeWearablesMethodOrThrow("initialize", reactContextOrThrow())
   }
 
   private fun startRegistration(): Map<String, String> {
     initializeWearables()
-    invokeWearablesMethod("startRegistration", currentActivityOrThrow())
-      ?: throw IllegalStateException("Wearables.startRegistration(Activity) is unavailable")
+    invokeWearablesMethodOrThrow("startRegistration", currentActivityOrThrow())
     sessionState = "registering"
     emitStateChanged()
     return mapOf("state" to sessionState, "mode" to "sdk")
@@ -498,8 +1560,7 @@ class ExpoMetaWearablesDatModule : Module() {
 
   private fun startUnregistration(): Map<String, String> {
     initializeWearables()
-    invokeWearablesMethod("startUnregistration", currentActivityOrThrow())
-      ?: throw IllegalStateException("Wearables.startUnregistration(Activity) is unavailable")
+    invokeWearablesMethodOrThrow("startUnregistration", currentActivityOrThrow())
     sessionState = "unregistering"
     emitStateChanged()
     return mapOf("state" to sessionState, "mode" to "sdk")
@@ -828,6 +1889,143 @@ class ExpoMetaWearablesDatModule : Module() {
       else -> "unknown"
     }
 
+  private data class DisplayActionConfig(
+    val action: String,
+    val operation: String,
+    val successConnectionState: String,
+    val unavailableMessage: String,
+    val sendsContent: Boolean = true,
+    val clearsLocalWidgetState: Boolean = false
+  )
+
+  private data class DisplayWidgetMetadata(
+    val contract: String?,
+    val type: String?,
+    val operation: String?,
+    val descriptorCid: String?,
+    val interfaceCid: String?,
+    val manifestCid: String?,
+    val widgetId: String?,
+    val widgetCid: String?,
+    val orbReceiptCid: String?,
+    val policyDecision: String?,
+    val correlationId: String?,
+    val requestId: String?,
+    val issuedAt: String?,
+    val title: String?,
+    val subtitle: String?,
+    val focusDirection: String?,
+    val activatedActionId: String?
+  )
+
+  private data class DisplayDeviceTarget(
+    val deviceId: String,
+    val nativeIdentifier: Any
+  )
+
+  private class BlockingContinuation : Continuation<Any?> {
+    override val context: CoroutineContext = EmptyCoroutineContext
+    private val latch = CountDownLatch(1)
+    private var value: Any? = null
+    private var error: Throwable? = null
+
+    override fun resumeWith(result: Result<Any?>) {
+      result.fold(
+        onSuccess = { value = it },
+        onFailure = { error = it }
+      )
+      latch.countDown()
+    }
+
+    fun resolve(invocationResult: Any?): Any? {
+      if (invocationResult !== COROUTINE_SUSPENDED) {
+        return invocationResult
+      }
+      if (!latch.await(DISPLAY_SESSION_TIMEOUT_MS, TimeUnit.MILLISECONDS)) {
+        throw TimeoutException("DAT display suspend call did not complete before timeout.")
+      }
+      error?.let { throw it }
+      return value
+    }
+  }
+
+  private data class DisplayLifecycleResult(
+    val supported: Boolean,
+    val state: String,
+    val reason: String?,
+    val message: String,
+    val display: Any?,
+    val renderPath: String?,
+    val requiredAction: String?
+  ) {
+    companion object {
+      fun ready(
+        state: String,
+        message: String,
+        display: Any?,
+        renderPath: String
+      ): DisplayLifecycleResult =
+        DisplayLifecycleResult(
+          supported = true,
+          state = state,
+          reason = null,
+          message = message,
+          display = display,
+          renderPath = renderPath,
+          requiredAction = null
+        )
+
+      fun blocked(
+        state: String,
+        reason: String,
+        message: String,
+        requiredAction: String? = null
+      ): DisplayLifecycleResult =
+        DisplayLifecycleResult(
+          supported = false,
+          state = state,
+          reason = reason,
+          message = message,
+          display = null,
+          renderPath = null,
+          requiredAction = requiredAction
+        )
+    }
+  }
+
+  private data class DatCallResult(
+    val success: Boolean,
+    val value: Any?,
+    val error: Any?,
+    val description: String?
+  ) {
+    companion object {
+      fun success(value: Any?): DatCallResult =
+        DatCallResult(success = true, value = value, error = null, description = null)
+
+      fun failure(description: String? = null, error: Any? = null): DatCallResult =
+        DatCallResult(
+          success = false,
+          value = null,
+          error = error,
+          description = description ?: errorDescription(error)
+        )
+
+      private fun errorDescription(error: Any?): String? {
+        if (error == null) {
+          return null
+        }
+        return try {
+          error.javaClass.methods.firstOrNull { method ->
+            method.name == "getDescription" && method.parameterCount == 0
+          }?.invoke(error) as? String
+        } catch (_: Throwable) {
+          null
+        } ?: error.toString()
+      }
+    }
+  }
+
   private data class DatSnapshot(
     val sdkLinked: Boolean,
     val registrationState: String,
@@ -843,5 +2041,57 @@ class ExpoMetaWearablesDatModule : Module() {
     const val METADATA_ANALYTICS_OPT_OUT = "com.meta.wearable.mwdat.ANALYTICS_OPT_OUT"
     const val METADATA_DAM_ENABLED = "com.meta.wearable.mwdat.DAM_ENABLED"
     const val MINIMUM_DAT_SDK_VERSION = "0.7.0"
+    const val SPECIFIC_DEVICE_SELECTOR_CLASS_NAME = "com.meta.wearable.dat.core.selectors.SpecificDeviceSelector"
+    const val DISPLAY_INTERFACE_CLASS_NAME = "com.meta.wearable.dat.display.Display"
+    const val DISPLAY_CONFIGURATION_CLASS_NAME = "com.meta.wearable.dat.display.DisplayConfiguration"
+    const val DISPLAY_SESSION_TIMEOUT_MS = 5_000L
+    const val DISPLAY_STATE_POLL_MS = 100L
+    const val MAX_DISPLAY_LIFECYCLE_STAGES = 16
+    val DISPLAY_EXTENSION_CLASS_NAMES = listOf(
+      "com.meta.wearable.dat.display.DisplayKt",
+      "com.meta.wearable.dat.display.DisplayExtensionsKt",
+      "com.meta.wearable.dat.display.DisplayCapabilityKt",
+      "com.meta.wearable.dat.display.DeviceSessionDisplayKt",
+      "com.meta.wearable.dat.display.DeviceSessionExtensionsKt"
+    )
+    val DISPLAY_WIDGET_RENDER = DisplayActionConfig(
+      action = "render_display_widget",
+      operation = "render_widget",
+      successConnectionState = "rendered",
+      unavailableMessage = "Display widget rendering requires DAT SDK linkage, DAM enablement, and a selected target."
+    )
+    val DISPLAY_WIDGET_UPDATE = DisplayActionConfig(
+      action = "update_display_widget",
+      operation = "update_widget",
+      successConnectionState = "updated",
+      unavailableMessage = "Display widget updates require an active DAT display session."
+    )
+    val DISPLAY_WIDGET_CLEAR = DisplayActionConfig(
+      action = "clear_display_widget",
+      operation = "clear_widget",
+      successConnectionState = "cleared",
+      unavailableMessage = "Display widget clearing requires an active DAT display session.",
+      clearsLocalWidgetState = true
+    )
+    val DISPLAY_WIDGET_FOCUS = DisplayActionConfig(
+      action = "focus_display_widget",
+      operation = "focus_next",
+      successConnectionState = "focused",
+      unavailableMessage = "Display widget focus requires an active DAT display session."
+    )
+    val DISPLAY_WIDGET_ACTIVATE = DisplayActionConfig(
+      action = "activate_display_widget_action",
+      operation = "activate",
+      successConnectionState = "action_activated",
+      unavailableMessage = "Display widget actions require an active DAT display session."
+    )
+    val DISPLAY_WIDGET_RESET = DisplayActionConfig(
+      action = "reset_display_widget_session",
+      operation = "reset_session",
+      successConnectionState = "reset",
+      unavailableMessage = "Display widget session reset requires DAT display lifecycle availability.",
+      sendsContent = false,
+      clearsLocalWidgetState = true
+    )
   }
 }

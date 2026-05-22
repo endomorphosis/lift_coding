@@ -14,6 +14,7 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 - [ ] Mobile app uses a build that includes `expo-meta-wearables-dat`
 - [ ] Backend is reachable from device network
 - [ ] `scripts/lint_display_webapp_readiness.py` passes for target web app metadata
+- [ ] Default bridge-only Android build passes with `cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false` and no Meta package credentials
 - [ ] Test account has required permissions for app onboarding and display access
 
 ## A) Connectivity + capability baseline
@@ -31,7 +32,16 @@ Evidence:
 
 Run each action from the diagnostics/action surface and record result metadata.
 
+- [ ] Android SDK-linked build reports `renderPath: native-dat` for native widget render
+- [ ] Native render path records `displayLifecycleStages` for DisplayAccess stages: selected display target, session started, display attached, display started
+- [ ] Bridge-only Android build returns `reason: dat_native_display_unavailable` and `renderPath: mobile-card` for widget actions
+- [ ] Firmware update required state returns `reason: firmware_update_required` and `requiredAction: open_firmware_update`
+- [ ] DAT glasses app update required state returns `reason: dat_app_update_required` and `requiredAction: open_dat_glasses_app_update`
 - [ ] `renderDisplayTest` returns a structured success/unsupported response
+- [ ] `renderDisplayWidget` renders a simple title/body widget and returns widget ID, manifest CID, render path, and display status
+- [ ] `updateDisplayWidget` replaces the displayed content and increments update count
+- [ ] `focusDisplayWidget` and `activateDisplayWidgetAction` return structured action metadata without crashing
+- [ ] `resetDisplayWidgetSession` detaches/restarts cleanly before the next render
 - [ ] `clearDisplay` returns a structured success/unsupported response
 - [ ] `playDisplayVideo` returns a structured success/unsupported response
 - [ ] `resetDisplaySession` returns a structured success/unsupported response
@@ -39,6 +49,7 @@ Run each action from the diagnostics/action surface and record result metadata.
 
 Evidence:
 - [ ] Screenshot or log excerpt per action result
+- [ ] Android log excerpt showing session start, display attach, display ready, and send result
 - [ ] Note any error/status code and message payloads
 
 ## C) UX and reliability checks
@@ -62,4 +73,3 @@ Evidence:
 Result:
 - [ ] PASS for staged rollout gate
 - [ ] FAIL (requires fixes/retest)
-

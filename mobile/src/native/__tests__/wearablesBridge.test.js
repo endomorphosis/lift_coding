@@ -16,6 +16,29 @@ describe('wearablesBridge wrapper', () => {
     const reconnect = await bridge.reconnectSelectedDeviceTarget();
     const connect = await bridge.connectSelectedDeviceTarget();
     const photo = await bridge.capturePhoto();
+    const widgetPayload = {
+      contract: 'handsfree.meta-glasses/display-widget-action@0.1.0',
+      type: 'mobile_render_display_widget',
+      descriptor_cid: 'bafybeidescriptor',
+      widget_id: 'handsfree.task-progress-widget',
+      widget_cid: 'bafybeiwidget',
+      orb_receipt_cid: 'bafybeiorbreceipt',
+      correlation_id: 'corr-widget',
+      fallback: {
+        reason: 'dat_native_display_unavailable',
+        renderPath: 'display-webapp',
+        message: 'Native display unavailable. Opening display webapp preview.',
+      },
+    };
+    const renderedWidget = await bridge.renderDisplayWidget(
+      { id: 'handsfree.task-progress-widget' },
+      widgetPayload
+    );
+    const updatedWidget = await bridge.updateDisplayWidget({ progress: 50 }, widgetPayload);
+    const clearedWidget = await bridge.clearDisplayWidget('handsfree.task-progress-widget', widgetPayload);
+    const focusedWidget = await bridge.focusDisplayWidget('next', widgetPayload);
+    const activatedWidget = await bridge.activateDisplayWidgetAction('primary', widgetPayload);
+    const resetWidget = await bridge.resetDisplayWidgetSession(widgetPayload);
 
     expect(bridge.isBridgeAvailable()).toBe(false);
     expect(diagnostics).toEqual({
@@ -84,6 +107,155 @@ describe('wearablesBridge wrapper', () => {
       action: 'capture_photo',
       supported: false,
     });
+    expect(renderedWidget).toMatchObject({
+      action: 'render_display_widget',
+      operation: 'render_widget',
+      supported: false,
+      reason: 'dat_native_display_unavailable',
+      renderPath: 'display-webapp',
+      message: 'Native display unavailable. Opening display webapp preview.',
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+      widgetCid: 'bafybeiwidget',
+      orbReceiptCid: 'bafybeiorbreceipt',
+      correlationId: 'corr-widget',
+      displayConnectionState: 'unavailable',
+      displayLastStatus: 'unsupported',
+    });
+    expect(updatedWidget).toMatchObject({
+      action: 'update_display_widget',
+      operation: 'update_widget',
+      supported: false,
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    expect(clearedWidget).toMatchObject({
+      action: 'clear_display_widget',
+      operation: 'clear_widget',
+      supported: false,
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    expect(focusedWidget).toMatchObject({
+      action: 'focus_display_widget',
+      operation: 'focus_next',
+      supported: false,
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    expect(activatedWidget).toMatchObject({
+      action: 'activate_display_widget_action',
+      operation: 'activate',
+      supported: false,
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    expect(resetWidget).toMatchObject({
+      action: 'reset_display_widget_session',
+      operation: 'reset_session',
+      supported: false,
+      widgetId: 'handsfree.task-progress-widget',
+    });
+  });
+
+  test('delegates display widget methods when the native module exposes them', async () => {
+    const nativeModule = {
+      isAvailable: () => true,
+      renderDisplayWidget: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget rendered.',
+        displayConnectionState: 'rendered',
+      })),
+      updateDisplayWidget: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget updated.',
+      })),
+      clearDisplayWidget: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget cleared.',
+      })),
+      focusDisplayWidget: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget focused.',
+      })),
+      activateDisplayWidgetAction: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget action activated.',
+      })),
+      resetDisplayWidgetSession: jest.fn(async () => ({
+        state: 'ready',
+        mode: 'sdk_reflection',
+        supported: true,
+        message: 'Widget session reset.',
+      })),
+    };
+
+    jest.doMock('expo-meta-wearables-dat', () => ({
+      __esModule: true,
+      default: nativeModule,
+    }));
+
+    const { getWearablesBridge, clearWearablesBridgeCache } = require('../wearablesBridge');
+    clearWearablesBridgeCache();
+
+    const bridge = await getWearablesBridge();
+    const payload = {
+      descriptor_cid: 'bafybeidescriptor',
+      widget_id: 'handsfree.task-progress-widget',
+      widget_cid: 'bafybeiwidget',
+      orb_receipt_cid: 'bafybeiorbreceipt',
+      correlation_id: 'corr-widget',
+    };
+    const manifest = { id: 'handsfree.task-progress-widget' };
+    const patch = { progress: 75 };
+
+    await expect(bridge.renderDisplayWidget(manifest, payload)).resolves.toMatchObject({
+      action: 'render_display_widget',
+      operation: 'render_widget',
+      supported: true,
+      renderPath: 'native-dat',
+      fallback: null,
+      descriptorCid: 'bafybeidescriptor',
+      widgetId: 'handsfree.task-progress-widget',
+    });
+    await expect(bridge.updateDisplayWidget(patch, payload)).resolves.toMatchObject({
+      action: 'update_display_widget',
+      operation: 'update_widget',
+      supported: true,
+    });
+    await expect(bridge.clearDisplayWidget('handsfree.task-progress-widget', payload)).resolves.toMatchObject({
+      action: 'clear_display_widget',
+      operation: 'clear_widget',
+      supported: true,
+    });
+    await expect(bridge.focusDisplayWidget('next', payload)).resolves.toMatchObject({
+      action: 'focus_display_widget',
+      operation: 'focus_next',
+      supported: true,
+    });
+    await expect(bridge.activateDisplayWidgetAction('primary', payload)).resolves.toMatchObject({
+      action: 'activate_display_widget_action',
+      operation: 'activate',
+      supported: true,
+    });
+    await expect(bridge.resetDisplayWidgetSession(payload)).resolves.toMatchObject({
+      action: 'reset_display_widget_session',
+      operation: 'reset_session',
+      supported: true,
+    });
+
+    expect(nativeModule.renderDisplayWidget).toHaveBeenCalledWith(manifest);
+    expect(nativeModule.updateDisplayWidget).toHaveBeenCalledWith(patch);
+    expect(nativeModule.clearDisplayWidget).toHaveBeenCalledWith('handsfree.task-progress-widget');
+    expect(nativeModule.focusDisplayWidget).toHaveBeenCalledWith('next');
+    expect(nativeModule.activateDisplayWidgetAction).toHaveBeenCalledWith('primary');
+    expect(nativeModule.resetDisplayWidgetSession).toHaveBeenCalledWith();
   });
 
   test('normalizes resolved native module diagnostics into bridge metadata', async () => {

@@ -3642,7 +3642,13 @@ components:
       properties:
         action_id:
           type: string
-          description: Stable card action identifier such as read_cid or rerun_dataset_search.
+          description: >
+            Stable card action identifier such as read_cid or rerun_dataset_search.
+            Client-local Meta glasses display widget actions include
+            mobile_render_display_widget, mobile_update_display_widget,
+            mobile_clear_display_widget, mobile_focus_display_widget,
+            mobile_activate_display_widget_action, and
+            mobile_reset_display_widget_session.
         params:
           type: object
           additionalProperties: true
@@ -3800,6 +3806,127 @@ components:
               token: conf-abc123xyz
               expires_at: '2026-01-17T01:00:00Z'
               summary: Merge PR #456 in owner/repo
+            follow_on_task: null
+        display_widget_actions:
+          summary: Meta glasses display widget mobile actions
+          value:
+            status: ok
+            intent:
+              name: agent.result_details
+              confidence: 1.0
+              entities:
+                task_id: task-widget-1
+                descriptor_cid: bafybeidescriptor
+                widget_cid: bafybeiwidget
+                orb_receipt_cid: bafybeiorbreceipt
+            spoken_text: Display widget actions are ready.
+            cards:
+              - title: Task Progress Widget
+                subtitle: Meta glasses display
+                lines:
+                  - 'descriptor: bafybeidescriptor'
+                  - 'widget: bafybeiwidget'
+                  - 'policy: permit'
+                action_items:
+                  - id: mobile_render_display_widget
+                    label: Render Widget
+                    phrase: render the display widget
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_render_display_widget
+                      action: render
+                      operation: render_widget
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-render
+                  - id: mobile_update_display_widget
+                    label: Update Widget
+                    phrase: update the display widget
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_update_display_widget
+                      action: update
+                      operation: update_widget
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-update
+                  - id: mobile_clear_display_widget
+                    label: Clear Widget
+                    phrase: clear the display widget
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_clear_display_widget
+                      action: clear
+                      operation: clear_widget
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-clear
+                  - id: mobile_focus_display_widget
+                    label: Focus Widget
+                    phrase: focus the display widget
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_focus_display_widget
+                      action: focus
+                      operation: focus_next
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-focus
+                      focus:
+                        direction: next
+                  - id: mobile_activate_display_widget_action
+                    label: Activate Widget
+                    phrase: activate the selected display widget action
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_activate_display_widget_action
+                      action: activate
+                      operation: activate
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-activate
+                  - id: mobile_reset_display_widget_session
+                    label: Reset Widget
+                    phrase: reset the display widget session
+                    mobile_payload:
+                      contract: handsfree.meta-glasses/display-widget-action@0.1.0
+                      type: mobile_reset_display_widget_session
+                      action: reset
+                      operation: reset_session
+                      descriptor_cid: bafybeidescriptor
+                      interface_cid: bafybeidescriptor
+                      widget_id: handsfree.task-progress-widget
+                      widget_cid: bafybeiwidget
+                      orb_receipt_cid: bafybeiorbreceipt
+                      policy_decision:
+                        outcome: permit
+                      correlation_id: corr-widget-reset
+            pending_action: null
             follow_on_task: null
       properties:
         status:
@@ -4259,6 +4386,152 @@ components:
           type: string
           description: Human-readable action summary for confirmation.
 
+    MetaGlassesDisplayWidgetAction:
+      type: string
+      enum: [render, update, clear, focus, activate, reset]
+
+    MetaGlassesDisplayWidgetOperation:
+      type: string
+      enum: [render_widget, update_widget, clear_widget, focus_next, focus_previous, activate, reset_session]
+
+    MetaGlassesDisplayWidgetMobileActionType:
+      type: string
+      enum:
+        - mobile_render_display_widget
+        - mobile_update_display_widget
+        - mobile_clear_display_widget
+        - mobile_focus_display_widget
+        - mobile_activate_display_widget_action
+        - mobile_reset_display_widget_session
+
+    MetaGlassesDisplayWidgetPolicyDecision:
+      type: object
+      required: [outcome]
+      properties:
+        outcome:
+          type: string
+          enum: [permit, deny, require_confirmation]
+        reasons:
+          type: array
+          items: { type: string }
+        policy_id:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+
+    MetaGlassesDisplayWidgetFocusPayload:
+      type: object
+      required: [direction]
+      properties:
+        direction:
+          type: string
+          enum: [next, previous]
+        action_id:
+          type: string
+          nullable: true
+        focus_index:
+          type: integer
+          minimum: 0
+          nullable: true
+
+    MetaGlassesDisplayWidgetMobileActionPayload:
+      type: object
+      required:
+        - type
+        - action
+        - operation
+        - descriptor_cid
+        - widget_id
+        - widget_cid
+        - orb_receipt_cid
+        - policy_decision
+        - correlation_id
+      example:
+        contract: handsfree.meta-glasses/display-widget-action@0.1.0
+        type: mobile_render_display_widget
+        action: render
+        operation: render_widget
+        descriptor_cid: bafybeidescriptor
+        interface_cid: bafybeidescriptor
+        widget_id: handsfree.task-progress-widget
+        widget_cid: bafybeiwidget
+        orb_receipt_cid: bafybeiorbreceipt
+        policy_decision:
+          outcome: permit
+          reasons: [trusted descriptor]
+          policy_id: display-widget-default
+          source: handsfree
+        correlation_id: corr-widget-render
+        request_id: render-1
+        issued_at: '2026-05-22T12:00:00Z'
+        fallback:
+          render_path: mobile-card
+          message: Display unavailable; showing this widget on the phone.
+      properties:
+        contract:
+          type: string
+          enum: [handsfree.meta-glasses/display-widget-action@0.1.0]
+          default: handsfree.meta-glasses/display-widget-action@0.1.0
+        type:
+          $ref: '#/components/schemas/MetaGlassesDisplayWidgetMobileActionType'
+        action:
+          $ref: '#/components/schemas/MetaGlassesDisplayWidgetAction'
+        operation:
+          $ref: '#/components/schemas/MetaGlassesDisplayWidgetOperation'
+        descriptor_cid:
+          type: string
+          minLength: 1
+          description: Descriptor or interface CID authorized by the ORB.
+        interface_cid:
+          type: string
+          nullable: true
+          description: Swissknife interface CID; mirrors descriptor_cid when available.
+        widget_id:
+          type: string
+          minLength: 1
+        widget_cid:
+          type: string
+          minLength: 1
+        orb_receipt_cid:
+          type: string
+          minLength: 1
+        policy_decision:
+          $ref: '#/components/schemas/MetaGlassesDisplayWidgetPolicyDecision'
+        correlation_id:
+          type: string
+          minLength: 1
+        request_id:
+          type: string
+          nullable: true
+        issued_at:
+          type: string
+          nullable: true
+        state:
+          type: object
+          additionalProperties: true
+          nullable: true
+        patch:
+          type: object
+          additionalProperties: true
+          nullable: true
+        manifest:
+          type: object
+          additionalProperties: true
+          nullable: true
+        focus:
+          allOf:
+            - $ref: '#/components/schemas/MetaGlassesDisplayWidgetFocusPayload'
+          nullable: true
+        activated_action_id:
+          type: string
+          nullable: true
+        fallback:
+          type: object
+          additionalProperties: true
+          nullable: true
+
     UICard:
       type: object
       required: [title]
@@ -4309,6 +4582,11 @@ components:
           type: object
           additionalProperties: true
           description: Optional action parameters or template values.
+        mobile_payload:
+          allOf:
+            - $ref: '#/components/schemas/MetaGlassesDisplayWidgetMobileActionPayload'
+          nullable: true
+          description: Typed client-local payload for Meta glasses display widget actions.
 
     AgentTaskControlResponse:
       type: object

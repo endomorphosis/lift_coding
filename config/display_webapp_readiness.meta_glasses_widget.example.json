@@ -1,0 +1,50 @@
+{
+  "deployment_url": "https://example.com/glasses-display/widgets/handsfree-task-progress-widget",
+  "viewport": {
+    "width": 600,
+    "height": 600
+  },
+  "navigation_model": "dpad_focus",
+  "focusable_elements": 2,
+  "navigation_order_valid": true,
+  "dark_theme_supported": true,
+  "min_contrast_ratio": 7.2,
+  "app_connection_documented": true,
+  "renderer": {
+    "schema": "handsfree.meta-glasses/webapp-preview",
+    "schema_version": "0.1.0",
+    "implementation": "swissknife/src/services/meta-glasses-webapp-renderer.ts",
+    "local_preview": true
+  },
+  "widgets": [
+    {
+      "widget_id": "org.handsfree.meta_glasses.handsfree-task-progress-widget@1.0.0",
+      "widget_cid": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "render_path": "display-webapp",
+      "fallback_render_path": "display-webapp",
+      "webapp_target": true,
+      "deployment_url": "https://example.com/glasses-display/widgets/handsfree-task-progress-widget",
+      "viewport": {
+        "width": 600,
+        "height": 600
+      },
+      "navigation_model": "dpad_focus",
+      "focusable_elements": 2,
+      "focus_order": [
+        "pause",
+        "dismiss"
+      ],
+      "navigation_order_valid": true,
+      "dark_theme_supported": true,
+      "min_contrast_ratio": 7.2,
+      "browser_preview": {
+        "renderer": "swissknife/src/services/meta-glasses-webapp-renderer.ts",
+        "renderable": true,
+        "viewport": {
+          "width": 600,
+          "height": 600
+        }
+      }
+    }
+  ]
+}
