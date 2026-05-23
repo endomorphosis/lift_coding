@@ -169,6 +169,38 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
     assert "contracts/interaction_envelope.schema.json" in _git(nested, "show", "--name-only", "--format=", "HEAD")
 
 
+def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    repo = tmp_path / "repo"
+    parent = repo / "hallucinate_app"
+    parent.mkdir(parents=True)
+    (parent / ".gitmodules").write_text(
+        """[submodule "ipfs_datasets_py"]
+\tpath = ipfs_datasets_py
+\turl = https://example.invalid/ipfs_datasets_py.git
+""",
+        encoding="utf-8",
+    )
+    daemon = PortalImplementationDaemon(
+        todo_path=repo / "todo.md",
+        state_path=repo / "state.json",
+        strategy_path=repo / "strategy.json",
+        events_path=repo / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+
+    daemon._initialize_nested_worktree_submodules(
+        parent,
+        branch_name="implementation/hao-test",
+        parent_relative="hallucinate_app",
+    )
+
+    assert not (parent / "ipfs_datasets_py").exists()
+
+
 def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
     state_dir = tmp_path / "state"
