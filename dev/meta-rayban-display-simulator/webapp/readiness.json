@@ -1,0 +1,44 @@
+{
+  "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+  "viewport": {
+    "width": 600,
+    "height": 600
+  },
+  "navigation_model": "dpad_focus",
+  "focusable_elements": 2,
+  "navigation_order_valid": true,
+  "dark_theme_supported": true,
+  "min_contrast_ratio": 8.1,
+  "app_connection_documented": true,
+  "widgets": [
+    {
+      "widget_id": "org.handsfree.meta_glasses.task-progress-simulator@1.0.0",
+      "widget_cid": "sha256:task-progress-simulator-fixture",
+      "render_path": "display-webapp",
+      "fallback_render_path": "display-webapp",
+      "webapp_target": true,
+      "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+      "viewport": {
+        "width": 600,
+        "height": 600
+      },
+      "navigation_model": "dpad_focus",
+      "focusable_elements": 2,
+      "focus_order": [
+        "pause",
+        "dismiss"
+      ],
+      "navigation_order_valid": true,
+      "dark_theme_supported": true,
+      "min_contrast_ratio": 8.1,
+      "browser_preview": {
+        "renderer": "dev/meta-rayban-display-simulator/webapp/app.js",
+        "renderable": true,
+        "viewport": {
+          "width": 600,
+          "height": 600
+        }
+      }
+    }
+  ]
+}

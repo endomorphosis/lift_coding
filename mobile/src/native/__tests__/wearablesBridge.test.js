@@ -380,6 +380,49 @@ describe('wearablesBridge wrapper', () => {
     }));
   });
 
+  test('replays the Meta Ray-Ban Display simulator fixture through fallback rendering', async () => {
+    jest.doMock('expo-meta-wearables-dat', () => {
+      throw new Error('module unavailable');
+    });
+
+    const {
+      TASK_PROGRESS_SIMULATOR_DISPLAY_ACTION,
+      TASK_PROGRESS_SIMULATOR_MANIFEST,
+    } = require('../__fixtures__/metaRaybanDisplaySimulatorFixtures');
+    const { getWearablesBridge, clearWearablesBridgeCache } = require('../wearablesBridge');
+    clearWearablesBridgeCache();
+
+    const bridge = await getWearablesBridge();
+    const rendered = await bridge.renderDisplayWidget(
+      TASK_PROGRESS_SIMULATOR_MANIFEST,
+      TASK_PROGRESS_SIMULATOR_DISPLAY_ACTION
+    );
+
+    expect(rendered).toMatchObject({
+      action: 'render_display_widget',
+      operation: 'render_widget',
+      supported: false,
+      reason: 'dat_native_display_unavailable',
+      renderPath: 'display-webapp',
+      descriptorCid: 'sha256:display-widget-interface',
+      widgetId: 'org.handsfree.meta_glasses.task-progress-simulator@1.0.0',
+      widgetCid: 'sha256:task-progress-simulator-fixture',
+      orbReceiptCid: 'sha256:simulator-receipt',
+      correlationId: 'simulator-task-progress',
+      fallback: expect.objectContaining({
+        renderPath: 'display-webapp',
+      }),
+    });
+
+    await expect(bridge.getDiagnostics()).resolves.toMatchObject({
+      displayActiveWidgetId: TASK_PROGRESS_SIMULATOR_MANIFEST.widget_id,
+      displayWidgetCid: TASK_PROGRESS_SIMULATOR_MANIFEST.widget_cid,
+      displayOrbReceiptCid: TASK_PROGRESS_SIMULATOR_MANIFEST.orb_receipt_cid,
+      displayCorrelationId: TASK_PROGRESS_SIMULATOR_MANIFEST.correlation_id,
+      displayRenderPath: 'display-webapp',
+    });
+  });
+
   test('normalizes resolved native module diagnostics into bridge metadata', async () => {
     const nativeModule = {
       isAvailable: () => true,

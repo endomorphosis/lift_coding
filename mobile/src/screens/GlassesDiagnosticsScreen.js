@@ -1,4 +1,4 @@
-import { Alert, AppState, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, AppState, Platform, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
@@ -37,6 +37,12 @@ import {
   isStaleTransportSessionSuspected,
 } from '../utils/peerTransportSessions';
 import { uploadWearablesDatAsset } from '../utils/metaWearablesDatMedia';
+import { createMetaGlassesMobileOrbRuntime } from '../orb/metaGlassesMobileOrbRuntime';
+import {
+  mcpServiceDescriptorRef,
+  TASK_STATUS_SERVICE_INTERFACE,
+  descriptorRef,
+} from '../orb/metaGlassesOrbDescriptors';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 const NATIVE_RECORDING_DURATION_SECONDS = 10;
@@ -161,6 +167,11 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const [wearablesFollowOnTask, setWearablesFollowOnTask] = useState(null);
   const [wearablesMediaStatus, setWearablesMediaStatus] = useState('No DAT media action yet');
   const [wearablesDisplayStatus, setWearablesDisplayStatus] = useState('No DAT display action yet');
+  const [mobileOrbDiagnostics, setMobileOrbDiagnostics] = useState(null);
+  const [mobileOrbBackendDiagnostics, setMobileOrbBackendDiagnostics] = useState(null);
+  const [mobileOrbStatus, setMobileOrbStatus] = useState('Mobile ORB edge not initialized');
+  const [isRegisteringMobileOrb, setIsRegisteringMobileOrb] = useState(false);
+  const [isRoutingMobileOrbEvent, setIsRoutingMobileOrbEvent] = useState(false);
   const [discoveredPeers, setDiscoveredPeers] = useState([]);
   const [selectedPeerRef, setSelectedPeerRef] = useState(null);
   const [activePeer, setActivePeer] = useState(null);
@@ -182,6 +193,7 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const peerSessionRef = useRef(createSessionId());
   const peerConversationRef = useRef(`chat-${createSessionId()}`);
   const localPeerIdRef = useRef(localPeerId);
+  const mobileOrbRuntimeRef = useRef(null);
   const soundRef = useRef(null);
   const pendingTtsTempUriRef = useRef(null);
   const recordingPromiseRef = useRef(null);
@@ -249,6 +261,89 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
     onStateChanged: handleWearablesStateChanged,
   });
   const wearablesCapabilitySummary = summarizeMetaWearablesDat(wearablesDiagnostics);
+  if (!mobileOrbRuntimeRef.current) {
+    mobileOrbRuntimeRef.current = createMetaGlassesMobileOrbRuntime();
+  }
+  const latestMobileOrbBinding = Array.isArray(mobileOrbDiagnostics?.bindings)
+    ? mobileOrbDiagnostics.bindings[mobileOrbDiagnostics.bindings.length - 1]
+    : null;
+  const latestMobileOrbSubscription = Array.isArray(mobileOrbDiagnostics?.subscriptions)
+    ? mobileOrbDiagnostics.subscriptions[mobileOrbDiagnostics.subscriptions.length - 1]
+    : null;
+
+  const buildMobileOrbRegistrationInput = (options = {}) => {
+    const platform = Platform.OS === 'ios' || Platform.OS === 'android'
+      ? Platform.OS
+      : 'simulator';
+    const capabilities = wearablesDiagnostics?.capabilities || {};
+    return {
+      ...options,
+      platform,
+      device_id:
+        wearablesDiagnostics?.selectedDeviceId ||
+        wearablesDiagnostics?.activeDeviceId ||
+        undefined,
+      device_model:
+        wearablesDiagnostics?.selectedDeviceName ||
+        wearablesDiagnostics?.activeDeviceName ||
+        'Meta Ray-Ban Display',
+      capabilities: {
+        session: Boolean(capabilities.session || wearablesBridgeAvailable),
+        camera: Boolean(capabilities.camera),
+        photoCapture: Boolean(capabilities.photoCapture),
+        videoStream: Boolean(capabilities.videoStream),
+        audio: true,
+        display: Boolean(capabilities.display || wearablesCapabilitySummary.displayReady),
+        displayVideo: Boolean(capabilities.displayVideo),
+        webAppDisplay: true,
+      },
+    };
+  };
+
+  const refreshMobileOrbDiagnostics = () => {
+    const diagnostics = mobileOrbRuntimeRef.current.getDiagnostics();
+    setMobileOrbDiagnostics(diagnostics);
+    return diagnostics;
+  };
+
+  const refreshMobileOrbBackendDiagnostics = async () => {
+    const diagnostics = await mobileOrbRuntimeRef.current.fetchBackendDiagnostics();
+    setMobileOrbBackendDiagnostics(diagnostics);
+    return diagnostics;
+  };
+
+  const ensureMobileOrbEdgeSession = async (options = {}) => {
+    setIsRegisteringMobileOrb(true);
+    try {
+      setLastError(null);
+      const result = await mobileOrbRuntimeRef.current.ensureRegistered(
+        buildMobileOrbRegistrationInput(options)
+      );
+      const diagnostics = refreshMobileOrbDiagnostics();
+      await refreshMobileOrbBackendDiagnostics().catch(() => null);
+      const mode = result?.restored ? 'Restored' : 'Registered';
+      setMobileOrbStatus(`${mode} ${diagnostics.edge_session_id || 'mobile ORB edge'}`);
+      return result;
+    } catch (error) {
+      setMobileOrbStatus('Mobile ORB edge registration failed');
+      setLastError(`Mobile ORB edge registration failed: ${error.message}`);
+      throw error;
+    } finally {
+      setIsRegisteringMobileOrb(false);
+    }
+  };
+
+  const clearMobileOrbEdgeSession = async () => {
+    try {
+      setLastError(null);
+      await mobileOrbRuntimeRef.current.clearEdgeSession();
+      refreshMobileOrbDiagnostics();
+      setMobileOrbBackendDiagnostics(null);
+      setMobileOrbStatus('Mobile ORB edge session cleared');
+    } catch (error) {
+      setLastError(`Mobile ORB edge clear failed: ${error.message}`);
+    }
+  };
 
   const hydrateWearablesFollowOnTask = async (followOnTask) => {
     if (!followOnTask?.task_id) {
@@ -327,6 +422,11 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
       }
       await checkAudioRoute();
       await refreshPeerAdapterState();
+      try {
+        await ensureMobileOrbEdgeSession();
+      } catch {
+        // Mobile ORB diagnostics are best-effort on this screen.
+      }
     })();
 
     // Fetch initial debug state immediately
@@ -790,6 +890,75 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
       await handleWearablesDisplayResult(result);
     } catch {
       // hook already reported the error
+    }
+  };
+
+  const routeMobileOrbTaskStatus = async () => {
+    setIsRoutingMobileOrbEvent(true);
+    try {
+      setLastError(null);
+      await ensureMobileOrbEdgeSession();
+      const correlationId = `diagnostics-task-status-${Date.now()}`;
+      const result = await mobileOrbRuntimeRef.current.routeGlassesEventToService({
+        eventType: 'captouch',
+        eventPayload: {
+          gesture: 'tap',
+          intent: 'show task status',
+          source: 'diagnostics',
+        },
+        serviceInterfaceCid: 'sha256:task-service',
+        serviceDescriptor: mcpServiceDescriptorRef(
+          TASK_STATUS_SERVICE_INTERFACE,
+          'sha256:task-service'
+        ),
+        serviceOperation: 'get_task_status',
+        serviceArguments: {
+          task_id: wearablesFollowOnTask?.task_id || 'diagnostics-task',
+          display_widget_action: {
+            operation: 'render_widget',
+            descriptor_cid: mobileOrbDiagnostics?.display_widget_interface_cid,
+            manifest: {
+              widget_id: 'handsfree.diagnostics.task-status',
+              state: {
+                values: {
+                  title: 'HandsFree task status',
+                  status: wearablesFollowOnTask?.state || 'diagnostics',
+                  summary:
+                    wearablesFollowOnTask?.summary ||
+                    'Mobile ORB bridge routed a glasses event.',
+                },
+              },
+            },
+            fallback: {
+              render_path: 'mobile-card',
+              message: 'Display unavailable. Showing task status on phone.',
+            },
+          },
+          spoken_text: wearablesFollowOnTask?.summary || 'Task status is available.',
+        },
+        renderTargets: ['display_widget', 'audio', 'mobile_card'],
+        correlationId,
+        subscribeUpdates: true,
+        updateStream: 'task-status',
+        subscriptionArguments: {
+          task_id: wearablesFollowOnTask?.task_id || 'diagnostics-task',
+        },
+        navigation,
+      });
+      const diagnostics = refreshMobileOrbDiagnostics();
+      await refreshMobileOrbBackendDiagnostics().catch(() => null);
+      setMobileOrbStatus(
+        `Routed ${result.event.response.event_cid}; subscription ${
+          result.subscription?.response?.subscription_id ||
+          diagnostics.subscriptions?.[diagnostics.subscriptions.length - 1]?.subscription_id ||
+          'none'
+        }; dispatch ${result.dispatched.response.receipt_cid}`
+      );
+    } catch (error) {
+      setMobileOrbStatus('Mobile ORB route failed');
+      setLastError(`Mobile ORB route failed: ${error.message}`);
+    } finally {
+      setIsRoutingMobileOrbEvent(false);
     }
   };
 
@@ -1392,6 +1561,43 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         )}
         <Text style={styles.text}>Media action: {wearablesMediaStatus}</Text>
         <Text style={styles.text}>Display action: {wearablesDisplayStatus}</Text>
+        <Text style={styles.text}>Mobile ORB edge: {mobileOrbStatus}</Text>
+        <Text style={styles.text}>
+          ORB session: {mobileOrbDiagnostics?.edge_session_id || 'none'}
+        </Text>
+        <Text style={styles.text}>
+          ORB policy: {mobileOrbDiagnostics?.policy_cid || 'none'}
+        </Text>
+        <Text style={styles.text}>
+          ORB persistence: {mobileOrbDiagnostics?.edge_session_persistence ? 'edge-session' : 'none'}
+          {mobileOrbDiagnostics?.orb_state_persistence ? ' + bindings/subscriptions' : ''}
+        </Text>
+        <Text style={styles.text}>
+          ORB descriptors: {[
+            mobileOrbDiagnostics?.mobile_orb_interface_cid,
+            mobileOrbDiagnostics?.display_widget_interface_cid,
+          ].filter(Boolean).join(', ') || 'none'}
+        </Text>
+        <Text style={styles.text}>
+          ORB events/bindings/subscriptions: {mobileOrbDiagnostics
+            ? `${mobileOrbDiagnostics.events_count}/${mobileOrbDiagnostics.bindings_count}/${mobileOrbDiagnostics.subscriptions_count || 0}`
+            : '0/0/0'}
+        </Text>
+        <Text style={styles.text}>
+          ORB backend events/bindings/subscriptions: {mobileOrbBackendDiagnostics
+            ? `${mobileOrbBackendDiagnostics.events_count}/${mobileOrbBackendDiagnostics.bindings_count}/${mobileOrbBackendDiagnostics.subscriptions_count || 0}`
+            : 'not loaded'}
+        </Text>
+        <Text style={styles.text}>
+          ORB latest service: {latestMobileOrbBinding
+            ? `${latestMobileOrbBinding.service_id || latestMobileOrbBinding.service_interface_cid} / ${latestMobileOrbBinding.operation}`
+            : 'none'}
+        </Text>
+        <Text style={styles.text}>
+          ORB latest subscription: {latestMobileOrbSubscription
+            ? `${latestMobileOrbSubscription.service_id || latestMobileOrbSubscription.binding_handle} / ${latestMobileOrbSubscription.stream || latestMobileOrbSubscription.operation}`
+            : 'none'}
+        </Text>
         <Text style={styles.text}>
           Candidate devices: {wearablesCandidates.length > 0
             ? wearablesCandidates
@@ -1409,6 +1615,30 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
         </Text>
         <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={refreshWearablesDiagnostics}>
           <Text style={styles.buttonTextSecondary}>Refresh Bridge Diagnostics</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary, isRegisteringMobileOrb && styles.buttonDisabled]}
+          onPress={() => ensureMobileOrbEdgeSession({ force: true }).catch(() => {})}
+          disabled={isRegisteringMobileOrb}
+        >
+          <Text style={styles.buttonTextSecondary}>
+            {isRegisteringMobileOrb ? 'Registering ORB Edge...' : 'Register Mobile ORB Edge'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, isRoutingMobileOrbEvent && styles.buttonDisabled]}
+          onPress={routeMobileOrbTaskStatus}
+          disabled={isRoutingMobileOrbEvent}
+        >
+          <Text style={styles.buttonText}>
+            {isRoutingMobileOrbEvent ? 'Routing ORB Event...' : 'Route Task Status Through ORB'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonSecondary]}
+          onPress={clearMobileOrbEdgeSession}
+        >
+          <Text style={styles.buttonTextSecondary}>Clear Mobile ORB Edge Session</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, !wearablesCandidates.length && styles.buttonDisabled]} onPress={selectPrimaryWearablesCandidate} disabled={!wearablesCandidates.length}>
           <Text style={styles.buttonText}>Select First Candidate</Text>

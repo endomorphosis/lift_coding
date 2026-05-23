@@ -1,6 +1,7 @@
 import {
   bindMobileOrbService,
   dispatchMobileOrbGlassesResponse,
+  getMobileOrbDiagnostics,
   invokeMobileOrbService,
   publishMobileOrbGlassesEvent,
   registerMobileOrbEdgeCapabilities,
@@ -17,5 +18,6 @@ export function createMetaGlassesMobileOrbApiBackend() {
     subscribeServiceUpdates: subscribeMobileOrbServiceUpdates,
     dispatchGlassesResponse: dispatchMobileOrbGlassesResponse,
     revokeBinding: revokeMobileOrbBinding,
+    getDiagnostics: getMobileOrbDiagnostics,
   };
 }

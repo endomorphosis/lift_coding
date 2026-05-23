@@ -1,6 +1,7 @@
 import { createMetaGlassesMobileOrbApiBackend } from './metaGlassesMobileOrbApiBackend';
 import { createMetaGlassesMobileOrbBridge } from './metaGlassesMobileOrbBridge';
 import { metaGlassesOrbEdgeSessionStore } from './metaGlassesOrbEdgeSession';
+import { metaGlassesOrbStateStore } from './metaGlassesOrbStateStore';
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
@@ -37,6 +38,9 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
   const edgeSessionStore = Object.prototype.hasOwnProperty.call(options, 'edgeSessionStore')
     ? options.edgeSessionStore
     : metaGlassesOrbEdgeSessionStore;
+  const orbStateStore = Object.prototype.hasOwnProperty.call(options, 'orbStateStore')
+    ? options.orbStateStore
+    : metaGlassesOrbStateStore;
   const backend = options.backend || createMetaGlassesMobileOrbApiBackend();
   const localInterfaceCids = options.localInterfaceCids || [
     localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
@@ -47,6 +51,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
     now,
     backend,
     edgeSessionStore,
+    orbStateStore,
     localInterfaceCids,
   });
 
@@ -97,7 +102,22 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
       display_widget_interface_cid: localInterfaceCids[1],
       backend_kind: options.backend ? 'injected' : 'api',
       edge_session_persistence: Boolean(edgeSessionStore),
+      orb_state_persistence: Boolean(orbStateStore),
     };
+  }
+
+  async function fetchBackendDiagnostics(params = {}) {
+    if (!backend.getDiagnostics) {
+      return null;
+    }
+    const edgeSessionId =
+      params.edge_session_id ||
+      params.edgeSessionId ||
+      bridge.getEdgeSession()?.edge_session_id;
+    return backend.getDiagnostics({
+      ...params,
+      ...(edgeSessionId ? { edge_session_id: edgeSessionId } : {}),
+    });
   }
 
   return {
@@ -106,6 +126,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
     routeGlassesEventToService,
     restoreEdgeSession: () => bridge.restoreEdgeSession(),
     clearEdgeSession: () => bridge.clearEdgeSession(),
+    fetchBackendDiagnostics,
     getDiagnostics,
   };
 }

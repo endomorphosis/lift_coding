@@ -27,6 +27,7 @@ import {
   postDevPeerEnvelope,
   getNotificationDetail,
   getNotifications,
+  getMobileOrbDiagnostics,
   bindMobileOrbService,
   dispatchMobileOrbGlassesResponse,
   invokeMobileOrbService,
@@ -201,6 +202,7 @@ describe('mobile ORB bridge API helpers', () => {
     await subscribeMobileOrbServiceUpdates({ binding_handle: 'binding', operation: 'get_task_status' });
     await dispatchMobileOrbGlassesResponse({ edge_session_id: 'session', result: {} });
     await revokeMobileOrbBinding({ binding_handle: 'binding', reason: 'done' });
+    await getMobileOrbDiagnostics({ edge_session_id: 'session' });
 
     expect(global.fetch.mock.calls.map(([url]) => url)).toEqual([
       'http://example.test/v1/mobile/orb/register_edge_capabilities',
@@ -210,8 +212,9 @@ describe('mobile ORB bridge API helpers', () => {
       'http://example.test/v1/mobile/orb/subscribe_service_updates',
       'http://example.test/v1/mobile/orb/dispatch_glasses_response',
       'http://example.test/v1/mobile/orb/revoke_binding',
+      'http://example.test/v1/mobile/orb/diagnostics?edge_session_id=session',
     ]);
-    for (const [, request] of global.fetch.mock.calls) {
+    for (const [, request] of global.fetch.mock.calls.slice(0, -1)) {
       expect(request).toMatchObject({
         method: 'POST',
         headers: {
@@ -220,6 +223,13 @@ describe('mobile ORB bridge API helpers', () => {
         },
       });
     }
+    expect(global.fetch.mock.calls[global.fetch.mock.calls.length - 1][1]).toMatchObject({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer test-token',
+      },
+    });
   });
 
   it('throws normalized mobile ORB bridge backend errors', async () => {

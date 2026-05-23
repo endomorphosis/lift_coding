@@ -1,0 +1,159 @@
+{
+  "schema": "handsfree.meta-rayban-display/simulator-manifest",
+  "schema_version": "0.1.0",
+  "widget_id": "org.handsfree.meta_glasses.task-progress-simulator@1.0.0",
+  "widget_cid": "sha256:task-progress-simulator-fixture",
+  "descriptor_cid": "sha256:display-widget-interface",
+  "orb_receipt_cid": "sha256:simulator-receipt",
+  "correlation_id": "simulator-task-progress",
+  "viewport": {
+    "width": 600,
+    "height": 600
+  },
+  "state": {
+    "title": "Sync dataset",
+    "status": "Running",
+    "summary": "42 percent complete. Indexing source records.",
+    "progress": 0.42,
+    "updated_at": "2026-05-23T12:00:00Z"
+  },
+  "regions": [
+    {
+      "id": "title",
+      "kind": "text",
+      "x": 32,
+      "y": 28,
+      "width": 536,
+      "height": 92,
+      "text": "Sync dataset",
+      "variant": "title"
+    },
+    {
+      "id": "status",
+      "kind": "text",
+      "x": 32,
+      "y": 132,
+      "width": 536,
+      "height": 82,
+      "text": "Running: 42 percent complete",
+      "variant": "status"
+    },
+    {
+      "id": "progress",
+      "kind": "progress",
+      "x": 32,
+      "y": 232,
+      "width": 536,
+      "height": 90,
+      "value": 0.42,
+      "label": "42%"
+    },
+    {
+      "id": "media-fallback",
+      "kind": "media",
+      "x": 32,
+      "y": 342,
+      "width": 536,
+      "height": 86,
+      "fallback_text": "Preview image unavailable on simulator fixture.",
+      "media": {
+        "type": "image",
+        "uri": "https://example.com/glasses-display/assets/task-progress.png",
+        "alt": "Task progress preview"
+      }
+    },
+    {
+      "id": "pause-task",
+      "kind": "action",
+      "x": 32,
+      "y": 452,
+      "width": 252,
+      "height": 96,
+      "action_id": "pause",
+      "label": "Pause"
+    },
+    {
+      "id": "dismiss-widget",
+      "kind": "action",
+      "x": 316,
+      "y": 452,
+      "width": 252,
+      "height": 96,
+      "action_id": "dismiss",
+      "label": "Dismiss"
+    }
+  ],
+  "actions": [
+    {
+      "id": "pause",
+      "label": "Pause",
+      "operation": "activate",
+      "result": {
+        "action": "activate_display_widget_action",
+        "requiredAction": "pause_task"
+      }
+    },
+    {
+      "id": "dismiss",
+      "label": "Dismiss",
+      "operation": "clear_widget",
+      "result": {
+        "action": "clear_display_widget",
+        "requiredAction": "dismiss_widget"
+      }
+    }
+  ],
+  "focus_order": [
+    "pause",
+    "dismiss"
+  ],
+  "fallback": {
+    "reason": "dat_native_display_unavailable",
+    "render_path": "display-webapp",
+    "message": "Native display unavailable. Showing simulator preview."
+  },
+  "readiness": {
+    "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+    "viewport": {
+      "width": 600,
+      "height": 600
+    },
+    "navigation_model": "dpad_focus",
+    "focusable_elements": 2,
+    "navigation_order_valid": true,
+    "dark_theme_supported": true,
+    "min_contrast_ratio": 8.1,
+    "app_connection_documented": true,
+    "widgets": [
+      {
+        "widget_id": "org.handsfree.meta_glasses.task-progress-simulator@1.0.0",
+        "widget_cid": "sha256:task-progress-simulator-fixture",
+        "render_path": "display-webapp",
+        "fallback_render_path": "display-webapp",
+        "webapp_target": true,
+        "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+        "viewport": {
+          "width": 600,
+          "height": 600
+        },
+        "navigation_model": "dpad_focus",
+        "focusable_elements": 2,
+        "focus_order": [
+          "pause",
+          "dismiss"
+        ],
+        "navigation_order_valid": true,
+        "dark_theme_supported": true,
+        "min_contrast_ratio": 8.1,
+        "browser_preview": {
+          "renderer": "dev/meta-rayban-display-simulator/simulator.js",
+          "renderable": true,
+          "viewport": {
+            "width": 600,
+            "height": 600
+          }
+        }
+      }
+    ]
+  }
+}

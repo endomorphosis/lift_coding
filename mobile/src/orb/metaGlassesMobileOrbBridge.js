@@ -75,6 +75,15 @@ function nowIso(now) {
   return now().toISOString();
 }
 
+function isStaleBindingError(error) {
+  const message = String(error?.message || '').toLowerCase();
+  return (
+    message.includes('binding_not_found') ||
+    message.includes('service binding not found') ||
+    message.includes('untracked service binding')
+  );
+}
+
 function normalizeCapabilities(input = {}) {
   const capabilities = input.capabilities || input.dat_capabilities || input;
   return {
@@ -121,6 +130,148 @@ function normalizePolicyDecision(policyDecision = {}) {
     reasons: Array.isArray(policyDecision.reasons) ? policyDecision.reasons : [],
     source: policyDecision.source || 'mobile_orb_bridge',
     ...policyDecision,
+  };
+}
+
+function normalizeMethodDefinitions(value) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value
+    .filter(isObject)
+    .filter((method) => typeof method.name === 'string' && method.name.length > 0)
+    .map((method) => definedEntries(
+      Object.fromEntries(Object.keys(method).sort().map((key) => [key, method[key]]))
+    ));
+}
+
+function normalizeErrorDefinitions(value) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value
+    .filter(isObject)
+    .filter((error) => typeof error.name === 'string' && error.name.length > 0)
+    .map((error) => definedEntries(
+      Object.fromEntries(Object.keys(error).sort().map((key) => [key, error[key]]))
+    ));
+}
+
+function normalizeDescriptorRecord(value) {
+  if (!isObject(value)) {
+    return {};
+  }
+  return definedEntries(
+    Object.fromEntries(Object.keys(value).sort().map((key) => [key, value[key]]))
+  );
+}
+
+function normalizeDescriptorMetadata(value) {
+  if (!isObject(value)) {
+    return {};
+  }
+  return definedEntries({
+    provider_name: value.provider_name,
+    server_family: value.server_family || value.mcp_server_family,
+    tool_name: value.tool_name || value.default_tool_name || value.operation_tool_name,
+  });
+}
+
+function normalizeServiceDescriptor(serviceInterfaceCid, serviceDescriptor) {
+  if (!isObject(serviceDescriptor)) {
+    return null;
+  }
+  const normalizedDescriptor = {
+    name:
+      serviceDescriptor.name ||
+      serviceDescriptor.service_id ||
+      serviceDescriptor.serviceId ||
+      serviceInterfaceCid,
+    namespace:
+      serviceDescriptor.namespace ||
+      serviceDescriptor.service_namespace ||
+      serviceDescriptor.serviceNamespace ||
+      'handsfree.meta_glasses.mobile',
+    version: serviceDescriptor.version || '0.1.0',
+    methods: normalizeMethodDefinitions(serviceDescriptor.methods),
+    errors: normalizeErrorDefinitions(serviceDescriptor.errors),
+    requires: Array.isArray(serviceDescriptor.requires)
+      ? serviceDescriptor.requires.filter((item) => typeof item === 'string')
+      : [],
+    compatibility: normalizeDescriptorRecord(serviceDescriptor.compatibility),
+  };
+  const metadata = normalizeDescriptorMetadata(serviceDescriptor.metadata);
+  if (Object.keys(metadata).length > 0) {
+    normalizedDescriptor.metadata = metadata;
+  }
+  return normalizedDescriptor;
+}
+
+function descriptorServiceId(serviceInterfaceCid, serviceDescriptor) {
+  if (!isObject(serviceDescriptor)) {
+    return serviceInterfaceCid;
+  }
+  return (
+    serviceDescriptor.service_id ||
+    serviceDescriptor.serviceId ||
+    serviceDescriptor.name ||
+    serviceDescriptor.namespace ||
+    serviceInterfaceCid
+  );
+}
+
+function descriptorOperation(operation, serviceDescriptor) {
+  if (operation) {
+    return operation;
+  }
+  if (Array.isArray(serviceDescriptor?.methods)) {
+    const method = serviceDescriptor.methods.find(
+      (candidate) => isObject(candidate) && typeof candidate.name === 'string'
+    );
+    if (method?.name) {
+      return method.name;
+    }
+  }
+  return 'invoke';
+}
+
+function buildOrbBindingMetadata(payload, bindingHandle) {
+  const serviceInterfaceCid = payload.service_interface_cid;
+  const normalizedDescriptor = normalizeServiceDescriptor(
+    serviceInterfaceCid,
+    payload.service_descriptor
+  );
+  const descriptorMetadata = isObject(normalizedDescriptor?.metadata)
+    ? normalizedDescriptor.metadata
+    : {};
+  const descriptorCid = normalizedDescriptor
+    ? localCid('mcp-interface', normalizedDescriptor)
+    : serviceInterfaceCid;
+  const serviceId = descriptorServiceId(serviceInterfaceCid, payload.service_descriptor);
+  const operation = descriptorOperation(payload.operation, payload.service_descriptor);
+  const transport = payload.transport_preference || 'mcp-server';
+
+  return {
+    handle: bindingHandle,
+    interface_cid: serviceInterfaceCid,
+    descriptor_cid: descriptorCid,
+    service_id: serviceId,
+    operation,
+    transport,
+    transport_binding: {
+      transport,
+      service_id: serviceId,
+      operation,
+      metadata: definedEntries({
+        descriptor_cid: descriptorCid,
+        descriptor_available: isObject(payload.service_descriptor),
+        descriptor_kind: normalizedDescriptor ? 'mcp-idl' : undefined,
+        provider_name: descriptorMetadata.provider_name,
+        server_family: descriptorMetadata.server_family,
+        tool_name: descriptorMetadata.tool_name,
+        interface_descriptor: normalizedDescriptor || undefined,
+      }),
+    },
   };
 }
 
@@ -236,15 +387,17 @@ function defaultBackend(now) {
       };
     },
     async bindService(payload) {
+      const bindingHandle =
+        payload.binding_handle ||
+        `${DEFAULT_SERVICE_BINDING}:${payload.service_interface_cid || payload.operation || 'unknown'}`;
       return {
-        binding_handle:
-          payload.binding_handle ||
-          `${DEFAULT_SERVICE_BINDING}:${payload.service_interface_cid || payload.operation || 'unknown'}`,
+        binding_handle: bindingHandle,
         transport: payload.transport_preference || 'http',
         granted_capabilities: [],
         policy_decision: normalizePolicyDecision({
           reasons: ['Local default service binding.'],
         }),
+        orb_binding: buildOrbBindingMetadata(payload, bindingHandle),
         expires_at: null,
       };
     },
@@ -259,10 +412,20 @@ function defaultBackend(now) {
       };
     },
     async subscribeServiceUpdates(payload) {
+      const subscriptionId = `local:subscription:${payload.operation || 'updates'}`;
+      const receiptCid = localCid('receipt', payload);
       return {
-        subscription_id: `local:subscription:${payload.operation || 'updates'}`,
-        receipt_cid: localCid('receipt', payload),
+        subscription_id: subscriptionId,
+        receipt_cid: receiptCid,
         generation_key: `${payload.binding_handle}:${payload.operation}:${nowIso(now)}`,
+        subscription: {
+          ...payload,
+          subscription_id: subscriptionId,
+          receipt_cid: receiptCid,
+          generation_key: `${payload.binding_handle}:${payload.operation}:${nowIso(now)}`,
+          status: 'active',
+          subscribed_at: nowIso(now),
+        },
       };
     },
     async dispatchGlassesResponse(payload) {
@@ -291,6 +454,7 @@ export class MetaGlassesMobileOrbBridge {
     };
     this.localActionExecutor = options.localActionExecutor || executeLocalStructuredAction;
     this.edgeSessionStore = options.edgeSessionStore || null;
+    this.orbStateStore = options.orbStateStore || null;
     this.edgeId = options.edgeId || DEFAULT_EDGE_ID;
     this.platform = options.platform || 'simulator';
     this.device = options.device || {};
@@ -300,6 +464,7 @@ export class MetaGlassesMobileOrbBridge {
     ];
     this.edgeSession = null;
     this.bindings = new Map();
+    this.subscriptions = new Map();
     this.eventLog = [];
   }
 
@@ -309,6 +474,14 @@ export class MetaGlassesMobileOrbBridge {
 
   getEventLog() {
     return [...this.eventLog];
+  }
+
+  getOrbStateSnapshot() {
+    return {
+      edge_session_id: this.edgeSession?.edge_session_id || null,
+      bindings: Array.from(this.bindings.values()),
+      subscriptions: Array.from(this.subscriptions.values()),
+    };
   }
 
   getDiagnostics() {
@@ -321,6 +494,29 @@ export class MetaGlassesMobileOrbBridge {
       accepted_interface_cids: this.edgeSession?.accepted_interface_cids || [],
       dat_capabilities: this.edgeSession?.dat_capabilities || null,
       bindings_count: this.bindings.size,
+      bindings: Array.from(this.bindings.entries()).map(([bindingHandle, binding]) => ({
+        binding_handle: bindingHandle,
+        service_interface_cid: binding.service_interface_cid || null,
+        service_id: binding.orb_binding?.service_id || null,
+        descriptor_cid: binding.orb_binding?.descriptor_cid || null,
+        operation: binding.operation || binding.orb_binding?.operation || null,
+        transport: binding.transport || binding.orb_binding?.transport || null,
+        orb_binding: binding.orb_binding || null,
+      })),
+      subscriptions_count: this.subscriptions.size,
+      subscriptions: Array.from(this.subscriptions.entries()).map(([
+        subscriptionId,
+        subscription,
+      ]) => ({
+        subscription_id: subscriptionId,
+        binding_handle: subscription.binding_handle,
+        operation: subscription.operation,
+        stream: subscription.stream,
+        generation_key: subscription.generation_key,
+        receipt_cid: subscription.receipt_cid,
+        status: subscription.status || 'active',
+        service_id: subscription.orb_binding?.service_id || null,
+      })),
       events_count: this.eventLog.length,
       latest_event_cid: this.eventLog[this.eventLog.length - 1]?.event_cid || null,
     };
@@ -335,19 +531,139 @@ export class MetaGlassesMobileOrbBridge {
     return this.edgeSession;
   }
 
+  hydrateOrbState(state) {
+    if (!isObject(state)) {
+      return this.getOrbStateSnapshot();
+    }
+    if (
+      state.edge_session_id &&
+      this.edgeSession?.edge_session_id &&
+      state.edge_session_id !== this.edgeSession.edge_session_id
+    ) {
+      this.bindings.clear();
+      this.subscriptions.clear();
+      return this.getOrbStateSnapshot();
+    }
+
+    const bindings = Array.isArray(state.bindings) ? state.bindings.filter(isObject) : [];
+    this.bindings = new Map(
+      bindings
+        .filter((binding) => typeof binding.binding_handle === 'string')
+        .map((binding) => [binding.binding_handle, binding])
+    );
+    const bindingHandles = new Set(this.bindings.keys());
+    const subscriptions = Array.isArray(state.subscriptions)
+      ? state.subscriptions.filter(isObject)
+      : [];
+    this.subscriptions = new Map(
+      subscriptions
+        .filter((subscription) => (
+          typeof subscription.subscription_id === 'string' &&
+          bindingHandles.has(subscription.binding_handle)
+        ))
+        .map((subscription) => [subscription.subscription_id, subscription])
+    );
+    return this.getOrbStateSnapshot();
+  }
+
+  async restoreOrbState() {
+    if (!this.orbStateStore?.load) {
+      return this.getOrbStateSnapshot();
+    }
+    return this.hydrateOrbState(await this.orbStateStore.load());
+  }
+
+  async persistOrbState() {
+    const snapshot = {
+      ...this.getOrbStateSnapshot(),
+      saved_at: nowIso(this.now),
+    };
+    if (this.orbStateStore?.save) {
+      return this.orbStateStore.save(snapshot);
+    }
+    return snapshot;
+  }
+
+  findReusableServiceBinding(serviceInterfaceCid, operation) {
+    for (const binding of this.bindings.values()) {
+      const bindingOperation = binding.operation || binding.orb_binding?.operation;
+      const bindingInterfaceCid =
+        binding.service_interface_cid || binding.orb_binding?.interface_cid;
+      if (bindingInterfaceCid === serviceInterfaceCid && bindingOperation === operation) {
+        return binding;
+      }
+    }
+    return null;
+  }
+
+  serviceBindingResultFromRecord(binding) {
+    return {
+      payload: null,
+      response: {
+        ...binding,
+        binding_handle: binding.binding_handle || binding.orb_binding?.handle,
+      },
+      reused: true,
+    };
+  }
+
+  findReusableSubscription(bindingHandle, operation, stream) {
+    for (const subscription of this.subscriptions.values()) {
+      if (
+        subscription.binding_handle === bindingHandle &&
+        subscription.operation === operation &&
+        (subscription.stream || 'updates') === (stream || 'updates')
+      ) {
+        return subscription;
+      }
+    }
+    return null;
+  }
+
+  subscriptionResultFromRecord(subscription) {
+    return {
+      payload: null,
+      response: {
+        subscription_id: subscription.subscription_id,
+        receipt_cid: subscription.receipt_cid,
+        generation_key: subscription.generation_key,
+        subscription,
+      },
+      reused: true,
+    };
+  }
+
+  async removeBindingState(bindingHandle) {
+    this.bindings.delete(bindingHandle);
+    for (const [subscriptionId, subscription] of this.subscriptions.entries()) {
+      if (subscription.binding_handle === bindingHandle) {
+        this.subscriptions.delete(subscriptionId);
+      }
+    }
+    await this.persistOrbState();
+  }
+
   async restoreEdgeSession() {
     if (!this.edgeSessionStore?.load) {
       return null;
     }
-    return this.hydrateEdgeSession(await this.edgeSessionStore.load());
+    const restored = this.hydrateEdgeSession(await this.edgeSessionStore.load());
+    if (restored) {
+      await this.restoreOrbState();
+    }
+    return restored;
   }
 
   async clearEdgeSession() {
     this.edgeSession = null;
     this.bindings.clear();
+    this.subscriptions.clear();
     this.eventLog = [];
     if (this.edgeSessionStore?.clear) {
       await this.edgeSessionStore.clear();
+    }
+    if (this.orbStateStore?.clear) {
+      await this.orbStateStore.clear();
     }
   }
 
@@ -365,6 +681,7 @@ export class MetaGlassesMobileOrbBridge {
         descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, this.localInterfaceCids[1]),
       ],
     });
+    const previousEdgeSessionId = this.edgeSession?.edge_session_id || null;
     const response = await this.backend.registerEdgeCapabilities(payload);
     this.edgeSession = {
       ...response,
@@ -376,6 +693,11 @@ export class MetaGlassesMobileOrbBridge {
     };
     if (this.edgeSessionStore?.save) {
       await this.edgeSessionStore.save(this.edgeSession);
+    }
+    if (previousEdgeSessionId && previousEdgeSessionId !== this.edgeSession.edge_session_id) {
+      this.bindings.clear();
+      this.subscriptions.clear();
+      await this.persistOrbState();
     }
     return {
       payload,
@@ -437,15 +759,22 @@ export class MetaGlassesMobileOrbBridge {
       throw new Error('Cannot bind service without service_interface_cid.');
     }
     const response = await this.backend.bindService(payload);
+    const orbBinding = response.orb_binding || buildOrbBindingMetadata(payload, response.binding_handle);
     this.bindings.set(response.binding_handle, {
       ...response,
       service_interface_cid: payload.service_interface_cid,
+      service_descriptor: payload.service_descriptor || null,
       operation: payload.operation || null,
+      orb_binding: orbBinding,
       bound_at: nowIso(this.now),
     });
+    await this.persistOrbState();
     return {
       payload,
-      response,
+      response: {
+        ...response,
+        orb_binding: orbBinding,
+      },
     };
   }
 
@@ -463,7 +792,16 @@ export class MetaGlassesMobileOrbBridge {
       correlation_id: options.correlation_id || `mobile-orb-service-${operation}`,
       parent_receipt_cids: options.parent_receipt_cids,
     });
-    const response = await this.backend.invokeService(payload);
+    let response = await this.backend.invokeService(payload);
+    if (binding?.orb_binding && isObject(response?.service_result)) {
+      response = {
+        ...response,
+        service_result: {
+          ...response.service_result,
+          orb_binding: response.service_result.orb_binding || binding.orb_binding,
+        },
+      };
+    }
     return {
       payload,
       response,
@@ -471,6 +809,10 @@ export class MetaGlassesMobileOrbBridge {
   }
 
   async subscribeServiceUpdates(bindingHandle, operation, options = {}) {
+    const binding = this.bindings.get(bindingHandle);
+    if (!binding && !options.allow_untracked_binding) {
+      throw new Error(`Cannot subscribe to untracked service binding: ${bindingHandle}`);
+    }
     const payload = definedEntries({
       binding_handle: bindingHandle,
       operation,
@@ -479,9 +821,24 @@ export class MetaGlassesMobileOrbBridge {
       correlation_id: options.correlation_id || `mobile-orb-stream-${operation}`,
     });
     const response = await this.backend.subscribeServiceUpdates(payload);
+    const subscription = {
+      ...(response.subscription || {}),
+      ...payload,
+      subscription_id: response.subscription_id,
+      receipt_cid: response.receipt_cid,
+      generation_key: response.generation_key,
+      orb_binding: response.subscription?.orb_binding || binding?.orb_binding || null,
+      status: response.subscription?.status || 'active',
+      subscribed_at: response.subscription?.subscribed_at || nowIso(this.now),
+    };
+    this.subscriptions.set(response.subscription_id, subscription);
+    await this.persistOrbState();
     return {
       payload,
-      response,
+      response: {
+        ...response,
+        subscription,
+      },
     };
   }
 
@@ -541,30 +898,87 @@ export class MetaGlassesMobileOrbBridge {
     fallback = null,
     navigation = null,
     correlationId = null,
+    subscribeUpdates = false,
+    updateStream = 'updates',
+    subscriptionArguments = null,
+    reuseBinding = true,
+    reuseSubscription = true,
   }) {
     const event = await this.publishGlassesEvent(eventType, eventPayload, {
       correlation_id: correlationId,
     });
-    const binding = await this.bindService({
+
+    const bindFreshService = () => this.bindService({
       service_interface_cid: serviceInterfaceCid,
       service_descriptor: serviceDescriptor,
       operation: serviceOperation,
       user_intent: eventPayload.intent || eventPayload.command || eventType,
     });
-    const invoked = await this.invokeService(
-      binding.response.binding_handle,
-      serviceOperation,
-      serviceArguments,
-      {
-        correlation_id: event.payload.correlation_id,
-        parent_receipt_cids: [event.response.receipt_cid].filter(Boolean),
-        glasses_context: {
-          event_type: eventType,
-          event_cid: event.response.event_cid,
-          payload: eventPayload,
-        },
+    const buildInvokeOptions = () => ({
+      correlation_id: event.payload.correlation_id,
+      parent_receipt_cids: [event.response.receipt_cid].filter(Boolean),
+      glasses_context: {
+        event_type: eventType,
+        event_cid: event.response.event_cid,
+        payload: eventPayload,
+      },
+    });
+    const subscribeForBinding = async (bindingResult) => {
+      if (!subscribeUpdates) {
+        return null;
       }
-    );
+      const bindingHandle = bindingResult.response.binding_handle;
+      const existingSubscription = reuseSubscription
+        ? this.findReusableSubscription(bindingHandle, serviceOperation, updateStream)
+        : null;
+      if (existingSubscription) {
+        return this.subscriptionResultFromRecord(existingSubscription);
+      }
+      return this.subscribeServiceUpdates(
+        bindingHandle,
+        serviceOperation,
+        {
+          arguments: subscriptionArguments || serviceArguments,
+          stream: updateStream,
+          correlation_id: event.payload.correlation_id,
+        }
+      );
+    };
+    const runServiceFlow = async (bindingResult) => {
+      const invokedResult = await this.invokeService(
+        bindingResult.response.binding_handle,
+        serviceOperation,
+        serviceArguments,
+        buildInvokeOptions()
+      );
+      const subscriptionResult = await subscribeForBinding(bindingResult);
+      return {
+        binding: bindingResult,
+        invoked: invokedResult,
+        subscription: subscriptionResult,
+      };
+    };
+
+    const reusableBinding = reuseBinding
+      ? this.findReusableServiceBinding(serviceInterfaceCid, serviceOperation)
+      : null;
+    let binding = reusableBinding
+      ? this.serviceBindingResultFromRecord(reusableBinding)
+      : await bindFreshService();
+    let invoked;
+    let subscription;
+
+    try {
+      ({ binding, invoked, subscription } = await runServiceFlow(binding));
+    } catch (error) {
+      if (!isStaleBindingError(error)) {
+        throw error;
+      }
+      await this.removeBindingState(binding.response.binding_handle);
+      binding = await bindFreshService();
+      ({ binding, invoked, subscription } = await runServiceFlow(binding));
+    }
+
     const dispatched = await this.dispatchGlassesResponse({
       result: invoked.response,
       renderTargets,
@@ -580,6 +994,7 @@ export class MetaGlassesMobileOrbBridge {
     return {
       event,
       binding,
+      subscription,
       invoked,
       dispatched,
     };
@@ -594,6 +1009,12 @@ export class MetaGlassesMobileOrbBridge {
     const response = await this.backend.revokeBinding(payload);
     if (response.revoked) {
       this.bindings.delete(bindingHandle);
+      for (const [subscriptionId, subscription] of this.subscriptions.entries()) {
+        if (subscription.binding_handle === bindingHandle) {
+          this.subscriptions.delete(subscriptionId);
+        }
+      }
+      await this.persistOrbState();
     }
     return {
       payload,

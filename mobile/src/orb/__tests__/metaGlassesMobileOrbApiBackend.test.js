@@ -27,11 +27,16 @@ jest.mock('../../api/client', () => ({
     operation: 'revoke_binding',
     payload,
   })),
+  getMobileOrbDiagnostics: jest.fn(async (payload) => ({
+    operation: 'diagnostics',
+    payload,
+  })),
 }));
 
 import {
   bindMobileOrbService,
   dispatchMobileOrbGlassesResponse,
+  getMobileOrbDiagnostics,
   invokeMobileOrbService,
   publishMobileOrbGlassesEvent,
   registerMobileOrbEdgeCapabilities,
@@ -84,6 +89,11 @@ describe('createMetaGlassesMobileOrbApiBackend', () => {
         revokeMobileOrbBinding,
         { binding_handle: 'binding', reason: 'done' },
       ],
+      [
+        backend.getDiagnostics,
+        getMobileOrbDiagnostics,
+        { edge_session_id: 'session' },
+      ],
     ];
 
     const responses = [];
@@ -100,6 +110,7 @@ describe('createMetaGlassesMobileOrbApiBackend', () => {
       'subscribe_updates',
       'dispatch_response',
       'revoke_binding',
+      'diagnostics',
     ]);
   });
 });

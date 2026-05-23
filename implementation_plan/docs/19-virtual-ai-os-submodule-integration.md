@@ -5,6 +5,7 @@
 Comprehensive integration plan for turning the current HandsFree monorepo plus its component repositories into a virtualized AI operating system with Meta glasses as a remote audio and display endpoint.
 
 Created: 2026-05-22
+Refreshed: 2026-05-23
 
 ## Goal
 
@@ -33,24 +34,46 @@ The target state is not a loose collection of tools. It is one system that can:
 
 - `external/ipfs_datasets`
   - target upstream: `https://github.com/endomorphosis/ipfs_datasets_py`
-  - staged root gitlink: `a1b42fd96269cb6ec7bf0475ee0a6b0f49242bae`
-  - cached `origin/main`: `a1b42fd96269cb6ec7bf0475ee0a6b0f49242bae`
-  - local checkout is clean at the same reviewed commit, so the root gitlink can align directly with the current upstream-tracking checkout.
+  - recorded root gitlink at repo `HEAD`: `c68759c211f4a46ea22d34aa05e2679ddc5b2e34`
+  - live local checkout on 2026-05-23: `3ea8d7aa6e24bc39df56e1a9de16567db45ebcfd`
+  - current branch: `main`
+  - state: clean submodule worktree, but local checkout is ahead of the recorded superproject gitlink and should be advanced only as an explicit pin refresh.
 - `external/ipfs_accelerate`
   - target upstream: `https://github.com/endomorphosis/ipfs_accelerate_py`
-  - target HEAD: `ff61c14b4df44529ff6f73efa5e26fadeda649d5`
+  - recorded root gitlink at repo `HEAD`: `ff61c14b4df44529ff6f73efa5e26fadeda649d5`
+  - live local checkout on 2026-05-23: `ff61c14b4df44529ff6f73efa5e26fadeda649d5`
+  - current branch: `main`
+  - state: clean and aligned with the recorded gitlink.
 - `external/ipfs_kit`
   - target upstream: `https://github.com/endomorphosis/ipfs_kit_py`
-  - target HEAD: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
+  - recorded root gitlink at repo `HEAD`: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
+  - live local checkout on 2026-05-23: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
+  - current branch: `main`
+  - state: clean at the recorded gitlink, but recursive submodule inspection still fails because upstream nested submodule metadata references `ipfs_accelerate_py` without a matching root `.gitmodules` mapping.
 - `swissknife`
   - upstream: `https://github.com/endomorphosis/swissknife`
-  - reviewed HEAD: `5b4598e15709203c0fe2265fdab2f51ea822b0f2`
+  - recorded root gitlink at repo `HEAD`: `5b4598e15709203c0fe2265fdab2f51ea822b0f2`
+  - live local checkout on 2026-05-23: `5b4598e15709203c0fe2265fdab2f51ea822b0f2`
+  - current branch: `main`
+  - state: dirty local worktree; do not auto-advance or overwrite during submodule refresh work.
 - `hallucinate_app`
   - upstream: `https://github.com/endomorphosis/hallucinate_app.git`
-  - reviewed HEAD: `e5fb3381aead5a3f174095063c71131d30797520`
+  - recorded root gitlink at repo `HEAD`: `0fc4e0ccb8d6cb5c74a6bbf769d610dd600ff7c5`
+  - live local checkout on 2026-05-23 after explicit submodule init: `0fc4e0ccb8d6cb5c74a6bbf769d610dd600ff7c5`
+  - current branch: `main`
+  - state: initialized and clean.
 - compatibility reference submodules that remain part of the full-stack validation path:
-  - `external/meta-wearables-dat-android` at `25f3a6d4479b7a4a72f877977b865a11af990d04`
-  - `external/meta-wearables-dat-ios` at `a739e94181221e7f321304273bcda2272821b163`
+  - `external/meta-wearables-dat-android` recorded and checked out at `25f3a6d4479b7a4a72f877977b865a11af990d04`
+  - `external/meta-wearables-dat-ios` recorded and checked out at `a739e94181221e7f321304273bcda2272821b163`
+
+### 2026-05-23 submodule refresh findings
+
+- Root `.gitmodules` wiring is still canonical for `ipfs_datasets_py`, `ipfs_accelerate_py`, `ipfs_kit_py`, `swissknife`, and `hallucinate_app`; local IPFS submodule remotes were synced to those `_py` URLs before fetching.
+- `hallucinate_app` required explicit submodule initialization in local Git config before it appeared as a live worktree in `git submodule status`.
+- `external/ipfs_datasets` is the only reviewed component whose local checkout currently differs from the recorded superproject gitlink; advancing that pin should be treated as a deliberate superproject change, not an incidental refresh side effect.
+- `swissknife` has local modifications in its worktree; protect it from any automated pin or checkout step during backlog automation.
+- Recursive submodule traversal is still unreliable because upstream nested metadata under `external/ipfs_kit` references `ipfs_accelerate_py` without a matching root `.gitmodules` mapping.
+- Evidence: [data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md](../../data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md)
 
 ### Upstream blocker
 
@@ -62,7 +85,7 @@ The target state is not a loose collection of tools. It is one system that can:
 
 - Resolution date: 2026-05-22.
 - Decision: keep `mcp_plus_plus` out of the root `.gitmodules` file until a valid canonical upstream exists.
-- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md](../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md) records the `Repository not found` result and the rationale for continuing to treat MCP++ as a distributed protocol surface.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md) records the `Repository not found` result and the rationale for continuing to treat MCP++ as a distributed protocol surface.
 - Re-open this decision only when a reviewed upstream repository exists and can be pinned without duplicating the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
 
 ## Current Integration Baseline
@@ -76,12 +99,15 @@ The target state is not a loose collection of tools. It is one system that can:
 - Hallucinate App now positions itself as the operator console and daemon manager shell that hosts SwissKnife virtual desktop workflows for the virtual AI OS.
 - The repo already contains one machine-readable daemon backlog pattern for the Meta glasses widget stream.
 - Mobile plus backend already contain Meta DAT display and action-routing primitives.
+- A dedicated simulation plan now exists in `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` for browser-first Meta Ray-Ban interface validation before iPhone handoff.
 
 ### Residual follow-up after the initial backlog
 
 - Physical-device rollout evidence still has to be collected from real DAT-capable hardware runs; the repo now contains the checklist and fallback contracts, but not the run artifacts themselves.
 - Hallucinate desktop E2E coverage remains the operator-console complement to the backend/mobile hardware-free harnesses and should continue to gather evidence under real packaging/runtime conditions.
 - Canonical standalone `mcp_plus_plus` source discovery should only be revisited if a valid upstream repository appears with scope that is distinct from the already-reviewed distributed protocol surfaces.
+- The Meta/Ray-Ban simulator track now needs to move from planning into implementation: browser 600x600 rendering, D-pad/focus traces, Web App readiness export, and fixture parity with the mobile DAT bridge.
+- Public Meta evidence reviewed on 2026-05-23 shows developer-preview Web App and DAT testing paths plus Mock Device support, but no verified official native display desktop simulator. Treat our local browser simulator plus DAT mock-device flows as the supported pre-hardware path.
 
 ## Discovery closeout (2026-05-22)
 
@@ -98,7 +124,7 @@ Discovery result:
 
 - no new implementation unknowns were found that warrant additional `VAI-` backlog items for this review cycle
 - the remaining work is evidence collection and future upstream-change handling, not a newly discovered code-path gap
-- the discovery artifact for this closeout is [data/virtual_ai_os/discovery/no-new-unknowns-2026-05-22.md](../data/virtual_ai_os/discovery/no-new-unknowns-2026-05-22.md)
+- the discovery artifact for this closeout is [data/virtual_ai_os/discovery/no-new-unknowns-2026-05-22.md](../../data/virtual_ai_os/discovery/no-new-unknowns-2026-05-22.md)
 
 ## Virtual AI OS Architecture
 
@@ -181,6 +207,7 @@ Use the `ipfs_datasets_py` todo daemon and supervisor to advance backlog items, 
 - Promote `hallucinate_app` to a root-tracked submodule so the monorepo records the reviewed GUI shell revision.
 - Record exact pins in this plan and in daemon tasks.
 - Resolve the canonical `mcp_plus_plus` upstream before wiring it as a submodule.
+- Advance the `external/ipfs_datasets` gitlink only through an explicit reviewed pin refresh, and leave `swissknife` untouched while it has a dirty worktree.
 
 ### Workstream B: Shared capability registry
 
@@ -218,7 +245,14 @@ Add a runtime orchestration seam in HandsFree that can choose among:
 
 This runtime is the operating-system scheduler equivalent for the stack.
 
-### Workstream D: UI and operator plane
+### Workstream D: Meta Ray-Ban simulation and iPhone handoff
+
+- Use `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` as the canonical implementation plan for the pre-hardware simulation track.
+- Treat Meta Web Apps browser preview plus DAT Mock Device tooling as the official pre-hardware inputs that we can actually verify today.
+- Build one canonical 600x600 manifest-driven simulator that feeds browser preview, Web App packaging, mobile fixture tests, and DAT-native adapter validation.
+- Keep the simulator bridge-compatible with the current HandsFree mobile ORB/display-widget contracts so simulator traces can become integration-test fixtures instead of throwaway mocks.
+
+### Workstream E: UI and operator plane
 
 - Swissknife becomes the composable interface and ORB surface.
 - Verified in the current review cycle with the hardware-free descriptor-to-mobile-render harness and the Meta glasses ORB adapter/service surfaces in the `swissknife` worktree.
@@ -226,7 +260,7 @@ This runtime is the operating-system scheduler equivalent for the stack.
 - HandsFree mobile stays the companion control surface.
 - Meta glasses become the remote audio/display terminal.
 
-### Workstream E: Device interface plane
+### Workstream F: Device interface plane
 
 Merge the audio and display stories into one remote-interface contract:
 
@@ -237,7 +271,7 @@ Merge the audio and display stories into one remote-interface contract:
 - live task progress,
 - policy-safe confirmations.
 
-### Workstream F: Full-stack test and rollout discipline
+### Workstream G: Full-stack test and rollout discipline
 
 Build a layered test matrix:
 

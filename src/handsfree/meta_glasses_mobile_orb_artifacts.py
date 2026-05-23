@@ -37,9 +37,121 @@ def _first_nonempty_string(*values: Any) -> str | None:
     return None
 
 
+def _normalize_method_signatures(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    normalized: list[dict[str, Any]] = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        method_name = _first_nonempty_string(item.get("name"))
+        if not method_name:
+            continue
+        normalized.append(
+            {
+                key: item[key]
+                for key in sorted(item.keys())
+                if item[key] is not None
+            }
+        )
+    return normalized
+
+
+def _normalize_error_definitions(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    normalized: list[dict[str, Any]] = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        error_name = _first_nonempty_string(item.get("name"))
+        if not error_name:
+            continue
+        normalized.append(
+            {
+                key: item[key]
+                for key in sorted(item.keys())
+                if item[key] is not None
+            }
+        )
+    return normalized
+
+
+def _normalize_descriptor_metadata(value: Any) -> dict[str, str]:
+    if not isinstance(value, dict):
+        return {}
+
+    normalized = {
+        "provider_name": _first_nonempty_string(value.get("provider_name")),
+        "server_family": _first_nonempty_string(
+            value.get("server_family"),
+            value.get("mcp_server_family"),
+        ),
+        "tool_name": _first_nonempty_string(
+            value.get("tool_name"),
+            value.get("default_tool_name"),
+            value.get("operation_tool_name"),
+        ),
+    }
+    return {
+        key: item
+        for key, item in normalized.items()
+        if isinstance(item, str) and item.strip()
+    }
+
+
+def _normalize_interface_descriptor(
+    service_interface_cid: str,
+    service_descriptor: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if not isinstance(service_descriptor, dict) or not service_descriptor:
+        return None
+
+    methods = _normalize_method_signatures(service_descriptor.get("methods"))
+    compatibility = service_descriptor.get("compatibility")
+    if not isinstance(compatibility, dict):
+        compatibility = {}
+    metadata = _normalize_descriptor_metadata(service_descriptor.get("metadata"))
+
+    normalized = {
+        "name": _first_nonempty_string(
+            service_descriptor.get("name"),
+            service_descriptor.get("service_id"),
+            service_descriptor.get("serviceId"),
+            service_interface_cid,
+        )
+        or service_interface_cid,
+        "namespace": _first_nonempty_string(
+            service_descriptor.get("namespace"),
+            service_descriptor.get("service_namespace"),
+            service_descriptor.get("serviceNamespace"),
+            "handsfree.meta_glasses.mobile",
+        )
+        or "handsfree.meta_glasses.mobile",
+        "version": _first_nonempty_string(service_descriptor.get("version"), "0.1.0") or "0.1.0",
+        "methods": methods,
+        "errors": _normalize_error_definitions(service_descriptor.get("errors")),
+        "requires": list(service_descriptor.get("requires", []))
+        if isinstance(service_descriptor.get("requires"), list)
+        else [],
+        "compatibility": {
+            key: compatibility[key]
+            for key in sorted(compatibility.keys())
+            if compatibility[key] is not None
+        },
+    }
+    if metadata:
+        normalized["metadata"] = metadata
+    return normalized
+
+
 def _descriptor_cid(service_interface_cid: str, service_descriptor: dict[str, Any] | None) -> str:
-    if isinstance(service_descriptor, dict) and service_descriptor:
-        return _local_sha256_cid("mcp-interface", service_descriptor)
+    normalized_descriptor = _normalize_interface_descriptor(
+        service_interface_cid,
+        service_descriptor,
+    )
+    if normalized_descriptor is not None:
+        return _local_sha256_cid("mcp-interface", normalized_descriptor)
     return service_interface_cid
 
 
@@ -81,10 +193,19 @@ def _build_orb_binding_metadata(
     request: MetaGlassesMobileOrbBindServiceRequest,
     binding_handle: str,
 ) -> dict[str, Any]:
-    descriptor = request.service_descriptor if isinstance(request.service_descriptor, dict) else None
+    descriptor = (
+        request.service_descriptor if isinstance(request.service_descriptor, dict) else None
+    )
+    normalized_descriptor = _normalize_interface_descriptor(
+        request.service_interface_cid,
+        descriptor,
+    )
     descriptor_cid = _descriptor_cid(request.service_interface_cid, descriptor)
     service_id = _descriptor_service_id(request.service_interface_cid, descriptor)
     operation = _descriptor_operation(request.operation, descriptor)
+    descriptor_metadata = _normalize_descriptor_metadata(
+        descriptor.get("metadata") if descriptor else None
+    )
     return {
         "handle": binding_handle,
         "interface_cid": request.service_interface_cid,
@@ -97,8 +218,11 @@ def _build_orb_binding_metadata(
             "service_id": service_id,
             "operation": operation,
             "metadata": {
+                **descriptor_metadata,
                 "descriptor_cid": descriptor_cid,
                 "descriptor_available": descriptor is not None,
+                "descriptor_kind": "mcp-idl" if normalized_descriptor is not None else None,
+                "interface_descriptor": normalized_descriptor,
             },
         },
     }
@@ -243,6 +367,32 @@ def build_mobile_orb_subscription_artifacts(
     )
     receipt_cid = _local_sha256_cid("mobile-orb-receipt", request.model_dump())
     return subscription_id, receipt_cid
+
+
+def build_mobile_orb_subscription_record(
+    *,
+    request: MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
+    binding: dict[str, Any],
+    subscription_id: str,
+    receipt_cid: str,
+    subscribed_at: str,
+) -> dict[str, Any]:
+    """Build the stored subscription record for service update routing."""
+    generation_key = f"{request.binding_handle}:{request.operation}:{request.stream}"
+    return {
+        **request.model_dump(),
+        "subscription_id": subscription_id,
+        "receipt_cid": receipt_cid,
+        "generation_key": generation_key,
+        "edge_session_id": binding.get("edge_session_id"),
+        "service_interface_cid": binding.get("service_interface_cid"),
+        "service_id": binding.get("orb_binding", {}).get("service_id")
+        if isinstance(binding.get("orb_binding"), dict)
+        else None,
+        "orb_binding": binding.get("orb_binding"),
+        "status": "active",
+        "subscribed_at": subscribed_at,
+    }
 
 
 def build_mobile_orb_dispatch_receipt_cid(

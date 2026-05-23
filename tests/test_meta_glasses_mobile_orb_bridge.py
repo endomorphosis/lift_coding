@@ -90,6 +90,11 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
         json={
             "edge_session_id": registered["edge_session_id"],
             "service_interface_cid": "sha256:task-service",
+            "service_descriptor": {
+                "name": "task_status_service",
+                "namespace": "handsfree.services.tasks",
+                "methods": [{"name": "get_task_status"}],
+            },
             "operation": "get_task_status",
             "transport_preference": "mcp-server",
             "user_intent": "show task status",
@@ -101,6 +106,11 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert binding_payload["policy_decision"]["outcome"] == "permit"
     assert binding_payload["policy_decision"]["decision_cid"].startswith(
         "sha256:mobile-orb-policy-decision:"
+    )
+    assert binding_payload["orb_binding"]["interface_cid"] == "sha256:task-service"
+    assert binding_payload["orb_binding"]["service_id"] == "task_status_service"
+    assert binding_payload["orb_binding"]["transport_binding"]["metadata"]["descriptor_kind"] == (
+        "mcp-idl"
     )
 
     display_widget_action = {
@@ -198,7 +208,39 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
         },
     )
     assert subscription.status_code == 200
-    assert subscription.json()["generation_key"].endswith(":get_task_status:task-status")
+    subscription_payload = subscription.json()
+    assert subscription_payload["generation_key"].endswith(":get_task_status:task-status")
+    assert subscription_payload["subscription"]["subscription_id"] == (
+        subscription_payload["subscription_id"]
+    )
+    assert subscription_payload["subscription"]["binding_handle"] == (
+        binding_payload["binding_handle"]
+    )
+    assert subscription_payload["subscription"]["service_interface_cid"] == (
+        "sha256:task-service"
+    )
+    assert subscription_payload["subscription"]["status"] == "active"
+    assert subscription_payload["subscription"]["orb_binding"]["service_id"] == (
+        "task_status_service"
+    )
+
+    diagnostics = client.get(
+        "/v1/mobile/orb/diagnostics",
+        params={"edge_session_id": registered["edge_session_id"]},
+    )
+    assert diagnostics.status_code == 200
+    diagnostics_payload = diagnostics.json()
+    assert diagnostics_payload["edge_session_id"] == registered["edge_session_id"]
+    assert diagnostics_payload["edge_sessions_count"] == 1
+    assert diagnostics_payload["events_count"] == 1
+    assert diagnostics_payload["bindings_count"] == 1
+    assert diagnostics_payload["subscriptions_count"] == 1
+    assert diagnostics_payload["bindings"][0]["binding_handle"] == (
+        binding_payload["binding_handle"]
+    )
+    assert diagnostics_payload["subscriptions"][0]["subscription_id"] == (
+        subscription_payload["subscription_id"]
+    )
 
     revoked = client.post(
         "/v1/mobile/orb/revoke_binding",
@@ -244,6 +286,7 @@ def test_openapi_exposes_mobile_orb_bridge_contracts() -> None:
     assert response.status_code == 200
     schema = response.json()
     assert "/v1/mobile/orb/register_edge_capabilities" in schema["paths"]
+    assert "/v1/mobile/orb/diagnostics" in schema["paths"]
     assert "/v1/mobile/orb/invoke_service" in schema["paths"]
     assert "/v1/mobile/orb/dispatch_glasses_response" in schema["paths"]
     schemas = schema["components"]["schemas"]

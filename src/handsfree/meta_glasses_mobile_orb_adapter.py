@@ -292,6 +292,7 @@ def build_mobile_orb_bind_service_response(
     request: MetaGlassesMobileOrbBindServiceRequest,
     binding_handle: str,
     policy_decision: dict[str, Any],
+    orb_binding: dict[str, Any] | None = None,
 ) -> MetaGlassesMobileOrbBindServiceResponse:
     """Build a service binding response for the mobile ORB edge."""
     return MetaGlassesMobileOrbBindServiceResponse(
@@ -299,6 +300,7 @@ def build_mobile_orb_bind_service_response(
         transport=request.transport_preference,
         granted_capabilities=[],
         policy_decision=policy_decision,
+        orb_binding=orb_binding,
         expires_at=None,
     )
 
@@ -310,9 +312,7 @@ def build_mobile_orb_invoke_service_response(
     receipt_cid: str,
 ) -> MetaGlassesMobileOrbInvokeServiceResponse:
     """Build a normalized receipt-backed response for a service invocation."""
-    follow_up_actions = _normalize_follow_up_actions(
-        request.arguments.get("follow_up_actions")
-    )
+    follow_up_actions = _normalize_follow_up_actions(request.arguments.get("follow_up_actions"))
     display_widget_action = _normalize_display_widget_mobile_action(
         request.arguments.get("display_widget_action"),
         correlation_id=request.correlation_id,
@@ -352,12 +352,14 @@ def build_mobile_orb_subscribe_response(
     request: MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
     subscription_id: str,
     receipt_cid: str,
+    subscription: dict[str, Any] | None = None,
 ) -> MetaGlassesMobileOrbSubscribeServiceUpdatesResponse:
     """Build a service update subscription response."""
     return MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(
         subscription_id=subscription_id,
         receipt_cid=receipt_cid,
         generation_key=f"{request.binding_handle}:{request.operation}:{request.stream}",
+        subscription=subscription,
     )
 
 

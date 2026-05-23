@@ -36,6 +36,43 @@ paths:
               schema:
                 type: string
 
+  /simulator/meta-rayban-display:
+    get:
+      summary: Return Meta Ray-Ban Display simulator page
+      operationId: getMetaRaybanDisplaySimulatorPage
+      responses:
+        '200':
+          description: HTML Meta Ray-Ban Display simulator page
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Simulator file not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
+  /simulator/meta-rayban-display/{asset_path}:
+    get:
+      summary: Return Meta Ray-Ban Display simulator static asset
+      operationId: getMetaRaybanDisplaySimulatorAsset
+      parameters:
+        - in: path
+          name: asset_path
+          required: true
+          schema:
+            type: string
+          description: Relative path under dev/meta-rayban-display-simulator.
+      responses:
+        '200':
+          description: Static simulator asset
+        '404':
+          description: Simulator asset not found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+
   /v1/command:
     post:
       summary: Submit a hands-free command (text or audio metadata)

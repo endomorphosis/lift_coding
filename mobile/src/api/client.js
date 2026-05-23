@@ -397,6 +397,32 @@ async function postMobileOrbBridgeOperation(operation, payload) {
   return await response.json();
 }
 
+export async function getMobileOrbDiagnostics(params = {}) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+  const searchParams = new URLSearchParams();
+  const edgeSessionId = params.edge_session_id || params.edgeSessionId;
+  if (edgeSessionId) {
+    searchParams.set('edge_session_id', edgeSessionId);
+  }
+  const query = searchParams.toString();
+  const response = await fetch(
+    `${baseUrl}/v1/mobile/orb/diagnostics${query ? `?${query}` : ''}`,
+    {
+      method: 'GET',
+      headers,
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const message = errorData.error || errorData.detail?.error || `Mobile ORB diagnostics failed: ${response.status}`;
+    throw new Error(message);
+  }
+
+  return await response.json();
+}
+
 export async function registerMobileOrbEdgeCapabilities(payload) {
   return postMobileOrbBridgeOperation('register_edge_capabilities', payload);
 }

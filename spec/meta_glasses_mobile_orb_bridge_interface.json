@@ -106,7 +106,44 @@
         "properties": {
           "edge_session_id": { "type": "string" },
           "service_interface_cid": { "type": "string" },
-          "service_descriptor": { "type": "object" },
+          "service_descriptor": {
+            "type": "object",
+            "description": "Optional MCP-IDL-like descriptor for the bound service. When present, the ORB bridge normalizes this payload and preserves whitelisted routing metadata under `metadata`.",
+            "properties": {
+              "name": { "type": "string" },
+              "service_id": { "type": "string" },
+              "serviceId": { "type": "string" },
+              "namespace": { "type": "string" },
+              "service_namespace": { "type": "string" },
+              "serviceNamespace": { "type": "string" },
+              "version": { "type": "string" },
+              "methods": {
+                "type": "array",
+                "items": { "type": "object" }
+              },
+              "errors": {
+                "type": "array",
+                "items": { "type": "object" }
+              },
+              "requires": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "compatibility": { "type": "object" },
+              "metadata": {
+                "type": "object",
+                "description": "Optional runtime routing hints preserved by bind-time descriptor normalization.",
+                "properties": {
+                  "server_family": { "type": "string" },
+                  "mcp_server_family": { "type": "string" },
+                  "tool_name": { "type": "string" },
+                  "default_tool_name": { "type": "string" },
+                  "operation_tool_name": { "type": "string" },
+                  "provider_name": { "type": "string" }
+                }
+              }
+            }
+          },
           "operation": { "type": "string" },
           "transport_preference": { "enum": ["local", "http", "websocket", "mcp-server"] },
           "user_intent": { "type": "string" },
@@ -124,6 +161,10 @@
             "items": { "type": "string" }
           },
           "policy_decision": { "type": "object" },
+          "orb_binding": {
+            "type": "object",
+            "description": "ORB binding metadata that keeps interface descriptor, service id, transport, and transport-specific routing details visible to the phone edge."
+          },
           "expires_at": { "type": "string" }
         }
       }
@@ -189,7 +230,11 @@
         "properties": {
           "subscription_id": { "type": "string" },
           "receipt_cid": { "type": "string" },
-          "generation_key": { "type": "string" }
+          "generation_key": { "type": "string" },
+          "subscription": {
+            "type": "object",
+            "description": "Stored active subscription record with binding, interface, ORB receipt, stream, and MCP-IDL routing metadata."
+          }
         }
       }
     },

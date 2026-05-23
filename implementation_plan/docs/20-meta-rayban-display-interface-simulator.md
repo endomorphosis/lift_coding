@@ -11,6 +11,8 @@ The simulator should not pretend to be an official glasses emulator. Public Meta
 
 The plan below uses the Web Apps path as the primary surface for visual interface simulation, while preserving a bridge-compatible path for the existing mobile DAT implementation.
 
+Refresh note, 2026-05-23: the Wearables Developer Center pages require login in this environment, so public verification used Meta's official GitHub repositories and maintainer discussion where available. Those sources still confirm the same implementation direction: Web Apps are browser-testable, the Web App AI Toolkit documents arrow-key D-pad simulation plus Chrome Sensors, the DAT Android/iOS repos ship MockDeviceKit guidance, and a maintainer announcement for DAT 0.6 specifically calls out video-streaming simulation using the phone camera plus permission/configuration simulation with the Meta AI app.
+
 ## Source Findings
 
 ### Web Apps path
@@ -41,6 +43,9 @@ Sources:
 - https://wearables.developer.meta.com/docs/develop/webapps/build/
 - https://wearables.developer.meta.com/docs/develop/webapps/test/
 - https://github.com/facebookincubator/meta-wearables-webapp
+- https://github.com/facebook/meta-wearables-dat-ios
+- https://github.com/facebook/meta-wearables-dat-android
+- https://github.com/facebook/meta-wearables-dat-ios/discussions/141
 
 ### DAT native display path
 
@@ -78,6 +83,7 @@ Meta-supported options:
 - DAT Mock Device Kit:
   - Simulates app connection/registration, permission requests, paired mock devices, power/don/unfold state, camera feed, photo capture, and captouch gestures in the CameraAccess path.
   - Supports automated testing through iOS XCTest/XCUITest and Android instrumentation patterns.
+  - Public DAT 0.6 maintainer notes also call out phone-camera video streaming simulation and permission/configuration simulation with the Meta AI app.
 
 Gap:
 
@@ -388,3 +394,15 @@ Implement Phase 1 and Phase 2 for a single task-progress fixture:
 - Readiness JSON export that passes the existing linter.
 
 This gives us a concrete, testable interface simulator without waiting for iPhone build signing, DAT credentials, or physical glasses.
+
+## Implementation Progress
+
+- Added `dev/meta-rayban-display-simulator/index.html` as a static browser simulator shell.
+- Added `dev/meta-rayban-display-simulator/simulator.js` with manifest normalization, validation, D-pad focus handling, bridge-shaped action results, trace export, and readiness export.
+- Added `dev/meta-rayban-display-simulator/styles.css` for the fixed 600x600 display frame and external control panel.
+- Added `dev/meta-rayban-display-simulator/fixtures/task-progress.json` as the golden task-progress fixture.
+- Added backend routes at `/simulator/meta-rayban-display` and `/simulator/meta-rayban-display/{asset_path}` so simulator fixtures and assets load over HTTP.
+- Added `mobile/src/native/__fixtures__/metaRaybanDisplaySimulatorFixtures.js` and replay coverage in `wearablesBridge` tests so the simulator fixture exercises the mobile DAT fallback path.
+- Added `dev/meta-rayban-display-simulator/webapp/` as a deployable-style fixed 600x600 Web App preview with D-pad/Enter handling, event metadata persisted to `sessionStorage`, `manifest.webmanifest`, and `readiness.json`.
+- The Web App preview now registers a simulator ORB edge, publishes `display_action` activation events, binds a task-service MCP-IDL descriptor, subscribes to task-progress updates, invokes the bound service, and dispatches the result back through display/audio/mobile render targets when served from the backend, while preserving local-only event storage and clearing stale cached bindings as fallback.
+- Added `tests/test_meta_rayban_display_simulator.py` to verify readiness, viewport bounds, focus/action consistency, simulator JS validation, and bridge-result metadata.

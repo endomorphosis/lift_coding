@@ -87,6 +87,7 @@ from handsfree.meta_glasses_mobile_orb_artifacts import (
     build_mobile_orb_register_artifacts,
     build_mobile_orb_revoke_receipt_cid,
     build_mobile_orb_subscription_artifacts,
+    build_mobile_orb_subscription_record,
 )
 from handsfree.meta_glasses_mobile_orb_adapter import (
     build_mobile_orb_bind_service_response,
@@ -96,6 +97,10 @@ from handsfree.meta_glasses_mobile_orb_adapter import (
     build_mobile_orb_register_response,
     build_mobile_orb_revoke_binding_response,
     build_mobile_orb_subscribe_response,
+)
+from handsfree.meta_glasses_mobile_orb_runtime import (
+    attach_mobile_orb_runtime_binding,
+    invoke_mobile_orb_runtime_binding,
 )
 from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.models import (
@@ -243,6 +248,7 @@ processed_ai_requests: dict[str, AICapabilityExecuteResponse] = {}
 dev_peer_sessions: dict[str, str] = {}
 mobile_orb_edge_sessions: dict[str, dict[str, Any]] = {}
 mobile_orb_service_bindings: dict[str, dict[str, Any]] = {}
+mobile_orb_service_subscriptions: dict[str, dict[str, Any]] = {}
 mobile_orb_events: dict[str, dict[str, Any]] = {}
 dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
 _peer_transport_provider = None
@@ -1568,6 +1574,48 @@ def publish_mobile_orb_glasses_event(
     )
 
 
+@app.get("/v1/mobile/orb/diagnostics")
+def get_mobile_orb_diagnostics(
+    edge_session_id: str | None = Query(default=None),
+) -> dict[str, Any]:
+    """Inspect backend mobile ORB edge, binding, subscription, and event state."""
+    if edge_session_id is not None:
+        _require_mobile_orb_edge_session(edge_session_id)
+
+    edge_sessions = [
+        session
+        for session in mobile_orb_edge_sessions.values()
+        if edge_session_id is None or session.get("edge_session_id") == edge_session_id
+    ]
+    bindings = [
+        binding
+        for binding in mobile_orb_service_bindings.values()
+        if edge_session_id is None or binding.get("edge_session_id") == edge_session_id
+    ]
+    subscriptions = [
+        subscription
+        for subscription in mobile_orb_service_subscriptions.values()
+        if edge_session_id is None or subscription.get("edge_session_id") == edge_session_id
+    ]
+    events = [
+        event
+        for event in mobile_orb_events.values()
+        if edge_session_id is None or event.get("edge_session_id") == edge_session_id
+    ]
+
+    return {
+        "edge_session_id": edge_session_id,
+        "edge_sessions_count": len(edge_sessions),
+        "bindings_count": len(bindings),
+        "subscriptions_count": len(subscriptions),
+        "events_count": len(events),
+        "edge_sessions": edge_sessions,
+        "bindings": bindings,
+        "subscriptions": subscriptions,
+        "events": events,
+    }
+
+
 @app.post(
     "/v1/mobile/orb/bind_service",
     response_model=MetaGlassesMobileOrbBindServiceResponse,
@@ -1581,11 +1629,13 @@ def bind_mobile_orb_service(
         request=request,
         bound_at=datetime.now(UTC).isoformat(),
     )
+    binding_record = attach_mobile_orb_runtime_binding(binding_record)
     mobile_orb_service_bindings[binding_handle] = binding_record
     return build_mobile_orb_bind_service_response(
         request=request,
         binding_handle=binding_handle,
         policy_decision=policy_decision,
+        orb_binding=binding_record.get("orb_binding"),
     )
 
 
@@ -1599,11 +1649,20 @@ def invoke_mobile_orb_service(
     """Invoke a bound service and return a receipt-backed normalized result."""
     binding = _require_mobile_orb_binding(request.binding_handle)
     receipt_cid = build_mobile_orb_invoke_receipt_cid(request=request)
-    return build_mobile_orb_invoke_service_response(
+    response = build_mobile_orb_invoke_service_response(
         binding=binding,
         request=request,
         receipt_cid=receipt_cid,
     )
+    transport_result = invoke_mobile_orb_runtime_binding(
+        binding=binding,
+        request=request,
+    )
+    if transport_result is not None:
+        response.service_result["transport_result"] = transport_result
+        if transport_result.get("status") == "error":
+            response.ok = False
+    return response
 
 
 @app.post(
@@ -1614,14 +1673,23 @@ def subscribe_mobile_orb_service_updates(
     request: MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
 ) -> MetaGlassesMobileOrbSubscribeServiceUpdatesResponse:
     """Create a receipt-backed service update subscription handle."""
-    _require_mobile_orb_binding(request.binding_handle)
+    binding = _require_mobile_orb_binding(request.binding_handle)
     subscription_id, receipt_cid = build_mobile_orb_subscription_artifacts(
         request=request,
     )
+    subscription_record = build_mobile_orb_subscription_record(
+        request=request,
+        binding=binding,
+        subscription_id=subscription_id,
+        receipt_cid=receipt_cid,
+        subscribed_at=datetime.now(UTC).isoformat(),
+    )
+    mobile_orb_service_subscriptions[subscription_id] = subscription_record
     return build_mobile_orb_subscribe_response(
         request=request,
         subscription_id=subscription_id,
         receipt_cid=receipt_cid,
+        subscription=subscription_record,
     )
 
 
@@ -1650,6 +1718,10 @@ def revoke_mobile_orb_binding(
 ) -> MetaGlassesMobileOrbRevokeBindingResponse:
     """Revoke a mobile ORB service binding."""
     revoked = mobile_orb_service_bindings.pop(request.binding_handle, None) is not None
+    if revoked:
+        for subscription_id, subscription in list(mobile_orb_service_subscriptions.items()):
+            if subscription.get("binding_handle") == request.binding_handle:
+                mobile_orb_service_subscriptions.pop(subscription_id, None)
     return build_mobile_orb_revoke_binding_response(
         revoked=revoked,
         receipt_cid=build_mobile_orb_revoke_receipt_cid(request=request),
@@ -1706,6 +1778,38 @@ async def dev_simulator():
             detail="Simulator not found. Ensure dev/simulator.html exists.",
         )
     return FileResponse(simulator_path)
+
+
+@app.get("/simulator/meta-rayban-display")
+async def meta_rayban_display_simulator():
+    """Serve the Meta Ray-Ban Display browser simulator shell."""
+    simulator_path = (
+        Path(__file__).parent.parent.parent
+        / "dev"
+        / "meta-rayban-display-simulator"
+        / "index.html"
+    )
+    if not simulator_path.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                "Meta Ray-Ban Display simulator not found. Ensure "
+                "dev/meta-rayban-display-simulator/index.html exists."
+            ),
+        )
+    return FileResponse(simulator_path)
+
+
+@app.get("/simulator/meta-rayban-display/{asset_path:path}")
+async def meta_rayban_display_simulator_asset(asset_path: str):
+    """Serve static assets for the Meta Ray-Ban Display simulator."""
+    simulator_root = (
+        Path(__file__).parent.parent.parent / "dev" / "meta-rayban-display-simulator"
+    ).resolve()
+    requested_path = (simulator_root / asset_path).resolve()
+    if simulator_root not in requested_path.parents or not requested_path.is_file():
+        raise HTTPException(status_code=404, detail="Simulator asset not found.")
+    return FileResponse(requested_path)
 
 
 @app.post("/v1/webhooks/github", status_code=status.HTTP_202_ACCEPTED)

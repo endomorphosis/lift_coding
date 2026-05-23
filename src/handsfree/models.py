@@ -353,6 +353,7 @@ class MetaGlassesMobileOrbBindServiceResponse(BaseModel):
     transport: Literal["local", "http", "websocket", "mcp-server"]
     granted_capabilities: list[str] = Field(default_factory=list)
     policy_decision: dict[str, Any]
+    orb_binding: dict[str, Any] | None = None
     expires_at: str | None = None
 
 
@@ -397,6 +398,7 @@ class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(BaseModel):
     subscription_id: str
     receipt_cid: str
     generation_key: str
+    subscription: dict[str, Any] | None = None
 
 
 class MetaGlassesMobileOrbDispatchResponseRequest(BaseModel):
