@@ -178,8 +178,10 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     managed_pid = state_dir / f"{prefix}_managed_daemon.pid"
     wrapper_pid = state_dir / f"{prefix}_supervisor_wrapper.pid"
     status_path = state_dir / f"{prefix}_supervisor_status.json"
+    lock_path = state_dir / "implementation.lock"
     managed_pid.write_text(f"{stale_pid}\n", encoding="utf-8")
     wrapper_pid.write_text(f"{stale_pid}\n", encoding="utf-8")
+    lock_path.write_text(json.dumps({"kind": "implementation", "pid": stale_pid}), encoding="utf-8")
     status_path.write_text(
         json.dumps(
             {
@@ -195,8 +197,10 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
 
     assert str(managed_pid) in repairs["removed"]
     assert str(wrapper_pid) in repairs["removed"]
+    assert str(lock_path) in repairs["removed"]
     assert not managed_pid.exists()
     assert not wrapper_pid.exists()
+    assert not lock_path.exists()
     status = json.loads(status_path.read_text(encoding="utf-8"))
     assert status["status"] == "stale"
     assert status["repair_reason"] == "supervisor_pid_not_running"

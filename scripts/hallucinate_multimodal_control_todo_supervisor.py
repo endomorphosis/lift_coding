@@ -103,6 +103,7 @@ def _hallucinate_supervisor_runtime_paths(state_dir: Path, state_prefix: str) ->
         "managed_daemon_pid": state_dir / f"{state_prefix}_managed_daemon.pid",
         "wrapper_pid": state_dir / f"{state_prefix}_supervisor_wrapper.pid",
         "wrapper_out": state_dir / f"{state_prefix}_supervisor_wrapper.out",
+        "implementation_lock": state_dir / "implementation.lock",
     }
 
 
@@ -112,6 +113,20 @@ def _pid_is_hallucinate_supervisor(pid: int) -> bool:
         "hallucinate_multimodal_control_todo_supervisor.py" in cmdline
         or "hallucinate_multimodal_control_autopilot.py" in cmdline
     )
+
+
+def _runtime_lock_owner_is_alive(path: Path) -> bool:
+    metadata = _read_json(path)
+    try:
+        pid = int(metadata.get("pid") or 0)
+    except (TypeError, ValueError):
+        return False
+    if not _pid_alive(pid):
+        return False
+    owner_script = str(metadata.get("owner_script") or "")
+    if owner_script and owner_script not in _process_command_line(pid):
+        return False
+    return True
 
 
 def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, Any]:
@@ -128,6 +143,11 @@ def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) ->
             continue
         path.unlink(missing_ok=True)
         repairs["removed"].append(str(path))
+
+    lock_path = paths["implementation_lock"]
+    if lock_path.exists() and not _runtime_lock_owner_is_alive(lock_path):
+        lock_path.unlink(missing_ok=True)
+        repairs["removed"].append(str(lock_path))
 
     status_path = paths["supervisor_status"]
     status = _read_json(status_path)
