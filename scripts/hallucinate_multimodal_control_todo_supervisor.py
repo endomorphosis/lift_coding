@@ -272,6 +272,7 @@ def main(argv: list[str] | None = None) -> None:
             implement=parsed.implement,
             implementation_command=parsed.implementation_command,
             implementation_timeout=parsed.implementation_timeout,
+            implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
             use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
             worktree_root=parsed.worktree_root,
             repo_root=REPO_ROOT,
