@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import shlex
 import sys
 import time
 from datetime import datetime, timezone
@@ -20,6 +21,7 @@ DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "sta
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
 VALIDATION_RETRY_BUDGET = 3
+MERGE_RETRY_BUDGET = 3
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
@@ -91,6 +93,42 @@ def _consecutive_validation_failures(events: list[dict[str, Any]], task_id: str)
         if validation.get("passed", False):
             break
         failures.append(event)
+    failures.reverse()
+    return failures
+
+
+def _event_merge_result(event: dict[str, Any]) -> dict[str, Any]:
+    merge_result = event.get("merge_result") or {}
+    return merge_result if isinstance(merge_result, dict) else {}
+
+
+def _consecutive_merge_failures(events: list[dict[str, Any]], task_id: str) -> list[dict[str, Any]]:
+    failures: list[dict[str, Any]] = []
+    for event in reversed(events):
+        event_type = str(event.get("type") or "")
+        if event_type not in {"implementation_finished", "merge_reconciled"}:
+            continue
+        if str(event.get("task_id") or "") != task_id:
+            continue
+
+        merge_result = _event_merge_result(event)
+        if event_type == "merge_reconciled" and event.get("resolved", False):
+            break
+        if event_type == "implementation_finished":
+            validation = event.get("validation_result") or {}
+            if isinstance(validation, dict) and validation.get("attempted") and not validation.get("passed", False):
+                break
+            if merge_result.get("merged", False):
+                break
+
+        if not merge_result.get("attempted", False):
+            continue
+        if merge_result.get("merged", False):
+            break
+        if str(merge_result.get("reason") or "") == "not_attempted":
+            continue
+        failures.append(event)
+
     failures.reverse()
     return failures
 
@@ -170,6 +208,59 @@ is appended to the HAO board for normal daemon parsing.
     return path
 
 
+def _merge_command_label(merge_result: dict[str, Any]) -> str:
+    command = merge_result.get("command")
+    if isinstance(command, list) and command:
+        return shlex.join(str(part) for part in command)
+    if command:
+        return str(command)
+    reason = str(merge_result.get("reason") or "merge_failed")
+    return f"git merge ({reason})"
+
+
+def _write_merge_retry_budget_discovery(
+    *,
+    discovery_dir: Path,
+    follow_up_task_id: str,
+    source_task_id: str,
+    merge_result: dict[str, Any],
+    failures: list[dict[str, Any]],
+    retry_budget: int,
+) -> Path:
+    date = datetime.now(timezone.utc).date().isoformat()
+    path = discovery_dir / f"{date}-{follow_up_task_id.lower()}-{source_task_id.lower()}-merge-retry-budget.md"
+    discovery_dir.mkdir(parents=True, exist_ok=True)
+    dirty_paths = merge_result.get("dirty_paths") or []
+    dirty_paths_text = ", ".join(str(path) for path in dirty_paths) if isinstance(dirty_paths, list) else str(dirty_paths)
+    attempts = [str(event.get("attempt") or "") for event in failures if event.get("attempt")]
+    content = f"""# {follow_up_task_id} Merge Retry-Budget Finding: {source_task_id}
+
+Date: {date}
+Source task: {source_task_id}
+Follow-up task: {follow_up_task_id}
+Retry budget: {retry_budget}
+Observed consecutive merge failures: {len(failures)}
+
+## Evidence
+
+- Merge command: `{_merge_command_label(merge_result)}`
+- Merge reason: `{str(merge_result.get("reason") or "not recorded")}`
+- Dirty paths: {dirty_paths_text or "not recorded"}
+- Attempts: {", ".join(attempts) or "not recorded"}
+- Branch: `{str(merge_result.get("branch") or "not recorded")}`
+- Main worktree: `{str(merge_result.get("main_worktree_path") or "not recorded")}`
+
+## Guardrail Result
+
+The Hallucinate multimodal-control daemon classified this as backlog work instead
+of retrying the same merge reconciliation indefinitely. The source task is added
+to the strategy `blocked_tasks` list and the follow-up task below is appended to
+the HAO board for normal daemon parsing.
+"""
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
 def _retry_budget_task_block(
     *,
     follow_up_task_id: str,
@@ -194,6 +285,38 @@ def _retry_budget_task_block(
 """
 
 
+def _merge_retry_budget_task_block(
+    *,
+    follow_up_task_id: str,
+    source_task: Any,
+    discovery_path: Path,
+    strategy_path: Path,
+    depends_on: list[str],
+) -> str:
+    outputs = list(getattr(source_task, "outputs", []) or [])
+    if "data/hallucinate_multimodal_control/discovery" not in outputs:
+        outputs.append("data/hallucinate_multimodal_control/discovery")
+    validation_source = "\n".join(
+        [
+            "import json, pathlib",
+            f"strategy = json.loads(pathlib.Path({str(strategy_path)!r}).read_text(encoding='utf-8'))",
+            f"assert {source_task.task_id!r} not in strategy.get('blocked_tasks', [])",
+        ]
+    )
+    validation_command = f"python3 -c {shlex.quote(f'exec({validation_source!r})')}"
+    return f"""## {follow_up_task_id} Resolve merge retry-budget failure for {source_task.task_id}
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: {", ".join(depends_on)}
+- Outputs: {", ".join(outputs)}
+- Validation: {validation_command}
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in {source_task.task_id}. Use evidence in {discovery_path} to fix the merge blocker, verify the intended implementation changes are actually committed in their owning repository or submodule, then remove {source_task.task_id} from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+"""
+
+
 def record_retry_budget_findings(
     *,
     todo_path: Path = DEFAULT_TODO_PATH,
@@ -202,10 +325,11 @@ def record_retry_budget_findings(
     discovery_dir: Path = DISCOVERY_DIR,
     task_header_prefix: str = "## HAO-",
     retry_budget: int = VALIDATION_RETRY_BUDGET,
+    merge_retry_budget: int = MERGE_RETRY_BUDGET,
 ) -> list[dict[str, Any]]:
-    """Turn repeated validation failures into discovery-backed daemon backlog items."""
+    """Turn repeated validation or merge failures into discovery-backed daemon backlog items."""
 
-    if retry_budget <= 0 or not todo_path.exists():
+    if not todo_path.exists():
         return []
 
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
@@ -223,35 +347,82 @@ def record_retry_budget_findings(
     strategy = _load_strategy(strategy_path)
     blocked_tasks = [str(item) for item in strategy.get("blocked_tasks", []) if str(item).strip()]
 
+    if retry_budget > 0:
+        for task in tasks:
+            if task.task_id in completed_task_ids:
+                continue
+            marker = f"retry-budget failure for {task.task_id}"
+            if marker in todo_text:
+                continue
+            failures = _consecutive_validation_failures(events, task.task_id)
+            if len(failures) < retry_budget:
+                continue
+            latest_validation = failures[-1].get("validation_result") or {}
+            failed_command = str(latest_validation.get("failed_command") or "")
+            if not failed_command:
+                continue
+
+            follow_up_task_id = _next_hao_task_id(todo_text)
+            discovery_path = _write_retry_budget_discovery(
+                discovery_dir=discovery_dir,
+                follow_up_task_id=follow_up_task_id,
+                source_task_id=task.task_id,
+                failed_command=failed_command,
+                failures=failures,
+                retry_budget=retry_budget,
+            )
+            depends_on = ["HAO-013"] if "HAO-013" in task_ids else list(task.depends_on)
+            task_block = _retry_budget_task_block(
+                follow_up_task_id=follow_up_task_id,
+                source_task=task,
+                failed_command=failed_command,
+                discovery_path=discovery_path,
+                depends_on=depends_on,
+            )
+            todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
+            task_ids.add(follow_up_task_id)
+            if task.task_id not in blocked_tasks:
+                blocked_tasks.append(task.task_id)
+            findings.append(
+                {
+                    "source_task_id": task.task_id,
+                    "follow_up_task_id": follow_up_task_id,
+                    "failure_count": len(failures),
+                    "failed_command": failed_command,
+                    "discovery_path": str(discovery_path),
+                }
+            )
+
     for task in tasks:
+        if merge_retry_budget <= 0:
+            break
         if task.task_id in completed_task_ids:
             continue
-        marker = f"retry-budget failure for {task.task_id}"
+        marker = f"merge retry-budget failure for {task.task_id}"
         if marker in todo_text:
             continue
-        failures = _consecutive_validation_failures(events, task.task_id)
-        if len(failures) < retry_budget:
+        failures = _consecutive_merge_failures(events, task.task_id)
+        if len(failures) < merge_retry_budget:
             continue
-        latest_validation = failures[-1].get("validation_result") or {}
-        failed_command = str(latest_validation.get("failed_command") or "")
-        if not failed_command:
+        latest_merge_result = _event_merge_result(failures[-1])
+        if not latest_merge_result:
             continue
 
         follow_up_task_id = _next_hao_task_id(todo_text)
-        discovery_path = _write_retry_budget_discovery(
+        discovery_path = _write_merge_retry_budget_discovery(
             discovery_dir=discovery_dir,
             follow_up_task_id=follow_up_task_id,
             source_task_id=task.task_id,
-            failed_command=failed_command,
+            merge_result=latest_merge_result,
             failures=failures,
-            retry_budget=retry_budget,
+            retry_budget=merge_retry_budget,
         )
-        depends_on = ["HAO-013"] if "HAO-013" in task_ids else list(task.depends_on)
-        task_block = _retry_budget_task_block(
+        depends_on = list(task.depends_on)
+        task_block = _merge_retry_budget_task_block(
             follow_up_task_id=follow_up_task_id,
             source_task=task,
-            failed_command=failed_command,
             discovery_path=discovery_path,
+            strategy_path=strategy_path,
             depends_on=depends_on,
         )
         todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
@@ -263,8 +434,9 @@ def record_retry_budget_findings(
                 "source_task_id": task.task_id,
                 "follow_up_task_id": follow_up_task_id,
                 "failure_count": len(failures),
-                "failed_command": failed_command,
+                "failed_command": _merge_command_label(latest_merge_result),
                 "discovery_path": str(discovery_path),
+                "failure_kind": "merge",
             }
         )
 

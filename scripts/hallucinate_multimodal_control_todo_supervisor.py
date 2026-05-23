@@ -3,10 +3,15 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import os
+import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +29,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"
+SUPERVISOR_RUNNING_STATES = {"running", "starting", "recycling", "restarting"}
 
 
 def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
@@ -32,8 +38,175 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     return [flag, value, *argv]
 
 
+def _pop_bool_flag(argv: list[str], flag: str) -> bool:
+    found = False
+    kept: list[str] = []
+    for item in argv:
+        if item == flag:
+            found = True
+            continue
+        kept.append(item)
+    argv[:] = kept
+    return found
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _pid_alive(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _read_pid(path: Path) -> int:
+    try:
+        return int(path.read_text(encoding="utf-8").strip())
+    except (OSError, ValueError):
+        return 0
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _process_command_line(pid: int) -> str:
+    if pid <= 0:
+        return ""
+    cmdline_path = Path("/proc") / str(pid) / "cmdline"
+    try:
+        raw = cmdline_path.read_bytes()
+    except OSError:
+        return ""
+    return raw.replace(b"\0", b" ").decode("utf-8", errors="replace").strip()
+
+
+def _hallucinate_supervisor_runtime_paths(state_dir: Path, state_prefix: str) -> dict[str, Path]:
+    return {
+        "supervisor_status": state_dir / f"{state_prefix}_supervisor_status.json",
+        "managed_daemon_pid": state_dir / f"{state_prefix}_managed_daemon.pid",
+        "wrapper_pid": state_dir / f"{state_prefix}_supervisor_wrapper.pid",
+        "wrapper_out": state_dir / f"{state_prefix}_supervisor_wrapper.out",
+    }
+
+
+def _pid_is_hallucinate_supervisor(pid: int) -> bool:
+    cmdline = _process_command_line(pid)
+    return (
+        "hallucinate_multimodal_control_todo_supervisor.py" in cmdline
+        or "hallucinate_multimodal_control_autopilot.py" in cmdline
+    )
+
+
+def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, Any]:
+    """Clear stale Hallucinate supervisor/daemon markers before health checks."""
+
+    paths = _hallucinate_supervisor_runtime_paths(state_dir, state_prefix)
+    repairs: dict[str, Any] = {"removed": [], "updated_status": False}
+    for key in ("managed_daemon_pid", "wrapper_pid"):
+        path = paths[key]
+        pid = _read_pid(path)
+        if not path.exists():
+            continue
+        if pid and _pid_alive(pid):
+            continue
+        path.unlink(missing_ok=True)
+        repairs["removed"].append(str(path))
+
+    status_path = paths["supervisor_status"]
+    status = _read_json(status_path)
+    supervisor_pid = int(status.get("supervisor_pid") or 0)
+    daemon_pid = int(status.get("daemon_pid") or 0)
+    status_value = str(status.get("status") or "")
+    supervisor_alive = _pid_alive(supervisor_pid)
+    daemon_alive = _pid_alive(daemon_pid)
+    if status and status_value in SUPERVISOR_RUNNING_STATES and not supervisor_alive:
+        status.update(
+            {
+                "status": "stale",
+                "repaired_at": _utc_now(),
+                "repair_reason": "supervisor_pid_not_running",
+                "supervisor_pid_alive": False,
+                "daemon_pid_alive": daemon_alive,
+            }
+        )
+        _write_json(status_path, status)
+        repairs["updated_status"] = True
+    return repairs
+
+
+def hallucinate_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
+    paths = _hallucinate_supervisor_runtime_paths(state_dir, state_prefix)
+    candidates = [
+        _read_pid(paths["wrapper_pid"]),
+        int(_read_json(paths["supervisor_status"]).get("supervisor_pid") or 0),
+    ]
+    return any(_pid_alive(pid) and _pid_is_hallucinate_supervisor(pid) for pid in candidates)
+
+
+def _background_supervisor_args(argv: list[str]) -> list[str]:
+    args = [item for item in argv if item != "--once"]
+    if "--implement" not in args and "--no-implement" not in args:
+        args = ["--implement", *args]
+    return args
+
+
+def ensure_hallucinate_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, Any]:
+    repairs = repair_hallucinate_supervisor_runtime(state_dir, state_prefix)
+    if hallucinate_supervisor_is_running(state_dir, state_prefix):
+        return {"started": False, "reason": "already_running", "repairs": repairs}
+
+    paths = _hallucinate_supervisor_runtime_paths(state_dir, state_prefix)
+    launch_args = _background_supervisor_args(argv)
+    command = [sys.executable, str(Path(__file__).resolve()), *launch_args]
+    env = dict(os.environ)
+    env["PYTHONPATH"] = os.pathsep.join(
+        [str(IPFS_DATASETS_ROOT), env["PYTHONPATH"]] if env.get("PYTHONPATH") else [str(IPFS_DATASETS_ROOT)]
+    )
+    paths["wrapper_out"].parent.mkdir(parents=True, exist_ok=True)
+    out_handle = paths["wrapper_out"].open("ab")
+    try:
+        process = subprocess.Popen(
+            command,
+            cwd=REPO_ROOT,
+            env=env,
+            stdin=subprocess.DEVNULL,
+            stdout=out_handle,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+    finally:
+        out_handle.close()
+    paths["wrapper_pid"].write_text(f"{process.pid}\n", encoding="utf-8")
+    time.sleep(1.0)
+    return {
+        "started": _pid_alive(process.pid),
+        "pid": process.pid,
+        "command": command,
+        "wrapper_out": str(paths["wrapper_out"]),
+        "repairs": repairs,
+    }
+
+
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
+    ensure_running = _pop_bool_flag(args, "--ensure-running")
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     os.chdir(REPO_ROOT)
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
@@ -70,6 +243,19 @@ def main(argv: list[str] | None = None) -> None:
         discovery_dir=DISCOVERY_DIR,
         task_header_prefix=parsed.task_prefix,
     )
+    if ensure_running:
+        result = ensure_hallucinate_supervisor_running(
+            args,
+            state_dir=parsed.state_dir,
+            state_prefix=parsed.state_prefix,
+        )
+        logger.info("Hallucinate multimodal-control supervisor ensure complete: %s", result)
+        return
+
+    repairs = repair_hallucinate_supervisor_runtime(parsed.state_dir, parsed.state_prefix)
+    if repairs.get("removed") or repairs.get("updated_status"):
+        logger.info("Repaired stale Hallucinate supervisor runtime markers: %s", repairs)
+
     supervisor = PortalImplementationSupervisor(
         PortalSupervisorConfig(
             todo_path=parsed.todo_path,

@@ -51,9 +51,9 @@ def test_hallucinate_multimodal_todo_dependencies_are_declared_tasks():
 
 def test_discovery_expansion_task_waits_for_initial_backlog():
     tasks = {task.task_id: task for task in _load_tasks()}
-    discovery = tasks["HAO-013"]
+    discovery = tasks["HAO-025"]
 
-    for index in range(2, 13):
+    for index in range(4, 25):
         assert f"HAO-{index:03d}" in discovery.depends_on
     assert "HAO-000" not in discovery.depends_on
     assert "HAO-001" not in discovery.depends_on
@@ -66,6 +66,40 @@ def test_hallucinate_autopilot_defaults_to_implement():
     assert autopilot.with_autopilot_defaults([]) == ["--implement"]
     assert autopilot.with_autopilot_defaults(["--once"]) == ["--implement", "--once"]
     assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == ["--no-implement", "--once"]
+
+
+def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
+    supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    stale_pid = 99999999
+    prefix = "hallucinate_multimodal_control"
+    managed_pid = state_dir / f"{prefix}_managed_daemon.pid"
+    wrapper_pid = state_dir / f"{prefix}_supervisor_wrapper.pid"
+    status_path = state_dir / f"{prefix}_supervisor_status.json"
+    managed_pid.write_text(f"{stale_pid}\n", encoding="utf-8")
+    wrapper_pid.write_text(f"{stale_pid}\n", encoding="utf-8")
+    status_path.write_text(
+        json.dumps(
+            {
+                "status": "running",
+                "supervisor_pid": stale_pid,
+                "daemon_pid": stale_pid,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    repairs = supervisor.repair_hallucinate_supervisor_runtime(state_dir, prefix)
+
+    assert str(managed_pid) in repairs["removed"]
+    assert str(wrapper_pid) in repairs["removed"]
+    assert not managed_pid.exists()
+    assert not wrapper_pid.exists()
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    assert status["status"] == "stale"
+    assert status["repair_reason"] == "supervisor_pid_not_running"
+    assert not supervisor.hallucinate_supervisor_is_running(state_dir, prefix)
 
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
@@ -163,3 +197,121 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         discovery_dir=discovery_dir,
         retry_budget=3,
     )
+
+
+def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    todo_path = tmp_path / "todo.md"
+    events_path = tmp_path / "events.jsonl"
+    strategy_path = tmp_path / "strategy.json"
+    discovery_dir = tmp_path / "discovery"
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-004 Discover logic APIs
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: logic
+- Depends on:
+- Outputs: data/hallucinate_multimodal_control/discovery
+- Validation: true
+- Acceptance: Discovery is complete.
+
+## HAO-005 Define the formal multimodal control policy IR
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: logic
+- Depends on: HAO-004
+- Outputs: hallucinate_app/python/hallucinate_app/control_surface_logic_ir.py
+- Validation: python3 hallucinate_app/python/hallucinate_app/test/test_control_surface_logic_ir.py
+- Acceptance: Formal IR is defined.
+""",
+        encoding="utf-8",
+    )
+    merge_result = {
+        "attempted": True,
+        "merged": False,
+        "returncode": 2,
+        "branch": "implementation/hao-005-attempt-2-1779566133",
+        "target_branch": "main",
+        "command": ["git", "merge", "--no-ff", "--no-edit", "implementation/hao-005-attempt-2-1779566133"],
+        "reason": "main_checkout_dirty_conflict",
+        "dirty_paths": ["swissknife"],
+        "main_worktree_path": "/repo",
+    }
+    events = [
+        {
+            "type": "implementation_finished",
+            "timestamp": "2026-05-23T00:01:00+00:00",
+            "task_id": "HAO-005",
+            "attempt": 2,
+            "returncode": 2,
+            "implementation_commit": "abc123",
+            "merge_result": merge_result,
+            "validation_result": {"attempted": True, "passed": True, "returncode": 0},
+        },
+        {
+            "type": "merge_reconciled",
+            "timestamp": "2026-05-23T00:02:00+00:00",
+            "task_id": "HAO-005",
+            "attempt": 2,
+            "resolved": False,
+            "reason": "merge_retried",
+            "merge_result": merge_result,
+        },
+        {
+            "type": "merge_reconciled",
+            "timestamp": "2026-05-23T00:03:00+00:00",
+            "task_id": "HAO-005",
+            "attempt": 2,
+            "resolved": False,
+            "reason": "merge_retried",
+            "merge_result": merge_result,
+        },
+    ]
+    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+
+    findings = daemon_module.record_retry_budget_findings(
+        todo_path=todo_path,
+        events_path=events_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        retry_budget=3,
+    )
+
+    expected_discovery = (
+        discovery_dir
+        / f"{datetime.now(timezone.utc).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
+    )
+    assert findings == [
+        {
+            "source_task_id": "HAO-005",
+            "follow_up_task_id": "HAO-006",
+            "failure_count": 3,
+            "failed_command": "git merge --no-ff --no-edit implementation/hao-005-attempt-2-1779566133",
+            "discovery_path": str(expected_discovery),
+            "failure_kind": "merge",
+        }
+    ]
+
+    updated = todo_path.read_text(encoding="utf-8")
+    assert "## HAO-006 Resolve merge retry-budget failure for HAO-005" in updated
+    assert "Depends on: HAO-004" in updated
+
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+
+    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
+    assert tasks["HAO-006"].depends_on == ["HAO-004"]
+    assert len(tasks["HAO-006"].validation) == 1
+    assert "blocked_tasks" in tasks["HAO-006"].validation[0]
+
+    strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
+    assert "HAO-005" in strategy["blocked_tasks"]
+    discovery = expected_discovery.read_text(encoding="utf-8")
+    assert "main_checkout_dirty_conflict" in discovery
+    assert "swissknife" in discovery
