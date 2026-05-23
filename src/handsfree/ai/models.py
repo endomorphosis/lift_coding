@@ -32,6 +32,72 @@ class AIExecutionMode(str, Enum):
     ORCHESTRATED = "orchestrated"
 
 
+class CapabilityExecutionMode(str, Enum):
+    """Cross-repo execution modes used by the virtual AI OS registry."""
+
+    DIRECT_IMPORT = "direct_import"
+    DIRECT_CLI = "direct_cli"
+    MCP_REMOTE = "mcp_remote"
+    ORCHESTRATED = "orchestrated"
+
+
+class CapabilityConfirmationPolicy(str, Enum):
+    """Normalized confirmation policy for cross-repo capabilities."""
+
+    SAFE_READ = "safe_read"
+    SAFE_WRITE = "safe_write"
+    REQUIRE_CONFIRMATION = "require_confirmation"
+    PROVIDER_DEFAULT = "provider_default"
+
+
+class CapabilityRuntimeSurface(str, Enum):
+    """Execution surface selected by the virtual AI OS runtime router."""
+
+    DIRECT_ADAPTER = "direct_adapter"
+    LOCAL_CLI = "local_cli"
+    MCP_PROVIDER = "mcp_provider"
+    DAEMON_MEDIATED = "daemon_mediated"
+    SWISSKNIFE_ORB = "swissknife_orb"
+
+
+@dataclass(frozen=True)
+class AICapabilityRegistryEntry:
+    """Cross-repo capability metadata for the virtual AI OS control plane."""
+
+    capability_id: str
+    owner_repo: str
+    provider_name: str
+    server_family: str
+    title: str
+    description: str
+    execution_modes: tuple[CapabilityExecutionMode, ...]
+    default_execution_mode: CapabilityExecutionMode
+    fallback_execution_mode: CapabilityExecutionMode | None
+    confirmation_policy: CapabilityConfirmationPolicy
+    input_schema_ref: str
+    result_schema_ref: str
+    artifact_output: tuple[str, ...] = ()
+    display_summary_fields: tuple[str, ...] = ()
+    integration_test_ids: tuple[str, ...] = ()
+    legacy_capability_ids: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class AICapabilityRoute:
+    """Deterministic routing decision for a cross-repo capability."""
+
+    capability_id: str
+    owner_repo: str
+    provider_name: str
+    server_family: str
+    execution_mode: CapabilityExecutionMode
+    runtime_surface: CapabilityRuntimeSurface
+    confirmation_policy: CapabilityConfirmationPolicy
+    handler_ref: str
+    cli_command: str | None = None
+    fallback_execution_mode: CapabilityExecutionMode | None = None
+
+
 @dataclass(frozen=True)
 class AICapabilitySpec:
     """Static metadata for a single AI capability."""

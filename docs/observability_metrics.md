@@ -193,3 +193,41 @@ Potential future improvements:
 3. **Additional Metrics**: Track more granular metrics (e.g., per-user rates)
 4. **Reset Endpoint**: Add an endpoint to reset metrics
 5. **Worker Aggregation**: Implement cross-worker metric aggregation
+
+## Virtual AI OS Contract
+
+The virtual AI OS stack now has one repo-local observability and rollback contract in `src/handsfree/config.py` via `get_virtual_ai_os_observability_contract()`.
+
+That contract exposes four things for the cross-repo execution paths:
+
+- feature flags: the `HANDSFREE_DISPLAY_WIDGETS_*` rollout flags plus `HANDSFREE_ENABLE_METRICS`
+- policy outcomes: `permit`, `deny`, and `require_confirmation`
+- metric and failure-mode names for Meta-glasses display-widget flows
+- rollback-safe execution-path guards for `direct_import`, `mcp_remote`, `daemon_mediated`, `swissknife_orb`, and `mobile_remote_terminal`
+
+### Virtual AI OS Feature Flags
+
+```bash
+HANDSFREE_ENABLE_METRICS=true
+HANDSFREE_DISPLAY_WIDGETS_ENABLED=true
+HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR=true
+HANDSFREE_DISPLAY_WIDGETS_ALLOW_WEBAPP_FALLBACK=true
+HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_ANDROID=false
+HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false
+```
+
+### Execution-Path Guards
+
+- `direct_import`: keep local adapters available so provider or submodule regressions do not block rollback.
+- `mcp_remote`: preserve transport, timeout, and provider-specific configuration so remote execution can fall back safely.
+- `daemon_mediated`: keep the repo-local todo board, state snapshots, and isolated worktrees as the rollback-safe source of truth.
+- `swissknife_orb`: treat Swissknife as a reviewed runtime surface and avoid speculative MCP++ rewiring while source remains distributed.
+- `mobile_remote_terminal`: require native-display-unavailable fallbacks so Meta-glasses actions degrade to safe mobile/web surfaces.
+
+### Policy Decisions
+
+Virtual AI OS remote-terminal and ORB flows should only emit operator actions under one of these normalized policy decisions:
+
+- `permit`
+- `deny`
+- `require_confirmation`

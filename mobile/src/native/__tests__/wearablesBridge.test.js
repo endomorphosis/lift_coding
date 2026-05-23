@@ -50,6 +50,7 @@ describe('wearablesBridge wrapper', () => {
     const resetWidget = await bridge.resetDisplayWidgetSession(widgetPayload);
     const videoWidget = await bridge.playDisplayWidgetVideo(widgetPayload.video, widgetPayload);
     const subscribedWidget = await bridge.subscribeDisplayWidgetUpdates(widgetPayload.subscription, widgetPayload);
+    const widgetDiagnostics = await bridge.getDiagnostics();
 
     expect(bridge.isBridgeAvailable()).toBe(false);
     expect(diagnostics).toEqual({
@@ -101,6 +102,21 @@ describe('wearablesBridge wrapper', () => {
       displayLastAction: null,
       displayLastStatus: null,
       displayLastUpdatedAt: null,
+      displayRenderPath: 'mobile-card',
+      displayLastError: null,
+      displayActiveWidgetId: null,
+      displayDescriptorCid: null,
+      displayInterfaceCid: null,
+      displayManifestCid: null,
+      displayWidgetCid: null,
+      displayOrbReceiptCid: null,
+      displayReceiptCid: null,
+      displayPolicyDecision: null,
+      displayCorrelationId: null,
+      displayRequestId: null,
+      displayFallback: null,
+      displayUpdateCount: 0,
+      displayLifecycleStages: [],
     });
     expect(reconnect).toEqual({
       state: 'awaiting_target',
@@ -189,6 +205,21 @@ describe('wearablesBridge wrapper', () => {
       correlationId: 'corr-widget',
       displayLastStatus: 'unsupported',
       renderPath: 'display-webapp',
+    });
+    expect(widgetDiagnostics).toMatchObject({
+      displayLastAction: 'subscribe_display_widget_updates',
+      displayLastStatus: 'unsupported',
+      displayRenderPath: 'display-webapp',
+      displayLastError: 'dat_native_display_unavailable',
+      displayActiveWidgetId: 'handsfree.task-progress-widget',
+      displayDescriptorCid: 'bafybeidescriptor',
+      displayWidgetCid: 'bafybeiwidget',
+      displayOrbReceiptCid: 'bafybeiorbreceipt',
+      displayPolicyDecision: { outcome: 'permit', reasons: ['trusted descriptor'] },
+      displayCorrelationId: 'corr-widget',
+      displayFallback: expect.objectContaining({
+        renderPath: 'display-webapp',
+      }),
     });
   });
 
@@ -316,14 +347,37 @@ describe('wearablesBridge wrapper', () => {
       widgetId: 'handsfree.task-progress-widget',
     });
 
-    expect(nativeModule.renderDisplayWidget).toHaveBeenCalledWith(manifest);
-    expect(nativeModule.updateDisplayWidget).toHaveBeenCalledWith(patch);
-    expect(nativeModule.clearDisplayWidget).toHaveBeenCalledWith('handsfree.task-progress-widget');
-    expect(nativeModule.focusDisplayWidget).toHaveBeenCalledWith('next');
-    expect(nativeModule.activateDisplayWidgetAction).toHaveBeenCalledWith('primary');
-    expect(nativeModule.resetDisplayWidgetSession).toHaveBeenCalledWith();
-    expect(nativeModule.playDisplayWidgetVideo).toHaveBeenCalledWith(video);
-    expect(nativeModule.subscribeDisplayWidgetUpdates).toHaveBeenCalledWith(subscription);
+    expect(nativeModule.renderDisplayWidget).toHaveBeenCalledWith(manifest, expect.objectContaining({
+      descriptor_cid: 'bafybeidescriptor',
+      manifest,
+    }));
+    expect(nativeModule.updateDisplayWidget).toHaveBeenCalledWith(patch, expect.objectContaining({
+      descriptor_cid: 'bafybeidescriptor',
+      patch,
+    }));
+    expect(nativeModule.clearDisplayWidget).toHaveBeenCalledWith('handsfree.task-progress-widget', expect.objectContaining({
+      widget_id: 'handsfree.task-progress-widget',
+      widget_cid: 'bafybeiwidget',
+    }));
+    expect(nativeModule.focusDisplayWidget).toHaveBeenCalledWith('next', expect.objectContaining({
+      focus: { direction: 'next' },
+      orb_receipt_cid: 'bafybeiorbreceipt',
+    }));
+    expect(nativeModule.activateDisplayWidgetAction).toHaveBeenCalledWith('primary', expect.objectContaining({
+      activated_action_id: 'primary',
+      correlation_id: 'corr-widget',
+    }));
+    expect(nativeModule.resetDisplayWidgetSession).toHaveBeenCalledWith(expect.objectContaining({
+      descriptor_cid: 'bafybeidescriptor',
+    }));
+    expect(nativeModule.playDisplayWidgetVideo).toHaveBeenCalledWith(video, expect.objectContaining({
+      video,
+      descriptor_cid: 'bafybeidescriptor',
+    }));
+    expect(nativeModule.subscribeDisplayWidgetUpdates).toHaveBeenCalledWith(subscription, expect.objectContaining({
+      subscription,
+      widget_cid: 'bafybeiwidget',
+    }));
   });
 
   test('normalizes resolved native module diagnostics into bridge metadata', async () => {

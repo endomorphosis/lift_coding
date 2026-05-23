@@ -8,6 +8,7 @@ import json
 import logging
 import os
 from datetime import UTC, datetime
+from pathlib import Path
 import shutil
 import subprocess
 import re
@@ -24,6 +25,10 @@ from handsfree.db.agent_tasks import AgentTask
 from handsfree.ipfs_datasets_routers import get_embeddings_router
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
 from handsfree.metrics import get_metrics_collector
+from handsfree.meta_glasses_display_widget_contract import (
+    DISPLAY_WIDGET_ACTION_CONTRACT,
+    DISPLAY_WIDGET_ACTION_DEFINITIONS,
+)
 from handsfree.mcp import (
     MCPClient,
     MCPClientError,
@@ -72,65 +77,6 @@ WEARABLES_MOBILE_RESET_DISPLAY_ACTION = {
     "label": "Reset Display Session",
     "phrase": "reset the wearables display session",
 }
-DISPLAY_WIDGET_ACTION_CONTRACT = "handsfree.meta-glasses/display-widget-action@0.1.0"
-DISPLAY_WIDGET_ACTION_DEFINITIONS: tuple[dict[str, str], ...] = (
-    {
-        "action": "render",
-        "operation": "render_widget",
-        "id": "mobile_render_display_widget",
-        "label": "Render Widget",
-        "phrase": "render the display widget",
-    },
-    {
-        "action": "update",
-        "operation": "update_widget",
-        "id": "mobile_update_display_widget",
-        "label": "Update Widget",
-        "phrase": "update the display widget",
-    },
-    {
-        "action": "clear",
-        "operation": "clear_widget",
-        "id": "mobile_clear_display_widget",
-        "label": "Clear Widget",
-        "phrase": "clear the display widget",
-    },
-    {
-        "action": "focus",
-        "operation": "focus_next",
-        "id": "mobile_focus_display_widget",
-        "label": "Focus Widget",
-        "phrase": "focus the display widget",
-    },
-    {
-        "action": "activate",
-        "operation": "activate",
-        "id": "mobile_activate_display_widget_action",
-        "label": "Activate Widget",
-        "phrase": "activate the selected display widget action",
-    },
-    {
-        "action": "reset",
-        "operation": "reset_session",
-        "id": "mobile_reset_display_widget_session",
-        "label": "Reset Widget",
-        "phrase": "reset the display widget session",
-    },
-    {
-        "action": "play_video",
-        "operation": "play_video",
-        "id": "mobile_play_display_widget_video",
-        "label": "Play Widget Video",
-        "phrase": "play display widget video",
-    },
-    {
-        "action": "subscribe_updates",
-        "operation": "subscribe_updates",
-        "id": "mobile_subscribe_display_widget_updates",
-        "label": "Subscribe Widget Updates",
-        "phrase": "subscribe to display widget updates",
-    },
-)
 
 
 def _nonempty_string(value: Any) -> str | None:
@@ -1117,6 +1063,10 @@ class MCPAgentProvider(AgentProvider):
         return _build_wearables_bridge_connectivity_envelope(task, envelope)
 
     def start_task(self, task: AgentTask) -> dict[str, Any]:
+        daemon_result = _todo_daemon_status_result(task)
+        if daemon_result is not None:
+            return daemon_result
+
         trace = self._base_trace(task)
 
         if not is_mcp_provider_enabled(self.provider_name):
@@ -1224,6 +1174,10 @@ class MCPAgentProvider(AgentProvider):
         }
 
     def check_status(self, task: AgentTask) -> dict[str, Any]:
+        daemon_result = _todo_daemon_status_result(task)
+        if daemon_result is not None:
+            return daemon_result
+
         trace = task.trace or {}
         if trace.get("mcp_status_strategy") == "tool_polling":
             return self._check_remote_task_status(task, trace)
@@ -1786,6 +1740,204 @@ def _trace_timeout_state(trace: dict[str, Any] | None) -> tuple[bool, int | None
     elapsed_s = max(0, int((datetime.now(UTC) - started).total_seconds()))
     timeout_int = int(timeout_s)
     return elapsed_s > timeout_int, elapsed_s, timeout_int
+
+
+def _todo_daemon_config(trace: dict[str, Any] | None) -> dict[str, str] | None:
+    normalized_trace = trace or {}
+    state_path = _first_nonempty_string(
+        normalized_trace.get("todo_daemon_state_path"),
+        normalized_trace.get("virtual_ai_os_state_path"),
+    )
+    task_id = _first_nonempty_string(
+        normalized_trace.get("todo_daemon_task_id"),
+        normalized_trace.get("virtual_ai_os_task_id"),
+    )
+    if state_path is None or task_id is None:
+        return None
+    config = {"state_path": state_path, "task_id": task_id}
+    events_path = _first_nonempty_string(
+        normalized_trace.get("todo_daemon_events_path"),
+        normalized_trace.get("virtual_ai_os_events_path"),
+    )
+    if events_path is not None:
+        config["events_path"] = events_path
+    return config
+
+
+def _load_json_record(path: str) -> dict[str, Any]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return payload if isinstance(payload, dict) else {}
+
+
+def _load_jsonl_records(path: str | None) -> list[dict[str, Any]]:
+    if not path:
+        return []
+    file_path = Path(path)
+    if not file_path.exists():
+        return []
+    events: list[dict[str, Any]] = []
+    for raw_line in file_path.read_text(encoding="utf-8").splitlines():
+        raw_line = raw_line.strip()
+        if not raw_line:
+            continue
+        try:
+            payload = json.loads(raw_line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(payload, dict):
+            events.append(payload)
+    return events
+
+
+def _todo_daemon_task_title(
+    *,
+    task_id: str,
+    state: dict[str, Any],
+    events: list[dict[str, Any]],
+    fallback: str | None,
+) -> str:
+    if state.get("active_task_id") == task_id:
+        title = _first_nonempty_string(state.get("active_task_title"))
+        if title is not None:
+            return title
+    for event in reversed(events):
+        if str(event.get("task_id") or "") != task_id:
+            continue
+        title = _first_nonempty_string(event.get("title"))
+        if title is not None:
+            return title
+    return fallback or task_id
+
+
+def _map_todo_daemon_status_to_task_state(task_id: str, state: dict[str, Any]) -> tuple[str, str]:
+    statuses = state.get("task_statuses") if isinstance(state.get("task_statuses"), dict) else {}
+    daemon_status = str(statuses.get(task_id) or "").strip().lower()
+    active_task_id = _first_nonempty_string(state.get("active_task_id"))
+    if daemon_status == "completed":
+        return "completed", daemon_status
+    if daemon_status in {"blocked", "needs_input"}:
+        return "needs_input", daemon_status or "blocked"
+    if daemon_status in {"failed", "error"}:
+        return "failed", daemon_status
+    if active_task_id == task_id:
+        return "running", daemon_status or "active"
+    if daemon_status in {"ready", "waiting", "todo", "running", "active"}:
+        return "running", daemon_status
+    return "running", daemon_status or "unknown"
+
+
+def _todo_daemon_progress_summary(
+    *,
+    task_id: str,
+    title: str,
+    mapped_status: str,
+    daemon_status: str,
+    state: dict[str, Any],
+) -> str:
+    active_task_id = _first_nonempty_string(state.get("active_task_id"))
+    if mapped_status == "completed":
+        return f"{task_id} completed: {title}."
+    if mapped_status == "needs_input":
+        return f"{task_id} is blocked: {title}."
+    if active_task_id == task_id:
+        return f"{task_id} active in the todo daemon: {title}."
+    if daemon_status == "ready":
+        return f"{task_id} is ready in the todo daemon: {title}."
+    if daemon_status == "waiting":
+        return f"{task_id} is waiting on dependencies: {title}."
+    return f"{task_id} status is {daemon_status}: {title}."
+
+
+def _todo_daemon_trace_update(task: AgentTask) -> dict[str, Any] | None:
+    config = _todo_daemon_config(task.trace)
+    if config is None:
+        return None
+
+    state = _load_json_record(config["state_path"])
+    events = _load_jsonl_records(config.get("events_path"))
+    task_id = config["task_id"]
+    mapped_status, daemon_status = _map_todo_daemon_status_to_task_state(task_id, state)
+    title = _todo_daemon_task_title(
+        task_id=task_id,
+        state=state,
+        events=events,
+        fallback=task.instruction,
+    )
+    summary = _todo_daemon_progress_summary(
+        task_id=task_id,
+        title=title,
+        mapped_status=mapped_status,
+        daemon_status=daemon_status,
+        state=state,
+    )
+    structured_output = {
+        "task_id": task_id,
+        "title": title,
+        "task_status": daemon_status,
+        "active_task_id": _first_nonempty_string(state.get("active_task_id")),
+        "active_task_title": _first_nonempty_string(state.get("active_task_title")),
+        "ready_count": state.get("ready_count"),
+        "completed_count": state.get("completed_count"),
+        "waiting_count": state.get("waiting_count"),
+        "blocked_count": state.get("blocked_count"),
+        "recommended_task_id": _first_nonempty_string(state.get("recommended_task_id")),
+        "recommended_actions": state.get("recommended_actions")
+        if isinstance(state.get("recommended_actions"), list)
+        else [],
+    }
+    return {
+        "sync_completed": mapped_status == "completed",
+        "todo_daemon_result_envelope": {
+            "capability_id": task_id,
+            "provider": task.provider,
+            "server_family": "ipfs_datasets_todo_daemon",
+            "execution_mode": "orchestrated",
+            "status": mapped_status,
+            "spoken_text": summary,
+            "summary": summary,
+            "structured_output": structured_output,
+            "follow_up_actions": [],
+            "artifact_refs": {
+                "result_cid": None,
+                "receipt_ref": None,
+                "event_dag_ref": None,
+                "delegation_ref": None,
+            },
+            "trace": {
+                "request_id": None,
+                "run_id": None,
+                "remote_task_id": task_id,
+                "tool_name": "ipfs_datasets.todo_daemon",
+                "last_protocol_state": daemon_status,
+                "provider_profiles": ["virtual_ai_os"],
+            },
+        },
+        "todo_daemon_result_preview": summary,
+        "todo_daemon_result_output": structured_output,
+        "todo_daemon_task_id": task_id,
+        "todo_daemon_task_title": title,
+        "todo_daemon_task_status": daemon_status,
+        "todo_daemon_active_task_id": structured_output["active_task_id"],
+        "todo_daemon_active_task_title": structured_output["active_task_title"],
+        "todo_daemon_ready_count": structured_output["ready_count"],
+        "todo_daemon_completed_count": structured_output["completed_count"],
+        "todo_daemon_waiting_count": structured_output["waiting_count"],
+        "todo_daemon_blocked_count": structured_output["blocked_count"],
+        "todo_daemon_last_progress_at": _first_nonempty_string(state.get("last_progress_at")),
+    }
+
+
+def _todo_daemon_status_result(task: AgentTask) -> dict[str, Any] | None:
+    trace_update = _todo_daemon_trace_update(task)
+    if trace_update is None:
+        return None
+    envelope = trace_update["todo_daemon_result_envelope"]
+    return {
+        "ok": True,
+        "status": envelope["status"],
+        "message": envelope["spoken_text"],
+        "trace": trace_update,
+    }
 
 
 def _extract_target_number(target_ref: str | None) -> int | None:

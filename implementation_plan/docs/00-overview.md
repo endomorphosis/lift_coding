@@ -19,6 +19,9 @@ short, safe, spoken feedback.
   - `implementation_plan/docs/13-nl-prompt-to-hierarchical-tools-ipfs-datasets.md`
 - Swissknife descriptor/ORB-driven Meta display widgets:
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`
+- Meta Ray-Ban Display simulator and phone-edge ORB bridge:
+  - `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md`
+  - `implementation_plan/docs/21-swissknife-mobile-orb-bridge.md`
 
 ## Non-goals (for MVP)
 - Full IDE-in-the-glasses

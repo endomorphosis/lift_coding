@@ -264,6 +264,176 @@ class MetaGlassesDisplayWidgetMobileActionPayload(BaseModel):
         return self
 
 
+class MetaGlassesMobileOrbDatCapabilities(BaseModel):
+    """DAT and display capabilities advertised by the phone ORB edge node."""
+
+    session: bool = False
+    camera: bool = False
+    photoCapture: bool = False
+    videoStream: bool = False
+    audio: bool = False
+    display: bool = False
+    displayVideo: bool = False
+    webAppDisplay: bool = False
+
+
+class MetaGlassesMobileOrbRegisterRequest(BaseModel):
+    """Register a mobile phone as the ORB edge node for Meta glasses."""
+
+    edge_id: str = Field(..., min_length=1)
+    platform: Literal["ios", "android", "simulator"]
+    device_id: str | None = None
+    device_model: str | None = None
+    dat_capabilities: MetaGlassesMobileOrbDatCapabilities
+    local_interface_cids: list[str] = Field(default_factory=list)
+    transport_preferences: list[Literal["local", "http", "websocket", "mcp-server"]] = Field(
+        default_factory=list
+    )
+    descriptors: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class MetaGlassesMobileOrbRegisterResponse(BaseModel):
+    """Registered mobile ORB edge session."""
+
+    edge_session_id: str
+    accepted_interface_cids: list[str] = Field(default_factory=list)
+    policy_cid: str
+    expires_at: str | None = None
+
+
+class MetaGlassesMobileOrbEventRequest(BaseModel):
+    """Normalized event published by the glasses-facing mobile edge."""
+
+    edge_session_id: str = Field(..., min_length=1)
+    event_type: Literal[
+        "session_state",
+        "device_state",
+        "captouch",
+        "neural_input",
+        "display_action",
+        "audio_state",
+        "camera_frame_ref",
+        "photo_ref",
+        "sensor",
+        "location",
+        "permission_state",
+        "diagnostic",
+    ]
+    payload: dict[str, Any] = Field(default_factory=dict)
+    correlation_id: str = Field(..., min_length=1)
+    parent_receipt_cids: list[str] = Field(default_factory=list)
+    observed_at: str | None = None
+
+
+class MetaGlassesMobileOrbEventResponse(BaseModel):
+    """Receipt-backed normalized glasses event result."""
+
+    event_cid: str
+    accepted: bool
+    routed_operations: list[str] = Field(default_factory=list)
+    receipt_cid: str
+
+
+class MetaGlassesMobileOrbBindServiceRequest(BaseModel):
+    """Bind a local or remote service descriptor for glasses-originated calls."""
+
+    edge_session_id: str = Field(..., min_length=1)
+    service_interface_cid: str = Field(..., min_length=1)
+    service_descriptor: dict[str, Any] | None = None
+    operation: str | None = None
+    transport_preference: Literal["local", "http", "websocket", "mcp-server"] = "mcp-server"
+    user_intent: str | None = None
+    policy_context: dict[str, Any] | None = None
+
+
+class MetaGlassesMobileOrbBindServiceResponse(BaseModel):
+    """Bound service handle and policy decision."""
+
+    binding_handle: str
+    transport: Literal["local", "http", "websocket", "mcp-server"]
+    granted_capabilities: list[str] = Field(default_factory=list)
+    policy_decision: dict[str, Any]
+    expires_at: str | None = None
+
+
+class MetaGlassesMobileOrbInvokeServiceRequest(BaseModel):
+    """Invoke a bound service operation on behalf of the glasses wearer."""
+
+    binding_handle: str = Field(..., min_length=1)
+    operation: str = Field(..., min_length=1)
+    arguments: dict[str, Any] = Field(default_factory=dict)
+    glasses_context: dict[str, Any] | None = None
+    display_context: dict[str, Any] | None = None
+    correlation_id: str = Field(..., min_length=1)
+    parent_receipt_cids: list[str] = Field(default_factory=list)
+
+
+class MetaGlassesMobileOrbInvokeServiceResponse(BaseModel):
+    """Receipt-backed service invocation result for the phone edge."""
+
+    ok: bool
+    service_result: dict[str, Any] = Field(default_factory=dict)
+    output_refs: list[str] = Field(default_factory=list)
+    provenance_refs: list[str] = Field(default_factory=list)
+    receipt_cid: str
+    follow_up_actions: list[dict[str, Any]] = Field(default_factory=list)
+    display_widget_action: dict[str, Any] | None = None
+    spoken_text: str | None = None
+
+
+class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(BaseModel):
+    """Subscribe to updates from a bound service."""
+
+    binding_handle: str = Field(..., min_length=1)
+    operation: str = Field(..., min_length=1)
+    arguments: dict[str, Any] = Field(default_factory=dict)
+    stream: str | None = "updates"
+    correlation_id: str = Field(..., min_length=1)
+
+
+class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(BaseModel):
+    """Stream subscription registration result."""
+
+    subscription_id: str
+    receipt_cid: str
+    generation_key: str
+
+
+class MetaGlassesMobileOrbDispatchResponseRequest(BaseModel):
+    """Dispatch a service result back to phone-local glasses render targets."""
+
+    edge_session_id: str = Field(..., min_length=1)
+    result: dict[str, Any] = Field(default_factory=dict)
+    render_targets: list[Literal["display_widget", "display_webapp", "audio", "mobile_card", "notification"]]
+    fallback: dict[str, Any] | None = None
+    correlation_id: str = Field(..., min_length=1)
+    parent_receipt_cids: list[str] = Field(default_factory=list)
+
+
+class MetaGlassesMobileOrbDispatchResponseResponse(BaseModel):
+    """Phone-local actions generated from a service result."""
+
+    dispatched_actions: list[dict[str, Any]] = Field(default_factory=list)
+    display_widget_action: dict[str, Any] | None = None
+    spoken_text: str | None = None
+    receipt_cid: str
+
+
+class MetaGlassesMobileOrbRevokeBindingRequest(BaseModel):
+    """Revoke a phone edge service binding."""
+
+    binding_handle: str = Field(..., min_length=1)
+    reason: str = Field(..., min_length=1)
+    correlation_id: str | None = None
+
+
+class MetaGlassesMobileOrbRevokeBindingResponse(BaseModel):
+    """Revocation result for a service binding."""
+
+    revoked: bool
+    receipt_cid: str
+
+
 class ActionItem(BaseModel):
     """Structured card action metadata."""
 

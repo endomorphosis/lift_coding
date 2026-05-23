@@ -33,8 +33,11 @@ logger = logging.getLogger(__name__)
 def _trace_result_envelope(trace: dict[str, Any] | None) -> dict[str, Any] | None:
     if not isinstance(trace, dict):
         return None
-    envelope = trace.get("mcp_result_envelope")
-    return envelope if isinstance(envelope, dict) else None
+    for key in ("mcp_result_envelope", "todo_daemon_result_envelope"):
+        envelope = trace.get(key)
+        if isinstance(envelope, dict):
+            return envelope
+    return None
 
 
 def _trace_result_preview(trace: dict[str, Any] | None) -> str | None:
@@ -42,9 +45,10 @@ def _trace_result_preview(trace: dict[str, Any] | None) -> str | None:
     summary = envelope.get("summary") if envelope else None
     if isinstance(summary, str) and summary.strip():
         return summary.strip()
-    preview = (trace or {}).get("mcp_result_preview")
-    if isinstance(preview, str) and preview.strip():
-        return preview.strip()
+    for key in ("mcp_result_preview", "todo_daemon_result_preview"):
+        preview = (trace or {}).get(key)
+        if isinstance(preview, str) and preview.strip():
+            return preview.strip()
     return None
 
 
@@ -52,7 +56,10 @@ def _trace_result_output(trace: dict[str, Any] | None) -> Any:
     envelope = _trace_result_envelope(trace)
     if envelope and "structured_output" in envelope:
         return envelope.get("structured_output")
-    return (trace or {}).get("mcp_result_output")
+    for key in ("mcp_result_output", "todo_daemon_result_output"):
+        if key in (trace or {}):
+            return (trace or {}).get(key)
+    return None
 
 
 def _trace_follow_up_actions(trace: dict[str, Any] | None) -> list[dict[str, Any]]:
@@ -82,6 +89,22 @@ def _trace_runtime_metadata(trace: dict[str, Any] | None) -> dict[str, Any]:
     poll_interval_s = normalized_trace.get("mcp_poll_interval_s")
     if isinstance(poll_interval_s, (int, float)):
         metadata["mcp_poll_interval_s"] = poll_interval_s
+
+    for key in (
+        "todo_daemon_task_id",
+        "todo_daemon_task_title",
+        "todo_daemon_task_status",
+        "todo_daemon_active_task_id",
+        "todo_daemon_active_task_title",
+        "todo_daemon_ready_count",
+        "todo_daemon_completed_count",
+        "todo_daemon_waiting_count",
+        "todo_daemon_blocked_count",
+        "todo_daemon_last_progress_at",
+    ):
+        value = normalized_trace.get(key)
+        if value is not None:
+            metadata[key] = value
 
     return metadata
 
@@ -218,7 +241,12 @@ class AgentService:
 
             if start_result.get("ok"):
                 provider_trace = start_result.get("trace", {})
-                next_state = "completed" if provider_trace.get("mcp_sync_completed") else "running"
+                provider_status = str(start_result.get("status") or "").strip().lower()
+                next_state = "running"
+                if provider_trace.get("sync_completed") or provider_trace.get("mcp_sync_completed"):
+                    next_state = "completed"
+                elif provider_status in {"completed", "needs_input", "failed"}:
+                    next_state = provider_status
                 if next_state == "completed":
                     updated_task = update_agent_task_state(
                         conn=self.conn,
@@ -316,6 +344,11 @@ class AgentService:
             spoken = f"Task created for {target_type} {target_ref}."
         else:
             spoken = "Agent task created."
+
+        if task.trace and task.trace.get("todo_daemon_result_preview"):
+            preview = _trace_result_preview(task.trace)
+            if preview:
+                spoken = preview
 
         if task.trace and task.trace.get("mcp_sync_completed"):
             preview = _trace_result_preview(task.trace)

@@ -27,9 +27,16 @@ import {
   postDevPeerEnvelope,
   getNotificationDetail,
   getNotifications,
+  bindMobileOrbService,
+  dispatchMobileOrbGlassesResponse,
+  invokeMobileOrbService,
+  publishMobileOrbGlassesEvent,
+  registerMobileOrbEdgeCapabilities,
+  revokeMobileOrbBinding,
   sendCommand,
   delegateWearablesBridgeTask,
   sendActionCommand,
+  subscribeMobileOrbServiceUpdates,
   confirmCommand,
   uploadDevAudio,
   uploadDevMedia,
@@ -169,6 +176,63 @@ describe('sendActionCommand', () => {
     });
 
     await expect(sendActionCommand('unknown_action')).rejects.toThrow('invalid_action_id');
+  });
+});
+
+describe('mobile ORB bridge API helpers', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('posts phone-edge ORB operations to the backend endpoints', async () => {
+    global.fetch.mockResolvedValue({
+      ok: true,
+      json: jest.fn().mockResolvedValue({ ok: true }),
+    });
+
+    await registerMobileOrbEdgeCapabilities({ edge_id: 'edge', platform: 'ios' });
+    await publishMobileOrbGlassesEvent({ edge_session_id: 'session', event_type: 'captouch' });
+    await bindMobileOrbService({ edge_session_id: 'session', service_interface_cid: 'sha256:service' });
+    await invokeMobileOrbService({ binding_handle: 'binding', operation: 'get_task_status' });
+    await subscribeMobileOrbServiceUpdates({ binding_handle: 'binding', operation: 'get_task_status' });
+    await dispatchMobileOrbGlassesResponse({ edge_session_id: 'session', result: {} });
+    await revokeMobileOrbBinding({ binding_handle: 'binding', reason: 'done' });
+
+    expect(global.fetch.mock.calls.map(([url]) => url)).toEqual([
+      'http://example.test/v1/mobile/orb/register_edge_capabilities',
+      'http://example.test/v1/mobile/orb/publish_glasses_event',
+      'http://example.test/v1/mobile/orb/bind_service',
+      'http://example.test/v1/mobile/orb/invoke_service',
+      'http://example.test/v1/mobile/orb/subscribe_service_updates',
+      'http://example.test/v1/mobile/orb/dispatch_glasses_response',
+      'http://example.test/v1/mobile/orb/revoke_binding',
+    ]);
+    for (const [, request] of global.fetch.mock.calls) {
+      expect(request).toMatchObject({
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer test-token',
+        },
+      });
+    }
+  });
+
+  it('throws normalized mobile ORB bridge backend errors', async () => {
+    global.fetch.mockResolvedValue({
+      ok: false,
+      json: jest.fn().mockResolvedValue({
+        detail: { error: 'edge_session_not_found' },
+      }),
+    });
+
+    await expect(
+      publishMobileOrbGlassesEvent({ edge_session_id: 'missing', event_type: 'captouch' })
+    ).rejects.toThrow('edge_session_not_found');
   });
 });
 

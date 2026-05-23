@@ -11,12 +11,16 @@ Current implementation baseline in this repo:
 - wearables connectivity receipts now expose a documented local action contract:
   - `mobile_open_wearables_diagnostics`
   - `mobile_reconnect_wearables_target`
+- Meta glasses display-widget flows now expose a test-backed remote-terminal action contract across backend and mobile:
+  - backend emits `mobile_render_display_widget`, `mobile_update_display_widget`, `mobile_clear_display_widget`, `mobile_focus_display_widget`, `mobile_activate_display_widget_action`, `mobile_reset_display_widget_session`, `mobile_play_display_widget_video`, and `mobile_subscribe_display_widget_updates`
+  - mobile executes those action ids through the local DAT bridge with safe diagnostics navigation and native-display-unavailable fallback handling
 
 ## Scope
 This roadmap covers integration across these repositories:
 
 - `facebook/meta-wearables-dat-android`
 - `facebook/meta-wearables-dat-ios`
+- `endomorphosis/swissknife`
 - `endomorphosis/ipfs_kit_py`
 - `endomorphosis/ipfs_accelerate_py`
 - `endomorphosis/ipfs_datasets_py`
@@ -51,6 +55,27 @@ MGW-001 adds the following source pins and guardrails for the Swissknife-driven 
 - Meta display APIs remain developer preview surfaces. Release-channel access, organization enablement, app-model metadata, platform entitlements, and package registry permissions can change independently of this repository; implementation tasks must gate native display code with runtime capability detection and operator-visible diagnostics.
 - Android `mwdat-display` packaging stays optional until the target release channel confirms GitHub Packages access and artifact availability. DAT-disabled builds must continue to compile without resolving `mwdat-display`.
 - Every display widget must define a native-display-unavailable fallback. When DAT native display is unavailable, mobile should return a structured `display unavailable` response and route to a safe fallback such as display-webapp preview, simulator preview, mobile card, notification, or audio-first summary instead of failing silently.
+- The current repo already validates this contract with a backend harness in `tests/test_meta_glasses_display_widget_harness.py` and a mobile harness in `mobile/src/utils/__tests__/agentActions.test.js`, so future changes should preserve the same remote-terminal action ids and fallback semantics.
+
+## Swissknife reuse decision (2026-05-22)
+
+MGW-002 makes Swissknife the canonical bridge implementation source for phone/display/service mediation wherever its existing contracts already match the desired HandsFree behavior.
+
+Swissknife surfaces to reuse first:
+
+- `swissknife/src/services/mcp-idl.ts` for content-addressed interface descriptors, deterministic canonicalization, and interface CID generation for display-widget operations and bridge-visible service capabilities.
+- `swissknife/src/services/mcp-envelope.ts` for content-addressed execution envelopes and receipts so phone-originated requests, backend tool invocations, and display updates share one receipt/provenance model.
+- `swissknife/src/services/mcp-orb-capability-router.ts` for the ORB lifecycle, binding model, and transport adapters. The current transport kinds already match the needed bridge surfaces: `local`, `websocket`, `http`, and `mcp-server`.
+- `swissknife/src/tools/MCPTool/MCPTool.tsx` for the expectation that tool registrations can surface `interface_cid` when MCP-IDL is enabled.
+- `spec/meta_glasses_display_widget_orb_interface.json` in this repo as the first concrete HandsFree-side descriptor artifact aligned to the currently tested display-widget mobile action contract.
+
+Bridge architecture consequences:
+
+- The phone-side DAT bridge should behave as an ORB edge node, not as a bespoke one-off transport.
+- The browser simulator, local mobile preview, and native DAT display path should share the same interface descriptors and operation names.
+- The preferred bridge from phone/display state into backend and service families is the ORB `mcp-server` adapter. Raw HTTP or WebSocket bindings remain valid fallbacks when a provider does not expose an MCP surface.
+- HandsFree backend remains the policy and task control plane, while Swissknife ORB and MCP-IDL provide the transport and contract layer between phone, display, and remote services.
+- Do not introduce a second HandsFree-specific receipt or bridge schema when a thin adapter around the Swissknife contract is sufficient.
 
 ## Current codebase facts that shape the plan
 
@@ -81,6 +106,7 @@ The project already has the right high-level shape for this integration:
 The new opportunity is to turn those separate pieces into one coherent execution fabric:
 
 - **HandsFree wearables bridge** becomes the supported device-access layer on iOS and Android, using Meta DAT repos as reference inputs and optional future acceleration points
+- **Swissknife IDL + ORB layer** becomes the reusable bridge contract between the phone, the display simulator/native DAT surface, and MCP++-backed services
 - **HandsFree mobile** remains the end-user orchestration shell for voice, cards, notifications, and task review
 - **HandsFree backend** remains the control plane and policy boundary
 - **MCP++** becomes the protocol contract for remote tool execution, provenance, delegation, and policy-aware routing
@@ -125,7 +151,21 @@ Key integration assets already present:
 - `docs/meta-ai-glasses.md`
 - `implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md`
 
-### 2. `facebook/meta-wearables-dat-ios`
+### 2. `endomorphosis/swissknife`
+Role in target architecture:
+
+- reusable MCP-IDL, ORB, and receipt/envelope implementation source
+- bridge contract layer between phone-side display/device actions and backend/service execution
+- optional operator and simulator-adjacent surface for display-preview tooling
+
+Important upstream features relevant here:
+
+- `mcp-idl.ts` provides deterministic interface descriptors and interface CIDs
+- `mcp-envelope.ts` provides immutable execution envelopes and receipts
+- `mcp-orb-capability-router.ts` provides ORB discovery, binding, invocation, streaming, and recovery contracts
+- ORB already models `local`, `websocket`, `http`, and `mcp-server` transports, which covers the current phone/backend/service bridging plan
+
+### 3. `facebook/meta-wearables-dat-ios`
 Role in target architecture:
 
 - supported iOS device-access SDK for Meta AI glasses
@@ -139,7 +179,7 @@ Important facts from upstream:
 - includes analytics behavior that can be opted out via `Info.plist`
 - intended to help mobile apps reliably connect to Meta AI glasses
 
-### 3. `facebook/meta-wearables-dat-android`
+### 4. `facebook/meta-wearables-dat-android`
 Role in target architecture:
 
 - supported Android device-access SDK for Meta AI glasses
@@ -158,7 +198,7 @@ Planning consequence in this repo:
 - the production baseline must continue to compile and function without GitHub Packages resolution
 - official DAT artifacts remain an optional future enhancement rather than a hard dependency
 
-### 4. `endomorphosis/ipfs_kit_py`
+### 5. `endomorphosis/ipfs_kit_py`
 Role in target architecture:
 
 - IPFS storage, pinning, retrieval, clustering, VFS, and packaging substrate
@@ -174,7 +214,7 @@ Important upstream features relevant here:
 - MCP server support
 - health, metrics, and operational dashboards
 
-### 5. `endomorphosis/ipfs_datasets_py`
+### 6. `endomorphosis/ipfs_datasets_py`
 Role in target architecture:
 
 - high-level data, retrieval, knowledge graph, vector, legal reasoning, and web/archive tool family
@@ -190,7 +230,7 @@ Important upstream features relevant here:
 - theorem-prover-backed workflows
 - dashboard and analytics support
 
-### 6. `endomorphosis/ipfs_accelerate_py`
+### 7. `endomorphosis/ipfs_accelerate_py`
 Role in target architecture:
 
 - accelerated inference and heavy compute backend
@@ -206,7 +246,7 @@ Important upstream features relevant here:
 - remote libp2p task pickup integration path
 - observability and control-plane features
 
-### 7. `endomorphosis/Mcp-Plus-Plus`
+### 8. `endomorphosis/Mcp-Plus-Plus`
 Role in target architecture:
 
 - protocol-level contract and documentation source
@@ -293,8 +333,12 @@ The planner, command system, mobile UI cards, and notifications should target ca
         │ DAT / Bluetooth / media events
         ▼
 [iOS app / Android app]
+  │
+  │ local ORB handlers + DAT bridge + simulator bridge
+  ▼
+[Swissknife MCP-IDL + ORB layer]
         │
-        │ HTTPS / WebSocket
+  │ mcp-server / HTTP / WebSocket
         ▼
 [HandsFree Backend Control Plane]
   ├─ Command + Intent Router
@@ -319,6 +363,7 @@ The planner, command system, mobile UI cards, and notifications should target ca
 | Repository | Primary role in end-state | First integration milestone | Main owners in this repo |
 | --- | --- | --- | --- |
 | `lift_coding` | control plane, mobile UX, routing, persistence | capability registry + DAT wrapper shells | `src/handsfree/*`, `mobile/*` |
+| `swissknife` | reusable IDL, ORB, and receipt bridge primitives | shared interface descriptors + ORB adapter reuse for display and service mediation | `swissknife/src/services/*`, adapter layers in `src/handsfree/*` and `mobile/*` |
 | `meta-wearables-dat-ios` | official iOS wearable access | native Expo module bridge, session state, media capture | `mobile/modules/expo-meta-wearables-dat/ios/*` |
 | `meta-wearables-dat-android` | official Android wearable access | Android Expo module bridge, package auth, mock-device harness | `mobile/modules/expo-meta-wearables-dat/android/*` |
 | `ipfs_kit_py` | storage, pinning, packaging, CID lifecycle | normalized add/pin/read/resolve capabilities | `src/handsfree/ipfs_kit_adapters.py`, `src/handsfree/mcp/*` |
@@ -382,12 +427,14 @@ Responsibilities:
 - selected target persistence
 - reconnect and connect flows
 - rich state-change events for MCP-trigger handoff
+- local ORB handler registration for display-widget, diagnostics, reconnect, and preview operations
 
 Recommended implementation detail:
 
 - model it after the existing local Expo module pattern, not as ad hoc native code inside generated app folders
 - add an Expo config plugin so iOS `Info.plist` and Android `AndroidManifest.xml` entries can be injected from app config
 - keep all DAT-specific identifiers in environment-driven or app-config driven settings rather than hardcoded constants
+- keep the JS/native bridge contract aligned with Swissknife ORB operation names and interface descriptors rather than inventing a parallel phone-only RPC surface
 
 ### A3. Expose bridge capabilities to React Native via a narrow JS contract
 Recommended JS-facing contract:
@@ -544,6 +591,16 @@ That is the correct home for continued work.
 
 ## Goal
 Evolve the current MCP client/config layer into a production-ready MCP++ runtime that can speak to `ipfs_accelerate_py`, `ipfs_datasets_py`, and `ipfs_kit_py` consistently.
+
+## Implementation preference
+Reuse Swissknife MCP++ primitives before creating new HandsFree-native equivalents.
+
+That means:
+
+- vendor or wrap `mcp-idl.ts` semantics for interface descriptors and interface CID computation
+- vendor or wrap `mcp-envelope.ts` semantics for envelopes and receipts
+- vendor or wrap `mcp-orb-capability-router.ts` semantics for discovery, binding, invocation, streaming, and recovery
+- keep any HandsFree adapters wire-compatible with Swissknife contracts so the phone/display bridge and backend/service bridge can share the same operation model
 
 ## Required enhancements
 

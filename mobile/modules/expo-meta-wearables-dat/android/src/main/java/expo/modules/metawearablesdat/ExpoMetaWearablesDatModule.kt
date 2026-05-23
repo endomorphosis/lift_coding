@@ -55,6 +55,7 @@ class ExpoMetaWearablesDatModule : Module() {
   private var nativeDisplaySession: Any? = null
   private var nativeDisplay: Any? = null
   private var nativeDisplayDeviceId: String? = null
+  private var displayActiveManifest: DisplayWidgetManifest? = null
 
   override fun definition() = ModuleDefinition {
     Name("ExpoMetaWearablesDat")
@@ -512,28 +513,33 @@ class ExpoMetaWearablesDatModule : Module() {
     if (config.action == "render_display_widget") {
       displayLifecycleStages = emptyList()
     }
-    val metadata = displayWidgetMetadata(input)
+    var metadata = displayWidgetMetadata(input)
+    metadata = metadata.copy(manifest = resolveDisplayManifest(config, metadata))
     val lifecycle = prepareDisplayLifecycle(config, metadata)
     var supported = lifecycle.supported
     var reason = lifecycle.reason
     var message = lifecycle.message
     var displayState = lifecycle.state
     var renderPath = lifecycle.renderPath
+    var renderFallbacks: List<Map<String, Any?>> = emptyList()
 
     if (supported && config.sendsContent && lifecycle.display != null) {
       val sendResult = try {
         sendNativeDisplayContent(lifecycle.display, config, metadata)
       } catch (error: Throwable) {
         val nativeError = unwrapDatError(error)
-        DatCallResult.failure(
-          description = datErrorDescription(nativeError) ?: "DAT display content send failed.",
-          error = nativeError
+        DisplayContentSendResult(
+          callResult = DatCallResult.failure(
+            description = datErrorDescription(nativeError) ?: "DAT display content send failed.",
+            error = nativeError
+          )
         )
       }
-      if (!sendResult.success) {
+      renderFallbacks = sendResult.renderFallbacks
+      if (!sendResult.callResult.success) {
         supported = false
-        reason = datErrorReason(sendResult.error)
-        message = sendResult.description ?: "DAT display content send failed."
+        reason = datErrorReason(sendResult.callResult.error)
+        message = sendResult.callResult.description ?: "DAT display content send failed."
         displayState = "display_send_failed"
         renderPath = "mobile-card"
         recordDisplayLifecycleStage("content_send_failed")
@@ -543,7 +549,7 @@ class ExpoMetaWearablesDatModule : Module() {
       }
     }
 
-    applyDisplayWidgetState(config, metadata, supported, reason, displayState, renderPath, message)
+    applyDisplayWidgetState(config, metadata, supported, reason, displayState, renderPath, message, renderFallbacks)
 
     val result = displayWidgetActionResult(
       config = config,
@@ -552,7 +558,8 @@ class ExpoMetaWearablesDatModule : Module() {
       state = if (supported) "ready" else "not_supported",
       reason = reason,
       message = message,
-      requiredAction = lifecycle.requiredAction
+      requiredAction = lifecycle.requiredAction,
+      renderFallbacks = renderFallbacks
     )
     emitDisplayWidgetEvent(config, supported, result)
     return result
@@ -788,23 +795,325 @@ class ExpoMetaWearablesDatModule : Module() {
     display: Any,
     config: DisplayActionConfig,
     metadata: DisplayWidgetMetadata
-  ): DatCallResult {
+  ): DisplayContentSendResult {
+    val renderState = DisplayContentRenderState()
     val contentBuilder: (Any) -> Unit = { scope ->
-      renderNativeDisplayScope(scope, config, metadata)
+      renderNativeDisplayScope(scope, config, metadata, renderState)
     }
     val result = invokeInstanceMethod(display, "sendContent", contentBuilder)
       ?: invokeTopLevelDisplayFunction("sendContent", display, contentBuilder)
       ?: invokeSuspendInstanceMethod(display, "sendContent", contentBuilder)
       ?: invokeSuspendTopLevelDisplayFunction("sendContent", display, contentBuilder)
-      ?: return DatCallResult.failure("DAT display sendContent API is unavailable.")
-    return unwrapDatResult(result)
+      ?: return DisplayContentSendResult(
+        callResult = DatCallResult.failure("DAT display sendContent API is unavailable."),
+        renderFallbacks = renderState.renderFallbacks
+      )
+    val callResult = unwrapDatResult(result)
+    if (callResult.success) {
+      renderState.videoPlayer?.let { playNativeVideoPlayer(it) }
+    }
+    return DisplayContentSendResult(
+      callResult = callResult,
+      renderFallbacks = renderState.renderFallbacks
+    )
   }
 
   private fun renderNativeDisplayScope(
     scope: Any,
     config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata,
+    renderState: DisplayContentRenderState
+  ) {
+    val plan = buildDisplayContentPlan(config, metadata)
+    renderState.addFallbacks(plan.renderFallbacks)
+
+    val rootVideo = plan.rootVideo
+    if (rootVideo?.uri != null) {
+      val player = createNativeVideoPlayer(rootVideo.uri)
+      if (player != null && invokeDisplayDslMethod(scope, "video", objectHints = listOf(player))) {
+        renderState.videoPlayer = player
+        return
+      }
+      renderState.addFallback(
+        displayRenderFallback(
+          kind = "media",
+          id = rootVideo.id,
+          reason = "video_root_unavailable",
+          message = rootVideo.fallbackText ?: "Video could not be sent as DAT root content."
+        )
+      )
+    }
+
+    val rendered = invokeDisplayDslMethod(
+      target = scope,
+      name = "flexBox",
+      enumHints = mapOf(
+        "Direction" to "COLUMN",
+        "FlexBoxBackground" to "CARD"
+      ),
+      block = { box ->
+        renderDisplayContentBox(box, plan, metadata, renderState)
+      }
+    )
+    if (!rendered) {
+      throw IllegalStateException("DAT display ContentScope did not expose supported flexBox builder")
+    }
+  }
+
+  private fun renderDisplayContentBox(
+    box: Any,
+    plan: DisplayContentPlan,
+    metadata: DisplayWidgetMetadata,
+    renderState: DisplayContentRenderState
+  ) {
+    if (plan.regions.isEmpty() && plan.actions.isEmpty()) {
+      renderDisplaySummaryBox(box, plan, metadata)
+      return
+    }
+
+    plan.regions.forEach { region ->
+      renderDisplayRegion(box, region, plan, renderState)
+    }
+
+    plan.actions.forEach { action ->
+      val rendered = invokeDisplayDslMethod(
+        target = box,
+        name = "button",
+        text = action.label ?: action.id,
+        enumHints = mapOf(
+          "ButtonStyle" to if (action.id == metadata.activatedActionId || action.id == plan.manifest?.focusedActionId) "PRIMARY" else "SECONDARY",
+          "IconName" to displayActionIconName(action)
+        ),
+        callback = {
+          handleDisplayActionCallback(metadata, action)
+        }
+      )
+      if (!rendered) {
+        renderState.addFallback(
+          displayRenderFallback(
+            kind = "region",
+            id = action.regionId ?: action.id,
+            reason = "button_builder_unavailable",
+            message = action.label ?: action.id
+          )
+        )
+        invokeDisplayText(box, action.label ?: action.id, "BODY", "SECONDARY")
+      }
+    }
+  }
+
+  private fun renderDisplayRegion(
+    box: Any,
+    region: DisplayWidgetRegion,
+    plan: DisplayContentPlan,
+    renderState: DisplayContentRenderState
+  ) {
+    val media = region.mediaId?.let { plan.mediaById[it] }
+    if (media != null) {
+      renderDisplayMediaRegion(box, region, media, renderState)
+      return
+    }
+    if (region.kind == "action") {
+      return
+    }
+    val text = displayRegionText(region, plan.manifest)
+    if (!text.isNullOrBlank()) {
+      invokeDisplayText(
+        target = box,
+        text = text,
+        style = displayTextStyle(region),
+        color = displayTextColor(region)
+      )
+    }
+  }
+
+  private fun renderDisplayMediaRegion(
+    box: Any,
+    region: DisplayWidgetRegion,
+    media: DisplayWidgetMedia,
+    renderState: DisplayContentRenderState
+  ) {
+    when {
+      isDisplayImageMedia(media) && isSafeHttpsUri(media.uri) -> {
+        val rendered = invokeDisplayDslMethod(
+          target = box,
+          name = "image",
+          text = media.uri,
+          enumHints = mapOf(
+            "ImageSize" to "FILL",
+            "CornerRadius" to "MEDIUM"
+          )
+        )
+        if (!rendered) {
+          renderState.addFallback(
+            displayRenderFallback(
+              kind = "media",
+              id = media.id,
+              reason = "image_builder_unavailable",
+              message = media.fallbackText ?: "Image region ${region.id} rendered as text fallback."
+            )
+          )
+          invokeDisplayText(box, media.fallbackText ?: displayRegionText(region, null) ?: region.id, "BODY", "SECONDARY")
+        }
+      }
+      isDisplayVideoMedia(media) -> {
+        renderState.addFallback(
+          displayRenderFallback(
+            kind = "media",
+            id = media.id,
+            reason = "video_region_root_required",
+            message = media.fallbackText ?: "Video media requires root DAT video content."
+          )
+        )
+        invokeDisplayText(box, media.fallbackText ?: displayRegionText(region, null) ?: "Video unavailable", "BODY", "SECONDARY")
+      }
+      else -> {
+        renderState.addFallback(
+          displayRenderFallback(
+            kind = "media",
+            id = media.id,
+            reason = "media_transport_unsupported",
+            message = media.fallbackText ?: "Media region ${region.id} is unsupported on native DAT display."
+          )
+        )
+        invokeDisplayText(box, media.fallbackText ?: displayRegionText(region, null) ?: region.id, "BODY", "SECONDARY")
+      }
+    }
+  }
+
+  private fun renderDisplaySummaryBox(
+    box: Any,
+    plan: DisplayContentPlan,
     metadata: DisplayWidgetMetadata
   ) {
+    val title = plan.summaryTitle ?: metadata.title ?: "HandsFree widget"
+    val detail = plan.summaryDetail ?: metadata.subtitle ?: metadata.widgetId ?: "Display widget"
+    val footer = listOfNotNull(
+      metadata.widgetId,
+      metadata.manifestCid ?: metadata.descriptorCid
+    ).joinToString(" | ").ifBlank { metadata.operation ?: "render_widget" }
+
+    invokeDisplayText(box, title, "HEADING", null)
+    invokeDisplayText(box, detail, "BODY", "SECONDARY")
+    invokeDisplayText(box, footer, "META", "SECONDARY")
+  }
+
+  private fun buildDisplayContentPlan(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata
+  ): DisplayContentPlan {
+    val renderFallbacks = mutableListOf<Map<String, Any?>>()
+    val rootVideo = rootVideoMedia(config, metadata, renderFallbacks)
+    if (rootVideo != null) {
+      return DisplayContentPlan(
+        manifest = metadata.manifest,
+        regions = emptyList(),
+        actions = emptyList(),
+        mediaById = emptyMap(),
+        rootVideo = rootVideo,
+        renderFallbacks = renderFallbacks,
+        summaryTitle = metadata.title,
+        summaryDetail = rootVideo.fallbackText ?: metadata.subtitle
+      )
+    }
+
+    val manifest = metadata.manifest
+    if (manifest == null) {
+      return summaryDisplayContentPlan(config, metadata, renderFallbacks)
+    }
+
+    if (!isSupportedManifestViewport(manifest)) {
+      renderFallbacks.add(
+        displayRenderFallback(
+          kind = "manifest",
+          id = manifest.widgetId ?: metadata.widgetId ?: "widget",
+          reason = "manifest_viewport_unsupported",
+          message = "DAT native display requires a 600x600 widget manifest viewport."
+        )
+      )
+      return summaryDisplayContentPlan(config, metadata, renderFallbacks)
+    }
+
+    val safeRegions = mutableListOf<DisplayWidgetRegion>()
+    manifest.regions
+      .sortedWith(compareBy<DisplayWidgetRegion> { it.bounds?.y ?: 0 }.thenBy { it.bounds?.x ?: 0 })
+      .forEach { region ->
+        val bounds = region.bounds
+        if (bounds == null || !isSafeRegionBounds(bounds)) {
+          renderFallbacks.add(
+            displayRenderFallback(
+              kind = "region",
+              id = region.id,
+              reason = "region_bounds_unsafe",
+              message = "Region ${region.id} was outside the 600x600 manifest viewport."
+            )
+          )
+          return@forEach
+        }
+        val visible = isRegionVisible(region, manifest)
+        if (visible == false) {
+          return@forEach
+        }
+        if (visible == null) {
+          renderFallbacks.add(
+            displayRenderFallback(
+              kind = "region",
+              id = region.id,
+              reason = "visible_condition_unsupported",
+              message = "Region ${region.id} uses an unsupported visible_if expression."
+            )
+          )
+          return@forEach
+        }
+        safeRegions.add(region)
+      }
+
+    val actionRegions = safeRegions
+      .filter { it.kind == "action" && !it.actionId.isNullOrBlank() }
+      .associateBy { it.actionId.orEmpty() }
+    val actionsById = manifest.actions.associateBy { it.id }
+    val focusOrderedActions = manifest.focusOrder.mapNotNull { actionId ->
+      val action = actionsById[actionId] ?: actionRegions[actionId]?.let { region ->
+        DisplayWidgetAction(
+          id = actionId,
+          method = null,
+          backendActionId = null,
+          label = actionId,
+          focusable = true,
+          focusIndex = manifest.focusOrder.indexOf(actionId),
+          serviceId = null,
+          regionId = region.id
+        )
+      }
+      action?.takeIf { it.focusable && actionRegions.containsKey(it.id) }
+    }
+    val remainingActions = manifest.actions
+      .filter { action ->
+        action.focusable &&
+          action.id !in manifest.focusOrder &&
+          actionRegions.containsKey(action.id)
+      }
+      .sortedBy { it.regionId ?: it.id }
+
+    val regionsWithoutActions = safeRegions.filter { it.kind != "action" }
+
+    return DisplayContentPlan(
+      manifest = manifest,
+      regions = regionsWithoutActions,
+      actions = focusOrderedActions + remainingActions,
+      mediaById = manifest.media.associateBy { it.id },
+      rootVideo = null,
+      renderFallbacks = renderFallbacks,
+      summaryTitle = metadata.title,
+      summaryDetail = metadata.subtitle
+    )
+  }
+
+  private fun summaryDisplayContentPlan(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata,
+    renderFallbacks: List<Map<String, Any?>>
+  ): DisplayContentPlan {
     val title = when (config.action) {
       "clear_display_widget" -> "Display cleared"
       "reset_display_widget_session" -> "Display session reset"
@@ -816,18 +1125,208 @@ class ExpoMetaWearablesDatModule : Module() {
       "update_display_widget" -> metadata.subtitle ?: "Widget updated"
       else -> metadata.subtitle ?: metadata.widgetId ?: config.operation
     }
-    val footer = listOfNotNull(
-      metadata.widgetId,
-      metadata.manifestCid ?: metadata.descriptorCid
-    ).joinToString(" | ").ifBlank { config.operation }
+    return DisplayContentPlan(
+      manifest = metadata.manifest,
+      regions = emptyList(),
+      actions = emptyList(),
+      mediaById = emptyMap(),
+      rootVideo = null,
+      renderFallbacks = renderFallbacks,
+      summaryTitle = title,
+      summaryDetail = detail
+    )
+  }
 
-    val rendered = invokeDisplayDslMethod(scope, "flexBox") { box ->
-      invokeDisplayText(box, title, "HEADING", null)
-      invokeDisplayText(box, detail, "BODY", "SECONDARY")
-      invokeDisplayText(box, footer, "META", "SECONDARY")
+  private fun rootVideoMedia(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata,
+    renderFallbacks: MutableList<Map<String, Any?>>
+  ): DisplayWidgetMedia? {
+    if (config.action != DISPLAY_WIDGET_PLAY_VIDEO.action) {
+      return null
     }
-    if (!rendered && !invokeDisplayText(scope, title, "HEADING", null)) {
-      throw IllegalStateException("DAT display ContentScope did not expose supported text/flexBox builders")
+    val candidate = metadata.videoMedia
+      ?: metadata.manifest?.media?.firstOrNull { isDisplayVideoMedia(it) }
+    if (candidate == null) {
+      renderFallbacks.add(
+        displayRenderFallback(
+          kind = "media",
+          id = metadata.widgetId ?: "video",
+          reason = "video_media_missing",
+          message = "Display widget video playback did not include a video media reference."
+        )
+      )
+      return null
+    }
+    if (!isDisplayVideoMedia(candidate)) {
+      renderFallbacks.add(
+        displayRenderFallback(
+          kind = "media",
+          id = candidate.id,
+          reason = "video_media_type_unsupported",
+          message = candidate.fallbackText ?: "Only video/mp4 media can be sent to DAT root video content."
+        )
+      )
+      return null
+    }
+    if (!isSafeHttpsUri(candidate.uri)) {
+      renderFallbacks.add(
+        displayRenderFallback(
+          kind = "media",
+          id = candidate.id,
+          reason = "video_uri_unsupported",
+          message = candidate.fallbackText ?: "DAT root video content requires an HTTPS MP4 URL."
+        )
+      )
+      return null
+    }
+    if (!videoPlayerClassesLinked()) {
+      renderFallbacks.add(
+        displayRenderFallback(
+          kind = "media",
+          id = candidate.id,
+          reason = "video_player_unavailable",
+          message = candidate.fallbackText ?: "DAT video player classes are unavailable in this build."
+        )
+      )
+      return null
+    }
+    return candidate
+  }
+
+  private fun displayRegionText(region: DisplayWidgetRegion, manifest: DisplayWidgetManifest?): String? {
+    val explicit = region.text?.value?.takeIf { it.isNotBlank() }
+    if (explicit != null) {
+      return explicit
+    }
+    if (region.kind != "progress") {
+      return null
+    }
+    val state = manifest?.stateValues ?: return null
+    firstString(state["progress_label"], state["progressLabel"])?.let { return it }
+    val progress = numberValue(state["progress"]) ?: return null
+    return "${(progress.coerceIn(0.0, 1.0) * 100).toInt()}% complete"
+  }
+
+  private fun displayTextStyle(region: DisplayWidgetRegion): String =
+    when (region.kind) {
+      "text" -> if ((region.bounds?.height ?: 0) >= 64) "HEADING" else "BODY"
+      "status" -> "BODY"
+      "progress" -> "BODY"
+      "list" -> "BODY"
+      else -> "BODY"
+    }
+
+  private fun displayTextColor(region: DisplayWidgetRegion): String? =
+    when (region.kind) {
+      "status", "progress", "list" -> "SECONDARY"
+      else -> null
+    }
+
+  private fun displayActionIconName(action: DisplayWidgetAction): String =
+    when (normalizedToken(action.method ?: action.backendActionId ?: action.id)) {
+      "CLEAR_WIDGET", "DISMISS", "CLOSE" -> "CLOSE"
+      "PAUSE" -> "PAUSE"
+      "PLAY", "PLAY_VIDEO" -> "PLAY"
+      "FOCUS_NEXT", "NEXT" -> "TRIANGLE_RIGHT_VERTICAL_LINE"
+      "FOCUS_PREVIOUS", "PREVIOUS" -> "TRIANGLE_LEFT_VERTICAL_LINE"
+      else -> "CHECKMARK"
+    }
+
+  private fun handleDisplayActionCallback(
+    metadata: DisplayWidgetMetadata,
+    action: DisplayWidgetAction
+  ) {
+    displayFocusTarget = action.id
+    displayLastAction = DISPLAY_WIDGET_ACTIVATE.action
+    displayLastStatus = "action_requested"
+    displayLastUpdatedAt = System.currentTimeMillis()
+    sendEvent(
+      "display_widget_action",
+      mapOf(
+        "action" to DISPLAY_WIDGET_ACTIVATE.action,
+        "operation" to "activate",
+        "widgetId" to metadata.widgetId,
+        "widgetCid" to metadata.widgetCid,
+        "descriptorCid" to metadata.descriptorCid,
+        "interfaceCid" to metadata.interfaceCid,
+        "manifestCid" to metadata.manifestCid,
+        "orbReceiptCid" to metadata.orbReceiptCid,
+        "policyDecision" to metadata.policyDecision,
+        "correlationId" to metadata.correlationId,
+        "requestId" to metadata.requestId,
+        "activatedActionId" to action.id,
+        "backendActionId" to action.backendActionId,
+        "serviceId" to action.serviceId,
+        "displayRenderPath" to displayRenderPath,
+        "displayLifecycleStages" to displayLifecycleStages
+      )
+    )
+  }
+
+  private fun isSupportedManifestViewport(manifest: DisplayWidgetManifest): Boolean =
+    manifest.viewportWidth == DISPLAY_MANIFEST_VIEWPORT_SIZE &&
+      manifest.viewportHeight == DISPLAY_MANIFEST_VIEWPORT_SIZE
+
+  private fun isSafeRegionBounds(bounds: DisplayWidgetBounds): Boolean =
+    bounds.x >= 0 &&
+      bounds.y >= 0 &&
+      bounds.width > 0 &&
+      bounds.height > 0 &&
+      bounds.x + bounds.width <= DISPLAY_MANIFEST_VIEWPORT_SIZE &&
+      bounds.y + bounds.height <= DISPLAY_MANIFEST_VIEWPORT_SIZE
+
+  private fun isRegionVisible(region: DisplayWidgetRegion, manifest: DisplayWidgetManifest): Boolean? {
+    val visibleIf = region.visibleIf?.takeIf { it.isNotBlank() } ?: return true
+    if (!visibleIf.startsWith("state.")) {
+      return null
+    }
+    return truthyValue(resolveStatePath(manifest.stateValues, visibleIf.removePrefix("state.")))
+  }
+
+  private fun isDisplayImageMedia(media: DisplayWidgetMedia): Boolean =
+    media.type == "image/png" || media.type == "image/jpeg"
+
+  private fun isDisplayVideoMedia(media: DisplayWidgetMedia): Boolean =
+    media.type == "video/mp4" || media.type == "video"
+
+  private fun isSafeHttpsUri(uri: String?): Boolean =
+    uri?.startsWith("https://", ignoreCase = true) == true
+
+  private fun displayRenderFallback(
+    kind: String,
+    id: String,
+    reason: String,
+    message: String
+  ): Map<String, Any?> =
+    mapOf(
+      "kind" to kind,
+      "id" to id,
+      "reason" to reason,
+      "message" to message
+    )
+
+  private fun videoPlayerClassesLinked(): Boolean =
+    classExists(VIDEO_PLAYER_CLASS_NAME) &&
+      classExists(VIDEO_SOURCE_URL_CLASS_NAME) &&
+      classExists(VIDEO_CODEC_CLASS_NAME)
+
+  private fun createNativeVideoPlayer(uri: String): Any? {
+    val source = instantiateSingleArg(VIDEO_SOURCE_URL_CLASS_NAME, uri) ?: return null
+    val codec = try {
+      enumConstant(Class.forName(VIDEO_CODEC_CLASS_NAME), "MP4")
+    } catch (_: Throwable) {
+      null
+    } ?: return null
+    return instantiateWithArgs(VIDEO_PLAYER_CLASS_NAME, source, codec)
+      ?: instantiateWithArgs(VIDEO_PLAYER_CLASS_NAME, source)
+  }
+
+  private fun playNativeVideoPlayer(player: Any) {
+    try {
+      unwrapDatResult(invokeInstanceMethod(player, "play"))
+    } catch (_: Throwable) {
+      // Playback errors are surfaced through DAT player state/error streams; sendContent already succeeded.
     }
   }
 
@@ -838,29 +1337,34 @@ class ExpoMetaWearablesDatModule : Module() {
     reason: String?,
     connectionState: String,
     renderPath: String?,
-    message: String
+    message: String,
+    renderFallbacks: List<Map<String, Any?>> = emptyList()
   ) {
     if (supported || config.clearsLocalWidgetState) {
       when (config.action) {
         "render_display_widget" -> {
           displayActiveWidgetId = metadata.widgetId
           displayUpdateCount = 0
+          displayActiveManifest = metadata.manifest
         }
         "update_display_widget" -> {
           displayActiveWidgetId = metadata.widgetId ?: displayActiveWidgetId
           displayUpdateCount += 1
+          displayActiveManifest = metadata.manifest ?: displayActiveManifest
         }
         "clear_display_widget" -> {
           displayActiveWidgetId = null
           displayFocusTarget = null
+          displayActiveManifest = null
         }
         "focus_display_widget" -> {
-          displayFocusTarget = metadata.focusDirection
+          displayFocusTarget = metadata.manifest?.focusedActionId ?: metadata.focusDirection
         }
         "reset_display_widget_session" -> {
           displayActiveWidgetId = null
           displayFocusTarget = null
           displayUpdateCount = 0
+          displayActiveManifest = null
         }
       }
     }
@@ -872,7 +1376,11 @@ class ExpoMetaWearablesDatModule : Module() {
     displayPolicyDecision = metadata.policyDecision ?: displayPolicyDecision
     displayCorrelationId = metadata.correlationId ?: displayCorrelationId
     displayRequestId = metadata.requestId ?: displayRequestId
-    displayFallback = metadata.fallback ?: if (supported) null else displayWidgetFallback(metadata, reason, message)
+    displayFallback = if (supported) {
+      displayWidgetRecordedFallback(metadata, renderFallbacks)
+    } else {
+      displayWidgetFallback(metadata, reason, message, renderFallbacks)
+    }
     updateDisplayState(
       action = config.action,
       status = if (supported) "ready" else "blocked",
@@ -901,7 +1409,8 @@ class ExpoMetaWearablesDatModule : Module() {
     state: String,
     reason: String?,
     message: String,
-    requiredAction: String?
+    requiredAction: String?,
+    renderFallbacks: List<Map<String, Any?>> = emptyList()
   ): Map<String, Any?> =
     mapOf(
       "state" to state,
@@ -937,7 +1446,7 @@ class ExpoMetaWearablesDatModule : Module() {
       "issuedAt" to metadata.issuedAt,
       "focusDirection" to metadata.focusDirection,
       "activatedActionId" to metadata.activatedActionId,
-      "fallback" to if (supported) null else displayWidgetFallback(metadata, reason, message)
+      "fallback" to if (supported) null else displayWidgetFallback(metadata, reason, message, renderFallbacks)
     )
 
   private fun emitDisplayWidgetEvent(
@@ -997,7 +1506,8 @@ class ExpoMetaWearablesDatModule : Module() {
   private fun displayWidgetFallback(
     metadata: DisplayWidgetMetadata,
     reason: String?,
-    message: String
+    message: String,
+    renderFallbacks: List<Map<String, Any?>> = emptyList()
   ): Map<String, Any?> {
     val fallback = metadata.fallback?.toMutableMap() ?: mutableMapOf()
     if (firstString(fallback["reason"]) == null) {
@@ -1009,12 +1519,56 @@ class ExpoMetaWearablesDatModule : Module() {
     if (firstString(fallback["message"]) == null) {
       fallback["message"] = message
     }
+    appendRenderFallbacks(fallback, renderFallbacks)
     return fallback
+  }
+
+  private fun displayWidgetRecordedFallback(
+    metadata: DisplayWidgetMetadata,
+    renderFallbacks: List<Map<String, Any?>>
+  ): Map<String, Any?>? {
+    if (metadata.fallback == null && renderFallbacks.isEmpty()) {
+      return null
+    }
+    val fallback = metadata.fallback?.toMutableMap() ?: mutableMapOf()
+    if (renderFallbacks.isNotEmpty()) {
+      if (firstString(fallback["reason"]) == null) {
+        fallback["reason"] = "native_display_partial_fallback"
+      }
+      if (firstString(fallback["renderPath"]) == null && firstString(fallback["render_path"]) == null) {
+        fallback["renderPath"] = "native-dat"
+      }
+      if (firstString(fallback["message"]) == null) {
+        fallback["message"] = "DAT display rendered with native region/media fallbacks."
+      }
+    }
+    appendRenderFallbacks(fallback, renderFallbacks)
+    return fallback
+  }
+
+  private fun appendRenderFallbacks(
+    fallback: MutableMap<String, Any?>,
+    renderFallbacks: List<Map<String, Any?>>
+  ) {
+    if (renderFallbacks.isEmpty()) {
+      return
+    }
+    fallback["renderFallbacks"] = renderFallbacks
+    val regionFallbacks = renderFallbacks.filter { it["kind"] == "region" || it["kind"] == "manifest" }
+    val mediaFallbacks = renderFallbacks.filter { it["kind"] == "media" }
+    if (regionFallbacks.isNotEmpty()) {
+      fallback["regionFallbacks"] = regionFallbacks
+    }
+    if (mediaFallbacks.isNotEmpty()) {
+      fallback["mediaFallbacks"] = mediaFallbacks
+    }
   }
 
   private fun displayWidgetMetadata(input: Map<String, Any?>): DisplayWidgetMetadata {
     val manifest = mapValue(input["manifest"]) ?: input
     val focus = mapValue(input["focus"])
+    val video = mapValue(input["video"])
+    val parsedManifest = parseDisplayWidgetManifest(manifest)
     return DisplayWidgetMetadata(
       contract = stringValue(input["contract"]),
       type = stringValue(input["type"]),
@@ -1040,7 +1594,219 @@ class ExpoMetaWearablesDatModule : Module() {
       subtitle = firstString(manifest["summary"], manifest["description"], input["summary"], input["description"]),
       focusDirection = firstString(focus?.get("direction"), input["direction"]),
       activatedActionId = firstString(input["activated_action_id"], input["activatedActionId"], input["action_id"], input["actionId"]),
-      fallback = mapValue(input["fallback"])
+      fallback = mapValue(input["fallback"]) ?: parsedManifest?.fallback,
+      patch = mapValue(input["patch"]),
+      manifest = parsedManifest,
+      videoMedia = parseDisplayWidgetVideoMedia(video ?: input)
+    )
+  }
+
+  private fun resolveDisplayManifest(
+    config: DisplayActionConfig,
+    metadata: DisplayWidgetMetadata
+  ): DisplayWidgetManifest? {
+    val directManifest = metadata.manifest
+    if (directManifest != null) {
+      return if (metadata.patch == null) directManifest else patchDisplayWidgetManifest(directManifest, metadata.patch)
+    }
+    val activeManifest = displayActiveManifest ?: return null
+    return when (config.action) {
+      DISPLAY_WIDGET_UPDATE.action -> patchDisplayWidgetManifest(activeManifest, metadata.patch ?: emptyMap())
+      DISPLAY_WIDGET_FOCUS.action -> activeManifest.copy(focusedActionId = focusTargetForDirection(activeManifest, metadata.focusDirection))
+      DISPLAY_WIDGET_ACTIVATE.action -> activeManifest.copy(focusedActionId = metadata.activatedActionId ?: activeManifest.focusedActionId)
+      DISPLAY_WIDGET_PLAY_VIDEO.action -> activeManifest
+      else -> activeManifest
+    }
+  }
+
+  private fun patchDisplayWidgetManifest(
+    manifest: DisplayWidgetManifest,
+    patch: Map<String, Any?>
+  ): DisplayWidgetManifest {
+    if (patch.isEmpty()) {
+      return manifest
+    }
+    val stateValues = manifest.stateValues.toMutableMap()
+    patch.forEach { (key, value) ->
+      if (key != "manifest" && key != "patch") {
+        stateValues[key] = value
+      }
+    }
+    val regions = manifest.regions.map { region ->
+      val text = region.text
+      val source = text?.source
+      if (text == null || source == null || !source.startsWith("state.")) {
+        region
+      } else {
+        val resolved = displayStringValue(resolveStatePath(stateValues, source.removePrefix("state.")))
+        region.copy(text = text.copy(value = clampDisplayText(resolved, text.maxChars)))
+      }
+    }
+    return manifest.copy(stateValues = stateValues, regions = regions)
+  }
+
+  private fun focusTargetForDirection(
+    manifest: DisplayWidgetManifest,
+    direction: String?
+  ): String? {
+    if (manifest.focusOrder.isEmpty()) {
+      return manifest.focusedActionId
+    }
+    val current = manifest.focusedActionId ?: displayFocusTarget
+    val currentIndex = manifest.focusOrder.indexOf(current).takeIf { it >= 0 } ?: -1
+    return if (direction == "previous") {
+      manifest.focusOrder.getOrElse(if (currentIndex <= 0) manifest.focusOrder.lastIndex else currentIndex - 1) {
+        manifest.focusOrder.first()
+      }
+    } else {
+      manifest.focusOrder.getOrElse(if (currentIndex < 0 || currentIndex >= manifest.focusOrder.lastIndex) 0 else currentIndex + 1) {
+        manifest.focusOrder.first()
+      }
+    }
+  }
+
+  private fun parseDisplayWidgetManifest(manifest: Map<String, Any?>): DisplayWidgetManifest? {
+    val regionsValue = manifest["regions"] as? Collection<*> ?: return null
+    val viewport = mapValue(manifest["viewport"])
+    val stateValues = mapValue(mapValue(manifest["state"])?.get("values"))
+      ?: mapValue(manifest["state_values"])
+      ?: emptyMap()
+    val mediaItems = mutableListOf<DisplayWidgetMedia>()
+    mediaItems.addAll(
+      mapListValue(manifest["media"]).mapNotNull { parseDisplayWidgetMedia(it, null) }
+    )
+    val regions = regionsValue.mapNotNull { regionValue ->
+      val regionMap = mapValue(regionValue) ?: return@mapNotNull null
+      parseDisplayWidgetRegion(regionMap, stateValues, mediaItems)
+    }
+    val actions = mapListValue(manifest["actions"]).mapNotNull { parseDisplayWidgetAction(it) }
+    val focusOrder = stringListValue(manifest["focus_order"])
+    return DisplayWidgetManifest(
+      widgetId = firstString(manifest["widget_id"], manifest["widgetId"], manifest["id"]),
+      viewportWidth = intValue(viewport?.get("width")) ?: DISPLAY_MANIFEST_VIEWPORT_SIZE,
+      viewportHeight = intValue(viewport?.get("height")) ?: DISPLAY_MANIFEST_VIEWPORT_SIZE,
+      regions = regions,
+      focusOrder = focusOrder,
+      actions = actions.map { action ->
+        val regionId = action.regionId ?: regions.firstOrNull { it.actionId == action.id }?.id
+        val focusIndex = action.focusIndex ?: focusOrder.indexOf(action.id).takeIf { it >= 0 }
+        action.copy(regionId = regionId, focusIndex = focusIndex)
+      },
+      media = mediaItems,
+      stateValues = stateValues,
+      fallback = mapValue(manifest["fallback"]),
+      focusedActionId = firstString(manifest["focused_action_id"], manifest["focusedActionId"], displayFocusTarget)
+    )
+  }
+
+  private fun parseDisplayWidgetRegion(
+    region: Map<String, Any?>,
+    stateValues: Map<String, Any?>,
+    mediaItems: MutableList<DisplayWidgetMedia>
+  ): DisplayWidgetRegion? {
+    val id = firstString(region["id"]) ?: return null
+    val inlineMedia = mapValue(region["media"])
+    val inlineMediaId = if (inlineMedia != null) {
+      val media = parseDisplayWidgetMedia(inlineMedia + mapOf<String, Any?>("region_id" to id), id)
+      if (media != null) {
+        mediaItems.add(media)
+        media.id
+      } else {
+        null
+      }
+    } else {
+      null
+    }
+    return DisplayWidgetRegion(
+      id = id,
+      kind = firstString(region["kind"]) ?: "text",
+      bounds = parseDisplayWidgetBounds(mapValue(region["bounds"])),
+      text = parseDisplayWidgetText(mapValue(region["text"]), stateValues),
+      actionId = firstString(region["action_id"], region["actionId"]),
+      mediaId = firstString(region["media_id"], region["mediaId"], inlineMediaId),
+      visibleIf = firstString(region["visible_if"], region["visibleIf"])
+    )
+  }
+
+  private fun parseDisplayWidgetBounds(bounds: Map<String, Any?>?): DisplayWidgetBounds? {
+    if (bounds == null) {
+      return null
+    }
+    return DisplayWidgetBounds(
+      x = intValue(bounds["x"]) ?: return null,
+      y = intValue(bounds["y"]) ?: return null,
+      width = intValue(bounds["width"]) ?: return null,
+      height = intValue(bounds["height"]) ?: return null
+    )
+  }
+
+  private fun parseDisplayWidgetText(
+    text: Map<String, Any?>?,
+    stateValues: Map<String, Any?>
+  ): DisplayWidgetText? {
+    if (text == null) {
+      return null
+    }
+    val source = firstString(text["source"])
+    val value = firstString(text["value"])
+      ?: source?.takeIf { it.startsWith("state.") }?.let {
+        displayStringValue(resolveStatePath(stateValues, it.removePrefix("state.")))
+      }
+      ?: ""
+    val maxChars = intValue(text["max_chars"]) ?: value.length.coerceAtLeast(1)
+    return DisplayWidgetText(
+      source = source,
+      value = clampDisplayText(value, maxChars),
+      maxLines = intValue(text["max_lines"]) ?: 1,
+      maxChars = maxChars,
+      overflow = firstString(text["overflow"]) ?: "truncate"
+    )
+  }
+
+  private fun parseDisplayWidgetAction(action: Map<String, Any?>): DisplayWidgetAction? {
+    val id = firstString(action["id"]) ?: return null
+    return DisplayWidgetAction(
+      id = id,
+      method = firstString(action["method"]),
+      backendActionId = firstString(action["backend_action_id"], action["backendActionId"]),
+      label = firstString(action["label"]) ?: id,
+      focusable = booleanValue(action["focusable"]) ?: true,
+      focusIndex = intValue(action["focus_index"], action["focusIndex"]),
+      serviceId = firstString(action["service_id"], action["serviceId"]),
+      stateKeys = stringListValue(action["state_keys"] ?: action["stateKeys"]),
+      regionId = firstString(action["region_id"], action["regionId"])
+    )
+  }
+
+  private fun parseDisplayWidgetMedia(
+    media: Map<String, Any?>,
+    fallbackRegionId: String?
+  ): DisplayWidgetMedia? {
+    val regionId = firstString(media["region_id"], media["regionId"], fallbackRegionId)
+    val id = firstString(media["id"]) ?: regionId?.let { "$it-media" } ?: return null
+    return DisplayWidgetMedia(
+      id = id,
+      regionId = regionId,
+      type = firstString(media["type"], media["content_type"], media["contentType"], media["mime_type"], media["mimeType"]),
+      transport = firstString(media["transport"]),
+      uri = firstString(media["uri"], media["url"], media["href"], media["source_uri"], media["sourceUri"], media["asset_uri"], media["assetUri"]),
+      fallbackText = firstString(media["fallback_text"], media["fallbackText"], media["alt"], media["label"]),
+      durationMs = longValue(media["duration_ms"], media["durationMs"]),
+      sizeBytes = longValue(media["size_bytes"], media["sizeBytes"])
+    )
+  }
+
+  private fun parseDisplayWidgetVideoMedia(video: Map<String, Any?>): DisplayWidgetMedia? {
+    val uri = firstString(video["uri"], video["url"], video["href"], video["asset_uri"], video["assetUri"]) ?: return null
+    return DisplayWidgetMedia(
+      id = firstString(video["id"], video["media_id"], video["mediaId"]) ?: "display-widget-video",
+      regionId = firstString(video["region_id"], video["regionId"]),
+      type = firstString(video["type"], video["content_type"], video["contentType"], video["mime_type"], video["mimeType"]) ?: "video/mp4",
+      transport = firstString(video["transport"]) ?: if (isSafeHttpsUri(uri)) "https" else null,
+      uri = uri,
+      fallbackText = firstString(video["fallback_text"], video["fallbackText"], video["message"]),
+      durationMs = longValue(video["duration_ms"], video["durationMs"]),
+      sizeBytes = longValue(video["size_bytes"], video["sizeBytes"])
     )
   }
 
@@ -1182,6 +1948,7 @@ class ExpoMetaWearablesDatModule : Module() {
     nativeDisplay = null
     nativeDisplaySession = null
     nativeDisplayDeviceId = null
+    displayActiveManifest = null
   }
 
   private fun waitForOwnerState(owner: Any, expected: String, timeoutMs: Long): String? {
@@ -1326,14 +2093,21 @@ class ExpoMetaWearablesDatModule : Module() {
     name: String,
     text: String? = null,
     enumHints: Map<String, String> = emptyMap(),
-    block: ((Any) -> Unit)? = null
+    block: ((Any) -> Unit)? = null,
+    callback: (() -> Unit)? = null,
+    objectHints: List<Any> = emptyList()
   ): Boolean {
     val methods = target.javaClass.methods
       .filter { it.name == name }
-      .sortedBy { it.parameterTypes.size }
+      .sortedWith(
+        compareByDescending<Method> { method ->
+          (block != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function1" }) ||
+            (callback != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function0" })
+        }.thenBy { it.parameterTypes.size }
+      )
 
     for (method in methods) {
-      val args = buildDisplayDslArgs(method.parameterTypes, text, enumHints, block) ?: continue
+      val args = buildDisplayDslArgs(method.parameterTypes, text, enumHints, block, callback, objectHints) ?: continue
       try {
         method.invoke(target, *args)
         return true
@@ -1348,11 +2122,15 @@ class ExpoMetaWearablesDatModule : Module() {
     parameterTypes: Array<Class<*>>,
     text: String?,
     enumHints: Map<String, String>,
-    block: ((Any) -> Unit)?
+    block: ((Any) -> Unit)?,
+    callback: (() -> Unit)?,
+    objectHints: List<Any>
   ): Array<Any?>? {
     var textUsed = false
     return parameterTypes.map { parameterType ->
       when {
+        objectHints.any { parameterType.isAssignableFrom(it.javaClass) } ->
+          objectHints.first { parameterType.isAssignableFrom(it.javaClass) }
         parameterType == String::class.java -> {
           textUsed = true
           text ?: ""
@@ -1366,6 +2144,7 @@ class ExpoMetaWearablesDatModule : Module() {
           Unit
         })
         parameterType.name == "kotlin.jvm.functions.Function0" -> ({
+          callback?.invoke()
           Unit
         })
         !parameterType.isPrimitive -> null
@@ -1389,6 +2168,23 @@ class ExpoMetaWearablesDatModule : Module() {
   private fun instantiateNoArg(className: String): Any? =
     try {
       Class.forName(className).constructors.firstOrNull { it.parameterCount == 0 }?.newInstance()
+    } catch (_: Throwable) {
+      null
+    }
+
+  private fun instantiateSingleArg(className: String, arg: Any): Any? =
+    instantiateWithArgs(className, arg)
+
+  private fun instantiateWithArgs(className: String, vararg args: Any?): Any? =
+    try {
+      val clazz = Class.forName(className)
+      val constructor = clazz.constructors.firstOrNull { ctor ->
+        ctor.parameterTypes.size == args.size &&
+          ctor.parameterTypes.indices.all { index ->
+            isArgumentCompatible(ctor.parameterTypes[index], args[index])
+          }
+      }
+      constructor?.newInstance(*args)
     } catch (_: Throwable) {
       null
     }
@@ -1484,6 +2280,16 @@ class ExpoMetaWearablesDatModule : Module() {
       (key as? String)?.let { it to mapValue }
     }?.toMap()
 
+  private fun mapListValue(value: Any?): List<Map<String, Any?>> =
+    (value as? Collection<*>)
+      ?.mapNotNull { mapValue(it) }
+      ?: emptyList()
+
+  private fun stringListValue(value: Any?): List<String> =
+    (value as? Collection<*>)
+      ?.mapNotNull { stringValue(it)?.takeIf { item -> item.isNotBlank() } }
+      ?: emptyList()
+
   private fun firstString(vararg values: Any?): String? =
     values.firstNotNullOfOrNull { stringValue(it)?.takeIf { value -> value.isNotBlank() } }
 
@@ -1496,6 +2302,70 @@ class ExpoMetaWearablesDatModule : Module() {
       is String -> value
       else -> value.toString()
     }
+
+  private fun intValue(vararg values: Any?): Int? =
+    values.firstNotNullOfOrNull { value ->
+      when (value) {
+        is Int -> value
+        is Number -> value.toInt()
+        is String -> value.toIntOrNull()
+        else -> null
+      }
+    }
+
+  private fun longValue(vararg values: Any?): Long? =
+    values.firstNotNullOfOrNull { value ->
+      when (value) {
+        is Long -> value
+        is Number -> value.toLong()
+        is String -> value.toLongOrNull()
+        else -> null
+      }
+    }
+
+  private fun numberValue(value: Any?): Double? =
+    when (value) {
+      is Number -> value.toDouble()
+      is String -> value.toDoubleOrNull()
+      else -> null
+    }
+
+  private fun booleanValue(value: Any?): Boolean? =
+    when (value) {
+      is Boolean -> value
+      is String -> value.equals("true", ignoreCase = true)
+      is Number -> value.toInt() != 0
+      else -> null
+    }
+
+  private fun truthyValue(value: Any?): Boolean =
+    when (value) {
+      null -> false
+      is Boolean -> value
+      is Number -> value.toDouble() != 0.0
+      is String -> value.isNotBlank() && !value.equals("false", ignoreCase = true)
+      else -> true
+    }
+
+  private fun resolveStatePath(state: Map<String, Any?>, path: String): Any? {
+    var current: Any? = state
+    path.split(".").forEach { segment ->
+      val map = mapValue(current) ?: return null
+      current = map[segment]
+    }
+    return current
+  }
+
+  private fun displayStringValue(value: Any?): String =
+    when (value) {
+      null -> ""
+      is String -> value
+      is Number, is Boolean -> value.toString()
+      else -> value.toString()
+    }
+
+  private fun clampDisplayText(value: String, maxChars: Int): String =
+    if (maxChars > 0 && value.length > maxChars) value.take(maxChars) else value
 
   private fun deviceIdentifierKey(identifier: Any?): String? =
     firstString(
@@ -2023,7 +2893,103 @@ class ExpoMetaWearablesDatModule : Module() {
     val subtitle: String?,
     val focusDirection: String?,
     val activatedActionId: String?,
-    val fallback: Map<String, Any?>?
+    val fallback: Map<String, Any?>?,
+    val patch: Map<String, Any?>?,
+    val manifest: DisplayWidgetManifest?,
+    val videoMedia: DisplayWidgetMedia?
+  )
+
+  private data class DisplayWidgetManifest(
+    val widgetId: String?,
+    val viewportWidth: Int,
+    val viewportHeight: Int,
+    val regions: List<DisplayWidgetRegion>,
+    val focusOrder: List<String>,
+    val actions: List<DisplayWidgetAction>,
+    val media: List<DisplayWidgetMedia>,
+    val stateValues: Map<String, Any?>,
+    val fallback: Map<String, Any?>?,
+    val focusedActionId: String?
+  )
+
+  private data class DisplayWidgetRegion(
+    val id: String,
+    val kind: String,
+    val bounds: DisplayWidgetBounds?,
+    val text: DisplayWidgetText?,
+    val actionId: String?,
+    val mediaId: String?,
+    val visibleIf: String?
+  )
+
+  private data class DisplayWidgetBounds(
+    val x: Int,
+    val y: Int,
+    val width: Int,
+    val height: Int
+  )
+
+  private data class DisplayWidgetText(
+    val source: String?,
+    val value: String,
+    val maxLines: Int,
+    val maxChars: Int,
+    val overflow: String
+  )
+
+  private data class DisplayWidgetAction(
+    val id: String,
+    val method: String?,
+    val backendActionId: String?,
+    val label: String?,
+    val focusable: Boolean,
+    val focusIndex: Int?,
+    val serviceId: String?,
+    val stateKeys: List<String> = emptyList(),
+    val regionId: String?
+  )
+
+  private data class DisplayWidgetMedia(
+    val id: String,
+    val regionId: String?,
+    val type: String?,
+    val transport: String?,
+    val uri: String?,
+    val fallbackText: String?,
+    val durationMs: Long?,
+    val sizeBytes: Long?
+  )
+
+  private data class DisplayContentPlan(
+    val manifest: DisplayWidgetManifest?,
+    val regions: List<DisplayWidgetRegion>,
+    val actions: List<DisplayWidgetAction>,
+    val mediaById: Map<String, DisplayWidgetMedia>,
+    val rootVideo: DisplayWidgetMedia?,
+    val renderFallbacks: List<Map<String, Any?>>,
+    val summaryTitle: String?,
+    val summaryDetail: String?
+  )
+
+  private class DisplayContentRenderState {
+    private val mutableFallbacks = mutableListOf<Map<String, Any?>>()
+    var videoPlayer: Any? = null
+
+    val renderFallbacks: List<Map<String, Any?>>
+      get() = mutableFallbacks.toList()
+
+    fun addFallback(fallback: Map<String, Any?>) {
+      mutableFallbacks.add(fallback)
+    }
+
+    fun addFallbacks(fallbacks: List<Map<String, Any?>>) {
+      mutableFallbacks.addAll(fallbacks)
+    }
+  }
+
+  private data class DisplayContentSendResult(
+    val callResult: DatCallResult,
+    val renderFallbacks: List<Map<String, Any?>> = emptyList()
   )
 
   private data class DisplayDeviceTarget(
@@ -2155,6 +3121,10 @@ class ExpoMetaWearablesDatModule : Module() {
     const val DISPLAY_SESSION_TIMEOUT_MS = 5_000L
     const val DISPLAY_STATE_POLL_MS = 100L
     const val MAX_DISPLAY_LIFECYCLE_STAGES = 16
+    const val DISPLAY_MANIFEST_VIEWPORT_SIZE = 600
+    const val VIDEO_PLAYER_CLASS_NAME = "com.meta.wearable.dat.display.views.VideoPlayer"
+    const val VIDEO_SOURCE_URL_CLASS_NAME = "com.meta.wearable.dat.display.types.VideoSource\$Url"
+    const val VIDEO_CODEC_CLASS_NAME = "com.meta.wearable.dat.display.types.VideoCodec"
     val DISPLAY_EXTENSION_CLASS_NAMES = listOf(
       "com.meta.wearable.dat.display.DisplayKt",
       "com.meta.wearable.dat.display.DisplayExtensionsKt",

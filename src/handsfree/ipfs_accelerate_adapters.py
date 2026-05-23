@@ -14,6 +14,7 @@ from functools import lru_cache
 from typing import Any, Callable, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
+IPFS_ACCELERATE_CLI_COMMAND = "ipfs-accelerate"
 
 
 class IPFSAccelerateAdapter(Protocol):
@@ -98,3 +99,8 @@ def get_ipfs_accelerate_adapter() -> IPFSAccelerateAdapter:
 def reset_ipfs_accelerate_adapter_cache() -> None:
     """Reset cached accelerate adapter (primarily for tests)."""
     get_ipfs_accelerate_adapter.cache_clear()
+
+
+def get_ipfs_accelerate_cli_command() -> str:
+    """Return the validated CLI command name for local accelerate execution."""
+    return IPFS_ACCELERATE_CLI_COMMAND

@@ -328,6 +328,34 @@ Notes:
 - For `stdio`, set `*_COMMAND` and `*_ARGS`. The client uses header-framed JSON-RPC over subprocess stdio and reuses the same provider interface.
 - `ipfs_datasets_py` and `ipfs_accelerate_py` now default to real upstream meta-dispatch via `tools_dispatch` and the background-task category bindings above.
 - `ipfs_kit_py` does not expose a single generic agent-delegation tool, so `HANDSFREE_MCP_IPFS_KIT_TOOL_NAME` must be set explicitly to a concrete upstream tool for task delegation.
+
+#### Virtual AI OS Submodule Bootstrap
+
+The virtual AI OS integration backlog uses the repo-local `ipfs_datasets_py` todo supervisor and ephemeral worktrees. The bootstrap contract is now explicit and can be overridden with environment variables when operators need a different state or worktree location.
+
+Relevant bootstrap environment variables:
+
+```bash
+HANDSFREE_VAI_OS_TODO_PATH=/home/you/lift_coding/implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+HANDSFREE_VAI_OS_STATE_DIR=/home/you/lift_coding/data/virtual_ai_os/state
+HANDSFREE_VAI_OS_WORKTREE_ROOT=/home/you/lift_coding/data/virtual_ai_os/worktrees
+```
+
+Operational notes:
+
+- `HANDSFREE_VAI_OS_TODO_PATH` controls which daemon-parseable backlog the supervisor reads.
+- `HANDSFREE_VAI_OS_STATE_DIR` stores the task-state snapshot, events log, and strategy state.
+- `HANDSFREE_VAI_OS_WORKTREE_ROOT` is where isolated implementation worktrees are created when `--implement` is used.
+- The supervisor wrapper now creates the state and worktree directories automatically before invoking `ipfs_datasets_py`.
+- This bootstrap path is intentionally submodule-aware: initialize the root submodules before asking the supervisor to create implementation worktrees.
+
+Recommended bootstrap sequence:
+
+```bash
+git submodule sync --recursive
+git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate external/ipfs_kit swissknife
+PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
+```
 2. Create a new API key
 3. Add to `.env`
 

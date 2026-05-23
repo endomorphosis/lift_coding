@@ -1,0 +1,274 @@
+{
+  "name": "display_widget_bridge",
+  "namespace": "handsfree.meta_glasses.display",
+  "version": "0.1.0",
+  "methods": [
+    {
+      "name": "render_widget",
+      "description": "Render a full display widget manifest on the preferred display target and emit a mobile action payload when phone mediation is required.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "widget_cid",
+          "manifest"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "widget_cid": { "type": "string" },
+          "manifest": { "type": "object" },
+          "fallback": { "type": "object" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": [
+          "type",
+          "operation",
+          "widget_id",
+          "widget_cid",
+          "orb_receipt_cid"
+        ],
+        "properties": {
+          "type": { "const": "mobile_render_display_widget" },
+          "operation": { "const": "render_widget" },
+          "widget_id": { "type": "string" },
+          "widget_cid": { "type": "string" },
+          "orb_receipt_cid": { "type": "string" },
+          "manifest": { "type": "object" },
+          "state": { "type": "object" },
+          "fallback": { "type": "object" }
+        }
+      }
+    },
+    {
+      "name": "update_widget",
+      "description": "Apply a state patch to an existing widget session.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "patch"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "patch": { "type": "object" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_update_display_widget" },
+          "operation": { "const": "update_widget" },
+          "patch": { "type": "object" }
+        }
+      }
+    },
+    {
+      "name": "clear_widget",
+      "description": "Clear the active widget from the display target.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_clear_display_widget" },
+          "operation": { "const": "clear_widget" },
+          "widget_id": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "focus_next",
+      "description": "Move focus within the widget interaction model. The focus payload carries the actual direction metadata.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "focus"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "focus": {
+            "type": "object",
+            "properties": {
+              "direction": { "enum": ["next", "previous"] },
+              "action_id": { "type": "string" },
+              "focus_index": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_focus_display_widget" },
+          "operation": { "const": "focus_next" },
+          "focus": { "type": "object" }
+        }
+      }
+    },
+    {
+      "name": "activate",
+      "description": "Activate a widget action selected through focus or direct input.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "activated_action_id"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "activated_action_id": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_activate_display_widget_action" },
+          "operation": { "const": "activate" },
+          "activated_action_id": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "reset_session",
+      "description": "Detach or reset the display widget session before a new render.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "widget_id": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_reset_display_widget_session" },
+          "operation": { "const": "reset_session" }
+        }
+      }
+    },
+    {
+      "name": "play_video",
+      "description": "Play a video associated with the current widget context.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "video"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "video": {
+            "type": "object",
+            "required": ["media_id", "uri", "content_type"],
+            "properties": {
+              "media_id": { "type": "string" },
+              "uri": { "type": "string" },
+              "content_type": { "type": "string" },
+              "duration_ms": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_play_display_widget_video" },
+          "operation": { "const": "play_video" },
+          "video": { "type": "object" }
+        }
+      }
+    },
+    {
+      "name": "subscribe_updates",
+      "description": "Subscribe to widget update events for simulator or mobile synchronization.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "subscription"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "subscription": {
+            "type": "object",
+            "properties": {
+              "stream": { "type": "string" }
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_subscribe_display_widget_updates" },
+          "operation": { "const": "subscribe_updates" },
+          "subscription": { "type": "object" }
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "policy_denied",
+      "code": 403,
+      "description": "The operation was denied by policy or trusted-descriptor checks."
+    },
+    {
+      "name": "display_unavailable",
+      "code": 503,
+      "description": "Native DAT display was unavailable and the caller must use the declared fallback."
+    },
+    {
+      "name": "invalid_widget_manifest",
+      "code": 422,
+      "description": "The supplied widget manifest or patch failed validation."
+    },
+    {
+      "name": "widget_not_found",
+      "code": 404,
+      "description": "The target widget session or widget id could not be resolved."
+    },
+    {
+      "name": "invalid_video",
+      "code": 422,
+      "description": "The requested video payload violates display transport or media constraints."
+    }
+  ],
+  "requires": [
+    "display/widget",
+    "mcp++/invoke"
+  ],
+  "compatibility": {
+    "compatibleWith": [],
+    "supersedes": []
+  },
+  "semanticTags": [
+    "meta-glasses",
+    "display-widget",
+    "orb-bridge",
+    "mobile-action-contract"
+  ],
+  "observability": {
+    "trace": true,
+    "provenance": true
+  },
+  "interactionPatterns": {
+    "requestResponse": true,
+    "eventStreams": true
+  },
+  "resourceCostHints": {
+    "tokensPerCall": 0,
+    "latencyMs": 150,
+    "bytesPerCall": 4096
+  },
+  "schemaHash": "draft-local"
+}

@@ -14,6 +14,7 @@ from functools import lru_cache
 from typing import Any, Callable, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
+IPFS_KIT_CLI_COMMAND = "ipfs-kit"
 
 
 class IPFSKitAdapter(Protocol):
@@ -179,3 +180,8 @@ def get_ipfs_kit_adapter() -> IPFSKitAdapter:
 def reset_ipfs_kit_adapter_cache() -> None:
     """Reset cached kit adapter (primarily for tests)."""
     get_ipfs_kit_adapter.cache_clear()
+
+
+def get_ipfs_kit_cli_command() -> str:
+    """Return the validated CLI command name for local IPFS Kit execution."""
+    return IPFS_KIT_CLI_COMMAND

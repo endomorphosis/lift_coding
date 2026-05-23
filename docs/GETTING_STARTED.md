@@ -190,6 +190,44 @@ See [iPhone & Meta Glasses Testing](#iphone--meta-glasses-testing) for details.
 
 ---
 
+### Path 4: Virtual AI OS Bootstrap
+
+**Goal**: initialize the component submodules, bootstrap the virtual AI OS backlog, and prepare supervisor worktrees for autonomous implementation.
+
+**Time**: 10-15 minutes
+
+```bash
+# 1. Clone and enter the repo
+git clone https://github.com/endomorphosis/lift_coding.git
+cd lift_coding
+
+# 2. Initialize the reviewed component submodules
+git submodule sync --recursive
+git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate external/ipfs_kit swissknife
+
+# 3. Bootstrap Python dependencies for the root repo
+make deps
+
+# 4. Validate the daemon-backed backlog
+PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_daemon.py --once
+PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
+
+# 5. Optional: create isolated worktrees for autonomous implementation
+PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once --implement
+```
+
+Bootstrap notes:
+
+- The virtual AI OS supervisor stores its state under `data/virtual_ai_os/state` by default.
+- Autonomous implementation worktrees are created under `data/virtual_ai_os/worktrees` by default.
+- You can override the backlog, state directory, or worktree root with `HANDSFREE_VAI_OS_TODO_PATH`, `HANDSFREE_VAI_OS_STATE_DIR`, and `HANDSFREE_VAI_OS_WORKTREE_ROOT`.
+- If `swissknife` or another submodule already has local changes, prefer a non-conflicting ready task before asking the supervisor to implement against that worktree.
+- The current reviewed blocker is the unresolved canonical `mcp_plus_plus` upstream; keep that as a documented ops task instead of adding a broken submodule URL.
+
+See [implementation_plan/docs/19-virtual-ai-os-submodule-integration.md](../implementation_plan/docs/19-virtual-ai-os-submodule-integration.md) for the operating-model details and [CONFIGURATION.md](CONFIGURATION.md) for the bootstrap environment contract.
+
+---
+
 ## Backend Setup
 
 ### Step 1: Clone and Install

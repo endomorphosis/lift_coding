@@ -191,7 +191,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-016 Preserve full widget action metadata through native DAT bridge calls
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
@@ -202,7 +202,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-017 Render compiled widget manifest regions on Android native DAT display
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
@@ -213,7 +213,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-018 Add iOS DisplayAccess native-display bridge parity
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: mobile
@@ -224,7 +224,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-019 Broaden the hardware-free display widget harness for discovered lifecycle gaps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality

@@ -378,6 +378,53 @@ export async function sendActionCommand(actionId, options = {}) {
   return normalizeCommandResponse(await response.json());
 }
 
+async function postMobileOrbBridgeOperation(operation, payload) {
+  const baseUrl = await getBaseUrl();
+  const headers = await getHeaders();
+
+  const response = await fetch(`${baseUrl}/v1/mobile/orb/${operation}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payload || {}),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const message = errorData.error || errorData.detail?.error || `Mobile ORB bridge failed: ${response.status}`;
+    throw new Error(message);
+  }
+
+  return await response.json();
+}
+
+export async function registerMobileOrbEdgeCapabilities(payload) {
+  return postMobileOrbBridgeOperation('register_edge_capabilities', payload);
+}
+
+export async function publishMobileOrbGlassesEvent(payload) {
+  return postMobileOrbBridgeOperation('publish_glasses_event', payload);
+}
+
+export async function bindMobileOrbService(payload) {
+  return postMobileOrbBridgeOperation('bind_service', payload);
+}
+
+export async function invokeMobileOrbService(payload) {
+  return postMobileOrbBridgeOperation('invoke_service', payload);
+}
+
+export async function subscribeMobileOrbServiceUpdates(payload) {
+  return postMobileOrbBridgeOperation('subscribe_service_updates', payload);
+}
+
+export async function dispatchMobileOrbGlassesResponse(payload) {
+  return postMobileOrbBridgeOperation('dispatch_glasses_response', payload);
+}
+
+export async function revokeMobileOrbBinding(payload) {
+  return postMobileOrbBridgeOperation('revoke_binding', payload);
+}
+
 /**
  * Send an audio command to the backend.
  * Note: the backend expects an audio URI it can fetch (https:// or file:// for dev).

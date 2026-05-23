@@ -32,6 +32,7 @@ export interface DatConfiguration {
   datAppModelEnabled?: boolean;
   displayDamRequired?: boolean;
   displayDamEnabled?: boolean;
+  displaySdkLinked?: boolean;
   applicationId?: string | null;
   provider?: string;
   integrationMode?: string;
@@ -49,6 +50,7 @@ export interface DatDiagnostics {
   datAppModelEnabled?: boolean;
   displayDamRequired?: boolean;
   displayDamEnabled?: boolean;
+  displaySdkLinked?: boolean;
   displayReady?: boolean;
   configWarnings?: string[];
   applicationId?: string | null;
@@ -151,6 +153,8 @@ export interface DatDisplayWidgetActionResult extends Omit<DatMediaActionResult,
   displayLifecycleStages?: string[];
   widgetId?: string | null;
   widgetCid?: string | null;
+  contract?: string | null;
+  type?: string | null;
   descriptorCid?: string | null;
   interfaceCid?: string | null;
   manifestCid?: string | null;
@@ -192,6 +196,7 @@ function getUnavailableConfiguration(): DatConfiguration {
     datAppModelEnabled: false,
     displayDamRequired: true,
     displayDamEnabled: false,
+    displaySdkLinked: false,
     applicationId: null,
     provider: 'internal_bridge',
     integrationMode: 'unavailable',
@@ -206,6 +211,7 @@ function getUnavailableDiagnostics(): DatDiagnostics {
     capabilities: unavailableCapabilities,
     sessionState: 'unavailable',
     displayReady: false,
+    displaySdkLinked: false,
     configWarnings: ['DAT native module is unavailable in this build.'],
     registrationState: 'unavailable',
     deviceCount: 0,

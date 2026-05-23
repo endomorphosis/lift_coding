@@ -8,6 +8,11 @@ import {
   extractActionTaskUpdate,
 } from '../agentActions';
 import { getMetaWearablesDat } from '../../native/metaWearablesDat';
+import {
+  DISPLAY_WIDGET_ACTION_IDS,
+  DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
+  DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
+} from '../metaWearablesDatDisplayWidgetContract';
 
 describe('agentActions helpers', () => {
   beforeEach(() => {
@@ -72,6 +77,41 @@ describe('agentActions helpers', () => {
         debug: { tool_calls: [] },
       })
     ).toBeNull();
+  });
+
+  it('keeps the display widget ORB contract aligned to DAT bridge methods', () => {
+    expect(DISPLAY_WIDGET_ACTION_IDS).toEqual([
+      'mobile_render_display_widget',
+      'mobile_update_display_widget',
+      'mobile_clear_display_widget',
+      'mobile_focus_display_widget',
+      'mobile_activate_display_widget_action',
+      'mobile_reset_display_widget_session',
+      'mobile_play_display_widget_video',
+      'mobile_subscribe_display_widget_updates',
+    ]);
+
+    expect(DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID).toEqual({
+      mobile_render_display_widget: 'render_widget',
+      mobile_update_display_widget: 'update_widget',
+      mobile_clear_display_widget: 'clear_widget',
+      mobile_focus_display_widget: 'focus_next',
+      mobile_activate_display_widget_action: 'activate',
+      mobile_reset_display_widget_session: 'reset_session',
+      mobile_play_display_widget_video: 'play_video',
+      mobile_subscribe_display_widget_updates: 'subscribe_updates',
+    });
+
+    expect(DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID).toEqual({
+      mobile_render_display_widget: 'renderDisplayWidget',
+      mobile_update_display_widget: 'updateDisplayWidget',
+      mobile_clear_display_widget: 'clearDisplayWidget',
+      mobile_focus_display_widget: 'focusDisplayWidget',
+      mobile_activate_display_widget_action: 'activateDisplayWidgetAction',
+      mobile_reset_display_widget_session: 'resetDisplayWidgetSession',
+      mobile_play_display_widget_video: 'playDisplayWidgetVideo',
+      mobile_subscribe_display_widget_updates: 'subscribeDisplayWidgetUpdates',
+    });
   });
 
   it('runs wearables reconnect locally and navigates to diagnostics', async () => {

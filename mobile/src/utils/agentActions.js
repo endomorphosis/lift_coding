@@ -1,5 +1,6 @@
 import { sendActionCommand } from '../api/client';
 import { getMetaWearablesDat } from '../native/metaWearablesDat';
+import { isDisplayWidgetActionId } from './metaWearablesDatDisplayWidgetContract';
 
 export function buildPromptDraft(actionItem, card, valueOverride = undefined) {
   if (!actionItem?.prompt_key) {
@@ -195,19 +196,8 @@ function getDisplayWidgetSubscriptionPayload(payload) {
   };
 }
 
-const DISPLAY_WIDGET_ACTION_IDS = new Set([
-  'mobile_render_display_widget',
-  'mobile_update_display_widget',
-  'mobile_clear_display_widget',
-  'mobile_focus_display_widget',
-  'mobile_activate_display_widget_action',
-  'mobile_reset_display_widget_session',
-  'mobile_play_display_widget_video',
-  'mobile_subscribe_display_widget_updates',
-]);
-
 async function executeLocalDisplayWidgetAction({ actionItem, navigation }) {
-  if (!DISPLAY_WIDGET_ACTION_IDS.has(actionItem?.id)) {
+  if (!isDisplayWidgetActionId(actionItem?.id)) {
     return { handled: false };
   }
 

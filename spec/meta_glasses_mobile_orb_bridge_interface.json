@@ -1,0 +1,314 @@
+{
+  "name": "mobile_orb_bridge",
+  "namespace": "handsfree.meta_glasses.mobile",
+  "version": "0.1.0",
+  "methods": [
+    {
+      "name": "register_edge_capabilities",
+      "description": "Register the phone as a Meta glasses ORB edge node and advertise DAT, display, audio, media, and local bridge capabilities.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["edge_id", "platform", "dat_capabilities"],
+        "properties": {
+          "edge_id": { "type": "string" },
+          "platform": { "enum": ["ios", "android", "simulator"] },
+          "device_id": { "type": "string" },
+          "device_model": { "type": "string" },
+          "dat_capabilities": {
+            "type": "object",
+            "properties": {
+              "session": { "type": "boolean" },
+              "camera": { "type": "boolean" },
+              "photoCapture": { "type": "boolean" },
+              "videoStream": { "type": "boolean" },
+              "audio": { "type": "boolean" },
+              "display": { "type": "boolean" },
+              "displayVideo": { "type": "boolean" },
+              "webAppDisplay": { "type": "boolean" }
+            }
+          },
+          "local_interface_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "transport_preferences": {
+            "type": "array",
+            "items": { "enum": ["local", "http", "websocket", "mcp-server"] }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["edge_session_id", "accepted_interface_cids", "policy_cid"],
+        "properties": {
+          "edge_session_id": { "type": "string" },
+          "accepted_interface_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "policy_cid": { "type": "string" },
+          "expires_at": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "publish_glasses_event",
+      "description": "Publish a normalized glasses event from DAT, Web App, Neural Band/captouch, audio, camera, sensor, or display surfaces into the ORB routing layer.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["edge_session_id", "event_type", "payload", "correlation_id"],
+        "properties": {
+          "edge_session_id": { "type": "string" },
+          "event_type": {
+            "enum": [
+              "session_state",
+              "device_state",
+              "captouch",
+              "neural_input",
+              "display_action",
+              "audio_state",
+              "camera_frame_ref",
+              "photo_ref",
+              "sensor",
+              "location",
+              "permission_state",
+              "diagnostic"
+            ]
+          },
+          "payload": { "type": "object" },
+          "correlation_id": { "type": "string" },
+          "parent_receipt_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["event_cid", "accepted"],
+        "properties": {
+          "event_cid": { "type": "string" },
+          "accepted": { "type": "boolean" },
+          "routed_operations": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "receipt_cid": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "bind_service",
+      "description": "Bind a remote or local service descriptor so glasses-originated requests can invoke it through policy-checked ORB transport.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["edge_session_id", "service_interface_cid"],
+        "properties": {
+          "edge_session_id": { "type": "string" },
+          "service_interface_cid": { "type": "string" },
+          "service_descriptor": { "type": "object" },
+          "operation": { "type": "string" },
+          "transport_preference": { "enum": ["local", "http", "websocket", "mcp-server"] },
+          "user_intent": { "type": "string" },
+          "policy_context": { "type": "object" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["binding_handle", "transport", "policy_decision"],
+        "properties": {
+          "binding_handle": { "type": "string" },
+          "transport": { "enum": ["local", "http", "websocket", "mcp-server"] },
+          "granted_capabilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "policy_decision": { "type": "object" },
+          "expires_at": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "invoke_service",
+      "description": "Invoke a bound service operation on behalf of the glasses wearer and return a receipt-backed result plus display/audio follow-up actions.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["binding_handle", "operation", "arguments", "correlation_id"],
+        "properties": {
+          "binding_handle": { "type": "string" },
+          "operation": { "type": "string" },
+          "arguments": { "type": "object" },
+          "glasses_context": { "type": "object" },
+          "display_context": { "type": "object" },
+          "correlation_id": { "type": "string" },
+          "parent_receipt_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["ok", "receipt_cid"],
+        "properties": {
+          "ok": { "type": "boolean" },
+          "service_result": { "type": "object" },
+          "output_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "provenance_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "receipt_cid": { "type": "string" },
+          "follow_up_actions": {
+            "type": "array",
+            "items": { "type": "object" }
+          }
+        }
+      }
+    },
+    {
+      "name": "subscribe_service_updates",
+      "description": "Subscribe to updates from a bound service and route streamed progress or status back to the phone/display bridge.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["binding_handle", "operation", "correlation_id"],
+        "properties": {
+          "binding_handle": { "type": "string" },
+          "operation": { "type": "string" },
+          "arguments": { "type": "object" },
+          "stream": { "type": "string" },
+          "correlation_id": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["subscription_id", "receipt_cid"],
+        "properties": {
+          "subscription_id": { "type": "string" },
+          "receipt_cid": { "type": "string" },
+          "generation_key": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "dispatch_glasses_response",
+      "description": "Convert a service result into phone-local render targets such as DAT display widget, Web App preview, audio summary, mobile card, or notification fallback.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["edge_session_id", "result", "render_targets", "correlation_id"],
+        "properties": {
+          "edge_session_id": { "type": "string" },
+          "result": { "type": "object" },
+          "render_targets": {
+            "type": "array",
+            "items": {
+              "enum": ["display_widget", "display_webapp", "audio", "mobile_card", "notification"]
+            }
+          },
+          "fallback": { "type": "object" },
+          "correlation_id": { "type": "string" },
+          "parent_receipt_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["dispatched_actions", "receipt_cid"],
+        "properties": {
+          "dispatched_actions": {
+            "type": "array",
+            "items": { "type": "object" }
+          },
+          "display_widget_action": { "type": "object" },
+          "spoken_text": { "type": "string" },
+          "receipt_cid": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "revoke_binding",
+      "description": "Revoke a service binding or phone edge session binding and prevent future glasses-originated invocation through that handle.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["binding_handle", "reason"],
+        "properties": {
+          "binding_handle": { "type": "string" },
+          "reason": { "type": "string" },
+          "correlation_id": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["revoked"],
+        "properties": {
+          "revoked": { "type": "boolean" },
+          "receipt_cid": { "type": "string" }
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "policy_denied",
+      "code": 403,
+      "description": "The edge node or service invocation was denied by policy."
+    },
+    {
+      "name": "edge_session_not_found",
+      "code": 404,
+      "description": "The mobile edge session is missing, expired, or revoked."
+    },
+    {
+      "name": "binding_not_found",
+      "code": 404,
+      "description": "The requested service binding handle could not be resolved."
+    },
+    {
+      "name": "service_unavailable",
+      "code": 503,
+      "description": "The remote service or MCP++ endpoint is unavailable."
+    },
+    {
+      "name": "invalid_glasses_event",
+      "code": 422,
+      "description": "The glasses event payload does not match the declared event type."
+    }
+  ],
+  "requires": [
+    "mcp++/invoke",
+    "mcp++/receipts",
+    "mcp++/provenance",
+    "dat/session",
+    "display/widget"
+  ],
+  "compatibility": {
+    "compatibleWith": [],
+    "supersedes": []
+  },
+  "semanticTags": [
+    "meta-glasses",
+    "mobile-edge",
+    "object-request-broker",
+    "mcp-plus-plus",
+    "service-bridge"
+  ],
+  "observability": {
+    "trace": true,
+    "provenance": true
+  },
+  "interactionPatterns": {
+    "requestResponse": true,
+    "eventStreams": true
+  },
+  "resourceCostHints": {
+    "tokensPerCall": 0,
+    "latencyMs": 250,
+    "bytesPerCall": 8192
+  },
+  "schemaHash": "draft-local"
+}

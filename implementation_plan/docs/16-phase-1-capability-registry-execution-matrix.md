@@ -23,6 +23,20 @@ The repository already has partial capability and provider seams:
 
 What is still missing is a single execution contract that the command router, task service, mobile cards, and MCP providers can all target consistently.
 
+## VAI-003 implementation slice
+
+The first implementation slice should land in `src/handsfree/ai/capability_registry.py` and extend `src/handsfree/ai/models.py` with a richer cross-repo registry entry model.
+
+That registry should not replace the existing AI execution helpers or MCP catalog yet. It should normalize them into one control-plane view with:
+
+- canonical cross-repo capability ids,
+- owner repo metadata,
+- execution-mode resolution,
+- confirmation policy,
+- artifact output shape,
+- display summary fields,
+- integration-test coverage.
+
 ## Deliverables
 
 ### 1. Canonical capability model
@@ -94,9 +108,9 @@ The first implementation target is not perfect feature parity. It is determinist
 ## Required code changes
 
 ### Registry and models
-- extend `src/handsfree/mcp/catalog.py`
-- add richer result and schema models to `src/handsfree/mcp/models.py`
-- add normalization helpers under `src/handsfree/mcp/capabilities.py`
+- add `src/handsfree/ai/capability_registry.py`
+- extend `src/handsfree/ai/models.py` with the cross-repo registry entry model
+- keep `src/handsfree/mcp/catalog.py` and `src/handsfree/ai/capabilities.py` as source inputs until the runtime router lands
 
 ### Runtime and routing
 - add or extend a shared execution runtime under `src/handsfree/mcp/`
@@ -120,6 +134,8 @@ The first implementation target is not perfect feature parity. It is determinist
 - contract tests cover result-envelope normalization
 - parity tests compare direct and remote output shapes for the initial capability set
 - regression tests confirm existing providers still work
+
+For VAI-003 specifically, the focused test target is `tests/test_virtual_ai_os_capability_registry.py`.
 
 ## Sequencing after Phase 1
 Once this lands:

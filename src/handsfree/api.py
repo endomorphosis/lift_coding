@@ -79,6 +79,24 @@ from handsfree.logging_utils import (
     log_warning,
     set_request_id,
 )
+from handsfree.meta_glasses_mobile_orb_artifacts import (
+    build_mobile_orb_bind_service_artifacts,
+    build_mobile_orb_dispatch_receipt_cid,
+    build_mobile_orb_event_artifacts,
+    build_mobile_orb_invoke_receipt_cid,
+    build_mobile_orb_register_artifacts,
+    build_mobile_orb_revoke_receipt_cid,
+    build_mobile_orb_subscription_artifacts,
+)
+from handsfree.meta_glasses_mobile_orb_adapter import (
+    build_mobile_orb_bind_service_response,
+    build_mobile_orb_dispatch_response,
+    build_mobile_orb_event_response,
+    build_mobile_orb_invoke_service_response,
+    build_mobile_orb_register_response,
+    build_mobile_orb_revoke_binding_response,
+    build_mobile_orb_subscribe_response,
+)
 from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.models import (
     ActionResult,
@@ -146,6 +164,20 @@ from handsfree.models import (
     InboxItem,
     InboxItemType,
     InboxResponse,
+    MetaGlassesMobileOrbBindServiceRequest,
+    MetaGlassesMobileOrbBindServiceResponse,
+    MetaGlassesMobileOrbDispatchResponseRequest,
+    MetaGlassesMobileOrbDispatchResponseResponse,
+    MetaGlassesMobileOrbEventRequest,
+    MetaGlassesMobileOrbEventResponse,
+    MetaGlassesMobileOrbInvokeServiceRequest,
+    MetaGlassesMobileOrbInvokeServiceResponse,
+    MetaGlassesMobileOrbRegisterRequest,
+    MetaGlassesMobileOrbRegisterResponse,
+    MetaGlassesMobileOrbRevokeBindingRequest,
+    MetaGlassesMobileOrbRevokeBindingResponse,
+    MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
+    MetaGlassesMobileOrbSubscribeServiceUpdatesResponse,
     MergeRequest,
     NotificationSubscriptionResponse,
     NotificationSubscriptionsListResponse,
@@ -209,6 +241,9 @@ processed_commands: dict[str, CommandResponse] = {}
 idempotency_store: dict[str, ActionResult] = {}
 processed_ai_requests: dict[str, AICapabilityExecuteResponse] = {}
 dev_peer_sessions: dict[str, str] = {}
+mobile_orb_edge_sessions: dict[str, dict[str, Any]] = {}
+mobile_orb_service_bindings: dict[str, dict[str, Any]] = {}
+mobile_orb_events: dict[str, dict[str, Any]] = {}
 dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
 _peer_transport_provider = None
 
@@ -229,6 +264,33 @@ def _get_cached_command_response(db: Any, key: str, endpoint: str) -> CommandRes
             key,
         )
         return None
+
+
+def _require_mobile_orb_edge_session(edge_session_id: str) -> dict[str, Any]:
+    session = mobile_orb_edge_sessions.get(edge_session_id)
+    if not session:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "edge_session_not_found",
+                "message": "Mobile ORB edge session is missing, expired, or revoked.",
+            },
+        )
+    return session
+
+
+def _require_mobile_orb_binding(binding_handle: str) -> dict[str, Any]:
+    binding = mobile_orb_service_bindings.get(binding_handle)
+    if not binding:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": "binding_not_found",
+                "message": "Mobile ORB service binding is missing, expired, or revoked.",
+            },
+        )
+    return binding
+
 
 FOLLOW_ON_TASK_INTENTS = {
     "agent.delegate",
@@ -1463,6 +1525,134 @@ def get_status():
         version=app.version,
         timestamp=datetime.now(UTC),
         dependencies=dependencies,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/register_edge_capabilities",
+    response_model=MetaGlassesMobileOrbRegisterResponse,
+)
+def register_mobile_orb_edge_capabilities(
+    request: MetaGlassesMobileOrbRegisterRequest,
+) -> MetaGlassesMobileOrbRegisterResponse:
+    """Register the phone as a policy-scoped ORB edge node for Meta glasses."""
+    edge_session_id, policy_cid, edge_session = build_mobile_orb_register_artifacts(
+        request=request,
+        registered_at=datetime.now(UTC).isoformat(),
+    )
+    mobile_orb_edge_sessions[edge_session_id] = edge_session
+    return build_mobile_orb_register_response(
+        request=request,
+        edge_session_id=edge_session_id,
+        policy_cid=policy_cid,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/publish_glasses_event",
+    response_model=MetaGlassesMobileOrbEventResponse,
+)
+def publish_mobile_orb_glasses_event(
+    request: MetaGlassesMobileOrbEventRequest,
+) -> MetaGlassesMobileOrbEventResponse:
+    """Publish a normalized glasses event into the backend ORB control plane."""
+    _require_mobile_orb_edge_session(request.edge_session_id)
+    event_cid, receipt_cid, event_record = build_mobile_orb_event_artifacts(
+        request=request,
+    )
+    mobile_orb_events[event_cid] = event_record
+    return build_mobile_orb_event_response(
+        request=request,
+        event_cid=event_cid,
+        receipt_cid=receipt_cid,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/bind_service",
+    response_model=MetaGlassesMobileOrbBindServiceResponse,
+)
+def bind_mobile_orb_service(
+    request: MetaGlassesMobileOrbBindServiceRequest,
+) -> MetaGlassesMobileOrbBindServiceResponse:
+    """Bind a service descriptor for policy-checked glasses-originated invocation."""
+    _require_mobile_orb_edge_session(request.edge_session_id)
+    binding_handle, policy_decision, binding_record = build_mobile_orb_bind_service_artifacts(
+        request=request,
+        bound_at=datetime.now(UTC).isoformat(),
+    )
+    mobile_orb_service_bindings[binding_handle] = binding_record
+    return build_mobile_orb_bind_service_response(
+        request=request,
+        binding_handle=binding_handle,
+        policy_decision=policy_decision,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/invoke_service",
+    response_model=MetaGlassesMobileOrbInvokeServiceResponse,
+)
+def invoke_mobile_orb_service(
+    request: MetaGlassesMobileOrbInvokeServiceRequest,
+) -> MetaGlassesMobileOrbInvokeServiceResponse:
+    """Invoke a bound service and return a receipt-backed normalized result."""
+    binding = _require_mobile_orb_binding(request.binding_handle)
+    receipt_cid = build_mobile_orb_invoke_receipt_cid(request=request)
+    return build_mobile_orb_invoke_service_response(
+        binding=binding,
+        request=request,
+        receipt_cid=receipt_cid,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/subscribe_service_updates",
+    response_model=MetaGlassesMobileOrbSubscribeServiceUpdatesResponse,
+)
+def subscribe_mobile_orb_service_updates(
+    request: MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
+) -> MetaGlassesMobileOrbSubscribeServiceUpdatesResponse:
+    """Create a receipt-backed service update subscription handle."""
+    _require_mobile_orb_binding(request.binding_handle)
+    subscription_id, receipt_cid = build_mobile_orb_subscription_artifacts(
+        request=request,
+    )
+    return build_mobile_orb_subscribe_response(
+        request=request,
+        subscription_id=subscription_id,
+        receipt_cid=receipt_cid,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/dispatch_glasses_response",
+    response_model=MetaGlassesMobileOrbDispatchResponseResponse,
+)
+def dispatch_mobile_orb_glasses_response(
+    request: MetaGlassesMobileOrbDispatchResponseRequest,
+) -> MetaGlassesMobileOrbDispatchResponseResponse:
+    """Convert service output into phone-local display/audio/mobile actions."""
+    _require_mobile_orb_edge_session(request.edge_session_id)
+    receipt_cid = build_mobile_orb_dispatch_receipt_cid(request=request)
+    return build_mobile_orb_dispatch_response(
+        request=request,
+        receipt_cid=receipt_cid,
+    )
+
+
+@app.post(
+    "/v1/mobile/orb/revoke_binding",
+    response_model=MetaGlassesMobileOrbRevokeBindingResponse,
+)
+def revoke_mobile_orb_binding(
+    request: MetaGlassesMobileOrbRevokeBindingRequest,
+) -> MetaGlassesMobileOrbRevokeBindingResponse:
+    """Revoke a mobile ORB service binding."""
+    revoked = mobile_orb_service_bindings.pop(request.binding_handle, None) is not None
+    return build_mobile_orb_revoke_binding_response(
+        revoked=revoked,
+        receipt_cid=build_mobile_orb_revoke_receipt_cid(request=request),
     )
 
 

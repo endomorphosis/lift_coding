@@ -34,6 +34,35 @@ DISPLAY_WIDGET_FAILURE_MODES: tuple[str, ...] = (
     "latency_budget_exceeded",
 )
 
+VIRTUAL_AI_OS_POLICY_OUTCOMES: tuple[str, ...] = (
+    "permit",
+    "deny",
+    "require_confirmation",
+)
+
+VIRTUAL_AI_OS_EXECUTION_GUARDS: dict[str, dict[str, str]] = {
+    "direct_import": {
+        "policy_surface": "handsfree.ai.runtime_router",
+        "rollback_guard": "keep direct adapters available when remote providers or submodule revisions regress",
+    },
+    "mcp_remote": {
+        "policy_surface": "handsfree.mcp",
+        "rollback_guard": "preserve provider-specific transport configuration and timeout fallback to avoid blocking delegation",
+    },
+    "daemon_mediated": {
+        "policy_surface": "ipfs_datasets_py todo daemon",
+        "rollback_guard": "retain repo-local todo board, state snapshots, and isolated worktrees for rollback-safe retries",
+    },
+    "swissknife_orb": {
+        "policy_surface": "swissknife ORB policy receipts",
+        "rollback_guard": "treat Swissknife as a reviewed UI/runtime surface and avoid speculative MCP++ source rewiring",
+    },
+    "mobile_remote_terminal": {
+        "policy_surface": "HandsFree mobile + Meta glasses display-widget contract",
+        "rollback_guard": "keep native-display-unavailable fallback paths active so remote-terminal actions degrade safely",
+    },
+}
+
 _TRUE_VALUES = {"1", "true", "yes", "on", "enabled"}
 _FALSE_VALUES = {"0", "false", "no", "off", "disabled"}
 
@@ -157,4 +186,27 @@ def get_meta_glasses_display_widget_observability_contract() -> dict[str, object
     return {
         "metric_names": dict(DISPLAY_WIDGET_METRIC_NAMES),
         "failure_modes": list(DISPLAY_WIDGET_FAILURE_MODES),
+    }
+
+
+def get_virtual_ai_os_observability_contract(
+    environ: Mapping[str, str] | None = None,
+) -> dict[str, object]:
+    """Return the feature-flag, policy, metric, and rollback contract for virtual-AI-OS paths."""
+
+    source = os.environ if environ is None else environ
+    display_widget_config = get_meta_glasses_display_widget_config(source)
+    return {
+        "feature_flags": {
+            **display_widget_config.env_flags,
+            "HANDSFREE_ENABLE_METRICS": _env_flag(source, "HANDSFREE_ENABLE_METRICS", False),
+        },
+        "policy_outcomes": list(VIRTUAL_AI_OS_POLICY_OUTCOMES),
+        "metric_names": dict(DISPLAY_WIDGET_METRIC_NAMES),
+        "failure_modes": list(DISPLAY_WIDGET_FAILURE_MODES),
+        "execution_path_guards": {
+            path: dict(contract)
+            for path, contract in VIRTUAL_AI_OS_EXECUTION_GUARDS.items()
+        },
+        "display_widget": display_widget_config.as_dict(),
     }

@@ -72,6 +72,15 @@ Use this for realistic demos with actual speech recognition.
 
 Follow this script in order. Each step includes the voice command, expected backend behavior, and success criteria.
 
+### Operator Console Readiness
+
+Before starting the spoken demo, verify the desktop operator view is usable:
+
+- [ ] Hallucinate App desktop operator console or equivalent desktop monitoring surface is open
+- [ ] Operator can see daemon/session health before the first command
+- [ ] Operator can explain the current display path (`native-dat`, `mobile-card`, or other fallback) if the remote display degrades
+- [ ] Operator has a rollback plan for the demo build: bridge-only fallback, stub providers, or phone-screen fallback
+
 ### Step 1: Show My Inbox
 **Voice Command:** "Show my inbox"
 
@@ -195,6 +204,19 @@ If glasses speakers not working:
    - Responses displayed as text on screen
    - No TTS needed
 
+### Remote Display Degraded Mode
+If the display-capable glasses path is unavailable or blocked:
+
+1. **Use mobile-card fallback:**
+  - Confirm the app reports a structured display fallback reason
+  - Keep the spoken summary active through the glasses or phone audio path
+  - Continue the demo with the same task/result semantics shown on the phone screen
+
+2. **Use desktop operator fallback:**
+  - Keep the Hallucinate desktop operator console visible
+  - Show the operator-visible display state, fallback reason, and any rollback recommendation
+  - Record whether the demo stayed bridge-only, native DAT, or mixed-mode
+
 ### Backend Issues
 If backend is unresponsive:
 
@@ -252,6 +274,11 @@ After completing the demo, capture these artifacts for review and debugging:
 - [ ] Screenshot: Audio routing diagnostics (Bluetooth device selected)
 - [ ] Screenshot: Each command sent with response received
 - [ ] Screenshot: Any error messages or warnings
+
+### 3b. Desktop Operator Evidence
+- [ ] Screenshot: desktop operator console before the demo starts
+- [ ] Screenshot: operator-visible display/fallback state during one command
+- [ ] Note the rollback path used if the physical display was unavailable
 
 ### 4. Audio Recordings (Optional)
 - [ ] Record demo audio from glasses (if supported)
