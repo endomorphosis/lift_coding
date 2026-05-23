@@ -20,6 +20,10 @@ data/*
 data/meta_glasses_display_widgets/*
 !data/meta_glasses_display_widgets/discovery/
 !data/meta_glasses_display_widgets/discovery/**
+!data/hallucinate_multimodal_control/
+data/hallucinate_multimodal_control/*
+!data/hallucinate_multimodal_control/discovery/
+!data/hallucinate_multimodal_control/discovery/**
 .tools
 # Dev audio uploads (don't commit test audio files)
 dev/audio/

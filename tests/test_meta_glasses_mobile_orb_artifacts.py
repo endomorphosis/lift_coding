@@ -50,6 +50,90 @@ def test_build_mobile_orb_bind_service_artifacts_include_orb_binding_metadata() 
     assert binding_record["orb_binding"]["transport"] == "mcp-server"
     assert binding_record["orb_binding"]["transport_binding"]["transport"] == "mcp-server"
     assert binding_record["orb_binding"]["transport_binding"]["operation"] == "get_task_status"
+    metadata = binding_record["orb_binding"]["transport_binding"]["metadata"]
+    assert metadata["descriptor_kind"] == "mcp-idl"
+    assert metadata["interface_descriptor"] == {
+        "name": "task_status_service",
+        "namespace": "handsfree.services.tasks",
+        "version": "0.1.0",
+        "methods": [{"name": "get_task_status"}],
+        "errors": [],
+        "requires": [],
+        "compatibility": {},
+    }
+
+
+def test_build_mobile_orb_bind_service_artifacts_normalize_descriptor_cid() -> None:
+    request_a = MetaGlassesMobileOrbBindServiceRequest(
+        edge_session_id="sha256:edge-session",
+        service_interface_cid="sha256:task-service",
+        service_descriptor={
+            "namespace": "handsfree.services.tasks",
+            "methods": [{"name": "get_task_status", "outputSchema": {"type": "object"}}],
+            "name": "task_status_service",
+        },
+        transport_preference="mcp-server",
+    )
+    request_b = MetaGlassesMobileOrbBindServiceRequest(
+        edge_session_id="sha256:edge-session",
+        service_interface_cid="sha256:task-service",
+        service_descriptor={
+            "name": "task_status_service",
+            "methods": [{"outputSchema": {"type": "object"}, "name": "get_task_status"}],
+            "namespace": "handsfree.services.tasks",
+        },
+        transport_preference="mcp-server",
+    )
+
+    _, _, binding_record_a = build_mobile_orb_bind_service_artifacts(
+        request=request_a,
+        bound_at="2026-05-23T00:00:00Z",
+    )
+    _, _, binding_record_b = build_mobile_orb_bind_service_artifacts(
+        request=request_b,
+        bound_at="2026-05-23T00:00:00Z",
+    )
+
+    assert (
+        binding_record_a["orb_binding"]["descriptor_cid"]
+        == binding_record_b["orb_binding"]["descriptor_cid"]
+    )
+
+
+def test_build_mobile_orb_bind_service_artifacts_preserve_descriptor_routing_metadata() -> None:
+    request = MetaGlassesMobileOrbBindServiceRequest(
+        edge_session_id="sha256:edge-session",
+        service_interface_cid="sha256:task-service",
+        service_descriptor={
+            "name": "task_status_service",
+            "namespace": "handsfree.services.tasks",
+            "methods": [{"name": "pause_task"}],
+            "metadata": {
+                "mcp_server_family": "ipfs_datasets",
+                "operation_tool_name": "tools_dispatch",
+                "provider_name": "ipfs_datasets_mcp",
+                "ignored": "not exposed",
+            },
+        },
+        operation="pause_task",
+        transport_preference="mcp-server",
+    )
+
+    _, _, binding_record = build_mobile_orb_bind_service_artifacts(
+        request=request,
+        bound_at="2026-05-23T00:00:00Z",
+    )
+
+    metadata = binding_record["orb_binding"]["transport_binding"]["metadata"]
+    assert metadata["server_family"] == "ipfs_datasets"
+    assert metadata["tool_name"] == "tools_dispatch"
+    assert metadata["provider_name"] == "ipfs_datasets_mcp"
+    assert "ignored" not in metadata
+    assert metadata["interface_descriptor"]["metadata"] == {
+        "provider_name": "ipfs_datasets_mcp",
+        "server_family": "ipfs_datasets",
+        "tool_name": "tools_dispatch",
+    }
 
 
 def test_build_mobile_orb_register_artifacts_preserve_interface_cids() -> None:

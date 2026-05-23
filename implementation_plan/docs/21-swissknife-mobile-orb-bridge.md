@@ -269,6 +269,18 @@ Build one end-to-end flow:
    - policy decision,
    - display bridge result.
 
+## Implementation Progress
+
+- Added backend mobile ORB models, artifacts, adapter response builders, and `/v1/mobile/orb/*` routes.
+- Added backend ORB diagnostics inspection for edge sessions, events, service bindings, and service-update subscriptions, plus mobile API/runtime wiring for backend-vs-local diagnostics.
+- Added descriptor-backed `orb_binding` metadata on service binding and service invocation responses.
+- Preserved MCP-IDL routing metadata (`server_family`, `tool_name`, `provider_name`) inside ORB binding transport metadata so mobile/SwissKnife can inspect the same MCP++ hints the backend runtime uses.
+- Added backend runtime transport resolution for `mcp-server` bindings, including MCP server family/tool resolution and focused tests.
+- Added SwissKnife `meta-glasses-mobile-orb-bridge` service with MCP-IDL descriptor creation, ORB policies, local handlers, in-memory backend, and Jest coverage.
+- Added persisted service-update subscription records for backend and SwissKnife ORB bridge flows, with revocation cleanup.
+- Added mobile ORB descriptors, MCP++ profile requirements for the task-service descriptor, API backend, bridge runtime, AsyncStorage edge-session persistence, AsyncStorage binding/subscription state persistence, restored binding/subscription reuse, stale-binding rebind recovery, local subscription diagnostics, diagnostics-screen subscription visibility, and mobile Jest coverage.
+- Added a static Meta Ray-Ban Display simulator and Web App preview that can exercise event publish, service bind, service-update subscribe, service invoke, and response dispatch before iPhone handoff.
+
 ## Implementation Phases
 
 ### Phase 1 - Descriptor and Mapping
