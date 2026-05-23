@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -27,6 +28,18 @@ def _load_tasks():
     from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TODO_PATH, "## HAO-")
+
+
+def _git(cwd: Path, *args: str) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    return result.stdout.strip()
 
 
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
@@ -66,6 +79,94 @@ def test_hallucinate_autopilot_defaults_to_implement():
     assert autopilot.with_autopilot_defaults([]) == ["--implement"]
     assert autopilot.with_autopilot_defaults(["--once"]) == ["--implement", "--once"]
     assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == ["--no-implement", "--once"]
+
+
+def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "base.txt").write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "base.txt")
+    _git(repo, "commit", "-m", "base")
+
+    _git(repo, "checkout", "-b", "implementation/task")
+    (repo / "feature.txt").write_text("feature\n", encoding="utf-8")
+    _git(repo, "add", "feature.txt")
+    _git(repo, "commit", "-m", "feature")
+
+    _git(repo, "checkout", "main")
+    (repo / "main-only.txt").write_text("main\n", encoding="utf-8")
+    _git(repo, "add", "main-only.txt")
+    _git(repo, "commit", "-m", "main only")
+
+    daemon = PortalImplementationDaemon(
+        todo_path=repo / "todo.md",
+        state_path=repo / "state.json",
+        strategy_path=repo / "strategy.json",
+        events_path=repo / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+
+    assert daemon._branch_changed_paths("implementation/task") == {"feature.txt"}
+
+
+def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon, PortalTask
+
+    repo = tmp_path / "repo"
+    parent = repo / "hallucinate_app"
+    nested = parent / "swissknife"
+    nested.mkdir(parents=True)
+    _git(nested, "init")
+    _git(nested, "checkout", "-b", "main")
+    _git(nested, "config", "user.name", "Test User")
+    _git(nested, "config", "user.email", "test@example.invalid")
+    (nested / "README.md").write_text("nested\n", encoding="utf-8")
+    _git(nested, "add", "README.md")
+    _git(nested, "commit", "-m", "base")
+
+    (parent / ".gitmodules").write_text(
+        """[submodule "swissknife"]
+\tpath = swissknife
+\turl = ../swissknife.git
+""",
+        encoding="utf-8",
+    )
+    contracts = nested / "contracts"
+    contracts.mkdir()
+    (contracts / "interaction_envelope.schema.json").write_text('{"type":"object"}\n', encoding="utf-8")
+
+    daemon = PortalImplementationDaemon(
+        todo_path=repo / "todo.md",
+        state_path=repo / "state.json",
+        strategy_path=repo / "strategy.json",
+        events_path=repo / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+    task = PortalTask(
+        task_id="HAO-999",
+        title="Commit nested outputs",
+        status="todo",
+        completion="manual",
+        priority="P1",
+        track="runtime",
+    )
+
+    results = daemon._commit_nested_submodule_changes(parent, task, 1, parent_relative="hallucinate_app")
+
+    assert results[0]["path"] == "hallucinate_app/swissknife"
+    assert results[0]["committed"] is True
+    assert _git(nested, "status", "--porcelain") == ""
+    assert "contracts/interaction_envelope.schema.json" in _git(nested, "show", "--name-only", "--format=", "HEAD")
 
 
 def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
