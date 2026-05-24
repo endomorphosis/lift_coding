@@ -452,3 +452,125 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     discovery = expected_discovery.read_text(encoding="utf-8")
     assert "main_checkout_dirty_conflict" in discovery
     assert "swissknife" in discovery
+
+
+def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    repo = tmp_path / "repo"
+    app = repo / "hallucinate_app"
+    docs = app / "docs"
+    docs.mkdir(parents=True)
+
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    _git(app, "init")
+    _git(app, "checkout", "-b", "main")
+    _git(app, "config", "user.name", "Test User")
+    _git(app, "config", "user.email", "test@example.invalid")
+
+    todo_path = docs / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+    todo_path.write_text(
+        """# HAO Board
+
+## HAO-001 Land generated status
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md
+- Validation: true
+- Acceptance: Status updates are committed.
+""",
+        encoding="utf-8",
+    )
+    _git(app, "add", "docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md")
+    _git(app, "commit", "-m", "app base")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "root base")
+
+    daemon = PortalImplementationDaemon(
+        todo_path=todo_path,
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+
+    result = daemon._mark_task_completed_in_todo("HAO-001")
+
+    assert result["updated"] is True
+    assert result["commit_result"]["committed"] is True
+    assert _git(app, "status", "--porcelain") == ""
+    assert _git(repo, "status", "--porcelain") == ""
+    assert "- Status: completed" in todo_path.read_text(encoding="utf-8")
+    assert _git(repo, "rev-parse", "HEAD:hallucinate_app") == _git(app, "rev-parse", "HEAD")
+
+
+def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    repo = tmp_path / "repo"
+    discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "finding.md"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "README.md").write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "README.md")
+    _git(repo, "commit", "-m", "base")
+
+    _git(repo, "checkout", "-b", "ours")
+    discovery.parent.mkdir(parents=True)
+    discovery.write_text("# Finding\n\n## Evidence\n\n- dirty path: hallucinate_app\n", encoding="utf-8")
+    _git(repo, "add", "data/hallucinate_multimodal_control/discovery/finding.md")
+    _git(repo, "commit", "-m", "ours finding")
+
+    _git(repo, "checkout", "main")
+    _git(repo, "checkout", "-b", "theirs")
+    discovery.parent.mkdir(parents=True)
+    discovery.write_text(
+        "# Finding\n\n## Evidence\n\n- dirty path: hallucinate_app\n\n## Resolution\n\n- committed generated output\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "data/hallucinate_multimodal_control/discovery/finding.md")
+    _git(repo, "commit", "-m", "theirs finding")
+
+    _git(repo, "checkout", "main")
+    _git(repo, "merge", "--no-ff", "--no-edit", "ours")
+    conflict = subprocess.run(
+        ["git", "merge", "--no-ff", "--no-edit", "theirs"],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert conflict.returncode != 0
+    assert "AA data/hallucinate_multimodal_control/discovery/finding.md" in _git(repo, "status", "--porcelain")
+
+    daemon = PortalImplementationDaemon(
+        todo_path=repo / "todo.md",
+        state_path=repo / "state.json",
+        strategy_path=repo / "strategy.json",
+        events_path=repo / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+
+    repairs = daemon._resolve_generated_add_add_conflicts(cwd=repo)
+
+    assert repairs[0]["resolved"] is True
+    assert "## Resolution" in discovery.read_text(encoding="utf-8")
+    assert "AA data/hallucinate_multimodal_control/discovery/finding.md" not in _git(
+        repo,
+        "status",
+        "--porcelain",
+    )

@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import shlex
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -167,6 +168,190 @@ def _load_strategy(path: Path) -> dict[str, Any]:
 def _save_strategy(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _git_toplevel_for_path(cwd: Path) -> Path | None:
+    result = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"],
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    return Path(result.stdout.strip()).resolve()
+
+
+def _repo_relative_path(repo: Path, path: Path) -> str:
+    try:
+        return path.resolve().relative_to(repo.resolve()).as_posix()
+    except ValueError:
+        return ""
+
+
+def _repo_relative_path_safe(relative: str) -> bool:
+    if not relative or relative.startswith("/") or "\0" in relative:
+        return False
+    return ".." not in Path(relative).parts
+
+
+def _path_status(repo: Path, relative: str) -> str:
+    result = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=all", "--", relative],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return ""
+    return result.stdout.strip()
+
+
+def _unmerged_worktree_paths(repo: Path) -> set[str]:
+    result = subprocess.run(
+        ["git", "diff", "--name-only", "--diff-filter=U"],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return set()
+    return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+
+
+def _commit_specific_generated_path(repo: Path, relative: str, *, subject: str) -> dict[str, Any]:
+    if not _repo_relative_path_safe(relative):
+        return {"committed": False, "reason": "unsafe_path", "repo": str(repo), "path": relative}
+    unmerged = _unmerged_worktree_paths(repo)
+    if unmerged and relative not in unmerged:
+        return {
+            "committed": False,
+            "reason": "repo_has_unrelated_unmerged_paths",
+            "repo": str(repo),
+            "path": relative,
+            "unmerged_paths": sorted(unmerged),
+        }
+    status = _path_status(repo, relative)
+    if not status:
+        return {"committed": False, "reason": "no_changes", "repo": str(repo), "path": relative}
+    add = subprocess.run(
+        ["git", "add", "--", relative],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if add.returncode != 0:
+        return {
+            "committed": False,
+            "reason": "git_add_failed",
+            "repo": str(repo),
+            "path": relative,
+            "returncode": add.returncode,
+            "stdout": add.stdout[-4000:],
+            "stderr": add.stderr[-4000:],
+        }
+    staged = subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "--", relative],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if staged.returncode == 0:
+        return {"committed": False, "reason": "no_staged_changes", "repo": str(repo), "path": relative}
+    commit = subprocess.run(
+        [
+            "git",
+            "-c",
+            "user.name=Hallucinate Todo Daemon",
+            "-c",
+            "user.email=hallucinate-todo-daemon@example.invalid",
+            "commit",
+            "-m",
+            subject,
+            "--",
+            relative,
+        ],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if commit.returncode != 0:
+        return {
+            "committed": False,
+            "reason": "git_commit_failed",
+            "repo": str(repo),
+            "path": relative,
+            "returncode": commit.returncode,
+            "stdout": commit.stdout[-4000:],
+            "stderr": commit.stderr[-4000:],
+        }
+    commit_ref = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    ).stdout.strip()
+    return {
+        "committed": True,
+        "repo": str(repo),
+        "path": relative,
+        "commit": commit_ref,
+        "status": status,
+    }
+
+
+def _parent_git_toplevel_for_repo(repo: Path) -> Path | None:
+    parent = _git_toplevel_for_path(repo.resolve().parent)
+    if parent is None or parent.resolve() == repo.resolve():
+        return None
+    try:
+        repo.resolve().relative_to(parent.resolve())
+    except ValueError:
+        return None
+    return parent
+
+
+def _commit_parent_gitlink_updates(child_repo: Path, *, subject: str) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    current = child_repo.resolve()
+    repo_root = REPO_ROOT.resolve()
+    while current != repo_root:
+        parent = _parent_git_toplevel_for_repo(current)
+        if parent is None:
+            break
+        relative = _repo_relative_path(parent, current)
+        if not relative:
+            break
+        results.append(_commit_specific_generated_path(parent, relative, subject=subject))
+        current = parent.resolve()
+    return results
+
+
+def _commit_generated_retry_budget_outputs(paths: list[Path], *, subject: str) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    for path in paths:
+        repo = _git_toplevel_for_path(path.parent)
+        if repo is None:
+            results.append({"committed": False, "reason": "not_in_git_repo", "path": str(path)})
+            continue
+        relative = _repo_relative_path(repo, path)
+        if not relative:
+            results.append({"committed": False, "reason": "path_outside_repo", "path": str(path), "repo": str(repo)})
+            continue
+        result = _commit_specific_generated_path(repo, relative, subject=subject)
+        if result.get("committed"):
+            parent_results = _commit_parent_gitlink_updates(repo, subject=subject)
+            if parent_results:
+                result["parent_gitlink_commits"] = parent_results
+        results.append(result)
+    return results
 
 
 def _write_retry_budget_discovery(
@@ -344,6 +529,7 @@ def record_retry_budget_findings(
     completed_task_ids = {task.task_id for task in tasks if task.status == "completed"}
     events = _iter_jsonl(events_path)
     findings: list[dict[str, Any]] = []
+    generated_paths: list[Path] = []
     strategy = _load_strategy(strategy_path)
     blocked_tasks = [str(item) for item in strategy.get("blocked_tasks", []) if str(item).strip()]
 
@@ -371,6 +557,7 @@ def record_retry_budget_findings(
                 failures=failures,
                 retry_budget=retry_budget,
             )
+            generated_paths.append(discovery_path)
             depends_on = ["HAO-013"] if "HAO-013" in task_ids else list(task.depends_on)
             task_block = _retry_budget_task_block(
                 follow_up_task_id=follow_up_task_id,
@@ -417,6 +604,7 @@ def record_retry_budget_findings(
             failures=failures,
             retry_budget=merge_retry_budget,
         )
+        generated_paths.append(discovery_path)
         depends_on = list(task.depends_on)
         task_block = _merge_retry_budget_task_block(
             follow_up_task_id=follow_up_task_id,
@@ -448,6 +636,12 @@ def record_retry_budget_findings(
     strategy["last_retry_budget_guardrail_at"] = _utc_now()
     strategy["retry_budget_findings"] = findings
     _save_strategy(strategy_path, strategy)
+    generated_paths.insert(0, todo_path)
+    commit_results = _commit_generated_retry_budget_outputs(
+        generated_paths,
+        subject="HAO: record retry-budget guardrail outputs",
+    )
+    logger.info("Committed retry-budget generated outputs: %s", commit_results)
     return findings
 
 
