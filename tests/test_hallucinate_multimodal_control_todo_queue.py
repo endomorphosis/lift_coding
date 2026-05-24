@@ -574,3 +574,73 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
         "status",
         "--porcelain",
     )
+
+
+def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path):
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    app = repo / "hallucinate_app"
+    app.mkdir(parents=True)
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    _git(app, "init")
+    _git(app, "checkout", "-b", "main")
+    _git(app, "config", "user.name", "Test User")
+    _git(app, "config", "user.email", "test@example.invalid")
+    (app / "README.md").write_text("base\n", encoding="utf-8")
+    _git(app, "add", "README.md")
+    _git(app, "commit", "-m", "app base")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "root base")
+    baseline_ref = _git(repo, "rev-parse", "HEAD")
+
+    branch_name = "implementation/hao-777-attempt"
+    _git(repo, "checkout", "-b", branch_name)
+    _git(app, "checkout", "-b", "task-branch")
+    (app / "branch.txt").write_text("implementation branch\n", encoding="utf-8")
+    _git(app, "add", "branch.txt")
+    _git(app, "commit", "-m", "HAO-777: original task output")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "HAO-777 root pointer")
+    implementation_commit = _git(repo, "rev-parse", "HEAD")
+
+    _git(repo, "checkout", "main")
+    _git(app, "checkout", "main")
+    (app / "equivalent.txt").write_text("equivalent repair\n", encoding="utf-8")
+    _git(app, "add", "equivalent.txt")
+    _git(app, "commit", "-m", "HAO-777: equivalent task output")
+    equivalent_head = _git(app, "rev-parse", "HEAD")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "main equivalent pointer")
+
+    daemon = PortalImplementationDaemon(
+        todo_path=repo / "todo.md",
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+    task = PortalTask(
+        task_id="HAO-777",
+        title="Repair equivalent submodule gitlink",
+        status="todo",
+        completion="manual",
+        priority="P1",
+        track="ops",
+    )
+
+    result = daemon._merge_branch_to_main(branch_name, task, 1, baseline_ref=baseline_ref)
+
+    assert result["merged"] is True
+    assert result["submodule_conflict_repair"]["repaired"] is True
+    assert _git(repo, "status", "--porcelain") == ""
+    assert _git(repo, "rev-parse", "HEAD:hallucinate_app") == equivalent_head
+    _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
