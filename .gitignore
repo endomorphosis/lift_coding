@@ -24,6 +24,9 @@ data/meta_glasses_display_widgets/*
 data/hallucinate_multimodal_control/*
 !data/hallucinate_multimodal_control/discovery/
 !data/hallucinate_multimodal_control/discovery/**
+!data/hallucinate_multimodal_control/policies/
+data/hallucinate_multimodal_control/policies/*
+!data/hallucinate_multimodal_control/policies/README.md
 .tools
 # Dev audio uploads (don't commit test audio files)
 dev/audio/
