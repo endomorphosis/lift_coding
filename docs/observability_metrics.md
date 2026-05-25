@@ -205,6 +205,20 @@ That contract exposes four things for the cross-repo execution paths:
 - metric and failure-mode names for Meta-glasses display-widget flows
 - rollback-safe execution-path guards for `direct_import`, `mcp_remote`, `daemon_mediated`, `swissknife_orb`, and `mobile_remote_terminal`
 
+### Meta Glasses Remote Terminal Proof
+
+The Meta glasses remote terminal path is the operator-facing mobile edge of the
+virtual AI OS contract. It treats the glasses as a remote audio/display terminal
+by combining Bluetooth audio routing, Meta-glasses display-widget payloads, ORB
+receipts, and mobile/web fallback rendering under the same policy outcomes and
+execution-path guards listed below.
+
+Hardware-free coverage for this proof lives in
+`tests/test_virtual_ai_os_end_to_end.py`: the test drives daemon progress through
+`IPFSDatasetsMCPAgentProvider`, builds the Meta-glasses display-widget manifest,
+and validates the mobile action payload that a glasses client or simulator can
+render as terminal output.
+
 ### Virtual AI OS Feature Flags
 
 ```bash

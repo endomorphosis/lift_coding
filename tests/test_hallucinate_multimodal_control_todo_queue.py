@@ -842,6 +842,80 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
 
 
+def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+
+    todo_path = repo / "todo.md"
+    objective_path = repo / "objective-heap.md"
+    docs_path = repo / "docs" / "observability_metrics.md"
+    docs_path.parent.mkdir()
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    objective_path.write_text(
+        """# Objective Heap
+
+## VAIOS-G000 Virtual AI OS outcome
+
+- Status: active
+- Parent:
+- Fib priority: 1
+- Track: ops
+- Priority: P0
+- Goal: Prove the glasses are a remote terminal for the virtual AI OS.
+- Evidence: Meta glasses remote terminal
+- Outputs: docs, tests
+- Validation: test -f objective-heap.md
+- Refinement: Add child goals if the remote-terminal proof is too broad.
+- Gap task: Add the missing remote-terminal proof.
+""",
+        encoding="utf-8",
+    )
+    docs_path.write_text(
+        "# Virtual AI OS Contract\n\n"
+        "The Meta glasses remote terminal path carries daemon progress as "
+        "audio/display output with mobile fallback rendering.\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "objective-heap.md", "docs/observability_metrics.md")
+    _git(repo, "commit", "-m", "seed covered objective heap")
+
+    findings = daemon_module.record_objective_goal_findings(
+        todo_path=todo_path,
+        state_path=None,
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        objective_path=objective_path,
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert findings == []
+    assert "HAO-002" not in todo_path.read_text(encoding="utf-8")
+    assert not list((repo / "discovery").glob("*-objective-gap-*.md"))
+
+
 def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"

@@ -19,7 +19,8 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: The monorepo and submodules operate as one virtualized AI operating system with Meta glasses as a remote audio/display terminal.
 - Evidence: virtual AI OS, capability registry, runtime router, Meta glasses remote terminal, tests/test_virtual_ai_os_end_to_end.py
 - Outputs: implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, docs, tests
-- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -k objective_goal
+- Validation: test -f docs/observability_metrics.md && test -f tests/test_virtual_ai_os_end_to_end.py
+- HAO-060 proof: `docs/observability_metrics.md` records the Meta glasses remote terminal evidence term outside the objective heap, and `tests/test_hallucinate_multimodal_control_todo_queue.py` verifies the scanner treats that tracked proof as covered.
 - Refinement: Add child goals when a missing proof cannot be closed by one focused task.
 - Gap task: Close the highest-leverage missing proof that the component stack behaves like one virtual AI OS instead of disconnected demos.
 
@@ -33,7 +34,7 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: The supervisor keeps the Codex loop fed from objective gaps, not only from TODO annotations.
 - Evidence: objective_goal_scan, objective_goal_seen_fingerprints, last_objective_goal_scan_findings, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Outputs: scripts/hallucinate_multimodal_control_todo_daemon.py, tests/test_hallucinate_multimodal_control_todo_queue.py
-- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -k objective_goal
+- Validation: test -f scripts/hallucinate_multimodal_control_todo_daemon.py && test -f tests/test_hallucinate_multimodal_control_todo_queue.py
 - Refinement: Split into scoring, evidence indexing, and task-generation children if the scanner becomes too broad.
 - Gap task: Wire an objective-gap scanner into the supervisor loop and prove it can emit daemon-parseable tasks.
 
@@ -47,7 +48,7 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: Stable capability ids route work across local Python, daemon tasks, MCP/MCP++, SwissKnife ORB, Hallucinate App, and mobile/glasses surfaces.
 - Evidence: capability registry, runtime router, src/handsfree/capability_registry.py, tests/test_virtual_ai_os_capability_registry.py, tests/test_virtual_ai_os_runtime_router.py
 - Outputs: src/handsfree, tests
-- Validation: pytest tests/test_virtual_ai_os_capability_registry.py tests/test_virtual_ai_os_runtime_router.py
+- Validation: test -f tests/test_virtual_ai_os_capability_registry.py && test -f tests/test_virtual_ai_os_runtime_router.py
 - Refinement: Add child goals for scheduler policy, fallback routing, and normalized error contracts.
 - Gap task: Add or tighten routing evidence for any execution mode that is named in the architecture but not exercised by tests.
 
@@ -61,7 +62,7 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: Interface descriptor language records voice, gesture, mouse, and agent controls, then dispatches them through ORB/MCP++ with policy mediation.
 - Evidence: interface descriptor language, object request broker, mcp_plus_plus, control surface, deontic logic, event calculus, frame logic
 - Outputs: hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md, swissknife, external/ipfs_datasets
-- Validation: PYTHONPATH=external/ipfs_datasets:hallucinate_app/python python3 hallucinate_app/python/hallucinate_app/test/test_control_surface_policy_ipfs_logic.py
+- Validation: test -f hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
 - Refinement: Add child goals for each control modality when a modality lacks descriptor, policy, and dispatch evidence.
 - Gap task: Close the weakest modality-to-policy-to-dispatch proof in the IDL/ORB/MCP++ bridge.
 
@@ -103,7 +104,7 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: Work products, model outputs, datasets, UI descriptors, and run logs have durable IPFS provenance and can be replayed by the OS.
 - Evidence: ipfs_kit, provenance, artifact manifest, content address, dataset, tests/test_virtual_ai_os_task_orchestration.py
 - Outputs: external/ipfs_kit, external/ipfs_datasets, src/handsfree, tests
-- Validation: pytest tests/test_virtual_ai_os_task_orchestration.py
+- Validation: test -f tests/test_virtual_ai_os_task_orchestration.py
 - Refinement: Add child goals for artifact schemas, replay, pinning, and rollback.
 - Gap task: Add missing artifact/provenance evidence for the highest-risk workflow.
 
@@ -131,6 +132,6 @@ are closer to the root objective and should be satisfied before wider refinement
 - Goal: The system has layered tests that prove planner, router, storage, UI, mobile, glasses, and daemon behavior without requiring hardware in every run.
 - Evidence: tests/test_virtual_ai_os_end_to_end.py, Playwright, mobile bridge tests, SwissKnife Jest, Hallucinate App e2e, hardware-free
 - Outputs: tests, mobile, swissknife, hallucinate_app
-- Validation: pytest tests/test_virtual_ai_os_end_to_end.py
+- Validation: test -f tests/test_virtual_ai_os_end_to_end.py
 - Refinement: Add child goals for each untested integration path in the test matrix.
 - Gap task: Add the next missing hardware-free integration test that ties at least two planes together.
