@@ -261,6 +261,8 @@ OPENAI_API_KEY=sk-your-openai-api-key-here
 
 **Getting an API Key**:
 1. Go to https://platform.openai.com/api-keys
+2. Create a new API key
+3. Add to `.env`
 
 #### MCP++ IPFS Providers
 
@@ -356,8 +358,6 @@ git submodule sync --recursive
 git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate external/ipfs_kit swissknife
 PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
 ```
-2. Create a new API key
-3. Add to `.env`
 
 #### Push Notifications (Expo)
 
