@@ -171,9 +171,11 @@ Every generated widget must pass these checks before the backend can emit a mobi
 
 ### Daemon Processing
 
-The checklist below is also mirrored as an ipfs_datasets_py implementation-daemon task board:
+The checklist below is also mirrored in this ipfs_datasets_py implementation-daemon task board file:
 
-- `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+```text
+implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+```
 
 Use these repository-local wrappers so the daemon, supervisor, and llm_router run with the correct task prefix, state directory, and `external/ipfs_datasets` import path:
 
