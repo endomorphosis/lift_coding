@@ -285,9 +285,8 @@ player.stop()
 
 ## References
 
-- [mobile/glasses/README.md](../../glasses/README.md) - Full glasses audio guide
-- [mobile/glasses/TODO.md](../../glasses/TODO.md) - Implementation checklist
-- [docs/meta-ai-glasses-audio-routing.md](../../../docs/meta-ai-glasses-audio-routing.md) - Audio routing docs
+- [mobile/glasses/README.md](glasses/README.md) - Full glasses audio guide
+- [docs/meta-ai-glasses-audio-routing.md](../docs/meta-ai-glasses-audio-routing.md) - Audio routing docs
 - [Expo Modules API](https://docs.expo.dev/modules/overview/)
 - [Apple AVAudioSession](https://developer.apple.com/documentation/avfoundation/avaudiosession)
 - [Apple AVAudioEngine](https://developer.apple.com/documentation/avfoundation/avaudioengine)
