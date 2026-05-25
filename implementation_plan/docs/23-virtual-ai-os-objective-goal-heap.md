@@ -88,8 +88,69 @@ preserve the intent of the lane before the source task is unblocked.
 - Evidence: capability registry, runtime router, src/handsfree/capability_registry.py, tests/test_virtual_ai_os_capability_registry.py, tests/test_virtual_ai_os_runtime_router.py
 - Outputs: src/handsfree, tests
 - Validation: test -f tests/test_virtual_ai_os_capability_registry.py && test -f tests/test_virtual_ai_os_runtime_router.py
+- HAO-062 proof: `src/handsfree/capability_registry.py` is the scanner-visible capability routing kernel. It exposes `CapabilityRegistry`, `RuntimeRouter`, and `CapabilityRoutingKernel.dispatch_task` while delegating to the existing AI registry/router and naming the local Python, daemon tasks, MCP/MCP++, SwissKnife ORB, Hallucinate App, and mobile/glasses surfaces. `tests/test_virtual_ai_os_capability_registry.py` and `tests/test_virtual_ai_os_runtime_router.py` exercise the top-level path, fallback route planning, and normalized route-planning error contract.
 - Refinement: Add child goals for scheduler policy, fallback routing, and normalized error contracts.
 - Gap task: Add or tighten routing evidence for any execution mode that is named in the architecture but not exercised by tests.
+
+## VAIOS-G021 Capability scheduler policy
+
+- Status: active
+- Parent: VAIOS-G020
+- Fib priority: 3
+- Track: runtime
+- Priority: P1
+- Bundle: objective/runtime/capability-routing/scheduler-policy
+- Parallel lane: runtime-routing
+- Refinement depth: 2
+- Embedding query: capability scheduler policy priority queue placement daemon task dispatch fairness virtual AI OS
+- AST query: CapabilitySchedulerPolicy, scheduler_policy, dispatch_task, priority
+- Conflict policy: keep capability ids stable and make scheduler policy additive to existing route selection
+- Goal: Capability dispatch plans carry scheduler policy metadata for daemon-mediated work without changing stable capability ids.
+- Evidence: scheduler policy, capability scheduler, dispatch priority, tests/test_virtual_ai_os_runtime_router.py
+- Outputs: src/handsfree, tests
+- Validation: rg -n "scheduler policy|CapabilitySchedulerPolicy|scheduler_policy|dispatch priority" src/handsfree tests
+- Refinement: Add children for per-surface capacity and fairness only after scheduler metadata lands.
+- Gap task: Add scheduler-policy evidence that proves daemon task placement is a policy decision, not a hard-coded side effect.
+
+## VAIOS-G022 Capability fallback routing
+
+- Status: active
+- Parent: VAIOS-G020
+- Fib priority: 3
+- Track: runtime
+- Priority: P1
+- Bundle: objective/runtime/capability-routing/fallback-routing
+- Parallel lane: runtime-routing
+- Refinement depth: 2
+- Embedding query: capability fallback routing fallback execution mode degraded surface recovery MCP direct daemon SwissKnife
+- AST query: fallback_route, fallback_execution_mode, resolve_fallback_route
+- Conflict policy: preserve primary route determinism and add fallback behavior through explicit route metadata
+- Goal: Every capability with a fallback execution mode exposes a deterministic fallback route that clients can inspect before execution.
+- Evidence: fallback routing, fallback_route, fallback_execution_mode, tests/test_virtual_ai_os_runtime_router.py
+- Outputs: src/handsfree, tests
+- Validation: rg -n "fallback routing|fallback_route|fallback_execution_mode|resolve_fallback_route" src/handsfree tests
+- Refinement: Add children for runtime health scoring and surface-specific fallback receipts if route metadata is not enough.
+- Gap task: Add fallback-routing evidence for capabilities whose backup path is named in the registry but not exercised by dispatch tests.
+
+## VAIOS-G023 Capability normalized error contracts
+
+- Status: active
+- Parent: VAIOS-G020
+- Fib priority: 3
+- Track: runtime
+- Priority: P1
+- Bundle: objective/runtime/capability-routing/error-contracts
+- Parallel lane: runtime-routing
+- Refinement depth: 2
+- Embedding query: normalized error contracts capability route failures API Hallucinate App mobile glasses MCP ORB
+- AST query: CapabilityRoutingError, NORMALIZED_ERROR_CONTRACT_ID, build_error_contract
+- Conflict policy: keep error envelopes backward compatible and add fields only with safe defaults
+- Goal: Route planning and execution failures share one normalized error contract across API, Hallucinate App, mobile/glasses, MCP, and ORB clients.
+- Evidence: normalized error contracts, CapabilityRoutingError, NORMALIZED_ERROR_CONTRACT_ID, tests/test_virtual_ai_os_runtime_router.py
+- Outputs: src/handsfree, tests
+- Validation: rg -n "normalized error contracts|CapabilityRoutingError|NORMALIZED_ERROR_CONTRACT_ID|build_error_contract" src/handsfree tests
+- Refinement: Add children for execution-time provider errors and user-facing error rendering once route-planning errors are covered.
+- Gap task: Add normalized-error evidence for the next capability failure path that still returns provider-specific strings.
 
 ## VAIOS-G030 IDL, ORB, and MCP++ bridge
 
