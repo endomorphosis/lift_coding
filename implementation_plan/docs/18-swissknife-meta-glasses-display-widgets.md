@@ -167,7 +167,7 @@ Every generated widget must pass these checks before the backend can emit a mobi
 - ORB invocation requires correlation ID, receipt, policy outcome, and lifecycle record.
 - A native-display-unavailable fallback is required before publish; DAT native display unavailable must be treated as a normal fallback state, not a renderer crash.
 
-## Implementation Todo List
+## Implementation Backlog Board
 
 ### Daemon Processing
 
