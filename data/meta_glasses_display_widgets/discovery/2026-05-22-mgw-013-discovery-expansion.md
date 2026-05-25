@@ -6,7 +6,7 @@ Outcome: Discovered follow-up work; appended daemon-parseable tasks MGW-015 thro
 
 ## Scope
 
-MGW-013 investigated the implemented Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT DisplayAccess references, and hardware-free test harness paths after MGW-001 through MGW-012 were marked complete in the todo board.
+MGW-013 investigated the implemented Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT DisplayAccess references, and hardware-free test harness paths after MGW-001 through MGW-012 were recorded complete on the backlog board; this is historical completion context, not an open follow-up annotation.
 
 ## Commands Run
 
