@@ -7,6 +7,11 @@ from handsfree.ai import (
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
 )
+from handsfree.capability_registry import (
+    CAPABILITY_ROUTING_SURFACE_LABELS,
+    CapabilityRegistry,
+    list_capability_routing_surfaces,
+)
 
 
 def test_virtual_ai_os_registry_exposes_initial_capability_set():
@@ -41,7 +46,10 @@ def test_virtual_ai_os_registry_resolves_legacy_capability_aliases():
 
 
 def test_virtual_ai_os_execution_mode_resolution_is_deterministic():
-    assert resolve_virtual_ai_os_execution_mode("embedding") == CapabilityExecutionMode.DIRECT_IMPORT
+    assert (
+        resolve_virtual_ai_os_execution_mode("embedding")
+        == CapabilityExecutionMode.DIRECT_IMPORT
+    )
     assert (
         resolve_virtual_ai_os_execution_mode(
             "embedding",
@@ -77,3 +85,33 @@ def test_virtual_ai_os_execution_matrix_tracks_mcp_alignment():
     assert matrix["dataset_discovery"]["mcp_capability_registered"] is True
     assert matrix["storage"]["default_execution_mode"] == "mcp_remote"
     assert matrix["workflow"]["fallback_execution_mode"] == "orchestrated"
+
+
+def test_top_level_capability_registry_path_resolves_stable_ids():
+    registry = CapabilityRegistry()
+
+    assert registry.get("ipfs.embeddings.embed_text").capability_id == "embedding"
+    assert (
+        registry.resolve_execution_mode("embedding", provider_preferred_modes=("mcp_remote",))
+        == CapabilityExecutionMode.MCP_REMOTE
+    )
+    assert [entry.capability_id for entry in registry.list_capabilities()] == [
+        "agentic_fetch",
+        "dataset_discovery",
+        "embedding",
+        "ipfs_pin",
+        "storage",
+        "workflow",
+    ]
+
+
+def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():
+    surfaces = {surface.surface_id: surface for surface in list_capability_routing_surfaces()}
+
+    assert set(surfaces) == set(CAPABILITY_ROUTING_SURFACE_LABELS)
+    assert surfaces["local_python"].label == "local Python"
+    assert surfaces["daemon_task"].label == "daemon tasks"
+    assert surfaces["mcp_mcp_plus_plus"].label == "MCP/MCP++"
+    assert surfaces["swissknife_orb"].label == "SwissKnife ORB"
+    assert surfaces["hallucinate_app"].label == "Hallucinate App"
+    assert surfaces["mobile_glasses"].label == "mobile/glasses"

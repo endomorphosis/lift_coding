@@ -5,6 +5,12 @@ from handsfree.ai import (
     CapabilityRuntimeSurface,
     resolve_virtual_ai_os_runtime_route,
 )
+from handsfree.capability_registry import (
+    NORMALIZED_ERROR_CONTRACT_ID,
+    CapabilityDispatchRequest,
+    CapabilityRoutingKernel,
+    RuntimeRouter,
+)
 
 
 def test_runtime_router_uses_direct_adapter_for_embedding_by_default():
@@ -56,3 +62,56 @@ def test_runtime_router_rejects_invalid_surface_for_direct_import_capability():
         assert "does not support runtime surface" in str(exc)
     else:
         raise AssertionError("Expected unsupported runtime surface to fail")
+
+
+def test_capability_routing_kernel_dispatches_with_fallback_and_presentations():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="embedding",
+            payload={"text": "route me"},
+        )
+    )
+
+    assert plan.capability_id == "embedding"
+    assert plan.route.runtime_surface == CapabilityRuntimeSurface.DIRECT_ADAPTER
+    assert plan.fallback_route is not None
+    assert plan.fallback_route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert plan.fallback_route.runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER
+    assert plan.error_contract_id == NORMALIZED_ERROR_CONTRACT_ID
+    assert [entry.surface_id for entry in plan.entrypoints] == [
+        "local_python",
+        "hallucinate_app",
+        "mobile_glasses",
+    ]
+    assert (
+        plan.entrypoints[0].handler_ref
+        == "handsfree.ipfs_datasets_routers:get_embeddings_router"
+    )
+    assert plan.payload == {"text": "route me"}
+
+
+def test_runtime_router_normalizes_route_planning_errors():
+    router = RuntimeRouter()
+    try:
+        router.resolve_route(
+            "dataset_discovery",
+            requested_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+        )
+    except ValueError as exc:
+        error = router.build_error_contract(
+            exc,
+            capability_id="dataset_discovery",
+            details={"requested_mode": "direct_import"},
+        )
+    else:
+        raise AssertionError("Expected unsupported route to fail")
+
+    assert error.as_dict() == {
+        "ok": False,
+        "contract_id": NORMALIZED_ERROR_CONTRACT_ID,
+        "capability_id": "dataset_discovery",
+        "error_code": "capability_route_error",
+        "message": "Capability 'dataset_discovery' does not support execution mode 'direct_import'",
+        "recoverable": True,
+        "details": {"requested_mode": "direct_import"},
+    }
