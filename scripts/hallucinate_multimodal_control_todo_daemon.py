@@ -205,6 +205,43 @@ def _open_task_count(todo_text: str) -> int:
     return sum(1 for status in statuses.values() if status not in {"completed", "blocked"})
 
 
+def _open_task_count_from_state(todo_text: str, state_path: Path | None) -> int | None:
+    """Return daemon-resolved open task count when state matches the current todo board."""
+
+    if state_path is None or not state_path.exists():
+        return None
+    try:
+        payload = json.loads(state_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+
+    task_ids = set(_task_ids_from_todo(todo_text))
+    statuses = payload.get("task_statuses") or {}
+    if not isinstance(statuses, dict):
+        return None
+    normalized = {str(task_id): str(status).lower() for task_id, status in statuses.items()}
+    if set(normalized) != task_ids:
+        return None
+
+    try:
+        state_task_count = int(payload.get("task_count") or 0)
+    except (TypeError, ValueError):
+        return None
+    if state_task_count != len(task_ids):
+        return None
+
+    return sum(1 for status in normalized.values() if status not in {"completed", "blocked"})
+
+
+def _effective_open_task_count(todo_text: str, state_path: Path | None = None) -> int:
+    state_open_count = _open_task_count_from_state(todo_text, state_path)
+    if state_open_count is not None:
+        return state_open_count
+    return _open_task_count(todo_text)
+
+
 def _next_hao_task_id(todo_text: str) -> str:
     highest = 0
     for task_id in _task_ids_from_todo(todo_text):
@@ -840,6 +877,7 @@ def _codebase_scan_task_block(
 def record_codebase_scan_findings(
     *,
     todo_path: Path = DEFAULT_TODO_PATH,
+    state_path: Path | None = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
     strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
     discovery_dir: Path = DISCOVERY_DIR,
     task_header_prefix: str = "## HAO-",
@@ -855,7 +893,7 @@ def record_codebase_scan_findings(
         return []
     todo_text = todo_path.read_text(encoding="utf-8")
     task_ids = set(_task_ids_from_todo(todo_text))
-    open_task_count = _open_task_count(todo_text)
+    open_task_count = _effective_open_task_count(todo_text, state_path)
     if not force and open_task_count > min_open_tasks:
         return []
 
@@ -1129,6 +1167,7 @@ def main(argv: list[str] | None = None) -> None:
     while True:
         scan_findings = record_codebase_scan_findings(
             todo_path=parsed.todo_path,
+            state_path=state_path,
             strategy_path=strategy_path,
             discovery_dir=DISCOVERY_DIR,
             task_header_prefix=parsed.task_prefix,
@@ -1157,6 +1196,7 @@ def main(argv: list[str] | None = None) -> None:
             logger.warning("Recorded Hallucinate retry-budget findings after daemon pass: %s", findings)
         scan_findings = record_codebase_scan_findings(
             todo_path=parsed.todo_path,
+            state_path=state_path,
             strategy_path=strategy_path,
             discovery_dir=DISCOVERY_DIR,
             task_header_prefix=parsed.task_prefix,

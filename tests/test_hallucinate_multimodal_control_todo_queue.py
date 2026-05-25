@@ -636,6 +636,73 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
     assert strategy["last_drained_codebase_scan_task_count"] == 1
 
 
+def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    source = repo / "scan_target.py"
+    todo_path = repo / "todo.md"
+    state_path = tmp_path / "state.json"
+    strategy_path = tmp_path / "strategy.json"
+    discovery_dir = repo / "discovery"
+
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    source.write_text("def unresolved():\n    # TODO: state-backed drain scan\n    return None\n", encoding="utf-8")
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed in daemon state only
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: The markdown status intentionally lags behind daemon state.
+""",
+        encoding="utf-8",
+    )
+    state_path.write_text(
+        json.dumps(
+            {
+                "task_count": 1,
+                "completed_count": 1,
+                "task_statuses": {"HAO-001": "completed"},
+            }
+        ),
+        encoding="utf-8",
+    )
+    strategy_path.write_text(
+        json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
+        encoding="utf-8",
+    )
+    _git(repo, "add", "scan_target.py", "todo.md")
+    _git(repo, "commit", "-m", "seed stale markdown board")
+
+    findings = daemon_module.record_codebase_scan_findings(
+        todo_path=todo_path,
+        state_path=state_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=21600,
+    )
+
+    assert len(findings) == 1
+    assert findings[0]["source"] == "scan_target.py:2"
+    assert "## HAO-002 Resolve code annotation in scan_target.py:2" in todo_path.read_text(encoding="utf-8")
+    strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
+    assert strategy["last_codebase_scan_mode"] == "drained_exhaustive"
+    assert strategy["last_drained_codebase_scan_task_count"] == 1
+
+
 def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"

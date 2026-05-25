@@ -259,6 +259,7 @@ def main(argv: list[str] | None = None) -> None:
     daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
     record_codebase_scan_findings(
         todo_path=parsed.todo_path,
+        state_path=state_path,
         strategy_path=strategy_path,
         discovery_dir=DISCOVERY_DIR,
         task_header_prefix=parsed.task_prefix,
@@ -311,6 +312,7 @@ def main(argv: list[str] | None = None) -> None:
         result = supervisor.run_once()
         record_codebase_scan_findings(
             todo_path=parsed.todo_path,
+            state_path=state_path,
             strategy_path=strategy_path,
             discovery_dir=DISCOVERY_DIR,
             task_header_prefix=parsed.task_prefix,
