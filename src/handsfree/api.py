@@ -1542,7 +1542,7 @@ def register_mobile_orb_edge_capabilities(
     request: MetaGlassesMobileOrbRegisterRequest,
 ) -> MetaGlassesMobileOrbRegisterResponse:
     """Register the phone as a policy-scoped ORB edge node for Meta glasses."""
-    edge_session_id, policy_cid, edge_session = build_mobile_orb_register_artifacts(
+    edge_session_id, control_surface_contract_ref, edge_session = build_mobile_orb_register_artifacts(
         request=request,
         registered_at=datetime.now(UTC).isoformat(),
     )
@@ -1550,7 +1550,13 @@ def register_mobile_orb_edge_capabilities(
     return build_mobile_orb_register_response(
         request=request,
         edge_session_id=edge_session_id,
-        policy_cid=policy_cid,
+        control_surface_artifacts={
+            "control_surface_contract_ref": control_surface_contract_ref,
+            "interaction_envelope": edge_session.get("interaction_envelope"),
+            "normalized_intent": edge_session.get("normalized_intent"),
+            "policy_decision": edge_session.get("policy_decision"),
+            "mediation_receipt": edge_session.get("mediation_receipt"),
+        },
     )
 
 
@@ -1636,6 +1642,7 @@ def bind_mobile_orb_service(
         binding_handle=binding_handle,
         policy_decision=policy_decision,
         orb_binding=binding_record.get("orb_binding"),
+        control_surface_artifacts=binding_record,
     )
 
 
@@ -1725,6 +1732,7 @@ def revoke_mobile_orb_binding(
     return build_mobile_orb_revoke_binding_response(
         revoked=revoked,
         receipt_cid=build_mobile_orb_revoke_receipt_cid(request=request),
+        request=request,
     )
 
 

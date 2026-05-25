@@ -501,9 +501,20 @@ describe('MetaGlassesMobileOrbBridge', () => {
       patch: { progress: 0.5 },
       correlation_id: 'corr-update',
       policy_decision: {
-        outcome: 'permit',
-        source: 'mobile_orb_bridge',
+        outcome: 'allow',
+        metadata: expect.objectContaining({
+          remote_client_policy_contract: false,
+        }),
       },
+      control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
+      normalized_intent: expect.objectContaining({
+        method: 'update_widget',
+      }),
+      mediation_receipt: expect.objectContaining({
+        policy_decision: expect.objectContaining({
+          outcome: 'allow',
+        }),
+      }),
     });
 
     expect(actionItemFromDisplayWidgetAction(payload)).toEqual({

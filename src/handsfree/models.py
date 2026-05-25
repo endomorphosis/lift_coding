@@ -277,7 +277,17 @@ class MetaGlassesMobileOrbDatCapabilities(BaseModel):
     webAppDisplay: bool = False
 
 
-class MetaGlassesMobileOrbRegisterRequest(BaseModel):
+class MetaGlassesMobileOrbControlSurfaceArtifacts(BaseModel):
+    """Canonical Hallucinate App control-surface artifacts transported by ORB clients."""
+
+    control_surface_contract_ref: str | None = None
+    interaction_envelope: dict[str, Any] | None = None
+    normalized_intent: dict[str, Any] | None = None
+    policy_decision: dict[str, Any] | None = None
+    mediation_receipt: dict[str, Any] | None = None
+
+
+class MetaGlassesMobileOrbRegisterRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Register a mobile phone as the ORB edge node for Meta glasses."""
 
     edge_id: str = Field(..., min_length=1)
@@ -292,16 +302,16 @@ class MetaGlassesMobileOrbRegisterRequest(BaseModel):
     descriptors: list[dict[str, Any]] = Field(default_factory=list)
 
 
-class MetaGlassesMobileOrbRegisterResponse(BaseModel):
+class MetaGlassesMobileOrbRegisterResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Registered mobile ORB edge session."""
 
     edge_session_id: str
     accepted_interface_cids: list[str] = Field(default_factory=list)
-    policy_cid: str
+    policy_cid: str | None = None
     expires_at: str | None = None
 
 
-class MetaGlassesMobileOrbEventRequest(BaseModel):
+class MetaGlassesMobileOrbEventRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Normalized event published by the glasses-facing mobile edge."""
 
     edge_session_id: str = Field(..., min_length=1)
@@ -325,7 +335,7 @@ class MetaGlassesMobileOrbEventRequest(BaseModel):
     observed_at: str | None = None
 
 
-class MetaGlassesMobileOrbEventResponse(BaseModel):
+class MetaGlassesMobileOrbEventResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Receipt-backed normalized glasses event result."""
 
     event_cid: str
@@ -334,7 +344,7 @@ class MetaGlassesMobileOrbEventResponse(BaseModel):
     receipt_cid: str
 
 
-class MetaGlassesMobileOrbBindServiceRequest(BaseModel):
+class MetaGlassesMobileOrbBindServiceRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Bind a local or remote service descriptor for glasses-originated calls."""
 
     edge_session_id: str = Field(..., min_length=1)
@@ -346,7 +356,7 @@ class MetaGlassesMobileOrbBindServiceRequest(BaseModel):
     policy_context: dict[str, Any] | None = None
 
 
-class MetaGlassesMobileOrbBindServiceResponse(BaseModel):
+class MetaGlassesMobileOrbBindServiceResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Bound service handle and policy decision."""
 
     binding_handle: str
@@ -357,7 +367,7 @@ class MetaGlassesMobileOrbBindServiceResponse(BaseModel):
     expires_at: str | None = None
 
 
-class MetaGlassesMobileOrbInvokeServiceRequest(BaseModel):
+class MetaGlassesMobileOrbInvokeServiceRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Invoke a bound service operation on behalf of the glasses wearer."""
 
     binding_handle: str = Field(..., min_length=1)
@@ -369,7 +379,7 @@ class MetaGlassesMobileOrbInvokeServiceRequest(BaseModel):
     parent_receipt_cids: list[str] = Field(default_factory=list)
 
 
-class MetaGlassesMobileOrbInvokeServiceResponse(BaseModel):
+class MetaGlassesMobileOrbInvokeServiceResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Receipt-backed service invocation result for the phone edge."""
 
     ok: bool
@@ -382,7 +392,7 @@ class MetaGlassesMobileOrbInvokeServiceResponse(BaseModel):
     spoken_text: str | None = None
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(BaseModel):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Subscribe to updates from a bound service."""
 
     binding_handle: str = Field(..., min_length=1)
@@ -392,7 +402,7 @@ class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(BaseModel):
     correlation_id: str = Field(..., min_length=1)
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(BaseModel):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Stream subscription registration result."""
 
     subscription_id: str
@@ -401,7 +411,7 @@ class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(BaseModel):
     subscription: dict[str, Any] | None = None
 
 
-class MetaGlassesMobileOrbDispatchResponseRequest(BaseModel):
+class MetaGlassesMobileOrbDispatchResponseRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Dispatch a service result back to phone-local glasses render targets."""
 
     edge_session_id: str = Field(..., min_length=1)
@@ -412,7 +422,7 @@ class MetaGlassesMobileOrbDispatchResponseRequest(BaseModel):
     parent_receipt_cids: list[str] = Field(default_factory=list)
 
 
-class MetaGlassesMobileOrbDispatchResponseResponse(BaseModel):
+class MetaGlassesMobileOrbDispatchResponseResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Phone-local actions generated from a service result."""
 
     dispatched_actions: list[dict[str, Any]] = Field(default_factory=list)
@@ -421,7 +431,7 @@ class MetaGlassesMobileOrbDispatchResponseResponse(BaseModel):
     receipt_cid: str
 
 
-class MetaGlassesMobileOrbRevokeBindingRequest(BaseModel):
+class MetaGlassesMobileOrbRevokeBindingRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Revoke a phone edge service binding."""
 
     binding_handle: str = Field(..., min_length=1)
@@ -429,7 +439,7 @@ class MetaGlassesMobileOrbRevokeBindingRequest(BaseModel):
     correlation_id: str | None = None
 
 
-class MetaGlassesMobileOrbRevokeBindingResponse(BaseModel):
+class MetaGlassesMobileOrbRevokeBindingResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
     """Revocation result for a service binding."""
 
     revoked: bool

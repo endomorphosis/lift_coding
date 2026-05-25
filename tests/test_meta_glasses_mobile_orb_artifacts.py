@@ -16,10 +16,11 @@ from handsfree.models import (
 def test_build_mobile_orb_policy_decision_matches_orb_shape() -> None:
     decision = build_mobile_orb_policy_decision("Service descriptor binding accepted.")
 
-    assert decision["outcome"] == "permit"
-    assert decision["required_capabilities"] == []
-    assert decision["granted_capabilities"] == []
-    assert decision["decision_cid"].startswith("sha256:mobile-orb-policy-decision:")
+    assert decision["outcome"] == "allow"
+    assert decision["interaction_envelope"]["normalized_intent"]["method"] == "bind_service"
+    assert decision["policy_bundle_ref"]["source"] == "system_default"
+    assert decision["metadata"]["remote_client_policy_contract"] is False
+    assert decision["decision_id"].startswith("sha256:control-surface-decision:")
 
 
 def test_build_mobile_orb_bind_service_artifacts_include_orb_binding_metadata() -> None:
@@ -42,7 +43,14 @@ def test_build_mobile_orb_bind_service_artifacts_include_orb_binding_metadata() 
     )
 
     assert binding_handle.startswith("sha256:mobile-orb-binding:")
-    assert policy_decision["decision_cid"].startswith("sha256:mobile-orb-policy-decision:")
+    assert policy_decision["decision_id"].startswith("sha256:control-surface-decision:")
+    assert policy_decision["outcome"] == "allow"
+    assert binding_record["control_surface_contract_ref"].startswith("control_surface_contract:")
+    assert binding_record["interaction_envelope"]["normalized_intent"]["method"] == "bind_service"
+    assert binding_record["normalized_intent"] == (
+        binding_record["interaction_envelope"]["normalized_intent"]
+    )
+    assert binding_record["mediation_receipt"]["policy_decision"] == policy_decision
     assert binding_record["orb_binding"]["handle"] == binding_handle
     assert binding_record["orb_binding"]["interface_cid"] == "sha256:task-service"
     assert binding_record["orb_binding"]["service_id"] == "task_status_service"
@@ -145,12 +153,16 @@ def test_build_mobile_orb_register_artifacts_preserve_interface_cids() -> None:
         transport_preferences=["local", "mcp-server"],
     )
 
-    edge_session_id, policy_cid, edge_session = build_mobile_orb_register_artifacts(
+    edge_session_id, control_surface_contract_ref, edge_session = build_mobile_orb_register_artifacts(
         request=request,
         registered_at="2026-05-23T00:00:00Z",
     )
 
     assert edge_session_id.startswith("sha256:mobile-orb-edge:")
-    assert policy_cid.startswith("sha256:mobile-orb-policy:")
+    assert control_surface_contract_ref.startswith("control_surface_contract:")
     assert edge_session["local_interface_cids"] == ["sha256:mobile", "sha256:display"]
-    assert edge_session["policy_cid"] == policy_cid
+    assert edge_session["control_surface_contract_ref"] == control_surface_contract_ref
+    assert edge_session["interaction_envelope"]["surface"] == "mobile"
+    assert edge_session["mediation_receipt"]["control_surface_contract_ref"] == (
+        control_surface_contract_ref
+    )

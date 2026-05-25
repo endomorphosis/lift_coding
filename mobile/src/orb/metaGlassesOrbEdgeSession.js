@@ -40,9 +40,13 @@ export function normalizeMetaGlassesOrbEdgeSession(value) {
 
   const edgeSessionId = stringOrNull(value.edge_session_id);
   const policyCid = stringOrNull(value.policy_cid);
+  const controlSurfaceContractRef =
+    stringOrNull(value.control_surface_contract_ref) ||
+    stringOrNull(value.mediation_receipt?.control_surface_contract_ref) ||
+    stringOrNull(value.interaction_envelope?.control_surface_contract_ref);
   const edgeId = stringOrNull(value.edge_id) || 'handsfree-mobile-orb-edge';
   const platform = PLATFORMS.has(value.platform) ? value.platform : 'simulator';
-  if (!edgeSessionId || !policyCid) {
+  if (!edgeSessionId || (!controlSurfaceContractRef && !policyCid)) {
     return null;
   }
 
@@ -52,6 +56,19 @@ export function normalizeMetaGlassesOrbEdgeSession(value) {
     platform,
     device_id: stringOrNull(value.device_id),
     policy_cid: policyCid,
+    control_surface_contract_ref: controlSurfaceContractRef,
+    interaction_envelope: isObject(value.interaction_envelope) ? value.interaction_envelope : null,
+    normalized_intent: isObject(value.normalized_intent)
+      ? value.normalized_intent
+      : isObject(value.interaction_envelope?.normalized_intent)
+        ? value.interaction_envelope.normalized_intent
+        : null,
+    policy_decision: isObject(value.policy_decision)
+      ? value.policy_decision
+      : isObject(value.mediation_receipt?.policy_decision)
+        ? value.mediation_receipt.policy_decision
+        : null,
+    mediation_receipt: isObject(value.mediation_receipt) ? value.mediation_receipt : null,
     accepted_interface_cids: stringArray(value.accepted_interface_cids),
     dat_capabilities: normalizeCapabilities(value.dat_capabilities),
     registered_at:

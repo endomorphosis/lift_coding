@@ -12,6 +12,9 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
+from handsfree.meta_glasses_mobile_orb_artifacts import (
+    build_mobile_orb_control_surface_artifacts,
+)
 from handsfree.meta_glasses_display_widget_contract import (
     DISPLAY_WIDGET_ACTION_CONTRACT,
     DISPLAY_WIDGET_ACTION_DEFINITIONS,
@@ -27,6 +30,7 @@ from handsfree.models import (
     MetaGlassesMobileOrbInvokeServiceResponse,
     MetaGlassesMobileOrbRegisterRequest,
     MetaGlassesMobileOrbRegisterResponse,
+    MetaGlassesMobileOrbRevokeBindingRequest,
     MetaGlassesMobileOrbRevokeBindingResponse,
     MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
     MetaGlassesMobileOrbSubscribeServiceUpdatesResponse,
@@ -78,6 +82,42 @@ def _first_nonempty_string(*values: Any) -> str | None:
     return None
 
 
+def _control_surface_fields(artifacts: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(artifacts, dict):
+        return {}
+    return _without_none(
+        {
+            "control_surface_contract_ref": artifacts.get("control_surface_contract_ref"),
+            "interaction_envelope": artifacts.get("interaction_envelope"),
+            "normalized_intent": artifacts.get("normalized_intent"),
+            "policy_decision": artifacts.get("policy_decision"),
+            "mediation_receipt": artifacts.get("mediation_receipt"),
+        }
+    )
+
+
+def _build_control_surface_artifacts(
+    *,
+    operation: str,
+    payload: Any,
+    receipt_cid: str | None = None,
+    reason: str,
+) -> dict[str, Any]:
+    return build_mobile_orb_control_surface_artifacts(
+        operation=operation,
+        payload=payload,
+        emitted_at=datetime.now(UTC).isoformat(),
+        receipt_cid=receipt_cid,
+        reason=reason,
+    )
+
+
+def _mediation_invoked(artifacts: dict[str, Any]) -> bool:
+    receipt = artifacts.get("mediation_receipt") if isinstance(artifacts, dict) else None
+    result = receipt.get("mediation_result") if isinstance(receipt, dict) else None
+    return bool(result.get("invoked")) if isinstance(result, dict) else False
+
+
 def _display_widget_definition_for(action: dict[str, Any]) -> dict[str, str]:
     raw_type = _first_nonempty_string(action.get("type"), action.get("id"))
     if raw_type and raw_type in DISPLAY_WIDGET_DEFINITION_BY_ID:
@@ -94,11 +134,30 @@ def _display_widget_definition_for(action: dict[str, Any]) -> dict[str, str]:
     return DEFAULT_DISPLAY_WIDGET_DEFINITION
 
 
-def _normalize_policy_decision(value: Any, reason: str) -> dict[str, Any]:
+def _normalize_policy_decision(
+    value: Any,
+    reason: str,
+    *,
+    operation: str = "dispatch_glasses_response",
+    payload: Any | None = None,
+    receipt_cid: str | None = None,
+) -> dict[str, Any]:
     if isinstance(value, dict):
+        if value.get("decision_id") and isinstance(value.get("interaction_envelope"), dict):
+            return value
         outcome = value.get("outcome")
-        if outcome not in {"permit", "deny", "require_confirmation"}:
-            outcome = "permit"
+        if outcome == "permit":
+            outcome = "allow"
+        if outcome not in {
+            "allow",
+            "deny",
+            "require_confirmation",
+            "defer",
+            "rewrite",
+            "fallback_surface",
+            "rate_limit",
+        }:
+            outcome = "allow"
         reasons = value.get("reasons")
         if isinstance(reasons, str):
             reasons = [reasons]
@@ -108,14 +167,17 @@ def _normalize_policy_decision(value: Any, reason: str) -> dict[str, Any]:
             **value,
             "outcome": outcome,
             "reasons": reasons or [reason],
-            "source": value.get("source") or "handsfree-mobile-orb",
+            "source": value.get("source")
+            or "hallucinate_app.control_surface_mediator.remote_client_envelope",
         }
 
-    return {
-        "outcome": "permit",
-        "reasons": [reason],
-        "source": "handsfree-mobile-orb",
-    }
+    artifacts = _build_control_surface_artifacts(
+        operation=operation,
+        payload=payload or {"reason": reason},
+        receipt_cid=receipt_cid,
+        reason=reason,
+    )
+    return artifacts["policy_decision"]
 
 
 def _normalize_display_widget_mobile_action(
@@ -159,6 +221,12 @@ def _normalize_display_widget_mobile_action(
     action_fallback = (
         action.get("fallback") if isinstance(action.get("fallback"), dict) else fallback
     )
+    control_surface_artifacts = _build_control_surface_artifacts(
+        operation=definition["operation"],
+        payload={**action, "correlation_id": correlation_id},
+        receipt_cid=receipt_cid,
+        reason=policy_reason,
+    )
 
     return _without_none(
         {
@@ -176,9 +244,18 @@ def _normalize_display_widget_mobile_action(
                 receipt_cid,
             ),
             "policy_decision": _normalize_policy_decision(
-                action.get("policy_decision"),
+                control_surface_artifacts.get("policy_decision"),
                 policy_reason,
+                operation=definition["operation"],
+                payload=action,
+                receipt_cid=receipt_cid,
             ),
+            "control_surface_contract_ref": control_surface_artifacts.get(
+                "control_surface_contract_ref"
+            ),
+            "interaction_envelope": control_surface_artifacts.get("interaction_envelope"),
+            "normalized_intent": control_surface_artifacts.get("normalized_intent"),
+            "mediation_receipt": control_surface_artifacts.get("mediation_receipt"),
             "correlation_id": _first_nonempty_string(
                 action.get("correlation_id"),
                 action.get("correlationId"),
@@ -256,13 +333,19 @@ def build_mobile_orb_register_response(
     *,
     request: MetaGlassesMobileOrbRegisterRequest,
     edge_session_id: str,
-    policy_cid: str,
+    control_surface_artifacts: dict[str, Any] | None = None,
 ) -> MetaGlassesMobileOrbRegisterResponse:
     """Build the phone edge registration response."""
+    artifacts = control_surface_artifacts or _build_control_surface_artifacts(
+        operation="register_edge_capabilities",
+        payload={**request.model_dump(), "edge_session_id": edge_session_id},
+        reason="Mobile ORB edge registration normalized by Hallucinate App control-surface contract.",
+    )
     return MetaGlassesMobileOrbRegisterResponse(
         edge_session_id=edge_session_id,
         accepted_interface_cids=request.local_interface_cids,
-        policy_cid=policy_cid,
+        policy_cid=None,
+        **_control_surface_fields(artifacts),
         expires_at=None,
     )
 
@@ -274,6 +357,12 @@ def build_mobile_orb_event_response(
     receipt_cid: str,
 ) -> MetaGlassesMobileOrbEventResponse:
     """Build the normalized glasses event publish response."""
+    artifacts = _build_control_surface_artifacts(
+        operation="publish_glasses_event",
+        payload={**request.model_dump(), "event_cid": event_cid},
+        receipt_cid=receipt_cid,
+        reason="Meta-glasses event normalized by Hallucinate App control-surface contract.",
+    )
     routed_operations = (
         ["bind_service", "invoke_service"]
         if request.event_type in {"captouch", "neural_input", "display_action"}
@@ -281,9 +370,10 @@ def build_mobile_orb_event_response(
     )
     return MetaGlassesMobileOrbEventResponse(
         event_cid=event_cid,
-        accepted=True,
+        accepted=_mediation_invoked(artifacts),
         routed_operations=routed_operations,
         receipt_cid=receipt_cid,
+        **_control_surface_fields(artifacts),
     )
 
 
@@ -293,14 +383,26 @@ def build_mobile_orb_bind_service_response(
     binding_handle: str,
     policy_decision: dict[str, Any],
     orb_binding: dict[str, Any] | None = None,
+    control_surface_artifacts: dict[str, Any] | None = None,
 ) -> MetaGlassesMobileOrbBindServiceResponse:
     """Build a service binding response for the mobile ORB edge."""
+    artifacts = control_surface_artifacts or _build_control_surface_artifacts(
+        operation="bind_service",
+        payload=request.model_dump(),
+        reason="Service descriptor binding normalized by Hallucinate App control-surface contract.",
+    )
+    artifact_fields = _control_surface_fields(artifacts)
+    canonical_policy_decision = artifact_fields.pop(
+        "policy_decision",
+        policy_decision,
+    )
     return MetaGlassesMobileOrbBindServiceResponse(
         binding_handle=binding_handle,
         transport=request.transport_preference,
         granted_capabilities=[],
-        policy_decision=policy_decision,
+        policy_decision=canonical_policy_decision,
         orb_binding=orb_binding,
+        **artifact_fields,
         expires_at=None,
     )
 
@@ -312,6 +414,12 @@ def build_mobile_orb_invoke_service_response(
     receipt_cid: str,
 ) -> MetaGlassesMobileOrbInvokeServiceResponse:
     """Build a normalized receipt-backed response for a service invocation."""
+    artifacts = _build_control_surface_artifacts(
+        operation="invoke_service",
+        payload=request.model_dump(),
+        receipt_cid=receipt_cid,
+        reason="Service invocation normalized by Hallucinate App control-surface contract.",
+    )
     follow_up_actions = _normalize_follow_up_actions(request.arguments.get("follow_up_actions"))
     display_widget_action = _normalize_display_widget_mobile_action(
         request.arguments.get("display_widget_action"),
@@ -341,6 +449,7 @@ def build_mobile_orb_invoke_service_response(
             *request.parent_receipt_cids,
         ],
         receipt_cid=receipt_cid,
+        **_control_surface_fields(artifacts),
         follow_up_actions=follow_up_actions,
         display_widget_action=display_widget_action,
         spoken_text=spoken_text,
@@ -355,10 +464,23 @@ def build_mobile_orb_subscribe_response(
     subscription: dict[str, Any] | None = None,
 ) -> MetaGlassesMobileOrbSubscribeServiceUpdatesResponse:
     """Build a service update subscription response."""
+    artifacts = (
+        _control_surface_fields(subscription)
+        if isinstance(subscription, dict)
+        else _control_surface_fields(
+            _build_control_surface_artifacts(
+                operation="subscribe_service_updates",
+                payload=request.model_dump(),
+                receipt_cid=receipt_cid,
+                reason="Service update subscription normalized by Hallucinate App control-surface contract.",
+            )
+        )
+    )
     return MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(
         subscription_id=subscription_id,
         receipt_cid=receipt_cid,
         generation_key=f"{request.binding_handle}:{request.operation}:{request.stream}",
+        **artifacts,
         subscription=subscription,
     )
 
@@ -369,6 +491,12 @@ def build_mobile_orb_dispatch_response(
     receipt_cid: str,
 ) -> MetaGlassesMobileOrbDispatchResponseResponse:
     """Build phone-local actions generated from a service invocation result."""
+    artifacts = _build_control_surface_artifacts(
+        operation="dispatch_glasses_response",
+        payload=request.model_dump(),
+        receipt_cid=receipt_cid,
+        reason="Glasses response dispatch normalized by Hallucinate App control-surface contract.",
+    )
     result = request.result
     display_widget_action = _normalize_display_widget_mobile_action(
         result.get("display_widget_action"),
@@ -387,6 +515,7 @@ def build_mobile_orb_dispatch_response(
         display_widget_action=display_widget_action,
         spoken_text=_normalize_spoken_text(result.get("spoken_text")),
         receipt_cid=receipt_cid,
+        **_control_surface_fields(artifacts),
     )
 
 
@@ -394,9 +523,17 @@ def build_mobile_orb_revoke_binding_response(
     *,
     revoked: bool,
     receipt_cid: str,
+    request: MetaGlassesMobileOrbRevokeBindingRequest | None = None,
 ) -> MetaGlassesMobileOrbRevokeBindingResponse:
     """Build a service binding revocation response."""
+    artifacts = _build_control_surface_artifacts(
+        operation="revoke_binding",
+        payload=request.model_dump() if hasattr(request, "model_dump") else {"revoked": revoked},
+        receipt_cid=receipt_cid,
+        reason="Service binding revocation normalized by Hallucinate App control-surface contract.",
+    )
     return MetaGlassesMobileOrbRevokeBindingResponse(
         revoked=revoked,
         receipt_cid=receipt_cid,
+        **_control_surface_fields(artifacts),
     )
