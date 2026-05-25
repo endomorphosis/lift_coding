@@ -17,6 +17,11 @@ DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "meta_glasses_display_todo_daemon.py"
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
+CODEBASE_SCAN_SKIP_PREFIXES = (
+    "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
+)
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
@@ -64,6 +69,21 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     return [flag, value, *argv]
 
 
+def _with_flag_default(argv: list[str], flag: str) -> list[str]:
+    if flag in argv:
+        return argv
+    return [flag, *argv]
+
+
+def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) -> list[str]:
+    if flag in argv:
+        return argv
+    defaults: list[str] = []
+    for value in values:
+        defaults.extend([flag, value])
+    return [*defaults, *argv]
+
+
 def _task_is_present(todo_text: str, task_id: str) -> bool:
     return f"## {task_id} " in todo_text
 
@@ -100,6 +120,7 @@ def _run_supervisor(argv: list[str]) -> None:
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
         parse_args,
+        split_csv_values,
     )
 
     parsed = parse_args(argv)
@@ -137,6 +158,16 @@ def _run_supervisor(argv: list[str]) -> None:
             use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
             worktree_root=parsed.worktree_root,
             worktree_submodule_paths=tuple(parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS),
+            codebase_refill_enabled=parsed.codebase_refill_scan,
+            codebase_scan_discovery_dir=parsed.codebase_scan_discovery_dir,
+            codebase_scan_discovery_output_path=parsed.codebase_scan_discovery_output_path,
+            codebase_scan_min_open_tasks=parsed.codebase_scan_min_open_tasks,
+            codebase_scan_max_findings=parsed.codebase_scan_max_findings,
+            codebase_scan_cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
+            codebase_scan_depends_on=split_csv_values(parsed.codebase_scan_depends_on),
+            codebase_scan_skip_prefixes=tuple(parsed.codebase_scan_skip_prefix),
+            codebase_scan_commit_outputs=parsed.codebase_scan_commit_outputs,
+            codebase_scan_commit_subject=parsed.codebase_scan_commit_subject,
             repo_root=REPO_ROOT,
             daemon_script_path=DAEMON_SCRIPT_PATH,
         )
@@ -168,6 +199,11 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
     args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
+    args = _with_flag_default(args, "--codebase-refill-scan")
+    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
+    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
+    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
     _run_supervisor(args)
 
 

@@ -14,6 +14,12 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.todo.md"
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
+DISCOVERY_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
+CODEBASE_SCAN_SKIP_PREFIXES = (
+    "data/virtual_ai_os/discovery/",
+    "data/virtual_ai_os/state/",
+    "data/virtual_ai_os/worktrees/",
+)
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_datasets",
     "external/ipfs_accelerate",
@@ -55,6 +61,12 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     return [flag, value, *argv]
 
 
+def _with_flag_default(argv: list[str], flag: str) -> list[str]:
+    if flag in argv:
+        return argv
+    return [flag, *argv]
+
+
 def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) -> list[str]:
     if flag in argv:
         return argv
@@ -87,6 +99,11 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--state-prefix", "virtual_ai_os")
     args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
+    args = _with_flag_default(args, "--codebase-refill-scan")
+    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")
+    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
+    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
     supervisor_main(args)
 
 
