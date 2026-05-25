@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import logging
+import ast
+import math
 import os
 import re
 import shlex
@@ -29,11 +31,14 @@ DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "5"))
 OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MAX_FINDINGS", "5"))
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "21600"))
+OBJECTIVE_EMBEDDING_DIMENSIONS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_EMBEDDING_DIMENSIONS", "64"))
+OBJECTIVE_EMBEDDING_MIN_SCORE = float(os.environ.get("HANDSFREE_HAO_OBJECTIVE_EMBEDDING_MIN_SCORE", "0.62"))
 CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", "5"))
 CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
 CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
@@ -620,7 +625,7 @@ def _merge_retry_budget_task_block(
 - Depends on: {", ".join(depends_on)}
 - Outputs: {", ".join(outputs)}
 - Validation: {validation_command}
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in {source_task.task_id}. Use evidence in {discovery_path} to fix the merge blocker, verify the intended implementation changes are actually committed in their owning repository or submodule, then remove {source_task.task_id} from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in {source_task.task_id}. Use evidence in {discovery_path} to fix the merge blocker, verify the intended implementation changes are actually committed in their owning repository or submodule, run `python3 scripts/hallucinate_multimodal_control_merge_conflict_resolver.py --task-id {source_task.task_id} --apply` when the conflict is semantic, then remove {source_task.task_id} from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
 """
 
 
@@ -844,6 +849,86 @@ def _split_objective_terms(value: str) -> list[str]:
     return terms
 
 
+def _objective_tokens(value: str) -> list[str]:
+    return [token for token in re.findall(r"[a-z0-9]+", value.lower()) if len(token) > 1]
+
+
+def _objective_text_embedding(value: str, *, dimensions: int = OBJECTIVE_EMBEDDING_DIMENSIONS) -> list[float]:
+    vector = [0.0] * max(1, dimensions)
+    for token in _objective_tokens(value):
+        digest = sha1(token.encode("utf-8")).digest()
+        index = int.from_bytes(digest[:4], "big") % len(vector)
+        vector[index] += 1.0
+    norm = math.sqrt(sum(item * item for item in vector))
+    if norm == 0:
+        return vector
+    return [item / norm for item in vector]
+
+
+def _objective_cosine(left: list[float], right: list[float]) -> float:
+    if not left or not right or len(left) != len(right):
+        return 0.0
+    return sum(a * b for a, b in zip(left, right))
+
+
+def _objective_symbol_terms(path: Path, text: str) -> set[str]:
+    suffix = path.suffix.lower()
+    symbols: set[str] = set()
+    if suffix == ".py":
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            tree = None
+        if tree is not None:
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    symbols.add(node.name)
+                elif isinstance(node, ast.Import):
+                    for alias in node.names:
+                        symbols.add(alias.name)
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    symbols.add(node.module)
+                    for alias in node.names:
+                        symbols.add(f"{node.module}.{alias.name}")
+    elif suffix in {".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"}:
+        for match in re.finditer(
+            r"\b(?:class|function|interface|type|const|let|var)\s+([A-Za-z_$][\w$]*)",
+            text,
+        ):
+            symbols.add(match.group(1))
+        for match in re.finditer(r"\bexport\s+\{([^}]+)\}", text):
+            for raw in match.group(1).split(","):
+                symbol = raw.strip().split(" as ", 1)[0].strip()
+                if symbol:
+                    symbols.add(symbol)
+    elif suffix in {".md", ".rst"}:
+        for line in text.splitlines():
+            stripped = line.strip("#= ")
+            if line.startswith("#") and stripped:
+                symbols.add(stripped)
+    elif suffix == ".json":
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError:
+            payload = None
+
+        def collect_json_keys(value: Any) -> None:
+            if isinstance(value, dict):
+                for key, item in value.items():
+                    symbols.add(str(key))
+                    collect_json_keys(item)
+            elif isinstance(value, list):
+                for item in value:
+                    collect_json_keys(item)
+
+        collect_json_keys(payload)
+    expanded: set[str] = set()
+    for symbol in symbols:
+        expanded.add(symbol)
+        expanded.add(" ".join(_objective_tokens(symbol)))
+    return {item.lower() for item in expanded if item.strip()}
+
+
 def _parse_objective_goal_heap(text: str) -> list[dict[str, Any]]:
     goals: list[dict[str, Any]] = []
     current: dict[str, Any] | None = None
@@ -888,6 +973,99 @@ def _objective_goal_required_evidence(goal: dict[str, Any]) -> list[str]:
     return _split_objective_terms(str(fields.get("evidence") or fields.get("required_evidence") or ""))
 
 
+def _objective_goal_parent_ids(goal: dict[str, Any]) -> list[str]:
+    fields = goal.get("fields") or {}
+    parents = _split_objective_terms(str(fields.get("parents") or fields.get("parent") or ""))
+    return [parent for parent in parents if parent]
+
+
+def _objective_goal_bundle_key(goal: dict[str, Any], missing_terms: list[str]) -> str:
+    fields = goal.get("fields") or {}
+    explicit = str(fields.get("bundle") or "").strip()
+    if explicit:
+        return explicit.strip("/ ")
+    track = str(fields.get("track") or "ops").strip().lower() or "ops"
+    roots = _split_objective_terms(str(fields.get("outputs") or ""))
+    root = "general"
+    for candidate in roots:
+        first = candidate.split("/", 1)[0].strip()
+        if first and first not in {"data", "tests"}:
+            root = first
+            break
+    fingerprint = sha1("|".join([str(goal.get("goal_id") or ""), *missing_terms]).encode("utf-8")).hexdigest()[:8]
+    return f"objective/{track}/{root}/{fingerprint}"
+
+
+def _safe_bundle_key(value: str) -> str:
+    safe = re.sub(r"[^A-Za-z0-9_.-]+", "-", value.strip("/ ").lower()).strip("-")
+    return safe or "objective-general"
+
+
+def _objective_goal_graph(goals: list[dict[str, Any]]) -> dict[str, Any]:
+    nodes = {str(goal.get("goal_id") or ""): goal for goal in goals if str(goal.get("goal_id") or "")}
+    edges: list[dict[str, str]] = []
+    children: dict[str, list[str]] = {goal_id: [] for goal_id in nodes}
+    roots: list[str] = []
+    for goal_id, goal in nodes.items():
+        parents = [parent for parent in _objective_goal_parent_ids(goal) if parent]
+        if not parents:
+            roots.append(goal_id)
+        for parent in parents:
+            edges.append({"from": parent, "to": goal_id, "kind": "refines"})
+            children.setdefault(parent, []).append(goal_id)
+    depths: dict[str, int] = {}
+
+    def depth_for(goal_id: str, seen: set[str] | None = None) -> int:
+        if goal_id in depths:
+            return depths[goal_id]
+        seen = set(seen or set())
+        if goal_id in seen:
+            depths[goal_id] = 0
+            return 0
+        seen.add(goal_id)
+        parents = _objective_goal_parent_ids(nodes.get(goal_id, {}))
+        if not parents:
+            depths[goal_id] = 0
+            return 0
+        known_parents = [parent for parent in parents if parent in nodes]
+        if not known_parents:
+            depths[goal_id] = 1
+            return 1
+        depths[goal_id] = 1 + max(depth_for(parent, seen) for parent in known_parents)
+        return depths[goal_id]
+
+    for goal_id in nodes:
+        depth_for(goal_id)
+    return {
+        "nodes": sorted(nodes),
+        "edges": edges,
+        "children": {key: sorted(value) for key, value in children.items() if value},
+        "roots": sorted(roots),
+        "depths": depths,
+    }
+
+
+def _objective_evidence_methods(present_evidence: dict[str, Any]) -> list[str]:
+    methods: set[str] = set()
+    for paths in present_evidence.values():
+        values = paths if isinstance(paths, list) else [paths]
+        for value in values:
+            match = re.search(r"\((path|exact|ast|embedding)(?::[^)]*)?\)\s*$", str(value))
+            if match:
+                methods.add(match.group(1))
+    return sorted(methods)
+
+
+def _objective_bundle_path(bundle_dir: Path, bundle_key: str) -> Path:
+    return bundle_dir / f"{_safe_bundle_key(bundle_key)}.todo.md"
+
+
+def _objective_bundle_dir(repo_root: Path, bundle_dir: Path | None) -> Path:
+    if bundle_dir is not None:
+        return bundle_dir
+    return repo_root / "data" / "hallucinate_multimodal_control" / "objective_bundles"
+
+
 def _objective_goal_fingerprint(goal: dict[str, Any], missing_terms: list[str]) -> str:
     payload = "\0".join(
         [
@@ -900,12 +1078,26 @@ def _objective_goal_fingerprint(goal: dict[str, Any], missing_terms: list[str]) 
     return sha1(payload.encode("utf-8")).hexdigest()
 
 
+def _objective_evidence_path_skipped(path: Path, *, repo_root: Path) -> bool:
+    root_relative = _root_relative_path(repo_root, path)
+    parts = set(Path(root_relative).parts)
+    if "-objective-gap-" in path.name or path.name == "index.json":
+        return True
+    if {"discovery", "objective_bundles"} & parts:
+        return True
+    if root_relative.startswith("data/hallucinate_multimodal_control/"):
+        return True
+    return False
+
+
 def _objective_candidate_files(repo_root: Path, *, objective_path: Path) -> list[Path]:
     objective_resolved = objective_path.resolve()
     files: list[Path] = []
     for git_root in _discover_git_worktrees(repo_root):
         for path in _tracked_files(git_root):
             if path.resolve() == objective_resolved:
+                continue
+            if _objective_evidence_path_skipped(path, repo_root=repo_root):
                 continue
             if not _file_is_scan_candidate(path, repo_root=repo_root):
                 continue
@@ -923,12 +1115,14 @@ def _objective_evidence_index(
     evidence = {term: [] for term in normalized_terms}
     if not normalized_terms:
         return evidence
+    term_tokens = {term: set(_objective_tokens(term)) for term in normalized_terms}
+    term_embeddings = {term: _objective_text_embedding(term) for term in normalized_terms}
     for term in normalized_terms:
         if not _repo_relative_path_safe(term):
             continue
         candidate = repo_root / term
         if candidate.exists():
-            evidence[term].append(Path(term).as_posix())
+            evidence[term].append(f"{Path(term).as_posix()} (path)")
     lowered_terms = {term: term.lower() for term in normalized_terms}
     for path in _objective_candidate_files(repo_root, objective_path=objective_path):
         root_relative = _root_relative_path(repo_root, path)
@@ -936,12 +1130,33 @@ def _objective_evidence_index(
             text = path.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
+        symbols = _objective_symbol_terms(path, text)
+        symbol_text = " ".join(sorted(symbols))
+        document_embedding = _objective_text_embedding(f"{root_relative}\n{symbol_text}\n{text[:12000]}")
+        document_tokens = set(_objective_tokens(f"{root_relative}\n{symbol_text}\n{text[:12000]}"))
         haystack = f"{root_relative}\n{text}".lower()
         for term, lowered in lowered_terms.items():
             if len(evidence[term]) >= 3:
                 continue
             if lowered in haystack:
-                evidence[term].append(root_relative)
+                evidence[term].append(f"{root_relative} (exact)")
+                continue
+            normalized_symbol = " ".join(_objective_tokens(term))
+            if normalized_symbol and (
+                normalized_symbol in symbols
+                or any(normalized_symbol in symbol or symbol in normalized_symbol for symbol in symbols)
+            ):
+                evidence[term].append(f"{root_relative} (ast)")
+                continue
+            overlap = term_tokens[term] & document_tokens
+            required_overlap = max(1, min(2, len(term_tokens[term])))
+            embedding_score = _objective_cosine(term_embeddings[term], document_embedding)
+            overlap_ratio = len(overlap) / max(1, len(term_tokens[term]))
+            embedding_threshold = OBJECTIVE_EMBEDDING_MIN_SCORE
+            if overlap_ratio >= 0.75:
+                embedding_threshold = min(embedding_threshold, 0.30)
+            if len(overlap) >= required_overlap and embedding_score >= embedding_threshold:
+                evidence[term].append(f"{root_relative} (embedding:{embedding_score:.2f})")
     return evidence
 
 
@@ -961,6 +1176,7 @@ def _scan_objective_goal_findings(
     ]
     if not goals:
         return []
+    graph = _objective_goal_graph(goals)
     required_terms: list[str] = []
     for goal in goals:
         required_terms.extend(_objective_goal_required_evidence(goal))
@@ -976,6 +1192,8 @@ def _scan_objective_goal_findings(
         if fingerprint in seen_fingerprints:
             continue
         fields = goal.get("fields") or {}
+        present_evidence = {term: evidence.get(term, []) for term in terms if evidence.get(term)}
+        bundle_key = _objective_goal_bundle_key(goal, missing_terms)
         findings.append(
             {
                 "kind": "objective_goal_gap",
@@ -986,13 +1204,25 @@ def _scan_objective_goal_findings(
                 "priority": str(fields.get("priority") or "P2"),
                 "track": str(fields.get("track") or "ops"),
                 "missing_evidence": missing_terms,
-                "present_evidence": {term: evidence.get(term, []) for term in terms if evidence.get(term)},
+                "present_evidence": present_evidence,
+                "evidence_methods": _objective_evidence_methods(present_evidence),
                 "objective_path": _root_relative_path(repo_root, objective_path),
                 "outputs": _split_objective_terms(str(fields.get("outputs") or "")),
                 "validation": str(fields.get("validation") or f"test -f {_root_relative_path(repo_root, objective_path)}"),
                 "goal": str(fields.get("goal") or ""),
                 "refinement": str(fields.get("refinement") or ""),
                 "gap_task": str(fields.get("gap_task") or ""),
+                "parent_goal_ids": _objective_goal_parent_ids(goal),
+                "graph_depth": graph["depths"].get(str(goal.get("goal_id") or ""), 0),
+                "bundle_key": bundle_key,
+                "parallel_lane": str(fields.get("parallel_lane") or bundle_key),
+                "embedding_query": str(fields.get("embedding_query") or fields.get("goal") or goal.get("title") or ""),
+                "ast_query": str(fields.get("ast_query") or ", ".join(terms)),
+                "conflict_policy": str(
+                    fields.get("conflict_policy")
+                    or "prefer bundle-local changes; invoke the LLM merge resolver for semantic conflicts"
+                ),
+                "refinement_depth": str(fields.get("refinement_depth") or graph["depths"].get(str(goal.get("goal_id") or ""), 0)),
             }
         )
         seen_fingerprints.add(fingerprint)
@@ -1019,6 +1249,8 @@ def _write_objective_goal_discovery(
             joined = ", ".join(str(item) for item in paths) if isinstance(paths, list) else str(paths)
             present_items.append(f"- {term}: {joined}")
     present = "\n".join(present_items) if present_items else "- none found for this goal"
+    parents = ", ".join(str(item) for item in finding.get("parent_goal_ids", [])) or "none"
+    evidence_methods = ", ".join(str(item) for item in finding.get("evidence_methods", [])) or "none"
     content = f"""# {follow_up_task_id} Objective Goal Gap
 
 Date: {date}
@@ -1029,6 +1261,15 @@ Goal title: {finding["title"]}
 Objective heap: {finding["objective_path"]}
 Priority: {finding["priority"]}
 Track: {finding["track"]}
+Parent goals: {parents}
+Graph depth: {finding.get("graph_depth", 0)}
+Bundle: {finding.get("bundle_key", "objective/general")}
+Bundle shard: {finding.get("bundle_shard", "not assigned")}
+Parallel lane: {finding.get("parallel_lane", finding.get("bundle_key", "objective/general"))}
+Evidence methods: {evidence_methods}
+Embedding query: {finding.get("embedding_query", "")}
+AST query: {finding.get("ast_query", "")}
+Conflict policy: {finding.get("conflict_policy", "")}
 
 ## Goal
 
@@ -1066,6 +1307,9 @@ def _objective_goal_task_block(
     unique_outputs = list(dict.fromkeys(outputs))
     missing = ", ".join(str(item) for item in finding.get("missing_evidence", []))
     refinement = str(finding.get("refinement") or "Refine the objective heap if the gap needs smaller child goals.")
+    parents = ", ".join(str(item) for item in finding.get("parent_goal_ids", [])) or "none"
+    bundle_key = str(finding.get("bundle_key") or "objective/general")
+    bundle_shard = str(finding.get("bundle_shard") or f"data/hallucinate_multimodal_control/objective_bundles/{_safe_bundle_key(bundle_key)}.todo.md")
     return f"""## {follow_up_task_id} {finding["summary"]}
 
 - Status: todo
@@ -1075,8 +1319,114 @@ def _objective_goal_task_block(
 - Depends on: {", ".join(depends_on)}
 - Outputs: {", ".join(unique_outputs)}
 - Validation: {finding["validation"]}
+- Bundle: {bundle_key}
+- Bundle shard: {bundle_shard}
+- Graph parents: {parents}
+- Graph depth: {finding.get("graph_depth", 0)}
+- Parallel lane: {finding.get("parallel_lane", bundle_key)}
+- Conflict policy: {finding.get("conflict_policy", "prefer bundle-local changes; invoke the LLM merge resolver for semantic conflicts")}
 - Acceptance: Objective scan filed this gap for {finding["goal_id"]}. Use evidence in {discovery_path}, add code/tests/docs or child goals that prove the missing evidence terms are covered ({missing}), and keep the supervisor-fed backlog aligned with the virtual AI OS objective heap. {refinement}
 """
+
+
+def _write_objective_bundle_shards(
+    *,
+    bundle_dir: Path,
+    repo_root: Path,
+    todo_path: Path,
+    records: list[dict[str, Any]],
+) -> list[Path]:
+    if not records:
+        return []
+
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    generated_paths: list[Path] = []
+    source_todo = _root_relative_path(repo_root, todo_path)
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for record in records:
+        finding = record.get("finding") or {}
+        bundle_key = str(finding.get("bundle_key") or "objective/general")
+        groups.setdefault(bundle_key, []).append(record)
+
+    for bundle_key, bundle_records in sorted(groups.items()):
+        shard_path = _objective_bundle_path(bundle_dir, bundle_key)
+        if shard_path.exists():
+            shard_text = shard_path.read_text(encoding="utf-8")
+        else:
+            shard_text = (
+                f"# Objective Bundle: {bundle_key}\n\n"
+                f"Source todo: {source_todo}\n"
+                "Purpose: bundle objective-generated tasks so parallel daemons can work one lane at a time.\n"
+                "Conflict policy: keep edits inside this bundle when possible; use the LLM merge resolver for semantic conflicts.\n"
+            )
+
+        changed = False
+        for record in bundle_records:
+            task_id = str(record.get("follow_up_task_id") or "")
+            if task_id and f"## {task_id} " in shard_text:
+                continue
+            task_block = str(record.get("task_block") or "").strip()
+            if not task_block:
+                continue
+            shard_text = shard_text.rstrip() + "\n\n" + task_block + "\n"
+            changed = True
+
+        if changed or not shard_path.exists():
+            shard_path.write_text(shard_text, encoding="utf-8")
+            generated_paths.append(shard_path)
+
+    index_path = bundle_dir / "index.json"
+    if index_path.exists():
+        try:
+            index_payload = json.loads(index_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            index_payload = {}
+    else:
+        index_payload = {}
+    if not isinstance(index_payload, dict):
+        index_payload = {}
+    bundles = index_payload.get("bundles")
+    if not isinstance(bundles, dict):
+        bundles = {}
+
+    for bundle_key, bundle_records in sorted(groups.items()):
+        shard_path = _objective_bundle_path(bundle_dir, bundle_key)
+        bundle_info = bundles.get(bundle_key)
+        if not isinstance(bundle_info, dict):
+            bundle_info = {}
+        existing_tasks = bundle_info.get("tasks")
+        task_map: dict[str, dict[str, Any]] = {}
+        if isinstance(existing_tasks, list):
+            for item in existing_tasks:
+                if isinstance(item, dict) and str(item.get("task_id") or ""):
+                    task_map[str(item["task_id"])] = item
+        for record in bundle_records:
+            finding = record.get("finding") or {}
+            task_id = str(record.get("follow_up_task_id") or "")
+            if not task_id:
+                continue
+            task_map[task_id] = {
+                "task_id": task_id,
+                "goal_id": str(finding.get("goal_id") or ""),
+                "graph_depth": finding.get("graph_depth", 0),
+                "parent_goal_ids": finding.get("parent_goal_ids", []),
+                "missing_evidence": finding.get("missing_evidence", []),
+                "discovery_path": str(record.get("discovery_path") or ""),
+            }
+        bundles[bundle_key] = {
+            "bundle_key": bundle_key,
+            "shard_path": _root_relative_path(repo_root, shard_path),
+            "parallel_lane": str((bundle_records[0].get("finding") or {}).get("parallel_lane") or bundle_key),
+            "conflict_policy": str((bundle_records[0].get("finding") or {}).get("conflict_policy") or ""),
+            "tasks": [task_map[key] for key in sorted(task_map)],
+        }
+
+    index_payload["generated_at"] = _utc_now()
+    index_payload["source_todo"] = source_todo
+    index_payload["bundles"] = bundles
+    index_path.write_text(json.dumps(index_payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    generated_paths.append(index_path)
+    return generated_paths
 
 
 def _write_codebase_scan_discovery(*, discovery_dir: Path, follow_up_task_id: str, finding: dict[str, Any]) -> Path:
@@ -1138,6 +1488,7 @@ def record_objective_goal_findings(
     strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
     discovery_dir: Path = DISCOVERY_DIR,
     objective_path: Path = DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    bundle_dir: Path | None = None,
     task_header_prefix: str = "## HAO-",
     repo_root: Path = REPO_ROOT,
     min_open_tasks: int = OBJECTIVE_SCAN_MIN_OPEN_TASKS,
@@ -1155,6 +1506,7 @@ def record_objective_goal_findings(
     if not force and open_task_count > min_open_tasks:
         return []
 
+    effective_bundle_dir = _objective_bundle_dir(repo_root, bundle_dir)
     strategy = _load_strategy(strategy_path)
     now = datetime.now(timezone.utc)
     task_count = len(task_ids)
@@ -1196,9 +1548,15 @@ def record_objective_goal_findings(
 
     generated_paths: list[Path] = []
     appended: list[dict[str, Any]] = []
+    bundle_records: list[dict[str, Any]] = []
     depends_on = ["HAO-013"] if "HAO-013" in task_ids else []
     for finding in findings:
+        finding = dict(finding)
         follow_up_task_id = _next_hao_task_id(todo_text)
+        finding["bundle_shard"] = _root_relative_path(
+            repo_root,
+            _objective_bundle_path(effective_bundle_dir, str(finding.get("bundle_key") or "objective/general")),
+        )
         discovery_path = _write_objective_goal_discovery(
             discovery_dir=discovery_dir,
             follow_up_task_id=follow_up_task_id,
@@ -1213,6 +1571,14 @@ def record_objective_goal_findings(
         todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
         task_ids.add(follow_up_task_id)
         generated_paths.append(discovery_path)
+        bundle_records.append(
+            {
+                "follow_up_task_id": follow_up_task_id,
+                "task_block": task_block,
+                "finding": finding,
+                "discovery_path": discovery_path,
+            }
+        )
         appended.append(
             {
                 "follow_up_task_id": follow_up_task_id,
@@ -1220,11 +1586,23 @@ def record_objective_goal_findings(
                 "kind": finding["kind"],
                 "goal_id": finding["goal_id"],
                 "missing_evidence": finding["missing_evidence"],
+                "bundle_key": finding.get("bundle_key"),
+                "bundle_shard": finding.get("bundle_shard"),
+                "graph_depth": finding.get("graph_depth"),
+                "parent_goal_ids": finding.get("parent_goal_ids", []),
                 "discovery_path": str(discovery_path),
             }
         )
 
     todo_path.write_text(todo_text, encoding="utf-8")
+    generated_paths.extend(
+        _write_objective_bundle_shards(
+            bundle_dir=effective_bundle_dir,
+            repo_root=repo_root,
+            todo_path=todo_path,
+            records=bundle_records,
+        )
+    )
     strategy["last_objective_goal_scan_findings"] = appended
     _save_strategy(strategy_path, strategy)
     generated_paths.insert(0, todo_path)

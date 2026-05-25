@@ -454,6 +454,47 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     assert "swissknife" in discovery
 
 
+def test_merge_conflict_resolver_builds_dry_run_prompt(tmp_path):
+    resolver = _load_script_module("hallucinate_multimodal_control_merge_conflict_resolver")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    events_path = tmp_path / "events.jsonl"
+    events_path.write_text(
+        json.dumps(
+            {
+                "type": "merge_reconciled",
+                "timestamp": "2026-05-23T00:03:00+00:00",
+                "task_id": "HAO-005",
+                "attempt": 2,
+                "resolved": False,
+                "reason": "merge_retried",
+                "merge_result": {
+                    "attempted": True,
+                    "merged": False,
+                    "branch": "implementation/hao-005-attempt-2",
+                    "target_branch": "main",
+                    "command": ["git", "merge", "--no-ff", "implementation/hao-005-attempt-2"],
+                    "reason": "content_conflict",
+                    "dirty_paths": ["swissknife"],
+                    "stderr": "CONFLICT (content): Merge conflict in swissknife/app.ts",
+                },
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    payload = resolver.resolver_payload(events_path=events_path, repo_root=repo, task_id="HAO-005")
+
+    assert payload["found"] is True
+    assert payload["task_id"] == "HAO-005"
+    assert payload["branch"] == "implementation/hao-005-attempt-2"
+    assert "Resolve the HAO daemon merge conflict" in payload["prompt"]
+    assert "swissknife" in payload["prompt"]
+
+
 def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"
@@ -818,6 +859,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
         strategy_path=tmp_path / "strategy.json",
         discovery_dir=repo / "discovery",
         objective_path=objective_path,
+        bundle_dir=repo / "bundles",
         repo_root=repo,
         min_open_tasks=0,
         max_findings=1,
@@ -828,9 +870,13 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert findings[0]["follow_up_task_id"] == "HAO-002"
     assert findings[0]["goal_id"] == "VAIOS-G001"
     assert findings[0]["missing_evidence"] == ["meta_glasses_terminal_e2e_contract"]
+    assert findings[0]["bundle_key"].startswith("objective/")
+    assert findings[0]["bundle_shard"].startswith("bundles/")
     updated = todo_path.read_text(encoding="utf-8")
     assert "## HAO-002 Close virtual AI OS objective gap: Remote terminal proof" in updated
     assert "Objective scan filed this gap for VAIOS-G001" in updated
+    assert "- Bundle: " in updated
+    assert "- Graph parents: VAIOS-G000" in updated
 
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
     from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
@@ -840,6 +886,96 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert tasks["HAO-002"].track == "mobile"
     assert "objective-heap.md" in tasks["HAO-002"].validation[0]
     assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
+    bundle_shards = list((repo / "bundles").glob("*.todo.md"))
+    assert len(bundle_shards) == 1
+    assert "## HAO-002 Close virtual AI OS objective gap" in bundle_shards[0].read_text(encoding="utf-8")
+    bundle_index = json.loads((repo / "bundles" / "index.json").read_text(encoding="utf-8"))
+    assert findings[0]["bundle_key"] in bundle_index["bundles"]
+    assert bundle_index["bundles"][findings[0]["bundle_key"]]["tasks"][0]["task_id"] == "HAO-002"
+
+
+def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+
+    todo_path = repo / "todo.md"
+    objective_path = repo / "objective-heap.md"
+    source = repo / "src" / "runtime_router.py"
+    notes = repo / "docs" / "runtime_notes.md"
+    source.parent.mkdir()
+    notes.parent.mkdir()
+    source.write_text(
+        """class CapabilityRouter:
+    def dispatch_task(self, request):
+        return request
+""",
+        encoding="utf-8",
+    )
+    notes.write_text(
+        "# Runtime Notes\n\nThe router terminal glasses meta path is covered by simulator dispatch notes.\n",
+        encoding="utf-8",
+    )
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    objective_path.write_text(
+        """# Objective Heap
+
+## VAIOS-G001 Runtime proof
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 2
+- Track: runtime
+- Priority: P1
+- Bundle: objective/runtime/test
+- Goal: Prove runtime routing evidence.
+- Evidence: CapabilityRouter.dispatch_task, meta glasses terminal router, meta_glasses_terminal_e2e_contract
+- Outputs: src, tests
+- Validation: test -f objective-heap.md
+- Gap task: Add the missing runtime proof.
+""",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "objective-heap.md", "src/runtime_router.py", "docs/runtime_notes.md")
+    _git(repo, "commit", "-m", "seed objective heap")
+
+    findings = daemon_module.record_objective_goal_findings(
+        todo_path=todo_path,
+        state_path=None,
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        objective_path=objective_path,
+        bundle_dir=repo / "bundles",
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert len(findings) == 1
+    assert findings[0]["missing_evidence"] == ["meta_glasses_terminal_e2e_contract"]
+    discovery = next((repo / "discovery").glob("*-hao-002-objective-gap-*.md")).read_text(encoding="utf-8")
+    assert "CapabilityRouter.dispatch_task: src/runtime_router.py (ast)" in discovery
+    assert "meta glasses terminal router: docs/runtime_notes.md (embedding:" in discovery
 
 
 def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_path):
