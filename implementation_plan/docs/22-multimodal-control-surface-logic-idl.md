@@ -315,6 +315,24 @@ Initial implementation targets:
 - `mobile/src/orb/`
 - simulator artifacts under `dev/` and related tests
 
+Remote-client rule:
+- Meta-glasses, mobile, and simulator clients are remote interaction surface
+  adapters for Hallucinate App, not separate policy or control-contract owners.
+- Each path publishes a normalized `interaction_envelope` with the canonical
+  `surface`, `surface_event`, `normalized_intent`, actor, context, descriptor
+  refs, and correlation/receipt metadata required by the Hallucinate App
+  mediator.
+- Client-specific details stay in `raw_payload` and context metadata. Examples
+  include DAT display state, Web App display actions, Neural Band/captouch
+  values, mobile-card input, simulator trace entries, location, and sensor data.
+- `context.platform` identifies `meta_glasses`, `mobile`, or `simulator`, while
+  `context.device_context.remote_surface` records the concrete transport path
+  such as `dat-native-display`, `meta-rayban-display-webapp`,
+  `mobile-shell`, or `meta-rayban-display-simulator`.
+- The mobile ORB bridge and simulator can cache edge-session and binding data,
+  but the `policy_decision`, `mediation_receipt`, fallback routing, and final
+  allow/deny/confirmation result come from Hallucinate App.
+
 ## Proposed New Runtime Modules
 The upgrade should add a narrow mediation slice instead of baking policy logic into each route.
 
@@ -369,6 +387,24 @@ Examples:
 - agent adapter: action proposal -> structured intent + delegation context
 
 The adapter must not decide final policy. That belongs to the mediation layer.
+
+### Remote interaction surfaces
+Meta-glasses hardware, the mobile companion shell, and the browser simulator are
+client paths around those canonical adapters. They may expose different
+capabilities and transports, but their control contract is the Hallucinate App
+contract.
+
+Mapping expectations:
+- Meta-glasses DAT, Web App, Neural Band, captouch, display, audio, sensor, and
+  location events normalize through the mobile edge before mediation.
+- Mobile shell controls normalize as the same voice, gesture, pointer, or agent
+  interaction envelopes used by the desktop shell.
+- Simulator fixtures and traces replay the same envelopes so allowed, denied,
+  confirmation-required, rewrite, and fallback cases can be compared with
+  mobile diagnostics.
+- No remote client introduces client-local `allowed_surfaces`,
+  `policy_hooks`, or conflict-resolution rules that differ from the descriptor
+  owned by Hallucinate App.
 
 ## Conflict Handling
 Multimodal systems will create real conflicts.

@@ -209,6 +209,46 @@ Each simulated action should produce the same structured result fields used by `
 
 This makes simulator traces directly comparable to mobile diagnostics.
 
+### 4a. Remote Interaction Surface Bridge
+
+The simulator, Web App preview, mobile shell, and eventual Meta-glasses DAT path
+must publish normalized remote events into Hallucinate App instead of creating a
+simulator-specific or mobile-specific control contract. The browser simulator is
+only another remote interaction surface for the canonical
+`control_surface_contract`.
+
+Simulator and mobile events should carry enough data to build the Hallucinate
+App `interaction_envelope`:
+
+- `surface`: the normalized modality, such as `gesture`, `voice`, `mouse`, or
+  `agent`, not the device family.
+- `surface_event`: the canonical event after adapter normalization, such as
+  `tap`, `swipe`, `utterance`, `click`, or `proposal`.
+- `raw_payload`: the original simulator, Web App, DAT, mobile, sensor, or
+  display-action payload plus `correlation_id`, `request_id`, widget refs, and
+  receipt CIDs.
+- `context.platform`: `simulator`, `mobile`, or `meta_glasses`.
+- `context.device_context.remote_surface`: the concrete path, such as
+  `meta-rayban-display-simulator`, `meta-rayban-display-webapp`,
+  `dat-native-display`, or `mobile-shell`.
+
+The event route is:
+
+```text
+Meta-glasses / mobile / simulator event
+  -> remote-surface adapter
+  -> Hallucinate App interaction envelope
+  -> shared control-surface mediator
+  -> policy decision + mediation receipt
+  -> display/audio/mobile/render-target execution
+```
+
+The simulator may display the returned `policy_decision` and
+`mediation_receipt` in diagnostics, but it must not decide final policy locally.
+`fallback_surface`, `rewrite`, `require_confirmation`, and denial behavior all
+come from Hallucinate App so simulator traces remain comparable to the mobile
+and physical Meta-glasses paths.
+
 ### 5. Web App Compatibility Mode
 
 Add a "MRBD Web App mode" that renders the same interface as deployable HTML/CSS/JS:
@@ -406,3 +446,6 @@ This gives us a concrete, testable interface simulator without waiting for iPhon
 - Added `dev/meta-rayban-display-simulator/webapp/` as a deployable-style fixed 600x600 Web App preview with D-pad/Enter handling, event metadata persisted to `sessionStorage`, `manifest.webmanifest`, and `readiness.json`.
 - The Web App preview now registers a simulator ORB edge, publishes `display_action` activation events, binds a task-service MCP-IDL descriptor, subscribes to task-progress updates, invokes the bound service, and dispatches the result back through display/audio/mobile render targets when served from the backend, while preserving local-only event storage and clearing stale cached bindings as fallback.
 - Added `tests/test_meta_rayban_display_simulator.py` to verify readiness, viewport bounds, focus/action consistency, simulator JS validation, and bridge-result metadata.
+- Documented the simulator, mobile, and Meta-glasses paths as remote interaction
+  surfaces that publish Hallucinate App `interaction_envelope` events and
+  consume the shared `control_surface_contract` instead of defining local policy.
