@@ -347,7 +347,9 @@ Build a layered test matrix:
 
 The machine-readable task board for this plan is:
 
-- `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+```text
+implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+```
 
 Run from the repo root:
 
