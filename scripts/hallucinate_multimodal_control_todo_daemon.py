@@ -59,8 +59,10 @@ CODEBASE_SCAN_SKIP_PARTS = {
     "test-results",
 }
 CODEBASE_SCAN_SKIP_PREFIXES = (
+    "data/hallucinate_multimodal_control/discovery/",
     "data/hallucinate_multimodal_control/state/",
     "data/hallucinate_multimodal_control/worktrees/",
+    "data/meta_glasses_display_widgets/discovery/",
 )
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
@@ -706,8 +708,15 @@ def _scan_findings_in_file(path: Path, *, repo_root: Path) -> list[dict[str, Any
     except OSError:
         return []
     findings: list[dict[str, Any]] = []
+    in_fenced_block = False
+    scan_fences = path.suffix.lower() in {".md", ".rst"}
     for index, line in enumerate(lines, start=1):
         stripped = line.strip()
+        if scan_fences and (stripped.startswith("```") or stripped.startswith("~~~")):
+            in_fenced_block = not in_fenced_block
+            continue
+        if in_fenced_block:
+            continue
         if not stripped:
             continue
         lowered = stripped.lower()

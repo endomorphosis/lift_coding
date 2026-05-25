@@ -574,6 +574,63 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     assert "HAO-002" not in (repo / "todo.md").read_text(encoding="utf-8")
 
 
+def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "report.md"
+    source = repo / "src" / "scan_target.py"
+    readme = repo / "README.md"
+    source.parent.mkdir(parents=True)
+    discovery.parent.mkdir(parents=True)
+
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "todo.md").write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    source.write_text("def unresolved():\n    # FIXME: real source finding\n    return None\n", encoding="utf-8")
+    discovery.write_text(
+        "# Generated Discovery\n\nThe historical task had `Status: todo` in captured evidence.\n",
+        encoding="utf-8",
+    )
+    readme.write_text(
+        "# Example\n\n```bash\nrg -n \"todo\" docs/example.todo.md\n```\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "src/scan_target.py", "data/hallucinate_multimodal_control/discovery/report.md", "README.md")
+    _git(repo, "commit", "-m", "seed")
+
+    findings = daemon_module.record_codebase_scan_findings(
+        todo_path=repo / "todo.md",
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=5,
+        cooldown_seconds=0,
+    )
+
+    assert [finding["source"] for finding in findings] == ["src/scan_target.py:2"]
+    updated = (repo / "todo.md").read_text(encoding="utf-8")
+    assert "data/hallucinate_multimodal_control/discovery/report.md" not in updated
+    assert "README.md" not in updated
+
+
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
     from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
