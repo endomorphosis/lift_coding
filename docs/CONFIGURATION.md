@@ -333,7 +333,7 @@ Notes:
 
 #### Virtual AI OS Submodule Bootstrap
 
-The virtual AI OS integration backlog uses the repo-local `ipfs_datasets_py` todo supervisor and ephemeral worktrees. The bootstrap contract is now explicit and can be overridden with environment variables when operators need a different state or worktree location.
+The virtual AI OS integration backlog uses the repo-local `ipfs_datasets_py` implementation supervisor and ephemeral worktrees. The bootstrap contract is now explicit and can be overridden with environment variables when operators need a different state or worktree location.
 
 Relevant bootstrap environment variables:
 
