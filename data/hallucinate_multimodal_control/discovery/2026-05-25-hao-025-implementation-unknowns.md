@@ -7,8 +7,8 @@ Scope: Hallucinate App, Swissknife, `ipfs_datasets_py`, and remote clients
 ## Outcome
 
 New multimodal control-surface unknowns were found. This is not a
-no-new-unknowns report. The daemon-parseable follow-up tasks appended to
-`hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md` are:
+no-new-unknowns report. During HAO-025, these daemon-parseable HAO
+task-board entries were recorded as historical discovery outputs:
 
 - `HAO-036` for remote-client schema/envelope alignment.
 - `HAO-037` for fail-open JavaScript and Swissknife mediation gates.
