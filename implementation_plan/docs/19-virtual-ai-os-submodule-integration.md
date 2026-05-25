@@ -11,7 +11,7 @@ Refreshed: 2026-05-23
 
 Unify the submodule stack into one operational system with clear control planes:
 
-- `ipfs_datasets_py` as the semantic routing, dataset, todo-daemon, and MCP grounding plane.
+- `ipfs_datasets_py` as the semantic routing, dataset, backlog orchestration, and MCP grounding plane.
 - `ipfs_accelerate_py` as the execution-placement and acceleration plane.
 - `ipfs_kit_py` as the IPFS content, packaging, and provenance plane.
 - `swissknife` as the local UI, ORB, MCP++, and operator-facing virtual desktop plane.
