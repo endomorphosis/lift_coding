@@ -191,7 +191,7 @@ The glasses surface should support:
 
 ### 4. Autonomous work must stay supervised
 
-Use the `ipfs_datasets_py` todo daemon and supervisor to advance backlog items, but keep:
+Use the repo-local `ipfs_datasets_py` implementation supervisor to advance daemon-backed backlog items, while preserving:
 
 - typed validation commands,
 - explicit acceptance criteria,
