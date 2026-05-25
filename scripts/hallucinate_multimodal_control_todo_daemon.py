@@ -21,6 +21,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
     os.environ.get(
@@ -117,6 +118,25 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     if flag in argv:
         return argv
     return [flag, value, *argv]
+
+
+def _ensure_ipfs_accelerate_path() -> None:
+    if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+        sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+
+def _task_prefix_from_header(task_header_prefix: str) -> str:
+    value = str(task_header_prefix or "## HAO-").strip()
+    if value.startswith("## "):
+        value = value[3:].strip()
+    return value or "HAO-"
+
+
+def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
+    try:
+        return discovery_dir.resolve().relative_to(repo_root.resolve()).as_posix()
+    except ValueError:
+        return "data/hallucinate_multimodal_control/discovery"
 
 
 def _utc_now() -> str:
@@ -1498,120 +1518,33 @@ def record_objective_goal_findings(
 ) -> list[dict[str, Any]]:
     """Feed the HAO board from missing evidence in the virtual-AI-OS objective heap."""
 
-    if max_findings <= 0 or not todo_path.exists() or not objective_path.exists():
-        return []
-    todo_text = todo_path.read_text(encoding="utf-8")
-    task_ids = set(_task_ids_from_todo(todo_text))
-    open_task_count = _effective_open_task_count(todo_text, state_path)
-    if not force and open_task_count > min_open_tasks:
-        return []
+    _ensure_ipfs_accelerate_path()
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_objective_backlog_findings as accelerator_record_objective_backlog_findings,
+    )
 
-    effective_bundle_dir = _objective_bundle_dir(repo_root, bundle_dir)
-    strategy = _load_strategy(strategy_path)
-    now = datetime.now(timezone.utc)
-    task_count = len(task_ids)
-    drained_backlog = open_task_count == 0
-    try:
-        last_drained_scan_task_count = int(strategy.get("last_drained_objective_goal_scan_task_count") or -1)
-    except (TypeError, ValueError):
-        last_drained_scan_task_count = -1
-    drained_scan_due = drained_backlog and last_drained_scan_task_count != task_count
-    last_scan_at = _parse_iso_timestamp(str(strategy.get("last_objective_goal_scan_at") or ""))
-    if (
-        not force
-        and not drained_scan_due
-        and last_scan_at is not None
-        and (now - last_scan_at).total_seconds() < cooldown_seconds
-    ):
-        return []
-
-    seen = {
-        str(item)
-        for item in strategy.get("objective_goal_seen_fingerprints", [])
-        if str(item).strip()
-    }
-    findings = _scan_objective_goal_findings(
-        repo_root,
+    task_prefix = _task_prefix_from_header(task_header_prefix)
+    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
+    depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text) else []
+    return accelerator_record_objective_backlog_findings(
+        repo_root=repo_root,
         objective_path=objective_path,
+        todo_path=todo_path,
+        discovery_dir=discovery_dir,
+        bundle_dir=_objective_bundle_dir(repo_root, bundle_dir),
+        strategy_path=strategy_path,
+        state_path=state_path,
+        task_prefix=task_prefix,
+        depends_on=depends_on,
+        min_open_tasks=min_open_tasks,
         max_findings=max_findings,
-        seen_fingerprints=seen,
+        cooldown_seconds=cooldown_seconds,
+        force=force,
+        summary_prefix="Close virtual AI OS objective gap",
+        discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
+        commit_outputs=True,
+        commit_subject="HAO: record objective goal backlog findings",
     )
-    strategy["last_objective_goal_scan_at"] = _utc_now()
-    strategy["last_objective_goal_scan_mode"] = "drained_exhaustive" if drained_scan_due else "low_backlog"
-    if drained_backlog:
-        strategy["last_drained_objective_goal_scan_task_count"] = task_count
-    strategy["objective_goal_seen_fingerprints"] = sorted(seen)
-    if not findings:
-        strategy["last_objective_goal_scan_findings"] = []
-        _save_strategy(strategy_path, strategy)
-        return []
-
-    generated_paths: list[Path] = []
-    appended: list[dict[str, Any]] = []
-    bundle_records: list[dict[str, Any]] = []
-    depends_on = ["HAO-013"] if "HAO-013" in task_ids else []
-    for finding in findings:
-        finding = dict(finding)
-        follow_up_task_id = _next_hao_task_id(todo_text)
-        finding["bundle_shard"] = _root_relative_path(
-            repo_root,
-            _objective_bundle_path(effective_bundle_dir, str(finding.get("bundle_key") or "objective/general")),
-        )
-        discovery_path = _write_objective_goal_discovery(
-            discovery_dir=discovery_dir,
-            follow_up_task_id=follow_up_task_id,
-            finding=finding,
-        )
-        task_block = _objective_goal_task_block(
-            follow_up_task_id=follow_up_task_id,
-            finding=finding,
-            discovery_path=discovery_path,
-            depends_on=depends_on,
-        )
-        todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
-        task_ids.add(follow_up_task_id)
-        generated_paths.append(discovery_path)
-        bundle_records.append(
-            {
-                "follow_up_task_id": follow_up_task_id,
-                "task_block": task_block,
-                "finding": finding,
-                "discovery_path": discovery_path,
-            }
-        )
-        appended.append(
-            {
-                "follow_up_task_id": follow_up_task_id,
-                "fingerprint": finding["fingerprint"],
-                "kind": finding["kind"],
-                "goal_id": finding["goal_id"],
-                "missing_evidence": finding["missing_evidence"],
-                "bundle_key": finding.get("bundle_key"),
-                "bundle_shard": finding.get("bundle_shard"),
-                "graph_depth": finding.get("graph_depth"),
-                "parent_goal_ids": finding.get("parent_goal_ids", []),
-                "discovery_path": str(discovery_path),
-            }
-        )
-
-    todo_path.write_text(todo_text, encoding="utf-8")
-    generated_paths.extend(
-        _write_objective_bundle_shards(
-            bundle_dir=effective_bundle_dir,
-            repo_root=repo_root,
-            todo_path=todo_path,
-            records=bundle_records,
-        )
-    )
-    strategy["last_objective_goal_scan_findings"] = appended
-    _save_strategy(strategy_path, strategy)
-    generated_paths.insert(0, todo_path)
-    commit_results = _commit_generated_retry_budget_outputs(
-        generated_paths,
-        subject="HAO: record objective goal backlog findings",
-    )
-    logger.info("Committed objective-goal generated outputs: %s", commit_results)
-    return appended
 
 
 def record_codebase_scan_findings(
@@ -1629,92 +1562,31 @@ def record_codebase_scan_findings(
 ) -> list[dict[str, Any]]:
     """Feed the HAO board with static codebase scan findings when backlog runs low."""
 
-    if max_findings <= 0 or not todo_path.exists():
-        return []
-    todo_text = todo_path.read_text(encoding="utf-8")
-    task_ids = set(_task_ids_from_todo(todo_text))
-    open_task_count = _effective_open_task_count(todo_text, state_path)
-    if not force and open_task_count > min_open_tasks:
-        return []
+    _ensure_ipfs_accelerate_path()
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_codebase_scan_findings as accelerator_record_codebase_scan_findings,
+    )
 
-    strategy = _load_strategy(strategy_path)
-    now = datetime.now(timezone.utc)
-    task_count = len(task_ids)
-    drained_backlog = open_task_count == 0
-    try:
-        last_drained_scan_task_count = int(strategy.get("last_drained_codebase_scan_task_count") or -1)
-    except (TypeError, ValueError):
-        last_drained_scan_task_count = -1
-    drained_scan_due = drained_backlog and last_drained_scan_task_count != task_count
-    last_scan_at = _parse_iso_timestamp(str(strategy.get("last_codebase_scan_at") or ""))
-    if (
-        not force
-        and not drained_scan_due
-        and last_scan_at is not None
-        and (now - last_scan_at).total_seconds() < cooldown_seconds
-    ):
-        return []
-
-    seen = {
-        str(item)
-        for item in strategy.get("codebase_scan_seen_fingerprints", [])
-        if str(item).strip()
-    }
-    findings = _scan_codebase_findings(
-        repo_root,
+    task_prefix = _task_prefix_from_header(task_header_prefix)
+    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
+    depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text) else []
+    return accelerator_record_codebase_scan_findings(
+        todo_path=todo_path,
+        state_path=state_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        repo_root=repo_root,
+        task_prefix=task_prefix,
+        depends_on=depends_on,
+        min_open_tasks=min_open_tasks,
         max_findings=max_findings,
-        seen_fingerprints=seen,
-        exhaustive=drained_scan_due,
+        cooldown_seconds=cooldown_seconds,
+        force=force,
+        discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
+        skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+        commit_outputs=True,
+        commit_subject="HAO: record codebase scan backlog findings",
     )
-    strategy["last_codebase_scan_at"] = _utc_now()
-    strategy["last_codebase_scan_mode"] = "drained_exhaustive" if drained_scan_due else "low_backlog"
-    if drained_backlog:
-        strategy["last_drained_codebase_scan_task_count"] = task_count
-    strategy["codebase_scan_seen_fingerprints"] = sorted(seen)
-    if not findings:
-        strategy["last_codebase_scan_findings"] = []
-        _save_strategy(strategy_path, strategy)
-        return []
-
-    generated_paths: list[Path] = []
-    appended: list[dict[str, Any]] = []
-    depends_on = ["HAO-013"] if "HAO-013" in task_ids else []
-    for finding in findings:
-        follow_up_task_id = _next_hao_task_id(todo_text)
-        discovery_path = _write_codebase_scan_discovery(
-            discovery_dir=discovery_dir,
-            follow_up_task_id=follow_up_task_id,
-            finding=finding,
-        )
-        task_block = _codebase_scan_task_block(
-            follow_up_task_id=follow_up_task_id,
-            finding=finding,
-            discovery_path=discovery_path,
-            depends_on=depends_on,
-        )
-        todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
-        task_ids.add(follow_up_task_id)
-        generated_paths.append(discovery_path)
-        appended.append(
-            {
-                "follow_up_task_id": follow_up_task_id,
-                "fingerprint": finding["fingerprint"],
-                "kind": finding["kind"],
-                "source": f"{finding['root_relative_path']}:{finding['line_number']}",
-                "discovery_path": str(discovery_path),
-            }
-        )
-
-    todo_path.write_text(todo_text, encoding="utf-8")
-    strategy["last_codebase_scan_findings"] = appended
-    _save_strategy(strategy_path, strategy)
-    generated_paths.insert(0, todo_path)
-    commit_results = _commit_generated_retry_budget_outputs(
-        generated_paths,
-        subject="HAO: record codebase scan backlog findings",
-    )
-    logger.info("Committed codebase-scan generated outputs: %s", commit_results)
-    return appended
 
 
 def record_retry_budget_findings(
@@ -1729,134 +1601,33 @@ def record_retry_budget_findings(
 ) -> list[dict[str, Any]]:
     """Turn repeated validation or merge failures into discovery-backed daemon backlog items."""
 
-    if not todo_path.exists():
-        return []
-
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
-
-    tasks = parse_task_file(todo_path, task_header_prefix)
-    if not tasks:
-        return []
-
-    todo_text = todo_path.read_text(encoding="utf-8")
-    task_ids = set(_task_ids_from_todo(todo_text))
-    completed_task_ids = {task.task_id for task in tasks if task.status == "completed"}
-    events = _iter_jsonl(events_path)
-    findings: list[dict[str, Any]] = []
-    generated_paths: list[Path] = []
-    strategy = _load_strategy(strategy_path)
-    blocked_tasks = [str(item) for item in strategy.get("blocked_tasks", []) if str(item).strip()]
-
-    if retry_budget > 0:
-        for task in tasks:
-            if task.task_id in completed_task_ids:
-                continue
-            marker = f"retry-budget failure for {task.task_id}"
-            if marker in todo_text:
-                continue
-            failures = _consecutive_validation_failures(events, task.task_id)
-            if len(failures) < retry_budget:
-                continue
-            latest_validation = failures[-1].get("validation_result") or {}
-            failed_command = str(latest_validation.get("failed_command") or "")
-            if not failed_command:
-                continue
-
-            follow_up_task_id = _next_hao_task_id(todo_text)
-            discovery_path = _write_retry_budget_discovery(
-                discovery_dir=discovery_dir,
-                follow_up_task_id=follow_up_task_id,
-                source_task_id=task.task_id,
-                failed_command=failed_command,
-                failures=failures,
-                retry_budget=retry_budget,
-            )
-            generated_paths.append(discovery_path)
-            depends_on = ["HAO-013"] if "HAO-013" in task_ids else list(task.depends_on)
-            task_block = _retry_budget_task_block(
-                follow_up_task_id=follow_up_task_id,
-                source_task=task,
-                failed_command=failed_command,
-                discovery_path=discovery_path,
-                depends_on=depends_on,
-            )
-            todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
-            task_ids.add(follow_up_task_id)
-            if task.task_id not in blocked_tasks:
-                blocked_tasks.append(task.task_id)
-            findings.append(
-                {
-                    "source_task_id": task.task_id,
-                    "follow_up_task_id": follow_up_task_id,
-                    "failure_count": len(failures),
-                    "failed_command": failed_command,
-                    "discovery_path": str(discovery_path),
-                }
-            )
-
-    for task in tasks:
-        if merge_retry_budget <= 0:
-            break
-        if task.task_id in completed_task_ids:
-            continue
-        marker = f"merge retry-budget failure for {task.task_id}"
-        if marker in todo_text:
-            continue
-        failures = _consecutive_merge_failures(events, task.task_id)
-        if len(failures) < merge_retry_budget:
-            continue
-        latest_merge_result = _event_merge_result(failures[-1])
-        if not latest_merge_result:
-            continue
-
-        follow_up_task_id = _next_hao_task_id(todo_text)
-        discovery_path = _write_merge_retry_budget_discovery(
-            discovery_dir=discovery_dir,
-            follow_up_task_id=follow_up_task_id,
-            source_task_id=task.task_id,
-            merge_result=latest_merge_result,
-            failures=failures,
-            retry_budget=merge_retry_budget,
-        )
-        generated_paths.append(discovery_path)
-        depends_on = list(task.depends_on)
-        task_block = _merge_retry_budget_task_block(
-            follow_up_task_id=follow_up_task_id,
-            source_task=task,
-            discovery_path=discovery_path,
-            strategy_path=strategy_path,
-            depends_on=depends_on,
-        )
-        todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
-        task_ids.add(follow_up_task_id)
-        if task.task_id not in blocked_tasks:
-            blocked_tasks.append(task.task_id)
-        findings.append(
-            {
-                "source_task_id": task.task_id,
-                "follow_up_task_id": follow_up_task_id,
-                "failure_count": len(failures),
-                "failed_command": _merge_command_label(latest_merge_result),
-                "discovery_path": str(discovery_path),
-                "failure_kind": "merge",
-            }
-        )
-
-    if not findings:
-        return []
-
-    todo_path.write_text(todo_text, encoding="utf-8")
-    strategy["blocked_tasks"] = blocked_tasks
-    strategy["last_retry_budget_guardrail_at"] = _utc_now()
-    strategy["retry_budget_findings"] = findings
-    _save_strategy(strategy_path, strategy)
-    generated_paths.insert(0, todo_path)
-    commit_results = _commit_generated_retry_budget_outputs(
-        generated_paths,
-        subject="HAO: record retry-budget guardrail outputs",
+    _ensure_ipfs_accelerate_path()
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_retry_budget_findings as accelerator_record_retry_budget_findings,
     )
-    logger.info("Committed retry-budget generated outputs: %s", commit_results)
+
+    task_prefix = _task_prefix_from_header(task_header_prefix)
+    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
+    validation_depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text) else []
+    inferred_repo_root = _git_toplevel_for_path(todo_path.parent) or REPO_ROOT
+    findings = accelerator_record_retry_budget_findings(
+        todo_path=todo_path,
+        events_path=events_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        task_header_prefix_value=task_header_prefix,
+        task_prefix=task_prefix,
+        validation_retry_budget=retry_budget,
+        merge_retry_budget=merge_retry_budget,
+        validation_depends_on=validation_depends_on,
+        discovery_output_path=_discovery_output_path(inferred_repo_root, discovery_dir),
+        commit_outputs=True,
+        repo_root=inferred_repo_root,
+        commit_subject="HAO: record retry-budget guardrail outputs",
+    )
+    for finding in findings:
+        if finding.get("failure_kind") == "validation":
+            finding.pop("failure_kind", None)
     return findings
 
 
