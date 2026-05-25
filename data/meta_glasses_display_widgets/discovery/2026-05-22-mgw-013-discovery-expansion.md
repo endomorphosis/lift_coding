@@ -11,7 +11,7 @@ MGW-013 investigated the implemented Swissknife, HandsFree backend, mobile DAT b
 ## Commands Run
 
 ```bash
-sed -n '130,190p' implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+sed -n '130,190p' implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.t'odo'.md
 sed -n '1,240p' implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 rg -n "MGW-013|Discovery Expansion|unknown unknowns|discovered|meta glasses|Swissknife|HandsFree|DAT bridge|Meta DAT" implementation_plan/docs tests data -S
 rg --files | rg 'swissknife|handsfree|meta_glasses|dat|display|widget|harness|external/ipfs_datasets'
