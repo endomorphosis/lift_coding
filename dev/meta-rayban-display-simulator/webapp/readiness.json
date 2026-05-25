@@ -1,5 +1,8 @@
 {
-  "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+  "schema": "handsfree.meta-rayban-display/webapp-readiness",
+  "schema_version": "0.1.0",
+  "package_id": "org.handsfree.meta_glasses.task-progress-simulator.webapp@1.0.0",
+  "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator/",
   "viewport": {
     "width": 600,
     "height": 600
@@ -10,6 +13,44 @@
   "dark_theme_supported": true,
   "min_contrast_ratio": 8.1,
   "app_connection_documented": true,
+  "hosting": {
+    "requires_publicly_available_https": true,
+    "publicly_available_https_note": "Host this directory at a publicly available HTTPS URL before loading it on glasses.",
+    "supported_static_hosts": [
+      "GitHub Pages",
+      "Netlify",
+      "Vercel"
+    ],
+    "meta_ai_app_onboarding": "Meta AI app > App Connections > Web apps",
+    "qr_registration_supported": true,
+    "qr_target": "deployment_url",
+    "native_dat_migration_gate": "Use this Web App package for glasses display validation before migrating the same manifest into the native iPhone DAT display bridge."
+  },
+  "static_files": [
+    "index.html",
+    "styles.css",
+    "app.js",
+    "manifest.webmanifest",
+    "readiness.json",
+    "icons/icon-52.png",
+    "icons/icon-192.png"
+  ],
+  "manifest": {
+    "path": "manifest.webmanifest",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "icons/icon-52.png",
+        "sizes": "52x52",
+        "type": "image/png"
+      },
+      {
+        "src": "icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  },
   "widgets": [
     {
       "widget_id": "org.handsfree.meta_glasses.task-progress-simulator@1.0.0",
@@ -17,7 +58,7 @@
       "render_path": "display-webapp",
       "fallback_render_path": "display-webapp",
       "webapp_target": true,
-      "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator",
+      "deployment_url": "https://example.com/glasses-display/widgets/task-progress-simulator/",
       "viewport": {
         "width": 600,
         "height": 600
