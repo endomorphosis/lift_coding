@@ -761,7 +761,13 @@ def _scan_findings_in_file(path: Path, *, repo_root: Path) -> list[dict[str, Any
     return findings
 
 
-def _scan_codebase_findings(repo_root: Path, *, max_findings: int, seen_fingerprints: set[str]) -> list[dict[str, Any]]:
+def _scan_codebase_findings(
+    repo_root: Path,
+    *,
+    max_findings: int,
+    seen_fingerprints: set[str],
+    exhaustive: bool = False,
+) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     for git_root in _discover_git_worktrees(repo_root):
         for path in _tracked_files(git_root):
@@ -770,9 +776,11 @@ def _scan_codebase_findings(repo_root: Path, *, max_findings: int, seen_fingerpr
             for finding in _scan_findings_in_file(path, repo_root=repo_root):
                 if finding["fingerprint"] in seen_fingerprints:
                     continue
-                findings.append(finding)
-                seen_fingerprints.add(str(finding["fingerprint"]))
-                if len(findings) >= max_findings:
+                if len(findings) < max_findings:
+                    findings.append(finding)
+                    seen_fingerprints.add(str(finding["fingerprint"]))
+                    continue
+                if not exhaustive:
                     return findings
     return findings
 
@@ -847,13 +855,26 @@ def record_codebase_scan_findings(
         return []
     todo_text = todo_path.read_text(encoding="utf-8")
     task_ids = set(_task_ids_from_todo(todo_text))
-    if not force and _open_task_count(todo_text) > min_open_tasks:
+    open_task_count = _open_task_count(todo_text)
+    if not force and open_task_count > min_open_tasks:
         return []
 
     strategy = _load_strategy(strategy_path)
     now = datetime.now(timezone.utc)
+    task_count = len(task_ids)
+    drained_backlog = open_task_count == 0
+    try:
+        last_drained_scan_task_count = int(strategy.get("last_drained_codebase_scan_task_count") or -1)
+    except (TypeError, ValueError):
+        last_drained_scan_task_count = -1
+    drained_scan_due = drained_backlog and last_drained_scan_task_count != task_count
     last_scan_at = _parse_iso_timestamp(str(strategy.get("last_codebase_scan_at") or ""))
-    if not force and last_scan_at is not None and (now - last_scan_at).total_seconds() < cooldown_seconds:
+    if (
+        not force
+        and not drained_scan_due
+        and last_scan_at is not None
+        and (now - last_scan_at).total_seconds() < cooldown_seconds
+    ):
         return []
 
     seen = {
@@ -861,8 +882,16 @@ def record_codebase_scan_findings(
         for item in strategy.get("codebase_scan_seen_fingerprints", [])
         if str(item).strip()
     }
-    findings = _scan_codebase_findings(repo_root, max_findings=max_findings, seen_fingerprints=seen)
+    findings = _scan_codebase_findings(
+        repo_root,
+        max_findings=max_findings,
+        seen_fingerprints=seen,
+        exhaustive=drained_scan_due,
+    )
     strategy["last_codebase_scan_at"] = _utc_now()
+    strategy["last_codebase_scan_mode"] = "drained_exhaustive" if drained_scan_due else "low_backlog"
+    if drained_backlog:
+        strategy["last_drained_codebase_scan_task_count"] = task_count
     strategy["codebase_scan_seen_fingerprints"] = sorted(seen)
     if not findings:
         strategy["last_codebase_scan_findings"] = []
