@@ -220,7 +220,7 @@ HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false
 
 - `direct_import`: keep local adapters available so provider or submodule regressions do not block rollback.
 - `mcp_remote`: preserve transport, timeout, and provider-specific configuration so remote execution can fall back safely.
-- `daemon_mediated`: keep the repo-local todo board, state snapshots, and isolated worktrees as the rollback-safe source of truth.
+- `daemon_mediated`: keep the repo-local backlog board, state snapshots, and isolated worktrees as the rollback-safe source of truth.
 - `swissknife_orb`: treat Swissknife as a reviewed runtime surface and avoid speculative MCP++ rewiring while source remains distributed.
 - `mobile_remote_terminal`: require native-display-unavailable fallbacks so Meta-glasses actions degrade to safe mobile/web surfaces.
 
