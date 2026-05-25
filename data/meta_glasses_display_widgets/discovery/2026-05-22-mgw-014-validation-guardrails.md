@@ -22,7 +22,7 @@ The task agents then proved the same Android bridge-only build passed when `JAVA
 
 ## Guardrails
 
-- The display-widget daemon and supervisor wrappers now bootstrap `JAVA_HOME`, `ANDROID_HOME`, `ANDROID_SDK_ROOT`, and `PATH` from repo-local `.tools` paths before importing or spawning the upstream todo daemon.
+- The display-widget daemon and supervisor wrappers now bootstrap `JAVA_HOME`, `ANDROID_HOME`, `ANDROID_SDK_ROOT`, and `PATH` from repo-local `.tools` paths before importing or spawning the upstream implementation-daemon package.
 - The supervisor-managed child daemon command is routed through `scripts/meta_glasses_display_todo_daemon.py`, so the child process also enforces the same environment.
 - Bare Android Gradle validation commands in the MGW board are normalized to include the repo-local JDK/Android SDK environment.
 - Repeated validation failures now have a retry budget. For active non-completed tasks, the wrapper writes a discovery report, appends a daemon-parseable follow-up MGW task, and adds the source task to strategy `blocked_tasks` instead of allowing indefinite retries.
