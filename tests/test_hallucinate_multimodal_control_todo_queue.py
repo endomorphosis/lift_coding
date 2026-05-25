@@ -1052,6 +1052,146 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
     assert not list((repo / "discovery").glob("*-objective-gap-*.md"))
 
 
+def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+
+    todo_path = repo / "todo.md"
+    objective_path = repo / "objective-heap.md"
+    shell_docs = repo / "docs" / "operator_shell.md"
+    harness_test = repo / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts"
+    shell_docs.parent.mkdir()
+    harness_test.parent.mkdir(parents=True)
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    objective_path.write_text(
+        """# Objective Heap
+
+## VAIOS-G040 Operator shell and virtual desktop
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 8
+- Track: ui
+- Priority: P1
+- Goal: Prove the operator shell evidence.
+- Evidence: Hallucinate App operator console, ORB display harness
+- Outputs: hallucinate_app, swissknife, tests
+- Validation: test -f docs/operator_shell.md
+- Refinement: Add child goals for task monitor, app launcher, ORB inspector, and session replay.
+- Gap task: Add the missing operator shell proof.
+""",
+        encoding="utf-8",
+    )
+    shell_docs.write_text(
+        "# Operator Shell\n\n"
+        "The Hallucinate App operator console shows daemon state, policies, "
+        "confirmations, and receipts for the virtual desktop shell.\n",
+        encoding="utf-8",
+    )
+    harness_test.write_text(
+        "describe('ORB display harness', () => {\n"
+        "  it('records descriptor, invocation, receipt, and session state', () => {});\n"
+        "});\n",
+        encoding="utf-8",
+    )
+    _git(
+        repo,
+        "add",
+        "todo.md",
+        "objective-heap.md",
+        "docs/operator_shell.md",
+        "test/mcp-plus-plus/meta-glasses-display-harness.test.ts",
+    )
+    _git(repo, "commit", "-m", "seed covered operator shell objective")
+
+    findings = daemon_module.record_objective_goal_findings(
+        todo_path=todo_path,
+        state_path=None,
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        objective_path=objective_path,
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert findings == []
+    assert "HAO-002" not in todo_path.read_text(encoding="utf-8")
+    assert not list((repo / "discovery").glob("*-objective-gap-*.md"))
+
+
+def test_operator_shell_evidence_terms_are_tracked_outside_generated_artifacts():
+    operator_sources = [
+        REPO_ROOT / "hallucinate_app" / "index.js",
+        REPO_ROOT / "hallucinate_app" / "docs" / "SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md",
+    ]
+    harness_sources = [
+        REPO_ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts",
+        REPO_ROOT / "hallucinate_app" / "docs" / "SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md",
+    ]
+
+    assert any(
+        "Hallucinate App operator console" in path.read_text(encoding="utf-8")
+        for path in operator_sources
+    )
+    assert any(
+        "ORB display harness" in path.read_text(encoding="utf-8")
+        for path in harness_sources
+    )
+
+
+def test_operator_shell_objective_heap_has_child_goals():
+    heap = (REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md").read_text(
+        encoding="utf-8"
+    )
+
+    def section_for(goal_id: str) -> str:
+        marker = f"## {goal_id} "
+        start = heap.index(marker)
+        next_start = heap.find("\n## VAIOS-", start + len(marker))
+        if next_start == -1:
+            next_start = len(heap)
+        return heap[start:next_start]
+
+    parent_section = section_for("VAIOS-G040")
+    assert "Hallucinate App operator console" in parent_section
+    assert "ORB display harness" in parent_section
+    assert "HAO-064 proof" in parent_section
+
+    child_expectations = {
+        "VAIOS-G041": "task monitor",
+        "VAIOS-G042": "app launcher",
+        "VAIOS-G043": "ORB inspector",
+        "VAIOS-G044": "session replay",
+    }
+    for goal_id, evidence in child_expectations.items():
+        child = section_for(goal_id)
+        assert "- Parent: VAIOS-G040" in child
+        assert "- Refinement depth: 2" in child
+        assert evidence in child
+
+
 def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"
