@@ -923,6 +923,12 @@ def _objective_evidence_index(
     evidence = {term: [] for term in normalized_terms}
     if not normalized_terms:
         return evidence
+    for term in normalized_terms:
+        if not _repo_relative_path_safe(term):
+            continue
+        candidate = repo_root / term
+        if candidate.exists():
+            evidence[term].append(Path(term).as_posix())
     lowered_terms = {term: term.lower() for term in normalized_terms}
     for path in _objective_candidate_files(repo_root, objective_path=objective_path):
         root_relative = _root_relative_path(repo_root, path)

@@ -801,7 +801,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
 - Track: mobile
 - Priority: P1
 - Goal: Prove the glasses are a remote terminal for the virtual AI OS.
-- Evidence: capability registry, meta_glasses_terminal_e2e_contract
+- Evidence: objective-heap.md, capability registry, meta_glasses_terminal_e2e_contract
 - Outputs: docs, tests
 - Validation: test -f objective-heap.md
 - Refinement: Add child goals if the remote-terminal proof is too broad.
