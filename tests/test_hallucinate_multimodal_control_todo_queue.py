@@ -454,6 +454,126 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     assert "swissknife" in discovery
 
 
+def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    app = repo / "hallucinate_app"
+    source = app / "python" / "hallucinate_app" / "scan_target.py"
+    source.parent.mkdir(parents=True)
+
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    _git(app, "init")
+    _git(app, "checkout", "-b", "main")
+    _git(app, "config", "user.name", "Test User")
+    _git(app, "config", "user.email", "test@example.invalid")
+    source.write_text("def unresolved():\n    # FIXME: handle policy receipt collision\n    return None\n", encoding="utf-8")
+    _git(app, "add", "python/hallucinate_app/scan_target.py")
+    _git(app, "commit", "-m", "app scan target")
+
+    todo_path = repo / "todo.md"
+    discovery_dir = repo / "discovery"
+    strategy_path = tmp_path / "strategy.json"
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "hallucinate_app")
+    _git(repo, "commit", "-m", "root seed")
+
+    findings = daemon_module.record_codebase_scan_findings(
+        todo_path=todo_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert len(findings) == 1
+    assert findings[0]["follow_up_task_id"] == "HAO-002"
+    assert "hallucinate_app/python/hallucinate_app/scan_target.py:2" == findings[0]["source"]
+    updated = todo_path.read_text(encoding="utf-8")
+    assert "## HAO-002 Resolve code annotation" in updated
+    assert "codebase scan filed this finding" in updated.lower()
+
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+
+    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
+    assert tasks["HAO-002"].track == "runtime"
+    assert "py_compile" in tasks["HAO-002"].validation[0]
+    assert discovery_dir.exists()
+    assert list(discovery_dir.glob("*-hao-002-codebase-scan-*.md"))
+    assert not daemon_module.record_codebase_scan_findings(
+        todo_path=todo_path,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        repo_root=repo,
+        min_open_tasks=100,
+        max_findings=1,
+        cooldown_seconds=0,
+        force=True,
+    )
+
+
+def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "todo.md").write_text(
+        """# Temporary Board
+
+## HAO-001 Existing work
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: todo.md
+- Validation: true
+- Acceptance: Existing work remains.
+""",
+        encoding="utf-8",
+    )
+    (repo / "scan_target.py").write_text("# TODO: this should wait for backlog drain\n", encoding="utf-8")
+    _git(repo, "add", "todo.md", "scan_target.py")
+    _git(repo, "commit", "-m", "seed")
+
+    findings = daemon_module.record_codebase_scan_findings(
+        todo_path=repo / "todo.md",
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert findings == []
+    assert "HAO-002" not in (repo / "todo.md").read_text(encoding="utf-8")
+
+
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
     from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon

@@ -6,10 +6,12 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import shlex
 import subprocess
 import sys
 import time
+from hashlib import sha1
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -23,6 +25,43 @@ DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / 
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
+CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", "5"))
+CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
+CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
+CODEBASE_SCAN_MAX_FILE_BYTES = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FILE_BYTES", "262144"))
+CODEBASE_SCAN_SUFFIXES = {
+    ".cjs",
+    ".css",
+    ".html",
+    ".js",
+    ".json",
+    ".jsx",
+    ".md",
+    ".mjs",
+    ".py",
+    ".rs",
+    ".sh",
+    ".ts",
+    ".tsx",
+    ".yaml",
+    ".yml",
+}
+CODEBASE_SCAN_SKIP_PARTS = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "__pycache__",
+    "build",
+    "dist",
+    "node_modules",
+    "playwright-report",
+    "test-results",
+}
+CODEBASE_SCAN_SKIP_PREFIXES = (
+    "data/hallucinate_multimodal_control/state/",
+    "data/hallucinate_multimodal_control/worktrees/",
+)
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
@@ -145,6 +184,25 @@ def _task_ids_from_todo(todo_text: str) -> list[str]:
     return task_ids
 
 
+def _task_statuses_from_todo(todo_text: str) -> dict[str, str]:
+    statuses: dict[str, str] = {}
+    current_task_id = ""
+    for line in todo_text.splitlines():
+        if line.startswith("## HAO-"):
+            parts = line[3:].strip().split(" ", 1)
+            current_task_id = parts[0] if parts else ""
+            continue
+        if current_task_id and line.startswith("- Status:"):
+            statuses[current_task_id] = line.split(":", 1)[1].strip().lower()
+            current_task_id = ""
+    return statuses
+
+
+def _open_task_count(todo_text: str) -> int:
+    statuses = _task_statuses_from_todo(todo_text)
+    return sum(1 for status in statuses.values() if status not in {"completed", "blocked"})
+
+
 def _next_hao_task_id(todo_text: str) -> str:
     highest = 0
     for task_id in _task_ids_from_todo(todo_text):
@@ -153,6 +211,18 @@ def _next_hao_task_id(todo_text: str) -> str:
         except (IndexError, ValueError):
             continue
     return f"HAO-{highest + 1:03d}"
+
+
+def _parse_iso_timestamp(value: str) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
 
 
 def _load_strategy(path: Path) -> dict[str, Any]:
@@ -502,6 +572,335 @@ def _merge_retry_budget_task_block(
 """
 
 
+def _path_is_under(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root.resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def _codebase_scan_path_skipped(path: Path, *, repo_root: Path) -> bool:
+    try:
+        relative = path.resolve().relative_to(repo_root.resolve()).as_posix()
+    except ValueError:
+        relative = path.as_posix()
+    if any(relative == prefix.rstrip("/") or relative.startswith(prefix) for prefix in CODEBASE_SCAN_SKIP_PREFIXES):
+        return True
+    return any(part in CODEBASE_SCAN_SKIP_PARTS for part in path.parts)
+
+
+def _discover_git_worktrees(repo_root: Path) -> list[Path]:
+    roots: list[Path] = []
+    seen: set[str] = set()
+
+    def add_if_worktree(candidate: Path) -> None:
+        top = _git_toplevel_for_path(candidate)
+        if top is None:
+            return
+        resolved = top.resolve()
+        if not _path_is_under(resolved, repo_root):
+            return
+        key = str(resolved)
+        if key not in seen:
+            seen.add(key)
+            roots.append(resolved)
+
+    add_if_worktree(repo_root)
+    for current, dirnames, _filenames in os.walk(repo_root):
+        current_path = Path(current)
+        dirnames[:] = [
+            dirname
+            for dirname in dirnames
+            if dirname not in CODEBASE_SCAN_SKIP_PARTS
+            and not _codebase_scan_path_skipped(current_path / dirname, repo_root=repo_root)
+        ]
+        if current_path != repo_root and (current_path / ".git").exists():
+            add_if_worktree(current_path)
+            dirnames[:] = []
+            continue
+    return roots
+
+
+def _tracked_files(repo: Path) -> list[Path]:
+    result = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=repo,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return []
+    files: list[Path] = []
+    for raw_path in result.stdout.split(b"\0"):
+        if not raw_path:
+            continue
+        relative = raw_path.decode("utf-8", errors="surrogateescape")
+        if not _repo_relative_path_safe(relative):
+            continue
+        path = repo / relative
+        if path.is_file():
+            files.append(path)
+    return files
+
+
+def _root_relative_path(repo_root: Path, path: Path) -> str:
+    try:
+        return path.resolve().relative_to(repo_root.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _file_is_scan_candidate(path: Path, *, repo_root: Path) -> bool:
+    if _codebase_scan_path_skipped(path, repo_root=repo_root):
+        return False
+    if "-codebase-scan-" in path.name or "retry-budget" in path.name:
+        return False
+    if path.name == "todo.md" or path.name.endswith(".todo.md"):
+        return False
+    if path.suffix.lower() not in CODEBASE_SCAN_SUFFIXES:
+        return False
+    try:
+        if path.stat().st_size > CODEBASE_SCAN_MAX_FILE_BYTES:
+            return False
+    except OSError:
+        return False
+    return True
+
+
+def _scan_fingerprint(*, kind: str, root_relative_path: str, line_number: int, snippet: str) -> str:
+    normalized = " ".join(snippet.strip().split())
+    payload = f"{kind}\0{root_relative_path}\0{line_number}\0{normalized}"
+    return sha1(payload.encode("utf-8")).hexdigest()
+
+
+def _scan_track_for_path(path: str) -> str:
+    lowered = path.lower()
+    if "/test/" in lowered or lowered.startswith("tests/") or "test_" in Path(lowered).name:
+        return "quality"
+    if "ui" in Path(lowered).parts or "frontend" in Path(lowered).parts:
+        return "ui"
+    if lowered.endswith((".md", ".rst")):
+        return "docs"
+    if lowered.endswith((".py", ".rs", ".sh")):
+        return "runtime"
+    return "ops"
+
+
+def _scan_validation_for_path(root_relative_path: str) -> str:
+    quoted = shlex.quote(root_relative_path)
+    suffix = Path(root_relative_path).suffix.lower()
+    if suffix == ".py":
+        return f"python3 -m py_compile {quoted}"
+    if suffix in {".json"}:
+        return f"python3 -m json.tool {quoted} >/dev/null"
+    if suffix in {".yaml", ".yml"}:
+        return f"python3 -c {shlex.quote('import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding=\"utf-8\").strip()')} {quoted}"
+    return f"test -f {quoted}"
+
+
+def _scan_findings_in_file(path: Path, *, repo_root: Path) -> list[dict[str, Any]]:
+    root_relative = _root_relative_path(repo_root, path)
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return []
+    findings: list[dict[str, Any]] = []
+    for index, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        lowered = stripped.lower()
+        kind = ""
+        priority = "P2"
+        summary = ""
+        if re.search(r"\b(todo|fixme|hack|xxx)\b", stripped, flags=re.IGNORECASE):
+            kind = "annotated_followup"
+            priority = "P2" if re.search(r"\b(fixme|hack|xxx)\b", stripped, flags=re.IGNORECASE) else "P3"
+            summary = f"Resolve code annotation in {root_relative}:{index}"
+        elif re.search(r"\bexcept\s*:\s*$", stripped) or re.search(r"\bexcept\s+Exception\b", stripped):
+            window = "\n".join(lines[index : min(len(lines), index + 3)]).lower()
+            if "pass" in window or "return none" in window:
+                kind = "swallowed_exception"
+                priority = "P1"
+                summary = f"Review swallowed exception path in {root_relative}:{index}"
+        elif "assert false" in lowered or "raise notimplementederror" in lowered:
+            kind = "placeholder_runtime_path"
+            priority = "P1"
+            summary = f"Replace placeholder runtime path in {root_relative}:{index}"
+        if not kind:
+            continue
+        fingerprint = _scan_fingerprint(
+            kind=kind,
+            root_relative_path=root_relative,
+            line_number=index,
+            snippet=stripped,
+        )
+        findings.append(
+            {
+                "kind": kind,
+                "priority": priority,
+                "track": _scan_track_for_path(root_relative),
+                "root_relative_path": root_relative,
+                "line_number": index,
+                "snippet": stripped[:240],
+                "summary": summary,
+                "validation": _scan_validation_for_path(root_relative),
+                "fingerprint": fingerprint,
+            }
+        )
+    return findings
+
+
+def _scan_codebase_findings(repo_root: Path, *, max_findings: int, seen_fingerprints: set[str]) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
+    for git_root in _discover_git_worktrees(repo_root):
+        for path in _tracked_files(git_root):
+            if not _file_is_scan_candidate(path, repo_root=repo_root):
+                continue
+            for finding in _scan_findings_in_file(path, repo_root=repo_root):
+                if finding["fingerprint"] in seen_fingerprints:
+                    continue
+                findings.append(finding)
+                seen_fingerprints.add(str(finding["fingerprint"]))
+                if len(findings) >= max_findings:
+                    return findings
+    return findings
+
+
+def _write_codebase_scan_discovery(*, discovery_dir: Path, follow_up_task_id: str, finding: dict[str, Any]) -> Path:
+    date = datetime.now(timezone.utc).date().isoformat()
+    short_fingerprint = str(finding["fingerprint"])[:12]
+    path = discovery_dir / f"{date}-{follow_up_task_id.lower()}-codebase-scan-{short_fingerprint}.md"
+    discovery_dir.mkdir(parents=True, exist_ok=True)
+    content = f"""# {follow_up_task_id} Codebase Scan Finding
+
+Date: {date}
+Fingerprint: {finding["fingerprint"]}
+Kind: {finding["kind"]}
+Source: {finding["root_relative_path"]}:{finding["line_number"]}
+Priority: {finding["priority"]}
+Track: {finding["track"]}
+
+## Evidence
+
+```text
+{finding["snippet"]}
+```
+
+## Suggested Handling
+
+Review the finding in context, decide whether it represents a bug, missing test,
+maintenance risk, or false positive, and land a small fix with validation. If the
+finding is a false positive, document why in the changed code or discovery notes
+so the supervisor does not keep re-adding the same work.
+"""
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+def _codebase_scan_task_block(
+    *,
+    follow_up_task_id: str,
+    finding: dict[str, Any],
+    discovery_path: Path,
+    depends_on: list[str],
+) -> str:
+    outputs = ["data/hallucinate_multimodal_control/discovery", str(finding["root_relative_path"])]
+    return f"""## {follow_up_task_id} {finding["summary"]}
+
+- Status: todo
+- Completion: manual
+- Priority: {finding["priority"]}
+- Track: {finding["track"]}
+- Depends on: {", ".join(depends_on)}
+- Outputs: {", ".join(outputs)}
+- Validation: {finding["validation"]}
+- Acceptance: Codebase scan filed this finding from {finding["root_relative_path"]}:{finding["line_number"]}. Use evidence in {discovery_path}, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+"""
+
+
+def record_codebase_scan_findings(
+    *,
+    todo_path: Path = DEFAULT_TODO_PATH,
+    strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    discovery_dir: Path = DISCOVERY_DIR,
+    task_header_prefix: str = "## HAO-",
+    repo_root: Path = REPO_ROOT,
+    min_open_tasks: int = CODEBASE_SCAN_MIN_OPEN_TASKS,
+    max_findings: int = CODEBASE_SCAN_MAX_FINDINGS,
+    cooldown_seconds: int = CODEBASE_SCAN_COOLDOWN_SECONDS,
+    force: bool = False,
+) -> list[dict[str, Any]]:
+    """Feed the HAO board with static codebase scan findings when backlog runs low."""
+
+    if max_findings <= 0 or not todo_path.exists():
+        return []
+    todo_text = todo_path.read_text(encoding="utf-8")
+    task_ids = set(_task_ids_from_todo(todo_text))
+    if not force and _open_task_count(todo_text) > min_open_tasks:
+        return []
+
+    strategy = _load_strategy(strategy_path)
+    now = datetime.now(timezone.utc)
+    last_scan_at = _parse_iso_timestamp(str(strategy.get("last_codebase_scan_at") or ""))
+    if not force and last_scan_at is not None and (now - last_scan_at).total_seconds() < cooldown_seconds:
+        return []
+
+    seen = {
+        str(item)
+        for item in strategy.get("codebase_scan_seen_fingerprints", [])
+        if str(item).strip()
+    }
+    findings = _scan_codebase_findings(repo_root, max_findings=max_findings, seen_fingerprints=seen)
+    strategy["last_codebase_scan_at"] = _utc_now()
+    strategy["codebase_scan_seen_fingerprints"] = sorted(seen)
+    if not findings:
+        strategy["last_codebase_scan_findings"] = []
+        _save_strategy(strategy_path, strategy)
+        return []
+
+    generated_paths: list[Path] = []
+    appended: list[dict[str, Any]] = []
+    depends_on = ["HAO-013"] if "HAO-013" in task_ids else []
+    for finding in findings:
+        follow_up_task_id = _next_hao_task_id(todo_text)
+        discovery_path = _write_codebase_scan_discovery(
+            discovery_dir=discovery_dir,
+            follow_up_task_id=follow_up_task_id,
+            finding=finding,
+        )
+        task_block = _codebase_scan_task_block(
+            follow_up_task_id=follow_up_task_id,
+            finding=finding,
+            discovery_path=discovery_path,
+            depends_on=depends_on,
+        )
+        todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
+        task_ids.add(follow_up_task_id)
+        generated_paths.append(discovery_path)
+        appended.append(
+            {
+                "follow_up_task_id": follow_up_task_id,
+                "fingerprint": finding["fingerprint"],
+                "kind": finding["kind"],
+                "source": f"{finding['root_relative_path']}:{finding['line_number']}",
+                "discovery_path": str(discovery_path),
+            }
+        )
+
+    todo_path.write_text(todo_text, encoding="utf-8")
+    strategy["last_codebase_scan_findings"] = appended
+    _save_strategy(strategy_path, strategy)
+    generated_paths.insert(0, todo_path)
+    commit_results = _commit_generated_retry_budget_outputs(
+        generated_paths,
+        subject="HAO: record codebase scan backlog findings",
+    )
+    logger.info("Committed codebase-scan generated outputs: %s", commit_results)
+    return appended
+
+
 def record_retry_budget_findings(
     *,
     todo_path: Path = DEFAULT_TODO_PATH,
@@ -690,6 +1089,15 @@ def main(argv: list[str] | None = None) -> None:
     )
 
     while True:
+        scan_findings = record_codebase_scan_findings(
+            todo_path=parsed.todo_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
+        if scan_findings:
+            logger.warning("Recorded Hallucinate codebase-scan findings before daemon pass: %s", scan_findings)
         findings = record_retry_budget_findings(
             todo_path=parsed.todo_path,
             events_path=events_path,
@@ -709,6 +1117,15 @@ def main(argv: list[str] | None = None) -> None:
         )
         if findings:
             logger.warning("Recorded Hallucinate retry-budget findings after daemon pass: %s", findings)
+        scan_findings = record_codebase_scan_findings(
+            todo_path=parsed.todo_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
+        if scan_findings:
+            logger.warning("Recorded Hallucinate codebase-scan findings after daemon pass: %s", scan_findings)
         logger.info("Hallucinate multimodal-control daemon pass complete: %s", result)
         if parsed.once:
             break

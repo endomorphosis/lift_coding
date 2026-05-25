@@ -23,6 +23,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     IPFS_DATASETS_ROOT,
     DISCOVERY_DIR,
     ensure_hallucinate_multimodal_bootstrap_paths,
+    record_codebase_scan_findings,
     record_retry_budget_findings,
 )
 
@@ -256,6 +257,13 @@ def main(argv: list[str] | None = None) -> None:
     strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
     events_path = parsed.state_dir / f"{parsed.state_prefix}_supervisor_events.jsonl"
     daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
+    record_codebase_scan_findings(
+        todo_path=parsed.todo_path,
+        strategy_path=strategy_path,
+        discovery_dir=DISCOVERY_DIR,
+        task_header_prefix=parsed.task_prefix,
+        repo_root=REPO_ROOT,
+    )
     record_retry_budget_findings(
         todo_path=parsed.todo_path,
         events_path=daemon_events_path,
@@ -301,6 +309,13 @@ def main(argv: list[str] | None = None) -> None:
     )
     if parsed.once:
         result = supervisor.run_once()
+        record_codebase_scan_findings(
+            todo_path=parsed.todo_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
         record_retry_budget_findings(
             todo_path=parsed.todo_path,
             events_path=daemon_events_path,
