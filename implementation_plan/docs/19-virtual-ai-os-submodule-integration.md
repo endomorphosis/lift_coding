@@ -335,7 +335,7 @@ Build a layered test matrix:
 
 ### Phase 3: autonomous supervised execution
 
-- let the todo daemon/supervisor advance backlog items in isolated worktrees
+- run the repo-local backlog daemon and implementation supervisor to advance queued work in isolated worktrees
 - require evidence-backed validation and retry-budget handling
 
 ### Phase 4: physical rollout and observability
