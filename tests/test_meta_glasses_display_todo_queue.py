@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
 
 
@@ -25,8 +25,8 @@ def _load_script_module(name: str):
 
 
 def _load_tasks():
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TODO_PATH, "## MGW-")
 
@@ -229,7 +229,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         retry_budget=3,
     )
 
-    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-014-mgw-001-retry-budget.md"
+    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-015-mgw-001-retry-budget.md"
     assert findings == [
         {
             "source_task_id": "MGW-001",
@@ -244,8 +244,8 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     assert "Depends on: MGW-014" in updated
     assert "env JAVA_HOME=" in updated
 
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## MGW-")}
     assert tasks["MGW-015"].depends_on == ["MGW-014"]

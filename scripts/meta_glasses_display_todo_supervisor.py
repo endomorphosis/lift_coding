@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the ipfs_datasets_py todo supervisor for display-widget work."""
+"""Run the accelerator todo supervisor for display-widget work."""
 
 from __future__ import annotations
 
@@ -10,7 +10,6 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
@@ -25,8 +24,10 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from meta_glasses_display_todo_daemon import (  # noqa: E402
     _bootstrap_android_validation_env,
+    _ensure_runtime_pythonpath,
     android_validation_environment,
     enforce_android_validation_environment,
+    META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
     record_retry_budget_findings,
 )
 
@@ -40,7 +41,7 @@ DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns an
 - Track: ops
 - Depends on: {INITIAL_BACKLOG_DEPENDENCIES}
 - Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
-- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: After the initial backlog completes, investigate the Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT references, and hardware-free test harness code paths for missed work. Append new daemon-parseable MGW tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
 """
 
@@ -52,7 +53,7 @@ SUPERVISOR_GUARDRAIL_TASK = """## MGW-014 Add supervisor validation-environment 
 - Track: ops
 - Depends on: MGW-013
 - Outputs: scripts/meta_glasses_display_todo_supervisor.py, scripts/meta_glasses_display_todo_daemon.py, tests/test_meta_glasses_display_todo_queue.py, data/meta_glasses_display_widgets/discovery
-- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; PYTHONPATH=external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
 - Acceptance: Discovered during MGW-010: Android validation needs the repo-local JDK 17/Android SDK environment, and repeated validation failures should become evidence-backed discovery follow-up items instead of indefinite retry loops. The supervisor documents/enforces the validation environment and records retry-budget findings as daemon-parseable backlog work.
 """
 
@@ -95,7 +96,7 @@ def validation_environment_summary() -> dict[str, object]:
 
 
 def _run_supervisor(argv: list[str]) -> None:
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor import (
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
         parse_args,
@@ -135,6 +136,7 @@ def _run_supervisor(argv: list[str]) -> None:
             implementation_timeout=parsed.implementation_timeout,
             use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
             worktree_root=parsed.worktree_root,
+            worktree_submodule_paths=tuple(parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS),
             repo_root=REPO_ROOT,
             daemon_script_path=DAEMON_SCRIPT_PATH,
         )
@@ -159,11 +161,7 @@ def main(argv: list[str] | None = None) -> None:
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(TODO_PATH)
     enforce_android_validation_environment(TODO_PATH)
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    existing = os.environ.get("PYTHONPATH", "")
-    os.environ["PYTHONPATH"] = os.pathsep.join(
-        [str(IPFS_DATASETS_ROOT), existing] if existing else [str(IPFS_DATASETS_ROOT)]
-    )
+    _ensure_runtime_pythonpath()
 
     args = _with_default(args, "--todo-path", str(TODO_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))

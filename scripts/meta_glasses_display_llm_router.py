@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Use ipfs_datasets_py.llm_router to prepare display-widget task proposals."""
+"""Use the accelerator LLM helper to prepare display-widget task proposals."""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
@@ -19,9 +20,11 @@ ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router
 
 def _bootstrap_imports() -> None:
     os.chdir(REPO_ROOT)
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    for path in (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT):
+        if str(path) not in sys.path:
+            sys.path.insert(0, str(path))
     existing = os.environ.get("PYTHONPATH", "")
-    paths = [str(IPFS_DATASETS_ROOT)]
+    paths = [str(IPFS_ACCELERATE_ROOT), str(IPFS_DATASETS_ROOT)]
     if existing:
         paths.append(existing)
     os.environ["PYTHONPATH"] = os.pathsep.join(paths)
@@ -85,8 +88,8 @@ def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     _bootstrap_imports()
 
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
-    from ipfs_datasets_py.optimizers.todo_daemon.llm import LlmRouterInvocation, call_llm_router
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.llm import LlmRouterInvocation, call_llm_router
 
     tasks = parse_task_file(args.todo_path, "## MGW-")
     selected = _select_task(tasks, args.task_id)

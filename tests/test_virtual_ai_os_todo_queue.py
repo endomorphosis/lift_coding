@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.todo.md"
 
 
@@ -23,8 +23,8 @@ def _load_script_module(name: str):
 
 
 def _load_tasks():
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TODO_PATH, "## VAI-")
 

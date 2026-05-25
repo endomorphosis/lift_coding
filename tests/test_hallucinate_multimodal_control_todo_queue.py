@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
 
 
@@ -24,8 +24,8 @@ def _load_script_module(name: str):
 
 
 def _load_tasks():
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TODO_PATH, "## HAO-")
 
@@ -82,8 +82,8 @@ def test_hallucinate_autopilot_defaults_to_implement():
 
 
 def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
 
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -118,8 +118,8 @@ def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
 
 
 def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon, PortalTask
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon, PortalTask
 
     repo = tmp_path / "repo"
     parent = repo / "hallucinate_app"
@@ -170,8 +170,8 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
 
 
 def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
 
     repo = tmp_path / "repo"
     parent = repo / "hallucinate_app"
@@ -315,8 +315,8 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     assert "## HAO-014 Resolve validation retry-budget failure for HAO-003" in updated
     assert "Depends on: HAO-013" in updated
 
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-014"].depends_on == ["HAO-013"]
@@ -439,8 +439,8 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     assert "## HAO-006 Resolve merge retry-budget failure for HAO-005" in updated
     assert "Depends on: HAO-004" in updated
 
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-006"].depends_on == ["HAO-004"]
@@ -553,8 +553,8 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     assert "## HAO-002 Resolve code annotation" in updated
     assert "codebase scan filed this finding" in updated.lower()
 
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-002"].track == "runtime"
@@ -878,8 +878,8 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert "- Bundle: " in updated
     assert "- Graph parents: VAIOS-G000" in updated
 
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-002"].priority == "P1"
@@ -1251,8 +1251,8 @@ def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
 
 
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
 
     repo = tmp_path / "repo"
     app = repo / "hallucinate_app"
@@ -1310,8 +1310,8 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
 
 
 def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
 
     repo = tmp_path / "repo"
     discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "finding.md"
@@ -1373,8 +1373,8 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
 
 
 def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path):
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import (
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         PortalImplementationDaemon,
         PortalTask,
     )

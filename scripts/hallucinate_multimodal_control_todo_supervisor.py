@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the ipfs_datasets_py todo supervisor for Hallucinate multimodal-control work."""
+"""Run the accelerator todo supervisor for Hallucinate multimodal-control work."""
 
 from __future__ import annotations
 
@@ -20,8 +20,9 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
-    IPFS_DATASETS_ROOT,
     DISCOVERY_DIR,
+    HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+    _ensure_runtime_pythonpath,
     ensure_hallucinate_multimodal_bootstrap_paths,
     record_codebase_scan_findings,
     record_objective_goal_findings,
@@ -197,10 +198,8 @@ def ensure_hallucinate_supervisor_running(argv: list[str], *, state_dir: Path, s
     paths = _hallucinate_supervisor_runtime_paths(state_dir, state_prefix)
     launch_args = _background_supervisor_args(argv)
     command = [sys.executable, str(Path(__file__).resolve()), *launch_args]
+    _ensure_runtime_pythonpath()
     env = dict(os.environ)
-    env["PYTHONPATH"] = os.pathsep.join(
-        [str(IPFS_DATASETS_ROOT), env["PYTHONPATH"]] if env.get("PYTHONPATH") else [str(IPFS_DATASETS_ROOT)]
-    )
     paths["wrapper_out"].parent.mkdir(parents=True, exist_ok=True)
     out_handle = paths["wrapper_out"].open("ab")
     try:
@@ -231,11 +230,7 @@ def main(argv: list[str] | None = None) -> None:
     ensure_running = _pop_bool_flag(args, "--ensure-running")
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     os.chdir(REPO_ROOT)
-    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
-    existing = os.environ.get("PYTHONPATH", "")
-    os.environ["PYTHONPATH"] = os.pathsep.join(
-        [str(IPFS_DATASETS_ROOT), existing] if existing else [str(IPFS_DATASETS_ROOT)]
-    )
+    _ensure_runtime_pythonpath()
 
     args = _with_default(args, "--todo-path", str(paths["todo_path"]))
     args = _with_default(args, "--state-dir", str(paths["state_dir"]))
@@ -243,7 +238,7 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
     args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
 
-    from ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor import (
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
         parse_args,
@@ -314,6 +309,7 @@ def main(argv: list[str] | None = None) -> None:
             implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
             use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
             worktree_root=parsed.worktree_root,
+            worktree_submodule_paths=tuple(parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS),
             repo_root=REPO_ROOT,
             daemon_script_path=DAEMON_SCRIPT_PATH,
         )
