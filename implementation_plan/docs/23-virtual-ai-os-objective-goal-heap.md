@@ -128,8 +128,89 @@ preserve the intent of the lane before the source task is unblocked.
 - Evidence: SwissKnife virtual desktop, Hallucinate App operator console, daemon manager, ORB display harness, test/mcp-plus-plus/meta-glasses-display-harness.test.ts
 - Outputs: swissknife, hallucinate_app, tests
 - Validation: test -f hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
+- HAO-064 proof: `hallucinate_app/index.js` exposes the Hallucinate App operator console evidence term in the Electron snapshot, `swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts` names the ORB display harness, and `hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md` ties both terms to the desktop shell.
 - Refinement: Add child goals for task monitor, app launcher, ORB inspector, and session replay.
 - Gap task: Add missing shell evidence that connects daemon state, ORB tools, and operator-visible UI.
+
+## VAIOS-G041 Operator shell task monitor
+
+- Status: active
+- Parent: VAIOS-G040
+- Fib priority: 8
+- Track: ui
+- Priority: P1
+- Bundle: objective/ui/operator-shell/task-monitor
+- Parallel lane: operator-shell
+- Refinement depth: 2
+- Embedding query: Hallucinate App operator console task monitor daemon task status pending confirmations receipts
+- AST query: OperatorConsole, getControlSurfaceSnapshot, daemon:getAll
+- Conflict policy: keep task state visible in the operator shell without duplicating daemon ownership
+- Goal: Operators can monitor daemon-backed task status, pending confirmations, and receipt counts from the Hallucinate App desktop shell.
+- Evidence: task monitor, daemon task status, pending confirmations, receipt diagnostics
+- Outputs: hallucinate_app, tests
+- Validation: rg -n "task monitor|daemon task status|pending confirmations|receipt diagnostics" hallucinate_app tests
+- Refinement: Add child goals for per-daemon task streams if task state outgrows the current console snapshot.
+- Gap task: Add missing task-monitor evidence that keeps daemon state visible to operators.
+
+## VAIOS-G042 Operator shell app launcher
+
+- Status: active
+- Parent: VAIOS-G040
+- Fib priority: 8
+- Track: ui
+- Priority: P1
+- Bundle: objective/ui/operator-shell/app-launcher
+- Parallel lane: operator-shell
+- Refinement depth: 2
+- Embedding query: SwissKnife virtual desktop app launcher Hallucinate App desktop shell MCP tool launch
+- AST query: createSwissKnifeWindow, openSwissKnifeApp, appLauncher
+- Conflict policy: preserve one primary SwissKnife launch path and add app-specific launch metadata without forking the desktop shell
+- Goal: Operators can launch SwissKnife virtual desktop apps and MCP tools from the Hallucinate App shell.
+- Evidence: app launcher, SwissKnife virtual desktop launch, MCP tool actions
+- Outputs: hallucinate_app, swissknife, tests
+- Validation: rg -n "app launcher|SwissKnife virtual desktop launch|MCP tool actions" hallucinate_app swissknife tests
+- Refinement: Add app-specific child goals only when a launched app needs independent policy or routing evidence.
+- Gap task: Add missing app-launcher evidence that proves tools are reachable from the desktop shell.
+
+## VAIOS-G043 Operator shell ORB inspector
+
+- Status: active
+- Parent: VAIOS-G040
+- Fib priority: 8
+- Track: ui
+- Priority: P1
+- Bundle: objective/ui/operator-shell/orb-inspector
+- Parallel lane: operator-shell
+- Refinement depth: 2
+- Embedding query: ORB inspector descriptor manifest invocation receipt operator console display harness
+- AST query: ORBDisplayHarness, MetaGlassesDisplayORBAdapter, getTaskMetadata, getSessionSnapshot
+- Conflict policy: expose ORB diagnostics through additive inspector state and keep adapter contracts stable
+- Goal: Operators can inspect ORB descriptor, manifest, invocation, receipt, and session state for display workflows.
+- Evidence: ORB inspector, ORB display harness, descriptor manifest, session snapshot
+- Outputs: swissknife, hallucinate_app, tests
+- Validation: rg -n "ORB inspector|ORB display harness|descriptor manifest|session snapshot" swissknife hallucinate_app tests
+- Refinement: Add inspector children for descriptor diffing, receipt search, and policy-denial drilldown if needed.
+- Gap task: Add missing ORB-inspector evidence for display workflow diagnostics.
+
+## VAIOS-G044 Operator shell session replay
+
+- Status: active
+- Parent: VAIOS-G040
+- Fib priority: 8
+- Track: ui
+- Priority: P1
+- Bundle: objective/ui/operator-shell/session-replay
+- Parallel lane: operator-shell
+- Refinement depth: 2
+- Embedding query: session replay mediation receipts ORB session snapshot operator visible workflow reconstruction
+- AST query: mediation_receipt, getSessionSnapshot, replay_task
+- Conflict policy: preserve receipts and session snapshots as append-only replay anchors
+- Goal: Operators can replay or reconstruct desktop, ORB, and mediation sessions from receipts and session snapshots.
+- Evidence: session replay, mediation receipts, ORB session snapshots, replay anchors
+- Outputs: hallucinate_app, swissknife, tests
+- Validation: rg -n "session replay|mediation receipts|ORB session snapshots|replay anchors" hallucinate_app swissknife tests
+- Refinement: Add storage/provenance children when replay artifacts need durable IPFS addressing.
+- Gap task: Add missing session-replay evidence for operator-visible workflow reconstruction.
 
 ## VAIOS-G050 Meta glasses remote terminal
 
