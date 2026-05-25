@@ -21,6 +21,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
     os.environ.get(
@@ -117,6 +118,25 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     if flag in argv:
         return argv
     return [flag, value, *argv]
+
+
+def _ensure_ipfs_accelerate_path() -> None:
+    if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+        sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+
+def _task_prefix_from_header(task_header_prefix: str) -> str:
+    value = str(task_header_prefix or "## HAO-").strip()
+    if value.startswith("## "):
+        value = value[3:].strip()
+    return value or "HAO-"
+
+
+def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
+    try:
+        return discovery_dir.resolve().relative_to(repo_root.resolve()).as_posix()
+    except ValueError:
+        return "data/hallucinate_multimodal_control/discovery"
 
 
 def _utc_now() -> str:
@@ -1497,6 +1517,34 @@ def record_objective_goal_findings(
     force: bool = False,
 ) -> list[dict[str, Any]]:
     """Feed the HAO board from missing evidence in the virtual-AI-OS objective heap."""
+
+    _ensure_ipfs_accelerate_path()
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_objective_backlog_findings as accelerator_record_objective_backlog_findings,
+    )
+
+    task_prefix = _task_prefix_from_header(task_header_prefix)
+    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
+    depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text) else []
+    return accelerator_record_objective_backlog_findings(
+        repo_root=repo_root,
+        objective_path=objective_path,
+        todo_path=todo_path,
+        discovery_dir=discovery_dir,
+        bundle_dir=_objective_bundle_dir(repo_root, bundle_dir),
+        strategy_path=strategy_path,
+        state_path=state_path,
+        task_prefix=task_prefix,
+        depends_on=depends_on,
+        min_open_tasks=min_open_tasks,
+        max_findings=max_findings,
+        cooldown_seconds=cooldown_seconds,
+        force=force,
+        summary_prefix="Close virtual AI OS objective gap",
+        discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
+        commit_outputs=True,
+        commit_subject="HAO: record objective goal backlog findings",
+    )
 
     if max_findings <= 0 or not todo_path.exists() or not objective_path.exists():
         return []
