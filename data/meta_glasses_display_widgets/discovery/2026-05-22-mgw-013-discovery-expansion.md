@@ -60,7 +60,7 @@ rg -n "compileMetaGlassesWidgetManifest|regions|bounds|text\\(|button\\(|image\\
 
 ## Backlog Changes
 
-The following daemon-parseable tasks were appended to `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`:
+During MGW-013, the following daemon-parseable MGW task-board entries were recorded as historical discovery outputs:
 
 - MGW-015 Close optional display widget operation contract gaps.
 - MGW-016 Preserve full widget action metadata through native DAT bridge calls.
