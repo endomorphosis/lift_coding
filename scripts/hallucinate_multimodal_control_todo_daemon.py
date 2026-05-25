@@ -20,11 +20,20 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
+    os.environ.get(
+        "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+        str(REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"),
+    )
+)
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "5"))
+OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MAX_FINDINGS", "5"))
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "21600"))
 CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", "5"))
 CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
 CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
@@ -78,9 +87,13 @@ def hallucinate_multimodal_bootstrap_paths() -> dict[str, Path]:
     worktree_root = Path(
         os.environ.get("HANDSFREE_HAO_WORKTREE_ROOT", str(DEFAULT_WORKTREE_ROOT))
     )
+    objective_goal_heap_path = Path(
+        os.environ.get("HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH", str(DEFAULT_OBJECTIVE_GOAL_HEAP_PATH))
+    )
     return {
         "repo_root": REPO_ROOT,
         "todo_path": todo_path,
+        "objective_goal_heap_path": objective_goal_heap_path,
         "state_dir": state_dir,
         "worktree_root": worktree_root,
     }
@@ -822,6 +835,244 @@ def _scan_codebase_findings(
     return findings
 
 
+def _split_objective_terms(value: str) -> list[str]:
+    terms: list[str] = []
+    for raw in re.split(r"[,;]", value):
+        term = " ".join(raw.strip().split())
+        if term:
+            terms.append(term)
+    return terms
+
+
+def _parse_objective_goal_heap(text: str) -> list[dict[str, Any]]:
+    goals: list[dict[str, Any]] = []
+    current: dict[str, Any] | None = None
+    header_pattern = re.compile(r"^##\s+(VAIOS-G\d+)\s+(.+?)\s*$")
+    for line in text.splitlines():
+        header = header_pattern.match(line)
+        if header:
+            if current is not None:
+                goals.append(current)
+            current = {
+                "goal_id": header.group(1),
+                "title": header.group(2).strip(),
+                "fields": {},
+            }
+            continue
+        if current is None or not line.startswith("- ") or ":" not in line:
+            continue
+        key, value = line[2:].split(":", 1)
+        normalized_key = re.sub(r"[^a-z0-9]+", "_", key.strip().lower()).strip("_")
+        current["fields"][normalized_key] = value.strip()
+    if current is not None:
+        goals.append(current)
+    return goals
+
+
+def _objective_goal_status(goal: dict[str, Any]) -> str:
+    fields = goal.get("fields") or {}
+    return str(fields.get("status") or "active").strip().lower()
+
+
+def _objective_goal_priority(goal: dict[str, Any]) -> tuple[int, str]:
+    fields = goal.get("fields") or {}
+    try:
+        fib_priority = int(str(fields.get("fib_priority") or "999999").strip())
+    except ValueError:
+        fib_priority = 999999
+    return fib_priority, str(goal.get("goal_id") or "")
+
+
+def _objective_goal_required_evidence(goal: dict[str, Any]) -> list[str]:
+    fields = goal.get("fields") or {}
+    return _split_objective_terms(str(fields.get("evidence") or fields.get("required_evidence") or ""))
+
+
+def _objective_goal_fingerprint(goal: dict[str, Any], missing_terms: list[str]) -> str:
+    payload = "\0".join(
+        [
+            "objective_goal_gap",
+            str(goal.get("goal_id") or ""),
+            str(goal.get("title") or ""),
+            *[" ".join(term.lower().split()) for term in missing_terms],
+        ]
+    )
+    return sha1(payload.encode("utf-8")).hexdigest()
+
+
+def _objective_candidate_files(repo_root: Path, *, objective_path: Path) -> list[Path]:
+    objective_resolved = objective_path.resolve()
+    files: list[Path] = []
+    for git_root in _discover_git_worktrees(repo_root):
+        for path in _tracked_files(git_root):
+            if path.resolve() == objective_resolved:
+                continue
+            if not _file_is_scan_candidate(path, repo_root=repo_root):
+                continue
+            files.append(path)
+    return files
+
+
+def _objective_evidence_index(
+    repo_root: Path,
+    *,
+    objective_path: Path,
+    terms: list[str],
+) -> dict[str, list[str]]:
+    normalized_terms = [term for term in dict.fromkeys(terms) if term.strip()]
+    evidence = {term: [] for term in normalized_terms}
+    if not normalized_terms:
+        return evidence
+    lowered_terms = {term: term.lower() for term in normalized_terms}
+    for path in _objective_candidate_files(repo_root, objective_path=objective_path):
+        root_relative = _root_relative_path(repo_root, path)
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        haystack = f"{root_relative}\n{text}".lower()
+        for term, lowered in lowered_terms.items():
+            if len(evidence[term]) >= 3:
+                continue
+            if lowered in haystack:
+                evidence[term].append(root_relative)
+    return evidence
+
+
+def _scan_objective_goal_findings(
+    repo_root: Path,
+    *,
+    objective_path: Path,
+    max_findings: int,
+    seen_fingerprints: set[str],
+) -> list[dict[str, Any]]:
+    if max_findings <= 0 or not objective_path.exists():
+        return []
+    goals = [
+        goal
+        for goal in _parse_objective_goal_heap(objective_path.read_text(encoding="utf-8"))
+        if _objective_goal_status(goal) in {"active", "todo", "open"}
+    ]
+    if not goals:
+        return []
+    required_terms: list[str] = []
+    for goal in goals:
+        required_terms.extend(_objective_goal_required_evidence(goal))
+    evidence = _objective_evidence_index(repo_root, objective_path=objective_path, terms=required_terms)
+
+    findings: list[dict[str, Any]] = []
+    for goal in sorted(goals, key=_objective_goal_priority):
+        terms = _objective_goal_required_evidence(goal)
+        missing_terms = [term for term in terms if not evidence.get(term)]
+        if not missing_terms:
+            continue
+        fingerprint = _objective_goal_fingerprint(goal, missing_terms)
+        if fingerprint in seen_fingerprints:
+            continue
+        fields = goal.get("fields") or {}
+        findings.append(
+            {
+                "kind": "objective_goal_gap",
+                "fingerprint": fingerprint,
+                "goal_id": str(goal.get("goal_id") or ""),
+                "title": str(goal.get("title") or ""),
+                "summary": f"Close virtual AI OS objective gap: {goal.get('title')}",
+                "priority": str(fields.get("priority") or "P2"),
+                "track": str(fields.get("track") or "ops"),
+                "missing_evidence": missing_terms,
+                "present_evidence": {term: evidence.get(term, []) for term in terms if evidence.get(term)},
+                "objective_path": _root_relative_path(repo_root, objective_path),
+                "outputs": _split_objective_terms(str(fields.get("outputs") or "")),
+                "validation": str(fields.get("validation") or f"test -f {_root_relative_path(repo_root, objective_path)}"),
+                "goal": str(fields.get("goal") or ""),
+                "refinement": str(fields.get("refinement") or ""),
+                "gap_task": str(fields.get("gap_task") or ""),
+            }
+        )
+        seen_fingerprints.add(fingerprint)
+        if len(findings) >= max_findings:
+            break
+    return findings
+
+
+def _write_objective_goal_discovery(
+    *,
+    discovery_dir: Path,
+    follow_up_task_id: str,
+    finding: dict[str, Any],
+) -> Path:
+    date = datetime.now(timezone.utc).date().isoformat()
+    short_fingerprint = str(finding["fingerprint"])[:12]
+    path = discovery_dir / f"{date}-{follow_up_task_id.lower()}-objective-gap-{short_fingerprint}.md"
+    discovery_dir.mkdir(parents=True, exist_ok=True)
+    missing = "\n".join(f"- {term}" for term in finding.get("missing_evidence", [])) or "- none"
+    present_items: list[str] = []
+    present_evidence = finding.get("present_evidence") or {}
+    if isinstance(present_evidence, dict):
+        for term, paths in present_evidence.items():
+            joined = ", ".join(str(item) for item in paths) if isinstance(paths, list) else str(paths)
+            present_items.append(f"- {term}: {joined}")
+    present = "\n".join(present_items) if present_items else "- none found for this goal"
+    content = f"""# {follow_up_task_id} Objective Goal Gap
+
+Date: {date}
+Fingerprint: {finding["fingerprint"]}
+Kind: {finding["kind"]}
+Goal id: {finding["goal_id"]}
+Goal title: {finding["title"]}
+Objective heap: {finding["objective_path"]}
+Priority: {finding["priority"]}
+Track: {finding["track"]}
+
+## Goal
+
+{finding.get("goal") or finding["title"]}
+
+## Missing Evidence
+
+{missing}
+
+## Present Evidence
+
+{present}
+
+## Suggested Handling
+
+{finding.get("gap_task") or "Close the missing evidence with a focused code, test, or documentation change."}
+
+If the gap is too broad for one task, refine `{finding["goal_id"]}` in the objective
+heap by adding child goals with concrete evidence terms, then keep the generated
+todo task small enough for the supervisor to validate.
+"""
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+def _objective_goal_task_block(
+    *,
+    follow_up_task_id: str,
+    finding: dict[str, Any],
+    discovery_path: Path,
+    depends_on: list[str],
+) -> str:
+    outputs = ["data/hallucinate_multimodal_control/discovery", finding["objective_path"]]
+    outputs.extend(str(item) for item in finding.get("outputs", []) if str(item).strip())
+    unique_outputs = list(dict.fromkeys(outputs))
+    missing = ", ".join(str(item) for item in finding.get("missing_evidence", []))
+    refinement = str(finding.get("refinement") or "Refine the objective heap if the gap needs smaller child goals.")
+    return f"""## {follow_up_task_id} {finding["summary"]}
+
+- Status: todo
+- Completion: manual
+- Priority: {finding["priority"]}
+- Track: {finding["track"]}
+- Depends on: {", ".join(depends_on)}
+- Outputs: {", ".join(unique_outputs)}
+- Validation: {finding["validation"]}
+- Acceptance: Objective scan filed this gap for {finding["goal_id"]}. Use evidence in {discovery_path}, add code/tests/docs or child goals that prove the missing evidence terms are covered ({missing}), and keep the supervisor-fed backlog aligned with the virtual AI OS objective heap. {refinement}
+"""
+
+
 def _write_codebase_scan_discovery(*, discovery_dir: Path, follow_up_task_id: str, finding: dict[str, Any]) -> Path:
     date = datetime.now(timezone.utc).date().isoformat()
     short_fingerprint = str(finding["fingerprint"])[:12]
@@ -872,6 +1123,111 @@ def _codebase_scan_task_block(
 - Validation: {finding["validation"]}
 - Acceptance: Codebase scan filed this finding from {finding["root_relative_path"]}:{finding["line_number"]}. Use evidence in {discovery_path}, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 """
+
+
+def record_objective_goal_findings(
+    *,
+    todo_path: Path = DEFAULT_TODO_PATH,
+    state_path: Path | None = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
+    strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    discovery_dir: Path = DISCOVERY_DIR,
+    objective_path: Path = DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    task_header_prefix: str = "## HAO-",
+    repo_root: Path = REPO_ROOT,
+    min_open_tasks: int = OBJECTIVE_SCAN_MIN_OPEN_TASKS,
+    max_findings: int = OBJECTIVE_SCAN_MAX_FINDINGS,
+    cooldown_seconds: int = OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+    force: bool = False,
+) -> list[dict[str, Any]]:
+    """Feed the HAO board from missing evidence in the virtual-AI-OS objective heap."""
+
+    if max_findings <= 0 or not todo_path.exists() or not objective_path.exists():
+        return []
+    todo_text = todo_path.read_text(encoding="utf-8")
+    task_ids = set(_task_ids_from_todo(todo_text))
+    open_task_count = _effective_open_task_count(todo_text, state_path)
+    if not force and open_task_count > min_open_tasks:
+        return []
+
+    strategy = _load_strategy(strategy_path)
+    now = datetime.now(timezone.utc)
+    task_count = len(task_ids)
+    drained_backlog = open_task_count == 0
+    try:
+        last_drained_scan_task_count = int(strategy.get("last_drained_objective_goal_scan_task_count") or -1)
+    except (TypeError, ValueError):
+        last_drained_scan_task_count = -1
+    drained_scan_due = drained_backlog and last_drained_scan_task_count != task_count
+    last_scan_at = _parse_iso_timestamp(str(strategy.get("last_objective_goal_scan_at") or ""))
+    if (
+        not force
+        and not drained_scan_due
+        and last_scan_at is not None
+        and (now - last_scan_at).total_seconds() < cooldown_seconds
+    ):
+        return []
+
+    seen = {
+        str(item)
+        for item in strategy.get("objective_goal_seen_fingerprints", [])
+        if str(item).strip()
+    }
+    findings = _scan_objective_goal_findings(
+        repo_root,
+        objective_path=objective_path,
+        max_findings=max_findings,
+        seen_fingerprints=seen,
+    )
+    strategy["last_objective_goal_scan_at"] = _utc_now()
+    strategy["last_objective_goal_scan_mode"] = "drained_exhaustive" if drained_scan_due else "low_backlog"
+    if drained_backlog:
+        strategy["last_drained_objective_goal_scan_task_count"] = task_count
+    strategy["objective_goal_seen_fingerprints"] = sorted(seen)
+    if not findings:
+        strategy["last_objective_goal_scan_findings"] = []
+        _save_strategy(strategy_path, strategy)
+        return []
+
+    generated_paths: list[Path] = []
+    appended: list[dict[str, Any]] = []
+    depends_on = ["HAO-013"] if "HAO-013" in task_ids else []
+    for finding in findings:
+        follow_up_task_id = _next_hao_task_id(todo_text)
+        discovery_path = _write_objective_goal_discovery(
+            discovery_dir=discovery_dir,
+            follow_up_task_id=follow_up_task_id,
+            finding=finding,
+        )
+        task_block = _objective_goal_task_block(
+            follow_up_task_id=follow_up_task_id,
+            finding=finding,
+            discovery_path=discovery_path,
+            depends_on=depends_on,
+        )
+        todo_text = todo_text.rstrip() + "\n\n" + task_block.strip() + "\n"
+        task_ids.add(follow_up_task_id)
+        generated_paths.append(discovery_path)
+        appended.append(
+            {
+                "follow_up_task_id": follow_up_task_id,
+                "fingerprint": finding["fingerprint"],
+                "kind": finding["kind"],
+                "goal_id": finding["goal_id"],
+                "missing_evidence": finding["missing_evidence"],
+                "discovery_path": str(discovery_path),
+            }
+        )
+
+    todo_path.write_text(todo_text, encoding="utf-8")
+    strategy["last_objective_goal_scan_findings"] = appended
+    _save_strategy(strategy_path, strategy)
+    generated_paths.insert(0, todo_path)
+    commit_results = _commit_generated_retry_budget_outputs(
+        generated_paths,
+        subject="HAO: record objective goal backlog findings",
+    )
+    logger.info("Committed objective-goal generated outputs: %s", commit_results)
+    return appended
 
 
 def record_codebase_scan_findings(
@@ -1165,6 +1521,17 @@ def main(argv: list[str] | None = None) -> None:
     )
 
     while True:
+        objective_findings = record_objective_goal_findings(
+            todo_path=parsed.todo_path,
+            state_path=state_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=paths["objective_goal_heap_path"],
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
+        if objective_findings:
+            logger.warning("Recorded Hallucinate objective-goal findings before daemon pass: %s", objective_findings)
         scan_findings = record_codebase_scan_findings(
             todo_path=parsed.todo_path,
             state_path=state_path,
@@ -1194,6 +1561,17 @@ def main(argv: list[str] | None = None) -> None:
         )
         if findings:
             logger.warning("Recorded Hallucinate retry-budget findings after daemon pass: %s", findings)
+        objective_findings = record_objective_goal_findings(
+            todo_path=parsed.todo_path,
+            state_path=state_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=paths["objective_goal_heap_path"],
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
+        if objective_findings:
+            logger.warning("Recorded Hallucinate objective-goal findings after daemon pass: %s", objective_findings)
         scan_findings = record_codebase_scan_findings(
             todo_path=parsed.todo_path,
             state_path=state_path,

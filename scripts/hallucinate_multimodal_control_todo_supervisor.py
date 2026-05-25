@@ -24,6 +24,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     DISCOVERY_DIR,
     ensure_hallucinate_multimodal_bootstrap_paths,
     record_codebase_scan_findings,
+    record_objective_goal_findings,
     record_retry_budget_findings,
 )
 
@@ -257,6 +258,15 @@ def main(argv: list[str] | None = None) -> None:
     strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
     events_path = parsed.state_dir / f"{parsed.state_prefix}_supervisor_events.jsonl"
     daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
+    record_objective_goal_findings(
+        todo_path=parsed.todo_path,
+        state_path=state_path,
+        strategy_path=strategy_path,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        task_header_prefix=parsed.task_prefix,
+        repo_root=REPO_ROOT,
+    )
     record_codebase_scan_findings(
         todo_path=parsed.todo_path,
         state_path=state_path,
@@ -310,6 +320,15 @@ def main(argv: list[str] | None = None) -> None:
     )
     if parsed.once:
         result = supervisor.run_once()
+        record_objective_goal_findings(
+            todo_path=parsed.todo_path,
+            state_path=state_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=paths["objective_goal_heap_path"],
+            task_header_prefix=parsed.task_prefix,
+            repo_root=REPO_ROOT,
+        )
         record_codebase_scan_findings(
             todo_path=parsed.todo_path,
             state_path=state_path,

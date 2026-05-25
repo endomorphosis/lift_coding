@@ -760,6 +760,146 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     assert "README.md" not in updated
 
 
+def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+
+    todo_path = repo / "todo.md"
+    objective_path = repo / "objective-heap.md"
+    source = repo / "src" / "capability_registry.py"
+    source.parent.mkdir()
+    source.write_text("# capability registry evidence for the runtime router\n", encoding="utf-8")
+    todo_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Completed seed
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: discovery
+- Validation: true
+- Acceptance: Seed task.
+""",
+        encoding="utf-8",
+    )
+    objective_path.write_text(
+        """# Objective Heap
+
+## VAIOS-G001 Remote terminal proof
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 2
+- Track: mobile
+- Priority: P1
+- Goal: Prove the glasses are a remote terminal for the virtual AI OS.
+- Evidence: capability registry, meta_glasses_terminal_e2e_contract
+- Outputs: docs, tests
+- Validation: test -f objective-heap.md
+- Refinement: Add child goals if the remote-terminal proof is too broad.
+- Gap task: Add the missing remote-terminal proof.
+""",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "objective-heap.md", "src/capability_registry.py")
+    _git(repo, "commit", "-m", "seed objective heap")
+
+    findings = daemon_module.record_objective_goal_findings(
+        todo_path=todo_path,
+        state_path=None,
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        objective_path=objective_path,
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert len(findings) == 1
+    assert findings[0]["follow_up_task_id"] == "HAO-002"
+    assert findings[0]["goal_id"] == "VAIOS-G001"
+    assert findings[0]["missing_evidence"] == ["meta_glasses_terminal_e2e_contract"]
+    updated = todo_path.read_text(encoding="utf-8")
+    assert "## HAO-002 Close virtual AI OS objective gap: Remote terminal proof" in updated
+    assert "Objective scan filed this gap for VAIOS-G001" in updated
+
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import parse_task_file
+
+    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
+    assert tasks["HAO-002"].priority == "P1"
+    assert tasks["HAO-002"].track == "mobile"
+    assert "objective-heap.md" in tasks["HAO-002"].validation[0]
+    assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
+
+
+def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "todo.md").write_text(
+        """# Temporary Board
+
+## HAO-001 Existing work
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: todo.md
+- Validation: true
+- Acceptance: Existing work remains.
+""",
+        encoding="utf-8",
+    )
+    (repo / "objective-heap.md").write_text(
+        """# Objective Heap
+
+## VAIOS-G001 Missing proof
+
+- Status: active
+- Fib priority: 1
+- Track: ops
+- Priority: P1
+- Goal: Missing proof.
+- Evidence: missing_goal_evidence
+- Validation: test -f objective-heap.md
+""",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "todo.md", "objective-heap.md")
+    _git(repo, "commit", "-m", "seed objective waiting")
+
+    findings = daemon_module.record_objective_goal_findings(
+        todo_path=repo / "todo.md",
+        state_path=None,
+        strategy_path=tmp_path / "strategy.json",
+        discovery_dir=repo / "discovery",
+        objective_path=repo / "objective-heap.md",
+        repo_root=repo,
+        min_open_tasks=0,
+        max_findings=1,
+        cooldown_seconds=0,
+    )
+
+    assert findings == []
+    assert "HAO-002" not in (repo / "todo.md").read_text(encoding="utf-8")
+
+
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     sys.path.insert(0, str(IPFS_DATASETS_ROOT))
     from ipfs_datasets_py.optimizers.todo_daemon.implementation_daemon import PortalImplementationDaemon
