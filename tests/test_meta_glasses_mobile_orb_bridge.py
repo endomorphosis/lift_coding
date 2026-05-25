@@ -69,7 +69,12 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     registered = _register_edge()
 
     assert registered["accepted_interface_cids"] == ["sha256:mobile", "sha256:display"]
-    assert registered["policy_cid"].startswith("sha256:mobile-orb-policy:")
+    assert registered["policy_cid"] is None
+    assert registered["control_surface_contract_ref"].startswith("control_surface_contract:")
+    assert registered["interaction_envelope"]["normalized_intent"]["method"] == (
+        "register_edge_capabilities"
+    )
+    assert registered["mediation_receipt"]["policy_decision"]["outcome"] == "allow"
 
     event = client.post(
         "/v1/mobile/orb/publish_glasses_event",
@@ -83,6 +88,9 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert event.status_code == 200
     event_payload = event.json()
     assert event_payload["accepted"] is True
+    assert event_payload["interaction_envelope"]["surface"] == "meta_glasses"
+    assert event_payload["normalized_intent"]["method"] == "publish_glasses_event"
+    assert event_payload["mediation_receipt"]["policy_decision"]["outcome"] == "allow"
     assert "invoke_service" in event_payload["routed_operations"]
 
     binding = client.post(
@@ -103,9 +111,15 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert binding.status_code == 200
     binding_payload = binding.json()
     assert binding_payload["transport"] == "mcp-server"
-    assert binding_payload["policy_decision"]["outcome"] == "permit"
-    assert binding_payload["policy_decision"]["decision_cid"].startswith(
-        "sha256:mobile-orb-policy-decision:"
+    assert binding_payload["policy_decision"]["outcome"] == "allow"
+    assert binding_payload["policy_decision"]["decision_id"].startswith(
+        "sha256:control-surface-decision:"
+    )
+    assert binding_payload["interaction_envelope"]["normalized_intent"]["method"] == (
+        "bind_service"
+    )
+    assert binding_payload["mediation_receipt"]["policy_decision"] == (
+        binding_payload["policy_decision"]
     )
     assert binding_payload["orb_binding"]["interface_cid"] == "sha256:task-service"
     assert binding_payload["orb_binding"]["service_id"] == "task_status_service"
@@ -160,7 +174,14 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert invoked_payload["display_widget_action"]["orb_receipt_cid"] == (
         invoked_payload["receipt_cid"]
     )
-    assert invoked_payload["display_widget_action"]["policy_decision"]["outcome"] == "permit"
+    assert invoked_payload["policy_decision"]["outcome"] == "allow"
+    assert invoked_payload["mediation_receipt"]["policy_decision"] == (
+        invoked_payload["policy_decision"]
+    )
+    assert invoked_payload["display_widget_action"]["policy_decision"]["outcome"] == "allow"
+    assert invoked_payload["display_widget_action"]["mediation_receipt"]["policy_decision"] == (
+        invoked_payload["display_widget_action"]["policy_decision"]
+    )
     assert invoked_payload["display_widget_action"]["correlation_id"] == "corr-task-status"
     assert invoked_payload["follow_up_actions"][0]["id"] == "mobile_render_display_widget"
     assert invoked_payload["follow_up_actions"][0]["params"]["display_widget_action"] == (

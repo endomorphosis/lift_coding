@@ -9,7 +9,10 @@ import {
 } from './metaGlassesOrbDescriptors';
 
 function isUsableEdgeSession(session, now = () => new Date()) {
-  if (!session?.edge_session_id || !session?.policy_cid) {
+  if (
+    !session?.edge_session_id ||
+    (!session?.control_surface_contract_ref && !session?.mediation_receipt && !session?.policy_cid)
+  ) {
     return false;
   }
   if (!session.expires_at) {

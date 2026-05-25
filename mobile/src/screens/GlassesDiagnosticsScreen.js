@@ -1566,7 +1566,7 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
           ORB session: {mobileOrbDiagnostics?.edge_session_id || 'none'}
         </Text>
         <Text style={styles.text}>
-          ORB policy: {mobileOrbDiagnostics?.policy_cid || 'none'}
+          ORB contract: {mobileOrbDiagnostics?.control_surface_contract_ref || mobileOrbDiagnostics?.policy_cid || 'none'}
         </Text>
         <Text style={styles.text}>
           ORB persistence: {mobileOrbDiagnostics?.edge_session_persistence ? 'edge-session' : 'none'}

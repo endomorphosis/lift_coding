@@ -2,6 +2,17 @@
   "name": "mobile_orb_bridge",
   "namespace": "handsfree.meta_glasses.mobile",
   "version": "0.1.0",
+  "control_surface_contract_ref": "control_surface_contract:hallucinate-app:remote-client",
+  "canonical_control_surface_artifacts": {
+    "description": "Remote clients transport the canonical Hallucinate App control-surface artifacts. They do not define or authorize a separate mobile policy contract.",
+    "fields": [
+      "control_surface_contract_ref",
+      "interaction_envelope",
+      "normalized_intent",
+      "policy_decision",
+      "mediation_receipt"
+    ]
+  },
   "methods": [
     {
       "name": "register_edge_capabilities",
@@ -39,14 +50,23 @@
       },
       "outputSchema": {
         "type": "object",
-        "required": ["edge_session_id", "accepted_interface_cids", "policy_cid"],
+        "required": ["edge_session_id", "accepted_interface_cids", "control_surface_contract_ref", "mediation_receipt"],
         "properties": {
           "edge_session_id": { "type": "string" },
           "accepted_interface_cids": {
             "type": "array",
             "items": { "type": "string" }
           },
-          "policy_cid": { "type": "string" },
+          "policy_cid": {
+            "type": ["string", "null"],
+            "deprecated": true,
+            "description": "Compatibility alias only. Remote clients must use control_surface_contract_ref plus mediation_receipt instead of defining a local policy contract."
+          },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" },
           "expires_at": { "type": "string" }
         }
       }
@@ -93,7 +113,12 @@
             "type": "array",
             "items": { "type": "string" }
           },
-          "receipt_cid": { "type": "string" }
+          "receipt_cid": { "type": "string" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" }
         }
       }
     },
@@ -161,6 +186,10 @@
             "items": { "type": "string" }
           },
           "policy_decision": { "type": "object" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "mediation_receipt": { "type": "object" },
           "orb_binding": {
             "type": "object",
             "description": "ORB binding metadata that keeps interface descriptor, service id, transport, and transport-specific routing details visible to the phone edge."
@@ -203,6 +232,11 @@
             "items": { "type": "string" }
           },
           "receipt_cid": { "type": "string" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" },
           "follow_up_actions": {
             "type": "array",
             "items": { "type": "object" }
@@ -231,6 +265,11 @@
           "subscription_id": { "type": "string" },
           "receipt_cid": { "type": "string" },
           "generation_key": { "type": "string" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" },
           "subscription": {
             "type": "object",
             "description": "Stored active subscription record with binding, interface, ORB receipt, stream, and MCP-IDL routing metadata."
@@ -271,7 +310,12 @@
           },
           "display_widget_action": { "type": "object" },
           "spoken_text": { "type": "string" },
-          "receipt_cid": { "type": "string" }
+          "receipt_cid": { "type": "string" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" }
         }
       }
     },
@@ -292,7 +336,12 @@
         "required": ["revoked"],
         "properties": {
           "revoked": { "type": "boolean" },
-          "receipt_cid": { "type": "string" }
+          "receipt_cid": { "type": "string" },
+          "control_surface_contract_ref": { "type": "string" },
+          "interaction_envelope": { "type": "object" },
+          "normalized_intent": { "type": "object" },
+          "policy_decision": { "type": "object" },
+          "mediation_receipt": { "type": "object" }
         }
       }
     }

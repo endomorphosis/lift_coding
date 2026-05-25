@@ -49,7 +49,11 @@ def test_build_mobile_orb_invoke_service_response_normalizes_optional_fields() -
     assert response.display_widget_action["operation"] == "render_widget"
     assert response.display_widget_action["orb_receipt_cid"] == "sha256:invoke-receipt"
     assert response.display_widget_action["correlation_id"] == "corr-task-status"
-    assert response.display_widget_action["policy_decision"]["outcome"] == "permit"
+    assert response.policy_decision["outcome"] == "allow"
+    assert response.interaction_envelope["normalized_intent"]["method"] == "invoke_service"
+    assert response.mediation_receipt["policy_decision"] == response.policy_decision
+    assert response.display_widget_action["policy_decision"]["outcome"] == "allow"
+    assert response.display_widget_action["normalized_intent"]["method"] == "render_widget"
     assert response.spoken_text == "Task is running."
 
 

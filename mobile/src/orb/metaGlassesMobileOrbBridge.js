@@ -14,9 +14,23 @@ import {
 } from './metaGlassesOrbDescriptors';
 
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
-const DEFAULT_POLICY_CID = 'local:policy:handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
+const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
+const CONTROL_SURFACE_POLICY_BUNDLE_REF = {
+  policy_id: 'policy:hallucinate-app:remote-client-transport',
+  policy_cid: 'local:hallucinate-app:remote-client-transport',
+  version: '0.1.0',
+  scope: 'remote-client-transport',
+  source: 'system_default',
+};
+const CONTROL_SURFACE_COMPILED_POLICY_CID = 'local:hallucinate-app:remote-client-transport';
+const CONTROL_SURFACE_SCHEMA_REFS = [
+  'control_surface_contract',
+  'interaction_envelope',
+  'policy_decision',
+  'mediation_receipt',
+];
 
 const EVENT_TYPES = new Set([
   'session_state',
@@ -99,7 +113,15 @@ function normalizeCapabilities(input = {}) {
 }
 
 function normalizeEdgeSessionSnapshot(session = {}) {
-  if (!isObject(session) || !session.edge_session_id || !session.policy_cid) {
+  if (!isObject(session) || !session.edge_session_id) {
+    return null;
+  }
+  const contractRef =
+    session.control_surface_contract_ref ||
+    session.mediation_receipt?.control_surface_contract_ref ||
+    session.interaction_envelope?.control_surface_contract_ref ||
+    null;
+  if (!contractRef && !session.policy_cid) {
     return null;
   }
   return {
@@ -107,7 +129,13 @@ function normalizeEdgeSessionSnapshot(session = {}) {
     edge_id: session.edge_id || DEFAULT_EDGE_ID,
     platform: session.platform || 'simulator',
     device_id: session.device_id || null,
-    policy_cid: session.policy_cid,
+    policy_cid: session.policy_cid || null,
+    control_surface_contract_ref: contractRef,
+    interaction_envelope: session.interaction_envelope || null,
+    normalized_intent:
+      session.normalized_intent || session.interaction_envelope?.normalized_intent || null,
+    policy_decision: session.policy_decision || session.mediation_receipt?.policy_decision || null,
+    mediation_receipt: session.mediation_receipt || null,
     accepted_interface_cids: Array.isArray(session.accepted_interface_cids)
       ? session.accepted_interface_cids.filter((cid) => typeof cid === 'string')
       : [],
@@ -117,19 +145,319 @@ function normalizeEdgeSessionSnapshot(session = {}) {
   };
 }
 
-function normalizePolicyDecision(policyDecision = {}) {
-  if (!isObject(policyDecision)) {
+function remoteSurface(operation, payload = {}) {
+  if (payload.platform === 'simulator') {
+    return 'simulator';
+  }
+  if (
+    operation === 'publish_glasses_event' ||
+    ['captouch', 'neural_input', 'display_action'].includes(payload.event_type)
+  ) {
+    return 'meta_glasses';
+  }
+  return 'mobile';
+}
+
+function remoteActorId(payload = {}) {
+  return (
+    payload.edge_session_id ||
+    payload.edge_id ||
+    payload.device_id ||
+    payload.binding_handle ||
+    payload.correlation_id ||
+    'remote-client'
+  );
+}
+
+function canonicalOutcome(value) {
+  if (value === 'permit') {
+    return 'allow';
+  }
+  return [
+    'allow',
+    'deny',
+    'require_confirmation',
+    'defer',
+    'rewrite',
+    'fallback_surface',
+    'rate_limit',
+  ].includes(value)
+    ? value
+    : 'allow';
+}
+
+function normalizedIntent(operation, payload = {}, surface = 'mobile') {
+  if (isObject(payload.normalized_intent) && payload.normalized_intent.method) {
     return {
-      outcome: 'permit',
-      reasons: ['Local mobile ORB bridge dispatch.'],
-      source: 'mobile_orb_bridge',
+      intent: payload.normalized_intent.intent || `${surface}.${operation}`,
+      method: payload.normalized_intent.method || operation,
+      target_ref:
+        payload.normalized_intent.target_ref ||
+        `handsfree.meta_glasses.mobile.mobile_orb_bridge.${operation}`,
+      arguments: isObject(payload.normalized_intent.arguments)
+        ? payload.normalized_intent.arguments
+        : payload,
+      confidence: Number(payload.normalized_intent.confidence || 1),
     };
   }
+  const nestedPayload = isObject(payload.payload) ? payload.payload : {};
+  const args = isObject(payload.arguments) ? payload.arguments : {};
   return {
-    outcome: policyDecision.outcome || 'permit',
+    intent:
+      payload.user_intent ||
+      payload.intent ||
+      nestedPayload.intent ||
+      nestedPayload.command ||
+      args.intent ||
+      `${surface}.${operation}`,
+    method: operation,
+    target_ref: `handsfree.meta_glasses.mobile.mobile_orb_bridge.${operation}`,
+    arguments: payload,
+    confidence: 1,
+  };
+}
+
+function runtimeContext(payload = {}, surface = 'mobile', emittedAt = new Date().toISOString()) {
+  return {
+    local_time: emittedAt,
+    state_frames: Array.isArray(payload.state_frames) ? payload.state_frames : [],
+    device_mode: payload.device_mode || surface,
+    platform: payload.platform || surface,
+    location_context: isObject(payload.location_context) ? payload.location_context : {},
+    device_context: definedEntries({
+      edge_id: payload.edge_id,
+      edge_session_id: payload.edge_session_id,
+      device_id: payload.device_id,
+      device_model: payload.device_model,
+      dat_capabilities: payload.dat_capabilities,
+      glasses_context: payload.glasses_context,
+      display_context: payload.display_context,
+    }),
+  };
+}
+
+function logicBinding(operation, surface) {
+  const bindingId = `hallucinate_app.remote_client.${surface}.${operation}`;
+  return {
+    binding_id: bindingId,
+    policy_bundle_ref: CONTROL_SURFACE_POLICY_BUNDLE_REF,
+    compiled_policy_cid: CONTROL_SURFACE_COMPILED_POLICY_CID,
+    surface_ref: surface,
+    method_ref: operation,
+    norm_refs: [`${bindingId}.transport_only`],
+  };
+}
+
+function buildMobileOrbControlSurfaceArtifacts(operation, payload = {}, options = {}) {
+  if (
+    isObject(payload.mediation_receipt) &&
+    isObject(payload.mediation_receipt.interaction_envelope) &&
+    isObject(payload.mediation_receipt.policy_decision)
+  ) {
+    const envelope = payload.mediation_receipt.interaction_envelope;
+    return {
+      control_surface_contract_ref:
+        payload.mediation_receipt.control_surface_contract_ref ||
+        envelope.control_surface_contract_ref ||
+        payload.control_surface_contract_ref ||
+        CONTROL_SURFACE_CONTRACT_REF,
+      interaction_envelope: envelope,
+      normalized_intent: envelope.normalized_intent || payload.normalized_intent || null,
+      policy_decision: payload.mediation_receipt.policy_decision,
+      mediation_receipt: payload.mediation_receipt,
+    };
+  }
+
+  const emittedAt = options.emitted_at || new Date().toISOString();
+  const surface = remoteSurface(operation, payload);
+  const actorId = remoteActorId(payload);
+  const intent = normalizedIntent(operation, payload, surface);
+  const contractRef = payload.control_surface_contract_ref || CONTROL_SURFACE_CONTRACT_REF;
+  const envelope = {
+    interaction_id:
+      payload.interaction_id ||
+      payload.correlation_id ||
+      payload.edge_session_id ||
+      localCid('interaction', { operation, payload }),
+    surface,
+    surface_event: payload.event_type || operation,
+    raw_payload: payload,
+    normalized_intent: intent,
+    actor: {
+      type: 'remote_client',
+      id: actorId,
+      delegation_chain: [actorId],
+    },
+    context: runtimeContext(payload, surface, emittedAt),
+    control_surface_contract_ref: contractRef,
+    policy_bundle_ref: CONTROL_SURFACE_POLICY_BUNDLE_REF,
+    compiled_policy_cid: CONTROL_SURFACE_COMPILED_POLICY_CID,
+    logic_bindings: [logicBinding(operation, surface)],
+  };
+  const outcome = canonicalOutcome(options.outcome);
+  const explanation = `${options.reason || 'Remote client artifact normalized to canonical control-surface envelope.'} Remote clients transport the Hallucinate App mediation receipt and do not define or authorize a separate policy contract.`;
+  const policyDecision = {
+    decision_id: localCid('control-surface-decision', {
+      interaction_id: envelope.interaction_id,
+      operation,
+      outcome,
+      compiled_policy_cid: CONTROL_SURFACE_COMPILED_POLICY_CID,
+    }),
+    interaction_id: envelope.interaction_id,
+    interaction_envelope: envelope,
+    outcome,
+    policy_bundle_ref: CONTROL_SURFACE_POLICY_BUNDLE_REF,
+    compiled_policy_cid: CONTROL_SURFACE_COMPILED_POLICY_CID,
+    decided_at: emittedAt,
+    matched_norms: [
+      {
+        norm_id: 'remote_client_transport_receipt',
+        outcome,
+        priority: 100,
+        policy_bundle_ref: CONTROL_SURFACE_POLICY_BUNDLE_REF,
+        logic_clause_refs: envelope.logic_bindings.map((binding) => binding.binding_id),
+        guard_refs: [],
+        explanation,
+      },
+    ],
+    effects: [
+      {
+        outcome,
+        method: intent.method,
+        target_ref: intent.target_ref,
+        arguments: intent.arguments,
+        confirmation_required: outcome === 'require_confirmation',
+        reason: explanation,
+      },
+    ],
+    frame_facts: [
+      {
+        fact_id: localCid('fact', [envelope.interaction_id, 'surface']),
+        kind: 'surface',
+        subject: envelope.surface,
+        predicate: 'surface.id',
+        value: envelope.surface,
+        attrs: {},
+      },
+      {
+        fact_id: localCid('fact', [envelope.interaction_id, 'event']),
+        kind: 'event',
+        subject: envelope.surface,
+        predicate: 'surface_event',
+        value: envelope.surface_event,
+        attrs: {},
+      },
+      {
+        fact_id: localCid('fact', [envelope.interaction_id, 'method']),
+        kind: 'method',
+        subject: intent.target_ref,
+        predicate: 'intent.method',
+        value: intent.method,
+        attrs: {},
+      },
+    ],
+    reasons: [explanation],
+    explanation,
+    confidence: intent.confidence,
+    metadata: {
+      source: 'hallucinate_app.control_surface_mediator.remote_client_envelope',
+      authorization_scope: 'hallucinate_app_control_surface_contract',
+      remote_client_policy_contract: false,
+      transport_receipt: true,
+      schema_refs: CONTROL_SURFACE_SCHEMA_REFS,
+    },
+  };
+  const invoked = !['deny', 'require_confirmation', 'defer', 'rate_limit'].includes(outcome);
+  const mediationReceipt = {
+    receipt_id:
+      options.receipt_cid ||
+      localCid('mediation_receipt', {
+        interaction_id: envelope.interaction_id,
+        decision_id: policyDecision.decision_id,
+        outcome,
+      }),
+    emitted_at: emittedAt,
+    control_surface_contract_ref: contractRef,
+    interaction_envelope: envelope,
+    policy_decision: policyDecision,
+    policy_refs: [
+      {
+        policy_bundle_ref: CONTROL_SURFACE_POLICY_BUNDLE_REF,
+        compiled_policy_cid: CONTROL_SURFACE_COMPILED_POLICY_CID,
+        matched_norm_refs: ['remote_client_transport_receipt'],
+      },
+    ],
+    mediation_result: {
+      outcome,
+      invoked,
+      final_method: intent.method,
+      final_target_ref: intent.target_ref,
+      confirmation_required: outcome === 'require_confirmation',
+    },
+    explanation,
+    metadata: {
+      source: 'hallucinate_app.control_surface_mediator.remote_client_envelope',
+      remote_client_policy_contract: false,
+      schema_refs: CONTROL_SURFACE_SCHEMA_REFS,
+    },
+  };
+  return {
+    control_surface_contract_ref: contractRef,
+    interaction_envelope: envelope,
+    normalized_intent: intent,
+    policy_decision: policyDecision,
+    mediation_receipt: mediationReceipt,
+  };
+}
+
+function controlSurfaceFields(artifacts = {}) {
+  return definedEntries({
+    control_surface_contract_ref: artifacts.control_surface_contract_ref,
+    interaction_envelope: artifacts.interaction_envelope,
+    normalized_intent: artifacts.normalized_intent,
+    policy_decision: artifacts.policy_decision,
+    mediation_receipt: artifacts.mediation_receipt,
+  });
+}
+
+function hasCanonicalControlSurfaceArtifacts(value = {}) {
+  return Boolean(
+    value.control_surface_contract_ref &&
+    isObject(value.interaction_envelope) &&
+    isObject(value.policy_decision) &&
+    isObject(value.mediation_receipt)
+  );
+}
+
+function isMediationInvoked(artifacts = {}) {
+  return Boolean(artifacts.mediation_receipt?.mediation_result?.invoked);
+}
+
+function normalizePolicyDecision(policyDecision = {}, defaults = {}) {
+  if (!isObject(policyDecision)) {
+    return buildMobileOrbControlSurfaceArtifacts(
+      defaults.operation || 'dispatch_glasses_response',
+      defaults.payload || {},
+      {
+        receipt_cid: defaults.receipt_cid,
+        reason:
+          defaults.reason ||
+          'Mobile ORB bridge dispatch normalized by Hallucinate App control-surface contract.',
+      }
+    ).policy_decision;
+  }
+  if (policyDecision.decision_id && isObject(policyDecision.interaction_envelope)) {
+    return policyDecision;
+  }
+  const outcome = canonicalOutcome(policyDecision.outcome);
+  return {
+    outcome,
     reasons: Array.isArray(policyDecision.reasons) ? policyDecision.reasons : [],
-    source: policyDecision.source || 'mobile_orb_bridge',
+    source:
+      policyDecision.source ||
+      'hallucinate_app.control_surface_mediator.remote_client_envelope',
     ...policyDecision,
+    outcome,
   };
 }
 
@@ -314,6 +642,26 @@ export function normalizeDisplayWidgetMobileAction(action = {}, defaults = {}) {
     defaults.descriptor_cid ||
     defaults.interface_cid ||
     localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE);
+  const controlSurfaceArtifacts = buildMobileOrbControlSurfaceArtifacts(
+    operation,
+    {
+      ...defaults,
+      ...action,
+      correlation_id:
+        action.correlation_id ||
+        action.correlationId ||
+        defaults.correlation_id ||
+        defaults.correlationId,
+    },
+    {
+      receipt_cid:
+        action.orb_receipt_cid ||
+        action.receipt_cid ||
+        defaults.orb_receipt_cid ||
+        defaults.receipt_cid,
+      reason: 'Display widget action normalized by Hallucinate App control-surface contract.',
+    }
+  );
 
   return definedEntries({
     contract: action.contract || DISPLAY_WIDGET_ACTION_CONTRACT,
@@ -330,7 +678,16 @@ export function normalizeDisplayWidgetMobileAction(action = {}, defaults = {}) {
       defaults.orb_receipt_cid ||
       defaults.receipt_cid ||
       localCid('receipt', { type, operation, widgetId }),
-    policy_decision: normalizePolicyDecision(action.policy_decision || defaults.policy_decision),
+    policy_decision: normalizePolicyDecision(controlSurfaceArtifacts.policy_decision, {
+      operation,
+      payload: action,
+      receipt_cid: controlSurfaceArtifacts.mediation_receipt?.receipt_id,
+      reason: 'Display widget action normalized by Hallucinate App control-surface contract.',
+    }),
+    control_surface_contract_ref: controlSurfaceArtifacts.control_surface_contract_ref,
+    interaction_envelope: controlSurfaceArtifacts.interaction_envelope,
+    normalized_intent: controlSurfaceArtifacts.normalized_intent,
+    mediation_receipt: controlSurfaceArtifacts.mediation_receipt,
     correlation_id:
       action.correlation_id ||
       action.correlationId ||
@@ -371,53 +728,103 @@ export function actionItemFromDisplayWidgetAction(action) {
 function defaultBackend(now) {
   return {
     async registerEdgeCapabilities(payload) {
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'register_edge_capabilities',
+        {
+          ...payload,
+          edge_session_id: DEFAULT_EDGE_SESSION_ID,
+        },
+        {
+          emitted_at: nowIso(now),
+          reason: 'Mobile ORB edge registration normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         edge_session_id: DEFAULT_EDGE_SESSION_ID,
         accepted_interface_cids: payload.local_interface_cids || [],
-        policy_cid: DEFAULT_POLICY_CID,
+        policy_cid: null,
+        ...controlSurfaceFields(artifacts),
         expires_at: null,
       };
     },
     async publishGlassesEvent(payload) {
+      const eventCid = localCid('event', payload);
+      const receiptCid = localCid('receipt', payload);
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'publish_glasses_event',
+        { ...payload, event_cid: eventCid },
+        {
+          receipt_cid: receiptCid,
+          emitted_at: payload.observed_at || nowIso(now),
+          reason: 'Meta-glasses event normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
-        event_cid: localCid('event', payload),
-        accepted: true,
+        event_cid: eventCid,
+        accepted: isMediationInvoked(artifacts),
         routed_operations: [],
-        receipt_cid: localCid('receipt', payload),
+        receipt_cid: receiptCid,
+        ...controlSurfaceFields(artifacts),
       };
     },
     async bindService(payload) {
       const bindingHandle =
         payload.binding_handle ||
         `${DEFAULT_SERVICE_BINDING}:${payload.service_interface_cid || payload.operation || 'unknown'}`;
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'bind_service',
+        { ...payload, binding_handle: bindingHandle },
+        {
+          emitted_at: nowIso(now),
+          reason: 'Service descriptor binding normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         binding_handle: bindingHandle,
         transport: payload.transport_preference || 'http',
         granted_capabilities: [],
-        policy_decision: normalizePolicyDecision({
-          reasons: ['Local default service binding.'],
-        }),
+        ...controlSurfaceFields(artifacts),
         orb_binding: buildOrbBindingMetadata(payload, bindingHandle),
         expires_at: null,
       };
     },
     async invokeService(payload) {
+      const receiptCid = localCid('receipt', payload);
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'invoke_service',
+        payload,
+        {
+          receipt_cid: receiptCid,
+          reason: 'Service invocation normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         ok: true,
         service_result: {},
-        output_refs: [],
+        output_refs: [receiptCid],
         provenance_refs: [],
-        receipt_cid: localCid('receipt', payload),
+        receipt_cid: receiptCid,
+        ...controlSurfaceFields(artifacts),
         follow_up_actions: [],
       };
     },
     async subscribeServiceUpdates(payload) {
       const subscriptionId = `local:subscription:${payload.operation || 'updates'}`;
       const receiptCid = localCid('receipt', payload);
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'subscribe_service_updates',
+        { ...payload, subscription_id: subscriptionId },
+        {
+          receipt_cid: receiptCid,
+          emitted_at: nowIso(now),
+          reason: 'Service update subscription normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         subscription_id: subscriptionId,
         receipt_cid: receiptCid,
         generation_key: `${payload.binding_handle}:${payload.operation}:${nowIso(now)}`,
+        ...controlSurfaceFields(artifacts),
         subscription: {
           ...payload,
           subscription_id: subscriptionId,
@@ -425,21 +832,42 @@ function defaultBackend(now) {
           generation_key: `${payload.binding_handle}:${payload.operation}:${nowIso(now)}`,
           status: 'active',
           subscribed_at: nowIso(now),
+          ...controlSurfaceFields(artifacts),
         },
       };
     },
     async dispatchGlassesResponse(payload) {
+      const receiptCid = localCid('receipt', payload);
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'dispatch_glasses_response',
+        payload,
+        {
+          receipt_cid: receiptCid,
+          reason: 'Glasses response dispatch normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         dispatched_actions: payload.result?.follow_up_actions || [],
         display_widget_action: payload.result?.display_widget_action || null,
         spoken_text: payload.result?.spoken_text || null,
-        receipt_cid: localCid('receipt', payload),
+        receipt_cid: receiptCid,
+        ...controlSurfaceFields(artifacts),
       };
     },
     async revokeBinding(payload) {
+      const receiptCid = localCid('receipt', payload);
+      const artifacts = buildMobileOrbControlSurfaceArtifacts(
+        'revoke_binding',
+        payload,
+        {
+          receipt_cid: receiptCid,
+          reason: 'Service binding revocation normalized by Hallucinate App control-surface contract.',
+        }
+      );
       return {
         revoked: true,
-        receipt_cid: localCid('receipt', payload),
+        receipt_cid: receiptCid,
+        ...controlSurfaceFields(artifacts),
       };
     },
   };
@@ -491,6 +919,8 @@ export class MetaGlassesMobileOrbBridge {
       edge_id: this.edgeSession?.edge_id || this.edgeId,
       platform: this.edgeSession?.platform || this.platform,
       policy_cid: this.edgeSession?.policy_cid || null,
+      control_surface_contract_ref: this.edgeSession?.control_surface_contract_ref || null,
+      mediation_receipt: this.edgeSession?.mediation_receipt || null,
       accepted_interface_cids: this.edgeSession?.accepted_interface_cids || [],
       dat_capabilities: this.edgeSession?.dat_capabilities || null,
       bindings_count: this.bindings.size,
@@ -683,8 +1113,22 @@ export class MetaGlassesMobileOrbBridge {
     });
     const previousEdgeSessionId = this.edgeSession?.edge_session_id || null;
     const response = await this.backend.registerEdgeCapabilities(payload);
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'register_edge_capabilities',
+        {
+          ...payload,
+          edge_session_id: response.edge_session_id,
+        },
+        {
+          emitted_at: nowIso(this.now),
+          reason: 'Mobile ORB edge registration normalized by Hallucinate App control-surface contract.',
+        }
+      );
     this.edgeSession = {
       ...response,
+      ...controlSurfaceFields(artifacts),
       edge_id: payload.edge_id,
       platform: payload.platform,
       device_id: payload.device_id || null,
@@ -730,16 +1174,36 @@ export class MetaGlassesMobileOrbBridge {
       observed_at: options.observed_at || nowIso(this.now),
     });
     const response = await this.backend.publishGlassesEvent(eventPayload);
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'publish_glasses_event',
+        {
+          ...eventPayload,
+          event_cid: response.event_cid,
+        },
+        {
+          receipt_cid: response.receipt_cid,
+          emitted_at: eventPayload.observed_at,
+          reason: 'Meta-glasses event normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    const normalizedResponse = {
+      ...response,
+      accepted: response.accepted ?? isMediationInvoked(artifacts),
+      ...controlSurfaceFields(artifacts),
+    };
     const event = {
       ...eventPayload,
-      event_cid: response.event_cid,
-      accepted: response.accepted,
-      receipt_cid: response.receipt_cid,
+      event_cid: normalizedResponse.event_cid,
+      accepted: normalizedResponse.accepted,
+      receipt_cid: normalizedResponse.receipt_cid,
+      ...controlSurfaceFields(artifacts),
     };
     this.eventLog.push(event);
     return {
       payload: eventPayload,
-      response,
+      response: normalizedResponse,
       event,
     };
   }
@@ -759,9 +1223,28 @@ export class MetaGlassesMobileOrbBridge {
       throw new Error('Cannot bind service without service_interface_cid.');
     }
     const response = await this.backend.bindService(payload);
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'bind_service',
+        {
+          ...payload,
+          binding_handle: response.binding_handle,
+        },
+        {
+          emitted_at: nowIso(this.now),
+          reason: 'Service descriptor binding normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    const artifactFields = controlSurfaceFields(artifacts);
+    const normalizedResponse = {
+      ...response,
+      ...artifactFields,
+      policy_decision: artifactFields.policy_decision || response.policy_decision,
+    };
     const orbBinding = response.orb_binding || buildOrbBindingMetadata(payload, response.binding_handle);
     this.bindings.set(response.binding_handle, {
-      ...response,
+      ...normalizedResponse,
       service_interface_cid: payload.service_interface_cid,
       service_descriptor: payload.service_descriptor || null,
       operation: payload.operation || null,
@@ -772,7 +1255,7 @@ export class MetaGlassesMobileOrbBridge {
     return {
       payload,
       response: {
-        ...response,
+        ...normalizedResponse,
         orb_binding: orbBinding,
       },
     };
@@ -793,6 +1276,20 @@ export class MetaGlassesMobileOrbBridge {
       parent_receipt_cids: options.parent_receipt_cids,
     });
     let response = await this.backend.invokeService(payload);
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'invoke_service',
+        payload,
+        {
+          receipt_cid: response.receipt_cid,
+          reason: 'Service invocation normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    response = {
+      ...response,
+      ...controlSurfaceFields(artifacts),
+    };
     if (binding?.orb_binding && isObject(response?.service_result)) {
       response = {
         ...response,
@@ -821,22 +1318,42 @@ export class MetaGlassesMobileOrbBridge {
       correlation_id: options.correlation_id || `mobile-orb-stream-${operation}`,
     });
     const response = await this.backend.subscribeServiceUpdates(payload);
-    const subscription = {
-      ...(response.subscription || {}),
-      ...payload,
-      subscription_id: response.subscription_id,
-      receipt_cid: response.receipt_cid,
-      generation_key: response.generation_key,
-      orb_binding: response.subscription?.orb_binding || binding?.orb_binding || null,
-      status: response.subscription?.status || 'active',
-      subscribed_at: response.subscription?.subscribed_at || nowIso(this.now),
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'subscribe_service_updates',
+        {
+          ...payload,
+          subscription_id: response.subscription_id,
+        },
+        {
+          receipt_cid: response.receipt_cid,
+          emitted_at: nowIso(this.now),
+          reason: 'Service update subscription normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    const artifactFields = controlSurfaceFields(artifacts);
+    const normalizedResponse = {
+      ...response,
+      ...artifactFields,
     };
-    this.subscriptions.set(response.subscription_id, subscription);
+    const subscription = {
+      ...(normalizedResponse.subscription || {}),
+      ...payload,
+      subscription_id: normalizedResponse.subscription_id,
+      receipt_cid: normalizedResponse.receipt_cid,
+      generation_key: normalizedResponse.generation_key,
+      orb_binding: normalizedResponse.subscription?.orb_binding || binding?.orb_binding || null,
+      status: normalizedResponse.subscription?.status || 'active',
+      subscribed_at: normalizedResponse.subscription?.subscribed_at || nowIso(this.now),
+      ...artifactFields,
+    };
+    this.subscriptions.set(normalizedResponse.subscription_id, subscription);
     await this.persistOrbState();
     return {
       payload,
       response: {
-        ...response,
+        ...normalizedResponse,
         subscription,
       },
     };
@@ -853,12 +1370,28 @@ export class MetaGlassesMobileOrbBridge {
       parent_receipt_cids: parentReceiptCids,
     });
     const response = await this.backend.dispatchGlassesResponse(payload);
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'dispatch_glasses_response',
+        payload,
+        {
+          receipt_cid: response.receipt_cid,
+          reason: 'Glasses response dispatch normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    const normalizedResponse = {
+      ...response,
+      ...controlSurfaceFields(artifacts),
+    };
     const actions = [
-      ...(Array.isArray(response.dispatched_actions) ? response.dispatched_actions : []),
+      ...(Array.isArray(normalizedResponse.dispatched_actions)
+        ? normalizedResponse.dispatched_actions
+        : []),
       ...(Array.isArray(result.follow_up_actions) ? result.follow_up_actions : []),
     ];
     const displayWidgetAction =
-      response.display_widget_action ||
+      normalizedResponse.display_widget_action ||
       result.display_widget_action ||
       actions.find((action) => isDisplayWidgetActionId(action?.id || action?.type));
 
@@ -872,7 +1405,7 @@ export class MetaGlassesMobileOrbBridge {
         : actionItemFromDisplayWidgetAction({
           ...actionPayload,
           correlation_id: actionPayload.correlation_id || payload.correlation_id,
-          orb_receipt_cid: actionPayload.orb_receipt_cid || response.receipt_cid,
+          orb_receipt_cid: actionPayload.orb_receipt_cid || normalizedResponse.receipt_cid,
           fallback: actionPayload.fallback || fallback,
         });
       if (isDisplayWidgetActionId(actionItem.id || actionItem.type)) {
@@ -882,7 +1415,7 @@ export class MetaGlassesMobileOrbBridge {
 
     return {
       payload,
-      response,
+      response: normalizedResponse,
       localResults,
     };
   }
@@ -1007,7 +1540,21 @@ export class MetaGlassesMobileOrbBridge {
       correlation_id: options.correlation_id || `mobile-orb-revoke-${bindingHandle}`,
     };
     const response = await this.backend.revokeBinding(payload);
-    if (response.revoked) {
+    const artifacts = hasCanonicalControlSurfaceArtifacts(response)
+      ? response
+      : buildMobileOrbControlSurfaceArtifacts(
+        'revoke_binding',
+        payload,
+        {
+          receipt_cid: response.receipt_cid,
+          reason: 'Service binding revocation normalized by Hallucinate App control-surface contract.',
+        }
+      );
+    const normalizedResponse = {
+      ...response,
+      ...controlSurfaceFields(artifacts),
+    };
+    if (normalizedResponse.revoked) {
       this.bindings.delete(bindingHandle);
       for (const [subscriptionId, subscription] of this.subscriptions.entries()) {
         if (subscription.binding_handle === bindingHandle) {
@@ -1018,7 +1565,7 @@ export class MetaGlassesMobileOrbBridge {
     }
     return {
       payload,
-      response,
+      response: normalizedResponse,
     };
   }
 }

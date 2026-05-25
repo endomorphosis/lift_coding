@@ -38,6 +38,11 @@ describe('metaGlassesOrbEdgeSession', () => {
       platform: 'ios',
       device_id: null,
       policy_cid: 'sha256:policy',
+      control_surface_contract_ref: null,
+      interaction_envelope: null,
+      normalized_intent: null,
+      policy_decision: null,
+      mediation_receipt: null,
       accepted_interface_cids: ['sha256:mobile', 'sha256:display'],
       dat_capabilities: {
         session: true,
@@ -57,6 +62,18 @@ describe('metaGlassesOrbEdgeSession', () => {
   it('returns null for invalid persisted sessions', () => {
     expect(normalizeMetaGlassesOrbEdgeSession({ policy_cid: 'sha256:policy' })).toBeNull();
     expect(normalizeMetaGlassesOrbEdgeSession({ edge_session_id: 'edge' })).toBeNull();
+    expect(
+      normalizeMetaGlassesOrbEdgeSession({
+        edge_session_id: 'edge',
+        control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
+      })
+    ).toEqual(
+      expect.objectContaining({
+        edge_session_id: 'edge',
+        policy_cid: null,
+        control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
+      })
+    );
   });
 
   it('loads and sanitizes a stored session', async () => {
