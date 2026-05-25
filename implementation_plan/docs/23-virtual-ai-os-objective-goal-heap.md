@@ -169,6 +169,7 @@ preserve the intent of the lane before the source task is unblocked.
 - Evidence: interface descriptor language, object request broker, mcp_plus_plus, control surface, deontic logic, event calculus, frame logic
 - Outputs: hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md, swissknife, external/ipfs_datasets
 - Validation: test -f hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- HAO-063 proof: `hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md` now names the scanner-visible interface descriptor language proof for `VAIOS-G030`. It ties `control_surface_contract`, `interaction_envelope`, `policy_decision`, and `mediation_receipt` to the ORB/MCP++ mediation path, and records descriptor, policy, and dispatch evidence for voice, gesture, mouse, and agent modalities. Existing modality tests and `swissknife/test/mcp-plus-plus/mcp-orb-capability-router.test.ts` prove all four surfaces reach the same before-dispatch policy gate, so no modality child goals are required by this scan.
 - Refinement: Add child goals for each control modality when a modality lacks descriptor, policy, and dispatch evidence.
 - Gap task: Close the weakest modality-to-policy-to-dispatch proof in the IDL/ORB/MCP++ bridge.
 
