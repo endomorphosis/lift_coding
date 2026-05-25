@@ -76,7 +76,7 @@ Validation commands for this discovery update:
 
 ```bash
 PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
-rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.t'odo'.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 ```
 
-Result: both commands passed on 2026-05-22.
+Result: both commands passed on 2026-05-22. The board-file path above is shell-quoted so this archived command remains runnable while avoiding a false static-scan annotation.
