@@ -1357,11 +1357,11 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
 
     todo_path = docs / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
     todo_path.write_text(
-        """# HAO Board
+        f"""# HAO Board
 
 ## HAO-001 Land generated status
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P1
 - Track: ops
