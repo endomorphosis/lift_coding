@@ -135,10 +135,14 @@ git push origin --delete draft/pr-026-notification-push-delivery
 
 ## Files Created
 
-Each PR will have:
-- Branch: `draft/pr-XXX-...`
-- Plan file: `work/pr-XXX-...-plan.md`
-- Tracking doc: `tracking/PR-XXX-....md` (already exists)
+The PR-026/027/028 scripts create one plan commit on each draft branch:
+- Branches: `draft/pr-026-notification-push-delivery`, `draft/pr-027-profile-verbosity-tuning`, and `draft/pr-028-external-agent-runner-setup`
+- Plan files: `work/pr-026-plan.md`, `work/pr-027-plan.md`, and `work/pr-028-plan.md`
+- Tracking docs used as PR bodies: `tracking/PR-026-notification-push-delivery.md`, `tracking/PR-027-profile-verbosity-tuning.md`, and `tracking/PR-028-external-agent-runner-setup.md` (already exists)
+
+The placeholder queue script opens draft PRs for the existing PR-001 through
+PR-013 draft branches and their matching `tracking/PR-*.md` files; it does not
+create plan files.
 
 ## Expected Output
 
@@ -186,7 +190,7 @@ If you can't use the scripts, you can create PRs via the GitHub web interface:
 1. Go to https://github.com/endomorphosis/lift_coding
 2. Click "New pull request"
 3. Click "compare across forks" or create branch first
-4. Set base: `main`, compare: `draft/pr-XXX-...` (create branch first)
+4. Set base: `main`, compare to the draft branch, such as `draft/pr-026-notification-push-delivery` (create the branch first)
 5. Add title and body from tracking document
 6. Mark as draft
 7. Add label `copilot-agent`
