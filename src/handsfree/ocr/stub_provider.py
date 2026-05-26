@@ -4,6 +4,8 @@ This is the default implementation used in CI and dev environments.
 It doesn't require any external dependencies or API keys.
 """
 
+from handsfree.ocr import OCRDisabledError
+
 
 class OCRDisabledError(NotImplementedError):
     """Raised when OCR is disabled by runtime configuration."""
