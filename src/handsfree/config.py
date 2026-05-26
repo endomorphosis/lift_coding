@@ -51,7 +51,7 @@ VIRTUAL_AI_OS_EXECUTION_GUARDS: dict[str, dict[str, str]] = {
     },
     "daemon_mediated": {
         "policy_surface": "ipfs_datasets_py todo daemon",
-        "rollback_guard": "retain repo-local todo board, state snapshots, and isolated worktrees for rollback-safe retries",
+        "rollback_guard": "retain repo-local backlog board, state snapshots, and isolated worktrees for rollback-safe retries",
     },
     "swissknife_orb": {
         "policy_surface": "swissknife ORB policy receipts",

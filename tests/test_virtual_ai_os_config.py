@@ -13,6 +13,14 @@ def test_virtual_ai_os_observability_contract_defaults_are_stable() -> None:
     assert "render_success_total" in contract["metric_names"]
     assert "bridge_error" in contract["failure_modes"]
     assert "daemon_mediated" in contract["execution_path_guards"]
+    expected_daemon_guard = (
+        "retain repo-local backlog board, state snapshots, and isolated worktrees "
+        "for rollback-safe retries"
+    )
+    assert (
+        contract["execution_path_guards"]["daemon_mediated"]["rollback_guard"]
+        == expected_daemon_guard
+    )
     assert "rollback_guard" in contract["execution_path_guards"]["mobile_remote_terminal"]
 
 
