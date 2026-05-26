@@ -10,7 +10,8 @@ Source task: VAI-028
 - Failed command: `git merge --no-ff --no-edit implementation/vai-028-attempt-1-1779758632`
 - VAI-028 implementation commit: `542783cff4d51e748a042c21747cd3e562036d51`
 - Root merge commit: `b7ae98893e694170597a073f3d3279ab00cd82a2`
-- Semantic conflict: `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- Semantic conflict: virtual-AI-OS submodule-integration backlog board; the
+  exact generated-file path is preserved in the MGW-038 scan evidence.
 
 ## Resolver
 
