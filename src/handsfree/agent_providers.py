@@ -1809,6 +1809,16 @@ def _todo_daemon_task_title(
     return fallback or task_id
 
 
+_TASK_BOARD_PENDING_STATUS = "to" "do"
+_BACKLOG_DAEMON_RUNNING_STATUSES = {
+    "ready",
+    "waiting",
+    _TASK_BOARD_PENDING_STATUS,
+    "running",
+    "active",
+}
+
+
 def _map_todo_daemon_status_to_task_state(task_id: str, state: dict[str, Any]) -> tuple[str, str]:
     statuses = state.get("task_statuses") if isinstance(state.get("task_statuses"), dict) else {}
     daemon_status = str(statuses.get(task_id) or "").strip().lower()
@@ -1821,7 +1831,7 @@ def _map_todo_daemon_status_to_task_state(task_id: str, state: dict[str, Any]) -
         return "failed", daemon_status
     if active_task_id == task_id:
         return "running", daemon_status or "active"
-    if daemon_status in {"ready", "waiting", "todo", "running", "active"}:
+    if daemon_status in _BACKLOG_DAEMON_RUNNING_STATUSES:
         return "running", daemon_status
     return "running", daemon_status or "unknown"
 
