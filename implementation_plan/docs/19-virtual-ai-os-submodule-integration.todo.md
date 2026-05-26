@@ -13,6 +13,20 @@ python3 scripts/virtual_ai_os_llm_router.py --task-id VAI-003
 
 To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
 
+## Autonomous Cadence State
+
+Run the daemon before the supervisor for one-shot checks. The daemon writes
+`data/virtual_ai_os/state/virtual_ai_os_task_state.json`,
+`data/virtual_ai_os/state/virtual_ai_os_strategy.json`, and
+`data/virtual_ai_os/state/virtual_ai_os_events.jsonl`. Implementation agents
+should read `recommended_task_id`, `ready_task_ids`, `waiting_task_ids`,
+`task_statuses`, `task_artifacts`, and `task_validation` from that state
+instead of inferring the next task from the markdown order.
+
+After VAI-015, VAI-018 is completed, VAI-019 and VAI-020 are ready, VAI-023
+waits for VAI-020 and VAI-022, and VAI-026 verifies that this supervised
+cadence remains parseable and resumable.
+
 ## VAI-000 Bootstrap supervised virtual-AI-OS backlog processing
 
 - Status: completed
