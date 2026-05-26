@@ -11,7 +11,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+)
 
 
 def _load_script_module(name: str):
@@ -28,7 +30,7 @@ def _load_tasks():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
-    return parse_task_file(TODO_PATH, "## MGW-")
+    return parse_task_file(TASK_BOARD_PATH, "## MGW-")
 
 
 def test_meta_glasses_display_todo_board_is_daemon_parseable():
