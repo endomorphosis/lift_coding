@@ -298,6 +298,26 @@ class TestSessionTokenManagerEdgeCases:
         result = manager.validate_session("any_token")
         assert result is None
 
+    def test_validate_session_revokes_malformed_data(self):
+        """Malformed stored session data should invalidate and revoke the token."""
+        mock_redis = MagicMock()
+        mock_redis.hgetall.return_value = {
+            b"user_id": b"user-123",
+            b"device_id": b"device-456",
+            b"created_at": b"not-a-date",
+            b"expires_at": datetime.now(UTC).isoformat().encode(),
+            b"metadata": b"{}",
+        }
+
+        manager = SessionTokenManager(mock_redis)
+        token = "any_token"
+        redis_key = manager._make_redis_key(manager._hash_token(token))
+
+        result = manager.validate_session(token)
+
+        assert result is None
+        mock_redis.delete.assert_called_once_with(redis_key)
+
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
         session = session_manager.create_session("user-123", "device-456", metadata={})

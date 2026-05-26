@@ -182,53 +182,59 @@ class SessionTokenManager:
         token_hash = self._hash_token(token)
         redis_key = self._make_redis_key(token_hash)
 
-        # Retrieve session data
         try:
             session_data = self.redis.hgetall(redis_key)
+        except redis.RedisError as e:
+            logger.error("Redis error during session validation: %s", e)
+            return None
 
-            if not session_data:
-                logger.debug("Session token not found or expired")
-                return None
+        if not session_data:
+            logger.debug("Session token not found or expired")
+            return None
 
+        try:
             # Decode bytes to strings (Redis returns bytes)
-            session_data = {
+            decoded_session_data = {
                 k.decode() if isinstance(k, bytes) else k: v.decode() if isinstance(v, bytes) else v
                 for k, v in session_data.items()
             }
 
             # Parse dates
-            created_at = datetime.fromisoformat(session_data["created_at"])
-            expires_at = datetime.fromisoformat(session_data["expires_at"])
-
-            # Check if expired (defensive check, Redis should auto-expire)
-            if expires_at < datetime.now(UTC):
-                logger.warning("Expired session token found (should have been auto-expired)")
-                self.revoke_session(token)
-                return None
+            created_at = datetime.fromisoformat(decoded_session_data["created_at"])
+            expires_at = datetime.fromisoformat(decoded_session_data["expires_at"])
+            user_id = decoded_session_data["user_id"]
+            device_id = decoded_session_data["device_id"]
 
             # Parse metadata (stored as JSON string)
-            metadata_str = session_data.get("metadata", "{}")
+            metadata_str = decoded_session_data.get("metadata", "{}")
             try:
                 metadata = json.loads(metadata_str)
             except json.JSONDecodeError:
                 logger.warning("Invalid JSON in session metadata, using empty dict")
                 metadata = {}
 
-            return SessionToken(
-                token=token,
-                user_id=session_data["user_id"],
-                device_id=session_data["device_id"],
-                created_at=created_at,
-                expires_at=expires_at,
-                metadata=metadata,
+        except (KeyError, TypeError, ValueError) as e:
+            logger.warning(
+                "Invalid session data during validation; revoking session (%s)",
+                type(e).__name__,
             )
+            self.revoke_session(token)
+            return None
 
-        except redis.RedisError as e:
-            logger.error("Redis error during session validation: %s", e)
+        # Check if expired (defensive check, Redis should auto-expire)
+        if expires_at < datetime.now(UTC):
+            logger.warning("Expired session token found (should have been auto-expired)")
+            self.revoke_session(token)
             return None
-        except Exception as e:
-            logger.error("Error validating session: %s", e)
-            return None
+
+        return SessionToken(
+            token=token,
+            user_id=user_id,
+            device_id=device_id,
+            created_at=created_at,
+            expires_at=expires_at,
+            metadata=metadata,
+        )
 
     def revoke_session(self, token: str) -> bool:
         """Revoke a session token.
