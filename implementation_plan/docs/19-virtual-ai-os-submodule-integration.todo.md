@@ -832,7 +832,7 @@ cadence remains parseable and resumable.
 
 ## VAI-073 Resolve code annotation in tests/test_meta_glasses_display_todo_queue.py:81
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
