@@ -41,7 +41,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Generate an implementation proposal for a Meta glasses display-widget task-board item with llm_router.",
     )
-    parser.add_argument("--task-id", default="", help="Specific MGW task id. Defaults to the first ready task.")
+    parser.add_argument("--task-id", default="", help="Specific MGW task id. Defaults to the first open task.")
     parser.add_argument("--task-board-path", dest="task_board_path", type=Path, default=TASK_BOARD_PATH)
     parser.add_argument(_legacy_task_board_path_flag(), dest="task_board_path", type=Path, help=argparse.SUPPRESS)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
@@ -64,7 +64,7 @@ def _select_task(tasks: list[object], requested_task_id: str) -> object:
     for task in tasks:
         if getattr(task, "status", "") in OPEN_TASK_STATUSES:
             return task
-    raise SystemExit("No open task found in display-widget task board.")
+    raise SystemExit("Display-widget task board has no open task.")
 
 
 def _build_prompt(task: object, plan_text: str) -> str:
