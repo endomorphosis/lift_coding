@@ -18,7 +18,7 @@ Reviewed and fetched the root component submodules requested for the virtual AI 
 | `ipfs_datasets_py` | `external/ipfs_datasets` | `origin/main` resolves to `3ea8d7aa6e24bc39df56e1a9de16567db45ebcfd` during the original refresh. | Clean submodule worktree, checked out at remote `main`; superproject `HEAD` recorded older gitlink `c68759c211f4a46ea22d34aa05e2679ddc5b2e34` during the original refresh. |
 | `ipfs_accelerate_py` | `external/ipfs_accelerate` | `origin/main` resolves to `ff61c14b4df44529ff6f73efa5e26fadeda649d5` during the original refresh; later worktree metadata also verified `https://github.com/endomorphosis/ipfs_accelerate_py` resolves. | Clean and aligned with the reviewed superproject gitlink during the original refresh. |
 | `ipfs_kit_py` | `external/ipfs_kit` | `origin/main` resolves to `3133d4fdc85a885ba7d776465bdee48f7a867e01` during the original refresh. | VAI-021 pins the owning submodule to `d40eab72b9383519edee54331636350985b4ba79`, which adds the missing nested `ipfs_accelerate_py` `.gitmodules` mapping so status traversal no longer fails on the orphan nested gitlink. The nested gitlink remains a status-only hygiene surface until its pin is verified for recursive update. |
-| `Mcp-Plus-Plus` | `Mcp-Plus-Plus` | `https://github.com/endomorphosis/Mcp-Plus-Plus.git` resolves to `29343be704da4e193ff143bac7daae9b0f98435d`. | VAI-025 maps the existing CamelCase root gitlink in `.gitmodules` so root submodule status can traverse the committed topology. |
+| `Mcp-Plus-Plus` | `Mcp-Plus-Plus` | `https://github.com/endomorphosis/Mcp-Plus-Plus.git` resolves to `29343be704da4e193ff143bac7daae9b0f98435d`. | VAI-021 and VAI-025 map the existing CamelCase root gitlink in `.gitmodules` so root submodule status can traverse the committed topology. |
 | `swissknife` | `swissknife` | `origin/main` resolves to `5b4598e15709203c0fe2265fdab2f51ea822b0f2` during the original refresh. | Same commit as the then-reviewed superproject gitlink, but dirty local worktree contained in-progress Meta glasses ORB bridge changes. |
 | `hallucinate_app` | `hallucinate_app` | `origin/main` resolves to `0fc4e0ccb8d6cb5c74a6bbf769d610dd600ff7c5` during the original refresh. | Initialized and aligned with the reviewed superproject gitlink during the original refresh. |
 | `mcp_plus_plus` | none | `git ls-remote https://github.com/endomorphosis/mcp_plus_plus` returned `Repository not found` during source review and on the 2026-05-25 re-check. | Continue treating lowercase `mcp_plus_plus` as unresolved; the mapped root gitlink uses the resolvable CamelCase repository. |
@@ -29,7 +29,7 @@ Reviewed and fetched the root component submodules requested for the virtual AI 
 - Fetched all resolvable requested root submodule remotes.
 - Initialized `hallucinate_app` in local Git config so it appears as a live submodule in `git submodule status`.
 - Left `swissknife` untouched because it had local modifications.
-- Kept the VAI-025 root `.gitmodules` mapping for the existing `Mcp-Plus-Plus` gitlink at `29343be704da4e193ff143bac7daae9b0f98435d`.
+- Kept the root `.gitmodules` mapping for the existing `Mcp-Plus-Plus` gitlink at `29343be704da4e193ff143bac7daae9b0f98435d`.
 - Repaired `external/ipfs_kit/.gitmodules` in the owning submodule for the nested `ipfs_accelerate_py` gitlink recorded at `676c0eb95d55f15b98c106ac149c431b263d7470`.
 
 ## Local-Safe Bootstrap
