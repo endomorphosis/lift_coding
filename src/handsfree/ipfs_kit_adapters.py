@@ -175,8 +175,48 @@ class _IPFSKitModuleAdapter:
                 return resolve_fn(cid, **kwargs)
         except NotImplementedError as exc:
             logger.debug("ipfs_kit_py.resolve direct callable unavailable: %s", exc)
-        raise NotImplementedError(
-            "ipfs_kit_py resolve is not exposed through a stable direct-import seam yet"
+        try:
+            backend = self._get_backend()
+        except IPFSKitUnavailableError as exc:
+            logger.debug("ipfs_kit_py resolve backend unavailable: %s", exc)
+        else:
+            for method_name in ("resolve", "name_resolve", "ipfs_name_resolve"):
+                backend_resolve = getattr(backend, method_name, None)
+                if callable(backend_resolve):
+                    return backend_resolve(cid, **kwargs)
+        try:
+            simple_api = self._get_simple_api()
+        except IPFSKitUnavailableError as exc:
+            raise IPFSKitUnavailableError(
+                "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
+                "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI is unavailable"
+            ) from exc
+        simple_resolve = getattr(simple_api, "resolve", None)
+        if callable(simple_resolve):
+            return simple_resolve(cid, **kwargs)
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
+            "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI exposes no resolve"
+        )
+
+    def _get_simple_api(self) -> Any:
+        module_name = "ipfs_kit_py.high_level_api"
+        try:
+            module = importlib.import_module(module_name)
+        except ModuleNotFoundError as exc:
+            if exc.name not in {"ipfs_kit_py", module_name}:
+                raise
+            logger.debug(
+                "Optional kit high-level API unavailable for %s: %s",
+                module_name,
+                exc,
+            )
+        else:
+            factory = getattr(module, "IPFSSimpleAPI", None)
+            if callable(factory):
+                return factory()
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable"
         )
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
