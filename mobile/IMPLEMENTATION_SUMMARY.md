@@ -147,10 +147,8 @@ The implementation is ready for testing but requires physical hardware:
 ## Known Limitations & TODOs
 
 1. **Android WAV Playback:**
-   - Current implementation enables Bluetooth SCO but doesn't parse/play WAV files
-   - Marked with TODO comments
-   - Requires implementing WAV header parsing and AudioTrack buffer management
-   - DEV mode (expo-av) playback works fine
+   - Current `expo-glasses-audio` Android playback enables Bluetooth SCO and parses RIFF/WAVE, `fmt `, and `data` chunks before playing mono PCM through `AudioTrack`
+   - DEV mode (expo-av) playback remains available for phone-audio iteration
 
 2. **Playback Status Events:**
    - iOS uses 3-second estimated duration instead of real playback status
