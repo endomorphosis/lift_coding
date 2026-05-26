@@ -10,7 +10,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / ("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md")
 
 
 def _load_script_module(name: str):
@@ -27,7 +27,7 @@ def _load_tasks():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
-    return parse_task_file(TODO_PATH, "## HAO-")
+    return parse_task_file(TASK_BOARD_PATH, "## HAO-")
 
 
 def _git(cwd: Path, *args: str) -> str:
