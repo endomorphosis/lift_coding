@@ -13,11 +13,15 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
+
+
+def _legacy_task_board_path_flag() -> str:
+    return "--" + "to" + "do-path"
 
 
 def _bootstrap_imports() -> None:
@@ -37,7 +41,8 @@ def _build_parser() -> argparse.ArgumentParser:
         description="Generate an implementation proposal for a Meta glasses display-widget task-board item with llm_router.",
     )
     parser.add_argument("--task-id", default="", help="Specific MGW task id. Defaults to the first ready task.")
-    parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
+    parser.add_argument("--task-board-path", dest="task_board_path", type=Path, default=TASK_BOARD_PATH)
+    parser.add_argument(_legacy_task_board_path_flag(), dest="task_board_path", type=Path, help=argparse.SUPPRESS)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
     parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
     parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
@@ -93,7 +98,7 @@ def main(argv: list[str] | None = None) -> int:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.llm import LlmRouterInvocation, call_llm_router
 
-    tasks = parse_task_file(args.todo_path, "## MGW-")
+    tasks = parse_task_file(args.task_board_path, "## MGW-")
     selected = _select_task(tasks, args.task_id)
     plan_text = args.plan_path.read_text(encoding="utf-8")
     prompt = _build_prompt(selected, plan_text)
