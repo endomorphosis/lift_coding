@@ -601,12 +601,13 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    (repo / "todo.md").write_text(
-        """# Temporary Board
+    task_board_path = repo / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text(
+        f"""# Temporary Board
 
 ## HAO-001 Existing work
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P2
 - Track: ops
@@ -618,11 +619,11 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
         encoding="utf-8",
     )
     (repo / "scan_target.py").write_text("# TODO: this should wait for backlog drain\n", encoding="utf-8")
-    _git(repo, "add", "todo.md", "scan_target.py")
+    _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "scan_target.py")
     _git(repo, "commit", "-m", "seed")
 
     findings = daemon_module.record_codebase_scan_findings(
-        todo_path=repo / "todo.md",
+        todo_path=task_board_path,
         strategy_path=tmp_path / "strategy.json",
         discovery_dir=repo / "discovery",
         repo_root=repo,
@@ -632,7 +633,7 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     )
 
     assert findings == []
-    assert "HAO-002" not in (repo / "todo.md").read_text(encoding="utf-8")
+    assert "HAO-002" not in task_board_path.read_text(encoding="utf-8")
 
 
 def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
