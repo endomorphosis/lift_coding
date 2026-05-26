@@ -60,6 +60,10 @@ def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:
     }
 
 
+def _temporary_board_path(repo: Path) -> Path:
+    return repo / TEMP_TASK_BOARD_FILENAME
+
+
 def _pending_task_metadata() -> dict[str, str]:
     return {
         "status": PENDING_TASK_STATUS,
@@ -973,7 +977,7 @@ def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / TEMP_TASK_BOARD_FILENAME
+    todo_path = _temporary_board_path(repo)
     objective_path = repo / "objective-heap.md"
     source = repo / "src" / "runtime_router.py"
     notes = repo / "docs" / "runtime_notes.md"
