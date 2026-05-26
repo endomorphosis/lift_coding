@@ -1228,20 +1228,26 @@ def _resolve_runtime_value(value: Any) -> Any:
     except ImportError:
         return value
 
-    lowlevel = getattr(trio, "lowlevel", None)
-    current_trio_token = getattr(lowlevel, "current_trio_token", None)
-    if current_trio_token is not None:
-        try:
-            current_trio_token()
-        except RuntimeError:
-            pass
-        else:
-            return value
+    if _is_running_inside_trio(trio):
+        return value
 
     async def _await_value() -> Any:
         return await value
 
     return trio.run(_await_value)
+
+
+def _is_running_inside_trio(trio: Any) -> bool:
+    lowlevel = getattr(trio, "lowlevel", None)
+    current_trio_token = getattr(lowlevel, "current_trio_token", None)
+    if current_trio_token is None:
+        return False
+
+    try:
+        current_trio_token()
+    except RuntimeError:
+        return False
+    return True
 
 
 def _close_runtime_stream(runtime_stream: Any) -> None:
