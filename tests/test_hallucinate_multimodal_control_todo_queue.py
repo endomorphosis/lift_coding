@@ -48,8 +48,8 @@ def _git(cwd: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
-# Keep daemon fixture path arguments centralized so scanner findings stay focused
-# on real source markers.
+# Keep daemon constructor fixture paths centralized so required task-board wiring
+# does not look like a source follow-up at every call site.
 def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:
     return {
         TASK_BOARD_PATH_KEY: repo / TEMP_TASK_BOARD_FILENAME,
