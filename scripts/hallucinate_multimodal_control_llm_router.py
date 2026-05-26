@@ -38,7 +38,7 @@ def _bootstrap_imports() -> None:
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate an implementation proposal for a Hallucinate multimodal-control todo with llm_router.",
+        description="Generate an implementation proposal for a Hallucinate multimodal-control task-board item with llm_router.",
     )
     parser.add_argument("--task-id", default="", help="Specific HAO task id. Defaults to the first ready task.")
     parser.add_argument("--todo-path", type=Path, default=DEFAULT_TASK_BOARD_PATH)
