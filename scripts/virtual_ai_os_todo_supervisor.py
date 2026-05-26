@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the accelerator todo supervisor for virtual-AI-OS work."""
+"""Run the accelerator backlog supervisor for virtual-AI-OS work."""
 
 from __future__ import annotations
 
