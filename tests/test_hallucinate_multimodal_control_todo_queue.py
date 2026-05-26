@@ -87,6 +87,10 @@ def _repo_relative_paths(repo: Path, *paths: Path) -> list[str]:
     return [path.relative_to(repo).as_posix() for path in paths]
 
 
+def _stage_paths(repo: Path, *paths: Path) -> None:
+    _git(repo, "add", *_repo_relative_paths(repo, *paths))
+
+
 def _pending_task_metadata() -> dict[str, str]:
     return {
         "status": PENDING_TASK_STATUS,
@@ -1354,7 +1358,7 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     _git(app, "config", "user.email", "test@example.invalid")
 
     todo_path = docs / TASK_BOARD_FILENAME
-    task_board_pathspec = _repo_relative_paths(app, todo_path)[0]
+    declared_output_path = _repo_relative_paths(app, todo_path)[0]
     todo_path.write_text(
         f"""# HAO Board
 
@@ -1365,13 +1369,13 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
 - Priority: P1
 - Track: ops
 - Depends on:
-- Outputs: {task_board_pathspec}
+- Outputs: {declared_output_path}
 - Validation: true
 - Acceptance: Status updates are committed.
 """,
         encoding="utf-8",
     )
-    _git(app, "add", task_board_pathspec)
+    _stage_paths(app, todo_path)
     _git(app, "commit", "-m", "app base")
     _git(repo, "add", "hallucinate_app")
     _git(repo, "commit", "-m", "root base")
