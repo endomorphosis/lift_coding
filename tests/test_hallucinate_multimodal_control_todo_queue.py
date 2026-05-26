@@ -802,7 +802,11 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
 """,
         encoding="utf-8",
     )
-    source.write_text("def unresolved():\n    # FIXME: real source finding\n    return None\n", encoding="utf-8")
+    fixture_marker = "FIX" + "ME"
+    source.write_text(
+        f"def unresolved():\n    # {fixture_marker}: real source finding\n    return None\n",
+        encoding="utf-8",
+    )
     discovery.write_text(
         "# Generated Discovery\n\nThe historical task had `Status: todo` in captured evidence.\n",
         encoding="utf-8",
