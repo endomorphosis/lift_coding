@@ -11,8 +11,9 @@ from __future__ import annotations
 import importlib
 import json
 import logging
+from collections.abc import Callable
 from functools import lru_cache
-from typing import Any, Callable, NoReturn, Protocol
+from typing import Any, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
 IPFS_KIT_CLI_COMMAND = "ipfs-kit"
@@ -303,7 +304,10 @@ class _IPFSKitModuleAdapter:
             if callable(package_fn):
                 return package_fn(items, **kwargs)
         except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.package_dataset direct callable unavailable: %s", exc)
+            logger.debug(
+                "ipfs_kit_py.package_dataset direct callable unavailable: %s",
+                exc,
+            )
 
         storage_options = dict(kwargs)
         metadata = storage_options.pop("metadata", None)
