@@ -9,6 +9,7 @@ Source task: MGW-022
 - Retry-budget evidence: `/home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-027-mgw-022-merge-retry-budget.md`
 - Failed reason: `main_checkout_dirty_conflict`
 - Dirty paths: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`, `scripts/meta_glasses_display_todo_supervisor.py`, `scripts/virtual_ai_os_todo_supervisor.py`
+- MGW-022 implementation branch: `implementation/mgw-022-attempt-1-1779754068`
 - MGW-022 implementation commit: `ba47688718e33fcdd24182127920c939ec44eff0`
 - MGW-022 reconciliation commit: `3a97fd774af5be37a9fec89cee3af476bb5cba56`
 - Main merge commit containing MGW-022: `f358213ae780bbdddf79f6524084a281bd670884`
@@ -17,14 +18,18 @@ Source task: MGW-022
 
 The merge blocker was generated backlog and supervisor drift in the main
 checkout, not a semantic conflict in the MGW-022 docs fix. The intended MGW-022
-implementation is committed in the owning repository at
+implementation was already committed in the owning repository at
 `ba47688718e33fcdd24182127920c939ec44eff0`; its commit metadata reports no
 submodule changes.
 
-The MGW-022 branch was reconciled by
-`3a97fd774af5be37a9fec89cee3af476bb5cba56`, preserving the newer MGW-025
-through MGW-029 retry-budget backlog entries from `main`. The reconciled
-MGW-022 work is now present on `main` through merge commit
+The MGW-022 source branch included reconciliation commit
+`3a97fd774af5be37a9fec89cee3af476bb5cba56`, which merged current `main` into
+`implementation/mgw-022-attempt-1-1779754068` and preserved the newer MGW-025
+through MGW-029 retry-budget backlog entries from `main`. After reconciliation,
+the branch diff against `main` was limited to the MGW-022 discovery wording fix
+and annotation-resolution note.
+
+The reconciled MGW-022 work is now present on `main` through merge commit
 `f358213ae780bbdddf79f6524084a281bd670884`, so there is no live semantic
 conflict for `ipfs-accelerate-agent-merge-resolver --events-path ... --apply`.
 
@@ -38,6 +43,7 @@ loop.
 git branch --contains ba47688718e33fcdd24182127920c939ec44eff0
 git branch --contains 3a97fd774af5be37a9fec89cee3af476bb5cba56
 git show --summary f358213ae780bbdddf79f6524084a281bd670884
+git merge-tree --write-tree main 3a97fd774af5be37a9fec89cee3af476bb5cba56
 ```
 
 ```bash
