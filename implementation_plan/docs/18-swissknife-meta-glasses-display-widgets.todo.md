@@ -433,7 +433,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-038 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-unblock.md:13
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
