@@ -30,7 +30,7 @@ class IPFSAccelerateAdapter(Protocol):
 
 
 class IPFSAccelerateUnavailableError(RuntimeError):
-    """Raised when the optional ipfs_accelerate_py dependency is not installed."""
+    """Raised when ipfs_accelerate_py is missing or has no usable adapter surface."""
 
 
 class _UnavailableIPFSAccelerateAdapter:
@@ -60,7 +60,7 @@ class _IPFSAccelerateModuleAdapter:
             except Exception:
                 continue
 
-        raise NotImplementedError(
+        raise IPFSAccelerateUnavailableError(
             "ipfs_accelerate_py canonical direct-import surface is unavailable. "
             "Expected one of: "
             "`ipfs_accelerate_py.llm_router.generate_text`, "

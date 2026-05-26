@@ -88,3 +88,20 @@ def test_delegates_to_legacy_top_level_helpers(monkeypatch):
         "vectors": [[1.0], [2.0]],
         "options": {},
     }
+
+
+def test_installed_accelerate_without_supported_surface_raises_unavailable(monkeypatch):
+    """Installed accelerate package should fail with the adapter's concrete error."""
+    _clear_accelerate_modules(monkeypatch)
+    module = ModuleType("ipfs_accelerate_py")
+
+    monkeypatch.setitem(sys.modules, "ipfs_accelerate_py", module)
+    reset_ipfs_accelerate_adapter_cache()
+
+    adapter = get_ipfs_accelerate_adapter()
+
+    with pytest.raises(
+        IPFSAccelerateUnavailableError,
+        match="canonical direct-import surface is unavailable",
+    ):
+        adapter.generate("hello")
