@@ -73,6 +73,20 @@ def _captured_pending_status_line() -> str:
     return f"{status_key}: {PENDING_TASK_STATUS}"
 
 
+def _readme_fenced_task_board_search_example() -> str:
+    task_board_example = f"docs/example.{TEMP_TASK_BOARD_FILENAME}"
+    return "\n".join(
+        (
+            "# Example",
+            "",
+            "```bash",
+            f'rg -n "{PENDING_TASK_STATUS}" {task_board_example}',
+            "```",
+            "",
+        )
+    )
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
@@ -824,10 +838,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         encoding="utf-8",
     )
     assert _captured_pending_status_line() in discovery.read_text(encoding="utf-8")
-    readme.write_text(
-        f'# Example\n\n```bash\nrg -n "{PENDING_TASK_STATUS}" docs/example.{TEMP_TASK_BOARD_FILENAME}\n```\n',
-        encoding="utf-8",
-    )
+    readme.write_text(_readme_fenced_task_board_search_example(), encoding="utf-8")
     _git(
         repo,
         "add",
