@@ -356,7 +356,6 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-031 Resolve merge retry-budget failure for MGW-027
 
-<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P1
@@ -368,20 +367,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-032 Resolve implementation retry-budget failure for MGW-028
 
-=======
->>>>>>> implementation/mgw-028-attempt-3-1779761979
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-<<<<<<< HEAD
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-028. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-028 from strategy blocked_tasks.
-=======
-- Depends on: 
-- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
-- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-027'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-027. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-031-mgw-027-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-027 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
->>>>>>> implementation/mgw-028-attempt-3-1779761979
