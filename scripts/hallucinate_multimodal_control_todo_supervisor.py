@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the accelerator todo supervisor for Hallucinate multimodal-control work."""
+"""Run the accelerator task supervisor for Hallucinate multimodal-control work."""
 
 from __future__ import annotations
 
