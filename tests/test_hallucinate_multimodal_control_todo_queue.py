@@ -1443,10 +1443,7 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
     assert "AA data/hallucinate_multimodal_control/discovery/finding.md" in _git(repo, "status", "--porcelain")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
-        state_path=repo / "state.json",
-        strategy_path=repo / "strategy.json",
-        events_path=repo / "events.jsonl",
+        **_implementation_daemon_paths(repo),
         repo_root=repo,
         task_header_prefix="## HAO-",
     )
@@ -1507,7 +1504,7 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     _git(repo, "commit", "-m", "main equivalent pointer")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
+        **{TASK_BOARD_PATH_KEY: _temporary_board_path(repo)},
         state_path=tmp_path / "state.json",
         strategy_path=tmp_path / "strategy.json",
         events_path=tmp_path / "events.jsonl",
