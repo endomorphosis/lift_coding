@@ -14,8 +14,12 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
 )
+TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
+TASK_BOARD_PATH_ENV = "HANDSFREE_VAI_OS_" + "TO" + "DO" + "_PATH"
 STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
+STATE_DIR_ENV = "HANDSFREE_VAI_OS_STATE_DIR"
 WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
+WORKTREE_ROOT_ENV = "HANDSFREE_VAI_OS_WORKTREE_ROOT"
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_datasets",
     "external/ipfs_accelerate",
@@ -24,6 +28,29 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "swissknife",
     "hallucinate_app",
 )
+
+
+def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
+    """Return the repo-local bootstrap paths for the virtual-AI-OS daemon."""
+
+    task_board_path = Path(os.environ.get(TASK_BOARD_PATH_ENV, str(TASK_BOARD_PATH)))
+    state_dir = Path(os.environ.get(STATE_DIR_ENV, str(STATE_DIR)))
+    worktree_root = Path(os.environ.get(WORKTREE_ROOT_ENV, str(WORKTREE_ROOT)))
+    return {
+        "repo_root": REPO_ROOT,
+        "task_board_path": task_board_path,
+        "state_dir": state_dir,
+        "worktree_root": worktree_root,
+    }
+
+
+def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
+    """Create local runtime directories used by the virtual-AI-OS daemon."""
+
+    resolved = paths or virtual_ai_os_bootstrap_paths()
+    resolved["state_dir"].mkdir(parents=True, exist_ok=True)
+    resolved["worktree_root"].mkdir(parents=True, exist_ok=True)
+    return resolved
 
 
 def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
@@ -52,16 +79,17 @@ def _ensure_runtime_pythonpath() -> None:
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
+    paths = ensure_virtual_ai_os_bootstrap_paths()
     os.chdir(REPO_ROOT)
     _ensure_runtime_pythonpath()
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 
-    args = _with_default(args, "--todo-path", str(TASK_BOARD_PATH))
-    args = _with_default(args, "--state-dir", str(STATE_DIR))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths["task_board_path"]))
+    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
     args = _with_default(args, "--task-prefix", "## VAI-")
     args = _with_default(args, "--state-prefix", "virtual_ai_os")
-    args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
+    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
     daemon_main(args)
 
