@@ -135,9 +135,7 @@ def _run_supervisor(argv: list[str]) -> None:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
-        ensure_implementation_supervisor_running,
         parse_args,
-        repair_implementation_supervisor_runtime,
         split_csv_values,
     )
 
@@ -214,22 +212,9 @@ def _run_supervisor(argv: list[str]) -> None:
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
     )
-    if parsed.ensure_running:
-        result = ensure_implementation_supervisor_running(
-            config,
-            argv,
-            launcher_path=Path(__file__).resolve(),
-            process_fragments=("meta_glasses_display_todo_supervisor.py",),
-            startup_wait_seconds=parsed.ensure_startup_wait_seconds,
-        )
-        logger.info("Display-widget implementation supervisor ensure complete: %s", result)
-        return
-
-    repairs = repair_implementation_supervisor_runtime(config)
-    if repairs.get("removed") or repairs.get("updated_status"):
-        logger.info("Repaired stale display-widget supervisor runtime markers: %s", repairs)
-
     supervisor = PortalImplementationSupervisor(config)
+    if getattr(parsed, "ensure_running", False):
+        logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
     if parsed.once:
         result = supervisor.run_once()
         record_retry_budget_findings(
