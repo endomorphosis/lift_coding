@@ -63,7 +63,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Refinement depth: 1
 - Embedding query: objective driven supervisor loop scans goal heap and generates daemon parseable backlog records
 - AST query: record_objective_goal_findings, objective_goal_seen_fingerprints, last_objective_goal_scan_findings
-- Conflict policy: keep supervisor state schema backward compatible and resolve todo generation conflicts by preserving all unique HAO tasks
+- Conflict policy: keep supervisor state schema backward compatible and resolve backlog-record generation conflicts by preserving all unique HAO records
 - Goal: The supervisor keeps the Codex loop fed from objective gaps, not only from TODO annotations.
 - Evidence: objective_goal_scan, objective_goal_seen_fingerprints, last_objective_goal_scan_findings, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Outputs: scripts/hallucinate_multimodal_control_todo_daemon.py, tests/test_hallucinate_multimodal_control_todo_queue.py
