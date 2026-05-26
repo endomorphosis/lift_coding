@@ -13,6 +13,93 @@
       "mediation_receipt"
     ]
   },
+  "diagnosticsContract": {
+    "name": "mobile_orb_diagnostics",
+    "version": "0.1.0",
+    "description": "Single simulator/physical-device diagnostics shape for mobile ORB edge state, backend counts, policy receipts, descriptor CIDs, and fallback visibility.",
+    "required": [
+      "contract",
+      "edge_session_id",
+      "mode",
+      "capability_counts",
+      "backend_counts",
+      "backend_capability_counts",
+      "descriptor_cids",
+      "policy_cids",
+      "binding_state",
+      "receipt_cids",
+      "fallback_reasons"
+    ],
+    "properties": {
+      "contract": {
+        "const": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
+      },
+      "edge_session_id": {
+        "type": ["string", "null"]
+      },
+      "mode": {
+        "enum": ["simulator", "physical_device", "unknown"]
+      },
+      "capability_counts": {
+        "type": "object",
+        "description": "Counts for DAT capabilities, advertised/accepted interface capabilities, and backend ORB records visible to diagnostics."
+      },
+      "backend_counts": {
+        "type": "object",
+        "properties": {
+          "edge_sessions": { "type": "integer" },
+          "events": { "type": "integer" },
+          "bindings": { "type": "integer" },
+          "subscriptions": { "type": "integer" },
+          "invocations": { "type": "integer" },
+          "dispatches": { "type": "integer" },
+          "revocations": { "type": "integer" }
+        }
+      },
+      "backend_capability_counts": {
+        "type": "object",
+        "description": "Compatibility alias for backend_counts so diagnostics clients can read backend capability counts directly."
+      },
+      "descriptor_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "policy_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "binding_state": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": ["missing", "registered", "bound", "subscribed"]
+          },
+          "registered": { "type": "boolean" },
+          "edge_session_id": { "type": ["string", "null"] },
+          "active_bindings": { "type": "integer" },
+          "active_binding_handles": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "active_subscriptions": { "type": "integer" },
+          "active_subscription_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "latest_binding_handle": { "type": ["string", "null"] },
+          "latest_subscription_id": { "type": ["string", "null"] }
+        }
+      },
+      "receipt_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "fallback_reasons": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  },
   "methods": [
     {
       "name": "register_edge_capabilities",

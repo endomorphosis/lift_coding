@@ -129,6 +129,13 @@ function formatWearablesDisplayActionStatus(result, diagnostics) {
   return `${action}: ${message} (state=${connectionState}, status=${status})`;
 }
 
+function formatMobileOrbList(values, limit = 3) {
+  if (!Array.isArray(values) || values.length === 0) {
+    return 'none';
+  }
+  return values.slice(-limit).join(', ');
+}
+
 function mergeWearablesFollowOnTask(followOnTask, detail) {
   if (!followOnTask?.task_id || !detail?.id) {
     return followOnTask;
@@ -270,6 +277,33 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const latestMobileOrbSubscription = Array.isArray(mobileOrbDiagnostics?.subscriptions)
     ? mobileOrbDiagnostics.subscriptions[mobileOrbDiagnostics.subscriptions.length - 1]
     : null;
+  const mobileOrbBackendCounts =
+    mobileOrbBackendDiagnostics?.backend_capability_counts ||
+    mobileOrbBackendDiagnostics?.backend_counts ||
+    mobileOrbDiagnostics?.backend_capability_counts ||
+    mobileOrbDiagnostics?.backend_counts ||
+    {};
+  const mobileOrbCapabilityCounts =
+    mobileOrbBackendDiagnostics?.capability_counts ||
+    mobileOrbDiagnostics?.capability_counts ||
+    {};
+  const mobileOrbBindingState = mobileOrbDiagnostics?.binding_state || {};
+  const mobileOrbDescriptorCids =
+    mobileOrbBackendDiagnostics?.descriptor_cids ||
+    mobileOrbDiagnostics?.descriptor_cids ||
+    [];
+  const mobileOrbPolicyCids =
+    mobileOrbBackendDiagnostics?.policy_cids ||
+    mobileOrbDiagnostics?.policy_cids ||
+    [];
+  const mobileOrbReceiptCids =
+    mobileOrbBackendDiagnostics?.receipt_cids ||
+    mobileOrbDiagnostics?.receipt_cids ||
+    [];
+  const mobileOrbFallbackReasons =
+    mobileOrbBackendDiagnostics?.fallback_reasons ||
+    mobileOrbDiagnostics?.fallback_reasons ||
+    [];
 
   const buildMobileOrbRegistrationInput = (options = {}) => {
     const platform = Platform.OS === 'ios' || Platform.OS === 'android'
@@ -1573,15 +1607,40 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
           {mobileOrbDiagnostics?.orb_state_persistence ? ' + bindings/subscriptions' : ''}
         </Text>
         <Text style={styles.text}>
-          ORB descriptors: {[
-            mobileOrbDiagnostics?.mobile_orb_interface_cid,
-            mobileOrbDiagnostics?.display_widget_interface_cid,
-          ].filter(Boolean).join(', ') || 'none'}
+          ORB diagnostics contract: {mobileOrbDiagnostics?.contract || 'none'} / {mobileOrbDiagnostics?.mode || 'unknown'}
+        </Text>
+        <Text style={styles.text}>
+          ORB binding state: {mobileOrbBindingState.status || 'missing'} ({mobileOrbBindingState.active_bindings || 0} bindings, {mobileOrbBindingState.active_subscriptions || 0} subscriptions)
+        </Text>
+        <Text style={styles.text}>
+          ORB capability counts: DAT {mobileOrbCapabilityCounts?.dat?.enabled || 0}/{mobileOrbCapabilityCounts?.dat?.total || 0}, interfaces {mobileOrbCapabilityCounts.accepted_interfaces || 0}/{mobileOrbCapabilityCounts.advertised_interfaces || 0}
+        </Text>
+        <Text style={styles.text}>
+          ORB descriptors: {formatMobileOrbList(mobileOrbDescriptorCids.length
+            ? mobileOrbDescriptorCids
+            : [
+                mobileOrbDiagnostics?.mobile_orb_interface_cid,
+                mobileOrbDiagnostics?.display_widget_interface_cid,
+              ].filter(Boolean))}
+        </Text>
+        <Text style={styles.text}>
+          ORB policy CIDs: {formatMobileOrbList(mobileOrbPolicyCids)}
+        </Text>
+        <Text style={styles.text}>
+          ORB receipt CIDs: {formatMobileOrbList(mobileOrbReceiptCids)}
+        </Text>
+        <Text style={styles.text}>
+          ORB fallback reasons: {formatMobileOrbList(mobileOrbFallbackReasons)}
         </Text>
         <Text style={styles.text}>
           ORB events/bindings/subscriptions: {mobileOrbDiagnostics
             ? `${mobileOrbDiagnostics.events_count}/${mobileOrbDiagnostics.bindings_count}/${mobileOrbDiagnostics.subscriptions_count || 0}`
             : '0/0/0'}
+        </Text>
+        <Text style={styles.text}>
+          ORB backend counts: {mobileOrbBackendCounts
+            ? `${mobileOrbBackendCounts.events || 0}/${mobileOrbBackendCounts.bindings || 0}/${mobileOrbBackendCounts.subscriptions || 0}/${mobileOrbBackendCounts.invocations || 0}/${mobileOrbBackendCounts.dispatches || 0}`
+            : '0/0/0/0/0'}
         </Text>
         <Text style={styles.text}>
           ORB backend events/bindings/subscriptions: {mobileOrbBackendDiagnostics

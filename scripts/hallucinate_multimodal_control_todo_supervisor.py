@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 import logging
 import os
+import shlex
+import shutil
 import subprocess
 import sys
 import time
@@ -39,6 +41,19 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
     if flag in argv:
         return argv
     return [flag, value, *argv]
+
+
+def _default_llm_merge_resolver_command() -> str:
+    configured = os.environ.get("HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    configured = os.environ.get("IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    codex = shutil.which("codex")
+    if not codex:
+        return ""
+    return f"{shlex.quote(codex)} exec --dangerously-bypass-approvals-and-sandbox -C . -"
 
 
 def _pop_bool_flag(argv: list[str], flag: str) -> bool:
@@ -237,6 +252,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--task-prefix", "## HAO-")
     args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
     args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
+    resolver_command = _default_llm_merge_resolver_command()
+    if resolver_command:
+        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
@@ -305,6 +323,8 @@ def main(argv: list[str] | None = None) -> None:
             state_prefix=parsed.state_prefix,
             implement=parsed.implement,
             implementation_command=parsed.implementation_command,
+            llm_merge_resolver_command=parsed.llm_merge_resolver_command,
+            llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
             implementation_timeout=parsed.implementation_timeout,
             implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
             use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,

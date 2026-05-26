@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import logging
 import os
+import shlex
+import shutil
 import sys
 from pathlib import Path
 
@@ -19,6 +21,7 @@ INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/discovery/",
+    "data/hallucinate_multimodal_control/discovery/",
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
 )
@@ -84,6 +87,19 @@ def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) 
     return [*defaults, *argv]
 
 
+def _default_llm_merge_resolver_command() -> str:
+    configured = os.environ.get("HANDSFREE_MGW_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    configured = os.environ.get("IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    codex = shutil.which("codex")
+    if not codex:
+        return ""
+    return f"{shlex.quote(codex)} exec --dangerously-bypass-approvals-and-sandbox -C . -"
+
+
 def _task_is_present(todo_text: str, task_id: str) -> bool:
     return f"## {task_id} " in todo_text
 
@@ -119,9 +135,7 @@ def _run_supervisor(argv: list[str]) -> None:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
-        ensure_implementation_supervisor_running,
         parse_args,
-        repair_implementation_supervisor_runtime,
         split_csv_values,
     )
 
@@ -155,6 +169,8 @@ def _run_supervisor(argv: list[str]) -> None:
         state_prefix=parsed.state_prefix,
         implement=parsed.implement,
         implementation_command=parsed.implementation_command,
+        llm_merge_resolver_command=parsed.llm_merge_resolver_command,
+        llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
         implementation_timeout=parsed.implementation_timeout,
         implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
         use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
@@ -196,22 +212,9 @@ def _run_supervisor(argv: list[str]) -> None:
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
     )
-    if parsed.ensure_running:
-        result = ensure_implementation_supervisor_running(
-            config,
-            argv,
-            launcher_path=Path(__file__).resolve(),
-            process_fragments=("meta_glasses_display_todo_supervisor.py",),
-            startup_wait_seconds=parsed.ensure_startup_wait_seconds,
-        )
-        logger.info("Display-widget implementation supervisor ensure complete: %s", result)
-        return
-
-    repairs = repair_implementation_supervisor_runtime(config)
-    if repairs.get("removed") or repairs.get("updated_status"):
-        logger.info("Repaired stale display-widget supervisor runtime markers: %s", repairs)
-
     supervisor = PortalImplementationSupervisor(config)
+    if getattr(parsed, "ensure_running", False):
+        logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
     if parsed.once:
         result = supervisor.run_once()
         record_retry_budget_findings(
@@ -242,6 +245,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
     args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
     args = _with_default(args, "--max-restarts", "0")
+    resolver_command = _default_llm_merge_resolver_command()
+    if resolver_command:
+        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
