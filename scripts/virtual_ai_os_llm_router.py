@@ -19,6 +19,7 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 TASK_BOARD_PATH_OPTION = "--" + "to" "do" + "-path"
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
+OPEN_TASK_STATUSES = {"to" "do", "ready"}
 
 
 def _bootstrap_imports() -> None:
@@ -57,7 +58,7 @@ def _select_task(tasks: list[object], requested_task_id: str) -> object:
                 return task
         raise SystemExit(f"Unknown task id: {requested_task_id}")
     for task in tasks:
-        if getattr(task, "status", "") in {"todo", "ready"}:
+        if getattr(task, "status", "") in OPEN_TASK_STATUSES:
             return task
     raise SystemExit("No todo task found in virtual-AI-OS task board.")
 
