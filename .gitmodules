@@ -1,7 +1,10 @@
-# No root-tracked mcp_plus_plus submodule is configured because the requested
-# https://github.com/endomorphosis/mcp_plus_plus repository returned
-# "Repository not found" during source review on 2026-05-22. Continue treating
-# MCP++ as a distributed protocol surface across the reviewed component repos.
+# The lowercase https://github.com/endomorphosis/mcp_plus_plus source review
+# returned "Repository not found" on 2026-05-22. The existing root gitlink uses
+# the CamelCase repository below and is mapped so submodule status can traverse
+# the committed topology.
+[submodule "Mcp-Plus-Plus"]
+	path = Mcp-Plus-Plus
+	url = https://github.com/endomorphosis/Mcp-Plus-Plus.git
 [submodule "external/ipfs_datasets"]
 	path = external/ipfs_datasets
 	url = https://github.com/endomorphosis/ipfs_datasets_py
