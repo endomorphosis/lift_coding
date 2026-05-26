@@ -603,11 +603,11 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     _git(repo, "config", "user.email", "test@example.invalid")
     task_board_path = repo / TEMP_TASK_BOARD_FILENAME
     task_board_path.write_text(
-        """# Temporary Board
+        f"""# Temporary Board
 
 ## HAO-001 Existing work
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P2
 - Track: ops
