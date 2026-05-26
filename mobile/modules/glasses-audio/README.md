@@ -385,7 +385,7 @@ Both platforms automatically route audio to Bluetooth HFP (Hands-Free Profile) d
 
 - [Meta AI Glasses Audio Routing](../../../docs/meta-ai-glasses-audio-routing.md)
 - [Glasses Implementation README](../../glasses/README.md)
-- [Glasses Implementation TODO](../../glasses/TODO.md)
+- Glasses implementation checklist - Remaining native audio validation and platform tasks
 
 ## License
 
