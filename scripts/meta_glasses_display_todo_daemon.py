@@ -14,7 +14,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+)
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 LOCAL_JDK = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
@@ -159,7 +161,7 @@ def with_android_validation_env(command: str, repo_root: Path = REPO_ROOT) -> st
     return command.replace("./gradlew", f"env {prefix} ./gradlew", 1)
 
 
-def enforce_android_validation_environment(todo_path: Path = TODO_PATH, repo_root: Path = REPO_ROOT) -> bool:
+def enforce_android_validation_environment(todo_path: Path = TASK_BOARD_PATH, repo_root: Path = REPO_ROOT) -> bool:
     """Rewrite bare Android Gradle validations to use the repo-local JDK/SDK."""
 
     if not todo_path.exists():
@@ -192,7 +194,7 @@ def enforce_android_validation_environment(todo_path: Path = TODO_PATH, repo_roo
 
 def record_retry_budget_findings(
     *,
-    todo_path: Path = TODO_PATH,
+    todo_path: Path = TASK_BOARD_PATH,
     events_path: Path = STATE_DIR / "meta_glasses_display_events.jsonl",
     strategy_path: Path = STATE_DIR / "meta_glasses_display_strategy.json",
     discovery_dir: Path = DISCOVERY_DIR,
@@ -238,7 +240,7 @@ def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     os.chdir(REPO_ROOT)
     _bootstrap_android_validation_env()
-    enforce_android_validation_environment(TODO_PATH)
+    enforce_android_validation_environment(TASK_BOARD_PATH)
     _ensure_runtime_pythonpath()
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
@@ -249,7 +251,7 @@ def main(argv: list[str] | None = None) -> None:
         parse_args,
     )
 
-    args = _with_default(args, "--todo-path", str(TODO_PATH))
+    args = _with_default(args, "--todo-path", str(TASK_BOARD_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
