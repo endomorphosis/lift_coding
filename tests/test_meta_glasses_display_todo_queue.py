@@ -150,8 +150,8 @@ def test_android_gradle_validations_are_env_wrapped_in_board():
 
 def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    todo_path = tmp_path / "todo.md"
-    todo_path.write_text(
+    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text(
         """# Temporary Board
 
 ## MGW-001 Android task
@@ -168,13 +168,13 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
         encoding="utf-8",
     )
 
-    assert daemon_module.enforce_android_validation_environment(todo_path, REPO_ROOT)
-    updated = todo_path.read_text(encoding="utf-8")
+    assert daemon_module.enforce_android_validation_environment(task_board_path, REPO_ROOT)
+    updated = task_board_path.read_text(encoding="utf-8")
 
     assert "env JAVA_HOME=" in updated
     assert ".tools/jdk17/jdk-17.0.18+8" in updated
     assert "ANDROID_SDK_ROOT=" in updated
-    assert not daemon_module.enforce_android_validation_environment(todo_path, REPO_ROOT)
+    assert not daemon_module.enforce_android_validation_environment(task_board_path, REPO_ROOT)
 
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
