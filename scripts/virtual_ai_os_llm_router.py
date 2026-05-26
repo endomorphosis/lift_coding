@@ -60,7 +60,7 @@ def _select_task(tasks: list[object], requested_task_id: str) -> object:
     for task in tasks:
         if getattr(task, "status", "") in OPEN_TASK_STATUSES:
             return task
-    raise SystemExit("No todo task found in virtual-AI-OS task board.")
+    raise SystemExit("No open task found in virtual-AI-OS task board.")
 
 
 def _build_prompt(task: object, plan_text: str) -> str:
