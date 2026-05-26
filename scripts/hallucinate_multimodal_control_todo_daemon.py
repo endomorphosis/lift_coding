@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the generalized accelerator todo daemon for Hallucinate multimodal-control work."""
+"""Run the generalized accelerator backlog daemon for Hallucinate multimodal-control work."""
 
 from __future__ import annotations
 
