@@ -78,7 +78,7 @@ class _IPFSKitModuleAdapter:
     def __init__(self, root_module: Any) -> None:
         self._root_module = root_module
 
-    def _resolve_callable(self, *targets: tuple[str, str]) -> Callable[..., Any]:
+    def _resolve_callable(self, *targets: tuple[str, str]) -> Callable[..., Any] | None:
         for module_name, attr_name in targets:
             try:
                 module = importlib.import_module(module_name)
@@ -87,9 +87,7 @@ class _IPFSKitModuleAdapter:
                     return candidate
             except Exception:
                 continue
-        raise NotImplementedError(
-            "ipfs_kit_py callable is unavailable on the validated direct-import surface"
-        )
+        return None
 
     def _get_backend(self) -> Any:
         try:
@@ -104,58 +102,68 @@ class _IPFSKitModuleAdapter:
         )
 
     def add_bytes(self, data: bytes, **kwargs: Any) -> Any:
+        add_fn = self._resolve_callable(("ipfs_kit_py", "add_bytes"))
         try:
-            add_fn = self._resolve_callable(("ipfs_kit_py", "add_bytes"))
-            return add_fn(data, **kwargs)
-        except NotImplementedError:
-            backend = self._get_backend()
-            add_bytes = getattr(backend, "add_bytes", None)
-            if callable(add_bytes):
-                return add_bytes(data, **kwargs)
-            add_str = getattr(backend, "add_str", None)
-            if callable(add_str):
-                return add_str(data.decode("utf-8", errors="replace"), **kwargs)
-            raise NotImplementedError(
-                "ipfs_kit_py add_bytes is not exposed through a stable direct-import seam yet"
-            )
+            if add_fn is not None:
+                return add_fn(data, **kwargs)
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.add_bytes direct callable unavailable: %s", exc)
+        backend = self._get_backend()
+        add_bytes = getattr(backend, "add_bytes", None)
+        if callable(add_bytes):
+            return add_bytes(data, **kwargs)
+        add_str = getattr(backend, "add_str", None)
+        if callable(add_str):
+            return add_str(data.decode("utf-8", errors="replace"), **kwargs)
+        raise NotImplementedError(
+            "ipfs_kit_py add_bytes is not exposed through a stable direct-import seam yet"
+        )
 
     def cat(self, cid: str, **kwargs: Any) -> Any:
+        cat_fn = self._resolve_callable(("ipfs_kit_py", "cat"))
         try:
-            cat_fn = self._resolve_callable(("ipfs_kit_py", "cat"))
-            return cat_fn(cid, **kwargs)
-        except NotImplementedError:
-            backend = self._get_backend()
-            cat_fn = getattr(backend, "cat", None)
-            if callable(cat_fn):
+            if cat_fn is not None:
                 return cat_fn(cid, **kwargs)
-            raise NotImplementedError(
-                "ipfs_kit_py cat is not exposed through a stable direct-import seam yet"
-            )
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.cat direct callable unavailable: %s", exc)
+        backend = self._get_backend()
+        cat_fn = getattr(backend, "cat", None)
+        if callable(cat_fn):
+            return cat_fn(cid, **kwargs)
+        raise NotImplementedError(
+            "ipfs_kit_py cat is not exposed through a stable direct-import seam yet"
+        )
 
     def pin(self, cid: str, **kwargs: Any) -> Any:
+        pin_fn = self._resolve_callable(("ipfs_kit_py", "pin"))
         try:
-            pin_fn = self._resolve_callable(("ipfs_kit_py", "pin"))
-            return pin_fn(cid, **kwargs)
-        except NotImplementedError:
-            backend = self._get_backend()
-            return backend.pin_add(cid, **kwargs)
+            if pin_fn is not None:
+                return pin_fn(cid, **kwargs)
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.pin direct callable unavailable: %s", exc)
+        backend = self._get_backend()
+        return backend.pin_add(cid, **kwargs)
 
     def unpin(self, cid: str, **kwargs: Any) -> Any:
+        unpin_fn = self._resolve_callable(("ipfs_kit_py", "unpin"))
         try:
-            unpin_fn = self._resolve_callable(("ipfs_kit_py", "unpin"))
-            return unpin_fn(cid, **kwargs)
-        except NotImplementedError:
-            backend = self._get_backend()
-            return backend.pin_rm(cid, **kwargs)
+            if unpin_fn is not None:
+                return unpin_fn(cid, **kwargs)
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.unpin direct callable unavailable: %s", exc)
+        backend = self._get_backend()
+        return backend.pin_rm(cid, **kwargs)
 
     def resolve(self, cid: str, **kwargs: Any) -> Any:
+        resolve_fn = self._resolve_callable(("ipfs_kit_py", "resolve"))
         try:
-            resolve_fn = self._resolve_callable(("ipfs_kit_py", "resolve"))
-            return resolve_fn(cid, **kwargs)
-        except NotImplementedError:
-            raise NotImplementedError(
-                "ipfs_kit_py resolve is not exposed through a stable direct-import seam yet"
-            )
+            if resolve_fn is not None:
+                return resolve_fn(cid, **kwargs)
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.resolve direct callable unavailable: %s", exc)
+        raise NotImplementedError(
+            "ipfs_kit_py resolve is not exposed through a stable direct-import seam yet"
+        )
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
         package_fn = getattr(self._root_module, "package_dataset", None)

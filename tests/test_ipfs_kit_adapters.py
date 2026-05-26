@@ -87,3 +87,35 @@ def test_delegates_to_canonical_ipfs_backend(monkeypatch):
         "cid": "bafy123",
         "options": {},
     }
+
+
+def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
+    """Missing direct content helpers should use the canonical backend module."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def add_bytes(self, data, **kwargs):
+            return {"backend": "add_bytes", "data": data, "options": kwargs}
+
+        def cat(self, cid, **kwargs):
+            return {"backend": "cat", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.add_bytes(b"payload", pin=True) == {
+        "backend": "add_bytes",
+        "data": b"payload",
+        "options": {"pin": True},
+    }
+    assert adapter.cat("bafy123", timeout=10) == {
+        "backend": "cat",
+        "cid": "bafy123",
+        "options": {"timeout": 10},
+    }
