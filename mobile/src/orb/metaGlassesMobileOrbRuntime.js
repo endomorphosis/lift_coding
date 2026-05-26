@@ -1,5 +1,8 @@
 import { createMetaGlassesMobileOrbApiBackend } from './metaGlassesMobileOrbApiBackend';
-import { createMetaGlassesMobileOrbBridge } from './metaGlassesMobileOrbBridge';
+import {
+  buildMobileOrbDiagnosticsContract,
+  createMetaGlassesMobileOrbBridge,
+} from './metaGlassesMobileOrbBridge';
 import { metaGlassesOrbEdgeSessionStore } from './metaGlassesOrbEdgeSession';
 import { metaGlassesOrbStateStore } from './metaGlassesOrbStateStore';
 import {
@@ -99,13 +102,25 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
   }
 
   function getDiagnostics() {
-    return {
+    const diagnostics = {
       ...bridge.getDiagnostics(),
       mobile_orb_interface_cid: localInterfaceCids[0],
       display_widget_interface_cid: localInterfaceCids[1],
       backend_kind: options.backend ? 'injected' : 'api',
       edge_session_persistence: Boolean(edgeSessionStore),
       orb_state_persistence: Boolean(orbStateStore),
+    };
+    const diagnosticsContract = buildMobileOrbDiagnosticsContract(diagnostics);
+    return {
+      ...diagnostics,
+      diagnostics_contract: diagnosticsContract,
+      capability_counts: diagnosticsContract.capability_counts,
+      backend_capability_counts: diagnosticsContract.backend_capability_counts,
+      descriptor_cids: diagnosticsContract.descriptor_cids,
+      policy_cids: diagnosticsContract.policy_cids,
+      binding_state: diagnosticsContract.binding_state,
+      receipt_cids: diagnosticsContract.receipt_cids,
+      fallback_reasons: diagnosticsContract.fallback_reasons,
     };
   }
 

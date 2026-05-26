@@ -277,5 +277,23 @@ describe('Meta glasses mobile ORB runtime', () => {
         ],
       })
     );
+    expect(runtime.getDiagnostics().diagnostics_contract).toEqual(
+      expect.objectContaining({
+        contract: 'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0',
+        backend_kind: 'injected',
+        backend_capability_counts: expect.objectContaining({
+          events: 1,
+          bindings: 1,
+          subscriptions: 1,
+          operation_receipts: 2,
+        }),
+        receipt_cids: expect.arrayContaining([
+          'sha256:event-receipt',
+          'sha256:invoke-receipt',
+          'sha256:dispatch-receipt',
+          'sha256:subscription-receipt',
+        ]),
+      })
+    );
   });
 });

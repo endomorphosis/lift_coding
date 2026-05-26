@@ -54,6 +54,10 @@ def test_mobile_orb_descriptor_artifact_declares_phone_edge_methods() -> None:
 
     assert descriptor["name"] == "mobile_orb_bridge"
     assert descriptor["namespace"] == "handsfree.meta_glasses.mobile"
+    assert descriptor["diagnostics_contract"]["contract"] == (
+        "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
+    )
+    assert "receipt_cids" in descriptor["diagnostics_contract"]["required"]
     assert [method["name"] for method in descriptor["methods"]] == [
         "register_edge_capabilities",
         "publish_glasses_event",
@@ -256,6 +260,37 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert diagnostics_payload["events_count"] == 1
     assert diagnostics_payload["bindings_count"] == 1
     assert diagnostics_payload["subscriptions_count"] == 1
+    diagnostics_contract = diagnostics_payload["diagnostics_contract"]
+    assert diagnostics_contract["contract"] == (
+        "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
+    )
+    assert diagnostics_contract["mode"] == "physical_device"
+    assert diagnostics_contract["backend_capability_counts"]["events"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["bindings"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["subscriptions"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["operation_receipts"] >= 2
+    assert diagnostics_contract["backend_capability_counts"]["dat"]["session"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["dat"]["display"] == 1
+    assert "sha256:mobile" in diagnostics_contract["descriptor_cids"]
+    assert "sha256:display" in diagnostics_contract["descriptor_cids"]
+    assert "sha256:task-service" in diagnostics_contract["descriptor_cids"]
+    assert binding_payload["orb_binding"]["descriptor_cid"] in (
+        diagnostics_contract["descriptor_cids"]
+    )
+    assert binding_payload["policy_decision"]["decision_id"] in (
+        diagnostics_contract["policy_cids"]
+    )
+    assert event_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert invoked_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert dispatched_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert subscription_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert "Display unavailable. Showing task status on phone." in (
+        diagnostics_contract["fallback_reasons"]
+    )
+    assert diagnostics_contract["binding_state"]["active_bindings_count"] == 1
+    assert diagnostics_contract["binding_state"]["bindings"][0]["state"] == "bound"
+    assert diagnostics_payload["descriptor_cids"] == diagnostics_contract["descriptor_cids"]
+    assert diagnostics_payload["receipt_cids"] == diagnostics_contract["receipt_cids"]
     assert diagnostics_payload["bindings"][0]["binding_handle"] == (
         binding_payload["binding_handle"]
     )

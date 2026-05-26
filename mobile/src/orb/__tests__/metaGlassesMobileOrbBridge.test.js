@@ -29,6 +29,19 @@ describe('MetaGlassesMobileOrbBridge', () => {
 
     expect(mobileDescriptor.name).toBe('mobile_orb_bridge');
     expect(mobileDescriptor.namespace).toBe('handsfree.meta_glasses.mobile');
+    expect(mobileDescriptor.diagnostics_contract.contract).toBe(
+      'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0'
+    );
+    expect(mobileDescriptor.diagnostics_contract.required).toEqual(
+      expect.arrayContaining([
+        'backend_capability_counts',
+        'descriptor_cids',
+        'policy_cids',
+        'binding_state',
+        'receipt_cids',
+        'fallback_reasons',
+      ])
+    );
     expect(mobileDescriptor.methods.map((method) => method.name)).toEqual(
       MOBILE_ORB_BRIDGE_OPERATIONS
     );
@@ -447,7 +460,8 @@ describe('MetaGlassesMobileOrbBridge', () => {
     expect(result.invoked.response.service_result.orb_binding).toEqual(
       result.binding.response.orb_binding
     );
-    expect(bridge.getDiagnostics().bindings[0]).toEqual(
+    const diagnostics = bridge.getDiagnostics();
+    expect(diagnostics.bindings[0]).toEqual(
       expect.objectContaining({
         service_id: 'task_status_service',
         operation: 'get_task_status',
@@ -463,7 +477,7 @@ describe('MetaGlassesMobileOrbBridge', () => {
         status: 'active',
       })
     );
-    expect(bridge.getDiagnostics().subscriptions[0]).toEqual(
+    expect(diagnostics.subscriptions[0]).toEqual(
       expect.objectContaining({
         subscription_id: 'sha256:subscription',
         binding_handle: 'binding-task-status',
@@ -471,6 +485,39 @@ describe('MetaGlassesMobileOrbBridge', () => {
         stream: 'task-status',
         service_id: 'task_status_service',
       })
+    );
+    expect(diagnostics.diagnostics_contract).toEqual(
+      expect.objectContaining({
+        contract: 'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0',
+        mode: 'simulator',
+        backend_capability_counts: expect.objectContaining({
+          events: 1,
+          bindings: 1,
+          subscriptions: 1,
+          operation_receipts: 2,
+        }),
+        binding_state: expect.objectContaining({
+          active_bindings_count: 1,
+          subscriptions_count: 1,
+        }),
+      })
+    );
+    expect(diagnostics.descriptor_cids).toEqual(
+      expect.arrayContaining(['sha256:task-service', 'sha256:display'])
+    );
+    expect(diagnostics.policy_cids).toContain(
+      'local:hallucinate-app:remote-client-transport'
+    );
+    expect(diagnostics.receipt_cids).toEqual(
+      expect.arrayContaining([
+        'sha256:event-receipt',
+        'sha256:service-receipt',
+        'sha256:dispatch-receipt',
+        'sha256:subscription-receipt',
+      ])
+    );
+    expect(diagnostics.fallback_reasons).toContain(
+      'Display unavailable. Showing task status on phone.'
     );
     expect(bridge.getEventLog()).toEqual([
       expect.objectContaining({

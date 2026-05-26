@@ -17,6 +17,8 @@ const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
+export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
+  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const CONTROL_SURFACE_POLICY_BUNDLE_REF = {
   policy_id: 'policy:hallucinate-app:remote-client-transport',
   policy_cid: 'local:hallucinate-app:remote-client-transport',
@@ -30,6 +32,16 @@ const CONTROL_SURFACE_SCHEMA_REFS = [
   'interaction_envelope',
   'policy_decision',
   'mediation_receipt',
+];
+const MOBILE_ORB_DAT_CAPABILITY_KEYS = [
+  'session',
+  'camera',
+  'photoCapture',
+  'videoStream',
+  'audio',
+  'display',
+  'displayVideo',
+  'webAppDisplay',
 ];
 
 const EVENT_TYPES = new Set([
@@ -55,6 +67,255 @@ function definedEntries(record) {
   return Object.fromEntries(
     Object.entries(record).filter(([, value]) => value !== undefined)
   );
+}
+
+function uniqueStrings(values) {
+  const seen = new Set();
+  const result = [];
+  values.forEach((value) => {
+    if (typeof value !== 'string' || value.length === 0 || seen.has(value)) {
+      return;
+    }
+    seen.add(value);
+    result.push(value);
+  });
+  return result;
+}
+
+function walkObjects(value, visitor) {
+  if (Array.isArray(value)) {
+    value.forEach((item) => walkObjects(item, visitor));
+    return;
+  }
+  if (!isObject(value)) {
+    return;
+  }
+  visitor(value);
+  Object.values(value).forEach((item) => walkObjects(item, visitor));
+}
+
+function collectKeyedStrings(records, keys) {
+  const values = [];
+  records.forEach((record) => {
+    walkObjects(record, (item) => {
+      keys.forEach((key) => {
+        const value = item[key];
+        if (typeof value === 'string') {
+          values.push(value);
+        } else if (Array.isArray(value)) {
+          values.push(...value.filter((candidate) => typeof candidate === 'string'));
+        }
+      });
+    });
+  });
+  return uniqueStrings(values);
+}
+
+function normalizeDiagnosticsEdgeSessions(snapshot = {}) {
+  if (Array.isArray(snapshot.edge_sessions)) {
+    return snapshot.edge_sessions.filter(isObject);
+  }
+  if (isObject(snapshot.edge_session)) {
+    return [snapshot.edge_session];
+  }
+  if (isObject(snapshot.edgeSession)) {
+    return [snapshot.edgeSession];
+  }
+  if (isObject(snapshot.edgeSessionRecord)) {
+    return [snapshot.edgeSessionRecord];
+  }
+  if (snapshot.edge_session_id || snapshot.edge_id || snapshot.dat_capabilities) {
+    return [
+      definedEntries({
+        edge_session_id: snapshot.edge_session_id,
+        edge_id: snapshot.edge_id,
+        platform: snapshot.platform,
+        device_id: snapshot.device_id,
+        policy_cid: snapshot.policy_cid,
+        control_surface_contract_ref: snapshot.control_surface_contract_ref,
+        mediation_receipt: snapshot.mediation_receipt,
+        accepted_interface_cids: snapshot.accepted_interface_cids,
+        dat_capabilities: snapshot.dat_capabilities,
+      }),
+    ];
+  }
+  return [];
+}
+
+function datCapabilityCounts(edgeSessions) {
+  const counts = Object.fromEntries(MOBILE_ORB_DAT_CAPABILITY_KEYS.map((key) => [key, 0]));
+  edgeSessions.forEach((session) => {
+    const capabilities = isObject(session.dat_capabilities)
+      ? session.dat_capabilities
+      : session.capabilities;
+    MOBILE_ORB_DAT_CAPABILITY_KEYS.forEach((key) => {
+      if (capabilities?.[key] === true) {
+        counts[key] += 1;
+      }
+    });
+  });
+  return counts;
+}
+
+function diagnosticsMode(edgeSessions) {
+  if (edgeSessions.some((session) => session.platform === 'simulator')) {
+    return 'simulator';
+  }
+  if (
+    edgeSessions.some(
+      (session) => ['ios', 'android'].includes(session.platform) && session.device_id
+    )
+  ) {
+    return 'physical_device';
+  }
+  return edgeSessions.length > 0 ? 'simulator' : 'unknown';
+}
+
+function descriptorCidsForDiagnostics({ edgeSessions, bindings, subscriptions, events, receipts }) {
+  const values = [];
+  edgeSessions.forEach((session) => {
+    ['accepted_interface_cids', 'local_interface_cids'].forEach((key) => {
+      if (Array.isArray(session[key])) {
+        values.push(...session[key]);
+      }
+    });
+    if (Array.isArray(session.descriptors)) {
+      session.descriptors.forEach((descriptor) => {
+        if (isObject(descriptor)) {
+          values.push(descriptor.interface_cid);
+        }
+      });
+    }
+  });
+  values.push(
+    ...collectKeyedStrings(
+      [...bindings, ...subscriptions, ...events, ...receipts],
+      ['descriptor_cid', 'interface_cid', 'service_interface_cid']
+    )
+  );
+  return uniqueStrings(values);
+}
+
+function fallbackReasonsForDiagnostics(records) {
+  const reasons = [];
+  records.forEach((record) => {
+    walkObjects(record, (item) => {
+      if (isObject(item.fallback)) {
+        reasons.push(item.fallback.reason, item.fallback.message, item.fallback.render_path);
+      } else if (typeof item.fallback === 'string') {
+        reasons.push(item.fallback);
+      }
+      if (typeof item.fallback_reason === 'string') {
+        reasons.push(item.fallback_reason);
+      }
+      if (typeof item.fallbackReason === 'string') {
+        reasons.push(item.fallbackReason);
+      }
+      if (isObject(item.transport_result) && item.transport_result.status === 'error') {
+        reasons.push(item.transport_result.error || item.transport_result.message);
+      }
+    });
+  });
+  return uniqueStrings(reasons);
+}
+
+function receiptCidsForDiagnostics(records) {
+  return collectKeyedStrings(
+    records,
+    ['receipt_cid', 'orb_receipt_cid', 'receipt_id', 'parent_receipt_cids']
+  );
+}
+
+function policyCidsForDiagnostics(records) {
+  return collectKeyedStrings(records, ['policy_cid', 'compiled_policy_cid', 'decision_id']);
+}
+
+function bindingStateForDiagnostics(bindings, subscriptions) {
+  const bindingSummaries = bindings.map((binding) => {
+    const orbBinding = isObject(binding.orb_binding) ? binding.orb_binding : {};
+    const runtimeBinding = isObject(binding.runtime_binding) ? binding.runtime_binding : {};
+    const policyCids = policyCidsForDiagnostics([binding]);
+    const receiptCids = receiptCidsForDiagnostics([binding]);
+    return {
+      binding_handle: binding.binding_handle || orbBinding.handle,
+      state: binding.state || 'bound',
+      service_interface_cid: binding.service_interface_cid || orbBinding.interface_cid || null,
+      service_id: orbBinding.service_id || binding.service_id || null,
+      operation: binding.operation || orbBinding.operation || null,
+      transport: binding.transport || binding.transport_preference || orbBinding.transport || null,
+      descriptor_cid: orbBinding.descriptor_cid || binding.descriptor_cid || null,
+      policy_cid: policyCids[0] || null,
+      policy_cids: policyCids,
+      receipt_cid: receiptCids[0] || null,
+      runtime_status: runtimeBinding.status || null,
+    };
+  });
+  const subscriptionSummaries = subscriptions.map((subscription) => ({
+    subscription_id: subscription.subscription_id,
+    binding_handle: subscription.binding_handle,
+    operation: subscription.operation,
+    stream: subscription.stream,
+    status: subscription.status || 'active',
+    receipt_cid: subscription.receipt_cid || null,
+    service_id: subscription.service_id || subscription.orb_binding?.service_id || null,
+  }));
+  return {
+    bindings_count: bindingSummaries.length,
+    active_bindings_count: bindingSummaries.filter((binding) => binding.state === 'bound').length,
+    subscriptions_count: subscriptionSummaries.length,
+    bindings: bindingSummaries,
+    subscriptions: subscriptionSummaries,
+  };
+}
+
+export function buildMobileOrbDiagnosticsContract(snapshot = {}) {
+  const edgeSessions = normalizeDiagnosticsEdgeSessions(snapshot);
+  const bindings = Array.isArray(snapshot.bindings) ? snapshot.bindings.filter(isObject) : [];
+  const subscriptions = Array.isArray(snapshot.subscriptions)
+    ? snapshot.subscriptions.filter(isObject)
+    : [];
+  const events = Array.isArray(snapshot.events)
+    ? snapshot.events.filter(isObject)
+    : Array.isArray(snapshot.event_log)
+      ? snapshot.event_log.filter(isObject)
+      : [];
+  const receipts = Array.isArray(snapshot.operation_receipts)
+    ? snapshot.operation_receipts.filter(isObject)
+    : Array.isArray(snapshot.receipts)
+      ? snapshot.receipts.filter(isObject)
+      : [];
+  const records = [...edgeSessions, ...bindings, ...subscriptions, ...events, ...receipts];
+  const dat = datCapabilityCounts(edgeSessions);
+  const descriptorCids = descriptorCidsForDiagnostics({
+    edgeSessions,
+    bindings,
+    subscriptions,
+    events,
+    receipts,
+  });
+  const backendCapabilityCounts = {
+    edge_sessions: edgeSessions.length,
+    events: events.length || Number(snapshot.events_count || 0),
+    bindings: bindings.length || Number(snapshot.bindings_count || 0),
+    subscriptions: subscriptions.length || Number(snapshot.subscriptions_count || 0),
+    operation_receipts: receipts.length || Number(snapshot.operation_receipts_count || 0),
+    dat,
+    accepted_interface_cids: descriptorCids.length,
+  };
+  return {
+    contract: MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+    version: '0.1.0',
+    mode: diagnosticsMode(edgeSessions),
+    edge_session_id: snapshot.edge_session_id || edgeSessions[0]?.edge_session_id || null,
+    backend_kind: snapshot.backend_kind || 'local',
+    capability_counts: backendCapabilityCounts,
+    backend_capability_counts: backendCapabilityCounts,
+    descriptor_cids: descriptorCids,
+    policy_cids: policyCidsForDiagnostics(records),
+    binding_state: bindingStateForDiagnostics(bindings, subscriptions),
+    receipt_cids: receiptCidsForDiagnostics(records),
+    fallback_reasons: fallbackReasonsForDiagnostics(records),
+  };
 }
 
 function stableStringify(value) {
@@ -894,6 +1155,7 @@ export class MetaGlassesMobileOrbBridge {
     this.bindings = new Map();
     this.subscriptions = new Map();
     this.eventLog = [];
+    this.operationReceipts = [];
   }
 
   getEdgeSession() {
@@ -912,8 +1174,53 @@ export class MetaGlassesMobileOrbBridge {
     };
   }
 
+  recordOperationReceipt(record = {}) {
+    const receiptCid = record.receipt_cid || record.receiptId;
+    if (!receiptCid) {
+      return;
+    }
+    this.operationReceipts = this.operationReceipts.filter(
+      (existing) => existing.receipt_cid !== receiptCid
+    );
+    this.operationReceipts.push({
+      ...record,
+      receipt_cid: receiptCid,
+      edge_session_id: record.edge_session_id || this.edgeSession?.edge_session_id || null,
+      recorded_at: record.recorded_at || nowIso(this.now),
+    });
+  }
+
   getDiagnostics() {
-    return {
+    const bindings = Array.from(this.bindings.entries()).map(([bindingHandle, binding]) => ({
+      binding_handle: bindingHandle,
+      service_interface_cid: binding.service_interface_cid || null,
+      service_id: binding.orb_binding?.service_id || null,
+      descriptor_cid: binding.orb_binding?.descriptor_cid || null,
+      operation: binding.operation || binding.orb_binding?.operation || null,
+      transport: binding.transport || binding.orb_binding?.transport || null,
+      orb_binding: binding.orb_binding || null,
+      policy_decision: binding.policy_decision || null,
+      mediation_receipt: binding.mediation_receipt || null,
+      runtime_binding: binding.runtime_binding || null,
+    }));
+    const subscriptions = Array.from(this.subscriptions.entries()).map(([
+      subscriptionId,
+      subscription,
+    ]) => ({
+      subscription_id: subscriptionId,
+      binding_handle: subscription.binding_handle,
+      operation: subscription.operation,
+      stream: subscription.stream,
+      generation_key: subscription.generation_key,
+      receipt_cid: subscription.receipt_cid,
+      status: subscription.status || 'active',
+      service_id: subscription.orb_binding?.service_id || null,
+      orb_binding: subscription.orb_binding || null,
+      mediation_receipt: subscription.mediation_receipt || null,
+    }));
+    const events = [...this.eventLog];
+    const operationReceipts = [...this.operationReceipts];
+    const diagnostics = {
       registered: Boolean(this.edgeSession?.edge_session_id),
       edge_session_id: this.edgeSession?.edge_session_id || null,
       edge_id: this.edgeSession?.edge_id || this.edgeId,
@@ -924,31 +1231,34 @@ export class MetaGlassesMobileOrbBridge {
       accepted_interface_cids: this.edgeSession?.accepted_interface_cids || [],
       dat_capabilities: this.edgeSession?.dat_capabilities || null,
       bindings_count: this.bindings.size,
-      bindings: Array.from(this.bindings.entries()).map(([bindingHandle, binding]) => ({
-        binding_handle: bindingHandle,
-        service_interface_cid: binding.service_interface_cid || null,
-        service_id: binding.orb_binding?.service_id || null,
-        descriptor_cid: binding.orb_binding?.descriptor_cid || null,
-        operation: binding.operation || binding.orb_binding?.operation || null,
-        transport: binding.transport || binding.orb_binding?.transport || null,
-        orb_binding: binding.orb_binding || null,
-      })),
+      bindings,
       subscriptions_count: this.subscriptions.size,
-      subscriptions: Array.from(this.subscriptions.entries()).map(([
-        subscriptionId,
-        subscription,
-      ]) => ({
-        subscription_id: subscriptionId,
-        binding_handle: subscription.binding_handle,
-        operation: subscription.operation,
-        stream: subscription.stream,
-        generation_key: subscription.generation_key,
-        receipt_cid: subscription.receipt_cid,
-        status: subscription.status || 'active',
-        service_id: subscription.orb_binding?.service_id || null,
-      })),
+      subscriptions,
       events_count: this.eventLog.length,
+      events,
       latest_event_cid: this.eventLog[this.eventLog.length - 1]?.event_cid || null,
+      latest_receipt_cid:
+        operationReceipts[operationReceipts.length - 1]?.receipt_cid ||
+        this.eventLog[this.eventLog.length - 1]?.receipt_cid ||
+        null,
+      operation_receipts_count: operationReceipts.length,
+      operation_receipts: operationReceipts,
+    };
+    const diagnosticsContract = buildMobileOrbDiagnosticsContract({
+      ...diagnostics,
+      edge_session: this.edgeSession,
+      backend_kind: 'local',
+    });
+    return {
+      ...diagnostics,
+      diagnostics_contract: diagnosticsContract,
+      capability_counts: diagnosticsContract.capability_counts,
+      backend_capability_counts: diagnosticsContract.backend_capability_counts,
+      descriptor_cids: diagnosticsContract.descriptor_cids,
+      policy_cids: diagnosticsContract.policy_cids,
+      binding_state: diagnosticsContract.binding_state,
+      receipt_cids: diagnosticsContract.receipt_cids,
+      fallback_reasons: diagnosticsContract.fallback_reasons,
     };
   }
 
@@ -1089,6 +1399,7 @@ export class MetaGlassesMobileOrbBridge {
     this.bindings.clear();
     this.subscriptions.clear();
     this.eventLog = [];
+    this.operationReceipts = [];
     if (this.edgeSessionStore?.clear) {
       await this.edgeSessionStore.clear();
     }
@@ -1299,6 +1610,16 @@ export class MetaGlassesMobileOrbBridge {
         },
       };
     }
+    this.recordOperationReceipt({
+      operation: 'invoke_service',
+      binding_handle: bindingHandle,
+      receipt_cid: response.receipt_cid,
+      payload,
+      response,
+      fallback: response.display_widget_action?.fallback || args.fallback || null,
+      policy_decision: response.policy_decision || null,
+      mediation_receipt: response.mediation_receipt || null,
+    });
     return {
       payload,
       response,
@@ -1384,6 +1705,19 @@ export class MetaGlassesMobileOrbBridge {
       ...response,
       ...controlSurfaceFields(artifacts),
     };
+    this.recordOperationReceipt({
+      operation: 'dispatch_glasses_response',
+      receipt_cid: normalizedResponse.receipt_cid,
+      payload,
+      response: normalizedResponse,
+      fallback:
+        normalizedResponse.display_widget_action?.fallback ||
+        result.display_widget_action?.fallback ||
+        fallback ||
+        null,
+      policy_decision: normalizedResponse.policy_decision || null,
+      mediation_receipt: normalizedResponse.mediation_receipt || null,
+    });
     const actions = [
       ...(Array.isArray(normalizedResponse.dispatched_actions)
         ? normalizedResponse.dispatched_actions
@@ -1554,6 +1888,15 @@ export class MetaGlassesMobileOrbBridge {
       ...response,
       ...controlSurfaceFields(artifacts),
     };
+    this.recordOperationReceipt({
+      operation: 'revoke_binding',
+      binding_handle: bindingHandle,
+      receipt_cid: normalizedResponse.receipt_cid,
+      payload,
+      response: normalizedResponse,
+      policy_decision: normalizedResponse.policy_decision || null,
+      mediation_receipt: normalizedResponse.mediation_receipt || null,
+    });
     if (normalizedResponse.revoked) {
       this.bindings.delete(bindingHandle);
       for (const [subscriptionId, subscription] of this.subscriptions.entries()) {

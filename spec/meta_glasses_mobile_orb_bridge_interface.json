@@ -13,6 +13,54 @@
       "mediation_receipt"
     ]
   },
+  "diagnostics_contract": {
+    "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
+    "version": "0.1.0",
+    "description": "One mobile ORB edge diagnostics envelope shared by backend, simulator, and physical-device modes. The envelope summarizes backend capability counts, descriptor CIDs, policy CIDs, binding state, receipt CIDs, and fallback reasons while preserving raw records on the diagnostics endpoint.",
+    "required": [
+      "contract",
+      "version",
+      "mode",
+      "backend_capability_counts",
+      "descriptor_cids",
+      "policy_cids",
+      "binding_state",
+      "receipt_cids",
+      "fallback_reasons"
+    ],
+    "properties": {
+      "contract": { "const": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0" },
+      "version": { "type": "string" },
+      "mode": { "enum": ["simulator", "physical_device", "unknown"] },
+      "edge_session_id": { "type": ["string", "null"] },
+      "backend_kind": { "type": "string" },
+      "capability_counts": { "type": "object" },
+      "backend_capability_counts": {
+        "type": "object",
+        "description": "Counts for backend-visible edge sessions, ORB events, service bindings, subscriptions, recorded operation receipts, and DAT capabilities advertised by registered edges."
+      },
+      "descriptor_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "policy_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "binding_state": {
+        "type": "object",
+        "description": "Active binding and subscription summaries keyed by binding handle, service/interface descriptor CID, transport, runtime status, receipt CID, and policy CIDs."
+      },
+      "receipt_cids": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "fallback_reasons": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  },
   "methods": [
     {
       "name": "register_edge_capabilities",
@@ -41,6 +89,11 @@
           "local_interface_cids": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "descriptors": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "Local mobile/display interface descriptor references advertised by the phone edge so diagnostics can expose accepted descriptor CIDs."
           },
           "transport_preferences": {
             "type": "array",
