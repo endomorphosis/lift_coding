@@ -373,7 +373,10 @@ def execute_ai_capability(
     if capability_id == "github.check.find_similar_failures":
         return _execute_github_find_similar_failures(spec, **kwargs)
 
-    raise NotImplementedError(f"No executor registered for AI capability: {capability_id}")
+    raise RuntimeError(
+        "AI capability registry is inconsistent: "
+        f"registered capability '{capability_id}' has no executor"
+    )
 
 
 def execute_ai_request(
