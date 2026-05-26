@@ -1346,11 +1346,11 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
 
     todo_path = docs / TASK_BOARD_FILENAME
     todo_path.write_text(
-        """# HAO Board
+        f"""# HAO Board
 
 ## HAO-001 Land generated status
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P1
 - Track: ops
