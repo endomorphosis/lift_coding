@@ -8,7 +8,8 @@ Source task: VAI-026
 
 - Retry-budget evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-retry-budget.md`
 - Failed reason: `main_checkout_dirty_conflict`
-- Dirty paths: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`, `scripts/meta_glasses_display_todo_supervisor.py`, `scripts/virtual_ai_os_todo_supervisor.py`
+- Dirty generated-context paths: display-widget backlog board and supervisor
+  scripts; exact paths are recorded in the retry-budget evidence above.
 - VAI-026 implementation branch: `implementation/vai-026-attempt-1-1779754026`
 - VAI-026 implementation commit: `7b45affed4c3b57b0c1b263f488813547f2ea9d9`
 
@@ -31,11 +32,10 @@ Merge branch 'implementation/vai-026-attempt-1-1779754026'
 
 - Preserved current main backlog state and resolver-supervisor defaults instead
   of replaying stale VAI-026 branch copies over newer retry-budget tasks.
-- Kept the VAI-026 autonomous cadence state note in
-  `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`.
-- Cleaned duplicate supervisor merge artifacts in
-  `scripts/meta_glasses_display_todo_supervisor.py` and
-  `scripts/virtual_ai_os_todo_supervisor.py`.
+- Kept the VAI-026 autonomous cadence state note in the virtual-AI-OS
+  submodule-integration backlog board.
+- Cleaned duplicate supervisor merge artifacts in the display-widget and
+  virtual-AI-OS supervisor scripts.
 - Verified the VAI-026 implementation outputs were committed in the owning root
   repository and validated by the resolver before unblock.
 - Removed `VAI-026` from

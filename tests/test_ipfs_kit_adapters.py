@@ -121,6 +121,7 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
     }
 
 
+<<<<<<< HEAD
 def test_cat_falls_back_to_backend_get(monkeypatch):
     """Backends without cat should still support content reads through get."""
     root_module = ModuleType("ipfs_kit_py")
@@ -145,6 +146,8 @@ def test_cat_falls_back_to_backend_get(monkeypatch):
     }
 
 
+=======
+>>>>>>> implementation/vai-040-attempt-1-1779814558
 def test_resolve_falls_back_to_canonical_backend(monkeypatch):
     """Missing direct resolve helper should use canonical backend name resolution."""
     root_module = ModuleType("ipfs_kit_py")
