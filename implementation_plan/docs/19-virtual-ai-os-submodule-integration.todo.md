@@ -290,7 +290,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-025 Re-check canonical mcp_plus_plus source and standalone pin decision
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
