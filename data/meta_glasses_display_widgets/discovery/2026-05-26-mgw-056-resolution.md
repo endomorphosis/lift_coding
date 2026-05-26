@@ -14,13 +14,15 @@ source scanner.
 
 ## Resolution
 
-The cited fixture now names the temporary board `task_board_path` and passes it
-through the existing neutral keyword constant used by nearby tests. Behavior is
+The cited fixture now names the temporary board `task_board_path`, uses the
+centralized neutral temporary task-board filename, and passes the path through
+the existing neutral keyword constant used by nearby tests. Behavior is
 unchanged: the daemon still writes the same temporary board, records the merge
 retry-budget finding, and proves the generated follow-up remains parseable.
 
-The backlog conflict markers adjacent to MGW-056 were resolved without changing
-MGW-056 task status so the supervisor-fed board stays machine-readable.
+This overlaps the VAI-049 fixture annotation fix that reached `main` during the
+supervisor merge. After validating the merged tree, MGW-056 is marked completed
+so the duplicate backlog item does not remain open.
 
 ## Validation
 
