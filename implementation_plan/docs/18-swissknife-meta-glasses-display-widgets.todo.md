@@ -246,7 +246,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-021 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md:24
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
@@ -268,7 +268,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-023 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md:8
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
