@@ -1853,7 +1853,7 @@ def _todo_daemon_progress_summary(
     if active_task_id == task_id:
         return f"{task_id} active in the {_BACKLOG_DAEMON_DISPLAY_NAME}: {title}."
     if daemon_status == "ready":
-        return f"{task_id} is ready in the todo daemon: {title}."
+        return f"{task_id} is ready in the {_BACKLOG_DAEMON_DISPLAY_NAME}: {title}."
     if daemon_status == "waiting":
         return f"{task_id} is waiting on dependencies: {title}."
     return f"{task_id} status is {daemon_status}: {title}."
