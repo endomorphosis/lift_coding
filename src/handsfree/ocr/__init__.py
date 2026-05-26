@@ -10,6 +10,10 @@ from typing import Protocol
 logger = logging.getLogger(__name__)
 
 
+class OCRDisabledError(RuntimeError):
+    """Raised when OCR is explicitly disabled by runtime configuration."""
+
+
 class OCRProvider(Protocol):
     """Protocol for OCR providers."""
 
@@ -24,7 +28,7 @@ class OCRProvider(Protocol):
             Extracted text from the image
 
         Raises:
-            NotImplementedError: If OCR is not enabled/available
+            OCRDisabledError: If OCR is not enabled/available
             ValueError: If image format is unsupported
         """
         ...
