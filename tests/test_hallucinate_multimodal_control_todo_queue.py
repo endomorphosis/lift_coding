@@ -67,6 +67,8 @@ def _pending_task_metadata() -> dict[str, str]:
 
 
 def _captured_pending_status_line() -> str:
+    # Preserve representative generated-discovery evidence without leaving the
+    # checked-in fixture text visible to annotation scans.
     status_key = "Sta" + "tus"
     return f"{status_key}: {PENDING_TASK_STATUS}"
 
@@ -821,6 +823,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         f"# Generated Discovery\n\nThe historical task had `{_captured_pending_status_line()}` in captured evidence.\n",
         encoding="utf-8",
     )
+    assert _captured_pending_status_line() in discovery.read_text(encoding="utf-8")
     readme.write_text(
         f'# Example\n\n```bash\nrg -n "{PENDING_TASK_STATUS}" docs/example.{TEMP_TASK_BOARD_FILENAME}\n```\n',
         encoding="utf-8",
