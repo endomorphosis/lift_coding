@@ -18,6 +18,7 @@ import base64
 import importlib
 import inspect
 import json
+import logging
 import os
 import secrets
 import threading
@@ -37,6 +38,8 @@ MAX_FRAME_BYTES = 16 * 1024
 RUNTIME_STREAM_PROTOCOL_ID = "/handsfree/runtime-stream/1.0.0"
 
 EnvelopeKind = Literal["handshake", "message", "ack", "error"]
+
+logger = logging.getLogger(__name__)
 
 
 def _new_session_id() -> str:
@@ -1241,15 +1244,23 @@ def _close_runtime_stream(runtime_stream: Any) -> None:
         try:
             _resolve_runtime_value(close())
             return
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning(
+                "Failed to close py-libp2p runtime stream; trying reset fallback: %s",
+                exc,
+                exc_info=True,
+            )
 
     reset = getattr(runtime_stream, "reset", None)
     if reset is not None:
         try:
             _resolve_runtime_value(reset())
-        except Exception:
-            return
+        except Exception as exc:
+            logger.warning(
+                "Failed to reset py-libp2p runtime stream: %s",
+                exc,
+                exc_info=True,
+            )
 
 
 def _encode_envelope(envelope: PeerEnvelope) -> bytes:
