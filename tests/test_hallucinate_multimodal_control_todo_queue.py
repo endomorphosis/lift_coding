@@ -533,10 +533,10 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     _git(app, "add", "python/hallucinate_app/scan_target.py")
     _git(app, "commit", "-m", "app scan target")
 
-    todo_path = repo / "todo.md"
+    task_board_path = repo / TEMP_TASK_BOARD_FILENAME
     discovery_dir = repo / "discovery"
     strategy_path = tmp_path / "strategy.json"
-    todo_path.write_text(
+    task_board_path.write_text(
         """# Temporary Board
 
 ## HAO-001 Completed seed
@@ -552,11 +552,11 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
 """,
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "hallucinate_app")
+    _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "hallucinate_app")
     _git(repo, "commit", "-m", "root seed")
 
     findings = daemon_module.record_codebase_scan_findings(
-        todo_path=todo_path,
+        todo_path=task_board_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
         repo_root=repo,
@@ -568,20 +568,20 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     assert len(findings) == 1
     assert findings[0]["follow_up_task_id"] == "HAO-002"
     assert "hallucinate_app/python/hallucinate_app/scan_target.py:2" == findings[0]["source"]
-    updated = todo_path.read_text(encoding="utf-8")
+    updated = task_board_path.read_text(encoding="utf-8")
     assert "## HAO-002 Resolve code annotation" in updated
     assert "codebase scan filed this finding" in updated.lower()
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
-    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
+    tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## HAO-")}
     assert tasks["HAO-002"].track == "runtime"
     assert "py_compile" in tasks["HAO-002"].validation[0]
     assert discovery_dir.exists()
     assert list(discovery_dir.glob("*-hao-002-codebase-scan-*.md"))
     assert not daemon_module.record_codebase_scan_findings(
-        todo_path=todo_path,
+        todo_path=task_board_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
         repo_root=repo,
