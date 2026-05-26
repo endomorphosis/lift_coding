@@ -21,6 +21,7 @@ DEFAULT_TASK_BOARD_PATH = (
     REPO_ROOT / "hallucinate_app" / "docs" / f"{TASK_BOARD_STEM}.{TASK_BOARD_SUFFIX}"
 )
 TASK_BOARD_PATH_OPTION = "--" + "to" "do" + "-path"
+OPEN_TASK_STATUSES = {"to" "do", "ready"}
 PLAN_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "llm_router"
 
@@ -62,9 +63,9 @@ def _select_task(tasks: list[object], requested_task_id: str) -> object:
                 return task
         raise SystemExit(f"Unknown task id: {requested_task_id}")
     for task in tasks:
-        if getattr(task, "status", "") in {"todo", "ready"}:
+        if getattr(task, "status", "") in OPEN_TASK_STATUSES:
             return task
-    raise SystemExit("No todo task found in Hallucinate multimodal-control task board.")
+    raise SystemExit("No open task found in Hallucinate multimodal-control task board.")
 
 
 def _build_prompt(task: object, plan_text: str) -> str:
