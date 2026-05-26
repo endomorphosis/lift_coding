@@ -121,6 +121,60 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
     }
 
 
+def test_resolve_falls_back_to_canonical_backend(monkeypatch):
+    """Missing direct resolve helper should use canonical backend name resolution."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def name_resolve(self, cid, **kwargs):
+            return {"backend": "name_resolve", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.resolve("k51name", recursive=False) == {
+        "backend": "name_resolve",
+        "cid": "k51name",
+        "options": {"recursive": False},
+    }
+
+
+def test_resolve_falls_back_to_high_level_api(monkeypatch):
+    """Resolve should use the documented high-level API when backend has no resolver."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+    high_level_module = ModuleType("ipfs_kit_py.high_level_api")
+
+    class FakeBackend:
+        pass
+
+    class FakeSimpleAPI:
+        def resolve(self, cid, **kwargs):
+            return {"api": "simple", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+    high_level_module.IPFSSimpleAPI = FakeSimpleAPI
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.high_level_api", high_level_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.resolve("k51name", timeout=5) == {
+        "api": "simple",
+        "cid": "k51name",
+        "options": {"timeout": 5},
+    }
+
+
 def test_missing_backend_factory_raises_unavailable_error(monkeypatch):
     """Missing canonical backend factory should use the adapter unavailable error."""
     root_module = ModuleType("ipfs_kit_py")
