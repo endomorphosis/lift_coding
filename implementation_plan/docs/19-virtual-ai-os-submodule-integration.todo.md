@@ -499,3 +499,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/ocr/stub_provider.py
 - Validation: python3 -m py_compile src/handsfree/ocr/stub_provider.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/ocr/stub_provider.py:38. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-042-codebase-scan-914627da8285.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-043 Review swallowed exception path in src/handsfree/redis_client.py:77
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/redis_client.py
+- Validation: python3 -m py_compile src/handsfree/redis_client.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/redis_client.py:77. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-043-codebase-scan-7a1ac1883655.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-044 Review swallowed exception path in src/handsfree/sessions.py:229
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/sessions.py
+- Validation: python3 -m py_compile src/handsfree/sessions.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/sessions.py:229. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-044-codebase-scan-b1039b93eb48.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-045 Replace placeholder runtime path in src/handsfree/stt/stub_provider.py:42
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/stt/stub_provider.py
+- Validation: python3 -m py_compile src/handsfree/stt/stub_provider.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/stt/stub_provider.py:42. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-045-codebase-scan-b40c594b84b1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-046 Review swallowed exception path in src/handsfree/transport/libp2p_bluetooth.py:1244
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/transport/libp2p_bluetooth.py
+- Validation: python3 -m py_compile src/handsfree/transport/libp2p_bluetooth.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/transport/libp2p_bluetooth.py:1244. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-046-codebase-scan-74ff113b87c6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-047 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:13
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:13. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-047-codebase-scan-cfe0d4fe2a26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
