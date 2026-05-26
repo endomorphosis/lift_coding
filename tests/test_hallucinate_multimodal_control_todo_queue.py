@@ -195,10 +195,7 @@ def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
         encoding="utf-8",
     )
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
-        state_path=repo / "state.json",
-        strategy_path=repo / "strategy.json",
-        events_path=repo / "events.jsonl",
+        **_implementation_daemon_paths(repo),
         repo_root=repo,
         task_header_prefix="## HAO-",
     )
