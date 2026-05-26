@@ -252,7 +252,7 @@ Record → /v1/dev/audio → /v1/command → /v1/tts → Play
 ### Existing Documentation
 - `docs/meta-ai-glasses-audio-routing.md` - Overall architecture
 - `mobile/glasses/README.md` - Feature specifications
-- `mobile/glasses/TODO.md` - Implementation checklist
+- Glasses implementation checklist - Remaining native audio validation and platform tasks
 - `work/PR-039-glasses-audio-routing-devmode-plan.md` - PR plan
 
 ## Screenshots
