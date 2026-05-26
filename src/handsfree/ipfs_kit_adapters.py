@@ -90,13 +90,17 @@ class _IPFSKitModuleAdapter:
         return None
 
     def _get_backend(self) -> Any:
+        module_name = "ipfs_kit_py.ipfs_backend"
         try:
-            module = importlib.import_module("ipfs_kit_py.ipfs_backend")
+            module = importlib.import_module(module_name)
+        except ModuleNotFoundError as exc:
+            if exc.name not in {"ipfs_kit_py", module_name}:
+                raise
+            logger.debug("Optional kit backend unavailable for %s: %s", module_name, exc)
+        else:
             factory = getattr(module, "get_instance", None)
             if callable(factory):
                 return factory()
-        except Exception:
-            pass
         raise NotImplementedError(
             "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
         )

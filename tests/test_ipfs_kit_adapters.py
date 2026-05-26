@@ -119,3 +119,23 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
         "cid": "bafy123",
         "options": {"timeout": 10},
     }
+
+
+def test_backend_factory_errors_are_not_swallowed(monkeypatch):
+    """Backend construction failures should surface with their original cause."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    def get_instance():
+        raise RuntimeError("backend init failed")
+
+    backend_module.get_instance = get_instance
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    with pytest.raises(RuntimeError, match="backend init failed"):
+        adapter.pin("bafy123")
