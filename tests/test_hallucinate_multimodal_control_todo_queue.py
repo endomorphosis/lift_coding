@@ -1280,28 +1280,30 @@ def test_operator_shell_objective_heap_has_child_goals():
 def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"
+    task_board_path = _temporary_board_path(repo)
+    objective_path = repo / "objective-heap.md"
     repo.mkdir()
     _git(repo, "init")
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    (repo / "todo.md").write_text(
-        """# Temporary Board
+    task_board_path.write_text(
+        f"""# Temporary Board
 
 ## HAO-001 Existing work
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P2
 - Track: ops
 - Depends on:
-- Outputs: todo.md
+- Outputs: {TEMP_TASK_BOARD_FILENAME}
 - Validation: true
 - Acceptance: Existing work remains.
 """,
         encoding="utf-8",
     )
-    (repo / "objective-heap.md").write_text(
+    objective_path.write_text(
         """# Objective Heap
 
 ## VAIOS-G001 Missing proof
@@ -1316,15 +1318,15 @@ def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
 """,
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "objective-heap.md")
+    _git(repo, "add", *_repo_relative_paths(repo, task_board_path, objective_path))
     _git(repo, "commit", "-m", "seed objective waiting")
 
     findings = daemon_module.record_objective_goal_findings(
-        todo_path=repo / "todo.md",
+        todo_path=task_board_path,
         state_path=None,
         strategy_path=tmp_path / "strategy.json",
         discovery_dir=repo / "discovery",
-        objective_path=repo / "objective-heap.md",
+        objective_path=objective_path,
         repo_root=repo,
         min_open_tasks=0,
         max_findings=1,
@@ -1332,7 +1334,7 @@ def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
     )
 
     assert findings == []
-    assert "HAO-002" not in (repo / "todo.md").read_text(encoding="utf-8")
+    assert "HAO-002" not in task_board_path.read_text(encoding="utf-8")
 
 
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
