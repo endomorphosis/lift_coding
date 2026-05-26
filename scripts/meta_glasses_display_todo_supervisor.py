@@ -21,6 +21,7 @@ INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/discovery/",
+    "data/hallucinate_multimodal_control/discovery/",
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
 )
