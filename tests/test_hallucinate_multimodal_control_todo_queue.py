@@ -445,7 +445,8 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-006"].depends_on == ["HAO-004"]
     assert len(tasks["HAO-006"].validation) == 1
-    assert "blocked_tasks" in tasks["HAO-006"].validation[0]
+    assert tasks["HAO-006"].validation[0].startswith("test -f ")
+    assert str(expected_discovery) in tasks["HAO-006"].validation[0]
 
     strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
     assert "HAO-005" in strategy["blocked_tasks"]

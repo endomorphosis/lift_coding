@@ -13,6 +13,20 @@ python3 scripts/virtual_ai_os_llm_router.py --task-id VAI-003
 
 To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
 
+## Autonomous Cadence State
+
+Run the daemon before the supervisor for one-shot checks. The daemon writes
+`data/virtual_ai_os/state/virtual_ai_os_task_state.json`,
+`data/virtual_ai_os/state/virtual_ai_os_strategy.json`, and
+`data/virtual_ai_os/state/virtual_ai_os_events.jsonl`. Implementation agents
+should read `recommended_task_id`, `ready_task_ids`, `waiting_task_ids`,
+`task_statuses`, `task_artifacts`, and `task_validation` from that state
+instead of inferring the next task from the markdown order.
+
+After VAI-015, VAI-018 is completed, VAI-019 and VAI-020 are ready, VAI-023
+waits for VAI-020 and VAI-022, and VAI-026 verifies that this supervised
+cadence remains parseable and resumable.
+
 ## VAI-000 Bootstrap supervised virtual-AI-OS backlog processing
 
 - Status: completed
@@ -268,7 +282,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-023 Prepare iPhone native DAT handoff and physical validation evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
@@ -301,7 +315,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-026 Supervised autonomous implementation cadence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -312,7 +326,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-027 Resolve merge retry-budget failure for VAI-019
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -332,7 +346,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-020'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-020. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-020 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
 
-## VAI-029 Resolve merge retry-budget failure for VAI-022
+## VAI-029 Resolve merge retry-budget failure for VAI-021
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-015
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-021'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-021. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-029-vai-021-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-021 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-030 Resolve merge retry-budget failure for VAI-022
 
 - Status: todo
 - Completion: manual
@@ -341,15 +366,81 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: VAI-017
 - Outputs: dev/meta-rayban-display-simulator/webapp, docs/ios-rayban-mvp1-runbook.md, docs/ios-rayban-mvp1-demo-runbook.md, data/virtual_ai_os/discovery
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-022'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-029-vai-022-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-022 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-030-vai-022-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-022 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
 
-## VAI-030 Resolve merge retry-budget failure for VAI-026
+## VAI-031 Resolve merge retry-budget failure for VAI-026
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
 - Depends on: VAI-015
 - Outputs: data/virtual_ai_os/state, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, data/virtual_ai_os/discovery
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-026'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-026. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-030-vai-026-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-026 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-026. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-026 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-032 Resolve merge retry-budget failure for VAI-028
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-017
+- Outputs: spec/meta_glasses_mobile_orb_bridge_interface.json, src/handsfree/api.py, mobile/src/orb, mobile/src/screens/GlassesDiagnosticsScreen.js, data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-028. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-028 from strategy blocked_tasks.
+
+## VAI-033 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-058-resolution.md:10
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-058-resolution.md
+- Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-058-resolution.md
+- Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-058-resolution.md:10. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-033-codebase-scan-8f7801ad8bfb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-034 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-060-objective-gap-8e0fb6e29f18.md:33
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-060-objective-gap-8e0fb6e29f18.md
+- Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-060-objective-gap-8e0fb6e29f18.md
+- Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-060-objective-gap-8e0fb6e29f18.md:33. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-034-codebase-scan-1bbab731502c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-035 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:14
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md
+- Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md
+- Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-035-codebase-scan-67a929f462fe.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-036 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:32
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md
+- Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md
+- Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:32. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-036-codebase-scan-feba566db9bd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-037 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md:33
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md
+- Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md
+- Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md:33. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-037-codebase-scan-0ba39ace37d6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

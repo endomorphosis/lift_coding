@@ -7,6 +7,7 @@ import sys
 import types
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 
 if "handsfree.secrets" not in sys.modules:
@@ -16,10 +17,23 @@ if "handsfree.secrets" not in sys.modules:
     secrets_module.reset_secret_manager = lambda: None
     sys.modules["handsfree.secrets"] = secrets_module
 
-from handsfree.api import app  # noqa: E402
+from handsfree import api as api_module  # noqa: E402
 
 
-client = TestClient(app)
+client = TestClient(api_module.app)
+
+
+@pytest.fixture(autouse=True)
+def _reset_mobile_orb_state() -> None:
+    api_module.mobile_orb_edge_sessions.clear()
+    api_module.mobile_orb_service_bindings.clear()
+    api_module.mobile_orb_service_subscriptions.clear()
+    api_module.mobile_orb_events.clear()
+    yield
+    api_module.mobile_orb_edge_sessions.clear()
+    api_module.mobile_orb_service_bindings.clear()
+    api_module.mobile_orb_service_subscriptions.clear()
+    api_module.mobile_orb_events.clear()
 
 
 def _register_edge() -> dict:
@@ -136,8 +150,20 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
             "state": {"values": {"title": "Sync dataset", "progress": 0.42}},
         },
         "fallback": {
+            "reason": "dat_native_display_unavailable",
             "render_path": "mobile-card",
             "message": "Display unavailable. Showing task status on phone.",
+            "display": {
+                "target": "meta_rayban_display",
+                "available": False,
+                "fallback_target": "mobile_card",
+            },
+            "audio": {
+                "target": "meta_glasses_speakers",
+                "available": False,
+                "fallback_target": "phone_speaker",
+                "spoken_text": "Sync dataset is 42 percent complete.",
+            },
         },
     }
     invoked = client.post(
@@ -183,6 +209,10 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
         invoked_payload["display_widget_action"]["policy_decision"]
     )
     assert invoked_payload["display_widget_action"]["correlation_id"] == "corr-task-status"
+    assert invoked_payload["display_widget_action"]["fallback"]["display"]["available"] is False
+    assert invoked_payload["display_widget_action"]["fallback"]["audio"]["fallback_target"] == (
+        "phone_speaker"
+    )
     assert invoked_payload["follow_up_actions"][0]["id"] == "mobile_render_display_widget"
     assert invoked_payload["follow_up_actions"][0]["params"]["display_widget_action"] == (
         invoked_payload["display_widget_action"]
@@ -208,6 +238,12 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert dispatched_payload["display_widget_action"]["type"] == "mobile_render_display_widget"
     assert dispatched_payload["display_widget_action"]["contract"] == (
         "handsfree.meta-glasses/display-widget-action@0.1.0"
+    )
+    assert dispatched_payload["display_widget_action"]["fallback"]["reason"] == (
+        "dat_native_display_unavailable"
+    )
+    assert dispatched_payload["display_widget_action"]["fallback"]["audio"]["spoken_text"] == (
+        "Sync dataset is 42 percent complete."
     )
     assert dispatched_payload["dispatched_actions"][0]["id"] == "mobile_render_display_widget"
     assert dispatched_payload["dispatched_actions"][0]["params"]["display_widget_action"] == (

@@ -235,44 +235,44 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-020 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md:22
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md:22. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-020-codebase-scan-09a5288b833b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-021 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md:24
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-021-codebase-scan-55c0165aa8e2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-022 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-022-codebase-scan-894285209757.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-023 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md:8
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md:8. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-023-codebase-scan-5e7f9214abc2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -283,7 +283,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md:10. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-024-codebase-scan-5ebb02bc2f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -294,7 +294,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-020'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-020. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-025-mgw-020-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-020 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
@@ -305,7 +305,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-021'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-021. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-mgw-021-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-021 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
@@ -316,7 +316,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-022'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-022. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-027-mgw-022-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-022 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
@@ -327,18 +327,51 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-023'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-023. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-mgw-023-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-023 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
 
 ## MGW-029 Resolve merge retry-budget failure for MGW-024
 
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-024'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-024. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-029-mgw-024-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-024 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## MGW-030 Resolve merge retry-budget failure for MGW-026
+
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
-- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
-- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-024'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-024. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-029-mgw-024-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-024 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-026'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-026. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-030-mgw-026-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-026 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## MGW-031 Resolve merge retry-budget failure for MGW-027
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'MGW-027'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-027. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-031-mgw-027-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove MGW-027 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## MGW-032 Resolve implementation retry-budget failure for MGW-028
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-028. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-028 from strategy blocked_tasks.

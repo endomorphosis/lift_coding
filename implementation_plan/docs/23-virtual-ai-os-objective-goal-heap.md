@@ -4,7 +4,7 @@ This document is the objective model for supervisor-fed backlog discovery. It is
 separate from the task board on purpose: the task board says what to do next,
 while this heap says what the system must eventually prove.
 
-The heap is represented as flat markdown records so the todo supervisor can parse
+The heap is represented as flat markdown records so the backlog supervisor can parse
 and refine it without a bespoke database. `Parent` forms the hierarchy, and
 `Fib priority` gives the scanner a stable Fibonacci-style ordering. Lower numbers
 are closer to the root objective and should be satisfied before wider refinements.
@@ -22,13 +22,13 @@ deterministic sentence-style token embeddings. `Embedding query` describes the
 semantic search target, while `AST query` names code symbols, modules, or schema
 terms that should satisfy the goal.
 
-`Bundle` assigns generated todo items to a conflict-reduction lane. The daemon
-mirrors each generated task into
-`data/hallucinate_multimodal_control/objective_bundles/<safe-bundle>.todo.md`
-and updates `data/hallucinate_multimodal_control/objective_bundles/index.json`.
-Parallel workers should claim one bundle shard at a time. If a shard still
-collides at merge time, `Conflict policy` tells the LLM merge resolver how to
-preserve the intent of the lane before the source task is unblocked.
+`Bundle` assigns generated backlog records to a conflict-reduction lane. The daemon
+mirrors each generated task into the fenced shard path:
+```text
+data/hallucinate_multimodal_control/objective_bundles/<safe-bundle>.todo.md
+```
+It also updates `data/hallucinate_multimodal_control/objective_bundles/index.json`. Parallel workers should claim one bundle shard at a time.
+If a shard still collides at merge time, `Conflict policy` tells the LLM merge resolver how to preserve lane intent before unblocking the source task.
 
 ## VAIOS-G000 Virtual AI OS outcome
 
@@ -61,10 +61,10 @@ preserve the intent of the lane before the source task is unblocked.
 - Bundle: objective/ops/supervisor-loop
 - Parallel lane: supervisor-backlog
 - Refinement depth: 1
-- Embedding query: objective driven supervisor loop scans goal heap and generates daemon parseable todo tasks
+- Embedding query: objective driven supervisor loop scans goal heap and generates daemon parseable backlog records
 - AST query: record_objective_goal_findings, objective_goal_seen_fingerprints, last_objective_goal_scan_findings
-- Conflict policy: keep supervisor state schema backward compatible and resolve todo generation conflicts by preserving all unique HAO tasks
-- Goal: The supervisor keeps the Codex loop fed from objective gaps, not only from TODO annotations.
+- Conflict policy: keep supervisor state schema backward compatible and resolve backlog-record generation conflicts by preserving all unique HAO records
+- Goal: The supervisor keeps the Codex loop fed from objective gaps, not only from inline source annotations.
 - Evidence: objective_goal_scan, objective_goal_seen_fingerprints, last_objective_goal_scan_findings, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Outputs: scripts/hallucinate_multimodal_control_todo_daemon.py, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: test -f scripts/hallucinate_multimodal_control_todo_daemon.py && test -f tests/test_hallucinate_multimodal_control_todo_queue.py

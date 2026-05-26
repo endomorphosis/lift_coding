@@ -50,7 +50,7 @@ try session.setCategory(
 ### 6. Documentation
 - ✅ `BUILD_AND_TEST_GLASSES_PLAYER.md` - Comprehensive build/test guide
 - ✅ Module `README.md` - API documentation
-- ✅ Updated `TODO.md` - Implementation progress
+- ✅ Updated glasses implementation checklist - PR-049 progress
 - ✅ Updated glasses `README.md` - Status and links
 
 ## Acceptance Criteria Status

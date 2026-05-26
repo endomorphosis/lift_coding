@@ -1,6 +1,7 @@
-# The snake-case https://github.com/endomorphosis/mcp_plus_plus URL still
-# returns "Repository not found"; the case-sensitive canonical MCP++ spec
-# source is tracked as Mcp-Plus-Plus.
+# The lowercase https://github.com/endomorphosis/mcp_plus_plus source review
+# returned "Repository not found"; the existing root gitlink uses the
+# case-sensitive Mcp-Plus-Plus repository below so submodule status can traverse
+# the committed topology.
 [submodule "Mcp-Plus-Plus"]
 	path = Mcp-Plus-Plus
 	url = https://github.com/endomorphosis/Mcp-Plus-Plus.git

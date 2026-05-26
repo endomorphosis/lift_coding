@@ -21,7 +21,7 @@ the retry budget before the policy code could be validated.
 ## Resolution
 
 - The HAO-038 validation command now uses the newline-based `exec(...)` form
-  already present in the todo file.
+  from the supervised backlog entry.
 - The HAO-041 and HAO-042 import-only validations are closed shell commands.
 - The current `hallucinate_app/main` submodule head contains the policy
   evaluator compatibility patch and regression coverage.

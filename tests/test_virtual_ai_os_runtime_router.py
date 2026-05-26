@@ -90,6 +90,41 @@ def test_capability_routing_kernel_dispatches_with_fallback_and_presentations():
     assert plan.payload == {"text": "route me"}
 
 
+def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="todo_daemon",
+            payload={
+                "task_id": "VAI-019",
+                "todo_daemon_state": {"task_status": "ready"},
+                "artifact_refs": {
+                    "result_cid": "bafybeivai019taskprogress",
+                    "receipt_ref": "bafybeivai019receipt",
+                    "event_dag_ref": "bafybeivai019eventdag",
+                },
+            },
+        )
+    )
+
+    assert plan.route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert plan.route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert plan.route.handler_ref == "swissknife.orb::dataset_discovery"
+    assert plan.fallback_route is not None
+    assert plan.fallback_route.runtime_surface == CapabilityRuntimeSurface.LOCAL_CLI
+    assert [entry.surface_id for entry in plan.entrypoints] == [
+        "swissknife_orb",
+        "hallucinate_app",
+        "mobile_glasses",
+    ]
+    assert plan.entrypoints[-1].handler_ref == (
+        "handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"
+    )
+    assert plan.payload["task_id"] == "VAI-019"
+    assert plan.payload["artifact_refs"]["receipt_ref"] == "bafybeivai019receipt"
+
+
 def test_runtime_router_normalizes_route_planning_errors():
     router = RuntimeRouter()
     try:
