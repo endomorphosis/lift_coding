@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Resolved as a false-positive annotation match. The objective-bundle shard
+filename is intentional, but the broad Markdown scan matched the word inside the
+`.todo.md` suffix. The objective heap now keeps the canonical shard path inside a
+fenced text block, which the scanner already skips for literal examples, while
+preserving the bundle lane and index contract.
