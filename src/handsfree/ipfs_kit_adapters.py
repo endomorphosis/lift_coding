@@ -144,8 +144,11 @@ class _IPFSKitModuleAdapter:
         cat_fn = getattr(backend, "cat", None)
         if callable(cat_fn):
             return cat_fn(cid, **kwargs)
-        raise NotImplementedError(
-            "ipfs_kit_py cat is not exposed through a stable direct-import seam yet"
+        get_fn = getattr(backend, "get", None)
+        if callable(get_fn):
+            return get_fn(cid, **kwargs)
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py cat is unavailable: backend exposes neither cat nor get"
         )
 
     def pin(self, cid: str, **kwargs: Any) -> Any:

@@ -444,3 +444,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md:33. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-037-codebase-scan-0ba39ace37d6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-038 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:147
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ipfs_kit_adapters.py:147. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-038-codebase-scan-b7a1b442e24b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-039 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:178
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ipfs_kit_adapters.py:178. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-039-codebase-scan-5c42c881b5ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-040 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:186
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ipfs_kit_adapters.py:186. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-040-codebase-scan-5908a1fbe802.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-041 Review swallowed exception path in src/handsfree/ipfs_kit_adapters.py:194
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ipfs_kit_adapters.py:194. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-041-codebase-scan-fa5c9b97278c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-042 Replace placeholder runtime path in src/handsfree/ocr/stub_provider.py:38
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ocr/stub_provider.py
+- Validation: python3 -m py_compile src/handsfree/ocr/stub_provider.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ocr/stub_provider.py:38. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-042-codebase-scan-914627da8285.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

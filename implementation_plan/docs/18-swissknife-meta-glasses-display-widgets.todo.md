@@ -375,3 +375,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-028. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-032-mgw-028-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-028 from strategy blocked_tasks.
+
+## MGW-033 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md:11
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-033-codebase-scan-693c6508faa9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-034 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-unblock.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-034-codebase-scan-806430f05751.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-035 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:13
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:13. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-035-codebase-scan-b4023560fbdd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-036 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:26
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:26. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-036-codebase-scan-ff1cd3f4e0b7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-037 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md:11
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-037-codebase-scan-5fb02bb41fbf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
