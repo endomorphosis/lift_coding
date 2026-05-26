@@ -533,7 +533,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-046 Review swallowed exception path in src/handsfree/transport/libp2p_bluetooth.py:1244
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
