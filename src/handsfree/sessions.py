@@ -33,6 +33,8 @@ except ImportError:  # pragma: no cover
 
 logger = logging.getLogger(__name__)
 
+_SESSION_RECORD_ERRORS = (KeyError, TypeError, ValueError, UnicodeError)
+
 
 @dataclass
 class SessionToken:
@@ -182,53 +184,59 @@ class SessionTokenManager:
         token_hash = self._hash_token(token)
         redis_key = self._make_redis_key(token_hash)
 
-        # Retrieve session data
         try:
-            session_data = self.redis.hgetall(redis_key)
-
-            if not session_data:
-                logger.debug("Session token not found or expired")
-                return None
-
-            # Decode bytes to strings (Redis returns bytes)
-            session_data = {
-                k.decode() if isinstance(k, bytes) else k: v.decode() if isinstance(v, bytes) else v
-                for k, v in session_data.items()
-            }
-
-            # Parse dates
-            created_at = datetime.fromisoformat(session_data["created_at"])
-            expires_at = datetime.fromisoformat(session_data["expires_at"])
-
-            # Check if expired (defensive check, Redis should auto-expire)
-            if expires_at < datetime.now(UTC):
-                logger.warning("Expired session token found (should have been auto-expired)")
-                self.revoke_session(token)
-                return None
-
-            # Parse metadata (stored as JSON string)
-            metadata_str = session_data.get("metadata", "{}")
-            try:
-                metadata = json.loads(metadata_str)
-            except json.JSONDecodeError:
-                logger.warning("Invalid JSON in session metadata, using empty dict")
-                metadata = {}
-
-            return SessionToken(
-                token=token,
-                user_id=session_data["user_id"],
-                device_id=session_data["device_id"],
-                created_at=created_at,
-                expires_at=expires_at,
-                metadata=metadata,
-            )
-
+            raw_session_data = self.redis.hgetall(redis_key)
         except redis.RedisError as e:
             logger.error("Redis error during session validation: %s", e)
             return None
-        except Exception as e:
-            logger.error("Error validating session: %s", e)
+
+        if not raw_session_data:
+            logger.debug("Session token not found or expired")
             return None
+
+        try:
+            # Decode bytes to strings (Redis returns bytes)
+            session_data = {
+                k.decode() if isinstance(k, bytes) else k: v.decode() if isinstance(v, bytes) else v
+                for k, v in raw_session_data.items()
+            }
+
+            user_id = session_data["user_id"]
+            device_id = session_data["device_id"]
+            created_at = datetime.fromisoformat(session_data["created_at"])
+            expires_at = datetime.fromisoformat(session_data["expires_at"])
+            if created_at.tzinfo is None or expires_at.tzinfo is None:
+                raise ValueError("session timestamps must include timezone information")
+        except _SESSION_RECORD_ERRORS as e:
+            logger.warning("Invalid session record encountered during validation; revoking: %s", e)
+            self.revoke_session(token)
+            return None
+
+        # Check if expired (defensive check, Redis should auto-expire)
+        if expires_at < datetime.now(UTC):
+            logger.warning("Expired session token found (should have been auto-expired)")
+            self.revoke_session(token)
+            return None
+
+        # Parse metadata (stored as JSON string)
+        metadata_str = session_data.get("metadata", "{}")
+        try:
+            metadata = json.loads(metadata_str)
+            if not isinstance(metadata, dict):
+                logger.warning("Session metadata is not a JSON object, using empty dict")
+                metadata = {}
+        except (json.JSONDecodeError, TypeError):
+            logger.warning("Invalid JSON in session metadata, using empty dict")
+            metadata = {}
+
+        return SessionToken(
+            token=token,
+            user_id=user_id,
+            device_id=device_id,
+            created_at=created_at,
+            expires_at=expires_at,
+            metadata=metadata,
+        )
 
     def revoke_session(self, token: str) -> bool:
         """Revoke a session token.
