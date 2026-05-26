@@ -499,7 +499,7 @@ cd android
 ## References
 
 - [BRIDGE_README.md](BRIDGE_README.md) - Integration and usage guide
-- [TODO.md](TODO.md) - Implementation checklist
+- Glasses implementation checklist - Remaining device validation and diagnostics integration tasks
 - [README.md](README.md) - Feature specifications
 - [../docs/meta-ai-glasses-audio-routing.md](../../docs/meta-ai-glasses-audio-routing.md) - Audio routing documentation
 - [Android AudioRecord](https://developer.android.com/reference/android/media/AudioRecord)
