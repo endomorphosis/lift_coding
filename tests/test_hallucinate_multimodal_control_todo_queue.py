@@ -612,7 +612,7 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
 - Priority: P2
 - Track: ops
 - Depends on:
-- Outputs: todo.md
+- Outputs: {TEMP_TASK_BOARD_FILENAME}
 - Validation: true
 - Acceptance: Existing work remains.
 """,
