@@ -6,9 +6,9 @@ Source finding: `src/handsfree/stt/stub_provider.py:42`
 
 ## Review
 
-The scan evidence captured a historical `raise NotImplementedError(` in the
-stub STT provider runtime path. In this checkout, `StubSTTProvider.transcribe`
-already performs the runtime behavior required for CI/dev use:
+The scan evidence captured an obsolete unimplemented-runtime exception from the
+stub STT provider. In this checkout, `StubSTTProvider.transcribe` already
+performs the runtime behavior required for CI/dev use:
 
 - disabled providers raise `STTDisabledError`
 - unsupported formats raise `ValueError`
@@ -18,9 +18,8 @@ already performs the runtime behavior required for CI/dev use:
 
 Kept the provider behavior intact and made the runtime contract explicit by
 promoting supported formats and the deterministic transcript to class-level
-constants. This preserves the replacement for the placeholder runtime path while
-making future scans less likely to confuse the active implementation with a
-temporary stub.
+constants. This preserves the concrete runtime path while making future scans
+less likely to confuse the active implementation with a temporary stub.
 
 ## Validation
 
