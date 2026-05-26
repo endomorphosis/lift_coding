@@ -961,7 +961,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-086 Resolve code annotation in tests/test_meta_glasses_display_todo_queue.py:79
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
