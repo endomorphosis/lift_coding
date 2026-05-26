@@ -22,10 +22,10 @@ submodule-owned changes. Its intended implementation surface was limited to:
 
 The merge blocker came from stale generated backlog/supervisor context captured
 on the VAI-020 branch, not from the mobile ORB diagnostics implementation. A
-full branch merge would delete newer display-widget retry-budget tasks from
-`implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`,
-so this unblock replays only the committed VAI-020 implementation files and
-leaves the backlog conflict out of scope.
+full branch merge would delete newer display-widget retry-budget tasks from the
+display-widget backlog board, so this unblock replays only the committed
+VAI-020 implementation files and leaves the backlog conflict out of scope. The
+retry-budget evidence above retains the exact generated-file path for audit.
 
 ## Resolver
 
