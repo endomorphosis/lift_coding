@@ -243,6 +243,7 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
+        LLM_MERGE_RESOLVER_COMMAND_ENV,
         PortalImplementationDaemon,
         parse_args,
     )
@@ -257,6 +258,8 @@ def main(argv: list[str] | None = None) -> None:
         level=getattr(logging, parsed.log_level),
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
+    if parsed.llm_merge_resolver_command:
+        os.environ[LLM_MERGE_RESOLVER_COMMAND_ENV] = parsed.llm_merge_resolver_command
     state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
     strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
     events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
