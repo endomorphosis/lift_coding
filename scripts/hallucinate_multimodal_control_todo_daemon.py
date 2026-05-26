@@ -37,6 +37,13 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/hallucinate_multimodal_control/state/",
     "data/hallucinate_multimodal_control/worktrees/",
     "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
+    "data/virtual_ai_os/discovery/",
+    "data/virtual_ai_os/objective_bundles/",
+    "data/virtual_ai_os/objective_datasets/",
+    "data/virtual_ai_os/state/",
+    "data/virtual_ai_os/worktrees/",
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 
@@ -257,6 +264,8 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
+        LLM_MERGE_RESOLVER_COMMAND_ENV,
+        LLM_MERGE_RESOLVER_TIMEOUT_ENV,
         PortalImplementationDaemon,
         parse_args,
     )
@@ -266,6 +275,10 @@ def main(argv: list[str] | None = None) -> None:
         level=getattr(logging, parsed.log_level),
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
+    if parsed.llm_merge_resolver_command:
+        os.environ[LLM_MERGE_RESOLVER_COMMAND_ENV] = parsed.llm_merge_resolver_command
+    if parsed.llm_merge_resolver_timeout_seconds is not None:
+        os.environ[LLM_MERGE_RESOLVER_TIMEOUT_ENV] = str(parsed.llm_merge_resolver_timeout_seconds)
     state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
     strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
     events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
@@ -282,6 +295,8 @@ def main(argv: list[str] | None = None) -> None:
         use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
         worktree_root=parsed.worktree_root,
         worktree_submodule_paths=parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+        llm_merge_resolver_command=parsed.llm_merge_resolver_command or None,
+        llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
     )
 
     while True:

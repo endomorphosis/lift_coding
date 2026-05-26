@@ -20,7 +20,24 @@ This runbook describes how to run an MVP1 demo in under 5 minutes. The demo show
 - **Hardware**: iPhone paired with Ray-Ban Meta smart glasses via Bluetooth
 - **Backend**: Running locally or accessible via network with appropriate environment configuration
 - **Mobile app**: iOS companion app from `mobile/` directory built as Expo dev client
+- **Display Web App**: `dev/meta-rayban-display-simulator/webapp/` hosted at a publicly available HTTPS URL and added in the Meta AI app under `App Connections > Web apps`
 - **Implementation**: Depends on PRs 033, 037, 047, 048, 049 (see [Related PRs](#related-prs))
+
+---
+
+## Display Web App Demo Preflight
+
+Use this before the native iPhone DAT migration so the same display manifest is validated on glasses through the browser Web App path.
+
+1. Deploy `dev/meta-rayban-display-simulator/webapp/` as static files.
+2. Confirm the hosted `index.html`, `manifest.webmanifest`, and `readiness.json` are reachable over publicly available HTTPS with no login.
+3. Run the readiness linter against `dev/meta-rayban-display-simulator/webapp/readiness.json`.
+4. Generate a QR code for the hosted `index.html` URL.
+5. In the Meta AI app, open `App Connections > Web apps` and add the hosted URL.
+6. Launch the Web App on glasses and verify D-pad focus moves between Pause and Dismiss, then press Enter on Pause.
+7. Confirm the action is saved in browser session storage if the backend ORB endpoints are not available from the hosted page.
+
+For a fast demo, keep the hosted Web App open as the display proof while the iOS app performs the audio command and TTS loop below.
 
 ---
 
@@ -344,7 +361,7 @@ Use this approach to demonstrate the complete audio pipeline:
    let session = AVAudioSession.sharedInstance()
    try session.setCategory(.playback, mode: .voiceChat, options: [.allowBluetooth])
    try session.setActive(true)
-   
+
    let player = try AVAudioPlayer(data: ttsAudioData)
    player.play()
    ```
@@ -521,15 +538,15 @@ This runbook synthesizes work from multiple implementation PRs:
 
 A successful MVP1 demo includes:
 
-✅ User speaks a command  
-✅ Backend processes and returns appropriate response  
-✅ TTS audio plays through Ray-Ban Meta glasses  
-✅ Navigation commands work (next, repeat)  
-✅ Optional: PR summary query works  
-✅ Fallback to phone mic when Bluetooth mic is unreliable  
-✅ Clear audio output through glasses with no echo  
+✅ User speaks a command
+✅ Backend processes and returns appropriate response
+✅ TTS audio plays through Ray-Ban Meta glasses
+✅ Navigation commands work (next, repeat)
+✅ Optional: PR summary query works
+✅ Fallback to phone mic when Bluetooth mic is unreliable
+✅ Clear audio output through glasses with no echo
 
 ---
 
-**Last updated**: 2026-01-18  
+**Last updated**: 2026-05-25
 **Maintainer**: endomorphosis/lift_coding team

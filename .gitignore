@@ -20,6 +20,10 @@ data/*
 data/meta_glasses_display_widgets/*
 !data/meta_glasses_display_widgets/discovery/
 !data/meta_glasses_display_widgets/discovery/**
+!data/virtual_ai_os/
+data/virtual_ai_os/*
+!data/virtual_ai_os/discovery/
+!data/virtual_ai_os/discovery/**
 !data/hallucinate_multimodal_control/
 data/hallucinate_multimodal_control/*
 !data/hallucinate_multimodal_control/discovery/
@@ -30,6 +34,10 @@ data/hallucinate_multimodal_control/policies/*
 !data/hallucinate_multimodal_control/receipts/
 data/hallucinate_multimodal_control/receipts/*
 !data/hallucinate_multimodal_control/receipts/README.md
+!data/virtual_ai_os/
+data/virtual_ai_os/*
+!data/virtual_ai_os/discovery/
+!data/virtual_ai_os/discovery/**
 .tools
 # Dev audio uploads (don't commit test audio files)
 dev/audio/

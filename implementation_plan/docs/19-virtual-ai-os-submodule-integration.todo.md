@@ -13,6 +13,20 @@ python3 scripts/virtual_ai_os_llm_router.py --task-id VAI-003
 
 To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
 
+## Autonomous Cadence State
+
+Run the daemon before the supervisor for one-shot checks. The daemon writes
+`data/virtual_ai_os/state/virtual_ai_os_task_state.json`,
+`data/virtual_ai_os/state/virtual_ai_os_strategy.json`, and
+`data/virtual_ai_os/state/virtual_ai_os_events.jsonl`. Implementation agents
+should read `recommended_task_id`, `ready_task_ids`, `waiting_task_ids`,
+`task_statuses`, `task_artifacts`, and `task_validation` from that state
+instead of inferring the next task from the markdown order.
+
+After VAI-015, VAI-018 is completed, VAI-019 and VAI-020 are ready, VAI-023
+waits for VAI-020 and VAI-022, and VAI-026 verifies that this supervised
+cadence remains parseable and resumable.
+
 ## VAI-000 Bootstrap supervised virtual-AI-OS backlog processing
 
 - Status: completed
@@ -268,7 +282,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-023 Prepare iPhone native DAT handoff and physical validation evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
@@ -290,7 +304,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-025 Re-check canonical mcp_plus_plus source and standalone pin decision
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
@@ -301,7 +315,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-026 Supervised autonomous implementation cadence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -309,3 +323,69 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/virtual_ai_os/state, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_daemon.py --once; PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once; rg -n "VAI-018|VAI-019|VAI-020|VAI-023|VAI-026" implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md data/virtual_ai_os/state
 - Acceptance: The ipfs_datasets_py todo daemon/supervisor can parse the expanded board, report ready work, preserve dependency order, and provide enough state for autonomous implementation agents to continue without guessing the next task.
+
+## VAI-027 Resolve merge retry-budget failure for VAI-019
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-015, VAI-017
+- Outputs: tests/test_virtual_ai_os_end_to_end.py, tests/test_virtual_ai_os_runtime_router.py, tests/test_meta_glasses_mobile_orb_bridge.py, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-019'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-019. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-019 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-028 Resolve merge retry-budget failure for VAI-020
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-017
+- Outputs: spec/meta_glasses_mobile_orb_bridge_interface.json, src/handsfree/api.py, mobile/src/orb, mobile/src/screens/GlassesDiagnosticsScreen.js, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-020'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-020. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-020 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-029 Resolve merge retry-budget failure for VAI-021
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-015
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-021'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-021. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-029-vai-021-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-021 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-030 Resolve merge retry-budget failure for VAI-022
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-017
+- Outputs: dev/meta-rayban-display-simulator/webapp, docs/ios-rayban-mvp1-runbook.md, docs/ios-rayban-mvp1-demo-runbook.md, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-022'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-030-vai-022-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-022 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-031 Resolve merge retry-budget failure for VAI-026
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-015
+- Outputs: data/virtual_ai_os/state, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, data/virtual_ai_os/discovery
+- Validation: python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path('"'"'/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json'"'"').read_text(encoding='"'"'utf-8'"'"'))\nassert '"'"'VAI-026'"'"' not in strategy.get('"'"'blocked_tasks'"'"', [])")'
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-026. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then remove VAI-026 from the strategy blocked_tasks list so the original backlog item can continue without an indefinite retry loop.
+
+## VAI-032 Resolve merge retry-budget failure for VAI-028
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-017
+- Outputs: spec/meta_glasses_mobile_orb_bridge_interface.json, src/handsfree/api.py, mobile/src/orb, mobile/src/screens/GlassesDiagnosticsScreen.js, data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-028. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-028 from strategy blocked_tasks.

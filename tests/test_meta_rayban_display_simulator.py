@@ -159,11 +159,60 @@ def test_webapp_preview_readiness_descriptor_passes_linter() -> None:
     assert readiness["widgets"][0]["browser_preview"]["renderer"].endswith("webapp/app.js")
 
 
+def test_webapp_preview_package_declares_static_files_and_png_icons() -> None:
+    manifest = json.loads((WEBAPP_DIR / "manifest.webmanifest").read_text(encoding="utf-8"))
+    readiness = json.loads((WEBAPP_DIR / "readiness.json").read_text(encoding="utf-8"))
+
+    for relative_path in readiness["static_files"]:
+        assert (WEBAPP_DIR / relative_path).is_file()
+
+    assert "readiness.json" in readiness["static_files"]
+    assert readiness["hosting"]["requires_publicly_available_https"] is True
+    assert readiness["hosting"]["qr_registration_supported"] is True
+    assert "Meta AI app" in readiness["hosting"]["meta_ai_app_onboarding"]
+    assert "Web apps" in readiness["hosting"]["meta_ai_app_onboarding"]
+    assert "native iPhone DAT" in readiness["hosting"]["native_dat_migration_gate"]
+
+    icons = manifest["icons"]
+    assert {icon["sizes"] for icon in icons} >= {"52x52", "192x192"}
+    assert readiness["manifest"]["icons"] == [
+        {"src": "icons/icon-52.png", "sizes": "52x52", "type": "image/png"},
+        {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    ]
+    for icon in icons:
+        assert icon["type"] == "image/png"
+        assert icon["src"].startswith("./icons/")
+        icon_path = WEBAPP_DIR / icon["src"].removeprefix("./")
+        assert icon_path.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+
+
+def test_ios_rayban_runbooks_cover_https_webapp_onboarding_path() -> None:
+    runbook = (REPO_ROOT / "docs" / "ios-rayban-mvp1-runbook.md").read_text(
+        encoding="utf-8"
+    )
+    demo_runbook = (
+        REPO_ROOT / "docs" / "ios-rayban-mvp1-demo-runbook.md"
+    ).read_text(encoding="utf-8")
+    webapp_readme = (WEBAPP_DIR / "README.md").read_text(encoding="utf-8")
+    combined = "\n".join([runbook, demo_runbook, webapp_readme])
+
+    for phrase in [
+        "publicly available HTTPS",
+        "QR",
+        "Meta AI app",
+        "Web apps",
+        "readiness.json",
+        "native iPhone DAT",
+    ]:
+        assert phrase in combined
+
+
 def test_backend_serves_webapp_preview_assets() -> None:
     index = client.get("/simulator/meta-rayban-display/webapp/index.html")
     app_js = client.get("/simulator/meta-rayban-display/webapp/app.js")
     readiness = client.get("/simulator/meta-rayban-display/webapp/readiness.json")
     manifest = client.get("/simulator/meta-rayban-display/webapp/manifest.webmanifest")
+    icon = client.get("/simulator/meta-rayban-display/webapp/icons/icon-52.png")
 
     assert index.status_code == 200
     assert "data-meta-rayban-display-webapp" in index.text
@@ -173,6 +222,8 @@ def test_backend_serves_webapp_preview_assets() -> None:
     assert readiness.json()["viewport"] == {"width": 600, "height": 600}
     assert manifest.status_code == 200
     assert manifest.json()["display"] == "fullscreen"
+    assert icon.status_code == 200
+    assert icon.content.startswith(b"\x89PNG\r\n\x1a\n")
 
 
 def test_webapp_display_action_event_can_publish_through_mobile_orb_backend() -> None:

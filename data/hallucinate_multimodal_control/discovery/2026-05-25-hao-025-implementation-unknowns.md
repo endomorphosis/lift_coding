@@ -18,10 +18,12 @@ task-board entries were recorded as historical discovery outputs:
 
 ## Queue State Evidence
 
-The initial queue is not fully clear in the current backlog: `HAO-008` and
-`HAO-009` still have `Status: todo`, and the strategy file still lists both in
-`blocked_tasks`. Existing retry-budget tasks `HAO-028` and `HAO-029` already
-track those blockers, so this discovery does not duplicate them.
+When this report was written, the initial queue still showed unresolved
+`HAO-008` and `HAO-009` work, and the strategy file still listed both in
+`blocked_tasks`. Current queue evidence now shows `HAO-008`, `HAO-009`,
+`HAO-028`, and `HAO-029` completed with an empty `blocked_tasks` list, so this
+section is historical context rather than a live blocker or a duplicate
+backlog signal.
 
 Evidence commands:
 
