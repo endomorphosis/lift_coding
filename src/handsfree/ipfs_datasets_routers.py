@@ -127,8 +127,15 @@ class _LLMRouterAdapter:
 def _import_router_module(module_name: str) -> Any | None:
     try:
         return importlib.import_module(module_name)
-    except Exception as exc:
-        logger.debug("Optional router import failed for %s: %s", module_name, exc)
+    except ModuleNotFoundError as exc:
+        root_package = module_name.partition(".")[0]
+        if exc.name not in {root_package, module_name}:
+            raise
+        logger.debug(
+            "Optional router module unavailable for %s: %s",
+            module_name,
+            exc,
+        )
         return None
 
 

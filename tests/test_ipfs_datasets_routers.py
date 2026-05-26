@@ -120,3 +120,40 @@ def test_delegates_to_llm_router_module(monkeypatch):
     router = get_llm_router()
 
     assert router.generate_text("hello") == "generated:hello"
+
+
+@pytest.mark.parametrize(
+    "missing_name",
+    ["ipfs_datasets_py", "ipfs_datasets_py.llm_router"],
+)
+def test_import_router_module_returns_none_for_missing_optional_router(
+    monkeypatch,
+    missing_name,
+):
+    """Missing optional package/router modules should keep the safe fallback path."""
+
+    def import_module(module_name):
+        raise ModuleNotFoundError(
+            f"No module named {module_name!r}",
+            name=missing_name,
+        )
+
+    monkeypatch.setattr(routers.importlib, "import_module", import_module)
+
+    assert routers._import_router_module("ipfs_datasets_py.llm_router") is None
+
+
+def test_import_router_module_reraises_import_time_dependency_failures(monkeypatch):
+    """Import errors from router dependencies should not be swallowed."""
+
+    def import_module(module_name):
+        _ = module_name
+        raise ModuleNotFoundError(
+            "No module named 'missing_dependency'",
+            name="missing_dependency",
+        )
+
+    monkeypatch.setattr(routers.importlib, "import_module", import_module)
+
+    with pytest.raises(ModuleNotFoundError, match="missing_dependency"):
+        routers._import_router_module("ipfs_datasets_py.llm_router")
