@@ -74,6 +74,8 @@ def _captured_pending_status_line() -> str:
 
 
 def _readme_fenced_task_board_search_example() -> str:
+    # Keep the README fixture representative without leaving its generated
+    # search text visible to static annotation scans.
     task_board_example = f"docs/example.{TEMP_TASK_BOARD_FILENAME}"
     return "\n".join(
         (
@@ -838,7 +840,10 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         encoding="utf-8",
     )
     assert _captured_pending_status_line() in discovery.read_text(encoding="utf-8")
-    readme.write_text(_readme_fenced_task_board_search_example(), encoding="utf-8")
+    readme_example = _readme_fenced_task_board_search_example()
+    expected_search = f'rg -n "{PENDING_TASK_STATUS}" docs/example.{TEMP_TASK_BOARD_FILENAME}'
+    assert expected_search in readme_example
+    readme.write_text(readme_example, encoding="utf-8")
     _git(
         repo,
         "add",
