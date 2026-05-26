@@ -139,6 +139,29 @@ def test_missing_backend_factory_raises_unavailable_error(monkeypatch):
         adapter.pin("bafy123")
 
 
+def test_add_bytes_without_backend_helpers_raises_unavailable_error(monkeypatch):
+    """Missing backend content helpers should use the adapter unavailable error."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        pass
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    with pytest.raises(
+        IPFSKitUnavailableError,
+        match="backend exposes neither add_bytes nor add_str",
+    ):
+        adapter.add_bytes(b"payload")
+
+
 def test_backend_factory_errors_are_not_swallowed(monkeypatch):
     """Backend construction failures should surface with their original cause."""
     root_module = ModuleType("ipfs_kit_py")

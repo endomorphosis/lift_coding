@@ -128,8 +128,9 @@ class _IPFSKitModuleAdapter:
         add_str = getattr(backend, "add_str", None)
         if callable(add_str):
             return add_str(data.decode("utf-8", errors="replace"), **kwargs)
-        raise NotImplementedError(
-            "ipfs_kit_py add_bytes is not exposed through a stable direct-import seam yet"
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py add_bytes is unavailable: backend exposes neither "
+            "add_bytes nor add_str"
         )
 
     def cat(self, cid: str, **kwargs: Any) -> Any:
