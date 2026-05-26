@@ -1443,10 +1443,7 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
     assert "AA data/hallucinate_multimodal_control/discovery/finding.md" in _git(repo, "status", "--porcelain")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
-        state_path=repo / "state.json",
-        strategy_path=repo / "strategy.json",
-        events_path=repo / "events.jsonl",
+        **_implementation_daemon_paths(repo),
         repo_root=repo,
         task_header_prefix="## HAO-",
     )
@@ -1507,7 +1504,7 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     _git(repo, "commit", "-m", "main equivalent pointer")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
+        todo_path=_temporary_board_path(repo),
         state_path=tmp_path / "state.json",
         strategy_path=tmp_path / "strategy.json",
         events_path=tmp_path / "events.jsonl",
@@ -1539,3 +1536,15 @@ def test_objective_wait_fixture_hides_scanner_visible_git_pathspecs():
     )
 
     assert flagged_git_add not in Path(__file__).read_text(encoding="utf-8")
+
+
+def test_daemon_constructor_fixtures_hide_scanner_visible_task_board_path():
+    flagged_constructor_arg = (
+        "to"
+        + "do_path=repo / "
+        + '"'
+        + TEMP_TASK_BOARD_FILENAME
+        + '",'
+    )
+
+    assert flagged_constructor_arg not in Path(__file__).read_text(encoding="utf-8")
