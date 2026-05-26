@@ -18,6 +18,9 @@ class StubSTTProvider:
     It doesn't require any external dependencies or API keys.
     """
 
+    SUPPORTED_FORMATS = ("wav", "m4a", "mp3", "opus")
+    DEFAULT_TRANSCRIPT = "show my inbox"
+
     def __init__(self, enabled: bool = True):
         """Initialize stub STT provider.
 
@@ -45,16 +48,14 @@ class StubSTTProvider:
                 "Audio STT is disabled. Set HANDSFREE_STT_ENABLED=true to enable."
             )
 
-        # Validate format
-        supported_formats = ["wav", "m4a", "mp3", "opus"]
-        if format not in supported_formats:
+        if format not in self.SUPPORTED_FORMATS:
             raise ValueError(
                 f"Unsupported audio format: {format}. "
-                f"Supported formats: {', '.join(supported_formats)}"
+                f"Supported formats: {', '.join(self.SUPPORTED_FORMATS)}"
             )
 
         # Always return a known, parseable command.
         # Python's built-in hash() is intentionally randomized per process, and some
         # plausible transcripts may not map to a supported intent. Keeping this
         # stable prevents flaky integration tests.
-        return "show my inbox"
+        return self.DEFAULT_TRANSCRIPT
