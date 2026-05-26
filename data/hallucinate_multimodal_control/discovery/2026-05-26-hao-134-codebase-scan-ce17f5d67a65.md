@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Remediation
+
+Replaced the missing optional-dependency placeholder `NotImplementedError` path
+with `IPFSKitUnavailableError`, a concrete runtime error for unavailable
+`ipfs_kit_py` integration. Updated focused adapter coverage to assert the
+concrete unavailable error when the optional dependency is absent.
