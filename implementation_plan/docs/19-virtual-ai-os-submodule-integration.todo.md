@@ -425,7 +425,7 @@ cadence remains parseable and resumable.
 
 ## VAI-036 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:32
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
