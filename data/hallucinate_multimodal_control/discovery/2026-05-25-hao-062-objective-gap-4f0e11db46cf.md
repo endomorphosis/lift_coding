@@ -30,4 +30,4 @@ Add or tighten routing evidence for any execution mode that is named in the arch
 
 If the gap is too broad for one task, refine `VAIOS-G020` in the objective
 heap by adding child goals with concrete evidence terms, then keep the generated
-todo task small enough for the supervisor to validate.
+backlog record narrow enough for the supervisor to validate.
