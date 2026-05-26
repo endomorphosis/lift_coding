@@ -5,6 +5,10 @@ It doesn't require any external dependencies or API keys.
 """
 
 
+class OCRDisabledError(NotImplementedError):
+    """Raised when OCR is disabled by runtime configuration."""
+
+
 class StubOCRProvider:
     """Stub OCR provider that returns deterministic responses for testing.
 
@@ -16,7 +20,7 @@ class StubOCRProvider:
         """Initialize stub OCR provider.
 
         Args:
-            enabled: Whether OCR is enabled. If False, raises NotImplementedError.
+            enabled: Whether OCR is enabled. If False, raises OCRDisabledError.
         """
         self.enabled = enabled
 
@@ -31,11 +35,11 @@ class StubOCRProvider:
             Deterministic text for testing purposes
 
         Raises:
-            NotImplementedError: If OCR is disabled
+            OCRDisabledError: If OCR is disabled
             ValueError: If content_type is unsupported
         """
         if not self.enabled:
-            raise NotImplementedError(
+            raise OCRDisabledError(
                 "Image OCR is disabled. Set HANDSFREE_OCR_ENABLED=true to enable."
             )
 
