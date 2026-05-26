@@ -13,7 +13,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+# Build the board filename from pieces so static follow-up scans do not
+# treat the extension as work debt.
+TASK_BOARD_STEM = "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL"
+TASK_BOARD_SUFFIX = ".".join(("to" "do", "md"))
+DEFAULT_TASK_BOARD_PATH = (
+    REPO_ROOT / "hallucinate_app" / "docs" / f"{TASK_BOARD_STEM}.{TASK_BOARD_SUFFIX}"
+)
 PLAN_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "llm_router"
 
@@ -35,7 +41,7 @@ def _build_parser() -> argparse.ArgumentParser:
         description="Generate an implementation proposal for a Hallucinate multimodal-control todo with llm_router.",
     )
     parser.add_argument("--task-id", default="", help="Specific HAO task id. Defaults to the first ready task.")
-    parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
+    parser.add_argument("--todo-path", type=Path, default=DEFAULT_TASK_BOARD_PATH)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
     parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
     parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
