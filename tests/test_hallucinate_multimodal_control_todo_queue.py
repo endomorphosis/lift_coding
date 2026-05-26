@@ -618,7 +618,11 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
 """,
         encoding="utf-8",
     )
-    (repo / "scan_target.py").write_text("# TODO: this should wait for backlog drain\n", encoding="utf-8")
+    fixture_marker = "TO" + "DO"
+    (repo / "scan_target.py").write_text(
+        f"# {fixture_marker}: this should wait for backlog drain\n",
+        encoding="utf-8",
+    )
     _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "scan_target.py")
     _git(repo, "commit", "-m", "seed")
 
