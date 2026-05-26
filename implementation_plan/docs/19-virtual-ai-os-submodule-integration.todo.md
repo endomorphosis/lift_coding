@@ -268,7 +268,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## VAI-023 Prepare iPhone native DAT handoff and physical validation evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
