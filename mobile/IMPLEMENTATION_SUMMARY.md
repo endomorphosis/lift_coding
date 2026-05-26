@@ -48,6 +48,7 @@ stopRecording(): Promise<RecordingResult>
 playAudio(fileUri: string): Promise<void>
 stopPlayback(): Promise<void>
 addAudioRouteChangeListener(listener): Subscription
+addPlaybackStatusListener(listener): Subscription
 ```
 
 ### 3. Updated Diagnostics Screen
@@ -151,16 +152,16 @@ The implementation is ready for testing but requires physical hardware:
    - DEV mode (expo-av) playback remains available for phone-audio iteration
 
 2. **Playback Status Events:**
-   - iOS uses 3-second estimated duration instead of real playback status
-   - Should implement `addPlaybackStatusListener` for accurate status
-   - Marked with TODO comment
+   - iOS emits native `onPlaybackStatus` events when playback starts, stops, completes, or errors
+   - `addPlaybackStatusListener` is exposed through the Expo module API and consumed by the diagnostics screen
+   - No estimated-duration fallback is required in the native diagnostics path
 
 3. **Recording Format:**
    - iOS saves as WAV (16kHz, 16-bit, mono PCM)
    - Android AudioRecord configured but file writing not fully implemented
    - Both work for the diagnostics/testing use case
 
-These limitations don't prevent testing the core functionality but should be addressed in follow-up work.
+The remaining limitations don't prevent testing the core functionality but should be addressed in follow-up work.
 
 ## Security
 
@@ -208,7 +209,7 @@ mobile/
 
 2. **Playback Implementation**
    - Complete Android WAV file playback
-   - Implement iOS playback status events
+   - Validate iOS playback status events on physical hardware
    - Add recording status events
 
 3. **Production Readiness**
