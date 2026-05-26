@@ -1149,7 +1149,7 @@ def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / "todo.md"
+    todo_path = _temporary_board_path(repo)
     objective_path = repo / "objective-heap.md"
     shell_docs = repo / "docs" / "operator_shell.md"
     harness_test = repo / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts"
