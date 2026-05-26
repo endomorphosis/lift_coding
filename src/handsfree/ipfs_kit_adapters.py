@@ -78,6 +78,24 @@ class _IPFSKitModuleAdapter:
     def __init__(self, root_module: Any) -> None:
         self._root_module = root_module
 
+    def _resolve_backend_callable(
+        self,
+        backend: Any,
+        *paths: tuple[str, ...],
+    ) -> Callable[..., Any] | None:
+        for root in (backend, getattr(backend, "client", None)):
+            if root is None:
+                continue
+            for path in paths:
+                candidate = root
+                for attr_name in path:
+                    candidate = getattr(candidate, attr_name, None)
+                    if candidate is None:
+                        break
+                if callable(candidate):
+                    return candidate
+        return None
+
     def _resolve_callable(self, *targets: tuple[str, str]) -> Callable[..., Any] | None:
         for module_name, attr_name in targets:
             try:
