@@ -543,15 +543,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-048 Replace placeholder runtime path in data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: docs
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-048-codebase-scan-9477780ff54f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -562,11 +558,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:110. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-049-codebase-scan-9e6407080e55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -577,11 +569,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:149. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-050-codebase-scan-113fa6a2035a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -592,11 +580,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:159. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-051-codebase-scan-0886ebe3b4a6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -607,11 +591,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:188. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-052-codebase-scan-acbf277a215b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
