@@ -29,6 +29,12 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
 )
+DISCOVERY_EXPANSION_OUTPUTS = (
+    TASK_BOARD_PATH.relative_to(REPO_ROOT).as_posix(),
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+    DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+)
+DISCOVERY_EXPANSION_OUTPUTS_TEXT = ", ".join(DISCOVERY_EXPANSION_OUTPUTS)
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
@@ -52,7 +58,7 @@ DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns an
 - Priority: P2
 - Track: ops
 - Depends on: {INITIAL_BACKLOG_DEPENDENCIES}
-- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
+- Outputs: {DISCOVERY_EXPANSION_OUTPUTS_TEXT}
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: After the initial backlog completes, investigate the Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT references, and hardware-free test harness code paths for missed work. Append new daemon-parseable MGW tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
 """
