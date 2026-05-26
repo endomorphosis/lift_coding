@@ -654,7 +654,7 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
     _git(app, "add", "python/hallucinate_app/scan_target.py")
     _git(app, "commit", "-m", "app scan target")
 
-    todo_path = repo / "todo.md"
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = repo / "discovery"
     todo_path.write_text(
@@ -677,7 +677,7 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
         json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "hallucinate_app")
+    _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "hallucinate_app")
     _git(repo, "commit", "-m", "root seed")
 
     findings = daemon_module.record_codebase_scan_findings(
