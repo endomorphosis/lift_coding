@@ -56,7 +56,16 @@ def get_redis_client(
 
     # Get connection parameters from environment or defaults
     host = host or os.environ.get("REDIS_HOST", "localhost")
-    port = port or int(os.environ.get("REDIS_PORT", "6379"))
+    if port is None:
+        redis_port = os.environ.get("REDIS_PORT", "6379")
+        try:
+            port = int(redis_port)
+        except ValueError:
+            logger.warning(
+                "Invalid REDIS_PORT value %r; Redis integration disabled",
+                redis_port,
+            )
+            return None
 
     try:
         client = redis.Redis(
