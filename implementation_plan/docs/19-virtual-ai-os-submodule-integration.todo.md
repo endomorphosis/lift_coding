@@ -579,7 +579,7 @@ cadence remains parseable and resumable.
 
 ## VAI-050 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:375
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
