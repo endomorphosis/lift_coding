@@ -6,6 +6,8 @@ It doesn't require any external dependencies or API keys.
 
 import logging
 
+from handsfree.stt import STTDisabledError
+
 logger = logging.getLogger(__name__)
 
 
@@ -20,7 +22,7 @@ class StubSTTProvider:
         """Initialize stub STT provider.
 
         Args:
-            enabled: Whether STT is enabled. If False, raises NotImplementedError.
+            enabled: Whether STT is enabled. If False, raises STTDisabledError.
         """
         self.enabled = enabled
 
@@ -35,11 +37,11 @@ class StubSTTProvider:
             Deterministic transcript based on audio data
 
         Raises:
-            NotImplementedError: If STT is disabled
+            STTDisabledError: If STT is disabled
             ValueError: If format is unsupported
         """
         if not self.enabled:
-            raise NotImplementedError(
+            raise STTDisabledError(
                 "Audio STT is disabled. Set HANDSFREE_STT_ENABLED=true to enable."
             )
 

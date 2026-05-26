@@ -207,7 +207,7 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
-from handsfree.stt import get_stt_provider
+from handsfree.stt import STTDisabledError, get_stt_provider
 from handsfree.ocr import OCRDisabledError, get_ocr_provider
 from handsfree.peer_chat import PeerChatSessionService
 from handsfree.webhooks import (
@@ -3088,7 +3088,7 @@ async def submit_command(
                 transcript_length=len(text),
                 user_id=user_id,
             )
-        except NotImplementedError as e:
+        except STTDisabledError as e:
             # STT is disabled
             clear_request_id()
             return CommandResponse(
