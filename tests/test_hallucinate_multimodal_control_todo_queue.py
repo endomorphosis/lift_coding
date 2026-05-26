@@ -1075,7 +1075,7 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / "todo.md"
+    todo_path = _temporary_board_path(repo)
     objective_path = repo / "objective-heap.md"
     docs_path = repo / "docs" / "observability_metrics.md"
     docs_path.parent.mkdir()
@@ -1120,7 +1120,7 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
         "audio/display output with mobile fallback rendering.\n",
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "objective-heap.md", "docs/observability_metrics.md")
+    _git(repo, "add", *_repo_relative_paths(repo, todo_path, objective_path, docs_path))
     _git(repo, "commit", "-m", "seed covered objective heap")
 
     findings = daemon_module.record_objective_goal_findings(
