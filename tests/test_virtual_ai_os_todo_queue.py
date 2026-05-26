@@ -12,6 +12,10 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.todo.md"
 
 
+def _git(cwd: Path, *args: str) -> None:
+    subprocess.run(["git", *args], cwd=cwd, text=True, capture_output=True, check=True)
+
+
 def _load_script_module(name: str):
     script_path = REPO_ROOT / "scripts" / f"{name}.py"
     spec = importlib.util.spec_from_file_location(name, script_path)
@@ -130,3 +134,41 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
 
     assert paths["state_dir"].exists()
     assert paths["worktree_root"].exists()
+
+
+def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path):
+    supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_codebase_findings
+
+    repo = tmp_path / "repo"
+    source = repo / "src" / "scan_target.py"
+    generated_reports = (
+        repo / "data" / "virtual_ai_os" / "discovery" / "report.md",
+        repo / "data" / "hallucinate_multimodal_control" / "discovery" / "report.md",
+        repo / "data" / "meta_glasses_display_widgets" / "discovery" / "report.md",
+    )
+
+    _git(repo.parent, "init", repo.name)
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    source.parent.mkdir(parents=True)
+    source.write_text("def unresolved():\n    # FIXME: real source finding\n    return None\n", encoding="utf-8")
+    for report in generated_reports:
+        report.parent.mkdir(parents=True, exist_ok=True)
+        report.write_text(
+            "# Generated Discovery\n\nThe captured evidence mentions a todo task.\n",
+            encoding="utf-8",
+        )
+    _git(repo, "add", ".")
+    _git(repo, "commit", "-m", "seed scan candidates")
+
+    findings = scan_codebase_findings(
+        repo,
+        max_findings=10,
+        seen_fingerprints=set(),
+        skip_prefixes=supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES,
+    )
+
+    assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]

@@ -30,4 +30,4 @@ Close the highest-leverage missing proof that the component stack behaves like o
 
 If the gap is too broad for one task, refine `VAIOS-G000` in the objective
 heap by adding child goals with concrete evidence terms, then keep the generated
-todo task small enough for the supervisor to validate.
+backlog item small enough for the supervisor to validate.
