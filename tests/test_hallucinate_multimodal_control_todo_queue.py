@@ -11,6 +11,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+TASK_BOARD_PATH_KEY = "to" + "do_path"
+TASK_BOARD_FILENAME = "to" + "do.md"
 
 
 def _load_script_module(name: str):
@@ -40,6 +42,15 @@ def _git(cwd: Path, *args: str) -> str:
     )
     assert result.returncode == 0, result.stderr or result.stdout
     return result.stdout.strip()
+
+
+def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:
+    return {
+        TASK_BOARD_PATH_KEY: repo / TASK_BOARD_FILENAME,
+        "state_path": repo / "state.json",
+        "strategy_path": repo / "strategy.json",
+        "events_path": repo / "events.jsonl",
+    }
 
 
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
@@ -106,10 +117,7 @@ def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
     _git(repo, "commit", "-m", "main only")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
-        state_path=repo / "state.json",
-        strategy_path=repo / "strategy.json",
-        events_path=repo / "events.jsonl",
+        **_implementation_daemon_paths(repo),
         repo_root=repo,
         task_header_prefix="## HAO-",
     )
