@@ -34,7 +34,7 @@ def _bootstrap_imports() -> None:
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate an implementation proposal for a Meta glasses display-widget todo with llm_router.",
+        description="Generate an implementation proposal for a Meta glasses display-widget task-board item with llm_router.",
     )
     parser.add_argument("--task-id", default="", help="Specific MGW task id. Defaults to the first ready task.")
     parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
