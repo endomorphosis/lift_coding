@@ -569,6 +569,31 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 >>>>>>> implementation/mgw-049-attempt-1-1779821285
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+<<<<<<< HEAD
+=======
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:13. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-codebase-scan-cfe0d4fe2a26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-048 Replace placeholder runtime path in data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-048-codebase-scan-9477780ff54f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-049 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:110
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+>>>>>>> implementation/mgw-048-attempt-1-1779820679
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:110. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-049-codebase-scan-9e6407080e55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-050 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:149
@@ -578,10 +603,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Priority: P3
 - Track: quality
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Depends on:
 =======
 - Depends on: 
 >>>>>>> implementation/mgw-049-attempt-1-1779821285
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-048-attempt-1-1779820679
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:149. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-050-codebase-scan-113fa6a2035a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -593,10 +622,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Priority: P3
 - Track: quality
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Depends on:
 =======
 - Depends on: 
 >>>>>>> implementation/mgw-049-attempt-1-1779821285
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-048-attempt-1-1779820679
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:159. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-051-codebase-scan-0886ebe3b4a6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -608,10 +641,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Priority: P3
 - Track: quality
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Depends on:
 =======
 - Depends on: 
 >>>>>>> implementation/mgw-049-attempt-1-1779821285
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-048-attempt-1-1779820679
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:188. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-052-codebase-scan-acbf277a215b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-053 Resolve dependency guardrail for MGW-048
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-053-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-048 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-053-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## MGW-054 Resolve dependency guardrail for MGW-049
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-054-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-049 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-054-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
