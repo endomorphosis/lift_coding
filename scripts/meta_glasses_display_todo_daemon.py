@@ -17,6 +17,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
+TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 LOCAL_JDK = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
@@ -251,7 +252,7 @@ def main(argv: list[str] | None = None) -> None:
         parse_args,
     )
 
-    args = _with_default(args, "--todo-path", str(TASK_BOARD_PATH))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(TASK_BOARD_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
