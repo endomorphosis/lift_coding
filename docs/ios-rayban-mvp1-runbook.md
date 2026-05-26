@@ -1,7 +1,7 @@
 # iOS + Ray-Ban Meta MVP1 Runbook
 
-**Version**: 1.0  
-**Last Updated**: 2026-05-25  
+**Version**: 1.0
+**Last Updated**: 2026-05-25
 **Purpose**: Single, reliable, end-to-end runbook for MVP1 demo on iOS with Ray-Ban Meta glasses
 
 ---
@@ -43,57 +43,6 @@ Use this checklist for a successful demo:
 - [ ] No audio routing issues encountered
 - [ ] Backend responded to all commands successfully
 - [ ] Optional: Notifications were fetched and displayed
-
----
-
-## Web App Display Simulator Preflight
-
-Before migrating the display surface into native iPhone DAT, validate the browser Web App package in `dev/meta-rayban-display-simulator/webapp/`.
-
-### Static Package
-
-The Web App export is a no-build static directory:
-
-```text
-dev/meta-rayban-display-simulator/webapp/
-├── index.html
-├── styles.css
-├── app.js
-├── manifest.webmanifest
-├── readiness.json
-└── icons/
-    ├── icon-52.png
-    └── icon-192.png
-```
-
-`readiness.json` is the source of truth for the hosted URL, 600x600 viewport, D-pad focus metadata, PNG icon metadata, and the native iPhone DAT migration gate.
-
-### Host Over HTTPS
-
-1. Deploy the contents of `dev/meta-rayban-display-simulator/webapp/` to a static host such as GitHub Pages, Netlify, or Vercel.
-2. Use a publicly available HTTPS URL; local tunnels, private IPs, and authenticated preview URLs are not acceptable for glasses loading.
-3. Verify these URLs return HTTP 200 without login:
-   - `https://<host>/<path>/index.html`
-   - `https://<host>/<path>/manifest.webmanifest`
-   - `https://<host>/<path>/readiness.json`
-4. Update `deployment_url` in the hosted `readiness.json` to the final HTTPS `index.html` URL or directory URL used by the glasses.
-5. Run:
-
-```bash
-PYTHONPATH=./src python3 scripts/lint_display_webapp_readiness.py \
-  dev/meta-rayban-display-simulator/webapp/readiness.json
-```
-
-### Add to Meta AI App Web Apps
-
-1. Generate a QR code for the final HTTPS `index.html` URL.
-2. On the paired iPhone, open the Meta AI app.
-3. Navigate to `App Connections > Web apps`.
-4. Add the Web App URL, using the QR code when available to avoid typing errors.
-5. Launch the Web App on the glasses.
-6. Confirm the task-progress display stays inside 600x600, D-pad focus moves between Pause and Dismiss, and Enter records an action event.
-
-Record the final HTTPS URL and readiness linter result before using the same manifest and trace for native iPhone DAT work.
 
 ---
 
@@ -1056,7 +1005,7 @@ If issues arise during a demo, use these fallback strategies:
 4. Continue demo with phone speaker output
 5. Explain: "For today's demo, we're using the phone speaker as a fallback"
 
-**Pros**: Demo can continue without delay  
+**Pros**: Demo can continue without delay
 **Cons**: Not hands-free; less impressive
 
 ### Fallback 2: Use Text Input Instead of Voice
@@ -1069,7 +1018,7 @@ If issues arise during a demo, use these fallback strategies:
 3. Backend and TTS pipeline still function normally
 4. Explain: "For today's demo, we're using text input to simulate voice commands"
 
-**Pros**: Bypasses STT issues; consistent results  
+**Pros**: Bypasses STT issues; consistent results
 **Cons**: Not truly voice-driven
 
 ### Fallback 3: Disable Push Notifications
@@ -1081,7 +1030,7 @@ If issues arise during a demo, use these fallback strategies:
 2. Focus on core command → TTS → audio playback flow
 3. Explain: "Notifications are an optional feature we're still refining"
 
-**Pros**: Core demo still works  
+**Pros**: Core demo still works
 **Cons**: Cannot show end-to-end notification flow
 
 ### Fallback 4: Use Fixture Mode
@@ -1094,7 +1043,7 @@ If issues arise during a demo, use these fallback strategies:
 3. Backend will use canned fixture data (fast, predictable)
 4. Explain: "For today's demo, we're using sample data for speed"
 
-**Pros**: Consistent, fast responses; no API dependencies  
+**Pros**: Consistent, fast responses; no API dependencies
 **Cons**: Data is not real-time
 
 ### Rollback: Revert to Last Known Good Config
