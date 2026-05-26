@@ -24,6 +24,8 @@ if str(SCRIPTS_DIR) not in sys.path:
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     DISCOVERY_DIR,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+    TASK_BOARD_PATH_KEY,
+    TASK_BOARD_PATH_OPTION,
     _ensure_runtime_pythonpath,
     ensure_hallucinate_multimodal_bootstrap_paths,
     record_codebase_scan_findings,
@@ -247,7 +249,7 @@ def main(argv: list[str] | None = None) -> None:
     os.chdir(REPO_ROOT)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, "--todo-path", str(paths["todo_path"]))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths[TASK_BOARD_PATH_KEY]))
     args = _with_default(args, "--state-dir", str(paths["state_dir"]))
     args = _with_default(args, "--task-prefix", "## HAO-")
     args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
