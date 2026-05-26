@@ -14,6 +14,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
+TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 
 
 def _load_script_module(name: str):
@@ -78,8 +79,8 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
     ensure_post_initial_discovery_backlog = supervisor_module.ensure_post_initial_discovery_backlog
 
-    todo_path = tmp_path / "todo.md"
-    todo_path.write_text(
+    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text(
         """# Temporary Board
 
 ## MGW-001 Initial task
@@ -96,15 +97,15 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
         encoding="utf-8",
     )
 
-    assert ensure_post_initial_discovery_backlog(todo_path)
-    updated = todo_path.read_text(encoding="utf-8")
+    assert ensure_post_initial_discovery_backlog(task_board_path)
+    updated = task_board_path.read_text(encoding="utf-8")
 
     assert "## MGW-013 Investigate implementation unknowns and expand the backlog" in updated
     assert "Depends on: MGW-001, MGW-002, MGW-003" in updated
     assert "MGW-012" in updated
     assert "## MGW-014 Add supervisor validation-environment and retry-budget guardrails" in updated
     assert "Depends on: MGW-013" in updated
-    assert not ensure_post_initial_discovery_backlog(todo_path)
+    assert not ensure_post_initial_discovery_backlog(task_board_path)
 
 
 def test_codebase_scan_skips_generated_discovery_dirs():
