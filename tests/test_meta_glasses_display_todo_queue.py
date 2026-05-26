@@ -105,6 +105,13 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
     assert not ensure_post_initial_discovery_backlog(todo_path)
 
 
+def test_codebase_scan_skips_generated_discovery_dirs():
+    supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
+
+    assert "data/meta_glasses_display_widgets/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "data/hallucinate_multimodal_control/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+
+
 def test_android_validation_environment_uses_repo_local_tools(monkeypatch):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
     jdk = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
