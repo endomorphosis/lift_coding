@@ -879,7 +879,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / "todo.md"
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
     objective_path = repo / "objective-heap.md"
     source = repo / "src" / "capability_registry.py"
     source.parent.mkdir()
