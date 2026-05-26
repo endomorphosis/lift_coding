@@ -533,6 +533,7 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     _git(app, "add", "python/hallucinate_app/scan_target.py")
     _git(app, "commit", "-m", "app scan target")
 
+    # Keep this fixture path on the neutral board filename to avoid scan noise.
     task_board_path = repo / TEMP_TASK_BOARD_FILENAME
     discovery_dir = repo / "discovery"
     strategy_path = tmp_path / "strategy.json"
