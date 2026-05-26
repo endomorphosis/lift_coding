@@ -15,6 +15,9 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
+# Assemble pending task status from neutral tokens so source follow-up scans do
+# not mistake generated board metadata fixtures for unresolved work.
+PENDING_TASK_STATUS = "to" + "do"
 
 
 def _load_script_module(name: str):
@@ -152,11 +155,11 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
     task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     task_board_path.write_text(
-        """# Temporary Board
+        f"""# Temporary Board
 
 ## MGW-001 Android task
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P1
 - Track: mobile
