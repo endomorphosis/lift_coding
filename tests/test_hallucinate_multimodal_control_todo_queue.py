@@ -972,7 +972,7 @@ def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / "todo.md"
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
     objective_path = repo / "objective-heap.md"
     source = repo / "src" / "runtime_router.py"
     notes = repo / "docs" / "runtime_notes.md"
@@ -1024,7 +1024,7 @@ def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
 """,
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "objective-heap.md", "src/runtime_router.py", "docs/runtime_notes.md")
+    _git(repo, "add", todo_path.name, "objective-heap.md", "src/runtime_router.py", "docs/runtime_notes.md")
     _git(repo, "commit", "-m", "seed objective heap")
 
     findings = daemon_module.record_objective_goal_findings(
