@@ -4,7 +4,7 @@ This document is the objective model for supervisor-fed backlog discovery. It is
 separate from the task board on purpose: the task board says what to do next,
 while this heap says what the system must eventually prove.
 
-The heap is represented as flat markdown records so the todo supervisor can parse
+The heap is represented as flat markdown records so backlog automation can parse
 and refine it without a bespoke database. `Parent` forms the hierarchy, and
 `Fib priority` gives the scanner a stable Fibonacci-style ordering. Lower numbers
 are closer to the root objective and should be satisfied before wider refinements.
