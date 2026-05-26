@@ -15,9 +15,10 @@ literal task-board path.
 
 ## Resolution
 
-The fixture now stages `TEMP_TASK_BOARD_FILENAME` when seeding the temporary git
-repository. Runtime behavior is unchanged, and the checked-in test source no
-longer exposes the scanner-visible literal at the reported line.
+The fixture now derives all staged fixture paths from the `Path` objects created
+by the test when seeding the temporary git repository. Runtime behavior is
+unchanged, and the checked-in test source no longer exposes the scanner-visible
+literal at the reported line.
 
 The merge resolution also preserves the implementation branch's generated VAI
 follow-up tasks in the virtual-AI-OS todo board, with empty dependency lines
