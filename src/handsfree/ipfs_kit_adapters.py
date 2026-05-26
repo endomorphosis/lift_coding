@@ -9,12 +9,14 @@ when they are explicitly available.
 from __future__ import annotations
 
 import importlib
+import json
 import logging
 from functools import lru_cache
 from typing import Any, Callable, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
 IPFS_KIT_CLI_COMMAND = "ipfs-kit"
+PACKAGE_DATASET_MANIFEST_SCHEMA = "handsfree.ipfs_kit.package_dataset.v1"
 
 
 class IPFSKitAdapter(Protocol):
@@ -132,6 +134,61 @@ class _IPFSKitModuleAdapter:
             "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
         )
 
+    def _get_high_level_api(self) -> Any | None:
+        api_factory = self._resolve_callable(
+            ("ipfs_kit_py.high_level_api", "IPFSSimpleAPI")
+        )
+        if api_factory is None:
+            return None
+        api = api_factory()
+        if getattr(api, "available", True) is False:
+            logger.debug("Optional kit high-level API is unavailable")
+            return None
+        return api
+
+    def _dataset_manifest(
+        self,
+        items: list[dict[str, Any]],
+        metadata: Any | None,
+    ) -> dict[str, Any]:
+        manifest: dict[str, Any] = {
+            "schema": PACKAGE_DATASET_MANIFEST_SCHEMA,
+            "items": items,
+        }
+        if metadata is not None:
+            manifest["metadata"] = metadata
+        return manifest
+
+    def _store_dataset_manifest(
+        self,
+        target: Any,
+        manifest: dict[str, Any],
+        **kwargs: Any,
+    ) -> Any:
+        add_json = getattr(target, "add_json", None)
+        if callable(add_json):
+            return add_json(manifest, **kwargs)
+
+        payload = json.dumps(
+            manifest,
+            ensure_ascii=True,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        add_bytes = getattr(target, "add_bytes", None)
+        if callable(add_bytes):
+            return add_bytes(payload.encode("utf-8"), **kwargs)
+
+        add_str = getattr(target, "add_str", None)
+        if callable(add_str):
+            return add_str(payload, **kwargs)
+
+        add = getattr(target, "add", None)
+        if callable(add):
+            return add(payload.encode("utf-8"), **kwargs)
+
+        return None
+
     def add_bytes(self, data: bytes, **kwargs: Any) -> Any:
         add_fn = self._resolve_callable(("ipfs_kit_py", "add_bytes"))
         try:
@@ -242,10 +299,41 @@ class _IPFSKitModuleAdapter:
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
         package_fn = getattr(self._root_module, "package_dataset", None)
-        if callable(package_fn):
-            return package_fn(items, **kwargs)
-        raise NotImplementedError(
-            "ipfs_kit_py package_dataset is not exposed through a stable direct-import seam yet"
+        try:
+            if callable(package_fn):
+                return package_fn(items, **kwargs)
+        except NotImplementedError as exc:
+            logger.debug("ipfs_kit_py.package_dataset direct callable unavailable: %s", exc)
+
+        storage_options = dict(kwargs)
+        metadata = storage_options.pop("metadata", None)
+        manifest = self._dataset_manifest(items, metadata)
+
+        api = self._get_high_level_api()
+        if api is not None:
+            api_package_fn = getattr(api, "package_dataset", None)
+            try:
+                if callable(api_package_fn):
+                    return api_package_fn(items, **kwargs)
+            except NotImplementedError as exc:
+                logger.debug(
+                    "ipfs_kit_py.high_level_api.package_dataset unavailable: %s",
+                    exc,
+                )
+            result = self._store_dataset_manifest(api, manifest, **storage_options)
+            if result is not None:
+                return result
+
+        backend = self._get_backend()
+        backend_package_fn = getattr(backend, "package_dataset", None)
+        if callable(backend_package_fn):
+            return backend_package_fn(items, **kwargs)
+        result = self._store_dataset_manifest(backend, manifest, **storage_options)
+        if result is not None:
+            return result
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py package_dataset is unavailable: backend exposes neither "
+            "package_dataset, add_json, add_bytes, add_str nor add"
         )
 
 
