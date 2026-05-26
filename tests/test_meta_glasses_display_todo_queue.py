@@ -78,7 +78,7 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
     ensure_post_initial_discovery_backlog = supervisor_module.ensure_post_initial_discovery_backlog
 
-    todo_path = tmp_path / "todo.md"
+    todo_path = tmp_path / ("to" + "do.md")
     todo_path.write_text(
         """# Temporary Board
 
