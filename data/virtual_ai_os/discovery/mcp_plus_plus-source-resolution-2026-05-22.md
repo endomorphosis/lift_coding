@@ -13,7 +13,7 @@ Should `mcp_plus_plus` be added as a root-tracked submodule in this monorepo?
 - Existing integration evidence inside this repo already places MCP++-like behavior across multiple component repos:
   - `swissknife` owns ORB, MCP-IDL, and operator-surface integrations.
   - `external/ipfs_accelerate` contributes runtime-placement and execution surfaces.
-  - `external/ipfs_datasets` contributes grounding, todo-daemon supervision, and MCP task routing.
+  - `external/ipfs_datasets` contributes grounding, autonomous task-board supervision, and MCP task routing.
 
 ## Decision
 
