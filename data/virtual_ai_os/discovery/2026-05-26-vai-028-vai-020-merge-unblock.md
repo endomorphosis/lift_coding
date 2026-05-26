@@ -10,7 +10,7 @@ Follow-up task: VAI-028
 - Failed branch: `implementation/vai-020-attempt-3-1779756496`
 - Implementation commit: `05b2ce085f74f678b704e2f3dc02cf40f32e96c6`
 - Failed merge command: `git merge --no-ff --no-edit implementation/vai-020-attempt-3-1779756496`
-- Recorded conflict: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Recorded conflict: display-widget backlog board; exact path is captured in the retry-budget evidence above.
 
 The VAI-020 implementation commit was present in the root repository and had no
 submodule-owned changes. Its intended implementation surface was limited to:
