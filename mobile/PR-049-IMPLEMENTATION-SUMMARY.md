@@ -73,7 +73,7 @@ try session.setCategory(
 - `mobile/src/screens/GlassesDiagnosticsScreen.js` - Added native player UI
 - `mobile/app.json` - Added Bluetooth permissions
 - `mobile/glasses/README.md` - Status update
-- `mobile/glasses/TODO.md` - Progress tracking
+- Glasses implementation checklist - Recorded PR-049 progress
 
 ## How to Build & Test
 
