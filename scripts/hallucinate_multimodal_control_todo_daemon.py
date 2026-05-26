@@ -37,6 +37,13 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/hallucinate_multimodal_control/state/",
     "data/hallucinate_multimodal_control/worktrees/",
     "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
+    "data/virtual_ai_os/discovery/",
+    "data/virtual_ai_os/objective_bundles/",
+    "data/virtual_ai_os/objective_datasets/",
+    "data/virtual_ai_os/state/",
+    "data/virtual_ai_os/worktrees/",
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 
