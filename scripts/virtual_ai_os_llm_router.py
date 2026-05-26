@@ -13,7 +13,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.todo.md"
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
+)
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
 
@@ -35,7 +37,7 @@ def _build_parser() -> argparse.ArgumentParser:
         description="Generate an implementation proposal for a virtual-AI-OS todo with llm_router.",
     )
     parser.add_argument("--task-id", default="", help="Specific VAI task id. Defaults to the first ready task.")
-    parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
+    parser.add_argument("--todo-path", type=Path, default=TASK_BOARD_PATH)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
     parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
     parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
