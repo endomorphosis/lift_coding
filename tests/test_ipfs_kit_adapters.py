@@ -121,6 +121,30 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
     }
 
 
+def test_cat_falls_back_to_backend_get(monkeypatch):
+    """Backends without cat should still support content reads through get."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def get(self, cid, **kwargs):
+            return {"backend": "get", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.cat("bafy123", timeout=10) == {
+        "backend": "get",
+        "cid": "bafy123",
+        "options": {"timeout": 10},
+    }
+
+
 def test_missing_backend_factory_raises_unavailable_error(monkeypatch):
     """Missing canonical backend factory should use the adapter unavailable error."""
     root_module = ModuleType("ipfs_kit_py")
@@ -160,6 +184,29 @@ def test_add_bytes_without_backend_helpers_raises_unavailable_error(monkeypatch)
         match="backend exposes neither add_bytes nor add_str",
     ):
         adapter.add_bytes(b"payload")
+
+
+def test_cat_without_backend_helpers_raises_unavailable_error(monkeypatch):
+    """Missing backend read helpers should use the adapter unavailable error."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        pass
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    with pytest.raises(
+        IPFSKitUnavailableError,
+        match="backend exposes neither cat nor get",
+    ):
+        adapter.cat("bafy123")
 
 
 def test_backend_factory_errors_are_not_swallowed(monkeypatch):
