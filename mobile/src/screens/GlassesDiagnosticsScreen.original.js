@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Switch, TouchableOpacity, Alert } f
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { uploadDevAudio, sendAudioCommand } from '../api/client';
+import { uploadDevAudio, sendAudioCommand, fetchTTS } from '../api/client';
 
 const DEV_MODE_KEY = '@glasses_dev_mode';
 
@@ -142,6 +142,62 @@ export default function GlassesDiagnosticsScreen() {
     }
   };
 
+  const readBlobAsDataUri = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (!reader.result) {
+          reject(new Error('FileReader returned null result'));
+          return;
+        }
+        resolve(String(reader.result));
+      };
+      reader.onerror = () => reject(new Error('Failed to read TTS audio data'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const playTtsResponse = async (text) => {
+    if (!text) {
+      return false;
+    }
+
+    if (sound) {
+      await sound.stopAsync();
+      await sound.unloadAsync();
+      setSound(null);
+    }
+
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      playsInSilentModeIOS: true,
+      staysActiveInBackground: false,
+      shouldDuckAndroid: false,
+      playThroughEarpieceAndroid: false,
+    });
+
+    const audioBlob = await fetchTTS(text, { format: 'wav', accept: 'audio/wav' });
+    const audioDataUri = await readBlobAsDataUri(audioBlob);
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      { uri: audioDataUri },
+      { shouldPlay: true }
+    );
+
+    setSound(newSound);
+    setIsPlaying(true);
+
+    newSound.setOnPlaybackStatusUpdate((status) => {
+      if (status.error) {
+        setLastError(`TTS playback failed: ${status.error}`);
+      }
+      if (status.didJustFinish) {
+        setIsPlaying(false);
+      }
+    });
+
+    return true;
+  };
+
   const processAudioThroughPipeline = async () => {
     if (!lastRecordingUri) {
       Alert.alert('No Recording', 'Please record audio first.');
@@ -174,20 +230,25 @@ export default function GlassesDiagnosticsScreen() {
 
       setCommandResponse(response);
 
+      let ttsStatus = 'No spoken text returned for TTS playback.';
+      if (response.spoken_text) {
+        try {
+          const didStartTts = await playTtsResponse(response.spoken_text);
+          ttsStatus = didStartTts
+            ? `TTS playback started through ${devMode ? 'phone speaker' : 'the current audio route'}.`
+            : ttsStatus;
+        } catch (ttsError) {
+          ttsStatus = `TTS playback failed: ${ttsError.message}`;
+          setLastError(ttsStatus);
+          console.error('Failed to play TTS response:', ttsError);
+        }
+      }
+
       Alert.alert(
         'Pipeline Complete',
-        `Command processed successfully!\n\n${response.spoken_text || 'Response received (no text content)'}\n\nNote: TTS playback not yet implemented.`,
+        `Command processed successfully!\n\n${response.spoken_text || 'Response received (no text content)'}\n\n${ttsStatus}`,
         [{ text: 'OK' }]
       );
-
-      // TODO: Step 4 & 5 - Implement TTS playback
-      // Currently the backend returns audio as a blob, but we need to handle
-      // binary audio data differently in React Native. Options:
-      // 1. Have backend return base64-encoded audio
-      // 2. Download audio to file using FileSystem.downloadAsync
-      // 3. Use a streaming approach with expo-av
-      // For now, displaying the text response is sufficient to demonstrate
-      // the pipeline is working.
 
     } catch (error) {
       setLastError(`Pipeline failed: ${error.message}`);
@@ -266,8 +327,8 @@ export default function GlassesDiagnosticsScreen() {
     Alert.alert(
       'Audio Pipeline Flow',
       devMode
-        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n\n✓ Steps 1-4 implemented\n⏳ TTS playback (step 5) coming soon'
-        : '👓 GLASSES MODE\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Receive response\n\n⚠️ Requires native Bluetooth implementation',
+        ? '📱 DEV MODE\n\nRecord from: Phone mic\nPlayback through: Phone speaker\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Fetch /v1/tts audio\n5. Play spoken response\n\n✓ Steps 1-5 implemented'
+        : '👓 GLASSES MODE\n\nRecord from: Glasses mic (Bluetooth)\nPlayback through: Glasses speakers\n\nBackend pipeline:\n1. Record audio\n2. Upload to /v1/dev/audio\n3. Send to /v1/command\n4. Fetch /v1/tts audio\n5. Play spoken response\n\n✓ Command/TTS loop implemented\n⚠️ Glasses routing requires native Bluetooth implementation',
       [{ text: 'OK' }]
     );
   };
@@ -394,7 +455,7 @@ export default function GlassesDiagnosticsScreen() {
           Process recording through backend pipeline:
         </Text>
         <Text style={styles.mono}>
-          Record → /v1/dev/audio → /v1/command
+          Record → /v1/dev/audio → /v1/command → /v1/tts → Playback
         </Text>
         <TouchableOpacity
           style={[
@@ -423,7 +484,7 @@ export default function GlassesDiagnosticsScreen() {
           </View>
         )}
         <Text style={styles.hintText}>
-          Note: TTS playback will be added in a future update
+          TTS playback starts automatically when the backend returns spoken text.
         </Text>
       </View>
 
@@ -434,7 +495,7 @@ export default function GlassesDiagnosticsScreen() {
           Both modes use the same backend pipeline:
         </Text>
         <Text style={styles.mono}>
-          Record → /v1/dev/audio → /v1/command → Response
+          Record → /v1/dev/audio → /v1/command → /v1/tts → Playback
         </Text>
         <TouchableOpacity style={[styles.button, styles.buttonSecondary]} onPress={testAudioPipeline}>
           <Text style={styles.buttonTextSecondary}>ℹ️ View Pipeline Details</Text>
@@ -447,6 +508,7 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.text}>✓ DEV mode (phone mic/speaker) - Working</Text>
         <Text style={styles.text}>✓ Recording and playback - Working</Text>
         <Text style={styles.text}>✓ Backend pipeline integration - Working</Text>
+        <Text style={styles.text}>✓ TTS response playback - Working</Text>
         <Text style={styles.text}>✓ Error handling - Working</Text>
         <Text style={styles.text}>⚠ Glasses mode - Requires native Bluetooth code</Text>
       </View>
