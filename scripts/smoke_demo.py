@@ -23,7 +23,6 @@ Exit codes:
 import argparse
 import sys
 import time
-from typing import Any
 
 try:
     import requests
@@ -63,6 +62,24 @@ class SmokeTest:
             print(f"⚠ {message}")
         elif level == "info" and self.verbose:
             print(f"ℹ {message}")
+
+    def log_response_error_details(self, response: "requests.Response") -> None:
+        """Log diagnostic details for an HTTP error response."""
+        try:
+            error_data = response.json()
+        except ValueError:
+            body = response.text.strip()
+            if not body:
+                self.log("Error details unavailable: response body was empty", "error")
+                return
+
+            max_body_length = 500
+            if len(body) > max_body_length:
+                body = f"{body[:max_body_length]}..."
+            self.log(f"Error body: {body}", "error")
+            return
+
+        self.log(f"Error details: {error_data}", "error")
 
     def check_status_endpoint(self) -> bool:
         """Check /v1/status endpoint.
@@ -135,11 +152,7 @@ class SmokeTest:
                     f"/v1/tts returned {response.status_code}, expected 200", "error"
                 )
                 if response.status_code >= 400:
-                    try:
-                        error_data = response.json()
-                        self.log(f"Error details: {error_data}", "error")
-                    except Exception:
-                        pass
+                    self.log_response_error_details(response)
                 return False
 
             # Validate content type
@@ -209,11 +222,7 @@ class SmokeTest:
                     "error",
                 )
                 if response.status_code >= 400:
-                    try:
-                        error_data = response.json()
-                        self.log(f"Error details: {error_data}", "error")
-                    except Exception:
-                        pass
+                    self.log_response_error_details(response)
                 return False
 
             data = response.json()
