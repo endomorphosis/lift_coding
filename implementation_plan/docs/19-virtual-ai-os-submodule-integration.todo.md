@@ -513,7 +513,7 @@ cadence remains parseable and resumable.
 
 ## VAI-044 Review swallowed exception path in src/handsfree/sessions.py:229
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
