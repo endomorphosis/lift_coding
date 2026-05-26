@@ -1,5 +1,6 @@
 """Tests for optional ipfs_kit_py adapters."""
 
+import json
 import sys
 from types import ModuleType
 
@@ -121,7 +122,6 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
     }
 
 
-<<<<<<< HEAD
 def test_cat_falls_back_to_backend_get(monkeypatch):
     """Backends without cat should still support content reads through get."""
     root_module = ModuleType("ipfs_kit_py")
@@ -146,8 +146,6 @@ def test_cat_falls_back_to_backend_get(monkeypatch):
     }
 
 
-=======
->>>>>>> implementation/vai-040-attempt-1-1779814558
 def test_resolve_falls_back_to_canonical_backend(monkeypatch):
     """Missing direct resolve helper should use canonical backend name resolution."""
     root_module = ModuleType("ipfs_kit_py")
@@ -200,6 +198,64 @@ def test_resolve_falls_back_to_high_level_api(monkeypatch):
         "cid": "k51name",
         "options": {"timeout": 5},
     }
+
+
+def test_package_dataset_falls_back_to_backend_json_manifest(monkeypatch):
+    """Missing package helper should store a manifest through backend JSON support."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def add_json(self, manifest, **kwargs):
+            return {"backend": "add_json", "manifest": manifest, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.package_dataset(
+        [{"cid": "bafy123"}],
+        metadata={"name": "demo"},
+        pin=True,
+    ) == {
+        "backend": "add_json",
+        "manifest": {
+            "schema": adapters.PACKAGE_DATASET_MANIFEST_SCHEMA,
+            "items": [{"cid": "bafy123"}],
+            "metadata": {"name": "demo"},
+        },
+        "options": {"pin": True},
+    }
+
+
+def test_package_dataset_falls_back_to_backend_bytes_manifest(monkeypatch):
+    """Backends without JSON support should receive deterministic manifest bytes."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def add_bytes(self, data, **kwargs):
+            return {"backend": "add_bytes", "data": data, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+    result = adapter.package_dataset([{"cid": "bafy123"}], wrap=True)
+
+    assert result["backend"] == "add_bytes"
+    assert json.loads(result["data"].decode("utf-8")) == {
+        "schema": adapters.PACKAGE_DATASET_MANIFEST_SCHEMA,
+        "items": [{"cid": "bafy123"}],
+    }
+    assert result["options"] == {"wrap": True}
 
 
 def test_missing_backend_factory_raises_unavailable_error(monkeypatch):

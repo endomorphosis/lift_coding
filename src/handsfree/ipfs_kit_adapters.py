@@ -342,10 +342,13 @@ class _IPFSKitModuleAdapter:
 
 
 def _import_kit_module() -> Any | None:
+    module_name = "ipfs_kit_py"
     try:
-        return importlib.import_module("ipfs_kit_py")
-    except Exception as exc:
-        logger.debug("Optional kit import failed for ipfs_kit_py: %s", exc)
+        return importlib.import_module(module_name)
+    except ModuleNotFoundError as exc:
+        if exc.name != module_name:
+            raise
+        logger.debug("Optional kit import failed for %s: %s", module_name, exc)
         return None
 
 
