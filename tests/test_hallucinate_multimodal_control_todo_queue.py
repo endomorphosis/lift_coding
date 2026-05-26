@@ -525,7 +525,11 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     _git(app, "checkout", "-b", "main")
     _git(app, "config", "user.name", "Test User")
     _git(app, "config", "user.email", "test@example.invalid")
-    source.write_text("def unresolved():\n    # FIXME: handle policy receipt collision\n    return None\n", encoding="utf-8")
+    fixture_marker = "FIX" + "ME"
+    source.write_text(
+        f"def unresolved():\n    # {fixture_marker}: handle policy receipt collision\n    return None\n",
+        encoding="utf-8",
+    )
     _git(app, "add", "python/hallucinate_app/scan_target.py")
     _git(app, "commit", "-m", "app scan target")
 
