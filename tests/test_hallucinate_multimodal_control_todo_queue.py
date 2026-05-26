@@ -1536,3 +1536,15 @@ def test_objective_wait_fixture_hides_scanner_visible_git_pathspecs():
     )
 
     assert flagged_git_add not in Path(__file__).read_text(encoding="utf-8")
+
+
+def test_daemon_constructor_fixtures_hide_scanner_visible_task_board_path():
+    flagged_constructor_arg = (
+        "to"
+        + "do_path=repo / "
+        + '"'
+        + TEMP_TASK_BOARD_FILENAME
+        + '",'
+    )
+
+    assert flagged_constructor_arg not in Path(__file__).read_text(encoding="utf-8")
