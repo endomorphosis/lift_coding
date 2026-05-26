@@ -36,6 +36,30 @@ function defaultCapabilities(capabilities = {}) {
   };
 }
 
+function withDiagnosticsContract(response, localDiagnostics, source) {
+  if (!response || typeof response !== 'object' || Array.isArray(response)) {
+    return response;
+  }
+  return {
+    ...response,
+    contract: response.contract || localDiagnostics.contract,
+    source: response.source || source,
+    mode: response.mode || localDiagnostics.mode,
+    edge_session_id: response.edge_session_id || localDiagnostics.edge_session_id,
+    capability_counts: response.capability_counts || localDiagnostics.capability_counts,
+    backend_capability_counts:
+      response.backend_capability_counts ||
+      response.capability_counts ||
+      localDiagnostics.backend_capability_counts,
+    descriptor_cids: response.descriptor_cids || localDiagnostics.descriptor_cids || [],
+    policy_cids: response.policy_cids || localDiagnostics.policy_cids || [],
+    receipt_cids: response.receipt_cids || localDiagnostics.receipt_cids || [],
+    binding_state: response.binding_state || localDiagnostics.binding_state,
+    fallback_reasons: response.fallback_reasons || localDiagnostics.fallback_reasons || [],
+    fallback_details: response.fallback_details || localDiagnostics.fallback_details || [],
+  };
+}
+
 export function createMetaGlassesMobileOrbRuntime(options = {}) {
   const now = options.now || (() => new Date());
   const edgeSessionStore = Object.prototype.hasOwnProperty.call(options, 'edgeSessionStore')
@@ -113,14 +137,16 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
     if (!backend.getDiagnostics) {
       return null;
     }
+    const localDiagnostics = getDiagnostics();
     const edgeSessionId =
       params.edge_session_id ||
       params.edgeSessionId ||
       bridge.getEdgeSession()?.edge_session_id;
-    return backend.getDiagnostics({
+    const response = await backend.getDiagnostics({
       ...params,
       ...(edgeSessionId ? { edge_session_id: edgeSessionId } : {}),
     });
+    return withDiagnosticsContract(response, localDiagnostics, 'backend');
   }
 
   return {

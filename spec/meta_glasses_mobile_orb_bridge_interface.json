@@ -13,6 +13,34 @@
       "mediation_receipt"
     ]
   },
+  "diagnostics_contract": {
+    "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
+    "description": "Shared mobile/backend diagnostics shape for simulator and physical-device ORB edge sessions.",
+    "fields": [
+      "contract",
+      "source",
+      "mode",
+      "edge_session_id",
+      "capability_counts",
+      "backend_capability_counts",
+      "descriptor_cids",
+      "policy_cids",
+      "binding_state",
+      "receipt_cids",
+      "fallback_reasons",
+      "fallback_details"
+    ],
+    "source_values": ["mobile", "backend"],
+    "mode_values": ["simulator", "physical_device", "mixed", "unknown"],
+    "notes": {
+      "capability_counts": "Counts DAT capability availability across the selected backend edge sessions or the active mobile edge session.",
+      "descriptor_cids": "Includes local bridge interface CIDs, service interface CIDs, and normalized descriptor CIDs.",
+      "policy_cids": "Includes legacy policy_cid aliases plus canonical compiled policy, policy bundle, and policy decision CIDs transported by mediation receipts.",
+      "binding_state": "Summarizes active/revoked binding handles and runtime transport resolution state.",
+      "receipt_cids": "Includes registration, event, bind, invoke, subscription, dispatch, revoke, and display-widget receipt CIDs when observed.",
+      "fallback_reasons": "Captures render/audio/mobile-card fallback messages or reasons observed during invocation and dispatch."
+    }
+  },
   "methods": [
     {
       "name": "register_edge_capabilities",
