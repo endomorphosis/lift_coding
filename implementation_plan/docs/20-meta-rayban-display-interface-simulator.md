@@ -410,8 +410,8 @@ Acceptance:
 3. Add state/fallback simulation.
 4. Add trace export and tests.
 5. Add Web App export and readiness linter integration.
-6. Host the Web App over HTTPS.
-7. Load it through the Meta AI app on glasses.
+6. Host the Web App at a publicly available HTTPS URL.
+7. Load it through the Meta AI app `App Connections > Web apps` flow, using a QR code for the hosted URL when possible.
 8. Move the validated manifest and trace into the iPhone DAT bridge path.
 9. Run the existing physical validation checklist.
 
@@ -444,6 +444,7 @@ This gives us a concrete, testable interface simulator without waiting for iPhon
 - Added backend routes at `/simulator/meta-rayban-display` and `/simulator/meta-rayban-display/{asset_path}` so simulator fixtures and assets load over HTTP.
 - Added `mobile/src/native/__fixtures__/metaRaybanDisplaySimulatorFixtures.js` and replay coverage in `wearablesBridge` tests so the simulator fixture exercises the mobile DAT fallback path.
 - Added `dev/meta-rayban-display-simulator/webapp/` as a deployable-style fixed 600x600 Web App preview with D-pad/Enter handling, event metadata persisted to `sessionStorage`, `manifest.webmanifest`, and `readiness.json`.
+- Packaged the Web App preview with PNG app icons, readiness hosting metadata, and operator runbook steps for publicly available HTTPS hosting, QR onboarding, and Meta AI app Web apps registration before native iPhone DAT migration.
 - The Web App preview now registers a simulator ORB edge, publishes `display_action` activation events, binds a task-service MCP-IDL descriptor, subscribes to task-progress updates, invokes the bound service, and dispatches the result back through display/audio/mobile render targets when served from the backend, while preserving local-only event storage and clearing stale cached bindings as fallback.
 - Added `tests/test_meta_rayban_display_simulator.py` to verify readiness, viewport bounds, focus/action consistency, simulator JS validation, and bridge-result metadata.
 - Documented the simulator, mobile, and Meta-glasses paths as remote interaction
