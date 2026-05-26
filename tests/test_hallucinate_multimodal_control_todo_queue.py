@@ -919,7 +919,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
 """,
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "objective-heap.md", "src/capability_registry.py")
+    _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "objective-heap.md", "src/capability_registry.py")
     _git(repo, "commit", "-m", "seed objective heap")
 
     findings = daemon_module.record_objective_goal_findings(
