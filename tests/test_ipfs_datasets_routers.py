@@ -5,7 +5,9 @@ from types import ModuleType
 
 import pytest
 
+import handsfree.ipfs_datasets_routers as routers
 from handsfree.ipfs_datasets_routers import (
+    IPFSDatasetsRouterUnavailableError,
     get_embeddings_router,
     get_ipfs_router,
     get_llm_router,
@@ -13,36 +15,45 @@ from handsfree.ipfs_datasets_routers import (
 )
 
 
-def test_fallback_embeddings_router_when_dependency_missing():
+def test_fallback_embeddings_router_when_dependency_missing(monkeypatch):
     """Embeddings router should safely fall back when optional dependency is missing."""
-    sys.modules.pop("ipfs_datasets_py.embeddings_router", None)
+    monkeypatch.setattr(routers, "_import_router_module", lambda module_name: None)
     reset_ipfs_datasets_router_caches()
 
     router = get_embeddings_router()
 
-    with pytest.raises(NotImplementedError, match="install ipfs_datasets_py"):
+    with pytest.raises(
+        IPFSDatasetsRouterUnavailableError,
+        match="install ipfs_datasets_py",
+    ):
         router.embed_text("hello")
 
 
-def test_fallback_ipfs_router_when_dependency_missing():
+def test_fallback_ipfs_router_when_dependency_missing(monkeypatch):
     """IPFS router should safely fall back when optional dependency is missing."""
-    sys.modules.pop("ipfs_datasets_py.ipfs_backend_router", None)
+    monkeypatch.setattr(routers, "_import_router_module", lambda module_name: None)
     reset_ipfs_datasets_router_caches()
 
     router = get_ipfs_router()
 
-    with pytest.raises(NotImplementedError, match="install ipfs_datasets_py"):
+    with pytest.raises(
+        IPFSDatasetsRouterUnavailableError,
+        match="install ipfs_datasets_py",
+    ):
         router.add_bytes(b"hello")
 
 
-def test_fallback_llm_router_when_dependency_missing():
+def test_fallback_llm_router_when_dependency_missing(monkeypatch):
     """LLM router should safely fall back when optional dependency is missing."""
-    sys.modules.pop("ipfs_datasets_py.llm_router", None)
+    monkeypatch.setattr(routers, "_import_router_module", lambda module_name: None)
     reset_ipfs_datasets_router_caches()
 
     router = get_llm_router()
 
-    with pytest.raises(NotImplementedError, match="install ipfs_datasets_py"):
+    with pytest.raises(
+        IPFSDatasetsRouterUnavailableError,
+        match="install ipfs_datasets_py",
+    ):
         router.generate_text("hello")
 
 

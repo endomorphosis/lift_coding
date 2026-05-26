@@ -18,6 +18,10 @@ from typing import Any, NoReturn, Protocol
 logger = logging.getLogger(__name__)
 
 
+class IPFSDatasetsRouterUnavailableError(RuntimeError):
+    """Raised when ipfs_datasets_py is missing or a router cannot be used."""
+
+
 class EmbeddingsRouter(Protocol):
     """Embeddings router interface."""
 
@@ -55,7 +59,7 @@ class _UnavailableRouter:
         self._router_name = router_name
 
     def _raise(self, method: str) -> NoReturn:
-        raise NotImplementedError(
+        raise IPFSDatasetsRouterUnavailableError(
             f"{self._router_name}.{method} is unavailable: install ipfs_datasets_py"
         )
 
