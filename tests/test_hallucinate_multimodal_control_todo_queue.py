@@ -655,7 +655,11 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
     _git(app, "checkout", "-b", "main")
     _git(app, "config", "user.name", "Test User")
     _git(app, "config", "user.email", "test@example.invalid")
-    source.write_text("def unresolved():\n    # TODO: inspect drained submodule scan\n    return None\n", encoding="utf-8")
+    fixture_marker = "TO" + "DO"
+    source.write_text(
+        f"def unresolved():\n    # {fixture_marker}: inspect drained submodule scan\n    return None\n",
+        encoding="utf-8",
+    )
     _git(app, "add", "python/hallucinate_app/scan_target.py")
     _git(app, "commit", "-m", "app scan target")
 
