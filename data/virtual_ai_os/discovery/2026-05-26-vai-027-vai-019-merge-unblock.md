@@ -8,7 +8,7 @@ Source task: VAI-019
 
 - Retry-budget evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-027-vai-019-merge-retry-budget.md`
 - Failed reason: `main_checkout_dirty_conflict`
-- Dirty paths: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`, `scripts/meta_glasses_display_todo_supervisor.py`, `scripts/virtual_ai_os_todo_supervisor.py`
+- Dirty generated-context paths: display-widget backlog board and supervisor scripts; exact paths are recorded in the retry-budget evidence above.
 - VAI-019 implementation branch: `implementation/vai-019-attempt-1-1779753531`
 - VAI-019 implementation commit: `3d8fda7e9f343631a34434d35412db1e421361d7`
 
