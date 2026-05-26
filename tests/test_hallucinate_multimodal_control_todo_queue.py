@@ -357,7 +357,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
     task_board_path.write_text(
-        """# Temporary Board
+        f"""# Temporary Board
 
 ## HAO-004 Discover logic APIs
 
@@ -372,7 +372,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
 
 ## HAO-005 Define the formal multimodal control policy IR
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P0
 - Track: logic
