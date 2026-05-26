@@ -45,9 +45,15 @@ class IPFSKitAdapter(Protocol):
         ...
 
 
+class IPFSKitUnavailableError(RuntimeError):
+    """Raised when ipfs_kit_py is missing or has no usable adapter surface."""
+
+
 class _UnavailableIPFSKitAdapter:
     def _raise(self, method: str) -> NoReturn:
-        raise NotImplementedError(f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py")
+        raise IPFSKitUnavailableError(
+            f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py"
+        )
 
     def add_bytes(self, data: bytes, **kwargs: Any) -> NoReturn:
         self._raise("add_bytes")

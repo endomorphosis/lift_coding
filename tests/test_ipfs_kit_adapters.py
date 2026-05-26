@@ -5,20 +5,23 @@ from types import ModuleType
 
 import pytest
 
+import handsfree.ipfs_kit_adapters as adapters
 from handsfree.ipfs_kit_adapters import (
+    IPFSKitUnavailableError,
     get_ipfs_kit_adapter,
     reset_ipfs_kit_adapter_cache,
 )
 
 
-def test_fallback_kit_adapter_when_dependency_missing():
+def test_fallback_kit_adapter_when_dependency_missing(monkeypatch):
     """Kit adapter should safely fall back when optional dependency is missing."""
-    sys.modules.pop("ipfs_kit_py", None)
+    monkeypatch.delitem(sys.modules, "ipfs_kit_py", raising=False)
+    monkeypatch.setattr(adapters, "_import_kit_module", lambda: None)
     reset_ipfs_kit_adapter_cache()
 
     adapter = get_ipfs_kit_adapter()
 
-    with pytest.raises(NotImplementedError, match="install ipfs_kit_py"):
+    with pytest.raises(IPFSKitUnavailableError, match="install ipfs_kit_py"):
         adapter.pin("bafy123")
 
 
