@@ -1075,7 +1075,7 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
 
-    todo_path = repo / "todo.md"
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
     objective_path = repo / "objective-heap.md"
     docs_path = repo / "docs" / "observability_metrics.md"
     docs_path.parent.mkdir()
