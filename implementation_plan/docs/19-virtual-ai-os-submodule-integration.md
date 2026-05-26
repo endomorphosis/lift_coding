@@ -114,6 +114,7 @@ The target state is not a loose collection of tools. It is one system that can:
 - Swissknife already provides MCP-IDL, ORB routing, and widget-authoring surfaces.
 - Swissknife now has a hardware-free Meta glasses descriptor-to-mobile-render harness that exercises ORB discovery, binding, invocation, bridge receipts, and operator-safe fallback behavior in `test/mcp-plus-plus/meta-glasses-display-harness.test.ts`.
 - Hallucinate App now positions itself as the operator console and daemon manager shell that hosts SwissKnife virtual desktop workflows for the virtual AI OS.
+- VAI-024 adds desktop operator E2E coverage across Hallucinate App and SwissKnife: `hallucinate_app/test/e2e/mcp-daemon-manager.spec.ts` simulates inspecting, routing, rendering, and recovering a daemon task from the desktop console, while `swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts` and `swissknife/test/mcp-plus-plus/meta-glasses-mobile-orb-bridge.test.ts` prove the same task can fall back from unpaired Meta glasses hardware to Hallucinate App and SwissKnife operator surfaces.
 - The repo already contains one machine-readable daemon backlog pattern for the Meta glasses widget stream.
 - Mobile plus backend already contain Meta DAT display and action-routing primitives.
 - A dedicated simulation plan now exists in `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` for browser-first Meta Ray-Ban interface validation before iPhone handoff.
@@ -274,6 +275,7 @@ This runtime is the operating-system scheduler equivalent for the stack.
 - Swissknife becomes the composable interface and ORB surface.
 - Verified in the current review cycle with the hardware-free descriptor-to-mobile-render harness and the Meta glasses ORB adapter/service surfaces in the `swissknife` worktree.
 - Hallucinate App becomes the operator console, daemon/session monitor, and SwissKnife virtual desktop shell.
+- Desktop operator coverage now includes a hardware-free daemon task path: inspect through the Hallucinate App daemon manager, route through SwissKnife ORB/virtual desktop, render to the desktop fallback panel when Meta glasses are unpaired, and recover the task with receipt-backed state updates.
 - HandsFree mobile stays the companion control surface.
 - Meta glasses become the remote audio/display terminal.
 
