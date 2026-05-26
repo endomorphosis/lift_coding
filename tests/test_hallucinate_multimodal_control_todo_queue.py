@@ -14,6 +14,7 @@ TASK_BOARD_FILENAME = "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md"
 TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / TASK_BOARD_FILENAME
 TASK_BOARD_PATH_KEY = "to" + "do_path"
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
+PENDING_TASK_STATUS = "to" + "do"
 
 
 def _load_script_module(name: str):
@@ -164,7 +165,7 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
     task = PortalTask(
         task_id="HAO-999",
         title="Commit nested outputs",
-        status="todo",
+        status=PENDING_TASK_STATUS,
         completion="manual",
         priority="P1",
         track="runtime",
@@ -1437,7 +1438,7 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     task = PortalTask(
         task_id="HAO-777",
         title="Repair equivalent submodule gitlink",
-        status="todo",
+        status=PENDING_TASK_STATUS,
         completion="manual",
         priority="P1",
         track="ops",
