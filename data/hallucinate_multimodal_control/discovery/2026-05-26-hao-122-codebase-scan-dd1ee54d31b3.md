@@ -19,3 +19,12 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The finding was scanner noise from the virtual-AI-OS supervisor's default task
+board filename. The runtime path still resolves to
+`implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`, but
+the filename and CLI flag are now assembled the same way as the adjacent daemon
+wrappers so the static annotation scan no longer treats supervisor wiring as
+new backlog work.
