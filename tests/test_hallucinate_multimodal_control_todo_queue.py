@@ -154,10 +154,7 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
     (contracts / "interaction_envelope.schema.json").write_text('{"type":"object"}\n', encoding="utf-8")
 
     daemon = PortalImplementationDaemon(
-        todo_path=repo / "todo.md",
-        state_path=repo / "state.json",
-        strategy_path=repo / "strategy.json",
-        events_path=repo / "events.jsonl",
+        **_implementation_daemon_paths(repo),
         repo_root=repo,
         task_header_prefix="## HAO-",
     )
