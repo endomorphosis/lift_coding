@@ -785,12 +785,13 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     readme = repo / "README.md"
     source.parent.mkdir(parents=True)
     discovery.parent.mkdir(parents=True)
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
 
     _git(repo, "init")
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    (repo / "todo.md").write_text(
+    todo_path.write_text(
         """# Temporary Board
 
 ## HAO-001 Completed seed
@@ -819,11 +820,18 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         "# Example\n\n```bash\nrg -n \"todo\" docs/example.todo.md\n```\n",
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "src/scan_target.py", "data/hallucinate_multimodal_control/discovery/report.md", "README.md")
+    _git(
+        repo,
+        "add",
+        TEMP_TASK_BOARD_FILENAME,
+        "src/scan_target.py",
+        "data/hallucinate_multimodal_control/discovery/report.md",
+        "README.md",
+    )
     _git(repo, "commit", "-m", "seed")
 
     findings = daemon_module.record_codebase_scan_findings(
-        todo_path=repo / "todo.md",
+        todo_path=todo_path,
         strategy_path=tmp_path / "strategy.json",
         discovery_dir=repo / "discovery",
         repo_root=repo,
@@ -833,7 +841,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     )
 
     assert [finding["source"] for finding in findings] == ["src/scan_target.py:2"]
-    updated = (repo / "todo.md").read_text(encoding="utf-8")
+    updated = todo_path.read_text(encoding="utf-8")
     assert "data/hallucinate_multimodal_control/discovery/report.md" not in updated
     assert "README.md" not in updated
 
