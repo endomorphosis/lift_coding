@@ -182,16 +182,16 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    todo_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
-    todo_path.write_text(
-        """# Temporary Board
+    task_board_path.write_text(
+        f"""# Temporary Board
 
 ## MGW-001 Android task
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P1
 - Track: mobile
@@ -235,7 +235,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
 
     findings = daemon_module.record_retry_budget_findings(
-        todo_path=todo_path,
+        todo_path=task_board_path,
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
@@ -252,7 +252,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
             "discovery_path": str(expected_discovery),
         }
     ]
-    updated = todo_path.read_text(encoding="utf-8")
+    updated = task_board_path.read_text(encoding="utf-8")
     assert "## MGW-015 Resolve validation retry-budget failure for MGW-001" in updated
     assert "Depends on: MGW-014" in updated
     assert "env JAVA_HOME=" in updated
@@ -260,7 +260,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
-    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## MGW-")}
+    tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## MGW-")}
     assert tasks["MGW-015"].depends_on == ["MGW-014"]
     assert "retry-budget" in tasks["MGW-015"].title
 
@@ -270,7 +270,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     assert failed_command in discovery
     assert "Observed consecutive validation failures: 3" in discovery
     assert not daemon_module.record_retry_budget_findings(
-        todo_path=todo_path,
+        todo_path=task_board_path,
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
