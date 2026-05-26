@@ -249,11 +249,11 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
-    todo_path = tmp_path / "todo.md"
+    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
-    todo_path.write_text(
+    task_board_path.write_text(
         """# Temporary Board
 
 ## HAO-003 Normalize interaction inputs
@@ -302,7 +302,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
 
     findings = daemon_module.record_retry_budget_findings(
-        todo_path=todo_path,
+        **{TASK_BOARD_PATH_KEY: task_board_path},
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
@@ -319,14 +319,14 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
             "discovery_path": str(expected_discovery),
         }
     ]
-    updated = todo_path.read_text(encoding="utf-8")
+    updated = task_board_path.read_text(encoding="utf-8")
     assert "## HAO-014 Resolve validation retry-budget failure for HAO-003" in updated
     assert "Depends on: HAO-013" in updated
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
-    tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
+    tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## HAO-")}
     assert tasks["HAO-014"].depends_on == ["HAO-013"]
     assert "retry-budget" in tasks["HAO-014"].title
 
@@ -336,7 +336,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     assert failed_command in discovery
     assert "Observed consecutive validation failures: 3" in discovery
     assert not daemon_module.record_retry_budget_findings(
-        todo_path=todo_path,
+        **{TASK_BOARD_PATH_KEY: task_board_path},
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
