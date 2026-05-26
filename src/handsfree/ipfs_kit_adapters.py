@@ -78,6 +78,24 @@ class _IPFSKitModuleAdapter:
     def __init__(self, root_module: Any) -> None:
         self._root_module = root_module
 
+    def _resolve_backend_callable(
+        self,
+        backend: Any,
+        *paths: tuple[str, ...],
+    ) -> Callable[..., Any] | None:
+        for root in (backend, getattr(backend, "client", None)):
+            if root is None:
+                continue
+            for path in paths:
+                candidate = root
+                for attr_name in path:
+                    candidate = getattr(candidate, attr_name, None)
+                    if candidate is None:
+                        break
+                if callable(candidate):
+                    return candidate
+        return None
+
     def _resolve_callable(self, *targets: tuple[str, str]) -> Callable[..., Any] | None:
         for module_name, attr_name in targets:
             try:
@@ -175,8 +193,26 @@ class _IPFSKitModuleAdapter:
                 return resolve_fn(cid, **kwargs)
         except NotImplementedError as exc:
             logger.debug("ipfs_kit_py.resolve direct callable unavailable: %s", exc)
-        raise NotImplementedError(
-            "ipfs_kit_py resolve is not exposed through a stable direct-import seam yet"
+        backend = self._get_backend()
+        backend_resolve = self._resolve_backend_callable(
+            backend,
+            ("resolve",),
+            ("ipfs_resolve",),
+            ("dag_resolve",),
+            ("ipfs_dag_resolve",),
+            ("dag", "resolve"),
+            ("ipfs_object_stat",),
+            ("object_stat",),
+            ("object", "stat"),
+            ("name_resolve",),
+            ("ipfs_name_resolve",),
+            ("name", "resolve"),
+        )
+        if backend_resolve is not None:
+            return backend_resolve(cid, **kwargs)
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py resolve is unavailable: backend exposes neither "
+            "resolve, DAG resolve, object stat, nor name resolve"
         )
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:

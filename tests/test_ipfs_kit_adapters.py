@@ -121,6 +121,30 @@ def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
     }
 
 
+def test_resolve_falls_back_to_canonical_ipfs_backend(monkeypatch):
+    """Missing direct resolve helper should use canonical backend CID metadata."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def ipfs_object_stat(self, cid, **kwargs):
+            return {"backend": "ipfs_object_stat", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.resolve("bafy123", timeout=10) == {
+        "backend": "ipfs_object_stat",
+        "cid": "bafy123",
+        "options": {"timeout": 10},
+    }
+
+
 def test_missing_backend_factory_raises_unavailable_error(monkeypatch):
     """Missing canonical backend factory should use the adapter unavailable error."""
     root_module = ModuleType("ipfs_kit_py")
