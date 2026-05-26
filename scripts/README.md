@@ -100,7 +100,7 @@ Repeat for PR-027 and PR-028.
 
 1. **Check prerequisites**: Verify gh CLI is installed and authenticated
 2. **Create branches**: One branch per PR from main
-3. **Add initial plan**: Create a work/pr-XXX-plan.md file referencing the tracking doc
+3. **Add initial plan**: Create `work/pr-026-plan.md`, `work/pr-027-plan.md`, and `work/pr-028-plan.md`, each referencing its tracking doc
 4. **Commit and push**: Push each branch to origin
 5. **Create draft PRs**: Create draft PRs with:
    - Title from PR number
