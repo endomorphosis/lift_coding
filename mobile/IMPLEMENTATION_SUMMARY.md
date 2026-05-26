@@ -31,7 +31,7 @@ Created a local Expo module that bridges existing Swift/Kotlin audio classes to 
 - `ExpoGlassesAudioModule.kt` - Main module definition
 - Integrates with existing `AudioRouteMonitor`, `GlassesRecorder`, `GlassesPlayer`
 - Uses AudioManager for Bluetooth SCO control
-- Basic playback implementation (full WAV parsing marked as TODO)
+- WAV playback through Bluetooth SCO with PCM RIFF/fmt/data chunk parsing for mono audio
 
 **TypeScript API:**
 ```typescript
