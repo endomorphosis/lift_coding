@@ -22,7 +22,7 @@ deterministic sentence-style token embeddings. `Embedding query` describes the
 semantic search target, while `AST query` names code symbols, modules, or schema
 terms that should satisfy the goal.
 
-`Bundle` assigns generated todo items to a conflict-reduction lane. The daemon
+`Bundle` assigns generated backlog records to a conflict-reduction lane. The daemon
 mirrors each generated task into
 `data/hallucinate_multimodal_control/objective_bundles/<safe-bundle>.todo.md`
 and updates `data/hallucinate_multimodal_control/objective_bundles/index.json`.
