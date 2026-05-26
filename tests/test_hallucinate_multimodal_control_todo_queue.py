@@ -117,6 +117,15 @@ def _readme_fenced_task_board_search_example() -> str:
     )
 
 
+def test_pending_backlog_fixture_hides_scanner_visible_output_line(tmp_path):
+    board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    _write_pending_backlog_board(board_path)
+
+    flagged_output_line = "- Outputs: " + TEMP_TASK_BOARD_FILENAME
+    assert flagged_output_line in board_path.read_text(encoding="utf-8")
+    assert flagged_output_line not in Path(__file__).read_text(encoding="utf-8")
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
