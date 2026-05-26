@@ -101,7 +101,7 @@ class _IPFSKitModuleAdapter:
             factory = getattr(module, "get_instance", None)
             if callable(factory):
                 return factory()
-        raise NotImplementedError(
+        raise IPFSKitUnavailableError(
             "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
         )
 
