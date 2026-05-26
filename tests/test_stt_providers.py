@@ -121,12 +121,13 @@ def test_stub_provider_transcribe():
 
 
 def test_stub_provider_disabled():
-    """Test that disabled stub provider raises NotImplementedError."""
+    """Test that disabled stub provider raises STTDisabledError."""
+    from handsfree.stt import STTDisabledError
     from handsfree.stt.stub_provider import StubSTTProvider
 
     provider = StubSTTProvider(enabled=False)
 
-    with pytest.raises(NotImplementedError, match="Audio STT is disabled"):
+    with pytest.raises(STTDisabledError, match="Audio STT is disabled"):
         provider.transcribe(b"test", "wav")
 
 

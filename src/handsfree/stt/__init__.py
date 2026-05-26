@@ -10,6 +10,10 @@ from typing import Protocol
 logger = logging.getLogger(__name__)
 
 
+class STTDisabledError(RuntimeError):
+    """Raised when STT processing is explicitly disabled by runtime configuration."""
+
+
 class STTProvider(Protocol):
     """Protocol for STT providers."""
 
@@ -24,7 +28,7 @@ class STTProvider(Protocol):
             Transcribed text
 
         Raises:
-            NotImplementedError: If STT is not enabled/available
+            STTDisabledError: If STT is not enabled/available
             ValueError: If audio format is unsupported
         """
         ...
