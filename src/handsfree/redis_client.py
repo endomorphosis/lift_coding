@@ -84,5 +84,12 @@ def get_redis_client(
         logger.warning("Could not connect to Redis at %s:%s: %s", host, port, e)
         return None
     except redis.RedisError as e:
-        logger.warning("Redis client initialization failed at %s:%s: %s", host, port, e)
+        logger.warning(
+            "Redis error connecting to Redis at %s:%s (db=%s); Redis integration disabled: %s",
+            host,
+            port,
+            db,
+            e,
+            exc_info=True,
+        )
         return None
