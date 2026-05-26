@@ -59,6 +59,13 @@ def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:
     }
 
 
+def _pending_task_metadata() -> dict[str, str]:
+    return {
+        "status": PENDING_TASK_STATUS,
+        "completion": "manual",
+    }
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
@@ -166,8 +173,7 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
     task = PortalTask(
         task_id="HAO-999",
         title="Commit nested outputs",
-        status=PENDING_TASK_STATUS,
-        completion="manual",
+        **_pending_task_metadata(),
         priority="P1",
         track="runtime",
     )
@@ -1436,8 +1442,7 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     task = PortalTask(
         task_id="HAO-777",
         title="Repair equivalent submodule gitlink",
-        status=PENDING_TASK_STATUS,
-        completion="manual",
+        **_pending_task_metadata(),
         priority="P1",
         track="ops",
     )
