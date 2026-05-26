@@ -327,6 +327,7 @@ Build a layered test matrix:
 - `swissknife` also contains local modifications; leave its working tree untouched during the submodule alignment work.
 - Meta display APIs remain developer preview surfaces and cannot be required for default CI-safe builds.
 - Nested submodules inside upstream repos remain inconsistent; use status-only recursive checks for hygiene and avoid recursive `update --init` through `external/ipfs_kit` until its nested `ipfs_accelerate_py` pin is verified upstream.
+- Nested submodules inside upstream repos remain inconsistent; use status-only recursive checks for hygiene and avoid recursive `update --init` through `external/ipfs_kit` until its nested `ipfs_accelerate_py` pin is verified upstream.
 
 ## Delivery Strategy
 

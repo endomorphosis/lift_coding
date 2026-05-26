@@ -136,7 +136,9 @@ def _run_supervisor(argv: list[str]) -> None:
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
         ensure_implementation_supervisor_running,
+        ensure_implementation_supervisor_running,
         parse_args,
+        repair_implementation_supervisor_runtime,
         repair_implementation_supervisor_runtime,
         split_csv_values,
     )
