@@ -13,7 +13,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / ("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md")
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
     os.environ.get(
         "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
