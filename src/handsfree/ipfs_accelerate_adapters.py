@@ -29,9 +29,13 @@ class IPFSAccelerateAdapter(Protocol):
         ...
 
 
+class IPFSAccelerateUnavailableError(RuntimeError):
+    """Raised when the optional ipfs_accelerate_py dependency is not installed."""
+
+
 class _UnavailableIPFSAccelerateAdapter:
     def _raise(self, method: str) -> NoReturn:
-        raise NotImplementedError(
+        raise IPFSAccelerateUnavailableError(
             f"ipfs_accelerate_py.{method} is unavailable: install ipfs_accelerate_py"
         )
 
