@@ -5,25 +5,41 @@ from types import ModuleType
 
 import pytest
 
+import handsfree.ipfs_accelerate_adapters as adapters
 from handsfree.ipfs_accelerate_adapters import (
+    IPFSAccelerateUnavailableError,
     get_ipfs_accelerate_adapter,
     reset_ipfs_accelerate_adapter_cache,
 )
 
 
-def test_fallback_accelerate_adapter_when_dependency_missing():
+def _clear_accelerate_modules(monkeypatch):
+    for module_name in (
+        "ipfs_accelerate_py.embeddings_router",
+        "ipfs_accelerate_py.llm_router",
+        "ipfs_accelerate_py",
+    ):
+        monkeypatch.delitem(sys.modules, module_name, raising=False)
+
+
+def test_fallback_accelerate_adapter_when_dependency_missing(monkeypatch):
     """Accelerate adapter should safely fall back when optional dependency is missing."""
-    sys.modules.pop("ipfs_accelerate_py", None)
+    _clear_accelerate_modules(monkeypatch)
+    monkeypatch.setattr(adapters, "_import_accelerate_module", lambda: None)
     reset_ipfs_accelerate_adapter_cache()
 
     adapter = get_ipfs_accelerate_adapter()
 
-    with pytest.raises(NotImplementedError, match="install ipfs_accelerate_py"):
+    with pytest.raises(
+        IPFSAccelerateUnavailableError,
+        match="install ipfs_accelerate_py",
+    ):
         adapter.generate("hello")
 
 
 def test_delegates_to_canonical_accelerate_modules(monkeypatch):
     """Accelerate adapter should prefer canonical upstream router modules."""
+    _clear_accelerate_modules(monkeypatch)
     root_module = ModuleType("ipfs_accelerate_py")
     llm_router = ModuleType("ipfs_accelerate_py.llm_router")
     embeddings_router = ModuleType("ipfs_accelerate_py.embeddings_router")
@@ -50,6 +66,7 @@ def test_delegates_to_canonical_accelerate_modules(monkeypatch):
 
 def test_delegates_to_legacy_top_level_helpers(monkeypatch):
     """Accelerate adapter should keep compatibility with top-level helper mocks."""
+    _clear_accelerate_modules(monkeypatch)
     module = ModuleType("ipfs_accelerate_py")
 
     def generate(prompt, **kwargs):
