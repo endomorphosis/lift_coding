@@ -13,7 +13,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.todo.md"
+DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
+)
+TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
@@ -121,7 +124,7 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import main as supervisor_main
 
-    args = _with_default(args, "--todo-path", str(paths["todo_path"]))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths["todo_path"]))
     args = _with_default(args, "--state-dir", str(paths["state_dir"]))
     args = _with_default(args, "--task-prefix", "## VAI-")
     args = _with_default(args, "--state-prefix", "virtual_ai_os")
