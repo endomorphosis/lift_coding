@@ -1205,10 +1205,7 @@ def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):
     _git(
         repo,
         "add",
-        "todo.md",
-        "objective-heap.md",
-        "docs/operator_shell.md",
-        "test/mcp-plus-plus/meta-glasses-display-harness.test.ts",
+        *_repo_relative_paths(repo, todo_path, objective_path, shell_docs, harness_test),
     )
     _git(repo, "commit", "-m", "seed covered operator shell objective")
 
