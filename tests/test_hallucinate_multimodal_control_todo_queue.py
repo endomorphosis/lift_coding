@@ -64,6 +64,10 @@ def _temporary_board_path(repo: Path) -> Path:
     return repo / TEMP_TASK_BOARD_FILENAME
 
 
+def _repo_relative_paths(repo: Path, *paths: Path) -> list[str]:
+    return [path.relative_to(repo).as_posix() for path in paths]
+
+
 def _pending_task_metadata() -> dict[str, str]:
     return {
         "status": PENDING_TASK_STATUS,
@@ -1038,10 +1042,7 @@ def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
     _git(
         repo,
         "add",
-        todo_path.relative_to(repo).as_posix(),
-        objective_path.relative_to(repo).as_posix(),
-        source.relative_to(repo).as_posix(),
-        notes.relative_to(repo).as_posix(),
+        *_repo_relative_paths(repo, todo_path, objective_path, source, notes),
     )
     _git(repo, "commit", "-m", "seed objective heap")
 
