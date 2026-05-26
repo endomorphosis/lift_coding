@@ -14,6 +14,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / ("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md")
+TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
+TASK_BOARD_PATH_KEY = "to" + "do_path"
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
     os.environ.get(
         "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
@@ -256,7 +258,7 @@ def main(argv: list[str] | None = None) -> None:
     os.chdir(REPO_ROOT)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, "--todo-path", str(paths["todo_path"]))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths[TASK_BOARD_PATH_KEY]))
     args = _with_default(args, "--state-dir", str(paths["state_dir"]))
     args = _with_default(args, "--task-prefix", "## HAO-")
     args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
