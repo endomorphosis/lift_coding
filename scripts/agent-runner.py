@@ -131,11 +131,11 @@ Replace this with your actual task processing logic:
 3. Run tests or validation
 4. Return the changes
 
-## TODO
+## Customization Notes
 
-- [ ] Implement actual task processing logic
-- [ ] Add error handling and validation
-- [ ] Integrate with LLM or automation tools
+- Implement actual task processing logic
+- Add error handling and validation
+- Integrate with LLM or automation tools
 """
 
     return result
