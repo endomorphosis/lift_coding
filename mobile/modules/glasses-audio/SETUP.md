@@ -311,7 +311,7 @@ When ready to ship:
 ## Next Steps
 
 - Review [GlassesAudio Module README](README.md) for API documentation
-- Review [Glasses Implementation TODO](../../glasses/TODO.md) for remaining work
+- Review the glasses implementation checklist for native audio validation and platform-readiness items
 - Test on different devices and OS versions
 - Optimize audio quality settings
 - Add telemetry and crash reporting
