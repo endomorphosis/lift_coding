@@ -37,6 +37,25 @@ def test_fallback_accelerate_adapter_when_dependency_missing(monkeypatch):
         adapter.generate("hello")
 
 
+def test_accelerate_import_does_not_swallow_transitive_import_failure(monkeypatch):
+    """Import-time failures inside an installed package should stay visible."""
+    _clear_accelerate_modules(monkeypatch)
+    real_import_module = adapters.importlib.import_module
+
+    def fail_import(name, package=None):
+        if name == "ipfs_accelerate_py":
+            raise ModuleNotFoundError("No module named 'torch'", name="torch")
+        return real_import_module(name, package=package)
+
+    monkeypatch.setattr(adapters.importlib, "import_module", fail_import)
+    reset_ipfs_accelerate_adapter_cache()
+
+    with pytest.raises(ModuleNotFoundError) as exc_info:
+        get_ipfs_accelerate_adapter()
+
+    assert exc_info.value.name == "torch"
+
+
 def test_delegates_to_canonical_accelerate_modules(monkeypatch):
     """Accelerate adapter should prefer canonical upstream router modules."""
     _clear_accelerate_modules(monkeypatch)

@@ -86,7 +86,9 @@ class _IPFSAccelerateModuleAdapter:
 def _import_accelerate_module() -> Any | None:
     try:
         return importlib.import_module("ipfs_accelerate_py")
-    except Exception as exc:
+    except ModuleNotFoundError as exc:
+        if exc.name != "ipfs_accelerate_py":
+            raise
         logger.debug("Optional accelerate import failed for ipfs_accelerate_py: %s", exc)
         return None
 
