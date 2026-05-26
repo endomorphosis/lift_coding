@@ -790,7 +790,8 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    (repo / "todo.md").write_text(
+    task_board_path = repo / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text(
         """# Temporary Board
 
 ## HAO-001 Completed seed
@@ -812,18 +813,25 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         encoding="utf-8",
     )
     discovery.write_text(
-        "# Generated Discovery\n\nThe historical task had `Status: todo` in captured evidence.\n",
+        f"# Generated Discovery\n\nThe historical task had `Status: {PENDING_TASK_STATUS}` in captured evidence.\n",
         encoding="utf-8",
     )
     readme.write_text(
-        "# Example\n\n```bash\nrg -n \"todo\" docs/example.todo.md\n```\n",
+        f'# Example\n\n```bash\nrg -n "{PENDING_TASK_STATUS}" docs/example.{TEMP_TASK_BOARD_FILENAME}\n```\n',
         encoding="utf-8",
     )
-    _git(repo, "add", "todo.md", "src/scan_target.py", "data/hallucinate_multimodal_control/discovery/report.md", "README.md")
+    _git(
+        repo,
+        "add",
+        TEMP_TASK_BOARD_FILENAME,
+        "src/scan_target.py",
+        "data/hallucinate_multimodal_control/discovery/report.md",
+        "README.md",
+    )
     _git(repo, "commit", "-m", "seed")
 
     findings = daemon_module.record_codebase_scan_findings(
-        todo_path=repo / "todo.md",
+        todo_path=task_board_path,
         strategy_path=tmp_path / "strategy.json",
         discovery_dir=repo / "discovery",
         repo_root=repo,
@@ -833,7 +841,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     )
 
     assert [finding["source"] for finding in findings] == ["src/scan_target.py:2"]
-    updated = (repo / "todo.md").read_text(encoding="utf-8")
+    updated = task_board_path.read_text(encoding="utf-8")
     assert "data/hallucinate_multimodal_control/discovery/report.md" not in updated
     assert "README.md" not in updated
 
