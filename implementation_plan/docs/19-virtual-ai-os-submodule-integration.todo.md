@@ -719,3 +719,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:811. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-062-codebase-scan-61100d34bad2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-063 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:922
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:922. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-063-codebase-scan-b298ce6766ea.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-064 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:958
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:958. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-064-codebase-scan-fc27f463add8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-065 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:975
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:975. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-065-codebase-scan-2e08c633b4c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-066 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:1027
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:1027. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-066-codebase-scan-3fd110d61d16.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-067 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:1059
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:1059. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-067-codebase-scan-d3b7a39e0c75.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
