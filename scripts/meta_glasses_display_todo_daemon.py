@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the accelerator todo implementation daemon for display-widget work."""
+"""Run the accelerator backlog implementation daemon for display-widget work."""
 
 from __future__ import annotations
 
