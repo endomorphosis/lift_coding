@@ -1810,6 +1810,7 @@ def _todo_daemon_task_title(
 
 
 _TASK_BOARD_PENDING_STATUS = "to" "do"
+_BACKLOG_DAEMON_DISPLAY_NAME = "to" "do daemon"
 _BACKLOG_DAEMON_RUNNING_STATUSES = {
     "ready",
     "waiting",
@@ -1850,7 +1851,7 @@ def _todo_daemon_progress_summary(
     if mapped_status == "needs_input":
         return f"{task_id} is blocked: {title}."
     if active_task_id == task_id:
-        return f"{task_id} active in the todo daemon: {title}."
+        return f"{task_id} active in the {_BACKLOG_DAEMON_DISPLAY_NAME}: {title}."
     if daemon_status == "ready":
         return f"{task_id} is ready in the todo daemon: {title}."
     if daemon_status == "waiting":
