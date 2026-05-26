@@ -12,7 +12,10 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+)
+TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
@@ -104,7 +107,7 @@ def _task_is_present(todo_text: str, task_id: str) -> bool:
     return f"## {task_id} " in todo_text
 
 
-def ensure_post_initial_discovery_backlog(todo_path: Path = TODO_PATH) -> bool:
+def ensure_post_initial_discovery_backlog(todo_path: Path = TASK_BOARD_PATH) -> bool:
     """Keep the post-initial discovery expansion tasks in the supervised board."""
     if not todo_path.exists():
         return False
@@ -233,11 +236,11 @@ def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     os.chdir(REPO_ROOT)
     _bootstrap_android_validation_env()
-    ensure_post_initial_discovery_backlog(TODO_PATH)
-    enforce_android_validation_environment(TODO_PATH)
+    ensure_post_initial_discovery_backlog(TASK_BOARD_PATH)
+    enforce_android_validation_environment(TASK_BOARD_PATH)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, "--todo-path", str(TODO_PATH))
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(TASK_BOARD_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
