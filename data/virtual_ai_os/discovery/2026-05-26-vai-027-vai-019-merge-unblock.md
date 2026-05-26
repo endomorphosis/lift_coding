@@ -15,7 +15,7 @@ Source task: VAI-019
 ## Resolution
 
 The recorded blocker was not a semantic merge conflict in the VAI-019 test
-outputs. The implementation branch included seeded supervisor and todo files
+outputs. The implementation branch included seeded supervisor and backlog files
 that overlapped with newer main-worktree backlog state, so replaying the full
 branch would reintroduce stale generated context.
 
