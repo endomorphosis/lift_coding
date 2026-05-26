@@ -491,7 +491,7 @@ cadence remains parseable and resumable.
 
 ## VAI-042 Replace placeholder runtime path in src/handsfree/ocr/stub_provider.py:38
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
