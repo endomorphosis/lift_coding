@@ -17,20 +17,13 @@ DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
-DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
 DISCOVERY_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
-OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
-OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/virtual_ai_os/discovery/",
-    "data/virtual_ai_os/objective_bundles/",
-    "data/virtual_ai_os/objective_datasets/",
     "data/virtual_ai_os/objective_bundles/",
     "data/virtual_ai_os/objective_datasets/",
     "data/virtual_ai_os/state/",
@@ -134,14 +127,6 @@ def main(argv: list[str] | None = None) -> None:
     if resolver_command:
         args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
-    args = _with_flag_default(args, "--objective-refill-scan")
-    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
-    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
-    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
-    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
-    args = _with_default(args, "--objective-scan-min-open-tasks", "0")
     args = _with_flag_default(args, "--objective-refill-scan")
     args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
     args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
