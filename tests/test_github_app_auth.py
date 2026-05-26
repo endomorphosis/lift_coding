@@ -225,6 +225,48 @@ adW+7qG7Q9T48zppJ2NWTp6pUUOKrMfX2Mu9tqGJJZiUMsbhrI+w
         ):
             provider._mint_installation_token()
 
+    def test_get_token_propagates_minting_failure(self, monkeypatch, valid_private_key):
+        """Configured GitHub App minting failures should not be converted to no-token mode."""
+        monkeypatch.setenv("GITHUB_APP_ID", "12345")
+        monkeypatch.setenv("GITHUB_APP_PRIVATE_KEY_PEM", valid_private_key)
+        monkeypatch.setenv("GITHUB_INSTALLATION_ID", "67890")
+
+        mock_client = Mock()
+        response = Mock()
+        response.status_code = 401
+        response.text = "Unauthorized"
+        mock_client.post.return_value = response
+
+        provider = GitHubAppTokenProvider(http_client=mock_client)
+
+        with pytest.raises(
+            RuntimeError, match="(Failed to mint installation token|JWT generation failed)"
+        ):
+            provider.get_token()
+
+        assert provider._cached_token is None
+        assert provider._token_expires_at is None
+
+    def test_get_token_rejects_malformed_mint_response(self, monkeypatch, valid_private_key):
+        """Malformed GitHub App token responses should fail explicitly."""
+        monkeypatch.setenv("GITHUB_APP_ID", "12345")
+        monkeypatch.setenv("GITHUB_APP_PRIVATE_KEY_PEM", valid_private_key)
+        monkeypatch.setenv("GITHUB_INSTALLATION_ID", "67890")
+
+        mock_client = Mock()
+        response = Mock()
+        response.status_code = 201
+        response.json.return_value = {"expires_at": (datetime.now(UTC) + timedelta(hours=1))}
+        mock_client.post.return_value = response
+
+        provider = GitHubAppTokenProvider(http_client=mock_client)
+
+        with pytest.raises(RuntimeError, match="missing token"):
+            provider.get_token()
+
+        assert provider._cached_token is None
+        assert provider._token_expires_at is None
+
     def test_token_caching(self, monkeypatch, valid_private_key, mock_http_client):
         """Test that tokens are cached and reused."""
         monkeypatch.setenv("GITHUB_APP_ID", "12345")
