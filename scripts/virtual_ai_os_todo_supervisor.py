@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import os
+import shlex
+import shutil
 import sys
 from pathlib import Path
 
@@ -83,6 +85,19 @@ def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) 
     return [*defaults, *argv]
 
 
+def _default_llm_merge_resolver_command() -> str:
+    configured = os.environ.get("HANDSFREE_VAI_OS_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    configured = os.environ.get("IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND", "").strip()
+    if configured:
+        return configured
+    codex = shutil.which("codex")
+    if not codex:
+        return ""
+    return f"{shlex.quote(codex)} exec --dangerously-bypass-approvals-and-sandbox -C . -"
+
+
 def _ensure_runtime_pythonpath() -> None:
     for path in (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT):
         if str(path) not in sys.path:
@@ -108,6 +123,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
     args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
     args = _with_default(args, "--max-restarts", "0")
+    resolver_command = _default_llm_merge_resolver_command()
+    if resolver_command:
+        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
     args = _with_flag_default(args, "--objective-refill-scan")
     args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
