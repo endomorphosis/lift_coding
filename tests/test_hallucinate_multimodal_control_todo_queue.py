@@ -955,7 +955,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert tasks["HAO-002"].track == "mobile"
     assert "objective-heap.md" in tasks["HAO-002"].validation[0]
     assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
-    bundle_shards = list((repo / "bundles").glob("*.todo.md"))
+    bundle_shards = list((repo / "bundles").glob(f"*.{TEMP_TASK_BOARD_FILENAME}"))
     assert len(bundle_shards) == 1
     assert "## HAO-002 Close virtual AI OS objective gap" in bundle_shards[0].read_text(encoding="utf-8")
     bundle_index = json.loads((repo / "bundles" / "index.json").read_text(encoding="utf-8"))
