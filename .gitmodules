@@ -1,19 +1,12 @@
-# The lowercase https://github.com/endomorphosis/mcp_plus_plus source review
-# returned "Repository not found"; the existing root gitlink uses the
-# case-sensitive Mcp-Plus-Plus repository below so submodule status can traverse
-# the committed topology.
-[submodule "Mcp-Plus-Plus"]
-	path = Mcp-Plus-Plus
-	url = https://github.com/endomorphosis/Mcp-Plus-Plus.git
 [submodule "external/ipfs_datasets"]
 	path = external/ipfs_datasets
-	url = https://github.com/endomorphosis/ipfs_datasets_py
+	url = https://github.com/endomorphosis/ipfs_datasets
 [submodule "external/ipfs_kit"]
 	path = external/ipfs_kit
-	url = https://github.com/endomorphosis/ipfs_kit_py
+	url = https://github.com/endomorphosis/ipfs_kit
 [submodule "external/ipfs_accelerate"]
 	path = external/ipfs_accelerate
-	url = https://github.com/endomorphosis/ipfs_accelerate_py
+	url = https://github.com/endomorphosis/ipfs_accelerate
 [submodule "external/meta-wearables-dat-android"]
 	path = external/meta-wearables-dat-android
 	url = https://github.com/facebook/meta-wearables-dat-android
@@ -23,6 +16,3 @@
 [submodule "swissknife"]
 	path = swissknife
 	url = https://github.com/endomorphosis/swissknife
-[submodule "hallucinate_app"]
-	path = hallucinate_app
-	url = https://github.com/endomorphosis/hallucinate_app.git
