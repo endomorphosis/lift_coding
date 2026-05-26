@@ -50,7 +50,7 @@ VIRTUAL_AI_OS_EXECUTION_GUARDS: dict[str, dict[str, str]] = {
         "rollback_guard": "preserve provider-specific transport configuration and timeout fallback to avoid blocking delegation",
     },
     "daemon_mediated": {
-        "policy_surface": "ipfs_datasets_py todo daemon",
+        "policy_surface": "ipfs_datasets_py implementation supervisor",
         "rollback_guard": "retain repo-local backlog board, state snapshots, and isolated worktrees for rollback-safe retries",
     },
     "swissknife_orb": {
