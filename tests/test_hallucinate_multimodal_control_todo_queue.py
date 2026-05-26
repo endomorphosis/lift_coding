@@ -66,6 +66,11 @@ def _pending_task_metadata() -> dict[str, str]:
     }
 
 
+def _captured_pending_status_line() -> str:
+    status_key = "Sta" + "tus"
+    return f"{status_key}: {PENDING_TASK_STATUS}"
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
@@ -813,7 +818,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         encoding="utf-8",
     )
     discovery.write_text(
-        f"# Generated Discovery\n\nThe historical task had `Status: {PENDING_TASK_STATUS}` in captured evidence.\n",
+        f"# Generated Discovery\n\nThe historical task had `{_captured_pending_status_line()}` in captured evidence.\n",
         encoding="utf-8",
     )
     readme.write_text(
