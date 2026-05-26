@@ -7,10 +7,6 @@ It doesn't require any external dependencies or API keys.
 from handsfree.ocr import OCRDisabledError
 
 
-class OCRDisabledError(NotImplementedError):
-    """Raised when OCR is disabled by runtime configuration."""
-
-
 class StubOCRProvider:
     """Stub OCR provider that returns deterministic responses for testing.
 

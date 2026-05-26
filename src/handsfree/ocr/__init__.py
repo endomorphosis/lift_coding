@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class OCRDisabledError(RuntimeError):
-    """Raised when OCR is explicitly disabled by runtime configuration."""
+    """Raised when OCR processing is explicitly disabled by runtime configuration."""
 
 
 class OCRProvider(Protocol):
