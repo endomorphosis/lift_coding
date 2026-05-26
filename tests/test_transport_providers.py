@@ -741,6 +741,50 @@ def test_protocol_routing_adapter_logs_runtime_stream_cleanup_failures(caplog):
     assert all(record.exc_info for record in cleanup_records)
 
 
+def test_protocol_routing_adapter_logs_async_runtime_stream_cleanup_failures(caplog):
+    from handsfree.transport.libp2p_bluetooth import (
+        BluetoothProtocolStream,
+        ProtocolRoutingBluetoothTransportAdapter,
+    )
+
+    close_calls: list[str] = []
+    reset_calls: list[str] = []
+
+    class FakeRuntimeStream:
+        async def close(self) -> None:
+            close_calls.append("close")
+            raise RuntimeError("async-close-failed")
+
+        def reset(self) -> None:
+            reset_calls.append("reset")
+
+    adapter = ProtocolRoutingBluetoothTransportAdapter()
+    adapter.streams[("peer-ref", "session-id", "/handsfree/chat/1.0.0")] = BluetoothProtocolStream(
+        peer_ref="peer-ref",
+        peer_id="peer-id",
+        session_id="session-id",
+        protocol="/handsfree/chat/1.0.0",
+        runtime_stream=FakeRuntimeStream(),
+    )
+
+    caplog.set_level(logging.WARNING, logger="handsfree.transport.libp2p_bluetooth")
+
+    adapter.close("peer-ref", "session-id")
+
+    assert close_calls == ["close"]
+    assert reset_calls == ["reset"]
+    cleanup_records = [
+        record
+        for record in caplog.records
+        if record.name == "handsfree.transport.libp2p_bluetooth"
+    ]
+    messages = [record.getMessage() for record in cleanup_records]
+    assert messages == [
+        "Failed to close py-libp2p runtime stream; trying reset fallback: async-close-failed",
+    ]
+    assert all(record.exc_info for record in cleanup_records)
+
+
 def test_protocol_routing_adapter_reads_inbound_runtime_stream_payloads(monkeypatch):
     from handsfree.transport import libp2p_bluetooth
     from handsfree.transport.libp2p_bluetooth import (
