@@ -150,7 +150,7 @@ def test_android_gradle_validations_are_env_wrapped_in_board():
 
 def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    todo_path = tmp_path / "todo.md"
+    todo_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     todo_path.write_text(
         """# Temporary Board
 
