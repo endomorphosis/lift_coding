@@ -1344,7 +1344,7 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     _git(app, "config", "user.name", "Test User")
     _git(app, "config", "user.email", "test@example.invalid")
 
-    todo_path = docs / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+    todo_path = docs / TASK_BOARD_FILENAME
     todo_path.write_text(
         """# HAO Board
 
