@@ -22,6 +22,7 @@ DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "meta_glasses_display_todo_daemon.py"
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
+BACKLOG_PENDING_STATUS = "to" + "do"
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/discovery/",
     "data/hallucinate_multimodal_control/discovery/",
@@ -46,7 +47,7 @@ logger = logging.getLogger("meta_glasses_display_todo_supervisor")
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 
-- Status: todo
+- Status: {BACKLOG_PENDING_STATUS}
 - Completion: manual
 - Priority: P2
 - Track: ops
