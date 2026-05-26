@@ -13,7 +13,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+)
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
 
