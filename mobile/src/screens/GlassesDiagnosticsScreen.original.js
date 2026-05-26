@@ -518,7 +518,7 @@ export default function GlassesDiagnosticsScreen() {
         <Text style={styles.cardTitle}>Documentation</Text>
         <Text style={styles.mono}>docs/meta-ai-glasses-audio-routing.md</Text>
         <Text style={styles.mono}>mobile/glasses/README.md</Text>
-        <Text style={styles.mono}>mobile/glasses/TODO.md</Text>
+        <Text style={styles.mono}>mobile/glasses/IMPLEMENTATION_STATUS.md</Text>
       </View>
     </ScrollView>
   );
