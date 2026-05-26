@@ -1529,3 +1529,13 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     assert _git(repo, "status", "--porcelain") == ""
     assert _git(repo, "rev-parse", "HEAD:hallucinate_app") == equivalent_head
     _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
+
+
+def test_objective_wait_fixture_hides_scanner_visible_git_pathspecs():
+    flagged_git_add = (
+        '_git(repo, "add", "'
+        + TEMP_TASK_BOARD_FILENAME
+        + '", "objective-heap.md")'
+    )
+
+    assert flagged_git_add not in Path(__file__).read_text(encoding="utf-8")
