@@ -157,3 +157,33 @@ def test_backend_factory_errors_are_not_swallowed(monkeypatch):
 
     with pytest.raises(RuntimeError, match="backend init failed"):
         adapter.pin("bafy123")
+
+
+def test_direct_callable_import_errors_are_not_swallowed(monkeypatch):
+    """Broken installed direct-import surfaces should fail before backend fallback."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeBackend:
+        def pin_add(self, cid, **kwargs):
+            return {"backend": "pin_add", "cid": cid, "options": kwargs}
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    reset_ipfs_kit_adapter_cache()
+    adapter = get_ipfs_kit_adapter()
+
+    original_import_module = adapters.importlib.import_module
+
+    def import_module(module_name):
+        if module_name == "ipfs_kit_py":
+            raise RuntimeError("direct import failed")
+        if module_name == "ipfs_kit_py.ipfs_backend":
+            return backend_module
+        return original_import_module(module_name)
+
+    monkeypatch.setattr(adapters.importlib, "import_module", import_module)
+
+    with pytest.raises(RuntimeError, match="direct import failed"):
+        adapter.pin("bafy123")

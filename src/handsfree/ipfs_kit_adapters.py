@@ -82,11 +82,20 @@ class _IPFSKitModuleAdapter:
         for module_name, attr_name in targets:
             try:
                 module = importlib.import_module(module_name)
-                candidate = getattr(module, attr_name, None)
-                if callable(candidate):
-                    return candidate
-            except Exception:
+            except ModuleNotFoundError as exc:
+                root_package = module_name.partition(".")[0]
+                if exc.name not in {root_package, module_name}:
+                    raise
+                logger.debug(
+                    "Optional kit callable module unavailable for %s.%s: %s",
+                    module_name,
+                    attr_name,
+                    exc,
+                )
                 continue
+            candidate = getattr(module, attr_name, None)
+            if callable(candidate):
+                return candidate
         return None
 
     def _get_backend(self) -> Any:
