@@ -64,6 +64,25 @@ def _temporary_board_path(repo: Path) -> Path:
     return repo / TEMP_TASK_BOARD_FILENAME
 
 
+def _write_pending_backlog_board(path: Path) -> None:
+    path.write_text(
+        f"""# Temporary Board
+
+## HAO-001 Existing work
+
+- Status: {PENDING_TASK_STATUS}
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: {TEMP_TASK_BOARD_FILENAME}
+- Validation: true
+- Acceptance: Existing work remains.
+""",
+        encoding="utf-8",
+    )
+
+
 def _repo_relative_paths(repo: Path, *paths: Path) -> list[str]:
     return [path.relative_to(repo).as_posix() for path in paths]
 
@@ -633,23 +652,8 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    task_board_path = repo / TEMP_TASK_BOARD_FILENAME
-    task_board_path.write_text(
-        f"""# Temporary Board
-
-## HAO-001 Existing work
-
-- Status: {PENDING_TASK_STATUS}
-- Completion: manual
-- Priority: P2
-- Track: ops
-- Depends on:
-- Outputs: {TEMP_TASK_BOARD_FILENAME}
-- Validation: true
-- Acceptance: Existing work remains.
-""",
-        encoding="utf-8",
-    )
+    task_board_path = _temporary_board_path(repo)
+    _write_pending_backlog_board(task_board_path)
     fixture_marker = "TO" + "DO"
     (repo / "scan_target.py").write_text(
         f"# {fixture_marker}: this should wait for backlog drain\n",
@@ -1287,22 +1291,7 @@ def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    task_board_path.write_text(
-        f"""# Temporary Board
-
-## HAO-001 Existing work
-
-- Status: {PENDING_TASK_STATUS}
-- Completion: manual
-- Priority: P2
-- Track: ops
-- Depends on:
-- Outputs: {TEMP_TASK_BOARD_FILENAME}
-- Validation: true
-- Acceptance: Existing work remains.
-""",
-        encoding="utf-8",
-    )
+    _write_pending_backlog_board(task_board_path)
     objective_path.write_text(
         """# Objective Heap
 
