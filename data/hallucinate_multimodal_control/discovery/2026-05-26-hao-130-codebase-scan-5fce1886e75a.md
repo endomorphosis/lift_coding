@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Remediation
+
+Replaced the unsupported direct-import surface placeholder with
+`IPFSAccelerateUnavailableError`, the adapter's concrete runtime error for a
+missing or unusable `ipfs_accelerate_py` integration surface. Added focused
+coverage for the installed-package-without-supported-callables path.
