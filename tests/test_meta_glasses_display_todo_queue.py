@@ -179,7 +179,7 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    todo_path = tmp_path / "todo.md"
+    todo_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
