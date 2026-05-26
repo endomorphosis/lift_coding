@@ -78,9 +78,9 @@ DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns an
 - Acceptance: After the initial backlog completes, investigate the Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT references, and hardware-free test harness code paths for missed work. Append new daemon-parseable MGW tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
 """
 
-SUPERVISOR_GUARDRAIL_TASK = """## MGW-014 Add supervisor validation-environment and retry-budget guardrails
+SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment and retry-budget guardrails
 
-- Status: todo
+- Status: {BACKLOG_PENDING_STATUS}
 - Completion: manual
 - Priority: P1
 - Track: ops
