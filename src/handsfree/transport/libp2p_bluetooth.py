@@ -41,6 +41,8 @@ EnvelopeKind = Literal["handshake", "message", "ack", "error"]
 
 logger = logging.getLogger(__name__)
 
+RUNTIME_STREAM_CLEANUP_ERRORS = (OSError, RuntimeError, TimeoutError)
+
 
 def _new_session_id() -> str:
     return secrets.token_hex(8)
@@ -1244,7 +1246,7 @@ def _close_runtime_stream(runtime_stream: Any) -> None:
         try:
             _resolve_runtime_value(close())
             return
-        except Exception as exc:
+        except RUNTIME_STREAM_CLEANUP_ERRORS as exc:
             logger.warning(
                 "Failed to close py-libp2p runtime stream; trying reset fallback: %s",
                 exc,
@@ -1255,7 +1257,7 @@ def _close_runtime_stream(runtime_stream: Any) -> None:
     if reset is not None:
         try:
             _resolve_runtime_value(reset())
-        except Exception as exc:
+        except RUNTIME_STREAM_CLEANUP_ERRORS as exc:
             logger.warning(
                 "Failed to reset py-libp2p runtime stream: %s",
                 exc,
