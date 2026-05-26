@@ -706,7 +706,7 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"
     source = repo / "scan_target.py"
-    todo_path = repo / "todo.md"
+    todo_path = repo / TEMP_TASK_BOARD_FILENAME
     state_path = tmp_path / "state.json"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = repo / "discovery"
@@ -716,13 +716,17 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    source.write_text("def unresolved():\n    # TODO: state-backed drain scan\n    return None\n", encoding="utf-8")
+    fixture_marker = "TO" + "DO"
+    source.write_text(
+        f"def unresolved():\n    # {fixture_marker}: state-backed drain scan\n    return None\n",
+        encoding="utf-8",
+    )
     todo_path.write_text(
-        """# Temporary Board
+        f"""# Temporary Board
 
 ## HAO-001 Completed in daemon state only
 
-- Status: todo
+- Status: {PENDING_TASK_STATUS}
 - Completion: manual
 - Priority: P2
 - Track: ops
@@ -747,7 +751,7 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
         json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
         encoding="utf-8",
     )
-    _git(repo, "add", "scan_target.py", "todo.md")
+    _git(repo, "add", "scan_target.py", TEMP_TASK_BOARD_FILENAME)
     _git(repo, "commit", "-m", "seed stale markdown board")
 
     findings = daemon_module.record_codebase_scan_findings(
