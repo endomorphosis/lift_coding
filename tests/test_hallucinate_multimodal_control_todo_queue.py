@@ -17,6 +17,7 @@ TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / TASK_BOARD_FILENAME
 TASK_BOARD_PATH_KEY = "to" + "do_path"
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 PENDING_TASK_STATUS = "to" + "do"
+OBJECTIVE_BUNDLE_SHARD_GLOB = "*." + TEMP_TASK_BOARD_FILENAME
 
 
 def _load_script_module(name: str):
@@ -955,7 +956,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert tasks["HAO-002"].track == "mobile"
     assert "objective-heap.md" in tasks["HAO-002"].validation[0]
     assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
-    bundle_shards = list((repo / "bundles").glob(f"*.{TEMP_TASK_BOARD_FILENAME}"))
+    bundle_shards = list((repo / "bundles").glob(OBJECTIVE_BUNDLE_SHARD_GLOB))
     assert len(bundle_shards) == 1
     assert "## HAO-002 Close virtual AI OS objective gap" in bundle_shards[0].read_text(encoding="utf-8")
     bundle_index = json.loads((repo / "bundles" / "index.json").read_text(encoding="utf-8"))
