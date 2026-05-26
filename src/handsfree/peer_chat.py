@@ -2,16 +2,22 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import asdict, dataclass
 from time import time
-from uuid import uuid4
 from typing import Any
+from uuid import uuid4
+
+import duckdb
 
 from handsfree.db.peer_chat import (
     list_peer_chat_messages,
     list_recent_peer_chat_conversations,
     store_peer_chat_message,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(slots=True)
@@ -119,8 +125,15 @@ class PeerChatSessionService:
                     timestamp_ms=timestamp_ms,
                     task_snapshot=task_snapshot,
                 )
-            except Exception:
-                pass
+            except (duckdb.Error, OSError) as exc:
+                logger.warning(
+                    "Failed to persist peer chat message for conversation %s and peer %s; "
+                    "using in-memory fallback: %s",
+                    conversation_id,
+                    peer_id,
+                    exc,
+                    exc_info=True,
+                )
         self._messages.setdefault(conversation_id, []).append(message)
         return message
 
@@ -140,8 +153,14 @@ class PeerChatSessionService:
                     }
                     for item in list_peer_chat_messages(conn, conversation_id)
                 ]
-            except Exception:
-                pass
+            except (duckdb.Error, OSError) as exc:
+                logger.warning(
+                    "Failed to list persisted peer chat messages for conversation %s; "
+                    "using in-memory fallback: %s",
+                    conversation_id,
+                    exc,
+                    exc_info=True,
+                )
         return [asdict(item) for item in self._messages.get(conversation_id, [])]
 
     def list_recent_conversations(self, limit: int = 20) -> list[dict[str, Any]]:
@@ -161,8 +180,13 @@ class PeerChatSessionService:
                     }
                     for item in list_recent_peer_chat_conversations(conn, limit)
                 ]
-            except Exception:
-                pass
+            except (duckdb.Error, OSError) as exc:
+                logger.warning(
+                    "Failed to list persisted peer chat conversations; using in-memory "
+                    "fallback: %s",
+                    exc,
+                    exc_info=True,
+                )
 
         conversations: dict[str, dict[str, Any]] = {}
         for items in self._messages.values():
