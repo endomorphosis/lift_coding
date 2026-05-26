@@ -6,6 +6,7 @@ Comprehensive integration plan for turning the current HandsFree monorepo plus i
 
 Created: 2026-05-22
 Refreshed: 2026-05-23
+MCP++ source re-check: 2026-05-25
 
 ## Goal
 
@@ -46,10 +47,10 @@ The target state is not a loose collection of tools. It is one system that can:
   - state: clean and aligned with the recorded gitlink.
 - `external/ipfs_kit`
   - target upstream: `https://github.com/endomorphosis/ipfs_kit_py`
-  - recorded root gitlink at repo `HEAD`: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
-  - live local checkout on 2026-05-23: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
-  - current branch: `main`
-  - state: clean at the recorded gitlink, but recursive submodule inspection still fails because upstream nested submodule metadata references `ipfs_accelerate_py` without a matching root `.gitmodules` mapping.
+  - recorded root gitlink after VAI-021: `d40eab72b9383519edee54331636350985b4ba79`
+  - reviewed upstream base on 2026-05-23: `3133d4fdc85a885ba7d776465bdee48f7a867e01`
+  - current branch: `implementation/vai-029-attempt-2-1779760032-submodule-external-ipfs_kit`
+  - state: VAI-021 adds the missing nested `ipfs_accelerate_py` mapping in `external/ipfs_kit/.gitmodules`, so `git -C external/ipfs_kit submodule status` and root `git submodule status --recursive` can inspect the topology without failing on an orphan gitlink.
 - `swissknife`
   - upstream: `https://github.com/endomorphosis/swissknife`
   - recorded root gitlink at repo `HEAD`: `5b4598e15709203c0fe2265fdab2f51ea822b0f2`
@@ -62,6 +63,12 @@ The target state is not a loose collection of tools. It is one system that can:
   - live local checkout on 2026-05-23 after explicit submodule init: `0fc4e0ccb8d6cb5c74a6bbf769d610dd600ff7c5`
   - current branch: `main`
   - state: initialized and clean.
+- `Mcp-Plus-Plus`
+  - upstream: `https://github.com/endomorphosis/Mcp-Plus-Plus.git`
+  - recorded root gitlink at repo `HEAD`: `29343be704da4e193ff143bac7daae9b0f98435d`
+  - live local checkout on 2026-05-25: `29343be704da4e193ff143bac7daae9b0f98435d`
+  - current branch: `implementation/vai-025-attempt-1-1779757879-submodule-Mcp-Plus-Plus`
+  - state: clean standalone MCP++ spec/docs source; root `.gitmodules` now maps the existing gitlink to the case-sensitive upstream URL.
 - compatibility reference submodules that remain part of the full-stack validation path:
   - `external/meta-wearables-dat-android` recorded and checked out at `25f3a6d4479b7a4a72f877977b865a11af990d04`
   - `external/meta-wearables-dat-ios` recorded and checked out at `a739e94181221e7f321304273bcda2272821b163`
@@ -72,21 +79,31 @@ The target state is not a loose collection of tools. It is one system that can:
 - `hallucinate_app` required explicit submodule initialization in local Git config before it appeared as a live worktree in `git submodule status`.
 - `external/ipfs_datasets` is the only reviewed component whose local checkout currently differs from the recorded superproject gitlink; advancing that pin should be treated as a deliberate superproject change, not an incidental refresh side effect.
 - `swissknife` has local modifications in its worktree; protect it from any automated pin or checkout step during backlog automation.
-- Recursive submodule traversal is still unreliable because upstream nested metadata under `external/ipfs_kit` references `ipfs_accelerate_py` without a matching root `.gitmodules` mapping.
+- Recursive submodule status traversal is restored for the reviewed topology: the root `Mcp-Plus-Plus` gitlink has a matching `.gitmodules` entry, and `external/ipfs_kit` now declares its nested `ipfs_accelerate_py` gitlink.
+- Until `external/ipfs_kit` advances the nested `ipfs_accelerate_py` gitlink to a verified upstream pin, local bootstrap should avoid recursive update traversal through `external/ipfs_kit`. Use `git submodule update --init external/ipfs_kit` followed by `git -C external/ipfs_kit submodule status` for status-only hygiene; initialize specific nested dependencies only after their pins are verified.
 - Evidence: [data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md](../../data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md)
 
-### Upstream blocker
+### 2026-05-25 MCP++ canonical-source re-check
 
-- Requested upstream `https://github.com/endomorphosis/mcp_plus_plus` did not resolve via `git ls-remote` on 2026-05-22.
-- Current repo evidence suggests MCP++ is presently represented as a protocol and implementation surface distributed across `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`, not yet as a root-tracked standalone submodule in this monorepo.
-- Treat canonical `mcp_plus_plus` source resolution as a blocking ops task before adding a root submodule entry for it.
+- The requested snake-case upstream `https://github.com/endomorphosis/mcp_plus_plus` still returns `Repository not found` via `git ls-remote`.
+- The case-sensitive upstream `https://github.com/endomorphosis/Mcp-Plus-Plus.git` resolves; `HEAD` and `refs/heads/main` both point to `29343be704da4e193ff143bac7daae9b0f98435d`.
+- The root index already records `Mcp-Plus-Plus` as a gitlink at that same commit, so the scoped fix is to add the missing root `.gitmodules` mapping rather than create a second snake-case `mcp_plus_plus` entry.
+- Treat `Mcp-Plus-Plus` as the standalone MCP++ spec/docs source. Runtime MCP++ behavior remains a distributed protocol surface across SwissKnife, `ipfs_datasets_py`, and `ipfs_accelerate_py` until a distinct standalone service implementation is reviewed.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md)
+
+### Upstream blocker history
+
+- Requested upstream `https://github.com/endomorphosis/mcp_plus_plus` did not resolve via `git ls-remote` on 2026-05-22 and still does not resolve on the 2026-05-25 re-check.
+- The valid canonical source uses the case-sensitive repository name `Mcp-Plus-Plus`; do not encode the broken snake-case URL in root submodule metadata.
+- Keep MCP++ runtime implementation as a distributed protocol surface until a reviewed standalone service exists beyond the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
 
 ### Canonical-source resolution
 
-- Resolution date: 2026-05-22.
-- Decision: keep `mcp_plus_plus` out of the root `.gitmodules` file until a valid canonical upstream exists.
-- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md) records the `Repository not found` result and the rationale for continuing to treat MCP++ as a distributed protocol surface.
-- Re-open this decision only when a reviewed upstream repository exists and can be pinned without duplicating the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
+- Initial resolution date: 2026-05-22.
+- Re-check date: 2026-05-25.
+- Decision: wire the existing `Mcp-Plus-Plus` root gitlink in `.gitmodules` to `https://github.com/endomorphosis/Mcp-Plus-Plus.git` and keep the pin at `29343be704da4e193ff143bac7daae9b0f98435d`.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md) records the current `Repository not found` result for the snake-case URL, the successful case-sensitive upstream resolution, and the decision to treat `Mcp-Plus-Plus` as the standalone spec/docs source.
+- Re-open the runtime-service decision only when a reviewed upstream implementation exists and can be pinned without duplicating the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
 
 ## Current Integration Baseline
 
@@ -105,7 +122,7 @@ The target state is not a loose collection of tools. It is one system that can:
 
 - Physical-device rollout evidence still has to be collected from real DAT-capable hardware runs; the repo now contains the checklist and fallback contracts, but not the run artifacts themselves.
 - Hallucinate desktop E2E coverage remains the operator-console complement to the backend/mobile hardware-free harnesses and should continue to gather evidence under real packaging/runtime conditions.
-- Canonical standalone `mcp_plus_plus` source discovery should only be revisited if a valid upstream repository appears with scope that is distinct from the already-reviewed distributed protocol surfaces.
+- Canonical standalone `Mcp-Plus-Plus` spec/docs source is pinned; runtime-service discovery should only be revisited if a valid upstream implementation appears with scope that is distinct from the already-reviewed distributed protocol surfaces.
 - The Meta/Ray-Ban simulator track now needs to move from planning into implementation: browser 600x600 rendering, D-pad/focus traces, Web App readiness export, and fixture parity with the mobile DAT bridge.
 - Public Meta evidence reviewed on 2026-05-23 shows developer-preview Web App and DAT testing paths plus Mock Device support, but no verified official native display desktop simulator. Treat our local browser simulator plus DAT mock-device flows as the supported pre-hardware path.
 
@@ -206,7 +223,7 @@ Use the repo-local `ipfs_datasets_py` implementation supervisor to advance daemo
 - Align root `.gitmodules` URLs with canonical upstream repositories.
 - Promote `hallucinate_app` to a root-tracked submodule so the monorepo records the reviewed GUI shell revision.
 - Record exact pins in this plan and in daemon tasks.
-- Resolve the canonical `mcp_plus_plus` upstream before wiring it as a submodule.
+- Keep the canonical `Mcp-Plus-Plus` spec/docs submodule wired to the case-sensitive upstream and avoid adding the broken snake-case `mcp_plus_plus` URL.
 - Advance the `external/ipfs_datasets` gitlink only through an explicit reviewed pin refresh, and leave `swissknife` untouched while it has a dirty worktree.
 
 ### Workstream B: Shared capability registry
@@ -241,7 +258,7 @@ Add a runtime orchestration seam in HandsFree that can choose among:
 - `ipfs_kit_py` storage/package operations,
 - Swissknife ORB tools,
 - Hallucinate App daemon-manager actions,
-- future standalone `mcp_plus_plus` services once source is resolved.
+- future standalone `Mcp-Plus-Plus` services once runtime-service scope is resolved.
 
 This runtime is the operating-system scheduler equivalent for the stack.
 
@@ -305,11 +322,11 @@ Build a layered test matrix:
 
 ## Risks and Constraints
 
-- `mcp_plus_plus` upstream is unresolved; do not encode a broken submodule URL.
+- The snake-case `mcp_plus_plus` upstream remains unresolved; do not encode that broken submodule URL. Use the case-sensitive `Mcp-Plus-Plus` spec/docs pin instead.
 - `external/ipfs_datasets` currently contains local modifications; advancing the root gitlink must not overwrite that nested worktree.
 - `swissknife` also contains local modifications; leave its working tree untouched during the submodule alignment work.
 - Meta display APIs remain developer preview surfaces and cannot be required for default CI-safe builds.
-- Nested submodules inside upstream repos remain inconsistent; do not assume recursive bootstrap is reliable without explicit guardrails.
+- Nested submodules inside upstream repos remain inconsistent; use status-only recursive checks for hygiene and avoid recursive `update --init` through `external/ipfs_kit` until its nested `ipfs_accelerate_py` pin is verified upstream.
 
 ## Delivery Strategy
 

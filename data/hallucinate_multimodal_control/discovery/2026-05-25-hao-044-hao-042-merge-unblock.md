@@ -22,7 +22,7 @@ policy-code change. In the `hallucinate_app` submodule, commit
 `b23ba058e74aee458911182fc710db3d0d6aa34b` merges the HAO-042 implementation
 commit as a parent while preserving the current tree. That makes the HAO-042
 submodule commit an ancestor of the updated gitlink and avoids replaying the
-older todo/discovery state from the failed merge branch.
+older backlog and discovery snapshots from the failed merge branch.
 
 `HAO-042` was also removed from the shared strategy `blocked_tasks` and
 failed-merge `deprioritized_tasks` entries after this verification.
