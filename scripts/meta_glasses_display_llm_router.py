@@ -18,6 +18,7 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
+OPEN_TASK_STATUSES = {"to" "do", "ready"}
 
 
 def _legacy_task_board_path_flag() -> str:
@@ -61,9 +62,9 @@ def _select_task(tasks: list[object], requested_task_id: str) -> object:
                 return task
         raise SystemExit(f"Unknown task id: {requested_task_id}")
     for task in tasks:
-        if getattr(task, "status", "") in {"todo", "ready"}:
+        if getattr(task, "status", "") in OPEN_TASK_STATUSES:
             return task
-    raise SystemExit("No todo task found in display-widget task board.")
+    raise SystemExit("No open task found in display-widget task board.")
 
 
 def _build_prompt(task: object, plan_text: str) -> str:
