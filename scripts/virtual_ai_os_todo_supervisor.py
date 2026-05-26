@@ -28,6 +28,12 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/virtual_ai_os/objective_datasets/",
     "data/virtual_ai_os/state/",
     "data/virtual_ai_os/worktrees/",
+    "data/hallucinate_multimodal_control/discovery/",
+    "data/hallucinate_multimodal_control/state/",
+    "data/hallucinate_multimodal_control/worktrees/",
+    "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
 )
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_datasets",
