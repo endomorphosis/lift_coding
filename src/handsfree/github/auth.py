@@ -347,12 +347,26 @@ class GitHubAppTokenProvider(TokenProvider):
             )
             raise RuntimeError(f"Failed to mint installation token: HTTP {response.status_code}")
 
-        data = response.json()
-        token = data["token"]
-        expires_at_str = data["expires_at"]
+        try:
+            data = response.json()
+        except ValueError as e:
+            raise RuntimeError("Failed to mint installation token: invalid JSON response") from e
+
+        token = data.get("token") if isinstance(data, dict) else None
+        if not isinstance(token, str) or not token:
+            raise RuntimeError("Failed to mint installation token: missing token in response")
+
+        expires_at_str = data.get("expires_at") if isinstance(data, dict) else None
+        if not isinstance(expires_at_str, str) or not expires_at_str:
+            raise RuntimeError("Failed to mint installation token: missing expires_at in response")
 
         # Parse expiration time (ISO 8601 format)
-        expires_at = datetime.fromisoformat(expires_at_str.replace("Z", "+00:00"))
+        try:
+            expires_at = datetime.fromisoformat(expires_at_str.replace("Z", "+00:00"))
+        except ValueError as e:
+            raise RuntimeError(
+                "Failed to mint installation token: invalid expires_at in response"
+            ) from e
 
         logger.info("Minted GitHub App installation token (expires at %s)", expires_at.isoformat())
 
@@ -384,30 +398,28 @@ class GitHubAppTokenProvider(TokenProvider):
 
         Returns:
             GitHub installation access token, or None if not configured.
+
+        Raises:
+            RuntimeError: If the configured GitHub App cannot mint or refresh a token.
         """
         if not self._is_configured():
             return None
 
-        try:
-            # Fast path: check if we can use cached token without lock
+        # Fast path: check if we can use cached token without lock
+        if not self._should_refresh_token():
+            logger.debug("Using cached GitHub App installation token")
+            return self._cached_token
+
+        # Slow path: acquire lock and refresh token
+        with self._refresh_lock:
+            # Double-check after acquiring lock (another thread may have refreshed)
             if not self._should_refresh_token():
-                logger.debug("Using cached GitHub App installation token")
+                logger.debug("Using cached GitHub App installation token (after lock)")
                 return self._cached_token
 
-            # Slow path: acquire lock and refresh token
-            with self._refresh_lock:
-                # Double-check after acquiring lock (another thread may have refreshed)
-                if not self._should_refresh_token():
-                    logger.debug("Using cached GitHub App installation token (after lock)")
-                    return self._cached_token
-
-                logger.debug("Refreshing GitHub App installation token")
-                self._cached_token, self._token_expires_at = self._mint_installation_token()
-                return self._cached_token
-
-        except Exception as e:
-            logger.error("Failed to get GitHub App token: %s", str(e))
-            return None
+            logger.debug("Refreshing GitHub App installation token")
+            self._cached_token, self._token_expires_at = self._mint_installation_token()
+            return self._cached_token
 
 
 class EnvironmentTokenProvider(GitHubAuthProvider):
