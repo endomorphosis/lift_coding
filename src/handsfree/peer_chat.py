@@ -19,6 +19,8 @@ from handsfree.db.peer_chat import (
 
 logger = logging.getLogger(__name__)
 
+_PEER_CHAT_PERSISTENCE_ERRORS = (duckdb.Error, OSError)
+
 
 @dataclass(slots=True)
 class PeerChatMessage:
@@ -125,7 +127,7 @@ class PeerChatSessionService:
                     timestamp_ms=timestamp_ms,
                     task_snapshot=task_snapshot,
                 )
-            except (duckdb.Error, OSError) as exc:
+            except _PEER_CHAT_PERSISTENCE_ERRORS as exc:
                 logger.warning(
                     "Failed to persist peer chat message for conversation %s and peer %s; "
                     "using in-memory fallback: %s",
@@ -153,7 +155,7 @@ class PeerChatSessionService:
                     }
                     for item in list_peer_chat_messages(conn, conversation_id)
                 ]
-            except (duckdb.Error, OSError) as exc:
+            except _PEER_CHAT_PERSISTENCE_ERRORS as exc:
                 logger.warning(
                     "Failed to list persisted peer chat messages for conversation %s; "
                     "using in-memory fallback: %s",
@@ -180,7 +182,7 @@ class PeerChatSessionService:
                     }
                     for item in list_recent_peer_chat_conversations(conn, limit)
                 ]
-            except (duckdb.Error, OSError) as exc:
+            except _PEER_CHAT_PERSISTENCE_ERRORS as exc:
                 logger.warning(
                     "Failed to list persisted peer chat conversations; using in-memory "
                     "fallback: %s",
