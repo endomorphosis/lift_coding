@@ -348,7 +348,7 @@ def _import_kit_module() -> Any | None:
     except ModuleNotFoundError as exc:
         if exc.name != module_name:
             raise
-        logger.debug("Optional kit import failed for %s: %s", module_name, exc)
+        logger.debug("Optional kit root package unavailable for %s: %s", module_name, exc)
         return None
 
 
