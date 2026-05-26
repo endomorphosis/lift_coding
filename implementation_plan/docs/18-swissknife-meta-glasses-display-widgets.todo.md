@@ -444,7 +444,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-039 Resolve code annotation in data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md:16
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
