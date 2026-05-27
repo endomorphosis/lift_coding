@@ -1118,7 +1118,7 @@ cadence remains parseable and resumable.
 
 ## VAI-099 Resolve code annotation in hallucinate_app/docs/INDEX.md:24
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
