@@ -201,10 +201,10 @@ class TestErrorHandling:
         # Should return None (fixture mode)
         assert token is None
 
-    def test_invalid_installation_id_falls_back_gracefully(
+    def test_invalid_installation_id_raises_explicitly(
         self, db_conn, test_user_id, valid_private_key, monkeypatch
     ):
-        """Invalid installation_id should fall back to env token."""
+        """Invalid installation_id should surface the minting failure."""
         # Create connection with installation_id
         create_github_connection(
             conn=db_conn,
@@ -227,13 +227,8 @@ class TestErrorHandling:
         # Create token provider
         token_provider = get_user_token_provider(db_conn, test_user_id, http_client=mock_client)
 
-        # Token minting will fail, but should not crash
-        # The provider will attempt to mint but return None on error
-        token = token_provider.get_token()
-
-        # GitHub App provider returns None on error, not falling back
-        # This is expected behavior - token minting errors should be logged
-        assert token is None
+        with pytest.raises(RuntimeError, match="Failed to mint installation token: HTTP 404"):
+            token_provider.get_token()
 
 
 class TestMultipleUsers:
