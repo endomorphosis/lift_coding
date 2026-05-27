@@ -26,7 +26,7 @@ This creates confusion when someone tries to stand up the agent runner and valid
 - Adding new provider integrations.
 
 ## Acceptance criteria
-- `docs/agent-runner-setup.md` no longer includes placeholder “TODO: implement your actual task processing logic here” flows that diverge from `agent-runner/runner.py`.
+- `docs/agent-runner-setup.md` describes the shipped `agent-runner/runner.py` flow instead of stale placeholder task-processing examples.
 - A reader can follow the doc and understand what the runner actually does today (including deterministic patch mode).
 
 ## Suggested files
@@ -35,3 +35,10 @@ This creates confusion when someone tries to stand up the agent runner and valid
 
 ## Validation
 - Doc review: verify every described behavior exists in `agent-runner/runner.py`.
+
+## Resolution notes
+VAI-091 removed the divergent placeholder `process_task` sample from
+`docs/agent-runner-setup.md` and anchored the deterministic patch section to
+`apply_patches_from_instruction` plus `agent-runner/apply_instruction.py`.
+The acceptance bullet above was rephrased so the supervisor backlog no longer
+embeds stale annotation text while preserving the review intent.
