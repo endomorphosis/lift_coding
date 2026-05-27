@@ -1,39 +1,53 @@
 # PR-081: Privacy mode configurable per profile
 
 ## Goal
-Make privacy mode (strict / balanced / debug) configurable per user profile, instead of being hard-coded to strict.
+Keep privacy mode (strict / balanced / debug) configurable through profile
+configuration so router-selected profiles drive redaction behavior.
 
 ## Context
-The implementation plan explicitly calls out privacy modes (strict/balanced/debug). The backend already supports `PrivacyMode` and applies redaction, but `commands/router.py` currently hard-codes strict with a TODO.
+PR-081 is implemented in the backend. `ProfileConfig` includes a
+`privacy_mode` field, built-in profiles default to `strict` for safety, and
+`CommandRouter` passes `profile_config.privacy_mode` into the inbox and PR
+summary handlers. Keep this tracker aligned with that shipped behavior so stale
+implementation notes do not get re-ingested as new work.
 
 ## Scope
-- Add profile-level privacy mode selection.
+- Maintain profile-level privacy mode selection.
   - Source of truth should be profile configuration (existing profile system) rather than per-request hacks.
   - Default remains `strict`.
 - Ensure the selected privacy mode is consistently applied to:
   - inbox summaries
   - PR summaries
   - debug information returned in `CommandResponse`
-- Add tests to validate that different profiles produce appropriately redacted output.
+- Maintain tests validating that different profiles produce appropriately redacted output.
 
 ## Non-goals
 - Mobile UI changes (profile selector UI is tracked separately).
 - Changing the meaning of strict/balanced/debug.
 
 ## Acceptance criteria
-- Profiles can specify privacy mode and it takes effect end-to-end.
+- Profiles can specify privacy mode through `ProfileConfig` and it takes effect in router handler calls.
 - Default profile continues to behave as today (`strict`).
 - Tests cover at least:
   - strict mode redaction
   - balanced mode includes limited excerpts
   - debug mode includes debug fields
 
-## Suggested files
-- `src/handsfree/commands/router.py`
-- Profile config source (where profiles are defined/loaded)
-- `src/handsfree/handlers/inbox.py`
-- `src/handsfree/handlers/pr_summary.py`
-- Tests under `tests/`
+## References
+- `src/handsfree/commands/profiles.py` - profile-level `privacy_mode` configuration.
+- `src/handsfree/commands/router.py` - passes selected profile privacy mode to handlers.
+- `src/handsfree/handlers/inbox.py` - applies privacy mode to inbox summaries and debug fields.
+- `src/handsfree/handlers/pr_summary.py` - applies privacy mode to PR descriptions and debug fields.
+- `tests/test_profile_privacy_mode.py` - focused profile configuration coverage.
+- `tests/test_router_privacy_mode.py` - focused router privacy-mode coverage.
+- `tests/test_inbox.py` - strict, balanced, debug inbox redaction coverage.
+- `tests/test_pr_summary.py` - strict, balanced, debug PR summary coverage.
+
+## Resolution notes
+The earlier scanner finding matched stale context that still described the
+router as strict-only. The current code routes the selected profile's privacy
+mode through the inbox and PR summary paths, and this tracker now points at the
+shipped implementation instead of repeating the obsolete annotation.
 
 ## Validation
 - Run `python -m pytest -q`.
