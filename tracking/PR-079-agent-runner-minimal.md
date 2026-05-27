@@ -31,11 +31,12 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 - Includes basic unit test coverage for the task processing loop (mocking backend calls).
 - Documentation includes: how to run, required env vars, and a sample flow.
 
-## Suggested files
-- `docs/agent-runner-setup.md` (keep setup docs pointed at the shipped implementation)
-- New runner module under `src/handsfree/agents/runner.py` (or similar)
-- Optional: `scripts/agent_runner.py`
-- Tests under `tests/`
+## Implemented files
+- `docs/MINIMAL_AGENT_RUNNER.md` documents local usage, environment variables, and sample flow.
+- `docs/agent-runner-setup.md` links from the custom-runner placeholder to the shipped minimal runner guide.
+- `src/handsfree/agents/runner.py` contains the minimal local runner loop.
+- `scripts/minimal_agent_runner.py` provides the local CLI entrypoint.
+- `tests/test_minimal_runner.py` covers the task-processing loop and failure path.
 
 ## References
 - `src/handsfree/agents/runner.py` - minimal local runner loop.
