@@ -28,3 +28,9 @@ Record from the glasses microphone and play back audio through glasses speakers 
 - `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesPlayer.kt` - active Expo WAV player implementation.
 - `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/ExpoGlassesAudioModule.kt` - active Expo JS bridge implementation.
 - `mobile/modules/expo-glasses-audio/index.ts` - JS/TS wrapper for app integration.
+
+## Resolution notes
+This tracking note points directly at the current Android source, Expo bridge,
+and PR-051 status docs. The older broad diagnostics checklist is not listed here
+because its Android section predates the recorder/player bridge implementation
+and is only historical planning context.
