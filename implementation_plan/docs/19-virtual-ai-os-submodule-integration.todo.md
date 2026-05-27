@@ -1195,7 +1195,7 @@ cadence remains parseable and resumable.
 
 ## VAI-106 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
