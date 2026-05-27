@@ -22,8 +22,8 @@ Wire the native iOS/Android glasses audio modules into the React Native app so t
   - "Test TTS" plays through glasses
 
 ## References
-- mobile/src/screens/GlassesDiagnosticsScreen.js
-- mobile/modules/expo-glasses-audio/README.md
-- mobile/glasses/BRIDGE_README.md
-- docs/meta-ai-glasses-audio-routing.md
-- PR-046..PR-051 native work
+- `mobile/src/screens/GlassesDiagnosticsScreen.js` - diagnostics UI integration for route status, recording, playback, and TTS playback.
+- `mobile/modules/expo-glasses-audio/README.md` - active Expo module API and development-build usage notes.
+- `mobile/glasses/BRIDGE_README.md` - standalone bridge architecture reference for Android recorder/player behavior.
+- `docs/implementation/IMPLEMENTATION_SUMMARY_PR052.md` - PR-052 implementation summary and validation notes.
+- `docs/meta-ai-glasses-audio-routing.md` - Bluetooth audio routing background for Meta AI Glasses.
