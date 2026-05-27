@@ -884,3 +884,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:190. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-077-codebase-scan-0fa82e5efa89.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-078 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:276
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_end_to_end.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:276. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-078-codebase-scan-6c6fd37fd2fd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-079 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:69
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:69. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-079-codebase-scan-e9739c3e25ee.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-080 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:99
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:99. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-080-codebase-scan-c270de6a3cd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-081 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:111
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-081-codebase-scan-352e1337216e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-082 Resolve code annotation in tests/test_virtual_ai_os_todo_queue.py:12
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_todo_queue.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:12. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-082-codebase-scan-4f48f7ac5f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
