@@ -62,11 +62,7 @@ def _write_events(path, *, task_id: str, title: str):
 
 
 def _daemon_backed_task_title() -> str:
-    task_queue_label = "to" + "do" + "-daemon"
-    return (
-        f"Integrate ipfs_datasets_py {task_queue_label} state "
-        "into HandsFree task orchestration"
-    )
+    return "Daemon-backed orchestration state fixture"
 
 
 def _daemon_display_label() -> str:
@@ -113,6 +109,8 @@ def test_delegate_tracks_virtual_ai_os_daemon_progress(
 
     task = get_agent_task_by_id(db_conn, result["task_id"])
     assert result["state"] == expected_task_state
+    assert result["todo_daemon_task_status"] == "ready"
+    assert result["todo_daemon_active_task_id"] == "VAI-005"
     assert task is not None
     assert task.state == expected_task_state
     assert result["spoken_text"] == expected_active_summary
@@ -120,6 +118,7 @@ def test_delegate_tracks_virtual_ai_os_daemon_progress(
     assert task.trace["todo_daemon_task_status"] == "ready"
     assert task.trace["todo_daemon_active_task_id"] == "VAI-005"
     assert task.trace["todo_daemon_result_envelope"]["structured_output"]["task_id"] == "VAI-005"
+    assert task.trace["todo_daemon_result_envelope"]["structured_output"]["title"] == title
 
 
 def test_status_advances_daemon_backed_task_to_completed(
