@@ -4,7 +4,7 @@
 Turn the documented agent runner skeleton into a minimal working implementation that can pick up agent tasks and drive them through completion/failure, suitable for demo / dev.
 
 ## Context
-The repo now includes a minimal local runner implementation in `src/handsfree/agents/runner.py`, a CLI entrypoint in `scripts/minimal_agent_runner.py`, and focused coverage in `tests/test_minimal_runner.py`. Keep this tracking note aligned with shipped behavior and avoid reintroducing obsolete placeholder phrasing. The minimal runner:
+PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal local runner in `src/handsfree/agents/runner.py`, a CLI entrypoint in `scripts/minimal_agent_runner.py`, usage docs in `docs/MINIMAL_AGENT_RUNNER.md`, and focused coverage in `tests/test_minimal_runner.py`. The minimal runner:
 - can read queued tasks
 - executes a stubbed “do work” routine
 - updates task state and emits progress/notifications (where available)
