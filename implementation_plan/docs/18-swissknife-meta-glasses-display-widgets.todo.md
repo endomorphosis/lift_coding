@@ -1038,7 +1038,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-093 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:170
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
