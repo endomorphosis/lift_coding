@@ -181,8 +181,18 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
     assert not daemon_module.enforce_android_validation_environment(task_board_path, REPO_ROOT)
 
 
-def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
+def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkeypatch):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    local_jdk_bin = tmp_path / ".tools" / "jdk17" / "jdk-17.0.18+8" / "bin"
+    local_jdk_bin.mkdir(parents=True)
+    (local_jdk_bin / "java").touch()
+    (tmp_path / ".tools" / "android-sdk" / "platform-tools").mkdir(parents=True)
+    original_with_android_validation_env = daemon_module.with_android_validation_env
+
+    def with_tmp_android_validation_env(command: str) -> str:
+        return original_with_android_validation_env(command, tmp_path)
+
+    monkeypatch.setattr(daemon_module, "with_android_validation_env", with_tmp_android_validation_env)
     task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     assert task_board_path.name == TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
@@ -215,6 +225,8 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
 """,
         encoding="utf-8",
     )
+    fixture_text = task_board_path.read_text(encoding="utf-8")
+    assert f"- Status: {PENDING_TASK_STATUS}" in fixture_text
     failed_command = "cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false"
     events = [
         {
