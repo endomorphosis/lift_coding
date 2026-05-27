@@ -19,3 +19,14 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The scan matched stale PR-079 tracking text that described the agent runner as
+example task-processing wording. The repo already has a minimal local runner
+in `src/handsfree/agents/runner.py`, a CLI in `scripts/minimal_agent_runner.py`,
+focused tests in `tests/test_minimal_runner.py`, and usage docs in
+`docs/MINIMAL_AGENT_RUNNER.md`.
+
+Updated `tracking/PR-079-agent-runner-minimal.md` to remove the annotation-
+triggering wording and point directly at the shipped runner behavior.
