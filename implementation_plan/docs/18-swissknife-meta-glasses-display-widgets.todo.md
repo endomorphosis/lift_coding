@@ -1467,7 +1467,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-132 Resolve merge retry-budget failure for MGW-130
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1478,7 +1478,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-133 Resolve merge retry-budget failure for MGW-127
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
