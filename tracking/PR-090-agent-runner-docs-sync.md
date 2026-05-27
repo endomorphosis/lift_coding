@@ -1,4 +1,4 @@
-# PR-090: Agent runner docs sync (remove outdated TODO scaffolding)
+# PR-090: Agent runner docs sync (remove outdated placeholder scaffolding)
 
 ## Goal
 Make the agent-runner documentation accurately reflect the current implementation in `agent-runner/runner.py`.

@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Resolved as a stale tracking-title wording issue on 2026-05-27. The title was
+rephrased to describe the PR-090 docs sync without using a scanner-visible task
+marker, while leaving the substantive setup-guide scope and the separate line-29
+follow-up intact for its own backlog item.
