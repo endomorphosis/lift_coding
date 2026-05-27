@@ -17,6 +17,8 @@ Enable reliable audio playback through Meta AI glasses speakers on iOS.
 - Works in an Expo development build (not Expo Go).
 
 ## References
-- mobile/glasses/README.md
-- mobile/glasses/ios/
-- mobile/src/screens/GlassesDiagnosticsScreen.js
+- `mobile/glasses/README.md` - shared mobile glasses setup and diagnostics notes.
+- `mobile/glasses/ios/IMPLEMENTATION.md` - iOS audio architecture and testing notes.
+- `mobile/glasses/ios/GlassesPlayer.swift` - native Bluetooth playback implementation.
+- `mobile/modules/expo-glasses-audio/ios/GlassesPlayer.swift` - Expo development-build player bridge implementation.
+- `mobile/src/screens/GlassesDiagnosticsScreen.js` - diagnostics UI entry point for playback controls.
