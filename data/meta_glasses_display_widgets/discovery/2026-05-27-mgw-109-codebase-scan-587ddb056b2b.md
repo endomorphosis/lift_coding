@@ -19,3 +19,15 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The cited tracker context was stale. The current Android module already routes
+recording through `GlassesRecorder`, which writes RIFF/WAV headers and PCM data,
+then updates chunk sizes on stop. Playback already routes through
+`GlassesPlayer`, which validates PCM WAV metadata, reads the data chunk, and
+plays mono 16-bit samples through `AudioTrack`.
+
+`tracking/PR-083-android-expo-glasses-audio-wav-playback.md` now records this
+as an MGW-109 resolution and keeps the line-7 context focused on the shipped
+implementation instead of the obsolete missing-work annotation.
