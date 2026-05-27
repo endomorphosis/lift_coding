@@ -1162,7 +1162,7 @@ cadence remains parseable and resumable.
 
 ## VAI-103 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
