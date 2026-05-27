@@ -1002,3 +1002,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:179. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-089-codebase-scan-2147ab0540df.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-090 Replace placeholder runtime path in tests/test_notification_delivery.py:16
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_notification_delivery.py
+- Validation: python3 -m py_compile tests/test_notification_delivery.py
+- Acceptance: Codebase scan filed this finding from tests/test_notification_delivery.py:16. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-090-codebase-scan-7ea0a035e91b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-091 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:140
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:140. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-091-codebase-scan-43df8518618b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-092 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:169
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:169. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-092-codebase-scan-b52448303122.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-093 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:170
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:170. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-093-codebase-scan-38d32e5240d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-094 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:228
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:228. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-094-codebase-scan-9da25a3fe7ab.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
