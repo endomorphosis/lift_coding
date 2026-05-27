@@ -13,7 +13,7 @@ if "pywebpush" not in sys.modules:
         pass
 
     def webpush(*args, **kwargs):
-        raise NotImplementedError("pywebpush test stub should be monkeypatched in tests")
+        return types.SimpleNamespace(status_code=202)
 
     pywebpush_module.WebPushException = WebPushException
     pywebpush_module.webpush = webpush
@@ -130,6 +130,24 @@ class TestGetNotificationProvider:
 
 class TestWebPushProvider:
     """Test the WebPushProvider."""
+
+    def test_send_notification_with_local_pywebpush_stub(self):
+        """Test WebPush send with the local pywebpush test double."""
+        provider = WebPushProvider(
+            vapid_public_key="test-public-key",
+            vapid_private_key="test-private-key",
+            vapid_subject="mailto:test@example.com",
+        )
+
+        result = provider.send(
+            subscription_endpoint="https://push.example.com/test",
+            notification_data={"message": "Test"},
+            subscription_keys={"p256dh": "test-p256dh", "auth": "test-auth"},
+        )
+
+        assert result["ok"] is True
+        assert result["message"] == "Notification sent (status: 202)"
+        assert result["delivery_id"].startswith("webpush-")
 
     def test_send_notification_success(self, monkeypatch):
         """Test successful WebPush notification send."""
