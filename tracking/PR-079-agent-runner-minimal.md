@@ -32,11 +32,11 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 - Documentation includes: how to run, required env vars, and a sample flow.
 
 ## Implementation status
-- Local setup docs: `docs/MINIMAL_AGENT_RUNNER.md`.
-- Broader GitHub runner setup guide: `docs/agent-runner-setup.md`, which points readers to the minimal runner guide when discussing local task processing.
-- Runner module: `src/handsfree/agents/runner.py`.
-- CLI entrypoint: `scripts/minimal_agent_runner.py`.
-- Focused tests: `tests/test_minimal_runner.py`.
+- `docs/MINIMAL_AGENT_RUNNER.md` documents local usage, environment variables, and sample flow.
+- `docs/agent-runner-setup.md` links from the custom-runner placeholder to the shipped minimal runner guide and points readers to it when discussing local task processing.
+- `src/handsfree/agents/runner.py` contains the minimal local runner loop.
+- `scripts/minimal_agent_runner.py` provides the local CLI entrypoint.
+- `tests/test_minimal_runner.py` covers the task-processing loop and failure path.
 
 ## References
 - `src/handsfree/agents/runner.py` - minimal local runner loop.
