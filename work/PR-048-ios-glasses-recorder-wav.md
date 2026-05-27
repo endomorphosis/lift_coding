@@ -18,7 +18,7 @@ Native glasses work lives under mobile/glasses/ and must be wired into an Expo d
 - mobile/src/screens/GlassesDiagnosticsScreen.js
 
 ## Resolution notes
-VAI-094 resolved the stale scanner finding at the original line 14 by removing
+MGW-111 resolved the stale scanner finding at the original line 14 by removing
 the broad glasses checklist from this PR-048 reference list. That checklist still
 tracks unrelated iOS, Android, validation, and polish follow-up work, while this
 work plan is now anchored to the active iOS recorder source, native bridge, JS
