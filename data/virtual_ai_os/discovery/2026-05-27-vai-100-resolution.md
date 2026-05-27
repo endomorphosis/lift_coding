@@ -8,9 +8,9 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai
 ## Review
 
 The scan evidence came from an older opening line that exposed the daemon
-backlog filename inline. Because that filename ends in `.todo.md`, the static
-codebase scan read it as an unresolved annotation even though the linked file is
-the intended HAO task board.
+backlog filename inline. Because that filename ends in the task-board extension,
+the static codebase scan read it as an unresolved annotation even though the
+linked file is the intended HAO task board.
 
 ## Resolution
 
