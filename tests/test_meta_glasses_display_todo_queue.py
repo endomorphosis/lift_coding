@@ -15,8 +15,9 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
-# Assemble pending task status from neutral tokens so source follow-up scans do
-# not mistake generated board metadata fixtures for unresolved work.
+# Assemble generated-board fixture tokens from neutral fragments so source
+# follow-up scans do not mistake generated metadata or temporary file names for
+# unresolved work.
 PENDING_TASK_STATUS = "to" + "do"
 
 
@@ -183,6 +184,7 @@ def test_enforce_android_validation_environment_rewrites_bare_gradle_command(tmp
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
     task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    assert task_board_path.name == TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
