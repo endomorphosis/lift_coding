@@ -17,6 +17,6 @@ Enable reliable audio playback through Meta AI glasses speakers on iOS.
 - Works in an Expo development build (not Expo Go).
 
 ## References
-- mobile/glasses/TODO.md
+- mobile/glasses/README.md
 - mobile/glasses/ios/
 - mobile/src/screens/GlassesDiagnosticsScreen.js
