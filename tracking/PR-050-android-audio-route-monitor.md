@@ -15,5 +15,7 @@ Expose real-time Android audio routing state (inputs/outputs, SCO) for Meta AI g
   - updates on connect/disconnect
 
 ## References
-- mobile/glasses/TODO.md
-- mobile/glasses/android/
+- mobile/glasses/README.md
+- mobile/glasses/android/README.md
+- mobile/glasses/android/AudioRouteMonitor.kt
+- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/AudioRouteMonitor.kt
