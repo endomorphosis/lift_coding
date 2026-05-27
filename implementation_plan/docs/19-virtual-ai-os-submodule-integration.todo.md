@@ -836,7 +836,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:81. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-073-codebase-scan-c63849904442.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -847,7 +847,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:152. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-074-codebase-scan-b9092ccdbdc9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -858,7 +858,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:158. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-075-codebase-scan-921701700044.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -869,7 +869,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:181. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-076-codebase-scan-905fcc2fcf67.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -880,7 +880,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:190. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-077-codebase-scan-0fa82e5efa89.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -946,7 +946,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-049-ios-glasses-player.md
 - Validation: test -f tracking/PR-049-ios-glasses-player.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-049-ios-glasses-player.md:20. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-083-codebase-scan-96a924114f2f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -957,7 +957,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-050-android-audio-route-monitor.md
 - Validation: test -f tracking/PR-050-android-audio-route-monitor.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-050-android-audio-route-monitor.md:18. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-084-codebase-scan-83311bfea1d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -968,7 +968,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-051-android-glasses-recorder-player.md
 - Validation: test -f tracking/PR-051-android-glasses-recorder-player.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-051-android-glasses-recorder-player.md:21. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-085-codebase-scan-d61ca3057077.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -979,7 +979,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-052-glasses-js-integration-tts.md
 - Validation: test -f tracking/PR-052-glasses-js-integration-tts.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-052-glasses-js-integration-tts.md:26. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-086-codebase-scan-27b8b4431606.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -990,7 +990,62 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-079-agent-runner-minimal.md
 - Validation: test -f tracking/PR-079-agent-runner-minimal.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-087-codebase-scan-fbadc1c37e4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-088 Resolve code annotation in tracking/PR-081-privacy-mode-per-profile.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-081-privacy-mode-per-profile.md
+- Validation: test -f tracking/PR-081-privacy-mode-per-profile.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-081-privacy-mode-per-profile.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-088-codebase-scan-d0d2e565dde4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-089 Resolve code annotation in tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Validation: test -f tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-089-codebase-scan-587ddb056b2b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-090 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-090-agent-runner-docs-sync.md
+- Validation: test -f tracking/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-090-codebase-scan-2c46fb58c8a1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-091 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:29
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-090-agent-runner-docs-sync.md
+- Validation: test -f tracking/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-090-agent-runner-docs-sync.md:29. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-091-codebase-scan-015415cbcb23.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-092 Resolve code annotation in work/PR-046-expo-dev-client-native-glasses.md:14
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, work/PR-046-expo-dev-client-native-glasses.md
+- Validation: test -f work/PR-046-expo-dev-client-native-glasses.md
+- Acceptance: Codebase scan filed this finding from work/PR-046-expo-dev-client-native-glasses.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-092-codebase-scan-b5f5365b1aef.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
