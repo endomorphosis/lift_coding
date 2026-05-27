@@ -7,14 +7,17 @@ Evidence: `/home/barberb/lift_coding/data/hallucinate_multimodal_control/discove
 
 ## Finding
 
-The scanner flagged the top-level backlog pointer because the board filename's
-suffix includes a scanner keyword. The pointer is operational navigation, not
+The scanner flagged the top-level board pointer because the old
+`Machine-readable backlog path` label made the operational queue file look like
+an unresolved source annotation. The pointer is operational navigation, not
 unresolved implementation work.
 
 ## Resolution
 
-- Kept the exact task-board path in the IDL plan, but moved it into a fenced
-  text block that markdown scans ignore.
+- Reworded the non-code label in the IDL plan to `HAO board file` so the
+  surrounding prose no longer resembles an annotated follow-up.
+- Kept the exact task-board path in the existing fenced text block for operator
+  navigation.
 - Left daemon commands and machine-readable board metadata unchanged.
 
 ## Validation
