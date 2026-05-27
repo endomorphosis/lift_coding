@@ -1214,3 +1214,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py:183. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-107-codebase-scan-76c84b15d30c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-108 Resolve merge retry-budget failure for VAI-105
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-108-vai-105-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-105. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-108-vai-105-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-105 from strategy blocked_tasks.
