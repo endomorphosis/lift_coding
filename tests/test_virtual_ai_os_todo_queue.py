@@ -136,6 +136,21 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
     assert paths["worktree_root"].exists()
 
 
+def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatch):
+    supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_supervisor
+
+    captured: dict[str, list[str]] = {}
+    monkeypatch.setattr(implementation_supervisor, "main", lambda args: captured.setdefault("args", args))
+
+    supervisor_module.main(["--once"])
+
+    args = captured["args"]
+    flag_index = args.index("--objective-surplus-findings-per-goal")
+    assert args[flag_index + 1] == str(supervisor_module.OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL)
+
+
 def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))

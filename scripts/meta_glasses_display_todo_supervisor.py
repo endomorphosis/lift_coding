@@ -234,6 +234,9 @@ def _run_supervisor(argv: list[str]) -> None:
         objective_max_refinement_children=parsed.objective_max_refinement_children,
         objective_max_refinement_depth=parsed.objective_max_refinement_depth,
         objective_persist_ast_dataset=parsed.objective_persist_ast_dataset,
+        objective_write_todo_vector_index=parsed.objective_write_todo_vector_index,
+        objective_todo_vector_index_path=parsed.objective_todo_vector_index_path,
+        objective_surplus_findings_per_goal=parsed.objective_surplus_findings_per_goal,
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
     )

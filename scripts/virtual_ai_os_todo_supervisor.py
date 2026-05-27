@@ -25,6 +25,7 @@ OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-a
 OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = 3
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
@@ -144,6 +145,7 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
     args = _with_default(args, "--objective-scan-min-open-tasks", "0")
+    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")
