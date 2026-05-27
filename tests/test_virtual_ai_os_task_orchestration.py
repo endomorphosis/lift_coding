@@ -83,6 +83,7 @@ def test_delegate_tracks_virtual_ai_os_daemon_progress(
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
     title = _daemon_backed_task_title()
+    expected_task_state = "running"
     expected_active_summary = _daemon_active_summary("VAI-005", title)
     _write_state(
         state_path,
@@ -111,8 +112,9 @@ def test_delegate_tracks_virtual_ai_os_daemon_progress(
     )
 
     task = get_agent_task_by_id(db_conn, result["task_id"])
+    assert result["state"] == expected_task_state
     assert task is not None
-    assert task.state == "running"
+    assert task.state == expected_task_state
     assert result["spoken_text"] == expected_active_summary
     assert task.trace is not None
     assert task.trace["todo_daemon_task_status"] == "ready"
