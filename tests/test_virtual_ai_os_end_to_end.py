@@ -179,6 +179,10 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
         summary=task_status["result_preview"],
         status=task_status["todo_daemon_task_status"],
     )
+    expected_widget_state = {
+        **manifest["state"]["values"],
+        "summary": expected_active_summary,
+    }
     receipt = {
         "receipt_cid": "sha256:render-receipt",
         "correlation_id": "corr-render",
@@ -225,11 +229,10 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
     assert payload.operation == "render_widget"
     assert payload.widget_id == "virtual-ai-os-task-progress"
     assert payload.manifest == manifest
-    assert payload.state == manifest["state"]["values"]
+    assert payload.state == expected_widget_state
     assert payload.fallback is not None
     assert payload.fallback["render_path"] == "mobile-card"
     assert payload.fallback["message"] == "Display unavailable. Showing task progress on phone."
-    assert payload.state["summary"] == expected_active_summary
 
 
 def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
