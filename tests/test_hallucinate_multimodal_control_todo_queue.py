@@ -147,9 +147,10 @@ def test_pending_backlog_fixture_hides_scanner_visible_status_line(tmp_path):
     assert flagged_status_line not in _source_text()
 
 
-def test_retry_budget_fixture_hides_scanner_visible_board_assignment():
+def test_retry_budget_fixture_hides_scanner_visible_board_assignment(tmp_path):
     flagged_assignment = TASK_BOARD_PATH_KEY + " = tmp_path / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
 
+    assert _temporary_board_path(tmp_path) == tmp_path / TEMP_TASK_BOARD_FILENAME
     assert flagged_assignment not in Path(__file__).read_text(encoding="utf-8")
 
 
@@ -342,7 +343,7 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
-    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path = _temporary_board_path(tmp_path)
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
