@@ -58,6 +58,13 @@ tracking note and setup guide now point at the shipped runner behavior, so the
 supervisor-fed backlog can parse the remaining metadata without re-ingesting the
 old docs-sync title as active work.
 
+HAO-165 resolved the duplicate scanner finding at the original line 29 by
+verifying that `docs/agent-runner-setup.md` now documents the shipped
+deterministic patch path through `apply_patches_from_instruction()` and
+`agent-runner/apply_instruction.py`. The stale example-processing acceptance
+wording is no longer present in this tracker, so no runner behavior change is
+needed for this follow-up.
+
 ## Suggested files
 - `docs/agent-runner-setup.md`
 - (optional) `agent-runner/README.md` for minor alignment / cross-links
