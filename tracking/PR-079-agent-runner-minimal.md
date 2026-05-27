@@ -31,11 +31,12 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 - Includes basic unit test coverage for the task processing loop (mocking backend calls).
 - Documentation includes: how to run, required env vars, and a sample flow.
 
-## Suggested files
-- `docs/agent-runner-setup.md` (keep setup docs pointed at the shipped implementation)
-- New runner module under `src/handsfree/agents/runner.py` (or similar)
-- Optional: `scripts/agent_runner.py`
-- Tests under `tests/`
+## Implementation status
+- Local setup docs: `docs/MINIMAL_AGENT_RUNNER.md`.
+- Broader GitHub runner setup guide: `docs/agent-runner-setup.md`, which points readers to the minimal runner guide when discussing local task processing.
+- Runner module: `src/handsfree/agents/runner.py`.
+- CLI entrypoint: `scripts/minimal_agent_runner.py`.
+- Focused tests: `tests/test_minimal_runner.py`.
 
 ## References
 - `src/handsfree/agents/runner.py` - minimal local runner loop.
@@ -51,6 +52,8 @@ HAO-161 verified that `needs_input` is a pause state for this runner: `run_once`
 only polls `created` and `running` tasks, and
 `tests/test_minimal_runner.py::test_run_once_leaves_needs_input_tasks_untouched`
 covers that paused tasks remain unchanged.
+HAO-162 replaced the stale setup-doc entry with implementation-status wording so
+the tracker reflects the shipped local docs and runner entrypoints.
 
 ## Validation
 - Run `python -m pytest -q`.
