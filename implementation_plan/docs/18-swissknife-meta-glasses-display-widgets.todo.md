@@ -1434,7 +1434,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-129 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
