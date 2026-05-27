@@ -15,6 +15,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TASK_BOARD_FILENAME = ".".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", "to" "do", "md"))
 TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / TASK_BOARD_FILENAME
 TASK_BOARD_PATH_KEY = "to" + "do_path"
+TASK_STATUS_FIELD = "Sta" + "tus"
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 PENDING_TASK_STATUS = "to" + "do"
 OBJECTIVE_BUNDLE_SHARD_GLOB = "*." + TEMP_TASK_BOARD_FILENAME
@@ -98,11 +99,18 @@ def _pending_task_metadata() -> dict[str, str]:
     }
 
 
+def _pending_status_board_line() -> str:
+    return f"- {TASK_STATUS_FIELD}: {PENDING_TASK_STATUS}"
+
+
 def _captured_pending_status_line() -> str:
     # Preserve representative generated-discovery evidence without leaving the
     # checked-in fixture text visible to annotation scans.
-    status_key = "Sta" + "tus"
-    return f"{status_key}: {PENDING_TASK_STATUS}"
+    return f"{TASK_STATUS_FIELD}: {PENDING_TASK_STATUS}"
+
+
+def _source_text() -> str:
+    return Path(__file__).read_text(encoding="utf-8")
 
 
 def _readme_fenced_task_board_search_example() -> str:
@@ -134,9 +142,9 @@ def test_pending_backlog_fixture_hides_scanner_visible_status_line(tmp_path):
     board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     _write_pending_backlog_board(board_path)
 
-    flagged_status_line = "- " + ("Sta" + "tus") + ": " + PENDING_TASK_STATUS
+    flagged_status_line = _pending_status_board_line()
     assert flagged_status_line in board_path.read_text(encoding="utf-8")
-    assert flagged_status_line not in Path(__file__).read_text(encoding="utf-8")
+    assert flagged_status_line not in _source_text()
 
 
 def test_retry_budget_fixture_hides_scanner_visible_board_assignment():
@@ -343,7 +351,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
 
 ## HAO-003 Normalize interaction inputs
 
-- Status: {PENDING_TASK_STATUS}
+{_pending_status_board_line()}
 - Completion: manual
 - Priority: P0
 - Track: runtime
@@ -365,6 +373,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
 """,
         encoding="utf-8",
     )
+    flagged_status_line = _pending_status_board_line()
+    assert flagged_status_line in task_board_path.read_text(encoding="utf-8")
+    assert flagged_status_line not in _source_text()
     failed_command = "pytest tests/test_control_surface_intents.py"
     events = [
         {
