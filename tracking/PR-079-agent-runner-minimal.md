@@ -13,7 +13,7 @@ The repo now includes a minimal local runner implementation in `src/handsfree/ag
 - Implement a simple runner process (Python) that:
   - polls for tasks in `created` state (or the appropriate state used by the backend)
   - transitions tasks: `created -> running -> completed` (or `failed` on exceptions)
-  - supports `needs_input` (optional: leave as TODO, but don’t crash)
+  - leaves `needs_input` tasks parked until an explicit resume moves them back to `running`
   - logs progress clearly
 - Provide a CLI entrypoint for local use.
 - Keep the runner safe by default:
