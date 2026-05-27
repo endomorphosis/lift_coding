@@ -11,5 +11,15 @@ Native glasses work lives under mobile/glasses/ and must be wired into an Expo d
 
 ## References
 - mobile/glasses/README.md
-- mobile/glasses/TODO.md
+- mobile/BUILD.md
+- mobile/IMPLEMENTATION_SUMMARY.md
+- mobile/modules/expo-glasses-audio/README.md
+- mobile/modules/expo-glasses-audio/expo-module.config.json
 - mobile/src/screens/GlassesDiagnosticsScreen.js
+
+## Resolution notes
+VAI-092 removed the broad glasses implementation checklist from this PR-046
+reference list because it still tracks unrelated iOS, Android, testing, and
+polish follow-up work. PR-046 is now anchored to the concrete Expo
+development-client docs, implementation summary, module config/API docs, and the
+diagnostics screen that exercise the native glasses plumbing.
