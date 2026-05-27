@@ -1159,3 +1159,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json
 - Validation: python3 -m json.tool hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json >/dev/null
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-102-codebase-scan-7360c608d6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-103 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-103-codebase-scan-a73074e556ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-104 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-104-codebase-scan-af1c8f84f823.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-105 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-105-codebase-scan-fbaaa894a103.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-106 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-106-codebase-scan-249bb3d996f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-107 Review swallowed exception path in hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py:183
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py:183. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-107-codebase-scan-76c84b15d30c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
