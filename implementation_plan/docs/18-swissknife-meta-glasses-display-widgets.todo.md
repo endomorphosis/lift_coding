@@ -1057,3 +1057,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
 - Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
 - Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:228. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-094-codebase-scan-9da25a3fe7ab.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-095 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:69
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:69. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-095-codebase-scan-e9739c3e25ee.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-096 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:99
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:99. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-096-codebase-scan-c270de6a3cd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-097 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:111
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:111. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-097-codebase-scan-352e1337216e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-098 Resolve code annotation in tests/test_virtual_ai_os_todo_queue.py:12
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_todo_queue.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:12. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-098-codebase-scan-4f48f7ac5f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-099 Resolve code annotation in tests/test_virtual_ai_os_todo_queue.py:109
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_todo_queue.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:109. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-099-codebase-scan-6955fef82baf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
