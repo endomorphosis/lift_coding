@@ -23,5 +23,7 @@ Wire the native iOS/Android glasses audio modules into the React Native app so t
 
 ## References
 - mobile/src/screens/GlassesDiagnosticsScreen.js
-- mobile/glasses/TODO.md
+- mobile/modules/expo-glasses-audio/README.md
+- mobile/glasses/BRIDGE_README.md
+- docs/meta-ai-glasses-audio-routing.md
 - PR-046..PR-051 native work
