@@ -1030,7 +1030,7 @@ cadence remains parseable and resumable.
 
 ## VAI-091 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:29
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
