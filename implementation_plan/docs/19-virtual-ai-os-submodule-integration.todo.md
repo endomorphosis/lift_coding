@@ -975,7 +975,7 @@ cadence remains parseable and resumable.
 
 ## VAI-086 Resolve code annotation in tracking/PR-052-glasses-js-integration-tts.md:26
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
