@@ -4,6 +4,9 @@ This guide explains how to set up an external agent runner that processes dispat
 
 Related docs:
 
+- [Agent Runner Quick Start](./AGENT_RUNNER_QUICKSTART.md)
+- [Agent Runner README](../agent-runner/README.md)
+- [Docker Compose Configuration](../docker-compose.agent-runner.yml)
 - [Package Guide](./PACKAGE_GUIDE.md)
 - [Authentication](./AUTHENTICATION.md)
 - [Webhooks](./webhooks.md)
@@ -78,13 +81,15 @@ If you have access to GitHub Copilot workspace agents, you can configure Copilot
 
 **Best for**: On-premise deployments, custom workflows, advanced automation
 
-A standalone service that polls the dispatch repository and processes tasks using custom logic or LLM integrations.
+A standalone service that polls the dispatch repository and processes tasks
+using deterministic patches, with extension points for custom logic or LLM
+integrations.
 
 **Pros**:
 - Full control over execution logic
 - Can run on-premise or in any cloud
-- Supports custom LLM providers
-- Advanced error handling and retry logic
+- Supports deterministic patch mode through fenced `diff` / `patch` blocks
+- Can be extended with custom LLM providers, validation, and retry logic
 
 **Cons**:
 - Infrastructure to maintain
@@ -134,6 +139,20 @@ export GITHUB_TOKEN=ghp_your_token_here
 # Don't set HANDSFREE_AGENT_DISPATCH_REPO or GITHUB_TOKEN
 # Result: copilot provider is used (fallback)
 ```
+
+The Docker runner in `agent-runner/runner.py` reads these environment variables:
+
+| Variable | Required | Description | Default |
+|----------|----------|-------------|---------|
+| `GITHUB_TOKEN` | Yes | GitHub personal access token or App token used for API calls and git push operations. | _(none)_ |
+| `DISPATCH_REPO` | No | Repository to poll for dispatch issues, in `owner/repo` format. | `endomorphosis/lift_coding_dispatch` |
+| `POLL_INTERVAL_SECONDS` | No | Seconds to wait between polling cycles. | `30` |
+| `AGENT_NAME` | No | Bot name used for git commits, comments, and logs. | `custom-agent` |
+| `LOG_LEVEL` | No | Python logging level. | `INFO` |
+
+When using `docker-compose.agent-runner.yml`, set `AGENT_RUNNER_GITHUB_TOKEN`
+and `HANDSFREE_AGENT_DISPATCH_REPO`; the compose file maps them into
+`GITHUB_TOKEN` and `DISPATCH_REPO` for the container.
 
 ### 1. GitHub Authentication
 
@@ -188,6 +207,8 @@ Resolves #123
 Where `#123` is the issue number of the dispatch issue in the dispatch repository.
 
 **Note**: Method 1 is preferred as it works across repositories and is more explicit.
+The shipped Docker runner includes both the metadata comment and a
+`Fixes owner/dispatch-repo#issue_number` reference in every PR body.
 
 ## GitHub Actions Workflow Example
 
@@ -396,97 +417,31 @@ See [Smoke Test Procedure](#smoke-test-procedure) below for detailed testing ste
 
 ## Docker Compose Custom Runner
 
-For a custom runner implementation, create `docker-compose.agent-runner.yml`:
+The repository already includes the Docker runner assets:
 
-```yaml
-version: '3.8'
+- `docker-compose.agent-runner.yml` - Compose configuration and `/workspace`
+  volume mount.
+- `agent-runner/Dockerfile` - Container image definition.
+- `agent-runner/requirements.txt` - Python dependencies.
+- `agent-runner/runner.py` - Polling runner implementation.
+- `agent-runner/apply_instruction.py` - Deterministic patch helper.
 
-services:
-  agent-runner:
-    build:
-      context: ./agent-runner
-      dockerfile: Dockerfile
-    environment:
-      # GitHub authentication
-      - GITHUB_TOKEN=${AGENT_RUNNER_GITHUB_TOKEN}
-      
-      # Dispatch repository configuration
-      - DISPATCH_REPO=${HANDSFREE_AGENT_DISPATCH_REPO:-endomorphosis/lift_coding_dispatch}
-      - POLL_INTERVAL_SECONDS=${AGENT_POLL_INTERVAL:-30}
-      
-      # Agent configuration
-      - AGENT_NAME=${AGENT_NAME:-custom-agent}
-      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
-      - LLM_API_KEY=${LLM_API_KEY}
-      - LLM_MODEL=${LLM_MODEL:-gpt-4}
-      
-      # Logging
-      - LOG_LEVEL=${LOG_LEVEL:-INFO}
-    
-    volumes:
-      # Mount workspace for processing tasks
-      - agent-workspace:/workspace
-      # Optional: mount custom scripts or plugins
-      - ./agent-runner/plugins:/app/plugins:ro
-    
-    restart: unless-stopped
-    
-    networks:
-      - agent-runner-net
+Create a `.env` file for Compose with at least:
 
-networks:
-  agent-runner-net:
-    driver: bridge
-
-volumes:
-  agent-workspace:
+```bash
+AGENT_RUNNER_GITHUB_TOKEN=ghp_your_token_here
+HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
 ```
 
-Create `agent-runner/Dockerfile`:
+Then start the runner:
 
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy agent runner code
-COPY . .
-
-# Run the agent
-CMD ["python", "runner.py"]
-```
-
-Create `agent-runner/requirements.txt`:
-
-```
-# Core dependencies
-PyGithub>=2.1.1
-
-# Optional dependencies for extending the runner
-# Uncomment and install based on your needs:
-
-# For LLM integration (OpenAI, Anthropic, etc.)
-# openai>=1.0.0
-
-# For advanced HTTP requests
-# httpx>=0.24.0
-
-# For loading .env files
-# python-dotenv>=1.0.0
+```bash
+docker-compose -f docker-compose.agent-runner.yml up -d
 ```
 
 The `agent-runner/runner.py` file is provided in the repository and implements a complete workflow that:
 
-1. **Polls for dispatch issues**: Monitors the dispatch repository for issues labeled `copilot-agent`
+1. **Polls for dispatch issues**: Monitors open dispatch issues labeled `copilot-agent`, oldest first, and skips issue numbers already present in the running process's `processed_issues` cache.
 2. **Extracts task metadata**: Parses the issue body to extract `task_id`, `instruction`, and `target_repo`
 3. **Clones the target repository**: Uses git to clone the repository into `/workspace`
 4. **Creates a branch**: Names the branch `agent-task-<task_id_prefix>` where `task_id_prefix` is the first 8 characters of the task ID
@@ -497,21 +452,22 @@ The `agent-runner/runner.py` file is provided in the repository and implements a
    - Title: `"Agent task: {issue.title}"`
    - Body containing correlation metadata: `<!-- agent_task_metadata {"task_id": "{task_id}"} -->`
    - Issue reference: `Fixes {dispatch_repo}#{issue_number}`
-9. **Adds processed label**: Labels the dispatch issue with `processed` to prevent reprocessing
+9. **Records success**: Comments on the dispatch issue, adds a `processed` label when available, and records the issue number in the in-memory `processed_issues` cache.
 10. **Cleans up workspace**: Removes the cloned repository from `/workspace` after processing
 
 ### Deterministic Patch Mode
 
 The shipped Docker runner handles deterministic patches in `process_task` after
 cloning the target repository and creating the `agent-task-<task_id_prefix>`
-branch. It calls `apply_patches_from_instruction(repo_dir, instruction)`, which
-writes the task instruction to a temporary file and delegates to
-`agent-runner/apply_instruction.py`.
+branch, but before creating the trace file and PR. It calls
+`apply_patches_from_instruction(repo_dir, instruction)`, which:
 
-1. Extract all fenced `diff` and `patch` blocks from the instruction
-2. Apply them sequentially using `git apply --index`
-3. Treat instructions with no patch blocks as a successful no-op
-4. Abort the task if any patch fails to apply, preventing a misleading PR
+1. Writes the issue instruction to a temporary markdown file
+2. Invokes `python agent-runner/apply_instruction.py --instruction-file <file> --repo-dir <repo>`
+3. Extracts fenced `diff` and `patch` blocks from the instruction
+4. Applies each patch sequentially with `git apply --index`
+5. Treats instructions with no patch blocks as a successful no-op
+6. Aborts the task if any patch fails to apply, preventing a misleading PR
 
 **Example instruction with patch:**
 
@@ -566,7 +522,6 @@ For customization examples and integration patterns, see `agent-runner/README.md
      ```bash
      AGENT_RUNNER_GITHUB_TOKEN=ghp_your_token_here
      HANDSFREE_AGENT_DISPATCH_REPO=owner/lift_coding_dispatch
-     LLM_API_KEY=your_llm_api_key_here
      ```
 
 3. **Build and run**:
@@ -639,14 +594,12 @@ docker-compose -f docker-compose.agent-runner.yml logs -f agent-runner
 INFO - Found new dispatch issue: #X - Test agent task - Hello World
 INFO - Processing task: Test agent task - Hello World
 INFO - Task ID: smoke-test-12345678
-INFO - Cloning repository to /workspace/...
+INFO - Cloning owner/your-target-repo to /workspace/owner_your-target-repo
 INFO - Creating new branch agent-task-smoke-te...
-INFO - Created trace file at .../agent-tasks/smoke-te.md
-INFO - Changes committed
-INFO - Pushed branch agent-task-smoke-te to remote
-INFO - Creating new PR...
-INFO - Created PR: #Y
-INFO - Added 'processed' label to issue
+INFO - Created trace file: /workspace/owner_your-target-repo/agent-tasks/smoke-te.md
+INFO - Committed and pushed changes to agent-task-smoke-te
+INFO - Creating new PR from agent-task-smoke-te to main
+INFO - Created PR #Y: https://github.com/owner/your-target-repo/pull/Y
 INFO - Task processed successfully: X
 ```
 
@@ -680,9 +633,9 @@ Go back to the dispatch issue and verify:
 
 1. **Comments added**:
    - "🤖 [agent-name] started processing this task at [timestamp]"
-   - "✅ [agent-name] completed processing this task.\n\nPull request created: [PR URL]"
+   - "[agent-name] completed processing this task and noted that a pull request was created in the target repository."
 
-2. **Label added**: The `processed` label should be present (if the label exists in the repository)
+2. **Label added**: The `processed` label should be present if it exists in the repository. The current runner also keeps an in-memory `processed_issues` cache while the process is running.
 
 #### Step 5: Test Idempotency
 
@@ -701,9 +654,9 @@ To verify the runner handles existing PRs correctly:
    **For GitHub Actions**: Manually re-trigger the workflow or create a comment on the issue
 
 3. **Expected behavior**:
-   - Runner should skip the issue (already in processed_issues cache)
-   - OR if cache was cleared, runner should update the existing PR instead of creating a new one
-   - Check logs: "PR already exists: #Y, updating..."
+   - While the process is still running, the runner skips issue numbers already in `processed_issues`
+   - After a restart, the cache is empty; the runner should reuse the existing branch and update the existing PR instead of creating a new one
+   - Check logs for "Branch agent-task-smoke-te already exists remotely" and "Updating existing PR #Y"
 
 4. **Verify**: No duplicate branches or PRs should be created
 
@@ -785,7 +738,7 @@ Your agent runner is working correctly if:
 ✅ Branch is created with correct naming pattern  
 ✅ Trace file contains correlation metadata  
 ✅ PR is created with proper metadata and issue reference  
-✅ Dispatch issue is marked as processed  
+✅ Dispatch issue gets a `processed` label when that label exists
 ✅ Re-running doesn't create duplicate PRs (idempotency)  
 ✅ (Optional) HandsFree marks the task as completed  
 
