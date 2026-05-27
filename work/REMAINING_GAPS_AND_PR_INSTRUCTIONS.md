@@ -165,7 +165,7 @@ If CLI is not available, create PRs manually:
    git push -u origin draft/pr-026-notification-push-delivery
    ```
 
-2. Go to https://github.com/$REPO/pulls/new
+2. Go to https://github.com/endomorphosis/lift_coding/pulls/new
 3. Select base: `main`, compare: `draft/pr-026-notification-push-delivery`
 4. Title: "PR-026: Automatic push notification delivery"
 5. Body: Copy content from `tracking/PR-026-notification-push-delivery.md`
@@ -174,14 +174,14 @@ If CLI is not available, create PRs manually:
 
 Repeat for PR-027 and PR-028.
 
-## Expected PR URLs
+## Recording Created PR URLs
 
-Once created, the PRs should be at:
-- https://github.com/$REPO/pull/XXX (PR-026)
-- https://github.com/$REPO/pull/YYY (PR-027)
-- https://github.com/$REPO/pull/ZZZ (PR-028)
-
-Where XXX, YYY, ZZZ are the next available PR numbers (likely 139, 140, 141 or similar), and $REPO is the repository (endomorphosis/lift_coding).
+GitHub assigns final PR numbers when each draft PR is created. After running
+`gh pr create` or using the GitHub UI, record the concrete URL returned or shown
+for each branch:
+- PR-026: `draft/pr-026-notification-push-delivery`
+- PR-027: `draft/pr-027-profile-verbosity-tuning`
+- PR-028: `draft/pr-028-external-agent-runner-setup`
 
 ## Priority Order
 
