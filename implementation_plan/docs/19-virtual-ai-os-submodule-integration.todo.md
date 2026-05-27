@@ -964,7 +964,7 @@ cadence remains parseable and resumable.
 
 ## VAI-085 Resolve code annotation in tracking/PR-051-android-glasses-recorder-player.md:21
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
