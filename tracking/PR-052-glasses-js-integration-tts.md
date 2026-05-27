@@ -27,3 +27,10 @@ Wire the native iOS/Android glasses audio modules into the React Native app so t
 - `mobile/glasses/BRIDGE_README.md` - standalone bridge architecture reference for Android recorder/player behavior.
 - `docs/implementation/IMPLEMENTATION_SUMMARY_PR052.md` - PR-052 implementation summary and validation notes.
 - `docs/meta-ai-glasses-audio-routing.md` - Bluetooth audio routing background for Meta AI Glasses.
+
+## Resolution notes
+This tracking note now points at the current PR-052 implementation artifacts:
+the diagnostics screen, active Expo module docs, bridge architecture notes,
+implementation summary, and audio-routing guide. The older broad glasses
+diagnostics checklist is historical planning context and is intentionally not
+used as the PR-052 reference.
