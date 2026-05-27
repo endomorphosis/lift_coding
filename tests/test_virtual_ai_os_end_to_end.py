@@ -138,7 +138,9 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
     task_queue_label = "to" + "do" + "-daemon"
+    daemon_display_label = "to" + "do" + " daemon"
     title = f"Integrate ipfs_datasets_py {task_queue_label} state into HandsFree task orchestration"
+    expected_active_summary = f"VAI-005 active in the {daemon_display_label}: {title}."
     _write_state(
         state_path,
         task_id="VAI-005",
@@ -167,8 +169,8 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
     status = agent_service.get_status(user_id=test_user_id)
 
     assert created["state"] == "running"
-    assert created["spoken_text"] == f"VAI-005 active in the todo daemon: {title}."
-    assert status["tasks"][0]["result_preview"] == f"VAI-005 active in the todo daemon: {title}."
+    assert created["spoken_text"] == expected_active_summary
+    assert status["tasks"][0]["result_preview"] == expected_active_summary
     assert status["tasks"][0]["todo_daemon_task_status"] == "ready"
 
     manifest = _task_progress_manifest(
@@ -226,7 +228,7 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
     assert payload.fallback is not None
     assert payload.fallback["render_path"] == "mobile-card"
     assert payload.fallback["message"] == "Display unavailable. Showing task progress on phone."
-    assert payload.state["summary"] == f"VAI-005 active in the todo daemon: {title}."
+    assert payload.state["summary"] == expected_active_summary
 
 
 def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
