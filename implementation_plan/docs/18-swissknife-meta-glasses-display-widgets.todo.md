@@ -1119,7 +1119,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-049-ios-glasses-player.md
 - Validation: test -f tracking/PR-049-ios-glasses-player.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-049-ios-glasses-player.md:20. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-100-codebase-scan-96a924114f2f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1130,7 +1130,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-050-android-audio-route-monitor.md
 - Validation: test -f tracking/PR-050-android-audio-route-monitor.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-050-android-audio-route-monitor.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-101-codebase-scan-83311bfea1d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1141,7 +1141,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-051-android-glasses-recorder-player.md
 - Validation: test -f tracking/PR-051-android-glasses-recorder-player.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-051-android-glasses-recorder-player.md:21. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-102-codebase-scan-d61ca3057077.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1152,7 +1152,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-052-glasses-js-integration-tts.md
 - Validation: test -f tracking/PR-052-glasses-js-integration-tts.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-052-glasses-js-integration-tts.md:26. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-103-codebase-scan-27b8b4431606.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1163,7 +1163,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
 - Validation: test -f tracking/PR-079-agent-runner-minimal.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-104-codebase-scan-fbadc1c37e4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1225,11 +1225,19 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-110 Resolve code annotation in work/PR-047-ios-audio-route-monitor.md:14
 
+<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
 - Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/meta_glasses_display_widgets/discovery, work/PR-047-ios-audio-route-monitor.md
 - Validation: test -f work/PR-047-ios-audio-route-monitor.md
 - Acceptance: Codebase scan filed this finding from work/PR-047-ios-audio-route-monitor.md:14. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-110-codebase-scan-98ff09f42056.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1240,18 +1248,30 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
+<<<<<<< HEAD
 - Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/meta_glasses_display_widgets/discovery, work/PR-048-ios-glasses-recorder-wav.md
 - Validation: test -f work/PR-048-ios-glasses-recorder-wav.md
 - Acceptance: Codebase scan filed this finding from work/PR-048-ios-glasses-recorder-wav.md:14. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-111-codebase-scan-841f4db539b0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-112 Resolve code annotation in work/PR-081-privacy-mode-per-profile.md:18
 
+<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
 - Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/meta_glasses_display_widgets/discovery, work/PR-081-privacy-mode-per-profile.md
 - Validation: test -f work/PR-081-privacy-mode-per-profile.md
 - Acceptance: Codebase scan filed this finding from work/PR-081-privacy-mode-per-profile.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-112-codebase-scan-6dfbe572b893.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1262,18 +1282,30 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
+<<<<<<< HEAD
 - Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/meta_glasses_display_widgets/discovery, work/PR-090-agent-runner-docs-sync.md
 - Validation: test -f work/PR-090-agent-runner-docs-sync.md
 - Acceptance: Codebase scan filed this finding from work/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-113-codebase-scan-9b624a3cfffc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## MGW-114 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
 
+<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P2
 - Track: docs
 - Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/meta_glasses_display_widgets/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-114-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
