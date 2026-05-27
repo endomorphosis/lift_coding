@@ -15,6 +15,8 @@ queue tests. The path is intentional test setup, not unresolved follow-up work.
 - Renamed the local fixture path to `task_board_path`.
 - Reused the existing neutral task-board filename and keyword constants when
   calling `record_retry_budget_findings()`.
+- Added a regression assertion for the original scanner-visible assignment so
+  the fixture path cannot be reintroduced as plain source text.
 - Preserved the same daemon-parseable temporary board behavior.
 
 ## Validation
