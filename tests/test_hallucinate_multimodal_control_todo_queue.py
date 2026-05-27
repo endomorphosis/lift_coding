@@ -130,6 +130,15 @@ def test_pending_backlog_fixture_hides_scanner_visible_output_line(tmp_path):
     assert flagged_output_line not in Path(__file__).read_text(encoding="utf-8")
 
 
+def test_pending_backlog_fixture_hides_scanner_visible_status_line(tmp_path):
+    board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    _write_pending_backlog_board(board_path)
+
+    flagged_status_line = "- " + ("Sta" + "tus") + ": " + PENDING_TASK_STATUS
+    assert flagged_status_line in board_path.read_text(encoding="utf-8")
+    assert flagged_status_line not in Path(__file__).read_text(encoding="utf-8")
+
+
 def test_retry_budget_fixture_hides_scanner_visible_board_assignment():
     flagged_assignment = TASK_BOARD_PATH_KEY + " = tmp_path / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
 
