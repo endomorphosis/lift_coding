@@ -1225,7 +1225,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-110 Resolve code annotation in work/PR-047-ios-audio-route-monitor.md:14
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
