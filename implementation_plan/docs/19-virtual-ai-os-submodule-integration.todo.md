@@ -1052,7 +1052,7 @@ cadence remains parseable and resumable.
 
 ## VAI-093 Resolve code annotation in work/PR-047-ios-audio-route-monitor.md:14
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
