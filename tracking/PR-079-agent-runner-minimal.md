@@ -13,7 +13,7 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 - Implement a simple runner process (Python) that:
   - polls for tasks in `created` state (or the appropriate state used by the backend)
   - transitions tasks: `created -> running -> completed` (or `failed` on exceptions)
-  - leaves `needs_input` tasks untouched without crashing the local loop
+  - leaves `needs_input` tasks parked and untouched until an explicit resume moves them back to `running`, without crashing the local loop
   - logs progress clearly
 - Provide a CLI entrypoint for local use.
 - Keep the runner safe by default:
