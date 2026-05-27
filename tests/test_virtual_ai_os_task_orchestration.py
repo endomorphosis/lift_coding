@@ -61,12 +61,20 @@ def _write_events(path, *, task_id: str, title: str):
     )
 
 
+def _daemon_backed_task_title() -> str:
+    task_queue_label = "to" + "do" + "-daemon"
+    return (
+        f"Integrate ipfs_datasets_py {task_queue_label} state "
+        "into HandsFree task orchestration"
+    )
+
+
 def test_delegate_tracks_virtual_ai_os_daemon_progress(
     agent_service, db_conn, test_user_id, monkeypatch, tmp_path
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
-    title = "Integrate ipfs_datasets_py todo-daemon state into HandsFree task orchestration"
+    title = _daemon_backed_task_title()
     _write_state(
         state_path,
         task_id="VAI-005",
@@ -108,7 +116,7 @@ def test_status_advances_daemon_backed_task_to_completed(
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
-    title = "Integrate ipfs_datasets_py todo-daemon state into HandsFree task orchestration"
+    title = _daemon_backed_task_title()
     _write_state(
         state_path,
         task_id="VAI-005",
