@@ -73,13 +73,17 @@ def _daemon_display_label() -> str:
     return "to" + "do" + " daemon"
 
 
+def _daemon_active_summary(task_id: str, title: str) -> str:
+    return f"{task_id} active in the {_daemon_display_label()}: {title}."
+
+
 def test_delegate_tracks_virtual_ai_os_daemon_progress(
     agent_service, db_conn, test_user_id, monkeypatch, tmp_path
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
     title = _daemon_backed_task_title()
-    expected_active_summary = f"VAI-005 active in the {_daemon_display_label()}: {title}."
+    expected_active_summary = _daemon_active_summary("VAI-005", title)
     _write_state(
         state_path,
         task_id="VAI-005",
