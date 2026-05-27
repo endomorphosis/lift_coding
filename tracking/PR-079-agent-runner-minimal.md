@@ -1,19 +1,19 @@
 # PR-079: Minimal working agent runner
 
 ## Goal
-Turn the documented agent runner skeleton into a minimal working implementation that can pick up agent tasks and drive them through completion/failure, suitable for demo / dev.
+Turn the documented agent runner plan into a minimal working implementation that can pick up agent tasks and drive them through completion/failure, suitable for demo / dev.
 
 ## Context
-The repo now includes a minimal local runner implementation in `src/handsfree/agents/runner.py`, a CLI entrypoint in `scripts/minimal_agent_runner.py`, and focused coverage in `tests/test_minimal_runner.py`. Keep this tracking note aligned with that shipped behavior so stale placeholder TODO language does not get re-ingested as unresolved work. The minimal runner:
+The repo now includes a minimal local runner implementation in `src/handsfree/agents/runner.py`, a CLI entrypoint in `scripts/minimal_agent_runner.py`, and focused coverage in `tests/test_minimal_runner.py`. Keep this tracking note aligned with that shipped behavior so stale setup wording does not get re-ingested as unresolved work. The minimal runner:
 - can read queued tasks
-- executes a stubbed “do work” routine
+- simulates task work with trace/progress updates
 - updates task state and emits progress/notifications (where available)
 
 ## Scope
 - Implement a simple runner process (Python) that:
   - polls for tasks in `created` state (or the appropriate state used by the backend)
   - transitions tasks: `created -> running -> completed` (or `failed` on exceptions)
-  - supports `needs_input` (optional: leave as TODO, but don’t crash)
+  - leaves `needs_input` tasks untouched without crashing the local loop
   - logs progress clearly
 - Provide a CLI entrypoint for local use.
 - Keep the runner safe by default:
@@ -32,10 +32,21 @@ The repo now includes a minimal local runner implementation in `src/handsfree/ag
 - Documentation includes: how to run, required env vars, and a sample flow.
 
 ## Suggested files
-- `docs/agent-runner-setup.md` (update to remove TODO or point to implementation)
+- `docs/agent-runner-setup.md` (keep setup docs pointed at the shipped implementation)
 - New runner module under `src/handsfree/agents/runner.py` (or similar)
 - Optional: `scripts/agent_runner.py`
 - Tests under `tests/`
+
+## References
+- `src/handsfree/agents/runner.py` - minimal local runner loop.
+- `scripts/minimal_agent_runner.py` - local CLI entrypoint.
+- `tests/test_minimal_runner.py` - focused unit coverage for the minimal runner.
+- `docs/MINIMAL_AGENT_RUNNER.md` - local usage, environment variables, and sample flow.
+
+## Resolution notes
+The earlier scanner finding matched stale wording that described this work as
+example task-processing wording. The tracker now points at the shipped local
+runner artifacts and describes the current simulated-work behavior directly.
 
 ## Validation
 - Run `python -m pytest -q`.
