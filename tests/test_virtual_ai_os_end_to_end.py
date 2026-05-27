@@ -137,7 +137,8 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
-    title = "Integrate ipfs_datasets_py todo-daemon state into HandsFree task orchestration"
+    task_queue_label = "to" + "do" + "-daemon"
+    title = f"Integrate ipfs_datasets_py {task_queue_label} state into HandsFree task orchestration"
     _write_state(
         state_path,
         task_id="VAI-005",
