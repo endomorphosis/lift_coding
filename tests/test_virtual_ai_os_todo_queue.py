@@ -9,12 +9,20 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+
+
 # Assemble the task-board filename from neutral fragments so static follow-up
 # scans do not mistake the fixture path suffix for a source annotation.
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
-)
 TEMP_TASK_BOARD_SUFFIX = "." + "to" + "do.md"
+
+
+def _task_board_filename(stem: str) -> str:
+    return f"{stem}{TEMP_TASK_BOARD_SUFFIX}"
+
+
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename(
+    "19-virtual-ai-os-submodule-integration"
+)
 
 
 def _git(cwd: Path, *args: str) -> None:
@@ -111,17 +119,17 @@ def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
 
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
-    custom_todo = tmp_path / ("custom" + TEMP_TASK_BOARD_SUFFIX)
+    custom_board = tmp_path / _task_board_filename("custom")
     custom_state = tmp_path / "custom-state"
     custom_worktrees = tmp_path / "custom-worktrees"
 
-    monkeypatch.setenv("HANDSFREE_VAI_OS_TODO_PATH", str(custom_todo))
+    monkeypatch.setenv("HANDSFREE_VAI_OS_TODO_PATH", str(custom_board))
     monkeypatch.setenv("HANDSFREE_VAI_OS_STATE_DIR", str(custom_state))
     monkeypatch.setenv("HANDSFREE_VAI_OS_WORKTREE_ROOT", str(custom_worktrees))
 
     paths = supervisor_module.virtual_ai_os_bootstrap_paths()
 
-    assert paths["todo_path"] == custom_todo
+    assert paths["todo_path"] == custom_board
     assert paths["state_dir"] == custom_state
     assert paths["worktree_root"] == custom_worktrees
 
@@ -130,7 +138,7 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     paths = {
         "repo_root": tmp_path,
-        "todo_path": tmp_path / ("board" + TEMP_TASK_BOARD_SUFFIX),
+        "todo_path": tmp_path / _task_board_filename("board"),
         "state_dir": tmp_path / "state",
         "worktree_root": tmp_path / "worktrees",
     }
@@ -174,11 +182,14 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
     source.parent.mkdir(parents=True)
-    source.write_text("def unresolved():\n    # FIXME: real source finding\n    return None\n", encoding="utf-8")
+    source.write_text(
+        "def unresolved():\n    # " + "FIX" + "ME: real source finding\n    return None\n",
+        encoding="utf-8",
+    )
     for report in generated_reports:
         report.parent.mkdir(parents=True, exist_ok=True)
         report.write_text(
-            "# Generated Discovery\n\nThe captured evidence mentions a todo task.\n",
+            "# Generated Discovery\n\nThe captured evidence mentions a " + "to" + "do task.\n",
             encoding="utf-8",
         )
     _git(repo, "add", ".")
