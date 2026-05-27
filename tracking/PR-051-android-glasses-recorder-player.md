@@ -18,5 +18,13 @@ Record from the glasses microphone and play back audio through glasses speakers 
   - Output WAV is valid and audible
 
 ## References
-- mobile/glasses/TODO.md
-- mobile/glasses/android/
+- `mobile/glasses/README.md` - shared mobile glasses setup and diagnostics notes.
+- `mobile/glasses/android/README.md` - Android recorder/player architecture and validation checklist.
+- `mobile/glasses/IMPLEMENTATION_STATUS_PR051.md` - PR-051 recorder/player bridge implementation summary.
+- `mobile/glasses/android/GlassesRecorder.kt` - standalone Android SCO recorder reference.
+- `mobile/glasses/android/GlassesPlayer.kt` - standalone Android SCO WAV player reference.
+- `mobile/glasses/android/GlassesAudioModule.kt` - standalone React Native bridge reference.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesRecorder.kt` - active Expo recorder implementation.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesPlayer.kt` - active Expo WAV player implementation.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/ExpoGlassesAudioModule.kt` - active Expo JS bridge implementation.
+- `mobile/modules/expo-glasses-audio/index.ts` - JS/TS wrapper for app integration.
