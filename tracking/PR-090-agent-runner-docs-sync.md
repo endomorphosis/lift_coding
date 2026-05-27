@@ -30,8 +30,8 @@ workspace cleanup.
 
 ## Acceptance criteria
 - `docs/agent-runner-setup.md` describes the shipped Docker runner workflow in
-  `agent-runner/runner.py` instead of stale placeholder task-processing
-  examples.
+  `agent-runner/runner.py`, including the deterministic patch path through
+  `apply_patches_from_instruction()` and `agent-runner/apply_instruction.py`.
 - The setup guide documents deterministic patch mode, correlation metadata,
   `/workspace` cleanup, and the distinction between the in-memory processed
   issue cache and the `processed` issue label.
@@ -48,8 +48,9 @@ workspace cleanup.
   instead of an example processing stub.
 
 ## Resolution notes
-VAI-091 removed the divergent placeholder `process_task` sample from
-`docs/agent-runner-setup.md` and anchored the deterministic patch section to
+VAI-091 resolved the line 29 scan follow-up by confirming
+`docs/agent-runner-setup.md` no longer carries the divergent `process_task`
+sample and by anchoring the deterministic patch section to
 `apply_patches_from_instruction` plus `agent-runner/apply_instruction.py`.
 
 HAO-164 resolved the stale scanner finding at line 1 by changing this tracker
