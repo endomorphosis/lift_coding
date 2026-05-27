@@ -1,7 +1,7 @@
 # PR-083: Android Expo glasses audio — WAV record + playback
 
 ## Goal
-Make the Android Expo native module (`expo-glasses-audio`) actually record to WAV and play WAV audio through the glasses/BT route (SCO) so the end-to-end TTS loop can be tested on Android.
+Document the landed Android Expo native module (`expo-glasses-audio`) behavior for recording WAV audio and playing WAV audio through the glasses/BT route (SCO), so the end-to-end TTS loop can be tested on Android.
 
 ## Context
 The Android Expo native module ships the PR-083 WAV path.
@@ -9,7 +9,8 @@ The Android Expo native module ships the PR-083 WAV path.
 and `playAudio` through `GlassesPlayer`: the recorder writes RIFF/WAV headers
 plus PCM data and updates file sizes on stop, while the player parses PCM WAV
 metadata and plays mono 16-bit audio through `AudioTrack` using the
-voice-communication route.
+voice-communication route. The bridge cleans up SCO routing after playback
+completion, stop, timeout, or error paths.
 
 iOS already has working implementations under `mobile/modules/expo-glasses-audio/ios/`.
 
@@ -45,13 +46,6 @@ iOS already has working implementations under `mobile/modules/expo-glasses-audio
 - `mobile/modules/expo-glasses-audio/index.ts`, `mobile/src/types/expo-glasses-audio.d.ts`, and `mobile/modules/expo-glasses-audio/README.md` document and export the record/play module surface.
 - Remaining validation is hardware-facing Android device verification of audible playback and SCO cleanup.
 
-## Resolution notes
-MGW-109 resolved the stale scanner finding at line 7. The earlier context
-described missing Android WAV playback and recording work, but the current code
-implements both paths through `GlassesPlayer` and `GlassesRecorder`. This
-tracker now records the shipped implementation state so stale follow-up wording
-is not re-ingested as open work.
-
 ## Suggested files
 - `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/ExpoGlassesAudioModule.kt`
 - `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesRecorder.kt`
@@ -63,3 +57,19 @@ is not re-ingested as open work.
 ## Validation
 - Android build via the existing mobile build instructions.
 - Basic lint/typecheck if available in `mobile/`.
+
+## References
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/ExpoGlassesAudioModule.kt` - active Expo bridge for recording, playback, SCO setup/cleanup, and status events.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesRecorder.kt` - active Android recorder that writes PCM data into WAV files and updates WAV sizes on stop.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesPlayer.kt` - active Android WAV parser and PCM playback implementation.
+- `mobile/modules/expo-glasses-audio/index.ts` - JS/TS module surface for recording and playback.
+- `mobile/modules/expo-glasses-audio/README.md` - module API and Android recording/playback behavior.
+
+## Resolution notes
+MGW-109 and VAI-089 both matched stale PR-083 tracking text that described
+missing Android WAV playback and recording work. The current Android
+implementation records non-empty WAV files, parses PCM 16-bit mono WAV files
+for playback, emits recording/playback events through the Expo bridge, and
+cleans up SCO routing on completion, stop, timeout, or playback error paths.
+This tracker now records the shipped implementation state so stale follow-up
+wording is not re-ingested as open work.
