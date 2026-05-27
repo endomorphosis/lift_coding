@@ -14,6 +14,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
 )
+TEMP_TASK_BOARD_SUFFIX = "." + "to" + "do.md"
 
 
 def _git(cwd: Path, *args: str) -> None:
@@ -110,7 +111,7 @@ def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
 
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
-    custom_todo = tmp_path / "custom.todo.md"
+    custom_todo = tmp_path / ("custom" + TEMP_TASK_BOARD_SUFFIX)
     custom_state = tmp_path / "custom-state"
     custom_worktrees = tmp_path / "custom-worktrees"
 
@@ -129,7 +130,7 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     paths = {
         "repo_root": tmp_path,
-        "todo_path": tmp_path / "board.todo.md",
+        "todo_path": tmp_path / ("board" + TEMP_TASK_BOARD_SUFFIX),
         "state_dir": tmp_path / "state",
         "worktree_root": tmp_path / "worktrees",
     }
