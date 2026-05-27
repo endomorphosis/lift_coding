@@ -18,5 +18,10 @@ Record from the glasses microphone and play back audio through glasses speakers 
   - Output WAV is valid and audible
 
 ## References
-- mobile/glasses/TODO.md
-- mobile/glasses/android/
+- mobile/glasses/IMPLEMENTATION_STATUS_PR051.md
+- mobile/glasses/android/README.md
+- mobile/glasses/android/GlassesRecorder.kt
+- mobile/glasses/android/GlassesPlayer.kt
+- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/ExpoGlassesAudioModule.kt
+- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesRecorder.kt
+- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesPlayer.kt
