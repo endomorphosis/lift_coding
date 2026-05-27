@@ -1115,7 +1115,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-100 Resolve code annotation in tracking/PR-049-ios-glasses-player.md:20
 
+<<<<<<< HEAD
 - Status: completed
+=======
+- Status: todo
+>>>>>>> implementation/hao-155-attempt-1-1779867088
 - Completion: manual
 - Priority: P3
 - Track: docs
