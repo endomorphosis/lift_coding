@@ -1159,7 +1159,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-104 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:7
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
