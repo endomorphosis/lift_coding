@@ -1269,7 +1269,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-114 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: docs
