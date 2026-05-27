@@ -22,3 +22,8 @@ MGW-110 resolved the stale scanner finding at the original line 14 by removing
 the broad glasses checklist from the PR-047 reference list. This work plan now
 points at the active Expo module route-monitor source, JS API surface, module
 documentation, and diagnostics screen evidence for the iOS audio route slice.
+
+HAO-167 verified the same scanner fingerprint for the multimodal-control
+backlog. The current reference list no longer points to the broad historical
+checklist and stays scoped to concrete iOS route-monitor implementation
+evidence.
