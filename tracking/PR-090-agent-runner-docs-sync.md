@@ -1,15 +1,18 @@
-# PR-090: Agent runner docs sync (remove outdated TODO scaffolding)
+# PR-090: Agent runner docs sync
 
 ## Goal
-Make the agent-runner documentation accurately reflect the current implementation in `agent-runner/runner.py`.
+Keep the agent-runner documentation accurately aligned with the current
+implementation in `agent-runner/runner.py`.
 
 ## Context
-`docs/agent-runner-setup.md` currently contains an older/example code path with placeholder TODOs that does not match the shipped runner in `agent-runner/runner.py`.
-
-This creates confusion when someone tries to stand up the agent runner and validate the GitHub-issue dispatch + correlation loop.
+PR-090 is implemented in `docs/agent-runner-setup.md`. The setup guide now
+describes the shipped Docker runner behavior from `agent-runner/runner.py`,
+including polling, branch creation, deterministic patch application, trace file
+creation, PR correlation metadata, the `processed` visibility label, and
+workspace cleanup.
 
 ## Scope
-- Update `docs/agent-runner-setup.md` so it matches the real behavior of `agent-runner/runner.py`:
+- Maintain `docs/agent-runner-setup.md` so it matches the real behavior of `agent-runner/runner.py`:
   - required env vars (`GITHUB_TOKEN`, `DISPATCH_REPO`, etc.)
   - polling behavior + labels (`copilot-agent`, `processed`)
   - branch naming (`agent-task-<task_id_prefix>`)
@@ -26,8 +29,29 @@ This creates confusion when someone tries to stand up the agent runner and valid
 - Adding new provider integrations.
 
 ## Acceptance criteria
-- `docs/agent-runner-setup.md` no longer includes placeholder “TODO: implement your actual task processing logic here” flows that diverge from `agent-runner/runner.py`.
-- A reader can follow the doc and understand what the runner actually does today (including deterministic patch mode).
+- `docs/agent-runner-setup.md` describes the shipped Docker runner workflow in
+  `agent-runner/runner.py`.
+- The setup guide documents deterministic patch mode, correlation metadata,
+  `/workspace` cleanup, and the distinction between the in-memory processed
+  issue cache and the `processed` issue label.
+- A reader can follow the doc and understand what the runner does today.
+
+## Implementation status
+- `docs/agent-runner-setup.md` links directly to `agent-runner/README.md`,
+  `docs/AGENT_RUNNER_QUICKSTART.md`, and `docker-compose.agent-runner.yml`.
+- The Docker runner section documents the active environment variables read by
+  `runner.py`: `GITHUB_TOKEN`, `DISPATCH_REPO`, `POLL_INTERVAL_SECONDS`,
+  `AGENT_NAME`, and `LOG_LEVEL`.
+- The deterministic patch section now points to
+  `apply_patches_from_instruction()` and `agent-runner/apply_instruction.py`
+  instead of an example processing stub.
+
+## Resolution notes
+HAO-164 resolved the stale scanner finding at line 1 by changing this tracker
+from an open docs-sync instruction into a current implementation record. The
+tracking note and setup guide now point at the shipped runner behavior, so the
+supervisor-fed backlog can parse the remaining metadata without re-ingesting the
+old docs-sync title as active work.
 
 ## Suggested files
 - `docs/agent-runner-setup.md`
@@ -35,3 +59,4 @@ This creates confusion when someone tries to stand up the agent runner and valid
 
 ## Validation
 - Doc review: verify every described behavior exists in `agent-runner/runner.py`.
+- `test -f tracking/PR-090-agent-runner-docs-sync.md`
