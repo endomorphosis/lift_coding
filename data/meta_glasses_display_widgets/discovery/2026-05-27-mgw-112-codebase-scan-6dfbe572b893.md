@@ -19,3 +19,15 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The cited work-log bullet was stale cleanup wording, not an unresolved code
+task. Current `CommandRouter` behavior already reads
+`profile_config.privacy_mode` for both GitHub-backed inbox listing and PR
+summary paths, then passes that value to `handle_inbox_list()` and
+`handle_pr_summarize()`. `ProfileConfig` includes a `privacy_mode` field, and
+all built-in profiles continue to default to `PrivacyMode.STRICT`.
+
+`work/PR-081-privacy-mode-per-profile.md` now describes the implemented router
+behavior directly instead of mentioning removed cleanup comments.
