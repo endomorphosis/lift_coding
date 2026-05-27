@@ -127,15 +127,16 @@ def test_status_advances_daemon_backed_task_to_completed(
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
-    title = _daemon_backed_task_title()
+    daemon_task_title = _daemon_backed_task_title()
+    expected_result_preview = f"VAI-005 completed: {daemon_task_title}."
     _write_state(
         state_path,
         task_id="VAI-005",
         task_status="ready",
         active_task_id="VAI-005",
-        active_task_title=title,
+        active_task_title=daemon_task_title,
     )
-    _write_events(events_path, task_id="VAI-005", title=title)
+    _write_events(events_path, task_id="VAI-005", title=daemon_task_title)
 
     provider = IPFSDatasetsMCPAgentProvider(client=None)
     monkeypatch.setattr(
@@ -167,7 +168,7 @@ def test_status_advances_daemon_backed_task_to_completed(
     task = get_agent_task_by_id(db_conn, created["task_id"])
 
     assert status["by_state"]["completed"] == 1
-    assert status["tasks"][0]["result_preview"] == f"VAI-005 completed: {title}."
+    assert status["tasks"][0]["result_preview"] == expected_result_preview
     assert status["tasks"][0]["result_envelope"]["structured_output"]["task_status"] == "completed"
     assert status["tasks"][0]["todo_daemon_active_task_id"] == "VAI-006"
     assert task is not None
