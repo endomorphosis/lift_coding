@@ -10,6 +10,7 @@ Native glasses work lives under mobile/glasses/ and must be wired into an Expo d
 - [ ] Add minimal developer documentation for testing on-device
 
 ## References
+- mobile/glasses/README.md
 - mobile/modules/expo-glasses-audio/ios/AudioRouteMonitor.swift
 - mobile/modules/expo-glasses-audio/ios/ExpoGlassesAudioModule.swift
 - mobile/modules/expo-glasses-audio/index.ts
