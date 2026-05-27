@@ -13,7 +13,7 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 - Implement a simple runner process (Python) that:
   - polls for tasks in `created` state (or the appropriate state used by the backend)
   - transitions tasks: `created -> running -> completed` (or `failed` on exceptions)
-  - leaves `needs_input` tasks untouched without crashing the local loop
+  - leaves paused `needs_input` tasks untouched by the local loop
   - logs progress clearly
 - Provide a CLI entrypoint for local use.
 - Keep the runner safe by default:
@@ -47,6 +47,10 @@ PR-079 is implemented as a shipped dev/demo runner. The repo includes a minimal 
 The earlier scanner finding matched stale wording that described this work as
 example task-processing wording. The tracker now points at the shipped local
 runner artifacts and describes the current simulated-work behavior directly.
+HAO-161 verified that `needs_input` is a pause state for this runner: `run_once`
+only polls `created` and `running` tasks, and
+`tests/test_minimal_runner.py::test_run_once_leaves_needs_input_tasks_untouched`
+covers that paused tasks remain unchanged.
 
 ## Validation
 - Run `python -m pytest -q`.

@@ -293,6 +293,40 @@ def test_run_once_full_cycle(mock_db, enable_runner):
     assert result2["tasks_completed"] == 0
 
 
+def test_run_once_leaves_needs_input_tasks_untouched(mock_db, enable_runner):
+    """Test that paused tasks are ignored by the local runner loop."""
+    from handsfree.db.agent_tasks import update_agent_task_state
+
+    task = create_agent_task(
+        conn=mock_db,
+        user_id="test-user",
+        provider="test-provider",
+        instruction="Waiting for clarification",
+    )
+    update_agent_task_state(
+        conn=mock_db,
+        task_id=task.id,
+        new_state="running",
+        trace_update={"started": True},
+    )
+    update_agent_task_state(
+        conn=mock_db,
+        task_id=task.id,
+        new_state="needs_input",
+        trace_update={"prompt": "Need user clarification"},
+    )
+
+    result = run_once(mock_db)
+
+    assert result["enabled"] is True
+    assert result["tasks_started"] == 0
+    assert result["tasks_completed"] == 0
+    assert result["tasks_failed"] == 0
+    task_after = get_agent_task_by_id(mock_db, task.id)
+    assert task_after.state == "needs_input"
+    assert task_after.trace["prompt"] == "Need user clarification"
+
+
 def test_run_loop_sleeps_between_iterations(enable_runner):
     """Test run_loop waits between iterations in continuous mode."""
     result = {
