@@ -1280,7 +1280,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-115 Resolve code annotation in hallucinate_app/MENU_STRUCTURE.md:11
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
