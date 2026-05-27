@@ -15,7 +15,7 @@
 - Added `privacy_mode` field to `ProfileConfig` class in `src/handsfree/commands/profiles.py`
 - All profiles now default to `PrivacyMode.STRICT` for safety
 - Updated `router.py` to use `profile_config.privacy_mode` instead of hardcoded `PrivacyMode.STRICT`
-- Cleared stale inline router notes around initialization and delegation formatting.
+- Router initialization and delegation formatting now reflect completed implementation work.
 - Verified the inbox and PR summary router paths both pass `profile_config.privacy_mode` into their handlers.
 - Added comprehensive tests:
   - `tests/test_profile_privacy_mode.py`: Unit tests for profile privacy mode configuration

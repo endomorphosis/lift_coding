@@ -1056,18 +1056,30 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
+<<<<<<< HEAD
 - Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-047-ios-audio-route-monitor.md
 - Validation: test -f work/PR-047-ios-audio-route-monitor.md
 - Acceptance: Codebase scan filed this finding from work/PR-047-ios-audio-route-monitor.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-093-codebase-scan-98ff09f42056.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## VAI-094 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
 
+<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
 - Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-048-ios-glasses-recorder-wav.md
 - Validation: test -f work/PR-048-ios-glasses-recorder-wav.md
 - Acceptance: Codebase scan filed this finding from work/PR-048-ios-glasses-recorder-wav.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-094-codebase-scan-841f4db539b0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1078,7 +1090,11 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
+<<<<<<< HEAD
 - Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-081-privacy-mode-per-profile.md
 - Validation: test -f work/PR-081-privacy-mode-per-profile.md
 - Acceptance: Codebase scan filed this finding from work/PR-081-privacy-mode-per-profile.md:18. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1089,18 +1105,30 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
+<<<<<<< HEAD
 - Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-090-agent-runner-docs-sync.md
 - Validation: test -f work/PR-090-agent-runner-docs-sync.md
 - Acceptance: Codebase scan filed this finding from work/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-096-codebase-scan-9b624a3cfffc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## VAI-097 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
 
+<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P2
 - Track: docs
 - Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-097-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
