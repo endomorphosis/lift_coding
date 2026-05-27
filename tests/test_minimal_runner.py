@@ -12,6 +12,7 @@ from handsfree.agents.runner import (
     is_runner_enabled,
     process_running_task,
     process_running_tasks,
+    run_loop,
     run_once,
     simulate_progress_update,
 )
@@ -290,6 +291,25 @@ def test_run_once_full_cycle(mock_db, enable_runner):
     result2 = run_once(mock_db)
     assert result2["tasks_started"] == 0
     assert result2["tasks_completed"] == 0
+
+
+def test_run_loop_sleeps_between_iterations(enable_runner):
+    """Test run_loop waits between iterations in continuous mode."""
+    result = {
+        "tasks_started": 0,
+        "tasks_completed": 0,
+        "tasks_failed": 0,
+    }
+
+    with (
+        patch("handsfree.agents.runner.run_once", return_value=result) as run_once_mock,
+        patch("handsfree.agents.runner.time.sleep", side_effect=KeyboardInterrupt) as sleep_mock,
+    ):
+        with pytest.raises(KeyboardInterrupt):
+            run_loop(conn=object(), interval_seconds=2)
+
+    run_once_mock.assert_called_once()
+    sleep_mock.assert_called_once_with(2)
 
 
 def test_run_once_error_handling(mock_db, enable_runner):
