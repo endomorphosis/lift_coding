@@ -10,20 +10,18 @@ Native glasses work lives under mobile/glasses/ and must be wired into an Expo d
 - [ ] Add minimal developer documentation for testing on-device
 
 ## References
-- mobile/glasses/README.md
 - mobile/modules/expo-glasses-audio/ios/AudioRouteMonitor.swift
 - mobile/modules/expo-glasses-audio/ios/ExpoGlassesAudioModule.swift
 - mobile/modules/expo-glasses-audio/index.ts
 - mobile/modules/expo-glasses-audio/README.md
 - mobile/src/screens/GlassesDiagnosticsScreen.js
 
-## Resolution notes
+## Resolution Notes
 MGW-110 resolved the stale scanner finding at the original line 14 by removing
 the broad glasses checklist from the PR-047 reference list. This work plan now
 points at the active Expo module route-monitor source, JS API surface, module
 documentation, and diagnostics screen evidence for the iOS audio route slice.
 
-HAO-167 verified the same scanner fingerprint for the multimodal-control
-backlog. The current reference list no longer points to the broad historical
-checklist and stays scoped to concrete iOS route-monitor implementation
-evidence.
+HAO-167 and VAI-093 verified the same scanner fingerprint for their backlogs.
+The current reference list stays scoped to concrete iOS route-monitor
+implementation evidence.
