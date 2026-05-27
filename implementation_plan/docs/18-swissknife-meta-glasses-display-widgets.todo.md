@@ -1387,3 +1387,69 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
 - Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-124-codebase-scan-249bb3d996f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-125 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-125-codebase-scan-b703c77d6df0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-126 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-126-codebase-scan-43d9c2282080.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-127 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-127-codebase-scan-da82d68a141b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-128 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-128-codebase-scan-8e7612d2b02c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-129 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-129-codebase-scan-c2481cea1af4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-130 Resolve merge retry-budget failure for MGW-125
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-130-mgw-125-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-125. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-130-mgw-125-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-125 from strategy blocked_tasks.
