@@ -1247,7 +1247,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-112 Resolve code annotation in work/PR-081-privacy-mode-per-profile.md:18
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
