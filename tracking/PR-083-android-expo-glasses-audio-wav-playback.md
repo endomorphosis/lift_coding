@@ -4,11 +4,12 @@
 Make the Android Expo native module (`expo-glasses-audio`) actually record to WAV and play WAV audio through the glasses/BT route (SCO) so the end-to-end TTS loop can be tested on Android.
 
 ## Context
-PR-083 is implemented in the Android Expo native module. `ExpoGlassesAudioModule.kt`
-now routes `startRecording` through `GlassesRecorder` and `playAudio` through
-`GlassesPlayer`: the recorder writes RIFF/WAV headers plus PCM data and updates
-file sizes on stop, while the player parses PCM WAV metadata and plays mono
-16-bit audio through `AudioTrack` using the voice-communication route.
+The Android Expo native module ships the PR-083 WAV path.
+`ExpoGlassesAudioModule.kt` routes `startRecording` through `GlassesRecorder`
+and `playAudio` through `GlassesPlayer`: the recorder writes RIFF/WAV headers
+plus PCM data and updates file sizes on stop, while the player parses PCM WAV
+metadata and plays mono 16-bit audio through `AudioTrack` using the
+voice-communication route.
 
 iOS already has working implementations under `mobile/modules/expo-glasses-audio/ios/`.
 
@@ -45,7 +46,7 @@ iOS already has working implementations under `mobile/modules/expo-glasses-audio
 - Remaining validation is hardware-facing Android device verification of audible playback and SCO cleanup.
 
 ## Resolution notes
-HAO-163 resolved the stale scanner finding at line 7. The earlier context
+MGW-109 resolved the stale scanner finding at line 7. The earlier context
 described missing Android WAV playback and recording work, but the current code
 implements both paths through `GlassesPlayer` and `GlassesRecorder`. This
 tracker now records the shipped implementation state so stale follow-up wording
