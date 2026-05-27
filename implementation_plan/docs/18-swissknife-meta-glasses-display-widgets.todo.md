@@ -1324,7 +1324,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-119 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
