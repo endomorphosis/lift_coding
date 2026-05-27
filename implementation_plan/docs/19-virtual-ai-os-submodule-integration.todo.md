@@ -887,7 +887,7 @@ cadence remains parseable and resumable.
 
 ## VAI-078 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:276
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
