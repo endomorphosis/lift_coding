@@ -1063,7 +1063,7 @@ cadence remains parseable and resumable.
 
 ## VAI-094 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
