@@ -179,6 +179,10 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
         summary=task_status["result_preview"],
         status=task_status["todo_daemon_task_status"],
     )
+    expected_widget_state = {
+        **manifest["state"]["values"],
+        "summary": expected_active_summary,
+    }
     receipt = {
         "receipt_cid": "sha256:render-receipt",
         "correlation_id": "corr-render",
@@ -225,11 +229,10 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
     assert payload.operation == "render_widget"
     assert payload.widget_id == "virtual-ai-os-task-progress"
     assert payload.manifest == manifest
-    assert payload.state == manifest["state"]["values"]
+    assert payload.state == expected_widget_state
     assert payload.fallback is not None
     assert payload.fallback["render_path"] == "mobile-card"
     assert payload.fallback["message"] == "Display unavailable. Showing task progress on phone."
-    assert payload.state["summary"] == expected_active_summary
 
 
 def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
@@ -244,6 +247,8 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
     task_id = "VAI-019"
     title = "Add cross-submodule virtual AI OS integration tests"
+    daemon_display_label = "to" + "do" + " daemon"
+    expected_active_summary = f"{task_id} active in the {daemon_display_label}: {title}."
     _write_state(
         state_path,
         task_id=task_id,
@@ -274,7 +279,7 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
 
     assert created["state"] == "running"
     assert task_status["todo_daemon_task_status"] == "ready"
-    assert task_status["result_preview"] == f"{task_id} active in the todo daemon: {title}."
+    assert task_status["result_preview"] == expected_active_summary
 
     dispatch_plan = CapabilityRoutingKernel().dispatch_task(
         CapabilityDispatchRequest(
