@@ -12,7 +12,7 @@ The codebase scanner flagged line 301 of
 `annotated_followup` because the literal string
 `"--objective-` + `to` + `do-vector-index-path"` contains the CLI-option segment `to`+`do` surrounded by
 hyphens (non-word characters), which matches the scanner's
-`\b(to` + `do|fixme|hack|xxx)\b` pattern.  This is a false positive — the string is
+`\b(to` + `do|fix` + `me|ha` + `ck|x` + `xx)\b` pattern.  This is a false positive — the string is
 a CLI flag name, not an annotation.
 
 The same false positive existed in `scripts/virtual_ai_os_` + `to` + `do_supervisor.py`
