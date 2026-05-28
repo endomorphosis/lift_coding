@@ -1305,7 +1305,7 @@ cadence remains parseable and resumable.
 
 ## VAI-116 Resolve code annotation in scripts/meta_glasses_display_todo_supervisor.py:302
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: runtime
