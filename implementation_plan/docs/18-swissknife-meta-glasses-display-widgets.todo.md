@@ -1597,6 +1597,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-143-codebase-scan-1358e4f052cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
+## MGW-144 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:9
+
 - Status: completed
 - Completion: manual
 - Priority: P3
