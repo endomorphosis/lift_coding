@@ -1665,11 +1665,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-150 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-113-resolution.md:47
 
-<<<<<<< HEAD
 - Status: completed
-=======
-- Status: todo
->>>>>>> implementation/mgw-149-attempt-1-1779962698
 - Completion: manual
 - Priority: P3
 - Track: docs
@@ -1680,11 +1676,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-151 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md:12
 
-<<<<<<< HEAD
 - Status: done
-=======
-- Status: todo
->>>>>>> implementation/mgw-149-attempt-1-1779962698
 - Completion: manual
 - Priority: P3
 - Track: docs
