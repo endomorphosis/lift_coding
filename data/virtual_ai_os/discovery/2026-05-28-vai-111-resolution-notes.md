@@ -11,9 +11,9 @@ That stub no longer exists in the source file.
 The stub was already resolved — the `openServerConfig` case navigates to `views/settings.html`
 (with an optional `?server=<id>` param for per-server config), which is a complete implementation.
 
-## Additional TODOs Resolved
+## Additional Stubs Resolved
 
-Two adjacent TODO stubs in `handleAction()` were also addressed:
+Two adjacent placeholder stubs in `handleAction()` were also addressed:
 
 - **`resetConfig`** (was line 445): Now shows a confirmation dialog before navigating to
   `views/settings.html?reset=true`. The safe default is Cancel to prevent accidental resets.
