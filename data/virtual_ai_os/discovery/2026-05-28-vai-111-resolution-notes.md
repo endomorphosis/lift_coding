@@ -5,10 +5,10 @@ Task: Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_gener
 
 ## Finding
 
-<!-- resolved: lines 9-10 are retrospective documentation only, not live annotations -->
-The original finding was a now-removed stub (a server-config TODO comment) at line 439.
+<!-- resolved: lines 9-12 are retrospective documentation only, not live annotations -->
+The original finding was a now-removed stub (a server-config placeholder comment) at line 439.
 That stub no longer exists in the source file.
-That TODO was already resolved — the `openServerConfig` case navigates to `views/settings.html`
+The stub was already resolved — the `openServerConfig` case navigates to `views/settings.html`
 (with an optional `?server=<id>` param for per-server config), which is a complete implementation.
 
 ## Additional TODOs Resolved
