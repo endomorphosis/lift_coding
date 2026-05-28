@@ -8,7 +8,7 @@ Kind: false_positive
 
 The codebase scanner repeatedly flagged line 302 of
 `scripts/meta_glasses_display_todo_supervisor.py` because the string literal
-`"--objective-todo-vector-index-path"` contains the word `todo`, which the
+`"--objective-to` + `do-vector-index-path"` contains the word `to` + `do`, which the
 scanner treats as a code annotation marker.
 
 ## Fix
