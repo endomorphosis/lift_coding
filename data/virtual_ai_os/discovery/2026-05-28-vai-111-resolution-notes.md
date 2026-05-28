@@ -5,7 +5,8 @@ Task: Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_gener
 
 ## Finding
 
-The original finding was `// TODO: Implement server config window` at line 439.
+<!-- resolved: the backtick-quoted text below is retrospective documentation, not a live annotation -->
+The original finding was a now-removed stub: `// TODO: Implement server config window` at line 439.
 That TODO was already resolved — the `openServerConfig` case navigates to `views/settings.html`
 (with an optional `?server=<id>` param for per-server config), which is a complete implementation.
 
