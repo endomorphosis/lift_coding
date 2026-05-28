@@ -1500,3 +1500,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py:369. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-133-codebase-scan-b701b80bf41c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-134 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1110
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1110. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-134-codebase-scan-e115a28cef8a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-135 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1111
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-135-codebase-scan-a2d26a7117fd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-136 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1118
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1118. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-136-codebase-scan-32cf556b56c9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-137 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:175
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:175. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-137-codebase-scan-8a2d973b6b52.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-138 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:198
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:198. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-138-codebase-scan-bd5d75fcd4e5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
