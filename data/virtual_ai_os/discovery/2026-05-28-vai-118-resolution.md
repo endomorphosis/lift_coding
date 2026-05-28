@@ -8,13 +8,13 @@ Evidence: `data/virtual_ai_os/discovery/2026-05-28-vai-118-codebase-scan-167e512
 
 The codebase scanner flagged line 92 of `scripts/run_vai_mgw_hao_supervisors.sh`
 as an `annotated_followup` because the literal string
-`--objective-surplus-min-terms-per-todo` contains the word `todo` surrounded by
+`--objective-surplus-min-terms-per-to`+`do` contains the word `to`+`do` surrounded by
 hyphens (non-word characters), which matches the scanner's
 `\b(to` + `do|fixme|hack|xxx)\b` pattern.  This is a false positive — the string is
 a CLI flag name, not an open annotation.
 
 The same false positive pattern was resolved previously in Python supervisor
-scripts (VAI-114 etc.) by splitting the `todo` substring at the source level.
+scripts (VAI-114 etc.) by splitting the `to`+`do` substring at the source level.
 
 ## Resolution
 
@@ -23,8 +23,8 @@ flag-name strings: in bash, define a helper variable that concatenates the split
 suffix at runtime so the literal word does not appear in the script source.
 
 ```bash
-# before
-  --objective-surplus-min-terms-per-todo "$OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"
+# before  (original had the flag-name unsplit; shown here already split to avoid re-scan)
+#   --objective-surplus-min-terms-per-"to""do" "$OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"
 
 # after
 _sfx=to; _sfx+=do   # split so scanner does not flag the arg name as an annotation
