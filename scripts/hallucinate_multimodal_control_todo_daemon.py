@@ -26,16 +26,22 @@ DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "sta
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
+OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_datasets"
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "5"))
-OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MAX_FINDINGS", "5"))
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "21600"))
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
+OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
 CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", "5"))
 CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
 CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/hallucinate_multimodal_control/discovery/",
+    "data/hallucinate_multimodal_control/objective_bundles/",
+    "data/hallucinate_multimodal_control/objective_datasets/",
     "data/hallucinate_multimodal_control/state/",
     "data/hallucinate_multimodal_control/worktrees/",
     "data/meta_glasses_display_widgets/discovery/",
@@ -125,6 +131,12 @@ def _objective_bundle_dir(repo_root: Path, bundle_dir: Path | None) -> Path:
     return repo_root / "data" / "hallucinate_multimodal_control" / "objective_bundles"
 
 
+def _objective_dataset_dir(repo_root: Path, dataset_dir: Path | None) -> Path:
+    if dataset_dir is not None:
+        return dataset_dir
+    return repo_root / "data" / "hallucinate_multimodal_control" / "objective_datasets"
+
+
 def record_objective_goal_findings(
     *,
     todo_path: Path = DEFAULT_TODO_PATH,
@@ -133,11 +145,15 @@ def record_objective_goal_findings(
     discovery_dir: Path = DISCOVERY_DIR,
     objective_path: Path = DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
     bundle_dir: Path | None = None,
+    dataset_dir: Path | None = None,
+    todo_vector_index_path: Path | None = None,
     task_header_prefix: str = "## HAO-",
     repo_root: Path = REPO_ROOT,
     min_open_tasks: int = OBJECTIVE_SCAN_MIN_OPEN_TASKS,
     max_findings: int = OBJECTIVE_SCAN_MAX_FINDINGS,
     cooldown_seconds: int = OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+    surplus_findings_per_goal: int = OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
+    surplus_min_terms_per_todo: int = OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
     force: bool = False,
 ) -> list[dict[str, object]]:
     """Feed the HAO board from missing evidence in the objective heap."""
@@ -154,6 +170,7 @@ def record_objective_goal_findings(
         todo_path=todo_path,
         discovery_dir=discovery_dir,
         bundle_dir=_objective_bundle_dir(repo_root, bundle_dir),
+        dataset_dir=_objective_dataset_dir(repo_root, dataset_dir),
         strategy_path=strategy_path,
         state_path=state_path,
         task_prefix=task_prefix,
@@ -162,6 +179,10 @@ def record_objective_goal_findings(
         max_findings=max_findings,
         cooldown_seconds=cooldown_seconds,
         force=force,
+        write_todo_vector_index=True,
+        todo_vector_index_path=todo_vector_index_path or _objective_bundle_dir(repo_root, bundle_dir) / "todo_vector_index.json",
+        surplus_findings_per_goal=surplus_findings_per_goal,
+        surplus_min_terms_per_todo=surplus_min_terms_per_todo,
         summary_prefix="Close virtual AI OS objective gap",
         discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
         commit_outputs=True,

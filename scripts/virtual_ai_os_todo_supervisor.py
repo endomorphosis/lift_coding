@@ -25,7 +25,16 @@ OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-a
 OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = 3
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
+OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(
+    os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6")
+)
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(
+    os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4")
+)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
@@ -144,8 +153,12 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
     args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
-    args = _with_default(args, "--objective-scan-min-open-tasks", "0")
+    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
+    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
+    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
+    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
+    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")

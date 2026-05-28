@@ -67,6 +67,10 @@ export PYTHONUNBUFFERED=1
 export PYTHONPATH="$REPO_ROOT/external/ipfs_accelerate:$REPO_ROOT/external/ipfs_datasets:${PYTHONPATH:-}"
 export CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS="${CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS:-60}"
 export PREFER_COPILOT_MERGE_RESOLVER="${PREFER_COPILOT_MERGE_RESOLVER:-1}"
+OBJECTIVE_SCAN_MIN_OPEN_TASKS="${OBJECTIVE_SCAN_MIN_OPEN_TASKS:-20}"
+OBJECTIVE_SCAN_MAX_FINDINGS="${OBJECTIVE_SCAN_MAX_FINDINGS:-12}"
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL="${OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL:-6}"
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO="${OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO:-4}"
 
 mkdir -p "$MASTER_DIR"
 printf '%s\n' "$$" > "$MASTER_PID"
@@ -81,7 +85,11 @@ common_args=(
   --implementation-log-stall-seconds 900
   --implementation-command "$resolver_command"
   --max-restarts 0
+  --objective-scan-min-open-tasks "$OBJECTIVE_SCAN_MIN_OPEN_TASKS"
+  --objective-scan-max-findings "$OBJECTIVE_SCAN_MAX_FINDINGS"
   --objective-scan-cooldown-seconds 900
+  --objective-surplus-findings-per-goal "$OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"
+  --objective-surplus-min-terms-per-todo "$OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"
   --codebase-scan-cooldown-seconds 900
   --llm-merge-resolver-command "$resolver_command"
   --llm-merge-resolver-timeout-seconds 1800

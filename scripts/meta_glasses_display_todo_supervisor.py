@@ -20,11 +20,23 @@ STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "meta_glasses_display_todo_daemon.py"
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_graph.json"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
+OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
+OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/objective_bundles/",
+    "data/meta_glasses_display_widgets/objective_datasets/",
     "data/hallucinate_multimodal_control/discovery/",
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
@@ -237,6 +249,7 @@ def _run_supervisor(argv: list[str]) -> None:
         objective_write_todo_vector_index=parsed.objective_write_todo_vector_index,
         objective_todo_vector_index_path=parsed.objective_todo_vector_index_path,
         objective_surplus_findings_per_goal=parsed.objective_surplus_findings_per_goal,
+        objective_surplus_min_terms_per_todo=parsed.objective_surplus_min_terms_per_todo,
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
     )
@@ -276,6 +289,19 @@ def main(argv: list[str] | None = None) -> None:
     resolver_command = _default_llm_merge_resolver_command()
     if resolver_command:
         args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
+    args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
+    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
+    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
+    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--objective-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
+    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
+    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
+    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
+    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
+    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
+    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
