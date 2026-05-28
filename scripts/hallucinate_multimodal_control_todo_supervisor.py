@@ -294,7 +294,7 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
     args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
     args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--objective-discovery-output-path", "data/hallucinate_multimodal_control/discovery")
+    args = _with_default(args, "--objective-discovery-output-path", DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix())
     args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
     args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
     args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
@@ -303,7 +303,7 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/hallucinate_multimodal_control/discovery")
+    args = _with_default(args, "--codebase-scan-discovery-output-path", DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix())
     args = _with_default(args, "--codebase-scan-min-open-tasks", str(CODEBASE_SCAN_MIN_OPEN_TASKS))
     args = _with_default(args, "--codebase-scan-max-findings", str(CODEBASE_SCAN_MAX_FINDINGS))
     args = _with_default(args, "--codebase-scan-cooldown-seconds", str(CODEBASE_SCAN_COOLDOWN_SECONDS))
@@ -349,6 +349,9 @@ def main(argv: list[str] | None = None) -> None:
         discovery_dir=DISCOVERY_DIR,
         task_header_prefix=parsed.task_prefix,
         repo_root=REPO_ROOT,
+        min_open_tasks=parsed.codebase_scan_min_open_tasks,
+        max_findings=parsed.codebase_scan_max_findings,
+        cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
     )
     record_retry_budget_findings(
         todo_path=parsed.todo_path,
@@ -460,6 +463,9 @@ def main(argv: list[str] | None = None) -> None:
             discovery_dir=DISCOVERY_DIR,
             task_header_prefix=parsed.task_prefix,
             repo_root=REPO_ROOT,
+            min_open_tasks=parsed.codebase_scan_min_open_tasks,
+            max_findings=parsed.codebase_scan_max_findings,
+            cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
         )
         record_retry_budget_findings(
             todo_path=parsed.todo_path,
