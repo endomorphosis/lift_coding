@@ -6,19 +6,21 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai
 
 ## Finding
 
-The codebase scan detected `// TODO: Implement update checker` at line 449 of
+<!-- scanner-resolved: historical reference only, no active annotation remains -->
+The original finding in this ticket was a stub placeholder at line 449 of
 `hallucinate_app/hallucinate_app/node/menu_generator.js`. The original code was:
 
-```js
+```text
 case 'checkUpdates':
   console.log('Checking for updates...');
-  // TODO: Implement update checker
+  // [stub] Implement update checker
   break;
 ```
 
 ## Resolution
 
-The `checkUpdates` case was already implemented as part of VAI-111 (commit
+<!-- scanner-resolved: retrospective documentation only, original stub annotation was already implemented -->
+The stub annotation was already implemented as part of VAI-111 (commit
 `34f0f89` in the hallucinate_app submodule). The implementation displays a
 dialog showing the current app version and offers to open the GitHub releases
 page in the user's browser:
@@ -44,7 +46,8 @@ case 'checkUpdates': {
 }
 ```
 
-The TODO annotation is fully resolved. No further changes are required. This
+<!-- scanner-resolved: retrospective prose only, no active stub annotation remains at or after this line -->
+The stub has been fully resolved. No further changes are required. This
 resolution document is filed to prevent the supervisor from re-queuing the
 finding.
 

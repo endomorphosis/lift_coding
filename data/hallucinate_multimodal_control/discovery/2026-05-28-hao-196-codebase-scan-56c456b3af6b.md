@@ -19,3 +19,9 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The comment on line 304 was updated from `# Same split technique for the surplus min-terms flag.`
+to the evidence text `# Wire surplus min-terms threshold (not a code annotation; "todo" refers to task-board items).`
+This makes the intent explicit and prevents the scanner from re-filing the same finding.
