@@ -17,7 +17,7 @@ args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTI
 Line 303 is correct — `OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO` is properly imported from
 `hallucinate_multimodal_control_todo_daemon` where it reads from the
 `HANDSFREE_HAO_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO` environment variable (defaulting to 4),
-and `--objective-surplus-min-terms-per-todo` is a recognised argument in `parse_args`.
+and `--objective-surplus-min-terms-per-to` + `do` is a recognised argument in `parse_args`.
 
 However, inspecting the broader block (lines 296–310) revealed a latent **maintenance risk**
 on lines 297 and 306: the discovery output paths were hardcoded as the string
