@@ -301,7 +301,7 @@ def main(argv: list[str] | None = None) -> None:
     # Split flag name so the scanner does not treat "todo" as an unresolved annotation.
     args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    # Same split technique for the surplus min-terms flag.
+    # Wire surplus min-terms threshold (not a code annotation; "todo" refers to task-board items).
     args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
