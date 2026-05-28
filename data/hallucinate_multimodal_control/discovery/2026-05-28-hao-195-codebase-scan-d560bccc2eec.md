@@ -1,0 +1,21 @@
+# HAO-195 Codebase Scan Finding
+
+Date: 2026-05-28
+Fingerprint: d560bccc2eeca133f892d2073aa4150241a21bbc
+Kind: annotated_followup
+Source: scripts/hallucinate_multimodal_control_todo_supervisor.py:302
+Priority: P3
+Track: runtime
+
+## Evidence
+
+```text
+args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
+```
+
+## Suggested Handling
+
+Review the finding in context, decide whether it represents a bug, missing test,
+maintenance risk, or false positive, and land a small fix with validation. If the
+finding is a false positive, document why in the changed code or discovery notes
+so the supervisor does not keep re-adding the same work.
