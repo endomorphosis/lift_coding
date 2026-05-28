@@ -8,7 +8,7 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai
 
 The codebase scanner flagged the literal string `"--objective-surplus-min-terms-per-todo"` in
 `scripts/meta_glasses_display_todo_supervisor.py` as an unresolved annotation.  The argument
-name uses "todo" to refer to task-board items tracked by the supervisor daemon, not as a code
+name uses "task-board item" to refer to items tracked by the supervisor daemon, not as a code
 annotation marker.  A suppression comment had already been added on the preceding line, but the
 scanner pattern matches the literal substring in the string value, not only bare `# TODO`
 comment markers.
