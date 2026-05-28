@@ -1250,7 +1250,7 @@ cadence remains parseable and resumable.
 
 ## VAI-111 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:439
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
