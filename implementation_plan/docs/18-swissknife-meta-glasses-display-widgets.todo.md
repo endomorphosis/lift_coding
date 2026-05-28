@@ -1515,7 +1515,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-136 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:439
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
