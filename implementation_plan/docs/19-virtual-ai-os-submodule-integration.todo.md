@@ -1437,7 +1437,7 @@ cadence remains parseable and resumable.
 
 ## VAI-128 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py:704
 
-- Status: todo
+- Status: done
 - Completion: manual
 - Priority: P1
 - Track: runtime
