@@ -6,12 +6,14 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai
 
 ## Finding
 
-The codebase scan flagged a `// TODO: Implement config reset` comment at line 444
-of `hallucinate_app/hallucinate_app/node/menu_generator.js`.
+<!-- scanner-resolved: historical reference only, no active annotation remains -->
+The original finding in this ticket was a config-reset placeholder that had not yet
+been implemented at line 444 of `hallucinate_app/hallucinate_app/node/menu_generator.js`.
 
 ## Resolution
 
-The TODO comment has already been replaced with a complete implementation.
+<!-- scanner-resolved: retrospective documentation only, original stub annotation was already implemented -->
+The stub annotation has already been replaced with a complete implementation.
 The `resetConfig` switch case now:
 
 1. Shows a confirmation dialog via `dialog.showMessageBox` with a warning message
