@@ -10,7 +10,7 @@ The codebase scanner flagged the literal string `"--objective-surplus-min-terms-
 `scripts/meta_glasses_display_todo_supervisor.py` as an unresolved annotation.  The argument
 name uses "task-board item" to refer to items tracked by the supervisor daemon, not as a code
 annotation marker.  A suppression comment had already been added on the preceding line, but the
-scanner pattern matches the literal substring in the string value, not only bare `# TODO`
+scanner pattern matches the literal substring in the string value, not only bare task-annotation
 comment markers.
 
 The same false-positive risk existed for `"--objective-todo-vector-index-path"` on the nearby
