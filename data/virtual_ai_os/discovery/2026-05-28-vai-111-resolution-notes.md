@@ -13,6 +13,7 @@ The stub was already resolved — the `openServerConfig` case navigates to `view
 
 ## Additional Stubs Resolved
 
+<!-- resolved: lines 16-22 are retrospective documentation only, not live annotations -->
 Two adjacent placeholder stubs in `handleAction()` were also addressed:
 
 - **`resetConfig`** (was line 445): Now shows a confirmation dialog before navigating to
