@@ -89,6 +89,7 @@ common_args=(
   --objective-scan-max-findings "$OBJECTIVE_SCAN_MAX_FINDINGS"
   --objective-scan-cooldown-seconds 900
   --objective-surplus-findings-per-goal "$OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"
+  # Not a code annotation; "todo" in the flag name refers to task-board items.
   --objective-surplus-min-terms-per-todo "$OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"
   --codebase-scan-cooldown-seconds 900
   --llm-merge-resolver-command "$resolver_command"
