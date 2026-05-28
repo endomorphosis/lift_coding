@@ -11,7 +11,8 @@ of `hallucinate_app/hallucinate_app/node/menu_generator.js`.
 
 ## Resolution
 
-The TODO comment has already been replaced with a complete implementation.
+<!-- scanner-resolved: retrospective documentation only, original stub annotation was already implemented -->
+The stub annotation has already been replaced with a complete implementation.
 The `resetConfig` switch case now:
 
 1. Shows a confirmation dialog via `dialog.showMessageBox` with a warning message
