@@ -10,7 +10,7 @@ The codebase scanner flagged line 92 of `scripts/run_vai_mgw_hao_supervisors.sh`
 as an `annotated_followup` because the literal string
 `--objective-surplus-min-terms-per-to`+`do` contains the word `to`+`do` surrounded by
 hyphens (non-word characters), which matches the scanner's
-`\b(to` + `do|fixme|hack|xxx)\b` pattern.  This is a false positive — the string is
+annotation-keyword regex pattern.  This is a false positive — the string is
 a CLI flag name, not an open annotation.
 
 The same false positive pattern was resolved previously in Python supervisor
