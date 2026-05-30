@@ -1668,11 +1668,7 @@ cadence remains parseable and resumable.
 
 ## VAI-149 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py:329
 
-<<<<<<< HEAD
 - Status: completed
-=======
-- Status: todo
->>>>>>> implementation/mgw-176-attempt-1-1780164772
 - Completion: manual
 - Priority: P1
 - Track: runtime
