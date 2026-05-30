@@ -1937,6 +1937,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-174-mgw-169-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-169. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-174-mgw-169-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-169 from strategy blocked_tasks.
+<<<<<<< HEAD
 
 ## MGW-175 Resolve merge retry-budget failure for MGW-174
 
@@ -1948,3 +1949,5 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-175-mgw-174-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-175-mgw-174-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-174 from strategy blocked_tasks.
+=======
+>>>>>>> implementation/mgw-170-attempt-1-1780158983
