@@ -35,6 +35,11 @@ OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(
     os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4")
 )
+VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = tuple(
+    item.strip()
+    for item in os.environ.get("HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
+    if item.strip()
+)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
@@ -147,6 +152,8 @@ def main(argv: list[str] | None = None) -> None:
         args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
     args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
+    args = _with_repeated_default(args, "--objective-interoperability-focus", VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS)
     args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
     args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))

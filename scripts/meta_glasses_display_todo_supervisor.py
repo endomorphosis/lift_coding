@@ -30,6 +30,11 @@ OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_M
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
+META_DISPLAY_INTEROPERABILITY_FOCUS = tuple(
+    item.strip()
+    for item in os.environ.get("HANDSFREE_MGW_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
+    if item.strip()
+)
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
@@ -232,6 +237,10 @@ def _run_supervisor(argv: list[str]) -> None:
         objective_discovery_output_path=parsed.objective_discovery_output_path,
         objective_summary_prefix=parsed.objective_summary_prefix,
         objective_refine_goals=parsed.objective_refine_goals,
+        objective_reconcile_goal_completion=parsed.objective_reconcile_goal_completion,
+        objective_seed_interoperability_goals=parsed.objective_seed_interoperability_goals,
+        objective_interoperability_focus=split_csv_values(parsed.objective_interoperability_focus),
+        objective_max_interoperability_goals=parsed.objective_max_interoperability_goals,
         objective_ensure_tracking_document=parsed.objective_ensure_tracking_document,
         objective_ultimate_goal=parsed.objective_ultimate_goal,
         objective_root_evidence=split_csv_values(parsed.objective_root_evidence),
@@ -290,6 +299,8 @@ def main(argv: list[str] | None = None) -> None:
     if resolver_command:
         args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
+    args = _with_repeated_default(args, "--objective-interoperability-focus", META_DISPLAY_INTEROPERABILITY_FOCUS)
     args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
     args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))

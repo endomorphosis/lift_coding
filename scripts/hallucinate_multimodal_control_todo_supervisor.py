@@ -36,6 +36,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
     OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
     OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+    HALLUCINATE_INTEROPERABILITY_FOCUS,
     TASK_BOARD_PATH_KEY,
     TASK_BOARD_PATH_OPTION,
     _ensure_runtime_pythonpath,
@@ -289,6 +290,8 @@ def main(argv: list[str] | None = None) -> None:
     if resolver_command:
         args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
+    args = _with_repeated_default(args, "--objective-interoperability-focus", HALLUCINATE_INTEROPERABILITY_FOCUS)
     args = _with_default(args, "--objective-path", str(paths["objective_goal_heap_path"]))
     args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
@@ -415,6 +418,10 @@ def main(argv: list[str] | None = None) -> None:
             objective_discovery_output_path=parsed.objective_discovery_output_path,
             objective_summary_prefix=parsed.objective_summary_prefix,
             objective_refine_goals=parsed.objective_refine_goals,
+            objective_reconcile_goal_completion=parsed.objective_reconcile_goal_completion,
+            objective_seed_interoperability_goals=parsed.objective_seed_interoperability_goals,
+            objective_interoperability_focus=split_csv_values(parsed.objective_interoperability_focus),
+            objective_max_interoperability_goals=parsed.objective_max_interoperability_goals,
             objective_ensure_tracking_document=parsed.objective_ensure_tracking_document,
             objective_ultimate_goal=parsed.objective_ultimate_goal,
             objective_root_evidence=split_csv_values(parsed.objective_root_evidence),

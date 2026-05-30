@@ -117,6 +117,7 @@ def test_codebase_scan_skips_generated_discovery_dirs():
 
     assert "data/meta_glasses_display_widgets/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "data/hallucinate_multimodal_control/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert supervisor_module.META_DISPLAY_INTEROPERABILITY_FOCUS == ("hallucinate_app",)
 
 
 def test_android_validation_environment_uses_repo_local_tools(monkeypatch):

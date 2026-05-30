@@ -305,6 +305,10 @@ def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
 
 def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+    daemon = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+
+    assert daemon.HALLUCINATE_INTEROPERABILITY_FOCUS == ("hallucinate_app",)
+
     state_dir = tmp_path / "state"
     state_dir.mkdir()
     stale_pid = 99999999

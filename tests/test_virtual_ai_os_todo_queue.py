@@ -162,6 +162,9 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     args = captured["args"]
     flag_index = args.index("--objective-surplus-findings-per-goal")
     assert args[flag_index + 1] == str(supervisor_module.OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL)
+    assert "--objective-seed-interoperability-goals" in args
+    focus_index = args.index("--objective-interoperability-focus")
+    assert args[focus_index + 1] == "hallucinate_app"
 
 
 def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path):
