@@ -33,8 +33,9 @@ Exit code 0 — script compiles cleanly.
 
 ## Merge Conflict Resolution
 
-The merge conflict in `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md` (UU)
-arose because the implementation branch (89209171) added VAI-119 through VAI-123 with `Status: todo`,
-while main had already marked VAI-119 as `completed`. The conflict was resolved by preserving the
-`completed` status for VAI-119 and including all new task entries from the implementation branch.
-VAI-120 is now marked `completed` as the underlying code fix is confirmed in place.
+The merge conflict in the virtual-ai-os submodule integration backlog file (UU status)
+arose because the implementation branch (89209171) added VAI-119 through VAI-123 with pending
+status, while main had already marked VAI-119 as `completed`. The conflict was resolved by
+preserving the `completed` status for VAI-119 and including all new task entries from the
+implementation branch. VAI-120 is now marked `completed` as the underlying code fix is
+confirmed in place.
