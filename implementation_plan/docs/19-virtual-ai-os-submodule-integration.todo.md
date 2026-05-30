@@ -1569,7 +1569,7 @@ cadence remains parseable and resumable.
 
 ## VAI-140 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1112
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: runtime
