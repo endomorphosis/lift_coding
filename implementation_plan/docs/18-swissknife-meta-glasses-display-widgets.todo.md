@@ -1959,3 +1959,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-176-mgw-173-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-173. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-176-mgw-173-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-173 from strategy blocked_tasks.
+
+## MGW-177 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:11
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-codebase-scan-dff7136c9adb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-178 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:301
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:301. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-178-codebase-scan-7d52a8f929c8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-179 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:303
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:303. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-179-codebase-scan-fbd7ce184cdf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-180 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:283
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:283. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-180-codebase-scan-46e73526b874.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-181 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:338
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:338. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-181-codebase-scan-96df5fcdd59e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
