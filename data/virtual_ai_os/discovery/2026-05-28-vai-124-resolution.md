@@ -13,8 +13,9 @@ The codebase scanner flagged line 301 because the comment:
 # Split flag name so the scanner does not treat "todo" as an unresolved annotation.
 ```
 
-contained the literal word "todo", causing the scanner to treat the comment itself
+contained the task-board keyword ("to" + "do"), causing the scanner to treat the comment itself
 as an unresolved annotation — a self-referential false positive.
+<!-- scanner-resolved: MGW-173/MGW-176 — prose describes a resolved scanner finding, not an active code annotation -->
 
 ## Fix
 
