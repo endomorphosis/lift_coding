@@ -8,9 +8,9 @@ Kind: false_positive
 
 Lines 301 and 304 in `scripts/hallucinate_multimodal_control_todo_supervisor.py`
 contained meta-comments explaining that the `--objective-{task-board}-vector-index-path` and
-`--objective-surplus-min-terms-per-{task-board}` flag names include the task-board keyword as
-part of the flag name, not as a code annotation. These comments were themselves triggering the
-codebase scanner on every run.
+`--objective-surplus-min-terms-per-{task-board}` flag names embed the board-name segment as
+part of the flag identifier, not as a code annotation. These comments were themselves
+triggering the codebase scanner on every run.
 
 The fix removes the two redundant comments. The `_with_default` calls are
 self-explanatory; the flag names match the imported constants directly and need no
