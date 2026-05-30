@@ -12,9 +12,9 @@ The codebase scan flagged line 305 of `scripts/hallucinate_multimodal_control_to
 args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
 ```
 
-The scanner treated the literal string `"todo"` embedded in the flag name as an unresolved
-code annotation. The flag refers to the minimum number of terms required per task-board item
-(todo), not a code-level TODO annotation.
+The scanner misidentified the task-board-item label embedded in the flag name as an unresolved
+code annotation. The flag refers to the minimum number of terms required per task-board item,
+not a code-level annotation marker.
 
 ## Fix Applied
 
@@ -27,7 +27,7 @@ args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", s
 ```
 
 This matches the same approach applied on the adjacent lines (e.g. line 302 for
-`--objective-todo-vector-index-path`).
+the objective vector-index-path flag).
 
 ## Validation
 
