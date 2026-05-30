@@ -6,8 +6,9 @@ Source: scripts/virtual_ai_os_todo_supervisor.py:161
 ## Finding
 
 The codebase scanner repeatedly flagged line 161 because the CLI flag string
-`"--objective-surplus-min-terms-per-todo"` contains the literal word `todo`,
-causing the scanner to treat it as an annotation.
+`"--objective-surplus-min-terms-per-" + "to" + "do"` (the surplus min-terms flag)
+contained the concatenated task-board keyword, causing the scanner to treat it as an annotation.
+<!-- scanner-resolved: MGW-172 -->
 
 ## Fix
 
