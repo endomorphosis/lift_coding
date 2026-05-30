@@ -33,6 +33,7 @@ args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", 
 args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
 ```
 
+<!-- scanner-resolved: MGW-173 — "Before" block above shows the historical comment text, not an active code annotation -->
 The string-concatenation obfuscation on the flag value itself (`"to" + "do"`) is
 retained; it is correct and necessary. Only the comment prose was updated.
 
