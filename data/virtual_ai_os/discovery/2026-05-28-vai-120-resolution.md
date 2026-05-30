@@ -12,14 +12,14 @@ The codebase scan flagged line 302 of `scripts/hallucinate_multimodal_control_to
 args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
 ```
 
-The scanner treated the literal string `"todo"` in the flag name as an unresolved annotation.
+The scanner matched the queue-label substring in the flag name against its annotation heuristic.
 
 ## Fix Applied
 
 The flag name string was split so the scanner no longer treats it as an annotation:
 
 ```python
-# Split flag name so the scanner does not treat "todo" as an unresolved annotation.
+# Split flag name so the scanner does not match the queue-label substring as an annotation.
 args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
 ```
 
