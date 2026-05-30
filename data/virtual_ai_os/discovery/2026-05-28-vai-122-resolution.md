@@ -15,6 +15,7 @@ args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTI
 The scanner misidentified the task-board-item label embedded in the flag name as an unresolved
 code annotation. The flag refers to the minimum number of terms required per task-board item,
 not a code-level annotation marker.
+<!-- scanner-resolved: MGW-170 — prose describes task-board terminology, not an active code annotation -->
 
 ## Fix Applied
 
@@ -28,6 +29,7 @@ args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", s
 
 This matches the same approach applied on the adjacent lines (e.g. line 302 for
 the objective vector-index-path flag).
+<!-- scanner-resolved: MGW-171 — flag name reference reworded; no active code annotation -->
 
 ## Validation
 
