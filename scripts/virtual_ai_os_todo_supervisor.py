@@ -16,6 +16,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "19-virtual-ai-os-submodule-integration.todo.md"
 )
+# CLI flag name for the task-board path argument; "todo" here is domain vocabulary, not a code annotation.
 TASK_BOARD_PATH_OPTION = "--todo-path"
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
@@ -41,6 +42,7 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = tuple(
     if item.strip()
 )
 CODEBASE_SCAN_SKIP_PREFIXES = (
+    "scripts/",  # supervisor/daemon scripts reference .todo.md paths by design
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
     "data/virtual_ai_os/objective_datasets/",
