@@ -1830,3 +1830,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:17. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-163-codebase-scan-199c9802cce0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-164 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_daemon.py:47
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_daemon.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_daemon.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_daemon.py:47. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-164-codebase-scan-c4894982f031.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-165 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:304
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-165-codebase-scan-5c4a0f935809.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-166 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:307
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-166-codebase-scan-fc2b92d17414.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-167 Resolve code annotation in scripts/virtual_ai_os_todo_supervisor.py:19
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:19. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-167-codebase-scan-94c3b95fdec8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-168 Resolve code annotation in scripts/virtual_ai_os_todo_supervisor.py:44
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:44. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-168-codebase-scan-8164d3ed24f1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
