@@ -44,7 +44,7 @@ CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_M
 CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
 CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
 CODEBASE_SCAN_SKIP_PREFIXES = (
-    "scripts/",  # supervisor/daemon scripts reference .todo.md paths by design, not as code annotations
+    "scripts/",  # supervisor/daemon scripts embed task-board paths by design; not code annotations
     "data/hallucinate_multimodal_control/discovery/",
     "data/hallucinate_multimodal_control/objective_bundles/",
     "data/hallucinate_multimodal_control/objective_datasets/",
