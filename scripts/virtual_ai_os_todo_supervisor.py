@@ -165,7 +165,7 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
     args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
     args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
-    # scanner-resolved: HAO-251 HAO-255 VAI-173 — "todo" in --objective-todo-vector-index-path refers to backlog task entries (CLI flag name, not a deferred-work annotation).
+    # scanner-resolved: HAO-251 HAO-255 VAI-173 HAO-261 — "todo" in --objective-todo-vector-index-path refers to backlog task entries (CLI flag name, not a deferred-work annotation).
     args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
     # scanner-resolved: HAO-251 HAO-256 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
