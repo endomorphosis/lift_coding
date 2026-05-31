@@ -24,7 +24,7 @@ This matches the pattern established by the adjacent comment at line 304:
 ```
 
 The phrase "not a deferred-work marker" is the canonical signal used throughout this
-file to suppress future scanner re-filings for CLI flag names that contain "todo". <!-- scanner-resolved: MGW-201, MGW-206, MGW-212 — line 27 discusses the suppression pattern in historical prose; the word in that line refers to CLI flag name segments (work-item queue references), not a deferred-work marker; this document is a completed false-positive resolution and contains no open code annotations -->
+file to suppress future scanner re-filings for CLI flag names that contain "todo". <!-- scanner-resolved: MGW-201, MGW-206, MGW-212, MGW-217 — line 27 discusses the suppression pattern in historical prose; the word in that line refers to CLI flag name segments (work-item queue references), not a deferred-work marker; this document is a completed false-positive resolution and contains no open code annotations -->
 
 ## Validation
 
