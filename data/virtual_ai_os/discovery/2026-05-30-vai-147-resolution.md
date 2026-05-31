@@ -10,7 +10,7 @@ Codebase scan filed a finding from `error_monitor.py:1121`. The evidence line
 `# normalising to the three-character token "XXX") are not conflated.` was stale
 after VAI-144 changed the sentinel from `'XXX'` to `'\x00'`. The current code
 (as of VAI-144) correctly says `"normalising to the one-character sentinel"`.
-<!-- scanner-resolved: MGW-177, MGW-188, MGW-193, MGW-198, MGW-203, MGW-208 — lines 9–12 are historical prose documenting the sentinel change; the `'XXX'` reference is not an active annotation; this comment itself is a suppression marker, not an open finding -->
+<!-- scanner-resolved: MGW-177, MGW-188, MGW-193, MGW-198, MGW-203, MGW-208, MGW-213 — lines 9–12 are historical prose documenting the sentinel change; the `'XXX'` reference is not an active annotation; this comment itself is a suppression marker, not an open finding -->
 
 ## Resolution
 
