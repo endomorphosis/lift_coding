@@ -158,9 +158,8 @@ def validation_environment_summary() -> dict[str, object]:
 def _run_supervisor(argv: list[str]) -> None:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
-        PortalSupervisorConfig,
         parse_args,
-        split_csv_values,
+        supervisor_config_from_args,
     )
 
     parsed = parse_args(argv)
@@ -168,9 +167,15 @@ def _run_supervisor(argv: list[str]) -> None:
         level=getattr(logging, parsed.log_level),
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
-    state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
-    strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
-    events_path = parsed.state_dir / f"{parsed.state_prefix}_supervisor_events.jsonl"
+    config = supervisor_config_from_args(
+        parsed,
+        repo_root=REPO_ROOT,
+        daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
+        worktree_submodule_paths=parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+    )
+    state_path = config.state_path
+    strategy_path = config.strategy_path
+    events_path = config.events_path
     daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
     record_retry_budget_findings(
         todo_path=parsed.todo_path,
@@ -178,71 +183,6 @@ def _run_supervisor(argv: list[str]) -> None:
         strategy_path=strategy_path,
         discovery_dir=DISCOVERY_DIR,
         task_header_prefix=parsed.task_prefix,
-    )
-    config = PortalSupervisorConfig(
-        todo_path=parsed.todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        events_path=events_path,
-        state_dir=parsed.state_dir,
-        stale_seconds=parsed.stale_seconds,
-        check_interval=parsed.check_interval,
-        max_restarts=parsed.max_restarts,
-        daemon_interval=parsed.daemon_interval,
-        task_prefix=parsed.task_prefix,
-        state_prefix=parsed.state_prefix,
-        implement=parsed.implement,
-        implementation_command=parsed.implementation_command,
-        llm_merge_resolver_command=parsed.llm_merge_resolver_command,
-        llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
-        implementation_timeout=parsed.implementation_timeout,
-        implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
-        use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
-        worktree_root=parsed.worktree_root,
-        worktree_submodule_paths=tuple(parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS),
-        codebase_refill_enabled=parsed.codebase_refill_scan,
-        codebase_scan_discovery_dir=parsed.codebase_scan_discovery_dir,
-        codebase_scan_discovery_output_path=parsed.codebase_scan_discovery_output_path,
-        codebase_scan_min_open_tasks=parsed.codebase_scan_min_open_tasks,
-        codebase_scan_max_findings=parsed.codebase_scan_max_findings,
-        codebase_scan_cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
-        codebase_scan_depends_on=split_csv_values(parsed.codebase_scan_depends_on),
-        codebase_scan_skip_prefixes=tuple(parsed.codebase_scan_skip_prefix),
-        codebase_scan_commit_outputs=parsed.codebase_scan_commit_outputs,
-        codebase_scan_commit_subject=parsed.codebase_scan_commit_subject,
-        objective_refill_enabled=parsed.objective_refill_scan,
-        objective_path=parsed.objective_path,
-        objective_graph_path=parsed.objective_graph_path,
-        objective_bundle_dir=parsed.objective_bundle_dir,
-        objective_dataset_dir=parsed.objective_dataset_dir,
-        objective_discovery_dir=parsed.objective_discovery_dir,
-        objective_discovery_output_path=parsed.objective_discovery_output_path,
-        objective_summary_prefix=parsed.objective_summary_prefix,
-        objective_refine_goals=parsed.objective_refine_goals,
-        objective_reconcile_goal_completion=parsed.objective_reconcile_goal_completion,
-        objective_seed_interoperability_goals=parsed.objective_seed_interoperability_goals,
-        objective_interoperability_focus=split_csv_values(parsed.objective_interoperability_focus),
-        objective_max_interoperability_goals=parsed.objective_max_interoperability_goals,
-        objective_ensure_tracking_document=parsed.objective_ensure_tracking_document,
-        objective_ultimate_goal=parsed.objective_ultimate_goal,
-        objective_root_evidence=split_csv_values(parsed.objective_root_evidence),
-        objective_goal_prefix=parsed.objective_goal_prefix,
-        objective_root_goal_id=parsed.objective_root_goal_id,
-        objective_root_goal_title=parsed.objective_root_goal_title,
-        objective_tracking_document_title=parsed.objective_tracking_document_title,
-        objective_scan_min_open_tasks=parsed.objective_scan_min_open_tasks,
-        objective_scan_max_findings=parsed.objective_scan_max_findings,
-        objective_scan_cooldown_seconds=parsed.objective_scan_cooldown_seconds,
-        objective_scan_depends_on=split_csv_values(parsed.objective_scan_depends_on),
-        objective_max_refinement_children=parsed.objective_max_refinement_children,
-        objective_max_refinement_depth=parsed.objective_max_refinement_depth,
-        objective_persist_ast_dataset=parsed.objective_persist_ast_dataset,
-        objective_write_todo_vector_index=parsed.objective_write_todo_vector_index,
-        objective_todo_vector_index_path=parsed.objective_todo_vector_index_path,
-        objective_surplus_findings_per_goal=parsed.objective_surplus_findings_per_goal,
-        objective_surplus_min_terms_per_todo=parsed.objective_surplus_min_terms_per_todo,
-        repo_root=REPO_ROOT,
-        daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
     )
     supervisor = PortalImplementationSupervisor(config)
     if getattr(parsed, "ensure_running", False):
