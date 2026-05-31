@@ -2127,7 +2127,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-192 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:308
 
+<<<<<<< HEAD
 - Status: completed
+=======
+- Status: todo
+>>>>>>> implementation/mgw-189-attempt-1-1780219645
 - Completion: manual
 - Priority: P3
 - Track: runtime
