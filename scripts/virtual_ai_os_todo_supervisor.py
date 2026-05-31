@@ -4,8 +4,6 @@
 from __future__ import annotations
 
 import os
-import shlex
-import shutil
 import sys
 from pathlib import Path
 
@@ -64,6 +62,17 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "hallucinate_app",
 )
 
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
+    ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    with_default as _with_default,
+    with_flag_default as _with_flag_default,
+    with_repeated_default as _with_repeated_default,
+)
+
 
 def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
     """Return the repo-local bootstrap contract for virtual-AI-OS supervision."""
@@ -90,47 +99,14 @@ def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -
     return resolved
 
 
-def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
-    if flag in argv:
-        return argv
-    return [flag, value, *argv]
-
-
-def _with_flag_default(argv: list[str], flag: str) -> list[str]:
-    if flag in argv:
-        return argv
-    return [flag, *argv]
-
-
-def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) -> list[str]:
-    if flag in argv:
-        return argv
-    defaults: list[str] = []
-    for value in values:
-        defaults.extend([flag, value])
-    return [*defaults, *argv]
-
-
 def _default_llm_merge_resolver_command() -> str:
-    configured = os.environ.get("HANDSFREE_VAI_OS_LLM_MERGE_RESOLVER_COMMAND", "").strip()
-    if configured:
-        return configured
-    configured = os.environ.get("IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND", "").strip()
-    if configured:
-        return configured
-    codex = shutil.which("codex")
-    if not codex:
-        return ""
-    return f"{shlex.quote(codex)} exec --dangerously-bypass-approvals-and-sandbox -C . -"
+    return _shared_default_llm_merge_resolver_command(
+        primary_env_var="HANDSFREE_VAI_OS_LLM_MERGE_RESOLVER_COMMAND"
+    )
 
 
 def _ensure_runtime_pythonpath() -> None:
-    for path in (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT):
-        if str(path) not in sys.path:
-            sys.path.insert(0, str(path))
-    existing = os.environ.get("PYTHONPATH", "")
-    paths = [str(IPFS_ACCELERATE_ROOT), str(IPFS_DATASETS_ROOT)]
-    os.environ["PYTHONPATH"] = os.pathsep.join([*paths, existing] if existing else paths)
+    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
 
 def main(argv: list[str] | None = None) -> None:

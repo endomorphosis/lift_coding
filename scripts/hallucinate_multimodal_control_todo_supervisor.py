@@ -6,8 +6,6 @@ from __future__ import annotations
 import json
 import logging
 import os
-import shlex
-import shutil
 import subprocess
 import sys
 import time
@@ -17,10 +15,19 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
+    with_default as _with_default,
+    with_flag_default as _with_flag_default,
+    with_repeated_default as _with_repeated_default,
+)
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_COOLDOWN_SECONDS,
     CODEBASE_SCAN_MAX_FINDINGS,
@@ -53,38 +60,10 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "
 SUPERVISOR_RUNNING_STATES = {"running", "starting", "recycling", "restarting"}
 
 
-def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
-    if flag in argv:
-        return argv
-    return [flag, value, *argv]
-
-
-def _with_flag_default(argv: list[str], flag: str) -> list[str]:
-    if flag in argv:
-        return argv
-    return [flag, *argv]
-
-
-def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) -> list[str]:
-    if flag in argv:
-        return argv
-    defaults: list[str] = []
-    for value in values:
-        defaults.extend([flag, value])
-    return [*defaults, *argv]
-
-
 def _default_llm_merge_resolver_command() -> str:
-    configured = os.environ.get("HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND", "").strip()
-    if configured:
-        return configured
-    configured = os.environ.get("IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND", "").strip()
-    if configured:
-        return configured
-    codex = shutil.which("codex")
-    if not codex:
-        return ""
-    return f"{shlex.quote(codex)} exec --dangerously-bypass-approvals-and-sandbox -C . -"
+    return _shared_default_llm_merge_resolver_command(
+        primary_env_var="HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
+    )
 
 
 def _pop_bool_flag(argv: list[str], flag: str) -> bool:

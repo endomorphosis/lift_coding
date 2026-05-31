@@ -61,6 +61,14 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    with_default as _with_default,
+)
+
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
 
@@ -89,25 +97,12 @@ def ensure_hallucinate_multimodal_bootstrap_paths(
     return resolved
 
 
-def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
-    if flag in argv:
-        return argv
-    return [flag, value, *argv]
-
-
 def _ensure_ipfs_accelerate_path() -> None:
-    if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-        sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT,))
 
 
 def _ensure_runtime_pythonpath() -> None:
-    _ensure_ipfs_accelerate_path()
-    for path in (IPFS_DATASETS_ROOT,):
-        if str(path) not in sys.path:
-            sys.path.insert(0, str(path))
-    existing = os.environ.get("PYTHONPATH", "")
-    paths = [str(IPFS_ACCELERATE_ROOT), str(IPFS_DATASETS_ROOT)]
-    os.environ["PYTHONPATH"] = os.pathsep.join([*paths, existing] if existing else paths)
+    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
 
 def _task_prefix_from_header(task_header_prefix: str) -> str:
