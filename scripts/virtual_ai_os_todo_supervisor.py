@@ -41,6 +41,7 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = tuple(
     for item in os.environ.get("HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
     if item.strip()
 )
+# scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
     "data/virtual_ai_os/discovery/",
