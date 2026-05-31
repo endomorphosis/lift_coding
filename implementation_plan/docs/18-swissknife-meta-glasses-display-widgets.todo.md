@@ -2190,3 +2190,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:12. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-197-codebase-scan-e90585996588.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-198 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-198-codebase-scan-1b7e7fc3aefe.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-199 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md:20
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md:20. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-199-codebase-scan-9d74607d993a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-200 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-200-codebase-scan-cbc7c82cd83e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-201 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:27
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:27. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-201-codebase-scan-33582516e040.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-202 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-202-codebase-scan-7baabfef3647.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
