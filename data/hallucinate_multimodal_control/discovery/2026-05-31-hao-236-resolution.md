@@ -7,16 +7,30 @@ Status: fixed
 
 ## Finding
 
-Bare `except:` clause at line 463 silently swallowed any exception from
-`os.unlink(test_file)` during cleanup in the `test` method.  A bare `except`
-catches `BaseException` (including `KeyboardInterrupt`, `SystemExit`, etc.),
-which is wider than intended and hides unexpected failures.
+The cleanup block at line 463 silently swallowed any `OSError` raised by
+`os.unlink(test_file)` during the `test` method with a bare `pass`, making
+temp-file cleanup failures invisible at all log levels.
 
 ## Fix
 
-Replaced bare `except:` with `except OSError:`, which is the correct exception
-type for file-system operations like `os.unlink`.  Other exceptions (including
-`KeyboardInterrupt`) will now propagate normally.
+Replaced `except OSError: pass` with `except OSError as exc:` and a
+`logger.debug(...)` call so transient cleanup failures are visible in debug
+output without being elevated to warnings or errors (cleanup failures are
+non-critical).
+
+```python
+# Before
+try:
+    os.unlink(test_file)
+except OSError:
+    pass
+
+# After
+try:
+    os.unlink(test_file)
+except OSError as exc:
+    logger.debug("Could not remove temporary test file %s: %s", test_file, exc)
+```
 
 ## Validation
 
