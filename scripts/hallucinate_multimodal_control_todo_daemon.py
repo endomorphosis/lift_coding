@@ -290,6 +290,8 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--task-prefix", "## HAO-")
     args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
     args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
+    args = _with_default(args, "--objective-path", str(paths["objective_goal_heap_path"]))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
@@ -324,6 +326,8 @@ def main(argv: list[str] | None = None) -> None:
         use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
         worktree_root=parsed.worktree_root,
         worktree_submodule_paths=parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+        objective_path=parsed.objective_path or paths["objective_goal_heap_path"],
+        objective_bundle_dir=parsed.objective_bundle_dir or OBJECTIVE_BUNDLE_DIR,
         llm_merge_resolver_command=parsed.llm_merge_resolver_command or None,
         llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
     )

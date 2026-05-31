@@ -20,6 +20,8 @@ STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 STATE_DIR_ENV = "HANDSFREE_VAI_OS_STATE_DIR"
 WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 WORKTREE_ROOT_ENV = "HANDSFREE_VAI_OS_WORKTREE_ROOT"
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_datasets",
     "external/ipfs_accelerate",
@@ -90,6 +92,8 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--task-prefix", "## VAI-")
     args = _with_default(args, "--state-prefix", "virtual_ai_os")
     args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
+    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
     daemon_main(args)
 

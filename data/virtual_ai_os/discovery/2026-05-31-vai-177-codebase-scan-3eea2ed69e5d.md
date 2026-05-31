@@ -19,3 +19,7 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution (VAI-177)
+
+False positive. The "todo" in `--objective-todo-vector-index-path` is part of a CLI flag name referring to backlog task entries, not a deferred-work annotation. The existing `scanner-resolved` comment at line 168 has been updated to include VAI-177 so the supervisor will not re-file this finding.

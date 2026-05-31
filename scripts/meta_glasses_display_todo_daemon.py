@@ -19,7 +19,10 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
+WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 LOCAL_JDK = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
 LOCAL_ANDROID_SDK = REPO_ROOT / ".tools" / "android-sdk"
 VALIDATION_RETRY_BUDGET = 3
@@ -256,6 +259,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--state-dir", str(STATE_DIR))
     args = _with_default(args, "--task-prefix", "## MGW-")
     args = _with_default(args, "--state-prefix", "meta_glasses_display")
+    args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
+    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
     args = _with_repeated_default(args, "--worktree-submodule-path", META_DISPLAY_WORKTREE_SUBMODULE_PATHS)
     parsed = parse_args(args)
     logging.basicConfig(
@@ -282,6 +288,8 @@ def main(argv: list[str] | None = None) -> None:
         use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
         worktree_root=parsed.worktree_root,
         worktree_submodule_paths=parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+        objective_path=parsed.objective_path,
+        objective_bundle_dir=parsed.objective_bundle_dir,
         llm_merge_resolver_command=parsed.llm_merge_resolver_command or None,
         llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
     )
