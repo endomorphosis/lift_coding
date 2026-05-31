@@ -304,6 +304,7 @@ def main(argv: list[str] | None = None) -> None:
     # Wire the task-board vector index (not a code annotation; "todo" is part of the path name).
     args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
+    # "todo" in flag name below refers to task-board items, not a code annotation.
     args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
