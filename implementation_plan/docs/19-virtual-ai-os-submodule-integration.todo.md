@@ -1822,7 +1822,7 @@ cadence remains parseable and resumable.
 
 ## VAI-163 Resolve code annotation in scripts/virtual_ai_os_todo_supervisor.py:17
 
-- Status: todo
+- Status: done
 - Completion: manual
 - Priority: P3
 - Track: runtime
