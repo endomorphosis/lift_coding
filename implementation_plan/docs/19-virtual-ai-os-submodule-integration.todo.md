@@ -2105,3 +2105,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:390. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-188-codebase-scan-c5f417bc9670.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-189 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:462
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:462. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-189-codebase-scan-851ad878de18.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-190 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-190-codebase-scan-ccb16b8cf977.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-191 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-191-codebase-scan-0151f4bbf728.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-192 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-192-codebase-scan-15d4816ce8d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-193 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-193-codebase-scan-7fae0bf71f93.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
