@@ -50,4 +50,4 @@ False positive suppressed. No functional change to runtime behaviour.
 test -f data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
 ```
 
-File exists and now contains the MGW-202 scanner-resolved suppression marker.
+File exists and contains the MGW-202 scanner-resolved suppression marker at line 7.
