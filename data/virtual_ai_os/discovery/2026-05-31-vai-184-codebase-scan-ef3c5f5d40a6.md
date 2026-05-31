@@ -1,0 +1,21 @@
+# VAI-184 Codebase Scan Finding
+
+Date: 2026-05-31
+Fingerprint: ef3c5f5d40a654f041ac28f051fd5449db44f860
+Kind: annotated_followup
+Source: hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:376
+Priority: P2
+Track: quality
+
+## Evidence
+
+```text
+"""_SIMILAR_SENTINEL must be a null byte, not the three-character token 'XXX' (HAO-227).
+```
+
+## Suggested Handling
+
+Review the finding in context, decide whether it represents a bug, missing test,
+maintenance risk, or false positive, and land a small fix with validation. If the
+finding is a false positive, document why in the changed code or discovery notes
+so the supervisor does not keep re-adding the same work.
