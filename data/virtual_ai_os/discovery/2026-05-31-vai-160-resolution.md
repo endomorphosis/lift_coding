@@ -42,3 +42,5 @@ After:
 ```bash
 python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 ```
+
+<!-- scanner-resolved: MGW-200 — line 18 references the CLI flag name `--objective-todo-vector-index-path` in historical analysis prose; the segment in that flag name denotes the work-item queue path (not a deferred-work marker); this document is a completed false-positive resolution and contains no open code annotations -->
