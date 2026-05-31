@@ -16,7 +16,7 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "19-virtual-ai-os-submodule-integration.todo.md"
 )
-# scanner-resolved: VAI-167 — "todo" in --todo-path is a CLI flag name for the backlog task-board file path, not a deferred-work annotation.
+# scanner-resolved: VAI-167 VAI-171 — The CLI flag above names the backlog task-board file path; it is not a deferred-work annotation.
 TASK_BOARD_PATH_OPTION = "--todo-path"
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
