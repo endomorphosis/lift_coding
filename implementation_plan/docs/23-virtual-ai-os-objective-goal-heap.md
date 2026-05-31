@@ -2638,6 +2638,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+<<<<<<< HEAD
 
 ## VAIOS-G161 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
@@ -3646,3 +3647,5 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+=======
+>>>>>>> implementation/mgw-188-attempt-1-1780219004
