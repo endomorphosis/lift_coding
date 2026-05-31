@@ -1775,3 +1775,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-158-vai-157-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-157. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-158-vai-157-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-157 from strategy blocked_tasks.
+
+## VAI-159 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:304
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-159-codebase-scan-9f8f16918698.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-160 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:305
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:305. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-160-codebase-scan-969bf9b8ee48.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-161 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:307
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-161-codebase-scan-06466d54cc2a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-162 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:308
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:308. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-162-codebase-scan-c0b8d370e688.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-163 Resolve code annotation in scripts/virtual_ai_os_todo_supervisor.py:17
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
+- Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
+- Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:17. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-163-codebase-scan-199c9802cce0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
