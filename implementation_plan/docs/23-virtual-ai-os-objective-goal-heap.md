@@ -32,7 +32,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G000 Virtual AI OS outcome
 
-- Status: active
+- Status: completed
 - Parent:
 - Fib priority: 1
 - Track: ops
@@ -50,10 +50,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - HAO-060 proof: `docs/observability_metrics.md` records the Meta glasses remote terminal evidence term outside the objective heap, and `tests/test_hallucinate_multimodal_control_todo_queue.py` verifies the scanner treats that tracked proof as covered.
 - Refinement: Add child goals when a missing proof cannot be closed by one focused task.
 - Gap task: Close the highest-leverage missing proof that the component stack behaves like one virtual AI OS instead of disconnected demos.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: virtual AI OS => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/android/termux_phone_dispatcher.py (ast); capability registry => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); runtime router => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/reference_mobile_client.py (ast); Meta glasses remote terminal => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), docs/observability_metrics.md (exact); tests/test_virtual_ai_os_end_to_end.py => tests/test_virtual_ai_os_end_to_end.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G010 Objective-driven supervisor loop
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 2
 - Track: ops
@@ -70,10 +73,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: test -f scripts/hallucinate_multimodal_control_todo_daemon.py && test -f tests/test_hallucinate_multimodal_control_todo_queue.py
 - Refinement: Split into scoring, evidence indexing, and task-generation children if the scanner becomes too broad.
 - Gap task: Wire an objective-gap scanner into the supervisor loop and prove it can emit daemon-parseable tasks.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: objective_goal_scan => implementation_plan/docs/12-github-cli-copilot-integration.md (ast), implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md (ast), implementation_plan/docs/12-p2p-bluetooth-libp2p.md (ast); objective_goal_seen_fingerprints => implementation_plan/docs/12-github-cli-copilot-integration.md (ast), implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md (ast), implementation_plan/docs/12-p2p-bluetooth-libp2p.md (ast); last_objective_goal_scan_findings => implementation_plan/docs/12-github-cli-copilot-integration.md (ast), implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md (ast), implementation_plan/docs/12-p2p-bluetooth-libp2p.md (ast); implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md => implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G020 Capability routing kernel
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3
 - Track: runtime
@@ -91,6 +97,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - HAO-062 proof: `src/handsfree/capability_registry.py` is the scanner-visible capability routing kernel. It exposes `CapabilityRegistry`, `RuntimeRouter`, and `CapabilityRoutingKernel.dispatch_task` while delegating to the existing AI registry/router and naming the local Python, daemon tasks, MCP/MCP++, SwissKnife ORB, Hallucinate App, and mobile/glasses surfaces. `tests/test_virtual_ai_os_capability_registry.py` and `tests/test_virtual_ai_os_runtime_router.py` exercise the top-level path, fallback route planning, and normalized route-planning error contract.
 - Refinement: Add child goals for scheduler policy, fallback routing, and normalized error contracts.
 - Gap task: Add or tighten routing evidence for any execution mode that is named in the architecture but not exercised by tests.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: capability registry => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); runtime router => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/reference_mobile_client.py (ast); src/handsfree/capability_registry.py => src/handsfree/capability_registry.py (path), README.md (embedding:0.42), agent-runner/apply_instruction.py (ast); tests/test_virtual_ai_os_capability_registry.py => tests/test_virtual_ai_os_capability_registry.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast); tests/test_virtual_ai_os_runtime_router.py => tests/test_virtual_ai_os_runtime_router.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G021 Capability scheduler policy
 
@@ -114,7 +123,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G022 Capability fallback routing
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G020
 - Fib priority: 3
 - Track: runtime
@@ -131,10 +140,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "fallback routing|fallback_route|fallback_execution_mode|resolve_fallback_route" src/handsfree tests
 - Refinement: Add children for runtime health scoring and surface-specific fallback receipts if route metadata is not enough.
 - Gap task: Add fallback-routing evidence for capabilities whose backup path is named in the registry but not exercised by dispatch tests.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: fallback routing => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), docs/device-smoke-checklist-ios-meta-glasses.md (embedding:0.33); fallback_route => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), mobile/modules/expo-meta-wearables-dat/index.ts (ast); fallback_execution_mode => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), implementation_plan/docs/12-meta-glasses-ipfs-tool-integration.md (embedding:0.36); tests/test_virtual_ai_os_runtime_router.py => tests/test_virtual_ai_os_runtime_router.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G023 Capability normalized error contracts
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G020
 - Fib priority: 3
 - Track: runtime
@@ -151,10 +163,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "normalized error contracts|CapabilityRoutingError|NORMALIZED_ERROR_CONTRACT_ID|build_error_contract" src/handsfree tests
 - Refinement: Add children for execution-time provider errors and user-facing error rendering once route-planning errors are covered.
 - Gap task: Add normalized-error evidence for the next capability failure path that still returns provider-specific strings.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: normalized error contracts => dev/meta-rayban-display-simulator/webapp/app.js (ast), mobile/push/examples/backend_client.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast); CapabilityRoutingError => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), mobile/push/examples/backend_client.ts (ast); NORMALIZED_ERROR_CONTRACT_ID => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), mobile/push/examples/backend_client.ts (ast); tests/test_virtual_ai_os_runtime_router.py => tests/test_virtual_ai_os_runtime_router.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G030 IDL, ORB, and MCP++ bridge
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 5
 - Track: runtime
@@ -172,10 +187,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - HAO-063 proof: `hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md` now names the scanner-visible interface descriptor language proof for `VAIOS-G030`. It ties `control_surface_contract`, `interaction_envelope`, `policy_decision`, and `mediation_receipt` to the ORB/MCP++ mediation path, and records descriptor, policy, and dispatch evidence for voice, gesture, mouse, and agent modalities. Existing modality tests and `swissknife/test/mcp-plus-plus/mcp-orb-capability-router.test.ts` prove all four surfaces reach the same before-dispatch policy gate, so no modality child goals are required by this scan.
 - Refinement: Add child goals for each control modality when a modality lacks descriptor, policy, and dispatch evidence.
 - Gap task: Close the weakest modality-to-policy-to-dispatch proof in the IDL/ORB/MCP++ bridge.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: interface descriptor language => mobile/modules/expo-glasses-audio/index.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/push/notificationsHandler.js (ast); object request broker => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (exact); mcp_plus_plus => dev/meta-rayban-display-simulator/webapp/app.js (exact), docs/GETTING_STARTED.md (exact), implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast); control surface => dev/meta-rayban-display-simulator/styles.css (embedding:0.34), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact); deontic logic => implementation_plan/docs/22-multimodal-control-surface-logic-idl.md (exact), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/screens/CommandScreen.js (ast); event calculus => dev/meta-rayban-display-simulator/simulator.js (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), implementation_plan/docs/22-multimodal-control-surface-logic-idl.md (exact); frame logic => dev/meta-rayban-display-simulator/simulator.js (ast), implementation_plan/docs/22-multimodal-control-surface-logic-idl.md (exact), mobile/push/examples/expo_receive_handler.ts (ast)
+- Completion validation: 0
 
 ## VAIOS-G040 Operator shell and virtual desktop
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 8
 - Track: ui
@@ -193,10 +211,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - HAO-064 proof: `hallucinate_app/index.js` exposes the Hallucinate App operator console evidence term in the Electron snapshot, `swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts` names the ORB display harness, and `hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md` ties both terms to the desktop shell.
 - Refinement: Add child goals for task monitor, app launcher, ORB inspector, and session replay.
 - Gap task: Add missing shell evidence that connects daemon state, ORB tools, and operator-visible UI.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: SwissKnife virtual desktop => implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.37); Hallucinate App operator console => dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/meta-wearables-dat-display-physical-validation-checklist.md (embedding:0.42), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (embedding:0.31); daemon manager => implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (exact), mobile/src/screens/SettingsScreen.js (ast); ORB display harness => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast), implementation_plan/docs/21-swissknife-mobile-orb-bridge.md (embedding:0.39); test/mcp-plus-plus/meta-glasses-display-harness.test.ts => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast), docs/DOCUMENTATION_INDEX.md (embedding:0.32)
+- Completion validation: 0
 
 ## VAIOS-G041 Operator shell task monitor
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G040
 - Fib priority: 8
 - Track: ui
@@ -213,10 +234,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "task monitor|daemon task status|pending confirmations|receipt diagnostics" hallucinate_app tests
 - Refinement: Add child goals for per-daemon task streams if task state outgrows the current console snapshot.
 - Gap task: Add missing task-monitor evidence that keeps daemon state visible to operators.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: task monitor => docs/planning/CODEBASE_INVENTORY.md (exact), docs/planning/DOCUMENTATION_GAP_ANALYSIS.md (exact), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.34); daemon task status => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (embedding:0.32), implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast); pending confirmations => implementation_plan/docs/06-command-system.md (embedding:0.38), implementation_plan/prs/PR-004-command-router-and-confirmations.md (embedding:0.33), mobile/push/examples/expo_receive_handler.ts (ast); receipt diagnostics => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/android/termux_phone_dispatcher.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G042 Operator shell app launcher
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G040
 - Fib priority: 8
 - Track: ui
@@ -233,10 +257,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "app launcher|SwissKnife virtual desktop launch|MCP tool actions" hallucinate_app swissknife tests
 - Refinement: Add app-specific child goals only when a launched app needs independent policy or routing evidence.
 - Gap task: Add missing app-launcher evidence that proves tools are reachable from the desktop shell.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: app launcher => dev/meta-rayban-display-simulator/webapp/app.js (ast), mobile/App.js (ast), mobile/modules/expo-meta-wearables-dat/app.plugin.js (ast); SwissKnife virtual desktop launch => implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.34), mobile/modules/expo-glasses-audio/index.ts (ast); MCP tool actions => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G043 Operator shell ORB inspector
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G040
 - Fib priority: 8
 - Track: ui
@@ -253,10 +280,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "ORB inspector|ORB display harness|descriptor manifest|session snapshot" swissknife hallucinate_app tests
 - Refinement: Add inspector children for descriptor diffing, receipt search, and policy-denial drilldown if needed.
 - Gap task: Add missing ORB-inspector evidence for display workflow diagnostics.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: ORB inspector => mobile/modules/expo-glasses-audio/index.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/push/notificationsHandler.js (ast); ORB display harness => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast), implementation_plan/docs/21-swissknife-mobile-orb-bridge.md (embedding:0.39); descriptor manifest => dev/meta-rayban-display-simulator/simulator.js (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast); session snapshot => mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/hooks/usePeerChatDiagnostics.js (ast), mobile/src/orb/__tests__/metaGlassesOrbEdgeSession.test.js (exact)
+- Completion validation: 0
 
 ## VAIOS-G044 Operator shell session replay
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G040
 - Fib priority: 8
 - Track: ui
@@ -273,10 +303,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "session replay|mediation receipts|ORB session snapshots|replay anchors" hallucinate_app swissknife tests
 - Refinement: Add storage/provenance children when replay artifacts need durable IPFS addressing.
 - Gap task: Add missing session-replay evidence for operator-visible workflow reconstruction.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: session replay => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); mediation receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); ORB session snapshots => mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/hooks/usePeerChatDiagnostics.js (ast), mobile/src/orb/__tests__/metaGlassesOrbEdgeSession.test.js (embedding:0.36); replay anchors => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completion validation: 0
 
 ## VAIOS-G050 Meta glasses remote terminal
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 13
 - Track: mobile
@@ -293,10 +326,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: test -f implementation_plan/docs/20-meta-rayban-display-interface-simulator.md
 - Refinement: Add child goals for display, audio, action receipts, fallback rendering, and physical-device evidence.
 - Gap task: Add missing simulator or bridge evidence so glasses can be treated as a terminal, not only a notification endpoint.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: Meta Ray-Ban simulator => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/index.html (embedding:0.30), docs/plan-vs-code-gap-matrix.md (embedding:0.32); 600x600 => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/index.html (exact), dev/meta-rayban-display-simulator/simulator.js (exact); DAT Mock Device => implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), implementation_plan/docs/20-meta-rayban-display-interface-simulator.md (exact), implementation_plan/prs/PR-018-meta-wearables-dat-diagnostics-and-native-bridge.md (embedding:0.31); mobile glasses bridge => ARCHITECTURE.md (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/ARCHITECTURE.md (ast); display widget => config/display_webapp_readiness.meta_glasses_widget.example.json (embedding:0.32), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (embedding:0.31); audio routing => ARCHITECTURE.md (exact), GETTING_STARTED.md (exact), docs/ARCHITECTURE.md (exact); tests/test_meta_glasses_display_simulator.py => CONTRIBUTING.md (ast), GETTING_STARTED.md (embedding:0.35), README.md (embedding:0.36)
+- Completion validation: 0
 
 ## VAIOS-G060 Content, provenance, and durable artifacts
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 21
 - Track: data
@@ -313,10 +349,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: test -f tests/test_virtual_ai_os_task_orchestration.py
 - Refinement: Add child goals for artifact schemas, replay, pinning, and rollback.
 - Gap task: Add missing artifact/provenance evidence for the highest-risk workflow.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: ipfs_kit => CONFIGURATION.md (exact), docs/CONFIGURATION.md (exact), docs/GETTING_STARTED.md (exact); provenance => docs/meta-wearables-dat-display-rollout-evidence-template.md (exact), implementation_plan/docs/13-nl-prompt-to-hierarchical-tools-ipfs-datasets.md (exact), implementation_plan/docs/14-mcp-plus-plus-ipfs-server-integration.md (exact); artifact manifest => dev/meta-rayban-display-simulator/simulator.js (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast); content address => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/12-github-cli-copilot-integration.md (exact); dataset => ARCHITECTURE.md (exact), CONFIGURATION.md (exact), dev/meta-rayban-display-simulator/fixtures/task-progress.json (exact); tests/test_virtual_ai_os_task_orchestration.py => tests/test_virtual_ai_os_task_orchestration.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G070 Execution placement and acceleration
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 34
 - Track: runtime
@@ -333,10 +372,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "execution placement|ipfs_accelerate|fallback mode" docs implementation_plan src tests
 - Refinement: Add child goals for placement policy, batching, fallback, and observability.
 - Gap task: Add routing or test evidence for the weakest execution-placement path.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: ipfs_accelerate => CONFIGURATION.md (exact), docs/CONFIGURATION.md (exact), docs/GETTING_STARTED.md (exact); execution placement => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), mobile/push/examples/expo_receive_handler.ts (ast); accelerated inference => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (exact); scheduler => implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), mobile/src/screens/SettingsScreen.js (ast), src/handsfree/capability_registry.py (exact); fallback mode => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.40)
+- Completion validation: 0
 
 ## VAIOS-G080 End-to-end validation lattice
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 55
 - Track: quality
@@ -353,3 +395,566 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: test -f tests/test_virtual_ai_os_end_to_end.py
 - Refinement: Add child goals for each untested integration path in the test matrix.
 - Gap task: Add the next missing hardware-free integration test that ties at least two planes together.
+- Completed at: 2026-05-31T07:38:46.698317+00:00
+- Completion evidence: tests/test_virtual_ai_os_end_to_end.py => tests/test_virtual_ai_os_end_to_end.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast); Playwright => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), implementation_plan/docs/20-meta-rayban-display-interface-simulator.md (exact), mobile/modules/expo-meta-wearables-dat/app.plugin.js (ast); mobile bridge tests => ARCHITECTURE.md (ast), CONTRIBUTING.md (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); SwissKnife Jest => implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), mobile/package.json (ast); Hallucinate App e2e => dev/meta-rayban-display-simulator/webapp/app.js (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.43); hardware-free => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), docs/observability_metrics.md (exact)
+- Completion validation: 0
+
+## VAIOS-G081 Interoperate hallucinate_app with external/ipfs_datasets
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_datasets
+- Submodules: hallucinate_app, external/ipfs_datasets
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_datasets/.tools/ipfs_kit_py/.playwright_local/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/archive/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/backup/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/config/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/config/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.cfg, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.py, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/requirements.txt
+- Interface descriptors: external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/backend_schemas.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/graphql_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/openapi_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/scripts/development/verify_mcp_interface.py
+- MCP descriptors: external/ipfs_datasets/.github/workflows/mcp-benchmarks.yml, external/ipfs_datasets/.github/workflows/mcp-dashboard-tests.yml, external/ipfs_datasets/.github/workflows/mcp-integration-tests.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring-unified.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml.backup, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/enhanced-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/final-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/direct_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp.sh, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp_issues.sh
+- Python import roots: Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, benchmark_symai, black, bs4, cProfile, collections, complete_mcp_discovery_test, concurrent
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_datasets` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, interface contract hallucinate_app external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, hallucinate_app, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_datasets interoperability integration test interface descriptor Bio PIL Stanford __future__ advanced_thread_pool_manager aiohttp analyze_workflow_failure anyio archive argparse ast asyncio
+- AST query: hallucinate_app, external/ipfs_datasets, interface contract, integration test, Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G082 Interoperate hallucinate_app with external/ipfs_accelerate
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_accelerate
+- Submodules: hallucinate_app, external/ipfs_accelerate
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_accelerate/ipfs_accelerate_py/consensus_kit/Cargo.toml, external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/utils/qualcomm/onnx/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/libllama/requirements.txt, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/requirements.txt, external/ipfs_accelerate/scripts/generators/skill_generator/setup.py, external/ipfs_accelerate/scripts/generators/test_generator/requirements.txt, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/doc-builder-test/pyproject.toml, external/ipfs_accelerate/test/doc-builder-test/setup.cfg
+- Interface descriptors: external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py, external/ipfs_accelerate/docs/development_history/VISUAL_PROOF_WORKING_INTERFACE.md, external/ipfs_accelerate/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/core/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/embeddings_schema_stubs.md, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema.py, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema_stubs.md
+- MCP descriptors: external/ipfs_accelerate/.github/workflows/mcp-transport-libp2p.yml, external/ipfs_accelerate/MCP_SERVER_UNIFICATION_PLAN.md, external/ipfs_accelerate/deployments/systemd/ipfs-accelerate-mcp.service, external/ipfs_accelerate/docs/MCP_DASHBOARD_GUIDE.md, external/ipfs_accelerate/docs/MCP_TRIO_ROADMAP.md, external/ipfs_accelerate/docs/architecture/IPFS_ACCELERATE_MCP_INTEGRATION_PLAN.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT_2025-10-23.md, external/ipfs_accelerate/docs/archive/implementations/IMPLEMENTATION_COMPLETE_GITHUB_MCP.md, external/ipfs_accelerate/docs/development_history/MCP_ERROR_HANDLING_VERIFICATION.md, external/ipfs_accelerate/docs/features/mcp/AI_MCP_SERVER_IMPLEMENTATION.md, external/ipfs_accelerate/docs/guides/MCP_SETUP_GUIDE.md, external/ipfs_accelerate/docs/guides/QUICK_START_MCP.md, external/ipfs_accelerate/docs/guides/github/GITHUB_CLI_MCP_INTEGRATION.md, external/ipfs_accelerate/docs/guides/github/QUICK_REFERENCE_GITHUB_MCP.md, external/ipfs_accelerate/docs/guides/infrastructure/MCP_P2P_SETUP_GUIDE.md
+- Python import roots: Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, builtins, cli, collections, comprehensive_mcp_server, concurrent, contextlib, copilot, copy
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_accelerate` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, interface contract hallucinate_app external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, hallucinate_app, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_accelerate interoperability integration test interface descriptor Bio GitHub PIL __future__ abc advanced_thread_pool_manager aiohttp anyio api_backends argparse asyncio atexit
+- AST query: hallucinate_app, external/ipfs_accelerate, interface contract, integration test, Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G083 Interoperate hallucinate_app with external/ipfs_kit
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_kit
+- Submodules: hallucinate_app, external/ipfs_kit
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_kit/.playwright_local/package.json, external/ipfs_kit/archive/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/archive/fixes/requirements.txt, external/ipfs_kit/backup/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/backup/fixes/requirements.txt, external/ipfs_kit/config/package.json, external/ipfs_kit/config/pyproject.toml, external/ipfs_kit/config/requirements.txt, external/ipfs_kit/config/setup.cfg, external/ipfs_kit/config/setup.py, external/ipfs_kit/docs/py-ipld-car/pyproject.toml, external/ipfs_kit/docs/py-ipld-car/requirements.txt
+- Interface descriptors: external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto, external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/demo_unified_bucket_interface.py, external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/schema_column_optimization_example.py, external/ipfs_kit/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_kit/ipfs_kit_py/backend_schemas.py, external/ipfs_kit/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_kit/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_kit/ipfs_kit_py/graphql_schema.py, external/ipfs_kit/ipfs_kit_py/libp2p/network/stream/net_stream_interface.py
+- MCP descriptors: external/ipfs_kit/.github/workflows/enhanced-mcp-server.yml, external/ipfs_kit/.github/workflows/final-mcp-server.yml, external/ipfs_kit/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_kit/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_kit/archive/applied_patches/fix_all_mcp.sh, external/ipfs_kit/archive/applied_patches/fix_all_mcp_issues.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch1.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch2.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_code.py, external/ipfs_kit/archive/applied_patches/fix_mcp_errors.py, external/ipfs_kit/archive/applied_patches/fix_mcp_file.py, external/ipfs_kit/archive/applied_patches/fix_mcp_form_data.py
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, boto3, botocore, cbor2, collections, concurrent, contextlib, copy, create_individual_bucket_parquet, cross, cross_browser_model_sharding, cryptography, dag_cbor
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_kit` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, interface contract hallucinate_app external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, hallucinate_app, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_kit interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp anyio argparse asyncio auth auth_keystore_integration auth_keystore_py base64
+- AST query: hallucinate_app, external/ipfs_kit, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G084 Interoperate hallucinate_app with Mcp-Plus-Plus
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, Mcp-Plus-Plus
+- Submodules: hallucinate_app, Mcp-Plus-Plus
+- Interoperability score: 35
+- Discovery sources: configured, gitlink
+- Package manifests: Mcp-Plus-Plus/tests-go/go.mod, Mcp-Plus-Plus/tests-py/requirements.txt, Mcp-Plus-Plus/tests-rs/Cargo.toml, Mcp-Plus-Plus/tests-ts/package.json, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py
+- Interface descriptors: Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts
+- MCP descriptors: Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md, Mcp-Plus-Plus/tests-go/validators/base_mcp.go, Mcp-Plus-Plus/tests-go/validators/mcp_idl.go, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_tool_call.json, Mcp-Plus-Plus/tests-py/integration/test_base_mcp_typed.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_baseline.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_idl.py, Mcp-Plus-Plus/tests-py/validators/base_mcp.py, Mcp-Plus-Plus/tests-py/validators/base_mcp_typed.py, Mcp-Plus-Plus/tests-py/validators/mcp_idl.py, Mcp-Plus-Plus/tests-rs/src/validators/base_mcp.rs, Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs, Mcp-Plus-Plus/tests-ts/src/validators/baseMCP.ts
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `Mcp-Plus-Plus` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, interface contract hallucinate_app Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py
+- Outputs: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, hallucinate_app, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app Mcp-Plus-Plus interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, Mcp-Plus-Plus, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G085 Interoperate hallucinate_app with swissknife
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3004
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-swissknife
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, swissknife
+- Submodules: hallucinate_app, swissknife
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `swissknife` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_swissknife_interop.py, docs/integration/hallucinate_app-swissknife.md, interface contract hallucinate_app swissknife, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_swissknife_interop.py, docs/integration/hallucinate_app-swissknife.md, hallucinate_app, swissknife, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app swissknife interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, swissknife, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-swissknife
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `swissknife` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G086 Interoperate hallucinate_app with external/meta-wearables-dat-android
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3005
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-android
+- Submodules: hallucinate_app, external/meta-wearables-dat-android
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-android` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, interface contract hallucinate_app external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, hallucinate_app, external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-android interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-android, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-android` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G087 Interoperate hallucinate_app with external/meta-wearables-dat-ios
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3006
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-ios
+- Submodules: hallucinate_app, external/meta-wearables-dat-ios
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-ios` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, interface contract hallucinate_app external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, hallucinate_app, external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-ios interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-ios, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-ios` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G088 Interoperate hallucinate_app with external/meta-wearables-dat-android
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-android
+- Submodules: hallucinate_app, external/meta-wearables-dat-android
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-android` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, interface contract hallucinate_app external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, hallucinate_app, external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-android interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-android, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-android` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G089 Interoperate hallucinate_app with external/meta-wearables-dat-ios
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-ios
+- Submodules: hallucinate_app, external/meta-wearables-dat-ios
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-ios` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, interface contract hallucinate_app external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, hallucinate_app, external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-ios interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-ios, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-ios` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G090 Interoperate hallucinate_app with external/ipfs_datasets
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_datasets
+- Submodules: hallucinate_app, external/ipfs_datasets
+- Interoperability score: 35
+- Discovery sources: gitlink, gitmodules
+- Package manifests: external/ipfs_datasets/.tools/ipfs_kit_py/.playwright_local/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/archive/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/backup/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/config/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/config/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.cfg, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.py, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/requirements.txt
+- Interface descriptors: external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/backend_schemas.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/graphql_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/openapi_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/scripts/development/verify_mcp_interface.py
+- MCP descriptors: external/ipfs_datasets/.github/workflows/mcp-benchmarks.yml, external/ipfs_datasets/.github/workflows/mcp-dashboard-tests.yml, external/ipfs_datasets/.github/workflows/mcp-integration-tests.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring-unified.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml.backup, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/enhanced-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/final-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/direct_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp.sh, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp_issues.sh
+- Python import roots: Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, benchmark_symai, black, bs4, cProfile, collections, complete_mcp_discovery_test, concurrent
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_datasets` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, interface contract hallucinate_app external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, hallucinate_app, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_datasets interoperability integration test interface descriptor Bio PIL Stanford __future__ advanced_thread_pool_manager aiohttp analyze_workflow_failure anyio archive argparse ast asyncio
+- AST query: hallucinate_app, external/ipfs_datasets, interface contract, integration test, Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G091 Interoperate hallucinate_app with external/ipfs_kit
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_kit
+- Submodules: hallucinate_app, external/ipfs_kit
+- Interoperability score: 35
+- Discovery sources: gitlink, gitmodules
+- Package manifests: external/ipfs_kit/.playwright_local/package.json, external/ipfs_kit/archive/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/archive/fixes/requirements.txt, external/ipfs_kit/backup/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/backup/fixes/requirements.txt, external/ipfs_kit/config/package.json, external/ipfs_kit/config/pyproject.toml, external/ipfs_kit/config/requirements.txt, external/ipfs_kit/config/setup.cfg, external/ipfs_kit/config/setup.py, external/ipfs_kit/docs/py-ipld-car/pyproject.toml, external/ipfs_kit/docs/py-ipld-car/requirements.txt
+- Interface descriptors: external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto, external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/demo_unified_bucket_interface.py, external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/schema_column_optimization_example.py, external/ipfs_kit/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_kit/ipfs_kit_py/backend_schemas.py, external/ipfs_kit/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_kit/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_kit/ipfs_kit_py/graphql_schema.py, external/ipfs_kit/ipfs_kit_py/libp2p/network/stream/net_stream_interface.py
+- MCP descriptors: external/ipfs_kit/.github/workflows/enhanced-mcp-server.yml, external/ipfs_kit/.github/workflows/final-mcp-server.yml, external/ipfs_kit/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_kit/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_kit/archive/applied_patches/fix_all_mcp.sh, external/ipfs_kit/archive/applied_patches/fix_all_mcp_issues.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch1.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch2.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_code.py, external/ipfs_kit/archive/applied_patches/fix_mcp_errors.py, external/ipfs_kit/archive/applied_patches/fix_mcp_file.py, external/ipfs_kit/archive/applied_patches/fix_mcp_form_data.py
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, boto3, botocore, cbor2, collections, concurrent, contextlib, copy, create_individual_bucket_parquet, cross, cross_browser_model_sharding, cryptography, dag_cbor
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_kit` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, interface contract hallucinate_app external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, hallucinate_app, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_kit interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp anyio argparse asyncio auth auth_keystore_integration auth_keystore_py base64
+- AST query: hallucinate_app, external/ipfs_kit, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G092 Interoperate hallucinate_app with external/ipfs_accelerate
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3004
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_accelerate
+- Submodules: hallucinate_app, external/ipfs_accelerate
+- Interoperability score: 35
+- Discovery sources: gitlink, gitmodules
+- Package manifests: external/ipfs_accelerate/ipfs_accelerate_py/consensus_kit/Cargo.toml, external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/utils/qualcomm/onnx/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/libllama/requirements.txt, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/requirements.txt, external/ipfs_accelerate/scripts/generators/skill_generator/setup.py, external/ipfs_accelerate/scripts/generators/test_generator/requirements.txt, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/doc-builder-test/pyproject.toml, external/ipfs_accelerate/test/doc-builder-test/setup.cfg
+- Interface descriptors: external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py, external/ipfs_accelerate/docs/development_history/VISUAL_PROOF_WORKING_INTERFACE.md, external/ipfs_accelerate/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/core/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/embeddings_schema_stubs.md, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema.py, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema_stubs.md
+- MCP descriptors: external/ipfs_accelerate/.github/workflows/mcp-transport-libp2p.yml, external/ipfs_accelerate/MCP_SERVER_UNIFICATION_PLAN.md, external/ipfs_accelerate/deployments/systemd/ipfs-accelerate-mcp.service, external/ipfs_accelerate/docs/MCP_DASHBOARD_GUIDE.md, external/ipfs_accelerate/docs/MCP_TRIO_ROADMAP.md, external/ipfs_accelerate/docs/architecture/IPFS_ACCELERATE_MCP_INTEGRATION_PLAN.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT_2025-10-23.md, external/ipfs_accelerate/docs/archive/implementations/IMPLEMENTATION_COMPLETE_GITHUB_MCP.md, external/ipfs_accelerate/docs/development_history/MCP_ERROR_HANDLING_VERIFICATION.md, external/ipfs_accelerate/docs/features/mcp/AI_MCP_SERVER_IMPLEMENTATION.md, external/ipfs_accelerate/docs/guides/MCP_SETUP_GUIDE.md, external/ipfs_accelerate/docs/guides/QUICK_START_MCP.md, external/ipfs_accelerate/docs/guides/github/GITHUB_CLI_MCP_INTEGRATION.md, external/ipfs_accelerate/docs/guides/github/QUICK_REFERENCE_GITHUB_MCP.md, external/ipfs_accelerate/docs/guides/infrastructure/MCP_P2P_SETUP_GUIDE.md
+- Python import roots: Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, builtins, cli, collections, comprehensive_mcp_server, concurrent, contextlib, copilot, copy
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_accelerate` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, interface contract hallucinate_app external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, hallucinate_app, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_accelerate interoperability integration test interface descriptor Bio GitHub PIL __future__ abc advanced_thread_pool_manager aiohttp anyio api_backends argparse asyncio atexit
+- AST query: hallucinate_app, external/ipfs_accelerate, interface contract, integration test, Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G093 Interoperate hallucinate_app with Mcp-Plus-Plus
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3005
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, Mcp-Plus-Plus
+- Submodules: hallucinate_app, Mcp-Plus-Plus
+- Interoperability score: 35
+- Discovery sources: gitlink
+- Package manifests: Mcp-Plus-Plus/tests-go/go.mod, Mcp-Plus-Plus/tests-py/requirements.txt, Mcp-Plus-Plus/tests-rs/Cargo.toml, Mcp-Plus-Plus/tests-ts/package.json, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py
+- Interface descriptors: Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts
+- MCP descriptors: Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md, Mcp-Plus-Plus/tests-go/validators/base_mcp.go, Mcp-Plus-Plus/tests-go/validators/mcp_idl.go, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_tool_call.json, Mcp-Plus-Plus/tests-py/integration/test_base_mcp_typed.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_baseline.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_idl.py, Mcp-Plus-Plus/tests-py/validators/base_mcp.py, Mcp-Plus-Plus/tests-py/validators/base_mcp_typed.py, Mcp-Plus-Plus/tests-py/validators/mcp_idl.py, Mcp-Plus-Plus/tests-rs/src/validators/base_mcp.rs, Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs, Mcp-Plus-Plus/tests-ts/src/validators/baseMCP.ts
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `Mcp-Plus-Plus` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, interface contract hallucinate_app Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py
+- Outputs: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, hallucinate_app, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app Mcp-Plus-Plus interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, Mcp-Plus-Plus, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G094 Interoperate hallucinate_app with ipfs_datasets_py
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-ipfs_datasets_py
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, ipfs_datasets_py
+- Submodules: hallucinate_app, ipfs_datasets_py
+- Interoperability score: 35
+- Discovery sources: configured, gitlink
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `ipfs_datasets_py` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_ipfs_datasets_py_interop.py, docs/integration/hallucinate_app-ipfs_datasets_py.md, interface contract hallucinate_app ipfs_datasets_py, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_ipfs_datasets_py_interop.py, docs/integration/hallucinate_app-ipfs_datasets_py.md, hallucinate_app, ipfs_datasets_py, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app ipfs_datasets_py interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, ipfs_datasets_py, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-ipfs_datasets_py
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `ipfs_datasets_py` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G095 Interoperate hallucinate_app with external/ipfs_datasets
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_datasets
+- Submodules: hallucinate_app, external/ipfs_datasets
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_datasets/.tools/ipfs_kit_py/.playwright_local/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/archive/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/backup/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/config/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/config/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.cfg, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.py, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/requirements.txt
+- Interface descriptors: external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/backend_schemas.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/graphql_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/openapi_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/scripts/development/verify_mcp_interface.py
+- MCP descriptors: external/ipfs_datasets/.github/workflows/mcp-benchmarks.yml, external/ipfs_datasets/.github/workflows/mcp-dashboard-tests.yml, external/ipfs_datasets/.github/workflows/mcp-integration-tests.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring-unified.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml.backup, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/enhanced-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/final-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/direct_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp.sh, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp_issues.sh
+- Python import roots: Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, benchmark_symai, black, bs4, cProfile, collections, complete_mcp_discovery_test, concurrent
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_datasets` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, interface contract hallucinate_app external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_datasets_interop.py, docs/integration/hallucinate_app-external_ipfs_datasets.md, hallucinate_app, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_datasets interoperability integration test interface descriptor Bio PIL Stanford __future__ advanced_thread_pool_manager aiohttp analyze_workflow_failure anyio archive argparse ast asyncio
+- AST query: hallucinate_app, external/ipfs_datasets, interface contract, integration test, Bio, PIL, Stanford, __future__, advanced_thread_pool_manager, aiohttp, analyze_workflow_failure, anyio, archive, argparse, ast, asyncio
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_datasets
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G096 Interoperate hallucinate_app with external/ipfs_kit
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_kit
+- Submodules: hallucinate_app, external/ipfs_kit
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_kit/.playwright_local/package.json, external/ipfs_kit/archive/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/archive/fixes/requirements.txt, external/ipfs_kit/backup/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/backup/fixes/requirements.txt, external/ipfs_kit/config/package.json, external/ipfs_kit/config/pyproject.toml, external/ipfs_kit/config/requirements.txt, external/ipfs_kit/config/setup.cfg, external/ipfs_kit/config/setup.py, external/ipfs_kit/docs/py-ipld-car/pyproject.toml, external/ipfs_kit/docs/py-ipld-car/requirements.txt
+- Interface descriptors: external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto, external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/demo_unified_bucket_interface.py, external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/schema_column_optimization_example.py, external/ipfs_kit/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_kit/ipfs_kit_py/backend_schemas.py, external/ipfs_kit/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_kit/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_kit/ipfs_kit_py/graphql_schema.py, external/ipfs_kit/ipfs_kit_py/libp2p/network/stream/net_stream_interface.py
+- MCP descriptors: external/ipfs_kit/.github/workflows/enhanced-mcp-server.yml, external/ipfs_kit/.github/workflows/final-mcp-server.yml, external/ipfs_kit/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_kit/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_kit/archive/applied_patches/fix_all_mcp.sh, external/ipfs_kit/archive/applied_patches/fix_all_mcp_issues.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch1.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch2.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_code.py, external/ipfs_kit/archive/applied_patches/fix_mcp_errors.py, external/ipfs_kit/archive/applied_patches/fix_mcp_file.py, external/ipfs_kit/archive/applied_patches/fix_mcp_form_data.py
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, boto3, botocore, cbor2, collections, concurrent, contextlib, copy, create_individual_bucket_parquet, cross, cross_browser_model_sharding, cryptography, dag_cbor
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_kit` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, interface contract hallucinate_app external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_kit_interop.py, docs/integration/hallucinate_app-external_ipfs_kit.md, hallucinate_app, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_kit interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp anyio argparse asyncio auth auth_keystore_integration auth_keystore_py base64
+- AST query: hallucinate_app, external/ipfs_kit, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, anyio, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_kit
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G097 Interoperate hallucinate_app with external/ipfs_accelerate
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/ipfs_accelerate
+- Submodules: hallucinate_app, external/ipfs_accelerate
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_accelerate/ipfs_accelerate_py/consensus_kit/Cargo.toml, external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/utils/qualcomm/onnx/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/libllama/requirements.txt, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/requirements.txt, external/ipfs_accelerate/scripts/generators/skill_generator/setup.py, external/ipfs_accelerate/scripts/generators/test_generator/requirements.txt, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/doc-builder-test/pyproject.toml, external/ipfs_accelerate/test/doc-builder-test/setup.cfg
+- Interface descriptors: external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py, external/ipfs_accelerate/docs/development_history/VISUAL_PROOF_WORKING_INTERFACE.md, external/ipfs_accelerate/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/core/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/interfaces.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/browser_interface.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, external/ipfs_accelerate/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/embeddings_schema_stubs.md, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema.py, external/ipfs_accelerate/ipfs_accelerate_py/embeddings/schema_stubs.md
+- MCP descriptors: external/ipfs_accelerate/.github/workflows/mcp-transport-libp2p.yml, external/ipfs_accelerate/MCP_SERVER_UNIFICATION_PLAN.md, external/ipfs_accelerate/deployments/systemd/ipfs-accelerate-mcp.service, external/ipfs_accelerate/docs/MCP_DASHBOARD_GUIDE.md, external/ipfs_accelerate/docs/MCP_TRIO_ROADMAP.md, external/ipfs_accelerate/docs/architecture/IPFS_ACCELERATE_MCP_INTEGRATION_PLAN.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT_2025-10-23.md, external/ipfs_accelerate/docs/archive/implementations/IMPLEMENTATION_COMPLETE_GITHUB_MCP.md, external/ipfs_accelerate/docs/development_history/MCP_ERROR_HANDLING_VERIFICATION.md, external/ipfs_accelerate/docs/features/mcp/AI_MCP_SERVER_IMPLEMENTATION.md, external/ipfs_accelerate/docs/guides/MCP_SETUP_GUIDE.md, external/ipfs_accelerate/docs/guides/QUICK_START_MCP.md, external/ipfs_accelerate/docs/guides/github/GITHUB_CLI_MCP_INTEGRATION.md, external/ipfs_accelerate/docs/guides/github/QUICK_REFERENCE_GITHUB_MCP.md, external/ipfs_accelerate/docs/guides/infrastructure/MCP_P2P_SETUP_GUIDE.md
+- Python import roots: Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit, auth, auth_keystore_integration, auth_keystore_py, base64, builtins, cli, collections, comprehensive_mcp_server, concurrent, contextlib, copilot, copy
+- Goal: Prove `hallucinate_app` interoperates with `external/ipfs_accelerate` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, interface contract hallucinate_app external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py
+- Outputs: tests/integration/test_hallucinate_app_external_ipfs_accelerate_interop.py, docs/integration/hallucinate_app-external_ipfs_accelerate.md, hallucinate_app, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/ipfs_accelerate interoperability integration test interface descriptor Bio GitHub PIL __future__ abc advanced_thread_pool_manager aiohttp anyio api_backends argparse asyncio atexit
+- AST query: hallucinate_app, external/ipfs_accelerate, interface contract, integration test, Bio, GitHub, PIL, __future__, abc, advanced_thread_pool_manager, aiohttp, anyio, api_backends, argparse, asyncio, atexit
+- Parallel lane: objective/interoperability/hallucinate_app-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G098 Interoperate hallucinate_app with external/meta-wearables-dat-android
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3004
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-android
+- Submodules: hallucinate_app, external/meta-wearables-dat-android
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-android` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, interface contract hallucinate_app external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, hallucinate_app, external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-android interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-android, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-android` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G099 Interoperate hallucinate_app with external/meta-wearables-dat-ios
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3005
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, external/meta-wearables-dat-ios
+- Submodules: hallucinate_app, external/meta-wearables-dat-ios
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
+- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
+- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-ios` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, interface contract hallucinate_app external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
+- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_ios_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_ios.md, hallucinate_app, external/meta-wearables-dat-ios, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app external/meta-wearables-dat-ios interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, external/meta-wearables-dat-ios, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_ios
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-ios` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G100 Interoperate hallucinate_app with Mcp-Plus-Plus
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3006
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Goal kind: interoperability
+- Interoperability pair: hallucinate_app, Mcp-Plus-Plus
+- Submodules: hallucinate_app, Mcp-Plus-Plus
+- Interoperability score: 35
+- Discovery sources: configured, gitlink
+- Package manifests: Mcp-Plus-Plus/tests-go/go.mod, Mcp-Plus-Plus/tests-py/requirements.txt, Mcp-Plus-Plus/tests-rs/Cargo.toml, Mcp-Plus-Plus/tests-ts/package.json, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py
+- Interface descriptors: Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts
+- MCP descriptors: Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md, Mcp-Plus-Plus/tests-go/validators/base_mcp.go, Mcp-Plus-Plus/tests-go/validators/mcp_idl.go, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_tool_call.json, Mcp-Plus-Plus/tests-py/integration/test_base_mcp_typed.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_baseline.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_idl.py, Mcp-Plus-Plus/tests-py/validators/base_mcp.py, Mcp-Plus-Plus/tests-py/validators/base_mcp_typed.py, Mcp-Plus-Plus/tests-py/validators/mcp_idl.py, Mcp-Plus-Plus/tests-rs/src/validators/base_mcp.rs, Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs, Mcp-Plus-Plus/tests-ts/src/validators/baseMCP.ts
+- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
+- Goal: Prove `hallucinate_app` interoperates with `Mcp-Plus-Plus` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, interface contract hallucinate_app Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py
+- Outputs: tests/integration/test_hallucinate_app_mcp_plus_plus_interop.py, docs/integration/hallucinate_app-mcp_plus_plus.md, hallucinate_app, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: hallucinate_app Mcp-Plus-Plus interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
+- AST query: hallucinate_app, Mcp-Plus-Plus, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
+- Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
