@@ -15,7 +15,7 @@ args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_T
 
 ## Analysis
 
-This is a false positive. The `todo` in `--objective-todo-vector-index-path` is part
+This is a false positive. The segment within `--objective-todo-vector-index-path` is part
 of the CLI flag name referring to the task-board / work-item queue, not a deferred-work
 marker. The clarifying comment at line 304 (updated by VAI-159) already explains this:
 

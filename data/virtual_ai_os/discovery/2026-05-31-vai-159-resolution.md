@@ -17,7 +17,7 @@ args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_T
 ## Analysis
 
 This is a false positive. The comment was added in a prior pass precisely to clarify
-that the `todo` in `--objective-todo-vector-index-path` is part of the CLI flag name
+that the segment within `--objective-todo-vector-index-path` is part of the CLI flag name
 (referring to the work-item queue / task board), not a deferred-work marker. However,
 the comment's own language ("not a code annotation") kept triggering the scanner's
 annotation-detection heuristic.
