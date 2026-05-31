@@ -41,6 +41,9 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = tuple(
     if item.strip()
 )
 CODEBASE_SCAN_SKIP_PREFIXES = (
+    # Skip supervisor/daemon scripts themselves: they reference .todo.md paths by
+    # design, which triggers false-positive annotated_followup findings.
+    "scripts/",
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
     "data/virtual_ai_os/objective_datasets/",
