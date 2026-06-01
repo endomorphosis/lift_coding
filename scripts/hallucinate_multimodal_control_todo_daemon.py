@@ -66,6 +66,11 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    ConfiguredCodebaseScanRecorder,
+    ConfiguredObjectiveBacklogRecorder,
+    ConfiguredRetryBudgetRecorder,
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,
     apply_portal_implementation_daemon_defaults,
@@ -123,142 +128,62 @@ def ensure_hallucinate_multimodal_bootstrap_paths(
     )
 
 
-def record_objective_goal_findings(
-    *,
-    todo_path: Path = DEFAULT_TODO_PATH,
-    state_path: Path | None = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
-    strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
-    discovery_dir: Path = DISCOVERY_DIR,
-    objective_path: Path = DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
-    bundle_dir: Path | None = None,
-    dataset_dir: Path | None = None,
-    todo_vector_index_path: Path | None = None,
-    task_header_prefix: str = "## HAO-",
-    repo_root: Path = REPO_ROOT,
-    min_open_tasks: int = OBJECTIVE_SCAN_MIN_OPEN_TASKS,
-    max_findings: int = OBJECTIVE_SCAN_MAX_FINDINGS,
-    cooldown_seconds: int = OBJECTIVE_SCAN_COOLDOWN_SECONDS,
-    surplus_findings_per_goal: int = OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
-    surplus_min_terms_per_todo: int = OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
-    force: bool = False,
-) -> list[dict[str, object]]:
-    """Feed the HAO board from missing evidence in the objective heap."""
+record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
+    repo_root=REPO_ROOT,
+    objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    todo_path=DEFAULT_TODO_PATH,
+    discovery_dir=DISCOVERY_DIR,
+    default_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+    default_dataset_dir=OBJECTIVE_DATASET_DIR,
+    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    state_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
+    task_header_prefix_value="## HAO-",
+    depends_on_if_present=("HAO-013",),
+    min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
+    max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
+    cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+    surplus_findings_per_goal=OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
+    surplus_min_terms_per_todo=OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
+    summary_prefix="Close virtual AI OS objective gap",
+    discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
+    commit_outputs=True,
+    commit_subject="HAO: record objective goal backlog findings",
+    prepare_environment=_ensure_ipfs_accelerate_path,
+)
 
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_objective_backlog_findings
+record_codebase_scan_findings = ConfiguredCodebaseScanRecorder(
+    todo_path=DEFAULT_TODO_PATH,
+    state_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
+    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    discovery_dir=DISCOVERY_DIR,
+    repo_root=REPO_ROOT,
+    task_header_prefix_value="## HAO-",
+    depends_on_if_present=("HAO-013",),
+    min_open_tasks=CODEBASE_SCAN_MIN_OPEN_TASKS,
+    max_findings=CODEBASE_SCAN_MAX_FINDINGS,
+    cooldown_seconds=CODEBASE_SCAN_COOLDOWN_SECONDS,
+    discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
+    skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+    commit_outputs=True,
+    commit_subject="HAO: record codebase scan backlog findings",
+    prepare_environment=_ensure_ipfs_accelerate_path,
+)
 
-    return record_configured_objective_backlog_findings(
-        repo_root=repo_root,
-        objective_path=objective_path,
-        todo_path=todo_path,
-        discovery_dir=discovery_dir,
-        bundle_dir=bundle_dir,
-        dataset_dir=dataset_dir,
-        default_bundle_dir=(
-            repo_root
-            / "data"
-            / "hallucinate_multimodal_control"
-            / "objective_bundles"
-        ),
-        default_dataset_dir=(
-            repo_root
-            / "data"
-            / "hallucinate_multimodal_control"
-            / "objective_datasets"
-        ),
-        strategy_path=strategy_path,
-        state_path=state_path,
-        task_header_prefix_value=task_header_prefix,
-        depends_on_if_present=("HAO-013",),
-        min_open_tasks=min_open_tasks,
-        max_findings=max_findings,
-        cooldown_seconds=cooldown_seconds,
-        force=force,
-        write_todo_vector_index=True,
-        todo_vector_index_path=todo_vector_index_path
-        or (
-            bundle_dir
-            or repo_root
-            / "data"
-            / "hallucinate_multimodal_control"
-            / "objective_bundles"
-        )
-        / "todo_vector_index.json",
-        surplus_findings_per_goal=surplus_findings_per_goal,
-        surplus_min_terms_per_todo=surplus_min_terms_per_todo,
-        summary_prefix="Close virtual AI OS objective gap",
-        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
-        commit_outputs=True,
-        commit_subject="HAO: record objective goal backlog findings",
-    )
-
-
-def record_codebase_scan_findings(
-    *,
-    todo_path: Path = DEFAULT_TODO_PATH,
-    state_path: Path | None = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
-    strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
-    discovery_dir: Path = DISCOVERY_DIR,
-    task_header_prefix: str = "## HAO-",
-    repo_root: Path = REPO_ROOT,
-    min_open_tasks: int = CODEBASE_SCAN_MIN_OPEN_TASKS,
-    max_findings: int = CODEBASE_SCAN_MAX_FINDINGS,
-    cooldown_seconds: int = CODEBASE_SCAN_COOLDOWN_SECONDS,
-    force: bool = False,
-) -> list[dict[str, object]]:
-    """Feed the HAO board with accelerator static-scan findings when backlog runs low."""
-
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_codebase_scan_findings
-
-    return record_configured_codebase_scan_findings(
-        todo_path=todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        discovery_dir=discovery_dir,
-        repo_root=repo_root,
-        task_header_prefix_value=task_header_prefix,
-        depends_on_if_present=("HAO-013",),
-        min_open_tasks=min_open_tasks,
-        max_findings=max_findings,
-        cooldown_seconds=cooldown_seconds,
-        force=force,
-        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
-        skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-        commit_outputs=True,
-        commit_subject="HAO: record codebase scan backlog findings",
-    )
-
-
-def record_retry_budget_findings(
-    *,
-    todo_path: Path = DEFAULT_TODO_PATH,
-    events_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl",
-    strategy_path: Path = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
-    discovery_dir: Path = DISCOVERY_DIR,
-    task_header_prefix: str = "## HAO-",
-    retry_budget: int = VALIDATION_RETRY_BUDGET,
-    merge_retry_budget: int = MERGE_RETRY_BUDGET,
-) -> list[dict[str, object]]:
-    """Turn repeated validation or merge failures into accelerator backlog items."""
-
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_retry_budget_findings
-
-    return record_configured_retry_budget_findings(
-        todo_path=todo_path,
-        events_path=events_path,
-        strategy_path=strategy_path,
-        discovery_dir=discovery_dir,
-        task_header_prefix_value=task_header_prefix,
-        validation_retry_budget=retry_budget,
-        merge_retry_budget=merge_retry_budget,
-        validation_depends_on_if_present=("HAO-013",),
-        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
-        strip_validation_failure_kind=True,
-        commit_outputs=True,
-        commit_subject="HAO: record retry-budget guardrail outputs",
-    )
+record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
+    todo_path=DEFAULT_TODO_PATH,
+    events_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl",
+    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    discovery_dir=DISCOVERY_DIR,
+    task_header_prefix_value="## HAO-",
+    validation_retry_budget=VALIDATION_RETRY_BUDGET,
+    merge_retry_budget=MERGE_RETRY_BUDGET,
+    validation_depends_on_if_present=("HAO-013",),
+    discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
+    strip_validation_failure_kind=True,
+    commit_outputs=True,
+    commit_subject="HAO: record retry-budget guardrail outputs",
+    prepare_environment=_ensure_ipfs_accelerate_path,
+)
 
 
 def main(argv: list[str] | None = None) -> None:

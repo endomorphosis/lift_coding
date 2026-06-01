@@ -39,6 +39,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_relative_or_default as _repo_relative_or_default,
     with_android_validation_environment as _shared_with_android_validation_environment,
 )
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,
     apply_portal_implementation_daemon_defaults,
@@ -88,34 +89,22 @@ def enforce_android_validation_environment(todo_path: Path = TASK_BOARD_PATH, re
     return _shared_enforce_android_validation_environment(todo_path, repo_root)
 
 
-def record_retry_budget_findings(
-    *,
-    todo_path: Path = TASK_BOARD_PATH,
-    events_path: Path = STATE_DIR / "meta_glasses_display_events.jsonl",
-    strategy_path: Path = STATE_DIR / "meta_glasses_display_strategy.json",
-    discovery_dir: Path = DISCOVERY_DIR,
-    task_header_prefix: str = "## MGW-",
-    retry_budget: int = VALIDATION_RETRY_BUDGET,
-) -> list[dict[str, Any]]:
-    """Turn repeated validation failures into accelerator backlog items."""
-
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_retry_budget_findings
-
-    return record_configured_retry_budget_findings(
-        todo_path=todo_path,
-        events_path=events_path,
-        strategy_path=strategy_path,
-        discovery_dir=discovery_dir,
-        task_header_prefix_value=task_header_prefix,
-        validation_retry_budget=retry_budget,
-        merge_retry_budget=0,
-        implementation_retry_budget=0,
-        validation_depends_on_if_present=("MGW-014",),
-        validation_task_command_transform=with_android_validation_env,
-        discovery_output_path=_discovery_output_path(REPO_ROOT, discovery_dir),
-        strip_validation_failure_kind=True,
-    )
+record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
+    todo_path=TASK_BOARD_PATH,
+    events_path=STATE_DIR / "meta_glasses_display_events.jsonl",
+    strategy_path=STATE_DIR / "meta_glasses_display_strategy.json",
+    discovery_dir=DISCOVERY_DIR,
+    task_header_prefix_value="## MGW-",
+    validation_retry_budget=VALIDATION_RETRY_BUDGET,
+    merge_retry_budget=0,
+    implementation_retry_budget=0,
+    validation_depends_on_if_present=("MGW-014",),
+    validation_task_command_transform=lambda command: with_android_validation_env(command),
+    discovery_output_path_default=_discovery_output_path(REPO_ROOT, DISCOVERY_DIR),
+    strip_validation_failure_kind=True,
+    repo_root=REPO_ROOT,
+    prepare_environment=_ensure_ipfs_accelerate_path,
+)
 
 
 def main(argv: list[str] | None = None) -> None:
