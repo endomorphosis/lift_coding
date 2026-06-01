@@ -62,9 +62,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
+    bootstrap_runtime_environment as _bootstrap_runtime_environment,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     ensure_named_directories as _ensure_named_directories,
-    ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     env_csv_tuple as _env_csv_tuple,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
@@ -108,14 +108,13 @@ def _default_llm_merge_resolver_command() -> str:
 
 
 def _ensure_runtime_pythonpath() -> None:
-    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     paths = ensure_virtual_ai_os_bootstrap_paths()
-    os.chdir(REPO_ROOT)
-    _ensure_runtime_pythonpath()
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import main as supervisor_main
 

@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 
@@ -36,8 +35,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
+    bootstrap_runtime_environment as _bootstrap_runtime_environment,
     ensure_named_directories as _ensure_named_directories,
-    ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -67,14 +66,13 @@ def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -
 
 
 def _ensure_runtime_pythonpath() -> None:
-    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     paths = ensure_virtual_ai_os_bootstrap_paths()
-    os.chdir(REPO_ROOT)
-    _ensure_runtime_pythonpath()
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 

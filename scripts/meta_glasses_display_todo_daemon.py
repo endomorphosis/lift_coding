@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -36,8 +35,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     apply_environment_contract as _apply_environment_contract,
+    bootstrap_runtime_environment as _bootstrap_runtime_environment,
     environment_assignment_prefix as _environment_assignment_prefix,
-    ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     repo_relative_or_default as _repo_relative_or_default,
     rewrite_validation_commands as _rewrite_validation_commands,
     unique_path_entries as _unique_path_entries,
@@ -56,11 +55,11 @@ logger = logging.getLogger("meta_glasses_display_todo_daemon")
 
 
 def _ensure_ipfs_accelerate_path() -> None:
-    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT,))
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT,), chdir=False)
 
 
 def _ensure_runtime_pythonpath() -> None:
-    _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
 
 
 def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
@@ -173,10 +172,9 @@ def record_retry_budget_findings(
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    os.chdir(REPO_ROOT)
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(TASK_BOARD_PATH)
-    _ensure_runtime_pythonpath()
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
 

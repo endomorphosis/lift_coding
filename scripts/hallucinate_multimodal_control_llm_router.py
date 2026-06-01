@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 
@@ -31,12 +30,11 @@ from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: 
     build_task_proposal_prompt,
     run_task_proposal_router_cli,
 )
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import ensure_runtime_pythonpath  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import bootstrap_runtime_environment  # noqa: E402
 
 
 def _bootstrap_imports() -> None:
-    os.chdir(REPO_ROOT)
-    ensure_runtime_pythonpath([IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT])
+    bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
 
 def _build_cli_config() -> TaskProposalRouterCliConfig:
