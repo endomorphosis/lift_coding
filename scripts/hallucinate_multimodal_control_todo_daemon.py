@@ -6,7 +6,6 @@ from __future__ import annotations
 import logging
 import os
 import sys
-import time
 from pathlib import Path
 
 
@@ -65,6 +64,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_csv_tuple as _env_csv_tuple,
     repo_relative_or_default as _repo_relative_or_default,
     with_default as _with_default,
+)
+from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
+    DaemonLoopHook,
+    ImplementationDaemonRunContext,
+    build_portal_implementation_daemon_from_args,
+    configure_daemon_logging,
+    run_portal_implementation_daemon_loop,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
@@ -286,111 +292,62 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-path", str(paths["objective_goal_heap_path"]))
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
-        DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
-        LLM_MERGE_RESOLVER_COMMAND_ENV,
-        LLM_MERGE_RESOLVER_TIMEOUT_ENV,
-        PortalImplementationDaemon,
-        parse_args,
-    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
 
     parsed = parse_args(args)
-    logging.basicConfig(
-        level=getattr(logging, parsed.log_level),
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-    if parsed.llm_merge_resolver_command:
-        os.environ[LLM_MERGE_RESOLVER_COMMAND_ENV] = parsed.llm_merge_resolver_command
-    if parsed.llm_merge_resolver_timeout_seconds is not None:
-        os.environ[LLM_MERGE_RESOLVER_TIMEOUT_ENV] = str(parsed.llm_merge_resolver_timeout_seconds)
-    state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
-    strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
-    events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
-    daemon = PortalImplementationDaemon(
-        todo_path=parsed.todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        events_path=events_path,
+    configure_daemon_logging(parsed)
+    daemon, context = build_portal_implementation_daemon_from_args(
+        parsed,
         repo_root=REPO_ROOT,
-        task_header_prefix=parsed.task_prefix,
-        implement=parsed.implement,
-        implementation_command=parsed.implementation_command or None,
-        implementation_timeout=parsed.implementation_timeout or DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
-        use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
-        worktree_root=parsed.worktree_root,
-        worktree_submodule_paths=parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        objective_path=parsed.objective_path or paths["objective_goal_heap_path"],
-        objective_bundle_dir=parsed.objective_bundle_dir or OBJECTIVE_BUNDLE_DIR,
-        llm_merge_resolver_command=parsed.llm_merge_resolver_command or None,
-        llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
+        default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=paths["objective_goal_heap_path"],
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
     )
 
-    while True:
-        objective_findings = record_objective_goal_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
+    def objective_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
+        return record_objective_goal_findings(
+            todo_path=ctx.parsed.todo_path,
+            state_path=ctx.state_path,
+            strategy_path=ctx.strategy_path,
             discovery_dir=DISCOVERY_DIR,
             objective_path=paths["objective_goal_heap_path"],
-            task_header_prefix=parsed.task_prefix,
+            task_header_prefix=ctx.parsed.task_prefix,
             repo_root=REPO_ROOT,
         )
-        if objective_findings:
-            logger.warning("Recorded Hallucinate objective-goal findings before daemon pass: %s", objective_findings)
-        scan_findings = record_codebase_scan_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
+
+    def codebase_scan_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
+        return record_codebase_scan_findings(
+            todo_path=ctx.parsed.todo_path,
+            state_path=ctx.state_path,
+            strategy_path=ctx.strategy_path,
             discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
+            task_header_prefix=ctx.parsed.task_prefix,
             repo_root=REPO_ROOT,
         )
-        if scan_findings:
-            logger.warning("Recorded Hallucinate codebase-scan findings before daemon pass: %s", scan_findings)
-        findings = record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=events_path,
-            strategy_path=strategy_path,
+
+    def retry_budget_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
+        return record_retry_budget_findings(
+            todo_path=ctx.parsed.todo_path,
+            events_path=ctx.events_path,
+            strategy_path=ctx.strategy_path,
             discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
+            task_header_prefix=ctx.parsed.task_prefix,
         )
-        if findings:
-            logger.warning("Recorded Hallucinate retry-budget findings before daemon pass: %s", findings)
-        result = daemon.run_once()
-        findings = record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=events_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-        )
-        if findings:
-            logger.warning("Recorded Hallucinate retry-budget findings after daemon pass: %s", findings)
-        objective_findings = record_objective_goal_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=paths["objective_goal_heap_path"],
-            task_header_prefix=parsed.task_prefix,
-            repo_root=REPO_ROOT,
-        )
-        if objective_findings:
-            logger.warning("Recorded Hallucinate objective-goal findings after daemon pass: %s", objective_findings)
-        scan_findings = record_codebase_scan_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-            repo_root=REPO_ROOT,
-        )
-        if scan_findings:
-            logger.warning("Recorded Hallucinate codebase-scan findings after daemon pass: %s", scan_findings)
-        logger.info("Hallucinate multimodal-control daemon pass complete: %s", result)
-        if parsed.once:
-            break
-        time.sleep(parsed.interval)
+
+    run_portal_implementation_daemon_loop(
+        daemon,
+        context,
+        logger=logger,
+        hooks=(
+            DaemonLoopHook("before", "Recorded Hallucinate objective-goal findings before daemon pass: %s", objective_hook),
+            DaemonLoopHook("before", "Recorded Hallucinate codebase-scan findings before daemon pass: %s", codebase_scan_hook),
+            DaemonLoopHook("before", "Recorded Hallucinate retry-budget findings before daemon pass: %s", retry_budget_hook),
+            DaemonLoopHook("after", "Recorded Hallucinate retry-budget findings after daemon pass: %s", retry_budget_hook),
+            DaemonLoopHook("after", "Recorded Hallucinate objective-goal findings after daemon pass: %s", objective_hook),
+            DaemonLoopHook("after", "Recorded Hallucinate codebase-scan findings after daemon pass: %s", codebase_scan_hook),
+        ),
+        pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
+    )
 
 
 if __name__ == "__main__":

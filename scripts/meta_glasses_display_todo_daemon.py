@@ -6,7 +6,6 @@ from __future__ import annotations
 import logging
 import os
 import sys
-import time
 from pathlib import Path
 from typing import Any
 
@@ -41,6 +40,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     unique_path_entries as _unique_path_entries,
     with_default as _with_default,
     with_repeated_default as _with_repeated_default,
+)
+from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
+    DaemonLoopHook,
+    ImplementationDaemonRunContext,
+    build_portal_implementation_daemon_from_args,
+    configure_daemon_logging,
+    run_portal_implementation_daemon_loop,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -222,13 +228,7 @@ def main(argv: list[str] | None = None) -> None:
     enforce_android_validation_environment(TASK_BOARD_PATH)
     _ensure_runtime_pythonpath()
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
-        DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
-        LLM_MERGE_RESOLVER_COMMAND_ENV,
-        LLM_MERGE_RESOLVER_TIMEOUT_ENV,
-        PortalImplementationDaemon,
-        parse_args,
-    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
 
     args = _with_default(args, TASK_BOARD_PATH_OPTION, str(TASK_BOARD_PATH))
     args = _with_default(args, "--state-dir", str(STATE_DIR))
@@ -239,60 +239,34 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
     args = _with_repeated_default(args, "--worktree-submodule-path", META_DISPLAY_WORKTREE_SUBMODULE_PATHS)
     parsed = parse_args(args)
-    logging.basicConfig(
-        level=getattr(logging, parsed.log_level),
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-    if parsed.llm_merge_resolver_command:
-        os.environ[LLM_MERGE_RESOLVER_COMMAND_ENV] = parsed.llm_merge_resolver_command
-    if parsed.llm_merge_resolver_timeout_seconds is not None:
-        os.environ[LLM_MERGE_RESOLVER_TIMEOUT_ENV] = str(parsed.llm_merge_resolver_timeout_seconds)
-    state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
-    strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
-    events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
-    daemon = PortalImplementationDaemon(
-        todo_path=parsed.todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        events_path=events_path,
+    configure_daemon_logging(parsed)
+    daemon, context = build_portal_implementation_daemon_from_args(
+        parsed,
         repo_root=REPO_ROOT,
-        task_header_prefix=parsed.task_prefix,
-        implement=parsed.implement,
-        implementation_command=parsed.implementation_command or None,
-        implementation_timeout=parsed.implementation_timeout or DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
-        use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
-        worktree_root=parsed.worktree_root,
-        worktree_submodule_paths=parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        objective_path=parsed.objective_path,
-        objective_bundle_dir=parsed.objective_bundle_dir,
-        llm_merge_resolver_command=parsed.llm_merge_resolver_command or None,
-        llm_merge_resolver_timeout_seconds=parsed.llm_merge_resolver_timeout_seconds,
+        default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=OBJECTIVE_HEAP_PATH,
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
     )
 
-    while True:
-        findings = record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=events_path,
-            strategy_path=strategy_path,
+    def retry_budget_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, Any]]:
+        return record_retry_budget_findings(
+            todo_path=ctx.parsed.todo_path,
+            events_path=ctx.events_path,
+            strategy_path=ctx.strategy_path,
             discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
+            task_header_prefix=ctx.parsed.task_prefix,
         )
-        if findings:
-            logger.warning("Recorded validation retry-budget findings before daemon pass: %s", findings)
-        result = daemon.run_once()
-        findings = record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=events_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-        )
-        if findings:
-            logger.warning("Recorded validation retry-budget findings after daemon pass: %s", findings)
-        logger.info("Display-widget implementation daemon pass complete: %s", result)
-        if parsed.once:
-            break
-        time.sleep(parsed.interval)
+
+    run_portal_implementation_daemon_loop(
+        daemon,
+        context,
+        logger=logger,
+        hooks=(
+            DaemonLoopHook("before", "Recorded validation retry-budget findings before daemon pass: %s", retry_budget_hook),
+            DaemonLoopHook("after", "Recorded validation retry-budget findings after daemon pass: %s", retry_budget_hook),
+        ),
+        pass_complete_message="Display-widget implementation daemon pass complete: %s",
+    )
 
 
 if __name__ == "__main__":
