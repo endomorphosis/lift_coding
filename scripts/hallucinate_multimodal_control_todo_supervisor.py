@@ -23,6 +23,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     with_flag_default as _with_flag_default,
     with_repeated_default as _with_repeated_default,
 )
+from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    ImplementationSupervisorRunContext,
+    SupervisorRunHook,
+    build_portal_implementation_supervisor_from_args,
+    configure_supervisor_logging,
+    run_portal_implementation_supervisor,
+)
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
     ensure_supervisor_running as _ensure_supervisor_running,
     pop_bool_flag as _pop_bool_flag,
@@ -139,116 +146,87 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--codebase-scan-cooldown-seconds", str(CODEBASE_SCAN_COOLDOWN_SECONDS))
     args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
-        PortalImplementationSupervisor,
-        parse_args,
-        supervisor_config_from_args,
-    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import parse_args
 
     parsed = parse_args(args)
-    logging.basicConfig(
-        level=getattr(logging, parsed.log_level),
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-    config = supervisor_config_from_args(
+    configure_supervisor_logging(parsed)
+    supervisor, context = build_portal_implementation_supervisor_from_args(
         parsed,
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     )
-    state_path = config.state_path
-    strategy_path = config.strategy_path
-    events_path = config.events_path
-    daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
-    record_objective_goal_findings(
-        todo_path=parsed.todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        discovery_dir=DISCOVERY_DIR,
-        objective_path=parsed.objective_path or paths["objective_goal_heap_path"],
-        bundle_dir=parsed.objective_bundle_dir,
-        dataset_dir=parsed.objective_dataset_dir,
-        todo_vector_index_path=parsed.objective_todo_vector_index_path,
-        task_header_prefix=parsed.task_prefix,
-        repo_root=REPO_ROOT,
-        min_open_tasks=parsed.objective_scan_min_open_tasks,
-        max_findings=parsed.objective_scan_max_findings,
-        cooldown_seconds=parsed.objective_scan_cooldown_seconds,
-        surplus_findings_per_goal=parsed.objective_surplus_findings_per_goal,
-        surplus_min_terms_per_todo=parsed.objective_surplus_min_terms_per_todo,
-    )
-    record_codebase_scan_findings(
-        todo_path=parsed.todo_path,
-        state_path=state_path,
-        strategy_path=strategy_path,
-        discovery_dir=DISCOVERY_DIR,
-        task_header_prefix=parsed.task_prefix,
-        repo_root=REPO_ROOT,
-        min_open_tasks=parsed.codebase_scan_min_open_tasks,
-        max_findings=parsed.codebase_scan_max_findings,
-        cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
-    )
-    record_retry_budget_findings(
-        todo_path=parsed.todo_path,
-        events_path=daemon_events_path,
-        strategy_path=strategy_path,
-        discovery_dir=DISCOVERY_DIR,
-        task_header_prefix=parsed.task_prefix,
-    )
-    if ensure_running:
-        result = ensure_hallucinate_supervisor_running(
+
+    def objective_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
+        return record_objective_goal_findings(
+            todo_path=ctx.parsed.todo_path,
+            state_path=ctx.state_path,
+            strategy_path=ctx.strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=ctx.parsed.objective_path or paths["objective_goal_heap_path"],
+            bundle_dir=ctx.parsed.objective_bundle_dir,
+            dataset_dir=ctx.parsed.objective_dataset_dir,
+            todo_vector_index_path=ctx.parsed.objective_todo_vector_index_path,
+            task_header_prefix=ctx.parsed.task_prefix,
+            repo_root=REPO_ROOT,
+            min_open_tasks=ctx.parsed.objective_scan_min_open_tasks,
+            max_findings=ctx.parsed.objective_scan_max_findings,
+            cooldown_seconds=ctx.parsed.objective_scan_cooldown_seconds,
+            surplus_findings_per_goal=ctx.parsed.objective_surplus_findings_per_goal,
+            surplus_min_terms_per_todo=ctx.parsed.objective_surplus_min_terms_per_todo,
+        )
+
+    def codebase_scan_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
+        return record_codebase_scan_findings(
+            todo_path=ctx.parsed.todo_path,
+            state_path=ctx.state_path,
+            strategy_path=ctx.strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=ctx.parsed.task_prefix,
+            repo_root=REPO_ROOT,
+            min_open_tasks=ctx.parsed.codebase_scan_min_open_tasks,
+            max_findings=ctx.parsed.codebase_scan_max_findings,
+            cooldown_seconds=ctx.parsed.codebase_scan_cooldown_seconds,
+        )
+
+    def retry_budget_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
+        return record_retry_budget_findings(
+            todo_path=ctx.parsed.todo_path,
+            events_path=ctx.daemon_events_path,
+            strategy_path=ctx.strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=ctx.parsed.task_prefix,
+        )
+
+    def ensure_running_hook(ctx: ImplementationSupervisorRunContext) -> dict[str, object]:
+        return ensure_hallucinate_supervisor_running(
             args,
-            state_dir=parsed.state_dir,
-            state_prefix=parsed.state_prefix,
+            state_dir=ctx.parsed.state_dir,
+            state_prefix=ctx.parsed.state_prefix,
         )
-        logger.info("Hallucinate multimodal-control supervisor ensure complete: %s", result)
-        return
 
-    repairs = repair_hallucinate_supervisor_runtime(parsed.state_dir, parsed.state_prefix)
-    if repairs.get("removed") or repairs.get("updated_status"):
-        logger.info("Repaired stale Hallucinate supervisor runtime markers: %s", repairs)
+    def repair_runtime_hook(ctx: ImplementationSupervisorRunContext) -> dict[str, object]:
+        return repair_hallucinate_supervisor_runtime(ctx.parsed.state_dir, ctx.parsed.state_prefix)
 
-    supervisor = PortalImplementationSupervisor(config)
-    if parsed.once:
-        result = supervisor.run_once()
-        record_objective_goal_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=parsed.objective_path or paths["objective_goal_heap_path"],
-            bundle_dir=parsed.objective_bundle_dir,
-            dataset_dir=parsed.objective_dataset_dir,
-            todo_vector_index_path=parsed.objective_todo_vector_index_path,
-            task_header_prefix=parsed.task_prefix,
-            repo_root=REPO_ROOT,
-            min_open_tasks=parsed.objective_scan_min_open_tasks,
-            max_findings=parsed.objective_scan_max_findings,
-            cooldown_seconds=parsed.objective_scan_cooldown_seconds,
-            surplus_findings_per_goal=parsed.objective_surplus_findings_per_goal,
-            surplus_min_terms_per_todo=parsed.objective_surplus_min_terms_per_todo,
-        )
-        record_codebase_scan_findings(
-            todo_path=parsed.todo_path,
-            state_path=state_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-            repo_root=REPO_ROOT,
-            min_open_tasks=parsed.codebase_scan_min_open_tasks,
-            max_findings=parsed.codebase_scan_max_findings,
-            cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
-        )
-        record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=daemon_events_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-        )
-        logger.info("Hallucinate multimodal-control supervisor check complete: %s", result)
-        return
-    supervisor.run_forever()
+    run_portal_implementation_supervisor(
+        supervisor,
+        context,
+        logger=logger,
+        hooks=(
+            SupervisorRunHook("before", "Recorded Hallucinate objective-goal findings before supervisor pass: %s", objective_hook),
+            SupervisorRunHook("before", "Recorded Hallucinate codebase-scan findings before supervisor pass: %s", codebase_scan_hook),
+            SupervisorRunHook("before", "Recorded Hallucinate retry-budget findings before supervisor pass: %s", retry_budget_hook),
+            SupervisorRunHook("after_once", "Recorded Hallucinate objective-goal findings after supervisor pass: %s", objective_hook),
+            SupervisorRunHook("after_once", "Recorded Hallucinate codebase-scan findings after supervisor pass: %s", codebase_scan_hook),
+            SupervisorRunHook("after_once", "Recorded Hallucinate retry-budget findings after supervisor pass: %s", retry_budget_hook),
+        ),
+        once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
+        ensure_running=ensure_running,
+        ensure_running_callback=ensure_running_hook,
+        ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
+        repair_runtime_callback=repair_runtime_hook,
+        repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
+    )
 
 
 if __name__ == "__main__":

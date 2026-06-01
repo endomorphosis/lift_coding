@@ -73,6 +73,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     with_flag_default as _with_flag_default,
     with_repeated_default as _with_repeated_default,
 )
+from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    ImplementationSupervisorRunContext,
+    SupervisorRunHook,
+    build_portal_implementation_supervisor_from_args,
+    configure_supervisor_logging,
+    run_portal_implementation_supervisor,
+)
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _env_csv_tuple(
     "HANDSFREE_MGW_INTEROPERABILITY_FOCUS",
@@ -157,49 +164,38 @@ def validation_environment_summary() -> dict[str, object]:
 
 
 def _run_supervisor(argv: list[str]) -> None:
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
-        PortalImplementationSupervisor,
-        parse_args,
-        supervisor_config_from_args,
-    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import parse_args
 
     parsed = parse_args(argv)
-    logging.basicConfig(
-        level=getattr(logging, parsed.log_level),
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-    config = supervisor_config_from_args(
+    configure_supervisor_logging(parsed)
+    supervisor, context = build_portal_implementation_supervisor_from_args(
         parsed,
         repo_root=REPO_ROOT,
         daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
     )
-    state_path = config.state_path
-    strategy_path = config.strategy_path
-    events_path = config.events_path
-    daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
-    record_retry_budget_findings(
-        todo_path=parsed.todo_path,
-        events_path=daemon_events_path,
-        strategy_path=strategy_path,
-        discovery_dir=DISCOVERY_DIR,
-        task_header_prefix=parsed.task_prefix,
-    )
-    supervisor = PortalImplementationSupervisor(config)
+
+    def retry_budget_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
+        return record_retry_budget_findings(
+            todo_path=ctx.parsed.todo_path,
+            events_path=ctx.daemon_events_path,
+            strategy_path=ctx.strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=ctx.parsed.task_prefix,
+        )
+
     if getattr(parsed, "ensure_running", False):
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    if parsed.once:
-        result = supervisor.run_once()
-        record_retry_budget_findings(
-            todo_path=parsed.todo_path,
-            events_path=daemon_events_path,
-            strategy_path=strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=parsed.task_prefix,
-        )
-        logger.info("Display-widget implementation supervisor check complete: %s", result)
-        return
-    supervisor.run_forever()
+    run_portal_implementation_supervisor(
+        supervisor,
+        context,
+        logger=logger,
+        hooks=(
+            SupervisorRunHook("before", "Recorded validation retry-budget findings before supervisor pass: %s", retry_budget_hook),
+            SupervisorRunHook("after_once", "Recorded validation retry-budget findings after supervisor pass: %s", retry_budget_hook),
+        ),
+        once_complete_message="Display-widget implementation supervisor check complete: %s",
+    )
 
 
 def main(argv: list[str] | None = None) -> None:
