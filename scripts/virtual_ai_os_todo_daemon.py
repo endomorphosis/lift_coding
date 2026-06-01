@@ -36,7 +36,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
     bootstrap_runtime_environment as _bootstrap_runtime_environment,
-    ensure_named_directories as _ensure_named_directories,
+    resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -44,25 +44,28 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     apply_portal_implementation_daemon_defaults,
 )
 
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
+    BootstrapPathSpec("task_board_path", TASK_BOARD_PATH, TASK_BOARD_PATH_ENV),
+    BootstrapPathSpec("state_dir", STATE_DIR, STATE_DIR_ENV),
+    BootstrapPathSpec("worktree_root", WORKTREE_ROOT, WORKTREE_ROOT_ENV),
+)
+
 
 def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
     """Return the repo-local bootstrap paths for the virtual-AI-OS daemon."""
 
-    return _resolve_bootstrap_paths(
-        REPO_ROOT,
-        (
-            BootstrapPathSpec("task_board_path", TASK_BOARD_PATH, TASK_BOARD_PATH_ENV),
-            BootstrapPathSpec("state_dir", STATE_DIR, STATE_DIR_ENV),
-            BootstrapPathSpec("worktree_root", WORKTREE_ROOT, WORKTREE_ROOT_ENV),
-        ),
-    )
+    return _resolve_bootstrap_paths(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
 
 
 def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
     """Create local runtime directories used by the virtual-AI-OS daemon."""
 
-    resolved = paths or virtual_ai_os_bootstrap_paths()
-    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
+    return _resolve_and_ensure_bootstrap_paths(
+        REPO_ROOT,
+        VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
+        ("state_dir", "worktree_root"),
+        paths=paths,
+    )
 
 
 def _ensure_runtime_pythonpath() -> None:

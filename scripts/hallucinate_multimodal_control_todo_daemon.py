@@ -62,8 +62,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
     bootstrap_runtime_environment as _bootstrap_runtime_environment,
-    ensure_named_directories as _ensure_named_directories,
     env_csv_tuple as _env_csv_tuple,
+    resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -80,31 +80,33 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
     "HANDSFREE_HAO_INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
+HALLUCINATE_BOOTSTRAP_SPECS = (
+    BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, "HANDSFREE_HAO_TODO_PATH"),
+    BootstrapPathSpec(
+        "objective_goal_heap_path",
+        DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+        "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+    ),
+    BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_HAO_STATE_DIR"),
+    BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_HAO_WORKTREE_ROOT"),
+)
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
 
 def hallucinate_multimodal_bootstrap_paths() -> dict[str, Path]:
-    return _resolve_bootstrap_paths(
-        REPO_ROOT,
-        (
-            BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, "HANDSFREE_HAO_TODO_PATH"),
-            BootstrapPathSpec(
-                "objective_goal_heap_path",
-                DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
-                "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
-            ),
-            BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_HAO_STATE_DIR"),
-            BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_HAO_WORKTREE_ROOT"),
-        ),
-    )
+    return _resolve_bootstrap_paths(REPO_ROOT, HALLUCINATE_BOOTSTRAP_SPECS)
 
 
 def ensure_hallucinate_multimodal_bootstrap_paths(
     paths: dict[str, Path] | None = None,
 ) -> dict[str, Path]:
-    resolved = paths or hallucinate_multimodal_bootstrap_paths()
-    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
+    return _resolve_and_ensure_bootstrap_paths(
+        REPO_ROOT,
+        HALLUCINATE_BOOTSTRAP_SPECS,
+        ("state_dir", "worktree_root"),
+        paths=paths,
+    )
 
 
 def _ensure_ipfs_accelerate_path() -> None:

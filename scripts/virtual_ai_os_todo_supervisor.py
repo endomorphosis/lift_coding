@@ -64,8 +64,8 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
     bootstrap_runtime_environment as _bootstrap_runtime_environment,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
-    ensure_named_directories as _ensure_named_directories,
     env_csv_tuple as _env_csv_tuple,
+    resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -79,26 +79,28 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
     "HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
+    BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, "HANDSFREE_VAI_OS_TODO_PATH"),
+    BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_VAI_OS_STATE_DIR"),
+    BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_VAI_OS_WORKTREE_ROOT"),
+)
 
 
 def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
     """Return the repo-local bootstrap contract for virtual-AI-OS supervision."""
 
-    return _resolve_bootstrap_paths(
-        REPO_ROOT,
-        (
-            BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, "HANDSFREE_VAI_OS_TODO_PATH"),
-            BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_VAI_OS_STATE_DIR"),
-            BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_VAI_OS_WORKTREE_ROOT"),
-        ),
-    )
+    return _resolve_bootstrap_paths(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
 
 
 def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
     """Create the local state and worktree directories used by the supervisor."""
 
-    resolved = paths or virtual_ai_os_bootstrap_paths()
-    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
+    return _resolve_and_ensure_bootstrap_paths(
+        REPO_ROOT,
+        VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
+        ("state_dir", "worktree_root"),
+        paths=paths,
+    )
 
 
 def _default_llm_merge_resolver_command() -> str:
