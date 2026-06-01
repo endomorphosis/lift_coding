@@ -50,6 +50,27 @@ def _git(cwd: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
+def test_hallucinate_multimodal_llm_router_preflight_does_not_call_model():
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "scripts/hallucinate_multimodal_control_llm_router.py",
+            "--task-id",
+            "HAO-005",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    payload = json.loads(completed.stdout)
+    assert payload["task_id"] == "HAO-005"
+    assert payload["generate"] is False
+    assert payload["llm_router_importable"] is True
+
+
 # Keep daemon constructor fixture paths centralized so required task-board wiring
 # does not look like a source follow-up at every call site.
 def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:

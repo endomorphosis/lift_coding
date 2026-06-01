@@ -19,19 +19,22 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 TASK_BOARD_PATH_OPTION = "--" + "to" "do" + "-path"
 PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.md"
 ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
-OPEN_TASK_STATUSES = {"to" "do", "ready"}
+
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
+    TaskProposalRouterConfig,
+    TaskProposalRouterError,
+    build_task_proposal_prompt,
+    run_task_proposal_router,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import ensure_runtime_pythonpath  # noqa: E402
 
 
 def _bootstrap_imports() -> None:
     os.chdir(REPO_ROOT)
-    for path in (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT):
-        if str(path) not in sys.path:
-            sys.path.insert(0, str(path))
-    existing = os.environ.get("PYTHONPATH", "")
-    paths = [str(IPFS_ACCELERATE_ROOT), str(IPFS_DATASETS_ROOT)]
-    if existing:
-        paths.append(existing)
-    os.environ["PYTHONPATH"] = os.pathsep.join(paths)
+    ensure_runtime_pythonpath([IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT])
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -51,81 +54,45 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _select_task(tasks: list[object], requested_task_id: str) -> object:
-    if requested_task_id:
-        for task in tasks:
-            if getattr(task, "task_id", "") == requested_task_id:
-                return task
-        raise SystemExit(f"Unknown task id: {requested_task_id}")
-    for task in tasks:
-        if getattr(task, "status", "") in OPEN_TASK_STATUSES:
-            return task
-    raise SystemExit("No open task found in virtual-AI-OS task board.")
-
-
 def _build_prompt(task: object, plan_text: str) -> str:
-    return f"""You are helping implement the HandsFree virtual AI operating system roadmap.
-
-Task:
-- ID: {getattr(task, 'task_id', '')}
-- Title: {getattr(task, 'title', '')}
-- Priority: {getattr(task, 'priority', '')}
-- Track: {getattr(task, 'track', '')}
-- Depends on: {', '.join(getattr(task, 'depends_on', []) or []) or 'none'}
-- Outputs: {', '.join(getattr(task, 'outputs', []) or []) or 'none listed'}
-- Validation: {'; '.join(getattr(task, 'validation', []) or []) or 'none listed'}
-- Acceptance: {getattr(task, 'acceptance', '') or 'none listed'}
-
-Roadmap context:
-{plan_text[:40000]}
-
-Return a concise implementation proposal with:
-1. exact files to edit,
-2. runtime and cross-repo contracts to add,
-3. tests and fixtures needed,
-4. validation commands,
-5. risks or blockers.
-"""
+    return build_task_proposal_prompt(
+        task=task,
+        plan_text=plan_text,
+        intro="You are helping implement the HandsFree virtual AI operating system roadmap.",
+        requested_outputs=(
+            "exact files to edit",
+            "runtime and cross-repo contracts to add",
+            "tests and fixtures needed",
+            "validation commands",
+            "risks or blockers",
+        ),
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     _bootstrap_imports()
-
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.llm import LlmRouterInvocation, call_llm_router
-
-    tasks = parse_task_file(args.todo_path, "## VAI-")
-    selected = _select_task(tasks, args.task_id)
-    plan_text = args.plan_path.read_text(encoding="utf-8")
-    prompt = _build_prompt(selected, plan_text)
-    payload = {
-        "task_id": getattr(selected, "task_id", ""),
-        "title": getattr(selected, "title", ""),
-        "provider": args.provider or None,
-        "model": args.model,
-        "prompt_chars": len(prompt),
-        "generate": bool(args.generate),
-        "llm_router_importable": True,
-    }
-    if not args.generate:
-        print(json.dumps(payload, indent=2, sort_keys=True))
-        return 0
-
-    config = LlmRouterInvocation(
-        repo_root=REPO_ROOT,
-        model_name=args.model,
-        provider=args.provider or None,
-        allow_local_fallback=bool(args.allow_local_fallback),
-        timeout_seconds=int(args.timeout),
-        max_new_tokens=int(args.max_new_tokens),
-        reject_effective_provider_name=None if args.allow_local_fallback else "local_hf",
-    )
-    proposal = call_llm_router(prompt, config)
-    args.artifact_dir.mkdir(parents=True, exist_ok=True)
-    output_path = args.artifact_dir / f"{getattr(selected, 'task_id', 'task').lower()}-proposal.md"
-    output_path.write_text(proposal, encoding="utf-8")
-    payload["artifact"] = str(output_path.relative_to(REPO_ROOT))
+    try:
+        payload = run_task_proposal_router(
+            TaskProposalRouterConfig(
+                repo_root=REPO_ROOT,
+                task_board_path=args.todo_path,
+                task_header_prefix="## VAI-",
+                plan_path=args.plan_path,
+                artifact_dir=args.artifact_dir,
+                prompt_builder=_build_prompt,
+                no_open_task_message="No open task found in virtual-AI-OS task board.",
+            ),
+            task_id=args.task_id,
+            generate=bool(args.generate),
+            provider=args.provider,
+            model=args.model,
+            max_new_tokens=int(args.max_new_tokens),
+            timeout_seconds=int(args.timeout),
+            allow_local_fallback=bool(args.allow_local_fallback),
+        )
+    except TaskProposalRouterError as exc:
+        raise SystemExit(str(exc)) from exc
     print(json.dumps(payload, indent=2, sort_keys=True))
     return 0
 
