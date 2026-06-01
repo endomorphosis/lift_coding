@@ -34,10 +34,8 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     run_configured_portal_implementation_supervisor,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    ensure_supervisor_running as _ensure_supervisor_running,
+    build_supervisor_runtime_operations,
     pop_bool_flag as _pop_bool_flag,
-    repair_supervisor_runtime as _repair_supervisor_runtime,
-    supervisor_is_running as _supervisor_is_running,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_COOLDOWN_SECONDS,
@@ -83,31 +81,29 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
 _default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
     primary_env_var="HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
 )
+_hallucinate_supervisor_runtime = build_supervisor_runtime_operations(
+    repo_root=REPO_ROOT,
+    script_path=Path(__file__).resolve(),
+    process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
+    prepare_environment=_ensure_runtime_pythonpath,
+)
 
 
 def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
     """Clear stale Hallucinate supervisor/daemon markers before health checks."""
 
-    return _repair_supervisor_runtime(state_dir, state_prefix)
+    return _hallucinate_supervisor_runtime.repair_runtime(state_dir, state_prefix)
 
 
 def hallucinate_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
-    return _supervisor_is_running(
-        state_dir,
-        state_prefix,
-        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
-    )
+    return _hallucinate_supervisor_runtime.is_running(state_dir, state_prefix)
 
 
 def ensure_hallucinate_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
-    return _ensure_supervisor_running(
+    return _hallucinate_supervisor_runtime.ensure_running(
         argv,
         state_dir=state_dir,
         state_prefix=state_prefix,
-        repo_root=REPO_ROOT,
-        script_path=Path(__file__).resolve(),
-        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
-        prepare_environment=_ensure_runtime_pythonpath,
     )
 
 
