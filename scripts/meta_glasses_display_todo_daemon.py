@@ -6,7 +6,6 @@ from __future__ import annotations
 import logging
 import sys
 from pathlib import Path
-from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -32,12 +31,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    android_validation_environment_contract as _android_validation_environment_contract,
-    apply_environment_contract as _apply_environment_contract,
+    build_android_validation_callbacks as _build_android_validation_callbacks,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    enforce_android_validation_environment as _shared_enforce_android_validation_environment,
     repo_relative_or_default as _repo_relative_or_default,
-    with_android_validation_environment as _shared_with_android_validation_environment,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -63,30 +59,20 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
+_android_validation_callbacks = _build_android_validation_callbacks(
+    REPO_ROOT,
+    todo_path=TASK_BOARD_PATH,
+)
 
 
 def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
     return _repo_relative_or_default(discovery_dir, repo_root, "data/meta_glasses_display_widgets/discovery")
 
 
-def android_validation_environment(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
-    """Return the repo-local Android validation environment contract."""
-
-    return _android_validation_environment_contract(repo_root)
-
-
-def _bootstrap_android_validation_env(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
-    return _apply_environment_contract(android_validation_environment(repo_root))
-
-
-def with_android_validation_env(command: str, repo_root: Path = REPO_ROOT) -> str:
-    return _shared_with_android_validation_environment(command, repo_root)
-
-
-def enforce_android_validation_environment(todo_path: Path = TASK_BOARD_PATH, repo_root: Path = REPO_ROOT) -> bool:
-    """Rewrite bare Android Gradle validations to use the repo-local JDK/SDK."""
-
-    return _shared_enforce_android_validation_environment(todo_path, repo_root)
+android_validation_environment = _android_validation_callbacks.environment_contract
+_bootstrap_android_validation_env = _android_validation_callbacks.apply_environment
+with_android_validation_env = _android_validation_callbacks.wrap_command
+enforce_android_validation_environment = _android_validation_callbacks.enforce_todo
 
 
 record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
