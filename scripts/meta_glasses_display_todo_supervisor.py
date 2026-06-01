@@ -78,10 +78,10 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
     ImplementationSupervisorDefaults,
-    ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
     build_supervisor_refill_hooks,
+    build_supervisor_retry_budget_refill_callback,
     run_configured_portal_implementation_supervisor,
 )
 
@@ -153,14 +153,10 @@ def validation_environment_summary() -> dict[str, object]:
 
 
 def _run_supervisor(argv: list[str]) -> None:
-    def retry_budget_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
-        return record_retry_budget_findings(
-            todo_path=ctx.parsed.todo_path,
-            events_path=ctx.daemon_events_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=ctx.parsed.task_prefix,
-        )
+    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
+        record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+    )
 
     if "--ensure-running" in argv:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")

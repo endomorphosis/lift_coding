@@ -24,10 +24,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
     ImplementationSupervisorDefaults,
-    ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_supervisor_codebase_scan_refill_callback,
+    build_supervisor_objective_refill_callback,
     build_supervisor_refill_hooks,
+    build_supervisor_retry_budget_refill_callback,
     build_supervisor_runtime_callbacks,
     run_configured_portal_implementation_supervisor,
 )
@@ -152,46 +154,21 @@ def main(argv: list[str] | None = None) -> None:
         ),
     )
 
-    def objective_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
-        return record_objective_goal_findings(
-            todo_path=ctx.parsed.todo_path,
-            state_path=ctx.state_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=ctx.parsed.objective_path or paths["objective_goal_heap_path"],
-            bundle_dir=ctx.parsed.objective_bundle_dir,
-            dataset_dir=ctx.parsed.objective_dataset_dir,
-            todo_vector_index_path=ctx.parsed.objective_todo_vector_index_path,
-            task_header_prefix=ctx.parsed.task_prefix,
-            repo_root=REPO_ROOT,
-            min_open_tasks=ctx.parsed.objective_scan_min_open_tasks,
-            max_findings=ctx.parsed.objective_scan_max_findings,
-            cooldown_seconds=ctx.parsed.objective_scan_cooldown_seconds,
-            surplus_findings_per_goal=ctx.parsed.objective_surplus_findings_per_goal,
-            surplus_min_terms_per_todo=ctx.parsed.objective_surplus_min_terms_per_todo,
-        )
-
-    def codebase_scan_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
-        return record_codebase_scan_findings(
-            todo_path=ctx.parsed.todo_path,
-            state_path=ctx.state_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=ctx.parsed.task_prefix,
-            repo_root=REPO_ROOT,
-            min_open_tasks=ctx.parsed.codebase_scan_min_open_tasks,
-            max_findings=ctx.parsed.codebase_scan_max_findings,
-            cooldown_seconds=ctx.parsed.codebase_scan_cooldown_seconds,
-        )
-
-    def retry_budget_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
-        return record_retry_budget_findings(
-            todo_path=ctx.parsed.todo_path,
-            events_path=ctx.daemon_events_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=ctx.parsed.task_prefix,
-        )
+    objective_hook = build_supervisor_objective_refill_callback(
+        record_objective_goal_findings,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        repo_root=REPO_ROOT,
+    )
+    codebase_scan_hook = build_supervisor_codebase_scan_refill_callback(
+        record_codebase_scan_findings,
+        discovery_dir=DISCOVERY_DIR,
+        repo_root=REPO_ROOT,
+    )
+    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
+        record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+    )
 
     runtime_callbacks = build_supervisor_runtime_callbacks(
         args,

@@ -68,9 +68,11 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,
-    ImplementationDaemonRunContext,
     apply_portal_implementation_daemon_defaults,
+    build_daemon_codebase_scan_refill_callback,
+    build_daemon_objective_refill_callback,
     build_daemon_refill_hooks,
+    build_daemon_retry_budget_refill_callback,
     run_configured_portal_implementation_daemon,
 )
 
@@ -273,35 +275,21 @@ def main(argv: list[str] | None = None) -> None:
         ),
     )
 
-    def objective_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
-        return record_objective_goal_findings(
-            todo_path=ctx.parsed.todo_path,
-            state_path=ctx.state_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=paths["objective_goal_heap_path"],
-            task_header_prefix=ctx.parsed.task_prefix,
-            repo_root=REPO_ROOT,
-        )
-
-    def codebase_scan_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
-        return record_codebase_scan_findings(
-            todo_path=ctx.parsed.todo_path,
-            state_path=ctx.state_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=ctx.parsed.task_prefix,
-            repo_root=REPO_ROOT,
-        )
-
-    def retry_budget_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
-        return record_retry_budget_findings(
-            todo_path=ctx.parsed.todo_path,
-            events_path=ctx.events_path,
-            strategy_path=ctx.strategy_path,
-            discovery_dir=DISCOVERY_DIR,
-            task_header_prefix=ctx.parsed.task_prefix,
-        )
+    objective_hook = build_daemon_objective_refill_callback(
+        record_objective_goal_findings,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        repo_root=REPO_ROOT,
+    )
+    codebase_scan_hook = build_daemon_codebase_scan_refill_callback(
+        record_codebase_scan_findings,
+        discovery_dir=DISCOVERY_DIR,
+        repo_root=REPO_ROOT,
+    )
+    retry_budget_hook = build_daemon_retry_budget_refill_callback(
+        record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+    )
 
     run_configured_portal_implementation_daemon(
         args,
