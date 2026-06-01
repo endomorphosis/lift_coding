@@ -37,8 +37,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
-    with_default as _with_default,
-    with_repeated_default as _with_repeated_default,
+)
+from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
+    ImplementationDaemonDefaults,
+    apply_portal_implementation_daemon_defaults,
 )
 
 
@@ -75,14 +77,20 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 
-    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths["task_board_path"]))
-    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
-    args = _with_default(args, "--task-prefix", "## VAI-")
-    args = _with_default(args, "--state-prefix", "virtual_ai_os")
-    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
-    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
-    args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
+    args = apply_portal_implementation_daemon_defaults(
+        args,
+        defaults=ImplementationDaemonDefaults(
+            todo_path=paths["task_board_path"],
+            state_dir=paths["state_dir"],
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            worktree_root=paths["worktree_root"],
+            todo_path_flag=TASK_BOARD_PATH_OPTION,
+            objective_path=OBJECTIVE_HEAP_PATH,
+            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
+        ),
+    )
     daemon_main(args)
 
 

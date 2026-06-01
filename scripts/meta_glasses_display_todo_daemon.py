@@ -38,12 +38,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     repo_relative_or_default as _repo_relative_or_default,
     unique_path_entries as _unique_path_entries,
-    with_default as _with_default,
-    with_repeated_default as _with_repeated_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     DaemonLoopHook,
+    ImplementationDaemonDefaults,
     ImplementationDaemonRunContext,
+    apply_portal_implementation_daemon_defaults,
     build_portal_implementation_daemon_from_args,
     configure_daemon_logging,
     run_portal_implementation_daemon_loop,
@@ -230,14 +230,20 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
 
-    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(TASK_BOARD_PATH))
-    args = _with_default(args, "--state-dir", str(STATE_DIR))
-    args = _with_default(args, "--task-prefix", "## MGW-")
-    args = _with_default(args, "--state-prefix", "meta_glasses_display")
-    args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
-    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
-    args = _with_repeated_default(args, "--worktree-submodule-path", META_DISPLAY_WORKTREE_SUBMODULE_PATHS)
+    args = apply_portal_implementation_daemon_defaults(
+        args,
+        defaults=ImplementationDaemonDefaults(
+            todo_path=TASK_BOARD_PATH,
+            state_dir=STATE_DIR,
+            task_prefix="## MGW-",
+            state_prefix="meta_glasses_display",
+            worktree_root=WORKTREE_ROOT,
+            todo_path_flag=TASK_BOARD_PATH_OPTION,
+            objective_path=OBJECTIVE_HEAP_PATH,
+            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+        ),
+    )
     parsed = parse_args(args)
     configure_daemon_logging(parsed)
     daemon, context = build_portal_implementation_daemon_from_args(

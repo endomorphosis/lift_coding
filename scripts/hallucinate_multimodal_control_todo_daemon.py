@@ -63,11 +63,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     env_csv_tuple as _env_csv_tuple,
     repo_relative_or_default as _repo_relative_or_default,
-    with_default as _with_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     DaemonLoopHook,
+    ImplementationDaemonDefaults,
     ImplementationDaemonRunContext,
+    apply_portal_implementation_daemon_defaults,
     build_portal_implementation_daemon_from_args,
     configure_daemon_logging,
     run_portal_implementation_daemon_loop,
@@ -284,13 +285,20 @@ def main(argv: list[str] | None = None) -> None:
     os.chdir(REPO_ROOT)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths[TASK_BOARD_PATH_KEY]))
-    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
-    args = _with_default(args, "--task-prefix", "## HAO-")
-    args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
-    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
-    args = _with_default(args, "--objective-path", str(paths["objective_goal_heap_path"]))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
+    args = apply_portal_implementation_daemon_defaults(
+        args,
+        defaults=ImplementationDaemonDefaults(
+            todo_path=paths[TASK_BOARD_PATH_KEY],
+            state_dir=paths["state_dir"],
+            task_prefix="## HAO-",
+            state_prefix="hallucinate_multimodal_control",
+            worktree_root=paths["worktree_root"],
+            todo_path_flag=TASK_BOARD_PATH_OPTION,
+            objective_path=paths["objective_goal_heap_path"],
+            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+        ),
+    )
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
 
