@@ -27,6 +27,7 @@ DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discove
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+DISCOVERY_OUTPUT_PATH = "data/hallucinate_multimodal_control/discovery"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
@@ -63,7 +64,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     env_csv_tuple as _env_csv_tuple,
-    repo_relative_or_default as _repo_relative_or_default,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -115,36 +115,6 @@ def _ensure_runtime_pythonpath() -> None:
     _ensure_runtime_pythonpath_for_paths((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
 
-def _task_prefix_from_header(task_header_prefix: str) -> str:
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import task_id_prefix
-
-    return task_id_prefix(task_header_prefix or "## HAO-")
-
-
-def _task_ids_from_todo(todo_text: str, *, task_prefix: str) -> list[str]:
-    _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import task_ids_from_todo_text
-
-    return task_ids_from_todo_text(todo_text, task_prefix=task_prefix)
-
-
-def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
-    return _repo_relative_or_default(discovery_dir, repo_root, "data/hallucinate_multimodal_control/discovery")
-
-
-def _objective_bundle_dir(repo_root: Path, bundle_dir: Path | None) -> Path:
-    if bundle_dir is not None:
-        return bundle_dir
-    return repo_root / "data" / "hallucinate_multimodal_control" / "objective_bundles"
-
-
-def _objective_dataset_dir(repo_root: Path, dataset_dir: Path | None) -> Path:
-    if dataset_dir is not None:
-        return dataset_dir
-    return repo_root / "data" / "hallucinate_multimodal_control" / "objective_datasets"
-
-
 def record_objective_goal_findings(
     *,
     todo_path: Path = DEFAULT_TODO_PATH,
@@ -167,32 +137,49 @@ def record_objective_goal_findings(
     """Feed the HAO board from missing evidence in the objective heap."""
 
     _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_objective_backlog_findings
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_objective_backlog_findings
 
-    task_prefix = _task_prefix_from_header(task_header_prefix)
-    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
-    depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text, task_prefix=task_prefix) else []
-    return record_objective_backlog_findings(
+    return record_configured_objective_backlog_findings(
         repo_root=repo_root,
         objective_path=objective_path,
         todo_path=todo_path,
         discovery_dir=discovery_dir,
-        bundle_dir=_objective_bundle_dir(repo_root, bundle_dir),
-        dataset_dir=_objective_dataset_dir(repo_root, dataset_dir),
+        bundle_dir=bundle_dir,
+        dataset_dir=dataset_dir,
+        default_bundle_dir=(
+            repo_root
+            / "data"
+            / "hallucinate_multimodal_control"
+            / "objective_bundles"
+        ),
+        default_dataset_dir=(
+            repo_root
+            / "data"
+            / "hallucinate_multimodal_control"
+            / "objective_datasets"
+        ),
         strategy_path=strategy_path,
         state_path=state_path,
-        task_prefix=task_prefix,
-        depends_on=depends_on,
+        task_header_prefix_value=task_header_prefix,
+        depends_on_if_present=("HAO-013",),
         min_open_tasks=min_open_tasks,
         max_findings=max_findings,
         cooldown_seconds=cooldown_seconds,
         force=force,
         write_todo_vector_index=True,
-        todo_vector_index_path=todo_vector_index_path or _objective_bundle_dir(repo_root, bundle_dir) / "todo_vector_index.json",
+        todo_vector_index_path=todo_vector_index_path
+        or (
+            bundle_dir
+            or repo_root
+            / "data"
+            / "hallucinate_multimodal_control"
+            / "objective_bundles"
+        )
+        / "todo_vector_index.json",
         surplus_findings_per_goal=surplus_findings_per_goal,
         surplus_min_terms_per_todo=surplus_min_terms_per_todo,
         summary_prefix="Close virtual AI OS objective gap",
-        discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
+        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
         commit_outputs=True,
         commit_subject="HAO: record objective goal backlog findings",
     )
@@ -214,24 +201,21 @@ def record_codebase_scan_findings(
     """Feed the HAO board with accelerator static-scan findings when backlog runs low."""
 
     _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_codebase_scan_findings as record_scan
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_codebase_scan_findings
 
-    task_prefix = _task_prefix_from_header(task_header_prefix)
-    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
-    depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text, task_prefix=task_prefix) else []
-    return record_scan(
+    return record_configured_codebase_scan_findings(
         todo_path=todo_path,
         state_path=state_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
         repo_root=repo_root,
-        task_prefix=task_prefix,
-        depends_on=depends_on,
+        task_header_prefix_value=task_header_prefix,
+        depends_on_if_present=("HAO-013",),
         min_open_tasks=min_open_tasks,
         max_findings=max_findings,
         cooldown_seconds=cooldown_seconds,
         force=force,
-        discovery_output_path=_discovery_output_path(repo_root, discovery_dir),
+        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
         skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         commit_outputs=True,
         commit_subject="HAO: record codebase scan backlog findings",
@@ -251,34 +235,22 @@ def record_retry_budget_findings(
     """Turn repeated validation or merge failures into accelerator backlog items."""
 
     _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
-        git_toplevel_for_path,
-        record_retry_budget_findings as record_retries,
-    )
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_retry_budget_findings
 
-    task_prefix = _task_prefix_from_header(task_header_prefix)
-    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
-    validation_depends_on = ["HAO-013"] if "HAO-013" in _task_ids_from_todo(todo_text, task_prefix=task_prefix) else []
-    inferred_repo_root = git_toplevel_for_path(todo_path.parent) or REPO_ROOT
-    findings = record_retries(
+    return record_configured_retry_budget_findings(
         todo_path=todo_path,
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
         task_header_prefix_value=task_header_prefix,
-        task_prefix=task_prefix,
         validation_retry_budget=retry_budget,
         merge_retry_budget=merge_retry_budget,
-        validation_depends_on=validation_depends_on,
-        discovery_output_path=_discovery_output_path(inferred_repo_root, discovery_dir),
+        validation_depends_on_if_present=("HAO-013",),
+        discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
+        strip_validation_failure_kind=True,
         commit_outputs=True,
-        repo_root=inferred_repo_root,
         commit_subject="HAO: record retry-budget guardrail outputs",
     )
-    for finding in findings:
-        if finding.get("failure_kind") == "validation":
-            finding.pop("failure_kind", None)
-    return findings
 
 
 def main(argv: list[str] | None = None) -> None:

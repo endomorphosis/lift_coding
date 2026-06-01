@@ -189,36 +189,22 @@ def record_retry_budget_findings(
     """Turn repeated validation failures into accelerator backlog items."""
 
     _ensure_ipfs_accelerate_path()
-    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
-        record_retry_budget_findings as record_retries,
-        task_id_prefix,
-        task_ids_from_todo_text,
-    )
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import record_configured_retry_budget_findings
 
-    if retry_budget <= 0 or not todo_path.exists():
-        return []
-
-    task_prefix = task_id_prefix(task_header_prefix)
-    todo_text = todo_path.read_text(encoding="utf-8") if todo_path.exists() else ""
-    task_ids = set(task_ids_from_todo_text(todo_text, task_prefix=task_prefix))
-    validation_depends_on = ["MGW-014"] if "MGW-014" in task_ids else []
-    findings = record_retries(
+    return record_configured_retry_budget_findings(
         todo_path=todo_path,
         events_path=events_path,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
         task_header_prefix_value=task_header_prefix,
-        task_prefix=task_prefix,
         validation_retry_budget=retry_budget,
         merge_retry_budget=0,
-        validation_depends_on=validation_depends_on,
+        implementation_retry_budget=0,
+        validation_depends_on_if_present=("MGW-014",),
         validation_task_command_transform=with_android_validation_env,
         discovery_output_path=_discovery_output_path(REPO_ROOT, discovery_dir),
+        strip_validation_failure_kind=True,
     )
-    for finding in findings:
-        if finding.get("failure_kind") == "validation":
-            finding.pop("failure_kind", None)
-    return findings
 
 
 def main(argv: list[str] | None = None) -> None:
