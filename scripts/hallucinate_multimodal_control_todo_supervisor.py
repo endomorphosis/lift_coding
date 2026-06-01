@@ -28,6 +28,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     apply_portal_implementation_supervisor_defaults,
     build_portal_implementation_supervisor_from_args,
     build_supervisor_refill_hooks,
+    build_supervisor_runtime_callbacks,
     configure_supervisor_logging,
     run_portal_implementation_supervisor,
 )
@@ -202,15 +203,13 @@ def main(argv: list[str] | None = None) -> None:
             task_header_prefix=ctx.parsed.task_prefix,
         )
 
-    def ensure_running_hook(ctx: ImplementationSupervisorRunContext) -> dict[str, object]:
-        return ensure_hallucinate_supervisor_running(
-            args,
-            state_dir=ctx.parsed.state_dir,
-            state_prefix=ctx.parsed.state_prefix,
-        )
-
-    def repair_runtime_hook(ctx: ImplementationSupervisorRunContext) -> dict[str, object]:
-        return repair_hallucinate_supervisor_runtime(ctx.parsed.state_dir, ctx.parsed.state_prefix)
+    runtime_callbacks = build_supervisor_runtime_callbacks(
+        args,
+        repo_root=REPO_ROOT,
+        script_path=Path(__file__).resolve(),
+        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
+        prepare_environment=_ensure_runtime_pythonpath,
+    )
 
     run_portal_implementation_supervisor(
         supervisor,
@@ -226,9 +225,9 @@ def main(argv: list[str] | None = None) -> None:
         ),
         once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
         ensure_running=ensure_running,
-        ensure_running_callback=ensure_running_hook,
+        ensure_running_callback=runtime_callbacks.ensure_running,
         ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
-        repair_runtime_callback=repair_runtime_hook,
+        repair_runtime_callback=runtime_callbacks.repair_runtime,
         repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
     )
 
