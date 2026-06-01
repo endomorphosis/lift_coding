@@ -35,8 +35,11 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    apply_environment_contract as _apply_environment_contract,
+    environment_assignment_prefix as _environment_assignment_prefix,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     repo_relative_or_default as _repo_relative_or_default,
+    rewrite_validation_commands as _rewrite_validation_commands,
     unique_path_entries as _unique_path_entries,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
@@ -101,31 +104,14 @@ def android_validation_environment(repo_root: Path = REPO_ROOT) -> dict[str, Any
 
 
 def _bootstrap_android_validation_env(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
-    contract = android_validation_environment(repo_root)
-    env = dict(contract["env"])
-    path_entries = list(contract["path_entries"])
-    for key, value in env.items():
-        os.environ[key] = value
-    if path_entries:
-        current_path = os.environ.get("PATH", "")
-        existing_entries = current_path.split(os.pathsep) if current_path else []
-        os.environ["PATH"] = os.pathsep.join(_unique_path_entries([*path_entries, *existing_entries]))
-    contract["effective_path"] = os.environ.get("PATH", "")
-    return contract
+    return _apply_environment_contract(android_validation_environment(repo_root))
 
 
 def _android_env_assignment_prefix(repo_root: Path = REPO_ROOT) -> str:
-    contract = android_validation_environment(repo_root)
-    env = dict(contract["env"])
-    assignments = [
-        f"{key}={env[key]}"
-        for key in ("JAVA_HOME", "ANDROID_HOME", "ANDROID_SDK_ROOT")
-        if key in env
-    ]
-    path_entries = list(contract["path_entries"])
-    if path_entries:
-        assignments.append(f"PATH={os.pathsep.join(path_entries)}:$PATH")
-    return " ".join(assignments)
+    return _environment_assignment_prefix(
+        android_validation_environment(repo_root),
+        env_keys=("JAVA_HOME", "ANDROID_HOME", "ANDROID_SDK_ROOT"),
+    )
 
 
 def _validation_command_needs_android_env(command: str) -> bool:
@@ -149,32 +135,10 @@ def with_android_validation_env(command: str, repo_root: Path = REPO_ROOT) -> st
 def enforce_android_validation_environment(todo_path: Path = TASK_BOARD_PATH, repo_root: Path = REPO_ROOT) -> bool:
     """Rewrite bare Android Gradle validations to use the repo-local JDK/SDK."""
 
-    if not todo_path.exists():
-        return False
-
-    lines = todo_path.read_text(encoding="utf-8").splitlines(keepends=True)
-    changed = False
-    updated_lines: list[str] = []
-    for line in lines:
-        if not line.startswith("- Validation:"):
-            updated_lines.append(line)
-            continue
-
-        newline = "\n" if line.endswith("\n") else ""
-        body = line[len("- Validation:") :].strip()
-        commands = [item.strip() for item in body.split(";")]
-        updated_commands = [with_android_validation_env(command, repo_root) for command in commands]
-        if updated_commands != commands:
-            changed = True
-            updated_lines.append("- Validation: " + "; ".join(updated_commands) + newline)
-        else:
-            updated_lines.append(line)
-
-    if not changed:
-        return False
-
-    todo_path.write_text("".join(updated_lines), encoding="utf-8")
-    return True
+    return _rewrite_validation_commands(
+        todo_path,
+        lambda command: with_android_validation_env(command, repo_root),
+    )
 
 
 def record_retry_budget_findings(

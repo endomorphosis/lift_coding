@@ -70,6 +70,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
 )
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    ensure_task_blocks_present as _ensure_task_blocks_present,
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
     ImplementationSupervisorDefaults,
@@ -133,29 +136,15 @@ def _default_llm_merge_resolver_command() -> str:
     )
 
 
-def _task_is_present(todo_text: str, task_id: str) -> bool:
-    return f"## {task_id} " in todo_text
-
-
 def ensure_post_initial_discovery_backlog(todo_path: Path = TASK_BOARD_PATH) -> bool:
     """Keep the post-initial discovery expansion tasks in the supervised board."""
-    if not todo_path.exists():
-        return False
-
-    todo_text = todo_path.read_text(encoding="utf-8")
-    additions: list[str] = []
-
-    if not _task_is_present(todo_text, "MGW-013"):
-        additions.append(DISCOVERY_EXPANSION_TASK.strip())
-    if not _task_is_present(todo_text, "MGW-014"):
-        additions.append(SUPERVISOR_GUARDRAIL_TASK.strip())
-
-    if not additions:
-        return False
-
-    updated = todo_text.rstrip() + "\n\n" + "\n\n".join(additions) + "\n"
-    todo_path.write_text(updated, encoding="utf-8")
-    return True
+    return _ensure_task_blocks_present(
+        todo_path,
+        (
+            ("MGW-013", DISCOVERY_EXPANSION_TASK),
+            ("MGW-014", SUPERVISOR_GUARDRAIL_TASK),
+        ),
+    )
 
 
 def validation_environment_summary() -> dict[str, object]:
