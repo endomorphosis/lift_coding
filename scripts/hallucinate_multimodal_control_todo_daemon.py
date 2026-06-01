@@ -66,6 +66,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    repo_relative_or_default as _repo_relative_or_default,
     with_default as _with_default,
 )
 
@@ -120,10 +121,7 @@ def _task_ids_from_todo(todo_text: str, *, task_prefix: str) -> list[str]:
 
 
 def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
-    try:
-        return discovery_dir.resolve().relative_to(repo_root.resolve()).as_posix()
-    except ValueError:
-        return "data/hallucinate_multimodal_control/discovery"
+    return _repo_relative_or_default(discovery_dir, repo_root, "data/hallucinate_multimodal_control/discovery")
 
 
 def _objective_bundle_dir(repo_root: Path, bundle_dir: Path | None) -> Path:

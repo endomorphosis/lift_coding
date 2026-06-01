@@ -37,6 +37,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    repo_relative_or_default as _repo_relative_or_default,
+    unique_path_entries as _unique_path_entries,
     with_default as _with_default,
     with_repeated_default as _with_repeated_default,
 )
@@ -53,21 +55,7 @@ def _ensure_runtime_pythonpath() -> None:
 
 
 def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
-    try:
-        return discovery_dir.resolve().relative_to(repo_root.resolve()).as_posix()
-    except ValueError:
-        return "data/meta_glasses_display_widgets/discovery"
-
-
-def _unique_path_entries(entries: list[str]) -> list[str]:
-    seen: set[str] = set()
-    unique: list[str] = []
-    for entry in entries:
-        if not entry or entry in seen:
-            continue
-        seen.add(entry)
-        unique.append(entry)
-    return unique
+    return _repo_relative_or_default(discovery_dir, repo_root, "data/meta_glasses_display_widgets/discovery")
 
 
 def android_validation_environment(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
