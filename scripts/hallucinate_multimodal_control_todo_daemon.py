@@ -61,10 +61,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
+    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
+    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
     env_csv_tuple as _env_csv_tuple,
-    resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
-    resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     ConfiguredCodebaseScanRecorder,
@@ -111,21 +111,12 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
 )
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
-
-
-def hallucinate_multimodal_bootstrap_paths() -> dict[str, Path]:
-    return _resolve_bootstrap_paths(REPO_ROOT, HALLUCINATE_BOOTSTRAP_SPECS)
-
-
-def ensure_hallucinate_multimodal_bootstrap_paths(
-    paths: dict[str, Path] | None = None,
-) -> dict[str, Path]:
-    return _resolve_and_ensure_bootstrap_paths(
-        REPO_ROOT,
-        HALLUCINATE_BOOTSTRAP_SPECS,
-        ("state_dir", "worktree_root"),
-        paths=paths,
-    )
+hallucinate_multimodal_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, HALLUCINATE_BOOTSTRAP_SPECS)
+ensure_hallucinate_multimodal_bootstrap_paths = _build_bootstrap_path_ensurer(
+    REPO_ROOT,
+    HALLUCINATE_BOOTSTRAP_SPECS,
+    ("state_dir", "worktree_root"),
+)
 
 
 record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(

@@ -62,11 +62,11 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
+    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
+    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
-    resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
-    resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -93,23 +93,12 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
-
-
-def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
-    """Return the repo-local bootstrap contract for virtual-AI-OS supervision."""
-
-    return _resolve_bootstrap_paths(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
-
-
-def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
-    """Create the local state and worktree directories used by the supervisor."""
-
-    return _resolve_and_ensure_bootstrap_paths(
-        REPO_ROOT,
-        VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
-        ("state_dir", "worktree_root"),
-        paths=paths,
-    )
+virtual_ai_os_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
+ensure_virtual_ai_os_bootstrap_paths = _build_bootstrap_path_ensurer(
+    REPO_ROOT,
+    VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
+    ("state_dir", "worktree_root"),
+)
 
 
 def _default_llm_merge_resolver_command() -> str:
