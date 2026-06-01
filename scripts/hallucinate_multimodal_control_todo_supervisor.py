@@ -19,13 +19,14 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
-    with_default as _with_default,
-    with_flag_default as _with_flag_default,
-    with_repeated_default as _with_repeated_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    CodebaseRefillDefaults,
+    ImplementationSupervisorDefaults,
     ImplementationSupervisorRunContext,
+    ObjectiveRefillDefaults,
     SupervisorRunHook,
+    apply_portal_implementation_supervisor_defaults,
     build_portal_implementation_supervisor_from_args,
     configure_supervisor_logging,
     run_portal_implementation_supervisor,
@@ -110,41 +111,44 @@ def main(argv: list[str] | None = None) -> None:
     os.chdir(REPO_ROOT)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths[TASK_BOARD_PATH_KEY]))
-    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
-    args = _with_default(args, "--task-prefix", "## HAO-")
-    args = _with_default(args, "--state-prefix", "hallucinate_multimodal_control")
-    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
-    args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
-    args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
-    args = _with_default(args, "--max-restarts", "0")
-    resolver_command = _default_llm_merge_resolver_command()
-    if resolver_command:
-        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
-    args = _with_flag_default(args, "--objective-refill-scan")
-    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
-    args = _with_repeated_default(args, "--objective-interoperability-focus", HALLUCINATE_INTEROPERABILITY_FOCUS)
-    args = _with_default(args, "--objective-path", str(paths["objective_goal_heap_path"]))
-    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
-    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
-    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--objective-discovery-output-path", DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix())
-    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
-    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
-    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
-    # scanner-resolved: MGW-189, MGW-190, HAO-247, VAI-165, HAO-253, VAI-169, HAO-257, HAO-262, VAI-174 — "todo" below is part of the CLI flag name --objective-todo-vector-index-path (work-item queue path), not a deferred-work annotation.
-    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
-    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    # scanner-resolved: MGW-191, MGW-192, HAO-244, HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, HAO-258, HAO-263, VAI-175, VAI-178, MGW-206 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
-    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
-    args = _with_flag_default(args, "--codebase-refill-scan")
-    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--codebase-scan-discovery-output-path", DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix())
-    args = _with_default(args, "--codebase-scan-min-open-tasks", str(CODEBASE_SCAN_MIN_OPEN_TASKS))
-    args = _with_default(args, "--codebase-scan-max-findings", str(CODEBASE_SCAN_MAX_FINDINGS))
-    args = _with_default(args, "--codebase-scan-cooldown-seconds", str(CODEBASE_SCAN_COOLDOWN_SECONDS))
-    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
+    args = apply_portal_implementation_supervisor_defaults(
+        args,
+        defaults=ImplementationSupervisorDefaults(
+            todo_path=paths[TASK_BOARD_PATH_KEY],
+            state_dir=paths["state_dir"],
+            task_prefix="## HAO-",
+            state_prefix="hallucinate_multimodal_control",
+            worktree_root=paths["worktree_root"],
+            daemon_script_path=DAEMON_SCRIPT_PATH,
+            supervisor_script_path=Path(__file__).resolve(),
+            todo_path_flag=TASK_BOARD_PATH_OPTION,
+            llm_merge_resolver_command=_default_llm_merge_resolver_command(),
+        ),
+        objective=ObjectiveRefillDefaults(
+            objective_path=paths["objective_goal_heap_path"],
+            objective_graph_path=OBJECTIVE_GRAPH_PATH,
+            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            objective_dataset_dir=OBJECTIVE_DATASET_DIR,
+            objective_discovery_dir=DISCOVERY_DIR,
+            objective_discovery_output_path=DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+            objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
+            objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
+            objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+            objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+            objective_surplus_findings_per_goal=OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
+            objective_surplus_min_terms_per_todo=OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
+            objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
+            seed_interoperability_goals=True,
+        ),
+        codebase=CodebaseRefillDefaults(
+            codebase_scan_discovery_dir=DISCOVERY_DIR,
+            codebase_scan_discovery_output_path=DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+            codebase_scan_min_open_tasks=CODEBASE_SCAN_MIN_OPEN_TASKS,
+            codebase_scan_max_findings=CODEBASE_SCAN_MAX_FINDINGS,
+            codebase_scan_cooldown_seconds=CODEBASE_SCAN_COOLDOWN_SECONDS,
+            codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+        ),
+    )
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import parse_args
 

@@ -69,13 +69,14 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
-    with_default as _with_default,
-    with_flag_default as _with_flag_default,
-    with_repeated_default as _with_repeated_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    CodebaseRefillDefaults,
+    ImplementationSupervisorDefaults,
     ImplementationSupervisorRunContext,
+    ObjectiveRefillDefaults,
     SupervisorRunHook,
+    apply_portal_implementation_supervisor_defaults,
     build_portal_implementation_supervisor_from_args,
     configure_supervisor_logging,
     run_portal_implementation_supervisor,
@@ -206,41 +207,42 @@ def main(argv: list[str] | None = None) -> None:
     enforce_android_validation_environment(TASK_BOARD_PATH)
     _ensure_runtime_pythonpath()
 
-    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(TASK_BOARD_PATH))
-    args = _with_default(args, "--state-dir", str(STATE_DIR))
-    args = _with_default(args, "--task-prefix", "## MGW-")
-    args = _with_default(args, "--state-prefix", "meta_glasses_display")
-    args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
-    args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
-    args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
-    args = _with_default(args, "--max-restarts", "0")
-    resolver_command = _default_llm_merge_resolver_command()
-    if resolver_command:
-        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
-    args = _with_flag_default(args, "--objective-refill-scan")
-    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
-    args = _with_repeated_default(args, "--objective-interoperability-focus", META_DISPLAY_INTEROPERABILITY_FOCUS)
-    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
-    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
-    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
-    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
-    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--objective-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
-    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
-    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
-    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
-    # Wire the task-board vector index; split "to"+"do" so the codebase scanner
-    # does not flag this as an unresolved annotation (it is part of the path name).
-    args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
-    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    # Wire surplus min-terms threshold; split "to"+"do" so the codebase scanner
-    # does not re-flag this as an unresolved annotation (it refers to task-board items).
-    args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
-    args = _with_flag_default(args, "--codebase-refill-scan")
-    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
-    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
-    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
-    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
+    args = apply_portal_implementation_supervisor_defaults(
+        args,
+        defaults=ImplementationSupervisorDefaults(
+            todo_path=TASK_BOARD_PATH,
+            state_dir=STATE_DIR,
+            task_prefix="## MGW-",
+            state_prefix="meta_glasses_display",
+            worktree_root=WORKTREE_ROOT,
+            daemon_script_path=DAEMON_SCRIPT_PATH,
+            supervisor_script_path=Path(__file__).resolve(),
+            todo_path_flag=TASK_BOARD_PATH_OPTION,
+            llm_merge_resolver_command=_default_llm_merge_resolver_command(),
+        ),
+        objective=ObjectiveRefillDefaults(
+            objective_path=OBJECTIVE_HEAP_PATH,
+            objective_graph_path=OBJECTIVE_GRAPH_PATH,
+            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            objective_dataset_dir=OBJECTIVE_DATASET_DIR,
+            objective_discovery_dir=DISCOVERY_DIR,
+            objective_discovery_output_path="data/meta_glasses_display_widgets/discovery",
+            objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
+            objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
+            objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+            objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+            objective_surplus_findings_per_goal=OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
+            objective_surplus_min_terms_per_todo=OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
+            objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
+            seed_interoperability_goals=True,
+        ),
+        codebase=CodebaseRefillDefaults(
+            codebase_scan_discovery_dir=DISCOVERY_DIR,
+            codebase_scan_discovery_output_path="data/meta_glasses_display_widgets/discovery",
+            codebase_scan_min_open_tasks=0,
+            codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+        ),
+    )
     _run_supervisor(args)
 
 
