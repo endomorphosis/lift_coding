@@ -18,8 +18,8 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -80,12 +80,9 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
-
-
-def _default_llm_merge_resolver_command() -> str:
-    return _shared_default_llm_merge_resolver_command(
-        primary_env_var="HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
-    )
+_default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
+    primary_env_var="HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
+)
 
 
 def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:

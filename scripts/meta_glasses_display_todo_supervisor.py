@@ -68,8 +68,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
@@ -133,10 +133,9 @@ SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment
 """
 
 
-def _default_llm_merge_resolver_command() -> str:
-    return _shared_default_llm_merge_resolver_command(
-        primary_env_var="HANDSFREE_MGW_LLM_MERGE_RESOLVER_COMMAND"
-    )
+_default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
+    primary_env_var="HANDSFREE_MGW_LLM_MERGE_RESOLVER_COMMAND"
+)
 
 
 def ensure_post_initial_discovery_backlog(todo_path: Path = TASK_BOARD_PATH) -> bool:
