@@ -59,10 +59,12 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    BootstrapPathSpec,
     ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     env_csv_tuple as _env_csv_tuple,
     repo_relative_or_default as _repo_relative_or_default,
+    resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     DaemonLoopHook,
@@ -83,19 +85,19 @@ logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
 
 def hallucinate_multimodal_bootstrap_paths() -> dict[str, Path]:
-    todo_path = Path(os.environ.get("HANDSFREE_HAO_TODO_PATH", str(DEFAULT_TODO_PATH)))
-    state_dir = Path(os.environ.get("HANDSFREE_HAO_STATE_DIR", str(DEFAULT_STATE_DIR)))
-    worktree_root = Path(os.environ.get("HANDSFREE_HAO_WORKTREE_ROOT", str(DEFAULT_WORKTREE_ROOT)))
-    objective_goal_heap_path = Path(
-        os.environ.get("HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH", str(DEFAULT_OBJECTIVE_GOAL_HEAP_PATH))
+    return _resolve_bootstrap_paths(
+        REPO_ROOT,
+        (
+            BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, "HANDSFREE_HAO_TODO_PATH"),
+            BootstrapPathSpec(
+                "objective_goal_heap_path",
+                DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+                "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+            ),
+            BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_HAO_STATE_DIR"),
+            BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_HAO_WORKTREE_ROOT"),
+        ),
     )
-    return {
-        "repo_root": REPO_ROOT,
-        "todo_path": todo_path,
-        "objective_goal_heap_path": objective_goal_heap_path,
-        "state_dir": state_dir,
-        "worktree_root": worktree_root,
-    }
 
 
 def ensure_hallucinate_multimodal_bootstrap_paths(

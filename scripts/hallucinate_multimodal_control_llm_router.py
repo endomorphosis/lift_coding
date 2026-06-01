@@ -3,8 +3,6 @@
 
 from __future__ import annotations
 
-import argparse
-import json
 import os
 import sys
 from pathlib import Path
@@ -29,9 +27,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     TaskProposalRouterConfig,
-    TaskProposalRouterError,
+    TaskProposalRouterCliConfig,
     build_task_proposal_prompt,
-    run_task_proposal_router,
+    run_task_proposal_router_cli,
 )
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import ensure_runtime_pythonpath  # noqa: E402
 
@@ -41,22 +39,26 @@ def _bootstrap_imports() -> None:
     ensure_runtime_pythonpath([IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT])
 
 
-def _build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Generate an implementation proposal for a Hallucinate multimodal-control task-board item with llm_router.",
+def _build_cli_config() -> TaskProposalRouterCliConfig:
+    return TaskProposalRouterCliConfig(
+        router_config=TaskProposalRouterConfig(
+            repo_root=REPO_ROOT,
+            task_board_path=DEFAULT_TASK_BOARD_PATH,
+            task_header_prefix="## HAO-",
+            plan_path=PLAN_PATH,
+            artifact_dir=ARTIFACT_DIR,
+            prompt_builder=_build_prompt,
+            no_open_task_message="No open task found in Hallucinate multimodal-control task board.",
+        ),
+        description=(
+            "Generate an implementation proposal for a Hallucinate multimodal-control "
+            "task-board item with llm_router."
+        ),
+        task_id_help="Specific HAO task id. Defaults to the first ready task.",
+        task_board_option=TASK_BOARD_PATH_OPTION,
+        include_dry_run_flag=True,
+        bootstrap=_bootstrap_imports,
     )
-    parser.add_argument("--task-id", default="", help="Specific HAO task id. Defaults to the first ready task.")
-    parser.add_argument(TASK_BOARD_PATH_OPTION, type=Path, default=DEFAULT_TASK_BOARD_PATH)
-    parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
-    parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
-    parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
-    parser.add_argument("--dry-run", action="store_true", help="Explicit preflight mode. This is the default when --generate is not set.")
-    parser.add_argument("--provider", default=os.environ.get("IPFS_DATASETS_PY_LLM_PROVIDER", ""))
-    parser.add_argument("--model", default=os.environ.get("IPFS_DATASETS_PY_LLM_MODEL", "gpt-5.3-codex-spark"))
-    parser.add_argument("--max-new-tokens", type=int, default=2048)
-    parser.add_argument("--timeout", type=int, default=300)
-    parser.add_argument("--allow-local-fallback", action="store_true")
-    return parser
 
 
 def _build_prompt(task: object, plan_text: str) -> str:
@@ -75,33 +77,7 @@ def _build_prompt(task: object, plan_text: str) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = _build_parser().parse_args(argv)
-    if args.generate and args.dry_run:
-        raise SystemExit("Choose either --generate or --dry-run, not both.")
-    _bootstrap_imports()
-    try:
-        payload = run_task_proposal_router(
-            TaskProposalRouterConfig(
-                repo_root=REPO_ROOT,
-                task_board_path=args.todo_path,
-                task_header_prefix="## HAO-",
-                plan_path=args.plan_path,
-                artifact_dir=args.artifact_dir,
-                prompt_builder=_build_prompt,
-                no_open_task_message="No open task found in Hallucinate multimodal-control task board.",
-            ),
-            task_id=args.task_id,
-            generate=bool(args.generate),
-            provider=args.provider,
-            model=args.model,
-            max_new_tokens=int(args.max_new_tokens),
-            timeout_seconds=int(args.timeout),
-            allow_local_fallback=bool(args.allow_local_fallback),
-        )
-    except TaskProposalRouterError as exc:
-        raise SystemExit(str(exc)) from exc
-    print(json.dumps(payload, indent=2, sort_keys=True))
-    return 0
+    return run_task_proposal_router_cli(_build_cli_config(), argv)
 
 
 if __name__ == "__main__":

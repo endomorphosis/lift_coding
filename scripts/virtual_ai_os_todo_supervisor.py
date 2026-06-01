@@ -61,10 +61,12 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    BootstrapPathSpec,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     env_csv_tuple as _env_csv_tuple,
+    resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -82,17 +84,14 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
 def virtual_ai_os_bootstrap_paths() -> dict[str, Path]:
     """Return the repo-local bootstrap contract for virtual-AI-OS supervision."""
 
-    todo_path = Path(os.environ.get("HANDSFREE_VAI_OS_TODO_PATH", str(DEFAULT_TODO_PATH)))
-    state_dir = Path(os.environ.get("HANDSFREE_VAI_OS_STATE_DIR", str(DEFAULT_STATE_DIR)))
-    worktree_root = Path(
-        os.environ.get("HANDSFREE_VAI_OS_WORKTREE_ROOT", str(DEFAULT_WORKTREE_ROOT))
+    return _resolve_bootstrap_paths(
+        REPO_ROOT,
+        (
+            BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, "HANDSFREE_VAI_OS_TODO_PATH"),
+            BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_VAI_OS_STATE_DIR"),
+            BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_VAI_OS_WORKTREE_ROOT"),
+        ),
     )
-    return {
-        "repo_root": REPO_ROOT,
-        "todo_path": todo_path,
-        "state_dir": state_dir,
-        "worktree_root": worktree_root,
-    }
 
 
 def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
