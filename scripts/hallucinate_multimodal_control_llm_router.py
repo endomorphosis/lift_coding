@@ -25,9 +25,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
-    TaskProposalRouterConfig,
     TaskProposalRouterCliConfig,
-    build_task_proposal_prompt,
+    build_task_proposal_router_cli_config,
     run_task_proposal_router_cli,
 )
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_runtime_environment_callback  # noqa: E402
@@ -37,16 +36,21 @@ _bootstrap_imports = build_runtime_environment_callback(REPO_ROOT, (IPFS_ACCELER
 
 
 def _build_cli_config() -> TaskProposalRouterCliConfig:
-    return TaskProposalRouterCliConfig(
-        router_config=TaskProposalRouterConfig(
-            repo_root=REPO_ROOT,
-            task_board_path=DEFAULT_TASK_BOARD_PATH,
-            task_header_prefix="## HAO-",
-            plan_path=PLAN_PATH,
-            artifact_dir=ARTIFACT_DIR,
-            prompt_builder=_build_prompt,
-            no_open_task_message="No open task found in Hallucinate multimodal-control task board.",
+    return build_task_proposal_router_cli_config(
+        repo_root=REPO_ROOT,
+        task_board_path=DEFAULT_TASK_BOARD_PATH,
+        task_header_prefix="## HAO-",
+        plan_path=PLAN_PATH,
+        artifact_dir=ARTIFACT_DIR,
+        prompt_intro="You are helping implement the Hallucinate App multimodal control-surface roadmap.",
+        requested_outputs=(
+            "exact files to edit",
+            "descriptor/runtime contracts to add",
+            "tests and fixtures needed",
+            "validation commands",
+            "risks or blockers",
         ),
+        no_open_task_message="No open task found in Hallucinate multimodal-control task board.",
         description=(
             "Generate an implementation proposal for a Hallucinate multimodal-control "
             "task-board item with llm_router."
@@ -55,21 +59,6 @@ def _build_cli_config() -> TaskProposalRouterCliConfig:
         task_board_option=TASK_BOARD_PATH_OPTION,
         include_dry_run_flag=True,
         bootstrap=_bootstrap_imports,
-    )
-
-
-def _build_prompt(task: object, plan_text: str) -> str:
-    return build_task_proposal_prompt(
-        task=task,
-        plan_text=plan_text,
-        intro="You are helping implement the Hallucinate App multimodal control-surface roadmap.",
-        requested_outputs=(
-            "exact files to edit",
-            "descriptor/runtime contracts to add",
-            "tests and fixtures needed",
-            "validation commands",
-            "risks or blockers",
-        ),
     )
 
 
