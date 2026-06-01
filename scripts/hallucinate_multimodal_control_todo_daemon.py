@@ -71,9 +71,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     ImplementationDaemonRunContext,
     apply_portal_implementation_daemon_defaults,
     build_daemon_refill_hooks,
-    build_portal_implementation_daemon_from_args,
-    configure_daemon_logging,
-    run_portal_implementation_daemon_loop,
+    run_configured_portal_implementation_daemon,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
@@ -275,18 +273,6 @@ def main(argv: list[str] | None = None) -> None:
         ),
     )
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
-
-    parsed = parse_args(args)
-    configure_daemon_logging(parsed)
-    daemon, context = build_portal_implementation_daemon_from_args(
-        parsed,
-        repo_root=REPO_ROOT,
-        default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=paths["objective_goal_heap_path"],
-        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-    )
-
     def objective_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, object]]:
         return record_objective_goal_findings(
             todo_path=ctx.parsed.todo_path,
@@ -317,10 +303,13 @@ def main(argv: list[str] | None = None) -> None:
             task_header_prefix=ctx.parsed.task_prefix,
         )
 
-    run_portal_implementation_daemon_loop(
-        daemon,
-        context,
+    run_configured_portal_implementation_daemon(
+        args,
+        repo_root=REPO_ROOT,
         logger=logger,
+        default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=paths["objective_goal_heap_path"],
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         hooks=build_daemon_refill_hooks(
             (
                 ("objective-goal", objective_hook),

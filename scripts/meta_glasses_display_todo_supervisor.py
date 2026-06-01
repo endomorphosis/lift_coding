@@ -81,10 +81,8 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
-    build_portal_implementation_supervisor_from_args,
     build_supervisor_refill_hooks,
-    configure_supervisor_logging,
-    run_portal_implementation_supervisor,
+    run_configured_portal_implementation_supervisor,
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _env_csv_tuple(
@@ -155,17 +153,6 @@ def validation_environment_summary() -> dict[str, object]:
 
 
 def _run_supervisor(argv: list[str]) -> None:
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import parse_args
-
-    parsed = parse_args(argv)
-    configure_supervisor_logging(parsed)
-    supervisor, context = build_portal_implementation_supervisor_from_args(
-        parsed,
-        repo_root=REPO_ROOT,
-        daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
-        worktree_submodule_paths=parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-    )
-
     def retry_budget_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
         return record_retry_budget_findings(
             todo_path=ctx.parsed.todo_path,
@@ -175,12 +162,14 @@ def _run_supervisor(argv: list[str]) -> None:
             task_header_prefix=ctx.parsed.task_prefix,
         )
 
-    if getattr(parsed, "ensure_running", False):
+    if "--ensure-running" in argv:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    run_portal_implementation_supervisor(
-        supervisor,
-        context,
+    run_configured_portal_implementation_supervisor(
+        argv,
+        repo_root=REPO_ROOT,
         logger=logger,
+        daemon_script_path=DAEMON_SCRIPT_PATH,
+        worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(
             (("retry-budget", retry_budget_hook),),
             scope_label="validation",

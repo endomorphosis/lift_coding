@@ -44,9 +44,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     ImplementationDaemonRunContext,
     apply_portal_implementation_daemon_defaults,
     build_daemon_refill_hooks,
-    build_portal_implementation_daemon_from_args,
-    configure_daemon_logging,
-    run_portal_implementation_daemon_loop,
+    run_configured_portal_implementation_daemon,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -120,8 +118,6 @@ def main(argv: list[str] | None = None) -> None:
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(TASK_BOARD_PATH)
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_args
-
     args = apply_portal_implementation_daemon_defaults(
         args,
         defaults=ImplementationDaemonDefaults(
@@ -136,15 +132,6 @@ def main(argv: list[str] | None = None) -> None:
             worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         ),
     )
-    parsed = parse_args(args)
-    configure_daemon_logging(parsed)
-    daemon, context = build_portal_implementation_daemon_from_args(
-        parsed,
-        repo_root=REPO_ROOT,
-        default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=OBJECTIVE_HEAP_PATH,
-        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-    )
 
     def retry_budget_hook(ctx: ImplementationDaemonRunContext) -> list[dict[str, Any]]:
         return record_retry_budget_findings(
@@ -155,10 +142,13 @@ def main(argv: list[str] | None = None) -> None:
             task_header_prefix=ctx.parsed.task_prefix,
         )
 
-    run_portal_implementation_daemon_loop(
-        daemon,
-        context,
+    run_configured_portal_implementation_daemon(
+        args,
+        repo_root=REPO_ROOT,
         logger=logger,
+        default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=OBJECTIVE_HEAP_PATH,
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         hooks=build_daemon_refill_hooks(
             (("retry-budget", retry_budget_hook),),
             scope_label="validation",

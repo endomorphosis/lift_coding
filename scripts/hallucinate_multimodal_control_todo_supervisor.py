@@ -27,11 +27,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
-    build_portal_implementation_supervisor_from_args,
     build_supervisor_refill_hooks,
     build_supervisor_runtime_callbacks,
-    configure_supervisor_logging,
-    run_portal_implementation_supervisor,
+    run_configured_portal_implementation_supervisor,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
     ensure_supervisor_running as _ensure_supervisor_running,
@@ -154,17 +152,6 @@ def main(argv: list[str] | None = None) -> None:
         ),
     )
 
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import parse_args
-
-    parsed = parse_args(args)
-    configure_supervisor_logging(parsed)
-    supervisor, context = build_portal_implementation_supervisor_from_args(
-        parsed,
-        repo_root=REPO_ROOT,
-        daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
-        worktree_submodule_paths=parsed.worktree_submodule_path or HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-    )
-
     def objective_hook(ctx: ImplementationSupervisorRunContext) -> list[dict[str, object]]:
         return record_objective_goal_findings(
             todo_path=ctx.parsed.todo_path,
@@ -214,10 +201,12 @@ def main(argv: list[str] | None = None) -> None:
         prepare_environment=_ensure_runtime_pythonpath,
     )
 
-    run_portal_implementation_supervisor(
-        supervisor,
-        context,
+    run_configured_portal_implementation_supervisor(
+        args,
+        repo_root=REPO_ROOT,
         logger=logger,
+        daemon_script_path=DAEMON_SCRIPT_PATH,
+        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(
             (
                 ("objective-goal", objective_hook),
