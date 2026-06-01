@@ -34,7 +34,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     android_validation_environment_contract as _android_validation_environment_contract,
     apply_environment_contract as _apply_environment_contract,
-    bootstrap_runtime_environment as _bootstrap_runtime_environment,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
     enforce_android_validation_environment as _shared_enforce_android_validation_environment,
     repo_relative_or_default as _repo_relative_or_default,
     with_android_validation_environment as _shared_with_android_validation_environment,
@@ -48,14 +48,20 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
-
-
-def _ensure_ipfs_accelerate_path() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT,), chdir=False)
-
-
-def _ensure_runtime_pythonpath() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
+_enter_runtime_environment = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
+_ensure_ipfs_accelerate_path = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT,),
+    chdir=False,
+)
+_ensure_runtime_pythonpath = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+    chdir=False,
+)
 
 
 def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
@@ -114,7 +120,7 @@ def record_retry_budget_findings(
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _enter_runtime_environment()
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(TASK_BOARD_PATH)
 

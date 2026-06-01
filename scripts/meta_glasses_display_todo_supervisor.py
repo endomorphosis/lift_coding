@@ -68,7 +68,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    bootstrap_runtime_environment as _bootstrap_runtime_environment,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
 )
@@ -103,6 +103,10 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")
+_enter_runtime_environment = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 
@@ -176,7 +180,7 @@ def _run_supervisor(argv: list[str]) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _enter_runtime_environment()
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(TASK_BOARD_PATH)
     enforce_android_validation_environment(TASK_BOARD_PATH)

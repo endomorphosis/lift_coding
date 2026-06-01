@@ -35,7 +35,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
-    bootstrap_runtime_environment as _bootstrap_runtime_environment,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
     resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
@@ -48,6 +48,15 @@ VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
     BootstrapPathSpec("task_board_path", TASK_BOARD_PATH, TASK_BOARD_PATH_ENV),
     BootstrapPathSpec("state_dir", STATE_DIR, STATE_DIR_ENV),
     BootstrapPathSpec("worktree_root", WORKTREE_ROOT, WORKTREE_ROOT_ENV),
+)
+_enter_runtime_environment = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
+_ensure_runtime_pythonpath = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+    chdir=False,
 )
 
 
@@ -68,14 +77,10 @@ def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -
     )
 
 
-def _ensure_runtime_pythonpath() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
-
-
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     paths = ensure_virtual_ai_os_bootstrap_paths()
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _enter_runtime_environment()
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 

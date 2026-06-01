@@ -26,11 +26,10 @@ from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: 
     build_task_proposal_prompt,
     run_task_proposal_router_cli,
 )
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import bootstrap_runtime_environment  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_runtime_environment_callback  # noqa: E402
 
 
-def _bootstrap_imports() -> None:
-    bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+_bootstrap_imports = build_runtime_environment_callback(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 
 
 def _build_cli_config() -> TaskProposalRouterCliConfig:

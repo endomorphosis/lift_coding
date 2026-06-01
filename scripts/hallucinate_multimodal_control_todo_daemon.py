@@ -61,7 +61,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     BootstrapPathSpec,
-    bootstrap_runtime_environment as _bootstrap_runtime_environment,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
     env_csv_tuple as _env_csv_tuple,
     resolve_and_ensure_bootstrap_paths as _resolve_and_ensure_bootstrap_paths,
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
@@ -90,6 +90,20 @@ HALLUCINATE_BOOTSTRAP_SPECS = (
     BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_HAO_STATE_DIR"),
     BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_HAO_WORKTREE_ROOT"),
 )
+_enter_runtime_environment = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
+_ensure_ipfs_accelerate_path = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT,),
+    chdir=False,
+)
+_ensure_runtime_pythonpath = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+    chdir=False,
+)
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
@@ -107,14 +121,6 @@ def ensure_hallucinate_multimodal_bootstrap_paths(
         ("state_dir", "worktree_root"),
         paths=paths,
     )
-
-
-def _ensure_ipfs_accelerate_path() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT,), chdir=False)
-
-
-def _ensure_runtime_pythonpath() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
 
 
 def record_objective_goal_findings(
@@ -258,7 +264,7 @@ def record_retry_budget_findings(
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _enter_runtime_environment()
 
     args = apply_portal_implementation_daemon_defaults(
         args,

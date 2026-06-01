@@ -18,7 +18,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    bootstrap_runtime_environment as _bootstrap_runtime_environment,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -71,16 +71,21 @@ HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
     "hallucinate_multimodal_control_todo_supervisor.py",
     "hallucinate_multimodal_control_autopilot.py",
 )
+_enter_runtime_environment = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
+_ensure_runtime_pythonpath = _build_runtime_environment_callback(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+    chdir=False,
+)
 
 
 def _default_llm_merge_resolver_command() -> str:
     return _shared_default_llm_merge_resolver_command(
         primary_env_var="HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
     )
-
-
-def _ensure_runtime_pythonpath() -> None:
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT), chdir=False)
 
 
 def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
@@ -113,7 +118,7 @@ def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     ensure_running = _pop_bool_flag(args, "--ensure-running")
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
-    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+    _enter_runtime_environment()
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
