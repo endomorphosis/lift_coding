@@ -21,8 +21,6 @@ WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
-LOCAL_JDK = REPO_ROOT / ".tools" / "jdk17" / "jdk-17.0.18+8"
-LOCAL_ANDROID_SDK = REPO_ROOT / ".tools" / "android-sdk"
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "swissknife",
@@ -34,12 +32,12 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    android_validation_environment_contract as _android_validation_environment_contract,
     apply_environment_contract as _apply_environment_contract,
     bootstrap_runtime_environment as _bootstrap_runtime_environment,
-    environment_assignment_prefix as _environment_assignment_prefix,
+    enforce_android_validation_environment as _shared_enforce_android_validation_environment,
     repo_relative_or_default as _repo_relative_or_default,
-    rewrite_validation_commands as _rewrite_validation_commands,
-    unique_path_entries as _unique_path_entries,
+    with_android_validation_environment as _shared_with_android_validation_environment,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,
@@ -69,75 +67,21 @@ def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
 def android_validation_environment(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     """Return the repo-local Android validation environment contract."""
 
-    local_jdk = repo_root / ".tools" / "jdk17" / "jdk-17.0.18+8"
-    local_android_sdk = repo_root / ".tools" / "android-sdk"
-    env: dict[str, str] = {}
-    path_entries: list[str] = []
-    missing: list[str] = []
-
-    if (local_jdk / "bin" / "java").exists():
-        env["JAVA_HOME"] = str(local_jdk)
-        path_entries.append(str(local_jdk / "bin"))
-    else:
-        missing.append(str(local_jdk / "bin" / "java"))
-
-    if local_android_sdk.exists():
-        env["ANDROID_HOME"] = str(local_android_sdk)
-        env["ANDROID_SDK_ROOT"] = str(local_android_sdk)
-        for candidate in (
-            local_android_sdk / "platform-tools",
-            local_android_sdk / "cmdline-tools" / "latest" / "bin",
-            local_android_sdk / "cmdline-tools" / "bin",
-        ):
-            if candidate.exists():
-                path_entries.append(str(candidate))
-    else:
-        missing.append(str(local_android_sdk))
-
-    return {
-        "env": env,
-        "path_entries": _unique_path_entries(path_entries),
-        "missing": missing,
-        "repo_root": str(repo_root),
-    }
+    return _android_validation_environment_contract(repo_root)
 
 
 def _bootstrap_android_validation_env(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     return _apply_environment_contract(android_validation_environment(repo_root))
 
 
-def _android_env_assignment_prefix(repo_root: Path = REPO_ROOT) -> str:
-    return _environment_assignment_prefix(
-        android_validation_environment(repo_root),
-        env_keys=("JAVA_HOME", "ANDROID_HOME", "ANDROID_SDK_ROOT"),
-    )
-
-
-def _validation_command_needs_android_env(command: str) -> bool:
-    normalized = " ".join(command.split())
-    if "./gradlew" not in normalized:
-        return False
-    if "mobile/android" not in normalized and "cd android" not in normalized:
-        return False
-    return "JAVA_HOME=" not in normalized and "org.gradle.java.home" not in normalized
-
-
 def with_android_validation_env(command: str, repo_root: Path = REPO_ROOT) -> str:
-    if not _validation_command_needs_android_env(command):
-        return command
-    prefix = _android_env_assignment_prefix(repo_root)
-    if not prefix:
-        return command
-    return command.replace("./gradlew", f"env {prefix} ./gradlew", 1)
+    return _shared_with_android_validation_environment(command, repo_root)
 
 
 def enforce_android_validation_environment(todo_path: Path = TASK_BOARD_PATH, repo_root: Path = REPO_ROOT) -> bool:
     """Rewrite bare Android Gradle validations to use the repo-local JDK/SDK."""
 
-    return _rewrite_validation_commands(
-        todo_path,
-        lambda command: with_android_validation_env(command, repo_root),
-    )
+    return _shared_enforce_android_validation_environment(todo_path, repo_root)
 
 
 def record_retry_budget_findings(

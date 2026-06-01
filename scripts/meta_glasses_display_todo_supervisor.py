@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
@@ -67,6 +68,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    bootstrap_runtime_environment as _bootstrap_runtime_environment,
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
     env_csv_tuple as _env_csv_tuple,
 )
@@ -96,7 +98,6 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from meta_glasses_display_todo_daemon import (  # noqa: E402
     _bootstrap_android_validation_env,
-    _ensure_runtime_pythonpath,
     android_validation_environment,
     enforce_android_validation_environment,
     META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
@@ -190,11 +191,10 @@ def _run_supervisor(argv: list[str]) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    os.chdir(REPO_ROOT)
+    _bootstrap_runtime_environment(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(TASK_BOARD_PATH)
     enforce_android_validation_environment(TASK_BOARD_PATH)
-    _ensure_runtime_pythonpath()
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
