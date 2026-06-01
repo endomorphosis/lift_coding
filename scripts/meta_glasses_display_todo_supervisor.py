@@ -73,7 +73,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_csv_tuple as _env_csv_tuple,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
-    ensure_task_blocks_present as _ensure_task_blocks_present,
+    build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -138,15 +138,13 @@ _default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_
 )
 
 
-def ensure_post_initial_discovery_backlog(todo_path: Path = TASK_BOARD_PATH) -> bool:
-    """Keep the post-initial discovery expansion tasks in the supervised board."""
-    return _ensure_task_blocks_present(
-        todo_path,
-        (
-            ("MGW-013", DISCOVERY_EXPANSION_TASK),
-            ("MGW-014", SUPERVISOR_GUARDRAIL_TASK),
-        ),
-    )
+ensure_post_initial_discovery_backlog = _build_task_blocks_ensurer(
+    (
+        ("MGW-013", DISCOVERY_EXPANSION_TASK),
+        ("MGW-014", SUPERVISOR_GUARDRAIL_TASK),
+    ),
+    default_todo_path=TASK_BOARD_PATH,
+)
 
 
 def validation_environment_summary() -> dict[str, object]:
