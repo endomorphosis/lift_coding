@@ -35,11 +35,6 @@ OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_M
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
-HALLUCINATE_INTEROPERABILITY_FOCUS = tuple(
-    item.strip()
-    for item in os.environ.get("HANDSFREE_HAO_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
-    if item.strip()
-)
 CODEBASE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", "5"))
 CODEBASE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", "5"))
 CODEBASE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", "21600"))
@@ -65,9 +60,16 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    env_csv_tuple as _env_csv_tuple,
     repo_relative_or_default as _repo_relative_or_default,
     with_default as _with_default,
+)
+
+HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
+    "HANDSFREE_HAO_INTEROPERABILITY_FOCUS",
+    "hallucinate_app",
 )
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
@@ -93,9 +95,7 @@ def ensure_hallucinate_multimodal_bootstrap_paths(
     paths: dict[str, Path] | None = None,
 ) -> dict[str, Path]:
     resolved = paths or hallucinate_multimodal_bootstrap_paths()
-    resolved["state_dir"].mkdir(parents=True, exist_ok=True)
-    resolved["worktree_root"].mkdir(parents=True, exist_ok=True)
-    return resolved
+    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
 
 
 def _ensure_ipfs_accelerate_path() -> None:

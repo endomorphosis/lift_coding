@@ -35,6 +35,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
     with_default as _with_default,
     with_repeated_default as _with_repeated_default,
@@ -59,9 +60,7 @@ def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -
     """Create local runtime directories used by the virtual-AI-OS daemon."""
 
     resolved = paths or virtual_ai_os_bootstrap_paths()
-    resolved["state_dir"].mkdir(parents=True, exist_ok=True)
-    resolved["worktree_root"].mkdir(parents=True, exist_ok=True)
-    return resolved
+    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
 
 
 def _ensure_runtime_pythonpath() -> None:

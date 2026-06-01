@@ -30,11 +30,6 @@ OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_M
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
-META_DISPLAY_INTEROPERABILITY_FOCUS = tuple(
-    item.strip()
-    for item in os.environ.get("HANDSFREE_MGW_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
-    if item.strip()
-)
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
@@ -73,9 +68,15 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
+    env_csv_tuple as _env_csv_tuple,
     with_default as _with_default,
     with_flag_default as _with_flag_default,
     with_repeated_default as _with_repeated_default,
+)
+
+META_DISPLAY_INTEROPERABILITY_FOCUS = _env_csv_tuple(
+    "HANDSFREE_MGW_INTEROPERABILITY_FOCUS",
+    "hallucinate_app",
 )
 
 SCRIPTS_DIR = Path(__file__).resolve().parent

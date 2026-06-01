@@ -33,11 +33,6 @@ OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(
     os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4")
 )
-VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = tuple(
-    item.strip()
-    for item in os.environ.get("HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS", "hallucinate_app").split(",")
-    if item.strip()
-)
 # scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
@@ -67,10 +62,17 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     default_llm_merge_resolver_command as _shared_default_llm_merge_resolver_command,
+    ensure_named_directories as _ensure_named_directories,
     ensure_runtime_pythonpath as _ensure_runtime_pythonpath_for_paths,
+    env_csv_tuple as _env_csv_tuple,
     with_default as _with_default,
     with_flag_default as _with_flag_default,
     with_repeated_default as _with_repeated_default,
+)
+
+VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
+    "HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS",
+    "hallucinate_app",
 )
 
 
@@ -94,9 +96,7 @@ def ensure_virtual_ai_os_bootstrap_paths(paths: dict[str, Path] | None = None) -
     """Create the local state and worktree directories used by the supervisor."""
 
     resolved = paths or virtual_ai_os_bootstrap_paths()
-    resolved["state_dir"].mkdir(parents=True, exist_ok=True)
-    resolved["worktree_root"].mkdir(parents=True, exist_ok=True)
-    return resolved
+    return _ensure_named_directories(resolved, ("state_dir", "worktree_root"))
 
 
 def _default_llm_merge_resolver_command() -> str:
