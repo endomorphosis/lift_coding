@@ -25,9 +25,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     ImplementationSupervisorDefaults,
     ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
-    SupervisorRunHook,
     apply_portal_implementation_supervisor_defaults,
     build_portal_implementation_supervisor_from_args,
+    build_supervisor_refill_hooks,
     configure_supervisor_logging,
     run_portal_implementation_supervisor,
 )
@@ -216,13 +216,13 @@ def main(argv: list[str] | None = None) -> None:
         supervisor,
         context,
         logger=logger,
-        hooks=(
-            SupervisorRunHook("before", "Recorded Hallucinate objective-goal findings before supervisor pass: %s", objective_hook),
-            SupervisorRunHook("before", "Recorded Hallucinate codebase-scan findings before supervisor pass: %s", codebase_scan_hook),
-            SupervisorRunHook("before", "Recorded Hallucinate retry-budget findings before supervisor pass: %s", retry_budget_hook),
-            SupervisorRunHook("after_once", "Recorded Hallucinate objective-goal findings after supervisor pass: %s", objective_hook),
-            SupervisorRunHook("after_once", "Recorded Hallucinate codebase-scan findings after supervisor pass: %s", codebase_scan_hook),
-            SupervisorRunHook("after_once", "Recorded Hallucinate retry-budget findings after supervisor pass: %s", retry_budget_hook),
+        hooks=build_supervisor_refill_hooks(
+            (
+                ("objective-goal", objective_hook),
+                ("codebase-scan", codebase_scan_hook),
+                ("retry-budget", retry_budget_hook),
+            ),
+            scope_label="Hallucinate",
         ),
         once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
         ensure_running=ensure_running,

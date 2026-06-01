@@ -75,9 +75,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     ImplementationSupervisorDefaults,
     ImplementationSupervisorRunContext,
     ObjectiveRefillDefaults,
-    SupervisorRunHook,
     apply_portal_implementation_supervisor_defaults,
     build_portal_implementation_supervisor_from_args,
+    build_supervisor_refill_hooks,
     configure_supervisor_logging,
     run_portal_implementation_supervisor,
 )
@@ -191,9 +191,9 @@ def _run_supervisor(argv: list[str]) -> None:
         supervisor,
         context,
         logger=logger,
-        hooks=(
-            SupervisorRunHook("before", "Recorded validation retry-budget findings before supervisor pass: %s", retry_budget_hook),
-            SupervisorRunHook("after_once", "Recorded validation retry-budget findings after supervisor pass: %s", retry_budget_hook),
+        hooks=build_supervisor_refill_hooks(
+            (("retry-budget", retry_budget_hook),),
+            scope_label="validation",
         ),
         once_complete_message="Display-widget implementation supervisor check complete: %s",
     )

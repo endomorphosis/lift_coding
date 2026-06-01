@@ -67,10 +67,10 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     resolve_bootstrap_paths as _resolve_bootstrap_paths,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    DaemonLoopHook,
     ImplementationDaemonDefaults,
     ImplementationDaemonRunContext,
     apply_portal_implementation_daemon_defaults,
+    build_daemon_refill_hooks,
     build_portal_implementation_daemon_from_args,
     configure_daemon_logging,
     run_portal_implementation_daemon_loop,
@@ -320,13 +320,14 @@ def main(argv: list[str] | None = None) -> None:
         daemon,
         context,
         logger=logger,
-        hooks=(
-            DaemonLoopHook("before", "Recorded Hallucinate objective-goal findings before daemon pass: %s", objective_hook),
-            DaemonLoopHook("before", "Recorded Hallucinate codebase-scan findings before daemon pass: %s", codebase_scan_hook),
-            DaemonLoopHook("before", "Recorded Hallucinate retry-budget findings before daemon pass: %s", retry_budget_hook),
-            DaemonLoopHook("after", "Recorded Hallucinate retry-budget findings after daemon pass: %s", retry_budget_hook),
-            DaemonLoopHook("after", "Recorded Hallucinate objective-goal findings after daemon pass: %s", objective_hook),
-            DaemonLoopHook("after", "Recorded Hallucinate codebase-scan findings after daemon pass: %s", codebase_scan_hook),
+        hooks=build_daemon_refill_hooks(
+            (
+                ("objective-goal", objective_hook),
+                ("codebase-scan", codebase_scan_hook),
+                ("retry-budget", retry_budget_hook),
+            ),
+            scope_label="Hallucinate",
+            after_order=("retry-budget", "objective-goal", "codebase-scan"),
         ),
         pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
     )

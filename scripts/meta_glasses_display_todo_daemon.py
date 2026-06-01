@@ -40,10 +40,10 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     unique_path_entries as _unique_path_entries,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    DaemonLoopHook,
     ImplementationDaemonDefaults,
     ImplementationDaemonRunContext,
     apply_portal_implementation_daemon_defaults,
+    build_daemon_refill_hooks,
     build_portal_implementation_daemon_from_args,
     configure_daemon_logging,
     run_portal_implementation_daemon_loop,
@@ -253,9 +253,9 @@ def main(argv: list[str] | None = None) -> None:
         daemon,
         context,
         logger=logger,
-        hooks=(
-            DaemonLoopHook("before", "Recorded validation retry-budget findings before daemon pass: %s", retry_budget_hook),
-            DaemonLoopHook("after", "Recorded validation retry-budget findings after daemon pass: %s", retry_budget_hook),
+        hooks=build_daemon_refill_hooks(
+            (("retry-budget", retry_budget_hook),),
+            scope_label="validation",
         ),
         pass_complete_message="Display-widget implementation daemon pass complete: %s",
     )
