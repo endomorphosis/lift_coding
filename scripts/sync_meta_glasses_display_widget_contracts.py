@@ -8,7 +8,6 @@ renders the repo-local Python and JS contract modules from that descriptor.
 
 from __future__ import annotations
 
-import argparse
 import os
 import sys
 from pathlib import Path
@@ -34,14 +33,11 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
-    ActionContractSyncTarget,
+    ActionContractCodegenConfig,
     JavaScriptActionContractConfig,
     PythonActionContractConfig,
-    load_action_definitions_from_descriptor,
     operation_action_mapper,
-    render_js_action_contract,
-    render_python_action_contract,
-    sync_contract_targets,
+    run_action_contract_sync,
 )
 
 OPERATION_TO_ACTION = {
@@ -123,80 +119,25 @@ JS_CONTRACT_CONFIG = JavaScriptActionContractConfig(
     },
 )
 
-
-def _build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Sync or verify Meta glasses display widget contract modules.",
-    )
-    parser.add_argument(
-        "--write",
-        action="store_true",
-        help="Overwrite the Python and JS contract modules with generated content.",
-    )
-    parser.add_argument(
-        "--check",
-        action="store_true",
-        help="Fail if the generated content differs from the checked-in modules.",
-    )
-    return parser
-
-
-def _load_definitions() -> list[dict[str, str]]:
-    return load_action_definitions_from_descriptor(
-        SPEC_PATH,
-        operation_to_action=operation_action_mapper(
-            OPERATION_TO_ACTION,
-            label="display widget operation",
-        ),
-        action_metadata=ACTION_METADATA,
-    )
-
-
-def _render_python_module(definitions: list[dict[str, str]]) -> str:
-    return render_python_action_contract(
-        definitions,
-        contract=CONTRACT,
-        config=PYTHON_CONTRACT_CONFIG,
-    )
-
-
-def _render_js_module(definitions: list[dict[str, str]]) -> str:
-    return render_js_action_contract(
-        definitions,
-        contract=CONTRACT,
-        config=JS_CONTRACT_CONFIG,
-    )
-
-
-def _write_if_needed(path: Path, content: str, *, check: bool, write: bool) -> bool:
-    return sync_contract_targets(
-        (ActionContractSyncTarget(path, content),),
-        check=check,
-        write=write,
-        repo_root=REPO_ROOT,
-    )
+SYNC_CONFIG = ActionContractCodegenConfig(
+    descriptor_path=SPEC_PATH,
+    contract=CONTRACT,
+    operation_to_action=operation_action_mapper(
+        OPERATION_TO_ACTION,
+        label="display widget operation",
+    ),
+    action_metadata=ACTION_METADATA,
+    python_target_path=PYTHON_CONTRACT_PATH,
+    python_config=PYTHON_CONTRACT_CONFIG,
+    js_target_path=JS_CONTRACT_PATH,
+    js_config=JS_CONTRACT_CONFIG,
+    repo_root=REPO_ROOT,
+    description="Sync or verify Meta glasses display widget contract modules.",
+)
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = _build_parser().parse_args(argv)
-    if not args.check and not args.write:
-        args.check = True
-
-    definitions = _load_definitions()
-    python_content = _render_python_module(definitions)
-    js_content = _render_js_module(definitions)
-
-    changed = sync_contract_targets(
-        (
-            ActionContractSyncTarget(PYTHON_CONTRACT_PATH, python_content),
-            ActionContractSyncTarget(JS_CONTRACT_PATH, js_content),
-        ),
-        check=bool(args.check),
-        write=bool(args.write),
-        repo_root=REPO_ROOT,
-    )
-
-    return 1 if args.check and changed else 0
+    return run_action_contract_sync(SYNC_CONFIG, argv)
 
 
 if __name__ == "__main__":
