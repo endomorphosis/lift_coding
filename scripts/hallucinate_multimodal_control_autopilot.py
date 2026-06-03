@@ -4,13 +4,22 @@
 from __future__ import annotations
 
 import sys
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    with_exclusive_flag_default as _with_exclusive_flag_default,
+)
 
 
 def with_autopilot_defaults(argv: list[str]) -> list[str]:
-    args = list(argv)
-    if "--implement" in args or "--no-implement" in args:
-        return args
-    return ["--implement", *args]
+    return _with_exclusive_flag_default(argv, "--implement", ("--no-implement",))
 
 
 def main(argv: list[str] | None = None) -> None:
