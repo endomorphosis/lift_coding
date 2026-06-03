@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import sys
 from pathlib import Path
 
@@ -16,16 +15,17 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import env_int as _env_int  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    env_int as _env_int,
+    env_path as _env_path,
+)
 
 DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / ("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md")
 TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 TASK_BOARD_PATH_KEY = "to" + "do_path"
-DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = Path(
-    os.environ.get(
-        "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
-        str(REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"),
-    )
+DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _env_path(
+    "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+    REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
 )
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
