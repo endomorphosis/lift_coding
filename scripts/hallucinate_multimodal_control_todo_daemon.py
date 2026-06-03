@@ -18,6 +18,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
     env_path as _env_path,
+    task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_key as _task_board_path_key,
     task_board_path_option as _task_board_path_option,
@@ -31,6 +32,7 @@ DEFAULT_TODO_PATH = (
 )
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_KEY = _task_board_path_key()
+TASK_BOARD_PATH_ENV = _task_board_env_var("HANDSFREE_HAO")
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _env_path(
     "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
     REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
@@ -100,7 +102,7 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
     "hallucinate_app",
 )
 HALLUCINATE_BOOTSTRAP_SPECS = (
-    BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, "HANDSFREE_HAO_TODO_PATH"),
+    BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, TASK_BOARD_PATH_ENV),
     BootstrapPathSpec(
         "objective_goal_heap_path",
         DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,

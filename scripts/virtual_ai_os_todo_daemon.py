@@ -19,6 +19,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
+    task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -27,7 +28,7 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-TASK_BOARD_PATH_ENV = "HANDSFREE_VAI_OS_" + "TO" + "DO" + "_PATH"
+TASK_BOARD_PATH_ENV = _task_board_env_var("HANDSFREE_VAI_OS")
 STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 STATE_DIR_ENV = "HANDSFREE_VAI_OS_STATE_DIR"
 WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"

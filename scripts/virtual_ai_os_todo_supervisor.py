@@ -17,6 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
     repo_relative_or_default as _repo_relative_or_default,
+    task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -25,6 +26,7 @@ DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
+TASK_BOARD_PATH_ENV = _task_board_env_var("HANDSFREE_VAI_OS")
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
@@ -91,7 +93,7 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
     "hallucinate_app",
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
-    BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, "HANDSFREE_VAI_OS_TODO_PATH"),
+    BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, TASK_BOARD_PATH_ENV),
     BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_VAI_OS_STATE_DIR"),
     BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_VAI_OS_WORKTREE_ROOT"),
 )
