@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import shlex
 import sys
 from pathlib import Path
@@ -13,6 +12,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import env_int as _env_int  # noqa: E402
+
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
@@ -26,11 +31,11 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "ob
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
-OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6"))
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = int(os.environ.get("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", "4"))
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_MIN_OPEN_TASKS", 20)
+OBJECTIVE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_MAX_FINDINGS", 12)
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", 900)
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", 6)
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", 4)
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
