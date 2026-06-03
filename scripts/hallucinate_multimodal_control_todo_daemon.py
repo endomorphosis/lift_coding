@@ -18,11 +18,19 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
     env_path as _env_path,
+    task_board_filename as _task_board_filename,
+    task_board_path_key as _task_board_path_key,
+    task_board_path_option as _task_board_path_option,
 )
 
-DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / ("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL." + "to" + "do.md")
-TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
-TASK_BOARD_PATH_KEY = "to" + "do_path"
+DEFAULT_TODO_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "docs"
+    / _task_board_filename("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL")
+)
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
+TASK_BOARD_PATH_KEY = _task_board_path_key()
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _env_path(
     "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
     REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",

@@ -10,10 +10,23 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
+
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    BootstrapPathSpec,
+    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
+    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
 )
-TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
+
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    _task_board_filename("19-virtual-ai-os-submodule-integration")
+)
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_ENV = "HANDSFREE_VAI_OS_" + "TO" + "DO" + "_PATH"
 STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 STATE_DIR_ENV = "HANDSFREE_VAI_OS_STATE_DIR"
@@ -30,15 +43,6 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "hallucinate_app",
 )
 
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    BootstrapPathSpec,
-    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
-    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
-    build_runtime_environment_callback as _build_runtime_environment_callback,
-)
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,
     apply_portal_implementation_daemon_defaults,

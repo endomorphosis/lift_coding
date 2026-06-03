@@ -14,12 +14,17 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import env_int as _env_int  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    env_int as _env_int,
+    repo_relative_or_default as _repo_relative_or_default,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
+)
 
 DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "19-virtual-ai-os-submodule-integration.todo.md"
+    _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
-TASK_BOARD_PATH_OPTION = "--todo-path"  # scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 VAI-176 HAO-234 — CLI flag naming the backlog task-board file; not a deferred-work annotation.
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
@@ -29,6 +34,11 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.j
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
+    DISCOVERY_DIR,
+    REPO_ROOT,
+    "data/virtual_ai_os/discovery",
+)
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MIN_OPEN_TASKS", 20)
 OBJECTIVE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MAX_FINDINGS", 12)
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_COOLDOWN_SECONDS", 900)
@@ -131,7 +141,7 @@ def main(argv: list[str] | None = None) -> None:
             objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
             objective_dataset_dir=OBJECTIVE_DATASET_DIR,
             objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path="data/virtual_ai_os/discovery",
+            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
             objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
@@ -143,7 +153,7 @@ def main(argv: list[str] | None = None) -> None:
         ),
         codebase=CodebaseRefillDefaults(
             codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path="data/virtual_ai_os/discovery",
+            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),

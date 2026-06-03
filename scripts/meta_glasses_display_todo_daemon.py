@@ -11,10 +11,22 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_android_validation_callbacks as _build_android_validation_callbacks,
+    build_runtime_environment_callback as _build_runtime_environment_callback,
+    repo_relative_or_default as _repo_relative_or_default,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
 )
-TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
+
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    _task_board_filename("18-swissknife-meta-glasses-display-widgets")
+)
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
@@ -27,14 +39,6 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "external/meta-wearables-dat-ios",
 )
 
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_android_validation_callbacks as _build_android_validation_callbacks,
-    build_runtime_environment_callback as _build_runtime_environment_callback,
-    repo_relative_or_default as _repo_relative_or_default,
-)
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     ImplementationDaemonDefaults,

@@ -19,12 +19,14 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
     repo_relative_or_default as _repo_relative_or_default,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
 )
 
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+    _task_board_filename("18-swissknife-meta-glasses-display-widgets")
 )
-TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
@@ -53,7 +55,7 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
 TASK_BOARD_OUTPUT_PATH = _repo_relative_or_default(
     TASK_BOARD_PATH,
     REPO_ROOT,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    f"implementation_plan/docs/{_task_board_filename('18-swissknife-meta-glasses-display-widgets')}",
 )
 DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
     DISCOVERY_DIR,

@@ -10,25 +10,27 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
-)
-PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
-ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_runtime_environment_callback,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
+)
+
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    _task_board_filename("18-swissknife-meta-glasses-display-widgets")
+)
+PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     TaskProposalRouterCliConfig,
     build_task_proposal_router_cli_config,
     run_task_proposal_router_cli,
 )
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_runtime_environment_callback  # noqa: E402
-
-
-def _legacy_task_board_path_flag() -> str:
-    return "--" + "to" + "do-path"
 
 
 _bootstrap_imports = build_runtime_environment_callback(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
@@ -55,7 +57,7 @@ def _build_cli_config() -> TaskProposalRouterCliConfig:
             "task-board item with llm_router."
         ),
         task_id_help="Specific MGW task id. Defaults to the first open task.",
-        hidden_task_board_options=(_legacy_task_board_path_flag(),),
+        hidden_task_board_options=(_task_board_path_option(),),
         bootstrap=_bootstrap_imports,
     )
 

@@ -10,22 +10,28 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "19-virtual-ai-os-submodule-integration." + "to" + "do.md"
-)
-TASK_BOARD_PATH_OPTION = "--" + "to" "do" + "-path"
-PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.md"
-ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_runtime_environment_callback,
+    task_board_filename as _task_board_filename,
+    task_board_path_option as _task_board_path_option,
+)
+
+TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
+    _task_board_filename("19-virtual-ai-os-submodule-integration")
+)
+TASK_BOARD_PATH_OPTION = _task_board_path_option()
+PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submodule-integration.md"
+ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     TaskProposalRouterCliConfig,
     build_task_proposal_router_cli_config,
     run_task_proposal_router_cli,
 )
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_runtime_environment_callback  # noqa: E402
 
 
 _bootstrap_imports = build_runtime_environment_callback(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
