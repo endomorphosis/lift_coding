@@ -9,12 +9,13 @@ renders the repo-local Python and JS contract modules from that descriptor.
 from __future__ import annotations
 
 import argparse
-import json
+import os
 import sys
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SPEC_PATH = REPO_ROOT / "spec" / "meta_glasses_display_widget_orb_interface.json"
 PYTHON_CONTRACT_PATH = (
     REPO_ROOT / "src" / "handsfree" / "meta_glasses_display_widget_contract.py"
@@ -28,38 +29,99 @@ JS_CONTRACT_PATH = (
 )
 CONTRACT = "handsfree.meta-glasses/display-widget-action@0.1.0"
 
-ACTION_TO_LABEL = {
-    "render": "Render Widget",
-    "update": "Update Widget",
-    "clear": "Clear Widget",
-    "focus": "Focus Widget",
-    "activate": "Activate Widget",
-    "reset": "Reset Widget",
-    "play_video": "Play Widget Video",
-    "subscribe_updates": "Subscribe Widget Updates",
+os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
+    ActionContractSyncTarget,
+    JavaScriptActionContractConfig,
+    PythonActionContractConfig,
+    load_action_definitions_from_descriptor,
+    operation_action_mapper,
+    render_js_action_contract,
+    render_python_action_contract,
+    sync_contract_targets,
+)
+
+OPERATION_TO_ACTION = {
+    "focus_next": "focus",
+    "focus_previous": "focus",
+    "render_widget": "render",
+    "update_widget": "update",
+    "clear_widget": "clear",
+    "activate": "activate",
+    "reset_session": "reset",
+    "play_video": "play_video",
+    "subscribe_updates": "subscribe_updates",
 }
 
-ACTION_TO_PHRASE = {
-    "render": "render the display widget",
-    "update": "update the display widget",
-    "clear": "clear the display widget",
-    "focus": "focus the display widget",
-    "activate": "activate the selected display widget action",
-    "reset": "reset the display widget session",
-    "play_video": "play display widget video",
-    "subscribe_updates": "subscribe to display widget updates",
+ACTION_METADATA = {
+    "render": {
+        "label": "Render Widget",
+        "phrase": "render the display widget",
+        "dat_method": "renderDisplayWidget",
+    },
+    "update": {
+        "label": "Update Widget",
+        "phrase": "update the display widget",
+        "dat_method": "updateDisplayWidget",
+    },
+    "clear": {
+        "label": "Clear Widget",
+        "phrase": "clear the display widget",
+        "dat_method": "clearDisplayWidget",
+    },
+    "focus": {
+        "label": "Focus Widget",
+        "phrase": "focus the display widget",
+        "dat_method": "focusDisplayWidget",
+    },
+    "activate": {
+        "label": "Activate Widget",
+        "phrase": "activate the selected display widget action",
+        "dat_method": "activateDisplayWidgetAction",
+    },
+    "reset": {
+        "label": "Reset Widget",
+        "phrase": "reset the display widget session",
+        "dat_method": "resetDisplayWidgetSession",
+    },
+    "play_video": {
+        "label": "Play Widget Video",
+        "phrase": "play display widget video",
+        "dat_method": "playDisplayWidgetVideo",
+    },
+    "subscribe_updates": {
+        "label": "Subscribe Widget Updates",
+        "phrase": "subscribe to display widget updates",
+        "dat_method": "subscribeDisplayWidgetUpdates",
+    },
 }
 
-ACTION_TO_DAT_METHOD = {
-    "render": "renderDisplayWidget",
-    "update": "updateDisplayWidget",
-    "clear": "clearDisplayWidget",
-    "focus": "focusDisplayWidget",
-    "activate": "activateDisplayWidgetAction",
-    "reset": "resetDisplayWidgetSession",
-    "play_video": "playDisplayWidgetVideo",
-    "subscribe_updates": "subscribeDisplayWidgetUpdates",
-}
+PYTHON_CONTRACT_CONFIG = PythonActionContractConfig(
+    contract_name="DISPLAY_WIDGET_ACTION_CONTRACT",
+    definitions_name="DISPLAY_WIDGET_ACTION_DEFINITIONS",
+    ids_name="DISPLAY_WIDGET_ACTION_IDS",
+    operations_name="DISPLAY_WIDGET_ORB_OPERATIONS",
+    docstring=(
+        "Shared Meta glasses display widget bridge contract for backend emitters.\n\n"
+        "Keeps the Python-side mobile action ids and ORB operation names aligned with the\n"
+        "spec artifacts and mobile bridge contract."
+    ),
+)
+
+JS_CONTRACT_CONFIG = JavaScriptActionContractConfig(
+    contract_name="DISPLAY_WIDGET_ACTION_CONTRACT",
+    ids_name="DISPLAY_WIDGET_ACTION_IDS",
+    ids_set_name="DISPLAY_WIDGET_ACTION_ID_SET",
+    action_by_id_name="DISPLAY_WIDGET_ACTION_BY_ACTION_ID",
+    operation_by_id_name="DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID",
+    validator_function_name="isDisplayWidgetActionId",
+    extra_id_maps={
+        "dat_method": "DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID",
+    },
+)
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -80,123 +142,39 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def _load_definitions() -> list[dict[str, str]]:
-    descriptor = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
-    definitions: list[dict[str, str]] = []
-    for method in descriptor["methods"]:
-        operation = str(method["name"])
-        action_id = str(method["outputSchema"]["properties"]["type"]["const"])
-        action = _action_from_operation(operation)
-        definitions.append(
-            {
-                "action": action,
-                "operation": operation,
-                "id": action_id,
-                "label": ACTION_TO_LABEL[action],
-                "phrase": ACTION_TO_PHRASE[action],
-                "dat_method": ACTION_TO_DAT_METHOD[action],
-            }
-        )
-    return definitions
-
-
-def _action_from_operation(operation: str) -> str:
-    if operation in {"focus_next", "focus_previous"}:
-        return "focus"
-    if operation == "render_widget":
-        return "render"
-    if operation == "update_widget":
-        return "update"
-    if operation == "clear_widget":
-        return "clear"
-    if operation == "activate":
-        return "activate"
-    if operation == "reset_session":
-        return "reset"
-    if operation == "play_video":
-        return "play_video"
-    if operation == "subscribe_updates":
-        return "subscribe_updates"
-    raise ValueError(f"Unsupported display widget operation: {operation}")
+    return load_action_definitions_from_descriptor(
+        SPEC_PATH,
+        operation_to_action=operation_action_mapper(
+            OPERATION_TO_ACTION,
+            label="display widget operation",
+        ),
+        action_metadata=ACTION_METADATA,
+    )
 
 
 def _render_python_module(definitions: list[dict[str, str]]) -> str:
-    tuple_entries = "\n".join(
-        [
-            "    {\n"
-            f'        "action": "{definition["action"]}",\n'
-            f'        "operation": "{definition["operation"]}",\n'
-            f'        "id": "{definition["id"]}",\n'
-            f'        "label": "{definition["label"]}",\n'
-            f'        "phrase": "{definition["phrase"]}",\n'
-            "    },"
-            for definition in definitions
-        ]
-    )
-    return (
-        '"""Shared Meta glasses display widget bridge contract for backend emitters.\n\n'
-        "Keeps the Python-side mobile action ids and ORB operation names aligned with the\n"
-        'spec artifacts and mobile bridge contract.\n"""\n\n'
-        "from __future__ import annotations\n\n"
-        "from typing import Final\n\n\n"
-        f'DISPLAY_WIDGET_ACTION_CONTRACT: Final = "{CONTRACT}"\n\n'
-        "DISPLAY_WIDGET_ACTION_DEFINITIONS: Final[tuple[dict[str, str], ...]] = (\n"
-        f"{tuple_entries}\n"
-        ")\n\n"
-        "DISPLAY_WIDGET_ACTION_IDS: Final[tuple[str, ...]] = tuple(\n"
-        '    definition["id"] for definition in DISPLAY_WIDGET_ACTION_DEFINITIONS\n'
-        ")\n\n"
-        "DISPLAY_WIDGET_ORB_OPERATIONS: Final[tuple[str, ...]] = tuple(\n"
-        '    definition["operation"] for definition in DISPLAY_WIDGET_ACTION_DEFINITIONS\n'
-        ")\n"
+    return render_python_action_contract(
+        definitions,
+        contract=CONTRACT,
+        config=PYTHON_CONTRACT_CONFIG,
     )
 
 
 def _render_js_module(definitions: list[dict[str, str]]) -> str:
-    action_ids = "\n".join(f"  '{definition['id']}'," for definition in definitions)
-    action_map = "\n".join(
-        f"  {definition['id']}: '{definition['action']}',"
-        for definition in definitions
-    )
-    operation_map = "\n".join(
-        f"  {definition['id']}: '{definition['operation']}',"
-        for definition in definitions
-    )
-    dat_method_map = "\n".join(
-        f"  {definition['id']}: '{definition['dat_method']}',"
-        for definition in definitions
-    )
-    return (
-        f"export const DISPLAY_WIDGET_ACTION_CONTRACT =\n  '{CONTRACT}';\n\n"
-        f"export const DISPLAY_WIDGET_ACTION_IDS = [\n{action_ids}\n];\n\n"
-        "export const DISPLAY_WIDGET_ACTION_BY_ACTION_ID = {\n"
-        f"{action_map}\n"
-        "};\n\n"
-        "export const DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID = {\n"
-        f"{operation_map}\n"
-        "};\n\n"
-        "export const DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID = {\n"
-        f"{dat_method_map}\n"
-        "};\n\n"
-        "const DISPLAY_WIDGET_ACTION_ID_SET = new Set(DISPLAY_WIDGET_ACTION_IDS);\n\n"
-        "export function isDisplayWidgetActionId(actionId) {\n"
-        "  return DISPLAY_WIDGET_ACTION_ID_SET.has(actionId);\n"
-        "}\n"
+    return render_js_action_contract(
+        definitions,
+        contract=CONTRACT,
+        config=JS_CONTRACT_CONFIG,
     )
 
 
 def _write_if_needed(path: Path, content: str, *, check: bool, write: bool) -> bool:
-    existing = path.read_text(encoding="utf-8") if path.exists() else ""
-    if existing == content:
-        return False
-    if check:
-        print(f"drift:{path.relative_to(REPO_ROOT)}")
-        return True
-    if write:
-        path.write_text(content, encoding="utf-8")
-        print(f"updated:{path.relative_to(REPO_ROOT)}")
-        return True
-    print(f"would-update:{path.relative_to(REPO_ROOT)}")
-    return True
+    return sync_contract_targets(
+        (ActionContractSyncTarget(path, content),),
+        check=check,
+        write=write,
+        repo_root=REPO_ROOT,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -208,18 +186,14 @@ def main(argv: list[str] | None = None) -> int:
     python_content = _render_python_module(definitions)
     js_content = _render_js_module(definitions)
 
-    changed = False
-    changed |= _write_if_needed(
-        PYTHON_CONTRACT_PATH,
-        python_content,
+    changed = sync_contract_targets(
+        (
+            ActionContractSyncTarget(PYTHON_CONTRACT_PATH, python_content),
+            ActionContractSyncTarget(JS_CONTRACT_PATH, js_content),
+        ),
         check=bool(args.check),
         write=bool(args.write),
-    )
-    changed |= _write_if_needed(
-        JS_CONTRACT_PATH,
-        js_content,
-        check=bool(args.check),
-        write=bool(args.write),
+        repo_root=REPO_ROOT,
     )
 
     return 1 if args.check and changed else 0
