@@ -18,6 +18,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
     env_path as _env_path,
+    prefixed_env_var as _prefixed_env_var,
     task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_key as _task_board_path_key,
@@ -30,11 +31,13 @@ DEFAULT_TODO_PATH = (
     / "docs"
     / _task_board_filename("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL")
 )
+HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_KEY = _task_board_path_key()
-TASK_BOARD_PATH_ENV = _task_board_env_var("HANDSFREE_HAO")
+TASK_BOARD_PATH_ENV = _task_board_env_var(HALLUCINATE_ENV_PREFIX)
+OBJECTIVE_GOAL_HEAP_ENV = _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_GOAL_HEAP_PATH")
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _env_path(
-    "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+    OBJECTIVE_GOAL_HEAP_ENV,
     REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
 )
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
@@ -46,14 +49,38 @@ OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.jso
 DISCOVERY_OUTPUT_PATH = "data/hallucinate_multimodal_control/discovery"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", 20)
-OBJECTIVE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_HAO_OBJECTIVE_SCAN_MAX_FINDINGS", 12)
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_HAO_OBJECTIVE_SCAN_COOLDOWN_SECONDS", 900)
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int("HANDSFREE_HAO_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", 6)
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int("HANDSFREE_HAO_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", 4)
-CODEBASE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_HAO_CODEBASE_SCAN_MIN_OPEN_TASKS", 5)
-CODEBASE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_HAO_CODEBASE_SCAN_MAX_FINDINGS", 5)
-CODEBASE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_HAO_CODEBASE_SCAN_COOLDOWN_SECONDS", 21600)
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_MIN_OPEN_TASKS"),
+    20,
+)
+OBJECTIVE_SCAN_MAX_FINDINGS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_MAX_FINDINGS"),
+    12,
+)
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_COOLDOWN_SECONDS"),
+    900,
+)
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"),
+    6,
+)
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"),
+    4,
+)
+CODEBASE_SCAN_MIN_OPEN_TASKS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_MIN_OPEN_TASKS"),
+    5,
+)
+CODEBASE_SCAN_MAX_FINDINGS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_MAX_FINDINGS"),
+    5,
+)
+CODEBASE_SCAN_COOLDOWN_SECONDS = _env_int(
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_COOLDOWN_SECONDS"),
+    21600,
+)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts embed task-board paths by design; exclude from annotation scan
     "data/hallucinate_multimodal_control/discovery/",
@@ -98,7 +125,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
-    "HANDSFREE_HAO_INTEROPERABILITY_FOCUS",
+    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "INTEROPERABILITY_FOCUS"),
     "hallucinate_app",
 )
 HALLUCINATE_BOOTSTRAP_SPECS = (
@@ -106,10 +133,18 @@ HALLUCINATE_BOOTSTRAP_SPECS = (
     BootstrapPathSpec(
         "objective_goal_heap_path",
         DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
-        "HANDSFREE_HAO_OBJECTIVE_GOAL_HEAP_PATH",
+        OBJECTIVE_GOAL_HEAP_ENV,
     ),
-    BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_HAO_STATE_DIR"),
-    BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_HAO_WORKTREE_ROOT"),
+    BootstrapPathSpec(
+        "state_dir",
+        DEFAULT_STATE_DIR,
+        _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "STATE_DIR"),
+    ),
+    BootstrapPathSpec(
+        "worktree_root",
+        DEFAULT_WORKTREE_ROOT,
+        _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "WORKTREE_ROOT"),
+    ),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,

@@ -16,6 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
+    prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
@@ -25,8 +26,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
+VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-TASK_BOARD_PATH_ENV = _task_board_env_var("HANDSFREE_VAI_OS")
+TASK_BOARD_PATH_ENV = _task_board_env_var(VIRTUAL_AI_OS_ENV_PREFIX)
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
@@ -41,11 +43,26 @@ DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
     REPO_ROOT,
     "data/virtual_ai_os/discovery",
 )
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MIN_OPEN_TASKS", 20)
-OBJECTIVE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MAX_FINDINGS", 12)
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_COOLDOWN_SECONDS", 900)
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", 6)
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", 4)
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int(
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_MIN_OPEN_TASKS"),
+    20,
+)
+OBJECTIVE_SCAN_MAX_FINDINGS = _env_int(
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_MAX_FINDINGS"),
+    12,
+)
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int(
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_COOLDOWN_SECONDS"),
+    900,
+)
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int(
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"),
+    6,
+)
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int(
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"),
+    4,
+)
 # scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
@@ -89,13 +106,21 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
-    "HANDSFREE_VAI_OS_INTEROPERABILITY_FOCUS",
+    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "INTEROPERABILITY_FOCUS"),
     "hallucinate_app",
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
     BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, TASK_BOARD_PATH_ENV),
-    BootstrapPathSpec("state_dir", DEFAULT_STATE_DIR, "HANDSFREE_VAI_OS_STATE_DIR"),
-    BootstrapPathSpec("worktree_root", DEFAULT_WORKTREE_ROOT, "HANDSFREE_VAI_OS_WORKTREE_ROOT"),
+    BootstrapPathSpec(
+        "state_dir",
+        DEFAULT_STATE_DIR,
+        _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "STATE_DIR"),
+    ),
+    BootstrapPathSpec(
+        "worktree_root",
+        DEFAULT_WORKTREE_ROOT,
+        _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "WORKTREE_ROOT"),
+    ),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
@@ -113,7 +138,7 @@ ensure_virtual_ai_os_bootstrap_paths = _build_bootstrap_path_ensurer(
     ("state_dir", "worktree_root"),
 )
 _default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
-    primary_env_var="HANDSFREE_VAI_OS_LLM_MERGE_RESOLVER_COMMAND"
+    primary_env_var=_prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
 )
 
 

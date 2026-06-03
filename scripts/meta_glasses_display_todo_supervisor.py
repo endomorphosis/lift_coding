@@ -18,6 +18,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_int as _env_int,
+    prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -26,6 +27,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("18-swissknife-meta-glasses-display-widgets")
 )
+META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
@@ -36,11 +38,26 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "ob
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_MIN_OPEN_TASKS", 20)
-OBJECTIVE_SCAN_MAX_FINDINGS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_MAX_FINDINGS", 12)
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int("HANDSFREE_MGW_OBJECTIVE_SCAN_COOLDOWN_SECONDS", 900)
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int("HANDSFREE_MGW_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", 6)
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int("HANDSFREE_MGW_OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO", 4)
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int(
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "OBJECTIVE_SCAN_MIN_OPEN_TASKS"),
+    20,
+)
+OBJECTIVE_SCAN_MAX_FINDINGS = _env_int(
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "OBJECTIVE_SCAN_MAX_FINDINGS"),
+    12,
+)
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int(
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "OBJECTIVE_SCAN_COOLDOWN_SECONDS"),
+    900,
+)
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int(
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"),
+    6,
+)
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int(
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"),
+    4,
+)
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
@@ -103,7 +120,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _env_csv_tuple(
-    "HANDSFREE_MGW_INTEROPERABILITY_FOCUS",
+    _prefixed_env_var(META_DISPLAY_ENV_PREFIX, "INTEROPERABILITY_FOCUS"),
     "hallucinate_app",
 )
 
@@ -151,7 +168,7 @@ SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment
 
 
 _default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
-    primary_env_var="HANDSFREE_MGW_LLM_MERGE_RESOLVER_COMMAND"
+    primary_env_var=_prefixed_env_var(META_DISPLAY_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
 )
 
 

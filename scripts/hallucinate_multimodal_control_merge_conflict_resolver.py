@@ -10,14 +10,18 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
-DEFAULT_EVENTS_PATH = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl"
-HAO_LLM_MERGE_RESOLVER_COMMAND_ENV = "HANDSFREE_HAO_LLM_MERGE_RESOLVER_COMMAND"
-HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
-HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import prefixed_env_var as _prefixed_env_var  # noqa: E402
+
+DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
+DEFAULT_EVENTS_PATH = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl"
+HAO_ENV_PREFIX = "HANDSFREE_HAO"
+HAO_LLM_MERGE_RESOLVER_COMMAND_ENV = _prefixed_env_var(HAO_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
+HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
+HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     MergeResolverCliConfig,
