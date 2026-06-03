@@ -16,7 +16,10 @@ IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import env_int as _env_int  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    env_int as _env_int,
+    repo_relative_or_default as _repo_relative_or_default,
+)
 
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
@@ -47,10 +50,20 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
 )
+TASK_BOARD_OUTPUT_PATH = _repo_relative_or_default(
+    TASK_BOARD_PATH,
+    REPO_ROOT,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+)
+DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
+    DISCOVERY_DIR,
+    REPO_ROOT,
+    "data/meta_glasses_display_widgets/discovery",
+)
 DISCOVERY_EXPANSION_OUTPUTS = (
-    TASK_BOARD_PATH.relative_to(REPO_ROOT).as_posix(),
+    TASK_BOARD_OUTPUT_PATH,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
-    DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+    DISCOVERY_OUTPUT_PATH,
 )
 DISCOVERY_EXPANSION_OUTPUTS_TEXT = ", ".join(DISCOVERY_EXPANSION_OUTPUTS)
 DISCOVERY_EXPANSION_SEARCH_PATTERN = "|".join(
@@ -65,12 +78,9 @@ DISCOVERY_EXPANSION_VALIDATION = (
     "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
     "pytest tests/test_meta_glasses_display_todo_queue.py; "
     f"rg -n {shlex.quote(DISCOVERY_EXPANSION_SEARCH_PATTERN)} "
-    f"{TASK_BOARD_PATH.relative_to(REPO_ROOT).as_posix()} "
+    f"{TASK_BOARD_OUTPUT_PATH} "
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md"
 )
-
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
@@ -206,7 +216,7 @@ def main(argv: list[str] | None = None) -> None:
             objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
             objective_dataset_dir=OBJECTIVE_DATASET_DIR,
             objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path="data/meta_glasses_display_widgets/discovery",
+            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
             objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
@@ -218,7 +228,7 @@ def main(argv: list[str] | None = None) -> None:
         ),
         codebase=CodebaseRefillDefaults(
             codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path="data/meta_glasses_display_widgets/discovery",
+            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),

@@ -20,6 +20,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
+    repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -65,6 +66,11 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"
 OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_graph.json"
+DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
+    DISCOVERY_DIR,
+    REPO_ROOT,
+    "data/hallucinate_multimodal_control/discovery",
+)
 HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
     "hallucinate_multimodal_control_todo_supervisor.py",
     "hallucinate_multimodal_control_autopilot.py",
@@ -132,7 +138,7 @@ def main(argv: list[str] | None = None) -> None:
             objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
             objective_dataset_dir=OBJECTIVE_DATASET_DIR,
             objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path=DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
             objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
@@ -144,7 +150,7 @@ def main(argv: list[str] | None = None) -> None:
         ),
         codebase=CodebaseRefillDefaults(
             codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path=DISCOVERY_DIR.relative_to(REPO_ROOT).as_posix(),
+            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             codebase_scan_min_open_tasks=CODEBASE_SCAN_MIN_OPEN_TASKS,
             codebase_scan_max_findings=CODEBASE_SCAN_MAX_FINDINGS,
             codebase_scan_cooldown_seconds=CODEBASE_SCAN_COOLDOWN_SECONDS,
