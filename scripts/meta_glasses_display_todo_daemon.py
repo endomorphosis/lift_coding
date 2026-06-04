@@ -17,7 +17,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
+    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
+    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
+    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -27,11 +30,20 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("18-swissknife-meta-glasses-display-widgets")
 )
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
+META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
 STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
 WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
+META_DISPLAY_BOOTSTRAP_SPECS = (
+    _prefixed_bootstrap_path_spec("todo_path", TASK_BOARD_PATH, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("discovery_dir", DISCOVERY_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_heap_path", OBJECTIVE_HEAP_PATH, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR, META_DISPLAY_ENV_PREFIX),
+)
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "swissknife",
@@ -49,6 +61,12 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
+meta_display_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, META_DISPLAY_BOOTSTRAP_SPECS)
+ensure_meta_display_bootstrap_paths = _build_bootstrap_path_ensurer(
+    REPO_ROOT,
+    META_DISPLAY_BOOTSTRAP_SPECS,
+    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
+)
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -100,27 +118,31 @@ record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     _enter_runtime_environment()
+    paths = ensure_meta_display_bootstrap_paths()
     _bootstrap_android_validation_env()
-    enforce_android_validation_environment(TASK_BOARD_PATH)
+    enforce_android_validation_environment(paths["todo_path"])
 
     args = apply_portal_implementation_daemon_defaults(
         args,
         defaults=ImplementationDaemonDefaults(
-            todo_path=TASK_BOARD_PATH,
-            state_dir=STATE_DIR,
+            todo_path=paths["todo_path"],
+            state_dir=paths["state_dir"],
             task_prefix="## MGW-",
             state_prefix="meta_glasses_display",
-            worktree_root=WORKTREE_ROOT,
+            worktree_root=paths["worktree_root"],
             todo_path_flag=TASK_BOARD_PATH_OPTION,
-            objective_path=OBJECTIVE_HEAP_PATH,
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+            objective_path=paths["objective_heap_path"],
+            objective_bundle_dir=paths["objective_bundle_dir"],
             worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         ),
     )
 
     retry_budget_hook = build_daemon_retry_budget_refill_callback(
         record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
+        discovery_dir=paths["discovery_dir"],
+        extra_kwargs={
+            "discovery_output_path": _discovery_output_path(REPO_ROOT, paths["discovery_dir"]),
+        },
     )
 
     run_configured_portal_implementation_daemon(
@@ -128,8 +150,8 @@ def main(argv: list[str] | None = None) -> None:
         repo_root=REPO_ROOT,
         logger=logger,
         default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=OBJECTIVE_HEAP_PATH,
-        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        default_objective_path=paths["objective_heap_path"],
+        default_objective_bundle_dir=paths["objective_bundle_dir"],
         hooks=build_daemon_refill_hooks(
             (("retry-budget", retry_budget_hook),),
             scope_label="validation",

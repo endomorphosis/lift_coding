@@ -112,6 +112,63 @@ def test_supervisor_bootstrap_adds_post_initial_discovery_tasks(tmp_path):
     assert not ensure_post_initial_discovery_backlog(task_board_path)
 
 
+def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
+    supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    custom_board = tmp_path / TEMP_TASK_BOARD_FILENAME
+    custom_state = tmp_path / "state"
+    custom_worktrees = tmp_path / "worktrees"
+    custom_discovery = tmp_path / "discovery"
+    custom_objective = tmp_path / "objective.md"
+    custom_bundles = tmp_path / "bundles"
+    custom_graph = tmp_path / "objective_graph.json"
+    custom_datasets = tmp_path / "datasets"
+    custom_vector_index = tmp_path / "todo_vector_index.json"
+
+    monkeypatch.setenv("HANDSFREE_MGW_TODO_PATH", str(custom_board))
+    monkeypatch.setenv("HANDSFREE_MGW_STATE_DIR", str(custom_state))
+    monkeypatch.setenv("HANDSFREE_MGW_WORKTREE_ROOT", str(custom_worktrees))
+    monkeypatch.setenv("HANDSFREE_MGW_DISCOVERY_DIR", str(custom_discovery))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_HEAP_PATH", str(custom_objective))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_BUNDLE_DIR", str(custom_bundles))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_GRAPH_PATH", str(custom_graph))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_DATASET_DIR", str(custom_datasets))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_TODO_VECTOR_INDEX_PATH", str(custom_vector_index))
+
+    daemon_paths = daemon_module.meta_display_bootstrap_paths()
+    supervisor_paths = supervisor_module.meta_display_bootstrap_paths()
+
+    assert daemon_paths["todo_path"] == custom_board
+    assert daemon_paths["state_dir"] == custom_state
+    assert daemon_paths["worktree_root"] == custom_worktrees
+    assert daemon_paths["discovery_dir"] == custom_discovery
+    assert daemon_paths["objective_heap_path"] == custom_objective
+    assert daemon_paths["objective_bundle_dir"] == custom_bundles
+    assert supervisor_paths["objective_graph_path"] == custom_graph
+    assert supervisor_paths["objective_dataset_dir"] == custom_datasets
+    assert supervisor_paths["objective_todo_vector_index_path"] == custom_vector_index
+
+
+def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    paths = {
+        "repo_root": tmp_path,
+        "todo_path": tmp_path / TEMP_TASK_BOARD_FILENAME,
+        "state_dir": tmp_path / "state",
+        "worktree_root": tmp_path / "worktrees",
+        "discovery_dir": tmp_path / "discovery",
+        "objective_heap_path": tmp_path / "objective.md",
+        "objective_bundle_dir": tmp_path / "bundles",
+    }
+
+    daemon_module.ensure_meta_display_bootstrap_paths(paths)
+
+    assert paths["state_dir"].exists()
+    assert paths["worktree_root"].exists()
+    assert paths["discovery_dir"].exists()
+    assert paths["objective_bundle_dir"].exists()
+
+
 def test_codebase_scan_skips_generated_discovery_dirs():
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
 

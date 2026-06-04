@@ -17,6 +17,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
+    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
+    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
@@ -39,6 +42,21 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "ob
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+META_DISPLAY_BOOTSTRAP_SPECS = (
+    _prefixed_bootstrap_path_spec("todo_path", TASK_BOARD_PATH, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("discovery_dir", DISCOVERY_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_heap_path", OBJECTIVE_HEAP_PATH, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_graph_path", OBJECTIVE_GRAPH_PATH, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("objective_dataset_dir", OBJECTIVE_DATASET_DIR, META_DISPLAY_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec(
+        "objective_todo_vector_index_path",
+        OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+        META_DISPLAY_ENV_PREFIX,
+    ),
+)
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
     META_DISPLAY_ENV_PREFIX,
     "OBJECTIVE_SCAN_MIN_OPEN_TASKS",
@@ -143,6 +161,12 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")
+meta_display_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, META_DISPLAY_BOOTSTRAP_SPECS)
+ensure_meta_display_bootstrap_paths = _build_bootstrap_path_ensurer(
+    REPO_ROOT,
+    META_DISPLAY_BOOTSTRAP_SPECS,
+    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir", "objective_dataset_dir"),
+)
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -193,10 +217,17 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _run_supervisor(argv: list[str]) -> None:
+def _run_supervisor(argv: list[str], *, paths: dict[str, Path]) -> None:
     retry_budget_hook = build_supervisor_retry_budget_refill_callback(
         record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
+        discovery_dir=paths["discovery_dir"],
+        extra_kwargs={
+            "discovery_output_path": _repo_relative_or_default(
+                paths["discovery_dir"],
+                REPO_ROOT,
+                "data/meta_glasses_display_widgets/discovery",
+            ),
+        },
     )
 
     if "--ensure-running" in argv:
@@ -218,47 +249,56 @@ def _run_supervisor(argv: list[str]) -> None:
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     _enter_runtime_environment()
+    paths = ensure_meta_display_bootstrap_paths()
     _bootstrap_android_validation_env()
-    ensure_post_initial_discovery_backlog(TASK_BOARD_PATH)
-    enforce_android_validation_environment(TASK_BOARD_PATH)
+    ensure_post_initial_discovery_backlog(paths["todo_path"])
+    enforce_android_validation_environment(paths["todo_path"])
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
         defaults=ImplementationSupervisorDefaults(
-            todo_path=TASK_BOARD_PATH,
-            state_dir=STATE_DIR,
+            todo_path=paths["todo_path"],
+            state_dir=paths["state_dir"],
             task_prefix="## MGW-",
             state_prefix="meta_glasses_display",
-            worktree_root=WORKTREE_ROOT,
+            worktree_root=paths["worktree_root"],
             daemon_script_path=DAEMON_SCRIPT_PATH,
             supervisor_script_path=Path(__file__).resolve(),
             todo_path_flag=TASK_BOARD_PATH_OPTION,
             llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         ),
         objective=ObjectiveRefillDefaults(
-            objective_path=OBJECTIVE_HEAP_PATH,
-            objective_graph_path=OBJECTIVE_GRAPH_PATH,
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-            objective_dataset_dir=OBJECTIVE_DATASET_DIR,
-            objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+            objective_path=paths["objective_heap_path"],
+            objective_graph_path=paths["objective_graph_path"],
+            objective_bundle_dir=paths["objective_bundle_dir"],
+            objective_dataset_dir=paths["objective_dataset_dir"],
+            objective_discovery_dir=paths["discovery_dir"],
+            objective_discovery_output_path=_repo_relative_or_default(
+                paths["discovery_dir"],
+                REPO_ROOT,
+                "data/meta_glasses_display_widgets/discovery",
+            ),
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
             objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
-            objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+            objective_todo_vector_index_path=paths["objective_todo_vector_index_path"],
             objective_surplus_findings_per_goal=OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
             objective_surplus_min_terms_per_todo=OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
             objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
             seed_interoperability_goals=True,
         ),
         codebase=CodebaseRefillDefaults(
-            codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+            codebase_scan_discovery_dir=paths["discovery_dir"],
+            codebase_scan_discovery_output_path=_repo_relative_or_default(
+                paths["discovery_dir"],
+                REPO_ROOT,
+                "data/meta_glasses_display_widgets/discovery",
+            ),
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
     )
-    _run_supervisor(args)
+    _run_supervisor(args, paths=paths)
 
 
 if __name__ == "__main__":
