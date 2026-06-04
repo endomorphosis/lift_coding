@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import logging
 import sys
 from pathlib import Path
 
@@ -41,6 +42,7 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
 
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     apply_portal_implementation_daemon_defaults_from_paths,
+    build_configured_implementation_daemon_runner,
 )
 
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
@@ -62,14 +64,13 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
+logger = logging.getLogger("virtual_ai_os_todo_daemon")
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
     paths = ensure_virtual_ai_os_bootstrap_paths()
     _enter_runtime_environment()
-
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 
     args = apply_portal_implementation_daemon_defaults_from_paths(
         args,
@@ -82,7 +83,14 @@ def main(argv: list[str] | None = None) -> None:
         objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     )
-    daemon_main(args)
+    build_configured_implementation_daemon_runner(
+        repo_root=REPO_ROOT,
+        logger=logger,
+        default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=OBJECTIVE_HEAP_PATH,
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
+    ).run_configured(args)
 
 
 if __name__ == "__main__":

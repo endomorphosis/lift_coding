@@ -62,9 +62,9 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     apply_portal_implementation_daemon_defaults_from_paths,
+    build_configured_implementation_daemon_runner,
     build_daemon_refill_hooks,
     build_daemon_retry_budget_refill_callback,
-    run_configured_portal_implementation_daemon,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -138,18 +138,19 @@ def main(argv: list[str] | None = None) -> None:
         },
     )
 
-    run_configured_portal_implementation_daemon(
-        args,
+    build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
         default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         default_objective_path=paths["objective_heap_path"],
         default_objective_bundle_dir=paths["objective_bundle_dir"],
+        pass_complete_message="Display-widget implementation daemon pass complete: %s",
+    ).run_configured(
+        args,
         hooks=build_daemon_refill_hooks(
             (("retry-budget", retry_budget_hook),),
             scope_label="validation",
         ),
-        pass_complete_message="Display-widget implementation daemon pass complete: %s",
     )
 
 

@@ -90,11 +90,11 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     apply_portal_implementation_daemon_defaults_from_paths,
+    build_configured_implementation_daemon_runner,
     build_daemon_codebase_scan_refill_callback,
     build_daemon_objective_refill_callback,
     build_daemon_refill_hooks,
     build_daemon_retry_budget_refill_callback,
-    run_configured_portal_implementation_daemon,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -212,13 +212,15 @@ def main(argv: list[str] | None = None) -> None:
         discovery_dir=DISCOVERY_DIR,
     )
 
-    run_configured_portal_implementation_daemon(
-        args,
+    build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
         default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         default_objective_path=paths["objective_goal_heap_path"],
         default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
+    ).run_configured(
+        args,
         hooks=build_daemon_refill_hooks(
             (
                 ("objective-goal", objective_hook),
@@ -228,7 +230,6 @@ def main(argv: list[str] | None = None) -> None:
             scope_label="Hallucinate",
             after_order=("retry-budget", "objective-goal", "codebase-scan"),
         ),
-        pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
     )
 
 
