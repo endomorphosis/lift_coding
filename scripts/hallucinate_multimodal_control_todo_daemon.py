@@ -16,7 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    prefixed_env_int as _prefixed_env_int,
+    prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
     prefixed_env_path as _prefixed_env_path,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
@@ -54,21 +54,10 @@ OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
-CODEBASE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
-    HALLUCINATE_ENV_PREFIX,
-    "CODEBASE_SCAN_MIN_OPEN_TASKS",
-    5,
-)
-CODEBASE_SCAN_MAX_FINDINGS = _prefixed_env_int(
-    HALLUCINATE_ENV_PREFIX,
-    "CODEBASE_SCAN_MAX_FINDINGS",
-    5,
-)
-CODEBASE_SCAN_COOLDOWN_SECONDS = _prefixed_env_int(
-    HALLUCINATE_ENV_PREFIX,
-    "CODEBASE_SCAN_COOLDOWN_SECONDS",
-    21600,
-)
+CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(HALLUCINATE_ENV_PREFIX)
+CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
+CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
+CODEBASE_SCAN_COOLDOWN_SECONDS = CODEBASE_SCAN_SETTINGS.cooldown_seconds
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts embed task-board paths by design; exclude from annotation scan
     "data/hallucinate_multimodal_control/discovery/",
