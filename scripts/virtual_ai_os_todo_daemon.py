@@ -40,8 +40,7 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    apply_portal_implementation_daemon_defaults,
-    build_implementation_daemon_defaults_from_paths,
+    apply_portal_implementation_daemon_defaults_from_paths,
 )
 
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
@@ -72,18 +71,16 @@ def main(argv: list[str] | None = None) -> None:
 
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import main as daemon_main
 
-    args = apply_portal_implementation_daemon_defaults(
+    args = apply_portal_implementation_daemon_defaults_from_paths(
         args,
-        defaults=build_implementation_daemon_defaults_from_paths(
-            paths,
-            todo_path_key="task_board_path",
-            task_prefix="## VAI-",
-            state_prefix="virtual_ai_os",
-            todo_path_flag=TASK_BOARD_PATH_OPTION,
-            objective_path=OBJECTIVE_HEAP_PATH,
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-            worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-        ),
+        paths,
+        todo_path_key="task_board_path",
+        task_prefix="## VAI-",
+        state_prefix="virtual_ai_os",
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        objective_path=OBJECTIVE_HEAP_PATH,
+        objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     )
     daemon_main(args)
 

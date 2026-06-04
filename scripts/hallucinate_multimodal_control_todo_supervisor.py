@@ -23,9 +23,8 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    apply_portal_implementation_supervisor_defaults,
+    apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
-    build_implementation_supervisor_defaults_from_paths,
     build_objective_refill_defaults_from_paths,
     build_supervisor_codebase_scan_refill_callback,
     build_supervisor_objective_refill_callback,
@@ -117,18 +116,16 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     _enter_runtime_environment()
 
-    args = apply_portal_implementation_supervisor_defaults(
+    args = apply_portal_implementation_supervisor_defaults_from_paths(
         args,
-        defaults=build_implementation_supervisor_defaults_from_paths(
-            paths,
-            todo_path_key=TASK_BOARD_PATH_KEY,
-            task_prefix="## HAO-",
-            state_prefix="hallucinate_multimodal_control",
-            daemon_script_path=DAEMON_SCRIPT_PATH,
-            supervisor_script_path=Path(__file__).resolve(),
-            todo_path_flag=TASK_BOARD_PATH_OPTION,
-            llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        ),
+        paths,
+        todo_path_key=TASK_BOARD_PATH_KEY,
+        task_prefix="## HAO-",
+        state_prefix="hallucinate_multimodal_control",
+        daemon_script_path=DAEMON_SCRIPT_PATH,
+        supervisor_script_path=Path(__file__).resolve(),
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         objective=build_objective_refill_defaults_from_paths(
             paths,
             objective_path_key="objective_goal_heap_path",

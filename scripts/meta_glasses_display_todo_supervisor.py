@@ -112,9 +112,8 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    apply_portal_implementation_supervisor_defaults,
+    apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
-    build_implementation_supervisor_defaults_from_paths,
     build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
@@ -234,17 +233,15 @@ def main(argv: list[str] | None = None) -> None:
         paths,
     )
 
-    args = apply_portal_implementation_supervisor_defaults(
+    args = apply_portal_implementation_supervisor_defaults_from_paths(
         args,
-        defaults=build_implementation_supervisor_defaults_from_paths(
-            paths,
-            task_prefix="## MGW-",
-            state_prefix="meta_glasses_display",
-            daemon_script_path=DAEMON_SCRIPT_PATH,
-            supervisor_script_path=Path(__file__).resolve(),
-            todo_path_flag=TASK_BOARD_PATH_OPTION,
-            llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        ),
+        paths,
+        task_prefix="## MGW-",
+        state_prefix="meta_glasses_display",
+        daemon_script_path=DAEMON_SCRIPT_PATH,
+        supervisor_script_path=Path(__file__).resolve(),
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         objective=build_objective_refill_defaults_from_paths(
             paths,
             objective_path_key="objective_heap_path",

@@ -61,8 +61,7 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
 
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    apply_portal_implementation_daemon_defaults,
-    build_implementation_daemon_defaults_from_paths,
+    apply_portal_implementation_daemon_defaults_from_paths,
     build_daemon_refill_hooks,
     build_daemon_retry_budget_refill_callback,
     run_configured_portal_implementation_daemon,
@@ -116,17 +115,15 @@ def main(argv: list[str] | None = None) -> None:
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(paths["todo_path"])
 
-    args = apply_portal_implementation_daemon_defaults(
+    args = apply_portal_implementation_daemon_defaults_from_paths(
         args,
-        defaults=build_implementation_daemon_defaults_from_paths(
-            paths,
-            task_prefix="## MGW-",
-            state_prefix="meta_glasses_display",
-            todo_path_flag=TASK_BOARD_PATH_OPTION,
-            objective_path_key="objective_heap_path",
-            objective_bundle_dir_key="objective_bundle_dir",
-            worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        ),
+        paths,
+        task_prefix="## MGW-",
+        state_prefix="meta_glasses_display",
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        objective_path_key="objective_heap_path",
+        objective_bundle_dir_key="objective_bundle_dir",
+        worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
     )
 
     retry_budget_hook = build_daemon_retry_budget_refill_callback(

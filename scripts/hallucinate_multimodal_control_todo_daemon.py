@@ -89,8 +89,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     ConfiguredRetryBudgetRecorder,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    apply_portal_implementation_daemon_defaults,
-    build_implementation_daemon_defaults_from_paths,
+    apply_portal_implementation_daemon_defaults_from_paths,
     build_daemon_codebase_scan_refill_callback,
     build_daemon_objective_refill_callback,
     build_daemon_refill_hooks,
@@ -191,18 +190,16 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     _enter_runtime_environment()
 
-    args = apply_portal_implementation_daemon_defaults(
+    args = apply_portal_implementation_daemon_defaults_from_paths(
         args,
-        defaults=build_implementation_daemon_defaults_from_paths(
-            paths,
-            todo_path_key=TASK_BOARD_PATH_KEY,
-            task_prefix="## HAO-",
-            state_prefix="hallucinate_multimodal_control",
-            todo_path_flag=TASK_BOARD_PATH_OPTION,
-            objective_path_key="objective_goal_heap_path",
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-            worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        ),
+        paths,
+        todo_path_key=TASK_BOARD_PATH_KEY,
+        task_prefix="## HAO-",
+        state_prefix="hallucinate_multimodal_control",
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        objective_path_key="objective_goal_heap_path",
+        objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     )
 
     objective_hook = build_daemon_objective_refill_callback(
