@@ -15,7 +15,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    env_int as _env_int,
+    prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
+    prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_env_var as _task_board_env_var,
@@ -43,24 +44,29 @@ DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
     REPO_ROOT,
     "data/virtual_ai_os/discovery",
 )
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_MIN_OPEN_TASKS"),
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "OBJECTIVE_SCAN_MIN_OPEN_TASKS",
     20,
 )
-OBJECTIVE_SCAN_MAX_FINDINGS = _env_int(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_MAX_FINDINGS"),
+OBJECTIVE_SCAN_MAX_FINDINGS = _prefixed_env_int(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "OBJECTIVE_SCAN_MAX_FINDINGS",
     12,
 )
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SCAN_COOLDOWN_SECONDS"),
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _prefixed_env_int(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "OBJECTIVE_SCAN_COOLDOWN_SECONDS",
     900,
 )
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"),
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _prefixed_env_int(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL",
     6,
 )
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"),
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _prefixed_env_int(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO",
     4,
 )
 # scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
@@ -96,7 +102,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    env_csv_tuple as _env_csv_tuple,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
@@ -105,8 +110,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     apply_portal_implementation_supervisor_defaults,
 )
 
-VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _env_csv_tuple(
-    _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "INTEROPERABILITY_FOCUS"),
+VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (

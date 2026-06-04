@@ -16,8 +16,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    env_int as _env_int,
-    env_path as _env_path,
+    prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
+    prefixed_env_int as _prefixed_env_int,
+    prefixed_env_path as _prefixed_env_path,
     prefixed_env_var as _prefixed_env_var,
     task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
@@ -36,8 +37,9 @@ TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_KEY = _task_board_path_key()
 TASK_BOARD_PATH_ENV = _task_board_env_var(HALLUCINATE_ENV_PREFIX)
 OBJECTIVE_GOAL_HEAP_ENV = _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_GOAL_HEAP_PATH")
-DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _env_path(
-    OBJECTIVE_GOAL_HEAP_ENV,
+DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_GOAL_HEAP_PATH",
     REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
 )
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
@@ -49,36 +51,44 @@ OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.jso
 DISCOVERY_OUTPUT_PATH = "data/hallucinate_multimodal_control/discovery"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_MIN_OPEN_TASKS"),
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_SCAN_MIN_OPEN_TASKS",
     20,
 )
-OBJECTIVE_SCAN_MAX_FINDINGS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_MAX_FINDINGS"),
+OBJECTIVE_SCAN_MAX_FINDINGS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_SCAN_MAX_FINDINGS",
     12,
 )
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SCAN_COOLDOWN_SECONDS"),
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_SCAN_COOLDOWN_SECONDS",
     900,
 )
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL"),
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL",
     6,
 )
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO"),
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO",
     4,
 )
-CODEBASE_SCAN_MIN_OPEN_TASKS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_MIN_OPEN_TASKS"),
+CODEBASE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "CODEBASE_SCAN_MIN_OPEN_TASKS",
     5,
 )
-CODEBASE_SCAN_MAX_FINDINGS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_MAX_FINDINGS"),
+CODEBASE_SCAN_MAX_FINDINGS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "CODEBASE_SCAN_MAX_FINDINGS",
     5,
 )
-CODEBASE_SCAN_COOLDOWN_SECONDS = _env_int(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "CODEBASE_SCAN_COOLDOWN_SECONDS"),
+CODEBASE_SCAN_COOLDOWN_SECONDS = _prefixed_env_int(
+    HALLUCINATE_ENV_PREFIX,
+    "CODEBASE_SCAN_COOLDOWN_SECONDS",
     21600,
 )
 CODEBASE_SCAN_SKIP_PREFIXES = (
@@ -107,7 +117,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    env_csv_tuple as _env_csv_tuple,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     ConfiguredCodebaseScanRecorder,
@@ -124,8 +133,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     run_configured_portal_implementation_daemon,
 )
 
-HALLUCINATE_INTEROPERABILITY_FOCUS = _env_csv_tuple(
-    _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "INTEROPERABILITY_FOCUS"),
+HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
+    HALLUCINATE_ENV_PREFIX,
+    "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
 HALLUCINATE_BOOTSTRAP_SPECS = (
