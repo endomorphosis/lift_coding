@@ -13,13 +13,13 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    with_exclusive_flag_default as _with_exclusive_flag_default,
+from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
+    implementation_supervisor_args as _implementation_supervisor_args,
 )
 
 
 def with_autopilot_defaults(argv: list[str]) -> list[str]:
-    return _with_exclusive_flag_default(argv, "--implement", ("--no-implement",))
+    return _implementation_supervisor_args(argv)
 
 
 def main(argv: list[str] | None = None) -> None:
