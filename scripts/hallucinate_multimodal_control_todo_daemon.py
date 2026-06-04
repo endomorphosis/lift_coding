@@ -16,11 +16,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_path as _prefixed_env_path,
-    prefixed_env_var as _prefixed_env_var,
-    task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_key as _task_board_path_key,
     task_board_path_option as _task_board_path_option,
@@ -35,8 +34,6 @@ DEFAULT_TODO_PATH = (
 HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_KEY = _task_board_path_key()
-TASK_BOARD_PATH_ENV = _task_board_env_var(HALLUCINATE_ENV_PREFIX)
-OBJECTIVE_GOAL_HEAP_ENV = _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "OBJECTIVE_GOAL_HEAP_PATH")
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
     HALLUCINATE_ENV_PREFIX,
     "OBJECTIVE_GOAL_HEAP_PATH",
@@ -113,7 +110,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    BootstrapPathSpec,
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
@@ -139,21 +135,21 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
     "hallucinate_app",
 )
 HALLUCINATE_BOOTSTRAP_SPECS = (
-    BootstrapPathSpec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, TASK_BOARD_PATH_ENV),
-    BootstrapPathSpec(
+    _prefixed_bootstrap_path_spec(TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH, HALLUCINATE_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec(
         "objective_goal_heap_path",
         DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
-        OBJECTIVE_GOAL_HEAP_ENV,
+        HALLUCINATE_ENV_PREFIX,
     ),
-    BootstrapPathSpec(
+    _prefixed_bootstrap_path_spec(
         "state_dir",
         DEFAULT_STATE_DIR,
-        _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "STATE_DIR"),
+        HALLUCINATE_ENV_PREFIX,
     ),
-    BootstrapPathSpec(
+    _prefixed_bootstrap_path_spec(
         "worktree_root",
         DEFAULT_WORKTREE_ROOT,
-        _prefixed_env_var(HALLUCINATE_ENV_PREFIX, "WORKTREE_ROOT"),
+        HALLUCINATE_ENV_PREFIX,
     ),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(

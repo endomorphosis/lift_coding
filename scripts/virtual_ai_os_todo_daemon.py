@@ -15,12 +15,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    BootstrapPathSpec,
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    prefixed_env_var as _prefixed_env_var,
-    task_board_env_var as _task_board_env_var,
+    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -30,11 +28,8 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-TASK_BOARD_PATH_ENV = _task_board_env_var(VIRTUAL_AI_OS_ENV_PREFIX)
 STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
-STATE_DIR_ENV = _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "STATE_DIR")
 WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
-WORKTREE_ROOT_ENV = _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "WORKTREE_ROOT")
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
@@ -52,9 +47,14 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 )
 
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
-    BootstrapPathSpec("task_board_path", TASK_BOARD_PATH, TASK_BOARD_PATH_ENV),
-    BootstrapPathSpec("state_dir", STATE_DIR, STATE_DIR_ENV),
-    BootstrapPathSpec("worktree_root", WORKTREE_ROOT, WORKTREE_ROOT_ENV),
+    _prefixed_bootstrap_path_spec(
+        "task_board_path",
+        TASK_BOARD_PATH,
+        VIRTUAL_AI_OS_ENV_PREFIX,
+        "todo_path",
+    ),
+    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, VIRTUAL_AI_OS_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, VIRTUAL_AI_OS_ENV_PREFIX),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,

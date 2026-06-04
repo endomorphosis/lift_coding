@@ -15,11 +15,11 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
-    task_board_env_var as _task_board_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -29,7 +29,6 @@ DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-TASK_BOARD_PATH_ENV = _task_board_env_var(VIRTUAL_AI_OS_ENV_PREFIX)
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
@@ -97,7 +96,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    BootstrapPathSpec,
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
@@ -116,17 +114,9 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
     "hallucinate_app",
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
-    BootstrapPathSpec("todo_path", DEFAULT_TODO_PATH, TASK_BOARD_PATH_ENV),
-    BootstrapPathSpec(
-        "state_dir",
-        DEFAULT_STATE_DIR,
-        _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "STATE_DIR"),
-    ),
-    BootstrapPathSpec(
-        "worktree_root",
-        DEFAULT_WORKTREE_ROOT,
-        _prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "WORKTREE_ROOT"),
-    ),
+    _prefixed_bootstrap_path_spec("todo_path", DEFAULT_TODO_PATH, VIRTUAL_AI_OS_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("state_dir", DEFAULT_STATE_DIR, VIRTUAL_AI_OS_ENV_PREFIX),
+    _prefixed_bootstrap_path_spec("worktree_root", DEFAULT_WORKTREE_ROOT, VIRTUAL_AI_OS_ENV_PREFIX),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
