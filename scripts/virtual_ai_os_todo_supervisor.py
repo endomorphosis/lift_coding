@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import logging
 import sys
 from pathlib import Path
 
@@ -83,6 +84,11 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
     build_objective_refill_defaults_from_paths,
+    run_configured_portal_implementation_supervisor_with_runtime,
+)
+from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
+    build_supervisor_runtime_operations,
+    pop_bool_flag as _pop_bool_flag,
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -111,14 +117,39 @@ ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     VIRTUAL_AI_OS_ENV_PREFIX
 )
+logger = logging.getLogger("virtual_ai_os_todo_supervisor")
+VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = ("virtual_ai_os_todo_supervisor.py",)
+_virtual_ai_os_supervisor_runtime = build_supervisor_runtime_operations(
+    repo_root=REPO_ROOT,
+    script_path=Path(__file__).resolve(),
+    process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
+    prepare_environment=_ensure_runtime_pythonpath,
+)
+
+
+def repair_virtual_ai_os_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
+    """Clear stale virtual-AI-OS supervisor/daemon markers before health checks."""
+
+    return _virtual_ai_os_supervisor_runtime.repair_runtime(state_dir, state_prefix)
+
+
+def virtual_ai_os_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
+    return _virtual_ai_os_supervisor_runtime.is_running(state_dir, state_prefix)
+
+
+def ensure_virtual_ai_os_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
+    return _virtual_ai_os_supervisor_runtime.ensure_running(
+        argv,
+        state_dir=state_dir,
+        state_prefix=state_prefix,
+    )
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
+    ensure_running = _pop_bool_flag(args, "--ensure-running")
     paths = ensure_virtual_ai_os_bootstrap_paths()
     _enter_runtime_environment()
-
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import main as supervisor_main
 
     args = apply_portal_implementation_supervisor_defaults_from_paths(
         args,
@@ -150,7 +181,20 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
     )
-    supervisor_main(args)
+    run_configured_portal_implementation_supervisor_with_runtime(
+        args,
+        repo_root=REPO_ROOT,
+        logger=logger,
+        script_path=Path(__file__).resolve(),
+        process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
+        prepare_environment=_ensure_runtime_pythonpath,
+        daemon_script_path=DAEMON_SCRIPT_PATH,
+        worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
+        once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",
+        ensure_running=ensure_running,
+        ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
+        repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
+    )
 
 
 if __name__ == "__main__":

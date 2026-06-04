@@ -30,8 +30,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_supervisor_objective_refill_callback,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
-    build_supervisor_runtime_callbacks,
-    run_configured_portal_implementation_supervisor,
+    run_configured_portal_implementation_supervisor_with_runtime,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
     build_supervisor_runtime_operations,
@@ -158,18 +157,13 @@ def main(argv: list[str] | None = None) -> None:
         discovery_dir=DISCOVERY_DIR,
     )
 
-    runtime_callbacks = build_supervisor_runtime_callbacks(
-        args,
-        repo_root=REPO_ROOT,
-        script_path=Path(__file__).resolve(),
-        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
-        prepare_environment=_ensure_runtime_pythonpath,
-    )
-
-    run_configured_portal_implementation_supervisor(
+    run_configured_portal_implementation_supervisor_with_runtime(
         args,
         repo_root=REPO_ROOT,
         logger=logger,
+        script_path=Path(__file__).resolve(),
+        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
+        prepare_environment=_ensure_runtime_pythonpath,
         daemon_script_path=DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(
@@ -182,9 +176,7 @@ def main(argv: list[str] | None = None) -> None:
         ),
         once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
         ensure_running=ensure_running,
-        ensure_running_callback=runtime_callbacks.ensure_running,
         ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
-        repair_runtime_callback=runtime_callbacks.repair_runtime,
         repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
     )
 

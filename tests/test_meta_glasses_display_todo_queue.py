@@ -174,6 +174,37 @@ def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
     assert paths["objective_bundle_dir"].exists()
 
 
+def test_meta_display_supervisor_ensure_running_flag_uses_runtime_helper(tmp_path, monkeypatch):
+    supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
+    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text("# Temporary Board\n", encoding="utf-8")
+    captured: dict[str, object] = {}
+
+    monkeypatch.setenv("HANDSFREE_MGW_TODO_PATH", str(task_board_path))
+    monkeypatch.setenv("HANDSFREE_MGW_STATE_DIR", str(tmp_path / "state"))
+    monkeypatch.setenv("HANDSFREE_MGW_WORKTREE_ROOT", str(tmp_path / "worktrees"))
+    monkeypatch.setenv("HANDSFREE_MGW_DISCOVERY_DIR", str(tmp_path / "discovery"))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_HEAP_PATH", str(tmp_path / "objective.md"))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_GRAPH_PATH", str(tmp_path / "objective_graph.json"))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_BUNDLE_DIR", str(tmp_path / "objective_bundles"))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_DATASET_DIR", str(tmp_path / "objective_datasets"))
+    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_TODO_VECTOR_INDEX_PATH", str(tmp_path / "todo_vector_index.json"))
+    monkeypatch.setattr(
+        supervisor_module,
+        "run_configured_portal_implementation_supervisor_with_runtime",
+        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+    )
+
+    supervisor_module.main(["--ensure-running", "--once"])
+
+    payload = captured["payload"]
+    args = payload["args"]
+    kwargs = payload["kwargs"]
+    assert "--ensure-running" not in args
+    assert kwargs["ensure_running"] is True
+    assert kwargs["process_match_any"] == supervisor_module.META_DISPLAY_SUPERVISOR_PROCESS_MARKERS
+
+
 def test_codebase_scan_skips_generated_discovery_dirs():
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
 

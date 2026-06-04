@@ -117,7 +117,11 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
-    run_configured_portal_implementation_supervisor,
+    run_configured_portal_implementation_supervisor_with_runtime,
+)
+from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
+    build_supervisor_runtime_operations,
+    pop_bool_flag as _pop_bool_flag,
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -145,6 +149,32 @@ _RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
 )
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
+_ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
+META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = ("meta_glasses_display_todo_supervisor.py",)
+_meta_display_supervisor_runtime = build_supervisor_runtime_operations(
+    repo_root=REPO_ROOT,
+    script_path=Path(__file__).resolve(),
+    process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
+    prepare_environment=_ensure_runtime_pythonpath,
+)
+
+
+def repair_meta_display_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
+    """Clear stale Meta-display supervisor/daemon markers before health checks."""
+
+    return _meta_display_supervisor_runtime.repair_runtime(state_dir, state_prefix)
+
+
+def meta_display_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
+    return _meta_display_supervisor_runtime.is_running(state_dir, state_prefix)
+
+
+def ensure_meta_display_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
+    return _meta_display_supervisor_runtime.ensure_running(
+        argv,
+        state_dir=state_dir,
+        state_prefix=state_prefix,
+    )
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 
@@ -191,7 +221,7 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _run_supervisor(argv: list[str], *, paths: dict[str, Path]) -> None:
+def _run_supervisor(argv: list[str], *, paths: dict[str, Path], ensure_running: bool) -> None:
     retry_budget_hook = build_supervisor_retry_budget_refill_callback(
         record_retry_budget_findings,
         discovery_dir=paths["discovery_dir"],
@@ -204,12 +234,15 @@ def _run_supervisor(argv: list[str], *, paths: dict[str, Path]) -> None:
         },
     )
 
-    if "--ensure-running" in argv:
+    if ensure_running:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    run_configured_portal_implementation_supervisor(
+    run_configured_portal_implementation_supervisor_with_runtime(
         argv,
         repo_root=REPO_ROOT,
         logger=logger,
+        script_path=Path(__file__).resolve(),
+        process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
+        prepare_environment=_ensure_runtime_pythonpath,
         daemon_script_path=DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(
@@ -217,11 +250,15 @@ def _run_supervisor(argv: list[str], *, paths: dict[str, Path]) -> None:
             scope_label="validation",
         ),
         once_complete_message="Display-widget implementation supervisor check complete: %s",
+        ensure_running=ensure_running,
+        ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
+        repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
     )
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
+    ensure_running = _pop_bool_flag(args, "--ensure-running")
     _enter_runtime_environment()
     paths = ensure_meta_display_bootstrap_paths()
     _bootstrap_android_validation_env()
@@ -263,7 +300,7 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
     )
-    _run_supervisor(args, paths=paths)
+    _run_supervisor(args, paths=paths, ensure_running=ensure_running)
 
 
 if __name__ == "__main__":

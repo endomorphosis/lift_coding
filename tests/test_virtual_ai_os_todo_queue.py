@@ -151,20 +151,47 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
 
 def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_supervisor
-
-    captured: dict[str, list[str]] = {}
-    monkeypatch.setattr(implementation_supervisor, "main", lambda args: captured.setdefault("args", args))
+    captured: dict[str, object] = {}
+    monkeypatch.setattr(
+        supervisor_module,
+        "run_configured_portal_implementation_supervisor_with_runtime",
+        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+    )
 
     supervisor_module.main(["--once"])
 
-    args = captured["args"]
+    payload = captured["payload"]
+    args = payload["args"]
+    kwargs = payload["kwargs"]
     flag_index = args.index("--objective-surplus-findings-per-goal")
     assert args[flag_index + 1] == str(supervisor_module.OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL)
     assert "--objective-seed-interoperability-goals" in args
     focus_index = args.index("--objective-interoperability-focus")
     assert args[focus_index + 1] == "hallucinate_app"
+    assert kwargs["ensure_running"] is False
+    assert kwargs["process_match_any"] == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
+
+
+def test_virtual_ai_os_supervisor_ensure_running_flag_uses_runtime_helper(tmp_path, monkeypatch):
+    supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
+    captured: dict[str, object] = {}
+    monkeypatch.setenv("HANDSFREE_VAI_OS_TODO_PATH", str(tmp_path / _task_board_filename("board")))
+    monkeypatch.setenv("HANDSFREE_VAI_OS_STATE_DIR", str(tmp_path / "state"))
+    monkeypatch.setenv("HANDSFREE_VAI_OS_WORKTREE_ROOT", str(tmp_path / "worktrees"))
+    monkeypatch.setattr(
+        supervisor_module,
+        "run_configured_portal_implementation_supervisor_with_runtime",
+        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+    )
+
+    supervisor_module.main(["--ensure-running", "--once"])
+
+    payload = captured["payload"]
+    args = payload["args"]
+    kwargs = payload["kwargs"]
+    assert "--ensure-running" not in args
+    assert kwargs["ensure_running"] is True
+    assert kwargs["process_match_any"] == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
 
 
 def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path):
