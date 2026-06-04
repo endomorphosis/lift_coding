@@ -33,11 +33,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
-    ActionContractCodegenConfig,
     JavaScriptActionContractConfig,
     PythonActionContractConfig,
+    build_configured_action_contract_sync_runner,
     operation_action_mapper,
-    run_action_contract_sync,
 )
 
 OPERATION_TO_ACTION = {
@@ -119,7 +118,7 @@ JS_CONTRACT_CONFIG = JavaScriptActionContractConfig(
     },
 )
 
-SYNC_CONFIG = ActionContractCodegenConfig(
+ACTION_CONTRACT_SYNC_RUNNER = build_configured_action_contract_sync_runner(
     descriptor_path=SPEC_PATH,
     contract=CONTRACT,
     operation_to_action=operation_action_mapper(
@@ -134,10 +133,11 @@ SYNC_CONFIG = ActionContractCodegenConfig(
     repo_root=REPO_ROOT,
     description="Sync or verify Meta glasses display widget contract modules.",
 )
+SYNC_CONFIG = ACTION_CONTRACT_SYNC_RUNNER.config
 
 
 def main(argv: list[str] | None = None) -> int:
-    return run_action_contract_sync(SYNC_CONFIG, argv)
+    return ACTION_CONTRACT_SYNC_RUNNER.run(argv)
 
 
 if __name__ == "__main__":
