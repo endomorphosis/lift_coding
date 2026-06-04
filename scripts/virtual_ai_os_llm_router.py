@@ -28,9 +28,7 @@ PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "19-virtual-ai-os-submo
 ARTIFACT_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "llm_router"
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
-    TaskProposalRouterCliConfig,
-    build_task_proposal_router_cli_config,
-    run_task_proposal_router_cli,
+    run_configured_task_proposal_router_cli,
 )
 
 
@@ -38,8 +36,9 @@ _RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(REPO_ROOT, (IPFS_ACCE
 _bootstrap_imports = _RUNTIME_ENVIRONMENT.enter
 
 
-def _build_cli_config() -> TaskProposalRouterCliConfig:
-    return build_task_proposal_router_cli_config(
+def main(argv: list[str] | None = None) -> int:
+    return run_configured_task_proposal_router_cli(
+        argv,
         repo_root=REPO_ROOT,
         task_board_path=TASK_BOARD_PATH,
         task_header_prefix="## VAI-",
@@ -59,10 +58,6 @@ def _build_cli_config() -> TaskProposalRouterCliConfig:
         task_board_option=TASK_BOARD_PATH_OPTION,
         bootstrap=_bootstrap_imports,
     )
-
-
-def main(argv: list[str] | None = None) -> int:
-    return run_task_proposal_router_cli(_build_cli_config(), argv)
 
 
 if __name__ == "__main__":
