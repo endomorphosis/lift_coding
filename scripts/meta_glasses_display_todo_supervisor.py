@@ -17,9 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
-    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
-    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
+    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
@@ -42,7 +40,8 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "ob
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-META_DISPLAY_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+_META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+    REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
     (
         ("todo_path", TASK_BOARD_PATH),
@@ -55,7 +54,9 @@ META_DISPLAY_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
         ("objective_dataset_dir", OBJECTIVE_DATASET_DIR),
         ("objective_todo_vector_index_path", OBJECTIVE_TODO_VECTOR_INDEX_PATH),
     ),
+    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir", "objective_dataset_dir"),
 )
+META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
     META_DISPLAY_ENV_PREFIX,
     "OBJECTIVE_SCAN_MIN_OPEN_TASKS",
@@ -160,12 +161,8 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")
-meta_display_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, META_DISPLAY_BOOTSTRAP_SPECS)
-ensure_meta_display_bootstrap_paths = _build_bootstrap_path_ensurer(
-    REPO_ROOT,
-    META_DISPLAY_BOOTSTRAP_SPECS,
-    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir", "objective_dataset_dir"),
-)
+meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
+ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),

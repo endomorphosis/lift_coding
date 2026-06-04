@@ -15,10 +15,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
-    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
+    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -46,14 +44,17 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     apply_portal_implementation_daemon_defaults,
 )
 
-VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+    REPO_ROOT,
     VIRTUAL_AI_OS_ENV_PREFIX,
     (
         ("task_board_path", TASK_BOARD_PATH, "todo_path"),
         ("state_dir", STATE_DIR),
         ("worktree_root", WORKTREE_ROOT),
     ),
+    ("state_dir", "worktree_root"),
 )
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -63,12 +64,8 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
-virtual_ai_os_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
-ensure_virtual_ai_os_bootstrap_paths = _build_bootstrap_path_ensurer(
-    REPO_ROOT,
-    VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
-    ("state_dir", "worktree_root"),
-)
+virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
+ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
 
 
 def main(argv: list[str] | None = None) -> None:

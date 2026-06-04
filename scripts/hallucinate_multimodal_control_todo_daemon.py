@@ -16,7 +16,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_path as _prefixed_env_path,
@@ -110,8 +109,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
-    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
+    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_runtime_environment_callback as _build_runtime_environment_callback,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
@@ -134,7 +132,8 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
     "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
-HALLUCINATE_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+_HALLUCINATE_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+    REPO_ROOT,
     HALLUCINATE_ENV_PREFIX,
     (
         (TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH),
@@ -142,7 +141,9 @@ HALLUCINATE_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
         ("state_dir", DEFAULT_STATE_DIR),
         ("worktree_root", DEFAULT_WORKTREE_ROOT),
     ),
+    ("state_dir", "worktree_root"),
 )
+HALLUCINATE_BOOTSTRAP_SPECS = _HALLUCINATE_BOOTSTRAP_PATHS.specs
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -159,12 +160,8 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
 )
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
-hallucinate_multimodal_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, HALLUCINATE_BOOTSTRAP_SPECS)
-ensure_hallucinate_multimodal_bootstrap_paths = _build_bootstrap_path_ensurer(
-    REPO_ROOT,
-    HALLUCINATE_BOOTSTRAP_SPECS,
-    ("state_dir", "worktree_root"),
-)
+hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
+ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
 
 
 record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(

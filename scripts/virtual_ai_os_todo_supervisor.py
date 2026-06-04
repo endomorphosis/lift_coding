@@ -15,7 +15,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
@@ -96,9 +95,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
-    build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
+    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_runtime_environment_callback as _build_runtime_environment_callback,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -113,14 +111,17 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
     "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
-VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+    REPO_ROOT,
     VIRTUAL_AI_OS_ENV_PREFIX,
     (
         ("todo_path", DEFAULT_TODO_PATH),
         ("state_dir", DEFAULT_STATE_DIR),
         ("worktree_root", DEFAULT_WORKTREE_ROOT),
     ),
+    ("state_dir", "worktree_root"),
 )
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -130,12 +131,8 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
-virtual_ai_os_bootstrap_paths = _build_bootstrap_path_resolver(REPO_ROOT, VIRTUAL_AI_OS_BOOTSTRAP_SPECS)
-ensure_virtual_ai_os_bootstrap_paths = _build_bootstrap_path_ensurer(
-    REPO_ROOT,
-    VIRTUAL_AI_OS_BOOTSTRAP_SPECS,
-    ("state_dir", "worktree_root"),
-)
+virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
+ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
 _default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
     primary_env_var=_prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
 )
