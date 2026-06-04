@@ -19,7 +19,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
-    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
+    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
@@ -42,19 +42,18 @@ OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "ob
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-META_DISPLAY_BOOTSTRAP_SPECS = (
-    _prefixed_bootstrap_path_spec("todo_path", TASK_BOARD_PATH, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("discovery_dir", DISCOVERY_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_heap_path", OBJECTIVE_HEAP_PATH, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_graph_path", OBJECTIVE_GRAPH_PATH, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_dataset_dir", OBJECTIVE_DATASET_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec(
-        "objective_todo_vector_index_path",
-        OBJECTIVE_TODO_VECTOR_INDEX_PATH,
-        META_DISPLAY_ENV_PREFIX,
+META_DISPLAY_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+    META_DISPLAY_ENV_PREFIX,
+    (
+        ("todo_path", TASK_BOARD_PATH),
+        ("state_dir", STATE_DIR),
+        ("worktree_root", WORKTREE_ROOT),
+        ("discovery_dir", DISCOVERY_DIR),
+        ("objective_heap_path", OBJECTIVE_HEAP_PATH),
+        ("objective_graph_path", OBJECTIVE_GRAPH_PATH),
+        ("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR),
+        ("objective_dataset_dir", OBJECTIVE_DATASET_DIR),
+        ("objective_todo_vector_index_path", OBJECTIVE_TODO_VECTOR_INDEX_PATH),
     ),
 )
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(

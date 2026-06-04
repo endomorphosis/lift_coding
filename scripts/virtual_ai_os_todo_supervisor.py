@@ -15,7 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
+    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
@@ -113,10 +113,13 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
     "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
-VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
-    _prefixed_bootstrap_path_spec("todo_path", DEFAULT_TODO_PATH, VIRTUAL_AI_OS_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("state_dir", DEFAULT_STATE_DIR, VIRTUAL_AI_OS_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("worktree_root", DEFAULT_WORKTREE_ROOT, VIRTUAL_AI_OS_ENV_PREFIX),
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    (
+        ("todo_path", DEFAULT_TODO_PATH),
+        ("state_dir", DEFAULT_STATE_DIR),
+        ("worktree_root", DEFAULT_WORKTREE_ROOT),
+    ),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,

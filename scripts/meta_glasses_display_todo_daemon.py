@@ -20,7 +20,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
+    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -36,13 +36,16 @@ WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees
 DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
-META_DISPLAY_BOOTSTRAP_SPECS = (
-    _prefixed_bootstrap_path_spec("todo_path", TASK_BOARD_PATH, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("discovery_dir", DISCOVERY_DIR, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_heap_path", OBJECTIVE_HEAP_PATH, META_DISPLAY_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR, META_DISPLAY_ENV_PREFIX),
+META_DISPLAY_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+    META_DISPLAY_ENV_PREFIX,
+    (
+        ("todo_path", TASK_BOARD_PATH),
+        ("state_dir", STATE_DIR),
+        ("worktree_root", WORKTREE_ROOT),
+        ("discovery_dir", DISCOVERY_DIR),
+        ("objective_heap_path", OBJECTIVE_HEAP_PATH),
+        ("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR),
+    ),
 )
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (

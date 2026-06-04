@@ -18,7 +18,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_bootstrap_path_ensurer as _build_bootstrap_path_ensurer,
     build_bootstrap_path_resolver as _build_bootstrap_path_resolver,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    prefixed_bootstrap_path_spec as _prefixed_bootstrap_path_spec,
+    prefixed_bootstrap_path_specs as _prefixed_bootstrap_path_specs,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -46,15 +46,13 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     apply_portal_implementation_daemon_defaults,
 )
 
-VIRTUAL_AI_OS_BOOTSTRAP_SPECS = (
-    _prefixed_bootstrap_path_spec(
-        "task_board_path",
-        TASK_BOARD_PATH,
-        VIRTUAL_AI_OS_ENV_PREFIX,
-        "todo_path",
+VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _prefixed_bootstrap_path_specs(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    (
+        ("task_board_path", TASK_BOARD_PATH, "todo_path"),
+        ("state_dir", STATE_DIR),
+        ("worktree_root", WORKTREE_ROOT),
     ),
-    _prefixed_bootstrap_path_spec("state_dir", STATE_DIR, VIRTUAL_AI_OS_ENV_PREFIX),
-    _prefixed_bootstrap_path_spec("worktree_root", WORKTREE_ROOT, VIRTUAL_AI_OS_ENV_PREFIX),
 )
 _enter_runtime_environment = _build_runtime_environment_callback(
     REPO_ROOT,
