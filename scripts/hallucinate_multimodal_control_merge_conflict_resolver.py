@@ -24,19 +24,17 @@ HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
 HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
-    MergeResolverCliConfig,
-    build_configured_merge_resolver_arg_parser,
+    build_configured_merge_resolver_runner,
     build_llm_merge_resolver_invoker,
     build_merge_prompt_callback,
     build_resolver_payload_callback,
     compact_text,
     iter_jsonl,
     latest_failed_merge_event,
-    run_configured_merge_resolver_cli,
     unmerged_paths,
 )
 
-_HAO_MERGE_RESOLVER_CONFIG = MergeResolverCliConfig(
+_HAO_MERGE_RESOLVER_RUNNER = build_configured_merge_resolver_runner(
     default_events_path=DEFAULT_EVENTS_PATH,
     default_repo_root=REPO_ROOT,
     prompt_heading=HAO_PROMPT_HEADING,
@@ -46,6 +44,7 @@ _HAO_MERGE_RESOLVER_CONFIG = MergeResolverCliConfig(
     missing_event_exit_code=1,
     apply_failed_exit_code=2,
 )
+_HAO_MERGE_RESOLVER_CONFIG = _HAO_MERGE_RESOLVER_RUNNER.config
 
 build_merge_prompt = build_merge_prompt_callback(
     prompt_heading=HAO_PROMPT_HEADING,
@@ -71,11 +70,11 @@ __all__ = [
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    return build_configured_merge_resolver_arg_parser(_HAO_MERGE_RESOLVER_CONFIG).parse_args(argv)
+    return _HAO_MERGE_RESOLVER_RUNNER.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
-    return run_configured_merge_resolver_cli(_HAO_MERGE_RESOLVER_CONFIG, argv)
+    return _HAO_MERGE_RESOLVER_RUNNER.run(argv)
 
 
 if __name__ == "__main__":
