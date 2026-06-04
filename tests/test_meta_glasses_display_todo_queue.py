@@ -118,7 +118,7 @@ def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     custom_board = tmp_path / TEMP_TASK_BOARD_FILENAME
     custom_state = tmp_path / "state"
     custom_worktrees = tmp_path / "worktrees"
-    custom_discovery = tmp_path / "discovery"
+    custom_discovery = REPO_ROOT / "data" / "custom_mgw_discovery"
     custom_objective = tmp_path / "objective.md"
     custom_bundles = tmp_path / "bundles"
     custom_graph = tmp_path / "objective_graph.json"
@@ -147,6 +147,11 @@ def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     assert supervisor_paths["objective_graph_path"] == custom_graph
     assert supervisor_paths["objective_dataset_dir"] == custom_datasets
     assert supervisor_paths["objective_todo_vector_index_path"] == custom_vector_index
+    assert supervisor_module._META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+        "discovery_dir",
+        "data/meta_glasses_display_widgets/discovery",
+        supervisor_paths,
+    ) == "data/custom_mgw_discovery"
 
 
 def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):

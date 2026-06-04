@@ -19,7 +19,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -48,6 +47,11 @@ _META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
+DISCOVERY_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+    "discovery_dir",
+    "data/meta_glasses_display_widgets/discovery",
+    {"discovery_dir": DISCOVERY_DIR},
+)
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "swissknife",
@@ -87,10 +91,6 @@ _android_validation_callbacks = _build_android_validation_callbacks(
 )
 
 
-def _discovery_output_path(repo_root: Path, discovery_dir: Path) -> str:
-    return _repo_relative_or_default(discovery_dir, repo_root, "data/meta_glasses_display_widgets/discovery")
-
-
 android_validation_environment = _android_validation_callbacks.environment_contract
 _bootstrap_android_validation_env = _android_validation_callbacks.apply_environment
 with_android_validation_env = _android_validation_callbacks.wrap_command
@@ -108,7 +108,7 @@ record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
     implementation_retry_budget=0,
     validation_depends_on_if_present=("MGW-014",),
     validation_task_command_transform=lambda command: with_android_validation_env(command),
-    discovery_output_path_default=_discovery_output_path(REPO_ROOT, DISCOVERY_DIR),
+    discovery_output_path_default=DISCOVERY_OUTPUT_PATH,
     strip_validation_failure_kind=True,
     repo_root=REPO_ROOT,
     prepare_environment=_ensure_ipfs_accelerate_path,
@@ -141,7 +141,11 @@ def main(argv: list[str] | None = None) -> None:
         record_retry_budget_findings,
         discovery_dir=paths["discovery_dir"],
         extra_kwargs={
-            "discovery_output_path": _discovery_output_path(REPO_ROOT, paths["discovery_dir"]),
+            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                "discovery_dir",
+                "data/meta_glasses_display_widgets/discovery",
+                paths,
+            ),
         },
     )
 

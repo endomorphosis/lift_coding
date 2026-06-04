@@ -21,7 +21,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
     prefixed_env_var as _prefixed_env_var,
-    repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -93,15 +92,15 @@ CODEBASE_SCAN_SKIP_PREFIXES = (
     "data/meta_glasses_display_widgets/state/",
     "data/meta_glasses_display_widgets/worktrees/",
 )
-TASK_BOARD_OUTPUT_PATH = _repo_relative_or_default(
-    TASK_BOARD_PATH,
-    REPO_ROOT,
+TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+    "todo_path",
     f"implementation_plan/docs/{_task_board_filename('18-swissknife-meta-glasses-display-widgets')}",
+    {"todo_path": TASK_BOARD_PATH},
 )
-DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
-    DISCOVERY_DIR,
-    REPO_ROOT,
+DISCOVERY_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+    "discovery_dir",
     "data/meta_glasses_display_widgets/discovery",
+    {"discovery_dir": DISCOVERY_DIR},
 )
 DISCOVERY_EXPANSION_OUTPUTS = (
     TASK_BOARD_OUTPUT_PATH,
@@ -218,10 +217,10 @@ def _run_supervisor(argv: list[str], *, paths: dict[str, Path]) -> None:
         record_retry_budget_findings,
         discovery_dir=paths["discovery_dir"],
         extra_kwargs={
-            "discovery_output_path": _repo_relative_or_default(
-                paths["discovery_dir"],
-                REPO_ROOT,
+            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                "discovery_dir",
                 "data/meta_glasses_display_widgets/discovery",
+                paths,
             ),
         },
     )
@@ -269,10 +268,10 @@ def main(argv: list[str] | None = None) -> None:
             objective_bundle_dir=paths["objective_bundle_dir"],
             objective_dataset_dir=paths["objective_dataset_dir"],
             objective_discovery_dir=paths["discovery_dir"],
-            objective_discovery_output_path=_repo_relative_or_default(
-                paths["discovery_dir"],
-                REPO_ROOT,
+            objective_discovery_output_path=_META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                "discovery_dir",
                 "data/meta_glasses_display_widgets/discovery",
+                paths,
             ),
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
@@ -285,10 +284,10 @@ def main(argv: list[str] | None = None) -> None:
         ),
         codebase=CodebaseRefillDefaults(
             codebase_scan_discovery_dir=paths["discovery_dir"],
-            codebase_scan_discovery_output_path=_repo_relative_or_default(
-                paths["discovery_dir"],
-                REPO_ROOT,
+            codebase_scan_discovery_output_path=_META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                "discovery_dir",
                 "data/meta_glasses_display_widgets/discovery",
+                paths,
             ),
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
