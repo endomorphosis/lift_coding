@@ -81,7 +81,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
-    build_runtime_environment_callback as _build_runtime_environment_callback,
+    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     ConfiguredCodebaseScanRecorder,
@@ -114,20 +114,14 @@ _HALLUCINATE_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     ("state_dir", "worktree_root"),
 )
 HALLUCINATE_BOOTSTRAP_SPECS = _HALLUCINATE_BOOTSTRAP_PATHS.specs
-_enter_runtime_environment = _build_runtime_environment_callback(
+_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+    primary_import_paths=(IPFS_ACCELERATE_ROOT,),
 )
-_ensure_ipfs_accelerate_path = _build_runtime_environment_callback(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT,),
-    chdir=False,
-)
-_ensure_runtime_pythonpath = _build_runtime_environment_callback(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-    chdir=False,
-)
+_enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
+_ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
+_ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve

@@ -106,7 +106,7 @@ DISCOVERY_EXPANSION_VALIDATION = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_runtime_environment_callback as _build_runtime_environment_callback,
+    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
@@ -141,10 +141,11 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")
 meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
 ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
-_enter_runtime_environment = _build_runtime_environment_callback(
+_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
 )
+_enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 

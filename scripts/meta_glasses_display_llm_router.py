@@ -15,7 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_runtime_environment_callback,
+    build_runtime_environment_callbacks,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -33,7 +33,8 @@ from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: 
 )
 
 
-_bootstrap_imports = build_runtime_environment_callback(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+_RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
+_bootstrap_imports = _RUNTIME_ENVIRONMENT.enter
 
 
 def _build_cli_config() -> TaskProposalRouterCliConfig:

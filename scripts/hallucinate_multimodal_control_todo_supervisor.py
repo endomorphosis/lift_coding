@@ -19,7 +19,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-    build_runtime_environment_callback as _build_runtime_environment_callback,
+    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -76,15 +76,12 @@ HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
     "hallucinate_multimodal_control_todo_supervisor.py",
     "hallucinate_multimodal_control_autopilot.py",
 )
-_enter_runtime_environment = _build_runtime_environment_callback(
+_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
 )
-_ensure_runtime_pythonpath = _build_runtime_environment_callback(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-    chdir=False,
-)
+_enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
+_ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     HALLUCINATE_ENV_PREFIX
 )
