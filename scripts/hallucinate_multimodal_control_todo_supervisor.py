@@ -25,15 +25,14 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
+    build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
     build_supervisor_codebase_scan_refill_callback,
     build_supervisor_objective_refill_callback,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
-    run_configured_portal_implementation_supervisor_with_runtime,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    build_supervisor_runtime_operations,
     pop_bool_flag as _pop_bool_flag,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
@@ -77,7 +76,7 @@ _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     HALLUCINATE_ENV_PREFIX
 )
-_hallucinate_supervisor_runtime = build_supervisor_runtime_operations(
+_hallucinate_supervisor_runtime = build_configured_supervisor_runtime(
     repo_root=REPO_ROOT,
     script_path=Path(__file__).resolve(),
     process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
@@ -157,13 +156,9 @@ def main(argv: list[str] | None = None) -> None:
         discovery_dir=DISCOVERY_DIR,
     )
 
-    run_configured_portal_implementation_supervisor_with_runtime(
+    _hallucinate_supervisor_runtime.run_configured(
         args,
-        repo_root=REPO_ROOT,
         logger=logger,
-        script_path=Path(__file__).resolve(),
-        process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
-        prepare_environment=_ensure_runtime_pythonpath,
         daemon_script_path=DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(

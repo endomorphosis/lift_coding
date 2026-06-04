@@ -114,13 +114,12 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
+    build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
-    run_configured_portal_implementation_supervisor_with_runtime,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    build_supervisor_runtime_operations,
     pop_bool_flag as _pop_bool_flag,
 )
 
@@ -151,7 +150,7 @@ _RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = ("meta_glasses_display_todo_supervisor.py",)
-_meta_display_supervisor_runtime = build_supervisor_runtime_operations(
+_meta_display_supervisor_runtime = build_configured_supervisor_runtime(
     repo_root=REPO_ROOT,
     script_path=Path(__file__).resolve(),
     process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
@@ -236,13 +235,9 @@ def _run_supervisor(argv: list[str], *, paths: dict[str, Path], ensure_running: 
 
     if ensure_running:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    run_configured_portal_implementation_supervisor_with_runtime(
+    _meta_display_supervisor_runtime.run_configured(
         argv,
-        repo_root=REPO_ROOT,
         logger=logger,
-        script_path=Path(__file__).resolve(),
-        process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
-        prepare_environment=_ensure_runtime_pythonpath,
         daemon_script_path=DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(

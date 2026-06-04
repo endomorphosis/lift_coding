@@ -189,20 +189,25 @@ def test_meta_display_supervisor_ensure_running_flag_uses_runtime_helper(tmp_pat
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_BUNDLE_DIR", str(tmp_path / "objective_bundles"))
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_DATASET_DIR", str(tmp_path / "objective_datasets"))
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_TODO_VECTOR_INDEX_PATH", str(tmp_path / "todo_vector_index.json"))
+    runtime_class = type(supervisor_module._meta_display_supervisor_runtime)
     monkeypatch.setattr(
-        supervisor_module,
-        "run_configured_portal_implementation_supervisor_with_runtime",
-        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+        runtime_class,
+        "run_configured",
+        lambda self, args, **kwargs: captured.setdefault(
+            "payload",
+            {"runtime": self, "args": args, "kwargs": kwargs},
+        ),
     )
 
     supervisor_module.main(["--ensure-running", "--once"])
 
     payload = captured["payload"]
+    runtime = payload["runtime"]
     args = payload["args"]
     kwargs = payload["kwargs"]
     assert "--ensure-running" not in args
     assert kwargs["ensure_running"] is True
-    assert kwargs["process_match_any"] == supervisor_module.META_DISPLAY_SUPERVISOR_PROCESS_MARKERS
+    assert runtime.process_match_any == supervisor_module.META_DISPLAY_SUPERVISOR_PROCESS_MARKERS
 
 
 def test_codebase_scan_skips_generated_discovery_dirs():

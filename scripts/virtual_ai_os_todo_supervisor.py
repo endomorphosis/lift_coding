@@ -83,11 +83,10 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
+    build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
-    run_configured_portal_implementation_supervisor_with_runtime,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    build_supervisor_runtime_operations,
     pop_bool_flag as _pop_bool_flag,
 )
 
@@ -119,7 +118,7 @@ _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
 )
 logger = logging.getLogger("virtual_ai_os_todo_supervisor")
 VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = ("virtual_ai_os_todo_supervisor.py",)
-_virtual_ai_os_supervisor_runtime = build_supervisor_runtime_operations(
+_virtual_ai_os_supervisor_runtime = build_configured_supervisor_runtime(
     repo_root=REPO_ROOT,
     script_path=Path(__file__).resolve(),
     process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
@@ -181,13 +180,9 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
     )
-    run_configured_portal_implementation_supervisor_with_runtime(
+    _virtual_ai_os_supervisor_runtime.run_configured(
         args,
-        repo_root=REPO_ROOT,
         logger=logger,
-        script_path=Path(__file__).resolve(),
-        process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
-        prepare_environment=_ensure_runtime_pythonpath,
         daemon_script_path=DAEMON_SCRIPT_PATH,
         worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
         once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",

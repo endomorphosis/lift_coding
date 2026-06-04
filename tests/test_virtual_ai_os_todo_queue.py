@@ -152,15 +152,20 @@ def test_virtual_ai_os_supervisor_creates_bootstrap_directories(tmp_path):
 def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     captured: dict[str, object] = {}
+    runtime_class = type(supervisor_module._virtual_ai_os_supervisor_runtime)
     monkeypatch.setattr(
-        supervisor_module,
-        "run_configured_portal_implementation_supervisor_with_runtime",
-        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+        runtime_class,
+        "run_configured",
+        lambda self, args, **kwargs: captured.setdefault(
+            "payload",
+            {"runtime": self, "args": args, "kwargs": kwargs},
+        ),
     )
 
     supervisor_module.main(["--once"])
 
     payload = captured["payload"]
+    runtime = payload["runtime"]
     args = payload["args"]
     kwargs = payload["kwargs"]
     flag_index = args.index("--objective-surplus-findings-per-goal")
@@ -169,7 +174,7 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     focus_index = args.index("--objective-interoperability-focus")
     assert args[focus_index + 1] == "hallucinate_app"
     assert kwargs["ensure_running"] is False
-    assert kwargs["process_match_any"] == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
+    assert runtime.process_match_any == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
 
 
 def test_virtual_ai_os_supervisor_ensure_running_flag_uses_runtime_helper(tmp_path, monkeypatch):
@@ -178,20 +183,25 @@ def test_virtual_ai_os_supervisor_ensure_running_flag_uses_runtime_helper(tmp_pa
     monkeypatch.setenv("HANDSFREE_VAI_OS_TODO_PATH", str(tmp_path / _task_board_filename("board")))
     monkeypatch.setenv("HANDSFREE_VAI_OS_STATE_DIR", str(tmp_path / "state"))
     monkeypatch.setenv("HANDSFREE_VAI_OS_WORKTREE_ROOT", str(tmp_path / "worktrees"))
+    runtime_class = type(supervisor_module._virtual_ai_os_supervisor_runtime)
     monkeypatch.setattr(
-        supervisor_module,
-        "run_configured_portal_implementation_supervisor_with_runtime",
-        lambda args, **kwargs: captured.setdefault("payload", {"args": args, "kwargs": kwargs}),
+        runtime_class,
+        "run_configured",
+        lambda self, args, **kwargs: captured.setdefault(
+            "payload",
+            {"runtime": self, "args": args, "kwargs": kwargs},
+        ),
     )
 
     supervisor_module.main(["--ensure-running", "--once"])
 
     payload = captured["payload"]
+    runtime = payload["runtime"]
     args = payload["args"]
     kwargs = payload["kwargs"]
     assert "--ensure-running" not in args
     assert kwargs["ensure_running"] is True
-    assert kwargs["process_match_any"] == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
+    assert runtime.process_match_any == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
 
 
 def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path):
