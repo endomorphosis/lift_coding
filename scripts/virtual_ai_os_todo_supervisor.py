@@ -16,7 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
-    prefixed_env_int as _prefixed_env_int,
+    prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -41,31 +41,12 @@ DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
     REPO_ROOT,
     "data/virtual_ai_os/discovery",
 )
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = _prefixed_env_int(
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    "OBJECTIVE_SCAN_MIN_OPEN_TASKS",
-    20,
-)
-OBJECTIVE_SCAN_MAX_FINDINGS = _prefixed_env_int(
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    "OBJECTIVE_SCAN_MAX_FINDINGS",
-    12,
-)
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = _prefixed_env_int(
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    "OBJECTIVE_SCAN_COOLDOWN_SECONDS",
-    900,
-)
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = _prefixed_env_int(
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    "OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL",
-    6,
-)
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = _prefixed_env_int(
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    "OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO",
-    4,
-)
+OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
+OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
+OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
 # scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
