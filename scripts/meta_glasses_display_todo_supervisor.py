@@ -18,9 +18,9 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
-    prefixed_env_var as _prefixed_env_var,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -125,7 +125,6 @@ DISCOVERY_EXPANSION_VALIDATION = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
@@ -192,8 +191,8 @@ SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment
 """
 
 
-_default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
-    primary_env_var=_prefixed_env_var(META_DISPLAY_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    META_DISPLAY_ENV_PREFIX
 )
 
 

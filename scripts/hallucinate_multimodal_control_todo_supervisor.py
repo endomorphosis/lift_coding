@@ -18,9 +18,8 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
-    prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -86,8 +85,8 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
     chdir=False,
 )
-_default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
-    primary_env_var=_prefixed_env_var(HALLUCINATE_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    HALLUCINATE_ENV_PREFIX
 )
 _hallucinate_supervisor_runtime = build_supervisor_runtime_operations(
     repo_root=REPO_ROOT,

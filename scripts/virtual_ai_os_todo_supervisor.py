@@ -17,7 +17,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
     prefixed_env_int as _prefixed_env_int,
-    prefixed_env_var as _prefixed_env_var,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -95,8 +94,8 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_default_llm_merge_resolver_command_callback as _build_default_llm_merge_resolver_command_callback,
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_runtime_environment_callback as _build_runtime_environment_callback,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -133,8 +132,8 @@ _ensure_runtime_pythonpath = _build_runtime_environment_callback(
 )
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
-_default_llm_merge_resolver_command = _build_default_llm_merge_resolver_command_callback(
-    primary_env_var=_prefixed_env_var(VIRTUAL_AI_OS_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    VIRTUAL_AI_OS_ENV_PREFIX
 )
 
 
