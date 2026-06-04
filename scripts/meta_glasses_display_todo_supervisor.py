@@ -113,9 +113,9 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
-    ImplementationSupervisorDefaults,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_implementation_supervisor_defaults_from_paths,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
     run_configured_portal_implementation_supervisor,
@@ -230,12 +230,10 @@ def main(argv: list[str] | None = None) -> None:
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
-        defaults=ImplementationSupervisorDefaults(
-            todo_path=paths["todo_path"],
-            state_dir=paths["state_dir"],
+        defaults=build_implementation_supervisor_defaults_from_paths(
+            paths,
             task_prefix="## MGW-",
             state_prefix="meta_glasses_display",
-            worktree_root=paths["worktree_root"],
             daemon_script_path=DAEMON_SCRIPT_PATH,
             supervisor_script_path=Path(__file__).resolve(),
             todo_path_flag=TASK_BOARD_PATH_OPTION,

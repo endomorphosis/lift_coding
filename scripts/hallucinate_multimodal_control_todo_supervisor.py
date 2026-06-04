@@ -24,9 +24,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
-    ImplementationSupervisorDefaults,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_implementation_supervisor_defaults_from_paths,
     build_supervisor_codebase_scan_refill_callback,
     build_supervisor_objective_refill_callback,
     build_supervisor_refill_hooks,
@@ -122,12 +122,11 @@ def main(argv: list[str] | None = None) -> None:
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
-        defaults=ImplementationSupervisorDefaults(
-            todo_path=paths[TASK_BOARD_PATH_KEY],
-            state_dir=paths["state_dir"],
+        defaults=build_implementation_supervisor_defaults_from_paths(
+            paths,
+            todo_path_key=TASK_BOARD_PATH_KEY,
             task_prefix="## HAO-",
             state_prefix="hallucinate_multimodal_control",
-            worktree_root=paths["worktree_root"],
             daemon_script_path=DAEMON_SCRIPT_PATH,
             supervisor_script_path=Path(__file__).resolve(),
             todo_path_flag=TASK_BOARD_PATH_OPTION,

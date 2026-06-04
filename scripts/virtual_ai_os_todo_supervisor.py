@@ -81,9 +81,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     CodebaseRefillDefaults,
-    ImplementationSupervisorDefaults,
     ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_implementation_supervisor_defaults_from_paths,
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -126,12 +126,10 @@ def main(argv: list[str] | None = None) -> None:
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
-        defaults=ImplementationSupervisorDefaults(
-            todo_path=paths["todo_path"],
-            state_dir=paths["state_dir"],
+        defaults=build_implementation_supervisor_defaults_from_paths(
+            paths,
             task_prefix="## VAI-",
             state_prefix="virtual_ai_os",
-            worktree_root=paths["worktree_root"],
             daemon_script_path=DAEMON_SCRIPT_PATH,
             supervisor_script_path=Path(__file__).resolve(),
             llm_merge_resolver_command=_default_llm_merge_resolver_command(),
