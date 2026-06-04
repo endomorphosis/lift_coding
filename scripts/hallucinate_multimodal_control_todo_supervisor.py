@@ -23,10 +23,10 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    CodebaseRefillDefaults,
-    ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_codebase_refill_defaults_from_paths,
     build_implementation_supervisor_defaults_from_paths,
+    build_objective_refill_defaults_from_paths,
     build_supervisor_codebase_scan_refill_callback,
     build_supervisor_objective_refill_callback,
     build_supervisor_refill_hooks,
@@ -132,8 +132,9 @@ def main(argv: list[str] | None = None) -> None:
             todo_path_flag=TASK_BOARD_PATH_OPTION,
             llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         ),
-        objective=ObjectiveRefillDefaults(
-            objective_path=paths["objective_goal_heap_path"],
+        objective=build_objective_refill_defaults_from_paths(
+            paths,
+            objective_path_key="objective_goal_heap_path",
             objective_graph_path=OBJECTIVE_GRAPH_PATH,
             objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
             objective_dataset_dir=OBJECTIVE_DATASET_DIR,
@@ -148,7 +149,8 @@ def main(argv: list[str] | None = None) -> None:
             objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
             seed_interoperability_goals=True,
         ),
-        codebase=CodebaseRefillDefaults(
+        codebase=build_codebase_refill_defaults_from_paths(
+            paths,
             codebase_scan_discovery_dir=DISCOVERY_DIR,
             codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
             codebase_scan_min_open_tasks=CODEBASE_SCAN_MIN_OPEN_TASKS,

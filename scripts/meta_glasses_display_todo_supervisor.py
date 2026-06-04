@@ -112,10 +112,10 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    CodebaseRefillDefaults,
-    ObjectiveRefillDefaults,
     apply_portal_implementation_supervisor_defaults,
+    build_codebase_refill_defaults_from_paths,
     build_implementation_supervisor_defaults_from_paths,
+    build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks,
     build_supervisor_retry_budget_refill_callback,
     run_configured_portal_implementation_supervisor,
@@ -227,6 +227,11 @@ def main(argv: list[str] | None = None) -> None:
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(paths["todo_path"])
     enforce_android_validation_environment(paths["todo_path"])
+    discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+        "discovery_dir",
+        "data/meta_glasses_display_widgets/discovery",
+        paths,
+    )
 
     args = apply_portal_implementation_supervisor_defaults(
         args,
@@ -239,33 +244,27 @@ def main(argv: list[str] | None = None) -> None:
             todo_path_flag=TASK_BOARD_PATH_OPTION,
             llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         ),
-        objective=ObjectiveRefillDefaults(
-            objective_path=paths["objective_heap_path"],
-            objective_graph_path=paths["objective_graph_path"],
-            objective_bundle_dir=paths["objective_bundle_dir"],
-            objective_dataset_dir=paths["objective_dataset_dir"],
-            objective_discovery_dir=paths["discovery_dir"],
-            objective_discovery_output_path=_META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                "discovery_dir",
-                "data/meta_glasses_display_widgets/discovery",
-                paths,
-            ),
+        objective=build_objective_refill_defaults_from_paths(
+            paths,
+            objective_path_key="objective_heap_path",
+            objective_graph_path_key="objective_graph_path",
+            objective_bundle_dir_key="objective_bundle_dir",
+            objective_dataset_dir_key="objective_dataset_dir",
+            objective_discovery_dir_key="discovery_dir",
+            objective_discovery_output_path=discovery_output_path,
             objective_scan_min_open_tasks=OBJECTIVE_SCAN_MIN_OPEN_TASKS,
             objective_scan_max_findings=OBJECTIVE_SCAN_MAX_FINDINGS,
             objective_scan_cooldown_seconds=OBJECTIVE_SCAN_COOLDOWN_SECONDS,
-            objective_todo_vector_index_path=paths["objective_todo_vector_index_path"],
+            objective_todo_vector_index_path_key="objective_todo_vector_index_path",
             objective_surplus_findings_per_goal=OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
             objective_surplus_min_terms_per_todo=OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
             objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
             seed_interoperability_goals=True,
         ),
-        codebase=CodebaseRefillDefaults(
-            codebase_scan_discovery_dir=paths["discovery_dir"],
-            codebase_scan_discovery_output_path=_META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                "discovery_dir",
-                "data/meta_glasses_display_widgets/discovery",
-                paths,
-            ),
+        codebase=build_codebase_refill_defaults_from_paths(
+            paths,
+            codebase_scan_discovery_dir_key="discovery_dir",
+            codebase_scan_discovery_output_path=discovery_output_path,
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
