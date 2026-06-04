@@ -15,7 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
+    prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
@@ -86,9 +86,8 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     apply_portal_implementation_supervisor_defaults,
 )
 
-VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
+VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     VIRTUAL_AI_OS_ENV_PREFIX,
-    "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(

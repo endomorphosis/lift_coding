@@ -19,7 +19,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-    prefixed_env_csv_tuple as _prefixed_env_csv_tuple,
+    prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -121,9 +121,8 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     run_configured_portal_implementation_supervisor,
 )
 
-META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_env_csv_tuple(
+META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     META_DISPLAY_ENV_PREFIX,
-    "INTEROPERABILITY_FOCUS",
     "hallucinate_app",
 )
 
