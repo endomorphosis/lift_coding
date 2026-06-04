@@ -27,39 +27,39 @@ PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-gla
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
-    run_configured_task_proposal_router_cli,
+    build_configured_task_proposal_router_runner,
 )
 
 
 _RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(REPO_ROOT, (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
 _bootstrap_imports = _RUNTIME_ENVIRONMENT.enter
+TASK_PROPOSAL_RUNNER = build_configured_task_proposal_router_runner(
+    repo_root=REPO_ROOT,
+    task_board_path=TASK_BOARD_PATH,
+    task_header_prefix="## MGW-",
+    plan_path=PLAN_PATH,
+    artifact_dir=ARTIFACT_DIR,
+    prompt_intro="You are helping implement the HandsFree/Swissknife Meta glasses display-widget roadmap.",
+    requested_outputs=(
+        "exact files to edit",
+        "data contracts or APIs to add",
+        "mocks/fixtures/tests needed to run without hardware",
+        "validation commands",
+        "risks or blockers",
+    ),
+    no_open_task_message="Display-widget task board has no open task.",
+    description=(
+        "Generate an implementation proposal for a Meta glasses display-widget "
+        "task-board item with llm_router."
+    ),
+    task_id_help="Specific MGW task id. Defaults to the first open task.",
+    hidden_task_board_options=(_task_board_path_option(),),
+    bootstrap=_bootstrap_imports,
+)
 
 
 def main(argv: list[str] | None = None) -> int:
-    return run_configured_task_proposal_router_cli(
-        argv,
-        repo_root=REPO_ROOT,
-        task_board_path=TASK_BOARD_PATH,
-        task_header_prefix="## MGW-",
-        plan_path=PLAN_PATH,
-        artifact_dir=ARTIFACT_DIR,
-        prompt_intro="You are helping implement the HandsFree/Swissknife Meta glasses display-widget roadmap.",
-        requested_outputs=(
-            "exact files to edit",
-            "data contracts or APIs to add",
-            "mocks/fixtures/tests needed to run without hardware",
-            "validation commands",
-            "risks or blockers",
-        ),
-        no_open_task_message="Display-widget task board has no open task.",
-        description=(
-            "Generate an implementation proposal for a Meta glasses display-widget "
-            "task-board item with llm_router."
-        ),
-        task_id_help="Specific MGW task id. Defaults to the first open task.",
-        hidden_task_board_options=(_task_board_path_option(),),
-        bootstrap=_bootstrap_imports,
-    )
+    return TASK_PROPOSAL_RUNNER.run(argv)
 
 
 if __name__ == "__main__":
