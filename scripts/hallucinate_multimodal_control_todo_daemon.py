@@ -89,7 +89,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
@@ -107,16 +107,14 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     HALLUCINATE_ENV_PREFIX,
     "hallucinate_app",
 )
-_HALLUCINATE_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+_HALLUCINATE_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
     REPO_ROOT,
     HALLUCINATE_ENV_PREFIX,
-    (
-        (TASK_BOARD_PATH_KEY, DEFAULT_TODO_PATH),
-        ("objective_goal_heap_path", DEFAULT_OBJECTIVE_GOAL_HEAP_PATH),
-        ("state_dir", DEFAULT_STATE_DIR),
-        ("worktree_root", DEFAULT_WORKTREE_ROOT),
-    ),
-    ("state_dir", "worktree_root"),
+    DEFAULT_TODO_PATH,
+    HALLUCINATE_DATA_PATHS,
+    todo_key=TASK_BOARD_PATH_KEY,
+    objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    objective_path_key="objective_goal_heap_path",
 )
 HALLUCINATE_BOOTSTRAP_SPECS = _HALLUCINATE_BOOTSTRAP_PATHS.specs
 _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(

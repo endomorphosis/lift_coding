@@ -17,7 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
-    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
@@ -41,21 +41,21 @@ OBJECTIVE_GRAPH_PATH = META_DISPLAY_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = META_DISPLAY_DATA_PATHS.objective_dataset_dir
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = META_DISPLAY_DATA_PATHS.objective_todo_vector_index_path
-_META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+_META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
-    (
-        ("todo_path", TASK_BOARD_PATH),
-        ("state_dir", STATE_DIR),
-        ("worktree_root", WORKTREE_ROOT),
-        ("discovery_dir", DISCOVERY_DIR),
-        ("objective_heap_path", OBJECTIVE_HEAP_PATH),
-        ("objective_graph_path", OBJECTIVE_GRAPH_PATH),
-        ("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR),
-        ("objective_dataset_dir", OBJECTIVE_DATASET_DIR),
-        ("objective_todo_vector_index_path", OBJECTIVE_TODO_VECTOR_INDEX_PATH),
+    TASK_BOARD_PATH,
+    META_DISPLAY_DATA_PATHS,
+    objective_path=OBJECTIVE_HEAP_PATH,
+    namespace_keys=(
+        "state_dir",
+        "worktree_root",
+        "discovery_dir",
+        "objective_graph_path",
+        "objective_bundle_dir",
+        "objective_dataset_dir",
+        "objective_todo_vector_index_path",
     ),
-    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir", "objective_dataset_dir"),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(META_DISPLAY_ENV_PREFIX)

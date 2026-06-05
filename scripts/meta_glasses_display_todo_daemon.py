@@ -17,7 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_android_validation_callbacks as _build_android_validation_callbacks,
-    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
@@ -34,18 +34,13 @@ WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
 DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
-_META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+_META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
-    (
-        ("todo_path", TASK_BOARD_PATH),
-        ("state_dir", STATE_DIR),
-        ("worktree_root", WORKTREE_ROOT),
-        ("discovery_dir", DISCOVERY_DIR),
-        ("objective_heap_path", OBJECTIVE_HEAP_PATH),
-        ("objective_bundle_dir", OBJECTIVE_BUNDLE_DIR),
-    ),
-    ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
+    TASK_BOARD_PATH,
+    META_DISPLAY_DATA_PATHS,
+    objective_path=OBJECTIVE_HEAP_PATH,
+    namespace_keys=("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 _meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(

@@ -76,7 +76,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
+    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
@@ -90,15 +90,11 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     VIRTUAL_AI_OS_ENV_PREFIX,
     "hallucinate_app",
 )
-_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
+_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
     REPO_ROOT,
     VIRTUAL_AI_OS_ENV_PREFIX,
-    (
-        ("todo_path", DEFAULT_TODO_PATH),
-        ("state_dir", DEFAULT_STATE_DIR),
-        ("worktree_root", DEFAULT_WORKTREE_ROOT),
-    ),
-    ("state_dir", "worktree_root"),
+    DEFAULT_TODO_PATH,
+    VIRTUAL_AI_OS_DATA_PATHS,
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
 _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
