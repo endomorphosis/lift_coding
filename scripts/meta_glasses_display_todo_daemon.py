@@ -42,14 +42,15 @@ _META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks
     namespace_keys=("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
+META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()
 _meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
     "discovery_dir",
-    "data/meta_glasses_display_widgets/discovery",
+    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
 )
 _meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_kwargs_factory(
     "discovery_output_path",
     "discovery_dir",
-    "data/meta_glasses_display_widgets/discovery",
+    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
 )
 DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
 VALIDATION_RETRY_BUDGET = 3

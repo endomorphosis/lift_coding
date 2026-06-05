@@ -48,10 +48,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "hallucinate_multimodal_control_todo_daemon.py")
-DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
-    "discovery_dir",
-    "data/hallucinate_multimodal_control/discovery",
-)
+DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
 HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
     "hallucinate_multimodal_control_todo_supervisor.py",
     "hallucinate_multimodal_control_autopilot.py",

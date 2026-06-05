@@ -47,10 +47,7 @@ DISCOVERY_DIR = HALLUCINATE_DATA_PATHS.discovery_dir
 OBJECTIVE_BUNDLE_DIR = HALLUCINATE_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = HALLUCINATE_DATA_PATHS.objective_dataset_dir
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = HALLUCINATE_DATA_PATHS.objective_todo_vector_index_path
-DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
-    "discovery_dir",
-    "data/hallucinate_multimodal_control/discovery",
-)
+DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(HALLUCINATE_ENV_PREFIX)

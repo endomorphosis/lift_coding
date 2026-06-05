@@ -59,6 +59,7 @@ _META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks
     ),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
+META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(META_DISPLAY_ENV_PREFIX)
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
 OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
@@ -85,12 +86,12 @@ TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
 )
 _meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
     "discovery_dir",
-    "data/meta_glasses_display_widgets/discovery",
+    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
 )
 _meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_kwargs_factory(
     "discovery_output_path",
     "discovery_dir",
-    "data/meta_glasses_display_widgets/discovery",
+    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
 )
 DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
 DISCOVERY_EXPANSION_OUTPUTS = (
