@@ -211,7 +211,10 @@ def test_discovery_expansion_task_waits_for_initial_backlog():
 
 def test_hallucinate_autopilot_defaults_to_implement():
     autopilot = _load_script_module("hallucinate_multimodal_control_autopilot")
+    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_autopilot.py").read_text(encoding="utf-8")
 
+    assert "build_module_implementation_supervisor_entrypoint(" in source
+    assert "def _supervisor_main(" not in source
     assert autopilot.with_autopilot_defaults([]) == ["--implement"]
     assert autopilot.with_autopilot_defaults(["--once"]) == ["--implement", "--once"]
     assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == ["--no-implement", "--once"]
