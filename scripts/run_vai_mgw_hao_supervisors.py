@@ -53,32 +53,29 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
     ConfiguredMultiSupervisorCliRunner,
     ImplementationSupervisorTrackConfig,
     build_configured_multi_supervisor_cli_runner,
-    implementation_supervisor_compact_track_specs,
     utc_run_stamp,
 )
 
 
-VAI_MGW_HAO_IMPLEMENTATION_TRACKS = implementation_supervisor_compact_track_specs(
-    (
-        ImplementationSupervisorTrackConfig(
-            name="VAI",
-            script_path="scripts/virtual_ai_os_todo_supervisor.py",
-            state_dir="data/virtual_ai_os/state",
-            state_prefix="virtual_ai_os",
-        ),
-        ImplementationSupervisorTrackConfig(
-            name="MGW",
-            script_path="scripts/meta_glasses_display_todo_supervisor.py",
-            state_dir="data/meta_glasses_display_widgets/state",
-            state_prefix="meta_glasses_display",
-        ),
-        ImplementationSupervisorTrackConfig(
-            name="HAO",
-            script_path="scripts/hallucinate_multimodal_control_todo_supervisor.py",
-            state_dir="data/hallucinate_multimodal_control/state",
-            state_prefix="hallucinate_multimodal_control",
-        ),
-    )
+VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
+    ImplementationSupervisorTrackConfig(
+        name="VAI",
+        script_path="scripts/virtual_ai_os_todo_supervisor.py",
+        state_dir="data/virtual_ai_os/state",
+        state_prefix="virtual_ai_os",
+    ),
+    ImplementationSupervisorTrackConfig(
+        name="MGW",
+        script_path="scripts/meta_glasses_display_todo_supervisor.py",
+        state_dir="data/meta_glasses_display_widgets/state",
+        state_prefix="meta_glasses_display",
+    ),
+    ImplementationSupervisorTrackConfig(
+        name="HAO",
+        script_path="scripts/hallucinate_multimodal_control_todo_supervisor.py",
+        state_dir="data/hallucinate_multimodal_control/state",
+        state_prefix="hallucinate_multimodal_control",
+    ),
 )
 
 
@@ -94,7 +91,7 @@ def build_runner() -> ConfiguredMultiSupervisorCliRunner:
         label="VAI/MGW/HAO supervisor run",
         implementation_supervisor_defaults=True,
         implementation_supervisor_command=resolver_command,
-        implementation_tracks=VAI_MGW_HAO_IMPLEMENTATION_TRACKS,
+        implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
     )
 
 
