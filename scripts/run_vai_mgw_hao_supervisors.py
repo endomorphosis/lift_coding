@@ -16,7 +16,6 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_runtime_environment_callbacks,
-    env_str,
     repo_external_package_roots,
     repo_root_from_env,
     repo_script_command,
@@ -45,7 +44,6 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
     ConfiguredMultiSupervisorLauncher,
     ImplementationSupervisorTrackConfig,
     build_configured_multi_supervisor_launcher,
-    utc_run_stamp,
 )
 
 
@@ -77,8 +75,9 @@ def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     resolver_command = repo_script_command(REPO_ROOT, "scripts/llm_merge_resolver_fallback.sh")
     return build_configured_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
-        duration_seconds=env_str("DURATION_SECONDS", "28800"),
-        stamp=env_str("STAMP", utc_run_stamp()),
+        duration_seconds=28800,
+        duration_seconds_env_var="DURATION_SECONDS",
+        stamp_env_var="STAMP",
         master_dir="data/agent_supervisor",
         label="VAI/MGW/HAO supervisor run",
         implementation_supervisor_defaults=True,
