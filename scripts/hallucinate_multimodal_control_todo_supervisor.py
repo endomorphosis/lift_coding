@@ -19,6 +19,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
+    repo_script_path as _repo_script_path,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_configured_supervisor_bootstrap_runner,
@@ -46,7 +47,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
-DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"
+DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "hallucinate_multimodal_control_todo_daemon.py")
 DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
     "discovery_dir",
     "data/hallucinate_multimodal_control/discovery",
