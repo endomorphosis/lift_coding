@@ -26,6 +26,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    apply_env_defaults,
     build_runtime_environment_callbacks,
     env_str,
 )
@@ -35,14 +36,17 @@ _RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
 )
+MULTI_SUPERVISOR_ENV_DEFAULTS = {
+    "PYTHONUNBUFFERED": "1",
+    "CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS": "60",
+    "PREFER_COPILOT_MERGE_RESOLVER": "1",
+}
 
 
 def configure_environment() -> None:
     """Apply lift runtime defaults before launching child supervisor processes."""
 
-    os.environ.setdefault("PYTHONUNBUFFERED", "1")
-    os.environ.setdefault("CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS", "60")
-    os.environ.setdefault("PREFER_COPILOT_MERGE_RESOLVER", "1")
+    apply_env_defaults(MULTI_SUPERVISOR_ENV_DEFAULTS)
     _RUNTIME_ENVIRONMENT.ensure_pythonpath()
 
 
