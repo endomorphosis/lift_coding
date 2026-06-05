@@ -15,14 +15,11 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_repo_runtime_environment_callbacks,
     repo_root_from_env,
-    repo_script_command,
 )
 
 
 REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
-_RUNTIME_ENVIRONMENT = build_repo_runtime_environment_callbacks(REPO_ROOT)
 MULTI_SUPERVISOR_ENV_DEFAULTS = {
     "PYTHONUNBUFFERED": "1",
     "CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS": "60",
@@ -34,7 +31,7 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
     ConfiguredMultiSupervisorCliRunner,
     ConfiguredMultiSupervisorLauncher,
     ImplementationSupervisorTrackConfig,
-    build_configured_multi_supervisor_launcher,
+    build_repo_implementation_multi_supervisor_launcher,
 )
 
 
@@ -63,19 +60,16 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
 def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     """Return the configured reusable launcher for this repository's tracks."""
 
-    resolver_command = repo_script_command(REPO_ROOT, "scripts/llm_merge_resolver_fallback.sh")
-    return build_configured_multi_supervisor_launcher(
+    return build_repo_implementation_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
+        implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
+        resolver_script_path="scripts/llm_merge_resolver_fallback.sh",
         duration_seconds=28800,
         duration_seconds_env_var="DURATION_SECONDS",
         stamp_env_var="STAMP",
         master_dir="data/agent_supervisor",
         label="VAI/MGW/HAO supervisor run",
-        implementation_supervisor_defaults=True,
-        implementation_supervisor_command=resolver_command,
-        implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
         env_defaults=MULTI_SUPERVISOR_ENV_DEFAULTS,
-        prepare_environment=_RUNTIME_ENVIRONMENT.ensure_pythonpath,
     )
 
 
