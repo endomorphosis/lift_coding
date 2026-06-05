@@ -90,6 +90,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
     build_daemon_refill_hooks_factory_from_recorders,
+    implementation_state_artifact_paths,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -119,6 +120,10 @@ _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
 ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
+HALLUCINATE_STATE_PATHS = implementation_state_artifact_paths(
+    DEFAULT_STATE_DIR,
+    "hallucinate_multimodal_control",
+)
 
 
 record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
@@ -128,8 +133,8 @@ record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
     discovery_dir=DISCOVERY_DIR,
     default_bundle_dir=OBJECTIVE_BUNDLE_DIR,
     default_dataset_dir=OBJECTIVE_DATASET_DIR,
-    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
-    state_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
+    strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
+    state_path=HALLUCINATE_STATE_PATHS["state_path"],
     task_header_prefix_value="## HAO-",
     depends_on_if_present=("HAO-013",),
     **OBJECTIVE_REFILL_SETTINGS.recorder_kwargs(),
@@ -142,8 +147,8 @@ record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
 
 record_codebase_scan_findings = ConfiguredCodebaseScanRecorder(
     todo_path=DEFAULT_TODO_PATH,
-    state_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_task_state.json",
-    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    state_path=HALLUCINATE_STATE_PATHS["state_path"],
+    strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
     discovery_dir=DISCOVERY_DIR,
     repo_root=REPO_ROOT,
     task_header_prefix_value="## HAO-",
@@ -158,8 +163,8 @@ record_codebase_scan_findings = ConfiguredCodebaseScanRecorder(
 
 record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
     todo_path=DEFAULT_TODO_PATH,
-    events_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl",
-    strategy_path=DEFAULT_STATE_DIR / "hallucinate_multimodal_control_strategy.json",
+    events_path=HALLUCINATE_STATE_PATHS["events_path"],
+    strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
     discovery_dir=DISCOVERY_DIR,
     task_header_prefix_value="## HAO-",
     validation_retry_budget=VALIDATION_RETRY_BUDGET,

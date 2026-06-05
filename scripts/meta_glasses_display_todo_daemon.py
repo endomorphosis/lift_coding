@@ -67,6 +67,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetry
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
     build_daemon_refill_hooks_factory_from_recorders,
+    implementation_state_artifact_paths,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -79,6 +80,10 @@ _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
+META_DISPLAY_STATE_PATHS = implementation_state_artifact_paths(
+    STATE_DIR,
+    "meta_glasses_display",
+)
 _android_validation_callbacks = _build_android_validation_callbacks(
     REPO_ROOT,
     todo_path=TASK_BOARD_PATH,
@@ -93,8 +98,8 @@ enforce_android_validation_environment = _android_validation_callbacks.enforce_t
 
 record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
     todo_path=TASK_BOARD_PATH,
-    events_path=STATE_DIR / "meta_glasses_display_events.jsonl",
-    strategy_path=STATE_DIR / "meta_glasses_display_strategy.json",
+    events_path=META_DISPLAY_STATE_PATHS["events_path"],
+    strategy_path=META_DISPLAY_STATE_PATHS["strategy_path"],
     discovery_dir=DISCOVERY_DIR,
     task_header_prefix_value="## MGW-",
     validation_retry_budget=VALIDATION_RETRY_BUDGET,

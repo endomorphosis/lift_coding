@@ -15,9 +15,15 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import prefixed_env_var as _prefixed_env_var  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
+    implementation_state_artifact_paths,
+)
 
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
-DEFAULT_EVENTS_PATH = DEFAULT_STATE_DIR / "hallucinate_multimodal_control_events.jsonl"
+DEFAULT_EVENTS_PATH = implementation_state_artifact_paths(
+    DEFAULT_STATE_DIR,
+    "hallucinate_multimodal_control",
+)["events_path"]
 HAO_ENV_PREFIX = "HANDSFREE_HAO"
 HAO_LLM_MERGE_RESOLVER_COMMAND_ENV = _prefixed_env_var(HAO_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
 HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
