@@ -79,7 +79,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_configured_supervisor_bootstrap_runner,
-    build_configured_supervisor_runtime,
+    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
 )
@@ -104,13 +104,12 @@ _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     VIRTUAL_AI_OS_ENV_PREFIX
 )
 logger = logging.getLogger("virtual_ai_os_todo_supervisor")
-VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = ("virtual_ai_os_todo_supervisor.py",)
-_virtual_ai_os_supervisor_runtime = build_configured_supervisor_runtime(
+_virtual_ai_os_supervisor_runtime = build_script_supervisor_runtime(
     repo_root=REPO_ROOT,
-    script_path=Path(__file__).resolve(),
-    process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
+    script_path=__file__,
     prepare_environment=_ensure_runtime_pythonpath,
 )
+VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_runtime.process_match_any
 repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runtime.repair_runtime
 virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_running
 ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
@@ -140,7 +139,6 @@ _virtual_ai_os_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     task_prefix="## VAI-",
     state_prefix="virtual_ai_os",
     daemon_script_path=DAEMON_SCRIPT_PATH,
-    supervisor_script_path=Path(__file__).resolve(),
     llm_merge_resolver_command=_default_llm_merge_resolver_command,
     worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     objective_factory=_virtual_ai_os_objective_defaults,

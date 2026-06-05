@@ -23,7 +23,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_configured_supervisor_bootstrap_runner,
-    build_configured_supervisor_runtime,
+    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
     build_supervisor_refill_hooks_factory_from_recorders,
@@ -49,20 +49,16 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "hallucinate_multimodal_control_todo_daemon.py")
 DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
-HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
-    "hallucinate_multimodal_control_todo_supervisor.py",
-    "hallucinate_multimodal_control_autopilot.py",
-)
 _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     HALLUCINATE_ENV_PREFIX
 )
-_hallucinate_supervisor_runtime = build_configured_supervisor_runtime(
+_hallucinate_supervisor_runtime = build_script_supervisor_runtime(
     repo_root=REPO_ROOT,
-    script_path=Path(__file__).resolve(),
-    process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
+    script_path=__file__,
+    extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
     prepare_environment=_ensure_runtime_pythonpath,
 )
 repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_runtime.repair_runtime
@@ -106,7 +102,6 @@ _hallucinate_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     task_prefix="## HAO-",
     state_prefix="hallucinate_multimodal_control",
     daemon_script_path=DAEMON_SCRIPT_PATH,
-    supervisor_script_path=Path(__file__).resolve(),
     todo_path_flag=TASK_BOARD_PATH_OPTION,
     llm_merge_resolver_command=_default_llm_merge_resolver_command,
     worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,

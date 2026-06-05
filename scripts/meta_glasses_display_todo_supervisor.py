@@ -124,7 +124,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_configured_supervisor_bootstrap_runner,
-    build_configured_supervisor_runtime,
+    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
     build_supervisor_refill_hooks_factory_from_recorders,
@@ -153,13 +153,12 @@ ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
 _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = ("meta_glasses_display_todo_supervisor.py",)
-_meta_display_supervisor_runtime = build_configured_supervisor_runtime(
+_meta_display_supervisor_runtime = build_script_supervisor_runtime(
     repo_root=REPO_ROOT,
-    script_path=Path(__file__).resolve(),
-    process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
+    script_path=__file__,
     prepare_environment=_ensure_runtime_pythonpath,
 )
+META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_runtime.process_match_any
 repair_meta_display_supervisor_runtime = _meta_display_supervisor_runtime.repair_runtime
 meta_display_supervisor_is_running = _meta_display_supervisor_runtime.is_running
 ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure_running
@@ -251,7 +250,6 @@ _meta_display_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     task_prefix="## MGW-",
     state_prefix="meta_glasses_display",
     daemon_script_path=DAEMON_SCRIPT_PATH,
-    supervisor_script_path=Path(__file__).resolve(),
     todo_path_flag=TASK_BOARD_PATH_OPTION,
     llm_merge_resolver_command=_default_llm_merge_resolver_command,
     worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
