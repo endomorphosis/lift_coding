@@ -16,6 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
@@ -30,15 +31,16 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
-WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
-DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
+META_DISPLAY_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets")
+STATE_DIR = META_DISPLAY_DATA_PATHS.state_dir
+WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
+DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "meta_glasses_display_todo_daemon.py"
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_graph.json"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
-OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_datasets"
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+OBJECTIVE_GRAPH_PATH = META_DISPLAY_DATA_PATHS.objective_graph_path
+OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
+OBJECTIVE_DATASET_DIR = META_DISPLAY_DATA_PATHS.objective_dataset_dir
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = META_DISPLAY_DATA_PATHS.objective_todo_vector_index_path
 _META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,

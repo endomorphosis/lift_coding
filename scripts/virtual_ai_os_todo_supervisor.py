@@ -15,10 +15,10 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
-    repo_relative_or_default as _repo_relative_or_default,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -27,19 +27,19 @@ DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
+VIRTUAL_AI_OS_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os")
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
-DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
-DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
+DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
+DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
-DISCOVERY_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
+DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
-OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
-    DISCOVERY_DIR,
-    REPO_ROOT,
+OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
+OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
+OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
+DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.repo_relative_path(
+    "discovery_dir",
     "data/virtual_ai_os/discovery",
 )
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)

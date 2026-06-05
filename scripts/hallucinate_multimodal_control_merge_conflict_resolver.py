@@ -14,12 +14,16 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import prefixed_env_var as _prefixed_env_var  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
+    prefixed_env_var as _prefixed_env_var,
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     implementation_state_artifact_paths,
 )
 
-DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
+HALLUCINATE_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control")
+DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
 DEFAULT_EVENTS_PATH = implementation_state_artifact_paths(
     DEFAULT_STATE_DIR,
     "hallucinate_multimodal_control",

@@ -19,7 +19,6 @@ if str(SCRIPTS_DIR) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
-    repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_codebase_refill_defaults_factory,
@@ -31,6 +30,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_SETTINGS,
     CODEBASE_SCAN_SKIP_PREFIXES,
     DISCOVERY_DIR,
+    HALLUCINATE_DATA_PATHS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     OBJECTIVE_BUNDLE_DIR,
     OBJECTIVE_DATASET_DIR,
@@ -49,10 +49,9 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"
-OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_graph.json"
-DISCOVERY_OUTPUT_PATH = _repo_relative_or_default(
-    DISCOVERY_DIR,
-    REPO_ROOT,
+OBJECTIVE_GRAPH_PATH = HALLUCINATE_DATA_PATHS.objective_graph_path
+DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
+    "discovery_dir",
     "data/hallucinate_multimodal_control/discovery",
 )
 HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (

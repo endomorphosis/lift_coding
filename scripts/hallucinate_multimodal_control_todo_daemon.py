@@ -15,6 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
     prefixed_env_path as _prefixed_env_path,
@@ -32,6 +33,7 @@ DEFAULT_TODO_PATH = (
     / _task_board_filename("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL")
 )
 HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
+HALLUCINATE_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control")
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 TASK_BOARD_PATH_KEY = _task_board_path_key()
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
@@ -39,13 +41,16 @@ DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
     "OBJECTIVE_GOAL_HEAP_PATH",
     REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
 )
-DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
-DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
-DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
-OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_datasets"
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-DISCOVERY_OUTPUT_PATH = "data/hallucinate_multimodal_control/discovery"
+DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
+DEFAULT_WORKTREE_ROOT = HALLUCINATE_DATA_PATHS.worktree_root
+DISCOVERY_DIR = HALLUCINATE_DATA_PATHS.discovery_dir
+OBJECTIVE_BUNDLE_DIR = HALLUCINATE_DATA_PATHS.objective_bundle_dir
+OBJECTIVE_DATASET_DIR = HALLUCINATE_DATA_PATHS.objective_dataset_dir
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = HALLUCINATE_DATA_PATHS.objective_todo_vector_index_path
+DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
+    "discovery_dir",
+    "data/hallucinate_multimodal_control/discovery",
+)
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(HALLUCINATE_ENV_PREFIX)

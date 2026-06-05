@@ -15,6 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_android_validation_callbacks as _build_android_validation_callbacks,
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
@@ -27,11 +28,12 @@ TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
-STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
-WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
-DISCOVERY_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
+META_DISPLAY_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets")
+STATE_DIR = META_DISPLAY_DATA_PATHS.state_dir
+WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
+DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "objective_bundles"
+OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
 _META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
