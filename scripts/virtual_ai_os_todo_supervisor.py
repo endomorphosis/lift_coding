@@ -13,30 +13,34 @@ SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
+    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
     repo_script_path as _repo_script_path,
-    repo_task_board_path as _repo_task_board_path,
-    task_board_path_option as _task_board_path_option,
 )
 
 _SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-DEFAULT_TODO_PATH = _repo_task_board_path(REPO_ROOT, "19-virtual-ai-os-submodule-integration")
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
-VIRTUAL_AI_OS_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os")
-TASK_BOARD_PATH_OPTION = _task_board_path_option()
+OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
+_VIRTUAL_AI_OS_CONTEXT = _build_agent_supervisor_namespace_context(
+    REPO_ROOT,
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    namespace="virtual_ai_os",
+    task_board_stem="19-virtual-ai-os-submodule-integration",
+)
+DEFAULT_TODO_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
+VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
+TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
 DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "virtual_ai_os_todo_daemon.py")
 DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
-OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
 OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
@@ -73,7 +77,6 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -87,12 +90,7 @@ VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     VIRTUAL_AI_OS_ENV_PREFIX,
     "hallucinate_app",
 )
-_VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
-    REPO_ROOT,
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    DEFAULT_TODO_PATH,
-    VIRTUAL_AI_OS_DATA_PATHS,
-)
+_VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP = _VIRTUAL_AI_OS_CONTEXT.runtime_bootstrap
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP.bootstrap_paths
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
 _RUNTIME_ENVIRONMENT = _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP.runtime_environment

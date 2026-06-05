@@ -172,6 +172,31 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     )
 
 
+def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():
+    daemon_module = _load_script_module("virtual_ai_os_todo_daemon")
+    supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
+    daemon_source = (SCRIPTS_DIR / "virtual_ai_os_todo_daemon.py").read_text(encoding="utf-8")
+    supervisor_source = (SCRIPTS_DIR / "virtual_ai_os_todo_supervisor.py").read_text(encoding="utf-8")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
+
+    for module, source in (
+        (daemon_module, daemon_source),
+        (supervisor_module, supervisor_source),
+    ):
+        assert isinstance(module._VIRTUAL_AI_OS_CONTEXT, AgentSupervisorNamespaceContext)
+        assert module._VIRTUAL_AI_OS_CONTEXT.namespace_paths.namespace == "virtual_ai_os"
+        assert module._VIRTUAL_AI_OS_CONTEXT.task_board_path == (
+            REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename(
+                "19-virtual-ai-os-submodule-integration"
+            )
+        )
+        assert module.VIRTUAL_AI_OS_DATA_PATHS == module._VIRTUAL_AI_OS_CONTEXT.namespace_paths
+        assert "build_agent_supervisor_namespace_context(" in source
+        assert "agent_supervisor_namespace_paths(" not in source
+        assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in source
+
+
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     custom_board = tmp_path / _task_board_filename("custom")
