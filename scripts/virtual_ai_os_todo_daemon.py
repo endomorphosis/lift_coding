@@ -77,9 +77,7 @@ _virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
 
 
 def main(argv: list[str] | None = None) -> None:
-    args = list(sys.argv[1:] if argv is None else argv)
-
-    _virtual_ai_os_daemon_runner.run(args)
+    _virtual_ai_os_daemon_runner.run(argv)
 
 
 if __name__ == "__main__":

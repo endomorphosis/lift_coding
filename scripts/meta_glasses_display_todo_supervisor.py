@@ -260,9 +260,7 @@ ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure
 
 
 def main(argv: list[str] | None = None) -> None:
-    args = list(sys.argv[1:] if argv is None else argv)
-
-    _meta_display_supervisor_runner.run(args)
+    _meta_display_supervisor_runner.run(argv)
 
 
 if __name__ == "__main__":

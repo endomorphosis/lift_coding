@@ -146,9 +146,7 @@ ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensu
 
 
 def main(argv: list[str] | None = None) -> None:
-    args = list(sys.argv[1:] if argv is None else argv)
-
-    _virtual_ai_os_supervisor_runner.run(args)
+    _virtual_ai_os_supervisor_runner.run(argv)
 
 
 if __name__ == "__main__":
