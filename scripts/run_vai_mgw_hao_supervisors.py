@@ -15,7 +15,6 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    apply_env_defaults,
     build_runtime_environment_callbacks,
     env_str,
     repo_external_package_roots,
@@ -40,19 +39,11 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = {
 }
 
 
-def configure_environment() -> None:
-    """Apply lift runtime defaults before launching child supervisor processes."""
-
-    apply_env_defaults(MULTI_SUPERVISOR_ENV_DEFAULTS)
-    _RUNTIME_ENVIRONMENT.ensure_pythonpath()
-
-
-configure_environment()
-
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
+    ConfiguredMultiSupervisorLauncher,
     ImplementationSupervisorTrackConfig,
-    build_configured_multi_supervisor_cli_runner,
+    build_configured_multi_supervisor_launcher,
     utc_run_stamp,
 )
 
@@ -79,11 +70,11 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
 )
 
 
-def build_runner() -> ConfiguredMultiSupervisorCliRunner:
-    """Return the configured reusable runner for this repository's tracks."""
+def build_launcher() -> ConfiguredMultiSupervisorLauncher:
+    """Return the configured reusable launcher for this repository's tracks."""
 
     resolver_command = f"bash {REPO_ROOT / 'scripts' / 'llm_merge_resolver_fallback.sh'}"
-    return build_configured_multi_supervisor_cli_runner(
+    return build_configured_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
         duration_seconds=env_str("DURATION_SECONDS", "28800"),
         stamp=env_str("STAMP", utc_run_stamp()),
@@ -92,13 +83,21 @@ def build_runner() -> ConfiguredMultiSupervisorCliRunner:
         implementation_supervisor_defaults=True,
         implementation_supervisor_command=resolver_command,
         implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
+        env_defaults=MULTI_SUPERVISOR_ENV_DEFAULTS,
+        prepare_environment=_RUNTIME_ENVIRONMENT.ensure_pythonpath,
     )
+
+
+def build_runner() -> ConfiguredMultiSupervisorCliRunner:
+    """Return the configured reusable runner for this repository's tracks."""
+
+    return build_launcher().runner
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the configured VAI/MGW/HAO multi-supervisor CLI."""
 
-    return build_runner().run(sys.argv[1:] if argv is None else argv)
+    return build_launcher().run(sys.argv[1:] if argv is None else argv)
 
 
 if __name__ == "__main__":
