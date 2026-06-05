@@ -25,10 +25,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
-    build_supervisor_codebase_scan_refill_callback,
-    build_supervisor_objective_refill_callback,
-    build_supervisor_refill_hooks,
-    build_supervisor_retry_budget_refill_callback,
+    build_supervisor_refill_hooks_from_recorders,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
     pop_bool_flag as _pop_bool_flag,
@@ -103,22 +100,6 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     _enter_runtime_environment()
 
-    objective_hook = build_supervisor_objective_refill_callback(
-        record_objective_goal_findings,
-        discovery_dir=DISCOVERY_DIR,
-        objective_path=paths["objective_goal_heap_path"],
-        repo_root=REPO_ROOT,
-    )
-    codebase_scan_hook = build_supervisor_codebase_scan_refill_callback(
-        record_codebase_scan_findings,
-        discovery_dir=DISCOVERY_DIR,
-        repo_root=REPO_ROOT,
-    )
-    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
-        record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
-    )
-
     _hallucinate_supervisor_runtime.run_configured_from_paths(
         args,
         paths,
@@ -151,12 +132,13 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
             **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
         ),
-        hooks=build_supervisor_refill_hooks(
-            (
-                ("objective-goal", objective_hook),
-                ("codebase-scan", codebase_scan_hook),
-                ("retry-budget", retry_budget_hook),
-            ),
+        hooks=build_supervisor_refill_hooks_from_recorders(
+            objective_recorder=record_objective_goal_findings,
+            codebase_scan_recorder=record_codebase_scan_findings,
+            retry_budget_recorder=record_retry_budget_findings,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=paths["objective_goal_heap_path"],
+            repo_root=REPO_ROOT,
             scope_label="Hallucinate",
         ),
         once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",

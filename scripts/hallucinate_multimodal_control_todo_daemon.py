@@ -89,10 +89,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
-    build_daemon_codebase_scan_refill_callback,
-    build_daemon_objective_refill_callback,
-    build_daemon_refill_hooks,
-    build_daemon_retry_budget_refill_callback,
+    build_daemon_refill_hooks_from_recorders,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -181,22 +178,6 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     _enter_runtime_environment()
 
-    objective_hook = build_daemon_objective_refill_callback(
-        record_objective_goal_findings,
-        discovery_dir=DISCOVERY_DIR,
-        objective_path=paths["objective_goal_heap_path"],
-        repo_root=REPO_ROOT,
-    )
-    codebase_scan_hook = build_daemon_codebase_scan_refill_callback(
-        record_codebase_scan_findings,
-        discovery_dir=DISCOVERY_DIR,
-        repo_root=REPO_ROOT,
-    )
-    retry_budget_hook = build_daemon_retry_budget_refill_callback(
-        record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
-    )
-
     build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
@@ -214,12 +195,13 @@ def main(argv: list[str] | None = None) -> None:
         objective_path_key="objective_goal_heap_path",
         objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        hooks=build_daemon_refill_hooks(
-            (
-                ("objective-goal", objective_hook),
-                ("codebase-scan", codebase_scan_hook),
-                ("retry-budget", retry_budget_hook),
-            ),
+        hooks=build_daemon_refill_hooks_from_recorders(
+            objective_recorder=record_objective_goal_findings,
+            codebase_scan_recorder=record_codebase_scan_findings,
+            retry_budget_recorder=record_retry_budget_findings,
+            discovery_dir=DISCOVERY_DIR,
+            objective_path=paths["objective_goal_heap_path"],
+            repo_root=REPO_ROOT,
             scope_label="Hallucinate",
             after_order=("retry-budget", "objective-goal", "codebase-scan"),
         ),

@@ -61,8 +61,7 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
-    build_daemon_refill_hooks,
-    build_daemon_retry_budget_refill_callback,
+    build_daemon_refill_hooks_from_recorders,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -112,18 +111,6 @@ def main(argv: list[str] | None = None) -> None:
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(paths["todo_path"])
 
-    retry_budget_hook = build_daemon_retry_budget_refill_callback(
-        record_retry_budget_findings,
-        discovery_dir=paths["discovery_dir"],
-        extra_kwargs={
-            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                "discovery_dir",
-                "data/meta_glasses_display_widgets/discovery",
-                paths,
-            ),
-        },
-    )
-
     build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
@@ -140,8 +127,16 @@ def main(argv: list[str] | None = None) -> None:
         objective_path_key="objective_heap_path",
         objective_bundle_dir_key="objective_bundle_dir",
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        hooks=build_daemon_refill_hooks(
-            (("retry-budget", retry_budget_hook),),
+        hooks=build_daemon_refill_hooks_from_recorders(
+            retry_budget_recorder=record_retry_budget_findings,
+            discovery_dir=paths["discovery_dir"],
+            retry_budget_extra_kwargs={
+                "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                    "discovery_dir",
+                    "data/meta_glasses_display_widgets/discovery",
+                    paths,
+                ),
+            },
             scope_label="validation",
         ),
     )

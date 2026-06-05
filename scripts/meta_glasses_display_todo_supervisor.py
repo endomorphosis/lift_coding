@@ -116,8 +116,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
-    build_supervisor_refill_hooks,
-    build_supervisor_retry_budget_refill_callback,
+    build_supervisor_refill_hooks_from_recorders,
 )
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
     pop_bool_flag as _pop_bool_flag,
@@ -225,18 +224,6 @@ def _run_supervisor(
     objective: ObjectiveRefillDefaults,
     codebase: CodebaseRefillDefaults,
 ) -> None:
-    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
-        record_retry_budget_findings,
-        discovery_dir=paths["discovery_dir"],
-        extra_kwargs={
-            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                "discovery_dir",
-                "data/meta_glasses_display_widgets/discovery",
-                paths,
-            ),
-        },
-    )
-
     if ensure_running:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
     _meta_display_supervisor_runtime.run_configured_from_paths(
@@ -252,8 +239,16 @@ def _run_supervisor(
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         objective=objective,
         codebase=codebase,
-        hooks=build_supervisor_refill_hooks(
-            (("retry-budget", retry_budget_hook),),
+        hooks=build_supervisor_refill_hooks_from_recorders(
+            retry_budget_recorder=record_retry_budget_findings,
+            discovery_dir=paths["discovery_dir"],
+            retry_budget_extra_kwargs={
+                "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                    "discovery_dir",
+                    "data/meta_glasses_display_widgets/discovery",
+                    paths,
+                ),
+            },
             scope_label="validation",
         ),
         once_complete_message="Display-widget implementation supervisor check complete: %s",
