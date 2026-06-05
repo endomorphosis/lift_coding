@@ -25,9 +25,6 @@ HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validatio
 
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     build_configured_merge_resolver_runner,
-    build_llm_merge_resolver_invoker,
-    build_merge_prompt_callback,
-    build_resolver_payload_callback,
     compact_text,
     iter_jsonl,
     latest_failed_merge_event,
@@ -44,19 +41,10 @@ _HAO_MERGE_RESOLVER_RUNNER = build_configured_merge_resolver_runner(
     missing_event_exit_code=1,
     apply_failed_exit_code=2,
 )
-_HAO_MERGE_RESOLVER_CONFIG = _HAO_MERGE_RESOLVER_RUNNER.config
 
-build_merge_prompt = build_merge_prompt_callback(
-    prompt_heading=HAO_PROMPT_HEADING,
-    completion_rule=HAO_COMPLETION_RULE,
-)
-resolver_payload = build_resolver_payload_callback(
-    prompt_heading=HAO_PROMPT_HEADING,
-    completion_rule=HAO_COMPLETION_RULE,
-)
-invoke_llm_resolver = build_llm_merge_resolver_invoker(
-    primary_command_env_var=HAO_LLM_MERGE_RESOLVER_COMMAND_ENV,
-)
+build_merge_prompt = _HAO_MERGE_RESOLVER_RUNNER.build_merge_prompt()
+resolver_payload = _HAO_MERGE_RESOLVER_RUNNER.resolver_payload()
+invoke_llm_resolver = _HAO_MERGE_RESOLVER_RUNNER.llm_resolver_invoker()
 
 __all__ = [
     "build_merge_prompt",
