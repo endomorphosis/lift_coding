@@ -21,16 +21,16 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_env_path as _prefixed_env_path,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
-    task_board_filename as _task_board_filename,
+    repo_doc_path as _repo_doc_path,
+    repo_task_board_path as _repo_task_board_path,
     task_board_path_key as _task_board_path_key,
     task_board_path_option as _task_board_path_option,
 )
 
-DEFAULT_TODO_PATH = (
-    REPO_ROOT
-    / "hallucinate_app"
-    / "docs"
-    / _task_board_filename("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL")
+DEFAULT_TODO_PATH = _repo_task_board_path(
+    REPO_ROOT,
+    "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",
+    docs_dir="hallucinate_app/docs",
 )
 HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
 HALLUCINATE_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control")
@@ -39,7 +39,7 @@ TASK_BOARD_PATH_KEY = _task_board_path_key()
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
     HALLUCINATE_ENV_PREFIX,
     "OBJECTIVE_GOAL_HEAP_PATH",
-    REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md",
+    _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md"),
 )
 DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = HALLUCINATE_DATA_PATHS.worktree_root

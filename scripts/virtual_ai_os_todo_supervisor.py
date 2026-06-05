@@ -19,13 +19,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
-    task_board_filename as _task_board_filename,
+    repo_doc_path as _repo_doc_path,
+    repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
 )
 
-DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    _task_board_filename("19-virtual-ai-os-submodule-integration")
-)
+DEFAULT_TODO_PATH = _repo_task_board_path(REPO_ROOT, "19-virtual-ai-os-submodule-integration")
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 VIRTUAL_AI_OS_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os")
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
@@ -33,7 +32,7 @@ DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
 DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
-OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
 OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
