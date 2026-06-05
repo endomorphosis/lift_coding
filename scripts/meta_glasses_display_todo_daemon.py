@@ -61,8 +61,8 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
 
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    build_configured_implementation_daemon_runner,
     build_daemon_refill_hooks_factory_from_recorders,
+    build_namespace_configured_implementation_daemon_runner,
     implementation_state_artifact_paths,
 )
 
@@ -121,29 +121,31 @@ _meta_display_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
     retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
 )
+_meta_display_daemon_runner = build_namespace_configured_implementation_daemon_runner(
+    repo_root=REPO_ROOT,
+    logger=logger,
+    namespace_paths=META_DISPLAY_DATA_PATHS,
+    default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+    default_objective_path=OBJECTIVE_HEAP_PATH,
+    pass_complete_message="Display-widget implementation daemon pass complete: %s",
+)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    build_configured_implementation_daemon_runner(
-        repo_root=REPO_ROOT,
-        logger=logger,
-        default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=OBJECTIVE_HEAP_PATH,
-        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-        pass_complete_message="Display-widget implementation daemon pass complete: %s",
-    ).run_configured_from_bootstrap(
+    _meta_display_daemon_runner.run_namespace_configured_from_bootstrap(
         args,
         ensure_paths=ensure_meta_display_bootstrap_paths,
+        namespace_paths=META_DISPLAY_DATA_PATHS,
         enter_runtime_environment=_enter_runtime_environment,
         enter_runtime_before_paths=True,
         path_callbacks=(_prepare_meta_display_paths,),
+        use_bootstrap_keys=True,
         task_prefix="## MGW-",
         state_prefix="meta_glasses_display",
         todo_path_flag=TASK_BOARD_PATH_OPTION,
         objective_path_key="objective_heap_path",
-        objective_bundle_dir_key="objective_bundle_dir",
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
         hooks_factory=_meta_display_refill_hooks,
     )
