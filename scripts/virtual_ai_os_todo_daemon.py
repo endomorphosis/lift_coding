@@ -16,8 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
-    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
-    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
+    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     repo_doc_path as _repo_doc_path,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
@@ -44,7 +43,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
     build_namespace_daemon_bootstrap_runner,
 )
 
-_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
+_VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
     REPO_ROOT,
     VIRTUAL_AI_OS_ENV_PREFIX,
     TASK_BOARD_PATH,
@@ -52,8 +51,9 @@ _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callback
     todo_key="task_board_path",
     todo_setting="todo_path",
 )
+_VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP.bootstrap_paths
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
-_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
+_RUNTIME_ENVIRONMENT = _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve

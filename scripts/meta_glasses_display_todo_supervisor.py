@@ -17,7 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
-    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
+    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
@@ -42,7 +42,7 @@ OBJECTIVE_GRAPH_PATH = META_DISPLAY_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = META_DISPLAY_DATA_PATHS.objective_dataset_dir
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = META_DISPLAY_DATA_PATHS.objective_todo_vector_index_path
-_META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
+_META_DISPLAY_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
     TASK_BOARD_PATH,
@@ -58,6 +58,7 @@ _META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks
         "objective_todo_vector_index_path",
     ),
 )
+_META_DISPLAY_BOOTSTRAP_PATHS = _META_DISPLAY_RUNTIME_BOOTSTRAP.bootstrap_paths
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(META_DISPLAY_ENV_PREFIX)
@@ -116,9 +117,6 @@ DISCOVERY_EXPANSION_VALIDATION = (
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md"
 )
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
-)
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
@@ -149,7 +147,7 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")
 meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
 ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
-_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
+_RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 

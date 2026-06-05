@@ -17,8 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_android_validation_callbacks as _build_android_validation_callbacks,
-    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
-    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
+    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     repo_doc_path as _repo_doc_path,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
@@ -32,14 +31,16 @@ WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
 DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
 OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
-_META_DISPLAY_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
+_META_DISPLAY_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
     TASK_BOARD_PATH,
     META_DISPLAY_DATA_PATHS,
     objective_path=OBJECTIVE_HEAP_PATH,
     namespace_keys=("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
+    runtime_primary_package_names=("ipfs_accelerate",),
 )
+_META_DISPLAY_BOOTSTRAP_PATHS = _META_DISPLAY_RUNTIME_BOOTSTRAP.bootstrap_paths
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()
 _meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
@@ -69,10 +70,7 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
 meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
 ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
-_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(
-    REPO_ROOT,
-    primary_package_names=("ipfs_accelerate",),
-)
+_RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath

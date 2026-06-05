@@ -85,8 +85,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_agent_supervisor_bootstrap_path_callbacks as _build_agent_supervisor_bootstrap_path_callbacks,
-    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
+    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_namespace_codebase_scan_recorder,
@@ -103,7 +102,7 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     HALLUCINATE_ENV_PREFIX,
     "hallucinate_app",
 )
-_HALLUCINATE_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
+_HALLUCINATE_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
     REPO_ROOT,
     HALLUCINATE_ENV_PREFIX,
     DEFAULT_TODO_PATH,
@@ -111,12 +110,11 @@ _HALLUCINATE_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
     todo_key=TASK_BOARD_PATH_KEY,
     objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
     objective_path_key="objective_goal_heap_path",
+    runtime_primary_package_names=("ipfs_accelerate",),
 )
+_HALLUCINATE_BOOTSTRAP_PATHS = _HALLUCINATE_RUNTIME_BOOTSTRAP.bootstrap_paths
 HALLUCINATE_BOOTSTRAP_SPECS = _HALLUCINATE_BOOTSTRAP_PATHS.specs
-_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(
-    REPO_ROOT,
-    primary_package_names=("ipfs_accelerate",),
-)
+_RUNTIME_ENVIRONMENT = _HALLUCINATE_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
