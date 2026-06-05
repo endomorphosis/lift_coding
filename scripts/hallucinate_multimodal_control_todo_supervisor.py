@@ -45,7 +45,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 )
 
 
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root

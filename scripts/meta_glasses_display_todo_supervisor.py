@@ -26,7 +26,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     task_board_filename as _task_board_filename,
 )
 
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
