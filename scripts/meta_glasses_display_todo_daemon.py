@@ -59,7 +59,7 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "external/meta-wearables-dat-ios",
 )
 
-from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import build_namespace_retry_budget_recorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_daemon_refill_hooks_factory_from_recorders,
     build_namespace_configured_implementation_daemon_runner,
@@ -92,11 +92,11 @@ with_android_validation_env = _android_validation_callbacks.wrap_command
 enforce_android_validation_environment = _android_validation_callbacks.enforce_todo
 
 
-record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
+record_retry_budget_findings = build_namespace_retry_budget_recorder(
+    namespace_paths=META_DISPLAY_DATA_PATHS,
     todo_path=TASK_BOARD_PATH,
     events_path=META_DISPLAY_STATE_PATHS["events_path"],
     strategy_path=META_DISPLAY_STATE_PATHS["strategy_path"],
-    discovery_dir=DISCOVERY_DIR,
     task_header_prefix_value="## MGW-",
     validation_retry_budget=VALIDATION_RETRY_BUDGET,
     merge_retry_budget=0,

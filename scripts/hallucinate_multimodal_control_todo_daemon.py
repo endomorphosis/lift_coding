@@ -93,9 +93,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
-    ConfiguredCodebaseScanRecorder,
-    ConfiguredObjectiveBacklogRecorder,
-    ConfiguredRetryBudgetRecorder,
+    build_namespace_codebase_scan_recorder,
+    build_namespace_objective_backlog_recorder,
+    build_namespace_retry_budget_recorder,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_daemon_refill_hooks_factory_from_recorders,
@@ -134,13 +134,11 @@ HALLUCINATE_STATE_PATHS = implementation_state_artifact_paths(
 )
 
 
-record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
+record_objective_goal_findings = build_namespace_objective_backlog_recorder(
     repo_root=REPO_ROOT,
+    namespace_paths=HALLUCINATE_DATA_PATHS,
     objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
     todo_path=DEFAULT_TODO_PATH,
-    discovery_dir=DISCOVERY_DIR,
-    default_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-    default_dataset_dir=OBJECTIVE_DATASET_DIR,
     strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
     state_path=HALLUCINATE_STATE_PATHS["state_path"],
     task_header_prefix_value="## HAO-",
@@ -153,12 +151,12 @@ record_objective_goal_findings = ConfiguredObjectiveBacklogRecorder(
     prepare_environment=_ensure_ipfs_accelerate_path,
 )
 
-record_codebase_scan_findings = ConfiguredCodebaseScanRecorder(
+record_codebase_scan_findings = build_namespace_codebase_scan_recorder(
+    repo_root=REPO_ROOT,
+    namespace_paths=HALLUCINATE_DATA_PATHS,
     todo_path=DEFAULT_TODO_PATH,
     state_path=HALLUCINATE_STATE_PATHS["state_path"],
     strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
-    discovery_dir=DISCOVERY_DIR,
-    repo_root=REPO_ROOT,
     task_header_prefix_value="## HAO-",
     depends_on_if_present=("HAO-013",),
     **CODEBASE_SCAN_SETTINGS.recorder_kwargs(),
@@ -169,11 +167,11 @@ record_codebase_scan_findings = ConfiguredCodebaseScanRecorder(
     prepare_environment=_ensure_ipfs_accelerate_path,
 )
 
-record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
+record_retry_budget_findings = build_namespace_retry_budget_recorder(
+    namespace_paths=HALLUCINATE_DATA_PATHS,
     todo_path=DEFAULT_TODO_PATH,
     events_path=HALLUCINATE_STATE_PATHS["events_path"],
     strategy_path=HALLUCINATE_STATE_PATHS["strategy_path"],
-    discovery_dir=DISCOVERY_DIR,
     task_header_prefix_value="## HAO-",
     validation_retry_budget=VALIDATION_RETRY_BUDGET,
     merge_retry_budget=MERGE_RETRY_BUDGET,
