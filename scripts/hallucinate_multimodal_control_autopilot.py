@@ -14,19 +14,25 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    implementation_supervisor_args as _implementation_supervisor_args,
+    build_configured_implementation_supervisor_entrypoint,
 )
 
 
+def _supervisor_main(argv: list[str]) -> None:
+    from hallucinate_multimodal_control_todo_supervisor import main as supervisor_main
+
+    return supervisor_main(argv)
+
+
+AUTOPILOT_ENTRYPOINT = build_configured_implementation_supervisor_entrypoint(_supervisor_main)
+
+
 def with_autopilot_defaults(argv: list[str]) -> list[str]:
-    return _implementation_supervisor_args(argv)
+    return AUTOPILOT_ENTRYPOINT.with_defaults(argv)
 
 
 def main(argv: list[str] | None = None) -> None:
-    args = with_autopilot_defaults(list(sys.argv[1:] if argv is None else argv))
-    from hallucinate_multimodal_control_todo_supervisor import main as supervisor_main
-
-    supervisor_main(args)
+    AUTOPILOT_ENTRYPOINT.run(list(sys.argv[1:] if argv is None else argv))
 
 
 if __name__ == "__main__":
