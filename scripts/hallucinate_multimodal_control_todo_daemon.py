@@ -41,7 +41,6 @@ DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
     "OBJECTIVE_GOAL_HEAP_PATH",
     _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md"),
 )
-DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = HALLUCINATE_DATA_PATHS.worktree_root
 DISCOVERY_DIR = HALLUCINATE_DATA_PATHS.discovery_dir
 OBJECTIVE_BUNDLE_DIR = HALLUCINATE_DATA_PATHS.objective_bundle_dir
@@ -97,7 +96,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_daemon_refill_hooks_factory_from_recorders,
     build_namespace_configured_implementation_daemon_runner,
-    implementation_state_artifact_paths,
+    namespace_implementation_state_artifact_paths,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -125,10 +124,7 @@ _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
 ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
-HALLUCINATE_STATE_PATHS = implementation_state_artifact_paths(
-    DEFAULT_STATE_DIR,
-    "hallucinate_multimodal_control",
-)
+HALLUCINATE_STATE_PATHS = namespace_implementation_state_artifact_paths(HALLUCINATE_DATA_PATHS)
 
 
 record_objective_goal_findings = build_namespace_objective_backlog_recorder(

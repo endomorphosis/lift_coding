@@ -28,7 +28,6 @@ TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "18-swissknife-meta-glasses-d
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
 META_DISPLAY_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets")
-STATE_DIR = META_DISPLAY_DATA_PATHS.state_dir
 WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
 DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
@@ -64,7 +63,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import build_namespace
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_daemon_refill_hooks_factory_from_recorders,
     build_namespace_configured_implementation_daemon_runner,
-    implementation_state_artifact_paths,
+    namespace_implementation_state_artifact_paths,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -77,9 +76,9 @@ _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-META_DISPLAY_STATE_PATHS = implementation_state_artifact_paths(
-    STATE_DIR,
-    "meta_glasses_display",
+META_DISPLAY_STATE_PATHS = namespace_implementation_state_artifact_paths(
+    META_DISPLAY_DATA_PATHS,
+    state_prefix="meta_glasses_display",
 )
 _android_validation_callbacks = _build_android_validation_callbacks(
     REPO_ROOT,
