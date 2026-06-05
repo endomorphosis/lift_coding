@@ -15,6 +15,7 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    agent_supervisor_namespace_paths,
     repo_root_from_env,
 )
 
@@ -30,29 +31,27 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = {
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
     ConfiguredMultiSupervisorLauncher,
-    ImplementationSupervisorTrackConfig,
     build_repo_implementation_multi_supervisor_launcher,
+    implementation_supervisor_namespace_track_config,
 )
 
 
 VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
-    ImplementationSupervisorTrackConfig(
+    implementation_supervisor_namespace_track_config(
         name="VAI",
         script_path="scripts/virtual_ai_os_todo_supervisor.py",
-        state_dir="data/virtual_ai_os/state",
-        state_prefix="virtual_ai_os",
+        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os"),
     ),
-    ImplementationSupervisorTrackConfig(
+    implementation_supervisor_namespace_track_config(
         name="MGW",
         script_path="scripts/meta_glasses_display_todo_supervisor.py",
-        state_dir="data/meta_glasses_display_widgets/state",
+        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets"),
         state_prefix="meta_glasses_display",
     ),
-    ImplementationSupervisorTrackConfig(
+    implementation_supervisor_namespace_track_config(
         name="HAO",
         script_path="scripts/hallucinate_multimodal_control_todo_supervisor.py",
-        state_dir="data/hallucinate_multimodal_control/state",
-        state_prefix="hallucinate_multimodal_control",
+        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control"),
     ),
 )
 
