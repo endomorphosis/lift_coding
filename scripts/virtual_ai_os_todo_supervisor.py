@@ -80,9 +80,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_codebase_refill_defaults_factory,
     build_configured_supervisor_runtime,
-    build_objective_refill_defaults_factory,
+    build_namespace_codebase_refill_defaults_factory,
+    build_namespace_objective_refill_defaults_factory,
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -117,22 +117,18 @@ virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_runni
 ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
 
 
-_virtual_ai_os_objective_defaults = build_objective_refill_defaults_factory(
+_virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_factory(
+    VIRTUAL_AI_OS_DATA_PATHS,
     objective_path=OBJECTIVE_HEAP_PATH,
-    objective_graph_path=OBJECTIVE_GRAPH_PATH,
-    objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-    objective_dataset_dir=OBJECTIVE_DATASET_DIR,
-    objective_discovery_dir=DISCOVERY_DIR,
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-    objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
     objective_interoperability_focus=VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
 
-_virtual_ai_os_codebase_defaults = build_codebase_refill_defaults_factory(
-    codebase_scan_discovery_dir=DISCOVERY_DIR,
+_virtual_ai_os_codebase_defaults = build_namespace_codebase_refill_defaults_factory(
+    VIRTUAL_AI_OS_DATA_PATHS,
     codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     codebase_scan_min_open_tasks=0,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,

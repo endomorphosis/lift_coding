@@ -21,9 +21,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_codebase_refill_defaults_factory,
     build_configured_supervisor_runtime,
-    build_objective_refill_defaults_factory,
+    build_namespace_codebase_refill_defaults_factory,
+    build_namespace_objective_refill_defaults_factory,
     build_supervisor_refill_hooks_factory_from_recorders,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
@@ -32,10 +32,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     DISCOVERY_DIR,
     HALLUCINATE_DATA_PATHS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-    OBJECTIVE_BUNDLE_DIR,
-    OBJECTIVE_DATASET_DIR,
     OBJECTIVE_REFILL_SETTINGS,
-    OBJECTIVE_TODO_VECTOR_INDEX_PATH,
     HALLUCINATE_INTEROPERABILITY_FOCUS,
     HALLUCINATE_ENV_PREFIX,
     TASK_BOARD_PATH_KEY,
@@ -49,7 +46,6 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"
-OBJECTIVE_GRAPH_PATH = HALLUCINATE_DATA_PATHS.objective_graph_path
 DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.repo_relative_path(
     "discovery_dir",
     "data/hallucinate_multimodal_control/discovery",
@@ -75,22 +71,18 @@ hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
 ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
 
 
-_hallucinate_objective_defaults = build_objective_refill_defaults_factory(
+_hallucinate_objective_defaults = build_namespace_objective_refill_defaults_factory(
+    HALLUCINATE_DATA_PATHS,
     objective_path_key="objective_goal_heap_path",
-    objective_graph_path=OBJECTIVE_GRAPH_PATH,
-    objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-    objective_dataset_dir=OBJECTIVE_DATASET_DIR,
-    objective_discovery_dir=DISCOVERY_DIR,
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-    objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
 
-_hallucinate_codebase_defaults = build_codebase_refill_defaults_factory(
-    codebase_scan_discovery_dir=DISCOVERY_DIR,
+_hallucinate_codebase_defaults = build_namespace_codebase_refill_defaults_factory(
+    HALLUCINATE_DATA_PATHS,
     codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
     **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
