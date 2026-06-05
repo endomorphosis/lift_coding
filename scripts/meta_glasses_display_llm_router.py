@@ -14,20 +14,23 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
 
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    _task_board_filename("18-swissknife-meta-glasses-display-widgets")
-)
-PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
-ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
-
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     build_repo_task_proposal_router_runner,
+    build_task_proposal_route_paths,
     standard_task_proposal_requested_outputs,
 )
+META_DISPLAY_ROUTE_PATHS = build_task_proposal_route_paths(
+    repo_root=REPO_ROOT,
+    task_board_stem="18-swissknife-meta-glasses-display-widgets",
+    task_board_dir="implementation_plan/docs",
+    artifact_namespace="meta_glasses_display_widgets",
+)
+TASK_BOARD_PATH = META_DISPLAY_ROUTE_PATHS.task_board_path
+PLAN_PATH = META_DISPLAY_ROUTE_PATHS.plan_path
+ARTIFACT_DIR = META_DISPLAY_ROUTE_PATHS.artifact_dir
 
 
 TASK_PROPOSAL_RUNNER = build_repo_task_proposal_router_runner(
