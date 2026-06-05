@@ -41,7 +41,6 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    apply_portal_implementation_daemon_defaults_from_paths,
     build_configured_implementation_daemon_runner,
 )
 
@@ -72,7 +71,14 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_virtual_ai_os_bootstrap_paths()
     _enter_runtime_environment()
 
-    args = apply_portal_implementation_daemon_defaults_from_paths(
+    build_configured_implementation_daemon_runner(
+        repo_root=REPO_ROOT,
+        logger=logger,
+        default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
+        default_objective_path=OBJECTIVE_HEAP_PATH,
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
+    ).run_configured_from_paths(
         args,
         paths,
         todo_path_key="task_board_path",
@@ -83,14 +89,6 @@ def main(argv: list[str] | None = None) -> None:
         objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     )
-    build_configured_implementation_daemon_runner(
-        repo_root=REPO_ROOT,
-        logger=logger,
-        default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=OBJECTIVE_HEAP_PATH,
-        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-        pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
-    ).run_configured(args)
 
 
 if __name__ == "__main__":
