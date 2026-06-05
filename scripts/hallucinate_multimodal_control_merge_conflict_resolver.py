@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
@@ -18,6 +18,7 @@ HAO_ENV_PREFIX = "HANDSFREE_HAO"
 HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
 HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import repo_root_from_env  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     build_namespace_merge_resolver_runner,
     compact_text,
@@ -26,6 +27,7 @@ from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     unmerged_paths,
 )
 
+REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 _HAO_MERGE_RESOLVER_RUNNER = build_namespace_merge_resolver_runner(
     repo_root=REPO_ROOT,
     namespace="hallucinate_multimodal_control",

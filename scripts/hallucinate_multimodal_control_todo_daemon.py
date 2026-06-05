@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
@@ -22,11 +22,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
+    repo_root_from_env as _repo_root_from_env,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_key as _task_board_path_key,
     task_board_path_option as _task_board_path_option,
 )
 
+REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 DEFAULT_TODO_PATH = _repo_task_board_path(
     REPO_ROOT,
     "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",
@@ -80,9 +82,6 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     include_scripts=True,
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
-
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,

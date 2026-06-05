@@ -7,17 +7,19 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import repo_root_from_env  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     build_repo_task_proposal_route_runner,
 )
 
 
+REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 TASK_PROPOSAL_RUNNER = build_repo_task_proposal_route_runner(
     repo_root=REPO_ROOT,
     task_board_stem="MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",

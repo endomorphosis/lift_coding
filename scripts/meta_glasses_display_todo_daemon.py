@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
@@ -19,10 +19,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     repo_doc_path as _repo_doc_path,
+    repo_root_from_env as _repo_root_from_env,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
 )
 
+REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "18-swissknife-meta-glasses-display-widgets")
 TASK_BOARD_PATH_OPTION = _task_board_path_option()
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"

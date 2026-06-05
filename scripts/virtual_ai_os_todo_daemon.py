@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
@@ -17,11 +17,13 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
+    repo_root_from_env as _repo_root_from_env,
     repo_doc_path as _repo_doc_path,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
 )
 
+REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "19-virtual-ai-os-submodule-integration")
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 VIRTUAL_AI_OS_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os")
