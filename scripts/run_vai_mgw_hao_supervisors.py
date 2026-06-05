@@ -22,22 +22,19 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACKS = (
 )
 
 
-def _prepend_path(path: Path) -> None:
-    text = str(path)
-    if text not in sys.path:
-        sys.path.insert(0, text)
+if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_runtime_environment_callbacks,
+    env_str,
+)
 
 
-def _prepend_pythonpath(paths: Sequence[Path]) -> None:
-    existing = [part for part in os.environ.get("PYTHONPATH", "").split(os.pathsep) if part]
-    additions = [str(path) for path in paths]
-    merged = [*additions, *(part for part in existing if part not in additions)]
-    os.environ["PYTHONPATH"] = os.pathsep.join(merged)
-
-
-def _env_value(name: str, default: str) -> str:
-    value = os.environ.get(name, "").strip()
-    return value or default
+_RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(
+    REPO_ROOT,
+    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
+)
 
 
 def configure_environment() -> None:
@@ -46,9 +43,7 @@ def configure_environment() -> None:
     os.environ.setdefault("PYTHONUNBUFFERED", "1")
     os.environ.setdefault("CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS", "60")
     os.environ.setdefault("PREFER_COPILOT_MERGE_RESOLVER", "1")
-    _prepend_pythonpath((IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT))
-    _prepend_path(IPFS_ACCELERATE_ROOT)
-    _prepend_path(IPFS_DATASETS_ROOT)
+    _RUNTIME_ENVIRONMENT.ensure_pythonpath()
 
 
 configure_environment()
@@ -66,8 +61,8 @@ def build_runner() -> ConfiguredMultiSupervisorCliRunner:
     resolver_command = f"bash {REPO_ROOT / 'scripts' / 'llm_merge_resolver_fallback.sh'}"
     return build_configured_multi_supervisor_cli_runner(
         repo_root=REPO_ROOT,
-        duration_seconds=_env_value("DURATION_SECONDS", "28800"),
-        stamp=_env_value("STAMP", utc_run_stamp()),
+        duration_seconds=env_str("DURATION_SECONDS", "28800"),
+        stamp=env_str("STAMP", utc_run_stamp()),
         master_dir="data/agent_supervisor",
         label="VAI/MGW/HAO supervisor run",
         implementation_supervisor_defaults=True,
