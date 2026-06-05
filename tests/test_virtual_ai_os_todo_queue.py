@@ -9,6 +9,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPTS_DIR = REPO_ROOT / "scripts"
 
 
 # Assemble the task-board filename from neutral fragments so static follow-up
@@ -31,6 +32,8 @@ def _git(cwd: Path, *args: str) -> None:
 
 def _load_script_module(name: str):
     script_path = REPO_ROOT / "scripts" / f"{name}.py"
+    if str(SCRIPTS_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS_DIR))
     spec = importlib.util.spec_from_file_location(name, script_path)
     assert spec is not None
     assert spec.loader is not None

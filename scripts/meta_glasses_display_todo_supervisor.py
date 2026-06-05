@@ -5,15 +5,14 @@ from __future__ import annotations
 
 import logging
 import shlex
-import sys
 from pathlib import Path
 
+from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+_PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
+SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
@@ -137,10 +136,6 @@ META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     META_DISPLAY_ENV_PREFIX,
     "hallucinate_app",
 )
-
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from meta_glasses_display_todo_daemon import (  # noqa: E402
     _bootstrap_android_validation_env,

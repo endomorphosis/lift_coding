@@ -3,15 +3,12 @@
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
+from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
 
-SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
-
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+_PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
+SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402

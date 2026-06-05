@@ -3,16 +3,14 @@
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
 from typing import Sequence
 
+from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
-BOOTSTRAP_IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 
-if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
+_PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
+SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
+BOOTSTRAP_IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths,

@@ -4,17 +4,13 @@
 from __future__ import annotations
 
 import logging
-import sys
-from pathlib import Path
+
+from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
 
-SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
+_PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
+SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
