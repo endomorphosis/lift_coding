@@ -23,7 +23,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
@@ -108,9 +107,26 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_hallucinate_multimodal_bootstrap_paths()
     _enter_runtime_environment()
 
-    args = apply_portal_implementation_supervisor_defaults_from_paths(
+    objective_hook = build_supervisor_objective_refill_callback(
+        record_objective_goal_findings,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        repo_root=REPO_ROOT,
+    )
+    codebase_scan_hook = build_supervisor_codebase_scan_refill_callback(
+        record_codebase_scan_findings,
+        discovery_dir=DISCOVERY_DIR,
+        repo_root=REPO_ROOT,
+    )
+    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
+        record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+    )
+
+    _hallucinate_supervisor_runtime.run_configured_from_paths(
         args,
         paths,
+        logger=logger,
         todo_path_key=TASK_BOARD_PATH_KEY,
         task_prefix="## HAO-",
         state_prefix="hallucinate_multimodal_control",
@@ -118,6 +134,7 @@ def main(argv: list[str] | None = None) -> None:
         supervisor_script_path=Path(__file__).resolve(),
         todo_path_flag=TASK_BOARD_PATH_OPTION,
         llm_merge_resolver_command=_default_llm_merge_resolver_command(),
+        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         objective=build_objective_refill_defaults_from_paths(
             paths,
             objective_path_key="objective_goal_heap_path",
@@ -138,29 +155,6 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
             **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
         ),
-    )
-
-    objective_hook = build_supervisor_objective_refill_callback(
-        record_objective_goal_findings,
-        discovery_dir=DISCOVERY_DIR,
-        objective_path=paths["objective_goal_heap_path"],
-        repo_root=REPO_ROOT,
-    )
-    codebase_scan_hook = build_supervisor_codebase_scan_refill_callback(
-        record_codebase_scan_findings,
-        discovery_dir=DISCOVERY_DIR,
-        repo_root=REPO_ROOT,
-    )
-    retry_budget_hook = build_supervisor_retry_budget_refill_callback(
-        record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
-    )
-
-    _hallucinate_supervisor_runtime.run_configured(
-        args,
-        logger=logger,
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
         hooks=build_supervisor_refill_hooks(
             (
                 ("objective-goal", objective_hook),

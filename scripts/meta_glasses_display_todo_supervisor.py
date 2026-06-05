@@ -112,7 +112,8 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    apply_portal_implementation_supervisor_defaults_from_paths,
+    CodebaseRefillDefaults,
+    ObjectiveRefillDefaults,
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
@@ -220,7 +221,14 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _run_supervisor(argv: list[str], *, paths: dict[str, Path], ensure_running: bool) -> None:
+def _run_supervisor(
+    argv: list[str],
+    *,
+    paths: dict[str, Path],
+    ensure_running: bool,
+    objective: ObjectiveRefillDefaults,
+    codebase: CodebaseRefillDefaults,
+) -> None:
     retry_budget_hook = build_supervisor_retry_budget_refill_callback(
         record_retry_budget_findings,
         discovery_dir=paths["discovery_dir"],
@@ -235,11 +243,19 @@ def _run_supervisor(argv: list[str], *, paths: dict[str, Path], ensure_running: 
 
     if ensure_running:
         logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    _meta_display_supervisor_runtime.run_configured(
+    _meta_display_supervisor_runtime.run_configured_from_paths(
         argv,
+        paths,
         logger=logger,
+        task_prefix="## MGW-",
+        state_prefix="meta_glasses_display",
         daemon_script_path=DAEMON_SCRIPT_PATH,
+        supervisor_script_path=Path(__file__).resolve(),
+        todo_path_flag=TASK_BOARD_PATH_OPTION,
+        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+        objective=objective,
+        codebase=codebase,
         hooks=build_supervisor_refill_hooks(
             (("retry-budget", retry_budget_hook),),
             scope_label="validation",
@@ -265,37 +281,33 @@ def main(argv: list[str] | None = None) -> None:
         paths,
     )
 
-    args = apply_portal_implementation_supervisor_defaults_from_paths(
-        args,
+    objective = build_objective_refill_defaults_from_paths(
         paths,
-        task_prefix="## MGW-",
-        state_prefix="meta_glasses_display",
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        supervisor_script_path=Path(__file__).resolve(),
-        todo_path_flag=TASK_BOARD_PATH_OPTION,
-        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        objective=build_objective_refill_defaults_from_paths(
-            paths,
-            objective_path_key="objective_heap_path",
-            objective_graph_path_key="objective_graph_path",
-            objective_bundle_dir_key="objective_bundle_dir",
-            objective_dataset_dir_key="objective_dataset_dir",
-            objective_discovery_dir_key="discovery_dir",
-            objective_discovery_output_path=discovery_output_path,
-            objective_todo_vector_index_path_key="objective_todo_vector_index_path",
-            objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
-            seed_interoperability_goals=True,
-            **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-        ),
-        codebase=build_codebase_refill_defaults_from_paths(
-            paths,
-            codebase_scan_discovery_dir_key="discovery_dir",
-            codebase_scan_discovery_output_path=discovery_output_path,
-            codebase_scan_min_open_tasks=0,
-            codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-        ),
+        objective_path_key="objective_heap_path",
+        objective_graph_path_key="objective_graph_path",
+        objective_bundle_dir_key="objective_bundle_dir",
+        objective_dataset_dir_key="objective_dataset_dir",
+        objective_discovery_dir_key="discovery_dir",
+        objective_discovery_output_path=discovery_output_path,
+        objective_todo_vector_index_path_key="objective_todo_vector_index_path",
+        objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
+        seed_interoperability_goals=True,
+        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
     )
-    _run_supervisor(args, paths=paths, ensure_running=ensure_running)
+    codebase = build_codebase_refill_defaults_from_paths(
+        paths,
+        codebase_scan_discovery_dir_key="discovery_dir",
+        codebase_scan_discovery_output_path=discovery_output_path,
+        codebase_scan_min_open_tasks=0,
+        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+    )
+    _run_supervisor(
+        args,
+        paths=paths,
+        ensure_running=ensure_running,
+        objective=objective,
+        codebase=codebase,
+    )
 
 
 if __name__ == "__main__":

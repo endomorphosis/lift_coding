@@ -81,7 +81,6 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    apply_portal_implementation_supervisor_defaults_from_paths,
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
@@ -150,9 +149,10 @@ def main(argv: list[str] | None = None) -> None:
     paths = ensure_virtual_ai_os_bootstrap_paths()
     _enter_runtime_environment()
 
-    args = apply_portal_implementation_supervisor_defaults_from_paths(
+    _virtual_ai_os_supervisor_runtime.run_configured_from_paths(
         args,
         paths,
+        logger=logger,
         task_prefix="## VAI-",
         state_prefix="virtual_ai_os",
         daemon_script_path=DAEMON_SCRIPT_PATH,
@@ -179,12 +179,6 @@ def main(argv: list[str] | None = None) -> None:
             codebase_scan_min_open_tasks=0,
             codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
         ),
-    )
-    _virtual_ai_os_supervisor_runtime.run_configured(
-        args,
-        logger=logger,
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
         once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",
         ensure_running=ensure_running,
         ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
