@@ -14,36 +14,34 @@ SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_android_validation_callbacks as _build_android_validation_callbacks,
-    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
+    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     repo_doc_path as _repo_doc_path,
-    repo_task_board_path as _repo_task_board_path,
-    task_board_path_option as _task_board_path_option,
 )
 
 _SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "18-swissknife-meta-glasses-display-widgets")
-TASK_BOARD_PATH_OPTION = _task_board_path_option()
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
-META_DISPLAY_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets")
-WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
-DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
 OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
-OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
-_META_DISPLAY_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
+_META_DISPLAY_CONTEXT = _build_agent_supervisor_namespace_context(
     REPO_ROOT,
     META_DISPLAY_ENV_PREFIX,
-    TASK_BOARD_PATH,
-    META_DISPLAY_DATA_PATHS,
+    namespace="meta_glasses_display_widgets",
+    task_board_stem="18-swissknife-meta-glasses-display-widgets",
     objective_path=OBJECTIVE_HEAP_PATH,
     namespace_keys=("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
     runtime_primary_package_names=("ipfs_accelerate",),
 )
+TASK_BOARD_PATH = _META_DISPLAY_CONTEXT.task_board_path
+TASK_BOARD_PATH_OPTION = _META_DISPLAY_CONTEXT.task_board_path_option
+META_DISPLAY_DATA_PATHS = _META_DISPLAY_CONTEXT.namespace_paths
+WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
+DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
+OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
+_META_DISPLAY_RUNTIME_BOOTSTRAP = _META_DISPLAY_CONTEXT.runtime_bootstrap
 _META_DISPLAY_BOOTSTRAP_PATHS = _META_DISPLAY_RUNTIME_BOOTSTRAP.bootstrap_paths
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
 META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()

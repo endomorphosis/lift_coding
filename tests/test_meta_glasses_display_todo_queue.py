@@ -157,6 +157,27 @@ def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     ) == "data/custom_mgw_discovery"
 
 
+def test_meta_display_wrappers_delegate_reusable_namespace_context():
+    supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
+    daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
+    supervisor_source = (SCRIPTS_DIR / "meta_glasses_display_todo_supervisor.py").read_text(encoding="utf-8")
+    daemon_source = (SCRIPTS_DIR / "meta_glasses_display_todo_daemon.py").read_text(encoding="utf-8")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
+
+    for module, source in (
+        (daemon_module, daemon_source),
+        (supervisor_module, supervisor_source),
+    ):
+        assert isinstance(module._META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
+        assert module._META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
+        assert module._META_DISPLAY_CONTEXT.task_board_path == TASK_BOARD_PATH
+        assert module.META_DISPLAY_DATA_PATHS == module._META_DISPLAY_CONTEXT.namespace_paths
+        assert "build_agent_supervisor_namespace_context(" in source
+        assert "agent_supervisor_namespace_paths(" not in source
+        assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in source
+
+
 def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
     paths = {

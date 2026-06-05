@@ -13,7 +13,7 @@ SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
+    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
@@ -21,29 +21,32 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
-    repo_task_board_path as _repo_task_board_path,
-    task_board_path_key as _task_board_path_key,
-    task_board_path_option as _task_board_path_option,
 )
 
 _SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-DEFAULT_TODO_PATH = _repo_task_board_path(
-    REPO_ROOT,
-    "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",
-    docs_dir="hallucinate_app/docs",
-)
 HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
-HALLUCINATE_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control")
-TASK_BOARD_PATH_OPTION = _task_board_path_option()
-TASK_BOARD_PATH_KEY = _task_board_path_key()
 DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
     HALLUCINATE_ENV_PREFIX,
     "OBJECTIVE_GOAL_HEAP_PATH",
     _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md"),
 )
+_HALLUCINATE_CONTEXT = _build_agent_supervisor_namespace_context(
+    REPO_ROOT,
+    HALLUCINATE_ENV_PREFIX,
+    namespace="hallucinate_multimodal_control",
+    task_board_stem="MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",
+    task_board_docs_dir="hallucinate_app/docs",
+    objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    objective_path_key="objective_goal_heap_path",
+    runtime_primary_package_names=("ipfs_accelerate",),
+)
+DEFAULT_TODO_PATH = _HALLUCINATE_CONTEXT.task_board_path
+HALLUCINATE_DATA_PATHS = _HALLUCINATE_CONTEXT.namespace_paths
+TASK_BOARD_PATH_OPTION = _HALLUCINATE_CONTEXT.task_board_path_option
+TASK_BOARD_PATH_KEY = _HALLUCINATE_CONTEXT.task_board_path_key
 DEFAULT_WORKTREE_ROOT = HALLUCINATE_DATA_PATHS.worktree_root
 DISCOVERY_DIR = HALLUCINATE_DATA_PATHS.discovery_dir
 OBJECTIVE_BUNDLE_DIR = HALLUCINATE_DATA_PATHS.objective_bundle_dir
@@ -84,9 +87,6 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
-)
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_configured_backlog_recorder_bundle,
     build_namespace_codebase_scan_recorder,
@@ -102,16 +102,7 @@ HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     HALLUCINATE_ENV_PREFIX,
     "hallucinate_app",
 )
-_HALLUCINATE_RUNTIME_BOOTSTRAP = _build_agent_supervisor_runtime_bootstrap_callbacks(
-    REPO_ROOT,
-    HALLUCINATE_ENV_PREFIX,
-    DEFAULT_TODO_PATH,
-    HALLUCINATE_DATA_PATHS,
-    todo_key=TASK_BOARD_PATH_KEY,
-    objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
-    objective_path_key="objective_goal_heap_path",
-    runtime_primary_package_names=("ipfs_accelerate",),
-)
+_HALLUCINATE_RUNTIME_BOOTSTRAP = _HALLUCINATE_CONTEXT.runtime_bootstrap
 _HALLUCINATE_BOOTSTRAP_PATHS = _HALLUCINATE_RUNTIME_BOOTSTRAP.bootstrap_paths
 HALLUCINATE_BOOTSTRAP_SPECS = _HALLUCINATE_BOOTSTRAP_PATHS.specs
 _RUNTIME_ENVIRONMENT = _HALLUCINATE_RUNTIME_BOOTSTRAP.runtime_environment
