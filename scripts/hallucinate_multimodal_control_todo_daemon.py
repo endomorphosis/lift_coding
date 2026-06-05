@@ -173,21 +173,33 @@ record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
 )
 
 
+def _hallucinate_refill_hooks(paths: dict[str, Path]):
+    return build_daemon_refill_hooks_from_recorders(
+        objective_recorder=record_objective_goal_findings,
+        codebase_scan_recorder=record_codebase_scan_findings,
+        retry_budget_recorder=record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        repo_root=REPO_ROOT,
+        scope_label="Hallucinate",
+        after_order=("retry-budget", "objective-goal", "codebase-scan"),
+    )
+
+
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    paths = ensure_hallucinate_multimodal_bootstrap_paths()
-    _enter_runtime_environment()
 
     build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
         default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=paths["objective_goal_heap_path"],
+        default_objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
         default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
-    ).run_configured_from_paths(
+    ).run_configured_from_bootstrap(
         args,
-        paths,
+        ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
         todo_path_key=TASK_BOARD_PATH_KEY,
         task_prefix="## HAO-",
         state_prefix="hallucinate_multimodal_control",
@@ -195,16 +207,7 @@ def main(argv: list[str] | None = None) -> None:
         objective_path_key="objective_goal_heap_path",
         objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        hooks=build_daemon_refill_hooks_from_recorders(
-            objective_recorder=record_objective_goal_findings,
-            codebase_scan_recorder=record_codebase_scan_findings,
-            retry_budget_recorder=record_retry_budget_findings,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=paths["objective_goal_heap_path"],
-            repo_root=REPO_ROOT,
-            scope_label="Hallucinate",
-            after_order=("retry-budget", "objective-goal", "codebase-scan"),
-        ),
+        hooks_factory=_hallucinate_refill_hooks,
     )
 
 

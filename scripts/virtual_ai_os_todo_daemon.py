@@ -64,8 +64,6 @@ logger = logging.getLogger("virtual_ai_os_todo_daemon")
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    paths = ensure_virtual_ai_os_bootstrap_paths()
-    _enter_runtime_environment()
 
     build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
@@ -74,9 +72,10 @@ def main(argv: list[str] | None = None) -> None:
         default_objective_path=OBJECTIVE_HEAP_PATH,
         default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
-    ).run_configured_from_paths(
+    ).run_configured_from_bootstrap(
         args,
-        paths,
+        ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
         todo_path_key="task_board_path",
         task_prefix="## VAI-",
         state_prefix="virtual_ai_os",

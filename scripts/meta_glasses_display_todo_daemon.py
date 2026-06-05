@@ -104,41 +104,49 @@ record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
 )
 
 
-def main(argv: list[str] | None = None) -> None:
-    args = list(sys.argv[1:] if argv is None else argv)
-    _enter_runtime_environment()
-    paths = ensure_meta_display_bootstrap_paths()
+def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     _bootstrap_android_validation_env()
     enforce_android_validation_environment(paths["todo_path"])
+
+
+def _meta_display_refill_hooks(paths: dict[str, Path]):
+    return build_daemon_refill_hooks_from_recorders(
+        retry_budget_recorder=record_retry_budget_findings,
+        discovery_dir=paths["discovery_dir"],
+        retry_budget_extra_kwargs={
+            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+                "discovery_dir",
+                "data/meta_glasses_display_widgets/discovery",
+                paths,
+            ),
+        },
+        scope_label="validation",
+    )
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = list(sys.argv[1:] if argv is None else argv)
 
     build_configured_implementation_daemon_runner(
         repo_root=REPO_ROOT,
         logger=logger,
         default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        default_objective_path=paths["objective_heap_path"],
-        default_objective_bundle_dir=paths["objective_bundle_dir"],
+        default_objective_path=OBJECTIVE_HEAP_PATH,
+        default_objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
         pass_complete_message="Display-widget implementation daemon pass complete: %s",
-    ).run_configured_from_paths(
+    ).run_configured_from_bootstrap(
         args,
-        paths,
+        ensure_paths=ensure_meta_display_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
+        enter_runtime_before_paths=True,
+        path_callbacks=(_prepare_meta_display_paths,),
         task_prefix="## MGW-",
         state_prefix="meta_glasses_display",
         todo_path_flag=TASK_BOARD_PATH_OPTION,
         objective_path_key="objective_heap_path",
         objective_bundle_dir_key="objective_bundle_dir",
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        hooks=build_daemon_refill_hooks_from_recorders(
-            retry_budget_recorder=record_retry_budget_findings,
-            discovery_dir=paths["discovery_dir"],
-            retry_budget_extra_kwargs={
-                "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                    "discovery_dir",
-                    "data/meta_glasses_display_widgets/discovery",
-                    paths,
-                ),
-            },
-            scope_label="validation",
-        ),
+        hooks_factory=_meta_display_refill_hooks,
     )
 
 
