@@ -95,7 +95,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_daemon_refill_hooks_factory_from_recorders,
-    build_namespace_configured_implementation_daemon_runner,
+    build_namespace_daemon_bootstrap_runner,
     namespace_implementation_state_artifact_paths,
 )
 
@@ -187,10 +187,18 @@ _hallucinate_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
     scope_label="Hallucinate",
     after_order=("retry-budget", "objective-goal", "codebase-scan"),
 )
-_hallucinate_daemon_runner = build_namespace_configured_implementation_daemon_runner(
+_hallucinate_daemon_runner = build_namespace_daemon_bootstrap_runner(
     repo_root=REPO_ROOT,
     logger=logger,
     namespace_paths=HALLUCINATE_DATA_PATHS,
+    ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
+    enter_runtime_environment=_enter_runtime_environment,
+    task_prefix="## HAO-",
+    state_prefix="hallucinate_multimodal_control",
+    todo_path_key=TASK_BOARD_PATH_KEY,
+    todo_path_flag=TASK_BOARD_PATH_OPTION,
+    objective_path_key="objective_goal_heap_path",
+    hooks_factory=_hallucinate_refill_hooks,
     default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     default_objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
     pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
@@ -200,19 +208,7 @@ _hallucinate_daemon_runner = build_namespace_configured_implementation_daemon_ru
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    _hallucinate_daemon_runner.run_namespace_configured_from_bootstrap(
-        args,
-        ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
-        namespace_paths=HALLUCINATE_DATA_PATHS,
-        enter_runtime_environment=_enter_runtime_environment,
-        todo_path_key=TASK_BOARD_PATH_KEY,
-        task_prefix="## HAO-",
-        state_prefix="hallucinate_multimodal_control",
-        todo_path_flag=TASK_BOARD_PATH_OPTION,
-        objective_path_key="objective_goal_heap_path",
-        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        hooks_factory=_hallucinate_refill_hooks,
-    )
+    _hallucinate_daemon_runner.run(args)
 
 
 if __name__ == "__main__":

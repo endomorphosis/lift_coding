@@ -41,7 +41,7 @@ VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    build_namespace_configured_implementation_daemon_runner,
+    build_namespace_daemon_bootstrap_runner,
 )
 
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_agent_supervisor_bootstrap_path_callbacks(
@@ -59,10 +59,17 @@ _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
 logger = logging.getLogger("virtual_ai_os_todo_daemon")
-_virtual_ai_os_daemon_runner = build_namespace_configured_implementation_daemon_runner(
+_virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
     repo_root=REPO_ROOT,
     logger=logger,
     namespace_paths=VIRTUAL_AI_OS_DATA_PATHS,
+    ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
+    enter_runtime_environment=_enter_runtime_environment,
+    task_prefix="## VAI-",
+    state_prefix="virtual_ai_os",
+    todo_path_key="task_board_path",
+    todo_path_flag=TASK_BOARD_PATH_OPTION,
+    objective_path=OBJECTIVE_HEAP_PATH,
     default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     default_objective_path=OBJECTIVE_HEAP_PATH,
     pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
@@ -72,18 +79,7 @@ _virtual_ai_os_daemon_runner = build_namespace_configured_implementation_daemon_
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    _virtual_ai_os_daemon_runner.run_namespace_configured_from_bootstrap(
-        args,
-        ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
-        namespace_paths=VIRTUAL_AI_OS_DATA_PATHS,
-        enter_runtime_environment=_enter_runtime_environment,
-        todo_path_key="task_board_path",
-        task_prefix="## VAI-",
-        state_prefix="virtual_ai_os",
-        todo_path_flag=TASK_BOARD_PATH_OPTION,
-        objective_path=OBJECTIVE_HEAP_PATH,
-        worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-    )
+    _virtual_ai_os_daemon_runner.run(args)
 
 
 if __name__ == "__main__":
