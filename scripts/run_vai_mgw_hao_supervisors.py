@@ -81,7 +81,7 @@ def build_runner() -> ConfiguredMultiSupervisorCliRunner:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the configured VAI/MGW/HAO multi-supervisor CLI."""
 
-    return build_launcher().run(sys.argv[1:] if argv is None else argv)
+    return build_launcher().run_cli(argv)
 
 
 if __name__ == "__main__":
