@@ -22,10 +22,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_script_path as _repo_script_path,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_configured_supervisor_bootstrap_runner,
-    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_script_supervisor_bootstrap_runner,
     build_supervisor_refill_hooks_factory_from_recorders,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
@@ -55,16 +54,6 @@ _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     HALLUCINATE_ENV_PREFIX
 )
-_hallucinate_supervisor_runtime = build_script_supervisor_runtime(
-    repo_root=REPO_ROOT,
-    script_path=__file__,
-    extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
-    prepare_environment=_ensure_runtime_pythonpath,
-)
-repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_runtime.repair_runtime
-hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
-ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
-
 
 _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_factory(
     HALLUCINATE_DATA_PATHS,
@@ -93,10 +82,13 @@ _hallucinate_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders
     repo_root=REPO_ROOT,
     scope_label="Hallucinate",
 )
-_hallucinate_supervisor_runner = build_configured_supervisor_bootstrap_runner(
-    runtime=_hallucinate_supervisor_runtime,
+_hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
+    repo_root=REPO_ROOT,
+    script_path=__file__,
     logger=logger,
     ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
+    extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
+    prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
     todo_path_key=TASK_BOARD_PATH_KEY,
     task_prefix="## HAO-",
@@ -112,6 +104,10 @@ _hallucinate_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
     repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
 )
+_hallucinate_supervisor_runtime = _hallucinate_supervisor_runner.runtime
+repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_runtime.repair_runtime
+hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
+ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:

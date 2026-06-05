@@ -78,10 +78,9 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_configured_supervisor_bootstrap_runner,
-    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_script_supervisor_bootstrap_runner,
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -104,16 +103,6 @@ _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     VIRTUAL_AI_OS_ENV_PREFIX
 )
 logger = logging.getLogger("virtual_ai_os_todo_supervisor")
-_virtual_ai_os_supervisor_runtime = build_script_supervisor_runtime(
-    repo_root=REPO_ROOT,
-    script_path=__file__,
-    prepare_environment=_ensure_runtime_pythonpath,
-)
-VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_runtime.process_match_any
-repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runtime.repair_runtime
-virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_running
-ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
-
 
 _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_factory(
     VIRTUAL_AI_OS_DATA_PATHS,
@@ -131,10 +120,12 @@ _virtual_ai_os_codebase_defaults = build_namespace_codebase_refill_defaults_fact
     codebase_scan_min_open_tasks=0,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
 )
-_virtual_ai_os_supervisor_runner = build_configured_supervisor_bootstrap_runner(
-    runtime=_virtual_ai_os_supervisor_runtime,
+_virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(
+    repo_root=REPO_ROOT,
+    script_path=__file__,
     logger=logger,
     ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
+    prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
     task_prefix="## VAI-",
     state_prefix="virtual_ai_os",
@@ -147,6 +138,11 @@ _virtual_ai_os_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
     repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
 )
+_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runner.runtime
+VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_runtime.process_match_any
+repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runtime.repair_runtime
+virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_running
+ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:

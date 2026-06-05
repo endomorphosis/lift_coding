@@ -123,10 +123,9 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_configured_supervisor_bootstrap_runner,
-    build_script_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_script_supervisor_bootstrap_runner,
     build_supervisor_refill_hooks_factory_from_recorders,
 )
 
@@ -153,15 +152,6 @@ ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
 _RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-_meta_display_supervisor_runtime = build_script_supervisor_runtime(
-    repo_root=REPO_ROOT,
-    script_path=__file__,
-    prepare_environment=_ensure_runtime_pythonpath,
-)
-META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_runtime.process_match_any
-repair_meta_display_supervisor_runtime = _meta_display_supervisor_runtime.repair_runtime
-meta_display_supervisor_is_running = _meta_display_supervisor_runtime.is_running
-ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure_running
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 
@@ -240,10 +230,12 @@ _meta_display_refill_hooks = build_supervisor_refill_hooks_factory_from_recorder
     retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
 )
-_meta_display_supervisor_runner = build_configured_supervisor_bootstrap_runner(
-    runtime=_meta_display_supervisor_runtime,
+_meta_display_supervisor_runner = build_script_supervisor_bootstrap_runner(
+    repo_root=REPO_ROOT,
+    script_path=__file__,
     logger=logger,
     ensure_paths=ensure_meta_display_bootstrap_paths,
+    prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
     enter_runtime_before_paths=True,
     path_callbacks=(_prepare_meta_display_paths,),
@@ -260,6 +252,11 @@ _meta_display_supervisor_runner = build_configured_supervisor_bootstrap_runner(
     ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
     repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
 )
+_meta_display_supervisor_runtime = _meta_display_supervisor_runner.runtime
+META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_runtime.process_match_any
+repair_meta_display_supervisor_runtime = _meta_display_supervisor_runtime.repair_runtime
+meta_display_supervisor_is_running = _meta_display_supervisor_runtime.is_running
+ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:
