@@ -22,18 +22,19 @@ _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 BOOTSTRAP_IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-MULTI_SUPERVISOR_ENV_DEFAULTS = {
-    "PYTHONUNBUFFERED": "1",
-    "CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS": "60",
-    "PREFER_COPILOT_MERGE_RESOLVER": "1",
-}
 
 
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
     ConfiguredMultiSupervisorLauncher,
     build_repo_implementation_multi_supervisor_launcher,
+    implementation_multi_supervisor_env_defaults,
     implementation_supervisor_namespace_track_config,
+)
+
+
+MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
+    prefer_copilot_merge_resolver=True,
 )
 
 
