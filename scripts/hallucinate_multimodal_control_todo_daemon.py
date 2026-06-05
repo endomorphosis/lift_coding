@@ -43,6 +43,7 @@ _HALLUCINATE_CONTEXT = _build_agent_supervisor_namespace_context(
     objective_path_key="objective_goal_heap_path",
     runtime_primary_package_names=("ipfs_accelerate",),
 )
+HALLUCINATE_CONTEXT = _HALLUCINATE_CONTEXT
 DEFAULT_TODO_PATH = _HALLUCINATE_CONTEXT.task_board_path
 HALLUCINATE_DATA_PATHS = _HALLUCINATE_CONTEXT.namespace_paths
 TASK_BOARD_PATH_OPTION = _HALLUCINATE_CONTEXT.task_board_path_option

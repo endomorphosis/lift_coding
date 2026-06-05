@@ -15,7 +15,6 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
-    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     repo_script_path as _repo_script_path,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
@@ -36,6 +35,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     OBJECTIVE_REFILL_SETTINGS,
     HALLUCINATE_INTEROPERABILITY_FOCUS,
     HALLUCINATE_ENV_PREFIX,
+    HALLUCINATE_CONTEXT,
     TASK_BOARD_PATH_KEY,
     TASK_BOARD_PATH_OPTION,
     ensure_hallucinate_multimodal_bootstrap_paths,
@@ -52,7 +52,7 @@ REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "hallucinate_multimodal_control_todo_daemon.py")
 DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
-_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
+_RUNTIME_ENVIRONMENT = HALLUCINATE_CONTEXT.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(

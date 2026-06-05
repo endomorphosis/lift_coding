@@ -82,19 +82,29 @@ def test_hallucinate_multimodal_llm_router_preflight_does_not_call_model():
     assert "build_repo_task_proposal_route_runner(" not in source
 
 
-def test_hallucinate_daemon_delegates_reusable_namespace_context():
+def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
-    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_daemon.py").read_text(encoding="utf-8")
+    supervisor_module = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+    daemon_source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_daemon.py").read_text(encoding="utf-8")
+    supervisor_source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_supervisor.py").read_text(
+        encoding="utf-8"
+    )
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 
     assert isinstance(daemon_module._HALLUCINATE_CONTEXT, AgentSupervisorNamespaceContext)
+    assert isinstance(supervisor_module.HALLUCINATE_CONTEXT, AgentSupervisorNamespaceContext)
+    assert daemon_module.HALLUCINATE_CONTEXT is daemon_module._HALLUCINATE_CONTEXT
     assert daemon_module._HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
+    assert supervisor_module.HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
     assert daemon_module._HALLUCINATE_CONTEXT.task_board_path == TASK_BOARD_PATH
+    assert supervisor_module.HALLUCINATE_CONTEXT.task_board_path == TASK_BOARD_PATH
     assert daemon_module.HALLUCINATE_DATA_PATHS == daemon_module._HALLUCINATE_CONTEXT.namespace_paths
-    assert "build_agent_supervisor_namespace_context(" in source
-    assert "agent_supervisor_namespace_paths(" not in source
-    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in source
+    assert supervisor_module.HALLUCINATE_DATA_PATHS == supervisor_module.HALLUCINATE_CONTEXT.namespace_paths
+    assert "build_agent_supervisor_namespace_context(" in daemon_source
+    assert "agent_supervisor_namespace_paths(" not in daemon_source
+    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in daemon_source
+    assert "build_repo_runtime_environment_callbacks(" not in supervisor_source
 
 
 # Keep daemon constructor fixture paths centralized so required task-board wiring
