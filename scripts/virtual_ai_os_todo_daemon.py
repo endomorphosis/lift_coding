@@ -29,11 +29,11 @@ _VIRTUAL_AI_OS_CONTEXT = _build_agent_supervisor_namespace_context(
     VIRTUAL_AI_OS_ENV_PREFIX,
     namespace="virtual_ai_os",
     task_board_stem="19-virtual-ai-os-submodule-integration",
-    task_board_key="task_board_path",
-    task_board_setting="todo_path",
     objective_path=OBJECTIVE_HEAP_PATH,
 )
+VIRTUAL_AI_OS_CONTEXT = _VIRTUAL_AI_OS_CONTEXT
 TASK_BOARD_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
+TASK_BOARD_PATH_KEY = _VIRTUAL_AI_OS_CONTEXT.task_board_path_key
 VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
 TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
@@ -69,7 +69,7 @@ _virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
     enter_runtime_environment=_enter_runtime_environment,
     task_prefix="## VAI-",
     state_prefix="virtual_ai_os",
-    todo_path_key="task_board_path",
+    todo_path_key=TASK_BOARD_PATH_KEY,
     todo_path_flag=TASK_BOARD_PATH_OPTION,
     objective_path=OBJECTIVE_HEAP_PATH,
     default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,

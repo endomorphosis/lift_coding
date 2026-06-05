@@ -180,21 +180,24 @@ def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 
-    for module, source in (
-        (daemon_module, daemon_source),
-        (supervisor_module, supervisor_source),
-    ):
-        assert isinstance(module._VIRTUAL_AI_OS_CONTEXT, AgentSupervisorNamespaceContext)
-        assert module._VIRTUAL_AI_OS_CONTEXT.namespace_paths.namespace == "virtual_ai_os"
-        assert module._VIRTUAL_AI_OS_CONTEXT.task_board_path == (
-            REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename(
-                "19-virtual-ai-os-submodule-integration"
-            )
+    assert isinstance(daemon_module.VIRTUAL_AI_OS_CONTEXT, AgentSupervisorNamespaceContext)
+    assert isinstance(supervisor_module.VIRTUAL_AI_OS_CONTEXT, AgentSupervisorNamespaceContext)
+    assert daemon_module.VIRTUAL_AI_OS_CONTEXT is daemon_module._VIRTUAL_AI_OS_CONTEXT
+    for module in (daemon_module, supervisor_module):
+        assert module.VIRTUAL_AI_OS_CONTEXT.namespace_paths.namespace == "virtual_ai_os"
+        assert module.VIRTUAL_AI_OS_CONTEXT.task_board_path == (
+            REPO_ROOT
+            / "implementation_plan"
+            / "docs"
+            / _task_board_filename("19-virtual-ai-os-submodule-integration")
         )
-        assert module.VIRTUAL_AI_OS_DATA_PATHS == module._VIRTUAL_AI_OS_CONTEXT.namespace_paths
-        assert "build_agent_supervisor_namespace_context(" in source
-        assert "agent_supervisor_namespace_paths(" not in source
-        assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in source
+        assert module.VIRTUAL_AI_OS_DATA_PATHS == module.VIRTUAL_AI_OS_CONTEXT.namespace_paths
+    assert "build_agent_supervisor_namespace_context(" in daemon_source
+    assert "build_agent_supervisor_namespace_context(" not in supervisor_source
+    assert "agent_supervisor_namespace_paths(" not in daemon_source
+    assert "agent_supervisor_namespace_paths(" not in supervisor_source
+    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in daemon_source
+    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in supervisor_source
 
 
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
