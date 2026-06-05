@@ -46,11 +46,16 @@ _META_DISPLAY_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     ("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
 )
 META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
-DISCOVERY_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+_meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
     "discovery_dir",
     "data/meta_glasses_display_widgets/discovery",
-    {"discovery_dir": DISCOVERY_DIR},
 )
+_meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_kwargs_factory(
+    "discovery_output_path",
+    "discovery_dir",
+    "data/meta_glasses_display_widgets/discovery",
+)
+DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "swissknife",
@@ -109,20 +114,10 @@ def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     enforce_android_validation_environment(paths["todo_path"])
 
 
-def _meta_display_retry_budget_extra_kwargs(paths: dict[str, Path]):
-    return {
-        "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-            "discovery_dir",
-            "data/meta_glasses_display_widgets/discovery",
-            paths,
-        ),
-    }
-
-
 _meta_display_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
     retry_budget_recorder=record_retry_budget_findings,
     discovery_dir_key="discovery_dir",
-    retry_budget_extra_kwargs_factory=_meta_display_retry_budget_extra_kwargs,
+    retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
 )
 

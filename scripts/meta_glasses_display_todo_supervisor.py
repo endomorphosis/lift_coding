@@ -77,11 +77,16 @@ TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
     f"implementation_plan/docs/{_task_board_filename('18-swissknife-meta-glasses-display-widgets')}",
     {"todo_path": TASK_BOARD_PATH},
 )
-DISCOVERY_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+_meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
     "discovery_dir",
     "data/meta_glasses_display_widgets/discovery",
-    {"discovery_dir": DISCOVERY_DIR},
 )
+_meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_kwargs_factory(
+    "discovery_output_path",
+    "discovery_dir",
+    "data/meta_glasses_display_widgets/discovery",
+)
+DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
 DISCOVERY_EXPANSION_OUTPUTS = (
     TASK_BOARD_OUTPUT_PATH,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
@@ -196,22 +201,10 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _meta_display_discovery_output_path(paths: dict[str, Path]) -> str:
-    return _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-        "discovery_dir",
-        "data/meta_glasses_display_widgets/discovery",
-        paths,
-    )
-
-
 def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     _bootstrap_android_validation_env()
     ensure_post_initial_discovery_backlog(paths["todo_path"])
     enforce_android_validation_environment(paths["todo_path"])
-
-
-def _meta_display_retry_budget_extra_kwargs(paths: dict[str, Path]):
-    return {"discovery_output_path": _meta_display_discovery_output_path(paths)}
 
 
 _meta_display_objective_defaults = build_objective_refill_defaults_factory(
@@ -239,7 +232,7 @@ _meta_display_codebase_defaults = build_codebase_refill_defaults_factory(
 _meta_display_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders(
     retry_budget_recorder=record_retry_budget_findings,
     discovery_dir_key="discovery_dir",
-    retry_budget_extra_kwargs_factory=_meta_display_retry_budget_extra_kwargs,
+    retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
 )
 
