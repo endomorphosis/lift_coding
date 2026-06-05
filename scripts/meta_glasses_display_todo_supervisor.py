@@ -152,24 +152,9 @@ _meta_display_supervisor_runtime = build_configured_supervisor_runtime(
     process_match_any=META_DISPLAY_SUPERVISOR_PROCESS_MARKERS,
     prepare_environment=_ensure_runtime_pythonpath,
 )
-
-
-def repair_meta_display_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
-    """Clear stale Meta-display supervisor/daemon markers before health checks."""
-
-    return _meta_display_supervisor_runtime.repair_runtime(state_dir, state_prefix)
-
-
-def meta_display_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
-    return _meta_display_supervisor_runtime.is_running(state_dir, state_prefix)
-
-
-def ensure_meta_display_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
-    return _meta_display_supervisor_runtime.ensure_running(
-        argv,
-        state_dir=state_dir,
-        state_prefix=state_prefix,
-    )
+repair_meta_display_supervisor_runtime = _meta_display_supervisor_runtime.repair_runtime
+meta_display_supervisor_is_running = _meta_display_supervisor_runtime.is_running
+ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure_running
 
 DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
 

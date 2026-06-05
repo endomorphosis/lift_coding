@@ -119,24 +119,9 @@ _virtual_ai_os_supervisor_runtime = build_configured_supervisor_runtime(
     process_match_any=VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS,
     prepare_environment=_ensure_runtime_pythonpath,
 )
-
-
-def repair_virtual_ai_os_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
-    """Clear stale virtual-AI-OS supervisor/daemon markers before health checks."""
-
-    return _virtual_ai_os_supervisor_runtime.repair_runtime(state_dir, state_prefix)
-
-
-def virtual_ai_os_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
-    return _virtual_ai_os_supervisor_runtime.is_running(state_dir, state_prefix)
-
-
-def ensure_virtual_ai_os_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
-    return _virtual_ai_os_supervisor_runtime.ensure_running(
-        argv,
-        state_dir=state_dir,
-        state_prefix=state_prefix,
-    )
+repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runtime.repair_runtime
+virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_running
+ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:

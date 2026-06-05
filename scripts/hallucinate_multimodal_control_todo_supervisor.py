@@ -74,24 +74,9 @@ _hallucinate_supervisor_runtime = build_configured_supervisor_runtime(
     process_match_any=HALLUCINATE_SUPERVISOR_PROCESS_MARKERS,
     prepare_environment=_ensure_runtime_pythonpath,
 )
-
-
-def repair_hallucinate_supervisor_runtime(state_dir: Path, state_prefix: str) -> dict[str, object]:
-    """Clear stale Hallucinate supervisor/daemon markers before health checks."""
-
-    return _hallucinate_supervisor_runtime.repair_runtime(state_dir, state_prefix)
-
-
-def hallucinate_supervisor_is_running(state_dir: Path, state_prefix: str) -> bool:
-    return _hallucinate_supervisor_runtime.is_running(state_dir, state_prefix)
-
-
-def ensure_hallucinate_supervisor_running(argv: list[str], *, state_dir: Path, state_prefix: str) -> dict[str, object]:
-    return _hallucinate_supervisor_runtime.ensure_running(
-        argv,
-        state_dir=state_dir,
-        state_prefix=state_prefix,
-    )
+repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_runtime.repair_runtime
+hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
+ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:
