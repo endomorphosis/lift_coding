@@ -30,6 +30,7 @@ ARTIFACT_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "llm_rout
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     build_configured_task_proposal_router_runner,
+    standard_task_proposal_requested_outputs,
 )
 
 
@@ -42,12 +43,8 @@ TASK_PROPOSAL_RUNNER = build_configured_task_proposal_router_runner(
     plan_path=PLAN_PATH,
     artifact_dir=ARTIFACT_DIR,
     prompt_intro="You are helping implement the Hallucinate App multimodal control-surface roadmap.",
-    requested_outputs=(
-        "exact files to edit",
+    requested_outputs=standard_task_proposal_requested_outputs(
         "descriptor/runtime contracts to add",
-        "tests and fixtures needed",
-        "validation commands",
-        "risks or blockers",
     ),
     no_open_task_message="No open task found in Hallucinate multimodal-control task board.",
     description=(

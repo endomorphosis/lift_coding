@@ -28,6 +28,7 @@ ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     build_configured_task_proposal_router_runner,
+    standard_task_proposal_requested_outputs,
 )
 
 
@@ -40,12 +41,9 @@ TASK_PROPOSAL_RUNNER = build_configured_task_proposal_router_runner(
     plan_path=PLAN_PATH,
     artifact_dir=ARTIFACT_DIR,
     prompt_intro="You are helping implement the HandsFree/Swissknife Meta glasses display-widget roadmap.",
-    requested_outputs=(
-        "exact files to edit",
+    requested_outputs=standard_task_proposal_requested_outputs(
         "data contracts or APIs to add",
-        "mocks/fixtures/tests needed to run without hardware",
-        "validation commands",
-        "risks or blockers",
+        test_output="mocks/fixtures/tests needed to run without hardware",
     ),
     no_open_task_message="Display-widget task board has no open task.",
     description=(
