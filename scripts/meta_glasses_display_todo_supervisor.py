@@ -129,6 +129,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
 )
 
@@ -258,10 +259,11 @@ _meta_display_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
 )
 _meta_display_supervisor_runtime = _meta_display_supervisor_runner.runtime
-META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_runtime.process_match_any
-repair_meta_display_supervisor_runtime = _meta_display_supervisor_runtime.repair_runtime
-meta_display_supervisor_is_running = _meta_display_supervisor_runtime.is_running
-ensure_meta_display_supervisor_running = _meta_display_supervisor_runtime.ensure_running
+_meta_display_supervisor_exports = build_configured_supervisor_runtime_exports(_meta_display_supervisor_runtime)
+META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_exports.process_match_any
+repair_meta_display_supervisor_runtime = _meta_display_supervisor_exports.repair_runtime
+meta_display_supervisor_is_running = _meta_display_supervisor_exports.is_running
+ensure_meta_display_supervisor_running = _meta_display_supervisor_exports.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:

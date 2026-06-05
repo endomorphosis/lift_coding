@@ -28,6 +28,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
@@ -114,9 +115,10 @@ _hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
 )
 _hallucinate_supervisor_runtime = _hallucinate_supervisor_runner.runtime
-repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_runtime.repair_runtime
-hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
-ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
+_hallucinate_supervisor_exports = build_configured_supervisor_runtime_exports(_hallucinate_supervisor_runtime)
+repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_exports.repair_runtime
+hallucinate_supervisor_is_running = _hallucinate_supervisor_exports.is_running
+ensure_hallucinate_supervisor_running = _hallucinate_supervisor_exports.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:

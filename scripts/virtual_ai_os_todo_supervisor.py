@@ -81,6 +81,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
+    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
 )
 
@@ -141,10 +142,11 @@ _virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
 )
 _virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runner.runtime
-VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_runtime.process_match_any
-repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runtime.repair_runtime
-virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_running
-ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
+_virtual_ai_os_supervisor_exports = build_configured_supervisor_runtime_exports(_virtual_ai_os_supervisor_runtime)
+VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_exports.process_match_any
+repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_exports.repair_runtime
+virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_exports.is_running
+ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_exports.ensure_running
 
 
 def main(argv: list[str] | None = None) -> None:
