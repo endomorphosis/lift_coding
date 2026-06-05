@@ -10,7 +10,6 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
@@ -19,7 +18,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
+    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     repo_relative_or_default as _repo_relative_or_default,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
@@ -66,10 +65,7 @@ HALLUCINATE_SUPERVISOR_PROCESS_MARKERS = (
     "hallucinate_multimodal_control_todo_supervisor.py",
     "hallucinate_multimodal_control_autopilot.py",
 )
-_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-)
+_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(

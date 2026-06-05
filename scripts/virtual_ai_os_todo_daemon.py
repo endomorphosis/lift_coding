@@ -9,7 +9,6 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
@@ -17,7 +16,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
-    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
+    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -55,10 +54,7 @@ _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _build_prefixed_bootstrap_path_callbacks(
     ("state_dir", "worktree_root"),
 )
 VIRTUAL_AI_OS_BOOTSTRAP_SPECS = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.specs
-_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-)
+_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(REPO_ROOT)
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve

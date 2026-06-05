@@ -15,23 +15,14 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_runtime_environment_callbacks,
-    repo_external_package_roots,
+    build_repo_runtime_environment_callbacks,
     repo_root_from_env,
     repo_script_command,
 )
 
 
 REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
-IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT = repo_external_package_roots(
-    REPO_ROOT,
-    ("ipfs_accelerate", "ipfs_datasets"),
-)
-
-_RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(
-    REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-)
+_RUNTIME_ENVIRONMENT = build_repo_runtime_environment_callbacks(REPO_ROOT)
 MULTI_SUPERVISOR_ENV_DEFAULTS = {
     "PYTHONUNBUFFERED": "1",
     "CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS": "60",

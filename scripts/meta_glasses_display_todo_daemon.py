@@ -9,7 +9,6 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
@@ -18,7 +17,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
-    build_runtime_environment_callbacks as _build_runtime_environment_callbacks,
+    build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -69,10 +68,9 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
 meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
 ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
-_RUNTIME_ENVIRONMENT = _build_runtime_environment_callbacks(
+_RUNTIME_ENVIRONMENT = _build_repo_runtime_environment_callbacks(
     REPO_ROOT,
-    (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
-    primary_import_paths=(IPFS_ACCELERATE_ROOT,),
+    primary_package_names=("ipfs_accelerate",),
 )
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
