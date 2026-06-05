@@ -29,10 +29,20 @@ IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT = repo_external_package_roots(
     ("ipfs_accelerate", "ipfs_datasets"),
 )
 
-VAI_MGW_HAO_IMPLEMENTATION_TRACKS = (
-    "VAI|scripts/virtual_ai_os_todo_supervisor.py|data/virtual_ai_os/state|virtual_ai_os",
-    "MGW|scripts/meta_glasses_display_todo_supervisor.py|data/meta_glasses_display_widgets/state|meta_glasses_display",
-    "HAO|scripts/hallucinate_multimodal_control_todo_supervisor.py|data/hallucinate_multimodal_control/state|hallucinate_multimodal_control",
+VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
+    ("VAI", "scripts/virtual_ai_os_todo_supervisor.py", "data/virtual_ai_os/state", "virtual_ai_os"),
+    (
+        "MGW",
+        "scripts/meta_glasses_display_todo_supervisor.py",
+        "data/meta_glasses_display_widgets/state",
+        "meta_glasses_display",
+    ),
+    (
+        "HAO",
+        "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+        "data/hallucinate_multimodal_control/state",
+        "hallucinate_multimodal_control",
+    ),
 )
 
 
@@ -59,7 +69,19 @@ configure_environment()
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
     build_configured_multi_supervisor_cli_runner,
+    implementation_supervisor_compact_track_spec,
     utc_run_stamp,
+)
+
+
+VAI_MGW_HAO_IMPLEMENTATION_TRACKS = tuple(
+    implementation_supervisor_compact_track_spec(
+        name=name,
+        script_path=script_path,
+        state_dir=state_dir,
+        state_prefix=state_prefix,
+    )
+    for name, script_path, state_dir, state_prefix in VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS
 )
 
 
