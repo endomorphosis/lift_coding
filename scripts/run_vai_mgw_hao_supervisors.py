@@ -16,11 +16,14 @@ if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths,
-    repo_root_from_env,
+    build_repo_script_bootstrap,
 )
 
 
-REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+BOOTSTRAP_IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 MULTI_SUPERVISOR_ENV_DEFAULTS = {
     "PYTHONUNBUFFERED": "1",
     "CODEX_MERGE_RESOLVER_TIMEOUT_SECONDS": "60",

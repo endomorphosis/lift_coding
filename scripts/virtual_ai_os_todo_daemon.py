@@ -17,13 +17,16 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
-    repo_root_from_env as _repo_root_from_env,
+    build_repo_script_bootstrap as _build_repo_script_bootstrap,
     repo_doc_path as _repo_doc_path,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_option as _task_board_path_option,
 )
 
-REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "19-virtual-ai-os-submodule-integration")
 VIRTUAL_AI_OS_ENV_PREFIX = "HANDSFREE_VAI_OS"
 VIRTUAL_AI_OS_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os")

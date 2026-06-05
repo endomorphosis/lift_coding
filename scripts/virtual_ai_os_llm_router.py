@@ -13,13 +13,16 @@ IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import repo_root_from_env  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     build_repo_task_proposal_route_runner,
 )
 
 
-REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 TASK_PROPOSAL_RUNNER = build_repo_task_proposal_route_runner(
     repo_root=REPO_ROOT,
     task_board_stem="19-virtual-ai-os-submodule-integration",

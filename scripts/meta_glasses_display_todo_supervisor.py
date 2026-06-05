@@ -19,18 +19,21 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+    build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
-    repo_root_from_env as _repo_root_from_env,
     repo_script_path as _repo_script_path,
     repo_task_board_path as _repo_task_board_path,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
 
-REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 TASK_BOARD_PATH = _repo_task_board_path(REPO_ROOT, "18-swissknife-meta-glasses-display-widgets")
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
 TASK_BOARD_PATH_OPTION = _task_board_path_option()

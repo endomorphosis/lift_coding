@@ -21,7 +21,7 @@ os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import repo_root_from_env  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
     JavaScriptActionContractConfig,
     PythonActionContractConfig,
@@ -29,7 +29,10 @@ from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # 
     operation_action_mapper,
 )
 
-REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 SPEC_PATH = REPO_ROOT / "spec" / "meta_glasses_display_widget_orb_interface.json"
 PYTHON_CONTRACT_PATH = (
     REPO_ROOT / "src" / "handsfree" / "meta_glasses_display_widget_contract.py"

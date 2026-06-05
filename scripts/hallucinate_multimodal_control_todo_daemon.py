@@ -16,19 +16,22 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
+    build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
     prefixed_env_path as _prefixed_env_path,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
-    repo_root_from_env as _repo_root_from_env,
     repo_task_board_path as _repo_task_board_path,
     task_board_path_key as _task_board_path_key,
     task_board_path_option as _task_board_path_option,
 )
 
-REPO_ROOT = _repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 DEFAULT_TODO_PATH = _repo_task_board_path(
     REPO_ROOT,
     "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",

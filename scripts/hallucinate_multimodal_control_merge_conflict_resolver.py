@@ -18,7 +18,7 @@ HAO_ENV_PREFIX = "HANDSFREE_HAO"
 HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
 HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import repo_root_from_env  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     build_namespace_merge_resolver_runner,
     compact_text,
@@ -27,7 +27,10 @@ from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
     unmerged_paths,
 )
 
-REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
+_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 _HAO_MERGE_RESOLVER_RUNNER = build_namespace_merge_resolver_runner(
     repo_root=REPO_ROOT,
     namespace="hallucinate_multimodal_control",
