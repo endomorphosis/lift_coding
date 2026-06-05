@@ -18,13 +18,16 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     apply_env_defaults,
     build_runtime_environment_callbacks,
     env_str,
+    repo_external_package_roots,
     repo_root_from_env,
 )
 
 
 REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
-IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
-IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT = repo_external_package_roots(
+    REPO_ROOT,
+    ("ipfs_accelerate", "ipfs_datasets"),
+)
 
 VAI_MGW_HAO_IMPLEMENTATION_TRACKS = (
     "VAI|scripts/virtual_ai_os_todo_supervisor.py|data/virtual_ai_os/state|virtual_ai_os",
