@@ -90,12 +90,12 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_runtime_bootstrap_callbacks as _build_agent_supervisor_runtime_bootstrap_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    build_configured_backlog_recorder_bundle,
     build_namespace_codebase_scan_recorder,
     build_namespace_objective_backlog_recorder,
     build_namespace_retry_budget_recorder,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    build_daemon_refill_hooks_factory_from_recorders,
     build_namespace_daemon_bootstrap_runner,
     namespace_implementation_state_artifact_paths,
 )
@@ -177,10 +177,12 @@ record_retry_budget_findings = build_namespace_retry_budget_recorder(
 )
 
 
-_hallucinate_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
+_hallucinate_refill_recorders = build_configured_backlog_recorder_bundle(
     objective_recorder=record_objective_goal_findings,
     codebase_scan_recorder=record_codebase_scan_findings,
     retry_budget_recorder=record_retry_budget_findings,
+)
+_hallucinate_refill_hooks = _hallucinate_refill_recorders.daemon_refill_hooks_factory(
     discovery_dir=DISCOVERY_DIR,
     objective_path_key="objective_goal_heap_path",
     repo_root=REPO_ROOT,

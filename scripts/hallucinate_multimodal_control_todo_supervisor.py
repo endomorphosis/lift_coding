@@ -22,11 +22,13 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
     repo_script_path as _repo_script_path,
 )
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    build_configured_backlog_recorder_bundle,
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
     build_script_supervisor_bootstrap_runner,
-    build_supervisor_refill_hooks_factory_from_recorders,
 )
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_SETTINGS,
@@ -78,10 +80,12 @@ _hallucinate_codebase_defaults = build_namespace_codebase_refill_defaults_factor
 )
 
 
-_hallucinate_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders(
+_hallucinate_refill_recorders = build_configured_backlog_recorder_bundle(
     objective_recorder=record_objective_goal_findings,
     codebase_scan_recorder=record_codebase_scan_findings,
     retry_budget_recorder=record_retry_budget_findings,
+)
+_hallucinate_refill_hooks = _hallucinate_refill_recorders.supervisor_refill_hooks_factory(
     discovery_dir=DISCOVERY_DIR,
     objective_path_key="objective_goal_heap_path",
     repo_root=REPO_ROOT,

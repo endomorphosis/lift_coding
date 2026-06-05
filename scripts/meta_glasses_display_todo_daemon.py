@@ -65,9 +65,11 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "external/meta-wearables-dat-ios",
 )
 
-from ipfs_accelerate_py.agent_supervisor.backlog_refinery import build_namespace_retry_budget_recorder  # noqa: E402
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    build_configured_backlog_recorder_bundle,
+    build_namespace_retry_budget_recorder,
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    build_daemon_refill_hooks_factory_from_recorders,
     build_namespace_daemon_bootstrap_runner,
     namespace_implementation_state_artifact_paths,
 )
@@ -118,8 +120,10 @@ def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     enforce_android_validation_environment(paths["todo_path"])
 
 
-_meta_display_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
+_meta_display_refill_recorders = build_configured_backlog_recorder_bundle(
     retry_budget_recorder=record_retry_budget_findings,
+)
+_meta_display_refill_hooks = _meta_display_refill_recorders.daemon_refill_hooks_factory(
     discovery_dir_key="discovery_dir",
     retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",

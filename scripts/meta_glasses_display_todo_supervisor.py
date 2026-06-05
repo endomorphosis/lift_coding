@@ -123,13 +123,13 @@ DISCOVERY_EXPANSION_VALIDATION = (
 )
 
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    build_configured_backlog_recorder_bundle,
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
     build_script_supervisor_bootstrap_runner,
-    build_supervisor_refill_hooks_factory_from_recorders,
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -227,8 +227,10 @@ _meta_display_codebase_defaults = build_namespace_codebase_refill_defaults_facto
 )
 
 
-_meta_display_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders(
+_meta_display_refill_recorders = build_configured_backlog_recorder_bundle(
     retry_budget_recorder=record_retry_budget_findings,
+)
+_meta_display_refill_hooks = _meta_display_refill_recorders.supervisor_refill_hooks_factory(
     discovery_dir_key="discovery_dir",
     retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
