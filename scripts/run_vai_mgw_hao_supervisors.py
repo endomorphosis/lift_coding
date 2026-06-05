@@ -19,6 +19,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     env_str,
     repo_external_package_roots,
     repo_root_from_env,
+    repo_script_command,
 )
 
 
@@ -73,7 +74,7 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
 def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     """Return the configured reusable launcher for this repository's tracks."""
 
-    resolver_command = f"bash {REPO_ROOT / 'scripts' / 'llm_merge_resolver_fallback.sh'}"
+    resolver_command = repo_script_command(REPO_ROOT, "scripts/llm_merge_resolver_fallback.sh")
     return build_configured_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
         duration_seconds=env_str("DURATION_SECONDS", "28800"),
