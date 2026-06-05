@@ -15,13 +15,11 @@ SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
-    repo_doc_path as _repo_doc_path,
     repo_script_path as _repo_script_path,
     task_board_filename as _task_board_filename,
 )
@@ -31,23 +29,18 @@ SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
-OBJECTIVE_HEAP_PATH = _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md")
-_META_DISPLAY_CONTEXT = _build_agent_supervisor_namespace_context(
-    REPO_ROOT,
-    META_DISPLAY_ENV_PREFIX,
-    namespace="meta_glasses_display_widgets",
-    task_board_stem="18-swissknife-meta-glasses-display-widgets",
-    objective_path=OBJECTIVE_HEAP_PATH,
-    namespace_keys=(
-        "state_dir",
-        "worktree_root",
-        "discovery_dir",
-        "objective_graph_path",
-        "objective_bundle_dir",
-        "objective_dataset_dir",
-        "objective_todo_vector_index_path",
-    ),
+
+from meta_glasses_display_todo_daemon import (  # noqa: E402
+    _bootstrap_android_validation_env,
+    android_validation_environment,
+    enforce_android_validation_environment,
+    META_DISPLAY_CONTEXT,
+    META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+    OBJECTIVE_HEAP_PATH,
+    record_retry_budget_findings,
 )
+
+_META_DISPLAY_CONTEXT = META_DISPLAY_CONTEXT
 TASK_BOARD_PATH = _META_DISPLAY_CONTEXT.task_board_path
 TASK_BOARD_PATH_OPTION = _META_DISPLAY_CONTEXT.task_board_path_option
 META_DISPLAY_DATA_PATHS = _META_DISPLAY_CONTEXT.namespace_paths
@@ -133,14 +126,6 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
 META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     META_DISPLAY_ENV_PREFIX,
     "hallucinate_app",
-)
-
-from meta_glasses_display_todo_daemon import (  # noqa: E402
-    _bootstrap_android_validation_env,
-    android_validation_environment,
-    enforce_android_validation_environment,
-    META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-    record_retry_budget_findings,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")

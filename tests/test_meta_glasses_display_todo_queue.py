@@ -165,17 +165,19 @@ def test_meta_display_wrappers_delegate_reusable_namespace_context():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 
-    for module, source in (
-        (daemon_module, daemon_source),
-        (supervisor_module, supervisor_source),
-    ):
-        assert isinstance(module._META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
-        assert module._META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
-        assert module._META_DISPLAY_CONTEXT.task_board_path == TASK_BOARD_PATH
-        assert module.META_DISPLAY_DATA_PATHS == module._META_DISPLAY_CONTEXT.namespace_paths
-        assert "build_agent_supervisor_namespace_context(" in source
-        assert "agent_supervisor_namespace_paths(" not in source
-        assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in source
+    assert isinstance(daemon_module.META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
+    assert isinstance(supervisor_module.META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
+    assert daemon_module.META_DISPLAY_CONTEXT is daemon_module._META_DISPLAY_CONTEXT
+    for module in (daemon_module, supervisor_module):
+        assert module.META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
+        assert module.META_DISPLAY_CONTEXT.task_board_path == TASK_BOARD_PATH
+        assert module.META_DISPLAY_DATA_PATHS == module.META_DISPLAY_CONTEXT.namespace_paths
+    assert "build_agent_supervisor_namespace_context(" in daemon_source
+    assert "build_agent_supervisor_namespace_context(" not in supervisor_source
+    assert "agent_supervisor_namespace_paths(" not in daemon_source
+    assert "agent_supervisor_namespace_paths(" not in supervisor_source
+    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in daemon_source
+    assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in supervisor_source
 
 
 def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
@@ -188,6 +190,7 @@ def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
         "discovery_dir": tmp_path / "discovery",
         "objective_heap_path": tmp_path / "objective.md",
         "objective_bundle_dir": tmp_path / "bundles",
+        "objective_dataset_dir": tmp_path / "datasets",
     }
 
     daemon_module.ensure_meta_display_bootstrap_paths(paths)
@@ -196,6 +199,7 @@ def test_meta_display_bootstrap_creates_runtime_directories(tmp_path):
     assert paths["worktree_root"].exists()
     assert paths["discovery_dir"].exists()
     assert paths["objective_bundle_dir"].exists()
+    assert paths["objective_dataset_dir"].exists()
 
 
 def test_meta_display_supervisor_ensure_running_flag_uses_runtime_helper(tmp_path, monkeypatch):

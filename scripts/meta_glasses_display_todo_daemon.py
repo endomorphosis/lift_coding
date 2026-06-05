@@ -32,9 +32,18 @@ _META_DISPLAY_CONTEXT = _build_agent_supervisor_namespace_context(
     namespace="meta_glasses_display_widgets",
     task_board_stem="18-swissknife-meta-glasses-display-widgets",
     objective_path=OBJECTIVE_HEAP_PATH,
-    namespace_keys=("state_dir", "worktree_root", "discovery_dir", "objective_bundle_dir"),
+    namespace_keys=(
+        "state_dir",
+        "worktree_root",
+        "discovery_dir",
+        "objective_graph_path",
+        "objective_bundle_dir",
+        "objective_dataset_dir",
+        "objective_todo_vector_index_path",
+    ),
     runtime_primary_package_names=("ipfs_accelerate",),
 )
+META_DISPLAY_CONTEXT = _META_DISPLAY_CONTEXT
 TASK_BOARD_PATH = _META_DISPLAY_CONTEXT.task_board_path
 TASK_BOARD_PATH_OPTION = _META_DISPLAY_CONTEXT.task_board_path_option
 META_DISPLAY_DATA_PATHS = _META_DISPLAY_CONTEXT.namespace_paths
