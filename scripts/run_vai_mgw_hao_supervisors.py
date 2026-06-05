@@ -3,15 +3,26 @@
 
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 from typing import Sequence
 
 
-REPO_ROOT = Path(
-    os.environ.get("REPO_ROOT") or Path(__file__).resolve().parents[1]
-).resolve()
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parents[1]
+BOOTSTRAP_IPFS_ACCELERATE_ROOT = SCRIPT_REPO_ROOT / "external" / "ipfs_accelerate"
+
+if str(BOOTSTRAP_IPFS_ACCELERATE_ROOT) not in sys.path:
+    sys.path.insert(0, str(BOOTSTRAP_IPFS_ACCELERATE_ROOT))
+
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    apply_env_defaults,
+    build_runtime_environment_callbacks,
+    env_str,
+    repo_root_from_env,
+)
+
+
+REPO_ROOT = repo_root_from_env(fallback=SCRIPT_REPO_ROOT)
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 
@@ -19,16 +30,6 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACKS = (
     "VAI|scripts/virtual_ai_os_todo_supervisor.py|data/virtual_ai_os/state|virtual_ai_os",
     "MGW|scripts/meta_glasses_display_todo_supervisor.py|data/meta_glasses_display_widgets/state|meta_glasses_display",
     "HAO|scripts/hallucinate_multimodal_control_todo_supervisor.py|data/hallucinate_multimodal_control/state|hallucinate_multimodal_control",
-)
-
-
-if str(IPFS_ACCELERATE_ROOT) not in sys.path:
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    apply_env_defaults,
-    build_runtime_environment_callbacks,
-    env_str,
 )
 
 
