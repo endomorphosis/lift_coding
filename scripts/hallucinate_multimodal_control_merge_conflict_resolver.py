@@ -14,39 +14,24 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    agent_supervisor_namespace_paths as _agent_supervisor_namespace_paths,
-    prefixed_env_var as _prefixed_env_var,
-)
-from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
-    implementation_state_artifact_paths,
-)
-
-HALLUCINATE_DATA_PATHS = _agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control")
-DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
-DEFAULT_EVENTS_PATH = implementation_state_artifact_paths(
-    DEFAULT_STATE_DIR,
-    "hallucinate_multimodal_control",
-)["events_path"]
 HAO_ENV_PREFIX = "HANDSFREE_HAO"
-HAO_LLM_MERGE_RESOLVER_COMMAND_ENV = _prefixed_env_var(HAO_ENV_PREFIX, "LLM_MERGE_RESOLVER_COMMAND")
 HAO_PROMPT_HEADING = "Resolve the HAO daemon merge conflict in this repository."
 HAO_COMPLETION_RULE = "Do not remove the task from blocked_tasks until validation passes."
 
 from ipfs_accelerate_py.agent_supervisor.merge_resolver import (  # noqa: E402
-    build_configured_merge_resolver_runner,
+    build_namespace_merge_resolver_runner,
     compact_text,
     iter_jsonl,
     latest_failed_merge_event,
     unmerged_paths,
 )
 
-_HAO_MERGE_RESOLVER_RUNNER = build_configured_merge_resolver_runner(
-    default_events_path=DEFAULT_EVENTS_PATH,
-    default_repo_root=REPO_ROOT,
+_HAO_MERGE_RESOLVER_RUNNER = build_namespace_merge_resolver_runner(
+    repo_root=REPO_ROOT,
+    namespace="hallucinate_multimodal_control",
+    env_prefix=HAO_ENV_PREFIX,
     prompt_heading=HAO_PROMPT_HEADING,
     completion_rule=HAO_COMPLETION_RULE,
-    primary_command_env_var=HAO_LLM_MERGE_RESOLVER_COMMAND_ENV,
     description=__doc__ or "Prepare or invoke an LLM merge-conflict resolver.",
     missing_event_exit_code=1,
     apply_failed_exit_code=2,
