@@ -15,6 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_relative_or_default as _repo_relative_or_default,
@@ -48,19 +49,19 @@ OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
 # scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
-CODEBASE_SCAN_SKIP_PREFIXES = (
-    "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
-    "data/virtual_ai_os/discovery/",
-    "data/virtual_ai_os/objective_bundles/",
-    "data/virtual_ai_os/objective_datasets/",
-    "data/virtual_ai_os/state/",
-    "data/virtual_ai_os/worktrees/",
-    "data/hallucinate_multimodal_control/discovery/",
-    "data/hallucinate_multimodal_control/state/",
-    "data/hallucinate_multimodal_control/worktrees/",
-    "data/meta_glasses_display_widgets/discovery/",
-    "data/meta_glasses_display_widgets/state/",
-    "data/meta_glasses_display_widgets/worktrees/",
+CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
+    {
+        "virtual_ai_os": (
+            "discovery",
+            "objective_bundles",
+            "objective_datasets",
+            "state",
+            "worktrees",
+        ),
+        "hallucinate_multimodal_control": ("discovery", "state", "worktrees"),
+        "meta_glasses_display_widgets": ("discovery", "state", "worktrees"),
+    },
+    include_scripts=True,
 )
 VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_datasets",

@@ -15,6 +15,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
     prefixed_env_path as _prefixed_env_path,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
@@ -57,21 +58,25 @@ CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(HALLUCINATE_ENV_PR
 CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
 CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
 CODEBASE_SCAN_COOLDOWN_SECONDS = CODEBASE_SCAN_SETTINGS.cooldown_seconds
-CODEBASE_SCAN_SKIP_PREFIXES = (
-    "scripts/",  # supervisor/daemon scripts embed task-board paths by design; exclude from annotation scan
-    "data/hallucinate_multimodal_control/discovery/",
-    "data/hallucinate_multimodal_control/objective_bundles/",
-    "data/hallucinate_multimodal_control/objective_datasets/",
-    "data/hallucinate_multimodal_control/state/",
-    "data/hallucinate_multimodal_control/worktrees/",
-    "data/meta_glasses_display_widgets/discovery/",
-    "data/meta_glasses_display_widgets/state/",
-    "data/meta_glasses_display_widgets/worktrees/",
-    "data/virtual_ai_os/discovery/",
-    "data/virtual_ai_os/objective_bundles/",
-    "data/virtual_ai_os/objective_datasets/",
-    "data/virtual_ai_os/state/",
-    "data/virtual_ai_os/worktrees/",
+CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
+    {
+        "hallucinate_multimodal_control": (
+            "discovery",
+            "objective_bundles",
+            "objective_datasets",
+            "state",
+            "worktrees",
+        ),
+        "meta_glasses_display_widgets": ("discovery", "state", "worktrees"),
+        "virtual_ai_os": (
+            "discovery",
+            "objective_bundles",
+            "objective_datasets",
+            "state",
+            "worktrees",
+        ),
+    },
+    include_scripts=True,
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 

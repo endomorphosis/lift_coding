@@ -18,6 +18,7 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_bootstrap_path_callbacks as _build_prefixed_bootstrap_path_callbacks,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+    data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     task_board_filename as _task_board_filename,
@@ -64,13 +65,15 @@ OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_ter
 INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
 INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
 BACKLOG_PENDING_STATUS = "to" + "do"
-CODEBASE_SCAN_SKIP_PREFIXES = (
-    "data/meta_glasses_display_widgets/discovery/",
-    "data/meta_glasses_display_widgets/objective_bundles/",
-    "data/meta_glasses_display_widgets/objective_datasets/",
-    "data/hallucinate_multimodal_control/discovery/",
-    "data/meta_glasses_display_widgets/state/",
-    "data/meta_glasses_display_widgets/worktrees/",
+CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
+    {
+        "meta_glasses_display_widgets": ("discovery", "objective_bundles", "objective_datasets"),
+        "hallucinate_multimodal_control": ("discovery",),
+    },
+    extra_prefixes=(
+        "data/meta_glasses_display_widgets/state/",
+        "data/meta_glasses_display_widgets/worktrees/",
+    ),
 )
 TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
     "todo_path",
