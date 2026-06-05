@@ -111,15 +111,10 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    CodebaseRefillDefaults,
-    ObjectiveRefillDefaults,
     build_codebase_refill_defaults_from_paths,
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks_from_recorders,
-)
-from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    pop_bool_flag as _pop_bool_flag,
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -201,20 +196,67 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _run_supervisor(
-    argv: list[str],
-    *,
-    paths: dict[str, Path],
-    ensure_running: bool,
-    objective: ObjectiveRefillDefaults,
-    codebase: CodebaseRefillDefaults,
-) -> None:
-    if ensure_running:
-        logger.info("Display-widget supervisor ensure requested; running supervisor in foreground.")
-    _meta_display_supervisor_runtime.run_configured_from_paths(
-        argv,
+def _meta_display_discovery_output_path(paths: dict[str, Path]) -> str:
+    return _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+        "discovery_dir",
+        "data/meta_glasses_display_widgets/discovery",
         paths,
+    )
+
+
+def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
+    _bootstrap_android_validation_env()
+    ensure_post_initial_discovery_backlog(paths["todo_path"])
+    enforce_android_validation_environment(paths["todo_path"])
+
+
+def _meta_display_objective_defaults(paths: dict[str, Path]):
+    return build_objective_refill_defaults_from_paths(
+        paths,
+        objective_path_key="objective_heap_path",
+        objective_graph_path_key="objective_graph_path",
+        objective_bundle_dir_key="objective_bundle_dir",
+        objective_dataset_dir_key="objective_dataset_dir",
+        objective_discovery_dir_key="discovery_dir",
+        objective_discovery_output_path=_meta_display_discovery_output_path(paths),
+        objective_todo_vector_index_path_key="objective_todo_vector_index_path",
+        objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
+        seed_interoperability_goals=True,
+        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
+    )
+
+
+def _meta_display_codebase_defaults(paths: dict[str, Path]):
+    return build_codebase_refill_defaults_from_paths(
+        paths,
+        codebase_scan_discovery_dir_key="discovery_dir",
+        codebase_scan_discovery_output_path=_meta_display_discovery_output_path(paths),
+        codebase_scan_min_open_tasks=0,
+        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+    )
+
+
+def _meta_display_refill_hooks(paths: dict[str, Path]):
+    return build_supervisor_refill_hooks_from_recorders(
+        retry_budget_recorder=record_retry_budget_findings,
+        discovery_dir=paths["discovery_dir"],
+        retry_budget_extra_kwargs={
+            "discovery_output_path": _meta_display_discovery_output_path(paths),
+        },
+        scope_label="validation",
+    )
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = list(sys.argv[1:] if argv is None else argv)
+
+    _meta_display_supervisor_runtime.run_configured_from_bootstrap(
+        args,
         logger=logger,
+        ensure_paths=ensure_meta_display_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
+        enter_runtime_before_paths=True,
+        path_callbacks=(_prepare_meta_display_paths,),
         task_prefix="## MGW-",
         state_prefix="meta_glasses_display",
         daemon_script_path=DAEMON_SCRIPT_PATH,
@@ -222,67 +264,12 @@ def _run_supervisor(
         todo_path_flag=TASK_BOARD_PATH_OPTION,
         llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        objective=objective,
-        codebase=codebase,
-        hooks=build_supervisor_refill_hooks_from_recorders(
-            retry_budget_recorder=record_retry_budget_findings,
-            discovery_dir=paths["discovery_dir"],
-            retry_budget_extra_kwargs={
-                "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                    "discovery_dir",
-                    "data/meta_glasses_display_widgets/discovery",
-                    paths,
-                ),
-            },
-            scope_label="validation",
-        ),
+        objective_factory=_meta_display_objective_defaults,
+        codebase_factory=_meta_display_codebase_defaults,
+        hooks_factory=_meta_display_refill_hooks,
         once_complete_message="Display-widget implementation supervisor check complete: %s",
-        ensure_running=ensure_running,
         ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
         repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
-    )
-
-
-def main(argv: list[str] | None = None) -> None:
-    args = list(sys.argv[1:] if argv is None else argv)
-    ensure_running = _pop_bool_flag(args, "--ensure-running")
-    _enter_runtime_environment()
-    paths = ensure_meta_display_bootstrap_paths()
-    _bootstrap_android_validation_env()
-    ensure_post_initial_discovery_backlog(paths["todo_path"])
-    enforce_android_validation_environment(paths["todo_path"])
-    discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-        "discovery_dir",
-        "data/meta_glasses_display_widgets/discovery",
-        paths,
-    )
-
-    objective = build_objective_refill_defaults_from_paths(
-        paths,
-        objective_path_key="objective_heap_path",
-        objective_graph_path_key="objective_graph_path",
-        objective_bundle_dir_key="objective_bundle_dir",
-        objective_dataset_dir_key="objective_dataset_dir",
-        objective_discovery_dir_key="discovery_dir",
-        objective_discovery_output_path=discovery_output_path,
-        objective_todo_vector_index_path_key="objective_todo_vector_index_path",
-        objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
-        seed_interoperability_goals=True,
-        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-    )
-    codebase = build_codebase_refill_defaults_from_paths(
-        paths,
-        codebase_scan_discovery_dir_key="discovery_dir",
-        codebase_scan_discovery_output_path=discovery_output_path,
-        codebase_scan_min_open_tasks=0,
-        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-    )
-    _run_supervisor(
-        args,
-        paths=paths,
-        ensure_running=ensure_running,
-        objective=objective,
-        codebase=codebase,
     )
 
 

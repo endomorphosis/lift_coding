@@ -84,9 +84,6 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_configured_supervisor_runtime,
     build_objective_refill_defaults_from_paths,
 )
-from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    pop_bool_flag as _pop_bool_flag,
-)
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     VIRTUAL_AI_OS_ENV_PREFIX,
@@ -124,44 +121,49 @@ virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_runtime.is_runni
 ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_runtime.ensure_running
 
 
+def _virtual_ai_os_objective_defaults(paths: dict[str, Path]):
+    return build_objective_refill_defaults_from_paths(
+        paths,
+        objective_path=OBJECTIVE_HEAP_PATH,
+        objective_graph_path=OBJECTIVE_GRAPH_PATH,
+        objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        objective_dataset_dir=OBJECTIVE_DATASET_DIR,
+        objective_discovery_dir=DISCOVERY_DIR,
+        objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+        objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+        objective_interoperability_focus=VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS,
+        seed_interoperability_goals=True,
+        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
+    )
+
+
+def _virtual_ai_os_codebase_defaults(paths: dict[str, Path]):
+    return build_codebase_refill_defaults_from_paths(
+        paths,
+        codebase_scan_discovery_dir=DISCOVERY_DIR,
+        codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+        codebase_scan_min_open_tasks=0,
+        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+    )
+
+
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    ensure_running = _pop_bool_flag(args, "--ensure-running")
-    paths = ensure_virtual_ai_os_bootstrap_paths()
-    _enter_runtime_environment()
 
-    _virtual_ai_os_supervisor_runtime.run_configured_from_paths(
+    _virtual_ai_os_supervisor_runtime.run_configured_from_bootstrap(
         args,
-        paths,
         logger=logger,
+        ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
         task_prefix="## VAI-",
         state_prefix="virtual_ai_os",
         daemon_script_path=DAEMON_SCRIPT_PATH,
         supervisor_script_path=Path(__file__).resolve(),
         llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-        objective=build_objective_refill_defaults_from_paths(
-            paths,
-            objective_path=OBJECTIVE_HEAP_PATH,
-            objective_graph_path=OBJECTIVE_GRAPH_PATH,
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-            objective_dataset_dir=OBJECTIVE_DATASET_DIR,
-            objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-            objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
-            objective_interoperability_focus=VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS,
-            seed_interoperability_goals=True,
-            **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-        ),
-        codebase=build_codebase_refill_defaults_from_paths(
-            paths,
-            codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-            codebase_scan_min_open_tasks=0,
-            codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-        ),
+        objective_factory=_virtual_ai_os_objective_defaults,
+        codebase_factory=_virtual_ai_os_codebase_defaults,
         once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",
-        ensure_running=ensure_running,
         ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
         repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
     )

@@ -27,9 +27,6 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
     build_objective_refill_defaults_from_paths,
     build_supervisor_refill_hooks_from_recorders,
 )
-from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (  # noqa: E402
-    pop_bool_flag as _pop_bool_flag,
-)
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_SETTINGS,
     CODEBASE_SCAN_SKIP_PREFIXES,
@@ -79,16 +76,52 @@ hallucinate_supervisor_is_running = _hallucinate_supervisor_runtime.is_running
 ensure_hallucinate_supervisor_running = _hallucinate_supervisor_runtime.ensure_running
 
 
+def _hallucinate_objective_defaults(paths: dict[str, Path]):
+    return build_objective_refill_defaults_from_paths(
+        paths,
+        objective_path_key="objective_goal_heap_path",
+        objective_graph_path=OBJECTIVE_GRAPH_PATH,
+        objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
+        objective_dataset_dir=OBJECTIVE_DATASET_DIR,
+        objective_discovery_dir=DISCOVERY_DIR,
+        objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+        objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
+        objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
+        seed_interoperability_goals=True,
+        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
+    )
+
+
+def _hallucinate_codebase_defaults(paths: dict[str, Path]):
+    return build_codebase_refill_defaults_from_paths(
+        paths,
+        codebase_scan_discovery_dir=DISCOVERY_DIR,
+        codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
+        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+        **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
+    )
+
+
+def _hallucinate_refill_hooks(paths: dict[str, Path]):
+    return build_supervisor_refill_hooks_from_recorders(
+        objective_recorder=record_objective_goal_findings,
+        codebase_scan_recorder=record_codebase_scan_findings,
+        retry_budget_recorder=record_retry_budget_findings,
+        discovery_dir=DISCOVERY_DIR,
+        objective_path=paths["objective_goal_heap_path"],
+        repo_root=REPO_ROOT,
+        scope_label="Hallucinate",
+    )
+
+
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
-    ensure_running = _pop_bool_flag(args, "--ensure-running")
-    paths = ensure_hallucinate_multimodal_bootstrap_paths()
-    _enter_runtime_environment()
 
-    _hallucinate_supervisor_runtime.run_configured_from_paths(
+    _hallucinate_supervisor_runtime.run_configured_from_bootstrap(
         args,
-        paths,
         logger=logger,
+        ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
+        enter_runtime_environment=_enter_runtime_environment,
         todo_path_key=TASK_BOARD_PATH_KEY,
         task_prefix="## HAO-",
         state_prefix="hallucinate_multimodal_control",
@@ -97,37 +130,10 @@ def main(argv: list[str] | None = None) -> None:
         todo_path_flag=TASK_BOARD_PATH_OPTION,
         llm_merge_resolver_command=_default_llm_merge_resolver_command(),
         worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        objective=build_objective_refill_defaults_from_paths(
-            paths,
-            objective_path_key="objective_goal_heap_path",
-            objective_graph_path=OBJECTIVE_GRAPH_PATH,
-            objective_bundle_dir=OBJECTIVE_BUNDLE_DIR,
-            objective_dataset_dir=OBJECTIVE_DATASET_DIR,
-            objective_discovery_dir=DISCOVERY_DIR,
-            objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-            objective_todo_vector_index_path=OBJECTIVE_TODO_VECTOR_INDEX_PATH,
-            objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
-            seed_interoperability_goals=True,
-            **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-        ),
-        codebase=build_codebase_refill_defaults_from_paths(
-            paths,
-            codebase_scan_discovery_dir=DISCOVERY_DIR,
-            codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-            codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-            **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
-        ),
-        hooks=build_supervisor_refill_hooks_from_recorders(
-            objective_recorder=record_objective_goal_findings,
-            codebase_scan_recorder=record_codebase_scan_findings,
-            retry_budget_recorder=record_retry_budget_findings,
-            discovery_dir=DISCOVERY_DIR,
-            objective_path=paths["objective_goal_heap_path"],
-            repo_root=REPO_ROOT,
-            scope_label="Hallucinate",
-        ),
+        objective_factory=_hallucinate_objective_defaults,
+        codebase_factory=_hallucinate_codebase_defaults,
+        hooks_factory=_hallucinate_refill_hooks,
         once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
-        ensure_running=ensure_running,
         ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
         repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
     )
