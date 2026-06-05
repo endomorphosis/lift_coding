@@ -80,6 +80,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_bootstrap_runner,
     build_configured_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
@@ -133,28 +134,29 @@ _virtual_ai_os_codebase_defaults = build_namespace_codebase_refill_defaults_fact
     codebase_scan_min_open_tasks=0,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
 )
+_virtual_ai_os_supervisor_runner = build_configured_supervisor_bootstrap_runner(
+    runtime=_virtual_ai_os_supervisor_runtime,
+    logger=logger,
+    ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
+    enter_runtime_environment=_enter_runtime_environment,
+    task_prefix="## VAI-",
+    state_prefix="virtual_ai_os",
+    daemon_script_path=DAEMON_SCRIPT_PATH,
+    supervisor_script_path=Path(__file__).resolve(),
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
+    worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
+    objective_factory=_virtual_ai_os_objective_defaults,
+    codebase_factory=_virtual_ai_os_codebase_defaults,
+    once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",
+    ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
+    repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
+)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    _virtual_ai_os_supervisor_runtime.run_configured_from_bootstrap(
-        args,
-        logger=logger,
-        ensure_paths=ensure_virtual_ai_os_bootstrap_paths,
-        enter_runtime_environment=_enter_runtime_environment,
-        task_prefix="## VAI-",
-        state_prefix="virtual_ai_os",
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        supervisor_script_path=Path(__file__).resolve(),
-        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-        objective_factory=_virtual_ai_os_objective_defaults,
-        codebase_factory=_virtual_ai_os_codebase_defaults,
-        once_complete_message="Virtual-AI-OS implementation supervisor check complete: %s",
-        ensure_running_message="Virtual-AI-OS implementation supervisor ensure complete: %s",
-        repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
-    )
+    _virtual_ai_os_supervisor_runner.run(args)
 
 
 if __name__ == "__main__":

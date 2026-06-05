@@ -21,6 +21,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_runtime_environment_callbacks as _build_repo_runtime_environment_callbacks,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_bootstrap_runner,
     build_configured_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
@@ -98,31 +99,32 @@ _hallucinate_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders
     repo_root=REPO_ROOT,
     scope_label="Hallucinate",
 )
+_hallucinate_supervisor_runner = build_configured_supervisor_bootstrap_runner(
+    runtime=_hallucinate_supervisor_runtime,
+    logger=logger,
+    ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
+    enter_runtime_environment=_enter_runtime_environment,
+    todo_path_key=TASK_BOARD_PATH_KEY,
+    task_prefix="## HAO-",
+    state_prefix="hallucinate_multimodal_control",
+    daemon_script_path=DAEMON_SCRIPT_PATH,
+    supervisor_script_path=Path(__file__).resolve(),
+    todo_path_flag=TASK_BOARD_PATH_OPTION,
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
+    worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+    objective_factory=_hallucinate_objective_defaults,
+    codebase_factory=_hallucinate_codebase_defaults,
+    hooks_factory=_hallucinate_refill_hooks,
+    once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
+    ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
+    repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
+)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    _hallucinate_supervisor_runtime.run_configured_from_bootstrap(
-        args,
-        logger=logger,
-        ensure_paths=ensure_hallucinate_multimodal_bootstrap_paths,
-        enter_runtime_environment=_enter_runtime_environment,
-        todo_path_key=TASK_BOARD_PATH_KEY,
-        task_prefix="## HAO-",
-        state_prefix="hallucinate_multimodal_control",
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        supervisor_script_path=Path(__file__).resolve(),
-        todo_path_flag=TASK_BOARD_PATH_OPTION,
-        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-        objective_factory=_hallucinate_objective_defaults,
-        codebase_factory=_hallucinate_codebase_defaults,
-        hooks_factory=_hallucinate_refill_hooks,
-        once_complete_message="Hallucinate multimodal-control supervisor check complete: %s",
-        ensure_running_message="Hallucinate multimodal-control supervisor ensure complete: %s",
-        repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
-    )
+    _hallucinate_supervisor_runner.run(args)
 
 
 if __name__ == "__main__":

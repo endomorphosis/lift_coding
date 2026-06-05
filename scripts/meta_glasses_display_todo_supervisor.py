@@ -121,6 +121,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_bootstrap_runner,
     build_configured_supervisor_runtime,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
@@ -238,32 +239,33 @@ _meta_display_refill_hooks = build_supervisor_refill_hooks_factory_from_recorder
     retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
     scope_label="validation",
 )
+_meta_display_supervisor_runner = build_configured_supervisor_bootstrap_runner(
+    runtime=_meta_display_supervisor_runtime,
+    logger=logger,
+    ensure_paths=ensure_meta_display_bootstrap_paths,
+    enter_runtime_environment=_enter_runtime_environment,
+    enter_runtime_before_paths=True,
+    path_callbacks=(_prepare_meta_display_paths,),
+    task_prefix="## MGW-",
+    state_prefix="meta_glasses_display",
+    daemon_script_path=DAEMON_SCRIPT_PATH,
+    supervisor_script_path=Path(__file__).resolve(),
+    todo_path_flag=TASK_BOARD_PATH_OPTION,
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
+    worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
+    objective_factory=_meta_display_objective_defaults,
+    codebase_factory=_meta_display_codebase_defaults,
+    hooks_factory=_meta_display_refill_hooks,
+    once_complete_message="Display-widget implementation supervisor check complete: %s",
+    ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
+    repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
+)
 
 
 def main(argv: list[str] | None = None) -> None:
     args = list(sys.argv[1:] if argv is None else argv)
 
-    _meta_display_supervisor_runtime.run_configured_from_bootstrap(
-        args,
-        logger=logger,
-        ensure_paths=ensure_meta_display_bootstrap_paths,
-        enter_runtime_environment=_enter_runtime_environment,
-        enter_runtime_before_paths=True,
-        path_callbacks=(_prepare_meta_display_paths,),
-        task_prefix="## MGW-",
-        state_prefix="meta_glasses_display",
-        daemon_script_path=DAEMON_SCRIPT_PATH,
-        supervisor_script_path=Path(__file__).resolve(),
-        todo_path_flag=TASK_BOARD_PATH_OPTION,
-        llm_merge_resolver_command=_default_llm_merge_resolver_command(),
-        worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-        objective_factory=_meta_display_objective_defaults,
-        codebase_factory=_meta_display_codebase_defaults,
-        hooks_factory=_meta_display_refill_hooks,
-        once_complete_message="Display-widget implementation supervisor check complete: %s",
-        ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
-        repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
-    )
+    _meta_display_supervisor_runner.run(args)
 
 
 if __name__ == "__main__":
