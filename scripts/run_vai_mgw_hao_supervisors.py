@@ -29,23 +29,6 @@ IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT = repo_external_package_roots(
     ("ipfs_accelerate", "ipfs_datasets"),
 )
 
-VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
-    ("VAI", "scripts/virtual_ai_os_todo_supervisor.py", "data/virtual_ai_os/state", "virtual_ai_os"),
-    (
-        "MGW",
-        "scripts/meta_glasses_display_todo_supervisor.py",
-        "data/meta_glasses_display_widgets/state",
-        "meta_glasses_display",
-    ),
-    (
-        "HAO",
-        "scripts/hallucinate_multimodal_control_todo_supervisor.py",
-        "data/hallucinate_multimodal_control/state",
-        "hallucinate_multimodal_control",
-    ),
-)
-
-
 _RUNTIME_ENVIRONMENT = build_runtime_environment_callbacks(
     REPO_ROOT,
     (IPFS_ACCELERATE_ROOT, IPFS_DATASETS_ROOT),
@@ -68,6 +51,7 @@ configure_environment()
 
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
+    ImplementationSupervisorTrackConfig,
     build_configured_multi_supervisor_cli_runner,
     implementation_supervisor_compact_track_specs,
     utc_run_stamp,
@@ -75,7 +59,26 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
 
 
 VAI_MGW_HAO_IMPLEMENTATION_TRACKS = implementation_supervisor_compact_track_specs(
-    VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS
+    (
+        ImplementationSupervisorTrackConfig(
+            name="VAI",
+            script_path="scripts/virtual_ai_os_todo_supervisor.py",
+            state_dir="data/virtual_ai_os/state",
+            state_prefix="virtual_ai_os",
+        ),
+        ImplementationSupervisorTrackConfig(
+            name="MGW",
+            script_path="scripts/meta_glasses_display_todo_supervisor.py",
+            state_dir="data/meta_glasses_display_widgets/state",
+            state_prefix="meta_glasses_display",
+        ),
+        ImplementationSupervisorTrackConfig(
+            name="HAO",
+            script_path="scripts/hallucinate_multimodal_control_todo_supervisor.py",
+            state_dir="data/hallucinate_multimodal_control/state",
+            state_prefix="hallucinate_multimodal_control",
+        ),
+    )
 )
 
 
