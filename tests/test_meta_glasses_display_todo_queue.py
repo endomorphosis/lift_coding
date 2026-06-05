@@ -411,3 +411,11 @@ def test_meta_glasses_llm_router_preflight_does_not_call_model():
     assert completed.returncode == 0, completed.stderr
     assert '"generate": false' in completed.stdout
     assert '"llm_router_importable": true' in completed.stdout
+    router_module = _load_script_module("meta_glasses_display_llm_router")
+    source = (SCRIPTS_DIR / "meta_glasses_display_llm_router.py").read_text(encoding="utf-8")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.task_proposal_router import TaskProposalRouteSpec
+
+    assert isinstance(router_module.TASK_PROPOSAL_ROUTE_SPEC, TaskProposalRouteSpec)
+    assert "build_repo_task_proposal_route_runner_from_spec(" in source
+    assert "build_repo_task_proposal_route_runner(" not in source

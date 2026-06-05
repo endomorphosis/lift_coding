@@ -12,7 +12,8 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
-    build_repo_task_proposal_route_runner,
+    TaskProposalRouteSpec,
+    build_repo_task_proposal_route_runner_from_spec,
 )
 
 
@@ -20,8 +21,7 @@ _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-TASK_PROPOSAL_RUNNER = build_repo_task_proposal_route_runner(
-    repo_root=REPO_ROOT,
+TASK_PROPOSAL_ROUTE_SPEC = TaskProposalRouteSpec(
     task_board_stem="19-virtual-ai-os-submodule-integration",
     task_board_dir="implementation_plan/docs",
     artifact_namespace="virtual_ai_os",
@@ -31,6 +31,10 @@ TASK_PROPOSAL_RUNNER = build_repo_task_proposal_route_runner(
     no_open_task_message="No open task found in virtual-AI-OS task board.",
     description="Generate an implementation proposal for a virtual-AI-OS task-board item with llm_router.",
     task_id_help="Specific VAI task id. Defaults to the first ready task.",
+)
+TASK_PROPOSAL_RUNNER = build_repo_task_proposal_route_runner_from_spec(
+    repo_root=REPO_ROOT,
+    route_spec=TASK_PROPOSAL_ROUTE_SPEC,
 )
 
 

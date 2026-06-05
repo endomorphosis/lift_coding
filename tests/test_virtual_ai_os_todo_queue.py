@@ -118,6 +118,14 @@ def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
     assert payload["task_id"] == "VAI-003"
     assert payload["generate"] is False
     assert payload["llm_router_importable"] is True
+    router_module = _load_script_module("virtual_ai_os_llm_router")
+    source = (SCRIPTS_DIR / "virtual_ai_os_llm_router.py").read_text(encoding="utf-8")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.task_proposal_router import TaskProposalRouteSpec
+
+    assert isinstance(router_module.TASK_PROPOSAL_ROUTE_SPEC, TaskProposalRouteSpec)
+    assert "build_repo_task_proposal_route_runner_from_spec(" in source
+    assert "build_repo_task_proposal_route_runner(" not in source
 
 
 def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
