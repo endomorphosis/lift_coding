@@ -69,19 +69,13 @@ configure_environment()
 from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noqa: E402
     ConfiguredMultiSupervisorCliRunner,
     build_configured_multi_supervisor_cli_runner,
-    implementation_supervisor_compact_track_spec,
+    implementation_supervisor_compact_track_specs,
     utc_run_stamp,
 )
 
 
-VAI_MGW_HAO_IMPLEMENTATION_TRACKS = tuple(
-    implementation_supervisor_compact_track_spec(
-        name=name,
-        script_path=script_path,
-        state_dir=state_dir,
-        state_prefix=state_prefix,
-    )
-    for name, script_path, state_dir, state_prefix in VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS
+VAI_MGW_HAO_IMPLEMENTATION_TRACKS = implementation_supervisor_compact_track_specs(
+    VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS
 )
 
 
