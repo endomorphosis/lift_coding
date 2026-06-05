@@ -12,10 +12,7 @@ _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 BOOTSTRAP_IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    agent_supervisor_namespace_paths,
-    build_repo_script_bootstrap,
-)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 
 
 _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
@@ -29,7 +26,7 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
     ConfiguredMultiSupervisorLauncher,
     build_repo_implementation_multi_supervisor_launcher,
     implementation_multi_supervisor_env_defaults,
-    implementation_supervisor_namespace_track_config,
+    implementation_supervisor_namespace_track_configs,
 )
 
 
@@ -38,22 +35,21 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
 )
 
 
-VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = (
-    implementation_supervisor_namespace_track_config(
-        name="VAI",
-        script_path="scripts/virtual_ai_os_todo_supervisor.py",
-        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "virtual_ai_os"),
-    ),
-    implementation_supervisor_namespace_track_config(
-        name="MGW",
-        script_path="scripts/meta_glasses_display_todo_supervisor.py",
-        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "meta_glasses_display_widgets"),
-        state_prefix="meta_glasses_display",
-    ),
-    implementation_supervisor_namespace_track_config(
-        name="HAO",
-        script_path="scripts/hallucinate_multimodal_control_todo_supervisor.py",
-        namespace_paths=agent_supervisor_namespace_paths(REPO_ROOT, "hallucinate_multimodal_control"),
+VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_track_configs(
+    repo_root=REPO_ROOT,
+    track_specs=(
+        ("VAI", "scripts/virtual_ai_os_todo_supervisor.py", "virtual_ai_os"),
+        (
+            "MGW",
+            "scripts/meta_glasses_display_todo_supervisor.py",
+            "meta_glasses_display_widgets",
+            "meta_glasses_display",
+        ),
+        (
+            "HAO",
+            "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+            "hallucinate_multimodal_control",
+        ),
     ),
 )
 
