@@ -120,6 +120,50 @@ def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
     assert payload["llm_router_importable"] is True
 
 
+def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
+    runner_module = _load_script_module("run_vai_mgw_hao_supervisors")
+    source = (SCRIPTS_DIR / "run_vai_mgw_hao_supervisors.py").read_text(encoding="utf-8")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.llm_merge_resolver_fallback import (
+        llm_merge_resolver_fallback_command,
+    )
+    from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (
+        implementation_multi_supervisor_env_defaults,
+        implementation_supervisor_namespace_track_configs,
+    )
+
+    assert "implementation_multi_supervisor_env_defaults(" in source
+    assert "implementation_supervisor_namespace_track_configs(" in source
+    assert "agent_supervisor_namespace_paths(" not in source
+    assert '"PREFER_COPILOT_MERGE_RESOLVER": "1"' not in source
+    assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS == implementation_multi_supervisor_env_defaults(
+        prefer_copilot_merge_resolver=True,
+    )
+    assert runner_module.VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS == (
+        implementation_supervisor_namespace_track_configs(
+            repo_root=REPO_ROOT,
+            track_specs=(
+                ("VAI", "scripts/virtual_ai_os_todo_supervisor.py", "virtual_ai_os"),
+                (
+                    "MGW",
+                    "scripts/meta_glasses_display_todo_supervisor.py",
+                    "meta_glasses_display_widgets",
+                    "meta_glasses_display",
+                ),
+                (
+                    "HAO",
+                    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+                    "hallucinate_multimodal_control",
+                ),
+            ),
+        )
+    )
+    launcher_args = runner_module.build_launcher().args()
+    assert launcher_args[launcher_args.index("--implementation-supervisor-command") + 1] == (
+        llm_merge_resolver_fallback_command()
+    )
+
+
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     custom_board = tmp_path / _task_board_filename("custom")
