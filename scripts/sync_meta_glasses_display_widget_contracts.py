@@ -21,27 +21,19 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
+    ActionContractSyncSpec,
     JavaScriptActionContractConfig,
     PythonActionContractConfig,
-    build_configured_action_contract_sync_runner,
-    operation_action_mapper,
+    build_action_contract_sync_runner_from_spec,
 )
 
 _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-SPEC_PATH = REPO_ROOT / "spec" / "meta_glasses_display_widget_orb_interface.json"
-PYTHON_CONTRACT_PATH = (
-    REPO_ROOT / "src" / "handsfree" / "meta_glasses_display_widget_contract.py"
-)
-JS_CONTRACT_PATH = (
-    REPO_ROOT
-    / "mobile"
-    / "src"
-    / "utils"
-    / "metaWearablesDatDisplayWidgetContract.js"
-)
+SPEC_PATH = "spec/meta_glasses_display_widget_orb_interface.json"
+PYTHON_CONTRACT_PATH = "src/handsfree/meta_glasses_display_widget_contract.py"
+JS_CONTRACT_PATH = "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js"
 
 OPERATION_TO_ACTION = {
     "focus_next": "focus",
@@ -122,20 +114,21 @@ JS_CONTRACT_CONFIG = JavaScriptActionContractConfig(
     },
 )
 
-ACTION_CONTRACT_SYNC_RUNNER = build_configured_action_contract_sync_runner(
+ACTION_CONTRACT_SYNC_SPEC = ActionContractSyncSpec(
     descriptor_path=SPEC_PATH,
     contract=CONTRACT,
-    operation_to_action=operation_action_mapper(
-        OPERATION_TO_ACTION,
-        label="display widget operation",
-    ),
+    operation_to_action=OPERATION_TO_ACTION,
+    operation_label="display widget operation",
     action_metadata=ACTION_METADATA,
     python_target_path=PYTHON_CONTRACT_PATH,
     python_config=PYTHON_CONTRACT_CONFIG,
     js_target_path=JS_CONTRACT_PATH,
     js_config=JS_CONTRACT_CONFIG,
-    repo_root=REPO_ROOT,
     description="Sync or verify Meta glasses display widget contract modules.",
+)
+ACTION_CONTRACT_SYNC_RUNNER = build_action_contract_sync_runner_from_spec(
+    repo_root=REPO_ROOT,
+    sync_spec=ACTION_CONTRACT_SYNC_SPEC,
 )
 SYNC_CONFIG = ACTION_CONTRACT_SYNC_RUNNER.config
 

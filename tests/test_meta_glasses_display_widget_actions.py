@@ -1,5 +1,6 @@
 """Display widget backend action contract tests."""
 
+import importlib.util
 import json
 import sys
 import types
@@ -26,6 +27,9 @@ from handsfree.models import MetaGlassesDisplayWidgetMobileActionPayload  # noqa
 from test_mcp_ipfs_provider import _FakeMCPClient  # noqa: E402
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
+SCRIPTS_DIR = REPO_ROOT / "scripts"
 client = TestClient(app)
 
 DISPLAY_WIDGET_ACTION_IDS = [
@@ -38,6 +42,20 @@ DISPLAY_WIDGET_ACTION_IDS = [
     "mobile_play_display_widget_video",
     "mobile_subscribe_display_widget_updates",
 ]
+
+
+def _load_script_module(name: str):
+    script_path = SCRIPTS_DIR / f"{name}.py"
+    if str(SCRIPTS_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+    if str(IPFS_ACCELERATE_ROOT) not in sys.path:
+        sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    spec = importlib.util.spec_from_file_location(name, script_path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _contract_kwargs() -> dict[str, object]:
@@ -235,3 +253,34 @@ def test_static_openapi_spec_documents_display_widget_actions() -> None:
         assert action_id in raw_spec
     for contract_field in ("descriptor_cid", "widget_cid", "orb_receipt_cid", "policy_decision"):
         assert contract_field in raw_spec
+
+
+def test_display_widget_contract_sync_delegates_reusable_spec_wiring() -> None:
+    sync_module = _load_script_module("sync_meta_glasses_display_widget_contracts")
+    source = (SCRIPTS_DIR / "sync_meta_glasses_display_widget_contracts.py").read_text(encoding="utf-8")
+
+    from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import ActionContractSyncSpec
+
+    assert isinstance(sync_module.ACTION_CONTRACT_SYNC_SPEC, ActionContractSyncSpec)
+    assert sync_module.ACTION_CONTRACT_SYNC_SPEC.descriptor_path == (
+        "spec/meta_glasses_display_widget_orb_interface.json"
+    )
+    assert sync_module.ACTION_CONTRACT_SYNC_SPEC.python_target_path == (
+        "src/handsfree/meta_glasses_display_widget_contract.py"
+    )
+    assert sync_module.ACTION_CONTRACT_SYNC_SPEC.js_target_path == (
+        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js"
+    )
+    assert "build_action_contract_sync_runner_from_spec(" in source
+    assert "build_configured_action_contract_sync_runner(" not in source
+    assert "operation_action_mapper(" not in source
+
+    assert sync_module.SYNC_CONFIG.descriptor_path == (
+        REPO_ROOT / "spec" / "meta_glasses_display_widget_orb_interface.json"
+    )
+    assert sync_module.SYNC_CONFIG.python_target_path == (
+        REPO_ROOT / "src" / "handsfree" / "meta_glasses_display_widget_contract.py"
+    )
+    assert sync_module.SYNC_CONFIG.js_target_path == (
+        REPO_ROOT / "mobile" / "src" / "utils" / "metaWearablesDatDisplayWidgetContract.js"
+    )
