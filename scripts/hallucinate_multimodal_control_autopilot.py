@@ -32,7 +32,7 @@ def with_autopilot_defaults(argv: list[str]) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> None:
-    AUTOPILOT_ENTRYPOINT.run(list(sys.argv[1:] if argv is None else argv))
+    AUTOPILOT_ENTRYPOINT.run(argv)
 
 
 if __name__ == "__main__":
