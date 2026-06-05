@@ -14,7 +14,6 @@ if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_repo_runtime_environment_callbacks,
     task_board_filename as _task_board_filename,
     task_board_path_option as _task_board_path_option,
 )
@@ -28,14 +27,12 @@ PLAN_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE
 ARTIFACT_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "llm_router"
 
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
-    build_configured_task_proposal_router_runner,
+    build_repo_task_proposal_router_runner,
     standard_task_proposal_requested_outputs,
 )
 
 
-_RUNTIME_ENVIRONMENT = build_repo_runtime_environment_callbacks(REPO_ROOT)
-_bootstrap_imports = _RUNTIME_ENVIRONMENT.enter
-TASK_PROPOSAL_RUNNER = build_configured_task_proposal_router_runner(
+TASK_PROPOSAL_RUNNER = build_repo_task_proposal_router_runner(
     repo_root=REPO_ROOT,
     task_board_path=DEFAULT_TASK_BOARD_PATH,
     task_header_prefix="## HAO-",
@@ -53,7 +50,6 @@ TASK_PROPOSAL_RUNNER = build_configured_task_proposal_router_runner(
     task_id_help="Specific HAO task id. Defaults to the first ready task.",
     task_board_option=TASK_BOARD_PATH_OPTION,
     include_dry_run_flag=True,
-    bootstrap=_bootstrap_imports,
 )
 
 
