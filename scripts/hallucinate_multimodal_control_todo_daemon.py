@@ -89,7 +89,7 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
-    build_daemon_refill_hooks_from_recorders,
+    build_daemon_refill_hooks_factory_from_recorders,
 )
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -173,17 +173,16 @@ record_retry_budget_findings = ConfiguredRetryBudgetRecorder(
 )
 
 
-def _hallucinate_refill_hooks(paths: dict[str, Path]):
-    return build_daemon_refill_hooks_from_recorders(
-        objective_recorder=record_objective_goal_findings,
-        codebase_scan_recorder=record_codebase_scan_findings,
-        retry_budget_recorder=record_retry_budget_findings,
-        discovery_dir=DISCOVERY_DIR,
-        objective_path=paths["objective_goal_heap_path"],
-        repo_root=REPO_ROOT,
-        scope_label="Hallucinate",
-        after_order=("retry-budget", "objective-goal", "codebase-scan"),
-    )
+_hallucinate_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
+    objective_recorder=record_objective_goal_findings,
+    codebase_scan_recorder=record_codebase_scan_findings,
+    retry_budget_recorder=record_retry_budget_findings,
+    discovery_dir=DISCOVERY_DIR,
+    objective_path_key="objective_goal_heap_path",
+    repo_root=REPO_ROOT,
+    scope_label="Hallucinate",
+    after_order=("retry-budget", "objective-goal", "codebase-scan"),
+)
 
 
 def main(argv: list[str] | None = None) -> None:

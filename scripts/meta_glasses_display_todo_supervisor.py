@@ -111,10 +111,10 @@ from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_task_blocks_ensurer as _build_task_blocks_ensurer,
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_codebase_refill_defaults_from_paths,
+    build_codebase_refill_defaults_factory,
     build_configured_supervisor_runtime,
-    build_objective_refill_defaults_from_paths,
-    build_supervisor_refill_hooks_from_recorders,
+    build_objective_refill_defaults_factory,
+    build_supervisor_refill_hooks_factory_from_recorders,
 )
 
 META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
@@ -210,41 +210,38 @@ def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     enforce_android_validation_environment(paths["todo_path"])
 
 
-def _meta_display_objective_defaults(paths: dict[str, Path]):
-    return build_objective_refill_defaults_from_paths(
-        paths,
-        objective_path_key="objective_heap_path",
-        objective_graph_path_key="objective_graph_path",
-        objective_bundle_dir_key="objective_bundle_dir",
-        objective_dataset_dir_key="objective_dataset_dir",
-        objective_discovery_dir_key="discovery_dir",
-        objective_discovery_output_path=_meta_display_discovery_output_path(paths),
-        objective_todo_vector_index_path_key="objective_todo_vector_index_path",
-        objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
-        seed_interoperability_goals=True,
-        **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-    )
+def _meta_display_retry_budget_extra_kwargs(paths: dict[str, Path]):
+    return {"discovery_output_path": _meta_display_discovery_output_path(paths)}
 
 
-def _meta_display_codebase_defaults(paths: dict[str, Path]):
-    return build_codebase_refill_defaults_from_paths(
-        paths,
-        codebase_scan_discovery_dir_key="discovery_dir",
-        codebase_scan_discovery_output_path=_meta_display_discovery_output_path(paths),
-        codebase_scan_min_open_tasks=0,
-        codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-    )
+_meta_display_objective_defaults = build_objective_refill_defaults_factory(
+    objective_path_key="objective_heap_path",
+    objective_graph_path_key="objective_graph_path",
+    objective_bundle_dir_key="objective_bundle_dir",
+    objective_dataset_dir_key="objective_dataset_dir",
+    objective_discovery_dir_key="discovery_dir",
+    objective_discovery_output_path_factory=_meta_display_discovery_output_path,
+    objective_todo_vector_index_path_key="objective_todo_vector_index_path",
+    objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
+    seed_interoperability_goals=True,
+    **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
+)
 
 
-def _meta_display_refill_hooks(paths: dict[str, Path]):
-    return build_supervisor_refill_hooks_from_recorders(
-        retry_budget_recorder=record_retry_budget_findings,
-        discovery_dir=paths["discovery_dir"],
-        retry_budget_extra_kwargs={
-            "discovery_output_path": _meta_display_discovery_output_path(paths),
-        },
-        scope_label="validation",
-    )
+_meta_display_codebase_defaults = build_codebase_refill_defaults_factory(
+    codebase_scan_discovery_dir_key="discovery_dir",
+    codebase_scan_discovery_output_path_factory=_meta_display_discovery_output_path,
+    codebase_scan_min_open_tasks=0,
+    codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+)
+
+
+_meta_display_refill_hooks = build_supervisor_refill_hooks_factory_from_recorders(
+    retry_budget_recorder=record_retry_budget_findings,
+    discovery_dir_key="discovery_dir",
+    retry_budget_extra_kwargs_factory=_meta_display_retry_budget_extra_kwargs,
+    scope_label="validation",
+)
 
 
 def main(argv: list[str] | None = None) -> None:

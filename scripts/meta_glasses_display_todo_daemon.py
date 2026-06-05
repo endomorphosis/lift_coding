@@ -61,7 +61,7 @@ META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import ConfiguredRetryBudgetRecorder  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  # noqa: E402
     build_configured_implementation_daemon_runner,
-    build_daemon_refill_hooks_from_recorders,
+    build_daemon_refill_hooks_factory_from_recorders,
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
@@ -109,19 +109,22 @@ def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
     enforce_android_validation_environment(paths["todo_path"])
 
 
-def _meta_display_refill_hooks(paths: dict[str, Path]):
-    return build_daemon_refill_hooks_from_recorders(
-        retry_budget_recorder=record_retry_budget_findings,
-        discovery_dir=paths["discovery_dir"],
-        retry_budget_extra_kwargs={
-            "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-                "discovery_dir",
-                "data/meta_glasses_display_widgets/discovery",
-                paths,
-            ),
-        },
-        scope_label="validation",
-    )
+def _meta_display_retry_budget_extra_kwargs(paths: dict[str, Path]):
+    return {
+        "discovery_output_path": _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+            "discovery_dir",
+            "data/meta_glasses_display_widgets/discovery",
+            paths,
+        ),
+    }
+
+
+_meta_display_refill_hooks = build_daemon_refill_hooks_factory_from_recorders(
+    retry_budget_recorder=record_retry_budget_findings,
+    discovery_dir_key="discovery_dir",
+    retry_budget_extra_kwargs_factory=_meta_display_retry_budget_extra_kwargs,
+    scope_label="validation",
+)
 
 
 def main(argv: list[str] | None = None) -> None:
