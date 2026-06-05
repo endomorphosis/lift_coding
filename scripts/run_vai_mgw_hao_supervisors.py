@@ -63,7 +63,6 @@ def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     return build_repo_implementation_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
         implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
-        resolver_script_path="scripts/llm_merge_resolver_fallback.sh",
         duration_seconds=28800,
         duration_seconds_env_var="DURATION_SECONDS",
         stamp_env_var="STAMP",
