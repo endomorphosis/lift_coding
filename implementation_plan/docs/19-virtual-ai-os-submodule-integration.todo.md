@@ -2119,7 +2119,7 @@ cadence remains parseable and resumable.
 
 ## VAI-190 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality
