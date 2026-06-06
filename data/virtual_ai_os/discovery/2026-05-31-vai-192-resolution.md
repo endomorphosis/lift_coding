@@ -1,22 +1,26 @@
 # VAI-192 Resolution
 
-Date: 2026-05-31
+Date: 2026-06-05
 Source: hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029
 Kind: swallowed_exception → fixed
 
 ## Change
 
 The bare `except Exception: pass` that drained `scale_futures` after the
-auto-scaling test was changed to log the exception at DEBUG level:
+auto-scaling test was replaced with explicit, logged exception handling
+consistent with the timeout-test pattern already present at line 984:
 
 ```python
-except Exception as exc:
-    logger.debug("Scale-test future raised (expected during drain): %s", exc)
+except (TimeoutError, concurrent.futures.TimeoutError):
+    logger.debug("Scale test task timed out during cleanup")
+except Exception as e:
+    logger.debug("Scale test task raised unexpected exception during cleanup: %s", e)
 ```
 
-Exceptions during this drain are harmless (the tasks are intentional
-`time.sleep` lambdas that can also timeout), but logging them ensures
-diagnostics are not silently lost if something unexpected occurs.
+Timeout errors are expected here (tasks are intentional `time.sleep` lambdas
+that may still be running when we drain). Other exceptions are unexpected but
+harmless at this stage; logging them at DEBUG ensures diagnostics are never
+silently lost.
 
 ## Validation
 
