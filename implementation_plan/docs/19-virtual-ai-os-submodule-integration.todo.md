@@ -2160,7 +2160,6 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-193-codebase-scan-7fae0bf71f93.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-<<<<<<< HEAD
 
 ## VAI-194 Resolve merge retry-budget failure for VAI-191
 
@@ -2172,5 +2171,3 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-191. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-191 from strategy blocked_tasks.
-=======
->>>>>>> implementation/hao-286-attempt-1-1780250844
