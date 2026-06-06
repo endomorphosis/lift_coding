@@ -2130,7 +2130,7 @@ cadence remains parseable and resumable.
 
 ## VAI-191 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
@@ -2163,7 +2163,7 @@ cadence remains parseable and resumable.
 
 ## VAI-194 Resolve merge retry-budget failure for VAI-191
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
