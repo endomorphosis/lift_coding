@@ -14,6 +14,7 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
@@ -115,6 +116,9 @@ logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
 ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
 HALLUCINATE_STATE_PATHS = namespace_implementation_state_artifact_paths(HALLUCINATE_DATA_PATHS)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    HALLUCINATE_ENV_PREFIX
+)
 
 
 record_objective_goal_findings = build_namespace_objective_backlog_recorder(
@@ -193,6 +197,7 @@ _hallucinate_daemon_runner = build_namespace_daemon_bootstrap_runner(
     hooks_factory=_hallucinate_refill_hooks,
     default_worktree_submodule_paths=HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     default_objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
     pass_complete_message="Hallucinate multimodal-control daemon pass complete: %s",
 )
 
