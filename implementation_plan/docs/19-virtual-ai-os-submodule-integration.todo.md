@@ -2171,3 +2171,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-191. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-191 from strategy blocked_tasks.
+
+## VAI-195 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:1001
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:1001. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-195-codebase-scan-ad6f0cf5772c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-196 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py:223
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
+- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py:223. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-196-codebase-scan-c7eac77a4882.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-197 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-197-codebase-scan-c7debe50e8cb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-198 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-198-codebase-scan-e8f8f357776a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
