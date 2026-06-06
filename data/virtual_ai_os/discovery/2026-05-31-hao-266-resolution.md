@@ -14,7 +14,7 @@ The implementation branch had dirty working tree files on `main` that matched th
 
 ## Changes Applied
 
-- `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`: VAI-178 status changed from `todo` to `completed` <!-- scanner-resolved: MGW-209, MGW-214, MGW-219, MGW-224, MGW-229 — false positive; "todo" here refers to the prior backlog status of VAI-178, not a deferred-work annotation marker; no open annotation remains -->
+- `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`: VAI-178 status changed from `todo` to `completed` <!-- scanner-resolved: MGW-209, MGW-214, MGW-219, MGW-224, MGW-229, MGW-234 — false positive; "todo" here refers to the prior backlog status of VAI-178, not a deferred-work annotation marker; no open annotation remains -->
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`: Appended VAIOS-G347 through VAIOS-G350+ interoperability goal records
 - `scripts/virtual_ai_os_todo_supervisor.py:169`: Added `HAO-266` to scanner-resolved comment
 
