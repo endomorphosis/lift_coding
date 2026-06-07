@@ -2644,7 +2644,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-239 Resolve dirty main checkout blocking 19 worktree merges
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
