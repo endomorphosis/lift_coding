@@ -113,6 +113,40 @@ reviewable commits or follow-up tasks, rerun the supervisor reconciliation pass,
 and verify that either the candidate merge count decreases or the dirty
 worktree cleanup skip count decreases.
 
+## Resolution Evidence
+
+Execution on 2026-06-07 classified the main checkout before mutating any
+worktree cleanup candidates:
+
+- `git status --short --branch` in `/home/barberb/lift_coding` reported
+  `## main...origin/main` with no dirty paths at main commit `79a86cb8`.
+- `git diff --cached --stat` and `git diff --stat` were empty, so none of the
+  original guardrail dirty paths remained as uncommitted work.
+- No dirty or untracked content from the guardrail set was discarded.
+
+The active supervisor then reran worktree reconciliation after the checkout was
+clean enough to inspect merge candidates. Structured events in
+`data/virtual_ai_os/state/virtual_ai_os_supervisor_events.jsonl` recorded:
+
+- `2026-06-07T07:09:06.785769+00:00`: `worktree_reconciliation`,
+  `attempted=true`, `main_checkout_dirty=false`, `candidate_count=15`,
+  `reconciled_count=0`.
+- `2026-06-07T07:17:26.799537+00:00`: `worktree_reconciliation`,
+  `attempted=true`, `main_checkout_dirty=false`, `candidate_count=15`,
+  `reconciled_count=0`.
+
+This reduces the VAI-200 dirty-main blocked work surface from the guardrail's
+`18` candidates to a post-pass reconciliation candidate count of `15`, with the
+`main_checkout_dirty` condition false. The remaining candidates are no longer
+blocked by the dirty main checkout; they are carried forward under the separate
+dirty-worktree or preflight-conflict guardrails.
+
+During this execution the live supervisor generated additional VAI-201/objective
+refill updates after the clean reconciliation pass. Those generated changes were
+preserved in main commit `dd61450c` (`Record VAI reconciliation guardrail
+refresh`) rather than discarded, leaving the main checkout clean again for the
+VAI-200 worktree merge.
+
 ## Reconciliation Plan
 
 Work surface: `18` candidates, `18` sampled records.
