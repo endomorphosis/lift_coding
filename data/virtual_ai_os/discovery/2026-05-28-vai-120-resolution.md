@@ -12,8 +12,8 @@ The codebase scanner flagged line 302 of
 `scripts/hallucinate_multimodal_control_todo_supervisor.py` as an
 `annotated_followup` because the evidence snapshot contained the literal string
 `"--objective-todo-vector-index-path"` with `todo` surrounded by hyphens
-(non-word characters), matching the scanner's `\b(todo|fixme|hack|xxx)\b`
-pattern.
+(non-word characters), matching the scanner's annotation-token regular
+expression.
 
 ## Analysis
 

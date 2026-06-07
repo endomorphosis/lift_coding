@@ -1888,11 +1888,7 @@ cadence remains parseable and resumable.
 
 ## VAI-169 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:304
 
-<<<<<<< HEAD
 - Status: completed
-=======
-- Status: todo
->>>>>>> implementation/mgw-200-attempt-2-1780229330
 - Completion: manual
 - Priority: P3
 - Track: runtime
