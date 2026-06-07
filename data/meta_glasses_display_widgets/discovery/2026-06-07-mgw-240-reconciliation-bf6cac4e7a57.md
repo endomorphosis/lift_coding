@@ -1,10 +1,10 @@
 # MGW-240 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: 1bfe5896e1d558d548810c26504c497cbaead779
+Fingerprint: ba8605bb3e3ecfc5e86be5f3ca4ee26cceae6221
 Kind: dirty_backlogged_worktree
 Reason: content_not_in_target
-Candidate count: 81
+Candidate count: 20
 Priority: P2
 Track: ops
 
@@ -30,29 +30,12 @@ Track: ops
   - Diff stat:
     - `scripts/meta_glasses_display_todo_supervisor.py | 17 +++++++++++++++++`
     - ` 1 file changed, 17 insertions(+)`
-- `implementation/mgw-030-attempt-1-1779789211` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-030-attempt-1-1779789211` status: `?? data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-030-merge-unblock-resolution.md`
-  - Untracked paths:
-    - `data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-030-merge-unblock-resolution.md`
 - `implementation/mgw-036-attempt-1-1779814627` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-036-attempt-1-1779814627` status: ` M tests/test_ipfs_kit_adapters.py`
   - Name status:
     - `M	tests/test_ipfs_kit_adapters.py`
   - Diff stat:
     - `tests/test_ipfs_kit_adapters.py | 54 +++++++++++++++++++++++++++++++++++++++++`
     - ` 1 file changed, 54 insertions(+)`
-- `implementation/mgw-037-attempt-1-1779815139` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1779815139` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-  - Name status:
-    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-  - Diff stat:
-    - `...swissknife-meta-glasses-display-widgets.todo.md | 24 ++++++++++++++++++++++`
-    - ` .../19-virtual-ai-os-submodule-integration.todo.md | 20 ++++++++++++++++++`
-    - ` 2 files changed, 44 insertions(+)`
-- `implementation/mgw-049-attempt-1-1779820946` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-049-attempt-1-1779820946` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - Name status:
-    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - Diff stat:
-    - `...swissknife-meta-glasses-display-widgets.todo.md | 55 ++++++++++++++++++++++`
-    - ` 1 file changed, 55 insertions(+)`
 - `implementation/mgw-050-attempt-1-1779822495` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-050-attempt-1-1779822495` status: ` M tests/test_hallucinate_multimodal_control_todo_queue.py; ?? data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-050-resolution.md`
   - Name status:
     - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
@@ -147,24 +130,66 @@ Track: ops
   - Diff stat:
     - `hallucinate_app | 2 +-`
     - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
-- `implementation/mgw-124-attempt-1-1779885985` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-124-attempt-1-1779885985` status: ` M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-138-attempt-1-1779952108` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-138-attempt-1-1779952108` status: ` M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md;  M scripts/hallucinate_multimodal_control_todo_supervisor.py`
   - Name status:
     - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `M	scripts/hallucinate_multimodal_control_todo_supervisor.py`
   - Diff stat:
-    - `.../docs/19-virtual-ai-os-submodule-integration.todo.md       | 11 +++++++++++`
-    - ` 1 file changed, 11 insertions(+)`
-- `implementation/mgw-125-attempt-1-1779887576` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779887576` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `.../19-virtual-ai-os-submodule-integration.todo.md | 55 ++++++++++++++++++++++`
+    - ` ...llucinate_multimodal_control_todo_supervisor.py |  6 +++`
+    - ` 2 files changed, 61 insertions(+)`
+- `implementation/mgw-179-attempt-1-1780216111` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-179-attempt-1-1780216111` status: ` M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md;  M scripts/hallucinate_multimodal_control_todo_supervisor.py`
+  - Name status:
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `M	scripts/hallucinate_multimodal_control_todo_supervisor.py`
+  - Diff stat:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md | 2 +-`
+    - ` scripts/hallucinate_multimodal_control_todo_supervisor.py               | 1 +`
+    - ` 2 files changed, 2 insertions(+), 1 deletion(-)`
+- `implementation/mgw-192-attempt-1-1780220839` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-192-attempt-1-1780220839` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M scripts/hallucinate_multimodal_control_todo_supervisor.py; ?? data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-192-resolution.md`
   - Name status:
     - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `M	scripts/hallucinate_multimodal_control_todo_supervisor.py`
   - Diff stat:
     - `...swissknife-meta-glasses-display-widgets.todo.md | 55 ++++++++++++++++++++++`
-    - ` 1 file changed, 55 insertions(+)`
-- `implementation/mgw-125-attempt-1-1779887833` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779887833` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - ` ...llucinate_multimodal_control_todo_supervisor.py |  2 +-`
+    - ` 2 files changed, 56 insertions(+), 1 deletion(-)`
+  - Untracked paths:
+    - `data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-192-resolution.md`
+- `implementation/mgw-193-attempt-1-1780224683` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-193-attempt-1-1780224683` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md;  M scripts/hallucinate_multimodal_control_todo_supervisor.py;  M scripts/virtual_ai_os_todo_supervisor.py`
   - Name status:
     - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `M	implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+    - `M	scripts/hallucinate_multimodal_control_todo_supervisor.py`
+    - `M	scripts/virtual_ai_os_todo_supervisor.py`
   - Diff stat:
     - `...swissknife-meta-glasses-display-widgets.todo.md | 55 ++++++++++++++++++++++`
-    - ` 1 file changed, 55 insertions(+)`
+    - ` .../docs/23-virtual-ai-os-objective-goal-heap.md   |  6 +++`
+    - ` ...llucinate_multimodal_control_todo_supervisor.py |  4 ++`
+    - ` scripts/virtual_ai_os_todo_supervisor.py           |  1 +`
+    - ` 4 files changed, 66 insertions(+)`
+- `implementation/mgw-200-attempt-1-1780228916` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-200-attempt-1-1780228916` status: ` M data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md;  M implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md;  M scripts/virtual_ai_os_todo_supervisor.py; ?? data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-200-resolution.md`
+  - Name status:
+    - `M	data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md`
+    - `M	implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+    - `M	scripts/virtual_ai_os_todo_supervisor.py`
+  - Diff stat:
+    - `.../discovery/2026-05-31-vai-160-resolution.md     |   2 +-`
+    - ` .../docs/23-virtual-ai-os-objective-goal-heap.md   | 339 +++++++++++++++++++++`
+    - ` scripts/virtual_ai_os_todo_supervisor.py           |   1 +`
+    - ` 3 files changed, 341 insertions(+), 1 deletion(-)`
+  - Untracked paths:
+    - `data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-200-resolution.md`
+- `implementation/mgw-224-attempt-1-1780252704` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-224-attempt-1-1780252704` status: ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md;  M scripts/virtual_ai_os_todo_supervisor.py`
+  - Name status:
+    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `M	implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+    - `M	scripts/virtual_ai_os_todo_supervisor.py`
+  - Diff stat:
+    - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md           | 4 ++++`
+    - ` implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md      | 4 ++++`
+    - ` scripts/virtual_ai_os_todo_supervisor.py                              | 2 +-`
+    - ` 3 files changed, 9 insertions(+), 1 deletion(-)`
 
 ## Why This Blocks Progress
 
@@ -183,7 +208,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `81` candidates, `20` sampled records.
+Work surface: `20` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -231,10 +256,10 @@ Work surface: `81` candidates, `20` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 81,
+  "candidate_count": 20,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target",
-  "fingerprint": "1bfe5896e1d558d548810c26504c497cbaead779",
+  "fingerprint": "ba8605bb3e3ecfc5e86be5f3ca4ee26cceae6221",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "content_not_in_target",
@@ -246,10 +271,7 @@ Work surface: `81` candidates, `20` sampled records.
   "sample_branches": [
     "implementation/mgw-001-attempt-2-1779440035",
     "implementation/mgw-030-attempt-1-1779786094",
-    "implementation/mgw-030-attempt-1-1779789211",
     "implementation/mgw-036-attempt-1-1779814627",
-    "implementation/mgw-037-attempt-1-1779815139",
-    "implementation/mgw-049-attempt-1-1779820946",
     "implementation/mgw-050-attempt-1-1779822495",
     "implementation/mgw-057-attempt-1-1779825553",
     "implementation/mgw-085-attempt-1-1779837576",
@@ -261,9 +283,12 @@ Work surface: `81` candidates, `20` sampled records.
     "implementation/mgw-121-attempt-1-1779882531",
     "implementation/mgw-121-attempt-1-1779882975",
     "implementation/mgw-122-attempt-1-1779883972",
-    "implementation/mgw-124-attempt-1-1779885985",
-    "implementation/mgw-125-attempt-1-1779887576",
-    "implementation/mgw-125-attempt-1-1779887833"
+    "implementation/mgw-138-attempt-1-1779952108",
+    "implementation/mgw-179-attempt-1-1780216111",
+    "implementation/mgw-192-attempt-1-1780220839",
+    "implementation/mgw-193-attempt-1-1780224683",
+    "implementation/mgw-200-attempt-1-1780228916",
+    "implementation/mgw-224-attempt-1-1780252704"
   ],
   "sample_count": 20,
   "sample_status_paths": [
@@ -271,30 +296,31 @@ Work surface: `81` candidates, `20` sampled records.
     "scripts/meta_glasses_display_todo_daemon.py",
     "scripts/meta_glasses_display_todo_supervisor.py",
     "tests/test_meta_glasses_display_todo_queue.py",
-    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-030-merge-unblock-resolution.md",
     "tests/test_ipfs_kit_adapters.py",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-050-resolution.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-057-resolution.md",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-085-resolution.md",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-087-resolution.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "tests/test_virtual_ai_os_end_to_end.py",
     "scripts/virtual_ai_os_todo_supervisor.py",
     "tests/test_virtual_ai_os_task_orchestration.py",
     "tests/test_virtual_ai_os_todo_queue.py",
     "data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-107-codebase-scan-13883aa045ec.md",
     "tracking/PR-079-agent-runner-minimal.md",
-    "hallucinate_app"
+    "hallucinate_app",
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+    "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-192-resolution.md",
+    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+    "data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md",
+    "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-200-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-001-attempt-2-1779440035",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-030-attempt-1-1779786094",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-030-attempt-1-1779789211",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-036-attempt-1-1779814627",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1779815139",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-049-attempt-1-1779820946",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-050-attempt-1-1779822495",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-057-attempt-1-1779825553",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-085-attempt-1-1779837576",
@@ -306,9 +332,12 @@ Work surface: `81` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1779882531",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1779882975",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-122-attempt-1-1779883972",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-124-attempt-1-1779885985",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779887576",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779887833"
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-138-attempt-1-1779952108",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-179-attempt-1-1780216111",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-192-attempt-1-1780220839",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-193-attempt-1-1780224683",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-200-attempt-1-1780228916",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-224-attempt-1-1780252704"
   ],
   "success_signals": [
     "candidate_count_decreases",
