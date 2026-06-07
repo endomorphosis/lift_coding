@@ -263,3 +263,47 @@ Work surface: `21` candidates, `20` sampled records.
   ]
 }
 ```
+
+## Execution Addendum
+
+Date: 2026-06-07
+
+The original guardrail manifest recorded `candidate_count: 21` for
+`preflight_merge_conflict`. A fresh live preflight against `main` at
+`5dcb078893ba8ac92131cdc46709ecd9f47a35be` found one sampled candidate that
+had become mergeable after the earlier HAO-311 submodule reconciliation:
+`implementation/hao-174-attempt-1-1779879857`.
+
+Reconciliation decision:
+
+- `implementation/hao-174-attempt-1-1779879857` only changed the outer
+  `hallucinate_app` gitlink.
+- The branch gitlink commit
+  `a1b3beb18b6017fc32b6fda140ced5e37d78adc1` is already an ancestor of
+  `hallucinate_app` main at `079e2c0ea5581856599db937ba21637dc040e8da`.
+- `git merge-tree --write-tree main implementation/hao-174-attempt-1-1779879857`
+  returned a clean tree whose `hallucinate_app` gitlink stayed at
+  `079e2c0ea5581856599db937ba21637dc040e8da`, so the outer branch was redundant
+  after preserving the submodule intent.
+
+Supervisor reconciliation rerun:
+
+- Command:
+  `python scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 1 --no-reconciliation-guardrail --log-level INFO`
+- First pass result: `candidate_count: 21`, `processed_count: 3`,
+  `preflight_blocked_count: 2`, `reconciled_count: 1`, `cleanup_count: 1`.
+- The pass merged `implementation/hao-174-attempt-1-1779879857` into `main` as
+  `56abf420342fbb7edc4d96ef7d14bcafd048bd5e` and cleaned the outer worktree,
+  outer branch, and associated `hallucinate_app`/`swissknife` submodule
+  worktrees and branches.
+- Second pass result against `main` at
+  `56abf420342fbb7edc4d96ef7d14bcafd048bd5e`: `candidate_count: 20`,
+  `processed_count: 20`, `preflight_blocked_count: 20`, `reconciled_count: 0`,
+  `cleanup_count: 0`, `main_checkout_dirty: false`.
+
+Success signals observed:
+
+- Blocked preflight candidate count decreased from `21` to `20`.
+- Reconciled count increased by `1`.
+- Cleanup count increased by `1`.
+- Main checkout remained clean after both supervisor passes.
