@@ -2227,22 +2227,22 @@ cadence remains parseable and resumable.
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-200 Resolve dirty main checkout blocking 48 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 49 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: d50d8fb3006ac7e513656e57221d41cd753dbe4f
+- Fingerprint: 73c9b04c762458e650ef83bb3ca5b94d31590953
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 48 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 49 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 2 dirty backlogged worktrees blocked by content_not_in_target
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
@@ -2266,18 +2266,18 @@ cadence remains parseable and resumable.
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-203 Resolve 15 preflight-conflicting backlogged worktree merges
+## VAI-203 Resolve 5 preflight-conflicting backlogged worktree merges
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 19f9d53ba349afd9620566c87d1e062cb819943b
+- Fingerprint: 7a186e8fa0342104028f52b8e3f9d43eb2091ea0
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
-- Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 5 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
