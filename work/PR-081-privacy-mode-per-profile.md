@@ -15,8 +15,14 @@
 - Added `privacy_mode` field to `ProfileConfig` class in `src/handsfree/commands/profiles.py`
 - All profiles now default to `PrivacyMode.STRICT` for safety
 - Updated `router.py` to use `profile_config.privacy_mode` instead of hardcoded `PrivacyMode.STRICT`
-- Removed TODO comments in router.py (lines 504 and 669)
+- Removed obsolete router comments at the privacy-mode call sites
 - Added comprehensive tests:
   - `tests/test_profile_privacy_mode.py`: Unit tests for profile privacy mode configuration
   - `tests/test_router_privacy_mode.py`: Integration tests for router privacy mode behavior
 - All 1169 tests pass successfully
+
+## Resolution notes
+VAI-095 resolved the stale scanner finding at the original line 18. The entry was
+historical implementation-summary wording; current `router.py` reads privacy mode
+from `profile_config.privacy_mode` before calling the inbox and PR summary
+handlers, so no product-code change was needed for this docs cleanup.
