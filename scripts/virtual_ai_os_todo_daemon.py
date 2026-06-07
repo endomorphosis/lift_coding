@@ -14,6 +14,7 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     repo_doc_path as _repo_doc_path,
 )
@@ -60,6 +61,9 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    VIRTUAL_AI_OS_ENV_PREFIX
+)
 logger = logging.getLogger("virtual_ai_os_todo_daemon")
 _virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
     repo_root=REPO_ROOT,
@@ -74,6 +78,7 @@ _virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
     objective_path=OBJECTIVE_HEAP_PATH,
     default_worktree_submodule_paths=VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
     default_objective_path=OBJECTIVE_HEAP_PATH,
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
     pass_complete_message="Virtual-AI-OS implementation daemon pass complete: %s",
 )
 
