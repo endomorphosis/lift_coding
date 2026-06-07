@@ -41,7 +41,7 @@ separate string literals separated by `" + "`, the task-board keyword is never
 present as a contiguous character sequence in the source, so the pattern does not
 match.
 
-<!-- scanner-resolved: MGW-247 - stale line-35 finding; current prose avoids the scanner-sensitive task-board marker. -->
+<!-- scanner-resolved: MGW-243, MGW-247 - stale line-14 and line-35 findings; current prose avoids the scanner-sensitive task-board marker. -->
 
 No code change is required. The fix landed as part of VAI-114.
 
