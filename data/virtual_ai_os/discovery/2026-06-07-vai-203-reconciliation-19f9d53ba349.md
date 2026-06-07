@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: 7a186e8fa0342104028f52b8e3f9d43eb2091ea0
+Fingerprint: a84b9cc78c963a673999c6911f42785aef7dafda
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 5
+Candidate count: 20
 Priority: P1
 Track: ops
 
@@ -39,6 +39,60 @@ Track: ops
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
     - `work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md`
+- `implementation/vai-108-attempt-3-1779889162` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-3-1779889162`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `implementation/vai-116-attempt-1-1779953956` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-116-attempt-1-1779953956`
+  - Conflict paths:
+    - `scripts/meta_glasses_display_todo_supervisor.py`
+- `implementation/vai-119-attempt-1-1779957414` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-119-attempt-1-1779957414`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `scripts/hallucinate_multimodal_control_todo_supervisor.py`
+- `implementation/vai-121-attempt-1-1779958261` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-121-attempt-1-1779958261`
+  - Conflict paths:
+    - `scripts/hallucinate_multimodal_control_todo_supervisor.py`
+- `implementation/vai-124-attempt-1-1779964094` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-124-attempt-1-1779964094`
+  - Conflict paths:
+    - `data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md`
+    - `scripts/hallucinate_multimodal_control_todo_daemon.py`
+    - `scripts/hallucinate_multimodal_control_todo_supervisor.py`
+- `implementation/vai-126-attempt-1-1779960486` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-126-attempt-1-1779960486`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-128-attempt-1-1779961507` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-128-attempt-1-1779961507`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/vai-135-attempt-1-1779974033` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-135-attempt-1-1779974033`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `implementation/vai-136-attempt-1-1779974850` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-136-attempt-1-1779974850`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/vai-137-attempt-1-1779970867` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-137-attempt-1-1779970867`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-142-attempt-1-1779976578` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-142-attempt-1-1779976578`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-142-attempt-1-1779977419` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-142-attempt-1-1779977419`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-143-attempt-1-1779976871` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-143-attempt-1-1779976871`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-147-attempt-1-1780160070` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-147-attempt-1-1780160070`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/vai-147-attempt-1-1780162217` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-147-attempt-1-1780162217`
+  - Conflict paths:
+    - `hallucinate_app`
 
 ## Why This Blocks Progress
 
@@ -57,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `5` candidates, `5` sampled records.
+Work surface: `20` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,11 +159,16 @@ Work surface: `5` candidates, `5` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 5,
+  "candidate_count": 20,
   "conflict_path_counts": {
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md": 1,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 3,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 2,
+    "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md": 1,
+    "hallucinate_app": 8,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 7,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 8,
+    "scripts/hallucinate_multimodal_control_todo_daemon.py": 1,
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py": 3,
+    "scripts/meta_glasses_display_todo_supervisor.py": 1,
     "src/handsfree/api.py": 1,
     "src/handsfree/ocr/__init__.py": 1,
     "tests/test_hallucinate_multimodal_control_todo_queue.py": 1,
@@ -117,7 +176,7 @@ Work surface: `5` candidates, `5` sampled records.
     "work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "7a186e8fa0342104028f52b8e3f9d43eb2091ea0",
+  "fingerprint": "a84b9cc78c963a673999c6911f42785aef7dafda",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -131,9 +190,24 @@ Work surface: `5` candidates, `5` sampled records.
     "implementation/vai-054-attempt-1-1779827423",
     "implementation/vai-079-attempt-1-1779841991",
     "implementation/vai-095-attempt-1-1779875087",
-    "implementation/vai-097-attempt-1-1779873902"
+    "implementation/vai-097-attempt-1-1779873902",
+    "implementation/vai-108-attempt-3-1779889162",
+    "implementation/vai-116-attempt-1-1779953956",
+    "implementation/vai-119-attempt-1-1779957414",
+    "implementation/vai-121-attempt-1-1779958261",
+    "implementation/vai-124-attempt-1-1779964094",
+    "implementation/vai-126-attempt-1-1779960486",
+    "implementation/vai-128-attempt-1-1779961507",
+    "implementation/vai-135-attempt-1-1779974033",
+    "implementation/vai-136-attempt-1-1779974850",
+    "implementation/vai-137-attempt-1-1779970867",
+    "implementation/vai-142-attempt-1-1779976578",
+    "implementation/vai-142-attempt-1-1779977419",
+    "implementation/vai-143-attempt-1-1779976871",
+    "implementation/vai-147-attempt-1-1780160070",
+    "implementation/vai-147-attempt-1-1780162217"
   ],
-  "sample_count": 5,
+  "sample_count": 20,
   "sample_status_paths": [
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "src/handsfree/api.py",
@@ -142,14 +216,34 @@ Work surface: `5` candidates, `5` sampled records.
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md",
     "work/PR-081-privacy-mode-per-profile.md",
-    "work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md"
+    "work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md",
+    "scripts/meta_glasses_display_todo_supervisor.py",
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md",
+    "scripts/hallucinate_multimodal_control_todo_daemon.py",
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-054-attempt-1-1779827423",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-079-attempt-1-1779841991",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-095-attempt-1-1779875087",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-097-attempt-1-1779873902"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-097-attempt-1-1779873902",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-3-1779889162",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-116-attempt-1-1779953956",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-119-attempt-1-1779957414",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-121-attempt-1-1779958261",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-124-attempt-1-1779964094",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-126-attempt-1-1779960486",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-128-attempt-1-1779961507",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-135-attempt-1-1779974033",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-136-attempt-1-1779974850",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-137-attempt-1-1779970867",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-142-attempt-1-1779976578",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-142-attempt-1-1779977419",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-143-attempt-1-1779976871",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-147-attempt-1-1780160070",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-147-attempt-1-1780162217"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -158,9 +252,14 @@ Work surface: `5` candidates, `5` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "hallucinate_app",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md",
+    "scripts/hallucinate_multimodal_control_todo_daemon.py",
+    "scripts/meta_glasses_display_todo_supervisor.py",
     "src/handsfree/api.py",
     "src/handsfree/ocr/__init__.py",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
