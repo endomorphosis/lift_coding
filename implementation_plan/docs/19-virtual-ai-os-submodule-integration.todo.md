@@ -2329,7 +2329,7 @@ cadence remains parseable and resumable.
 
 ## VAI-208 Review swallowed exception path in external/ipfs_kit/.github/scripts/generate_workflow_list.py:36
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
