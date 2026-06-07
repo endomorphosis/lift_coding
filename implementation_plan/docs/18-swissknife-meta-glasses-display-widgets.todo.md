@@ -430,3 +430,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-037-codebase-scan-5fb02bb41fbf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-038 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-unblock.md:13
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-unblock.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-unblock.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-032-vai-028-merge-unblock.md:13. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-038-codebase-scan-ad4e36b82b97.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-039 Resolve code annotation in data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md:16
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md
+- Validation: test -f data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-22.md:16. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-039-codebase-scan-7f82c7dc3d74.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-040 Review swallowed exception path in src/handsfree/ipfs_kit_adapters.py:347
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ipfs_kit_adapters.py:347. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-040-codebase-scan-6b0df05ca4a0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-041 Replace placeholder runtime path in src/handsfree/ocr/stub_provider.py:38
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/ocr/stub_provider.py
+- Validation: python3 -m py_compile src/handsfree/ocr/stub_provider.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/ocr/stub_provider.py:38. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-041-codebase-scan-914627da8285.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-042 Review swallowed exception path in src/handsfree/peer_chat.py:122
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/peer_chat.py
+- Validation: python3 -m py_compile src/handsfree/peer_chat.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/peer_chat.py:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-042-codebase-scan-e0404f01baad.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
