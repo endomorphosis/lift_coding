@@ -167,16 +167,17 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
         },
     )
     status = agent_service.get_status(user_id=test_user_id)
+    task_status = status["tasks"][0]
 
     assert created["state"] == "running"
     assert created["spoken_text"] == expected_active_summary
-    assert status["tasks"][0]["result_preview"] == expected_active_summary
-    assert status["tasks"][0]["todo_daemon_task_status"] == "ready"
+    assert task_status["result_preview"] == expected_active_summary
+    assert task_status["todo_daemon_task_status"] == "ready"
 
     manifest = _task_progress_manifest(
         title="Virtual AI OS task progress",
-        summary=status["tasks"][0]["result_preview"],
-        status=status["tasks"][0]["todo_daemon_task_status"],
+        summary=task_status["result_preview"],
+        status=task_status["todo_daemon_task_status"],
     )
     receipt = {
         "receipt_cid": "sha256:render-receipt",
