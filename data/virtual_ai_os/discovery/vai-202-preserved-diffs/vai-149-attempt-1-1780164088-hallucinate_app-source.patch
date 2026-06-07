@@ -1,0 +1,15 @@
+diff --git a/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py b/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py
+index e0bb15f..cd01f34 100644
+--- a/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py
++++ b/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py
+@@ -326,8 +326,8 @@ class IPFSKitServer:
+                 with open(path, "rb") as f:
+                     content = f.read()
+                 self.mock_storage[mock_cid] = content
+-        except Exception:
+-            pass  # Ignore errors in mock
++        except Exception as e:
++            logger.warning("Mock add: failed to read file %s: %s", path, e)
+         
+         return {"Name": path, "Hash": mock_cid, "Size": "1234"}
+     

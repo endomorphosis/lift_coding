@@ -1,0 +1,27 @@
+diff --git a/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py b/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py
+index 882004d..5be3efa 100644
+--- a/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py
++++ b/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py
+@@ -622,8 +622,8 @@ class IPFSFaissPy:
+                 # Clean up temporary files
+                 try:
+                     os.unlink(index_file)
+-                except:
+-                    pass
++                except OSError as e:
++                    logger.debug(f"Could not remove temporary index file {index_file}: {e}")
+                 
+         except Exception as e:
+             logger.error(f"Error loading index from IPFS: {e}")
+@@ -730,8 +730,9 @@ class IPFSFaissPy:
+                             # Try loading with pickle first
+                             with open(index_path, 'rb') as f:
+                                 index = pickle.load(f)
+-                        except:
+-                            # Fall back to faiss reader
++                        except Exception as e:
++                            # Fall back to faiss reader if pickle fails
++                            logger.debug(f"Pickle load failed for {index_path}, falling back to faiss reader: {e}")
+                             index = faiss.read_index(index_path)
+                         
+                         if index:

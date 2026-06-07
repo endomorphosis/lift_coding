@@ -2289,3 +2289,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because VAI-200 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## VAI-205 Review preserved VAI-202 dirty submodule source patches
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-202
+- Outputs: data/virtual_ai_os/discovery/vai-202-preserved-diffs, hallucinate_app
+- Validation: test -d data/virtual_ai_os/discovery/vai-202-preserved-diffs
+- Acceptance: VAI-202 preserved unique source diffs from merged dirty worktrees before cleanup. Review each patch in data/virtual_ai_os/discovery/vai-202-preserved-diffs, port or intentionally drop the corresponding hallucinate_app change, and record the decision so the merged-worktree cleanup can stay free of stale local source edits.

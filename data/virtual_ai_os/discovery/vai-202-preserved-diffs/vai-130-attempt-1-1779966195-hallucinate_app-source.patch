@@ -1,0 +1,15 @@
+diff --git a/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py b/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
+index e8d746d..5575b11 100644
+--- a/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
++++ b/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
+@@ -812,8 +812,8 @@ class DuckDBIPLDKit:
+         # Clean up test table
+         try:
+             await self.execute("DROP TABLE IF EXISTS test_table")
+-        except Exception:
+-            pass  # Best-effort cleanup; ignore errors so test results are still returned.
++        except Exception as cleanup_exc:  # noqa: BLE001
++            logger.debug("Best-effort cleanup of test_table failed (non-fatal): %s", cleanup_exc)
+         
+         return results
+ 
