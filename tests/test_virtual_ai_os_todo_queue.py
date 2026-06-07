@@ -173,6 +173,17 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     ] == (
         llm_merge_resolver_fallback_command()
     )
+    assert runner_module.default_launch_args(()) == ["--detach"]
+    assert runner_module.default_launch_args(("--detach",)) == ["--detach"]
+    assert runner_module.default_launch_args(("--duration-seconds", "5")) == [
+        "--duration-seconds",
+        "5",
+        "--detach",
+    ]
+    assert runner_module.default_launch_args(("--foreground", "--duration-seconds", "5")) == [
+        "--duration-seconds",
+        "5",
+    ]
 
 
 def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():

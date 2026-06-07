@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import sys
 from typing import Sequence
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
@@ -75,10 +76,22 @@ def build_runner() -> ConfiguredMultiSupervisorCliRunner:
     return build_launcher().runner
 
 
+def default_launch_args(argv: Sequence[str]) -> list[str]:
+    """Return wrapper CLI args, defaulting long runs to detached mode."""
+
+    launch_args = list(argv)
+    if "--foreground" in launch_args:
+        return [arg for arg in launch_args if arg != "--foreground"]
+    if "--detach" not in launch_args:
+        launch_args.append("--detach")
+    return launch_args
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the configured VAI/MGW/HAO multi-supervisor CLI."""
 
-    return build_launcher().run_cli(argv)
+    cli_args = sys.argv[1:] if argv is None else argv
+    return build_launcher().run_cli(default_launch_args(cli_args))
 
 
 if __name__ == "__main__":
