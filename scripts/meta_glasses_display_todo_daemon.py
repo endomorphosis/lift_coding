@@ -16,6 +16,7 @@ IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
     build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     repo_doc_path as _repo_doc_path,
 )
@@ -87,6 +88,9 @@ _RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
+    META_DISPLAY_ENV_PREFIX
+)
 META_DISPLAY_STATE_PATHS = namespace_implementation_state_artifact_paths(
     META_DISPLAY_DATA_PATHS,
     state_prefix="meta_glasses_display",
@@ -150,6 +154,7 @@ _meta_display_daemon_runner = build_namespace_daemon_bootstrap_runner(
     objective_path_key="objective_heap_path",
     default_worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
     default_objective_path=OBJECTIVE_HEAP_PATH,
+    llm_merge_resolver_command=_default_llm_merge_resolver_command,
     pass_complete_message="Display-widget implementation daemon pass complete: %s",
 )
 
