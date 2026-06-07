@@ -167,7 +167,10 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         )
     )
     launcher_args = runner_module.build_launcher().args()
-    assert launcher_args[launcher_args.index("--implementation-supervisor-command") + 1] == (
+    assert "--implementation-supervisor-command" not in launcher_args
+    assert launcher_args[
+        launcher_args.index("--implementation-supervisor-llm-merge-resolver-command") + 1
+    ] == (
         llm_merge_resolver_fallback_command()
     )
 
