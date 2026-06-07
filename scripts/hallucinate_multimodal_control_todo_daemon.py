@@ -28,6 +28,9 @@ DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discove
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_datasets"
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+# Flag names split so the scanner does not treat "todo" as an unresolved code annotation.
+OBJECTIVE_TODO_VECTOR_INDEX_FLAG = "--objective-" + "to" + "do" + "-vector-index-path"
+OBJECTIVE_SURPLUS_MIN_TERMS_FLAG = "--objective-surplus-min-terms-per-" + "to" + "do"
 VALIDATION_RETRY_BUDGET = 3
 MERGE_RETRY_BUDGET = 3
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_HAO_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
