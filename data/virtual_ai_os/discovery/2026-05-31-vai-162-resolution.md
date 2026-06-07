@@ -19,6 +19,8 @@ Resolution:
 - Removed inline `scanner-resolved` comments from this note because those
   comments repeated the scanner-sensitive token and caused follow-up MGW
   findings.
+- MGW-253 rechecked the stale line-8 evidence after that cleanup. The evidence
+  points to an old inline suppression marker that is no longer present here.
 - No functional change required; the current supervisor wrapper has moved to the
   shared configured runner, and the historical evidence remains a completed
   discovery record.
@@ -26,3 +28,4 @@ Resolution:
 Validation:
 
 - `test -f data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md`
+- Focused `scan_findings_in_file` validation reports no findings for this note.
