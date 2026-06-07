@@ -1,10 +1,10 @@
 # VAI-202 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: 2e3bc2d4b8b82ba68ac3dfc81f3c94d03f93e7e8
+Fingerprint: dbef11aff4de4ff3d5dc327340d7cc0193b873ae
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
-Candidate count: 31
+Candidate count: 15
 Priority: P1
 Track: ops
 
@@ -18,18 +18,6 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/vai-036-attempt-1-1779789512` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-036-attempt-1-1779789512` status: ` D external/ipfs_accelerate`
-  - Name status:
-    - `D	external/ipfs_accelerate`
-  - Diff stat:
-    - `external/ipfs_accelerate | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-036-attempt-2-1779789950` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-036-attempt-2-1779789950` status: ` D external/ipfs_accelerate`
-  - Name status:
-    - `D	external/ipfs_accelerate`
-  - Diff stat:
-    - `external/ipfs_accelerate | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
 - `implementation/vai-046-attempt-1-1779819855` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1779819855` status: ` m external/ipfs_accelerate;  D external/ipfs_datasets;  D external/ipfs_kit`
   - Name status:
     - `M	external/ipfs_accelerate`
@@ -40,38 +28,6 @@ Track: ops
     - ` external/ipfs_datasets   | 1 -`
     - ` external/ipfs_kit        | 1 -`
     - ` 3 files changed, 2 deletions(-)`
-- `implementation/vai-050-attempt-1-1779825466` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-050-attempt-1-1779825466` status: ` D external/ipfs_accelerate`
-  - Name status:
-    - `D	external/ipfs_accelerate`
-  - Diff stat:
-    - `external/ipfs_accelerate | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-051-attempt-1-1779823656` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-051-attempt-1-1779823656` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-086-attempt-1-1779868723` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-086-attempt-1-1779868723` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-091-attempt-1-1779872158` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-091-attempt-1-1779872158` status: ` D external/ipfs_accelerate;  D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_accelerate`
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_accelerate | 1 -`
-    - ` external/ipfs_datasets   | 1 -`
-    - ` 2 files changed, 2 deletions(-)`
-- `implementation/vai-100-attempt-1-1779880027` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-100-attempt-1-1779880027` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
 - `implementation/vai-103-attempt-1-1779882686` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-103-attempt-1-1779882686` status: ` m hallucinate_app;  M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
   - Name status:
     - `M	hallucinate_app`
@@ -88,42 +44,6 @@ Track: ops
   - Diff stat:
     - `hallucinate_app | 0`
     - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
-- `implementation/vai-108-attempt-2-1779888411` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-2-1779888411` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-108-attempt-3-1779892340` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-3-1779892340` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-108-attempt-4-1779893416` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-4-1779893416` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-108-attempt-5-1779894172` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-5-1779894172` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-108-attempt-6-1779895347` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-6-1779895347` status: ` D external/ipfs_datasets`
-  - Name status:
-    - `D	external/ipfs_datasets`
-  - Diff stat:
-    - `external/ipfs_datasets | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
-- `implementation/vai-113-attempt-1-1779950908` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-113-attempt-1-1779950908` status: ` D external/ipfs_accelerate`
-  - Name status:
-    - `D	external/ipfs_accelerate`
-  - Diff stat:
-    - `external/ipfs_accelerate | 1 -`
-    - ` 1 file changed, 1 deletion(-)`
 - `implementation/vai-125-attempt-1-1779963369` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-125-attempt-1-1779963369` status: ` m hallucinate_app`
   - Name status:
     - `M	hallucinate_app`
@@ -152,6 +72,64 @@ Track: ops
   - Diff stat:
     - `hallucinate_app | 0`
     - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/vai-137-attempt-1-1779971710` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-137-attempt-1-1779971710` status: ` m hallucinate_app`
+  - Name status:
+    - `M	hallucinate_app`
+  - Diff stat:
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/vai-143-attempt-1-1780151927` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-143-attempt-1-1780151927` status: ` m hallucinate_app`
+  - Name status:
+    - `M	hallucinate_app`
+  - Diff stat:
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/vai-148-attempt-1-1780156054` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-148-attempt-1-1780156054` status: ` m hallucinate_app`
+  - Name status:
+    - `M	hallucinate_app`
+  - Diff stat:
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/vai-149-attempt-1-1780164088` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-149-attempt-1-1780164088` status: ` m hallucinate_app;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+  - Name status:
+    - `M	hallucinate_app`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+  - Diff stat:
+    - `hallucinate_app                                    |  0`
+    - ` .../19-virtual-ai-os-submodule-integration.todo.md | 55 ++++++++++++++++++++++`
+    - ` 2 files changed, 55 insertions(+)`
+- `implementation/vai-153-attempt-1-1780216008` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-153-attempt-1-1780216008` status: ` m hallucinate_app;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+  - Name status:
+    - `M	hallucinate_app`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+  - Diff stat:
+    - `hallucinate_app                                                         | 0`
+    - ` implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md | 2 +-`
+    - ` 2 files changed, 1 insertion(+), 1 deletion(-)`
+- `implementation/vai-157-attempt-3-1780171229` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-157-attempt-3-1780171229` status: ` m external/ipfs_datasets`
+  - Name status:
+    - `M	external/ipfs_datasets`
+  - Diff stat:
+    - `external/ipfs_datasets | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/vai-179-attempt-1-1780240556` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-179-attempt-1-1780240556` status: ` m hallucinate_app;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md;  M implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+  - Name status:
+    - `M	hallucinate_app`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `M	implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+  - Diff stat:
+    - `hallucinate_app                                    |   0`
+    - ` .../19-virtual-ai-os-submodule-integration.todo.md |  55 +++++++`
+    - ` .../docs/23-virtual-ai-os-objective-goal-heap.md   | 168 +++++++++++++++++++++`
+    - ` 3 files changed, 223 insertions(+)`
+- `implementation/vai-192-attempt-1-1780252495` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-192-attempt-1-1780252495` status: ` m hallucinate_app;  M implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+  - Name status:
+    - `M	hallucinate_app`
+    - `M	implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+  - Diff stat:
+    - `hallucinate_app                                    |   0`
+    - ` .../docs/23-virtual-ai-os-objective-goal-heap.md   | 338 ++++++++++++++++++++-`
+    - ` 2 files changed, 335 insertions(+), 3 deletions(-)`
 
 ## Why This Blocks Progress
 
@@ -170,7 +148,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `31` candidates, `20` sampled records.
+Work surface: `15` candidates, `15` sampled records.
 
 ### Suggested Actions
 
@@ -218,9 +196,10 @@ Work surface: `31` candidates, `20` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 31,
+  "candidate_count": 15,
+  "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "2e3bc2d4b8b82ba68ac3dfc81f3c94d03f93e7e8",
+  "fingerprint": "dbef11aff4de4ff3d5dc327340d7cc0193b873ae",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -230,63 +209,55 @@ Work surface: `31` candidates, `20` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-036-attempt-1-1779789512",
-    "implementation/vai-036-attempt-2-1779789950",
     "implementation/vai-046-attempt-1-1779819855",
-    "implementation/vai-050-attempt-1-1779825466",
-    "implementation/vai-051-attempt-1-1779823656",
-    "implementation/vai-086-attempt-1-1779868723",
-    "implementation/vai-091-attempt-1-1779872158",
-    "implementation/vai-100-attempt-1-1779880027",
     "implementation/vai-103-attempt-1-1779882686",
     "implementation/vai-105-attempt-1-1779884819",
-    "implementation/vai-108-attempt-2-1779888411",
-    "implementation/vai-108-attempt-3-1779892340",
-    "implementation/vai-108-attempt-4-1779893416",
-    "implementation/vai-108-attempt-5-1779894172",
-    "implementation/vai-108-attempt-6-1779895347",
-    "implementation/vai-113-attempt-1-1779950908",
     "implementation/vai-125-attempt-1-1779963369",
     "implementation/vai-130-attempt-1-1779966195",
     "implementation/vai-132-attempt-1-1779968911",
-    "implementation/vai-133-attempt-1-1779967124"
+    "implementation/vai-133-attempt-1-1779967124",
+    "implementation/vai-137-attempt-1-1779971710",
+    "implementation/vai-143-attempt-1-1780151927",
+    "implementation/vai-148-attempt-1-1780156054",
+    "implementation/vai-149-attempt-1-1780164088",
+    "implementation/vai-153-attempt-1-1780216008",
+    "implementation/vai-157-attempt-3-1780171229",
+    "implementation/vai-179-attempt-1-1780240556",
+    "implementation/vai-192-attempt-1-1780252495"
   ],
-  "sample_count": 20,
+  "sample_count": 15,
   "sample_status_paths": [
     "external/ipfs_accelerate",
     "external/ipfs_datasets",
     "external/ipfs_kit",
     "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-036-attempt-1-1779789512",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-036-attempt-2-1779789950",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1779819855",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-050-attempt-1-1779825466",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-051-attempt-1-1779823656",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-086-attempt-1-1779868723",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-091-attempt-1-1779872158",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-100-attempt-1-1779880027",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-103-attempt-1-1779882686",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-105-attempt-1-1779884819",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-2-1779888411",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-3-1779892340",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-4-1779893416",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-5-1779894172",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-108-attempt-6-1779895347",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-113-attempt-1-1779950908",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-125-attempt-1-1779963369",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-130-attempt-1-1779966195",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-132-attempt-1-1779968911",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-133-attempt-1-1779967124"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-133-attempt-1-1779967124",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-137-attempt-1-1779971710",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-143-attempt-1-1780151927",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-148-attempt-1-1780156054",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-149-attempt-1-1780164088",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-153-attempt-1-1780216008",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-157-attempt-3-1780171229",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-179-attempt-1-1780240556",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-192-attempt-1-1780252495"
   ],
   "success_signals": [
     "candidate_count_decreases",
     "dirty_worktree_group_count_decreases",
     "main_checkout_dirty_becomes_false",
     "cleanup_or_reconciliation_pass_processes_candidates"
-  ]
+  ],
+  "top_conflict_paths": []
 }
 ```
