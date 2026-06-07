@@ -2233,7 +2233,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 57d597cf76a02cf1731b36f7297603b34dacd206
+- Fingerprint: bff9fc18fee67566e4cdaa42ee62eb2984baa1a2
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -2377,3 +2377,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-211. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-211 from strategy blocked_tasks.
+
+## VAI-213 Resolve validation retry-budget failure for VAI-209
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Validation: python3 -c 'import pathlib, sys
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-213-vai-209-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.

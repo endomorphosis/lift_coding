@@ -19,3 +19,19 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The workflow embedded extractor previously printed a per-file error and returned
+`None`, allowing generated module documentation to omit unreadable or unparsable
+modules without failing the maintenance run. The extractor now raises a typed
+`DocumentationExtractionError` for read and parse failures, aggregates failures
+during module scanning, and exits the workflow step nonzero before writing a
+partial `module_structure.md`.
+
+## Validation
+
+- `python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml`
+- `python3 -m py_compile /tmp/vai209_extract_docs.py`
+- Temporary malformed-module extraction check confirmed the workflow script exits
+  nonzero before writing `module_structure.md`.

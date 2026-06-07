@@ -4,7 +4,7 @@ Date: 2026-06-07
 Fingerprint: ba8605bb3e3ecfc5e86be5f3ca4ee26cceae6221
 Kind: dirty_backlogged_worktree
 Reason: content_not_in_target
-Candidate count: 20
+Candidate count: 23
 Priority: P2
 Track: ops
 
@@ -208,7 +208,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `20` candidates, `20` sampled records.
+Work surface: `23` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -256,7 +256,7 @@ Work surface: `20` candidates, `20` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 20,
+  "candidate_count": 23,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target",
   "fingerprint": "ba8605bb3e3ecfc5e86be5f3ca4ee26cceae6221",
