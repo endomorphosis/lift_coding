@@ -2679,3 +2679,16 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-241-reconciliation-731f0bb0db09.md
 - Acceptance: Reconciliation guardrail filed this because 2 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-241-reconciliation-731f0bb0db09.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## MGW-242 Resolve 18 preflight-conflicting backlogged worktree merges
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Fingerprint: ef2bec545f8a2d4c55943f7ec3c25134921eb154
+- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-242-reconciliation-ef2bec545f8a.md
+- Acceptance: Reconciliation guardrail filed this because 18 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-242-reconciliation-ef2bec545f8a.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.

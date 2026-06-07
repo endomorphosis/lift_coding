@@ -232,6 +232,7 @@ Work surface: `81` candidates, `20` sampled records.
     }
   ],
   "candidate_count": 81,
+  "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target",
   "fingerprint": "1bfe5896e1d558d548810c26504c497cbaead779",
   "kind": "dirty_backlogged_worktree",
@@ -314,6 +315,7 @@ Work surface: `81` candidates, `20` sampled records.
     "dirty_worktree_group_count_decreases",
     "main_checkout_dirty_becomes_false",
     "cleanup_or_reconciliation_pass_processes_candidates"
-  ]
+  ],
+  "top_conflict_paths": []
 }
 ```
