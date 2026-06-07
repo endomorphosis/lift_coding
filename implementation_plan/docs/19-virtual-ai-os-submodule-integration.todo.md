@@ -2292,7 +2292,7 @@ cadence remains parseable and resumable.
 
 ## VAI-205 Review preserved VAI-202 dirty submodule source patches
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
