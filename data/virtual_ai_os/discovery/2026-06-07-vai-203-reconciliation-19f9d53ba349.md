@@ -112,6 +112,43 @@ Work surface: `15` candidates, `15` sampled records.
 - `reconciled_count_increases`
 - `main_checkout_dirty_becomes_false`
 
+## Reconciliation Evidence
+
+The reconciliation was scoped to the single add/add discovery conflict for
+`implementation/vai-120-attempt-1-1779957766`, whose only preflight conflict was
+`data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md`.
+
+Before the merge, a scoped supervisor API pass against that worktree reported:
+
+- `candidate_count`: `1`
+- `processed_count`: `1`
+- `preflight_blocked_count`: `1`
+- `conflict_paths`: `data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md`
+- `cleanup.skipped_reason_counts.not_merged`: `1`
+
+The branch was merged into `implementation/vai-203-attempt-1-1780818443` with
+merge commit `974477512205ac59f3e464d3dcde3a0ca70ec163`. The add/add discovery
+note was resolved by preserving the current completed-task resolution context
+and retaining the candidate branch's clearer evidence pointer and stale-finding
+analysis.
+
+After the merge, the same scoped supervisor reconciliation/cleanup pass reported:
+
+- `candidate_count`: `0`
+- `processed_count`: `0`
+- `preflight_blocked_count`: `0`
+- `skipped.already_merged_cleanup_pass`: `1`
+- `cleanup.removed_count`: `1`
+- `branch_delete.deleted`: `true`
+
+Post-cleanup checks confirmed that
+`implementation/vai-120-attempt-1-1779957766` no longer appears in
+`git branch --list` or `git worktree list --porcelain`. Recounting the original
+VAI-203 sampled branch set with the same `git merge-tree --write-tree HEAD
+<branch>` preflight leaves `14` blocked branches and one reconciled missing
+branch, decreasing the original guardrail surface from `15` blocked candidates
+to `14`.
+
 ## Machine Readable Manifest
 
 ```json
