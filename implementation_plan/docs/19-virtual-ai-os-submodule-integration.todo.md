@@ -2227,44 +2227,44 @@ cadence remains parseable and resumable.
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-200 Resolve dirty main checkout blocking 50 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 48 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: a172e1d62957b7275db072aeb48de7251b41c6ad
+- Fingerprint: 1e4d8edacd67a3f9848204d5df19f0cfa624bfa0
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 50 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 48 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-201 Resolve 34 dirty backlogged worktrees blocked by content_not_in_target
+## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
 - Status: todo
 - Completion: manual
 - Priority: P2
 - Track: ops
-- Fingerprint: a13ec50687c20ff60f933c5b7e1ad3b4290190ed
+- Fingerprint: 9e5ff24a11fa612ec217e2db481e5d706060804e
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
-- Acceptance: Reconciliation guardrail filed this because 34 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-202 Resolve 15 dirty backlogged worktrees blocked by unsupported_status
+## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: dbef11aff4de4ff3d5dc327340d7cc0193b873ae
+- Fingerprint: a85d85105867279486de1857555ef07b4b5b6c70
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md
-- Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-203 Resolve 15 preflight-conflicting backlogged worktree merges
 
@@ -2279,6 +2279,7 @@ cadence remains parseable and resumable.
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
 - Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
+<<<<<<< HEAD
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
 - Status: completed
@@ -2289,8 +2290,13 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because VAI-200 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+<<<<<<< HEAD
 
 ## VAI-205 Review preserved VAI-202 dirty submodule source patches
+=======
+=======
+## VAI-204 Review preserved VAI-202 dirty submodule source patches
+>>>>>>> implementation/mgw-235-attempt-2-1780821852
 
 - Status: todo
 - Completion: manual
@@ -2300,3 +2306,18 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery/vai-202-preserved-diffs, hallucinate_app
 - Validation: test -d data/virtual_ai_os/discovery/vai-202-preserved-diffs
 - Acceptance: VAI-202 preserved unique source diffs from merged dirty worktrees before cleanup. Review each patch in data/virtual_ai_os/discovery/vai-202-preserved-diffs, port or intentionally drop the corresponding hallucinate_app change, and record the decision so the merged-worktree cleanup can stay free of stale local source edits.
+<<<<<<< HEAD
+=======
+>>>>>>> implementation/vai-202-attempt-1-1780819211
+>>>>>>> implementation/mgw-235-attempt-2-1780821852
+
+## VAI-206 Resolve dependency guardrail for VAI-204
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because VAI-204 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
