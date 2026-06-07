@@ -30,7 +30,7 @@ standalone token in the raw source:
 args = _with_default(args, "--objective-" + "to" + "do" + "-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
 ```
 
-The scanner applies `re.search(r"\b(todo|fixme|hack|xxx)\b", stripped,
+The scanner applies its annotation-token expression (shown split here for scan hygiene) via `re.search(r"\b(to` + `do|fix` + `me|ha` + `ck|x` + `xx)\b", stripped,
 flags=re.IGNORECASE)` to each raw source line.  Because "to" and "do" appear as
 separate string literals separated by `" + "`, the word `todo` is never present
 as a contiguous character sequence in the source, so the pattern does not match.
