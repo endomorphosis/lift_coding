@@ -2229,7 +2229,7 @@ cadence remains parseable and resumable.
 
 ## VAI-200 Resolve dirty main checkout blocking 18 worktree merges
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
