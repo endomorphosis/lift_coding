@@ -18,10 +18,12 @@ class LiftIpfsAccelerateBootstrap:
 
 
 def _prepend_sys_path(paths: Iterable[Path | str]) -> None:
-    for path in reversed(tuple(paths)):
-        value = str(path)
-        if value not in sys.path:
-            sys.path.insert(0, value)
+    values = [str(path) for path in paths]
+    for value in values:
+        while value in sys.path:
+            sys.path.remove(value)
+    for value in reversed(values):
+        sys.path.insert(0, value)
 
 
 def bootstrap_ipfs_accelerate(
