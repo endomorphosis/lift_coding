@@ -290,3 +290,49 @@ Work surface: `17` candidates, `17` sampled records.
   ]
 }
 ```
+
+## Reconciliation Run
+
+Date: 2026-06-07
+
+### Action Taken
+
+Pruned three stale, clean backlogged worktrees whose unique branch-side content
+was superseded by existing `main` evidence:
+
+- `implementation/mgw-125-attempt-1-1779888714`
+  - Removed worktree:
+    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779888714`
+  - Deleted branch ref at `73893b7d`.
+  - Evidence: `cd621cfa` already records principal deletion for MGW-125 and
+    `f13ce327`/`cd621cfa` already record the MGW-130 merge-budget evidence.
+- `implementation/mgw-126-attempt-1-1779891958`
+  - Removed worktree:
+    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1779891958`
+  - Deleted branch ref at `7d5b3c85`.
+  - Evidence: `cd621cfa` already records principal editing for MGW-126 and the
+    corresponding discovery file `2026-05-27-mgw-126-resolution.md`.
+- `implementation/mgw-130-attempt-1-1779889662`
+  - Removed worktree:
+    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1779889662`
+  - Deleted branch ref at `fc4582ad`.
+  - Evidence: `f13ce327` already records MGW-130 discovery/resolution files and
+    `cd621cfa` includes the same merge-budget evidence in the later aggregate
+    resolution commit.
+
+### Supervisor Evidence
+
+- Before cleanup: shared supervisor event at `2026-06-07T07:49:51.378248+00:00`
+  reported `candidate_count=17`, `processed_count=17`, and
+  `preflight_blocked_count=17` against target signature
+  `a26952e3298905d1d6229653c4ab06fbdd35d48d`.
+- After cleanup: shared supervisor event at `2026-06-07T07:56:10.882324+00:00`
+  reported `candidate_count=14`, `processed_count=14`, and
+  `preflight_blocked_count=14` against the same target signature from the clean
+  MGW-242 checkout.
+- Shared `main` checkout pass at `2026-06-07T07:55:07.078353+00:00` also saw
+  `candidate_count=14`; it did not preflight because unrelated dirty `main`
+  paths were present outside this reconciliation.
+
+Result: the preflight-conflicting cleanup candidate count decreased from 17 to
+14 while preserving the already-integrated MGW-125/MGW-126/MGW-130 evidence.
