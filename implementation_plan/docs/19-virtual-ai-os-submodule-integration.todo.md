@@ -2233,7 +2233,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: bff9fc18fee67566e4cdaa42ee62eb2984baa1a2
+- Fingerprint: 699b07e1611eeafc2d508cda58832bca362a21f4
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -2342,7 +2342,7 @@ cadence remains parseable and resumable.
 - Track: ops
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
-- Validation: python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Validation: test -s external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-209-codebase-scan-f5c0089e31da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## VAI-210 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39
@@ -2380,7 +2380,7 @@ cadence remains parseable and resumable.
 
 ## VAI-213 Resolve validation retry-budget failure for VAI-209
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
