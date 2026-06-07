@@ -1,0 +1,20 @@
+diff --git a/hallucinate_app/python/hallucinate_app/thread_pool_manager.py b/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
+index 6f43550..d745884 100644
+--- a/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
++++ b/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
+@@ -1022,12 +1022,12 @@ class ThreadPoolManager:
+                 }
+             }
+             
+-            # Wait for all tasks to complete
++            # Wait for all tasks to complete; log any failures for diagnostics
+             for future in scale_futures:
+                 try:
+                     future.result(timeout=2.0)
+-                except Exception:
+-                    pass
++                except Exception as exc:  # noqa: BLE001
++                    logger.debug("Scale-test future raised (expected during drain): %s", exc)
+             
+             # Overall success
+             test_results["success"] = all(step["success"] for step in test_results["steps"].values())

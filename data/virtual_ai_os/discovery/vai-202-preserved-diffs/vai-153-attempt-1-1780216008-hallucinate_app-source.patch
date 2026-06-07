@@ -1,0 +1,42 @@
+diff --git a/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py b/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py
+index 221cbba..0bfd2e9 100644
+--- a/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py
++++ b/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py
+@@ -728,7 +728,8 @@ class PyArrowContentIndexBridge:
+                         try:
+                             self.metrics['cache_hits'].labels(cache_type=cache_type).inc()
+                         except Exception as e:
+-                            logger.error(f"Error updating cache hit metrics: {e}")
++                            # Metrics updates are non-fatal; log with full traceback for debugging
++                            logger.warning(f"Error updating cache hit metrics: {e}", exc_info=True)
+                     
+                     return cache[key]
+                 else:
+@@ -750,7 +751,8 @@ class PyArrowContentIndexBridge:
+                 try:
+                     self.metrics['cache_misses'].labels(cache_type=cache_type).inc()
+                 except Exception as e:
+-                    logger.error(f"Error updating cache miss metrics: {e}")
++                    # Metrics updates are non-fatal; log with full traceback for debugging
++                    logger.warning(f"Error updating cache miss metrics: {e}", exc_info=True)
+                     
+             return None
+     
+@@ -1995,7 +1997,7 @@ class PyArrowContentIndexBridge:
+                 add_result = await self.js_add_entry(test_entry)
+                 result["steps"]["add_entry"] = {
+                     "success": "error" not in add_result if isinstance(add_result, dict) else True,
+-                    "message": "Successfully added test entry" if "error" not in add_result if isinstance(add_result, dict) else True else f"Failed to add entry: {add_result['error']}"
++                    "message": "Successfully added test entry" if (isinstance(add_result, dict) and "error" not in add_result) else f"Failed to add entry: {add_result.get('error', str(add_result)) if isinstance(add_result, dict) else str(add_result)}"
+                 }
+             except Exception as e:
+                 result["steps"]["add_entry"] = {
+@@ -2010,7 +2012,7 @@ class PyArrowContentIndexBridge:
+                 lookup_result = await self.js_lookup_by_cid(test_entry["cid"])
+                 result["steps"]["lookup_by_cid"] = {
+                     "success": "error" not in lookup_result if isinstance(lookup_result, dict) else True,
+-                    "message": "Successfully looked up entry by CID" if "error" not in lookup_result if isinstance(lookup_result, dict) else True else f"Failed to lookup by CID: {lookup_result['error']}"
++                    "message": "Successfully looked up entry by CID" if (isinstance(lookup_result, dict) and "error" not in lookup_result) else f"Failed to lookup by CID: {lookup_result.get('error', str(lookup_result)) if isinstance(lookup_result, dict) else str(lookup_result)}"
+                 }
+             except Exception as e:
+                 result["steps"]["lookup_by_cid"] = {

@@ -261,3 +261,67 @@ Work surface: `15` candidates, `15` sampled records.
   "top_conflict_paths": []
 }
 ```
+
+## Attempt 1 Reconciliation Result
+
+Execution time: 2026-06-07T08:15:00Z
+
+### Classification
+
+- All 15 sampled outer branches were confirmed as ancestors of `main` before cleanup.
+- The repeated task-board and objective-heap edits were stale generated backlog/objective entries already present in the current VAI/MGW boards or objective heap.
+- `vai-125` only contained generated Python bytecode dirt in `hallucinate_app`.
+- `vai-046`, `vai-105`, and `vai-157` were structural submodule checkout/index states:
+  - `vai-046`: missing top-level `external/ipfs_datasets` and `external/ipfs_kit` checkout directories plus a dirty `external/ipfs_accelerate` submodule worktree.
+  - `vai-105`: missing nested `hallucinate_app/swissknife` checkout.
+  - `vai-157`: `external/ipfs_datasets` had an empty/stale index state with 9,624 deleted tracked paths and 58 untracked checkout-root paths; a stale zero-byte `index.lock` blocked the first restore attempt.
+- Unique `hallucinate_app` source diffs from 11 worktrees did not match the current clean `main` submodule checkout, so they were preserved before cleanup.
+
+### Preserved Source Patch Evidence
+
+The unique source diffs were preserved under `data/virtual_ai_os/discovery/vai-202-preserved-diffs/`:
+
+- `vai-103-attempt-1-1779882686-hallucinate_app-source.patch`
+- `vai-130-attempt-1-1779966195-hallucinate_app-source.patch`
+- `vai-132-attempt-1-1779968911-hallucinate_app-source.patch`
+- `vai-133-attempt-1-1779967124-hallucinate_app-source.patch`
+- `vai-137-attempt-1-1779971710-hallucinate_app-source.patch`
+- `vai-143-attempt-1-1780151927-hallucinate_app-source.patch`
+- `vai-148-attempt-1-1780156054-hallucinate_app-source.patch`
+- `vai-149-attempt-1-1780164088-hallucinate_app-source.patch`
+- `vai-153-attempt-1-1780216008-hallucinate_app-source.patch`
+- `vai-179-attempt-1-1780240556-hallucinate_app-source.patch`
+- `vai-192-attempt-1-1780252495-hallucinate_app-source.patch`
+
+Follow-up task `VAI-204` was added to review and either port or intentionally drop those preserved patches.
+
+### Cleanup Actions
+
+- Restored dirty tracked content in the inactive merged worktrees after patch preservation.
+- Re-initialized the missing `hallucinate_app/swissknife`, `external/ipfs_datasets`, and `external/ipfs_kit` submodule checkouts needed to make the outer worktrees clean.
+- Removed the stale zero-byte `external/ipfs_datasets` worktree `index.lock` for `vai-157` after confirming no owning Git process remained, then rebuilt that submodule index with `git reset --hard HEAD`.
+- Confirmed all 15 sampled worktrees reported clean status before running the supervisor cleanup pass.
+
+### Supervisor Pass
+
+Command:
+
+```sh
+python scripts/virtual_ai_os_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
+```
+
+Latest `merged_worktree_cleanup` event:
+
+- Timestamp: `2026-06-07T08:14:59.998477+00:00`
+- `removed_count`: `15`
+- `skipped_reason_counts`: `dirty_worktree=34`, `dirty_worktree:content_not_in_target=34`, `not_merged=17`, `active_state_worktree=1`
+- `dirty_worktree_groups`: `content_not_in_target=34`
+- `unsupported_status` dirty group after cleanup: absent
+
+Latest `supervisor_check` event:
+
+- Timestamp: `2026-06-07T08:15:00.630153+00:00`
+- `worktree_cleanup_removed_count`: `15`
+- `worktree_cleanup_dirty_group_count`: `1`
+
+Success signal: the VAI-202 `unsupported_status` blocked candidate count decreased from `15` to `0` for the sampled group, and all 15 sampled worktree directories were removed by the supervisor cleanup pass.

@@ -1,0 +1,52 @@
+diff --git a/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py b/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+index 85e18f9..a21f00e 100644
+--- a/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
++++ b/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+@@ -172,8 +172,10 @@ class PlasmaManager:
+             self.client.put(serialized, object_id)
+             
+             return object_id.binary()
+-        except Exception:
+-            logger.exception("Failed to put object in plasma store")
++        except Exception as e:
++            # Log with full traceback; return None so callers can fall back gracefully.
++            # Callers MUST check for None before using the return value.
++            logger.exception("Failed to put object in plasma store: %s", e)
+             return None
+     
+     def get(self, object_id: bytes) -> Any:
+@@ -192,10 +194,10 @@ class PlasmaManager:
+             with open(file_path, 'rb') as f:
+                 obj = json.loads(f.read().decode())
+             
+-            # Clean up the temporary file
++            # Clean up the temporary file (best-effort; ignore OS-level errors)
+             try:
+                 os.unlink(file_path)
+-            except:
++            except OSError:
+                 pass
+             
+             return obj
+@@ -211,8 +213,8 @@ class PlasmaManager:
+             obj = pa.deserialize(serialized)
+             
+             return obj
+-        except Exception:
+-            logger.exception("Failed to get object from plasma store")
++        except Exception as e:
++            logger.exception("Failed to get object from plasma store: %s", e)
+             return None
+     
+     def delete(self, object_id: bytes):
+@@ -232,8 +234,8 @@ class PlasmaManager:
+             
+             # Delete the object from the plasma store
+             self.client.delete([plasma_id])
+-        except Exception:
+-            logger.exception("Failed to delete object from plasma store")
++        except Exception as e:
++            logger.exception("Failed to delete object from plasma store: %s", e)
+ 
+ 
+ def ipfs_process_fn(command_queue, result_queue, plasma_socket=None):

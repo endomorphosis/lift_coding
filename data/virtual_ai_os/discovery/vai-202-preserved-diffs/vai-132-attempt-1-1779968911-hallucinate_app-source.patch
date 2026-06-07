@@ -1,0 +1,40 @@
+diff --git a/hallucinate_app/python/hallucinate_app/error_monitor.py b/hallucinate_app/python/hallucinate_app/error_monitor.py
+index a51dbb2..078f4d3 100644
+--- a/hallucinate_app/python/hallucinate_app/error_monitor.py
++++ b/hallucinate_app/python/hallucinate_app/error_monitor.py
+@@ -781,9 +781,16 @@ class ErrorMonitor:
+     and triggers alerts when necessary.
+     """
+ 
+-    # Compiled once; re.IGNORECASE ensures both 0xDEADBEEF and 0xdeadbeef are normalised
++    # Compiled once; re.IGNORECASE ensures both 0xDEADBEEF and 0xdeadbeef are normalised.
++    # The timestamp alternative is listed before the stack-trace "at file:line" alternative,
++    # and the stack-trace branch uses a negative lookahead (?!\d{4}-…) so that "at 2026-05-28"
++    # is consumed by the timestamp branch rather than partially by the stack-trace branch.
+     _SIMILAR_PATTERN = re.compile(
+-        r'line \d+|at [^:]+:\d+|0x[0-9a-fA-F]+|\d{4}-\d{2}-\d{2}|ID: [a-fA-F0-9-]+',
++        r'line \d+'
++        r'|\d{4}-\d{2}-\d{2}(?:[T ]\d{2}:\d{2}:\d{2}(?:[.,]\d+)?(?:Z|[+-]\d{2}:?\d{2})?)?'
++        r'|at (?!\d{4}-\d{2}-\d{2})[^:]+:\d+'
++        r'|0x[0-9a-fA-F]+'
++        r'|ID: [a-fA-F0-9-]+',
+         re.IGNORECASE,
+     )
+     
+diff --git a/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py b/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
+index 252ad32..fb3d818 100644
+--- a/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
++++ b/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
+@@ -236,6 +236,12 @@ class TestMessagesSimilar(unittest.TestCase):
+         msg2 = "Backup failed on 2025-12-31"
+         self.assertTrue(self._similar(msg1, msg2))
+ 
++    def test_iso_timestamp_normalised(self):
++        """Messages differing only in full ISO-8601 timestamp should be considered similar."""
++        msg1 = "Task failed at 2024-01-15T10:30:00.123Z with code 1"
++        msg2 = "Task failed at 2025-12-31T23:59:59.999-07:00 with code 1"
++        self.assertTrue(self._similar(msg1, msg2))
++
+     def test_distinct_messages_differ(self):
+         """Truly distinct messages must not be reported as similar."""
+         msg1 = "Connection refused by remote host"

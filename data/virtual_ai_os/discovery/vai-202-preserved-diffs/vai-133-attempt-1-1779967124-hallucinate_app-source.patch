@@ -1,0 +1,13 @@
+diff --git a/hallucinate_app/python/hallucinate_app/github_issue_reporter.py b/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
+index a0df31a..3f32c00 100644
+--- a/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
++++ b/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
+@@ -368,7 +368,7 @@ class GitHubIssueReporter:
+             
+         except Exception as e:
+             self.stats["errors"] += 1
+-            logger.error(f"Failed to create GitHub issue: {e}")
++            logger.exception(f"Failed to create GitHub issue: {e}")
+             return None
+     
+     def get_stats(self) -> Dict[str, Any]:
