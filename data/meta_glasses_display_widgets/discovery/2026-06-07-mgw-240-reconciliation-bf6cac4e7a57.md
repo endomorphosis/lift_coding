@@ -206,6 +206,49 @@ reviewable commits or follow-up tasks, rerun the supervisor reconciliation pass,
 and verify that either the candidate merge count decreases or the dirty
 worktree cleanup skip count decreases.
 
+## Resolution Evidence
+
+Recorded during MGW-240 reconciliation on 2026-06-07.
+
+- Live dirty already-merged MGW worktrees were classified before cleanup:
+  `61` were generated-only todo/discovery/objective edits and `20` contained
+  code, test, script, submodule, or tracking changes.
+- The generated-only resolver touched only these path classes:
+  `implementation_plan/docs/*.todo.md`,
+  `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`, and
+  `data/*/discovery/*.md`.
+- Representative stale-generated checks:
+  `implementation/mgw-125-attempt-1-1779887576` only re-added MGW-125 through
+  MGW-129 backlog blocks already represented in the current task board, and
+  `implementation/mgw-153-attempt-1-1779965069` had an older untracked MGW-153
+  resolution while the target already contains the resolution document.
+- The resolver restored `79` tracked generated paths and removed `5` untracked
+  generated discovery files, leaving `61` worktrees clean for normal supervisor
+  cleanup.
+- Mixed/code worktrees were deliberately preserved. The remaining dirty group
+  includes script, test, submodule, tracking, or objective-heap changes that
+  should be reviewed separately instead of discarded.
+- A fresh shared supervisor pass was run from `/home/barberb/lift_coding` with
+  the worktree scan cache disabled:
+
+```sh
+python3 /home/barberb/lift_coding/scripts/meta_glasses_display_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0
+```
+
+- The cleanup event at `2026-06-07T08:14:27.164008+00:00` reported
+  `removed_count = 61`, `dirty_worktree:content_not_in_target = 20`,
+  `not_merged = 16`, `active_state_worktree = 1`, and
+  `scan_cache_hit_count = 0`.
+- Original guardrail candidate count: `81`.
+- Current content-not-in-target blocked candidate count: `20`.
+- Count decrease confirmed: `81 -> 20`.
+
+Verification command used:
+
+```sh
+jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count // 0), (.skipped_reason_counts["dirty_worktree:content_not_in_target"] // 0), (.dirty_worktree_groups.content_not_in_target.count // 0), (.scan_cache_hit_count // 0)] | @tsv' /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_supervisor_events.jsonl | tail -n 8
+```
+
 ## Reconciliation Plan
 
 Work surface: `20` candidates, `20` sampled records.
