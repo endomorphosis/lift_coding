@@ -2578,7 +2578,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-233 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13
 
-- Status: todo
+- Status: done
 - Completion: manual
 - Priority: P2
 - Track: docs
@@ -2630,6 +2630,10 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md:8. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-237-codebase-scan-4539b8d277a4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+<<<<<<< HEAD
+=======
+
+>>>>>>> implementation/mgw-238-attempt-1-1780720601
 ## MGW-238 Resolve implementation retry-budget failure for MGW-233
 
 - Status: todo
@@ -2640,6 +2644,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-233. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-233 from strategy blocked_tasks.
+<<<<<<< HEAD
 
 ## MGW-239 Resolve dirty main checkout blocking 19 worktree merges
 
@@ -2692,3 +2697,5 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-242-reconciliation-ef2bec545f8a.md
 - Acceptance: Reconciliation guardrail filed this because 18 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-242-reconciliation-ef2bec545f8a.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+>>>>>>> implementation/mgw-238-attempt-1-1780720601
