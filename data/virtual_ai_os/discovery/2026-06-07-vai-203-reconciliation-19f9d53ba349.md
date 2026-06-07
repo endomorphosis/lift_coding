@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: a84b9cc78c963a673999c6911f42785aef7dafda
+Fingerprint: 0162d9c6768eb48444dd4247401662d0f5ec98d5
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 20
+Candidate count: 34
 Priority: P1
 Track: ops
 
@@ -111,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `20` candidates, `20` sampled records.
+Work surface: `34` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -159,16 +159,17 @@ Work surface: `20` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 20,
+  "candidate_count": 34,
   "conflict_path_counts": {
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md": 1,
     "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md": 1,
     "hallucinate_app": 8,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 7,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 8,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 19,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 20,
     "scripts/hallucinate_multimodal_control_todo_daemon.py": 1,
-    "scripts/hallucinate_multimodal_control_todo_supervisor.py": 3,
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py": 4,
     "scripts/meta_glasses_display_todo_supervisor.py": 1,
+    "scripts/virtual_ai_os_todo_supervisor.py": 1,
     "src/handsfree/api.py": 1,
     "src/handsfree/ocr/__init__.py": 1,
     "tests/test_hallucinate_multimodal_control_todo_queue.py": 1,
@@ -176,7 +177,7 @@ Work surface: `20` candidates, `20` sampled records.
     "work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "a84b9cc78c963a673999c6911f42785aef7dafda",
+  "fingerprint": "0162d9c6768eb48444dd4247401662d0f5ec98d5",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -252,14 +253,15 @@ Work surface: `20` candidates, `20` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "hallucinate_app",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "hallucinate_app",
     "scripts/hallucinate_multimodal_control_todo_supervisor.py",
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md",
     "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md",
     "scripts/hallucinate_multimodal_control_todo_daemon.py",
     "scripts/meta_glasses_display_todo_supervisor.py",
+    "scripts/virtual_ai_os_todo_supervisor.py",
     "src/handsfree/api.py",
     "src/handsfree/ocr/__init__.py",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
