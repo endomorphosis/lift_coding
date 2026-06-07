@@ -1,0 +1,62 @@
+diff --git a/hallucinate_app/python/hallucinate_app/__pycache__/auth_keystore_integration.cpython-312.pyc b/hallucinate_app/python/hallucinate_app/__pycache__/auth_keystore_integration.cpython-312.pyc
+index 76d6e57b1ae87cc23069168e6e5c7cf25047d6a3..ab5ca2edf0e989410c91a18a5b79b062bfe175a2 100644
+GIT binary patch
+delta 1096
+zcmaJ<U2GIp6rQ^~)3V#y+Fh`_i~Do2Hg@d~p_UK^LNH@%SCg_owF08aWcMx|n4PJ2
+zX4r-VFeFM4^}%a+;Q@?3Xbk>z9(*t%12tx=QKxa^PveV`2NH}~0wfjsz?~rr?F;we
+zJKw$e@||<;Ilp}hZhsCse+-3!3_W5;?2z*M*PTrs6s=IG#s&juwuEL3SyRb7;a%V-
+zvJjrz@H?Ma<P%PMkCV&SbthSD@RQcNkvo2{WS#0B1K@x1bM()6OSapN*}?jg^?Y4)
+zlDP(-w=Ts54zOfmWCs~Zef9|9t<)tJ+@)?kB$0}d|9Z}EY`Kc|xGmHRt4sLgshuqN
+zhy2~Qu)d{w-p<=J>v)6Dl5aB~`IZ6E;(M%%&l~{$O~*J=-I6B#1JNf=GG*T}?l@Ni
+zHD=bokEwx+{u;=vlZJc*4XpIa6=<rGX-sQaK8ngv!*B*`N8~cXP}K}r(M+{WE_baz
+zA;~(@g&<sYrX<BgqZn&gfY}N(rV*4?10BSY`?0X9l}&{{>7J9U%7!c{Zk9DBqpd**
+zuz&`!mxk7aW@k{zpcNt4Uxz1j4VENDL6nyy6_#b)kkx~xtWSGMu_`HRd{@<3kz~ch
+zNQV`yRXw%p7APrjLQ@g!Tk`{(ANHMjV2JxIa}a`#6}n8<nB_N_CL|Yz;vhnjsVG?-
+zIyW5oi;uL1Gip!U`|H>#6rKE}lYF_sPyNA%?>0GKAhMz#p&ln=qCgg7-Eje24nHe~
+zm@6z01MC$p<?<dN3LnIy0|J<D2lQb+;9-Y{p@6u}Ki{1YhyC-zoXfZQMFCi6H_x$c
+z8Ne_)M;GwwqxLDgb&BhnaHV||?)S5i_7f%F3s)1ZF0%FhdeWKN>+IX_?0wZq9%%5d
+zef-@HzI}=FW@0V8@C9hA(r%6>h%^)n8b~*4uItm*`RsM}!LE+kZ`dU#`C@~A$vQXj
+z3jiiLoErmGGMD=|+{;D2Dm57zY~2gw%X~LSugx6!A^%P2E$W{E_!S!P8S;K%kb95P
+z9%2__U8gBq@@e`Kdq~$*JVUM(#=+ZUOL2SJ72z{3Y;qy(D%b72zmdD}hvamznl{@(
+f=MBa~{1}rQ`8BcCVd6L20O(zAie2RK$>;6?TQ6|*
+
+delta 656
+zcmeymn(^8SM!wU$yj%=G@Mpt|be-6Zd>?rD6ZJFlb5r$`5{r^ji<0y=|K}-ZVPj1#
+zD#|aK+#qPjcxv)~!A*kwKAk=nq`gl#o-n>3>3@YMU~{X`FJ{JHn;XR37#Y7$-k_{J
+z`IY!Kafmvb9T7Xc4kVorJi&ZH(&q|~@8+EnR;=7ij0_Af7=AP`e2|%ZQCxDexZFXU
+z8a~SHV`2OOH1`%%iTweN9aSfUkX*1t#fF9P;pB%JC!x-BI3RccXrap$9@oixH5YEy
+z6J}>(;$fT|uk&ZJftb+demx~du$dsYN=$yMKU+)U4v!GT&5j2&4oICaI+1uH_=05M
+z6`r6w!s5R_urhH<{3$X62H9pE!%Zv#DnKt3qx*y14CW6^M?NwOV`cLM=~CNlXT!=U
+z1+mTbK=y&y3qc_lLc=bEgkO-1xWW^;INp|rwMY$QSDNQKMz$Ovt4e0_MpFr{lGNgo
+zB9I}fn{B*bvq1gpbinX{@&!q^D?IL-tpd(7GL}r{3UXu2nH(7OMo@uOVngx=1|W5y
+z7)(v}3l?JqazD6D&J5np+X6IQld&iqNELNW)(z2R?Ey07CdY?J2y_5hx0v#aZ?R+*
+z=jRpWPi_zKU~HXyA;eN1q^PJ1L@0s?c_8tN!zMRBr8Fniu4wXPjnG{A0(M5ej|^Zk
+dgP%dx<g$$E1qR8_Y>bSmKR#6QPu>#h2mrhf>J9(^
+
+diff --git a/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py b/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
+index d7e836a..cb7e85b 100644
+--- a/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
++++ b/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
+@@ -264,7 +264,12 @@ class AuthKeystoreIntegration:
+             auth_token: UCAN capability token
+         
+         Returns:
+-            dict: Key information if authorized, None otherwise
++            dict: Key information if authorized, None if unauthorized or provider not found
++        
++        Raises:
++            ValueError: If the integration module is not initialized
++            Exception: Re-raises unexpected errors so callers can distinguish internal
++                       failures from intentional None (unauthorized / not found)
+         """
+         if not self.initialized:
+             raise ValueError("Integration module not initialized. Call init() first")
+@@ -287,7 +292,7 @@ class AuthKeystoreIntegration:
+                 return await self.keystore.get_key_info(provider)
+         except Exception as e:
+             logger.exception(f"Failed to get authorized key info for {provider}: {e}")
+-            return None
++            raise
+     
+     async def rotate_authorized_key(self, provider: str, new_key: str, auth_token: str,
+                                    options: Dict[str, Any] = None) -> bool:

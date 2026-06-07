@@ -1,0 +1,13 @@
+diff --git a/test/mcp-plus-plus/meta-glasses-display-harness.test.ts b/test/mcp-plus-plus/meta-glasses-display-harness.test.ts
+index c3c4201..247e5b5 100644
+--- a/test/mcp-plus-plus/meta-glasses-display-harness.test.ts
++++ b/test/mcp-plus-plus/meta-glasses-display-harness.test.ts
+@@ -80,7 +80,7 @@ function outputOf(response: { output: unknown }): MetaGlassesDisplayORBOperation
+   return response.output as MetaGlassesDisplayORBOperationOutput;
+ }
+ 
+-describe('Meta glasses hardware-free descriptor-to-mobile-render harness', () => {
++describe('ORB display harness: Meta glasses hardware-free descriptor-to-mobile-render flow', () => {
+   it('publishes, compiles, discovers, binds, invokes every widget operation, and records receipts', async () => {
+     const descriptor = displayDescriptor();
+     const registry = new MCPInterfaceDiscoveryRegistry(new LocalMCPInterfaceRegistryBackend());

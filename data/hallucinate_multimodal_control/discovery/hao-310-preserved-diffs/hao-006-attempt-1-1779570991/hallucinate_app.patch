@@ -1,0 +1,175 @@
+diff --git a/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md b/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+index 8220f6d..a0f1f78 100644
+--- a/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
++++ b/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+@@ -175,6 +175,9 @@ This must be supported first in the descriptor/runtime surfaces packaged by Hall
+ 
+ Canonical schema artifact:
+ - `hallucinate_app/swissknife/contracts/control_surface_contract.schema.json`
++- `hallucinate_app/swissknife/contracts/interaction_envelope.schema.json`
++- `hallucinate_app/swissknife/contracts/policy_decision.schema.json`
++- `hallucinate_app/swissknife/contracts/mediation_receipt.schema.json`
+ 
+ The bundled `hallucinate_app/swissknife/` checkout is currently empty in this workspace, so `HAO-002` starts by defining the schema artifact there as the canonical source of truth that later descriptor builders and ORB surfaces will consume.
+ 
+@@ -192,43 +195,139 @@ The bundled `hallucinate_app/swissknife/` checkout is currently empty in this wo
+         "confidence_policy": {
+           "min_confidence": 0.85,
+           "clarify_below": 0.92
++        },
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
+         }
+       },
+       {
+         "id": "gesture",
+         "kind": "captouch_or_wrist",
+         "event_types": ["tap", "swipe", "hold", "wrist_raise"],
+-        "intent_resolver": "gesture_mapping_table"
++        "intent_resolver": "gesture_mapping_table",
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++        }
+       },
+       {
+         "id": "mouse",
+         "kind": "pointer",
+         "event_types": ["click", "double_click", "hover", "focus"],
+-        "intent_resolver": "pointer_mapping_table"
++        "intent_resolver": "pointer_mapping_table",
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++        }
+       },
+       {
+         "id": "agent",
+         "kind": "ai_agent",
+         "event_types": ["proposal", "autonomous_invoke", "scheduled_action"],
+-        "intent_resolver": "structured_agent_intent"
++        "intent_resolver": "structured_agent_intent",
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++        }
+       }
+     ],
+     "intent_bindings": [
+       {
+         "intent": "display.focus_next",
+         "method": "focus_next",
+-        "allowed_surfaces": ["gesture", "mouse", "voice", "agent"]
++        "allowed_surfaces": ["gesture", "mouse", "voice", "agent"],
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++        }
+       },
+       {
+         "intent": "display.activate",
+         "method": "activate",
+-        "allowed_surfaces": ["gesture", "mouse", "voice", "agent"]
++        "allowed_surfaces": ["gesture", "mouse", "voice", "agent"],
++        "logic_bindings": {
++          "policy_bundle_ref": "policy:active-operator-profile",
++          "compiled_policy_cid": "bafy-policy-quiet-hours",
++          "policy_ir_version": "0.1.0",
++          "compiled_artifact_refs": {
++            "frame_logic": "bafy-frame-logic",
++            "event_calculus": "bafy-event-calculus",
++            "deontic": "bafy-deontic"
++          },
++          "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++          "policy_decision_schema_ref": "policy_decision.schema.json",
++          "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++        }
+       }
+     ],
++    "logic_bindings": {
++      "policy_bundle_ref": "policy:active-operator-profile",
++      "compiled_policy_cid": "bafy-policy-quiet-hours",
++      "policy_ir_version": "0.1.0",
++      "compiled_artifact_refs": {
++        "frame_logic": "bafy-frame-logic",
++        "event_calculus": "bafy-event-calculus",
++        "deontic": "bafy-deontic"
++      },
++      "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++      "policy_decision_schema_ref": "policy_decision.schema.json",
++      "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
++    },
+     "policy_hooks": {
+       "compile_api": "ipfs_datasets_py.logic.api.compile_nl_to_policy",
+       "evaluate_api": "ipfs_datasets_py.logic.api.evaluate_nl_policy",
+-      "decision_receipt": true
++      "decision_receipt": true,
++      "policy_bundle_ref": "policy:active-operator-profile",
++      "compiled_policy_cid": "bafy-policy-quiet-hours",
++      "interaction_envelope_schema_ref": "interaction_envelope.schema.json",
++      "policy_decision_schema_ref": "policy_decision.schema.json",
++      "mediation_receipt_schema_ref": "mediation_receipt.schema.json"
+     },
+     "context_schema": {
+       "state_frames": ["sleeping", "driving", "meeting", "screen_locked"],
+@@ -241,6 +340,14 @@ The bundled `hallucinate_app/swissknife/` checkout is currently empty in this wo
+       "default": "deny_over_permit",
+       "requires_explanation": true,
+       "requires_user_confirmation_for": ["destructive", "financial", "communication.send"]
++    },
++    "mediation_receipts": {
++      "enabled": true,
++      "schema_ref": "mediation_receipt.schema.json",
++      "store_ref": "audit:control_surface_mediation",
++      "include_interaction_envelope": true,
++      "include_policy_decision": true,
++      "include_logic_bindings": true
+     }
+   }
+ }
