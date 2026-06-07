@@ -1,10 +1,10 @@
 # HAO-310 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: ab689090ed4d18ff1e83b5c0cf5eb1ac02cd83cb
+Fingerprint: e9f297bae0d0243c24487c3af8dfcf31eb88e3b9
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
-Candidate count: 13
+Candidate count: 14
 Priority: P1
 Track: ops
 
@@ -134,6 +134,16 @@ Track: ops
   - Diff stat:
     - `hallucinate_app | 0`
     - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `implementation/hao-308-attempt-1-1780822649` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-308-attempt-1-1780822649` status: ` m external/ipfs_kit;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md; ?? data/hallucinate_multimodal_control/discovery/2026-06-07-hao-308-resolution.md`
+  - Name status:
+    - `M	external/ipfs_kit`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+  - Diff stat:
+    - `external/ipfs_kit                                            |  0`
+    - ` .../docs/19-virtual-ai-os-submodule-integration.todo.md      | 12 ++++++++++++`
+    - ` 2 files changed, 12 insertions(+)`
+  - Untracked paths:
+    - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-308-resolution.md`
 
 ## Why This Blocks Progress
 
@@ -150,9 +160,68 @@ reviewable commits or follow-up tasks, rerun the supervisor reconciliation pass,
 and verify that either the candidate merge count decreases or the dirty
 worktree cleanup skip count decreases.
 
+## Resolution Evidence
+
+Recorded during HAO-310 reconciliation on 2026-06-07.
+
+- Confirmed all `14` sampled implementation branches were already ancestors of
+  `main` before cleanup.
+- Preserved dirty source and untracked content under
+  `data/hallucinate_multimodal_control/discovery/hao-310-preserved-diffs/`
+  before resetting the stale worktrees. The preservation set contains `37`
+  files: per-worktree outer patches, `hallucinate_app` or `swissknife`
+  submodule patches, the `external/ipfs_kit` patch for HAO-308, and copied
+  untracked text artifacts.
+- Reset and cleaned the sampled outer worktrees and the dirty configured
+  submodules (`hallucinate_app`, `swissknife`, and `external/ipfs_kit`) after
+  preservation.
+- Confirmed all `14` sampled worktrees reported clean status before rerunning
+  the supervisor cleanup pass.
+- Reran the supervisor cleanup/reconciliation pass from the main checkout:
+
+```sh
+python scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
+```
+
+Latest `merged_worktree_cleanup` event from
+`/home/barberb/lift_coding/data/hallucinate_multimodal_control/state/hallucinate_multimodal_control_supervisor_events.jsonl`:
+
+- Timestamp: `2026-06-07T09:29:41.139137+00:00`
+- `removed_count`: `14`
+- Removed branches: `implementation/hao-004-attempt-1-1779564069`,
+  `implementation/hao-006-attempt-1-1779570991`,
+  `implementation/hao-064-attempt-1-1779742161`,
+  `implementation/hao-171-attempt-1-1779877530`,
+  `implementation/hao-187-attempt-1-1779947932`,
+  `implementation/hao-202-attempt-1-1779958389`,
+  `implementation/hao-203-attempt-1-1779959920`,
+  `implementation/hao-207-attempt-1-1779964806`,
+  `implementation/hao-210-attempt-1-1779969102`,
+  `implementation/hao-213-attempt-1-1779968142`,
+  `implementation/hao-214-attempt-1-1779973133`,
+  `implementation/hao-216-attempt-1-1779974669`,
+  `implementation/hao-289-attempt-1-1780714919`, and
+  `implementation/hao-308-attempt-1-1780822649`.
+- `skipped_reason_counts`: `not_merged=27`, `dirty_worktree=48`,
+  `dirty_worktree:content_not_in_target=48`, `active_state_worktree=1`.
+- `dirty_worktree_groups`: `content_not_in_target=48`.
+- `dirty_worktree:unsupported_status` after cleanup: absent / `0`.
+- `scan_cache_hit_count`: `0`.
+
+Verification commands:
+
+```sh
+git -C /home/barberb/lift_coding worktree list --porcelain | rg 'hao-004-attempt-1-1779564069|hao-006-attempt-1-1779570991|hao-064-attempt-1-1779742161|hao-171-attempt-1-1779877530|hao-187-attempt-1-1779947932|hao-202-attempt-1-1779958389|hao-203-attempt-1-1779959920|hao-207-attempt-1-1779964806|hao-210-attempt-1-1779969102|hao-213-attempt-1-1779968142|hao-214-attempt-1-1779973133|hao-216-attempt-1-1779974669|hao-289-attempt-1-1780714919|hao-308-attempt-1-1780822649' || true
+jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count // 0), (.skipped_reason_counts["dirty_worktree:unsupported_status"] // 0), (.dirty_worktree_groups.unsupported_status.count // 0)] | @tsv' /home/barberb/lift_coding/data/hallucinate_multimodal_control/state/hallucinate_multimodal_control_supervisor_events.jsonl | tail -n 5
+```
+
+Success signal: the HAO-310 `unsupported_status` blocked candidate count
+decreased from `14` to `0`, and the supervisor removed all `14` sampled stale
+merged worktree registrations.
+
 ## Reconciliation Plan
 
-Work surface: `13` candidates, `13` sampled records.
+Work surface: `14` candidates, `14` sampled records.
 
 ### Suggested Actions
 
@@ -200,10 +269,10 @@ Work surface: `13` candidates, `13` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 13,
+  "candidate_count": 14,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "ab689090ed4d18ff1e83b5c0cf5eb1ac02cd83cb",
+  "fingerprint": "e9f297bae0d0243c24487c3af8dfcf31eb88e3b9",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -225,9 +294,10 @@ Work surface: `13` candidates, `13` sampled records.
     "implementation/hao-213-attempt-1-1779968142",
     "implementation/hao-214-attempt-1-1779973133",
     "implementation/hao-216-attempt-1-1779974669",
-    "implementation/hao-289-attempt-1-1780714919"
+    "implementation/hao-289-attempt-1-1780714919",
+    "implementation/hao-308-attempt-1-1780822649"
   ],
-  "sample_count": 13,
+  "sample_count": 14,
   "sample_status_paths": [
     "hallucinate_app",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
@@ -249,7 +319,9 @@ Work surface: `13` candidates, `13` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-064-resolution.md",
     "tests/test_virtual_ai_os_operator_shell_docs.py",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-171-resolution.md"
+    "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-171-resolution.md",
+    "external/ipfs_kit",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-308-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-004-attempt-1-1779564069",
@@ -264,7 +336,8 @@ Work surface: `13` candidates, `13` sampled records.
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-213-attempt-1-1779968142",
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-214-attempt-1-1779973133",
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-216-attempt-1-1779974669",
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-289-attempt-1-1780714919"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-289-attempt-1-1780714919",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-308-attempt-1-1780822649"
   ],
   "success_signals": [
     "candidate_count_decreases",

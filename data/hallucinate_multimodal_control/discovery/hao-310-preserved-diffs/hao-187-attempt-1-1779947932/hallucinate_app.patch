@@ -1,0 +1,73 @@
+diff --git a/hallucinate_app/node/menu_generator.js b/hallucinate_app/node/menu_generator.js
+index 7a56407..f60bf99 100644
+--- a/hallucinate_app/node/menu_generator.js
++++ b/hallucinate_app/node/menu_generator.js
+@@ -5,7 +5,9 @@
+  * This enables easier testing and maintenance of menu items.
+  */
+ 
+-import { Menu, shell, dialog } from 'electron';
++import { Menu, shell, dialog, app } from 'electron';
++import fs from 'fs';
++import path from 'path';
+ import {
+   mcpServers,
+   dashboards,
+@@ -399,6 +401,12 @@ export class MenuGenerator {
+    * Handle custom actions
+    */
+   handleAction(action, item) {
++    this._handleActionAsync(action, item).catch(err => {
++      console.error(`Error handling action '${action}':`, err);
++    });
++  }
++
++  async _handleActionAsync(action, item) {
+     switch (action) {
+       case 'navigateHome':
+         this.navigateToView(resolveViewPath('views/dashboard.html'));
+@@ -440,10 +448,41 @@ export class MenuGenerator {
+         }
+         break;
+ 
+-      case 'resetConfig':
+-        console.log('Resetting all configurations to defaults...');
+-        // TODO: Implement config reset
++      case 'resetConfig': {
++        const { response } = await dialog.showMessageBox({
++          type: 'warning',
++          buttons: ['Reset to Defaults', 'Cancel'],
++          defaultId: 1,
++          cancelId: 1,
++          title: 'Reset Configuration',
++          message: 'Reset all configurations to defaults?',
++          detail: 'This will remove all custom settings and server configurations. The application will restart after reset.'
++        });
++        if (response === 0) {
++          try {
++            const userDataPath = app.getPath('userData');
++            const configFiles = ['config.json', 'settings.json', 'server-config.json'];
++            for (const file of configFiles) {
++              const filePath = path.join(userDataPath, file);
++              if (fs.existsSync(filePath)) {
++                fs.unlinkSync(filePath);
++              }
++            }
++            await dialog.showMessageBox({
++              type: 'info',
++              title: 'Configuration Reset',
++              message: 'All configurations have been reset to defaults.',
++              detail: 'The application will now restart.'
++            });
++            app.relaunch();
++            app.exit(0);
++          } catch (err) {
++            console.error('Failed to reset configuration:', err);
++            dialog.showErrorBox('Reset Failed', `Could not reset configuration: ${err.message}`);
++          }
++        }
+         break;
++      }
+ 
+       case 'checkUpdates':
+         console.log('Checking for updates...');

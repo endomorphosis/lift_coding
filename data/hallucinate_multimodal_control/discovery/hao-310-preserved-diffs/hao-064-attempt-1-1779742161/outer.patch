@@ -1,0 +1,99 @@
+diff --git a/implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md b/implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+index ecbd523c..7dbb75a9 100644
+--- a/implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
++++ b/implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+@@ -125,12 +125,93 @@ preserve the intent of the lane before the source task is unblocked.
+ - AST query: OperatorConsole, DaemonManager, ORBDisplayHarness, virtualDesktop
+ - Conflict policy: preserve user-visible operator workflows and reconcile UI conflicts by keeping the denser control surface
+ - Goal: SwissKnife and Hallucinate App provide a usable operator shell for sessions, daemon state, tools, and virtual desktop workflows.
+-- Evidence: SwissKnife virtual desktop, Hallucinate App operator console, daemon manager, ORB display harness, test/mcp-plus-plus/meta-glasses-display-harness.test.ts
++- Evidence: SwissKnife virtual desktop, Hallucinate App operator console, daemon manager, ORB display harness, hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md, swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts
+ - Outputs: swissknife, hallucinate_app, tests
+ - Validation: test -f hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++- HAO-064 proof: `hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md` now records the Hallucinate App operator console, task monitor, app launcher, ORB inspector, session replay, and ORB display harness mapping to `swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts`; `tests/test_virtual_ai_os_operator_shell_docs.py` keeps these evidence terms pinned.
+ - Refinement: Add child goals for task monitor, app launcher, ORB inspector, and session replay.
+ - Gap task: Add missing shell evidence that connects daemon state, ORB tools, and operator-visible UI.
+ 
++## VAIOS-G041 Operator task monitor
++
++- Status: active
++- Parent: VAIOS-G040
++- Fib priority: 9
++- Track: ui
++- Priority: P2
++- Bundle: objective/ui/operator-shell
++- Parallel lane: operator-shell
++- Refinement depth: 2
++- Embedding query: Hallucinate App operator task monitor daemon task queue validation retry budget state
++- AST query: task monitor, DaemonManager, operator console
++- Conflict policy: preserve operator-visible task state fields and keep task monitor additions additive to the shell contract
++- Goal: The Hallucinate App operator console exposes daemon task state, active branch, validation command, and retry-budget status.
++- Evidence: task monitor, Hallucinate App operator console, hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++- Outputs: hallucinate_app, tests
++- Validation: pytest tests/test_virtual_ai_os_operator_shell_docs.py
++- Refinement: Split into daemon-state API and renderer-state children if the monitor needs code-level evidence beyond the shell contract.
++- Gap task: Add missing task-monitor proof for daemon state visible in the operator shell.
++
++## VAIOS-G042 Virtual desktop app launcher
++
++- Status: active
++- Parent: VAIOS-G040
++- Fib priority: 10
++- Track: ui
++- Priority: P2
++- Bundle: objective/ui/operator-shell
++- Parallel lane: operator-shell
++- Refinement depth: 2
++- Embedding query: SwissKnife app launcher Hallucinate App shell opens virtual desktop daemon manager system monitor MCP++ apps
++- AST query: app launcher, createSwissKnifeWindow, virtualDesktop
++- Conflict policy: preserve stable menu labels and route new apps through the existing operator shell launcher model
++- Goal: The operator shell launches SwissKnife Virtual Desktop, Daemon Manager, System Monitor, and descriptor-driven ORB tools from one app launcher.
++- Evidence: app launcher, SwissKnife Virtual Desktop, hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++- Outputs: hallucinate_app, swissknife, tests
++- Validation: pytest tests/test_virtual_ai_os_operator_shell_docs.py
++- Refinement: Add one child per launcher target if menu, window, and descriptor-driven app launches diverge.
++- Gap task: Add missing app-launcher proof for virtual desktop workflows.
++
++## VAIOS-G043 ORB inspector
++
++- Status: active
++- Parent: VAIOS-G040
++- Fib priority: 11
++- Track: ui
++- Priority: P2
++- Bundle: objective/ui/operator-shell
++- Parallel lane: operator-shell
++- Refinement depth: 2
++- Embedding query: ORB inspector descriptor operation policy bridge target receipt CID ORB display harness
++- AST query: ORBDisplayHarness, MetaGlassesDisplayORBAdapter, ORB inspector
++- Conflict policy: keep ORB inspection read-only by default and preserve receipt/capability fields during UI changes
++- Goal: The operator shell can inspect discovered ORB descriptors, selected operations, policy decisions, bridge targets, and receipt CIDs.
++- Evidence: ORB inspector, ORB display harness, swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts, hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++- Outputs: swissknife, hallucinate_app, tests
++- Validation: pytest tests/test_virtual_ai_os_operator_shell_docs.py
++- Refinement: Split descriptor discovery, policy receipt, and display bridge inspection if the inspector grows into separate panes.
++- Gap task: Add missing ORB-inspector proof that ties SwissKnife ORB events to operator-visible UI.
++
++## VAIOS-G044 Session replay
++
++- Status: active
++- Parent: VAIOS-G040
++- Fib priority: 12
++- Track: ui
++- Priority: P2
++- Bundle: objective/ui/operator-shell
++- Parallel lane: operator-shell
++- Refinement depth: 2
++- Embedding query: session replay daemon start ORB invocation display bridge receipt validation rollback operator console
++- AST query: session replay, replay_task, bridge receipt
++- Conflict policy: preserve chronological replay records and avoid dropping validation or rollback events
++- Goal: The operator shell can replay session events from daemon startup through ORB invocation, display bridge receipts, validation, and rollback.
++- Evidence: session replay, bridge receipt, hallucinate_app/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++- Outputs: hallucinate_app, tests
++- Validation: pytest tests/test_virtual_ai_os_operator_shell_docs.py
++- Refinement: Add storage/provenance children when replay moves from documented shell contract to persisted event logs.
++- Gap task: Add missing session-replay proof for operator review and recovery.
++
+ ## VAIOS-G050 Meta glasses remote terminal
+ 
+ - Status: active

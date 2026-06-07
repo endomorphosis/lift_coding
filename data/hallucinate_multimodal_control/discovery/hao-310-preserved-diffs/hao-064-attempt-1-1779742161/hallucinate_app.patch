@@ -1,0 +1,62 @@
+diff --git a/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md b/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
+index b527496..05c4779 100644
+--- a/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
++++ b/docs/SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md
+@@ -152,6 +152,50 @@ When you access the app menus:
+ 4. **Daemon Control**: Use `Daemons` menu or `Windows → Daemon Manager` for control
+ 5. **Status Updates**: Real-time status updates show daemon health
+ 
++## VAIOS-G040 Operator Shell Evidence
++
++This mockup is the Hallucinate App operator console contract for the virtual AI
++OS desktop. Hallucinate App owns the shell chrome, daemon controls, session
++status, and recovery actions; SwissKnife owns the virtual desktop canvas and ORB
++tool surfaces launched inside that shell.
++
++The operator console must expose these VAIOS-G040 surfaces together:
++the task monitor, app launcher, ORB inspector, and session replay panes are
++first-class shell regions rather than separate demos.
++
++| Surface | Operator-visible proof |
++| --- | --- |
++| Task monitor | Shows queued, running, blocked, and completed daemon tasks with source task id, active branch, validation command, and retry-budget status. |
++| App launcher | Opens SwissKnife Virtual Desktop, Daemon Manager, System Monitor, and future descriptor-driven MCP++ apps from the same shell menu. |
++| ORB inspector | Shows discovered ORB descriptors, selected operation, required capabilities, policy decision, bridge target, and last receipt CID. |
++| Session replay | Replays session events from daemon start through ORB invocation, display bridge receipt, validation result, and rollback action. |
++
++The ORB display harness evidence term maps the operator console to the
++hardware-free SwissKnife test path
++`swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts`. That
++harness proves descriptor publish, widget compile, ORB discover/bind/invoke,
++bridge receipt capture, and display fallback behavior before the operator shell
++surfaces those events in the ORB inspector and session replay panes.
++
++### Operator Console Layout
++
++```
++┌─ Hallucinate App operator console ────────────────────────────────────────┐
++│ Session: hao-064-attempt-1     Daemons: 3/3 running     ORB: connected     │
++├─────────────────────────────────────────────────────────────────────────────┤
++│ Task monitor                     │ SwissKnife virtual desktop              │
++│ - HAO-064 running                │ ┌─ App launcher ──────────────────────┐ │
++│ - Validation: pending            │ │ Terminal  Files  ORB Tools  Replay  │ │
++│ - Retry budget: clean            │ └─────────────────────────────────────┘ │
++│                                  │                                         │
++│ ORB inspector                    │ Session replay                         │
++│ - Descriptor: task-progress      │ - daemon-started                       │
++│ - Operation: render_widget       │ - orb-discovered                       │
++│ - Policy: allowed                │ - widget-rendered                      │
++│ - Receipt: sha256:...            │ - validation-passed                    │
++└─────────────────────────────────────────────────────────────────────────────┘
++```
++
+ ## Alternative Ways to See SwissKnife
+ 
+ Since the Electron app has build issues, you can also:
+@@ -181,4 +225,4 @@ The integration works by:
+ - Health monitoring ensures daemons stay running
+ - Auto-restart handles failures gracefully
+ 
+-This gives you a complete desktop environment for decentralized AI development!
+\ No newline at end of file
++This gives you a complete desktop environment for decentralized AI development!

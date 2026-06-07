@@ -1,0 +1,62 @@
+diff --git a/hallucinate_app/python/hallucinate_app/__pycache__/error_monitor.cpython-312.pyc b/hallucinate_app/python/hallucinate_app/__pycache__/error_monitor.cpython-312.pyc
+index 770f566b436d39cd0ef494ae941d6426b56d0bb9..a0e87b4e4a628a5b1f2df8c23d3dcbfedf745733 100644
+GIT binary patch
+delta 787
+zcmZ{gT}YEr7{}k|{a7~N&CHoP{GMr(X&IVO6ixhSqSNMrh~SMhDh)?xD>N1r-4(^?
+z5VMQG3Ekw4a)>2?b<suOXme!ch*<fNxWc&vV@h?7b`eD9;&;yT{Qu86&vV{*#lV25
+zozQ6199_>%+1*E?quQm{5W*vl-MAuXJ&vHC?-H&`E{R##atp)o=Op!<<Txa`1-E#a
+zW6r-^;y*6YEo{2_MWckh!OAi_x<_wnGzyVzN{6M@(qgtL?Pj~Z!DfvJ&P%7!eJUGO
+zI2tU|N46`i7OT>6tggduvsjyymIkX+MfE}~hpM3un?tqr(bUWVeK^(dJ|iox=JE?e
+zDf$m`nn!)REmTkyma9g(Uo=ndvr_p#>1djc_(C24h3pMG1o(o7rc5x8gHwfYj>M;4
+z0bC<v?+)?s5dWAy3*Ydmhy`wv$C0D}KJw_}8o)UAMfXr89Ib~jlJzOT!vvn4>63ra
+ze?tb^GU9mbo2i2U9-iF^KqhC)0bY{zxzA7{@KhHWB!-Q!oz)y*)tdt57xsgU4=z-|
+zThg;|2UHsBy;6)X#`5vtoCq;ev{(ch9nBg=q_FZ#+!o6PExr&l!3ud0TNG43MUHbm
+z!*XI58C}ZbL63vWwNOO1B+NYIVarM*)Dq81m<K!QTs<K`F&<Cq!GNceHs~d$wG;`A
+zPimkNV5_$apftOjwUOR{kOQ?kde6HYsM2-D>GJr80KCG{c{ajVhU=^)`aFjcEL>$+
+zXGmj1%M5HJq-Drq$Ym&CC}t>SDEHrzpa%3hDRZzh&e3foV`F=&`_7`c$v>?EI$5=U
+iHH8}Cu)jhLcOj=P6|$DO4L0xK((|zPh6a_;c76jxf$>-X
+
+delta 700
+zcmXYvT}YEr9LCRc-gkaXHyj$x>B7(S9lDAPp`b7_nWp$f7f}ofDZOa*Zi<OeU3FDm
+zoWgZeUDQnw7zbI<Rdo|(IW1(&z>l1X3Qo&{7S;LB&c*NiAO7$2oaf>l59^;sbo)D-
+z&C1mI>UQ>7XP?>EKj4lS4eSxM6K%zV2wK60wPAgLsaaREKCBI}E@p7?al%_<@OYlT
+z%h&2V(a`B{Z|LrB>}-o`!Tz&`MN~(tEJ2Hk7QN9roDuh<^)<;1<|qpHP3Bc^GVU;9
+zd9H9@R0&Oqx&I<*;n^Ouf{6!yr>vXo2TsZ-QvnT2!ZlrkglL*BfnQ#jegh21eX+w_
+zHNF%-k2MjC`!FQSW`1c1OZRLF7!!r_d)20S{uoB(?fG$zSK{>IVD29<W|pgV=3j`p
+z#iMvF$`h4f(wFc6FJx$G0TrC9y++UpY1vMmL*(9Gh@s_!$Pr`9wRkVTEZ+oj#pRVM
+zEXaE+rSRk{qoJFAaura>Te7w&8PpX@)G;e*X%ma9HCUC7wG|Cp^7nc(N1<ritcO!x
+z-E80}7B9aahgW88O>wlynV+Y$;!;YytL#SR_7fCrHWSK3N2(J&@=+?wg6grS@B&#Q
+zpMl*@L%D_=jiwneTLTw+Ljltp>IsH!L|hyrT1SE!t`e?M5Y;p{Nd6$C2zGimhmcFK
+z5uAh~!Y)F(S|v?JglFIYTsaoc!*fZduF?GT^}OI4siZ5?kqI}){zxEOeTXBG$5z}z
+X;T0=(Zm={5cQA)r*st5vkHOeKDBsV^
+
+diff --git a/hallucinate_app/python/hallucinate_app/error_monitor.py b/hallucinate_app/python/hallucinate_app/error_monitor.py
+index a51dbb2..21ccf3c 100644
+--- a/hallucinate_app/python/hallucinate_app/error_monitor.py
++++ b/hallucinate_app/python/hallucinate_app/error_monitor.py
+@@ -1101,11 +1101,20 @@ class ErrorMonitor:
+         # also normalised, preventing missed duplicates.
+         clean_msg1 = self._SIMILAR_PATTERN.sub('XXX', msg1)
+         clean_msg2 = self._SIMILAR_PATTERN.sub('XXX', msg2)
+-        
+-        # Check if the messages are similar (either exact match or one is substring of other)
+-        return (clean_msg1 == clean_msg2 or
+-                clean_msg1 in clean_msg2 or
+-                clean_msg2 in clean_msg1)
++
++        if clean_msg1 == clean_msg2:
++            return True
++
++        # Guard against very short normalised strings (e.g. a message that was
++        # entirely an address becomes "XXX") producing spurious substring matches
++        # that would incorrectly deduplicate unrelated errors.
++        _MIN_SUBSTRING_LEN = 10
++        if (len(clean_msg1) >= _MIN_SUBSTRING_LEN and clean_msg1 in clean_msg2):
++            return True
++        if (len(clean_msg2) >= _MIN_SUBSTRING_LEN and clean_msg2 in clean_msg1):
++            return True
++
++        return False
+     
+     async def _check_alerts(self, error: ErrorData):
+         """Check if any alert rules are triggered by this error"""

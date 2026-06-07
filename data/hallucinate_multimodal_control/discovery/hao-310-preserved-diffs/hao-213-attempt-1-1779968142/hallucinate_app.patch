@@ -1,0 +1,19 @@
+diff --git a/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py b/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+index cd46635..7f68674 100644
+--- a/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
++++ b/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
+@@ -99,9 +99,11 @@ class PlasmaManager:
+                 self.client = plasma.connect(self.socket_path)
+                 logger.info(f"Connected to existing plasma store at {self.socket_path}")
+                 return
+-            except Exception:
+-                # No existing store, start a new one
+-                pass
++            except Exception as connect_err:
++                # No existing store running at this path; start a new one.
++                logger.debug(
++                    f"Could not connect to existing plasma store at {self.socket_path}: {connect_err}"
++                )
+             
+             # Start the plasma store
+             from subprocess import Popen

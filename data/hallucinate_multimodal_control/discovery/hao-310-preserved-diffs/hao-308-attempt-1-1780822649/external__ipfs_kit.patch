@@ -1,0 +1,114 @@
+diff --git a/archive/applied_patches/advanced_filecoin.py b/archive/applied_patches/advanced_filecoin.py
+index 951bd7c4..9c547d94 100644
+--- a/archive/applied_patches/advanced_filecoin.py
++++ b/archive/applied_patches/advanced_filecoin.py
+@@ -157,7 +157,9 @@ class AdvancedFilecoinStorage(FilecoinStorage):
+                         stats = json.load(f)
+                 else:
+                     # Create simulated stats
+-                    chain_height = self._get_chain_height() or 2500000
++                    chain_height = self._get_chain_height()
++                    if chain_height is None:
++                        chain_height = 2500000
+                     stats = {
+                         "chain_height": chain_height,
+                         "storage_power_TiB": 20145.32,
+@@ -172,7 +174,7 @@ class AdvancedFilecoinStorage(FilecoinStorage):
+                 
+                 # Update with current chain height
+                 current_height = self._get_chain_height()
+-                if current_height:
++                if current_height is not None:
+                     stats["chain_height"] = current_height
+                 else:
+                     # Simulate chain progress if we can't get real height
+@@ -960,30 +962,49 @@ class AdvancedFilecoinStorage(FilecoinStorage):
+         }
+     
+     def _get_chain_height(self) -> Optional[int]:
+-        """Helper method to get current chain height."""
+-        try:
+-            if self.mock_mode or self.gateway_mode:
+-                # Try to get from mock storage first
+-                mock_base = os.path.expanduser("~/.ipfs_kit/mock_filecoin")
+-                network_file = os.path.join(mock_base, "network", "stats.json")
+-                
+-                if os.path.exists(network_file):
+-                    with open(network_file, "r") as f:
+-                        stats = json.load(f)
+-                    
+-                    if "chain_height" in stats:
+-                        return stats["chain_height"]
+-            
+-            # Try to get real chain height
+-            chain_head = self._make_api_request("Filecoin.ChainHead")
+-            if chain_head and "Height" in chain_head:
+-                return chain_head["Height"]
+-            
+-            return None
+-        
+-        except Exception as e:
+-            logger.warning(f"Error getting chain height: {e}")
+-            return None
++        """Helper method to get current chain height.
++
++        Mock stats file errors propagate to callers so corrupt local state is
++        reported instead of being hidden behind a synthetic fallback height.
++        """
++        if self.mock_mode or self.gateway_mode:
++            # Try to get from mock storage first
++            mock_base = os.path.expanduser("~/.ipfs_kit/mock_filecoin")
++            network_file = os.path.join(mock_base, "network", "stats.json")
++
++            if os.path.exists(network_file):
++                with open(network_file, "r", encoding="utf-8") as f:
++                    stats = json.load(f)
++
++                if not isinstance(stats, dict):
++                    raise ValueError(
++                        f"Invalid mock Filecoin stats in {network_file}: expected JSON object"
++                    )
++                if "chain_height" not in stats:
++                    raise ValueError(f"Missing chain_height in {network_file}")
++
++                chain_height = stats["chain_height"]
++                try:
++                    return int(chain_height)
++                except (TypeError, ValueError) as exc:
++                    raise ValueError(
++                        f"Invalid chain_height in {network_file}: {chain_height!r}"
++                    ) from exc
++
++        # Try to get real chain height. The request helper logs transport/API
++        # failures and returns None, so only malformed successful responses
++        # need to be surfaced here.
++        chain_head = self._make_api_request("Filecoin.ChainHead")
++        if isinstance(chain_head, dict) and "Height" in chain_head:
++            chain_height = chain_head["Height"]
++            try:
++                return int(chain_height)
++            except (TypeError, ValueError) as exc:
++                raise ValueError(
++                    f"Invalid Height in Filecoin.ChainHead response: {chain_height!r}"
++                ) from exc
++
++        return None
+ 
+     def explore_chain_block(self, height: Optional[int] = None, cid: Optional[str] = None) -> Dict[str, Any]:
+         """
+@@ -1007,7 +1028,7 @@ class AdvancedFilecoinStorage(FilecoinStorage):
+             try:
+                 # Get chain height from mock storage
+                 current_height = self._get_chain_height()
+-                if not current_height:
++                if current_height is None:
+                     current_height = 2500000 + int(time.time() / EPOCH_DURATION_SECONDS)
+                 
+                 # If no height provided, use current height
+@@ -1243,4 +1264,4 @@ class AdvancedFilecoinStorage(FilecoinStorage):
+         
+         except Exception as e:
+             logger.warning(f"Error finding deals for CID {cid}: {e}")
+-            return []
+\ No newline at end of file
++            return []
