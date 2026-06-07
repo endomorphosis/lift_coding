@@ -1995,7 +1995,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-180 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:283
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
