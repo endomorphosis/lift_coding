@@ -2315,3 +2315,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because VAI-204 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## VAI-207 Resolve code annotation in hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py:793
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
+- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py:793. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-207-codebase-scan-35009422e1fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-208 Review swallowed exception path in external/ipfs_kit/.github/scripts/generate_workflow_list.py:36
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/scripts/generate_workflow_list.py
+- Validation: python3 -m py_compile external/ipfs_kit/.github/scripts/generate_workflow_list.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/scripts/generate_workflow_list.py:36. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-208-codebase-scan-67e750fa2595.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-209 Review swallowed exception path in external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Validation: python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-209-codebase-scan-f5c0089e31da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-210 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-210-codebase-scan-7e74c27a365d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-211 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-211-codebase-scan-f223d9e5d048.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
