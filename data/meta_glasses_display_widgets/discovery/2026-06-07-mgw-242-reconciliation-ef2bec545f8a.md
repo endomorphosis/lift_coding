@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: e37e8b917031476362b638a87c2029a9ffaf639d
+Fingerprint: 612a1b40801b3fb511b53919982125f61f623117
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 17
+Candidate count: 14
 Priority: P1
 Track: ops
 
@@ -40,15 +40,6 @@ Track: ops
 - `implementation/mgw-123-attempt-1-1779885204` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-123-attempt-1-1779885204`
   - Conflict paths:
     - `hallucinate_app`
-- `implementation/mgw-125-attempt-1-1779888714` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779888714`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `implementation/mgw-126-attempt-1-1779891958` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1779891958`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `implementation/mgw-130-attempt-1-1779889662` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1779889662`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - `implementation/mgw-139-attempt-1-1779955983` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-139-attempt-1-1779955983`
   - Conflict paths:
     - `data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-139-resolution.md`
@@ -106,7 +97,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `17` candidates, `17` sampled records.
+Work surface: `14` candidates, `14` sampled records.
 
 ### Suggested Actions
 
@@ -154,7 +145,7 @@ Work surface: `17` candidates, `17` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 17,
+  "candidate_count": 14,
   "conflict_path_counts": {
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-060-resolution.md": 1,
     "data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-139-resolution.md": 1,
@@ -173,7 +164,7 @@ Work surface: `17` candidates, `17` sampled records.
     "implementation_plan/docs/00-overview.md": 1,
     "implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md": 1,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md": 1,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 9,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 6,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1,
     "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md": 2,
     "scripts/meta_glasses_display_llm_router.py": 1,
@@ -184,7 +175,7 @@ Work surface: `17` candidates, `17` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "e37e8b917031476362b638a87c2029a9ffaf639d",
+  "fingerprint": "612a1b40801b3fb511b53919982125f61f623117",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -198,9 +189,6 @@ Work surface: `17` candidates, `17` sampled records.
     "implementation/mgw-060-attempt-1-1779826861",
     "implementation/mgw-112-attempt-1-1779876522",
     "implementation/mgw-123-attempt-1-1779885204",
-    "implementation/mgw-125-attempt-1-1779888714",
-    "implementation/mgw-126-attempt-1-1779891958",
-    "implementation/mgw-130-attempt-1-1779889662",
     "implementation/mgw-139-attempt-1-1779955983",
     "implementation/mgw-142-attempt-1-1779957075",
     "implementation/mgw-145-attempt-1-1779959122",
@@ -212,7 +200,7 @@ Work surface: `17` candidates, `17` sampled records.
     "implementation/mgw-214-attempt-1-1780245390",
     "implementation/mgw-224-attempt-1-1780714601"
   ],
-  "sample_count": 17,
+  "sample_count": 14,
   "sample_status_paths": [
     "implementation_plan/docs/00-overview.md",
     "implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md",
@@ -246,9 +234,6 @@ Work surface: `17` candidates, `17` sampled records.
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-060-attempt-1-1779826861",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-112-attempt-1-1779876522",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-123-attempt-1-1779885204",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779888714",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1779891958",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1779889662",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-139-attempt-1-1779955983",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-142-attempt-1-1779957075",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-145-attempt-1-1779959122",
@@ -290,49 +275,3 @@ Work surface: `17` candidates, `17` sampled records.
   ]
 }
 ```
-
-## Reconciliation Run
-
-Date: 2026-06-07
-
-### Action Taken
-
-Pruned three stale, clean backlogged worktrees whose unique branch-side content
-was superseded by existing `main` evidence:
-
-- `implementation/mgw-125-attempt-1-1779888714`
-  - Removed worktree:
-    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-1-1779888714`
-  - Deleted branch ref at `73893b7d`.
-  - Evidence: `cd621cfa` already records principal deletion for MGW-125 and
-    `f13ce327`/`cd621cfa` already record the MGW-130 merge-budget evidence.
-- `implementation/mgw-126-attempt-1-1779891958`
-  - Removed worktree:
-    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1779891958`
-  - Deleted branch ref at `7d5b3c85`.
-  - Evidence: `cd621cfa` already records principal editing for MGW-126 and the
-    corresponding discovery file `2026-05-27-mgw-126-resolution.md`.
-- `implementation/mgw-130-attempt-1-1779889662`
-  - Removed worktree:
-    `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1779889662`
-  - Deleted branch ref at `fc4582ad`.
-  - Evidence: `f13ce327` already records MGW-130 discovery/resolution files and
-    `cd621cfa` includes the same merge-budget evidence in the later aggregate
-    resolution commit.
-
-### Supervisor Evidence
-
-- Before cleanup: shared supervisor event at `2026-06-07T07:49:51.378248+00:00`
-  reported `candidate_count=17`, `processed_count=17`, and
-  `preflight_blocked_count=17` against target signature
-  `a26952e3298905d1d6229653c4ab06fbdd35d48d`.
-- After cleanup: shared supervisor event at `2026-06-07T07:56:10.882324+00:00`
-  reported `candidate_count=14`, `processed_count=14`, and
-  `preflight_blocked_count=14` against the same target signature from the clean
-  MGW-242 checkout.
-- Shared `main` checkout pass at `2026-06-07T07:55:07.078353+00:00` also saw
-  `candidate_count=14`; it did not preflight because unrelated dirty `main`
-  paths were present outside this reconciliation.
-
-Result: the preflight-conflicting cleanup candidate count decreased from 17 to
-14 while preserving the already-integrated MGW-125/MGW-126/MGW-130 evidence.

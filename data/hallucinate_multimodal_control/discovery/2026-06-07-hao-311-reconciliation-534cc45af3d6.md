@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: 534cc45af3d6f714bfef83ef2b6beca75463c64e
+Fingerprint: 5aa92933396a9803bec32879a277352a9f081db1
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 21
+Candidate count: 22
 Priority: P1
 Track: ops
 
@@ -111,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `21` candidates, `20` sampled records.
+Work surface: `22` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -159,22 +159,22 @@ Work surface: `21` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 21,
+  "candidate_count": 22,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-167-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-28-hao-187-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-245-resolution.md": 1,
     "hallucinate_app": 10,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 7,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 4,
-    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md": 5,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 8,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 5,
+    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md": 6,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 2,
     "scripts/virtual_ai_os_todo_supervisor.py": 4,
     "work/PR-047-ios-audio-route-monitor.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "534cc45af3d6f714bfef83ef2b6beca75463c64e",
+  "fingerprint": "5aa92933396a9803bec32879a277352a9f081db1",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
