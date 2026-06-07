@@ -1,49 +1,31 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-07
-Fingerprint: 91602bc32e20fbb7ada7ea9317623de028f89d6d
+Fingerprint: a01232decd62e03f4b4a4de41e454f12518f75a5
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 48
+Candidate count: 47
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md`
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
 - ` m hallucinate_app`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1, untracked=5`
+- Path categories: `modified=1, other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
   - `hallucinate_app`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
   - `M	hallucinate_app`
-- Untracked paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md`
+- Diff stat:
+  - `...26-06-07-hao-311-reconciliation-534cc45af3d6.md | 23 +++++++++++-----------`
+  - ` hallucinate_app                                    |  0`
+  - ` 2 files changed, 11 insertions(+), 12 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -85,7 +67,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `48` candidates, `20` sampled records.
+Work surface: `47` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -127,51 +109,25 @@ Work surface: `48` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 48,
+  "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "91602bc32e20fbb7ada7ea9317623de028f89d6d",
+  "fingerprint": "a01232decd62e03f4b4a4de41e454f12518f75a5",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md",
-      "data/virtual_ai_os/discovery/2026-06-07-vai-207-codebase-scan-35009422e1fa.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app",
+    "diff_stat": "...26-06-07-hao-311-reconciliation-534cc45af3d6.md | 23 +++++++++++-----------\n hallucinate_app                                    |  0\n 2 files changed, 11 insertions(+), 12 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md\nM\thallucinate_app",
     "path_categories": {
-      "modified": 3,
-      "other_dirty": 1,
-      "untracked": 5
+      "modified": 1,
+      "other_dirty": 1
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "hallucinate_app",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      "hallucinate_app"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      " m hallucinate_app",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md"
-    ],
-    "untracked_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -204,15 +160,8 @@ Work surface: `48` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-    "hallucinate_app",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-249-codebase-scan-34b56cd1c047.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-250-codebase-scan-e24cf6a2ed70.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-251-codebase-scan-260c89e10d17.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-252-codebase-scan-31ff8ec733f2.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-253-codebase-scan-edfd1babbc1c.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
