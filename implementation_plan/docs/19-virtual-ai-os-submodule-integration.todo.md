@@ -2303,7 +2303,7 @@ cadence remains parseable and resumable.
 
 ## VAI-206 Resolve dependency guardrail for VAI-204
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
