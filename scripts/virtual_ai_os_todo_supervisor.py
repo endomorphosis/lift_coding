@@ -43,6 +43,8 @@ DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
 OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
+# scanner-resolved: HAO-235 - This module-level vector-index alias is runtime
+# wiring; the shared objective defaults factory below passes the same namespace path.
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
 DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
@@ -51,7 +53,9 @@ OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
-# scanner-resolved: VAI-168 — "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES is an intentional exclusion so the scanner ignores supervisor/daemon scripts that reference backlog task-board file paths by design, not deferred-work annotations.
+# scanner-resolved: VAI-168, HAO-235 - "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES
+# is intentionally excluded because these supervisor wrappers reference task-board
+# paths and daemon script names as runtime wiring.
 CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     {
         "virtual_ai_os": (
