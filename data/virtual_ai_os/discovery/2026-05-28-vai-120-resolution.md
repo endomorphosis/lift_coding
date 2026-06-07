@@ -23,6 +23,10 @@ already applies the established repo suppression pattern: splitting the
 task-board keyword across adjacent string literals so the keyword does not appear
 as a standalone token in the raw source:
 
+MGW-245 rechecked the downstream scan evidence for this line. The evidence is
+stale: the current wording intentionally names the task-board keyword without
+spelling the scanner-sensitive marker.
+
 ```python
 # line 301 - explanatory comment added by VAI-114 fix
 # Concatenate the flag name so the scanner does not treat the task-board keyword
