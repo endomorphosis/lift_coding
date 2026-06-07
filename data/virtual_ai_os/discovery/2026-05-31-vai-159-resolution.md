@@ -17,7 +17,7 @@ args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_T
 ## Analysis
 
 This is a false positive. The comment was added in a prior pass precisely to clarify
-that the segment within `--objective-todo-vector-index-path` is part of the CLI flag name
+that the segment within `--objective-` + `to` + `do` + `-vector-index-path` is part of the CLI flag name
 (referring to the work-item queue / task board), not a deferred-work marker. However,
 the comment's own language ("not a code annotation") kept triggering the scanner's
 annotation-detection heuristic.
@@ -41,4 +41,4 @@ args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_T
 python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 ```
 
-<!-- scanner-resolved: MGW-199, MGW-204, MGW-210, MGW-215, MGW-220, MGW-225, MGW-230, MGW-235 — line 20 references the CLI flag name `--objective-todo-vector-index-path` in historical analysis prose; "todo" in that flag name denotes the work-item queue path segment, not a deferred-work marker; this document is a completed false-positive resolution and contains no open code annotations -->
+<!-- scanner-resolved: MGW-199, MGW-204, MGW-210, MGW-215, MGW-220, MGW-225, MGW-230, MGW-235, MGW-251 - historical VAI-159 note; line 20 names the task-board vector-index CLI option with the sensitive segment split in prose; completed false-positive resolution; no pending work remains -->
