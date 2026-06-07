@@ -48,6 +48,33 @@ reviewable commits or follow-up tasks, rerun the supervisor reconciliation pass,
 and verify that either the candidate merge count decreases or the dirty
 worktree cleanup skip count decreases.
 
+## Resolution Evidence
+
+Recorded during MGW-241 reconciliation on 2026-06-07.
+
+- Live worktree registration no longer includes
+  `implementation/mgw-071-attempt-1-1779831690` or
+  `implementation/mgw-085-attempt-1-1779837810`.
+- The sampled worktree paths no longer exist on disk:
+  `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-071-attempt-1-1779831690`
+  and
+  `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-085-attempt-1-1779837810`.
+- A fresh supervisor cleanup/reconciliation pass was observed from
+  `/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_supervisor_events.jsonl`.
+  The latest cleanup events at `2026-06-07T07:55:06.477719+00:00` and
+  `2026-06-07T07:56:22.539444+00:00` reported
+  `dirty_worktree:unsupported_status = 0`.
+- Original guardrail candidate count: `2`.
+- Current unsupported-status blocked candidate count: `0`.
+- Count decrease confirmed: `2 -> 0`.
+
+Verification commands:
+
+```sh
+git -C /home/barberb/lift_coding worktree list --porcelain | rg 'mgw-071-attempt-1-1779831690|mgw-085-attempt-1-1779837810' || true
+jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.dirty_worktree_groups.unsupported_status.count // 0), (.skipped_reason_counts["dirty_worktree:unsupported_status"] // 0)] | @tsv' /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_supervisor_events.jsonl | tail -n 5
+```
+
 ## Reconciliation Plan
 
 Work surface: `2` candidates, `2` sampled records.
