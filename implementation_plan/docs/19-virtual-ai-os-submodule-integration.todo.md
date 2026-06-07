@@ -1232,7 +1232,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
 - Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:421. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-109-codebase-scan-dc01283308ea.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2233,7 +2233,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 9a8b4e206e72c79ce7109e6048570861ae24445a
+- Fingerprint: 069bf71d7f2da357bea5e34a77bef0248fe1cdae
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
