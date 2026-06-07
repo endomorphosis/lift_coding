@@ -2266,18 +2266,18 @@ cadence remains parseable and resumable.
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-203 Resolve 46 preflight-conflicting backlogged worktree merges
+## VAI-203 Resolve 47 preflight-conflicting backlogged worktree merges
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 25417f4694d43233e8e04709fc2a5769d95ca2ca
+- Fingerprint: ef1f079b5e01b727c57ada55380be42e97b77a87
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
-- Acceptance: Reconciliation guardrail filed this because 46 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 47 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
@@ -2388,3 +2388,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-213-vai-209-retry-budget.md
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-213-vai-209-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.
+
+## VAI-214 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:1245
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:1245. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-214-codebase-scan-d700867b5fc4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-215 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/direct_mcp_server.py:159
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/direct_mcp_server.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/direct_mcp_server.py:159. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-215-codebase-scan-e0e818ca7fce.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-216 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/direct_mcp_server.py:217
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/direct_mcp_server.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/direct_mcp_server.py:217. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-216-codebase-scan-95256901e972.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-217 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py:44
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py:44. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-217-codebase-scan-00aa8a4f9593.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-218 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py:430
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py:430. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-218-codebase-scan-e52c17f7507d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
