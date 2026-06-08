@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: f70a214ee3818ac4dbc484b714ca631f8da42b31
+Fingerprint: 441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -11,21 +11,17 @@ Track: ops
 ## Main Checkout Status
 
 - ` M .handsfree_transport_sessions.json`
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2`
+- Path categories: `modified=1`
 - Status paths:
   - `.handsfree_transport_sessions.json`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - Name status:
   - `M	.handsfree_transport_sessions.json`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - Diff stat:
-  - `.handsfree_transport_sessions.json                 |  2 +-`
-  - ` ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------`
-  - ` 2 files changed, 34 insertions(+), 12 deletions(-)`
+  - `.handsfree_transport_sessions.json | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -112,21 +108,19 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "f70a214ee3818ac4dbc484b714ca631f8da42b31",
+  "fingerprint": "441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------\n 2 files changed, 34 insertions(+), 12 deletions(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "diff_stat": ".handsfree_transport_sessions.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\t.handsfree_transport_sessions.json",
     "path_categories": {
-      "modified": 2
+      "modified": 1
     },
     "status_paths": [
-      ".handsfree_transport_sessions.json",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
+      ".handsfree_transport_sessions.json"
     ],
     "status_short": [
-      " M .handsfree_transport_sessions.json",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
+      " M .handsfree_transport_sessions.json"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -159,8 +153,7 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    ".handsfree_transport_sessions.json",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
+    ".handsfree_transport_sessions.json"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
