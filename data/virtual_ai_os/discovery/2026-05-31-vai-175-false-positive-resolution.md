@@ -8,9 +8,9 @@ Resolution: false_positive
 ## Summary
 
 The scanner flagged line 307 of `scripts/hallucinate_multimodal_control_todo_supervisor.py`
-which already contained a `scanner-resolved` annotation explaining that the CLI
-flag name `--objective-surplus-min-terms-per-todo` refers to backlog task entries, not a
-deferred-work annotation.
+which already contained a `scanner-resolved` annotation explaining that the
+objective-surplus CLI flag refers to backlog task entries, not a deferred-work
+annotation.
 
 This is the same recurring false positive previously resolved as MGW-191, MGW-192, HAO-244,
 HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, and HAO-258. The scanner keeps re-flagging the
