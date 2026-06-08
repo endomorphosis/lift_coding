@@ -1,35 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 126467c970a11ed689ff9730806d154c139cfd3b
+Fingerprint: 1b191563b3a46cc726f027d510d6311ea1b6eb1a
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 47
+Candidate count: 48
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` M .handsfree_transport_sessions.json`
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=1`
 - Status paths:
   - `.handsfree_transport_sessions.json`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md`
 - Name status:
   - `M	.handsfree_transport_sessions.json`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md`
 - Diff stat:
-  - `.handsfree_transport_sessions.json                 |  2 +-`
-  - ` ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 40 +++++++++++++---------`
-  - ` ...-mgw-271-mgw-270-implementation-retry-budget.md | 24 +++++++++++++`
-  - ` 3 files changed, 49 insertions(+), 17 deletions(-)`
+  - `.handsfree_transport_sessions.json | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -71,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `47` candidates, `20` sampled records.
+Work surface: `48` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -113,26 +105,22 @@ Work surface: `47` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 47,
+  "candidate_count": 48,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "126467c970a11ed689ff9730806d154c139cfd3b",
+  "fingerprint": "1b191563b3a46cc726f027d510d6311ea1b6eb1a",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 40 +++++++++++++---------\n ...-mgw-271-mgw-270-implementation-retry-budget.md | 24 +++++++++++++\n 3 files changed, 49 insertions(+), 17 deletions(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md",
+    "diff_stat": ".handsfree_transport_sessions.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\t.handsfree_transport_sessions.json",
     "path_categories": {
-      "modified": 3
+      "modified": 1
     },
     "status_paths": [
-      ".handsfree_transport_sessions.json",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md"
+      ".handsfree_transport_sessions.json"
     ],
     "status_short": [
-      " M .handsfree_transport_sessions.json",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md"
+      " M .handsfree_transport_sessions.json"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -165,9 +153,7 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    ".handsfree_transport_sessions.json",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-271-mgw-270-implementation-retry-budget.md"
+    ".handsfree_transport_sessions.json"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
