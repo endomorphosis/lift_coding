@@ -8,7 +8,7 @@ Resolution: false_positive
 ## Summary
 
 The scanner flagged line 307 of `scripts/hallucinate_multimodal_control_todo_supervisor.py`
-which already contained a `scanner-resolved` annotation explaining that "todo" in the CLI
+which already contained a `scanner-resolved` annotation explaining that the CLI
 flag name `--objective-surplus-min-terms-per-todo` refers to backlog task entries, not a
 deferred-work annotation.
 
