@@ -2875,7 +2875,7 @@ cadence remains parseable and resumable.
 
 ## VAI-258 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_s3_backend.py:698
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
