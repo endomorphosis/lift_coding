@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The broad backup exception handler previously logged and returned `None`, but
+callers ignored that value and continued to overwrite Lassie files without a
+verified backup. The patch narrows backup failures to filesystem/copy errors,
+logs the traceback, and makes both backup callers abort before modifying their
+target files when backup creation fails.
