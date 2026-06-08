@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: fe1272c27c470b38cf0b6a0d3462909b2a8eaf18
+Fingerprint: f70a214ee3818ac4dbc484b714ca631f8da42b31
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -10,22 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M .handsfree_transport_sessions.json`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 
 ## Main Checkout Evidence
 
 - Path categories: `modified=2`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `.handsfree_transport_sessions.json`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - Name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	.handsfree_transport_sessions.json`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - Diff stat:
-  - `...-mgw-277-mgw-276-implementation-retry-budget.md | 24 ++++++++++++++++++++++`
-  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
-  - ` 2 files changed, 25 insertions(+), 1 deletion(-)`
+  - `.handsfree_transport_sessions.json                 |  2 +-`
+  - ` ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------`
+  - ` 2 files changed, 34 insertions(+), 12 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -112,21 +112,21 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "fe1272c27c470b38cf0b6a0d3462909b2a8eaf18",
+  "fingerprint": "f70a214ee3818ac4dbc484b714ca631f8da42b31",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...-mgw-277-mgw-276-implementation-retry-budget.md | 24 ++++++++++++++++++++++\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 2 files changed, 25 insertions(+), 1 deletion(-)",
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------\n 2 files changed, 34 insertions(+), 12 deletions(-)",
+    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
     "path_categories": {
       "modified": 2
     },
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      ".handsfree_transport_sessions.json",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
     ],
     "status_short": [
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M .handsfree_transport_sessions.json",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -159,8 +159,8 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    ".handsfree_transport_sessions.json",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
