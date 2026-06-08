@@ -3106,7 +3106,7 @@ cadence remains parseable and resumable.
 
 ## VAI-279 Review swallowed exception path in external/ipfs_kit/archive/backup_patches/fix_storage_backends.py:288
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
