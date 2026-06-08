@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 612a1b40801b3fb511b53919982125f61f623117
+Fingerprint: 081b1763ca241d20fc52b6d24168f345d13b2446
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 14
+Candidate count: 15
 Priority: P1
 Track: ops
 
@@ -79,6 +79,9 @@ Track: ops
   - Conflict paths:
     - `data/virtual_ai_os/discovery/2026-05-31-hao-266-resolution.md`
     - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+- `implementation/mgw-271-attempt-4-1780902619` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-271-attempt-4-1780902619`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Why This Blocks Progress
 
@@ -97,7 +100,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `14` candidates, `14` sampled records.
+Work surface: `15` candidates, `15` sampled records.
 
 ### Suggested Actions
 
@@ -145,7 +148,7 @@ Work surface: `14` candidates, `14` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 14,
+  "candidate_count": 15,
   "conflict_path_counts": {
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-060-resolution.md": 1,
     "data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-139-resolution.md": 1,
@@ -164,7 +167,7 @@ Work surface: `14` candidates, `14` sampled records.
     "implementation_plan/docs/00-overview.md": 1,
     "implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md": 1,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md": 1,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 6,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 7,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1,
     "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md": 2,
     "scripts/meta_glasses_display_llm_router.py": 1,
@@ -175,7 +178,7 @@ Work surface: `14` candidates, `14` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "612a1b40801b3fb511b53919982125f61f623117",
+  "fingerprint": "081b1763ca241d20fc52b6d24168f345d13b2446",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -198,9 +201,10 @@ Work surface: `14` candidates, `14` sampled records.
     "implementation/mgw-169-attempt-3-1780157080",
     "implementation/mgw-202-attempt-2-1780231669",
     "implementation/mgw-214-attempt-1-1780245390",
-    "implementation/mgw-224-attempt-1-1780714601"
+    "implementation/mgw-224-attempt-1-1780714601",
+    "implementation/mgw-271-attempt-4-1780902619"
   ],
-  "sample_count": 14,
+  "sample_count": 15,
   "sample_status_paths": [
     "implementation_plan/docs/00-overview.md",
     "implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md",
@@ -243,7 +247,8 @@ Work surface: `14` candidates, `14` sampled records.
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-169-attempt-3-1780157080",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-202-attempt-2-1780231669",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-214-attempt-1-1780245390",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-224-attempt-1-1780714601"
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-224-attempt-1-1780714601",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-271-attempt-4-1780902619"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
