@@ -2798,7 +2798,7 @@ cadence remains parseable and resumable.
 
 ## VAI-251 Replace placeholder runtime path in external/ipfs_kit/archive/applied_patches/fix_ipfs_model.py:210
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
