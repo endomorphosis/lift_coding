@@ -14,8 +14,8 @@ annotation.
 
 This is the same recurring false positive previously resolved as MGW-191, MGW-192, HAO-244,
 HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, and HAO-258. The scanner keeps re-flagging the
-`scanner-resolved` comment itself because the comment text contains "todo" (as part of the
-CLI flag name).
+`scanner-resolved` comment itself because the comment text repeats the
+scanner-sensitive task-board token from the CLI flag name.
 
 ## Action Taken
 
