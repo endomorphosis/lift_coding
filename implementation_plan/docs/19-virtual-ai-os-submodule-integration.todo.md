@@ -2787,7 +2787,7 @@ cadence remains parseable and resumable.
 
 ## VAI-250 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py:318
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
