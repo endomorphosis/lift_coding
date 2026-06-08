@@ -17,6 +17,7 @@ case.
 The peer PID reader now handles each expected condition explicitly:
 
 - a missing PID file returns `None`;
+- a PID file missing at open time still returns `None`;
 - file read failures log the path and traceback before returning `None`;
 - invalid UTF-8 PID file contents log a warning;
 - empty PID files log a warning;
@@ -31,5 +32,5 @@ exception path that hid why a peer PID could not be used.
 `python3 -m py_compile external/ipfs_kit/archive/applied_patches/direct_mcp_server.py` -> exit 0
 
 An additional AST validation checked that `get_other_instance_pid()` no longer
-catches `Exception` and still has an explicit `OSError` path for PID-file read
-failures -> exit 0.
+catches `Exception` and still has explicit `FileNotFoundError`, `OSError`, and
+`UnicodeDecodeError` paths for PID-file read failures -> exit 0.
