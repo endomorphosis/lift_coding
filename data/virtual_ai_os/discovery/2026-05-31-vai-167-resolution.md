@@ -6,9 +6,9 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai
 
 ## Assessment
 
-False positive. `TASK_BOARD_PATH_OPTION = "--todo-path"` is a constant holding
-the CLI flag name used to supply the backlog task-board file path to the upstream
-supervisor. The substring "todo" in `--todo-path` refers to the task-board file,
+The scanner match was reviewed as historical CLI-option prose, not active work.
+`TASK_BOARD_PATH_OPTION` now receives the shared context value for the backlog
+task-board path option. The substring "todo" in `--todo-path` refers to the task-board file,
 not to deferred work that needs follow-up. The `scripts/` prefix is already listed
 in `CODEBASE_SCAN_SKIP_PREFIXES` so future scans should not re-flag this file.
 
