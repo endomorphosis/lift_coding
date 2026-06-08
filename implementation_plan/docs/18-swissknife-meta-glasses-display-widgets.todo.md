@@ -2648,7 +2648,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 52bc47f297ac62dfafbab35d35f658324a2fd2c2
+- Fingerprint: b2e8373a500e5c2e93b365688d5d8b11855a37b9
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -3048,7 +3048,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-275 Resolve implementation retry-budget failure for MGW-274
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
