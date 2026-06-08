@@ -18,7 +18,7 @@ On review the finding is a historical artefact from an older snapshot.  The
 current codebase already has the fix in place:
 
 - `hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py` line 799:
-  `_SIMILAR_SENTINEL = '\x00'`  (null byte, not the three-character 'XXX' placeholder)
+  `_SIMILAR_SENTINEL` holds the null-byte sentinel value (not the three-character 'XXX' placeholder; fixed in VAI-144)
 - `_SIMILAR_MIN_LEN = 10` ensures that messages whose entire content normalises
   to the single-character sentinel are never falsely conflated.
 - `test_sentinel_is_single_null_byte_not_xxx` (line 375) explicitly asserts
