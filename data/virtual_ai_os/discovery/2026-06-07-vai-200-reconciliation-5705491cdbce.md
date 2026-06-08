@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec
+Fingerprint: c012774fafad03ce1750f346c084105a97629c1d
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -11,17 +11,17 @@ Track: ops
 ## Main Checkout Status
 
 - ` M .handsfree_transport_sessions.json`
+- ` M external/ipfs_kit`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `modified=2`
 - Status paths:
   - `.handsfree_transport_sessions.json`
+  - `external/ipfs_kit`
 - Name status:
   - `M	.handsfree_transport_sessions.json`
-- Diff stat:
-  - `.handsfree_transport_sessions.json | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+  - `M	external/ipfs_kit`
 
 ## Sample Branches Or Worktrees
 
@@ -108,19 +108,23 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec",
+  "fingerprint": "c012774fafad03ce1750f346c084105a97629c1d",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-08-vai-238-codebase-scan-372c9f0bf55f.md"
+    ],
+    "name_status": "M\t.handsfree_transport_sessions.json\nM\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 1
+      "modified": 2
     },
     "status_paths": [
-      ".handsfree_transport_sessions.json"
+      ".handsfree_transport_sessions.json",
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M .handsfree_transport_sessions.json"
+      " M .handsfree_transport_sessions.json",
+      " M external/ipfs_kit"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -153,7 +157,8 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    ".handsfree_transport_sessions.json"
+    ".handsfree_transport_sessions.json",
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",

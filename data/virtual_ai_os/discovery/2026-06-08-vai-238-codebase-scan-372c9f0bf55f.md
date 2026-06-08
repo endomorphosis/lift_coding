@@ -19,3 +19,9 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Replaced the bare metadata-read handler in `_mock_check_status` with an explicit
+`except (OSError, ValueError)` path that logs the storage ID, metadata path, and
+error before preserving the previous fallback-to-defaults behavior.
