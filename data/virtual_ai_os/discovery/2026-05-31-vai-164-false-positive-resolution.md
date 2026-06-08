@@ -12,7 +12,7 @@ task-board markdown suffix, which the scanner interprets as a path reference
 
 However, the line is part of `CODEBASE_SCAN_SKIP_PREFIXES`, the tuple that
 explicitly tells the scanner to skip the `scripts/` directory on future runs.
-The presence of a `.todo.md` mention in that comment was incidental — the entry
+The task-board suffix mention in that comment was incidental; the entry
 exists so that daemon scripts that legitimately import or reference task-board
 paths are not repeatedly flagged.
 
