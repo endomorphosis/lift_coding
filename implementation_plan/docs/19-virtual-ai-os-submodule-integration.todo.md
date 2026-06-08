@@ -3172,7 +3172,7 @@ cadence remains parseable and resumable.
 
 ## VAI-285 Review swallowed exception path in external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py:1667
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
