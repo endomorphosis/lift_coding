@@ -3007,7 +3007,7 @@ cadence remains parseable and resumable.
 
 ## VAI-270 Review swallowed exception path in external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_fix_resource_handlers.py:249
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
