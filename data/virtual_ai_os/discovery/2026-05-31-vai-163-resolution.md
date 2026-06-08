@@ -30,4 +30,6 @@ annotations.
 
 - `python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py`
 - `test -f data/virtual_ai_os/discovery/2026-05-31-vai-163-resolution.md`
-- Focused `scan_findings_in_file` validation reports no findings for this note.
+- MGW-256 recheck: focused `scan_findings_in_file` validation reports no
+  findings for this note; the stale evidence was removed by the previous docs
+  cleanup.
