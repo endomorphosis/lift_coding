@@ -2233,25 +2233,25 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 899b724273ce3ea72cfed7ab1a1930d143970669
+- Fingerprint: 1de2a3858a3ec667c06da5169dc308629b37fb1f
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
 - Acceptance: Reconciliation guardrail filed this because 47 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-201 Resolve 3 dirty backlogged worktrees blocked by content_not_in_target
+## VAI-201 Resolve 63 dirty backlogged worktrees blocked by content_not_in_target
 
 - Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
-- Fingerprint: 443bbaa6b16c08e5c7dfc372831c322ad49f7a1b
+- Fingerprint: 5ab266ca0db86534c638bad7e3558d49e99a74bc
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
-- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 63 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
@@ -2443,3 +2443,201 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py:430. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-218-codebase-scan-e52c17f7507d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-219 Resolve implementation retry-budget failure for VAI-218
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-219-vai-218-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-218. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-219-vai-218-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-218 from strategy blocked_tasks.
+
+## VAI-220 Resolve implementation retry-budget failure for VAI-219
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-220-vai-219-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-219. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-220-vai-219-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-219 from strategy blocked_tasks.
+
+## VAI-221 Resolve implementation retry-budget failure for VAI-220
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-221-vai-220-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-220. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-221-vai-220-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-220 from strategy blocked_tasks.
+
+## VAI-222 Resolve implementation retry-budget failure for VAI-221
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-222-vai-221-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-221. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-222-vai-221-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-221 from strategy blocked_tasks.
+
+## VAI-223 Resolve implementation retry-budget failure for VAI-222
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-223-vai-222-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-222. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-223-vai-222-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-222 from strategy blocked_tasks.
+
+## VAI-224 Resolve implementation retry-budget failure for VAI-223
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-224-vai-223-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-223. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-224-vai-223-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-223 from strategy blocked_tasks.
+
+## VAI-225 Resolve implementation retry-budget failure for VAI-224
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-225-vai-224-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-224. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-225-vai-224-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-224 from strategy blocked_tasks.
+
+## VAI-226 Resolve implementation retry-budget failure for VAI-225
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-226-vai-225-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-225. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-226-vai-225-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-225 from strategy blocked_tasks.
+
+## VAI-227 Resolve implementation retry-budget failure for VAI-226
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-227-vai-226-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-226. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-227-vai-226-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-226 from strategy blocked_tasks.
+
+## VAI-228 Resolve implementation retry-budget failure for VAI-227
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-228-vai-227-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-227. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-228-vai-227-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-227 from strategy blocked_tasks.
+
+## VAI-229 Resolve implementation retry-budget failure for VAI-228
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-229-vai-228-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-228. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-229-vai-228-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-228 from strategy blocked_tasks.
+
+## VAI-230 Resolve implementation retry-budget failure for VAI-229
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-230-vai-229-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-229. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-230-vai-229-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-229 from strategy blocked_tasks.
+
+## VAI-231 Resolve implementation retry-budget failure for VAI-230
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-231-vai-230-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-230. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-231-vai-230-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-230 from strategy blocked_tasks.
+
+## VAI-232 Resolve implementation retry-budget failure for VAI-231
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-232-vai-231-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-231. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-232-vai-231-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-231 from strategy blocked_tasks.
+
+## VAI-233 Resolve implementation retry-budget failure for VAI-232
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-233-vai-232-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-232. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-233-vai-232-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-232 from strategy blocked_tasks.
+
+## VAI-234 Resolve implementation retry-budget failure for VAI-233
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-234-vai-233-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-233. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-234-vai-233-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-233 from strategy blocked_tasks.
+
+## VAI-235 Resolve implementation retry-budget failure for VAI-234
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-235-vai-234-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-234. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-235-vai-234-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-234 from strategy blocked_tasks.
+
+## VAI-236 Resolve implementation retry-budget failure for VAI-235
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-236-vai-235-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-235. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-236-vai-235-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-235 from strategy blocked_tasks.
