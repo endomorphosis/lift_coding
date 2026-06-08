@@ -3276,3 +3276,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-173-resolution.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-173-resolution.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-173-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-295-codebase-scan-dafaa84701ce.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-296 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md:9
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-296-codebase-scan-04fa55d17038.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-297 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md:10
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-174-resolution.md:10. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-297-codebase-scan-649acfc205c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-298 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:11
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-298-codebase-scan-80e624e8a2fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-299 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:12
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:12. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-299-codebase-scan-684b044dfa4a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-300 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:17
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-31-vai-175-false-positive-resolution.md:17. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-300-codebase-scan-4229d2b55690.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
