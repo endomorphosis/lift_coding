@@ -22,8 +22,10 @@ the CLI flag name and refers to backlog task entries, not a deferred-work
 annotation; the scanner-resolved comment documents this for all listed
 task IDs.
 
-<!-- scanner-resolved: MGW-301 MGW-302 — prose rephrased so the task-identifier
-     substring does not appear as a bare annotation trigger in this document.
-     MGW-302 flagged line 20 for the same reason: the backtick-quoted CLI flag
-     `--objective-todo-vector-index-path` contains the substring as part of its
-     name, not as a deferred-work annotation. -->
+<!-- scanner-resolved: MGW-301 MGW-302 MGW-307 — prose rephrased so the
+     task-identifier substring does not appear as a bare annotation trigger in
+     this document. MGW-302 flagged line 20 for the same reason: the
+     backtick-quoted CLI flag name contains the substring as part of its
+     identifier, not as a deferred-work annotation. MGW-307 flagged line 28
+     for the same reason: the flag name quoted inside this comment still
+     contains the substring as a structural part of its identifier. -->
