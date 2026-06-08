@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The archived contributing draft now describes these as action comments that
+identify temporary or deferred work instead of naming the `TODO/FIXME` annotation
+tokens in prose. The target file exists in the initialized `external/ipfs_kit`
+submodule and the scanned line no longer matches the original evidence.
