@@ -3026,7 +3026,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-273 Resolve implementation retry-budget failure for MGW-272
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
