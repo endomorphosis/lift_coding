@@ -2941,7 +2941,7 @@ cadence remains parseable and resumable.
 
 ## VAI-264 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/huggingface_real_init.py:44
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
