@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec
+Fingerprint: eb3189a24c66039a776230df22ca967a4c762e0a
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -11,17 +11,29 @@ Track: ops
 ## Main Checkout Status
 
 - ` M .handsfree_transport_sessions.json`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md`
+- ` m hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `modified=3, other_dirty=1`
 - Status paths:
   - `.handsfree_transport_sessions.json`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md`
+  - `hallucinate_app`
 - Name status:
   - `M	.handsfree_transport_sessions.json`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md`
+  - `M	hallucinate_app`
 - Diff stat:
-  - `.handsfree_transport_sessions.json | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+  - `.handsfree_transport_sessions.json                 |  2 +-`
+  - ` ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 36 +++++++++++++++-------`
+  - ` ...-mgw-268-mgw-267-implementation-retry-budget.md | 24 +++++++++++++++`
+  - ` hallucinate_app                                    |  0`
+  - ` 4 files changed, 50 insertions(+), 12 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -108,19 +120,26 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec",
+  "fingerprint": "eb3189a24c66039a776230df22ca967a4c762e0a",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json",
+    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 36 +++++++++++++++-------\n ...-mgw-268-mgw-267-implementation-retry-budget.md | 24 +++++++++++++++\n hallucinate_app                                    |  0\n 4 files changed, 50 insertions(+), 12 deletions(-)",
+    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md\nM\thallucinate_app",
     "path_categories": {
-      "modified": 1
+      "modified": 3,
+      "other_dirty": 1
     },
     "status_paths": [
-      ".handsfree_transport_sessions.json"
+      ".handsfree_transport_sessions.json",
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md",
+      "hallucinate_app"
     ],
     "status_short": [
-      " M .handsfree_transport_sessions.json"
+      " M .handsfree_transport_sessions.json",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md",
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -153,7 +172,10 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    ".handsfree_transport_sessions.json"
+    ".handsfree_transport_sessions.json",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-268-mgw-267-implementation-retry-budget.md",
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
