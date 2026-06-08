@@ -3051,7 +3051,7 @@ cadence remains parseable and resumable.
 
 ## VAI-274 Review swallowed exception path in external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_mcp_server_with_tools.py:243
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
