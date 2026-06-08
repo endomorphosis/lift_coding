@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 6a50eb2581421469c534ba2a7bea677da7e35691
+Fingerprint: 894c82c7aa05960e4191df7d81f65e58d7ec807e
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -10,26 +10,21 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-- ` m external/ipfs_accelerate`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M external/ipfs_kit`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `modified=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `external/ipfs_accelerate`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `external/ipfs_kit`
 - Name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `M	external/ipfs_accelerate`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	external/ipfs_kit`
 - Diff stat:
-  - `...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 107 +++++++++------------`
-  - ` external/ipfs_accelerate                           |   0`
-  - ` ...swissknife-meta-glasses-display-widgets.todo.md |   2 +-`
-  - ` 3 files changed, 44 insertions(+), 65 deletions(-)`
+  - `external/ipfs_kit | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+- Submodule summary:
+  - `* external/ipfs_kit 894f2e35...3dbb75d3 (1):`
+  - `  < VAI-236: Resolve implementation retry-budget failure for VAI-235`
 
 ## Sample Branches Or Worktrees
 
@@ -116,25 +111,21 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "6a50eb2581421469c534ba2a7bea677da7e35691",
+  "fingerprint": "894c82c7aa05960e4191df7d81f65e58d7ec807e",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 107 +++++++++------------\n external/ipfs_accelerate                           |   0\n ...swissknife-meta-glasses-display-widgets.todo.md |   2 +-\n 3 files changed, 44 insertions(+), 65 deletions(-)",
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_accelerate\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "external/ipfs_kit | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 2,
-      "other_dirty": 1
+      "modified": 1
     },
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "external/ipfs_accelerate",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      " m external/ipfs_accelerate",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
-    ]
+      " M external/ipfs_kit"
+    ],
+    "submodule_summary": "* external/ipfs_kit 894f2e35...3dbb75d3 (1):\n  < VAI-236: Resolve implementation retry-budget failure for VAI-235"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -166,9 +157,7 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-    "external/ipfs_accelerate",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
