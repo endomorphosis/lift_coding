@@ -2765,7 +2765,7 @@ cadence remains parseable and resumable.
 
 ## VAI-248 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_concise.sh:234
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
