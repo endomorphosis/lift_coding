@@ -3136,3 +3136,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/cli_drafts/ipfs_kit_cli_ultra_fast.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/cli_drafts/ipfs_kit_cli_ultra_fast.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/cli_drafts/ipfs_kit_cli_ultra_fast.py:78. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-281-codebase-scan-331fb598d446.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-282 Review swallowed exception path in external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py:138
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py:138. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-282-codebase-scan-6757a6b20b77.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-283 Review swallowed exception path in external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py:514
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/ipfs_development/ipfs_mcp_tools.py:514. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-283-codebase-scan-1fe00024762d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-284 Review swallowed exception path in external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_direct_ipfs.py:232
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_direct_ipfs.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_direct_ipfs.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_direct_ipfs.py:232. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-284-codebase-scan-6e3807014f53.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-285 Review swallowed exception path in external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py:1667
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py:1667. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-285-codebase-scan-8b2e8ed6b503.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-286 Review swallowed exception path in external/ipfs_kit/archive/legacy_servers/vscode_mcp_server.py:304
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/legacy_servers/vscode_mcp_server.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/legacy_servers/vscode_mcp_server.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/legacy_servers/vscode_mcp_server.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-286-codebase-scan-c7842a8943c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
