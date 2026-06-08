@@ -15,8 +15,8 @@ DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
 )
 ```
 
-The string `"19-virtual-ai-os-submodule-integration.todo.md"` contains `.todo.md`
-which triggers the `annotated_followup` scanner pattern.
+The string literal above embeds the Virtual AI OS task-board filename,
+which triggers the `annotated_followup` scanner pattern in prose.
 
 ## Resolution
 
