@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 894c82c7aa05960e4191df7d81f65e58d7ec807e
+Fingerprint: fe1272c27c470b38cf0b6a0d3462909b2a8eaf18
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -10,21 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M external/ipfs_kit`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `modified=2`
 - Status paths:
-  - `external/ipfs_kit`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	external/ipfs_kit`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `external/ipfs_kit | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
-- Submodule summary:
-  - `* external/ipfs_kit 894f2e35...3dbb75d3 (1):`
-  - `  < VAI-236: Resolve implementation retry-budget failure for VAI-235`
+  - `...-mgw-277-mgw-276-implementation-retry-budget.md | 24 ++++++++++++++++++++++`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 2 files changed, 25 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -111,21 +112,22 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "894c82c7aa05960e4191df7d81f65e58d7ec807e",
+  "fingerprint": "fe1272c27c470b38cf0b6a0d3462909b2a8eaf18",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_kit | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\texternal/ipfs_kit",
+    "diff_stat": "...-mgw-277-mgw-276-implementation-retry-budget.md | 24 ++++++++++++++++++++++\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 2 files changed, 25 insertions(+), 1 deletion(-)",
+    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 1
+      "modified": 2
     },
     "status_paths": [
-      "external/ipfs_kit"
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M external/ipfs_kit"
-    ],
-    "submodule_summary": "* external/ipfs_kit 894f2e35...3dbb75d3 (1):\n  < VAI-236: Resolve implementation retry-budget failure for VAI-235"
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    ]
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -157,7 +159,8 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "external/ipfs_kit"
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-277-mgw-276-implementation-retry-budget.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
