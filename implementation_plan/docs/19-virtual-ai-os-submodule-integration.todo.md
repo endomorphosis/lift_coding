@@ -2751,3 +2751,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_code_issues.sh
 - Validation: test -f external/ipfs_kit/archive/applied_patches/fix_code_issues.sh
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_code_issues.sh:229. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-246-codebase-scan-0ba993b31c87.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-247 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_concise.sh:210
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_concise.sh
+- Validation: test -f external/ipfs_kit/archive/applied_patches/fix_concise.sh
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_concise.sh:210. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-247-codebase-scan-56cf393d22a0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-248 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_concise.sh:234
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_concise.sh
+- Validation: test -f external/ipfs_kit/archive/applied_patches/fix_concise.sh
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_concise.sh:234. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-248-codebase-scan-c56a8e5d1295.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-249 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py:58
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py:58. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-249-codebase-scan-24cc769c050b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-250 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py:318
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_huggingface_integration.py:318. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-250-codebase-scan-483ae5ddf6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-251 Replace placeholder runtime path in external/ipfs_kit/archive/applied_patches/fix_ipfs_model.py:210
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_ipfs_model.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_ipfs_model.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_ipfs_model.py:210. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-251-codebase-scan-8835ea6867fd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
