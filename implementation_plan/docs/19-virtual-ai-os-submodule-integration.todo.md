@@ -2971,3 +2971,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/ipfs_ipns_operations.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/ipfs_ipns_operations.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/ipfs_ipns_operations.py:1501. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-266-codebase-scan-d768e8bb62e5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-267 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/lassie_mock_server.py:59
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/lassie_mock_server.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/lassie_mock_server.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/lassie_mock_server.py:59. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-267-codebase-scan-3ea0f0198aff.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-268 Resolve code annotation in external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md:213
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md
+- Validation: test -f external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md:213. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-268-codebase-scan-dcf58d1b0ac8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-269 Resolve code annotation in external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md:214
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md
+- Validation: test -f external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md:214. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-269-codebase-scan-584bb5fe6ed1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-270 Review swallowed exception path in external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_fix_resource_handlers.py:249
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_fix_resource_handlers.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_fix_resource_handlers.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_fix_resource_handlers.py:249. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-270-codebase-scan-84c70ed539d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-271 Review swallowed exception path in external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_mcp_server.py:251
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_mcp_server.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_mcp_server.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/archive_clutter/fix_scripts/direct_mcp_server.py:251. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-271-codebase-scan-0991e13de35f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
