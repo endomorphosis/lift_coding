@@ -2883,7 +2883,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-260 Resolve implementation retry-budget failure for MGW-259
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
