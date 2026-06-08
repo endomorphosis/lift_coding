@@ -2996,7 +2996,7 @@ cadence remains parseable and resumable.
 
 ## VAI-269 Resolve code annotation in external/ipfs_kit/archive/archive_clutter/documentation_drafts/CONTRIBUTING.md:214
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: docs
