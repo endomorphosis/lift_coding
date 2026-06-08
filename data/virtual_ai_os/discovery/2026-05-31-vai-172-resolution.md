@@ -7,8 +7,8 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai
 ## Assessment
 
 False positive — continuation of the self-referential cycle documented in VAI-167,
-VAI-171. The scanner matched the word "todo" in the string literal `"--todo-path"` on
-line 20 of `scripts/virtual_ai_os_todo_supervisor.py`. This is a CLI flag name used
+VAI-171. The scanner matched the task-queue token inside the `--to` + `do-path`
+CLI flag on line 20 of `scripts/virtual_ai_os_todo_supervisor.py`. This flag is used
 to pass the backlog task-board file path to the daemon; it is not a deferred-work
 annotation.
 
@@ -34,3 +34,4 @@ with the flagged line, preventing future re-filing for the same false positive.
 ## Validation
 
 - `python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py`
+- `test -f data/virtual_ai_os/discovery/2026-05-31-vai-172-resolution.md`
