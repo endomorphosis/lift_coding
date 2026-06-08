@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 76ff3e08c46f791fce7116036bef8b4dc80a4e67
+Fingerprint: f33945fd85cda8f54d908835cc36196897934483
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -12,20 +12,24 @@ Track: ops
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
+- `?? data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1`
+- Path categories: `modified=1, other_dirty=1, untracked=1`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 +++++++++++-----------`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 41 ++++++++++++++--------`
   - ` hallucinate_app                                    |  0`
-  - ` 2 files changed, 12 insertions(+), 12 deletions(-)`
+  - ` 2 files changed, 26 insertions(+), 15 deletions(-)`
+- Untracked paths:
+  - `data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md`
 
 ## Sample Branches Or Worktrees
 
@@ -112,22 +116,28 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "76ff3e08c46f791fce7116036bef8b4dc80a4e67",
+  "fingerprint": "f33945fd85cda8f54d908835cc36196897934483",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 +++++++++++-----------\n hallucinate_app                                    |  0\n 2 files changed, 12 insertions(+), 12 deletions(-)",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 41 ++++++++++++++--------\n hallucinate_app                                    |  0\n 2 files changed, 26 insertions(+), 15 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
     "path_categories": {
       "modified": 1,
-      "other_dirty": 1
+      "other_dirty": 1,
+      "untracked": 1
     },
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app"
+      "hallucinate_app",
+      "data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m hallucinate_app"
+      " m hallucinate_app",
+      "?? data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md"
+    ],
+    "untracked_paths": [
+      "data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -161,7 +171,8 @@ Work surface: `47` candidates, `20` sampled records.
   "sample_count": 20,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app"
+    "hallucinate_app",
+    "data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-302-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
