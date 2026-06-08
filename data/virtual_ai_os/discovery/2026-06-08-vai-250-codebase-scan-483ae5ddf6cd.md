@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The flagged path was a real observability gap in a best-effort server stop. The
+restart helper now captures `pkill` output, logs the expected no-match exit code
+at debug level, warns on unexpected nonzero exits, and records process-launch
+exceptions instead of silently swallowing them.
