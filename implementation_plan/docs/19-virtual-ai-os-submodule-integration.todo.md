@@ -2666,7 +2666,7 @@ cadence remains parseable and resumable.
 
 ## VAI-239 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py:981
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
