@@ -22,3 +22,14 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Resolution
+
+- The three VAI-235 attempts failed before repository edits because Codex lost
+  network/DNS connectivity to the responses backend, then the Copilot fallback
+  exited without authentication.
+- This repair worktree applies the blocked VAI-218 runtime fix directly in
+  `external/ipfs_kit/archive/applied_patches/enhanced_storacha_storage.py`.
+- The temporary-file cleanup in `to_ipfs` no longer uses a silent bare
+  `except:`. Missing temp files are handled explicitly and cleanup `OSError`
+  cases are logged so unexpected cleanup failures are visible.
