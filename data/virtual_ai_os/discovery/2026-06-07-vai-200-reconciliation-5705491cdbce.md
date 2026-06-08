@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 76ff3e08c46f791fce7116036bef8b4dc80a4e67
+Fingerprint: bb4a800adf7efe8aa7700d97b7922afae77ef851
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -10,22 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` m hallucinate_app`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1`
+- Path categories: `modified=2`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `hallucinate_app`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	hallucinate_app`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 +++++++++++-----------`
-  - ` hallucinate_app                                    |  0`
-  - ` 2 files changed, 12 insertions(+), 12 deletions(-)`
+  - `...-mgw-261-mgw-260-implementation-retry-budget.md | 25 ++++++++++++++++++++++`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 2 files changed, 26 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -112,22 +112,21 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "76ff3e08c46f791fce7116036bef8b4dc80a4e67",
+  "fingerprint": "bb4a800adf7efe8aa7700d97b7922afae77ef851",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 +++++++++++-----------\n hallucinate_app                                    |  0\n 2 files changed, 12 insertions(+), 12 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
+    "diff_stat": "...-mgw-261-mgw-260-implementation-retry-budget.md | 25 ++++++++++++++++++++++\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 2 files changed, 26 insertions(+), 1 deletion(-)",
+    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 1,
-      "other_dirty": 1
+      "modified": 2
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app"
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m hallucinate_app"
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -160,8 +159,8 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app"
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-261-mgw-260-implementation-retry-budget.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
