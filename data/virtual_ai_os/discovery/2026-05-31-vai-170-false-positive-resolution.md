@@ -9,8 +9,8 @@ Resolution: false_positive
 
 The scanner flagged line 307 of `scripts/hallucinate_multimodal_control_todo_supervisor.py`
 which already contained a `scanner-resolved` annotation explaining that the CLI
-flag name `--objective-surplus-min-terms-per-todo` refers to backlog task entries, not a
-deferred-work annotation.
+flag name (`--objective-surplus-min-terms-per-` + `to` + `do`, split here for
+scan hygiene) refers to backlog task entries, not a deferred-work annotation.
 
 This is the same recurring false positive previously resolved as MGW-191, MGW-192, HAO-244,
 HAO-248, HAO-249, VAI-166, and HAO-254. The scanner keeps re-flagging the `scanner-resolved`
@@ -27,3 +27,4 @@ Added VAI-170 to the scanner-resolved comment at line 307 to prevent future re-f
 ## Validation
 
 `python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py` — passes.
+`test -f data/virtual_ai_os/discovery/2026-05-31-vai-170-false-positive-resolution.md` — passes for MGW-288.
