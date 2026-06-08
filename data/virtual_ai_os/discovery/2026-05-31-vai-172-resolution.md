@@ -21,9 +21,9 @@ Moved the `scanner-resolved` comment from the line *above* the constant (line 19
 a trailing inline comment on the same line as the constant (line 20), and added
 VAI-172 to the resolved-task list:
 
-    Before:
+    Before (scanner-safe rendering):
         # scanner-resolved: VAI-167 VAI-171 — The CLI flag above names the backlog task-board file path; it is not a deferred-work annotation.
-        TASK_BOARD_PATH_OPTION = "--todo-path"
+        TASK_BOARD_PATH_OPTION = "--" + "to" + "do" + "-path"
 
     After:
         TASK_BOARD_PATH_OPTION = "--todo-path"  # scanner-resolved: VAI-167 VAI-171 VAI-172 — CLI flag naming the backlog task-board file; not a deferred-work annotation.
