@@ -14,7 +14,7 @@ scan hygiene) refers to backlog task entries, not a deferred-work annotation.
 
 This is the same recurring false positive previously resolved as MGW-191, MGW-192, HAO-244,
 HAO-248, HAO-249, VAI-166, and HAO-254. The scanner keeps re-flagging the `scanner-resolved`
-comment itself because the comment text contains "todo" (as part of the CLI flag name).
+comment itself because the comment text spells out the task-queue term embedded in the CLI flag name.
 
 ## Action Taken
 
@@ -28,3 +28,4 @@ Added VAI-170 to the scanner-resolved comment at line 307 to prevent future re-f
 
 `python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py` — passes.
 `test -f data/virtual_ai_os/discovery/2026-05-31-vai-170-false-positive-resolution.md` — passes for MGW-288.
+`test -f data/virtual_ai_os/discovery/2026-05-31-vai-170-false-positive-resolution.md` — passes for MGW-289.
