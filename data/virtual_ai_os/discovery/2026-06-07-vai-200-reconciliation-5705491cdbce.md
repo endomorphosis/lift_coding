@@ -1,10 +1,10 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-08
-Fingerprint: 1b191563b3a46cc726f027d510d6311ea1b6eb1a
+Fingerprint: 441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 48
+Candidate count: 47
 Priority: P1
 Track: ops
 
@@ -63,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `48` candidates, `20` sampled records.
+Work surface: `47` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,10 +105,10 @@ Work surface: `48` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 48,
+  "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "1b191563b3a46cc726f027d510d6311ea1b6eb1a",
+  "fingerprint": "441fadeb5fd5ad996b60ee7b0a8bccfa7c69cfec",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "diff_stat": ".handsfree_transport_sessions.json | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
