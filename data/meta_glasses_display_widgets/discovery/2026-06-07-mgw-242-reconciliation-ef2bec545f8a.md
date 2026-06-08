@@ -1,6 +1,6 @@
 # MGW-242 Reconciliation Guardrail
 
-Date: 2026-06-07
+Date: 2026-06-08
 Fingerprint: 612a1b40801b3fb511b53919982125f61f623117
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
