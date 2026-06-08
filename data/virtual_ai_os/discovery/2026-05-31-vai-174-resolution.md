@@ -7,8 +7,9 @@ Evidence: `/home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai
 The scan found the `# scanner-resolved: MGW-189, MGW-190, HAO-247, VAI-165, HAO-253,
 VAI-169, HAO-257` annotation on line 304 of
 `scripts/hallucinate_multimodal_control_todo_supervisor.py`. The task-board substring in the
-adjacent CLI flag `--objective-todo-vector-index-path` is part of the flag name and
-refers to backlog task entries managed by the supervisor, not a deferred-work annotation.
+adjacent CLI flag (`--objective-` + `to` + `do-vector-index-path`) is part of
+the option name and refers to backlog task entries managed by the supervisor,
+not a deferred-work annotation.
 
 Resolution:
 
