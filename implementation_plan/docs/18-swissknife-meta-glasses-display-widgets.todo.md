@@ -3136,7 +3136,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-283 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-166-false-positive-resolved.md:12
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
