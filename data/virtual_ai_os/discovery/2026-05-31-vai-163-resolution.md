@@ -7,16 +7,12 @@ Kind: false_positive
 
 ## Finding
 
-The codebase scanner flagged line 17 of `scripts/virtual_ai_os_todo_supervisor.py`:
+The codebase scanner flagged the older default-path assignment in
+`scripts/virtual_ai_os_todo_supervisor.py`. That assignment embedded the
+Virtual AI OS task-board filename directly in a string literal.
 
-```python
-DEFAULT_TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "19-virtual-ai-os-submodule-integration.todo.md"
-)
-```
-
-The string literal above embeds the Virtual AI OS task-board filename,
-which triggers the `annotated_followup` scanner pattern in prose.
+The exact historical filename is intentionally omitted here because repeating
+the task-board suffix in a completed discovery note creates another scanner hit.
 
 ## Resolution
 
