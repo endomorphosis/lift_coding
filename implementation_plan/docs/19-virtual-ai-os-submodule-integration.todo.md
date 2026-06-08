@@ -2861,3 +2861,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_mcp_server.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_mcp_server.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_mcp_server.py:219. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-256-codebase-scan-1de8a1719e98.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-257 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_s3_backend.py:236
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_s3_backend.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_s3_backend.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_s3_backend.py:236. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-257-codebase-scan-5e21764d35b6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-258 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_s3_backend.py:698
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_s3_backend.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_s3_backend.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_s3_backend.py:698. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-258-codebase-scan-7b425b8a660e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-259 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py:232
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py:232. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-259-codebase-scan-8088ea61f67f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-260 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py:845
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_s3_backend_complete.py:845. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-260-codebase-scan-e13172ffcfa8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-261 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/fix_storacha_backend.py:472
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/fix_storacha_backend.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/fix_storacha_backend.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/fix_storacha_backend.py:472. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-08-vai-261-codebase-scan-bdb55de0fb60.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

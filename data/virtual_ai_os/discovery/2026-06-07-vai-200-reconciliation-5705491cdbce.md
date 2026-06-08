@@ -25,7 +25,8 @@ Track: ops
 - Diff stat:
   - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 34 +++++++++-------------`
   - ` hallucinate_app                                    |  0`
-  - ` 2 files changed, 14 insertions(+), 20 deletions(-)`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 3 files changed, 15 insertions(+), 21 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -115,7 +116,7 @@ Work surface: `47` candidates, `20` sampled records.
   "fingerprint": "76ff3e08c46f791fce7116036bef8b4dc80a4e67",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 34 +++++++++-------------\n hallucinate_app                                    |  0\n 2 files changed, 14 insertions(+), 20 deletions(-)",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 34 +++++++++-------------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 3 files changed, 15 insertions(+), 21 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
     "path_categories": {
       "modified": 1,
