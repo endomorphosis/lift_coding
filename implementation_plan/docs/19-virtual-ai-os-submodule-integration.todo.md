@@ -2952,7 +2952,7 @@ cadence remains parseable and resumable.
 
 ## VAI-265 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/ipfs_dht_operations.py:279
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
