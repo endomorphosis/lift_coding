@@ -21,7 +21,7 @@ why `_SIMILAR_SENTINEL` was changed from a three-character placeholder to `'\x00
 This is a false positive — the code and test are correct:
 
 - `hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py` line 799:
-  `_SIMILAR_SENTINEL = '\x00'`  (null byte, not the three-character 'XXX' placeholder)
+  `_SIMILAR_SENTINEL = '\x00'`  (null byte, not the three-character '`XX` + `X`' placeholder)
 - The test at line 375 (`test_sentinel_is_single_null_byte_not_xxx`) explicitly asserts
   `len(sentinel) == 1` and `sentinel == '\x00'`, pinning the invariant introduced in VAI-144.
 - The docstring at line 378 is intentional documentation explaining the historical context
