@@ -1423,7 +1423,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-128 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856
 
+<<<<<<< HEAD
 - Status: completed
+=======
+- Status: todo
+>>>>>>> 73893b7dcc0ef4600150b2435b184902e3687298
 - Completion: manual
 - Priority: P3
 - Track: ops
@@ -1434,7 +1438,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-129 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304
 
+<<<<<<< HEAD
 - Status: completed
+=======
+- Status: todo
+>>>>>>> 73893b7dcc0ef4600150b2435b184902e3687298
 - Completion: manual
 - Priority: P3
 - Track: ops
@@ -1442,6 +1450,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
 - Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-129-codebase-scan-c2481cea1af4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+<<<<<<< HEAD
 
 ## MGW-130 Resolve merge retry-budget failure for MGW-125
 
@@ -3441,3 +3450,5 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-05-vai-189-resolution.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-06-05-vai-189-resolution.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-05-vai-189-resolution.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-08-mgw-310-codebase-scan-432f573c6323.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+=======
+>>>>>>> 73893b7dcc0ef4600150b2435b184902e3687298
