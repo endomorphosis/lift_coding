@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: 1fa808f149d6e8ccdb3057f0f795d60c055626ca
+Fingerprint: b9efd6e79c56dacda95e07e615aed1665b2e00d0
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 3
+Candidate count: 2
 Priority: P1
 Track: ops
 
@@ -19,9 +19,6 @@ Track: ops
 ## Sample Branches Or Worktrees
 
 - `implementation/hao-203-attempt-1-1780987641` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641`
-  - Conflict paths:
-    - `hallucinate_app`
-- `implementation/hao-217-attempt-1-1780988891` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1780988891`
   - Conflict paths:
     - `hallucinate_app`
 - `implementation/hao-222-attempt-1-1780989133` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133`
@@ -46,7 +43,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `3` candidates, `3` sampled records.
+Work surface: `2` candidates, `2` sampled records.
 
 ### Suggested Actions
 
@@ -94,13 +91,13 @@ Work surface: `3` candidates, `3` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 3,
+  "candidate_count": 2,
   "conflict_path_counts": {
-    "hallucinate_app": 3,
+    "hallucinate_app": 2,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "1fa808f149d6e8ccdb3057f0f795d60c055626ca",
+  "fingerprint": "b9efd6e79c56dacda95e07e615aed1665b2e00d0",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -111,17 +108,15 @@ Work surface: `3` candidates, `3` sampled records.
   ],
   "sample_branches": [
     "implementation/hao-203-attempt-1-1780987641",
-    "implementation/hao-217-attempt-1-1780988891",
     "implementation/hao-222-attempt-1-1780989133"
   ],
-  "sample_count": 3,
+  "sample_count": 2,
   "sample_status_paths": [
     "hallucinate_app",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641",
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1780988891",
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133"
   ],
   "success_signals": [

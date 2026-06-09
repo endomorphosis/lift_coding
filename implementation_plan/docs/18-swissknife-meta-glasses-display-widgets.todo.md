@@ -510,7 +510,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-045 Replace placeholder runtime path in src/handsfree/stt/stub_provider.py:42
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
