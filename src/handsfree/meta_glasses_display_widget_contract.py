@@ -8,7 +8,6 @@ from __future__ import annotations
 
 from typing import Final
 
-
 DISPLAY_WIDGET_ACTION_CONTRACT: Final = "handsfree.meta-glasses/display-widget-action@0.1.0"
 
 DISPLAY_WIDGET_ACTION_DEFINITIONS: Final[tuple[dict[str, str], ...]] = (

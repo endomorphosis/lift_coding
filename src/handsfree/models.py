@@ -1,13 +1,13 @@
 """Pydantic models aligned with spec/openapi.yaml."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
 
-class Profile(str, Enum):
+class Profile(StrEnum):
     """Profile enum."""
 
     WORKOUT = "workout"
@@ -16,7 +16,7 @@ class Profile(str, Enum):
     DEFAULT = "default"
 
 
-class PrivacyMode(str, Enum):
+class PrivacyMode(StrEnum):
     """Privacy mode enum for controlling data exposure in responses."""
 
     STRICT = "strict"  # No images, no code snippets, summaries only
@@ -31,7 +31,7 @@ class TextInput(BaseModel):
     text: str = Field(..., max_length=2000)
 
 
-class AudioFormat(str, Enum):
+class AudioFormat(StrEnum):
     """Audio format enum."""
 
     WAV = "wav"
@@ -124,7 +124,7 @@ class PendingAction(BaseModel):
     summary: str
 
 
-class MetaGlassesDisplayWidgetAction(str, Enum):
+class MetaGlassesDisplayWidgetAction(StrEnum):
     """Backend-visible display widget action names for mobile dispatch."""
 
     RENDER = "render"
@@ -137,7 +137,7 @@ class MetaGlassesDisplayWidgetAction(str, Enum):
     SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
-class MetaGlassesDisplayWidgetOperation(str, Enum):
+class MetaGlassesDisplayWidgetOperation(StrEnum):
     """Swissknife ORB display widget operations accepted by HandsFree."""
 
     RENDER_WIDGET = "render_widget"
@@ -151,7 +151,7 @@ class MetaGlassesDisplayWidgetOperation(str, Enum):
     SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
-class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
+class MetaGlassesDisplayWidgetMobileActionType(StrEnum):
     """Client-local mobile action IDs for display widget operations."""
 
     RENDER = "mobile_render_display_widget"
@@ -164,7 +164,7 @@ class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
     SUBSCRIBE_UPDATES = "mobile_subscribe_display_widget_updates"
 
 
-class MetaGlassesDisplayWidgetFocusDirection(str, Enum):
+class MetaGlassesDisplayWidgetFocusDirection(StrEnum):
     """Display widget focus movement direction."""
 
     NEXT = "next"
@@ -499,7 +499,7 @@ class DebugInfo(BaseModel):
     profile_metadata: dict[str, Any] | None = None  # Optional profile info (speech_rate, etc.)
 
 
-class CommandStatus(str, Enum):
+class CommandStatus(StrEnum):
     """Command status."""
 
     OK = "ok"
@@ -822,7 +822,7 @@ class ConfirmRequest(BaseModel):
     idempotency_key: str | None = None
 
 
-class InboxItemType(str, Enum):
+class InboxItemType(StrEnum):
     """Inbox item type."""
 
     PR = "pr"
@@ -868,7 +868,7 @@ class RerunChecksRequest(BaseModel):
     idempotency_key: str | None = None
 
 
-class MergeMethod(str, Enum):
+class MergeMethod(StrEnum):
     """Merge method."""
 
     MERGE = "merge"
@@ -914,7 +914,7 @@ class AICapabilityContext(BaseModel):
     session_id: str | None = None
 
 
-class AIWorkflow(str, Enum):
+class AIWorkflow(StrEnum):
     """Higher-level AI workflow aliases for API callers."""
 
     COPILOT_EXPLAIN_PR = "copilot_explain_pr"
@@ -929,14 +929,14 @@ class AIWorkflow(str, Enum):
     ACCELERATE_GENERATE_AND_STORE = "accelerate_generate_and_store"
 
 
-class AISummaryBackend(str, Enum):
+class AISummaryBackend(StrEnum):
     """Backend selection for PR summary workflows."""
 
     DEFAULT = "default"
     ACCELERATED = "accelerated"
 
 
-class AIFailureAnalysisBackend(str, Enum):
+class AIFailureAnalysisBackend(StrEnum):
     """Backend selection for failure analysis workflows."""
 
     DEFAULT = "default"

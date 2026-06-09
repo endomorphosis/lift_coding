@@ -5,9 +5,8 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -412,8 +411,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
     )
 
     expected_discovery = (
-        discovery_dir
-        / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-015-mgw-001-retry-budget.md"
+        discovery_dir / f"{datetime.now(UTC).date().isoformat()}-mgw-015-mgw-001-retry-budget.md"
     )
     assert findings == [
         {

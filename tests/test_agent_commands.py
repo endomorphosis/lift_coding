@@ -1,6 +1,7 @@
 """Tests for agent command routing."""
 
 import pytest
+from test_mcp_ipfs_provider import _FakeMCPClient
 
 from handsfree.agent_providers import (
     IPFSAccelerateMCPAgentProvider,
@@ -17,7 +18,6 @@ from handsfree.db.agent_tasks import (
     get_agent_task_by_id,
     update_agent_task_state,
 )
-from test_mcp_ipfs_provider import _FakeMCPClient
 
 
 @pytest.fixture

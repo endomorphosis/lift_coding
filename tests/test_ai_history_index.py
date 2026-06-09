@@ -1,7 +1,7 @@
 """Tests for persisted AI history index storage."""
 
-from datetime import UTC, datetime, timedelta
 import uuid
+from datetime import UTC, datetime, timedelta
 
 from handsfree.db import init_db
 from handsfree.db.ai_history_index import (

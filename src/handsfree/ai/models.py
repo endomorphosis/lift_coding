@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 
-class AIBackendFamily(str, Enum):
+class AIBackendFamily(StrEnum):
     """Normalized backend families for AI capabilities."""
 
     COPILOT_CLI = "copilot_cli"
@@ -21,7 +21,7 @@ class AIBackendFamily(str, Enum):
     COMPOSITE = "composite"
 
 
-class AIExecutionMode(str, Enum):
+class AIExecutionMode(StrEnum):
     """Supported execution modes for AI capabilities."""
 
     FIXTURE = "fixture"
@@ -32,7 +32,7 @@ class AIExecutionMode(str, Enum):
     ORCHESTRATED = "orchestrated"
 
 
-class CapabilityExecutionMode(str, Enum):
+class CapabilityExecutionMode(StrEnum):
     """Cross-repo execution modes used by the virtual AI OS registry."""
 
     DIRECT_IMPORT = "direct_import"
@@ -41,7 +41,7 @@ class CapabilityExecutionMode(str, Enum):
     ORCHESTRATED = "orchestrated"
 
 
-class CapabilityConfirmationPolicy(str, Enum):
+class CapabilityConfirmationPolicy(StrEnum):
     """Normalized confirmation policy for cross-repo capabilities."""
 
     SAFE_READ = "safe_read"
@@ -50,7 +50,7 @@ class CapabilityConfirmationPolicy(str, Enum):
     PROVIDER_DEFAULT = "provider_default"
 
 
-class CapabilityRuntimeSurface(str, Enum):
+class CapabilityRuntimeSurface(StrEnum):
     """Execution surface selected by the virtual AI OS runtime router."""
 
     DIRECT_ADAPTER = "direct_adapter"

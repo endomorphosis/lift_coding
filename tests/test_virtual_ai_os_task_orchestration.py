@@ -6,8 +6,8 @@ import json
 
 import pytest
 
-from handsfree.agents.service import AgentService
 from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
+from handsfree.agents.service import AgentService
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_task_by_id
 

@@ -115,9 +115,9 @@ class TestAgentDelegationWithEnvVar:
 
     def test_task_lifecycle_with_github_issue_dispatch(self, db_conn, monkeypatch):
         """Test complete lifecycle: delegate -> dispatch issue -> PR opened -> task completed."""
+        from handsfree import api
         from handsfree.agents.service import AgentService
         from handsfree.api import _correlate_pr_with_agent_tasks
-        from handsfree import api
 
         # Mock get_db to return our test db_conn
         monkeypatch.setattr(api, "get_db", lambda: db_conn)
@@ -200,9 +200,9 @@ class TestCorrelationWithMetadata:
 
     def test_pr_correlation_via_metadata_marker(self, db_conn, monkeypatch):
         """Test that PR is correlated via agent_task_metadata comment."""
+        from handsfree import api
         from handsfree.agents.service import AgentService
         from handsfree.api import _correlate_pr_with_agent_tasks
-        from handsfree import api
 
         # Mock get_db to return our test db_conn
         monkeypatch.setattr(api, "get_db", lambda: db_conn)

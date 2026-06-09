@@ -259,12 +259,12 @@ class TestPRIntents:
     ) -> None:
         """Test pr.summarize with workout profile."""
         intent = parser.parse("summarize pr 456")
-        response = router.route(intent, Profile.WORKOUT)
+        router.route(intent, Profile.WORKOUT)
 
         # Workout should have shorter summary
 
 
-class TestAIIntents:
+class TestAIExecutionIntents:
     """Test AI intent routing."""
 
     def test_ai_summarize_diff(self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch) -> None:

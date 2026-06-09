@@ -128,8 +128,8 @@ def test_libp2p_transport_validates_inputs(mock_libp2p_runtime):
 
 def test_libp2p_transport_rejects_unsupported_protocol_version(mock_libp2p_runtime):
     from handsfree.transport.libp2p_bluetooth import (
-        Libp2pBluetoothTransport,
         PROTOCOL_MAJOR,
+        Libp2pBluetoothTransport,
         ProtocolVersionError,
     )
 
@@ -787,9 +787,9 @@ def test_protocol_routing_adapter_logs_async_runtime_stream_cleanup_failures(cap
 def test_protocol_routing_adapter_reads_inbound_runtime_stream_payloads(monkeypatch):
     from handsfree.transport import libp2p_bluetooth
     from handsfree.transport.libp2p_bluetooth import (
+        RUNTIME_STREAM_PROTOCOL_ID,
         Libp2pBluetoothTransport,
         ProtocolRoutingBluetoothTransportAdapter,
-        RUNTIME_STREAM_PROTOCOL_ID,
     )
 
     inbound_event = threading.Event()

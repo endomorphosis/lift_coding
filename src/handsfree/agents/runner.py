@@ -14,12 +14,12 @@ from typing import Any
 
 import duckdb
 
-from handsfree.db.notifications import create_notification
 from handsfree.db.agent_tasks import (
     get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_state,
 )
+from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
 

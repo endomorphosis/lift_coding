@@ -7,16 +7,23 @@ import logging
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_script_path as _repo_script_path,
 )
 
@@ -71,14 +78,14 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     include_scripts=True,
 )
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-)
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_runtime_exports,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
-    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
 )
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(

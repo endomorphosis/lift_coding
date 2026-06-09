@@ -1168,14 +1168,14 @@ class TestExpoIntegration:
         from handsfree.db.notification_subscriptions import create_subscription, list_subscriptions
 
         # Create subscriptions for different platforms
-        expo_sub = create_subscription(
+        create_subscription(
             conn=db_conn,
             user_id=test_user_id,
             endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
             platform="expo",
         )
 
-        webpush_sub = create_subscription(
+        create_subscription(
             conn=db_conn,
             user_id=test_user_id,
             endpoint="https://fcm.googleapis.com/fcm/send/...",

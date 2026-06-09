@@ -40,7 +40,6 @@ from handsfree.transport.libp2p_bluetooth import (
     encode_transport_message,
 )
 
-
 client = TestClient(app)
 
 

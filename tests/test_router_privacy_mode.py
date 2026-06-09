@@ -4,10 +4,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from handsfree.commands.profiles import Profile, ProfileConfig
-from handsfree.commands.router import CommandRouter
 from handsfree.commands.intent_parser import ParsedIntent
 from handsfree.commands.pending_actions import PendingActionManager
+from handsfree.commands.profiles import Profile, ProfileConfig
+from handsfree.commands.router import CommandRouter
 from handsfree.models import PrivacyMode
 
 

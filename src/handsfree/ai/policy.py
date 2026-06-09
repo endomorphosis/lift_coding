@@ -56,9 +56,9 @@ def get_ai_backend_policy() -> AIBackendPolicy:
 
 def resolve_policy_workflow(
     *,
-    workflow: "AIWorkflow | None",
+    workflow: AIWorkflow | None,
     capability_id: str | None,
-) -> tuple["AIWorkflow | None", str | None]:
+) -> tuple[AIWorkflow | None, str | None]:
     """Resolve workflow/capability through backend policy.
 
     Explicit capability IDs are left untouched. Policy only applies when the
@@ -88,11 +88,11 @@ def resolve_policy_workflow(
 
 def build_policy_resolution(
     *,
-    requested_workflow: "AIWorkflow | None",
-    resolved_workflow: "AIWorkflow | None",
+    requested_workflow: AIWorkflow | None,
+    resolved_workflow: AIWorkflow | None,
     requested_capability_id: str | None,
     resolved_capability_id: str,
-) -> "AIPolicyResolution":
+) -> AIPolicyResolution:
     """Build API-facing metadata describing policy remapping."""
     from handsfree.models import AIPolicyResolution
 

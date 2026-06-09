@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
+from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
+
 from .capability_registry import (
     get_virtual_ai_os_capability,
     resolve_virtual_ai_os_execution_mode,
@@ -11,9 +14,6 @@ from .models import (
     CapabilityExecutionMode,
     CapabilityRuntimeSurface,
 )
-from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
-from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
-
 
 _DATASETS_CLI_COMMAND = "python external/ipfs_datasets/ipfs_datasets_cli.py"
 

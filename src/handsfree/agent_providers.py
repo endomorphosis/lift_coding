@@ -7,28 +7,22 @@ for copilot and custom agents.
 import json
 import logging
 import os
-from datetime import UTC, datetime
-from pathlib import Path
+import re
 import shutil
 import subprocess
-import re
 import uuid
 from abc import ABC, abstractmethod
+from datetime import UTC, datetime
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from handsfree.cli.executor import CLIExecutor
-from handsfree.cli.parsers import parse_output
 from handsfree.commands.profiles import Profile, ProfileConfig
 from handsfree.config import get_meta_glasses_display_widget_config
 from handsfree.db.agent_tasks import AgentTask
 from handsfree.ipfs_datasets_routers import get_embeddings_router
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
-from handsfree.metrics import get_metrics_collector
-from handsfree.meta_glasses_display_widget_contract import (
-    DISPLAY_WIDGET_ACTION_CONTRACT,
-    DISPLAY_WIDGET_ACTION_DEFINITIONS,
-)
 from handsfree.mcp import (
     MCPClient,
     MCPClientError,
@@ -42,6 +36,11 @@ from handsfree.mcp import (
     is_mcp_provider_enabled,
     resolve_task_binding,
 )
+from handsfree.meta_glasses_display_widget_contract import (
+    DISPLAY_WIDGET_ACTION_CONTRACT,
+    DISPLAY_WIDGET_ACTION_DEFINITIONS,
+)
+from handsfree.metrics import get_metrics_collector
 
 logger = logging.getLogger(__name__)
 CLI_DETECTION_TIMEOUT_SECONDS = 2
@@ -616,7 +615,7 @@ class CopilotCLIAgentProvider(AgentProvider):
         repo = _extract_target_repo(task.target_ref)
         if task.target_type == "pr" and pr_number:
             from handsfree.ai.capabilities import execute_ai_request
-            from handsfree.ai.models import AIRequestContext, AICapabilityRequest
+            from handsfree.ai.models import AICapabilityRequest, AIRequestContext
             from handsfree.ai.policy import build_policy_resolution
             from handsfree.models import AIWorkflow
 

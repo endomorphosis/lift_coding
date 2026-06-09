@@ -12,20 +12,20 @@ from uuid import NAMESPACE_DNS, UUID, uuid5
 import duckdb
 
 from handsfree.agent_providers import get_provider, is_copilot_cli_available
+from handsfree.db.agent_tasks import (
+    create_agent_task,
+    get_agent_task_by_id,
+    get_agent_tasks,
+    update_agent_task_state,
+    update_agent_task_trace,
+)
+from handsfree.db.notifications import create_notification
 from handsfree.mcp import (
     get_provider_descriptor,
     infer_provider_capability,
     resolve_capability_execution_mode,
     resolve_provider_capability,
 )
-from handsfree.db.agent_tasks import (
-    create_agent_task,
-    get_agent_task_by_id,
-    get_agent_tasks,
-    update_agent_task_trace,
-    update_agent_task_state,
-)
-from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
 

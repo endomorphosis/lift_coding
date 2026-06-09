@@ -6,7 +6,6 @@ from typing import Any
 
 from handsfree.mcp import resolve_provider_alias
 
-
 PROVIDER_ALIASES = {
     "copilot": "copilot",
 }

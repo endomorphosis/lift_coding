@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -521,7 +522,6 @@ class TestImageInputHTTPSFetching:
 
     def test_fail_fast_content_length_rejection(self, monkeypatch, respx_mock):
         """Test that oversized images are rejected based on Content-Length before download."""
-        import respx
         from httpx import Response
 
         # Set a small size limit for this test
@@ -572,7 +572,6 @@ class TestImageInputHTTPSFetching:
 
     def test_content_length_within_limit_downloads(self, monkeypatch, respx_mock):
         """Test that images with Content-Length within limit proceed to download."""
-        import respx
         from httpx import Response
 
         # Set a reasonable size limit
@@ -625,7 +624,6 @@ class TestImageInputHTTPSFetching:
 
     def test_invalid_content_length_handled_gracefully(self, monkeypatch, respx_mock):
         """Test that invalid Content-Length headers are handled gracefully."""
-        import respx
         from httpx import Response
 
         # Configure allowed host
@@ -676,7 +674,6 @@ class TestImageInputHTTPSFetching:
 
     def test_strict_host_checking_enabled_by_default(self, monkeypatch, respx_mock):
         """Test that strict host checking is enabled by default (deny-all when no allowlist)."""
-        import respx
         from httpx import Response
 
         # Don't set IMAGE_ALLOWED_HOSTS, which should trigger default-deny
@@ -716,7 +713,6 @@ class TestImageInputHTTPSFetching:
 
     def test_strict_host_checking_can_be_disabled(self, monkeypatch, respx_mock):
         """Test that strict host checking can be disabled for backward compatibility."""
-        import respx
         from httpx import Response
 
         # Disable strict host checking

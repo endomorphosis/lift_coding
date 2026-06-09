@@ -9,8 +9,8 @@ import duckdb
 
 from handsfree.agents.results_views import resolve_result_query
 from handsfree.ai import (
-    AIRequestContext,
     AICapabilityRequest,
+    AIRequestContext,
     build_policy_resolution,
     discover_failure_history_cids,
     execute_ai_request,

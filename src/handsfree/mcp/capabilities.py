@@ -5,12 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from .client import MCPConfigurationError
 from .catalog import (
     resolve_capability_execution_mode,
     resolve_provider_capability,
     resolve_provider_name_for_server_family,
 )
+from .client import MCPConfigurationError
 from .models import (
     MCPArtifactRefs,
     MCPExecutionResultEnvelope,

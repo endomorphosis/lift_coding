@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
+from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Mapping
 
 DISPLAY_WIDGET_ENV_DEFAULTS: dict[str, bool] = {
     "HANDSFREE_DISPLAY_WIDGETS_ENABLED": True,

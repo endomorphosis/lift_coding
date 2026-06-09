@@ -7,35 +7,20 @@ import logging
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-    build_repo_script_bootstrap as _build_repo_script_bootstrap,
-    repo_script_path as _repo_script_path,
-)
-from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
-    build_configured_backlog_recorder_bundle,
-)
-from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_namespace_codebase_refill_defaults_factory,
-    build_namespace_objective_refill_defaults_factory,
-    build_configured_supervisor_runtime_exports,
-    build_script_supervisor_bootstrap_runner,
-)
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     CODEBASE_SCAN_SETTINGS,
     CODEBASE_SCAN_SKIP_PREFIXES,
     DISCOVERY_DIR,
+    HALLUCINATE_CONTEXT,
     HALLUCINATE_DATA_PATHS,
+    HALLUCINATE_ENV_PREFIX,
+    HALLUCINATE_INTEROPERABILITY_FOCUS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     OBJECTIVE_REFILL_SETTINGS,
-    HALLUCINATE_INTEROPERABILITY_FOCUS,
-    HALLUCINATE_ENV_PREFIX,
-    HALLUCINATE_CONTEXT,
     TASK_BOARD_PATH_KEY,
     TASK_BOARD_PATH_OPTION,
     ensure_hallucinate_multimodal_bootstrap_paths,
@@ -43,7 +28,24 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     record_objective_goal_findings,
     record_retry_budget_findings,
 )
-
+from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
+    build_configured_backlog_recorder_bundle,
+)
+from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_runtime_exports,
+    build_namespace_codebase_refill_defaults_factory,
+    build_namespace_objective_refill_defaults_factory,
+    build_script_supervisor_bootstrap_runner,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    repo_script_path as _repo_script_path,
+)
 
 _SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root

@@ -34,7 +34,6 @@ sys.modules.setdefault("hvac.exceptions", hvac_exceptions_module)
 from handsfree.api import app, dev_peer_chat_service, get_db
 from handsfree.db.agent_tasks import create_agent_task
 
-
 client = TestClient(app)
 
 

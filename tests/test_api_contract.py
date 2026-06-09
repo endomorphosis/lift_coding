@@ -13,10 +13,11 @@ if "handsfree.secrets" not in sys.modules:
     secrets_module.reset_secret_manager = lambda: None
     sys.modules["handsfree.secrets"] = secrets_module
 
+from test_mcp_ipfs_provider import _FakeMCPClient
+
 from handsfree.agent_providers import IPFSAccelerateMCPAgentProvider
 from handsfree.api import app
 from handsfree.db.agent_tasks import create_agent_task, update_agent_task_state
-from test_mcp_ipfs_provider import _FakeMCPClient
 
 client = TestClient(app)
 

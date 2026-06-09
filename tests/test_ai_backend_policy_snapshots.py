@@ -1,7 +1,7 @@
 """Tests for persisted AI backend-policy snapshots."""
 
-from datetime import UTC, datetime
 import uuid
+from datetime import UTC, datetime
 
 import pytest
 
@@ -199,7 +199,7 @@ def test_store_ai_backend_policy_snapshot_honors_env_pruning(db_conn, monkeypatc
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
 
-    for i in range(3):
+    for _i in range(3):
         write_action_log(
             db_conn,
             user_id=user_id,

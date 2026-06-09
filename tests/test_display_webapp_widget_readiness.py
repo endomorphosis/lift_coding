@@ -4,7 +4,6 @@ from pathlib import Path
 
 from handsfree.display_webapp_compat import evaluate_display_webapp_readiness
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 READINESS_EXAMPLE = (
     REPO_ROOT / "config" / "display_webapp_readiness.meta_glasses_widget.example.json"

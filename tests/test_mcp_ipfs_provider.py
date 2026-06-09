@@ -561,8 +561,8 @@ class TestMCPIPFSProviders:
 
     def test_ipfs_accelerate_direct_agentic_fetch_uses_web_archive_tool(self, monkeypatch):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
-        provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
-        task = SimpleNamespace(
+        IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
+        SimpleNamespace(
             id="task-127",
             instruction="discover and fetch climate regulations from https://example.com",
             target_type=None,

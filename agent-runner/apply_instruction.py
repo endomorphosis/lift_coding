@@ -26,7 +26,6 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-
 _FENCED_BLOCK_RE = re.compile(r"```(?P<lang>[A-Za-z0-9_+-]*)\n(?P<body>.*?)\n```\s*", re.DOTALL)
 
 

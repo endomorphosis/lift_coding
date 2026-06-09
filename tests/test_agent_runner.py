@@ -8,9 +8,6 @@ from unittest import mock
 
 import pytest
 
-from handsfree.db import init_db
-from handsfree.db.agent_tasks import create_agent_task, get_agent_task_by_id
-from handsfree.db.notifications import list_notifications
 from handsfree.agents.runner import (
     auto_start_created_tasks,
     get_task_completion_delay,
@@ -20,6 +17,9 @@ from handsfree.agents.runner import (
     should_simulate_failure,
     simulate_progress_update,
 )
+from handsfree.db import init_db
+from handsfree.db.agent_tasks import create_agent_task, get_agent_task_by_id
+from handsfree.db.notifications import list_notifications
 
 
 @pytest.fixture

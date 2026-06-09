@@ -8,10 +8,9 @@ import logging
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
@@ -54,7 +53,7 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def _iter_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -138,7 +137,7 @@ def _write_retry_budget_discovery(
     failures: list[dict[str, Any]],
     retry_budget: int,
 ) -> Path:
-    date = datetime.now(timezone.utc).date().isoformat()
+    date = datetime.now(UTC).date().isoformat()
     path = (
         discovery_dir
         / f"{date}-{follow_up_task_id.lower()}-{source_task_id.lower()}-retry-budget.md"

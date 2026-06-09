@@ -5,7 +5,6 @@ States are short-lived (10 min TTL) and consumed on first use.
 """
 
 import secrets
-import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 

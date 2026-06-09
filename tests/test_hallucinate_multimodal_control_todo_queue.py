@@ -4,9 +4,8 @@ import importlib.util
 import json
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -510,8 +509,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     )
 
     expected_discovery = (
-        discovery_dir
-        / f"{datetime.now(timezone.utc).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+        discovery_dir / f"{datetime.now(UTC).date().isoformat()}-hao-014-hao-003-retry-budget.md"
     )
     assert findings == [
         {
@@ -643,7 +641,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
 
     expected_discovery = (
         discovery_dir
-        / f"{datetime.now(timezone.utc).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
+        / f"{datetime.now(UTC).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
     )
     assert findings == [
         {
@@ -888,7 +886,7 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
         encoding="utf-8",
     )
     strategy_path.write_text(
-        json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
+        json.dumps({"last_codebase_scan_at": datetime.now(UTC).isoformat()}),
         encoding="utf-8",
     )
     _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "hallucinate_app")
@@ -957,7 +955,7 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
         encoding="utf-8",
     )
     strategy_path.write_text(
-        json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
+        json.dumps({"last_codebase_scan_at": datetime.now(UTC).isoformat()}),
         encoding="utf-8",
     )
     _git(repo, "add", "scan_target.py", TEMP_TASK_BOARD_FILENAME)

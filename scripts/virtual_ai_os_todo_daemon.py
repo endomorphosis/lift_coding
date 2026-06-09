@@ -7,15 +7,20 @@ import logging
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_doc_path as _repo_doc_path,
 )
 

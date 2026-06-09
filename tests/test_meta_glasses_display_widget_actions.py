@@ -18,14 +18,14 @@ if "handsfree.secrets" not in sys.modules:
     secrets_module.reset_secret_manager = lambda: None
     sys.modules["handsfree.secrets"] = secrets_module
 
+from test_mcp_ipfs_provider import _FakeMCPClient  # noqa: E402
+
 from handsfree.agent_providers import (  # noqa: E402
     IPFSAccelerateMCPAgentProvider,
     build_meta_glasses_display_widget_action_items,
 )
 from handsfree.api import app  # noqa: E402
 from handsfree.models import MetaGlassesDisplayWidgetMobileActionPayload  # noqa: E402
-from test_mcp_ipfs_provider import _FakeMCPClient  # noqa: E402
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"

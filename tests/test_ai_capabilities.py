@@ -3,9 +3,9 @@
 import json
 
 from handsfree.ai import (
-    AICapabilityResult,
-    AICapabilityRequest,
     AIBackendFamily,
+    AICapabilityRequest,
+    AICapabilityResult,
     AIExecutionMode,
     AIRequestContext,
     execute_ai_capability,

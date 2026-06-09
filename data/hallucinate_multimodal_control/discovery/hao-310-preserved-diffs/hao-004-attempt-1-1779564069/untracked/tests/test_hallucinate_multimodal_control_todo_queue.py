@@ -3,9 +3,8 @@ from __future__ import annotations
 import importlib.util
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
@@ -136,8 +135,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     )
 
     expected_discovery = (
-        discovery_dir
-        / f"{datetime.now(timezone.utc).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+        discovery_dir / f"{datetime.now(UTC).date().isoformat()}-hao-014-hao-003-retry-budget.md"
     )
     assert findings == [
         {

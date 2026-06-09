@@ -30,8 +30,8 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+from handsfree.agents.runner import is_runner_enabled, run_loop, run_once
 from handsfree.db.connection import get_connection
-from handsfree.agents.runner import run_once, run_loop, is_runner_enabled
 
 # Configure logging
 logging.basicConfig(

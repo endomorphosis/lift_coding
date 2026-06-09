@@ -1,8 +1,9 @@
 """Tests for GitHub rate limit handling and retry logic."""
 
-import pytest
-from unittest.mock import MagicMock, patch
 from datetime import datetime, timedelta
+from unittest.mock import MagicMock, patch
+
+import pytest
 
 from handsfree.github.auth import TokenProvider
 from handsfree.github.provider import LiveGitHubProvider
@@ -158,7 +159,7 @@ class TestTransientErrorRetry:
 
     def test_504_retries(self, provider):
         """Test that 504 errors are retried."""
-        with patch("httpx.Client") as mock_client, patch("time.sleep") as mock_sleep:
+        with patch("httpx.Client") as mock_client, patch("time.sleep"):
             mock_response_504 = MagicMock()
             mock_response_504.status_code = 504
             mock_response_504.headers = {}

@@ -328,7 +328,7 @@ class SmokeTest:
             ("Notifications endpoint", self.check_notifications_endpoint),
         ]
 
-        for name, check_func in checks:
+        for _name, check_func in checks:
             if check_func():
                 self.passed += 1
             else:

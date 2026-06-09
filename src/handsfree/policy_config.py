@@ -126,7 +126,7 @@ def load_policy_config(config_path: str | None = None) -> PolicyConfigFile:
         return PolicyConfigFile(default=_get_default_config(), repos={})
 
     try:
-        with open(config_path, "r") as f:
+        with open(config_path) as f:
             data = yaml.safe_load(f)
 
         if not isinstance(data, dict):

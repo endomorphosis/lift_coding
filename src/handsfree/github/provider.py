@@ -5,7 +5,7 @@ import logging
 import random
 import time
 from abc import ABC, abstractmethod
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -301,8 +301,8 @@ class LiveGitHubProvider(GitHubProviderInterface):
             return "unknown time"
 
         try:
-            reset_time = datetime.fromtimestamp(int(reset_timestamp), tz=timezone.utc)
-            now = datetime.now(timezone.utc)
+            reset_time = datetime.fromtimestamp(int(reset_timestamp), tz=UTC)
+            now = datetime.now(UTC)
             delta = reset_time - now
 
             if delta.total_seconds() <= 0:

@@ -1,7 +1,7 @@
 """Tests for GitHub rate limit handling and retry logic."""
 
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import httpx
 import pytest
@@ -139,7 +139,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 30 seconds
-        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=30)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(seconds=30)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -151,7 +151,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 2 seconds to avoid timing issues
-        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=2)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(seconds=2)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -167,7 +167,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 5 minutes
-        reset_time = int((datetime.now(timezone.utc) + timedelta(minutes=5)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(minutes=5)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -179,7 +179,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 2 hours
-        reset_time = int((datetime.now(timezone.utc) + timedelta(hours=2)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(hours=2)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -191,7 +191,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in the past
-        reset_time = int((datetime.now(timezone.utc) - timedelta(minutes=5)).timestamp())
+        reset_time = int((datetime.now(UTC) - timedelta(minutes=5)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)

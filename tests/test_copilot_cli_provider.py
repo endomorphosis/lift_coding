@@ -3,13 +3,13 @@
 from datetime import UTC, datetime
 from types import SimpleNamespace
 
-from handsfree.ai import AIExecutionMode
 from handsfree.agent_providers import (
     CopilotCLIAgentProvider,
     get_provider,
     is_copilot_cli_available,
     reset_copilot_cli_availability_cache,
 )
+from handsfree.ai import AIExecutionMode
 from handsfree.cli.models import CLIResult
 
 

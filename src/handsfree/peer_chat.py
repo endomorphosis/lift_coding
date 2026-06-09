@@ -16,7 +16,6 @@ from handsfree.db.peer_chat import (
     store_peer_chat_message,
 )
 
-
 logger = logging.getLogger(__name__)
 
 # Peer chat ingest/write and read paths should only fall back to in-memory state

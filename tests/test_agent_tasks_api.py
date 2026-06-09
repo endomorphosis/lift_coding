@@ -1,8 +1,8 @@
 """Tests for agent tasks API endpoints."""
 
-import uuid
 import sys
 import types
+import uuid
 
 import pytest
 from fastapi.testclient import TestClient

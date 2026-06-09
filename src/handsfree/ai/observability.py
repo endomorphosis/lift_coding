@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import os
 from collections import Counter
 from datetime import UTC, datetime, timedelta
-import os
 
 import duckdb
 
@@ -12,19 +12,19 @@ from handsfree.db.action_logs import get_action_logs
 from handsfree.db.ai_backend_policy_snapshots import get_latest_ai_backend_policy_snapshot
 from handsfree.github.auth import _is_live_mode_requested, resolve_github_auth_source
 from handsfree.models import (
-    AICapabilityUsageCount,
-    AILatestSnapshotInfo,
-    AIRemapCount,
     AIBackendPolicyBucketReport,
     AIBackendPolicyConfig,
     AIBackendPolicyHistoryBucket,
     AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
+    AIBackendPolicyWindow,
+    AICapabilityUsageCount,
+    AILatestSnapshotInfo,
+    AIRemapCount,
     AISnapshotHealth,
     AISnapshotPolicyConfig,
     AISnapshotSummary,
     AITopCapabilities,
-    AIBackendPolicyWindow,
 )
 
 from .policy import get_ai_backend_policy

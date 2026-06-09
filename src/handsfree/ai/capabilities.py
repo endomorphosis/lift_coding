@@ -9,22 +9,21 @@ from typing import Any
 
 from handsfree.cli import CLIExecutor, CopilotCLIAdapter, GitHubCLIAdapter
 from handsfree.commands.profiles import Profile, ProfileConfig
+from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_adapter
 from handsfree.ipfs_datasets_routers import (
     get_embeddings_router,
     get_ipfs_router,
     get_llm_router,
 )
-from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_adapter
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
 
 from .models import (
+    AIBackendFamily,
     AICapabilityRequest,
     AICapabilityResult,
     AICapabilitySpec,
-    AIBackendFamily,
     AIExecutionMode,
 )
-
 
 _CAPABILITIES: dict[str, AICapabilitySpec] = {
     "copilot.pr.explain": AICapabilitySpec(

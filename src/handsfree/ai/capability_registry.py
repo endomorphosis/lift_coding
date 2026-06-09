@@ -10,7 +10,6 @@ from .models import (
     CapabilityExecutionMode,
 )
 
-
 _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
     "embedding": AICapabilityRegistryEntry(
         capability_id="embedding",

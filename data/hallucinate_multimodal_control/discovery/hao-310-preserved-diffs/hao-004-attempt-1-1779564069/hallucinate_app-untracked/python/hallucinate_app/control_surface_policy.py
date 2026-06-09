@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import hashlib
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any, Callable
-
+from typing import Any
 
 try:  # pragma: no cover - optional integration surface
     from ipfs_datasets_py.logic.api import compile_nl_to_policy
@@ -29,7 +29,7 @@ STRICT_TEMPLATE_EXAMPLES = (
 
 
 def _stable_policy_id(text: str, profile: str) -> str:
-    digest = hashlib.sha256(f"{profile}\n{text.strip().lower()}".encode("utf-8")).hexdigest()[:16]
+    digest = hashlib.sha256(f"{profile}\n{text.strip().lower()}".encode()).hexdigest()[:16]
     return f"control-surface-policy-{digest}"
 
 

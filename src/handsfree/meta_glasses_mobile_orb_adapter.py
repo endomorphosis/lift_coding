@@ -12,12 +12,12 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-from handsfree.meta_glasses_mobile_orb_artifacts import (
-    build_mobile_orb_control_surface_artifacts,
-)
 from handsfree.meta_glasses_display_widget_contract import (
     DISPLAY_WIDGET_ACTION_CONTRACT,
     DISPLAY_WIDGET_ACTION_DEFINITIONS,
+)
+from handsfree.meta_glasses_mobile_orb_artifacts import (
+    build_mobile_orb_control_surface_artifacts,
 )
 from handsfree.models import (
     MetaGlassesMobileOrbBindServiceRequest,

@@ -15,34 +15,35 @@ from typing import Any
 from fastapi import FastAPI, Header, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from handsfree.audio_fetch import fetch_audio_data
-from handsfree.ai import (
-    build_ai_backend_policy_config,
-    build_ai_backend_policy_history_report,
-    AIRequestContext,
-    AICapabilityRequest,
-    build_ai_backend_policy_report,
-    build_snapshot_health,
-    build_snapshot_summary,
-    build_policy_resolution,
-    build_api_execute_response,
-    discover_failure_history_cids,
-    execute_ai_request,
-    build_latest_snapshot_info,
-    resolve_policy_workflow,
-)
 from handsfree.actions import (
     DirectActionRequest,
     execute_confirmed_action,
     process_direct_action_request,
     process_direct_action_request_detailed,
 )
-from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.agents.results_views import resolve_result_query
-from handsfree.image_fetch import fetch_image_data
+from handsfree.ai import (
+    AICapabilityRequest,
+    AIRequestContext,
+    build_ai_backend_policy_config,
+    build_ai_backend_policy_history_report,
+    build_ai_backend_policy_report,
+    build_api_execute_response,
+    build_latest_snapshot_info,
+    build_policy_resolution,
+    build_snapshot_health,
+    build_snapshot_summary,
+    discover_failure_history_cids,
+    execute_ai_request,
+    resolve_policy_workflow,
+)
+from handsfree.audio_fetch import fetch_audio_data
+from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
+from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
-from handsfree.commands.profiles import Profile as CommandProfile, ProfileConfig
+from handsfree.commands.profiles import Profile as CommandProfile
+from handsfree.commands.profiles import ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
@@ -58,13 +59,12 @@ from handsfree.db.github_connections import (
     get_github_connection,
     get_github_connections_by_user,
 )
+from handsfree.db.notifications import create_notification
 from handsfree.db.oauth_states import (
     generate_oauth_state,
     validate_and_consume_oauth_state,
 )
-from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
-    create_pending_action,
     delete_pending_action,
     get_pending_action,
 )
@@ -72,12 +72,23 @@ from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
+from handsfree.image_fetch import fetch_image_data
 from handsfree.logging_utils import (
     clear_request_id,
     log_error,
     log_info,
     log_warning,
     set_request_id,
+)
+from handsfree.mcp.catalog import get_capability_descriptor, get_provider_descriptor
+from handsfree.meta_glasses_mobile_orb_adapter import (
+    build_mobile_orb_bind_service_response,
+    build_mobile_orb_dispatch_response,
+    build_mobile_orb_event_response,
+    build_mobile_orb_invoke_service_response,
+    build_mobile_orb_register_response,
+    build_mobile_orb_revoke_binding_response,
+    build_mobile_orb_subscribe_response,
 )
 from handsfree.meta_glasses_mobile_orb_artifacts import (
     build_mobile_orb_bind_service_artifacts,
@@ -89,31 +100,22 @@ from handsfree.meta_glasses_mobile_orb_artifacts import (
     build_mobile_orb_subscription_artifacts,
     build_mobile_orb_subscription_record,
 )
-from handsfree.meta_glasses_mobile_orb_adapter import (
-    build_mobile_orb_bind_service_response,
-    build_mobile_orb_dispatch_response,
-    build_mobile_orb_event_response,
-    build_mobile_orb_invoke_service_response,
-    build_mobile_orb_register_response,
-    build_mobile_orb_revoke_binding_response,
-    build_mobile_orb_subscribe_response,
-)
 from handsfree.meta_glasses_mobile_orb_runtime import (
     attach_mobile_orb_runtime_binding,
     invoke_mobile_orb_runtime_binding,
 )
-from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.models import (
-    ActionResult,
     ActionCommandRequest,
-    AIAccelerateGenerateAndStoreExecuteRequest,
-    AIAcceleratedPRSummaryExecuteRequest,
+    ActionResult,
+    AgentTaskControlResponse,
+    AgentTaskMediaAttachRequest,
     AIAcceleratedFailureExplainExecuteRequest,
+    AIAcceleratedPRSummaryExecuteRequest,
+    AIAccelerateGenerateAndStoreExecuteRequest,
     AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
-    AIBackendPolicySnapshotsResponse,
     AIBackendPolicySnapshotResponse,
-    AICapabilityContext,
+    AIBackendPolicySnapshotsResponse,
     AICapabilityExecuteRequest,
     AICapabilityExecuteResponse,
     AICopilotExplainFailureExecuteRequest,
@@ -123,43 +125,41 @@ from handsfree.models import (
     AIFindSimilarFailuresExecuteRequest,
     AIPRRAGSummaryExecuteRequest,
     AIStoredOutputReadExecuteRequest,
-    AgentTaskControlResponse,
     ApiKeyResponse,
     ApiKeysListResponse,
     AudioInput,
-    CommentRequest,
     CommandRequest,
     CommandResponse,
     CommandStatus,
+    CommentRequest,
     ConfirmRequest,
     CreateApiKeyRequest,
     CreateApiKeyResponse,
-    DevPeerChatConversationsResponse,
-    DevPeerChatHistoryResponse,
-    DevPeerChatHandsetHeartbeatRequest,
-    DevPeerChatHandsetSessionResponse,
-    DevPeerChatOutboxAckRequest,
-    DevPeerChatOutboxAckResponse,
-    DevPeerChatOutboxReleaseRequest,
-    DevPeerChatOutboxReleaseResponse,
-    DevPeerChatOutboxPromoteRequest,
-    DevPeerChatOutboxPromoteResponse,
-    DevPeerChatOutboxResponse,
-    DevPeerChatSendRequest,
-    DevPeerChatSendResponse,
-    DevAudioUploadRequest,
-    DevMediaUploadRequest,
-    AgentTaskMediaAttachRequest,
-    DevPeerEnvelopeRequest,
-    DevPeerEnvelopeResponse,
-    DevTransportSessionClearResponse,
-    DevTransportSessionCursor,
-    DevTransportSessionsResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
     DebugInfo,
     DependencyStatus,
+    DevAudioUploadRequest,
+    DevMediaUploadRequest,
+    DevPeerChatConversationsResponse,
+    DevPeerChatHandsetHeartbeatRequest,
+    DevPeerChatHandsetSessionResponse,
+    DevPeerChatHistoryResponse,
+    DevPeerChatOutboxAckRequest,
+    DevPeerChatOutboxAckResponse,
+    DevPeerChatOutboxPromoteRequest,
+    DevPeerChatOutboxPromoteResponse,
+    DevPeerChatOutboxReleaseRequest,
+    DevPeerChatOutboxReleaseResponse,
+    DevPeerChatOutboxResponse,
+    DevPeerChatSendRequest,
+    DevPeerChatSendResponse,
+    DevPeerEnvelopeRequest,
+    DevPeerEnvelopeResponse,
+    DevTransportSessionClearResponse,
+    DevTransportSessionCursor,
+    DevTransportSessionsResponse,
     FollowOnTask,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
@@ -169,6 +169,7 @@ from handsfree.models import (
     InboxItem,
     InboxItemType,
     InboxResponse,
+    MergeRequest,
     MetaGlassesMobileOrbBindServiceRequest,
     MetaGlassesMobileOrbBindServiceResponse,
     MetaGlassesMobileOrbDispatchResponseRequest,
@@ -183,11 +184,10 @@ from handsfree.models import (
     MetaGlassesMobileOrbRevokeBindingResponse,
     MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
     MetaGlassesMobileOrbSubscribeServiceUpdatesResponse,
-    MergeRequest,
-    NotificationSubscriptionResponse,
-    NotificationSubscriptionsListResponse,
     Notification,
     NotificationsListResponse,
+    NotificationSubscriptionResponse,
+    NotificationSubscriptionsListResponse,
     ParsedIntent,
     PrivacyMode,
     Profile,
@@ -200,30 +200,27 @@ from handsfree.models import (
     TTSRequest,
     UICard,
 )
-from handsfree.mcp.catalog import get_capability_descriptor, get_provider_descriptor
 from handsfree.models import (
     PendingAction as PydanticPendingAction,
 )
-from handsfree.policy import PolicyDecision, evaluate_action_policy
+from handsfree.ocr import OCRDisabledError, get_ocr_provider
+from handsfree.peer_chat import PeerChatSessionService
 from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import STTDisabledError, get_stt_provider
-from handsfree.ocr import OCRDisabledError, get_ocr_provider
-from handsfree.peer_chat import PeerChatSessionService
-from handsfree.webhooks import (
-    normalize_github_event,
-    verify_github_signature,
-)
 from handsfree.transport.libp2p_bluetooth import (
     CHAT_PROTOCOL_ID,
     PeerEnvelope,
     PersistedTransportSessionCursor,
-    encode_chat_message_payload,
     decode_chat_message_payload,
-    decode_transport_message,
     decode_transport_envelope,
-    decode_transport_payload,
+    decode_transport_message,
+    encode_chat_message_payload,
     encode_transport_envelope,
+)
+from handsfree.webhooks import (
+    normalize_github_event,
+    verify_github_signature,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -3548,8 +3545,8 @@ async def submit_action_command(
         action_session_id = action_session_id or "action-card-context"
         router.seed_navigation_card(action_session_id, embedded_card)
     elif isinstance(task_id, str) and task_id.strip():
-        from handsfree.db.agent_tasks import get_agent_task_by_id
         from handsfree.commands.router import _build_result_card
+        from handsfree.db.agent_tasks import get_agent_task_by_id
 
         db = get_db()
         task = get_agent_task_by_id(db, task_id.strip())
@@ -3874,7 +3871,7 @@ def _convert_router_response_to_command_response(
                 transcript,
                 "api",
                 user_id,
-                client_context=request.client_context.model_dump(mode="json"),
+                client_context=None,
             )
         if intent_entities.get("state") != "completed":
             task_id = intent_entities.get("task_id", "")
@@ -4652,8 +4649,8 @@ def _handle_agent_delegate(
         device: Device identifier
         user_id: User ID from header or fixture
     """
-    from handsfree.agents.service import AgentService
     from handsfree.agents.delegation import enrich_delegate_trace_for_client_context
+    from handsfree.agents.service import AgentService
 
     # Extract entities from parsed intent
     instruction = parsed_intent.entities.get("instruction", text)
@@ -6567,8 +6564,8 @@ async def list_agent_tasks(
         raise _invalid_parameter("direction must be one of: asc, desc")
 
     db = get_db()
-    from handsfree.db.agent_tasks import get_agent_tasks
     from handsfree.auth import get_auth_mode
+    from handsfree.db.agent_tasks import get_agent_tasks
 
     effective_user_id = user_id
     if get_auth_mode() == "dev" and x_user_id_raw:

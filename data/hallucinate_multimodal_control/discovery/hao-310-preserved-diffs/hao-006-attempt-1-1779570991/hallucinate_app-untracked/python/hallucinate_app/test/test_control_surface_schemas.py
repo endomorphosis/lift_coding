@@ -10,11 +10,9 @@ from pathlib import Path
 from jsonschema import Draft202012Validator, ValidationError
 from referencing import Registry, Resource
 
-
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from hallucinate_app.control_surface_intents import normalize_interaction
-
 
 HALLUCINATE_ROOT = Path(__file__).resolve().parents[3]
 CONTRACT_DIR = HALLUCINATE_ROOT / "swissknife" / "contracts"

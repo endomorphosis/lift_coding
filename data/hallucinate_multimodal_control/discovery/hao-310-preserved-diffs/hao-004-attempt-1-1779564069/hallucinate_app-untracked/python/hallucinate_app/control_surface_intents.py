@@ -18,7 +18,7 @@ class NormalizedIntent:
     confidence: float = 0.0
 
     @classmethod
-    def from_mapping(cls, payload: dict[str, Any] | None) -> "NormalizedIntent":
+    def from_mapping(cls, payload: dict[str, Any] | None) -> NormalizedIntent:
         data = payload or {}
         return cls(
             intent=str(data.get("intent") or ""),

@@ -8,7 +8,7 @@ import logging
 import os
 import re
 
-from google.api_core.exceptions import AlreadyExists, NotFound, GoogleAPIError
+from google.api_core.exceptions import AlreadyExists, GoogleAPIError, NotFound
 from google.cloud import secretmanager
 
 from .interface import SecretManager
