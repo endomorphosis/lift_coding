@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: 3e53d557342d7742c591388a819ce9fd0fda0724
+Fingerprint: 0d4266015d3b8d28f41aa4a9a82001eb28efe497
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 1
+Candidate count: 5
 Priority: P1
 Track: ops
 
@@ -19,6 +19,19 @@ Track: ops
 ## Sample Branches Or Worktrees
 
 - `implementation/hao-203-attempt-1-1780987641` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/hao-206-attempt-1-1780988124` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-206-attempt-1-1780988124`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/hao-209-attempt-1-1780988356` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-209-attempt-1-1780988356`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/hao-217-attempt-1-1780988891` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1780988891`
+  - Conflict paths:
+    - `hallucinate_app`
+- `implementation/hao-222-attempt-1-1780989133` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133`
   - Conflict paths:
     - `hallucinate_app`
 
@@ -39,7 +52,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `5` candidates, `5` sampled records.
 
 ### Suggested Actions
 
@@ -87,12 +100,13 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 5,
   "conflict_path_counts": {
-    "hallucinate_app": 1
+    "hallucinate_app": 5,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "3e53d557342d7742c591388a819ce9fd0fda0724",
+  "fingerprint": "0d4266015d3b8d28f41aa4a9a82001eb28efe497",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -102,14 +116,23 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/hao-203-attempt-1-1780987641"
+    "implementation/hao-203-attempt-1-1780987641",
+    "implementation/hao-206-attempt-1-1780988124",
+    "implementation/hao-209-attempt-1-1780988356",
+    "implementation/hao-217-attempt-1-1780988891",
+    "implementation/hao-222-attempt-1-1780989133"
   ],
-  "sample_count": 1,
+  "sample_count": 5,
   "sample_status_paths": [
-    "hallucinate_app"
+    "hallucinate_app",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-206-attempt-1-1780988124",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-209-attempt-1-1780988356",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1780988891",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -118,7 +141,8 @@ Work surface: `1` candidates, `1` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "hallucinate_app"
+    "hallucinate_app",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ]
 }
 ```
