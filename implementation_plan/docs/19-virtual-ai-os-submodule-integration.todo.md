@@ -3491,7 +3491,7 @@ cadence remains parseable and resumable.
 
 ## VAI-314 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:52
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
