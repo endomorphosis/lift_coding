@@ -122,3 +122,35 @@ Work surface: `1` candidates, `1` sampled records.
   ]
 }
 ```
+
+## Resolution Evidence
+
+Checked on 2026-06-09:
+
+- Sample worktree
+  `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-045-attempt-1-1780988318`
+  is no longer present in `git worktree list --porcelain`.
+- Sample branch `implementation/mgw-045-attempt-1-1780988318` is no longer a
+  valid ref (`git branch --list` returned no match; `git rev-parse`/diff
+  queries fail with an unknown revision).
+- A supervisor reconciliation-only pass for the MGW worktree root reported
+  `worktree_reconciliation_preflight_blocked_count: 0`. The original guardrail
+  candidate count was `1`, so the preflight-blocked candidate count decreased
+  from `1` to `0`.
+- The refreshed pass still found unrelated cleanup blockers:
+  `main_checkout_dirty` candidates and `content_not_in_target` dirty worktree
+  groups. Those are separate guardrail classes and do not include the MGW-045
+  preflight conflict recorded here.
+
+Command used for the refreshed pass:
+
+```bash
+PYTHONPATH=/home/barberb/lift_coding/external/ipfs_accelerate:/home/barberb/lift_coding/external/ipfs_datasets:/home/barberb/lift_coding/external/ipfs_kit \
+  python3 scripts/meta_glasses_display_todo_supervisor.py \
+  --once \
+  --reconciliation-only \
+  --no-worktree-scan-cache \
+  --todo-path /home/barberb/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md \
+  --state-dir /home/barberb/lift_coding/data/meta_glasses_display_widgets/state \
+  --worktree-root /home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees
+```
