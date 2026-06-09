@@ -50,6 +50,9 @@ def _clear_mobile_orb_state(api_module) -> None:
     api_module.mobile_orb_service_bindings.clear()
     api_module.mobile_orb_service_subscriptions.clear()
     api_module.mobile_orb_events.clear()
+    api_module.mobile_orb_invocations.clear()
+    api_module.mobile_orb_dispatches.clear()
+    api_module.mobile_orb_revocations.clear()
 
 
 @pytest.fixture
@@ -576,3 +579,31 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
         dispatched_payload["display_widget_action"]
     )
     assert dispatched_payload["spoken_text"] == task_status["result_preview"]
+
+    diagnostics = client.get(
+        "/v1/mobile/orb/diagnostics",
+        params={"edge_session_id": edge["edge_session_id"]},
+    )
+    assert diagnostics.status_code == 200
+    diagnostics_payload = diagnostics.json()
+    assert diagnostics_payload["backend_counts"] == {
+        "edge_sessions": 1,
+        "events": 1,
+        "bindings": 1,
+        "subscriptions": 0,
+        "invocations": 1,
+        "dispatches": 1,
+        "revocations": 0,
+    }
+    assert orb_binding["descriptor_cid"] in diagnostics_payload["descriptor_cids"]
+    assert binding_payload["policy_decision"]["compiled_policy_cid"] in (
+        diagnostics_payload["policy_cids"]
+    )
+    assert event_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert dispatched_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
+    assert diagnostics_payload["binding_state"]["status"] == "bound"
+    assert diagnostics_payload["diagnostics_contract"]["capability_counts"]["backend"] == (
+        diagnostics_payload["backend_counts"]
+    )
