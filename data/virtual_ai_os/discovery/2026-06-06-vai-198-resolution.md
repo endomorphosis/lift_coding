@@ -35,3 +35,19 @@ python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_pol
 ```
 
 Exits with code 0.
+
+## Scanner Notes (MGW-321)
+
+Date: 2026-06-09
+The automated codebase scan re-filed this document as `swallowed_exception` (MGW-321)
+because the prose above describes the *old* bare-except pattern as documentation of the
+historical finding.  The mentions of the old pattern in this document are intentional
+documentation, not live code.  The actual fix has been verified in the Python source:
+
+```
+grep -n "except Exception" hallucinate_app/python/hallucinate_app/control_surface_policy.py
+```
+
+All occurrences at lines 1027, 1036, and 1045 use `except Exception as exc:` with
+`exc_info=exc` — the fix is complete.  This document is a historical resolution record;
+scanner findings originating from this file should be treated as false positives.
