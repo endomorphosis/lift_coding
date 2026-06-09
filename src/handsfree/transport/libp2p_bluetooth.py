@@ -369,7 +369,8 @@ class RuntimeBluetoothTransportAdapter(InMemoryBluetoothTransportAdapter):
                 if get_id is not None:
                     try:
                         peer_id = str(get_id())
-                    except Exception:
+                    except Exception as exc:  # noqa: BLE001
+                        logger.debug("get_id() failed; keeping default peer_id: %s", exc)
                         peer_id = str(peer_id)
 
         self.host = host
@@ -378,7 +379,8 @@ class RuntimeBluetoothTransportAdapter(InMemoryBluetoothTransportAdapter):
         if get_default_muxer is not None:
             try:
                 muxer = str(get_default_muxer())
-            except Exception:
+            except Exception as exc:  # noqa: BLE001
+                logger.debug("get_default_muxer() failed; muxer left as None: %s", exc)
                 muxer = None
 
         transport_protocols: tuple[str, ...] = ()
@@ -386,7 +388,8 @@ class RuntimeBluetoothTransportAdapter(InMemoryBluetoothTransportAdapter):
         if get_supported_transport_protocols is not None:
             try:
                 transport_protocols = tuple(str(item) for item in get_supported_transport_protocols())
-            except Exception:
+            except Exception as exc:  # noqa: BLE001
+                logger.debug("get_supported_transport_protocols() failed; using empty tuple: %s", exc)
                 transport_protocols = ()
 
         self.local_identity = LocalPeerIdentity(
@@ -639,7 +642,8 @@ class ProtocolRoutingBluetoothTransportAdapter(RuntimeBluetoothTransportAdapter)
                 message_id, payload, is_ack, session_id, runtime_protocol, resume_token = _read_runtime_stream_message(
                     stream.runtime_stream
                 )
-            except Exception:
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Error reading runtime stream %s; closing reader: %s", stream_key, exc)
                 break
 
             if not payload:
