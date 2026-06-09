@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: e23071ee0ff8d4847089a0aba32c851eef09a48d
+Fingerprint: 623df20b20bf3b6dc77f185d45c3f973a8dce4f4
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 6
@@ -10,24 +10,38 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-- ` m hallucinate_app`
+- ` m external/ipfs_accelerate`
+- `M  hallucinate_app`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M scripts/run_vai_mgw_hao_supervisors.py`
+- ` M tests/test_virtual_ai_os_todo_queue.py`
+- `?? data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1`
+- Path categories: `modified=6, other_dirty=1, untracked=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `external/ipfs_accelerate`
   - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `scripts/run_vai_mgw_hao_supervisors.py`
+  - `tests/test_virtual_ai_os_todo_queue.py`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `M	hallucinate_app`
+  - `M	external/ipfs_accelerate`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	scripts/run_vai_mgw_hao_supervisors.py`
+  - `M	tests/test_virtual_ai_os_todo_queue.py`
+- Staged name status:
+  - `M	hallucinate_app`
+- Untracked paths:
+  - `data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md`
 
 ## Sample Branches Or Worktrees
 
@@ -100,29 +114,42 @@ Work surface: `6` candidates, `6` sampled records.
   "candidate_count": 6,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "e23071ee0ff8d4847089a0aba32c851eef09a48d",
+  "fingerprint": "623df20b20bf3b6dc77f185d45c3f973a8dce4f4",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
       "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
       "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_accelerate\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tscripts/run_vai_mgw_hao_supervisors.py\nM\ttests/test_virtual_ai_os_todo_queue.py",
     "path_categories": {
-      "modified": 3,
-      "other_dirty": 1
+      "modified": 6,
+      "other_dirty": 1,
+      "untracked": 1
     },
+    "staged_name_status": "M\thallucinate_app",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "external/ipfs_accelerate",
       "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "scripts/run_vai_mgw_hao_supervisors.py",
+      "tests/test_virtual_ai_os_todo_queue.py",
+      "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      " m hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " m external/ipfs_accelerate",
+      "M  hallucinate_app",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      " M scripts/run_vai_mgw_hao_supervisors.py",
+      " M tests/test_virtual_ai_os_todo_queue.py",
+      "?? data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md"
+    ],
+    "untracked_paths": [
+      "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -141,10 +168,14 @@ Work surface: `6` candidates, `6` sampled records.
   ],
   "sample_count": 6,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "external/ipfs_accelerate",
     "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "scripts/run_vai_mgw_hao_supervisors.py",
+    "tests/test_virtual_ai_os_todo_queue.py",
+    "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-154-attempt-1-1780988946",
