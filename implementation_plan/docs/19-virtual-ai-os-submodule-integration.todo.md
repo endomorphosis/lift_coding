@@ -2255,7 +2255,7 @@ cadence remains parseable and resumable.
 
 ## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
