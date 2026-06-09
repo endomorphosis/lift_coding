@@ -2028,7 +2028,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-183 Resolve implementation retry-budget failure for MGW-182
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2039,7 +2039,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-184 Resolve implementation retry-budget failure for MGW-183
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2050,7 +2050,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-185 Resolve implementation retry-budget failure for MGW-184
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
