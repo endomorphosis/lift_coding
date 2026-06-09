@@ -22,3 +22,27 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair
+
+Root cause: `ipfs_model_manager.py` imported `ModelFilter` from
+`huggingface_hub`, but the installed `huggingface_hub` 0.36.2 package no longer
+exports that symbol. Because `ModelFilter` was imported in the same statement as
+`HfApi` and `snapshot_download`, the module caught the import failure and set
+`has_huggingface_hub = False`, disabling Hugging Face support even though the
+package was installed.
+
+Fix: remove the unused stale `ModelFilter` import so current
+`huggingface_hub` releases can initialize the model manager's Hugging Face API.
+
+Validation:
+
+```bash
+python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+PYTHONPATH=hallucinate_app/hallucinate_app/python python3 - <<'PY'
+import hallucinate_app.ipfs_model_manager as m
+assert m.has_huggingface_hub is True
+assert m.ipfs_model_manager.hf_api is not None
+PY
+test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-156-vai-155-implementation-retry-budget.md
+```
