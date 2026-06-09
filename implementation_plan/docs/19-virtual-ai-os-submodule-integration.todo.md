@@ -3359,7 +3359,7 @@ cadence remains parseable and resumable.
 
 ## VAI-302 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/enhanced_filecoin.py:204
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
