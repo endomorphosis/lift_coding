@@ -13,9 +13,13 @@ Track: runtime
 except Exception:
 ```
 
-## Suggested Handling
+## Fix Applied
 
-Review the finding in context, decide whether it represents a bug, missing test,
-maintenance risk, or false positive, and land a small fix with validation. If the
-finding is a false positive, document why in the changed code or discovery notes
-so the supervisor does not keep re-adding the same work.
+The bare `except Exception: pass` was replaced with
+`except Exception as cleanup_err: logger.warning(...)` so temporary-file
+cleanup failures are surfaced via the module logger rather than silently
+swallowed.  The same fix was applied to the synchronous counterpart
+(`ipfs_to_lassie`).  Pre-existing syntax errors throughout the file were also
+repaired to allow `py_compile` to pass.
+
+Status: **RESOLVED** — validated with `python3 -m py_compile` (exit 0).
