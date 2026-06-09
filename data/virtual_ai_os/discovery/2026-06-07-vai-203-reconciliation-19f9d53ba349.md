@@ -274,3 +274,37 @@ Work surface: `46` candidates, `20` sampled records.
   ]
 }
 ```
+
+## VAI-203 Supervisor Confirmation
+
+Reran the VAI supervisor cleanup/reconciliation pass from the shared checkout
+with a fresh worktree scan and zero allowed merges so the pass classified the
+current backlog without mutating branch contents:
+
+```bash
+python3 scripts/virtual_ai_os_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
+```
+
+Latest `supervisor_check` event for active task `VAI-203`:
+
+```json
+{
+  "timestamp": "2026-06-09T07:30:50.002837+00:00",
+  "active_task_id": "VAI-203",
+  "worktree_reconciliation_candidate_count": 4,
+  "worktree_reconciliation_processed_count": 0,
+  "worktree_reconciliation_reconciled_count": 0,
+  "worktree_reconciliation_preflight_blocked_count": 0,
+  "worktree_cleanup_removed_count": 0,
+  "worktree_cleanup_dirty_group_count": 1,
+  "reconciliation_guardrail_count": 1
+}
+```
+
+The original guardrail candidate count for `preflight_merge_conflict` was `46`.
+The refreshed supervisor pass reported `worktree_reconciliation_preflight_blocked_count`
+as `0`, so the preflight-conflicting blocked candidate count decreased from
+`46` to `0`. The remaining reconciliation guardrail is for `main_checkout_dirty`
+with `4` candidates, which is a separate blocker class and was left untouched
+because the shared checkout also contains unrelated dirty discovery/todo and
+submodule state.
