@@ -10,26 +10,28 @@ The scanner flagged a `except Exception as e:` block in `_extract_table_name` at
 the original line 1250 (now shifted to line 1258 after a TRUNCATE-handling branch
 was added in a subsequent commit).
 
-Examining the current state revealed two exception handlers in the function:
+Examining the path revealed two exception handlers in the function:
 
 1. `except re.error as e:` (line 1255) — silently returns `None` after logging a
    bare warning with no context about *which* SQL triggered the failure.
 2. `except Exception as e:` (line 1258) — logs the error and **re-raises**, so the
-   exception is not swallowed.
+   exception is not swallowed, but the broad catch still produces scanner noise
+   and adds no control-flow value.
 
-The `except Exception` path was already correct. The real maintenance risk was the
-`except re.error` branch: its warning message carried no contextual information
-(no `sql_type`, no SQL snippet), making it hard for operators to diagnose unusual
-inputs that trigger regex failures.  Because `_extract_table_name` is called on the
-hot path of SQL authorization, a silent failure silently degrades the capability
-check from per-table (`capability:table_name`) to wildcard (`capability:*`).  That
-broader check is still enforced, but the degradation was invisible in logs.
+The broad `except Exception` path was redundant because it only logged and
+re-raised. Unexpected failures now propagate naturally to the caller. The specific
+`except re.error` branch remains because `_extract_table_name` is called on the hot
+path of SQL authorization: returning `None` intentionally falls back from a
+per-table check (`capability:table_name`) to the wildcard capability check
+(`capability:*`), which is still enforced.
 
 ## Fix
 
-Improved the `except re.error` warning to include `sql_type` and a truncated
-`sql_snippet` (up to 120 chars) so operators can identify the unexpected SQL.
-Also tidied the `except Exception` log call to include `sql_type` consistently.
+Removed the redundant broad `except Exception as e:` handler so the scanned
+swallowed-exception path no longer exists. Kept the specific `re.error` fallback
+and improved its warning to include `sql_type` and a truncated `sql_snippet` (up
+to 120 chars) so operators can identify unexpected SQL that triggers regex
+failures.
 
 ```python
 # before
@@ -55,19 +57,11 @@ except re.error as e:
         e,
     )
     return None
-except Exception as e:
-    logger.error(
-        "Unexpected error extracting table name (sql_type=%r): %s",
-        sql_type,
-        e,
-        exc_info=True,
-    )
-    raise
 ```
 
 The graceful-degradation design (`re.error` → return None) is intentional and
 preserved; a bad regex in a SQL-parsing helper must not abort an otherwise valid
-SQL execution.
+SQL execution. Other unexpected exceptions are no longer caught in this helper.
 
 ## Validation
 
