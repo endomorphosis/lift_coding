@@ -3455,7 +3455,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-312 Review swallowed exception path in data/virtual_ai_os/discovery/2026-06-06-vai-197-resolution.md:9
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: docs
