@@ -1734,7 +1734,7 @@ cadence remains parseable and resumable.
 
 ## VAI-155 Resolve implementation retry-budget failure for VAI-154
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
