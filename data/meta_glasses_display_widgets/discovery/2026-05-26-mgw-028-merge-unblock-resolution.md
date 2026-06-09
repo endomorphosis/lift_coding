@@ -50,6 +50,22 @@ conflict, so no live conflict remains for
 so the source backlog item is no longer pinned behind the retry-budget
 guardrail.
 
+## 2026-06-09 Revalidation
+
+Revalidated MGW-028 from worktree
+`implementation/mgw-028-attempt-1-1780989816` at
+`08622c062cdca97f1b53df3f09a6517f304aed98`. The MGW-023 implementation,
+generated-state preservation, generated-backlog reconciliation, and merge
+commits are all ancestors of the current attempt head. The source branch diff
+against `0662906e095a034a378e01f9e64e37574e1cf513` remains empty, and the
+expected HAO-051 resolution artifact is present.
+
+The shared strategy file at
+`/home/barberb/lift_coding/data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json`
+has an empty `blocked_tasks` list, so `MGW-023` is not blocked. No semantic
+merge conflict is present to pass to
+`ipfs-accelerate-agent-merge-resolver --events-path ... --apply`.
+
 ## Validation
 
 ```bash
