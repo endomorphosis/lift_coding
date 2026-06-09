@@ -271,7 +271,7 @@ cadence remains parseable and resumable.
 
 ## VAI-022 Package the browser Web App for HTTPS glasses loading
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
