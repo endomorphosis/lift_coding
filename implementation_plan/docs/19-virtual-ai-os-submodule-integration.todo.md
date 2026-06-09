@@ -2268,7 +2268,7 @@ cadence remains parseable and resumable.
 
 ## VAI-203 Resolve 46 preflight-conflicting backlogged worktree merges
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
