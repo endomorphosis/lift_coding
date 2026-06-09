@@ -30,8 +30,9 @@ resolved to `645f0a5e172e3e22034257ffc9eac52df825d368`, but the configured
 `https://github.com/endomorphosis/hallucinate_app.git` remote did not advertise
 that object, so the expected `ipfs_model_manager.py` path could not be reliably
 materialized. This repair reinitialized `hallucinate_app` from the fetchable
-upstream `main` commit `2062957f2bc319d3e879fa127f68e1d4bb88b4ae` and reapplied
-the MGW-181 exception-path cleanup there.
+upstream `main` commit `2062957f2bc319d3e879fa127f68e1d4bb88b4ae` and committed
+the MGW-181 exception-path cleanup in the submodule at
+`7864709954174b93b4548e194748f500124c1a09`.
 
 The `import_model_from_ipfs` broad catch remains a call-boundary guard for a
 recoverable import failure. It now logs the traceback with `logger.exception`
