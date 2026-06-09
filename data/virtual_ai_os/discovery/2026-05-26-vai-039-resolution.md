@@ -24,3 +24,7 @@ callable was missing or declined the operation.
 python3 -m py_compile src/handsfree/ipfs_kit_adapters.py
 PYTHONPATH=src pytest tests/test_ipfs_kit_adapters.py -q
 ```
+
+Attempt 1 confirmed the live adapter now probes backend/client CID, DAG, and
+name resolver surfaces, including `ipfs_object_stat`, before falling back to
+`IPFSSimpleAPI.resolve` or reporting `IPFSKitUnavailableError`.
