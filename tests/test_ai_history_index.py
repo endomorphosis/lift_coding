@@ -213,7 +213,9 @@ def test_prune_ai_history_records_to_limit_keeps_newest_records() -> None:
     older_time = datetime.now(UTC) - timedelta(days=2)
     db.execute("UPDATE ai_history_index SET created_at = ? WHERE id = ?", [older_time, first.id])
     db.execute("UPDATE ai_history_index SET created_at = ? WHERE id = ?", [old_time, second.id])
-    db.execute("UPDATE ai_history_index SET created_at = ? WHERE id = ?", [datetime.now(UTC), third.id])
+    db.execute(
+        "UPDATE ai_history_index SET created_at = ? WHERE id = ?", [datetime.now(UTC), third.id]
+    )
 
     deleted = prune_ai_history_records_to_limit(
         db,

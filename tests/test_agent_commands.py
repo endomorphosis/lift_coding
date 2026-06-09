@@ -121,7 +121,9 @@ class TestAgentDelegate:
             "handsfree.agents.service.get_provider",
             lambda provider_name: fake_provider if provider_name == "ipfs_kit_mcp" else None,
         )
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
         intent = parser.parse("pin bafytestcid on ipfs locally")
 
         response = router.route(intent, Profile.DEFAULT, user_id=test_user_id)
@@ -257,7 +259,10 @@ class TestAgentStatus:
 
         assert response["status"] == "ok"
         assert response["cards"][0]["lines"][1] == "message: Expanded legal query"
-        assert "expanded_queries: legal datasets, legal datasets statutes" in response["cards"][0]["lines"]
+        assert (
+            "expanded_queries: legal datasets, legal datasets statutes"
+            in response["cards"][0]["lines"]
+        )
 
     def test_results_saved_view_returns_cards(self, router, parser, db_conn, test_user_id):
         """Saved result views should surface completed MCP results."""
@@ -289,14 +294,22 @@ class TestAgentStatus:
         assert "1 datasets result" in response["spoken_text"].lower()
         assert response["intent"]["entities"]["view"] == "datasets"
         assert response["cards"][0]["title"] == "IPFS Datasets dataset discovery"
-        assert "expanded_queries: legal datasets, legal datasets statutes" in response["cards"][0]["lines"]
+        assert (
+            "expanded_queries: legal datasets, legal datasets statutes"
+            in response["cards"][0]["lines"]
+        )
         assert response["cards"][0]["deep_link"] == f"/v1/agents/tasks/{task.id}"
         assert "show task details for that result" in response["cards"][0]["actions"]
-        assert "rerun that dataset search with labor law datasets remotely" in response["cards"][0]["actions"]
+        assert (
+            "rerun that dataset search with labor law datasets remotely"
+            in response["cards"][0]["actions"]
+        )
         assert response["cards"][0]["action_items"][0]["id"] == "open_result"
         assert response["cards"][0]["action_items"][-1]["id"] == "rerun_dataset_search"
 
-    def test_results_saved_view_supports_result_envelope(self, router, parser, db_conn, test_user_id):
+    def test_results_saved_view_supports_result_envelope(
+        self, router, parser, db_conn, test_user_id
+    ):
         """Saved result views should render envelope-backed results."""
         task = create_agent_task(
             conn=db_conn,
@@ -310,7 +323,9 @@ class TestAgentStatus:
                     "summary": "Pinned bafy123.",
                     "structured_output": {"message": "Pinned bafy123.", "cid": "bafy123"},
                     "artifact_refs": {"result_cid": "bafy123"},
-                    "follow_up_actions": [{"id": "read_cid", "label": "Read CID", "phrase": "read the cid"}],
+                    "follow_up_actions": [
+                        {"id": "read_cid", "label": "Read CID", "phrase": "read the cid"}
+                    ],
                 },
             },
         )
@@ -420,9 +435,7 @@ class TestAgentStatus:
         assert len(next_response["cards"]) == 1
         assert next_response["cards"][0]["lines"][0] == "message: First legal result"
 
-    def test_open_current_result_uses_selected_card(
-        self, router, parser, db_conn, test_user_id
-    ):
+    def test_open_current_result_uses_selected_card(self, router, parser, db_conn, test_user_id):
         """Open-result follow-up should return the current result card."""
         task = create_agent_task(
             conn=db_conn,
@@ -456,9 +469,7 @@ class TestAgentStatus:
         assert response["cards"][0]["deep_link"] == f"/v1/agents/tasks/{task.id}"
         assert response["debug"]["tool_calls"][0]["deep_link"] == f"/v1/agents/tasks/{task.id}"
 
-    def test_show_task_details_for_current_result(
-        self, router, parser, db_conn, test_user_id
-    ):
+    def test_show_task_details_for_current_result(self, router, parser, db_conn, test_user_id):
         """Result-detail follow-up should load the selected task from the DB."""
         task = create_agent_task(
             conn=db_conn,
@@ -501,16 +512,18 @@ class TestAgentStatus:
         assert "Capability: dataset discovery" in response["cards"][0]["lines"]
         assert "message: Expanded legal query" in response["cards"][0]["lines"]
 
-    def test_show_available_actions_for_current_result(
-        self, router, parser, db_conn, test_user_id
-    ):
+    def test_show_available_actions_for_current_result(self, router, parser, db_conn, test_user_id):
         """Result-action help should reflect the current result's available follow-ups."""
         task = create_agent_task(
             conn=db_conn,
             user_id=test_user_id,
             provider="ipfs_kit_mcp",
             instruction="add this file to ipfs",
-            trace={"mcp_capability": "ipfs_add", "provider_label": "IPFS Kit", "mcp_cid": "bafy123"},
+            trace={
+                "mcp_capability": "ipfs_add",
+                "provider_label": "IPFS Kit",
+                "mcp_cid": "bafy123",
+            },
         )
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(
@@ -799,7 +812,10 @@ class TestAgentStatus:
         rerun_task = get_agent_task_by_id(db_conn, rerun_task_id)
         assert rerun_task is not None
         assert rerun_task.provider == "ipfs_accelerate_mcp"
-        assert rerun_task.instruction == "discover and fetch climate regulations from https://example.org"
+        assert (
+            rerun_task.instruction
+            == "discover and fetch climate regulations from https://example.org"
+        )
         assert rerun_task.trace is not None
         assert rerun_task.trace["mcp_capability"] == "agentic_fetch"
         assert rerun_task.trace["mcp_input"] == "climate regulations"
@@ -815,7 +831,11 @@ class TestAgentStatus:
             user_id=test_user_id,
             provider="ipfs_kit_mcp",
             instruction="add this file to ipfs",
-            trace={"mcp_capability": "ipfs_add", "provider_label": "IPFS Kit", "mcp_cid": "bafy123"},
+            trace={
+                "mcp_capability": "ipfs_add",
+                "provider_label": "IPFS Kit",
+                "mcp_cid": "bafy123",
+            },
         )
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(
@@ -954,7 +974,9 @@ class TestAgentStatus:
             "handsfree.agents.service.get_provider",
             lambda provider_name: fake_provider if provider_name == "ipfs_kit_mcp" else None,
         )
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
 
         task = create_agent_task(
             conn=db_conn,
@@ -1014,7 +1036,9 @@ class TestAgentStatus:
                 "mcp_result_envelope": {
                     "summary": "Expanded legal query",
                     "structured_output": {"message": "Expanded legal query"},
-                    "follow_up_actions": [{"id": "open_result", "label": "Open Result", "phrase": "open that result"}],
+                    "follow_up_actions": [
+                        {"id": "open_result", "label": "Open Result", "phrase": "open that result"}
+                    ],
                 },
             },
         )
@@ -1149,7 +1173,11 @@ class TestAgentStatus:
             user_id=test_user_id,
             provider="ipfs_kit_mcp",
             instruction="add this file to ipfs",
-            trace={"mcp_capability": "ipfs_add", "provider_label": "IPFS Kit", "mcp_cid": "bafy123"},
+            trace={
+                "mcp_capability": "ipfs_add",
+                "provider_label": "IPFS Kit",
+                "mcp_cid": "bafy123",
+            },
         )
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(
@@ -1191,7 +1219,11 @@ class TestAgentStatus:
             user_id=test_user_id,
             provider="ipfs_kit_mcp",
             instruction="add this file to ipfs",
-            trace={"mcp_capability": "ipfs_add", "provider_label": "IPFS Kit", "mcp_cid": "bafy123"},
+            trace={
+                "mcp_capability": "ipfs_add",
+                "provider_label": "IPFS Kit",
+                "mcp_cid": "bafy123",
+            },
         )
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(
@@ -1247,14 +1279,20 @@ class TestAgentStatus:
             "handsfree.agents.service.get_provider",
             lambda provider_name: fake_provider if provider_name == "ipfs_kit_mcp" else None,
         )
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
 
         task = create_agent_task(
             conn=db_conn,
             user_id=test_user_id,
             provider="ipfs_kit_mcp",
             instruction="add this file to ipfs",
-            trace={"mcp_capability": "ipfs_add", "provider_label": "IPFS Kit", "mcp_cid": "bafy123"},
+            trace={
+                "mcp_capability": "ipfs_add",
+                "provider_label": "IPFS Kit",
+                "mcp_cid": "bafy123",
+            },
         )
         update_agent_task_state(conn=db_conn, task_id=task.id, new_state="running")
         update_agent_task_state(
@@ -1639,7 +1677,9 @@ class TestAgentConfirmationFlow:
         assert "unpin that remotely" in actions
 
         action_items = response["cards"][0]["action_items"]
-        local_save = next(item for item in action_items if item["id"] == "save_result_to_ipfs_local")
+        local_save = next(
+            item for item in action_items if item["id"] == "save_result_to_ipfs_local"
+        )
         assert local_save["execution_mode"] == "direct_import"
         assert local_save["execution_mode_label"] == "Local"
         assert local_save["params"]["mcp_preferred_execution_mode"] == "direct_import"

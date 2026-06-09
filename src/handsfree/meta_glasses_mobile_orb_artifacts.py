@@ -487,13 +487,7 @@ def _normalize_method_signatures(value: Any) -> list[dict[str, Any]]:
         method_name = _first_nonempty_string(item.get("name"))
         if not method_name:
             continue
-        normalized.append(
-            {
-                key: item[key]
-                for key in sorted(item.keys())
-                if item[key] is not None
-            }
-        )
+        normalized.append({key: item[key] for key in sorted(item.keys()) if item[key] is not None})
     return normalized
 
 
@@ -507,13 +501,7 @@ def _normalize_error_definitions(value: Any) -> list[dict[str, Any]]:
         error_name = _first_nonempty_string(item.get("name"))
         if not error_name:
             continue
-        normalized.append(
-            {
-                key: item[key]
-                for key in sorted(item.keys())
-                if item[key] is not None
-            }
-        )
+        normalized.append({key: item[key] for key in sorted(item.keys()) if item[key] is not None})
     return normalized
 
 
@@ -533,11 +521,7 @@ def _normalize_descriptor_metadata(value: Any) -> dict[str, str]:
             value.get("operation_tool_name"),
         ),
     }
-    return {
-        key: item
-        for key, item in normalized.items()
-        if isinstance(item, str) and item.strip()
-    }
+    return {key: item for key, item in normalized.items() if isinstance(item, str) and item.strip()}
 
 
 def _normalize_interface_descriptor(

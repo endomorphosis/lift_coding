@@ -43,7 +43,7 @@ def generate_oauth_state(
     """
     # Generate a cryptographically secure random token
     state = secrets.token_urlsafe(32)
-    
+
     now = datetime.now(UTC)
     expires_at = now + timedelta(minutes=ttl_minutes)
 
@@ -149,7 +149,7 @@ def cleanup_expired_oauth_states(
         """,
         [cutoff, datetime.now(UTC)],
     )
-    
+
     # DuckDB doesn't return row count from DELETE in fetchone()
     # Return 0 as we can't easily get the count
     # This is acceptable as cleanup is a best-effort operation

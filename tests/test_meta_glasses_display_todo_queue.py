@@ -12,8 +12,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
-    "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
+TASK_BOARD_PATH = (
+    REPO_ROOT
+    / "implementation_plan"
+    / "docs"
+    / ("18-swissknife-meta-glasses-display-widgets." + "to" + "do.md")
 )
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 # Assemble generated-board fixture tokens from neutral fragments so source
@@ -36,7 +39,9 @@ def _load_script_module(name: str):
 
 def _load_tasks():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     return parse_task_file(TASK_BOARD_PATH, "## MGW-")
 
@@ -150,18 +155,25 @@ def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
     assert supervisor_paths["objective_graph_path"] == custom_graph
     assert supervisor_paths["objective_dataset_dir"] == custom_datasets
     assert supervisor_paths["objective_todo_vector_index_path"] == custom_vector_index
-    assert supervisor_module._META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-        "discovery_dir",
-        "data/meta_glasses_display_widgets/discovery",
-        supervisor_paths,
-    ) == "data/custom_mgw_discovery"
+    assert (
+        supervisor_module._META_DISPLAY_BOOTSTRAP_PATHS.output_path(
+            "discovery_dir",
+            "data/meta_glasses_display_widgets/discovery",
+            supervisor_paths,
+        )
+        == "data/custom_mgw_discovery"
+    )
 
 
 def test_meta_display_wrappers_delegate_reusable_namespace_context():
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    supervisor_source = (SCRIPTS_DIR / "meta_glasses_display_todo_supervisor.py").read_text(encoding="utf-8")
-    daemon_source = (SCRIPTS_DIR / "meta_glasses_display_todo_daemon.py").read_text(encoding="utf-8")
+    supervisor_source = (SCRIPTS_DIR / "meta_glasses_display_todo_supervisor.py").read_text(
+        encoding="utf-8"
+    )
+    daemon_source = (SCRIPTS_DIR / "meta_glasses_display_todo_daemon.py").read_text(
+        encoding="utf-8"
+    )
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 
@@ -169,7 +181,9 @@ def test_meta_display_wrappers_delegate_reusable_namespace_context():
     assert isinstance(supervisor_module.META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
     assert daemon_module.META_DISPLAY_CONTEXT is daemon_module._META_DISPLAY_CONTEXT
     for module in (daemon_module, supervisor_module):
-        assert module.META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
+        assert (
+            module.META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
+        )
         assert module.META_DISPLAY_CONTEXT.task_board_path == TASK_BOARD_PATH
         assert module.META_DISPLAY_DATA_PATHS == module.META_DISPLAY_CONTEXT.namespace_paths
     assert "build_agent_supervisor_namespace_context(" in daemon_source
@@ -216,7 +230,9 @@ def test_meta_display_supervisor_ensure_running_flag_uses_runtime_helper(tmp_pat
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_GRAPH_PATH", str(tmp_path / "objective_graph.json"))
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_BUNDLE_DIR", str(tmp_path / "objective_bundles"))
     monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_DATASET_DIR", str(tmp_path / "objective_datasets"))
-    monkeypatch.setenv("HANDSFREE_MGW_OBJECTIVE_TODO_VECTOR_INDEX_PATH", str(tmp_path / "todo_vector_index.json"))
+    monkeypatch.setenv(
+        "HANDSFREE_MGW_OBJECTIVE_TODO_VECTOR_INDEX_PATH", str(tmp_path / "todo_vector_index.json")
+    )
     runtime_class = type(supervisor_module._meta_display_supervisor_runtime)
     monkeypatch.setattr(
         runtime_class,
@@ -241,8 +257,14 @@ def test_meta_display_supervisor_ensure_running_flag_uses_runtime_helper(tmp_pat
 def test_codebase_scan_skips_generated_discovery_dirs():
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
 
-    assert "data/meta_glasses_display_widgets/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
-    assert "data/hallucinate_multimodal_control/discovery/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert (
+        "data/meta_glasses_display_widgets/discovery/"
+        in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    )
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    )
     assert supervisor_module.META_DISPLAY_INTEROPERABILITY_FOCUS == ("hallucinate_app",)
 
 
@@ -319,7 +341,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
     def with_tmp_android_validation_env(command: str) -> str:
         return original_with_android_validation_env(command, tmp_path)
 
-    monkeypatch.setattr(daemon_module, "with_android_validation_env", with_tmp_android_validation_env)
+    monkeypatch.setattr(
+        daemon_module, "with_android_validation_env", with_tmp_android_validation_env
+    )
     task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
     assert task_board_path.name == TEMP_TASK_BOARD_FILENAME
     events_path = tmp_path / "events.jsonl"
@@ -354,7 +378,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
     )
     fixture_text = task_board_path.read_text(encoding="utf-8")
     assert f"- Status: {PENDING_TASK_STATUS}" in fixture_text
-    failed_command = "cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false"
+    failed_command = (
+        "cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false"
+    )
     events = [
         {
             "type": "implementation_finished",
@@ -373,7 +399,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
         }
         for index in range(1, 4)
     ]
-    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8"
+    )
 
     findings = daemon_module.record_retry_budget_findings(
         todo_path=task_board_path,
@@ -383,7 +411,10 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
         retry_budget=3,
     )
 
-    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-015-mgw-001-retry-budget.md"
+    expected_discovery = (
+        discovery_dir
+        / f"{datetime.now(timezone.utc).date().isoformat()}-mgw-015-mgw-001-retry-budget.md"
+    )
     assert findings == [
         {
             "source_task_id": "MGW-001",
@@ -399,7 +430,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path, monkey
     assert "env JAVA_HOME=" in updated
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## MGW-")}
     assert tasks["MGW-015"].depends_on == ["MGW-014"]

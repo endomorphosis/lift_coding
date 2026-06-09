@@ -392,7 +392,9 @@ class MetaGlassesMobileOrbInvokeServiceResponse(MetaGlassesMobileOrbControlSurfa
     spoken_text: str | None = None
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(
+    MetaGlassesMobileOrbControlSurfaceArtifacts
+):
     """Subscribe to updates from a bound service."""
 
     binding_handle: str = Field(..., min_length=1)
@@ -402,7 +404,9 @@ class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(MetaGlassesMobileOrbCon
     correlation_id: str = Field(..., min_length=1)
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(
+    MetaGlassesMobileOrbControlSurfaceArtifacts
+):
     """Stream subscription registration result."""
 
     subscription_id: str
@@ -416,7 +420,9 @@ class MetaGlassesMobileOrbDispatchResponseRequest(MetaGlassesMobileOrbControlSur
 
     edge_session_id: str = Field(..., min_length=1)
     result: dict[str, Any] = Field(default_factory=dict)
-    render_targets: list[Literal["display_widget", "display_webapp", "audio", "mobile_card", "notification"]]
+    render_targets: list[
+        Literal["display_widget", "display_webapp", "audio", "mobile_card", "notification"]
+    ]
     fallback: dict[str, Any] | None = None
     correlation_id: str = Field(..., min_length=1)
     parent_receipt_cids: list[str] = Field(default_factory=list)
@@ -566,8 +572,7 @@ class CommandResponse(BaseModel):
                         }
                     ],
                 },
-            }
-            ,
+            },
             "examples": [
                 {
                     "status": "ok",
@@ -1066,22 +1071,28 @@ class AICapabilityExecuteRequest(BaseModel):
         resolved_capability_id = self.resolve_capability_id()
         context = self.normalized_context()
 
-        if resolved_capability_id in {
-            "copilot.pr.explain",
-            "copilot.pr.diff_summary",
-            "copilot.pr.failure_explain",
-            "github.pr.rag_summary",
-            "github.pr.accelerated_summary",
-            "github.check.failure_rag_explain",
-            "github.check.accelerated_failure_explain",
-            "github.check.find_similar_failures",
-        } and context.pr_number is None:
+        if (
+            resolved_capability_id
+            in {
+                "copilot.pr.explain",
+                "copilot.pr.diff_summary",
+                "copilot.pr.failure_explain",
+                "github.pr.rag_summary",
+                "github.pr.accelerated_summary",
+                "github.check.failure_rag_explain",
+                "github.check.accelerated_failure_explain",
+                "github.check.find_similar_failures",
+            }
+            and context.pr_number is None
+        ):
             raise ValueError(f"{resolved_capability_id} requires context.pr_number")
 
         if resolved_capability_id == "ipfs.accelerate.generate_and_store":
             prompt = self.inputs.get("prompt") or self.options.get("prompt")
             if not prompt:
-                raise ValueError("ipfs.accelerate.generate_and_store requires inputs.prompt or options.prompt")
+                raise ValueError(
+                    "ipfs.accelerate.generate_and_store requires inputs.prompt or options.prompt"
+                )
 
         if resolved_capability_id == "ipfs.content.read_ai_output":
             cid = self.inputs.get("cid") or self.options.get("cid")
@@ -2221,7 +2232,7 @@ class Notification(BaseModel):
                             "id": "read_cid",
                             "label": "Read Receipt",
                             "phrase": "read the wearables receipt",
-                        }
+                        },
                     ],
                 },
             }
@@ -2286,7 +2297,7 @@ class NotificationsListResponse(BaseModel):
                                     "id": "read_cid",
                                     "label": "Read Receipt",
                                     "phrase": "read the wearables receipt",
-                                }
+                                },
                             ],
                         },
                     }

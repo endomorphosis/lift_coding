@@ -145,24 +145,16 @@ def load_policy_config(config_path: str | None = None) -> PolicyConfigFile:
                 if not isinstance(repo_name, str):
                     raise ValueError(f"Repository name must be a string: {repo_name}")
                 if not isinstance(repo_data, dict):
-                    raise ValueError(
-                        f"Repository config must be a dictionary: {repo_name}"
-                    )
+                    raise ValueError(f"Repository config must be a dictionary: {repo_name}")
 
                 # Merge repo-specific config with defaults
                 merged_data = {
-                    "allow_merge": repo_data.get(
-                        "allow_merge", default_config.allow_merge
-                    ),
-                    "allow_rerun": repo_data.get(
-                        "allow_rerun", default_config.allow_rerun
-                    ),
+                    "allow_merge": repo_data.get("allow_merge", default_config.allow_merge),
+                    "allow_rerun": repo_data.get("allow_rerun", default_config.allow_rerun),
                     "allow_request_review": repo_data.get(
                         "allow_request_review", default_config.allow_request_review
                     ),
-                    "allow_comment": repo_data.get(
-                        "allow_comment", default_config.allow_comment
-                    ),
+                    "allow_comment": repo_data.get("allow_comment", default_config.allow_comment),
                     "require_confirmation": repo_data.get(
                         "require_confirmation", default_config.require_confirmation
                     ),

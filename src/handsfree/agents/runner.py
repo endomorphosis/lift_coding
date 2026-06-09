@@ -310,7 +310,9 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
                     },
                 )
                 if updated_task is not None:
-                    event_type = "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+                    event_type = (
+                        "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+                    )
                     message = (
                         f"Agent task failed: {task.instruction or 'No instruction'}"
                         if new_state == "failed"

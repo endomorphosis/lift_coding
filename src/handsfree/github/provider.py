@@ -363,18 +363,17 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     if self._is_rate_limited(response):
                         # Use helper method for consistent message formatting
                         retry_msg = self._get_rate_limit_reset_message(response)
-                        
+
                         # SECURITY: Log without token
                         logger.error(
-                            "GitHub API rate limit exceeded for endpoint %s. "
-                            "Retry after: %s",
+                            "GitHub API rate limit exceeded for endpoint %s. Retry after: %s",
                             endpoint,
-                            retry_msg
+                            retry_msg,
                         )
                         raise RuntimeError(
                             f"GitHub API rate limit exceeded. Try again after {retry_msg}"
                         )
-                    
+
                     # Check for other 403 errors (not rate limits) - don't retry
                     # Check for non-rate-limit 403 (permission/auth error) - don't retry
                     if response.status_code == 403:
@@ -393,10 +392,10 @@ class LiveGitHubProvider(GitHubProviderInterface):
                     # Retry transient server errors (502, 503, 504)
                     if response.status_code in (502, 503, 504) and attempt < self._max_retries - 1:
                         # Exponential backoff with jitter up to 50% of the base delay
-                        base_delay_no_jitter = self._base_delay * (2 ** attempt)
+                        base_delay_no_jitter = self._base_delay * (2**attempt)
                     if response.status_code in (502, 503, 504) and attempt < max_retries - 1:
                         # Exponential backoff with proportional jitter
-                        base_delay_no_jitter = base_delay * (2 ** attempt)
+                        base_delay_no_jitter = base_delay * (2**attempt)
                         delay = base_delay_no_jitter + random.uniform(0, base_delay_no_jitter * 0.5)
                         logger.warning(
                             "GitHub API transient error %d on attempt %d/%d. "
@@ -404,7 +403,7 @@ class LiveGitHubProvider(GitHubProviderInterface):
                             response.status_code,
                             attempt + 1,
                             self._max_retries,
-                            delay
+                            delay,
                         )
                         time.sleep(delay)
                         continue

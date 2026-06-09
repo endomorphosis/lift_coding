@@ -67,7 +67,10 @@ def test_store_and_read_ai_backend_policy_snapshot(db_conn, monkeypatch):
     assert stored[0].reused is False
     assert stored[0].remap_counts == {"pr_rag_summary->accelerated_pr_summary": 1}
     assert stored[0].top_remaps[0]["remap_key"] == "pr_rag_summary->accelerated_pr_summary"
-    assert stored[0].top_capabilities["remapped"][0]["capability_id"] == "github.pr.accelerated_summary"
+    assert (
+        stored[0].top_capabilities["remapped"][0]["capability_id"]
+        == "github.pr.accelerated_summary"
+    )
 
 
 def test_get_ai_backend_policy_snapshots_orders_newest_first(db_conn):

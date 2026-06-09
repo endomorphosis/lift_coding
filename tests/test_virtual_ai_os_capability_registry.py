@@ -47,8 +47,7 @@ def test_virtual_ai_os_registry_resolves_legacy_capability_aliases():
 
 def test_virtual_ai_os_execution_mode_resolution_is_deterministic():
     assert (
-        resolve_virtual_ai_os_execution_mode("embedding")
-        == CapabilityExecutionMode.DIRECT_IMPORT
+        resolve_virtual_ai_os_execution_mode("embedding") == CapabilityExecutionMode.DIRECT_IMPORT
     )
     assert (
         resolve_virtual_ai_os_execution_mode(

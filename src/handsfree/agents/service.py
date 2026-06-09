@@ -116,7 +116,9 @@ def _requested_local_fallback(preferred_mode: str | None, resolved_mode: str | N
     )
 
 
-def _execution_fallback_message(preferred_mode: str | None, resolved_mode: str | None) -> str | None:
+def _execution_fallback_message(
+    preferred_mode: str | None, resolved_mode: str | None
+) -> str | None:
     if _requested_local_fallback(preferred_mode, resolved_mode):
         return "Execution: remote (local unavailable)"
     return None
@@ -501,7 +503,9 @@ class AgentService:
                     "result_output": _trace_result_output(t.trace),
                     "result_envelope": _trace_result_envelope(t.trace),
                     "provider_label": (t.trace or {}).get("provider_label") if t.trace else None,
-                    "mcp_execution_mode": (t.trace or {}).get("mcp_execution_mode") if t.trace else None,
+                    "mcp_execution_mode": (t.trace or {}).get("mcp_execution_mode")
+                    if t.trace
+                    else None,
                     "mcp_preferred_execution_mode": (
                         (t.trace or {}).get("mcp_preferred_execution_mode") if t.trace else None
                     ),

@@ -137,7 +137,8 @@ def _filter_router_result_tasks(
     latest_only: bool,
 ) -> list[Any]:
     filtered = [
-        task for task in tasks
+        task
+        for task in tasks
         if task.state == "completed"
         and isinstance(task.trace, dict)
         and (
@@ -148,7 +149,8 @@ def _filter_router_result_tasks(
     ]
     if capability:
         filtered = [
-            task for task in filtered
+            task
+            for task in filtered
             if isinstance(task.trace, dict) and task.trace.get("mcp_capability") == capability
         ]
     if latest_only:
@@ -235,7 +237,9 @@ def _serialize_result_for_ipfs(task: Any, card: dict[str, Any] | None = None) ->
         "result_preview": _trace_result_preview(trace),
         "result_output": _trace_result_output(trace),
         "result_envelope": _trace_result_envelope(trace),
-        "deep_link": (card or {}).get("deep_link") if isinstance(card, dict) else _result_task_deep_link(task),
+        "deep_link": (card or {}).get("deep_link")
+        if isinstance(card, dict)
+        else _result_task_deep_link(task),
     }
     return json.dumps(payload, sort_keys=True)
 
@@ -327,7 +331,9 @@ def _build_result_action_items(card: dict[str, Any]) -> list[dict[str, Any]]:
                 {
                     "id": "read_cid",
                     "label": "Read Receipt" if is_wearables_receipt else "Read CID",
-                    "phrase": "read the wearables receipt" if is_wearables_receipt else "read the cid",
+                    "phrase": "read the wearables receipt"
+                    if is_wearables_receipt
+                    else "read the cid",
                     "params": {"cid": cid},
                 },
                 {
@@ -433,7 +439,9 @@ def _available_result_actions(card: dict[str, Any]) -> list[str]:
     """Return user-facing actions available for the selected result card."""
     action_items = card.get("action_items")
     if isinstance(action_items, list) and action_items:
-        return [item["phrase"] for item in action_items if isinstance(item, dict) and "phrase" in item]
+        return [
+            item["phrase"] for item in action_items if isinstance(item, dict) and "phrase" in item
+        ]
     return [item["phrase"] for item in _build_result_action_items(card)]
 
 
@@ -469,7 +477,9 @@ def _execution_mode_policy_note(preferred_mode: str | None, resolved_mode: str |
     return ""
 
 
-def _execution_mode_detail_line(preferred_mode: str | None, resolved_mode: str | None) -> str | None:
+def _execution_mode_detail_line(
+    preferred_mode: str | None, resolved_mode: str | None
+) -> str | None:
     """Return an execution detail line for task/result cards."""
     label = _execution_mode_label(resolved_mode)
     if not label:
@@ -663,7 +673,9 @@ class CommandRouter:
             pr_num = intent.entities.get("pr_number")
             provider = intent.entities.get("provider", "copilot")
             provider_descriptor = get_provider_descriptor(provider)
-            provider_label = provider_descriptor.display_name if provider_descriptor else "the agent"
+            provider_label = (
+                provider_descriptor.display_name if provider_descriptor else "the agent"
+            )
             capability = resolve_provider_capability(
                 provider,
                 intent.entities.get("mcp_capability"),
@@ -1078,14 +1090,14 @@ class CommandRouter:
         """Handle inbox.list intent with profile-based verbosity."""
         # Get user from intent entities or fall back to fixture user
         user = intent.entities.get("user", "testuser")
-        
+
         # Use GitHub provider if available
         if self.github_provider:
             from handsfree.handlers.inbox import handle_inbox_list
-            
+
             # Use privacy mode from profile configuration
             privacy_mode = profile_config.privacy_mode
-            
+
             try:
                 # Call the inbox handler with user_id for live mode support
                 result = handle_inbox_list(
@@ -1095,7 +1107,7 @@ class CommandRouter:
                     profile_config=profile_config,
                     user_id=user_id,
                 )
-                
+
                 # Return response with inbox items
                 return {
                     "status": "ok",
@@ -1108,7 +1120,9 @@ class CommandRouter:
                             "url": item["url"],
                         }
                         for item in result["items"][:5]  # Limit to top 5 for UI
-                    ] if "items" in result and result["items"] else [],
+                    ]
+                    if "items" in result and result["items"]
+                    else [],
                 }
             except Exception as e:
                 logger.error("Failed to fetch inbox: %s", str(e))
@@ -1122,7 +1136,7 @@ class CommandRouter:
                     "intent": intent.to_dict(),
                     "spoken_text": spoken_text,
                 }
-        
+
         # Fallback: Stub data if no GitHub provider
         profile = profile_config.profile
 
@@ -1287,7 +1301,7 @@ class CommandRouter:
                         profile_config=profile_config,
                         user_id=user_id,
                     )
-                    
+
                     # Return response with PR details
                     return {
                         "status": "ok",
@@ -1313,10 +1327,10 @@ class CommandRouter:
                         "intent": intent.to_dict(),
                         "spoken_text": spoken_text,
                     }
-            
+
             # Fallback: stub data
             pr_num_str = str(pr_num) if pr_num else "unknown"
-            
+
             # Stub data - in production this would come from GitHub provider
             # Generate profile-appropriate PR summaries
             if profile == Profile.WORKOUT:
@@ -1441,7 +1455,9 @@ class CommandRouter:
         repo = intent.entities.get("repo")
         if intent.name not in {"ai.read_cid", "ai.accelerate_generate_and_store"}:
             if not pr_num:
-                context = self._session_context.get_repo_pr(session_id, fallback_repo="default/repo")
+                context = self._session_context.get_repo_pr(
+                    session_id, fallback_repo="default/repo"
+                )
                 pr_num = context.get("pr_number")
                 if not repo:
                     repo = context.get("repo")
@@ -1454,9 +1470,7 @@ class CommandRouter:
                 }
 
         if self._ai_intent_requires_cli(intent.name) and not self._use_cli_for_read_intents():
-            spoken_text = profile_config.truncate_spoken_text(
-                "Copilot CLI explain is not enabled."
-            )
+            spoken_text = profile_config.truncate_spoken_text("Copilot CLI explain is not enabled.")
             return {
                 "status": "error",
                 "intent": intent.to_dict(),
@@ -1480,11 +1494,20 @@ class CommandRouter:
                 config.update(self._select_pr_summary_ai_capability(intent))
             request_options: dict[str, Any] = {}
             request_inputs: dict[str, Any] = {}
-            if config["capability_id"] == "github.check.failure_rag_explain" and self.github_provider:
+            if (
+                config["capability_id"] == "github.check.failure_rag_explain"
+                and self.github_provider
+            ):
                 request_options["github_provider"] = self.github_provider
-            if config["capability_id"] == "github.check.accelerated_failure_explain" and self.github_provider:
+            if (
+                config["capability_id"] == "github.check.accelerated_failure_explain"
+                and self.github_provider
+            ):
                 request_options["github_provider"] = self.github_provider
-            if config["capability_id"] == "github.check.find_similar_failures" and self.github_provider:
+            if (
+                config["capability_id"] == "github.check.find_similar_failures"
+                and self.github_provider
+            ):
                 request_options["github_provider"] = self.github_provider
             if intent.entities.get("persist_output") is True:
                 request_options["persist_output"] = True
@@ -1544,7 +1567,8 @@ class CommandRouter:
             if (
                 self.db_conn
                 and user_id
-                and execution.capability_id in {
+                and execution.capability_id
+                in {
                     "github.check.failure_rag_explain",
                     "github.check.accelerated_failure_explain",
                 }
@@ -1557,7 +1581,8 @@ class CommandRouter:
                     capability_id=execution.capability_id,
                     repo=result.get("repo") or repo,
                     pr_number=result.get("pr_number") or pr_num,
-                    failure_target=result.get("failure_target") or intent.entities.get("failure_target"),
+                    failure_target=result.get("failure_target")
+                    or intent.entities.get("failure_target"),
                     failure_target_type=result.get("failure_target_type")
                     or intent.entities.get("failure_target_type"),
                     ipfs_cid=result["ipfs_cid"].strip(),
@@ -1570,7 +1595,10 @@ class CommandRouter:
                 card_title = f"{config['card_title']} for PR #{pr_num}"
                 if repo:
                     card_title = f"{card_title} on {repo}"
-            card_lines = [result.get("summary") or str(result.get("generated") or result.get("cid") or "Completed.")]
+            card_lines = [
+                result.get("summary")
+                or str(result.get("generated") or result.get("cid") or "Completed.")
+            ]
             if result.get("ipfs_cid"):
                 card_lines.append(f"Stored in IPFS as {result['ipfs_cid']}")
             elif result.get("cid"):
@@ -2395,7 +2423,11 @@ class CommandRouter:
                         "actions": actions,
                     }
                 ],
-                "debug": {"tool_calls": [{"actions": actions, "action_items": _build_result_action_items(card)}]},
+                "debug": {
+                    "tool_calls": [
+                        {"actions": actions, "action_items": _build_result_action_items(card)}
+                    ]
+                },
             }
 
         elif intent.name == "agent.result_details":
@@ -2440,7 +2472,9 @@ class CommandRouter:
 
             task = get_agent_task_by_id(self.db_conn, task_id)
             if not task or task.user_id != user_id:
-                spoken_text = profile_config.truncate_spoken_text("The current result is unavailable.")
+                spoken_text = profile_config.truncate_spoken_text(
+                    "The current result is unavailable."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -2660,7 +2694,9 @@ class CommandRouter:
 
             source_task = get_agent_task_by_id(self.db_conn, source_task_id)
             if not source_task or source_task.user_id != user_id:
-                spoken_text = profile_config.truncate_spoken_text("The current result is unavailable.")
+                spoken_text = profile_config.truncate_spoken_text(
+                    "The current result is unavailable."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -2673,7 +2709,9 @@ class CommandRouter:
                     intent.entities.get("mcp_preferred_execution_mode")
                     or intent.entities.get("mcp_execution_mode")
                     or ""
-                ).strip().lower()
+                )
+                .strip()
+                .lower()
                 or None
             )
             resolved_execution_mode = resolve_capability_execution_mode(
@@ -2842,7 +2880,9 @@ class CommandRouter:
                     "provider_label": "IPFS Kit",
                     "mcp_capability": "ipfs_pin",
                     "mcp_execution_mode": resolved_execution_mode,
-                    "mcp_preferred_execution_mode": intent.entities.get("mcp_preferred_execution_mode"),
+                    "mcp_preferred_execution_mode": intent.entities.get(
+                        "mcp_preferred_execution_mode"
+                    ),
                     "mcp_cid": cid,
                     "mcp_pin_action": "pin",
                 },
@@ -2943,7 +2983,9 @@ class CommandRouter:
                     "provider_label": "IPFS Kit",
                     "mcp_capability": "ipfs_pin",
                     "mcp_execution_mode": resolved_execution_mode,
-                    "mcp_preferred_execution_mode": intent.entities.get("mcp_preferred_execution_mode"),
+                    "mcp_preferred_execution_mode": intent.entities.get(
+                        "mcp_preferred_execution_mode"
+                    ),
                     "mcp_cid": cid,
                     "mcp_pin_action": "unpin",
                 },
@@ -3036,7 +3078,9 @@ class CommandRouter:
 
             source_task = get_agent_task_by_id(self.db_conn, source_task_id)
             if not source_task or source_task.user_id != user_id:
-                spoken_text = profile_config.truncate_spoken_text("The current result is unavailable.")
+                spoken_text = profile_config.truncate_spoken_text(
+                    "The current result is unavailable."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -3171,7 +3215,9 @@ class CommandRouter:
 
             source_task = get_agent_task_by_id(self.db_conn, source_task_id)
             if not source_task or source_task.user_id != user_id:
-                spoken_text = profile_config.truncate_spoken_text("The current result is unavailable.")
+                spoken_text = profile_config.truncate_spoken_text(
+                    "The current result is unavailable."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -3194,9 +3240,7 @@ class CommandRouter:
 
             new_seed_url = intent.entities.get("mcp_seed_url")
             if not isinstance(new_seed_url, str) or not new_seed_url.strip():
-                spoken_text = profile_config.truncate_spoken_text(
-                    "A new fetch URL is required."
-                )
+                spoken_text = profile_config.truncate_spoken_text("A new fetch URL is required.")
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),
@@ -3326,7 +3370,9 @@ class CommandRouter:
 
             source_task = get_agent_task_by_id(self.db_conn, source_task_id)
             if not source_task or source_task.user_id != user_id:
-                spoken_text = profile_config.truncate_spoken_text("The current result is unavailable.")
+                spoken_text = profile_config.truncate_spoken_text(
+                    "The current result is unavailable."
+                )
                 return {
                     "status": "error",
                     "intent": intent.to_dict(),

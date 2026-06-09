@@ -319,7 +319,9 @@ class TestPRIntents:
         assert result.entities["pr_number"] == 125
         assert result.entities["history_cids"] == ["bafy123", "bafy456"]
 
-        result = parser.parse("find similar workflow CI Linux failures for pr 125 using cid bafy789")
+        result = parser.parse(
+            "find similar workflow CI Linux failures for pr 125 using cid bafy789"
+        )
         assert result.name == "ai.find_similar_failures"
         assert result.entities["workflow_name"] == "CI Linux"
         assert result.entities["history_cids"] == ["bafy789"]
@@ -331,7 +333,9 @@ class TestPRIntents:
         assert result.entities["pr_number"] == 123
         assert result.entities["history_cids"] == ["bafy123"]
 
-        result = parser.parse("explain workflow CI Linux for pr 123 on owner/repo using cids bafy1, bafy2")
+        result = parser.parse(
+            "explain workflow CI Linux for pr 123 on owner/repo using cids bafy1, bafy2"
+        )
         assert result.name == "ai.explain_failure"
         assert result.entities["pr_number"] == 123
         assert result.entities["repo"] == "owner/repo"
@@ -534,7 +538,9 @@ class TestAgentIntents:
         assert result.entities["mcp_capability"] == "ipfs_cat"
         assert result.entities["mcp_cid"] == "bafytestcid"
 
-    def test_result_save_ipfs_local_phrase_sets_direct_import_mode(self, parser: IntentParser) -> None:
+    def test_result_save_ipfs_local_phrase_sets_direct_import_mode(
+        self, parser: IntentParser
+    ) -> None:
         result = parser.parse("save that result to ipfs locally")
 
         assert result.name == "agent.result_save_ipfs"

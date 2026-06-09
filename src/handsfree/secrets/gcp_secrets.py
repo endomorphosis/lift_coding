@@ -57,7 +57,9 @@ class GCPSecretManager(SecretManager):
             GoogleAPIError: If connection to Secret Manager fails
         """
         # Load configuration from environment variables or parameters
-        self.project_id = project_id or os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCP_PROJECT_ID")
+        self.project_id = (
+            project_id or os.getenv("GOOGLE_CLOUD_PROJECT") or os.getenv("GCP_PROJECT_ID")
+        )
         self.prefix = prefix or os.getenv("HANDSFREE_GCP_SECRETS_PREFIX", "handsfree")
 
         # Validate configuration
@@ -97,11 +99,11 @@ class GCPSecretManager(SecretManager):
         """
         # GCP secret names can contain [a-zA-Z0-9_-]. For consistency, we normalize
         # underscores and all other non-alphanumeric characters to hyphens.
-        normalized = re.sub(r'[^a-zA-Z0-9-]', '-', key).lower()
+        normalized = re.sub(r"[^a-zA-Z0-9-]", "-", key).lower()
         # Remove consecutive hyphens
-        normalized = re.sub(r'-+', '-', normalized)
+        normalized = re.sub(r"-+", "-", normalized)
         # Remove leading/trailing hyphens
-        normalized = normalized.strip('-')
+        normalized = normalized.strip("-")
         return f"{self.prefix}-{normalized}"
 
     def _get_secret_path(self, secret_name: str) -> str:
@@ -181,11 +183,11 @@ class GCPSecretManager(SecretManager):
             Normalized string (lowercase, invalid characters replaced with hyphens)
         """
         # Convert to lowercase and replace invalid characters (including underscores) with hyphens
-        normalized = re.sub(r'[^a-z0-9-]', '-', text.lower())
+        normalized = re.sub(r"[^a-z0-9-]", "-", text.lower())
         # Remove consecutive hyphens
-        normalized = re.sub(r'-+', '-', normalized)
+        normalized = re.sub(r"-+", "-", normalized)
         # Remove leading/trailing hyphens
-        normalized = normalized.strip('-')
+        normalized = normalized.strip("-")
         return normalized
 
     def store_secret(self, key: str, value: str, metadata: dict[str, str] | None = None) -> str:

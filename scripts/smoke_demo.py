@@ -8,10 +8,10 @@ require external services by default.
 Usage:
     # Start the server first
     python -m handsfree.server &
-    
+
     # Run the smoke test
     python scripts/smoke_demo.py
-    
+
     # Or specify a custom base URL
     python scripts/smoke_demo.py --base-url http://localhost:8080
 
@@ -109,9 +109,7 @@ class SmokeTest:
 
             # Validate status value
             if data["status"] not in ["ok", "degraded", "unavailable"]:
-                self.log(
-                    f"/v1/status has invalid status: {data['status']}", "error"
-                )
+                self.log(f"/v1/status has invalid status: {data['status']}", "error")
                 return False
 
             self.log(f"/v1/status check passed (status={data['status']})", "success")
@@ -119,8 +117,7 @@ class SmokeTest:
 
         except requests.exceptions.ConnectionError:
             self.log(
-                f"Connection error: Cannot connect to {self.base_url}. "
-                "Is the server running?",
+                f"Connection error: Cannot connect to {self.base_url}. Is the server running?",
                 "error",
             )
             return False
@@ -143,14 +140,10 @@ class SmokeTest:
         self.log("Checking /v1/tts endpoint...")
         try:
             payload = {"text": "Demo smoke test", "format": "wav"}
-            response = requests.post(
-                f"{self.base_url}/v1/tts", json=payload, timeout=10
-            )
+            response = requests.post(f"{self.base_url}/v1/tts", json=payload, timeout=10)
 
             if response.status_code != 200:
-                self.log(
-                    f"/v1/tts returned {response.status_code}, expected 200", "error"
-                )
+                self.log(f"/v1/tts returned {response.status_code}, expected 200", "error")
                 if response.status_code >= 400:
                     self.log_response_error_details(response)
                 return False
@@ -177,8 +170,7 @@ class SmokeTest:
 
         except requests.exceptions.ConnectionError:
             self.log(
-                f"Connection error: Cannot connect to {self.base_url}. "
-                "Is the server running?",
+                f"Connection error: Cannot connect to {self.base_url}. Is the server running?",
                 "error",
             )
             return False
@@ -212,9 +204,7 @@ class SmokeTest:
                 "idempotency_key": f"smoke-test-{int(time.time())}",
             }
 
-            response = requests.post(
-                f"{self.base_url}/v1/command", json=payload, timeout=10
-            )
+            response = requests.post(f"{self.base_url}/v1/command", json=payload, timeout=10)
 
             if response.status_code != 200:
                 self.log(
@@ -237,20 +227,15 @@ class SmokeTest:
             # Validate status value
             valid_statuses = ["ok", "needs_confirmation", "error"]
             if data["status"] not in valid_statuses:
-                self.log(
-                    f"/v1/command has invalid status: {data['status']}", "error"
-                )
+                self.log(f"/v1/command has invalid status: {data['status']}", "error")
                 return False
 
-            self.log(
-                f"/v1/command check passed (status={data['status']})", "success"
-            )
+            self.log(f"/v1/command check passed (status={data['status']})", "success")
             return True
 
         except requests.exceptions.ConnectionError:
             self.log(
-                f"Connection error: Cannot connect to {self.base_url}. "
-                "Is the server running?",
+                f"Connection error: Cannot connect to {self.base_url}. Is the server running?",
                 "error",
             )
             return False
@@ -276,7 +261,7 @@ class SmokeTest:
 
             if response.status_code == 200:
                 data = response.json()
-                
+
                 # Handle both array and object responses
                 notification_count = 0
                 if isinstance(data, list):
@@ -284,9 +269,7 @@ class SmokeTest:
                 elif isinstance(data, dict) and "notifications" in data:
                     notification_count = len(data.get("notifications", []))
                 else:
-                    self.log(
-                        "/v1/notifications returned unexpected response format", "warning"
-                    )
+                    self.log("/v1/notifications returned unexpected response format", "warning")
                     self.warnings += 1
                     return True  # Non-fatal
 
@@ -316,8 +299,7 @@ class SmokeTest:
 
         except requests.exceptions.ConnectionError:
             self.log(
-                f"Connection error: Cannot connect to {self.base_url}. "
-                "Is the server running?",
+                f"Connection error: Cannot connect to {self.base_url}. Is the server running?",
                 "error",
             )
             return False
@@ -381,9 +363,7 @@ def main() -> int:
         default="http://localhost:8080",
         help="Base URL of the API server (default: http://localhost:8080)",
     )
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable verbose output"
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose output")
     parser.add_argument(
         "--wait",
         type=int,

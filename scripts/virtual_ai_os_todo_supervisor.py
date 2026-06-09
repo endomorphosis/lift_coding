@@ -93,9 +93,7 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    VIRTUAL_AI_OS_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(VIRTUAL_AI_OS_ENV_PREFIX)
 logger = logging.getLogger("virtual_ai_os_todo_supervisor")
 
 _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_factory(
@@ -135,7 +133,9 @@ _virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
 )
 _virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runner.runtime
-_virtual_ai_os_supervisor_exports = build_configured_supervisor_runtime_exports(_virtual_ai_os_supervisor_runtime)
+_virtual_ai_os_supervisor_exports = build_configured_supervisor_runtime_exports(
+    _virtual_ai_os_supervisor_runtime
+)
 VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_exports.process_match_any
 repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_exports.repair_runtime
 virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_exports.is_running

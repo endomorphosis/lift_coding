@@ -61,9 +61,7 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    VIRTUAL_AI_OS_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(VIRTUAL_AI_OS_ENV_PREFIX)
 logger = logging.getLogger("virtual_ai_os_todo_daemon")
 _virtual_ai_os_daemon_runner = build_namespace_daemon_bootstrap_runner(
     repo_root=REPO_ROOT,

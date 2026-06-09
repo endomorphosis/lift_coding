@@ -326,24 +326,36 @@ def _display_widget_action_items_from_context(
     try:
         return build_meta_glasses_display_widget_action_items(
             descriptor_cid=descriptor_cid,
-            interface_cid=_first_nonempty_string(receipt.get("interface_cid"), mobile_action.get("interface_cid")),
+            interface_cid=_first_nonempty_string(
+                receipt.get("interface_cid"), mobile_action.get("interface_cid")
+            ),
             widget_cid=widget_cid,
             orb_receipt_cid=orb_receipt_cid,
             policy_decision=normalized_policy or policy_decision,
             widget_id=widget_id,
             correlation_id=correlation_id,
-            request_id=_first_nonempty_string(receipt.get("request_id"), mobile_action.get("request_id")),
-            issued_at=_first_nonempty_string(receipt.get("issued_at"), mobile_action.get("issued_at")),
+            request_id=_first_nonempty_string(
+                receipt.get("request_id"), mobile_action.get("request_id")
+            ),
+            issued_at=_first_nonempty_string(
+                receipt.get("issued_at"), mobile_action.get("issued_at")
+            ),
             state=_record_or_empty(mobile_action.get("state")) or None,
-            patch=_record_or_empty(receipt.get("patch")) or _record_or_empty(mobile_action.get("patch")) or None,
+            patch=_record_or_empty(receipt.get("patch"))
+            or _record_or_empty(mobile_action.get("patch"))
+            or None,
             manifest=(
                 _record_or_empty(receipt.get("manifest"))
                 or _record_or_empty(mobile_action.get("manifest"))
                 or None
             ),
-            focus=_record_or_empty(receipt.get("focus")) or _record_or_empty(mobile_action.get("focus")) or None,
+            focus=_record_or_empty(receipt.get("focus"))
+            or _record_or_empty(mobile_action.get("focus"))
+            or None,
             activated_action_id=activated_action_id,
-            video=_record_or_empty(receipt.get("video")) or _record_or_empty(mobile_action.get("video")) or None,
+            video=_record_or_empty(receipt.get("video"))
+            or _record_or_empty(mobile_action.get("video"))
+            or None,
             subscription=(
                 _record_or_empty(receipt.get("subscription"))
                 or _record_or_empty(mobile_action.get("subscription"))
@@ -668,7 +680,11 @@ class CopilotCLIAgentProvider(AgentProvider):
                         pr_number=pr_number,
                     )
                     if raw_result.ok:
-                        preview = raw_result.stdout.strip().splitlines()[0] if raw_result.stdout.strip() else ""
+                        preview = (
+                            raw_result.stdout.strip().splitlines()[0]
+                            if raw_result.stdout.strip()
+                            else ""
+                        )
                         trace.update(
                             {
                                 "capability_id": capability_id,
@@ -1186,7 +1202,8 @@ class MCPAgentProvider(AgentProvider):
             return {
                 "ok": True,
                 "status": "completed",
-                "message": trace.get("mcp_result_preview") or f"{self.provider_name} task completed",
+                "message": trace.get("mcp_result_preview")
+                or f"{self.provider_name} task completed",
                 "trace": {
                     "last_protocol_state": "completed",
                 },
@@ -1347,9 +1364,7 @@ class MCPAgentProvider(AgentProvider):
             "message": envelope.spoken_text,
             "trace": envelope_to_trace(envelope)
             | {
-                "mcp_result_output": result.output
-                if mapped_status == "completed"
-                else None,
+                "mcp_result_output": result.output if mapped_status == "completed" else None,
             },
         }
 
@@ -1441,7 +1456,11 @@ class MCPAgentProvider(AgentProvider):
             return None
         value = result.output.get(field_name)
         if value is None:
-            value = result.output.get("result", {}).get(field_name) if isinstance(result.output.get("result"), dict) else None
+            value = (
+                result.output.get("result", {}).get(field_name)
+                if isinstance(result.output.get("result"), dict)
+                else None
+            )
         if value is None:
             return None
         return str(value)
@@ -1537,13 +1556,16 @@ class MCPAgentProvider(AgentProvider):
                 structured_output = output
                 cid = None
                 if isinstance(output, dict):
-                    cid = str(
-                        output.get("cid")
-                        or output.get("Hash")
-                        or output.get("hash")
-                        or output.get("value")
-                        or ""
-                    ).strip() or None
+                    cid = (
+                        str(
+                            output.get("cid")
+                            or output.get("Hash")
+                            or output.get("hash")
+                            or output.get("value")
+                            or ""
+                        ).strip()
+                        or None
+                    )
 
             preview = f"Saved content to IPFS as {cid}." if cid else "Saved content to IPFS."
             return {
@@ -1577,7 +1599,9 @@ class MCPAgentProvider(AgentProvider):
             output = adapter.cat(cid)
             structured_output = {
                 "cid": cid,
-                "content": output.decode("utf-8", errors="replace") if isinstance(output, bytes) else output,
+                "content": output.decode("utf-8", errors="replace")
+                if isinstance(output, bytes)
+                else output,
             }
             preview = f"Read content from {cid}."
             return {
@@ -1809,8 +1833,8 @@ def _todo_daemon_task_title(
     return fallback or task_id
 
 
-_TASK_BOARD_PENDING_STATUS = "to" "do"
-_BACKLOG_DAEMON_DISPLAY_NAME = "to" "do daemon"
+_TASK_BOARD_PENDING_STATUS = "todo"
+_BACKLOG_DAEMON_DISPLAY_NAME = "todo daemon"
 _BACKLOG_DAEMON_RUNNING_STATUSES = {
     "ready",
     "waiting",
@@ -2010,7 +2034,10 @@ def _select_delegated_capability_with_trace(
 ) -> str:
     """Prefer explicit orchestration hints from task trace before text heuristics."""
     normalized_trace = trace or {}
-    if normalized_trace.get("wearables_bridge_requested_workflow") == "wearables_bridge_connectivity":
+    if (
+        normalized_trace.get("wearables_bridge_requested_workflow")
+        == "wearables_bridge_connectivity"
+    ):
         return "workflow"
     trace_capability = normalized_trace.get("mcp_capability")
     if isinstance(trace_capability, str) and trace_capability.strip():
@@ -2032,7 +2059,9 @@ def _infer_delegated_requested_workflow_with_trace(
 def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
     """Wrap a generic MCP workflow result in a wearables connectivity receipt."""
     trace = task.trace or {}
-    client_context = trace.get("client_context") if isinstance(trace.get("client_context"), dict) else {}
+    client_context = (
+        trace.get("client_context") if isinstance(trace.get("client_context"), dict) else {}
+    )
     device_id = client_context.get("device_id")
     device_name = client_context.get("device_name") or device_id or "wearable target"
     target_state = client_context.get("target_connection_state") or "connected"
@@ -2109,7 +2138,7 @@ def _build_wearables_bridge_connectivity_envelope(task: AgentTask, envelope):
             "id": "agent_status",
             "label": "Check Task",
             "phrase": "check the wearables bridge task",
-        }
+        },
     ]
     if envelope.artifact_refs.result_cid:
         follow_up_actions.append(

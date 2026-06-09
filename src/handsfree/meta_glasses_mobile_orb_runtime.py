@@ -85,11 +85,14 @@ def resolve_mobile_orb_runtime_binding(binding_record: Mapping[str, Any]) -> dic
     if transport != "mcp-server":
         return None
 
-    transport_metadata = _get_nested_mapping(
-        orb_binding,
-        "transport_binding",
-        "metadata",
-    ) or {}
+    transport_metadata = (
+        _get_nested_mapping(
+            orb_binding,
+            "transport_binding",
+            "metadata",
+        )
+        or {}
+    )
 
     service_id = _first_nonempty_string(
         orb_binding.get("service_id"),

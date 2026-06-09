@@ -51,16 +51,16 @@ def test_task_progress_fixture_regions_and_actions_match_simulator_constraints()
 
     assert set(fixture["focus_order"]).issubset(action_ids)
     for region in fixture["regions"]:
-      assert region["x"] >= 0
-      assert region["y"] >= 0
-      assert region["width"] > 0
-      assert region["height"] > 0
-      assert region["x"] + region["width"] <= viewport["width"]
-      assert region["y"] + region["height"] <= viewport["height"]
-      if region["kind"] == "action":
-          assert region["action_id"] in action_ids
-      if region["kind"] == "media":
-          assert region["media"]["uri"].startswith("https://")
+        assert region["x"] >= 0
+        assert region["y"] >= 0
+        assert region["width"] > 0
+        assert region["height"] > 0
+        assert region["x"] + region["width"] <= viewport["width"]
+        assert region["y"] + region["height"] <= viewport["height"]
+        if region["kind"] == "action":
+            assert region["action_id"] in action_ids
+        if region["kind"] == "media":
+            assert region["media"]["uri"].startswith("https://")
 
 
 def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
@@ -122,7 +122,7 @@ def test_webapp_preview_is_fixed_600x600_and_dpad_operable() -> None:
 
     assert "width=600,height=600" in html
     assert "data-meta-rayban-display-webapp" in html
-    assert "role=\"application\"" in html
+    assert 'role="application"' in html
     assert "width: 600px" in css
     assert "height: 600px" in css
     assert "overflow: hidden" in css
@@ -187,12 +187,10 @@ def test_webapp_preview_package_declares_static_files_and_png_icons() -> None:
 
 
 def test_ios_rayban_runbooks_cover_https_webapp_onboarding_path() -> None:
-    runbook = (REPO_ROOT / "docs" / "ios-rayban-mvp1-runbook.md").read_text(
+    runbook = (REPO_ROOT / "docs" / "ios-rayban-mvp1-runbook.md").read_text(encoding="utf-8")
+    demo_runbook = (REPO_ROOT / "docs" / "ios-rayban-mvp1-demo-runbook.md").read_text(
         encoding="utf-8"
     )
-    demo_runbook = (
-        REPO_ROOT / "docs" / "ios-rayban-mvp1-demo-runbook.md"
-    ).read_text(encoding="utf-8")
     webapp_readme = (WEBAPP_DIR / "README.md").read_text(encoding="utf-8")
     combined = "\n".join([runbook, demo_runbook, webapp_readme])
 
@@ -458,8 +456,9 @@ def test_webapp_display_action_can_complete_orb_bind_invoke_dispatch_loop(monkey
     assert invoked_payload["display_widget_action"]["type"] == "mobile_update_display_widget"
     assert invoked_payload["display_widget_action"]["widget_id"] == fixture["widget_id"]
     assert invoked_payload["display_widget_action"]["activated_action_id"] == "pause"
-    assert invoked_payload["display_widget_action"]["orb_receipt_cid"] == (
-        invoked_payload["receipt_cid"]
+    assert (
+        invoked_payload["display_widget_action"]["orb_receipt_cid"]
+        == (invoked_payload["receipt_cid"])
     )
 
     dispatched = client.post(
@@ -482,8 +481,9 @@ def test_webapp_display_action_can_complete_orb_bind_invoke_dispatch_loop(monkey
     assert dispatched.status_code == 200
     dispatched_payload = dispatched.json()
     assert dispatched_payload["display_widget_action"]["type"] == "mobile_update_display_widget"
-    assert dispatched_payload["dispatched_actions"][0]["mobile_payload"] == (
-        dispatched_payload["display_widget_action"]
+    assert (
+        dispatched_payload["dispatched_actions"][0]["mobile_payload"]
+        == (dispatched_payload["display_widget_action"])
     )
     assert dispatched_payload["spoken_text"] == "Pause requested."
 

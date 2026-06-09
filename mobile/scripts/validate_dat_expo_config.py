@@ -10,7 +10,9 @@ from pathlib import Path
 
 
 def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate DAT display lane in resolved Expo config.")
+    parser = argparse.ArgumentParser(
+        description="Validate DAT display lane in resolved Expo config."
+    )
     parser.add_argument("--mode", choices=("disabled", "enabled"), required=True)
     parser.add_argument("--config-path", required=True)
     return parser.parse_args()
@@ -47,4 +49,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

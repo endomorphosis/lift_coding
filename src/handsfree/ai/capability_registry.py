@@ -227,7 +227,9 @@ def resolve_virtual_ai_os_execution_mode(
     if allow_fallback and entry.fallback_execution_mode in supported:
         return entry.fallback_execution_mode
 
-    raise ValueError(f"No supported execution mode available for capability '{entry.capability_id}'")
+    raise ValueError(
+        f"No supported execution mode available for capability '{entry.capability_id}'"
+    )
 
 
 def build_virtual_ai_os_execution_matrix() -> list[dict[str, object]]:

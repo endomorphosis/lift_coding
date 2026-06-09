@@ -60,7 +60,9 @@ class _FakeMCPClient:
                             "category": category,
                         },
                         raw_response={"ok": True},
-                        content=[{"type": "text", "text": json.dumps({"task_id": "remote-task-123"})}],
+                        content=[
+                            {"type": "text", "text": json.dumps({"task_id": "remote-task-123"})}
+                        ],
                     )
                 if action == "cancel":
                     return MCPToolInvocationResult(
@@ -68,7 +70,11 @@ class _FakeMCPClient:
                         run_id=None,
                         status="completed",
                         tool_name=tool_name,
-                        output={"status": "success", "task_id": parameters.get("task_id"), "message": "Cancelled"},
+                        output={
+                            "status": "success",
+                            "task_id": parameters.get("task_id"),
+                            "message": "Cancelled",
+                        },
                         raw_response={"ok": True},
                         content=[{"type": "text", "text": "Cancelled"}],
                     )
@@ -201,7 +207,10 @@ class TestMCPIPFSProviders:
 
         envelope = result["trace"]["mcp_result_envelope"]
         assert result["ok"] is True
-        assert envelope["summary"] == "Wearables bridge connectivity workflow running for Ray-Ban Meta."
+        assert (
+            envelope["summary"]
+            == "Wearables bridge connectivity workflow running for Ray-Ban Meta."
+        )
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
         assert envelope["structured_output"]["device_id"] == "AA:BB"
         assert envelope["structured_output"]["target_rssi"] == -42
@@ -237,7 +246,10 @@ class TestMCPIPFSProviders:
                 result = super().invoke_tool(tool_name, arguments, correlation_id)
                 nested_tool_name = str(arguments.get("tool_name") or arguments.get("tool"))
                 parameters = arguments.get("parameters") or arguments.get("params") or {}
-                if tool_name == "tools_dispatch" and nested_tool_name in {"get_task_status", "check_task_status"}:
+                if tool_name == "tools_dispatch" and nested_tool_name in {
+                    "get_task_status",
+                    "check_task_status",
+                }:
                     return MCPToolInvocationResult(
                         request_id="req-999",
                         run_id=None,
@@ -287,7 +299,10 @@ class TestMCPIPFSProviders:
         envelope = result["trace"]["mcp_result_envelope"]
         assert result["ok"] is False
         assert result["status"] == "failed"
-        assert result["message"] == "Wearables bridge connectivity workflow timed out for Ray-Ban Meta."
+        assert (
+            result["message"]
+            == "Wearables bridge connectivity workflow timed out for Ray-Ban Meta."
+        )
         assert envelope["status"] == "failed"
         assert envelope["structured_output"]["workflow"] == "wearables_bridge_connectivity"
         assert envelope["structured_output"]["display"]["capable"] is False
@@ -350,7 +365,9 @@ class TestMCPIPFSProviders:
             for action in envelope["follow_up_actions"]
         )
 
-    def test_accelerate_wearables_bridge_display_capable_accepts_numeric_float_true(self, monkeypatch):
+    def test_accelerate_wearables_bridge_display_capable_accepts_numeric_float_true(
+        self, monkeypatch
+    ):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
         provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
         task = SimpleNamespace(
@@ -378,7 +395,9 @@ class TestMCPIPFSProviders:
             for action in envelope["follow_up_actions"]
         )
 
-    def test_accelerate_wearables_bridge_display_capable_rejects_non_integer_float(self, monkeypatch):
+    def test_accelerate_wearables_bridge_display_capable_rejects_non_integer_float(
+        self, monkeypatch
+    ):
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_ACCELERATE_MCP", "true")
         provider = IPFSAccelerateMCPAgentProvider(client=_FakeMCPClient())
         task = SimpleNamespace(
@@ -565,7 +584,9 @@ class TestMCPIPFSProviders:
             def unpin(self, cid: str, **kwargs):
                 return {"ok": True, "cid": cid, "mode": "unpin", "options": kwargs}
 
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
         client = _FakeMCPClient()
         provider = IPFSKitMCPAgentProvider(client=client)
         task = SimpleNamespace(
@@ -602,7 +623,9 @@ class TestMCPIPFSProviders:
             def add_bytes(self, data: bytes, **kwargs):
                 return {"cid": "bafyadd123", "size": len(data), "options": kwargs}
 
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
         client = _FakeMCPClient()
         provider = IPFSKitMCPAgentProvider(client=client)
         task = SimpleNamespace(
@@ -633,7 +656,9 @@ class TestMCPIPFSProviders:
             def cat(self, cid: str, **kwargs):
                 return b"hello from ipfs"
 
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
         client = _FakeMCPClient()
         provider = IPFSKitMCPAgentProvider(client=client)
         task = SimpleNamespace(
@@ -695,7 +720,9 @@ class TestMCPIPFSProviders:
             def unpin(self, cid: str, **kwargs):
                 return {"ok": True, "cid": cid, "mode": "unpin", "options": kwargs}
 
-        monkeypatch.setattr("handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter())
+        monkeypatch.setattr(
+            "handsfree.agent_providers.get_ipfs_kit_adapter", lambda: _FakeKitAdapter()
+        )
         client = _FakeMCPClient()
         provider = IPFSKitMCPAgentProvider(client=client)
         task = SimpleNamespace(
@@ -868,7 +895,11 @@ class TestMCPClientJSONRPC:
             recorded.append((path, payload))
             method = payload["method"]
             if method == "initialize":
-                return {"jsonrpc": "2.0", "id": payload["id"], "result": {"capabilities": {"tools": {}}}}
+                return {
+                    "jsonrpc": "2.0",
+                    "id": payload["id"],
+                    "result": {"capabilities": {"tools": {}}},
+                }
             if method == "tools/call":
                 return {
                     "jsonrpc": "2.0",
@@ -902,7 +933,11 @@ class TestMCPClientJSONRPC:
             recorded.append((path, payload))
             method = payload["method"]
             if method == "initialize":
-                return {"jsonrpc": "2.0", "id": payload["id"], "result": {"capabilities": {"tools": {}}}}
+                return {
+                    "jsonrpc": "2.0",
+                    "id": payload["id"],
+                    "result": {"capabilities": {"tools": {}}},
+                }
             if method == "tools/list":
                 return {
                     "jsonrpc": "2.0",
@@ -970,7 +1005,9 @@ class TestMCPClientJSONRPC:
         fake_process = _FakeProcess({"jsonrpc": "2.0", "id": 1, "result": {"capabilities": {}}})
         client._process = fake_process  # type: ignore[assignment]
 
-        response = client._rpc_request("initialize", {"protocolVersion": "2024-11-05", "capabilities": {}})
+        response = client._rpc_request(
+            "initialize", {"protocolVersion": "2024-11-05", "capabilities": {}}
+        )
 
         assert response["result"]["capabilities"] == {}
         written = fake_process.stdin.writes[0]

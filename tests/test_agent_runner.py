@@ -122,7 +122,9 @@ class TestAutoStartCreatedTasks:
         # Task ID should be in the metadata
         assert notifications[0].metadata["task_id"] == task.id
 
-    def test_auto_start_multiple_tasks(self, db_conn, test_user_id, enable_runner, disable_auto_push):
+    def test_auto_start_multiple_tasks(
+        self, db_conn, test_user_id, enable_runner, disable_auto_push
+    ):
         """Test auto-starting multiple created tasks."""
         # Create multiple tasks
         task1 = create_agent_task(
@@ -153,7 +155,9 @@ class TestAutoStartCreatedTasks:
         count = auto_start_created_tasks(db_conn)
         assert count == 0
 
-    def test_auto_start_ignores_running_tasks(self, db_conn, test_user_id, enable_runner, disable_auto_push):
+    def test_auto_start_ignores_running_tasks(
+        self, db_conn, test_user_id, enable_runner, disable_auto_push
+    ):
         """Test that auto-start ignores already running tasks."""
         # Create and start a task manually
         task = create_agent_task(
@@ -165,6 +169,7 @@ class TestAutoStartCreatedTasks:
 
         # Manually transition to running
         from handsfree.db.agent_tasks import update_agent_task_state
+
         update_agent_task_state(
             conn=db_conn,
             task_id=task.id,
@@ -191,6 +196,7 @@ class TestSimulateProgressUpdate:
         )
 
         from handsfree.db.agent_tasks import update_agent_task_state
+
         update_agent_task_state(
             conn=db_conn,
             task_id=task.id,
@@ -445,7 +451,9 @@ class TestRunOnce:
         assert result["enabled"] is False
         assert result["tasks_started"] == 0
 
-    def test_run_once_with_created_tasks(self, db_conn, test_user_id, enable_runner, disable_auto_push):
+    def test_run_once_with_created_tasks(
+        self, db_conn, test_user_id, enable_runner, disable_auto_push
+    ):
         """Test run_once starts created tasks."""
         # Create a task
         create_agent_task(
@@ -461,7 +469,9 @@ class TestRunOnce:
         assert result["tasks_started"] == 1
         assert result["tasks_completed"] == 0
 
-    def test_run_once_with_running_tasks(self, db_conn, test_user_id, enable_runner, disable_auto_push):
+    def test_run_once_with_running_tasks(
+        self, db_conn, test_user_id, enable_runner, disable_auto_push
+    ):
         """Test run_once completes running tasks."""
         from handsfree.db.agent_tasks import update_agent_task_state
 
@@ -514,7 +524,7 @@ class TestRunOnce:
         # Manipulate the start time to simulate elapsed time
         # We need to directly update the trace, not use update_agent_task_state
         # because we can't transition running->running.
-        # 
+        #
         # NOTE: This test intentionally uses raw SQL to manipulate database state
         # to test the runner's behavior when a task has been running for a specific
         # duration. This is necessary because:

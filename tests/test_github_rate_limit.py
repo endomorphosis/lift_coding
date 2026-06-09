@@ -123,9 +123,7 @@ class TestRateLimitDetection:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock a 401 response
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(401)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(401))
 
         # Should raise RuntimeError about authentication
         with pytest.raises(RuntimeError, match="authentication failed"):
@@ -245,7 +243,9 @@ class TestTransientErrorRetry:
         ]
         response_iter = iter(responses)
 
-        respx.get("https://api.github.com/user").mock(side_effect=lambda request: next(response_iter))
+        respx.get("https://api.github.com/user").mock(
+            side_effect=lambda request: next(response_iter)
+        )
 
         # Should eventually succeed after retries
         result = provider._make_request("/user")
@@ -318,9 +318,7 @@ class TestTransientErrorRetry:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock 503 responses beyond max retries
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(503)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(503))
 
         # Should fail after max retries
         with pytest.raises(RuntimeError, match="request failed with status 503"):
@@ -446,9 +444,7 @@ class TestTokenNotLogged:
         token_provider = MockTokenProvider("ghp_secrettoken789012")
         provider = LiveGitHubProvider(token_provider)
 
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(503)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(503))
 
         with pytest.raises(RuntimeError):
             provider._make_request("/user")

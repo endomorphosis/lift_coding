@@ -36,14 +36,16 @@ def get_ai_backend_policy() -> AIBackendPolicy:
     )
 
     # Legacy rollout flags remain supported as compatibility fallbacks.
-    if summary_backend == "default" and os.getenv(
-        "HANDSFREE_AI_ACCELERATED_SUMMARY_ENABLED", "false"
-    ).lower() == "true":
+    if (
+        summary_backend == "default"
+        and os.getenv("HANDSFREE_AI_ACCELERATED_SUMMARY_ENABLED", "false").lower() == "true"
+    ):
         summary_backend = "accelerated"
 
-    if failure_backend == "default" and os.getenv(
-        "HANDSFREE_AI_COMPOSITE_FAILURE_ENABLED", "false"
-    ).lower() == "true":
+    if (
+        failure_backend == "default"
+        and os.getenv("HANDSFREE_AI_COMPOSITE_FAILURE_ENABLED", "false").lower() == "true"
+    ):
         failure_backend = "composite"
 
     return AIBackendPolicy(
@@ -74,7 +76,10 @@ def resolve_policy_workflow(
 
     if workflow == AIWorkflow.FAILURE_RAG_EXPLAIN:
         if policy.failure_backend == "accelerated":
-            return AIWorkflow.ACCELERATED_FAILURE_EXPLAIN, "github.check.accelerated_failure_explain"
+            return (
+                AIWorkflow.ACCELERATED_FAILURE_EXPLAIN,
+                "github.check.accelerated_failure_explain",
+            )
         if policy.failure_backend == "composite":
             return AIWorkflow.FAILURE_RAG_EXPLAIN, "github.check.failure_rag_explain"
 

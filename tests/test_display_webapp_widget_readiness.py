@@ -6,7 +6,9 @@ from handsfree.display_webapp_compat import evaluate_display_webapp_readiness
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-READINESS_EXAMPLE = REPO_ROOT / "config" / "display_webapp_readiness.meta_glasses_widget.example.json"
+READINESS_EXAMPLE = (
+    REPO_ROOT / "config" / "display_webapp_readiness.meta_glasses_widget.example.json"
+)
 RENDERER_SOURCE = REPO_ROOT / "swissknife" / "src" / "services" / "meta-glasses-webapp-renderer.ts"
 
 
@@ -15,7 +17,9 @@ def _load_example() -> dict:
 
 
 def _widget_prefix(widget_id: str) -> str:
-    normalized = "".join(character if character.isalnum() else "_" for character in widget_id.lower())
+    normalized = "".join(
+        character if character.isalnum() else "_" for character in widget_id.lower()
+    )
     return "widget_" + "_".join(part for part in normalized.split("_") if part)
 
 
@@ -77,7 +81,7 @@ def test_webapp_renderer_source_exports_preview_and_readiness_contracts() -> Non
         "export function buildMetaGlassesWebappReadinessDescriptor",
         "export function evaluateMetaGlassesWebappReadiness",
         "export function assertMetaGlassesWebappReady",
-        "role=\"application\"",
+        'role="application"',
         "width: 600px",
         "height: 600px",
         "data-mgw-focus-index",

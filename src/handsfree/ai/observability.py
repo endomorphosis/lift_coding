@@ -275,9 +275,9 @@ def build_ai_backend_policy_report(
     def _top_entries(counter: Counter[str], max_items: int = 5) -> list[AICapabilityUsageCount]:
         return [
             AICapabilityUsageCount(capability_id=capability_id, count=count)
-            for capability_id, count in sorted(counter.items(), key=lambda item: (-item[1], item[0]))[
-                :max_items
-            ]
+            for capability_id, count in sorted(
+                counter.items(), key=lambda item: (-item[1], item[0])
+            )[:max_items]
         ]
 
     def _top_remaps(counter: Counter[str], max_items: int = 5) -> list[AIRemapCount]:

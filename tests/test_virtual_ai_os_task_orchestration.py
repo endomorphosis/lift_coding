@@ -24,7 +24,14 @@ def agent_service(db_conn):
     return AgentService(db_conn)
 
 
-def _write_state(path, *, task_id: str, task_status: str, active_task_id: str | None, active_task_title: str | None):
+def _write_state(
+    path,
+    *,
+    task_id: str,
+    task_status: str,
+    active_task_id: str | None,
+    active_task_title: str | None,
+):
     path.write_text(
         json.dumps(
             {

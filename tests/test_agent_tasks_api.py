@@ -848,7 +848,10 @@ class TestAgentTaskMediaAttach:
         updated_task = get_agent_task_by_id(conn=db, task_id=task.id)
         assert updated_task is not None
         assert updated_task.trace["wearables_dat_media_count"] == 1
-        assert updated_task.trace["wearables_dat_latest_media"]["uri"] == "file:///tmp/uploaded-image.jpg"
+        assert (
+            updated_task.trace["wearables_dat_latest_media"]["uri"]
+            == "file:///tmp/uploaded-image.jpg"
+        )
         assert updated_task.trace["wearables_dat_media"][0]["media_kind"] == "image"
 
     def test_attach_media_is_user_scoped(self, reset_db, test_user_id_2):

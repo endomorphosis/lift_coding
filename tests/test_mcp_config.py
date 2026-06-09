@@ -41,7 +41,9 @@ class TestMCPConfig:
         monkeypatch.setenv("HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CATEGORY", "workflow")
         monkeypatch.setenv("HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CREATE_TOOL", "create_workflow")
         monkeypatch.setenv("HANDSFREE_MCP_IPFS_ACCELERATE_TASK_STATUS_TOOL", "get_task_status")
-        monkeypatch.setenv("HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CANCEL_TOOL", "manage_background_tasks")
+        monkeypatch.setenv(
+            "HANDSFREE_MCP_IPFS_ACCELERATE_TASK_CANCEL_TOOL", "manage_background_tasks"
+        )
 
         config = get_mcp_server_config("ipfs_accelerate")
 

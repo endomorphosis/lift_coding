@@ -265,7 +265,9 @@ class PeerChatSessionService:
         if policy["delivery_mode"] == "short_retry":
             deliverable.sort(key=lambda item: item.timestamp_ms)
         else:
-            deliverable.sort(key=lambda item: (0 if item.priority == "urgent" else 1, item.timestamp_ms))
+            deliverable.sort(
+                key=lambda item: (0 if item.priority == "urgent" else 1, item.timestamp_ms)
+            )
 
         visible: list[dict[str, Any]] = []
         for item in deliverable:

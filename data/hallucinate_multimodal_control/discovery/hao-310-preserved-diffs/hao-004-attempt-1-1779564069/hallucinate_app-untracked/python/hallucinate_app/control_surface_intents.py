@@ -80,9 +80,15 @@ def normalize_interaction(
         if isinstance(normalized_intent, NormalizedIntent)
         else NormalizedIntent.from_mapping(normalized_intent)
     )
-    resolved_actor = actor if isinstance(actor, ActorIdentity) else ActorIdentity.from_mapping(actor)
-    resolved_context = context if isinstance(context, RuntimeContext) else RuntimeContext.from_mapping(context)
-    resolved_interaction_id = interaction_id or str(resolved_payload.get("interaction_id") or uuid4())
+    resolved_actor = (
+        actor if isinstance(actor, ActorIdentity) else ActorIdentity.from_mapping(actor)
+    )
+    resolved_context = (
+        context if isinstance(context, RuntimeContext) else RuntimeContext.from_mapping(context)
+    )
+    resolved_interaction_id = interaction_id or str(
+        resolved_payload.get("interaction_id") or uuid4()
+    )
 
     return InteractionEnvelope(
         interaction_id=resolved_interaction_id,

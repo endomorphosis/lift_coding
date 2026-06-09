@@ -160,9 +160,7 @@ SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment
 """
 
 
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_DISPLAY_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(META_DISPLAY_ENV_PREFIX)
 
 
 ensure_post_initial_discovery_backlog = _build_task_blocks_ensurer(
@@ -239,7 +237,9 @@ _meta_display_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
 )
 _meta_display_supervisor_runtime = _meta_display_supervisor_runner.runtime
-_meta_display_supervisor_exports = build_configured_supervisor_runtime_exports(_meta_display_supervisor_runtime)
+_meta_display_supervisor_exports = build_configured_supervisor_runtime_exports(
+    _meta_display_supervisor_runtime
+)
 META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_exports.process_match_any
 repair_meta_display_supervisor_runtime = _meta_display_supervisor_exports.repair_runtime
 meta_display_supervisor_is_running = _meta_display_supervisor_exports.is_running

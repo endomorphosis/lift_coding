@@ -12,7 +12,7 @@ def test_executor_uses_fixture_mode(monkeypatch):
 
     assert result.ok is True
     assert result.source == "fixture"
-    assert "\"number\":123" in result.stdout
+    assert '"number":123' in result.stdout
 
 
 def test_github_cli_adapter_summarizes_pr(monkeypatch):

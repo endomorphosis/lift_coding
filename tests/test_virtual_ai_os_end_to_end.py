@@ -65,7 +65,14 @@ def mobile_orb_api():
     _clear_mobile_orb_state(api_module)
 
 
-def _write_state(path, *, task_id: str, task_status: str, active_task_id: str | None, active_task_title: str | None):
+def _write_state(
+    path,
+    *,
+    task_id: str,
+    task_status: str,
+    active_task_id: str | None,
+    active_task_title: str | None,
+):
     path.write_text(
         json.dumps(
             {
@@ -539,7 +546,9 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
         artifact_refs.receipt_ref,
     ]
     assert invoked_payload["service_result"]["arguments"]["artifact_refs"] == artifact_payload
-    assert invoked_payload["display_widget_action"]["descriptor_cid"] == orb_binding["descriptor_cid"]
+    assert (
+        invoked_payload["display_widget_action"]["descriptor_cid"] == orb_binding["descriptor_cid"]
+    )
     assert invoked_payload["display_widget_action"]["widget_cid"] == artifact_refs.result_cid
     assert invoked_payload["display_widget_action"]["manifest"]["provenance"]["artifact_refs"] == (
         artifact_payload
@@ -572,11 +581,13 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
     assert dispatched_payload["display_widget_action"]["fallback"]["reason"] == (
         "dat_native_display_unavailable"
     )
-    assert dispatched_payload["display_widget_action"]["fallback"]["audio"]["spoken_text"] == (
-        task_status["result_preview"]
+    assert (
+        dispatched_payload["display_widget_action"]["fallback"]["audio"]["spoken_text"]
+        == (task_status["result_preview"])
     )
-    assert dispatched_payload["dispatched_actions"][0]["mobile_payload"] == (
-        dispatched_payload["display_widget_action"]
+    assert (
+        dispatched_payload["dispatched_actions"][0]["mobile_payload"]
+        == (dispatched_payload["display_widget_action"])
     )
     assert dispatched_payload["spoken_text"] == task_status["result_preview"]
 
@@ -596,14 +607,16 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
         "revocations": 0,
     }
     assert orb_binding["descriptor_cid"] in diagnostics_payload["descriptor_cids"]
-    assert binding_payload["policy_decision"]["compiled_policy_cid"] in (
-        diagnostics_payload["policy_cids"]
+    assert (
+        binding_payload["policy_decision"]["compiled_policy_cid"]
+        in (diagnostics_payload["policy_cids"])
     )
     assert event_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert dispatched_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
     assert diagnostics_payload["binding_state"]["status"] == "bound"
-    assert diagnostics_payload["diagnostics_contract"]["capability_counts"]["backend"] == (
-        diagnostics_payload["backend_counts"]
+    assert (
+        diagnostics_payload["diagnostics_contract"]["capability_counts"]["backend"]
+        == (diagnostics_payload["backend_counts"])
     )

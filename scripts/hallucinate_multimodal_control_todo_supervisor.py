@@ -55,9 +55,7 @@ DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
 _RUNTIME_ENVIRONMENT = HALLUCINATE_CONTEXT.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    HALLUCINATE_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(HALLUCINATE_ENV_PREFIX)
 
 _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_factory(
     HALLUCINATE_DATA_PATHS,
@@ -113,7 +111,9 @@ _hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale Hallucinate supervisor runtime markers: %s",
 )
 _hallucinate_supervisor_runtime = _hallucinate_supervisor_runner.runtime
-_hallucinate_supervisor_exports = build_configured_supervisor_runtime_exports(_hallucinate_supervisor_runtime)
+_hallucinate_supervisor_exports = build_configured_supervisor_runtime_exports(
+    _hallucinate_supervisor_runtime
+)
 repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_exports.repair_runtime
 hallucinate_supervisor_is_running = _hallucinate_supervisor_exports.is_running
 ensure_hallucinate_supervisor_running = _hallucinate_supervisor_exports.ensure_running

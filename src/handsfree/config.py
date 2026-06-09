@@ -159,9 +159,7 @@ def get_meta_glasses_display_widget_config(
         require_trusted_descriptor=_env_flag(
             source,
             "HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR",
-            DISPLAY_WIDGET_ENV_DEFAULTS[
-                "HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR"
-            ],
+            DISPLAY_WIDGET_ENV_DEFAULTS["HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR"],
         ),
         allow_webapp_fallback=_env_flag(
             source,
@@ -205,8 +203,7 @@ def get_virtual_ai_os_observability_contract(
         "metric_names": dict(DISPLAY_WIDGET_METRIC_NAMES),
         "failure_modes": list(DISPLAY_WIDGET_FAILURE_MODES),
         "execution_path_guards": {
-            path: dict(contract)
-            for path, contract in VIRTUAL_AI_OS_EXECUTION_GUARDS.items()
+            path: dict(contract) for path, contract in VIRTUAL_AI_OS_EXECUTION_GUARDS.items()
         },
         "display_widget": display_widget_config.as_dict(),
     }

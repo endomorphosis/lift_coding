@@ -34,8 +34,12 @@ def resolve_virtual_ai_os_runtime_route(
         provider_preferred_modes=provider_preferred_modes,
         policy_preferred_modes=policy_preferred_modes,
     )
-    runtime_surface = _resolve_runtime_surface(entry.capability_id, execution_mode, preferred_surface)
-    handler_ref, cli_command = _resolve_handler(entry.capability_id, execution_mode, runtime_surface)
+    runtime_surface = _resolve_runtime_surface(
+        entry.capability_id, execution_mode, preferred_surface
+    )
+    handler_ref, cli_command = _resolve_handler(
+        entry.capability_id, execution_mode, runtime_surface
+    )
     return AICapabilityRoute(
         capability_id=entry.capability_id,
         owner_repo=entry.owner_repo,
@@ -94,7 +98,11 @@ def _supported_surfaces_for_mode(
         return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
     if capability_id in {"embedding", "dataset_discovery", "storage", "ipfs_pin"}:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
-    return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.DAEMON_MEDIATED, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    return (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
 
 
 def _resolve_handler(

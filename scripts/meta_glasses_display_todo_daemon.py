@@ -88,9 +88,7 @@ _RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_DISPLAY_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(META_DISPLAY_ENV_PREFIX)
 META_DISPLAY_STATE_PATHS = namespace_implementation_state_artifact_paths(
     META_DISPLAY_DATA_PATHS,
     state_prefix="meta_glasses_display",

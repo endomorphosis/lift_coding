@@ -146,7 +146,11 @@ _CAPABILITIES: dict[str, AICapabilitySpec] = {
         title="Pin Content With IPFS Kit",
         description="Pin content through ipfs_kit_py canonical backend modules.",
         backend_family=AIBackendFamily.IPFS_KIT,
-        execution_modes=(AIExecutionMode.DIRECT_IMPORT, AIExecutionMode.CLI_LIVE, AIExecutionMode.MCP_REMOTE),
+        execution_modes=(
+            AIExecutionMode.DIRECT_IMPORT,
+            AIExecutionMode.CLI_LIVE,
+            AIExecutionMode.MCP_REMOTE,
+        ),
         required_inputs=("cid",),
         optional_inputs=("ipfs_options",),
         tags=("ipfs", "kit", "pin"),
@@ -157,7 +161,11 @@ _CAPABILITIES: dict[str, AICapabilitySpec] = {
         title="Unpin Content With IPFS Kit",
         description="Unpin content through ipfs_kit_py canonical backend modules.",
         backend_family=AIBackendFamily.IPFS_KIT,
-        execution_modes=(AIExecutionMode.DIRECT_IMPORT, AIExecutionMode.CLI_LIVE, AIExecutionMode.MCP_REMOTE),
+        execution_modes=(
+            AIExecutionMode.DIRECT_IMPORT,
+            AIExecutionMode.CLI_LIVE,
+            AIExecutionMode.MCP_REMOTE,
+        ),
         required_inputs=("cid",),
         optional_inputs=("ipfs_options",),
         tags=("ipfs", "kit", "pin"),
@@ -895,7 +903,9 @@ def _execute_github_check_failure_rag_explain(
     failure_target_type = kwargs.get("failure_target_type")
     github_provider = kwargs.get("github_provider")
     history_candidates = list(kwargs.get("history_candidates") or [])
-    history_candidates.extend(_load_failure_history_candidates_from_cids(kwargs.get("history_cids")))
+    history_candidates.extend(
+        _load_failure_history_candidates_from_cids(kwargs.get("history_cids"))
+    )
     embedding_options = dict(kwargs.get("embedding_options") or {})
     generation_options = dict(kwargs.get("generation_options") or {})
 
@@ -1017,14 +1027,18 @@ def _execute_github_check_failure_rag_explain(
     )
 
 
-def _execute_github_find_similar_failures(spec: AICapabilitySpec, **kwargs: Any) -> AICapabilityResult:
+def _execute_github_find_similar_failures(
+    spec: AICapabilitySpec, **kwargs: Any
+) -> AICapabilityResult:
     pr_number = kwargs["pr_number"]
     repo = kwargs.get("repo")
     failure_target = kwargs.get("failure_target")
     failure_target_type = kwargs.get("failure_target_type")
     github_provider = kwargs.get("github_provider")
     history_candidates = list(kwargs.get("history_candidates") or [])
-    history_candidates.extend(_load_failure_history_candidates_from_cids(kwargs.get("history_cids")))
+    history_candidates.extend(
+        _load_failure_history_candidates_from_cids(kwargs.get("history_cids"))
+    )
     top_k = kwargs.get("top_k")
 
     checks = _fetch_pr_checks(github_provider, repo, pr_number)
@@ -1035,7 +1049,9 @@ def _execute_github_find_similar_failures(spec: AICapabilitySpec, **kwargs: Any)
         failure_target_type=failure_target_type,
     )
 
-    candidate_payloads = [_normalize_failure_history_candidate(candidate) for candidate in history_candidates]
+    candidate_payloads = [
+        _normalize_failure_history_candidate(candidate) for candidate in history_candidates
+    ]
     ranking = _execute_ipfs_rank_texts(
         get_ai_capability("ipfs.retrieval.rank_texts"),
         query_text=checks_context,
@@ -1110,7 +1126,9 @@ def _execute_github_check_accelerated_failure_explain(
     failure_target_type = kwargs.get("failure_target_type")
     github_provider = kwargs.get("github_provider")
     history_candidates = list(kwargs.get("history_candidates") or [])
-    history_candidates.extend(_load_failure_history_candidates_from_cids(kwargs.get("history_cids")))
+    history_candidates.extend(
+        _load_failure_history_candidates_from_cids(kwargs.get("history_cids"))
+    )
     embedding_options = dict(kwargs.get("embedding_options") or {})
     generation_options = dict(kwargs.get("generation_options") or {})
 
@@ -1241,7 +1259,9 @@ def _execute_github_check_accelerated_failure_explain(
     )
 
 
-def _fetch_pr_checks(github_provider: Any, repo: str | None, pr_number: int) -> list[dict[str, Any]]:
+def _fetch_pr_checks(
+    github_provider: Any, repo: str | None, pr_number: int
+) -> list[dict[str, Any]]:
     if github_provider is None or not repo:
         return []
     checks = github_provider.get_pr_checks(repo, pr_number)
@@ -1306,16 +1326,19 @@ def _normalize_failure_history_candidate(candidate: Any) -> dict[str, Any]:
     pr_number = candidate.get("pr_number")
     failure_target = candidate.get("failure_target")
     failure_target_type = candidate.get("failure_target_type")
-    match_text = " | ".join(
-        value
-        for value in [
-            str(repo) if repo else "",
-            f"PR {pr_number}" if pr_number is not None else "",
-            f"{failure_target_type} {failure_target}".strip() if failure_target else "",
-            summary,
-        ]
-        if value
-    ) or summary
+    match_text = (
+        " | ".join(
+            value
+            for value in [
+                str(repo) if repo else "",
+                f"PR {pr_number}" if pr_number is not None else "",
+                f"{failure_target_type} {failure_target}".strip() if failure_target else "",
+                summary,
+            ]
+            if value
+        )
+        or summary
+    )
     return {
         "summary": summary,
         "match_text": match_text,
@@ -1341,10 +1364,13 @@ def _load_failure_history_candidates_from_cids(history_cids: Any) -> list[dict[s
         stored_payload = payload.get("payload", {}) if isinstance(payload, dict) else {}
         loaded_candidates.append(
             {
-                "summary": stored_payload.get("summary") or stored_payload.get("headline") or f"Stored output {cid}",
+                "summary": stored_payload.get("summary")
+                or stored_payload.get("headline")
+                or f"Stored output {cid}",
                 "repo": metadata.get("repo") or stored_payload.get("repo"),
                 "pr_number": metadata.get("pr_number") or stored_payload.get("pr_number"),
-                "failure_target": metadata.get("failure_target") or stored_payload.get("failure_target"),
+                "failure_target": metadata.get("failure_target")
+                or stored_payload.get("failure_target"),
                 "failure_target_type": metadata.get("failure_target_type")
                 or stored_payload.get("failure_target_type"),
             }
@@ -1407,7 +1433,9 @@ def _cosine_similarity(left: list[float], right: list[float]) -> float:
     if not left or not right or len(left) != len(right):
         return 0.0
 
-    dot_product = sum(left_value * right_value for left_value, right_value in zip(left, right, strict=False))
+    dot_product = sum(
+        left_value * right_value for left_value, right_value in zip(left, right, strict=False)
+    )
     left_norm = sum(value * value for value in left) ** 0.5
     right_norm = sum(value * value for value in right) ** 0.5
     if left_norm == 0 or right_norm == 0:

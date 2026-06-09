@@ -54,9 +54,7 @@ class IPFSKitUnavailableError(RuntimeError):
 
 class _UnavailableIPFSKitAdapter:
     def _raise(self, method: str) -> NoReturn:
-        raise IPFSKitUnavailableError(
-            f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py"
-        )
+        raise IPFSKitUnavailableError(f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py")
 
     def add_bytes(self, data: bytes, **kwargs: Any) -> NoReturn:
         self._raise("add_bytes")
@@ -131,14 +129,10 @@ class _IPFSKitModuleAdapter:
             factory = getattr(module, "get_instance", None)
             if callable(factory):
                 return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
-        )
+        raise IPFSKitUnavailableError("ipfs_kit_py.ipfs_backend.get_instance is unavailable")
 
     def _get_high_level_api(self) -> Any | None:
-        api_factory = self._resolve_callable(
-            ("ipfs_kit_py.high_level_api", "IPFSSimpleAPI")
-        )
+        api_factory = self._resolve_callable(("ipfs_kit_py.high_level_api", "IPFSSimpleAPI"))
         if api_factory is None:
             return None
         api = api_factory()
@@ -205,8 +199,7 @@ class _IPFSKitModuleAdapter:
         if callable(add_str):
             return add_str(data.decode("utf-8", errors="replace"), **kwargs)
         raise IPFSKitUnavailableError(
-            "ipfs_kit_py add_bytes is unavailable: backend exposes neither "
-            "add_bytes nor add_str"
+            "ipfs_kit_py add_bytes is unavailable: backend exposes neither add_bytes nor add_str"
         )
 
     def cat(self, cid: str, **kwargs: Any) -> Any:
@@ -304,9 +297,7 @@ class _IPFSKitModuleAdapter:
             factory = getattr(module, "IPFSSimpleAPI", None)
             if callable(factory):
                 return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable"
-        )
+        raise IPFSKitUnavailableError("ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable")
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
         package_fn = getattr(self._root_module, "package_dataset", None)

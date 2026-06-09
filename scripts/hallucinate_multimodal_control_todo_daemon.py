@@ -116,9 +116,7 @@ logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
 ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
 HALLUCINATE_STATE_PATHS = namespace_implementation_state_artifact_paths(HALLUCINATE_DATA_PATHS)
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    HALLUCINATE_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(HALLUCINATE_ENV_PREFIX)
 
 
 record_objective_goal_findings = build_namespace_objective_backlog_recorder(

@@ -353,83 +353,93 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "/v1/agents/results" in schema["paths"]
     assert "/v1/notifications" in schema["paths"]
     assert "/v1/notifications/{notification_id}" in schema["paths"]
-    notifications_examples = (
-        schema["paths"]["/v1/notifications"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
+    notifications_examples = schema["paths"]["/v1/notifications"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["examples"]
     assert notifications_examples["notifications_feed"]["value"]["count"] == 1
     assert (
-        notifications_examples["notifications_feed"]["value"]["notifications"][0]["card"]["action_items"][0]["id"]
+        notifications_examples["notifications_feed"]["value"]["notifications"][0]["card"][
+            "action_items"
+        ][0]["id"]
         == "mobile_open_wearables_diagnostics"
     )
-    notifications_error_examples = (
-        schema["paths"]["/v1/notifications"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
-    )
+    notifications_error_examples = schema["paths"]["/v1/notifications"]["get"]["responses"]["400"][
+        "content"
+    ]["application/json"]["examples"]
     assert notifications_error_examples["invalid_since"]["value"]["error"] == "invalid_parameter"
-    notification_detail_examples = (
-        schema["paths"]["/v1/notifications/{notification_id}"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
+    notification_detail_examples = schema["paths"]["/v1/notifications/{notification_id}"]["get"][
+        "responses"
+    ]["200"]["content"]["application/json"]["examples"]
+    assert notification_detail_examples["mcp_completion_notification"]["value"]["card"][
+        "title"
+    ] == ("Wearables Connectivity Receipt")
+    notification_detail_error_examples = schema["paths"]["/v1/notifications/{notification_id}"][
+        "get"
+    ]["responses"]["404"]["content"]["application/json"]["examples"]
+    assert (
+        notification_detail_error_examples["notification_not_found"]["value"]["error"]
+        == "not_found"
     )
-    assert notification_detail_examples["mcp_completion_notification"]["value"]["card"]["title"] == (
-        "Wearables Connectivity Receipt"
-    )
-    notification_detail_error_examples = (
-        schema["paths"]["/v1/notifications/{notification_id}"]["get"]["responses"]["404"]["content"]["application/json"]["examples"]
-    )
-    assert notification_detail_error_examples["notification_not_found"]["value"]["error"] == "not_found"
-    task_list_examples = (
-        schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
-    assert task_list_examples["filtered_task_list"]["value"]["tasks"][0]["result"]["capability"] == (
-        "dataset_discovery"
-    )
-    task_list_error_examples = (
-        schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
-    )
+    task_list_examples = schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["200"]["content"][
+        "application/json"
+    ]["examples"]
+    assert task_list_examples["filtered_task_list"]["value"]["tasks"][0]["result"][
+        "capability"
+    ] == ("dataset_discovery")
+    task_list_error_examples = schema["paths"]["/v1/agents/tasks"]["get"]["responses"]["400"][
+        "content"
+    ]["application/json"]["examples"]
     assert task_list_error_examples["invalid_parameter"]["value"]["error"] == "invalid_parameter"
-    command_examples = (
-        schema["paths"]["/v1/command"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
+    command_examples = schema["paths"]["/v1/command"]["post"]["responses"]["200"]["content"][
+        "application/json"
+    ]["examples"]
     assert command_examples["task_spawn"]["value"]["follow_on_task"]["summary"] == (
         "IPFS Accelerate agentic fetch running."
     )
-    assert command_examples["needs_confirmation"]["value"]["pending_action"]["token"] == "conf-abc123xyz"
-    action_examples = (
-        schema["paths"]["/v1/commands/action"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
+    assert (
+        command_examples["needs_confirmation"]["value"]["pending_action"]["token"]
+        == "conf-abc123xyz"
     )
+    action_examples = schema["paths"]["/v1/commands/action"]["post"]["responses"]["200"]["content"][
+        "application/json"
+    ]["examples"]
     assert action_examples["task_spawn"]["value"]["intent"]["name"] == "agent.result_rerun"
-    confirm_examples = (
-        schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
+    confirm_examples = schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["200"][
+        "content"
+    ]["application/json"]["examples"]
     assert confirm_examples["task_spawn"]["value"]["intent"]["name"] == "agent.delegate.confirmed"
-    command_error_examples = (
-        schema["paths"]["/v1/command"]["post"]["responses"]["400"]["content"]["application/json"]["examples"]
-    )
+    command_error_examples = schema["paths"]["/v1/command"]["post"]["responses"]["400"]["content"][
+        "application/json"
+    ]["examples"]
     assert command_error_examples["invalid_request"]["value"]["error"] == "validation_error"
-    action_error_examples = (
-        schema["paths"]["/v1/commands/action"]["post"]["responses"]["400"]["content"]["application/json"]["examples"]
-    )
+    action_error_examples = schema["paths"]["/v1/commands/action"]["post"]["responses"]["400"][
+        "content"
+    ]["application/json"]["examples"]
     assert action_error_examples["invalid_action_id"]["value"]["error"] == "invalid_action_id"
-    confirm_error_examples = (
-        schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["404"]["content"]["application/json"]["examples"]
-    )
+    confirm_error_examples = schema["paths"]["/v1/commands/confirm"]["post"]["responses"]["404"][
+        "content"
+    ]["application/json"]["examples"]
     assert confirm_error_examples["expired_pending_action"]["value"]["error"] == "expired"
-    task_detail_examples = (
-        schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
+    task_detail_examples = schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["examples"]
     assert task_detail_examples["completed_dataset_result"]["value"]["result"]["capability"] == (
         "dataset_discovery"
     )
-    task_detail_error_examples = (
-        schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"]["404"]["content"]["application/json"]["examples"]
-    )
+    task_detail_error_examples = schema["paths"]["/v1/agents/tasks/{task_id}"]["get"]["responses"][
+        "404"
+    ]["content"]["application/json"]["examples"]
     assert task_detail_error_examples["task_not_found"]["value"]["error"] == "task_not_found"
-    agent_results_examples = (
-        schema["paths"]["/v1/agents/results"]["get"]["responses"]["200"]["content"]["application/json"]["examples"]
-    )
+    agent_results_examples = schema["paths"]["/v1/agents/results"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["examples"]
     assert agent_results_examples["datasets_view"]["value"]["summary"]["total_results"] == 1
-    agent_results_error_examples = (
-        schema["paths"]["/v1/agents/results"]["get"]["responses"]["400"]["content"]["application/json"]["examples"]
+    agent_results_error_examples = schema["paths"]["/v1/agents/results"]["get"]["responses"]["400"][
+        "content"
+    ]["application/json"]["examples"]
+    assert (
+        agent_results_error_examples["invalid_parameter"]["value"]["error"] == "invalid_parameter"
     )
-    assert agent_results_error_examples["invalid_parameter"]["value"]["error"] == "invalid_parameter"
     task_control = schema["components"]["schemas"]["AgentTaskControlResponse"]
     assert "task_id" in task_control["properties"]
     assert "state" in task_control["properties"]
@@ -437,7 +447,10 @@ def test_openapi_includes_action_command_and_card_action_schema() -> None:
     assert "updated_at" in task_control["properties"]
     action_request = schema["components"]["schemas"]["ActionCommandRequest"]
     assert "action_id" in action_request["properties"]
-    assert "mobile_open_wearables_diagnostics" in action_request["properties"]["action_id"]["description"]
+    assert (
+        "mobile_open_wearables_diagnostics"
+        in action_request["properties"]["action_id"]["description"]
+    )
     command_response = schema["components"]["schemas"]["CommandResponse"]
     assert "follow_on_task" in command_response["properties"]
     assert command_response["example"]["follow_on_task"]["summary"] == (

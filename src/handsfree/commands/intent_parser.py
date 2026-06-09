@@ -577,12 +577,12 @@ class IntentParser:
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "failure_backend": "accelerated",
                     "persist_output": True,
@@ -618,12 +618,12 @@ class IntentParser:
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "failure_backend": "accelerated",
                 },
@@ -679,28 +679,28 @@ class IntentParser:
                 ),
                 "ai.accelerated_explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                 },
             ),
             (
                 re.compile(
                     r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
-                re.IGNORECASE,
+                    re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "repo": lambda m: m.group(4),
                     "provider": "copilot_cli",
@@ -709,16 +709,16 @@ class IntentParser:
             (
                 re.compile(
                     r"\buse\s+copilot\s+to\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
-                re.IGNORECASE,
+                    re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "provider": "copilot_cli",
                 },
@@ -754,12 +754,12 @@ class IntentParser:
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "repo": lambda m: m.group(4),
                     "history_cids": lambda m: _parse_cids(m.group(5)),
@@ -772,12 +772,12 @@ class IntentParser:
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "history_cids": lambda m: _parse_cids(m.group(4)),
                 },
@@ -785,16 +785,16 @@ class IntentParser:
             (
                 re.compile(
                     r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
-                re.IGNORECASE,
+                    re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                     "repo": lambda m: m.group(4),
                 },
@@ -802,16 +802,16 @@ class IntentParser:
             (
                 re.compile(
                     r"\bexplain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\b",
-                re.IGNORECASE,
+                    re.IGNORECASE,
                 ),
                 "ai.explain_failure",
                 {
-                    "workflow_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "workflow"
-                    else None,
-                    "check_name": lambda m: m.group(2).strip()
-                    if m.group(1).lower() == "check"
-                    else None,
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
                     "pr_number": lambda m: int(m.group(3)),
                 },
             ),
