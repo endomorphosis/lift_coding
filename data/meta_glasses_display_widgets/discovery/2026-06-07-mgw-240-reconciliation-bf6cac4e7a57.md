@@ -1,10 +1,10 @@
 # MGW-240 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: aa06f1c0d3d6225ea8d02248ac4b009a7746a7ce
+Fingerprint: 745e9e0b76aa773c037e5b21928a01bc9cbbf44f
 Kind: dirty_backlogged_worktree
 Reason: content_not_in_target
-Candidate count: 1
+Candidate count: 2
 Priority: P2
 Track: ops
 
@@ -24,6 +24,14 @@ Track: ops
   - Diff stat:
     - `.../docs/19-virtual-ai-os-submodule-integration.todo.md             | 6 +++---`
     - ` 1 file changed, 3 insertions(+), 3 deletions(-)`
+- `implementation/mgw-185-attempt-1-1780992723` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-185-attempt-1-1780992723` status: ` M hallucinate_app;  M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - Name status:
+    - `M	hallucinate_app`
+    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - Diff stat:
+    - `hallucinate_app                                                   | 2 +-`
+    - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md       | 8 ++++----`
+    - ` 2 files changed, 5 insertions(+), 5 deletions(-)`
 
 ## Why This Blocks Progress
 
@@ -42,7 +50,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `2` candidates, `2` sampled records.
 
 ### Suggested Actions
 
@@ -90,10 +98,10 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target",
-  "fingerprint": "aa06f1c0d3d6225ea8d02248ac4b009a7746a7ce",
+  "fingerprint": "745e9e0b76aa773c037e5b21928a01bc9cbbf44f",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "content_not_in_target",
@@ -103,14 +111,18 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/mgw-181-attempt-1-1780988528"
+    "implementation/mgw-181-attempt-1-1780988528",
+    "implementation/mgw-185-attempt-1-1780992723"
   ],
-  "sample_count": 1,
+  "sample_count": 2,
   "sample_status_paths": [
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-181-attempt-1-1780988528"
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-181-attempt-1-1780988528",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-185-attempt-1-1780992723"
   ],
   "success_signals": [
     "candidate_count_decreases",

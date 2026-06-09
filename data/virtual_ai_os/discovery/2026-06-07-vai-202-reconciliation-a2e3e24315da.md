@@ -325,3 +325,27 @@ Latest `supervisor_check` event:
 - `worktree_cleanup_dirty_group_count`: `1`
 
 Success signal: the VAI-202 `unsupported_status` blocked candidate count decreased from `15` to `0` for the sampled group, and all 15 sampled worktree directories were removed by the supervisor cleanup pass.
+
+## Attempt 2 Reconciliation Result
+
+Execution time: 2026-06-09T08:35:00Z
+
+### Classification
+
+- Attempt 1 had already cleared all 15 `unsupported_status` candidates. The Attempt 2 pass found 2 remaining dirty worktrees in the active worktree set:
+  - `vai-019-attempt-1-1780988474` (branch already merged into `main`): working tree contained stale cosmetic updates — count changes in already-completed task descriptions (`VAI-200` count changed from "46" to "2", `MGW-239` count changed from "14" to "1") with no new fingerprint resolution beyond what `main` already contains.
+  - `vai-202-attempt-2-1780994073` (current reconciliation worktree): working tree contained unresolved nested conflict markers in `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md` from a prior merge, affecting already-completed task entries `MGW-239` and `MGW-240`.
+
+### Cleanup Actions
+
+- Restored `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md` in `vai-202-attempt-2-1780994073` from HEAD using `git checkout HEAD -- <file>`, discarding the nested conflict markers (which diverged from the main-branch HEAD for already-completed tasks).
+- Restored `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md` and `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md` in `vai-019-attempt-1-1780988474` from HEAD using `git checkout HEAD -- <files>`, discarding stale cosmetic count updates for already-completed and already-merged tasks.
+- Confirmed all active worktrees reported clean `git status` after restoration.
+
+### Result
+
+- `unsupported_status` blocked candidate count: `0` (unchanged from Attempt 1 result)
+- Remaining dirty worktree groups: `0` (`vai-019` and `vai-202-attempt-2` both clean after restoration)
+- All `unsupported_status` candidates originally identified in the reconciliation plan were resolved in Attempt 1 and remain resolved.
+
+Success signal: blocked candidate count remains at `0`; no new `unsupported_status` dirty worktree groups detected in the active worktree set.
