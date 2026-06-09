@@ -1,30 +1,24 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: 894c82c7aa05960e4191df7d81f65e58d7ec807e
+Fingerprint: bb4cadaf2828b8d841de5c965484b9c088d9021b
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 47
+Candidate count: 48
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M external/ipfs_kit`
+- `?? data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `untracked=1`
 - Status paths:
-  - `external/ipfs_kit`
-- Name status:
-  - `M	external/ipfs_kit`
-- Diff stat:
-  - `external/ipfs_kit | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
-- Submodule summary:
-  - `* external/ipfs_kit 0203f48f...c5744078 (1):`
-  - `  > Merge branch 'implementation/vai-292-attempt-1-1780995917-submodule-external-ipfs_kit'`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md`
+- Untracked paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md`
 
 ## Sample Branches Or Worktrees
 
@@ -66,7 +60,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `47` candidates, `20` sampled records.
+Work surface: `48` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -108,24 +102,24 @@ Work surface: `47` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 47,
+  "candidate_count": 48,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "894c82c7aa05960e4191df7d81f65e58d7ec807e",
+  "fingerprint": "bb4cadaf2828b8d841de5c965484b9c088d9021b",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_kit | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 1
+      "untracked": 1
     },
     "status_paths": [
-      "external/ipfs_kit"
+      "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md"
     ],
     "status_short": [
-      " M external/ipfs_kit"
+      "?? data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md"
     ],
-    "submodule_summary": "* external/ipfs_kit 0203f48f...c5744078 (1):\n  > Merge branch 'implementation/vai-292-attempt-1-1780995917-submodule-external-ipfs_kit'"
+    "untracked_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md"
+    ]
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -157,7 +151,7 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "external/ipfs_kit"
+    "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-379-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
