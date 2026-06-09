@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: b9efd6e79c56dacda95e07e615aed1665b2e00d0
+Fingerprint: 88af5d3b708c8ab79826db69ae5d31879b41455f
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 2
+Candidate count: 3
 Priority: P1
 Track: ops
 
@@ -25,6 +25,10 @@ Track: ops
   - Conflict paths:
     - `hallucinate_app`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/hao-223-attempt-1-1780990818` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-223-attempt-1-1780990818`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
 
 ## Why This Blocks Progress
 
@@ -43,7 +47,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `2` candidates, `2` sampled records.
+Work surface: `3` candidates, `3` sampled records.
 
 ### Suggested Actions
 
@@ -91,13 +95,14 @@ Work surface: `2` candidates, `2` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 2,
+  "candidate_count": 3,
   "conflict_path_counts": {
     "hallucinate_app": 2,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 1,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 2
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "b9efd6e79c56dacda95e07e615aed1665b2e00d0",
+  "fingerprint": "88af5d3b708c8ab79826db69ae5d31879b41455f",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -108,16 +113,19 @@ Work surface: `2` candidates, `2` sampled records.
   ],
   "sample_branches": [
     "implementation/hao-203-attempt-1-1780987641",
-    "implementation/hao-222-attempt-1-1780989133"
+    "implementation/hao-222-attempt-1-1780989133",
+    "implementation/hao-223-attempt-1-1780990818"
   ],
-  "sample_count": 2,
+  "sample_count": 3,
   "sample_status_paths": [
     "hallucinate_app",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-203-attempt-1-1780987641",
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-222-attempt-1-1780989133",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-223-attempt-1-1780990818"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -127,7 +135,8 @@ Work surface: `2` candidates, `2` sampled records.
   ],
   "top_conflict_paths": [
     "hallucinate_app",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ]
 }
 ```
