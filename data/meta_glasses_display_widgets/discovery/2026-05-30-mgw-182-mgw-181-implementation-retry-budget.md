@@ -22,3 +22,19 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Remediation
+
+MGW-181 attempts failed in worktrees whose `hallucinate_app` submodule gitlink
+resolved to `645f0a5e172e3e22034257ffc9eac52df825d368`, but the configured
+`https://github.com/endomorphosis/hallucinate_app.git` remote did not advertise
+that object, so the expected `ipfs_model_manager.py` path could not be reliably
+materialized. This repair reinitialized `hallucinate_app` from the fetchable
+upstream `main` commit `2062957f2bc319d3e879fa127f68e1d4bb88b4ae` and committed
+the MGW-181 exception-path cleanup in the submodule at
+`7864709954174b93b4548e194748f500124c1a09`.
+
+The `import_model_from_ipfs` broad catch remains a call-boundary guard for a
+recoverable import failure. It now logs the traceback with `logger.exception`
+without binding an unused exception variable or interpolating the exception
+message into the log string.
