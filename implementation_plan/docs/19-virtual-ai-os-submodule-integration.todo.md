@@ -3514,7 +3514,7 @@ cadence remains parseable and resumable.
 
 ## VAI-315 Resolve code annotation in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:123
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: runtime
