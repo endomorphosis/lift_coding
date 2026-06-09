@@ -217,12 +217,9 @@ class _IPFSKitModuleAdapter:
         except NotImplementedError as exc:
             logger.debug("ipfs_kit_py.cat direct callable unavailable: %s", exc)
         backend = self._get_backend()
-        cat_fn = getattr(backend, "cat", None)
-        if callable(cat_fn):
+        cat_fn = self._resolve_backend_callable(backend, ("cat",), ("get",))
+        if cat_fn is not None:
             return cat_fn(cid, **kwargs)
-        get_fn = getattr(backend, "get", None)
-        if callable(get_fn):
-            return get_fn(cid, **kwargs)
         raise IPFSKitUnavailableError(
             "ipfs_kit_py cat is unavailable: backend exposes neither cat nor get"
         )
