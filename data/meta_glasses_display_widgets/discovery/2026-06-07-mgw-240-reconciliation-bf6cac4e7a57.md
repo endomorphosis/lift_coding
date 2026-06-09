@@ -1,6 +1,6 @@
 # MGW-240 Reconciliation Guardrail
 
-Date: 2026-06-08
+Date: 2026-06-09
 Fingerprint: ba8605bb3e3ecfc5e86be5f3ca4ee26cceae6221
 Kind: dirty_backlogged_worktree
 Reason: content_not_in_target
