@@ -1,6 +1,6 @@
 # HAO-311 Reconciliation Guardrail
 
-Date: 2026-06-08
+Date: 2026-06-09
 Fingerprint: fd1b527134319746e4d639332f2916bbce8ab480
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
