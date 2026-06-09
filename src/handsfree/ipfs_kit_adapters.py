@@ -259,23 +259,36 @@ class _IPFSKitModuleAdapter:
         except IPFSKitUnavailableError as exc:
             logger.debug("ipfs_kit_py resolve backend unavailable: %s", exc)
         else:
-            for method_name in ("resolve", "name_resolve", "ipfs_name_resolve"):
-                backend_resolve = getattr(backend, method_name, None)
-                if callable(backend_resolve):
-                    return backend_resolve(cid, **kwargs)
+            backend_resolve = self._resolve_backend_callable(
+                backend,
+                ("resolve",),
+                ("dag_resolve",),
+                ("ipfs_dag_resolve",),
+                ("ipfs_object_stat",),
+                ("object_stat",),
+                ("object", "stat"),
+                ("dag_get",),
+                ("ipfs_dag_get",),
+                ("dag", "get"),
+                ("name_resolve",),
+                ("ipfs_name_resolve",),
+                ("name", "resolve"),
+            )
+            if backend_resolve is not None:
+                return backend_resolve(cid, **kwargs)
         try:
             simple_api = self._get_simple_api()
         except IPFSKitUnavailableError as exc:
             raise IPFSKitUnavailableError(
-                "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
-                "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI is unavailable"
+                "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
+                "or name resolver, and IPFSSimpleAPI is unavailable"
             ) from exc
         simple_resolve = getattr(simple_api, "resolve", None)
         if callable(simple_resolve):
             return simple_resolve(cid, **kwargs)
         raise IPFSKitUnavailableError(
-            "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
-            "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI exposes no resolve"
+            "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
+            "or name resolver, and IPFSSimpleAPI exposes no resolve"
         )
 
     def _get_simple_api(self) -> Any:
