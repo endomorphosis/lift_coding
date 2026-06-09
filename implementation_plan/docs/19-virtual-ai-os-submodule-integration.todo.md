@@ -2336,7 +2336,7 @@ cadence remains parseable and resumable.
 
 ## VAI-209 Review swallowed exception path in external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2388,3 +2388,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Validation: python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-213-vai-209-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.
+
+## VAI-216 Resolve merge retry-budget failure for VAI-209
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-216-vai-209-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-216-vai-209-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.
