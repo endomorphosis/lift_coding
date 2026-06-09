@@ -3606,3 +3606,58 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
 - Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
 - Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:32. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-325-codebase-scan-a53bb18e0ba2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-326 Resolve code annotation in data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:34
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:34. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-326-codebase-scan-87e93530f6b6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-327 Resolve code annotation in data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:35
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:35. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-327-codebase-scan-5c36e94cbe2d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-328 Resolve code annotation in data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:37
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:37. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-328-codebase-scan-4ca0df9cdf4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-329 Resolve code annotation in data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:39
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:39. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-329-codebase-scan-c08d77a15127.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-330 Resolve code annotation in data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:40
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md:40. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-330-codebase-scan-772f0e8436de.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
