@@ -14,6 +14,9 @@ callable were unavailable.
 - Added a backend `get` fallback after backend `cat`, matching the upstream
   `ipfs_kit_py.ipfs_backend.IPFSBackend` retrieval surface and documented
   `IPFSSimpleAPI.get(cid)` usage.
+- Routed the final read fallback through the adapter's backend callable resolver
+  so equivalent helpers exposed on `backend.client` are considered before the
+  adapter reports the integration unavailable.
 - Replaced the exhausted placeholder path with `IPFSKitUnavailableError`, the
   adapter's concrete runtime error for installed-but-unusable kit integrations.
 - Left the parseable VAI backlog metadata unchanged; the supervisor owns task
