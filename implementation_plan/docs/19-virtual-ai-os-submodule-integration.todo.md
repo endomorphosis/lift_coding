@@ -2228,7 +2228,7 @@ cadence remains parseable and resumable.
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 <<<<<<< Updated upstream
-## VAI-200 Resolve dirty main checkout blocking 48 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 47 worktree merges
 =======
 ## VAI-200 Resolve dirty main checkout blocking 46 worktree merges
 >>>>>>> Stashed changes
