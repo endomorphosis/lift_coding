@@ -19,3 +19,13 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Fixed in VAI-289. The `except Exception as e:` blocks at lines 262, 316, and 366 were swallowing full tracebacks.
+
+Changes made:
+- Added `exc_info=True` to all `logger.error()` calls in these except blocks so full tracebacks are preserved in logs.
+- Split each bare `except Exception` into a `requests.RequestException` catch (for expected network errors) followed by a catch-all `Exception` (for unexpected errors like JSON decode failures), both with `exc_info=True`.
+
+This is a genuine improvement: the exception is still handled gracefully (returning `None`/`[]`/`False`), but the full diagnostic context is now available in log output.
