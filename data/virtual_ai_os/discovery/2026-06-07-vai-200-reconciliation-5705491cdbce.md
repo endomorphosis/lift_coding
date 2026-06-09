@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: 50a9b0ac7c8d196f521f8e72bb9e0e35faa4d483
+Fingerprint: 894c82c7aa05960e4191df7d81f65e58d7ec807e
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -10,22 +10,21 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M .handsfree_transport_sessions.json`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M external/ipfs_kit`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2`
+- Path categories: `modified=1`
 - Status paths:
-  - `.handsfree_transport_sessions.json`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `external/ipfs_kit`
 - Name status:
-  - `M	.handsfree_transport_sessions.json`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	external/ipfs_kit`
 - Diff stat:
-  - `.handsfree_transport_sessions.json                 |  2 +-`
-  - ` ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 50 ++++++++++++++++------`
-  - ` 2 files changed, 39 insertions(+), 13 deletions(-)`
+  - `external/ipfs_kit | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+- Submodule summary:
+  - `* external/ipfs_kit 0203f48f...c5744078 (1):`
+  - `  > Merge branch 'implementation/vai-292-attempt-1-1780995917-submodule-external-ipfs_kit'`
 
 ## Sample Branches Or Worktrees
 
@@ -112,22 +111,21 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "50a9b0ac7c8d196f521f8e72bb9e0e35faa4d483",
+  "fingerprint": "894c82c7aa05960e4191df7d81f65e58d7ec807e",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 50 ++++++++++++++++------\n 2 files changed, 39 insertions(+), 13 deletions(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "diff_stat": "external/ipfs_kit | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 2
+      "modified": 1
     },
     "status_paths": [
-      ".handsfree_transport_sessions.json",
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M .handsfree_transport_sessions.json",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
-    ]
+      " M external/ipfs_kit"
+    ],
+    "submodule_summary": "* external/ipfs_kit 0203f48f...c5744078 (1):\n  > Merge branch 'implementation/vai-292-attempt-1-1780995917-submodule-external-ipfs_kit'"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -159,8 +157,7 @@ Work surface: `47` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    ".handsfree_transport_sessions.json",
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
