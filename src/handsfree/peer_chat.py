@@ -19,9 +19,9 @@ from handsfree.db.peer_chat import (
 
 logger = logging.getLogger(__name__)
 
-# Peer chat write and read paths should only fall back to in-memory state for
-# persistence-layer failures; validation and programming errors must still reach
-# callers.
+# Peer chat ingest/write and read paths should only fall back to in-memory state
+# for persistence-layer failures; validation and programming errors must still
+# reach callers.
 _PEER_CHAT_PERSISTENCE_ERRORS = (duckdb.Error, OSError)
 
 

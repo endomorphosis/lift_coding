@@ -170,6 +170,33 @@ def test_resolve_falls_back_to_canonical_backend(monkeypatch):
     }
 
 
+def test_resolve_falls_back_to_backend_client_object_stat(monkeypatch):
+    """CID metadata resolution should use backend client object-stat support."""
+    root_module = ModuleType("ipfs_kit_py")
+    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+
+    class FakeClient:
+        def ipfs_object_stat(self, cid, **kwargs):
+            return {"client": "ipfs_object_stat", "cid": cid, "options": kwargs}
+
+    class FakeBackend:
+        client = FakeClient()
+
+    backend_module.get_instance = lambda: FakeBackend()
+
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
+    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
+    reset_ipfs_kit_adapter_cache()
+
+    adapter = get_ipfs_kit_adapter()
+
+    assert adapter.resolve("bafy123", timeout=5) == {
+        "client": "ipfs_object_stat",
+        "cid": "bafy123",
+        "options": {"timeout": 5},
+    }
+
+
 def test_resolve_falls_back_to_high_level_api(monkeypatch):
     """Resolve should use the documented high-level API when backend has no resolver."""
     root_module = ModuleType("ipfs_kit_py")

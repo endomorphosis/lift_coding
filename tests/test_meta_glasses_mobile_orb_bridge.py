@@ -29,11 +29,17 @@ def _reset_mobile_orb_state() -> None:
     api_module.mobile_orb_service_bindings.clear()
     api_module.mobile_orb_service_subscriptions.clear()
     api_module.mobile_orb_events.clear()
+    api_module.mobile_orb_invocations.clear()
+    api_module.mobile_orb_dispatches.clear()
+    api_module.mobile_orb_revocations.clear()
     yield
     api_module.mobile_orb_edge_sessions.clear()
     api_module.mobile_orb_service_bindings.clear()
     api_module.mobile_orb_service_subscriptions.clear()
     api_module.mobile_orb_events.clear()
+    api_module.mobile_orb_invocations.clear()
+    api_module.mobile_orb_dispatches.clear()
+    api_module.mobile_orb_revocations.clear()
 
 
 def _register_edge() -> dict:
@@ -292,6 +298,34 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert diagnostics_payload["events_count"] == 1
     assert diagnostics_payload["bindings_count"] == 1
     assert diagnostics_payload["subscriptions_count"] == 1
+    assert diagnostics_payload["invocations_count"] == 1
+    assert diagnostics_payload["dispatches_count"] == 1
+    assert diagnostics_payload["revocations_count"] == 0
+    assert diagnostics_payload["backend_counts"] == {
+        "edge_sessions": 1,
+        "events": 1,
+        "bindings": 1,
+        "subscriptions": 1,
+        "invocations": 1,
+        "dispatches": 1,
+        "revocations": 0,
+    }
+    assert "sha256:task-service" in diagnostics_payload["descriptor_cids"]
+    assert binding_payload["orb_binding"]["descriptor_cid"] in diagnostics_payload["descriptor_cids"]
+    assert invoked_payload["display_widget_action"]["descriptor_cid"] in (
+        diagnostics_payload["descriptor_cids"]
+    )
+    assert binding_payload["policy_decision"]["compiled_policy_cid"] in (
+        diagnostics_payload["policy_cids"]
+    )
+    assert event_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert dispatched_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
+    assert diagnostics_payload["binding_state"]["status"] == "subscribed"
+    assert diagnostics_payload["binding_state"]["active_binding_handles"] == [
+        binding_payload["binding_handle"]
+    ]
     assert diagnostics_payload["bindings"][0]["binding_handle"] == (
         binding_payload["binding_handle"]
     )
