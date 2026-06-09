@@ -32,7 +32,7 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
 
 
 MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
-    prefer_copilot_merge_resolver=True,
+    prefer_copilot_merge_resolver=False,
 )
 
 
