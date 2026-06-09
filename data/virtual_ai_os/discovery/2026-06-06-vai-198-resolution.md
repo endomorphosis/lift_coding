@@ -3,6 +3,7 @@
 Date: 2026-06-06
 Source finding: `data/virtual_ai_os/discovery/2026-06-06-vai-198-codebase-scan-e8f8f357776a.md`
 Evidence: `hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027`
+Kind: swallowed_exception_resolved
 
 ## Finding
 
