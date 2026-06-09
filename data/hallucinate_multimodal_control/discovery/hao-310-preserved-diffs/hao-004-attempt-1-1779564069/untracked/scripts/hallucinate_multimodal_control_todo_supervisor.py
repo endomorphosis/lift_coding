@@ -8,19 +8,17 @@ import os
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
-    IPFS_DATASETS_ROOT,
     DISCOVERY_DIR,
+    IPFS_DATASETS_ROOT,
     ensure_hallucinate_multimodal_bootstrap_paths,
     record_retry_budget_findings,
 )
-
 
 logger = logging.getLogger("hallucinate_multimodal_control_todo_supervisor")
 DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "hallucinate_multimodal_control_todo_daemon.py"

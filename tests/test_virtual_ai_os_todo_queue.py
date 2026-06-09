@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 import importlib.util
+import json
 import subprocess
 import sys
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -21,8 +20,11 @@ def _task_board_filename(stem: str) -> str:
     return f"{stem}{TEMP_TASK_BOARD_SUFFIX}"
 
 
-TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename(
-    "19-virtual-ai-os-submodule-integration"
+TASK_BOARD_PATH = (
+    REPO_ROOT
+    / "implementation_plan"
+    / "docs"
+    / _task_board_filename("19-virtual-ai-os-submodule-integration")
 )
 
 
@@ -44,7 +46,9 @@ def _load_script_module(name: str):
 
 def _load_tasks():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     return parse_task_file(TASK_BOARD_PATH, "## VAI-")
 
@@ -96,7 +100,10 @@ def test_virtual_ai_os_mcplusplus_source_task_is_explicit():
 
     assert source_task.depends_on == ["VAI-001"]
     assert "canonical source" in source_task.acceptance.lower()
-    assert "repository not found" in source_task.acceptance.lower() or "distributed protocol surface" in source_task.acceptance.lower()
+    assert (
+        "repository not found" in source_task.acceptance.lower()
+        or "distributed protocol surface" in source_task.acceptance.lower()
+    )
 
 
 def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
@@ -144,8 +151,11 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "implementation_supervisor_namespace_track_configs(" in source
     assert "agent_supervisor_namespace_paths(" not in source
     assert '"PREFER_COPILOT_MERGE_RESOLVER": "1"' not in source
-    assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS == implementation_multi_supervisor_env_defaults(
-        prefer_copilot_merge_resolver=True,
+    assert (
+        runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS
+        == implementation_multi_supervisor_env_defaults(
+            prefer_copilot_merge_resolver=True,
+        )
     )
     assert runner_module.VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS == (
         implementation_supervisor_namespace_track_configs(
@@ -170,9 +180,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--implementation-supervisor-command" not in launcher_args
     assert launcher_args[
         launcher_args.index("--implementation-supervisor-llm-merge-resolver-command") + 1
-    ] == (
-        llm_merge_resolver_fallback_command()
-    )
+    ] == (llm_merge_resolver_fallback_command())
     assert runner_module.default_launch_args(()) == ["--detach"]
     assert runner_module.default_launch_args(("--detach",)) == ["--detach"]
     assert runner_module.default_launch_args(("--duration-seconds", "5")) == [
@@ -190,7 +198,9 @@ def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():
     daemon_module = _load_script_module("virtual_ai_os_todo_daemon")
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     daemon_source = (SCRIPTS_DIR / "virtual_ai_os_todo_daemon.py").read_text(encoding="utf-8")
-    supervisor_source = (SCRIPTS_DIR / "virtual_ai_os_todo_supervisor.py").read_text(encoding="utf-8")
+    supervisor_source = (SCRIPTS_DIR / "virtual_ai_os_todo_supervisor.py").read_text(
+        encoding="utf-8"
+    )
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 

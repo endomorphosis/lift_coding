@@ -10,8 +10,9 @@ from __future__ import annotations
 
 import importlib
 import logging
+from collections.abc import Callable
 from functools import lru_cache
-from typing import Any, Callable, NoReturn, Protocol
+from typing import Any, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
 IPFS_ACCELERATE_CLI_COMMAND = "ipfs-accelerate"

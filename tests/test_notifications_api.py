@@ -505,7 +505,9 @@ class TestAgentServiceNotifications:
         assert "expanded_queries: legal datasets, legal datasets statutes" in notif["card"]["lines"]
         assert notif["card"]["deep_link"] == f"/v1/agents/tasks/{task_id}"
         assert "show task details for that result" in notif["card"]["actions"]
-        assert "rerun that dataset search with labor law datasets remotely" in notif["card"]["actions"]
+        assert (
+            "rerun that dataset search with labor law datasets remotely" in notif["card"]["actions"]
+        )
         assert notif["card"]["action_items"][0]["id"] == "open_result"
         assert notif["card"]["action_items"][-1]["id"] == "rerun_dataset_search"
         assert notif["card"]["action_items"][-1]["execution_mode"] == "mcp_remote"
@@ -635,11 +637,19 @@ class TestAgentServiceNotifications:
                     },
                     "artifact_refs": {"result_cid": "bafyreceipt"},
                     "follow_up_actions": [
-                        {"id": "read_cid", "label": "Read Receipt", "phrase": "read the wearables receipt"}
+                        {
+                            "id": "read_cid",
+                            "label": "Read Receipt",
+                            "phrase": "read the wearables receipt",
+                        }
                     ],
                 },
                 "follow_up_actions": [
-                    {"id": "read_cid", "label": "Read Receipt", "phrase": "read the wearables receipt"}
+                    {
+                        "id": "read_cid",
+                        "label": "Read Receipt",
+                        "phrase": "read the wearables receipt",
+                    }
                 ],
             },
         )

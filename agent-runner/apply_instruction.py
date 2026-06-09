@@ -26,10 +26,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-
-_FENCED_BLOCK_RE = re.compile(
-    r"```(?P<lang>[A-Za-z0-9_+-]*)\n(?P<body>.*?)\n```\s*", re.DOTALL
-)
+_FENCED_BLOCK_RE = re.compile(r"```(?P<lang>[A-Za-z0-9_+-]*)\n(?P<body>.*?)\n```\s*", re.DOTALL)
 
 
 def extract_fenced_blocks(text: str, allowed_langs: set[str]) -> list[str]:
@@ -58,16 +55,14 @@ def apply_unified_diff(repo_dir: Path, diff_text: str) -> tuple[bool, str]:
     # Ensure patch ends with newline (required by git apply)
     if diff_text and not diff_text.endswith("\n"):
         diff_text = diff_text + "\n"
-    
+
     with tempfile.NamedTemporaryFile("w", delete=False, suffix=".diff") as temp_file:
         temp_file.write(diff_text)
         temp_path = temp_file.name
 
     try:
         # --index stages changes; --whitespace=nowarn avoids noisy failures on EOL.
-        result = _run(
-            ["git", "apply", "--index", "--whitespace=nowarn", temp_path], cwd=repo_dir
-        )
+        result = _run(["git", "apply", "--index", "--whitespace=nowarn", temp_path], cwd=repo_dir)
         if result.returncode != 0:
             msg = (result.stderr or result.stdout or "").strip()
             return False, msg or "git apply failed"

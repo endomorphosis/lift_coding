@@ -84,8 +84,7 @@ def test_capability_routing_kernel_dispatches_with_fallback_and_presentations():
         "mobile_glasses",
     ]
     assert (
-        plan.entrypoints[0].handler_ref
-        == "handsfree.ipfs_datasets_routers:get_embeddings_router"
+        plan.entrypoints[0].handler_ref == "handsfree.ipfs_datasets_routers:get_embeddings_router"
     )
     assert plan.payload == {"text": "route me"}
 

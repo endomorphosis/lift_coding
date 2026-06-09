@@ -225,8 +225,8 @@ class SessionTokenManager:
             if not isinstance(metadata, dict):
                 logger.warning("Session metadata is not a JSON object, using empty dict")
                 metadata = {}
-        except (json.JSONDecodeError, TypeError):
-            logger.warning("Invalid JSON in session metadata, using empty dict")
+        except (json.JSONDecodeError, TypeError) as e:
+            logger.warning("Invalid JSON in session metadata, using empty dict: %s", e)
             metadata = {}
 
         return SessionToken(

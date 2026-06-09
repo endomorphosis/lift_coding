@@ -24,7 +24,7 @@ import secrets
 import threading
 import time
 from dataclasses import asdict, dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Literal, Protocol
 
@@ -136,14 +136,11 @@ class PersistedTransportSessionCursor:
 class TransportSessionStore(Protocol):
     """Persistence boundary for transport session cursors."""
 
-    def load_all(self) -> dict[str, PersistedTransportSessionCursor]:
-        ...
+    def load_all(self) -> dict[str, PersistedTransportSessionCursor]: ...
 
-    def save(self, cursor: PersistedTransportSessionCursor) -> None:
-        ...
+    def save(self, cursor: PersistedTransportSessionCursor) -> None: ...
 
-    def delete(self, peer_id: str) -> None:
-        ...
+    def delete(self, peer_id: str) -> None: ...
 
 
 class InMemoryTransportSessionStore:
@@ -211,10 +208,7 @@ class FileTransportSessionStore:
         return cursors
 
     def save(self, cursor: PersistedTransportSessionCursor) -> None:
-        data = {
-            peer_id: asdict(existing)
-            for peer_id, existing in self.load_all().items()
-        }
+        data = {peer_id: asdict(existing) for peer_id, existing in self.load_all().items()}
         data[cursor.peer_id] = asdict(cursor)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(
@@ -258,11 +252,10 @@ class BluetoothTransportAdapter(Protocol):
 class FrameHandler(Protocol):
     """Callback type for inbound Bluetooth frames."""
 
-    def __call__(self, peer_ref: str, frame: bytes) -> None:
-        ...
+    def __call__(self, peer_ref: str, frame: bytes) -> None: ...
 
 
-class SessionState(str, Enum):
+class SessionState(StrEnum):
     """Lifecycle states for a peer session."""
 
     NEW = "new"
@@ -382,10 +375,14 @@ class RuntimeBluetoothTransportAdapter(InMemoryBluetoothTransportAdapter):
                 muxer = None
 
         transport_protocols: tuple[str, ...] = ()
-        get_supported_transport_protocols = getattr(runtime, "get_supported_transport_protocols", None)
+        get_supported_transport_protocols = getattr(
+            runtime, "get_supported_transport_protocols", None
+        )
         if get_supported_transport_protocols is not None:
             try:
-                transport_protocols = tuple(str(item) for item in get_supported_transport_protocols())
+                transport_protocols = tuple(
+                    str(item) for item in get_supported_transport_protocols()
+                )
             except Exception:
                 transport_protocols = ()
 
@@ -516,10 +513,7 @@ class ProtocolRoutingBluetoothTransportAdapter(RuntimeBluetoothTransportAdapter)
 
     def close(self, peer_ref: str, session_id: str) -> None:
         super().close(peer_ref, session_id)
-        stale_keys = [
-            key for key in self.streams
-            if key[0] == peer_ref and key[1] == session_id
-        ]
+        stale_keys = [key for key in self.streams if key[0] == peer_ref and key[1] == session_id]
         for key in stale_keys:
             stream = self.streams.pop(key, None)
             if stream is not None:
@@ -556,7 +550,9 @@ class ProtocolRoutingBluetoothTransportAdapter(RuntimeBluetoothTransportAdapter)
                 resume_token=_new_resume_token(),
                 runtime_stream=runtime_stream,
             )
-            message_id, payload, is_ack, session_id, runtime_protocol, resume_token = _read_runtime_stream_message(runtime_stream)
+            message_id, payload, is_ack, session_id, runtime_protocol, resume_token = (
+                _read_runtime_stream_message(runtime_stream)
+            )
             if message_id is None:
                 message_id = self._next_runtime_message_id(stream)
             if not payload:
@@ -636,8 +632,8 @@ class ProtocolRoutingBluetoothTransportAdapter(RuntimeBluetoothTransportAdapter)
     ) -> None:
         while not stop_event.is_set():
             try:
-                message_id, payload, is_ack, session_id, runtime_protocol, resume_token = _read_runtime_stream_message(
-                    stream.runtime_stream
+                message_id, payload, is_ack, session_id, runtime_protocol, resume_token = (
+                    _read_runtime_stream_message(stream.runtime_stream)
                 )
             except Exception:
                 break
@@ -741,7 +737,9 @@ class Libp2pBluetoothTransport:
         self._persisted_session_cursors = self._session_store.load_all()
         self._runtime = _load_py_libp2p_runtime()
         self._local_identity = self._transport_adapter.bootstrap_runtime(self._runtime)
-        set_runtime_inbound_handler = getattr(self._transport_adapter, "set_runtime_inbound_handler", None)
+        set_runtime_inbound_handler = getattr(
+            self._transport_adapter, "set_runtime_inbound_handler", None
+        )
         if set_runtime_inbound_handler is not None:
             set_runtime_inbound_handler(self._handle_runtime_inbound_protocol)
         if self._bluetooth_driver is not None:
@@ -966,7 +964,9 @@ class Libp2pBluetoothTransport:
             protocol,
         )
 
-    def _write_bound_protocol_stream(self, session: PeerSession, protocol: str, payload: bytes) -> None:
+    def _write_bound_protocol_stream(
+        self, session: PeerSession, protocol: str, payload: bytes
+    ) -> None:
         write_protocol_payload = getattr(self._transport_adapter, "write_protocol_payload", None)
         if write_protocol_payload is None:
             return
@@ -982,8 +982,12 @@ class Libp2pBluetoothTransport:
             payload,
         )
 
-    def _deliver_inbound_protocol(self, session: PeerSession, protocol: str, payload: bytes) -> None:
-        deliver_inbound_protocol = getattr(self._transport_adapter, "deliver_inbound_protocol", None)
+    def _deliver_inbound_protocol(
+        self, session: PeerSession, protocol: str, payload: bytes
+    ) -> None:
+        deliver_inbound_protocol = getattr(
+            self._transport_adapter, "deliver_inbound_protocol", None
+        )
         if deliver_inbound_protocol is None:
             return
         deliver_inbound_protocol(
@@ -1022,7 +1026,9 @@ class Libp2pBluetoothTransport:
         message_id: str,
         emit_peer_ack: bool = False,
     ) -> None:
-        acknowledge_runtime_message = getattr(self._transport_adapter, "acknowledge_runtime_message", None)
+        acknowledge_runtime_message = getattr(
+            self._transport_adapter, "acknowledge_runtime_message", None
+        )
         if acknowledge_runtime_message is None:
             return
         acknowledge_runtime_message(connection, protocol, message_id, emit_peer_ack=emit_peer_ack)
@@ -1135,16 +1141,22 @@ def _read_runtime_stream_message(
     if isinstance(payload, tuple) and len(payload) == 2:
         message_id, chunk = payload
         if isinstance(message_id, str):
-            payload_bytes, is_ack, session_id, protocol, resume_token = _decode_runtime_stream_frame(chunk)
+            payload_bytes, is_ack, session_id, protocol, resume_token = (
+                _decode_runtime_stream_frame(chunk)
+            )
             if payload_bytes is not None:
                 return message_id, payload_bytes, is_ack, session_id, protocol, resume_token
             payload_bytes = _coerce_runtime_payload_bytes(chunk)
             return message_id, payload_bytes, False, None, None, None
-        payload_bytes, is_ack, session_id, protocol, resume_token = _decode_runtime_stream_frame(chunk)
+        payload_bytes, is_ack, session_id, protocol, resume_token = _decode_runtime_stream_frame(
+            chunk
+        )
         if payload_bytes is not None:
             return None, payload_bytes, is_ack, session_id, protocol, resume_token
         return None, _coerce_runtime_payload_bytes(chunk), False, None, None, None
-    payload_bytes, is_ack, session_id, protocol, resume_token = _decode_runtime_stream_frame(payload)
+    payload_bytes, is_ack, session_id, protocol, resume_token = _decode_runtime_stream_frame(
+        payload
+    )
     if payload_bytes is not None:
         return None, payload_bytes, is_ack, session_id, protocol, resume_token
     return None, _coerce_runtime_payload_bytes(payload), False, None, None, None
@@ -1194,7 +1206,9 @@ def _encode_runtime_stream_ack(
     return json.dumps(frame, separators=(",", ":"), sort_keys=True).encode("utf-8")
 
 
-def _decode_runtime_stream_frame(payload: Any) -> tuple[bytes | None, bool, str | None, str | None, str | None]:
+def _decode_runtime_stream_frame(
+    payload: Any,
+) -> tuple[bytes | None, bool, str | None, str | None, str | None]:
     raw = _coerce_runtime_payload_bytes(payload)
     if not raw:
         return None, False, None, None, None
@@ -1341,7 +1355,9 @@ def _decode_envelope(frame: bytes) -> PeerEnvelope:
     if kind == "ack" and not isinstance(acked_message_id, str):
         raise TransportEnvelopeError("Ack envelope requires acked_message_id")
     if kind == "handshake" and capabilities is not None:
-        if not isinstance(capabilities, list) or any(not isinstance(item, str) for item in capabilities):
+        if not isinstance(capabilities, list) or any(
+            not isinstance(item, str) for item in capabilities
+        ):
             raise TransportEnvelopeError("Handshake capabilities must be a list of strings")
     if kind == "error" and not isinstance(error_code, str):
         raise TransportEnvelopeError("Error envelope requires error_code")
@@ -1407,7 +1423,9 @@ def _decode_protocol_message(payload: bytes) -> tuple[str, bytes]:
     try:
         return protocol, base64.b64decode(payload_b64.encode("ascii"))
     except (UnicodeEncodeError, ValueError) as exc:
-        raise TransportEnvelopeError("Protocol wrapper payload_b64 is not valid ASCII base64 data") from exc
+        raise TransportEnvelopeError(
+            "Protocol wrapper payload_b64 is not valid ASCII base64 data"
+        ) from exc
 
 
 def encode_chat_message_payload(

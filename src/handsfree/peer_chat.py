@@ -16,12 +16,11 @@ from handsfree.db.peer_chat import (
     store_peer_chat_message,
 )
 
-
 logger = logging.getLogger(__name__)
 
-# Peer chat write and read paths should only fall back to in-memory state for
-# persistence-layer failures; validation and programming errors must still reach
-# callers.
+# Peer chat ingest/write and read paths should only fall back to in-memory state
+# for persistence-layer failures; validation and programming errors must still
+# reach callers.
 _PEER_CHAT_PERSISTENCE_ERRORS = (duckdb.Error, OSError)
 
 
@@ -265,7 +264,9 @@ class PeerChatSessionService:
         if policy["delivery_mode"] == "short_retry":
             deliverable.sort(key=lambda item: item.timestamp_ms)
         else:
-            deliverable.sort(key=lambda item: (0 if item.priority == "urgent" else 1, item.timestamp_ms))
+            deliverable.sort(
+                key=lambda item: (0 if item.priority == "urgent" else 1, item.timestamp_ms)
+            )
 
         visible: list[dict[str, Any]] = []
         for item in deliverable:

@@ -74,7 +74,7 @@ class TestAgentDelegationWithEnvVar:
             assert create_issue_route.called
             request = create_issue_route.calls[0].request
             request_body = json.loads(request.content)
-            
+
             # Verify issue metadata
             assert "Fix the authentication bug" in request_body["title"]
             assert task_id in request_body["body"]
@@ -85,7 +85,9 @@ class TestAgentDelegationWithEnvVar:
             assert task.trace is not None
             assert task.trace.get("provider") == "github_issue_dispatch"
             assert task.trace.get("issue_number") == 42
-            assert task.trace.get("issue_url") == "https://github.com/test-owner/test-repo/issues/42"
+            assert (
+                task.trace.get("issue_url") == "https://github.com/test-owner/test-repo/issues/42"
+            )
 
     def test_explicit_provider_overrides_env_var(self, db_conn, monkeypatch):
         """Test that explicit provider argument overrides env var."""
@@ -113,9 +115,9 @@ class TestAgentDelegationWithEnvVar:
 
     def test_task_lifecycle_with_github_issue_dispatch(self, db_conn, monkeypatch):
         """Test complete lifecycle: delegate -> dispatch issue -> PR opened -> task completed."""
+        from handsfree import api
         from handsfree.agents.service import AgentService
         from handsfree.api import _correlate_pr_with_agent_tasks
-        from handsfree import api
 
         # Mock get_db to return our test db_conn
         monkeypatch.setattr(api, "get_db", lambda: db_conn)
@@ -176,7 +178,10 @@ class TestAgentDelegationWithEnvVar:
             # Step 3: Verify task was marked as completed
             updated_task = get_agent_task_by_id(db_conn, task_id)
             assert updated_task.state == "completed"
-            assert updated_task.trace.get("pr_url") == "https://github.com/test-owner/test-repo/pull/123"
+            assert (
+                updated_task.trace.get("pr_url")
+                == "https://github.com/test-owner/test-repo/pull/123"
+            )
             assert updated_task.trace.get("pr_number") == 123
             assert updated_task.trace.get("correlated_via") == "issue_reference"
 
@@ -195,9 +200,9 @@ class TestCorrelationWithMetadata:
 
     def test_pr_correlation_via_metadata_marker(self, db_conn, monkeypatch):
         """Test that PR is correlated via agent_task_metadata comment."""
+        from handsfree import api
         from handsfree.agents.service import AgentService
         from handsfree.api import _correlate_pr_with_agent_tasks
-        from handsfree import api
 
         # Mock get_db to return our test db_conn
         monkeypatch.setattr(api, "get_db", lambda: db_conn)
@@ -246,6 +251,8 @@ This PR fixes the authentication issue.
         # Verify task was marked as completed
         updated_task = get_agent_task_by_id(db_conn, task_id)
         assert updated_task.state == "completed"
-        assert updated_task.trace.get("pr_url") == "https://github.com/test-owner/test-repo/pull/456"
+        assert (
+            updated_task.trace.get("pr_url") == "https://github.com/test-owner/test-repo/pull/456"
+        )
         assert updated_task.trace.get("pr_number") == 456
         assert updated_task.trace.get("correlated_via") == "pr_metadata"

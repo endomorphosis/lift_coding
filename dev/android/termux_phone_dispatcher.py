@@ -48,8 +48,8 @@ def _read_json(handler: BaseHTTPRequestHandler) -> dict:
     raw = handler.rfile.read(length) if length else b"{}"
     try:
         return json.loads(raw.decode("utf-8")) if raw else {}
-    except json.JSONDecodeError:
-        raise ValueError("Invalid JSON")
+    except json.JSONDecodeError as e:
+        raise ValueError("Invalid JSON") from e
 
 
 def create_issue(repo_full_name: str, token: str, title: str, body: str, labels: list[str]) -> dict:
@@ -87,7 +87,7 @@ def create_issue(repo_full_name: str, token: str, title: str, body: str, labels:
             return json.loads(resp.read().decode("utf-8"))
     except HTTPError as e:
         detail = e.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"GitHub API error: {e.code} {detail}")
+        raise RuntimeError(f"GitHub API error: {e.code} {detail}") from e
 
 
 class Handler(BaseHTTPRequestHandler):

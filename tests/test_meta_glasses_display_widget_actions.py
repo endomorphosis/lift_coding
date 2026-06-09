@@ -18,14 +18,14 @@ if "handsfree.secrets" not in sys.modules:
     secrets_module.reset_secret_manager = lambda: None
     sys.modules["handsfree.secrets"] = secrets_module
 
+from test_mcp_ipfs_provider import _FakeMCPClient  # noqa: E402
+
 from handsfree.agent_providers import (  # noqa: E402
     IPFSAccelerateMCPAgentProvider,
     build_meta_glasses_display_widget_action_items,
 )
 from handsfree.api import app  # noqa: E402
 from handsfree.models import MetaGlassesDisplayWidgetMobileActionPayload  # noqa: E402
-from test_mcp_ipfs_provider import _FakeMCPClient  # noqa: E402
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -205,7 +205,9 @@ def test_wearables_provider_envelope_adds_widget_action_contract(monkeypatch) ->
     result = provider.start_task(task)
     envelope = result["trace"]["mcp_result_envelope"]
     widget_actions = [
-        action for action in envelope["follow_up_actions"] if action["id"] in DISPLAY_WIDGET_ACTION_IDS
+        action
+        for action in envelope["follow_up_actions"]
+        if action["id"] in DISPLAY_WIDGET_ACTION_IDS
     ]
 
     assert result["ok"] is True
@@ -257,9 +259,13 @@ def test_static_openapi_spec_documents_display_widget_actions() -> None:
 
 def test_display_widget_contract_sync_delegates_reusable_spec_wiring() -> None:
     sync_module = _load_script_module("sync_meta_glasses_display_widget_contracts")
-    source = (SCRIPTS_DIR / "sync_meta_glasses_display_widget_contracts.py").read_text(encoding="utf-8")
+    source = (SCRIPTS_DIR / "sync_meta_glasses_display_widget_contracts.py").read_text(
+        encoding="utf-8"
+    )
 
-    from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import ActionContractSyncSpec
+    from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (
+        ActionContractSyncSpec,
+    )
 
     assert isinstance(sync_module.ACTION_CONTRACT_SYNC_SPEC, ActionContractSyncSpec)
     assert sync_module.ACTION_CONTRACT_SYNC_SPEC.descriptor_path == (

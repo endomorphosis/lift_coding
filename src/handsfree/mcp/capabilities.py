@@ -5,12 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from .client import MCPConfigurationError
 from .catalog import (
     resolve_capability_execution_mode,
     resolve_provider_capability,
     resolve_provider_name_for_server_family,
 )
+from .client import MCPConfigurationError
 from .models import (
     MCPArtifactRefs,
     MCPExecutionResultEnvelope,
@@ -64,7 +64,9 @@ def build_result_envelope(
     """Build a canonical HandsFree result envelope."""
     normalized_status = _normalize_envelope_status(status)
     resolved_summary = (summary or spoken_text or _infer_summary(structured_output) or "").strip()
-    resolved_spoken_text = (spoken_text or resolved_summary or _default_spoken_text(normalized_status)).strip()
+    resolved_spoken_text = (
+        spoken_text or resolved_summary or _default_spoken_text(normalized_status)
+    ).strip()
     return MCPExecutionResultEnvelope(
         capability_id=capability_id,
         provider=provider_name,
@@ -266,10 +268,10 @@ def resolve_task_binding(
     if server_family == "ipfs_datasets":
         return _with_binding_metadata(
             _resolve_ipfs_datasets_binding(
-            config=config,
-            base_arguments=normalized_arguments,
-            remote_task_id=remote_task_id,
-            status_tool_default="get_task_status",
+                config=config,
+                base_arguments=normalized_arguments,
+                remote_task_id=remote_task_id,
+                status_tool_default="get_task_status",
             ),
             capability_id=resolved_capability,
             execution_mode=resolved_execution_mode,
@@ -278,10 +280,10 @@ def resolve_task_binding(
     if server_family == "ipfs_accelerate":
         return _with_binding_metadata(
             _resolve_ipfs_accelerate_binding(
-            config=config,
-            base_arguments=normalized_arguments,
-            remote_task_id=remote_task_id,
-            status_tool_default="get_task_status",
+                config=config,
+                base_arguments=normalized_arguments,
+                remote_task_id=remote_task_id,
+                status_tool_default="get_task_status",
             ),
             capability_id=resolved_capability,
             execution_mode=resolved_execution_mode,
@@ -431,7 +433,9 @@ def _resolve_ipfs_datasets_binding(
 ) -> MCPTaskBinding:
     capability = str(base_arguments.get("mcp_capability") or "").strip().lower()
     if capability == "dataset_discovery":
-        query = str(base_arguments.get("mcp_input") or base_arguments.get("instruction") or "").strip()
+        query = str(
+            base_arguments.get("mcp_input") or base_arguments.get("instruction") or ""
+        ).strip()
         if not query:
             raise MCPConfigurationError("dataset discovery requires a non-empty query")
         return MCPTaskBinding(

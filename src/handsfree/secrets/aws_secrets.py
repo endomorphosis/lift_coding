@@ -73,7 +73,7 @@ class AWSSecretManager(SecretManager):
         # Load configuration
         self.region = region or os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION")
         self.prefix = prefix or os.getenv("HANDSFREE_AWS_SECRETS_PREFIX", "handsfree/")
-        
+
         # Configure deletion behavior (default to False for production safety)
         if force_delete is None:
             force_delete_env = os.getenv("AWS_SECRETS_FORCE_DELETE", "false").lower()
@@ -247,7 +247,7 @@ class AWSSecretManager(SecretManager):
     def delete_secret(self, reference: str) -> bool:
         """Delete a secret from AWS Secrets Manager.
 
-        Note: By default, AWS Secrets Manager schedules secrets for deletion with a 
+        Note: By default, AWS Secrets Manager schedules secrets for deletion with a
         recovery window. Set AWS_SECRETS_FORCE_DELETE=true or pass force_delete=True
         during initialization for immediate deletion without recovery window.
 
@@ -270,7 +270,7 @@ class AWSSecretManager(SecretManager):
             else:
                 # Use default 30-day recovery window
                 delete_params["RecoveryWindowInDays"] = 30
-            
+
             self.client.delete_secret(**delete_params)
 
             logger.debug("Deleted secret: %s", reference)
@@ -345,7 +345,7 @@ class AWSSecretManager(SecretManager):
                         secret_name,
                         describe_err,
                     )
-                
+
                 tags = [{"Key": k, "Value": v} for k, v in metadata.items()]
                 self.client.tag_resource(SecretId=secret_name, Tags=tags)
 
@@ -388,9 +388,7 @@ class AWSSecretManager(SecretManager):
             # Use AWS Filters parameter for better performance when prefix is specified
             paginate_kwargs = {}
             if search_prefix:
-                paginate_kwargs["Filters"] = [
-                    {"Key": "name", "Values": [search_prefix]}
-                ]
+                paginate_kwargs["Filters"] = [{"Key": "name", "Values": [search_prefix]}]
 
             for page in paginator.paginate(**paginate_kwargs):
                 for secret in page.get("SecretList", []):

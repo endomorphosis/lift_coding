@@ -34,7 +34,6 @@ sys.modules.setdefault("hvac.exceptions", hvac_exceptions_module)
 from handsfree.api import app, dev_peer_chat_service, get_db
 from handsfree.db.agent_tasks import create_agent_task
 
-
 client = TestClient(app)
 
 
@@ -161,10 +160,10 @@ def test_dev_peer_chat_send_populates_outbox(test_user_id):
                 send_response = client.post(
                     "/v1/dev/peer-chat/send",
                     json={
-                    "peer_id": "12D3KooWpeerOutbox",
-                    "text": "queue me",
-                    "priority": "urgent",
-                },
+                        "peer_id": "12D3KooWpeerOutbox",
+                        "text": "queue me",
+                        "priority": "urgent",
+                    },
                     headers={"X-User-Id": test_user_id},
                 )
                 assert send_response.status_code == 200
@@ -295,10 +294,10 @@ def test_dev_peer_chat_outbox_lease_expiry_requeues_message(test_user_id):
                 send_response = client.post(
                     "/v1/dev/peer-chat/send",
                     json={
-                    "peer_id": "12D3KooWpeerLease",
-                    "text": "lease me",
-                    "priority": "normal",
-                },
+                        "peer_id": "12D3KooWpeerLease",
+                        "text": "lease me",
+                        "priority": "normal",
+                    },
                     headers={"X-User-Id": test_user_id},
                 )
                 assert send_response.status_code == 200

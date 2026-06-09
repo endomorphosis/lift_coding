@@ -54,9 +54,7 @@ class IPFSKitUnavailableError(RuntimeError):
 
 class _UnavailableIPFSKitAdapter:
     def _raise(self, method: str) -> NoReturn:
-        raise IPFSKitUnavailableError(
-            f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py"
-        )
+        raise IPFSKitUnavailableError(f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py")
 
     def add_bytes(self, data: bytes, **kwargs: Any) -> NoReturn:
         self._raise("add_bytes")
@@ -131,14 +129,10 @@ class _IPFSKitModuleAdapter:
             factory = getattr(module, "get_instance", None)
             if callable(factory):
                 return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
-        )
+        raise IPFSKitUnavailableError("ipfs_kit_py.ipfs_backend.get_instance is unavailable")
 
     def _get_high_level_api(self) -> Any | None:
-        api_factory = self._resolve_callable(
-            ("ipfs_kit_py.high_level_api", "IPFSSimpleAPI")
-        )
+        api_factory = self._resolve_callable(("ipfs_kit_py.high_level_api", "IPFSSimpleAPI"))
         if api_factory is None:
             return None
         api = api_factory()
@@ -205,8 +199,7 @@ class _IPFSKitModuleAdapter:
         if callable(add_str):
             return add_str(data.decode("utf-8", errors="replace"), **kwargs)
         raise IPFSKitUnavailableError(
-            "ipfs_kit_py add_bytes is unavailable: backend exposes neither "
-            "add_bytes nor add_str"
+            "ipfs_kit_py add_bytes is unavailable: backend exposes neither add_bytes nor add_str"
         )
 
     def cat(self, cid: str, **kwargs: Any) -> Any:
@@ -217,12 +210,9 @@ class _IPFSKitModuleAdapter:
         except NotImplementedError as exc:
             logger.debug("ipfs_kit_py.cat direct callable unavailable: %s", exc)
         backend = self._get_backend()
-        cat_fn = getattr(backend, "cat", None)
-        if callable(cat_fn):
+        cat_fn = self._resolve_backend_callable(backend, ("cat",), ("get",))
+        if cat_fn is not None:
             return cat_fn(cid, **kwargs)
-        get_fn = getattr(backend, "get", None)
-        if callable(get_fn):
-            return get_fn(cid, **kwargs)
         raise IPFSKitUnavailableError(
             "ipfs_kit_py cat is unavailable: backend exposes neither cat nor get"
         )
@@ -259,23 +249,36 @@ class _IPFSKitModuleAdapter:
         except IPFSKitUnavailableError as exc:
             logger.debug("ipfs_kit_py resolve backend unavailable: %s", exc)
         else:
-            for method_name in ("resolve", "name_resolve", "ipfs_name_resolve"):
-                backend_resolve = getattr(backend, method_name, None)
-                if callable(backend_resolve):
-                    return backend_resolve(cid, **kwargs)
+            backend_resolve = self._resolve_backend_callable(
+                backend,
+                ("resolve",),
+                ("dag_resolve",),
+                ("ipfs_dag_resolve",),
+                ("ipfs_object_stat",),
+                ("object_stat",),
+                ("object", "stat"),
+                ("dag_get",),
+                ("ipfs_dag_get",),
+                ("dag", "get"),
+                ("name_resolve",),
+                ("ipfs_name_resolve",),
+                ("name", "resolve"),
+            )
+            if backend_resolve is not None:
+                return backend_resolve(cid, **kwargs)
         try:
             simple_api = self._get_simple_api()
         except IPFSKitUnavailableError as exc:
             raise IPFSKitUnavailableError(
-                "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
-                "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI is unavailable"
+                "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
+                "or name resolver, and IPFSSimpleAPI is unavailable"
             ) from exc
         simple_resolve = getattr(simple_api, "resolve", None)
         if callable(simple_resolve):
             return simple_resolve(cid, **kwargs)
         raise IPFSKitUnavailableError(
-            "ipfs_kit_py resolve is unavailable: backend exposes neither resolve, "
-            "name_resolve, nor ipfs_name_resolve, and IPFSSimpleAPI exposes no resolve"
+            "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
+            "or name resolver, and IPFSSimpleAPI exposes no resolve"
         )
 
     def _get_simple_api(self) -> Any:
@@ -294,9 +297,7 @@ class _IPFSKitModuleAdapter:
             factory = getattr(module, "IPFSSimpleAPI", None)
             if callable(factory):
                 return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable"
-        )
+        raise IPFSKitUnavailableError("ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable")
 
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
         package_fn = getattr(self._root_module, "package_dataset", None)

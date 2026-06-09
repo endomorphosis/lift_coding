@@ -31,6 +31,60 @@ def test_peer_chat_message_persists_in_memory_db():
     assert messages[0].timestamp_ms == 1234
 
 
+def test_peer_chat_ingest_falls_back_for_persistence_errors():
+    conversation_id = "chat:test-ingest-fallback"
+
+    def unavailable_db():
+        raise OSError("peer chat db unavailable")
+
+    service = PeerChatSessionService(db_conn_factory=unavailable_db)
+
+    message = service.ingest_chat_payload(
+        "12D3KooWpeerA",
+        {
+            "conversation_id": conversation_id,
+            "sender_peer_id": "12D3KooWpeerB",
+            "text": "ingest fallback hello",
+            "priority": "urgent",
+            "timestamp_ms": 4567,
+        },
+    )
+
+    assert message.text == "ingest fallback hello"
+    assert service.list_messages(conversation_id) == [
+        {
+            "conversation_id": conversation_id,
+            "peer_id": "12D3KooWpeerA",
+            "sender_peer_id": "12D3KooWpeerB",
+            "text": "ingest fallback hello",
+            "priority": "urgent",
+            "timestamp_ms": 4567,
+            "task_snapshot": None,
+        }
+    ]
+
+
+def test_peer_chat_ingest_propagates_unexpected_errors():
+    def broken_db_factory():
+        raise RuntimeError("unexpected peer chat failure")
+
+    service = PeerChatSessionService(db_conn_factory=broken_db_factory)
+
+    with pytest.raises(RuntimeError, match="unexpected peer chat failure"):
+        service.ingest_chat_payload(
+            "12D3KooWpeerA",
+            {
+                "conversation_id": "chat:test-ingest-propagate",
+                "sender_peer_id": "12D3KooWpeerB",
+                "text": "should not be swallowed",
+                "priority": "normal",
+                "timestamp_ms": 4568,
+            },
+        )
+
+    assert "chat:test-ingest-propagate" not in service._messages
+
+
 def test_peer_chat_list_messages_falls_back_for_persistence_errors():
     conversation_id = "chat:test-fallback"
 

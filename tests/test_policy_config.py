@@ -6,7 +6,6 @@ from pathlib import Path
 import pytest
 
 from handsfree.policy_config import (
-    PolicyConfig,
     _get_default_config,
     _parse_policy_config,
     load_policy_config,

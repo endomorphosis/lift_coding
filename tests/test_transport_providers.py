@@ -128,8 +128,8 @@ def test_libp2p_transport_validates_inputs(mock_libp2p_runtime):
 
 def test_libp2p_transport_rejects_unsupported_protocol_version(mock_libp2p_runtime):
     from handsfree.transport.libp2p_bluetooth import (
-        Libp2pBluetoothTransport,
         PROTOCOL_MAJOR,
+        Libp2pBluetoothTransport,
         ProtocolVersionError,
     )
 
@@ -624,7 +624,10 @@ def test_protocol_routing_adapter_reuses_bound_runtime_stream(monkeypatch):
     ]
     assert decoded_payloads == [b"first", b"second"]
     decoded_frames = [loads(payload.decode("utf-8")) for payload in written_payloads]
-    assert [frame["session_id"] for frame in decoded_frames] == [session.session_id, session.session_id]
+    assert [frame["session_id"] for frame in decoded_frames] == [
+        session.session_id,
+        session.session_id,
+    ]
     assert [frame["protocol"] for frame in decoded_frames] == [
         "/handsfree/chat/1.0.0",
         "/handsfree/chat/1.0.0",
@@ -729,9 +732,7 @@ def test_protocol_routing_adapter_logs_runtime_stream_cleanup_failures(caplog):
     assert close_calls == ["close"]
     assert reset_calls == ["reset"]
     cleanup_records = [
-        record
-        for record in caplog.records
-        if record.name == "handsfree.transport.libp2p_bluetooth"
+        record for record in caplog.records if record.name == "handsfree.transport.libp2p_bluetooth"
     ]
     messages = [record.getMessage() for record in cleanup_records]
     assert messages == [
@@ -774,9 +775,7 @@ def test_protocol_routing_adapter_logs_async_runtime_stream_cleanup_failures(cap
     assert close_calls == ["close"]
     assert reset_calls == ["reset"]
     cleanup_records = [
-        record
-        for record in caplog.records
-        if record.name == "handsfree.transport.libp2p_bluetooth"
+        record for record in caplog.records if record.name == "handsfree.transport.libp2p_bluetooth"
     ]
     messages = [record.getMessage() for record in cleanup_records]
     assert messages == [
@@ -788,9 +787,9 @@ def test_protocol_routing_adapter_logs_async_runtime_stream_cleanup_failures(cap
 def test_protocol_routing_adapter_reads_inbound_runtime_stream_payloads(monkeypatch):
     from handsfree.transport import libp2p_bluetooth
     from handsfree.transport.libp2p_bluetooth import (
+        RUNTIME_STREAM_PROTOCOL_ID,
         Libp2pBluetoothTransport,
         ProtocolRoutingBluetoothTransportAdapter,
-        RUNTIME_STREAM_PROTOCOL_ID,
     )
 
     inbound_event = threading.Event()
@@ -997,12 +996,16 @@ def test_runtime_stream_metadata_reconstitutes_session_after_local_reset(monkeyp
     assert transport._sessions["peerA"].resume_token == resumed_resume_token
     deadline = time.time() + 1.0
     while (
-        ("peerA", resumed_session_id, "/handsfree/chat/1.0.0") not in adapter.streams
-        and time.time() < deadline
-    ):
+        "peerA",
+        resumed_session_id,
+        "/handsfree/chat/1.0.0",
+    ) not in adapter.streams and time.time() < deadline:
         time.sleep(0.01)
     assert ("peerA", resumed_session_id, "/handsfree/chat/1.0.0") in adapter.streams
-    assert adapter.streams[("peerA", resumed_session_id, "/handsfree/chat/1.0.0")].resume_token == resumed_resume_token
+    assert (
+        adapter.streams[("peerA", resumed_session_id, "/handsfree/chat/1.0.0")].resume_token
+        == resumed_resume_token
+    )
 
 
 def test_file_transport_session_store_persists_cursors(tmp_path):

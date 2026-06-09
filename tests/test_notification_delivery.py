@@ -411,7 +411,10 @@ class TestNotificationDelivery:
         assert delivery_calls[0]["card"]["title"] == "Ipfs Datasets Completed"
         assert delivery_calls[0]["card"]["lines"][0] == "Instruction: find legal datasets"
         assert "message: Expanded legal query" in delivery_calls[0]["card"]["lines"]
-        assert delivery_calls[0]["card"]["deep_link"] == "/v1/agents/tasks/abc12345-0000-0000-0000-000000000000"
+        assert (
+            delivery_calls[0]["card"]["deep_link"]
+            == "/v1/agents/tasks/abc12345-0000-0000-0000-000000000000"
+        )
 
     def test_notification_not_delivered_when_provider_disabled(
         self, db_conn, test_user_id, monkeypatch
@@ -1061,7 +1064,7 @@ class TestGetProviderForPlatformExpo:
 
         # Clear logger override
         monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
-        
+
         # Don't set access token (it's optional)
         monkeypatch.delenv("HANDSFREE_EXPO_ACCESS_TOKEN", raising=False)
 
@@ -1075,7 +1078,7 @@ class TestGetProviderForPlatformExpo:
 
         # Clear logger override
         monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
-        
+
         # Set access token
         monkeypatch.setenv("HANDSFREE_EXPO_ACCESS_TOKEN", "test-token-123")
 
@@ -1089,7 +1092,7 @@ class TestGetProviderForPlatformExpo:
 
         # Clear logger override
         monkeypatch.delenv("HANDSFREE_NOTIFICATION_PROVIDER", raising=False)
-        
+
         # Set real mode
         monkeypatch.setenv("HANDSFREE_EXPO_MODE", "real")
 
@@ -1165,14 +1168,14 @@ class TestExpoIntegration:
         from handsfree.db.notification_subscriptions import create_subscription, list_subscriptions
 
         # Create subscriptions for different platforms
-        expo_sub = create_subscription(
+        create_subscription(
             conn=db_conn,
             user_id=test_user_id,
             endpoint="ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
             platform="expo",
         )
 
-        webpush_sub = create_subscription(
+        create_subscription(
             conn=db_conn,
             user_id=test_user_id,
             endpoint="https://fcm.googleapis.com/fcm/send/...",

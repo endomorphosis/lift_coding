@@ -15,34 +15,35 @@ from typing import Any
 from fastapi import FastAPI, Header, HTTPException, Query, Request, status
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from handsfree.audio_fetch import fetch_audio_data
-from handsfree.ai import (
-    build_ai_backend_policy_config,
-    build_ai_backend_policy_history_report,
-    AIRequestContext,
-    AICapabilityRequest,
-    build_ai_backend_policy_report,
-    build_snapshot_health,
-    build_snapshot_summary,
-    build_policy_resolution,
-    build_api_execute_response,
-    discover_failure_history_cids,
-    execute_ai_request,
-    build_latest_snapshot_info,
-    resolve_policy_workflow,
-)
 from handsfree.actions import (
     DirectActionRequest,
     execute_confirmed_action,
     process_direct_action_request,
     process_direct_action_request_detailed,
 )
-from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.agents.results_views import resolve_result_query
-from handsfree.image_fetch import fetch_image_data
+from handsfree.ai import (
+    AICapabilityRequest,
+    AIRequestContext,
+    build_ai_backend_policy_config,
+    build_ai_backend_policy_history_report,
+    build_ai_backend_policy_report,
+    build_api_execute_response,
+    build_latest_snapshot_info,
+    build_policy_resolution,
+    build_snapshot_health,
+    build_snapshot_summary,
+    discover_failure_history_cids,
+    execute_ai_request,
+    resolve_policy_workflow,
+)
+from handsfree.audio_fetch import fetch_audio_data
+from handsfree.auth import FIXTURE_USER_ID, CurrentUser
 from handsfree.commands.intent_parser import IntentParser
+from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.commands.pending_actions import PendingActionManager, RedisPendingActionManager
-from handsfree.commands.profiles import Profile as CommandProfile, ProfileConfig
+from handsfree.commands.profiles import Profile as CommandProfile
+from handsfree.commands.profiles import ProfileConfig
 from handsfree.commands.router import CommandRouter
 from handsfree.db import init_db
 from handsfree.db.action_logs import write_action_log
@@ -58,13 +59,12 @@ from handsfree.db.github_connections import (
     get_github_connection,
     get_github_connections_by_user,
 )
+from handsfree.db.notifications import create_notification
 from handsfree.db.oauth_states import (
     generate_oauth_state,
     validate_and_consume_oauth_state,
 )
-from handsfree.db.notifications import create_notification
 from handsfree.db.pending_actions import (
-    create_pending_action,
     delete_pending_action,
     get_pending_action,
 )
@@ -72,12 +72,23 @@ from handsfree.db.webhook_events import DBWebhookStore
 from handsfree.github import GitHubProvider
 from handsfree.handlers.inbox import handle_inbox_list
 from handsfree.handlers.pr_summary import handle_pr_summarize
+from handsfree.image_fetch import fetch_image_data
 from handsfree.logging_utils import (
     clear_request_id,
     log_error,
     log_info,
     log_warning,
     set_request_id,
+)
+from handsfree.mcp.catalog import get_capability_descriptor, get_provider_descriptor
+from handsfree.meta_glasses_mobile_orb_adapter import (
+    build_mobile_orb_bind_service_response,
+    build_mobile_orb_dispatch_response,
+    build_mobile_orb_event_response,
+    build_mobile_orb_invoke_service_response,
+    build_mobile_orb_register_response,
+    build_mobile_orb_revoke_binding_response,
+    build_mobile_orb_subscribe_response,
 )
 from handsfree.meta_glasses_mobile_orb_artifacts import (
     build_mobile_orb_bind_service_artifacts,
@@ -89,31 +100,22 @@ from handsfree.meta_glasses_mobile_orb_artifacts import (
     build_mobile_orb_subscription_artifacts,
     build_mobile_orb_subscription_record,
 )
-from handsfree.meta_glasses_mobile_orb_adapter import (
-    build_mobile_orb_bind_service_response,
-    build_mobile_orb_dispatch_response,
-    build_mobile_orb_event_response,
-    build_mobile_orb_invoke_service_response,
-    build_mobile_orb_register_response,
-    build_mobile_orb_revoke_binding_response,
-    build_mobile_orb_subscribe_response,
-)
 from handsfree.meta_glasses_mobile_orb_runtime import (
     attach_mobile_orb_runtime_binding,
     invoke_mobile_orb_runtime_binding,
 )
-from handsfree.commands.intent_parser import ParsedIntent as RouterParsedIntent
 from handsfree.models import (
-    ActionResult,
     ActionCommandRequest,
-    AIAccelerateGenerateAndStoreExecuteRequest,
-    AIAcceleratedPRSummaryExecuteRequest,
+    ActionResult,
+    AgentTaskControlResponse,
+    AgentTaskMediaAttachRequest,
     AIAcceleratedFailureExplainExecuteRequest,
+    AIAcceleratedPRSummaryExecuteRequest,
+    AIAccelerateGenerateAndStoreExecuteRequest,
     AIBackendPolicyHistoryReport,
     AIBackendPolicyReport,
-    AIBackendPolicySnapshotsResponse,
     AIBackendPolicySnapshotResponse,
-    AICapabilityContext,
+    AIBackendPolicySnapshotsResponse,
     AICapabilityExecuteRequest,
     AICapabilityExecuteResponse,
     AICopilotExplainFailureExecuteRequest,
@@ -123,43 +125,41 @@ from handsfree.models import (
     AIFindSimilarFailuresExecuteRequest,
     AIPRRAGSummaryExecuteRequest,
     AIStoredOutputReadExecuteRequest,
-    AgentTaskControlResponse,
     ApiKeyResponse,
     ApiKeysListResponse,
     AudioInput,
-    CommentRequest,
     CommandRequest,
     CommandResponse,
     CommandStatus,
+    CommentRequest,
     ConfirmRequest,
     CreateApiKeyRequest,
     CreateApiKeyResponse,
-    DevPeerChatConversationsResponse,
-    DevPeerChatHistoryResponse,
-    DevPeerChatHandsetHeartbeatRequest,
-    DevPeerChatHandsetSessionResponse,
-    DevPeerChatOutboxAckRequest,
-    DevPeerChatOutboxAckResponse,
-    DevPeerChatOutboxReleaseRequest,
-    DevPeerChatOutboxReleaseResponse,
-    DevPeerChatOutboxPromoteRequest,
-    DevPeerChatOutboxPromoteResponse,
-    DevPeerChatOutboxResponse,
-    DevPeerChatSendRequest,
-    DevPeerChatSendResponse,
-    DevAudioUploadRequest,
-    DevMediaUploadRequest,
-    AgentTaskMediaAttachRequest,
-    DevPeerEnvelopeRequest,
-    DevPeerEnvelopeResponse,
-    DevTransportSessionClearResponse,
-    DevTransportSessionCursor,
-    DevTransportSessionsResponse,
     CreateGitHubConnectionRequest,
     CreateNotificationSubscriptionRequest,
     CreateRepoSubscriptionRequest,
     DebugInfo,
     DependencyStatus,
+    DevAudioUploadRequest,
+    DevMediaUploadRequest,
+    DevPeerChatConversationsResponse,
+    DevPeerChatHandsetHeartbeatRequest,
+    DevPeerChatHandsetSessionResponse,
+    DevPeerChatHistoryResponse,
+    DevPeerChatOutboxAckRequest,
+    DevPeerChatOutboxAckResponse,
+    DevPeerChatOutboxPromoteRequest,
+    DevPeerChatOutboxPromoteResponse,
+    DevPeerChatOutboxReleaseRequest,
+    DevPeerChatOutboxReleaseResponse,
+    DevPeerChatOutboxResponse,
+    DevPeerChatSendRequest,
+    DevPeerChatSendResponse,
+    DevPeerEnvelopeRequest,
+    DevPeerEnvelopeResponse,
+    DevTransportSessionClearResponse,
+    DevTransportSessionCursor,
+    DevTransportSessionsResponse,
     FollowOnTask,
     GitHubConnectionResponse,
     GitHubConnectionsListResponse,
@@ -169,6 +169,7 @@ from handsfree.models import (
     InboxItem,
     InboxItemType,
     InboxResponse,
+    MergeRequest,
     MetaGlassesMobileOrbBindServiceRequest,
     MetaGlassesMobileOrbBindServiceResponse,
     MetaGlassesMobileOrbDispatchResponseRequest,
@@ -183,11 +184,10 @@ from handsfree.models import (
     MetaGlassesMobileOrbRevokeBindingResponse,
     MetaGlassesMobileOrbSubscribeServiceUpdatesRequest,
     MetaGlassesMobileOrbSubscribeServiceUpdatesResponse,
-    MergeRequest,
-    NotificationSubscriptionResponse,
-    NotificationSubscriptionsListResponse,
     Notification,
     NotificationsListResponse,
+    NotificationSubscriptionResponse,
+    NotificationSubscriptionsListResponse,
     ParsedIntent,
     PrivacyMode,
     Profile,
@@ -200,30 +200,27 @@ from handsfree.models import (
     TTSRequest,
     UICard,
 )
-from handsfree.mcp.catalog import get_capability_descriptor, get_provider_descriptor
 from handsfree.models import (
     PendingAction as PydanticPendingAction,
 )
-from handsfree.policy import PolicyDecision, evaluate_action_policy
+from handsfree.ocr import OCRDisabledError, get_ocr_provider
+from handsfree.peer_chat import PeerChatSessionService
 from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
 from handsfree.stt import STTDisabledError, get_stt_provider
-from handsfree.ocr import OCRDisabledError, get_ocr_provider
-from handsfree.peer_chat import PeerChatSessionService
-from handsfree.webhooks import (
-    normalize_github_event,
-    verify_github_signature,
-)
 from handsfree.transport.libp2p_bluetooth import (
     CHAT_PROTOCOL_ID,
     PeerEnvelope,
     PersistedTransportSessionCursor,
-    encode_chat_message_payload,
     decode_chat_message_payload,
-    decode_transport_message,
     decode_transport_envelope,
-    decode_transport_payload,
+    decode_transport_message,
+    encode_chat_message_payload,
     encode_transport_envelope,
+)
+from handsfree.webhooks import (
+    normalize_github_event,
+    verify_github_signature,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -410,9 +407,13 @@ def _collect_mobile_orb_policy_cids(records: list[dict[str, Any]]) -> list[str]:
         values.append(
             _mobile_orb_string_from(record, "policy_decision", "policy_bundle_ref", "policy_cid")
         )
-        values.append(_mobile_orb_string_from(record, "interaction_envelope", "compiled_policy_cid"))
         values.append(
-            _mobile_orb_string_from(record, "interaction_envelope", "policy_bundle_ref", "policy_cid")
+            _mobile_orb_string_from(record, "interaction_envelope", "compiled_policy_cid")
+        )
+        values.append(
+            _mobile_orb_string_from(
+                record, "interaction_envelope", "policy_bundle_ref", "policy_cid"
+            )
         )
         receipt = record.get("mediation_receipt")
         if isinstance(receipt, dict):
@@ -471,7 +472,9 @@ def _collect_mobile_orb_receipt_cids(records: list[dict[str, Any]]) -> list[str]
         display_action = record.get("display_widget_action")
         if isinstance(display_action, dict):
             values.append(display_action.get("orb_receipt_cid"))
-            values.append(_mobile_orb_string_from(display_action, "mediation_receipt", "receipt_id"))
+            values.append(
+                _mobile_orb_string_from(display_action, "mediation_receipt", "receipt_id")
+            )
         parent_receipts = record.get("parent_receipt_cids")
         if isinstance(parent_receipts, list):
             values.extend(parent_receipts)
@@ -910,7 +913,7 @@ NOTIFICATION_EXAMPLES = {
                         "id": "read_cid",
                         "label": "Read Receipt",
                         "phrase": "read the wearables receipt",
-                    }
+                    },
                 ],
             },
         },
@@ -1049,7 +1052,9 @@ def _build_follow_on_task(
     if provider is None and task is not None and isinstance(task.provider, str):
         provider = task.provider
     if provider_label is None and isinstance(serialized_task, dict):
-        trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+        trace = (
+            serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+        )
         if isinstance(trace.get("provider_label"), str):
             provider_label = trace["provider_label"]
     if capability is None and isinstance(serialized_task, dict):
@@ -1058,7 +1063,11 @@ def _build_follow_on_task(
         ):
             capability = serialized_task["result"]["capability"]
         else:
-            trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+            trace = (
+                serialized_task.get("trace")
+                if isinstance(serialized_task.get("trace"), dict)
+                else {}
+            )
             if isinstance(trace.get("mcp_capability"), str):
                 capability = trace["mcp_capability"]
 
@@ -1303,20 +1312,21 @@ async def _execute_ai_capability_request(
     normalized_context = request.normalized_context()
 
     options = request.build_options_dict()
-    if resolved_capability_id in {
-        "github.check.failure_rag_explain",
-        "github.check.accelerated_failure_explain",
-    } and "github_provider" not in options:
-        options["github_provider"] = _github_provider
-    request_inputs = dict(request.inputs)
     if (
-        "history_cids" not in request_inputs
-        and resolved_capability_id in {
+        resolved_capability_id
+        in {
             "github.check.failure_rag_explain",
             "github.check.accelerated_failure_explain",
-            "github.check.find_similar_failures",
         }
+        and "github_provider" not in options
     ):
+        options["github_provider"] = _github_provider
+    request_inputs = dict(request.inputs)
+    if "history_cids" not in request_inputs and resolved_capability_id in {
+        "github.check.failure_rag_explain",
+        "github.check.accelerated_failure_explain",
+        "github.check.find_similar_failures",
+    }:
         auto_history_cids = discover_failure_history_cids(
             get_db(),
             user_id=user_id,
@@ -1388,7 +1398,8 @@ async def _execute_ai_capability_request(
     )
 
     if (
-        resolved_capability_id in {
+        resolved_capability_id
+        in {
             "github.check.failure_rag_explain",
             "github.check.accelerated_failure_explain",
         }
@@ -1533,7 +1544,9 @@ def _normalize_mcp_task_result(task: Any) -> dict[str, Any] | None:
 
     capability = trace.get("mcp_capability")
     provider_label = trace.get("provider_label")
-    result_output = envelope.get("structured_output") if envelope else trace.get("mcp_result_output")
+    result_output = (
+        envelope.get("structured_output") if envelope else trace.get("mcp_result_output")
+    )
     result_preview = envelope.get("summary") if envelope else trace.get("mcp_result_preview")
 
     normalized: dict[str, Any] = {
@@ -1646,8 +1659,12 @@ def _serialize_agent_task(task: Any) -> dict[str, Any]:
         if isinstance(task.trace.get("mcp_started_at"), str):
             task_data["mcp_started_at"] = task.trace["mcp_started_at"]
             try:
-                started = datetime.fromisoformat(task.trace["mcp_started_at"].replace("Z", "+00:00"))
-                task_data["mcp_elapsed_s"] = max(0, int((datetime.now(UTC) - started).total_seconds()))
+                started = datetime.fromisoformat(
+                    task.trace["mcp_started_at"].replace("Z", "+00:00")
+                )
+                task_data["mcp_elapsed_s"] = max(
+                    0, int((datetime.now(UTC) - started).total_seconds())
+                )
             except ValueError:
                 pass
         if isinstance(task.trace.get("mcp_timeout_s"), (int, float)):
@@ -1717,12 +1734,14 @@ def _filter_agent_tasks_for_results(
     """Apply capability/result availability filtering to a task list."""
     if capability:
         tasks = [
-            task for task in tasks
+            task
+            for task in tasks
             if isinstance(task.trace, dict) and task.trace.get("mcp_capability") == capability
         ]
     if results_only:
         tasks = [
-            task for task in tasks
+            task
+            for task in tasks
             if task.state == "completed"
             and isinstance(task.trace, dict)
             and (
@@ -1737,7 +1756,7 @@ def _filter_agent_tasks_for_results(
 def _paginate_task_list(tasks: list[Any], *, limit: int, offset: int) -> tuple[list[Any], bool]:
     """Paginate an in-memory task list and return page plus has_more flag."""
     has_more = len(tasks) > offset + limit
-    return tasks[offset: offset + limit], has_more
+    return tasks[offset : offset + limit], has_more
 
 
 def _latest_tasks_by_result_key(tasks: list[Any]) -> list[Any]:
@@ -1855,9 +1874,11 @@ def register_mobile_orb_edge_capabilities(
     request: MetaGlassesMobileOrbRegisterRequest,
 ) -> MetaGlassesMobileOrbRegisterResponse:
     """Register the phone as a policy-scoped ORB edge node for Meta glasses."""
-    edge_session_id, control_surface_contract_ref, edge_session = build_mobile_orb_register_artifacts(
-        request=request,
-        registered_at=datetime.now(UTC).isoformat(),
+    edge_session_id, control_surface_contract_ref, edge_session = (
+        build_mobile_orb_register_artifacts(
+            request=request,
+            registered_at=datetime.now(UTC).isoformat(),
+        )
     )
     mobile_orb_edge_sessions[edge_session_id] = edge_session
     return build_mobile_orb_register_response(
@@ -2175,10 +2196,7 @@ async def dev_simulator():
 async def meta_rayban_display_simulator():
     """Serve the Meta Ray-Ban Display browser simulator shell."""
     simulator_path = (
-        Path(__file__).parent.parent.parent
-        / "dev"
-        / "meta-rayban-display-simulator"
-        / "index.html"
+        Path(__file__).parent.parent.parent / "dev" / "meta-rayban-display-simulator" / "index.html"
     )
     if not simulator_path.exists():
         raise HTTPException(
@@ -2725,7 +2743,9 @@ async def dev_send_peer_chat(
     transport = get_peer_transport()
     local_identity = getattr(transport, "get_local_identity", lambda: None)()
     sender_peer_id = getattr(local_identity, "peer_id", None) or "local-dev-peer"
-    conversation_id = request.conversation_id or build_conversation_id(request.peer_id, sender_peer_id)
+    conversation_id = request.conversation_id or build_conversation_id(
+        request.peer_id, sender_peer_id
+    )
     timestamp_ms = int(datetime.now(UTC).timestamp() * 1000)
     task_snapshot = None
     task_snapshot_data = None
@@ -3184,9 +3204,7 @@ async def submit_command(
 
             # Get OCR provider and extract text
             ocr_provider = get_ocr_provider()
-            text = ocr_provider.extract_text(
-                image_data, request.input.content_type or "image/jpeg"
-            )
+            text = ocr_provider.extract_text(image_data, request.input.content_type or "image/jpeg")
 
             log_info(
                 logger,
@@ -3462,7 +3480,7 @@ async def submit_command(
                     }
                 }
             },
-        }
+        },
     },
 )
 async def submit_action_command(
@@ -3527,8 +3545,8 @@ async def submit_action_command(
         action_session_id = action_session_id or "action-card-context"
         router.seed_navigation_card(action_session_id, embedded_card)
     elif isinstance(task_id, str) and task_id.strip():
-        from handsfree.db.agent_tasks import get_agent_task_by_id
         from handsfree.commands.router import _build_result_card
+        from handsfree.db.agent_tasks import get_agent_task_by_id
 
         db = get_db()
         task = get_agent_task_by_id(db, task_id.strip())
@@ -3549,7 +3567,9 @@ async def submit_action_command(
         from handsfree.db.notifications import build_notification_card, get_notification
 
         db = get_db()
-        notification = get_notification(db, user_id=user_id, notification_id=notification_id.strip())
+        notification = get_notification(
+            db, user_id=user_id, notification_id=notification_id.strip()
+        )
         if notification is None:
             clear_request_id()
             raise HTTPException(
@@ -3851,7 +3871,7 @@ def _convert_router_response_to_command_response(
                 transcript,
                 "api",
                 user_id,
-                client_context=request.client_context.model_dump(mode="json"),
+                client_context=None,
             )
         if intent_entities.get("state") != "completed":
             task_id = intent_entities.get("task_id", "")
@@ -3943,7 +3963,7 @@ def _convert_router_response_to_command_response(
                     }
                 }
             },
-        }
+        },
     },
 )
 async def confirm_command(
@@ -4004,7 +4024,7 @@ async def confirm_command(
                 issue_num = entities.get("issue_number")
                 pr_num = entities.get("pr_number")
                 provider = entities.get("provider")
-                
+
                 # Check if agent service is available (requires DB connection)
                 if not db:
                     response = CommandResponse(
@@ -4018,9 +4038,9 @@ async def confirm_command(
                     )
                 else:
                     from handsfree.agents.service import AgentService
-                    
+
                     agent_service = AgentService(db)
-                    
+
                     target_type = None
                     target_ref = None
                     if issue_num:
@@ -4029,7 +4049,7 @@ async def confirm_command(
                     elif pr_num:
                         target_type = "pr"
                         target_ref = f"#{pr_num}"
-                    
+
                     # Build trace with confirmation metadata
                     trace = {
                         "intent_name": intent_name,
@@ -4037,7 +4057,7 @@ async def confirm_command(
                         "confirmed_at": datetime.now(UTC).isoformat(),
                         "via_router_token": True,
                     }
-                    
+
                     try:
                         # Create and start the agent task
                         result = agent_service.delegate(
@@ -4048,9 +4068,9 @@ async def confirm_command(
                             target_ref=target_ref,
                             trace=trace,
                         )
-                        
+
                         spoken_text = result.get("spoken_text", "Agent task created.")
-                        
+
                         # Write audit log
                         task_id = result.get("task_id")
                         write_action_log(
@@ -4069,7 +4089,7 @@ async def confirm_command(
                             },
                             idempotency_key=request.idempotency_key,
                         )
-                        
+
                         response = CommandResponse(
                             status=CommandStatus.OK,
                             intent=ParsedIntent(
@@ -4089,7 +4109,7 @@ async def confirm_command(
                         raise
                     except Exception as e:
                         logger.error("Failed to delegate to agent: %s", e)
-                        
+
                         write_action_log(
                             db,
                             user_id=user_id,
@@ -4105,7 +4125,7 @@ async def confirm_command(
                             },
                             idempotency_key=request.idempotency_key,
                         )
-                        
+
                         response = CommandResponse(
                             status=CommandStatus.ERROR,
                             intent=ParsedIntent(
@@ -4115,7 +4135,7 @@ async def confirm_command(
                             ),
                             spoken_text=f"Failed to create agent task: {str(e)}",
                         )
-            
+
             else:
                 # Unknown intent from router - log for debugging
                 write_action_log(
@@ -4133,7 +4153,7 @@ async def confirm_command(
                     },
                     idempotency_key=request.idempotency_key,
                 )
-                
+
                 response = CommandResponse(
                     status=CommandStatus.ERROR,
                     intent=ParsedIntent(
@@ -4311,11 +4331,11 @@ async def get_inbox(
     """Get attention items (PRs, mentions, failing checks)."""
     # Use ProfileConfig for profile-aware filtering and truncation
     profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
-    
+
     # Use a placeholder; live mode resolves the authenticated login.
     # In fixture mode, username doesn't matter because fixtures are static.
     user = "me"
-    
+
     # Call the inbox handler to get rich items with checks summary
     try:
         result = handle_inbox_list(
@@ -4325,7 +4345,7 @@ async def get_inbox(
             profile_config=profile_config,
             user_id=user_id,
         )
-        
+
         # Convert handler items to InboxItem format
         items = []
         for item_data in result.get("items", []):
@@ -4341,17 +4361,17 @@ async def get_inbox(
                 checks_pending=item_data.get("checks_pending"),
             )
             items.append(item)
-        
+
     except Exception as e:
         logger.error("Failed to fetch inbox via handler: %s", str(e))
         # Fall back to fixture items on error
         items = _get_fixture_inbox_items()
-    
+
     # Apply profile-based filtering
     # During workout, only show high priority items for focused attention
     if profile == Profile.WORKOUT:
         items = [item for item in items if item.priority >= 4]
-    
+
     return InboxResponse(items=items)
 
 
@@ -4629,8 +4649,8 @@ def _handle_agent_delegate(
         device: Device identifier
         user_id: User ID from header or fixture
     """
-    from handsfree.agents.service import AgentService
     from handsfree.agents.delegation import enrich_delegate_trace_for_client_context
+    from handsfree.agents.service import AgentService
 
     # Extract entities from parsed intent
     instruction = parsed_intent.entities.get("instruction", text)
@@ -5423,7 +5443,7 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
             },
         },
     },
-) 
+)
 async def get_notifications(
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
@@ -5546,9 +5566,6 @@ async def text_to_speech(request: TTSRequest) -> Response:
                 "message": "Failed to synthesize speech",
             },
         ) from e
-
-
-
 
 
 @app.exception_handler(HTTPException)
@@ -6397,13 +6414,15 @@ async def delete_notification_subscription(
             "content": {
                 "application/json": {
                     "examples": {
-                        "notification_not_found": NOTIFICATION_ERROR_EXAMPLES["notification_not_found"],
+                        "notification_not_found": NOTIFICATION_ERROR_EXAMPLES[
+                            "notification_not_found"
+                        ],
                     }
                 }
             },
         },
     },
-) 
+)
 async def get_notification_detail(
     notification_id: str,
     user_id: CurrentUser,
@@ -6545,8 +6564,8 @@ async def list_agent_tasks(
         raise _invalid_parameter("direction must be one of: asc, desc")
 
     db = get_db()
-    from handsfree.db.agent_tasks import get_agent_tasks
     from handsfree.auth import get_auth_mode
+    from handsfree.db.agent_tasks import get_agent_tasks
 
     effective_user_id = user_id
     if get_auth_mode() == "dev" and x_user_id_raw:
@@ -6579,8 +6598,7 @@ async def list_agent_tasks(
 
     # Format response
     task_list = [
-        _apply_task_result_view(_serialize_agent_task(task), result_view)
-        for task in tasks
+        _apply_task_result_view(_serialize_agent_task(task), result_view) for task in tasks
     ]
 
     return JSONResponse(
@@ -6668,6 +6686,8 @@ async def get_agent_task_detail(
         task_data["result"] = normalized_result
 
     return JSONResponse(status_code=status.HTTP_200_OK, content=task_data)
+
+
 @app.post("/v1/agents/tasks/{task_id}/media")
 async def attach_agent_task_media(
     task_id: str,
@@ -7372,7 +7392,9 @@ async def get_ai_backend_policy_report(
             "created_at": latest_snapshot.created_at,
             "age_seconds": max(
                 0,
-                int((datetime.now(UTC) - latest_snapshot.created_at.astimezone(UTC)).total_seconds()),
+                int(
+                    (datetime.now(UTC) - latest_snapshot.created_at.astimezone(UTC)).total_seconds()
+                ),
             ),
         }
     report.snapshot_summary = build_snapshot_summary(

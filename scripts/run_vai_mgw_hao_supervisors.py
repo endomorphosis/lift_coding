@@ -4,17 +4,17 @@
 from __future__ import annotations
 
 import sys
-from typing import Sequence
+from collections.abc import Sequence
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
-
 
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 BOOTSTRAP_IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
-
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_repo_script_bootstrap,  # noqa: E402
+)
 
 _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
@@ -29,7 +29,6 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
     implementation_multi_supervisor_env_defaults,
     implementation_supervisor_namespace_track_configs,
 )
-
 
 MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
     prefer_copilot_merge_resolver=True,

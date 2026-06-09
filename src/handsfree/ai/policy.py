@@ -36,14 +36,16 @@ def get_ai_backend_policy() -> AIBackendPolicy:
     )
 
     # Legacy rollout flags remain supported as compatibility fallbacks.
-    if summary_backend == "default" and os.getenv(
-        "HANDSFREE_AI_ACCELERATED_SUMMARY_ENABLED", "false"
-    ).lower() == "true":
+    if (
+        summary_backend == "default"
+        and os.getenv("HANDSFREE_AI_ACCELERATED_SUMMARY_ENABLED", "false").lower() == "true"
+    ):
         summary_backend = "accelerated"
 
-    if failure_backend == "default" and os.getenv(
-        "HANDSFREE_AI_COMPOSITE_FAILURE_ENABLED", "false"
-    ).lower() == "true":
+    if (
+        failure_backend == "default"
+        and os.getenv("HANDSFREE_AI_COMPOSITE_FAILURE_ENABLED", "false").lower() == "true"
+    ):
         failure_backend = "composite"
 
     return AIBackendPolicy(
@@ -54,9 +56,9 @@ def get_ai_backend_policy() -> AIBackendPolicy:
 
 def resolve_policy_workflow(
     *,
-    workflow: "AIWorkflow | None",
+    workflow: AIWorkflow | None,
     capability_id: str | None,
-) -> tuple["AIWorkflow | None", str | None]:
+) -> tuple[AIWorkflow | None, str | None]:
     """Resolve workflow/capability through backend policy.
 
     Explicit capability IDs are left untouched. Policy only applies when the
@@ -74,7 +76,10 @@ def resolve_policy_workflow(
 
     if workflow == AIWorkflow.FAILURE_RAG_EXPLAIN:
         if policy.failure_backend == "accelerated":
-            return AIWorkflow.ACCELERATED_FAILURE_EXPLAIN, "github.check.accelerated_failure_explain"
+            return (
+                AIWorkflow.ACCELERATED_FAILURE_EXPLAIN,
+                "github.check.accelerated_failure_explain",
+            )
         if policy.failure_backend == "composite":
             return AIWorkflow.FAILURE_RAG_EXPLAIN, "github.check.failure_rag_explain"
 
@@ -83,11 +88,11 @@ def resolve_policy_workflow(
 
 def build_policy_resolution(
     *,
-    requested_workflow: "AIWorkflow | None",
-    resolved_workflow: "AIWorkflow | None",
+    requested_workflow: AIWorkflow | None,
+    resolved_workflow: AIWorkflow | None,
     requested_capability_id: str | None,
     resolved_capability_id: str,
-) -> "AIPolicyResolution":
+) -> AIPolicyResolution:
     """Build API-facing metadata describing policy remapping."""
     from handsfree.models import AIPolicyResolution
 

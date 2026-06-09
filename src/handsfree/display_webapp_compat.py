@@ -32,7 +32,9 @@ def _is_public_https_url(value: str) -> tuple[bool, str]:
     return True, "HTTPS public URL configured."
 
 
-def _build_check(check_id: str, passed: bool, success_message: str, failure_message: str) -> dict[str, Any]:
+def _build_check(
+    check_id: str, passed: bool, success_message: str, failure_message: str
+) -> dict[str, Any]:
     return {
         "id": check_id,
         "status": "pass" if passed else "fail",
@@ -58,9 +60,7 @@ def _check_passed(
 
 
 def _safe_check_id(value: str) -> str:
-    normalized = "".join(
-        character if character.isalnum() else "_" for character in value.lower()
-    )
+    normalized = "".join(character if character.isalnum() else "_" for character in value.lower())
     normalized = "_".join(part for part in normalized.split("_") if part)
     return normalized or "unnamed_widget"
 
@@ -75,9 +75,7 @@ def _is_webapp_target_widget(widget: Any) -> bool:
             "render_path"
         )
         or (
-            widget.get("renderer_hints")
-            if isinstance(widget.get("renderer_hints"), dict)
-            else {}
+            widget.get("renderer_hints") if isinstance(widget.get("renderer_hints"), dict) else {}
         ).get("primary_render_path")
     )
     fallback = widget.get("fallback") if isinstance(widget.get("fallback"), dict) else {}
@@ -114,7 +112,9 @@ def _widget_focusable_count(widget: dict[str, Any], default_count: Any) -> Any:
     return default_count
 
 
-def _evaluate_webapp_widgets(data: dict[str, Any], base_viewport: dict[str, Any]) -> list[dict[str, Any]]:
+def _evaluate_webapp_widgets(
+    data: dict[str, Any], base_viewport: dict[str, Any]
+) -> list[dict[str, Any]]:
     widgets = data.get("widgets")
     if not isinstance(widgets, list):
         return []
@@ -128,9 +128,7 @@ def _evaluate_webapp_widgets(data: dict[str, Any], base_viewport: dict[str, Any]
         widget_id = str(widget.get("widget_id") or widget.get("id") or f"widget_{index + 1}")
         check_prefix = f"widget_{_safe_check_id(widget_id)}"
         browser_preview = (
-            widget.get("browser_preview")
-            if isinstance(widget.get("browser_preview"), dict)
-            else {}
+            widget.get("browser_preview") if isinstance(widget.get("browser_preview"), dict) else {}
         )
         viewport = _widget_viewport(widget, base_viewport)
         focusable_elements = _widget_focusable_count(widget, data.get("focusable_elements"))
@@ -143,9 +141,9 @@ def _evaluate_webapp_widgets(data: dict[str, Any], base_viewport: dict[str, Any]
         if isinstance(focus_order, list) and all(
             isinstance(item, str) and item for item in focus_order
         ):
-            navigation_order_valid = bool(navigation_order_valid) and len(
-                set(focus_order)
-            ) == len(focus_order)
+            navigation_order_valid = bool(navigation_order_valid) and len(set(focus_order)) == len(
+                focus_order
+            )
         deployment_url = str(widget.get("deployment_url") or data.get("deployment_url") or "")
         url_ok, url_message = _is_public_https_url(deployment_url)
         viewport_ok = viewport.get("width") == 600 and viewport.get("height") == 600
@@ -166,14 +164,18 @@ def _evaluate_webapp_widgets(data: dict[str, Any], base_viewport: dict[str, Any]
             else data.get("dark_theme_supported")
         ) is True
         min_contrast_ratio = widget.get("min_contrast_ratio", data.get("min_contrast_ratio"))
-        contrast_ok = isinstance(min_contrast_ratio, (float, int)) and float(min_contrast_ratio) >= 4.5
+        contrast_ok = (
+            isinstance(min_contrast_ratio, (float, int)) and float(min_contrast_ratio) >= 4.5
+        )
         preview_ok = browser_preview.get("renderable") is True
         preview_viewport = (
             browser_preview.get("viewport")
             if isinstance(browser_preview.get("viewport"), dict)
             else {}
         )
-        preview_viewport_ok = preview_viewport.get("width") == 600 and preview_viewport.get("height") == 600
+        preview_viewport_ok = (
+            preview_viewport.get("width") == 600 and preview_viewport.get("height") == 600
+        )
 
         checks.extend(
             [

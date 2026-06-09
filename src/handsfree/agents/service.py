@@ -12,20 +12,20 @@ from uuid import NAMESPACE_DNS, UUID, uuid5
 import duckdb
 
 from handsfree.agent_providers import get_provider, is_copilot_cli_available
+from handsfree.db.agent_tasks import (
+    create_agent_task,
+    get_agent_task_by_id,
+    get_agent_tasks,
+    update_agent_task_state,
+    update_agent_task_trace,
+)
+from handsfree.db.notifications import create_notification
 from handsfree.mcp import (
     get_provider_descriptor,
     infer_provider_capability,
     resolve_capability_execution_mode,
     resolve_provider_capability,
 )
-from handsfree.db.agent_tasks import (
-    create_agent_task,
-    get_agent_task_by_id,
-    get_agent_tasks,
-    update_agent_task_trace,
-    update_agent_task_state,
-)
-from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
 
@@ -116,7 +116,9 @@ def _requested_local_fallback(preferred_mode: str | None, resolved_mode: str | N
     )
 
 
-def _execution_fallback_message(preferred_mode: str | None, resolved_mode: str | None) -> str | None:
+def _execution_fallback_message(
+    preferred_mode: str | None, resolved_mode: str | None
+) -> str | None:
     if _requested_local_fallback(preferred_mode, resolved_mode):
         return "Execution: remote (local unavailable)"
     return None
@@ -501,7 +503,9 @@ class AgentService:
                     "result_output": _trace_result_output(t.trace),
                     "result_envelope": _trace_result_envelope(t.trace),
                     "provider_label": (t.trace or {}).get("provider_label") if t.trace else None,
-                    "mcp_execution_mode": (t.trace or {}).get("mcp_execution_mode") if t.trace else None,
+                    "mcp_execution_mode": (t.trace or {}).get("mcp_execution_mode")
+                    if t.trace
+                    else None,
                     "mcp_preferred_execution_mode": (
                         (t.trace or {}).get("mcp_preferred_execution_mode") if t.trace else None
                     ),

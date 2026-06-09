@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MOCKUP_DOC = REPO_ROOT / "hallucinate_app" / "docs" / "SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md"
-OBJECTIVE_HEAP = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-ORB_HARNESS = REPO_ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts"
+OBJECTIVE_HEAP = (
+    REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+)
+ORB_HARNESS = (
+    REPO_ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts"
+)
 
 
 def _goal_block(heap_text: str, goal_id: str) -> str:

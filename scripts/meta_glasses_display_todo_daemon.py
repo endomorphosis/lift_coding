@@ -8,16 +8,23 @@ from pathlib import Path
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+)
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_android_validation_callbacks as _build_android_validation_callbacks,
-    build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_doc_path as _repo_doc_path,
 )
 
@@ -88,9 +95,7 @@ _RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_ipfs_accelerate_path = _RUNTIME_ENVIRONMENT.ensure_primary_pythonpath
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_DISPLAY_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(META_DISPLAY_ENV_PREFIX)
 META_DISPLAY_STATE_PATHS = namespace_implementation_state_artifact_paths(
     META_DISPLAY_DATA_PATHS,
     state_prefix="meta_glasses_display",

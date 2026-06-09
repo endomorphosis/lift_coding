@@ -7,20 +7,35 @@ import logging
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_agent_supervisor_namespace_context as _build_agent_supervisor_namespace_context,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_env_path as _prefixed_env_path,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_doc_path as _repo_doc_path,
 )
 
@@ -116,9 +131,7 @@ logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.resolve
 ensure_hallucinate_multimodal_bootstrap_paths = _HALLUCINATE_BOOTSTRAP_PATHS.ensure
 HALLUCINATE_STATE_PATHS = namespace_implementation_state_artifact_paths(HALLUCINATE_DATA_PATHS)
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    HALLUCINATE_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(HALLUCINATE_ENV_PREFIX)
 
 
 record_objective_goal_findings = build_namespace_objective_backlog_recorder(

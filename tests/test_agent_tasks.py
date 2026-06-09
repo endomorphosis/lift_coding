@@ -368,9 +368,14 @@ class TestAgentServicePauseResume:
         from handsfree.agents.service import AgentService
 
         owner_task = create_agent_task(
-            conn=db_conn, user_id="other-user@example.com", provider="copilot", instruction="other task"
+            conn=db_conn,
+            user_id="other-user@example.com",
+            provider="copilot",
+            instruction="other task",
         )
-        owner_task = update_agent_task_state(conn=db_conn, task_id=owner_task.id, new_state="running")
+        owner_task = update_agent_task_state(
+            conn=db_conn, task_id=owner_task.id, new_state="running"
+        )
 
         service = AgentService(db_conn)
 
@@ -447,9 +452,14 @@ class TestAgentServicePauseResume:
         from handsfree.agents.service import AgentService
 
         owner_task = create_agent_task(
-            conn=db_conn, user_id="other-user@example.com", provider="copilot", instruction="other task"
+            conn=db_conn,
+            user_id="other-user@example.com",
+            provider="copilot",
+            instruction="other task",
         )
-        owner_task = update_agent_task_state(conn=db_conn, task_id=owner_task.id, new_state="running")
+        owner_task = update_agent_task_state(
+            conn=db_conn, task_id=owner_task.id, new_state="running"
+        )
         owner_task = update_agent_task_state(
             conn=db_conn, task_id=owner_task.id, new_state="needs_input"
         )
@@ -492,7 +502,10 @@ class TestAgentServicePauseResume:
         from handsfree.agents.service import AgentService
 
         task = create_agent_task(
-            conn=db_conn, user_id=test_user_id, provider="ipfs_datasets_mcp", instruction="queued task"
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_datasets_mcp",
+            instruction="queued task",
         )
 
         service = AgentService(db_conn)

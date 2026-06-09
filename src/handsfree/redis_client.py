@@ -43,7 +43,8 @@ def get_redis_client(
         decode_responses: Whether to decode responses to strings (default: False)
 
     Returns:
-        Redis client if available, None if disabled or connection fails
+        Redis client if available, None if disabled or a Redis failure occurs.
+        Unexpected non-Redis errors propagate so startup defects are not hidden.
     """
     if not REDIS_AVAILABLE:
         logger.info("Redis Python package not installed; Redis integration disabled")

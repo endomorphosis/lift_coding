@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -484,7 +485,7 @@ class TestImageInputSecurityGating:
         large_file = tmp_path / "large_image.jpg"
         # Set a small size limit for this test
         monkeypatch.setenv("IMAGE_MAX_SIZE_BYTES", "100")
-        
+
         # Create a file larger than the limit
         large_file.write_bytes(b"x" * 200)
         large_file_uri = large_file.as_uri()
@@ -521,25 +522,26 @@ class TestImageInputHTTPSFetching:
 
     def test_fail_fast_content_length_rejection(self, monkeypatch, respx_mock):
         """Test that oversized images are rejected based on Content-Length before download."""
-        import respx
         from httpx import Response
-        
+
         # Set a small size limit for this test
         monkeypatch.setenv("IMAGE_MAX_SIZE_BYTES", "1000")
         # Enable strict host checking and configure allowed host
         monkeypatch.setenv("IMAGE_STRICT_HOST_CHECKING", "1")
         monkeypatch.setenv("IMAGE_ALLOWED_HOSTS", "example.com")
-        
+
         # Mock a response with Content-Length exceeding the limit
         mock_route = respx_mock.get("https://example.com/large.jpg")
-        mock_route.mock(return_value=Response(
-            200,
-            headers={
-                "content-length": "5000",  # Exceeds limit
-                "content-type": "image/jpeg",
-            },
-            content=b"should not be downloaded",
-        ))
+        mock_route.mock(
+            return_value=Response(
+                200,
+                headers={
+                    "content-length": "5000",  # Exceeds limit
+                    "content-type": "image/jpeg",
+                },
+                content=b"should not be downloaded",
+            )
+        )
 
         response = client.post(
             "/v1/command",
@@ -570,28 +572,29 @@ class TestImageInputHTTPSFetching:
 
     def test_content_length_within_limit_downloads(self, monkeypatch, respx_mock):
         """Test that images with Content-Length within limit proceed to download."""
-        import respx
         from httpx import Response
-        
+
         # Set a reasonable size limit
         monkeypatch.setenv("IMAGE_MAX_SIZE_BYTES", "10000")
         # Configure allowed host
         monkeypatch.setenv("IMAGE_STRICT_HOST_CHECKING", "1")
         monkeypatch.setenv("IMAGE_ALLOWED_HOSTS", "example.com")
-        
+
         # Create minimal valid JPEG data
         jpeg_data = b"\xff\xd8\xff\xe0\x00\x10JFIF" + b"\x00" * 100 + b"\xff\xd9"
-        
+
         # Mock a response with Content-Length within the limit
         mock_route = respx_mock.get("https://example.com/small.jpg")
-        mock_route.mock(return_value=Response(
-            200,
-            headers={
-                "content-length": str(len(jpeg_data)),
-                "content-type": "image/jpeg",
-            },
-            content=jpeg_data,
-        ))
+        mock_route.mock(
+            return_value=Response(
+                200,
+                headers={
+                    "content-length": str(len(jpeg_data)),
+                    "content-type": "image/jpeg",
+                },
+                content=jpeg_data,
+            )
+        )
 
         response = client.post(
             "/v1/command",
@@ -621,26 +624,27 @@ class TestImageInputHTTPSFetching:
 
     def test_invalid_content_length_handled_gracefully(self, monkeypatch, respx_mock):
         """Test that invalid Content-Length headers are handled gracefully."""
-        import respx
         from httpx import Response
-        
+
         # Configure allowed host
         monkeypatch.setenv("IMAGE_STRICT_HOST_CHECKING", "1")
         monkeypatch.setenv("IMAGE_ALLOWED_HOSTS", "example.com")
-        
+
         # Create minimal valid JPEG data
         jpeg_data = b"\xff\xd8\xff\xe0\x00\x10JFIF" + b"\x00" * 100 + b"\xff\xd9"
-        
+
         # Mock a response with invalid Content-Length
         mock_route = respx_mock.get("https://example.com/invalid-cl.jpg")
-        mock_route.mock(return_value=Response(
-            200,
-            headers={
-                "content-length": "not-a-number",  # Invalid
-                "content-type": "image/jpeg",
-            },
-            content=jpeg_data,
-        ))
+        mock_route.mock(
+            return_value=Response(
+                200,
+                headers={
+                    "content-length": "not-a-number",  # Invalid
+                    "content-type": "image/jpeg",
+                },
+                content=jpeg_data,
+            )
+        )
 
         response = client.post(
             "/v1/command",
@@ -670,14 +674,13 @@ class TestImageInputHTTPSFetching:
 
     def test_strict_host_checking_enabled_by_default(self, monkeypatch, respx_mock):
         """Test that strict host checking is enabled by default (deny-all when no allowlist)."""
-        import respx
         from httpx import Response
-        
+
         # Don't set IMAGE_ALLOWED_HOSTS, which should trigger default-deny
         monkeypatch.delenv("IMAGE_ALLOWED_HOSTS", raising=False)
         # Don't explicitly set IMAGE_STRICT_HOST_CHECKING (should default to enabled)
         monkeypatch.delenv("IMAGE_STRICT_HOST_CHECKING", raising=False)
-        
+
         # Mock a response (shouldn't be reached due to host checking)
         mock_route = respx_mock.get("https://example.com/test.jpg")
         mock_route.mock(return_value=Response(200, content=b"test"))
@@ -710,24 +713,25 @@ class TestImageInputHTTPSFetching:
 
     def test_strict_host_checking_can_be_disabled(self, monkeypatch, respx_mock):
         """Test that strict host checking can be disabled for backward compatibility."""
-        import respx
         from httpx import Response
-        
+
         # Disable strict host checking
         monkeypatch.setenv("IMAGE_STRICT_HOST_CHECKING", "0")
         # Don't set IMAGE_ALLOWED_HOSTS
         monkeypatch.delenv("IMAGE_ALLOWED_HOSTS", raising=False)
-        
+
         # Create minimal valid JPEG data
         jpeg_data = b"\xff\xd8\xff\xe0\x00\x10JFIF" + b"\x00" * 100 + b"\xff\xd9"
-        
+
         # Mock a response
         mock_route = respx_mock.get("https://example.com/test.jpg")
-        mock_route.mock(return_value=Response(
-            200,
-            headers={"content-type": "image/jpeg"},
-            content=jpeg_data,
-        ))
+        mock_route.mock(
+            return_value=Response(
+                200,
+                headers={"content-type": "image/jpeg"},
+                content=jpeg_data,
+            )
+        )
 
         response = client.post(
             "/v1/command",

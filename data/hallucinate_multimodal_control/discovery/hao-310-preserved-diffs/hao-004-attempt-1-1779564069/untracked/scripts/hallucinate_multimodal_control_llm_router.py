@@ -9,7 +9,6 @@ import os
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
@@ -31,14 +30,26 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Generate an implementation proposal for a Hallucinate multimodal-control todo with llm_router.",
     )
-    parser.add_argument("--task-id", default="", help="Specific HAO task id. Defaults to the first ready task.")
+    parser.add_argument(
+        "--task-id", default="", help="Specific HAO task id. Defaults to the first ready task."
+    )
     parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
     parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
-    parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
-    parser.add_argument("--dry-run", action="store_true", help="Explicit preflight mode. This is the default when --generate is not set.")
+    parser.add_argument(
+        "--generate",
+        action="store_true",
+        help="Actually call llm_router. Default is dry-run/preflight.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Explicit preflight mode. This is the default when --generate is not set.",
+    )
     parser.add_argument("--provider", default=os.environ.get("IPFS_DATASETS_PY_LLM_PROVIDER", ""))
-    parser.add_argument("--model", default=os.environ.get("IPFS_DATASETS_PY_LLM_MODEL", "gpt-5.3-codex-spark"))
+    parser.add_argument(
+        "--model", default=os.environ.get("IPFS_DATASETS_PY_LLM_MODEL", "gpt-5.3-codex-spark")
+    )
     parser.add_argument("--max-new-tokens", type=int, default=2048)
     parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--allow-local-fallback", action="store_true")
@@ -61,14 +72,14 @@ def _build_prompt(task: object, plan_text: str) -> str:
     return f"""You are helping implement the Hallucinate App multimodal control-surface roadmap.
 
 Task:
-- ID: {getattr(task, 'task_id', '')}
-- Title: {getattr(task, 'title', '')}
-- Priority: {getattr(task, 'priority', '')}
-- Track: {getattr(task, 'track', '')}
-- Depends on: {', '.join(getattr(task, 'depends_on', []) or []) or 'none'}
-- Outputs: {', '.join(getattr(task, 'outputs', []) or []) or 'none listed'}
-- Validation: {'; '.join(getattr(task, 'validation', []) or []) or 'none listed'}
-- Acceptance: {getattr(task, 'acceptance', '') or 'none listed'}
+- ID: {getattr(task, "task_id", "")}
+- Title: {getattr(task, "title", "")}
+- Priority: {getattr(task, "priority", "")}
+- Track: {getattr(task, "track", "")}
+- Depends on: {", ".join(getattr(task, "depends_on", []) or []) or "none"}
+- Outputs: {", ".join(getattr(task, "outputs", []) or []) or "none listed"}
+- Validation: {"; ".join(getattr(task, "validation", []) or []) or "none listed"}
+- Acceptance: {getattr(task, "acceptance", "") or "none listed"}
 
 Roadmap context:
 {plan_text[:40000]}

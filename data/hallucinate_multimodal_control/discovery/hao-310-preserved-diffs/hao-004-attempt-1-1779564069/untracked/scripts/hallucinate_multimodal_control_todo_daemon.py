@@ -8,14 +8,15 @@ import logging
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
-DEFAULT_TODO_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+DEFAULT_TODO_PATH = (
+    REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md"
+)
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
 DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
@@ -25,15 +26,9 @@ logger = logging.getLogger("hallucinate_multimodal_control_todo_daemon")
 
 
 def hallucinate_multimodal_bootstrap_paths() -> dict[str, Path]:
-    todo_path = Path(
-        os.environ.get("HANDSFREE_HAO_TODO_PATH", str(DEFAULT_TODO_PATH))
-    )
-    state_dir = Path(
-        os.environ.get("HANDSFREE_HAO_STATE_DIR", str(DEFAULT_STATE_DIR))
-    )
-    worktree_root = Path(
-        os.environ.get("HANDSFREE_HAO_WORKTREE_ROOT", str(DEFAULT_WORKTREE_ROOT))
-    )
+    todo_path = Path(os.environ.get("HANDSFREE_HAO_TODO_PATH", str(DEFAULT_TODO_PATH)))
+    state_dir = Path(os.environ.get("HANDSFREE_HAO_STATE_DIR", str(DEFAULT_STATE_DIR)))
+    worktree_root = Path(os.environ.get("HANDSFREE_HAO_WORKTREE_ROOT", str(DEFAULT_WORKTREE_ROOT)))
     return {
         "repo_root": REPO_ROOT,
         "todo_path": todo_path,
@@ -58,7 +53,7 @@ def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def _iter_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -78,7 +73,9 @@ def _iter_jsonl(path: Path) -> list[dict[str, Any]]:
     return events
 
 
-def _consecutive_validation_failures(events: list[dict[str, Any]], task_id: str) -> list[dict[str, Any]]:
+def _consecutive_validation_failures(
+    events: list[dict[str, Any]], task_id: str
+) -> list[dict[str, Any]]:
     failures: list[dict[str, Any]] = []
     for event in reversed(events):
         if str(event.get("type") or "") != "implementation_finished":
@@ -140,11 +137,16 @@ def _write_retry_budget_discovery(
     failures: list[dict[str, Any]],
     retry_budget: int,
 ) -> Path:
-    date = datetime.now(timezone.utc).date().isoformat()
-    path = discovery_dir / f"{date}-{follow_up_task_id.lower()}-{source_task_id.lower()}-retry-budget.md"
+    date = datetime.now(UTC).date().isoformat()
+    path = (
+        discovery_dir
+        / f"{date}-{follow_up_task_id.lower()}-{source_task_id.lower()}-retry-budget.md"
+    )
     discovery_dir.mkdir(parents=True, exist_ok=True)
     log_paths = [str(event.get("log_path") or "") for event in failures if event.get("log_path")]
-    attempt_numbers = [str(event.get("attempt") or "") for event in failures if event.get("attempt")]
+    attempt_numbers = [
+        str(event.get("attempt") or "") for event in failures if event.get("attempt")
+    ]
     content = f"""# {follow_up_task_id} Retry-Budget Finding: {source_task_id}
 
 Date: {date}
@@ -318,7 +320,8 @@ def main(argv: list[str] | None = None) -> None:
         task_header_prefix=parsed.task_prefix,
         implement=parsed.implement,
         implementation_command=parsed.implementation_command or None,
-        implementation_timeout=parsed.implementation_timeout or DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
+        implementation_timeout=parsed.implementation_timeout
+        or DEFAULT_IMPLEMENTATION_TIMEOUT_SECONDS,
         use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
         worktree_root=parsed.worktree_root,
     )
@@ -332,7 +335,9 @@ def main(argv: list[str] | None = None) -> None:
             task_header_prefix=parsed.task_prefix,
         )
         if findings:
-            logger.warning("Recorded Hallucinate retry-budget findings before daemon pass: %s", findings)
+            logger.warning(
+                "Recorded Hallucinate retry-budget findings before daemon pass: %s", findings
+            )
         result = daemon.run_once()
         findings = record_retry_budget_findings(
             todo_path=parsed.todo_path,
@@ -342,7 +347,9 @@ def main(argv: list[str] | None = None) -> None:
             task_header_prefix=parsed.task_prefix,
         )
         if findings:
-            logger.warning("Recorded Hallucinate retry-budget findings after daemon pass: %s", findings)
+            logger.warning(
+                "Recorded Hallucinate retry-budget findings after daemon pass: %s", findings
+            )
         logger.info("Hallucinate multimodal-control daemon pass complete: %s", result)
         if parsed.once:
             break

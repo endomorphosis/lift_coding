@@ -3,9 +3,8 @@ from __future__ import annotations
 import importlib.util
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
@@ -65,7 +64,10 @@ def test_hallucinate_autopilot_defaults_to_implement():
 
     assert autopilot.with_autopilot_defaults([]) == ["--implement"]
     assert autopilot.with_autopilot_defaults(["--once"]) == ["--implement", "--once"]
-    assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == ["--no-implement", "--once"]
+    assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == [
+        "--no-implement",
+        "--once",
+    ]
 
 
 def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
@@ -120,7 +122,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         }
         for index in range(1, 4)
     ]
-    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8"
+    )
 
     findings = daemon_module.record_retry_budget_findings(
         todo_path=todo_path,
@@ -130,7 +134,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         retry_budget=3,
     )
 
-    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+    expected_discovery = (
+        discovery_dir / f"{datetime.now(UTC).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+    )
     assert findings == [
         {
             "source_task_id": "HAO-003",

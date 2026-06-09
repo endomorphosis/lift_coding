@@ -352,8 +352,8 @@ class TestApiKeyModeAuthentication:
 
     def test_command_with_valid_api_key(self, test_user_id, api_key_mode_env, command_payload):
         """Test command endpoint with valid API key."""
-        from handsfree.db.api_keys import create_api_key
         from handsfree.api import get_db
+        from handsfree.db.api_keys import create_api_key
 
         db = get_db()
         plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
@@ -368,8 +368,8 @@ class TestApiKeyModeAuthentication:
 
     def test_command_with_revoked_api_key(self, test_user_id, api_key_mode_env, command_payload):
         """Test that revoked API keys are rejected."""
-        from handsfree.db.api_keys import create_api_key, revoke_api_key
         from handsfree.api import get_db
+        from handsfree.db.api_keys import create_api_key, revoke_api_key
 
         db = get_db()
         plaintext_key, api_key = create_api_key(db, test_user_id, label="Revoked key")
@@ -387,8 +387,8 @@ class TestApiKeyModeAuthentication:
 
     def test_github_connection_with_valid_api_key(self, test_user_id, api_key_mode_env):
         """Test GitHub connection creation with valid API key."""
-        from handsfree.db.api_keys import create_api_key
         from handsfree.api import get_db
+        from handsfree.db.api_keys import create_api_key
 
         db = get_db()
         plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
@@ -415,8 +415,8 @@ class TestApiKeyModeAuthentication:
 
     def test_list_connections_with_valid_api_key(self, test_user_id, api_key_mode_env):
         """Test listing connections with valid API key."""
-        from handsfree.db.api_keys import create_api_key
         from handsfree.api import get_db
+        from handsfree.db.api_keys import create_api_key
 
         db = get_db()
         plaintext_key, _ = create_api_key(db, test_user_id, label="Test key")
@@ -434,8 +434,8 @@ class TestApiKeyModeUserIsolation:
 
     def test_different_api_keys_have_different_connections(self, api_key_mode_env):
         """Test that different API key users see different connections."""
-        from handsfree.db.api_keys import create_api_key
         from handsfree.api import get_db
+        from handsfree.db.api_keys import create_api_key
 
         user1_id = str(uuid.uuid4())
         user2_id = str(uuid.uuid4())

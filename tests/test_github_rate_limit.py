@@ -1,7 +1,7 @@
 """Tests for GitHub rate limit handling and retry logic."""
 
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import httpx
 import pytest
@@ -123,9 +123,7 @@ class TestRateLimitDetection:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock a 401 response
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(401)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(401))
 
         # Should raise RuntimeError about authentication
         with pytest.raises(RuntimeError, match="authentication failed"):
@@ -141,7 +139,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 30 seconds
-        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=30)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(seconds=30)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -153,7 +151,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 2 seconds to avoid timing issues
-        reset_time = int((datetime.now(timezone.utc) + timedelta(seconds=2)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(seconds=2)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -169,7 +167,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 5 minutes
-        reset_time = int((datetime.now(timezone.utc) + timedelta(minutes=5)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(minutes=5)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -181,7 +179,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in 2 hours
-        reset_time = int((datetime.now(timezone.utc) + timedelta(hours=2)).timestamp())
+        reset_time = int((datetime.now(UTC) + timedelta(hours=2)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -193,7 +191,7 @@ class TestRetryTimeMessage:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock response with reset in the past
-        reset_time = int((datetime.now(timezone.utc) - timedelta(minutes=5)).timestamp())
+        reset_time = int((datetime.now(UTC) - timedelta(minutes=5)).timestamp())
         response = MockResponse(429, {"X-RateLimit-Reset": str(reset_time)})
 
         msg = provider._get_rate_limit_reset_message(response)
@@ -245,7 +243,9 @@ class TestTransientErrorRetry:
         ]
         response_iter = iter(responses)
 
-        respx.get("https://api.github.com/user").mock(side_effect=lambda request: next(response_iter))
+        respx.get("https://api.github.com/user").mock(
+            side_effect=lambda request: next(response_iter)
+        )
 
         # Should eventually succeed after retries
         result = provider._make_request("/user")
@@ -318,9 +318,7 @@ class TestTransientErrorRetry:
         provider = LiveGitHubProvider(token_provider)
 
         # Mock 503 responses beyond max retries
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(503)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(503))
 
         # Should fail after max retries
         with pytest.raises(RuntimeError, match="request failed with status 503"):
@@ -446,9 +444,7 @@ class TestTokenNotLogged:
         token_provider = MockTokenProvider("ghp_secrettoken789012")
         provider = LiveGitHubProvider(token_provider)
 
-        respx.get("https://api.github.com/user").mock(
-            return_value=httpx.Response(503)
-        )
+        respx.get("https://api.github.com/user").mock(return_value=httpx.Response(503))
 
         with pytest.raises(RuntimeError):
             provider._make_request("/user")

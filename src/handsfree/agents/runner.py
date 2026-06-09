@@ -14,12 +14,12 @@ from typing import Any
 
 import duckdb
 
-from handsfree.db.notifications import create_notification
 from handsfree.db.agent_tasks import (
     get_agent_task_by_id,
     get_agent_tasks,
     update_agent_task_state,
 )
+from handsfree.db.notifications import create_notification
 
 logger = logging.getLogger(__name__)
 
@@ -310,7 +310,9 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
                     },
                 )
                 if updated_task is not None:
-                    event_type = "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+                    event_type = (
+                        "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+                    )
                     message = (
                         f"Agent task failed: {task.instruction or 'No instruction'}"
                         if new_state == "failed"

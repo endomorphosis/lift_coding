@@ -40,7 +40,6 @@ from handsfree.transport.libp2p_bluetooth import (
     encode_transport_message,
 )
 
-
 client = TestClient(app)
 
 
@@ -63,7 +62,7 @@ def test_dev_peer_chat_history_returns_normalized_messages(test_user_id):
                 conversation_id=conversation_id,
                 priority="urgent",
                 timestamp_ms=222222,
-                        task_snapshot=task_snapshot,
+                task_snapshot=task_snapshot,
             ),
         ),
     )
@@ -76,7 +75,9 @@ def test_dev_peer_chat_history_returns_normalized_messages(test_user_id):
             "/v1/dev/peer-envelope",
             json={
                 "peer_ref": "peer://chat-a",
-                "frame_base64": base64.b64encode(encode_transport_envelope(envelope)).decode("ascii"),
+                "frame_base64": base64.b64encode(encode_transport_envelope(envelope)).decode(
+                    "ascii"
+                ),
             },
             headers={"X-User-Id": test_user_id},
         )
@@ -143,7 +144,9 @@ def test_dev_peer_chat_recent_conversations_returns_latest_summary(test_user_id)
                 "/v1/dev/peer-envelope",
                 json={
                     "peer_ref": "peer://chat-a",
-                    "frame_base64": base64.b64encode(encode_transport_envelope(envelope)).decode("ascii"),
+                    "frame_base64": base64.b64encode(encode_transport_envelope(envelope)).decode(
+                        "ascii"
+                    ),
                 },
                 headers={"X-User-Id": test_user_id},
             )
