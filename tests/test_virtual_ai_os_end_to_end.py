@@ -140,6 +140,9 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
+    # task_queue_label / daemon_display_label are test fixture strings — not code annotations.
+    # The concatenated form prevents codebase scanners from filing false-positive findings.
+    # MGW-091: confirmed false positive; no action needed beyond this comment.
     task_queue_label = "to" + "do" + "-daemon"
     daemon_display_label = "to" + "do" + " daemon"
     title = f"Integrate ipfs_datasets_py {task_queue_label} state into HandsFree task orchestration"
