@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-09
-Fingerprint: 1afaa768cd402b0817a0f6cf931b58079256f243
+Fingerprint: 50a9b0ac7c8d196f521f8e72bb9e0e35faa4d483
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 47
@@ -11,21 +11,21 @@ Track: ops
 ## Main Checkout Status
 
 - ` M .handsfree_transport_sessions.json`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 
 ## Main Checkout Evidence
 
 - Path categories: `modified=2`
 - Status paths:
   - `.handsfree_transport_sessions.json`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - Name status:
   - `M	.handsfree_transport_sessions.json`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - Diff stat:
-  - `.handsfree_transport_sessions.json                     |  2 +-`
-  - ` .../2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md   | 18 ++++++++++++++++++`
-  - ` 2 files changed, 19 insertions(+), 1 deletion(-)`
+  - `.handsfree_transport_sessions.json                 |  2 +-`
+  - ` ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 50 ++++++++++++++++------`
+  - ` 2 files changed, 39 insertions(+), 13 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -112,21 +112,21 @@ Work surface: `47` candidates, `20` sampled records.
   "candidate_count": 47,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "1afaa768cd402b0817a0f6cf931b58079256f243",
+  "fingerprint": "50a9b0ac7c8d196f521f8e72bb9e0e35faa4d483",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".handsfree_transport_sessions.json                     |  2 +-\n .../2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md   | 18 ++++++++++++++++++\n 2 files changed, 19 insertions(+), 1 deletion(-)",
-    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md",
+    "diff_stat": ".handsfree_transport_sessions.json                 |  2 +-\n ...26-06-07-hao-309-reconciliation-c05f71151a70.md | 50 ++++++++++++++++------\n 2 files changed, 39 insertions(+), 13 deletions(-)",
+    "name_status": "M\t.handsfree_transport_sessions.json\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "path_categories": {
       "modified": 2
     },
     "status_paths": [
       ".handsfree_transport_sessions.json",
-      "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
     ],
     "status_short": [
       " M .handsfree_transport_sessions.json",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -160,7 +160,7 @@ Work surface: `47` candidates, `20` sampled records.
   "sample_count": 20,
   "sample_status_paths": [
     ".handsfree_transport_sessions.json",
-    "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-366-codebase-scan-4eb43647c4ff.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-042-attempt-1-1779816389",
