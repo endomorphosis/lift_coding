@@ -145,8 +145,9 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "agent_supervisor_namespace_paths(" not in source
     assert '"PREFER_COPILOT_MERGE_RESOLVER": "1"' not in source
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS == implementation_multi_supervisor_env_defaults(
-        prefer_copilot_merge_resolver=True,
+        prefer_copilot_merge_resolver=False,
     )
+    assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS["COPILOT_MERGE_RESOLVER_TIMEOUT_SECONDS"] == "60"
     assert runner_module.VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS == (
         implementation_supervisor_namespace_track_configs(
             repo_root=REPO_ROOT,
