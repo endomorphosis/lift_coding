@@ -3466,3 +3466,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py:49. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-311-codebase-scan-a2b070dabc4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-312 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/perf.py:280
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/perf.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/perf.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/perf.py:280. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-312-codebase-scan-47fb33225c25.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-313 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py:74
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/webrtc.py:74. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-313-codebase-scan-29cc410eddef.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-314 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:52
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:52. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-314-codebase-scan-2c8f2cb04964.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-315 Resolve code annotation in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:123
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:123. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-315-codebase-scan-71a5c20a5edf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-316 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/ha/service.py:761
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/mcp_final_20250414_082801/ha/service.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/mcp_final_20250414_082801/ha/service.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/mcp_final_20250414_082801/ha/service.py:761. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-316-codebase-scan-0d841fabde4d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
