@@ -1,49 +1,21 @@
-# HAO-359 Codebase Scan: Swallowed Exception
+# HAO-359 Codebase Scan Finding
 
-**File:** `external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py`  
-**Line:** 1667  
-**Severity:** P1 / runtime
+Date: 2026-06-08
+Fingerprint: 8b2e8ed6b5036e52af66e21f0b2b79e343402d37
+Kind: swallowed_exception
+Source: external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py:1667
+Priority: P1
+Track: runtime
 
-## Finding
+## Evidence
 
-Bare `except:` clause at line 1667 silently swallowed all exceptions (including
-`KeyboardInterrupt` and `SystemExit`) when reading disk usage in
-`system_health_tool`. The `pass` statement discarded diagnostic information with
-no logging, making failures invisible.
-
-```python
-# BEFORE (swallowed exception)
+```text
 except:
-    pass
 ```
 
-## Fix Applied
+## Suggested Handling
 
-Replaced with a typed `except Exception` clause that logs the failure at DEBUG
-level via the module logger. This preserves the non-fatal intent (disk-usage for
-a single path should not abort the health check) while surfacing the error for
-diagnostics.
-
-```python
-# AFTER
-except Exception as e:
-    logger.debug("Could not read disk usage for %s: %s", path, e)
-```
-
-## Additional Fix: Truncated File
-
-The file was truncated at line 1679 (mid-expression in `ipfs_cluster_status_tool`),
-causing a `SyntaxError` on import/compile. Completed the file with:
-
-- `ipfs_cluster_status_tool` method body (modelled on `vscode_mcp_server.py`)
-- `handle_message()` top-level coroutine
-- `main()` server loop (modelled on `enhanced_mcp_server_direct_ipfs.py`)
-- `if __name__ == "__main__":` entry point
-- Added `import signal` to support graceful shutdown
-
-## Validation
-
-```
-python3 -m py_compile external/ipfs_kit/archive/legacy_servers/enhanced_mcp_server_phase2.py
-# exit 0 — PASS
-```
+Review the finding in context, decide whether it represents a bug, missing test,
+maintenance risk, or false positive, and land a small fix with validation. If the
+finding is a false positive, document why in the changed code or discovery notes
+so the supervisor does not keep re-adding the same work.

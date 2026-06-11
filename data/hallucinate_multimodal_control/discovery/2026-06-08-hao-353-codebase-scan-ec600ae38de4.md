@@ -1,48 +1,21 @@
-# HAO-353 Codebase Scan: Swallowed Exception in fixed_runner.py:58
+# HAO-353 Codebase Scan Finding
 
-## Finding
+Date: 2026-06-08
+Fingerprint: ec600ae38de45bd1c2ef2343190feb132e896500
+Kind: swallowed_exception
+Source: external/ipfs_kit/archive/archive_clutter/fix_scripts/fixed_runner.py:58
+Priority: P1
+Track: runtime
 
-**File:** `external/ipfs_kit/archive/archive_clutter/fix_scripts/fixed_runner.py`
-**Line:** 58
-**Severity:** P1 / Runtime
+## Evidence
 
-## Description
-
-A bare `except:` clause at line 58 of `kill_existing_servers()` silently swallows all exceptions, including `SystemExit` and `KeyboardInterrupt`. Any error opening, reading, or parsing a PID file, as well as any `OSError` from `os.remove()`, is silently discarded with no logging. This prevents operators from diagnosing stale PID file problems or permission errors at cleanup time.
-
-## Root Cause
-
-```python
-# Before fix (lines 49-59)
-for pid_file in pid_files:
-    if os.path.exists(pid_file):
-        try:
-            with open(pid_file, 'r') as f:
-                pid = int(f.read().strip())
-                try:
-                    os.kill(pid, signal.SIGTERM)
-                    logger.info(f"Terminated process with PID {pid} from {pid_file}")
-                except OSError:
-                    pass
-            os.remove(pid_file)
-        except:          # <-- swallows everything
-            pass
+```text
+except:
 ```
 
-## Fix Applied
+## Suggested Handling
 
-Replaced the bare `except:` with `except Exception as e:` and added a `logger.warning` call so that unexpected failures (malformed PID files, permission errors on `os.remove`, etc.) are surfaced in the log rather than silently ignored.
-
-```python
-# After fix
-        except Exception as e:
-            logger.warning(f"Failed to process PID file {pid_file}: {e}")
-```
-
-`KeyboardInterrupt` and `SystemExit` are no longer swallowed, allowing the process to terminate cleanly when requested.
-
-## Validation
-
-```
-python3 -m py_compile external/ipfs_kit/archive/archive_clutter/fix_scripts/fixed_runner.py
-```
+Review the finding in context, decide whether it represents a bug, missing test,
+maintenance risk, or false positive, and land a small fix with validation. If the
+finding is a false positive, document why in the changed code or discovery notes
+so the supervisor does not keep re-adding the same work.

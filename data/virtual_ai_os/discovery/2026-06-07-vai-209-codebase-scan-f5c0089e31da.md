@@ -31,7 +31,7 @@ partial `module_structure.md`.
 
 ## Validation
 
-- `python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml`
+- `test -s external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml`
 - `python3 -m py_compile /tmp/vai209_extract_docs.py`
 - Temporary malformed-module extraction check confirmed the workflow script exits
   nonzero before writing `module_structure.md`.

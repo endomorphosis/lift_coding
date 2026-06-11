@@ -1,49 +1,35 @@
 # HAO-300 Resolution
 
-Date: 2026-06-06
+Date: 2026-06-07
 Task: HAO-300
+Kind: swallowed_exception fix
 Source: hallucinate_app/python/hallucinate_app/control_surface_store.py:513
 
 ## Finding
 
-The HAO codebase scanner flagged two bare `except Exception: pass` blocks in the
-`_json_safe` helper inside `control_surface_store.py`. Exceptions thrown by
-`as_dict()` and `to_dict()` were silently discarded with no logging, making
-failures invisible in production.
+The original scan evidence flagged the `_json_safe` fallback branch that handled
+objects with a `to_dict()` method. A prior remediation made the fallback visible
+in debug logs, but the guarded expression still wrapped both `value.to_dict()`
+and recursive `_json_safe(...)` conversion. That meant a nested serialization
+failure after a successful `to_dict()` call could be mistaken for a bad
+`to_dict()` hook and hidden by later fallback strategies.
 
-## Root Cause of Implementation Failures (HAO-303 context)
+## Fix
 
-All three HAO-300 implementation attempts were terminated with signal 15 (SIGTERM)
-during the commit/merge phase (`python3 -m
-ipfs_accelerate_py.agent_supervisor.llm_merge_resolver_fallback`). The merge
-resolver module depends on `ipfs_kit_py.backends`, which is unavailable in this
-environment. The resolver hung waiting for the module and was killed by the
-implementation daemon's timeout watchdog.
+The `to_dict()` call is now isolated inside the `try` block and assigned to a
+local `raw` value. Recursive serialization runs in the `else` branch, so
+unexpected serialization errors are no longer swallowed by the hook fallback.
 
-HAO-299 landed the same fix (lines 508 and 513) as a side effect of its broader
-`_json_safe` improvement before HAO-300 could complete, so the underlying bug was
-already corrected by the time HAO-303 was filed.
-
-## Resolution
-
-The fix applied by HAO-299 (`commit 1740d5f` in the hallucinate_app submodule):
-
-```diff
--        except Exception:
--            pass
-+        except Exception as exc:  # noqa: BLE001
-+            _log.debug("_json_safe: as_dict() failed for %r: %s", type(value).__name__, exc)
-```
-
-Both `as_dict()` and `to_dict()` fallback branches now log at DEBUG level instead
-of silently swallowing the exception. The `# noqa: BLE001` suppressor is
-intentional — these are expected fallback paths, not error conditions.
-
-HAO-303 adds a docstring to `_json_safe` to document the cascading fallback
-behaviour so the scanner does not re-file this pattern as an unreviewed exception.
+Failures raised directly by `to_dict()` remain recoverable because this helper
+serializes best-effort policy artifacts. Those failures now log at WARNING level
+with traceback information before falling through to the remaining dataclass,
+public-attribute, and string fallback strategies. A short `_json_safe` docstring
+documents that distinction for future scans.
 
 ## Validation
 
 ```bash
 python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_store.py
 ```
+
+Exit code: 0 (PASS)
