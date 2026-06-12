@@ -13,6 +13,16 @@ def test_virtual_ai_os_observability_contract_defaults_are_stable() -> None:
     assert "render_success_total" in contract["metric_names"]
     assert "bridge_error" in contract["failure_modes"]
     assert "daemon_mediated" in contract["execution_path_guards"]
+    assert contract["remote_terminal"]["contract_id"] == (
+        "handsfree.meta-glasses/remote-terminal@0.1.0"
+    )
+    assert [
+        endpoint["endpoint_id"] for endpoint in contract["remote_terminal"]["endpoints"]
+    ] == [
+        "meta_glasses_audio_input",
+        "meta_glasses_audio_output",
+        "meta_glasses_display_widget",
+    ]
     expected_daemon_guard = (
         "retain repo-local backlog board, state snapshots, and isolated worktrees "
         "for rollback-safe retries"

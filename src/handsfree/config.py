@@ -6,6 +6,10 @@ import os
 from dataclasses import dataclass
 from typing import Mapping
 
+from handsfree.meta_glasses_remote_terminal import (
+    REMOTE_TERMINAL_CONTRACT_ID,
+    list_meta_glasses_remote_terminal_endpoints,
+)
 from handsfree.virtual_ai_os_components import (
     get_virtual_ai_os_component_bootstrap_contract,
     get_virtual_ai_os_component_environment_contract,
@@ -203,6 +207,9 @@ def get_virtual_ai_os_observability_contract(
 
     source = os.environ if environ is None else environ
     display_widget_config = get_meta_glasses_display_widget_config(source)
+    remote_terminal_endpoints = [
+        endpoint.as_dict() for endpoint in list_meta_glasses_remote_terminal_endpoints()
+    ]
     return {
         "feature_flags": {
             **display_widget_config.env_flags,
@@ -220,4 +227,9 @@ def get_virtual_ai_os_observability_contract(
         "component_pins": get_virtual_ai_os_component_pin_contract(),
         "component_bootstrap": get_virtual_ai_os_component_bootstrap_contract(),
         "display_widget": display_widget_config.as_dict(),
+        "remote_terminal": {
+            "contract_id": REMOTE_TERMINAL_CONTRACT_ID,
+            "surface_id": "mobile_glasses",
+            "endpoints": remote_terminal_endpoints,
+        },
     }

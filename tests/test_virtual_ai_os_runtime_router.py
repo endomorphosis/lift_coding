@@ -54,6 +54,7 @@ def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
         CapabilityRuntimeSurface.MCP_PROVIDER,
         CapabilityRuntimeSurface.DAEMON_MEDIATED,
         CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
     )
 
 
@@ -136,6 +137,8 @@ def test_capability_routing_kernel_dispatches_with_fallback_and_presentations():
         "local_python",
         "hallucinate_app",
         "mobile_glasses",
+        "meta_glasses_audio",
+        "meta_glasses_display",
     ]
     assert (
         plan.entrypoints[0].handler_ref
@@ -171,6 +174,8 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
         "swissknife_orb",
         "hallucinate_app",
         "mobile_glasses",
+        "meta_glasses_audio",
+        "meta_glasses_display",
     ]
     swissknife_metadata = plan.entrypoints[0].metadata
     assert swissknife_metadata["virtual_ui_plane"] == "swissknife.virtual_desktop"
@@ -188,10 +193,13 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
         "tool_name": "dataset_discovery",
         "provider_name": "ipfs_datasets_mcp",
     }
-    assert plan.entrypoints[-1].handler_ref == (
+    mobile_glasses_entrypoint = next(
+        entry for entry in plan.entrypoints if entry.surface_id == "mobile_glasses"
+    )
+    assert mobile_glasses_entrypoint.handler_ref == (
         "handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"
     )
-    assert plan.entrypoints[-1].metadata["orb_edge_descriptor"] == (
+    assert mobile_glasses_entrypoint.metadata["orb_edge_descriptor"] == (
         "spec/meta_glasses_mobile_orb_bridge_interface.json"
     )
     assert plan.payload["task_id"] == "VAI-019"

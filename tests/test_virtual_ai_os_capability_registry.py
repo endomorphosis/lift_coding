@@ -232,3 +232,9 @@ def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():
     )
     assert surfaces["hallucinate_app"].label == "Hallucinate App"
     assert surfaces["mobile_glasses"].label == "mobile/glasses"
+    assert surfaces["meta_glasses_audio"].role == "remote_terminal_audio"
+    assert surfaces["meta_glasses_audio"].metadata["channel"] == "audio"
+    assert surfaces["meta_glasses_display"].role == "remote_terminal_display"
+    assert surfaces["meta_glasses_display"].metadata["display_descriptor"] == (
+        "spec/meta_glasses_display_widget_orb_interface.json"
+    )
