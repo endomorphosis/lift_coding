@@ -8,6 +8,7 @@ import pytest
 
 redis = pytest.importorskip("redis")
 
+import handsfree.sessions as sessions_module
 from handsfree.sessions import SessionTokenManager
 
 
@@ -317,6 +318,49 @@ class TestSessionTokenManagerEdgeCases:
 
         assert result is None
         mock_redis.delete.assert_called_once_with(redis_key)
+
+    def test_validate_session_uses_empty_metadata_for_invalid_json(self):
+        """Invalid stored metadata JSON should not invalidate an otherwise valid session."""
+        mock_redis = MagicMock()
+        now = datetime.now(UTC)
+        mock_redis.hgetall.return_value = {
+            b"user_id": b"user-123",
+            b"device_id": b"device-456",
+            b"created_at": now.isoformat().encode(),
+            b"expires_at": (now + timedelta(hours=1)).isoformat().encode(),
+            b"metadata": b"{not-json",
+        }
+
+        manager = SessionTokenManager(mock_redis)
+
+        result = manager.validate_session("any_token")
+
+        assert result is not None
+        assert result.metadata == {}
+        mock_redis.delete.assert_not_called()
+
+    def test_validate_session_does_not_swallow_unexpected_metadata_errors(self, monkeypatch):
+        """Unexpected metadata parser failures should surface for diagnosis."""
+        mock_redis = MagicMock()
+        now = datetime.now(UTC)
+        mock_redis.hgetall.return_value = {
+            b"user_id": b"user-123",
+            b"device_id": b"device-456",
+            b"created_at": now.isoformat().encode(),
+            b"expires_at": (now + timedelta(hours=1)).isoformat().encode(),
+            b"metadata": b"{}",
+        }
+
+        def fail_json_loads(_value):
+            raise RuntimeError("parser failed")
+
+        monkeypatch.setattr(sessions_module.json, "loads", fail_json_loads)
+        manager = SessionTokenManager(mock_redis)
+
+        with pytest.raises(RuntimeError, match="parser failed"):
+            manager.validate_session("any_token")
+
+        mock_redis.delete.assert_not_called()
 
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
