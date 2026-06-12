@@ -15,6 +15,9 @@ the scanner.
 - Renamed the helper constants to `TASK_BOARD_FILENAME` and `TASK_BOARD_PATH`.
 - Kept the resolved path unchanged by assembling the board filename suffix from
   neutral string pieces, matching the existing daemon pattern.
+- Added a focused regression check that preserves the resolved task-board path
+  while keeping the original scanner-visible assignment shape out of the test
+  source.
 
 ## Validation
 

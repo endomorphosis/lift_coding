@@ -8,6 +8,7 @@ Created: 2026-05-22
 Refreshed: 2026-05-23
 MCP++ source re-check: 2026-05-25
 VAI-001 topology checkpoint: 2026-06-12
+VAI-002 source alignment: 2026-06-12
 
 ## Goal
 
@@ -65,6 +66,24 @@ Pin guardrails:
   source resolution.
 - Evidence:
   [data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md](../../data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md)
+
+### 2026-06-12 VAI-002 source alignment
+
+Root `.gitmodules` now maps the three IPFS root gitlinks to their canonical
+`_py` upstream repositories:
+
+| Path | Canonical upstream |
+| --- | --- |
+| `external/ipfs_datasets` | `https://github.com/endomorphosis/ipfs_datasets_py` |
+| `external/ipfs_accelerate` | `https://github.com/endomorphosis/ipfs_accelerate_py` |
+| `external/ipfs_kit` | `https://github.com/endomorphosis/ipfs_kit_py` |
+
+This alignment is a wiring-only change. It does not advance root gitlinks,
+initialize additional submodules, or alter the case-sensitive `Mcp-Plus-Plus`
+or `hallucinate_app` upstream mappings.
+
+Evidence:
+[data/virtual_ai_os/discovery/source-alignment-vai-002-2026-06-12.md](../../data/virtual_ai_os/discovery/source-alignment-vai-002-2026-06-12.md)
 
 ### Root-tracked submodules after alignment
 

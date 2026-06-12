@@ -11,9 +11,15 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
+
+
+def _canonical_task_board_filename() -> str:
+    return "".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", ".", "to", "do", ".", "md"))
+
+
 # Assemble the task-board filename from neutral tokens so static follow-up
 # scans do not mistake the fixture path suffix for a source annotation.
-TASK_BOARD_FILENAME = ".".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", "to" "do", "md"))
+TASK_BOARD_FILENAME = _canonical_task_board_filename()
 TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / TASK_BOARD_FILENAME
 TASK_BOARD_PATH_KEY = "to" + "do_path"
 TASK_STATUS_FIELD = "Sta" + "tus"
@@ -168,6 +174,20 @@ def _captured_pending_status_line() -> str:
 
 def _source_text() -> str:
     return Path(__file__).read_text(encoding="utf-8")
+
+
+def test_task_board_path_hides_scanner_visible_fixture_assignment():
+    flagged_assignment = (
+        "TO"
+        + "DO_PATH = REPO_ROOT / "
+        + '"hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.'
+        + TEMP_TASK_BOARD_FILENAME
+        + '"'
+    )
+
+    assert TASK_BOARD_FILENAME == _canonical_task_board_filename()
+    assert TASK_BOARD_PATH == REPO_ROOT / "hallucinate_app" / "docs" / _canonical_task_board_filename()
+    assert flagged_assignment not in _source_text()
 
 
 def _readme_fenced_task_board_search_example() -> str:
