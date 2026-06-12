@@ -22,10 +22,6 @@ Track: ops
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
   - `M	hallucinate_app`
-- Diff stat:
-  - `.../2026-06-07-hao-311-reconciliation-534cc45af3d6.md  | 18 +++++++++++-------`
-  - ` hallucinate_app                                        |  0`
-  - ` 2 files changed, 11 insertions(+), 7 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -115,7 +111,10 @@ Work surface: `235` candidates, `20` sampled records.
   "fingerprint": "b4cdbf349c218c466dab72f8384045fe81069fcb",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../2026-06-07-hao-311-reconciliation-534cc45af3d6.md  | 18 +++++++++++-------\n hallucinate_app                                        |  0\n 2 files changed, 11 insertions(+), 7 deletions(-)",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md\nM\thallucinate_app",
     "path_categories": {
       "modified": 1,
