@@ -174,3 +174,57 @@ def test_status_advances_daemon_backed_task_to_completed(
     assert task.state == "completed"
     assert task.trace is not None
     assert task.trace["todo_daemon_task_status"] == "completed"
+
+
+def test_virtual_ai_os_daemon_paths_default_from_state_dir(
+    agent_service, db_conn, test_user_id, monkeypatch, tmp_path
+):
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    state_path = state_dir / "virtual_ai_os_task_state.json"
+    events_path = state_dir / "virtual_ai_os_events.jsonl"
+    initial_title = "Default daemon state path fixture"
+    refreshed_title = "Default daemon state path fixture refreshed"
+    _write_state(
+        state_path,
+        task_id="VAI-005",
+        task_status="ready",
+        active_task_id="VAI-005",
+        active_task_title=initial_title,
+    )
+    _write_events(events_path, task_id="VAI-005", title=initial_title)
+    monkeypatch.setenv("HANDSFREE_VAI_OS_STATE_DIR", str(state_dir))
+
+    provider = IPFSDatasetsMCPAgentProvider(client=None)
+    monkeypatch.setattr(
+        "handsfree.agents.service.get_provider",
+        lambda provider_name: provider if provider_name == "ipfs_datasets_mcp" else None,
+    )
+
+    created = agent_service.delegate(
+        user_id=test_user_id,
+        instruction="track VAI-005",
+        provider="ipfs_datasets_mcp",
+        trace={"virtual_ai_os_task_id": "VAI-005"},
+    )
+    assert created["state"] == "running"
+    assert created["todo_daemon_task_status"] == "ready"
+    assert created["todo_daemon_active_task_id"] == "VAI-005"
+
+    _write_state(
+        state_path,
+        task_id="VAI-005",
+        task_status="ready",
+        active_task_id="VAI-005",
+        active_task_title=refreshed_title,
+    )
+
+    status = agent_service.get_status(user_id=test_user_id)
+    task = get_agent_task_by_id(db_conn, created["task_id"])
+    expected_preview = _daemon_active_summary("VAI-005", refreshed_title)
+
+    assert status["by_state"]["running"] == 1
+    assert status["tasks"][0]["result_preview"] == expected_preview
+    assert task is not None
+    assert task.trace is not None
+    assert task.trace["todo_daemon_result_preview"] == expected_preview

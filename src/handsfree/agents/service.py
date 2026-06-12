@@ -428,9 +428,9 @@ class AgentService:
 
                         if status_result.get("ok"):
                             new_status = status_result.get("status")
+                            trace_update = status_result.get("trace", {})
                             if new_status and new_status != task.state:
                                 # Update task state based on provider response
-                                trace_update = status_result.get("trace", {})
                                 updated_task = update_agent_task_state(
                                     conn=self.conn,
                                     task_id=task.id,
@@ -451,6 +451,14 @@ class AgentService:
                                         )
                                     # Update the task in the list
                                     task.state = new_status
+                                    task.trace = updated_task.trace
+                            elif trace_update:
+                                updated_task = update_agent_task_trace(
+                                    conn=self.conn,
+                                    task_id=task.id,
+                                    trace_update=trace_update,
+                                )
+                                if updated_task:
                                     task.trace = updated_task.trace
                 except Exception as e:
                     logger.warning(
