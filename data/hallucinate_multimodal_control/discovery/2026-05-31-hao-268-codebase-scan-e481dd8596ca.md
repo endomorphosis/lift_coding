@@ -27,3 +27,7 @@ the cache lookup path. It should remain non-fatal, but the exception path now
 captures the exception object and logs the full traceback with
 `logger.exception`, with an explicit code comment documenting that the failure is
 intentionally contained rather than silently swallowed.
+
+Attempt 2 confirmed the flagged cache-miss path remains non-fatal by design and
+tightened the metric log message to name the exact `cache_misses` metric and
+`cache_type`, preserving traceback logging for operational diagnosis.
