@@ -29,7 +29,7 @@ cadence remains parseable and resumable.
 
 ## VAI-000 Bootstrap supervised virtual-AI-OS backlog processing
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
