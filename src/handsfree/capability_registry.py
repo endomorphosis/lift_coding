@@ -281,6 +281,11 @@ _RUNTIME_SURFACE_ENDPOINTS: Mapping[
         "orb_bridge",
         "SwissKnife ORB",
     ),
+    CapabilityRuntimeSurface.HALLUCINATE_APP: (
+        "hallucinate_app",
+        "operator_console",
+        "hallucinate_app/index.js#operator_console",
+    ),
 }
 
 _PRESENTATION_SURFACE_ENDPOINTS = (
@@ -326,7 +331,14 @@ def _entrypoints_for_route(route: AICapabilityRoute) -> tuple[CapabilitySurfaceE
         cli_command=route.cli_command,
         metadata=metadata,
     )
-    return (runtime_endpoint, *_PRESENTATION_SURFACE_ENDPOINTS)
+    return (
+        runtime_endpoint,
+        *(
+            endpoint
+            for endpoint in _PRESENTATION_SURFACE_ENDPOINTS
+            if endpoint.surface_id != runtime_endpoint.surface_id
+        ),
+    )
 
 
 def _swissknife_orb_surface_metadata() -> Mapping[str, Any]:

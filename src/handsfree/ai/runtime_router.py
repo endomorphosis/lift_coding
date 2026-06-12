@@ -65,6 +65,61 @@ def resolve_virtual_ai_os_runtime_route(
     )
 
 
+def _resolve_runtime_surface(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+    preferred_surface: str | CapabilityRuntimeSurface | None,
+) -> CapabilityRuntimeSurface:
+    normalized_surface = _normalize_surface(preferred_surface)
+    default_surface = _default_runtime_surface(capability_id, execution_mode)
+    if normalized_surface is None:
+        return default_surface
+    if normalized_surface not in _supported_surfaces_for_mode(capability_id, execution_mode):
+        raise ValueError(
+            f"Capability '{capability_id}' does not support runtime surface '{normalized_surface.value}' "
+            f"for execution mode '{execution_mode.value}'"
+        )
+    return normalized_surface
+
+
+def _default_runtime_surface(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+) -> CapabilityRuntimeSurface:
+    if execution_mode == CapabilityExecutionMode.DIRECT_IMPORT:
+        return CapabilityRuntimeSurface.DIRECT_ADAPTER
+    if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
+        return CapabilityRuntimeSurface.LOCAL_CLI
+    if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
+        return CapabilityRuntimeSurface.DAEMON_MEDIATED
+    if capability_id in {"workflow", "agentic_fetch"}:
+        return CapabilityRuntimeSurface.DAEMON_MEDIATED
+    return CapabilityRuntimeSurface.MCP_PROVIDER
+
+
+def _supported_surfaces_for_mode(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+) -> tuple[CapabilityRuntimeSurface, ...]:
+    if execution_mode == CapabilityExecutionMode.DIRECT_IMPORT:
+        return (CapabilityRuntimeSurface.DIRECT_ADAPTER,)
+    if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
+        return (CapabilityRuntimeSurface.LOCAL_CLI,)
+    if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
+        return (
+            CapabilityRuntimeSurface.DAEMON_MEDIATED,
+            CapabilityRuntimeSurface.HALLUCINATE_APP,
+        )
+    if capability_id in {"embedding", "dataset_discovery", "storage", "ipfs_pin"}:
+        return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    return (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
+
+
 def _resolve_handler(
     capability_id: str,
     execution_mode: CapabilityExecutionMode,
@@ -76,6 +131,8 @@ def _resolve_handler(
         return "handsfree.ai.runtime_router:run_local_cli", _resolve_cli_command(capability_id)
     if runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED:
         return "handsfree.ai.runtime_router:run_daemon_workflow", None
+    if runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP:
+        return "hallucinate_app/index.js#operator_console", None
     if runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB:
         return f"swissknife.orb::{capability_id}", None
     if runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER:
@@ -107,3 +164,16 @@ def _resolve_cli_command(capability_id: str) -> str:
         return mapping[capability_id]
     except KeyError as exc:
         raise ValueError(f"Capability '{capability_id}' has no CLI route") from exc
+
+
+def _normalize_surface(
+    value: str | CapabilityRuntimeSurface | None,
+) -> CapabilityRuntimeSurface | None:
+    if value is None:
+        return None
+    if isinstance(value, CapabilityRuntimeSurface):
+        return value
+    normalized = value.strip().lower()
+    if not normalized:
+        return None
+    return CapabilityRuntimeSurface(normalized)
