@@ -2683,7 +2683,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-242 Resolve 28 preflight-conflicting backlogged worktree merges
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
