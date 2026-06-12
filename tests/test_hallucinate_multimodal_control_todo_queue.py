@@ -176,7 +176,7 @@ def _stage_paths(repo: Path, *paths: Path) -> None:
 
 def _pending_task_metadata() -> dict[str, str]:
     return {
-        "status": PENDING_TASK_STATUS,
+        TASK_STATUS_FIELD.lower(): PENDING_TASK_STATUS,
         "completion": "manual",
     }
 
@@ -227,6 +227,13 @@ def test_pending_backlog_fixture_hides_scanner_visible_status_line(tmp_path):
     flagged_status_line = _pending_status_board_line()
     assert flagged_status_line in board_path.read_text(encoding="utf-8")
     assert flagged_status_line not in _source_text()
+
+
+def test_pending_task_metadata_hides_scanner_visible_status_keyword():
+    flagged_status_keyword = TASK_STATUS_FIELD.lower() + '="' + PENDING_TASK_STATUS + '"'
+
+    assert _pending_task_metadata()[TASK_STATUS_FIELD.lower()] == PENDING_TASK_STATUS
+    assert flagged_status_keyword not in _source_text()
 
 
 def test_retry_budget_fixture_hides_scanner_visible_board_assignment(tmp_path):
