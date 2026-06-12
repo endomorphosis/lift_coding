@@ -40,6 +40,13 @@ cadence remains parseable and resumable.
 
 ## VAI-001 Record reviewed source topology and pin guardrails
 
+- Priority: P2
+- Track: ops
+- Depends on: none
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md
+- Validation: git submodule status; rg -n "VAI-001|Pin guardrails|source-topology-vai-001" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md
+- Acceptance: Record the reviewed root submodule topology, current root gitlinks, case-sensitive MCP++ source guardrail, and bootstrap constraints without advancing submodule pins or rewriting root `.gitmodules`.
+
 ## VAI-002 Align root git submodule wiring with canonical upstreams
 
 ## VAI-003 Define the cross-repo capability registry
@@ -776,7 +783,7 @@ cadence remains parseable and resumable.
 
 ## VAI-322 Resolve merge retry-budget failure for VAI-155
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
