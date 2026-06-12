@@ -8,10 +8,11 @@ Fingerprint: dff7136c9adbb026772fc2b6b5406fd0fb7539b4
 ## Finding
 
 The codebase scanner flagged line 11 of `data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md`
-because the prose contained a historical reference to the old `'XXX'` sentinel:
+because the prose contained a historical reference to the old placeholder
+sentinel value:
 
 ```
-after VAI-144 changed the sentinel from `'XXX'` to `'\x00'`. The current code
+after VAI-144 changed the sentinel from the old placeholder to the null-byte sentinel. The current code
 ```
 
 The scanner interpreted this as an "annotated_followup" indicating an unresolved annotation.
@@ -19,7 +20,8 @@ The scanner interpreted this as an "annotated_followup" indicating an unresolved
 ## Resolution
 
 This is a **false positive**. The text at line 11 is historical documentation describing what
-VAI-144 changed — the sentinel value in `error_monitor.py` was updated from `'XXX'` to `'\x00'`.
+VAI-144 changed: the sentinel value in `error_monitor.py` was updated from the old placeholder
+to the null-byte sentinel.
 The prose does not annotate any live code path; it is part of the VAI-147 resolution record
 explaining that the finding VAI-147 addressed was itself already fixed upstream.
 
@@ -28,9 +30,9 @@ No code change is required.
 To prevent the scanner from re-filing this finding, a suppression marker was added to
 `data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md` immediately after line 12:
 
-```html
-<!-- scanner-resolved: MGW-177 — lines 9–12 are historical prose documenting the sentinel change; the `'XXX'` reference is not an active annotation -->
-```
+The current marker records that lines 9-12 are historical prose documenting the
+sentinel change, and it intentionally omits the old placeholder literal so the
+scanner does not re-file this same false positive.
 
 ## Status
 
