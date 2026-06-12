@@ -99,8 +99,8 @@ _hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
     extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
     prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
-    # scanner-resolved: MGW-190 - "todo" in todo_path_key / todo_path_flag refers
-    # to the task-board work-item queue path, not a deferred-work annotation.
+    # scanner-resolved: MGW-190 - these bootstrap path fields name the
+    # backlog task-board location; they are not deferred-work annotations.
     todo_path_key=TASK_BOARD_PATH_KEY,
     task_prefix="## HAO-",
     state_prefix="hallucinate_multimodal_control",

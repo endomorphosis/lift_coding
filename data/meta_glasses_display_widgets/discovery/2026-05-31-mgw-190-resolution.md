@@ -19,16 +19,20 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-190.
 
 ## Resolution
 
-This is a **false positive**. The word "todo" appears in the CLI flag name
-`--objective-todo-vector-index-path`, where it refers to the backlog task-board (work-item queue),
-not a deferred code action. Prior commits (MGW-189) had already improved the comment on line 304
-to make this explicit. This task adds a `scanner-resolved: MGW-190` suppression marker so the
-scanner does not re-file the same finding.
+This is a **false positive**. The flagged line came from the earlier supervisor
+implementation, where the CLI flag name referred to the backlog task-board
+vector index, not a deferred code action. The current supervisor has since been
+reduced to a 129-line bootstrap wrapper, so the original source line 305 no
+longer exists.
 
-The comment at line 304 has been updated to:
+The remaining scanner-sensitive fields in the current wrapper are the bootstrap
+path-key and path-flag arguments passed into `build_script_supervisor_bootstrap_runner`.
+They name the backlog task-board location. The source comment now records the
+MGW-190 suppression without repeating the old flag-name text:
 
 ```python
-# scanner-resolved: MGW-190 — "todo" below is part of the CLI flag name --objective-todo-vector-index-path (work-item queue path), not a deferred-work annotation.
+# scanner-resolved: MGW-190 - these bootstrap path fields name the
+# backlog task-board location; they are not deferred-work annotations.
 ```
 
 <!-- scanner-resolved: MGW-190 — this resolution document records a false positive; no active annotation remains in the source file -->
