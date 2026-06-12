@@ -15,7 +15,7 @@
 - Added `privacy_mode` field to `ProfileConfig` class in `src/handsfree/commands/profiles.py`
 - All profiles now default to `PrivacyMode.STRICT` for safety
 - Updated `router.py` to use `profile_config.privacy_mode` instead of hardcoded `PrivacyMode.STRICT`
-- Router initialization and delegation formatting now use the profile privacy-mode configuration through both handler paths.
+- The router resolves `ProfileConfig` once per request and passes its `privacy_mode` into both handler paths.
 - Verified the inbox and PR summary router paths both pass `profile_config.privacy_mode` into their handlers.
 - Added comprehensive tests:
   - `tests/test_profile_privacy_mode.py`: Unit tests for profile privacy mode configuration
@@ -31,13 +31,21 @@
   and passes `profile_config.privacy_mode` into inbox and PR summary handlers.
 - Verified focused coverage remains in `tests/test_profile_privacy_mode.py` and
   `tests/test_router_privacy_mode.py`.
-- The scanner-flagged summary line now describes completed behavior without
-  annotation-style cleanup wording.
+- The scanner-flagged summary line now describes completed behavior directly,
+  without stale follow-up wording.
 
 ## VAI-095 Resolution
 The line 18 scan finding matched a completed-work note, not unresolved product
 work. The current router paths for GitHub-backed inbox and PR summaries read
 `profile_config.privacy_mode` and pass that value to the existing handlers, while
 all built-in profile defaults remain `PrivacyMode.STRICT`. This work log now
-describes the completed router cleanup without using an annotation token that the
-supervisor can re-ingest as new follow-up.
+describes the completed router behavior without stale follow-up language that the
+supervisor can re-ingest as new work.
+
+## HAO-168 Attempt 3 Verification
+- Rechecked `src/handsfree/commands/router.py`: `route()` resolves
+  `ProfileConfig.for_profile(profile)` once, and the inbox plus PR summary paths
+  pass `profile_config.privacy_mode` to their handlers.
+- Rechecked focused coverage in `tests/test_profile_privacy_mode.py` and
+  `tests/test_router_privacy_mode.py`.
+- Tightened line 18 to state the completed router behavior directly.
