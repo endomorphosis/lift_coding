@@ -81,6 +81,10 @@ class AICapabilityRuntimePlacement:
     runtime_surface: CapabilityRuntimeSurface
     supported_surfaces: tuple[CapabilityRuntimeSurface, ...]
     fallback_surfaces: tuple[CapabilityRuntimeSurface, ...] = ()
+    placement_layer: CapabilityPlacementLayer | None = None
+    target_repo: str | None = None
+    reason: str | None = None
+    constraints: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

@@ -23,6 +23,10 @@ _DAEMON_PREFERRED_REMOTE_CAPABILITIES = {
     "agentic_fetch",
 }
 
+_HALLUCINATE_OPERATOR_CAPABILITIES = {
+    "workflow",
+}
+
 _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES = {
     "ui_render_session",
 }
@@ -106,6 +110,13 @@ def supported_virtual_ai_os_runtime_surfaces(
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
     if capability_id in _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    if capability_id in _HALLUCINATE_OPERATOR_CAPABILITIES:
+        return (
+            CapabilityRuntimeSurface.MCP_PROVIDER,
+            CapabilityRuntimeSurface.DAEMON_MEDIATED,
+            CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            CapabilityRuntimeSurface.HALLUCINATE_APP,
+        )
     return (
         CapabilityRuntimeSurface.MCP_PROVIDER,
         CapabilityRuntimeSurface.DAEMON_MEDIATED,
@@ -140,6 +151,14 @@ def _placement_metadata(
             "target_repo": "endomorphosis/swissknife",
             "reason": "SwissKnife owns ORB binding and virtual desktop tool invocation.",
             "constraints": ("preserve_capability_id", "receipt_backed_operator_fallback"),
+        }
+
+    if runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP:
+        return {
+            "placement_layer": CapabilityPlacementLayer.HANDSFREE_DAEMON,
+            "target_repo": "endomorphosis/hallucinate_app",
+            "reason": "Hallucinate App owns the operator console surface for supervised workflows.",
+            "constraints": ("operator_console_available", "daemon_supervised"),
         }
 
     if runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER:
