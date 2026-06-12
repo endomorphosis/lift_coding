@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 5c77518b1aa00600ee736cccd4d4d450a4697f58
+Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 246
@@ -10,47 +10,15 @@ Track: ops
 
 ## Main Checkout Status
 
-- `UU data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md`
 - ` m hallucinate_app`
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `UU implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
-- `UU tests/test_hallucinate_multimodal_control_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `other_dirty=1, unmerged=4`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md`
   - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
-  - `tests/test_hallucinate_multimodal_control_todo_queue.py`
 - Name status:
-  - `U	data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md`
   - `M	hallucinate_app`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
-  - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
-  - `U	tests/test_hallucinate_multimodal_control_todo_queue.py`
-  - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
-- Staged name status:
-  - `U	data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
-  - `U	tests/test_hallucinate_multimodal_control_todo_queue.py`
-- Diff stat:
-  - `.../discovery/2026-05-26-mgw-047-resolution.md               | Unmerged`
-  - ` .../discovery/2026-05-26-mgw-047-resolution.md               |  6 ++++++`
-  - ` hallucinate_app                                              |  0`
-  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | Unmerged`
-  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | 12 ++++++++++++`
-  - ` .../docs/19-virtual-ai-os-submodule-integration.md           | Unmerged`
-  - ` .../docs/19-virtual-ai-os-submodule-integration.md           |  3 +++`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py      | Unmerged`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py      |  4 ++++`
-  - ` 5 files changed, 25 insertions(+)`
 
 ## Sample Branches Or Worktrees
 
@@ -137,29 +105,22 @@ Work surface: `246` candidates, `20` sampled records.
   "candidate_count": 246,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "5c77518b1aa00600ee736cccd4d4d450a4697f58",
+  "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../discovery/2026-05-26-mgw-047-resolution.md               | Unmerged\n .../discovery/2026-05-26-mgw-047-resolution.md               |  6 ++++++\n hallucinate_app                                              |  0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | Unmerged\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | 12 ++++++++++++\n .../docs/19-virtual-ai-os-submodule-integration.md           | Unmerged\n .../docs/19-virtual-ai-os-submodule-integration.md           |  3 +++\n tests/test_hallucinate_multimodal_control_todo_queue.py      | Unmerged\n tests/test_hallucinate_multimodal_control_todo_queue.py      |  4 ++++\n 5 files changed, 25 insertions(+)",
-    "name_status": "U\tdata/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nM\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nU\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "other_dirty": 1,
-      "unmerged": 4
+      "other_dirty": 1
     },
-    "staged_name_status": "U\tdata/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nU\ttests/test_hallucinate_multimodal_control_todo_queue.py",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md",
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
-      "tests/test_hallucinate_multimodal_control_todo_queue.py"
+      "hallucinate_app"
     ],
     "status_short": [
-      "UU data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md",
-      " m hallucinate_app",
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "UU implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
-      "UU tests/test_hallucinate_multimodal_control_todo_queue.py"
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -192,11 +153,7 @@ Work surface: `246` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
-    "tests/test_hallucinate_multimodal_control_todo_queue.py"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
