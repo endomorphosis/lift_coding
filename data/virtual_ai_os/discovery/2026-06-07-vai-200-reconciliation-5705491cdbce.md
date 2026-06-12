@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 3003950f18eaeaa99f06c2445779f5576a18e239
+Fingerprint: e86b052bd761e468a372ce8800b54f7427d732b3
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 35
@@ -10,22 +10,26 @@ Track: ops
 
 ## Main Checkout Status
 
-- `M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md`
 - ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- ` m external/ipfs_kit`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=2, other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `external/ipfs_kit`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
   - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	external/ipfs_kit`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Staged name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md`
+- Diff stat:
+  - `...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 51 ++++++++++++++--------`
+  - ` external/ipfs_kit                                  |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 3 files changed, 35 insertions(+), 18 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -112,25 +116,23 @@ Work surface: `35` candidates, `20` sampled records.
   "candidate_count": 35,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "3003950f18eaeaa99f06c2445779f5576a18e239",
+  "fingerprint": "e86b052bd761e468a372ce8800b54f7427d732b3",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 51 ++++++++++++++--------\n external/ipfs_kit                                  |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 3 files changed, 35 insertions(+), 18 deletions(-)",
+    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_kit\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 3
+      "modified": 2,
+      "other_dirty": 1
     },
-    "staged_name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md",
       "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "external/ipfs_kit",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      "M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md",
       " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      " m external/ipfs_kit",
       " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
@@ -164,8 +166,8 @@ Work surface: `35` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-268-resolution.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "external/ipfs_kit",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
