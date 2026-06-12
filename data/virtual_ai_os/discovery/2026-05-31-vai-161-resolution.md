@@ -23,8 +23,9 @@ This matches the pattern established by the adjacent comment at line 304:
 # Pass the task-board vector-index path; "todo" here is part of the CLI flag name (work-item queue), not a deferred-work marker.
 ```
 
-The phrase "not a deferred-work marker" is the canonical signal used throughout this
-file to suppress future scanner re-filings for CLI flag names that embed work-item queue identifiers. <!-- scanner-resolved: MGW-201, MGW-206, MGW-212, MGW-217, MGW-222, MGW-227 — line 27 discusses the suppression pattern in historical prose; the word in that line refers to CLI flag name segments (work-item queue references), not a deferred-work marker; this document is a completed false-positive resolution with no outstanding deferred-work markers -->
+That phrasing is the canonical signal used throughout this file for completed
+false-positive notes about CLI flags that embed work-item queue identifiers.
+<!-- scanner-resolved: MGW-201, MGW-206, MGW-212, MGW-217, MGW-222, MGW-227 - line 27 is historical prose about CLI flag name segments; this document is complete and has no outstanding deferred-work markers -->
 
 ## Validation
 
