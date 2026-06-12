@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 500588cdf39104b869d85cf23eaec21a5386b975
+Fingerprint: 092a16c3e3b8e4f9e6e6c4b495f692557bd9b989
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 182
+Candidate count: 183
 Priority: P1
 Track: ops
 
@@ -116,7 +116,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `182` candidates, `20` sampled records.
+Work surface: `183` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -164,7 +164,7 @@ Work surface: `182` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 182,
+  "candidate_count": 183,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md": 1,
@@ -184,9 +184,9 @@ Work surface: `182` candidates, `20` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-423-hao-159-implementation-retry-budget.md": 1,
     "external/ipfs_kit": 5,
     "hallucinate_app": 52,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 138,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 140,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 2,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 148,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 149,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 13,
     "scripts/virtual_ai_os_todo_supervisor.py": 6,
@@ -195,7 +195,7 @@ Work surface: `182` candidates, `20` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "500588cdf39104b869d85cf23eaec21a5386b975",
+  "fingerprint": "092a16c3e3b8e4f9e6e6c4b495f692557bd9b989",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
