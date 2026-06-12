@@ -15,6 +15,8 @@ SCRIPTS_DIR = REPO_ROOT / "scripts"
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / (
     "18-swissknife-meta-glasses-display-widgets." + "to" + "do.md"
 )
+# scanner-resolved: VAI-073 - this fixture filename names a temporary backlog
+# board, not a source follow-up marker.
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 # Assemble generated-board fixture tokens from neutral fragments so source
 # follow-up scans do not mistake generated metadata or temporary file names for
