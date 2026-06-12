@@ -12,6 +12,11 @@ from .capability_registry import (
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
 )
+from .runtime_placement import (
+    default_virtual_ai_os_runtime_surface,
+    resolve_virtual_ai_os_runtime_placement,
+    supported_virtual_ai_os_runtime_surfaces,
+)
 from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .history import discover_failure_history_cids
 from .observability import (
@@ -26,6 +31,7 @@ from .observability import (
 from .models import (
     AICapabilityRequest,
     AICapabilityRegistryEntry,
+    AICapabilityRuntimePlacement,
     AICapabilityRoute,
     AICapabilityResult,
     AICapabilitySpec,
@@ -47,6 +53,7 @@ from .serialization import build_api_execute_response
 __all__ = [
     "AICapabilityRequest",
     "AICapabilityRegistryEntry",
+    "AICapabilityRuntimePlacement",
     "AICapabilityRoute",
     "AICapabilityResult",
     "AICapabilitySpec",
@@ -76,6 +83,9 @@ __all__ = [
     "list_ai_capabilities",
     "list_virtual_ai_os_capabilities",
     "resolve_policy_workflow",
+    "default_virtual_ai_os_runtime_surface",
+    "resolve_virtual_ai_os_runtime_placement",
     "resolve_virtual_ai_os_execution_mode",
     "resolve_virtual_ai_os_runtime_route",
+    "supported_virtual_ai_os_runtime_surfaces",
 ]

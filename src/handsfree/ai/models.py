@@ -61,6 +61,17 @@ class CapabilityRuntimeSurface(str, Enum):
 
 
 @dataclass(frozen=True)
+class AICapabilityRuntimePlacement:
+    """Deterministic placement decision for a virtual AI OS runtime route."""
+
+    capability_id: str
+    execution_mode: CapabilityExecutionMode
+    runtime_surface: CapabilityRuntimeSurface
+    supported_surfaces: tuple[CapabilityRuntimeSurface, ...]
+    fallback_surfaces: tuple[CapabilityRuntimeSurface, ...] = ()
+
+
+@dataclass(frozen=True)
 class AICapabilityRegistryEntry:
     """Cross-repo capability metadata for the virtual AI OS control plane."""
 
