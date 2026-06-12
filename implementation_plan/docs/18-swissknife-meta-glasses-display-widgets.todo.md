@@ -2642,18 +2642,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-233. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-233 from strategy blocked_tasks.
 
-## MGW-239 Resolve dirty main checkout blocking 19 worktree merges
+## MGW-239 Resolve dirty main checkout blocking 17 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: c49cee9e3a031d86410add0e8797392c2ed4c475
+- Fingerprint: 877a811af6336528a5882743b624ed189de5041f
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md
-- Acceptance: Reconciliation guardrail filed this because 19 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 17 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## MGW-240 Resolve 2 dirty backlogged worktrees blocked by content_not_in_target
 
@@ -2759,3 +2759,25 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-248-mgw-244-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-244. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-248-mgw-244-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-244 from strategy blocked_tasks.
+
+## MGW-249 Resolve merge retry-budget failure for MGW-152
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-249-mgw-152-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-152. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-249-mgw-152-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-152 from strategy blocked_tasks.
+
+## MGW-250 Resolve merge retry-budget failure for MGW-185
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-250-mgw-185-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-185. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-250-mgw-185-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-185 from strategy blocked_tasks.

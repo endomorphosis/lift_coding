@@ -2233,12 +2233,12 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: f7bd6b9cadc94db2f3bdd719baace4488e253157
+- Fingerprint: 87330959098e1bbdcc8277a0748071ed6afd78fc
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 7 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 14 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
@@ -2465,3 +2465,25 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-220-vai-209-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-220-vai-209-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.
+
+## VAI-221 Resolve implementation retry-budget failure for VAI-219
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-221-vai-219-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-219. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-221-vai-219-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-219 from strategy blocked_tasks.
+
+## VAI-222 Resolve merge retry-budget failure for VAI-214
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/ipfs_kit_adapters.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-222-vai-214-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-214. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-09-vai-222-vai-214-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-214 from strategy blocked_tasks.
