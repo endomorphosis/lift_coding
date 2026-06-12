@@ -1,38 +1,31 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 8c972e9f0ce772233a84944cb8f88cfb8468c4fd
+Fingerprint: c82579206cf6e8c43c0479e0335225f9361ea9eb
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 18
+Candidate count: 19
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md`
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md`
+- ` M hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=2`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md`
+  - `hallucinate_app`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md`
-- Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++-------------`
-  - ` ...026-06-09-hao-374-codebase-scan-03be576c95cb.md |  7 +++`
-  - ` ...026-06-12-mgw-249-mgw-203-merge-retry-budget.md | 30 +++++++++`
-  - ` 3 files changed, 67 insertions(+), 41 deletions(-)`
+  - `M	hallucinate_app`
 
 ## Sample Branches Or Worktrees
 
+- `implementation/vai-001-attempt-1-1781231623` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623`
 - `implementation/vai-041-attempt-1-1780994517` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-041-attempt-1-1780994517`
 - `implementation/vai-045-attempt-1-1780994816` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816`
 - `implementation/vai-046-attempt-1-1780995526` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526`
@@ -69,7 +62,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `18` candidates, `18` sampled records.
+Work surface: `19` candidates, `19` sampled records.
 
 ### Suggested Actions
 
@@ -111,26 +104,27 @@ Work surface: `18` candidates, `18` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 18,
+  "candidate_count": 19,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "8c972e9f0ce772233a84944cb8f88cfb8468c4fd",
+  "fingerprint": "c82579206cf6e8c43c0479e0335225f9361ea9eb",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++-------------\n ...026-06-09-hao-374-codebase-scan-03be576c95cb.md |  7 +++\n ...026-06-12-mgw-249-mgw-203-merge-retry-budget.md | 30 +++++++++\n 3 files changed, 67 insertions(+), 41 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
     "path_categories": {
-      "modified": 3
+      "modified": 2
     },
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md"
+      "hallucinate_app"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md"
+      " M hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -140,6 +134,7 @@ Work surface: `18` candidates, `18` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
+    "implementation/vai-001-attempt-1-1781231623",
     "implementation/vai-041-attempt-1-1780994517",
     "implementation/vai-045-attempt-1-1780994816",
     "implementation/vai-046-attempt-1-1780995526",
@@ -159,13 +154,13 @@ Work surface: `18` candidates, `18` sampled records.
     "implementation/vai-322-attempt-1-1781229856",
     "implementation/vai-323-attempt-1-1781230632"
   ],
-  "sample_count": 18,
+  "sample_count": 19,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-09-hao-374-codebase-scan-03be576c95cb.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-249-mgw-203-merge-retry-budget.md"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-041-attempt-1-1780994517",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526",
