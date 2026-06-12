@@ -22,6 +22,12 @@ method still converts unexpected runtime failures into the backend's structured
 `success: False` result, but the exception is no longer swallowed without
 diagnostic context.
 
+Attempt 1 also reviewed the current line-698 area after line drift. The
+`remove_content()` unexpected error path now logs with `exc_info=True` and
+returns the bucket/key context (`identifier`, `container`, and `details`) so
+callers and runtime logs can correlate failed deletes with the affected S3
+object.
+
 ## Validation
 
 ```text
