@@ -52,6 +52,10 @@ HAO-161 verified that `needs_input` is a pause state for this runner: `run_once`
 only polls `created` and `running` tasks, and
 `tests/test_minimal_runner.py::test_run_once_leaves_needs_input_tasks_untouched`
 covers that paused tasks remain unchanged.
+The original annotated follow-up text, "supports `needs_input` (optional: leave
+as TODO, but don’t crash)", is resolved as shipped behavior rather than open
+work: paused tasks remain parked until an explicit resume moves them back to
+`running`.
 MGW-106 rechecked the same annotated scanner finding at line 16 and left it as
 resolved tracker wording: `needs_input` is documented here as shipped pause
 behavior, not optional follow-up work.
