@@ -3,7 +3,9 @@
 from handsfree.ai import (
     CapabilityExecutionMode,
     CapabilityRuntimeSurface,
+    resolve_virtual_ai_os_runtime_placement,
     resolve_virtual_ai_os_runtime_route,
+    supported_virtual_ai_os_runtime_surfaces,
 )
 from handsfree.capability_registry import (
     NORMALIZED_ERROR_CONTRACT_ID,
@@ -21,6 +23,38 @@ def test_runtime_router_uses_direct_adapter_for_embedding_by_default():
     assert route.runtime_surface == CapabilityRuntimeSurface.DIRECT_ADAPTER
     assert route.handler_ref == "handsfree.ipfs_datasets_routers:get_embeddings_router"
     assert route.cli_command is None
+
+
+def test_runtime_placement_layer_records_supported_and_fallback_surfaces():
+    placement = resolve_virtual_ai_os_runtime_placement(
+        "dataset_discovery",
+        CapabilityExecutionMode.MCP_REMOTE,
+        preferred_surface="swissknife_orb",
+    )
+
+    assert placement.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert placement.supported_surfaces == (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
+    assert placement.fallback_surfaces == (CapabilityRuntimeSurface.MCP_PROVIDER,)
+
+
+def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
+    placement = resolve_virtual_ai_os_runtime_placement(
+        "workflow",
+        CapabilityExecutionMode.MCP_REMOTE,
+    )
+
+    assert placement.runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED
+    assert supported_virtual_ai_os_runtime_surfaces(
+        "workflow",
+        CapabilityExecutionMode.MCP_REMOTE,
+    ) == (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
 
 
 def test_runtime_router_uses_cli_surface_for_requested_ipfs_pin_cli_mode():
