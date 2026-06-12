@@ -27,3 +27,13 @@ Current `src/handsfree/commands/router.py` creates a `ProfileConfig` from the
 selected profile and passes `profile_config.privacy_mode` through the inbox and
 PR summary handler paths. The work log wording was updated to avoid
 annotation-style cleanup language on the scanner-flagged summary line.
+
+## Attempt 2 Verification
+
+Rechecked the worktree for HAO-168. The current PR log line 18 says the router
+uses the profile privacy-mode configuration through both handler paths, and the
+live router code passes `profile_config.privacy_mode` to both
+`handle_inbox_list()` and `handle_pr_summarize()`. Focused validation coverage
+remains in `tests/test_profile_privacy_mode.py` and
+`tests/test_router_privacy_mode.py`, so no product-code change is needed for
+this docs-track finding.
