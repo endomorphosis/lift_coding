@@ -19,6 +19,12 @@ local cache read and shape failures (`OSError`, `TypeError`, `ValueError`), and
 logs the fallback to S3 with `exc_info=True`. Cache metadata reads remain
 best-effort, while unexpected runtime errors are no longer silently swallowed.
 
+Attempt 1 also reviewed the current line-698 area after line drift. The
+`remove_content()` unexpected error path now logs with `exc_info=True` and
+returns the bucket/key context (`identifier`, `container`, and `details`) so
+callers and runtime logs can correlate failed deletes with the affected S3
+object.
+
 ## Validation
 
 ```text
