@@ -460,7 +460,11 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52
+<<<<<<< HEAD
+- Fingerprint: ee4dd400fb9d8abef3756732cc0dc8f8d140c75b
+=======
+- Fingerprint: be7b80862c79ac5fd763c49f716257f4aadedafe
+>>>>>>> implementation/vai-322-attempt-1-1781237562
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -776,7 +780,7 @@ cadence remains parseable and resumable.
 
 ## VAI-322 Resolve merge retry-budget failure for VAI-155
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
