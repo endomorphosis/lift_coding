@@ -520,20 +520,38 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md
+<<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 18 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+<<<<<<< HEAD
+- Acceptance: Reconciliation guardrail filed this because 8 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+>>>>>>> implementation/mgw-152-attempt-1-1780993885
 
 ## MGW-240 Resolve 2 dirty backlogged worktrees blocked by content_not_in_target
+=======
+- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## MGW-240 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
+>>>>>>> implementation/vai-202-attempt-1-1780989786
 
 - Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: 745e9e0b76aa773c037e5b21928a01bc9cbbf44f
+=======
+- Fingerprint: aa06f1c0d3d6225ea8d02248ac4b009a7746a7ce
+>>>>>>> implementation/vai-202-attempt-1-1780989786
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-240-reconciliation-bf6cac4e7a57.md
+<<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 2 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-240-reconciliation-bf6cac4e7a57.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-240-reconciliation-bf6cac4e7a57.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+>>>>>>> implementation/vai-202-attempt-1-1780989786
 
 ## MGW-241 Resolve 2 dirty backlogged worktrees blocked by unsupported_status
 
