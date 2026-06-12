@@ -461,13 +461,13 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 238 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 244 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: f35a30cfef673e310bf3a766691b52e7dd698cf7
+- Fingerprint: cb218e030833705a1681c3322dc851814dd1c377
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -878,3 +878,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-330-vai-008-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-008. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-330-vai-008-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-008 from strategy blocked_tasks.
+
+## VAI-331 Resolve implementation retry-budget failure for VAI-052
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-331-vai-052-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-052. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-331-vai-052-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-052 from strategy blocked_tasks.
