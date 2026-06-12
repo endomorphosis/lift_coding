@@ -4,15 +4,15 @@ Date: 2026-06-12
 Source task: HAO-326
 Follow-up task: HAO-424
 Retry budget: 3
-Observed consecutive merge failures: 3
+Observed consecutive merge failures: 61
 
 ## Evidence
 
-- Failed command: `git merge (main_checkout_dirty_conflict)`
-- Attempts: 1, 1, 1
+- Failed command: `git merge --no-ff --no-edit implementation/hao-326-attempt-1-1781241072`
+- Attempts: 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 - Logs: not recorded
-- Merge reason: `main_checkout_dirty_conflict`
-- Dirty paths: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+- Merge reason: `not recorded`
+- Dirty paths: not recorded
 - Branch: `implementation/hao-326-attempt-1-1781241072`
 - Main worktree: `/home/barberb/lift_coding`
 
