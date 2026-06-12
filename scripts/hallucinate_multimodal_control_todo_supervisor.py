@@ -66,10 +66,15 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+<<<<<<< HEAD
     # scanner-resolved: HAO-195 - stale line-302 explicit flag wiring is now
     # owned by the shared objective defaults factory used by this supervisor.
     # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
     # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
+=======
+    # scanner-resolved: MGW-191 - "todo" in the surplus-min-terms flag emitted
+    # by objective_refill_kwargs refers to backlog task entries, not deferred work.
+>>>>>>> implementation/mgw-191-attempt-1-1781241449
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
