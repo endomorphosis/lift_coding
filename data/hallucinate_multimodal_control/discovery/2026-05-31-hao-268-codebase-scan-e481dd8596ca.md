@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The cache-miss metric increment is an optional observability side effect inside
+the cache lookup path. It should remain non-fatal, but the exception path now
+captures the exception object and logs the full traceback with
+`logger.exception`, with an explicit code comment documenting that the failure is
+intentionally contained rather than silently swallowed.
