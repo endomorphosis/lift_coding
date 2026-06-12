@@ -1068,13 +1068,7 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
 """,
         encoding="utf-8",
     )
-    _git(
-        repo,
-        "add",
-        todo_path.relative_to(repo).as_posix(),
-        objective_path.relative_to(repo).as_posix(),
-        source.relative_to(repo).as_posix(),
-    )
+    _stage_paths(repo, todo_path, objective_path, source)
     _git(repo, "commit", "-m", "seed objective heap")
 
     findings = daemon_module.record_objective_goal_findings(
