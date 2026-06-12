@@ -21,13 +21,16 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-191.
 
 This is a **false positive**. The word "todo" appears in the CLI flag name
 `--objective-surplus-min-terms-per-todo`, where it refers to backlog task entries (work-item queue),
-not a deferred code action. The comment on line 307 has been updated to include a
-`scanner-resolved: MGW-191` suppression marker so the scanner does not re-file the same finding.
+not a deferred code action. The current supervisor now delegates those defaults
+through `OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs()`, so the comment
+next to that kwargs expansion carries a `scanner-resolved: MGW-191` suppression
+marker to prevent the scanner from re-filing the same finding.
 
-The comment at line 307 has been updated to:
+The current supervisor comment is:
 
 ```python
-# scanner-resolved: MGW-191 — "todo" below is part of the CLI flag name --objective-surplus-min-terms-per-todo (backlog task-board entry count), not a deferred-work annotation.
+# scanner-resolved: MGW-191 - "todo" in the surplus-min-terms flag emitted
+# by objective_refill_kwargs refers to backlog task entries, not deferred work.
 ```
 
 <!-- scanner-resolved: MGW-191 — this resolution document records a false positive; no active annotation remains in the source file -->
