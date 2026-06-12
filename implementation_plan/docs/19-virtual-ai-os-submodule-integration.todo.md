@@ -493,7 +493,7 @@ cadence remains parseable and resumable.
 
 ## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
-## VAI-203 Resolve 4 preflight-conflicting backlogged worktree merges
+## VAI-203 Resolve 31 preflight-conflicting backlogged worktree merges
 
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
