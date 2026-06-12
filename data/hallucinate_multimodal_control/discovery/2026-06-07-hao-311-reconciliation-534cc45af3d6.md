@@ -1,7 +1,7 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 092a16c3e3b8e4f9e6e6c4b495f692557bd9b989
+Fingerprint: 18b2d8de38574c3d3aec982c46ce0a4eda6033a6
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
 Candidate count: 183
@@ -185,8 +185,8 @@ Work surface: `183` candidates, `20` sampled records.
     "external/ipfs_kit": 5,
     "hallucinate_app": 52,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 140,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 2,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 149,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 3,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 150,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 13,
     "scripts/virtual_ai_os_todo_supervisor.py": 6,
@@ -195,7 +195,7 @@ Work surface: `183` candidates, `20` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "092a16c3e3b8e4f9e6e6c4b495f692557bd9b989",
+  "fingerprint": "18b2d8de38574c3d3aec982c46ce0a4eda6033a6",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -270,8 +270,8 @@ Work surface: `183` candidates, `20` sampled records.
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "scripts/virtual_ai_os_todo_supervisor.py",
     "external/ipfs_kit",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md",
