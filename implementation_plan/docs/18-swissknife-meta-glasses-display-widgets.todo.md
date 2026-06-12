@@ -13,6 +13,20 @@ python3 scripts/meta_glasses_display_llm_router.py --task-id MGW-001
 
 To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
 
+## Autonomous Cadence State
+
+Run the daemon before the supervisor for one-shot checks. The daemon writes
+`data/meta_glasses_display_widgets/state/meta_glasses_display_task_state.json`,
+`data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json`, and
+`data/meta_glasses_display_widgets/state/meta_glasses_display_events.jsonl`.
+Implementation agents should read `recommended_task_id`, `ready_task_ids`,
+`waiting_task_ids`, `task_statuses`, `task_artifacts`, and `task_validation`
+from that state instead of inferring the next task from the markdown order.
+
+After MGW-014, Android validation commands are wrapped with the repo-local
+JDK 17 and Android SDK environment. Repeated validation failures are converted
+into evidence-backed MGW follow-up tasks instead of an indefinite retry loop.
+
 ## MGW-000 Bootstrap supervised display-widget backlog processing
 
 ## MGW-001 Record source alignment and version guardrails

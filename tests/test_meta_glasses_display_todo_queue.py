@@ -44,6 +44,7 @@ def _load_tasks():
 def test_meta_glasses_display_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
+    board_text = TASK_BOARD_PATH.read_text(encoding="utf-8")
 
     assert "MGW-000" in task_ids
     assert "MGW-012" in task_ids
@@ -52,6 +53,9 @@ def test_meta_glasses_display_todo_board_is_daemon_parseable():
     assert len(tasks) >= 15
     assert all(task.priority in {"P0", "P1", "P2", "P3"} for task in tasks)
     assert all(task.track for task in tasks)
+    assert "## Autonomous Cadence State" in board_text
+    assert "meta_glasses_display_task_state.json" in board_text
+    assert "recommended_task_id" in board_text
 
 
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():
@@ -155,6 +159,23 @@ def test_meta_display_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
         "data/meta_glasses_display_widgets/discovery",
         supervisor_paths,
     ) == "data/custom_mgw_discovery"
+
+
+def test_meta_display_bootstrap_docs_match_runtime_paths():
+    config_text = (REPO_ROOT / "docs" / "CONFIGURATION.md").read_text(encoding="utf-8")
+    getting_started_text = (REPO_ROOT / "docs" / "GETTING_STARTED.md").read_text(encoding="utf-8")
+
+    for text in (config_text, getting_started_text):
+        assert "scripts/meta_glasses_display_todo_daemon.py --once" in text
+        assert "scripts/meta_glasses_display_todo_supervisor.py --once" in text
+        assert "HANDSFREE_MGW_TODO_PATH" in text
+        assert "HANDSFREE_MGW_STATE_DIR" in text
+        assert "HANDSFREE_MGW_WORKTREE_ROOT" in text
+        assert "data/meta_glasses_display_widgets/state" in text
+        assert "data/meta_glasses_display_widgets/worktrees" in text
+
+    assert "HANDSFREE_MGW_DISCOVERY_DIR" in config_text
+    assert "meta_glasses_display_task_state.json" in config_text
 
 
 def test_meta_display_wrappers_delegate_reusable_namespace_context():
