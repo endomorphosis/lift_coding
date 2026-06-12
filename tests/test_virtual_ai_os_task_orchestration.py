@@ -7,6 +7,7 @@ import json
 import pytest
 
 from handsfree.agents.service import AgentService
+from handsfree.agents.runner import process_running_tasks
 from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_task_by_id
@@ -228,3 +229,60 @@ def test_virtual_ai_os_daemon_paths_default_from_state_dir(
     assert task is not None
     assert task.trace is not None
     assert task.trace["todo_daemon_result_preview"] == expected_preview
+
+
+def test_runner_polls_virtual_ai_os_daemon_state(
+    agent_service, db_conn, test_user_id, monkeypatch, tmp_path
+):
+    state_path = tmp_path / "virtual_ai_os_task_state.json"
+    events_path = tmp_path / "virtual_ai_os_events.jsonl"
+    daemon_task_title = _daemon_backed_task_title()
+    _write_state(
+        state_path,
+        task_id="VAI-005",
+        task_status="ready",
+        active_task_id="VAI-005",
+        active_task_title=daemon_task_title,
+    )
+    _write_events(events_path, task_id="VAI-005", title=daemon_task_title)
+
+    provider = IPFSDatasetsMCPAgentProvider(client=None)
+    monkeypatch.setattr(
+        "handsfree.agents.service.get_provider",
+        lambda provider_name: provider if provider_name == "ipfs_datasets_mcp" else None,
+    )
+    monkeypatch.setattr(
+        "handsfree.agent_providers.get_provider",
+        lambda provider_name: provider if provider_name == "ipfs_datasets_mcp" else None,
+    )
+
+    created = agent_service.delegate(
+        user_id=test_user_id,
+        instruction="track VAI-005",
+        provider="ipfs_datasets_mcp",
+        trace={
+            "todo_daemon_state_path": str(state_path),
+            "todo_daemon_events_path": str(events_path),
+            "todo_daemon_task_id": "VAI-005",
+        },
+    )
+    assert created["state"] == "running"
+
+    _write_state(
+        state_path,
+        task_id="VAI-005",
+        task_status="completed",
+        active_task_id="VAI-006",
+        active_task_title="Bind Swissknife into the virtual UI and ORB plane",
+    )
+
+    result = process_running_tasks(db_conn)
+    task = get_agent_task_by_id(db_conn, created["task_id"])
+
+    assert result["completed"] == 1
+    assert result["progressed"] == 0
+    assert task is not None
+    assert task.state == "completed"
+    assert task.trace is not None
+    assert task.trace["todo_daemon_task_status"] == "completed"
+    assert task.trace["todo_daemon_active_task_id"] == "VAI-006"

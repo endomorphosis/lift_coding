@@ -18,6 +18,7 @@ from handsfree.db.notifications import create_notification
 from handsfree.db.agent_tasks import (
     get_agent_task_by_id,
     get_agent_tasks,
+    update_agent_task_trace,
     update_agent_task_state,
 )
 
@@ -58,6 +59,97 @@ def should_simulate_failure() -> bool:
         True if HANDSFREE_AGENT_SIMULATE_FAILURE=true, False otherwise.
     """
     return os.environ.get("HANDSFREE_AGENT_SIMULATE_FAILURE", "").lower() == "true"
+
+
+def _has_todo_daemon_trace(trace: dict[str, Any] | None) -> bool:
+    if not isinstance(trace, dict):
+        return False
+    return bool(
+        (trace.get("todo_daemon_state_path") or trace.get("virtual_ai_os_state_path"))
+        and (trace.get("todo_daemon_task_id") or trace.get("virtual_ai_os_task_id"))
+    )
+
+
+def _emit_runner_completion_notification(
+    conn: duckdb.DuckDBPyConnection,
+    task: Any,
+    new_state: str,
+) -> None:
+    event_type = "agent.task_failed" if new_state == "failed" else "agent.task_completed"
+    message = (
+        f"Agent task failed: {task.instruction or 'No instruction'}"
+        if new_state == "failed"
+        else f"Agent task completed: {task.instruction or 'No instruction'}"
+    )
+    create_notification(
+        conn=conn,
+        user_id=task.user_id,
+        event_type=event_type,
+        message=message,
+        metadata={
+            "task_id": task.id,
+            "provider": task.provider,
+            "target_type": task.target_type,
+            "target_ref": task.target_ref,
+        },
+        priority=3,
+    )
+
+
+def _poll_todo_daemon_task(
+    conn: duckdb.DuckDBPyConnection,
+    task: Any,
+) -> tuple[str | None, bool]:
+    """Poll provider status for tasks backed by ipfs_datasets_py todo-daemon state."""
+    if not _has_todo_daemon_trace(task.trace):
+        return None, False
+
+    try:
+        from handsfree.agent_providers import get_provider
+
+        status_result = get_provider(task.provider).check_status(task)
+    except Exception as exc:
+        logger.warning("Failed to poll todo-daemon status for task %s: %s", task.id, exc)
+        return None, False
+
+    if not status_result.get("ok"):
+        logger.warning(
+            "Todo-daemon status poll failed for task %s: %s",
+            task.id,
+            status_result.get("message", "unknown error"),
+        )
+        return None, False
+
+    trace_update = status_result.get("trace")
+    if not isinstance(trace_update, dict):
+        trace_update = {}
+    new_state = str(status_result.get("status") or task.state).strip().lower() or task.state
+
+    if new_state == task.state:
+        if trace_update:
+            update_agent_task_trace(conn=conn, task_id=task.id, trace_update=trace_update)
+            return "progressed", True
+        return None, True
+
+    try:
+        updated_task = update_agent_task_state(
+            conn=conn,
+            task_id=task.id,
+            new_state=new_state,
+            trace_update=trace_update,
+        )
+    except ValueError as exc:
+        logger.warning("Invalid todo-daemon transition for task %s: %s", task.id, exc)
+        return None, False
+
+    if updated_task is None:
+        return None, False
+    if new_state in {"completed", "failed"}:
+        try:
+            _emit_runner_completion_notification(conn, task, new_state)
+        except Exception as exc:
+            logger.warning("Failed to create notification for task %s: %s", task.id, exc)
+    return new_state, True
 
 
 def auto_start_created_tasks(conn: duckdb.DuckDBPyConnection) -> int:
@@ -288,6 +380,18 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
 
     for task in tasks:
         trace = task.trace or {}
+        daemon_state, daemon_polled = _poll_todo_daemon_task(conn, task)
+        if daemon_polled:
+            if daemon_state == "completed":
+                completed += 1
+            elif daemon_state == "failed":
+                failed += 1
+            elif daemon_state == "progressed":
+                progressed += 1
+            else:
+                skipped += 1
+            continue
+
         started_at = _parse_trace_timestamp(trace.get("auto_started_at"))
         if started_at is None:
             skipped += 1
@@ -310,25 +414,7 @@ def process_running_tasks(conn: duckdb.DuckDBPyConnection) -> dict[str, int]:
                     },
                 )
                 if updated_task is not None:
-                    event_type = "agent.task_failed" if new_state == "failed" else "agent.task_completed"
-                    message = (
-                        f"Agent task failed: {task.instruction or 'No instruction'}"
-                        if new_state == "failed"
-                        else f"Agent task completed: {task.instruction or 'No instruction'}"
-                    )
-                    create_notification(
-                        conn=conn,
-                        user_id=task.user_id,
-                        event_type=event_type,
-                        message=message,
-                        metadata={
-                            "task_id": task.id,
-                            "provider": task.provider,
-                            "target_type": task.target_type,
-                            "target_ref": task.target_ref,
-                        },
-                        priority=3,
-                    )
+                    _emit_runner_completion_notification(conn, task, new_state)
                 if new_state == "failed":
                     failed += 1
                 else:
