@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: ec132b632b5fe9e785d62d184d880c98a56182a6
+Fingerprint: 3a2db889c526b46f41a9c5f6b9c823d21b1ed94a
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 178
+Candidate count: 182
 Priority: P1
 Track: ops
 
@@ -118,7 +118,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `178` candidates, `20` sampled records.
+Work surface: `182` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -166,7 +166,7 @@ Work surface: `178` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 178,
+  "candidate_count": 182,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md": 1,
@@ -185,21 +185,21 @@ Work surface: `178` candidates, `20` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-423-hao-159-implementation-retry-budget.md": 1,
     "external/ipfs_kit": 4,
     "hallucinate_app": 52,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 134,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 2,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 148,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 138,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 3,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 150,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 13,
     "scripts/meta_glasses_display_todo_supervisor.py": 1,
     "scripts/virtual_ai_os_todo_supervisor.py": 6,
     "tests/test_hallucinate_multimodal_control_todo_queue.py": 8,
     "tests/test_virtual_ai_os_config.py": 2,
-    "tests/test_virtual_ai_os_runtime_router.py": 63,
+    "tests/test_virtual_ai_os_runtime_router.py": 64,
     "tracking/PR-052-glasses-js-integration-tts.md": 1,
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "ec132b632b5fe9e785d62d184d880c98a56182a6",
+  "fingerprint": "3a2db889c526b46f41a9c5f6b9c823d21b1ed94a",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -276,8 +276,8 @@ Work surface: `178` candidates, `20` sampled records.
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "scripts/virtual_ai_os_todo_supervisor.py",
     "external/ipfs_kit",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
     "tests/test_virtual_ai_os_config.py",
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md",
