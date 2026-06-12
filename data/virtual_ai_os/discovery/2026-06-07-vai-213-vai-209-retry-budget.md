@@ -20,3 +20,15 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Resolution
+
+VAI-209's validation command used an inline Python one-liner with semicolons
+inside the quoted script. The supervisor validation runner split that command at
+the first semicolon and retried the unterminated fragment
+`python3 -c 'import pathlib, sys`, producing the repeated shell quote failure.
+
+The VAI-209 validation command is now the equivalent parseable file-content
+check, `test -s external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml`.
+The workflow fix from VAI-209 was also applied here so the swallowed extractor
+exception no longer allows partial module documentation to pass silently.

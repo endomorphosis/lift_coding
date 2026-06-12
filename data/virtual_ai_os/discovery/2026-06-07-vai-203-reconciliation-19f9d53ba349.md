@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
-Date: 2026-06-07
-Fingerprint: 25417f4694d43233e8e04709fc2a5769d95ca2ca
+Date: 2026-06-09
+Fingerprint: 368f296963458d693afb4f5ff622cacc6b59635a
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 46
+Candidate count: 47
 Priority: P1
 Track: ops
 
@@ -111,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `46` candidates, `20` sampled records.
+Work surface: `47` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -159,11 +159,13 @@ Work surface: `46` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 46,
+  "candidate_count": 47,
   "conflict_path_counts": {
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md": 1,
     "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md": 1,
+    "data/virtual_ai_os/discovery/2026-05-31-vai-188-resolution.md": 1,
     "data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md": 1,
+    "external/ipfs_kit": 1,
     "hallucinate_app": 9,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 26,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 24,
@@ -179,7 +181,7 @@ Work surface: `46` candidates, `20` sampled records.
     "work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "25417f4694d43233e8e04709fc2a5769d95ca2ca",
+  "fingerprint": "368f296963458d693afb4f5ff622cacc6b59635a",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -263,7 +265,9 @@ Work surface: `46` candidates, `20` sampled records.
     "scripts/virtual_ai_os_todo_supervisor.py",
     "data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md",
     "data/virtual_ai_os/discovery/2026-05-28-vai-124-resolution.md",
+    "data/virtual_ai_os/discovery/2026-05-31-vai-188-resolution.md",
     "data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md",
+    "external/ipfs_kit",
     "scripts/hallucinate_multimodal_control_todo_daemon.py",
     "scripts/meta_glasses_display_todo_supervisor.py",
     "src/handsfree/api.py",

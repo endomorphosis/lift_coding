@@ -2,7 +2,7 @@
 
 Date: 2026-06-06
 Source: hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022
-Kind: swallowed_exception
+Kind: swallowed_exception_resolved
 
 ## Finding
 

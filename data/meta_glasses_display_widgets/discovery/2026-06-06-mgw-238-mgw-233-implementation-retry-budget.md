@@ -22,3 +22,15 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair
+
+MGW-233 was resolved by adding `MGW-233` to the `scanner-resolved` marker in
+`data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md` and recording the
+false-positive analysis in
+`data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-233-resolution.md`.
+
+On 2026-06-09, the meta-glasses-display strategy file no longer lists MGW-233 in
+`blocked_tasks`, and this MGW-238 repair task was marked completed in the
+supervisor todo so the daemon can continue normal backlog parsing without
+retrying the exhausted MGW-233 implementation attempts.
