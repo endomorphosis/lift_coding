@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .capability_registry import get_virtual_ai_os_capability
 from .models import (
@@ -23,6 +23,8 @@ class RuntimePlacementDecision:
     target_repo: str
     reason: str
     constraints: tuple[str, ...] = ()
+    supported_surfaces: tuple[CapabilityRuntimeSurface, ...] = field(default_factory=tuple)
+    fallback_surfaces: tuple[CapabilityRuntimeSurface, ...] = field(default_factory=tuple)
 
 
 _SERVER_FAMILY_PLACEMENTS: dict[str, tuple[CapabilityPlacementLayer, str]] = {
@@ -41,12 +43,99 @@ _SERVER_FAMILY_PLACEMENTS: dict[str, tuple[CapabilityPlacementLayer, str]] = {
 }
 
 
+def supported_virtual_ai_os_runtime_surfaces(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+) -> tuple[CapabilityRuntimeSurface, ...]:
+    """Return the set of valid runtime surfaces for a capability/mode combination."""
+    if execution_mode == CapabilityExecutionMode.DIRECT_IMPORT:
+        return (CapabilityRuntimeSurface.DIRECT_ADAPTER,)
+    if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
+        return (CapabilityRuntimeSurface.LOCAL_CLI,)
+    if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
+        return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
+    if capability_id in {
+        "embedding",
+        "dataset_discovery",
+        "storage",
+        "ipfs_pin",
+        "ui_render_session",
+    }:
+        return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    return (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
+
+
+def _default_runtime_surface(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+) -> CapabilityRuntimeSurface:
+    if execution_mode == CapabilityExecutionMode.DIRECT_IMPORT:
+        return CapabilityRuntimeSurface.DIRECT_ADAPTER
+    if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
+        return CapabilityRuntimeSurface.LOCAL_CLI
+    if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
+        return CapabilityRuntimeSurface.DAEMON_MEDIATED
+    if capability_id == "ui_render_session":
+        return CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    if capability_id in {"workflow", "agentic_fetch"}:
+        return CapabilityRuntimeSurface.DAEMON_MEDIATED
+    return CapabilityRuntimeSurface.MCP_PROVIDER
+
+
+def _normalize_surface(
+    value: str | CapabilityRuntimeSurface | None,
+) -> CapabilityRuntimeSurface | None:
+    if value is None:
+        return None
+    if isinstance(value, CapabilityRuntimeSurface):
+        return value
+    normalized = value.strip().lower()
+    if not normalized:
+        return None
+    return CapabilityRuntimeSurface(normalized)
+
+
 def resolve_virtual_ai_os_runtime_placement(
+    capability_id: str,
+    execution_mode: CapabilityExecutionMode,
+    preferred_surface: str | CapabilityRuntimeSurface | None = None,
+) -> RuntimePlacementDecision:
+    """Resolve the virtual runtime layer for an already-valid route choice."""
+    entry = get_virtual_ai_os_capability(capability_id)
+
+    normalized_preferred = _normalize_surface(preferred_surface)
+    runtime_surface = (
+        normalized_preferred
+        if normalized_preferred is not None
+        else _default_runtime_surface(entry.capability_id, execution_mode)
+    )
+    all_surfaces = supported_virtual_ai_os_runtime_surfaces(entry.capability_id, execution_mode)
+    fallback = tuple(s for s in all_surfaces if s != runtime_surface)
+
+    placement = _build_placement(entry.capability_id, execution_mode, runtime_surface)
+    return RuntimePlacementDecision(
+        capability_id=placement.capability_id,
+        execution_mode=placement.execution_mode,
+        runtime_surface=placement.runtime_surface,
+        placement_layer=placement.placement_layer,
+        target_repo=placement.target_repo,
+        reason=placement.reason,
+        constraints=placement.constraints,
+        supported_surfaces=all_surfaces,
+        fallback_surfaces=fallback,
+    )
+
+
+def _build_placement(
     capability_id: str,
     execution_mode: CapabilityExecutionMode,
     runtime_surface: CapabilityRuntimeSurface,
 ) -> RuntimePlacementDecision:
-    """Resolve the virtual runtime layer for an already-valid route choice."""
+    """Build a placement without supported/fallback surfaces (used internally)."""
     entry = get_virtual_ai_os_capability(capability_id)
 
     if runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB:
@@ -124,4 +213,5 @@ def resolve_virtual_ai_os_runtime_placement(
 __all__ = [
     "RuntimePlacementDecision",
     "resolve_virtual_ai_os_runtime_placement",
+    "supported_virtual_ai_os_runtime_surfaces",
 ]
