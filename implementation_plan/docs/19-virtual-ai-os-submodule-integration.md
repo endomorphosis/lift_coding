@@ -41,12 +41,12 @@ The root gitlinks at `HEAD` are:
 | Path | Recorded gitlink |
 | --- | --- |
 | `Mcp-Plus-Plus` | `29343be704da4e193ff143bac7daae9b0f98435d` |
-| `external/ipfs_accelerate` | `765583468e28fc1229db849739a584816129251e` |
+| `external/ipfs_accelerate` | `7913fc3a66b95cc1dc75143b84a2c4c77b838af1` |
 | `external/ipfs_datasets` | `45ff065a4208e01ed7b1034a35e1ef2ffc6420b9` |
-| `external/ipfs_kit` | `17acebc422bb09f803be504b3212258db7b5b600` |
+| `external/ipfs_kit` | `58873ab257104981aa9ba7bee0c2368369716be7` |
 | `external/meta-wearables-dat-android` | `25f3a6d4479b7a4a72f877977b865a11af990d04` |
 | `external/meta-wearables-dat-ios` | `a739e94181221e7f321304273bcda2272821b163` |
-| `hallucinate_app` | `8ccbb84362fb95e1636b5515c32f5af0bbfeab3b` |
+| `hallucinate_app` | `f2a935154a4124b95c897fc0e5964eb43bc51a09` |
 | `swissknife` | `8865ff3b872bda4bab492433bbfb858587b03df1` |
 
 Pin guardrails:

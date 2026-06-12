@@ -65,6 +65,8 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+    # scanner-resolved: MGW-191 - "todo" in the surplus-min-terms flag emitted
+    # by objective_refill_kwargs refers to backlog task entries, not deferred work.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
