@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: af17d7281a1ae4353ff25e27579ab3c37a258bba
+Fingerprint: fdb2a212510e6673a688f734bbeb275a5629e108
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 23
@@ -10,26 +10,26 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
 - ` m external/ipfs_kit`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `other_dirty=1, unmerged=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
   - `external/ipfs_kit`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
   - `M	external/ipfs_kit`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Staged name status:
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `...2026-06-12-mgw-252-mgw-178-merge-retry-budget.md | 21 +++++++++++++++++++++`
-  - ` external/ipfs_kit                                   |  0`
-  - ` ...-swissknife-meta-glasses-display-widgets.todo.md |  4 ++--`
-  - ` 3 files changed, 23 insertions(+), 2 deletions(-)`
+  - `external/ipfs_kit                                                     | 0`
+  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md           | Unmerged`
+  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md           | 4 ++++`
+  - ` 2 files changed, 4 insertions(+)`
 
 ## Sample Branches Or Worktrees
 
@@ -116,24 +116,23 @@ Work surface: `23` candidates, `20` sampled records.
   "candidate_count": 23,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "af17d7281a1ae4353ff25e27579ab3c37a258bba",
+  "fingerprint": "fdb2a212510e6673a688f734bbeb275a5629e108",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...2026-06-12-mgw-252-mgw-178-merge-retry-budget.md | 21 +++++++++++++++++++++\n external/ipfs_kit                                   |  0\n ...-swissknife-meta-glasses-display-widgets.todo.md |  4 ++--\n 3 files changed, 23 insertions(+), 2 deletions(-)",
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md\nM\texternal/ipfs_kit\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "external/ipfs_kit                                                     | 0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md           | Unmerged\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md           | 4 ++++\n 2 files changed, 4 insertions(+)",
+    "name_status": "M\texternal/ipfs_kit\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 2,
-      "other_dirty": 1
+      "other_dirty": 1,
+      "unmerged": 1
     },
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
       "external/ipfs_kit",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
       " m external/ipfs_kit",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -166,7 +165,6 @@ Work surface: `23` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
     "external/ipfs_kit",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
