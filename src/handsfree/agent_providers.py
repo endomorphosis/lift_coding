@@ -1752,6 +1752,15 @@ def _todo_daemon_config(trace: dict[str, Any] | None) -> dict[str, str] | None:
         normalized_trace.get("todo_daemon_task_id"),
         normalized_trace.get("virtual_ai_os_task_id"),
     )
+    if state_path is None and task_id is not None and _is_virtual_ai_os_todo_task(task_id, normalized_trace):
+        default_paths = _virtual_ai_os_todo_daemon_default_paths()
+        if default_paths is not None:
+            state_path = default_paths["state_path"]
+            normalized_trace = normalized_trace | {
+                "todo_daemon_events_path": normalized_trace.get("todo_daemon_events_path")
+                or normalized_trace.get("virtual_ai_os_events_path")
+                or default_paths["events_path"],
+            }
     if state_path is None or task_id is None:
         return None
     config = {"state_path": state_path, "task_id": task_id}
@@ -1762,6 +1771,26 @@ def _todo_daemon_config(trace: dict[str, Any] | None) -> dict[str, str] | None:
     if events_path is not None:
         config["events_path"] = events_path
     return config
+
+
+def _is_virtual_ai_os_todo_task(task_id: str, trace: dict[str, Any]) -> bool:
+    return trace.get("virtual_ai_os_task_id") is not None or task_id.upper().startswith("VAI-")
+
+
+def _virtual_ai_os_todo_daemon_default_paths() -> dict[str, str] | None:
+    state_dir = Path(
+        os.getenv(
+            "HANDSFREE_VAI_OS_STATE_DIR",
+            Path(__file__).resolve().parents[2] / "data" / "virtual_ai_os" / "state",
+        )
+    )
+    state_path = state_dir / "virtual_ai_os_task_state.json"
+    if not state_path.exists():
+        return None
+    return {
+        "state_path": str(state_path),
+        "events_path": str(state_dir / "virtual_ai_os_events.jsonl"),
+    }
 
 
 def _load_json_record(path: str) -> dict[str, Any]:
