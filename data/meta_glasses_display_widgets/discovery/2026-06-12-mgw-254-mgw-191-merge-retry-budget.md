@@ -23,3 +23,15 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair
+
+- Ported the intended MGW-191 scanner suppression into
+  `scripts/hallucinate_multimodal_control_todo_supervisor.py`.
+- Resolved dirty todo metadata conflict markers that were blocking clean merge
+  retries without changing the intended MGW-191 runtime behavior.
+- Removed `MGW-191` from the meta-glasses-display strategy `blocked_tasks` list
+  so the supervisor can retry/reconcile the source branch.
+- No semantic merge conflict was present in the script change, so
+  `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` was not
+  needed.
