@@ -1249,7 +1249,12 @@ def _is_running_inside_trio(trio: Any) -> bool:
 
     try:
         current_trio_token()
-    except RuntimeError:
+    except RuntimeError as exc:
+        logger.debug(
+            "No active Trio token while resolving py-libp2p runtime value: %s",
+            exc,
+            exc_info=True,
+        )
         return False
     return True
 

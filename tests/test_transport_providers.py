@@ -785,6 +785,34 @@ def test_protocol_routing_adapter_logs_async_runtime_stream_cleanup_failures(cap
     assert all(record.exc_info for record in cleanup_records)
 
 
+def test_resolve_runtime_value_logs_missing_trio_token(caplog):
+    from handsfree.transport.libp2p_bluetooth import _is_running_inside_trio
+
+    class FakeLowLevel:
+        @staticmethod
+        def current_trio_token() -> None:
+            raise RuntimeError("must be called from async context")
+
+    class FakeTrio:
+        lowlevel = FakeLowLevel()
+
+    caplog.set_level(logging.DEBUG, logger="handsfree.transport.libp2p_bluetooth")
+
+    assert _is_running_inside_trio(FakeTrio()) is False
+
+    token_records = [
+        record
+        for record in caplog.records
+        if record.name == "handsfree.transport.libp2p_bluetooth"
+    ]
+    assert [record.getMessage() for record in token_records] == [
+        "No active Trio token while resolving py-libp2p runtime value: "
+        "must be called from async context",
+    ]
+    assert all(record.levelno == logging.DEBUG for record in token_records)
+    assert all(record.exc_info for record in token_records)
+
+
 def test_protocol_routing_adapter_reads_inbound_runtime_stream_payloads(monkeypatch):
     from handsfree.transport import libp2p_bluetooth
     from handsfree.transport.libp2p_bluetooth import (
