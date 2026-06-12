@@ -33,4 +33,6 @@ Record from the glasses microphone and play back audio through glasses speakers 
 This tracking note points directly at the current Android source, Expo bridge,
 and PR-051 status docs. The older broad diagnostics checklist is not listed here
 because its Android section predates the recorder/player bridge implementation
-and is only historical planning context.
+and is only historical planning context. MGW-102 resolved the codebase-scan
+finding by replacing that broad checklist reference with PR-051-specific Android
+recorder, player, bridge, and status evidence.
