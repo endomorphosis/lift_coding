@@ -652,10 +652,11 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
 def test_merge_conflict_resolver_builds_dry_run_prompt(tmp_path):
     resolver = _load_script_module("hallucinate_multimodal_control_merge_conflict_resolver")
     source = (SCRIPTS_DIR / "hallucinate_multimodal_control_merge_conflict_resolver.py").read_text(encoding="utf-8")
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.merge_resolver import MergeResolverNamespaceSpec
 
-    assert isinstance(resolver.HAO_MERGE_RESOLVER_SPEC, MergeResolverNamespaceSpec)
+    resolver_spec = resolver.HAO_MERGE_RESOLVER_SPEC
+    assert resolver_spec.namespace == "hallucinate_multimodal_control"
+    assert resolver_spec.env_prefix == "HANDSFREE_HAO"
+    assert resolver_spec.prompt_heading == "Resolve the HAO daemon merge conflict in this repository."
     assert "build_namespace_merge_resolver_runner_from_spec(" in source
     assert "build_namespace_merge_resolver_runner(" not in source
     repo = tmp_path / "repo"
