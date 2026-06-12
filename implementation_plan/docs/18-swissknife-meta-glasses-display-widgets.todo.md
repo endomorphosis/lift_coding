@@ -2859,7 +2859,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-258 Resolve merge retry-budget failure for MGW-188
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
