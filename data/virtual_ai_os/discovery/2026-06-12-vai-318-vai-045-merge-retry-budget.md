@@ -23,3 +23,21 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair
+
+Confirmed VAI-045's intended runtime change is already committed in this
+repository as `13039df0` (`VAI-045: Replace placeholder runtime path in
+src/handsfree/stt/stub_provider.py:42`). The current
+`src/handsfree/stt/stub_provider.py` implementation returns a deterministic
+transcript for supported formats and no longer contains the scanned
+`NotImplementedError` runtime path.
+
+The repeated merge failure was not a semantic conflict in VAI-045. The retry
+budget evidence shows `main_checkout_dirty_conflict` on
+`implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`;
+that file has a pending fingerprint update for an MGW reconciliation guardrail.
+This repair carries the guardrail metadata forward and marks VAI-318 completed
+so the supervisor can release VAI-045 from blocked merge retries. No
+`ipfs-accelerate-agent-merge-resolver --apply` run was needed because the
+failure was a dirty checkout guardrail, not a semantic merge conflict.
