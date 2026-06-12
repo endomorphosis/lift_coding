@@ -2687,7 +2687,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 9ac18c212b1c3fe589d757f7e4881ea575574de4
+- Fingerprint: f9e9cbb0e6e4aea4ce315dfa0f8d93fdfefcf13d
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
