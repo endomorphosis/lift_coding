@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The `find_providers` request-body fallback still attempts form parsing after JSON
+parsing fails, but the final form parse failure is no longer swallowed silently.
+Both parse failures are logged at warning level before the existing missing-`cid`
+validation response is returned.
