@@ -10,12 +10,16 @@ Codebase scan filed a finding from `error_monitor.py:1121`. The evidence line
 described normalising to the old three-character sentinel and was stale after
 VAI-144 changed the sentinel to `'\x00'`. The current code (as of VAI-144)
 correctly says `"normalising to the one-character sentinel"`.
-<!-- scanner-resolved: MGW-177, MGW-188, MGW-193, MGW-198, MGW-203, MGW-208, MGW-213, MGW-218, MGW-223, MGW-228, MGW-233, MGW-249; lines 9-12 are historical prose for the sentinel update, not an active annotation. -->
 
 ## Resolution
 
 The finding is a **false positive** — the upstream comment fix was already applied
 as part of VAI-144. No code change was required.
+
+MGW-203 rechecked the stale line-13 evidence after later suppression-comment
+churn. The evidence points to an inline suppression marker that has been removed
+from this note; the surrounding prose still avoids the old sentinel literal and
+does not describe an active code annotation.
 
 However, to prevent the scanner from re-filing this finding, a focused regression
 test `test_uppercase_hex_different_addresses_not_conflated` was added to
@@ -35,6 +39,12 @@ python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/err
 ```
 
 Passes. All 28 tests in `test_error_monitor.py` pass.
+
+MGW-203 validation:
+
+```
+test -f data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
+```
 
 ## Commit
 
