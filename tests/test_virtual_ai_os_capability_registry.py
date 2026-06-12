@@ -113,5 +113,14 @@ def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():
     assert surfaces["daemon_task"].label == "daemon tasks"
     assert surfaces["mcp_mcp_plus_plus"].label == "MCP/MCP++"
     assert surfaces["swissknife_orb"].label == "SwissKnife ORB"
+    assert surfaces["swissknife_orb"].metadata["virtual_ui_plane"] == (
+        "swissknife.virtual_desktop"
+    )
+    assert surfaces["swissknife_orb"].metadata["orb_router"] == (
+        "swissknife/src/services/mcp-orb-capability-router.ts"
+    )
+    assert surfaces["swissknife_orb"].metadata["display_descriptor"] == (
+        "spec/meta_glasses_display_widget_orb_interface.json"
+    )
     assert surfaces["hallucinate_app"].label == "Hallucinate App"
     assert surfaces["mobile_glasses"].label == "mobile/glasses"

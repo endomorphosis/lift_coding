@@ -11,6 +11,7 @@ from handsfree.capability_registry import (
     CapabilityRoutingKernel,
     RuntimeRouter,
 )
+from handsfree.meta_glasses_mobile_orb_runtime import resolve_mobile_orb_runtime_binding
 
 
 def test_runtime_router_uses_direct_adapter_for_embedding_by_default():
@@ -118,11 +119,47 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
         "hallucinate_app",
         "mobile_glasses",
     ]
+    swissknife_metadata = plan.entrypoints[0].metadata
+    assert swissknife_metadata["virtual_ui_plane"] == "swissknife.virtual_desktop"
+    assert swissknife_metadata["orb_plane"] == "swissknife.orb"
+    assert swissknife_metadata["service_descriptor"] == {
+        "namespace": "handsfree.virtual_ai_os.ipfs_datasets",
+        "operation": "dataset_discovery",
+        "tool_name": "dataset_discovery",
+        "server_family": "ipfs_datasets",
+        "provider_name": "ipfs_datasets_mcp",
+    }
+    assert swissknife_metadata["orb_binding"]["transport"] == "mcp-server"
+    assert swissknife_metadata["orb_binding"]["transport_binding"]["metadata"] == {
+        "server_family": "ipfs_datasets",
+        "tool_name": "dataset_discovery",
+        "provider_name": "ipfs_datasets_mcp",
+    }
     assert plan.entrypoints[-1].handler_ref == (
         "handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"
     )
+    assert plan.entrypoints[-1].metadata["orb_edge_descriptor"] == (
+        "spec/meta_glasses_mobile_orb_bridge_interface.json"
+    )
     assert plan.payload["task_id"] == "VAI-019"
     assert plan.payload["artifact_refs"]["receipt_ref"] == "bafybeivai019receipt"
+
+
+def test_swissknife_orb_dispatch_metadata_resolves_mobile_runtime_binding():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        )
+    )
+
+    runtime_binding = resolve_mobile_orb_runtime_binding(plan.entrypoints[0].metadata)
+
+    assert runtime_binding is not None
+    assert runtime_binding["binding_type"] == "handsfree.mcp-server"
+    assert runtime_binding["transport"] == "mcp-server"
+    assert runtime_binding["server_family"] == "ipfs_datasets"
+    assert runtime_binding["tool_name"] == "dataset_discovery"
 
 
 def test_runtime_router_normalizes_route_planning_errors():
