@@ -1,37 +1,46 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 16c01a3668f1d306dccd5c1d54cac825a65595eb
+Fingerprint: c4be90b8df7dfe03eafe8959080442b49038387b
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 131
+Candidate count: 134
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- `M  data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md`
-- `M  data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- `A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md`
 - ` m external/ipfs_kit`
-- `M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M hallucinate_app`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1`
+- Path categories: `added=1, modified=3, other_dirty=1, unmerged=1, untracked=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md`
   - `external/ipfs_kit`
+  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
-- Staged name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	hallucinate_app`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Diff stat:
-  - `external/ipfs_kit | 0`
-  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- Staged name status:
+  - `A	data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Untracked paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md`
 
 ## Sample Branches Or Worktrees
 
@@ -73,7 +82,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `131` candidates, `20` sampled records.
+Work surface: `134` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -115,30 +124,46 @@ Work surface: `131` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 131,
+  "candidate_count": 134,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "16c01a3668f1d306dccd5c1d54cac825a65595eb",
+  "fingerprint": "c4be90b8df7dfe03eafe8959080442b49038387b",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
-    "name_status": "M\texternal/ipfs_kit",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md",
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
+      "added": 1,
       "modified": 3,
-      "other_dirty": 1
+      "other_dirty": 1,
+      "unmerged": 1,
+      "untracked": 1
     },
-    "staged_name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "staged_name_status": "A\tdata/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md",
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md",
       "external/ipfs_kit",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md"
     ],
     "status_short": [
-      "M  data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md",
-      "M  data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md",
       " m external/ipfs_kit",
-      "M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M hallucinate_app",
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md"
+    ],
+    "untracked_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -171,10 +196,13 @@ Work surface: `131` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-206-resolution.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "data/hallucinate_multimodal_control/discovery/2026-05-26-hao-073-codebase-scan-584cb35c884b.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md",
     "external/ipfs_kit",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-074-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
