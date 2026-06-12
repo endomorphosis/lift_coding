@@ -39,6 +39,8 @@ from virtual_ai_os_todo_daemon import (  # noqa: E402
 _VIRTUAL_AI_OS_CONTEXT = VIRTUAL_AI_OS_CONTEXT
 DEFAULT_TODO_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
 VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
+# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
+# task-board path option is CLI flag naming, not a deferred-work annotation.
 TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
