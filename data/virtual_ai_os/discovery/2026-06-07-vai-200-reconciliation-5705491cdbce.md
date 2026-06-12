@@ -1,31 +1,42 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: be7b80862c79ac5fd763c49f716257f4aadedafe
+Fingerprint: 7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 25
+Candidate count: 27
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M hallucinate_app`
 - `UU tests/test_sessions.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `unmerged=1`
+- Path categories: `modified=2, unmerged=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `hallucinate_app`
   - `tests/test_sessions.py`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	hallucinate_app`
   - `U	tests/test_sessions.py`
   - `M	tests/test_sessions.py`
 - Staged name status:
   - `U	tests/test_sessions.py`
 - Diff stat:
-  - `tests/test_sessions.py | Unmerged`
-  - ` tests/test_sessions.py | 29 +++++++++++++++++++++++++++++`
-  - ` 1 file changed, 29 insertions(+)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 82 +++++++++-------------`
+  - ` hallucinate_app                                    |  2 +-`
+  - ` tests/test_sessions.py                             | Unmerged`
+  - ` tests/test_sessions.py                             | 50 +++++++++++++`
+  - ` 3 files changed, 84 insertions(+), 50 deletions(-)`
+- Submodule summary:
+  - `* hallucinate_app c0f7745...605c6fd (1):`
+  - `  > HAO: reconcile generated supervisor outputs`
 
 ## Sample Branches Or Worktrees
 
@@ -67,7 +78,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `25` candidates, `20` sampled records.
+Work surface: `27` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -109,24 +120,30 @@ Work surface: `25` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 25,
+  "candidate_count": 27,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "be7b80862c79ac5fd763c49f716257f4aadedafe",
+  "fingerprint": "7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "tests/test_sessions.py | Unmerged\n tests/test_sessions.py | 29 +++++++++++++++++++++++++++++\n 1 file changed, 29 insertions(+)",
-    "name_status": "U\ttests/test_sessions.py\nM\ttests/test_sessions.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 82 +++++++++-------------\n hallucinate_app                                    |  2 +-\n tests/test_sessions.py                             | Unmerged\n tests/test_sessions.py                             | 50 +++++++++++++\n 3 files changed, 84 insertions(+), 50 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nU\ttests/test_sessions.py\nM\ttests/test_sessions.py",
     "path_categories": {
+      "modified": 2,
       "unmerged": 1
     },
     "staged_name_status": "U\ttests/test_sessions.py",
     "status_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "hallucinate_app",
       "tests/test_sessions.py"
     ],
     "status_short": [
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M hallucinate_app",
       "UU tests/test_sessions.py"
-    ]
+    ],
+    "submodule_summary": "* hallucinate_app c0f7745...605c6fd (1):\n  > HAO: reconcile generated supervisor outputs"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -158,6 +175,8 @@ Work surface: `25` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "hallucinate_app",
     "tests/test_sessions.py"
   ],
   "sample_worktrees": [
