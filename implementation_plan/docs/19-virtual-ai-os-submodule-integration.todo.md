@@ -115,13 +115,6 @@ cadence remains parseable and resumable.
 
 ## VAI-026 Supervised autonomous implementation cadence
 
-- Priority: P2
-- Track: ops
-- Depends on: none
-- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, scripts/virtual_ai_os_todo_daemon.py, scripts/virtual_ai_os_todo_supervisor.py, tests/test_virtual_ai_os_todo_queue.py
-- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
-- Acceptance: The board records a supervised autonomous cadence that tells implementation agents to run the daemon before the supervisor, resume from `virtual_ai_os_task_state.json`, `virtual_ai_os_strategy.json`, and `virtual_ai_os_events.jsonl`, preserve dependency ordering through daemon state rather than markdown order, and keep the VAI daemon/supervisor wrappers parseable for isolated worktree implementation.
-
 ## VAI-027 Resolve merge retry-budget failure for VAI-019
 
 ## VAI-028 Resolve merge retry-budget failure for VAI-020
@@ -468,31 +461,17 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-<<<<<<< HEAD
-## VAI-200 Resolve dirty main checkout blocking 150 worktree merges
-=======
-## VAI-200 Resolve dirty main checkout blocking 68 worktree merges
->>>>>>> implementation/hao-413-attempt-1-1781248506
-
+## VAI-200 Resolve dirty main checkout blocking 156 worktree merges
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-<<<<<<< HEAD
-- Fingerprint: 672a853912e73ed22625bacbf8a6ef6c018e16a0
-=======
-- Fingerprint: c3ff963ee57418d66246ad6de9e96f9ec816c2ff
->>>>>>> implementation/hao-413-attempt-1-1781248506
+- Fingerprint: c0b7bf2bf93bf715738ebc09df2455b7a0998e4b
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-<<<<<<< HEAD
-- Acceptance: Reconciliation guardrail filed this because 146 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-=======
-- Acceptance: Reconciliation guardrail filed this because 68 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
->>>>>>> implementation/hao-413-attempt-1-1781248506
-
+- Acceptance: Reconciliation guardrail filed this because 156 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
 - Status: completed
