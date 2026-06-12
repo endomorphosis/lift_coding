@@ -824,3 +824,14 @@ into evidence-backed MGW follow-up tasks instead of an indefinite retry loop.
 - Outputs: data/meta_glasses_display_widgets/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-360-mgw-188-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-188. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-360-mgw-188-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-188 from strategy blocked_tasks.
+
+## MGW-361 Resolve merge retry-budget failure for MGW-203
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-361-mgw-203-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-203. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-361-mgw-203-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-203 from strategy blocked_tasks.
