@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: dff9ecb9306734851511771ae144559b6a988c4e
+Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 247
@@ -10,21 +10,18 @@ Track: ops
 
 ## Main Checkout Status
 
-- `AA data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
 - ` m hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `added=1, other_dirty=1`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
   - `hallucinate_app`
 - Name status:
-  - `U	data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
   - `M	hallucinate_app`
-- Staged name status:
-  - `U	data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
+- Diff stat:
+  - `hallucinate_app | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -111,24 +108,18 @@ Work surface: `247` candidates, `20` sampled records.
   "candidate_count": 247,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "dff9ecb9306734851511771ae144559b6a988c4e",
+  "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "U\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md\nM\thallucinate_app",
+    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "added": 1,
       "other_dirty": 1
     },
-    "staged_name_status": "U\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md",
       "hallucinate_app"
     ],
     "status_short": [
-      "AA data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md",
       " m hallucinate_app"
     ]
   },
@@ -162,7 +153,6 @@ Work surface: `247` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md",
     "hallucinate_app"
   ],
   "sample_worktrees": [
