@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 2308668ac69ada1396918e02e04e63a7b72b45a7
+Fingerprint: a34843847f13a7c76b597e4e18b731647e0ee52e
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 35
@@ -10,22 +10,21 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` m hallucinate_app`
+- ` M hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1`
+- Path categories: `modified=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 ++++++++++++++--------`
-  - ` hallucinate_app                                    |  0`
-  - ` 2 files changed, 37 insertions(+), 21 deletions(-)`
+  - `hallucinate_app | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+- Submodule summary:
+  - `* hallucinate_app 4fd3cdd...8f82a05 (1):`
+  - `  > update`
 
 ## Sample Branches Or Worktrees
 
@@ -112,23 +111,21 @@ Work surface: `35` candidates, `20` sampled records.
   "candidate_count": 35,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "2308668ac69ada1396918e02e04e63a7b72b45a7",
+  "fingerprint": "a34843847f13a7c76b597e4e18b731647e0ee52e",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 ++++++++++++++--------\n hallucinate_app                                    |  0\n 2 files changed, 37 insertions(+), 21 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
+    "diff_stat": "hallucinate_app | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "modified": 1,
-      "other_dirty": 1
+      "modified": 1
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "hallucinate_app"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m hallucinate_app"
-    ]
+      " M hallucinate_app"
+    ],
+    "submodule_summary": "* hallucinate_app 4fd3cdd...8f82a05 (1):\n  > update"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -160,7 +157,6 @@ Work surface: `35` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "hallucinate_app"
   ],
   "sample_worktrees": [
