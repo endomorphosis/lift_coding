@@ -1,27 +1,31 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6
+Fingerprint: 58cedb5900cf6bc86eef5a79e19f2e965c687b42
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 119
+Candidate count: 121
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m external/ipfs_kit`
 
 ## Main Checkout Evidence
 
-- Path categories: `other_dirty=1`
+- Path categories: `modified=1, other_dirty=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `external/ipfs_kit`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
 - Diff stat:
-  - `external/ipfs_kit | 0`
-  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 +++++++++-------------`
+  - ` external/ipfs_kit                                  |  0`
+  - ` 2 files changed, 24 insertions(+), 34 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -63,7 +67,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `119` candidates, `20` sampled records.
+Work surface: `121` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,21 +109,24 @@ Work surface: `119` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 119,
+  "candidate_count": 121,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6",
+  "fingerprint": "58cedb5900cf6bc86eef5a79e19f2e965c687b42",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
-    "name_status": "M\texternal/ipfs_kit",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 +++++++++-------------\n external/ipfs_kit                                  |  0\n 2 files changed, 24 insertions(+), 34 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit",
     "path_categories": {
+      "modified": 1,
       "other_dirty": 1
     },
     "status_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "external/ipfs_kit"
     ],
     "status_short": [
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m external/ipfs_kit"
     ]
   },
@@ -153,6 +160,7 @@ Work surface: `119` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "external/ipfs_kit"
   ],
   "sample_worktrees": [
