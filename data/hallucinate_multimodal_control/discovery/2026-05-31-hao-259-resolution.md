@@ -10,7 +10,9 @@ The codebase scanner flagged a "todo" annotation at line 19 of the virtual-AI-OS
 supervisor script:
 
 ```python
-TASK_BOARD_PATH_OPTION = "--todo-path"  # scanner-resolved: VAI-167 VAI-171 VAI-172 — CLI flag naming the backlog task-board file; not a deferred-work annotation.
+# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
+# task-board path option is CLI flag naming, not a deferred-work annotation.
+TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 ```
 
 ## Resolution
@@ -26,7 +28,9 @@ include the HAO-series task ID.
 The `scanner-resolved` comment was updated to include HAO-259:
 
 ```python
-TASK_BOARD_PATH_OPTION = "--todo-path"  # scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 — CLI flag naming the backlog task-board file; not a deferred-work annotation.
+# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
+# task-board path option is CLI flag naming, not a deferred-work annotation.
+TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 ```
 
 Note: `scripts/` is already listed in `CODEBASE_SCAN_SKIP_PREFIXES` in the supervisor,
