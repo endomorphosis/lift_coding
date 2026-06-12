@@ -19,7 +19,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     repo_doc_path as _repo_doc_path,
 )
 
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, environ={})
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root

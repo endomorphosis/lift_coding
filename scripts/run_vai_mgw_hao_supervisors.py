@@ -16,7 +16,7 @@ BOOTSTRAP_IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 
 
-_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
+_SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__, environ={})
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 BOOTSTRAP_IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
 REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
