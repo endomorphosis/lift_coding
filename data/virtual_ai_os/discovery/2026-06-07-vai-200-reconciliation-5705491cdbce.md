@@ -115,6 +115,7 @@ Work surface: `248` candidates, `20` sampled records.
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
       "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
     "name_status": "U\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md\nM\thallucinate_app",
