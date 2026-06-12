@@ -33,7 +33,7 @@ is appended for normal daemon parsing.
 - Merged `hallucinate_app` commit
   `4ae847c798fae2f83869b325cbeb104c74770d37` into the active VAI-321
   `hallucinate_app` submodule branch, producing merge commit
-  `83d431b016a9be616b32bc43edbd8f32461344aa`.
+  `c9f4464162a8d262f3fb9e0022daa34cd284c91c`.
 - Confirmed `/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json`
   has an empty `blocked_tasks` list, so VAI-126 is no longer held by strategy
   blocking state.
