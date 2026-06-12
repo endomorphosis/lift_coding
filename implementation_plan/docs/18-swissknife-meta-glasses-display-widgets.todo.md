@@ -551,7 +551,7 @@ into evidence-backed MGW follow-up tasks instead of an indefinite retry loop.
 
 ## MGW-241 Resolve 2 dirty backlogged worktrees blocked by unsupported_status
 
-## MGW-242 Resolve 1 preflight-conflicting backlogged worktree merges
+## MGW-242 Resolve 18 preflight-conflicting backlogged worktree merges
 
 ## MGW-243 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md:14
 
