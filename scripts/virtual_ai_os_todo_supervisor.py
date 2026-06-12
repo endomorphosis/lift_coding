@@ -57,6 +57,9 @@ OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
 OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
+# scanner-resolved: HAO-256 - "todo" in surplus_min_terms_per_todo maps to
+# the daemon's backlog task-entry threshold option; it is runtime wiring, not
+# a deferred-work annotation.
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
 # scanner-resolved: VAI-168, HAO-235 - "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES
 # is intentionally excluded because these supervisor wrappers reference task-board
