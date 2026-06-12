@@ -115,6 +115,13 @@ cadence remains parseable and resumable.
 
 ## VAI-026 Supervised autonomous implementation cadence
 
+- Priority: P2
+- Track: ops
+- Depends on: none
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, scripts/virtual_ai_os_todo_daemon.py, scripts/virtual_ai_os_todo_supervisor.py, tests/test_virtual_ai_os_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: The board records a supervised autonomous cadence that tells implementation agents to run the daemon before the supervisor, resume from `virtual_ai_os_task_state.json`, `virtual_ai_os_strategy.json`, and `virtual_ai_os_events.jsonl`, preserve dependency ordering through daemon state rather than markdown order, and keep the VAI daemon/supervisor wrappers parseable for isolated worktree implementation.
+
 ## VAI-027 Resolve merge retry-budget failure for VAI-019
 
 ## VAI-028 Resolve merge retry-budget failure for VAI-020
