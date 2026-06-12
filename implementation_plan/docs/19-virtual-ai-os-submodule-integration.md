@@ -37,6 +37,10 @@ The target state is not a loose collection of tools. It is one system that can:
 
 This checkpoint records the reviewed root topology in the current autonomous
 worktree without advancing submodule gitlinks or rewriting root `.gitmodules`.
+VAI-327 repaired the VAI-001 merge retry-budget blocker by confirming the
+failed branch only carried stale topology observations; the current checkpoint
+below is canonical and should not be overwritten by
+`implementation/vai-001-attempt-1-1781238154`.
 The root gitlinks at `HEAD` are:
 
 | Path | Recorded gitlink |
