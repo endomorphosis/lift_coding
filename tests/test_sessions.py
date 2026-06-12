@@ -6,14 +6,20 @@ from unittest.mock import MagicMock
 
 import pytest
 
-redis = pytest.importorskip("redis")
+try:
+    import redis
+except ImportError:  # pragma: no cover - exercised only when redis is not installed
+    redis = None
 
-from handsfree.sessions import SessionTokenManager
+from handsfree.sessions import SessionTokenManager, redis as session_redis
 
 
 @pytest.fixture
 def redis_client():
     """Create a Redis client for testing."""
+    if redis is None:
+        pytest.skip("Redis package not available for testing")
+
     try:
         client = redis.Redis(host="localhost", port=6379, db=15, decode_responses=False)
         # Test connection
@@ -290,7 +296,7 @@ class TestSessionTokenManagerEdgeCases:
         """Test handling of Redis connection errors."""
         # Create a mock Redis client that always fails
         mock_redis = MagicMock()
-        mock_redis.hgetall.side_effect = redis.RedisError("Connection failed")
+        mock_redis.hgetall.side_effect = session_redis.RedisError("Connection failed")
 
         manager = SessionTokenManager(mock_redis)
 
@@ -317,6 +323,47 @@ class TestSessionTokenManagerEdgeCases:
 
         assert result is None
         mock_redis.delete.assert_called_once_with(redis_key)
+
+    def test_validate_session_invalid_metadata_uses_empty_dict(self):
+        """Invalid stored metadata should not invalidate an otherwise valid session."""
+        mock_redis = MagicMock()
+        now = datetime.now(UTC)
+        mock_redis.hgetall.return_value = {
+            b"user_id": b"user-123",
+            b"device_id": b"device-456",
+            b"created_at": now.isoformat().encode(),
+            b"expires_at": (now + timedelta(hours=1)).isoformat().encode(),
+            b"metadata": b"{not-json",
+        }
+
+        manager = SessionTokenManager(mock_redis)
+
+        result = manager.validate_session("any_token")
+
+        assert result is not None
+        assert result.metadata == {}
+        mock_redis.delete.assert_not_called()
+
+    def test_validate_session_metadata_parser_runtime_error_is_not_swallowed(self, monkeypatch):
+        """Only expected metadata parse errors should fall back to empty metadata."""
+        mock_redis = MagicMock()
+        now = datetime.now(UTC)
+        mock_redis.hgetall.return_value = {
+            b"user_id": b"user-123",
+            b"device_id": b"device-456",
+            b"created_at": now.isoformat().encode(),
+            b"expires_at": (now + timedelta(hours=1)).isoformat().encode(),
+            b"metadata": b"{}",
+        }
+
+        def raise_runtime_error(_metadata):
+            raise RuntimeError("unexpected parser failure")
+
+        monkeypatch.setattr("handsfree.sessions.json.loads", raise_runtime_error)
+        manager = SessionTokenManager(mock_redis)
+
+        with pytest.raises(RuntimeError, match="unexpected parser failure"):
+            manager.validate_session("any_token")
 
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
