@@ -47,3 +47,7 @@ test -f data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md
 ```
 
 Exit code 0.
+
+A focused annotation-token scan of the VAI resolution and this MGW resolution
+returned no matches, confirming the historical false positive no longer
+re-enters the backlog.
