@@ -1,31 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: bfcbb7489fd92894018cfd5985dd74901281d5f5
+Fingerprint: 3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 117
+Candidate count: 118
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m external/ipfs_kit`
-- `M  hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `external/ipfs_kit`
-  - `hallucinate_app`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
-- Staged name status:
-  - `M	hallucinate_app`
+- Diff stat:
+  - `external/ipfs_kit | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -67,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `117` candidates, `20` sampled records.
+Work surface: `118` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -109,31 +105,22 @@ Work surface: `117` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 117,
+  "candidate_count": 118,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "bfcbb7489fd92894018cfd5985dd74901281d5f5",
+  "fingerprint": "3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit",
+    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 2,
       "other_dirty": 1
     },
-    "staged_name_status": "M\thallucinate_app",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "external/ipfs_kit",
-      "hallucinate_app"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m external/ipfs_kit",
-      "M  hallucinate_app"
+      " m external/ipfs_kit"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -166,9 +153,7 @@ Work surface: `117` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "external/ipfs_kit",
-    "hallucinate_app"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
