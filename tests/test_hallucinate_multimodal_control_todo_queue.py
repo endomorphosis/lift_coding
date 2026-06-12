@@ -807,8 +807,10 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     task_board_path = _temporary_board_path(repo)
     _write_pending_backlog_board(task_board_path)
     fixture_marker = "TO" + "DO"
+    flagged_source_line = f"# {fixture_marker}: this should wait for backlog drain"
+    assert flagged_source_line not in _source_text()
     (repo / "scan_target.py").write_text(
-        f"# {fixture_marker}: this should wait for backlog drain\n",
+        flagged_source_line + "\n",
         encoding="utf-8",
     )
     _git(repo, "add", task_board_path.name, "scan_target.py")
