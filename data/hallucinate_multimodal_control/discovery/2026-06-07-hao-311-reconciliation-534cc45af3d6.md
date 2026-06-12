@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 18b2d8de38574c3d3aec982c46ce0a4eda6033a6
+Fingerprint: f11ad1f39f44ec87cddff2f0d14d8e01ab2efd4c
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 183
+Candidate count: 182
 Priority: P1
 Track: ops
 
@@ -116,7 +116,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `183` candidates, `20` sampled records.
+Work surface: `182` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -164,7 +164,7 @@ Work surface: `183` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 183,
+  "candidate_count": 182,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md": 1,
@@ -184,7 +184,7 @@ Work surface: `183` candidates, `20` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-423-hao-159-implementation-retry-budget.md": 1,
     "external/ipfs_kit": 5,
     "hallucinate_app": 52,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 140,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 139,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 3,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 150,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
@@ -195,7 +195,7 @@ Work surface: `183` candidates, `20` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "18b2d8de38574c3d3aec982c46ce0a4eda6033a6",
+  "fingerprint": "f11ad1f39f44ec87cddff2f0d14d8e01ab2efd4c",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
