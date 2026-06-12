@@ -168,6 +168,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         llm_merge_resolver_fallback_command,
     )
     from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (
+        build_arg_parser,
         implementation_multi_supervisor_env_defaults,
         implementation_supervisor_namespace_track_configs,
     )
@@ -207,14 +208,16 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         llm_merge_resolver_fallback_command()
     )
     common_arg_values = [
-        launcher_args[index + 1]
-        for index, arg in enumerate(launcher_args)
-        if arg == "--common-arg"
+        arg.removeprefix("--common-arg=")
+        for arg in launcher_args
+        if arg.startswith("--common-arg=")
     ]
     assert "--worktree-reconciliation-max-merges" in common_arg_values
     assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "2"
     assert "--merge-reconciliation-max-merges" in common_arg_values
     assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "1"
+    parsed_launcher_args = build_arg_parser().parse_args(launcher_args)
+    assert parsed_launcher_args.common_arg == common_arg_values
     assert runner_module.default_launch_args(()) == ["--detach"]
     assert runner_module.default_launch_args(("--detach",)) == ["--detach"]
     assert runner_module.default_launch_args(("--duration-seconds", "5")) == [
