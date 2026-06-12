@@ -37,6 +37,20 @@ conflict for `ipfs-accelerate-agent-merge-resolver --events-path ... --apply`.
 `blocked_tasks` list, allowing the daemon to continue without the retry-budget
 loop.
 
+## 2026-06-12 Revalidation
+
+Revalidated MGW-027 from worktree
+`implementation/mgw-027-attempt-1-1781237521` at
+`b2b41e82b7dd2023a01f5486677770aa0e7c9074`. The MGW-022 implementation,
+reconciliation, and merge commits are all ancestors of the current attempt head.
+The expected HAO-044/HAO-042 merge-unblock artifact is present and retains the
+MGW-022 wording fix at line 25: "older backlog and discovery snapshots".
+
+The source retry-budget finding was for a dirty main checkout conflict rather
+than a semantic merge conflict, so there is still no live conflict for
+`ipfs-accelerate-agent-merge-resolver --events-path ... --apply`. The shared
+strategy file does not list `MGW-022` in `blocked_tasks`.
+
 ## Validation
 
 ```bash
