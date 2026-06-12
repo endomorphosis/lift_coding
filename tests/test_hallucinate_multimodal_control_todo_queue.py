@@ -52,6 +52,17 @@ def _load_tasks():
     return parse_task_file(TASK_BOARD_PATH, "## HAO-")
 
 
+def test_hallucinate_multimodal_queue_test_source_is_scan_clean():
+    original_sys_path = list(sys.path)
+    try:
+        sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+        from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
+    finally:
+        sys.path[:] = original_sys_path
+
+    assert scan_findings_in_file(Path(__file__), repo_root=REPO_ROOT) == []
+
+
 def _git(cwd: Path, *args: str) -> str:
     result = subprocess.run(
         ["git", *args],
