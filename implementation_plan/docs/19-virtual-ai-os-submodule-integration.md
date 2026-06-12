@@ -346,7 +346,7 @@ Build a layered test matrix:
 - integration: component-to-component routing
 - harness: hardware-free end-to-end flows
 - device: Android/iOS physical validation
-- ops: daemon, supervisor, and worktree automation — let the todo daemon/supervisor advance backlog items in isolated worktrees, verify worktree isolation on every merge, and confirm the supervisor backlog remains parseable after each cycle.
+- ops: daemon, supervisor, and worktree automation — queue backlog items through the repo-local backlog daemon and implementation supervisor, run each item in an isolated worktree, verify worktree isolation on every merge, and confirm the supervisor backlog remains parseable after each cycle.
 
 ## Test Matrix
 
