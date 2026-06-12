@@ -13,6 +13,8 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 ## Preconditions
 
 - [ ] Physical iPhone is on the target iOS version and paired to the test glasses
+- [ ] VAI-023 handoff packet is reviewed:
+      `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`
 - [ ] Meta AI app is installed, signed in with the test account, and can open `App Connections > Web apps`
 - [ ] Glasses firmware and Meta AI app are updated with no pending device/app update prompts
 - [ ] Mobile app uses a build that includes `expo-meta-wearables-dat`
@@ -34,6 +36,7 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 - [ ] iPhone physical run uses the same manifest, action IDs, operation order, and correlation ID family
 
 Evidence:
+- [ ] Reviewed VAI-023 handoff packet link or copy in the release ticket
 - [ ] `meta-rayban-display-simulator-trace.json`
 - [ ] Hosted `readiness.json` URL and linter result
 - [ ] Screenshot or note showing fixture and display state used for parity

@@ -17,6 +17,7 @@ Complete this template for each staged rollout checkpoint. Store the completed c
 - Glasses firmware version:
 - Meta AI app version:
 - Meta AI app Web App URL registered: (yes/no/link)
+- VAI-023 handoff packet:
 - DAT SDK target observed:
 - iPhone DAT build state: (SDK-unlinked fallback / SDK-linked native / bridge-only)
 - `MWDATCore` linked: (yes/no)
@@ -31,6 +32,7 @@ Complete this template for each staged rollout checkpoint. Store the completed c
 - Display Web App URL:
 - Web App readiness descriptor URL:
 - Simulator trace artifact:
+- Handoff bundle reviewed: (yes/no/link)
 
 | Flag | Value | Evidence source |
 |---|---|---|
