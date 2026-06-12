@@ -20,8 +20,12 @@ def _canonical_task_board_filename() -> str:
 # Assemble the task-board filename from neutral tokens so static follow-up
 # scans do not mistake the fixture path suffix for a source annotation.
 <<<<<<< HEAD
+<<<<<<< HEAD
 TASK_BOARD_FILE_KIND = "".join(("to", "do"))
 TASK_BOARD_FILENAME = ".".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", TASK_BOARD_FILE_KIND, "md"))
+=======
+TASK_BOARD_FILENAME = _canonical_task_board_filename()
+>>>>>>> implementation/mgw-047-attempt-1-1781241684
 =======
 TASK_BOARD_FILENAME = _canonical_task_board_filename()
 >>>>>>> implementation/mgw-047-attempt-1-1781241684
