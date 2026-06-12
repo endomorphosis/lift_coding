@@ -11,6 +11,7 @@ from .models import (
     CapabilityExecutionMode,
     CapabilityRuntimeSurface,
 )
+from .runtime_placement import resolve_virtual_ai_os_runtime_placement
 from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
 
@@ -36,6 +37,11 @@ def resolve_virtual_ai_os_runtime_route(
     )
     runtime_surface = _resolve_runtime_surface(entry.capability_id, execution_mode, preferred_surface)
     handler_ref, cli_command = _resolve_handler(entry.capability_id, execution_mode, runtime_surface)
+    placement = resolve_virtual_ai_os_runtime_placement(
+        entry.capability_id,
+        execution_mode,
+        runtime_surface,
+    )
     return AICapabilityRoute(
         capability_id=entry.capability_id,
         owner_repo=entry.owner_repo,
@@ -47,6 +53,10 @@ def resolve_virtual_ai_os_runtime_route(
         handler_ref=handler_ref,
         cli_command=cli_command,
         fallback_execution_mode=entry.fallback_execution_mode,
+        placement_layer=placement.placement_layer,
+        placement_target=placement.target_repo,
+        placement_reason=placement.reason,
+        placement_constraints=placement.constraints,
     )
 
 
