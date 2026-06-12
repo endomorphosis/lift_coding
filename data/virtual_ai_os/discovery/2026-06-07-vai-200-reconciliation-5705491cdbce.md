@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: c30a0a49d45b9026706ea9388836013ec127fde5
+Fingerprint: 3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 119
@@ -10,26 +10,18 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - ` m external/ipfs_kit`
-- `M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `external/ipfs_kit`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `M	external/ipfs_kit`
-- Staged name status:
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------`
-  - ` external/ipfs_kit                                  |  0`
-  - ` 2 files changed, 32 insertions(+), 12 deletions(-)`
+  - `external/ipfs_kit | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -116,25 +108,19 @@ Work surface: `119` candidates, `20` sampled records.
   "candidate_count": 119,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "c30a0a49d45b9026706ea9388836013ec127fde5",
+  "fingerprint": "3b2ca83adbbe1b9e19cd44b64e9da56c57fc3bb6",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 44 ++++++++++++++++------\n external/ipfs_kit                                  |  0\n 2 files changed, 32 insertions(+), 12 deletions(-)",
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_kit",
+    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 2,
       "other_dirty": 1
     },
-    "staged_name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "external/ipfs_kit",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      " m external/ipfs_kit",
-      "M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " m external/ipfs_kit"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -167,9 +153,7 @@ Work surface: `119` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-    "external/ipfs_kit",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
