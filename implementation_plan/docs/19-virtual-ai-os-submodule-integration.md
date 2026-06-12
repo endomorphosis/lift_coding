@@ -8,6 +8,7 @@ Created: 2026-05-22
 Refreshed: 2026-05-23
 MCP++ source re-check: 2026-05-25
 VAI-001 topology checkpoint: 2026-06-12
+VAI-015 pin refresh: 2026-06-12
 
 ## Goal
 
@@ -65,6 +66,37 @@ Pin guardrails:
   source resolution.
 - Evidence:
   [data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md](../../data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md)
+
+### 2026-06-12 VAI-015 pin refresh
+
+This checkpoint records the reviewed submodule pin state after the initial
+backlog (VAI-001 through VAI-014) merged into `main`.
+
+| Path | Refreshed gitlink | Change vs VAI-001 |
+| --- | --- | --- |
+| `Mcp-Plus-Plus` | `29343be704da4e193ff143bac7daae9b0f98435d` | unchanged |
+| `external/ipfs_accelerate` | `7913fc3a66b95cc1dc75143b84a2c4c77b838af1` | advanced |
+| `external/ipfs_datasets` | `45ff065a4208e01ed7b1034a35e1ef2ffc6420b9` | unchanged |
+| `external/ipfs_kit` | `58873ab257104981aa9ba7bee0c2368369716be7` | advanced (includes VAI-021 nested mapping fix) |
+| `external/meta-wearables-dat-android` | `25f3a6d4479b7a4a72f877977b865a11af990d04` | unchanged (uninitialized) |
+| `external/meta-wearables-dat-ios` | `a739e94181221e7f321304273bcda2272821b163` | unchanged (uninitialized) |
+| `hallucinate_app` | `5e2173fd2f825fa06572d3de8c7f281f570c43bc` | advanced |
+| `swissknife` | `8865ff3b872bda4bab492433bbfb858587b03df1` | unchanged |
+
+Automation guardrails refreshed by this checkpoint:
+
+- Root `git submodule status` remains the safe pin-check command.
+- `git submodule status --recursive` still exits non-zero (same nested
+  `.gitmodules` mapping failure as VAI-001); do not use recursive status as a
+  readiness gate in automation.
+- Do not run `git submodule update --init --recursive` from the root.
+- Do not advance `swissknife` automatically; its worktree carries ongoing work.
+- Do not add a lowercase `mcp_plus_plus` root submodule; the snake-case URL
+  still returns `Repository not found`.
+- `external/meta-wearables-dat-android` and `external/meta-wearables-dat-ios`
+  remain uninitialized; initialize only under a dedicated Meta-device task.
+- Evidence:
+  [data/virtual_ai_os/discovery/submodule-pins-vai-015-2026-06-12.md](../../data/virtual_ai_os/discovery/submodule-pins-vai-015-2026-06-12.md)
 
 ### Root-tracked submodules after alignment
 
