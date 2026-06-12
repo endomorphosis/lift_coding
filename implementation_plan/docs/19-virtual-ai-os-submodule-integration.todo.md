@@ -460,7 +460,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 001610d17dace5d566aa04d874faa4fea47b6f8d
+- Fingerprint: 2d0d07f6116f608b1e8b54af0a44eea7d6b3dd1c
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
