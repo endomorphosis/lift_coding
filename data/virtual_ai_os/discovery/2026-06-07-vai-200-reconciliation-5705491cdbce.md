@@ -1,10 +1,10 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 7e3d7dfbdbf310f75d9e65e8b07ceb562f0cc299
+Fingerprint: 1e90354069a17f584fd155a7ef81846b5c1e45be
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 32
+Candidate count: 33
 Priority: P1
 Track: ops
 
@@ -32,6 +32,7 @@ Track: ops
 - `implementation/vai-002-attempt-1-1781238461` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781238461`
 - `implementation/vai-003-attempt-1-1781233228` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781233228`
 - `implementation/vai-003-attempt-1-1781238678` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781238678`
+- `implementation/vai-003-attempt-1-1781238697` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781238697`
 - `implementation/vai-004-attempt-1-1781233842` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-004-attempt-1-1781233842`
 - `implementation/vai-005-attempt-1-1781234570` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-005-attempt-1-1781234570`
 - `implementation/vai-006-attempt-1-1781234828` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-006-attempt-1-1781234828`
@@ -44,7 +45,6 @@ Track: ops
 - `implementation/vai-214-attempt-1-1780995799` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-214-attempt-1-1780995799`
 - `implementation/vai-215-attempt-1-1780997204` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-215-attempt-1-1780997204`
 - `implementation/vai-216-attempt-1-1780997982` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-216-attempt-1-1780997982`
-- `implementation/vai-218-attempt-1-1780999166` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-218-attempt-1-1780999166`
 
 ## Why This Blocks Progress
 
@@ -63,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `32` candidates, `20` sampled records.
+Work surface: `33` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,10 +105,10 @@ Work surface: `32` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 32,
+  "candidate_count": 33,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "7e3d7dfbdbf310f75d9e65e8b07ceb562f0cc299",
+  "fingerprint": "1e90354069a17f584fd155a7ef81846b5c1e45be",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
@@ -137,6 +137,7 @@ Work surface: `32` candidates, `20` sampled records.
     "implementation/vai-002-attempt-1-1781238461",
     "implementation/vai-003-attempt-1-1781233228",
     "implementation/vai-003-attempt-1-1781238678",
+    "implementation/vai-003-attempt-1-1781238697",
     "implementation/vai-004-attempt-1-1781233842",
     "implementation/vai-005-attempt-1-1781234570",
     "implementation/vai-006-attempt-1-1781234828",
@@ -148,8 +149,7 @@ Work surface: `32` candidates, `20` sampled records.
     "implementation/vai-127-attempt-1-1780999997",
     "implementation/vai-214-attempt-1-1780995799",
     "implementation/vai-215-attempt-1-1780997204",
-    "implementation/vai-216-attempt-1-1780997982",
-    "implementation/vai-218-attempt-1-1780999166"
+    "implementation/vai-216-attempt-1-1780997982"
   ],
   "sample_count": 20,
   "sample_status_paths": [
@@ -163,6 +163,7 @@ Work surface: `32` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781238461",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781233228",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781238678",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781238697",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-004-attempt-1-1781233842",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-005-attempt-1-1781234570",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-006-attempt-1-1781234828",
@@ -174,8 +175,7 @@ Work surface: `32` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-127-attempt-1-1780999997",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-214-attempt-1-1780995799",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-215-attempt-1-1780997204",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-216-attempt-1-1780997982",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-218-attempt-1-1780999166"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-216-attempt-1-1780997982"
   ],
   "success_signals": [
     "candidate_count_decreases",
