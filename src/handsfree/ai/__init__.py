@@ -95,4 +95,5 @@ __all__ = [
     "resolve_virtual_ai_os_execution_mode",
     "resolve_virtual_ai_os_runtime_placement",
     "resolve_virtual_ai_os_runtime_route",
+    "supported_virtual_ai_os_runtime_surfaces",
 ]

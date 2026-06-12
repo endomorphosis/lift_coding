@@ -40,7 +40,7 @@ def resolve_virtual_ai_os_runtime_route(
     placement = resolve_virtual_ai_os_runtime_placement(
         entry.capability_id,
         execution_mode,
-        runtime_surface,
+        preferred_surface=runtime_surface,
     )
     return AICapabilityRoute(
         capability_id=entry.capability_id,
