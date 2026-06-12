@@ -9,13 +9,7 @@ Refreshed: 2026-05-23
 MCP++ source re-check: 2026-06-12
 VAI-001 topology checkpoint: 2026-06-12
 VAI-002 source alignment: 2026-06-12
-<<<<<<< HEAD
-<<<<<<< HEAD
 VAI-023 iPhone native DAT handoff packet: 2026-06-12
-=======
->>>>>>> implementation/mgw-047-attempt-1-1781241684
-=======
->>>>>>> implementation/mgw-047-attempt-1-1781241684
 
 ## Goal
 
