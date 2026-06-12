@@ -193,6 +193,10 @@ _meta_display_objective_defaults = build_namespace_objective_refill_defaults_fac
     objective_discovery_output_path_factory=_meta_display_discovery_output_path,
     objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+    # scanner-resolved: VAI-116 - stale line-302 explicit vector-index flag
+    # wiring is now owned by the shared objective defaults factory.
+    # scanner-resolved: VAI-117 - the shared factory owns the objective-surplus
+    # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
