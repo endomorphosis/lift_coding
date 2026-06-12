@@ -1,56 +1,53 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: a19239f2a8063dbcf87efeae53456488dc1657a1
+Fingerprint: 69efe5d22cc75e3e1f7dd2b935b66c4d0e2b18f7
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 19
+Candidate count: 20
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- `A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
-- `UU external/ipfs_kit`
+- ` m external/ipfs_kit`
 - ` M hallucinate_app`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU src/handsfree/transport/libp2p_bluetooth.py`
 - `?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
+- `?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `added=1, modified=2, unmerged=1, untracked=1`
+- Path categories: `modified=2, other_dirty=1, unmerged=2, untracked=2`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
   - `external/ipfs_kit`
   - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `src/handsfree/transport/libp2p_bluetooth.py`
   - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `U	external/ipfs_kit`
   - `M	external/ipfs_kit`
   - `M	hallucinate_app`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	src/handsfree/transport/libp2p_bluetooth.py`
+  - `M	src/handsfree/transport/libp2p_bluetooth.py`
 - Staged name status:
-  - `A	data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
-  - `U	external/ipfs_kit`
-- Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 69 ++++++++++++++--------`
-  - ` external/ipfs_kit                                  | Unmerged`
-  - ` external/ipfs_kit                                  |  0`
-  - ` hallucinate_app                                    |  2 +-`
-  - ` 3 files changed, 44 insertions(+), 27 deletions(-)`
-- Submodule summary:
-  - `* external/ipfs_kit 0000000...17acebc4 (710):`
-  - `  > Resolve auto-doc workflow merge conflict`
-  - ``
-  - `* hallucinate_app 51ecd25...3ef7327 (1):`
-  - `  > HAO: reconcile generated supervisor outputs`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	src/handsfree/transport/libp2p_bluetooth.py`
 - Untracked paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-001-attempt-1-1781231623` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623`
+- `implementation/vai-002-attempt-1-1781232308` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308`
 - `implementation/vai-041-attempt-1-1780994517` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-041-attempt-1-1780994517`
 - `implementation/vai-045-attempt-1-1780994816` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816`
 - `implementation/vai-046-attempt-1-1780995526` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526`
@@ -87,7 +84,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `19` candidates, `19` sampled records.
+Work surface: `20` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -129,38 +126,44 @@ Work surface: `19` candidates, `19` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 19,
+  "candidate_count": 20,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "a19239f2a8063dbcf87efeae53456488dc1657a1",
+  "fingerprint": "69efe5d22cc75e3e1f7dd2b935b66c4d0e2b18f7",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 69 ++++++++++++++--------\n external/ipfs_kit                                  | Unmerged\n external/ipfs_kit                                  |  0\n hallucinate_app                                    |  2 +-\n 3 files changed, 44 insertions(+), 27 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nU\texternal/ipfs_kit\nM\texternal/ipfs_kit\nM\thallucinate_app",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tsrc/handsfree/transport/libp2p_bluetooth.py\nM\tsrc/handsfree/transport/libp2p_bluetooth.py",
     "path_categories": {
-      "added": 1,
       "modified": 2,
-      "unmerged": 1,
-      "untracked": 1
+      "other_dirty": 1,
+      "unmerged": 2,
+      "untracked": 2
     },
-    "staged_name_status": "A\tdata/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md\nU\texternal/ipfs_kit",
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tsrc/handsfree/transport/libp2p_bluetooth.py",
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
       "external/ipfs_kit",
       "hallucinate_app",
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "src/handsfree/transport/libp2p_bluetooth.py",
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
-      "UU external/ipfs_kit",
+      " m external/ipfs_kit",
       " M hallucinate_app",
-      "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "UU src/handsfree/transport/libp2p_bluetooth.py",
+      "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
+      "?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
     ],
-    "submodule_summary": "* external/ipfs_kit 0000000...17acebc4 (710):\n  > Resolve auto-doc workflow merge conflict\n\n* hallucinate_app 51ecd25...3ef7327 (1):\n  > HAO: reconcile generated supervisor outputs",
     "untracked_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -171,6 +174,7 @@ Work surface: `19` candidates, `19` sampled records.
   ],
   "sample_branches": [
     "implementation/vai-001-attempt-1-1781231623",
+    "implementation/vai-002-attempt-1-1781232308",
     "implementation/vai-041-attempt-1-1780994517",
     "implementation/vai-045-attempt-1-1780994816",
     "implementation/vai-046-attempt-1-1780995526",
@@ -190,16 +194,19 @@ Work surface: `19` candidates, `19` sampled records.
     "implementation/vai-322-attempt-1-1781229856",
     "implementation/vai-323-attempt-1-1781230632"
   ],
-  "sample_count": 19,
+  "sample_count": 20,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
     "external/ipfs_kit",
     "hallucinate_app",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "src/handsfree/transport/libp2p_bluetooth.py",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-041-attempt-1-1780994517",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526",
