@@ -28,16 +28,16 @@ is appended for normal daemon parsing.
 
 - Verified VAI-107's intended implementation commit:
   `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-107-attempt-1-1780996157`
-  has parent commit `ce097e8b0a8882c03bc54a833f698415a35c0b1e`, which points
-  `hallucinate_app` at submodule commit
+  has commit `ce097e8b0a8882c03bc54a833f698415a35c0b1e`, which updates
+  `hallucinate_app` from submodule commit
+  `3c42df24bf22c1754cbce3c4861d1f3d3d8d1eb2` to
   `dc7f6504e2005a164cd7f92a3928600155b8b6af`.
 - Verified the active VAI-320 `hallucinate_app` checkout already contains
   `dc7f6504e2005a164cd7f92a3928600155b8b6af` as an ancestor of HEAD
-  `20c85c046c49595a97a1f0ef6701e9aaa6003960`, so the VAI-107 runtime fix is
+  `5db63f998ba307f0e2bb196a0b70aa6466d71409`, so the VAI-107 runtime fix is
   present in the owning submodule history.
 - Verified `/home/barberb/lift_coding/data/virtual_ai_os/state/virtual_ai_os_strategy.json`
-  no longer lists `VAI-107` in `blocked_tasks`; the only remaining blocked task
-  at repair time was `VAI-156`.
+  no longer lists `VAI-107` in `blocked_tasks`; the list is empty at repair time.
 - Resolved the local parseability blocker in
   `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md` by
   removing stale merge conflict markers around VAI-200/VAI-201 and marking
