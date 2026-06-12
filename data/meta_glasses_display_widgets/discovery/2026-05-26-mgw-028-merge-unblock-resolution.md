@@ -66,6 +66,24 @@ has an empty `blocked_tasks` list, so `MGW-023` is not blocked. No semantic
 merge conflict is present to pass to
 `ipfs-accelerate-agent-merge-resolver --events-path ... --apply`.
 
+## 2026-06-12 Revalidation
+
+Revalidated MGW-028 from worktree
+`implementation/mgw-028-attempt-1-1781238030` at
+`9d9ecf8354409e96607a8357105d4dff18990987`. The MGW-023 implementation
+commit, generated-state preservation commit, generated-backlog reconciliation
+commit, and final MGW-023 merge commit are all ancestors of the current
+attempt head.
+
+The expected HAO-051 resolution artifact is still present at
+`data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md`.
+The shared strategy file currently has unrelated blocked tasks, but `MGW-023`
+is absent from `blocked_tasks`, so the original source task is no longer held by
+the retry-budget guardrail. The historical failure mode remains dirty generated
+backlog/supervisor checkout state rather than a live semantic implementation
+conflict, so there is still no conflict payload for
+`ipfs-accelerate-agent-merge-resolver --events-path ... --apply`.
+
 ## Validation
 
 ```bash
