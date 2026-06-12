@@ -2804,3 +2804,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because MGW-239 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## MGW-252 Resolve merge retry-budget failure for MGW-178
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-178. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-178 from strategy blocked_tasks.
+
+## MGW-253 Resolve merge retry-budget failure for MGW-190
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-190. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-190 from strategy blocked_tasks.
+
+## MGW-254 Resolve merge retry-budget failure for MGW-191
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-254-mgw-191-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-191. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-254-mgw-191-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-191 from strategy blocked_tasks.
