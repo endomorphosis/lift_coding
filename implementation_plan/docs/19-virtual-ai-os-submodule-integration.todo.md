@@ -468,7 +468,11 @@ cadence remains parseable and resumable.
 - Priority: P1
 - Track: ops
 <<<<<<< HEAD
+<<<<<<< HEAD
 - Fingerprint: a34843847f13a7c76b597e4e18b731647e0ee52e
+=======
+- Fingerprint: 7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52
+>>>>>>> implementation/hao-268-attempt-1-1781238030
 =======
 - Fingerprint: be7b80862c79ac5fd763c49f716257f4aadedafe
 >>>>>>> implementation/vai-322-attempt-1-1781237562
