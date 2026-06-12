@@ -838,7 +838,7 @@ cadence remains parseable and resumable.
 
 ## VAI-327 Resolve merge retry-budget failure for VAI-001
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops

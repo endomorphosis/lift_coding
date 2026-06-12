@@ -140,8 +140,7 @@ def test_virtual_ai_os_daemon_progress_emits_mobile_display_widget_payload(
 ):
     state_path = tmp_path / "virtual_ai_os_task_state.json"
     events_path = tmp_path / "virtual_ai_os_events.jsonl"
-    # Keep these task-board fixture labels split so broad source scanners treat
-    # the scenario text as test data instead of backlog metadata.
+    # Keep the task-board fixture labels split so broad scanners leave them alone.
     task_queue_label = "to" + "do" + "-daemon"
     daemon_display_label = "to" + "do" + " daemon"
     title = f"Integrate ipfs_datasets_py {task_queue_label} state into HandsFree task orchestration"
