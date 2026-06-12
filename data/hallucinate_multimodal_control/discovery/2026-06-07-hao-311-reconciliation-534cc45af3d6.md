@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: bec55f7438fdd24e648a86519f94028636dece62
+Fingerprint: c2775a502c060b55d600e5010ed5e6fee1a8b7e4
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 25
+Candidate count: 45
 Priority: P1
 Track: ops
 
@@ -36,7 +36,7 @@ Track: ops
     - `hallucinate_app`
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--bb27a37d0655` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2833c7784009` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -111,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `25` candidates, `20` sampled records.
+Work surface: `45` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -159,15 +159,19 @@ Work surface: `25` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 25,
+  "candidate_count": 45,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md": 1,
-    "hallucinate_app": 15,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 13,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 16
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-314-codebase-scan-e0e818ca7fce.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-326-codebase-scan-42900ccea863.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-335-codebase-scan-7b425b8a660e.md": 1,
+    "external/ipfs_kit": 2,
+    "hallucinate_app": 18,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 29,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 28
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "bec55f7438fdd24e648a86519f94028636dece62",
+  "fingerprint": "c2775a502c060b55d600e5010ed5e6fee1a8b7e4",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -182,7 +186,7 @@ Work surface: `25` candidates, `20` sampled records.
     "implementation/hao-203-attempt-1-1780987641",
     "implementation/hao-205-attempt-2-1781229494",
     "implementation/hao-217-attempt-1-1781236753",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--bb27a37d0655",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2833c7784009",
     "implementation/hao-223-attempt-1-1780990818",
     "implementation/hao-223-attempt-1-1781237457",
     "implementation/hao-236-attempt-1-1781237706",
@@ -233,10 +237,14 @@ Work surface: `25` candidates, `20` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md"
+    "external/ipfs_kit",
+    "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-314-codebase-scan-e0e818ca7fce.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-326-codebase-scan-42900ccea863.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-335-codebase-scan-7b425b8a660e.md"
   ]
 }
 ```
