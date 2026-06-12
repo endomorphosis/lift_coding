@@ -478,6 +478,160 @@ def _collect_mobile_orb_receipt_cids(records: list[dict[str, Any]]) -> list[str]
     return _unique_mobile_orb_strings(values)
 
 
+def _mobile_orb_record_ref(record: dict[str, Any], fallback: str) -> str:
+    return (
+        _mobile_orb_string_from(record, "receipt_cid")
+        or _mobile_orb_string_from(record, "event_cid")
+        or _mobile_orb_string_from(record, "binding_handle")
+        or _mobile_orb_string_from(record, "subscription_id")
+        or _mobile_orb_string_from(record, "edge_session_id")
+        or fallback
+    )
+
+
+def _mobile_orb_receipt_summary_from(
+    *,
+    receipt: dict[str, Any],
+    source_record: str,
+) -> dict[str, Any] | None:
+    receipt_id = _mobile_orb_string_from(receipt, "receipt_id")
+    decision = receipt.get("policy_decision")
+    if not isinstance(decision, dict):
+        decision = {}
+    envelope = receipt.get("interaction_envelope")
+    if not isinstance(envelope, dict):
+        envelope = {}
+    normalized_intent = envelope.get("normalized_intent")
+    if not isinstance(normalized_intent, dict):
+        normalized_intent = {}
+
+    decision_id = _mobile_orb_string_from(decision, "decision_id")
+    policy_cid = _mobile_orb_string_from(
+        decision,
+        "compiled_policy_cid",
+    ) or _mobile_orb_string_from(
+        decision,
+        "policy_bundle_ref",
+        "policy_cid",
+    )
+    if receipt_id is None and decision_id is None:
+        return None
+
+    return {
+        "receipt_id": receipt_id,
+        "source_record": source_record,
+        "decision_id": decision_id,
+        "outcome": _mobile_orb_string_from(decision, "outcome") or "unknown",
+        "policy_cid": policy_cid,
+        "method": _mobile_orb_string_from(normalized_intent, "method"),
+        "target_ref": _mobile_orb_string_from(normalized_intent, "target_ref"),
+    }
+
+
+def _collect_mobile_orb_policy_receipts(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    receipts: list[dict[str, Any]] = []
+    seen: set[tuple[str | None, str | None, str]] = set()
+    for index, record in enumerate(records):
+        source_record = _mobile_orb_record_ref(record, f"record:{index}")
+        candidates: list[Any] = [record.get("mediation_receipt")]
+        display_action = record.get("display_widget_action")
+        if isinstance(display_action, dict):
+            candidates.append(display_action.get("mediation_receipt"))
+        result = record.get("result")
+        if isinstance(result, dict):
+            candidates.append(result.get("mediation_receipt"))
+            result_display_action = result.get("display_widget_action")
+            if isinstance(result_display_action, dict):
+                candidates.append(result_display_action.get("mediation_receipt"))
+
+        for candidate in candidates:
+            if not isinstance(candidate, dict):
+                continue
+            summary = _mobile_orb_receipt_summary_from(
+                receipt=candidate,
+                source_record=source_record,
+            )
+            if summary is None:
+                continue
+            key = (summary.get("receipt_id"), summary.get("decision_id"), source_record)
+            if key in seen:
+                continue
+            seen.add(key)
+            receipts.append(summary)
+    return receipts
+
+
+def _mobile_orb_receipt_integrity(
+    *,
+    records: list[dict[str, Any]],
+    receipt_cids: list[str],
+    policy_receipts: list[dict[str, Any]],
+) -> dict[str, Any]:
+    known_receipts = set(receipt_cids)
+    parent_receipts: list[Any] = []
+    records_missing_receipt = 0
+    for record in records:
+        if not _collect_mobile_orb_receipt_cids([record]):
+            records_missing_receipt += 1
+        parents = record.get("parent_receipt_cids")
+        if isinstance(parents, list):
+            parent_receipts.extend(parents)
+
+    outcome_counts: dict[str, int] = {}
+    missing_policy_cid_receipts: list[str] = []
+    for receipt in policy_receipts:
+        outcome = receipt.get("outcome") if isinstance(receipt.get("outcome"), str) else "unknown"
+        outcome_counts[outcome] = outcome_counts.get(outcome, 0) + 1
+        if not receipt.get("policy_cid"):
+            receipt_ref = receipt.get("receipt_id") or receipt.get("decision_id")
+            if isinstance(receipt_ref, str):
+                missing_policy_cid_receipts.append(receipt_ref)
+
+    orphan_parent_receipt_cids = [
+        item
+        for item in _unique_mobile_orb_strings(parent_receipts)
+        if item not in known_receipts
+    ]
+    return {
+        "records_total": len(records),
+        "records_with_receipt": len(records) - records_missing_receipt,
+        "records_missing_receipt": records_missing_receipt,
+        "policy_receipts_total": len(policy_receipts),
+        "outcomes": outcome_counts,
+        "missing_policy_cid_receipts": missing_policy_cid_receipts,
+        "orphan_parent_receipt_cids": orphan_parent_receipt_cids,
+    }
+
+
+def _mobile_orb_edge_health(
+    *,
+    binding_state: dict[str, Any],
+    receipt_integrity: dict[str, Any],
+    fallback_reasons: list[str],
+) -> dict[str, Any]:
+    degraded_reasons: list[Any] = []
+    if not binding_state.get("registered"):
+        degraded_reasons.append("edge_session_missing")
+    if receipt_integrity.get("records_missing_receipt"):
+        degraded_reasons.append("missing_policy_receipts")
+    if receipt_integrity.get("missing_policy_cid_receipts"):
+        degraded_reasons.append("missing_policy_cids")
+    if receipt_integrity.get("orphan_parent_receipt_cids"):
+        degraded_reasons.append("orphan_parent_receipts")
+    degraded_reasons.extend(fallback_reasons)
+    unique_degraded_reasons = _unique_mobile_orb_strings(degraded_reasons)
+    return {
+        "status": "degraded"
+        if unique_degraded_reasons
+        else "healthy"
+        if binding_state.get("registered")
+        else "unknown",
+        "registered": bool(binding_state.get("registered")),
+        "binding_status": binding_state.get("status"),
+        "degraded_reasons": unique_degraded_reasons,
+    }
+
+
 def _collect_mobile_orb_fallback_reasons(records: list[dict[str, Any]]) -> list[str]:
     values: list[Any] = []
     for record in records:
@@ -589,6 +743,21 @@ def _build_mobile_orb_diagnostics_contract(
         "dispatches": len(dispatches),
         "revocations": len(revocations),
     }
+    descriptor_cids = _collect_mobile_orb_descriptor_cids(records)
+    policy_cids = _collect_mobile_orb_policy_cids(records)
+    receipt_cids = _collect_mobile_orb_receipt_cids(records)
+    fallback_reasons = _collect_mobile_orb_fallback_reasons(records)
+    policy_receipts = _collect_mobile_orb_policy_receipts(records)
+    receipt_integrity = _mobile_orb_receipt_integrity(
+        records=records,
+        receipt_cids=receipt_cids,
+        policy_receipts=policy_receipts,
+    )
+    edge_health = _mobile_orb_edge_health(
+        binding_state=binding_state,
+        receipt_integrity=receipt_integrity,
+        fallback_reasons=fallback_reasons,
+    )
     return {
         "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
         "edge_session_id": binding_state["edge_session_id"],
@@ -603,11 +772,14 @@ def _build_mobile_orb_diagnostics_contract(
         },
         "backend_counts": backend_counts,
         "backend_capability_counts": backend_counts,
-        "descriptor_cids": _collect_mobile_orb_descriptor_cids(records),
-        "policy_cids": _collect_mobile_orb_policy_cids(records),
+        "descriptor_cids": descriptor_cids,
+        "policy_cids": policy_cids,
         "binding_state": binding_state,
-        "receipt_cids": _collect_mobile_orb_receipt_cids(records),
-        "fallback_reasons": _collect_mobile_orb_fallback_reasons(records),
+        "receipt_cids": receipt_cids,
+        "fallback_reasons": fallback_reasons,
+        "policy_receipts": policy_receipts,
+        "receipt_integrity": receipt_integrity,
+        "edge_health": edge_health,
     }
 
 
