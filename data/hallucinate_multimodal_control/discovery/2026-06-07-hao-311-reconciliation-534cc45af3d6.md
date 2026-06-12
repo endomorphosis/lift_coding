@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: d6cdbca1f94cdeed0c806b0bf92290f498c79b83
+Fingerprint: bec55f7438fdd24e648a86519f94028636dece62
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 26
+Candidate count: 25
 Priority: P1
 Track: ops
 
@@ -36,7 +36,7 @@ Track: ops
     - `hallucinate_app`
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--f1ad7b9b995b` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--bb27a37d0655` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -111,7 +111,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `26` candidates, `20` sampled records.
+Work surface: `25` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -159,15 +159,15 @@ Work surface: `26` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 26,
+  "candidate_count": 25,
   "conflict_path_counts": {
     "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md": 1,
     "hallucinate_app": 15,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 14,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 17
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 13,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 16
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "d6cdbca1f94cdeed0c806b0bf92290f498c79b83",
+  "fingerprint": "bec55f7438fdd24e648a86519f94028636dece62",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -182,7 +182,7 @@ Work surface: `26` candidates, `20` sampled records.
     "implementation/hao-203-attempt-1-1780987641",
     "implementation/hao-205-attempt-2-1781229494",
     "implementation/hao-217-attempt-1-1781236753",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--f1ad7b9b995b",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--bb27a37d0655",
     "implementation/hao-223-attempt-1-1780990818",
     "implementation/hao-223-attempt-1-1781237457",
     "implementation/hao-236-attempt-1-1781237706",
