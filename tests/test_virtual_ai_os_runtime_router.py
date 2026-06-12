@@ -87,12 +87,24 @@ def test_runtime_router_allows_swissknife_orb_override_for_remote_capability():
     assert route.handler_ref == "swissknife.orb::dataset_discovery"
 
 
+<<<<<<< HEAD
 def test_runtime_router_defaults_ui_render_sessions_to_swissknife_orb():
     route = resolve_virtual_ai_os_runtime_route("ui_render_session")
 
     assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
     assert route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
     assert route.handler_ref == "swissknife.orb::ui_render_session"
+=======
+def test_runtime_router_allows_hallucinate_operator_console_override_for_remote_capability():
+    route = resolve_virtual_ai_os_runtime_route(
+        "dataset_discovery",
+        preferred_surface=CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+    )
+
+    assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert route.runtime_surface == CapabilityRuntimeSurface.OPERATOR_CONSOLE
+    assert route.handler_ref == "hallucinate_app/index.js#operator_console"
+>>>>>>> implementation/vai-007-attempt-1-1781240539
 
 
 def test_runtime_router_rejects_invalid_surface_for_direct_import_capability():
@@ -187,6 +199,7 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
     assert plan.payload["artifact_refs"]["receipt_ref"] == "bafybeivai019receipt"
 
 
+<<<<<<< HEAD
 def test_swissknife_orb_dispatch_metadata_resolves_mobile_runtime_binding():
     plan = CapabilityRoutingKernel().dispatch_task(
         CapabilityDispatchRequest(
@@ -202,6 +215,26 @@ def test_swissknife_orb_dispatch_metadata_resolves_mobile_runtime_binding():
     assert runtime_binding["transport"] == "mcp-server"
     assert runtime_binding["server_family"] == "ipfs_datasets"
     assert runtime_binding["tool_name"] == "dataset_discovery"
+=======
+def test_capability_routing_kernel_builds_hallucinate_operator_console_plan():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+            source_surface="todo_daemon",
+            payload={"task_id": "VAI-007"},
+        )
+    )
+
+    assert plan.route.runtime_surface == CapabilityRuntimeSurface.OPERATOR_CONSOLE
+    assert plan.route.handler_ref == "hallucinate_app/index.js#operator_console"
+    assert [entry.surface_id for entry in plan.entrypoints] == [
+        "hallucinate_app",
+        "mobile_glasses",
+    ]
+    assert plan.entrypoints[0].role == "operator_console"
+    assert plan.payload == {"task_id": "VAI-007"}
+>>>>>>> implementation/vai-007-attempt-1-1781240539
 
 
 def test_runtime_router_normalizes_route_planning_errors():

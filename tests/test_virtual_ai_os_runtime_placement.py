@@ -48,3 +48,15 @@ def test_runtime_placement_routes_orb_override_to_swissknife_layer():
     assert route.placement_layer == CapabilityPlacementLayer.SWISSKNIFE_ORB
     assert route.placement_target == "endomorphosis/swissknife"
     assert "receipt_backed_operator_fallback" in route.placement_constraints
+
+
+def test_runtime_placement_routes_operator_console_override_to_hallucinate_app_layer():
+    route = resolve_virtual_ai_os_runtime_route(
+        "dataset_discovery",
+        preferred_surface=CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+    )
+
+    assert route.placement_layer == CapabilityPlacementLayer.OPERATOR_CONSOLE
+    assert route.placement_target == "endomorphosis/hallucinate_app"
+    assert "daemon_manager_receipts_required" in route.placement_constraints
+    assert "swissknife_virtual_desktop_fallback" in route.placement_constraints
