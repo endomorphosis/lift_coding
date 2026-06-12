@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 5730a0a4cce733204d39a02d804d12d6a4383fa7
+Fingerprint: b830947875c47dc1daa4a418a29310a2a20451ac
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 22
@@ -10,18 +10,37 @@ Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m external/ipfs_kit`
+- ` M hallucinate_app`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `other_dirty=1`
+- Path categories: `modified=2, other_dirty=1, unmerged=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `external/ipfs_kit`
+  - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
+  - `M	hallucinate_app`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Staged name status:
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `external/ipfs_kit | 0`
-  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 22 +++++++++++-----------`
+  - ` external/ipfs_kit                                  |  0`
+  - ` hallucinate_app                                    |  2 +-`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md | 12 ++++++++++++`
+  - ` 4 files changed, 24 insertions(+), 12 deletions(-)`
+- Submodule summary:
+  - `* hallucinate_app 80398cb...25cdd61 (1):`
+  - `  > HAO: reconcile generated supervisor outputs`
 
 ## Sample Branches Or Worktrees
 
@@ -108,20 +127,30 @@ Work surface: `22` candidates, `20` sampled records.
   "candidate_count": 22,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "5730a0a4cce733204d39a02d804d12d6a4383fa7",
+  "fingerprint": "b830947875c47dc1daa4a418a29310a2a20451ac",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
-    "name_status": "M\texternal/ipfs_kit",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 22 +++++++++++-----------\n external/ipfs_kit                                  |  0\n hallucinate_app                                    |  2 +-\n ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged\n ...swissknife-meta-glasses-display-widgets.todo.md | 12 ++++++++++++\n 4 files changed, 24 insertions(+), 12 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "other_dirty": 1
+      "modified": 2,
+      "other_dirty": 1,
+      "unmerged": 1
     },
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "external/ipfs_kit"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "external/ipfs_kit",
+      "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " m external/ipfs_kit"
-    ]
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " m external/ipfs_kit",
+      " M hallucinate_app",
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    ],
+    "submodule_summary": "* hallucinate_app 80398cb...25cdd61 (1):\n  > HAO: reconcile generated supervisor outputs"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -153,7 +182,10 @@ Work surface: `22` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "external/ipfs_kit"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "external/ipfs_kit",
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",
