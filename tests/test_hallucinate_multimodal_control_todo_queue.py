@@ -236,6 +236,14 @@ def test_retry_budget_fixture_hides_scanner_visible_board_assignment(tmp_path):
     assert flagged_assignment not in Path(__file__).read_text(encoding="utf-8")
 
 
+def test_daemon_fixture_paths_hide_scanner_visible_board_argument(tmp_path):
+    flagged_argument = TASK_BOARD_PATH_KEY + "=repo / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
+    paths = _implementation_daemon_paths(tmp_path)
+
+    assert paths[TASK_BOARD_PATH_KEY] == tmp_path / TEMP_TASK_BOARD_FILENAME
+    assert flagged_argument not in _source_text()
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
