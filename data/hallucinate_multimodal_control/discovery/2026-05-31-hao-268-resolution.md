@@ -30,12 +30,14 @@ to:
 
 ```python
 except Exception as e:
-    # Metrics update failures must not disrupt cache operations; log and continue
-    logger.exception("Error updating cache <x> metrics: %s", e)
+    # Metrics are best-effort; keep cache reads working while preserving the traceback.
+    logger.exception("Error updating cache <x> metrics for %s: %s", cache_type, e)
 ```
 
 This matches the `except Exception as e:` pattern used everywhere else in the file
-and makes the intentional swallow explicit with a clarifying comment.
+and makes the intentional swallow explicit with a clarifying comment. The log now
+includes the affected cache type so a contained metrics failure can be traced back
+to the cache path that triggered it.
 
 ## Validation
 
