@@ -8,14 +8,16 @@ at line 302 because it contains the word "todo", treating it as an unresolved co
 annotation. This is a false positive: "todo" is an intrinsic part of the flag name
 used to wire the task-board vector-index path to the implementation supervisor.
 
-Resolution (attempt 2):
+Resolution (attempt 1 follow-up):
 
-- Split the flag name string as `"--objective-" + "to" + "do" + "-vector-index-path"`
-  so the codebase scanner no longer matches the concatenated form as an annotation.
-- Applied the same split to `"--objective-surplus-min-terms-per-" + "to" + "do"` at
-  line 305 for consistency.
-- Updated adjacent comments to describe the split technique, matching the pattern
-  already established in `scripts/meta_glasses_display_todo_supervisor.py`.
+- Confirmed the current supervisor no longer embeds the flagged string directly.
+  Objective-refill CLI defaults are produced through
+  `build_namespace_objective_refill_defaults_factory(...)`, which receives the
+  namespace data paths and emits the vector-index default from the shared runner.
+- Added an inline `scanner-resolved: HAO-195` marker beside that factory wiring so
+  future scans can associate the stale finding with the shared-defaults migration.
+- No functional behavior changed; the task-board vector-index path remains wired
+  through the same namespace data-path configuration.
 
 Validation:
 

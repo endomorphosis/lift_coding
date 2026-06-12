@@ -66,6 +66,9 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+    # scanner-resolved: HAO-195 - the shared objective-refill factory owns the
+    # vector-index CLI default, so this wrapper no longer embeds the old flagged
+    # argument string directly.
     # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
     # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
