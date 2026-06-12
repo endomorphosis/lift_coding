@@ -43,6 +43,15 @@ def _load_tasks():
     return parse_task_file(TASK_BOARD_PATH, "## MGW-")
 
 
+def test_meta_display_queue_tests_have_no_codebase_scan_findings():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
+
+    findings = scan_findings_in_file(Path(__file__), repo_root=REPO_ROOT)
+
+    assert findings == []
+
+
 def test_meta_glasses_display_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
