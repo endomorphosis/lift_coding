@@ -177,6 +177,24 @@ Display widget rollout observability uses these metric names in the `/v1/metrics
 | `handsfree_display_widget_bridge_error_total` | Mobile bridge errors reported for widget rendering. |
 | `handsfree_display_widget_render_latency_ms` | Display widget render latency samples in milliseconds, reported with p50/p95/count. |
 
+## Virtual AI OS Component Repos
+
+- `HANDSFREE_VAI_IPFS_DATASETS_ROOT`
+- `HANDSFREE_VAI_IPFS_ACCELERATE_ROOT`
+- `HANDSFREE_VAI_IPFS_KIT_ROOT`
+- `HANDSFREE_VAI_SWISSKNIFE_ROOT`
+- `HANDSFREE_VAI_HALLUCINATE_APP_ROOT`
+- `HANDSFREE_VAI_MCP_PLUS_PLUS_ROOT`
+- `HANDSFREE_VAI_META_DAT_ANDROID_ROOT`
+- `HANDSFREE_VAI_META_DAT_IOS_ROOT`
+
+Defaults are repo-relative submodule paths declared in
+[src/handsfree/virtual_ai_os_components.py](../src/handsfree/virtual_ai_os_components.py).
+These variables override local component roots for integration harnesses and
+developer worktrees. They do not change the pin contract: the root
+superproject gitlink remains the reviewed pin, and bootstrap must not advance a
+component checkout without an explicit pin-refresh task.
+
 ## TTS/STT and OCR
 
 - `OPENAI_API_KEY`

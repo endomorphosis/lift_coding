@@ -416,6 +416,38 @@ python3 scripts/virtual_ai_os_llm_router.py --task-id VAI-003
 
 Use `--implement` with the supervisor when you want the `ipfs_datasets_py` implementation supervisor to start working tasks in ephemeral worktrees.
 
+## Component Repo Contracts
+
+VAI-009 defines the environment, pin, and bootstrap contract for component
+repositories in `src/handsfree/virtual_ai_os_components.py` and surfaces it
+through `get_virtual_ai_os_observability_contract`.
+
+The contract keeps these guardrails stable:
+
+- Root `.gitmodules` is the component source contract. The code-level contract
+  must match every root submodule path and URL.
+- The superproject gitlink is the reviewed pin. Bootstrap code may initialize
+  or sync a component worktree, but must not fetch, checkout, or advance a
+  component without an explicit pin-refresh task.
+- Recursive bootstrap remains disabled for the component set. `external/ipfs_kit`
+  uses a status-only nested bootstrap mode until nested pins are explicitly
+  reviewed.
+- Meta DAT Android and iOS repositories are optional device-validation
+  references. They remain status-only unless a physical/native validation task
+  needs the local checkout.
+- Component root overrides are environment-driven:
+  `HANDSFREE_VAI_IPFS_DATASETS_ROOT`,
+  `HANDSFREE_VAI_IPFS_ACCELERATE_ROOT`,
+  `HANDSFREE_VAI_IPFS_KIT_ROOT`,
+  `HANDSFREE_VAI_SWISSKNIFE_ROOT`,
+  `HANDSFREE_VAI_HALLUCINATE_APP_ROOT`,
+  `HANDSFREE_VAI_MCP_PLUS_PLUS_ROOT`,
+  `HANDSFREE_VAI_META_DAT_ANDROID_ROOT`, and
+  `HANDSFREE_VAI_META_DAT_IOS_ROOT`.
+
+Evidence:
+[data/virtual_ai_os/discovery/component-repo-contracts-vai-009-2026-06-12.md](../../data/virtual_ai_os/discovery/component-repo-contracts-vai-009-2026-06-12.md)
+
 ## Success Criteria
 
 The plan is successful when:
