@@ -19,7 +19,7 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-191.
 
 ## Resolution
 
-This is a **false positive**. The word "todo" appears in the CLI flag name
+This is a **false positive**. The word "todo" appeared in the CLI flag name
 `--objective-surplus-min-terms-per-todo`, where it refers to backlog task entries (work-item queue),
 not a deferred code action. The current supervisor now delegates those defaults
 through `OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs()`, so the comment
