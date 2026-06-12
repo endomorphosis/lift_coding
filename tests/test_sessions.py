@@ -345,18 +345,8 @@ class TestSessionTokenManagerEdgeCases:
         assert result.metadata == {}
         mock_redis.delete.assert_not_called()
 
-<<<<<<< HEAD
     def test_validate_session_does_not_swallow_unexpected_metadata_errors(self, monkeypatch):
         """Unexpected metadata parser failures should surface for diagnosis."""
-=======
-<<<<<<< HEAD
-    def test_validate_session_metadata_parser_runtime_error_is_not_swallowed(self, monkeypatch):
-        """Only expected metadata parse errors should fall back to empty metadata."""
-=======
-    def test_validate_session_does_not_swallow_unexpected_metadata_errors(self, monkeypatch):
-        """Unexpected metadata parser failures should surface for diagnosis."""
->>>>>>> implementation/mgw-044-attempt-1-1781236618
->>>>>>> implementation/vai-322-attempt-1-1781237562
         mock_redis = MagicMock()
         now = datetime.now(UTC)
         mock_redis.hgetall.return_value = {
@@ -367,26 +357,6 @@ class TestSessionTokenManagerEdgeCases:
             b"metadata": b"{}",
         }
 
-<<<<<<< HEAD
-        def fail_json_loads(_value):
-            raise RuntimeError("parser failed")
-=======
-<<<<<<< HEAD
-        def raise_runtime_error(_metadata):
-            raise RuntimeError("unexpected parser failure")
->>>>>>> implementation/vai-322-attempt-1-1781237562
-
-        monkeypatch.setattr(sessions_module.json, "loads", fail_json_loads)
-        manager = SessionTokenManager(mock_redis)
-
-        with pytest.raises(RuntimeError, match="parser failed"):
-            manager.validate_session("any_token")
-
-<<<<<<< HEAD
-        mock_redis.delete.assert_not_called()
-
-=======
-=======
         def fail_json_loads(_value):
             raise RuntimeError("parser failed")
 
@@ -397,9 +367,6 @@ class TestSessionTokenManagerEdgeCases:
             manager.validate_session("any_token")
 
         mock_redis.delete.assert_not_called()
-
->>>>>>> implementation/mgw-044-attempt-1-1781236618
->>>>>>> implementation/vai-322-attempt-1-1781237562
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
         session = session_manager.create_session("user-123", "device-456", metadata={})
