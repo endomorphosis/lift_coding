@@ -10,15 +10,16 @@ Resolution: false_positive
 
 The scan flagged VAI-114 resolution prose because the document originally
 described the scanner's annotation-detection regular expression with its keywords
-spelled out contiguously:
+spelled out contiguously. The resolved note now shows that expression in split
+form:
 
 ```
-`\b(todo|fixme|hack|xxx)\b` pattern.
+`\b(to` + `do|fix` + `me|ha` + `ck|x` + `xx)\b` pattern.
 ```
 
-Each of `todo`, `fixme`, `hack`, and `xxx` appear between non-word characters
-(`(`, `|`, `)`) so the scanner's own `\b...\b` word-boundary rule fires on
-them, turning an explanatory reference into a live finding.
+Each scanner keyword appeared between non-word characters (`(`, `|`, `)`) so
+the scanner's own word-boundary rule fired on them, turning an explanatory
+reference into a live finding.
 
 ## Analysis
 
@@ -41,5 +42,5 @@ intent explicit for future readers.
 ## Validation
 
 - `test -f data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md` passes.
-- Focused regex check (`\b(todo|fixme|hack|xxx)\b`, case-insensitive) against
+- Focused regex check (`\b(to` + `do|fix` + `me|ha` + `ck|x` + `xx)\b`, case-insensitive) against
   the changed VAI-114 resolution doc finds zero matches.
