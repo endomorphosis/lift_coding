@@ -548,7 +548,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
 
 def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
-    task_board_path = tmp_path / TEMP_TASK_BOARD_FILENAME
+    task_board_path = _temporary_board_path(tmp_path)
     events_path = tmp_path / "events.jsonl"
     strategy_path = tmp_path / "strategy.json"
     discovery_dir = tmp_path / "discovery"
