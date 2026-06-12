@@ -1,33 +1,31 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 6cb205a12eba88da0ffe8611c686fe6a3f2f7bd8
+Fingerprint: 427144b479320f057d005c4420c774942f101e85
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 172
+Candidate count: 174
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- `M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md`
 - ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, unmerged=1`
+- Path categories: `modified=2`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md`
   - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Staged name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Diff stat:
+  - `...026-05-27-hao-168-codebase-scan-6dfbe572b893.md |  9 ++++++++`
+  - ` ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 25 ++++++++++++++--------`
+  - ` 2 files changed, 25 insertions(+), 9 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -69,7 +67,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `172` candidates, `20` sampled records.
+Work surface: `174` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -111,31 +109,24 @@ Work surface: `172` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 172,
+  "candidate_count": 174,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "6cb205a12eba88da0ffe8611c686fe6a3f2f7bd8",
+  "fingerprint": "427144b479320f057d005c4420c774942f101e85",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "...026-05-27-hao-168-codebase-scan-6dfbe572b893.md |  9 ++++++++\n ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 25 ++++++++++++++--------\n 2 files changed, 25 insertions(+), 9 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
     "path_categories": {
-      "modified": 2,
-      "unmerged": 1
+      "modified": 2
     },
-    "staged_name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
     ],
     "status_short": [
-      "M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md",
-      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -168,9 +159,8 @@ Work surface: `172` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-273-resolution.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-168-codebase-scan-6dfbe572b893.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
