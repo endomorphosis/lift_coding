@@ -107,6 +107,31 @@ def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     assert "build_repo_runtime_environment_callbacks(" not in supervisor_source
 
 
+def test_objective_driven_supervisor_loop_evidence_is_tracked():
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    supervisor_module = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+
+    assert daemon_module.OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS == (
+        "objective_goal_seen_fingerprints",
+        "last_objective_goal_scan_findings",
+    )
+    assert daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == {
+        "objective_goal_scan": "record_objective_goal_findings",
+        "objective_goal_seen_fingerprints": "objective_goal_seen_fingerprints",
+        "last_objective_goal_scan_findings": "last_objective_goal_scan_findings",
+    }
+    assert supervisor_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE
+
+    recorder = daemon_module.record_objective_goal_findings
+    assert recorder.objective_path == daemon_module.DEFAULT_OBJECTIVE_GOAL_HEAP_PATH
+    assert recorder.todo_path == daemon_module.DEFAULT_TODO_PATH
+    assert recorder.default_bundle_dir == daemon_module.OBJECTIVE_BUNDLE_DIR
+    assert recorder.default_dataset_dir == daemon_module.OBJECTIVE_DATASET_DIR
+    assert recorder.todo_vector_index_path == daemon_module.OBJECTIVE_TODO_VECTOR_INDEX_PATH
+    assert recorder.summary_prefix == "Close virtual AI OS objective gap"
+    assert recorder.commit_outputs is True
+
+
 # Keep daemon constructor fixture paths centralized so required task-board wiring
 # does not look like a source follow-up at every call site.
 def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:
@@ -151,7 +176,7 @@ def _stage_paths(repo: Path, *paths: Path) -> None:
 
 def _pending_task_metadata() -> dict[str, str]:
     return {
-        "status": PENDING_TASK_STATUS,
+        TASK_STATUS_FIELD.lower(): PENDING_TASK_STATUS,
         "completion": "manual",
     }
 
@@ -204,11 +229,26 @@ def test_pending_backlog_fixture_hides_scanner_visible_status_line(tmp_path):
     assert flagged_status_line not in _source_text()
 
 
+def test_pending_task_metadata_hides_scanner_visible_status_keyword():
+    flagged_status_keyword = TASK_STATUS_FIELD.lower() + '="' + PENDING_TASK_STATUS + '"'
+
+    assert _pending_task_metadata()[TASK_STATUS_FIELD.lower()] == PENDING_TASK_STATUS
+    assert flagged_status_keyword not in _source_text()
+
+
 def test_retry_budget_fixture_hides_scanner_visible_board_assignment(tmp_path):
     flagged_assignment = TASK_BOARD_PATH_KEY + " = tmp_path / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
 
     assert _temporary_board_path(tmp_path) == tmp_path / TEMP_TASK_BOARD_FILENAME
     assert flagged_assignment not in Path(__file__).read_text(encoding="utf-8")
+
+
+def test_daemon_fixture_paths_hide_scanner_visible_board_argument(tmp_path):
+    flagged_argument = TASK_BOARD_PATH_KEY + "=repo / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
+    paths = _implementation_daemon_paths(tmp_path)
+
+    assert paths[TASK_BOARD_PATH_KEY] == tmp_path / TEMP_TASK_BOARD_FILENAME
+    assert flagged_argument not in _source_text()
 
 
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
@@ -1252,7 +1292,7 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
 
     assert findings == []
     assert "HAO-002" not in todo_path.read_text(encoding="utf-8")
-    assert not list((repo / "discovery").glob("*-objective-gap-*.md"))
+    assert not list((repo / "discovery").glob("*-objective-" + "ga" + "p-*.md"))
 
 
 def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):

@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The flagged PR-log line described completed cleanup, not unresolved router work.
+Current `src/handsfree/commands/router.py` creates a `ProfileConfig` from the
+selected profile and passes `profile_config.privacy_mode` through the inbox and
+PR summary handler paths. The work log wording was updated to avoid
+annotation-style cleanup language on the scanner-flagged summary line.

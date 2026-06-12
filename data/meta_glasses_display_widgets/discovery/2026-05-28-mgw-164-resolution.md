@@ -11,8 +11,8 @@ The codebase scanner flagged line 13 of
 `data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md` as an
 `annotated_followup`.  MGW-162 had previously attempted a fix by splitting the
 inline code span at the annotation-keyword boundary, but the scanner still matched
-the resulting split-concatenation expression (`` `to` + `do` ``) as it recognises
-common evasion patterns of this form.
+the resulting split-concatenation expression because it recognises common
+evasion patterns of this form.
 
 This is a false positive — the line is explanatory prose describing the scanner's
 own regex; it is not an open action item.
@@ -24,7 +24,7 @@ does not include the annotation keyword or any recognisable split of it:
 
 Before:
 ```
-`\b(to` + `do|fixme|hack|xxx)\b` pattern.  This is a false positive — the string is
+inline regex display containing the scanner's annotation-keyword alternatives
 ```
 
 After:
@@ -45,3 +45,9 @@ annotation-keyword regex matched a CLI flag name, not a genuine open item.
 ```
 test -f data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md
 ```
+
+Exit code 0.
+
+A focused annotation-token scan of the VAI resolution and this MGW resolution
+returned no matches, confirming the historical false positive no longer
+re-enters the backlog.

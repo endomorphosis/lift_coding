@@ -23,3 +23,17 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair Resolution
+
+The HAO-298 receipt implementation is present in
+`hallucinate_app/python/hallucinate_app/control_surface_receipts.py` in the
+`hallucinate_app` submodule. The `_json_safe` `as_dict()` fallback isolates the
+hook call from recursive serialization, logs direct hook failures at warning
+level with traceback information, and allows nested serialization failures from
+a successful hook to propagate.
+
+The semantic implementation is covered by
+`hallucinate_app/python/hallucinate_app/test/test_control_surface_receipts.py`.
+This repair marks HAO-413 completed in the submodule backlog so the supervisor
+can release HAO-298 from `blocked_tasks`.

@@ -19,3 +19,12 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The finding was stale tracker wording, not a missing runner implementation. The
+referenced artifacts are present in the repo: `src/handsfree/agents/runner.py`,
+`scripts/minimal_agent_runner.py`, `docs/MINIMAL_AGENT_RUNNER.md`, and
+`tests/test_minimal_runner.py`. `tracking/PR-079-agent-runner-minimal.md` now
+states that these are shipped artifacts and removes the line-7 maintenance
+instruction that could be re-ingested as unresolved work.

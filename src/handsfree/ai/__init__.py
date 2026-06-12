@@ -7,10 +7,16 @@ from .capabilities import (
     list_ai_capabilities,
 )
 from .capability_registry import (
+    build_virtual_ai_os_result_envelope,
     build_virtual_ai_os_execution_matrix,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
+)
+from .runtime_placement import (
+    default_virtual_ai_os_runtime_surface,
+    resolve_virtual_ai_os_runtime_placement,
+    supported_virtual_ai_os_runtime_surfaces,
 )
 from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .history import discover_failure_history_cids
@@ -25,7 +31,11 @@ from .observability import (
 )
 from .models import (
     AICapabilityRequest,
+    AICapabilityArtifactRefs,
+    AICapabilityExecutionTrace,
     AICapabilityRegistryEntry,
+    AICapabilityResultEnvelope,
+    AICapabilityRuntimePlacement,
     AICapabilityRoute,
     AICapabilityResult,
     AICapabilitySpec,
@@ -34,6 +44,7 @@ from .models import (
     AIRequestContext,
     CapabilityConfirmationPolicy,
     CapabilityExecutionMode,
+    CapabilityPlacementLayer,
     CapabilityRuntimeSurface,
 )
 from .policy import (
@@ -46,7 +57,11 @@ from .serialization import build_api_execute_response
 
 __all__ = [
     "AICapabilityRequest",
+    "AICapabilityArtifactRefs",
+    "AICapabilityExecutionTrace",
     "AICapabilityRegistryEntry",
+    "AICapabilityResultEnvelope",
+    "AICapabilityRuntimePlacement",
     "AICapabilityRoute",
     "AICapabilityResult",
     "AICapabilitySpec",
@@ -56,6 +71,7 @@ __all__ = [
     "AIRequestContext",
     "CapabilityConfirmationPolicy",
     "CapabilityExecutionMode",
+    "CapabilityPlacementLayer",
     "CapabilityRuntimeSurface",
     "build_ai_backend_policy_config",
     "build_ai_backend_policy_history_report",
@@ -64,6 +80,7 @@ __all__ = [
     "build_snapshot_policy_config",
     "build_snapshot_health",
     "build_snapshot_summary",
+    "build_virtual_ai_os_result_envelope",
     "build_virtual_ai_os_execution_matrix",
     "build_policy_resolution",
     "build_api_execute_response",
@@ -76,6 +93,9 @@ __all__ = [
     "list_ai_capabilities",
     "list_virtual_ai_os_capabilities",
     "resolve_policy_workflow",
+    "default_virtual_ai_os_runtime_surface",
+    "resolve_virtual_ai_os_runtime_placement",
     "resolve_virtual_ai_os_execution_mode",
     "resolve_virtual_ai_os_runtime_route",
+    "supported_virtual_ai_os_runtime_surfaces",
 ]

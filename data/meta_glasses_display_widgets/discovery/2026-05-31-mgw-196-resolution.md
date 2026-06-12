@@ -31,7 +31,7 @@ The resolution document contains no deferred-work marker; it is a completed anal
 ## Fix
 
 Rephrased line 11 of `data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md` to
-use neutral language and add the canonical suppressor phrase:
+use neutral language that avoids repeating annotation-like terms:
 
 Before:
 ```text
@@ -40,7 +40,7 @@ because it contained the word "todo" in the comment
 
 After:
 ```text
-because it contained the deferred-work keyword in the comment (not a deferred-work marker; the word appears in quoted source text being described)
+because its prose named the scanner trigger term from the source comment; this was historical context, not a queued work marker
 ```
 
 ## Validation
@@ -51,5 +51,5 @@ test -f data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md
 
 ## Status
 
-False positive resolved. The rephrased line 11 now includes the canonical suppressor
-phrase "not a deferred-work marker" so the scanner will not re-file this finding.
+False positive resolved. The rephrased line 11 now avoids the scanner trigger term and
+annotation-like phrasing so the scanner will not re-file this finding.

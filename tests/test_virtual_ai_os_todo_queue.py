@@ -99,6 +99,38 @@ def test_virtual_ai_os_mcplusplus_source_task_is_explicit():
     assert "repository not found" in source_task.acceptance.lower() or "distributed protocol surface" in source_task.acceptance.lower()
 
 
+def test_virtual_ai_os_autonomous_cadence_task_is_resumable():
+    board_text = TASK_BOARD_PATH.read_text(encoding="utf-8")
+    tasks = {task.task_id: task for task in _load_tasks()}
+    cadence_task = tasks["VAI-026"]
+
+    assert cadence_task.depends_on == []
+    assert "tests/test_virtual_ai_os_todo_queue.py" in cadence_task.outputs
+    assert cadence_task.validation == [
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py"
+    ]
+    assert "run the daemon before the supervisor" in cadence_task.acceptance.lower()
+    assert "dependency ordering" in cadence_task.acceptance.lower()
+    assert "isolated worktree implementation" in cadence_task.acceptance.lower()
+
+    assert "## Autonomous Cadence State" in board_text
+    for state_artifact in (
+        "data/virtual_ai_os/state/virtual_ai_os_task_state.json",
+        "data/virtual_ai_os/state/virtual_ai_os_strategy.json",
+        "data/virtual_ai_os/state/virtual_ai_os_events.jsonl",
+    ):
+        assert state_artifact in board_text
+    for state_key in (
+        "recommended_task_id",
+        "ready_task_ids",
+        "waiting_task_ids",
+        "task_statuses",
+        "task_artifacts",
+        "task_validation",
+    ):
+        assert state_key in board_text
+
+
 def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
     completed = subprocess.run(
         [
@@ -136,6 +168,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         llm_merge_resolver_fallback_command,
     )
     from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (
+        build_arg_parser,
         implementation_multi_supervisor_env_defaults,
         implementation_supervisor_namespace_track_configs,
     )
@@ -174,6 +207,17 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     ] == (
         llm_merge_resolver_fallback_command()
     )
+    common_arg_values = [
+        arg.removeprefix("--common-arg=")
+        for arg in launcher_args
+        if arg.startswith("--common-arg=")
+    ]
+    assert "--worktree-reconciliation-max-merges" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "2"
+    assert "--merge-reconciliation-max-merges" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "1"
+    parsed_launcher_args = build_arg_parser().parse_args(launcher_args)
+    assert parsed_launcher_args.common_arg == common_arg_values
     assert runner_module.default_launch_args(()) == ["--detach"]
     assert runner_module.default_launch_args(("--detach",)) == ["--detach"]
     assert runner_module.default_launch_args(("--duration-seconds", "5")) == [

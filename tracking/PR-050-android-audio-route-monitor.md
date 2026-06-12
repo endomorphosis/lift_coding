@@ -15,10 +15,16 @@ Expose real-time Android audio routing state (inputs/outputs, SCO) for Meta AI g
   - updates on connect/disconnect
 
 ## References
-- mobile/glasses/README.md
-- mobile/glasses/android/README.md
-- mobile/glasses/android/IMPLEMENTATION_NOTE.md
-- mobile/glasses/android/AudioRouteMonitor.kt
-- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/AudioRouteMonitor.kt
-- mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesAudioModule.kt
-- mobile/modules/expo-glasses-audio/index.ts
+- `mobile/glasses/android/README.md` - Android audio route monitor architecture and validation notes.
+- `mobile/glasses/android/IMPLEMENTATION_NOTE.md` - standalone versus Expo module implementation guidance.
+- `mobile/glasses/android/AudioRouteMonitor.kt` - standalone Android route monitor reference.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/AudioRouteMonitor.kt` - active Expo Android route monitor implementation.
+- `mobile/modules/expo-glasses-audio/android/src/main/java/expo/modules/glassesaudio/GlassesAudioModule.kt` - legacy Android React Native bridge reference.
+- `mobile/modules/expo-glasses-audio/index.ts` - JS/TS wrapper exposing route snapshots and route-change events.
+
+## Resolution notes
+VAI-084 resolved the broad shared mobile-glasses documentation reference at this
+tracker's original line 18. The PR-050 evidence now points directly at the
+Android route-monitor documentation, the standalone and active Expo Kotlin
+implementations, and the JS bridge surfaces needed to validate route snapshots
+and route-change events.

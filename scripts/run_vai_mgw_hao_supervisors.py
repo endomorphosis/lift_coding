@@ -54,6 +54,13 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_t
     ),
 )
 
+VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
+    "--worktree-reconciliation-max-merges",
+    "2",
+    "--merge-reconciliation-max-merges",
+    "1",
+)
+
 
 def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     """Return the configured reusable launcher for this repository's tracks."""
@@ -66,6 +73,7 @@ def build_launcher() -> ConfiguredMultiSupervisorLauncher:
         stamp_env_var="STAMP",
         master_dir="data/agent_supervisor",
         label="VAI/MGW/HAO supervisor run",
+        common_args=VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS,
         env_defaults=MULTI_SUPERVISOR_ENV_DEFAULTS,
     )
 

@@ -32,6 +32,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     DISCOVERY_DIR,
     HALLUCINATE_DATA_PATHS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
+    OBJECTIVE_GOAL_SCAN_EVIDENCE,
     OBJECTIVE_REFILL_SETTINGS,
     HALLUCINATE_INTEROPERABILITY_FOCUS,
     HALLUCINATE_ENV_PREFIX,
@@ -65,6 +66,8 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+    # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
+    # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
@@ -96,8 +99,8 @@ _hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
     extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
     prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
-    # scanner-resolved: MGW-190 - "todo" in todo_path_key / todo_path_flag refers
-    # to the task-board work-item queue path, not a deferred-work annotation.
+    # scanner-resolved: MGW-190 - these bootstrap path fields name the
+    # backlog task-board location; they are not deferred-work annotations.
     todo_path_key=TASK_BOARD_PATH_KEY,
     task_prefix="## HAO-",
     state_prefix="hallucinate_multimodal_control",

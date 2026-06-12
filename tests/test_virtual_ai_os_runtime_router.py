@@ -3,7 +3,9 @@
 from handsfree.ai import (
     CapabilityExecutionMode,
     CapabilityRuntimeSurface,
+    resolve_virtual_ai_os_runtime_placement,
     resolve_virtual_ai_os_runtime_route,
+    supported_virtual_ai_os_runtime_surfaces,
 )
 from handsfree.capability_registry import (
     NORMALIZED_ERROR_CONTRACT_ID,
@@ -11,6 +13,7 @@ from handsfree.capability_registry import (
     CapabilityRoutingKernel,
     RuntimeRouter,
 )
+from handsfree.meta_glasses_mobile_orb_runtime import resolve_mobile_orb_runtime_binding
 
 
 def test_runtime_router_uses_direct_adapter_for_embedding_by_default():
@@ -20,6 +23,38 @@ def test_runtime_router_uses_direct_adapter_for_embedding_by_default():
     assert route.runtime_surface == CapabilityRuntimeSurface.DIRECT_ADAPTER
     assert route.handler_ref == "handsfree.ipfs_datasets_routers:get_embeddings_router"
     assert route.cli_command is None
+
+
+def test_runtime_placement_layer_records_supported_and_fallback_surfaces():
+    placement = resolve_virtual_ai_os_runtime_placement(
+        "dataset_discovery",
+        CapabilityExecutionMode.MCP_REMOTE,
+        preferred_surface="swissknife_orb",
+    )
+
+    assert placement.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert placement.supported_surfaces == (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
+    assert placement.fallback_surfaces == (CapabilityRuntimeSurface.MCP_PROVIDER,)
+
+
+def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
+    placement = resolve_virtual_ai_os_runtime_placement(
+        "workflow",
+        CapabilityExecutionMode.MCP_REMOTE,
+    )
+
+    assert placement.runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED
+    assert supported_virtual_ai_os_runtime_surfaces(
+        "workflow",
+        CapabilityExecutionMode.MCP_REMOTE,
+    ) == (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
 
 
 def test_runtime_router_uses_cli_surface_for_requested_ipfs_pin_cli_mode():
@@ -50,6 +85,14 @@ def test_runtime_router_allows_swissknife_orb_override_for_remote_capability():
     assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
     assert route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
     assert route.handler_ref == "swissknife.orb::dataset_discovery"
+
+
+def test_runtime_router_defaults_ui_render_sessions_to_swissknife_orb():
+    route = resolve_virtual_ai_os_runtime_route("ui_render_session")
+
+    assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert route.handler_ref == "swissknife.orb::ui_render_session"
 
 
 def test_runtime_router_rejects_invalid_surface_for_direct_import_capability():
@@ -118,11 +161,47 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
         "hallucinate_app",
         "mobile_glasses",
     ]
+    swissknife_metadata = plan.entrypoints[0].metadata
+    assert swissknife_metadata["virtual_ui_plane"] == "swissknife.virtual_desktop"
+    assert swissknife_metadata["orb_plane"] == "swissknife.orb"
+    assert swissknife_metadata["service_descriptor"] == {
+        "namespace": "handsfree.virtual_ai_os.ipfs_datasets",
+        "operation": "dataset_discovery",
+        "tool_name": "dataset_discovery",
+        "server_family": "ipfs_datasets",
+        "provider_name": "ipfs_datasets_mcp",
+    }
+    assert swissknife_metadata["orb_binding"]["transport"] == "mcp-server"
+    assert swissknife_metadata["orb_binding"]["transport_binding"]["metadata"] == {
+        "server_family": "ipfs_datasets",
+        "tool_name": "dataset_discovery",
+        "provider_name": "ipfs_datasets_mcp",
+    }
     assert plan.entrypoints[-1].handler_ref == (
         "handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"
     )
+    assert plan.entrypoints[-1].metadata["orb_edge_descriptor"] == (
+        "spec/meta_glasses_mobile_orb_bridge_interface.json"
+    )
     assert plan.payload["task_id"] == "VAI-019"
     assert plan.payload["artifact_refs"]["receipt_ref"] == "bafybeivai019receipt"
+
+
+def test_swissknife_orb_dispatch_metadata_resolves_mobile_runtime_binding():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        )
+    )
+
+    runtime_binding = resolve_mobile_orb_runtime_binding(plan.entrypoints[0].metadata)
+
+    assert runtime_binding is not None
+    assert runtime_binding["binding_type"] == "handsfree.mcp-server"
+    assert runtime_binding["transport"] == "mcp-server"
+    assert runtime_binding["server_family"] == "ipfs_datasets"
+    assert runtime_binding["tool_name"] == "dataset_discovery"
 
 
 def test_runtime_router_normalizes_route_planning_errors():

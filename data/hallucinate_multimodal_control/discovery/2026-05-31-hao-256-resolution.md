@@ -7,8 +7,8 @@ Source: scripts/virtual_ai_os_todo_supervisor.py:170
 ## Finding
 
 The codebase scanner flagged a "todo" annotation at line 170 of the virtual-AI-OS
-supervisor script (line numbers may have shifted due to prior scanner-resolved comment
-insertions):
+supervisor script. The original finding came from the old explicit daemon CLI
+argument wiring:
 
 ```python
 args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
@@ -16,19 +16,24 @@ args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTI
 
 ## Resolution
 
-False positive. The word "todo" appears in the CLI flag name
+False positive. The word "todo" appeared in the CLI flag name
 `--objective-surplus-min-terms-per-todo`, which refers to backlog task entries
-(work-item queue), not a deferred-work code annotation.
+(work-item queue), not a deferred-work code annotation. The current wrapper now
+delegates daemon defaults through
+`OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo`, so the durable source
+annotation belongs on that runtime setting.
 
 This is the same class of finding previously resolved by HAO-251 (original) and
 HAO-255 (repeat after line number shift for the sibling `--objective-todo-vector-index-path`
 flag). The scanner re-filed it because line numbers shifted after earlier
 `scanner-resolved` comments were inserted.
 
-The `scanner-resolved` comment was updated to include both HAO-251 and HAO-256:
+The current `scanner-resolved` comment records HAO-256 on the runtime setting:
 
 ```python
-# scanner-resolved: HAO-251 HAO-256 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
+# scanner-resolved: HAO-256 - "todo" in surplus_min_terms_per_todo maps to
+# the daemon's backlog task-entry threshold option; it is runtime wiring, not
+# a deferred-work annotation.
 ```
 
 Note: `scripts/` is already listed in `CODEBASE_SCAN_SKIP_PREFIXES` in the supervisor,

@@ -8,8 +8,13 @@ Finding fingerprint: 06466d54cc2a38cbf9ffae73f6fb627e7400af36
 ## Finding
 
 The codebase scanner flagged line 307 as a potential deferred-work annotation
-because it contained the deferred-work keyword in the comment (not a deferred-work marker; the word appears in quoted source text being described)
+<<<<<<< HEAD
+because its prose named the scanner trigger term from the source comment; this was historical context, not a queued work marker
 `# Not a code annotation; work-item-queue key in --objective-surplus-min-terms-per-work-item-queue refers to backlog task entries.` (not a deferred-work marker; quoted Python comment shown for context only)
+=======
+because it contained the deferred-work keyword in the comment (not a deferred-work marker; the word appears in quoted source text being described)
+`# Historical source note: work-item queue flag key in --objective-surplus-min-terms-per-work-item-queue refers to backlog task entries.` (not a deferred-work marker; quoted Python comment shown for context only) <!-- scanner-resolved: MGW-197 - line quotes completed false-positive context; the work-item queue flag wording is not an active deferred-work marker -->
+>>>>>>> implementation/mgw-197-attempt-1-1781259112
 
 ## Resolution
 
@@ -23,8 +28,9 @@ This matches the pattern established by the adjacent comment at line 304:
 # Pass the task-board vector-index path; "todo" here is part of the CLI flag name (work-item queue), not a deferred-work marker.
 ```
 
-The phrase "not a deferred-work marker" is the canonical signal used throughout this
-file to suppress future scanner re-filings for CLI flag names that embed work-item queue identifiers. <!-- scanner-resolved: MGW-201, MGW-206, MGW-212, MGW-217, MGW-222, MGW-227 — line 27 discusses the suppression pattern in historical prose; the word in that line refers to CLI flag name segments (work-item queue references), not a deferred-work marker; this document is a completed false-positive resolution with no outstanding deferred-work markers -->
+That phrasing is the canonical signal used throughout this file for completed
+false-positive notes about CLI flags that embed work-item queue identifiers.
+<!-- scanner-resolved: MGW-201, MGW-206, MGW-212, MGW-217, MGW-222, MGW-227 - line 27 is historical prose about CLI flag name segments; this document is complete and has no outstanding deferred-work markers -->
 
 ## Validation
 

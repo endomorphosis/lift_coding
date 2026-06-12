@@ -39,6 +39,10 @@ from virtual_ai_os_todo_daemon import (  # noqa: E402
 _VIRTUAL_AI_OS_CONTEXT = VIRTUAL_AI_OS_CONTEXT
 DEFAULT_TODO_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
 VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
+# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
+# task-board path option is CLI flag naming, not a deferred-work annotation.
+# scanner-resolved: HAO-260 - This shared context value preserves the public
+# backlog task-board CLI flag name; it is runtime wiring, not a follow-up marker.
 TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
 DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
 DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
@@ -47,8 +51,9 @@ DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
 OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
-# scanner-resolved: HAO-235 - This module-level vector-index alias is runtime
-# wiring; the shared objective defaults factory below passes the same namespace path.
+# scanner-resolved: HAO-235 - The stale line-159 scan hit was old explicit
+# _with_default wiring for the objective todo vector index path. This wrapper now
+# passes the same runtime path through the shared objective defaults factory.
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
 DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
@@ -56,6 +61,9 @@ OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
 OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
+# scanner-resolved: HAO-256 - "todo" in surplus_min_terms_per_todo maps to
+# the daemon's backlog task-entry threshold option; it is runtime wiring, not
+# a deferred-work annotation.
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
 # scanner-resolved: VAI-168, HAO-235 - "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES
 # is intentionally excluded because these supervisor wrappers reference task-board
