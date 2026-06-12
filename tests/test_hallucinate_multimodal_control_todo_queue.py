@@ -618,7 +618,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
         discovery_dir
         / f"{datetime.now(timezone.utc).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
     )
-    assert findings == [
+    expected_findings = [
         {
             "source_task_id": "HAO-005",
             "follow_up_task_id": "HAO-006",
@@ -628,6 +628,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
             "failure_kind": "merge",
         }
     ]
+    assert findings == expected_findings
 
     updated = task_board_path.read_text(encoding="utf-8")
     assert "## HAO-006 Resolve merge retry-budget failure for HAO-005" in updated
