@@ -477,7 +477,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-042 Review swallowed exception path in src/handsfree/peer_chat.py:122
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
