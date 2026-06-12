@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52
+Fingerprint: ee4dd400fb9d8abef3756732cc0dc8f8d140c75b
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 27
@@ -10,33 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M hallucinate_app`
-- `UU tests/test_sessions.py`
+- ` M data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, unmerged=1`
+- Path categories: `modified=2`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `hallucinate_app`
-  - `tests/test_sessions.py`
+  - `data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	hallucinate_app`
-  - `U	tests/test_sessions.py`
-  - `M	tests/test_sessions.py`
-- Staged name status:
-  - `U	tests/test_sessions.py`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 82 +++++++++-------------`
-  - ` hallucinate_app                                    |  2 +-`
-  - ` tests/test_sessions.py                             | Unmerged`
-  - ` tests/test_sessions.py                             | 50 +++++++++++++`
-  - ` 3 files changed, 84 insertions(+), 50 deletions(-)`
-- Submodule summary:
-  - `* hallucinate_app c0f7745...605c6fd (1):`
-  - `  > HAO: reconcile generated supervisor outputs`
+  - `.../2026-05-26-mgw-028-merge-unblock-resolution.md     | 18 ++++++++++++++++++`
+  - ` .../18-swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 2 files changed, 19 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -123,27 +112,22 @@ Work surface: `27` candidates, `20` sampled records.
   "candidate_count": 27,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52",
+  "fingerprint": "ee4dd400fb9d8abef3756732cc0dc8f8d140c75b",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 82 +++++++++-------------\n hallucinate_app                                    |  2 +-\n tests/test_sessions.py                             | Unmerged\n tests/test_sessions.py                             | 50 +++++++++++++\n 3 files changed, 84 insertions(+), 50 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nU\ttests/test_sessions.py\nM\ttests/test_sessions.py",
+    "diff_stat": ".../2026-05-26-mgw-028-merge-unblock-resolution.md     | 18 ++++++++++++++++++\n .../18-swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 2 files changed, 19 insertions(+), 1 deletion(-)",
+    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 2,
-      "unmerged": 1
+      "modified": 2
     },
-    "staged_name_status": "U\ttests/test_sessions.py",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app",
-      "tests/test_sessions.py"
+      "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M hallucinate_app",
-      "UU tests/test_sessions.py"
-    ],
-    "submodule_summary": "* hallucinate_app c0f7745...605c6fd (1):\n  > HAO: reconcile generated supervisor outputs"
+      " M data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    ]
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -175,9 +159,8 @@ Work surface: `27` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app",
-    "tests/test_sessions.py"
+    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308",
