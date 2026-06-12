@@ -7,6 +7,7 @@ Comprehensive integration plan for turning the current HandsFree monorepo plus i
 Created: 2026-05-22
 Refreshed: 2026-05-23
 MCP++ source re-check: 2026-05-25
+VAI-001 topology checkpoint: 2026-06-12
 
 ## Goal
 
@@ -30,6 +31,40 @@ The target state is not a loose collection of tools. It is one system that can:
 6. validate behavior through repeatable integration tests.
 
 ## Reviewed Source Topology
+
+### 2026-06-12 VAI-001 topology checkpoint
+
+This checkpoint records the reviewed root topology in the current autonomous
+worktree without advancing submodule gitlinks or rewriting root `.gitmodules`.
+The root gitlinks at `HEAD` are:
+
+| Path | Recorded gitlink |
+| --- | --- |
+| `Mcp-Plus-Plus` | `29343be704da4e193ff143bac7daae9b0f98435d` |
+| `external/ipfs_accelerate` | `765583468e28fc1229db849739a584816129251e` |
+| `external/ipfs_datasets` | `45ff065a4208e01ed7b1034a35e1ef2ffc6420b9` |
+| `external/ipfs_kit` | `17acebc422bb09f803be504b3212258db7b5b600` |
+| `external/meta-wearables-dat-android` | `25f3a6d4479b7a4a72f877977b865a11af990d04` |
+| `external/meta-wearables-dat-ios` | `a739e94181221e7f321304273bcda2272821b163` |
+| `hallucinate_app` | `8ccbb84362fb95e1636b5515c32f5af0bbfeab3b` |
+| `swissknife` | `8865ff3b872bda4bab492433bbfb858587b03df1` |
+
+Pin guardrails:
+
+- VAI-001 is a topology-recording task only; do not advance any root gitlink
+  from this checkpoint.
+- Root `.gitmodules` still maps the three IPFS paths to non-`_py` URLs in this
+  checkout. Treat any URL rewrite as VAI-002 source-alignment scope, not a
+  VAI-001 side effect.
+- Root `git submodule status` is safe for this checkpoint. Full recursive
+  submodule traversal is not a safe guardrail yet because it currently fails in
+  nested IPFS submodules on a missing `.gitmodules` mapping for
+  `ipfs_accelerate_py`.
+- `Mcp-Plus-Plus` remains the case-sensitive standalone MCP++ spec/docs source;
+  do not add a lowercase `mcp_plus_plus` root submodule without a new canonical
+  source resolution.
+- Evidence:
+  [data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md](../../data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md)
 
 ### Root-tracked submodules after alignment
 
