@@ -359,6 +359,39 @@ git submodule update --init --recursive external/ipfs_datasets external/ipfs_acc
 PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
 ```
 
+#### Meta Glasses Display Widget Backlog Bootstrap
+
+The Meta glasses display-widget backlog uses the repo-local `ipfs_accelerate_py`
+implementation supervisor and isolated worktrees. The wrapper scripts share a
+single namespace context so the daemon, supervisor, and task-proposal router use
+the same task prefix, state files, discovery directory, and worktree root.
+
+Relevant bootstrap environment variables:
+
+```bash
+HANDSFREE_MGW_TODO_PATH=/home/you/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+HANDSFREE_MGW_STATE_DIR=/home/you/lift_coding/data/meta_glasses_display_widgets/state
+HANDSFREE_MGW_WORKTREE_ROOT=/home/you/lift_coding/data/meta_glasses_display_widgets/worktrees
+HANDSFREE_MGW_DISCOVERY_DIR=/home/you/lift_coding/data/meta_glasses_display_widgets/discovery
+```
+
+Operational notes:
+
+- `HANDSFREE_MGW_TODO_PATH` controls which daemon-parseable backlog the supervisor reads.
+- `HANDSFREE_MGW_STATE_DIR` stores `meta_glasses_display_task_state.json`, `meta_glasses_display_strategy.json`, and `meta_glasses_display_events.jsonl`.
+- `HANDSFREE_MGW_WORKTREE_ROOT` is where isolated implementation worktrees are created when `--implement` is used.
+- `HANDSFREE_MGW_DISCOVERY_DIR` stores discovery reports and retry-budget follow-up evidence.
+- Android Gradle validation commands are wrapped with the repo-local JDK 17 and Android SDK environment before the supervisor runs them.
+
+Recommended bootstrap sequence:
+
+```bash
+git submodule sync --recursive
+git submodule update --init --recursive external/ipfs_accelerate external/ipfs_datasets swissknife external/meta-wearables-dat-android external/meta-wearables-dat-ios
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_daemon.py --once
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
+```
+
 #### Push Notifications (Expo)
 
 | Variable | Default | Description |
