@@ -502,6 +502,15 @@ cadence remains parseable and resumable.
 
 ## VAI-212 Resolve implementation retry-budget failure for VAI-211
 
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-211. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-211 from strategy blocked_tasks.
+
 ## VAI-213 Resolve validation retry-budget failure for VAI-209
 
 ## VAI-214 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:1245
