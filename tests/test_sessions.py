@@ -11,6 +11,7 @@ try:
 except ImportError:  # pragma: no cover - exercised only when redis is not installed
     redis = None
 
+import handsfree.sessions as sessions_module
 from handsfree.sessions import SessionTokenManager, redis as session_redis
 
 
@@ -324,8 +325,8 @@ class TestSessionTokenManagerEdgeCases:
         assert result is None
         mock_redis.delete.assert_called_once_with(redis_key)
 
-    def test_validate_session_invalid_metadata_uses_empty_dict(self):
-        """Invalid stored metadata should not invalidate an otherwise valid session."""
+    def test_validate_session_uses_empty_metadata_for_invalid_json(self):
+        """Invalid stored metadata JSON should not invalidate an otherwise valid session."""
         mock_redis = MagicMock()
         now = datetime.now(UTC)
         mock_redis.hgetall.return_value = {
@@ -344,8 +345,8 @@ class TestSessionTokenManagerEdgeCases:
         assert result.metadata == {}
         mock_redis.delete.assert_not_called()
 
-    def test_validate_session_metadata_parser_runtime_error_is_not_swallowed(self, monkeypatch):
-        """Only expected metadata parse errors should fall back to empty metadata."""
+    def test_validate_session_does_not_swallow_unexpected_metadata_errors(self, monkeypatch):
+        """Unexpected metadata parser failures should surface for diagnosis."""
         mock_redis = MagicMock()
         now = datetime.now(UTC)
         mock_redis.hgetall.return_value = {
@@ -356,14 +357,16 @@ class TestSessionTokenManagerEdgeCases:
             b"metadata": b"{}",
         }
 
-        def raise_runtime_error(_metadata):
-            raise RuntimeError("unexpected parser failure")
+        def fail_json_loads(_value):
+            raise RuntimeError("parser failed")
 
-        monkeypatch.setattr("handsfree.sessions.json.loads", raise_runtime_error)
+        monkeypatch.setattr(sessions_module.json, "loads", fail_json_loads)
         manager = SessionTokenManager(mock_redis)
 
-        with pytest.raises(RuntimeError, match="unexpected parser failure"):
+        with pytest.raises(RuntimeError, match="parser failed"):
             manager.validate_session("any_token")
+
+        mock_redis.delete.assert_not_called()
 
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
