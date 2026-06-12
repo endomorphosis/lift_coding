@@ -23,3 +23,19 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair Verification
+
+- The recorded failure was `main_checkout_dirty_conflict`, not a semantic merge
+  conflict, so `ipfs-accelerate-agent-merge-resolver --apply` was not needed.
+- The dirty path recorded by the guardrail was
+  `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`.
+  That file has no local diff in the VAI-326 repair worktree, so this branch
+  does not carry or amplify the dirty-main-checkout blocker.
+- The VAI-212 implementation branch is committed at superproject commit
+  `db32091673f5092c95c7ad046a186b659174b972`.
+- The intended VAI-212 code change is committed in the owning submodule:
+  `external/ipfs_kit` commit `193f0e64519b7b82f7b9026362405a674ce62fe8`
+  updates `archive/applied_patches/advanced_filecoin.py`.
+- Current strategy state has an empty `blocked_tasks` list, so `VAI-212` is no
+  longer held by the guardrail.
