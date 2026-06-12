@@ -15,7 +15,7 @@
 - Added `privacy_mode` field to `ProfileConfig` class in `src/handsfree/commands/profiles.py`
 - All profiles now default to `PrivacyMode.STRICT` for safety
 - Updated `router.py` to use `profile_config.privacy_mode` instead of hardcoded `PrivacyMode.STRICT`
-- Cleared the prior router privacy-mode placeholders around initialization and delegation formatting after wiring profile configuration through both handler paths.
+- Router initialization and delegation formatting now use the profile privacy-mode configuration through both handler paths.
 - Verified the inbox and PR summary router paths both pass `profile_config.privacy_mode` into their handlers.
 - Added comprehensive tests:
   - `tests/test_profile_privacy_mode.py`: Unit tests for profile privacy mode configuration
@@ -29,7 +29,7 @@
 - The scanner finding at line 18 was stale PR-log wording, not live router debt.
 - Verified `src/handsfree/commands/router.py` uses `ProfileConfig.for_profile()`
   and passes `profile_config.privacy_mode` into inbox and PR summary handlers.
-- The PR log now records the completed cleanup without annotation-style wording.
+- The PR log records the completed cleanup without annotation-style wording on the scanner-flagged summary line.
 
 ## VAI-095 Resolution
 The line 18 scan finding matched a completed-work note, not unresolved product
