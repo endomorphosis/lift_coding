@@ -17,3 +17,13 @@ Implemented principal editing in `security_panel.js`:
 ## Outcome
 
 Not a false positive. The edit button was present in the UI but had no implementation. Principal editing is now functional.
+
+## Attempt 2 Follow-up
+
+Date: 2026-06-12
+
+The checked-out `security_panel.js` already had the edit dialog markup, event wiring,
+and form submit branch, but the `_openEditPrincipalDialog(principal)` method was
+missing. Added the method so the edit button opens the dialog and pre-fills the
+principal name, type, and immutable DID before saving through the existing
+`updatePrincipal()` branch.
