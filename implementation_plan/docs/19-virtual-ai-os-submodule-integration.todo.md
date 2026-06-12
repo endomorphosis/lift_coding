@@ -427,7 +427,7 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 46 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 15 worktree merges
 
 ## VAI-201 Resolve 63 dirty backlogged worktrees blocked by content_not_in_target
 
@@ -660,3 +660,91 @@ cadence remains parseable and resumable.
 ## VAI-315 Resolve code annotation in external/ipfs_kit/archive/mcp_final_20250414_082801/extensions/websocket.py:123
 
 ## VAI-316 Review swallowed exception path in external/ipfs_kit/archive/mcp_final_20250414_082801/ha/service.py:761
+
+## VAI-317 Resolve merge retry-budget failure for VAI-041
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-317-vai-041-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-041. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-317-vai-041-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-041 from strategy blocked_tasks.
+
+## VAI-318 Resolve merge retry-budget failure for VAI-045
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-318-vai-045-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-045. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-318-vai-045-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-045 from strategy blocked_tasks.
+
+## VAI-319 Resolve merge retry-budget failure for VAI-046
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-319-vai-046-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-046. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-319-vai-046-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-046 from strategy blocked_tasks.
+
+## VAI-320 Resolve merge retry-budget failure for VAI-107
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-320-vai-107-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-107. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-320-vai-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-107 from strategy blocked_tasks.
+
+## VAI-321 Resolve merge retry-budget failure for VAI-126
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-321-vai-126-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-126. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-321-vai-126-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-126 from strategy blocked_tasks.
+
+## VAI-322 Resolve merge retry-budget failure for VAI-155
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-322-vai-155-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-155. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-322-vai-155-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-155 from strategy blocked_tasks.
+
+## VAI-323 Resolve merge retry-budget failure for VAI-209
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-323-vai-209-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-209. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-323-vai-209-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-209 from strategy blocked_tasks.
+
+## VAI-324 Resolve merge retry-budget failure for VAI-214
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-324-vai-214-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-214. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-324-vai-214-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-214 from strategy blocked_tasks.
