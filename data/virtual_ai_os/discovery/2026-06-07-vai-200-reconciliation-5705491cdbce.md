@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 643808483e1fb46c58838574660a9e1a3079d7bf
+Fingerprint: 04cc1367c76b4f7d7b18742f113869722d8f6b1a
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 20
@@ -10,29 +10,18 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m external/ipfs_kit`
-- `?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1, untracked=2`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `external/ipfs_kit`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++++++---------`
-  - ` external/ipfs_kit                                  |  0`
-  - ` 2 files changed, 42 insertions(+), 29 deletions(-)`
-- Untracked paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
+  - `external/ipfs_kit | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -119,31 +108,19 @@ Work surface: `20` candidates, `20` sampled records.
   "candidate_count": 20,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "643808483e1fb46c58838574660a9e1a3079d7bf",
+  "fingerprint": "04cc1367c76b4f7d7b18742f113869722d8f6b1a",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++++++---------\n external/ipfs_kit                                  |  0\n 2 files changed, 42 insertions(+), 29 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit",
+    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 1,
-      "other_dirty": 1,
-      "untracked": 2
+      "other_dirty": 1
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "external/ipfs_kit",
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m external/ipfs_kit",
-      "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
-    ],
-    "untracked_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
+      " m external/ipfs_kit"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -176,10 +153,7 @@ Work surface: `20` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "external/ipfs_kit",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",
