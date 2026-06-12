@@ -21,21 +21,24 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-190.
 
 This is a **false positive**. The word "todo" appears in the CLI flag name
 `--objective-todo-vector-index-path`, where it refers to the backlog task-board (work-item queue),
-not a deferred code action. Prior commits (MGW-189) had already improved the comment on line 304
-to make this explicit. This task adds a `scanner-resolved: MGW-190` suppression marker so the
-scanner does not re-file the same finding.
+not a deferred code action. The supervisor no longer injects that flag directly; it now imports
+the shared `TASK_BOARD_PATH_KEY` and `TASK_BOARD_PATH_OPTION` values from the daemon and passes
+them into `build_script_supervisor_bootstrap_runner`.
 
-The comment at line 304 has been updated to:
+The remaining `todo_path_key` and `todo_path_flag` wrapper argument names are part of the shared
+supervisor API. The source comment now records the false positive so the scanner does not re-file
+the same finding:
 
 ```python
-# scanner-resolved: MGW-190 — "todo" below is part of the CLI flag name --objective-todo-vector-index-path (work-item queue path), not a deferred-work annotation.
+# scanner-resolved: MGW-190 - the old objective-todo flag is gone; these
+# todo_path_* wrapper arguments name the backlog work-item queue path.
 ```
 
-<!-- scanner-resolved: MGW-190 — this resolution document records a false positive; no active annotation remains in the source file -->
+<!-- scanner-resolved: MGW-190 - this resolution document records a false positive; no active annotation remains in the source file -->
 
 ## Status
 
-False positive suppressed. No functional change to runtime behaviour.
+False positive suppressed. No functional change to runtime behavior.
 
 ## Validation
 
@@ -43,4 +46,4 @@ False positive suppressed. No functional change to runtime behaviour.
 python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 ```
 
-Exit code 0 — script compiles successfully with the updated comment in place.
+Exit code 0 - script compiles successfully with the updated comment in place.
