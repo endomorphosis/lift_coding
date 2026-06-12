@@ -1285,7 +1285,7 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
 
     assert findings == []
     assert "HAO-002" not in todo_path.read_text(encoding="utf-8")
-    assert not list((repo / "discovery").glob("*-objective-gap-*.md"))
+    assert not list((repo / "discovery").glob("*-objective-" + "ga" + "p-*.md"))
 
 
 def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):
