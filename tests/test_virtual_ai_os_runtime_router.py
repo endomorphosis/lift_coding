@@ -54,6 +54,7 @@ def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
         CapabilityRuntimeSurface.MCP_PROVIDER,
         CapabilityRuntimeSurface.DAEMON_MEDIATED,
         CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
     )
 
 
