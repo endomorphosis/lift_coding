@@ -1,7 +1,7 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 904768513139c9db33044bab0316361b6e3eed02
+Fingerprint: 87c47b782e6cb98539ff9ad665623d9d4110e15b
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
 Candidate count: 44
@@ -36,7 +36,7 @@ Track: ops
     - `hallucinate_app`
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--831db5659431` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--ae171997d6ce` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781236780`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -172,7 +172,7 @@ Work surface: `44` candidates, `20` sampled records.
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 28
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "904768513139c9db33044bab0316361b6e3eed02",
+  "fingerprint": "87c47b782e6cb98539ff9ad665623d9d4110e15b",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -187,7 +187,7 @@ Work surface: `44` candidates, `20` sampled records.
     "implementation/hao-203-attempt-1-1780987641",
     "implementation/hao-205-attempt-2-1781229494",
     "implementation/hao-217-attempt-1-1781236753",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--831db5659431",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--ae171997d6ce",
     "implementation/hao-223-attempt-1-1780990818",
     "implementation/hao-223-attempt-1-1781237457",
     "implementation/hao-236-attempt-1-1781237706",
