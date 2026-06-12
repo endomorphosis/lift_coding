@@ -24,3 +24,7 @@ place for local transport bring-up when persistence is temporarily unavailable.
 ```bash
 python3 -m py_compile src/handsfree/peer_chat.py
 ```
+
+Current verification on 2026-06-12 confirmed the peer chat runtime path still
+catches only `_PEER_CHAT_PERSISTENCE_ERRORS`, logs expected persistence
+fallbacks, and lets unexpected DB factory or persistence errors propagate.
