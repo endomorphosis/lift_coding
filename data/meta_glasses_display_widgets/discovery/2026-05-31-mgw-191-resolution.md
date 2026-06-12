@@ -19,15 +19,19 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-191.
 
 ## Resolution
 
-This is a **false positive**. The word "todo" appears in the CLI flag name
+This is a **false positive**. The word "todo" appeared in the CLI flag name
 `--objective-surplus-min-terms-per-todo`, where it refers to backlog task entries (work-item queue),
-not a deferred code action. The comment on line 307 has been updated to include a
-`scanner-resolved: MGW-191` suppression marker so the scanner does not re-file the same finding.
+not a deferred code action. The supervisor has since been refactored to pass the
+task-board path through `todo_path_key` and `todo_path_flag`; the equivalent
+comment now includes a `scanner-resolved: MGW-191` suppression marker so the
+scanner does not re-file the same finding.
 
-The comment at line 307 has been updated to:
+The current supervisor comment has been updated to:
 
 ```python
-# scanner-resolved: MGW-191 — "todo" below is part of the CLI flag name --objective-surplus-min-terms-per-todo (backlog task-board entry count), not a deferred-work annotation.
+# scanner-resolved: MGW-190, MGW-191 - "todo" in todo_path_key /
+# todo_path_flag refers to the task-board work-item queue path, not a
+# deferred-work annotation.
 ```
 
 <!-- scanner-resolved: MGW-191 — this resolution document records a false positive; no active annotation remains in the source file -->

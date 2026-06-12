@@ -53,6 +53,14 @@ def test_runtime_router_allows_swissknife_orb_override_for_remote_capability():
     assert route.handler_ref == "swissknife.orb::dataset_discovery"
 
 
+def test_runtime_router_defaults_ui_render_sessions_to_swissknife_orb():
+    route = resolve_virtual_ai_os_runtime_route("ui_render_session")
+
+    assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert route.handler_ref == "swissknife.orb::ui_render_session"
+
+
 def test_runtime_router_rejects_invalid_surface_for_direct_import_capability():
     try:
         resolve_virtual_ai_os_runtime_route(
