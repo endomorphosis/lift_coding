@@ -29,9 +29,9 @@ per-table check (`capability:table_name`) to the wildcard capability check
 
 Removed the redundant broad `except Exception as e:` handler so the scanned
 swallowed-exception path no longer exists. Kept the specific `re.error` fallback
-and improved its warning to include `sql_type` and a truncated `sql_snippet` (up
-to 120 chars) so operators can identify unexpected SQL that triggers regex
-failures.
+and improved its warning to include `sql_type`, a truncated `sql_snippet` (up
+to 120 chars), and traceback context so operators can identify unexpected SQL
+and the regex failure source.
 
 ```python
 # before
@@ -55,6 +55,7 @@ except re.error as e:
         sql_type,
         sql[:120] if sql else "",
         e,
+        exc_info=True,
     )
     return None
 ```
