@@ -49,6 +49,7 @@ class CapabilitySurfaceEndpoint:
     role: str
     handler_ref: str
     cli_command: str | None = None
+    metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -245,6 +246,7 @@ def list_capability_routing_surfaces() -> tuple[CapabilitySurfaceEndpoint, ...]:
             label=CAPABILITY_ROUTING_SURFACE_LABELS["swissknife_orb"],
             role="orb_bridge",
             handler_ref="swissknife.orb",
+            metadata=_swissknife_orb_surface_metadata(),
         ),
         *_PRESENTATION_SURFACE_ENDPOINTS,
     )
@@ -287,26 +289,88 @@ _PRESENTATION_SURFACE_ENDPOINTS = (
         label=CAPABILITY_ROUTING_SURFACE_LABELS["hallucinate_app"],
         role="operator_console",
         handler_ref="hallucinate_app/index.js#operator_console",
+        metadata={
+            "virtual_ui_plane": "hallucinate_app.operator_console",
+            "hosted_surface": "swissknife.virtual_desktop",
+            "handoff_contract": "handsfree.capability.dispatch-plan@0.1.0",
+        },
     ),
     CapabilitySurfaceEndpoint(
         surface_id="mobile_glasses",
         label=CAPABILITY_ROUTING_SURFACE_LABELS["mobile_glasses"],
         role="remote_terminal",
         handler_ref="handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding",
+        metadata={
+            "orb_edge_descriptor": "spec/meta_glasses_mobile_orb_bridge_interface.json",
+            "display_descriptor": "spec/meta_glasses_display_widget_orb_interface.json",
+            "transport_preference": "mcp-server",
+            "runtime_binding_helper": (
+                "handsfree.meta_glasses_mobile_orb_runtime:"
+                "resolve_mobile_orb_runtime_binding"
+            ),
+        },
     ),
 )
 
 
 def _entrypoints_for_route(route: AICapabilityRoute) -> tuple[CapabilitySurfaceEndpoint, ...]:
     surface_id, role, fallback_handler_ref = _RUNTIME_SURFACE_ENDPOINTS[route.runtime_surface]
+    metadata: Mapping[str, Any] = {}
+    if route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB:
+        metadata = _swissknife_orb_route_metadata(route)
     runtime_endpoint = CapabilitySurfaceEndpoint(
         surface_id=surface_id,
         label=CAPABILITY_ROUTING_SURFACE_LABELS[surface_id],
         role=role,
         handler_ref=route.handler_ref or fallback_handler_ref,
         cli_command=route.cli_command,
+        metadata=metadata,
     )
     return (runtime_endpoint, *_PRESENTATION_SURFACE_ENDPOINTS)
+
+
+def _swissknife_orb_surface_metadata() -> Mapping[str, Any]:
+    return {
+        "virtual_ui_plane": "swissknife.virtual_desktop",
+        "orb_plane": "swissknife.orb",
+        "descriptor_authoring": "swissknife/src/services/mcp-idl.ts",
+        "orb_router": "swissknife/src/services/mcp-orb-capability-router.ts",
+        "display_adapter": "swissknife/src/services/meta-glasses-display-orb-adapter.ts",
+        "display_descriptor": "spec/meta_glasses_display_widget_orb_interface.json",
+        "mobile_edge_descriptor": "spec/meta_glasses_mobile_orb_bridge_interface.json",
+    }
+
+
+def _swissknife_orb_route_metadata(route: AICapabilityRoute) -> Mapping[str, Any]:
+    return {
+        **_swissknife_orb_surface_metadata(),
+        "capability_id": route.capability_id,
+        "server_family": route.server_family,
+        "provider_name": route.provider_name,
+        "service_descriptor": {
+            "namespace": f"handsfree.virtual_ai_os.{route.server_family}",
+            "operation": route.capability_id,
+            "tool_name": route.capability_id,
+            "server_family": route.server_family,
+            "provider_name": route.provider_name,
+        },
+        "orb_binding": {
+            "transport": "mcp-server",
+            "operation": route.capability_id,
+            "service_id": route.capability_id,
+            "transport_binding": {
+                "kind": "mcp-server",
+                "metadata": {
+                    "server_family": route.server_family,
+                    "tool_name": route.capability_id,
+                    "provider_name": route.provider_name,
+                },
+            },
+        },
+        "mobile_orb_runtime": (
+            "handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"
+        ),
+    }
 
 
 __all__ = [
