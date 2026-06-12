@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
+Fingerprint: 3a6d80b6b4e1c79e480096f83015d8a5511841ee
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 242
@@ -11,17 +11,64 @@ Track: ops
 ## Main Checkout Status
 
 - ` m hallucinate_app`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `M  src/handsfree/capability_registry.py`
+- `UU src/handsfree/config.py`
+- `A  src/handsfree/meta_glasses_remote_terminal.py`
+- `A  tests/test_meta_glasses_remote_terminal.py`
+- `M  tests/test_virtual_ai_os_capability_registry.py`
+- `M  tests/test_virtual_ai_os_config.py`
+- `M  tests/test_virtual_ai_os_end_to_end.py`
+- `UU tests/test_virtual_ai_os_runtime_router.py`
+- `UU tests/test_virtual_ai_os_task_orchestration.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `other_dirty=1`
+- Path categories: `added=2, modified=4, other_dirty=1, unmerged=4`
 - Status paths:
   - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `src/handsfree/capability_registry.py`
+  - `src/handsfree/config.py`
+  - `src/handsfree/meta_glasses_remote_terminal.py`
+  - `tests/test_meta_glasses_remote_terminal.py`
+  - `tests/test_virtual_ai_os_capability_registry.py`
+  - `tests/test_virtual_ai_os_config.py`
+  - `tests/test_virtual_ai_os_end_to_end.py`
+  - `tests/test_virtual_ai_os_runtime_router.py`
+  - `tests/test_virtual_ai_os_task_orchestration.py`
 - Name status:
   - `M	hallucinate_app`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	src/handsfree/config.py`
+  - `M	src/handsfree/config.py`
+  - `U	tests/test_virtual_ai_os_runtime_router.py`
+  - `M	tests/test_virtual_ai_os_runtime_router.py`
+  - `U	tests/test_virtual_ai_os_task_orchestration.py`
+  - `M	tests/test_virtual_ai_os_task_orchestration.py`
+- Staged name status:
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	src/handsfree/capability_registry.py`
+  - `U	src/handsfree/config.py`
+  - `A	src/handsfree/meta_glasses_remote_terminal.py`
+  - `A	tests/test_meta_glasses_remote_terminal.py`
+  - `M	tests/test_virtual_ai_os_capability_registry.py`
+  - `M	tests/test_virtual_ai_os_config.py`
+  - `M	tests/test_virtual_ai_os_end_to_end.py`
+  - `U	tests/test_virtual_ai_os_runtime_router.py`
+  - `U	tests/test_virtual_ai_os_task_orchestration.py`
 - Diff stat:
-  - `hallucinate_app | 0`
-  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+  - `hallucinate_app                                    |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md | 12 +++++++`
+  - ` src/handsfree/config.py                            | Unmerged`
+  - ` src/handsfree/config.py                            | 14 ++++++++`
+  - ` tests/test_virtual_ai_os_runtime_router.py         | Unmerged`
+  - ` tests/test_virtual_ai_os_runtime_router.py         | 12 +++++++`
+  - ` tests/test_virtual_ai_os_task_orchestration.py     | Unmerged`
+  - ` tests/test_virtual_ai_os_task_orchestration.py     | 41 ++++++++++++++++++++++`
+  - ` 5 files changed, 79 insertions(+)`
 
 ## Sample Branches Or Worktrees
 
@@ -108,19 +155,43 @@ Work surface: `242` candidates, `20` sampled records.
   "candidate_count": 242,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
+  "fingerprint": "3a6d80b6b4e1c79e480096f83015d8a5511841ee",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
-    "name_status": "M\thallucinate_app",
+    "diff_stat": "hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged\n ...swissknife-meta-glasses-display-widgets.todo.md | 12 +++++++\n src/handsfree/config.py                            | Unmerged\n src/handsfree/config.py                            | 14 ++++++++\n tests/test_virtual_ai_os_runtime_router.py         | Unmerged\n tests/test_virtual_ai_os_runtime_router.py         | 12 +++++++\n tests/test_virtual_ai_os_task_orchestration.py     | Unmerged\n tests/test_virtual_ai_os_task_orchestration.py     | 41 ++++++++++++++++++++++\n 5 files changed, 79 insertions(+)",
+    "name_status": "M\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tsrc/handsfree/config.py\nM\tsrc/handsfree/config.py\nU\ttests/test_virtual_ai_os_runtime_router.py\nM\ttests/test_virtual_ai_os_runtime_router.py\nU\ttests/test_virtual_ai_os_task_orchestration.py\nM\ttests/test_virtual_ai_os_task_orchestration.py",
     "path_categories": {
-      "other_dirty": 1
+      "added": 2,
+      "modified": 4,
+      "other_dirty": 1,
+      "unmerged": 4
     },
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tsrc/handsfree/capability_registry.py\nU\tsrc/handsfree/config.py\nA\tsrc/handsfree/meta_glasses_remote_terminal.py\nA\ttests/test_meta_glasses_remote_terminal.py\nM\ttests/test_virtual_ai_os_capability_registry.py\nM\ttests/test_virtual_ai_os_config.py\nM\ttests/test_virtual_ai_os_end_to_end.py\nU\ttests/test_virtual_ai_os_runtime_router.py\nU\ttests/test_virtual_ai_os_task_orchestration.py",
     "status_paths": [
-      "hallucinate_app"
+      "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "src/handsfree/capability_registry.py",
+      "src/handsfree/config.py",
+      "src/handsfree/meta_glasses_remote_terminal.py",
+      "tests/test_meta_glasses_remote_terminal.py",
+      "tests/test_virtual_ai_os_capability_registry.py",
+      "tests/test_virtual_ai_os_config.py",
+      "tests/test_virtual_ai_os_end_to_end.py",
+      "tests/test_virtual_ai_os_runtime_router.py",
+      "tests/test_virtual_ai_os_task_orchestration.py"
     ],
     "status_short": [
-      " m hallucinate_app"
+      " m hallucinate_app",
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "M  src/handsfree/capability_registry.py",
+      "UU src/handsfree/config.py",
+      "A  src/handsfree/meta_glasses_remote_terminal.py",
+      "A  tests/test_meta_glasses_remote_terminal.py",
+      "M  tests/test_virtual_ai_os_capability_registry.py",
+      "M  tests/test_virtual_ai_os_config.py",
+      "M  tests/test_virtual_ai_os_end_to_end.py",
+      "UU tests/test_virtual_ai_os_runtime_router.py",
+      "UU tests/test_virtual_ai_os_task_orchestration.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -153,7 +224,17 @@ Work surface: `242` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "hallucinate_app"
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "src/handsfree/capability_registry.py",
+    "src/handsfree/config.py",
+    "src/handsfree/meta_glasses_remote_terminal.py",
+    "tests/test_meta_glasses_remote_terminal.py",
+    "tests/test_virtual_ai_os_capability_registry.py",
+    "tests/test_virtual_ai_os_config.py",
+    "tests/test_virtual_ai_os_end_to_end.py",
+    "tests/test_virtual_ai_os_runtime_router.py",
+    "tests/test_virtual_ai_os_task_orchestration.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
