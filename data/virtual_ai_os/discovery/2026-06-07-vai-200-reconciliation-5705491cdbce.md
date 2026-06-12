@@ -1,34 +1,38 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: ee4dd400fb9d8abef3756732cc0dc8f8d140c75b
+Fingerprint: c6ed23d65cfd63c2f08a2e16dfc5d757579738ea
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 27
+Candidate count: 29
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- ` M hallucinate_app`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2`
+- Path categories: `modified=4`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	hallucinate_app`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Diff stat:
-  - `.../2026-05-26-mgw-028-merge-unblock-resolution.md     | 18 ++++++++++++++++++`
-  - ` .../18-swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
-  - ` 2 files changed, 19 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
+- `rescue/worktree/implementation-vai-001-attempt-1-1781237885-db42af9d93f2` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885`
+- `implementation/vai-001-attempt-1-1781238154` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781238154`
 - `implementation/vai-002-attempt-1-1781232308` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308`
 - `implementation/vai-003-attempt-1-1781233228` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781233228`
 - `implementation/vai-004-attempt-1-1781233842` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-004-attempt-1-1781233842`
@@ -47,8 +51,6 @@ Track: ops
 - `implementation/vai-317-attempt-1-1781226464` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-317-attempt-1-1781226464`
 - `implementation/vai-318-attempt-1-1781226886` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781226886`
 - `implementation/vai-318-attempt-1-1781236312` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236312`
-- `rescue/worktree/implementation-vai-319-attempt-1-1781227562-62fae97ef71a` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781227562`
-- `rescue/worktree/implementation-vai-319-attempt-1-1781236747-0b6dfb7b5c5b` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781236747`
 
 ## Why This Blocks Progress
 
@@ -67,7 +69,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `27` candidates, `20` sampled records.
+Work surface: `29` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -109,23 +111,30 @@ Work surface: `27` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 27,
+  "candidate_count": 29,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ee4dd400fb9d8abef3756732cc0dc8f8d140c75b",
+  "fingerprint": "c6ed23d65cfd63c2f08a2e16dfc5d757579738ea",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../2026-05-26-mgw-028-merge-unblock-resolution.md     | 18 ++++++++++++++++++\n .../18-swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 2 files changed, 19 insertions(+), 1 deletion(-)",
-    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 2
+      "modified": 4
     },
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      " M hallucinate_app",
       " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
@@ -136,6 +145,8 @@ Work surface: `27` candidates, `20` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
+    "rescue/worktree/implementation-vai-001-attempt-1-1781237885-db42af9d93f2",
+    "implementation/vai-001-attempt-1-1781238154",
     "implementation/vai-002-attempt-1-1781232308",
     "implementation/vai-003-attempt-1-1781233228",
     "implementation/vai-004-attempt-1-1781233842",
@@ -153,16 +164,18 @@ Work surface: `27` candidates, `20` sampled records.
     "implementation/vai-218-attempt-1-1780999166",
     "implementation/vai-317-attempt-1-1781226464",
     "implementation/vai-318-attempt-1-1781226886",
-    "implementation/vai-318-attempt-1-1781236312",
-    "rescue/worktree/implementation-vai-319-attempt-1-1781227562-62fae97ef71a",
-    "rescue/worktree/implementation-vai-319-attempt-1-1781236747-0b6dfb7b5c5b"
+    "implementation/vai-318-attempt-1-1781236312"
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-028-merge-unblock-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781238154",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-003-attempt-1-1781233228",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-004-attempt-1-1781233842",
@@ -180,9 +193,7 @@ Work surface: `27` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-218-attempt-1-1780999166",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-317-attempt-1-1781226464",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781226886",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236312",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781227562",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781236747"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236312"
   ],
   "success_signals": [
     "candidate_count_decreases",
