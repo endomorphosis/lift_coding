@@ -29,7 +29,10 @@
 - The scanner finding at line 18 was stale PR-log wording, not live router debt.
 - Verified `src/handsfree/commands/router.py` uses `ProfileConfig.for_profile()`
   and passes `profile_config.privacy_mode` into inbox and PR summary handlers.
-- The PR log records the completed cleanup without annotation-style wording on the scanner-flagged summary line.
+- Verified focused coverage remains in `tests/test_profile_privacy_mode.py` and
+  `tests/test_router_privacy_mode.py`.
+- The scanner-flagged summary line now describes completed behavior without
+  annotation-style cleanup wording.
 
 ## VAI-095 Resolution
 The line 18 scan finding matched a completed-work note, not unresolved product
