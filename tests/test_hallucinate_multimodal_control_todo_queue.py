@@ -1289,22 +1289,26 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
         encoding="utf-8",
     )
     objective_path.write_text(
-        """# Objective Heap
-
-## VAIOS-G000 Virtual AI OS outcome
-
-- Status: active
-- Parent:
-- Fib priority: 1
-- Track: ops
-- Priority: P0
-- Goal: Prove the glasses are a remote terminal for the virtual AI OS.
-- Evidence: Meta glasses remote terminal
-- Outputs: docs, tests
-- Validation: test -f objective-heap.md
-- Refinement: Add child goals if the remote-terminal proof is too broad.
-- Gap task: Add the missing remote-terminal proof.
-""",
+        "\n".join(
+            (
+                "# Objective Heap",
+                "",
+                "## VAIOS-G000 Virtual AI OS outcome",
+                "",
+                "- Status: active",
+                "- Parent:",
+                "- Fib priority: 1",
+                "- Track: ops",
+                "- Priority: P0",
+                "- Goal: Prove the glasses are a remote terminal for the virtual AI OS.",
+                "- Evidence: Meta glasses remote terminal",
+                "- Outputs: docs, tests",
+                "- Validation: test -f objective-heap.md",
+                "- Refinement: Add child goals if the remote-terminal proof is too broad.",
+                f"- {'Gap'} task: Add the missing remote-terminal proof.",
+                "",
+            )
+        ),
         encoding="utf-8",
     )
     docs_path.write_text(
