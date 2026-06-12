@@ -1,7 +1,7 @@
 # HAO-310 Reconciliation Guardrail
 
-Date: 2026-06-09
-Fingerprint: 4be543b68e7dd3d4e830d4e83089e5046602d128
+Date: 2026-06-12
+Fingerprint: 59c935d7eab6f8b74232aa296dd3adec2baee5d7
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,12 +18,16 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/hao-306-attempt-8-1780836137` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-306-attempt-8-1780836137` status: ` m hallucinate_app`
+- `implementation/hao-307-attempt-1-1781235947` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-307-attempt-1-1781235947` status: ` m external/ipfs_kit;  M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
   - Name status:
-    - `M	hallucinate_app`
+    - `M	external/ipfs_kit`
+    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
   - Diff stat:
-    - `hallucinate_app | 0`
-    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+    - `external/ipfs_kit                                            |  0`
+    - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | 12 ++++++++++++`
+    - ` .../docs/19-virtual-ai-os-submodule-integration.todo.md      | 12 ++++++++++++`
+    - ` 3 files changed, 24 insertions(+)`
 
 ## Why This Blocks Progress
 
@@ -93,7 +97,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "4be543b68e7dd3d4e830d4e83089e5046602d128",
+  "fingerprint": "59c935d7eab6f8b74232aa296dd3adec2baee5d7",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -103,14 +107,16 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/hao-306-attempt-8-1780836137"
+    "implementation/hao-307-attempt-1-1781235947"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app"
+    "external/ipfs_kit",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-306-attempt-8-1780836137"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-307-attempt-1-1781235947"
   ],
   "success_signals": [
     "candidate_count_decreases",

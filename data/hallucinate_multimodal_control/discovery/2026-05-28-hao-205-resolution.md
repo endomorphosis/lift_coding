@@ -9,7 +9,9 @@ Source: hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.p
 Replaced bare `except:` (which silently discarded any database error) with
 `except Exception as e:`. The caught error is now stored in `table_count_error`
 and surfaced in the `get_stats()` return dict so callers can detect and log
-connection/query failures without crashing the stats call.
+connection/query failures without crashing the stats call. The fallback also
+emits a module warning so runtime diagnostics are not limited to callers that
+inspect the returned stats payload.
 
 ## Validation
 
