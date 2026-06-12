@@ -6,7 +6,7 @@ Evidence: `data/virtual_ai_os/discovery/2026-05-28-vai-114-codebase-scan-7d52a8f
 
 ## Finding
 
-<!-- scanner-resolved: historical reference only, no active annotation remains -->
+<!-- scanner-resolved: MGW-152 historical scanner-pattern reference only, no active annotation remains -->
 The codebase scanner flagged line 301 of
 `scripts/hallucinate_multimodal_control_todo_supervisor.py` as an
 `annotated_followup` because the literal string
