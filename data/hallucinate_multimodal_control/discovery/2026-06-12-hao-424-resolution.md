@@ -8,34 +8,34 @@ Kind: merge retry-budget repair
 ## Finding
 
 The retry-budget evidence in
-`2026-06-12-hao-424-hao-326-merge-retry-budget.md` showed three repeated
-`main_checkout_dirty_conflict` merge failures for
-`implementation/hao-326-attempt-1-1781241072`. The blocker was not a semantic
-source conflict; the main checkout had local changes in
-`implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`.
+`2026-06-12-hao-424-hao-326-merge-retry-budget.md` showed repeated merge
+failures for `implementation/hao-326-attempt-1-1781241072`.
+
+The intended HAO-326 implementation lives in the `external/ipfs_kit` submodule,
+but fresh worktrees could not materialize the expected file because
+`.gitmodules` configured `external/ipfs_kit` to clone
+`https://github.com/endomorphosis/ipfs_kit_py` while the parent gitlink pointed
+at commits from `https://github.com/endomorphosis/ipfs_kit`. Submodule
+initialization failed before the merge daemon could verify
+`external/ipfs_kit/archive/applied_patches/fix_all_storacha.py`.
 
 ## Repair
 
-HAO-326 verified that the exception handling at
-`external/ipfs_kit/archive/applied_patches/fix_all_storacha.py:55` already
-uses a narrowed `except (OSError, shutil.Error):` clause rather than a bare
-`except Exception as e:`. This finding was already documented in
-`data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md`
-which is committed in main.
+Updated the `external/ipfs_kit` submodule URL to
+`https://github.com/endomorphosis/ipfs_kit` and advanced the parent gitlink to
+`58873ab257104981aa9ba7bee0c2368369716be7`, the HAO-326 implementation commit.
+That commit is reachable from the corrected remote and contains
+`archive/applied_patches/fix_all_storacha.py`.
 
-The dirty path `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-that blocked the merge was a transient state in the main checkout from
-concurrent supervisor reconciliation passes. The path is no longer dirty,
-so the merge blocker no longer applies to a fresh merge attempt.
+The `backup_file` function in the materialized file correctly catches only
+`(OSError, shutil.Error)`, logs the traceback with `logger.exception`, and
+returns `None` on failure. The `update_storacha_kit` caller checks that return
+value before replacing `storacha_kit.py`, so the original swallowed-exception
+finding is fixed in the owning submodule.
 
-The `fix_all_storacha.py` file passes `python3 -m py_compile` without errors.
-The `backup_file` function at line 55 correctly catches only
-`(OSError, shutil.Error)` and returns `None` on failure, with callers checking
-the return value before proceeding with file mutations.
-
-Because the recorded failure reason was `main_checkout_dirty_conflict` and not a
-semantic merge conflict, `ipfs-accelerate-agent-merge-resolver --apply` was not
-run.
+Because the blocker was submodule materialization and not a semantic source
+conflict, `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` was
+not run.
 
 ## Validation
 
