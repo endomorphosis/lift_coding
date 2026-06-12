@@ -216,6 +216,7 @@ def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():
 
 
 def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, monkeypatch):
+    daemon_module = _load_script_module("virtual_ai_os_todo_daemon")
     supervisor_module = _load_script_module("virtual_ai_os_todo_supervisor")
     custom_board = tmp_path / _task_board_filename("custom")
     custom_state = tmp_path / "custom-state"
@@ -225,8 +226,12 @@ def test_virtual_ai_os_supervisor_bootstrap_paths_can_be_overridden(tmp_path, mo
     monkeypatch.setenv("HANDSFREE_VAI_OS_STATE_DIR", str(custom_state))
     monkeypatch.setenv("HANDSFREE_VAI_OS_WORKTREE_ROOT", str(custom_worktrees))
 
+    daemon_paths = daemon_module.virtual_ai_os_bootstrap_paths()
     paths = supervisor_module.virtual_ai_os_bootstrap_paths()
 
+    assert daemon_paths["todo_path"] == custom_board
+    assert daemon_paths["state_dir"] == custom_state
+    assert daemon_paths["worktree_root"] == custom_worktrees
     assert paths["todo_path"] == custom_board
     assert paths["state_dir"] == custom_state
     assert paths["worktree_root"] == custom_worktrees
