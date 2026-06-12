@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 69efe5d22cc75e3e1f7dd2b935b66c4d0e2b18f7
+Fingerprint: 643808483e1fb46c58838574660a9e1a3079d7bf
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 20
@@ -12,34 +12,24 @@ Track: ops
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m external/ipfs_kit`
-- ` M hallucinate_app`
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `UU src/handsfree/transport/libp2p_bluetooth.py`
 - `?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
 - `?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1, unmerged=2, untracked=2`
+- Path categories: `modified=1, other_dirty=1, untracked=2`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `external/ipfs_kit`
-  - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `src/handsfree/transport/libp2p_bluetooth.py`
   - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
-  - `M	hallucinate_app`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	src/handsfree/transport/libp2p_bluetooth.py`
-  - `M	src/handsfree/transport/libp2p_bluetooth.py`
-- Staged name status:
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	src/handsfree/transport/libp2p_bluetooth.py`
+- Diff stat:
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++++++---------`
+  - ` external/ipfs_kit                                  |  0`
+  - ` 2 files changed, 42 insertions(+), 29 deletions(-)`
 - Untracked paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
@@ -129,35 +119,25 @@ Work surface: `20` candidates, `20` sampled records.
   "candidate_count": 20,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "69efe5d22cc75e3e1f7dd2b935b66c4d0e2b18f7",
+  "fingerprint": "643808483e1fb46c58838574660a9e1a3079d7bf",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tsrc/handsfree/transport/libp2p_bluetooth.py\nM\tsrc/handsfree/transport/libp2p_bluetooth.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 71 +++++++++++++---------\n external/ipfs_kit                                  |  0\n 2 files changed, 42 insertions(+), 29 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 2,
+      "modified": 1,
       "other_dirty": 1,
-      "unmerged": 2,
       "untracked": 2
     },
-    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tsrc/handsfree/transport/libp2p_bluetooth.py",
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "external/ipfs_kit",
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "src/handsfree/transport/libp2p_bluetooth.py",
       "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
       "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m external/ipfs_kit",
-      " M hallucinate_app",
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "UU src/handsfree/transport/libp2p_bluetooth.py",
       "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
       "?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
     ],
@@ -198,9 +178,6 @@ Work surface: `20` candidates, `20` sampled records.
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "external/ipfs_kit",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "src/handsfree/transport/libp2p_bluetooth.py",
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md"
   ],
