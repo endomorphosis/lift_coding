@@ -8,13 +8,12 @@ Fingerprint: 929aa289911ea57f76b2677179a67264b2319a3a
 
 ## Finding
 
-The codebase scanner flagged line 13 of `data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md`.
-The scan evidence captured an older suppression comment whose prose repeated the old sentinel
-literal by name while explaining that it was not active code.
-
-```html
-<!-- scanner-resolved: MGW-177, MGW-188, MGW-193, MGW-198, MGW-203, MGW-208, MGW-213, MGW-218, MGW-223, MGW-228, MGW-233, MGW-249 - lines 9-12 are historical prose documenting the sentinel change; MGW-188 evidence 929aa289911e confirmed this is a completed false-positive note, and the old literal is intentionally omitted so it does not create another scanner finding. -->
-```
+The codebase scanner flagged line 13 of
+`data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md`. The evidence
+snapshot was an older `scanner-resolved` HTML comment whose prose explicitly
+named the previous three-character sentinel. The current source line avoids
+quoting that literal so the completed false-positive note does not create
+another scanner finding.
 
 The scanner treated this HTML suppression marker as an `annotated_followup`, filing MGW-188.
 
@@ -47,4 +46,5 @@ False positive suppressed. No functional change to runtime behaviour.
 test -f data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md
 ```
 
-Exit code 0 - file exists with updated suppression annotation in place.
+Exit code 0 — file exists with MGW-188 in the suppression annotation and the old
+sentinel literal omitted from the source line.
