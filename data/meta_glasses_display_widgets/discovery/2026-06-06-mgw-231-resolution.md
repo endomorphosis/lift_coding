@@ -19,11 +19,15 @@ a resolved discovery file, not a deferred-work annotation in source code. The
 
 ## Resolution
 
-- Added `MGW-231` to the `scanner-resolved` tag on line 7 of
-  `data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md` so the
-  supervisor recognises all three review cycles and does not schedule a fourth.
-- No functional change required; the underlying code and its clarifying comment
-  at `scripts/hallucinate_multimodal_control_todo_supervisor.py:307` remain
+- Confirmed false positive: the scanner matched prose text in a resolved
+  discovery file, not a deferred-work annotation in source code.
+- Removed the inline `<!-- scanner-resolved: ... -->` HTML comments from
+  `data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md` because those
+  comments themselves repeated the scanner-sensitive token ("todo" inside the
+  HTML comment text) and caused repeated re-flags (MGW-202, MGW-207, MGW-231).
+  The rewritten prose on line 7 no longer contains a scanner-sensitive pattern.
+- No functional change required; the underlying code at
+  `scripts/hallucinate_multimodal_control_todo_supervisor.py:308` remains
   correct as written.
 
 ## Validation
