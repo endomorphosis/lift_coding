@@ -23,7 +23,7 @@ Wire the native iOS/Android glasses audio modules into the React Native app so t
 
 ## References
 - `mobile/src/screens/GlassesDiagnosticsScreen.js` - diagnostics UI integration for route status, recording, playback, and TTS playback.
-- `mobile/modules/expo-glasses-audio/README.md` - active Expo module API and development-build usage notes.
+- `mobile/modules/expo-glasses-audio/README.md` - active Expo module API, dev-client requirements, permissions, and event-listener guidance.
 - `mobile/glasses/BRIDGE_README.md` - standalone bridge architecture reference for Android recorder/player behavior.
 - `docs/implementation/IMPLEMENTATION_SUMMARY_PR052.md` - PR-052 implementation summary and validation notes.
 - `docs/meta-ai-glasses-audio-routing.md` - Bluetooth audio routing background for Meta AI Glasses.
@@ -34,3 +34,6 @@ the diagnostics screen, active Expo module docs, bridge architecture notes,
 implementation summary, and audio-routing guide. The older broad glasses
 diagnostics checklist is historical planning context and is intentionally not
 used as the PR-052 reference.
+VAI-086 resolved the original line-26 scan finding by replacing the broad
+README description with the specific Expo module API and dev-client evidence
+needed for PR-052 validation.
