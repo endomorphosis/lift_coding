@@ -19,27 +19,29 @@ treat it as a deferred-work annotation (`annotated_followup`), filing MGW-190.
 
 ## Resolution
 
-This is a **false positive**. The flagged line came from the earlier supervisor
-implementation, where the CLI flag name referred to the backlog task-board
-vector index, not a deferred code action. The current supervisor has since been
-reduced to a 129-line bootstrap wrapper, so the original source line 305 no
-longer exists.
+This is a **false positive**. The word "todo" appeared in the CLI flag name
+`--objective-todo-vector-index-path`, where it referred to the backlog task-board (work-item queue),
+not a deferred code action. The flagged line came from an earlier supervisor implementation; the
+current supervisor has since been reduced to a bootstrap wrapper, so the original source line 305
+no longer exists.
 
-The remaining scanner-sensitive fields in the current wrapper are the bootstrap
-path-key and path-flag arguments passed into `build_script_supervisor_bootstrap_runner`.
-They name the backlog task-board location. The source comment now records the
-MGW-190 suppression without repeating the old flag-name text:
+The supervisor no longer injects that flag directly; it now imports the shared `TASK_BOARD_PATH_KEY`
+and `TASK_BOARD_PATH_OPTION` values from the daemon and passes them into
+`build_script_supervisor_bootstrap_runner`. The remaining `todo_path_key` and `todo_path_flag`
+wrapper argument names are part of the shared supervisor API. The source comment now records the
+false positive so the scanner does not re-file the same finding:
 
 ```python
-# scanner-resolved: MGW-190 - these bootstrap path fields name the
-# backlog task-board location; they are not deferred-work annotations.
+# scanner-resolved: MGW-190 - the old objective-todo flag is gone; these
+# todo_path_* wrapper arguments name the backlog work-item queue path.
+
 ```
 
-<!-- scanner-resolved: MGW-190 — this resolution document records a false positive; no active annotation remains in the source file -->
+<!-- scanner-resolved: MGW-190 - this resolution document records a false positive; no active annotation remains in the source file -->
 
 ## Status
 
-False positive suppressed. No functional change to runtime behaviour.
+False positive suppressed. No functional change to runtime behavior.
 
 ## Validation
 
@@ -47,4 +49,4 @@ False positive suppressed. No functional change to runtime behaviour.
 python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 ```
 
-Exit code 0 — script compiles successfully with the updated comment in place.
+Exit code 0 - script compiles successfully with the updated comment in place.
