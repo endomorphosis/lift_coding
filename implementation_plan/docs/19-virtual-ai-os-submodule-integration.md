@@ -6,7 +6,7 @@ Comprehensive integration plan for turning the current HandsFree monorepo plus i
 
 Created: 2026-05-22
 Refreshed: 2026-05-23
-MCP++ source re-check: 2026-05-25
+MCP++ source re-check: 2026-06-12
 VAI-001 topology checkpoint: 2026-06-12
 
 ## Goal
@@ -118,6 +118,15 @@ Pin guardrails:
 - Until `external/ipfs_kit` advances the nested `ipfs_accelerate_py` gitlink to a verified upstream pin, local bootstrap should avoid recursive update traversal through `external/ipfs_kit`. Use `git submodule update --init external/ipfs_kit` followed by `git -C external/ipfs_kit submodule status` for status-only hygiene; initialize specific nested dependencies only after their pins are verified.
 - Evidence: [data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md](../../data/virtual_ai_os/discovery/submodule-refresh-2026-05-23.md)
 
+### 2026-06-12 VAI-025 MCP++ canonical-source re-check
+
+- The requested snake-case upstream `https://github.com/endomorphosis/mcp_plus_plus` still returns `Repository not found` via `git ls-remote`.
+- The case-sensitive upstream `https://github.com/endomorphosis/Mcp-Plus-Plus.git` still resolves; `HEAD` and `refs/heads/main` both point to `29343be704da4e193ff143bac7daae9b0f98435d`.
+- Root `.gitmodules` already maps the existing `Mcp-Plus-Plus` gitlink to the case-sensitive upstream URL, and `git submodule status -- Mcp-Plus-Plus` reports the same recorded pin.
+- Decision: keep `Mcp-Plus-Plus` as the standalone MCP++ spec/docs source, keep the root pin at `29343be704da4e193ff143bac7daae9b0f98435d`, and do not add or rename to a lowercase `mcp_plus_plus` submodule.
+- Runtime MCP++ behavior remains a distributed protocol surface across SwissKnife, `ipfs_datasets_py`, and `ipfs_accelerate_py` until a distinct standalone service implementation is reviewed.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md)
+
 ### 2026-05-25 MCP++ canonical-source re-check
 
 - The requested snake-case upstream `https://github.com/endomorphosis/mcp_plus_plus` still returns `Repository not found` via `git ls-remote`.
@@ -128,16 +137,16 @@ Pin guardrails:
 
 ### Upstream blocker history
 
-- Requested upstream `https://github.com/endomorphosis/mcp_plus_plus` did not resolve via `git ls-remote` on 2026-05-22 and still does not resolve on the 2026-05-25 re-check.
+- Requested upstream `https://github.com/endomorphosis/mcp_plus_plus` did not resolve via `git ls-remote` on 2026-05-22 and still does not resolve on the 2026-06-12 VAI-025 re-check.
 - The valid canonical source uses the case-sensitive repository name `Mcp-Plus-Plus`; do not encode the broken snake-case URL in root submodule metadata.
 - Keep MCP++ runtime implementation as a distributed protocol surface until a reviewed standalone service exists beyond the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
 
 ### Canonical-source resolution
 
 - Initial resolution date: 2026-05-22.
-- Re-check date: 2026-05-25.
+- Re-check date: 2026-06-12.
 - Decision: wire the existing `Mcp-Plus-Plus` root gitlink in `.gitmodules` to `https://github.com/endomorphosis/Mcp-Plus-Plus.git` and keep the pin at `29343be704da4e193ff143bac7daae9b0f98435d`.
-- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-05-25.md) records the current `Repository not found` result for the snake-case URL, the successful case-sensitive upstream resolution, and the decision to treat `Mcp-Plus-Plus` as the standalone spec/docs source.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md) records the current `Repository not found` result for the snake-case URL, the successful case-sensitive upstream resolution, and the decision to treat `Mcp-Plus-Plus` as the standalone spec/docs source.
 - Re-open the runtime-service decision only when a reviewed upstream implementation exists and can be pinned without duplicating the already-integrated MCP, ORB, and routing surfaces in `swissknife`, `ipfs_accelerate_py`, and `ipfs_datasets_py`.
 
 ## Current Integration Baseline
