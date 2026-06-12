@@ -6,28 +6,35 @@ Status: fixed
 
 ## Bug
 
-`DuckDBIPLDKit.test()` used a bare `except Exception: pass` block when cleaning up
-the temporary `test_table` after the integration test run.  The exception was
-completely swallowed—no logging, no variable binding—making it impossible to
-diagnose cleanup failures during development or CI.
+`DuckDBIPLDKit.test()` intentionally catches exceptions from the Arrow export
+self-test so it can return a structured failed test result. The path previously
+only encoded the error in the returned payload, which made unexpected Arrow
+runtime failures easy to miss in logs during development or CI.
 
 ## Fix
 
-Changed the bare swallow to capture the exception and emit a DEBUG log message,
-following the same pattern used elsewhere in the file (e.g. lines 191–200):
+Kept the self-test behavior of returning a structured failed result, but made the
+exception observable in logs with traceback via `logger.exception(...)`:
 
 ```python
 # Before
-except Exception:
-    pass  # Best-effort cleanup; ...
+except Exception as e:
+    results["tests"]["arrow_export"] = {
+        "success": False,
+        "error": str(e)
+    }
 
 # After
 except Exception as e:
-    logger.debug("Failed to drop test_table during cleanup (best-effort): %s", e)
+    logger.exception("DuckDB-IPLD self-test arrow export failed")
+    results["tests"]["arrow_export"] = {
+        "success": False,
+        "error": str(e)
+    }
 ```
 
-The cleanup is still best-effort (exceptions are not re-raised) so test results
-are still returned to the caller even when the DROP fails.
+The exception is still not re-raised because this method is a module self-test
+that reports per-check failures through its result object.
 
 ## Validation
 
