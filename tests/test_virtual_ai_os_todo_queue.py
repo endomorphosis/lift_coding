@@ -206,6 +206,15 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     ] == (
         llm_merge_resolver_fallback_command()
     )
+    common_arg_values = [
+        launcher_args[index + 1]
+        for index, arg in enumerate(launcher_args)
+        if arg == "--common-arg"
+    ]
+    assert "--worktree-reconciliation-max-merges" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "2"
+    assert "--merge-reconciliation-max-merges" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "1"
     assert runner_module.default_launch_args(()) == ["--detach"]
     assert runner_module.default_launch_args(("--detach",)) == ["--detach"]
     assert runner_module.default_launch_args(("--duration-seconds", "5")) == [
