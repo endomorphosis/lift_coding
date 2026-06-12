@@ -427,7 +427,7 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 17 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 18 worktree merges
 
 ## VAI-201 Resolve 63 dirty backlogged worktrees blocked by content_not_in_target
 
