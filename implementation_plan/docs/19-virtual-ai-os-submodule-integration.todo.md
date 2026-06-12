@@ -29,6 +29,15 @@ cadence remains parseable and resumable.
 
 ## VAI-000 Bootstrap supervised virtual-AI-OS backlog processing
 
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: none
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, scripts/virtual_ai_os_todo_daemon.py, scripts/virtual_ai_os_todo_supervisor.py, scripts/virtual_ai_os_llm_router.py, tests/test_virtual_ai_os_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: The virtual-AI-OS backlog is daemon-parseable, exposes repo-local daemon, supervisor, and LLM-router wrappers, and can run in isolated implementation worktrees without writing supervisor state to the parent checkout.
+
 ## VAI-001 Record reviewed source topology and pin guardrails
 
 ## VAI-002 Align root git submodule wiring with canonical upstreams
@@ -55,7 +64,25 @@ cadence remains parseable and resumable.
 
 ## VAI-013 Resolve the canonical mcp_plus_plus upstream source
 
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-001
+- Outputs: .gitmodules, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: git submodule status Mcp-Plus-Plus; rg -n "Mcp-Plus-Plus|repository not found|distributed protocol surface" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Resolve the canonical source for the standalone MCP++ spec/docs gitlink, record the case-sensitive upstream or repository not found evidence, and keep runtime MCP++ behavior described as a distributed protocol surface unless a distinct implementation is reviewed.
+
 ## VAI-014 Investigate implementation unknowns and expand the backlog
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-003, VAI-004, VAI-005, VAI-006, VAI-007, VAI-008, VAI-009, VAI-010, VAI-011, VAI-012, VAI-013
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py; rg -n "VAI-014|unknowns|Discovery|discovered" implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: After the initial backlog completes, investigate the cross-submodule control-plane, UI-plane, device-plane, and daemon-integration code paths for implementation unknowns. Append new daemon-parseable VAI tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
 
 ## VAI-015 Refresh reviewed submodule pins and automation guardrails
 
