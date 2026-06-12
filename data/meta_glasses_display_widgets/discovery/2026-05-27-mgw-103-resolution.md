@@ -16,10 +16,11 @@ reference made the tracker look like it still contained an unresolved annotation
 The tracker now points at the concrete integration artifacts for PR-052:
 `mobile/src/screens/GlassesDiagnosticsScreen.js`,
 `mobile/modules/expo-glasses-audio/README.md`,
-`mobile/glasses/BRIDGE_README.md`, and the audio-routing guide. These references
-cover the native module surface, route/record/playback usage, TTS playback path,
-and Expo dev-client expectations without keeping the checklist filename in the
-tracking file.
+`mobile/glasses/BRIDGE_README.md`,
+`docs/implementation/IMPLEMENTATION_SUMMARY_PR052.md`, and the audio-routing
+guide. These references cover the native module surface, route/record/playback
+usage, TTS playback path, implementation validation notes, and Expo dev-client
+expectations without keeping the checklist filename in the tracking file.
 
 ## Validation
 
