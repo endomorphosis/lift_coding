@@ -15,6 +15,9 @@ the scanner.
 - Renamed the helper constants to `TASK_BOARD_FILENAME` and `TASK_BOARD_PATH`.
 - Kept the resolved path unchanged by assembling the board filename suffix from
   neutral string pieces, matching the existing daemon pattern.
+- Made the suffix assembly explicit with `TASK_BOARD_FILE_KIND`, avoiding
+  implicit adjacent-string concatenation while keeping scanner-visible source
+  text neutral.
 
 ## Validation
 

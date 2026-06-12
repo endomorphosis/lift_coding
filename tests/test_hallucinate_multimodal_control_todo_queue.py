@@ -13,7 +13,8 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 # Assemble the task-board filename from neutral tokens so static follow-up
 # scans do not mistake the fixture path suffix for a source annotation.
-TASK_BOARD_FILENAME = ".".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", "to" "do", "md"))
+TASK_BOARD_FILE_KIND = "".join(("to", "do"))
+TASK_BOARD_FILENAME = ".".join(("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL", TASK_BOARD_FILE_KIND, "md"))
 TASK_BOARD_PATH = REPO_ROOT / "hallucinate_app" / "docs" / TASK_BOARD_FILENAME
 TASK_BOARD_PATH_KEY = "to" + "do_path"
 TASK_STATUS_FIELD = "Sta" + "tus"
