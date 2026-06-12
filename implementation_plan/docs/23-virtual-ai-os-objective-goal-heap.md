@@ -71,6 +71,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Evidence: objective_goal_scan, objective_goal_seen_fingerprints, last_objective_goal_scan_findings, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Outputs: scripts/hallucinate_multimodal_control_todo_daemon.py, tests/test_hallucinate_multimodal_control_todo_queue.py
 - Validation: test -f scripts/hallucinate_multimodal_control_todo_daemon.py && test -f tests/test_hallucinate_multimodal_control_todo_queue.py
+- HAO-061 proof: `scripts/hallucinate_multimodal_control_todo_daemon.py` exposes `OBJECTIVE_GOAL_SCAN_EVIDENCE` for `objective_goal_scan`, `objective_goal_seen_fingerprints`, and `last_objective_goal_scan_findings`. `scripts/hallucinate_multimodal_control_todo_supervisor.py` imports that evidence contract while wiring `record_objective_goal_findings` into the supervisor refill hooks, and `tests/test_hallucinate_multimodal_control_todo_queue.py` asserts the configured objective recorder targets the shared objective heap, bundle shard directory, dataset directory, and todo-vector index.
 - Refinement: Split into scoring, evidence indexing, and task-generation children if the scanner becomes too broad.
 - Gap task: Wire an objective-gap scanner into the supervisor loop and prove it can emit daemon-parseable tasks.
 - Completed at: 2026-05-31T07:38:46.698317+00:00
