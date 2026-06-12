@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: eadf944a8110f9b717ec8d3c615184417d11ab19
+Fingerprint: 78781dee2fa34f5a490386d7d7d264e99e9acacd
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 116
@@ -10,32 +10,26 @@ Track: ops
 
 ## Main Checkout Status
 
-- `M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - ` m external/ipfs_kit`
-- ` M hallucinate_app`
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `M  scripts/virtual_ai_os_todo_supervisor.py`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=4, other_dirty=1, unmerged=1`
+- Path categories: `modified=2, other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `external/ipfs_kit`
-  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `scripts/virtual_ai_os_todo_supervisor.py`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `M	external/ipfs_kit`
-  - `M	hallucinate_app`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Staged name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	scripts/virtual_ai_os_todo_supervisor.py`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Diff stat:
+  - `...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 70 ++++++++++++----------`
+  - ` external/ipfs_kit                                  |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  6 +-`
+  - ` 3 files changed, 40 insertions(+), 36 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -122,34 +116,24 @@ Work surface: `116` candidates, `20` sampled records.
   "candidate_count": 116,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "eadf944a8110f9b717ec8d3c615184417d11ab19",
+  "fingerprint": "78781dee2fa34f5a490386d7d7d264e99e9acacd",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 70 ++++++++++++----------\n external/ipfs_kit                                  |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  6 +-\n 3 files changed, 40 insertions(+), 36 deletions(-)",
+    "name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_kit\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 4,
-      "other_dirty": 1,
-      "unmerged": 1
+      "modified": 2,
+      "other_dirty": 1
     },
-    "staged_name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tscripts/virtual_ai_os_todo_supervisor.py",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
       "external/ipfs_kit",
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "scripts/virtual_ai_os_todo_supervisor.py"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      "M  data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
       " m external/ipfs_kit",
-      " M hallucinate_app",
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "M  scripts/virtual_ai_os_todo_supervisor.py"
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -182,12 +166,9 @@ Work surface: `116` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
     "external/ipfs_kit",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "scripts/virtual_ai_os_todo_supervisor.py"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
