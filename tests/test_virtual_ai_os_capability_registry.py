@@ -3,6 +3,7 @@
 from handsfree.ai import (
     CapabilityExecutionMode,
     build_virtual_ai_os_execution_matrix,
+    build_virtual_ai_os_result_envelope,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
@@ -35,8 +36,23 @@ def test_virtual_ai_os_registry_includes_cross_repo_metadata():
     assert embedding.server_family == "ipfs_datasets"
     assert embedding.default_execution_mode == CapabilityExecutionMode.DIRECT_IMPORT
     assert embedding.fallback_execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert embedding.voice_formatter == "handsfree.ai.formatters:format_embedding_summary"
+    assert (
+        embedding.follow_up_action_builder
+        == "handsfree.ai.follow_up_actions:build_embedding_actions"
+    )
     assert embedding.artifact_output == ("embedding_vector", "embedding_dimensions")
     assert "tests/test_virtual_ai_os_capability_registry.py" in embedding.integration_test_ids
+
+
+def test_virtual_ai_os_registry_defines_formatter_and_follow_up_contracts_for_all_capabilities():
+    for entry in list_virtual_ai_os_capabilities():
+        assert entry.voice_formatter.startswith("handsfree.ai.formatters:format_")
+        assert entry.follow_up_action_builder.startswith(
+            "handsfree.ai.follow_up_actions:build_"
+        )
+        assert entry.input_schema_ref.startswith("handsfree.capability.")
+        assert entry.result_schema_ref.startswith("handsfree.capability.")
 
 
 def test_virtual_ai_os_registry_resolves_legacy_capability_aliases():
@@ -85,6 +101,52 @@ def test_virtual_ai_os_execution_matrix_tracks_mcp_alignment():
     assert matrix["dataset_discovery"]["mcp_capability_registered"] is True
     assert matrix["storage"]["default_execution_mode"] == "mcp_remote"
     assert matrix["workflow"]["fallback_execution_mode"] == "orchestrated"
+    assert matrix["ipfs_pin"]["voice_formatter"] == (
+        "handsfree.ai.formatters:format_ipfs_pin_summary"
+    )
+    assert matrix["ipfs_pin"]["follow_up_action_builder"] == (
+        "handsfree.ai.follow_up_actions:build_ipfs_pin_actions"
+    )
+
+
+def test_virtual_ai_os_result_envelope_uses_shared_top_level_shape():
+    envelope = build_virtual_ai_os_result_envelope(
+        "ipfs_pin",
+        execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        spoken_text="Pin completed.",
+        summary="Pinned CID bafy...",
+        structured_output={"cid": "bafy123", "pin_status": "pinned"},
+        follow_up_actions=({"id": "read_cid", "label": "Read CID"},),
+        request_id="req_123",
+        run_id="run_456",
+        tool_name="tools_dispatch",
+        receipt_ref="receipt_789",
+    )
+
+    assert envelope.as_dict() == {
+        "capability_id": "ipfs_pin",
+        "provider": "ipfs_kit_mcp",
+        "server_family": "ipfs_kit",
+        "execution_mode": "mcp_remote",
+        "status": "completed",
+        "spoken_text": "Pin completed.",
+        "summary": "Pinned CID bafy...",
+        "structured_output": {"cid": "bafy123", "pin_status": "pinned"},
+        "follow_up_actions": [{"id": "read_cid", "label": "Read CID"}],
+        "trace": {
+            "request_id": "req_123",
+            "run_id": "run_456",
+            "tool_name": "tools_dispatch",
+            "remote_task_id": None,
+            "last_protocol_state": "completed",
+        },
+        "artifact_refs": {
+            "result_cid": "bafy123",
+            "receipt_ref": "receipt_789",
+            "event_dag_ref": None,
+            "delegation_ref": None,
+        },
+    }
 
 
 def test_top_level_capability_registry_path_resolves_stable_ids():

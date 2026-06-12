@@ -7,6 +7,7 @@ from .capabilities import (
     list_ai_capabilities,
 )
 from .capability_registry import (
+    build_virtual_ai_os_result_envelope,
     build_virtual_ai_os_execution_matrix,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
@@ -25,7 +26,10 @@ from .observability import (
 )
 from .models import (
     AICapabilityRequest,
+    AICapabilityArtifactRefs,
+    AICapabilityExecutionTrace,
     AICapabilityRegistryEntry,
+    AICapabilityResultEnvelope,
     AICapabilityRoute,
     AICapabilityResult,
     AICapabilitySpec,
@@ -46,7 +50,10 @@ from .serialization import build_api_execute_response
 
 __all__ = [
     "AICapabilityRequest",
+    "AICapabilityArtifactRefs",
+    "AICapabilityExecutionTrace",
     "AICapabilityRegistryEntry",
+    "AICapabilityResultEnvelope",
     "AICapabilityRoute",
     "AICapabilityResult",
     "AICapabilitySpec",
@@ -64,6 +71,7 @@ __all__ = [
     "build_snapshot_policy_config",
     "build_snapshot_health",
     "build_snapshot_summary",
+    "build_virtual_ai_os_result_envelope",
     "build_virtual_ai_os_execution_matrix",
     "build_policy_resolution",
     "build_api_execute_response",
