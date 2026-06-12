@@ -2867,3 +2867,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-12-mgw-258-mgw-188-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-188. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-12-mgw-258-mgw-188-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-188 from strategy blocked_tasks.
+
+## MGW-259 Resolve dependency guardrail for MGW-255
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-12-mgw-259-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-255 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-12-mgw-259-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
