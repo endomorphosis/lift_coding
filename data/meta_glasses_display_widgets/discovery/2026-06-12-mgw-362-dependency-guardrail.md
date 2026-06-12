@@ -1,18 +1,18 @@
-# Dependency Guardrail: MGW-240
+# Dependency Guardrail: MGW-242
 
-Created: 2026-06-12T01:33:41.123684+00:00
-Fingerprint: 4d701a19e17b2ff68efd6f5dcd7582fc22494cec
-Source task: MGW-240 Duplicate task id
+Created: 2026-06-12T01:33:41.124235+00:00
+Fingerprint: a4e42f6513d0e099f54788786e21b2220f605057
+Source task: MGW-242 Duplicate task id
 Missing dependencies: none
 Self-referential dependencies: none
 Dependency cycle: none
-Duplicate task id: MGW-240
-Duplicate source lines: 526, 528
+Duplicate task id: MGW-242
+Duplicate source lines: 549, 567
 
 ## Duplicate Task Titles
 
-- Resolve 2 dirty backlogged worktrees blocked by content_not_in_target
-- Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
+- Resolve 14 preflight-conflicting backlogged worktree merges
+- Resolve 1 preflight-conflicting backlogged worktree merges
 
 ## Why This Blocks Progress
 
