@@ -4,7 +4,7 @@ Date: 2026-06-12
 Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 241
+Candidate count: 242
 Priority: P1
 Track: ops
 
@@ -63,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `241` candidates, `20` sampled records.
+Work surface: `242` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,7 +105,7 @@ Work surface: `241` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 241,
+  "candidate_count": 242,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
   "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
