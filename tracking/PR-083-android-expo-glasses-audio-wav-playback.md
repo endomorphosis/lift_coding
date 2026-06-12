@@ -14,19 +14,18 @@ completion, stop, timeout, or error paths.
 
 iOS already has working implementations under `mobile/modules/expo-glasses-audio/ios/`.
 
-## Scope
-- Implement `startRecording(durationSeconds)` on Android to:
-  - write a valid WAV file (PCM 16-bit, mono; target 16kHz)
-  - return `{ uri, duration, size }` where the file exists and is non-zero
-- Implement `playAudio(fileUri)` on Android to:
-  - parse WAV header (at minimum support PCM 16-bit mono)
-  - stream PCM to `AudioTrack` (or existing `GlassesPlayer.playPcm16Mono` after decoding)
-  - stop/cleanup SCO routing on completion
-  - emit `onPlaybackStatus` events (started/ended/error)
-- Ensure module API is consumable from JS:
-  - Export the `ExpoGlassesAudio` module surface in `mobile/modules/expo-glasses-audio/index.ts` (or clearly separate route-monitor vs record/play exports)
-  - Update TypeScript types under `mobile/src/types/` as needed
-- Update module docs (`mobile/modules/expo-glasses-audio/README.md`) to include recording/playback functions.
+## Delivered scope
+- `startRecording(durationSeconds)` on Android writes valid WAV files
+  (PCM 16-bit, mono, 16 kHz) and returns `{ uri, duration, size }` for the
+  generated file.
+- `playAudio(fileUri)` on Android parses PCM WAV metadata, streams mono
+  16-bit samples to `AudioTrack`, emits `onPlaybackStatus` events, and cleans
+  up SCO routing on completion, stop, timeout, or error paths.
+- The JS/TS module surface exports record/play functions through
+  `mobile/modules/expo-glasses-audio/index.ts` and
+  `mobile/src/types/expo-glasses-audio.d.ts`.
+- `mobile/modules/expo-glasses-audio/README.md` documents the recording and
+  playback functions.
 
 ## Non-goals
 - Perfect WAV compatibility (only what our backend TTS and dev files produce).
@@ -66,10 +65,10 @@ iOS already has working implementations under `mobile/modules/expo-glasses-audio
 - `mobile/modules/expo-glasses-audio/README.md` - module API and Android recording/playback behavior.
 
 ## Resolution notes
-MGW-109 and VAI-089 both matched stale PR-083 tracking text that described
-missing Android WAV playback and recording work. The current Android
+MGW-109 and VAI-089 both matched stale PR-083 tracking text that treated
+Android WAV playback and recording as future work. The current Android
 implementation records non-empty WAV files, parses PCM 16-bit mono WAV files
 for playback, emits recording/playback events through the Expo bridge, and
 cleans up SCO routing on completion, stop, timeout, or playback error paths.
-This tracker now records the shipped implementation state so stale follow-up
-wording is not re-ingested as open work.
+This tracker now records the shipped implementation state so obsolete
+follow-up wording is not re-ingested as open work.

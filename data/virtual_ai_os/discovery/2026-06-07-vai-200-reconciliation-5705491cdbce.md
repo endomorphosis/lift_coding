@@ -1,31 +1,40 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 58cedb5900cf6bc86eef5a79e19f2e965c687b42
+Fingerprint: 8e5d5f1b70c964a9223f9fcb59fa8a182393de4e
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 121
+Candidate count: 129
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- `M  data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- `M  data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - ` m external/ipfs_kit`
+- `M  hallucinate_app`
+- `M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `M  tracking/PR-083-android-expo-glasses-audio-wav-playback.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1`
+- Path categories: `modified=5, other_dirty=1`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `external/ipfs_kit`
+  - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `tracking/PR-083-android-expo-glasses-audio-wav-playback.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	external/ipfs_kit`
-- Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 +++++++++-------------`
-  - ` external/ipfs_kit                                  |  0`
-  - ` 2 files changed, 24 insertions(+), 34 deletions(-)`
+- Staged name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	hallucinate_app`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	tracking/PR-083-android-expo-glasses-audio-wav-playback.md`
 
 ## Sample Branches Or Worktrees
 
@@ -67,7 +76,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `121` candidates, `20` sampled records.
+Work surface: `129` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -109,25 +118,37 @@ Work surface: `121` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 121,
+  "candidate_count": 129,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "58cedb5900cf6bc86eef5a79e19f2e965c687b42",
+  "fingerprint": "8e5d5f1b70c964a9223f9fcb59fa8a182393de4e",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 58 +++++++++-------------\n external/ipfs_kit                                  |  0\n 2 files changed, 24 insertions(+), 34 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\texternal/ipfs_kit",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 1,
+      "modified": 5,
       "other_dirty": 1
     },
+    "staged_name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttracking/PR-083-android-expo-glasses-audio-wav-playback.md",
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "external/ipfs_kit"
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "external/ipfs_kit",
+      "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "tracking/PR-083-android-expo-glasses-audio-wav-playback.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m external/ipfs_kit"
+      "M  data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "M  data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      " m external/ipfs_kit",
+      "M  hallucinate_app",
+      "M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "M  tracking/PR-083-android-expo-glasses-audio-wav-playback.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -161,7 +182,11 @@ Work surface: `121` candidates, `20` sampled records.
   "sample_count": 20,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "external/ipfs_kit"
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "external/ipfs_kit",
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "tracking/PR-083-android-expo-glasses-audio-wav-playback.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
