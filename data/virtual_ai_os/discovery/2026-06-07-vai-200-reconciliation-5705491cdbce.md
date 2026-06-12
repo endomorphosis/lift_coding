@@ -1,40 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 8361895fc4f5a2f42a45e09c9de55316076f9df8
+Fingerprint: 5730a0a4cce733204d39a02d804d12d6a4383fa7
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 21
+Candidate count: 22
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` m external/ipfs_kit`
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `M  scripts/hallucinate_multimodal_control_todo_supervisor.py`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1, unmerged=1, untracked=2`
+- Path categories: `other_dirty=1`
 - Status paths:
   - `external/ipfs_kit`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `scripts/hallucinate_multimodal_control_todo_supervisor.py`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md`
 - Name status:
   - `M	external/ipfs_kit`
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Staged name status:
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	scripts/hallucinate_multimodal_control_todo_supervisor.py`
-- Untracked paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md`
+- Diff stat:
+  - `external/ipfs_kit | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -76,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `21` candidates, `20` sampled records.
+Work surface: `22` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -118,40 +105,22 @@ Work surface: `21` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 21,
+  "candidate_count": 22,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "8361895fc4f5a2f42a45e09c9de55316076f9df8",
+  "fingerprint": "5730a0a4cce733204d39a02d804d12d6a4383fa7",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\texternal/ipfs_kit\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\texternal/ipfs_kit",
     "path_categories": {
-      "modified": 1,
-      "other_dirty": 1,
-      "unmerged": 1,
-      "untracked": 2
+      "other_dirty": 1
     },
-    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tscripts/hallucinate_multimodal_control_todo_supervisor.py",
     "status_paths": [
-      "external/ipfs_kit",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "scripts/hallucinate_multimodal_control_todo_supervisor.py",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md"
+      "external/ipfs_kit"
     ],
     "status_short": [
-      " m external/ipfs_kit",
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "M  scripts/hallucinate_multimodal_control_todo_supervisor.py",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md"
-    ],
-    "untracked_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md"
+      " m external/ipfs_kit"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -184,11 +153,7 @@ Work surface: `21` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "external/ipfs_kit",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-252-mgw-178-merge-retry-budget.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",
