@@ -6,6 +6,13 @@ import os
 from dataclasses import dataclass
 from typing import Mapping
 
+from handsfree.virtual_ai_os_components import (
+    get_virtual_ai_os_component_bootstrap_contract,
+    get_virtual_ai_os_component_environment_contract,
+    get_virtual_ai_os_component_pin_contract,
+    get_virtual_ai_os_component_repo_contracts,
+)
+
 DISPLAY_WIDGET_ENV_DEFAULTS: dict[str, bool] = {
     "HANDSFREE_DISPLAY_WIDGETS_ENABLED": True,
     "HANDSFREE_DISPLAY_WIDGETS_REQUIRE_TRUSTED_DESCRIPTOR": True,
@@ -208,5 +215,9 @@ def get_virtual_ai_os_observability_contract(
             path: dict(contract)
             for path, contract in VIRTUAL_AI_OS_EXECUTION_GUARDS.items()
         },
+        "component_repos": get_virtual_ai_os_component_repo_contracts(source),
+        "component_environment": get_virtual_ai_os_component_environment_contract(),
+        "component_pins": get_virtual_ai_os_component_pin_contract(),
+        "component_bootstrap": get_virtual_ai_os_component_bootstrap_contract(),
         "display_widget": display_widget_config.as_dict(),
     }
