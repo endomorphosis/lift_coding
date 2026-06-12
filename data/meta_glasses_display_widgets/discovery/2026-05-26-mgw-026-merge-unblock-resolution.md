@@ -33,6 +33,21 @@ test coverage. No live semantic conflict remains for
 state so the daemon can retry the original MGW-021 merge without another
 retry-budget loop.
 
+## 2026-06-12 Recheck
+
+The shared repository history now contains the MGW-021 implementation commit
+`16c689f22e29af0ca36073d1d7a1bba984e408e8`, reconciliation commit
+`4875d4d33d2c8f21ff7572cecc23bf0ef393a558`, and prior MGW-026 resolution
+commits `df03c678cafffd011dca500239a5a7f745331238` and
+`e47bb13538698b5beb73ce74fb8b2234ebeaf8a2`. The stale retry-budget branch
+`implementation/mgw-021-attempt-1-1779753702` is no longer present, and
+`MGW-021` is absent from the current strategy `blocked_tasks` list.
+
+No `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` run is
+needed for this recheck because the recorded blocker was a dirty main checkout
+conflict, not an active semantic conflict, and the original implementation is
+already committed in the owning repository history.
+
 ## Validation
 
 ```bash
