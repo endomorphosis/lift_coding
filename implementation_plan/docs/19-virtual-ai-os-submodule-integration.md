@@ -334,7 +334,7 @@ Build a layered test matrix:
 - integration: component-to-component routing
 - harness: hardware-free end-to-end flows
 - device: Android/iOS physical validation
-- ops: daemon, supervisor, and worktree automation
+- ops: daemon, supervisor, and worktree automation — let the todo daemon/supervisor advance backlog items in isolated worktrees, verify worktree isolation on every merge, and confirm the supervisor backlog remains parseable after each cycle.
 
 ## Test Matrix
 
@@ -348,7 +348,7 @@ Build a layered test matrix:
 
 ### Required validation layers
 
-- daemon board parseability tests
+- daemon board parseability tests (supervisor must parse backlog after each worktree cycle)
 - wrapper dry-run tests for `llm_router`
 - capability registry contract tests
 - backend API and OpenAPI tests

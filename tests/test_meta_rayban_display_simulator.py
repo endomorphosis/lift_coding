@@ -73,6 +73,16 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
         request_id: 'test-request',
         sensor: {{ heading: 18 }}
       }});
+      const disabledResult = simulator.buildBridgeResult('render_widget', fixture, 'disabled', {{
+        request_id: 'disabled-request'
+      }});
+      const envelope = simulator.buildInteractionEnvelope('tap', {{
+        action_id: 'pause',
+        request_id: result.requestId,
+        sensor: {{ heading: 18, tilt: 4, roll: 0, acceleration: 0 }}
+      }}, fixture, {{
+        display_state: 'unavailable'
+      }});
       if (!validation.ok) {{
         throw new Error(validation.errors.join('\\n'));
       }}
@@ -81,6 +91,15 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
       }}
       if (result.widgetId !== fixture.widget_id || result.supported !== false) {{
         throw new Error('bridge result did not preserve widget metadata');
+      }}
+      if (disabledResult.requiredAction !== 'enable_display_capability') {{
+        throw new Error('disabled state is not represented in bridge results');
+      }}
+      if (envelope.context.device_context.remote_surface !== 'meta-rayban-display-simulator') {{
+        throw new Error('interaction envelope did not preserve simulator surface');
+      }}
+      if (envelope.raw_payload.widget_cid !== fixture.widget_cid) {{
+        throw new Error('interaction envelope did not preserve widget refs');
       }}
     """
     subprocess.run(["node", "-e", script], check=True, cwd=REPO_ROOT)
@@ -95,6 +114,10 @@ def test_simulator_html_declares_keyboard_and_export_controls() -> None:
     assert "fixture-select" in html
     assert "export-trace-button" in html
     assert "export-readiness-button" in html
+    for token in ["disabled", "roll-input", "acceleration-input"]:
+        assert token in html
+    for token in ["buildInteractionEnvelope", "interaction_envelope", "fallback_reason"]:
+        assert token in source
     for token in ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter", "fetch"]:
         assert token in source
 
