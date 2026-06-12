@@ -99,6 +99,38 @@ def test_virtual_ai_os_mcplusplus_source_task_is_explicit():
     assert "repository not found" in source_task.acceptance.lower() or "distributed protocol surface" in source_task.acceptance.lower()
 
 
+def test_virtual_ai_os_autonomous_cadence_task_is_resumable():
+    board_text = TASK_BOARD_PATH.read_text(encoding="utf-8")
+    tasks = {task.task_id: task for task in _load_tasks()}
+    cadence_task = tasks["VAI-026"]
+
+    assert cadence_task.depends_on == []
+    assert "tests/test_virtual_ai_os_todo_queue.py" in cadence_task.outputs
+    assert cadence_task.validation == [
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py"
+    ]
+    assert "run the daemon before the supervisor" in cadence_task.acceptance.lower()
+    assert "dependency ordering" in cadence_task.acceptance.lower()
+    assert "isolated worktree implementation" in cadence_task.acceptance.lower()
+
+    assert "## Autonomous Cadence State" in board_text
+    for state_artifact in (
+        "data/virtual_ai_os/state/virtual_ai_os_task_state.json",
+        "data/virtual_ai_os/state/virtual_ai_os_strategy.json",
+        "data/virtual_ai_os/state/virtual_ai_os_events.jsonl",
+    ):
+        assert state_artifact in board_text
+    for state_key in (
+        "recommended_task_id",
+        "ready_task_ids",
+        "waiting_task_ids",
+        "task_statuses",
+        "task_artifacts",
+        "task_validation",
+    ):
+        assert state_key in board_text
+
+
 def test_virtual_ai_os_llm_router_preflight_does_not_call_model():
     completed = subprocess.run(
         [
