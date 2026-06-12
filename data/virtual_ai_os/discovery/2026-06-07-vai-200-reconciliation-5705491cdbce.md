@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 92288b4eb73b2a0e967f2bfb8f2d201a3cb3c424
+Fingerprint: a19239f2a8063dbcf87efeae53456488dc1657a1
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 19
@@ -10,18 +10,43 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- `A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
+- `UU external/ipfs_kit`
+- ` M hallucinate_app`
+- `?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `added=1, modified=2, unmerged=1, untracked=1`
 - Status paths:
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
+  - `external/ipfs_kit`
+  - `hallucinate_app`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
 - Name status:
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `U	external/ipfs_kit`
+  - `M	external/ipfs_kit`
+  - `M	hallucinate_app`
+- Staged name status:
+  - `A	data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md`
+  - `U	external/ipfs_kit`
 - Diff stat:
-  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 69 ++++++++++++++--------`
+  - ` external/ipfs_kit                                  | Unmerged`
+  - ` external/ipfs_kit                                  |  0`
+  - ` hallucinate_app                                    |  2 +-`
+  - ` 3 files changed, 44 insertions(+), 27 deletions(-)`
+- Submodule summary:
+  - `* external/ipfs_kit 0000000...17acebc4 (710):`
+  - `  > Resolve auto-doc workflow merge conflict`
+  - ``
+  - `* hallucinate_app 51ecd25...3ef7327 (1):`
+  - `  > HAO: reconcile generated supervisor outputs`
+- Untracked paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md`
 
 ## Sample Branches Or Worktrees
 
@@ -107,19 +132,35 @@ Work surface: `19` candidates, `19` sampled records.
   "candidate_count": 19,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "92288b4eb73b2a0e967f2bfb8f2d201a3cb3c424",
+  "fingerprint": "a19239f2a8063dbcf87efeae53456488dc1657a1",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 69 ++++++++++++++--------\n external/ipfs_kit                                  | Unmerged\n external/ipfs_kit                                  |  0\n hallucinate_app                                    |  2 +-\n 3 files changed, 44 insertions(+), 27 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nU\texternal/ipfs_kit\nM\texternal/ipfs_kit\nM\thallucinate_app",
     "path_categories": {
-      "modified": 1
+      "added": 1,
+      "modified": 2,
+      "unmerged": 1,
+      "untracked": 1
     },
+    "staged_name_status": "A\tdata/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md\nU\texternal/ipfs_kit",
     "status_paths": [
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
+      "external/ipfs_kit",
+      "hallucinate_app",
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
     ],
     "status_short": [
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "A  data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
+      "UU external/ipfs_kit",
+      " M hallucinate_app",
+      "?? data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
+    ],
+    "submodule_summary": "* external/ipfs_kit 0000000...17acebc4 (710):\n  > Resolve auto-doc workflow merge conflict\n\n* hallucinate_app 51ecd25...3ef7327 (1):\n  > HAO: reconcile generated supervisor outputs",
+    "untracked_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -151,7 +192,11 @@ Work surface: `19` candidates, `19` sampled records.
   ],
   "sample_count": 19,
   "sample_status_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-251-dependency-guardrail.md",
+    "external/ipfs_kit",
+    "hallucinate_app",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-405-storage-bridge-swallowed-exception.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781231623",

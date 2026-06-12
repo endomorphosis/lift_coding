@@ -460,7 +460,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 92288b4eb73b2a0e967f2bfb8f2d201a3cb3c424
+- Fingerprint: a19239f2a8063dbcf87efeae53456488dc1657a1
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -808,3 +808,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-325-vai-156-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-156. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-325-vai-156-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-156 from strategy blocked_tasks.
+
+## VAI-326 Resolve merge retry-budget failure for VAI-212
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-326-vai-212-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-212. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-326-vai-212-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-212 from strategy blocked_tasks.
