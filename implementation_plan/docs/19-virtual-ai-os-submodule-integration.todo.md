@@ -478,7 +478,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: ops
-- Fingerprint: 9384a66a64899d6de26fcae53dc42e41d10c2ec7
+- Fingerprint: fc3af4f1397dab4df28ead6f1db4cbc3464fa316
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -487,7 +487,7 @@ cadence remains parseable and resumable.
 
 ## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
-## VAI-203 Resolve 10 preflight-conflicting backlogged worktree merges
+## VAI-203 Resolve 146 preflight-conflicting backlogged worktree merges
 
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
