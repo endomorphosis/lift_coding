@@ -19,6 +19,9 @@ Track: ops
   - `hallucinate_app`
 - Name status:
   - `M	hallucinate_app`
+- Diff stat:
+  - `hallucinate_app | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -108,10 +111,7 @@ Work surface: `246` candidates, `20` sampled records.
   "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
+    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
     "name_status": "M\thallucinate_app",
     "path_categories": {
       "other_dirty": 1
