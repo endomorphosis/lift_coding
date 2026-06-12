@@ -65,6 +65,8 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     seed_interoperability_goals=True,
+    # scanner-resolved: HAO-195 - stale line-302 explicit flag wiring is now
+    # owned by the shared objective defaults factory used by this supervisor.
     # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
     # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
