@@ -51,6 +51,17 @@ than a semantic merge conflict, so there is still no live conflict for
 `ipfs-accelerate-agent-merge-resolver --events-path ... --apply`. The shared
 strategy file does not list `MGW-022` in `blocked_tasks`.
 
+Revalidated again from worktree
+`implementation/mgw-027-attempt-1-1781238030` at
+`9d9ecf8386b0c84f665711296b1261c83eb9c50d`. The current attempt head still
+contains the MGW-022 implementation commit
+`ba47688718e33fcdd24182127920c939ec44eff0`, reconciliation commit
+`3a97fd774af5be37a9fec89cee3af476bb5cba56`, and merge commit
+`f358213ae780bbdddf79f6524084a281bd670884`. `git merge-tree --write-tree main
+3a97fd774af5be37a9fec89cee3af476bb5cba56` produced tree
+`5daadd2f4d919fc0faaa149a054337cc5399e5e3`, confirming the historical
+retry-budget failure is not a remaining semantic merge conflict.
+
 ## Validation
 
 ```bash
