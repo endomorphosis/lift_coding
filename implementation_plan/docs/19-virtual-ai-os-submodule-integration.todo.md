@@ -461,7 +461,7 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 35 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 37 worktree merges
 
 - Status: completed
 - Completion: manual
@@ -469,7 +469,7 @@ cadence remains parseable and resumable.
 - Track: ops
 <<<<<<< HEAD
 <<<<<<< HEAD
-- Fingerprint: a34843847f13a7c76b597e4e18b731647e0ee52e
+- Fingerprint: 02a1d9a1ddf5b003c5f791c2ccfa7824bb08b409
 =======
 - Fingerprint: 7b4b6c9cfc0db1cb47ba4a137004d1c60b796a52
 >>>>>>> implementation/hao-268-attempt-1-1781238030
@@ -480,7 +480,7 @@ cadence remains parseable and resumable.
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 35 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 37 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
