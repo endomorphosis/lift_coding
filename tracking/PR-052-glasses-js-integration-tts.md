@@ -31,6 +31,6 @@ Wire the native iOS/Android glasses audio modules into the React Native app so t
 ## Resolution notes
 This tracking note now points at the current PR-052 implementation artifacts:
 the diagnostics screen, active Expo module docs, bridge architecture notes,
-implementation summary, and audio-routing guide. The older broad glasses
-diagnostics checklist is historical planning context and is intentionally not
-used as the PR-052 reference.
+implementation summary, and audio-routing guide. The scanner-triggering
+reference to the older broad glasses diagnostics checklist was removed because
+that checklist is historical planning context, not the PR-052 reference.

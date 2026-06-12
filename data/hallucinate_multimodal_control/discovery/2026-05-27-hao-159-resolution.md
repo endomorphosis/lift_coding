@@ -18,8 +18,10 @@ unresolved follow-up work.
 - Kept the PR-052 tracker focused on concrete shipped artifacts: the diagnostics
   screen, active Expo module docs, bridge notes, implementation summary, and
   audio-routing guide.
+- Kept line 26 pointed at the active Expo module API and development-build
+  notes instead of the stale broad implementation checklist.
 - Added a short tracker note explaining that the older broad checklist is
-  historical planning context and should not be used as the PR-052 reference.
+  historical planning context, not the PR-052 reference.
 - Left supervisor-fed backlog metadata unchanged.
 
 ## Validation
