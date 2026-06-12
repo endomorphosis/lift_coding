@@ -2784,7 +2784,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-251 Resolve dependency guardrail for MGW-239
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
