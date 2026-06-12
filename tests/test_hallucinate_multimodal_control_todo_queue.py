@@ -413,7 +413,7 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     state_dir = tmp_path / "state"
     state_dir.mkdir()
     stale_pid = 99999999
-    prefix = "hallucinate_multimodal_control"
+    prefix = daemon._HALLUCINATE_CONTEXT.namespace_paths.namespace
     managed_pid = state_dir / f"{prefix}_managed_daemon.pid"
     wrapper_pid = state_dir / f"{prefix}_supervisor_wrapper.pid"
     status_path = state_dir / f"{prefix}_supervisor_status.json"
