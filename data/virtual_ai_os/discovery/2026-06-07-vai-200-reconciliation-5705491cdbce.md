@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: edfdc088c0284ad7a8b5aa5599f4c80a1447d41d
+Fingerprint: be7b80862c79ac5fd763c49f716257f4aadedafe
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 25
@@ -10,18 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M hallucinate_app`
+- `UU tests/test_sessions.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2`
+- Path categories: `unmerged=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `hallucinate_app`
+  - `tests/test_sessions.py`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	hallucinate_app`
+  - `U	tests/test_sessions.py`
+  - `M	tests/test_sessions.py`
+- Staged name status:
+  - `U	tests/test_sessions.py`
+- Diff stat:
+  - `tests/test_sessions.py | Unmerged`
+  - ` tests/test_sessions.py | 29 +++++++++++++++++++++++++++++`
+  - ` 1 file changed, 29 insertions(+)`
 
 ## Sample Branches Or Worktrees
 
@@ -43,8 +47,8 @@ Track: ops
 - `implementation/vai-317-attempt-1-1781226464` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-317-attempt-1-1781226464`
 - `implementation/vai-318-attempt-1-1781226886` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781226886`
 - `implementation/vai-318-attempt-1-1781236312` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236312`
-- `implementation/vai-318-attempt-1-1781236509` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236509`
 - `rescue/worktree/implementation-vai-319-attempt-1-1781227562-62fae97ef71a` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781227562`
+- `rescue/worktree/implementation-vai-319-attempt-1-1781236747-0b6dfb7b5c5b` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781236747`
 
 ## Why This Blocks Progress
 
@@ -108,23 +112,20 @@ Work surface: `25` candidates, `20` sampled records.
   "candidate_count": 25,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "edfdc088c0284ad7a8b5aa5599f4c80a1447d41d",
+  "fingerprint": "be7b80862c79ac5fd763c49f716257f4aadedafe",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app",
+    "diff_stat": "tests/test_sessions.py | Unmerged\n tests/test_sessions.py | 29 +++++++++++++++++++++++++++++\n 1 file changed, 29 insertions(+)",
+    "name_status": "U\ttests/test_sessions.py\nM\ttests/test_sessions.py",
     "path_categories": {
-      "modified": 2
+      "unmerged": 1
     },
+    "staged_name_status": "U\ttests/test_sessions.py",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app"
+      "tests/test_sessions.py"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M hallucinate_app"
+      "UU tests/test_sessions.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -152,13 +153,12 @@ Work surface: `25` candidates, `20` sampled records.
     "implementation/vai-317-attempt-1-1781226464",
     "implementation/vai-318-attempt-1-1781226886",
     "implementation/vai-318-attempt-1-1781236312",
-    "implementation/vai-318-attempt-1-1781236509",
-    "rescue/worktree/implementation-vai-319-attempt-1-1781227562-62fae97ef71a"
+    "rescue/worktree/implementation-vai-319-attempt-1-1781227562-62fae97ef71a",
+    "rescue/worktree/implementation-vai-319-attempt-1-1781236747-0b6dfb7b5c5b"
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app"
+    "tests/test_sessions.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-002-attempt-1-1781232308",
@@ -179,8 +179,8 @@ Work surface: `25` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-317-attempt-1-1781226464",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781226886",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236312",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-318-attempt-1-1781236509",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781227562"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781227562",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-319-attempt-1-1781236747"
   ],
   "success_signals": [
     "candidate_count_decreases",
