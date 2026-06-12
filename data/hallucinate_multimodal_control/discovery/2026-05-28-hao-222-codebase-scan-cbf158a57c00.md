@@ -22,6 +22,6 @@ so the supervisor does not keep re-adding the same work.
 
 ## Resolution
 
-The cleanup path in `load_embeddings_from_ipfs` now catches `OSError` explicitly,
-logs temporary-file removal failures, and re-raises the original exception without
-resetting its traceback.
+The cleanup path in `load_embeddings_from_ipfs` now runs from a single `finally`
+block, ignores already-removed temp files, logs other removal failures, and does
+not mask successful loads, IPFS error results, or the original load exception.
