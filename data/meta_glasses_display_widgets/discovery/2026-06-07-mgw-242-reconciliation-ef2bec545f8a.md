@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: b245c834748656ae610c0f78ac7313221743e27e
+Fingerprint: 2a170ea7df88c3cc4e4cc137a88c635e8cd95e40
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 113
+Candidate count: 119
 Priority: P1
 Track: ops
 
@@ -119,7 +119,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `113` candidates, `20` sampled records.
+Work surface: `119` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -167,7 +167,7 @@ Work surface: `113` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 113,
+  "candidate_count": 119,
   "conflict_path_counts": {
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md": 1,
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-resolution.md": 1,
@@ -182,6 +182,7 @@ Work surface: `113` candidates, `20` sampled records.
     "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-253-mgw-190-merge-retry-budget.md": 2,
     "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-255-mgw-047-merge-retry-budget.md": 1,
     "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-257-mgw-091-merge-retry-budget.md": 1,
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-258-resolution.md": 1,
     "data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md": 1,
     "data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md": 2,
     "data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md": 4,
@@ -190,9 +191,9 @@ Work surface: `113` candidates, `20` sampled records.
     "data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md": 3,
     "data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md": 4,
     "hallucinate_app": 7,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 91,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 96,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 1,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 94,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 99,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 8,
     "scripts/virtual_ai_os_todo_supervisor.py": 1,
     "tests/test_hallucinate_multimodal_control_todo_queue.py": 1,
@@ -201,7 +202,7 @@ Work surface: `113` candidates, `20` sampled records.
     "tracking/PR-052-glasses-js-integration-tts.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "b245c834748656ae610c0f78ac7313221743e27e",
+  "fingerprint": "2a170ea7df88c3cc4e4cc137a88c635e8cd95e40",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
