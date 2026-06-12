@@ -1973,7 +1973,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-178 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:301
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: runtime
@@ -2795,7 +2795,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-252 Resolve merge retry-budget failure for MGW-178
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
