@@ -8,6 +8,7 @@ TODO. Current code no longer matches that limitation: `mobile/modules/expo-glass
 parses RIFF/WAVE, `fmt `, and `data` chunks before playing mono PCM through
 `AudioTrack`.
 
-Resolution: clarified the implementation summary bullet to state the implemented
-Android WAV parsing behavior directly, removing the stale TODO-style wording
-that caused the scanner finding.
+Resolution: clarified the implementation summary to state the implemented
+Android WAV parsing behavior directly and kept the remaining playback follow-up
+focused on physical hardware validation, removing stale TODO-style wording that
+caused the scanner finding.
