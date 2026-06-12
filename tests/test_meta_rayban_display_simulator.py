@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import types
+import zipfile
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -27,6 +28,7 @@ FIXTURE_PATH = SIMULATOR_DIR / "fixtures" / "task-progress.json"
 SIMULATOR_JS = SIMULATOR_DIR / "simulator.js"
 SIMULATOR_HTML = SIMULATOR_DIR / "index.html"
 WEBAPP_DIR = SIMULATOR_DIR / "webapp"
+WEBAPP_PACKAGER = REPO_ROOT / "scripts" / "package_display_webapp.py"
 client = TestClient(app)
 
 
@@ -207,6 +209,57 @@ def test_webapp_preview_package_declares_static_files_and_png_icons() -> None:
         assert icon["src"].startswith("./icons/")
         icon_path = WEBAPP_DIR / icon["src"].removeprefix("./")
         assert icon_path.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+
+
+def test_webapp_packager_builds_https_hosting_bundle(tmp_path) -> None:
+    output_dir = tmp_path / "webapp-package"
+    zip_path = tmp_path / "webapp-package.zip"
+    deployment_url = "https://glasses.example.org/handsfree/task-progress/"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(WEBAPP_PACKAGER),
+            "--source-dir",
+            str(WEBAPP_DIR),
+            "--output-dir",
+            str(output_dir),
+            "--deployment-url",
+            deployment_url,
+            "--zip",
+            str(zip_path),
+        ],
+        check=True,
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+    )
+    result = json.loads(completed.stdout)
+    readiness = json.loads((output_dir / "readiness.json").read_text(encoding="utf-8"))
+    package_manifest = json.loads(
+        (output_dir / "package-manifest.json").read_text(encoding="utf-8")
+    )
+
+    assert result["ok"] is True
+    assert result["readiness"]["ready"] is True
+    assert readiness["deployment_url"] == deployment_url
+    assert readiness["widgets"][0]["deployment_url"] == deployment_url
+    assert package_manifest["entrypoint"] == "index.html"
+    assert package_manifest["deployment_url"] == deployment_url
+    assert package_manifest["readiness_file"] == "readiness.json"
+    assert {file["path"] for file in package_manifest["files"]} == set(
+        readiness["static_files"]
+    )
+
+    for relative_path in readiness["static_files"]:
+        assert (output_dir / relative_path).is_file()
+
+    with zipfile.ZipFile(zip_path) as archive:
+        names = set(archive.namelist())
+    assert "index.html" in names
+    assert "manifest.webmanifest" in names
+    assert "readiness.json" in names
+    assert "package-manifest.json" in names
 
 
 def test_ios_rayban_runbooks_cover_https_webapp_onboarding_path() -> None:
