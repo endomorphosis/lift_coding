@@ -60,6 +60,17 @@ class CapabilityRuntimeSurface(str, Enum):
     SWISSKNIFE_ORB = "swissknife_orb"
 
 
+class CapabilityPlacementLayer(str, Enum):
+    """Virtual runtime layer that owns an execution placement decision."""
+
+    SEMANTIC_ROUTING = "semantic_routing"
+    EXECUTION_ACCELERATION = "execution_acceleration"
+    CONTENT_PROVENANCE = "content_provenance"
+    HANDSFREE_DAEMON = "handsfree_daemon"
+    MCP_PROTOCOL = "mcp_protocol"
+    SWISSKNIFE_ORB = "swissknife_orb"
+
+
 @dataclass(frozen=True)
 class AICapabilityRegistryEntry:
     """Cross-repo capability metadata for the virtual AI OS control plane."""
@@ -163,6 +174,10 @@ class AICapabilityRoute:
     handler_ref: str
     cli_command: str | None = None
     fallback_execution_mode: CapabilityExecutionMode | None = None
+    placement_layer: CapabilityPlacementLayer | None = None
+    placement_target: str | None = None
+    placement_reason: str | None = None
+    placement_constraints: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

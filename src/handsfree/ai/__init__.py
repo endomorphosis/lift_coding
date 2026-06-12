@@ -13,7 +13,6 @@ from .capability_registry import (
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
 )
-from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .history import discover_failure_history_cids
 from .observability import (
     build_ai_backend_policy_config,
@@ -38,6 +37,7 @@ from .models import (
     AIRequestContext,
     CapabilityConfirmationPolicy,
     CapabilityExecutionMode,
+    CapabilityPlacementLayer,
     CapabilityRuntimeSurface,
 )
 from .policy import (
@@ -46,6 +46,11 @@ from .policy import (
     get_ai_backend_policy,
     resolve_policy_workflow,
 )
+from .runtime_placement import (
+    RuntimePlacementDecision,
+    resolve_virtual_ai_os_runtime_placement,
+)
+from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .serialization import build_api_execute_response
 
 __all__ = [
@@ -63,7 +68,9 @@ __all__ = [
     "AIRequestContext",
     "CapabilityConfirmationPolicy",
     "CapabilityExecutionMode",
+    "CapabilityPlacementLayer",
     "CapabilityRuntimeSurface",
+    "RuntimePlacementDecision",
     "build_ai_backend_policy_config",
     "build_ai_backend_policy_history_report",
     "build_ai_backend_policy_report",
@@ -85,5 +92,6 @@ __all__ = [
     "list_virtual_ai_os_capabilities",
     "resolve_policy_workflow",
     "resolve_virtual_ai_os_execution_mode",
+    "resolve_virtual_ai_os_runtime_placement",
     "resolve_virtual_ai_os_runtime_route",
 ]
