@@ -47,8 +47,9 @@ DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
 OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
-# scanner-resolved: HAO-235 - This module-level vector-index alias is runtime
-# wiring; the shared objective defaults factory below passes the same namespace path.
+# scanner-resolved: HAO-235 - The stale line-159 scan hit was old explicit
+# _with_default wiring for the objective todo vector index path. This wrapper now
+# passes the same runtime path through the shared objective defaults factory.
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
 DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)

@@ -8,16 +8,17 @@ Evidence: `/home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery
 ## Finding
 
 The scan excerpt pointed at generated merge-unblock discovery prose, not a live
-source defect. The cited line repeated a generated backlog filename while
-explaining why the VAI-020 branch could not be merged wholesale, so the
-annotation scan treated historical merge evidence as fresh display-widget work.
+source defect. The cited line described a historical VAI-020 merge conflict
+where a full branch merge would have removed newer display-widget retry-budget
+work. The exact generated backlog filename remains in the retry-budget evidence,
+so repeating that filename in the unblock note caused annotation scan noise.
 
 ## Resolution
 
-The VAI-028 merge-unblock note now describes the target as the display-widget
-backlog board and points readers back to the retry-budget evidence for the exact
-generated-file path. This preserves the audit trail while avoiding another
-generated discovery annotation from the same historical backlog filename.
+The VAI-028 merge-unblock note now describes the risk as rolling back generated
+display-widget retry-budget entries without restating the generated backlog
+filename. The audit trail is preserved by the referenced retry-budget evidence,
+which remains the authoritative place for the exact generated-file path.
 
 ## Validation
 

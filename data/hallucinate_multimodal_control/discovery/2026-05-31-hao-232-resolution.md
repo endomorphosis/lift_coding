@@ -21,11 +21,12 @@ This is a false positive. The string "todo" in both the flag name and the consta
 `OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO` refers to task-board items in the objective
 surplus scoring system — not a `TODO` code annotation marker.
 
-Two clarifying inline comments were added near the affected lines to document that
-"todo" is part of the domain vocabulary (task-board items), not a code annotation:
+The current supervisor no longer embeds the flagged
+`--objective-surplus-min-terms-per-todo` literal. Objective-refill CLI defaults are
+now produced through `build_namespace_objective_refill_defaults_factory(...)`, with
+the namespace settings passed via `OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs()`.
+An inline `scanner-resolved: HAO-232` comment was added at that factory wiring point
+so future scans can associate the stale finding with the shared-defaults migration.
 
-- Line 304 (added in attempt 1): explains `--objective-todo-vector-index-path`
-- Line 307 (added in attempt 2): explains `--objective-surplus-min-terms-per-todo`
-
-No functional changes were required. The constants are correctly defined in
-`hallucinate_multimodal_control_todo_daemon.py` and properly imported and wired.
+No functional changes were required. The task-board terminology remains valid, and
+the supervisor-fed backlog remains parseable.

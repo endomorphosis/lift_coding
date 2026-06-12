@@ -12,15 +12,11 @@ thread pool monitor or tasks under test.
 
 ## Fix
 
-- Added `import logging` and imported `TimeoutError as FutureTimeoutError` and
-  `CancelledError` from `concurrent.futures`.
-- Replaced the bare `except Exception: pass` with two clauses:
-  1. `except (FutureTimeoutError, CancelledError): pass` — expected cleanup
-     conditions, silently ignored as before.
-  2. `except Exception: logging.getLogger(__name__).debug(...)` — unexpected
-     exceptions are now logged at DEBUG level (with `exc_info=True`) so they
-     appear in test output when `-v` / debug logging is enabled, without
-     failing the cleanup loop or the test.
+- Replaced the bare `except Exception: pass` with explicit expected cleanup
+  handling for `TimeoutError` and `CancelledError`.
+- Unexpected future exceptions are collected while the cleanup loop continues
+  through every future, then the test fails with the first unexpected exception.
+  This keeps later tests isolated without swallowing real task failures.
 
 ## Validation
 

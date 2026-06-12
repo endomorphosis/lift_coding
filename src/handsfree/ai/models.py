@@ -72,6 +72,17 @@ class CapabilityPlacementLayer(str, Enum):
 
 
 @dataclass(frozen=True)
+class AICapabilityRuntimePlacement:
+    """Deterministic placement decision for a virtual AI OS runtime route."""
+
+    capability_id: str
+    execution_mode: CapabilityExecutionMode
+    runtime_surface: CapabilityRuntimeSurface
+    supported_surfaces: tuple[CapabilityRuntimeSurface, ...]
+    fallback_surfaces: tuple[CapabilityRuntimeSurface, ...] = ()
+
+
+@dataclass(frozen=True)
 class AICapabilityRegistryEntry:
     """Cross-repo capability metadata for the virtual AI OS control plane."""
 
@@ -91,6 +102,7 @@ class AICapabilityRegistryEntry:
     follow_up_action_builder: str
     artifact_output: tuple[str, ...] = ()
     display_summary_fields: tuple[str, ...] = ()
+    voice_display_summary_formatter_ref: str | None = None
     integration_test_ids: tuple[str, ...] = ()
     legacy_capability_ids: tuple[str, ...] = ()
 

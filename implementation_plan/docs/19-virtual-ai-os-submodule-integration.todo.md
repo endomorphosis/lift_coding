@@ -461,34 +461,18 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-<<<<<<< HEAD
-## VAI-200 Resolve dirty main checkout blocking 36 worktree merges
-=======
-## VAI-200 Resolve dirty main checkout blocking 33 worktree merges
->>>>>>> implementation/hao-299-attempt-1-1781238992
+## VAI-200 Resolve dirty main checkout blocking 112 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-<<<<<<< HEAD
-- Fingerprint: b56c02ca8291e60d9287eff0c27b30a26a29f8af
-=======
-<<<<<<< HEAD
-- Fingerprint: 1e90354069a17f584fd155a7ef81846b5c1e45be
-=======
-- Fingerprint: be7b80862c79ac5fd763c49f716257f4aadedafe
->>>>>>> implementation/vai-322-attempt-1-1781237562
->>>>>>> implementation/hao-299-attempt-1-1781238992
+- Fingerprint: 10802b6dd01b26eed7f9fb778bd0ab9a6cd88a87
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-<<<<<<< HEAD
-- Acceptance: Reconciliation guardrail filed this because 36 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-=======
-- Acceptance: Reconciliation guardrail filed this because 33 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
->>>>>>> implementation/hao-299-attempt-1-1781238992
+- Acceptance: Reconciliation guardrail filed this because 112 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 

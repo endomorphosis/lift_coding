@@ -38,6 +38,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_embedding_actions",
         artifact_output=("embedding_vector", "embedding_dimensions"),
         display_summary_fields=("summary", "vector_count", "model"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_embedding",
         integration_test_ids=(
             "tests/test_virtual_ai_os_capability_registry.py",
             "tests/test_ai_capabilities.py",
@@ -72,6 +73,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_ipfs_pin_actions",
         artifact_output=("cid", "receipt_ref"),
         display_summary_fields=("summary", "cid", "pin_status"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_ipfs_pin",
         integration_test_ids=(
             "tests/test_virtual_ai_os_capability_registry.py",
             "tests/test_ai_capabilities.py",
@@ -100,6 +102,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_workflow_actions",
         artifact_output=("result_cid", "event_dag_ref", "run_id"),
         display_summary_fields=("summary", "status", "run_id"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_workflow",
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("workflow",),
     ),
@@ -126,6 +129,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_agentic_fetch_actions",
         artifact_output=("result_cid", "fetch_manifest"),
         display_summary_fields=("summary", "status", "source_count"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_agentic_fetch",
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("agentic_fetch",),
     ),
@@ -152,6 +156,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_dataset_discovery_actions",
         artifact_output=("result_cid", "dataset_manifest"),
         display_summary_fields=("summary", "dataset_count", "query"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_dataset_discovery",
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("dataset_discovery",),
     ),
@@ -178,8 +183,84 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         follow_up_action_builder="handsfree.ai.follow_up_actions:build_storage_actions",
         artifact_output=("result_cid", "package_ref", "receipt_ref"),
         display_summary_fields=("summary", "status", "result_cid"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_storage",
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("storage", "ipfs.content.add_bytes", "ipfs.content.read_ai_output"),
+    ),
+    "llm_generation": AICapabilityRegistryEntry(
+        capability_id="llm_generation",
+        owner_repo="handsfree",
+        provider_name="handsfree_ai_router",
+        server_family="handsfree_ai",
+        title="LLM Generation",
+        description=(
+            "Generate and revise model output through the HandsFree AI router while "
+            "preserving one dispatch contract for planner, daemon, and MCP callers."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.ORCHESTRATED,
+            CapabilityExecutionMode.MCP_REMOTE,
+        ),
+        default_execution_mode=CapabilityExecutionMode.ORCHESTRATED,
+        fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_READ,
+        input_schema_ref="handsfree.capability.llm_generation.input",
+        result_schema_ref="handsfree.capability.llm_generation.result",
+        artifact_output=("response_text", "revision_ref", "model_trace_ref"),
+        display_summary_fields=("summary", "model", "status"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_llm_generation",
+        integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
+        legacy_capability_ids=("llm_generation", "llm.revision", "ai.generate"),
+    ),
+    "ui_render_session": AICapabilityRegistryEntry(
+        capability_id="ui_render_session",
+        owner_repo="endomorphosis/swissknife",
+        provider_name="swissknife_orb",
+        server_family="swissknife",
+        title="UI Render Session",
+        description=(
+            "Create and update ORB-backed UI render sessions that can be mirrored by "
+            "Hallucinate App and the mobile/glasses presentation surfaces."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.MCP_REMOTE,
+            CapabilityExecutionMode.ORCHESTRATED,
+        ),
+        default_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        fallback_execution_mode=CapabilityExecutionMode.ORCHESTRATED,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_WRITE,
+        input_schema_ref="handsfree.capability.ui_render_session.input",
+        result_schema_ref="handsfree.capability.ui_render_session.result",
+        artifact_output=("descriptor_ref", "render_session_id", "receipt_ref"),
+        display_summary_fields=("summary", "surface", "render_session_id"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_ui_render_session",
+        integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
+        legacy_capability_ids=("ui_render_session", "orb.render_session"),
+    ),
+    "device_render_transport": AICapabilityRegistryEntry(
+        capability_id="device_render_transport",
+        owner_repo="handsfree/mobile",
+        provider_name="handsfree_mobile_orb",
+        server_family="meta_glasses_mobile_orb",
+        title="Device Render Transport",
+        description=(
+            "Route display, action receipts, and transport state to mobile and Meta "
+            "glasses endpoints through the shared ORB bridge contract."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.ORCHESTRATED,
+            CapabilityExecutionMode.MCP_REMOTE,
+        ),
+        default_execution_mode=CapabilityExecutionMode.ORCHESTRATED,
+        fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_WRITE,
+        input_schema_ref="handsfree.capability.device_render_transport.input",
+        result_schema_ref="handsfree.capability.device_render_transport.result",
+        artifact_output=("edge_session_id", "display_receipt_ref", "action_receipt_ref"),
+        display_summary_fields=("summary", "edge_id", "status"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_device_render_transport",
+        integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
+        legacy_capability_ids=("device_render_transport", "meta_glasses.render_transport"),
     ),
 }
 
@@ -266,6 +347,7 @@ def build_virtual_ai_os_execution_matrix() -> list[dict[str, object]]:
                 "confirmation_policy": entry.confirmation_policy.value,
                 "artifact_output": entry.artifact_output,
                 "display_summary_fields": entry.display_summary_fields,
+                "voice_display_summary_formatter_ref": entry.voice_display_summary_formatter_ref,
                 "integration_test_ids": entry.integration_test_ids,
                 "input_schema_ref": entry.input_schema_ref,
                 "result_schema_ref": entry.result_schema_ref,
