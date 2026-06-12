@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 6d88554131bc9bfd30847fb3e85c2cba229f3cd3
+Fingerprint: 9e6f2b25eacbf4481d2a85ec1d60478fd6c3e9a3
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 28
+Candidate count: 30
 Priority: P1
 Track: ops
 
@@ -60,7 +60,7 @@ Track: ops
 - `implementation/mgw-126-attempt-1-1780999750` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1780999750`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c474b3f4df1b` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--b52596ca2fcd` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -83,7 +83,7 @@ Track: ops
     - `data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md`
     - `hallucinate_app`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--6f7c5013ed1c` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-185-attempt-1-1780992723`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c1feab7c5f1a` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-185-attempt-1-1780992723`
   - Conflict paths:
     - `hallucinate_app`
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
@@ -112,7 +112,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `28` candidates, `20` sampled records.
+Work surface: `30` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -160,16 +160,16 @@ Work surface: `28` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 28,
+  "candidate_count": 30,
   "conflict_path_counts": {
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md": 1,
     "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md": 1,
     "hallucinate_app": 4,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 21,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 23,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 21
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "6d88554131bc9bfd30847fb3e85c2cba229f3cd3",
+  "fingerprint": "9e6f2b25eacbf4481d2a85ec1d60478fd6c3e9a3",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -190,13 +190,13 @@ Work surface: `28` candidates, `20` sampled records.
     "implementation/mgw-121-attempt-1-1780997197",
     "implementation/mgw-125-attempt-2-1780999263",
     "implementation/mgw-126-attempt-1-1780999750",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c474b3f4df1b",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--b52596ca2fcd",
     "implementation/mgw-130-attempt-1-1781238282",
     "implementation/mgw-130-attempt-1-1781238334",
     "implementation/mgw-178-attempt-1-1780995301",
     "rescue/worktree/implementation-mgw-181-attempt-1-1780988528-f9b487f470b3",
     "implementation/mgw-184-attempt-1-1780992369",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--6f7c5013ed1c",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c1feab7c5f1a",
     "implementation/mgw-185-attempt-1-1780992844",
     "implementation/mgw-190-attempt-1-1780995630"
   ],
