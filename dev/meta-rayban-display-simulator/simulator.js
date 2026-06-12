@@ -14,6 +14,14 @@
       requiredAction: 'use_display_webapp_or_mobile_card',
       message: 'Native DAT display unavailable. Use Web App preview or mobile fallback.',
     },
+    disabled: {
+      supported: false,
+      displayConnectionState: 'disabled',
+      displayLastStatus: 'disabled',
+      reason: 'display_capability_disabled',
+      requiredAction: 'enable_display_capability',
+      message: 'Display capability is disabled for the simulated device session.',
+    },
     unsupported: {
       supported: false,
       displayConnectionState: 'unsupported',
@@ -320,6 +328,30 @@
     };
   }
 
+  function buildInteractionEnvelope(surfaceEvent, rawPayload, manifest, context) {
+    return {
+      schema: 'hallucinate.control_surface/interaction_envelope',
+      surface: context?.surface || 'gesture',
+      surface_event: surfaceEvent,
+      raw_payload: {
+        ...rawPayload,
+        correlation_id: manifest.correlation_id,
+        widget_id: manifest.widget_id,
+        widget_cid: manifest.widget_cid,
+        descriptor_cid: manifest.descriptor_cid,
+        orb_receipt_cid: manifest.orb_receipt_cid,
+      },
+      context: {
+        platform: context?.platform || 'simulator',
+        device_context: {
+          remote_surface:
+            context?.remote_surface || 'meta-rayban-display-simulator',
+          display_state: context?.display_state || 'ready',
+        },
+      },
+    };
+  }
+
   function regionStyle(region) {
     return [
       `left:${Number(region.x)}px`,
@@ -412,6 +444,8 @@
     const eventLog = document.getElementById('event-log');
     const headingInput = document.getElementById('heading-input');
     const tiltInput = document.getElementById('tilt-input');
+    const rollInput = document.getElementById('roll-input');
+    const accelerationInput = document.getElementById('acceleration-input');
     const latitudeInput = document.getElementById('latitude-input');
     const longitudeInput = document.getElementById('longitude-input');
     const manifestFileInput = document.getElementById('manifest-file-input');
@@ -423,6 +457,8 @@
       return {
         heading: Number(headingInput.value),
         tilt: Number(tiltInput.value),
+        roll: Number(rollInput.value),
+        acceleration: Number(accelerationInput.value),
         location: {
           latitude: Number(latitudeInput.value),
           longitude: Number(longitudeInput.value),
@@ -431,9 +467,28 @@
     }
 
     function appendTrace(type, payload) {
+      const actionId = payload?.action_id || null;
+      const bridgeResult = payload?.result || null;
+      const requestId = bridgeResult?.requestId || payload?.request_id || null;
+      const fallback = bridgeResult?.fallback || manifest.fallback || {};
       const event = {
         type,
+        action_id: actionId,
+        request_id: requestId,
+        fallback_reason: bridgeResult?.reason || fallback.reason || null,
         payload,
+        interaction_envelope: buildInteractionEnvelope(
+          type === 'activate' ? 'tap' : type,
+          {
+            event_type: type,
+            action_id: actionId,
+            request_id: requestId,
+            fallback_reason: bridgeResult?.reason || fallback.reason || null,
+            sensor: payload?.sensor || bridgeResult?.sensor || null,
+          },
+          manifest,
+          { display_state: displayStateSelect.value },
+        ),
         correlation_id: manifest.correlation_id,
         recorded_at: new Date().toISOString(),
       };
@@ -597,6 +652,7 @@
     validateManifest,
     buildReadinessDescriptor,
     buildBridgeResult,
+    buildInteractionEnvelope,
   };
 
   if (typeof module !== 'undefined' && module.exports) {
