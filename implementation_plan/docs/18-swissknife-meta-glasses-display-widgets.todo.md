@@ -488,7 +488,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-043 Review swallowed exception path in src/handsfree/redis_client.py:77
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
