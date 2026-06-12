@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: e1c8f3bc8d3f7f61ae780683ff55e1c7076b766f
+Fingerprint: 2c97d231933a7cfd83d9443ae1ab7ee38db1b323
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 165
@@ -10,22 +10,23 @@ Track: ops
 
 ## Main Checkout Status
 
-- `UU data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md`
+- `M  data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md`
+- ` M hallucinate_app`
 - `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `unmerged=2`
+- Path categories: `modified=2, unmerged=1`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md`
+  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `U	data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md`
-  - `M	data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md`
+  - `M	hallucinate_app`
   - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Staged name status:
-  - `U	data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md`
   - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Sample Branches Or Worktrees
@@ -113,23 +114,27 @@ Work surface: `165` candidates, `20` sampled records.
   "candidate_count": 165,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "e1c8f3bc8d3f7f61ae780683ff55e1c7076b766f",
+  "fingerprint": "2c97d231933a7cfd83d9443ae1ab7ee38db1b323",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md"
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
-    "name_status": "U\tdata/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "name_status": "M\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "unmerged": 2
+      "modified": 2,
+      "unmerged": 1
     },
-    "staged_name_status": "U\tdata/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "staged_name_status": "M\tdata/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md",
+      "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md",
+      "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      "UU data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md",
+      "M  data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md",
+      " M hallucinate_app",
       "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
@@ -163,7 +168,8 @@ Work surface: `165` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-177-resolution.md",
+    "data/meta_glasses_display_widgets/discovery/2026-05-31-mgw-203-resolution.md",
+    "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
