@@ -103,8 +103,14 @@ _hallucinate_supervisor_runner = build_script_supervisor_bootstrap_runner(
     extra_process_match_any=("hallucinate_multimodal_control_autopilot.py",),
     prepare_environment=_ensure_runtime_pythonpath,
     enter_runtime_environment=_enter_runtime_environment,
+<<<<<<< HEAD
     # scanner-resolved: MGW-190 - the old objective-todo flag is gone; these
     # todo_path_* wrapper arguments name the backlog work-item queue path.
+=======
+    # scanner-resolved: MGW-190, MGW-191 - "todo" in todo_path_key /
+    # todo_path_flag refers to the task-board work-item queue path, not a
+    # deferred-work annotation.
+>>>>>>> implementation/mgw-191-attempt-1-1781241776
     todo_path_key=TASK_BOARD_PATH_KEY,
     task_prefix="## HAO-",
     state_prefix="hallucinate_multimodal_control",

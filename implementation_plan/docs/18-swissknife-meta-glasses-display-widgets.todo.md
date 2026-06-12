@@ -2644,6 +2644,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## MGW-239 Resolve dirty main checkout blocking 122 worktree merges
 =======
 ## MGW-239 Resolve dirty main checkout blocking 43 worktree merges
@@ -2651,11 +2652,15 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 =======
 ## MGW-239 Resolve dirty main checkout blocking 45 worktree merges
 >>>>>>> implementation/mgw-047-attempt-1-1781241684
+=======
+## MGW-239 Resolve dirty main checkout blocking 45 worktree merges
+>>>>>>> implementation/mgw-191-attempt-1-1781241776
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 - Fingerprint: d3d2fb98bfc91e37d88b1796a331fab05c5eead3
@@ -2669,10 +2674,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 =======
 - Fingerprint: 32529975594b917d3455fdb3ddffdd7a00803524
 >>>>>>> implementation/mgw-047-attempt-1-1781241684
+=======
+- Fingerprint: 9592b060b6f1c6a56ee0146a848e49a9f2241022
+>>>>>>> implementation/mgw-191-attempt-1-1781241776
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 122 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
@@ -2682,6 +2691,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 =======
 - Acceptance: Reconciliation guardrail filed this because 45 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 >>>>>>> implementation/mgw-047-attempt-1-1781241684
+=======
+- Acceptance: Reconciliation guardrail filed this because 45 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+>>>>>>> implementation/mgw-191-attempt-1-1781241776
 
 ## MGW-240 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
