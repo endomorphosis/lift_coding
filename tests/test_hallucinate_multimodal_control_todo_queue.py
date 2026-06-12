@@ -107,6 +107,31 @@ def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     assert "build_repo_runtime_environment_callbacks(" not in supervisor_source
 
 
+def test_objective_driven_supervisor_loop_evidence_is_tracked():
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+    supervisor_module = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+
+    assert daemon_module.OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS == (
+        "objective_goal_seen_fingerprints",
+        "last_objective_goal_scan_findings",
+    )
+    assert daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == {
+        "objective_goal_scan": "record_objective_goal_findings",
+        "objective_goal_seen_fingerprints": "objective_goal_seen_fingerprints",
+        "last_objective_goal_scan_findings": "last_objective_goal_scan_findings",
+    }
+    assert supervisor_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE
+
+    recorder = daemon_module.record_objective_goal_findings
+    assert recorder.objective_path == daemon_module.DEFAULT_OBJECTIVE_GOAL_HEAP_PATH
+    assert recorder.todo_path == daemon_module.DEFAULT_TODO_PATH
+    assert recorder.default_bundle_dir == daemon_module.OBJECTIVE_BUNDLE_DIR
+    assert recorder.default_dataset_dir == daemon_module.OBJECTIVE_DATASET_DIR
+    assert recorder.todo_vector_index_path == daemon_module.OBJECTIVE_TODO_VECTOR_INDEX_PATH
+    assert recorder.summary_prefix == "Close virtual AI OS objective gap"
+    assert recorder.commit_outputs is True
+
+
 # Keep daemon constructor fixture paths centralized so required task-board wiring
 # does not look like a source follow-up at every call site.
 def _implementation_daemon_paths(repo: Path) -> dict[str, Path]:

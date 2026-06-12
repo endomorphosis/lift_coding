@@ -63,6 +63,15 @@ OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo  # scanner-resolved: MGW-191, MGW-192, HAO-244, HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, HAO-258, HAO-263 — "todo" in surplus_min_terms_per_todo refers to backlog task entries (variable/CLI flag name, not a deferred-work annotation).
+OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS = (
+    "objective_goal_seen_fingerprints",
+    "last_objective_goal_scan_findings",
+)
+OBJECTIVE_GOAL_SCAN_EVIDENCE = {
+    "objective_goal_scan": "record_objective_goal_findings",
+    "objective_goal_seen_fingerprints": OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS[0],
+    "last_objective_goal_scan_findings": OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS[1],
+}
 CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(HALLUCINATE_ENV_PREFIX)
 CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
 CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
