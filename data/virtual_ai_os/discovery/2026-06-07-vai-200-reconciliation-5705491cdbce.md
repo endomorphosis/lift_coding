@@ -1,40 +1,43 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 70885483984af56f7c3d0a7c43e75d8ee47246c5
+Fingerprint: c2b89364961833c914f7fa28a14f6f2fc2830165
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 139
+Candidate count: 141
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- `A  data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md`
 - ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- `M  docs/meta-wearables-dat-display-physical-validation-checklist.md`
+- `M  docs/meta-wearables-dat-display-rollout-evidence-template.md`
 - ` m external/ipfs_kit`
 - `M  hallucinate_app`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `M  implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `added=1, modified=4, other_dirty=1`
+- Path categories: `modified=6, other_dirty=1`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `docs/meta-wearables-dat-display-physical-validation-checklist.md`
+  - `docs/meta-wearables-dat-display-rollout-evidence-template.md`
   - `external/ipfs_kit`
   - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `M	external/ipfs_kit`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Staged name status:
-  - `A	data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md`
+  - `M	docs/meta-wearables-dat-display-physical-validation-checklist.md`
+  - `M	docs/meta-wearables-dat-display-rollout-evidence-template.md`
   - `M	hallucinate_app`
+  - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
 
 ## Sample Branches Or Worktrees
 
@@ -76,7 +79,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `139` candidates, `20` sampled records.
+Work surface: `141` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -118,38 +121,40 @@ Work surface: `139` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 139,
+  "candidate_count": 141,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "70885483984af56f7c3d0a7c43e75d8ee47246c5",
+  "fingerprint": "c2b89364961833c914f7fa28a14f6f2fc2830165",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
       "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md",
       "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_kit\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\texternal/ipfs_kit",
     "path_categories": {
-      "added": 1,
-      "modified": 4,
+      "modified": 6,
       "other_dirty": 1
     },
-    "staged_name_status": "A\tdata/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md\nM\thallucinate_app",
+    "staged_name_status": "M\tdocs/meta-wearables-dat-display-physical-validation-checklist.md\nM\tdocs/meta-wearables-dat-display-rollout-evidence-template.md\nM\thallucinate_app\nM\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md",
       "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "docs/meta-wearables-dat-display-physical-validation-checklist.md",
+      "docs/meta-wearables-dat-display-rollout-evidence-template.md",
       "external/ipfs_kit",
       "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "A  data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md",
       " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "M  docs/meta-wearables-dat-display-physical-validation-checklist.md",
+      "M  docs/meta-wearables-dat-display-rollout-evidence-template.md",
       " m external/ipfs_kit",
       "M  hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "M  implementation_plan/docs/19-virtual-ai-os-submodule-integration.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -183,11 +188,12 @@ Work surface: `139` candidates, `20` sampled records.
   "sample_count": 20,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-301-resolution.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "docs/meta-wearables-dat-display-physical-validation-checklist.md",
+    "docs/meta-wearables-dat-display-rollout-evidence-template.md",
     "external/ipfs_kit",
     "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",

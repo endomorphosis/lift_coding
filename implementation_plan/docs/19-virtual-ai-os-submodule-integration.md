@@ -8,6 +8,7 @@ Created: 2026-05-22
 Refreshed: 2026-05-23
 MCP++ source re-check: 2026-05-25
 VAI-001 topology checkpoint: 2026-06-12
+VAI-023 iPhone native DAT handoff packet: 2026-06-12
 
 ## Goal
 
@@ -153,6 +154,7 @@ Pin guardrails:
 - The repo already contains one machine-readable daemon backlog pattern for the Meta glasses widget stream.
 - Mobile plus backend already contain Meta DAT display and action-routing primitives.
 - A dedicated simulation plan now exists in `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` for browser-first Meta Ray-Ban interface validation before iPhone handoff.
+- VAI-023 prepared the iPhone native DAT handoff bundle and physical evidence gate in `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`.
 
 ### Residual follow-up after the initial backlog
 
@@ -301,6 +303,7 @@ This runtime is the operating-system scheduler equivalent for the stack.
 ### Workstream D: Meta Ray-Ban simulation and iPhone handoff
 
 - Use `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` as the canonical implementation plan for the pre-hardware simulation track.
+- Use `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md` as the physical-run handoff packet for iPhone native DAT validation.
 - Treat Meta Web Apps browser preview plus DAT Mock Device tooling as the official pre-hardware inputs that we can actually verify today.
 - Build one canonical 600x600 manifest-driven simulator that feeds browser preview, Web App packaging, mobile fixture tests, and DAT-native adapter validation.
 - Keep the simulator bridge-compatible with the current HandsFree mobile ORB/display-widget contracts so simulator traces can become integration-test fixtures instead of throwaway mocks.
