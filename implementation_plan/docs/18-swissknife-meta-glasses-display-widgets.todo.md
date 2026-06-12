@@ -2648,7 +2648,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 10ca263fa77413af84b4cc193dee98e000500610
+<<<<<<< HEAD
+- Fingerprint: 61c7828e537b2518375d5fb642c370c4430776f8
+=======
+- Fingerprint: f85e1c41c961fa847a15bcded27844c0a98c7896
+>>>>>>> implementation/hao-420-attempt-1-1781240276
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
