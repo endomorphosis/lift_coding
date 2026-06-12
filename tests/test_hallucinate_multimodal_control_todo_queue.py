@@ -252,6 +252,13 @@ def test_daemon_fixture_paths_hide_scanner_visible_board_argument(tmp_path):
     assert flagged_argument not in _source_text()
 
 
+def test_this_module_has_no_static_codebase_findings():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
+
+    assert scan_findings_in_file(Path(__file__), repo_root=REPO_ROOT) == []
+
+
 def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
