@@ -390,3 +390,12 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
     )
 
     assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]
+
+
+def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
+
+    findings = scan_findings_in_file(Path(__file__), repo_root=REPO_ROOT)
+
+    assert findings == []
