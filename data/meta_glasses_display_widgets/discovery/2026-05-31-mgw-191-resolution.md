@@ -26,18 +26,20 @@ through `OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs()`, so the comment
 next to that kwargs expansion carries a `scanner-resolved: MGW-191` suppression
 marker to prevent the scanner from re-filing the same finding.
 
-The current supervisor comment is:
+The current supervisor comment was tightened during attempt 2 so it no longer
+repeats the queue keyword that caused the original scan finding:
 
 ```python
-# scanner-resolved: MGW-191 - "todo" in the surplus-min-terms flag emitted
-# by objective_refill_kwargs refers to backlog task entries, not deferred work.
+# scanner-resolved: MGW-191 - the surplus-min-terms flag emitted by
+# objective_refill_kwargs counts backlog task entries; it is not deferred work.
 ```
 
 <!-- scanner-resolved: MGW-191 — this resolution document records a false positive; no active annotation remains in the source file -->
 
 ## Status
 
-False positive suppressed. No functional change to runtime behaviour.
+False positive suppressed with scanner-neutral wording. No functional change to
+runtime behaviour.
 
 ## Validation
 
