@@ -1,10 +1,10 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: b56c02ca8291e60d9287eff0c27b30a26a29f8af
+Fingerprint: f964e742d0772cd1de394f230d26ecaa0e625f16
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 36
+Candidate count: 37
 Priority: P1
 Track: ops
 
@@ -40,11 +40,11 @@ Track: ops
 - `implementation/vai-007-attempt-1-1781240013` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1781240013`
 - `implementation/vai-007-attempt-1-1781240539` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1781240539`
 - `implementation/vai-008-attempt-1-1781240301` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-008-attempt-1-1781240301`
+- `implementation/vai-009-attempt-1-1781240737` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1781240737`
 - `implementation/vai-045-attempt-1-1780994816` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816`
 - `implementation/vai-046-attempt-1-1780995526` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526`
 - `implementation/vai-107-attempt-1-1780996157` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-107-attempt-1-1780996157`
 - `implementation/vai-126-attempt-1-1780996866` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-126-attempt-1-1780996866`
-- `implementation/vai-127-attempt-1-1780999997` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-127-attempt-1-1780999997`
 
 ## Why This Blocks Progress
 
@@ -63,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `36` candidates, `20` sampled records.
+Work surface: `37` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -105,10 +105,10 @@ Work surface: `36` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 36,
+  "candidate_count": 37,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "b56c02ca8291e60d9287eff0c27b30a26a29f8af",
+  "fingerprint": "f964e742d0772cd1de394f230d26ecaa0e625f16",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "diff_stat": "external/ipfs_kit | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
@@ -145,11 +145,11 @@ Work surface: `36` candidates, `20` sampled records.
     "implementation/vai-007-attempt-1-1781240013",
     "implementation/vai-007-attempt-1-1781240539",
     "implementation/vai-008-attempt-1-1781240301",
+    "implementation/vai-009-attempt-1-1781240737",
     "implementation/vai-045-attempt-1-1780994816",
     "implementation/vai-046-attempt-1-1780995526",
     "implementation/vai-107-attempt-1-1780996157",
-    "implementation/vai-126-attempt-1-1780996866",
-    "implementation/vai-127-attempt-1-1780999997"
+    "implementation/vai-126-attempt-1-1780996866"
   ],
   "sample_count": 20,
   "sample_status_paths": [
@@ -171,11 +171,11 @@ Work surface: `36` candidates, `20` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1781240013",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1781240539",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-008-attempt-1-1781240301",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1781240737",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-045-attempt-1-1780994816",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-046-attempt-1-1780995526",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-107-attempt-1-1780996157",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-126-attempt-1-1780996866",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-127-attempt-1-1780999997"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-126-attempt-1-1780996866"
   ],
   "success_signals": [
     "candidate_count_decreases",
