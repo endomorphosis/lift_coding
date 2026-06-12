@@ -87,6 +87,8 @@ def _default_runtime_surface(
         return CapabilityRuntimeSurface.LOCAL_CLI
     if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
         return CapabilityRuntimeSurface.DAEMON_MEDIATED
+    if capability_id == "ui_render_session":
+        return CapabilityRuntimeSurface.SWISSKNIFE_ORB
     if capability_id in {"workflow", "agentic_fetch"}:
         return CapabilityRuntimeSurface.DAEMON_MEDIATED
     return CapabilityRuntimeSurface.MCP_PROVIDER
@@ -102,9 +104,19 @@ def _supported_surfaces_for_mode(
         return (CapabilityRuntimeSurface.LOCAL_CLI,)
     if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
         return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
-    if capability_id in {"embedding", "dataset_discovery", "storage", "ipfs_pin"}:
+    if capability_id in {
+        "embedding",
+        "dataset_discovery",
+        "storage",
+        "ipfs_pin",
+        "ui_render_session",
+    }:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
-    return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.DAEMON_MEDIATED, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    return (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
 
 
 def _resolve_handler(

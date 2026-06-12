@@ -28,10 +28,14 @@ remaining semantic conflict in
 ## Repair
 
 Kept the current `hallucinate_app` submodule lineage, which already includes the
-HAO-268 implementation, and applied the cleaner HAO-268 attempt-2 wording for the
-cache metrics comments. The metrics side effects still catch `Exception as e`
-and log with `logger.exception(...)`, preserving traceback visibility while
-keeping cache lookups non-fatal when optional metrics fail.
+HAO-268 implementation and the cleaner cache metrics comments. The metrics side
+effects still catch `Exception as e` and log with `logger.exception(...)`,
+preserving traceback visibility while keeping cache lookups non-fatal when
+optional metrics fail.
+
+Marked HAO-420 completed on the active attempt-2 submodule branch in
+`25d35ff HAO-420: mark merge retry repair completed`, then advanced the outer
+worktree's `hallucinate_app` gitlink to that committed submodule state.
 
 The requested semantic merge resolver was not run because
 `ipfs-accelerate-agent-merge-resolver` is not installed in this environment and
