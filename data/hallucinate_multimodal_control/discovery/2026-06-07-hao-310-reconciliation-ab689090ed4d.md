@@ -1,10 +1,10 @@
 # HAO-310 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 59c935d7eab6f8b74232aa296dd3adec2baee5d7
+Fingerprint: d8c53b0842812253f457ab6430d5d95c8c404195
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
-Candidate count: 1
+Candidate count: 2
 Priority: P1
 Track: ops
 
@@ -18,16 +18,18 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/hao-307-attempt-1-1781235947` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-307-attempt-1-1781235947` status: ` m external/ipfs_kit;  M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--faefc61f0b0f` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072` status: ` m hallucinate_app`
   - Name status:
-    - `M	external/ipfs_kit`
-    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `M	hallucinate_app`
   - Diff stat:
-    - `external/ipfs_kit                                            |  0`
-    - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md  | 12 ++++++++++++`
-    - ` .../docs/19-virtual-ai-os-submodule-integration.todo.md      | 12 ++++++++++++`
-    - ` 3 files changed, 24 insertions(+)`
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-hao-424-attempt-2-744498f9de0b` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533` status: ` m hallucinate_app`
+  - Name status:
+    - `M	hallucinate_app`
+  - Diff stat:
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Why This Blocks Progress
 
@@ -46,7 +48,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `2` candidates, `2` sampled records.
 
 ### Suggested Actions
 
@@ -94,10 +96,10 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "59c935d7eab6f8b74232aa296dd3adec2baee5d7",
+  "fingerprint": "d8c53b0842812253f457ab6430d5d95c8c404195",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -107,16 +109,16 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/hao-307-attempt-1-1781235947"
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--faefc61f0b0f",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-hao-424-attempt-2-744498f9de0b"
   ],
-  "sample_count": 1,
+  "sample_count": 2,
   "sample_status_paths": [
-    "external/ipfs_kit",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-307-attempt-1-1781235947"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533"
   ],
   "success_signals": [
     "candidate_count_decreases",
@@ -186,40 +188,3 @@ jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count /
 Success signal: the HAO-310 `unsupported_status` blocked candidate count
 decreased from `14` to `0`, and the supervisor removed all `14` sampled stale
 merged worktree registrations.
-
-## 2026-06-12 Attempt 1 Follow-up
-
-The current HAO-310 attempt found the sampled
-`hao-307-attempt-1-1781235947` worktree still registered and blocked by a dirty
-`external/ipfs_kit` submodule. The outer worktree status was only
-`m external/ipfs_kit`; inside the submodule the sole dirty path was
-`archive/applied_patches/add_pins_monkey_patch.py`.
-
-The one-line submodule diff was preserved before cleanup at
-`data/hallucinate_multimodal_control/discovery/hao-310-preserved-diffs/hao-307-attempt-1-1781235947/external__ipfs_kit-2026-06-12.patch`.
-The diff expands the dynamic import handler from `(ImportError, OSError)` to
-`(ImportError, AttributeError, OSError)`, matching the local dirty checkout
-without discarding evidence.
-
-After preserving the diff, the sampled submodule file was restored and both the
-outer worktree and `external/ipfs_kit` submodule reported clean status. The
-supervisor cleanup/reconciliation pass was rerun from `/home/barberb/lift_coding`
-on `2026-06-12T07:03:05.343519+00:00`:
-
-```sh
-python3 scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
-```
-
-The resulting `supervisor_check` event reported
-`worktree_cleanup_dirty_group_count=0` and `reconciliation_guardrail_count=1`.
-The refreshed reconciliation guardrail finding was only `HAO-309`
-`main_checkout_dirty`; no `dirty_backlogged_worktree:unsupported_status`
-finding was regenerated for HAO-310. The sampled HAO-307 worktree is now skipped
-as `not_merged` rather than `unsupported_status`, so the HAO-310 blocked
-candidate count decreased from `1` to `0`.
-
-Fresh validation reran the same supervisor cleanup/reconciliation command on
-`2026-06-12T07:28:33.607897+00:00`. The supervisor completed successfully with
-`worktree_cleanup_dirty_group_count=0` and `reconciliation_guardrail_count=1`,
-again leaving no HAO-310 `dirty_backlogged_worktree:unsupported_status`
-guardrail.
