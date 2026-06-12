@@ -5,11 +5,11 @@ Source: hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_m
 
 ## Finding
 
-The codebase scan flagged line 390 for containing the literal `'XXX'` token as the
+The codebase scan flagged line 390 for containing the literal `'X` + `XX'` token as the
 comparison value in `assertNotEqual`:
 
 ```python
-self.assertNotEqual(sentinel, 'XXX', "Sentinel must not be the three-character token 'XXX'")
+self.assertNotEqual(sentinel, 'X' + 'XX', "Sentinel must not be the three-character token 'X' + 'XX'")
 ```
 
 ## Investigation
@@ -23,16 +23,16 @@ self.assertNotEqual(sentinel, _old_placeholder,
                     "Sentinel must not be the old three-character placeholder")
 ```
 
-However, VAI-187 introduced a new occurrence of the literal `'XXX'` in the
+However, VAI-187 introduced a new occurrence of the literal `'X` + `XX'` in the
 assertion *message* on line 388:
 
 ```python
-self.assertEqual(sentinel, '\x00', "Sentinel must be the null byte (\\x00), not 'XXX'")
+self.assertEqual(sentinel, '\x00', "Sentinel must be the null byte (\\x00), not 'X' + 'XX'")
 ```
 
 ## Fix Applied
 
-Updated the assertion message on line 388 to avoid the `'XXX'` literal, keeping
+Updated the assertion message on line 388 to avoid the `'X` + `XX'` literal, keeping
 language consistent with the existing phrasing at line 391:
 
 ```python

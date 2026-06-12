@@ -13,10 +13,10 @@ temp-file cleanup failures invisible at all log levels.
 
 ## Fix
 
-Replaced `except OSError: pass` with `except OSError as exc:` and a
-`logger.debug(...)` call so transient cleanup failures are visible in debug
-output without being elevated to warnings or errors (cleanup failures are
-non-critical).
+Replaced `except OSError: pass` with an `except OSError:` handler that logs via
+`logger.debug(..., exc_info=True)` so transient cleanup failures are visible in
+debug output, including traceback context, without being elevated to warnings or
+errors (cleanup failures are non-critical).
 
 ```python
 # Before
@@ -28,8 +28,12 @@ except OSError:
 # After
 try:
     os.unlink(test_file)
-except OSError as exc:
-    logger.debug("Could not remove temporary test file %s: %s", test_file, exc)
+except OSError:
+    logger.debug(
+        "Could not remove temporary test file %s",
+        test_file,
+        exc_info=True,
+    )
 ```
 
 ## Validation

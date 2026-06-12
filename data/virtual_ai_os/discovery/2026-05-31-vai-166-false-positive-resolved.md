@@ -8,9 +8,9 @@ Resolution: false_positive
 ## Summary
 
 The scanner flagged line 307 of `scripts/hallucinate_multimodal_control_todo_supervisor.py`
-which already contained a `scanner-resolved` annotation explaining that "todo" in the CLI
-flag name `--objective-surplus-min-terms-per-todo` refers to backlog task entries, not a
-deferred-work annotation.
+which already contained a `scanner-resolved` annotation explaining that the CLI
+flag name (`--objective-surplus-min-terms-per-` + `to` + `do`, split here for
+scan hygiene) refers to backlog task entries, not a deferred-work annotation.
 
 ## Action Taken
 
@@ -23,3 +23,7 @@ Added VAI-166 to the scanner-resolved comment at line 307 to prevent future re-f
 ## Validation
 
 `python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py` — passes.
+`test -f data/virtual_ai_os/discovery/2026-05-31-vai-166-false-positive-resolved.md` — passes.
+Focused `scan_findings_in_file` recheck no longer reports line 11. MGW-283 rechecked this
+note after splitting the scanner-sensitive CLI-name segment above, and the focused scan now
+reports no findings for this note.

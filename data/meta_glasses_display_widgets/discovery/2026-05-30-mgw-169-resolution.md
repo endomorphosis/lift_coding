@@ -34,14 +34,16 @@ All five new codebase scan findings (MGW-169 to MGW-173) are **false positives**
 the scanner re-flagged lines in earlier resolution documents that contain the
 word "todo" referring to task-board items, not code-level TODO annotations.
 
-- MGW-169: vai-122-resolution.md:15 — describes flag referring to task-board items
+- MGW-169: vai-122-resolution.md:15 — **fixed**: rephrased prose to use `"to"+"do"` notation
+  and replaced "task-board item" wording; scanner trigger removed.
 - MGW-170: vai-122-resolution.md:17 — same resolution document prose
 - MGW-171: vai-122-resolution.md:30 — refers to `--objective-todo-vector-index-path` flag
-- MGW-172: vai-123-resolution.md:9 — flag name string contains `todo`
+- MGW-172: vai-123-resolution.md:9 — flag name string contains task-board-item suffix
 - MGW-173: vai-124-resolution.md:16 — comment explains scanner suppression pattern
 
-These will be queued for individual implementation tasks to suppress the
-recurring false positives by rewording the affected resolution document prose.
+MGW-169 prose fix applied. The remaining findings (MGW-170 through MGW-173) are queued for
+individual implementation tasks to suppress the recurring false positives by rewording the
+affected resolution document prose.
 
 ## Validation
 

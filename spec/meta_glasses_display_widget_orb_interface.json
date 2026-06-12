@@ -87,7 +87,7 @@
     },
     {
       "name": "focus_next",
-      "description": "Move focus within the widget interaction model. The focus payload carries the actual direction metadata.",
+      "description": "Move focus forward within the widget interaction model. The focus payload carries the actual direction metadata.",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -111,6 +111,36 @@
         "properties": {
           "type": { "const": "mobile_focus_display_widget" },
           "operation": { "const": "focus_next" },
+          "focus": { "type": "object" }
+        }
+      }
+    },
+    {
+      "name": "focus_previous",
+      "description": "Move focus backward within the widget interaction model. The focus payload carries the actual direction metadata.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "widget_id",
+          "focus"
+        ],
+        "properties": {
+          "widget_id": { "type": "string" },
+          "focus": {
+            "type": "object",
+            "properties": {
+              "direction": { "const": "previous" },
+              "action_id": { "type": "string" },
+              "focus_index": { "type": "integer" }
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "type": { "const": "mobile_focus_display_widget" },
+          "operation": { "const": "focus_previous" },
           "focus": { "type": "object" }
         }
       }

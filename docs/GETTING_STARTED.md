@@ -228,6 +228,44 @@ See [implementation_plan/docs/19-virtual-ai-os-submodule-integration.md](../impl
 
 ---
 
+### Path 5: Meta Glasses Display Widget Backlog Bootstrap
+
+**Goal**: initialize the display-widget planning dependencies, validate the MGW backlog, and prepare supervisor worktrees for autonomous implementation.
+
+**Time**: 10-15 minutes
+
+```bash
+# 1. Clone and enter the repo
+git clone https://github.com/endomorphosis/lift_coding.git
+cd lift_coding
+
+# 2. Initialize the reviewed display-widget dependencies
+git submodule sync --recursive
+git submodule update --init --recursive external/ipfs_accelerate external/ipfs_datasets swissknife external/meta-wearables-dat-android external/meta-wearables-dat-ios
+
+# 3. Bootstrap Python dependencies for the root repo
+make deps
+
+# 4. Validate the daemon-backed backlog
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_daemon.py --once
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
+
+# 5. Optional: create isolated worktrees for autonomous implementation
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once --implement
+```
+
+Bootstrap notes:
+
+- The display-widget supervisor stores state under `data/meta_glasses_display_widgets/state` by default.
+- Autonomous implementation worktrees are created under `data/meta_glasses_display_widgets/worktrees` by default.
+- Discovery reports and retry-budget evidence are written under `data/meta_glasses_display_widgets/discovery` by default.
+- You can override the backlog, state directory, worktree root, or discovery directory with `HANDSFREE_MGW_TODO_PATH`, `HANDSFREE_MGW_STATE_DIR`, `HANDSFREE_MGW_WORKTREE_ROOT`, and `HANDSFREE_MGW_DISCOVERY_DIR`.
+- Android validation uses the repo-local JDK 17 and Android SDK wrapper installed by the MGW supervisor.
+
+See [implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md](../implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md) for the display-widget roadmap and [CONFIGURATION.md](CONFIGURATION.md) for the bootstrap environment contract.
+
+---
+
 ## Backend Setup
 
 ### Step 1: Clone and Install

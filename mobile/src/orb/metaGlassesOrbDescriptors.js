@@ -27,6 +27,7 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'update_widget',
   'clear_widget',
   'focus_next',
+  'focus_previous',
   'activate',
   'reset_session',
   'play_video',
