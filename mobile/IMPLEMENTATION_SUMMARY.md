@@ -208,7 +208,7 @@ mobile/
    - Test connection/disconnection scenarios
 
 2. **Playback Implementation**
-   - Complete Android WAV file playback
+   - Validate implemented Android WAV playback on physical hardware
    - Validate iOS playback status events on physical hardware
    - Add recording status events
 
