@@ -1,7 +1,7 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: c8d5185fb6f35c432086dae2a816a62ad942e9d5
+Fingerprint: 9552ee584ad449076bf8ea661c42847b8ab653da
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
 Candidate count: 182
@@ -195,7 +195,7 @@ Work surface: `182` candidates, `20` sampled records.
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "c8d5185fb6f35c432086dae2a816a62ad942e9d5",
+  "fingerprint": "9552ee584ad449076bf8ea661c42847b8ab653da",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
