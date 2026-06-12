@@ -34,6 +34,7 @@ the diagnostics screen, active Expo module docs, bridge architecture notes,
 implementation summary, and audio-routing guide. The scanner-triggering
 reference to the older broad glasses diagnostics checklist was removed because
 that checklist is historical planning context, not the PR-052 reference.
-VAI-086 resolved the original line-26 scan finding by replacing the broad
-README description with the specific Expo module API and dev-client evidence
-needed for PR-052 validation.
+HAO-159 resolves the original line-26 scan finding by keeping the tracker
+focused on the specific Expo module API, dev-client requirements, diagnostics
+screen, bridge notes, implementation summary, and audio-routing evidence needed
+for PR-052 validation.
