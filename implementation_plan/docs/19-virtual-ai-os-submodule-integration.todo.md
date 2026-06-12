@@ -461,13 +461,13 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 258 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 265 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 1f47d4f3284a6710bff2aeb1cd5dcfa56be69224
+- Fingerprint: 8bc8895d94ee379933d87939c1e942a17010e69a
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
