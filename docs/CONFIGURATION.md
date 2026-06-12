@@ -355,7 +355,9 @@ Recommended bootstrap sequence:
 
 ```bash
 git submodule sync --recursive
-git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate external/ipfs_kit swissknife
+git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate swissknife
+git submodule update --init external/ipfs_kit
+git -C external/ipfs_kit submodule status
 PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
 ```
 
