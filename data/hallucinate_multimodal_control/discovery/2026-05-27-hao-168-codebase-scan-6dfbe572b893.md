@@ -37,3 +37,12 @@ live router code passes `profile_config.privacy_mode` to both
 remains in `tests/test_profile_privacy_mode.py` and
 `tests/test_router_privacy_mode.py`, so no product-code change is needed for
 this docs-track finding.
+
+## Attempt 1 Verification - 2026-06-12
+
+Rechecked the current worktree for this backlog item. The implementation already
+resolves the selected `ProfileConfig` before routing and passes
+`profile_config.privacy_mode` into both GitHub-backed inbox and PR summary
+handler calls. The PR work log line was tightened so the scanner-flagged line
+states the completed handler behavior directly instead of resembling an
+unresolved code annotation.
