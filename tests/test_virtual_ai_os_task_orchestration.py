@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -72,6 +73,15 @@ def _daemon_display_label() -> str:
 
 def _daemon_active_summary(task_id: str, title: str) -> str:
     return f"{task_id} active in the {_daemon_display_label()}: {title}."
+
+
+def test_task_orchestration_source_has_no_static_followup_findings():
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
+
+    source_path = Path(__file__)
+    repo_root = source_path.resolve().parents[1]
+
+    assert scan_findings_in_file(source_path, repo_root=repo_root) == []
 
 
 def test_delegate_tracks_virtual_ai_os_daemon_progress(
