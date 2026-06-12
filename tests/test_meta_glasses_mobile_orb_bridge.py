@@ -321,7 +321,26 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert event_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert dispatched_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+    policy_receipts = diagnostics_payload["policy_receipts"]
+    assert len(policy_receipts) >= 5
+    assert {receipt["outcome"] for receipt in policy_receipts} == {"allow"}
+    assert registered["mediation_receipt"]["receipt_id"] in {
+        receipt["receipt_id"] for receipt in policy_receipts
+    }
+    assert invoked_payload["receipt_cid"] in {
+        receipt["receipt_id"] for receipt in policy_receipts
+    }
+    assert diagnostics_payload["receipt_integrity"]["records_missing_receipt"] == 0
+    assert diagnostics_payload["receipt_integrity"]["missing_policy_cid_receipts"] == []
+    assert diagnostics_payload["receipt_integrity"]["orphan_parent_receipt_cids"] == []
+    assert diagnostics_payload["receipt_integrity"]["outcomes"]["allow"] >= 5
     assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
+    assert diagnostics_payload["edge_health"]["status"] == "degraded"
+    assert diagnostics_payload["edge_health"]["registered"] is True
+    assert diagnostics_payload["edge_health"]["binding_status"] == "subscribed"
+    assert "dat_native_display_unavailable" in diagnostics_payload["edge_health"][
+        "degraded_reasons"
+    ]
     assert diagnostics_payload["binding_state"]["status"] == "subscribed"
     assert diagnostics_payload["binding_state"]["active_binding_handles"] == [
         binding_payload["binding_handle"]
@@ -343,6 +362,45 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     )
     assert revoked.status_code == 200
     assert revoked.json()["revoked"] is True
+
+
+def test_mobile_orb_diagnostics_reports_policy_receipt_integrity_edges() -> None:
+    registered = _register_edge()
+    event = client.post(
+        "/v1/mobile/orb/publish_glasses_event",
+        json={
+            "edge_session_id": registered["edge_session_id"],
+            "event_type": "diagnostic",
+            "payload": {"health": "probe"},
+            "correlation_id": "corr-diagnostics",
+            "parent_receipt_cids": ["sha256:missing-parent"],
+        },
+    )
+    assert event.status_code == 200
+
+    event_record = next(iter(api_module.mobile_orb_events.values()))
+    event_record["mediation_receipt"]["policy_decision"]["compiled_policy_cid"] = None
+    event_record["mediation_receipt"]["policy_decision"]["policy_bundle_ref"][
+        "policy_cid"
+    ] = None
+
+    diagnostics = client.get(
+        "/v1/mobile/orb/diagnostics",
+        params={"edge_session_id": registered["edge_session_id"]},
+    )
+
+    assert diagnostics.status_code == 200
+    diagnostics_payload = diagnostics.json()
+    assert diagnostics_payload["receipt_integrity"]["orphan_parent_receipt_cids"] == [
+        "sha256:missing-parent"
+    ]
+    assert event.json()["receipt_cid"] in diagnostics_payload["receipt_integrity"][
+        "missing_policy_cid_receipts"
+    ]
+    assert diagnostics_payload["receipt_integrity"]["outcomes"]["allow"] >= 1
+    assert diagnostics_payload["edge_health"]["status"] == "degraded"
+    assert "missing_policy_cids" in diagnostics_payload["edge_health"]["degraded_reasons"]
+    assert "orphan_parent_receipts" in diagnostics_payload["edge_health"]["degraded_reasons"]
 
 
 def test_mobile_orb_rejects_missing_edge_session_and_binding() -> None:

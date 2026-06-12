@@ -28,7 +28,10 @@
       "policy_cids",
       "binding_state",
       "receipt_cids",
-      "fallback_reasons"
+      "fallback_reasons",
+      "policy_receipts",
+      "receipt_integrity",
+      "edge_health"
     ],
     "properties": {
       "contract": {
@@ -97,6 +100,54 @@
       "fallback_reasons": {
         "type": "array",
         "items": { "type": "string" }
+      },
+      "policy_receipts": {
+        "type": "array",
+        "description": "Compact policy receipt summaries for edge-session, event, binding, invocation, dispatch, subscription, and revocation records.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "receipt_id": { "type": ["string", "null"] },
+            "source_record": { "type": "string" },
+            "decision_id": { "type": ["string", "null"] },
+            "outcome": { "type": "string" },
+            "policy_cid": { "type": ["string", "null"] },
+            "method": { "type": ["string", "null"] },
+            "target_ref": { "type": ["string", "null"] }
+          }
+        }
+      },
+      "receipt_integrity": {
+        "type": "object",
+        "description": "Receipt and policy linkage checks used by mobile diagnostics to surface degraded ORB edges.",
+        "properties": {
+          "records_total": { "type": "integer" },
+          "records_with_receipt": { "type": "integer" },
+          "records_missing_receipt": { "type": "integer" },
+          "policy_receipts_total": { "type": "integer" },
+          "outcomes": { "type": "object" },
+          "missing_policy_cid_receipts": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "orphan_parent_receipt_cids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "edge_health": {
+        "type": "object",
+        "description": "Single status summary for mobile edge diagnostics.",
+        "properties": {
+          "status": { "enum": ["healthy", "degraded", "unknown"] },
+          "registered": { "type": "boolean" },
+          "binding_status": { "type": ["string", "null"] },
+          "degraded_reasons": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
       }
     }
   },
