@@ -34,6 +34,7 @@ except ImportError:  # pragma: no cover
 logger = logging.getLogger(__name__)
 
 _SESSION_RECORD_ERRORS = (KeyError, TypeError, ValueError, UnicodeError)
+_SESSION_METADATA_ERRORS = (json.JSONDecodeError, TypeError)
 
 
 @dataclass
@@ -225,7 +226,7 @@ class SessionTokenManager:
             if not isinstance(metadata, dict):
                 logger.warning("Session metadata is not a JSON object, using empty dict")
                 metadata = {}
-        except (json.JSONDecodeError, TypeError) as e:
+        except _SESSION_METADATA_ERRORS as e:
             logger.warning("Invalid JSON in session metadata, using empty dict: %s", e)
             metadata = {}
 
