@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Reviewed `kill_existing_servers` in `fixed_runner.py`. The original broad
+exception finding has already been narrowed in the checked-out source, but the
+same cleanup block still silently ignored `OSError` from `os.kill`. Updated the
+handler to log stale PID, permission, and other OS termination failures without
+changing the existing PID-file cleanup flow.

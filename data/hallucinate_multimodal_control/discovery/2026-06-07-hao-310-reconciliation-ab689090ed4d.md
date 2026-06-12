@@ -186,3 +186,40 @@ jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count /
 Success signal: the HAO-310 `unsupported_status` blocked candidate count
 decreased from `14` to `0`, and the supervisor removed all `14` sampled stale
 merged worktree registrations.
+
+## 2026-06-12 Attempt 1 Follow-up
+
+The current HAO-310 attempt found the sampled
+`hao-307-attempt-1-1781235947` worktree still registered and blocked by a dirty
+`external/ipfs_kit` submodule. The outer worktree status was only
+`m external/ipfs_kit`; inside the submodule the sole dirty path was
+`archive/applied_patches/add_pins_monkey_patch.py`.
+
+The one-line submodule diff was preserved before cleanup at
+`data/hallucinate_multimodal_control/discovery/hao-310-preserved-diffs/hao-307-attempt-1-1781235947/external__ipfs_kit-2026-06-12.patch`.
+The diff expands the dynamic import handler from `(ImportError, OSError)` to
+`(ImportError, AttributeError, OSError)`, matching the local dirty checkout
+without discarding evidence.
+
+After preserving the diff, the sampled submodule file was restored and both the
+outer worktree and `external/ipfs_kit` submodule reported clean status. The
+supervisor cleanup/reconciliation pass was rerun from `/home/barberb/lift_coding`
+on `2026-06-12T07:03:05.343519+00:00`:
+
+```sh
+python3 scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
+```
+
+The resulting `supervisor_check` event reported
+`worktree_cleanup_dirty_group_count=0` and `reconciliation_guardrail_count=1`.
+The refreshed reconciliation guardrail finding was only `HAO-309`
+`main_checkout_dirty`; no `dirty_backlogged_worktree:unsupported_status`
+finding was regenerated for HAO-310. The sampled HAO-307 worktree is now skipped
+as `not_merged` rather than `unsupported_status`, so the HAO-310 blocked
+candidate count decreased from `1` to `0`.
+
+Fresh validation reran the same supervisor cleanup/reconciliation command on
+`2026-06-12T07:28:33.607897+00:00`. The supervisor completed successfully with
+`worktree_cleanup_dirty_group_count=0` and `reconciliation_guardrail_count=1`,
+again leaving no HAO-310 `dirty_backlogged_worktree:unsupported_status`
+guardrail.

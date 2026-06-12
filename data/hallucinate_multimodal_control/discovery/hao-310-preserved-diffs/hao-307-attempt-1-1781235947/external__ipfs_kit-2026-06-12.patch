@@ -1,0 +1,13 @@
+diff --git a/archive/applied_patches/add_pins_monkey_patch.py b/archive/applied_patches/add_pins_monkey_patch.py
+index f6215e28..2878d420 100755
+--- a/archive/applied_patches/add_pins_monkey_patch.py
++++ b/archive/applied_patches/add_pins_monkey_patch.py
+@@ -37,7 +37,7 @@ def get_ipfs_simple_api_class():
+ 
+                 module = importlib.util.module_from_spec(spec)
+                 spec.loader.exec_module(module)
+-            except (ImportError, OSError) as e:
++            except (ImportError, AttributeError, OSError) as e:
+                 print(f"Failed to import IPFSSimpleAPI class: {e}", file=sys.stderr)
+                 return None
+ 

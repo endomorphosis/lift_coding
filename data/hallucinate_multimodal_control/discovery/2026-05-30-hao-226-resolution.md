@@ -1,6 +1,6 @@
 # HAO-226 Resolution
 
-Date: 2026-05-30
+Date: 2026-06-12
 Source: hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1118
 Status: resolved
 
@@ -20,15 +20,16 @@ length.
 
 ## Resolution
 
-**`error_monitor.py` (already fixed):** The comment at the formerly-line-1118 location
-(now line 1129 after nearby guard code was inserted by HAO-225) was already updated
-prior to this worktree to read:
+**`error_monitor.py`:** The comment at the formerly-line-1118 location
+(now line 1134 after nearby guard code was inserted by adjacent tasks) was updated
+to name the current sentinel explicitly:
 
 ```python
-# and became the sentinel) must not cause unrelated errors to be treated
+# and normalised to the one-character null-byte sentinel) must not cause
 ```
 
-No further edits to `error_monitor.py` were required.
+This keeps the annotation aligned with `_SIMILAR_SENTINEL = '\x00'` and removes the
+remaining ambiguity from the scan finding.
 
 **`test/test_error_monitor.py` (stale comments fixed):** Two test methods
 (`test_short_msg2_not_falsely_matched` and `test_short_msg1_not_falsely_matched`)
@@ -53,6 +54,7 @@ symmetrically.
 ## Validation
 
 - `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py` passes.
+- `PYTHONPATH=hallucinate_app/hallucinate_app/python python3 -m unittest hallucinate_app.test.test_error_monitor.TestMessagesSimilar` passes.
 - Existing focused tests in `test/test_error_monitor.py` remain correct:
   - `test_two_different_hex_only_messages_not_similar` – verifies `'\x00'` sentinel < `_SIMILAR_MIN_LEN`
   - `test_message_containing_sentinel_not_falsely_similar` – asserts `_SIMILAR_SENTINEL == '\x00'`
