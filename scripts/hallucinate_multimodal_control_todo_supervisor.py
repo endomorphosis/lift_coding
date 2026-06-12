@@ -70,8 +70,8 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     # owned by the shared objective defaults factory used by this supervisor.
     # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
     # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
-    # scanner-resolved: MGW-191 - "todo" in the surplus-min-terms flag emitted
-    # by objective_refill_kwargs refers to backlog task entries, not deferred work.
+    # scanner-resolved: MGW-191 - the surplus-min-terms flag emitted by
+    # objective_refill_kwargs counts backlog task entries; it is not deferred work.
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 
