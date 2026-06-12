@@ -49,6 +49,7 @@ from .policy import (
 from .runtime_placement import (
     RuntimePlacementDecision,
     resolve_virtual_ai_os_runtime_placement,
+    supported_virtual_ai_os_runtime_surfaces,
 )
 from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .serialization import build_api_execute_response
@@ -94,4 +95,5 @@ __all__ = [
     "resolve_virtual_ai_os_execution_mode",
     "resolve_virtual_ai_os_runtime_placement",
     "resolve_virtual_ai_os_runtime_route",
+    "supported_virtual_ai_os_runtime_surfaces",
 ]

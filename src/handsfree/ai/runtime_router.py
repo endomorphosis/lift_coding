@@ -11,7 +11,7 @@ from .models import (
     CapabilityExecutionMode,
     CapabilityRuntimeSurface,
 )
-from .runtime_placement import resolve_virtual_ai_os_runtime_placement
+from .runtime_placement import resolve_virtual_ai_os_runtime_placement, supported_virtual_ai_os_runtime_surfaces
 from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
 
@@ -98,25 +98,7 @@ def _supported_surfaces_for_mode(
     capability_id: str,
     execution_mode: CapabilityExecutionMode,
 ) -> tuple[CapabilityRuntimeSurface, ...]:
-    if execution_mode == CapabilityExecutionMode.DIRECT_IMPORT:
-        return (CapabilityRuntimeSurface.DIRECT_ADAPTER,)
-    if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
-        return (CapabilityRuntimeSurface.LOCAL_CLI,)
-    if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
-        return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
-    if capability_id in {
-        "embedding",
-        "dataset_discovery",
-        "storage",
-        "ipfs_pin",
-        "ui_render_session",
-    }:
-        return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
-    return (
-        CapabilityRuntimeSurface.MCP_PROVIDER,
-        CapabilityRuntimeSurface.DAEMON_MEDIATED,
-        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
-    )
+    return supported_virtual_ai_os_runtime_surfaces(capability_id, execution_mode)
 
 
 def _resolve_handler(
