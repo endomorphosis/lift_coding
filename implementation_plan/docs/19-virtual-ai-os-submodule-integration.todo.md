@@ -461,17 +461,31 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
+<<<<<<< HEAD
 ## VAI-200 Resolve dirty main checkout blocking 132 worktree merges
+=======
+## VAI-200 Resolve dirty main checkout blocking 56 worktree merges
+
+>>>>>>> implementation/vai-017-attempt-2-1781246428
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: 09c67c70a05a14d2b1584994907215228898a6ec
+=======
+- Fingerprint: 08676e2f4afc267e411c679f61c99cb105195c53
+>>>>>>> implementation/vai-017-attempt-2-1781246428
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
+<<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 131 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+- Acceptance: Reconciliation guardrail filed this because 56 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+>>>>>>> implementation/vai-017-attempt-2-1781246428
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
 - Status: completed
