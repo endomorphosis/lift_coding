@@ -1,7 +1,7 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: d9d3adeb49b39f357a17fc3b17899ce96d636e12
+Fingerprint: 7a48b255ca1d0132dbaf757dcf0a4dbf0e9f802e
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
 Candidate count: 182
@@ -76,6 +76,7 @@ Track: ops
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `tests/test_virtual_ai_os_runtime_router.py`
 - `implementation/hao-077-attempt-1-1781264513` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-077-attempt-1-1781264513`
   - Conflict paths:
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -182,20 +183,22 @@ Work surface: `182` candidates, `20` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-401-resolution.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-421-hao-358-merge-retry-budget.md": 1,
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-423-hao-159-implementation-retry-budget.md": 1,
-    "external/ipfs_kit": 5,
+    "external/ipfs_kit": 4,
     "hallucinate_app": 52,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 139,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 138,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 3,
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 150,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
     "scripts/hallucinate_multimodal_control_todo_supervisor.py": 13,
+    "scripts/meta_glasses_display_todo_supervisor.py": 1,
     "scripts/virtual_ai_os_todo_supervisor.py": 6,
     "tests/test_hallucinate_multimodal_control_todo_queue.py": 7,
+    "tests/test_virtual_ai_os_runtime_router.py": 4,
     "tracking/PR-052-glasses-js-integration-tts.md": 1,
     "work/PR-081-privacy-mode-per-profile.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "d9d3adeb49b39f357a17fc3b17899ce96d636e12",
+  "fingerprint": "7a48b255ca1d0132dbaf757dcf0a4dbf0e9f802e",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -232,7 +235,8 @@ Work surface: `182` candidates, `20` sampled records.
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md",
-    "mobile/IMPLEMENTATION_SUMMARY.md"
+    "mobile/IMPLEMENTATION_SUMMARY.md",
+    "tests/test_virtual_ai_os_runtime_router.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-057-attempt-2-1781264721",
@@ -270,6 +274,7 @@ Work surface: `182` candidates, `20` sampled records.
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "scripts/virtual_ai_os_todo_supervisor.py",
     "external/ipfs_kit",
+    "tests/test_virtual_ai_os_runtime_router.py",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
     "data/hallucinate_multimodal_control/discovery/2026-05-25-hao-057-resolution.md",
@@ -281,8 +286,7 @@ Work surface: `182` candidates, `20` sampled records.
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-314-codebase-scan-e0e818ca7fce.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-326-codebase-scan-42900ccea863.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-335-codebase-scan-7b425b8a660e.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-260-resolution.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-298-resolution.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-260-resolution.md"
   ]
 }
 ```
