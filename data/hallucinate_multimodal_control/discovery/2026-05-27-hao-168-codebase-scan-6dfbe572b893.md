@@ -46,3 +46,15 @@ resolves the selected `ProfileConfig` before routing and passes
 handler calls. The PR work log line was tightened so the scanner-flagged line
 states the completed handler behavior directly instead of resembling an
 unresolved code annotation.
+
+## Attempt 3 Verification - 2026-06-12
+
+Rechecked the current worktree for HAO-168. `src/handsfree/commands/router.py`
+still resolves `ProfileConfig.for_profile(profile)` once in `route()` and sends
+`profile_config.privacy_mode` to the GitHub-backed inbox and PR summary handlers.
+Focused validation remains in `tests/test_profile_privacy_mode.py` and
+`tests/test_router_privacy_mode.py`.
+
+Updated `work/PR-081-privacy-mode-per-profile.md` line 18 so it states the
+completed router behavior directly: the router resolves `ProfileConfig` per
+request and passes its `privacy_mode` into both handler paths.
