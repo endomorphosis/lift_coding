@@ -1,5 +1,7 @@
 """Tests for the virtual AI OS capability registry."""
 
+from importlib import import_module
+
 from handsfree.ai import (
     CapabilityExecutionMode,
     build_virtual_ai_os_execution_matrix,
@@ -20,9 +22,12 @@ def test_virtual_ai_os_registry_exposes_initial_capability_set():
     assert capability_ids == [
         "agentic_fetch",
         "dataset_discovery",
+        "device_render_transport",
         "embedding",
         "ipfs_pin",
+        "llm_generation",
         "storage",
+        "ui_render_session",
         "workflow",
     ]
 
@@ -36,7 +41,41 @@ def test_virtual_ai_os_registry_includes_cross_repo_metadata():
     assert embedding.default_execution_mode == CapabilityExecutionMode.DIRECT_IMPORT
     assert embedding.fallback_execution_mode == CapabilityExecutionMode.MCP_REMOTE
     assert embedding.artifact_output == ("embedding_vector", "embedding_dimensions")
+    assert (
+        embedding.voice_display_summary_formatter_ref
+        == "handsfree.capability_summaries:format_embedding"
+    )
     assert "tests/test_virtual_ai_os_capability_registry.py" in embedding.integration_test_ids
+
+
+def test_virtual_ai_os_registry_covers_plan_initial_families():
+    capabilities = {entry.capability_id: entry for entry in list_virtual_ai_os_capabilities()}
+
+    assert capabilities["llm_generation"].owner_repo == "handsfree"
+    assert capabilities["ui_render_session"].owner_repo == "endomorphosis/swissknife"
+    assert capabilities["device_render_transport"].owner_repo == "handsfree/mobile"
+    assert capabilities["ui_render_session"].provider_name == "swissknife_orb"
+    assert capabilities["device_render_transport"].server_family == "meta_glasses_mobile_orb"
+    assert capabilities["llm_generation"].artifact_output == (
+        "response_text",
+        "revision_ref",
+        "model_trace_ref",
+    )
+    assert capabilities["ui_render_session"].display_summary_fields == (
+        "summary",
+        "surface",
+        "render_session_id",
+    )
+
+
+def test_virtual_ai_os_summary_formatter_refs_are_importable():
+    for entry in list_virtual_ai_os_capabilities():
+        module_name, function_name = entry.voice_display_summary_formatter_ref.split(":")
+        formatter = getattr(import_module(module_name), function_name)
+
+        assert formatter({"summary": f"{entry.capability_id} ready"}) == (
+            f"{entry.capability_id} ready"
+        )
 
 
 def test_virtual_ai_os_registry_resolves_legacy_capability_aliases():
@@ -85,6 +124,10 @@ def test_virtual_ai_os_execution_matrix_tracks_mcp_alignment():
     assert matrix["dataset_discovery"]["mcp_capability_registered"] is True
     assert matrix["storage"]["default_execution_mode"] == "mcp_remote"
     assert matrix["workflow"]["fallback_execution_mode"] == "orchestrated"
+    assert (
+        matrix["ui_render_session"]["voice_display_summary_formatter_ref"]
+        == "handsfree.capability_summaries:format_ui_render_session"
+    )
 
 
 def test_top_level_capability_registry_path_resolves_stable_ids():
@@ -98,9 +141,12 @@ def test_top_level_capability_registry_path_resolves_stable_ids():
     assert [entry.capability_id for entry in registry.list_capabilities()] == [
         "agentic_fetch",
         "dataset_discovery",
+        "device_render_transport",
         "embedding",
         "ipfs_pin",
+        "llm_generation",
         "storage",
+        "ui_render_session",
         "workflow",
     ]
 

@@ -78,6 +78,7 @@ class AICapabilityRegistryEntry:
     result_schema_ref: str
     artifact_output: tuple[str, ...] = ()
     display_summary_fields: tuple[str, ...] = ()
+    voice_display_summary_formatter_ref: str | None = None
     integration_test_ids: tuple[str, ...] = ()
     legacy_capability_ids: tuple[str, ...] = ()
 
