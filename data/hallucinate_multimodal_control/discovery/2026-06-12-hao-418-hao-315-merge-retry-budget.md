@@ -23,3 +23,23 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair Resolution
+
+- Confirmed the HAO-315 implementation is committed in `external/ipfs_kit` as
+  `50c5b4f5` (`Tighten archived exception handling`), updating
+  `archive/applied_patches/direct_mcp_server.py`.
+- Resolved the dirty submodule checkout that blocked merges by committing the
+  remaining `external/ipfs_kit` workflow conflict as `17acebc4`
+  (`Resolve auto-doc workflow merge conflict`).
+- Resolved the recorded dirty main-checkout todo conflicts in
+  `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  and `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`,
+  then completed the pending main merge as `3417c2d2`.
+- Committed the remaining generated reconciliation evidence as `bbf5bc5e`, then
+  completed the follow-on main merge as `171c6e60`, which removed committed
+  conflict markers from the same todo boards.
+- Verified `/home/barberb/lift_coding` has no dirty checkout paths and the
+  affected todo boards contain no conflict markers.
+- `ipfs-accelerate-agent-merge-resolver` was not available on `PATH`; the only
+  remaining conflict was resolved manually in `.github/workflows/auto-doc-maintenance.yml`.
