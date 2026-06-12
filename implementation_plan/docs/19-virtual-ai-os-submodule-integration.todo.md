@@ -775,3 +775,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-324-vai-214-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-214. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-324-vai-214-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-214 from strategy blocked_tasks.
+
+## VAI-325 Resolve merge retry-budget failure for VAI-156
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-325-vai-156-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-156. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-12-vai-325-vai-156-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-156 from strategy blocked_tasks.
