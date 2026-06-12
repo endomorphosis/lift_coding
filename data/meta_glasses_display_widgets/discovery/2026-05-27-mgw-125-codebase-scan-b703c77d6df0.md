@@ -19,3 +19,12 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Implemented the dashboard principal deletion flow in
+`hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js` with explicit
+guards for unsupported deletion, missing principals, root principal protection,
+awaited backend deletion, and dashboard refresh after success. Added focused
+coverage in `hallucinate_app/hallucinate_app/node/dashboard/test_auth_dashboard.js`
+for deleting a non-root principal through the dashboard handler.
