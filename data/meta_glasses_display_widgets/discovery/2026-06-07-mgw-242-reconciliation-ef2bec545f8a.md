@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 75b21a909bce3504a0e2c3b1090fdd57e464764e
+Fingerprint: d8bf46d2ca54a2c94220cc87c7ff18068e17c4b7
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 11
+Candidate count: 7
 Priority: P1
 Track: ops
 
@@ -32,29 +32,14 @@ Track: ops
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `rescue/worktree/implementation-mgw-026-attempt-1-1781236830-f817e263238f` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236830`
+  - Conflict paths:
+    - `data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `rescue/worktree/implementation-mgw-026-attempt-1-1781236884-73fa031ea665` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236884`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - `implementation/mgw-035-attempt-1-1781235219` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781235219`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-043-attempt-1-1781236407` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-043-attempt-1-1781236407`
-  - Conflict paths:
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-065-attempt-2-1781232555` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-2-1781232555`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-121-attempt-1-1780997197` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1780997197`
-  - Conflict paths:
-    - `hallucinate_app`
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-125-attempt-2-1780999263` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-2-1780999263`
-  - Conflict paths:
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-126-attempt-1-1780999750` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1780999750`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2d990c4ff79e` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -76,7 +61,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `11` candidates, `11` sampled records.
+Work surface: `7` candidates, `7` sampled records.
 
 ### Suggested Actions
 
@@ -124,14 +109,14 @@ Work surface: `11` candidates, `11` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 11,
+  "candidate_count": 7,
   "conflict_path_counts": {
-    "hallucinate_app": 1,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 8,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 9
+    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md": 1,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 6,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 4
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "75b21a909bce3504a0e2c3b1090fdd57e464764e",
+  "fingerprint": "d8bf46d2ca54a2c94220cc87c7ff18068e17c4b7",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -145,32 +130,24 @@ Work surface: `11` candidates, `11` sampled records.
     "implementation/mgw-002-attempt-1-1781228395",
     "rescue/worktree/implementation-mgw-004-attempt-1-1781229018-d0226fbce6ab",
     "rescue/worktree/implementation-mgw-005-attempt-1-1781229784-675aa8ee06a3",
-    "implementation/mgw-035-attempt-1-1781235219",
-    "implementation/mgw-043-attempt-1-1781236407",
-    "implementation/mgw-065-attempt-2-1781232555",
-    "implementation/mgw-121-attempt-1-1780997197",
-    "implementation/mgw-125-attempt-2-1780999263",
-    "implementation/mgw-126-attempt-1-1780999750",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2d990c4ff79e"
+    "rescue/worktree/implementation-mgw-026-attempt-1-1781236830-f817e263238f",
+    "rescue/worktree/implementation-mgw-026-attempt-1-1781236884-73fa031ea665",
+    "implementation/mgw-035-attempt-1-1781235219"
   ],
-  "sample_count": 11,
+  "sample_count": 7,
   "sample_status_paths": [
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "hallucinate_app"
+    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-001-attempt-1-1781226554",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-002-attempt-1-1781228395",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-004-attempt-1-1781229018",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-005-attempt-1-1781229784",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781235219",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-043-attempt-1-1781236407",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-2-1781232555",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1780997197",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-2-1780999263",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1780999750",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813"
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236830",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236884",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781235219"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -179,9 +156,9 @@ Work surface: `11` candidates, `11` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "hallucinate_app"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md"
   ]
 }
 ```
