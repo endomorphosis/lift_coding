@@ -91,10 +91,18 @@ def _supported_surfaces_for_mode(
     if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
         return (CapabilityRuntimeSurface.LOCAL_CLI,)
     if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
-        return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
+        return (
+            CapabilityRuntimeSurface.DAEMON_MEDIATED,
+            CapabilityRuntimeSurface.HALLUCINATE_APP,
+        )
     if capability_id in {"embedding", "dataset_discovery", "storage", "ipfs_pin"}:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
-    return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.DAEMON_MEDIATED, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+    return (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.DAEMON_MEDIATED,
+        CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
 
 
 def _resolve_handler(
@@ -108,6 +116,8 @@ def _resolve_handler(
         return "handsfree.ai.runtime_router:run_local_cli", _resolve_cli_command(capability_id)
     if runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED:
         return "handsfree.ai.runtime_router:run_daemon_workflow", None
+    if runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP:
+        return "hallucinate_app/index.js#operator_console", None
     if runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB:
         return f"swissknife.orb::{capability_id}", None
     if runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER:

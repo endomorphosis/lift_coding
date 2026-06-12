@@ -58,6 +58,7 @@ class CapabilityRuntimeSurface(str, Enum):
     MCP_PROVIDER = "mcp_provider"
     DAEMON_MEDIATED = "daemon_mediated"
     SWISSKNIFE_ORB = "swissknife_orb"
+    HALLUCINATE_APP = "hallucinate_app"
 
 
 @dataclass(frozen=True)

@@ -41,6 +41,17 @@ def test_runtime_router_uses_daemon_surface_for_accelerate_workflow():
     assert route.handler_ref == "handsfree.ai.runtime_router:run_daemon_workflow"
 
 
+def test_runtime_router_allows_hallucinate_operator_console_for_workflow():
+    route = resolve_virtual_ai_os_runtime_route(
+        "workflow",
+        preferred_surface=CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
+
+    assert route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert route.runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP
+    assert route.handler_ref == "hallucinate_app/index.js#operator_console"
+
+
 def test_runtime_router_allows_swissknife_orb_override_for_remote_capability():
     route = resolve_virtual_ai_os_runtime_route(
         "dataset_discovery",
@@ -123,6 +134,33 @@ def test_capability_routing_kernel_builds_swissknife_orb_mobile_task_flow_plan()
     )
     assert plan.payload["task_id"] == "VAI-019"
     assert plan.payload["artifact_refs"]["receipt_ref"] == "bafybeivai019receipt"
+
+
+def test_capability_routing_kernel_promotes_hallucinate_operator_console_plane():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="workflow",
+            preferred_surface=CapabilityRuntimeSurface.HALLUCINATE_APP,
+            source_surface="todo_daemon",
+            payload={
+                "task_id": "VAI-007",
+                "operator_plane": "hallucinate_app",
+                "daemon_action": "inspect_and_recover",
+            },
+        )
+    )
+
+    assert plan.route.execution_mode == CapabilityExecutionMode.MCP_REMOTE
+    assert plan.route.runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP
+    assert plan.route.handler_ref == "hallucinate_app/index.js#operator_console"
+    assert plan.fallback_route is not None
+    assert plan.fallback_route.runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED
+    assert [entry.surface_id for entry in plan.entrypoints] == [
+        "hallucinate_app",
+        "mobile_glasses",
+    ]
+    assert plan.entrypoints[0].role == "operator_console"
+    assert plan.payload["task_id"] == "VAI-007"
 
 
 def test_runtime_router_normalizes_route_planning_errors():

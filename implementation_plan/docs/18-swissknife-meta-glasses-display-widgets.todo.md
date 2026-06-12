@@ -2642,7 +2642,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-233. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-06-mgw-238-mgw-233-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-233 from strategy blocked_tasks.
 
-## MGW-239 Resolve dirty main checkout blocking 32 worktree merges
+## MGW-239 Resolve dirty main checkout blocking 31 worktree merges
 
 - Status: completed
 - Completion: manual
@@ -2687,7 +2687,11 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: cc82b00654adcade15c40fae9b166a4839d54b30
+=======
+- Fingerprint: 9e6f2b25eacbf4481d2a85ec1d60478fd6c3e9a3
+>>>>>>> implementation/mgw-253-attempt-1-1781239861
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -2806,7 +2810,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-253 Resolve merge retry-budget failure for MGW-190
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
