@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: e839e64c544f2ca554b82477304b8153fe56b011
+Fingerprint: 7b4b3d0d229f7ef6fe03df56ccd53a68a1de1c4e
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 43
+Candidate count: 172
 Priority: P1
 Track: ops
 
@@ -114,7 +114,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `43` candidates, `20` sampled records.
+Work surface: `172` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -162,15 +162,35 @@ Work surface: `43` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 43,
+  "candidate_count": 172,
   "conflict_path_counts": {
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 36,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 41,
+    "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-259-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-314-codebase-scan-e0e818ca7fce.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-326-codebase-scan-42900ccea863.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-335-codebase-scan-7b425b8a660e.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-260-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md": 2,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-298-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-401-resolution.md": 1,
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-421-hao-358-merge-retry-budget.md": 1,
+    "external/ipfs_kit": 5,
+    "hallucinate_app": 50,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 131,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 1,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 143,
     "mobile/IMPLEMENTATION_SUMMARY.md": 1,
-    "tests/test_hallucinate_multimodal_control_todo_queue.py": 5
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py": 4,
+    "scripts/virtual_ai_os_todo_supervisor.py": 6,
+    "tests/test_hallucinate_multimodal_control_todo_queue.py": 6,
+    "tracking/PR-052-glasses-js-integration-tts.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "e839e64c544f2ca554b82477304b8153fe56b011",
+  "fingerprint": "7b4b3d0d229f7ef6fe03df56ccd53a68a1de1c4e",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -238,8 +258,24 @@ Work surface: `43` candidates, `20` sampled records.
   "top_conflict_paths": [
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "hallucinate_app",
+    "scripts/virtual_ai_os_todo_supervisor.py",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
-    "mobile/IMPLEMENTATION_SUMMARY.md"
+    "external/ipfs_kit",
+    "scripts/hallucinate_multimodal_control_todo_supervisor.py",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-295-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-05-27-hao-159-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-256-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-05-31-hao-259-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-06-hao-300-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-310-reconciliation-ab689090ed4d.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-314-codebase-scan-e0e818ca7fce.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-326-codebase-scan-42900ccea863.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-08-hao-335-codebase-scan-7b425b8a660e.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-260-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-298-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-326-resolution.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-12-hao-401-resolution.md"
   ]
 }
 ```
