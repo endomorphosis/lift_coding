@@ -35,6 +35,8 @@ CAPABILITY_ROUTING_SURFACE_LABELS: Mapping[str, str] = {
     "swissknife_orb": "SwissKnife ORB",
     "hallucinate_app": "Hallucinate App",
     "mobile_glasses": "mobile/glasses",
+    "meta_glasses_audio": "Meta glasses audio",
+    "meta_glasses_display": "Meta glasses display",
 }
 
 CAPABILITY_ROUTING_SURFACES = tuple(CAPABILITY_ROUTING_SURFACE_LABELS)
@@ -313,6 +315,29 @@ _PRESENTATION_SURFACE_ENDPOINTS = (
                 "handsfree.meta_glasses_mobile_orb_runtime:"
                 "resolve_mobile_orb_runtime_binding"
             ),
+        },
+    ),
+    CapabilitySurfaceEndpoint(
+        surface_id="meta_glasses_audio",
+        label=CAPABILITY_ROUTING_SURFACE_LABELS["meta_glasses_audio"],
+        role="remote_terminal_audio",
+        handler_ref="handsfree.meta_glasses_remote_terminal:route_audio_endpoint",
+        metadata={
+            "contract_id": "handsfree.meta-glasses/remote-terminal@0.1.0",
+            "channel": "audio",
+            "surface_id": "mobile_glasses",
+        },
+    ),
+    CapabilitySurfaceEndpoint(
+        surface_id="meta_glasses_display",
+        label=CAPABILITY_ROUTING_SURFACE_LABELS["meta_glasses_display"],
+        role="remote_terminal_display",
+        handler_ref="handsfree.meta_glasses_remote_terminal:route_display_endpoint",
+        metadata={
+            "contract_id": "handsfree.meta-glasses/remote-terminal@0.1.0",
+            "channel": "display",
+            "surface_id": "mobile_glasses",
+            "display_descriptor": "spec/meta_glasses_display_widget_orb_interface.json",
         },
     ),
 )
