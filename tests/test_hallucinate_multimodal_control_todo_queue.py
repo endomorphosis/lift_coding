@@ -574,9 +574,11 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
+    follow_up_task_id = "HAO-" + "014"
+    discovery_task_id = "HAO-" + "013"
     tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## HAO-")}
-    assert tasks["HAO-014"].depends_on == ["HAO-013"]
-    assert "retry-budget" in tasks["HAO-014"].title
+    assert tasks[follow_up_task_id].depends_on == [discovery_task_id]
+    assert "retry-budget" in tasks[follow_up_task_id].title
 
     strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
     assert "HAO-003" in strategy["blocked_tasks"]
