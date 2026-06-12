@@ -92,7 +92,6 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
       if (result.widgetId !== fixture.widget_id || result.supported !== false) {{
         throw new Error('bridge result did not preserve widget metadata');
       }}
-<<<<<<< HEAD
       if (disabledResult.requiredAction !== 'enable_display_capability') {{
         throw new Error('disabled state is not represented in bridge results');
       }}
@@ -101,14 +100,13 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
       }}
       if (envelope.raw_payload.widget_cid !== fixture.widget_cid) {{
         throw new Error('interaction envelope did not preserve widget refs');
-=======
+      }}
       const readiness = simulator.buildReadinessDescriptor(fixture);
       if (readiness.simulator_artifacts.descriptor_cid !== fixture.descriptor_cid) {{
         throw new Error('readiness descriptor did not preserve simulator descriptor CID');
       }}
       if (!readiness.simulator_artifacts.mobile_orb.endpoints.includes('/v1/mobile/orb/bind_service')) {{
         throw new Error('readiness descriptor did not declare mobile ORB binding endpoint');
->>>>>>> implementation/vai-017-attempt-2-1781246428
       }}
     """
     subprocess.run(["node", "-e", script], check=True, cwd=REPO_ROOT)
