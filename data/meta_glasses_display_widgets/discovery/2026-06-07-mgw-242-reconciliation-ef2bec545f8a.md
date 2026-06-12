@@ -1,10 +1,10 @@
 # MGW-242 Reconciliation Guardrail
 
 Date: 2026-06-12
-Fingerprint: 10f3319db257a1a1032f2eb017c7ca59da4332dc
+Fingerprint: 86509755cb8dbd320588113fcccc3407d0f30c3c
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 14
+Candidate count: 75
 Priority: P1
 Track: ops
 
@@ -45,30 +45,57 @@ Track: ops
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-035-attempt-1-1781244188` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781244188`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-035-attempt-1-1781246549` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781246549`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-036-attempt-1-1781244391` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-036-attempt-1-1781244391`
+  - Conflict paths:
+    - `data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-037-attempt-1-1781244614` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1781244614`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-037-attempt-1-1781246936` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1781246936`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-047-attempt-1-1781241684` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-047-attempt-1-1781241684`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
+- `implementation/mgw-047-attempt-1-1781241995` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-047-attempt-1-1781241995`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-065-attempt-1-1781241897` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-1-1781241897`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/mgw-065-attempt-1-1781242191` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-1-1781242191`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
 - `implementation/mgw-065-attempt-2-1781232555` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-2-1781232555`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-121-attempt-1-1780997197` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1780997197`
-  - Conflict paths:
-    - `hallucinate_app`
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-125-attempt-2-1780999263` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-2-1780999263`
-  - Conflict paths:
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-126-attempt-1-1780999750` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1780999750`
-  - Conflict paths:
-    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--b7bdd4a91918` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813`
+- `implementation/mgw-091-attempt-1-1781242148` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-091-attempt-1-1781242148`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-130-attempt-1-1781238282` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1781238282`
+    - `tests/test_virtual_ai_os_end_to_end.py`
+- `implementation/mgw-101-attempt-1-1781244804` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-101-attempt-1-1781244804`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `implementation/mgw-130-attempt-1-1781238334` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1781238334`
+    - `tracking/PR-050-android-audio-route-monitor.md`
+- `implementation/mgw-102-attempt-2-1781259437` at `/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-102-attempt-2-1781259437`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
@@ -90,7 +117,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `14` candidates, `14` sampled records.
+Work surface: `75` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -138,15 +165,27 @@ Work surface: `14` candidates, `14` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 14,
+  "candidate_count": 75,
   "conflict_path_counts": {
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md": 1,
-    "hallucinate_app": 1,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 12,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 12
+    "data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-106-codebase-scan-d65e6d946f62.md": 1,
+    "data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-152-resolution.md": 1,
+    "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md": 1,
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-170-resolution.md": 1,
+    "data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md": 1,
+    "data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md": 1,
+    "data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md": 1,
+    "data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md": 2,
+    "data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md": 3,
+    "hallucinate_app": 7,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 62,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 1,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 67,
+    "tests/test_virtual_ai_os_end_to_end.py": 1,
+    "tracking/PR-050-android-audio-route-monitor.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "10f3319db257a1a1032f2eb017c7ca59da4332dc",
+  "fingerprint": "86509755cb8dbd320588113fcccc3407d0f30c3c",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -163,20 +202,29 @@ Work surface: `14` candidates, `14` sampled records.
     "rescue/worktree/implementation-mgw-026-attempt-1-1781236830-f817e263238f",
     "rescue/worktree/implementation-mgw-026-attempt-1-1781236884-73fa031ea665",
     "implementation/mgw-035-attempt-1-1781235219",
+    "implementation/mgw-035-attempt-1-1781244188",
+    "implementation/mgw-035-attempt-1-1781246549",
+    "implementation/mgw-036-attempt-1-1781244391",
+    "implementation/mgw-037-attempt-1-1781244614",
+    "implementation/mgw-037-attempt-1-1781246936",
+    "implementation/mgw-047-attempt-1-1781241684",
+    "implementation/mgw-047-attempt-1-1781241995",
+    "implementation/mgw-065-attempt-1-1781241897",
+    "implementation/mgw-065-attempt-1-1781242191",
     "implementation/mgw-065-attempt-2-1781232555",
-    "implementation/mgw-121-attempt-1-1780997197",
-    "implementation/mgw-125-attempt-2-1780999263",
-    "implementation/mgw-126-attempt-1-1780999750",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--b7bdd4a91918",
-    "implementation/mgw-130-attempt-1-1781238282",
-    "implementation/mgw-130-attempt-1-1781238334"
+    "implementation/mgw-091-attempt-1-1781242148",
+    "implementation/mgw-101-attempt-1-1781244804",
+    "implementation/mgw-102-attempt-2-1781259437"
   ],
-  "sample_count": 14,
+  "sample_count": 20,
   "sample_status_paths": [
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md",
-    "hallucinate_app"
+    "data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
+    "tests/test_virtual_ai_os_end_to_end.py",
+    "tracking/PR-050-android-audio-route-monitor.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-001-attempt-1-1781226554",
@@ -186,13 +234,19 @@ Work surface: `14` candidates, `14` sampled records.
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236830",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-026-attempt-1-1781236884",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781235219",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781244188",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-035-attempt-1-1781246549",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-036-attempt-1-1781244391",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1781244614",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-037-attempt-1-1781246936",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-047-attempt-1-1781241684",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-047-attempt-1-1781241995",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-1-1781241897",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-1-1781242191",
     "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-065-attempt-2-1781232555",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-121-attempt-1-1780997197",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-125-attempt-2-1780999263",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-126-attempt-1-1780999750",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-127-attempt-1-1781232813",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1781238282",
-    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-130-attempt-1-1781238334"
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-091-attempt-1-1781242148",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-101-attempt-1-1781244804",
+    "/home/barberb/lift_coding/data/meta_glasses_display_widgets/worktrees/mgw-102-attempt-2-1781259437"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -201,10 +255,22 @@ Work surface: `14` candidates, `14` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "hallucinate_app",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md",
     "data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-026-merge-unblock-resolution.md",
-    "hallucinate_app"
+    "data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-106-codebase-scan-d65e6d946f62.md",
+    "data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-152-resolution.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-09-mgw-184-hallucinate-app-submodule-pin.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-12-mgw-170-resolution.md",
+    "data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md",
+    "data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
+    "tests/test_virtual_ai_os_end_to_end.py",
+    "tracking/PR-050-android-audio-route-monitor.md"
   ]
 }
 ```
