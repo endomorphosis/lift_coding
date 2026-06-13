@@ -1,10 +1,10 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-13
-Fingerprint: ab87cc0e9ec14da3a893357ed6d626bf38402df4
+Fingerprint: 306e72b4ea5781a16bcbd1c842ac10cc817ac4c2
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 288
+Candidate count: 296
 Priority: P1
 Track: ops
 
@@ -13,27 +13,34 @@ Track: ops
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
 - ` m hallucinate_app`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
 - ` M tests/test_virtual_ai_os_end_to_end.py`
 - ` M tests/test_virtual_ai_os_runtime_router.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=5, other_dirty=1`
+- Path categories: `modified=4, other_dirty=1, unmerged=2`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
   - `tests/test_virtual_ai_os_end_to_end.py`
   - `tests/test_virtual_ai_os_runtime_router.py`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `M	hallucinate_app`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
   - `M	tests/test_virtual_ai_os_end_to_end.py`
   - `M	tests/test_virtual_ai_os_runtime_router.py`
+- Staged name status:
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
 
 ## Sample Branches Or Worktrees
 
@@ -75,7 +82,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `288` candidates, `20` sampled records.
+Work surface: `296` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -117,25 +124,29 @@ Work surface: `288` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 288,
+  "candidate_count": 296,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ab87cc0e9ec14da3a893357ed6d626bf38402df4",
+  "fingerprint": "306e72b4ea5781a16bcbd1c842ac10cc817ac4c2",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
       "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
-      "modified": 5,
-      "other_dirty": 1
+      "modified": 4,
+      "other_dirty": 1,
+      "unmerged": 2
     },
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
       "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
       "tests/test_virtual_ai_os_end_to_end.py",
       "tests/test_virtual_ai_os_runtime_router.py"
     ],
@@ -143,7 +154,8 @@ Work surface: `288` candidates, `20` sampled records.
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
       " m hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "UU implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
       " M tests/test_virtual_ai_os_end_to_end.py",
       " M tests/test_virtual_ai_os_runtime_router.py"
     ]
@@ -182,6 +194,7 @@ Work surface: `288` candidates, `20` sampled records.
     "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
     "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md",
     "tests/test_virtual_ai_os_end_to_end.py",
     "tests/test_virtual_ai_os_runtime_router.py"
   ],
