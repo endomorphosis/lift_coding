@@ -4,7 +4,7 @@ Date: 2026-06-13
 Fingerprint: 306e72b4ea5781a16bcbd1c842ac10cc817ac4c2
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 296
+Candidate count: 299
 Priority: P1
 Track: ops
 
@@ -36,11 +36,23 @@ Track: ops
   - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
+  - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
   - `M	tests/test_virtual_ai_os_end_to_end.py`
   - `M	tests/test_virtual_ai_os_runtime_router.py`
 - Staged name status:
   - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `U	implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
+- Diff stat:
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 29 ++++++++++++++++----`
+  - ` ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 32 ++++++++++++++--------`
+  - ` hallucinate_app                                    |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  6 +++-`
+  - ` .../docs/19-virtual-ai-os-submodule-integration.md | Unmerged`
+  - ` .../docs/19-virtual-ai-os-submodule-integration.md |  3 ++`
+  - ` tests/test_virtual_ai_os_end_to_end.py             |  2 +-`
+  - ` tests/test_virtual_ai_os_runtime_router.py         | 19 +++++++++++++`
+  - ` 7 files changed, 72 insertions(+), 19 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -82,7 +94,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `296` candidates, `20` sampled records.
+Work surface: `299` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -124,17 +136,14 @@ Work surface: `296` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 296,
+  "candidate_count": 299,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
   "fingerprint": "306e72b4ea5781a16bcbd1c842ac10cc817ac4c2",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 29 ++++++++++++++++----\n ...26-06-07-mgw-239-reconciliation-58c94934bd81.md | 32 ++++++++++++++--------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md | Unmerged\n ...swissknife-meta-glasses-display-widgets.todo.md |  6 +++-\n .../docs/19-virtual-ai-os-submodule-integration.md | Unmerged\n .../docs/19-virtual-ai-os-submodule-integration.md |  3 ++\n tests/test_virtual_ai_os_end_to_end.py             |  2 +-\n tests/test_virtual_ai_os_runtime_router.py         | 19 +++++++++++++\n 7 files changed, 72 insertions(+), 19 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nU\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nM\timplementation_plan/docs/19-virtual-ai-os-submodule-integration.md\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
       "modified": 4,
       "other_dirty": 1,
