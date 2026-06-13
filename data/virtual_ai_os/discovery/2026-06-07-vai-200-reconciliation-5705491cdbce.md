@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-13
-Fingerprint: ace75c3a0d87ea544d9bd8bae963f46082bd448e
+Fingerprint: 8bc8895d94ee379933d87939c1e942a17010e69a
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 303
@@ -10,21 +10,30 @@ Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
 - ` M tests/test_virtual_ai_os_end_to_end.py`
 - ` M tests/test_virtual_ai_os_runtime_router.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `modified=3, other_dirty=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
   - `tests/test_virtual_ai_os_end_to_end.py`
   - `tests/test_virtual_ai_os_runtime_router.py`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
   - `M	tests/test_virtual_ai_os_end_to_end.py`
   - `M	tests/test_virtual_ai_os_runtime_router.py`
+- Diff stat:
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 27 ++++++++++++++++++----`
+  - ` hallucinate_app                                    |  0`
+  - ` tests/test_virtual_ai_os_end_to_end.py             |  2 +-`
+  - ` tests/test_virtual_ai_os_runtime_router.py         | 19 +++++++++++++++`
+  - ` 4 files changed, 42 insertions(+), 6 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -111,24 +120,23 @@ Work surface: `303` candidates, `20` sampled records.
   "candidate_count": 303,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ace75c3a0d87ea544d9bd8bae963f46082bd448e",
+  "fingerprint": "8bc8895d94ee379933d87939c1e942a17010e69a",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/source-topology-vai-001-2026-06-12.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\thallucinate_app\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 27 ++++++++++++++++++----\n hallucinate_app                                    |  0\n tests/test_virtual_ai_os_end_to_end.py             |  2 +-\n tests/test_virtual_ai_os_runtime_router.py         | 19 +++++++++++++++\n 4 files changed, 42 insertions(+), 6 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
-      "modified": 2,
+      "modified": 3,
       "other_dirty": 1
     },
     "status_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "hallucinate_app",
       "tests/test_virtual_ai_os_end_to_end.py",
       "tests/test_virtual_ai_os_runtime_router.py"
     ],
     "status_short": [
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m hallucinate_app",
       " M tests/test_virtual_ai_os_end_to_end.py",
       " M tests/test_virtual_ai_os_runtime_router.py"
@@ -164,6 +172,7 @@ Work surface: `303` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "hallucinate_app",
     "tests/test_virtual_ai_os_end_to_end.py",
     "tests/test_virtual_ai_os_runtime_router.py"
