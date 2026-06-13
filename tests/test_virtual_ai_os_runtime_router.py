@@ -233,6 +233,23 @@ def test_capability_routing_kernel_promotes_hallucinate_operator_console_plane()
     assert plan.payload["task_id"] == "VAI-007"
 
 
+def test_swissknife_orb_dispatch_metadata_resolves_mobile_runtime_binding():
+    plan = CapabilityRoutingKernel().dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        )
+    )
+
+    runtime_binding = resolve_mobile_orb_runtime_binding(plan.entrypoints[0].metadata)
+
+    assert runtime_binding is not None
+    assert runtime_binding["binding_type"] == "handsfree.mcp-server"
+    assert runtime_binding["transport"] == "mcp-server"
+    assert runtime_binding["server_family"] == "ipfs_datasets"
+    assert runtime_binding["tool_name"] == "dataset_discovery"
+
+
 def test_runtime_router_normalizes_route_planning_errors():
     router = RuntimeRouter()
     try:

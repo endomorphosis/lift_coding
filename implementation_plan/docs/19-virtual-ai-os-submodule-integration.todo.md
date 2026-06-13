@@ -461,18 +461,18 @@ cadence remains parseable and resumable.
 
 ## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
 
-## VAI-200 Resolve dirty main checkout blocking 310 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 311 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
+- Fingerprint: 8bedd7a586d641fd2fa9be6a69f520627a60c652
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 310 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 311 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
@@ -890,3 +890,58 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-331-vai-052-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-052. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-12-vai-331-vai-052-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-052 from strategy blocked_tasks.
+
+## VAI-332 Resolve implementation retry-budget failure for VAI-150
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-332-vai-150-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-150. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-332-vai-150-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-150 from strategy blocked_tasks.
+
+## VAI-333 Resolve implementation retry-budget failure for VAI-151
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-333-vai-151-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-151. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-333-vai-151-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-151 from strategy blocked_tasks.
+
+## VAI-334 Resolve implementation retry-budget failure for VAI-141
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-334-vai-141-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-141. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-334-vai-141-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-141 from strategy blocked_tasks.
+
+## VAI-335 Resolve implementation retry-budget failure for VAI-142
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-335-vai-142-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-142. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-335-vai-142-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-142 from strategy blocked_tasks.
+
+## VAI-336 Resolve merge retry-budget failure for VAI-006
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-336-vai-006-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-006. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-336-vai-006-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-006 from strategy blocked_tasks.
