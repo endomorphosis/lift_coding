@@ -4,7 +4,7 @@ Date: 2026-06-13
 Fingerprint: ace75c3a0d87ea544d9bd8bae963f46082bd448e
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 305
+Candidate count: 307
 Priority: P1
 Track: ops
 
@@ -27,9 +27,9 @@ Track: ops
   - `M	tests/test_virtual_ai_os_runtime_router.py`
 - Diff stat:
   - `hallucinate_app                            |  0`
-  - ` tests/test_virtual_ai_os_end_to_end.py     |  2 +-`
+  - ` tests/test_virtual_ai_os_end_to_end.py     |  4 +++-`
   - ` tests/test_virtual_ai_os_runtime_router.py | 19 +++++++++++++++++++`
-  - ` 3 files changed, 20 insertions(+), 1 deletion(-)`
+  - ` 3 files changed, 22 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -71,7 +71,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `305` candidates, `20` sampled records.
+Work surface: `307` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -113,13 +113,13 @@ Work surface: `305` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 305,
+  "candidate_count": 307,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
   "fingerprint": "ace75c3a0d87ea544d9bd8bae963f46082bd448e",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                            |  0\n tests/test_virtual_ai_os_end_to_end.py     |  2 +-\n tests/test_virtual_ai_os_runtime_router.py | 19 +++++++++++++++++++\n 3 files changed, 20 insertions(+), 1 deletion(-)",
+    "diff_stat": "hallucinate_app                            |  0\n tests/test_virtual_ai_os_end_to_end.py     |  4 +++-\n tests/test_virtual_ai_os_runtime_router.py | 19 +++++++++++++++++++\n 3 files changed, 22 insertions(+), 1 deletion(-)",
     "name_status": "M\thallucinate_app\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
       "modified": 2,
