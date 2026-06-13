@@ -1,32 +1,39 @@
 # VAI-200 Reconciliation Guardrail
 
-Date: 2026-06-12
-Fingerprint: 0d4c4bef56be5c5169baac62aa9b012f752fa37d
+Date: 2026-06-13
+Fingerprint: ab87cc0e9ec14da3a893357ed6d626bf38402df4
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 238
+Candidate count: 288
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- `M  data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md`
-- `UU hallucinate_app`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+- ` m hallucinate_app`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M tests/test_virtual_ai_os_end_to_end.py`
+- ` M tests/test_virtual_ai_os_runtime_router.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, unmerged=1`
+- Path categories: `modified=5, other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
   - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `tests/test_virtual_ai_os_end_to_end.py`
+  - `tests/test_virtual_ai_os_runtime_router.py`
 - Name status:
-  - `U	hallucinate_app`
-- Staged name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md`
-  - `U	hallucinate_app`
-- Diff stat:
-  - `hallucinate_app | Unmerged`
-  - ` 0 files changed`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+  - `M	data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md`
+  - `M	hallucinate_app`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	tests/test_virtual_ai_os_end_to_end.py`
+  - `M	tests/test_virtual_ai_os_runtime_router.py`
 
 ## Sample Branches Or Worktrees
 
@@ -68,7 +75,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `238` candidates, `20` sampled records.
+Work surface: `288` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -110,26 +117,35 @@ Work surface: `238` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 238,
+  "candidate_count": 288,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "0d4c4bef56be5c5169baac62aa9b012f752fa37d",
+  "fingerprint": "ab87cc0e9ec14da3a893357ed6d626bf38402df4",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app | Unmerged\n 0 files changed",
-    "name_status": "U\thallucinate_app",
+    "filtered_generated_status_paths": [
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
-      "modified": 1,
-      "unmerged": 1
+      "modified": 5,
+      "other_dirty": 1
     },
-    "staged_name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md\nU\thallucinate_app",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md",
-      "hallucinate_app"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "tests/test_virtual_ai_os_end_to_end.py",
+      "tests/test_virtual_ai_os_runtime_router.py"
     ],
     "status_short": [
-      "M  data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md",
-      "UU hallucinate_app"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+      " m hallucinate_app",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      " M tests/test_virtual_ai_os_end_to_end.py",
+      " M tests/test_virtual_ai_os_runtime_router.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -162,8 +178,12 @@ Work surface: `238` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-05-28-hao-223-resolution.md",
-    "hallucinate_app"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-07-mgw-239-reconciliation-58c94934bd81.md",
+    "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "tests/test_virtual_ai_os_end_to_end.py",
+    "tests/test_virtual_ai_os_runtime_router.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
