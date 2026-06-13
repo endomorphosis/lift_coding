@@ -1,35 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-13
-Fingerprint: ace75c3a0d87ea544d9bd8bae963f46082bd448e
+Fingerprint: 54f61870b791149b9bfb9ca7d8227418f384a1ff
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 307
+Candidate count: 310
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` m hallucinate_app`
-- ` M tests/test_virtual_ai_os_end_to_end.py`
-- ` M tests/test_virtual_ai_os_runtime_router.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `other_dirty=1`
 - Status paths:
   - `hallucinate_app`
-  - `tests/test_virtual_ai_os_end_to_end.py`
-  - `tests/test_virtual_ai_os_runtime_router.py`
 - Name status:
   - `M	hallucinate_app`
-  - `M	tests/test_virtual_ai_os_end_to_end.py`
-  - `M	tests/test_virtual_ai_os_runtime_router.py`
 - Diff stat:
-  - `hallucinate_app                            |  0`
-  - ` tests/test_virtual_ai_os_end_to_end.py     |  4 +++-`
-  - ` tests/test_virtual_ai_os_runtime_router.py | 19 +++++++++++++++++++`
-  - ` 3 files changed, 22 insertions(+), 1 deletion(-)`
+  - `hallucinate_app | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -71,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `307` candidates, `20` sampled records.
+Work surface: `310` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -113,27 +105,22 @@ Work surface: `307` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 307,
+  "candidate_count": 310,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ace75c3a0d87ea544d9bd8bae963f46082bd448e",
+  "fingerprint": "54f61870b791149b9bfb9ca7d8227418f384a1ff",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                            |  0\n tests/test_virtual_ai_os_end_to_end.py     |  4 +++-\n tests/test_virtual_ai_os_runtime_router.py | 19 +++++++++++++++++++\n 3 files changed, 22 insertions(+), 1 deletion(-)",
-    "name_status": "M\thallucinate_app\nM\ttests/test_virtual_ai_os_end_to_end.py\nM\ttests/test_virtual_ai_os_runtime_router.py",
+    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "modified": 2,
       "other_dirty": 1
     },
     "status_paths": [
-      "hallucinate_app",
-      "tests/test_virtual_ai_os_end_to_end.py",
-      "tests/test_virtual_ai_os_runtime_router.py"
+      "hallucinate_app"
     ],
     "status_short": [
-      " m hallucinate_app",
-      " M tests/test_virtual_ai_os_end_to_end.py",
-      " M tests/test_virtual_ai_os_runtime_router.py"
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -166,9 +153,7 @@ Work surface: `307` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "hallucinate_app",
-    "tests/test_virtual_ai_os_end_to_end.py",
-    "tests/test_virtual_ai_os_runtime_router.py"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-001-attempt-1-1781237885",
