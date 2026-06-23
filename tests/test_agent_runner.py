@@ -435,10 +435,15 @@ class TestProcessRunningTasks:
         poll_records = [
             record
             for record in caplog.records
-            if "Failed to poll todo-daemon status" in record.message
+            if record.name == "handsfree.agents.runner"
+            and record.levelname == "WARNING"
+            and record.msg == "Failed to poll todo-daemon status for task %s: %s"
+            and record.args
+            and record.args[0] == task.id
         ]
         assert len(poll_records) == 1
         assert poll_records[0].exc_info is not None
+        assert isinstance(poll_records[0].args[1], RuntimeError)
 
     def test_process_multiple_running_tasks(self, db_conn, test_user_id, disable_auto_push):
         """Test processing multiple running tasks."""
