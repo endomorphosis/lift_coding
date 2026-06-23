@@ -37,6 +37,9 @@ LAUNCH_SLICE_REPLAY_RECEIPTS_PATH = (
 VAI_MGW_SHARED_EVIDENCE_PACKET_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-434-vai-mgw-shared-evidence-packet.md"
 )
+DESKTOP_PEER_OFFLOAD_SMOKE_PATH = (
+    DISCOVERY_ROOT / "2026-06-23-hao-438-desktop-peer-offload-smoke.md"
+)
 
 
 def _load_script_module(name: str):
@@ -144,6 +147,45 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert tasks["HAO-428"].status == "completed"
     assert tasks["HAO-431"].status == "completed"
     assert tasks["HAO-431"].track == "integration"
+
+
+def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    expected = {
+        "HAO-437": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "physical-phone-ingress",
+            "missing": "physical phone ingress rehearsal receipt",
+        },
+        "HAO-438": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "desktop-peer-smoke",
+            "missing": "desktop peer offload smoke receipt",
+        },
+        "HAO-439": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "meta-glasses-terminal",
+            "missing": "Meta glasses terminal receipt capture",
+        },
+        "HAO-440": {
+            "depends_on": ["HAO-437", "HAO-438", "HAO-439"],
+            "parallel_lane": "launch-readiness-aggregate",
+            "missing": "aggregate physical readiness receipt and Playwright lineage",
+        },
+    }
+
+    assert tasks["HAO-436"].status == "completed"
+    for task_id, values in expected.items():
+        task = tasks[task_id]
+        assert task.status == PENDING_TASK_STATUS
+        assert task.priority == "P0"
+        assert task.track == "launch"
+        assert task.depends_on == values["depends_on"]
+        assert task.metadata["goal id"] == "VAIOS-G697"
+        assert task.metadata["graph parents"] == "VAIOS-G697"
+        assert task.metadata["parallel lane"] == values["parallel_lane"]
+        assert task.metadata["missing evidence"] == values["missing"]
+        assert task.metadata["bundle"] == "objective/launch/production-readiness-gate"
 
 
 def test_hallucinate_codebase_scan_skips_objective_heap_as_source_annotations():
@@ -468,6 +510,151 @@ def test_hao_434_launch_replay_receipts_feed_vai_mgw_shared_evidence_packet():
         "VAI and MGW receive identical session, command, policy, and placement correlation IDs",
         "recovery receipt IDs remain stable across retry, fallback, and cancel",
         "the Meta glasses render receipt is the MGW orb_receipt_cid alias, not a separate command authority",
+    ]
+
+
+def test_hao_438_desktop_peer_offload_smoke_receipt_recovers_to_phone_local():
+    source = DESKTOP_PEER_OFFLOAD_SMOKE_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    packet = _json_block_after(source, "## Desktop-Peer Offload Smoke Fixture")
+    normalized_source = " ".join(source.split())
+    normalized_readiness = " ".join(readiness_source.split())
+
+    for term in (
+        "HAO-438",
+        "desktop-peer offload smoke receipt",
+        "phone-originated command",
+        "desktop:peer",
+        "capability and runtime health",
+        "peer_offload_policy_receipt",
+        "phone_local",
+        "same session, command, policy, placement, and offload receipt IDs intact",
+    ):
+        assert term in normalized_source
+
+    for term in (
+        "HAO-438",
+        "Desktop-Peer Offload Smoke",
+        "desktop-peer offload smoke receipt",
+        "desktop:peer",
+        "peer_offload_policy_receipt",
+        "phone_local",
+        "session_id",
+        "command_intent_id",
+        "policy_receipt_id",
+        "placement_id",
+    ):
+        assert term in normalized_readiness
+
+    assert packet["task_id"] == "HAO-438"
+    assert packet["artifact_id"] == "desktop_peer_offload_smoke_receipt"
+    assert packet["goal_id"] == "VAIOS-G697"
+    assert packet["requires_physical_devices"] is False
+    assert packet["determinism"]["clock"] == "fixed"
+    assert packet["determinism"]["network"] == "simulated"
+    assert packet["participants"]["desktop:peer"] == "simulated_desktop_peer_offload"
+    assert packet["participants"]["phone_local"] == "phone_local_runtime_fallback"
+    assert packet["receipt_chain"] == [
+        "phone_event",
+        "mediation_receipt",
+        "virtual_desktop_command_intent",
+        "desktop_peer_capability_receipt",
+        "desktop_peer_runtime_health_receipt",
+        "peer_offload_policy_receipt",
+        "runtime_receipt",
+        "peer_offload_recovery_receipt",
+        "render_receipt",
+    ]
+
+    stable_ids = packet["stable_ids"]
+    assert stable_ids == {
+        "session_id": "vdsk_hao438_desktop_peer_smoke",
+        "interaction_id": "evt_hao438_open_monitor",
+        "command_intent_id": "cmd_hao438_open_monitor",
+        "policy_receipt_id": "rcpt_policy_hao438_open_monitor",
+        "command_receipt_id": "rcpt_cmd_hao438_open_monitor",
+        "placement_id": "place_hao438_desktop_peer_model_monitor",
+        "peer_offload_policy_receipt_id": "rcpt_offload_hao438_open_monitor",
+    }
+
+    steps = packet["replay_steps"]
+    assert [step["phase"] for step in steps] == [
+        "phone_event",
+        "mediation",
+        "command_intent",
+        "desktop_peer_capability",
+        "desktop_peer_runtime_health",
+        "peer_offload_selection",
+        "runtime_unavailable",
+        "phone_local_recovery",
+        "surface_render",
+    ]
+    assert steps[0]["event"]["session"]["participant_id"] == "phone:operator"
+    assert steps[0]["event"]["session"]["session_id"] == stable_ids["session_id"]
+    assert steps[1]["receipt"]["receipt_id"] == stable_ids["policy_receipt_id"]
+    assert steps[1]["receipt"]["policy_decision"] == "allow"
+    assert steps[2]["command"]["issued_to"] == "desktop:peer"
+    assert steps[2]["command"]["command_intent_id"] == stable_ids["command_intent_id"]
+    assert steps[2]["command"]["placement_hint"]["placement_id"] == stable_ids["placement_id"]
+    assert steps[2]["command"]["placement_hint"]["fallback_runtime"] == "phone_local"
+
+    capability = steps[3]["capability_receipt"]
+    health = steps[4]["runtime_health_receipt"]
+    assert capability["participant_id"] == "desktop:peer"
+    assert capability["authenticated_transport"] is True
+    assert capability["receipt_return_path"] == "hallucinate_app.receipts.peer_runtime"
+    assert "desktop.execute_command" in capability["capability_refs"]
+    assert "desktop.stream_region" in capability["capability_refs"]
+    assert health["participant_id"] == "desktop:peer"
+    assert health["runtime_status"] == "healthy"
+    assert health["stream_region_ready"] is True
+
+    offload = steps[5]["receipt"]
+    assert offload["receipt_contract_ref"] == "peer_offload_policy_receipt@0.1.0"
+    assert offload["receipt_id"] == stable_ids["peer_offload_policy_receipt_id"]
+    assert offload["session_id"] == stable_ids["session_id"]
+    assert offload["command_intent_id"] == stable_ids["command_intent_id"]
+    assert offload["policy_receipt_id"] == stable_ids["policy_receipt_id"]
+    assert offload["command_receipt_id"] == stable_ids["command_receipt_id"]
+    assert offload["placement_id"] == stable_ids["placement_id"]
+    assert offload["capability_receipt_id"] == capability["receipt_id"]
+    assert offload["runtime_health_receipt_id"] == health["receipt_id"]
+    assert offload["selected_peer"]["participant_id"] == "desktop:peer"
+    assert offload["fallback_plan"]["fallback_targets"] == ["phone_local"]
+
+    runtime = steps[6]["runtime_receipt"]
+    assert runtime["runtime_status"] == "unavailable"
+    assert runtime["failed_peer_id"] == "desktop:peer"
+    assert runtime["peer_offload_policy_receipt_id"] == stable_ids["peer_offload_policy_receipt_id"]
+
+    recovery = steps[7]["receipt"]
+    for key in (
+        "session_id",
+        "command_intent_id",
+        "policy_receipt_id",
+        "command_receipt_id",
+        "placement_id",
+        "peer_offload_policy_receipt_id",
+    ):
+        assert recovery[key] == stable_ids[key]
+    assert recovery["recovery_state"] == "fallback_selected"
+    assert recovery["recovered_runtime"] == "phone_local"
+    assert recovery["selected_peer"]["participant_id"] == "phone_local"
+    assert recovery["runtime_receipt_id"] == runtime["receipt_id"]
+
+    render_receipts = steps[8]["render_receipts"]
+    assert {receipt["runtime"] for receipt in render_receipts} == {"phone_local"}
+    assert {receipt["source_recovery_receipt_id"] for receipt in render_receipts} == {
+        recovery["receipt_id"]
+    }
+    assert packet["assertions"] == [
+        "phone-originated command enters mediation before desktop peer dispatch",
+        "desktop:peer is selected only after capability and runtime health receipts",
+        "peer_offload_policy_receipt carries the selected desktop peer and placement_id",
+        "desktop peer reports availability failure but does not choose fallback",
+        "phone_local recovery preserves the same session_id, command_intent_id, policy_receipt_id, command_receipt_id, placement_id, and peer_offload_policy_receipt_id",
     ]
 
 
