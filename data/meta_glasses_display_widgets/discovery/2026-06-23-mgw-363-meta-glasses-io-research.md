@@ -1,4 +1,4 @@
-# MGW-029 Meta Glasses I/O Research Seed
+# MGW-363 Meta Glasses I/O Research Seed
 
 Date: 2026-06-23
 
