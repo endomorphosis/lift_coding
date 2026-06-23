@@ -85,7 +85,8 @@ def test_meta_display_product_run_defers_stale_scan_and_repair_tasks():
     tasks = {task.task_id: task for task in _load_tasks()}
 
     assert runnable_stale_tasks == []
-    assert tasks["MGW-265"].status == PENDING_TASK_STATUS
+    assert tasks["MGW-265"].status == "completed"
+    assert tasks["MGW-266"].status == PENDING_TASK_STATUS
     assert tasks["MGW-268"].track == "integration"
 
 

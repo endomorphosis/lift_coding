@@ -3001,7 +3001,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-265 Define the mobile-to-glasses virtual desktop session widget
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: mobile
