@@ -2075,3 +2075,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-184-mgw-183-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-183. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-184-mgw-183-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-183 from strategy blocked_tasks.
+
+## MGW-185 Resolve implementation retry-budget failure for MGW-184
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-185-mgw-184-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-184. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-30-mgw-185-mgw-184-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-184 from strategy blocked_tasks.
