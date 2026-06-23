@@ -413,7 +413,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-036 Add IPFS/libp2p/MCP++ conformance tests for Meta glasses I/O
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality
