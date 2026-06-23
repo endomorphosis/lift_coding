@@ -100,6 +100,8 @@ sed -n '1,240p' tests/test_virtual_ai_os_task_orchestration.py
 sed -n '1,240p' tests/test_virtual_ai_os_runtime_router.py
 rg -n "VAI-014|Discovery closeout|unknowns|discovered|no-new-unknowns" implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery --glob '!vai-202-preserved-diffs/**'
 git status --short
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+rg -n "VAI-014|unknowns|Discovery|discovered" implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery --glob '!vai-202-preserved-diffs/**'
 ```
 
 ## Result
@@ -110,3 +112,9 @@ daemon-parseable `VAI-` tasks in this review cycle.
 The open risk is evidence collection on physical hardware and real packaging
 runs, which the current backlog already represents as launch/readiness gates
 instead of unresolved implementation design gaps.
+
+Validation rerun on 2026-06-23 passed with
+`PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py`
+reporting 28 passed, and the discovery grep found the VAI-014 closeout,
+unknowns, and discovered-gap evidence in the plan, todo board, and discovery
+artifact.
