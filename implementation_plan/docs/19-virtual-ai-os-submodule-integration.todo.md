@@ -1187,7 +1187,7 @@ cadence remains parseable and resumable.
 
 ## VAI-339 Add an end-to-end launch replay gate for phone, desktop, Swissknife, Hallucinate App, and Meta glasses
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
