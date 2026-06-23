@@ -34,6 +34,7 @@ from handsfree.virtual_ai_os_observability import (
     build_virtual_ai_os_remote_execution_receipt_artifact,
     build_virtual_ai_os_rollback_event_artifact,
 )
+from handsfree.virtual_ai_os_components import get_virtual_ai_os_component_repo_contracts
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,13 @@ VAI_339_DISCOVERY_PATH = (
     / "virtual_ai_os"
     / "discovery"
     / "2026-06-23-vai-339-launch-replay-gate.md"
+)
+VAI_019_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-23-vai-019-cross-submodule-integration-tests.md"
 )
 
 
@@ -236,13 +244,19 @@ def _install_secret_stub() -> None:
 
 
 def _clear_mobile_orb_state(api_module: Any) -> None:
-    api_module.mobile_orb_edge_sessions.clear()
-    api_module.mobile_orb_service_bindings.clear()
-    api_module.mobile_orb_service_subscriptions.clear()
-    api_module.mobile_orb_events.clear()
-    api_module.mobile_orb_invocations.clear()
-    api_module.mobile_orb_dispatches.clear()
-    api_module.mobile_orb_revocations.clear()
+    for state_name in (
+        "mobile_orb_edge_sessions",
+        "mobile_orb_service_bindings",
+        "mobile_orb_service_subscriptions",
+        "mobile_orb_events",
+        "mobile_orb_receipts",
+        "mobile_orb_invocations",
+        "mobile_orb_dispatches",
+        "mobile_orb_revocations",
+    ):
+        state = getattr(api_module, state_name, None)
+        if state is not None:
+            state.clear()
 
 
 @pytest.fixture
@@ -318,6 +332,38 @@ def _json_block_after(source: str, marker: str) -> dict[str, Any]:
     payload_start = source.index("\n", fence_start) + 1
     payload_end = source.index("\n```", payload_start)
     return json.loads(source[payload_start:payload_end])
+
+
+def _component_contracts_by_id() -> dict[str, dict[str, Any]]:
+    return {
+        str(contract["component_id"]): contract
+        for contract in get_virtual_ai_os_component_repo_contracts({}, repo_root=REPO_ROOT)
+    }
+
+
+def _component_validation_artifacts(
+    component_ids: tuple[str, ...],
+    contracts: dict[str, dict[str, Any]],
+) -> dict[str, dict[str, str]]:
+    artifacts: dict[str, dict[str, str]] = {}
+    for component_id in component_ids:
+        contract = contracts[component_id]
+        root = Path(str(contract["resolved_root"]))
+        candidate_files = (
+            root / "package.json",
+            root / "pyproject.toml",
+            root / "README.md",
+        )
+        evidence_file = next(path for path in candidate_files if path.exists())
+        assert root.exists(), f"{component_id} root is not checked out: {root}"
+        assert (root / ".git").exists(), f"{component_id} is missing a submodule git marker"
+        artifacts[component_id] = {
+            "root": str(root.relative_to(REPO_ROOT)),
+            "git_marker": str((root / ".git").relative_to(REPO_ROOT)),
+            "evidence_file": str(evidence_file.relative_to(REPO_ROOT)),
+            "role": str(contract["role"]),
+        }
+    return artifacts
 
 
 def test_hardware_free_virtual_ai_os_harness_dispatches_offloads_streams_and_recovers(
@@ -673,16 +719,17 @@ def test_hardware_free_virtual_ai_os_harness_dispatches_offloads_streams_and_rec
     )
     assert diagnostics.status_code == 200
     diagnostics_payload = diagnostics.json()
-    assert diagnostics_payload["backend_counts"] == {
-        "edge_sessions": 1,
-        "events": 1,
-        "bindings": 1,
-        "subscriptions": 0,
-        "invocations": 2,
-        "dispatches": 2,
-        "revocations": 0,
-    }
-    assert diagnostics_payload["binding_state"]["status"] == "bound"
+    assert diagnostics_payload["source"] == "backend"
+    assert diagnostics_payload["edge_sessions_count"] == 1
+    assert diagnostics_payload["events_count"] == 1
+    assert diagnostics_payload["bindings_count"] == 1
+    assert diagnostics_payload["subscriptions_count"] == 0
+    assert diagnostics_payload["receipts_count"] == 7
+    assert diagnostics_payload["binding_state"]["active_count"] == 1
+    assert diagnostics_payload["binding_state"]["revoked_count"] == 0
+    assert diagnostics_payload["binding_state"]["bindings"][0]["operation"] == (
+        "run_desktop_command"
+    )
     assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
     assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert recovery_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
@@ -820,6 +867,161 @@ def test_desktop_operator_harness_presents_routes_and_places_local_or_peer_work(
             "task_id": task_id,
             "placement": "desktop_peer",
         }
+    ]
+
+
+def test_vai_019_cross_submodule_routes_select_placement_and_collect_artifacts():
+    contracts = _component_contracts_by_id()
+    kernel = CapabilityRoutingKernel()
+    operator_session = SimulatedDesktopOperatorSession(session_id="vai-019-cross-submodule-session")
+    desktop_peer = SimulatedDesktopPeer(peer_id="desktop-peer-vai-019")
+    task_id = "VAI-019"
+    artifact_refs = {
+        "result_cid": "sha256:vai019-result",
+        "receipt_ref": "sha256:vai019-receipt",
+        "event_dag_ref": "sha256:vai019-events",
+        "delegation_ref": "sha256:vai019-delegation",
+    }
+
+    session_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="ui_render_session",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "artifact_refs": artifact_refs,
+                "desktop_surface": "swissknife.virtual_desktop",
+            },
+        )
+    )
+    session = operator_session.present_swissknife_session(session_plan)
+
+    scenarios = [
+        {
+            "scenario_id": "desktop-dataset-discovery",
+            "component_ids": ("swissknife", "hallucinate_app", "ipfs_datasets_py"),
+            "capability_id": "dataset_discovery",
+            "requested_mode": None,
+            "preferred_surface": CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            "command": "route dataset discovery through the virtual desktop peer",
+            "modality": "voice",
+            "placement_preference": "desktop_peer",
+            "expected_runtime_surface": "swissknife_orb",
+            "expected_placement_target": "endomorphosis/swissknife",
+        },
+        {
+            "scenario_id": "local-ipfs-pin-receipt",
+            "component_ids": ("hallucinate_app", "ipfs_kit_py"),
+            "capability_id": "ipfs_pin",
+            "requested_mode": CapabilityExecutionMode.DIRECT_IMPORT,
+            "preferred_surface": None,
+            "command": "pin the cross-submodule validation manifest locally",
+            "modality": "keyboard",
+            "placement_preference": "local",
+            "expected_runtime_surface": "direct_adapter",
+            "expected_placement_target": "endomorphosis/ipfs_kit_py",
+        },
+    ]
+    evidence_packet: dict[str, Any] = {
+        "task_id": task_id,
+        "evidence_id": "vai-019-cross-submodule-integration",
+        "requires_physical_devices": False,
+        "scenarios": [],
+    }
+
+    for scenario in scenarios:
+        component_ids = scenario["component_ids"]
+        validation_artifacts = _component_validation_artifacts(component_ids, contracts)
+        assert len(validation_artifacts) >= 2
+
+        dispatch_plan = kernel.dispatch_task(
+            CapabilityDispatchRequest(
+                capability_id=scenario["capability_id"],
+                requested_mode=scenario["requested_mode"],
+                preferred_surface=scenario["preferred_surface"],
+                source_surface="hallucinate_app",
+                payload={
+                    "task_id": task_id,
+                    "scenario_id": scenario["scenario_id"],
+                    "artifact_refs": artifact_refs,
+                    "command": scenario["command"],
+                },
+            )
+        )
+        control = operator_session.route_hallucinate_control(
+            session=session,
+            dispatch_plan=dispatch_plan,
+            modality=scenario["modality"],
+            control=scenario["command"],
+            placement_preference=scenario["placement_preference"],
+        )
+
+        if scenario["placement_preference"] == "desktop_peer":
+            receipt = operator_session.handoff_to_peer(
+                dispatch_plan=dispatch_plan,
+                envelope=control,
+                desktop_peer=desktop_peer,
+            )
+        else:
+            receipt = operator_session.execute_locally(
+                dispatch_plan=dispatch_plan,
+                envelope=control,
+            )
+
+        scenario_evidence = {
+            "scenario_id": scenario["scenario_id"],
+            "component_ids": list(component_ids),
+            "command": scenario["command"],
+            "capability_id": dispatch_plan.capability_id,
+            "routed_from": control["virtual_desktop_command_intent"]["operator_console"],
+            "presented_by": session["presented_by"],
+            "runtime_surface": dispatch_plan.route.runtime_surface.value,
+            "placement_target": dispatch_plan.route.placement_target,
+            "compute_placement": receipt["compute_placement"],
+            "receipt_cid": receipt["receipt_cid"],
+            "validation_artifacts": validation_artifacts,
+        }
+        evidence_packet["scenarios"].append(scenario_evidence)
+
+        assert control["policy_decision"]["outcome"] == "allow"
+        assert control["virtual_desktop_command_intent"]["target_surface"] == (
+            "swissknife.virtual_desktop"
+        )
+        assert dispatch_plan.route.runtime_surface.value == scenario["expected_runtime_surface"]
+        assert dispatch_plan.route.placement_target == scenario["expected_placement_target"]
+        assert receipt["status"] == "completed"
+        assert receipt["capability_id"] == scenario["capability_id"]
+        assert receipt["command"] == scenario["command"]
+
+    assert [scenario["compute_placement"] for scenario in evidence_packet["scenarios"]] == [
+        "desktop_peer",
+        "local",
+    ]
+    assert desktop_peer.offloaded_commands == [
+        {
+            "command": "route dataset discovery through the virtual desktop peer",
+            "task_id": task_id,
+            "placement": "desktop_peer",
+        }
+    ]
+
+    documented_packet = _json_block_after(
+        VAI_019_DISCOVERY_PATH.read_text(encoding="utf-8"),
+        "## Cross-Submodule Harness Evidence",
+    )
+    assert documented_packet["task_id"] == evidence_packet["task_id"]
+    assert documented_packet["evidence_id"] == evidence_packet["evidence_id"]
+    assert documented_packet["scenarios"] == [
+        {
+            "scenario_id": scenario["scenario_id"],
+            "component_ids": list(scenario["component_ids"]),
+            "capability_id": scenario["capability_id"],
+            "runtime_surface": scenario["runtime_surface"],
+            "placement_target": scenario["placement_target"],
+            "compute_placement": scenario["compute_placement"],
+        }
+        for scenario in evidence_packet["scenarios"]
     ]
 
 
