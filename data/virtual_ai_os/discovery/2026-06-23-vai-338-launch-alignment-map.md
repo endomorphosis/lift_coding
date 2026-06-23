@@ -3,7 +3,7 @@
 Date: 2026-06-23
 Task: VAI-338
 Track: launch
-Depends on: VAI-009, VAI-012, VAI-024, VAI-337
+Depends on: none
 
 ## Purpose
 
@@ -58,8 +58,8 @@ reason, and parent receipt lineage remain intact.
 ## Launch-Critical
 
 - Phone-hosted session control and mobile ORB diagnostics.
-- VAI capability registry resolution for the MGW widget actions registered by
-  VAI-337.
+- VAI capability registry resolution for the MGW widget render, update,
+  confirm, and cancel actions in this launch alignment map.
 - HAO mediation receipts and policy decisions that reconcile with VAI
   observability artifacts.
 - Swissknife ORB route visibility and virtual desktop state for the same
@@ -112,8 +112,8 @@ reason, and parent receipt lineage remain intact.
   desktop peer, and Meta glasses rehearsal.
 - VAI-024 supplies the Hallucinate App and Swissknife desktop operator evidence
   path.
-- VAI-337 supplies the shared VAI capability registry entries for MGW widget
-  render, update, confirm, and cancel.
+- This map is dependency-free in backlog metadata; prior VAI evidence packets
+  remain useful references but are not blocking prerequisites for VAI-338.
 
 ## Validation
 
