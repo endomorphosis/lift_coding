@@ -1165,7 +1165,7 @@ cadence remains parseable and resumable.
 
 ## VAI-337 Register Meta glasses widget actions as VAI capabilities
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: integration
