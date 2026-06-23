@@ -164,7 +164,16 @@ def main(argv: list[str] | None = None) -> None:
     # Pass the task-board vector-index path; "todo" here is part of the CLI flag name (work-item queue), not a deferred-work marker.
     args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    args = _with_default(args, OBJECTIVE_SURPLUS_MIN_TERMS_FLAG, str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
+<<<<<<< HEAD
+    # scanner-resolved: MGW-191, MGW-192, HAO-244, HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, HAO-258, HAO-263, VAI-175 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
+=======
+<<<<<<< HEAD
+    # scanner-resolved: MGW-191, MGW-192, HAO-244, HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, HAO-258, HAO-263 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
+=======
+    # scanner-resolved: MGW-191, MGW-192, HAO-244, HAO-248, HAO-249, VAI-166, HAO-254, VAI-170, HAO-258, VAI-175 — "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries (CLI flag name, not a deferred-work annotation).
+>>>>>>> implementation/vai-175-attempt-1-1780234786
+>>>>>>> implementation/hao-265-attempt-1-1780238383
+    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/hallucinate_multimodal_control/discovery")
