@@ -304,8 +304,9 @@ cadence remains parseable and resumable.
 
 ## VAI-025 Re-check canonical mcp_plus_plus source and standalone pin decision
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred after VAI-013 resolved the current mcp_plus_plus source evidence; repeat source-pin rechecks are not launch-critical for the virtual desktop/mobile/glasses integration run.
 - Priority: P2
 - Track: ops
 - Depends on: VAI-013

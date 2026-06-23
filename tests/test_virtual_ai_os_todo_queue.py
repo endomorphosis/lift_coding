@@ -110,15 +110,21 @@ def test_supervisor_task_boards_do_not_contain_conflict_markers():
 
 
 def test_virtual_ai_os_product_run_defers_stale_maintenance_tasks():
-    stale_patterns = ("retry-budget", "supervised autonomous implementation cadence")
+    stale_patterns = (
+        "retry-budget",
+        "supervised autonomous implementation cadence",
+        "re-check canonical mcp_plus_plus source",
+    )
     runnable_stale_tasks = [
         task.task_id
         for task in _load_tasks()
         if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
         and any(pattern in f"{task.title} {task.acceptance}".lower() for pattern in stale_patterns)
     ]
+    tasks = {task.task_id: task for task in _load_tasks()}
 
     assert runnable_stale_tasks == []
+    assert tasks["VAI-025"].status == "blocked"
 
 
 def test_virtual_ai_os_todo_dependencies_are_declared_tasks():
