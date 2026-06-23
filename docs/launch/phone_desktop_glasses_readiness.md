@@ -14,6 +14,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Physical phone ingress receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-437-phone-ingress-rehearsal.md`
 - Desktop-peer smoke receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-438-desktop-peer-offload-smoke.md`
 - Meta glasses terminal receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-439-meta-glasses-terminal-receipt.md`
+- MCP server feature inventory: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-441-mcp-server-feature-inventory.md`
 - MGW supervisor packet: `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md`
 - Backlog bridge: `HAO-436` / `MGW-274` / `VAI-340` for `VAIOS-G697`
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
@@ -30,6 +31,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 | Swissknife virtual desktop | `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` opens every Swissknife desktop app and writes a reusable Meta glasses ORB template report. |
 | Desktop-peer offload | HAO-438 adds a desktop-peer offload smoke receipt: a phone-originated command selects `desktop:peer`, records capability and runtime health, emits `peer_offload_policy_receipt`, then recovers to `phone_local` with the same session, command, policy, and placement IDs when the peer is unavailable. |
 | Meta glasses terminal | HAO-439 adds the Meta glasses terminal receipt: `display_action` events and confirmations from `meta_glasses:terminal` map through the existing HAO-431 bridge into normalized Hallucinate App `terminal.activate_action` intents, render selected peer and recovery state, and fail closed when pairing or display evidence is stale. The Swissknife Playwright gate also renders the Meta glasses display-widget contract and checks interface, widget, and receipt CIDs. |
+| Swissknife MCP server features | HAO-441 adds the MCP server feature inventory for `ipfs_accelerate_py`, `ipfs_datasets_py`, and `ipfs_kit_py`. The launch gate treats Swissknife support as explicit only when a descriptor or app route names the daemon entrypoint, transport, protocol path, tool name, security boundary, expected consumer, and Hallucinate App mediation receipt fields. |
 
 ## VAI-339 Replay Chain
 
