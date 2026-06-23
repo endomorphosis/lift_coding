@@ -4,6 +4,7 @@ import json
 import importlib.util
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -78,12 +79,15 @@ def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled
     }
     lock_event = {
         "task_id": "VAI-011",
+        "timestamp": "2026-06-23T15:00:00+00:00",
         "merge_result": {"merged": False, "attempted": False, "reason": "lock_unavailable"},
     }
+    now_ts = datetime(2026, 6, 23, 15, 5, tzinfo=timezone.utc).timestamp()
 
     selected_when_disabled = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
         [conflict_event, lock_event],
         max_merges=0,
+        now_ts=now_ts,
     )
     selected_when_limited = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
         [conflict_event, lock_event],
@@ -97,6 +101,26 @@ def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled
     assert selected_when_disabled == [lock_event]
     assert selected_when_limited == [lock_event]
     assert selected_when_open == [lock_event, conflict_event]
+
+
+def test_daemon_skips_stale_transient_merge_locks_when_reconciliation_is_disabled():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    stale_lock_event = {
+        "task_id": "VAI-214",
+        "timestamp": "2026-06-09T09:07:16+00:00",
+        "merge_result": {"merged": False, "attempted": False, "reason": "lock_exists"},
+    }
+    now_ts = datetime(2026, 6, 23, 15, 20, tzinfo=timezone.utc).timestamp()
+
+    selected = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [stale_lock_event],
+        max_merges=0,
+        now_ts=now_ts,
+    )
+
+    assert selected == []
 
 
 def test_daemon_skips_strategy_filtered_failed_merge_reconciliation():
