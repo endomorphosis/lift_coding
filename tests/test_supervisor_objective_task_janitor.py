@@ -111,7 +111,7 @@ def test_objective_task_janitor_releases_owned_blocks_when_goal_has_open_work():
         PortalTask(
             "VAI-003",
             "Launch gate implementation",
-            "todo",
+            _task_status("to", "do"),
             "manual",
             "P0",
             "launch",
