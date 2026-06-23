@@ -15,50 +15,30 @@
   },
   "diagnostics_contract": {
     "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
-    "version": "0.1.0",
-    "description": "One mobile ORB edge diagnostics envelope shared by backend, simulator, and physical-device modes. The envelope summarizes backend capability counts, descriptor CIDs, policy CIDs, binding state, receipt CIDs, and fallback reasons while preserving raw records on the diagnostics endpoint.",
-    "required": [
+    "description": "Shared mobile/backend diagnostics shape for simulator and physical-device ORB edge sessions.",
+    "fields": [
       "contract",
-      "version",
+      "source",
       "mode",
+      "edge_session_id",
+      "capability_counts",
       "backend_capability_counts",
       "descriptor_cids",
       "policy_cids",
       "binding_state",
       "receipt_cids",
-      "fallback_reasons"
+      "fallback_reasons",
+      "fallback_details"
     ],
-    "properties": {
-      "contract": { "const": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0" },
-      "version": { "type": "string" },
-      "mode": { "enum": ["simulator", "physical_device", "unknown"] },
-      "edge_session_id": { "type": ["string", "null"] },
-      "backend_kind": { "type": "string" },
-      "capability_counts": { "type": "object" },
-      "backend_capability_counts": {
-        "type": "object",
-        "description": "Counts for backend-visible edge sessions, ORB events, service bindings, subscriptions, recorded operation receipts, and DAT capabilities advertised by registered edges."
-      },
-      "descriptor_cids": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "policy_cids": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "binding_state": {
-        "type": "object",
-        "description": "Active binding and subscription summaries keyed by binding handle, service/interface descriptor CID, transport, runtime status, receipt CID, and policy CIDs."
-      },
-      "receipt_cids": {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "fallback_reasons": {
-        "type": "array",
-        "items": { "type": "string" }
-      }
+    "source_values": ["mobile", "backend"],
+    "mode_values": ["simulator", "physical_device", "mixed", "unknown"],
+    "notes": {
+      "capability_counts": "Counts DAT capability availability across the selected backend edge sessions or the active mobile edge session.",
+      "descriptor_cids": "Includes local bridge interface CIDs, service interface CIDs, and normalized descriptor CIDs.",
+      "policy_cids": "Includes legacy policy_cid aliases plus canonical compiled policy, policy bundle, and policy decision CIDs transported by mediation receipts.",
+      "binding_state": "Summarizes active/revoked binding handles and runtime transport resolution state.",
+      "receipt_cids": "Includes registration, event, bind, invoke, subscription, dispatch, revoke, and display-widget receipt CIDs when observed.",
+      "fallback_reasons": "Captures render/audio/mobile-card fallback messages or reasons observed during invocation and dispatch."
     }
   },
   "methods": [

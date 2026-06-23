@@ -129,11 +129,30 @@ function formatWearablesDisplayActionStatus(result, diagnostics) {
   return `${action}: ${message} (state=${connectionState}, status=${status})`;
 }
 
-function formatMobileOrbList(values, limit = 3) {
+function formatShortList(values, limit = 3) {
   if (!Array.isArray(values) || values.length === 0) {
     return 'none';
   }
-  return values.slice(-limit).join(', ');
+  const visible = values.slice(0, limit).join(', ');
+  return values.length > limit ? `${visible} +${values.length - limit}` : visible;
+}
+
+function formatMobileOrbCapabilityCounts(diagnostics) {
+  const counts = diagnostics?.backend_capability_counts || diagnostics?.capability_counts;
+  const datCapabilities = counts?.dat_capabilities || {};
+  const enabled = Object.entries(datCapabilities)
+    .filter(([, count]) => Number(count) > 0)
+    .map(([capability]) => capability);
+  const total = counts?.total_enabled ?? enabled.length;
+  return enabled.length ? `${total}: ${enabled.join(', ')}` : '0';
+}
+
+function formatMobileOrbBindingState(diagnostics) {
+  const bindingState = diagnostics?.binding_state;
+  if (!bindingState) {
+    return 'none';
+  }
+  return `${bindingState.active_count || 0} active / ${bindingState.revoked_count || 0} revoked`;
 }
 
 function mergeWearablesFollowOnTask(followOnTask, detail) {
@@ -277,21 +296,7 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
   const latestMobileOrbSubscription = Array.isArray(mobileOrbDiagnostics?.subscriptions)
     ? mobileOrbDiagnostics.subscriptions[mobileOrbDiagnostics.subscriptions.length - 1]
     : null;
-  const mobileOrbDiagnosticsContract = mobileOrbDiagnostics?.diagnostics_contract || null;
-  const mobileOrbBackendDiagnosticsContract =
-    mobileOrbBackendDiagnostics?.diagnostics_contract || null;
-  const activeMobileOrbDiagnosticsContract =
-    mobileOrbBackendDiagnosticsContract || mobileOrbDiagnosticsContract;
-  const mobileOrbCapabilityCounts =
-    activeMobileOrbDiagnosticsContract?.backend_capability_counts ||
-    activeMobileOrbDiagnosticsContract?.capability_counts ||
-    null;
-  const mobileOrbDatCounts = mobileOrbCapabilityCounts?.dat || {};
-  const mobileOrbBindingState = activeMobileOrbDiagnosticsContract?.binding_state || null;
-  const mobileOrbDescriptorCids = activeMobileOrbDiagnosticsContract?.descriptor_cids || [];
-  const mobileOrbPolicyCids = activeMobileOrbDiagnosticsContract?.policy_cids || [];
-  const mobileOrbReceiptCids = activeMobileOrbDiagnosticsContract?.receipt_cids || [];
-  const mobileOrbFallbackReasons = activeMobileOrbDiagnosticsContract?.fallback_reasons || [];
+  const displayedMobileOrbDiagnostics = mobileOrbBackendDiagnostics || mobileOrbDiagnostics;
 
   const buildMobileOrbRegistrationInput = (options = {}) => {
     const platform = Platform.OS === 'ios' || Platform.OS === 'android'
@@ -1646,6 +1651,24 @@ export default function GlassesDiagnosticsScreen({ navigation }) {
           ORB backend events/bindings/subscriptions: {mobileOrbBackendDiagnostics
             ? `${mobileOrbBackendDiagnostics.events_count}/${mobileOrbBackendDiagnostics.bindings_count}/${mobileOrbBackendDiagnostics.subscriptions_count || 0}`
             : 'not loaded'}
+        </Text>
+        <Text style={styles.text}>
+          ORB capability counts: {formatMobileOrbCapabilityCounts(displayedMobileOrbDiagnostics)}
+        </Text>
+        <Text style={styles.text}>
+          ORB binding state: {formatMobileOrbBindingState(displayedMobileOrbDiagnostics)}
+        </Text>
+        <Text style={styles.text}>
+          ORB descriptor CIDs: {formatShortList(displayedMobileOrbDiagnostics?.descriptor_cids)}
+        </Text>
+        <Text style={styles.text}>
+          ORB policy CIDs: {formatShortList(displayedMobileOrbDiagnostics?.policy_cids)}
+        </Text>
+        <Text style={styles.text}>
+          ORB receipt CIDs: {formatShortList(displayedMobileOrbDiagnostics?.receipt_cids)}
+        </Text>
+        <Text style={styles.text}>
+          ORB fallback reasons: {formatShortList(displayedMobileOrbDiagnostics?.fallback_reasons)}
         </Text>
         <Text style={styles.text}>
           ORB latest service: {latestMobileOrbBinding
