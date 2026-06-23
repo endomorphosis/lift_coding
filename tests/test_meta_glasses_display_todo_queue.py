@@ -45,11 +45,7 @@ def test_meta_glasses_display_todo_board_is_daemon_parseable():
     assert "MGW-000" in task_ids
     assert "MGW-012" in task_ids
     assert "MGW-013" in task_ids
-<<<<<<< HEAD
     assert "MGW-373" in task_ids
-=======
-    assert "MGW-038" in task_ids
->>>>>>> implementation/mgw-029-attempt-1-1782248042
     assert len(tasks) >= 14
     assert all(task.priority in {"P0", "P1", "P2", "P3"} for task in tasks)
     assert all(task.track for task in tasks)
@@ -78,7 +74,6 @@ def test_expanded_meta_glasses_io_tasks_cover_contracts_mocks_transport_and_test
     tasks = {task.task_id: task for task in _load_tasks()}
 
     expected_dependencies = {
-<<<<<<< HEAD
         "MGW-363": ["MGW-001"],
         "MGW-364": ["MGW-363"],
         "MGW-365": ["MGW-363", "MGW-364"],
@@ -103,30 +98,6 @@ def test_expanded_meta_glasses_io_tasks_cover_contracts_mocks_transport_and_test
         "MGW-371": ["Bluetooth/Wi-Fi", "control-plane route decisions", "unauthorized control-plane handoffs"],
         "MGW-372": ["Playwright", "app interaction bindings", "control-plane handoff evidence"],
         "MGW-373": ["Launch readiness", "control-plane routing evidence", "Playwright results"],
-=======
-        "MGW-029": ["MGW-001"],
-        "MGW-030": ["MGW-029"],
-        "MGW-031": ["MGW-029", "MGW-030"],
-        "MGW-032": ["MGW-030"],
-        "MGW-033": ["MGW-030", "MGW-031", "MGW-032"],
-        "MGW-034": ["MGW-030", "MGW-031", "MGW-032"],
-        "MGW-035": ["MGW-030", "MGW-031", "MGW-032"],
-        "MGW-036": ["MGW-031", "MGW-032", "MGW-033", "MGW-034", "MGW-035"],
-        "MGW-037": ["MGW-033", "MGW-034", "MGW-035", "MGW-036"],
-        "MGW-038": ["MGW-036", "MGW-037"],
-    }
-    expected_acceptance_terms = {
-        "MGW-029": ["Meta Neural Band", "captouch", "Bluetooth-profile", "IPFS/libp2p/MCP++"],
-        "MGW-030": ["camera", "microphone", "speaker/headphone", "MCP++ receipt"],
-        "MGW-031": ["Hardware-free", "DAT camera", "Meta Neural Band", "phone GPS"],
-        "MGW-032": ["Bluetooth", "Wi-Fi", "content CIDs", "libp2p peer IDs"],
-        "MGW-033": ["camera photo", "video stream", "IPFS content references"],
-        "MGW-034": ["microphone", "speaker/headphone", "raw-audio leakage"],
-        "MGW-035": ["Meta Neural Band", "captouch", "motion/orientation", "MCP++ receipts"],
-        "MGW-036": ["Bluetooth/Wi-Fi", "MCP++ tool/event receipts", "display mock"],
-        "MGW-037": ["Playwright", "microphone", "speaker/headphone", "display capabilities"],
-        "MGW-038": ["Launch readiness", "IPFS/libp2p/MCP++", "Playwright results"],
->>>>>>> implementation/mgw-029-attempt-1-1782248042
     }
 
     for task_id, dependencies in expected_dependencies.items():
@@ -149,11 +120,8 @@ def test_expanded_meta_glasses_io_scope_is_documented_in_plan():
         "speaker/headphone output",
         "Meta Neural Band",
         "captouch",
-<<<<<<< HEAD
         "control plane",
         "interaction bindings",
-=======
->>>>>>> implementation/mgw-029-attempt-1-1782248042
         "Bluetooth",
         "Wi-Fi",
         "IPFS",
