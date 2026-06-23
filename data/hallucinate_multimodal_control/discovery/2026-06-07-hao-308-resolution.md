@@ -4,6 +4,7 @@ Date: 2026-06-07
 Task: HAO-308
 Kind: swallowed_exception fix
 Source: external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984
+Reviewed: 2026-06-12 attempt 1
 
 ## Finding
 
@@ -24,6 +25,12 @@ are now handled explicitly:
 
 Unexpected programming errors now propagate to existing callers, which already
 wrap their user-facing workflows and return structured errors.
+
+The 2026-06-12 attempt verified that the reported line now catches only
+`TypeError` and `ValueError` from cached height coercion. The nearby comment was
+clarified to preserve the intended contract: only malformed local cache state is
+downgraded in `_get_chain_height`; unexpected errors from the live
+`Filecoin.ChainHead` path propagate.
 
 ## Validation
 
