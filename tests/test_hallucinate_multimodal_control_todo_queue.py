@@ -31,6 +31,9 @@ DISCOVERY_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discov
 HARDWARE_FREE_OFFLOAD_HARNESS_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-430-hardware-free-offload-harness.md"
 )
+LAUNCH_SLICE_REPLAY_RECEIPTS_PATH = (
+    DISCOVERY_ROOT / "2026-06-23-hao-432-launch-slice-replay-receipts.md"
+)
 
 
 def _load_script_module(name: str):
@@ -215,8 +218,14 @@ def test_hao_429_peer_offload_policy_receipts_and_recovery_states():
 
 def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministic_replay():
     source = HARDWARE_FREE_OFFLOAD_HARNESS_PATH.read_text(encoding="utf-8")
+    idl_source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    launch_slice_source = LAUNCH_SLICE_REPLAY_RECEIPTS_PATH.read_text(encoding="utf-8")
     normalized_source = " ".join(source.split())
     harness = _json_block_after(source, "## Deterministic Harness Fixture")
+    launch_slice = _json_block_after(
+        launch_slice_source,
+        "## Deterministic Launch-Slice Replay Fixture",
+    )
 
     required_terms = [
         "hardware-free multimodal offload harness",
@@ -272,6 +281,93 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
     assert "desktop peer execution never starts without policy_receipt_id" in invariants
     assert "all user-visible surfaces render the same recovery_state" in invariants
     assert "receipt chain is stable across retry or fallback" in invariants
+
+    idl_section_start = idl_source.index("### Launch-slice deterministic replay artifacts")
+    idl_section_end = idl_source.index("### Meta glasses display-widget intent bridge")
+    idl_section = " ".join(idl_source[idl_section_start:idl_section_end].replace("`", "").split())
+    for term in (
+        "HAO-432",
+        "deterministic replay artifact",
+        "phone-originated virtual desktop command",
+        "desktop peer selection, policy decisions, retry, fallback, user cancellation, and Meta glasses status updates",
+        "phone_event -> mediation_receipt -> virtual_desktop_command_intent -> peer_offload_policy_receipt",
+        "peer_offload_recovery_receipt -> meta_glasses_status_receipt -> render_receipt",
+        "recovery_state: \"retry_scheduled\"",
+        "recovery_state: \"fallback_selected\"",
+        "recovery_state: \"cancelled\"",
+    ):
+        assert term in idl_section
+
+    assert launch_slice["task_id"] == "HAO-432"
+    assert launch_slice["artifact_id"] == "launch_slice_replay_receipts"
+    assert launch_slice["extends_harness_id"] == harness["harness_id"]
+    assert launch_slice["requires_physical_devices"] is False
+    assert launch_slice["determinism"]["clock"] == "fixed"
+    assert launch_slice["determinism"]["network"] == "simulated"
+    assert launch_slice["participants"] == harness["participants"]
+    assert launch_slice["receipt_chain"] == [
+        "phone_event",
+        "mediation_receipt",
+        "virtual_desktop_command_intent",
+        "peer_offload_policy_receipt",
+        "runtime_receipt",
+        "peer_offload_recovery_receipt",
+        "meta_glasses_status_receipt",
+        "render_receipt",
+    ]
+
+    launch_steps = launch_slice["replay_steps"]
+    assert [step["phase"] for step in launch_steps] == [
+        "phone_event",
+        "mediation",
+        "command_intent",
+        "peer_offload_selection",
+        "runtime_timeout",
+        "retry_recovery",
+        "meta_glasses_status_retry",
+        "runtime_timeout_after_retry",
+        "fallback_recovery",
+        "meta_glasses_status_fallback",
+        "phone_cancel_event",
+        "cancel_mediation",
+        "cancel_recovery",
+        "surface_render",
+    ]
+    assert launch_steps[0]["event"]["session"]["participant_id"] == "phone:operator"
+    assert launch_steps[1]["receipt"]["policy_decision"] == "allow"
+    assert launch_steps[2]["command"]["receipt_ids"]["policy_receipt_id"] == launch_steps[1]["receipt"]["receipt_id"]
+    assert launch_steps[3]["receipt"]["selected_peer"]["participant_id"] == "desktop:peer"
+    assert launch_steps[3]["receipt"]["policy_decision"] == "allow"
+    assert launch_steps[4]["runtime_receipt"]["runtime_status"] == "timeout"
+    assert launch_steps[5]["receipt"]["recovery_state"] == "retry_scheduled"
+    assert launch_steps[5]["receipt"]["next_target_participant_id"] == "desktop:peer"
+    assert launch_steps[6]["meta_glasses_status_receipt"]["state"] == "retry_scheduled"
+    assert (
+        launch_steps[6]["meta_glasses_status_receipt"]["source_recovery_receipt_id"]
+        == launch_steps[5]["receipt"]["receipt_id"]
+    )
+    assert launch_steps[8]["receipt"]["recovery_state"] == "fallback_selected"
+    assert launch_steps[8]["receipt"]["selected_peer"]["participant_id"] == "swissknife:ui"
+    assert launch_steps[9]["meta_glasses_status_receipt"]["state"] == "fallback_selected"
+    assert (
+        launch_steps[9]["meta_glasses_status_receipt"]["source_recovery_receipt_id"]
+        == launch_steps[8]["receipt"]["receipt_id"]
+    )
+    assert launch_steps[10]["event"]["surface_event"] == "cancel"
+    assert launch_steps[10]["event"]["session"]["participant_id"] == "phone:operator"
+    assert launch_steps[12]["receipt"]["recovery_state"] == "cancelled"
+    assert launch_steps[12]["receipt"]["cancel_source_participant_id"] == "phone:operator"
+    assert launch_steps[13]["render_receipts"][2]["participant_id"] == "meta_glasses:terminal"
+    assert {
+        receipt["state"]
+        for receipt in launch_steps[13]["render_receipts"]
+    } == {"cancelled"}
+
+    launch_invariants = launch_slice["assertions"]
+    assert "phone-originated commands enter mediation before dispatch" in launch_invariants
+    assert "desktop peer selection is receipt-backed by policy_decision" in launch_invariants
+    assert "retry_scheduled, fallback_selected, and cancelled outcomes are replayed in one sequence" in launch_invariants
+    assert "Meta glasses status updates use the same recovery receipt IDs as phone and Swissknife renders" in launch_invariants
 
 
 def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
