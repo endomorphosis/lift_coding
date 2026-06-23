@@ -485,3 +485,269 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/peer_chat.py
 - Validation: python3 -m py_compile src/handsfree/peer_chat.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/peer_chat.py:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-042-codebase-scan-e0404f01baad.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-043 Review swallowed exception path in src/handsfree/redis_client.py:77
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/redis_client.py
+- Validation: python3 -m py_compile src/handsfree/redis_client.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/redis_client.py:77. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-043-codebase-scan-7a1ac1883655.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-044 Review swallowed exception path in src/handsfree/sessions.py:229
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/sessions.py
+- Validation: python3 -m py_compile src/handsfree/sessions.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/sessions.py:229. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-044-codebase-scan-b1039b93eb48.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-045 Replace placeholder runtime path in src/handsfree/stt/stub_provider.py:42
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/stt/stub_provider.py
+- Validation: python3 -m py_compile src/handsfree/stt/stub_provider.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/stt/stub_provider.py:42. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-045-codebase-scan-b40c594b84b1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-046 Review swallowed exception path in src/handsfree/transport/libp2p_bluetooth.py:1244
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/transport/libp2p_bluetooth.py
+- Validation: python3 -m py_compile src/handsfree/transport/libp2p_bluetooth.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/transport/libp2p_bluetooth.py:1244. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-046-codebase-scan-74ff113b87c6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-047 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:13
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:13. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-047-codebase-scan-cfe0d4fe2a26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-048 Replace placeholder runtime path in data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-26-vai-045-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-048-codebase-scan-9477780ff54f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-049 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:110
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:110. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-049-codebase-scan-9e6407080e55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-050 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:149
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:149. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-050-codebase-scan-113fa6a2035a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-051 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:159
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:159. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-051-codebase-scan-0886ebe3b4a6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-052 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:188
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:188. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-052-codebase-scan-acbf277a215b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-053 Resolve dependency guardrail for MGW-048
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-053-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-048 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-053-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## MGW-054 Resolve dependency guardrail for MGW-049
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-054-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-049 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-054-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## MGW-055 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:267
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-055-codebase-scan-733817068892.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-056 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:355
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:355. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-056-codebase-scan-bfdf8c8d6101.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-057 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:375
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:375. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-057-codebase-scan-cd77c93b537e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-058 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:536
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:536. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-058-codebase-scan-9b4272e295ff.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-059 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:555
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:555. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-059-codebase-scan-d4dff9e91d68.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-060 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:604
+
+<<<<<<< HEAD
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+>>>>>>> implementation/mgw-061-attempt-1-1779827094
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:604. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-060-codebase-scan-ed0eacf2c1e0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-061 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:609
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-061-attempt-1-1779827094
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:609. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-061-codebase-scan-56be23fb68eb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-062 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:614
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-061-attempt-1-1779827094
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:614. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-062-codebase-scan-5a5d7575aa1d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-063 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:620
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-061-attempt-1-1779827094
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:620. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-063-codebase-scan-0857aa9175ad.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-064 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:621
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-061-attempt-1-1779827094
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:621. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-26-mgw-064-codebase-scan-a5472eeb1373.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
