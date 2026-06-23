@@ -92,6 +92,62 @@ def test_launch_readiness_receipt_covers_product_critical_hops():
     assert replay["placement_policy"]["fallback_runtime"] == "phone_local"
 
 
+def test_vai_339_replay_receipt_chain_preserves_session_and_command_identity():
+    replay = _json_block_after(
+        VAI_339_REPLAY_PATH.read_text(encoding="utf-8"),
+        "## Deterministic Launch Replay Gate",
+    )
+    join_keys = replay["join_keys"]
+    receipt_chain = replay["receipt_chain"]
+
+    assert [receipt["receipt"] for receipt in receipt_chain] == [
+        "phone_event_receipt",
+        "hallucinate_app_mediation_receipt",
+        "placement_receipt_cid",
+        "desktop_peer_execution_receipt",
+        "meta_glasses_render_receipt",
+        "recovery_receipt_cid",
+        "capability_receipt_cid",
+    ]
+
+    previous_receipt_cid = None
+    for receipt in receipt_chain:
+        assert receipt["session_id"] == join_keys["session_id"]
+        assert receipt["command_id"] == join_keys["command_id"]
+        assert receipt["correlation_id"] == join_keys["correlation_id"]
+        assert receipt["request_id"] == join_keys["request_id"]
+        if previous_receipt_cid is None:
+            assert receipt["parent_receipt_cids"] == []
+        else:
+            assert receipt["parent_receipt_cids"] == [previous_receipt_cid]
+        previous_receipt_cid = receipt["receipt_cid"]
+
+    by_receipt = {receipt["receipt"]: receipt for receipt in receipt_chain}
+    assert by_receipt["hallucinate_app_mediation_receipt"]["policy_decision"] == {
+        "outcome": "allow",
+        "policy_cid": join_keys["policy_cid"],
+    }
+    assert by_receipt["placement_receipt_cid"]["selected_runtime"] == "desktop_peer"
+    assert by_receipt["placement_receipt_cid"]["fallback_runtime"] == "phone_local"
+    assert by_receipt["desktop_peer_execution_receipt"]["desktop_id"] == join_keys["desktop_id"]
+    assert by_receipt["meta_glasses_render_receipt"]["widget_id"] == join_keys["widget_id"]
+    assert by_receipt["meta_glasses_render_receipt"]["descriptor_cid"] == (
+        join_keys["descriptor_cid"]
+    )
+    assert by_receipt["meta_glasses_render_receipt"]["manifest_cid"] == (
+        join_keys["manifest_cid"]
+    )
+    assert by_receipt["meta_glasses_render_receipt"]["terminal_status"] == "rendered"
+    assert by_receipt["recovery_receipt_cid"]["recovered_runtime"] == "phone_local"
+    assert by_receipt["recovery_receipt_cid"]["terminal_status"] == "recovered"
+    assert by_receipt["capability_receipt_cid"]["receipt_cid"] == (
+        join_keys["capability_receipt_cid"]
+    )
+    assert by_receipt["capability_receipt_cid"]["capability_actions"] == (
+        replay["widget_capabilities"]
+    )
+
+
 def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     package = json.loads(SWISSKNIFE_PACKAGE_PATH.read_text(encoding="utf-8"))
     runner_source = SWISSKNIFE_RUNNER_PATH.read_text(encoding="utf-8")
