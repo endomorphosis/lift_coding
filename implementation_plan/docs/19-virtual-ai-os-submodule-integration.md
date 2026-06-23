@@ -276,6 +276,8 @@ Discovery result:
   and VAI-340
 - the discovery artifact for this closeout is
   [data/virtual_ai_os/discovery/no-new-unknowns-vai-014-2026-06-23.md](../../data/virtual_ai_os/discovery/no-new-unknowns-vai-014-2026-06-23.md)
+- the 2026-06-23 validation rerun passed the daemon queue test and discovery
+  grep recorded in the VAI-014 closeout artifact
 
 ## Discovery closeout (2026-05-22)
 

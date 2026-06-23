@@ -191,7 +191,7 @@ cadence remains parseable and resumable.
 - Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py; rg -n "VAI-014|unknowns|Discovery|discovered" implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
 - Acceptance: After the initial backlog completes, investigate the cross-submodule control-plane, UI-plane, device-plane, and daemon-integration code paths for implementation unknowns. Append new daemon-parseable VAI tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
-- Discovery: 2026-06-23 no-new-unknowns report written at data/virtual_ai_os/discovery/no-new-unknowns-vai-014-2026-06-23.md; no new daemon-parseable VAI tasks were discovered.
+- Discovery: 2026-06-23 no-new-unknowns report written at data/virtual_ai_os/discovery/no-new-unknowns-vai-014-2026-06-23.md; no new daemon-parseable VAI tasks were discovered, and the report records the passing queue-test and discovery-grep validation rerun.
 
 ## VAI-015 Refresh reviewed submodule pins and automation guardrails
 
