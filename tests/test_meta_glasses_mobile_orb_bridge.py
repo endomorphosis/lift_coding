@@ -74,6 +74,10 @@ def test_mobile_orb_descriptor_artifact_declares_phone_edge_methods() -> None:
 
     assert descriptor["name"] == "mobile_orb_bridge"
     assert descriptor["namespace"] == "handsfree.meta_glasses.mobile"
+    assert descriptor["diagnostics_contract"]["contract"] == (
+        "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
+    )
+    assert "receipt_cids" in descriptor["diagnostics_contract"]["required"]
     assert [method["name"] for method in descriptor["methods"]] == [
         "register_edge_capabilities",
         "publish_glasses_event",
@@ -298,53 +302,37 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert diagnostics_payload["events_count"] == 1
     assert diagnostics_payload["bindings_count"] == 1
     assert diagnostics_payload["subscriptions_count"] == 1
-    assert diagnostics_payload["invocations_count"] == 1
-    assert diagnostics_payload["dispatches_count"] == 1
-    assert diagnostics_payload["revocations_count"] == 0
-    assert diagnostics_payload["backend_counts"] == {
-        "edge_sessions": 1,
-        "events": 1,
-        "bindings": 1,
-        "subscriptions": 1,
-        "invocations": 1,
-        "dispatches": 1,
-        "revocations": 0,
-    }
-    assert "sha256:task-service" in diagnostics_payload["descriptor_cids"]
-    assert binding_payload["orb_binding"]["descriptor_cid"] in diagnostics_payload["descriptor_cids"]
-    assert invoked_payload["display_widget_action"]["descriptor_cid"] in (
-        diagnostics_payload["descriptor_cids"]
+    diagnostics_contract = diagnostics_payload["diagnostics_contract"]
+    assert diagnostics_contract["contract"] == (
+        "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
     )
-    assert binding_payload["policy_decision"]["compiled_policy_cid"] in (
-        diagnostics_payload["policy_cids"]
+    assert diagnostics_contract["mode"] == "physical_device"
+    assert diagnostics_contract["backend_capability_counts"]["events"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["bindings"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["subscriptions"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["operation_receipts"] >= 2
+    assert diagnostics_contract["backend_capability_counts"]["dat"]["session"] == 1
+    assert diagnostics_contract["backend_capability_counts"]["dat"]["display"] == 1
+    assert "sha256:mobile" in diagnostics_contract["descriptor_cids"]
+    assert "sha256:display" in diagnostics_contract["descriptor_cids"]
+    assert "sha256:task-service" in diagnostics_contract["descriptor_cids"]
+    assert binding_payload["orb_binding"]["descriptor_cid"] in (
+        diagnostics_contract["descriptor_cids"]
     )
-    assert event_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
-    assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
-    assert dispatched_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
-    policy_receipts = diagnostics_payload["policy_receipts"]
-    assert len(policy_receipts) >= 5
-    assert {receipt["outcome"] for receipt in policy_receipts} == {"allow"}
-    assert registered["mediation_receipt"]["receipt_id"] in {
-        receipt["receipt_id"] for receipt in policy_receipts
-    }
-    assert invoked_payload["receipt_cid"] in {
-        receipt["receipt_id"] for receipt in policy_receipts
-    }
-    assert diagnostics_payload["receipt_integrity"]["records_missing_receipt"] == 0
-    assert diagnostics_payload["receipt_integrity"]["missing_policy_cid_receipts"] == []
-    assert diagnostics_payload["receipt_integrity"]["orphan_parent_receipt_cids"] == []
-    assert diagnostics_payload["receipt_integrity"]["outcomes"]["allow"] >= 5
-    assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
-    assert diagnostics_payload["edge_health"]["status"] == "degraded"
-    assert diagnostics_payload["edge_health"]["registered"] is True
-    assert diagnostics_payload["edge_health"]["binding_status"] == "subscribed"
-    assert "dat_native_display_unavailable" in diagnostics_payload["edge_health"][
-        "degraded_reasons"
-    ]
-    assert diagnostics_payload["binding_state"]["status"] == "subscribed"
-    assert diagnostics_payload["binding_state"]["active_binding_handles"] == [
-        binding_payload["binding_handle"]
-    ]
+    assert binding_payload["policy_decision"]["decision_id"] in (
+        diagnostics_contract["policy_cids"]
+    )
+    assert event_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert invoked_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert dispatched_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert subscription_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
+    assert "Display unavailable. Showing task status on phone." in (
+        diagnostics_contract["fallback_reasons"]
+    )
+    assert diagnostics_contract["binding_state"]["active_bindings_count"] == 1
+    assert diagnostics_contract["binding_state"]["bindings"][0]["state"] == "bound"
+    assert diagnostics_payload["descriptor_cids"] == diagnostics_contract["descriptor_cids"]
+    assert diagnostics_payload["receipt_cids"] == diagnostics_contract["receipt_cids"]
     assert diagnostics_payload["bindings"][0]["binding_handle"] == (
         binding_payload["binding_handle"]
     )

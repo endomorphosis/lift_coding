@@ -13,55 +13,31 @@
       "mediation_receipt"
     ]
   },
-  "diagnosticsContract": {
-    "name": "mobile_orb_diagnostics",
+  "diagnostics_contract": {
+    "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
     "version": "0.1.0",
-    "description": "Single simulator/physical-device diagnostics shape for mobile ORB edge state, backend counts, policy receipts, descriptor CIDs, and fallback visibility.",
+    "description": "One mobile ORB edge diagnostics envelope shared by backend, simulator, and physical-device modes. The envelope summarizes backend capability counts, descriptor CIDs, policy CIDs, binding state, receipt CIDs, and fallback reasons while preserving raw records on the diagnostics endpoint.",
     "required": [
       "contract",
-      "edge_session_id",
+      "version",
       "mode",
-      "capability_counts",
-      "backend_counts",
       "backend_capability_counts",
       "descriptor_cids",
       "policy_cids",
       "binding_state",
       "receipt_cids",
-      "fallback_reasons",
-      "policy_receipts",
-      "receipt_integrity",
-      "edge_health"
+      "fallback_reasons"
     ],
     "properties": {
-      "contract": {
-        "const": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
-      },
-      "edge_session_id": {
-        "type": ["string", "null"]
-      },
-      "mode": {
-        "enum": ["simulator", "physical_device", "unknown"]
-      },
-      "capability_counts": {
-        "type": "object",
-        "description": "Counts for DAT capabilities, advertised/accepted interface capabilities, and backend ORB records visible to diagnostics."
-      },
-      "backend_counts": {
-        "type": "object",
-        "properties": {
-          "edge_sessions": { "type": "integer" },
-          "events": { "type": "integer" },
-          "bindings": { "type": "integer" },
-          "subscriptions": { "type": "integer" },
-          "invocations": { "type": "integer" },
-          "dispatches": { "type": "integer" },
-          "revocations": { "type": "integer" }
-        }
-      },
+      "contract": { "const": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0" },
+      "version": { "type": "string" },
+      "mode": { "enum": ["simulator", "physical_device", "unknown"] },
+      "edge_session_id": { "type": ["string", "null"] },
+      "backend_kind": { "type": "string" },
+      "capability_counts": { "type": "object" },
       "backend_capability_counts": {
         "type": "object",
-        "description": "Compatibility alias for backend_counts so diagnostics clients can read backend capability counts directly."
+        "description": "Counts for backend-visible edge sessions, ORB events, service bindings, subscriptions, recorded operation receipts, and DAT capabilities advertised by registered edges."
       },
       "descriptor_cids": {
         "type": "array",
@@ -73,25 +49,7 @@
       },
       "binding_state": {
         "type": "object",
-        "properties": {
-          "status": {
-            "enum": ["missing", "registered", "bound", "subscribed"]
-          },
-          "registered": { "type": "boolean" },
-          "edge_session_id": { "type": ["string", "null"] },
-          "active_bindings": { "type": "integer" },
-          "active_binding_handles": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "active_subscriptions": { "type": "integer" },
-          "active_subscription_ids": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "latest_binding_handle": { "type": ["string", "null"] },
-          "latest_subscription_id": { "type": ["string", "null"] }
-        }
+        "description": "Active binding and subscription summaries keyed by binding handle, service/interface descriptor CID, transport, runtime status, receipt CID, and policy CIDs."
       },
       "receipt_cids": {
         "type": "array",
@@ -100,54 +58,6 @@
       "fallback_reasons": {
         "type": "array",
         "items": { "type": "string" }
-      },
-      "policy_receipts": {
-        "type": "array",
-        "description": "Compact policy receipt summaries for edge-session, event, binding, invocation, dispatch, subscription, and revocation records.",
-        "items": {
-          "type": "object",
-          "properties": {
-            "receipt_id": { "type": ["string", "null"] },
-            "source_record": { "type": "string" },
-            "decision_id": { "type": ["string", "null"] },
-            "outcome": { "type": "string" },
-            "policy_cid": { "type": ["string", "null"] },
-            "method": { "type": ["string", "null"] },
-            "target_ref": { "type": ["string", "null"] }
-          }
-        }
-      },
-      "receipt_integrity": {
-        "type": "object",
-        "description": "Receipt and policy linkage checks used by mobile diagnostics to surface degraded ORB edges.",
-        "properties": {
-          "records_total": { "type": "integer" },
-          "records_with_receipt": { "type": "integer" },
-          "records_missing_receipt": { "type": "integer" },
-          "policy_receipts_total": { "type": "integer" },
-          "outcomes": { "type": "object" },
-          "missing_policy_cid_receipts": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "orphan_parent_receipt_cids": {
-            "type": "array",
-            "items": { "type": "string" }
-          }
-        }
-      },
-      "edge_health": {
-        "type": "object",
-        "description": "Single status summary for mobile edge diagnostics.",
-        "properties": {
-          "status": { "enum": ["healthy", "degraded", "unknown"] },
-          "registered": { "type": "boolean" },
-          "binding_status": { "type": ["string", "null"] },
-          "degraded_reasons": {
-            "type": "array",
-            "items": { "type": "string" }
-          }
-        }
       }
     }
   },
@@ -179,6 +89,11 @@
           "local_interface_cids": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "descriptors": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "Local mobile/display interface descriptor references advertised by the phone edge so diagnostics can expose accepted descriptor CIDs."
           },
           "transport_preferences": {
             "type": "array",

@@ -29,81 +29,6 @@ OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-a
 OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
 OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
 OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
-OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(
-    os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6")
-)
-SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
-IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
-REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-
-from virtual_ai_os_todo_daemon import (  # noqa: E402
-    OBJECTIVE_HEAP_PATH,
-    VIRTUAL_AI_OS_CONTEXT,
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-)
-
-_VIRTUAL_AI_OS_CONTEXT = VIRTUAL_AI_OS_CONTEXT
-DEFAULT_TODO_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
-VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
-# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
-# task-board path option is CLI flag naming, not a deferred-work annotation.
-# scanner-resolved: HAO-260 - This shared context value preserves the public
-# backlog task-board CLI flag name; it is runtime wiring, not a follow-up marker.
-TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
-DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
-DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
-DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "virtual_ai_os_todo_daemon.py")
-DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
-OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
-OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
-OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
-# scanner-resolved: HAO-235 - The stale line-159 scan hit was old explicit
-# _with_default wiring for the objective todo vector index path. This wrapper now
-# passes the same runtime path through the shared objective defaults factory.
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
-DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
-OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
-OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
-# scanner-resolved: HAO-256 - "todo" in surplus_min_terms_per_todo maps to
-# the daemon's backlog task-entry threshold option; it is runtime wiring, not
-# a deferred-work annotation.
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
-# scanner-resolved: VAI-168, HAO-235 - "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES
-# is intentionally excluded because these supervisor wrappers reference task-board
-# paths and daemon script names as runtime wiring.
-CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
-    {
-        "virtual_ai_os": (
-            "discovery",
-            "objective_bundles",
-            "objective_datasets",
-            "state",
-            "worktrees",
-        ),
-        "hallucinate_multimodal_control": ("discovery", "state", "worktrees"),
-        "meta_glasses_display_widgets": ("discovery", "state", "worktrees"),
-    },
-    include_scripts=True,
-    extra_prefixes=(
-        "archive/",
-        "backup/",
-        "cleanup-archive/",
-        "external/ipfs_accelerate/test/duckdb_api/",
-        "external/ipfs_accelerate/test/generators/",
-        "external/ipfs_accelerate/test/huggingface_transformers/",
-        "external/ipfs_accelerate/test/skills/",
-        "external/ipfs_kit/archive/",
-        "external/ipfs_kit/backup/",
-    ),
-)
 CODEBASE_SCAN_SKIP_PREFIXES = (
     "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
     "data/virtual_ai_os/discovery/",
@@ -202,27 +127,15 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
     args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
     args = _with_default(args, "--max-restarts", "0")
-    resolver_command = _default_llm_merge_resolver_command()
-    if resolver_command:
-        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
     args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
     args = _with_flag_default(args, "--objective-refill-scan")
-    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
-    args = _with_repeated_default(args, "--objective-interoperability-focus", VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS)
     args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
     args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
     args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
     args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
     args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
-    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
-    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
-    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
-    # scanner-resolved: HAO-251 HAO-255 VAI-173 HAO-261 VAI-177 HAO-265 VAI-178 — "todo" in --objective-todo-vector-index-path refers to backlog task entries (CLI flag name, not a deferred-work annotation).
-    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
-    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    # Not a code annotation; "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries.
-    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
+    args = _with_default(args, "--objective-scan-min-open-tasks", "0")
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")
