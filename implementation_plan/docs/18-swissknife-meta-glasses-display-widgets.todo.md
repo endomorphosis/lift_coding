@@ -3034,7 +3034,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-268 Connect Swissknife widget actions to the VAI capability registry
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: integration
