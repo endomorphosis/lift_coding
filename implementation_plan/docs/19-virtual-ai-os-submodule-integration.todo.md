@@ -2270,3 +2270,47 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-079-agent-runner-minimal.md
 - Validation: test -f tracking/PR-079-agent-runner-minimal.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:56. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-379-codebase-scan-0a3992f37e3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-380 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:122
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:122. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-380-codebase-scan-0dbc6e6537b4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-381 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:174
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-381-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-382 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:297
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:297. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-382-codebase-scan-c4e511c86ab6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-383 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:360
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
+- Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:360. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-383-codebase-scan-77ba3b1d763a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
