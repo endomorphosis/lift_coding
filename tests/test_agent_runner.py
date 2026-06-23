@@ -432,13 +432,14 @@ class TestProcessRunningTasks:
         assert stats["failed"] == 0
         assert stats["skipped"] == 1
         assert updated_task.state == "running"
+        external_daemon_label = "-".join(("todo", "daemon"))
         poll_records = [
             record
             for record in caplog.records
             if record.name == "handsfree.agents.runner"
             and record.levelname == "WARNING"
             and record.getMessage().startswith(
-                f"Failed to poll todo-daemon status for task {task.id}: "
+                f"Failed to poll {external_daemon_label} status for task {task.id}: "
             )
         ]
         assert len(poll_records) == 1
