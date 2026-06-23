@@ -149,6 +149,67 @@ def test_virtual_desktop_session_widget_contract_is_documented():
     assert missing_terms == []
 
 
+def test_peer_offload_widget_contract_extension_is_documented():
+    plan_text = (
+        REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+    ).read_text(encoding="utf-8")
+
+    required_contract_terms = [
+        "Peer-offload state",
+        "peer_offload.availability",
+        "desktop-offload availability",
+        "unavailable",
+        "discovering",
+        "available",
+        "selected",
+        "transferring",
+        "running",
+        "degraded",
+        "failed",
+        "fallback_active",
+        "peer_offload.selected_peer",
+        "peer_id",
+        "display_name",
+        "endpoint_hint",
+        "trust_level",
+        "capability_class",
+        "last_seen_at",
+        "policy_receipt_cid",
+        "peer_offload.compute_placement",
+        "phone_local",
+        "desktop_peer",
+        "hybrid",
+        "fallback_phone",
+        "placement_receipt_cid",
+        "peer_offload.transfer_state",
+        "operation_id",
+        "bytes_sent",
+        "bytes_total",
+        "throughput_bps",
+        "peer_offload.actions",
+        "cancel_offload",
+        "retry_offload",
+        "fallback_to_phone",
+        "select_peer",
+        "dismiss_offload_message",
+        "open_mobile_card",
+        "backend-approved action ID",
+        "same correlation ID used by the active policy receipt",
+        "peer_offload.receipts",
+        "orb_receipt_cid",
+        "transfer_receipt_cid",
+        "fallback_receipt_cid",
+        "must not replace `descriptor_refs.policy_receipt_cid`",
+        "existing policy receipt model",
+        "peer_offload.error",
+        "retryable",
+    ]
+
+    missing_terms = [term for term in required_contract_terms if term not in plan_text]
+
+    assert missing_terms == []
+
+
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
