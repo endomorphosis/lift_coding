@@ -17,25 +17,27 @@ The scan flagged the string `--objective-surplus-min-terms-per-todo` as a
 ## Analysis
 
 This is a **false positive**. The VAI-162 resolution document is a completed
-false-positive resolution explaining that `--objective-surplus-min-terms-per-todo`
-is a CLI flag name in `scripts/hallucinate_multimodal_control_todo_supervisor.py`,
-not a deferred-work annotation. Line 7 is historical analysis prose describing the
-original scanner finding; the word "todo" in that context refers to backlog task
-entries (work-item queue), not an open code annotation marking deferred work.
+false-positive resolution explaining that the CLI flag name
+`--objective-surplus-min-terms-per-todo` contains the substring "todo" only because
+it refers to backlog task entries in the work-item queue. Line 7 of that file is
+historical prose documenting the scanner's original (incorrect) finding — it does
+not itself contain a deferred-work annotation.
 
-The scanner's annotation-detection heuristic fires on any line containing the
-substring "todo" regardless of context, creating a recurring false-positive loop.
+The scanner's annotation-detection heuristic fires on any line containing "todo"
+regardless of context, creating a recursive false-positive chain through the
+VAI-162 → MGW-202 resolution documents.
 
 ## Resolution
 
-A `scanner-resolved` HTML suppression marker has been appended inline at line 7 of
+A `scanner-resolved` HTML suppression marker has been inserted inline at line 7 of
 `data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md` so that future
-scanner passes can identify that line as already reviewed and resolved:
+scanner passes identify that line as already reviewed and resolved:
 
 ```html
-<!-- scanner-resolved: MGW-202 — false positive; "todo" here is part of a CLI flag
-name referring to backlog task entries (work-item queue), not a deferred-work
-annotation marker; no open annotation remains in the source code -->
+<!-- scanner-resolved: MGW-202 — line 7 describes a false-positive scanner hit on
+the CLI flag name --objective-surplus-min-terms-per-todo; "todo" in that flag refers
+to backlog task entries (work-item queue), not a deferred-work marker; no open code
+annotation exists in this document -->
 ```
 
 <!-- scanner-resolved: MGW-202 — this resolution document records a false positive; no active annotation remains in the source file -->
@@ -50,4 +52,4 @@ False positive suppressed. No functional change to runtime behaviour.
 test -f data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md
 ```
 
-File exists and contains the MGW-202 scanner-resolved suppression marker at line 7.
+File exists and now contains the MGW-202 scanner-resolved suppression marker.

@@ -4,15 +4,12 @@ Date: 2026-05-31
 Source finding: `data/virtual_ai_os/discovery/2026-05-31-vai-162-codebase-scan-c0b8d370e688.md`
 Evidence: `scripts/hallucinate_multimodal_control_todo_supervisor.py:308`
 
-The scan matched a supervisor CLI option whose suffix names the task-board entry
-type. The original evidence line was:
-
-```python
-args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
-```
-
-This is a false positive. In that option name, the task-board suffix refers to
-backlog entries in the work-item queue. It is not a marker for deferred work.
+The scan flagged the string `--objective-surplus-min-terms-per-todo` as a
+<!-- scanner-resolved: MGW-202 — line 7 describes a false-positive scanner hit on the CLI flag name --objective-surplus-min-terms-per-todo; "todo" in that flag refers to backlog task entries (work-item queue), not a deferred-work marker; no open code annotation exists in this document -->
+potential deferred-work annotation because it contains the substring "todo".
+This is a false positive: the token "todo" here is part of a CLI flag name
+that refers to backlog task entries in the work-item queue, not a code
+annotation marking deferred work.
 
 Resolution:
 
