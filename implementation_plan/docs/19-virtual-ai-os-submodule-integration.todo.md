@@ -1798,7 +1798,7 @@ cadence remains parseable and resumable.
 
 ## VAI-338 Build the launch alignment map across VAI, MGW, and HAO
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
