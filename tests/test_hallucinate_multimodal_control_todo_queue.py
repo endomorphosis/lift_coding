@@ -155,6 +155,25 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert tasks["HAO-431"].track == "integration"
 
 
+def test_hallucinate_open_tasks_do_not_claim_mgw_owned_queue_files():
+    mgw_owned_paths = (
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        "tests/test_meta_glasses_display_todo_queue.py",
+    )
+    open_cross_owned_tasks = [
+        task.task_id
+        for task in _load_tasks()
+        if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
+        and any(
+            path in " ".join([task.title, task.acceptance, *task.outputs, *task.validation])
+            for path in mgw_owned_paths
+        )
+    ]
+
+    assert open_cross_owned_tasks == []
+
+
 def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence():
     tasks = {task.task_id: task for task in _load_tasks()}
     expected = {
