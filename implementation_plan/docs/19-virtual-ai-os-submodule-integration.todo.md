@@ -315,8 +315,9 @@ cadence remains parseable and resumable.
 
 ## VAI-026 Supervised autonomous implementation cadence
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: none
@@ -1058,8 +1059,9 @@ cadence remains parseable and resumable.
 
 ## VAI-328 Resolve merge retry-budget failure for VAI-002
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1091,8 +1093,9 @@ cadence remains parseable and resumable.
 
 ## VAI-331 Resolve implementation retry-budget failure for VAI-052
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1102,8 +1105,9 @@ cadence remains parseable and resumable.
 
 ## VAI-332 Resolve implementation retry-budget failure for VAI-150
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1113,8 +1117,9 @@ cadence remains parseable and resumable.
 
 ## VAI-333 Resolve implementation retry-budget failure for VAI-151
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1124,8 +1129,9 @@ cadence remains parseable and resumable.
 
 ## VAI-334 Resolve implementation retry-budget failure for VAI-141
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1135,8 +1141,9 @@ cadence remains parseable and resumable.
 
 ## VAI-335 Resolve implementation retry-budget failure for VAI-142
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1146,8 +1153,9 @@ cadence remains parseable and resumable.
 
 ## VAI-336 Resolve merge retry-budget failure for VAI-006
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 

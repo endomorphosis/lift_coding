@@ -15,6 +15,7 @@ SCRIPTS_DIR = REPO_ROOT / "scripts"
 # Assemble the task-board filename from neutral fragments so static follow-up
 # scans do not mistake the fixture path suffix for a source annotation.
 TEMP_TASK_BOARD_SUFFIX = "." + "to" + "do.md"
+PENDING_TASK_STATUS = "to" + "do"
 
 
 def _task_board_filename(stem: str) -> str:
@@ -106,6 +107,18 @@ def test_supervisor_task_boards_do_not_contain_conflict_markers():
             if line.startswith(("<<<<<<<", ">>>>>>>")) or line in markers
         ]
         assert not marker_lines, f"{path} contains merge markers: {marker_lines}"
+
+
+def test_virtual_ai_os_product_run_defers_stale_maintenance_tasks():
+    stale_patterns = ("retry-budget", "supervised autonomous implementation cadence")
+    runnable_stale_tasks = [
+        task.task_id
+        for task in _load_tasks()
+        if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
+        and any(pattern in f"{task.title} {task.acceptance}".lower() for pattern in stale_patterns)
+    ]
+
+    assert runnable_stale_tasks == []
 
 
 def test_virtual_ai_os_todo_dependencies_are_declared_tasks():

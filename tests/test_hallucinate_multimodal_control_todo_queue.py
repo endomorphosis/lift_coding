@@ -103,6 +103,28 @@ def test_hallucinate_multimodal_queue_blocks_archival_codebase_scan_tasks():
     assert open_archive_tasks == []
 
 
+def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks():
+    stale_patterns = (
+        "resolve code annotation",
+        "swallowed exception path",
+        "placeholder runtime path",
+        "retry-budget",
+        "reconciliation guardrail",
+        "dirty backlogged",
+    )
+    runnable_stale_tasks = [
+        task.task_id
+        for task in _load_tasks()
+        if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
+        and any(pattern in f"{task.title} {task.acceptance}".lower() for pattern in stale_patterns)
+    ]
+    tasks = {task.task_id: task for task in _load_tasks()}
+
+    assert runnable_stale_tasks == []
+    assert tasks["HAO-427"].status == PENDING_TASK_STATUS
+    assert tasks["HAO-431"].track == "integration"
+
+
 def _git(cwd: Path, *args: str) -> str:
     result = subprocess.run(
         ["git", *args],

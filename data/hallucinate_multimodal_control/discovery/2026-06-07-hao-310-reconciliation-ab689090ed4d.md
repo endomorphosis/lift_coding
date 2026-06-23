@@ -188,3 +188,32 @@ jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count /
 Success signal: the HAO-310 `unsupported_status` blocked candidate count
 decreased from `14` to `0`, and the supervisor removed all `14` sampled stale
 merged worktree registrations.
+
+## Current Verification
+
+Verified during HAO-310 attempt 1 on 2026-06-23.
+
+- The two worktrees named by this guardrail are no longer registered or present:
+  `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072`
+  and
+  `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533`.
+- The main checkout at `/home/barberb/lift_coding` and the active HAO-310
+  worktree were clean before the rerun.
+- Reran the supervisor reconciliation pass from `/home/barberb/lift_coding`
+  with `python3` because `python` was not available on `PATH`:
+
+```sh
+python3 scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
+```
+
+Rerun result:
+
+- `worktree_reconciliation.candidate_count`: `0`
+- `worktree_reconciliation.preflight_blocked_count`: `0`
+- `worktree_cleanup.removed_count`: `0`
+- `worktree_cleanup.skipped_reason_counts`: `active_state_worktree=1`
+- `worktree_cleanup.dirty_worktree_groups`: `{}`
+
+Current success signal: the `unsupported_status` dirty worktree group remains
+absent / `0`, so the blocked candidate count is still decreased from the
+original HAO-310 guardrail count of `2`.

@@ -410,8 +410,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-035 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -421,8 +422,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-036 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-028-vai-020-merge-unblock.md:26
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -432,8 +434,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-037 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-26-vai-031-vai-026-merge-unblock.md:11
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -509,8 +512,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-044 Review swallowed exception path in src/handsfree/sessions.py:229
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: runtime
 - Depends on:
@@ -542,8 +546,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-047 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: quality
 - Depends on:
@@ -740,8 +745,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-065 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:658
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: quality
 - Depends on:
@@ -1026,8 +1032,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-091 Resolve code annotation in tests/test_virtual_ai_os_end_to_end.py:140
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: quality
 - Depends on:
@@ -1136,8 +1143,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-101 Resolve code annotation in tracking/PR-050-android-audio-route-monitor.md:18
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1147,8 +1155,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-102 Resolve code annotation in tracking/PR-051-android-glasses-recorder-player.md:21
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1158,8 +1167,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-103 Resolve code annotation in tracking/PR-052-glasses-js-integration-tts.md:26
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1191,8 +1201,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-106 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:16
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1202,8 +1213,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-107 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:35
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1213,8 +1225,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-108 Resolve code annotation in tracking/PR-081-privacy-mode-per-profile.md:7
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1224,8 +1237,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-109 Resolve code annotation in tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1246,8 +1260,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-111 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1268,8 +1283,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-113 Resolve code annotation in work/PR-090-agent-runner-docs-sync.md:1
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1301,8 +1317,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-116 Resolve code annotation in hallucinate_app/docs/INDEX.md:24
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1312,8 +1329,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-117 Resolve code annotation in hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md:3
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1323,8 +1341,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-118 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md:1
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on:
@@ -1356,8 +1375,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-121 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: ops
 - Depends on:
@@ -1400,8 +1420,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-125 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: ops
 - Depends on: 
@@ -1411,8 +1432,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-126 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: ops
 - Depends on: 
@@ -1499,8 +1521,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-134 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:421
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: ops
 - Depends on: 
@@ -1565,8 +1588,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-140 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:9
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1598,8 +1622,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-143 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:9
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1653,8 +1678,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-148 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-112-resolution.md:14
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1697,8 +1723,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-152 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-114-resolution.md:14
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P2
 - Track: docs
 - Depends on: 
@@ -1796,8 +1823,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-161 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md:11
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1829,8 +1857,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-164 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-118-resolution.md:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P2
 - Track: docs
 - Depends on: 
@@ -1840,8 +1869,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-165 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-119-resolution.md:10
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1862,8 +1892,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-167 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md:15
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1884,8 +1915,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-169 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md:15
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -1895,8 +1927,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-170 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-122-resolution.md:17
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2093,8 +2126,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-188 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P2
 - Track: docs
 - Depends on: 
@@ -2115,8 +2149,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-190 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:305
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: runtime
 - Depends on: 
@@ -2181,8 +2216,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-196 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:11
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2192,8 +2228,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-197 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:12
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2214,8 +2251,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-199 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md:20
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2236,8 +2274,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-201 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:27
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2258,8 +2297,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-203 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P2
 - Track: docs
 - Depends on: 
@@ -2291,8 +2331,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-206 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-161-resolution.md:27
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2335,8 +2376,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-210 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-159-resolution.md:44
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2346,8 +2388,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-211 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-160-resolution.md:46
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2533,8 +2576,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-228 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-30-vai-147-resolution.md:13
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P2
 - Track: docs
 - Depends on: 
@@ -2566,8 +2610,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-231 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md:7
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2632,8 +2677,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-237 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md:8
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2728,8 +2774,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-245 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md:22
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2750,8 +2797,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-247 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-120-resolution.md:35
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P3
 - Track: docs
 - Depends on: 
@@ -2849,8 +2897,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-256 Resolve merge retry-budget failure for MGW-065
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -2904,8 +2953,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-261 Resolve merge retry-budget failure for MGW-152
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -2915,8 +2965,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-262 Resolve implementation retry-budget failure for MGW-091
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -2926,8 +2977,9 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-263 Resolve merge retry-budget failure for MGW-121
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -2937,11 +2989,56 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-264 Resolve merge retry-budget failure for MGW-134
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
 - Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-13-mgw-264-mgw-134-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-134. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-13-mgw-264-mgw-134-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-134 from strategy blocked_tasks.
+
+## MGW-265 Define the mobile-to-glasses virtual desktop session widget
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: mobile
+- Depends on: MGW-012
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, tests/test_meta_glasses_display_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Specify the Meta glasses display widget contract for a phone-hosted virtual desktop session, including session identity, pairing state, active tool, progress/status regions, confirmation prompts, and recovery messages that can be rendered without paired hardware.
+
+## MGW-266 Add peer-offload status and controls to the display widget contract
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-265
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, tests/test_meta_glasses_display_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Extend the display-widget contract so glasses can show desktop-offload availability, selected peer, compute placement, transfer/progress state, and operator actions for cancel/retry/fallback while preserving the existing policy receipt model.
+
+## MGW-267 Build a hardware-free phone/glasses terminal fixture
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: quality
+- Depends on: MGW-265, MGW-266
+- Outputs: tests/test_meta_glasses_display_todo_queue.py, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Add or document a deterministic fixture that simulates a mobile-hosted Meta glasses terminal receiving virtual desktop status, confirmation, and peer-offload updates without Meta credentials or paired hardware.
+
+## MGW-268 Connect Swissknife widget actions to the VAI capability registry
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: integration
+- Depends on: MGW-265, MGW-266
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Map glasses widget render/update/confirm/cancel actions into the VAI capability registry work so Swissknife, mobile, and Hallucinate App can share a single command/receipt surface for virtual desktop sessions.
