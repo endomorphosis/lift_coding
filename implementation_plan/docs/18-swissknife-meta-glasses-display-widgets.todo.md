@@ -92,7 +92,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-007 Add mobile bridge widget methods and mocked fallback states
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: mobile
