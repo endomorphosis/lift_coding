@@ -10,6 +10,7 @@ MCP++ source re-check: 2026-06-12
 VAI-013 MCP++ source resolution: 2026-06-23
 VAI-001 topology checkpoint: 2026-06-12
 VAI-002 source alignment: 2026-06-12
+VAI-015 submodule pins and automation guardrails: 2026-06-23
 VAI-023 iPhone native DAT handoff packet: 2026-06-12
 VAI-020 mobile ORB edge diagnostics and policy receipts: 2026-06-23
 
@@ -91,6 +92,43 @@ or `hallucinate_app` upstream mappings.
 
 Evidence:
 [data/virtual_ai_os/discovery/source-alignment-vai-002-2026-06-12.md](../../data/virtual_ai_os/discovery/source-alignment-vai-002-2026-06-12.md)
+
+### 2026-06-23 VAI-015 submodule pins and automation guardrails
+
+VAI-015 reconciles the current root submodule pins with the reviewed
+component-source and bootstrap contracts from VAI-002 and VAI-009. The current
+root index and initialized component checkouts agree for every initialized root
+submodule, so this task does not advance gitlinks.
+
+Current root submodule pins:
+
+| Path | Root gitlink | Upstream `main` evidence | VAI-015 decision |
+| --- | --- | --- | --- |
+| `Mcp-Plus-Plus` | `29343be704da4e193ff143bac7daae9b0f98435d` | Matches `https://github.com/endomorphosis/Mcp-Plus-Plus.git` `refs/heads/main`. | Keep the case-sensitive spec/docs pin. |
+| `external/ipfs_accelerate` | `46b3e05ed10b3109c28820442359241bd26b7fbc` | Matches `https://github.com/endomorphosis/ipfs_accelerate_py` `refs/heads/main`. | Keep the reviewed launch-validation gate pin. |
+| `external/ipfs_datasets` | `c8dbe9c99c2ed13f34e622253687d965537f8c05` | Matches `https://github.com/endomorphosis/ipfs_datasets_py` `refs/heads/main`. | Keep the reviewed source-aligned pin. |
+| `external/ipfs_kit` | `d125a18374c5f9959c01d01d77fea51f3e67fe5e` | Upstream `https://github.com/endomorphosis/ipfs_kit_py` `refs/heads/main` is `135c36c210f516688dffa644851c5c321d232f38`. | Defer any movement; require a reviewed pin-refresh task with nested-bootstrap validation before advancing. |
+| `external/meta-wearables-dat-android` | `25f3a6d4479b7a4a72f877977b865a11af990d04` | Matches `https://github.com/facebook/meta-wearables-dat-android` `refs/heads/main`; checkout remains optional and uninitialized here. | Keep as status-only physical/native validation reference. |
+| `external/meta-wearables-dat-ios` | `a739e94181221e7f321304273bcda2272821b163` | Matches `https://github.com/facebook/meta-wearables-dat-ios` `refs/heads/main`; checkout remains optional and uninitialized here. | Keep as status-only physical/native validation reference. |
+| `hallucinate_app` | `be3315553727a8ca491300adcb79a9bcaf1478bd` | Upstream `https://github.com/endomorphosis/hallucinate_app.git` `refs/heads/main` is `b95c09ae36d1c81030acfa18e15281b786a40a2b`. | Defer movement until a desktop-operator evidence task reviews the newer upstream pin. |
+| `swissknife` | `0348884c24f86b92063b86b7fe9ad1410358b1bf` | Upstream `https://github.com/endomorphosis/swissknife` `refs/heads/main` is `a43e46139b78fdd9cafd83297db4ed543b86ddd3`. | Keep the current local launch-readiness pin; do not normalize to upstream `main` as daemon churn. |
+
+Automation guardrails:
+
+- `git submodule status` is the required VAI-015 guardrail. Recursive update
+  remains out of scope unless the nested `external/ipfs_kit` pins are reviewed
+  in a separate task.
+- Branch-sync automation may observe upstream `main`, but any parent gitlink
+  movement must be committed with old/new SHA evidence, validation output, and
+  the reviewed reason for the movement.
+- Supervisor or daemon worktrees may read root pins and may fast-forward clean
+  component checkouts for local validation, but they must not leave the parent
+  checkout in implicit pin drift.
+- Optional Meta DAT repositories remain status-only references until physical
+  or native validation needs initialized checkouts.
+
+Evidence:
+[data/virtual_ai_os/discovery/submodule-pins-vai-015-2026-06-23.md](../../data/virtual_ai_os/discovery/submodule-pins-vai-015-2026-06-23.md)
 
 ### Root-tracked submodules after alignment
 
