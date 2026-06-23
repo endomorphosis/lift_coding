@@ -10,7 +10,11 @@ Created: 2026-05-22
 
 Enable a developer or agent to define a Meta glasses display widget as a Swissknife MCP-IDL/UI descriptor, publish it through a descriptor registry, bind it through the Swissknife ORB, and render it on display-capable Meta glasses through the existing HandsFree mobile DAT bridge.
 
+<<<<<<< HEAD
 2026-06-23 scope expansion: MGW also owns the contracts, mocks, and tests for the broader Meta glasses I/O surface that Swissknife applications need: camera photo/video capture, microphone input, speaker/headphone output, Meta Neural Band and captouch events, motion/orientation and phone GPS context, and display output. Swissknife apps must be able to bind these interaction methods as app capabilities, consume them through deterministic mock and native-ready adapters, and forward normalized events or payload references into the control plane. Native DAT remains the phone-app bridge for hardware capabilities, while display Web Apps are a separate supported path for display-glasses inputs. Bluetooth, Wi-Fi, IPFS, libp2p, and MCP++ compatibility must be modeled as explicit app-level bridge envelopes, content-addressed payloads, peer/session identifiers, policy decisions, control-plane route decisions, and receipts unless official Meta documentation exposes lower-level transport hooks.
+=======
+2026-06-23 scope expansion: MGW also owns the contracts, mocks, and tests for the broader Meta glasses I/O surface that Swissknife applications need: camera photo/video capture, microphone input, speaker/headphone output, Meta Neural Band and captouch events, motion/orientation and phone GPS context, and display output. Native DAT remains the phone-app bridge for hardware capabilities, while display Web Apps are a separate supported path for display-glasses inputs. Bluetooth, Wi-Fi, IPFS, libp2p, and MCP++ compatibility must be modeled as explicit app-level bridge envelopes, content-addressed payloads, peer/session identifiers, policy decisions, and receipts unless official Meta documentation exposes lower-level transport hooks.
+>>>>>>> implementation/mgw-029-attempt-1-1782248042
 
 Target workflow:
 
@@ -52,6 +56,7 @@ Meta's May 14, 2026 display developer announcement describes two developer-previ
 
 ### Meta Glasses I/O Research Baseline
 
+<<<<<<< HEAD
 Current public Meta sources broaden MGW beyond display widgets:
 
 - Device Access Toolkit documentation describes access to cameras, microphone/audio, and display for compatible glasses. Camera photo/video capture is exposed through DAT native mobile integration.
@@ -59,6 +64,20 @@ Current public Meta sources broaden MGW beyond display widgets:
 - Web Apps for display glasses expose web-standard rendering plus motion/orientation, phone GPS, Meta Neural Band input, captouch input, and local storage. These inputs should feed normalized Swissknife intent/event descriptors.
 - The Mock Device Kit can support hardware-free testing for some DAT flows, but public docs currently say it does not support display glasses, so MGW must keep independent mocks for display and expanded I/O until Meta's mock coverage catches up.
 - The Android public DAT repository exposes `mwdat-core`, `mwdat-camera`, and `mwdat-mockdevice` modules, which should anchor camera/mock implementation research before native code assumes package availability.
+=======
+MGW-029 checked the current official Meta Wearables FAQ, display developer-preview announcement, Wearables Developer Platform `llms.txt`, Web Apps docs extract, Android DAT repo/changelog/DisplayAccess/CameraAccess guidance, and iOS DAT repo/changelog/DisplayAccess/CameraAccess guidance on 2026-06-23. The detailed discovery record is `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-029-meta-glasses-io-research.md`.
+
+Current public Meta sources broaden MGW beyond display widgets, but split the I/O surface into separate native DAT phone-app and display Web Apps paths:
+
+- Device Access Toolkit documentation describes access to cameras, microphone/audio, and display for compatible glasses. Camera photo/video capture is exposed through DAT native mobile integration.
+- Microphone input is documented as mobile-platform Bluetooth HFP audio at 8 kHz mono, and speaker/headphone playback is documented as platform audio routing to the device, so MGW should model audio as route/capability state rather than assuming raw DAT audio packets.
+- Native DAT display uses Android `mwdat-display` / iOS `MWDATDisplay` in DAT v0.7 with DAM enabled. The lifecycle is registration, display-capable device selection, started `DeviceSession`, attached/started `Display`, then one root FlexBox UI or VideoPlayer per send; each send replaces current content.
+- Web Apps for display glasses expose web-standard rendering plus motion/orientation, phone GPS, Meta Neural Band input, captouch input, and local storage. Web Apps do not support camera, microphone, speaker/headphone audio, notifications, offline mode, text input, back navigation, mouse/touch, or continuous cursor.
+- Meta Neural Band and captouch inputs in Web Apps are delivered as standard Arrow key and Enter events, so they should feed normalized Swissknife intent/event descriptors rather than raw EMG or low-level touch streams.
+- The Mock Device Kit supports hardware-free camera/session/permission flows and v0.7 captouch simulation, but the checked public sources do not confirm full Meta Ray-Ban Display native display mocking. MGW must keep independent mocks for display lifecycle, audio routes, Web App sensors/GPS, Neural Band/captouch, unsupported capability, and bridge envelopes until Meta mock coverage catches up.
+- The Android public DAT repository exposes `mwdat-core`, `mwdat-camera`, and `mwdat-mockdevice` in the README; `mwdat-display` is added by v0.7 display guidance and must remain optional because package credentials and release-channel access are not guaranteed in default builds.
+- Bluetooth, Wi-Fi, IPFS, libp2p, and MCP++ compatibility remains an app-level bridge-envelope concern: capture/render payloads may carry IPFS CIDs, peer/session IDs, policy receipts, backpressure, and latency metadata, but public Meta sources do not expose raw Bluetooth/Wi-Fi hooks that should be described as IPFS/libp2p transports.
+>>>>>>> implementation/mgw-029-attempt-1-1782248042
 
 ### Source Alignment and Version Guardrails
 
@@ -464,6 +483,7 @@ Exit criteria:
 
 ### Phase 10: Expanded Meta Glasses I/O for Swissknife Apps
 
+<<<<<<< HEAD
 - [ ] Research current Meta Wearables DAT, Web Apps, and display developer-preview documentation before implementing hardware assumptions.
 - [ ] Define a Swissknife Meta glasses I/O capability contract for camera, microphone, speakers/headphones, display, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, route state, fallback state, and lifecycle receipts.
 - [ ] Add hardware-free mocks for DAT camera photo/video capture, Bluetooth audio routes, display lifecycle, Neural Band/captouch events, motion/GPS events, permission denial, disconnect, unsupported capability, and degraded route behavior.
@@ -474,11 +494,26 @@ Exit criteria:
 - [ ] Add a Swissknife control-plane router for expanded Meta glasses I/O that maps app-level interaction bindings to ORB/MCP++ tool calls, Hallucinate App policy handoff, app session state, and receipt chains.
 - [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks, bridge envelopes, and control-plane routing.
 - [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities, then verify the expected control-plane handoff.
+=======
+- [ ] Research current Meta Wearables DAT, Web Apps, and display developer-preview documentation before implementing hardware assumptions. MGW-029 recorded the 2026-06-23 official-source baseline in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-029-meta-glasses-io-research.md`; refresh that record before changing native hardware assumptions.
+- [ ] Define a Swissknife Meta glasses I/O capability contract for camera, microphone, speakers/headphones, display, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, route state, fallback state, and lifecycle receipts.
+- [ ] Add hardware-free mocks for DAT camera photo/video capture, Bluetooth audio routes, display lifecycle, Neural Band/captouch events, motion/GPS events, permission denial, disconnect, unsupported capability, and degraded route behavior.
+- [ ] Define Bluetooth/Wi-Fi bridge envelopes that can carry IPFS CIDs, libp2p peer/session identifiers, MCP++ tool/event receipts, policy decisions, and backpressure/latency metadata without pretending the lower-level radio protocol is itself IPFS/libp2p.
+- [ ] Expose camera descriptors to Swissknife applications so apps can request photo/video capture, receive mock/unsupported/ready states, publish content-addressed capture references, and record audit receipts.
+- [ ] Expose microphone and speaker/headphone route descriptors to Swissknife applications with permission/fallback handling, route diagnostics, no raw-audio leakage by default, and MCP++ receipt mapping.
+- [ ] Expose Meta Neural Band, captouch, motion/orientation, and phone GPS inputs as normalized Swissknife event/intent descriptors that Hallucinate App policy can authorize and route.
+- [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks and bridge envelopes.
+- [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities.
+>>>>>>> implementation/mgw-029-attempt-1-1782248042
 
 Exit criteria:
 
 - Swissknife apps can develop against camera, audio, neural/captouch, motion, GPS, and display contracts without physical glasses.
+<<<<<<< HEAD
 - Expanded I/O events and payloads carry explicit policy decisions, receipts, session identity, app binding IDs, control-plane route decisions, and content-addressed references where applicable.
+=======
+- Expanded I/O events and payloads carry explicit policy decisions, receipts, session identity, and content-addressed references where applicable.
+>>>>>>> implementation/mgw-029-attempt-1-1782248042
 - The first physical-device implementation path is gated by official DAT/Web Apps research and can fall back cleanly when hardware, credentials, display APIs, or platform routes are unavailable.
 
 ## Priority Backlog
@@ -527,18 +562,27 @@ Done means an agent can generate a task-progress widget descriptor, the compiler
 
 ## Open Questions
 
-- Which Meta display API surface should be the production renderer for non-video native widgets on Android: a native layout tree, a declarative DAT content model, or a webapp URL?
-- Does iOS expose the same display capability lifecycle as Android in the target SDK version, or should iOS remain webapp/fallback first?
+- Which Meta display API surface should be the production renderer for non-video native widgets on Android: DAT v0.7 FlexBox/Button/Image/Icon content, a display Web App URL, or both behind policy and release-channel gates?
+- Does the target iOS build link `MWDATDisplay` and DAM configuration in the intended release channel, or should iOS remain webapp/fallback first until package access and physical validation are proven?
 - What minimum trust policy should apply to agent-generated descriptors before they can reach a physical display?
 - Should display widgets be stored as task-scoped artifacts only, or should trusted descriptors be reusable app-level capabilities?
 - What maximum text length and update frequency should be enforced for voice-first development workflows?
+- What official DAT or Web Apps API, if any, will expose raw Meta Neural Band gestures beyond Arrow/Enter Web App input and Mock Device Kit captouch simulation?
+- How much local Web Apps storage should MGW descriptors rely on beyond documented 5 MB `localStorage` and 5 MB `sessionStorage` limits before moving payloads into app storage/IPFS references?
 
 ## Source References
 
 - Meta display developer announcement, May 14, 2026: https://developers.meta.com/blog/build-for-display-glasses/
 - Meta Wearables developer FAQ: https://developers.meta.com/wearables/faq/
+<<<<<<< HEAD
+=======
+- Meta Wearables Developer Platform `llms.txt`: https://wearables.developer.meta.com/llms.txt?full=true
+- Meta Wearables Web Apps docs extract: https://wearables.developer.meta.com/llms.txt?full=true&product=webapps
+>>>>>>> implementation/mgw-029-attempt-1-1782248042
 - Meta Wearables DAT Android repository: https://github.com/facebook/meta-wearables-dat-android
 - Meta Wearables DAT Android DisplayAccess sample: https://github.com/facebook/meta-wearables-dat-android/tree/main/samples/DisplayAccess
 - Meta Wearables DAT iOS repository: https://github.com/facebook/meta-wearables-dat-ios
+- Meta Wearables DAT iOS DisplayAccess sample: https://github.com/facebook/meta-wearables-dat-ios/tree/main/samples/DisplayAccess
+- MGW-029 dated discovery record: `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-029-meta-glasses-io-research.md`
 - Existing HandsFree display baseline: `docs/meta-wearables-dat-display-integration.md`
 - Existing Swissknife MCP++ UI plan: `swissknife/docs/mcp-plus-plus/IMPLEMENTATION_PLAN_TODO_QUEUE.md`
