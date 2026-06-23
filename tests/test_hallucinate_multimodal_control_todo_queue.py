@@ -34,6 +34,9 @@ HARDWARE_FREE_OFFLOAD_HARNESS_PATH = (
 LAUNCH_SLICE_REPLAY_RECEIPTS_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-432-launch-slice-replay-receipts.md"
 )
+VAI_MGW_SHARED_EVIDENCE_PACKET_PATH = (
+    DISCOVERY_ROOT / "2026-06-23-hao-434-vai-mgw-shared-evidence-packet.md"
+)
 
 
 def _load_script_module(name: str):
@@ -377,6 +380,95 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
     assert "desktop peer selection is receipt-backed by policy_decision" in launch_invariants
     assert "retry_scheduled, fallback_selected, and cancelled outcomes are replayed in one sequence" in launch_invariants
     assert "Meta glasses status updates use the same recovery receipt IDs as phone and Swissknife renders" in launch_invariants
+
+
+def test_hao_434_launch_replay_receipts_feed_vai_mgw_shared_evidence_packet():
+    source = VAI_MGW_SHARED_EVIDENCE_PACKET_PATH.read_text(encoding="utf-8")
+    idl_source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    packet = _json_block_after(source, "## Shared Evidence Packet Fixture")
+    idl_section_start = idl_source.index("### VAI/MGW shared launch evidence packet")
+    idl_section_end = idl_source.index("### Meta glasses display-widget intent bridge")
+    idl_section = " ".join(idl_source[idl_section_start:idl_section_end].replace("`", "").split())
+
+    for term in (
+        "HAO-434",
+        "VAI/MGW shared launch evidence packet",
+        "mediation, command-intent, peer-offload, recovery, and render receipt IDs",
+        "identical session_id, command_correlation_id, policy_correlation_id, and placement_correlation_id",
+        "VAI launch replay",
+        "MGW glasses-widget launch replay",
+        "must reject the packet",
+    ):
+        assert term in idl_section
+
+    assert packet["task_id"] == "HAO-434"
+    assert packet["artifact_id"] == "vai_mgw_shared_launch_evidence_packet"
+    assert packet["source_replay_artifact"] == "launch_slice_replay_receipts"
+    assert packet["consumed_by"] == [
+        "virtual_ai_os.launch_replay",
+        "meta_glasses_display_widgets.glasses_widget_launch_replay",
+    ]
+
+    correlations = packet["correlation_ids"]
+    assert correlations == {
+        "session_id": "vdsk_hao432_launch_slice",
+        "command_correlation_id": "cmdcorr_hao434_open_monitor",
+        "policy_correlation_id": "polcorr_hao434_open_monitor",
+        "placement_correlation_id": "placecorr_hao434_desktop_peer",
+    }
+
+    emitted = packet["emitted_receipt_ids"]
+    assert emitted["mediation_receipt_id"] == "rcpt_policy_hao432_open_monitor"
+    assert emitted["command_intent_receipt_id"] == "rcpt_cmd_hao432_open_monitor"
+    assert emitted["peer_offload_policy_receipt_id"] == "rcpt_offload_hao432_open_monitor"
+    assert emitted["recovery_receipt_ids"] == [
+        "rcpt_recovery_hao432_retry",
+        "rcpt_recovery_hao432_fallback",
+        "rcpt_recovery_hao432_cancelled",
+    ]
+    assert emitted["render_receipt_ids"] == {
+        "phone:operator": "rcpt_render_hao432_phone",
+        "swissknife:ui": "rcpt_render_hao432_swissknife",
+        "meta_glasses:terminal": "rcpt_render_hao432_glasses",
+    }
+
+    for receipt in packet["hallucinate_app_emitted_receipts"]:
+        assert {
+            key: receipt[key]
+            for key in (
+                "session_id",
+                "command_correlation_id",
+                "policy_correlation_id",
+                "placement_correlation_id",
+            )
+        } == correlations
+
+    vai_replay = packet["vai_launch_replay"]
+    mgw_replay = packet["mgw_glasses_widget_launch_replay"]
+    for replay in (vai_replay, mgw_replay):
+        assert {
+            key: replay[key]
+            for key in (
+                "session_id",
+                "command_correlation_id",
+                "policy_correlation_id",
+                "placement_correlation_id",
+            )
+        } == correlations
+        assert replay["consumed_receipt_ids"] == emitted
+
+    assert vai_replay["launch_replay_id"] == "vai-launch-replay-hao434"
+    assert mgw_replay["launch_replay_id"] == "mgw-glasses-widget-launch-replay-hao434"
+    assert (
+        mgw_replay["display_widget_action"]["orb_receipt_cid"]
+        == emitted["render_receipt_ids"]["meta_glasses:terminal"]
+    )
+    assert packet["assertions"] == [
+        "Hallucinate App emits every receipt ID consumed by VAI and MGW launch replay",
+        "VAI and MGW receive identical session, command, policy, and placement correlation IDs",
+        "recovery receipt IDs remain stable across retry, fallback, and cancel",
+        "the Meta glasses render receipt is the MGW orb_receipt_cid alias, not a separate command authority",
+    ]
 
 
 def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
