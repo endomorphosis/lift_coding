@@ -197,13 +197,15 @@ Evidence:
 - Mobile plus backend already contain Meta DAT display and action-routing primitives.
 - A dedicated simulation plan now exists in `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` for browser-first Meta Ray-Ban interface validation before iPhone handoff.
 - VAI-023 prepared the iPhone native DAT handoff bundle and physical evidence gate in `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`.
+- VAI-017 connects simulator artifacts to the mobile ORB and Web App readiness flow: the VAI-016 browser session export, `dev/meta-rayban-display-simulator/webapp/readiness.json`, and the Web App ORB receipts must be treated as one pre-hardware proof bundle before a glasses-terminal session advances to physical DAT validation.
+- VAI-018 validates native mobile simulation parity against DAT MockDeviceKit assumptions: use MockDeviceKit for device/session/media and pairing-state simulation, but keep the browser/Web App/mobile ORB bundle as the command-capture, display-update, networking, and visual parity source until SDK-linked or physical DAT evidence exists.
 
 ### Residual follow-up after the initial backlog
 
 - Physical-device rollout evidence still has to be collected from real DAT-capable hardware runs; the repo now contains the checklist and fallback contracts, but not the run artifacts themselves.
 - Hallucinate desktop E2E coverage remains the operator-console complement to the backend/mobile hardware-free harnesses and should continue to gather evidence under real packaging/runtime conditions.
 - Canonical standalone `Mcp-Plus-Plus` spec/docs source is pinned; runtime-service discovery should only be revisited if a valid upstream implementation appears with scope that is distinct from the already-reviewed distributed protocol surfaces.
-- The Meta/Ray-Ban simulator track now needs to move from planning into implementation: browser 600x600 rendering, D-pad/focus traces, Web App readiness export, and fixture parity with the mobile DAT bridge.
+- The Meta/Ray-Ban simulator track now needs to continue from the VAI-017 readiness handoff into native parity work: browser 600x600 rendering, D-pad/focus traces, Web App readiness export, mobile ORB proof ingestion, and fixture parity with the mobile DAT bridge.
 - Public Meta evidence reviewed on 2026-05-23 shows developer-preview Web App and DAT testing paths plus Mock Device support, but no verified official native display desktop simulator. Treat our local browser simulator plus DAT mock-device flows as the supported pre-hardware path.
 
 ## Discovery closeout (2026-05-22)
@@ -349,6 +351,10 @@ This runtime is the operating-system scheduler equivalent for the stack.
 - Treat Meta Web Apps browser preview plus DAT Mock Device tooling as the official pre-hardware inputs that we can actually verify today.
 - Build one canonical 600x600 manifest-driven simulator that feeds browser preview, Web App packaging, mobile fixture tests, and DAT-native adapter validation.
 - Keep the simulator bridge-compatible with the current HandsFree mobile ORB/display-widget contracts so simulator traces can become integration-test fixtures instead of throwaway mocks.
+- VAI-017 readiness gate: feed simulator artifacts into both checks before hardware is attached. The mobile ORB check consumes `handsfree.virtual-desktop-session` exports, command envelopes, widget refs, ORB event receipts, service bindings, invocations, and dispatch receipts from the simulator/Web App. The Web App readiness check consumes `readiness.json`, static package inventory, deployment URL, 600x600 viewport, D-pad focus order, contrast metadata, and public HTTPS hosting requirements. A glasses-terminal session is pre-hardware ready only when those two proof streams share the same widget ID, widget CID, descriptor CID, correlation ID, focus order, and fallback render targets.
+- Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-017-simulator-artifacts-mobile-orb-webapp-readiness.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-017-simulator-artifacts-mobile-orb-webapp-readiness.md)
+- VAI-018 native mobile simulation parity gate: compare DAT MockDeviceKit coverage against the current simulator and mobile DAT bridge before physical hardware. Command capture remains proven by simulator/Web App/mobile ORB receipts; display updates remain proven by the 600x600 manifest renderer plus structured DAT bridge result fields; networking remains split across public HTTPS Web App loading, backend ORB reachability, and HTTPS media; device-pairing state is the main MockDeviceKit value and must cover no target, selected, connected, ready, update-required, and reconnect states before native DAT promotion.
+- Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-018-dat-mockdevicekit-native-mobile-parity.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-018-dat-mockdevicekit-native-mobile-parity.md)
 
 ### Workstream E: UI and operator plane
 
