@@ -228,6 +228,8 @@ def test_capability_routing_kernel_promotes_hallucinate_operator_console_plane()
     assert [entry.surface_id for entry in plan.entrypoints] == [
         "hallucinate_app",
         "mobile_glasses",
+        "meta_glasses_audio",
+        "meta_glasses_display",
     ]
     assert plan.entrypoints[0].role == "operator_console"
     assert plan.payload["task_id"] == "VAI-007"
