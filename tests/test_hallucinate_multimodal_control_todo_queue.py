@@ -2074,6 +2074,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     repo = tmp_path / "repo"
     discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "report.md"
     source = repo / "src" / "scan_target.py"
+    literal_source = repo / "tests" / "test_literal_paths.py"
     readme = repo / "README.md"
     mgw_owned_paths = (
         repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md",
@@ -2081,6 +2082,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         repo / "tests" / "test_meta_glasses_display_todo_queue.py",
     )
     source.parent.mkdir(parents=True)
+    literal_source.parent.mkdir(parents=True)
     discovery.parent.mkdir(parents=True)
     todo_path = repo / TEMP_TASK_BOARD_FILENAME
 
@@ -2109,6 +2111,15 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         f"def unresolved():\n    # {fixture_marker}: real source finding\n    return None\n",
         encoding="utf-8",
     )
+    literal_source.write_text(
+        "\n".join(
+            [
+                "MGW_TODO = 'implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md'",
+                "BOARD_PATH = repo / 'implementation_plan' / 'docs' / '18-swissknife-meta-glasses-display-widgets.todo.md'",
+            ]
+        ),
+        encoding="utf-8",
+    )
     discovery.write_text(
         f"# Generated Discovery\n\nThe historical task had `{_captured_pending_status_line()}` in captured evidence.\n",
         encoding="utf-8",
@@ -2129,6 +2140,7 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         "add",
         TEMP_TASK_BOARD_FILENAME,
         "src/scan_target.py",
+        "tests/test_literal_paths.py",
         "data/hallucinate_multimodal_control/discovery/report.md",
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
