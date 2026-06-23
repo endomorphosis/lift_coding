@@ -229,6 +229,50 @@ def test_daemon_selects_launch_task_before_legacy_p0_quality_focus(tmp_path):
     assert selected.task_id == "VAI-338"
 
 
+def test_daemon_skips_janitor_off_mission_task_even_when_it_is_only_ready_task(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    daemon = PortalImplementationDaemon(
+        todo_path=tmp_path / _task_board_filename("strict-deprioritized-selection"),
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+    task = PortalTask(
+        task_id="VAI-199",
+        title="Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032",
+        status=PENDING_TASK_STATUS,
+        completion="",
+        priority="P1",
+        track="runtime",
+    )
+
+    selected = daemon._select_next_task(
+        [task],
+        {"VAI-199": "ready"},
+        {
+            "deprioritized_tasks": ["VAI-199"],
+            "objective_task_janitor_receipts": [
+                {
+                    "action": "deprioritize",
+                    "task_id": "VAI-199",
+                    "retired_task_reason": "off_mission_codebase_scan_task",
+                }
+            ],
+        },
+        {},
+        {},
+    )
+
+    assert selected is None
+
+
 def test_daemon_parser_blocks_header_only_task_records(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
@@ -516,6 +560,8 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--objective-max-interoperability-goals" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "0"
     assert "--no-objective-goal-completion-reconcile" in common_arg_values
+    assert "--objective-task-janitor-max-deprioritized-tasks" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-task-janitor-max-deprioritized-tasks") + 1] == "500"
     assert common_arg_values.count("--objective-mission-term") == len(
         runner_module.VAI_MGW_HAO_LAUNCH_MISSION_TERMS
     )

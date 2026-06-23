@@ -219,6 +219,44 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
     ]
 
 
+def test_objective_task_janitor_deprioritizes_off_mission_worktree_cleanup_backlog():
+    _ObjectiveGoal, PortalTask, schema, reconcile = _imports()
+    tasks = [
+        PortalTask(
+            "VAI-202",
+            "Resolve 15 dirty backlogged worktrees blocked by unsupported_status",
+            "todo",
+            "manual",
+            "P1",
+            "ops",
+            acceptance="Reconciliation guardrail filed this from stale worktree cleanup failures.",
+        )
+    ]
+
+    result = reconcile(
+        goals=[],
+        tasks=tasks,
+        strategy={},
+        now="2026-06-23T00:00:00+00:00",
+        mission_terms=("Meta glasses interface", "Playwright launch replay"),
+    )
+
+    assert result["strategy"]["deprioritized_tasks"] == ["VAI-202"]
+    assert result["strategy"]["objective_task_janitor_receipts"] == [
+        {
+            "schema": schema,
+            "recorded_at": "2026-06-23T00:00:00+00:00",
+            "task_id": "VAI-202",
+            "action": "deprioritize",
+            "retired_task_reason": "off_mission_worktree_cleanup_task",
+            "goal_ids": [],
+            "title": "Resolve 15 dirty backlogged worktrees blocked by unsupported_status",
+            "priority": "P1",
+            "track": "ops",
+        }
+    ]
+
+
 def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
