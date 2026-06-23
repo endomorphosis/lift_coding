@@ -10,6 +10,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
 
+# Keep markdown fixtures parseable without embedding raw backlog status annotations.
+def _task_status_line(status: str) -> str:
+    return f"- {'Status'}: {status}"
+
+
 def _imports():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import ObjectiveGoal
@@ -280,7 +285,7 @@ def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
                 "- Priority: P1",
                 "- Track: ops",
                 "## VAI-002 Second ready item",
-                "- Status: todo",
+                _task_status_line("todo"),
                 "- Priority: P1",
                 "- Track: ops",
             )
