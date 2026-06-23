@@ -290,7 +290,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-025 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
