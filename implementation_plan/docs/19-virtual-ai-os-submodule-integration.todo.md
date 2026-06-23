@@ -1839,3 +1839,25 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-341-vai-052-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-052. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-341-vai-052-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-052 from strategy blocked_tasks.
+
+## VAI-342 Resolve implementation retry-budget failure for VAI-141
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py, data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-342-vai-141-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-141. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-342-vai-141-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-141 from strategy blocked_tasks.
+
+## VAI-343 Resolve implementation retry-budget failure for VAI-142
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py, data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-343-vai-142-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-142. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-343-vai-142-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-142 from strategy blocked_tasks.
