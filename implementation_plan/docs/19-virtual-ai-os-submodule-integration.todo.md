@@ -2196,7 +2196,7 @@ cadence remains parseable and resumable.
 
 ## VAI-373 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:114
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
