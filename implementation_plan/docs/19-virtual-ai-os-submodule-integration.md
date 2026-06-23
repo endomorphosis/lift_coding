@@ -426,6 +426,50 @@ VAI-008 validation evidence:
   records the reviewed device-plane evidence and dependency handoff from
   VAI-003, VAI-004, VAI-006, and VAI-007.
 
+#### VAI-022 Browser Web App Package for HTTPS Glasses Loading
+
+The glasses-accessible browser Web App is the static package at
+`dev/meta-rayban-display-simulator/webapp/`. It is the required HTTPS glasses
+loading path before native iPhone DAT display rollout. The package is
+self-contained and must remain copy-deployable to a static host without a build
+step:
+
+- `index.html` is the fixed 600x600 entrypoint for the Meta display viewport.
+- `manifest.webmanifest` declares fullscreen display mode and PNG icons,
+  including the 52x52 minimum icon used by the glasses Web App surface.
+- `app.js` owns D-pad focus, Enter activation, and local ORB event persistence.
+- `readiness.json` is the deployment contract and linter input for public
+  hosting, manifest metadata, widget IDs, focus order, and the final
+  `deployment_url`.
+
+Required HTTPS loading modes:
+
+- Local development mode: serve the directory from localhost for simulator and
+  desktop browser checks only. This mode may validate layout, focus order,
+  readiness metadata, and fixture parity, but it is not glasses-loadable unless
+  exposed through a public HTTPS URL.
+- Phone-hosted mode: keep the phone as the mobile session host from VAI-008 and
+  open the hosted Web App through the Meta AI app Web Apps connection. The
+  phone carries pairing, audio routing, command session state, and fallback to
+  mobile-card rendering; the glasses load only the HTTPS Web App URL registered
+  from `readiness.json`.
+- Desktop-hosted mode: serve the same static package from a desktop-controlled
+  public HTTPS origin such as GitHub Pages, Netlify, Vercel, or an approved
+  tunnel fronted by a trusted certificate. The desktop may own operator console
+  and offload state, but glasses loading still targets the hosted Web App URL
+  and must keep VAI-008 terminal constraints and mobile fallback semantics.
+
+Operational contract:
+
+- Private IPs, unauthenticated local LAN URLs, and plain HTTP are acceptable for
+  developer preview only and must not be used as the final glasses loading URL.
+- The deployed `index.html`, `manifest.webmanifest`, `readiness.json`, icons,
+  CSS, and JS must return HTTP 200 without authentication.
+- `readiness.json.deployment_url` must be updated to the exact HTTPS URL used
+  for glasses registration before collecting physical run evidence.
+- Browser packaging evidence is recorded in
+  `data/virtual_ai_os/discovery/2026-06-23-vai-022-browser-web-app-https-loading.md`.
+
 ### Workstream G: Full-stack test and rollout discipline
 
 Build a layered test matrix:
