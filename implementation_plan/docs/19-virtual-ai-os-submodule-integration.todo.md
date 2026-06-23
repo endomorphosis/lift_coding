@@ -2020,7 +2020,7 @@ cadence remains parseable and resumable.
 
 ## VAI-357 Review swallowed exception path in src/handsfree/agents/runner.py:111
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
