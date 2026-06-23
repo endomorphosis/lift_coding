@@ -117,7 +117,7 @@ cadence remains parseable and resumable.
 
 ## VAI-008 Route Meta glasses audio and display as remote terminal endpoints
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: device
