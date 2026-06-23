@@ -690,7 +690,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G693 Shared launch evidence packet
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G689
 - Fib priority: 1
 - Track: launch
@@ -707,10 +707,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py -q
 - Refinement: Split only if the shared packet needs a separate proof for capability, mediation, placement, recovery, or render receipts.
 - Gap task: Connect the completed launch slice into one cross-board evidence packet that the supervisor can validate before physical-device rehearsal.
+- Completed at: 2026-06-23T13:16:26.749131+00:00
+- Completion evidence: VAI-338 launch alignment map => implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.43), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.48), mobile/push/examples/expo_receive_handler.ts (ast); HAO-434 launch replay receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); MGW-272 glasses launch capability receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completion validation: 0
 
 ## VAIOS-G694 Phone-hosted physical rehearsal inputs
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G693
 - Fib priority: 1
 - Track: launch
@@ -727,10 +730,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "physical-device rehearsal|phone-hosted|Swissknife|Hallucinate App|Meta glasses|receipt" implementation_plan/docs data
 - Refinement: Split only if phone pairing, native DAT, Web App fallback, or manual evidence capture needs a distinct blocker task.
 - Gap task: Prepare the phone-side physical rehearsal inputs without requiring hardware in the autonomous run.
+- Completed at: 2026-06-23T13:16:26.749131+00:00
+- Completion evidence: VAI-023 iPhone native DAT handoff => docs/meta-wearables-dat-display-physical-validation-checklist.md (embedding:0.43), docs/meta-wearables-dat-display-rollout-evidence-template.md (embedding:0.41), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact); VAI-338 launch alignment map => implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.43), implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.48), mobile/push/examples/expo_receive_handler.ts (ast); MGW-273 physical-device rehearsal packet => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completion validation: 0
 
 ## VAIOS-G695 Desktop-peer offload recovery rehearsal
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G693
 - Fib priority: 1
 - Track: launch
@@ -747,10 +753,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_hallucinate_multimodal_control_todo_queue.py -q
 - Refinement: Split only if a recovery outcome lacks deterministic replay coverage.
 - Gap task: Prove desktop offload failure handling is launch-ready instead of optimistic-only.
+- Completed at: 2026-06-23T13:16:26.749131+00:00
+- Completion evidence: HAO-435 operator recovery rehearsal => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); VAI-339 launch replay gate => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); HAO-432 launch-slice replay receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completion validation: 0
 
 ## VAIOS-G696 Meta glasses physical terminal handoff
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G693
 - Fib priority: 1
 - Track: launch
@@ -767,3 +776,6 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: rg -n "Meta glasses|physical-device rehearsal|phone interface|desktop peer|display fallback|receipt" implementation_plan/docs data
 - Refinement: Split only if pairing, display fallback, or manual receipt inspection blocks the first hardware run.
 - Gap task: Prepare the Meta glasses handoff path for physical validation without inventing a second command surface.
+- Completed at: 2026-06-23T13:16:26.749131+00:00
+- Completion evidence: MGW-273 physical-device rehearsal packet => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); VAI-012 physical-device readiness => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); VAI-339 launch replay gate => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completion validation: 0
