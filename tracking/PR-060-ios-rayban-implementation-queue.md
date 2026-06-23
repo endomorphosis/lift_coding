@@ -1,22 +1,22 @@
 # PR-060: iOS + Ray-Ban Meta implementation queue (docs-only)
 
 ## Goal
-Create a single, ordered implementation queue for **iOS + Ray-Ban Meta MVP1** so we can execute work in the right dependency order.
+Create a single, ordered implementation queue for **iOS + Ray-Ban Meta MVP1** so the team can execute work in the right dependency order.
 
 This is docs-only, and is meant to drive subsequent implementation PRs.
 
 ## Why
-We already have a lot of mobile/glasses work tracked across multiple PRs. The missing piece is a crisp "do these in this order" plan with clear gates:
+We have many related mobile/glasses PRs. The missing piece is a crisp "do these in this order" plan with clear gates:
 - what unlocks the first end-to-end demo
 - what can be deferred
 - what to verify after each step
 
 ## Scope
 - Add a doc that lists:
-  - the recommended PR execution order
+  - recommended PR execution order
   - dependency edges (backend vs mobile vs infra)
   - demo gates: MVP1-ready, MVP2-ready, MVP3-ready, MVP4-ready
-  - the minimum smoke test for each stage
+  - minimum smoke test for each stage
 
 ## Non-goals
 - Implementing any mobile or backend features.
@@ -25,9 +25,9 @@ We already have a lot of mobile/glasses work tracked across multiple PRs. The mi
 - `docs/ios-rayban-implementation-queue.md`
 
 ## Acceptance criteria
-- The queue is explicit and executable by a dev team.
+- Queue is explicit and executable.
 - Each step has a verification checklist.
-- The queue references existing tracking PRs instead of duplicating their content.
+- References existing tracking PRs instead of duplicating.
 
 ## Related tracking PRs
 - PR-029 (client integration contract)
