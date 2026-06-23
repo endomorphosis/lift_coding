@@ -182,7 +182,7 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
         PortalTask(
             "MGW-027",
             "Resolve code annotation in swissknife/meta_glasses_overlay.ts:44",
-            "todo",
+            "ready",
             "manual",
             "P1",
             "runtime",
