@@ -13,6 +13,73 @@ from .models import (
     CapabilityExecutionMode,
 )
 
+_GLASSES_WIDGET_COMMAND_ENVELOPE_FIELDS = (
+    "capability_id",
+    "command_id",
+    "session_id",
+    "desktop_id",
+    "phone_host_id",
+    "widget_kind",
+    "descriptor_cid",
+    "manifest_cid",
+    "correlation_id",
+    "operator_id",
+    "action",
+    "payload",
+    "policy",
+    "placement",
+    "fallback",
+)
+
+_GLASSES_WIDGET_RECEIPT_FIELDS = (
+    "capability_receipt_cid",
+    "orb_receipt_cid",
+    "bridge_receipt_cid",
+    "policy_receipt_cid",
+    "placement_receipt_cid",
+    "transfer_receipt_cid",
+    "fallback_receipt_cid",
+    "validation_receipt_cid",
+    "render_result",
+)
+
+_GLASSES_WIDGET_SURFACES = (
+    "swissknife_orb",
+    "hallucinate_app",
+    "mobile_glasses",
+    "meta_glasses_display",
+)
+
+_GLASSES_WIDGET_FALLBACK_RENDER_PATHS = (
+    "mobile-card",
+    "display_webapp",
+    "simulator",
+)
+
+_GLASSES_WIDGET_INTEGRATION_TESTS = (
+    "tests/test_virtual_ai_os_capability_registry.py",
+    "tests/test_meta_glasses_display_todo_queue.py",
+)
+
+_GLASSES_WIDGET_ACTIONS = {
+    "render": (
+        "Render Glasses Widget",
+        "Create or replace the current handsfree.virtual-desktop-session manifest.",
+    ),
+    "update": (
+        "Update Glasses Widget",
+        "Apply a bounded state patch to the active virtual desktop session widget.",
+    ),
+    "confirm": (
+        "Confirm Glasses Widget Action",
+        "Submit a policy-approved confirmation action from the widget prompt surface.",
+    ),
+    "cancel": (
+        "Cancel Glasses Widget Action",
+        "Cancel the active widget action, offload transfer, or virtual desktop command.",
+    ),
+}
+
 
 _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
     "embedding": AICapabilityRegistryEntry(
@@ -268,6 +335,64 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("device_render_transport", "meta_glasses.render_transport"),
     ),
+    **{
+        f"vai.glasses_widget.{action}": AICapabilityRegistryEntry(
+            capability_id=f"vai.glasses_widget.{action}",
+            owner_repo="handsfree/mobile",
+            provider_name="handsfree_mobile_display_widget",
+            server_family="meta_glasses_mobile_orb",
+            title=title,
+            description=(
+                f"{description} Swissknife ORB, HandsFree mobile, Meta glasses, "
+                "and Hallucinate App share one receipt-backed command envelope."
+            ),
+            execution_modes=(
+                CapabilityExecutionMode.ORCHESTRATED,
+                CapabilityExecutionMode.MCP_REMOTE,
+            ),
+            default_execution_mode=CapabilityExecutionMode.ORCHESTRATED,
+            fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+            confirmation_policy=(
+                CapabilityConfirmationPolicy.REQUIRE_CONFIRMATION
+                if action == "confirm"
+                else CapabilityConfirmationPolicy.SAFE_WRITE
+            ),
+            input_schema_ref=f"handsfree.capability.vai.glasses_widget.{action}.input",
+            result_schema_ref=f"handsfree.capability.vai.glasses_widget.{action}.result",
+            voice_formatter=(
+                f"handsfree.ai.formatters:format_glasses_widget_{action}_summary"
+            ),
+            follow_up_action_builder=(
+                f"handsfree.ai.follow_up_actions:build_glasses_widget_{action}_actions"
+            ),
+            artifact_output=(
+                "capability_receipt_cid",
+                "manifest_cid",
+                "bridge_receipt_cid",
+                "render_result",
+            ),
+            display_summary_fields=(
+                "summary",
+                "render_result",
+                "fallback.render_path",
+                "capability_receipt_cid",
+            ),
+            voice_display_summary_formatter_ref=(
+                "handsfree.capability_summaries:format_glasses_widget"
+            ),
+            integration_test_ids=_GLASSES_WIDGET_INTEGRATION_TESTS,
+            legacy_capability_ids=(
+                f"vai.glasses_widget.{action}",
+                f"handsfree.mobile_display_widget.{action}",
+                f"meta_glasses.widget.{action}",
+            ),
+            command_envelope_fields=_GLASSES_WIDGET_COMMAND_ENVELOPE_FIELDS,
+            receipt_fields=_GLASSES_WIDGET_RECEIPT_FIELDS,
+            supported_surface_ids=_GLASSES_WIDGET_SURFACES,
+            fallback_render_paths=_GLASSES_WIDGET_FALLBACK_RENDER_PATHS,
+        )
+        for action, (title, description) in _GLASSES_WIDGET_ACTIONS.items()
+    },
 }
 
 _ALIASES = {
@@ -359,6 +484,10 @@ def build_virtual_ai_os_execution_matrix() -> list[dict[str, object]]:
                 "result_schema_ref": entry.result_schema_ref,
                 "voice_formatter": entry.voice_formatter,
                 "follow_up_action_builder": entry.follow_up_action_builder,
+                "command_envelope_fields": entry.command_envelope_fields,
+                "receipt_fields": entry.receipt_fields,
+                "supported_surface_ids": entry.supported_surface_ids,
+                "fallback_render_paths": entry.fallback_render_paths,
                 "mcp_capability_registered": mcp_descriptor is not None,
             }
         )

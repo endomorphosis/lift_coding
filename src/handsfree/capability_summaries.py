@@ -76,6 +76,16 @@ def format_device_render_transport(result: Mapping[str, Any]) -> str:
     return _join_summary("Device render transport", edge_id, status)
 
 
+def format_glasses_widget(result: Mapping[str, Any]) -> str:
+    """Summarize Meta glasses widget command results."""
+    summary = _first_text(result, "summary")
+    if summary:
+        return summary
+    render_result = _first_text(result, "render_result", "status")
+    receipt_cid = _first_text(result, "capability_receipt_cid", "receipt_ref")
+    return _join_summary("Glasses widget", render_result, receipt_cid)
+
+
 def _format_status_summary(result: Mapping[str, Any], fallback: str) -> str:
     summary = _first_text(result, "summary")
     if summary:
@@ -107,6 +117,7 @@ __all__ = [
     "format_dataset_discovery",
     "format_device_render_transport",
     "format_embedding",
+    "format_glasses_widget",
     "format_ipfs_pin",
     "format_llm_generation",
     "format_storage",

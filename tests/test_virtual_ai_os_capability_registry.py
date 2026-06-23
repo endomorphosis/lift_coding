@@ -4,10 +4,12 @@ from importlib import import_module
 
 from handsfree.ai import (
     CapabilityExecutionMode,
+    CapabilityRuntimeSurface,
     build_virtual_ai_os_execution_matrix,
     build_virtual_ai_os_result_envelope,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
+    resolve_virtual_ai_os_runtime_route,
     resolve_virtual_ai_os_execution_mode,
 )
 from handsfree.capability_registry import (
@@ -29,6 +31,10 @@ def test_virtual_ai_os_registry_exposes_initial_capability_set():
         "llm_generation",
         "storage",
         "ui_render_session",
+        "vai.glasses_widget.cancel",
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.render",
+        "vai.glasses_widget.update",
         "workflow",
     ]
 
@@ -81,6 +87,15 @@ def test_virtual_ai_os_registry_covers_plan_initial_families():
         "summary",
         "surface",
         "render_session_id",
+    )
+    assert capabilities["vai.glasses_widget.render"].owner_repo == "handsfree/mobile"
+    assert (
+        capabilities["vai.glasses_widget.render"].provider_name
+        == "handsfree_mobile_display_widget"
+    )
+    assert (
+        capabilities["vai.glasses_widget.render"].server_family
+        == "meta_glasses_mobile_orb"
     )
 
 
@@ -209,8 +224,89 @@ def test_top_level_capability_registry_path_resolves_stable_ids():
         "llm_generation",
         "storage",
         "ui_render_session",
+        "vai.glasses_widget.cancel",
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.render",
+        "vai.glasses_widget.update",
         "workflow",
     ]
+
+
+def test_meta_glasses_widget_actions_use_shared_vai_capability_envelope():
+    expected_ids = {
+        "vai.glasses_widget.render",
+        "vai.glasses_widget.update",
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.cancel",
+    }
+    capabilities = {entry.capability_id: entry for entry in list_virtual_ai_os_capabilities()}
+
+    assert expected_ids.issubset(capabilities)
+    for capability_id in expected_ids:
+        entry = capabilities[capability_id]
+        assert entry.default_execution_mode == CapabilityExecutionMode.ORCHESTRATED
+        assert entry.fallback_execution_mode == CapabilityExecutionMode.MCP_REMOTE
+        assert entry.command_envelope_fields == (
+            "capability_id",
+            "command_id",
+            "session_id",
+            "desktop_id",
+            "phone_host_id",
+            "widget_kind",
+            "descriptor_cid",
+            "manifest_cid",
+            "correlation_id",
+            "operator_id",
+            "action",
+            "payload",
+            "policy",
+            "placement",
+            "fallback",
+        )
+        assert {
+            "capability_receipt_cid",
+            "policy_receipt_cid",
+            "placement_receipt_cid",
+            "render_result",
+        }.issubset(entry.receipt_fields)
+        assert entry.supported_surface_ids == (
+            "swissknife_orb",
+            "hallucinate_app",
+            "mobile_glasses",
+            "meta_glasses_display",
+        )
+        assert entry.fallback_render_paths == (
+            "mobile-card",
+            "display_webapp",
+            "simulator",
+        )
+        assert "tests/test_meta_glasses_display_todo_queue.py" in entry.integration_test_ids
+
+    assert (
+        capabilities["vai.glasses_widget.confirm"].confirmation_policy.value
+        == "require_confirmation"
+    )
+
+
+def test_meta_glasses_widget_actions_resolve_required_runtime_surfaces():
+    default_route = resolve_virtual_ai_os_runtime_route("vai.glasses_widget.render")
+
+    assert default_route.runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED
+    assert default_route.placement_target == "handsfree/mobile"
+    assert "capability_receipt_required" in default_route.placement_constraints
+
+    orb_route = resolve_virtual_ai_os_runtime_route(
+        "vai.glasses_widget.render",
+        requested_mode=CapabilityExecutionMode.MCP_REMOTE,
+        preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+    )
+    assert orb_route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+
+    app_route = resolve_virtual_ai_os_runtime_route(
+        "vai.glasses_widget.confirm",
+        preferred_surface=CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
+    assert app_route.runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP
 
 
 def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():

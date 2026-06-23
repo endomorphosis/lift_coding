@@ -110,6 +110,10 @@ class AICapabilityRegistryEntry:
     voice_display_summary_formatter_ref: str | None = None
     integration_test_ids: tuple[str, ...] = ()
     legacy_capability_ids: tuple[str, ...] = ()
+    command_envelope_fields: tuple[str, ...] = ()
+    receipt_fields: tuple[str, ...] = ()
+    supported_surface_ids: tuple[str, ...] = ()
+    fallback_render_paths: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

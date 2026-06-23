@@ -257,6 +257,12 @@ Registry behavior:
 - Hallucinate App reads and submits the same command envelope when it renders the virtual desktop session or operator confirmation on the desktop console.
 - Meta glasses display actions are constrained terminal actions; they never bypass policy receipts, placement receipts, or the shared `capability_receipt_cid`.
 
+VAI-337 implementation status:
+
+- The shared HandsFree capability registry now registers `vai.glasses_widget.render`, `vai.glasses_widget.update`, `vai.glasses_widget.confirm`, and `vai.glasses_widget.cancel` as canonical VAI capabilities.
+- Each registry entry carries the command envelope fields, receipt bundle fields, supported surfaces, and fallback render paths required by MGW-268.
+- Runtime placement resolves the default path through HandsFree mobile daemon mediation, with MCP fallback available for Swissknife ORB and Hallucinate App operator-console dispatch.
+
 MGW-270 launch-session replay evidence:
 
 - The deterministic hardware-free replay fixture is `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-267-phone-glasses-terminal-fixture.json`; schema `1.1.0` extends the MGW-267 replay instead of creating a second contract.
