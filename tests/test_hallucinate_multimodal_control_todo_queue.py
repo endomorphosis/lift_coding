@@ -146,6 +146,45 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert tasks["HAO-431"].track == "integration"
 
 
+def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    expected = {
+        "HAO-437": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "physical-phone-ingress",
+            "missing": "physical phone ingress rehearsal receipt",
+        },
+        "HAO-438": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "desktop-peer-smoke",
+            "missing": "desktop peer offload smoke receipt",
+        },
+        "HAO-439": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "meta-glasses-terminal",
+            "missing": "Meta glasses terminal receipt capture",
+        },
+        "HAO-440": {
+            "depends_on": ["HAO-437", "HAO-438", "HAO-439"],
+            "parallel_lane": "launch-readiness-aggregate",
+            "missing": "aggregate physical readiness receipt and Playwright lineage",
+        },
+    }
+
+    assert tasks["HAO-436"].status == "completed"
+    for task_id, values in expected.items():
+        task = tasks[task_id]
+        assert task.status == PENDING_TASK_STATUS
+        assert task.priority == "P0"
+        assert task.track == "launch"
+        assert task.depends_on == values["depends_on"]
+        assert task.metadata["goal id"] == "VAIOS-G697"
+        assert task.metadata["graph parents"] == "VAIOS-G697"
+        assert task.metadata["parallel lane"] == values["parallel_lane"]
+        assert task.metadata["missing evidence"] == values["missing"]
+        assert task.metadata["bundle"] == "objective/launch/production-readiness-gate"
+
+
 def test_hallucinate_codebase_scan_skips_objective_heap_as_source_annotations():
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
 
