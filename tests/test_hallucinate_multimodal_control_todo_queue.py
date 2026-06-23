@@ -92,6 +92,17 @@ def test_hallucinate_multimodal_queue_test_source_is_scan_clean():
     assert scan_findings_in_file(Path(__file__), repo_root=REPO_ROOT) == []
 
 
+def test_hallucinate_multimodal_queue_blocks_archival_codebase_scan_tasks():
+    open_archive_tasks = [
+        task.task_id
+        for task in _load_tasks()
+        if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
+        and "external/ipfs_kit/archive/" in " ".join([task.title, task.acceptance, *task.outputs])
+    ]
+
+    assert open_archive_tasks == []
+
+
 def _git(cwd: Path, *args: str) -> str:
     result = subprocess.run(
         ["git", *args],
