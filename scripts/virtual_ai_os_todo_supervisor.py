@@ -93,9 +93,21 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/backup/",
     ),
 )
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+CODEBASE_SCAN_SKIP_PREFIXES = (
+    # Skip supervisor/daemon scripts themselves: they reference .todo.md paths by
+    # design, which triggers false-positive annotated_followup findings.
+    "scripts/",
+    "data/virtual_ai_os/discovery/",
+    "data/virtual_ai_os/objective_bundles/",
+    "data/virtual_ai_os/objective_datasets/",
+    "data/virtual_ai_os/state/",
+    "data/virtual_ai_os/worktrees/",
+    "data/hallucinate_multimodal_control/discovery/",
+    "data/hallucinate_multimodal_control/state/",
+    "data/hallucinate_multimodal_control/worktrees/",
+    "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
