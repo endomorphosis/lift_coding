@@ -21,15 +21,16 @@ switched to the capabilities tab but did not actually filter the list.
 
 The TODO was replaced with a concrete implementation. The handler now:
 
-1. Sets `this.principalFilter` to the selected principal's DID before switching
-   tabs, so `_renderCapabilities()` applies the filter when it runs.
-2. Calls `this._renderCapabilities()` after the tab switch to refresh the view
-   with only the capabilities belonging to that principal.
-3. A descriptive inline comment replaces the TODO to explain the intent.
+1. Sets `this.principalFilter` to the selected principal's DID.
+2. Clears `this.contentFilter` so content-scoped selections do not hide
+   capabilities when the user asks to view all capabilities for a principal.
+3. Switches to the capabilities tab and calls `this._renderCapabilities()` to
+   refresh the view with only the capabilities belonging to that principal.
+4. A descriptive inline comment replaces the TODO to explain the intent.
 
-The `principalFilter` property is already initialized to `null` in the
-constructor and cleared in `_resetFilters`, so the filter lifecycle is
-consistent with the rest of the component.
+The `principalFilter` property is initialized to `null` in the constructor and
+cleared when the user switches away from the capabilities tab, so the filter
+lifecycle is consistent with the rest of the component.
 
 ## Validation
 
