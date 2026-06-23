@@ -698,3 +698,47 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:114. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-395-codebase-scan-04bfc0065834.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-396 Resolve code annotation in tests/test_agent_runner.py:441
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_agent_runner.py
+- Validation: python3 -m py_compile tests/test_agent_runner.py
+- Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:441. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-396-codebase-scan-fbeb6b584d7c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-397 Resolve code annotation in tests/test_implementation_daemon_merge_lock_retry.py:121
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_implementation_daemon_merge_lock_retry.py
+- Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
+- Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:121. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-397-codebase-scan-76cb4c034940.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-398 Resolve code annotation in tests/test_meta_glasses_display_todo_queue.py:106
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_meta_glasses_display_todo_queue.py
+- Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:106. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-398-codebase-scan-66cf63fffa8e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-399 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:49
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
+- Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
+- Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:49. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-399-codebase-scan-7359bf5ddb37.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
