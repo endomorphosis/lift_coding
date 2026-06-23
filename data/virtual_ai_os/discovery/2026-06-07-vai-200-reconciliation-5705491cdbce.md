@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 1c1e2f08924b7439e0bb7b9229ed174d61ba85fe
+Fingerprint: 957c3dac62269358ec05526e9f3df34c3baa0319
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 1
@@ -10,22 +10,26 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` m external/ipfs_accelerate`
+- ` M tests/test_virtual_ai_os_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `modified=1, other_dirty=1`
 - Status paths:
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `external/ipfs_accelerate`
+  - `tests/test_virtual_ai_os_todo_queue.py`
 - Name status:
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	external/ipfs_accelerate`
+  - `M	tests/test_virtual_ai_os_todo_queue.py`
 - Diff stat:
-  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
-  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
+  - `external/ipfs_accelerate               |  0`
+  - ` tests/test_virtual_ai_os_todo_queue.py | 17 ++++++++++++++++-`
+  - ` 2 files changed, 16 insertions(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
-- `implementation/vai-009-attempt-1-1782220249` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1782220249`
+- `rescue/worktree/implementation-vai-021-attempt-2-1782221461-bd29abce34d7` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-021-attempt-2-1782221461`
 
 ## Why This Blocks Progress
 
@@ -89,19 +93,22 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "1c1e2f08924b7439e0bb7b9229ed174d61ba85fe",
+  "fingerprint": "957c3dac62269358ec05526e9f3df34c3baa0319",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "external/ipfs_accelerate               |  0\n tests/test_virtual_ai_os_todo_queue.py | 17 ++++++++++++++++-\n 2 files changed, 16 insertions(+), 1 deletion(-)",
+    "name_status": "M\texternal/ipfs_accelerate\nM\ttests/test_virtual_ai_os_todo_queue.py",
     "path_categories": {
-      "modified": 1
+      "modified": 1,
+      "other_dirty": 1
     },
     "status_paths": [
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "external/ipfs_accelerate",
+      "tests/test_virtual_ai_os_todo_queue.py"
     ],
     "status_short": [
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " m external/ipfs_accelerate",
+      " M tests/test_virtual_ai_os_todo_queue.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -111,14 +118,15 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-009-attempt-1-1782220249"
+    "rescue/worktree/implementation-vai-021-attempt-2-1782221461-bd29abce34d7"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "external/ipfs_accelerate",
+    "tests/test_virtual_ai_os_todo_queue.py"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1782220249"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-021-attempt-2-1782221461"
   ],
   "success_signals": [
     "candidate_count_decreases",
