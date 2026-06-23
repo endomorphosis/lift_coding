@@ -6,8 +6,8 @@ Source finding: `implementation_plan/docs/18-swissknife-meta-glasses-display-wid
 The scan excerpt pointed at the literal machine-readable board filename in the
 human-facing Meta glasses display widget plan. Reviewing the surrounding plan,
 the mirrored board, and the HAO scanner showed that this was a false positive:
-the board filename is intentional, but the broad annotation scan matched the
-task-board suffix as though it were an unresolved prose annotation.
+the board filename is intentional, but the broad annotation scan matched its
+final extension segment as though it were an unresolved prose annotation.
 
 Resolution:
 
