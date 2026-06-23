@@ -11,6 +11,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Gate class term: `LaunchReadinessGate`
 - Receipt packet: `data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md`
 - HAO backlog packet: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md`
+- Physical phone ingress receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-437-phone-ingress-rehearsal.md`
 - Desktop-peer smoke receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-438-desktop-peer-offload-smoke.md`
 - MGW supervisor packet: `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md`
 - Backlog bridge: `HAO-436` / `MGW-274` / `VAI-340` for `VAIOS-G697`
@@ -23,7 +24,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 
 | Hop | Launch evidence |
 | --- | --- |
-| Phone-originated command | VAI-339 replay keeps the shared capability envelope, request id, command id, session id, and receipt lineage in one evidence packet. |
+| Phone-originated command | HAO-437 adds the real phone ingress rehearsal receipt: a physical `phone:operator` UI event enters Hallucinate App as an `interaction_envelope`, preserves `session_id`, `correlation_id`, and `request_id`, blocks `desktop:peer` and `phone_local` dispatch until `mediation_receipt` and `policy_receipt_id` exist, and records fail-closed recovery when the physical adapter is absent. |
 | Hallucinate App mediation | `hallucinate_app/test/e2e/multimodal-control-surface.spec.ts` exercises voice, gesture, mouse, agent, and remote Meta glasses clients through `policy_decision` and `mediation_receipt`. |
 | Swissknife virtual desktop | `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` opens every Swissknife desktop app and writes a reusable Meta glasses ORB template report. |
 | Desktop-peer offload | HAO-438 adds a desktop-peer offload smoke receipt: a phone-originated command selects `desktop:peer`, records capability and runtime health, emits `peer_offload_policy_receipt`, then recovers to `phone_local` with the same session, command, policy, and placement IDs when the peer is unavailable. |
@@ -78,6 +79,22 @@ The `phone_local` fallback preserves the same `session_id`,
 and `peer_offload_policy_receipt_id`. Desktop peers may report capability,
 runtime health, and transport failure; they do not own policy, fallback, retry,
 or cancellation decisions.
+
+## Real Phone Ingress Rehearsal
+
+`HAO-437` supplies the real phone ingress rehearsal receipt required by the
+VAIOS-G697 physical-readiness split:
+`data/hallucinate_multimodal_control/discovery/2026-06-23-hao-437-phone-ingress-rehearsal.md`.
+The receipt starts from physical `phone:operator` input and records the adapter
+receipt before Hallucinate App builds the `interaction_envelope`.
+
+The same `session_id`, `correlation_id`, and `request_id` are preserved through
+`mediation_receipt`, `policy_receipt_id`, and `virtual_desktop_command_intent`.
+The dispatch gate explicitly blocks `desktop:peer` and `phone_local` until both
+the mediation receipt and policy receipt exist. When the physical phone adapter
+is absent, the recovery receipt is `fail_closed`, has no `policy_receipt_id`,
+sets `dispatch_allowed: false`, and records that no local or desktop runtime
+dispatch occurred.
 
 ## Split Policy
 
