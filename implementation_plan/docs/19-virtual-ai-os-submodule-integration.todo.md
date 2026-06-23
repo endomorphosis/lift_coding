@@ -1146,7 +1146,7 @@ cadence remains parseable and resumable.
 
 ## VAI-155 Resolve implementation retry-budget failure for VAI-154
 
-- Status: blocked
+- Status: completed
 - Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
@@ -1158,7 +1158,7 @@ cadence remains parseable and resumable.
 
 ## VAI-156 Resolve implementation retry-budget failure for VAI-155
 
-- Status: blocked
+- Status: completed
 - Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
@@ -1170,7 +1170,7 @@ cadence remains parseable and resumable.
 
 ## VAI-157 Resolve implementation retry-budget failure for VAI-156
 
-- Status: blocked
+- Status: completed
 - Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
@@ -1682,18 +1682,18 @@ cadence remains parseable and resumable.
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md
 - Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-203 Resolve 15 preflight-conflicting backlogged worktree merges
+## VAI-203 Resolve 1 preflight-conflicting backlogged worktree merges
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 19f9d53ba349afd9620566c87d1e062cb819943b
+- Fingerprint: dbf4c7aa1516738acdc4d0255ac64f6933c20997
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
-- Acceptance: Reconciliation guardrail filed this because 46 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-204 Resolve dependency guardrail for VAI-200
 
@@ -1827,3 +1827,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md, docs/launch/phone_desktop_glasses_readiness.md, tests/test_virtual_ai_os_launch_readiness_gate.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 - Acceptance: Keep the production launch gate open until explicit `launch_readiness_receipt_v1`, `LaunchReadinessGate`, phone/desktop/glasses readiness doc, Swissknife Playwright replay, and Hallucinate App Playwright mediation evidence all pass together.
+
+## VAI-341 Resolve implementation retry-budget failure for VAI-052
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-341-vai-052-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-052. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-341-vai-052-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-052 from strategy blocked_tasks.
