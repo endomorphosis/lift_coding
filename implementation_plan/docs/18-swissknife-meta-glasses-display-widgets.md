@@ -220,6 +220,43 @@ Recovery messages:
 - `recovery.next_actions`: bounded actions for `retry`, `reset_session`, `switch_to_phone_preview`, `open_mobile_card`, `dismiss`, or `request_help`.
 - `recovery.fallback`: required `render_path` and message for simulator/mobile-card/display-webapp rendering when DAT native display or paired hardware is unavailable.
 
+VAI capability registry mapping:
+
+MGW-268 connects the virtual desktop session widget actions to the VAI shared capability registry. Swissknife, HandsFree mobile, Meta glasses, and Hallucinate App must all use the same command envelope and receipt shape so render/update/confirm/cancel flows do not fork by surface.
+
+Capability IDs:
+
+- `vai.glasses_widget.render`: create or replace the current `handsfree.virtual-desktop-session` manifest for a session.
+- `vai.glasses_widget.update`: apply a bounded state patch for status, progress, peer-offload, pairing, recovery, or diagnostics regions.
+- `vai.glasses_widget.confirm`: submit a selected `confirmation_prompt.actions[*].id` or peer-offload confirmation for policy-approved execution.
+- `vai.glasses_widget.cancel`: cancel the active widget action, offload transfer, or virtual desktop command with receipt-backed recovery state.
+
+Shared command envelope:
+
+- `capability_id`: one of the IDs above; registry owner is `handsfree.mobile_display_widget` with Swissknife ORB, Hallucinate App, mobile-card, display-webapp, simulator, and DAT native adapters as surfaces.
+- `command_id`: idempotency key shared by Swissknife, mobile, and Hallucinate App.
+- `session_id`, `desktop_id`, `phone_host_id`, `widget_kind`, `descriptor_cid`, `manifest_cid`, `correlation_id`, and optional `operator_id`.
+- `action`: stable action name from `render`, `update`, `confirm`, or `cancel`; prompt actions continue to carry their backend-approved action ID.
+- `payload`: compiled manifest for render, JSON patch or state fragment for update, `prompt_id` plus `selected_action_id` for confirm, and `operation_id` plus cancel reason for cancel.
+- `policy`: `policy_receipt_cid`, policy outcome, risk level, confirmation requirement, and denial reason when blocked.
+- `placement`: current compute placement (`phone_local`, `desktop_peer`, `hybrid`, or `fallback_phone`) and optional `placement_receipt_cid`.
+- `fallback`: required render fallback path (`mobile-card`, `display_webapp`, or `simulator`) when paired display hardware is unavailable.
+
+Receipt surface:
+
+- `capability_receipt_cid`: canonical VAI receipt for the command.
+- `orb_receipt_cid`: Swissknife discovery/bind/invoke receipt when the command traverses ORB.
+- `bridge_receipt_cid`: HandsFree mobile bridge result for mobile-card, display-webapp, simulator, or DAT native rendering.
+- `policy_receipt_cid`, `transfer_receipt_cid`, `fallback_receipt_cid`, and `validation_receipt_cid` remain separate references but are included in the registry receipt bundle.
+- `render_result`: one of `rendered`, `updated`, `confirmed`, `cancelled`, `fallback_rendered`, `policy_denied`, `display_unavailable`, or `stale_session`.
+
+Registry behavior:
+
+- Swissknife emits ORB widget operations as VAI capability commands instead of surface-specific widget RPCs.
+- HandsFree mobile executes the same capability command against mobile-card, display-webapp, simulator, or DAT native adapters and returns the same receipt bundle.
+- Hallucinate App reads and submits the same command envelope when it renders the virtual desktop session or operator confirmation on the desktop console.
+- Meta glasses display actions are constrained terminal actions; they never bypass policy receipts, placement receipts, or the shared `capability_receipt_cid`.
+
 Minimal manifest state example:
 
 ```json
