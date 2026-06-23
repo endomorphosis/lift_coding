@@ -3057,3 +3057,25 @@ The meta glasses display supervisor stores resumable autonomous state in:
   - MGW display-widget actions are Hallucinate App interactions with `interaction_envelope.surface` set to `meta_glasses` and source-specific DAT, Web App, captouch, Neural Band, simulator, or mobile-card details retained in `raw_payload` and `context.device_context`.
   - Focus changes map to `normalized_intent.intent: "virtual_desktop.focus"` / `method: "focus"`; activation maps to `virtual_desktop.activate`; confirmation maps to `virtual_desktop.confirm`; cancellation and dismissals map to `virtual_desktop.cancel`; render and update acknowledgements map to `virtual_desktop.acknowledge_render`; recovery affordances map to `virtual_desktop.recover`.
   - Hallucinate App mediation emits the `policy_decision` and `mediation_receipt` for every MGW action. Only allowed decisions produce a `virtual_desktop_command_intent`; denied, confirmation-required, rewrite, and fallback decisions remain receipt-only until the next mediated envelope.
+
+## MGW-270 Add launch-session widget replay evidence
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: MGW-265, MGW-266, MGW-267, MGW-269
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery, tests/test_meta_glasses_display_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py::test_hardware_free_phone_glasses_terminal_fixture_is_deterministic tests/test_meta_glasses_display_todo_queue.py -q
+- Acceptance: Extend the hardware-free phone/glasses terminal evidence so a single replay shows phone-hosted virtual desktop status, desktop-peer offload state, confirmation/cancel/retry actions, and Hallucinate App receipt IDs rendered through the Meta glasses widget contract.
+
+## MGW-271 Define physical Meta glasses launch-readiness checklist
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: MGW-265, MGW-266, MGW-267, MGW-269
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
+- Validation: rg -n "MGW-271|physical Meta glasses|launch-readiness|phone-hosted|desktop peer|receipt" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md data/meta_glasses_display_widgets/discovery
+- Acceptance: Define the physical-readiness checklist for using Meta glasses as the phone interface to the virtual desktop, including pairing, display fallback, offload-state visibility, policy receipt inspection, and simulator-only gaps.

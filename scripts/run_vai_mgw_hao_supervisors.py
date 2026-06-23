@@ -63,10 +63,15 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "50",
     "--codebase-scan-max-findings",
     "0",
+    "--no-objective-goal-refinement",
+    "--objective-max-interoperability-goals",
+    "0",
+    "--objective-scan-min-open-tasks",
+    "3",
     "--objective-scan-max-findings",
-    "6",
+    "3",
     "--objective-surplus-findings-per-goal",
-    "2",
+    "1",
 )
 
 

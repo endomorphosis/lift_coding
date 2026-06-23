@@ -25,6 +25,7 @@ def _task_board_filename(stem: str) -> str:
 TASK_BOARD_PATH = REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename(
     "19-virtual-ai-os-submodule-integration"
 )
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 
 
 def _git(cwd: Path, *args: str) -> None:
@@ -287,8 +288,15 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
     assert "--codebase-scan-max-findings" in common_arg_values
     assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
+    assert "--no-objective-goal-refinement" in common_arg_values
+    assert "--objective-max-interoperability-goals" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "0"
+    assert "--objective-scan-min-open-tasks" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-scan-min-open-tasks") + 1] == "3"
     assert "--objective-scan-max-findings" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--objective-scan-max-findings") + 1] == "6"
+    assert common_arg_values[common_arg_values.index("--objective-scan-max-findings") + 1] == "3"
+    assert "--objective-surplus-findings-per-goal" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-surplus-findings-per-goal") + 1] == "1"
     parsed_launcher_args = build_arg_parser().parse_args(launcher_args)
     assert parsed_launcher_args.common_arg == common_arg_values
     assert runner_module.default_launch_args(()) == ["--detach"]
@@ -302,6 +310,39 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "--duration-seconds",
         "5",
     ]
+
+
+def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import objective_heap_schedule
+    from ipfs_accelerate_py.agent_supervisor.objective_tracker import (
+        interoperability_pair_key,
+        parse_goal_heap,
+    )
+
+    text = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    goals = parse_goal_heap(text)
+    active_goals = [goal for goal in goals if goal.status == "active"]
+    schedule_ids = [record.goal_id for record in objective_heap_schedule(goals)]
+    launch_ids = ["VAIOS-G689", "VAIOS-G690", "VAIOS-G691", "VAIOS-G692"]
+
+    assert len(active_goals) <= 16
+    assert all(goal_id in schedule_ids for goal_id in launch_ids)
+    assert all(schedule_ids.index(goal_id) < schedule_ids.index("VAIOS-G081") for goal_id in launch_ids)
+    launch_text = "\n".join(
+        goal.fields.get("goal", "")
+        for goal in goals
+        if goal.goal_id in launch_ids
+    ).lower()
+    for term in ("phone", "desktop", "swissknife", "hallucinate app", "meta glasses", "offload"):
+        assert term in launch_text
+
+    active_interop_keys = [
+        interoperability_pair_key(goal.fields.get("interoperability_pair", ""))
+        for goal in active_goals
+        if goal.fields.get("interoperability_pair")
+    ]
+    assert len(active_interop_keys) == len(set(active_interop_keys))
 
 
 def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():
