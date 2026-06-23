@@ -8,6 +8,12 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from handsfree.meta_glasses_remote_terminal import (
+    REMOTE_TERMINAL_CONTRACT_ID,
+    build_meta_glasses_remote_terminal_route,
+    build_meta_glasses_terminal_session_contract,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -153,6 +159,55 @@ def test_virtual_desktop_session_widget_contract_is_documented():
     missing_terms = [term for term in required_contract_terms if term not in plan_text]
 
     assert missing_terms == []
+
+
+def test_vai_008_meta_glasses_terminal_route_is_constrained_for_mobile_sessions():
+    session_contract = build_meta_glasses_terminal_session_contract(
+        session_id="vai-008-mobile-session",
+        phone_host_id="iphone-vai-008",
+        pairing_state="paired",
+        display_state="display_ready",
+        audio_command_state="listening",
+        desktop_offload_state="available",
+    )
+    route = build_meta_glasses_remote_terminal_route(
+        payload={"task_id": "VAI-008", "desktop_offload_visible": True},
+        session_contract=session_contract,
+    )
+
+    endpoint_ids = {endpoint["endpoint_id"] for endpoint in route["endpoints"]}
+    contract = route["session_contract"]
+
+    assert route["contract_id"] == REMOTE_TERMINAL_CONTRACT_ID
+    assert route["surface_id"] == "mobile_glasses"
+    assert route["terminal_kind"] == "meta_glasses_remote_terminal"
+    assert endpoint_ids == {
+        "meta_glasses_audio_input",
+        "meta_glasses_audio_output",
+        "meta_glasses_display_widget",
+    }
+    assert contract["host_mode"] == "mobile_hosted"
+    assert contract["terminal_constraints"]["hardware_required"] is False
+    assert contract["terminal_constraints"]["input_channels"] == ["audio_command"]
+    assert "visual_status" in contract["terminal_constraints"]["output_channels"]
+    assert "retry_pairing" in contract["terminal_constraints"]["permitted_actions"]
+    assert contract["pairing"] == {
+        "state": "paired",
+        "requires_paired_hardware": False,
+        "fallback_when_unpaired": "mobile-card",
+    }
+    assert contract["audio_command_input"]["state"] == "listening"
+    assert contract["audio_command_input"]["fallback_endpoint_id"] == "phone_microphone"
+    assert contract["visual_status_output"]["state"] == "display_ready"
+    assert contract["visual_status_output"]["fallback_render_path"] == "mobile-card"
+    assert contract["disconnection_handling"]["policy"] == "degrade_to_mobile_card"
+    assert "continue_mobile_session" in contract["disconnection_handling"]["on_pairing_lost"]
+    assert contract["desktop_offload"] == {
+        "visibility": "visible",
+        "state": "available",
+        "status_region": "peer_offload",
+        "fallback_compute_placement": "phone_local",
+    }
 
 
 def test_peer_offload_widget_contract_extension_is_documented():

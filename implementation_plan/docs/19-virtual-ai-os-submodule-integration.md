@@ -370,6 +370,62 @@ Merge the audio and display stories into one remote-interface contract:
 - live task progress,
 - policy-safe confirmations.
 
+#### VAI-008 Meta Glasses Remote Terminal Contract
+
+The Meta glasses path is defined as a constrained terminal for mobile-hosted
+virtual AI OS sessions, not as an unconstrained secondary display. HandsFree
+owns the stable route contract in
+`src/handsfree/meta_glasses_remote_terminal.py` under
+`handsfree.meta-glasses/remote-terminal@0.1.0`.
+
+Required route shape:
+
+- `surface_id: mobile_glasses`
+- `terminal_kind: meta_glasses_remote_terminal`
+- endpoints:
+  - `meta_glasses_audio_input` for audio command capture through the mobile
+    `expo_glasses_audio` bridge, with `phone_microphone` fallback
+  - `meta_glasses_audio_output` for spoken response playback, with
+    `phone_speaker` fallback
+  - `meta_glasses_display_widget` for visual status output through the mobile
+    ORB/display-widget runtime, with `display_webapp_or_mobile_card` fallback
+- `session_contract.host_mode: mobile_hosted`
+- `terminal_constraints.hardware_required: false`
+- `terminal_constraints.input_channels: audio_command`
+- `terminal_constraints.output_channels: visual_status` and `tts`
+- permitted terminal actions limited to confirm, cancel, retry pairing, switch
+  to phone preview, and open desktop-offload status
+
+Pairing and disconnection semantics:
+
+- `pairing.state` carries `unpaired`, `pairing`, `paired`, or
+  `pairing_lost`.
+- An unpaired or disconnected glasses path must keep the mobile session alive
+  and fall back to `mobile-card` rendering.
+- `disconnection_handling.on_pairing_lost` must mark display unavailable,
+  continue the mobile session, and expose a reconnect action.
+- Audio command capture falls back to the phone microphone; visual status falls
+  back to the display Web App or mobile card.
+
+Desktop-offload visibility:
+
+- `desktop_offload.visibility` is always visible in the terminal session
+  contract, even when no peer is selected.
+- `desktop_offload.status_region` maps to the widget `peer_offload` region
+  proven by the VAI-006 Swissknife ORB path and VAI-007 Hallucinate App
+  operator-console path.
+- If desktop offload disconnects or fails, compute placement falls back to
+  `phone_local` while status remains visible on mobile/glasses fallback
+  surfaces.
+
+VAI-008 validation evidence:
+
+- `tests/test_meta_glasses_display_todo_queue.py` validates the constrained
+  route manifest through `build_meta_glasses_remote_terminal_route()`.
+- `data/virtual_ai_os/discovery/2026-06-23-vai-008-meta-glasses-remote-terminal.md`
+  records the reviewed device-plane evidence and dependency handoff from
+  VAI-003, VAI-004, VAI-006, and VAI-007.
+
 ### Workstream G: Full-stack test and rollout discipline
 
 Build a layered test matrix:
