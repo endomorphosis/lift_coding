@@ -1,7 +1,7 @@
 {
   "fixture_id": "mgw-267-phone-glasses-terminal",
-  "schema_version": "1.0.0",
-  "description": "Deterministic mobile-hosted Meta glasses terminal trace for virtual desktop status, confirmation, and peer-offload updates.",
+  "schema_version": "1.1.0",
+  "description": "Deterministic mobile-hosted Meta glasses terminal trace for virtual desktop status, confirmation, peer-offload updates, and launch-session receipt replay evidence.",
   "offline_contract": {
     "deterministic": true,
     "requires_meta_credentials": false,
@@ -14,6 +14,24 @@
       "start": "2026-06-23T00:00:00Z",
       "step_ms": 1000
     }
+  },
+  "launch_replay_evidence": {
+    "task_id": "MGW-270",
+    "replay_id": "launch-session-widget-replay-mgw-270",
+    "render_contract": "handsfree.virtual-desktop-session",
+    "terminal_contract": "handsfree.meta-glasses/remote-terminal@0.1.0",
+    "single_replay": true,
+    "covers": [
+      "phone_hosted_virtual_desktop_status",
+      "desktop_peer_offload_state",
+      "confirmation_cancel_retry_actions",
+      "hallucinate_app_receipt_ids"
+    ],
+    "hallucinate_app_receipt_ids": [
+      "ha-mgw270-render-receipt",
+      "ha-mgw270-confirm-receipt",
+      "ha-mgw270-offload-receipt"
+    ]
   },
   "events": [
     {
@@ -37,6 +55,14 @@
           "manifest_cid": "bafy-mgw267-manifest-status",
           "orb_receipt_cid": "bafy-mgw267-orb-status",
           "policy_receipt_cid": "bafy-mgw267-policy"
+        },
+        "hallucinate_app": {
+          "interaction_envelope_id": "ha-mgw270-envelope-status",
+          "normalized_intent_id": "ha-mgw270-intent-render",
+          "policy_decision_id": "ha-mgw270-policy-allowed",
+          "mediation_receipt_id": "ha-mgw270-render-receipt",
+          "virtual_desktop_command_intent_id": "ha-mgw270-command-render",
+          "rendered_receipt_ids": ["ha-mgw270-render-receipt"]
         },
         "render_context": {
           "render_path": "mobile-card",
@@ -64,7 +90,10 @@
             "pairing_badge": "Preview",
             "active_tool_label": "Agent terminal",
             "policy_outcome": "allowed",
-            "last_receipt_cid": "bafy-mgw267-orb-status"
+            "last_receipt_cid": "bafy-mgw267-orb-status",
+            "phone_hosted_status": "running_on_phone",
+            "compute_placement": "phone_local",
+            "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
           },
           "progress_region": {
             "operation": "Run command",
@@ -77,11 +106,32 @@
           "message_region": {
             "text": "Command running on phone-hosted desktop."
           },
+          "action_region": {
+            "actions": [
+              {
+                "id": "retry_pairing",
+                "label": "Retry",
+                "kind": "retry",
+                "backend_action_id": "terminal.retry_pairing",
+                "correlation_id": "corr-mgw-267-status",
+                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
+              },
+              {
+                "id": "open_mobile_card",
+                "label": "Phone",
+                "kind": "fallback",
+                "backend_action_id": "terminal.open_mobile_card",
+                "correlation_id": "corr-mgw-267-status",
+                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
+              }
+            ]
+          },
           "diagnostics_region": {
             "session_id": "vdesktop-session-mgw-267",
             "render_path": "mobile-card",
             "update_count": 1,
-            "last_bridge_result": "display_unavailable"
+            "last_bridge_result": "display_unavailable",
+            "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
           }
         },
         "peer_offload": {
@@ -130,6 +180,14 @@
           "orb_receipt_cid": "bafy-mgw267-orb-confirm",
           "policy_receipt_cid": "bafy-mgw267-policy"
         },
+        "hallucinate_app": {
+          "interaction_envelope_id": "ha-mgw270-envelope-confirm",
+          "normalized_intent_id": "ha-mgw270-intent-confirm",
+          "policy_decision_id": "ha-mgw270-policy-confirmation-required",
+          "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+          "virtual_desktop_command_intent_id": "ha-mgw270-command-confirm",
+          "rendered_receipt_ids": ["ha-mgw270-confirm-receipt"]
+        },
         "render_context": {
           "render_path": "mobile-card",
           "fallback_path": "display-webapp",
@@ -162,16 +220,29 @@
             {
               "id": "continue",
               "label": "Continue",
+              "kind": "confirm",
               "focus_order": 1,
               "backend_action_id": "terminal.continue",
-              "correlation_id": "corr-mgw-267-confirm"
+              "correlation_id": "corr-mgw-267-confirm",
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
             },
             {
               "id": "cancel_task",
               "label": "Cancel task",
+              "kind": "cancel",
               "focus_order": 2,
               "backend_action_id": "terminal.cancel",
-              "correlation_id": "corr-mgw-267-confirm"
+              "correlation_id": "corr-mgw-267-confirm",
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+            },
+            {
+              "id": "retry_confirmation",
+              "label": "Retry",
+              "kind": "retry",
+              "focus_order": 3,
+              "backend_action_id": "terminal.retry",
+              "correlation_id": "corr-mgw-267-confirm",
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
             }
           ]
         },
@@ -181,7 +252,10 @@
             "pairing_badge": "Preview",
             "active_tool_label": "Agent terminal",
             "policy_outcome": "allowed",
-            "last_receipt_cid": "bafy-mgw267-orb-confirm"
+            "last_receipt_cid": "bafy-mgw267-orb-confirm",
+            "phone_hosted_status": "awaiting_confirmation",
+            "compute_placement": "phone_local",
+            "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
           },
           "progress_region": {
             "operation": "Run command",
@@ -191,11 +265,40 @@
           "message_region": {
             "text": "Confirm whether to stop the terminal command."
           },
+          "action_region": {
+            "actions": [
+              {
+                "id": "continue",
+                "label": "Continue",
+                "kind": "confirm",
+                "backend_action_id": "terminal.continue",
+                "correlation_id": "corr-mgw-267-confirm",
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              },
+              {
+                "id": "cancel_task",
+                "label": "Cancel task",
+                "kind": "cancel",
+                "backend_action_id": "terminal.cancel",
+                "correlation_id": "corr-mgw-267-confirm",
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              },
+              {
+                "id": "retry_confirmation",
+                "label": "Retry",
+                "kind": "retry",
+                "backend_action_id": "terminal.retry",
+                "correlation_id": "corr-mgw-267-confirm",
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              }
+            ]
+          },
           "diagnostics_region": {
             "session_id": "vdesktop-session-mgw-267",
             "render_path": "mobile-card",
             "update_count": 2,
-            "last_bridge_result": "display_unavailable"
+            "last_bridge_result": "display_unavailable",
+            "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
           }
         },
         "peer_offload": {
@@ -253,6 +356,14 @@
           "orb_receipt_cid": "bafy-mgw267-orb-offload",
           "policy_receipt_cid": "bafy-mgw267-policy"
         },
+        "hallucinate_app": {
+          "interaction_envelope_id": "ha-mgw270-envelope-offload",
+          "normalized_intent_id": "ha-mgw270-intent-offload-update",
+          "policy_decision_id": "ha-mgw270-policy-allowed",
+          "mediation_receipt_id": "ha-mgw270-offload-receipt",
+          "virtual_desktop_command_intent_id": "ha-mgw270-command-offload",
+          "rendered_receipt_ids": ["ha-mgw270-offload-receipt"]
+        },
         "render_context": {
           "render_path": "mobile-card",
           "fallback_path": "display-webapp",
@@ -279,7 +390,10 @@
             "pairing_badge": "Preview",
             "active_tool_label": "Agent terminal",
             "policy_outcome": "allowed",
-            "last_receipt_cid": "bafy-mgw267-orb-offload"
+            "last_receipt_cid": "bafy-mgw267-orb-offload",
+            "phone_hosted_status": "desktop_peer_transfer",
+            "compute_placement": "desktop_peer",
+            "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
           },
           "progress_region": {
             "operation": "Offload context",
@@ -292,11 +406,40 @@
           "message_region": {
             "text": "Sending task context to desktop peer."
           },
+          "action_region": {
+            "actions": [
+              {
+                "id": "cancel_offload",
+                "label": "Cancel",
+                "kind": "cancel",
+                "backend_action_id": "terminal.cancel_offload",
+                "correlation_id": "corr-mgw-267-offload",
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+              },
+              {
+                "id": "retry_offload",
+                "label": "Retry",
+                "kind": "retry",
+                "backend_action_id": "terminal.retry_offload",
+                "correlation_id": "corr-mgw-267-offload",
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+              },
+              {
+                "id": "fallback_to_phone",
+                "label": "Phone",
+                "kind": "fallback",
+                "backend_action_id": "terminal.fallback_to_phone",
+                "correlation_id": "corr-mgw-267-offload",
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+              }
+            ]
+          },
           "diagnostics_region": {
             "session_id": "vdesktop-session-mgw-267",
             "render_path": "mobile-card",
             "update_count": 3,
-            "last_bridge_result": "display_unavailable"
+            "last_bridge_result": "display_unavailable",
+            "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
           }
         },
         "peer_offload": {
@@ -329,7 +472,8 @@
           "receipts": {
             "policy_receipt_cid": "bafy-mgw267-policy",
             "orb_receipt_cid": "bafy-mgw267-orb-offload",
-            "transfer_receipt_cid": "bafy-mgw267-transfer"
+            "transfer_receipt_cid": "bafy-mgw267-transfer",
+            "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
           }
         },
         "recovery": {

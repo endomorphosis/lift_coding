@@ -257,6 +257,14 @@ Registry behavior:
 - Hallucinate App reads and submits the same command envelope when it renders the virtual desktop session or operator confirmation on the desktop console.
 - Meta glasses display actions are constrained terminal actions; they never bypass policy receipts, placement receipts, or the shared `capability_receipt_cid`.
 
+MGW-270 launch-session replay evidence:
+
+- The deterministic hardware-free replay fixture is `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-267-phone-glasses-terminal-fixture.json`; schema `1.1.0` extends the MGW-267 replay instead of creating a second contract.
+- `launch_replay_evidence.replay_id: "launch-session-widget-replay-mgw-270"` marks the single replay that must render through `handsfree.virtual-desktop-session` and `handsfree.meta-glasses/remote-terminal@0.1.0`.
+- The replay covers phone-hosted virtual desktop status, desktop-peer offload state, confirmation/cancel/retry actions, and Hallucinate App receipt IDs in the same event stream.
+- Each widget state includes `hallucinate_app.interaction_envelope_id`, `normalized_intent_id`, `policy_decision_id`, `mediation_receipt_id`, and `virtual_desktop_command_intent_id`; `regions.status_region`, `regions.diagnostics_region`, `regions.action_region.actions[*]`, and offload receipts render the relevant Hallucinate App receipt ID.
+- The confirmation event renders `confirm`, `cancel`, and `retry` action kinds with stable focus order and backend-approved `terminal.*` action IDs. The peer-offload event renders `desktop_peer` placement with cancel/retry/fallback actions and the Hallucinate App offload receipt.
+
 Minimal manifest state example:
 
 ```json

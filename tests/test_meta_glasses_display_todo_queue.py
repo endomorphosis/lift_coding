@@ -274,6 +274,7 @@ def test_peer_offload_widget_contract_extension_is_documented():
 def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
     fixture = json.loads(PHONE_GLASSES_TERMINAL_FIXTURE_PATH.read_text(encoding="utf-8"))
     offline_contract = fixture["offline_contract"]
+    launch_replay = fixture["launch_replay_evidence"]
     events = fixture["events"]
     credential_key_fragments = ("credential", "access_token", "refresh_token", "client_secret")
 
@@ -289,7 +290,18 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
                 yield from credential_like_paths(child, f"{path}[{index}]")
 
     assert fixture["fixture_id"] == "mgw-267-phone-glasses-terminal"
-    assert fixture["schema_version"] == "1.0.0"
+    assert fixture["schema_version"] == "1.1.0"
+    assert launch_replay["task_id"] == "MGW-270"
+    assert launch_replay["replay_id"] == "launch-session-widget-replay-mgw-270"
+    assert launch_replay["render_contract"] == "handsfree.virtual-desktop-session"
+    assert launch_replay["terminal_contract"] == REMOTE_TERMINAL_CONTRACT_ID
+    assert launch_replay["single_replay"] is True
+    assert set(launch_replay["covers"]) == {
+        "phone_hosted_virtual_desktop_status",
+        "desktop_peer_offload_state",
+        "confirmation_cancel_retry_actions",
+        "hallucinate_app_receipt_ids",
+    }
     assert offline_contract["deterministic"] is True
     assert offline_contract["requires_meta_credentials"] is False
     assert offline_contract["requires_paired_hardware"] is False
@@ -314,11 +326,17 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         "confirmation_prompt",
         "peer_offload_update",
     ]
+    assert [
+        event["widget_state"]["hallucinate_app"]["mediation_receipt_id"] for event in events
+    ] == launch_replay["hallucinate_app_receipt_ids"]
 
     for event in events:
         state = event["widget_state"]
         descriptor_refs = state["descriptor_refs"]
+        hallucinate_app = state["hallucinate_app"]
         peer_receipts = state["peer_offload"]["receipts"]
+        regions = state["regions"]
+        action_region = regions["action_region"]
 
         assert state["widget_kind"] == "handsfree.virtual-desktop-session"
         assert state["session_identity"]["session_id"] == "vdesktop-session-mgw-267"
@@ -329,7 +347,33 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         assert state["pairing"]["status"] == "unpaired"
         assert state["active_tool"]["surface"] == "mobile_card"
         assert {"status_region", "progress_region", "message_region", "diagnostics_region"} <= set(
-            state["regions"]
+            regions
+        )
+        assert regions["status_region"]["phone_hosted_status"]
+        assert regions["status_region"]["compute_placement"] in {"phone_local", "desktop_peer"}
+        assert regions["status_region"]["hallucinate_app_receipt_id"] == (
+            hallucinate_app["mediation_receipt_id"]
+        )
+        assert regions["diagnostics_region"]["hallucinate_app_receipt_id"] == (
+            hallucinate_app["mediation_receipt_id"]
+        )
+        assert hallucinate_app["mediation_receipt_id"].startswith("ha-mgw270-")
+        assert hallucinate_app["rendered_receipt_ids"] == [hallucinate_app["mediation_receipt_id"]]
+        assert hallucinate_app["virtual_desktop_command_intent_id"].startswith(
+            "ha-mgw270-command-"
+        )
+        assert action_region["actions"]
+        assert all(
+            action["hallucinate_app_receipt_id"] == hallucinate_app["mediation_receipt_id"]
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["correlation_id"] == event["correlation_id"]
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["backend_action_id"].startswith("terminal.")
+            for action in action_region["actions"]
         )
         assert peer_receipts["policy_receipt_cid"] == descriptor_refs["policy_receipt_cid"]
         assert "open_mobile_card" in state["recovery"]["next_actions"]
@@ -341,11 +385,20 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
     assert prompt["kind"] == "cancel"
     assert prompt["risk_level"] == "medium"
     assert prompt["default_action"] == "continue"
-    assert [action["id"] for action in prompt["actions"]] == ["continue", "cancel_task"]
-    assert [action["focus_order"] for action in prompt["actions"]] == [1, 2]
+    assert [action["id"] for action in prompt["actions"]] == [
+        "continue",
+        "cancel_task",
+        "retry_confirmation",
+    ]
+    assert [action["kind"] for action in prompt["actions"]] == ["confirm", "cancel", "retry"]
+    assert [action["focus_order"] for action in prompt["actions"]] == [1, 2, 3]
     assert all(action["backend_action_id"].startswith("terminal.") for action in prompt["actions"])
     assert all(
         action["correlation_id"] == events[1]["correlation_id"] for action in prompt["actions"]
+    )
+    assert all(
+        action["hallucinate_app_receipt_id"] == "ha-mgw270-confirm-receipt"
+        for action in prompt["actions"]
     )
 
     peer_offload = events[2]["widget_state"]["peer_offload"]
@@ -365,6 +418,14 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
     assert {"cancel_offload", "retry_offload", "fallback_to_phone", "open_mobile_card"} <= set(
         peer_offload["actions"]
     )
+    assert peer_offload["receipts"]["hallucinate_app_receipt_id"] == "ha-mgw270-offload-receipt"
+
+    launch_action_kinds = {
+        action["kind"]
+        for event in events
+        for action in event["widget_state"]["regions"]["action_region"]["actions"]
+    }
+    assert {"confirm", "cancel", "retry"} <= launch_action_kinds
 
 
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():
