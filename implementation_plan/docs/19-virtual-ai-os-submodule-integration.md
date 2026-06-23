@@ -549,6 +549,41 @@ The contract keeps these guardrails stable:
 Evidence:
 [data/virtual_ai_os/discovery/component-repo-contracts-vai-009-2026-06-12.md](../../data/virtual_ai_os/discovery/component-repo-contracts-vai-009-2026-06-12.md)
 
+## Observability, Policy, and Rollback Artifacts
+
+VAI-011 defines stable supervisor reconciliation artifacts in
+`src/handsfree/virtual_ai_os_observability.py` and exposes the advertised
+schema through `get_virtual_ai_os_observability_contract()["artifact_contract"]`.
+
+The artifact contract is
+`handsfree.virtual-ai-os/observability-artifacts@0.1.0` and uses
+`task_id`, `correlation_id`, and `artifact_id` as the durable reconcile keys.
+Supervisors can persist or replay the ordered bundle without searching logs or
+mobile ORB in-memory state.
+
+Stable artifact types:
+
+- `policy_decision`: records permit, deny, or confirmation decisions with the
+  policy ref, reason, actor, timestamp, and evidence refs.
+- `placement_change`: records transitions such as phone-local to desktop-peer
+  execution with parent links back to the policy decision.
+- `remote_execution_receipt`: records the remote surface, operation, status,
+  receipt ref, and stream refs emitted by SwissKnife ORB, MCP/MCP++, mobile, or
+  glasses paths.
+- `validation_failure`: records validator name, failure code, message,
+  retryability, and evidence refs for failed schema, runtime, or dispatch
+  checks.
+- `rollback_event`: records fallback or rollback action, restored placement or
+  ref, reason, and parent validation-failure artifact.
+
+The VAI-010 hardware-free harness remains the behavioral source for dispatch,
+offload, streaming, and recovery. VAI-011 adds the retry/reconcile artifact
+layer around those events so a daemon supervisor can resume from the latest
+rollback artifact or reconcile the full chain by artifact id.
+
+Evidence:
+[data/virtual_ai_os/discovery/2026-06-23-vai-011-observability-policy-rollback.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-011-observability-policy-rollback.md)
+
 ## Success Criteria
 
 The plan is successful when:

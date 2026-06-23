@@ -16,6 +16,9 @@ from handsfree.virtual_ai_os_components import (
     get_virtual_ai_os_component_pin_contract,
     get_virtual_ai_os_component_repo_contracts,
 )
+from handsfree.virtual_ai_os_observability import (
+    get_virtual_ai_os_observability_artifact_contract,
+)
 
 DISPLAY_WIDGET_ENV_DEFAULTS: dict[str, bool] = {
     "HANDSFREE_DISPLAY_WIDGETS_ENABLED": True,
@@ -226,6 +229,7 @@ def get_virtual_ai_os_observability_contract(
         "component_environment": get_virtual_ai_os_component_environment_contract(),
         "component_pins": get_virtual_ai_os_component_pin_contract(),
         "component_bootstrap": get_virtual_ai_os_component_bootstrap_contract(),
+        "artifact_contract": get_virtual_ai_os_observability_artifact_contract(),
         "display_widget": display_widget_config.as_dict(),
         "remote_terminal": {
             "contract_id": REMOTE_TERMINAL_CONTRACT_ID,
