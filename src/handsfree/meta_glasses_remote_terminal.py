@@ -39,6 +39,71 @@ class MetaGlassesRemoteTerminalEndpoint:
         }
 
 
+@dataclass(frozen=True)
+class MetaGlassesTerminalSessionContract:
+    """Constrained mobile-hosted terminal session state for glasses routing."""
+
+    session_id: str
+    phone_host_id: str
+    pairing_state: str
+    display_state: str
+    audio_command_state: str
+    desktop_offload_state: str
+    disconnection_policy: str
+    fallback_render_path: str
+    hardware_required: bool = False
+
+    def as_dict(self) -> dict[str, Any]:
+        """Return the session contract as JSON-serializable metadata."""
+        return {
+            "session_id": self.session_id,
+            "phone_host_id": self.phone_host_id,
+            "host_mode": "mobile_hosted",
+            "terminal_constraints": {
+                "hardware_required": self.hardware_required,
+                "input_channels": ["audio_command"],
+                "output_channels": ["visual_status", "tts"],
+                "permitted_actions": [
+                    "confirm",
+                    "cancel",
+                    "retry_pairing",
+                    "switch_to_phone_preview",
+                    "open_desktop_offload_status",
+                ],
+            },
+            "pairing": {
+                "state": self.pairing_state,
+                "requires_paired_hardware": False,
+                "fallback_when_unpaired": self.fallback_render_path,
+            },
+            "audio_command_input": {
+                "state": self.audio_command_state,
+                "endpoint_id": "meta_glasses_audio_input",
+                "fallback_endpoint_id": "phone_microphone",
+            },
+            "visual_status_output": {
+                "state": self.display_state,
+                "endpoint_id": "meta_glasses_display_widget",
+                "fallback_render_path": self.fallback_render_path,
+            },
+            "disconnection_handling": {
+                "policy": self.disconnection_policy,
+                "on_pairing_lost": [
+                    "mark_display_unavailable",
+                    "continue_mobile_session",
+                    "surface_reconnect_action",
+                ],
+                "fallback_render_path": self.fallback_render_path,
+            },
+            "desktop_offload": {
+                "visibility": "visible",
+                "state": self.desktop_offload_state,
+                "status_region": "peer_offload",
+                "fallback_compute_placement": "phone_local",
+            },
+        }
+
+
 _REMOTE_TERMINAL_ENDPOINTS: tuple[MetaGlassesRemoteTerminalEndpoint, ...] = (
     MetaGlassesRemoteTerminalEndpoint(
         endpoint_id="meta_glasses_audio_input",
@@ -96,6 +161,9 @@ def build_meta_glasses_remote_terminal_route(
     *,
     payload: Mapping[str, Any] | None = None,
     render_targets: tuple[str, ...] = ("audio", "display"),
+    session_contract: (
+        MetaGlassesTerminalSessionContract | Mapping[str, Any] | None
+    ) = None,
 ) -> dict[str, Any]:
     """Build a compact route manifest for audio/display terminal dispatch."""
     requested_targets = set(render_targets)
@@ -112,8 +180,43 @@ def build_meta_glasses_remote_terminal_route(
         "terminal_kind": "meta_glasses_remote_terminal",
         "render_targets": list(render_targets),
         "endpoints": endpoints,
+        "session_contract": _session_contract_as_dict(session_contract),
         "payload": dict(payload or {}),
     }
+
+
+def _session_contract_as_dict(
+    session_contract: MetaGlassesTerminalSessionContract | Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    if session_contract is None:
+        return build_meta_glasses_terminal_session_contract().as_dict()
+    if isinstance(session_contract, MetaGlassesTerminalSessionContract):
+        return session_contract.as_dict()
+    return dict(session_contract)
+
+
+def build_meta_glasses_terminal_session_contract(
+    *,
+    session_id: str = "mobile-hosted-session",
+    phone_host_id: str = "phone-host",
+    pairing_state: str = "unpaired",
+    display_state: str = "display_unavailable",
+    audio_command_state: str = "ready",
+    desktop_offload_state: str = "discovering",
+    disconnection_policy: str = "degrade_to_mobile_card",
+    fallback_render_path: str = "mobile-card",
+) -> MetaGlassesTerminalSessionContract:
+    """Build the constrained terminal contract for mobile-hosted glasses sessions."""
+    return MetaGlassesTerminalSessionContract(
+        session_id=session_id,
+        phone_host_id=phone_host_id,
+        pairing_state=pairing_state,
+        display_state=display_state,
+        audio_command_state=audio_command_state,
+        desktop_offload_state=desktop_offload_state,
+        disconnection_policy=disconnection_policy,
+        fallback_render_path=fallback_render_path,
+    )
 
 
 def route_audio_endpoint(payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -135,7 +238,9 @@ def route_display_endpoint(payload: Mapping[str, Any] | None = None) -> dict[str
 __all__ = [
     "REMOTE_TERMINAL_CONTRACT_ID",
     "MetaGlassesRemoteTerminalEndpoint",
+    "MetaGlassesTerminalSessionContract",
     "build_meta_glasses_remote_terminal_route",
+    "build_meta_glasses_terminal_session_contract",
     "get_meta_glasses_remote_terminal_endpoint",
     "list_meta_glasses_remote_terminal_endpoints",
     "route_audio_endpoint",
