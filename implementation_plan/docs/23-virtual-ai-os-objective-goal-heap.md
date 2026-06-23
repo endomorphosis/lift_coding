@@ -790,34 +790,75 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 ## VAIOS-G697 Production launch readiness gate
 
 - Status: active
-- Parent: VAIOS-G000
-- Fib priority: 3000
-- Track: interoperability
-- Priority: P1
-- Bundle: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
-- Goal kind: interoperability
-- Interoperability pair: hallucinate_app, external/meta-wearables-dat-android
-- Submodules: hallucinate_app, external/meta-wearables-dat-android
-- Interoperability score: 35
-- Discovery sources: configured, gitlink, gitmodules
-- Package manifests: hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/package.json, hallucinate_app/hallucinate_app/model_collection_viewer/package.json, hallucinate_app/hallucinate_app/node/package.json, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/setup.py, hallucinate_app/hallucinate_app/python/pyproject.toml, hallucinate_app/hallucinate_app/python/requirements.txt, hallucinate_app/hallucinate_app/python/setup.py, hallucinate_app/hallucinate_app/python/ucan_auth_py/setup.py, hallucinate_app/package.json, hallucinate_app/python/requirements.txt, hallucinate_app/swissknife/ipfs_accelerate_js/package.json, hallucinate_app/swissknife/package.json
-- Interface descriptors: hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json, hallucinate_app/swissknife/contracts/interaction_envelope.schema.json, hallucinate_app/swissknife/contracts/mediation_receipt.schema.json, hallucinate_app/swissknife/contracts/policy_decision.schema.json, hallucinate_app/swissknife/docs/ast_exports/interfaces/all_interfaces.json, hallucinate_app/swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, hallucinate_app/swissknife/docs/phase2/06_cross_domain_interfaces.md, hallucinate_app/swissknife/ipfs_accelerate_js/src/core/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/interfaces.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, hallucinate_app/swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts
-- MCP descriptors: hallucinate_app/.github/workflows/mcp-daemon-e2e.yml, hallucinate_app/docs/MCP_DAEMON_ARCHITECTURE.md, hallucinate_app/docs/MCP_DAEMON_IMPLEMENTATION_SUMMARY.md, hallucinate_app/docs/QUICK_START_MCP.md, hallucinate_app/hallucinate_app/cjs/orbitdb_kit_cjs/orbitdb_kit.cjs, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.css, hallucinate_app/hallucinate_app/node/dashboard/orbitdb_security_dashboard.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/orbitdb_kit.js, hallucinate_app/hallucinate_app/node/secure_orbitdb_manager.js, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_orbitdb_manager.py, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_secure_orbitdb_manager.py, hallucinate_app/swissknife/benchmark/integration/mcp-client-benchmark.ts, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, hallucinate_app/swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, hallucinate_app/swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md
-- Python import roots: Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections, concurrent, contextlib, copy, cross, cross_browser_model_sharding, cryptography, database_backup_manager, database_query_system, database_sync_manager, dataclasses, datasets, datetime
-- Goal: Prove `hallucinate_app` interoperates with `external/meta-wearables-dat-android` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
-- Evidence: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, interface contract hallucinate_app external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_schemas.py, hallucinate_app/swissknife/contracts/control_surface_contract.schema.json
-- Outputs: tests/integration/test_hallucinate_app_external_meta_wearables_dat_android_interop.py, docs/integration/hallucinate_app-external_meta_wearables_dat_android.md, hallucinate_app, external/meta-wearables-dat-android, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/python/hallucinate_app/control_surface_schema.py, hallucinate_app/python/hallucinate_app/test/test_control_surface_descriptor_validation.py
-- Validation: python -m pytest tests/integration -q
-- Refinement depth: 1
-- Embedding query: hallucinate_app external/meta-wearables-dat-android interoperability integration test interface descriptor Bio PIL __future__ advanced_thread_pool_manager aiohttp argparse asyncio auth auth_keystore_integration auth_keystore_py base64 collections
-- AST query: hallucinate_app, external/meta-wearables-dat-android, interface contract, integration test, Bio, PIL, __future__, advanced_thread_pool_manager, aiohttp, argparse, asyncio, auth, auth_keystore_integration, auth_keystore_py, base64, collections
-- Parallel lane: objective/interoperability/hallucinate_app-external_meta_wearables_dat_android
-- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
-- Gap task: Create one larger integration work item proving `hallucinate_app` and `external/meta-wearables-dat-android` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Parent: VAIOS-G689
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/production-readiness-gate
+- Parallel lane: launch-readiness-gate
+- Refinement depth: 2
+- Embedding query: production launch gate phone hosted Swissknife virtual desktop desktop peer offload Meta glasses terminal physical validation receipts Playwright e2e
+- AST query: LaunchReadinessGate, launch_readiness_receipt_v1, phone_desktop_glasses_readiness, playwright, meta-glasses-virtual-os, multimodal-control-surface
+- Conflict policy: keep launch readiness evidence in explicit receipts and tests; do not accept generic AST or documentation matches as sufficient proof
+- Goal: The supervisor must keep the phone-hosted Swissknife virtual desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses terminal path open until a launch-readiness receipt proves every product-critical hop.
+- Evidence: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, launch_readiness_receipt_v1, swissknife/test/e2e/meta-glasses-virtual-os.spec.ts, hallucinate_app/test/e2e/multimodal-control-surface.spec.ts, Playwright launch replay
+- Outputs: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, data/virtual_ai_os/discovery, data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+- Refinement: Split only if the gate needs a separate child for physical phone, desktop peer, or Meta glasses evidence capture.
+- Gap task: Add a launch-readiness gate that prevents the objective heap from treating weak scanner matches as proof that the product slice is production ready.
+- Gate evidence: VAI-340 launch readiness gate => data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md; MGW-274 launch readiness gate => data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md; HAO-436 launch readiness gate => data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md; launch Playwright validation gate => tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, swissknife/build-tools/configs/playwright.meta-glasses.config.ts, hallucinate_app/scripts/run_playwright_test.mjs
+- Completion evidence: launch_readiness_receipt_v1 => data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md; LaunchReadinessGate => tests/test_virtual_ai_os_launch_readiness_gate.py; phone_desktop_glasses_readiness => docs/launch/phone_desktop_glasses_readiness.md; Playwright launch replay => npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+
+## VAIOS-G698 Supervisor objective and task janitor
+
+- Status: completed
+- Parent: VAIOS-G010
+- Fib priority: 1
+- Track: ops
+- Priority: P0
+- Bundle: objective/ops/task-janitor
+- Parallel lane: supervisor-backlog
+- Refinement depth: 2
+- Embedding query: supervisor objective task janitor retire stale goals archive orphaned tasks remove useless work fibonacci heap dynamic reconciliation
+- AST query: ObjectiveTaskJanitor, objective_task_janitor, retired_task_reason, heap_goal_retirement_receipt
+- Conflict policy: make task retirement explicit and reversible; preserve audit receipts for every generated goal or task that is archived, deprioritized, or reopened
+- Goal: The daemon continuously reconciles goals, subgoals, tasks, subtasks, and heap priorities so stale or off-mission work is archived or deprioritized while launch-blocking gaps are reopened.
+- Evidence: tests/test_supervisor_objective_task_janitor.py, objective_task_janitor, retired_task_reason, heap_goal_retirement_receipt
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py -q
+- Refinement: Add child goals for task archival, heap-goal reopening, and stale blocked-task summarization only after the janitor contract lands.
+- Gap task: Implement an objective/task janitor that can dynamically add, remove, archive, reopen, and reprioritize daemon work against the launch objective.
+- Completed at: 2026-06-23T14:20:50+00:00
+- Completion evidence: objective_task_janitor strategy reconciler, retired_task_reason receipts, heap_goal_retirement_receipt strategy output, supervisor objective_task_janitor phase, and tests/test_supervisor_objective_task_janitor.py.
+- Completion validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_supervisor_objective_task_janitor.py tests/test_virtual_ai_os_todo_queue.py tests/test_meta_glasses_display_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q => 96 passed, 1 warning.
+
+## VAIOS-G699 Merge-lock retry and duplicate-attempt suppression
+
+- Status: completed
+- Parent: VAIOS-G010
+- Fib priority: 1
+- Track: ops
+- Priority: P0
+- Bundle: objective/ops/merge-reconciliation
+- Parallel lane: supervisor-backlog
+- Refinement depth: 2
+- Embedding query: merge lock retry queue duplicate attempt suppression worktree cleanup automatic failed validation retry supervisor daemon
+- AST query: merge_lock_retry_queue, duplicate_attempt_suppression, transient_merge_lock, validation_auto_repair
+- Conflict policy: distinguish transient merge-lock deferrals from real merge conflicts, and preserve validated implementation commits before spawning replacement attempts
+- Goal: A validated implementation whose merge was deferred by a transient lock is retried and cleaned up automatically instead of being blocked, duplicated, or stranded in an orphaned worktree.
+- Evidence: tests/test_implementation_daemon_merge_lock_retry.py, merge_lock_retry_queue, duplicate_attempt_suppression, transient_merge_lock
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, tests/test_implementation_daemon_merge_lock_retry.py
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_implementation_daemon_merge_lock_retry.py -q
+- Refinement: Split validation auto-repair into a child goal if lock retry lands but failed-validation retry remains ad hoc.
+- Gap task: Teach the daemon to retry transient merge-lock failures, suppress duplicate attempts for already-validated work, and clean merged worktrees without manual intervention.
+- Completed at: 2026-06-23T14:20:50+00:00
+- Completion evidence: transient_merge_lock classification, merge_lock_retry_queue candidate selection, duplicate_attempt_suppression waiting state, reconciliation todo completion, and tests/test_implementation_daemon_merge_lock_retry.py.
+- Completion validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_implementation_daemon_merge_lock_retry.py tests/test_supervisor_objective_task_janitor.py tests/test_virtual_ai_os_todo_queue.py tests/test_meta_glasses_display_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q => 99 passed, 1 warning.
 
 ## VAIOS-G089 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -845,7 +886,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G090 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -873,7 +915,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G091 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -901,7 +944,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G092 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -929,7 +973,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G093 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -957,7 +1002,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G094 Interoperate hallucinate_app with ipfs_datasets_py
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -985,7 +1031,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G095 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1013,7 +1060,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G096 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1041,7 +1089,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G097 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1069,7 +1118,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G098 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1097,7 +1147,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G099 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1125,7 +1176,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G100 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3006
 - Track: interoperability
@@ -1153,7 +1205,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G101 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1181,7 +1234,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G102 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1209,7 +1263,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G103 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1237,7 +1292,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G104 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1265,7 +1321,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G105 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1293,7 +1350,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G106 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1321,7 +1379,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G107 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1349,7 +1408,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G108 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1377,7 +1437,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G109 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1405,7 +1466,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G110 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1433,7 +1495,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G111 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1461,7 +1524,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G112 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1489,7 +1553,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G113 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1517,7 +1582,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G114 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1545,7 +1611,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G115 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1573,7 +1640,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G116 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1601,7 +1669,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G117 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1629,7 +1698,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G118 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1657,7 +1727,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G119 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1685,7 +1756,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G120 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1713,7 +1785,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G121 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1741,7 +1814,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G122 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1769,7 +1843,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G123 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1797,7 +1872,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G124 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1825,7 +1901,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G125 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1853,7 +1930,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G126 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1881,7 +1959,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G127 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1909,7 +1988,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G128 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1937,7 +2017,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G129 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1965,7 +2046,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G130 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1993,7 +2075,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G131 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2021,7 +2104,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G132 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2049,7 +2133,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G133 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2077,7 +2162,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G134 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2105,7 +2191,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G135 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2133,7 +2220,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G136 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2161,7 +2249,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G137 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2189,7 +2278,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G138 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2217,7 +2307,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G139 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2245,7 +2336,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G140 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2273,7 +2365,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G141 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2301,7 +2394,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G142 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2329,7 +2423,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G143 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2357,7 +2452,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G144 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2385,7 +2481,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G145 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2413,7 +2510,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G146 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2441,7 +2539,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G147 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2469,7 +2568,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G148 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2497,7 +2597,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G149 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2525,7 +2626,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G150 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2553,7 +2655,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G151 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2581,7 +2684,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G152 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2609,7 +2713,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G153 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2637,7 +2742,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G154 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2665,7 +2771,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G155 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2693,7 +2800,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G156 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2721,7 +2829,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G157 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2749,7 +2858,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G158 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2777,7 +2887,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G159 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2805,7 +2916,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G160 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2833,7 +2945,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G161 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -2861,7 +2974,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G162 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -2889,7 +3003,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G163 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -2917,7 +3032,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G164 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -2945,7 +3061,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G165 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -2973,7 +3090,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G166 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -2998,11 +3116,11 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
-<<<<<<< HEAD
 
 ## VAIOS-G167 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3030,7 +3148,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G168 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3058,7 +3177,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G169 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3086,7 +3206,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G170 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3114,7 +3235,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G171 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3142,7 +3264,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G172 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -3170,7 +3293,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G173 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3198,7 +3322,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G174 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3226,7 +3351,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G175 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3254,7 +3380,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G176 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3282,7 +3409,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G177 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3310,7 +3438,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G178 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -3338,7 +3467,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G179 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3366,7 +3496,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G180 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3394,7 +3525,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G181 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3422,7 +3554,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G182 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3450,7 +3583,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G183 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3478,7 +3612,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G184 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -3506,7 +3641,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G185 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3534,7 +3670,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G186 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3562,7 +3699,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G187 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3590,7 +3728,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G188 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3618,7 +3757,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G189 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3646,7 +3786,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G190 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -3674,7 +3815,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G191 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3702,7 +3844,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G192 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3730,7 +3873,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G193 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3758,7 +3902,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G194 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3786,7 +3931,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G195 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3814,7 +3960,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G196 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -3840,10 +3987,10 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
 
-
 ## VAIOS-G197 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -3871,7 +4018,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G198 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -3899,7 +4047,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G199 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -3927,7 +4076,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G200 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -3955,7 +4105,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G201 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -3983,7 +4134,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G202 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4011,7 +4163,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G203 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4039,7 +4192,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G204 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4067,7 +4221,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G205 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4095,7 +4250,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G206 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4123,7 +4279,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G207 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4151,7 +4308,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G208 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4179,7 +4337,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G209 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4207,7 +4366,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G210 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4235,7 +4395,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G211 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4263,7 +4424,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G212 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4291,7 +4453,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G213 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4319,7 +4482,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G214 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4347,7 +4511,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G215 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4375,7 +4540,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G216 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4403,7 +4569,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G217 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4431,7 +4598,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G218 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4459,7 +4627,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G219 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4487,7 +4656,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G220 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4515,7 +4685,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G221 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4543,7 +4714,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G222 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4571,7 +4743,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G223 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4599,7 +4772,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G224 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4627,7 +4801,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G225 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4655,7 +4830,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G226 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4683,7 +4859,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G227 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4711,7 +4888,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G228 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4739,7 +4917,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G229 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4767,7 +4946,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G230 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4795,7 +4975,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G231 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4823,7 +5004,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G232 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -4851,7 +5033,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G233 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -4879,7 +5062,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G234 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -4907,7 +5091,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G235 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -4935,7 +5120,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G236 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -4963,7 +5149,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G237 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -4991,7 +5178,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G238 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5019,7 +5207,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G239 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5047,7 +5236,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G240 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5075,7 +5265,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G241 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5103,7 +5294,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G242 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5131,7 +5323,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G243 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5159,7 +5352,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G244 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5187,7 +5381,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G245 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5215,7 +5410,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G246 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5243,7 +5439,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G247 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5271,7 +5468,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G248 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5299,7 +5497,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G249 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5327,7 +5526,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G250 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5355,7 +5555,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G251 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5383,7 +5584,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G252 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5411,7 +5613,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G253 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5439,7 +5642,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G254 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5467,7 +5671,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G255 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5495,7 +5700,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G256 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5523,7 +5729,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G257 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5551,7 +5758,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G258 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5579,7 +5787,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G259 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5607,7 +5816,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G260 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5635,7 +5845,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G261 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5663,7 +5874,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G262 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5691,7 +5903,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G263 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5719,7 +5932,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G264 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5747,7 +5961,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G265 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5775,7 +5990,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G266 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5803,7 +6019,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G267 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5831,7 +6048,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G268 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -5859,7 +6077,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G269 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -5887,7 +6106,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G270 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -5915,7 +6135,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G271 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -5943,7 +6164,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G272 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -5971,7 +6193,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G273 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -5999,7 +6222,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G274 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6027,7 +6251,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G275 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6055,7 +6280,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G276 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6083,7 +6309,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G277 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6111,7 +6338,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G278 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6139,7 +6367,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G279 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -6167,7 +6396,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G280 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6195,7 +6425,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G281 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6223,7 +6454,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G282 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6251,7 +6483,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G283 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6279,7 +6512,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G284 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6307,7 +6541,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G285 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -6335,7 +6570,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G286 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6360,11 +6596,11 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
-<<<<<<< HEAD
 
 ## VAIOS-G287 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6392,7 +6628,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G288 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6420,7 +6657,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G289 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6448,7 +6686,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G290 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6476,7 +6715,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G291 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -6504,7 +6744,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G292 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6532,7 +6773,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G293 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6560,7 +6802,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G294 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6588,7 +6831,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G295 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6616,7 +6860,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G296 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6644,7 +6889,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G297 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -6672,7 +6918,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G298 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6700,7 +6947,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G299 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6728,7 +6976,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G300 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6756,7 +7005,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G301 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6784,7 +7034,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G302 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6812,7 +7063,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G303 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -6840,7 +7092,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G304 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -6868,7 +7121,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G305 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -6896,7 +7150,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G306 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -6924,7 +7179,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G307 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -6952,7 +7208,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G308 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -6980,7 +7237,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G309 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7008,7 +7266,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G310 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7036,7 +7295,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G311 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7064,7 +7324,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G312 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7092,7 +7353,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G313 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7120,7 +7382,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G314 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7148,7 +7411,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G315 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7176,7 +7440,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G316 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7204,7 +7469,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G317 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7232,7 +7498,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G318 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7260,7 +7527,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G319 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7288,7 +7556,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G320 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7316,7 +7585,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G321 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7344,7 +7614,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G322 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7372,7 +7643,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G323 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7400,7 +7672,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G324 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7428,7 +7701,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G325 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7456,7 +7730,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G326 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7484,7 +7759,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G327 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7512,7 +7788,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G328 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7540,7 +7817,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G329 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7568,7 +7846,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G330 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7596,7 +7875,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G331 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7624,7 +7904,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G332 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7652,7 +7933,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G333 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7680,7 +7962,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G334 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7708,7 +7991,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G335 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7736,7 +8020,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G336 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7764,7 +8049,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G337 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7792,7 +8078,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G338 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7820,7 +8107,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G339 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -7848,7 +8136,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G340 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -7876,7 +8165,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G341 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -7904,7 +8194,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G342 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -7932,7 +8223,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G343 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -7960,7 +8252,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G344 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -7988,7 +8281,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G345 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8016,7 +8310,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G346 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8044,7 +8339,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G347 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8072,7 +8368,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G348 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8100,7 +8397,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G349 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8128,7 +8426,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G350 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8156,7 +8455,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G351 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8184,7 +8484,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G352 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8212,7 +8513,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G353 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8240,7 +8542,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G354 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8268,7 +8571,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G355 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8296,7 +8600,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G356 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8324,7 +8629,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G357 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8352,7 +8658,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G358 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8380,7 +8687,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G359 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8408,7 +8716,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G360 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8436,7 +8745,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G361 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8464,7 +8774,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G362 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8492,7 +8803,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G363 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8520,7 +8832,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G364 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8548,7 +8861,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G365 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8576,7 +8890,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G366 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8604,7 +8919,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G367 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8632,7 +8948,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G368 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8660,7 +8977,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G369 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8688,7 +9006,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G370 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8716,7 +9035,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G371 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8744,7 +9064,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G372 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8772,7 +9093,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G373 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8800,7 +9122,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G374 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8828,7 +9151,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G375 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -8856,7 +9180,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G376 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -8884,7 +9209,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G377 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -8912,7 +9238,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G378 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -8940,7 +9267,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G379 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -8968,7 +9296,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G380 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -8996,7 +9325,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G381 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9024,7 +9354,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G382 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9052,7 +9383,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G383 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9080,7 +9412,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G384 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9108,7 +9441,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G385 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9136,7 +9470,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G386 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -9164,7 +9499,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G387 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9192,7 +9528,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G388 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9220,7 +9557,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G389 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9248,7 +9586,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G390 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9276,7 +9615,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G391 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9304,7 +9644,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G392 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -9332,7 +9673,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G393 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9360,7 +9702,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G394 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9388,7 +9731,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G395 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9416,7 +9760,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G396 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9444,7 +9789,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G397 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9472,7 +9818,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G398 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -9500,7 +9847,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G399 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9528,7 +9876,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G400 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9556,7 +9905,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G401 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9584,7 +9934,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G402 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9612,7 +9963,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G403 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9640,7 +9992,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G404 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -9668,7 +10021,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G405 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9696,7 +10050,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G406 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9724,7 +10079,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G407 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9752,7 +10108,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G408 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9780,7 +10137,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G409 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9808,7 +10166,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G410 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -9836,7 +10195,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G411 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -9864,7 +10224,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G412 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -9892,7 +10253,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G413 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -9920,7 +10282,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G414 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -9948,7 +10311,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G415 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -9976,7 +10340,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G416 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10004,7 +10369,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G417 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10032,7 +10398,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G418 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10060,7 +10427,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G419 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10088,7 +10456,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G420 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10116,7 +10485,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G421 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10144,7 +10514,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G422 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10172,7 +10543,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G423 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10200,7 +10572,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G424 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10228,7 +10601,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G425 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10256,7 +10630,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G426 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10284,7 +10659,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G427 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10312,7 +10688,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G428 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10340,7 +10717,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G429 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10368,7 +10746,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G430 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10396,7 +10775,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G431 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10424,7 +10804,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G432 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10452,7 +10833,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G433 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10480,7 +10862,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G434 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10508,7 +10891,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G435 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10536,7 +10920,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G436 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10564,7 +10949,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G437 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10592,7 +10978,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G438 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10620,7 +11007,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G439 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10648,7 +11036,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G440 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10676,7 +11065,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G441 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10704,7 +11094,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G442 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10732,7 +11123,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G443 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10760,7 +11152,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G444 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10788,7 +11181,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G445 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10816,7 +11210,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G446 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -10844,7 +11239,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G447 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -10872,7 +11268,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G448 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -10900,7 +11297,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G449 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -10928,7 +11326,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G450 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -10956,7 +11355,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G451 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -10984,7 +11384,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G452 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11012,7 +11413,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G453 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11040,7 +11442,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G454 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11068,7 +11471,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G455 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11096,7 +11500,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G456 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11124,7 +11529,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G457 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11152,7 +11558,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G458 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11180,7 +11587,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G459 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11208,7 +11616,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G460 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11233,9 +11642,11 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
 ## VAIOS-G461 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11263,7 +11674,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G462 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11291,7 +11703,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G463 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11319,7 +11732,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G464 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11347,7 +11761,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G465 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11375,7 +11790,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G466 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11400,9 +11816,11 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
 ## VAIOS-G467 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11430,7 +11848,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G468 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11458,7 +11877,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G469 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11486,7 +11906,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G470 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11514,7 +11935,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G471 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11542,7 +11964,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G472 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11570,7 +11993,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G473 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11598,7 +12022,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G474 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11626,7 +12051,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G475 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11654,7 +12080,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G476 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11682,7 +12109,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G477 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11710,7 +12138,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G478 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11738,7 +12167,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G479 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11766,7 +12196,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G480 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11794,7 +12225,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G481 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11822,7 +12254,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G482 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -11850,7 +12283,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G483 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -11878,7 +12312,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G484 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -11906,7 +12341,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G485 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -11934,7 +12370,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G486 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -11962,7 +12399,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G487 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -11990,7 +12428,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G488 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12018,7 +12457,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G489 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12046,7 +12486,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G490 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12074,7 +12515,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G491 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12102,7 +12544,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G492 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12130,7 +12573,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G493 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12158,7 +12602,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G494 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12186,7 +12631,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G495 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12214,7 +12660,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G496 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12242,7 +12689,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G497 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12270,7 +12718,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G498 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12298,7 +12747,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G499 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12326,7 +12776,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G500 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12354,7 +12805,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G501 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12382,7 +12834,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G502 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12410,7 +12863,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G503 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12438,7 +12892,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G504 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12466,7 +12921,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G505 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12494,7 +12950,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G506 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12522,7 +12979,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G507 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12550,7 +13008,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G508 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12578,7 +13037,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G509 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12606,7 +13066,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G510 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12634,7 +13095,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G511 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12662,7 +13124,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G512 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12690,7 +13153,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G513 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12718,7 +13182,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G514 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12746,7 +13211,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G515 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12774,7 +13240,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G516 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12802,7 +13269,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G517 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12830,7 +13298,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G518 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -12858,7 +13327,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G519 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -12886,7 +13356,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G520 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -12914,7 +13385,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G521 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -12942,7 +13414,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G522 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -12970,7 +13443,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G523 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -12998,7 +13472,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G524 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13026,7 +13501,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G525 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13054,7 +13530,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G526 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13082,7 +13559,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G527 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13110,7 +13588,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G528 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13138,7 +13617,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G529 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -13166,7 +13646,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G530 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13194,7 +13675,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G531 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13222,7 +13704,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G532 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13250,7 +13733,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G533 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13278,7 +13762,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G534 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13306,7 +13791,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G535 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -13334,7 +13820,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G536 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13362,7 +13849,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G537 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13390,7 +13878,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G538 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13418,7 +13907,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G539 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13446,7 +13936,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G540 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13474,7 +13965,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G541 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -13502,7 +13994,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G542 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13530,7 +14023,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G543 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13558,7 +14052,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G544 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13586,7 +14081,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G545 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13614,7 +14110,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G546 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13642,7 +14139,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G547 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -13670,7 +14168,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G548 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13698,7 +14197,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G549 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13726,7 +14226,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G550 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13754,7 +14255,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G551 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13782,7 +14284,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G552 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13810,7 +14313,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G553 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -13838,7 +14342,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G554 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -13866,7 +14371,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G555 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -13894,7 +14400,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G556 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -13922,7 +14429,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G557 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -13950,7 +14458,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G558 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -13978,7 +14487,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G559 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14006,7 +14516,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G560 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14034,7 +14545,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G561 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14062,7 +14574,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G562 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14090,7 +14603,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G563 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14118,7 +14632,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G564 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14146,7 +14661,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G565 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14174,7 +14690,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G566 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14202,7 +14719,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G567 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14230,7 +14748,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G568 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14258,7 +14777,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G569 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14286,7 +14806,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G570 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14314,7 +14835,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G571 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14342,7 +14864,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G572 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14370,7 +14893,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G573 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14398,7 +14922,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G574 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14426,7 +14951,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G575 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14454,7 +14980,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G576 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14482,7 +15009,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G577 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14510,7 +15038,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G578 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14538,7 +15067,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G579 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14566,7 +15096,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G580 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14594,7 +15125,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G581 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14622,7 +15154,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G582 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14650,7 +15183,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G583 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14678,7 +15212,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G584 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14706,7 +15241,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G585 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14734,7 +15270,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G586 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14762,7 +15299,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G587 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14790,7 +15328,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G588 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14818,7 +15357,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G589 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -14846,7 +15386,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G590 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -14874,7 +15415,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G591 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -14902,7 +15444,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G592 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -14930,7 +15473,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G593 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -14958,7 +15502,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G594 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -14986,7 +15531,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G595 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -15014,7 +15560,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G596 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -15042,7 +15589,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G597 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -15070,7 +15618,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G598 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -15098,7 +15647,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G599 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -15126,7 +15676,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G600 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -15154,7 +15705,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G601 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -15182,7 +15734,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G602 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -15210,7 +15763,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G603 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -15238,7 +15792,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G604 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -15266,7 +15821,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G605 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -15294,7 +15850,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G606 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -15322,7 +15879,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G607 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -15350,7 +15908,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G608 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -15378,7 +15937,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G609 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -15406,7 +15966,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G610 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -15434,7 +15995,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G611 Interoperate hallucinate_app with external/meta-wearables-dat-android
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -15462,7 +16024,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G612 Interoperate hallucinate_app with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -15490,7 +16053,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G613 Interoperate hallucinate_app with external/ipfs_datasets
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -15518,7 +16082,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G614 Interoperate hallucinate_app with external/ipfs_kit
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -15546,7 +16111,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G615 Interoperate hallucinate_app with external/ipfs_accelerate
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -15574,7 +16140,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G616 Interoperate hallucinate_app with Mcp-Plus-Plus
 
-- Status: active
+- Status: deferred
+- Deferred reason: Broad pairwise interoperability is preserved for post-gate work, but it must not outrank the phone-hosted Swissknife desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses launch-readiness gate.
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability

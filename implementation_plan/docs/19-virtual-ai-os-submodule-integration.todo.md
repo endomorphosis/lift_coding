@@ -465,30 +465,18 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-047-ios-audio-route-monitor.md
 - Validation: test -f work/PR-047-ios-audio-route-monitor.md
 - Acceptance: Codebase scan filed this finding from work/PR-047-ios-audio-route-monitor.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-093-codebase-scan-98ff09f42056.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## VAI-094 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
 
-<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
 - Depends on:
-=======
-- Status: todo
-- Completion: manual
-- Priority: P3
-- Track: docs
-- Depends on: 
->>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-048-ios-glasses-recorder-wav.md
 - Validation: test -f work/PR-048-ios-glasses-recorder-wav.md
 - Acceptance: Codebase scan filed this finding from work/PR-048-ios-glasses-recorder-wav.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-094-codebase-scan-841f4db539b0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -499,11 +487,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-081-privacy-mode-per-profile.md
 - Validation: test -f work/PR-081-privacy-mode-per-profile.md
 - Acceptance: Codebase scan filed this finding from work/PR-081-privacy-mode-per-profile.md:18. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -514,18 +498,13 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-<<<<<<< HEAD
 - Depends on:
-=======
-- Depends on: 
->>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/PR-090-agent-runner-docs-sync.md
 - Validation: test -f work/PR-090-agent-runner-docs-sync.md
 - Acceptance: Codebase scan filed this finding from work/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-096-codebase-scan-9b624a3cfffc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 ## VAI-097 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
 
-<<<<<<< HEAD
 - Status: completed
 - Completion: manual
 - Priority: P2
@@ -533,13 +512,6 @@ cadence remains parseable and resumable.
 - Fingerprint: 04250c7724a2c2b2ba45af5432dcf9d6fceef761
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
-=======
-- Status: todo
-- Completion: manual
-- Priority: P2
-- Track: docs
-- Depends on: 
->>>>>>> implementation/vai-093-attempt-1-1779874261
 - Outputs: data/virtual_ai_os/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-097-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1162,7 +1134,8 @@ cadence remains parseable and resumable.
 
 ## VAI-154 Resolve implementation retry-budget failure for VAI-152
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1173,7 +1146,8 @@ cadence remains parseable and resumable.
 
 ## VAI-155 Resolve implementation retry-budget failure for VAI-154
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1184,7 +1158,8 @@ cadence remains parseable and resumable.
 
 ## VAI-156 Resolve implementation retry-budget failure for VAI-155
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1195,7 +1170,8 @@ cadence remains parseable and resumable.
 
 ## VAI-157 Resolve implementation retry-budget failure for VAI-156
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1283,11 +1259,7 @@ cadence remains parseable and resumable.
 
 ## VAI-165 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:304
 
-<<<<<<< HEAD
 - Status: completed
-=======
-- Status: todo
->>>>>>> implementation/hao-250-attempt-1-1780226813
 - Completion: manual
 - Priority: P3
 - Track: runtime
@@ -1606,7 +1578,8 @@ cadence remains parseable and resumable.
 
 ## VAI-194 Resolve merge retry-budget failure for VAI-191
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1812,7 +1785,8 @@ cadence remains parseable and resumable.
 
 ## VAI-212 Resolve implementation retry-budget failure for VAI-211
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1820,3 +1794,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-211. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-211 from strategy blocked_tasks.
+
+## VAI-338 Build the launch alignment map across VAI, MGW, and HAO
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery/2026-06-23-vai-338-launch-alignment-map.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
+- Validation: rg -n "VAI-338|launch alignment|phone|desktop peer|Meta glasses|Hallucinate App|Swissknife" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Keep the launch slice aligned around one phone-hosted Swissknife command session, desktop-peer offload path, Hallucinate App mediation receipt chain, and Meta glasses terminal/display contract so VAI, MGW, and HAO tasks advance the same product run.
+
+## VAI-339 Prove the launch replay receipt chain
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-338
+- Outputs: data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md, docs/launch/phone_desktop_glasses_readiness.md
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Acceptance: Produce a replayable receipt chain showing the phone command envelope, desktop-peer placement, recovery fallback, Hallucinate App mediation, and Meta glasses terminal/render status share one session and command identity.
+
+## VAI-340 Close objective gap: Production launch readiness gate
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-339
+- Outputs: data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md, docs/launch/phone_desktop_glasses_readiness.md, tests/test_virtual_ai_os_launch_readiness_gate.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+- Acceptance: Keep the production launch gate open until explicit `launch_readiness_receipt_v1`, `LaunchReadinessGate`, phone/desktop/glasses readiness doc, Swissknife Playwright replay, and Hallucinate App Playwright mediation evidence all pass together.
