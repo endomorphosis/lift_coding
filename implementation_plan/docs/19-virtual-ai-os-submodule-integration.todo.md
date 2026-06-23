@@ -172,7 +172,7 @@ cadence remains parseable and resumable.
 
 ## VAI-013 Resolve the canonical mcp_plus_plus upstream source
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
