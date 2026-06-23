@@ -103,7 +103,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-008 Build full hardware-free descriptor-to-mobile-render harness
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
