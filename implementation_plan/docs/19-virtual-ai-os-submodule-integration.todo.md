@@ -161,7 +161,7 @@ cadence remains parseable and resumable.
 
 ## VAI-012 Validate physical-device and desktop operator readiness
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: device
