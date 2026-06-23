@@ -28,6 +28,16 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 | Desktop-peer offload | The VAI-339 launch replay receipt keeps `desktop_peer` placement with `phone_local` recovery in the parent lineage. |
 | Meta glasses terminal | The Swissknife Playwright gate renders the Meta glasses display-widget contract and checks interface, widget, and receipt CIDs. |
 
+## VAI-339 Replay Chain
+
+`data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
+contains the replayable chain for the deterministic launch slice. Its
+`receipt_chain` orders the phone event, Hallucinate App mediation, placement,
+desktop-peer execution, Meta glasses render, phone-local recovery, and final
+capability reconciliation receipts. Every receipt carries the same `session_id`,
+`command_id`, `correlation_id`, and `request_id`, and each non-root receipt
+names the prior receipt CID as its parent.
+
 ## Launch Playwright Validation Gate
 
 This is the `launch Playwright validation gate` evidence term required by the
