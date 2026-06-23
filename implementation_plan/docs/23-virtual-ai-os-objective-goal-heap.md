@@ -598,7 +598,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G689 Phone desktop glasses launch slice
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 2
 - Track: launch
@@ -615,10 +615,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py -q
 - Refinement: Add implementation tasks only when they directly improve the launch slice across phone, desktop peer, Swissknife, Hallucinate App, Meta glasses, receipts, or recovery.
 - Gap task: Close the highest-leverage missing proof for the phone-to-desktop-to-glasses launch slice, not generic interoperability or repository cleanup.
+- Completed at: 2026-06-23T07:45:03.060209+00:00
+- Completion evidence: tests/test_virtual_ai_os_end_to_end_harness.py => tests/test_virtual_ai_os_end_to_end_harness.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast); src/handsfree/meta_glasses_remote_terminal.py => src/handsfree/meta_glasses_remote_terminal.py (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast); HAO-429 peer-offload policy receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); HAO-430 hardware-free multimodal offload harness => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.35); MGW-269 display widget normalized intents => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.30); VAI-010 hardware-free end-to-end integration harness => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), docs/implementation/IMPLEMENTATION_SUMMARY_NOTIFICATIONS.md (ast)
+- Completion validation: 0
 
 ## VAIOS-G690 Phone-hosted Swissknife session
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G689
 - Fib priority: 2
 - Track: launch
@@ -635,10 +638,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_meta_glasses_display_todo_queue.py -q
 - Refinement: Split only if phone session state, command envelope, or operator-intent routing needs a separate proof.
 - Gap task: Prove the phone-hosted virtual desktop session can launch, route commands, and expose state without assuming a desktop-only UI.
+- Completed at: 2026-06-23T07:45:03.060209+00:00
+- Completion evidence: VAI-006 Swissknife virtual UI binding => dev/meta-rayban-display-simulator/webapp/app.js (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.32); VAI-007 operator-console plane => implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md (embedding:0.37), mobile/modules/expo-glasses-audio/index.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast); MGW-269 display widget normalized intents => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.30); tests/test_virtual_ai_os_end_to_end_harness.py => tests/test_virtual_ai_os_end_to_end_harness.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G691 Desktop peer offload and receipts
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G689
 - Fib priority: 2
 - Track: launch
@@ -655,10 +661,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_hallucinate_multimodal_control_todo_queue.py -q
 - Refinement: Split only if placement policy, receipt schema, or recovery behavior needs a separate failing test.
 - Gap task: Prove phone-originated work can be offloaded to a desktop peer with receipts and recovery instead of local-only execution.
+- Completed at: 2026-06-23T07:45:03.060209+00:00
+- Completion evidence: HAO-429 peer-offload policy receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); HAO-430 hardware-free multimodal offload harness => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (embedding:0.35); capability scheduler policy => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/screens/CommandScreen.js (ast); tests/test_virtual_ai_os_end_to_end_harness.py => tests/test_virtual_ai_os_end_to_end_harness.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
 
 ## VAIOS-G692 Meta glasses terminal readiness
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G689
 - Fib priority: 2
 - Track: launch
@@ -675,3 +684,6 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_virtual_ai_os_todo_queue.py -q
 - Refinement: Split simulator, phone pairing, and physical-device evidence only when one of those blocks launch readiness.
 - Gap task: Prove Meta glasses can operate as the mobile terminal for the virtual desktop and can report desktop-offload state.
+- Completed at: 2026-06-23T07:45:03.060209+00:00
+- Completion evidence: VAI-008 Meta glasses remote terminal => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact); src/handsfree/meta_glasses_remote_terminal.py => src/handsfree/meta_glasses_remote_terminal.py (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast); VAI-016 browser simulator shell => mobile/modules/expo-glasses-audio/index.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast); VAI-012 physical-device readiness plan => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); tests/test_virtual_ai_os_end_to_end_harness.py => tests/test_virtual_ai_os_end_to_end_harness.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
+- Completion validation: 0
