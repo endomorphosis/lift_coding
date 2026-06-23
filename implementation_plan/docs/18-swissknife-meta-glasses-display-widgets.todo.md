@@ -3101,3 +3101,38 @@ The meta glasses display supervisor stores resumable autonomous state in:
 - Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
 - Validation: rg -n "MGW-273|physical-device rehearsal|phone-hosted|Meta glasses|pairing|fallback|receipt" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md data/meta_glasses_display_widgets/discovery
 - Acceptance: Produce a rehearsal packet for the first physical phone plus Meta glasses session, including pairing prerequisites, DAT/Web App fallback choice, expected widget states, manual evidence to capture, and the exact simulator replay artifacts that must match before hardware validation starts.
+
+## MGW-274 Close objective gap: Production launch readiness gate
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+- Bundle: objective/launch/production-readiness-gate
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-production-readiness-gate.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G689
+- Graph depth: 1
+- Parallel lane: launch-readiness-gate
+- Conflict policy: keep launch readiness evidence in explicit receipts and tests; do not accept generic AST or documentation matches as sufficient proof
+- Goal id: VAIOS-G697
+- Missing evidence: launch Playwright validation gate
+- Embedding query: production launch gate phone hosted Swissknife virtual desktop desktop peer offload Meta glasses terminal physical validation receipts Playwright e2e
+- AST query: LaunchReadinessGate, launch_readiness_receipt_v1, phone_desktop_glasses_readiness, playwright, meta-glasses-virtual-os, multimodal-control-surface
+- Surplus group: objective/VAIOS-G697
+- Merge key: 6e8ea139dc089f90
+- Merge family: objective/VAIOS-G697
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: cc195571dde04580
+- Acceptance: Objective scan filed this gap for VAIOS-G697. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-objective-gap-3c1f2a790f3e.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Split only if the gate needs a separate child for physical phone, desktop peer, or Meta glasses evidence capture.
