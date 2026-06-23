@@ -293,7 +293,7 @@ cadence remains parseable and resumable.
 
 ## VAI-024 Add Hallucinate App and SwissKnife desktop operator E2E coverage
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
