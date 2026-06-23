@@ -1,35 +1,35 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 957c3dac62269358ec05526e9f3df34c3baa0319
+Fingerprint: 2f642aa77afb7f7041e3e95059fde436d1afae5b
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 1
+Candidate count: 2
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` m external/ipfs_accelerate`
-- ` M tests/test_virtual_ai_os_todo_queue.py`
+- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU tests/test_virtual_ai_os_runtime_router.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=1`
+- Path categories: `unmerged=2`
 - Status paths:
-  - `external/ipfs_accelerate`
-  - `tests/test_virtual_ai_os_todo_queue.py`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `tests/test_virtual_ai_os_runtime_router.py`
 - Name status:
-  - `M	external/ipfs_accelerate`
-  - `M	tests/test_virtual_ai_os_todo_queue.py`
-- Diff stat:
-  - `external/ipfs_accelerate               |  0`
-  - ` tests/test_virtual_ai_os_todo_queue.py | 17 ++++++++++++++++-`
-  - ` 2 files changed, 16 insertions(+), 1 deletion(-)`
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	tests/test_virtual_ai_os_runtime_router.py`
+- Staged name status:
+  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `U	tests/test_virtual_ai_os_runtime_router.py`
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/implementation-vai-021-attempt-2-1782221461-bd29abce34d7` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-021-attempt-2-1782221461`
+- `rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032`
+- `implementation/vai-338-attempt-1-1782235197` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235197`
 
 ## Why This Blocks Progress
 
@@ -48,7 +48,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `2` candidates, `2` sampled records.
 
 ### Suggested Actions
 
@@ -90,25 +90,29 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "957c3dac62269358ec05526e9f3df34c3baa0319",
+  "fingerprint": "2f642aa77afb7f7041e3e95059fde436d1afae5b",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "external/ipfs_accelerate               |  0\n tests/test_virtual_ai_os_todo_queue.py | 17 ++++++++++++++++-\n 2 files changed, 16 insertions(+), 1 deletion(-)",
-    "name_status": "M\texternal/ipfs_accelerate\nM\ttests/test_virtual_ai_os_todo_queue.py",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-05-26-vai-029-merge-unblock-resolution.md",
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\ttests/test_virtual_ai_os_runtime_router.py",
     "path_categories": {
-      "modified": 1,
-      "other_dirty": 1
+      "unmerged": 2
     },
+    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\ttests/test_virtual_ai_os_runtime_router.py",
     "status_paths": [
-      "external/ipfs_accelerate",
-      "tests/test_virtual_ai_os_todo_queue.py"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "tests/test_virtual_ai_os_runtime_router.py"
     ],
     "status_short": [
-      " m external/ipfs_accelerate",
-      " M tests/test_virtual_ai_os_todo_queue.py"
+      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "UU tests/test_virtual_ai_os_runtime_router.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -118,15 +122,17 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/implementation-vai-021-attempt-2-1782221461-bd29abce34d7"
+    "rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc",
+    "implementation/vai-338-attempt-1-1782235197"
   ],
-  "sample_count": 1,
+  "sample_count": 2,
   "sample_status_paths": [
-    "external/ipfs_accelerate",
-    "tests/test_virtual_ai_os_todo_queue.py"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "tests/test_virtual_ai_os_runtime_router.py"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-021-attempt-2-1782221461"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235197"
   ],
   "success_signals": [
     "candidate_count_decreases",
