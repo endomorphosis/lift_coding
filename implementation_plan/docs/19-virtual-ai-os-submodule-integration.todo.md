@@ -2284,7 +2284,7 @@ cadence remains parseable and resumable.
 
 ## VAI-381 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:174
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: docs
