@@ -1819,7 +1819,7 @@ cadence remains parseable and resumable.
 
 ## VAI-339 Prove the launch replay receipt chain
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
