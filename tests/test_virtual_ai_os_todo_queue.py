@@ -480,6 +480,9 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "desktop peer offload",
         "Hallucinate App mediation",
         "Meta glasses interface",
+        "Playwright launch replay",
+        "cross-device e2e validation",
+        "launch readiness receipt",
     ):
         assert term in common_arg_values
     assert "--objective-scan-min-open-tasks" in common_arg_values
@@ -619,6 +622,17 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     assert len(active_goals) <= 16
     assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
     assert goals_by_id["VAIOS-G697"].status == "active"
+    launch_gate_validation = goals_by_id["VAIOS-G697"].fields.get("validation", "")
+    assert "tests/test_virtual_ai_os_launch_readiness_gate.py" in launch_gate_validation
+    assert "npm --prefix swissknife run test:e2e:meta-glasses" in launch_gate_validation
+    assert (
+        "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+        in launch_gate_validation
+    )
+    launch_gate_evidence = goals_by_id["VAIOS-G697"].fields.get("evidence", "")
+    assert "Playwright launch replay" in launch_gate_evidence
+    assert "swissknife/test/e2e/meta-glasses-virtual-os.spec.ts" in launch_gate_evidence
+    assert "hallucinate_app/test/e2e/multimodal-control-surface.spec.ts" in launch_gate_evidence
     for goal_id in ("VAIOS-G698", "VAIOS-G699"):
         assert goals_by_id[goal_id].status in {"active", "completed"}
         if goals_by_id[goal_id].status == "completed":

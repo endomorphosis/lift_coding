@@ -797,13 +797,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Bundle: objective/launch/production-readiness-gate
 - Parallel lane: launch-readiness-gate
 - Refinement depth: 2
-- Embedding query: production launch gate phone hosted Swissknife virtual desktop desktop peer offload Meta glasses terminal physical validation receipts
-- AST query: LaunchReadinessGate, launch_readiness_receipt_v1, phone_desktop_glasses_readiness
+- Embedding query: production launch gate phone hosted Swissknife virtual desktop desktop peer offload Meta glasses terminal physical validation receipts Playwright e2e
+- AST query: LaunchReadinessGate, launch_readiness_receipt_v1, phone_desktop_glasses_readiness, playwright, meta-glasses-virtual-os, multimodal-control-surface
 - Conflict policy: keep launch readiness evidence in explicit receipts and tests; do not accept generic AST or documentation matches as sufficient proof
 - Goal: The supervisor must keep the phone-hosted Swissknife virtual desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses terminal path open until a launch-readiness receipt proves every product-critical hop.
-- Evidence: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, launch_readiness_receipt_v1
+- Evidence: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, launch_readiness_receipt_v1, swissknife/test/e2e/meta-glasses-virtual-os.spec.ts, hallucinate_app/test/e2e/multimodal-control-surface.spec.ts, Playwright launch replay
 - Outputs: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, data/virtual_ai_os/discovery
-- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 - Refinement: Split only if the gate needs a separate child for physical phone, desktop peer, or Meta glasses evidence capture.
 - Gap task: Add a launch-readiness gate that prevents the objective heap from treating weak scanner matches as proof that the product slice is production ready.
 

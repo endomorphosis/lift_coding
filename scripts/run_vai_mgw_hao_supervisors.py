@@ -56,6 +56,9 @@ VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
     "mobile phone",
     "production readiness",
     "launch readiness",
+    "Playwright launch replay",
+    "cross-device e2e validation",
+    "launch readiness receipt",
 )
 
 VAI_MGW_HAO_LAUNCH_MISSION_ARGS = tuple(
