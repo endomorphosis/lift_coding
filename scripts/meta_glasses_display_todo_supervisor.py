@@ -71,8 +71,17 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "hallucinate_multimodal_control": ("discovery",),
     },
     extra_prefixes=(
+        "archive/",
+        "backup/",
+        "cleanup-archive/",
         "data/meta_glasses_display_widgets/state/",
         "data/meta_glasses_display_widgets/worktrees/",
+        "external/ipfs_accelerate/test/duckdb_api/",
+        "external/ipfs_accelerate/test/generators/",
+        "external/ipfs_accelerate/test/huggingface_transformers/",
+        "external/ipfs_accelerate/test/skills/",
+        "external/ipfs_kit/archive/",
+        "external/ipfs_kit/backup/",
     ),
 )
 TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(

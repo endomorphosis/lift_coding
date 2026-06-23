@@ -95,6 +95,17 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         ),
     },
     include_scripts=True,
+    extra_prefixes=(
+        "archive/",
+        "backup/",
+        "cleanup-archive/",
+        "external/ipfs_accelerate/test/duckdb_api/",
+        "external/ipfs_accelerate/test/generators/",
+        "external/ipfs_accelerate/test/huggingface_transformers/",
+        "external/ipfs_accelerate/test/skills/",
+        "external/ipfs_kit/archive/",
+        "external/ipfs_kit/backup/",
+    ),
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
 

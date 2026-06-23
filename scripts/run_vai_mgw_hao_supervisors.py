@@ -61,6 +61,12 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "1",
     "--daemon-merged-worktree-cleanup-max",
     "50",
+    "--codebase-scan-max-findings",
+    "0",
+    "--objective-scan-max-findings",
+    "6",
+    "--objective-surplus-findings-per-goal",
+    "2",
 )
 
 

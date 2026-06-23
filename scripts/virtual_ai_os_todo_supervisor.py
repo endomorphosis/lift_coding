@@ -81,6 +81,17 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "meta_glasses_display_widgets": ("discovery", "state", "worktrees"),
     },
     include_scripts=True,
+    extra_prefixes=(
+        "archive/",
+        "backup/",
+        "cleanup-archive/",
+        "external/ipfs_accelerate/test/duckdb_api/",
+        "external/ipfs_accelerate/test/generators/",
+        "external/ipfs_accelerate/test/huggingface_transformers/",
+        "external/ipfs_accelerate/test/skills/",
+        "external/ipfs_kit/archive/",
+        "external/ipfs_kit/backup/",
+    ),
 )
 
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402

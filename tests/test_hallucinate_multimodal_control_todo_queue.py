@@ -47,6 +47,40 @@ def _load_tasks():
     return parse_task_file(TASK_BOARD_PATH, "## HAO-")
 
 
+def test_objective_heap_schedule_deduplicates_interoperability_pairs():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import objective_heap_schedule, parse_goal_heap
+
+    goals = parse_goal_heap(
+        "\n".join(
+            (
+                "## OBJ-001 First pair",
+                "- Status: active",
+                "- Priority: P0",
+                "- Fibonacci priority: 1",
+                "- Interoperability pair: hallucinate_app, external/ipfs_accelerate",
+                "- Required evidence: proof/a.json",
+                "## OBJ-002 Duplicate pair",
+                "- Status: active",
+                "- Priority: P0",
+                "- Fibonacci priority: 1",
+                "- Interoperability pair: external/ipfs_accelerate, hallucinate_app",
+                "- Required evidence: proof/b.json",
+                "## OBJ-003 Different pair",
+                "- Status: active",
+                "- Priority: P1",
+                "- Fibonacci priority: 1",
+                "- Interoperability pair: hallucinate_app, swissknife",
+                "- Required evidence: proof/c.json",
+            )
+        )
+    )
+
+    scheduled_ids = [record.goal_id for record in objective_heap_schedule(goals)]
+
+    assert scheduled_ids == ["OBJ-001", "OBJ-003"]
+
+
 def test_hallucinate_multimodal_queue_test_source_is_scan_clean():
     original_sys_path = list(sys.path)
     try:

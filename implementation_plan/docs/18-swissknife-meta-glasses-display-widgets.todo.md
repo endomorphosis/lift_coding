@@ -13,6 +13,16 @@ python3 scripts/meta_glasses_display_llm_router.py --task-id MGW-001
 
 To allow autonomous implementation in isolated worktrees, pass `--implement` to the supervisor or daemon and provide an implementation command if the default Codex/Copilot fallback is not desired.
 
+## Autonomous Cadence State
+
+The meta glasses display supervisor stores resumable autonomous state in:
+
+- Task state: data/meta_glasses_display_widgets/state/meta_glasses_display_task_state.json
+- Strategy state: data/meta_glasses_display_widgets/state/meta_glasses_display_strategy.json
+- Event log: data/meta_glasses_display_widgets/state/meta_glasses_display_events.jsonl
+- Worktrees: data/meta_glasses_display_widgets/worktrees
+- State keys: recommended_task_id, ready_task_ids, waiting_task_ids, task_statuses, task_artifacts, task_validation
+
 ## MGW-000 Bootstrap supervised display-widget backlog processing
 
 - Status: completed

@@ -40,6 +40,8 @@ cadence remains parseable and resumable.
 
 ## VAI-001 Record reviewed source topology and pin guardrails
 
+- Status: completed
+- Completion: manual
 - Priority: P2
 - Track: ops
 - Depends on: none
@@ -49,25 +51,124 @@ cadence remains parseable and resumable.
 
 ## VAI-002 Align root git submodule wiring with canonical upstreams
 
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-001
+- Outputs: .gitmodules, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: git submodule status; rg -n "VAI-002|canonical upstream|submodule wiring" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Review root gitlinks against the canonical upstream map, record any mismatches with evidence, and make only intentional submodule URL or branch changes needed for the virtual AI OS integration path.
+
 ## VAI-003 Define the cross-repo capability registry
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: integration
+- Depends on: VAI-001
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, tests/test_virtual_ai_os_capability_registry.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_capability_registry.py
+- Acceptance: Define a daemon-parseable capability registry that maps SwissKnife, Hallucinate App, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit, mobile, and Meta glasses surfaces to ownership, transport, health probe, placement constraints, and expected proof artifacts.
 
 ## VAI-004 Add the virtual runtime placement layer
 
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: VAI-003
+- Outputs: src/handsfree/runtime_placement.py, tests/test_virtual_ai_os_runtime_placement.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_runtime_placement.py
+- Acceptance: Add a placement policy that can decide local phone, desktop offload, browser worker, and remote peer execution from capability, latency, power, trust, and resource hints, with deterministic fallback behavior when probes fail.
+
 ## VAI-005 Integrate ipfs_datasets_py todo-daemon state into HandsFree task orchestration
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: integration
+- Depends on: VAI-003
+- Outputs: scripts/virtual_ai_os_todo_supervisor.py, tests/test_virtual_ai_os_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Surface ipfs_datasets_py daemon state as a first-class orchestration input so task selection can account for dataset availability, worker health, and blocked cross-repo dependencies without spawning duplicate work.
 
 ## VAI-006 Bind Swissknife into the virtual UI and ORB plane
 
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: ui
+- Depends on: VAI-003, VAI-004
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, tests/test_virtual_ai_os_swissknife_integration.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_swissknife_integration.py
+- Acceptance: Specify and test the SwissKnife desktop/mobile UI contract for opening tools, forwarding ORB commands, presenting remote session state, and handing capability calls to local or offloaded runtimes.
+
 ## VAI-007 Promote Hallucinate App into the operator-console plane
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: integration
+- Depends on: VAI-003, VAI-004
+- Outputs: hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md, tests/test_hallucinate_multimodal_control_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Treat Hallucinate App as the multimodal operator console for the virtual desktop, with explicit IDL coverage for command routing, stream control, proof capture, and error recovery between the UI and runtime planes.
 
 ## VAI-008 Route Meta glasses audio and display as remote terminal endpoints
 
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: device
+- Depends on: VAI-003, VAI-004, VAI-006, VAI-007
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, tests/test_meta_glasses_display_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Define and validate the Meta glasses path as a constrained terminal for mobile-hosted sessions, including audio command input, visual status output, pairing state, disconnection handling, and desktop-offload visibility.
+
 ## VAI-009 Add environment, pin, and bootstrap contracts for component repos
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-002, VAI-003
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, scripts/run_vai_mgw_hao_supervisors.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Document and test the repo bootstrap contract for every participating submodule, including auth assumptions, environment variables, detached worktree policy, merge cleanup defaults, and when a submodule pin may advance.
 
 ## VAI-010 Build a hardware-free end-to-end integration harness
 
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: VAI-003, VAI-004, VAI-006, VAI-007, VAI-008
+- Outputs: tests/test_virtual_ai_os_end_to_end_harness.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py
+- Acceptance: Add a hardware-free path that simulates phone, desktop peer, SwissKnife UI, Hallucinate App command plane, and Meta glasses terminal enough to prove command dispatch, compute offload, response streaming, and recovery behavior.
+
 ## VAI-011 Add observability, policy, and rollback coverage
 
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-004, VAI-010
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, tests/test_virtual_ai_os_observability.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_observability.py
+- Acceptance: Capture policy decisions, placement changes, remote execution receipts, validation failures, and rollback events in stable artifacts that supervisors can use to retry or reconcile work without manual archaeology.
+
 ## VAI-012 Validate physical-device and desktop operator readiness
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: device
+- Depends on: VAI-008, VAI-010, VAI-011
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-012|physical-device|desktop operator|readiness" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Produce a readiness checklist and evidence plan for an actual phone, desktop offload host, and Meta glasses session, including what remains simulator-only and what must be manually verified on devices.
 
 ## VAI-013 Resolve the canonical mcp_plus_plus upstream source
 
@@ -93,27 +194,135 @@ cadence remains parseable and resumable.
 
 ## VAI-015 Refresh reviewed submodule pins and automation guardrails
 
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-002, VAI-009
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: git submodule status; rg -n "VAI-015|submodule pins|automation guardrails" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Reconcile the root submodule pin policy with current integration evidence and record any required pin movement as explicit, reviewed work rather than incidental daemon churn.
+
 ## VAI-016 Build the Meta Ray-Ban browser simulator shell
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: device
+- Depends on: VAI-008
+- Outputs: tests/test_meta_glasses_display_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Extend the browser simulator path so the glasses display and audio surfaces can be driven by the same command/session model expected from the mobile-hosted virtual desktop.
 
 ## VAI-017 Connect simulator artifacts to mobile ORB and Web App readiness flows
 
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: VAI-016
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-017|mobile ORB|Web App readiness|simulator artifacts" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Feed simulator proofs into the mobile ORB and web app readiness checks so a glasses-terminal session can be validated before physical hardware is attached.
+
 ## VAI-018 Validate DAT MockDeviceKit parity for native mobile simulation
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: VAI-017
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-018|MockDeviceKit|native mobile simulation|DAT" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Compare native mobile simulator behavior with DAT MockDeviceKit assumptions and record gaps that would affect command capture, display updates, networking, or device-pairing state.
 
 ## VAI-019 Add cross-submodule virtual AI OS integration tests
 
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: VAI-003, VAI-004, VAI-006, VAI-007, VAI-008, VAI-010
+- Outputs: tests/test_virtual_ai_os_end_to_end_harness.py, tests/test_virtual_ai_os_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Add integration coverage that links at least two real submodules per scenario and proves the virtual desktop can route commands, select execution placement, and collect validation artifacts across repo boundaries.
+
 ## VAI-020 Harden mobile ORB edge diagnostics and policy receipts
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: VAI-004, VAI-011, VAI-017
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-020|ORB edge diagnostics|policy receipts" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Record mobile ORB diagnostics and policy receipts for command routing, offload selection, permission denial, and recovery so the supervisor can distinguish implementation failure from unavailable device conditions.
 
 ## VAI-021 Resolve nested submodule hygiene for ipfs_kit recursive bootstrap
 
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-002, VAI-009
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: git submodule status --recursive; rg -n "VAI-021|nested submodule|ipfs_kit|recursive bootstrap" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Document or fix nested submodule bootstrap issues that block ipfs_kit from participating in the virtual desktop network path, with no unrelated gitlink churn.
+
 ## VAI-022 Package the browser Web App for HTTPS glasses loading
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ui
+- Depends on: VAI-008, VAI-016
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-022|HTTPS glasses loading|browser Web App" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Define the browser packaging and HTTPS loading path required for glasses-accessible UI surfaces, including local development, phone-hosted, and desktop-hosted modes.
 
 ## VAI-023 Prepare iPhone native DAT handoff and physical validation evidence
 
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: mobile
+- Depends on: VAI-018, VAI-020
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-023|iPhone native DAT handoff|physical validation" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Prepare the iPhone handoff evidence plan and runtime contract for DAT-backed mobile sessions that can control local UI, offload compute, and expose status to Meta glasses.
+
 ## VAI-024 Add Hallucinate App and SwissKnife desktop operator E2E coverage
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: VAI-006, VAI-007, VAI-010
+- Outputs: tests/test_virtual_ai_os_end_to_end_harness.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py
+- Acceptance: Prove a desktop operator path where SwissKnife presents a session, Hallucinate App routes multimodal controls, and the runtime placement layer can execute locally or hand work to a peer.
 
 ## VAI-025 Re-check canonical mcp_plus_plus source and standalone pin decision
 
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-013
+- Outputs: .gitmodules, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: git submodule status Mcp-Plus-Plus; rg -n "VAI-025|mcp_plus_plus|standalone pin" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Re-check whether mcp_plus_plus is a standalone source repo or only a protocol/spec surface and keep the root pin decision consistent with the recorded upstream evidence.
+
 ## VAI-026 Supervised autonomous implementation cadence
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: none
+- Outputs: tests/test_virtual_ai_os_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Keep the autonomous cadence resumable by proving run the daemon before the supervisor ordering, dependency ordering, and isolated worktree implementation behavior in the VAI queue tests.
 
 ## VAI-027 Resolve merge retry-budget failure for VAI-019
 

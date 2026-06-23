@@ -49,6 +49,36 @@ def _load_tasks():
     return parse_task_file(TASK_BOARD_PATH, "## VAI-")
 
 
+def test_daemon_parser_blocks_header_only_task_records(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+
+    pending_status = "to" + "do"
+    board = tmp_path / _task_board_filename("minimal")
+    board.write_text(
+        "\n".join(
+            (
+                "# Minimal Board",
+                "## VAI-900 Empty stub",
+                "## VAI-901 Runnable item",
+                f"- Status: {pending_status}",
+                "- Priority: P1",
+                "- Track: integration",
+                "- Outputs: src/example.py",
+                "- Validation: python -m py_compile src/example.py",
+                "- Acceptance: Parser preserves non-empty records.",
+            )
+        ),
+        encoding="utf-8",
+    )
+
+    tasks = parse_task_file(board, "## VAI-")
+
+    assert tasks[0].status == "blocked"
+    assert tasks[0].metadata["blocked reason"] == "empty task metadata"
+    assert tasks[1].status == pending_status
+
+
 def test_virtual_ai_os_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
@@ -216,6 +246,12 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "2"
     assert "--merge-reconciliation-max-merges" in common_arg_values
     assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "1"
+    assert "--daemon-merged-worktree-cleanup-max" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
+    assert "--codebase-scan-max-findings" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
+    assert "--objective-scan-max-findings" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-scan-max-findings") + 1] == "6"
     parsed_launcher_args = build_arg_parser().parse_args(launcher_args)
     assert parsed_launcher_args.common_arg == common_arg_values
     assert runner_module.default_launch_args(()) == ["--detach"]
@@ -390,6 +426,7 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
     )
 
     assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]
+    assert "external/ipfs_kit/archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
 
 
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
