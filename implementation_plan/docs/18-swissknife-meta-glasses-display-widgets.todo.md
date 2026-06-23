@@ -300,3 +300,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-025-reconciliation-12735569962d.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-025-reconciliation-12735569962d.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## MGW-026 Resolve validation retry-budget failure for MGW-003
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-002
+- Outputs: swissknife/test/fixtures/meta-glasses-display/valid-task-progress-widget.json, swissknife/test/fixtures/meta-glasses-display/invalid-widget-cases.json, mobile/src/native/__fixtures__/metaWearablesDisplayStates.js, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-003. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-026-mgw-003-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-003 from strategy blocked_tasks.
