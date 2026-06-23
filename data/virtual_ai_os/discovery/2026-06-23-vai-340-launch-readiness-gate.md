@@ -12,6 +12,9 @@ guard, the Swissknife Meta glasses Playwright gate, and the Hallucinate App
 multimodal control-surface Playwright gate are all wired to the same product
 slice.
 
+Mission coverage: phone-hosted Swissknife virtual desktop, desktop-peer offload,
+Hallucinate App mediation, and Meta glasses terminal.
+
 ## LaunchReadinessGate
 
 ```json

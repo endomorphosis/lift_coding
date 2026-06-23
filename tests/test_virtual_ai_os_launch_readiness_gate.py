@@ -20,7 +20,15 @@ HAO_436_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-23-hao-436-launch-readiness-gate.md"
 )
+MGW_274_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "meta_glasses_display_widgets"
+    / "discovery"
+    / "2026-06-23-mgw-274-launch-readiness-gate.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
+SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
     REPO_ROOT / "swissknife" / "build-tools" / "configs" / "playwright.meta-glasses.config.ts"
 )
@@ -86,12 +94,19 @@ def test_launch_readiness_receipt_covers_product_critical_hops():
 
 def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     package = json.loads(SWISSKNIFE_PACKAGE_PATH.read_text(encoding="utf-8"))
+    runner_source = SWISSKNIFE_RUNNER_PATH.read_text(encoding="utf-8")
     config_source = SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH.read_text(encoding="utf-8")
     spec_source = SWISSKNIFE_SPEC_PATH.read_text(encoding="utf-8")
 
     assert package["scripts"]["test:e2e:meta-glasses"] == (
-        "npx playwright test -c build-tools/configs/playwright.meta-glasses.config.ts"
+        "node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.meta-glasses.config.ts"
     )
+    for runner_term in ("node_modules", "@playwright", "test", "cli.js"):
+        assert runner_term in runner_source
+    assert "ensureE2EDependencies" in runner_source
+    assert "SWISSKNIFE_E2E_NO_BOOTSTRAP" in runner_source
+    assert "--legacy-peer-deps" in runner_source
+    assert "runPlaywright(args)" in runner_source
     assert "meta-glasses-virtual-os.spec.ts" in config_source
     assert "meta-glasses-chromium" in config_source
     assert "test-results/meta-glasses-virtual-os/results.json" in config_source
@@ -134,6 +149,8 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     doc_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
     hao_source = HAO_436_RECEIPT_PATH.read_text(encoding="utf-8")
+    mgw_source = MGW_274_RECEIPT_PATH.read_text(encoding="utf-8")
+    vai_source = VAI_340_RECEIPT_PATH.read_text(encoding="utf-8")
     receipt = _load_launch_readiness_receipt()
 
     required_terms = [
@@ -153,9 +170,22 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
         assert term in doc_source
         assert term in heap_source
         assert term in hao_source
+        assert term in mgw_source
+        assert term in vai_source
 
     assert receipt["readiness_doc"] == "docs/launch/phone_desktop_glasses_readiness.md"
     assert "VAI-340 launch readiness gate" in heap_source
     assert "HAO-436 launch readiness gate" in heap_source
+    assert "MGW-274 launch readiness gate" in heap_source
     assert "2026-06-23-vai-340-launch-readiness-gate.md" in heap_source
+    assert "2026-06-23-mgw-274-launch-readiness-gate.md" in heap_source
+    assert "2026-06-23-hao-436-launch-readiness-gate.md" in heap_source
+    assert "2026-06-23-vai-340-launch-readiness-gate.md" in doc_source
     assert "2026-06-23-hao-436-launch-readiness-gate.md" in doc_source
+    assert "2026-06-23-mgw-274-launch-readiness-gate.md" in doc_source
+    assert "HAO-436" in doc_source
+    assert "MGW-274" in doc_source
+    assert "VAI-340" in doc_source
+    assert "HAO-436" in hao_source
+    assert "MGW-274" in mgw_source
+    assert "VAI-340" in vai_source
