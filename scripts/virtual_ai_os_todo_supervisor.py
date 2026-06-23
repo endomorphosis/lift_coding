@@ -105,7 +105,7 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = (
-    "scripts/",  # supervisor/daemon scripts reference .todo.md paths by design
+    "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
     "data/virtual_ai_os/objective_datasets/",
