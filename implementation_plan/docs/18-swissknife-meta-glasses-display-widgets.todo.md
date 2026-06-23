@@ -3012,7 +3012,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-266 Add peer-offload status and controls to the display widget contract
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: runtime
