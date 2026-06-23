@@ -3060,7 +3060,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-270 Add launch-session widget replay evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
