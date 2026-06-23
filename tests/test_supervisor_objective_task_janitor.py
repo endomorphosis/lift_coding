@@ -155,6 +155,70 @@ def test_objective_task_janitor_records_configured_mission_terms():
     assert updated["objective_task_janitor_mission_terms"] == ["edge compositor handshake"]
 
 
+def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog():
+    _ObjectiveGoal, PortalTask, schema, reconcile = _imports()
+    tasks = [
+        PortalTask(
+            "VAI-199",
+            "Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032",
+            "todo",
+            "manual",
+            "P1",
+            "runtime",
+            acceptance=(
+                "Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/"
+                "control_surface_policy.py:1032."
+            ),
+        ),
+        PortalTask(
+            "MGW-026",
+            "Resolve validation retry-budget failure for MGW-003",
+            "todo",
+            "manual",
+            "P1",
+            "ops",
+            acceptance="Validation retry-budget guardrail filed this from repeated validation failures.",
+        ),
+        PortalTask(
+            "MGW-027",
+            "Resolve code annotation in swissknife/meta_glasses_overlay.ts:44",
+            "todo",
+            "manual",
+            "P1",
+            "runtime",
+            acceptance="Keep the Meta glasses interface Playwright launch replay covered.",
+        ),
+    ]
+
+    result = reconcile(
+        goals=[],
+        tasks=tasks,
+        strategy={},
+        now="2026-06-23T00:00:00+00:00",
+        mission_terms=("Meta glasses interface", "Playwright launch replay"),
+    )
+    updated = result["strategy"]
+
+    assert result["changed"]
+    assert updated["deprioritized_tasks"] == ["VAI-199"]
+    assert updated["objective_task_janitor_receipts"] == [
+        {
+            "schema": schema,
+            "recorded_at": "2026-06-23T00:00:00+00:00",
+            "task_id": "VAI-199",
+            "action": "deprioritize",
+            "retired_task_reason": "off_mission_codebase_scan_task",
+            "goal_ids": [],
+            "title": (
+                "Review swallowed exception path in hallucinate_app/python/hallucinate_app/"
+                "control_surface_policy.py:1032"
+            ),
+            "priority": "P1",
+            "track": "runtime",
+        }
+    ]
+
+
 def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
