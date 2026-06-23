@@ -52,6 +52,53 @@ def _load_tasks():
     return parse_task_file(TASK_BOARD_PATH, "## VAI-")
 
 
+def test_daemon_treats_merge_lock_deferrals_as_retryable_waits():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    lock_result = {"merged": False, "attempted": False, "reason": "lock_exists"}
+    conflict_result = {"merged": False, "attempted": True, "reason": "merge_conflict"}
+
+    assert PortalImplementationDaemon._merge_result_needs_reconciliation(lock_result)
+    assert PortalImplementationDaemon._merge_result_is_transient_lock_deferral(lock_result)
+    assert PortalImplementationDaemon._merge_result_needs_reconciliation(conflict_result)
+    assert not PortalImplementationDaemon._merge_result_is_transient_lock_deferral(conflict_result)
+    assert not PortalImplementationDaemon._merge_result_is_transient_lock_deferral(
+        {"merged": True, "attempted": True, "reason": "merged"}
+    )
+
+
+def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    conflict_event = {
+        "task_id": "VAI-010",
+        "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
+    }
+    lock_event = {
+        "task_id": "VAI-011",
+        "merge_result": {"merged": False, "attempted": False, "reason": "lock_unavailable"},
+    }
+
+    selected_when_disabled = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [conflict_event, lock_event],
+        max_merges=0,
+    )
+    selected_when_limited = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [conflict_event, lock_event],
+        max_merges=1,
+    )
+    selected_when_open = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [conflict_event, lock_event],
+        max_merges=3,
+    )
+
+    assert selected_when_disabled == [lock_event]
+    assert selected_when_limited == [lock_event]
+    assert selected_when_open == [lock_event, conflict_event]
+
+
 def test_daemon_parser_blocks_header_only_task_records(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
