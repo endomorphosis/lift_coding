@@ -50,7 +50,7 @@ DETACHED_WORKTREE_POLICY = (
 )
 
 MERGE_CLEANUP_DEFAULTS = {
-    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "3"),
+    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "0"),
     "merge_reconciliation_max_merges": os.environ.get("MERGE_RECONCILIATION_MAX_MERGES", "3"),
     "daemon_merged_worktree_cleanup_max": "50",
 }
