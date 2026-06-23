@@ -81,7 +81,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-006 Add HandsFree backend widget action contract
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: backend
