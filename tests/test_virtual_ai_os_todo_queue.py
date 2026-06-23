@@ -473,6 +473,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-depth") + 1] == "2"
     assert "--objective-max-interoperability-goals" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "0"
+    assert "--no-objective-goal-completion-reconcile" in common_arg_values
     assert common_arg_values.count("--objective-mission-term") == len(
         runner_module.VAI_MGW_HAO_LAUNCH_MISSION_TERMS
     )

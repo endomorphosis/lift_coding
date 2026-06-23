@@ -108,6 +108,7 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "2",
     "--objective-max-interoperability-goals",
     "0",
+    "--no-objective-goal-completion-reconcile",
     *VAI_MGW_HAO_LAUNCH_MISSION_ARGS,
     "--objective-scan-min-open-tasks",
     "3",
