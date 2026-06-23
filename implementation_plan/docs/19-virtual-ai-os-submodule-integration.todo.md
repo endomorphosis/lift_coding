@@ -73,8 +73,8 @@ cadence remains parseable and resumable.
 
 ## VAI-004 Add the virtual runtime placement layer
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: reconciled 2026-06-23: current main contains `src/handsfree/ai/runtime_placement.py`, runtime-router integration, and passing placement/router tests; stale branch `implementation/vai-004-attempt-1-1781233842` was not merged because it is based on an older tree and would reintroduce obsolete deletions.
 - Priority: P0
 - Track: runtime
 - Depends on: VAI-003
@@ -84,8 +84,8 @@ cadence remains parseable and resumable.
 
 ## VAI-005 Integrate ipfs_datasets_py todo-daemon state into HandsFree task orchestration
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: reconciled 2026-06-23: current main exposes todo-daemon state through HandsFree task orchestration tests, and the preserved branch `implementation/vai-005-attempt-1-1781234570` only changed this task status.
 - Priority: P1
 - Track: integration
 - Depends on: VAI-003

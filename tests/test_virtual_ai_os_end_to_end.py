@@ -314,6 +314,8 @@ def test_virtual_ai_os_full_task_flow_routes_orb_artifacts_and_glasses_fallback(
         "swissknife_orb",
         "hallucinate_app",
         "mobile_glasses",
+        "meta_glasses_audio",
+        "meta_glasses_display",
     ]
 
     artifact_refs = MCPArtifactRefs(
