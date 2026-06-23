@@ -1519,244 +1519,61 @@ cadence remains parseable and resumable.
 - Priority: P2
 - Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:380. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-186-codebase-scan-463570fd21dc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:532. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-052-codebase-scan-c28f9d1beee1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-187 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:389
+## VAI-053 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:604
 
-- Status: completed
+- Status: todo
 - Completion: manual
-- Priority: P2
+- Priority: P3
 - Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:389. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-187-codebase-scan-0b00a9870315.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:604. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-053-codebase-scan-ed0eacf2c1e0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-188 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:390
+## VAI-054 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:609
 
-- Status: completed
+- Status: todo
 - Completion: manual
-- Priority: P2
+- Priority: P3
 - Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:390. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-188-codebase-scan-c5f417bc9670.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:609. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-054-codebase-scan-56be23fb68eb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-189 Resolve code annotation in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:462
+## VAI-055 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:614
 
-- Status: completed
+- Status: todo
 - Completion: manual
-- Priority: P2
+- Priority: P3
 - Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:462. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-189-codebase-scan-851ad878de18.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:614. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-055-codebase-scan-5a5d7575aa1d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-190 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324
+## VAI-056 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:620
 
-- Status: completed
+- Status: todo
 - Completion: manual
-- Priority: P1
+- Priority: P3
 - Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-190-codebase-scan-ccb16b8cf977.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:620. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-056-codebase-scan-0857aa9175ad.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-191 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-191-codebase-scan-0151f4bbf728.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-192 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-192-codebase-scan-15d4816ce8d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-193 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-193-codebase-scan-7fae0bf71f93.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-194 Resolve merge retry-budget failure for VAI-191
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md
-- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-191. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-05-vai-194-vai-191-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-191 from strategy blocked_tasks.
-
-## VAI-195 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:1001
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:1001. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-195-codebase-scan-ad6f0cf5772c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-196 Review swallowed exception path in hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py:223
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
-- Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py:223. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-196-codebase-scan-c7eac77a4882.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-197 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022
+## VAI-057 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:621
 
 - Status: todo
 - Completion: manual
-- Priority: P1
-- Track: runtime
+- Priority: P3
+- Track: quality
 - Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-197-codebase-scan-c7debe50e8cb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-198 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027
-
-- Status: todo
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-198-codebase-scan-e8f8f357776a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-199 Review swallowed exception path in hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: runtime
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
-- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-200 Resolve dirty main checkout blocking 48 worktree merges
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Fingerprint: 1e4d8edacd67a3f9848204d5df19f0cfa624bfa0
-- Dedupe key: reconciliation_guardrail:main_checkout_dirty
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 48 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-
-## VAI-201 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
-
-- Status: todo
-- Completion: manual
-- Priority: P2
-- Track: ops
-- Fingerprint: 9e5ff24a11fa612ec217e2db481e5d706060804e
-- Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
-- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-
-## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
-
-- Status: todo
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Fingerprint: a85d85105867279486de1857555ef07b4b5b6c70
-- Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md
-- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-
-## VAI-203 Resolve 15 preflight-conflicting backlogged worktree merges
-
-- Status: todo
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Fingerprint: 19f9d53ba349afd9620566c87d1e062cb819943b
-- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
-- Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
-
-<<<<<<< HEAD
-## VAI-204 Resolve dependency guardrail for VAI-200
-
-- Status: completed
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md
-- Acceptance: Dependency guardrail filed this because VAI-200 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
-<<<<<<< HEAD
-
-## VAI-205 Review preserved VAI-202 dirty submodule source patches
-=======
-=======
-## VAI-204 Review preserved VAI-202 dirty submodule source patches
->>>>>>> implementation/mgw-235-attempt-2-1780821852
-
-- Status: todo
-- Completion: manual
-- Priority: P2
-- Track: ops
-- Depends on: VAI-202
-- Outputs: data/virtual_ai_os/discovery/vai-202-preserved-diffs, hallucinate_app
-- Validation: test -d data/virtual_ai_os/discovery/vai-202-preserved-diffs
-- Acceptance: VAI-202 preserved unique source diffs from merged dirty worktrees before cleanup. Review each patch in data/virtual_ai_os/discovery/vai-202-preserved-diffs, port or intentionally drop the corresponding hallucinate_app change, and record the decision so the merged-worktree cleanup can stay free of stale local source edits.
-<<<<<<< HEAD
-=======
->>>>>>> implementation/vai-202-attempt-1-1780819211
->>>>>>> implementation/mgw-235-attempt-2-1780821852
-
-## VAI-206 Resolve dependency guardrail for VAI-204
-
-- Status: todo
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Depends on:
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md
-- Acceptance: Dependency guardrail filed this because VAI-204 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+- Outputs: data/virtual_ai_os/discovery, tests/test_hallucinate_multimodal_control_todo_queue.py
+- Validation: python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_hallucinate_multimodal_control_todo_queue.py:621. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-26-vai-057-codebase-scan-a5472eeb1373.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

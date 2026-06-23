@@ -1322,16 +1322,25 @@ def test_codebase_scan_waits_until_open_backlog_is_low(tmp_path):
     _git(repo, "checkout", "-b", "main")
     _git(repo, "config", "user.name", "Test User")
     _git(repo, "config", "user.email", "test@example.invalid")
-    task_board_path = _temporary_board_path(repo)
-    _write_pending_backlog_board(task_board_path)
-    fixture_marker = "TO" + "DO"
-    flagged_source_line = f"# {fixture_marker}: this should wait for backlog drain"
-    assert flagged_source_line not in _source_text()
-    (repo / "scan_target.py").write_text(
-        flagged_source_line + "\n",
+    task_board_path = repo / TEMP_TASK_BOARD_FILENAME
+    task_board_path.write_text(
+        """# Temporary Board
+
+## HAO-001 Existing work
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: todo.md
+- Validation: true
+- Acceptance: Existing work remains.
+""",
         encoding="utf-8",
     )
-    _git(repo, "add", task_board_path.name, "scan_target.py")
+    (repo / "scan_target.py").write_text("# TODO: this should wait for backlog drain\n", encoding="utf-8")
+    _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "scan_target.py")
     _git(repo, "commit", "-m", "seed")
 
     findings = daemon_module.record_codebase_scan_findings(
