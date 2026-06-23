@@ -3023,7 +3023,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-267 Build a hardware-free phone/glasses terminal fixture
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality
