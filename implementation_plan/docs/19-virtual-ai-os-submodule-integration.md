@@ -451,6 +451,54 @@ VAI-008 validation evidence:
   records the reviewed device-plane evidence and dependency handoff from
   VAI-003, VAI-004, VAI-006, and VAI-007.
 
+#### VAI-012 Physical-Device and Desktop Operator Readiness
+
+VAI-012 is the device-readiness gate before claiming an actual phone, desktop
+offload host, or Meta glasses session. It does not replace the simulator
+harness from VAI-010 or the observability artifacts from VAI-011; it defines
+what must be carried from those proofs into a manual physical-device run.
+
+Readiness checklist:
+
+- Actual phone: record OS version, app build identifier, backend URL/auth mode,
+  mobile ORB diagnostics baseline, native DAT/Web App/mobile-card feature
+  flags, Meta AI app version, and pairing state before issuing the command.
+- Desktop operator host: record hostname or operator label, repo/worktree pin,
+  Hallucinate App console availability, SwissKnife ORB route availability,
+  desktop-peer placement policy, network reachability from the phone, and
+  fallback behavior when desktop offload is disabled or disconnected.
+- Meta glasses session: record firmware/app state, paired/unpaired transition,
+  audio command capture source, spoken response target, Web App HTTPS URL or
+  native DAT display state, D-pad/focus behavior, and recovery action when
+  pairing is lost.
+- Shared evidence: preserve `task_id`, `correlation_id`, `request_id`, widget
+  IDs, descriptor/interface CIDs, policy CIDs, receipt CIDs, placement changes,
+  remote execution receipts, rollback events, screenshots or operator notes,
+  and redacted logs for the same run.
+
+Evidence plan:
+
+- Start from the VAI-017 simulator/Web App readiness bundle and the VAI-010
+  hardware-free harness output. Those remain the source for command routing,
+  600x600 rendering, focus order, fallback render targets, and recovery logic.
+- Before attaching hardware, confirm VAI-011 artifact reconciliation can join
+  policy decisions, placement changes, remote execution receipts, validation
+  failures, and rollback events by `task_id`, `correlation_id`, and
+  `artifact_id`.
+- During the physical run, collect phone diagnostics, desktop operator/offload
+  receipts, and glasses-visible status for one shared session. The run is ready
+  only if those records join on the same correlation/request/widget/receipt
+  keys already proven by the simulator bundle.
+- Keep simulator-only claims separate from manual verification. Simulator-only
+  coverage proves routing, service binding, rendering metadata, fallback
+  semantics, and rollback shape. Manual device verification must prove real
+  phone connectivity, Meta AI app/Web App loading, physical glasses pairing,
+  audio capture/playback, D-pad interaction, desktop-host reachability, and
+  offload disconnect recovery on the actual devices.
+
+Evidence:
+[data/virtual_ai_os/discovery/2026-06-23-vai-012-physical-device-desktop-operator-readiness.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-012-physical-device-desktop-operator-readiness.md)
+
 #### VAI-022 Browser Web App Package for HTTPS Glasses Loading
 
 The glasses-accessible browser Web App is the static package at
