@@ -20,6 +20,34 @@ HAO_436_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-23-hao-436-launch-readiness-gate.md"
 )
+HAO_437_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-23-hao-437-phone-ingress-rehearsal.md"
+)
+HAO_438_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-23-hao-438-desktop-peer-offload-smoke.md"
+)
+HAO_439_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-23-hao-439-meta-glasses-terminal-receipt.md"
+)
+HAO_440_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-23-hao-440-launch-readiness-physical-aggregate.md"
+)
 MGW_274_RECEIPT_PATH = (
     REPO_ROOT
     / "data"
@@ -62,6 +90,10 @@ def _load_launch_readiness_receipt() -> dict:
     return _json_block_after(source, "## LaunchReadinessGate")
 
 
+def _load_receipt(path: Path, marker: str) -> dict:
+    return _json_block_after(path.read_text(encoding="utf-8"), marker)
+
+
 def test_launch_readiness_receipt_covers_product_critical_hops():
     receipt = _load_launch_readiness_receipt()
     replay = _json_block_after(
@@ -100,6 +132,78 @@ def test_launch_readiness_receipt_covers_product_critical_hops():
     assert "desktop_peer_or_phone_local_placement" in replay["covers"]
     assert replay["placement_policy"]["selected_runtime"] == "desktop_peer"
     assert replay["placement_policy"]["fallback_runtime"] == "phone_local"
+
+
+def test_launch_readiness_receipt_requires_physical_evidence_and_lineage():
+    receipt = _load_launch_readiness_receipt()
+    hao_437 = _load_receipt(HAO_437_RECEIPT_PATH, "## Real Phone Ingress Rehearsal Fixture")
+    hao_438 = _load_receipt(HAO_438_RECEIPT_PATH, "## Desktop-Peer Offload Smoke Fixture")
+    hao_439 = _load_receipt(HAO_439_RECEIPT_PATH, "## Meta Glasses Terminal Receipt Fixture")
+    hao_440 = _load_receipt(HAO_440_RECEIPT_PATH, "## Physical Readiness Aggregate Fixture")
+
+    requirements = {item["task_id"]: item for item in receipt["physical_readiness_requirements"]}
+    assert set(requirements) == {"HAO-437", "HAO-438", "HAO-439"}
+    assert requirements["HAO-437"]["receipt_path"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-06-23-hao-437-phone-ingress-rehearsal.md"
+    )
+    assert requirements["HAO-438"]["receipt_path"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-06-23-hao-438-desktop-peer-offload-smoke.md"
+    )
+    assert requirements["HAO-439"]["receipt_path"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-06-23-hao-439-meta-glasses-terminal-receipt.md"
+    )
+    assert requirements["HAO-437"]["artifact_id"] == hao_437["artifact_id"]
+    assert requirements["HAO-438"]["artifact_id"] == hao_438["artifact_id"]
+    assert requirements["HAO-439"]["artifact_id"] == hao_439["artifact_id"]
+    assert all(item["required_for_launch_ready"] is True for item in requirements.values())
+
+    lineage = receipt["playwright_lineage"]
+    assert lineage["lineage_id"] == "VAIOS-G697:launch-readiness:phone-desktop-glasses"
+    assert lineage["same_receipt_lineage"] is True
+    assert [gate["command"] for gate in lineage["required_gates"]] == [
+        PYTHON_GATE_COMMAND,
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ]
+    assert {gate["surface"] for gate in lineage["required_gates"]} == {
+        "python_static_receipt_gate",
+        "swissknife_meta_glasses_playwright",
+        "hallucinate_app_multimodal_playwright",
+    }
+    assert receipt["pass_together_rule"]["required_commands"] == [
+        gate["command"] for gate in lineage["required_gates"]
+    ]
+
+    fallback = receipt["hardware_free_fallback"]
+    assert fallback == {
+        "explicit": True,
+        "physical_capture_unavailable_state": "gate_open_physical_capture_pending",
+        "fallback_is_launch_ready": False,
+        "fallback_receipts": [
+            "data/virtual_ai_os/discovery/2026-06-23-vai-010-hardware-free-e2e-harness.md",
+            "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-430-hardware-free-offload-harness.md",
+            "data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md",
+        ],
+    }
+
+    assert hao_440["schema"] == "launch_readiness_physical_evidence_aggregate_v1"
+    assert hao_440["goal_id"] == receipt["goal_id"]
+    assert hao_440["launch_readiness_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md"
+    )
+    assert hao_440["required_physical_receipts"] == receipt["physical_readiness_requirements"]
+    assert hao_440["playwright_lineage"] == lineage
+    assert hao_440["hardware_free_fallback"] == fallback
+    assert hao_440["launch_ready_requires"] == [
+        "HAO-437 real_phone_ingress_rehearsal_receipt present",
+        "HAO-438 desktop_peer_offload_smoke_receipt present",
+        "HAO-439 meta_glasses_terminal_receipt present",
+        "all Playwright launch gates pass in VAIOS-G697:launch-readiness:phone-desktop-glasses",
+        "hardware-free fallback remains explicit and non-launch-ready when physical capture is unavailable",
+    ]
 
 
 def test_vai_339_replay_receipt_chain_preserves_session_and_command_identity():
@@ -213,6 +317,7 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     doc_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
+    normalized_doc_source = " ".join(doc_source.split())
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
     hao_source = HAO_436_RECEIPT_PATH.read_text(encoding="utf-8")
     mgw_source = MGW_274_RECEIPT_PATH.read_text(encoding="utf-8")
@@ -248,8 +353,16 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     assert "2026-06-23-hao-436-launch-readiness-gate.md" in heap_source
     assert "2026-06-23-vai-340-launch-readiness-gate.md" in doc_source
     assert "2026-06-23-hao-436-launch-readiness-gate.md" in doc_source
+    assert "2026-06-23-hao-440-launch-readiness-physical-aggregate.md" in doc_source
+    assert "2026-06-23-hao-440-launch-readiness-physical-aggregate.md" in heap_source
+    assert "physical_readiness_requirements" in vai_source
+    assert "HAO-440 physical readiness aggregate" in doc_source
+    assert "HAO-440 physical readiness aggregate" in heap_source
+    assert "Hardware-free fallback remains explicit and non-launch-ready" in normalized_doc_source
+    assert "hardware_free_fallback" in vai_source
     assert "2026-06-23-mgw-274-launch-readiness-gate.md" in doc_source
     assert "HAO-436" in doc_source
+    assert "HAO-440" in doc_source
     assert "MGW-274" in doc_source
     assert "VAI-340" in doc_source
     assert "HAO-436" in hao_source
