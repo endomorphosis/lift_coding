@@ -128,7 +128,7 @@ cadence remains parseable and resumable.
 
 ## VAI-009 Add environment, pin, and bootstrap contracts for component repos
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
