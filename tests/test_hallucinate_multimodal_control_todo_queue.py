@@ -27,6 +27,10 @@ TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 PENDING_TASK_STATUS = "to" + "do"
 OBJECTIVE_BUNDLE_SHARD_GLOB = "*." + TEMP_TASK_BOARD_FILENAME
 CONTROL_SURFACE_IDL_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
+DISCOVERY_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
+HARDWARE_FREE_OFFLOAD_HARNESS_PATH = (
+    DISCOVERY_ROOT / "2026-06-23-hao-430-hardware-free-offload-harness.md"
+)
 
 
 def _load_script_module(name: str):
@@ -46,6 +50,14 @@ def _load_tasks():
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TASK_BOARD_PATH, "## HAO-")
+
+
+def _json_block_after(source: str, marker: str) -> dict:
+    start = source.index(marker)
+    fence_start = source.index("```json", start)
+    payload_start = source.index("\n", fence_start) + 1
+    payload_end = source.index("\n```", payload_start)
+    return json.loads(source[payload_start:payload_end])
 
 
 def test_objective_heap_schedule_deduplicates_interoperability_pairs():
@@ -199,6 +211,67 @@ def test_hao_429_peer_offload_policy_receipts_and_recovery_states():
     assert section.index("mediation_receipt") < section.index("before peer dispatch")
     assert section.index("Peer-offload recovery records") < section.index("The recovery-state vocabulary is fixed")
     assert section.index("Hallucinate App owns recovery-state transitions") < section.index("The peer-offload receipt chain is")
+
+
+def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministic_replay():
+    source = HARDWARE_FREE_OFFLOAD_HARNESS_PATH.read_text(encoding="utf-8")
+    normalized_source = " ".join(source.split())
+    harness = _json_block_after(source, "## Deterministic Harness Fixture")
+
+    required_terms = [
+        "hardware-free multimodal offload harness",
+        "No physical phone, desktop, Swissknife browser, or Meta glasses device is required",
+        "simulates phone input, desktop peer offload, Swissknife operator UI, and Meta glasses terminal output",
+        "proves routing, mediation, receipts, and recovery",
+        "phone_event -> mediation_receipt -> virtual_desktop_command_intent -> peer_offload_policy_receipt",
+        "peer_offload_recovery_receipt -> render_receipt",
+    ]
+    for term in required_terms:
+        assert term in normalized_source
+
+    assert harness["task_id"] == "HAO-430"
+    assert harness["determinism"]["clock"] == "fixed"
+    assert harness["determinism"]["network"] == "simulated"
+    assert harness["requires_physical_devices"] is False
+    assert harness["participants"] == {
+        "phone:operator": "simulated_phone_input",
+        "desktop:peer": "simulated_desktop_peer_offload",
+        "swissknife:ui": "simulated_operator_ui",
+        "meta_glasses:terminal": "simulated_terminal_output",
+    }
+
+    steps = harness["replay_steps"]
+    assert [step["phase"] for step in steps] == [
+        "phone_event",
+        "mediation",
+        "command_intent",
+        "peer_offload_selection",
+        "desktop_peer_timeout",
+        "recovery",
+        "surface_render",
+    ]
+    assert steps[0]["event"]["session"]["participant_id"] == "phone:operator"
+    assert steps[1]["receipt"]["receipt_id"] == "rcpt_policy_hao430_open_monitor"
+    assert steps[1]["receipt"]["policy_decision"] == "allow"
+    assert steps[2]["command"]["receipt_ids"]["policy_receipt_id"] == steps[1]["receipt"]["receipt_id"]
+    assert steps[3]["receipt"]["selected_peer"]["participant_id"] == "desktop:peer"
+    assert steps[4]["runtime_receipt"]["runtime_status"] == "timeout"
+    assert steps[5]["receipt"]["peer_offload_policy_receipt_id"] == steps[3]["receipt"]["receipt_id"]
+    assert steps[5]["receipt"]["recovery_state"] == "fallback_selected"
+    assert steps[5]["receipt"]["selected_peer"]["participant_id"] == "swissknife:ui"
+    assert steps[6]["render_receipts"][0]["participant_id"] == "phone:operator"
+    assert steps[6]["render_receipts"][1]["participant_id"] == "swissknife:ui"
+    assert steps[6]["render_receipts"][2]["participant_id"] == "meta_glasses:terminal"
+    assert {
+        receipt["state"]
+        for receipt in steps[6]["render_receipts"]
+    } == {"fallback_selected"}
+
+    invariants = harness["assertions"]
+    assert "all ingress events enter mediation before dispatch" in invariants
+    assert "desktop peer execution never starts without policy_receipt_id" in invariants
+    assert "all user-visible surfaces render the same recovery_state" in invariants
+    assert "receipt chain is stable across retry or fallback" in invariants
 
 
 def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
