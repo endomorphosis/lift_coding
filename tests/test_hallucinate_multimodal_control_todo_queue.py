@@ -26,6 +26,7 @@ TASK_STATUS_FIELD = "Sta" + "tus"
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 PENDING_TASK_STATUS = "to" + "do"
 OBJECTIVE_BUNDLE_SHARD_GLOB = "*." + TEMP_TASK_BOARD_FILENAME
+CONTROL_SURFACE_IDL_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
 
 
 def _load_script_module(name: str):
@@ -124,6 +125,40 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert tasks["HAO-427"].status == "completed"
     assert tasks["HAO-428"].status == PENDING_TASK_STATUS
     assert tasks["HAO-431"].track == "integration"
+
+
+def test_hao_428_offload_session_events_route_through_mediation():
+    source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    section_start = source.index("### Offload-session mobile and glasses mediation path")
+    section_end = source.index("## Meta-Glasses Relationship")
+    section = source[section_start:section_end]
+    normalized_source = " ".join(source.split())
+
+    required_terms = [
+        "Offload-session mobile and glasses mediation path",
+        "voice, gesture, display action, or phone UI event",
+        "adapter submits the envelope to the shared Hallucinate App mediation",
+        "policy_decision",
+        "mediation_receipt",
+        "virtual_desktop_command_intent",
+        "denied results stop at the receipt",
+        "Offload-session adapters MUST NOT call desktop peer RPC",
+        "dispatch only from the resulting",
+        "policy_receipt_id",
+    ]
+    for term in required_terms:
+        assert term in normalized_source
+
+    for event_class in (
+        "Voice command from phone or glasses",
+        "Gesture from phone, captouch, Neural Band, or glasses",
+        "Display action from glasses terminal or DAT display",
+        "Phone UI event from mobile shell",
+    ):
+        assert event_class in source
+
+    assert section.index("adapter submits the envelope") < section.index("Only an allowed")
+    assert section.index("MUST NOT call desktop peer RPC") < section.index("policy_receipt_id")
 
 
 def _git(cwd: Path, *args: str) -> str:
