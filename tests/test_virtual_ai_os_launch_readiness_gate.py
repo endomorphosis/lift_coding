@@ -13,6 +13,13 @@ VAI_339_REPLAY_PATH = (
 VAI_340_RECEIPT_PATH = (
     REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-06-23-vai-340-launch-readiness-gate.md"
 )
+HAO_436_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-23-hao-436-launch-readiness-gate.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
     REPO_ROOT / "swissknife" / "build-tools" / "configs" / "playwright.meta-glasses.config.ts"
@@ -126,6 +133,7 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     doc_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    hao_source = HAO_436_RECEIPT_PATH.read_text(encoding="utf-8")
     receipt = _load_launch_readiness_receipt()
 
     required_terms = [
@@ -144,7 +152,10 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     for term in required_terms:
         assert term in doc_source
         assert term in heap_source
+        assert term in hao_source
 
     assert receipt["readiness_doc"] == "docs/launch/phone_desktop_glasses_readiness.md"
     assert "VAI-340 launch readiness gate" in heap_source
+    assert "HAO-436 launch readiness gate" in heap_source
     assert "2026-06-23-vai-340-launch-readiness-gate.md" in heap_source
+    assert "2026-06-23-hao-436-launch-readiness-gate.md" in doc_source

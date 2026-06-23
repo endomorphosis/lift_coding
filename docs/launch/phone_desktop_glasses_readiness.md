@@ -10,6 +10,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Receipt schema: `launch_readiness_receipt_v1`
 - Gate class term: `LaunchReadinessGate`
 - Receipt packet: `data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md`
+- HAO backlog packet: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md`
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
 - Python guard: `tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Swissknife Playwright command: `npm --prefix swissknife run test:e2e:meta-glasses`
