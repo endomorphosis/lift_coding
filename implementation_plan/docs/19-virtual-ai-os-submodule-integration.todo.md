@@ -150,7 +150,7 @@ cadence remains parseable and resumable.
 
 ## VAI-011 Add observability, policy, and rollback coverage
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
