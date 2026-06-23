@@ -479,7 +479,12 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
 
     assert len(active_goals) <= 16
     assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
-    assert all(goals_by_id[goal_id].status == "active" for goal_id in ["VAIOS-G697", "VAIOS-G698", "VAIOS-G699"])
+    assert goals_by_id["VAIOS-G697"].status == "active"
+    for goal_id in ("VAIOS-G698", "VAIOS-G699"):
+        assert goals_by_id[goal_id].status in {"active", "completed"}
+        if goals_by_id[goal_id].status == "completed":
+            assert goals_by_id[goal_id].fields.get("completion_evidence")
+            assert goals_by_id[goal_id].fields.get("completion_validation")
     if active_launch_ids:
         assert all(goal_id in schedule_ids for goal_id in active_launch_ids)
         assert all(schedule_ids.index(goal_id) < schedule_ids.index("VAIOS-G081") for goal_id in active_launch_ids)

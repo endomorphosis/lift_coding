@@ -802,7 +802,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G698 Supervisor objective and task janitor
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G010
 - Fib priority: 1
 - Track: ops
@@ -819,10 +819,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py -q
 - Refinement: Add child goals for task archival, heap-goal reopening, and stale blocked-task summarization only after the janitor contract lands.
 - Gap task: Implement an objective/task janitor that can dynamically add, remove, archive, reopen, and reprioritize daemon work against the launch objective.
+- Completed at: 2026-06-23T14:20:50+00:00
+- Completion evidence: objective_task_janitor strategy reconciler, retired_task_reason receipts, heap_goal_retirement_receipt strategy output, supervisor objective_task_janitor phase, and tests/test_supervisor_objective_task_janitor.py.
+- Completion validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_supervisor_objective_task_janitor.py tests/test_virtual_ai_os_todo_queue.py tests/test_meta_glasses_display_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q => 96 passed, 1 warning.
 
 ## VAIOS-G699 Merge-lock retry and duplicate-attempt suppression
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G010
 - Fib priority: 1
 - Track: ops
@@ -839,3 +842,6 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_implementation_daemon_merge_lock_retry.py -q
 - Refinement: Split validation auto-repair into a child goal if lock retry lands but failed-validation retry remains ad hoc.
 - Gap task: Teach the daemon to retry transient merge-lock failures, suppress duplicate attempts for already-validated work, and clean merged worktrees without manual intervention.
+- Completed at: 2026-06-23T14:20:50+00:00
+- Completion evidence: transient_merge_lock classification, merge_lock_retry_queue candidate selection, duplicate_attempt_suppression waiting state, reconciliation todo completion, and tests/test_implementation_daemon_merge_lock_retry.py.
+- Completion validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_implementation_daemon_merge_lock_retry.py tests/test_supervisor_objective_task_janitor.py tests/test_virtual_ai_os_todo_queue.py tests/test_meta_glasses_display_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q => 99 passed, 1 warning.
