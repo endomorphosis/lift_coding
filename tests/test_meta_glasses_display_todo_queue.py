@@ -22,6 +22,9 @@ TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 # follow-up scans do not mistake generated metadata or temporary file names for
 # unresolved work.
 PENDING_TASK_STATUS = "to" + "do"
+PHONE_GLASSES_TERMINAL_FIXTURE_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / (
+    "discovery"
+) / "2026-06-23-mgw-267-phone-glasses-terminal-fixture.json"
 
 
 def _load_script_module(name: str):
@@ -86,7 +89,7 @@ def test_meta_display_product_run_defers_stale_scan_and_repair_tasks():
 
     assert runnable_stale_tasks == []
     assert tasks["MGW-265"].status == "completed"
-    assert tasks["MGW-266"].status == PENDING_TASK_STATUS
+    assert tasks["MGW-266"].status == "completed"
     assert tasks["MGW-268"].track == "integration"
 
 
@@ -208,6 +211,102 @@ def test_peer_offload_widget_contract_extension_is_documented():
     missing_terms = [term for term in required_contract_terms if term not in plan_text]
 
     assert missing_terms == []
+
+
+def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
+    fixture = json.loads(PHONE_GLASSES_TERMINAL_FIXTURE_PATH.read_text(encoding="utf-8"))
+    offline_contract = fixture["offline_contract"]
+    events = fixture["events"]
+    credential_key_fragments = ("credential", "access_token", "refresh_token", "client_secret")
+
+    def credential_like_paths(value, path="fixture"):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                child_path = f"{path}.{key}"
+                if any(fragment in key.lower() for fragment in credential_key_fragments):
+                    yield child_path
+                yield from credential_like_paths(child, child_path)
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                yield from credential_like_paths(child, f"{path}[{index}]")
+
+    assert fixture["fixture_id"] == "mgw-267-phone-glasses-terminal"
+    assert fixture["schema_version"] == "1.0.0"
+    assert offline_contract["deterministic"] is True
+    assert offline_contract["requires_meta_credentials"] is False
+    assert offline_contract["requires_paired_hardware"] is False
+    assert offline_contract["hardware_required"] is False
+    assert offline_contract["paired_device_id"] is None
+    assert offline_contract["transport"] == "in_memory_fixture"
+    assert offline_contract["clock"] == {
+        "start": "2026-06-23T00:00:00Z",
+        "step_ms": 1000,
+    }
+    assert list(credential_like_paths(fixture)) == [
+        "fixture.offline_contract.requires_meta_credentials"
+    ]
+    assert [event["sequence"] for event in events] == [1, 2, 3]
+    assert [event["timestamp"] for event in events] == [
+        "2026-06-23T00:00:00Z",
+        "2026-06-23T00:00:01Z",
+        "2026-06-23T00:00:02Z",
+    ]
+    assert [event["event_type"] for event in events] == [
+        "virtual_desktop_status",
+        "confirmation_prompt",
+        "peer_offload_update",
+    ]
+
+    for event in events:
+        state = event["widget_state"]
+        descriptor_refs = state["descriptor_refs"]
+        peer_receipts = state["peer_offload"]["receipts"]
+
+        assert state["widget_kind"] == "handsfree.virtual-desktop-session"
+        assert state["session_identity"]["session_id"] == "vdesktop-session-mgw-267"
+        assert state["session_identity"]["phone_host_id"] == offline_contract["phone_host_id"]
+        assert state["render_context"]["hardware_required"] is False
+        assert state["render_context"]["paired_device_id"] is None
+        assert state["render_context"]["preview_mode"] is True
+        assert state["pairing"]["status"] == "unpaired"
+        assert state["active_tool"]["surface"] == "mobile_card"
+        assert {"status_region", "progress_region", "message_region", "diagnostics_region"} <= set(
+            state["regions"]
+        )
+        assert peer_receipts["policy_receipt_cid"] == descriptor_refs["policy_receipt_cid"]
+        assert "open_mobile_card" in state["recovery"]["next_actions"]
+        assert state["recovery"]["fallback"]["render_path"] == "mobile-card"
+
+    confirmation_state = events[1]["widget_state"]
+    prompt = confirmation_state["confirmation_prompt"]
+    assert prompt["prompt_id"] == "confirm-stop-mgw-267"
+    assert prompt["kind"] == "cancel"
+    assert prompt["risk_level"] == "medium"
+    assert prompt["default_action"] == "continue"
+    assert [action["id"] for action in prompt["actions"]] == ["continue", "cancel_task"]
+    assert [action["focus_order"] for action in prompt["actions"]] == [1, 2]
+    assert all(action["backend_action_id"].startswith("terminal.") for action in prompt["actions"])
+    assert all(
+        action["correlation_id"] == events[1]["correlation_id"] for action in prompt["actions"]
+    )
+
+    peer_offload = events[2]["widget_state"]["peer_offload"]
+    assert peer_offload["availability"] == "transferring"
+    assert peer_offload["selected_peer"]["peer_id"] == "desktop-peer-01"
+    assert peer_offload["compute_placement"]["mode"] == "desktop_peer"
+    assert peer_offload["transfer_state"] == {
+        "operation_id": "offload-transfer-mgw-267",
+        "phase": "uploading_context",
+        "bytes_sent": 5242880,
+        "bytes_total": 8388608,
+        "percent": 62,
+        "eta_ms": 42000,
+        "throughput_bps": 1048576,
+        "message": "Sending task context to desktop peer.",
+    }
+    assert {"cancel_offload", "retry_offload", "fallback_to_phone", "open_mobile_card"} <= set(
+        peer_offload["actions"]
+    )
 
 
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():
