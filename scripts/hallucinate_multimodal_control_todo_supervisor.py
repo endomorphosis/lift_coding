@@ -76,6 +76,7 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_path_key="objective_goal_heap_path",
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
+    objective_max_interoperability_goals=0,
     seed_interoperability_goals=True,
     # scanner-resolved: HAO-195 - stale line-302 explicit flag wiring is now
     # owned by the shared objective defaults factory used by this supervisor.

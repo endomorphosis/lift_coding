@@ -734,6 +734,39 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     ]
 
 
+def test_objective_refill_defaults_forward_zero_interoperability_cap(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (
+        ImplementationSupervisorDefaults,
+        ObjectiveRefillDefaults,
+        apply_portal_implementation_supervisor_defaults,
+    )
+
+    defaults = ImplementationSupervisorDefaults(
+        todo_path=tmp_path / "board.todo.md",
+        state_dir=tmp_path / "state",
+        task_prefix="VAI-",
+        state_prefix="vai",
+        worktree_root=tmp_path / "worktrees",
+        daemon_script_path=tmp_path / "daemon.py",
+        supervisor_script_path=tmp_path / "supervisor.py",
+    )
+    objective = ObjectiveRefillDefaults(
+        seed_interoperability_goals=True,
+        objective_max_interoperability_goals=0,
+    )
+
+    args = apply_portal_implementation_supervisor_defaults(
+        [],
+        defaults=defaults,
+        objective=objective,
+    )
+
+    assert "--objective-seed-interoperability-goals" in args
+    assert "--objective-max-interoperability-goals" in args
+    assert args[args.index("--objective-max-interoperability-goals") + 1] == "0"
+
+
 def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path):
     if str(SRC_DIR) not in sys.path:
         sys.path.insert(0, str(SRC_DIR))

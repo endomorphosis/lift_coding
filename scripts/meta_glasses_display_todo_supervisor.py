@@ -116,6 +116,7 @@ _meta_glasses_display_objective_defaults = build_namespace_objective_refill_defa
     objective_path=OBJECTIVE_HEAP_PATH,
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS,
+    objective_max_interoperability_goals=0,
     seed_interoperability_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
