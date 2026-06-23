@@ -45,11 +45,11 @@ Planning assumptions in this document are based on the current checked-out upstr
 
 If any upstream contract or packaging model changes after these revisions, update this roadmap before starting platform-specific implementation.
 
-## Display widget source alignment (2026-05-22)
+## Display widget source alignment (2026-06-23)
 
 MGW-001 adds the following source pins and guardrails for the Swissknife-driven Meta DAT display-widget plan:
 
-- Swissknife baseline: local package `swissknife@0.0.53` checked out at `/home/barberb/lift_coding/swissknife`, commit `5b4598e15709203c0fe2265fdab2f51ea822b0f2`. This implementation worktree does not currently contain a root `swissknife/` checkout, so any task that edits Swissknife-owned files must first make that package available in the worktree or update this pin.
+- Swissknife baseline: local package `swissknife@0.0.53` checked out at `/home/barberb/lift_coding/swissknife`, commit `a178e4c8f794254f228b373107fb42f0071e38cc`. This implementation worktree does not currently contain a root `swissknife/` checkout, so any task that edits Swissknife-owned files must first make that package available in the worktree or update this pin.
 - Meta DAT Android display sample baseline: `samples/DisplayAccess` from the initialized local checkout at `/home/barberb/lift_coding/external/meta-wearables-dat-android`, commit `25f3a6d4479b7a4a72f877977b865a11af990d04`.
 - Meta DAT iOS display sample baseline: `samples/DisplayAccess` from the initialized local checkout at `/home/barberb/lift_coding/external/meta-wearables-dat-ios`, commit `a739e94181221e7f321304273bcda2272821b163`.
 - Meta display APIs remain developer preview surfaces. Release-channel access, organization enablement, app-model metadata, platform entitlements, and package registry permissions can change independently of this repository; implementation tasks must gate native display code with runtime capability detection and operator-visible diagnostics.

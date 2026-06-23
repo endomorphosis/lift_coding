@@ -50,9 +50,9 @@ Meta's May 14, 2026 display developer announcement describes two developer-previ
 
 ### Source Alignment and Version Guardrails
 
-Recorded by MGW-001 on 2026-05-22:
+Recorded by MGW-001 on 2026-06-23:
 
-- Swissknife source baseline is `swissknife@0.0.53`, commit `5b4598e15709203c0fe2265fdab2f51ea822b0f2`, from the local checkout at `/home/barberb/lift_coding/swissknife`. This worktree does not currently include a root `swissknife/` checkout, so implementation tasks that own Swissknife files must either materialize that package in the worktree or update the source pin before editing.
+- Swissknife source baseline is `swissknife@0.0.53`, commit `a178e4c8f794254f228b373107fb42f0071e38cc`, from the local checkout at `/home/barberb/lift_coding/swissknife`. This worktree does not currently include a root `swissknife/` checkout, so implementation tasks that own Swissknife files must either materialize that package in the worktree or update the source pin before editing.
 - Meta DAT Android display planning uses `samples/DisplayAccess` from `/home/barberb/lift_coding/external/meta-wearables-dat-android`, commit `25f3a6d4479b7a4a72f877977b865a11af990d04`.
 - Meta DAT iOS display planning uses `samples/DisplayAccess` from `/home/barberb/lift_coding/external/meta-wearables-dat-ios`, commit `a739e94181221e7f321304273bcda2272821b163`.
 - Meta display APIs are developer preview surfaces and may require release-channel access, organization enablement, app-model metadata, entitlements, or SDK/package access that is not available in every build environment.
