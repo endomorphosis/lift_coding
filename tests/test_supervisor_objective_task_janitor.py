@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -247,3 +248,63 @@ def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     assert captured["force_goal_id"] == ["VAIOS-G697"]
     assert updated_strategy["last_objective_goal_scan_mode"] == "force"
     assert updated_strategy["last_objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]
+
+
+def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    calls: list[str] = []
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=tmp_path / "vai.todo.md",
+            state_path=state_dir / "virtual_ai_os_task_state.json",
+            strategy_path=state_dir / "virtual_ai_os_strategy.json",
+            events_path=state_dir / "virtual_ai_os_supervisor_events.jsonl",
+            state_dir=state_dir,
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            repo_root=tmp_path,
+        )
+    )
+
+    supervisor.ensure_event_log_file = lambda: calls.append("ensure_event_log_file") or {}  # type: ignore[method-assign]
+    supervisor.repair_main_checkout_merge_state = lambda: calls.append("repair_main_checkout_merge_state") or {}  # type: ignore[method-assign]
+    supervisor.ensure_managed_daemon_pid_file = lambda: calls.append("ensure_managed_daemon_pid_file") or {}  # type: ignore[method-assign]
+    supervisor.run_once = lambda: calls.append("run_once") or {"objective_task_janitor": {}}  # type: ignore[method-assign]
+    supervisor.build_supervisor_loop_config = lambda: calls.append("build_supervisor_loop_config") or object()  # type: ignore[method-assign]
+
+    class FakeSupervisorLoop:
+        def __init__(self, _config, watchdog_hook=None):
+            calls.append("loop_init")
+            assert "run_once" in calls
+            assert calls.index("run_once") < calls.index("loop_init")
+            self.watchdog_hook = watchdog_hook
+
+        def run(self):
+            calls.append("loop_run")
+            return SimpleNamespace(
+                status="stopped",
+                restart_count=0,
+                last_exit_code=0,
+                last_recycle_reason="",
+                last_run_id="test",
+                last_log_path="",
+            )
+
+    supervisor.shared_supervisor_loop_class = FakeSupervisorLoop
+
+    supervisor.run_forever()
+
+    assert calls[:4] == [
+        "ensure_event_log_file",
+        "repair_main_checkout_merge_state",
+        "ensure_managed_daemon_pid_file",
+        "run_once",
+    ]
+    assert calls[-2:] == ["loop_init", "loop_run"]
