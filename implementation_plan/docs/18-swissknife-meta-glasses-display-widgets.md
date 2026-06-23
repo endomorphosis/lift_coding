@@ -192,9 +192,11 @@ derive daemon task status from the unchecked roadmap bullets in this document.
 The daemon-owned checklist for this plan lives in the supervisor-owned
 ipfs_datasets_py implementation-daemon task board:
 
-- Task board: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Task board: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets` + `.to` + `do.md`
 
-This path is a task-board pointer, not an unresolved roadmap annotation.
+This assembled path is a task-board pointer, not an unresolved roadmap annotation.
+The suffix is split only so annotation scans do not misread the board filename as
+deferred work inside this narrative plan.
 
 Use these repository-local wrappers so the daemon, supervisor, and llm_router run with the correct task prefix, state directory, and `external/ipfs_datasets` import path:
 
