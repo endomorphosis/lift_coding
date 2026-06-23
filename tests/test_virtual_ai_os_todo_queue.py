@@ -413,9 +413,23 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
     assert "--codebase-scan-max-findings" in common_arg_values
     assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
-    assert "--no-objective-goal-refinement" in common_arg_values
+    assert "--no-objective-goal-refinement" not in common_arg_values
+    assert "--objective-max-refinement-children" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-max-refinement-children") + 1] == "2"
+    assert "--objective-max-refinement-depth" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-max-refinement-depth") + 1] == "2"
     assert "--objective-max-interoperability-goals" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "0"
+    assert common_arg_values.count("--objective-mission-term") == len(
+        runner_module.VAI_MGW_HAO_LAUNCH_MISSION_TERMS
+    )
+    for term in (
+        "phone-hosted Swissknife virtual desktop",
+        "desktop peer offload",
+        "Hallucinate App mediation",
+        "Meta glasses interface",
+    ):
+        assert term in common_arg_values
     assert "--objective-scan-min-open-tasks" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-scan-min-open-tasks") + 1] == "3"
     assert "--objective-scan-max-findings" in common_arg_values

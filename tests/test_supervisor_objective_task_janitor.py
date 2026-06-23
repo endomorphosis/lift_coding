@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -121,3 +122,128 @@ def test_objective_task_janitor_releases_owned_blocks_when_goal_has_open_work():
     assert updated["blocked_tasks"] == ["VAI-KEEP"]
     assert updated["objective_task_janitor_reopen_goal_ids"] == []
     assert result["open_goal_ids"] == ["VAIOS-G697"]
+
+
+def test_objective_task_janitor_records_configured_mission_terms():
+    ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
+    goals = [
+        ObjectiveGoal(
+            "VAIOS-G777",
+            "Desktop peer router",
+            {
+                "status": "active",
+                "fib_priority": "1",
+                "priority": "P1",
+                "track": "integration",
+                "goal": "Build an edge compositor handshake for phone to desktop routing.",
+            },
+        )
+    ]
+
+    result = reconcile(
+        goals=goals,
+        tasks=[],
+        strategy={},
+        now="2026-06-23T00:00:00+00:00",
+        mission_terms=("edge compositor handshake",),
+    )
+    updated = result["strategy"]
+
+    assert updated["objective_task_janitor_reopen_goal_ids"] == ["VAIOS-G777"]
+    assert updated["objective_task_janitor_force_goal_ids"] == ["VAIOS-G777"]
+    assert updated["objective_task_janitor_mission_terms"] == ["edge compositor handshake"]
+
+
+def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    todo_path = tmp_path / "vai.todo.md"
+    strategy_path = state_dir / "virtual_ai_os_strategy.json"
+    state_path = state_dir / "virtual_ai_os_task_state.json"
+    events_path = state_dir / "virtual_ai_os_supervisor_events.jsonl"
+    objective_path = tmp_path / "objective.md"
+    todo_path.write_text(
+        "\n".join(
+            (
+                "# VAI",
+                "## VAI-001 First ready item",
+                "- Status: todo",
+                "- Priority: P1",
+                "- Track: ops",
+                "## VAI-002 Second ready item",
+                "- Status: todo",
+                "- Priority: P1",
+                "- Track: ops",
+            )
+        ),
+        encoding="utf-8",
+    )
+    objective_path.write_text(
+        "\n".join(
+            (
+                "# Goals",
+                "## VAIOS-G697 Launch gate",
+                "- Status: active",
+                "- Fib priority: 1",
+                "- Track: launch",
+            )
+        ),
+        encoding="utf-8",
+    )
+    strategy_path.write_text(
+        json.dumps(
+            {
+                "last_objective_goal_scan_at": "2026-06-23T00:00:00+00:00",
+                "objective_task_janitor_force_goal_ids": ["VAIOS-G697"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    captured: dict[str, object] = {}
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=todo_path,
+            state_path=state_path,
+            strategy_path=strategy_path,
+            events_path=events_path,
+            state_dir=state_dir,
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            objective_refill_enabled=True,
+            objective_path=objective_path,
+            objective_scan_min_open_tasks=0,
+            objective_scan_cooldown_seconds=86400,
+            repo_root=tmp_path,
+        )
+    )
+
+    def fake_refill(_run_objective_daemon, args):
+        captured["force_goal_id"] = list(args.force_goal_id)
+        return {
+            "generated_count": 0,
+            "task_ids": [],
+            "refined_goal_ids": [],
+            "completed_goal_ids": [],
+            "seeded_interoperability_goal_ids": [],
+            "objective_goal_count": 1,
+            "objective_active_goal_count": 1,
+            "objective_completed_goal_count": 0,
+            "objective_heap_schedule_count": 1,
+            "todo_vector_index_path": "",
+        }
+
+    supervisor._run_objective_refill_with_timeout = fake_refill  # type: ignore[method-assign]
+
+    payload = supervisor.refill_objective_backlog()
+    updated_strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
+
+    assert payload["objective_heap_schedule_count"] == 1
+    assert captured["force_goal_id"] == ["VAIOS-G697"]
+    assert updated_strategy["last_objective_goal_scan_mode"] == "force"
+    assert updated_strategy["last_objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]

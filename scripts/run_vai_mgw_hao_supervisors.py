@@ -48,6 +48,22 @@ MERGE_CLEANUP_DEFAULTS = {
     "daemon_merged_worktree_cleanup_max": "50",
 }
 
+VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
+    "phone-hosted Swissknife virtual desktop",
+    "desktop peer offload",
+    "Hallucinate App mediation",
+    "Meta glasses interface",
+    "mobile phone",
+    "production readiness",
+    "launch readiness",
+)
+
+VAI_MGW_HAO_LAUNCH_MISSION_ARGS = tuple(
+    item
+    for term in VAI_MGW_HAO_LAUNCH_MISSION_TERMS
+    for item in ("--objective-mission-term", term)
+)
+
 
 VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_track_configs(
     repo_root=REPO_ROOT,
@@ -76,9 +92,13 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     MERGE_CLEANUP_DEFAULTS["daemon_merged_worktree_cleanup_max"],
     "--codebase-scan-max-findings",
     "0",
-    "--no-objective-goal-refinement",
+    "--objective-max-refinement-children",
+    "2",
+    "--objective-max-refinement-depth",
+    "2",
     "--objective-max-interoperability-goals",
     "0",
+    *VAI_MGW_HAO_LAUNCH_MISSION_ARGS,
     "--objective-scan-min-open-tasks",
     "3",
     "--objective-scan-max-findings",
