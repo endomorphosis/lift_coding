@@ -90,6 +90,24 @@ def test_virtual_ai_os_todo_board_is_daemon_parseable():
     assert all(task.track for task in tasks)
 
 
+def test_supervisor_task_boards_do_not_contain_conflict_markers():
+    task_board_paths = (
+        TASK_BOARD_PATH,
+        REPO_ROOT / "implementation_plan" / "docs" / _task_board_filename("18-swissknife-meta-glasses-display-widgets"),
+        REPO_ROOT / "hallucinate_app" / "docs" / _task_board_filename("MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL"),
+    )
+    markers = ("<<<<<<<", "=======", ">>>>>>>")
+
+    for path in task_board_paths:
+        lines = path.read_text(encoding="utf-8").splitlines()
+        marker_lines = [
+            f"{index}: {line}"
+            for index, line in enumerate(lines, start=1)
+            if line.startswith(("<<<<<<<", ">>>>>>>")) or line in markers
+        ]
+        assert not marker_lines, f"{path} contains merge markers: {marker_lines}"
+
+
 def test_virtual_ai_os_todo_dependencies_are_declared_tasks():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
