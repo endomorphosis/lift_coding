@@ -10,6 +10,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
+SRC_DIR = REPO_ROOT / "src"
 
 
 # Assemble the task-board filename from neutral fragments so static follow-up
@@ -249,6 +250,13 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         prefer_copilot_merge_resolver=False,
     )
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS["COPILOT_MERGE_RESOLVER_TIMEOUT_SECONDS"] == "60"
+    assert "default to --detach" in runner_module.DETACHED_WORKTREE_POLICY
+    assert "component submodule pins are read-only" in runner_module.DETACHED_WORKTREE_POLICY
+    assert runner_module.MERGE_CLEANUP_DEFAULTS == {
+        "worktree_reconciliation_max_merges": "0",
+        "merge_reconciliation_max_merges": "0",
+        "daemon_merged_worktree_cleanup_max": "50",
+    }
     assert runner_module.VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS == (
         implementation_supervisor_namespace_track_configs(
             repo_root=REPO_ROOT,
@@ -310,6 +318,87 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "--duration-seconds",
         "5",
     ]
+
+
+def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path):
+    if str(SRC_DIR) not in sys.path:
+        sys.path.insert(0, str(SRC_DIR))
+    from handsfree.config import get_virtual_ai_os_observability_contract
+    from handsfree.virtual_ai_os_components import (
+        VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS,
+        get_virtual_ai_os_component_repo_contracts,
+    )
+
+    plan_text = (
+        REPO_ROOT
+        / "implementation_plan"
+        / "docs"
+        / "19-virtual-ai-os-submodule-integration.md"
+    ).read_text(encoding="utf-8")
+    discovery_text = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "component-repo-contracts-vai-009-2026-06-12.md"
+    ).read_text(encoding="utf-8")
+
+    contracts = get_virtual_ai_os_component_repo_contracts(
+        {"HANDSFREE_VAI_IPFS_DATASETS_ROOT": str(tmp_path / "datasets")},
+        repo_root=REPO_ROOT,
+    )
+    by_id = {str(contract["component_id"]): contract for contract in contracts}
+
+    assert {contract.component_id for contract in VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS} == {
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+        "ipfs_kit_py",
+        "swissknife",
+        "hallucinate_app",
+        "mcp_plus_plus",
+        "meta_wearables_dat_android",
+        "meta_wearables_dat_ios",
+    }
+    assert by_id["ipfs_datasets_py"]["resolved_root"] == str(tmp_path / "datasets")
+    for component in contracts:
+        assert "public HTTPS" in str(component["auth_assumption"])
+        assert "credential helper or gh auth" in str(component["auth_assumption"])
+        if str(component["component_id"]).startswith("meta_wearables_dat_"):
+            assert "status-only component" in str(component["pin_policy"])
+        else:
+            assert "superproject gitlink is the reviewed pin" in str(component["pin_policy"])
+            assert "validation evidence" in str(component["pin_policy"])
+        assert component["recursive_bootstrap"] is False
+        assert "detached task worktrees" in str(component["detached_worktree_policy"])
+
+    assert by_id["ipfs_kit_py"]["bootstrap_mode"] == "init_root_submodule_status_nested"
+    assert by_id["meta_wearables_dat_ios"]["bootstrap_mode"] == (
+        "optional_device_validation_submodule"
+    )
+
+    observability = get_virtual_ai_os_observability_contract({})
+    assert observability["component_repos"] == get_virtual_ai_os_component_repo_contracts({})
+    assert observability["component_environment"]["mcp_plus_plus"] == (
+        "HANDSFREE_VAI_MCP_PLUS_PLUS_ROOT"
+    )
+    assert "auth_assumption" in observability["component_bootstrap"]["swissknife"]
+    assert "detached_worktree_policy" in observability["component_bootstrap"]["swissknife"]
+
+    for required_text in (
+        "Auth assumption",
+        "Detached worktree policy",
+        "Merge cleanup defaults",
+        "A pin may advance only when",
+        "credential helper or `gh auth`",
+    ):
+        assert required_text in plan_text
+    for required_text in (
+        "Auth contract",
+        "Detached worktree and merge cleanup contract",
+        "pin-refresh task that names the component",
+        "--worktree-reconciliation-max-merges 0",
+    ):
+        assert required_text in discovery_text
 
 
 def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
