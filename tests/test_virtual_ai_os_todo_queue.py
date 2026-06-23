@@ -273,6 +273,98 @@ def test_daemon_skips_janitor_off_mission_task_even_when_it_is_only_ready_task(t
     assert selected is None
 
 
+def test_daemon_records_no_eligible_ready_reason_for_off_mission_ready_tasks(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    daemon = PortalImplementationDaemon(
+        todo_path=tmp_path / _task_board_filename("selection-scope"),
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+    task = PortalTask(
+        task_id="VAI-199",
+        title="Review swallowed exception path in old scanner output",
+        status=PENDING_TASK_STATUS,
+        completion="",
+        priority="P1",
+        track="runtime",
+    )
+
+    scope = daemon._selection_scope(
+        [task],
+        {"VAI-199": "ready"},
+        {
+            "objective_task_janitor_receipts": [
+                {
+                    "action": "deprioritize",
+                    "task_id": "VAI-199",
+                    "retired_task_reason": "off_mission_codebase_scan_task",
+                }
+            ],
+        },
+    )
+
+    assert scope["selectable_ready_task_ids"] == ["VAI-199"]
+    assert scope["eligible_ready_task_ids"] == []
+    assert scope["strict_deprioritized_ready_task_ids"] == ["VAI-199"]
+    assert scope["selection_idle_reason"] == "all_selectable_ready_tasks_deprioritized_as_off_mission"
+
+
+def test_daemon_repairs_regressed_todo_status_for_merged_task(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    board = tmp_path / _task_board_filename("merged-status-repair")
+    board.write_text(
+        "\n".join(
+            (
+                "# Board",
+                "",
+                "## VAI-338 Build the launch alignment map",
+                "",
+                f"- Status: {PENDING_TASK_STATUS}",
+                "- Completion: manual",
+                "- Priority: P0",
+                "- Track: launch",
+                "- Depends on:",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    daemon = PortalImplementationDaemon(
+        todo_path=board,
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+    daemon._reconcile_failed_merges = lambda **_kwargs: []  # type: ignore[method-assign]
+    daemon._cleanup_already_merged_worktrees = lambda: {}  # type: ignore[method-assign]
+    daemon._unresolved_merge_failures_by_task = lambda **_kwargs: {}  # type: ignore[method-assign]
+    daemon._transient_merge_deferrals_by_task = lambda **_kwargs: {}  # type: ignore[method-assign]
+    daemon._latest_implementation_finished_by_task = lambda: {}  # type: ignore[method-assign]
+    daemon._successfully_merged_task_ids = lambda: {"VAI-338"}  # type: ignore[method-assign]
+    daemon._active_implementation_task_claims = lambda _task_ids: set()  # type: ignore[method-assign]
+    daemon._commit_generated_file_update = (  # type: ignore[method-assign]
+        lambda _path, *, task_id, subject: {"committed": False, "task_id": task_id, "subject": subject}
+    )
+
+    result = daemon.run_once()
+
+    assert result["merged_status_repair"]["updated_task_ids"] == ["VAI-338"]
+    assert "- Status: completed" in board.read_text(encoding="utf-8")
+    assert result["completed_count"] == 1
+
+
 def test_daemon_parser_blocks_header_only_task_records(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file

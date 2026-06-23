@@ -352,6 +352,61 @@ def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     assert updated_strategy["last_objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]
 
 
+def test_refill_backlog_treats_zero_eligible_ready_as_runnable_drained(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
+
+    todo_text = "\n".join(
+        (
+            "# Board",
+            "",
+            "## VAI-001 Completed launch setup",
+            "- Status: completed",
+            "",
+            "## VAI-002 Off-mission ready noise",
+            "- Status: todo",
+            "",
+            "## VAI-003 Blocked launch dependency",
+            "- Status: blocked",
+        )
+    )
+    state_path = tmp_path / "state.json"
+    state_path.write_text(
+        json.dumps(
+            {
+                "task_count": 3,
+                "completed_count": 1,
+                "ready_count": 1,
+                "eligible_ready_count": 0,
+                "blocked_count": 1,
+                "waiting_count": 0,
+                "task_statuses": {
+                    "VAI-001": "completed",
+                    "VAI-002": "ready",
+                    "VAI-003": "blocked",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    should_scan, mode, current_open, task_count = should_refill_backlog(
+        todo_text=todo_text,
+        state_path=state_path,
+        strategy={},
+        last_scan_key="last_objective_goal_scan_at",
+        last_drained_scan_task_count_key="last_drained_objective_goal_scan_task_count",
+        task_prefix="VAI-",
+        min_open_tasks=0,
+        cooldown_seconds=86400,
+    )
+
+    assert should_scan
+    assert mode == "runnable_drained_exhaustive"
+    assert current_open == 1
+    assert task_count == 3
+
+
 def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
