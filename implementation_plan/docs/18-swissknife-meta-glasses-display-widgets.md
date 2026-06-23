@@ -10,7 +10,7 @@ Created: 2026-05-22
 
 Enable a developer or agent to define a Meta glasses display widget as a Swissknife MCP-IDL/UI descriptor, publish it through a descriptor registry, bind it through the Swissknife ORB, and render it on display-capable Meta glasses through the existing HandsFree mobile DAT bridge.
 
-2026-06-23 scope expansion: MGW also owns the contracts, mocks, and tests for the broader Meta glasses I/O surface that Swissknife applications need: camera photo/video capture, microphone input, speaker/headphone output, Meta Neural Band and captouch events, motion/orientation and phone GPS context, and display output. Native DAT remains the phone-app bridge for hardware capabilities, while display Web Apps are a separate supported path for display-glasses inputs. Bluetooth, Wi-Fi, IPFS, libp2p, and MCP++ compatibility must be modeled as explicit app-level bridge envelopes, content-addressed payloads, peer/session identifiers, policy decisions, and receipts unless official Meta documentation exposes lower-level transport hooks.
+2026-06-23 scope expansion: MGW also owns the contracts, mocks, and tests for the broader Meta glasses I/O surface that Swissknife applications need: camera photo/video capture, microphone input, speaker/headphone output, Meta Neural Band and captouch events, motion/orientation and phone GPS context, and display output. Swissknife apps must be able to bind these interaction methods as app capabilities, consume them through deterministic mock and native-ready adapters, and forward normalized events or payload references into the control plane. Native DAT remains the phone-app bridge for hardware capabilities, while display Web Apps are a separate supported path for display-glasses inputs. Bluetooth, Wi-Fi, IPFS, libp2p, and MCP++ compatibility must be modeled as explicit app-level bridge envelopes, content-addressed payloads, peer/session identifiers, policy decisions, control-plane route decisions, and receipts unless official Meta documentation exposes lower-level transport hooks.
 
 Target workflow:
 
@@ -464,16 +464,17 @@ Exit criteria:
 - [ ] Define a Swissknife Meta glasses I/O capability contract for camera, microphone, speakers/headphones, display, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, route state, fallback state, and lifecycle receipts.
 - [ ] Add hardware-free mocks for DAT camera photo/video capture, Bluetooth audio routes, display lifecycle, Neural Band/captouch events, motion/GPS events, permission denial, disconnect, unsupported capability, and degraded route behavior.
 - [ ] Define Bluetooth/Wi-Fi bridge envelopes that can carry IPFS CIDs, libp2p peer/session identifiers, MCP++ tool/event receipts, policy decisions, and backpressure/latency metadata without pretending the lower-level radio protocol is itself IPFS/libp2p.
-- [ ] Expose camera descriptors to Swissknife applications so apps can request photo/video capture, receive mock/unsupported/ready states, publish content-addressed capture references, and record audit receipts.
-- [ ] Expose microphone and speaker/headphone route descriptors to Swissknife applications with permission/fallback handling, route diagnostics, no raw-audio leakage by default, and MCP++ receipt mapping.
-- [ ] Expose Meta Neural Band, captouch, motion/orientation, and phone GPS inputs as normalized Swissknife event/intent descriptors that Hallucinate App policy can authorize and route.
-- [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks and bridge envelopes.
-- [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities.
+- [ ] Expose camera descriptors to Swissknife applications so apps can request photo/video capture, receive mock/unsupported/ready states, publish content-addressed capture references, route capture events into the control plane, and record audit receipts.
+- [ ] Expose microphone and speaker/headphone route descriptors to Swissknife applications with permission/fallback handling, route diagnostics, no raw-audio leakage by default, control-plane route decisions, and MCP++ receipt mapping.
+- [ ] Expose Meta Neural Band, captouch, motion/orientation, and phone GPS inputs as normalized Swissknife event/intent descriptors that Hallucinate App policy can authorize and route into the control plane.
+- [ ] Add a Swissknife control-plane router for expanded Meta glasses I/O that maps app-level interaction bindings to ORB/MCP++ tool calls, Hallucinate App policy handoff, app session state, and receipt chains.
+- [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks, bridge envelopes, and control-plane routing.
+- [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities, then verify the expected control-plane handoff.
 
 Exit criteria:
 
 - Swissknife apps can develop against camera, audio, neural/captouch, motion, GPS, and display contracts without physical glasses.
-- Expanded I/O events and payloads carry explicit policy decisions, receipts, session identity, and content-addressed references where applicable.
+- Expanded I/O events and payloads carry explicit policy decisions, receipts, session identity, app binding IDs, control-plane route decisions, and content-addressed references where applicable.
 - The first physical-device implementation path is gated by official DAT/Web Apps research and can fall back cleanly when hardware, credentials, display APIs, or platform routes are unavailable.
 
 ## Priority Backlog

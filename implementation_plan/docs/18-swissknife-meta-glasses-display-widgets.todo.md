@@ -354,7 +354,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-363
 - Outputs: swissknife/src/services/meta-glasses-io-profile.ts, swissknife/test/mcp-plus-plus/meta-glasses-io-profile.test.ts, swissknife/docs/meta-glasses-io-contract.md
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-io-profile.ts src/services/mcp-idl.ts src/services/mcp-ui-profile.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-profile.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Swissknife has a versioned Meta glasses I/O profile covering camera photo/video capture, microphone input, speaker/headphone output, display output, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, capability readiness, unsupported/degraded states, fallback routing, policy decisions, content-addressed payload references, libp2p peer/session identifiers, and MCP++ receipt metadata.
+- Acceptance: Swissknife has a versioned Meta glasses I/O profile covering camera photo/video capture, microphone input, speaker/headphone output, display output, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, capability readiness, unsupported/degraded states, application interaction bindings, fallback routing, policy decisions, control-plane route decisions, content-addressed payload references, libp2p peer/session identifiers, and MCP++ receipt metadata.
 
 ## MGW-365 Add hardware-free mocks for expanded Meta glasses I/O
 
@@ -365,7 +365,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-363, MGW-364
 - Outputs: swissknife/test/fixtures/meta-glasses-io, mobile/src/native/__fixtures__/metaWearablesIoStates.js, tests/test_meta_glasses_io_mocks.py
 - Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_io_mocks.py; cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-profile.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Hardware-free fixtures and mocks cover DAT camera photo capture, DAT video stream readiness, microphone route readiness, speaker/headphone route readiness, display lifecycle, Meta Neural Band gestures, captouch events, motion/orientation events, phone GPS context, permission denial, disconnect, unsupported capability, degraded capability, stale session, route loss, and recovery without requiring Meta credentials, DAT package access, paired glasses, or physical hardware.
+- Acceptance: Hardware-free fixtures and mocks cover DAT camera photo capture, DAT video stream readiness, microphone route readiness, speaker/headphone route readiness, display lifecycle, Meta Neural Band gestures, captouch events, motion/orientation events, phone GPS context, Swissknife app capability bindings, control-plane event envelopes, permission denial, disconnect, unsupported capability, degraded capability, stale session, route loss, and recovery without requiring Meta credentials, DAT package access, paired glasses, or physical hardware.
 
 ## MGW-366 Model Bluetooth and Wi-Fi bridge envelopes for IPFS/libp2p/MCP++
 
@@ -376,7 +376,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-364
 - Outputs: swissknife/src/services/meta-glasses-io-transport.ts, swissknife/test/mcp-plus-plus/meta-glasses-io-transport.test.ts, docs/meta-glasses-io-transport-envelope.md
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-io-transport.ts src/services/meta-glasses-io-profile.ts src/services/mcp-idl.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-transport.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Bluetooth and Wi-Fi inputs are represented as app-level bridge envelopes with device ID, session ID, bridge route, permission state, latency, backpressure, payload size limits, content CIDs, libp2p peer IDs where applicable, MCP++ tool/event receipt IDs, policy decisions, and privacy redaction metadata. The contract explicitly avoids claiming raw Bluetooth or Wi-Fi transport is IPFS/libp2p/MCP++ unless the phone app or webapp bridge provides that layer.
+- Acceptance: Bluetooth and Wi-Fi inputs are represented as app-level bridge envelopes with device ID, session ID, app binding ID, bridge route, control-plane route decision, permission state, latency, backpressure, payload size limits, content CIDs, libp2p peer IDs where applicable, MCP++ tool/event receipt IDs, policy decisions, and privacy redaction metadata. The contract explicitly avoids claiming raw Bluetooth or Wi-Fi transport is IPFS/libp2p/MCP++ unless the phone app or webapp bridge provides that layer.
 
 ## MGW-367 Expose camera capture and video stream descriptors to Swissknife apps
 
@@ -387,7 +387,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-364, MGW-365, MGW-366
 - Outputs: swissknife/src/services/meta-glasses-camera-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-camera-adapter.test.ts, swissknife/docs/meta-glasses-camera-app-descriptors.md
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-camera-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-camera-adapter.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Swissknife applications can declare camera photo and video stream requirements, receive mock/unsupported/ready/degraded states, request capture with explicit permission and policy checks, publish capture outputs as IPFS content references when storage is enabled, record libp2p/session routing metadata where available, and emit MCP++ receipts for capture request, capture result, fallback, denial, and error paths.
+- Acceptance: Swissknife applications can declare camera photo and video stream requirements, bind camera interactions to app-level actions, receive mock/unsupported/ready/degraded states, request capture with explicit permission and policy checks, publish capture outputs as IPFS content references when storage is enabled, pass normalized capture events and payload references into the control plane, record libp2p/session routing metadata where available, and emit MCP++ receipts for capture request, capture result, fallback, denial, and error paths.
 
 ## MGW-368 Expose microphone and speaker/headphone audio routes to Swissknife apps
 
@@ -398,7 +398,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-364, MGW-365, MGW-366
 - Outputs: swissknife/src/services/meta-glasses-audio-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-audio-adapter.test.ts, swissknife/docs/meta-glasses-audio-app-descriptors.md
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-audio-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-audio-adapter.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Swissknife applications can declare microphone capture and speaker/headphone playback route requirements through platform Bluetooth-profile abstractions, receive mock/unsupported/ready/degraded route states, enforce permissions and privacy redaction, avoid raw-audio leakage by default, map allowed audio artifacts to content-addressed references, and emit MCP++ receipts for route selection, capture/playback start, fallback, denial, and error paths.
+- Acceptance: Swissknife applications can declare microphone capture and speaker/headphone playback route requirements through platform Bluetooth-profile abstractions, bind audio interactions to app-level actions, receive mock/unsupported/ready/degraded route states, enforce permissions and privacy redaction, avoid raw-audio leakage by default, map allowed audio artifacts to content-addressed references, pass normalized audio route/capture/playback events into the control plane, and emit MCP++ receipts for route selection, capture/playback start, fallback, denial, and error paths.
 
 ## MGW-369 Expose Neural Band, captouch, motion, and GPS inputs to Swissknife apps
 
@@ -409,37 +409,48 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Depends on: MGW-364, MGW-365, MGW-366
 - Outputs: swissknife/src/services/meta-glasses-input-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-input-adapter.test.ts, swissknife/docs/meta-glasses-input-app-descriptors.md
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-input-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-input-adapter.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Meta Neural Band gestures, captouch input, motion/orientation events, and phone GPS context are normalized as Swissknife event and intent descriptors that Hallucinate App policy can authorize and route. Fixtures cover allowed, denied, unsupported, stale, high-frequency throttled, disconnected, and replayed events, with session identity, MCP++ receipts, and privacy-safe payloads.
+- Acceptance: Meta Neural Band gestures, captouch input, motion/orientation events, and phone GPS context are normalized as Swissknife event and intent descriptors that applications can bind to commands, views, and agent actions. Hallucinate App policy can authorize and route those descriptors into the control plane. Fixtures cover allowed, denied, unsupported, stale, high-frequency throttled, disconnected, and replayed events, with session identity, control-plane route decisions, MCP++ receipts, and privacy-safe payloads.
 
-## MGW-370 Add IPFS/libp2p/MCP++ conformance tests for Meta glasses I/O
+## MGW-370 Route expanded Meta glasses I/O through the Swissknife control plane
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-367, MGW-368, MGW-369
+- Outputs: swissknife/src/services/meta-glasses-control-plane-router.ts, swissknife/test/mcp-plus-plus/meta-glasses-control-plane-router.test.ts, swissknife/docs/meta-glasses-control-plane-routing.md
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-control-plane-router.ts src/services/meta-glasses-camera-adapter.ts src/services/meta-glasses-audio-adapter.ts src/services/meta-glasses-input-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts src/services/mcp-orb-capability-router.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-control-plane-router.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Swissknife applications can register Meta glasses camera, microphone, speaker/headphone, display, Meta Neural Band, captouch, motion/orientation, and GPS interaction bindings and pass normalized events or content-addressed payload references into the control plane. The router maps app binding IDs to ORB/MCP++ tool calls, Hallucinate App policy handoff, app session state, libp2p/session routing metadata, replay protection, backpressure, privacy redaction, fallback handling, and deterministic MCP++ receipts.
+
+## MGW-371 Add IPFS/libp2p/MCP++ conformance tests for Meta glasses I/O
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: quality
-- Depends on: MGW-365, MGW-366, MGW-367, MGW-368, MGW-369
+- Depends on: MGW-365, MGW-366, MGW-367, MGW-368, MGW-369, MGW-370
 - Outputs: swissknife/test/mcp-plus-plus/meta-glasses-io-conformance.test.ts, tests/test_meta_glasses_io_mcpplusplus_contract.py, docs/meta-glasses-io-conformance.md
 - Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_io_mcpplusplus_contract.py; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-conformance.test.ts --config=config/jest/jest.config.cjs --runInBand
-- Acceptance: Conformance tests assert that camera, audio, Neural Band, captouch, motion/GPS, and display mock flows include stable content CIDs when payloads are persisted, libp2p peer/session identifiers when routed through network peers, MCP++ tool/event receipts for every operation, explicit policy decisions, privacy redaction metadata, bridge route state, fallback behavior, Bluetooth/Wi-Fi envelope metadata, and deterministic validation failures for malformed envelopes.
+- Acceptance: Conformance tests assert that camera, audio, Neural Band, captouch, motion/GPS, and display mock flows include stable content CIDs when payloads are persisted, libp2p peer/session identifiers when routed through network peers, MCP++ tool/event receipts for every operation, explicit policy decisions, privacy redaction metadata, bridge route state, control-plane route decisions, app binding IDs, fallback behavior, Bluetooth/Wi-Fi envelope metadata, and deterministic validation failures for malformed envelopes or unauthorized control-plane handoffs.
 
-## MGW-371 Add Playwright coverage for Swissknife apps using Meta glasses I/O
+## MGW-372 Add Playwright coverage for Swissknife apps using Meta glasses I/O
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: quality
-- Depends on: MGW-367, MGW-368, MGW-369, MGW-370
+- Depends on: MGW-367, MGW-368, MGW-369, MGW-370, MGW-371
 - Outputs: swissknife/test/e2e/meta-glasses-io-apps.spec.ts, swissknife/playwright.config.ts, swissknife/docs/meta-glasses-io-playwright.md
 - Validation: cd swissknife && npx playwright test test/e2e/meta-glasses-io-apps.spec.ts --config=playwright.config.ts
-- Acceptance: Playwright opens Swissknife applications against mocked Meta glasses camera, microphone, speaker/headphone, Meta Neural Band, captouch, motion/GPS, and display capabilities. Tests verify visible app state, permission prompts or denials, fallback UI, receipt display or diagnostics, content-addressed capture references, and bridge-route metadata without physical glasses.
+- Acceptance: Playwright opens Swissknife applications against mocked Meta glasses camera, microphone, speaker/headphone, Meta Neural Band, captouch, motion/GPS, and display capabilities. Tests verify visible app state, app interaction bindings, permission prompts or denials, fallback UI, receipt display or diagnostics, content-addressed capture references, bridge-route metadata, and control-plane handoff evidence without physical glasses.
 
-## MGW-372 Aggregate expanded Meta glasses I/O launch readiness evidence
+## MGW-373 Aggregate expanded Meta glasses I/O launch readiness evidence
 
 - Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: MGW-370, MGW-371
+- Depends on: MGW-371, MGW-372
 - Outputs: docs/meta-glasses-io-launch-readiness.md, docs/meta-wearables-dat-display-rollout-evidence-template.md, data/meta_glasses_display_widgets/discovery
-- Validation: rg -n "Meta glasses I/O|camera|microphone|headphone|Meta Neural Band|captouch|IPFS|libp2p|MCP\\+\\+|Playwright" docs data/meta_glasses_display_widgets/discovery implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
-- Acceptance: Launch readiness evidence summarizes the official Meta research baseline, capability contract, mocks, Bluetooth/Wi-Fi bridge envelope, IPFS/libp2p/MCP++ conformance results, Playwright results, hardware-free coverage, remaining physical-device validation steps, and fallback behavior for unsupported hardware, missing DAT credentials, missing display access, denied permissions, and unavailable audio routes.
+- Validation: rg -n "Meta glasses I/O|camera|microphone|headphone|Meta Neural Band|captouch|control plane|IPFS|libp2p|MCP\\+\\+|Playwright" docs data/meta_glasses_display_widgets/discovery implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Acceptance: Launch readiness evidence summarizes the official Meta research baseline, capability contract, mocks, Bluetooth/Wi-Fi bridge envelope, Swissknife app interaction bindings, control-plane routing evidence, IPFS/libp2p/MCP++ conformance results, Playwright results, hardware-free coverage, remaining physical-device validation steps, and fallback behavior for unsupported hardware, missing DAT credentials, missing display access, denied permissions, and unavailable audio routes.

@@ -28,6 +28,7 @@ This note seeds the expanded MGW task lane. It is intentionally conservative: im
 - Treat Bluetooth and Wi-Fi as lower-level routes. IPFS/libp2p/MCP++ compatibility belongs in the app-level bridge envelope unless official Meta docs expose lower-level hooks.
 - Preserve privacy boundaries: camera, microphone, GPS, neural/captouch, and motion inputs need explicit permission state, policy decisions, redaction metadata, and receipts.
 - Swissknife applications should consume normalized contracts, not platform-specific DAT objects.
+- Swissknife applications should be able to bind each supported interaction method to app commands, views, or agent actions, then pass normalized events or content-addressed payload references into the control plane with app binding IDs, policy decisions, route decisions, replay protection, and receipts.
 
 ## Follow-Up Questions
 
