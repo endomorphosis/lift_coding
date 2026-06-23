@@ -2031,7 +2031,7 @@ cadence remains parseable and resumable.
 
 ## VAI-358 Resolve code annotation in src/handsfree/agents/runner.py:112
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: runtime
