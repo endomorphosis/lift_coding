@@ -70,7 +70,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-005 Add ORB widget runtime and policy handling
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: runtime
