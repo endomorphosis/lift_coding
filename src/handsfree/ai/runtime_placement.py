@@ -31,6 +31,13 @@ _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES = {
     "ui_render_session",
 }
 
+_GLASSES_WIDGET_CAPABILITIES = {
+    "vai.glasses_widget.render",
+    "vai.glasses_widget.update",
+    "vai.glasses_widget.confirm",
+    "vai.glasses_widget.cancel",
+}
+
 _SERVER_FAMILY_PLACEMENTS: dict[str, tuple[CapabilityPlacementLayer, str]] = {
     "ipfs_datasets": (
         CapabilityPlacementLayer.SEMANTIC_ROUTING,
@@ -90,6 +97,8 @@ def default_virtual_ai_os_runtime_surface(
         return CapabilityRuntimeSurface.DAEMON_MEDIATED
     if capability_id in _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES:
         return CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    if capability_id in _GLASSES_WIDGET_CAPABILITIES:
+        return CapabilityRuntimeSurface.SWISSKNIFE_ORB
     if capability_id in _DAEMON_PREFERRED_REMOTE_CAPABILITIES:
         return CapabilityRuntimeSurface.DAEMON_MEDIATED
     return CapabilityRuntimeSurface.MCP_PROVIDER
@@ -105,12 +114,24 @@ def supported_virtual_ai_os_runtime_surfaces(
     if execution_mode == CapabilityExecutionMode.DIRECT_CLI:
         return (CapabilityRuntimeSurface.LOCAL_CLI,)
     if execution_mode == CapabilityExecutionMode.ORCHESTRATED:
+        if capability_id in _GLASSES_WIDGET_CAPABILITIES:
+            return (
+                CapabilityRuntimeSurface.DAEMON_MEDIATED,
+                CapabilityRuntimeSurface.HALLUCINATE_APP,
+            )
         return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
     if capability_id in _MCP_REMOTE_DATA_SURFACES:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
     if capability_id in _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
     if capability_id in _HALLUCINATE_OPERATOR_CAPABILITIES:
+        return (
+            CapabilityRuntimeSurface.MCP_PROVIDER,
+            CapabilityRuntimeSurface.DAEMON_MEDIATED,
+            CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            CapabilityRuntimeSurface.HALLUCINATE_APP,
+        )
+    if capability_id in _GLASSES_WIDGET_CAPABILITIES:
         return (
             CapabilityRuntimeSurface.MCP_PROVIDER,
             CapabilityRuntimeSurface.DAEMON_MEDIATED,
@@ -173,7 +194,20 @@ def _placement_metadata(
         }
 
     if runtime_surface == CapabilityRuntimeSurface.DAEMON_MEDIATED:
-        if entry.server_family == "ipfs_accelerate":
+        if entry.server_family == "meta_glasses_mobile_orb":
+            layer = CapabilityPlacementLayer.HANDSFREE_DAEMON
+            target_repo = "handsfree/mobile"
+            reason = (
+                "HandsFree mobile owns Meta glasses widget dispatch, bridge receipts, "
+                "and fallback rendering."
+            )
+            constraints = (
+                "daemon_supervised",
+                "policy_receipt_required",
+                "placement_receipt_required",
+                "capability_receipt_required",
+            )
+        elif entry.server_family == "ipfs_accelerate":
             layer, target_repo = _SERVER_FAMILY_PLACEMENTS[entry.server_family]
             reason = "ipfs_accelerate_py owns long-running execution placement workflows."
             constraints = ("daemon_supervised", "artifact_receipts_required")
