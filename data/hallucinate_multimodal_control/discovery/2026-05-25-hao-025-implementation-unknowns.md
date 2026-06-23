@@ -18,12 +18,12 @@ task-board entries were recorded as historical discovery outputs:
 
 ## Queue State Evidence
 
-When this report was written, the initial queue still showed unresolved
-`HAO-008` and `HAO-009` work, and the strategy file still listed both in
-`blocked_tasks`. Current queue evidence now shows `HAO-008`, `HAO-009`,
-`HAO-028`, and `HAO-029` completed with an empty `blocked_tasks` list, so this
-section is historical context rather than a live blocker or a duplicate
-backlog signal.
+Historical queue snapshot: when this report was first written, older queue
+artifacts showed `HAO-008` and `HAO-009` as pending and listed both in
+`blocked_tasks`. Current queue evidence supersedes that snapshot: `HAO-008`,
+`HAO-009`, `HAO-028`, and `HAO-029` are completed, and the strategy
+`blocked_tasks` list is empty. This section is retained only as discovery
+history, not as a live blocker or duplicate backlog signal.
 
 Evidence commands:
 
