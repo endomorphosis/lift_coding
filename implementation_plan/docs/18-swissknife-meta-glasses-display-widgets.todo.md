@@ -3082,7 +3082,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-272 Bind glasses launch replay to the shared VAI capability receipts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
