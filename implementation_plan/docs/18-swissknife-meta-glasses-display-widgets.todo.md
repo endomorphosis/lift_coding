@@ -1309,3 +1309,322 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-114-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-115 Resolve code annotation in hallucinate_app/MENU_STRUCTURE.md:11
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/MENU_STRUCTURE.md
+- Validation: test -f hallucinate_app/MENU_STRUCTURE.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/MENU_STRUCTURE.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-115-codebase-scan-adf5c0aa0a20.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-116 Resolve code annotation in hallucinate_app/docs/INDEX.md:24
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/docs/INDEX.md
+- Validation: test -f hallucinate_app/docs/INDEX.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/docs/INDEX.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-116-codebase-scan-58d2ea49839a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-117 Resolve code annotation in hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md:3
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Validation: test -f hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md:3. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-117-codebase-scan-b52e44553a92.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-118 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-118-codebase-scan-b9a9faa1f210.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-119 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json
+- Validation: python3 -m json.tool hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json >/dev/null
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-119-codebase-scan-7360c608d6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-120 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md:11
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-120-codebase-scan-7bcebb35f4e4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-121 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-121-codebase-scan-a73074e556ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-122 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-122-codebase-scan-af1c8f84f823.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-123 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-123-codebase-scan-fbaaa894a103.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-124 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-124-codebase-scan-249bb3d996f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-125 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-125-codebase-scan-b703c77d6df0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-126 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-126-codebase-scan-43d9c2282080.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-127 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-127-codebase-scan-da82d68a141b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-128 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-128-codebase-scan-8e7612d2b02c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-129 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-129-codebase-scan-c2481cea1af4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-130 Resolve merge retry-budget failure for MGW-125
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-130-mgw-125-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-125. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-130-mgw-125-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-125 from strategy blocked_tasks.
+
+## MGW-131 Resolve merge retry-budget failure for MGW-126
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-131-mgw-126-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-126. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-131-mgw-126-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-126 from strategy blocked_tasks.
+
+## MGW-132 Resolve merge retry-budget failure for MGW-130
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-132-mgw-130-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-130. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-132-mgw-130-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-130 from strategy blocked_tasks.
+
+## MGW-133 Resolve merge retry-budget failure for MGW-127
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-133-mgw-127-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-127. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-133-mgw-127-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-127 from strategy blocked_tasks.
+
+## MGW-134 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:421
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:421. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-134-codebase-scan-dc01283308ea.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-135 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:433
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:433. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-135-codebase-scan-616298b7fd51.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-136 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:439
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:439. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-136-codebase-scan-8b095211ac35.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-137 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:444
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:444. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-137-codebase-scan-049d1ee62326.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-138 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:449
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:449. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-138-codebase-scan-924df9ad9af7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-139 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:8
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:8. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-139-codebase-scan-b5eb73958205.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-140 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:9
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-140-codebase-scan-07a5da531281.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-141 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:15
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:15. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-141-codebase-scan-dc8f41e77400.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-142 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:8
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:8. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-142-codebase-scan-7af98f5b9f1b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-143 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:9
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-28-vai-111-resolution-notes.md:9. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-143-codebase-scan-1358e4f052cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

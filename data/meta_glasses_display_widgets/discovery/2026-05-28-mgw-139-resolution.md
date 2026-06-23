@@ -1,23 +1,23 @@
 # MGW-139 Resolution
 
 Date: 2026-05-28
-Task: MGW-139
-Source finding: data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:8
-Fingerprint: b5eb73958205c82d42ae72ad9b617d1a6eae1918
+Source: data/virtual_ai_os/discovery/2026-05-28-vai-110-resolution.md:8
+Finding: `The \`openSwissKnifeApp\` action handler had a TODO comment`
 
-## Finding
+## Context
 
-The `openSwissKnifeApp` action handler in
-`hallucinate_app/hallucinate_app/node/menu_generator.js` previously contained a
-`// TODO: Launch specific app within SwissKnife` comment with no functional
-implementation. Menu items in `menu_config.js` supply an `app` property
-(terminal, editor, files, chat, music, video) that was silently discarded.
+The VAI-110 resolution document (line 8) described a bug where the `openSwissKnifeApp`
+action handler contained a TODO comment `// TODO: Launch specific app within SwissKnife`
+and silently discarded the `app` property supplied by menu config items.
 
 ## Verification
 
-Inspected the current codebase state:
+The fix described in VAI-110 is confirmed present in the codebase:
 
-**menu_generator.js** (lines 429-433):
+- `hallucinate_app/hallucinate_app/node/menu_generator.js` — The `openSwissKnifeApp` case
+  now calls `this.createSwissKnifeWindow(item?.app)`, forwarding the app name from menu
+  config. No TODO comment remains.
+
 ```js
 case 'openSwissKnifeApp':
   if (this.createSwissKnifeWindow) {
@@ -26,23 +26,9 @@ case 'openSwissKnifeApp':
   break;
 ```
 
-The TODO comment is gone. `item?.app` is now forwarded to
-`createSwissKnifeWindow`.
-
-**index.js** (`createSwissKnifeWindow`, lines 2073-2093):
-```js
-const createSwissKnifeWindow = (appName) => {
-  // ...
-  win.loadFile(path.join(__dirname, 'hallucinate_app', 'node', 'views', 'dashboard.html'), {
-    hash: appName || ''
-  });
-```
-
-The function accepts the optional `appName` parameter and passes it as a URL
-hash so the dashboard frontend can deep-link to the named app on load.
-
 ## Verdict
 
-The bug described in VAI-110 was already resolved in the main codebase before
-this scan was filed. No additional code changes are required. This document
-closes the annotation as a confirmed fix (not a false positive).
+Not a false positive — the VAI-110 fix was already applied upstream. The MGW-139 annotation
+scan surfaced the historical description in the resolution document, which correctly documents
+a completed fix. No further code changes are required. This resolution note closes the finding
+so the supervisor does not re-queue it.
