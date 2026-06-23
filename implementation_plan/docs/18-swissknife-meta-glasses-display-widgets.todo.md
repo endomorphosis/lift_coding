@@ -114,7 +114,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-009 Add display webapp fallback renderer and readiness gates
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ui
