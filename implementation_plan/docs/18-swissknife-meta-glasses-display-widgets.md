@@ -265,6 +265,18 @@ MGW-270 launch-session replay evidence:
 - Each widget state includes `hallucinate_app.interaction_envelope_id`, `normalized_intent_id`, `policy_decision_id`, `mediation_receipt_id`, and `virtual_desktop_command_intent_id`; `regions.status_region`, `regions.diagnostics_region`, `regions.action_region.actions[*]`, and offload receipts render the relevant Hallucinate App receipt ID.
 - The confirmation event renders `confirm`, `cancel`, and `retry` action kinds with stable focus order and backend-approved `terminal.*` action IDs. The peer-offload event renders `desktop_peer` placement with cancel/retry/fallback actions and the Hallucinate App offload receipt.
 
+MGW-271 physical Meta glasses launch-readiness checklist:
+
+- Pairing readiness: physical Meta glasses must pair through the phone host before launch validation starts, expose `pairing.status: paired` followed by `display_ready`, and retain the paired `device_id` in `render_context.paired_device_id`; failures must render `pairing_lost`, `display_unavailable`, or `requires_update` recovery states with `retry_pairing` and `open_phone_preview` actions.
+- Phone interface readiness: the glasses session remains a terminal for the phone-hosted virtual desktop, so the phone is the authority for `session_identity`, policy checks, command receipts, and recovery state; no physical glasses action may issue a desktop command without the shared VAI capability envelope.
+- Display fallback readiness: every physical render must have a tested fallback path to `mobile-card`, `display_webapp`, or `simulator`; display fallback is launch-ready only when the same pairing badge, active tool, confirmation prompt, and receipt IDs are inspectable after the glasses display is disconnected or unavailable.
+- Offload-state visibility: the glasses status and diagnostics views must show whether compute placement is `phone_local`, `desktop_peer`, `hybrid`, or `fallback_phone`, including the selected desktop peer label, transfer phase/progress when present, and bounded `cancel_offload`, `retry_offload`, `fallback_to_phone`, and `open_mobile_card` actions.
+- Policy receipt inspection: each physical Meta glasses render/update/confirm/cancel flow must expose the policy receipt, mediation receipt, placement receipt, and transfer/fallback receipt when present through `descriptor_refs`, `peer_offload.receipts`, `regions.status_region`, or simulator/mobile diagnostics; a missing receipt is a launch blocker and must render `recovery.code: receipt_missing`.
+- Input readiness: physical captouch, voice, Neural Band, and phone relay inputs must normalize to the same Hallucinate App `interaction_envelope.surface: "meta_glasses"` path used by simulator and mobile-card previews, with focus order preserved for confirmation, cancel, retry, and offload actions.
+- Simulator-only gap log: launch evidence must keep simulator-only gaps explicit, including unavailable optical brightness/focus comfort checks, real Bluetooth/Wi-Fi pairing latency, physical input latency, battery/thermal behavior, and DAT native-display firmware failure modes; these gaps do not fork the contract, but they must be listed before a physical launch signoff.
+
+MGW-271 launch-readiness evidence lives in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-271-physical-launch-readiness.md` and ties the physical Meta glasses checklist back to the MGW-270 hardware-free replay.
+
 Minimal manifest state example:
 
 ```json
