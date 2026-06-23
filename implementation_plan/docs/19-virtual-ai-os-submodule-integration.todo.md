@@ -306,7 +306,7 @@ cadence remains parseable and resumable.
 
 ## VAI-025 Re-check canonical mcp_plus_plus source and standalone pin decision
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Blocked reason: Deferred after VAI-013 resolved the current mcp_plus_plus source evidence; repeat source-pin rechecks are not launch-critical for the virtual desktop/mobile/glasses integration run.
 - Priority: P2
@@ -318,7 +318,7 @@ cadence remains parseable and resumable.
 
 ## VAI-026 Supervised autonomous implementation cadence
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
@@ -563,7 +563,7 @@ cadence remains parseable and resumable.
 
 ## VAI-102 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
