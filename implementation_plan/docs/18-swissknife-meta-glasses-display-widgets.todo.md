@@ -1301,3 +1301,168 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
 - Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-114-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-115 Resolve code annotation in hallucinate_app/MENU_STRUCTURE.md:11
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/MENU_STRUCTURE.md
+- Validation: test -f hallucinate_app/MENU_STRUCTURE.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/MENU_STRUCTURE.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-115-codebase-scan-adf5c0aa0a20.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-116 Resolve code annotation in hallucinate_app/docs/INDEX.md:24
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/docs/INDEX.md
+- Validation: test -f hallucinate_app/docs/INDEX.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/docs/INDEX.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-116-codebase-scan-58d2ea49839a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-117 Resolve code annotation in hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md:3
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Validation: test -f hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md:3. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-117-codebase-scan-b52e44553a92.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-118 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/SUPPORT.md:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-118-codebase-scan-b9a9faa1f210.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-119 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json
+- Validation: python3 -m json.tool hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json >/dev/null
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/image-classification/models/webnn/efficientnet-lite4/config.json:490. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-119-codebase-scan-7360c608d6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-120 Resolve code annotation in data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md:11
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md
+- Validation: test -f data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md
+- Acceptance: Codebase scan filed this finding from data/virtual_ai_os/discovery/2026-05-27-vai-100-resolution.md:11. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-120-codebase-scan-7bcebb35f4e4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-121 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/stable-diffusion-1.5/index.js:874. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-121-codebase-scan-a73074e556ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-122 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/generation_utils.js:52. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-122-codebase-scan-af1c8f84f823.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-123 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/static/js/audioMotion-analyzer.js:1257. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-123-codebase-scan-fbaaa894a103.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-124 Resolve code annotation in hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Validation: test -f hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/experiments/webnn-developer-preview/demos/whisper-base/whisper.js:232. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-124-codebase-scan-249bb3d996f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-125 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/auth_dashboard.js:1167. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-125-codebase-scan-b703c77d6df0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-126 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:663. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-126-codebase-scan-43d9c2282080.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-127 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:677. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-127-codebase-scan-da82d68a141b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-128 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:856. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-128-codebase-scan-8e7612d2b02c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-129 Resolve code annotation in hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Validation: test -f hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js
+- Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/dashboard/security/security_panel.js:1304. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-129-codebase-scan-c2481cea1af4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
