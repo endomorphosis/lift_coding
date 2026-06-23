@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEYS = {
   PHONE_DISPATCHER_URL: '@handsfree_phone_dispatcher_url',
+  PHONE_DISPATCHER_SECRET: '@handsfree_phone_dispatcher_secret',
 };
 
 function normalizeBaseUrl(url) {
@@ -19,6 +20,18 @@ export async function getPhoneDispatcherUrl() {
   return normalizeBaseUrl(stored);
 }
 
+export async function getPhoneDispatcherSecret() {
+  const envSecret = typeof process !== 'undefined' ? process.env?.EXPO_PUBLIC_PHONE_DISPATCHER_SECRET : undefined;
+  if (envSecret) return String(envSecret).trim();
+
+  const stored = await AsyncStorage.getItem(STORAGE_KEYS.PHONE_DISPATCHER_SECRET);
+  return String(stored || '').trim();
+}
+
+export async function setPhoneDispatcherSecret(secret) {
+  await AsyncStorage.setItem(STORAGE_KEYS.PHONE_DISPATCHER_SECRET, String(secret || '').trim());
+}
+
 export async function setPhoneDispatcherUrl(url) {
   const normalized = normalizeBaseUrl(url);
   await AsyncStorage.setItem(STORAGE_KEYS.PHONE_DISPATCHER_URL, normalized);
@@ -30,9 +43,14 @@ export async function dispatchViaPhone({ title, body = '', labels = [] }) {
     throw new Error('Phone dispatcher URL not configured');
   }
 
+  const secret = await getPhoneDispatcherSecret();
+
+  const headers = { 'Content-Type': 'application/json' };
+  if (secret) headers['X-Handsfree-Dispatcher-Secret'] = secret;
+
   const resp = await fetch(`${baseUrl}/dispatch`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ title, body, labels }),
   });
 
