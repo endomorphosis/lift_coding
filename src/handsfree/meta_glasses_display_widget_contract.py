@@ -74,6 +74,14 @@ DISPLAY_WIDGET_ACTION_IDS: Final[tuple[str, ...]] = tuple(
     definition["id"] for definition in DISPLAY_WIDGET_ACTION_DEFINITIONS
 )
 
-DISPLAY_WIDGET_ORB_OPERATIONS: Final[tuple[str, ...]] = tuple(
-    definition["operation"] for definition in DISPLAY_WIDGET_ACTION_DEFINITIONS
+DISPLAY_WIDGET_ORB_OPERATIONS: Final[tuple[str, ...]] = (
+    "render_widget",
+    "update_widget",
+    "clear_widget",
+    "focus_next",
+    "focus_previous",
+    "activate",
+    "reset_session",
+    "play_video",
+    "subscribe_updates",
 )
