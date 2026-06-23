@@ -249,7 +249,7 @@ cadence remains parseable and resumable.
 
 ## VAI-020 Harden mobile ORB edge diagnostics and policy receipts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
