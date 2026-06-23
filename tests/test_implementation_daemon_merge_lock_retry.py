@@ -109,6 +109,61 @@ def test_prior_attempted_merge_failure_abandons_reconciliation_candidate(tmp_pat
     assert daemon._failed_merge_candidates() == []
 
 
+def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
+    Daemon = _daemon_class()
+    todo_path = tmp_path / "todo.md"
+    events_path = tmp_path / "events.jsonl"
+    todo_path.write_text(
+        """# Todos
+
+## ACCEL-001 Current task
+
+- Status: todo
+- Priority: P1
+- Track: runtime
+- Depends on:
+- Outputs: src/runtime.py
+- Validation: test -f src/runtime.py
+- Acceptance: Keep valid reconciliation candidates.
+""",
+        encoding="utf-8",
+    )
+    live_event = {
+        "type": "implementation_finished",
+        "task_id": "ACCEL-001",
+        "attempt": 1,
+        "branch": "implementation/accel-001-attempt-1",
+        "implementation_commit": "1111111111111111111111111111111111111111",
+        "validation_result": {"attempted": True, "passed": True},
+        "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
+    }
+    removed_event = {
+        "type": "implementation_finished",
+        "task_id": "ACCEL-999",
+        "attempt": 1,
+        "branch": "implementation/accel-999-attempt-1",
+        "implementation_commit": "9999999999999999999999999999999999999999",
+        "validation_result": {"attempted": True, "passed": True},
+        "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
+    }
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in [removed_event, live_event]),
+        encoding="utf-8",
+    )
+    daemon = Daemon(
+        todo_path=todo_path,
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=events_path,
+        repo_root=tmp_path,
+        task_header_prefix="## ACCEL-",
+    )
+    daemon._main_branch_name = lambda: "main"
+    daemon._git_ref_is_ancestor = lambda _commit, _target: False
+
+    assert daemon._failed_merge_candidates() == [live_event]
+
+
 def test_duplicate_attempt_suppression_prioritizes_transient_locks_before_new_conflict_work():
     daemon = _daemon_class()
     conflict_event = {
