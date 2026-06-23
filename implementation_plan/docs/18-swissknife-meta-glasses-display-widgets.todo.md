@@ -454,3 +454,47 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: docs/meta-glasses-io-launch-readiness.md, docs/meta-wearables-dat-display-rollout-evidence-template.md, data/meta_glasses_display_widgets/discovery
 - Validation: rg -n "Meta glasses I/O|camera|microphone|headphone|Meta Neural Band|captouch|control plane|IPFS|libp2p|MCP\\+\\+|Playwright" docs data/meta_glasses_display_widgets/discovery implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Acceptance: Launch readiness evidence summarizes the official Meta research baseline, capability contract, mocks, Bluetooth/Wi-Fi bridge envelope, Swissknife app interaction bindings, control-plane routing evidence, IPFS/libp2p/MCP++ conformance results, Playwright results, hardware-free coverage, remaining physical-device validation steps, and fallback behavior for unsupported hardware, missing DAT credentials, missing display access, denied permissions, and unavailable audio routes.
+
+## MGW-374 Resolve code annotation in implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-374-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-375 Resolve code annotation in implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
+- Validation: test -f implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-375-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-376 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-376-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-377 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-377-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
