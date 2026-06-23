@@ -2219,7 +2219,11 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-192 Resolve code annotation in scripts/hallucinate_multimodal_control_todo_supervisor.py:308
 
+<<<<<<< HEAD
+- Status: completed
+=======
 - Status: todo
+>>>>>>> implementation/vai-161-attempt-1-1780219293
 - Completion: manual
 - Priority: P3
 - Track: runtime

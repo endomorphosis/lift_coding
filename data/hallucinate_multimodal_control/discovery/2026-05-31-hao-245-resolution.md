@@ -19,11 +19,9 @@ Added a clarifying comment directly before the flagged line to document that
 This matches the same fix applied in `hallucinate_multimodal_control_todo_supervisor.py`
 for HAO-244.
 
-Also resolved merge conflicts in:
-- `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`:
-  kept `Status: completed` for MGW-192 (HEAD was more current).
-- `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`:
-  kept all HEAD content (the implementation branch added no new objectives here).
+The `hallucinate_multimodal_control_todo_daemon.py` `CODEBASE_SCAN_SKIP_PREFIXES`
+does not exclude `scripts/`, so the HAO scanner can reach this file. The inline
+comment is the appropriate suppression mechanism here.
 
 ## Validation
 
