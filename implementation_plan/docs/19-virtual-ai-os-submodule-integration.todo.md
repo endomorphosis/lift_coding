@@ -205,7 +205,7 @@ cadence remains parseable and resumable.
 
 ## VAI-016 Build the Meta Ray-Ban browser simulator shell
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: device
