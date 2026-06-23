@@ -162,6 +162,45 @@ def test_hao_428_offload_session_events_route_through_mediation():
     assert section.index("MUST NOT call desktop peer RPC") < section.index("policy_receipt_id")
 
 
+def test_hao_429_peer_offload_policy_receipts_and_recovery_states():
+    source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    section_start = source.index("### Peer-offload policy receipts and recovery states")
+    section_end = source.index("### Meta glasses display-widget intent bridge")
+    section = source[section_start:section_end]
+    normalized_section = " ".join(section.replace("`", "").split())
+
+    required_terms = [
+        "peer_offload_policy_receipt",
+        "peer_offload_recovery_receipt",
+        "decision, selected peer, fallback, cancellation, timeout, and retry state",
+        "phone UI, Swissknife UI, and Meta glasses terminal",
+        "policy_decision",
+        "selected_peer",
+        "fallback_plan",
+        "recovery_state",
+        "retry_budget",
+        "render_targets",
+        "Policy allow or confirmation",
+        "Peer selection fallback",
+        "User cancellation",
+        "Peer timeout",
+        "Retry scheduled or exhausted",
+        "dispatching, awaiting_confirmation, running_on_peer, fallback_selected",
+        "retry_scheduled, cancelled, timed_out, retry_exhausted, failed_closed, and recovered",
+        "Runtime-plane targets may report transport availability and execution errors",
+        "must not choose a new recovery state",
+        "event_receipt_id -> policy_receipt_id -> command_receipt_id -> peer_offload_policy_receipt_id",
+        "peer_offload_recovery_receipt_id -> render_receipt_id",
+        "must not invent different status semantics",
+    ]
+    for term in required_terms:
+        assert term in normalized_section
+
+    assert section.index("mediation_receipt") < section.index("before peer dispatch")
+    assert section.index("Peer-offload recovery records") < section.index("The recovery-state vocabulary is fixed")
+    assert section.index("Hallucinate App owns recovery-state transitions") < section.index("The peer-offload receipt chain is")
+
+
 def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
     source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
     section_start = source.index("### Operator-console plane contract")
