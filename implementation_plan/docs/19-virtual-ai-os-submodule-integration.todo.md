@@ -227,7 +227,7 @@ cadence remains parseable and resumable.
 
 ## VAI-018 Validate DAT MockDeviceKit parity for native mobile simulation
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
