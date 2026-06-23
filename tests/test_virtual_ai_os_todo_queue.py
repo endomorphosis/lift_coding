@@ -395,6 +395,50 @@ def test_daemon_parser_blocks_header_only_task_records(tmp_path):
     assert tasks[1].status == pending_status
 
 
+def test_daemon_completion_inserts_missing_status_line_for_header_only_task(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    board = tmp_path / _task_board_filename("header-only-completion")
+    board.write_text(
+        "\n".join(
+            (
+                "# Minimal Board",
+                "",
+                "## VAI-902 Generated annotation cleanup",
+                "",
+                "## VAI-903 Runnable item",
+                "",
+                f"- Status: {PENDING_TASK_STATUS}",
+                "- Priority: P1",
+                "- Track: integration",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    daemon = PortalImplementationDaemon(
+        todo_path=board,
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+    daemon._commit_generated_file_update = (  # type: ignore[method-assign]
+        lambda _path, *, task_id, subject: {"committed": False, "task_id": task_id, "subject": subject}
+    )
+
+    result = daemon._mark_task_completed_in_todo("VAI-902")
+
+    text = board.read_text(encoding="utf-8")
+    assert result["updated"] is True
+    assert result["updated_task_ids"] == ["VAI-902"]
+    assert result["inserted_status_task_ids"] == ["VAI-902"]
+    assert result["missing_task_ids"] == []
+    assert "## VAI-902 Generated annotation cleanup\n\n- Status: completed\n\n## VAI-903" in text
+
+
 def test_virtual_ai_os_todo_board_is_daemon_parseable():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
