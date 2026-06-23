@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 223483ce405ef808ad3bb9f341d9213afb9088fe
+Fingerprint: 1c1e2f08924b7439e0bb7b9229ed174d61ba85fe
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 1
@@ -10,28 +10,22 @@ Track: ops
 
 ## Main Checkout Status
 
-- `M  hallucinate_app`
-- `M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `M  tests/test_hallucinate_multimodal_control_todo_queue.py`
-- `M  tests/test_meta_glasses_display_todo_queue.py`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=4`
+- Path categories: `modified=1`
 - Status paths:
-  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `tests/test_hallucinate_multimodal_control_todo_queue.py`
-  - `tests/test_meta_glasses_display_todo_queue.py`
-- Staged name status:
-  - `M	hallucinate_app`
+- Name status:
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
-  - `M	tests/test_meta_glasses_display_todo_queue.py`
+- Diff stat:
+  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
+  - ` 1 file changed, 1 insertion(+), 1 deletion(-)`
 
 ## Sample Branches Or Worktrees
 
-- `implementation/vai-007-attempt-1-1782197284` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1782197284`
+- `implementation/vai-009-attempt-1-1782220249` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1782220249`
 
 ## Why This Blocks Progress
 
@@ -95,24 +89,19 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "223483ce405ef808ad3bb9f341d9213afb9088fe",
+  "fingerprint": "1c1e2f08924b7439e0bb7b9229ed174d61ba85fe",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
+    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 4
+      "modified": 1
     },
-    "staged_name_status": "M\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "status_paths": [
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "tests/test_hallucinate_multimodal_control_todo_queue.py",
-      "tests/test_meta_glasses_display_todo_queue.py"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      "M  hallucinate_app",
-      "M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "M  tests/test_hallucinate_multimodal_control_todo_queue.py",
-      "M  tests/test_meta_glasses_display_todo_queue.py"
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -122,17 +111,14 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-007-attempt-1-1782197284"
+    "implementation/vai-009-attempt-1-1782220249"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "tests/test_hallucinate_multimodal_control_todo_queue.py",
-    "tests/test_meta_glasses_display_todo_queue.py"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-007-attempt-1-1782197284"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-009-attempt-1-1782220249"
   ],
   "success_signals": [
     "candidate_count_decreases",
