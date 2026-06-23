@@ -40,6 +40,9 @@ VAI_MGW_SHARED_EVIDENCE_PACKET_PATH = (
 DESKTOP_PEER_OFFLOAD_SMOKE_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-438-desktop-peer-offload-smoke.md"
 )
+PHONE_INGRESS_REHEARSAL_PATH = (
+    DISCOVERY_ROOT / "2026-06-23-hao-437-phone-ingress-rehearsal.md"
+)
 
 
 def _load_script_module(name: str):
@@ -153,21 +156,25 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
     tasks = {task.task_id: task for task in _load_tasks()}
     expected = {
         "HAO-437": {
+            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-436"],
             "parallel_lane": "physical-phone-ingress",
             "missing": "physical phone ingress rehearsal receipt",
         },
         "HAO-438": {
+            "status": "completed",
             "depends_on": ["HAO-436"],
             "parallel_lane": "desktop-peer-smoke",
             "missing": "desktop peer offload smoke receipt",
         },
         "HAO-439": {
+            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-436"],
             "parallel_lane": "meta-glasses-terminal",
             "missing": "Meta glasses terminal receipt capture",
         },
         "HAO-440": {
+            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-437", "HAO-438", "HAO-439"],
             "parallel_lane": "launch-readiness-aggregate",
             "missing": "aggregate physical readiness receipt and Playwright lineage",
@@ -177,7 +184,7 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
     assert tasks["HAO-436"].status == "completed"
     for task_id, values in expected.items():
         task = tasks[task_id]
-        assert task.status == PENDING_TASK_STATUS
+        assert task.status == values["status"]
         assert task.priority == "P0"
         assert task.track == "launch"
         assert task.depends_on == values["depends_on"]
@@ -655,6 +662,134 @@ def test_hao_438_desktop_peer_offload_smoke_receipt_recovers_to_phone_local():
         "peer_offload_policy_receipt carries the selected desktop peer and placement_id",
         "desktop peer reports availability failure but does not choose fallback",
         "phone_local recovery preserves the same session_id, command_intent_id, policy_receipt_id, command_receipt_id, placement_id, and peer_offload_policy_receipt_id",
+    ]
+
+
+def test_hao_437_real_phone_ingress_rehearsal_receipt_fails_closed_without_adapter():
+    source = PHONE_INGRESS_REHEARSAL_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    packet = _json_block_after(source, "## Real Phone Ingress Rehearsal Fixture")
+    normalized_source = " ".join(source.split())
+    normalized_readiness = " ".join(readiness_source.split())
+
+    for term in (
+        "HAO-437",
+        "real phone ingress rehearsal",
+        "real phone ingress",
+        "phone:operator",
+        "interaction_envelope",
+        "mediation_receipt",
+        "policy_receipt_id",
+        "fail-closed recovery",
+    ):
+        assert term in normalized_source
+
+    for term in (
+        "HAO-437",
+        "Real Phone Ingress Rehearsal",
+        "real phone ingress rehearsal receipt",
+        "phone:operator",
+        "interaction_envelope",
+        "session_id",
+        "correlation_id",
+        "request_id",
+        "mediation_receipt",
+        "policy_receipt_id",
+        "fail_closed",
+    ):
+        assert term in normalized_readiness
+
+    assert packet["task_id"] == "HAO-437"
+    assert packet["artifact_id"] == "real_phone_ingress_rehearsal_receipt"
+    assert packet["goal_id"] == "VAIOS-G697"
+    assert packet["requires_physical_devices"] is True
+    assert packet["physical_device"]["participant_id"] == "phone:operator"
+    assert packet["physical_device"]["adapter_absent_recovery"] == "fail_closed"
+    assert packet["participants"]["desktop:peer"] == "runtime_target_blocked_until_policy"
+    assert packet["participants"]["phone_local"] == "runtime_target_blocked_until_policy"
+    assert packet["receipt_chain"] == [
+        "physical_phone_adapter_receipt",
+        "interaction_envelope",
+        "mediation_receipt",
+        "virtual_desktop_command_intent",
+        "dispatch_gate_receipt",
+        "adapter_absent_recovery_receipt",
+    ]
+
+    stable_ids = packet["stable_ids"]
+    assert stable_ids == {
+        "session_id": "vdsk_hao437_real_phone_ingress",
+        "correlation_id": "corr_hao437_phone_open_monitor",
+        "request_id": "req_hao437_phone_open_monitor",
+        "interaction_id": "evt_hao437_phone_open_monitor",
+        "event_receipt_id": "rcpt_evt_hao437_phone_open_monitor",
+        "policy_receipt_id": "rcpt_policy_hao437_phone_open_monitor",
+        "command_intent_id": "cmd_hao437_phone_open_monitor",
+        "command_receipt_id": "rcpt_cmd_hao437_phone_open_monitor",
+        "placement_id": "place_hao437_phone_model_monitor",
+        "adapter_absent_receipt_id": "rcpt_absent_hao437_phone_adapter",
+    }
+
+    steps = packet["replay_steps"]
+    assert [step["phase"] for step in steps] == [
+        "physical_phone_event",
+        "interaction_envelope",
+        "mediation",
+        "command_intent",
+        "dispatch_gate",
+        "adapter_absent_recovery",
+    ]
+
+    adapter = steps[0]["adapter_receipt"]
+    envelope = steps[1]["interaction_envelope"]
+    mediation = steps[2]["receipt"]
+    command = steps[3]["command"]
+    dispatch_gate = steps[4]["receipt"]
+    absent_recovery = steps[5]["receipt"]
+
+    assert adapter["participant_id"] == "phone:operator"
+    assert adapter["adapter_status"] == "attached"
+    assert adapter["transport_authenticated"] is True
+    assert envelope["participant_id"] == "phone:operator"
+    assert envelope["surface"] == "phone"
+    assert envelope["surface_event"] == "tap"
+    assert envelope["normalized_intent"]["arguments"]["source"] == "real_phone_ingress"
+
+    for record in (adapter, envelope, mediation, command, dispatch_gate, absent_recovery):
+        assert record["session_id"] == stable_ids["session_id"]
+        assert record["correlation_id"] == stable_ids["correlation_id"]
+        assert record["request_id"] == stable_ids["request_id"]
+
+    assert mediation["receipt_contract_ref"] == "mediation_receipt@0.1.0"
+    assert mediation["receipt_id"] == stable_ids["policy_receipt_id"]
+    assert mediation["policy_receipt_id"] == stable_ids["policy_receipt_id"]
+    assert mediation["interaction_envelope_ref"] == stable_ids["interaction_id"]
+    assert command["command_intent_id"] == stable_ids["command_intent_id"]
+    assert command["receipt_ids"]["mediation_receipt_id"] == stable_ids["policy_receipt_id"]
+    assert command["receipt_ids"]["policy_receipt_id"] == stable_ids["policy_receipt_id"]
+    assert command["placement_hint"]["placement_id"] == stable_ids["placement_id"]
+    assert command["eligible_runtimes"] == ["desktop:peer", "phone_local"]
+
+    assert dispatch_gate["runtime_dispatch_blocked_before_policy"] is True
+    assert dispatch_gate["blocked_runtimes_before_policy"] == ["desktop:peer", "phone_local"]
+    assert dispatch_gate["dispatch_allowed_after_receipts"] == [
+        "mediation_receipt",
+        "policy_receipt_id",
+    ]
+    assert absent_recovery["receipt_id"] == stable_ids["adapter_absent_receipt_id"]
+    assert absent_recovery["adapter_status"] == "absent"
+    assert absent_recovery["recovery_state"] == "fail_closed"
+    assert absent_recovery["policy_receipt_id"] is None
+    assert absent_recovery["dispatch_allowed"] is False
+    assert absent_recovery["blocked_runtimes"] == ["desktop:peer", "phone_local"]
+
+    assert packet["assertions"] == [
+        "real phone ingress enters Hallucinate App as interaction_envelope",
+        "phone:operator session_id, correlation_id, and request_id are preserved across mediation and command intent",
+        "desktop:peer and phone_local dispatch are blocked until mediation_receipt and policy_receipt_id exist",
+        "physical adapter absence records fail-closed recovery with no local or desktop runtime dispatch",
     ]
 
 
