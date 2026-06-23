@@ -1,6 +1,6 @@
 PR-008: Agent orchestration stub (task lifecycle + notifications)
 
-Placeholder branch for a future draft PR.
+This is a placeholder *draft* PR to enable later execution via Copilot coding agents.
 
 - Source spec: implementation_plan/prs/PR-008-agent-orchestration-stub.md
 - Stack note: docs/specs assume DuckDB (embedded) + Redis.
