@@ -100,7 +100,7 @@ def _poll_todo_daemon_task(
     conn: duckdb.DuckDBPyConnection,
     task: Any,
 ) -> tuple[str | None, bool]:
-    """Poll provider status for tasks backed by ipfs_datasets_py todo-daemon state."""
+    """Poll provider status for tasks backed by persisted external state."""
     if not _has_todo_daemon_trace(task.trace):
         return None, False
 
