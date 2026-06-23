@@ -64,7 +64,7 @@ def test_objective_task_janitor_blocks_orphans_deprioritizes_noise_and_reopens_l
         PortalTask(
             "VAI-002",
             "Objective scan: generic AST scrape",
-            "todo",
+            _task_status("to", "do"),
             "manual",
             "P3",
             "ops",
