@@ -106,7 +106,7 @@ cadence remains parseable and resumable.
 
 ## VAI-007 Promote Hallucinate App into the operator-console plane
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: integration

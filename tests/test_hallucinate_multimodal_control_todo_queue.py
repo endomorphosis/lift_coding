@@ -162,6 +162,67 @@ def test_hao_428_offload_session_events_route_through_mediation():
     assert section.index("MUST NOT call desktop peer RPC") < section.index("policy_receipt_id")
 
 
+def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
+    source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    section_start = source.index("### Operator-console plane contract")
+    section_end = source.index("## Meta-Glasses Relationship")
+    section = source[section_start:section_end]
+    normalized_section = " ".join(section.replace("`", "").split())
+
+    required_terms = [
+        "multimodal operator console for the virtual desktop",
+        "UI-plane participants",
+        "runtime-plane targets",
+        "operator_console_command_route",
+        "operator_console_stream_control",
+        "operator_console_proof_capture",
+        "operator_console_error_recovery",
+        "command route, stream lease, proof chain, and recovery decision",
+        "runtime execution changes state",
+        "policy_decision plus mediation_receipt",
+        "operator_console_command_route from the mediated virtual_desktop_command_intent",
+        "lease_state vocabulary",
+        "event_receipt_id -> policy_receipt_id -> command_receipt_id",
+        "Error recovery fails closed unless a mediated recovery route exists",
+        "Runtime-plane targets are not allowed to invent a recovery route",
+    ]
+    for term in required_terms:
+        assert term in normalized_section
+
+    assert section.index("Hallucinate App validates") < section.index("The selected runtime-plane target executes")
+    assert section.index("Stream control is command-scoped") < section.index("Proof capture is also command-scoped")
+    assert section.index("Proof capture is also command-scoped") < section.index("Error recovery fails closed")
+
+
+def test_vai_007_operator_console_surface_is_runtime_placeable():
+    from handsfree.ai import (
+        CapabilityExecutionMode,
+        CapabilityPlacementLayer,
+        CapabilityRuntimeSurface,
+        resolve_virtual_ai_os_runtime_placement,
+        resolve_virtual_ai_os_runtime_route,
+    )
+
+    placement = resolve_virtual_ai_os_runtime_placement(
+        "workflow",
+        CapabilityExecutionMode.MCP_REMOTE,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
+    route = resolve_virtual_ai_os_runtime_route(
+        "workflow",
+        requested_mode=CapabilityExecutionMode.MCP_REMOTE,
+        preferred_surface=CapabilityRuntimeSurface.HALLUCINATE_APP,
+    )
+
+    assert placement.runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP
+    assert placement.placement_layer == CapabilityPlacementLayer.HANDSFREE_DAEMON
+    assert placement.target_repo == "endomorphosis/hallucinate_app"
+    assert "operator_console_available" in placement.constraints
+    assert "daemon_supervised" in placement.constraints
+    assert route.handler_ref == "hallucinate_app/index.js#operator_console"
+    assert route.placement_target == placement.target_repo
+
+
 def _git(cwd: Path, *args: str) -> str:
     result = subprocess.run(
         ["git", *args],
