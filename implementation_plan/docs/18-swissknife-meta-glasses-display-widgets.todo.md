@@ -3045,7 +3045,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-269 Bridge display-widget actions into Hallucinate App normalized intents
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: integration
