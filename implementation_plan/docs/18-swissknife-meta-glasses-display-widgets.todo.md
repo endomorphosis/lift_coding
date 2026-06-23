@@ -322,3 +322,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: tests/test_meta_glasses_display_widget_harness.py, mobile/src/utils/__tests__/displayWidgetHarness.test.js, swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: cd mobile && npm test -- --runInBand src/utils/__tests__/displayWidgetHarness.test.js
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-008. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-027-mgw-008-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-008 from strategy blocked_tasks.
+
+## MGW-028 Resolve validation retry-budget failure for MGW-010
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-007, MGW-008
+- Outputs: mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-010. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-028-mgw-010-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-010 from strategy blocked_tasks.
