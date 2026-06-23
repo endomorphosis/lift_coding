@@ -420,7 +420,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     )
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS["COPILOT_MERGE_RESOLVER_TIMEOUT_SECONDS"] == "60"
     assert "default to --detach" in runner_module.DETACHED_WORKTREE_POLICY
-    assert "component submodule pins are read-only" in runner_module.DETACHED_WORKTREE_POLICY
+    assert "component submodules track" in runner_module.DETACHED_WORKTREE_POLICY
     assert runner_module.MERGE_CLEANUP_DEFAULTS == {
         "worktree_reconciliation_max_merges": "0",
         "merge_reconciliation_max_merges": "0",
@@ -549,7 +549,8 @@ def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path)
         if str(component["component_id"]).startswith("meta_wearables_dat_"):
             assert "status-only component" in str(component["pin_policy"])
         else:
-            assert "superproject gitlink is the reviewed pin" in str(component["pin_policy"])
+            assert ".gitmodules branch metadata tracks" in str(component["pin_policy"])
+            assert "superproject gitlink records the reviewed SHA" in str(component["pin_policy"])
             assert "validation evidence" in str(component["pin_policy"])
         assert component["recursive_bootstrap"] is False
         assert "detached task worktrees" in str(component["detached_worktree_policy"])
@@ -571,14 +572,16 @@ def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path)
         "Auth assumption",
         "Detached worktree policy",
         "Merge cleanup defaults",
-        "A pin may advance only when",
+        "branch metadata tracks",
+        "commit the parent gitlink immediately",
         "credential helper or `gh auth`",
     ):
         assert required_text in plan_text
     for required_text in (
         "Auth contract",
         "Detached worktree and merge cleanup contract",
-        "pin-refresh task that names the component",
+        "branch metadata tracks",
+        "parent gitlink immediately",
         "--worktree-reconciliation-max-merges 0",
     ):
         assert required_text in discovery_text

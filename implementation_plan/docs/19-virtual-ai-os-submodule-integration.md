@@ -693,16 +693,18 @@ The contract keeps these guardrails stable:
   operator's existing Git credential helper or `gh auth`; tokens must not be
   written into task boards, discovery artifacts, environment dumps, or checked-in
   bootstrap defaults.
-- The superproject gitlink is the reviewed pin. Bootstrap code may initialize
-  or sync a component worktree, but must not fetch, checkout, or advance a
-  component without an explicit pin-refresh task. A pin may advance only when
-  the scoped task names the component, records the old and new commit, preserves
-  the canonical upstream URL, and includes validation evidence for the new
-  commit.
+- `.gitmodules` branch metadata tracks each component's upstream default branch
+  (`main` for the launch component repos; `master` only for legacy CEC logic
+  submodules whose remote default is still `master`). The superproject gitlink
+  remains the reviewed SHA. Branch-sync automation may fast-forward a clean
+  component checkout, but it must commit the parent gitlink immediately with
+  the old/new commit evidence and validation result so no checkout is left in
+  pin-drift state.
 - Detached worktree policy: VAI/MGW/HAO supervisor runs default to `--detach`.
   Implementations run in namespace task worktrees under the configured worktree
-  root. Those worktrees may read the root submodule pins, but they must not
-  rewrite component gitlinks as an incidental bootstrap side effect.
+  root. Those worktrees may read the root submodule pins, but any clean
+  component branch-sync drift must be recorded as an explicit parent gitlink
+  commit before merge reconciliation proceeds.
 - Merge cleanup defaults: the combined supervisor runner disables automated
   reconciliation merges by default with
   `--worktree-reconciliation-max-merges 0` and

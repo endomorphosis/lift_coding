@@ -38,8 +38,8 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
 
 DETACHED_WORKTREE_POLICY = (
     "default to --detach for long VAI/MGW/HAO supervisor runs; implementation "
-    "work happens in namespace task worktrees, and component submodule pins are "
-    "read-only unless a scoped pin-refresh task advances the superproject gitlink"
+    "work happens in namespace task worktrees, and component submodules track "
+    ".gitmodules branches while the superproject records each reviewed gitlink"
 )
 
 MERGE_CLEANUP_DEFAULTS = {

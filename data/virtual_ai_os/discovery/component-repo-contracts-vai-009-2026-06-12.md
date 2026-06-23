@@ -21,11 +21,11 @@ submodules.
   git credential helper or `gh auth`; no token belongs in task boards,
   discovery artifacts, environment dumps, or checked-in defaults.
 - Pin contract:
-  the root superproject gitlink is the reviewed pin; bootstrap may initialize
-  or sync a worktree but must not fetch, checkout, or advance it without an
-  explicit pin-refresh task that names the component, records the old and new
-  commit, preserves the canonical upstream URL, and includes validation evidence
-  for the new commit.
+  `.gitmodules` branch metadata tracks each component's upstream default branch
+  while the root superproject gitlink records the reviewed SHA. Branch-sync
+  automation may fast-forward clean component checkouts, but it must commit the
+  parent gitlink immediately with old/new commit evidence and validation output
+  so no checkout is left in pin-drift state.
 - Bootstrap contract:
   recursive bootstrap is disabled for the component set. `external/ipfs_kit`
   is status-only for nested traversal until nested pins are reviewed.

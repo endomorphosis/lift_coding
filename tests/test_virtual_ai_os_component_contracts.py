@@ -24,7 +24,7 @@ def _gitmodules_entries() -> dict[str, str]:
             "--file",
             ".gitmodules",
             "--get-regexp",
-            r"^submodule\..*\.(path|url)$",
+            r"^submodule\..*\.(path|url|branch)$",
         ],
         cwd=REPO_ROOT,
         text=True,
@@ -56,7 +56,9 @@ def test_component_repo_contracts_cover_root_gitmodules() -> None:
         ]
         assert len(matching_names) == 1
         url_key = f"{matching_names[0]}.url"
+        branch_key = f"{matching_names[0]}.branch"
         assert entries[url_key] == contract.upstream_url
+        assert entries[branch_key] == "main"
 
 
 def test_component_contract_environment_overrides_are_applied(tmp_path) -> None:
@@ -80,8 +82,9 @@ def test_component_pin_and_bootstrap_contracts_are_guarded() -> None:
     bootstrap = get_virtual_ai_os_component_bootstrap_contract()
     environment = get_virtual_ai_os_component_environment_contract()
 
-    assert "superproject gitlink is the reviewed pin" in pins["ipfs_kit_py"]
-    assert "must not fetch, checkout, or advance" in pins["swissknife"]
+    assert ".gitmodules branch metadata tracks" in pins["ipfs_kit_py"]
+    assert "superproject gitlink records the reviewed SHA" in pins["ipfs_kit_py"]
+    assert "must commit the parent gitlink immediately" in pins["swissknife"]
     assert bootstrap["ipfs_kit_py"]["bootstrap_mode"] == (
         "init_root_submodule_status_nested"
     )

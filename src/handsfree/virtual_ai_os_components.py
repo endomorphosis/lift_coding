@@ -57,10 +57,10 @@ class VirtualAiOsComponentRepoContract:
 
 
 ROOT_GITLINK_PIN_POLICY = (
-    "the superproject gitlink is the reviewed pin; bootstrap may initialize "
-    "or sync a component but must not fetch, checkout, or advance it unless a "
-    "pin-refresh task explicitly requests that change after validation evidence "
-    "exists for the new component commit"
+    "the .gitmodules branch metadata tracks the component default branch, and "
+    "the superproject gitlink records the reviewed SHA; branch-sync automation "
+    "may fast-forward a clean component checkout, but it must commit the parent "
+    "gitlink immediately with validation evidence for the new component commit"
 )
 
 STATUS_ONLY_PIN_POLICY = (
@@ -77,7 +77,8 @@ COMPONENT_AUTH_ASSUMPTION = (
 DETACHED_WORKTREE_POLICY = (
     "supervisor and daemon implementations run in detached task worktrees under "
     "the namespace worktree root; component submodule pins are read from the "
-    "superproject and are not advanced from those detached worktrees"
+    "superproject, and any clean branch-sync drift must be recorded as a parent "
+    "gitlink commit before merge reconciliation proceeds"
 )
 
 VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS: tuple[
