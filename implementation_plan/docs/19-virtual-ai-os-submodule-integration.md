@@ -651,9 +651,26 @@ The contract keeps these guardrails stable:
 
 - Root `.gitmodules` is the component source contract. The code-level contract
   must match every root submodule path and URL.
+- Auth assumption: root component repos use public HTTPS upstreams by default.
+  Private forks, write operations, or authenticated fetches must use the
+  operator's existing Git credential helper or `gh auth`; tokens must not be
+  written into task boards, discovery artifacts, environment dumps, or checked-in
+  bootstrap defaults.
 - The superproject gitlink is the reviewed pin. Bootstrap code may initialize
   or sync a component worktree, but must not fetch, checkout, or advance a
-  component without an explicit pin-refresh task.
+  component without an explicit pin-refresh task. A pin may advance only when
+  the scoped task names the component, records the old and new commit, preserves
+  the canonical upstream URL, and includes validation evidence for the new
+  commit.
+- Detached worktree policy: VAI/MGW/HAO supervisor runs default to `--detach`.
+  Implementations run in namespace task worktrees under the configured worktree
+  root. Those worktrees may read the root submodule pins, but they must not
+  rewrite component gitlinks as an incidental bootstrap side effect.
+- Merge cleanup defaults: the combined supervisor runner disables automated
+  reconciliation merges by default with
+  `--worktree-reconciliation-max-merges 0` and
+  `--merge-reconciliation-max-merges 0`, while retaining up to `50` merged
+  daemon worktrees for cleanup via `--daemon-merged-worktree-cleanup-max 50`.
 - Recursive bootstrap remains disabled for the component set. `external/ipfs_kit`
   uses a status-only nested bootstrap mode until nested pins are explicitly
   reviewed.

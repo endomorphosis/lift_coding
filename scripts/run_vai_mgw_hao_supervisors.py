@@ -36,6 +36,19 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
 )
 
 
+DETACHED_WORKTREE_POLICY = (
+    "default to --detach for long VAI/MGW/HAO supervisor runs; implementation "
+    "work happens in namespace task worktrees, and component submodule pins are "
+    "read-only unless a scoped pin-refresh task advances the superproject gitlink"
+)
+
+MERGE_CLEANUP_DEFAULTS = {
+    "worktree_reconciliation_max_merges": "0",
+    "merge_reconciliation_max_merges": "0",
+    "daemon_merged_worktree_cleanup_max": "50",
+}
+
+
 VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_track_configs(
     repo_root=REPO_ROOT,
     track_specs=(
@@ -56,11 +69,11 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_t
 
 VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "--worktree-reconciliation-max-merges",
-    "0",
+    MERGE_CLEANUP_DEFAULTS["worktree_reconciliation_max_merges"],
     "--merge-reconciliation-max-merges",
-    "0",
+    MERGE_CLEANUP_DEFAULTS["merge_reconciliation_max_merges"],
     "--daemon-merged-worktree-cleanup-max",
-    "50",
+    MERGE_CLEANUP_DEFAULTS["daemon_merged_worktree_cleanup_max"],
     "--codebase-scan-max-findings",
     "0",
     "--no-objective-goal-refinement",

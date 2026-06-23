@@ -15,13 +15,28 @@ submodules.
 - Environment contract:
   each component has one `HANDSFREE_VAI_*_ROOT` override used by integration
   harnesses and isolated worktrees.
+- Auth contract:
+  component repos use public HTTPS upstreams by default. Private forks,
+  authenticated fetches, and write operations rely on the operator's existing
+  git credential helper or `gh auth`; no token belongs in task boards,
+  discovery artifacts, environment dumps, or checked-in defaults.
 - Pin contract:
   the root superproject gitlink is the reviewed pin; bootstrap may initialize
   or sync a worktree but must not fetch, checkout, or advance it without an
-  explicit pin-refresh task.
+  explicit pin-refresh task that names the component, records the old and new
+  commit, preserves the canonical upstream URL, and includes validation evidence
+  for the new commit.
 - Bootstrap contract:
   recursive bootstrap is disabled for the component set. `external/ipfs_kit`
   is status-only for nested traversal until nested pins are reviewed.
+- Detached worktree and merge cleanup contract:
+  VAI/MGW/HAO supervisor runs default to detached mode. Implementation work runs
+  in namespace worktrees under the configured worktree root, reads component
+  gitlinks from the superproject, and must not advance pins as a bootstrap side
+  effect. The combined runner disables automated reconciliation merges with
+  `--worktree-reconciliation-max-merges 0` and
+  `--merge-reconciliation-max-merges 0`, while retaining up to `50` merged daemon
+  worktrees for cleanup.
 - Device references:
   `external/meta-wearables-dat-android` and
   `external/meta-wearables-dat-ios` remain optional validation references.
@@ -80,3 +95,6 @@ references were not initialized in this worktree.
 - optional Meta DAT repositories use the optional validation bootstrap mode,
 - the existing virtual AI OS observability contract exposes the component repo
   environment, pin, and bootstrap contracts.
+- `tests/test_virtual_ai_os_todo_queue.py` also validates the VAI-009 contract
+  through the requested daemon validation path, including auth assumptions,
+  detached worktree policy, merge cleanup defaults, and the pin-advance gate.
