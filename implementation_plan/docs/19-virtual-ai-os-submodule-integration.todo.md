@@ -183,7 +183,7 @@ cadence remains parseable and resumable.
 
 ## VAI-014 Investigate implementation unknowns and expand the backlog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
