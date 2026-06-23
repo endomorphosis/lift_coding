@@ -59,6 +59,8 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "2",
     "--merge-reconciliation-max-merges",
     "1",
+    "--daemon-merged-worktree-cleanup-max",
+    "50",
 )
 
 
