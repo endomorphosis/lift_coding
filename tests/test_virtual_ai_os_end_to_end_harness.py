@@ -11,17 +11,38 @@ from __future__ import annotations
 import sys
 import types
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
 
-from handsfree.ai import CapabilityExecutionMode, CapabilityRuntimeSurface
+from handsfree.ai import (
+    CapabilityExecutionMode,
+    CapabilityRuntimeSurface,
+    list_virtual_ai_os_capabilities,
+)
 from handsfree.capability_registry import CapabilityDispatchRequest, CapabilityRoutingKernel
 from handsfree.meta_glasses_remote_terminal import (
     REMOTE_TERMINAL_CONTRACT_ID,
     build_meta_glasses_remote_terminal_route,
     build_meta_glasses_terminal_session_contract,
+)
+from handsfree.virtual_ai_os_observability import (
+    build_virtual_ai_os_observability_bundle,
+    build_virtual_ai_os_placement_change_artifact,
+    build_virtual_ai_os_remote_execution_receipt_artifact,
+    build_virtual_ai_os_rollback_event_artifact,
+)
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+VAI_339_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-23-vai-339-launch-replay-gate.md"
 )
 
 
@@ -287,6 +308,16 @@ def _display_widget_action(
         "fallback": fallback,
         "issued_at": "2026-06-23T00:00:00Z",
     }
+
+
+def _json_block_after(source: str, marker: str) -> dict[str, Any]:
+    import json
+
+    start = source.index(marker)
+    fence_start = source.index("```json", start)
+    payload_start = source.index("\n", fence_start) + 1
+    payload_end = source.index("\n```", payload_start)
+    return json.loads(source[payload_start:payload_end])
 
 
 def test_hardware_free_virtual_ai_os_harness_dispatches_offloads_streams_and_recovers(
@@ -789,4 +820,261 @@ def test_desktop_operator_harness_presents_routes_and_places_local_or_peer_work(
             "task_id": task_id,
             "placement": "desktop_peer",
         }
+    ]
+
+
+def test_vai_339_launch_replay_gate_builds_one_shared_evidence_packet():
+    kernel = CapabilityRoutingKernel()
+    task_id = "VAI-339"
+    session_id = "vdsk-vai339-launch-session"
+    command_id = "cmd-vai339-open-monitor"
+    correlation_id = "corr-vai339-launch-replay"
+    request_id = "req-vai339-phone-origin"
+    command = "open the launch monitor on the virtual desktop"
+    phone_host_id = "phone-vai339"
+    desktop_id = "desktop-vai339"
+    widget_id = "virtual-ai-os-launch-replay"
+    widget_cid = "sha256:vai339-widget"
+    descriptor_cid = "sha256:vai339-descriptor"
+    manifest_cid = "sha256:vai339-manifest"
+    policy_cid = "sha256:vai339-policy"
+    policy_receipt_cid = "sha256:vai339-policy-receipt"
+    placement_receipt_cid = "sha256:vai339-placement-peer"
+    capability_receipt_cid = "sha256:vai339-capability-receipt"
+    recovery_receipt_cid = "sha256:vai339-recovery-phone-local"
+    artifact_refs = {
+        "result_cid": "sha256:vai339-result",
+        "receipt_ref": capability_receipt_cid,
+        "event_dag_ref": "sha256:vai339-events",
+        "delegation_ref": "sha256:vai339-delegation",
+    }
+
+    terminal_route = build_meta_glasses_remote_terminal_route(
+        payload={"task_id": task_id, "command_id": command_id, "correlation_id": correlation_id},
+        session_contract=build_meta_glasses_terminal_session_contract(
+            session_id=session_id,
+            phone_host_id=phone_host_id,
+            pairing_state="unpaired",
+            display_state="display_unavailable",
+            audio_command_state="listening",
+            desktop_offload_state="available",
+        ),
+    )
+    session_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="ui_render_session",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "session_id": session_id,
+                "command_id": command_id,
+                "correlation_id": correlation_id,
+                "artifact_refs": artifact_refs,
+            },
+        )
+    )
+    peer_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "session_id": session_id,
+                "command_id": command_id,
+                "correlation_id": correlation_id,
+                "artifact_refs": artifact_refs,
+            },
+        )
+    )
+
+    operator_session = SimulatedDesktopOperatorSession(session_id=session_id)
+    desktop_peer = SimulatedDesktopPeer(peer_id="desktop-peer-vai-339")
+    swissknife_session = operator_session.present_swissknife_session(session_plan)
+    mediation = operator_session.route_hallucinate_control(
+        session=swissknife_session,
+        dispatch_plan=peer_plan,
+        modality="phone_audio",
+        control=command,
+        placement_preference="desktop_peer",
+    )
+    peer_receipt = operator_session.handoff_to_peer(
+        dispatch_plan=peer_plan,
+        envelope=mediation,
+        desktop_peer=desktop_peer,
+    )
+
+    capability_actions = [
+        "vai.glasses_widget.render",
+        "vai.glasses_widget.update",
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.cancel",
+    ]
+    capabilities = {entry.capability_id: entry for entry in list_virtual_ai_os_capabilities()}
+    widget_capability_receipts = {
+        capability_id: {
+            "capability_id": capability_id,
+            "capability_receipt_cid": f"{capability_receipt_cid}-{capability_id.rsplit('.', 1)[1]}",
+            "manifest_cid": manifest_cid,
+            "descriptor_cid": descriptor_cid,
+            "policy_receipt_cid": policy_receipt_cid,
+            "placement_receipt_cid": placement_receipt_cid,
+            "recovery_receipt_cid": recovery_receipt_cid,
+        }
+        for capability_id in capability_actions
+    }
+
+    placement_change = build_virtual_ai_os_placement_change_artifact(
+        task_id=task_id,
+        correlation_id=correlation_id,
+        from_placement="phone_local",
+        to_placement="desktop_peer",
+        reason="policy_allowed_desktop_peer",
+        placement_ref=placement_receipt_cid,
+    )
+    remote_execution = build_virtual_ai_os_remote_execution_receipt_artifact(
+        task_id=task_id,
+        correlation_id=correlation_id,
+        remote_surface="desktop-peer-vai-339",
+        operation="run_desktop_command",
+        status="completed",
+        receipt_ref=peer_receipt["receipt_cid"],
+        parent_artifact_ids=(placement_change["artifact_id"],),
+    )
+    rollback = build_virtual_ai_os_rollback_event_artifact(
+        task_id=task_id,
+        correlation_id=correlation_id,
+        rollback_action="fallback_to_phone",
+        reason="desktop_peer_disconnected_after_render",
+        restored_placement="phone_local",
+        restored_ref=recovery_receipt_cid,
+        parent_artifact_ids=(remote_execution["artifact_id"],),
+    )
+    observability_bundle = build_virtual_ai_os_observability_bundle(
+        task_id=task_id,
+        correlation_id=correlation_id,
+        artifacts=(placement_change, remote_execution, rollback),
+    )
+
+    evidence_packet = {
+        "task_id": task_id,
+        "replay_id": "vai-339-launch-replay-gate",
+        "requires_physical_devices": False,
+        "command_contract": "vai.shared_capability_envelope@0.1.0",
+        "single_evidence_packet": True,
+        "join_keys": {
+            "task_id": task_id,
+            "command_id": command_id,
+            "session_id": session_id,
+            "desktop_id": desktop_id,
+            "correlation_id": correlation_id,
+            "request_id": request_id,
+            "widget_id": widget_id,
+            "widget_cid": widget_cid,
+            "descriptor_cid": descriptor_cid,
+            "manifest_cid": manifest_cid,
+            "policy_cid": policy_cid,
+            "capability_receipt_cid": capability_receipt_cid,
+        },
+        "phone_originated_command": {
+            "participant_id": "phone:operator",
+            "phone_host_id": phone_host_id,
+            "command": command,
+            "terminal_contract_id": terminal_route["contract_id"],
+        },
+        "hallucinate_app_mediation": {
+            "participant_id": "hallucinate_app:operator_console",
+            "interaction_envelope": mediation["interaction_envelope"],
+            "normalized_intent": mediation["normalized_intent"],
+            "policy_decision": mediation["policy_decision"],
+            "mediation_receipt": mediation["mediation_receipt"],
+            "virtual_desktop_command_intent": mediation["virtual_desktop_command_intent"],
+            "policy_cid": policy_cid,
+            "policy_receipt_cid": policy_receipt_cid,
+        },
+        "swissknife_presentation": {
+            "participant_id": "swissknife:ui",
+            "presented_by": swissknife_session["presented_by"],
+            "orb_plane": swissknife_session["orb_plane"],
+            "descriptor_cid": descriptor_cid,
+            "manifest_cid": manifest_cid,
+            "visible_session_id": swissknife_session["session_id"],
+        },
+        "placement": {
+            "selected_runtime": "desktop_peer",
+            "placement_receipt_cid": placement_receipt_cid,
+            "peer_receipt": peer_receipt,
+            "recovery": {
+                "recovery_receipt_cid": recovery_receipt_cid,
+                "action": "fallback_to_phone",
+                "compute_placement": "phone_local",
+                "render_path": "mobile-card",
+            },
+        },
+        "meta_glasses_terminal": {
+            "participant_id": "meta_glasses:terminal",
+            "terminal_contract_id": terminal_route["contract_id"],
+            "endpoint_ids": [endpoint["endpoint_id"] for endpoint in terminal_route["endpoints"]],
+            "fallback_render_path": terminal_route["session_contract"]["visual_status_output"][
+                "fallback_render_path"
+            ],
+            "widget_capability_receipts": widget_capability_receipts,
+        },
+        "observability_bundle": observability_bundle,
+        "assertions": [
+            "phone command enters Hallucinate App mediation before desktop peer dispatch",
+            "Swissknife and Meta glasses share descriptor and manifest CIDs",
+            "desktop-peer placement and phone-local recovery share one receipt lineage",
+            "render/update/confirm/cancel actions use the VAI shared capability envelope",
+        ],
+    }
+
+    assert evidence_packet["phone_originated_command"]["participant_id"] == "phone:operator"
+    assert evidence_packet["hallucinate_app_mediation"]["policy_decision"]["outcome"] == "allow"
+    assert evidence_packet["swissknife_presentation"]["orb_plane"] == "swissknife.orb"
+    assert evidence_packet["placement"]["peer_receipt"]["compute_placement"] == "desktop_peer"
+    assert evidence_packet["placement"]["recovery"]["compute_placement"] == "phone_local"
+    assert evidence_packet["meta_glasses_terminal"]["terminal_contract_id"] == (
+        REMOTE_TERMINAL_CONTRACT_ID
+    )
+    assert set(evidence_packet["meta_glasses_terminal"]["endpoint_ids"]) == {
+        "meta_glasses_audio_input",
+        "meta_glasses_audio_output",
+        "meta_glasses_display_widget",
+    }
+    assert set(widget_capability_receipts) == set(capability_actions)
+    assert all(
+        capabilities[capability_id].command_envelope_fields
+        and "capability_receipt_cid" in capabilities[capability_id].receipt_fields
+        for capability_id in capability_actions
+    )
+    assert all(
+        receipt["descriptor_cid"] == descriptor_cid
+        and receipt["manifest_cid"] == manifest_cid
+        and receipt["policy_receipt_cid"] == policy_receipt_cid
+        and receipt["placement_receipt_cid"] == placement_receipt_cid
+        and receipt["recovery_receipt_cid"] == recovery_receipt_cid
+        for receipt in widget_capability_receipts.values()
+    )
+    assert evidence_packet["observability_bundle"]["artifact_ids"] == [
+        placement_change["artifact_id"],
+        remote_execution["artifact_id"],
+        rollback["artifact_id"],
+    ]
+
+    documented_packet = _json_block_after(
+        VAI_339_DISCOVERY_PATH.read_text(encoding="utf-8"),
+        "## Deterministic Launch Replay Gate",
+    )
+    assert documented_packet["task_id"] == evidence_packet["task_id"]
+    assert documented_packet["replay_id"] == evidence_packet["replay_id"]
+    assert documented_packet["join_keys"] == evidence_packet["join_keys"]
+    assert documented_packet["covers"] == [
+        "phone_originated_command",
+        "hallucinate_app_mediation",
+        "swissknife_presentation",
+        "desktop_peer_or_phone_local_placement",
+        "meta_glasses_terminal_contract",
+        "shared_policy_placement_recovery_capability_receipts",
     ]
