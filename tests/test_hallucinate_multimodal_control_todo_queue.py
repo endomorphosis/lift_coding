@@ -124,7 +124,7 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert runnable_stale_tasks == []
     assert tasks["HAO-427"].status == "completed"
     assert tasks["HAO-428"].status == "completed"
-    assert tasks["HAO-431"].status == PENDING_TASK_STATUS
+    assert tasks["HAO-431"].status == "completed"
     assert tasks["HAO-431"].track == "integration"
 
 
