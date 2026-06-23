@@ -1,6 +1,6 @@
 PR-007: Policy engine + one safe write action
 
-Placeholder branch for a future draft PR.
+This is a placeholder *draft* PR to enable later execution via Copilot coding agents.
 
 - Source spec: implementation_plan/prs/PR-007-policy-engine-and-safe-action.md
 - Stack note: docs/specs assume DuckDB (embedded) + Redis.
