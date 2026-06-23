@@ -239,7 +239,7 @@ cadence remains parseable and resumable.
 
 ## VAI-019 Add cross-submodule virtual AI OS integration tests
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
