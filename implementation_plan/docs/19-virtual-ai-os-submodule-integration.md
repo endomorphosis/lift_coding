@@ -331,6 +331,13 @@ Initial families:
 - accelerated inference and batching
 - UI/render session control
 - device/render transport
+- Meta glasses virtual desktop widget commands:
+  - `vai.glasses_widget.render`
+  - `vai.glasses_widget.update`
+  - `vai.glasses_widget.confirm`
+  - `vai.glasses_widget.cancel`
+
+The Meta glasses widget commands are registered as HandsFree mobile display-widget capabilities with one command envelope spanning `command_id`, `session_id`, descriptor and manifest CIDs, `correlation_id`, policy and placement receipts, fallback render path, and canonical `capability_receipt_cid`. Swissknife ORB, Hallucinate App, HandsFree mobile, and Meta glasses display surfaces consume this registry contract instead of surface-specific widget RPCs.
 
 ### Workstream C: Virtual runtime control plane
 
