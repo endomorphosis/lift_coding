@@ -1,20 +1,22 @@
-# MGW-022 Resolution
+# MGW-022 Code Annotation Resolution
 
 Date: 2026-05-25
-Source finding: `data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25`
+Task: MGW-022
+Source: data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25
 
-The scan excerpt pointed at historical merge-unblock evidence, not a live source
-defect. Reviewing the HAO merge note and the HAO-046 through HAO-049 noise
-unblock report showed that this exact finding came from generated discovery
-prose about avoiding an older branch snapshot during a submodule merge.
+## Finding
 
-Resolution:
+The codebase scan flagged the phrase describing older todo/discovery state from
+the failed merge branch. In context, the HAO-044 note is a completed merge
+unblock record, not an active deferred-work annotation.
 
-- Rephrased the merge note as "older backlog and discovery snapshots" so the
-  document keeps the same rollback-safety meaning without resembling an open
-  annotation.
-- Preserved the HAO-042/HAO-044 validation evidence and task metadata.
+## Resolution
 
-Validation:
+The source wording now says the merge avoided replaying "stale planning and
+discovery snapshots" from the failed branch. This preserves the operational
+meaning while removing backlog-like terminology that can be misread by the
+annotation scanner.
+
+## Validation
 
 - `test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md`
