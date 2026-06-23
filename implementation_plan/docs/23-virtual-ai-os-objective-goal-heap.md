@@ -855,3 +855,171 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Completed at: 2026-06-23T14:20:50+00:00
 - Completion evidence: transient_merge_lock classification, merge_lock_retry_queue candidate selection, duplicate_attempt_suppression waiting state, reconciliation todo completion, and tests/test_implementation_daemon_merge_lock_retry.py.
 - Completion validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_implementation_daemon_merge_lock_retry.py tests/test_supervisor_objective_task_janitor.py tests/test_virtual_ai_os_todo_queue.py tests/test_meta_glasses_display_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q => 99 passed, 1 warning.
+
+## VAIOS-G700 Interoperate swissknife with external/ipfs_accelerate
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-external_ipfs_accelerate
+- Goal kind: interoperability
+- Interoperability pair: swissknife, external/ipfs_accelerate
+- Submodules: swissknife, external/ipfs_accelerate
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_accelerate/docs/fastmcp/examples/atproto_mcp/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/examples/smart_home/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/examples/testing_demo/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/fastmcp_remote/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/fastmcp_slim/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/pyproject.toml, external/ipfs_accelerate/docs/mcp-python-sdk/examples/snippets/pyproject.toml, external/ipfs_accelerate/docs/mcp-python-sdk/pyproject.toml, external/ipfs_accelerate/ipfs_accelerate_py/consensus_kit/Cargo.toml, external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus/tests-go/go.mod, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus/tests-py/requirements.txt
+- Interface descriptors: external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py, external/ipfs_accelerate/docs/development_history/VISUAL_PROOF_WORKING_INTERFACE.md, external/ipfs_accelerate/docs/fastmcp/.github/workflows/run-schema-crash-test.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/update-config-schema.yml, external/ipfs_accelerate/docs/fastmcp/docs/python-sdk/fastmcp-utilities-json_schema.mdx, external/ipfs_accelerate/docs/fastmcp/docs/python-sdk/fastmcp-utilities-json_schema_type.mdx, external/ipfs_accelerate/docs/fastmcp/tests/cli/test_mcp_server_config_schema.py, external/ipfs_accelerate/docs/fastmcp/tests/test_json_schema_generation.py, external/ipfs_accelerate/docs/fastmcp/tests/utilities/test_json_schema.py, external/ipfs_accelerate/docs/mcp-python-sdk/tests/client/test_output_schema_validation.py, external/ipfs_accelerate/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts
+- MCP descriptors: external/ipfs_accelerate/.github/workflows/mcp-transport-libp2p.yml, external/ipfs_accelerate/MCP_SERVER_UNIFICATION_PLAN.md, external/ipfs_accelerate/deployments/systemd/ipfs-accelerate-mcp.service, external/ipfs_accelerate/docs/MCP_DASHBOARD_GUIDE.md, external/ipfs_accelerate/docs/MCP_TRIO_ROADMAP.md, external/ipfs_accelerate/docs/architecture/IPFS_ACCELERATE_MCP_INTEGRATION_PLAN.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT_2025-10-23.md, external/ipfs_accelerate/docs/archive/implementations/IMPLEMENTATION_COMPLETE_GITHUB_MCP.md, external/ipfs_accelerate/docs/development_history/MCP_ERROR_HANDLING_VERIFICATION.md, external/ipfs_accelerate/docs/fastmcp/.cursor/rules/core-mcp-objects.mdc, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp-remote.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp-slim.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp.yml, external/ipfs_accelerate/docs/fastmcp/docs/apps/fastmcp-app.mdx, external/ipfs_accelerate/docs/fastmcp/docs/cli/install-mcp.mdx
+- Python import roots: Bio, PIL, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile, cachetools, cmd, collections, concurrent, contextlib, copilot, copy, cross, cross_browser_model_sharding, cryptography
+- Goal: Prove `swissknife` interoperates with `external/ipfs_accelerate` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_external_ipfs_accelerate_interop.py, docs/integration/swissknife-external_ipfs_accelerate.md, interface contract swissknife external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py
+- Outputs: tests/integration/test_swissknife_external_ipfs_accelerate_interop.py, docs/integration/swissknife-external_ipfs_accelerate.md, swissknife, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife external/ipfs_accelerate interoperability integration test interface descriptor Bio PIL __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3
+- AST query: swissknife, external/ipfs_accelerate, interface contract, integration test, Bio, PIL, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3
+- Parallel lane: objective/interoperability/swissknife-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G701 Interoperate swissknife with external/ipfs_datasets
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-external_ipfs_datasets
+- Goal kind: interoperability
+- Interoperability pair: swissknife, external/ipfs_datasets
+- Submodules: swissknife, external/ipfs_datasets
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_datasets/.tools/ipfs_kit_py/.playwright_local/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/archive/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/backup/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/config/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/config/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.cfg, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.py, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/requirements.txt
+- Interface descriptors: external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/backend_schemas.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/graphql_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/openapi_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/scripts/development/verify_mcp_interface.py
+- MCP descriptors: external/ipfs_datasets/.github/workflows/mcp-benchmarks.yml, external/ipfs_datasets/.github/workflows/mcp-dashboard-tests.yml, external/ipfs_datasets/.github/workflows/mcp-integration-tests.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring-unified.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml.backup, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/enhanced-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/final-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/direct_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp.sh, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp_issues.sh
+- Python import roots: Bio, PIL, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile, cachetools, cmd, collections, concurrent, contextlib, copilot, copy, cross, cross_browser_model_sharding, cryptography
+- Goal: Prove `swissknife` interoperates with `external/ipfs_datasets` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, interface contract swissknife external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
+- Outputs: tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, swissknife, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife external/ipfs_datasets interoperability integration test interface descriptor Bio PIL __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3
+- AST query: swissknife, external/ipfs_datasets, interface contract, integration test, Bio, PIL, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3
+- Parallel lane: objective/interoperability/swissknife-external_ipfs_datasets
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G702 Interoperate swissknife with external/ipfs_kit
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-external_ipfs_kit
+- Goal kind: interoperability
+- Interoperability pair: swissknife, external/ipfs_kit
+- Submodules: swissknife, external/ipfs_kit
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_kit/.playwright_local/package.json, external/ipfs_kit/archive/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/archive/fixes/requirements.txt, external/ipfs_kit/backup/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/backup/fixes/requirements.txt, external/ipfs_kit/config/package.json, external/ipfs_kit/config/pyproject.toml, external/ipfs_kit/config/requirements.txt, external/ipfs_kit/config/setup.cfg, external/ipfs_kit/config/setup.py, external/ipfs_kit/docs/py-ipld-car/pyproject.toml, external/ipfs_kit/docs/py-ipld-car/requirements.txt
+- Interface descriptors: external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto, external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/demo_unified_bucket_interface.py, external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/schema_column_optimization_example.py, external/ipfs_kit/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_kit/ipfs_kit_py/backend_schemas.py, external/ipfs_kit/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_kit/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_kit/ipfs_kit_py/graphql_schema.py, external/ipfs_kit/ipfs_kit_py/libp2p/network/stream/net_stream_interface.py
+- MCP descriptors: external/ipfs_kit/.github/workflows/enhanced-mcp-server.yml, external/ipfs_kit/.github/workflows/final-mcp-server.yml, external/ipfs_kit/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_kit/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_kit/archive/applied_patches/fix_all_mcp.sh, external/ipfs_kit/archive/applied_patches/fix_all_mcp_issues.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch1.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch2.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_code.py, external/ipfs_kit/archive/applied_patches/fix_mcp_errors.py, external/ipfs_kit/archive/applied_patches/fix_mcp_file.py, external/ipfs_kit/archive/applied_patches/fix_mcp_form_data.py
+- Python import roots: Bio, PIL, __future__, aiofiles, aiohttp, anyio, argparse, ast, asyncio, atexit, base64, binascii, boto3, botocore, check_high_level_api_syntax, collections, concurrent, configparser, contextlib, coverage, cross, cross_browser_model_sharding, ctypes, daemon_manager
+- Goal: Prove `swissknife` interoperates with `external/ipfs_kit` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, interface contract swissknife external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto
+- Outputs: tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, swissknife, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife external/ipfs_kit interoperability integration test interface descriptor Bio PIL __future__ aiofiles aiohttp anyio argparse ast asyncio atexit base64 binascii
+- AST query: swissknife, external/ipfs_kit, interface contract, integration test, Bio, PIL, __future__, aiofiles, aiohttp, anyio, argparse, ast, asyncio, atexit, base64, binascii
+- Parallel lane: objective/interoperability/swissknife-external_ipfs_kit
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G703 Interoperate swissknife with external/meta-wearables-dat-android
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_android
+- Goal kind: interoperability
+- Interoperability pair: swissknife, external/meta-wearables-dat-android
+- Submodules: swissknife, external/meta-wearables-dat-android
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: swissknife/ipfs_accelerate_js/package.json, swissknife/package.json, swissknife/test/package.json, swissknife/web/package.json
+- Interface descriptors: swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json, swissknife/contracts/swissknife_mcp_capability_registry.schema.json, swissknife/docs/ast_exports/interfaces/all_interfaces.json, swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, swissknife/docs/phase2/06_cross_domain_interfaces.md, swissknife/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, swissknife/ipfs_accelerate_js/src/core/interfaces.ts, swissknife/ipfs_accelerate_js/src/interfaces.ts, swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, swissknife/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts, swissknife/scripts/mcp-plus-plus/descriptor_cli.mjs
+- MCP descriptors: swissknife/benchmark/integration/mcp-client-benchmark.ts, swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, swissknife/cleanup-archive/analysis/test-analysis/details/mcp-cli-integration_error.log, swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md, swissknife/cleanup-archive/scripts/fix-mcp-tests.sh, swissknife/cleanup-archive/scripts/mcp-registry-diagnose.sh, swissknife/cleanup-archive/scripts/mcp-test-runner.sh, swissknife/cleanup-archive/scripts/minimal-mcp-server.js, swissknife/cleanup-archive/scripts/run-mcp-tests.sh, swissknife/cleanup-archive/scripts/run_enhanced_mcp_tests.sh, swissknife/cleanup-archive/scripts/run_improved_mcp_tests.sh, swissknife/cleanup-archive/scripts/run_mcp_tests.sh, swissknife/cleanup-archive/test-files/direct-mcp-test.js, swissknife/cleanup-archive/test-files/mcp_test_report_20250512_174054.md, swissknife/cleanup-archive/test-files/mcp_test_report_20250512_183120.md
+- Python import roots: Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses, datetime, distributed_testing, duckdb, enum, examples, fileinput, fixed_web_platform, functools, gc, glob, hashlib, hmac
+- Goal: Prove `swissknife` interoperates with `external/meta-wearables-dat-android` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py, docs/integration/swissknife-external_meta_wearables_dat_android.md, interface contract swissknife external/meta-wearables-dat-android, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json, swissknife/contracts/swissknife_mcp_capability_registry.schema.json
+- Outputs: tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py, docs/integration/swissknife-external_meta_wearables_dat_android.md, swissknife, external/meta-wearables-dat-android, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife external/meta-wearables-dat-android interoperability integration test interface descriptor Bio PIL __future__ argparse asyncio base64 collections concurrent contextlib cross cross_browser_model_sharding dataclasses
+- AST query: swissknife, external/meta-wearables-dat-android, interface contract, integration test, Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses
+- Parallel lane: objective/interoperability/swissknife-external_meta_wearables_dat_android
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `external/meta-wearables-dat-android` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G704 Interoperate swissknife with external/meta-wearables-dat-ios
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3004
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_ios
+- Goal kind: interoperability
+- Interoperability pair: swissknife, external/meta-wearables-dat-ios
+- Submodules: swissknife, external/meta-wearables-dat-ios
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: swissknife/ipfs_accelerate_js/package.json, swissknife/package.json, swissknife/test/package.json, swissknife/web/package.json
+- Interface descriptors: swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json, swissknife/contracts/swissknife_mcp_capability_registry.schema.json, swissknife/docs/ast_exports/interfaces/all_interfaces.json, swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, swissknife/docs/phase2/06_cross_domain_interfaces.md, swissknife/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, swissknife/ipfs_accelerate_js/src/core/interfaces.ts, swissknife/ipfs_accelerate_js/src/interfaces.ts, swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, swissknife/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts, swissknife/scripts/mcp-plus-plus/descriptor_cli.mjs
+- MCP descriptors: swissknife/benchmark/integration/mcp-client-benchmark.ts, swissknife/cleanup-archive/analysis/mcp_direct_diagnostic.js, swissknife/cleanup-archive/analysis/mcp_server_diagnostic.py, swissknife/cleanup-archive/analysis/test-analysis/details/mcp-cli-integration_error.log, swissknife/cleanup-archive/docs/MCP-SERVER-DIAGNOSTIC-REPORT.md, swissknife/cleanup-archive/scripts/fix-mcp-tests.sh, swissknife/cleanup-archive/scripts/mcp-registry-diagnose.sh, swissknife/cleanup-archive/scripts/mcp-test-runner.sh, swissknife/cleanup-archive/scripts/minimal-mcp-server.js, swissknife/cleanup-archive/scripts/run-mcp-tests.sh, swissknife/cleanup-archive/scripts/run_enhanced_mcp_tests.sh, swissknife/cleanup-archive/scripts/run_improved_mcp_tests.sh, swissknife/cleanup-archive/scripts/run_mcp_tests.sh, swissknife/cleanup-archive/test-files/direct-mcp-test.js, swissknife/cleanup-archive/test-files/mcp_test_report_20250512_174054.md, swissknife/cleanup-archive/test-files/mcp_test_report_20250512_183120.md
+- Python import roots: Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses, datetime, distributed_testing, duckdb, enum, examples, fileinput, fixed_web_platform, functools, gc, glob, hashlib, hmac
+- Goal: Prove `swissknife` interoperates with `external/meta-wearables-dat-ios` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py, docs/integration/swissknife-external_meta_wearables_dat_ios.md, interface contract swissknife external/meta-wearables-dat-ios, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json, swissknife/contracts/swissknife_mcp_capability_registry.schema.json
+- Outputs: tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py, docs/integration/swissknife-external_meta_wearables_dat_ios.md, swissknife, external/meta-wearables-dat-ios, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife external/meta-wearables-dat-ios interoperability integration test interface descriptor Bio PIL __future__ argparse asyncio base64 collections concurrent contextlib cross cross_browser_model_sharding dataclasses
+- AST query: swissknife, external/meta-wearables-dat-ios, interface contract, integration test, Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses
+- Parallel lane: objective/interoperability/swissknife-external_meta_wearables_dat_ios
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `external/meta-wearables-dat-ios` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G705 Interoperate swissknife with Mcp-Plus-Plus
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3005
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/swissknife-mcp_plus_plus
+- Goal kind: interoperability
+- Interoperability pair: swissknife, Mcp-Plus-Plus
+- Submodules: swissknife, Mcp-Plus-Plus
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: Mcp-Plus-Plus/tests-go/go.mod, Mcp-Plus-Plus/tests-py/requirements.txt, Mcp-Plus-Plus/tests-rs/Cargo.toml, Mcp-Plus-Plus/tests-ts/package.json, swissknife/ipfs_accelerate_js/package.json, swissknife/package.json, swissknife/test/package.json, swissknife/web/package.json
+- Interface descriptors: Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json, swissknife/contracts/swissknife_mcp_capability_registry.schema.json, swissknife/docs/ast_exports/interfaces/all_interfaces.json, swissknife/docs/mcp-plus-plus/DESCRIPTOR_AUTHORING_CLI.md, swissknife/docs/phase2/06_cross_domain_interfaces.md, swissknife/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts, swissknife/ipfs_accelerate_js/src/core/interfaces.ts, swissknife/ipfs_accelerate_js/src/interfaces.ts, swissknife/ipfs_accelerate_js/src/utils/browser_interface.ts, swissknife/ipfs_accelerate_js/src/utils/create_benchmark_schema.ts, swissknife/ipfs_accelerate_js/src/utils/onnx_db_schema_update.ts
+- MCP descriptors: Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md, Mcp-Plus-Plus/tests-go/validators/base_mcp.go, Mcp-Plus-Plus/tests-go/validators/mcp_idl.go, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_tool_call.json, Mcp-Plus-Plus/tests-py/integration/test_base_mcp_typed.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_baseline.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_idl.py, Mcp-Plus-Plus/tests-py/validators/base_mcp.py, Mcp-Plus-Plus/tests-py/validators/base_mcp_typed.py, Mcp-Plus-Plus/tests-py/validators/mcp_idl.py, Mcp-Plus-Plus/tests-rs/src/validators/base_mcp.rs, Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs, Mcp-Plus-Plus/tests-ts/src/validators/baseMCP.ts
+- Python import roots: Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses, datetime, distributed_testing, duckdb, enum, examples, fileinput, fixed_web_platform, functools, gc, glob, hashlib, hmac
+- Goal: Prove `swissknife` interoperates with `Mcp-Plus-Plus` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, interface contract swissknife Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, swissknife/contracts/policy_decision.schema.json
+- Outputs: tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, swissknife, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: swissknife Mcp-Plus-Plus interoperability integration test interface descriptor Bio PIL __future__ argparse asyncio base64 collections concurrent contextlib cross cross_browser_model_sharding dataclasses
+- AST query: swissknife, Mcp-Plus-Plus, interface contract, integration test, Bio, PIL, __future__, argparse, asyncio, base64, collections, concurrent, contextlib, cross, cross_browser_model_sharding, dataclasses
+- Parallel lane: objective/interoperability/swissknife-mcp_plus_plus
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `swissknife` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
