@@ -173,7 +173,7 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
         PortalTask(
             "MGW-026",
             "Resolve validation retry-budget failure for MGW-003",
-            "todo",
+            "ready",
             "manual",
             "P1",
             "ops",
