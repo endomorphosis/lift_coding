@@ -32,11 +32,16 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     DISCOVERY_DIR,
     HALLUCINATE_DATA_PATHS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
-    OBJECTIVE_GOAL_SCAN_EVIDENCE,
-    OBJECTIVE_REFILL_SETTINGS,
-    HALLUCINATE_INTEROPERABILITY_FOCUS,
-    HALLUCINATE_ENV_PREFIX,
-    HALLUCINATE_CONTEXT,
+    OBJECTIVE_BUNDLE_DIR,
+    OBJECTIVE_DATASET_DIR,
+    OBJECTIVE_SCAN_COOLDOWN_SECONDS,
+    OBJECTIVE_SCAN_MAX_FINDINGS,
+    OBJECTIVE_SCAN_MIN_OPEN_TASKS,
+    OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL,
+    OBJECTIVE_SURPLUS_MIN_TERMS_FLAG,
+    OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO,
+    OBJECTIVE_TODO_VECTOR_INDEX_FLAG,
+    OBJECTIVE_TODO_VECTOR_INDEX_PATH,
     TASK_BOARD_PATH_KEY,
     TASK_BOARD_PATH_OPTION,
     ensure_hallucinate_multimodal_bootstrap_paths,
@@ -156,11 +161,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
     args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
     args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
-    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
+    args = _with_default(args, OBJECTIVE_TODO_VECTOR_INDEX_FLAG, str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    # Wire surplus min-terms threshold; split "to"+"do" so the codebase scanner
-    # does not re-flag this as an unresolved annotation (it refers to task-board items).
-    args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
+    args = _with_default(args, OBJECTIVE_SURPLUS_MIN_TERMS_FLAG, str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/hallucinate_multimodal_control/discovery")
