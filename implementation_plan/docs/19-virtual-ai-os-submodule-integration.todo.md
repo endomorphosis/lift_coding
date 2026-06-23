@@ -2006,3 +2006,47 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:649. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-355-codebase-scan-4c765d72a612.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-356 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-356-codebase-scan-309a8676f15b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-357 Review swallowed exception path in src/handsfree/agents/runner.py:111
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
+- Validation: python3 -m py_compile src/handsfree/agents/runner.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-357-codebase-scan-e0331f362512.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-358 Resolve code annotation in src/handsfree/agents/runner.py:112
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
+- Validation: python3 -m py_compile src/handsfree/agents/runner.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:112. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-358-codebase-scan-c1801c64990f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-359 Resolve code annotation in src/handsfree/agents/runner.py:117
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
+- Validation: python3 -m py_compile src/handsfree/agents/runner.py
+- Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:117. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-359-codebase-scan-3d0dc3c69a5f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
