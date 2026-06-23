@@ -261,7 +261,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         if arg.startswith("--common-arg=")
     ]
     assert "--worktree-reconciliation-max-merges" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "2"
+    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "0"
     assert "--merge-reconciliation-max-merges" in common_arg_values
     assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "0"
     assert "--daemon-merged-worktree-cleanup-max" in common_arg_values

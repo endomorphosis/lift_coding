@@ -56,7 +56,7 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_t
 
 VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "--worktree-reconciliation-max-merges",
-    "2",
+    "0",
     "--merge-reconciliation-max-merges",
     "0",
     "--daemon-merged-worktree-cleanup-max",
