@@ -1,186 +1,64 @@
 #!/usr/bin/env python3
-"""Run the accelerator backlog supervisor for display-widget work."""
+"""Run the ipfs_datasets_py todo supervisor for display-widget work."""
 
 from __future__ import annotations
 
-import logging
-import shlex
+import os
+import sys
 from pathlib import Path
 
-from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
+TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
+STATE_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "state"
+WORKTREE_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "worktrees"
 
 
-_PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
-SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
-IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
-    build_repo_script_bootstrap as _build_repo_script_bootstrap,
-    data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
-    prefixed_interoperability_focus as _prefixed_interoperability_focus,
-    prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
-    repo_script_path as _repo_script_path,
-    task_board_filename as _task_board_filename,
-)
-
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, include_script_dir=True)
-SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
-IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
-REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-META_DISPLAY_ENV_PREFIX = "HANDSFREE_MGW"
-
-from meta_glasses_display_todo_daemon import (  # noqa: E402
-    _bootstrap_android_validation_env,
-    android_validation_environment,
-    enforce_android_validation_environment,
-    META_DISPLAY_CONTEXT,
-    META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-    OBJECTIVE_HEAP_PATH,
-    record_retry_budget_findings,
-)
-
-_META_DISPLAY_CONTEXT = META_DISPLAY_CONTEXT
-TASK_BOARD_PATH = _META_DISPLAY_CONTEXT.task_board_path
-TASK_BOARD_PATH_OPTION = _META_DISPLAY_CONTEXT.task_board_path_option
-META_DISPLAY_DATA_PATHS = _META_DISPLAY_CONTEXT.namespace_paths
-STATE_DIR = META_DISPLAY_DATA_PATHS.state_dir
-WORKTREE_ROOT = META_DISPLAY_DATA_PATHS.worktree_root
-DISCOVERY_DIR = META_DISPLAY_DATA_PATHS.discovery_dir
-DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "meta_glasses_display_todo_daemon.py")
-OBJECTIVE_GRAPH_PATH = META_DISPLAY_DATA_PATHS.objective_graph_path
-OBJECTIVE_BUNDLE_DIR = META_DISPLAY_DATA_PATHS.objective_bundle_dir
-OBJECTIVE_DATASET_DIR = META_DISPLAY_DATA_PATHS.objective_dataset_dir
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = META_DISPLAY_DATA_PATHS.objective_todo_vector_index_path
-_META_DISPLAY_RUNTIME_BOOTSTRAP = _META_DISPLAY_CONTEXT.runtime_bootstrap
-_META_DISPLAY_BOOTSTRAP_PATHS = _META_DISPLAY_RUNTIME_BOOTSTRAP.bootstrap_paths
-META_DISPLAY_BOOTSTRAP_SPECS = _META_DISPLAY_BOOTSTRAP_PATHS.specs
-META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT = META_DISPLAY_DATA_PATHS.discovery_output_path()
-OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(META_DISPLAY_ENV_PREFIX)
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
-OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
-INITIAL_BACKLOG_TASK_IDS = tuple(f"MGW-{index:03d}" for index in range(1, 13))
-INITIAL_BACKLOG_DEPENDENCIES = ", ".join(INITIAL_BACKLOG_TASK_IDS)
-BACKLOG_PENDING_STATUS = "to" + "do"
-CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
-    {
-        "meta_glasses_display_widgets": ("discovery", "objective_bundles", "objective_datasets"),
-        "hallucinate_multimodal_control": ("discovery",),
-    },
-    extra_prefixes=(
-        "archive/",
-        "backup/",
-        "cleanup-archive/",
-        "data/meta_glasses_display_widgets/state/",
-        "data/meta_glasses_display_widgets/worktrees/",
-        "external/ipfs_accelerate/test/duckdb_api/",
-        "external/ipfs_accelerate/test/generators/",
-        "external/ipfs_accelerate/test/huggingface_transformers/",
-        "external/ipfs_accelerate/test/skills/",
-        "external/ipfs_kit/archive/",
-        "external/ipfs_kit/backup/",
-    ),
-)
-TASK_BOARD_OUTPUT_PATH = _META_DISPLAY_BOOTSTRAP_PATHS.output_path(
-    "todo_path",
-    f"implementation_plan/docs/{_task_board_filename('18-swissknife-meta-glasses-display-widgets')}",
-    {"todo_path": TASK_BOARD_PATH},
-)
-_meta_display_discovery_output_path = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_factory(
-    "discovery_dir",
-    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
-)
-_meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_path_kwargs_factory(
-    "discovery_output_path",
-    "discovery_dir",
-    META_DISPLAY_DISCOVERY_OUTPUT_DEFAULT,
-)
-DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
-DISCOVERY_EXPANSION_OUTPUTS = (
-    TASK_BOARD_OUTPUT_PATH,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
-    DISCOVERY_OUTPUT_PATH,
-)
-DISCOVERY_EXPANSION_OUTPUTS_TEXT = ", ".join(DISCOVERY_EXPANSION_OUTPUTS)
-DISCOVERY_EXPANSION_SEARCH_PATTERN = "|".join(
-    (
-        "MGW-013",
-        "unknown " + "unknowns",
-        "Discovery Expansion",
-        "discovered",
-    )
-)
-DISCOVERY_EXPANSION_VALIDATION = (
-    "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
-    "pytest tests/test_meta_glasses_display_todo_queue.py; "
-    f"rg -n {shlex.quote(DISCOVERY_EXPANSION_SEARCH_PATTERN)} "
-    f"{TASK_BOARD_OUTPUT_PATH} "
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md"
-)
-
-from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
-    build_configured_backlog_recorder_bundle,
-    build_task_blocks_ensurer as _build_task_blocks_ensurer,
-)
-from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
-    build_namespace_codebase_refill_defaults_factory,
-    build_namespace_objective_refill_defaults_factory,
-    build_configured_supervisor_runtime_exports,
-    build_script_supervisor_bootstrap_runner,
-)
-
-META_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
-    META_DISPLAY_ENV_PREFIX,
-    "hallucinate_app",
-)
-
-logger = logging.getLogger("meta_glasses_display_todo_supervisor")
-meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.resolve
-ensure_meta_display_bootstrap_paths = _META_DISPLAY_BOOTSTRAP_PATHS.ensure
-_RUNTIME_ENVIRONMENT = _META_DISPLAY_RUNTIME_BOOTSTRAP.runtime_environment
-_enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
-_ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-
-DISCOVERY_EXPANSION_TASK = f"""## MGW-013 Investigate implementation unknowns and expand the backlog
-
-- Status: {BACKLOG_PENDING_STATUS}
-- Completion: manual
-- Priority: P2
-- Track: ops
-- Depends on: {INITIAL_BACKLOG_DEPENDENCIES}
-- Outputs: {DISCOVERY_EXPANSION_OUTPUTS_TEXT}
-- Validation: {DISCOVERY_EXPANSION_VALIDATION}
-- Acceptance: After the initial backlog completes, investigate the Swissknife, HandsFree backend, mobile DAT bridge, external Meta DAT references, and hardware-free test harness code paths for missed work. Append new daemon-parseable MGW tasks for discovered gaps, or write a dated no-new-unknowns discovery report with evidence and commands run.
-"""
-
-SUPERVISOR_GUARDRAIL_TASK = f"""## MGW-014 Add supervisor validation-environment and retry-budget guardrails
-
-- Status: {BACKLOG_PENDING_STATUS}
-- Completion: manual
-- Priority: P1
-- Track: ops
-- Depends on: MGW-013
-- Outputs: scripts/meta_glasses_display_todo_supervisor.py, scripts/meta_glasses_display_todo_daemon.py, tests/test_meta_glasses_display_todo_queue.py, data/meta_glasses_display_widgets/discovery
-- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
-- Acceptance: Discovered during MGW-010: Android validation needs the repo-local JDK 17/Android SDK environment, and repeated validation failures should become evidence-backed discovery follow-up items instead of indefinite retry loops. The supervisor documents/enforces the validation environment and records retry-budget findings as daemon-parseable backlog work.
-"""
+def _with_default(argv: list[str], flag: str, value: str) -> list[str]:
+    if flag in argv:
+        return argv
+    return [flag, value, *argv]
 
 
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_DISPLAY_ENV_PREFIX
-)
+def _with_flag_default(argv: list[str], flag: str) -> list[str]:
+    if flag in argv:
+        return argv
+    return [flag, *argv]
 
 
-ensure_post_initial_discovery_backlog = _build_task_blocks_ensurer(
-    (
-        ("MGW-013", DISCOVERY_EXPANSION_TASK),
-        ("MGW-014", SUPERVISOR_GUARDRAIL_TASK),
-    ),
-    default_todo_path=TASK_BOARD_PATH,
-)
+def _with_repeated_default(argv: list[str], flag: str, values: tuple[str, ...]) -> list[str]:
+    if flag in argv:
+        return argv
+    defaults: list[str] = []
+    for value in values:
+        defaults.extend([flag, value])
+    return [*defaults, *argv]
+
+
+def _task_is_present(todo_text: str, task_id: str) -> bool:
+    return f"## {task_id} " in todo_text
+
+
+def ensure_post_initial_discovery_backlog(todo_path: Path = TODO_PATH) -> bool:
+    """Keep the post-initial discovery expansion tasks in the supervised board."""
+    if not todo_path.exists():
+        return False
+
+    todo_text = todo_path.read_text(encoding="utf-8")
+    additions: list[str] = []
+
+    if not _task_is_present(todo_text, "MGW-013"):
+        additions.append(DISCOVERY_EXPANSION_TASK.strip())
+    if not _task_is_present(todo_text, "MGW-014"):
+        additions.append(SUPERVISOR_GUARDRAIL_TASK.strip())
+
+    if not additions:
+        return False
+
+    updated = todo_text.rstrip() + "\n\n" + "\n\n".join(additions) + "\n"
+    todo_path.write_text(updated, encoding="utf-8")
+    return True
 
 
 def validation_environment_summary() -> dict[str, object]:
@@ -189,78 +67,142 @@ def validation_environment_summary() -> dict[str, object]:
     return android_validation_environment(REPO_ROOT)
 
 
-def _prepare_meta_display_paths(paths: dict[str, Path]) -> None:
-    _bootstrap_android_validation_env()
-    ensure_post_initial_discovery_backlog(paths["todo_path"])
-    enforce_android_validation_environment(paths["todo_path"])
+def _run_supervisor(argv: list[str]) -> None:
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+        ensure_implementation_supervisor_running,
+        parse_args,
+        repair_implementation_supervisor_runtime,
+        split_csv_values,
+    )
 
+    parsed = parse_args(argv)
+    logging.basicConfig(
+        level=getattr(logging, parsed.log_level),
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
+    state_path = parsed.state_dir / f"{parsed.state_prefix}_task_state.json"
+    strategy_path = parsed.state_dir / f"{parsed.state_prefix}_strategy.json"
+    events_path = parsed.state_dir / f"{parsed.state_prefix}_supervisor_events.jsonl"
+    daemon_events_path = parsed.state_dir / f"{parsed.state_prefix}_events.jsonl"
+    record_retry_budget_findings(
+        todo_path=parsed.todo_path,
+        events_path=daemon_events_path,
+        strategy_path=strategy_path,
+        discovery_dir=DISCOVERY_DIR,
+        task_header_prefix=parsed.task_prefix,
+    )
+    config = PortalSupervisorConfig(
+        todo_path=parsed.todo_path,
+        state_path=state_path,
+        strategy_path=strategy_path,
+        events_path=events_path,
+        state_dir=parsed.state_dir,
+        stale_seconds=parsed.stale_seconds,
+        check_interval=parsed.check_interval,
+        max_restarts=parsed.max_restarts,
+        daemon_interval=parsed.daemon_interval,
+        task_prefix=parsed.task_prefix,
+        state_prefix=parsed.state_prefix,
+        implement=parsed.implement,
+        implementation_command=parsed.implementation_command,
+        implementation_timeout=parsed.implementation_timeout,
+        implementation_log_stall_seconds=parsed.implementation_log_stall_seconds,
+        use_ephemeral_worktree=parsed.implement and not parsed.no_ephemeral_worktree,
+        worktree_root=parsed.worktree_root,
+        worktree_submodule_paths=tuple(parsed.worktree_submodule_path or META_DISPLAY_WORKTREE_SUBMODULE_PATHS),
+        codebase_refill_enabled=parsed.codebase_refill_scan,
+        codebase_scan_discovery_dir=parsed.codebase_scan_discovery_dir,
+        codebase_scan_discovery_output_path=parsed.codebase_scan_discovery_output_path,
+        codebase_scan_min_open_tasks=parsed.codebase_scan_min_open_tasks,
+        codebase_scan_max_findings=parsed.codebase_scan_max_findings,
+        codebase_scan_cooldown_seconds=parsed.codebase_scan_cooldown_seconds,
+        codebase_scan_depends_on=split_csv_values(parsed.codebase_scan_depends_on),
+        codebase_scan_skip_prefixes=tuple(parsed.codebase_scan_skip_prefix),
+        codebase_scan_commit_outputs=parsed.codebase_scan_commit_outputs,
+        codebase_scan_commit_subject=parsed.codebase_scan_commit_subject,
+        objective_refill_enabled=parsed.objective_refill_scan,
+        objective_path=parsed.objective_path,
+        objective_graph_path=parsed.objective_graph_path,
+        objective_bundle_dir=parsed.objective_bundle_dir,
+        objective_dataset_dir=parsed.objective_dataset_dir,
+        objective_discovery_dir=parsed.objective_discovery_dir,
+        objective_discovery_output_path=parsed.objective_discovery_output_path,
+        objective_summary_prefix=parsed.objective_summary_prefix,
+        objective_refine_goals=parsed.objective_refine_goals,
+        objective_ensure_tracking_document=parsed.objective_ensure_tracking_document,
+        objective_ultimate_goal=parsed.objective_ultimate_goal,
+        objective_root_evidence=split_csv_values(parsed.objective_root_evidence),
+        objective_goal_prefix=parsed.objective_goal_prefix,
+        objective_root_goal_id=parsed.objective_root_goal_id,
+        objective_root_goal_title=parsed.objective_root_goal_title,
+        objective_tracking_document_title=parsed.objective_tracking_document_title,
+        objective_scan_min_open_tasks=parsed.objective_scan_min_open_tasks,
+        objective_scan_max_findings=parsed.objective_scan_max_findings,
+        objective_scan_cooldown_seconds=parsed.objective_scan_cooldown_seconds,
+        objective_scan_depends_on=split_csv_values(parsed.objective_scan_depends_on),
+        objective_max_refinement_children=parsed.objective_max_refinement_children,
+        objective_max_refinement_depth=parsed.objective_max_refinement_depth,
+        objective_persist_ast_dataset=parsed.objective_persist_ast_dataset,
+        repo_root=REPO_ROOT,
+        daemon_script_path=parsed.daemon_script_path or DAEMON_SCRIPT_PATH,
+    )
+    if parsed.ensure_running:
+        result = ensure_implementation_supervisor_running(
+            config,
+            argv,
+            launcher_path=Path(__file__).resolve(),
+            process_fragments=("meta_glasses_display_todo_supervisor.py",),
+            startup_wait_seconds=parsed.ensure_startup_wait_seconds,
+        )
+        logger.info("Display-widget implementation supervisor ensure complete: %s", result)
+        return
 
-_meta_display_objective_defaults = build_namespace_objective_refill_defaults_factory(
-    META_DISPLAY_DATA_PATHS,
-    objective_path_key="objective_heap_path",
-    use_bootstrap_keys=True,
-    objective_discovery_output_path_factory=_meta_display_discovery_output_path,
-    objective_interoperability_focus=META_DISPLAY_INTEROPERABILITY_FOCUS,
-    seed_interoperability_goals=True,
-    # scanner-resolved: VAI-116 - stale line-302 explicit vector-index flag
-    # wiring is now owned by the shared objective defaults factory.
-    # scanner-resolved: VAI-117 - the shared factory owns the objective-surplus
-    # task-entry CLI defaults, so this supervisor no longer embeds the old flag.
-    **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
-)
+    repairs = repair_implementation_supervisor_runtime(config)
+    if repairs.get("removed") or repairs.get("updated_status"):
+        logger.info("Repaired stale display-widget supervisor runtime markers: %s", repairs)
 
-
-_meta_display_codebase_defaults = build_namespace_codebase_refill_defaults_factory(
-    META_DISPLAY_DATA_PATHS,
-    use_bootstrap_keys=True,
-    codebase_scan_discovery_output_path_factory=_meta_display_discovery_output_path,
-    codebase_scan_min_open_tasks=0,
-    codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
-)
-
-
-_meta_display_refill_recorders = build_configured_backlog_recorder_bundle(
-    retry_budget_recorder=record_retry_budget_findings,
-)
-_meta_display_refill_hooks = _meta_display_refill_recorders.supervisor_refill_hooks_factory(
-    discovery_dir_key="discovery_dir",
-    retry_budget_extra_kwargs_factory=_meta_display_discovery_output_kwargs,
-    scope_label="validation",
-)
-_meta_display_supervisor_runner = build_script_supervisor_bootstrap_runner(
-    repo_root=REPO_ROOT,
-    script_path=__file__,
-    logger=logger,
-    ensure_paths=ensure_meta_display_bootstrap_paths,
-    prepare_environment=_ensure_runtime_pythonpath,
-    enter_runtime_environment=_enter_runtime_environment,
-    enter_runtime_before_paths=True,
-    path_callbacks=(_prepare_meta_display_paths,),
-    task_prefix="## MGW-",
-    state_prefix="meta_glasses_display",
-    daemon_script_path=DAEMON_SCRIPT_PATH,
-    todo_path_flag=TASK_BOARD_PATH_OPTION,
-    llm_merge_resolver_command=_default_llm_merge_resolver_command,
-    worktree_submodule_paths=META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
-    generated_dirty_repair_enabled=True,
-    generated_dirty_repair_commit_subject="MGW: reconcile generated supervisor outputs",
-    objective_factory=_meta_display_objective_defaults,
-    codebase_factory=_meta_display_codebase_defaults,
-    hooks_factory=_meta_display_refill_hooks,
-    once_complete_message="Display-widget implementation supervisor check complete: %s",
-    ensure_running_message="Display-widget implementation supervisor ensure complete: %s",
-    repair_runtime_message="Repaired stale display-widget supervisor runtime markers: %s",
-)
-_meta_display_supervisor_runtime = _meta_display_supervisor_runner.runtime
-_meta_display_supervisor_exports = build_configured_supervisor_runtime_exports(_meta_display_supervisor_runtime)
-META_DISPLAY_SUPERVISOR_PROCESS_MARKERS = _meta_display_supervisor_exports.process_match_any
-repair_meta_display_supervisor_runtime = _meta_display_supervisor_exports.repair_runtime
-meta_display_supervisor_is_running = _meta_display_supervisor_exports.is_running
-ensure_meta_display_supervisor_running = _meta_display_supervisor_exports.ensure_running
+    supervisor = PortalImplementationSupervisor(config)
+    if parsed.once:
+        result = supervisor.run_once()
+        record_retry_budget_findings(
+            todo_path=parsed.todo_path,
+            events_path=daemon_events_path,
+            strategy_path=strategy_path,
+            discovery_dir=DISCOVERY_DIR,
+            task_header_prefix=parsed.task_prefix,
+        )
+        logger.info("Display-widget implementation supervisor check complete: %s", result)
+        return
+    supervisor.run_forever()
 
 
 def main(argv: list[str] | None = None) -> None:
-    _meta_display_supervisor_runner.run(argv)
+    args = list(sys.argv[1:] if argv is None else argv)
+    os.chdir(REPO_ROOT)
+    sys.path.insert(0, str(IPFS_DATASETS_ROOT))
+    existing = os.environ.get("PYTHONPATH", "")
+    os.environ["PYTHONPATH"] = os.pathsep.join(
+        [str(IPFS_DATASETS_ROOT), existing] if existing else [str(IPFS_DATASETS_ROOT)]
+    )
+
+    from ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor import main as supervisor_main
+
+    args = _with_default(args, "--todo-path", str(TODO_PATH))
+    args = _with_default(args, "--state-dir", str(STATE_DIR))
+    args = _with_default(args, "--task-prefix", "## MGW-")
+    args = _with_default(args, "--state-prefix", "meta_glasses_display")
+    args = _with_default(args, "--worktree-root", str(WORKTREE_ROOT))
+    args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
+    args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
+    args = _with_default(args, "--max-restarts", "0")
+    args = _with_flag_default(args, "--codebase-refill-scan")
+    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/meta_glasses_display_widgets/discovery")
+    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
+    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
+    _run_supervisor(args)
 
 
 if __name__ == "__main__":

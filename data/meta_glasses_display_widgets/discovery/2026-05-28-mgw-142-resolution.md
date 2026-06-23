@@ -10,7 +10,7 @@ The annotation reference at line 8 of the VAI-111 resolution notes is part of th
 documentation of a finding that was already resolved — it is not a live TODO comment in
 source code. The text reads:
 
-> The original finding was `// TODO: Implement server config window` at line 439.
+> The original finding was a now-removed stub: `// TODO: Implement server config window` at line 439.
 
 This sentence describes the historical state of the code before VAI-111 fixed it. The
 actual source file `hallucinate_app/hallucinate_app/node/menu_generator.js` no longer
@@ -30,7 +30,6 @@ VAI-111 resolved three adjacent TODO stubs in `handleAction()`:
 ## Verdict
 
 False positive: the codebase scan flagged a backtick-quoted reference inside discovery
-prose, not an unresolved code annotation. No code changes are required. The VAI-111
-resolution notes correctly document the completed fix. Future scans should not re-surface
-this finding since the quoted text is inside a Markdown blockquote and is clearly
-retrospective documentation.
+prose, not an unresolved code annotation. The VAI-111 resolution notes have been updated
+to add an HTML comment clarifying the text is retrospective documentation, not a live
+annotation. No code changes are required.

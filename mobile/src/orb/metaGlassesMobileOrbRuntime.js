@@ -1,5 +1,8 @@
 import { createMetaGlassesMobileOrbApiBackend } from './metaGlassesMobileOrbApiBackend';
-import { createMetaGlassesMobileOrbBridge } from './metaGlassesMobileOrbBridge';
+import {
+  buildMobileOrbDiagnosticsContract,
+  createMetaGlassesMobileOrbBridge,
+} from './metaGlassesMobileOrbBridge';
 import { metaGlassesOrbEdgeSessionStore } from './metaGlassesOrbEdgeSession';
 import { metaGlassesOrbStateStore } from './metaGlassesOrbStateStore';
 import {
@@ -33,6 +36,30 @@ function defaultCapabilities(capabilities = {}) {
     photoCapture: Boolean(capabilities.photoCapture),
     videoStream: Boolean(capabilities.videoStream),
     ...capabilities,
+  };
+}
+
+function withDiagnosticsContract(response, localDiagnostics, source) {
+  if (!response || typeof response !== 'object' || Array.isArray(response)) {
+    return response;
+  }
+  return {
+    ...response,
+    contract: response.contract || localDiagnostics.contract,
+    source: response.source || source,
+    mode: response.mode || localDiagnostics.mode,
+    edge_session_id: response.edge_session_id || localDiagnostics.edge_session_id,
+    capability_counts: response.capability_counts || localDiagnostics.capability_counts,
+    backend_capability_counts:
+      response.backend_capability_counts ||
+      response.capability_counts ||
+      localDiagnostics.backend_capability_counts,
+    descriptor_cids: response.descriptor_cids || localDiagnostics.descriptor_cids || [],
+    policy_cids: response.policy_cids || localDiagnostics.policy_cids || [],
+    receipt_cids: response.receipt_cids || localDiagnostics.receipt_cids || [],
+    binding_state: response.binding_state || localDiagnostics.binding_state,
+    fallback_reasons: response.fallback_reasons || localDiagnostics.fallback_reasons || [],
+    fallback_details: response.fallback_details || localDiagnostics.fallback_details || [],
   };
 }
 
@@ -99,7 +126,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
   }
 
   function getDiagnostics() {
-    return {
+    const diagnostics = {
       ...bridge.getDiagnostics(),
       mobile_orb_interface_cid: localInterfaceCids[0],
       display_widget_interface_cid: localInterfaceCids[1],
@@ -107,20 +134,34 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
       edge_session_persistence: Boolean(edgeSessionStore),
       orb_state_persistence: Boolean(orbStateStore),
     };
+    const diagnosticsContract = buildMobileOrbDiagnosticsContract(diagnostics);
+    return {
+      ...diagnostics,
+      diagnostics_contract: diagnosticsContract,
+      capability_counts: diagnosticsContract.capability_counts,
+      backend_capability_counts: diagnosticsContract.backend_capability_counts,
+      descriptor_cids: diagnosticsContract.descriptor_cids,
+      policy_cids: diagnosticsContract.policy_cids,
+      binding_state: diagnosticsContract.binding_state,
+      receipt_cids: diagnosticsContract.receipt_cids,
+      fallback_reasons: diagnosticsContract.fallback_reasons,
+    };
   }
 
   async function fetchBackendDiagnostics(params = {}) {
     if (!backend.getDiagnostics) {
       return null;
     }
+    const localDiagnostics = getDiagnostics();
     const edgeSessionId =
       params.edge_session_id ||
       params.edgeSessionId ||
       bridge.getEdgeSession()?.edge_session_id;
-    return backend.getDiagnostics({
+    const response = await backend.getDiagnostics({
       ...params,
       ...(edgeSessionId ? { edge_session_id: edgeSessionId } : {}),
     });
+    return withDiagnosticsContract(response, localDiagnostics, 'backend');
   }
 
   return {

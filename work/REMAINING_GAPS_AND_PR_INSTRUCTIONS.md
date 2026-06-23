@@ -176,9 +176,9 @@ Repeat for PR-027 and PR-028.
 
 ## Recording Created PR URLs
 
-GitHub assigns final PR numbers when each draft PR is created. After running
-`gh pr create` or using the GitHub UI, record the concrete URL returned or shown
-for each branch. Do not commit template PR URLs with fake numbers.
+GitHub assigns the final PR numbers when each draft PR is created. After running
+`gh pr create`, use the URL printed by the CLI or the corresponding URL in the
+GitHub UI for each branch:
 - PR-026: `draft/pr-026-notification-push-delivery`
 - PR-027: `draft/pr-027-profile-verbosity-tuning`
 - PR-028: `draft/pr-028-external-agent-runner-setup`

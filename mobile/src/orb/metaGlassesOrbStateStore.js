@@ -15,6 +15,15 @@ function objectOrNull(value) {
   return isObject(value) ? value : null;
 }
 
+function controlSurfaceFields(value) {
+  return {
+    control_surface_contract_ref: stringOrNull(value.control_surface_contract_ref),
+    interaction_envelope: objectOrNull(value.interaction_envelope),
+    normalized_intent: objectOrNull(value.normalized_intent),
+    mediation_receipt: objectOrNull(value.mediation_receipt),
+  };
+}
+
 function normalizeBinding(value) {
   if (!isObject(value)) {
     return null;
@@ -32,6 +41,7 @@ function normalizeBinding(value) {
       ? value.granted_capabilities.filter((item) => typeof item === 'string')
       : [],
     policy_decision: objectOrNull(value.policy_decision) || {},
+    ...controlSurfaceFields(value),
     expires_at: stringOrNull(value.expires_at),
     service_interface_cid:
       stringOrNull(value.service_interface_cid) || stringOrNull(orbBinding?.interface_cid),
@@ -62,6 +72,8 @@ function normalizeSubscription(value) {
     receipt_cid: stringOrNull(value.receipt_cid),
     generation_key: stringOrNull(value.generation_key),
     orb_binding: objectOrNull(value.orb_binding),
+    policy_decision: objectOrNull(value.policy_decision),
+    ...controlSurfaceFields(value),
     status: stringOrNull(value.status) || 'active',
     subscribed_at: stringOrNull(value.subscribed_at),
   };

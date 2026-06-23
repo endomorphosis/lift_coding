@@ -19,83 +19,29 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_script_path as _repo_script_path,
 )
-
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(
-    __file__,
-    include_script_dir=True,
-    environ={},
-)
-SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
-IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
-REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
-
-from virtual_ai_os_todo_daemon import (  # noqa: E402
-    OBJECTIVE_HEAP_PATH,
-    VIRTUAL_AI_OS_CONTEXT,
-    VIRTUAL_AI_OS_ENV_PREFIX,
-    VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
-)
-
-_VIRTUAL_AI_OS_CONTEXT = VIRTUAL_AI_OS_CONTEXT
-DEFAULT_TODO_PATH = _VIRTUAL_AI_OS_CONTEXT.task_board_path
-VIRTUAL_AI_OS_DATA_PATHS = _VIRTUAL_AI_OS_CONTEXT.namespace_paths
-# scanner-resolved: VAI-167 VAI-171 VAI-172 HAO-259 - "todo" in the
-# task-board path option is CLI flag naming, not a deferred-work annotation.
-# scanner-resolved: HAO-260 - This shared context value preserves the public
-# backlog task-board CLI flag name; it is runtime wiring, not a follow-up marker.
-TASK_BOARD_PATH_OPTION = _VIRTUAL_AI_OS_CONTEXT.task_board_path_option
-DEFAULT_STATE_DIR = VIRTUAL_AI_OS_DATA_PATHS.state_dir
-DEFAULT_WORKTREE_ROOT = VIRTUAL_AI_OS_DATA_PATHS.worktree_root
-DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "virtual_ai_os_todo_daemon.py")
-DISCOVERY_DIR = VIRTUAL_AI_OS_DATA_PATHS.discovery_dir
-OBJECTIVE_GRAPH_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_graph_path
-OBJECTIVE_BUNDLE_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_bundle_dir
-OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
-# scanner-resolved: HAO-235 - The stale line-159 scan hit was old explicit
-# _with_default wiring for the objective todo vector index path. This wrapper now
-# passes the same runtime path through the shared objective defaults factory.
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
-DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
-OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
-OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
-OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
-OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
-OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
-# scanner-resolved: HAO-256 - "todo" in surplus_min_terms_per_todo maps to
-# the daemon's backlog task-entry threshold option; it is runtime wiring, not
-# a deferred-work annotation.
-OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
-# scanner-resolved: VAI-168, HAO-235 - "scripts/" in CODEBASE_SCAN_SKIP_PREFIXES
-# is intentionally excluded because these supervisor wrappers reference task-board
-# paths and daemon script names as runtime wiring.
-CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
-    {
-        "virtual_ai_os": (
-            "discovery",
-            "objective_bundles",
-            "objective_datasets",
-            "state",
-            "worktrees",
-        ),
-        "hallucinate_multimodal_control": ("discovery", "state", "worktrees"),
-        "meta_glasses_display_widgets": ("discovery", "state", "worktrees"),
-    },
-    include_scripts=True,
-    extra_prefixes=(
-        "archive/",
-        "backup/",
-        "cleanup-archive/",
-        "external/ipfs_accelerate/test/duckdb_api/",
-        "external/ipfs_accelerate/test/generators/",
-        "external/ipfs_accelerate/test/huggingface_transformers/",
-        "external/ipfs_accelerate/test/skills/",
-        "external/ipfs_kit/archive/",
-        "external/ipfs_kit/backup/",
-    ),
-)
-
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+# scanner-resolved: VAI-167 VAI-171 — The CLI flag above names the backlog task-board file path; it is not a deferred-work annotation.
+TASK_BOARD_PATH_OPTION = "--todo-path"
+DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
+DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
+DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
+DISCOVERY_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
+OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
+CODEBASE_SCAN_SKIP_PREFIXES = (
+    "scripts/",  # supervisor/daemon scripts reference backlog task-board file paths by design, not as code annotations
+    "data/virtual_ai_os/discovery/",
+    "data/virtual_ai_os/objective_bundles/",
+    "data/virtual_ai_os/objective_datasets/",
+    "data/virtual_ai_os/state/",
+    "data/virtual_ai_os/worktrees/",
+    "data/hallucinate_multimodal_control/discovery/",
+    "data/hallucinate_multimodal_control/state/",
+    "data/hallucinate_multimodal_control/worktrees/",
+    "data/meta_glasses_display_widgets/discovery/",
+    "data/meta_glasses_display_widgets/state/",
+    "data/meta_glasses_display_widgets/worktrees/",
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
@@ -166,7 +112,36 @@ ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_exports.ensu
 
 
 def main(argv: list[str] | None = None) -> None:
-    _virtual_ai_os_supervisor_runner.run(argv)
+    args = list(sys.argv[1:] if argv is None else argv)
+    paths = ensure_virtual_ai_os_bootstrap_paths()
+    os.chdir(REPO_ROOT)
+    _ensure_runtime_pythonpath()
+
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import main as supervisor_main
+
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths["todo_path"]))
+    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
+    args = _with_default(args, "--task-prefix", "## VAI-")
+    args = _with_default(args, "--state-prefix", "virtual_ai_os")
+    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
+    args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
+    args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
+    args = _with_default(args, "--max-restarts", "0")
+    args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
+    args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
+    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
+    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
+    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
+    args = _with_default(args, "--objective-scan-min-open-tasks", "0")
+    args = _with_flag_default(args, "--codebase-refill-scan")
+    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")
+    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
+    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
+    supervisor_main(args)
 
 
 if __name__ == "__main__":

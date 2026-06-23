@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class OCRDisabledError(RuntimeError):
-    """Raised when OCR processing is explicitly disabled by runtime configuration."""
+    """Raised when OCR extraction is disabled by configuration."""
 
 
 class OCRProvider(Protocol):
@@ -28,7 +28,7 @@ class OCRProvider(Protocol):
             Extracted text from the image
 
         Raises:
-            OCRDisabledError: If OCR is not enabled/available
+            OCRDisabledError: If OCR is disabled by configuration
             ValueError: If image format is unsupported
         """
         ...

@@ -1,6 +1,6 @@
 PR-006: GitHub webhook ingestion + fixture replay
 
-Placeholder branch for a future draft PR.
+This is a placeholder *draft* PR to enable later execution via Copilot coding agents.
 
 - Source spec: implementation_plan/prs/PR-006-github-webhook-ingestion-and-replay.md
 - Stack note: docs/specs assume DuckDB (embedded) + Redis.

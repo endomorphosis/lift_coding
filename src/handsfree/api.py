@@ -207,7 +207,7 @@ from handsfree.models import (
 from handsfree.policy import PolicyDecision, evaluate_action_policy
 from handsfree.redis_client import get_redis_client
 from handsfree.secrets import get_default_secret_manager
-from handsfree.stt import STTDisabledError, get_stt_provider
+from handsfree.stt import get_stt_provider
 from handsfree.ocr import OCRDisabledError, get_ocr_provider
 from handsfree.peer_chat import PeerChatSessionService
 from handsfree.webhooks import (
@@ -250,11 +250,21 @@ mobile_orb_edge_sessions: dict[str, dict[str, Any]] = {}
 mobile_orb_service_bindings: dict[str, dict[str, Any]] = {}
 mobile_orb_service_subscriptions: dict[str, dict[str, Any]] = {}
 mobile_orb_events: dict[str, dict[str, Any]] = {}
-mobile_orb_invocations: list[dict[str, Any]] = []
-mobile_orb_dispatches: list[dict[str, Any]] = []
-mobile_orb_revocations: list[dict[str, Any]] = []
+mobile_orb_receipts: dict[str, dict[str, Any]] = {}
 dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
 _peer_transport_provider = None
+
+MOBILE_ORB_DIAGNOSTICS_CONTRACT = "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0"
+MOBILE_ORB_DAT_CAPABILITY_KEYS = (
+    "session",
+    "camera",
+    "photoCapture",
+    "videoStream",
+    "audio",
+    "display",
+    "displayVideo",
+    "webAppDisplay",
+)
 
 
 def _get_cached_command_response(db: Any, key: str, endpoint: str) -> CommandResponse | None:
@@ -301,485 +311,280 @@ def _require_mobile_orb_binding(binding_handle: str) -> dict[str, Any]:
     return binding
 
 
-def _unique_mobile_orb_strings(values: list[Any]) -> list[str]:
+def _mobile_orb_unique_strings(values: list[Any]) -> list[str]:
     seen: set[str] = set()
-    normalized: list[str] = []
+    result: list[str] = []
     for value in values:
-        if not isinstance(value, str):
-            continue
-        item = value.strip()
-        if not item or item in seen:
-            continue
-        seen.add(item)
-        normalized.append(item)
-    return normalized
+        if isinstance(value, str) and value.strip() and value not in seen:
+            seen.add(value)
+            result.append(value)
+    return result
 
 
-def _mobile_orb_string_from(value: Any, *keys: str) -> str | None:
-    current = value
-    for key in keys:
-        if not isinstance(current, dict):
-            return None
-        current = current.get(key)
-    return current.strip() if isinstance(current, str) and current.strip() else None
+def _mobile_orb_dict(value: Any) -> dict[str, Any]:
+    return value if isinstance(value, dict) else {}
 
 
-def _mobile_orb_capability_counts(sessions: list[dict[str, Any]]) -> dict[str, Any]:
-    capability_names = [
-        "session",
-        "camera",
-        "photoCapture",
-        "videoStream",
-        "audio",
-        "display",
-        "displayVideo",
-        "webAppDisplay",
-    ]
-    enabled_by_name = {name: 0 for name in capability_names}
-    total_true = 0
-    total_false = 0
-    for session in sessions:
-        capabilities = session.get("dat_capabilities")
-        if not isinstance(capabilities, dict):
-            capabilities = {}
-        for name in capability_names:
-            if capabilities.get(name) is True:
-                enabled_by_name[name] = enabled_by_name[name] + 1
-                total_true += 1
-            else:
-                total_false += 1
-
-    return {
-        "dat": {
-            "enabled": total_true,
-            "disabled": total_false,
-            "total": total_true + total_false,
-            "enabled_by_name": enabled_by_name,
-        },
-        "edge_sessions": len(sessions),
-        "advertised_interfaces": sum(
-            len(session.get("local_interface_cids", []))
-            for session in sessions
-            if isinstance(session.get("local_interface_cids"), list)
-        ),
-        "accepted_interfaces": sum(
-            len(session.get("accepted_interface_cids", []))
-            for session in sessions
-            if isinstance(session.get("accepted_interface_cids"), list)
-        ),
-    }
+def _mobile_orb_list(value: Any) -> list[Any]:
+    return value if isinstance(value, list) else []
 
 
-def _collect_mobile_orb_descriptor_cids(records: list[dict[str, Any]]) -> list[str]:
-    values: list[Any] = []
-    for record in records:
-        values.extend(record.get("accepted_interface_cids", []))
-        values.extend(record.get("local_interface_cids", []))
-        values.append(record.get("service_interface_cid"))
-        values.append(record.get("descriptor_cid"))
-        values.append(_mobile_orb_string_from(record, "orb_binding", "interface_cid"))
-        values.append(_mobile_orb_string_from(record, "orb_binding", "descriptor_cid"))
-        values.append(
-            _mobile_orb_string_from(
-                record,
-                "orb_binding",
-                "transport_binding",
-                "metadata",
-                "descriptor_cid",
-            )
+def _mobile_orb_collect_policy_cids(record: dict[str, Any]) -> list[str]:
+    values: list[Any] = [record.get("policy_cid")]
+    for policy_decision in (
+        _mobile_orb_dict(record.get("policy_decision")),
+        _mobile_orb_dict(_mobile_orb_dict(record.get("mediation_receipt")).get("policy_decision")),
+    ):
+        values.extend(
+            [
+                policy_decision.get("decision_id"),
+                policy_decision.get("compiled_policy_cid"),
+                _mobile_orb_dict(policy_decision.get("policy_bundle_ref")).get("policy_cid"),
+            ]
         )
-        display_action = record.get("display_widget_action")
-        if isinstance(display_action, dict):
-            values.append(display_action.get("descriptor_cid"))
-            values.append(display_action.get("interface_cid"))
-        descriptors = record.get("descriptors")
-        if isinstance(descriptors, list):
-            for descriptor in descriptors:
-                if isinstance(descriptor, dict):
-                    values.append(descriptor.get("interface_cid"))
-                    values.append(descriptor.get("descriptor_cid"))
-    return _unique_mobile_orb_strings(values)
-
-
-def _collect_mobile_orb_policy_cids(records: list[dict[str, Any]]) -> list[str]:
-    values: list[Any] = []
-    for record in records:
-        values.append(record.get("policy_cid"))
-        values.append(_mobile_orb_string_from(record, "policy_bundle_ref", "policy_cid"))
-        values.append(_mobile_orb_string_from(record, "policy_decision", "compiled_policy_cid"))
-        values.append(
-            _mobile_orb_string_from(record, "policy_decision", "policy_bundle_ref", "policy_cid")
-        )
-        values.append(_mobile_orb_string_from(record, "interaction_envelope", "compiled_policy_cid"))
-        values.append(
-            _mobile_orb_string_from(record, "interaction_envelope", "policy_bundle_ref", "policy_cid")
-        )
-        receipt = record.get("mediation_receipt")
-        if isinstance(receipt, dict):
-            values.append(
-                _mobile_orb_string_from(
-                    receipt,
-                    "policy_decision",
-                    "compiled_policy_cid",
-                )
-            )
-            values.append(
-                _mobile_orb_string_from(
-                    receipt,
-                    "policy_decision",
-                    "policy_bundle_ref",
-                    "policy_cid",
-                )
-            )
-            policy_refs = receipt.get("policy_refs")
-            if isinstance(policy_refs, list):
-                for policy_ref in policy_refs:
-                    if isinstance(policy_ref, dict):
-                        values.append(policy_ref.get("compiled_policy_cid"))
-                        values.append(
-                            _mobile_orb_string_from(
-                                policy_ref,
-                                "policy_bundle_ref",
-                                "policy_cid",
-                            )
-                        )
-        display_action = record.get("display_widget_action")
-        if isinstance(display_action, dict):
-            values.append(
-                _mobile_orb_string_from(
-                    display_action,
-                    "policy_decision",
-                    "compiled_policy_cid",
-                )
-            )
-            values.append(
-                _mobile_orb_string_from(
-                    display_action,
-                    "policy_decision",
-                    "policy_bundle_ref",
-                    "policy_cid",
-                )
-            )
-    return _unique_mobile_orb_strings(values)
-
-
-def _collect_mobile_orb_receipt_cids(records: list[dict[str, Any]]) -> list[str]:
-    values: list[Any] = []
-    for record in records:
-        values.append(record.get("receipt_cid"))
-        values.append(_mobile_orb_string_from(record, "mediation_receipt", "receipt_id"))
-        display_action = record.get("display_widget_action")
-        if isinstance(display_action, dict):
-            values.append(display_action.get("orb_receipt_cid"))
-            values.append(_mobile_orb_string_from(display_action, "mediation_receipt", "receipt_id"))
-        parent_receipts = record.get("parent_receipt_cids")
-        if isinstance(parent_receipts, list):
-            values.extend(parent_receipts)
-    return _unique_mobile_orb_strings(values)
-
-
-def _mobile_orb_record_ref(record: dict[str, Any], fallback: str) -> str:
-    return (
-        _mobile_orb_string_from(record, "receipt_cid")
-        or _mobile_orb_string_from(record, "event_cid")
-        or _mobile_orb_string_from(record, "binding_handle")
-        or _mobile_orb_string_from(record, "subscription_id")
-        or _mobile_orb_string_from(record, "edge_session_id")
-        or fallback
+    envelope = _mobile_orb_dict(record.get("interaction_envelope"))
+    values.extend(
+        [
+            envelope.get("compiled_policy_cid"),
+            _mobile_orb_dict(envelope.get("policy_bundle_ref")).get("policy_cid"),
+        ]
     )
+    receipt = _mobile_orb_dict(record.get("mediation_receipt"))
+    for policy_ref in _mobile_orb_list(receipt.get("policy_refs")):
+        policy_ref = _mobile_orb_dict(policy_ref)
+        values.extend(
+            [
+                policy_ref.get("compiled_policy_cid"),
+                _mobile_orb_dict(policy_ref.get("policy_bundle_ref")).get("policy_cid"),
+            ]
+        )
+    return _mobile_orb_unique_strings(values)
 
 
-def _mobile_orb_receipt_summary_from(
-    *,
-    receipt: dict[str, Any],
-    source_record: str,
-) -> dict[str, Any] | None:
-    receipt_id = _mobile_orb_string_from(receipt, "receipt_id")
-    decision = receipt.get("policy_decision")
-    if not isinstance(decision, dict):
-        decision = {}
-    envelope = receipt.get("interaction_envelope")
-    if not isinstance(envelope, dict):
-        envelope = {}
-    normalized_intent = envelope.get("normalized_intent")
-    if not isinstance(normalized_intent, dict):
-        normalized_intent = {}
-
-    decision_id = _mobile_orb_string_from(decision, "decision_id")
-    policy_cid = _mobile_orb_string_from(
-        decision,
-        "compiled_policy_cid",
-    ) or _mobile_orb_string_from(
-        decision,
-        "policy_bundle_ref",
-        "policy_cid",
-    )
-    if receipt_id is None and decision_id is None:
-        return None
-
-    return {
-        "receipt_id": receipt_id,
-        "source_record": source_record,
-        "decision_id": decision_id,
-        "outcome": _mobile_orb_string_from(decision, "outcome") or "unknown",
-        "policy_cid": policy_cid,
-        "method": _mobile_orb_string_from(normalized_intent, "method"),
-        "target_ref": _mobile_orb_string_from(normalized_intent, "target_ref"),
-    }
-
-
-def _collect_mobile_orb_policy_receipts(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    receipts: list[dict[str, Any]] = []
-    seen: set[tuple[str | None, str | None, str]] = set()
-    for index, record in enumerate(records):
-        source_record = _mobile_orb_record_ref(record, f"record:{index}")
-        candidates: list[Any] = [record.get("mediation_receipt")]
-        display_action = record.get("display_widget_action")
-        if isinstance(display_action, dict):
-            candidates.append(display_action.get("mediation_receipt"))
-        result = record.get("result")
-        if isinstance(result, dict):
-            candidates.append(result.get("mediation_receipt"))
-            result_display_action = result.get("display_widget_action")
-            if isinstance(result_display_action, dict):
-                candidates.append(result_display_action.get("mediation_receipt"))
-
-        for candidate in candidates:
-            if not isinstance(candidate, dict):
-                continue
-            summary = _mobile_orb_receipt_summary_from(
-                receipt=candidate,
-                source_record=source_record,
-            )
-            if summary is None:
-                continue
-            key = (summary.get("receipt_id"), summary.get("decision_id"), source_record)
-            if key in seen:
-                continue
-            seen.add(key)
-            receipts.append(summary)
-    return receipts
-
-
-def _mobile_orb_receipt_integrity(
-    *,
-    records: list[dict[str, Any]],
-    receipt_cids: list[str],
-    policy_receipts: list[dict[str, Any]],
-) -> dict[str, Any]:
-    known_receipts = set(receipt_cids)
-    parent_receipts: list[Any] = []
-    records_missing_receipt = 0
-    for record in records:
-        if not _collect_mobile_orb_receipt_cids([record]):
-            records_missing_receipt += 1
-        parents = record.get("parent_receipt_cids")
-        if isinstance(parents, list):
-            parent_receipts.extend(parents)
-
-    outcome_counts: dict[str, int] = {}
-    missing_policy_cid_receipts: list[str] = []
-    for receipt in policy_receipts:
-        outcome = receipt.get("outcome") if isinstance(receipt.get("outcome"), str) else "unknown"
-        outcome_counts[outcome] = outcome_counts.get(outcome, 0) + 1
-        if not receipt.get("policy_cid"):
-            receipt_ref = receipt.get("receipt_id") or receipt.get("decision_id")
-            if isinstance(receipt_ref, str):
-                missing_policy_cid_receipts.append(receipt_ref)
-
-    orphan_parent_receipt_cids = [
-        item
-        for item in _unique_mobile_orb_strings(parent_receipts)
-        if item not in known_receipts
+def _mobile_orb_collect_descriptor_cids(record: dict[str, Any]) -> list[str]:
+    values: list[Any] = [
+        record.get("service_interface_cid"),
+        record.get("descriptor_cid"),
+        record.get("interface_cid"),
     ]
-    return {
-        "records_total": len(records),
-        "records_with_receipt": len(records) - records_missing_receipt,
-        "records_missing_receipt": records_missing_receipt,
-        "policy_receipts_total": len(policy_receipts),
-        "outcomes": outcome_counts,
-        "missing_policy_cid_receipts": missing_policy_cid_receipts,
-        "orphan_parent_receipt_cids": orphan_parent_receipt_cids,
-    }
+    values.extend(_mobile_orb_list(record.get("accepted_interface_cids")))
+    values.extend(_mobile_orb_list(record.get("local_interface_cids")))
+    for descriptor in _mobile_orb_list(record.get("descriptors")):
+        descriptor = _mobile_orb_dict(descriptor)
+        values.extend(
+            [
+                descriptor.get("interface_cid"),
+                descriptor.get("descriptor_cid"),
+                descriptor.get("schemaHash"),
+            ]
+        )
+    orb_binding = _mobile_orb_dict(record.get("orb_binding"))
+    values.extend(
+        [
+            orb_binding.get("interface_cid"),
+            orb_binding.get("descriptor_cid"),
+        ]
+    )
+    metadata = _mobile_orb_dict(
+        _mobile_orb_dict(orb_binding.get("transport_binding")).get("metadata")
+    )
+    values.append(metadata.get("descriptor_cid"))
+    action = _mobile_orb_dict(record.get("display_widget_action"))
+    values.extend([action.get("descriptor_cid"), action.get("interface_cid")])
+    return _mobile_orb_unique_strings(values)
 
 
-def _mobile_orb_edge_health(
-    *,
-    binding_state: dict[str, Any],
-    receipt_integrity: dict[str, Any],
-    fallback_reasons: list[str],
-) -> dict[str, Any]:
-    degraded_reasons: list[Any] = []
-    if not binding_state.get("registered"):
-        degraded_reasons.append("edge_session_missing")
-    if receipt_integrity.get("records_missing_receipt"):
-        degraded_reasons.append("missing_policy_receipts")
-    if receipt_integrity.get("missing_policy_cid_receipts"):
-        degraded_reasons.append("missing_policy_cids")
-    if receipt_integrity.get("orphan_parent_receipt_cids"):
-        degraded_reasons.append("orphan_parent_receipts")
-    degraded_reasons.extend(fallback_reasons)
-    unique_degraded_reasons = _unique_mobile_orb_strings(degraded_reasons)
-    return {
-        "status": "degraded"
-        if unique_degraded_reasons
-        else "healthy"
-        if binding_state.get("registered")
-        else "unknown",
-        "registered": bool(binding_state.get("registered")),
-        "binding_status": binding_state.get("status"),
-        "degraded_reasons": unique_degraded_reasons,
-    }
+def _mobile_orb_collect_receipt_cids(record: dict[str, Any]) -> list[str]:
+    values: list[Any] = [
+        record.get("receipt_cid"),
+        record.get("orb_receipt_cid"),
+        _mobile_orb_dict(record.get("mediation_receipt")).get("receipt_id"),
+    ]
+    values.extend(_mobile_orb_list(record.get("parent_receipt_cids")))
+    values.extend(_mobile_orb_list(record.get("output_refs")))
+    action = _mobile_orb_dict(record.get("display_widget_action"))
+    values.extend([action.get("orb_receipt_cid"), action.get("receipt_cid")])
+    for action_item in _mobile_orb_list(record.get("follow_up_actions")):
+        action_item = _mobile_orb_dict(action_item)
+        mobile_payload = _mobile_orb_dict(action_item.get("mobile_payload"))
+        display_action = _mobile_orb_dict(
+            _mobile_orb_dict(action_item.get("params")).get("display_widget_action")
+        )
+        values.extend(
+            [
+                mobile_payload.get("orb_receipt_cid"),
+                mobile_payload.get("receipt_cid"),
+                display_action.get("orb_receipt_cid"),
+                display_action.get("receipt_cid"),
+            ]
+        )
+    return _mobile_orb_unique_strings(values)
 
 
-def _collect_mobile_orb_fallback_reasons(records: list[dict[str, Any]]) -> list[str]:
-    values: list[Any] = []
-    for record in records:
-        fallback = record.get("fallback")
-        if isinstance(fallback, dict):
-            values.extend(
-                [
-                    fallback.get("reason"),
-                    fallback.get("message"),
-                    fallback.get("render_path"),
-                ]
+def _mobile_orb_fallback_reason(fallback: dict[str, Any]) -> str | None:
+    for key in ("reason", "message", "error", "render_path"):
+        value = fallback.get(key)
+        if isinstance(value, str) and value.strip():
+            return value
+    return None
+
+
+def _mobile_orb_collect_fallback_details(record: dict[str, Any]) -> list[dict[str, Any]]:
+    details: list[dict[str, Any]] = []
+    candidates = [
+        ("record", _mobile_orb_dict(record.get("fallback"))),
+        (
+            "display_widget_action",
+            _mobile_orb_dict(_mobile_orb_dict(record.get("display_widget_action")).get("fallback")),
+        ),
+    ]
+    for action_item in _mobile_orb_list(record.get("follow_up_actions")):
+        action_item = _mobile_orb_dict(action_item)
+        mobile_payload = _mobile_orb_dict(action_item.get("mobile_payload"))
+        display_action = _mobile_orb_dict(
+            _mobile_orb_dict(action_item.get("params")).get("display_widget_action")
+        )
+        candidates.extend(
+            [
+                ("follow_up_mobile_payload", _mobile_orb_dict(mobile_payload.get("fallback"))),
+                ("follow_up_display_action", _mobile_orb_dict(display_action.get("fallback"))),
+            ]
+        )
+    for source, fallback in candidates:
+        if not fallback:
+            continue
+        reason = _mobile_orb_fallback_reason(fallback)
+        if reason:
+            details.append(
+                {
+                    "source": source,
+                    "reason": reason,
+                    "render_path": fallback.get("render_path"),
+                    "message": fallback.get("message"),
+                }
             )
-        display_action = record.get("display_widget_action")
-        if isinstance(display_action, dict):
-            action_fallback = display_action.get("fallback")
-            if isinstance(action_fallback, dict):
-                values.extend(
-                    [
-                        action_fallback.get("reason"),
-                        action_fallback.get("message"),
-                        action_fallback.get("render_path"),
-                    ]
-                )
-        result = record.get("result")
-        if isinstance(result, dict):
-            values.extend(_collect_mobile_orb_fallback_reasons([result]))
-            actions = result.get("follow_up_actions")
-            if isinstance(actions, list):
-                values.extend(
-                    _collect_mobile_orb_fallback_reasons(
-                        [action for action in actions if isinstance(action, dict)]
-                    )
-                )
-        params = record.get("params")
-        if isinstance(params, dict):
-            display_widget_action = params.get("display_widget_action")
-            if isinstance(display_widget_action, dict):
-                values.extend(_collect_mobile_orb_fallback_reasons([display_widget_action]))
-    return _unique_mobile_orb_strings(values)
+    return details
+
+
+def _mobile_orb_capability_counts(edge_sessions: list[dict[str, Any]]) -> dict[str, Any]:
+    dat_capabilities = {
+        capability: sum(
+            1
+            for session in edge_sessions
+            if _mobile_orb_dict(session.get("dat_capabilities")).get(capability) is True
+        )
+        for capability in MOBILE_ORB_DAT_CAPABILITY_KEYS
+    }
+    capability_matrix = {
+        capability: {
+            "available": dat_capabilities[capability],
+            "unavailable": max(len(edge_sessions) - dat_capabilities[capability], 0),
+        }
+        for capability in MOBILE_ORB_DAT_CAPABILITY_KEYS
+    }
+    return {
+        "edge_sessions": len(edge_sessions),
+        "dat_capabilities": dat_capabilities,
+        "capability_matrix": capability_matrix,
+        "total_enabled": sum(dat_capabilities.values()),
+    }
 
 
 def _mobile_orb_binding_state(
-    *,
-    edge_session_id: str | None,
-    edge_sessions: list[dict[str, Any]],
     bindings: list[dict[str, Any]],
-    subscriptions: list[dict[str, Any]],
+    receipts: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    active_binding_handles = _unique_mobile_orb_strings(
-        [binding.get("binding_handle") for binding in bindings]
-    )
-    active_subscription_ids = _unique_mobile_orb_strings(
-        [subscription.get("subscription_id") for subscription in subscriptions]
-    )
-    if not edge_sessions:
-        status_value = "missing"
-    elif subscriptions:
-        status_value = "subscribed"
-    elif bindings:
-        status_value = "bound"
-    else:
-        status_value = "registered"
-    return {
-        "status": status_value,
-        "registered": bool(edge_sessions),
-        "edge_session_id": edge_session_id
-        or (edge_sessions[-1].get("edge_session_id") if edge_sessions else None),
-        "active_bindings": len(active_binding_handles),
-        "active_binding_handles": active_binding_handles,
-        "active_subscriptions": len(active_subscription_ids),
-        "active_subscription_ids": active_subscription_ids,
-        "latest_binding_handle": active_binding_handles[-1] if active_binding_handles else None,
-        "latest_subscription_id": active_subscription_ids[-1] if active_subscription_ids else None,
-    }
-
-
-def _build_mobile_orb_diagnostics_contract(
-    *,
-    edge_session_id: str | None,
-    edge_sessions: list[dict[str, Any]],
-    bindings: list[dict[str, Any]],
-    subscriptions: list[dict[str, Any]],
-    events: list[dict[str, Any]],
-    invocations: list[dict[str, Any]],
-    dispatches: list[dict[str, Any]],
-    revocations: list[dict[str, Any]],
-) -> dict[str, Any]:
-    records = [
-        *edge_sessions,
-        *bindings,
-        *subscriptions,
-        *events,
-        *invocations,
-        *dispatches,
-        *revocations,
+    binding_items: list[dict[str, Any]] = []
+    active_count = 0
+    for binding in bindings:
+        orb_binding = _mobile_orb_dict(binding.get("orb_binding"))
+        runtime_binding = _mobile_orb_dict(binding.get("runtime_binding"))
+        status_value = (
+            binding.get("status")
+            or runtime_binding.get("status")
+            or "active"
+        )
+        if status_value in {"active", "ready", "unresolved", "invalid"}:
+            active_count += 1
+        binding_items.append(
+            {
+                "binding_handle": binding.get("binding_handle"),
+                "state": status_value,
+                "service_interface_cid": binding.get("service_interface_cid")
+                or orb_binding.get("interface_cid"),
+                "service_id": orb_binding.get("service_id"),
+                "operation": binding.get("operation") or orb_binding.get("operation"),
+                "transport": binding.get("transport")
+                or binding.get("transport_preference")
+                or orb_binding.get("transport"),
+                "descriptor_cid": orb_binding.get("descriptor_cid"),
+                "runtime_status": runtime_binding.get("status"),
+                "runtime_reason": runtime_binding.get("reason"),
+                "receipt_cid": _mobile_orb_dict(binding.get("mediation_receipt")).get(
+                    "receipt_id"
+                ),
+            }
+        )
+    revoked_items = [
+        {
+            "binding_handle": receipt.get("binding_handle"),
+            "state": "revoked",
+            "receipt_cid": receipt.get("receipt_cid"),
+            "runtime_status": None,
+            "runtime_reason": receipt.get("operation"),
+        }
+        for receipt in (receipts or [])
+        if receipt.get("operation") == "revoke_binding"
     ]
-    binding_state = _mobile_orb_binding_state(
-        edge_session_id=edge_session_id,
-        edge_sessions=edge_sessions,
-        bindings=bindings,
-        subscriptions=subscriptions,
-    )
-    backend_counts = {
-        "edge_sessions": len(edge_sessions),
-        "events": len(events),
-        "bindings": len(bindings),
-        "subscriptions": len(subscriptions),
-        "invocations": len(invocations),
-        "dispatches": len(dispatches),
-        "revocations": len(revocations),
-    }
-    descriptor_cids = _collect_mobile_orb_descriptor_cids(records)
-    policy_cids = _collect_mobile_orb_policy_cids(records)
-    receipt_cids = _collect_mobile_orb_receipt_cids(records)
-    fallback_reasons = _collect_mobile_orb_fallback_reasons(records)
-    policy_receipts = _collect_mobile_orb_policy_receipts(records)
-    receipt_integrity = _mobile_orb_receipt_integrity(
-        records=records,
-        receipt_cids=receipt_cids,
-        policy_receipts=policy_receipts,
-    )
-    edge_health = _mobile_orb_edge_health(
-        binding_state=binding_state,
-        receipt_integrity=receipt_integrity,
-        fallback_reasons=fallback_reasons,
-    )
     return {
-        "contract": "handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0",
-        "edge_session_id": binding_state["edge_session_id"],
-        "mode": "simulator"
-        if any(session.get("platform") == "simulator" for session in edge_sessions)
-        else "physical_device"
-        if edge_sessions
-        else "unknown",
-        "capability_counts": {
-            **_mobile_orb_capability_counts(edge_sessions),
-            "backend": backend_counts,
-        },
-        "backend_counts": backend_counts,
-        "backend_capability_counts": backend_counts,
-        "descriptor_cids": descriptor_cids,
-        "policy_cids": policy_cids,
-        "binding_state": binding_state,
-        "receipt_cids": receipt_cids,
-        "fallback_reasons": fallback_reasons,
-        "policy_receipts": policy_receipts,
-        "receipt_integrity": receipt_integrity,
-        "edge_health": edge_health,
+        "active_count": active_count,
+        "revoked_count": len(revoked_items),
+        "bindings": [*binding_items, *revoked_items],
+    }
+
+
+def _mobile_orb_diagnostics_mode(edge_sessions: list[dict[str, Any]]) -> str:
+    platforms = {
+        session.get("platform")
+        for session in edge_sessions
+        if isinstance(session.get("platform"), str)
+    }
+    if not platforms:
+        return "unknown"
+    if platforms == {"simulator"}:
+        return "simulator"
+    if "ios" in platforms or "android" in platforms:
+        return "physical_device"
+    return "mixed"
+
+
+def _record_mobile_orb_receipt(
+    *,
+    operation: str,
+    receipt_cid: str | None,
+    edge_session_id: str | None,
+    binding_handle: str | None = None,
+    correlation_id: str | None = None,
+    parent_receipt_cids: list[str] | None = None,
+    response: Any | None = None,
+    fallback: dict[str, Any] | None = None,
+) -> None:
+    if not receipt_cid:
+        return
+    response_payload = response.model_dump() if hasattr(response, "model_dump") else response
+    response_payload = response_payload if isinstance(response_payload, dict) else {}
+    mobile_orb_receipts[receipt_cid] = {
+        "operation": operation,
+        "receipt_cid": receipt_cid,
+        "edge_session_id": edge_session_id,
+        "binding_handle": binding_handle,
+        "correlation_id": correlation_id,
+        "parent_receipt_cids": parent_receipt_cids or [],
+        "fallback": fallback,
+        "display_widget_action": response_payload.get("display_widget_action"),
+        "follow_up_actions": response_payload.get("follow_up_actions"),
+        "policy_decision": response_payload.get("policy_decision"),
+        "mediation_receipt": response_payload.get("mediation_receipt"),
     }
 
 
@@ -2031,8 +1836,9 @@ def register_mobile_orb_edge_capabilities(
         request=request,
         registered_at=datetime.now(UTC).isoformat(),
     )
+    edge_session["accepted_interface_cids"] = list(request.local_interface_cids)
     mobile_orb_edge_sessions[edge_session_id] = edge_session
-    return build_mobile_orb_register_response(
+    response = build_mobile_orb_register_response(
         request=request,
         edge_session_id=edge_session_id,
         control_surface_artifacts={
@@ -2043,6 +1849,13 @@ def register_mobile_orb_edge_capabilities(
             "mediation_receipt": edge_session.get("mediation_receipt"),
         },
     )
+    _record_mobile_orb_receipt(
+        operation="register_edge_capabilities",
+        receipt_cid=edge_session.get("mediation_receipt", {}).get("receipt_id"),
+        edge_session_id=edge_session_id,
+        response=response,
+    )
+    return response
 
 
 @app.post(
@@ -2058,11 +1871,20 @@ def publish_mobile_orb_glasses_event(
         request=request,
     )
     mobile_orb_events[event_cid] = event_record
-    return build_mobile_orb_event_response(
+    response = build_mobile_orb_event_response(
         request=request,
         event_cid=event_cid,
         receipt_cid=receipt_cid,
     )
+    _record_mobile_orb_receipt(
+        operation="publish_glasses_event",
+        receipt_cid=receipt_cid,
+        edge_session_id=request.edge_session_id,
+        correlation_id=request.correlation_id,
+        parent_receipt_cids=request.parent_receipt_cids,
+        response=response,
+    )
+    return response
 
 
 @app.get("/v1/mobile/orb/diagnostics")
@@ -2093,50 +1915,70 @@ def get_mobile_orb_diagnostics(
         for event in mobile_orb_events.values()
         if edge_session_id is None or event.get("edge_session_id") == edge_session_id
     ]
-    invocations = [
-        invocation
-        for invocation in mobile_orb_invocations
-        if edge_session_id is None or invocation.get("edge_session_id") == edge_session_id
+    receipts = [
+        receipt
+        for receipt in mobile_orb_receipts.values()
+        if edge_session_id is None or receipt.get("edge_session_id") == edge_session_id
     ]
-    dispatches = [
-        dispatch
-        for dispatch in mobile_orb_dispatches
-        if edge_session_id is None or dispatch.get("edge_session_id") == edge_session_id
+    diagnostic_records = [
+        *edge_sessions,
+        *bindings,
+        *subscriptions,
+        *events,
+        *receipts,
     ]
-    revocations = [
-        revocation
-        for revocation in mobile_orb_revocations
-        if edge_session_id is None or revocation.get("edge_session_id") == edge_session_id
-    ]
-    diagnostics_contract = _build_mobile_orb_diagnostics_contract(
-        edge_session_id=edge_session_id,
-        edge_sessions=edge_sessions,
-        bindings=bindings,
-        subscriptions=subscriptions,
-        events=events,
-        invocations=invocations,
-        dispatches=dispatches,
-        revocations=revocations,
+    descriptor_cids = _mobile_orb_unique_strings(
+        [
+            cid
+            for record in diagnostic_records
+            for cid in _mobile_orb_collect_descriptor_cids(record)
+        ]
     )
+    policy_cids = _mobile_orb_unique_strings(
+        [
+            cid
+            for record in diagnostic_records
+            for cid in _mobile_orb_collect_policy_cids(record)
+        ]
+    )
+    receipt_cids = _mobile_orb_unique_strings(
+        [
+            cid
+            for record in diagnostic_records
+            for cid in _mobile_orb_collect_receipt_cids(record)
+        ]
+    )
+    fallback_details = [
+        detail
+        for record in diagnostic_records
+        for detail in _mobile_orb_collect_fallback_details(record)
+    ]
 
     return {
-        **diagnostics_contract,
-        "edge_session_id": edge_session_id or diagnostics_contract["edge_session_id"],
+        "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+        "source": "backend",
+        "mode": _mobile_orb_diagnostics_mode(edge_sessions),
+        "edge_session_id": edge_session_id,
         "edge_sessions_count": len(edge_sessions),
         "bindings_count": len(bindings),
         "subscriptions_count": len(subscriptions),
         "events_count": len(events),
-        "invocations_count": len(invocations),
-        "dispatches_count": len(dispatches),
-        "revocations_count": len(revocations),
-        "diagnostics_contract": diagnostics_contract,
+        "receipts_count": len(receipts),
+        "capability_counts": _mobile_orb_capability_counts(edge_sessions),
+        "backend_capability_counts": _mobile_orb_capability_counts(edge_sessions),
+        "descriptor_cids": descriptor_cids,
+        "policy_cids": policy_cids,
+        "receipt_cids": receipt_cids,
+        "binding_state": _mobile_orb_binding_state(bindings, receipts),
+        "fallback_reasons": _mobile_orb_unique_strings(
+            [detail.get("reason") for detail in fallback_details]
+        ),
+        "fallback_details": fallback_details,
         "edge_sessions": edge_sessions,
         "bindings": bindings,
         "subscriptions": subscriptions,
         "events": events,
-        "invocations": invocations,
-        "dispatches": dispatches,
-        "revocations": revocations,
+        "receipts": receipts,
     }
 
 
@@ -2155,13 +1997,21 @@ def bind_mobile_orb_service(
     )
     binding_record = attach_mobile_orb_runtime_binding(binding_record)
     mobile_orb_service_bindings[binding_handle] = binding_record
-    return build_mobile_orb_bind_service_response(
+    response = build_mobile_orb_bind_service_response(
         request=request,
         binding_handle=binding_handle,
         policy_decision=policy_decision,
         orb_binding=binding_record.get("orb_binding"),
         control_surface_artifacts=binding_record,
     )
+    _record_mobile_orb_receipt(
+        operation="bind_service",
+        receipt_cid=binding_record.get("mediation_receipt", {}).get("receipt_id"),
+        edge_session_id=request.edge_session_id,
+        binding_handle=binding_handle,
+        response=response,
+    )
+    return response
 
 
 @app.post(
@@ -2187,16 +2037,17 @@ def invoke_mobile_orb_service(
         response.service_result["transport_result"] = transport_result
         if transport_result.get("status") == "error":
             response.ok = False
-    response_payload = response.model_dump() if hasattr(response, "model_dump") else {}
-    mobile_orb_invocations.append(
-        {
-            **request.model_dump(),
-            "edge_session_id": binding.get("edge_session_id"),
-            "service_interface_cid": binding.get("service_interface_cid"),
-            "orb_binding": binding.get("orb_binding"),
-            "receipt_cid": receipt_cid,
-            **response_payload,
-        }
+    _record_mobile_orb_receipt(
+        operation="invoke_service",
+        receipt_cid=response.receipt_cid,
+        edge_session_id=binding.get("edge_session_id"),
+        binding_handle=request.binding_handle,
+        correlation_id=request.correlation_id,
+        parent_receipt_cids=request.parent_receipt_cids,
+        response=response,
+        fallback=request.arguments.get("fallback")
+        if isinstance(request.arguments.get("fallback"), dict)
+        else None,
     )
     return response
 
@@ -2221,12 +2072,21 @@ def subscribe_mobile_orb_service_updates(
         subscribed_at=datetime.now(UTC).isoformat(),
     )
     mobile_orb_service_subscriptions[subscription_id] = subscription_record
-    return build_mobile_orb_subscribe_response(
+    response = build_mobile_orb_subscribe_response(
         request=request,
         subscription_id=subscription_id,
         receipt_cid=receipt_cid,
         subscription=subscription_record,
     )
+    _record_mobile_orb_receipt(
+        operation="subscribe_service_updates",
+        receipt_cid=receipt_cid,
+        edge_session_id=subscription_record.get("edge_session_id"),
+        binding_handle=request.binding_handle,
+        correlation_id=request.correlation_id,
+        response=response,
+    )
+    return response
 
 
 @app.post(
@@ -2243,13 +2103,14 @@ def dispatch_mobile_orb_glasses_response(
         request=request,
         receipt_cid=receipt_cid,
     )
-    response_payload = response.model_dump() if hasattr(response, "model_dump") else {}
-    mobile_orb_dispatches.append(
-        {
-            **request.model_dump(),
-            "receipt_cid": receipt_cid,
-            **response_payload,
-        }
+    _record_mobile_orb_receipt(
+        operation="dispatch_glasses_response",
+        receipt_cid=receipt_cid,
+        edge_session_id=request.edge_session_id,
+        correlation_id=request.correlation_id,
+        parent_receipt_cids=request.parent_receipt_cids,
+        response=response,
+        fallback=request.fallback,
     )
     return response
 
@@ -2262,31 +2123,24 @@ def revoke_mobile_orb_binding(
     request: MetaGlassesMobileOrbRevokeBindingRequest,
 ) -> MetaGlassesMobileOrbRevokeBindingResponse:
     """Revoke a mobile ORB service binding."""
-    revoked_binding = mobile_orb_service_bindings.pop(request.binding_handle, None)
-    revoked = revoked_binding is not None
+    binding = mobile_orb_service_bindings.pop(request.binding_handle, None)
+    revoked = binding is not None
     if revoked:
         for subscription_id, subscription in list(mobile_orb_service_subscriptions.items()):
             if subscription.get("binding_handle") == request.binding_handle:
                 mobile_orb_service_subscriptions.pop(subscription_id, None)
-    receipt_cid = build_mobile_orb_revoke_receipt_cid(request=request)
     response = build_mobile_orb_revoke_binding_response(
         revoked=revoked,
         receipt_cid=receipt_cid,
         request=request,
     )
-    response_payload = response.model_dump() if hasattr(response, "model_dump") else {}
-    mobile_orb_revocations.append(
-        {
-            **request.model_dump(),
-            "edge_session_id": revoked_binding.get("edge_session_id")
-            if isinstance(revoked_binding, dict)
-            else None,
-            "service_interface_cid": revoked_binding.get("service_interface_cid")
-            if isinstance(revoked_binding, dict)
-            else None,
-            "receipt_cid": receipt_cid,
-            **response_payload,
-        }
+    _record_mobile_orb_receipt(
+        operation="revoke_binding",
+        receipt_cid=response.receipt_cid,
+        edge_session_id=binding.get("edge_session_id") if isinstance(binding, dict) else None,
+        binding_handle=request.binding_handle,
+        correlation_id=request.correlation_id,
+        response=response,
     )
     return response
 

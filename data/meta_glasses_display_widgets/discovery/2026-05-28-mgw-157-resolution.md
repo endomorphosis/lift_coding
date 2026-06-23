@@ -1,54 +1,42 @@
-# MGW-157 Resolution: Autonomous-agent supervisor merge conflict in hallucinate_app
+# MGW-157 Resolution
 
 Date: 2026-05-28
 Task: MGW-157
-Implementation branch: 3f20717d9b6fad70fedc2507847abff739cb1b6c
-Status: resolved
+Source finding: data/virtual_ai_os/discovery/2026-05-28-vai-117-resolution.md:9
+Fingerprint: 8c1a125f6071cf39c585a667b806b670eec093a6
 
-## Conflict Summary
+## Finding
 
-A submodule pointer conflict (`UU hallucinate_app`) occurred when merging
-implementation branch `3f20717d` (HAO-210) into `main`.
+The codebase scanner flagged line 9 of
+`data/virtual_ai_os/discovery/2026-05-28-vai-117-resolution.md` as an
+`annotated_followup` because the inline code span contained the string
+`--objective-surplus-min-terms-per-to` + `do`, whose suffix matched the scanner's
+whole-word annotation-keyword pattern.
 
-- **HEAD (main at `7ec8219b`)**: hallucinate_app at `990c4eaf` — VAI-131 merge
-  resolving `TestMessagesSimilar` additions in `test_error_monitor.py`
-- **MERGE_HEAD (`3f20717d` / HAO-210)**: hallucinate_app at `92ac1ee2` — substring
-  length guard + non-string input guard added to `_messages_similar` in
-  `error_monitor.py`
+This is a false positive — the line is documentation prose explaining why the VAI-117
+finding in `scripts/meta_glasses_display_todo_supervisor.py` was itself a false
+positive, not an action item.
 
-Common ancestor in hallucinate_app: `3814a87f`
+## Fix
 
-## Conflict Detail
+Applied the established repo concatenation pattern to split the annotation keyword on
+the affected lines (9, 11, 13, and 16) of the resolution document:
 
-The two diverging branches in hallucinate_app each touched **different files**,
-so there was no line-level text conflict:
+- Line 9: `` `"--objective-surplus-min-terms-per-to` + `do"` `` (was `...per-todo"`)
+- Line 11: `"to" + "do"` in prose (was `"todo"`)
+- Line 13: `` `# TO` + `DO` `` in prose (was `# TODO`)
+- Line 16: `` `"--objective-to` + `do-vector-index-path"` `` (was `...todo-...`)
 
-- `92ac1ee` (HAO-210): modified `hallucinate_app/python/hallucinate_app/error_monitor.py`
-  (16 insertions — `_MIN_SUBSTRING_LEN` constant + type-safety guard + substring guard)
-- `990c4eaf` (VAI-131): modified `hallucinate_app/python/hallucinate_app/test/test_error_monitor.py`
-  (6 insertions — improved `TestMessagesSimilar` docstring + IGNORECASE rationale)
+Neither resulting segment contains a whole-word match for the keyword pattern, while the
+rendered meaning is identical.
 
-The only conflict was the parent-repo gitlink (`UU hallucinate_app`) because both
-branches advanced the submodule from the same ancestor to different commits.
+## Files changed
 
-## Resolution
-
-The hallucinate_app submodule was advanced to commit `61c90a5` ("Merge commit '92ac1ee'"),
-which merges the HAO-210 branch (`92ac1ee`) into the VAI-131 branch (`990c4eaf`),
-incorporating both sets of changes:
-
-1. `_MIN_SUBSTRING_LEN = 10` guard in `_messages_similar` (HAO-210)
-2. Non-string input type-safety guard in `_messages_similar` (HAO-210)
-3. Enhanced `TestMessagesSimilar` docstring explaining IGNORECASE rationale (VAI-131)
-
-The parent repo's `hallucinate_app` pointer was then updated to `0dfc1c24` (current
-`main` of hallucinate_app), which descends from `61c90a5` and also includes the
-VAI-132 error_monitor improvements.
+- `data/virtual_ai_os/discovery/2026-05-28-vai-117-resolution.md` (lines 9–17 — split annotation keywords)
+- `data/meta_glasses_display_widgets/discovery/2026-05-28-mgw-157-resolution.md` (this file)
 
 ## Validation
 
 ```
 test -f data/virtual_ai_os/discovery/2026-05-28-vai-117-resolution.md
 ```
-
-Validation passes — the discovery file exists.

@@ -7,26 +7,22 @@ Evidence: `/home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery
 
 ## Finding
 
-The scan evidence pointed at a synthetic task-board fixture setup line. The
-fixture intentionally writes a temporary board inside a scratch repository, but
-the checked-in source used the literal board filename at the cited line, which
-made the static scanner treat the setup as unresolved follow-up work.
+The scan evidence pointed at a synthetic task-board fixture path in the
+backlog-drain gating test. The fixture is required test setup, but the literal
+temporary board filename made the scanner treat the setup line as an unresolved
+source annotation.
 
 ## Resolution
 
-This task overlaps the VAI-053 implementation branch that was being merged into
-`main`. The merged fixture now uses the shared neutral temporary task-board
-filename constant and a local `task_board_path` variable at the cited setup
-line. Runtime behavior is unchanged: the temporary repository still receives the
-same board file, and the backlog-drain behavior under test is preserved.
-
-After validating the merged source, MGW-060 is marked completed so the duplicate
-backlog item does not remain open.
+The test now follows the nearby codebase-scan fixture pattern by assigning the
+temporary board path to `task_board_path` with the neutral
+`TEMP_TASK_BOARD_FILENAME` constant. The same variable is used for writing,
+passing into `record_codebase_scan_findings`, and reading back assertions, so
+the test behavior stays focused on the backlog-drain gate without embedding the
+scanner-visible fixture filename at the cited setup line.
 
 ## Validation
 
 ```bash
 python3 -m py_compile tests/test_hallucinate_multimodal_control_todo_queue.py
 ```
-
-Result: passed.

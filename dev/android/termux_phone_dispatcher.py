@@ -27,7 +27,6 @@ from __future__ import annotations
 
 import json
 import os
-import secrets
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.error import HTTPError
@@ -53,15 +52,7 @@ def _read_json(handler: BaseHTTPRequestHandler) -> dict:
 
 
 def create_issue(repo_full_name: str, token: str, title: str, body: str, labels: list[str]) -> dict:
-    if "/" not in repo_full_name:
-        raise ValueError(
-            f"Invalid DISPATCH_REPO format; expected 'owner/repo' but got {repo_full_name!r}"
-        )
     owner, repo = repo_full_name.split("/", 1)
-    if not owner or not repo:
-        raise ValueError(
-            f"Invalid DISPATCH_REPO format; expected 'owner/repo' but got {repo_full_name!r}"
-        )
     url = f"https://api.github.com/repos/{owner}/{repo}/issues"
 
     payload = {"title": title}
@@ -93,37 +84,32 @@ def create_issue(repo_full_name: str, token: str, title: str, body: str, labels:
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):  # noqa: N802
         if self.path == "/health":
-            _json_response(self, 200, {"ok": True})
-            return
-        _json_response(self, 404, {"error": "not found"})
+            return _json_response(self, 200, {"ok": True})
+        return _json_response(self, 404, {"error": "not found"})
 
     def do_POST(self):  # noqa: N802
         if self.path != "/dispatch":
-            _json_response(self, 404, {"error": "not found"})
-            return
+            return _json_response(self, 404, {"error": "not found"})
 
         shared_secret = os.environ.get("DISPATCHER_SHARED_SECRET", "").strip()
         if shared_secret:
             provided = (self.headers.get("X-Handsfree-Dispatcher-Secret") or "").strip()
-            if not secrets.compare_digest(provided, shared_secret):
-                _json_response(self, 401, {"error": "Unauthorized"})
-                return
+            if provided != shared_secret:
+                return _json_response(self, 401, {"error": "Unauthorized"})
 
         token = os.environ.get("GITHUB_TOKEN", "").strip()
         repo = os.environ.get("DISPATCH_REPO", "").strip()
         if not token or not repo:
-            _json_response(
+            return _json_response(
                 self,
                 400,
                 {"error": "Missing env vars: set GITHUB_TOKEN and DISPATCH_REPO"},
             )
-            return
 
         try:
             payload = _read_json(self)
         except ValueError as e:
-            _json_response(self, 400, {"error": str(e)})
-            return
+            return _json_response(self, 400, {"error": str(e)})
 
         title = str(payload.get("title") or "").strip()
         body = str(payload.get("body") or "")
@@ -133,16 +119,14 @@ class Handler(BaseHTTPRequestHandler):
         labels = [str(x) for x in labels if str(x).strip()]
 
         if not title:
-            _json_response(self, 400, {"error": "Missing required field: title"})
-            return
+            return _json_response(self, 400, {"error": "Missing required field: title"})
 
         try:
             issue = create_issue(repo, token, title, body, labels)
         except Exception as e:
-            _json_response(self, 500, {"error": str(e)})
-            return
+            return _json_response(self, 500, {"error": str(e)})
 
-        _json_response(
+        return _json_response(
             self,
             200,
             {

@@ -5,4 +5,4 @@ PR-060: iOS + Ray-Ban Meta implementation queue (docs-only)
 ## Agent checklist
 - [ ] Write `docs/ios-rayban-implementation-queue.md`
 - [ ] Keep it docs-only
-- [ ] Reference existing PRs by number + linkable file paths
+- [ ] Reference existing PRs by number and file paths
