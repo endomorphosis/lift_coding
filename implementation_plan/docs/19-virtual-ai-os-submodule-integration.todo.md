@@ -139,7 +139,7 @@ cadence remains parseable and resumable.
 
 ## VAI-010 Build a hardware-free end-to-end integration harness
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
