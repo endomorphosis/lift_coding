@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Updated the focused runner test to match the formatted warning message via
+`LogRecord.getMessage()` and assert the captured exception through `exc_info`
+instead of coupling the test to the logger format string and `record.args`
+layout.
