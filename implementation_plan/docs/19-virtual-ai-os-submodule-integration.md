@@ -197,7 +197,7 @@ Evidence:
 - The repo already contains one machine-readable daemon backlog pattern for the Meta glasses widget stream.
 - Mobile plus backend already contain Meta DAT display and action-routing primitives.
 - A dedicated simulation plan now exists in `implementation_plan/docs/20-meta-rayban-display-interface-simulator.md` for browser-first Meta Ray-Ban interface validation before iPhone handoff.
-- VAI-023 prepared the iPhone native DAT handoff bundle and physical evidence gate in `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`.
+- VAI-023 prepared the iPhone native DAT handoff bundle, runtime contract, and physical validation evidence gate in `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`. The contract requires one joined session to prove local UI control, compute offload receipt lineage, and Meta glasses-visible status before native DAT rollout.
 - VAI-017 connects simulator artifacts to the mobile ORB and Web App readiness flow: the VAI-016 browser session export, `dev/meta-rayban-display-simulator/webapp/readiness.json`, and the Web App ORB receipts must be treated as one pre-hardware proof bundle before a glasses-terminal session advances to physical DAT validation.
 - VAI-018 validates native mobile simulation parity against DAT MockDeviceKit assumptions: use MockDeviceKit for device/session/media and pairing-state simulation, but keep the browser/Web App/mobile ORB bundle as the command-capture, display-update, networking, and visual parity source until SDK-linked or physical DAT evidence exists.
 
@@ -366,6 +366,14 @@ This runtime is the operating-system scheduler equivalent for the stack.
   unavailable-device conditions such as unpaired glasses, native DAT display
   absence, missing policy CIDs, or orphan parent receipts.
 - Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md)
+- VAI-023 iPhone native DAT handoff gate: after VAI-018 and VAI-020, a
+  physical validation packet must join the same `correlation_id`, `request_id`,
+  receipt CIDs, policy CIDs, descriptor/interface CIDs, and widget IDs across
+  local DAT/mobile UI actions, local-or-offloaded compute execution, and the
+  Meta glasses status surface. Native DAT stays held when any of those three
+  streams cannot be reconciled or when fallback status does not survive
+  `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false`.
+- Evidence: [data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md](../../data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md)
 
 ### Workstream E: UI and operator plane
 
