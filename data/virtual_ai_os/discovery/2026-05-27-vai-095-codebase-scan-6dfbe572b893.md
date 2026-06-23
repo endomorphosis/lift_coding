@@ -22,17 +22,15 @@ so the supervisor does not keep re-adding the same work.
 
 ## Resolution
 
-This was a completed-work log entry that reused a scanner-sensitive annotation
-word while describing already-landed router cleanup. The current implementation
-does not leave the router strict-only: `CommandRouter._handle_inbox_list` reads
-`profile_config.privacy_mode` and forwards it to `handle_inbox_list`, and the PR
-summary path does the same for `handle_pr_summarize`. The profile defaults in
-`src/handsfree/commands/profiles.py` remain conservative by setting built-in
-profiles to `PrivacyMode.STRICT`.
+This was a false positive from historical PR work-log wording, not a live
+router defect. The current `src/handsfree/commands/router.py` has no matching
+task-marker comments in the reported areas, and it reads privacy mode from
+`profile_config.privacy_mode` before calling both `handle_inbox_list` and
+`handle_pr_summarize`.
 
-Updated `work/PR-081-privacy-mode-per-profile.md` so the implementation summary
-states that the router privacy-mode placeholders were cleared without preserving
-the annotation wording that caused the follow-up scan.
+Updated `work/PR-081-privacy-mode-per-profile.md` to describe the completed
+cleanup without using scanner-visible annotation wording, while preserving the
+privacy-mode implementation summary and test references.
 
 ## Validation
 

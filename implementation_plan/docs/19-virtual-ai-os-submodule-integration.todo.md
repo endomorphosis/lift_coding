@@ -1489,3 +1489,196 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, tests/test_virtual_ai_os_todo_queue.py
 - Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:12. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-082-codebase-scan-4f48f7ac5f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-083 Resolve code annotation in tracking/PR-049-ios-glasses-player.md:20
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-049-ios-glasses-player.md
+- Validation: test -f tracking/PR-049-ios-glasses-player.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-049-ios-glasses-player.md:20. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-083-codebase-scan-96a924114f2f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-084 Resolve code annotation in tracking/PR-050-android-audio-route-monitor.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-050-android-audio-route-monitor.md
+- Validation: test -f tracking/PR-050-android-audio-route-monitor.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-050-android-audio-route-monitor.md:18. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-084-codebase-scan-83311bfea1d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-085 Resolve code annotation in tracking/PR-051-android-glasses-recorder-player.md:21
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-051-android-glasses-recorder-player.md
+- Validation: test -f tracking/PR-051-android-glasses-recorder-player.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-051-android-glasses-recorder-player.md:21. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-085-codebase-scan-d61ca3057077.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-086 Resolve code annotation in tracking/PR-052-glasses-js-integration-tts.md:26
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-052-glasses-js-integration-tts.md
+- Validation: test -f tracking/PR-052-glasses-js-integration-tts.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-052-glasses-js-integration-tts.md:26. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-086-codebase-scan-27b8b4431606.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-087 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-087-codebase-scan-fbadc1c37e4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-088 Resolve code annotation in tracking/PR-081-privacy-mode-per-profile.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-081-privacy-mode-per-profile.md
+- Validation: test -f tracking/PR-081-privacy-mode-per-profile.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-081-privacy-mode-per-profile.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-088-codebase-scan-d0d2e565dde4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-089 Resolve code annotation in tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Validation: test -f tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-089-codebase-scan-587ddb056b2b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-090 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-090-agent-runner-docs-sync.md
+- Validation: test -f tracking/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-090-codebase-scan-2c46fb58c8a1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-091 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:29
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-090-agent-runner-docs-sync.md
+- Validation: test -f tracking/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-090-agent-runner-docs-sync.md:29. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-091-codebase-scan-015415cbcb23.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-092 Resolve code annotation in work/PR-046-expo-dev-client-native-glasses.md:14
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, work/PR-046-expo-dev-client-native-glasses.md
+- Validation: test -f work/PR-046-expo-dev-client-native-glasses.md
+- Acceptance: Codebase scan filed this finding from work/PR-046-expo-dev-client-native-glasses.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-092-codebase-scan-b5f5365b1aef.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-093 Resolve code annotation in work/PR-047-ios-audio-route-monitor.md:14
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/virtual_ai_os/discovery, work/PR-047-ios-audio-route-monitor.md
+- Validation: test -f work/PR-047-ios-audio-route-monitor.md
+- Acceptance: Codebase scan filed this finding from work/PR-047-ios-audio-route-monitor.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-093-codebase-scan-98ff09f42056.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-094 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
+
+<<<<<<< HEAD
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/virtual_ai_os/discovery, work/PR-048-ios-glasses-recorder-wav.md
+- Validation: test -f work/PR-048-ios-glasses-recorder-wav.md
+- Acceptance: Codebase scan filed this finding from work/PR-048-ios-glasses-recorder-wav.md:14. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-094-codebase-scan-841f4db539b0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-095 Resolve code annotation in work/PR-081-privacy-mode-per-profile.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/virtual_ai_os/discovery, work/PR-081-privacy-mode-per-profile.md
+- Validation: test -f work/PR-081-privacy-mode-per-profile.md
+- Acceptance: Codebase scan filed this finding from work/PR-081-privacy-mode-per-profile.md:18. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-095-codebase-scan-6dfbe572b893.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-096 Resolve code annotation in work/PR-090-agent-runner-docs-sync.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/virtual_ai_os/discovery, work/PR-090-agent-runner-docs-sync.md
+- Validation: test -f work/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from work/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-096-codebase-scan-9b624a3cfffc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-097 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
+
+<<<<<<< HEAD
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on:
+=======
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/virtual_ai_os/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
+- Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
+- Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-27-vai-097-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

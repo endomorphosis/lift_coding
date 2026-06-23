@@ -1081,3 +1081,273 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_end_to_end.py
 - Validation: python3 -m py_compile tests/test_virtual_ai_os_end_to_end.py
 - Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_end_to_end.py:228. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-094-codebase-scan-9da25a3fe7ab.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-095 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:69
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:69. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-095-codebase-scan-e9739c3e25ee.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-096 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:99
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:99. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-096-codebase-scan-c270de6a3cd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-097 Resolve code annotation in tests/test_virtual_ai_os_task_orchestration.py:111
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_task_orchestration.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_task_orchestration.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_task_orchestration.py:111. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-097-codebase-scan-352e1337216e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-098 Resolve code annotation in tests/test_virtual_ai_os_todo_queue.py:12
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_todo_queue.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:12. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-098-codebase-scan-4f48f7ac5f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-099 Resolve code annotation in tests/test_virtual_ai_os_todo_queue.py:109
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tests/test_virtual_ai_os_todo_queue.py
+- Validation: python3 -m py_compile tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: Codebase scan filed this finding from tests/test_virtual_ai_os_todo_queue.py:109. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-099-codebase-scan-6955fef82baf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-100 Resolve code annotation in tracking/PR-049-ios-glasses-player.md:20
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-049-ios-glasses-player.md
+- Validation: test -f tracking/PR-049-ios-glasses-player.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-049-ios-glasses-player.md:20. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-100-codebase-scan-96a924114f2f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-101 Resolve code annotation in tracking/PR-050-android-audio-route-monitor.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-050-android-audio-route-monitor.md
+- Validation: test -f tracking/PR-050-android-audio-route-monitor.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-050-android-audio-route-monitor.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-101-codebase-scan-83311bfea1d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-102 Resolve code annotation in tracking/PR-051-android-glasses-recorder-player.md:21
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-051-android-glasses-recorder-player.md
+- Validation: test -f tracking/PR-051-android-glasses-recorder-player.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-051-android-glasses-recorder-player.md:21. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-102-codebase-scan-d61ca3057077.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-103 Resolve code annotation in tracking/PR-052-glasses-js-integration-tts.md:26
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-052-glasses-js-integration-tts.md
+- Validation: test -f tracking/PR-052-glasses-js-integration-tts.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-052-glasses-js-integration-tts.md:26. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-103-codebase-scan-27b8b4431606.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-104 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:7
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-104-codebase-scan-fbadc1c37e4e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-105 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:7
+
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-105-codebase-scan-e84a8c85ab29.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-106 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:16
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:16. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-106-codebase-scan-d65e6d946f62.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-107 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:35
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:35. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-107-codebase-scan-13883aa045ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-108 Resolve code annotation in tracking/PR-081-privacy-mode-per-profile.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-081-privacy-mode-per-profile.md
+- Validation: test -f tracking/PR-081-privacy-mode-per-profile.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-081-privacy-mode-per-profile.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-108-codebase-scan-d0d2e565dde4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-109 Resolve code annotation in tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Validation: test -f tracking/PR-083-android-expo-glasses-audio-wav-playback.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-109-codebase-scan-587ddb056b2b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-110 Resolve code annotation in work/PR-047-ios-audio-route-monitor.md:14
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+- Status: completed
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on:
+=======
+=======
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+<<<<<<< HEAD
+>>>>>>> implementation/mgw-114-attempt-1-1779873772
+=======
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/meta_glasses_display_widgets/discovery, work/PR-047-ios-audio-route-monitor.md
+- Validation: test -f work/PR-047-ios-audio-route-monitor.md
+- Acceptance: Codebase scan filed this finding from work/PR-047-ios-audio-route-monitor.md:14. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-110-codebase-scan-98ff09f42056.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-111 Resolve code annotation in work/PR-048-ios-glasses-recorder-wav.md:14
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-114-attempt-1-1779873772
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/meta_glasses_display_widgets/discovery, work/PR-048-ios-glasses-recorder-wav.md
+- Validation: test -f work/PR-048-ios-glasses-recorder-wav.md
+- Acceptance: Codebase scan filed this finding from work/PR-048-ios-glasses-recorder-wav.md:14. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-111-codebase-scan-841f4db539b0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-112 Resolve code annotation in work/PR-081-privacy-mode-per-profile.md:18
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-114-attempt-1-1779873772
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/meta_glasses_display_widgets/discovery, work/PR-081-privacy-mode-per-profile.md
+- Validation: test -f work/PR-081-privacy-mode-per-profile.md
+- Acceptance: Codebase scan filed this finding from work/PR-081-privacy-mode-per-profile.md:18. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-112-codebase-scan-6dfbe572b893.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-113 Resolve code annotation in work/PR-090-agent-runner-docs-sync.md:1
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+<<<<<<< HEAD
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-114-attempt-1-1779873772
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/meta_glasses_display_widgets/discovery, work/PR-090-agent-runner-docs-sync.md
+- Validation: test -f work/PR-090-agent-runner-docs-sync.md
+- Acceptance: Codebase scan filed this finding from work/PR-090-agent-runner-docs-sync.md:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-113-codebase-scan-9b624a3cfffc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-114 Resolve code annotation in work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180
+
+<<<<<<< HEAD
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: docs
+<<<<<<< HEAD
+- Depends on:
+=======
+- Depends on: 
+>>>>>>> implementation/mgw-114-attempt-1-1779873772
+=======
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: docs
+- Depends on: 
+>>>>>>> implementation/mgw-110-attempt-1-1779874084
+- Outputs: data/meta_glasses_display_widgets/discovery, work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
+- Validation: test -f work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md
+- Acceptance: Codebase scan filed this finding from work/REMAINING_GAPS_AND_PR_INSTRUCTIONS.md:180. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-27-mgw-114-codebase-scan-4b6fa8e6e4e8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
