@@ -756,7 +756,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-401 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:54
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
