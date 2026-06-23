@@ -2108,7 +2108,7 @@ cadence remains parseable and resumable.
 
 ## VAI-365 Resolve code annotation in tests/test_implementation_daemon_merge_lock_retry.py:101
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
