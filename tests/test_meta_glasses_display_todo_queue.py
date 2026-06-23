@@ -86,8 +86,10 @@ def test_meta_display_product_run_defers_stale_scan_and_repair_tasks():
 
     assert runnable_stale_tasks == []
     assert tasks["MGW-265"].status == "completed"
-    assert tasks["MGW-266"].status == PENDING_TASK_STATUS
+    assert tasks["MGW-266"].status == "completed"
+    assert tasks["MGW-267"].status == PENDING_TASK_STATUS
     assert tasks["MGW-268"].track == "integration"
+    assert tasks["MGW-269"].track == "integration"
 
 
 def test_virtual_desktop_session_widget_contract_is_documented():

@@ -3042,3 +3042,14 @@ The meta glasses display supervisor stores resumable autonomous state in:
 - Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py tests/test_virtual_ai_os_todo_queue.py
 - Acceptance: Map glasses widget render/update/confirm/cancel actions into the VAI capability registry work so Swissknife, mobile, and Hallucinate App can share a single command/receipt surface for virtual desktop sessions.
+
+## MGW-269 Bridge display-widget actions into Hallucinate App normalized intents
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: integration
+- Depends on: MGW-265, MGW-266
+- Outputs: hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Follow HAO-431 by routing MGW focus, activate, confirm, cancel, render/update acknowledgement, and recovery actions through Hallucinate App `interaction_envelope`, `normalized_intent`, `policy_decision`, `mediation_receipt`, and `virtual_desktop_command_intent` records so glasses operate the phone-hosted virtual desktop without a second command contract.
