@@ -3071,7 +3071,7 @@ The meta glasses display supervisor stores resumable autonomous state in:
 
 ## MGW-271 Define physical Meta glasses launch-readiness checklist
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
