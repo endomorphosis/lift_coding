@@ -668,7 +668,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-393 Resolve code annotation in tests/test_agent_runner.py:438
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: quality
