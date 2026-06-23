@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 2f642aa77afb7f7041e3e95059fde436d1afae5b
+Fingerprint: 0718ea17eea44e1ac47022161ce15d79a91d113c
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 2
@@ -10,21 +10,26 @@ Track: ops
 
 ## Main Checkout Status
 
-- `UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `UU tests/test_virtual_ai_os_runtime_router.py`
+- ` M scripts/meta_glasses_display_todo_daemon.py`
+- ` M scripts/meta_glasses_display_todo_supervisor.py`
+- ` M tests/test_meta_glasses_display_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `unmerged=2`
+- Path categories: `modified=3`
 - Status paths:
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `tests/test_virtual_ai_os_runtime_router.py`
+  - `scripts/meta_glasses_display_todo_daemon.py`
+  - `scripts/meta_glasses_display_todo_supervisor.py`
+  - `tests/test_meta_glasses_display_todo_queue.py`
 - Name status:
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	tests/test_virtual_ai_os_runtime_router.py`
-- Staged name status:
-  - `U	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	tests/test_virtual_ai_os_runtime_router.py`
+  - `M	scripts/meta_glasses_display_todo_daemon.py`
+  - `M	scripts/meta_glasses_display_todo_supervisor.py`
+  - `M	tests/test_meta_glasses_display_todo_queue.py`
+- Diff stat:
+  - `scripts/meta_glasses_display_todo_daemon.py     | 114 ++++++--`
+  - ` scripts/meta_glasses_display_todo_supervisor.py | 358 +++++++++++-------------`
+  - ` tests/test_meta_glasses_display_todo_queue.py   |  62 +++-`
+  - ` 3 files changed, 307 insertions(+), 227 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -93,26 +98,23 @@ Work surface: `2` candidates, `2` sampled records.
   "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "2f642aa77afb7f7041e3e95059fde436d1afae5b",
+  "fingerprint": "0718ea17eea44e1ac47022161ce15d79a91d113c",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-05-26-vai-029-merge-unblock-resolution.md",
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\ttests/test_virtual_ai_os_runtime_router.py",
+    "diff_stat": "scripts/meta_glasses_display_todo_daemon.py     | 114 ++++++--\n scripts/meta_glasses_display_todo_supervisor.py | 358 +++++++++++-------------\n tests/test_meta_glasses_display_todo_queue.py   |  62 +++-\n 3 files changed, 307 insertions(+), 227 deletions(-)",
+    "name_status": "M\tscripts/meta_glasses_display_todo_daemon.py\nM\tscripts/meta_glasses_display_todo_supervisor.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
-      "unmerged": 2
+      "modified": 3
     },
-    "staged_name_status": "U\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\ttests/test_virtual_ai_os_runtime_router.py",
     "status_paths": [
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "tests/test_virtual_ai_os_runtime_router.py"
+      "scripts/meta_glasses_display_todo_daemon.py",
+      "scripts/meta_glasses_display_todo_supervisor.py",
+      "tests/test_meta_glasses_display_todo_queue.py"
     ],
     "status_short": [
-      "UU implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "UU tests/test_virtual_ai_os_runtime_router.py"
+      " M scripts/meta_glasses_display_todo_daemon.py",
+      " M scripts/meta_glasses_display_todo_supervisor.py",
+      " M tests/test_meta_glasses_display_todo_queue.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -127,8 +129,9 @@ Work surface: `2` candidates, `2` sampled records.
   ],
   "sample_count": 2,
   "sample_status_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "tests/test_virtual_ai_os_runtime_router.py"
+    "scripts/meta_glasses_display_todo_daemon.py",
+    "scripts/meta_glasses_display_todo_supervisor.py",
+    "tests/test_meta_glasses_display_todo_queue.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032",
