@@ -23,12 +23,40 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_doc_path as _repo_doc_path,
 )
-DEFAULT_STATE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "state"
-DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "worktrees"
-DISCOVERY_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
-OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_bundles"
-OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "objective_datasets"
-OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+
+_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__)
+SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
+IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
+REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
+HALLUCINATE_ENV_PREFIX = "HANDSFREE_HAO"
+DEFAULT_OBJECTIVE_GOAL_HEAP_PATH = _prefixed_env_path(
+    HALLUCINATE_ENV_PREFIX,
+    "OBJECTIVE_GOAL_HEAP_PATH",
+    _repo_doc_path(REPO_ROOT, "23-virtual-ai-os-objective-goal-heap.md"),
+)
+_HALLUCINATE_CONTEXT = _build_agent_supervisor_namespace_context(
+    REPO_ROOT,
+    HALLUCINATE_ENV_PREFIX,
+    namespace="hallucinate_multimodal_control",
+    task_board_stem="MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL",
+    task_board_docs_dir="hallucinate_app/docs",
+    objective_path=DEFAULT_OBJECTIVE_GOAL_HEAP_PATH,
+    objective_path_key="objective_goal_heap_path",
+    runtime_primary_package_names=("ipfs_accelerate",),
+)
+HALLUCINATE_CONTEXT = _HALLUCINATE_CONTEXT
+DEFAULT_TODO_PATH = _HALLUCINATE_CONTEXT.task_board_path
+HALLUCINATE_DATA_PATHS = _HALLUCINATE_CONTEXT.namespace_paths
+TASK_BOARD_PATH_OPTION = _HALLUCINATE_CONTEXT.task_board_path_option
+TASK_BOARD_PATH_KEY = _HALLUCINATE_CONTEXT.task_board_path_key
+DEFAULT_STATE_DIR = HALLUCINATE_DATA_PATHS.state_dir
+DEFAULT_WORKTREE_ROOT = HALLUCINATE_DATA_PATHS.worktree_root
+DISCOVERY_DIR = HALLUCINATE_DATA_PATHS.discovery_dir
+OBJECTIVE_GRAPH_PATH = HALLUCINATE_DATA_PATHS.objective_graph_path
+OBJECTIVE_BUNDLE_DIR = HALLUCINATE_DATA_PATHS.objective_bundle_dir
+OBJECTIVE_DATASET_DIR = HALLUCINATE_DATA_PATHS.objective_dataset_dir
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = HALLUCINATE_DATA_PATHS.objective_todo_vector_index_path
+DISCOVERY_OUTPUT_PATH = HALLUCINATE_DATA_PATHS.discovery_output_path()
 # Flag names split so the scanner does not treat "todo" as an unresolved code annotation.
 OBJECTIVE_TODO_VECTOR_INDEX_FLAG = "--objective-" + "to" + "do" + "-vector-index-path"
 OBJECTIVE_SURPLUS_MIN_TERMS_FLAG = "--objective-surplus-min-terms-per-" + "to" + "do"
