@@ -346,7 +346,11 @@ cadence remains parseable and resumable.
 
 ## VAI-035 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:14
 
+- Status: completed
+
 ## VAI-036 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-061-objective-gap-6e4124a265a4.md:32
+
+- Status: completed
 
 ## VAI-037 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-062-objective-gap-4f0e11db46cf.md:33
 
@@ -412,7 +416,11 @@ cadence remains parseable and resumable.
 
 ## VAI-068 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:1288
 
+- Status: completed
+
 ## VAI-069 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:1293
+
+- Status: completed
 
 ## VAI-070 Resolve code annotation in tests/test_hallucinate_multimodal_control_todo_queue.py:1298
 
@@ -443,6 +451,8 @@ cadence remains parseable and resumable.
 ## VAI-083 Resolve code annotation in tracking/PR-049-ios-glasses-player.md:20
 
 ## VAI-084 Resolve code annotation in tracking/PR-050-android-audio-route-monitor.md:18
+
+- Status: completed
 
 ## VAI-085 Resolve code annotation in tracking/PR-051-android-glasses-recorder-player.md:21
 
@@ -651,7 +661,7 @@ cadence remains parseable and resumable.
 
 ## VAI-110 Resolve code annotation in hallucinate_app/hallucinate_app/node/menu_generator.js:433
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
@@ -1798,7 +1808,7 @@ cadence remains parseable and resumable.
 
 ## VAI-338 Build the launch alignment map across VAI, MGW, and HAO
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
