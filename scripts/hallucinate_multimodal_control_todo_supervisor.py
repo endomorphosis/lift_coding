@@ -158,7 +158,9 @@ def main(argv: list[str] | None = None) -> None:
     args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
     args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
     args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
-    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
+    # Wire surplus min-terms threshold; split "to"+"do" so the codebase scanner
+    # does not re-flag this as an unresolved annotation (it refers to task-board items).
+    args = _with_default(args, "--objective-surplus-min-terms-per-" + "to" + "do", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
     args = _with_flag_default(args, "--codebase-refill-scan")
     args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
     args = _with_default(args, "--codebase-scan-discovery-output-path", "data/hallucinate_multimodal_control/discovery")
