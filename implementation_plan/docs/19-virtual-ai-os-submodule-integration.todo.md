@@ -1874,3 +1874,47 @@ cadence remains parseable and resumable.
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-343-vai-142-implementation-retry-budget.md
 - Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-142. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-343-vai-142-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-142 from strategy blocked_tasks.
+
+## VAI-344 Resolve code annotation in implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-344-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-345 Resolve code annotation in implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
+- Validation: test -f implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-345-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-346 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-346-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-347 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-347-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
