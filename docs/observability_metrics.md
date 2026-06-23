@@ -219,6 +219,21 @@ Hardware-free coverage for this proof lives in
 and validates the mobile action payload that a glasses client or simulator can
 render as terminal output.
 
+### Swissknife Virtual UI And ORB Binding
+
+Swissknife is bound into the virtual AI OS as both a virtual desktop surface and
+an ORB runtime surface. The repo-local contract lives in
+`src/handsfree/swissknife_virtual_ui.py` and points to:
+
+- virtual UI: `swissknife sk-desktop launch mcp-control --workspace virtual-ai-os`
+- ORB router: `swissknife/src/services/mcp-orb-capability-router.ts`
+- descriptor pack: `swissknife/src/services/mcp-ipfs-datasets-descriptor-pack.ts`
+- ORB transports: `local`, `websocket`, `http`, and `mcp-server`
+
+The routing kernel attaches this binding metadata to `swissknife_orb` dispatch
+plans, so operator-console and mobile/glasses fallbacks can render the same
+capability route without guessing which Swissknife source owns the interface.
+
 ### Virtual AI OS Feature Flags
 
 ```bash

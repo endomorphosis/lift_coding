@@ -25,6 +25,7 @@ from handsfree.ai.models import (
     CapabilityRuntimeSurface,
 )
 from handsfree.ai.runtime_router import resolve_virtual_ai_os_runtime_route
+from handsfree.swissknife_virtual_ui import build_swissknife_surface_metadata
 
 NORMALIZED_ERROR_CONTRACT_ID = "handsfree.capability.error.v1"
 
@@ -368,6 +369,7 @@ def _entrypoints_for_route(route: AICapabilityRoute) -> tuple[CapabilitySurfaceE
 
 def _swissknife_orb_surface_metadata() -> Mapping[str, Any]:
     return {
+        **build_swissknife_surface_metadata(),
         "virtual_ui_plane": "swissknife.virtual_desktop",
         "orb_plane": "swissknife.orb",
         "descriptor_authoring": "swissknife/src/services/mcp-idl.ts",

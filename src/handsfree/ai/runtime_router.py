@@ -14,6 +14,7 @@ from .models import (
 from .runtime_placement import resolve_virtual_ai_os_runtime_placement
 from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
 from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
+from handsfree.swissknife_virtual_ui import get_swissknife_orb_handler_ref
 
 
 _DATASETS_CLI_COMMAND = "python external/ipfs_datasets/ipfs_datasets_cli.py"
@@ -134,7 +135,7 @@ def _resolve_handler(
     if runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP:
         return "hallucinate_app/index.js#operator_console", None
     if runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB:
-        return f"swissknife.orb::{capability_id}", None
+        return get_swissknife_orb_handler_ref(capability_id), None
     if runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER:
         return f"handsfree.mcp::{capability_id}", None
     raise ValueError(

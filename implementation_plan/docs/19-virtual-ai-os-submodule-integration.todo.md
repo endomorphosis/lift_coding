@@ -95,7 +95,7 @@ cadence remains parseable and resumable.
 
 ## VAI-006 Bind Swissknife into the virtual UI and ORB plane
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: ui
@@ -1154,9 +1154,8 @@ cadence remains parseable and resumable.
 
 ## VAI-336 Resolve merge retry-budget failure for VAI-006
 
-- Status: blocked
+- Status: completed
 - Completion: manual
-- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
 - Priority: P1
 - Track: ops
 - Depends on: 
