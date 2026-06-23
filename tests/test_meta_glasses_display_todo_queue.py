@@ -280,6 +280,9 @@ def test_meta_display_wrappers_delegate_reusable_namespace_context():
     assert isinstance(daemon_module.META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
     assert isinstance(supervisor_module.META_DISPLAY_CONTEXT, AgentSupervisorNamespaceContext)
     assert daemon_module.META_DISPLAY_CONTEXT is daemon_module._META_DISPLAY_CONTEXT
+    assert "external/ipfs_accelerate" in daemon_module.META_DISPLAY_WORKTREE_SUBMODULE_PATHS
+    assert "external/ipfs_datasets" in daemon_module.META_DISPLAY_WORKTREE_SUBMODULE_PATHS
+    assert supervisor_module.META_DISPLAY_WORKTREE_SUBMODULE_PATHS == daemon_module.META_DISPLAY_WORKTREE_SUBMODULE_PATHS
     for module in (daemon_module, supervisor_module):
         assert module.META_DISPLAY_CONTEXT.namespace_paths.namespace == "meta_glasses_display_widgets"
         assert module.META_DISPLAY_CONTEXT.task_board_path == TASK_BOARD_PATH

@@ -67,6 +67,8 @@ _meta_display_discovery_output_kwargs = _META_DISPLAY_BOOTSTRAP_PATHS.output_pat
 DISCOVERY_OUTPUT_PATH = _meta_display_discovery_output_path({"discovery_dir": DISCOVERY_DIR})
 VALIDATION_RETRY_BUDGET = 3
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
     "swissknife",
     "external/meta-wearables-dat-android",
     "external/meta-wearables-dat-ios",

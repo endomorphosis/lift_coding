@@ -107,7 +107,13 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/backup/",
     ),
 )
-HALLUCINATE_WORKTREE_SUBMODULE_PATHS = ("hallucinate_app", "ipfs_datasets_py", "swissknife")
+HALLUCINATE_WORKTREE_SUBMODULE_PATHS = (
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "hallucinate_app",
+    "ipfs_datasets_py",
+    "swissknife",
+)
 
 from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (  # noqa: E402
     build_configured_backlog_recorder_bundle,

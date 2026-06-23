@@ -180,6 +180,9 @@ def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     assert isinstance(daemon_module._HALLUCINATE_CONTEXT, AgentSupervisorNamespaceContext)
     assert isinstance(supervisor_module.HALLUCINATE_CONTEXT, AgentSupervisorNamespaceContext)
     assert daemon_module.HALLUCINATE_CONTEXT is daemon_module._HALLUCINATE_CONTEXT
+    assert "external/ipfs_accelerate" in daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
+    assert "external/ipfs_datasets" in daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
+    assert supervisor_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS == daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
     assert daemon_module._HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
     assert supervisor_module.HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
     assert daemon_module._HALLUCINATE_CONTEXT.task_board_path == TASK_BOARD_PATH
