@@ -414,7 +414,15 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     active_goals = [goal for goal in goals if goal.status == "active"]
     schedule_ids = [record.goal_id for record in objective_heap_schedule(goals)]
     completed_launch_ids = ["VAIOS-G689", "VAIOS-G690", "VAIOS-G691", "VAIOS-G692"]
-    launch_ids = ["VAIOS-G693", "VAIOS-G694", "VAIOS-G695", "VAIOS-G696"]
+    launch_ids = [
+        "VAIOS-G693",
+        "VAIOS-G694",
+        "VAIOS-G695",
+        "VAIOS-G696",
+        "VAIOS-G697",
+        "VAIOS-G698",
+        "VAIOS-G699",
+    ]
     goals_by_id = {goal.goal_id: goal for goal in goals}
     active_launch_ids = [
         goal_id
@@ -424,6 +432,7 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
 
     assert len(active_goals) <= 16
     assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
+    assert all(goals_by_id[goal_id].status == "active" for goal_id in ["VAIOS-G697", "VAIOS-G698", "VAIOS-G699"])
     if active_launch_ids:
         assert all(goal_id in schedule_ids for goal_id in active_launch_ids)
         assert all(schedule_ids.index(goal_id) < schedule_ids.index("VAIOS-G081") for goal_id in active_launch_ids)
@@ -437,6 +446,12 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     ).lower()
     for term in ("phone", "desktop", "swissknife", "hallucinate app", "meta glasses", "offload"):
         assert term in launch_text
+    launch_governance_text = "\n".join(
+        goals_by_id[goal_id].fields.get("goal", "")
+        for goal_id in ("VAIOS-G697", "VAIOS-G698", "VAIOS-G699")
+    ).lower()
+    for term in ("launch-readiness", "archive", "transient lock"):
+        assert term in launch_governance_text
 
     active_interop_keys = [
         interoperability_pair_key(goal.fields.get("interoperability_pair", ""))
