@@ -62,8 +62,8 @@ cadence remains parseable and resumable.
 
 ## VAI-003 Define the cross-repo capability registry
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: reconciled 2026-06-23: current main contains the cross-repo capability registry implementation and `PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_capability_registry.py` passes; stale branch `implementation/vai-003-attempt-1-1781233228` was not merged because it is based on an older tree and would reintroduce obsolete deletions.
 - Priority: P0
 - Track: integration
 - Depends on: VAI-001
