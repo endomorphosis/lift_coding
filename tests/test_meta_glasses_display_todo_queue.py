@@ -408,17 +408,33 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
                 yield from credential_like_paths(child, f"{path}[{index}]")
 
     assert fixture["fixture_id"] == "mgw-267-phone-glasses-terminal"
-    assert fixture["schema_version"] == "1.1.0"
-    assert launch_replay["task_id"] == "MGW-270"
-    assert launch_replay["replay_id"] == "launch-session-widget-replay-mgw-270"
+    assert fixture["schema_version"] == "1.2.0"
+    assert launch_replay["task_id"] == "MGW-272"
+    assert launch_replay["replay_id"] == "launch-session-widget-replay-mgw-272"
+    assert launch_replay["extends_replay_id"] == "launch-session-widget-replay-mgw-270"
     assert launch_replay["render_contract"] == "handsfree.virtual-desktop-session"
     assert launch_replay["terminal_contract"] == REMOTE_TERMINAL_CONTRACT_ID
+    assert launch_replay["command_contract"] == "vai.shared_capability_envelope@0.1.0"
+    assert launch_replay["no_second_widget_command_contract"] is True
     assert launch_replay["single_replay"] is True
     assert set(launch_replay["covers"]) == {
         "phone_hosted_virtual_desktop_status",
         "desktop_peer_offload_state",
         "confirmation_cancel_retry_actions",
         "hallucinate_app_receipt_ids",
+        "shared_vai_capability_receipts",
+        "placement_recovery_receipt_ids",
+    }
+    assert set(launch_replay["shared_vai_capability_receipt_cids"]) == {
+        "bafy-mgw272-vai-render-receipt",
+        "bafy-mgw272-vai-confirm-receipt",
+        "bafy-mgw272-vai-update-receipt",
+        "bafy-mgw272-vai-cancel-receipt",
+    }
+    assert set(launch_replay["placement_recovery_receipt_cids"]) == {
+        "bafy-mgw267-placement-phone",
+        "bafy-mgw267-placement-peer",
+        "bafy-mgw272-recovery-preview",
     }
     assert offline_contract["deterministic"] is True
     assert offline_contract["requires_meta_credentials"] is False
@@ -452,9 +468,11 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         state = event["widget_state"]
         descriptor_refs = state["descriptor_refs"]
         hallucinate_app = state["hallucinate_app"]
+        shared_receipts = state["shared_vai_receipts"]
         peer_receipts = state["peer_offload"]["receipts"]
         regions = state["regions"]
         action_region = regions["action_region"]
+        placement_receipt_cid = state["peer_offload"]["compute_placement"]["placement_receipt_cid"]
 
         assert state["widget_kind"] == "handsfree.virtual-desktop-session"
         assert state["session_identity"]["session_id"] == "vdesktop-session-mgw-267"
@@ -480,11 +498,49 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         assert hallucinate_app["virtual_desktop_command_intent_id"].startswith(
             "ha-mgw270-command-"
         )
+        assert shared_receipts["command_contract"] == launch_replay["command_contract"]
+        assert shared_receipts["capability_id"].startswith("vai.glasses_widget.")
+        assert shared_receipts["capability_receipt_cid"] in (
+            launch_replay["shared_vai_capability_receipt_cids"]
+        )
+        assert shared_receipts["mediation_receipt_id"] == hallucinate_app["mediation_receipt_id"]
+        assert shared_receipts["placement_receipt_cid"] == placement_receipt_cid
+        assert shared_receipts["recovery_receipt_cid"] == "bafy-mgw272-recovery-preview"
+        assert shared_receipts["policy_receipt_cid"] == descriptor_refs["policy_receipt_cid"]
+        assert shared_receipts["orb_receipt_cid"] == descriptor_refs["orb_receipt_cid"]
         assert action_region["actions"]
         assert all(
             action["hallucinate_app_receipt_id"] == hallucinate_app["mediation_receipt_id"]
             for action in action_region["actions"]
         )
+        assert all(
+            action["mediation_receipt_id"] == hallucinate_app["mediation_receipt_id"]
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["capability_receipt_cid"] in launch_replay["shared_vai_capability_receipt_cids"]
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["placement_receipt_cid"] == placement_receipt_cid
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["recovery_receipt_cid"] == shared_receipts["recovery_receipt_cid"]
+            for action in action_region["actions"]
+        )
+        assert all(
+            action["command_contract"] == launch_replay["command_contract"]
+            for action in action_region["actions"]
+        )
+        assert {
+            action["vai_capability_id"] for action in action_region["actions"]
+        } <= {
+            "vai.glasses_widget.render",
+            "vai.glasses_widget.update",
+            "vai.glasses_widget.confirm",
+            "vai.glasses_widget.cancel",
+        }
         assert all(
             action["correlation_id"] == event["correlation_id"]
             for action in action_region["actions"]
@@ -494,6 +550,10 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
             for action in action_region["actions"]
         )
         assert peer_receipts["policy_receipt_cid"] == descriptor_refs["policy_receipt_cid"]
+        assert peer_receipts["capability_receipt_cid"] == shared_receipts["capability_receipt_cid"]
+        assert peer_receipts["mediation_receipt_id"] == shared_receipts["mediation_receipt_id"]
+        assert peer_receipts["placement_receipt_cid"] == placement_receipt_cid
+        assert peer_receipts["recovery_receipt_cid"] == shared_receipts["recovery_receipt_cid"]
         assert "open_mobile_card" in state["recovery"]["next_actions"]
         assert state["recovery"]["fallback"]["render_path"] == "mobile-card"
 
@@ -518,6 +578,31 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         action["hallucinate_app_receipt_id"] == "ha-mgw270-confirm-receipt"
         for action in prompt["actions"]
     )
+    assert all(
+        action["mediation_receipt_id"] == "ha-mgw270-confirm-receipt"
+        for action in prompt["actions"]
+    )
+    assert [action["vai_capability_id"] for action in prompt["actions"]] == [
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.cancel",
+        "vai.glasses_widget.update",
+    ]
+    assert all(
+        action["capability_receipt_cid"] in launch_replay["shared_vai_capability_receipt_cids"]
+        for action in prompt["actions"]
+    )
+    assert all(
+        action["placement_receipt_cid"] == "bafy-mgw267-placement-phone"
+        for action in prompt["actions"]
+    )
+    assert all(
+        action["recovery_receipt_cid"] == "bafy-mgw272-recovery-preview"
+        for action in prompt["actions"]
+    )
+    assert all(
+        action["command_contract"] == launch_replay["command_contract"]
+        for action in prompt["actions"]
+    )
 
     peer_offload = events[2]["widget_state"]["peer_offload"]
     assert peer_offload["availability"] == "transferring"
@@ -537,6 +622,11 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         peer_offload["actions"]
     )
     assert peer_offload["receipts"]["hallucinate_app_receipt_id"] == "ha-mgw270-offload-receipt"
+    assert peer_offload["receipts"]["capability_receipt_cid"] == (
+        "bafy-mgw272-vai-update-receipt"
+    )
+    assert peer_offload["receipts"]["placement_receipt_cid"] == "bafy-mgw267-placement-peer"
+    assert peer_offload["receipts"]["recovery_receipt_cid"] == "bafy-mgw272-recovery-preview"
 
     launch_action_kinds = {
         action["kind"]
@@ -544,6 +634,18 @@ def test_hardware_free_phone_glasses_terminal_fixture_is_deterministic():
         for action in event["widget_state"]["regions"]["action_region"]["actions"]
     }
     assert {"confirm", "cancel", "retry"} <= launch_action_kinds
+
+    launch_capability_ids = {
+        action["vai_capability_id"]
+        for event in events
+        for action in event["widget_state"]["regions"]["action_region"]["actions"]
+    } | {action["vai_capability_id"] for action in prompt["actions"]}
+    assert launch_capability_ids == {
+        "vai.glasses_widget.render",
+        "vai.glasses_widget.update",
+        "vai.glasses_widget.confirm",
+        "vai.glasses_widget.cancel",
+    }
 
 
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():

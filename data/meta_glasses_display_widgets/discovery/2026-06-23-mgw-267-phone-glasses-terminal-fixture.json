@@ -1,6 +1,6 @@
 {
   "fixture_id": "mgw-267-phone-glasses-terminal",
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "description": "Deterministic mobile-hosted Meta glasses terminal trace for virtual desktop status, confirmation, peer-offload updates, and launch-session receipt replay evidence.",
   "offline_contract": {
     "deterministic": true,
@@ -16,21 +16,37 @@
     }
   },
   "launch_replay_evidence": {
-    "task_id": "MGW-270",
-    "replay_id": "launch-session-widget-replay-mgw-270",
+    "task_id": "MGW-272",
+    "replay_id": "launch-session-widget-replay-mgw-272",
+    "extends_replay_id": "launch-session-widget-replay-mgw-270",
     "render_contract": "handsfree.virtual-desktop-session",
     "terminal_contract": "handsfree.meta-glasses/remote-terminal@0.1.0",
+    "command_contract": "vai.shared_capability_envelope@0.1.0",
+    "no_second_widget_command_contract": true,
     "single_replay": true,
     "covers": [
       "phone_hosted_virtual_desktop_status",
       "desktop_peer_offload_state",
       "confirmation_cancel_retry_actions",
-      "hallucinate_app_receipt_ids"
+      "hallucinate_app_receipt_ids",
+      "shared_vai_capability_receipts",
+      "placement_recovery_receipt_ids"
     ],
     "hallucinate_app_receipt_ids": [
       "ha-mgw270-render-receipt",
       "ha-mgw270-confirm-receipt",
       "ha-mgw270-offload-receipt"
+    ],
+    "shared_vai_capability_receipt_cids": [
+      "bafy-mgw272-vai-render-receipt",
+      "bafy-mgw272-vai-confirm-receipt",
+      "bafy-mgw272-vai-update-receipt",
+      "bafy-mgw272-vai-cancel-receipt"
+    ],
+    "placement_recovery_receipt_cids": [
+      "bafy-mgw267-placement-phone",
+      "bafy-mgw267-placement-peer",
+      "bafy-mgw272-recovery-preview"
     ]
   },
   "events": [
@@ -63,6 +79,18 @@
           "mediation_receipt_id": "ha-mgw270-render-receipt",
           "virtual_desktop_command_intent_id": "ha-mgw270-command-render",
           "rendered_receipt_ids": ["ha-mgw270-render-receipt"]
+        },
+        "shared_vai_receipts": {
+          "capability_id": "vai.glasses_widget.render",
+          "action": "render",
+          "command_contract": "vai.shared_capability_envelope@0.1.0",
+          "capability_receipt_cid": "bafy-mgw272-vai-render-receipt",
+          "mediation_receipt_id": "ha-mgw270-render-receipt",
+          "placement_receipt_cid": "bafy-mgw267-placement-phone",
+          "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+          "policy_receipt_cid": "bafy-mgw267-policy",
+          "orb_receipt_cid": "bafy-mgw267-orb-status",
+          "render_result": "fallback_rendered"
         },
         "render_context": {
           "render_path": "mobile-card",
@@ -114,7 +142,13 @@
                 "kind": "retry",
                 "backend_action_id": "terminal.retry_pairing",
                 "correlation_id": "corr-mgw-267-status",
-                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt",
+                "vai_capability_id": "vai.glasses_widget.update",
+                "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+                "mediation_receipt_id": "ha-mgw270-render-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-phone",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               },
               {
                 "id": "open_mobile_card",
@@ -122,7 +156,13 @@
                 "kind": "fallback",
                 "backend_action_id": "terminal.open_mobile_card",
                 "correlation_id": "corr-mgw-267-status",
-                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-render-receipt",
+                "vai_capability_id": "vai.glasses_widget.render",
+                "capability_receipt_cid": "bafy-mgw272-vai-render-receipt",
+                "mediation_receipt_id": "ha-mgw270-render-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-phone",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               }
             ]
           },
@@ -144,7 +184,11 @@
           "actions": ["open_mobile_card"],
           "receipts": {
             "policy_receipt_cid": "bafy-mgw267-policy",
-            "orb_receipt_cid": "bafy-mgw267-orb-status"
+            "orb_receipt_cid": "bafy-mgw267-orb-status",
+            "capability_receipt_cid": "bafy-mgw272-vai-render-receipt",
+            "mediation_receipt_id": "ha-mgw270-render-receipt",
+            "placement_receipt_cid": "bafy-mgw267-placement-phone",
+            "recovery_receipt_cid": "bafy-mgw272-recovery-preview"
           }
         },
         "recovery": {
@@ -188,6 +232,18 @@
           "virtual_desktop_command_intent_id": "ha-mgw270-command-confirm",
           "rendered_receipt_ids": ["ha-mgw270-confirm-receipt"]
         },
+        "shared_vai_receipts": {
+          "capability_id": "vai.glasses_widget.confirm",
+          "action": "confirm",
+          "command_contract": "vai.shared_capability_envelope@0.1.0",
+          "capability_receipt_cid": "bafy-mgw272-vai-confirm-receipt",
+          "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+          "placement_receipt_cid": "bafy-mgw267-placement-phone",
+          "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+          "policy_receipt_cid": "bafy-mgw267-policy",
+          "orb_receipt_cid": "bafy-mgw267-orb-confirm",
+          "render_result": "confirmed"
+        },
         "render_context": {
           "render_path": "mobile-card",
           "fallback_path": "display-webapp",
@@ -224,7 +280,13 @@
               "focus_order": 1,
               "backend_action_id": "terminal.continue",
               "correlation_id": "corr-mgw-267-confirm",
-              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+              "vai_capability_id": "vai.glasses_widget.confirm",
+              "capability_receipt_cid": "bafy-mgw272-vai-confirm-receipt",
+              "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+              "placement_receipt_cid": "bafy-mgw267-placement-phone",
+              "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+              "command_contract": "vai.shared_capability_envelope@0.1.0"
             },
             {
               "id": "cancel_task",
@@ -233,7 +295,13 @@
               "focus_order": 2,
               "backend_action_id": "terminal.cancel",
               "correlation_id": "corr-mgw-267-confirm",
-              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+              "vai_capability_id": "vai.glasses_widget.cancel",
+              "capability_receipt_cid": "bafy-mgw272-vai-cancel-receipt",
+              "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+              "placement_receipt_cid": "bafy-mgw267-placement-phone",
+              "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+              "command_contract": "vai.shared_capability_envelope@0.1.0"
             },
             {
               "id": "retry_confirmation",
@@ -242,7 +310,13 @@
               "focus_order": 3,
               "backend_action_id": "terminal.retry",
               "correlation_id": "corr-mgw-267-confirm",
-              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+              "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+              "vai_capability_id": "vai.glasses_widget.update",
+              "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+              "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+              "placement_receipt_cid": "bafy-mgw267-placement-phone",
+              "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+              "command_contract": "vai.shared_capability_envelope@0.1.0"
             }
           ]
         },
@@ -273,7 +347,13 @@
                 "kind": "confirm",
                 "backend_action_id": "terminal.continue",
                 "correlation_id": "corr-mgw-267-confirm",
-                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+                "vai_capability_id": "vai.glasses_widget.confirm",
+                "capability_receipt_cid": "bafy-mgw272-vai-confirm-receipt",
+                "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-phone",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               },
               {
                 "id": "cancel_task",
@@ -281,7 +361,13 @@
                 "kind": "cancel",
                 "backend_action_id": "terminal.cancel",
                 "correlation_id": "corr-mgw-267-confirm",
-                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+                "vai_capability_id": "vai.glasses_widget.cancel",
+                "capability_receipt_cid": "bafy-mgw272-vai-cancel-receipt",
+                "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-phone",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               },
               {
                 "id": "retry_confirmation",
@@ -289,7 +375,13 @@
                 "kind": "retry",
                 "backend_action_id": "terminal.retry",
                 "correlation_id": "corr-mgw-267-confirm",
-                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-confirm-receipt",
+                "vai_capability_id": "vai.glasses_widget.update",
+                "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+                "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-phone",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               }
             ]
           },
@@ -320,7 +412,11 @@
           "actions": ["select_peer", "open_mobile_card"],
           "receipts": {
             "policy_receipt_cid": "bafy-mgw267-policy",
-            "orb_receipt_cid": "bafy-mgw267-orb-confirm"
+            "orb_receipt_cid": "bafy-mgw267-orb-confirm",
+            "capability_receipt_cid": "bafy-mgw272-vai-confirm-receipt",
+            "mediation_receipt_id": "ha-mgw270-confirm-receipt",
+            "placement_receipt_cid": "bafy-mgw267-placement-phone",
+            "recovery_receipt_cid": "bafy-mgw272-recovery-preview"
           }
         },
         "recovery": {
@@ -363,6 +459,19 @@
           "mediation_receipt_id": "ha-mgw270-offload-receipt",
           "virtual_desktop_command_intent_id": "ha-mgw270-command-offload",
           "rendered_receipt_ids": ["ha-mgw270-offload-receipt"]
+        },
+        "shared_vai_receipts": {
+          "capability_id": "vai.glasses_widget.update",
+          "action": "update",
+          "command_contract": "vai.shared_capability_envelope@0.1.0",
+          "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+          "mediation_receipt_id": "ha-mgw270-offload-receipt",
+          "placement_receipt_cid": "bafy-mgw267-placement-peer",
+          "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+          "policy_receipt_cid": "bafy-mgw267-policy",
+          "orb_receipt_cid": "bafy-mgw267-orb-offload",
+          "transfer_receipt_cid": "bafy-mgw267-transfer",
+          "render_result": "updated"
         },
         "render_context": {
           "render_path": "mobile-card",
@@ -414,7 +523,13 @@
                 "kind": "cancel",
                 "backend_action_id": "terminal.cancel_offload",
                 "correlation_id": "corr-mgw-267-offload",
-                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt",
+                "vai_capability_id": "vai.glasses_widget.cancel",
+                "capability_receipt_cid": "bafy-mgw272-vai-cancel-receipt",
+                "mediation_receipt_id": "ha-mgw270-offload-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-peer",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               },
               {
                 "id": "retry_offload",
@@ -422,7 +537,13 @@
                 "kind": "retry",
                 "backend_action_id": "terminal.retry_offload",
                 "correlation_id": "corr-mgw-267-offload",
-                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt",
+                "vai_capability_id": "vai.glasses_widget.update",
+                "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+                "mediation_receipt_id": "ha-mgw270-offload-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-peer",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               },
               {
                 "id": "fallback_to_phone",
@@ -430,7 +551,13 @@
                 "kind": "fallback",
                 "backend_action_id": "terminal.fallback_to_phone",
                 "correlation_id": "corr-mgw-267-offload",
-                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+                "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt",
+                "vai_capability_id": "vai.glasses_widget.cancel",
+                "capability_receipt_cid": "bafy-mgw272-vai-cancel-receipt",
+                "mediation_receipt_id": "ha-mgw270-offload-receipt",
+                "placement_receipt_cid": "bafy-mgw267-placement-peer",
+                "recovery_receipt_cid": "bafy-mgw272-recovery-preview",
+                "command_contract": "vai.shared_capability_envelope@0.1.0"
               }
             ]
           },
@@ -473,7 +600,11 @@
             "policy_receipt_cid": "bafy-mgw267-policy",
             "orb_receipt_cid": "bafy-mgw267-orb-offload",
             "transfer_receipt_cid": "bafy-mgw267-transfer",
-            "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt"
+            "hallucinate_app_receipt_id": "ha-mgw270-offload-receipt",
+            "capability_receipt_cid": "bafy-mgw272-vai-update-receipt",
+            "mediation_receipt_id": "ha-mgw270-offload-receipt",
+            "placement_receipt_cid": "bafy-mgw267-placement-peer",
+            "recovery_receipt_cid": "bafy-mgw272-recovery-preview"
           }
         },
         "recovery": {

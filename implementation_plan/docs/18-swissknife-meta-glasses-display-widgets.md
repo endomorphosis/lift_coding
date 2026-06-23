@@ -283,6 +283,16 @@ MGW-271 physical Meta glasses launch-readiness checklist:
 
 MGW-271 launch-readiness evidence lives in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-271-physical-launch-readiness.md` and ties the physical Meta glasses checklist back to the MGW-270 hardware-free replay.
 
+MGW-272 shared VAI capability receipt binding:
+
+- The launch replay fixture remains the single `handsfree.virtual-desktop-session` / `handsfree.meta-glasses/remote-terminal@0.1.0` event stream; `launch_replay_evidence.no_second_widget_command_contract: true` forbids a second glasses widget command contract.
+- The replay now uses `command_contract: "vai.shared_capability_envelope@0.1.0"` and records `shared_vai_capability_receipt_cids` for `vai.glasses_widget.render`, `vai.glasses_widget.update`, `vai.glasses_widget.confirm`, and `vai.glasses_widget.cancel`.
+- Each widget state carries `shared_vai_receipts` with the active VAI capability ID, `capability_receipt_cid`, Hallucinate App `mediation_receipt_id`, `policy_receipt_cid`, `orb_receipt_cid`, `placement_receipt_cid`, `recovery_receipt_cid`, and render result used by the phone-hosted virtual desktop session.
+- Every displayed glasses action in `regions.action_region.actions[*]` and every `confirmation_prompt.actions[*]` references the same shared VAI capability envelope, the relevant capability receipt, the Hallucinate App mediation receipt, and the placement/recovery receipt for the active phone-hosted desktop state.
+- The render/status event binds fallback phone-preview actions to the render/update capability receipts, the confirmation event binds continue/cancel/retry actions to confirm/cancel/update receipts, and the desktop-peer transfer event binds cancel/retry/fallback actions to cancel/update receipts while retaining the existing `terminal.*` backend action IDs.
+- `peer_offload.receipts` includes the same capability, mediation, placement, and recovery receipt references as the event-level `shared_vai_receipts`, so phone, Hallucinate App, Swissknife ORB, mobile-card, simulator, and Meta glasses views inspect one receipt chain.
+- MGW-272 evidence lives in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-272-shared-vai-capability-receipts.md` and is validated by `tests/test_meta_glasses_display_todo_queue.py` with the shared VAI registry coverage in `tests/test_virtual_ai_os_capability_registry.py`.
+
 Minimal manifest state example:
 
 ```json
