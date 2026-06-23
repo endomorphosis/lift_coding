@@ -99,6 +99,34 @@ def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled
     assert selected_when_open == [lock_event, conflict_event]
 
 
+def test_daemon_skips_strategy_filtered_failed_merge_reconciliation():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    conflict_event = {
+        "task_id": "VAI-046",
+        "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
+    }
+    lock_event = {
+        "task_id": "VAI-047",
+        "merge_result": {"merged": False, "attempted": False, "reason": "lock_exists"},
+    }
+
+    selected_when_deprioritized = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [conflict_event, lock_event],
+        max_merges=3,
+        deprioritized_task_ids={"VAI-046"},
+    )
+    selected_when_blocked = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
+        [conflict_event, lock_event],
+        max_merges=0,
+        blocked_task_ids={"VAI-047"},
+    )
+
+    assert selected_when_deprioritized == [lock_event]
+    assert selected_when_blocked == []
+
+
 def test_daemon_focus_tracks_keep_launch_first_for_legacy_strategies(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (

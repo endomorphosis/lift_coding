@@ -308,3 +308,54 @@ def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
         "run_once",
     ]
     assert calls[-2:] == ["loop_init", "loop_run"]
+
+
+def test_supervisor_rewrite_strategy_blocks_stale_merge_reconciliation(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTaskState
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    strategy_path = state_dir / "virtual_ai_os_strategy.json"
+    strategy_path.write_text(
+        json.dumps(
+            {
+                "generation": 7,
+                "focus_tracks": ["ops", "launch"],
+                "blocked_tasks": ["VAI-KEEP"],
+                "deprioritized_tasks": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=tmp_path / "vai.todo.md",
+            state_path=state_dir / "virtual_ai_os_task_state.json",
+            strategy_path=strategy_path,
+            events_path=state_dir / "virtual_ai_os_supervisor_events.jsonl",
+            state_dir=state_dir,
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            repo_root=tmp_path,
+        )
+    )
+    state = PortalTaskState(
+        active_task_id="VAI-046",
+        active_task_track="ops",
+        active_phase="merge_resolver",
+    )
+
+    strategy = supervisor.rewrite_strategy(
+        state,
+        "merge_resolver stalled for active task VAI-046: no active worker for 252s",
+    )
+
+    assert strategy["generation"] == 8
+    assert strategy["focus_tracks"][0] == "launch"
+    assert strategy["blocked_tasks"] == ["VAI-KEEP", "VAI-046"]
+    assert strategy["deprioritized_tasks"] == ["VAI-046"]
