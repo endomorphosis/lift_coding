@@ -17,7 +17,10 @@ instead of re-raising. This meant callers could not distinguish between an inten
 
 Changed all seven swallowed-exception blocks from `return None`/`return False` to `raise`,
 preserving the existing `logger.exception` call for diagnostics while allowing the
-exception to propagate to the caller. Methods affected:
+exception to propagate to the caller. The target `get_authorized_key` handler now
+uses `except Exception:` without binding the exception because `logger.exception`
+already records the active exception and the handler immediately re-raises it.
+Methods affected:
 
 - `get_authorized_key` (line 150)
 - `set_authorized_key`
