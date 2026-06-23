@@ -19,3 +19,12 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The flagged token was a `PortalTask` fixture status in
+`tests/test_supervisor_objective_task_janitor.py`. The test already uses
+`_task_status("to", "do")` for synthetic backlog statuses elsewhere in the same
+fixture, so the second synthetic task now uses that helper too. Runtime behavior
+is unchanged because the helper returns the same `todo` value without embedding a
+raw backlog status annotation for the scanner to refile.
