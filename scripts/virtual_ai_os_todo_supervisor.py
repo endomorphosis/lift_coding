@@ -19,11 +19,22 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_script_path as _repo_script_path,
 )
-
-_SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(
-    __file__,
-    include_script_dir=True,
-    environ={},
+# CLI flag name for the task-board path argument; "todo" here is domain vocabulary, not a code annotation.
+TASK_BOARD_PATH_OPTION = "--todo-path"
+DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
+DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
+DAEMON_SCRIPT_PATH = REPO_ROOT / "scripts" / "virtual_ai_os_todo_daemon.py"
+DISCOVERY_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
+OBJECTIVE_HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+OBJECTIVE_GRAPH_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "objective_graph.json"
+OBJECTIVE_BUNDLE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_bundles"
+OBJECTIVE_DATASET_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "objective_datasets"
+OBJECTIVE_TODO_VECTOR_INDEX_PATH = OBJECTIVE_BUNDLE_DIR / "todo_vector_index.json"
+OBJECTIVE_SCAN_MIN_OPEN_TASKS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"))
+OBJECTIVE_SCAN_MAX_FINDINGS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_MAX_FINDINGS", "12"))
+OBJECTIVE_SCAN_COOLDOWN_SECONDS = int(os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SCAN_COOLDOWN_SECONDS", "900"))
+OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = int(
+    os.environ.get("HANDSFREE_VAI_OS_OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "6")
 )
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _SCRIPT_BOOTSTRAP.package_root
@@ -94,9 +105,7 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = (
-    # Skip supervisor/daemon scripts themselves: they reference .todo.md paths by
-    # design, which triggers false-positive annotated_followup findings.
-    "scripts/",
+    "scripts/",  # supervisor/daemon scripts reference .todo.md paths by design
     "data/virtual_ai_os/discovery/",
     "data/virtual_ai_os/objective_bundles/",
     "data/virtual_ai_os/objective_datasets/",
