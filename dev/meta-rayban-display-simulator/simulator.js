@@ -166,6 +166,73 @@
     },
   };
 
+  const REMOTE_TERMINAL_CONTRACT_ID = 'handsfree.meta-glasses/remote-terminal@0.1.0';
+
+  const DEFAULT_COMMAND_SESSION = {
+    schema: 'handsfree.meta-rayban-display/browser-simulator-session',
+    schema_version: '0.1.0',
+    session_model: 'handsfree.virtual-desktop-session',
+    command_model: 'handsfree.command-session@0.1.0',
+    session_identity: {
+      session_id: 'meta-rayban-browser-session',
+      phone_host_id: 'browser-simulator-phone-host',
+      desktop_id: 'mobile-hosted-virtual-desktop',
+    },
+    host_mode: 'mobile_hosted',
+    pairing: {
+      state: 'unpaired',
+      requires_paired_hardware: false,
+      fallback_when_unpaired: 'mobile-card',
+    },
+    surfaces: {
+      display: {
+        endpoint_id: 'meta_glasses_display_widget',
+        state: 'display_ready',
+        render_path: 'display-webapp',
+        fallback_render_path: 'mobile-card',
+      },
+      audio: {
+        input_endpoint_id: 'meta_glasses_audio_input',
+        output_endpoint_id: 'meta_glasses_audio_output',
+        command_state: 'ready',
+        tts_state: 'ready',
+        fallback_input_endpoint_id: 'phone_microphone',
+        fallback_output_endpoint_id: 'phone_speaker',
+      },
+    },
+    command_queue: [],
+  };
+
+  const REMOTE_TERMINAL_ENDPOINTS = [
+    {
+      endpoint_id: 'meta_glasses_audio_input',
+      channel: 'audio',
+      direction: 'input',
+      role: 'command_capture',
+      handler_ref: 'mobile.modules.expo_glasses_audio:record_audio',
+      fallback_target: 'phone_microphone',
+      contract_id: REMOTE_TERMINAL_CONTRACT_ID,
+    },
+    {
+      endpoint_id: 'meta_glasses_audio_output',
+      channel: 'audio',
+      direction: 'output',
+      role: 'tts_playback',
+      handler_ref: 'mobile.modules.expo_glasses_audio:play_audio',
+      fallback_target: 'phone_speaker',
+      contract_id: REMOTE_TERMINAL_CONTRACT_ID,
+    },
+    {
+      endpoint_id: 'meta_glasses_display_widget',
+      channel: 'display',
+      direction: 'output',
+      role: 'display_widget_rendering',
+      handler_ref: 'handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding',
+      fallback_target: 'display_webapp_or_mobile_card',
+      contract_id: REMOTE_TERMINAL_CONTRACT_ID,
+    },
+  ];
+
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
   }
@@ -191,6 +258,159 @@
     manifest.fallback = isObject(manifest.fallback) ? manifest.fallback : {};
     manifest.state = isObject(manifest.state) ? manifest.state : {};
     return manifest;
+  }
+
+  function normalizeCommandSession(input) {
+    const session = isObject(input) ? clone(input) : clone(DEFAULT_COMMAND_SESSION);
+    const defaults = clone(DEFAULT_COMMAND_SESSION);
+    session.schema = session.schema || defaults.schema;
+    session.schema_version = session.schema_version || defaults.schema_version;
+    session.session_model = session.session_model || defaults.session_model;
+    session.command_model = session.command_model || defaults.command_model;
+    session.host_mode = session.host_mode || defaults.host_mode;
+    session.session_identity = {
+      ...defaults.session_identity,
+      ...(isObject(session.session_identity) ? session.session_identity : {}),
+    };
+    session.pairing = {
+      ...defaults.pairing,
+      ...(isObject(session.pairing) ? session.pairing : {}),
+    };
+    session.surfaces = {
+      display: {
+        ...defaults.surfaces.display,
+        ...(isObject(session.surfaces?.display) ? session.surfaces.display : {}),
+      },
+      audio: {
+        ...defaults.surfaces.audio,
+        ...(isObject(session.surfaces?.audio) ? session.surfaces.audio : {}),
+      },
+    };
+    session.command_queue = Array.isArray(session.command_queue)
+      ? session.command_queue
+      : [];
+    return session;
+  }
+
+  function buildMobileHostedSession(input, manifestInput) {
+    const session = normalizeCommandSession(input);
+    const manifest = normalizeManifest(manifestInput || DEFAULT_MANIFEST);
+    return {
+      ...session,
+      widget_refs: {
+        widget_id: manifest.widget_id,
+        widget_cid: manifest.widget_cid,
+        descriptor_cid: manifest.descriptor_cid,
+        orb_receipt_cid: manifest.orb_receipt_cid,
+        correlation_id: manifest.correlation_id,
+      },
+      terminal_constraints: {
+        hardware_required: false,
+        input_channels: ['audio_command'],
+        output_channels: ['visual_status', 'tts'],
+        permitted_actions: [
+          'confirm',
+          'cancel',
+          'retry_pairing',
+          'switch_to_phone_preview',
+          'open_desktop_offload_status',
+        ],
+      },
+    };
+  }
+
+  function buildRemoteTerminalRoute(sessionInput, payload) {
+    const session = normalizeCommandSession(sessionInput);
+    return {
+      contract_id: REMOTE_TERMINAL_CONTRACT_ID,
+      surface_id: 'mobile_glasses',
+      terminal_kind: 'meta_glasses_remote_terminal',
+      render_targets: ['audio', 'display'],
+      endpoints: clone(REMOTE_TERMINAL_ENDPOINTS),
+      session_contract: {
+        session_id: session.session_identity.session_id,
+        phone_host_id: session.session_identity.phone_host_id,
+        host_mode: 'mobile_hosted',
+        terminal_constraints: {
+          hardware_required: false,
+          input_channels: ['audio_command'],
+          output_channels: ['visual_status', 'tts'],
+          permitted_actions: [
+            'confirm',
+            'cancel',
+            'retry_pairing',
+            'switch_to_phone_preview',
+            'open_desktop_offload_status',
+          ],
+        },
+        pairing: session.pairing,
+        audio_command_input: {
+          state: session.surfaces.audio.command_state,
+          endpoint_id: session.surfaces.audio.input_endpoint_id,
+          fallback_endpoint_id: session.surfaces.audio.fallback_input_endpoint_id,
+        },
+        visual_status_output: {
+          state: session.surfaces.display.state,
+          endpoint_id: session.surfaces.display.endpoint_id,
+          fallback_render_path: session.surfaces.display.fallback_render_path,
+        },
+        disconnection_handling: {
+          policy: 'degrade_to_mobile_card',
+          on_pairing_lost: [
+            'mark_display_unavailable',
+            'continue_mobile_session',
+            'surface_reconnect_action',
+          ],
+          fallback_render_path: session.surfaces.display.fallback_render_path,
+        },
+      },
+      payload: clone(payload || {}),
+    };
+  }
+
+  function buildSessionCommand(commandType, payload, sessionInput, manifestInput) {
+    const session = buildMobileHostedSession(sessionInput, manifestInput);
+    const manifest = normalizeManifest(manifestInput || DEFAULT_MANIFEST);
+    const commandId =
+      payload?.command_id ||
+      `${commandType || 'command'}-${session.session_identity.session_id}-${Date.now()}`;
+    const targetSurface = payload?.target_surface || (
+      commandType === 'audio_command' || commandType === 'tts_output' ? 'audio' : 'display'
+    );
+    const command = {
+      schema: 'handsfree.meta-rayban-display/session-command',
+      schema_version: '0.1.0',
+      command_id: commandId,
+      command_type: commandType || 'render_display',
+      target_surface: targetSurface,
+      session_id: session.session_identity.session_id,
+      phone_host_id: session.session_identity.phone_host_id,
+      desktop_id: session.session_identity.desktop_id,
+      widget_refs: session.widget_refs,
+      payload: clone(payload || {}),
+      requested_at: payload?.requested_at || new Date().toISOString(),
+    };
+    const route = buildRemoteTerminalRoute(session, command);
+    return {
+      ...command,
+      route,
+      display_surface: {
+        ...session.surfaces.display,
+        widget_id: manifest.widget_id,
+        widget_cid: manifest.widget_cid,
+      },
+      audio_surface: session.surfaces.audio,
+    };
+  }
+
+  function dispatchSessionCommand(commandType, payload, sessionInput, manifestInput) {
+    const session = buildMobileHostedSession(sessionInput, manifestInput);
+    const command = buildSessionCommand(commandType, payload, session, manifestInput);
+    return {
+      ...session,
+      command_queue: [...session.command_queue, command],
+      last_command: command,
+    };
   }
 
   function validateManifest(input) {
@@ -442,6 +662,9 @@
     const displayStateLabel = document.getElementById('display-state-label');
     const validationList = document.getElementById('validation-list');
     const eventLog = document.getElementById('event-log');
+    const sessionLog = document.getElementById('session-log');
+    const commandSurfaceSelect = document.getElementById('command-surface-select');
+    const commandPayloadInput = document.getElementById('command-payload-input');
     const headingInput = document.getElementById('heading-input');
     const tiltInput = document.getElementById('tilt-input');
     const rollInput = document.getElementById('roll-input');
@@ -450,6 +673,7 @@
     const longitudeInput = document.getElementById('longitude-input');
     const manifestFileInput = document.getElementById('manifest-file-input');
     let manifest = normalizeManifest(DEFAULT_MANIFEST);
+    let commandSession = buildMobileHostedSession(DEFAULT_COMMAND_SESSION, manifest);
     let focusIndex = 0;
     let trace = [];
 
@@ -497,6 +721,24 @@
       return event;
     }
 
+    function refreshSessionLog() {
+      if (!sessionLog) {
+        return;
+      }
+      sessionLog.textContent = JSON.stringify(
+        {
+          session_identity: commandSession.session_identity,
+          host_mode: commandSession.host_mode,
+          display_surface: commandSession.surfaces.display,
+          audio_surface: commandSession.surfaces.audio,
+          command_queue_depth: commandSession.command_queue.length,
+          last_command: commandSession.last_command || null,
+        },
+        null,
+        2,
+      );
+    }
+
     function refresh() {
       const validation = validateManifest(manifest);
       displayStateLabel.textContent = displayStateSelect.value;
@@ -508,6 +750,7 @@
         .map((entry) => `<li class="${entry.error ? 'error' : ''}">${escapeHtml(entry.message)}</li>`)
         .join('');
       renderManifest(frame, validation.manifest, focusIndex, displayStateSelect.value);
+      refreshSessionLog();
     }
 
     function moveFocus(delta) {
@@ -544,6 +787,17 @@
           ...(action.result || {}),
         },
       });
+      commandSession = dispatchSessionCommand(
+        'display_action',
+        {
+          command_id: result.requestId,
+          target_surface: 'display',
+          action_id: action.id,
+          bridge_result: result,
+        },
+        commandSession,
+        manifest,
+      );
       refresh();
     }
 
@@ -559,6 +813,7 @@
           throw new Error(`Fixture load failed: ${response.status}`);
         }
         manifest = normalizeManifest(await response.json());
+        commandSession = buildMobileHostedSession(commandSession, manifest);
         focusIndex = 0;
         appendTrace('fixture_loaded', {
           fixture: fixtureSelect.value,
@@ -604,6 +859,7 @@
 
     document.getElementById('reset-button').addEventListener('click', () => {
       manifest = normalizeManifest(DEFAULT_MANIFEST);
+      commandSession = buildMobileHostedSession(DEFAULT_COMMAND_SESSION, manifest);
       focusIndex = 0;
       trace = [];
       eventLog.textContent = '';
@@ -625,12 +881,34 @@
       downloadJson('meta-rayban-display-readiness.json', buildReadinessDescriptor(manifest));
     });
 
+    document.getElementById('dispatch-command-button').addEventListener('click', () => {
+      const targetSurface = commandSurfaceSelect.value;
+      const commandType = targetSurface === 'audio' ? 'audio_command' : 'render_display';
+      commandSession = dispatchSessionCommand(
+        commandType,
+        {
+          target_surface: targetSurface,
+          text: commandPayloadInput.value,
+          sensor: sensorSnapshot(),
+        },
+        commandSession,
+        manifest,
+      );
+      appendTrace('session_command', commandSession.last_command);
+      refresh();
+    });
+
+    document.getElementById('export-session-button').addEventListener('click', () => {
+      downloadJson('meta-rayban-browser-session.json', commandSession);
+    });
+
     manifestFileInput.addEventListener('change', async () => {
       const [file] = manifestFileInput.files || [];
       if (!file) {
         return;
       }
       manifest = normalizeManifest(JSON.parse(await file.text()));
+      commandSession = buildMobileHostedSession(commandSession, manifest);
       focusIndex = 0;
       appendTrace('manifest_loaded', { name: file.name });
       refresh();
@@ -639,6 +917,7 @@
 
     appendTrace('simulator_ready', {
       widget_id: manifest.widget_id,
+      session_id: commandSession.session_identity.session_id,
       sensor: sensorSnapshot(),
     });
     refresh();
@@ -648,7 +927,15 @@
   const api = {
     DISPLAY_STATES,
     DEFAULT_MANIFEST,
+    DEFAULT_COMMAND_SESSION,
+    REMOTE_TERMINAL_CONTRACT_ID,
+    REMOTE_TERMINAL_ENDPOINTS,
     normalizeManifest,
+    normalizeCommandSession,
+    buildMobileHostedSession,
+    buildRemoteTerminalRoute,
+    buildSessionCommand,
+    dispatchSessionCommand,
     validateManifest,
     buildReadinessDescriptor,
     buildBridgeResult,

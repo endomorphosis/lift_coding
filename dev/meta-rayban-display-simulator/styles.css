@@ -232,6 +232,10 @@ select {
   gap: 10px;
 }
 
+.button-row.two-up {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 button {
   min-height: 42px;
   border: 1px solid var(--line);
@@ -275,7 +279,8 @@ button:focus {
   color: var(--danger);
 }
 
-#event-log {
+#event-log,
+#session-log {
   min-height: 190px;
   max-height: 260px;
   margin: 0;
@@ -286,6 +291,10 @@ button:focus {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.45;
+}
+
+#session-log {
+  min-height: 150px;
 }
 
 @media (max-width: 1080px) {
