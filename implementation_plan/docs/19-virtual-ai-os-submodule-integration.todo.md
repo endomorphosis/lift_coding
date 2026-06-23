@@ -1163,3 +1163,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-336-vai-006-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-006. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-13-vai-336-vai-006-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-006 from strategy blocked_tasks.
+
+## VAI-337 Register Meta glasses widget actions as VAI capabilities
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: integration
+- Depends on: VAI-003, VAI-006, VAI-007, VAI-008
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, tests/test_virtual_ai_os_capability_registry.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_capability_registry.py tests/test_meta_glasses_display_todo_queue.py
+- Acceptance: Add `vai.glasses_widget.render`, `vai.glasses_widget.update`, `vai.glasses_widget.confirm`, and `vai.glasses_widget.cancel` to the shared capability registry so Swissknife ORB, HandsFree mobile, Meta glasses, and Hallucinate App use one command envelope with `command_id`, `session_id`, `descriptor_cid`, `manifest_cid`, `correlation_id`, policy and placement receipts, fallback render path, and canonical `capability_receipt_cid` for virtual desktop sessions.
