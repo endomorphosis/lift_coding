@@ -13,6 +13,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - HAO backlog packet: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md`
 - Physical phone ingress receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-437-phone-ingress-rehearsal.md`
 - Desktop-peer smoke receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-438-desktop-peer-offload-smoke.md`
+- Meta glasses terminal receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-439-meta-glasses-terminal-receipt.md`
 - MGW supervisor packet: `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md`
 - Backlog bridge: `HAO-436` / `MGW-274` / `VAI-340` for `VAIOS-G697`
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
@@ -28,7 +29,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 | Hallucinate App mediation | `hallucinate_app/test/e2e/multimodal-control-surface.spec.ts` exercises voice, gesture, mouse, agent, and remote Meta glasses clients through `policy_decision` and `mediation_receipt`. |
 | Swissknife virtual desktop | `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` opens every Swissknife desktop app and writes a reusable Meta glasses ORB template report. |
 | Desktop-peer offload | HAO-438 adds a desktop-peer offload smoke receipt: a phone-originated command selects `desktop:peer`, records capability and runtime health, emits `peer_offload_policy_receipt`, then recovers to `phone_local` with the same session, command, policy, and placement IDs when the peer is unavailable. |
-| Meta glasses terminal | The Swissknife Playwright gate renders the Meta glasses display-widget contract and checks interface, widget, and receipt CIDs. |
+| Meta glasses terminal | HAO-439 adds the Meta glasses terminal receipt: `display_action` events and confirmations from `meta_glasses:terminal` map through the existing HAO-431 bridge into normalized Hallucinate App `terminal.activate_action` intents, render selected peer and recovery state, and fail closed when pairing or display evidence is stale. The Swissknife Playwright gate also renders the Meta glasses display-widget contract and checks interface, widget, and receipt CIDs. |
 
 ## VAI-339 Replay Chain
 
@@ -79,6 +80,24 @@ The `phone_local` fallback preserves the same `session_id`,
 and `peer_offload_policy_receipt_id`. Desktop peers may report capability,
 runtime health, and transport failure; they do not own policy, fallback, retry,
 or cancellation decisions.
+
+## Meta Glasses Terminal Receipt
+
+`HAO-439` supplies the Meta glasses terminal receipt required by the
+VAIOS-G697 physical-readiness split:
+`data/hallucinate_multimodal_control/discovery/2026-06-23-hao-439-meta-glasses-terminal-receipt.md`.
+The receipt captures a `display_action` plus terminal confirmation from
+`meta_glasses:terminal`, preserves the action payload in
+`raw_payload.display_action`, and routes it through the existing HAO-431
+display-action bridge before Hallucinate App emits the normalized
+`terminal.activate_action` intent.
+
+The allowed path renders `selected_peer: "desktop:peer"` and
+`recovery_state: "running_on_peer"` back to `meta_glasses:terminal`. The
+stale-evidence path denies the action with `policy_receipt_id: null`,
+`dispatch_allowed: false`, and `recovery_state: "fail_closed"` when pairing or
+display evidence is stale, so no terminal action, desktop handoff, or widget
+open dispatch can occur.
 
 ## Real Phone Ingress Rehearsal
 
