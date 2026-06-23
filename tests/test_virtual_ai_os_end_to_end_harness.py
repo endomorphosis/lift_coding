@@ -16,7 +16,7 @@ from typing import Any
 import pytest
 from fastapi.testclient import TestClient
 
-from handsfree.ai import CapabilityRuntimeSurface
+from handsfree.ai import CapabilityExecutionMode, CapabilityRuntimeSurface
 from handsfree.capability_registry import CapabilityDispatchRequest, CapabilityRoutingKernel
 from handsfree.meta_glasses_remote_terminal import (
     REMOTE_TERMINAL_CONTRACT_ID,
@@ -89,6 +89,118 @@ class SimulatedDesktopPeer:
             "peer_id": self.peer_id,
             "compute_placement": "desktop_peer",
         }
+
+
+@dataclass
+class SimulatedDesktopOperatorSession:
+    """Deterministic desktop operator path across SwissKnife and Hallucinate App."""
+
+    session_id: str = "vai-024-desktop-operator-session"
+    presented_sessions: list[dict[str, Any]] = field(default_factory=list)
+    mediated_controls: list[dict[str, Any]] = field(default_factory=list)
+    placement_receipts: list[dict[str, Any]] = field(default_factory=list)
+
+    def present_swissknife_session(self, dispatch_plan) -> dict[str, Any]:
+        swissknife_entrypoint = dispatch_plan.entrypoints[0]
+        hallucinate_entrypoint = next(
+            entry for entry in dispatch_plan.entrypoints if entry.surface_id == "hallucinate_app"
+        )
+        session = {
+            "session_id": self.session_id,
+            "task_id": dispatch_plan.payload["task_id"],
+            "presented_by": swissknife_entrypoint.surface_id,
+            "operator_console": hallucinate_entrypoint.surface_id,
+            "hosted_surface": hallucinate_entrypoint.metadata["hosted_surface"],
+            "virtual_ui_plane": swissknife_entrypoint.metadata["virtual_ui_plane"],
+            "orb_plane": swissknife_entrypoint.metadata["orb_plane"],
+            "controls": ("voice", "pointer", "image", "keyboard"),
+            "descriptor_ref": "sha256:vai024-swissknife-session-descriptor",
+        }
+        self.presented_sessions.append(session)
+        return session
+
+    def route_hallucinate_control(
+        self,
+        *,
+        session: dict[str, Any],
+        dispatch_plan,
+        modality: str,
+        control: str,
+        placement_preference: str,
+    ) -> dict[str, Any]:
+        hallucinate_entrypoint = next(
+            entry for entry in dispatch_plan.entrypoints if entry.surface_id == "hallucinate_app"
+        )
+        envelope = {
+            "interaction_envelope": {
+                "session_id": session["session_id"],
+                "surface": "hallucinate_app",
+                "source_modality": modality,
+                "raw_payload": {"control": control},
+            },
+            "normalized_intent": {
+                "capability_id": dispatch_plan.capability_id,
+                "command": control,
+                "placement_preference": placement_preference,
+            },
+            "policy_decision": {
+                "outcome": "allow",
+                "reason": "desktop_operator_test_harness",
+            },
+            "mediation_receipt": f"sha256:vai024-{modality}-{placement_preference}-receipt",
+            "virtual_desktop_command_intent": {
+                "target_surface": session["hosted_surface"],
+                "operator_console": hallucinate_entrypoint.surface_id,
+                "dispatch_handler": dispatch_plan.route.handler_ref,
+            },
+        }
+        self.mediated_controls.append(envelope)
+        return envelope
+
+    def execute_locally(self, *, dispatch_plan, envelope: dict[str, Any]) -> dict[str, Any]:
+        receipt = {
+            "receipt_cid": "sha256:vai024-local-placement-receipt",
+            "session_id": envelope["interaction_envelope"]["session_id"],
+            "capability_id": dispatch_plan.capability_id,
+            "command": envelope["normalized_intent"]["command"],
+            "compute_placement": "local",
+            "runtime_surface": dispatch_plan.route.runtime_surface.value,
+            "placement_layer": dispatch_plan.route.placement_layer.value,
+            "placement_target": dispatch_plan.route.placement_target,
+            "status": "completed",
+        }
+        self.placement_receipts.append(receipt)
+        return receipt
+
+    def handoff_to_peer(
+        self,
+        *,
+        dispatch_plan,
+        envelope: dict[str, Any],
+        desktop_peer: SimulatedDesktopPeer,
+    ) -> dict[str, Any]:
+        output = desktop_peer.run(
+            {
+                "task_id": dispatch_plan.payload["task_id"],
+                "command": envelope["normalized_intent"]["command"],
+                "artifact_refs": dispatch_plan.payload["artifact_refs"],
+            }
+        )
+        receipt = {
+            "receipt_cid": "sha256:vai024-peer-placement-receipt",
+            "session_id": envelope["interaction_envelope"]["session_id"],
+            "capability_id": dispatch_plan.capability_id,
+            "command": envelope["normalized_intent"]["command"],
+            "compute_placement": output["compute_placement"],
+            "runtime_surface": dispatch_plan.route.runtime_surface.value,
+            "placement_layer": dispatch_plan.route.placement_layer.value,
+            "placement_target": dispatch_plan.route.placement_target,
+            "peer_id": output["peer_id"],
+            "stream_events": output["stream_events"],
+            "status": output["status"],
+        }
+        self.placement_receipts.append(receipt)
+        return receipt
 
 
 def _install_secret_stub() -> None:
@@ -543,3 +655,138 @@ def test_hardware_free_virtual_ai_os_harness_dispatches_offloads_streams_and_rec
     assert "dat_native_display_unavailable" in diagnostics_payload["fallback_reasons"]
     assert invoked_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
     assert recovery_payload["receipt_cid"] in diagnostics_payload["receipt_cids"]
+
+
+def test_desktop_operator_harness_presents_routes_and_places_local_or_peer_work():
+    kernel = CapabilityRoutingKernel()
+    operator_session = SimulatedDesktopOperatorSession()
+    desktop_peer = SimulatedDesktopPeer(peer_id="desktop-peer-vai-024")
+    task_id = "VAI-024"
+    artifact_refs = {
+        "result_cid": "sha256:vai024-result",
+        "receipt_ref": "sha256:vai024-receipt",
+        "event_dag_ref": "sha256:vai024-events",
+        "delegation_ref": "sha256:vai024-delegation",
+    }
+
+    session_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="ui_render_session",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "operator_plane": "hallucinate_app",
+                "desktop_surface": "swissknife.virtual_desktop",
+                "artifact_refs": artifact_refs,
+            },
+        )
+    )
+    session = operator_session.present_swissknife_session(session_plan)
+
+    local_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="ipfs_pin",
+            requested_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "artifact_refs": artifact_refs,
+                "cid": "bafy-vai024-local-session-snapshot",
+            },
+        )
+    )
+    local_control = operator_session.route_hallucinate_control(
+        session=session,
+        dispatch_plan=local_plan,
+        modality="voice",
+        control="pin the session snapshot locally",
+        placement_preference="local",
+    )
+    local_receipt = operator_session.execute_locally(
+        dispatch_plan=local_plan,
+        envelope=local_control,
+    )
+
+    peer_plan = kernel.dispatch_task(
+        CapabilityDispatchRequest(
+            capability_id="dataset_discovery",
+            preferred_surface=CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            source_surface="hallucinate_app",
+            payload={
+                "task_id": task_id,
+                "artifact_refs": artifact_refs,
+                "query": "multimodal desktop operator evidence",
+            },
+        )
+    )
+    peer_control = operator_session.route_hallucinate_control(
+        session=session,
+        dispatch_plan=peer_plan,
+        modality="image",
+        control="inspect the screenshot and hand dataset search to the peer",
+        placement_preference="desktop_peer",
+    )
+    peer_receipt = operator_session.handoff_to_peer(
+        dispatch_plan=peer_plan,
+        envelope=peer_control,
+        desktop_peer=desktop_peer,
+    )
+
+    assert session == {
+        "session_id": "vai-024-desktop-operator-session",
+        "task_id": task_id,
+        "presented_by": "swissknife_orb",
+        "operator_console": "hallucinate_app",
+        "hosted_surface": "swissknife.virtual_desktop",
+        "virtual_ui_plane": "swissknife.virtual_desktop",
+        "orb_plane": "swissknife.orb",
+        "controls": ("voice", "pointer", "image", "keyboard"),
+        "descriptor_ref": "sha256:vai024-swissknife-session-descriptor",
+    }
+    assert session_plan.route.runtime_surface == CapabilityRuntimeSurface.SWISSKNIFE_ORB
+    assert session_plan.route.handler_ref == "swissknife.orb::ui_render_session"
+    assert session_plan.entrypoints[0].metadata["virtual_ui_app_id"] == "mcp-control"
+
+    routed_modalities = [
+        control["interaction_envelope"]["source_modality"]
+        for control in operator_session.mediated_controls
+    ]
+    assert routed_modalities == [
+        "voice",
+        "image",
+    ]
+    assert all(
+        control["policy_decision"]["outcome"] == "allow"
+        and control["virtual_desktop_command_intent"]["operator_console"] == "hallucinate_app"
+        for control in operator_session.mediated_controls
+    )
+
+    assert local_receipt == {
+        "receipt_cid": "sha256:vai024-local-placement-receipt",
+        "session_id": session["session_id"],
+        "capability_id": "ipfs_pin",
+        "command": "pin the session snapshot locally",
+        "compute_placement": "local",
+        "runtime_surface": "direct_adapter",
+        "placement_layer": "content_provenance",
+        "placement_target": "endomorphosis/ipfs_kit_py",
+        "status": "completed",
+    }
+    assert peer_receipt["compute_placement"] == "desktop_peer"
+    assert peer_receipt["runtime_surface"] == "swissknife_orb"
+    assert peer_receipt["placement_layer"] == "swissknife_orb"
+    assert peer_receipt["placement_target"] == "endomorphosis/swissknife"
+    assert peer_receipt["peer_id"] == "desktop-peer-vai-024"
+    assert [event["phase"] for event in peer_receipt["stream_events"]] == [
+        "dispatch",
+        "offload",
+        "response",
+    ]
+    assert desktop_peer.offloaded_commands == [
+        {
+            "command": "inspect the screenshot and hand dataset search to the peer",
+            "task_id": task_id,
+            "placement": "desktop_peer",
+        }
+    ]
