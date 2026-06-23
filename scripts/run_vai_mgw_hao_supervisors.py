@@ -55,6 +55,14 @@ MERGE_CLEANUP_DEFAULTS = {
     "daemon_merged_worktree_cleanup_max": "50",
 }
 
+REFILL_DEFAULTS = {
+    "objective_scan_min_open_tasks": os.environ.get("OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"),
+    "objective_scan_max_findings": os.environ.get("OBJECTIVE_SCAN_MAX_FINDINGS", "6"),
+    "objective_surplus_findings_per_goal": os.environ.get("OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "2"),
+    "codebase_scan_min_open_tasks": os.environ.get("CODEBASE_SCAN_MIN_OPEN_TASKS", "20"),
+    "codebase_scan_max_findings": os.environ.get("CODEBASE_SCAN_MAX_FINDINGS", "4"),
+}
+
 VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
     "phone-hosted Swissknife virtual desktop",
     "desktop peer offload",
@@ -105,8 +113,10 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     MERGE_CLEANUP_DEFAULTS["merge_reconciliation_max_merges"],
     "--daemon-merged-worktree-cleanup-max",
     MERGE_CLEANUP_DEFAULTS["daemon_merged_worktree_cleanup_max"],
+    "--codebase-scan-min-open-tasks",
+    REFILL_DEFAULTS["codebase_scan_min_open_tasks"],
     "--codebase-scan-max-findings",
-    "0",
+    REFILL_DEFAULTS["codebase_scan_max_findings"],
     "--objective-max-refinement-children",
     "2",
     "--objective-max-refinement-depth",
@@ -118,11 +128,11 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "500",
     *VAI_MGW_HAO_LAUNCH_MISSION_ARGS,
     "--objective-scan-min-open-tasks",
-    "3",
+    REFILL_DEFAULTS["objective_scan_min_open_tasks"],
     "--objective-scan-max-findings",
-    "3",
+    REFILL_DEFAULTS["objective_scan_max_findings"],
     "--objective-surplus-findings-per-goal",
-    "1",
+    REFILL_DEFAULTS["objective_surplus_findings_per_goal"],
 )
 
 
