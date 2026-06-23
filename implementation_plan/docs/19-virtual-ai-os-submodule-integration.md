@@ -506,6 +506,43 @@ Evidence plan:
 Evidence:
 [data/virtual_ai_os/discovery/2026-06-23-vai-012-physical-device-desktop-operator-readiness.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-012-physical-device-desktop-operator-readiness.md)
 
+#### VAI-338 Launch Alignment Map
+
+VAI-338 aligns the launch slice across Virtual AI OS, MGW, and HAO so one
+ordered validation path can be replayed before broader submodule cleanup. The
+slice starts from a phone-hosted command session, routes through the VAI
+capability registry and MGW display-widget contract, records Hallucinate App
+mediation receipts, shows Swissknife desktop/operator state, optionally offloads
+work to a desktop peer, and publishes constrained status to Meta glasses or the
+approved phone/Web App fallback.
+
+Launch alignment map:
+
+| Order | Slice step | Launch surface | Required evidence | Launch classification |
+| --- | --- | --- | --- | --- |
+| 1 | Phone creates the mobile-hosted session and command envelope with `command_id`, `session_id`, `correlation_id`, `request_id`, policy refs, and placement intent. | Phone, VAI runtime | Mobile ORB diagnostics baseline, session envelope, feature flags, backend/auth mode. | Launch-critical; simulator-only until VAI-012 physical phone evidence is collected. |
+| 2 | VAI capability registry resolves the command through shared widget capabilities, including `vai.glasses_widget.render`, `vai.glasses_widget.update`, `vai.glasses_widget.confirm`, and `vai.glasses_widget.cancel`. | VAI, Swissknife, Hallucinate App, MGW | Capability receipt CID, descriptor/manifest CIDs, fallback render path, policy and placement receipt links from VAI-337. | Launch-critical; CI-safe simulator validation. |
+| 3 | Hallucinate App mediates the operator intent and emits `interaction_envelope`, `normalized_intent`, `policy_decision`, `mediation_receipt`, and `virtual_desktop_command_intent`. | HAO, VAI observability | HAO mediation receipts joined by `task_id`, `correlation_id`, and parent receipt CIDs. | Launch-critical; simulator-only unless desktop operator host is physically available. |
+| 4 | Swissknife exposes the virtual desktop/widget descriptor through the ORB route and keeps operator-visible state for the same command. | Swissknife, VAI UI plane | ORB service binding, descriptor CID, widget ID/CID, stream receipts, desktop fallback panel state. | Launch-critical; simulator-only for default validation. |
+| 5 | Runtime placement selects phone-local execution first, then records desktop-peer offload when policy and reachability allow it. | VAI runtime, desktop peer, HAO operator console | `placement_change` artifact, remote execution receipt, peer offload stream, fallback-to-phone rollback event. | Launch-critical for evidence shape; physical-device-gated for real desktop-peer reachability. |
+| 6 | MGW renders the constrained Meta glasses terminal state from the same descriptor/manifest and receipt lineage. | MGW, Meta glasses, phone fallback | Display-widget render/update/confirm/cancel receipts, Web App or mobile-card fallback target, glasses-visible status note. | Launch-critical for the display-widget contract; physical-device-gated for actual Meta glasses. |
+| 7 | Recovery path proves offload disconnect, glasses pairing loss, or native DAT absence without ending the phone-hosted session. | Phone, desktop peer, Hallucinate App, Swissknife, Meta glasses | Validation failure, rollback event, fallback render target, degraded edge reason, parent receipt CIDs. | Launch-critical; simulator-only for CI, physical-device-gated for final rehearsal. |
+| 8 | Non-launch submodule hygiene is tracked separately from the replay slice. | VAI, MGW, HAO submodules | Reviewed pin notes, backlog cleanup tasks, nonblocking source hygiene references. | Deferred to non-launch submodule hygiene. |
+
+Launch-critical work is limited to the joinable evidence chain above. The
+simulator-only portion proves routing, registry lookup, HAO mediation,
+Swissknife ORB visibility, MGW render contracts, policy receipts, placement
+receipts, and rollback shape without requiring physical hardware. The
+physical-device-gated portion is the actual phone, desktop peer reachability,
+Meta glasses pairing/display/audio behavior, D-pad or native DAT behavior, and
+disconnect recovery on real devices. Work that only improves source pinning,
+duplicate backlog cleanup, broad codebase scans, or unrelated submodule
+metadata remains not launch-critical and deferred to non-launch submodule
+hygiene.
+
+Evidence:
+[data/virtual_ai_os/discovery/2026-06-23-vai-338-launch-alignment-map.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-338-launch-alignment-map.md)
+
 #### VAI-022 Browser Web App Package for HTTPS Glasses Loading
 
 The glasses-accessible browser Web App is the static package at
