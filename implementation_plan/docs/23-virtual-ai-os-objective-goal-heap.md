@@ -789,7 +789,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G697 Production launch readiness gate
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G689
 - Fib priority: 1
 - Track: launch
@@ -807,7 +807,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Refinement: Split only if the gate needs a separate child for physical phone, desktop peer, or Meta glasses evidence capture.
 - Gap task: Add a launch-readiness gate that prevents the objective heap from treating weak scanner matches as proof that the product slice is production ready.
 - Gate evidence: VAI-340 launch readiness gate => data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md; MGW-274 launch readiness gate => data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md; HAO-436 launch readiness gate => data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md; launch Playwright validation gate => tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, swissknife/build-tools/configs/playwright.meta-glasses.config.ts, hallucinate_app/scripts/run_playwright_test.mjs
-- Completion evidence: launch_readiness_receipt_v1 => data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md; LaunchReadinessGate => tests/test_virtual_ai_os_launch_readiness_gate.py; phone_desktop_glasses_readiness => docs/launch/phone_desktop_glasses_readiness.md; Playwright launch replay => npm --prefix swissknife run test:e2e:meta-glasses && npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+- Completion evidence: tests/test_virtual_ai_os_launch_readiness_gate.py => tests/test_virtual_ai_os_launch_readiness_gate.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast); docs/launch/phone_desktop_glasses_readiness.md => docs/launch/phone_desktop_glasses_readiness.md (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast); launch_readiness_receipt_v1 => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); swissknife/test/e2e/meta-glasses-virtual-os.spec.ts => swissknife/test/e2e/meta-glasses-virtual-os.spec.ts (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast); hallucinate_app/test/e2e/multimodal-control-surface.spec.ts => hallucinate_app/test/e2e/multimodal-control-surface.spec.ts (path), dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact); Playwright launch replay => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- Completed at: 2026-06-23T17:20:46.505591+00:00
+- Completion validation: 0
 
 ## VAIOS-G698 Supervisor objective and task janitor
 
