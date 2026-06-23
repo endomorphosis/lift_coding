@@ -113,7 +113,10 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+    "tests/test_meta_glasses_display_todo_queue.py",
 )
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_accelerate",

@@ -1045,6 +1045,11 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
 
     repo = tmp_path / "repo"
     source = repo / "src" / "scan_target.py"
+    mgw_owned_paths = (
+        repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md",
+        repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md",
+        repo / "tests" / "test_meta_glasses_display_todo_queue.py",
+    )
     generated_reports = (
         repo / "data" / "virtual_ai_os" / "discovery" / "report.md",
         repo / "data" / "hallucinate_multimodal_control" / "discovery" / "report.md",
@@ -1066,6 +1071,12 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
             "# Generated Discovery\n\nThe captured evidence mentions a " + "to" + "do task.\n",
             encoding="utf-8",
         )
+    for mgw_owned_path in mgw_owned_paths:
+        mgw_owned_path.parent.mkdir(parents=True, exist_ok=True)
+        mgw_owned_path.write_text(
+            "# MGW-owned file\n\n# " + "FIX" + "ME: VAI must not claim this file.\n",
+            encoding="utf-8",
+        )
     _git(repo, "add", ".")
     _git(repo, "commit", "-m", "seed scan candidates")
 
@@ -1078,6 +1089,11 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
 
     assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]
     assert "external/ipfs_kit/archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert {
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        "tests/test_meta_glasses_display_todo_queue.py",
+    } <= set(supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES)
 
 
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():

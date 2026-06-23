@@ -78,6 +78,11 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/backup/",
     ),
 )
+CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "tests/test_meta_glasses_display_todo_queue.py",
+)
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,

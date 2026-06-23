@@ -259,13 +259,17 @@ def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright(
     assert "swissknife run test:e2e:mcp" in " ".join(tasks["HAO-446"].validation)
 
 
-def test_hallucinate_codebase_scan_skips_objective_heap_as_source_annotations():
+def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
 
-    assert (
-        "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
-        in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
-    )
+    expected_skips = {
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+        "tests/test_meta_glasses_display_todo_queue.py",
+    }
+
+    assert expected_skips <= set(daemon_module.CODEBASE_SCAN_SKIP_PREFIXES)
 
 
 def test_hao_428_offload_session_events_route_through_mediation():
@@ -2052,6 +2056,11 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "report.md"
     source = repo / "src" / "scan_target.py"
     readme = repo / "README.md"
+    mgw_owned_paths = (
+        repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md",
+        repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md",
+        repo / "tests" / "test_meta_glasses_display_todo_queue.py",
+    )
     source.parent.mkdir(parents=True)
     discovery.parent.mkdir(parents=True)
     todo_path = repo / TEMP_TASK_BOARD_FILENAME
@@ -2085,6 +2094,12 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         f"# Generated Discovery\n\nThe historical task had `{_captured_pending_status_line()}` in captured evidence.\n",
         encoding="utf-8",
     )
+    for mgw_owned_path in mgw_owned_paths:
+        mgw_owned_path.parent.mkdir(parents=True, exist_ok=True)
+        mgw_owned_path.write_text(
+            f"# MGW-owned file\n\n# {fixture_marker}: HAO must not claim this file.\n",
+            encoding="utf-8",
+        )
     assert _captured_pending_status_line() in discovery.read_text(encoding="utf-8")
     readme_example = _readme_fenced_task_board_search_example()
     expected_search = f'rg -n "{PENDING_TASK_STATUS}" docs/example.{TEMP_TASK_BOARD_FILENAME}'
@@ -2096,6 +2111,9 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
         TEMP_TASK_BOARD_FILENAME,
         "src/scan_target.py",
         "data/hallucinate_multimodal_control/discovery/report.md",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        "tests/test_meta_glasses_display_todo_queue.py",
         "README.md",
     )
     _git(repo, "commit", "-m", "seed")
