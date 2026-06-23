@@ -264,7 +264,7 @@ Evidence reviewed:
 - device plane: Meta glasses remote-terminal contract, mobile ORB runtime
   binding, diagnostics receipts, hardware-free terminal harnesses, and iPhone
   DAT handoff packet
-- daemon integration: repo-local VAI daemon/supervisor wrappers, todo parser
+- daemon integration: repo-local VAI daemon/supervisor wrappers, task-board parser
   tests, daemon-backed task orchestration tests, and launch replay evidence
 
 Discovery result:
