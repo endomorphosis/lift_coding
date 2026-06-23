@@ -194,7 +194,7 @@ cadence remains parseable and resumable.
 
 ## VAI-015 Refresh reviewed submodule pins and automation guardrails
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
