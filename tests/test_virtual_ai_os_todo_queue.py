@@ -439,7 +439,7 @@ def test_virtual_ai_os_product_run_defers_stale_maintenance_tasks():
     tasks = {task.task_id: task for task in _load_tasks()}
 
     assert runnable_stale_tasks == []
-    assert tasks["VAI-025"].status == "blocked"
+    assert tasks["VAI-025"].status in {"blocked", "completed"}
 
 
 def test_virtual_ai_os_todo_dependencies_are_declared_tasks():

@@ -407,7 +407,7 @@ def test_refill_backlog_treats_zero_eligible_ready_as_runnable_drained(tmp_path)
     assert task_count == 3
 
 
-def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
+def test_supervisor_run_forever_defers_refill_before_daemon_loop(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
@@ -433,14 +433,18 @@ def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
     supervisor.ensure_event_log_file = lambda: calls.append("ensure_event_log_file") or {}  # type: ignore[method-assign]
     supervisor.repair_main_checkout_merge_state = lambda: calls.append("repair_main_checkout_merge_state") or {}  # type: ignore[method-assign]
     supervisor.ensure_managed_daemon_pid_file = lambda: calls.append("ensure_managed_daemon_pid_file") or {}  # type: ignore[method-assign]
-    supervisor.run_once = lambda: calls.append("run_once") or {"objective_task_janitor": {}}  # type: ignore[method-assign]
+    def fake_run_once(*, include_refill=True):
+        calls.append(f"run_once:{include_refill}")
+        return {"objective_task_janitor": {}}
+
+    supervisor.run_once = fake_run_once  # type: ignore[method-assign]
     supervisor.build_supervisor_loop_config = lambda: calls.append("build_supervisor_loop_config") or object()  # type: ignore[method-assign]
 
     class FakeSupervisorLoop:
         def __init__(self, _config, watchdog_hook=None):
             calls.append("loop_init")
-            assert "run_once" in calls
-            assert calls.index("run_once") < calls.index("loop_init")
+            assert "run_once:False" in calls
+            assert calls.index("run_once:False") < calls.index("loop_init")
             self.watchdog_hook = watchdog_hook
 
         def run(self):
@@ -462,7 +466,7 @@ def test_supervisor_run_forever_runs_preflight_before_daemon_loop(tmp_path):
         "ensure_event_log_file",
         "repair_main_checkout_merge_state",
         "ensure_managed_daemon_pid_file",
-        "run_once",
+        "run_once:False",
     ]
     assert calls[-2:] == ["loop_init", "loop_run"]
 

@@ -303,7 +303,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-026 Resolve validation retry-budget failure for MGW-003
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
