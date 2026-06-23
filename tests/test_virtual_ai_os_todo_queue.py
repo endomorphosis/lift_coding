@@ -640,7 +640,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "default to --detach" in runner_module.DETACHED_WORKTREE_POLICY
     assert "component submodules track" in runner_module.DETACHED_WORKTREE_POLICY
     assert runner_module.MERGE_CLEANUP_DEFAULTS == {
-        "worktree_reconciliation_max_merges": "0",
+        "worktree_reconciliation_max_merges": "3",
         "merge_reconciliation_max_merges": "3",
         "daemon_merged_worktree_cleanup_max": "50",
     }
@@ -675,13 +675,13 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         for arg in launcher_args
         if arg.startswith("--common-arg=")
     ]
-    assert "--no-worktree-reconciliation" in common_arg_values
-    assert "--no-reconciliation-guardrail" in common_arg_values
+    assert "--no-worktree-reconciliation" not in common_arg_values
+    assert "--no-reconciliation-guardrail" not in common_arg_values
     assert "--retry-budget-commit-outputs" in common_arg_values
     assert "--dependency-guardrail-commit-outputs" in common_arg_values
     assert "--auto-commit-generated-dirty" in common_arg_values
     assert "--worktree-reconciliation-max-merges" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "0"
+    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "3"
     assert "--merge-reconciliation-max-merges" in common_arg_values
     assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "3"
     assert "--daemon-merged-worktree-cleanup-max" in common_arg_values

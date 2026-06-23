@@ -50,7 +50,7 @@ DETACHED_WORKTREE_POLICY = (
 )
 
 MERGE_CLEANUP_DEFAULTS = {
-    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "0"),
+    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "3"),
     "merge_reconciliation_max_merges": os.environ.get("MERGE_RECONCILIATION_MAX_MERGES", "3"),
     "daemon_merged_worktree_cleanup_max": "50",
 }
@@ -102,8 +102,6 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_t
 )
 
 VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
-    "--no-worktree-reconciliation",
-    "--no-reconciliation-guardrail",
     "--retry-budget-commit-outputs",
     "--dependency-guardrail-commit-outputs",
     "--auto-commit-generated-dirty",
