@@ -136,7 +136,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-011 Add Swissknife widget authoring CLI and gallery
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ui
