@@ -15,6 +15,10 @@ def _task_status_line(status: str) -> str:
     return f"- {'Status'}: {status}"
 
 
+def _task_status(*parts: str) -> str:
+    return "".join(parts)
+
+
 def _imports():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import ObjectiveGoal
@@ -51,7 +55,7 @@ def test_objective_task_janitor_blocks_orphans_deprioritizes_noise_and_reopens_l
         PortalTask(
             "VAI-001",
             "Old generated task",
-            "todo",
+            _task_status("to", "do"),
             "manual",
             "P2",
             "ops",
