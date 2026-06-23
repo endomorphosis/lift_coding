@@ -13,11 +13,11 @@ queue state.
 
 ## Resolution
 
-The HAO-025 discovery note now describes the queue state as historical context,
-records the current evidence that `HAO-008`, `HAO-009`, `HAO-028`, and
-`HAO-029` are completed, and notes that `blocked_tasks` is empty. The updated
-paragraph avoids metadata-shaped status prose so the supervisor does not turn
-generated discovery evidence into another cleanup task.
+The HAO-025 discovery note now describes the queue state as a historical
+snapshot, records the current evidence that `HAO-008`, `HAO-009`, `HAO-028`,
+and `HAO-029` are completed, and notes that `blocked_tasks` is empty. The
+updated paragraph avoids metadata-shaped status prose so the supervisor does
+not turn generated discovery evidence into another cleanup task.
 
 ## Validation
 
@@ -25,4 +25,6 @@ Focused validation for this docs-only fix:
 
 ```bash
 test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
+nl -ba hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md | sed -n '121,134p;341,355p'
+python3 -c 'exec("import json, pathlib\nstrategy = json.loads(pathlib.Path(\"/home/barberb/lift_coding/data/hallucinate_multimodal_control/state/hallucinate_multimodal_control_strategy.json\").read_text(encoding=\"utf-8\"))\nassert strategy.get(\"blocked_tasks\") == []")'
 ```
