@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 82d8da5d57b75a59206448bcf9d96a092e5adeeb
+Fingerprint: 7e242bbc920fadb248602ef9c417d71970933123
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 2
+Candidate count: 4
 Priority: P1
 Track: ops
 
@@ -18,9 +18,15 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
+- `rescue/worktree/implementation-hao-454-attempt-1-1782251832-e92d14f27122` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-454-attempt-1-1782251832`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`
 - `rescue/worktree/implementation-hao-456-attempt-1-1782252832-d78e8300ca92` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-456-attempt-1-1782252832`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `rescue/worktree/implementation-hao-457-attempt-1-1782251891-8c122f7c2155` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-457-attempt-1-1782251891`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`
 - `implementation/hao-465-attempt-1-1782252508` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-465-attempt-1-1782252508`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md`
@@ -42,7 +48,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `2` candidates, `2` sampled records.
+Work surface: `4` candidates, `4` sampled records.
 
 ### Suggested Actions
 
@@ -90,13 +96,13 @@ Work surface: `2` candidates, `2` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 2,
+  "candidate_count": 4,
   "conflict_path_counts": {
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md": 1,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md": 3,
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "82d8da5d57b75a59206448bcf9d96a092e5adeeb",
+  "fingerprint": "7e242bbc920fadb248602ef9c417d71970933123",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -106,16 +112,20 @@ Work surface: `2` candidates, `2` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
+    "rescue/worktree/implementation-hao-454-attempt-1-1782251832-e92d14f27122",
     "rescue/worktree/implementation-hao-456-attempt-1-1782252832-d78e8300ca92",
+    "rescue/worktree/implementation-hao-457-attempt-1-1782251891-8c122f7c2155",
     "implementation/hao-465-attempt-1-1782252508"
   ],
-  "sample_count": 2,
+  "sample_count": 4,
   "sample_status_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-454-attempt-1-1782251832",
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-456-attempt-1-1782252832",
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-457-attempt-1-1782251891",
     "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-465-attempt-1-1782252508"
   ],
   "success_signals": [
