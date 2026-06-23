@@ -808,6 +808,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Gap task: Add a launch-readiness gate that prevents the objective heap from treating weak scanner matches as proof that the product slice is production ready.
 - Gate evidence: VAI-340 launch readiness gate => data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md; MGW-274 launch readiness gate => data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md; HAO-436 launch readiness gate => data/hallucinate_multimodal_control/discovery/2026-06-23-hao-436-launch-readiness-gate.md; launch Playwright validation gate => tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, swissknife/build-tools/configs/playwright.meta-glasses.config.ts, hallucinate_app/scripts/run_playwright_test.mjs
 - Active gate reason: Keep this goal open until a single launch-readiness receipt proves the phone, desktop-peer offload, Hallucinate App mediation, Meta glasses render path, and Playwright launch replay together.
+- Active HAO child tasks: HAO-437 physical phone ingress rehearsal receipt; HAO-438 desktop-peer offload smoke receipt; HAO-439 Meta glasses terminal receipt capture; HAO-440 aggregate physical-readiness evidence into the launch gate.
 
 ## VAIOS-G698 Supervisor objective and task janitor
 
