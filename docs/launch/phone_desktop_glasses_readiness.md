@@ -14,6 +14,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Physical phone ingress receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-437-phone-ingress-rehearsal.md`
 - Desktop-peer smoke receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-438-desktop-peer-offload-smoke.md`
 - Meta glasses terminal receipt: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-439-meta-glasses-terminal-receipt.md`
+- HAO-440 physical readiness aggregate: `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-440-launch-readiness-physical-aggregate.md`
 - MGW supervisor packet: `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-274-launch-readiness-gate.md`
 - Backlog bridge: `HAO-436` / `MGW-274` / `VAI-340` for `VAIOS-G697`
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
@@ -64,6 +65,15 @@ The `LaunchReadinessGate` remains open until the Python guard, Swissknife
 Playwright replay, and Hallucinate App Playwright mediation command all pass for
 the same receipt lineage. Only that all-pass result moves the gate state to
 `launch_ready`.
+
+The `launch_readiness_receipt_v1` also requires the same lineage to include the
+HAO-437 physical phone ingress receipt, HAO-438 desktop-peer offload smoke
+receipt, and HAO-439 Meta glasses terminal receipt. The HAO-440 physical
+readiness aggregate records that dependency set and the exact
+`VAIOS-G697:launch-readiness:phone-desktop-glasses` lineage. Hardware-free
+fallback remains explicit and non-launch-ready: if physical capture is
+unavailable, the gate state stays `gate_open_physical_capture_pending` while the
+VAI-010, HAO-430, and VAI-339 replay receipts remain development evidence.
 
 ## Desktop-Peer Offload Smoke
 
