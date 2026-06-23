@@ -187,7 +187,48 @@ ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_exports.ensu
 
 
 def main(argv: list[str] | None = None) -> None:
-    _virtual_ai_os_supervisor_runner.run(argv)
+    args = list(sys.argv[1:] if argv is None else argv)
+    paths = ensure_virtual_ai_os_bootstrap_paths()
+    os.chdir(REPO_ROOT)
+    _ensure_runtime_pythonpath()
+
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import main as supervisor_main
+
+    args = _with_default(args, TASK_BOARD_PATH_OPTION, str(paths["todo_path"]))
+    args = _with_default(args, "--state-dir", str(paths["state_dir"]))
+    args = _with_default(args, "--task-prefix", "## VAI-")
+    args = _with_default(args, "--state-prefix", "virtual_ai_os")
+    args = _with_default(args, "--worktree-root", str(paths["worktree_root"]))
+    args = _with_default(args, "--daemon-script-path", str(DAEMON_SCRIPT_PATH))
+    args = _with_default(args, "--supervisor-script-path", str(Path(__file__).resolve()))
+    args = _with_default(args, "--max-restarts", "0")
+    resolver_command = _default_llm_merge_resolver_command()
+    if resolver_command:
+        args = _with_default(args, "--llm-merge-resolver-command", resolver_command)
+    args = _with_repeated_default(args, "--worktree-submodule-path", VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS)
+    args = _with_flag_default(args, "--objective-refill-scan")
+    args = _with_flag_default(args, "--objective-seed-interoperability-goals")
+    args = _with_repeated_default(args, "--objective-interoperability-focus", VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS)
+    args = _with_default(args, "--objective-path", str(OBJECTIVE_HEAP_PATH))
+    args = _with_default(args, "--objective-graph-path", str(OBJECTIVE_GRAPH_PATH))
+    args = _with_default(args, "--objective-bundle-dir", str(OBJECTIVE_BUNDLE_DIR))
+    args = _with_default(args, "--objective-dataset-dir", str(OBJECTIVE_DATASET_DIR))
+    args = _with_default(args, "--objective-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--objective-discovery-output-path", "data/virtual_ai_os/discovery")
+    args = _with_default(args, "--objective-scan-min-open-tasks", str(OBJECTIVE_SCAN_MIN_OPEN_TASKS))
+    args = _with_default(args, "--objective-scan-max-findings", str(OBJECTIVE_SCAN_MAX_FINDINGS))
+    args = _with_default(args, "--objective-scan-cooldown-seconds", str(OBJECTIVE_SCAN_COOLDOWN_SECONDS))
+    # Pass the task-board vector-index path; "todo" here is part of the CLI flag name (work-item queue), not a deferred-work marker.
+    args = _with_default(args, "--objective-todo-vector-index-path", str(OBJECTIVE_TODO_VECTOR_INDEX_PATH))
+    args = _with_default(args, "--objective-surplus-findings-per-goal", str(OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL))
+    # Not a code annotation; "todo" in --objective-surplus-min-terms-per-todo refers to backlog task entries.
+    args = _with_default(args, "--objective-surplus-min-terms-per-todo", str(OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO))
+    args = _with_flag_default(args, "--codebase-refill-scan")
+    args = _with_default(args, "--codebase-scan-discovery-dir", str(DISCOVERY_DIR))
+    args = _with_default(args, "--codebase-scan-discovery-output-path", "data/virtual_ai_os/discovery")
+    args = _with_default(args, "--codebase-scan-min-open-tasks", "0")
+    args = _with_repeated_default(args, "--codebase-scan-skip-prefix", CODEBASE_SCAN_SKIP_PREFIXES)
+    supervisor_main(args)
 
 
 if __name__ == "__main__":
