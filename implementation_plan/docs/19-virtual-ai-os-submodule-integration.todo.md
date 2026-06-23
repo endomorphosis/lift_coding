@@ -2226,3 +2226,47 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:237. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-375-codebase-scan-09159eaa4473.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-376 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:288
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
+- Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
+- Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:288. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-376-codebase-scan-5f281694481a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-377 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:292
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
+- Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
+- Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:292. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-377-codebase-scan-465e51445a76.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-378 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:376
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
+- Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
+- Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:376. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-378-codebase-scan-5a569d75b7f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-379 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:56
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, tracking/PR-079-agent-runner-minimal.md
+- Validation: test -f tracking/PR-079-agent-runner-minimal.md
+- Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:56. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-379-codebase-scan-0a3992f37e3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
