@@ -1676,25 +1676,25 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: a71185d409114be126e4db776cdcce72331ba6e0
+- Fingerprint: 9a8b4e206e72c79ce7109e6048570861ae24445a
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
 - Acceptance: Reconciliation guardrail filed this because 46 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
-## VAI-201 Resolve 34 dirty backlogged worktrees blocked by content_not_in_target
+## VAI-201 Resolve 3 dirty backlogged worktrees blocked by content_not_in_target
 
 - Status: todo
 - Completion: manual
 - Priority: P2
 - Track: ops
-- Fingerprint: a13ec50687c20ff60f933c5b7e1ad3b4290190ed
+- Fingerprint: 443bbaa6b16c08e5c7dfc372831c322ad49f7a1b
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md
-- Acceptance: Reconciliation guardrail filed this because 34 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by content_not_in_target. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-201-reconciliation-9422bd776827.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-202 Resolve 15 dirty backlogged worktrees blocked by unsupported_status
 
@@ -1720,4 +1720,103 @@ cadence remains parseable and resumable.
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
-- Acceptance: Reconciliation guardrail filed this because 15 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 46 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## VAI-204 Resolve dependency guardrail for VAI-200
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because VAI-200 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-204-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## VAI-205 Review preserved VAI-202 dirty submodule source patches
+
+- Status: completed
+- Completion: manual
+- Priority: P2
+- Track: ops
+- Depends on: VAI-202
+- Outputs: data/virtual_ai_os/discovery/vai-202-preserved-diffs, hallucinate_app
+- Validation: test -d data/virtual_ai_os/discovery/vai-202-preserved-diffs
+- Acceptance: VAI-202 preserved unique source diffs from merged dirty worktrees before cleanup. Review each patch in data/virtual_ai_os/discovery/vai-202-preserved-diffs, port or intentionally drop the corresponding hallucinate_app change, and record the decision so the merged-worktree cleanup can stay free of stale local source edits.
+
+## VAI-206 Resolve dependency guardrail for VAI-204
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because VAI-204 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-206-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## VAI-207 Resolve code annotation in hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py:793
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
+- Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
+- Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py:793. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-207-codebase-scan-35009422e1fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-208 Review swallowed exception path in external/ipfs_kit/.github/scripts/generate_workflow_list.py:36
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/scripts/generate_workflow_list.py
+- Validation: python3 -m py_compile external/ipfs_kit/.github/scripts/generate_workflow_list.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/scripts/generate_workflow_list.py:36. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-208-codebase-scan-67e750fa2595.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-209 Review swallowed exception path in external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Validation: python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-209-codebase-scan-f5c0089e31da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-210 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-210-codebase-scan-7e74c27a365d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-211 Review swallowed exception path in external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-211-codebase-scan-f223d9e5d048.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-212 Resolve implementation retry-budget failure for VAI-211
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-211. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-211 from strategy blocked_tasks.
