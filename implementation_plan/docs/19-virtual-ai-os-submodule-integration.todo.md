@@ -1830,7 +1830,7 @@ cadence remains parseable and resumable.
 
 ## VAI-340 Close objective gap: Production launch readiness gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
