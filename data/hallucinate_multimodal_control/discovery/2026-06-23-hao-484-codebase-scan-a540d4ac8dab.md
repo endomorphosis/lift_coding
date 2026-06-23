@@ -19,3 +19,10 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+The flagged token was a `PortalTask` fixture status for `MGW-026`, not a pending
+code annotation. The fixture only needs to represent an open task, and
+`objective_task_janitor.OPEN_TASK_STATUSES` accepts `ready`, so the test now uses
+`ready` there to preserve coverage without re-triggering the annotation scan.
