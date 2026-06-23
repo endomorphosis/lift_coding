@@ -1,0 +1,347 @@
+{
+  "fixture_id": "mgw-267-phone-glasses-terminal",
+  "schema_version": "1.0.0",
+  "description": "Deterministic mobile-hosted Meta glasses terminal trace for virtual desktop status, confirmation, and peer-offload updates.",
+  "offline_contract": {
+    "deterministic": true,
+    "requires_meta_credentials": false,
+    "requires_paired_hardware": false,
+    "hardware_required": false,
+    "phone_host_id": "mobile-device-local",
+    "paired_device_id": null,
+    "transport": "in_memory_fixture",
+    "clock": {
+      "start": "2026-06-23T00:00:00Z",
+      "step_ms": 1000
+    }
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-06-23T00:00:00Z",
+      "event_type": "virtual_desktop_status",
+      "correlation_id": "corr-mgw-267-status",
+      "widget_state": {
+        "widget_kind": "handsfree.virtual-desktop-session",
+        "session_identity": {
+          "session_id": "vdesktop-session-mgw-267",
+          "desktop_id": "phone-hosted-desktop",
+          "phone_host_id": "mobile-device-local",
+          "operator_id": "fixture-operator",
+          "started_at": "2026-06-23T00:00:00Z",
+          "last_updated_at": "2026-06-23T00:00:00Z",
+          "receipt_cid": "bafy-mgw267-session"
+        },
+        "descriptor_refs": {
+          "descriptor_cid": "bafy-mgw267-descriptor",
+          "manifest_cid": "bafy-mgw267-manifest-status",
+          "orb_receipt_cid": "bafy-mgw267-orb-status",
+          "policy_receipt_cid": "bafy-mgw267-policy"
+        },
+        "render_context": {
+          "render_path": "mobile-card",
+          "fallback_path": "display-webapp",
+          "hardware_required": false,
+          "paired_device_id": null,
+          "preview_mode": true
+        },
+        "pairing": {
+          "status": "unpaired",
+          "detail": "phone preview active",
+          "actions": ["retry_pairing", "open_phone_preview"]
+        },
+        "active_tool": {
+          "tool_id": "agent-terminal",
+          "label": "Agent terminal",
+          "mode": "terminal",
+          "surface": "mobile_card",
+          "focus_region_id": "message",
+          "input_state": "ready"
+        },
+        "regions": {
+          "status_region": {
+            "title": "Virtual desktop",
+            "pairing_badge": "Preview",
+            "active_tool_label": "Agent terminal",
+            "policy_outcome": "allowed",
+            "last_receipt_cid": "bafy-mgw267-orb-status"
+          },
+          "progress_region": {
+            "operation": "Run command",
+            "phase": "executing",
+            "percent": 15,
+            "current_step": 1,
+            "total_steps": 3,
+            "eta_ms": 180000
+          },
+          "message_region": {
+            "text": "Command running on phone-hosted desktop."
+          },
+          "diagnostics_region": {
+            "session_id": "vdesktop-session-mgw-267",
+            "render_path": "mobile-card",
+            "update_count": 1,
+            "last_bridge_result": "display_unavailable"
+          }
+        },
+        "peer_offload": {
+          "availability": "discovering",
+          "compute_placement": {
+            "mode": "phone_local",
+            "reason": "fixture starts on phone host",
+            "placement_receipt_cid": "bafy-mgw267-placement-phone"
+          },
+          "actions": ["open_mobile_card"],
+          "receipts": {
+            "policy_receipt_cid": "bafy-mgw267-policy",
+            "orb_receipt_cid": "bafy-mgw267-orb-status"
+          }
+        },
+        "recovery": {
+          "code": "preview_only",
+          "message": "No paired display is required; showing phone preview.",
+          "next_actions": ["retry", "open_mobile_card"],
+          "fallback": {
+            "render_path": "mobile-card",
+            "message": "Continue from the phone preview."
+          }
+        }
+      }
+    },
+    {
+      "sequence": 2,
+      "timestamp": "2026-06-23T00:00:01Z",
+      "event_type": "confirmation_prompt",
+      "correlation_id": "corr-mgw-267-confirm",
+      "widget_state": {
+        "widget_kind": "handsfree.virtual-desktop-session",
+        "session_identity": {
+          "session_id": "vdesktop-session-mgw-267",
+          "desktop_id": "phone-hosted-desktop",
+          "phone_host_id": "mobile-device-local",
+          "operator_id": "fixture-operator",
+          "started_at": "2026-06-23T00:00:00Z",
+          "last_updated_at": "2026-06-23T00:00:01Z",
+          "receipt_cid": "bafy-mgw267-session"
+        },
+        "descriptor_refs": {
+          "descriptor_cid": "bafy-mgw267-descriptor",
+          "manifest_cid": "bafy-mgw267-manifest-confirm",
+          "orb_receipt_cid": "bafy-mgw267-orb-confirm",
+          "policy_receipt_cid": "bafy-mgw267-policy"
+        },
+        "render_context": {
+          "render_path": "mobile-card",
+          "fallback_path": "display-webapp",
+          "hardware_required": false,
+          "paired_device_id": null,
+          "preview_mode": true
+        },
+        "pairing": {
+          "status": "unpaired",
+          "detail": "phone preview active",
+          "actions": ["retry_pairing", "open_phone_preview"]
+        },
+        "active_tool": {
+          "tool_id": "agent-terminal",
+          "label": "Agent terminal",
+          "mode": "confirmation",
+          "surface": "mobile_card",
+          "focus_region_id": "confirmation",
+          "input_state": "awaiting_operator"
+        },
+        "confirmation_prompt": {
+          "prompt_id": "confirm-stop-mgw-267",
+          "kind": "cancel",
+          "title": "Stop task?",
+          "body": "Cancel the running desktop command.",
+          "risk_level": "medium",
+          "expires_at": "2026-06-23T00:01:01Z",
+          "default_action": "continue",
+          "actions": [
+            {
+              "id": "continue",
+              "label": "Continue",
+              "focus_order": 1,
+              "backend_action_id": "terminal.continue",
+              "correlation_id": "corr-mgw-267-confirm"
+            },
+            {
+              "id": "cancel_task",
+              "label": "Cancel task",
+              "focus_order": 2,
+              "backend_action_id": "terminal.cancel",
+              "correlation_id": "corr-mgw-267-confirm"
+            }
+          ]
+        },
+        "regions": {
+          "status_region": {
+            "title": "Virtual desktop",
+            "pairing_badge": "Preview",
+            "active_tool_label": "Agent terminal",
+            "policy_outcome": "allowed",
+            "last_receipt_cid": "bafy-mgw267-orb-confirm"
+          },
+          "progress_region": {
+            "operation": "Run command",
+            "phase": "confirming",
+            "percent": 15
+          },
+          "message_region": {
+            "text": "Confirm whether to stop the terminal command."
+          },
+          "diagnostics_region": {
+            "session_id": "vdesktop-session-mgw-267",
+            "render_path": "mobile-card",
+            "update_count": 2,
+            "last_bridge_result": "display_unavailable"
+          }
+        },
+        "peer_offload": {
+          "availability": "available",
+          "selected_peer": {
+            "peer_id": "desktop-peer-01",
+            "display_name": "Desk GPU",
+            "endpoint_hint": "lan",
+            "trust_level": "paired",
+            "capability_class": "desktop",
+            "last_seen_at": "2026-06-23T00:00:59Z",
+            "policy_receipt_cid": "bafy-mgw267-policy"
+          },
+          "compute_placement": {
+            "mode": "phone_local",
+            "reason": "operator confirmation pending",
+            "placement_receipt_cid": "bafy-mgw267-placement-phone"
+          },
+          "actions": ["select_peer", "open_mobile_card"],
+          "receipts": {
+            "policy_receipt_cid": "bafy-mgw267-policy",
+            "orb_receipt_cid": "bafy-mgw267-orb-confirm"
+          }
+        },
+        "recovery": {
+          "code": "preview_only",
+          "message": "No paired display is required; showing phone preview.",
+          "next_actions": ["retry", "open_mobile_card"],
+          "fallback": {
+            "render_path": "mobile-card",
+            "message": "Continue from the phone preview."
+          }
+        }
+      }
+    },
+    {
+      "sequence": 3,
+      "timestamp": "2026-06-23T00:00:02Z",
+      "event_type": "peer_offload_update",
+      "correlation_id": "corr-mgw-267-offload",
+      "widget_state": {
+        "widget_kind": "handsfree.virtual-desktop-session",
+        "session_identity": {
+          "session_id": "vdesktop-session-mgw-267",
+          "desktop_id": "phone-hosted-desktop",
+          "phone_host_id": "mobile-device-local",
+          "operator_id": "fixture-operator",
+          "started_at": "2026-06-23T00:00:00Z",
+          "last_updated_at": "2026-06-23T00:00:02Z",
+          "receipt_cid": "bafy-mgw267-session"
+        },
+        "descriptor_refs": {
+          "descriptor_cid": "bafy-mgw267-descriptor",
+          "manifest_cid": "bafy-mgw267-manifest-offload",
+          "orb_receipt_cid": "bafy-mgw267-orb-offload",
+          "policy_receipt_cid": "bafy-mgw267-policy"
+        },
+        "render_context": {
+          "render_path": "mobile-card",
+          "fallback_path": "display-webapp",
+          "hardware_required": false,
+          "paired_device_id": null,
+          "preview_mode": true
+        },
+        "pairing": {
+          "status": "unpaired",
+          "detail": "phone preview active",
+          "actions": ["retry_pairing", "open_phone_preview"]
+        },
+        "active_tool": {
+          "tool_id": "agent-terminal",
+          "label": "Agent terminal",
+          "mode": "terminal",
+          "surface": "mobile_card",
+          "focus_region_id": "peer_offload",
+          "input_state": "running"
+        },
+        "regions": {
+          "status_region": {
+            "title": "Virtual desktop",
+            "pairing_badge": "Preview",
+            "active_tool_label": "Agent terminal",
+            "policy_outcome": "allowed",
+            "last_receipt_cid": "bafy-mgw267-orb-offload"
+          },
+          "progress_region": {
+            "operation": "Offload context",
+            "phase": "uploading_context",
+            "percent": 62,
+            "current_step": 2,
+            "total_steps": 3,
+            "eta_ms": 42000
+          },
+          "message_region": {
+            "text": "Sending task context to desktop peer."
+          },
+          "diagnostics_region": {
+            "session_id": "vdesktop-session-mgw-267",
+            "render_path": "mobile-card",
+            "update_count": 3,
+            "last_bridge_result": "display_unavailable"
+          }
+        },
+        "peer_offload": {
+          "availability": "transferring",
+          "selected_peer": {
+            "peer_id": "desktop-peer-01",
+            "display_name": "Desk GPU",
+            "endpoint_hint": "lan",
+            "trust_level": "paired",
+            "capability_class": "desktop",
+            "last_seen_at": "2026-06-23T00:00:59Z",
+            "policy_receipt_cid": "bafy-mgw267-policy"
+          },
+          "compute_placement": {
+            "mode": "desktop_peer",
+            "reason": "operator selected desktop offload",
+            "placement_receipt_cid": "bafy-mgw267-placement-peer"
+          },
+          "transfer_state": {
+            "operation_id": "offload-transfer-mgw-267",
+            "phase": "uploading_context",
+            "bytes_sent": 5242880,
+            "bytes_total": 8388608,
+            "percent": 62,
+            "eta_ms": 42000,
+            "throughput_bps": 1048576,
+            "message": "Sending task context to desktop peer."
+          },
+          "actions": ["cancel_offload", "retry_offload", "fallback_to_phone", "open_mobile_card"],
+          "receipts": {
+            "policy_receipt_cid": "bafy-mgw267-policy",
+            "orb_receipt_cid": "bafy-mgw267-orb-offload",
+            "transfer_receipt_cid": "bafy-mgw267-transfer"
+          }
+        },
+        "recovery": {
+          "code": "preview_only",
+          "message": "No paired display is required; showing phone preview.",
+          "next_actions": ["retry", "open_mobile_card"],
+          "fallback": {
+            "render_path": "mobile-card",
+            "message": "Continue from the phone preview."
+          }
+        }
+      }
+    }
+  ]
+}
