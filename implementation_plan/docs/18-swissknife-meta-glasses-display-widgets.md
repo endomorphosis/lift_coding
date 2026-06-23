@@ -197,6 +197,16 @@ Progress and status regions:
 - `message_region`: short operator-facing status, capped to the same bounded-text rules as other Meta glasses display regions.
 - `diagnostics_region`: hidden by default on glasses, but available to simulator/mobile preview with `session_id`, `render_path`, update count, and last bridge result.
 
+Peer-offload state:
+
+- `peer_offload.availability`: desktop-offload availability for the current session, one of `unavailable`, `discovering`, `available`, `selected`, `transferring`, `running`, `degraded`, `failed`, or `fallback_active`.
+- `peer_offload.selected_peer`: optional selected peer summary with `peer_id`, `display_name`, `endpoint_hint`, `trust_level`, `capability_class`, `last_seen_at`, and `policy_receipt_cid`; glasses must show only display-safe names and coarse capability labels.
+- `peer_offload.compute_placement`: current placement for the active tool, one of `phone_local`, `desktop_peer`, `hybrid`, `fallback_phone`, or `unknown`, plus optional `reason` and `placement_receipt_cid`.
+- `peer_offload.transfer_state`: optional transfer/progress state with `operation_id`, `phase`, `bytes_sent`, `bytes_total`, `percent`, `eta_ms`, `throughput_bps`, and display-safe `message`; percent may be omitted while peer negotiation is indeterminate.
+- `peer_offload.actions`: bounded operator actions for `cancel_offload`, `retry_offload`, `fallback_to_phone`, `select_peer`, `dismiss_offload_message`, and `open_mobile_card`; every action must map to a backend-approved action ID and carry the same correlation ID used by the active policy receipt.
+- `peer_offload.receipts`: optional receipt references for `policy_receipt_cid`, `orb_receipt_cid`, `transfer_receipt_cid`, and `fallback_receipt_cid`; the extension must not replace `descriptor_refs.policy_receipt_cid` or bypass the existing policy receipt model.
+- `peer_offload.error`: optional stable `code`, display-safe `message`, and `retryable` flag for peer unavailable, peer rejected, transfer interrupted, policy denied, or fallback active states.
+
 Confirmation prompts:
 
 - `confirmation_prompt.prompt_id`, `kind`, `title`, `body`, `risk_level`, `expires_at`, `default_action`, and `actions`.
@@ -234,6 +244,35 @@ Minimal manifest state example:
     "mode": "terminal",
     "surface": "mobile_card",
     "focus_region_id": "message"
+  },
+  "peer_offload": {
+    "availability": "transferring",
+    "selected_peer": {
+      "peer_id": "desktop-peer-01",
+      "display_name": "Desk GPU",
+      "capability_class": "desktop",
+      "trust_level": "paired",
+      "policy_receipt_cid": "bafy-policy..."
+    },
+    "compute_placement": {
+      "mode": "desktop_peer",
+      "reason": "operator selected desktop offload",
+      "placement_receipt_cid": "bafy-placement..."
+    },
+    "transfer_state": {
+      "operation_id": "offload-transfer-01",
+      "phase": "uploading_context",
+      "percent": 62,
+      "bytes_sent": 5242880,
+      "bytes_total": 8388608,
+      "message": "Sending task context to desktop peer."
+    },
+    "actions": ["cancel_offload", "retry_offload", "fallback_to_phone"],
+    "receipts": {
+      "policy_receipt_cid": "bafy-policy...",
+      "orb_receipt_cid": "bafy-orb...",
+      "transfer_receipt_cid": "bafy-transfer..."
+    }
   },
   "regions": {
     "status_region": {
