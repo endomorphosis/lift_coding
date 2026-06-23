@@ -81,6 +81,30 @@
         <button id="export-readiness-button" type="button">Export Readiness</button>
       </div>
 
+      <section class="status-block" aria-label="Command session">
+        <h2>Command Session</h2>
+        <label class="field">
+          <span>Surface</span>
+          <select id="command-surface-select">
+            <option value="display">Display</option>
+            <option value="audio">Audio</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Payload</span>
+          <input
+            id="command-payload-input"
+            type="text"
+            value="show task progress and speak latest status"
+          >
+        </label>
+        <div class="button-row two-up">
+          <button id="dispatch-command-button" type="button">Dispatch Command</button>
+          <button id="export-session-button" type="button">Export Session</button>
+        </div>
+        <pre id="session-log"></pre>
+      </section>
+
       <label class="field">
         <span>Load Manifest JSON</span>
         <input id="manifest-file-input" type="file" accept="application/json">

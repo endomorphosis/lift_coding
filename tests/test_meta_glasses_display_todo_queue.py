@@ -31,6 +31,11 @@ PENDING_TASK_STATUS = "to" + "do"
 PHONE_GLASSES_TERMINAL_FIXTURE_PATH = REPO_ROOT / "data" / "meta_glasses_display_widgets" / (
     "discovery"
 ) / "2026-06-23-mgw-267-phone-glasses-terminal-fixture.json"
+META_RAYBAN_SIMULATOR_JS = REPO_ROOT / "dev" / "meta-rayban-display-simulator" / "simulator.js"
+META_RAYBAN_SIMULATOR_HTML = REPO_ROOT / "dev" / "meta-rayban-display-simulator" / "index.html"
+META_RAYBAN_DISCOVERY_PATH = REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / (
+    "2026-06-23-vai-016-meta-rayban-browser-simulator-shell.md"
+)
 
 
 def _load_script_module(name: str):
@@ -208,6 +213,119 @@ def test_vai_008_meta_glasses_terminal_route_is_constrained_for_mobile_sessions(
         "status_region": "peer_offload",
         "fallback_compute_placement": "phone_local",
     }
+
+
+def test_meta_rayban_browser_simulator_exports_mobile_hosted_command_session():
+    script = f"""
+      const simulator = require({json.dumps(str(META_RAYBAN_SIMULATOR_JS))});
+      const manifest = {{
+        ...simulator.DEFAULT_MANIFEST,
+        widget_id: 'org.handsfree.meta_glasses.vai016.shell',
+        widget_cid: 'sha256:vai016-shell',
+        descriptor_cid: 'sha256:vai016-descriptor',
+        orb_receipt_cid: 'sha256:vai016-orb-receipt',
+        correlation_id: 'vai016-command-session',
+      }};
+      const session = simulator.buildMobileHostedSession({{
+        session_identity: {{
+          session_id: 'vai016-browser-session',
+          phone_host_id: 'iphone-vai016',
+          desktop_id: 'mobile-hosted-vdesktop-vai016',
+        }},
+      }}, manifest);
+      const displayCommand = simulator.buildSessionCommand('render_display', {{
+        command_id: 'cmd-display-vai016',
+        target_surface: 'display',
+        text: 'render task status',
+        requested_at: '2026-06-23T00:00:00Z',
+      }}, session, manifest);
+      const updatedSession = simulator.dispatchSessionCommand('audio_command', {{
+        command_id: 'cmd-audio-vai016',
+        target_surface: 'audio',
+        text: 'speak task status',
+        requested_at: '2026-06-23T00:00:01Z',
+      }}, session, manifest);
+
+      if (session.session_model !== 'handsfree.virtual-desktop-session') {{
+        throw new Error('session model mismatch');
+      }}
+      if (session.command_model !== 'handsfree.command-session@0.1.0') {{
+        throw new Error('command model mismatch');
+      }}
+      if (session.host_mode !== 'mobile_hosted') {{
+        throw new Error('host mode mismatch');
+      }}
+      if (session.terminal_constraints.hardware_required !== false) {{
+        throw new Error('hardware-free constraint missing');
+      }}
+      if (session.surfaces.display.endpoint_id !== 'meta_glasses_display_widget') {{
+        throw new Error('display endpoint mismatch');
+      }}
+      if (session.surfaces.audio.input_endpoint_id !== 'meta_glasses_audio_input') {{
+        throw new Error('audio input endpoint mismatch');
+      }}
+      if (session.surfaces.audio.output_endpoint_id !== 'meta_glasses_audio_output') {{
+        throw new Error('audio output endpoint mismatch');
+      }}
+      if (displayCommand.route.contract_id !== simulator.REMOTE_TERMINAL_CONTRACT_ID) {{
+        throw new Error('route contract mismatch');
+      }}
+      if (displayCommand.route.terminal_kind !== 'meta_glasses_remote_terminal') {{
+        throw new Error('terminal kind mismatch');
+      }}
+      const endpointIds = displayCommand.route.endpoints.map((endpoint) => endpoint.endpoint_id).sort();
+      if (endpointIds.join(',') !== [
+        'meta_glasses_audio_input',
+        'meta_glasses_audio_output',
+        'meta_glasses_display_widget',
+      ].sort().join(',')) {{
+        throw new Error(`unexpected endpoints: ${{endpointIds.join(',')}}`);
+      }}
+      if (updatedSession.command_queue.length !== 1) {{
+        throw new Error('audio command was not queued');
+      }}
+      if (updatedSession.last_command.target_surface !== 'audio') {{
+        throw new Error('last command did not target audio');
+      }}
+      if (updatedSession.last_command.route.session_contract.host_mode !== 'mobile_hosted') {{
+        throw new Error('queued command route lost mobile host mode');
+      }}
+    """
+    subprocess.run(["node", "-e", script], check=True, cwd=REPO_ROOT)
+
+
+def test_meta_rayban_browser_simulator_shell_declares_session_controls_and_discovery():
+    html = META_RAYBAN_SIMULATOR_HTML.read_text(encoding="utf-8")
+    source = META_RAYBAN_SIMULATOR_JS.read_text(encoding="utf-8")
+    discovery = META_RAYBAN_DISCOVERY_PATH.read_text(encoding="utf-8")
+
+    for token in [
+        "command-surface-select",
+        "dispatch-command-button",
+        "export-session-button",
+        "session-log",
+    ]:
+        assert token in html
+    for token in [
+        "buildMobileHostedSession",
+        "buildSessionCommand",
+        "dispatchSessionCommand",
+        "handsfree.virtual-desktop-session",
+        "handsfree.command-session@0.1.0",
+        "meta_glasses_audio_input",
+        "meta_glasses_audio_output",
+        "meta_glasses_display_widget",
+    ]:
+        assert token in source
+    for token in [
+        "VAI-016",
+        "Meta Ray-Ban browser simulator shell",
+        "display surface",
+        "audio surface",
+        "mobile-hosted virtual desktop",
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py",
+    ]:
+        assert token in discovery
 
 
 def test_peer_offload_widget_contract_extension_is_documented():
