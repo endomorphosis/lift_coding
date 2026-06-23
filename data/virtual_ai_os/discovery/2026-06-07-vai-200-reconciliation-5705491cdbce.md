@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 0718ea17eea44e1ac47022161ce15d79a91d113c
+Fingerprint: 985335084183ba05cbce0eb9353a29c021b96285
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 2
@@ -10,31 +10,23 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M scripts/meta_glasses_display_todo_daemon.py`
-- ` M scripts/meta_glasses_display_todo_supervisor.py`
-- ` M tests/test_meta_glasses_display_todo_queue.py`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=1`
 - Status paths:
-  - `scripts/meta_glasses_display_todo_daemon.py`
-  - `scripts/meta_glasses_display_todo_supervisor.py`
-  - `tests/test_meta_glasses_display_todo_queue.py`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	scripts/meta_glasses_display_todo_daemon.py`
-  - `M	scripts/meta_glasses_display_todo_supervisor.py`
-  - `M	tests/test_meta_glasses_display_todo_queue.py`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `scripts/meta_glasses_display_todo_daemon.py     | 114 ++++++--`
-  - ` scripts/meta_glasses_display_todo_supervisor.py | 358 +++++++++++-------------`
-  - ` tests/test_meta_glasses_display_todo_queue.py   |  62 +++-`
-  - ` 3 files changed, 307 insertions(+), 227 deletions(-)`
+  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md | 13 +++++++++++++`
+  - ` 1 file changed, 13 insertions(+)`
 
 ## Sample Branches Or Worktrees
 
 - `rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032`
-- `implementation/vai-338-attempt-1-1782235197` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235197`
+- `rescue/worktree/implementation-vai-338-attempt-1-1782235449-28c9e2fd7957` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235449`
 
 ## Why This Blocks Progress
 
@@ -98,23 +90,19 @@ Work surface: `2` candidates, `2` sampled records.
   "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "0718ea17eea44e1ac47022161ce15d79a91d113c",
+  "fingerprint": "985335084183ba05cbce0eb9353a29c021b96285",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "scripts/meta_glasses_display_todo_daemon.py     | 114 ++++++--\n scripts/meta_glasses_display_todo_supervisor.py | 358 +++++++++++-------------\n tests/test_meta_glasses_display_todo_queue.py   |  62 +++-\n 3 files changed, 307 insertions(+), 227 deletions(-)",
-    "name_status": "M\tscripts/meta_glasses_display_todo_daemon.py\nM\tscripts/meta_glasses_display_todo_supervisor.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
+    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md | 13 +++++++++++++\n 1 file changed, 13 insertions(+)",
+    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "modified": 3
+      "modified": 1
     },
     "status_paths": [
-      "scripts/meta_glasses_display_todo_daemon.py",
-      "scripts/meta_glasses_display_todo_supervisor.py",
-      "tests/test_meta_glasses_display_todo_queue.py"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M scripts/meta_glasses_display_todo_daemon.py",
-      " M scripts/meta_glasses_display_todo_supervisor.py",
-      " M tests/test_meta_glasses_display_todo_queue.py"
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -125,17 +113,15 @@ Work surface: `2` candidates, `2` sampled records.
   ],
   "sample_branches": [
     "rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc",
-    "implementation/vai-338-attempt-1-1782235197"
+    "rescue/worktree/implementation-vai-338-attempt-1-1782235449-28c9e2fd7957"
   ],
   "sample_count": 2,
   "sample_status_paths": [
-    "scripts/meta_glasses_display_todo_daemon.py",
-    "scripts/meta_glasses_display_todo_supervisor.py",
-    "tests/test_meta_glasses_display_todo_queue.py"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235197"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235449"
   ],
   "success_signals": [
     "candidate_count_decreases",
