@@ -779,3 +779,63 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Completed at: 2026-06-23T13:16:26.749131+00:00
 - Completion evidence: MGW-273 physical-device rehearsal packet => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); VAI-012 physical-device readiness => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); VAI-339 launch replay gate => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
 - Completion validation: 0
+
+## VAIOS-G697 Production launch readiness gate
+
+- Status: active
+- Parent: VAIOS-G689
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/production-readiness-gate
+- Parallel lane: launch-readiness-gate
+- Refinement depth: 2
+- Embedding query: production launch gate phone hosted Swissknife virtual desktop desktop peer offload Meta glasses terminal physical validation receipts
+- AST query: LaunchReadinessGate, launch_readiness_receipt_v1, phone_desktop_glasses_readiness
+- Conflict policy: keep launch readiness evidence in explicit receipts and tests; do not accept generic AST or documentation matches as sufficient proof
+- Goal: The supervisor must keep the phone-hosted Swissknife virtual desktop, desktop-peer offload, Hallucinate App mediation, and Meta glasses terminal path open until a launch-readiness receipt proves every product-critical hop.
+- Evidence: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, launch_readiness_receipt_v1
+- Outputs: tests/test_virtual_ai_os_launch_readiness_gate.py, docs/launch/phone_desktop_glasses_readiness.md, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Refinement: Split only if the gate needs a separate child for physical phone, desktop peer, or Meta glasses evidence capture.
+- Gap task: Add a launch-readiness gate that prevents the objective heap from treating weak scanner matches as proof that the product slice is production ready.
+
+## VAIOS-G698 Supervisor objective and task janitor
+
+- Status: active
+- Parent: VAIOS-G010
+- Fib priority: 1
+- Track: ops
+- Priority: P0
+- Bundle: objective/ops/task-janitor
+- Parallel lane: supervisor-backlog
+- Refinement depth: 2
+- Embedding query: supervisor objective task janitor retire stale goals archive orphaned tasks remove useless work fibonacci heap dynamic reconciliation
+- AST query: ObjectiveTaskJanitor, objective_task_janitor, retired_task_reason, heap_goal_retirement_receipt
+- Conflict policy: make task retirement explicit and reversible; preserve audit receipts for every generated goal or task that is archived, deprioritized, or reopened
+- Goal: The daemon continuously reconciles goals, subgoals, tasks, subtasks, and heap priorities so stale or off-mission work is archived or deprioritized while launch-blocking gaps are reopened.
+- Evidence: tests/test_supervisor_objective_task_janitor.py, objective_task_janitor, retired_task_reason, heap_goal_retirement_receipt
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py -q
+- Refinement: Add child goals for task archival, heap-goal reopening, and stale blocked-task summarization only after the janitor contract lands.
+- Gap task: Implement an objective/task janitor that can dynamically add, remove, archive, reopen, and reprioritize daemon work against the launch objective.
+
+## VAIOS-G699 Merge-lock retry and duplicate-attempt suppression
+
+- Status: active
+- Parent: VAIOS-G010
+- Fib priority: 1
+- Track: ops
+- Priority: P0
+- Bundle: objective/ops/merge-reconciliation
+- Parallel lane: supervisor-backlog
+- Refinement depth: 2
+- Embedding query: merge lock retry queue duplicate attempt suppression worktree cleanup automatic failed validation retry supervisor daemon
+- AST query: merge_lock_retry_queue, duplicate_attempt_suppression, transient_merge_lock, validation_auto_repair
+- Conflict policy: distinguish transient merge-lock deferrals from real merge conflicts, and preserve validated implementation commits before spawning replacement attempts
+- Goal: A validated implementation whose merge was deferred by a transient lock is retried and cleaned up automatically instead of being blocked, duplicated, or stranded in an orphaned worktree.
+- Evidence: tests/test_implementation_daemon_merge_lock_retry.py, merge_lock_retry_queue, duplicate_attempt_suppression, transient_merge_lock
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, tests/test_implementation_daemon_merge_lock_retry.py
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_implementation_daemon_merge_lock_retry.py -q
+- Refinement: Split validation auto-repair into a child goal if lock retry lands but failed-validation retry remains ad hoc.
+- Gap task: Teach the daemon to retry transient merge-lock failures, suppress duplicate attempts for already-validated work, and clean merged worktrees without manual intervention.
