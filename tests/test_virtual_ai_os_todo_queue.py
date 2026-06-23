@@ -99,6 +99,76 @@ def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled
     assert selected_when_open == [lock_event, conflict_event]
 
 
+def test_daemon_focus_tracks_keep_launch_first_for_legacy_strategies(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        DEFAULT_TRACKS,
+        PortalImplementationDaemon,
+        normalize_focus_tracks,
+    )
+
+    strategy_path = tmp_path / "strategy.json"
+    strategy_path.write_text(json.dumps({"focus_tracks": ["quality", "ops"]}), encoding="utf-8")
+    daemon = PortalImplementationDaemon(
+        todo_path=tmp_path / _task_board_filename("legacy-focus"),
+        state_path=tmp_path / "state.json",
+        strategy_path=strategy_path,
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+
+    assert DEFAULT_TRACKS[0] == "launch"
+    assert normalize_focus_tracks(["quality", "ops"])[:3] == ["launch", "quality", "ops"]
+    assert daemon.load_strategy()["focus_tracks"][:3] == ["launch", "quality", "ops"]
+
+
+def test_daemon_selects_launch_task_before_legacy_p0_quality_focus(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    daemon = PortalImplementationDaemon(
+        todo_path=tmp_path / _task_board_filename("legacy-selection"),
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=tmp_path,
+        task_header_prefix="## VAI-",
+    )
+    tasks = [
+        PortalTask(
+            task_id="VAI-019",
+            title="Quality cleanup",
+            status=PENDING_TASK_STATUS,
+            completion="",
+            priority="P0",
+            track="quality",
+        ),
+        PortalTask(
+            task_id="VAI-338",
+            title="Launch map",
+            status=PENDING_TASK_STATUS,
+            completion="",
+            priority="P0",
+            track="launch",
+        ),
+    ]
+
+    selected = daemon._select_next_task(
+        tasks,
+        {"VAI-019": "ready", "VAI-338": "ready"},
+        {"focus_tracks": ["quality", "ops"]},
+        {},
+        {},
+    )
+
+    assert selected is not None
+    assert selected.task_id == "VAI-338"
+
+
 def test_daemon_parser_blocks_header_only_task_records(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
@@ -487,7 +557,14 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
             assert goals_by_id[goal_id].fields.get("completion_validation")
     if active_launch_ids:
         assert all(goal_id in schedule_ids for goal_id in active_launch_ids)
-        assert all(schedule_ids.index(goal_id) < schedule_ids.index("VAIOS-G081") for goal_id in active_launch_ids)
+        scheduled_interop_ids = [
+            goal_id
+            for goal_id in schedule_ids
+            if goals_by_id[goal_id].fields.get("track") == "interoperability"
+        ]
+        if scheduled_interop_ids:
+            first_interop_index = min(schedule_ids.index(goal_id) for goal_id in scheduled_interop_ids)
+            assert all(schedule_ids.index(goal_id) < first_interop_index for goal_id in active_launch_ids)
     else:
         assert all(goals_by_id[goal_id].status == "completed" for goal_id in launch_ids)
         assert all(goals_by_id[goal_id].fields.get("completion_evidence") for goal_id in launch_ids)
@@ -505,12 +582,29 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     for term in ("launch-readiness", "archive", "transient lock"):
         assert term in launch_governance_text
 
+    generic_interop_ids = [f"VAIOS-G{goal_id:03d}" for goal_id in range(81, 88)]
+    if goals_by_id["VAIOS-G697"].status == "active":
+        assert all(goals_by_id[goal_id].status == "deferred" for goal_id in generic_interop_ids)
+        assert all(goals_by_id[goal_id].fields.get("deferred_reason") for goal_id in generic_interop_ids)
+
     active_interop_keys = [
         interoperability_pair_key(goal.fields.get("interoperability_pair", ""))
         for goal in active_goals
         if goal.fields.get("interoperability_pair")
     ]
     assert len(active_interop_keys) == len(set(active_interop_keys))
+
+
+def test_virtual_ai_os_launch_tasks_are_not_blocked_by_recursive_submodule_hygiene():
+    tasks = {task.task_id: task for task in _load_tasks()}
+
+    assert tasks["VAI-021"].status == "blocked"
+    assert "non-launch" in tasks["VAI-021"].metadata.get("blocked reason", "")
+    assert "git -C external/ipfs_kit submodule status" in "; ".join(tasks["VAI-021"].validation)
+    assert "VAI-021" not in tasks["VAI-338"].depends_on
+    assert tasks["VAI-338"].priority == "P0"
+    assert tasks["VAI-338"].track == "launch"
+    assert "VAI-338" in tasks["VAI-339"].depends_on
 
 
 def test_virtual_ai_os_wrappers_delegate_reusable_namespace_context():

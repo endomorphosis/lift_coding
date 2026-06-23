@@ -260,14 +260,15 @@ cadence remains parseable and resumable.
 
 ## VAI-021 Resolve nested submodule hygiene for ipfs_kit recursive bootstrap
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P1
 - Track: ops
 - Depends on: VAI-002, VAI-009
+- Blocked reason: Scoped `external/ipfs_kit` submodule hygiene is documented, but root `git submodule status --recursive` still traverses unrelated vendored nested pins under `external/ipfs_accelerate`; treat this as non-launch housekeeping and do not let it block the phone/desktop/glasses launch slice.
 - Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
-- Validation: git submodule status --recursive; rg -n "VAI-021|nested submodule|ipfs_kit|recursive bootstrap" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
-- Acceptance: Document or fix nested submodule bootstrap issues that block ipfs_kit from participating in the virtual desktop network path, with no unrelated gitlink churn.
+- Validation: git -C external/ipfs_kit submodule status; rg -n "VAI-021|nested submodule|ipfs_kit|recursive bootstrap" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Keep the scoped ipfs_kit recursive-bootstrap evidence available, but split any remaining global recursive submodule cleanup into explicit non-launch pin-refresh work instead of blocking the virtual desktop launch gate.
 
 ## VAI-022 Package the browser Web App for HTTPS glasses loading
 
@@ -1179,10 +1180,10 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: VAI-009, VAI-012, VAI-021, VAI-024, VAI-337
+- Depends on: VAI-009, VAI-012, VAI-024, VAI-337
 - Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
 - Validation: rg -n "VAI-338|launch alignment|phone|desktop peer|Meta glasses|Hallucinate App|Swissknife" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
-- Acceptance: Produce a launch alignment map that ties the VAI capability registry, MGW display-widget contract, HAO mediation receipts, phone-hosted session model, and desktop-peer offload path into one ordered validation slice, explicitly marking work that is simulator-only, physical-device-gated, or not launch-critical.
+- Acceptance: Produce a launch alignment map that ties the VAI capability registry, MGW display-widget contract, HAO mediation receipts, phone-hosted session model, and desktop-peer offload path into one ordered validation slice, explicitly marking work that is simulator-only, physical-device-gated, not launch-critical, or deferred to non-launch submodule hygiene.
 
 ## VAI-339 Add an end-to-end launch replay gate for phone, desktop, Swissknife, Hallucinate App, and Meta glasses
 
