@@ -16,7 +16,7 @@ We already have multiple mobile tracking PRs (recording, routing, playback, uplo
 ## Scope
 - Write a runbook that a developer can follow to demo MVP1 in <5 minutes.
 - Document exact backend endpoints + expected payloads.
-- Document backend environment flags for "realistic" STT/TTS vs stubs.
+- Document backend environment flags for “realistic” STT/TTS vs stubs.
 - Document known Ray-Ban Meta Bluetooth constraints and fallback behavior.
 
 ## Non-goals
@@ -24,10 +24,10 @@ We already have multiple mobile tracking PRs (recording, routing, playback, uplo
 - Building a production push notification stack (polling is acceptable for MVP1).
 
 ## Demo definition (MVP1)
-1) User speaks: "show my inbox"
+1) User speaks: “show my inbox”
 2) Backend returns inbox summary + cards
 3) iOS app calls TTS endpoint and plays audio through glasses
-4) Optional: "summarize PR 123", "repeat", "next"
+4) Optional: “summarize PR 123”, “repeat”, “next”
 
 ## Backend prerequisites
 ### Backend endpoints used
@@ -53,9 +53,7 @@ TTS:
 
 GitHub:
 - Fixture-only (default): no env needed
-- Live mode (simple demo): `HANDS_FREE_GITHUB_MODE=live` and `GITHUB_TOKEN=...`
-- Alternate legacy live-mode flag: `GITHUB_LIVE_MODE=true`
-- Explicit CLI-backed fallback for legacy action/auth flows: `HANDSFREE_GH_CLI_ENABLED=true`
+- Live mode (simple demo): `GITHUB_LIVE_MODE=true` and `GITHUB_TOKEN=...`
 
 Webhooks (optional):
 - Dev signature accepted when secret unset; prod should set `GITHUB_WEBHOOK_SECRET`.
@@ -88,10 +86,10 @@ Option B (audio path, dev upload):
 - Play returned audio bytes via iOS audio session configured for Bluetooth output.
 
 ### 4) Navigation
-- Send "next" (`system.next`) and "repeat" (`system.repeat`) via `POST /v1/command` text input.
+- Send “next” (`system.next`) and “repeat” (`system.repeat`) via `POST /v1/command` text input.
 
 ### 5) Optional: PR summary
-- Send "summarize PR 123".
+- Send “summarize PR 123”.
 - Play returned TTS.
 
 ## Related tracking PRs (implementation)
@@ -109,8 +107,3 @@ This runbook assumes implementation is delivered by these PRs:
   - backend env flags for STT/TTS/GitHub
   - fallback guidance for Bluetooth mic unreliability
 - Runbook references the existing mobile tracking PRs instead of duplicating them.
-
-## Agent checklist
-- [ ] Create `tracking/PR-059-ios-rayban-mvp1-demo-runbook.md`
-- [ ] Create `work/PR-059-ios-rayban-mvp1-demo-runbook.md`
-- [ ] Create `docs/ios-rayban-mvp1-demo-runbook.md` with complete end-to-end demo instructions
