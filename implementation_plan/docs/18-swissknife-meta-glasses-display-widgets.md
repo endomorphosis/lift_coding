@@ -167,6 +167,115 @@ Every generated widget must pass these checks before the backend can emit a mobi
 - ORB invocation requires correlation ID, receipt, policy outcome, and lifecycle record.
 - A native-display-unavailable fallback is required before publish; DAT native display unavailable must be treated as a normal fallback state, not a renderer crash.
 
+## Phone-Hosted Virtual Desktop Session Widget
+
+MGW-265 defines the display-safe contract for a mobile-hosted virtual desktop session. The widget is a glasses render target for a desktop session whose authoritative runtime, receipts, and recovery state live on the phone/backend, so every state below must also render in simulator, display-webapp preview, or mobile-card fallback without paired Meta hardware.
+
+Contract identity:
+
+- `widget_kind`: `handsfree.virtual-desktop-session`.
+- `session_identity`: stable `session_id`, `desktop_id`, `phone_host_id`, optional `operator_id`, `started_at`, `last_updated_at`, and `receipt_cid`.
+- `descriptor_refs`: `descriptor_cid`, latest `manifest_cid`, optional `orb_receipt_cid`, and `policy_receipt_cid`.
+- `render_context`: `render_path`, `fallback_path`, `hardware_required: false`, `paired_device_id` when available, and `preview_mode` when no paired glasses are present.
+
+Pairing state:
+
+- `pairing.status`: one of `unpaired`, `discovering`, `pairing_requested`, `paired`, `display_ready`, `display_unavailable`, `disconnected`, or `requires_update`.
+- `pairing.detail`: short display-safe reason such as "phone preview active", "waiting for glasses", "display capability unavailable", "firmware update required", or "session disconnected".
+- `pairing.actions`: optional bounded actions for `retry_pairing`, `open_phone_preview`, `reset_display_session`, and `dismiss_message`.
+
+Active tool:
+
+- `active_tool.tool_id`, `label`, `mode`, `surface`, `focus_region_id`, and `input_state`.
+- `active_tool.mode`: one of `terminal`, `browser`, `editor`, `agent_task`, `file_transfer`, `confirmation`, or `idle`.
+- `active_tool.surface`: one of `phone_hosted_desktop`, `mobile_card`, `display_webapp`, `dat_native`, or `simulator`.
+
+Progress and status regions:
+
+- `status_region`: compact title, pairing badge, active tool label, and last receipt or policy outcome.
+- `progress_region`: optional `operation`, `phase`, `percent`, `current_step`, `total_steps`, and `eta_ms`; percent may be omitted for indeterminate work.
+- `message_region`: short operator-facing status, capped to the same bounded-text rules as other Meta glasses display regions.
+- `diagnostics_region`: hidden by default on glasses, but available to simulator/mobile preview with `session_id`, `render_path`, update count, and last bridge result.
+
+Confirmation prompts:
+
+- `confirmation_prompt.prompt_id`, `kind`, `title`, `body`, `risk_level`, `expires_at`, `default_action`, and `actions`.
+- `confirmation_prompt.kind`: one of `continue`, `cancel`, `destructive`, `permission`, `handoff`, or `fallback`.
+- `confirmation_prompt.actions`: bounded action set with stable IDs, display labels, focus order, and backend-approved action mappings; destructive and permission prompts must include a policy receipt before activation.
+
+Recovery messages:
+
+- `recovery.code`: stable code for `session_stale`, `pairing_lost`, `display_unavailable`, `phone_host_unreachable`, `tool_crashed`, `receipt_missing`, `policy_denied`, `update_required`, or `preview_only`.
+- `recovery.message`: display-safe text that tells the operator what changed without exposing raw stack traces or untrusted descriptor content.
+- `recovery.next_actions`: bounded actions for `retry`, `reset_session`, `switch_to_phone_preview`, `open_mobile_card`, `dismiss`, or `request_help`.
+- `recovery.fallback`: required `render_path` and message for simulator/mobile-card/display-webapp rendering when DAT native display or paired hardware is unavailable.
+
+Minimal manifest state example:
+
+```json
+{
+  "widget_kind": "handsfree.virtual-desktop-session",
+  "session_identity": {
+    "session_id": "vdesktop-session-01",
+    "desktop_id": "phone-hosted-desktop",
+    "phone_host_id": "mobile-device-local",
+    "started_at": "2026-06-23T00:00:00Z",
+    "last_updated_at": "2026-06-23T00:00:05Z",
+    "receipt_cid": "bafy..."
+  },
+  "pairing": {
+    "status": "unpaired",
+    "detail": "phone preview active",
+    "actions": ["retry_pairing", "open_phone_preview"]
+  },
+  "active_tool": {
+    "tool_id": "agent-terminal",
+    "label": "Agent terminal",
+    "mode": "terminal",
+    "surface": "mobile_card",
+    "focus_region_id": "message"
+  },
+  "regions": {
+    "status_region": {
+      "title": "Virtual desktop",
+      "pairing_badge": "Preview",
+      "policy_outcome": "allowed"
+    },
+    "progress_region": {
+      "operation": "Run command",
+      "phase": "executing",
+      "percent": 45
+    },
+    "message_region": {
+      "text": "Command running on phone-hosted desktop."
+    },
+    "diagnostics_region": {
+      "render_path": "mobile-card",
+      "update_count": 3,
+      "last_bridge_result": "display_unavailable"
+    }
+  },
+  "confirmation_prompt": {
+    "prompt_id": "confirm-stop-01",
+    "kind": "cancel",
+    "title": "Stop task?",
+    "body": "Cancel the running desktop command.",
+    "risk_level": "medium",
+    "default_action": "continue",
+    "actions": ["continue", "cancel_task"]
+  },
+  "recovery": {
+    "code": "preview_only",
+    "message": "No paired display is required; showing phone preview.",
+    "next_actions": ["retry", "open_mobile_card"],
+    "fallback": {
+      "render_path": "mobile-card",
+      "message": "Continue from the phone preview."
+    }
+  }
+}
+```
+
 ## Implementation Backlog Board
 
 ### Daemon Processing

@@ -89,6 +89,65 @@ def test_meta_display_product_run_defers_stale_scan_and_repair_tasks():
     assert tasks["MGW-268"].track == "integration"
 
 
+def test_virtual_desktop_session_widget_contract_is_documented():
+    plan_text = (
+        REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+    ).read_text(encoding="utf-8")
+
+    required_contract_terms = [
+        "## Phone-Hosted Virtual Desktop Session Widget",
+        "widget_kind",
+        "handsfree.virtual-desktop-session",
+        "session_identity",
+        "session_id",
+        "desktop_id",
+        "phone_host_id",
+        "receipt_cid",
+        "descriptor_cid",
+        "manifest_cid",
+        "orb_receipt_cid",
+        "policy_receipt_cid",
+        "hardware_required: false",
+        "preview_mode",
+        "pairing.status",
+        "unpaired",
+        "display_ready",
+        "display_unavailable",
+        "requires_update",
+        "retry_pairing",
+        "reset_display_session",
+        "active_tool.tool_id",
+        "terminal",
+        "browser",
+        "editor",
+        "agent_task",
+        "phone_hosted_desktop",
+        "display_webapp",
+        "status_region",
+        "progress_region",
+        "message_region",
+        "diagnostics_region",
+        "confirmation_prompt.prompt_id",
+        "risk_level",
+        "default_action",
+        "policy receipt",
+        "recovery.code",
+        "session_stale",
+        "pairing_lost",
+        "phone_host_unreachable",
+        "policy_denied",
+        "preview_only",
+        "switch_to_phone_preview",
+        "open_mobile_card",
+        '"render_path": "mobile-card"',
+        "No paired display is required",
+    ]
+
+    missing_terms = [term for term in required_contract_terms if term not in plan_text]
+
+    assert missing_terms == []
+
+
 def test_meta_glasses_display_todo_dependencies_are_declared_tasks():
     tasks = _load_tasks()
     task_ids = {task.task_id for task in tasks}
