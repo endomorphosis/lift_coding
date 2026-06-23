@@ -1,7 +1,7 @@
 # VAI-202 Reconciliation Guardrail
 
-Date: 2026-06-23
-Fingerprint: 6451c0ea9456c3f350bcf6fc4ced3e58bc3bd549
+Date: 2026-06-09
+Fingerprint: e13d1430f7936cd781eac8d5ba4630e0261595c6
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,11 +18,11 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/rescue-worktree-implementation-vai-193-attempt-1-1782236605-0906bf809378-aac3b5e6d6bd` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-193-attempt-1-1782236605` status: ` m hallucinate_app`
+- `implementation/vai-209-attempt-4-1780836876` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-209-attempt-4-1780836876` status: ` m external/ipfs_kit`
   - Name status:
-    - `M	hallucinate_app`
+    - `M	external/ipfs_kit`
   - Diff stat:
-    - `hallucinate_app | 0`
+    - `external/ipfs_kit | 0`
     - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Why This Blocks Progress
@@ -93,7 +93,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "6451c0ea9456c3f350bcf6fc4ced3e58bc3bd549",
+  "fingerprint": "e13d1430f7936cd781eac8d5ba4630e0261595c6",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -103,14 +103,14 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/rescue-worktree-implementation-vai-193-attempt-1-1782236605-0906bf809378-aac3b5e6d6bd"
+    "implementation/vai-209-attempt-4-1780836876"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app"
+    "external/ipfs_kit"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-193-attempt-1-1782236605"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-209-attempt-4-1780836876"
   ],
   "success_signals": [
     "candidate_count_decreases",
