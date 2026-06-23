@@ -1974,7 +1974,7 @@ cadence remains parseable and resumable.
 - Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:195. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-352-codebase-scan-1fcca8319846.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-353 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216
+## VAI-353 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:400
 
 - Status: todo
 - Completion: manual
@@ -1983,20 +1983,9 @@ cadence remains parseable and resumable.
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
-- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-353-codebase-scan-210b6a0bd043.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:400. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-353-codebase-scan-3516ce3866f4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-354 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239
-
-- Status: todo
-- Completion: manual
-- Priority: P3
-- Track: docs
-- Depends on: 
-- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
-- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
-- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-354-codebase-scan-4dc1f7f08722.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
-
-## VAI-355 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262
+## VAI-354 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:626
 
 - Status: todo
 - Completion: manual
@@ -2005,4 +1994,15 @@ cadence remains parseable and resumable.
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
-- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-355-codebase-scan-0b738229dfc8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:626. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-354-codebase-scan-8418bcea81da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-355 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:649
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: docs
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
+- Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:649. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-355-codebase-scan-4c765d72a612.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
