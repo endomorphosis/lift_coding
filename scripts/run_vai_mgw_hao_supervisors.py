@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from typing import Sequence
 
@@ -31,9 +32,15 @@ from ipfs_accelerate_py.agent_supervisor.multi_supervisor_runner import (  # noq
 )
 
 
-MULTI_SUPERVISOR_ENV_DEFAULTS = implementation_multi_supervisor_env_defaults(
-    prefer_copilot_merge_resolver=False,
-)
+MULTI_SUPERVISOR_ENV_DEFAULTS = {
+    **implementation_multi_supervisor_env_defaults(
+        prefer_copilot_merge_resolver=False,
+    ),
+    "IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK": os.environ.get(
+        "IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK",
+        "2",
+    ),
+}
 
 
 DETACHED_WORKTREE_POLICY = (
@@ -43,8 +50,8 @@ DETACHED_WORKTREE_POLICY = (
 )
 
 MERGE_CLEANUP_DEFAULTS = {
-    "worktree_reconciliation_max_merges": "0",
-    "merge_reconciliation_max_merges": "0",
+    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "3"),
+    "merge_reconciliation_max_merges": os.environ.get("MERGE_RECONCILIATION_MAX_MERGES", "3"),
     "daemon_merged_worktree_cleanup_max": "50",
 }
 

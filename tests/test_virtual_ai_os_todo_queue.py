@@ -417,13 +417,14 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert '"PREFER_COPILOT_MERGE_RESOLVER": "1"' not in source
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS == implementation_multi_supervisor_env_defaults(
         prefer_copilot_merge_resolver=False,
-    )
+    ) | {"IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK": "2"}
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS["COPILOT_MERGE_RESOLVER_TIMEOUT_SECONDS"] == "60"
+    assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS["IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK"] == "2"
     assert "default to --detach" in runner_module.DETACHED_WORKTREE_POLICY
     assert "component submodules track" in runner_module.DETACHED_WORKTREE_POLICY
     assert runner_module.MERGE_CLEANUP_DEFAULTS == {
-        "worktree_reconciliation_max_merges": "0",
-        "merge_reconciliation_max_merges": "0",
+        "worktree_reconciliation_max_merges": "3",
+        "merge_reconciliation_max_merges": "3",
         "daemon_merged_worktree_cleanup_max": "50",
     }
     assert runner_module.VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS == (
@@ -458,9 +459,9 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         if arg.startswith("--common-arg=")
     ]
     assert "--worktree-reconciliation-max-merges" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "0"
+    assert common_arg_values[common_arg_values.index("--worktree-reconciliation-max-merges") + 1] == "3"
     assert "--merge-reconciliation-max-merges" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "0"
+    assert common_arg_values[common_arg_values.index("--merge-reconciliation-max-merges") + 1] == "3"
     assert "--daemon-merged-worktree-cleanup-max" in common_arg_values
     assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
     assert "--codebase-scan-max-findings" in common_arg_values
