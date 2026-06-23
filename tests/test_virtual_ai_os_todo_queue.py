@@ -324,9 +324,12 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     goals = parse_goal_heap(text)
     active_goals = [goal for goal in goals if goal.status == "active"]
     schedule_ids = [record.goal_id for record in objective_heap_schedule(goals)]
-    launch_ids = ["VAIOS-G689", "VAIOS-G690", "VAIOS-G691", "VAIOS-G692"]
+    completed_launch_ids = ["VAIOS-G689", "VAIOS-G690", "VAIOS-G691", "VAIOS-G692"]
+    launch_ids = ["VAIOS-G693", "VAIOS-G694", "VAIOS-G695", "VAIOS-G696"]
+    goals_by_id = {goal.goal_id: goal for goal in goals}
 
     assert len(active_goals) <= 16
+    assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
     assert all(goal_id in schedule_ids for goal_id in launch_ids)
     assert all(schedule_ids.index(goal_id) < schedule_ids.index("VAIOS-G081") for goal_id in launch_ids)
     launch_text = "\n".join(

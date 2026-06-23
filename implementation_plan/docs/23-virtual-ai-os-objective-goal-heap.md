@@ -687,3 +687,83 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Completed at: 2026-06-23T07:45:03.060209+00:00
 - Completion evidence: VAI-008 Meta glasses remote terminal => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (exact); src/handsfree/meta_glasses_remote_terminal.py => src/handsfree/meta_glasses_remote_terminal.py (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast); VAI-016 browser simulator shell => mobile/modules/expo-glasses-audio/index.ts (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast); VAI-012 physical-device readiness plan => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); tests/test_virtual_ai_os_end_to_end_harness.py => tests/test_virtual_ai_os_end_to_end_harness.py (path), CONTRIBUTING.md (ast), agent-runner/apply_instruction.py (ast)
 - Completion validation: 0
+
+## VAIOS-G693 Shared launch evidence packet
+
+- Status: active
+- Parent: VAIOS-G689
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/shared-evidence-packet
+- Parallel lane: launch-shared-evidence
+- Refinement depth: 2
+- Embedding query: shared launch evidence packet phone desktop Swissknife Hallucinate App Meta glasses offload capability mediation placement recovery receipts
+- AST query: launch_alignment, capability_receipt, mediation_receipt, placement_receipt, meta_glasses_status_receipt
+- Conflict policy: keep evidence packet edits scoped to launch docs, deterministic fixtures, and focused tests
+- Goal: A shared launch evidence packet ties phone-hosted Swissknife virtual desktop commands, Hallucinate App mediation, desktop peer offload, Meta glasses display status, and recovery receipts to one session and command identity.
+- Evidence: VAI-338 launch alignment map, HAO-434 launch replay receipts, MGW-272 glasses launch capability receipts
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py -q
+- Refinement: Split only if the shared packet needs a separate proof for capability, mediation, placement, recovery, or render receipts.
+- Gap task: Connect the completed launch slice into one cross-board evidence packet that the supervisor can validate before physical-device rehearsal.
+
+## VAIOS-G694 Phone-hosted physical rehearsal inputs
+
+- Status: active
+- Parent: VAIOS-G693
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/phone-physical-rehearsal
+- Parallel lane: launch-phone-rehearsal
+- Refinement depth: 3
+- Embedding query: physical phone rehearsal mobile hosted Swissknife virtual desktop Hallucinate App commands Meta glasses interface fallback receipts
+- AST query: phone_hosted_session, physical_device_readiness, mobile_orb, display_webapp
+- Conflict policy: keep physical-device assumptions explicit and preserve simulator fallback evidence
+- Goal: The phone-hosted session has a rehearsal packet for launching Swissknife, routing commands through Hallucinate App, exposing fallback UI, and preparing Meta glasses as the phone interface.
+- Evidence: VAI-023 iPhone native DAT handoff, VAI-338 launch alignment map, MGW-273 physical-device rehearsal packet
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
+- Validation: rg -n "physical-device rehearsal|phone-hosted|Swissknife|Hallucinate App|Meta glasses|receipt" implementation_plan/docs data
+- Refinement: Split only if phone pairing, native DAT, Web App fallback, or manual evidence capture needs a distinct blocker task.
+- Gap task: Prepare the phone-side physical rehearsal inputs without requiring hardware in the autonomous run.
+
+## VAIOS-G695 Desktop-peer offload recovery rehearsal
+
+- Status: active
+- Parent: VAIOS-G693
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/desktop-peer-recovery
+- Parallel lane: launch-desktop-recovery
+- Refinement depth: 3
+- Embedding query: desktop peer offload recovery rehearsal timeout denial retry cancellation fallback phone Swissknife Hallucinate App Meta glasses receipts
+- AST query: desktop_peer, offload_failure, retry_exhausted, fallback_to_phone, recovery_receipt
+- Conflict policy: keep recovery-state vocabulary owned by Hallucinate App and visible to phone, Swissknife, and glasses surfaces
+- Goal: Desktop-peer timeout, denial, retry exhaustion, cancellation, and fallback-to-phone outcomes are rehearsed with one Hallucinate App recovery state rendered by phone UI, Swissknife, and Meta glasses.
+- Evidence: HAO-435 operator recovery rehearsal, VAI-339 launch replay gate, HAO-432 launch-slice replay receipts
+- Outputs: hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md, tests/test_virtual_ai_os_end_to_end_harness.py, data/hallucinate_multimodal_control/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_hallucinate_multimodal_control_todo_queue.py -q
+- Refinement: Split only if a recovery outcome lacks deterministic replay coverage.
+- Gap task: Prove desktop offload failure handling is launch-ready instead of optimistic-only.
+
+## VAIOS-G696 Meta glasses physical terminal handoff
+
+- Status: active
+- Parent: VAIOS-G693
+- Fib priority: 1
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/glasses-terminal-handoff
+- Parallel lane: launch-glasses-handoff
+- Refinement depth: 3
+- Embedding query: Meta glasses physical terminal handoff phone interface pairing display fallback offload visibility Hallucinate App receipts Swissknife
+- AST query: meta_glasses_remote_terminal, pairing, display_fallback, offload_visibility, terminal_handoff
+- Conflict policy: keep physical glasses readiness separate from simulator proofs while using the same command and receipt contract
+- Goal: Meta glasses can be rehearsed as the phone interface to the virtual desktop with pairing gates, display fallback, desktop-offload visibility, and Hallucinate App receipt inspection.
+- Evidence: MGW-273 physical-device rehearsal packet, VAI-012 physical-device readiness, VAI-339 launch replay gate
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/meta_glasses_display_widgets/discovery
+- Validation: rg -n "Meta glasses|physical-device rehearsal|phone interface|desktop peer|display fallback|receipt" implementation_plan/docs data
+- Refinement: Split only if pairing, display fallback, or manual receipt inspection blocks the first hardware run.
+- Gap task: Prepare the Meta glasses handoff path for physical validation without inventing a second command surface.

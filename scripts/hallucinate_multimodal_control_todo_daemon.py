@@ -107,6 +107,9 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/backup/",
     ),
 )
+CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
+    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+)
 HALLUCINATE_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_accelerate",
     "external/ipfs_datasets",

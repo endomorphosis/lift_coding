@@ -143,6 +143,15 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     assert tasks["HAO-431"].track == "integration"
 
 
+def test_hallucinate_codebase_scan_skips_objective_heap_as_source_annotations():
+    daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
+
+    assert (
+        "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
+        in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
+    )
+
+
 def test_hao_428_offload_session_events_route_through_mediation():
     source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
     section_start = source.index("### Offload-session mobile and glasses mediation path")

@@ -3079,3 +3079,25 @@ The meta glasses display supervisor stores resumable autonomous state in:
 - Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
 - Validation: rg -n "MGW-271|physical Meta glasses|launch-readiness|phone-hosted|desktop peer|receipt" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md data/meta_glasses_display_widgets/discovery
 - Acceptance: Define the physical-readiness checklist for using Meta glasses as the phone interface to the virtual desktop, including pairing, display fallback, offload-state visibility, policy receipt inspection, and simulator-only gaps.
+
+## MGW-272 Bind glasses launch replay to the shared VAI capability receipts
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: MGW-270, MGW-271
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery, tests/test_meta_glasses_display_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py tests/test_virtual_ai_os_capability_registry.py -q
+- Acceptance: Extend the launch replay evidence so every glasses render/update/confirm/cancel action references the shared VAI capability receipt, Hallucinate App mediation receipt, and placement/recovery receipt used by the phone-hosted virtual desktop session, with no second widget command contract.
+
+## MGW-273 Add the physical-device rehearsal packet for phone plus Meta glasses
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: MGW-271, MGW-272
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery
+- Validation: rg -n "MGW-273|physical-device rehearsal|phone-hosted|Meta glasses|pairing|fallback|receipt" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md data/meta_glasses_display_widgets/discovery
+- Acceptance: Produce a rehearsal packet for the first physical phone plus Meta glasses session, including pairing prerequisites, DAT/Web App fallback choice, expected widget states, manual evidence to capture, and the exact simulator replay artifacts that must match before hardware validation starts.

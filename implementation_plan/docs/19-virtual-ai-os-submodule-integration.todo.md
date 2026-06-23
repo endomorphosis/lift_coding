@@ -51,8 +51,8 @@ cadence remains parseable and resumable.
 
 ## VAI-002 Align root git submodule wiring with canonical upstreams
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-23: existing evidence in `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md` and `data/virtual_ai_os/discovery/source-alignment-vai-002-2026-06-12.md` records the canonical root submodule wiring; the stale `implementation/vai-002-attempt-1-1781232308` merge failure no longer represents launch-critical work.
 - Priority: P2
 - Track: ops
 - Depends on: VAI-001
@@ -1060,9 +1060,8 @@ cadence remains parseable and resumable.
 
 ## VAI-328 Resolve merge retry-budget failure for VAI-002
 
-- Status: blocked
-- Completion: manual
-- Blocked reason: Deferred for current virtual AI desktop/mobile/glasses integration run; historical scan or reconciliation task is not launch-critical.
+- Status: completed
+- Completion: manual 2026-06-23: VAI-002 was closed from source-alignment evidence, so the historical retry-budget task is resolved without replaying its stale implementation branch.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -1173,3 +1172,25 @@ cadence remains parseable and resumable.
 - Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, tests/test_virtual_ai_os_capability_registry.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_capability_registry.py tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Add `vai.glasses_widget.render`, `vai.glasses_widget.update`, `vai.glasses_widget.confirm`, and `vai.glasses_widget.cancel` to the shared capability registry so Swissknife ORB, HandsFree mobile, Meta glasses, and Hallucinate App use one command envelope with `command_id`, `session_id`, `descriptor_cid`, `manifest_cid`, `correlation_id`, policy and placement receipts, fallback render path, and canonical `capability_receipt_cid` for virtual desktop sessions.
+
+## VAI-338 Build the launch alignment map across VAI, MGW, and HAO
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-009, VAI-012, VAI-021, VAI-024, VAI-337
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery
+- Validation: rg -n "VAI-338|launch alignment|phone|desktop peer|Meta glasses|Hallucinate App|Swissknife" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Produce a launch alignment map that ties the VAI capability registry, MGW display-widget contract, HAO mediation receipts, phone-hosted session model, and desktop-peer offload path into one ordered validation slice, explicitly marking work that is simulator-only, physical-device-gated, or not launch-critical.
+
+## VAI-339 Add an end-to-end launch replay gate for phone, desktop, Swissknife, Hallucinate App, and Meta glasses
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-010, VAI-011, VAI-023, VAI-338
+- Outputs: tests/test_virtual_ai_os_end_to_end_harness.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_end_to_end_harness.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py -q
+- Acceptance: Extend or document the deterministic launch replay so one evidence packet proves a phone-originated command is mediated by Hallucinate App, shown in Swissknife, placed on a local or desktop-peer runtime, rendered to the Meta glasses terminal contract, and reconciled through shared policy, placement, recovery, and capability receipts.
