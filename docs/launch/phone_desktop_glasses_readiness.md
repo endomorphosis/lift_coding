@@ -57,6 +57,11 @@ replay packet, and `launch_readiness_receipt_v1` packet before the heavier
 browser tests run. That prevents scanner-only AST matches from satisfying the
 production objective.
 
+The `LaunchReadinessGate` remains open until the Python guard, Swissknife
+Playwright replay, and Hallucinate App Playwright mediation command all pass for
+the same receipt lineage. Only that all-pass result moves the gate state to
+`launch_ready`.
+
 ## Split Policy
 
 No child goal is needed for this deterministic launch gate. Split VAIOS-G697

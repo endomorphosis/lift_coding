@@ -78,6 +78,16 @@ def test_launch_readiness_receipt_covers_product_critical_hops():
         SWISSKNIFE_PLAYWRIGHT_COMMAND,
         HALLUCINATE_PLAYWRIGHT_COMMAND,
     }
+    assert receipt["pass_together_rule"] == {
+        "required_commands": [
+            PYTHON_GATE_COMMAND,
+            SWISSKNIFE_PLAYWRIGHT_COMMAND,
+            HALLUCINATE_PLAYWRIGHT_COMMAND,
+        ],
+        "same_receipt_lineage": True,
+        "gate_state_before_all_pass": "open",
+        "gate_state_after_all_pass": "launch_ready",
+    }
 
     covered_hops = {hop["hop"] for hop in receipt["product_critical_hops"]}
     assert covered_hops == {

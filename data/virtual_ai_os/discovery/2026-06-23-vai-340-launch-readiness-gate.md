@@ -86,6 +86,16 @@ Hallucinate App mediation, and Meta glasses terminal.
     }
   ],
   "blocking_rule": "The production launch objective remains active until the Python readiness gate and both Playwright commands pass for the same receipt lineage.",
+  "pass_together_rule": {
+    "required_commands": [
+      "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q",
+      "npm --prefix swissknife run test:e2e:meta-glasses",
+      "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+    ],
+    "same_receipt_lineage": true,
+    "gate_state_before_all_pass": "open",
+    "gate_state_after_all_pass": "launch_ready"
+  },
   "split_policy": "No child split is required unless physical phone, desktop peer, or Meta glasses capture fails independently of this deterministic Playwright gate."
 }
 ```
