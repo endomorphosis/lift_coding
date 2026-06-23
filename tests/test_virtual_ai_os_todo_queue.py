@@ -12,6 +12,14 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 SRC_DIR = REPO_ROOT / "src"
+VAI_019_HARNESS_PATH = REPO_ROOT / "tests" / "test_virtual_ai_os_end_to_end_harness.py"
+VAI_019_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-23-vai-019-cross-submodule-integration-tests.md"
+)
 
 
 # Assemble the task-board filename from neutral fragments so static follow-up
@@ -326,6 +334,35 @@ def test_virtual_ai_os_discovery_task_waits_for_initial_backlog():
     ):
         assert task_id in discovery.depends_on
     assert "unknowns" in discovery.acceptance.lower()
+
+
+def test_vai_019_cross_submodule_integration_evidence_is_wired():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    vai_019 = tasks["VAI-019"]
+    harness_source = VAI_019_HARNESS_PATH.read_text(encoding="utf-8")
+    discovery_source = VAI_019_DISCOVERY_PATH.read_text(encoding="utf-8")
+
+    assert vai_019.track == "quality"
+    assert "tests/test_virtual_ai_os_end_to_end_harness.py" in vai_019.outputs
+    assert "tests/test_virtual_ai_os_todo_queue.py" in vai_019.outputs
+    assert "data/virtual_ai_os/discovery" in vai_019.outputs
+    assert "at least two real submodules per scenario" in vai_019.acceptance
+    assert "test_vai_019_cross_submodule_routes_select_placement_and_collect_artifacts" in (
+        harness_source
+    )
+    for required_text in (
+        "desktop-dataset-discovery",
+        "local-ipfs-pin-receipt",
+        "swissknife",
+        "hallucinate_app",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "runtime_surface",
+        "placement_target",
+        "validation_artifacts",
+    ):
+        assert required_text in harness_source
+        assert required_text in discovery_source
 
 
 def test_virtual_ai_os_mcplusplus_source_task_is_explicit():
