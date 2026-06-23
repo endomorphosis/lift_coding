@@ -1071,3 +1071,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-154-vai-152-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-152. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-154-vai-152-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-152 from strategy blocked_tasks.
+
+## VAI-155 Resolve implementation retry-budget failure for VAI-154
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-155-vai-154-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-154. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-155-vai-154-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-154 from strategy blocked_tasks.
