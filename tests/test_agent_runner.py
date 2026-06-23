@@ -390,6 +390,56 @@ class TestProcessRunningTasks:
         updated_task = get_agent_task_by_id(db_conn, task.id)
         assert updated_task.state == "running"
 
+    def test_todo_daemon_poll_exception_skips_simulated_completion(
+        self,
+        db_conn,
+        test_user_id,
+        disable_auto_push,
+        caplog,
+    ):
+        """Provider poll exceptions should not let external tasks auto-complete."""
+        from handsfree.db.agent_tasks import update_agent_task_state
+
+        task = create_agent_task(
+            conn=db_conn,
+            user_id=test_user_id,
+            provider="ipfs_datasets_mcp",
+            instruction="external daemon task",
+        )
+        past_time = datetime.now(UTC) - timedelta(seconds=15)
+        update_agent_task_state(
+            conn=db_conn,
+            task_id=task.id,
+            new_state="running",
+            trace_update={
+                "auto_started_at": past_time.isoformat(),
+                "auto_started_by": "test",
+                "todo_daemon_state_path": "/tmp/todo-state.json",
+                "todo_daemon_task_id": "VAI-358",
+            },
+        )
+
+        provider = mock.Mock()
+        provider.check_status.side_effect = RuntimeError("provider unavailable")
+        caplog.set_level("WARNING", logger="handsfree.agents.runner")
+
+        with mock.patch("handsfree.agent_providers.get_provider", return_value=provider):
+            with mock.patch.dict(os.environ, {"HANDSFREE_AGENT_TASK_COMPLETION_DELAY": "10"}):
+                stats = process_running_tasks(db_conn)
+
+        updated_task = get_agent_task_by_id(db_conn, task.id)
+        assert stats["completed"] == 0
+        assert stats["failed"] == 0
+        assert stats["skipped"] == 1
+        assert updated_task.state == "running"
+        poll_records = [
+            record
+            for record in caplog.records
+            if "Failed to poll todo-daemon status" in record.message
+        ]
+        assert len(poll_records) == 1
+        assert poll_records[0].exc_info is not None
+
     def test_process_multiple_running_tasks(self, db_conn, test_user_id, disable_auto_push):
         """Test processing multiple running tasks."""
         from handsfree.db.agent_tasks import update_agent_task_state

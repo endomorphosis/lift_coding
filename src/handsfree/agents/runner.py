@@ -109,8 +109,13 @@ def _poll_todo_daemon_task(
 
         status_result = get_provider(task.provider).check_status(task)
     except Exception as exc:
-        logger.warning("Failed to poll todo-daemon status for task %s: %s", task.id, exc)
-        return None, False
+        logger.warning(
+            "Failed to poll todo-daemon status for task %s: %s",
+            task.id,
+            exc,
+            exc_info=True,
+        )
+        return None, True
 
     if not status_result.get("ok"):
         logger.warning(
