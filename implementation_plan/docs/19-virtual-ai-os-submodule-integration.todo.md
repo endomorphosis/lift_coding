@@ -216,7 +216,7 @@ cadence remains parseable and resumable.
 
 ## VAI-017 Connect simulator artifacts to mobile ORB and Web App readiness flows
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
