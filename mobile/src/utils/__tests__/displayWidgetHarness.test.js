@@ -61,6 +61,18 @@ const ACTION_RECEIPTS = {
   mobile_subscribe_display_widget_updates: 'sha256:subscribe-receipt',
 };
 
+const DISPLAY_WIDGET_ORB_OPERATIONS = [
+  'render_widget',
+  'update_widget',
+  'clear_widget',
+  'focus_next',
+  'focus_previous',
+  'activate',
+  'reset_session',
+  'play_video',
+  'subscribe_updates',
+];
+
 function mobilePayload(type, overrides = {}) {
   const action = DISPLAY_WIDGET_ACTION_BY_ACTION_ID[type];
   const operation = DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID[type];
@@ -270,11 +282,12 @@ describe('display widget hardware-free mobile harness', () => {
     expect(descriptor.name).toBe('display_widget_bridge');
     expect(descriptor.namespace).toBe('handsfree.meta_glasses.display');
     expect(descriptor.version).toBe('0.1.0');
-    expect(descriptor.methods.map((method) => method.name)).toEqual(
-      DISPLAY_WIDGET_ACTION_IDS.map(
-        (actionId) => DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID[actionId]
-      )
-    );
+    expect(descriptor.methods.map((method) => method.name)).toEqual(DISPLAY_WIDGET_ORB_OPERATIONS);
+    expect(DISPLAY_WIDGET_ACTION_IDS.map(
+      (actionId) => DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID[actionId]
+    )).toEqual(DISPLAY_WIDGET_ORB_OPERATIONS.filter(
+      (operation) => operation !== 'focus_previous'
+    ));
   });
 
   it('executes backend display widget lifecycle actions through a mocked fallback bridge', async () => {
