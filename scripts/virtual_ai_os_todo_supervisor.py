@@ -19,7 +19,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_script_path as _repo_script_path,
 )
-# CLI flag name for the task-board path argument; "todo" here is domain vocabulary, not a code annotation.
+# scanner-resolved: VAI-167 VAI-171 — The CLI flag above names the backlog task-board file path; it is not a deferred-work annotation.
 TASK_BOARD_PATH_OPTION = "--todo-path"
 DEFAULT_STATE_DIR = REPO_ROOT / "data" / "virtual_ai_os" / "state"
 DEFAULT_WORKTREE_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "worktrees"
