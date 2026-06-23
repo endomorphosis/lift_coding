@@ -20,11 +20,3 @@ The mobile app calls this via `mobile/src/api/phoneDispatcher.js` and the Settin
 - Prefer fine-grained tokens scoped to a single repo with Issues write permission.
 - Do not expose the dispatcher to the public internet.
 
-### Optional shared secret
-
-If you set `DISPATCHER_SHARED_SECRET` on the phone, the dispatcher will require:
-
-- HTTP header: `X-Handsfree-Dispatcher-Secret: <value>`
-
-The mobile client is expected to send this header when configured to do so. Support for configuring this via `EXPO_PUBLIC_PHONE_DISPATCHER_SECRET` (or by storing a secret in local storage) is planned but may not yet be implemented in the mobile app.
-

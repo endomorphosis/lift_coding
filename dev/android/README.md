@@ -1,33 +1,36 @@
 # Android (Termux) Dev Tools
 
-This folder contains small utilities intended to run on an Android phone via Termux.
+## Phone-local GitHub dispatcher
 
-## termux_github_dispatcher.py
+This provides a tiny HTTP server that accepts `POST /dispatch` and creates GitHub issues in a target repo.
 
-A tiny HTTP server that creates GitHub issues in a dispatch repo.
+It is intended to run on an Android phone via Termux, and be called from the mobile app.
 
-### Setup (Termux)
+### Install (Termux)
 
-```bash
-pkg update
-pkg install python
-pip install --upgrade pip
-pip install httpx
-```
+- `pkg update -y`
+- `pkg install -y python`
+
+### Configure
+
+Set environment variables:
+
+- `export GITHUB_TOKEN=...`
+- `export DISPATCH_REPO=owner/repo`
+- `export PORT=8765` (optional)
 
 ### Run
 
-```bash
-export GITHUB_TOKEN="<your_pat>"
-export DISPATCH_REPO="owner/repo"
+- `python dev/android/termux_phone_dispatcher.py`
 
-python dev/android/termux_github_dispatcher.py --host 0.0.0.0 --port 8765
-```
+### Test from another machine on the same Wi‑Fi
 
-### Test
+- `curl -s http://<PHONE_IP>:8765/health | jq .`
+- `curl -s -X POST http://<PHONE_IP>:8765/dispatch -H 'Content-Type: application/json' \
+    -d '{"title":"test dispatch","body":"hello","labels":["handsfree"]}' | jq .`
 
-```bash
-curl -sS -X POST http://127.0.0.1:8765/dispatch \
-  -H 'Content-Type: application/json' \
-  -d '{"title":"Test dispatch","body":"hello from phone","labels":["agent-task"]}' | cat
-```
+### Mobile app
+
+In the mobile app Developer Settings:
+- Set “Phone dispatcher URL” to `http://<PHONE_IP>:8765`
+- Tap “Test Phone Dispatch”
