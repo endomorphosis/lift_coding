@@ -11,6 +11,7 @@ VAI-013 MCP++ source resolution: 2026-06-23
 VAI-001 topology checkpoint: 2026-06-12
 VAI-002 source alignment: 2026-06-12
 VAI-023 iPhone native DAT handoff packet: 2026-06-12
+VAI-020 mobile ORB edge diagnostics and policy receipts: 2026-06-23
 
 ## Goal
 
@@ -355,6 +356,16 @@ This runtime is the operating-system scheduler equivalent for the stack.
 - Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-017-simulator-artifacts-mobile-orb-webapp-readiness.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-017-simulator-artifacts-mobile-orb-webapp-readiness.md)
 - VAI-018 native mobile simulation parity gate: compare DAT MockDeviceKit coverage against the current simulator and mobile DAT bridge before physical hardware. Command capture remains proven by simulator/Web App/mobile ORB receipts; display updates remain proven by the 600x600 manifest renderer plus structured DAT bridge result fields; networking remains split across public HTTPS Web App loading, backend ORB reachability, and HTTPS media; device-pairing state is the main MockDeviceKit value and must cover no target, selected, connected, ready, update-required, and reconnect states before native DAT promotion.
 - Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-018-dat-mockdevicekit-native-mobile-parity.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-018-dat-mockdevicekit-native-mobile-parity.md)
+- VAI-020 ORB edge diagnostics and policy receipts gate: supervisors must use
+  `/v1/mobile/orb/diagnostics` and the mobile bridge diagnostics contract
+  `handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0` to reconcile command
+  routing, offload selection, permission denial, and recovery. Required
+  receipt fields are `policy_receipts`, `receipt_integrity`, `edge_health`,
+  `backend_counts`, `binding_state`, `receipt_cids`, `policy_cids`, and
+  `fallback_reasons`; together they distinguish implementation failures from
+  unavailable-device conditions such as unpaired glasses, native DAT display
+  absence, missing policy CIDs, or orphan parent receipts.
+- Evidence: [data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md)
 
 ### Workstream E: UI and operator plane
 
@@ -633,6 +644,15 @@ rollback artifact or reconcile the full chain by artifact id.
 
 Evidence:
 [data/virtual_ai_os/discovery/2026-06-23-vai-011-observability-policy-rollback.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-011-observability-policy-rollback.md)
+
+VAI-020 hardens the mobile-specific edge view of that same artifact chain. The
+mobile ORB diagnostics endpoint and bridge diagnostics contract now provide the
+supervisor-facing receipts needed to classify command routing, offload
+selection, permission denial, and recovery as either healthy, degraded by an
+unavailable device condition, or degraded by missing receipt/policy integrity.
+
+Evidence:
+[data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md](../../data/virtual_ai_os/discovery/2026-06-23-vai-020-mobile-orb-edge-diagnostics-policy-receipts.md)
 
 ## Success Criteria
 
