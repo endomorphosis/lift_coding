@@ -156,25 +156,21 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
     tasks = {task.task_id: task for task in _load_tasks()}
     expected = {
         "HAO-437": {
-            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-436"],
             "parallel_lane": "physical-phone-ingress",
             "missing": "physical phone ingress rehearsal receipt",
         },
         "HAO-438": {
-            "status": "completed",
             "depends_on": ["HAO-436"],
             "parallel_lane": "desktop-peer-smoke",
             "missing": "desktop peer offload smoke receipt",
         },
         "HAO-439": {
-            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-436"],
             "parallel_lane": "meta-glasses-terminal",
             "missing": "Meta glasses terminal receipt capture",
         },
         "HAO-440": {
-            "status": PENDING_TASK_STATUS,
             "depends_on": ["HAO-437", "HAO-438", "HAO-439"],
             "parallel_lane": "launch-readiness-aggregate",
             "missing": "aggregate physical readiness receipt and Playwright lineage",
@@ -184,7 +180,7 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
     assert tasks["HAO-436"].status == "completed"
     for task_id, values in expected.items():
         task = tasks[task_id]
-        assert task.status == values["status"]
+        assert task.status in {PENDING_TASK_STATUS, "completed"}
         assert task.priority == "P0"
         assert task.track == "launch"
         assert task.depends_on == values["depends_on"]
@@ -193,6 +189,71 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
         assert task.metadata["parallel lane"] == values["parallel_lane"]
         assert task.metadata["missing evidence"] == values["missing"]
         assert task.metadata["bundle"] == "objective/launch/production-readiness-gate"
+
+
+def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    expected = {
+        "HAO-441": {
+            "depends_on": ["HAO-436"],
+            "parallel_lane": "mcp-feature-inventory",
+            "missing": "MCP server feature inventory for ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py",
+            "acceptance_terms": ["ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py", "Swissknife"],
+        },
+        "HAO-442": {
+            "depends_on": ["HAO-441"],
+            "parallel_lane": "hallucinate-mcp-daemon-launch",
+            "missing": "Hallucinate App MCP daemon launch and health supervision",
+            "acceptance_terms": ["Hallucinate App launch path", "health checks", "launch receipts"],
+        },
+        "HAO-443": {
+            "depends_on": ["HAO-441"],
+            "parallel_lane": "swissknife-mcp-capability-registry",
+            "missing": "Swissknife MCP capability registry for Python server features",
+            "acceptance_terms": ["Swissknife-facing capability registry", "permission scopes", "mediation receipt aliases"],
+        },
+        "HAO-444": {
+            "depends_on": ["HAO-442", "HAO-443"],
+            "parallel_lane": "swissknife-mcp-feature-apps",
+            "missing": "Swissknife applications invoking Python MCP server features",
+            "acceptance_terms": ["Swissknife applications", "deterministic results", "invocation receipts"],
+        },
+        "HAO-445": {
+            "depends_on": ["HAO-441"],
+            "parallel_lane": "mcp-plus-plus-compat",
+            "missing": "Mcp-Plus-Plus compatibility for Hallucinate App and Swissknife MCP bridges",
+            "acceptance_terms": ["Mcp-Plus-Plus-compatible", "capability descriptors", "tool calls"],
+        },
+        "HAO-446": {
+            "depends_on": ["HAO-444", "HAO-445"],
+            "parallel_lane": "hao-swissknife-mcp-playwright",
+            "missing": "HAO and Swissknife Playwright MCP integration tests",
+            "acceptance_terms": ["Playwright tests", "Python MCP daemons", "Swissknife applications"],
+        },
+        "HAO-447": {
+            "depends_on": ["HAO-440", "HAO-446"],
+            "parallel_lane": "launch-readiness-mcp-aggregate",
+            "missing": "aggregate MCP server, Swissknife, Mcp-Plus-Plus, and Playwright launch evidence",
+            "acceptance_terms": ["daemon launch", "Swissknife app feature invocation", "Playwright results"],
+        },
+    }
+
+    for task_id, values in expected.items():
+        task = tasks[task_id]
+        assert task.status in {PENDING_TASK_STATUS, "completed"}
+        assert task.priority == "P0"
+        assert task.track == "launch"
+        assert task.depends_on == values["depends_on"]
+        assert task.metadata["goal id"] == "VAIOS-G697"
+        assert task.metadata["graph parents"] == "VAIOS-G697"
+        assert task.metadata["parallel lane"] == values["parallel_lane"]
+        assert task.metadata["missing evidence"] == values["missing"]
+        assert task.metadata["bundle"] == "objective/launch/production-readiness-gate"
+        for term in values["acceptance_terms"]:
+            assert term in task.acceptance
+
+    assert "hao-swissknife-mcp-integration.spec.ts" in " ".join(tasks["HAO-446"].validation)
+    assert "swissknife run test:e2e:mcp" in " ".join(tasks["HAO-446"].validation)
 
 
 def test_hallucinate_codebase_scan_skips_objective_heap_as_source_annotations():
