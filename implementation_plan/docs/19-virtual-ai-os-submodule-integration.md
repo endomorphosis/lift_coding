@@ -7,6 +7,7 @@ Comprehensive integration plan for turning the current HandsFree monorepo plus i
 Created: 2026-05-22
 Refreshed: 2026-05-23
 MCP++ source re-check: 2026-06-12
+VAI-013 MCP++ source resolution: 2026-06-23
 VAI-001 topology checkpoint: 2026-06-12
 VAI-002 source alignment: 2026-06-12
 VAI-023 iPhone native DAT handoff packet: 2026-06-12
@@ -150,6 +151,15 @@ Evidence:
 - Decision: keep `Mcp-Plus-Plus` as the standalone MCP++ spec/docs source, keep the root pin at `29343be704da4e193ff143bac7daae9b0f98435d`, and do not add or rename to a lowercase `mcp_plus_plus` submodule.
 - Runtime MCP++ behavior remains a distributed protocol surface across SwissKnife, `ipfs_datasets_py`, and `ipfs_accelerate_py` until a distinct standalone service implementation is reviewed.
 - Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-2026-06-12.md)
+
+### 2026-06-23 VAI-013 MCP++ canonical-source resolution
+
+- The requested snake-case upstream `https://github.com/endomorphosis/mcp_plus_plus` still returns `Repository not found` via `git ls-remote`.
+- The case-sensitive upstream `https://github.com/endomorphosis/Mcp-Plus-Plus.git` resolves; `HEAD` and `refs/heads/main` both point to `29343be704da4e193ff143bac7daae9b0f98435d`.
+- Root `.gitmodules` maps the existing `Mcp-Plus-Plus` gitlink to the case-sensitive upstream URL, and `git submodule status Mcp-Plus-Plus` reports the same recorded pin.
+- Decision: keep `Mcp-Plus-Plus` as the standalone MCP++ spec/docs source, keep the root pin at `29343be704da4e193ff143bac7daae9b0f98435d`, and do not add or rename to a lowercase `mcp_plus_plus` submodule.
+- Runtime MCP++ behavior remains a distributed protocol surface across SwissKnife, `ipfs_datasets_py`, and `ipfs_accelerate_py` until a distinct standalone service implementation is reviewed.
+- Evidence: [data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-vai-013-2026-06-23.md](../../data/virtual_ai_os/discovery/mcp_plus_plus-source-resolution-vai-013-2026-06-23.md)
 
 ### 2026-05-25 MCP++ canonical-source re-check
 
