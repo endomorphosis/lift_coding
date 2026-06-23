@@ -32,6 +32,18 @@ This:
 2. Logs the failure at DEBUG level so operators can diagnose missing psutil.
 3. Records the unavailability in `test_results` so callers can inspect it.
 
+Follow-up in the same resource-collection path:
+
+- Added explicit `success: True` and `available: True` fields when psutil
+  resource metrics are collected.
+- Added explicit `success: True` and `available: False` fields when optional
+  resource metrics are unavailable.
+
+The `test()` method computes overall status by checking each `test_results`
+entry's `success` field. Resource telemetry is diagnostic, so missing psutil or
+successful metric collection should not turn an otherwise successful runtime
+test into `partial`.
+
 ## Validation
 
 ```
