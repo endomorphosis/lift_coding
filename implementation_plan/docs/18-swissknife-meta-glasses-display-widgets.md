@@ -60,6 +60,17 @@ Current public Meta sources broaden MGW beyond display widgets:
 - The Mock Device Kit can support hardware-free testing for some DAT flows, but public docs currently say it does not support display glasses, so MGW must keep independent mocks for display and expanded I/O until Meta's mock coverage catches up.
 - The Android public DAT repository exposes `mwdat-core`, `mwdat-camera`, and `mwdat-mockdevice` modules, which should anchor camera/mock implementation research before native code assumes package availability.
 
+MGW-363 refreshed this research on 2026-06-23 in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-363-meta-glasses-io-research.md` against the official Meta display developer announcement, Meta Wearables FAQ, public Android DAT 0.7.0 repo and DisplayAccess/CameraAccess samples, public iOS DAT 0.7.0 repo and DisplayAccess/CameraAccess samples, and the Meta Wearables Web Apps toolkit. Treat that file as the current hardware-assumption gate for MGW-364 through MGW-372.
+
+Key MGW-363 constraints:
+
+- Native Device Access Toolkit phone apps and display Web Apps are separate capability paths. DAT owns native camera photo/video stream/capture and native display sessions. Web Apps own standalone HTML/CSS/JavaScript display apps plus documented launch inputs for Meta Neural Band, captouch/D-pad, motion/orientation, phone GPS, and local storage.
+- DAT microphone input and speaker/headphone output should be modeled as iOS/Android Bluetooth-profile audio routes with permission, route diagnostics, fallback, and receipt metadata; do not assume raw microphone/speaker frames from DAT unless later authenticated docs expose them.
+- DAT display requires the Device Access Toolkit App Model, app registration metadata, release-channel or Developer Mode access, compatible firmware/glasses app state, a device session, display attach, `DisplayState.STARTED`, and structured cleanup. Missing packages, stale firmware, unavailable release channels, or unsupported hardware are normal fallback states.
+- Web Apps require a public HTTPS URL for on-device loading through the Meta AI app. Browser tests can simulate layout, D-pad, motion/orientation, and geolocation, but production Web Apps capability should remain distinct from native DAT device sessions.
+- Mock Device Kit can exercise DAT-style hardware-free camera/session/permission/media flows, but current public FAQ language says it does not support display glasses. MGW must keep independent mocks for display lifecycle, Meta Neural Band, captouch, motion/orientation, phone GPS, Bluetooth audio routes, unsupported states, and bridge envelopes.
+- No checked official source exposes raw Neural Band EMG, raw Bluetooth or Wi-Fi sockets, Web Apps camera/microphone capture, or direct Web Apps speaker/headphone routing. IPFS/libp2p/MCP++ compatibility must stay in app-level envelopes carrying CIDs, peer/session IDs, policy decisions, route decisions, backpressure, and receipts.
+
 ### Source Alignment and Version Guardrails
 
 Recorded by MGW-001 on 2026-06-23:
@@ -184,17 +195,17 @@ Every generated widget must pass these checks before the backend can emit a mobi
 ## Implementation Roadmap and Daemon Queue
 
 This roadmap section is descriptive planning context. The supervisor-owned,
-machine-readable MGW backlog remains in the board file named below, so do not
+machine-readable MGW backlog remains in the colocated board file, so do not
 derive daemon task status from the unchecked roadmap bullets in this document.
 
 ### Daemon Processing
 
-The daemon-owned checklist for this plan lives in the supervisor-owned
-ipfs_datasets_py implementation-daemon task board:
+The daemon-owned checklist for this plan is mirrored in the colocated
+supervisor-owned ipfs_datasets_py implementation-daemon task board that shares
+this plan's basename.
 
-- Task board: `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-
-This path is a task-board pointer, not an unresolved roadmap annotation.
+This document is descriptive planning context; the colocated board is the only
+machine-readable source for MGW task status.
 
 Use these repository-local wrappers so the daemon, supervisor, and llm_router run with the correct task prefix, state directory, and `external/ipfs_datasets` import path:
 
