@@ -1,24 +1,24 @@
 # VAI-199 Resolution
 
-Date: 2026-06-06
+Date: 2026-06-23
 Task: VAI-199 — Review swallowed exception path in control_surface_policy.py:1032
 Source: hallucinate_app/python/hallucinate_app/control_surface_policy.py
 
 ## Finding
 
 The codebase scan (fingerprint 457c986ab6c2) found `except Exception:` handlers in
-`_serialize_ipfs_value()` that were silently swallowing serialization failures.  Prior
-tasks HAO-295 through HAO-297 addressed the `as_dict()` and earlier handlers.  VAI-199
-addressed the remaining `to_dict()` and `asdict()` handlers (originally at line ~1032,
-shifted by prior fixes) which still logged only at DEBUG level.
+`_serialize_ipfs_value()` that were silently swallowing serialization failures. In the
+current file layout, VAI-198 has already made the `to_dict()` fallback visible. The
+matching VAI-199 path is the dataclass `asdict()` fallback, which still caught every
+exception and continued to later fallback serializers without diagnostics.
 
 ## Fix Applied
 
-Upgraded both remaining exception handlers from `_logger.debug(...)` to
-`_logger.warning(..., exc_info=True)` with an explanatory comment, consistent with the
-pattern established for `as_dict()` by HAO-297.  Swallowing the exception is intentional
-in this fallback chain — the function tries multiple serialization strategies in sequence
-— but failures must be visible in production logs.
+The dataclass `asdict()` fallback now binds the caught exception and logs a warning with
+traceback before trying the remaining `__dict__` and `repr()` serializers. The broad
+catch remains intentional because `_serialize_ipfs_value()` receives arbitrary upstream
+IPFS objects and must continue through its fallback chain, but the failure is no longer
+silent.
 
 ## Validation
 
