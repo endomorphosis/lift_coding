@@ -37,6 +37,14 @@ python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipf
 ```
 → OK
 
+## Attempt 2 Note
+
+Reapplied the documented cleanup-path fix in
+`PlasmaManager.get`: failed temp-file unlink operations now emit a warning with
+the file path and exception instead of being silently ignored. The cleanup still
+does not re-raise because the read has already succeeded and cleanup is
+best-effort.
+
 ## Submodule Commit
 
 Fix applied in hallucinate_app submodule at: `d341a926fa4ba5eef79503d4bcbc5309d64d58d1`
