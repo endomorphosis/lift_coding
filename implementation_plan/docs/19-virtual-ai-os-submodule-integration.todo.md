@@ -1024,8 +1024,8 @@ cadence remains parseable and resumable.
 
 ## VAI-143 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py:589
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-24: replaced the silent metadata temp-file unlink handler with `_unlink_temp_file(meta_file_path, "metadata")`; validation passed with `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py`.
 - Priority: P1
 - Track: runtime
 - Depends on: 
