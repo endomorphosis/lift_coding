@@ -213,6 +213,11 @@ describe('expo-meta-wearables-dat module wrapper', () => {
         displayLastError: null,
         displayUpdateCount: 0,
         displayLifecycleStages: ['target_selected', 'session_started', 'display_started'],
+        displayAccessLifecycleStages: [
+          'display_access_target_selected',
+          'display_access_session_started',
+          'display_access_display_started',
+        ],
       })),
       capturePhoto: jest.fn(async () => ({
         state: 'ready',
@@ -239,6 +244,13 @@ describe('expo-meta-wearables-dat module wrapper', () => {
           'display_started',
           'display_ready',
           'content_sent',
+        ],
+        displayAccessLifecycleStages: [
+          'display_access_target_selected',
+          'display_access_session_started',
+          'display_access_display_attached',
+          'display_access_display_started',
+          'display_access_content_sent',
         ],
       })),
       updateDisplayWidget: jest.fn(async () => ({
@@ -327,6 +339,10 @@ describe('expo-meta-wearables-dat module wrapper', () => {
       displayRenderPath: 'native-dat',
       displayLastError: null,
       displayLifecycleStages: expect.arrayContaining(['target_selected', 'display_started']),
+      displayAccessLifecycleStages: expect.arrayContaining([
+        'display_access_target_selected',
+        'display_access_display_started',
+      ]),
     });
     await expect(module.capturePhoto()).resolves.toMatchObject({
       action: 'capture_photo',
@@ -420,6 +436,13 @@ describe('expo-meta-wearables-dat module wrapper', () => {
         'display_attached',
         'display_started',
         'content_sent',
+      ]),
+      displayAccessLifecycleStages: expect.arrayContaining([
+        'display_access_target_selected',
+        'display_access_session_started',
+        'display_access_display_attached',
+        'display_access_display_started',
+        'display_access_content_sent',
       ]),
     });
     await expect(nativeModule.renderDisplayWidget.mock.results[0].value).resolves.toMatchObject({
