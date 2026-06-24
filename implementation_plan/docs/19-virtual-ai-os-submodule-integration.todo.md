@@ -1660,7 +1660,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: ce4e92ab5ce18e2dce456087fbd0e9d6848b747e
+- Fingerprint: ae66f7f8cd286e6ec8ab19c50bcf3406d98a2061
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -2974,3 +2974,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-443-codebase-scan-da19273702c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-444 Resolve code annotation in swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-444-codebase-scan-34218144f2c4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-445 Resolve code annotation in swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-445-codebase-scan-189bc4a84a14.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-446 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-446-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
