@@ -598,18 +598,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-386-mgw-363-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-363. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-386-mgw-363-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-363 from strategy blocked_tasks.
 
-## MGW-387 Resolve 18 preflight-conflicting backlogged worktree merges
+## MGW-387 Resolve 21 preflight-conflicting backlogged worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: d7c9765aeb02f9896483b11779c4e048f075fdd2
+- Fingerprint: 122bac222de2442c0321bd33adc9eebb67ec8e6f
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-387-reconciliation-6979a5daafb9.md
-- Acceptance: Reconciliation guardrail filed this because 18 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-387-reconciliation-6979a5daafb9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 21 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-387-reconciliation-6979a5daafb9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## MGW-388 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859
 
