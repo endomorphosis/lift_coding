@@ -3443,7 +3443,7 @@ cadence remains parseable and resumable.
 
 ## VAI-486 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: quality
