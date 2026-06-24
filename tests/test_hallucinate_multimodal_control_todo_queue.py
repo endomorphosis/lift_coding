@@ -2805,6 +2805,80 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
 
 
+def test_submodule_gitlink_conflict_repair_merges_sibling_submodule_heads(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    app = repo / "hallucinate_app"
+    app.mkdir(parents=True)
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    _git(app, "init")
+    _git(app, "checkout", "-b", "main")
+    _git(app, "config", "user.name", "Test User")
+    _git(app, "config", "user.email", "test@example.invalid")
+    (app / "README.md").write_text("base\n", encoding="utf-8")
+    _git(app, "add", "README.md")
+    _git(app, "commit", "-m", "app base")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "root base")
+    baseline_ref = _git(repo, "rev-parse", "HEAD")
+
+    branch_name = "implementation/vai-142-attempt"
+    _git(repo, "checkout", "-b", branch_name)
+    _git(app, "checkout", "-b", "vai-142-submodule")
+    (app / "vai142.txt").write_text("implementation branch\n", encoding="utf-8")
+    _git(app, "add", "vai142.txt")
+    _git(app, "commit", "-m", "VAI-142: sibling task output")
+    theirs_head = _git(app, "rev-parse", "HEAD")
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "VAI-142 root pointer")
+    implementation_commit = _git(repo, "rev-parse", "HEAD")
+
+    _git(repo, "checkout", "main")
+    _git(app, "checkout", "main")
+    (app / "hao515.txt").write_text("current main sibling\n", encoding="utf-8")
+    _git(app, "add", "hao515.txt")
+    _git(app, "commit", "-m", "HAO: sibling backlog output")
+    ours_head = _git(app, "rev-parse", "HEAD")
+    assert ours_head != theirs_head
+    _git(repo, "add", "hallucinate_app")
+    _git(repo, "commit", "-m", "main sibling pointer")
+
+    daemon = PortalImplementationDaemon(
+        **{TASK_BOARD_PATH_KEY: _temporary_board_path(repo)},
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## VAI-",
+    )
+    task = PortalTask(
+        task_id="VAI-142",
+        title="Repair sibling submodule gitlinks",
+        **_pending_task_metadata(),
+        priority="P1",
+        track="runtime",
+    )
+
+    result = daemon._merge_branch_to_main(branch_name, task, 1, baseline_ref=baseline_ref)
+    resolved_gitlink = _git(repo, "rev-parse", "HEAD:hallucinate_app")
+
+    assert result["merged"] is True
+    assert result["submodule_conflict_repair"]["repaired"] is True
+    assert _git(repo, "status", "--porcelain") == ""
+    assert resolved_gitlink == _git(app, "rev-parse", "HEAD")
+    _git(app, "merge-base", "--is-ancestor", ours_head, "HEAD")
+    _git(app, "merge-base", "--is-ancestor", theirs_head, "HEAD")
+    _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
+
+
 def test_objective_wait_fixture_hides_scanner_visible_git_pathspecs():
     flagged_git_add = (
         '_git(repo, "add", "'
