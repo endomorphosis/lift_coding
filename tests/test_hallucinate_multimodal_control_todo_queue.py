@@ -49,6 +49,9 @@ PHONE_INGRESS_REHEARSAL_PATH = (
 MCP_LAUNCH_CONTRACT_INTEGRATION_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-674-mcp-launch-contract-integration.md"
 )
+PLAYWRIGHT_LAUNCH_REPLAY_PATH = (
+    DISCOVERY_ROOT / "2026-06-24-hao-675-playwright-launch-replay.md"
+)
 
 
 def _load_script_module(name: str):
@@ -296,7 +299,7 @@ def test_hao_674_integrates_mcp_launch_contracts_with_swissknife_control_surface
     normalized_idl_source = " ".join(idl_source.split())
     normalized_daemon_doc = " ".join(daemon_doc.split())
 
-    assert task.status == PENDING_TASK_STATUS
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
     assert task.priority == "P0"
     assert task.track == "integration"
     assert task.depends_on == ["HAO-014", "HAO-020", "HAO-021"]
@@ -377,6 +380,119 @@ def test_hao_674_integrates_mcp_launch_contracts_with_swissknife_control_surface
     assert "Every service invocation routes through the multimodal control surface" in " ".join(
         fixture["assertions"]
     )
+
+
+def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_coverage():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-675"]
+    discovery_source = PLAYWRIGHT_LAUNCH_REPLAY_PATH.read_text(encoding="utf-8")
+    fixture = _json_block_after(discovery_source, "## Replay Fixture")
+    hallucinate_fixture = json.loads(
+        (
+            REPO_ROOT
+            / "hallucinate_app"
+            / "test"
+            / "e2e"
+            / "fixtures"
+            / "hao-675-launch-replay.json"
+        ).read_text(encoding="utf-8")
+    )
+    swissknife_fixture = json.loads(
+        (
+            REPO_ROOT
+            / "swissknife"
+            / "test"
+            / "e2e"
+            / "fixtures"
+            / "hao-675-launch-replay.json"
+        ).read_text(encoding="utf-8")
+    )
+    hallucinate_spec = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "multimodal-control-surface.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_spec = (
+        REPO_ROOT / "swissknife" / "test" / "e2e" / "meta-glasses-virtual-os.spec.ts"
+    ).read_text(encoding="utf-8")
+    idl_source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+
+    assert task.status == PENDING_TASK_STATUS
+    assert task.priority == "P0"
+    assert task.track == "validation"
+    assert task.depends_on == ["HAO-674"]
+    assert {"hallucinate_app", "swissknife", "tests", "data/hallucinate_multimodal_control/discovery"}.issubset(
+        set(task.outputs)
+    )
+
+    assert fixture == hallucinate_fixture
+    assert fixture == swissknife_fixture
+    assert fixture["task_id"] == "HAO-675"
+    assert fixture["artifact_id"] == "swissknife_hallucinate_app_playwright_launch_replay"
+    assert fixture["schema"] == "launch_replay_playwright_receipt_v1"
+    assert fixture["playwright_ready"] is True
+    assert "test:e2e:meta-glasses" in fixture["commands"]["swissknife"]
+    assert "multimodal-control-surface.spec.ts" in fixture["commands"]["hallucinate_app"]
+    assert fixture["route"] == [
+        "Swissknife application command intent",
+        "MCP++ service capability discovery",
+        "Hallucinate App interaction_envelope",
+        "Hallucinate App policy_decision",
+        "Hallucinate App mediation_receipt",
+        "desktop peer offload receipt",
+        "simulated Meta glasses terminal render",
+        "production launch readiness receipt",
+    ]
+
+    capabilities = {capability["server_package"]: capability for capability in fixture["service_capabilities"]}
+    assert set(capabilities) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
+    for capability in capabilities.values():
+        assert capability["mcp_plus_plus_profiles"] == [
+            "Profile A MCP-IDL",
+            "Profile C UCAN",
+            "Profile E P2P",
+        ]
+        assert capability["advertised_operations"]
+        assert capability["swissknife_app"]
+
+    assert fixture["simulated_meta_glasses_interaction"] == {
+        "participant_id": "meta_glasses:terminal",
+        "surface": "gesture",
+        "surface_event": "tap",
+        "platform": "meta_glasses",
+        "raw_action": "display.tap.open_model_runner",
+        "normalized_intent": "terminal.activate_action",
+        "render_target": "display_webapp",
+    }
+    assert fixture["pass_fail_receipts"] == {
+        "swissknife_invokes_hallucinate_app_mediation": "passed",
+        "mcp_plus_plus_capability_discovery": "passed",
+        "simulated_meta_glasses_interaction": "passed",
+        "desktop_peer_offload": "passed",
+        "production_launch_readiness": "passed",
+    }
+    assert [receipt["kind"] for receipt in fixture["receipt_chain"]] == [
+        "swissknife_command_intent",
+        "mcp_plus_plus_capability_discovery",
+        "mediation_receipt",
+        "desktop_peer_offload",
+        "simulated_meta_glasses_interaction",
+        "production_launch_readiness",
+    ]
+    assert {receipt["status"] for receipt in fixture["receipt_chain"]} == {"passed"}
+
+    for required_term in (
+        "HAO-675",
+        "Playwright launch replay",
+        "Swissknife",
+        "Hallucinate App",
+        "MCP++",
+        "Meta glasses",
+        "desktop peer offload",
+        "production launch readiness",
+    ):
+        assert required_term in discovery_source
+        assert required_term in idl_source
+        assert required_term in hallucinate_spec or required_term == "production launch readiness"
+        assert required_term in swissknife_spec or required_term == "production launch readiness"
 
 
 def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
