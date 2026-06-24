@@ -1654,18 +1654,18 @@ cadence remains parseable and resumable.
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## VAI-200 Resolve dirty main checkout blocking 17 worktree merges
+## VAI-200 Resolve dirty main checkout blocking 19 worktree merges
 
 - Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: d5ea1f19f8a8359265d329a7d8d8407f3d56c383
+- Fingerprint: 4b2daed37fdfaf96bc5d22c9a9f5a068908cd6ac
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md
-- Acceptance: Reconciliation guardrail filed this because 17 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 19 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## VAI-201 Resolve 3 dirty backlogged worktrees blocked by content_not_in_target
 
@@ -2809,3 +2809,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-428-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-429 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-429-codebase-scan-87a1ababe545.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-430 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-430-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-431 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-431-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
