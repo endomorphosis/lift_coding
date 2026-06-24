@@ -890,7 +890,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-413 Refresh official Meta glasses I/O source matrix
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: research
