@@ -238,8 +238,12 @@ def test_meta_glasses_supervisor_wrapper_uses_active_accelerate_runner(monkeypat
     assert "ipfs_datasets_py.optimizers.todo_daemon.implementation_supervisor" not in source
     assert "build_script_supervisor_bootstrap_runner(" in source
     assert supervisor_module.META_GLASSES_DISPLAY_ENV_PREFIX == "HANDSFREE_MGW"
-    assert supervisor_module.CODEBASE_SCAN_SETTINGS.min_open_tasks == 0
-    assert supervisor_module.CODEBASE_SCAN_SETTINGS.max_findings == 0
+    assert supervisor_module.CODEBASE_SCAN_SETTINGS.min_open_tasks == 8
+    assert supervisor_module.CODEBASE_SCAN_SETTINGS.max_findings == 3
+    assert "external/meta-wearables-dat-android" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
+    assert "external/meta-wearables-dat-ios" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
+    assert "Mcp-Plus-Plus" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS
+    assert "swissknife/cleanup-archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert supervisor_module.DAEMON_SCRIPT_PATH.name == "meta_glasses_display_todo_daemon.py"
     assert "swissknife" in supervisor_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
     assert (

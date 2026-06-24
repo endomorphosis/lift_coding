@@ -33,6 +33,7 @@ from hallucinate_multimodal_control_todo_daemon import (  # noqa: E402
     HALLUCINATE_CONTEXT,
     HALLUCINATE_DATA_PATHS,
     HALLUCINATE_ENV_PREFIX,
+    HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS,
     HALLUCINATE_INTEROPERABILITY_FOCUS,
     HALLUCINATE_WORKTREE_SUBMODULE_PATHS,
     OBJECTIVE_BUNDLE_DIR,
@@ -76,7 +77,8 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_path_key="objective_goal_heap_path",
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
-    objective_max_interoperability_goals=0,
+    objective_interoperability_component_paths=HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS,
+    objective_max_interoperability_goals=12,
     seed_interoperability_goals=True,
     # scanner-resolved: HAO-195 - stale line-302 explicit flag wiring is now
     # owned by the shared objective defaults factory used by this supervisor.

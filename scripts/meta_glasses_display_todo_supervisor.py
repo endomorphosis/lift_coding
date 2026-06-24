@@ -62,8 +62,8 @@ OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(
 )
 CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(
     META_GLASSES_DISPLAY_ENV_PREFIX,
-    min_open_tasks=0,
-    max_findings=0,
+    min_open_tasks=8,
+    max_findings=3,
 )
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
 OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
@@ -99,6 +99,8 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_accelerate/test/skills/",
         "external/ipfs_kit/archive/",
         "external/ipfs_kit/backup/",
+        "swissknife/cleanup-archive/",
+        "hallucinate_app/swissknife/cleanup-archive/",
     ),
 )
 
@@ -112,7 +114,18 @@ _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
 )
 META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     META_GLASSES_DISPLAY_ENV_PREFIX,
-    "swissknife,hallucinate_app",
+    "swissknife,hallucinate_app,external/meta-wearables-dat-android,external/meta-wearables-dat-ios",
+)
+META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS = (
+    "mobile",
+    "swissknife",
+    "hallucinate_app",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus",
+    "external/meta-wearables-dat-android",
+    "external/meta-wearables-dat-ios",
 )
 
 _meta_glasses_display_objective_defaults = build_namespace_objective_refill_defaults_factory(
@@ -120,7 +133,8 @@ _meta_glasses_display_objective_defaults = build_namespace_objective_refill_defa
     objective_path=OBJECTIVE_HEAP_PATH,
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS,
-    objective_max_interoperability_goals=0,
+    objective_interoperability_component_paths=META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS,
+    objective_max_interoperability_goals=12,
     seed_interoperability_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )

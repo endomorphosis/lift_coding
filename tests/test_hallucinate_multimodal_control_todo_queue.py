@@ -289,9 +289,13 @@ def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
     }
 
     assert expected_skips <= set(daemon_module.CODEBASE_SCAN_SKIP_PREFIXES)
-    assert daemon_module.CODEBASE_SCAN_MIN_OPEN_TASKS == 0
-    assert daemon_module.CODEBASE_SCAN_MAX_FINDINGS == 0
-    assert daemon_module.CODEBASE_SCAN_SETTINGS.max_findings == 0
+    assert daemon_module.CODEBASE_SCAN_MIN_OPEN_TASKS == 8
+    assert daemon_module.CODEBASE_SCAN_MAX_FINDINGS == 3
+    assert daemon_module.CODEBASE_SCAN_SETTINGS.max_findings == 3
+    assert daemon_module.HALLUCINATE_INTEROPERABILITY_FOCUS == ("hallucinate_app", "swissknife")
+    assert "Mcp-Plus-Plus" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
+    assert "external/meta-wearables-dat-android" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
+    assert "swissknife/cleanup-archive/" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
 
 
 def test_hao_428_offload_session_events_route_through_mediation():
@@ -1510,7 +1514,7 @@ def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
     daemon = _load_script_module("hallucinate_multimodal_control_todo_daemon")
 
-    assert daemon.HALLUCINATE_INTEROPERABILITY_FOCUS == ("hallucinate_app",)
+    assert daemon.HALLUCINATE_INTEROPERABILITY_FOCUS == ("hallucinate_app", "swissknife")
 
     state_dir = tmp_path / "state"
     state_dir.mkdir()

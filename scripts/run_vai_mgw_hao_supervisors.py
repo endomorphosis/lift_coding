@@ -59,9 +59,28 @@ REFILL_DEFAULTS = {
     "objective_scan_min_open_tasks": os.environ.get("OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"),
     "objective_scan_max_findings": os.environ.get("OBJECTIVE_SCAN_MAX_FINDINGS", "6"),
     "objective_surplus_findings_per_goal": os.environ.get("OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "2"),
-    "codebase_scan_min_open_tasks": os.environ.get("CODEBASE_SCAN_MIN_OPEN_TASKS", "0"),
-    "codebase_scan_max_findings": os.environ.get("CODEBASE_SCAN_MAX_FINDINGS", "0"),
+    "codebase_scan_min_open_tasks": os.environ.get("CODEBASE_SCAN_MIN_OPEN_TASKS", "8"),
+    "codebase_scan_max_findings": os.environ.get("CODEBASE_SCAN_MAX_FINDINGS", "3"),
+    "objective_max_interoperability_goals": os.environ.get("OBJECTIVE_MAX_INTEROPERABILITY_GOALS", "12"),
 }
+
+VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS = (
+    "mobile",
+    "swissknife",
+    "hallucinate_app",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus",
+    "external/meta-wearables-dat-android",
+    "external/meta-wearables-dat-ios",
+)
+
+VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS = tuple(
+    item
+    for path in VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS
+    for item in ("--objective-interoperability-component-path", path)
+)
 
 VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
     "phone-hosted Swissknife virtual desktop",
@@ -132,8 +151,8 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "--objective-max-refinement-depth",
     "2",
     "--objective-max-interoperability-goals",
-    "0",
-    "--no-objective-goal-completion-reconcile",
+    REFILL_DEFAULTS["objective_max_interoperability_goals"],
+    *VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS,
     "--objective-task-janitor-max-deprioritized-tasks",
     "500",
     *VAI_MGW_HAO_LAUNCH_MISSION_ARGS,

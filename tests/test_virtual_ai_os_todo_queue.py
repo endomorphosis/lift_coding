@@ -687,17 +687,32 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--daemon-merged-worktree-cleanup-max" in common_arg_values
     assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
     assert "--codebase-scan-min-open-tasks" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--codebase-scan-min-open-tasks") + 1] == "0"
+    assert common_arg_values[common_arg_values.index("--codebase-scan-min-open-tasks") + 1] == "8"
     assert "--codebase-scan-max-findings" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
+    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "3"
     assert "--no-objective-goal-refinement" not in common_arg_values
     assert "--objective-max-refinement-children" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-children") + 1] == "2"
     assert "--objective-max-refinement-depth" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-depth") + 1] == "2"
     assert "--objective-max-interoperability-goals" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "0"
-    assert "--no-objective-goal-completion-reconcile" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "12"
+    assert "--no-objective-goal-completion-reconcile" not in common_arg_values
+    assert common_arg_values.count("--objective-interoperability-component-path") == len(
+        runner_module.VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS
+    )
+    for component_path in (
+        "mobile",
+        "swissknife",
+        "hallucinate_app",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "Mcp-Plus-Plus",
+        "external/meta-wearables-dat-android",
+        "external/meta-wearables-dat-ios",
+    ):
+        assert component_path in common_arg_values
     assert "--objective-task-janitor-max-deprioritized-tasks" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-task-janitor-max-deprioritized-tasks") + 1] == "500"
     assert common_arg_values.count("--objective-mission-term") == len(
@@ -746,7 +761,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     ]
 
 
-def test_objective_refill_defaults_forward_zero_interoperability_cap(tmp_path):
+def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (
         ImplementationSupervisorDefaults,
@@ -765,7 +780,8 @@ def test_objective_refill_defaults_forward_zero_interoperability_cap(tmp_path):
     )
     objective = ObjectiveRefillDefaults(
         seed_interoperability_goals=True,
-        objective_max_interoperability_goals=0,
+        objective_interoperability_component_paths=("swissknife", "hallucinate_app"),
+        objective_max_interoperability_goals=12,
     )
 
     args = apply_portal_implementation_supervisor_defaults(
@@ -775,8 +791,11 @@ def test_objective_refill_defaults_forward_zero_interoperability_cap(tmp_path):
     )
 
     assert "--objective-seed-interoperability-goals" in args
+    assert args.count("--objective-interoperability-component-path") == 2
+    assert args[args.index("--objective-interoperability-component-path") + 1] == "swissknife"
+    assert "hallucinate_app" in args
     assert "--objective-max-interoperability-goals" in args
-    assert args[args.index("--objective-max-interoperability-goals") + 1] == "0"
+    assert args[args.index("--objective-max-interoperability-goals") + 1] == "12"
 
 
 def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path):
@@ -894,7 +913,10 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
 
     assert len(active_goals) <= 16
     assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
-    assert goals_by_id["VAIOS-G697"].status == "active"
+    assert goals_by_id["VAIOS-G697"].status in {"active", "completed"}
+    if goals_by_id["VAIOS-G697"].status == "completed":
+        assert goals_by_id["VAIOS-G697"].fields.get("completion_evidence")
+        assert goals_by_id["VAIOS-G697"].fields.get("completion_validation")
     launch_gate_validation = goals_by_id["VAIOS-G697"].fields.get("validation", "")
     assert "tests/test_virtual_ai_os_launch_readiness_gate.py" in launch_gate_validation
     assert "npm --prefix swissknife run test:e2e:meta-glasses" in launch_gate_validation
@@ -1050,12 +1072,24 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     flag_index = args.index("--objective-surplus-findings-per-goal")
     assert args[flag_index + 1] == str(supervisor_module.OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL)
     assert "--objective-seed-interoperability-goals" in args
-    focus_index = args.index("--objective-interoperability-focus")
-    assert args[focus_index + 1] == "hallucinate_app"
+    focus_values = [
+        args[index + 1]
+        for index, arg in enumerate(args)
+        if arg == "--objective-interoperability-focus"
+    ]
+    assert focus_values == ["mobile", "swissknife", "hallucinate_app"]
+    component_values = [
+        args[index + 1]
+        for index, arg in enumerate(args)
+        if arg == "--objective-interoperability-component-path"
+    ]
+    assert component_values == list(supervisor_module.VIRTUAL_AI_OS_INTEROPERABILITY_COMPONENT_PATHS)
+    max_interop_index = args.index("--objective-max-interoperability-goals")
+    assert args[max_interop_index + 1] == "12"
     codebase_min_index = args.index("--codebase-scan-min-open-tasks")
     codebase_max_index = args.index("--codebase-scan-max-findings")
-    assert args[codebase_min_index + 1] == "0"
-    assert args[codebase_max_index + 1] == "0"
+    assert args[codebase_min_index + 1] == "8"
+    assert args[codebase_max_index + 1] == "3"
     assert kwargs["ensure_running"] is False
     assert runtime.process_match_any == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
 
@@ -1138,6 +1172,7 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
 
     assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]
     assert "external/ipfs_kit/archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/cleanup-archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert {
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",

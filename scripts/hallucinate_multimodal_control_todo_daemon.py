@@ -79,8 +79,8 @@ OBJECTIVE_GOAL_SCAN_EVIDENCE = {
 }
 CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(
     HALLUCINATE_ENV_PREFIX,
-    min_open_tasks=0,
-    max_findings=0,
+    min_open_tasks=8,
+    max_findings=3,
 )
 CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
 CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
@@ -114,6 +114,8 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_accelerate/test/skills/",
         "external/ipfs_kit/archive/",
         "external/ipfs_kit/backup/",
+        "swissknife/cleanup-archive/",
+        "hallucinate_app/swissknife/cleanup-archive/",
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
@@ -143,7 +145,18 @@ from ipfs_accelerate_py.agent_supervisor.implementation_daemon_runner import (  
 
 HALLUCINATE_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     HALLUCINATE_ENV_PREFIX,
+    "hallucinate_app,swissknife",
+)
+HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS = (
+    "mobile",
+    "swissknife",
     "hallucinate_app",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus",
+    "external/meta-wearables-dat-android",
+    "external/meta-wearables-dat-ios",
 )
 _HALLUCINATE_RUNTIME_BOOTSTRAP = _HALLUCINATE_CONTEXT.runtime_bootstrap
 _HALLUCINATE_BOOTSTRAP_PATHS = _HALLUCINATE_RUNTIME_BOOTSTRAP.bootstrap_paths

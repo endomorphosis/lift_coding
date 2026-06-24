@@ -16,6 +16,7 @@ from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+    prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
     repo_script_path as _repo_script_path,
@@ -48,11 +49,19 @@ OBJECTIVE_DATASET_DIR = VIRTUAL_AI_OS_DATA_PATHS.objective_dataset_dir
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = VIRTUAL_AI_OS_DATA_PATHS.objective_todo_vector_index_path
 DISCOVERY_OUTPUT_PATH = VIRTUAL_AI_OS_DATA_PATHS.discovery_output_path()
 OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(VIRTUAL_AI_OS_ENV_PREFIX)
+CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(
+    VIRTUAL_AI_OS_ENV_PREFIX,
+    min_open_tasks=8,
+    max_findings=3,
+)
 OBJECTIVE_SCAN_MIN_OPEN_TASKS = OBJECTIVE_REFILL_SETTINGS.min_open_tasks
 OBJECTIVE_SCAN_MAX_FINDINGS = OBJECTIVE_REFILL_SETTINGS.max_findings
 OBJECTIVE_SCAN_COOLDOWN_SECONDS = OBJECTIVE_REFILL_SETTINGS.cooldown_seconds
 OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL = OBJECTIVE_REFILL_SETTINGS.surplus_findings_per_goal
 OBJECTIVE_SURPLUS_MIN_TERMS_PER_TODO = OBJECTIVE_REFILL_SETTINGS.surplus_min_terms_per_todo
+CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
+CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
+CODEBASE_SCAN_COOLDOWN_SECONDS = CODEBASE_SCAN_SETTINGS.cooldown_seconds
 CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
     {
         "virtual_ai_os": (
@@ -76,6 +85,8 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_accelerate/test/skills/",
         "external/ipfs_kit/archive/",
         "external/ipfs_kit/backup/",
+        "swissknife/cleanup-archive/",
+        "hallucinate_app/swissknife/cleanup-archive/",
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
@@ -92,7 +103,18 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
 
 VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     VIRTUAL_AI_OS_ENV_PREFIX,
+    "mobile,swissknife,hallucinate_app",
+)
+VIRTUAL_AI_OS_INTEROPERABILITY_COMPONENT_PATHS = (
+    "mobile",
+    "swissknife",
     "hallucinate_app",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus",
+    "external/meta-wearables-dat-android",
+    "external/meta-wearables-dat-ios",
 )
 _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP = _VIRTUAL_AI_OS_CONTEXT.runtime_bootstrap
 _VIRTUAL_AI_OS_BOOTSTRAP_PATHS = _VIRTUAL_AI_OS_RUNTIME_BOOTSTRAP.bootstrap_paths
@@ -112,7 +134,8 @@ _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_fa
     objective_path=OBJECTIVE_HEAP_PATH,
     objective_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     objective_interoperability_focus=VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS,
-    objective_max_interoperability_goals=0,
+    objective_interoperability_component_paths=VIRTUAL_AI_OS_INTEROPERABILITY_COMPONENT_PATHS,
+    objective_max_interoperability_goals=12,
     seed_interoperability_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
@@ -121,9 +144,8 @@ _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_fa
 _virtual_ai_os_codebase_defaults = build_namespace_codebase_refill_defaults_factory(
     VIRTUAL_AI_OS_DATA_PATHS,
     codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
-    codebase_scan_min_open_tasks=0,
-    codebase_scan_max_findings=0,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
+    **CODEBASE_SCAN_SETTINGS.codebase_refill_kwargs(),
 )
 _virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repo_root=REPO_ROOT,
