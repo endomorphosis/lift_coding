@@ -1,39 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: ba87dca66f401154bf9d7900e6434915378a90dc
+Fingerprint: 67ff2b012008de96db04428c9b1c2fb7219a5aae
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 27
+Candidate count: 26
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `MM swissknife`
-- `?? hallucinate-start-post-sysctl.log`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1, untracked=1`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `swissknife`
-  - `hallucinate-start-post-sysctl.log`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `M	swissknife`
-- Staged name status:
-  - `M	swissknife`
-- Untracked paths:
-  - `hallucinate-start-post-sysctl.log`
+- Diff stat:
+  - `hallucinate_app | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -75,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `27` candidates, `20` sampled records.
+Work surface: `26` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -117,38 +105,22 @@ Work surface: `27` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 27,
+  "candidate_count": 26,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ba87dca66f401154bf9d7900e6434915378a90dc",
+  "fingerprint": "67ff2b012008de96db04428c9b1c2fb7219a5aae",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-24-vai-453-codebase-scan-d4ed79ea4296.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
+    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "modified": 3,
-      "other_dirty": 1,
-      "untracked": 1
+      "other_dirty": 1
     },
-    "staged_name_status": "M\tswissknife",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "swissknife",
-      "hallucinate-start-post-sysctl.log"
+      "hallucinate_app"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "MM swissknife",
-      "?? hallucinate-start-post-sysctl.log"
-    ],
-    "untracked_paths": [
-      "hallucinate-start-post-sysctl.log"
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -181,11 +153,7 @@ Work surface: `27` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "swissknife",
-    "hallucinate-start-post-sysctl.log"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
