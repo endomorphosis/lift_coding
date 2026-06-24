@@ -3307,11 +3307,7 @@ cadence remains parseable and resumable.
 
 ## VAI-474 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1
 
-<<<<<<< HEAD
 - Status: completed
-=======
-- Status: todo
->>>>>>> implementation/mgw-507-attempt-1-1782283691
 - Completion: manual
 - Priority: P2
 - Track: quality

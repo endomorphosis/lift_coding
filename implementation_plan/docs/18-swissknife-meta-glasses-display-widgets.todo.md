@@ -2042,3 +2042,25 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-517-codebase-scan-7b300c0284ff.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-518 Define Meta glasses multimodal IO transport contracts for Swissknife
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: integration
+- Depends on: MGW-002, MGW-005, MGW-007, MGW-008, MGW-010
+- Outputs: implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md, data/meta_glasses_display_widgets/discovery, swissknife, mobile, tests
+- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-518|camera|microphone|headphones|Neural Band|captouch|IPFS|libp2p|MCP\\+\\+|control plane" implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md data/meta_glasses_display_widgets/discovery swissknife mobile tests
+- Acceptance: Define the hardware-free contract and mock boundary for Meta glasses camera, microphone, headphones, display, captouch, and Neural Band inputs as Swissknife control-plane events, including Bluetooth/Wi-Fi transport assumptions, DAT availability fallbacks, IPFS/libp2p handoff metadata, and MCP++ envelope compatibility.
+
+## MGW-519 Add Meta glasses control-plane mocks and Playwright-ready fixtures
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: MGW-518
+- Outputs: swissknife, mobile, tests, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=external/ipfs_datasets pytest tests/test_meta_glasses_display_todo_queue.py; rg -n "MGW-519|Meta glasses|control-plane|Playwright|camera|microphone|headphones|Neural Band" swissknife mobile tests data/meta_glasses_display_widgets/discovery
+- Acceptance: Add or specify reusable mocks and Playwright-ready fixtures that let Swissknife applications consume Meta glasses display/audio/camera/neural-band events through the control plane without paired hardware, while preserving receipts that can later be replayed against physical DAT devices.
