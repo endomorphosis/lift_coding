@@ -4,6 +4,7 @@ const {
   META_GLASSES_CONTROL_PLANE_EVENT_TYPES,
   META_GLASSES_TRANSPORT_ASSUMPTIONS,
   buildMetaGlassesControlPlaneEvent,
+  buildMetaGlassesPlaywrightFixture,
 } = require('../metaGlassesMultimodalIoTransportContract');
 
 describe('Meta glasses multimodal IO transport contract', () => {
@@ -58,5 +59,38 @@ describe('Meta glasses multimodal IO transport contract', () => {
     expect(envelope.handoff.ipfs_cids).toEqual(['bafyreceipt']);
     expect(envelope.handoff.libp2p_peer_id).toBe('peer-1');
     expect(envelope.fallback.dat_available).toBe(false);
+  });
+
+  test('builds MGW-519 Playwright-ready control-plane mocks with replay receipts', () => {
+    const fixture = buildMetaGlassesPlaywrightFixture();
+
+    expect(fixture.task_id).toBe('MGW-519');
+    expect(fixture.playwright_ready).toBe(true);
+    expect(fixture.edge_session.paired_meta_glasses_required).toBe(false);
+    expect(fixture.events.map((event) => event.device)).toEqual(
+      expect.arrayContaining([
+        'camera',
+        'microphone',
+        'headphones',
+        'display',
+        'Neural Band',
+      ])
+    );
+    expect(fixture.events.map((event) => event.event_type)).toEqual(
+      expect.arrayContaining([
+        'camera.photo_ref',
+        'microphone.transcript_ref',
+        'headphones.playback_state',
+        'display.action',
+        'Neural Band.intent',
+      ])
+    );
+    expect(fixture.events.every((event) => event.receipts.length === 1)).toBe(true);
+    expect(fixture.replay_receipts.map((receipt) => receipt.receipt_cid)).toEqual(
+      fixture.events.map((event) => event.receipts[0])
+    );
+    expect(
+      fixture.replay_receipts.every((receipt) => receipt.preserve_for_dat_replay)
+    ).toBe(true);
   });
 });
