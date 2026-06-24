@@ -881,7 +881,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: 33a72cca73a0c756c1b612e706f77ae068318386
+- Fingerprint: 46b7e965474915965f9661a7a04ebffb7b3d400a
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -1613,3 +1613,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-478-codebase-scan-bb4ec37257b5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-479 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-479-codebase-scan-2104a536dfcc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-480 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-480-codebase-scan-f9289a36b91d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-481 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-481-codebase-scan-d4ed79ea4296.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
