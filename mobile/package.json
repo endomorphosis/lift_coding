@@ -5,6 +5,8 @@
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
+    "android:bootstrap:local": "./scripts/bootstrap-android-local-toolchain.sh",
+    "android:validate:local": "./scripts/validate-android-gradle-local.sh",
     "android:debug:local": "./scripts/build-android-debug-local.sh",
     "android:install:local": "./scripts/install-android-debug-apk.sh",
     "android:grant:local": "./scripts/grant-android-local-permissions.sh",

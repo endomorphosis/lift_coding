@@ -8,7 +8,7 @@ The app includes a native module (`expo-glasses-audio`) that provides Bluetooth 
 
 ## Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js 20.20.2, or another Node release satisfying `>=20.19.4`
 - npm or yarn
 - Expo CLI: `npm install -g expo-cli`
 - EAS CLI: `npm install -g eas-cli`
@@ -44,7 +44,8 @@ This repo now has a host-verified Android debug build path that uses the repo-lo
 From `mobile/`:
 
 ```bash
-npm run android:debug:local
+npm run android:bootstrap:local
+npm run android:validate:local
 ```
 
 Or prepare a connected Android handset end-to-end in one command:
@@ -53,12 +54,25 @@ Or prepare a connected Android handset end-to-end in one command:
 npm run android:prepare:local
 ```
 
-What it does:
+The host-compatible validation path does this:
 - sets `JAVA_HOME` to the repo-local JDK 17
 - sets `ANDROID_HOME` / `ANDROID_SDK_ROOT` to the repo-local Android SDK
-- rewrites `android/local.properties` with that SDK path
 - runs Expo Android prebuild with Node 20
-- runs `./gradlew assembleDebug`
+- rewrites `android/local.properties` with that SDK path after prebuild creates `android/`
+- compiles the first-party DAT and glasses-audio Expo Android modules with Gradle
+
+Full APK output on supported x86-64/EAS hosts:
+
+```bash
+npm run android:debug:local
+```
+
+For this ARM host, `npm run android:validate:local` is the repeatable Gradle
+gate: it prebuilds `mobile/android`, writes `local.properties`, and compiles the
+first-party DAT and glasses-audio Expo modules without entering the unsupported
+NDK/CMake APK assembly path.
+Set `LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK=1` only if you intentionally want to
+attempt the unsupported full APK path on Linux ARM.
 
 APK output:
 

@@ -25,7 +25,7 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 - [ ] `scripts/lint_display_webapp_readiness.py` passes for target web app metadata
 - [ ] Hosted Display Web App loads over publicly available HTTPS and is added in the Meta AI app
 - [ ] `dev/meta-rayban-display-simulator` trace is exported for the same widget/action fixture used on device
-- [ ] Default bridge-only Android build passes with `cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false` and no Meta package credentials
+- [ ] Default bridge-only Android Gradle validation passes with `cd mobile && npm run android:bootstrap:local && npm run android:validate:local` and no Meta package credentials; full APK assembly uses `npm run android:debug:local` on x86-64/EAS hosts with compatible Android NDK/CMake host tools
 - [ ] Test account has required permissions for app onboarding and display access
 
 ## A) Simulator Trace Parity Gate

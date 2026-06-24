@@ -29,13 +29,13 @@ if [[ ! -x "${JDK_DIR}/bin/java" || ! -x "${JDK_DIR}/bin/javac" ]]; then
   exit 1
 fi
 
-if [[ ! -d "${SDK_DIR}/platforms" || ! -d "${SDK_DIR}/build-tools" ]]; then
-  echo "Missing local Android SDK packages at ${SDK_DIR}. Run npm run android:bootstrap:local from mobile/ first." >&2
+if [[ ! -d "${SDK_DIR}/platforms/android-36" || ! -d "${SDK_DIR}/build-tools/36.0.0" ]]; then
+  echo "Missing local Android SDK 36 packages at ${SDK_DIR}. Run npm run android:bootstrap:local from mobile/ first." >&2
   exit 1
 fi
 
 if [[ ! -f "${EXPO_CLI}" ]]; then
-  echo "Missing Expo CLI at ${EXPO_CLI}. Run npm install in mobile/ first." >&2
+  echo "Missing Expo CLI at ${EXPO_CLI}. Run npm ci in mobile/ first." >&2
   exit 1
 fi
 
@@ -52,24 +52,7 @@ mkdir -p "${MOBILE_DIR}/android"
 printf 'sdk.dir=%s\n' "${SDK_DIR}" > "${MOBILE_DIR}/android/local.properties"
 
 cd "${MOBILE_DIR}/android"
-GRADLE_ARGS=("assembleDebug")
-if [[ "$(uname -m)" =~ ^(aarch64|arm64)$ && "${LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK:-}" != "1" ]]; then
-  echo "Full APK assembly is not supported on this Linux ARM host with Google's x86-64 Android SDK/NDK CMake tools." >&2
-  echo "Run npm run android:validate:local here, or set LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK=1 to attempt the unsupported full APK path." >&2
-  exit 2
-fi
-
-if [[ "${LIFT_CODING_ANDROID_NEW_ARCH:-auto}" == "auto" ]]; then
-  case "$(uname -m)" in
-    aarch64|arm64)
-      GRADLE_ARGS+=("-PnewArchEnabled=false")
-      ;;
-  esac
-elif [[ -n "${LIFT_CODING_ANDROID_NEW_ARCH}" ]]; then
-  GRADLE_ARGS+=("-PnewArchEnabled=${LIFT_CODING_ANDROID_NEW_ARCH}")
-fi
-
-./gradlew "${GRADLE_ARGS[@]}"
-
-echo
-echo "APK ready at ${MOBILE_DIR}/android/app/build/outputs/apk/debug/app-debug.apk"
+./gradlew \
+  :expo-meta-wearables-dat:compileDebugKotlin \
+  :expo-glasses-audio:compileDebugKotlin \
+  -PnewArchEnabled=false
