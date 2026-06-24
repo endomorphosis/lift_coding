@@ -2097,3 +2097,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: swissknife/test/fixtures/meta-glasses-io, mobile/src/native/__fixtures__/metaWearablesIoStates.js, tests/test_meta_glasses_io_mocks.py, data/meta_glasses_display_widgets/state/discovery
 - Validation: cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-365. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-24-mgw-522-mgw-365-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-365 from strategy blocked_tasks.
+
+## MGW-523 Resolve validation retry-budget failure for MGW-366
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-364
+- Outputs: swissknife/src/services/meta-glasses-io-transport.ts, swissknife/test/mcp-plus-plus/meta-glasses-io-transport.test.ts, docs/meta-glasses-io-transport-envelope.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-io-transport.ts src/services/meta-glasses-io-profile.ts src/services/mcp-idl.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-366. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-24-mgw-523-mgw-366-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-366 from strategy blocked_tasks.
