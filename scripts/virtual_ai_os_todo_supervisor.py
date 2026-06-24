@@ -122,6 +122,7 @@ _virtual_ai_os_codebase_defaults = build_namespace_codebase_refill_defaults_fact
     VIRTUAL_AI_OS_DATA_PATHS,
     codebase_scan_discovery_output_path=DISCOVERY_OUTPUT_PATH,
     codebase_scan_min_open_tasks=0,
+    codebase_scan_max_findings=0,
     codebase_scan_skip_prefixes=CODEBASE_SCAN_SKIP_PREFIXES,
 )
 _virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(

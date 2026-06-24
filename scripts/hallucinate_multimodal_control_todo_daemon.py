@@ -77,7 +77,11 @@ OBJECTIVE_GOAL_SCAN_EVIDENCE = {
     "objective_goal_seen_fingerprints": OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS[0],
     "last_objective_goal_scan_findings": OBJECTIVE_GOAL_SCAN_STRATEGY_KEYS[1],
 }
-CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(HALLUCINATE_ENV_PREFIX)
+CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(
+    HALLUCINATE_ENV_PREFIX,
+    min_open_tasks=0,
+    max_findings=0,
+)
 CODEBASE_SCAN_MIN_OPEN_TASKS = CODEBASE_SCAN_SETTINGS.min_open_tasks
 CODEBASE_SCAN_MAX_FINDINGS = CODEBASE_SCAN_SETTINGS.max_findings
 CODEBASE_SCAN_COOLDOWN_SECONDS = CODEBASE_SCAN_SETTINGS.cooldown_seconds

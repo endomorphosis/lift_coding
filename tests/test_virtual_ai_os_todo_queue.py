@@ -1052,6 +1052,10 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     assert "--objective-seed-interoperability-goals" in args
     focus_index = args.index("--objective-interoperability-focus")
     assert args[focus_index + 1] == "hallucinate_app"
+    codebase_min_index = args.index("--codebase-scan-min-open-tasks")
+    codebase_max_index = args.index("--codebase-scan-max-findings")
+    assert args[codebase_min_index + 1] == "0"
+    assert args[codebase_max_index + 1] == "0"
     assert kwargs["ensure_running"] is False
     assert runtime.process_match_any == supervisor_module.VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS
 
