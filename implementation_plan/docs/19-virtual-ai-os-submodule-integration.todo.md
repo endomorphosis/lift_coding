@@ -3337,3 +3337,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-476-codebase-scan-b9d105999d3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-477 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-477-codebase-scan-95c78eeaccd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-478 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-478-codebase-scan-a9cbc076e898.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-479 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-479-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
