@@ -3615,7 +3615,7 @@ cadence remains parseable and resumable.
 
 ## VAI-502 Add the cross-device virtual desktop Playwright replay harness
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
