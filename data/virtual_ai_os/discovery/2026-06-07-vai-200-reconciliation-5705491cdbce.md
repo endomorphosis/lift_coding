@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: acf275cdfadc24d9c119d48e53edc508d2a5b813
+Fingerprint: 02c07c9c8dc6b35c983143c15276a3df0a227aec
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 31
@@ -10,49 +10,18 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- `A  data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md`
-- ` M hallucinate_app`
-- `UU swissknife`
-- `?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md`
-- `?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md`
-- `?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md`
-- `?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `added=1, modified=3, unmerged=1, untracked=6`
+- Path categories: `modified=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md`
-  - `hallucinate_app`
-  - `swissknife`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md`
-  - `M	hallucinate_app`
-  - `U	swissknife`
-  - `M	swissknife`
-- Staged name status:
-  - `A	data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md`
-  - `U	swissknife`
-- Untracked paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Diff stat:
+  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md         | 6 +++---`
+  - ` 1 file changed, 3 insertions(+), 3 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -139,61 +108,19 @@ Work surface: `31` candidates, `20` sampled records.
   "candidate_count": 31,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "acf275cdfadc24d9c119d48e53edc508d2a5b813",
+  "fingerprint": "02c07c9c8dc6b35c983143c15276a3df0a227aec",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-477-codebase-scan-95c78eeaccd0.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-480-codebase-scan-b9d105999d3a.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-481-codebase-scan-56bd19bf79e7.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-482-codebase-scan-295167feddbd.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-483-codebase-scan-56bd19bf79e7.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-484-codebase-scan-295167feddbd.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-485-codebase-scan-7e78f5b85c0d.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md\nM\thallucinate_app\nU\tswissknife\nM\tswissknife",
+    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md         | 6 +++---\n 1 file changed, 3 insertions(+), 3 deletions(-)",
+    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
-      "added": 1,
-      "modified": 3,
-      "unmerged": 1,
-      "untracked": 6
+      "modified": 1
     },
-    "staged_name_status": "A\tdata/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md\nU\tswissknife",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md",
-      "hallucinate_app",
-      "swissknife",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md"
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "A  data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md",
-      " M hallucinate_app",
-      "UU swissknife",
-      "?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md",
-      "?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md",
-      "?? data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md",
-      "?? data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md"
-    ],
-    "untracked_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md"
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -226,17 +153,7 @@ Work surface: `31` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-650-resolution.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-654-codebase-scan-81d13a160ddc.md",
-    "hallucinate_app",
-    "swissknife",
-    "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-656-codebase-scan-b3c6ff998da1.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-657-codebase-scan-9a74b88e06cf.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-24-hao-658-codebase-scan-669a61083619.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-81d13a160ddc.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-a4b2c5c5fec9.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-b3c6ff998da1.md"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
