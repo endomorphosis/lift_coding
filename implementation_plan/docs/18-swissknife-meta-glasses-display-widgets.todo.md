@@ -1481,3 +1481,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-466-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-467 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-467-codebase-scan-bfe30187a7bb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-468 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-468-codebase-scan-c2b12d295679.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-469 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-469-codebase-scan-ec18be8c273c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
