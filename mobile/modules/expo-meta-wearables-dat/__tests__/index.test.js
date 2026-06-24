@@ -422,6 +422,19 @@ describe('expo-meta-wearables-dat module wrapper', () => {
         'content_sent',
       ]),
     });
+    await expect(nativeModule.renderDisplayWidget.mock.results[0].value).resolves.toMatchObject({
+      mode: 'native_display',
+      displayLifecycleStages: [
+        'target_selected',
+        'starting_session',
+        'session_started',
+        'attaching_display',
+        'display_attached',
+        'display_started',
+        'display_ready',
+        'content_sent',
+      ],
+    });
     await expect(module.updateDisplayWidget(patch, widgetPayload)).resolves.toMatchObject({
       action: 'update_display_widget',
       supported: true,

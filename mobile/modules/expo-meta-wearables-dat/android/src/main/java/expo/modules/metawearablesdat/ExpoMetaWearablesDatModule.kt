@@ -2103,8 +2103,14 @@ class ExpoMetaWearablesDatModule : Module() {
       .filter { it.name == name }
       .sortedWith(
         compareByDescending<Method> { method ->
-          (block != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function1" }) ||
-            (callback != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function0" })
+          if (
+            (block != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function1" }) ||
+              (callback != null && method.parameterTypes.any { it.name == "kotlin.jvm.functions.Function0" })
+          ) {
+            1
+          } else {
+            0
+          }
         }.thenBy { it.parameterTypes.size }
       )
 
