@@ -3440,3 +3440,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-485-codebase-scan-7e78f5b85c0d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-486 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-486-codebase-scan-7e78f5b85c0d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-487 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-487-codebase-scan-4f239a29b61b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-488 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-488-codebase-scan-ca5abd94b6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
