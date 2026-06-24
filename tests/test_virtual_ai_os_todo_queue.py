@@ -1173,6 +1173,8 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
     assert [finding.root_relative_path for finding in findings] == ["src/scan_target.py"]
     assert "external/ipfs_kit/archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "swissknife/cleanup-archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/DEVELOPER_GUIDE.md" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/validation/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert {
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",

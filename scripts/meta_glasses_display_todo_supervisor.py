@@ -100,8 +100,14 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/archive/",
         "external/ipfs_kit/backup/",
         "swissknife/cleanup-archive/",
+        "swissknife/docs/validation/",
         "hallucinate_app/swissknife/cleanup-archive/",
+        "hallucinate_app/swissknife/docs/validation/",
     ),
+)
+CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
+    "swissknife/docs/DEVELOPER_GUIDE.md",
+    "hallucinate_app/swissknife/docs/DEVELOPER_GUIDE.md",
 )
 
 logger = logging.getLogger("meta_glasses_display_todo_supervisor")

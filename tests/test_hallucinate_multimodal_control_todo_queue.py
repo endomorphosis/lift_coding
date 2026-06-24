@@ -296,6 +296,8 @@ def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
     assert "Mcp-Plus-Plus" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
     assert "external/meta-wearables-dat-android" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
     assert "swissknife/cleanup-archive/" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/DEVELOPER_GUIDE.md" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/validation/" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
 
 
 def test_hao_428_offload_session_events_route_through_mediation():

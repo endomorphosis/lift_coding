@@ -244,6 +244,8 @@ def test_meta_glasses_supervisor_wrapper_uses_active_accelerate_runner(monkeypat
     assert "external/meta-wearables-dat-ios" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
     assert "Mcp-Plus-Plus" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS
     assert "swissknife/cleanup-archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/DEVELOPER_GUIDE.md" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
+    assert "swissknife/docs/validation/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert supervisor_module.DAEMON_SCRIPT_PATH.name == "meta_glasses_display_todo_daemon.py"
     assert "swissknife" in supervisor_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
     assert (

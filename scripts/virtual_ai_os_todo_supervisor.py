@@ -86,12 +86,16 @@ CODEBASE_SCAN_SKIP_PREFIXES = _data_namespace_scan_skip_prefixes(
         "external/ipfs_kit/archive/",
         "external/ipfs_kit/backup/",
         "swissknife/cleanup-archive/",
+        "swissknife/docs/validation/",
         "hallucinate_app/swissknife/cleanup-archive/",
+        "hallucinate_app/swissknife/docs/validation/",
     ),
 )
 CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "swissknife/docs/DEVELOPER_GUIDE.md",
+    "hallucinate_app/swissknife/docs/DEVELOPER_GUIDE.md",
     "tests/test_meta_glasses_display_todo_queue.py",
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
