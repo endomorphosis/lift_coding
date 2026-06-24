@@ -1197,7 +1197,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G712 Interoperate external/meta-wearables-dat-android with Mcp-Plus-Plus
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -1225,7 +1225,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G713 Interoperate external/meta-wearables-dat-android with external/meta-wearables-dat-ios
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3001
 - Track: interoperability
@@ -1253,7 +1253,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G714 Interoperate external/meta-wearables-dat-ios with mobile
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3002
 - Track: interoperability
@@ -1281,7 +1281,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G715 Interoperate external/meta-wearables-dat-ios with external/ipfs_accelerate
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3003
 - Track: interoperability
@@ -1309,7 +1309,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G716 Interoperate external/meta-wearables-dat-ios with external/ipfs_datasets
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3004
 - Track: interoperability
@@ -1337,7 +1337,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G717 Interoperate external/meta-wearables-dat-ios with external/ipfs_kit
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3005
 - Track: interoperability
@@ -1365,7 +1365,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G718 Interoperate external/meta-wearables-dat-ios with Mcp-Plus-Plus
 
-- Status: active
+- Status: scheduled
 - Parent: VAIOS-G000
 - Fib priority: 3006
 - Track: interoperability
