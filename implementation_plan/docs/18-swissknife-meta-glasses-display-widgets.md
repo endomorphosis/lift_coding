@@ -496,6 +496,36 @@ Exit criteria:
 - [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks, bridge envelopes, and control-plane routing.
 - [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities, then verify the expected control-plane handoff.
 
+MGW-518 defines the initial hardware-free transport contract as
+`handsfree.meta-glasses/multimodal-io-control-plane@0.1.0`. The mock boundary is
+`handsfree.meta-glasses/mock-multimodal-io-boundary@0.1.0` and covers camera,
+microphone, headphones, display, captouch, and Neural Band inputs as Swissknife
+control-plane events routed through `swissknife.mobile_orb.publish_glasses_event`.
+The canonical event families are `camera.photo_ref`, `camera.video_frame_ref`,
+`microphone.route_state`, `microphone.transcript_ref`,
+`headphones.route_state`, `headphones.playback_state`,
+`display.lifecycle_state`, `display.action`, `captouch.intent`,
+`Neural Band.intent`, `permission.state`, and `transport.handoff`.
+
+MGW-518 transport assumptions are deliberately app-level. Bluetooth represents
+phone-to-glasses audio route state and local device capability state. Wi-Fi
+represents app-level handoff reachability through the mobile edge or Web App
+path. Neither Bluetooth nor Wi-Fi is claimed to be raw IPFS/libp2p transport.
+IPFS CIDs, libp2p peer IDs, libp2p session IDs, MCP++ profile references,
+policy decisions, control-plane route decisions, backpressure, latency, and
+receipt CIDs live in the event envelope metadata. DAT availability is modeled
+as `dat_ready`, `dat_unavailable`, `permission_denied`,
+`unsupported_capability`, `route_degraded`, or `route_lost` fallback state, so
+Swissknife apps and mobile tests can run without paired hardware or Meta DAT
+package credentials.
+
+MGW-518 implementation anchors:
+
+- Backend: `src/handsfree/meta_glasses_multimodal_io_transport_contract.py`
+- Swissknife: `swissknife/src/services/meta-glasses-multimodal-io-transport-contract.ts`
+- Mobile: `mobile/src/utils/metaGlassesMultimodalIoTransportContract.js`
+- Tests: `tests/test_meta_glasses_multimodal_io_transport_contract.py` and `mobile/src/utils/__tests__/metaGlassesMultimodalIoTransportContract.test.js`
+
 Second-wave MGW task split:
 
 - `MGW-413` refreshes the official-source matrix for DAT display/camera, Bluetooth audio routes, Web Apps, Neural Band/captouch, motion/orientation, phone GPS, Mock Device Kit, and release-channel constraints.
