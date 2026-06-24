@@ -228,6 +228,8 @@ The daemon-facing task IDs use the `MGW-*` prefix. The llm_router wrapper defaul
 
 The machine-readable board includes `MGW-013`, a final discovery-expansion task. Once the initial implementation tasks are complete, the supervisor should run that task to inspect the resulting codebase and append additional daemon-parseable `MGW-*` tasks for gaps discovered during implementation. If no new work is found, the task must record a dated no-new-unknowns report with the evidence and commands used.
 
+MGW-013 Discovery Expansion is recorded in `data/meta_glasses_display_widgets/discovery/2026-05-22-mgw-013-discovery-expansion.md`. That investigation found missed work in optional widget operations, native bridge metadata preservation, Android manifest-region rendering, iOS DisplayAccess parity, and hardware-free lifecycle coverage, then added daemon-parseable follow-up tasks MGW-015 through MGW-019. A 2026-06-24 refresh confirmed those discovered backlog entries remain present and parseable while later MGW work has already completed them.
+
 ### Phase 0: Source Alignment and Version Guardrails
 
 - [ ] Record the current checked-out Swissknife commit or package version in `implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md`.
