@@ -1660,7 +1660,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 8317d5509973bb296d8889c82321435ebc7f76b1
+- Fingerprint: 0cab74036001c7ebb50e4a72481384dc965c7a8b
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -2380,3 +2380,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-389-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-390 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-390-codebase-scan-d5e80576db69.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-391 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-391-codebase-scan-defbcedebe03.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-392 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-392-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
