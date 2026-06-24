@@ -3252,7 +3252,7 @@ cadence remains parseable and resumable.
 
 ## VAI-469 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1
 
-- Status: completed
+- Status: todo
 - Completion: manual
 - Priority: P2
 - Track: quality
@@ -3271,3 +3271,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-470-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-471 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-471-codebase-scan-8a46ed903a02.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-472 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-472-codebase-scan-ef24d56686d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-473 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-473-codebase-scan-cbf59dd145d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
