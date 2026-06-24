@@ -3120,7 +3120,7 @@ cadence remains parseable and resumable.
 
 ## VAI-457 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: quality
