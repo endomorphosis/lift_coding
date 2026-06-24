@@ -1682,7 +1682,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-485 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_bros.ts:1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: quality
