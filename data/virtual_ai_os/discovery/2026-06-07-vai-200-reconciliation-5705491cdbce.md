@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: 34f7ad449119d83d915807671f04cf449ac2d71a
+Fingerprint: 32058fcb5e5390a4c1fe57f5a7d90bbb5b49caf4
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 34
@@ -10,24 +10,21 @@ Track: ops
 
 ## Main Checkout Status
 
-- `A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md`
-- `A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md`
-- `A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md`
-- `M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M external/ipfs_datasets`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- ` M swissknife`
 
 ## Main Checkout Evidence
 
-- Path categories: `added=3, modified=1`
+- Path categories: `modified=3`
 - Status paths:
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md`
-  - `data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md`
+  - `external/ipfs_datasets`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Staged name status:
-  - `A	data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md`
-  - `A	data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md`
-  - `A	data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md`
+  - `swissknife`
+- Name status:
+  - `M	external/ipfs_datasets`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `M	swissknife`
 
 ## Sample Branches Or Worktrees
 
@@ -114,32 +111,26 @@ Work surface: `34` candidates, `20` sampled records.
   "candidate_count": 34,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "34f7ad449119d83d915807671f04cf449ac2d71a",
+  "fingerprint": "32058fcb5e5390a4c1fe57f5a7d90bbb5b49caf4",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
     "filtered_generated_status_paths": [
       "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-495-codebase-scan-81d13a160ddc.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-496-codebase-scan-a4b2c5c5fec9.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-497-codebase-scan-b3c6ff998da1.md"
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
     ],
+    "name_status": "M\texternal/ipfs_datasets\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
     "path_categories": {
-      "added": 3,
-      "modified": 1
+      "modified": 3
     },
-    "staged_name_status": "A\tdata/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md\nA\tdata/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md\nA\tdata/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "status_paths": [
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md",
-      "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "external/ipfs_datasets",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "swissknife"
     ],
     "status_short": [
-      "A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md",
-      "A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md",
-      "A  data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md",
-      "M  implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M external/ipfs_datasets",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      " M swissknife"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -172,10 +163,9 @@ Work surface: `34` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "external/ipfs_datasets",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "swissknife"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
