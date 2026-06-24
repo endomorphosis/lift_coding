@@ -22,11 +22,11 @@ Each `MetaGlassesIOBridgeEnvelope` carries:
 
 ## Bluetooth Boundary
 
-Bluetooth envelopes model route state such as audio input/output through the phone app. A phone-app Bluetooth envelope may include IPFS CIDs or MCP++ receipts because the app bridge produced those artifacts. It must not include libp2p peer IDs unless the bridge declares `app_layers.libp2p = "provided_by_bridge"`.
+Bluetooth envelopes model route state such as audio input/output through the phone app. A phone-app Bluetooth envelope may include IPFS CIDs or MCP++ receipts because the app bridge produced those artifacts. It must not include local or remote libp2p peer IDs unless the bridge declares `app_layers.libp2p = "provided_by_bridge"`.
 
 ## Wi-Fi Boundary
 
-Wi-Fi envelopes model app-level handoff through a phone app local network path or display webapp browser bridge. A Wi-Fi route can include libp2p peer/session IDs when the bridge owns the libp2p layer and records `app_layers.libp2p = "provided_by_bridge"`.
+Wi-Fi envelopes model app-level handoff through a phone app local network path or display webapp browser bridge. A Wi-Fi route can include local and remote libp2p peer IDs plus a libp2p session ID when the bridge owns the libp2p layer and records `app_layers.libp2p = "provided_by_bridge"`.
 
 ## Validation Rules
 
@@ -34,8 +34,9 @@ The TypeScript validator in `swissknife/src/services/meta-glasses-io-transport.t
 
 - omit device/session/app binding identity fields;
 - omit control-plane route decisions, permission state, latency, backpressure, payload limits, content CIDs, receipts, policy decisions, or privacy redaction metadata;
+- pair a raw Bluetooth or Wi-Fi route with an incompatible bridge provider or bridge route;
 - set `route.raw_transport_is_ipfs_libp2p_or_mcp` to anything other than `false`;
 - attach libp2p peer/session IDs when the bridge did not provide libp2p;
-- claim bridge-provided libp2p without peer and session IDs.
+- claim bridge-provided libp2p without local peer, remote peer, and session IDs.
 
 This keeps raw device transport separate from IPFS/libp2p/MCP++ semantics while still allowing the bridge to publish content-addressed, receipt-bearing MCP++ envelopes.
