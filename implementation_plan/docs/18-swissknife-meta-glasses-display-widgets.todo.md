@@ -2045,7 +2045,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-518 Define Meta glasses multimodal IO transport contracts for Swissknife
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: integration
