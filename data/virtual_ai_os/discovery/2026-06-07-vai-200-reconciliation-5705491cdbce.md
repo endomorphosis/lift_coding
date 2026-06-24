@@ -1,35 +1,33 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: ef16a40ba6a3a36cd3d545077cde7bc382a5e7a3
+Fingerprint: fedbb843b5f6803ffe3c2fc445cf3e013970221c
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 13
+Candidate count: 15
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` m hallucinate_app`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` m swissknife`
 - `?? hallucinate-start-post-sysctl.log`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=2, untracked=1`
+- Path categories: `modified=1, other_dirty=1, untracked=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `swissknife`
   - `hallucinate-start-post-sysctl.log`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	hallucinate_app`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	swissknife`
+- Diff stat:
+  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
+  - ` swissknife                                                              | 0`
+  - ` 2 files changed, 1 insertion(+), 1 deletion(-)`
 - Untracked paths:
   - `hallucinate-start-post-sysctl.log`
 
@@ -48,6 +46,8 @@ Track: ops
 - `implementation/vai-406-attempt-1-1782274280` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-406-attempt-1-1782274280`
 - `implementation/vai-408-attempt-1-1782274810` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-408-attempt-1-1782274810`
 - `implementation/vai-409-attempt-1-1782274706` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-409-attempt-1-1782274706`
+- `implementation/vai-411-attempt-1-1782275130` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-411-attempt-1-1782275130`
+- `implementation/vai-412-attempt-1-1782275200` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-412-attempt-1-1782275200`
 
 ## Why This Blocks Progress
 
@@ -66,7 +66,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `13` candidates, `13` sampled records.
+Work surface: `15` candidates, `15` sampled records.
 
 ### Suggested Actions
 
@@ -108,32 +108,25 @@ Work surface: `13` candidates, `13` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 13,
+  "candidate_count": 15,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "ef16a40ba6a3a36cd3d545077cde7bc382a5e7a3",
+  "fingerprint": "fedbb843b5f6803ffe3c2fc445cf3e013970221c",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
+    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n swissknife                                                              | 0\n 2 files changed, 1 insertion(+), 1 deletion(-)",
+    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
     "path_categories": {
-      "modified": 2,
-      "other_dirty": 2,
+      "modified": 1,
+      "other_dirty": 1,
       "untracked": 1
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "swissknife",
       "hallucinate-start-post-sysctl.log"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " m hallucinate_app",
       " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " m swissknife",
       "?? hallucinate-start-post-sysctl.log"
@@ -161,12 +154,12 @@ Work surface: `13` candidates, `13` sampled records.
     "implementation/vai-403-attempt-1-1782273965",
     "implementation/vai-406-attempt-1-1782274280",
     "implementation/vai-408-attempt-1-1782274810",
-    "implementation/vai-409-attempt-1-1782274706"
+    "implementation/vai-409-attempt-1-1782274706",
+    "implementation/vai-411-attempt-1-1782275130",
+    "implementation/vai-412-attempt-1-1782275200"
   ],
-  "sample_count": 13,
+  "sample_count": 15,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "swissknife",
     "hallucinate-start-post-sysctl.log"
@@ -184,7 +177,9 @@ Work surface: `13` candidates, `13` sampled records.
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-403-attempt-1-1782273965",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-406-attempt-1-1782274280",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-408-attempt-1-1782274810",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-409-attempt-1-1782274706"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-409-attempt-1-1782274706",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-411-attempt-1-1782275130",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-412-attempt-1-1782275200"
   ],
   "success_signals": [
     "candidate_count_decreases",
