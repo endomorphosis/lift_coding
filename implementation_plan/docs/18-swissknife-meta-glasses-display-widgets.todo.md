@@ -881,7 +881,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: c5c9349868a763aac4a26a619b52ac6c95b1180a
+- Fingerprint: c1539d4d90a47b470324a8f20575b681c381357d
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -1448,3 +1448,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-463-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-464 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-464-codebase-scan-87a1ababe545.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-465 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-465-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-466 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-466-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
