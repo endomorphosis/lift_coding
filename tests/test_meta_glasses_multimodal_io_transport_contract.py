@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import pytest
 
 from handsfree.meta_glasses_multimodal_io_transport_contract import (
@@ -8,9 +11,21 @@ from handsfree.meta_glasses_multimodal_io_transport_contract import (
     META_GLASSES_CONTROL_PLANE_EVENT_TYPES,
     META_GLASSES_MOCK_BOUNDARY_STATES,
     META_GLASSES_MULTIMODAL_IO_CONTRACT,
+    META_GLASSES_PLAYWRIGHT_FIXTURE_ID,
     META_GLASSES_REQUIRED_ENVELOPE_FIELDS,
     META_GLASSES_TRANSPORT_ASSUMPTIONS,
     build_meta_glasses_control_plane_event,
+    build_meta_glasses_playwright_fixture,
+)
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SWISSKNIFE_PLAYWRIGHT_FIXTURE = (
+    REPO_ROOT
+    / "swissknife"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-519-meta-glasses-control-plane.json"
 )
 
 
@@ -90,3 +105,68 @@ def test_meta_glasses_control_plane_event_rejects_unknown_boundary_terms():
             app_binding_id="app-binding-camera",
             correlation_id="corr-1",
         )
+
+
+def test_mgw_519_playwright_fixture_covers_modalities_and_replay_receipts():
+    fixture = build_meta_glasses_playwright_fixture()
+
+    assert fixture["task_id"] == "MGW-519"
+    assert fixture["fixture_id"] == META_GLASSES_PLAYWRIGHT_FIXTURE_ID
+    assert fixture["playwright_ready"] is True
+    assert fixture["edge_session"]["paired_meta_glasses_required"] is False
+
+    events = fixture["events"]
+    devices = {event["device"] for event in events}
+    event_types = {event["event_type"] for event in events}
+
+    assert {"camera", "microphone", "headphones", "display", "Neural Band"}.issubset(
+        devices
+    )
+    assert {
+        "camera.photo_ref",
+        "microphone.transcript_ref",
+        "headphones.playback_state",
+        "display.action",
+        "Neural Band.intent",
+    }.issubset(event_types)
+
+    for event in events:
+        assert event["contract"] == META_GLASSES_MULTIMODAL_IO_CONTRACT
+        assert event["control_plane"]["route"] == (
+            "swissknife.mobile_orb.publish_glasses_event"
+        )
+        assert event["fallback"]["state"] == "dat_unavailable"
+        assert event["receipts"], event
+
+    replay_receipts = fixture["replay_receipts"]
+    assert len(replay_receipts) == len(events)
+    assert {receipt["receipt_cid"] for receipt in replay_receipts} == {
+        event["receipts"][0] for event in events
+    }
+    assert all(
+        receipt["preserve_for_dat_replay"] is True for receipt in replay_receipts
+    )
+
+
+def test_mgw_519_checked_in_playwright_fixture_is_replayable():
+    fixture = json.loads(SWISSKNIFE_PLAYWRIGHT_FIXTURE.read_text(encoding="utf-8"))
+
+    assert fixture["task_id"] == "MGW-519"
+    assert fixture["playwright_ready"] is True
+    assert fixture["edge_session"]["hardware_required"] is False
+    assert {event["device"] for event in fixture["events"]} >= {
+        "camera",
+        "microphone",
+        "headphones",
+        "display",
+        "Neural Band",
+    }
+    assert all(
+        event["control_plane"]["operation"] == "publish_glasses_event"
+        for event in fixture["events"]
+    )
+    assert all(event["receipts"] for event in fixture["events"])
+    assert all(
+        receipt["physical_dat_replay_target"] == "Meta Wearables DAT device session"
+        for receipt in fixture["replay_receipts"]
+    )
