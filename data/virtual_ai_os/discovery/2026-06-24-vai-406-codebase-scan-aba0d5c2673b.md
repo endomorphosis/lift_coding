@@ -19,3 +19,11 @@ Review the finding in context, decide whether it represents a bug, missing test,
 maintenance risk, or false positive, and land a small fix with validation. If the
 finding is a false positive, document why in the changed code or discovery notes
 so the supervisor does not keep re-adding the same work.
+
+## Resolution
+
+Replaced the malformed Python-to-TypeScript conversion in
+`swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts` with a
+focused Jest contract test for the existing WebGPU low-latency optimizer exports.
+The original `FIXME: Complex template literal` annotation was attached to invalid
+generated syntax rather than a recoverable template literal edge case.
