@@ -2067,7 +2067,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-520 Resolve validation retry-budget failure for MGW-364
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
