@@ -875,18 +875,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
-## MGW-412 Resolve dirty main checkout blocking 10 worktree merges
+## MGW-412 Resolve dirty main checkout blocking 11 worktree merges
 
 - Status: completed
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: 922d7ab76df0e9b10138efb20cae7a39137e9476
+- Fingerprint: 1d1c205746153aaa107195b5d39fc5b5bdc48c1a
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md
-- Acceptance: Reconciliation guardrail filed this because 10 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 11 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## MGW-413 Refresh official Meta glasses I/O source matrix
 
@@ -1415,3 +1415,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-460-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-461 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-461-codebase-scan-7ff199b75d27.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-462 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-462-codebase-scan-6ff7e98d2c3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-463 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-463-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
