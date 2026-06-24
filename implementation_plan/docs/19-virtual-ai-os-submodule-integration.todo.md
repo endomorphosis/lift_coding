@@ -2314,3 +2314,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:360. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-383-codebase-scan-77ba3b1d763a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-384 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-384-codebase-scan-2d67c01d3acc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-385 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-385-codebase-scan-e90a6112f5fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-386 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-386-codebase-scan-849612e9edb6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

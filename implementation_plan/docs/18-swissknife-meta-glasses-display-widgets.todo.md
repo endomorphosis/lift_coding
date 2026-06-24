@@ -1019,3 +1019,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-424-expanded-io-launch-priorities.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Validation: rg -n "MGW-424|Swissknife applications|camera|microphone|speaker/headphone|Meta Neural Band|captouch|Playwright|control-plane|IPFS|libp2p|MCP\\+\\+" data/meta_glasses_display_widgets/discovery implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Acceptance: Launch priority note tells the supervisor to prefer implementation tasks that make Swissknife applications use Meta glasses interaction methods through contracts, mocks, policy checks, control-plane routes, IPFS/libp2p/MCP++ receipts, and Playwright validation. It must deprioritize generic code-annotation cleanup whenever there are open P0/P1 expanded-I/O tasks with unmet contracts, mocks, tests, or launch-readiness evidence.
+
+## MGW-425 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-425-codebase-scan-2d67c01d3acc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-426 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-426-codebase-scan-e90a6112f5fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-427 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575
+
+- Status: todo
+- Completion: manual
+- Priority: P3
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-427-codebase-scan-849612e9edb6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
