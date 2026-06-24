@@ -81,6 +81,7 @@ class ExpoMetaWearablesDatModule : Module() {
     AsyncFunction("getConfiguration") {
       val metadata = manifestMetadata()
       val damEnabled = metadata?.getBoolean(METADATA_DAM_ENABLED) ?: false
+      val realSdkActive = isDatSdkLinked() && BuildConfig.META_WEARABLES_DAT_SDK_ENABLED
       val sdkMeetsMinimum = isDatVersionAtLeast(
         BuildConfig.META_WEARABLES_DAT_ANDROID_VERSION,
         MINIMUM_DAT_SDK_VERSION
@@ -96,6 +97,7 @@ class ExpoMetaWearablesDatModule : Module() {
         "datAppModelEnabled" to damEnabled,
         "displayDamRequired" to true,
         "displayDamEnabled" to damEnabled,
+        "displaySdkLinked" to (realSdkActive && isDisplaySdkLinked()),
         "applicationId" to metadata?.getString(METADATA_APPLICATION_ID),
         "provider" to "internal_bridge",
         "integrationMode" to integrationMode(isDatSdkLinked())

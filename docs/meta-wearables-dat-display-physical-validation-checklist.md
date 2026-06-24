@@ -6,19 +6,21 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 
 - Device class: display-capable glasses with DAT 0.7+ support
 - App mode: DAT app-model (DAM) enabled
-- Build type: iPhone development build with native DAT bridge enabled, plus a bridge-only fallback build or channel
+- Build type: Android development build with native DAT bridge enabled, iPhone parity build when applicable, plus a bridge-only fallback build or channel
 - Operator surface: desktop operator console plus mobile diagnostics for remote display rollback and degraded-mode review
 - Fallback surface: hosted Display Web App registered in the Meta AI app and phone/mobile-card rendering
 
 ## Preconditions
 
-- [ ] Physical iPhone is on the target iOS version and paired to the test glasses
+- [ ] Physical Android phone is on the target Android version and paired to the test glasses
+- [ ] Physical iPhone parity device is available when validating iOS rollout readiness
 - [ ] VAI-023 handoff packet is reviewed:
       `data/virtual_ai_os/discovery/2026-06-12-vai-023-iphone-native-dat-handoff.md`
 - [ ] Meta AI app is installed, signed in with the test account, and can open `App Connections > Web apps`
 - [ ] Glasses firmware and Meta AI app are updated with no pending device/app update prompts
 - [ ] Mobile app uses a build that includes `expo-meta-wearables-dat`
-- [ ] iPhone native DAT build state is known: SDK-unlinked fallback build or SDK-linked build with `MWDATCore` and `MWDATDisplay`
+- [ ] Android native DAT build state is known: bridge-only fallback build or SDK-linked build with `mwdat-core` and `mwdat-display`
+- [ ] iPhone native DAT build state is known when applicable: SDK-unlinked fallback build or SDK-linked build with `MWDATCore` and `MWDATDisplay`
 - [ ] Backend is reachable from device network
 - [ ] `scripts/lint_display_webapp_readiness.py` passes for target web app metadata
 - [ ] Hosted Display Web App loads over publicly available HTTPS and is added in the Meta AI app
@@ -33,7 +35,7 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 - [ ] Simulator `widget_id`, `widget_cid`, `descriptor_cid`, `orb_receipt_cid`, and `correlation_id` are recorded when present
 - [ ] Simulator focus order matches the Web App readiness descriptor focus order
 - [ ] Simulator fallback states are sampled for `dat_native_display_unavailable`, `firmware_update_required`, `dat_app_update_required`, and `display_lifecycle_error`
-- [ ] iPhone physical run uses the same manifest, action IDs, operation order, and correlation ID family
+- [ ] Physical device run uses the same manifest, action IDs, operation order, and correlation ID family
 
 Evidence:
 - [ ] Reviewed VAI-023 handoff packet link or copy in the release ticket
@@ -44,9 +46,9 @@ Evidence:
 ## B) Connectivity + Capability Baseline
 
 - [ ] Open Glasses Diagnostics and confirm bridge/module availability
-- [ ] Confirm diagnostics report `platform: ios` for the iPhone run
+- [ ] Confirm diagnostics report `platform: android` for the Android run, or `platform: ios` for an iPhone parity run
 - [ ] Confirm diagnostics report DAT SDK target >= `0.7.0`
-- [ ] Confirm diagnostics report `displaySdkLinked` for the exact iPhone build under test
+- [ ] Confirm diagnostics report `displaySdkLinked` for the exact Android or iPhone build under test
 - [ ] Confirm diagnostics surface DAM/display readiness flags as expected
 - [ ] Confirm Meta AI app shows glasses connected and no firmware/app update prompt
 - [ ] Confirm hosted Web App fallback launches on glasses through `App Connections > Web apps`
@@ -62,12 +64,12 @@ Evidence:
 
 Run each action from the diagnostics/action surface and record result metadata.
 
-- [ ] Android SDK-linked build reports `renderPath: native-dat` for native widget render
+- [ ] Android SDK-linked build reports `displaySdkLinked: true`, `renderPath: native-dat`, and DisplayAccess lifecycle stages before rollout
+- [ ] Android bridge-only build reports `displaySdkLinked: false`, `reason: dat_native_display_unavailable`, and `renderPath: mobile-card` without Meta package credentials or paired glasses
 - [ ] iOS SDK-unlinked build returns explicit `reason: dat_sdk_unlinked` or `reason: display_sdk_unlinked`, `renderPath: mobile-card`, and `displayConnectionState` matching the blocked SDK state for widget actions
 - [ ] iOS SDK-linked build with `MWDATDisplay` available reports `displaySdkLinked: true`, `renderPath: native-dat`, and DisplayAccess lifecycle stages before rollout
-- [ ] Native render path records `displayLifecycleStages` for DisplayAccess stages: selected display target, session started, display attached, display started, and content sent
-- [ ] iPhone native results preserve simulator trace parity for widget/action IDs, operation order, focus target, and correlation metadata
-- [ ] Bridge-only Android build returns `reason: dat_native_display_unavailable` and `renderPath: mobile-card` for widget actions
+- [ ] Native Android render path records `displayLifecycleStages` for DisplayAccess stages: selected display target, session started, display attached, display started, and content sent
+- [ ] Native results preserve simulator trace parity for widget/action IDs, operation order, focus target, and correlation metadata
 - [ ] Firmware update required state returns `reason: firmware_update_required` and `requiredAction: open_firmware_update`
 - [ ] DAT glasses app update required state returns `reason: dat_app_update_required` and `requiredAction: open_dat_glasses_app_update`
 - [ ] `renderDisplayTest` returns a structured success/unsupported response
@@ -87,17 +89,18 @@ Run each action from the diagnostics/action surface and record result metadata.
 
 Evidence:
 - [ ] Screenshot or log excerpt per action result
-- [ ] iPhone log excerpt showing DisplayAccess target selection, session start, display attach/start, and send result
+- [ ] iPhone parity log excerpt showing DisplayAccess target selection, session start, display attach/start, and send result when applicable
 - [ ] Android log excerpt showing session start, display attach, display ready, and send result
 - [ ] Note any error/status code and message payloads
 
 ## D) Native DAT Fallback Criteria
 
-Native iPhone DAT display is not rollout-ready if any blocked state silently succeeds, returns an unstructured error, or fails to preserve a working Web App/mobile-card fallback.
+Native DAT display is not rollout-ready if any blocked state silently succeeds, returns an unstructured error, or fails to preserve a working Web App/mobile-card fallback.
 
 | Gate | Expected fallback evidence | Rollout decision |
 |---|---|---|
-| DAT SDK unlinked | `reason: dat_sdk_unlinked`, `renderPath: mobile-card`, `supported: false` | Keep `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false`. |
+| Android DAT SDK disabled/unlinked | `reason: dat_native_display_unavailable` or `dat_sdk_unlinked`, `renderPath: mobile-card`, `supported: false` | Keep `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_ANDROID=false` and build with `-PmetaWearablesDatAndroidEnabled=false`. |
+| iOS DAT SDK unlinked | `reason: dat_sdk_unlinked`, `renderPath: mobile-card`, `supported: false` | Keep `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false`. |
 | `MWDATDisplay` unlinked | `reason: display_sdk_unlinked`, `displaySdkLinked: false` | Keep native iPhone DAT off and use browser Web App fallback. |
 | DAM disabled | `reason: dam_disabled`, `displayReady: false` | Rebuild app metadata before retest. |
 | DAT SDK target below `0.7.0` | `reason: sdk_version_unsupported` | Block native rollout until SDK target is updated. |
@@ -109,10 +112,11 @@ Native iPhone DAT display is not rollout-ready if any blocked state silently suc
 
 ## E) Rollback Validation
 
-- [ ] Set or confirm `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false` and verify iPhone no longer reports `renderPath: native-dat`
+- [ ] Set or confirm `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_ANDROID=false` and verify Android no longer reports `renderPath: native-dat`
+- [ ] Set or confirm `HANDSFREE_DISPLAY_WIDGETS_NATIVE_DAT_IOS=false` and verify iPhone no longer reports `renderPath: native-dat` when applicable
 - [ ] Keep `HANDSFREE_DISPLAY_WIDGETS_ALLOW_WEBAPP_FALLBACK=true` and verify the hosted Web App still opens from the Meta AI app
 - [ ] If display actions must stop entirely, set `HANDSFREE_DISPLAY_WIDGETS_ENABLED=false` and verify no new mobile display widget action is emitted
-- [ ] Move the iPhone test cohort back to the last bridge-only/mobile-card build or release channel if native SDK linkage is unstable
+- [ ] Move the Android or iPhone test cohort back to the last bridge-only/mobile-card build or release channel if native SDK linkage is unstable
 - [ ] Repeat one command after rollback and capture diagnostics showing `mobile-card` or `display-webapp`
 - [ ] Record rollback flag values, build/channel, and validation output in the evidence template
 

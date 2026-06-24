@@ -496,6 +496,21 @@ Exit criteria:
 - [ ] Add IPFS/libp2p/MCP++ conformance tests for the expanded I/O mocks, bridge envelopes, and control-plane routing.
 - [ ] Add Playwright tests that run Swissknife applications against mocked Meta glasses camera, audio, neural/captouch, and display capabilities, then verify the expected control-plane handoff.
 
+Second-wave MGW task split:
+
+- `MGW-413` refreshes the official-source matrix for DAT display/camera, Bluetooth audio routes, Web Apps, Neural Band/captouch, motion/orientation, phone GPS, Mock Device Kit, and release-channel constraints.
+- `MGW-414` adds a Swissknife app-facing capability registry so apps can request Meta glasses camera, audio route, display, Neural Band/captouch, motion/GPS, and fallback capabilities without importing DAT SDK objects.
+- `MGW-415` builds a fixture corpus from public DAT DisplayAccess/CameraAccess samples and Web Apps input behavior.
+- `MGW-416` adds a privacy and policy threat model for camera, microphone, audio output, location, Neural Band/captouch, motion, display content, and retention.
+- `MGW-417` defines mobile bridge route contracts for camera, audio, and display states, including route loss, degraded routes, and unsupported capability receipts.
+- `MGW-418` defines Web Apps input adapters for Arrow/Enter Neural Band/captouch mappings, motion/orientation, phone GPS, app binding IDs, and fallback state.
+- `MGW-419` integrates Hallucinate App policy decisions for expanded Meta glasses I/O before events reach the control plane.
+- `MGW-420` proves IPFS/libp2p/MCP++ compatibility at the bridge-envelope layer with content CIDs, peer/session IDs, receipts, policy decisions, and replay protection.
+- `MGW-421` creates a Swissknife demo app that exercises camera, audio, display, Neural Band/captouch, motion/GPS, and control-plane handoff through mocks.
+- `MGW-422` adds Playwright app-level tests for the mocked expanded I/O surface and visible control-plane receipt evidence.
+- `MGW-423` adds native DAT feature gates and a physical validation checklist for camera, display, Bluetooth audio routes, release channels, firmware/app update states, and package credentials.
+- `MGW-424` aggregates launch readiness evidence so the supervisor can prioritize implementation tasks that move Swissknife apps closer to usable Meta glasses interaction methods.
+
 Exit criteria:
 
 - Swissknife apps can develop against camera, audio, neural/captouch, motion, GPS, and display contracts without physical glasses.

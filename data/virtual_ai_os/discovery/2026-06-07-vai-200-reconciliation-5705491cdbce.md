@@ -1,32 +1,40 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-23
-Fingerprint: 985335084183ba05cbce0eb9353a29c021b96285
+Fingerprint: d4f97fd518eea827d8145a27ae555595b5445393
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 2
+Candidate count: 1
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- `UU swissknife`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1`
+- Path categories: `modified=3, unmerged=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+  - `swissknife`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- Diff stat:
-  - `.../docs/18-swissknife-meta-glasses-display-widgets.todo.md | 13 +++++++++++++`
-  - ` 1 file changed, 13 insertions(+)`
+  - `U	swissknife`
+  - `M	swissknife`
+- Staged name status:
+  - `U	swissknife`
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032`
-- `rescue/worktree/implementation-vai-338-attempt-1-1782235449-28c9e2fd7957` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235449`
+- `implementation/vai-380-attempt-1-1782258296` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-380-attempt-1-1782258296`
 
 ## Why This Blocks Progress
 
@@ -45,7 +53,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `2` candidates, `2` sampled records.
+Work surface: `1` candidates, `1` sampled records.
 
 ### Suggested Actions
 
@@ -87,22 +95,33 @@ Work surface: `2` candidates, `2` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 2,
+  "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "985335084183ba05cbce0eb9353a29c021b96285",
+  "fingerprint": "d4f97fd518eea827d8145a27ae555595b5445393",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": ".../docs/18-swissknife-meta-glasses-display-widgets.todo.md | 13 +++++++++++++\n 1 file changed, 13 insertions(+)",
-    "name_status": "M\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "filtered_generated_status_paths": [
+      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
+      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    ],
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tswissknife\nM\tswissknife",
     "path_categories": {
-      "modified": 1
+      "modified": 3,
+      "unmerged": 1
     },
+    "staged_name_status": "U\tswissknife",
     "status_paths": [
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
+      "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "swissknife"
     ],
     "status_short": [
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+      "UU swissknife"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -112,16 +131,17 @@ Work surface: `2` candidates, `2` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc",
-    "rescue/worktree/implementation-vai-338-attempt-1-1782235449-28c9e2fd7957"
+    "implementation/vai-380-attempt-1-1782258296"
   ],
-  "sample_count": 2,
+  "sample_count": 1,
   "sample_status_paths": [
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "swissknife"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-338-attempt-1-1782235449"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-380-attempt-1-1782258296"
   ],
   "success_signals": [
     "candidate_count_decreases",
@@ -166,3 +186,11 @@ refill updates after the clean reconciliation pass. Those generated changes were
 preserved in main commit `dd61450c` (`Record VAI reconciliation guardrail
 refresh`) rather than discarded, leaving the main checkout clean again for the
 VAI-200 worktree merge.
+
+## 2026-06-24 Resolution Note
+
+The stopped-run worktree directories for `VAI-380`, `MGW-010`, `MGW-411`,
+`HAO-510`, and `HAO-511` were inspected and pruned after the useful MGW-010
+Android DAT readiness changes were merged into the main checkout. The stale
+`UU swissknife` evidence above reflects the guardrail snapshot at discovery
+time; the current main checkout no longer has a registered worktree conflict.

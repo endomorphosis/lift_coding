@@ -158,11 +158,17 @@ describe('expo-meta-wearables-dat module wrapper', () => {
     const nativeModule = {
       isDatAvailable: jest.fn(async () => true),
       getConfiguration: jest.fn(async () => ({
-        platform: 'ios',
+        platform: 'android',
         sdkLinked: true,
         sdkConfigured: true,
+        sdkMeetsMinimum: true,
         analyticsOptOut: true,
-        sdkVersion: '0.5.0',
+        sdkVersion: '0.7.0',
+        sdkVersionTarget: '0.7.0',
+        datAppModelEnabled: true,
+        displayDamRequired: true,
+        displayDamEnabled: true,
+        displaySdkLinked: true,
         applicationId: 'handsfree-dev',
         provider: 'internal_bridge',
         integrationMode: 'sdk_reflection',
@@ -178,11 +184,17 @@ describe('expo-meta-wearables-dat module wrapper', () => {
       })),
       getDiagnostics: jest.fn(async () => ({
         available: true,
-        platform: 'ios',
+        platform: 'android',
         sdkLinked: true,
         sdkConfigured: true,
+        sdkMeetsMinimum: true,
         analyticsOptOut: true,
-        sdkVersion: '0.5.0',
+        sdkVersion: '0.7.0',
+        sdkVersionTarget: '0.7.0',
+        datAppModelEnabled: true,
+        displayDamRequired: true,
+        displayDamEnabled: true,
+        displaySdkLinked: true,
         applicationId: 'handsfree-dev',
         provider: 'internal_bridge',
         integrationMode: 'sdk_reflection',
@@ -294,8 +306,12 @@ describe('expo-meta-wearables-dat module wrapper', () => {
 
     await expect(module.isDatAvailable()).resolves.toBe(true);
     await expect(module.getConfiguration()).resolves.toMatchObject({
+      platform: 'android',
       sdkLinked: true,
       sdkConfigured: true,
+      sdkMeetsMinimum: true,
+      displayDamEnabled: true,
+      displaySdkLinked: true,
       integrationMode: 'sdk_reflection',
     });
     await expect(module.getCapabilities()).resolves.toMatchObject({
@@ -304,8 +320,10 @@ describe('expo-meta-wearables-dat module wrapper', () => {
     });
     await expect(module.getDiagnostics()).resolves.toMatchObject({
       available: true,
+      platform: 'android',
       sessionState: 'target_ready',
       displayReady: true,
+      displaySdkLinked: true,
       displayRenderPath: 'native-dat',
       displayLastError: null,
       displayLifecycleStages: expect.arrayContaining(['target_selected', 'display_started']),

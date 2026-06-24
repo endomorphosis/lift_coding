@@ -874,3 +874,148 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-412 Resolve dirty main checkout blocking 1 worktree merges
+
+- Status: completed
+- Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
+- Priority: P1
+- Track: ops
+- Fingerprint: 454d98962911c685c7c4d2368ab9a5d5f0e7fb20
+- Dedupe key: reconciliation_guardrail:main_checkout_dirty
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## MGW-413 Refresh official Meta glasses I/O source matrix
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: research
+- Depends on: MGW-363
+- Outputs: data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-413-expanded-io-source-refresh.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: rg -n "MGW-413|DAT|Web Apps|Meta Neural Band|captouch|Bluetooth audio route|IPFS/libp2p/MCP\\+\\+" data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-413-expanded-io-source-refresh.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Acceptance: Refresh the official-source matrix before native hardware assumptions change. The record must compare Meta Wearables FAQ, display developer announcement, Android DAT/iOS DAT 0.7 samples and changelogs, Web Apps starter kit behavior, Mock Device Kit limits, release-channel/package constraints, and unsupported surfaces. It must explicitly separate native DAT camera/display/audio-route capabilities from Web Apps Neural Band/captouch/motion/GPS inputs and explain how IPFS/libp2p/MCP++ compatibility lives in app-level bridge envelopes, not raw Bluetooth or Wi-Fi packets.
+
+## MGW-414 Add Swissknife Meta glasses app capability registry
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: runtime
+- Depends on: MGW-364, MGW-413
+- Outputs: swissknife/src/services/meta-glasses-app-capability-registry.ts, swissknife/test/mcp-plus-plus/meta-glasses-app-capability-registry.test.ts, swissknife/docs/meta-glasses-app-capability-registry.md
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-app-capability-registry.ts src/services/meta-glasses-io-profile.ts src/services/mcp-interface-registry.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-app-capability-registry.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Swissknife applications can enumerate and request Meta glasses camera, microphone route, speaker/headphone route, display, Meta Neural Band, captouch, motion/orientation, phone GPS, fallback, and unsupported capabilities without importing DAT SDK objects. Registry entries include app binding IDs, permission scopes, route readiness, policy requirements, control-plane route decisions, MCP++ descriptor references, and fallback behavior.
+
+## MGW-415 Build Meta glasses I/O fixture corpus from DAT and Web Apps samples
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: quality
+- Depends on: MGW-365, MGW-413
+- Outputs: swissknife/test/fixtures/meta-glasses-io/source-matrix, mobile/src/native/__fixtures__/metaWearablesDatSourceMatrix.js, tests/fixtures/meta_glasses_io_source_matrix.json
+- Validation: PYTHONPATH=./src pytest tests/test_meta_glasses_io_mocks.py; cd mobile && npm test -- --runInBand src/native/__tests__/wearablesBridge.test.js; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-profile.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Fixture corpus mirrors the public DAT DisplayAccess and CameraAccess lifecycle shapes, v0.7 display session states, camera stream/photo states, Bluetooth audio route readiness, Web Apps Arrow/Enter Neural Band and captouch input, motion/orientation, phone GPS, local storage limits, permission denial, unsupported display, release-channel missing, firmware/app update required, route loss, backpressure, and recovery. Fixtures must run without Meta credentials, DAT package access, paired glasses, or physical hardware.
+
+## MGW-416 Add privacy and policy threat model for expanded Meta glasses I/O
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: security
+- Depends on: MGW-364, MGW-413
+- Outputs: docs/meta-glasses-io-privacy-threat-model.md, swissknife/docs/meta-glasses-io-contract.md, hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Validation: rg -n "camera|microphone|speaker|headphone|GPS|Meta Neural Band|captouch|policy decision|redaction|retention|consent" docs/meta-glasses-io-privacy-threat-model.md swissknife/docs/meta-glasses-io-contract.md hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Acceptance: Threat model covers camera capture, microphone route/capture, speaker/headphone playback, display content, phone GPS, motion/orientation, Neural Band/captouch inputs, app binding IDs, control-plane routing, IPFS persistence, libp2p peer/session metadata, MCP++ receipts, consent, redaction, retention, auditability, replay protection, and denial paths before implementation emits real user data.
+
+## MGW-417 Define mobile bridge route contracts for camera, audio, and display
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: MGW-365, MGW-366, MGW-367, MGW-368
+- Outputs: mobile/src/native/metaWearablesIoBridge.js, mobile/src/native/__tests__/metaWearablesIoBridge.test.js, docs/meta-glasses-mobile-bridge-routes.md
+- Validation: cd mobile && npm test -- --runInBand src/native/__tests__/metaWearablesIoBridge.test.js
+- Acceptance: Mobile bridge contract emits normalized camera, microphone route, speaker/headphone route, display, permission, unsupported, disconnected, stale session, degraded route, firmware update, DAT app update, and fallback events. Events carry app binding IDs, bridge route metadata, Bluetooth/Wi-Fi route labels, policy decisions, control-plane route decisions, payload CIDs where enabled, privacy redaction metadata, latency/backpressure, and MCP++ receipts without claiming raw radio packets are IPFS/libp2p transports.
+
+## MGW-418 Add Web Apps input adapter for Neural Band, captouch, motion, and GPS
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: MGW-369, MGW-413, MGW-415
+- Outputs: swissknife/src/services/meta-glasses-webapp-input-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-webapp-input-adapter.test.ts, swissknife/docs/meta-glasses-webapp-input-adapter.md
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-webapp-input-adapter.ts src/services/meta-glasses-input-adapter.ts src/services/meta-glasses-io-profile.ts; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-webapp-input-adapter.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Web Apps adapter maps Arrow/Enter input from Meta Neural Band and captouch into normalized Swissknife intent descriptors, folds motion/orientation and phone GPS into privacy-safe context descriptors, rejects unsupported camera/microphone/audio assumptions for Web Apps, rate-limits high-frequency sensor events, preserves app binding IDs, and emits control-plane route decisions plus MCP++ receipts for allowed, denied, fallback, stale, and replayed events.
+
+## MGW-419 Integrate Hallucinate App policy for expanded Meta glasses I/O
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: policy
+- Depends on: MGW-370, MGW-416
+- Outputs: hallucinate_app/python/hallucinate_app/meta_glasses_io_policy.py, hallucinate_app/tests/test_meta_glasses_io_policy.py, hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md
+- Validation: PYTHONPATH=hallucinate_app/python pytest hallucinate_app/tests/test_meta_glasses_io_policy.py -q
+- Acceptance: Hallucinate App policy can authorize or deny camera, microphone, speaker/headphone, display, Neural Band, captouch, motion/orientation, phone GPS, IPFS persistence, libp2p relay, and MCP++ tool/event handoffs before Swissknife routes events into the control plane. Tests cover consent missing, sensitive capture, location redaction, denied audio capture, denied display output, allowed mock route, replayed receipt, and unsupported hardware fallback.
+
+## MGW-420 Prove IPFS/libp2p/MCP++ bridge-envelope compatibility
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: transport
+- Depends on: MGW-371, MGW-417, MGW-419
+- Outputs: tests/integration/test_meta_glasses_io_bridge_envelope.py, docs/meta-glasses-io-transport-envelope.md, swissknife/test/mcp-plus-plus/meta-glasses-io-conformance.test.ts
+- Validation: PYTHONPATH=./src pytest tests/integration/test_meta_glasses_io_bridge_envelope.py; cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-conformance.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Bridge-envelope tests prove camera, audio, Neural Band/captouch, motion/GPS, and display mock flows can carry IPFS CIDs, libp2p peer/session IDs, MCP++ receipts, policy decisions, control-plane route decisions, app binding IDs, replay protection, latency/backpressure, payload limits, and fallback states. Tests also prove malformed envelopes, missing policy decisions, unauthorized relays, raw Bluetooth/Wi-Fi transport claims, and missing receipts fail deterministically.
+
+## MGW-421 Add Swissknife demo app for expanded Meta glasses interaction methods
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: MGW-414, MGW-417, MGW-418, MGW-419
+- Outputs: swissknife/examples/meta-glasses-control-plane-demo, swissknife/docs/meta-glasses-control-plane-demo.md, swissknife/test/mcp-plus-plus/meta-glasses-demo-bindings.test.ts
+- Validation: cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-demo-bindings.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Demo Swissknife app binds camera capture, microphone route status, speaker/headphone route status, display output, Neural Band/captouch commands, motion/orientation, and phone GPS to app actions and visible diagnostics. The demo runs entirely on mocks, emits control-plane handoff receipts, shows fallback UI when native DAT/Web Apps routes are unavailable, and records content-addressed capture references only when policy allows persistence.
+
+## MGW-422 Add Playwright E2E coverage for expanded Meta glasses I/O in Swissknife apps
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: quality
+- Depends on: MGW-372, MGW-420, MGW-421
+- Outputs: swissknife/test/e2e/meta-glasses-expanded-io.spec.ts, swissknife/playwright.config.ts, swissknife/docs/meta-glasses-io-playwright.md
+- Validation: cd swissknife && npx playwright test test/e2e/meta-glasses-expanded-io.spec.ts --config=playwright.config.ts
+- Acceptance: Playwright opens a Swissknife app with mocked Meta glasses camera, microphone route, speaker/headphone route, display, Neural Band/captouch Arrow/Enter input, motion/orientation, phone GPS, bridge-route metadata, and control-plane receipts. The test verifies visible app state, permission prompts or denials, fallback UI, app interaction bindings, content-addressed capture references, MCP++ receipts, and no unauthorized control-plane handoff.
+
+## MGW-423 Add native DAT feature gates and physical validation checklist for expanded I/O
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-413, MGW-417, MGW-418
+- Outputs: docs/meta-glasses-expanded-io-physical-validation-checklist.md, docs/meta-wearables-dat-display-physical-validation-checklist.md, scripts/validate_meta_glasses_io_feature_gates.py
+- Validation: python3 scripts/validate_meta_glasses_io_feature_gates.py --check-docs
+- Acceptance: Native DAT feature gates for camera, display, and Bluetooth audio routes remain optional unless package credentials, Developer Mode or release channel, app registration, firmware/app update state, paired hardware, and capability checks succeed. The physical validation checklist covers Android and iOS DAT v0.7, display-capable device selection, camera stream/photo capture, Bluetooth route diagnostics, Web Apps HTTPS deployment, Neural Band/captouch input validation, motion/GPS, fallback evidence, privacy review, and rollback.
+
+## MGW-424 Aggregate expanded MGW launch priorities for the supervisor
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: ops
+- Depends on: MGW-413, MGW-414, MGW-415, MGW-416, MGW-417, MGW-418, MGW-419, MGW-420, MGW-421, MGW-422, MGW-423
+- Outputs: data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-424-expanded-io-launch-priorities.md, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+- Validation: rg -n "MGW-424|Swissknife applications|camera|microphone|speaker/headphone|Meta Neural Band|captouch|Playwright|control-plane|IPFS|libp2p|MCP\\+\\+" data/meta_glasses_display_widgets/discovery implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Acceptance: Launch priority note tells the supervisor to prefer implementation tasks that make Swissknife applications use Meta glasses interaction methods through contracts, mocks, policy checks, control-plane routes, IPFS/libp2p/MCP++ receipts, and Playwright validation. It must deprioritize generic code-annotation cleanup whenever there are open P0/P1 expanded-I/O tasks with unmet contracts, mocks, tests, or launch-readiness evidence.

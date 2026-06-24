@@ -197,6 +197,15 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
             "runtime",
             acceptance="Keep the Meta glasses interface Playwright launch replay covered.",
         ),
+        PortalTask(
+            "MGW-028",
+            "Resolve code annotation in swissknife/meta_glasses_gallery.ts:71",
+            "ready",
+            "manual",
+            "P3",
+            "docs",
+            acceptance="Keep the Meta glasses interface Playwright launch replay covered.",
+        ),
     ]
 
     result = reconcile(
@@ -209,7 +218,7 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
     updated = result["strategy"]
 
     assert result["changed"]
-    assert updated["deprioritized_tasks"] == ["VAI-199"]
+    assert updated["deprioritized_tasks"] == ["VAI-199", "MGW-028"]
     assert updated["objective_task_janitor_receipts"] == [
         {
             "schema": schema,
@@ -224,7 +233,18 @@ def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog(
             ),
             "priority": "P1",
             "track": "runtime",
-        }
+        },
+        {
+            "schema": schema,
+            "recorded_at": "2026-06-23T00:00:00+00:00",
+            "task_id": "MGW-028",
+            "action": "deprioritize",
+            "retired_task_reason": "off_mission_codebase_scan_task",
+            "goal_ids": [],
+            "title": "Resolve code annotation in swissknife/meta_glasses_gallery.ts:71",
+            "priority": "P3",
+            "track": "docs",
+        },
     ]
 
 

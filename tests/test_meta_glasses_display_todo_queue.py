@@ -110,6 +110,60 @@ def test_expanded_meta_glasses_io_tasks_cover_contracts_mocks_transport_and_test
             assert term in task.acceptance
 
 
+def test_expanded_meta_glasses_io_second_wave_targets_swissknife_app_integration():
+    tasks = {task.task_id: task for task in _load_tasks()}
+
+    expected_dependencies = {
+        "MGW-413": ["MGW-363"],
+        "MGW-414": ["MGW-364", "MGW-413"],
+        "MGW-415": ["MGW-365", "MGW-413"],
+        "MGW-416": ["MGW-364", "MGW-413"],
+        "MGW-417": ["MGW-365", "MGW-366", "MGW-367", "MGW-368"],
+        "MGW-418": ["MGW-369", "MGW-413", "MGW-415"],
+        "MGW-419": ["MGW-370", "MGW-416"],
+        "MGW-420": ["MGW-371", "MGW-417", "MGW-419"],
+        "MGW-421": ["MGW-414", "MGW-417", "MGW-418", "MGW-419"],
+        "MGW-422": ["MGW-372", "MGW-420", "MGW-421"],
+        "MGW-423": ["MGW-413", "MGW-417", "MGW-418"],
+        "MGW-424": [
+            "MGW-413",
+            "MGW-414",
+            "MGW-415",
+            "MGW-416",
+            "MGW-417",
+            "MGW-418",
+            "MGW-419",
+            "MGW-420",
+            "MGW-421",
+            "MGW-422",
+            "MGW-423",
+        ],
+    }
+    expected_acceptance_terms = {
+        "MGW-413": ["native DAT", "Web Apps", "IPFS/libp2p/MCP++", "Bluetooth or Wi-Fi"],
+        "MGW-414": ["Swissknife applications", "app binding IDs", "control-plane route decisions"],
+        "MGW-415": ["DisplayAccess", "CameraAccess", "Arrow/Enter", "without Meta credentials"],
+        "MGW-416": ["camera capture", "GPS", "redaction", "replay protection"],
+        "MGW-417": ["camera", "microphone route", "speaker/headphone route", "MCP++ receipts"],
+        "MGW-418": ["Neural Band", "captouch", "motion/orientation", "phone GPS"],
+        "MGW-419": ["Hallucinate App policy", "IPFS persistence", "libp2p relay"],
+        "MGW-420": ["IPFS CIDs", "libp2p peer/session IDs", "raw Bluetooth/Wi-Fi transport claims"],
+        "MGW-421": ["Demo Swissknife app", "control-plane handoff receipts", "fallback UI"],
+        "MGW-422": ["Playwright", "visible app state", "no unauthorized control-plane handoff"],
+        "MGW-423": ["Native DAT", "feature gates", "physical validation checklist"],
+        "MGW-424": ["deprioritize generic code-annotation cleanup", "P0/P1 expanded-I/O tasks"],
+    }
+
+    for task_id, dependencies in expected_dependencies.items():
+        task = tasks[task_id]
+
+        assert task.status == "todo"
+        assert task.priority in {"P0", "P1"}
+        assert task.depends_on == dependencies
+        for term in expected_acceptance_terms[task_id]:
+            assert term in task.acceptance
+
+
 def test_expanded_meta_glasses_io_scope_is_documented_in_plan():
     source = PLAN_PATH.read_text(encoding="utf-8")
 
@@ -128,6 +182,8 @@ def test_expanded_meta_glasses_io_scope_is_documented_in_plan():
         "libp2p",
         "MCP++",
         "Phase 10: Expanded Meta Glasses I/O for Swissknife Apps",
+        "Second-wave MGW task split",
+        "MGW-424",
         "Playwright tests",
     ]:
         assert term in source

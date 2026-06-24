@@ -687,9 +687,9 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--daemon-merged-worktree-cleanup-max" in common_arg_values
     assert common_arg_values[common_arg_values.index("--daemon-merged-worktree-cleanup-max") + 1] == "50"
     assert "--codebase-scan-min-open-tasks" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--codebase-scan-min-open-tasks") + 1] == "20"
+    assert common_arg_values[common_arg_values.index("--codebase-scan-min-open-tasks") + 1] == "0"
     assert "--codebase-scan-max-findings" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "4"
+    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
     assert "--no-objective-goal-refinement" not in common_arg_values
     assert "--objective-max-refinement-children" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-children") + 1] == "2"
@@ -708,6 +708,18 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "desktop peer offload",
         "Hallucinate App mediation",
         "Meta glasses interface",
+        "Meta Wearables DAT",
+        "camera",
+        "microphone",
+        "headphones",
+        "Neural Band",
+        "captouch",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "MCP server",
+        "Swissknife applications",
+        "control plane",
         "Playwright launch replay",
         "cross-device e2e validation",
         "launch readiness receipt",
