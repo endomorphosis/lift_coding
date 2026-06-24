@@ -577,35 +577,35 @@ class ExpoMetaWearablesDatModule : Module() {
       MINIMUM_DAT_SDK_VERSION
     )
     if (!BuildConfig.META_WEARABLES_DAT_SDK_ENABLED) {
-      return DisplayLifecycleResult.blocked(
+      return blockedDisplayLifecycleResult(
         state = "native_display_unavailable",
         reason = "dat_native_display_unavailable",
         message = "DAT native display is unavailable in this bridge-only Android build."
       )
     }
     if (!damEnabled) {
-      return DisplayLifecycleResult.blocked(
+      return blockedDisplayLifecycleResult(
         state = "dam_disabled",
         reason = "dam_disabled",
         message = "DAT display actions require DAM app-model enablement."
       )
     }
     if (!sdkMeetsMinimum) {
-      return DisplayLifecycleResult.blocked(
+      return blockedDisplayLifecycleResult(
         state = "sdk_version_unsupported",
         reason = "sdk_version_unsupported",
         message = "DAT display actions require Android DAT SDK $MINIMUM_DAT_SDK_VERSION or newer."
       )
     }
     if (!isDatSdkLinked()) {
-      return DisplayLifecycleResult.blocked(
+      return blockedDisplayLifecycleResult(
         state = "sdk_unlinked",
         reason = "dat_sdk_unlinked",
         message = "DAT SDK classes are not linked into this Android build."
       )
     }
     if (!isDisplaySdkLinked()) {
-      return DisplayLifecycleResult.blocked(
+      return blockedDisplayLifecycleResult(
         state = "display_sdk_unlinked",
         reason = "display_sdk_unlinked",
         message = "DAT display SDK classes are not linked into this Android build."
@@ -630,7 +630,7 @@ class ExpoMetaWearablesDatModule : Module() {
       initializeWearables()
       val registrationState = normalizedStateName(readFlowValue(invokeWearablesMethod("getRegistrationState")))
       if (registrationState != null && registrationState != "REGISTERED") {
-        DisplayLifecycleResult.blocked(
+        blockedDisplayLifecycleResult(
           state = "registration_required",
           reason = "registration_required",
           message = "Register with Meta AI before starting a DAT display session."
@@ -638,7 +638,7 @@ class ExpoMetaWearablesDatModule : Module() {
       } else {
         val target = resolveDisplayDeviceTarget()
         if (target == null) {
-          DisplayLifecycleResult.blocked(
+          blockedDisplayLifecycleResult(
             state = "awaiting_target",
             reason = "target_required",
             message = "Select a display-capable glasses target before rendering a DAT display widget."
@@ -661,13 +661,28 @@ class ExpoMetaWearablesDatModule : Module() {
       synchronized(nativeDisplayLock) {
         detachNativeDisplayLocked()
       }
-      DisplayLifecycleResult.blocked(
-        state = "native_display_error",
+      blockedDisplayLifecycleResult(
+        state = "display_lifecycle_error",
         reason = datErrorReason(nativeError),
         message = datErrorDescription(nativeError) ?: "DAT display lifecycle failed.",
         requiredAction = requiredActionForError(nativeError)
       )
     }
+  }
+
+  private fun blockedDisplayLifecycleResult(
+    state: String,
+    reason: String,
+    message: String,
+    requiredAction: String? = null
+  ): DisplayLifecycleResult {
+    recordDisplayLifecycleStage(state)
+    return DisplayLifecycleResult.blocked(
+      state = state,
+      reason = reason,
+      message = message,
+      requiredAction = requiredAction
+    )
   }
 
   private fun ensureNativeDisplayReadyLocked(

@@ -969,8 +969,8 @@ cadence remains parseable and resumable.
 
 ## VAI-138 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:198
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-24: preserved the orphaned implementation from `implementation/vai-138-attempt-2-1782267000`; `PlasmaManager.get()` now logs temp-file cleanup failures instead of silently swallowing `OSError`, and `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py` passes.
 - Priority: P1
 - Track: runtime
 - Depends on: 
