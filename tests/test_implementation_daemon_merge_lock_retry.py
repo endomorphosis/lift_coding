@@ -125,6 +125,16 @@ def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
 - Outputs: src/runtime.py
 - Validation: test -f src/runtime.py
 - Acceptance: Keep valid reconciliation candidates.
+
+## ACCEL-888 Blocked stale task
+
+- Status: blocked
+- Priority: P2
+- Track: ops
+- Depends on:
+- Outputs: cleanup-archive/stale.py
+- Validation: true
+- Acceptance: Blocked tasks should not be resurrected by merge reconciliation.
 """,
         encoding="utf-8",
     )
@@ -146,8 +156,17 @@ def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
         "validation_result": {"attempted": True, "passed": True},
         "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
     }
+    blocked_event = {
+        "type": "implementation_finished",
+        "task_id": "ACCEL-888",
+        "attempt": 1,
+        "branch": "implementation/accel-888-attempt-1",
+        "implementation_commit": "8888888888888888888888888888888888888888",
+        "validation_result": {"attempted": True, "passed": True},
+        "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
+    }
     events_path.write_text(
-        "\n".join(json.dumps(event) for event in [removed_event, live_event]),
+        "\n".join(json.dumps(event) for event in [removed_event, blocked_event, live_event]),
         encoding="utf-8",
     )
     daemon = Daemon(
