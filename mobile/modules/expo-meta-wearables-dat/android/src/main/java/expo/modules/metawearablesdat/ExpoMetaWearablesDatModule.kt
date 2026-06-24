@@ -252,7 +252,8 @@ class ExpoMetaWearablesDatModule : Module() {
         "displayFallback" to displayFallback,
         "displayFocusTarget" to displayFocusTarget,
         "displayUpdateCount" to displayUpdateCount,
-        "displayLifecycleStages" to displayLifecycleStages
+        "displayLifecycleStages" to displayLifecycleStages,
+        "displayAccessLifecycleStages" to displayAccessLifecycleStages()
       )
     }
 
@@ -1276,7 +1277,8 @@ class ExpoMetaWearablesDatModule : Module() {
         "backendActionId" to action.backendActionId,
         "serviceId" to action.serviceId,
         "displayRenderPath" to displayRenderPath,
-        "displayLifecycleStages" to displayLifecycleStages
+        "displayLifecycleStages" to displayLifecycleStages,
+        "displayAccessLifecycleStages" to displayAccessLifecycleStages()
       )
     )
   }
@@ -1451,6 +1453,7 @@ class ExpoMetaWearablesDatModule : Module() {
       "displayLastError" to displayLastError,
       "displayUpdateCount" to displayUpdateCount,
       "displayLifecycleStages" to displayLifecycleStages,
+      "displayAccessLifecycleStages" to displayAccessLifecycleStages(),
       "widgetId" to metadata.widgetId,
       "widgetCid" to metadata.widgetCid,
       "descriptorCid" to metadata.descriptorCid,
@@ -2429,6 +2432,11 @@ class ExpoMetaWearablesDatModule : Module() {
     displayLifecycleStages = stages.takeLast(MAX_DISPLAY_LIFECYCLE_STAGES)
   }
 
+  private fun displayAccessLifecycleStages(): List<String> =
+    displayLifecycleStages.mapNotNull { stage ->
+      DISPLAY_ACCESS_LIFECYCLE_STAGE_NAMES[stage]
+    }
+
   private fun manifestMetadata() =
     reactContextOrThrow()
       .packageManager
@@ -3154,6 +3162,13 @@ class ExpoMetaWearablesDatModule : Module() {
       "com.meta.wearable.dat.display.DisplayCapabilityKt",
       "com.meta.wearable.dat.display.DeviceSessionDisplayKt",
       "com.meta.wearable.dat.display.DeviceSessionExtensionsKt"
+    )
+    val DISPLAY_ACCESS_LIFECYCLE_STAGE_NAMES = mapOf(
+      "target_selected" to "display_access_target_selected",
+      "session_started" to "display_access_session_started",
+      "display_attached" to "display_access_display_attached",
+      "display_started" to "display_access_display_started",
+      "content_sent" to "display_access_content_sent"
     )
     val DISPLAY_WIDGET_RENDER = DisplayActionConfig(
       action = "render_display_widget",

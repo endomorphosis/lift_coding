@@ -70,6 +70,7 @@ Run each action from the diagnostics/action surface and record result metadata.
 - [ ] iOS SDK-unlinked build returns explicit `reason: dat_sdk_unlinked` or `reason: display_sdk_unlinked`, `renderPath: mobile-card`, and `displayConnectionState` matching the blocked SDK state for widget actions
 - [ ] iOS SDK-linked build with `MWDATDisplay` available reports `displaySdkLinked: true`, `renderPath: native-dat`, and DisplayAccess lifecycle stages before rollout
 - [ ] Native Android render path records `displayLifecycleStages` for DisplayAccess stages: selected display target, session started, display attached, display started, and content sent
+- [ ] Native Android render path also reports `displayAccessLifecycleStages` with `display_access_target_selected`, `display_access_session_started`, `display_access_display_attached`, `display_access_display_started`, and `display_access_content_sent`
 - [ ] Native results preserve simulator trace parity for widget/action IDs, operation order, focus target, and correlation metadata
 - [ ] Firmware update required state returns `reason: firmware_update_required` and `requiredAction: open_firmware_update`
 - [ ] DAT glasses app update required state returns `reason: dat_app_update_required` and `requiredAction: open_dat_glasses_app_update`
