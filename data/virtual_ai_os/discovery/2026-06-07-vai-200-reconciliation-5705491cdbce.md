@@ -1,30 +1,27 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: 8857004c3d7bbd4f48b9256d6b47824811b77977
+Fingerprint: c237ad82c27d44828655bb000c099551f3b24425
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 32
+Candidate count: 33
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M hallucinate_app`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=1`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	hallucinate_app`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+- Diff stat:
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 27 ++++++++++++++--------`
+  - ` 1 file changed, 17 insertions(+), 10 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -66,7 +63,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `32` candidates, `20` sampled records.
+Work surface: `33` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -108,29 +105,22 @@ Work surface: `32` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 32,
+  "candidate_count": 33,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "8857004c3d7bbd4f48b9256d6b47824811b77977",
+  "fingerprint": "c237ad82c27d44828655bb000c099551f3b24425",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 27 ++++++++++++++--------\n 1 file changed, 17 insertions(+), 10 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "path_categories": {
-      "modified": 3
+      "modified": 1
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -163,9 +153,7 @@ Work surface: `32` candidates, `20` sampled records.
   ],
   "sample_count": 20,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
