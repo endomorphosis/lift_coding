@@ -1390,3 +1390,115 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_ios-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-ios` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G719 Interoperate mobile with external/ipfs_accelerate
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/mobile-external_ipfs_accelerate
+- Goal kind: interoperability
+- Interoperability pair: mobile, external/ipfs_accelerate
+- Submodules: mobile, external/ipfs_accelerate
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_accelerate/docs/fastmcp/examples/atproto_mcp/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/examples/smart_home/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/examples/testing_demo/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/fastmcp_remote/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/fastmcp_slim/pyproject.toml, external/ipfs_accelerate/docs/fastmcp/pyproject.toml, external/ipfs_accelerate/docs/mcp-python-sdk/examples/snippets/pyproject.toml, external/ipfs_accelerate/docs/mcp-python-sdk/pyproject.toml, external/ipfs_accelerate/ipfs_accelerate_py/consensus_kit/Cargo.toml, external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus/tests-go/go.mod, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus/tests-py/requirements.txt
+- Interface descriptors: external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py, external/ipfs_accelerate/docs/development_history/VISUAL_PROOF_WORKING_INTERFACE.md, external/ipfs_accelerate/docs/fastmcp/.github/workflows/run-schema-crash-test.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/update-config-schema.yml, external/ipfs_accelerate/docs/fastmcp/docs/python-sdk/fastmcp-utilities-json_schema.mdx, external/ipfs_accelerate/docs/fastmcp/docs/python-sdk/fastmcp-utilities-json_schema_type.mdx, external/ipfs_accelerate/docs/fastmcp/tests/cli/test_mcp_server_config_schema.py, external/ipfs_accelerate/docs/fastmcp/tests/test_json_schema_generation.py, external/ipfs_accelerate/docs/fastmcp/tests/utilities/test_json_schema.py, external/ipfs_accelerate/docs/mcp-python-sdk/tests/client/test_output_schema_validation.py, external/ipfs_accelerate/ipfs_accelerate_js/src/browser/optimizations/ipfs_accelerate_js_browser_interface.ts
+- MCP descriptors: external/ipfs_accelerate/.github/workflows/mcp-transport-libp2p.yml, external/ipfs_accelerate/MCP_SERVER_UNIFICATION_PLAN.md, external/ipfs_accelerate/deployments/systemd/ipfs-accelerate-mcp.service, external/ipfs_accelerate/docs/MCP_DASHBOARD_GUIDE.md, external/ipfs_accelerate/docs/MCP_TRIO_ROADMAP.md, external/ipfs_accelerate/docs/architecture/IPFS_ACCELERATE_MCP_INTEGRATION_PLAN.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT.md, external/ipfs_accelerate/docs/archive/implementations/CICD_MCP_VALIDATION_REPORT_2025-10-23.md, external/ipfs_accelerate/docs/archive/implementations/IMPLEMENTATION_COMPLETE_GITHUB_MCP.md, external/ipfs_accelerate/docs/development_history/MCP_ERROR_HANDLING_VERIFICATION.md, external/ipfs_accelerate/docs/fastmcp/.cursor/rules/core-mcp-objects.mdc, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp-remote.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp-slim.yml, external/ipfs_accelerate/docs/fastmcp/.github/workflows/publish-fastmcp.yml, external/ipfs_accelerate/docs/fastmcp/docs/apps/fastmcp-app.mdx, external/ipfs_accelerate/docs/fastmcp/docs/cli/install-mcp.mdx
+- Python import roots: __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile, cachetools, cmd, collections, concurrent, contextlib, copilot, copy, cryptography, csv, dataclasses, datasets, datetime
+- Goal: Prove `mobile` interoperates with `external/ipfs_accelerate` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, interface contract mobile external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py, external/ipfs_accelerate/data/duckdb/utils/implement_db_schema_enhancements.py, external/ipfs_accelerate/data/duckdb/utils/onnx_db_schema_update.py
+- Outputs: tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: mobile external/ipfs_accelerate interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3 bs4 cProfile
+- AST query: mobile, external/ipfs_accelerate, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
+- Parallel lane: objective/interoperability/mobile-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `mobile` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G720 Interoperate mobile with external/ipfs_datasets
+
+- Status: scheduled
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/mobile-external_ipfs_datasets
+- Goal kind: interoperability
+- Interoperability pair: mobile, external/ipfs_datasets
+- Submodules: mobile, external/ipfs_datasets
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_datasets/.tools/ipfs_kit_py/.playwright_local/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/archive/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/backup/fixes/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/package.json, external/ipfs_datasets/.tools/ipfs_kit_py/config/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/config/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.cfg, external/ipfs_datasets/.tools/ipfs_kit_py/config/setup.py, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-car/requirements.txt, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/pyproject.toml, external/ipfs_datasets/.tools/ipfs_kit_py/docs/py-ipld-dag-pb/requirements.txt
+- Interface descriptors: external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/backend_schemas.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/graphql_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/openapi_schema.py, external/ipfs_datasets/.tools/ipfs_kit_py/ipfs_kit_py/unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/scripts/development/verify_mcp_interface.py
+- MCP descriptors: external/ipfs_datasets/.github/workflows/mcp-benchmarks.yml, external/ipfs_datasets/.github/workflows/mcp-dashboard-tests.yml, external/ipfs_datasets/.github/workflows/mcp-integration-tests.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring-unified.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml, external/ipfs_datasets/.github/workflows/mcp-tools-monitoring.yml.backup, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/enhanced-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/.github/workflows/final-mcp-server.yml, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/direct_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp.sh, external/ipfs_datasets/.tools/ipfs_kit_py/archive/applied_patches/fix_all_mcp_issues.sh
+- Python import roots: __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile, cachetools, cmd, collections, concurrent, contextlib, copilot, copy, cryptography, csv, dataclasses, datasets, datetime
+- Goal: Prove `mobile` interoperates with `external/ipfs_datasets` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_mobile_external_ipfs_datasets_interop.py, docs/integration/mobile-external_ipfs_datasets.md, interface contract mobile external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
+- Outputs: tests/integration/test_mobile_external_ipfs_datasets_interop.py, docs/integration/mobile-external_ipfs_datasets.md, mobile, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: mobile external/ipfs_datasets interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3 bs4 cProfile
+- AST query: mobile, external/ipfs_datasets, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
+- Parallel lane: objective/interoperability/mobile-external_ipfs_datasets
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `mobile` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G721 Interoperate mobile with external/ipfs_kit
+
+- Status: scheduled
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/mobile-external_ipfs_kit
+- Goal kind: interoperability
+- Interoperability pair: mobile, external/ipfs_kit
+- Submodules: mobile, external/ipfs_kit
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: external/ipfs_kit/.playwright_local/package.json, external/ipfs_kit/archive/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/archive/fixes/requirements.txt, external/ipfs_kit/backup/archive_clutter/temp_files/requirements.txt, external/ipfs_kit/backup/fixes/requirements.txt, external/ipfs_kit/config/package.json, external/ipfs_kit/config/pyproject.toml, external/ipfs_kit/config/requirements.txt, external/ipfs_kit/config/setup.cfg, external/ipfs_kit/config/setup.py, external/ipfs_kit/docs/py-ipld-car/pyproject.toml, external/ipfs_kit/docs/py-ipld-car/requirements.txt
+- Interface descriptors: external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto, external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/demo_unified_bucket_interface.py, external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_kit/examples/schema_column_optimization_example.py, external/ipfs_kit/ipfs_kit_py/arrow_ipc_daemon_interface.py, external/ipfs_kit/ipfs_kit_py/backend_schemas.py, external/ipfs_kit/ipfs_kit_py/cache/schema_column_optimization.py, external/ipfs_kit/ipfs_kit_py/cache/zero_copy_interface.py, external/ipfs_kit/ipfs_kit_py/graphql_schema.py, external/ipfs_kit/ipfs_kit_py/libp2p/network/stream/net_stream_interface.py
+- MCP descriptors: external/ipfs_kit/.github/workflows/enhanced-mcp-server.yml, external/ipfs_kit/.github/workflows/final-mcp-server.yml, external/ipfs_kit/archive/applied_patches/advanced_filecoin_mcp.py, external/ipfs_kit/archive/applied_patches/direct_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_real.py, external/ipfs_kit/archive/applied_patches/enhanced_mcp_server_with_ai_ml.py, external/ipfs_kit/archive/applied_patches/filecoin_mcp_integration.py, external/ipfs_kit/archive/applied_patches/fix_all_mcp.sh, external/ipfs_kit/archive/applied_patches/fix_all_mcp_issues.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch1.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_batch2.sh, external/ipfs_kit/archive/applied_patches/fix_mcp_code.py, external/ipfs_kit/archive/applied_patches/fix_mcp_errors.py, external/ipfs_kit/archive/applied_patches/fix_mcp_file.py, external/ipfs_kit/archive/applied_patches/fix_mcp_form_data.py
+- Python import roots: __future__, aiofiles, aiohttp, anyio, argparse, ast, atexit, binascii, boto3, botocore, check_high_level_api_syntax, collections, configparser, contextlib, coverage, ctypes, daemon_manager, dataclasses, datetime, difflib, enhanced_daemon_manager_with_cluster, enhanced_mcp_server_dashboard, enhanced_storage_backend_manager, enum
+- Goal: Prove `mobile` interoperates with `external/ipfs_kit` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_mobile_external_ipfs_kit_interop.py, docs/integration/mobile-external_ipfs_kit.md, interface contract mobile external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto
+- Outputs: tests/integration/test_mobile_external_ipfs_kit_interop.py, docs/integration/mobile-external_ipfs_kit.md, mobile, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: mobile external/ipfs_kit interoperability integration test interface descriptor __future__ aiofiles aiohttp anyio argparse ast atexit binascii boto3 botocore check_high_level_api_syntax collections
+- AST query: mobile, external/ipfs_kit, interface contract, integration test, __future__, aiofiles, aiohttp, anyio, argparse, ast, atexit, binascii, boto3, botocore, check_high_level_api_syntax, collections
+- Parallel lane: objective/interoperability/mobile-external_ipfs_kit
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `mobile` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G722 Interoperate mobile with Mcp-Plus-Plus
+
+- Status: scheduled
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: interoperability
+- Priority: P1
+- Bundle: objective/interoperability/mobile-mcp_plus_plus
+- Goal kind: interoperability
+- Interoperability pair: mobile, Mcp-Plus-Plus
+- Submodules: mobile, Mcp-Plus-Plus
+- Interoperability score: 35
+- Discovery sources: configured, gitlink, gitmodules
+- Package manifests: Mcp-Plus-Plus/tests-go/go.mod, Mcp-Plus-Plus/tests-py/requirements.txt, Mcp-Plus-Plus/tests-rs/Cargo.toml, Mcp-Plus-Plus/tests-ts/package.json, mobile/modules/expo-glasses-audio/package.json, mobile/modules/expo-meta-wearables-dat/package.json, mobile/modules/glasses-audio-player/package.json, mobile/modules/glasses-audio/package.json, mobile/package.json
+- Interface descriptors: Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js
+- MCP descriptors: Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md, Mcp-Plus-Plus/tests-go/validators/base_mcp.go, Mcp-Plus-Plus/tests-go/validators/mcp_idl.go, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_tool_call.json, Mcp-Plus-Plus/tests-py/integration/test_base_mcp_typed.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_baseline.py, Mcp-Plus-Plus/tests-py/integration/test_mcp_idl.py, Mcp-Plus-Plus/tests-py/validators/base_mcp.py, Mcp-Plus-Plus/tests-py/validators/base_mcp_typed.py, Mcp-Plus-Plus/tests-py/validators/mcp_idl.py, Mcp-Plus-Plus/tests-rs/src/validators/base_mcp.rs, Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs, Mcp-Plus-Plus/tests-ts/src/validators/baseMCP.ts
+- Python import roots: __future__, argparse, base64, dataclasses, enum, hashlib, json, pathlib, pydantic, pytest, sys, typing, validators
+- Goal: Prove `mobile` interoperates with `Mcp-Plus-Plus` through importable contracts, interface descriptors, runtime handoff behavior, and integration tests.
+- Evidence: tests/integration/test_mobile_mcp_plus_plus_interop.py, docs/integration/mobile-mcp_plus_plus.md, interface contract mobile Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md, Mcp-Plus-Plus/docs/spec/mcp-idl.md, Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md
+- Outputs: tests/integration/test_mobile_mcp_plus_plus_interop.py, docs/integration/mobile-mcp_plus_plus.md, mobile, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md
+- Validation: python -m pytest tests/integration -q
+- Refinement depth: 1
+- Embedding query: mobile Mcp-Plus-Plus interoperability integration test interface descriptor __future__ argparse base64 dataclasses enum hashlib json pathlib pydantic pytest sys typing
+- AST query: mobile, Mcp-Plus-Plus, interface contract, integration test, __future__, argparse, base64, dataclasses, enum, hashlib, json, pathlib, pydantic, pytest, sys, typing
+- Parallel lane: objective/interoperability/mobile-mcp_plus_plus
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Gap task: Create one larger integration work item proving `mobile` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.

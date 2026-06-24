@@ -1013,8 +1013,8 @@ cadence remains parseable and resumable.
 
 ## VAI-142 Review swallowed exception path in hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py:611
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-24: preserved the orphaned implementation from `implementation/vai-142-attempt-2-1782269160`; `IPFSEmbeddingsPy.load_embeddings_from_ipfs()` now narrows temporary-file cleanup handling to logged `OSError` failures and removes the unconditional `raise e`; validation passed with `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py`.
 - Priority: P1
 - Track: runtime
 - Depends on: 
@@ -1660,7 +1660,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: d4f97fd518eea827d8145a27ae555595b5445393
+- Fingerprint: 9eb6248fdba720f81e9050c7e9b8aa95c951c3e8
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
