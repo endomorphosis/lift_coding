@@ -1085,3 +1085,36 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-430-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-431 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-431-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-432 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-432-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## MGW-433 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-433-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
