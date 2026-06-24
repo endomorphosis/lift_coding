@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev
+.PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev inotify-check inotify-apply
 
 PYTHON ?= python3
 
@@ -37,3 +37,11 @@ compose-down:
 # Run the backend server
 dev:
 	$(PYTHON) -m handsfree.server
+
+# Diagnose inotify usage/limits (no root required)
+inotify-check:
+	bash scripts/inotify_doctor.sh check
+
+# Apply persistent inotify limits (requires sudo/root)
+inotify-apply:
+	bash scripts/inotify_doctor.sh apply
