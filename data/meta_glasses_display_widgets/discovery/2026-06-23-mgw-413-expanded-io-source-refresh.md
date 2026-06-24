@@ -36,6 +36,32 @@ raw Bluetooth or Wi-Fi packet layers.
   native implementation tasks must re-check authenticated docs before changing
   package, entitlement, firmware, or country/market assumptions.
 
+## 2026-06-24 Verification Delta
+
+- Public Meta sources still present DAT and Web Apps as separate development
+  products. DAT is the native iOS/Android phone-app path for camera/video,
+  photo capture, microphone/audio route integration, and display-capable device
+  sessions. Web Apps are the display-glasses HTML/CSS/JavaScript path for
+  on-display web rendering and documented launch inputs.
+- The Android and iOS DAT 0.7 changelogs continue to anchor native display
+  assumptions: display is a DAM-gated capability, content submission replaces
+  the active display view, and display readiness must be observed through
+  typed state/error surfaces. CameraAccess remains the native sample family
+  for stream/photo behavior and Mock Device Kit camera/session simulation.
+- Web Apps starter behavior remains browser-first: Arrow keys and Enter are
+  the development stand-in for Meta Neural Band and captouch D-pad activation,
+  Chrome DevTools sensors cover geolocation/orientation testing, and a public
+  HTTPS URL is required before on-device loading.
+- Mock Device Kit evidence should not be stretched into a full native display
+  simulator claim. Keep it scoped to documented DAT-style hardware-free flows,
+  including camera/session/permission/media behavior and v0.7 displayless
+  captouch simulation; keep MGW-owned mocks for display lifecycle, Web Apps
+  inputs, Bluetooth audio route state, unsupported states, and bridge
+  envelopes.
+- No checked official source added raw Bluetooth or Wi-Fi packet APIs for DAT
+  or Web Apps. IPFS/libp2p/MCP++ compatibility therefore remains an MGW
+  application envelope contract above the Meta transport/runtime surfaces.
+
 ## Official Source Matrix
 
 | Source | DAT native phone-app evidence | Web Apps evidence | MGW-413 assumption |
@@ -112,3 +138,13 @@ Display Web Apps input capabilities:
 - Re-check authenticated Wearables Developer Center docs before any task changes
   native firmware, market, SDK, entitlement, app-model, package, or release
   channel requirements.
+
+## Downstream Gate
+
+MGW-414 through MGW-424 should consume this matrix as a source-of-truth split:
+native DAT capabilities may be requested for camera, native display, and
+Bluetooth audio route readiness, while Web Apps capabilities may be requested
+for Meta Neural Band, captouch, motion/orientation, phone GPS, browser-tested
+D-pad input, and local storage. Anything outside those official surfaces must
+be represented as `unsupported_capability`, `route_unavailable`, or an
+app-level bridge envelope until a newer official source changes the boundary.
