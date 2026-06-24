@@ -1502,3 +1502,23 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/mobile-mcp_plus_plus
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `mobile` and `Mcp-Plus-Plus` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+
+## VAIOS-G723 Hallucinate MCP dashboard interoperability console
+
+- Status: active
+- Parent: VAIOS-G697
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 1
+- Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
+- Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes
+- Goal: Hallucinate App acts as the operator-facing MCP dashboard interoperability console for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`, proving the same dashboard capability catalog, backend service catalog, daemon health, MCP++ telemetry, tools/list, tools/call, and control_surface receipts that Swissknife applications consume.
+- Evidence: data/hallucinate_multimodal_control/discovery/2026-06-24-hao-676-hallucinate-mcp-dashboard-review.md, hallucinate_app/hallucinate_app/node/menu_config.js, hallucinate_app/hallucinate_app/node/menu_generator.js, hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js, hallucinate_app/hallucinate_app/node/views/ipfs_kit_dashboard.html, hallucinate_app/hallucinate_app/node/views/ipfs_datasets_dashboard.html, hallucinate_app/hallucinate_app/node/views/ipfs_accelerate_dashboard.html, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
+- Outputs: hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp
+- Refinement: Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+- Gap task: Turn the Hallucinate App menus and dashboards into the high-value launch console that continuously verifies Python MCP server interoperability before Swissknife, phone, desktop offload, or Meta glasses flows depend on those backend capabilities.

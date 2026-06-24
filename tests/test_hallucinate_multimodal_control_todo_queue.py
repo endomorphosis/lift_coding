@@ -52,6 +52,9 @@ MCP_LAUNCH_CONTRACT_INTEGRATION_PATH = (
 PLAYWRIGHT_LAUNCH_REPLAY_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-675-playwright-launch-replay.md"
 )
+MCP_DASHBOARD_REVIEW_PATH = (
+    DISCOVERY_ROOT / "2026-06-24-hao-676-hallucinate-mcp-dashboard-review.md"
+)
 
 
 def _load_script_module(name: str):
@@ -493,6 +496,178 @@ def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_covera
         assert required_term in idl_source
         assert required_term in hallucinate_spec or required_term == "production launch readiness"
         assert required_term in swissknife_spec or required_term == "production launch readiness"
+
+
+def test_hao_676_reviews_and_fixes_hallucinate_mcp_dashboard_menu_surface():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-676"]
+    review_source = MCP_DASHBOARD_REVIEW_PATH.read_text(encoding="utf-8")
+    fixture = _json_block_after(review_source, "## Review Fixture")
+    menu_config_source = (
+        REPO_ROOT / "hallucinate_app" / "hallucinate_app" / "node" / "menu_config.js"
+    ).read_text(encoding="utf-8")
+    menu_generator_source = (
+        REPO_ROOT / "hallucinate_app" / "hallucinate_app" / "node" / "menu_generator.js"
+    ).read_text(encoding="utf-8")
+    menu_test_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "test_programmatic_menu.js"
+    ).read_text(encoding="utf-8")
+
+    assert task.status == "completed"
+    assert task.priority == "P0"
+    assert task.track == "launch"
+    assert task.depends_on == ["HAO-674", "HAO-675"]
+    assert task.metadata["goal id"] == "VAIOS-G723"
+    assert task.metadata["bundle"] == "objective/launch/hallucinate-mcp-dashboard"
+    assert task.metadata["parallel lane"] == "hallucinate-mcp-dashboard-menu-review"
+    assert MCP_DASHBOARD_REVIEW_PATH.relative_to(REPO_ROOT).as_posix() in task.outputs
+
+    assert fixture["task_id"] == "HAO-676"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["artifact_id"] == "hallucinate_mcp_dashboard_menu_review"
+    assert fixture["requires_physical_devices"] is False
+    servers = {item["server_package"]: item for item in fixture["menu_dashboard_inventory"]}
+    assert set(servers) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
+    assert servers["ipfs_kit_py"]["daemon_id"] == "ipfs-kit"
+    assert servers["ipfs_kit_py"]["launch_plan_endpoint"] == "http://127.0.0.1:8004"
+    assert servers["ipfs_datasets_py"]["native_dashboard_catalog"] == "/api/hallucinate/dashboard-catalog"
+    assert "mcp++/profile-e-mcp-p2p" in servers["ipfs_accelerate_py"]["mcp_plus_plus_profiles"]
+
+    findings = {finding["id"]: finding for finding in fixture["findings"]}
+    assert findings["HAO-676-F1"]["severity"] == "fixed"
+    assert findings["HAO-676-F2"]["severity"] == "fixed"
+    assert findings["HAO-676-F3"]["severity"] == "launch-gap"
+    assert findings["HAO-676-F4"]["follow_up_task"] == "HAO-678"
+    assert findings["HAO-676-F5"]["follow_up_task"] == "HAO-682"
+
+    assert "export const dashboardMcpServers = mcpServers.filter(server => server.dashboardPath)" in menu_config_source
+    assert "items: dashboardMcpServers.map(server => ({" in menu_config_source
+    assert "openSwissKnifeApp(item = {})" in menu_generator_source
+    assert "this.createSwissKnifeWindow(appName)" in menu_generator_source
+    assert "should only expose real IPFS MCP dashboard paths" in menu_test_source
+
+    for required in (
+        "tools/list",
+        "tools/call",
+        "MCP++ telemetry",
+        "launch receipt",
+        "Playwright interoperability",
+    ):
+        assert required in task.acceptance
+        assert required in review_source
+
+
+def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    expected = {
+        "HAO-677": {
+            "priority": "P0",
+            "track": "integration",
+            "depends_on": ["HAO-676"],
+            "parallel_lane": "hallucinate-mcp-dashboard-capability-catalog",
+            "terms": ["dashboard capability catalog", "tools/list", "tools/call", "MCP++"],
+        },
+        "HAO-678": {
+            "priority": "P0",
+            "track": "launch",
+            "depends_on": ["HAO-677"],
+            "parallel_lane": "hallucinate-mcp-dashboard-ui-wiring",
+            "terms": ["IPFS Kit", "IPFS Datasets", "IPFS Accelerate", "daemon health"],
+        },
+        "HAO-679": {
+            "priority": "P0",
+            "track": "validation",
+            "depends_on": ["HAO-678"],
+            "parallel_lane": "hallucinate-mcp-dashboard-playwright",
+            "terms": ["Playwright", "tools/list", "tools/call", "pass/fail receipts"],
+        },
+        "HAO-680": {
+            "priority": "P0",
+            "track": "integration",
+            "depends_on": ["HAO-677"],
+            "parallel_lane": "hallucinate-mcp-dashboard-receipts",
+            "terms": ["interaction_envelope", "policy_decision", "mediation_receipt", "MCP++"],
+        },
+        "HAO-681": {
+            "priority": "P0",
+            "track": "integration",
+            "depends_on": ["HAO-677", "HAO-680"],
+            "parallel_lane": "swissknife-dashboard-catalog-consumer",
+            "terms": ["Swissknife", "catalog entries", "receipt schema", "MCP++"],
+        },
+        "HAO-682": {
+            "priority": "P0",
+            "track": "launch",
+            "depends_on": ["HAO-679", "HAO-681"],
+            "parallel_lane": "hallucinate-mcp-dashboard-launch-receipt",
+            "terms": ["launch-readiness packet", "dashboard catalog", "Playwright", "daemon lineage"],
+        },
+        "HAO-683": {
+            "priority": "P0",
+            "track": "ops",
+            "depends_on": ["HAO-676"],
+            "parallel_lane": "supervisor-dashboard-objective-refill",
+            "terms": ["supervisor launch mission terms", "objective-scan", "subtasks", "subgoals"],
+        },
+    }
+
+    for task_id, values in expected.items():
+        task = tasks[task_id]
+        assert task.status == PENDING_TASK_STATUS
+        assert task.priority == values["priority"]
+        assert task.track == values["track"]
+        assert task.depends_on == values["depends_on"]
+        assert task.metadata["goal id"] == "VAIOS-G723"
+        assert task.metadata["bundle"] == "objective/launch/hallucinate-mcp-dashboard"
+        assert task.metadata["parallel lane"] == values["parallel_lane"]
+        assert task.metadata["missing evidence"]
+        for term in values["terms"]:
+            assert term in task.acceptance
+
+    assert "mcp-dashboard-interoperability.spec.ts" in " ".join(tasks["HAO-679"].outputs)
+    assert "scripts/run_vai_mgw_hao_supervisors.py" in tasks["HAO-683"].outputs
+
+
+def test_vaios_g723_keeps_hallucinate_mcp_dashboard_work_ahead_of_broad_interop():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import objective_heap_schedule, parse_goal_heap
+
+    heap_source = (REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md").read_text(
+        encoding="utf-8"
+    )
+    goals = parse_goal_heap(heap_source)
+    goals_by_id = {goal.goal_id: goal for goal in goals}
+    schedule_ids = [record.goal_id for record in objective_heap_schedule(goals)]
+    goal = goals_by_id["VAIOS-G723"]
+
+    assert goal.status == "active"
+    assert goal.fields["track"] == "launch"
+    assert goal.fields["priority"] == "P0"
+    assert goal.fields["bundle"] == "objective/launch/hallucinate-mcp-dashboard"
+    assert goal.fields["parallel_lane"] == "hallucinate-mcp-dashboard"
+    assert goal.fields["fib_priority"] == "13"
+    assert "VAIOS-G723" in schedule_ids
+    assert schedule_ids.index("VAIOS-G723") < schedule_ids.index("VAIOS-G700")
+
+    combined_goal_text = " ".join(
+        goal.fields.get(field, "")
+        for field in ("goal", "evidence", "validation", "refinement", "gap_task")
+    )
+    for term in (
+        "Hallucinate App",
+        "MCP dashboard",
+        "dashboard capability catalog",
+        "daemon health",
+        "tools/list",
+        "tools/call",
+        "ipfs_kit_py",
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+        "Swissknife",
+        "MCP++",
+        "Playwright",
+    ):
+        assert term in combined_goal_text
 
 
 def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
